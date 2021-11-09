@@ -33,6 +33,18 @@ import { IconBarDndListDirective } from './directives/dnd/icon-bar-dnd-list.dire
         IconBarDndContainerDirective
     ],
     imports: [CommonModule, IconModule, PopoverModule, OverflowListModule, DragDropModule],
-    exports: [IconTabBarComponent]
+    exports: [
+        IconTabBarComponent,
+        IconTabBarTextTypeComponent,
+        ExtraButtonDirective,
+        IconTabBarIconTypeComponent,
+        IconTabBarProcessTypeComponent,
+        IconTabBarFilterTypeComponent,
+        IconTabBarPopoverComponent,
+        TextTypePopoverComponent,
+        IconBarDndListDirective,
+        IconBarDndItemDirective,
+        IconBarDndContainerDirective
+    ]
 })
 export class PlatformIconTabBarModule {}

@@ -36,11 +36,10 @@ export class DatePickerPo extends CoreBaseComponentPo {
     frenchButton = 'button[label="French"]';
     germanButton = 'button[label="German"]';
     bulgarianButton = 'button[label="Bulgarian"]';
-    previousMonthButton = '.fd-calendar__navigation .fd-calendar__action:nth-of-type(1) button';
-    selectMonthButton = '.fd-calendar__navigation .fd-calendar__action:nth-of-type(2) button';
-    selectYearButton = '.fd-calendar__navigation .fd-calendar__action:nth-of-type(3) button';
-    nextMonthButton = '.fd-calendar__navigation .fd-calendar__action:nth-of-type(4) button';
-
+    nextMonthButton = '.fd-calendar__action--arrow-right button';
+    previousMonthButton = '.fd-calendar__action--arrow-left button';
+    selectMonthButton = 'div > div:nth-child(2) > button';
+    selectYearButton = 'div:nth-child(3) > button';
     monthAttributeLabel = 'data-fd-calendar-month';
 
     open(): void {

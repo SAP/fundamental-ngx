@@ -23,6 +23,8 @@ import {
     selectPaginationTestArr7,
     selectPaginationTestText,
     playgroundPaginationItemArr,
+    playgroundPaginationItemArr2,
+    playgroundPaginationItemArr3,
     playgroundPaginationTestText,
     playgroundLabelArr
 } from '../fixtures/appData/pagination-contents';
@@ -302,6 +304,14 @@ describe('Pagination test suite:', () => {
                 expect(getText(playgroundLabel, i)).toBe(playgroundLabelArr[i]);
             }
         });
+
+        it('should check pagination looks correct after selecting 3 page', () => {
+            checkPaginationDisplaying('3', playgroundPaginationItemArr2);
+        });
+
+        it('should check pagination looks correct after selecting 7 page', () => {
+            checkPaginationDisplaying('7', playgroundPaginationItemArr3);
+        });
     });
 
     it('should check orientation', () => {
@@ -314,4 +324,16 @@ describe('Pagination test suite:', () => {
             expect(paginationPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
+
+    function checkPaginationDisplaying(currentPage: string, pagesArr: string[]): void {
+        setValue(playgroundInputFields, '9');
+        setValue(playgroundInputFields, '1', 1);
+        setValue(playgroundInputFields, currentPage, 2);
+        pause(250);
+        const pages = getElementArrayLength(playgroundPages);
+        expect(pages).toBe(5);
+        for (let i = 0; i < pages; i++) {
+            expect(getText(playgroundPages, i)).toEqual(pagesArr[i]);
+        }
+    }
 });

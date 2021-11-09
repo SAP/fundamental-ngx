@@ -1,4 +1,13 @@
-import { AfterContentInit, Directive, ElementRef, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
+import {
+    AfterContentInit,
+    Directive,
+    ElementRef,
+    EventEmitter,
+    HostBinding,
+    Input,
+    OnDestroy,
+    Output
+} from '@angular/core';
 import { DragDrop, DragRef } from '@angular/cdk/drag-drop';
 import { ElementChord, LinkPosition } from '../dnd-list/dnd-list.directive';
 import { Subscription } from 'rxjs';
@@ -12,12 +21,17 @@ export interface ElementPosition {
 @Directive({
     // tslint:disable-next-line:directive-selector
     selector: '[fd-dnd-item]',
-    host: {
-        class: 'fd-dnd-item'
-    },
     providers: [DragDrop]
 })
 export class DndItemDirective implements AfterContentInit, OnDestroy {
+    /**
+     * Whether to apply "fd-dnd-item" class.
+     * @default true
+     */
+    @Input()
+    @HostBinding('class.fd-dnd-item')
+    applyDragItemClass = true;
+
     @Input()
     containerSelector?: string;
 
