@@ -1,10 +1,11 @@
-<label tabindex="0" class="fd-time__slider-label">{{timeConfig?.label}}</label>
+<label class="fd-time__slider-label">{{timeConfig?.label}}</label>
 <button
     *ngIf="active && spinners"
     fd-button
     fdType="transparent"
     glyph="navigation-up-arrow"
     [compact]="compact"
+    [title]="timeConfig?.decreaseLabel"
     [ariaLabel]="timeConfig?.decreaseLabel"
     (keyup)="spinnerButtonKeyupHandle($event, true)"
     (click)="scrollUp($event)"
@@ -53,6 +54,7 @@
     fdType="transparent"
     glyph="navigation-down-arrow"
     [compact]="compact"
+    [title]="timeConfig?.increaseLabel"
     [ariaLabel]="timeConfig?.increaseLabel"
     (keyup)="spinnerButtonKeyupHandle($event)"
     (click)="scrollDown()"

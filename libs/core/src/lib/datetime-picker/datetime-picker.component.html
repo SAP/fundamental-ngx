@@ -48,8 +48,8 @@
                 </span>
             </fd-input-group>
         </fd-popover-control>
-        <fd-popover-body [attr.aria-expanded]="isOpen" [attr.aria-hidden]="!isOpen" [style.display]="'block'">
-            <fd-form-message tabindex="0" [embedded]="true" *ngIf="_message" [type]="state">
+        <fd-popover-body aria-labelledby="fd-form-message" [attr.aria-expanded]="isOpen" [attr.aria-hidden]="!isOpen" [style.display]="'block'">
+            <fd-form-message id="fd-form-message" [embedded]="true" *ngIf="_message" [type]="state">
                 {{ _message }}
             </fd-form-message>
             <ng-content></ng-content>
