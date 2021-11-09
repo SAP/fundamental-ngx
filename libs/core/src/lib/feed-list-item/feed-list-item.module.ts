@@ -10,7 +10,7 @@ import { FeedListActionComponent } from './components/feed-list-action/feed-list
 import { FeedListFooterComponent } from './components/feed-list-footer/feed-list-footer.component';
 import { FeedListFooterBylineDirective } from './directives/byline.directive';
 import { PipeModule } from '@fundamental-ngx/core/utils';
-import { TruncateModule } from '../utils/directives/truncate/truncate.module';
+import { TruncateModule } from '@fundamental-ngx/core/utils';
 
 @NgModule({
     declarations: [
