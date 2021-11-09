@@ -4,6 +4,7 @@ import {
     getElementArrayLength,
     getElementPlaceholder,
     getText,
+    isElementDisplayed,
     refreshPage,
     scrollIntoView,
     sendKeys,
@@ -33,7 +34,8 @@ describe('Multi input test suite', () => {
         dropdownOptionTextValueHelp,
         header,
         validationPopover,
-        compactExampleTokens
+        compactExampleTokens,
+        errorMessage
     } = multiInputPage;
 
     beforeAll(() => {
@@ -255,6 +257,16 @@ describe('Multi input test suite', () => {
         click(options);
         const newTokenCount = getElementArrayLength(compactExampleTokens);
         expect(newTokenCount).toEqual(originalTokenCount + 1);
+    });
+
+    // skipped due to https://github.com/SAP/fundamental-ngx/issues/6726
+    xit('should check error message after clear field in reactive example', () => {
+        scrollIntoView(activeInputs, 7);
+        multiInputPage.expandDropdown(activeDropdownButtons, 7);
+        multiInputPage.selectOption('Alaska');
+        click(crossButton('Alaska'));
+        expect(isElementDisplayed(errorMessage)).toBe(true);
+        expect(getText(errorMessage)).toBe('Value is required');
     });
 
     xdescribe('Check visual regression', () => {

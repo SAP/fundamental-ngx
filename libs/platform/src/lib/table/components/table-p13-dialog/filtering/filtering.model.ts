@@ -33,6 +33,11 @@ export class FilterRule<T = any> {
     /** Data type */
     dataType: FilterableColumnDataType;
 
+    /** returns whether filter rule has value */
+    get hasValue(): boolean {
+        return this.valueExists(this.value) || this.valueExists(this.value2);
+    }
+
     constructor(
         readonly columns: ReadonlyArray<FilterableColumn>,
         /** Column key the rule belongs to */
@@ -111,5 +116,9 @@ export class FilterRule<T = any> {
         }
 
         this.dataType = dataType;
+    }
+
+    private valueExists(value: any): boolean {
+        return !!value || value === 0;
     }
 }

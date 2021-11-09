@@ -147,7 +147,7 @@ describe('Datetime picker suite', () => {
     it('should check that available only 2 next weeks in range disabled example', () => {
         click(rangeDisabledExample + calendarIcon);
         const currentDayIndex = getCurrentItemIndex();
-        const itemsLength = getElementArrayLength(currentMonthCalendarItem) - 1;
+        const itemsLength = getElementArrayLength(currentMonthCalendarItem);
 
         for (let i = currentDayIndex - 1; i !== 0; i--) {
             expect(isElementClickable(calendarItem, i)).toBe(false, `previous day not disabled`);
@@ -177,6 +177,9 @@ describe('Datetime picker suite', () => {
             }
 
             for (let i = availableLengthNextMonth + 1; i < itemsLength; i++) {
+                if (i >= 31) {
+                    break;
+                }
                 expect(isElementClickable(currentMonthCalendarItem, i)).toBe(false, `element ${i} is not disabled`);
             }
         }
@@ -381,7 +384,7 @@ describe('Datetime picker suite', () => {
             click(section + calendarIcon);
         }
         if (currentDayIndex !== dayCount) {
-            click(currentMonthCalendarItem, currentDayIndex + 1);
+            click(altCalendarItem, currentDayIndex + 1);
 
             section === formattingExample
                 ? (chosenDate = `${getCurrentMonth(true)}/${getNextDay(true)}/${currentYear.toString().slice(2)}`)
