@@ -67,9 +67,7 @@ export class RadioGroupComponent
         super.setValue(newValue);
     }
 
-    /**
-     * To Display Radio buttons in a line
-     */
+    /** To Display Radio buttons in a line */
     @Input()
     get isInline(): boolean {
         return this._isInline;
@@ -80,15 +78,11 @@ export class RadioGroupComponent
         this._cd.markForCheck();
     }
 
-    /**
-     * None value radio button created
-     */
+    /** None value radio button created */
     @Input()
     hasNoValue = false;
 
-    /**
-     * Label for None value radio button
-     */
+    /** Label for None value radio button */
     @Input()
     noValueLabel = 'None';
 
@@ -147,26 +141,20 @@ export class RadioGroupComponent
             .subscribe((currentInline) => (this.isInline = currentInline));
     }
 
-    /**
-     * Control Value Accessor
-     */
+    /** Control Value Accessor */
     writeValue(value: any): void {
-        if (value) {
-            super.writeValue(value);
-        }
+        super.writeValue(value);
+        this.contentRadioButtons?.forEach((b) => this._selectUnselect(b));
+        this.viewRadioButtons?.forEach((b) => this._selectUnselect(b));
     }
 
-    /**
-     * Access display value for objects, acts as checkbox label.
-     */
+    /** Access display value for objects, acts as checkbox label. */
     getDisplayValue(item: any): string {
         return this.displayValue(item);
     }
 
-    /**
-     * Access lookup value for objects, acts as checkbox value.
-     */
-    public getLookupValue(item: any): string {
+    /** Access lookup value for objects, acts as checkbox value. */
+    getLookupValue(item: any): string {
         return this.lookupValue(item);
     }
 
@@ -178,9 +166,7 @@ export class RadioGroupComponent
         this._selectedValueChanged(event);
     }
 
-    /**
-     * @hidden Selecting default button as provided as input
-     */
+    /** @hidden Selecting default button as provided as input */
     ngAfterContentChecked(): void {
         if (!this._validateRadioButtons()) {
             throw new Error('fdp-radio-button-group must contain a fdp-radio-button');
@@ -190,6 +176,7 @@ export class RadioGroupComponent
     }
 
     /**
+     * @hidden
      * Initialize properties once fd-radio-buttons are available.
      * This allows us to propagate relevant attributes to associated buttons.
      */
@@ -201,23 +188,20 @@ export class RadioGroupComponent
         super.ngAfterViewInit();
     }
 
-    /**
-     * @hidden
-     * Destroys event subscription.
-     */
+    /** @hidden Destroys event subscription. */
     ngOnDestroy(): void {
         this._destroy$.next(true);
         this._destroy$.complete();
     }
 
     /** @hidden */
-    getListItemDisabledValue(item: RadioGroupComponent['list'][number]): boolean {
+    _getListItemDisabledValue(item: RadioGroupComponent['list'][number]): boolean {
         return this.disabled || typeof item === 'string' ? this.disabled : item.disabled;
     }
 
     /** @hidden */
     @HostListener('keydown', ['$event'])
-    handleKeydown(event: KeyboardEvent): void {
+    _handleKeydown(event: KeyboardEvent): void {
         event.stopImmediatePropagation();
         if (this._keyboardEventsManager) {
             // sets Active item. so arrow key starts after the active item.
@@ -234,67 +218,83 @@ export class RadioGroupComponent
         }
     }
 
+    /** @hidden */
     private _initialSetup(radioButtons: QueryList<RadioButtonComponent>): void {
-        if (radioButtons && radioButtons.length > 0) {
-            let firstEnabledButtonIndex = -1;
-            this._keyboardEventsManager = new FocusKeyManager(radioButtons).withWrap().withHorizontalOrientation('ltr');
-
-            radioButtons.forEach((button, i) => {
-                if (this.list) {
-                    button.state = this.state;
-                } else {
-                    this._setProperties(button);
-                }
-                this._selectUnselect(button);
-
-                // finding first enabled button to set tabIndex=0
-                if (!button.disabled && !this._disabled && firstEnabledButtonIndex < 0) {
-                    firstEnabledButtonIndex = i;
-                }
-                button.checked.pipe(takeUntil(this._destroy$)).subscribe((ev) => this._selectedValueChanged(ev));
-            });
-            // accessibility requirement
-            if (!this._selected && radioButtons && firstEnabledButtonIndex > -1) {
-                radioButtons.toArray()[firstEnabledButtonIndex].setTabIndex(0);
-            }
-            this.onChange(this.value);
+        if (!radioButtons || radioButtons?.length === 0) {
+            return;
         }
+
+        let firstEnabledButtonIndex = -1;
+        this._keyboardEventsManager = new FocusKeyManager(radioButtons).withWrap().withHorizontalOrientation('ltr');
+
+        radioButtons.forEach((button, i) => {
+            if (this.list) {
+                button.state = this.state;
+            } else {
+                this._setProperties(button);
+            }
+
+            this._selectUnselect(button);
+
+            // finding first enabled button to set tabIndex=0
+            if (!button.disabled && !this._disabled && firstEnabledButtonIndex < 0) {
+                firstEnabledButtonIndex = i;
+            }
+
+            button.checked.pipe(takeUntil(this._destroy$)).subscribe((ev) => this._selectedValueChanged(ev));
+        });
+
+        // accessibility requirement
+        if (!this._selected && radioButtons && firstEnabledButtonIndex > -1) {
+            radioButtons.toArray()[firstEnabledButtonIndex].setTabIndex(0);
+        }
+
+        this.onChange(this.value);
     }
 
     /**
+     * @hidden
      * Selects given button, if value matches
      * @param button
      */
     private _selectUnselect(button: RadioButtonComponent): void {
-        if (button.value === this.value) {
-            // selected button
-            if (this._selected !== button) {
-                this._selected = button;
-            }
-            if (!button.isChecked) {
-                button.select();
-            }
+        if (button.value !== this.value) {
+            button.unselect();
+
+            return;
+        }
+
+        // selected button
+        if (this._selected !== button) {
+            this._selected = button;
+        }
+
+        if (!button._isChecked) {
+            button.select();
         }
     }
 
-    /** Called every time a radio button is clicked, In content child as well as viewchild */
+    /** @hidden Called every time a radio button is clicked, In content child as well as viewchild */
     private _selectedValueChanged(button: RadioButtonComponent): void {
         if (this._selected !== button) {
-            this.resetTabIndex(button);
+            this._resetTabIndex(button);
+
             if (this._selected) {
                 this._selected.unselect();
             }
+
             this._selected = button;
             button.select();
         }
+
         this.value = button.value;
         this.change.emit(button);
     }
 
-    /** resets tabIndex for first radio in radio group. for accessibility tabIndex was set */
-    private resetTabIndex(selectedRadio: RadioButtonComponent): void {
+    /** @hidden resets tabIndex for first radio in radio group. for accessibility tabIndex was set */
+    private _resetTabIndex(selectedRadio: RadioButtonComponent): void {
         if (this.viewRadioButtons || this.contentRadioButtons) {
-            const radios = this.viewRadioButtons.length ? this.viewRadioButtons : this.contentRadioButtons;
+            const radios = this.viewRadioButtons.length > 0 ? this.viewRadioButtons : this.contentRadioButtons;
             radios.forEach((radio) => {
                 if (radio !== selectedRadio && radio.tabIndex === 0) {
                     radio.tabIndex = -1;
@@ -304,7 +304,7 @@ export class RadioGroupComponent
     }
 
     /**
-     *
+     * @hidden
      * @param button Set initial values, used while content children creation
      */
     private _setProperties(button: RadioButtonComponent): void {
@@ -316,9 +316,7 @@ export class RadioGroupComponent
         }
     }
 
-    /**
-     * Make sure we have expected child.
-     */
+    /** @hidden Make sure we have expected child. */
     private _validateRadioButtons(): boolean {
         return (
             this.contentRadioButtons.filter((item) => !(item instanceof RadioButtonComponent || item['renderer']))
