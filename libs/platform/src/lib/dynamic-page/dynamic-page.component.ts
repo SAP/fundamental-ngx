@@ -167,6 +167,9 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
 
     /** @hidden */
     ngDoCheck(): void {
+        /** Used to detect changes in projected components that displayed using templates,
+         * https://github.com/angular/angular/issues/44112
+         */
         this._cd.markForCheck();
     }
 
