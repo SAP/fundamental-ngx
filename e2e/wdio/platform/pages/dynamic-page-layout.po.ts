@@ -11,7 +11,7 @@ export class DynamicPageLayoutPo extends BaseComponentPo {
     flexibleColumnExampleButton = 'fdp-platform-dynamic-page-flexible-column-example button';
 
     dynamicPage = 'fdp-dynamic-page';
-    dynamicPageCollapseIcon = '.fd-dynamic-page__collapse-button';
+    dynamicPageCollapseIcon = this.dynamicPage + ' .fd-dynamic-page__collapse-button';
     dynamicPageContentStart = 'fdp-dynamic-page-content-host br';
     dynamicPageContentEnd = 'fdp-dynamic-page-content-host .footer-spacer';
     dynamicPageTitle = '.fd-dynamic-page__title-container';
