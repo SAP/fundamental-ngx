@@ -16,6 +16,8 @@ import { InfiniteScrollDirective } from '@fundamental-ngx/core/infinite-scroll';
 import { VhdFilter, VdhTableSelection } from '../../models';
 import { VhdBaseTab } from '../base-tab/vhd-base-tab.component';
 
+let titleUniqueId = 0;
+
 @Component({
     selector: 'fdp-select-tab',
     templateUrl: './select-tab.component.html',
@@ -24,6 +26,15 @@ import { VhdBaseTab } from '../base-tab/vhd-base-tab.component';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, AfterViewInit {
+    protected defaultTitleId = `fd-select-tab-title-id-${titleUniqueId++}`;
+    protected defaultCountId = `fd-select-tab-title-count-id-${titleUniqueId++}`;
+
+    @Input()
+    selectTabTitleId: string = this.defaultTitleId;
+
+    @Input()
+    selectTabCountId: string = this.defaultCountId;
+
     @Input()
     selected: T[] = [];
 
