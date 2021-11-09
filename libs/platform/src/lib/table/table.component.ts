@@ -719,6 +719,12 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this._cdr.markForCheck();
     }
 
+    /** Removes filters for the provided fields */
+    removeFilter(fields: string[]): void {
+        this._tableService.removeFilters(fields);
+        this._cdr.markForCheck();
+    }
+
     /** Set Groups */
     group(groups: CollectionGroup[]): void {
         this._tableService.setGroups(groups);
@@ -991,14 +997,18 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      * Filter triggered from column header
      */
     _columnHeaderFilterBy(field: string, value: string): void {
-        const collectionFilter: CollectionStringFilter = {
-            field: field,
-            value: value,
-            strategy: FILTER_STRING_STRATEGY.CONTAINS,
-            exclude: false
-        };
+        if (value) {
+            const collectionFilter: CollectionStringFilter = {
+                field: field,
+                value: value,
+                strategy: FILTER_STRING_STRATEGY.CONTAINS,
+                exclude: false
+            };
 
-        this.addFilter([collectionFilter]);
+            this.addFilter([collectionFilter]);
+        } else {
+            this.removeFilter([field]);
+        }
         this._closePopoverForColumnByFieldName(field);
     }
 
