@@ -1018,11 +1018,17 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** @hidden */
+    _getCellHeightPx(parentRow: HTMLTableRowElement): string {
+        return parentRow ? parentRow.getBoundingClientRect().height + 'px' : 'unset';
+    }
+
+    /** @hidden */
     _getSelectionCellStyles(parentRow: HTMLTableRowElement): { [styleProp: string]: string } {
         const rtlKey = this._rtl ? 'right' : 'left';
+
         return {
             [rtlKey]: this._semanticHighlightingColumnWidth + 'px',
-            height: parentRow ? parentRow.getBoundingClientRect().height + 'px' : 'unset'
+            height: this._getCellHeightPx(parentRow)
         };
     }
 
