@@ -196,8 +196,7 @@ describe('Flexible column layout component test', () => {
     function checkExistSeparator(section: string): void {
         click(section + button);
         click(columnButton2);
-        pause(1000);
-        expect(isElementDisplayed(separator)).toBe(true, 'separator is not displayed');
+        expect(waitForElDisplayed(separator)).toBe(true, 'separator is not displayed');
 
         click(columnButton2, 1);
         pause(1000);
