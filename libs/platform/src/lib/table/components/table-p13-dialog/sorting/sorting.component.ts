@@ -132,6 +132,11 @@ export class P13SortingDialogComponent implements Resettable {
         return rule.columnKey;
     }
 
+    _getAriaLabel(rule: ValidatedSortRule): string {
+        const columnLabel = this.columns.find((col) => col.key === rule.columnKey)?.label;
+        return `Sort by ${columnLabel}`;
+    }
+
     /** @hidden */
     private _initiateRules(collectionSort?: CollectionSort[]): void {
         this.rules = this._createRules(collectionSort);

@@ -3,7 +3,7 @@
         <ng-template fdTemplate="header">
             <div fd-bar-left>
                 <fd-bar-element>
-                    <h4 fd-title [headerSize]="4" i18n="@@platformTableP13SortDialogHeader">Sort</h4>
+                    <h4 fd-title [headerSize]="4" i18n="@@platformTableP13SortDialogHeader" tabindex="0">Sort</h4>
                 </fd-bar-element>
             </div>
             <div fd-bar-right>
@@ -17,12 +17,13 @@
     <fd-dialog-body>
         <div class="sort-row" *ngFor="let rule of rules; let i = index; trackBy: _trackByColumnKey">
             <fd-select
+                fd-initial-focus
                 class="sort-row__select"
                 [value]="rule.columnKey"
                 (valueChange)="_onRuleColumnKeyChange(rule, $event)"
                 [compact]="true"
                 placeholder="(none)"
-                ariaLabel="Sort by"
+                [ariaLabel]="_getAriaLabel(rule)"
                 i18n-ariaLabel="@@platformTableP13SortDialogRuleSortBy"
                 i18n-placeholder="@@platformTableP13SortDialogNoneSelectedColumn|Table column select placeholder"
             >
@@ -96,7 +97,6 @@
                 fd-button
                 fdType="transparent"
                 fd-dialog-decisive-button
-                fd-initial-focus
                 i18n-label="@@platformTableP13SortDialogCancelBtn"
                 label="Cancel"
                 [compact]="true"
