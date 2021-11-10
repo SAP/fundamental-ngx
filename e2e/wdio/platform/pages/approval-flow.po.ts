@@ -38,7 +38,7 @@ export class ApprovalFlowPo extends BaseComponentPo {
     approvalFlowNodeActionMenuItem = '[role="menuitem"]';
 
     remaindersSendToInput = 'fd-multi-input fd-tokenizer input';
-    selectItem = '[role="listitem"]';
+    selectItem = 'ul [role="option"]';
     bottomMenuItems = '.fd-bar__element button';
 
     addNode = '.fdp-approval-flow-node__add';

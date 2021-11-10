@@ -3,6 +3,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
+    HostListener,
     Inject,
     OnDestroy,
     OnInit,
@@ -20,6 +21,8 @@ import {
     MobileModeControl,
     MobileModeConfigToken
 } from '@fundamental-ngx/core/mobile-mode';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { ESCAPE } from '@angular/cdk/keycodes';
 
 @Component({
     selector: 'fd-multi-input-mobile',
@@ -79,6 +82,14 @@ export class MultiInputMobileComponent
     }
 
     /** @hidden */
+    @HostListener('keydown', ['$event'])
+    _keydownHandler(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, ESCAPE)) {
+            this.handleDismiss();
+        }
+    }
+
+    /** @hidden */
     handleDismiss(): void {
         this.dialogRef.hide(true);
         this._component.dialogDismiss(this._selectedBackup);
@@ -114,7 +125,8 @@ export class MultiInputMobileComponent
             ...this.dialogConfig,
             backdropClickCloseable: false,
             escKeyCloseable: false,
-            container: this._elementRef.nativeElement
+            container: this._elementRef.nativeElement,
+            focusTrapped: true
         });
     }
 }

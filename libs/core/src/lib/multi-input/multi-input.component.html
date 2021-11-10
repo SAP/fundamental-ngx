@@ -45,6 +45,9 @@
         [iconTitle]="title"
         (addOnButtonClicked)="_addOnButtonClicked()"
     >
+        <span [attr.id]="tokenHiddenId" aria-hidden="true" class="fd-multi-input__invisible-text">
+            {{ _tokenCountText }}</span
+        >
         <fd-tokenizer
             [compactCollapse]="compactCollapse"
             [compact]="compact"
@@ -54,6 +57,7 @@
             class="fd-multi-input-tokenizer-custom"
             [class.fd-multi-input-tokenizer-custom--compact]="compact"
             tabindex="-1"
+            role="listbox"
         >
             <fd-token
                 *ngFor="let token of selected"
@@ -83,9 +87,13 @@
                 [attr.aria-required]="required"
                 [class.fd-input--compact]="compact"
                 (ngModelChange)="_handleSearchTermChange($event)"
+                [attr.aria-haspopup]="!mobile"
+                [attr.aria-expanded]="!!(open && !mobile && displayedValues && displayedValues.length)"
                 (keydown)="_handleInputKeydown($event)"
                 [ngModelOptions]="{ standalone: true }"
                 [attr.id]="inputId"
+                [attr.aria-describedby]="tokenHiddenId"
+                [attr.aria-roledescription]="roleDescription"
             />
         </fd-tokenizer>
     </fd-input-group>
@@ -102,12 +110,16 @@
         [style.maxHeight]="!mobile ? maxHeight : 'auto'"
         (focusEscapeList)="handleListFocusEscape($event)"
         [style.minWidth]="'100%'"
+        role="listbox"
+        [attr.aria-roledescription]="listRoleDescription"
     >
         <li
             *ngFor="let value of displayedValues"
             fd-list-item
             (click)="dialogApprove()"
             [selected]="selected.indexOf(value) !== -1"
+            role="option"
+            [attr.aria-selected]="selected.indexOf(value) !== -1"
         >
             <fd-checkbox
                 [compact]="compact"
@@ -124,7 +136,7 @@
             (keyDown)="_showAllKeyDown($event)"
             (click)="_showAllClicked($event)"
         >
-            <a fd-link tabindex="0">Show All ({{ dropdownValues.length }})</a>
+            <a fd-link tabindex="0">{{ _footerLinkText }}</a>
         </li>
     </ul>
 </ng-template>

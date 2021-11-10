@@ -44,7 +44,9 @@ import {
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MultiInputMobileModule } from './multi-input-mobile/multi-input-mobile.module';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
+let uniqueHiddenLabel = 0;
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
  * limited number of pre-defined options with a filter-enabled context.
@@ -72,6 +74,12 @@ import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interf
 export class MultiInputComponent
     implements MultiInputInterface, ControlValueAccessor, CssClassBuilder, OnInit, OnChanges, AfterViewInit, OnDestroy
 {
+    protected tokenCountHiddenLabel = `fdp-multi-input-token-count-id-${uniqueHiddenLabel++}`;
+
+    /** token  count hidden label */
+    @Input()
+    tokenHiddenId: string = this.tokenCountHiddenLabel;
+
     /** Placeholder for the input field. */
     @Input()
     placeholder = '';
@@ -107,6 +115,14 @@ export class MultiInputComponent
     /** Search term, or more specifically the value of the inner input field. */
     @Input()
     searchTerm = '';
+
+    /** role description for the multi input */
+    @Input()
+    roleDescription = 'Multi Value Input';
+
+    /** role description for the list multi input */
+    @Input()
+    listRoleDescription = 'Suggestion Found';
 
     /** Id attribute for input element inside MultiInput component */
     @Input()
@@ -269,6 +285,9 @@ export class MultiInputComponent
     _dir: string;
 
     /** @hidden */
+    private _currentSearchSuggestionAnnoucementMessage = '';
+
+    /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
@@ -277,6 +296,24 @@ export class MultiInputComponent
     /** @hidden */
     onTouched: Function = () => {};
 
+    /** input for footer link text */
+    @Input()
+    footerLinkText = (valuesLength) => `Show all (${valuesLength})`;
+
+    /**@hidden */
+    get _footerLinkText(): string {
+        return this.footerLinkText(this.dropdownValues.length);
+    }
+
+    /** input for token count readable text */
+    @Input()
+    tokenCountText = (valuesLength) => `Contains ${valuesLength} token`;
+
+    /**@hidden */
+    get _tokenCountText(): string {
+        return this.tokenCountText(this.selected.length);
+    }
+
     /** @hidden */
     constructor(
         private readonly _elementRef: ElementRef,
@@ -284,6 +321,7 @@ export class MultiInputComponent
         private readonly _dynamicComponentService: DynamicComponentService,
         private readonly _injector: Injector,
         private readonly _viewContainerRef: ViewContainerRef,
+        private _liveAnnouncer: LiveAnnouncer,
         @Optional() private readonly _rtlService: RtlService,
         @Optional() private readonly _contentDensityService: ContentDensityService,
         @Optional() private readonly _focusTrapService: FocusTrapService
@@ -393,7 +431,6 @@ export class MultiInputComponent
         if (selected) {
             this.selected = selected;
         }
-
         this._changeDetRef.markForCheck();
     }
 
