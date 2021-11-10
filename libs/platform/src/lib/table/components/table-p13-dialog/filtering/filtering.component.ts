@@ -26,9 +26,6 @@ export class P13FilteringDialogComponent implements Resettable {
     /** Table columns available for filtering */
     readonly columns: FilterableColumn[] = [];
 
-    /** Initial filterBy collection */
-    readonly initialCollectionFilter: CollectionFilter[];
-
     /**
      * @hidden
      * Include Rules
@@ -69,17 +66,15 @@ export class P13FilteringDialogComponent implements Resettable {
     constructor(private dialogRef: DialogRef) {
         const { columns, collectionFilter }: FilterDialogData = this.dialogRef.data;
 
-        this.initialCollectionFilter = [...collectionFilter];
-
         this.columns = columns || [];
 
-        this._initiateRules();
+        this._initiateRules(collectionFilter);
 
         this._calculateValidRulesCount();
 
-        if (this._validExcludeRulesCount && !this._validIncludeRulesCount) {
-            this._excludePanelExpanded = true;
-        }
+        this._excludePanelExpanded = this._validExcludeRulesCount > 0;
+
+        this._recalculateResetAvailability();
     }
 
     /** Reset changes to the initial state */
@@ -118,7 +113,7 @@ export class P13FilteringDialogComponent implements Resettable {
             rules.push(new FilterRule(this.columns));
         }
 
-        this._onModelChange();
+        this._recalculateResetAvailability();
 
         this._calculateValidRulesCount();
     }
@@ -130,8 +125,10 @@ export class P13FilteringDialogComponent implements Resettable {
     }
 
     /** @hidden */
-    _onModelChange(): void {
-        this._isResetAvailableSubject$.next(true);
+    _recalculateResetAvailability(): void {
+        const hasOnlyOneEmptyIncludeRule = this._includeRules.length === 1 && !this._includeRules[0].hasValue;
+        const hasOnlyOneEmptyExcludeRule = this._excludeRules.length === 1 && !this._excludeRules[0].hasValue;
+        this._isResetAvailableSubject$.next(!hasOnlyOneEmptyIncludeRule || !hasOnlyOneEmptyExcludeRule);
     }
 
     /** @hidden */
@@ -140,9 +137,9 @@ export class P13FilteringDialogComponent implements Resettable {
     }
 
     /** @hidden */
-    private _initiateRules(): void {
-        this._includeRules = this._createRules(this.initialCollectionFilter.filter(({ exclude }) => !exclude));
-        this._excludeRules = this._createRules(this.initialCollectionFilter.filter(({ exclude }) => exclude));
+    private _initiateRules(initialRules?: CollectionFilter[]): void {
+        this._includeRules = this._createRules(initialRules?.filter(({ exclude }) => !exclude));
+        this._excludeRules = this._createRules(initialRules?.filter(({ exclude }) => exclude));
 
         [this._includeRules, this._excludeRules].forEach((rules) => {
             // Rules on initial phase are considered as valid

@@ -9,6 +9,7 @@ import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { ContentDensity, DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
 import { DATA_PROVIDERS, DataProvider, isOptionItem } from '@fundamental-ngx/platform/shared';
+
 import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
 import { PlatformComboboxModule } from '../combobox.module';
 import { ComboboxSelectionChangeEvent } from '../commons/base-combobox';
@@ -126,13 +127,13 @@ describe('ComboboxComponent default values', () => {
     });
 
     it('should be able to expand/collapse list if click on onPrimaryButtonClick', () => {
-        combobox.onPrimaryButtonClick(combobox.isOpen);
+        combobox.onPrimaryButtonClick();
         fixture.detectChanges();
 
         let toggleButton = overlayContainerEl.querySelectorAll('.fd-list__item');
         expect(toggleButton.length).toBe(combobox._suggestions.length);
 
-        combobox.onPrimaryButtonClick(combobox.isOpen);
+        combobox.onPrimaryButtonClick();
         fixture.detectChanges();
 
         toggleButton = overlayContainerEl.querySelectorAll('.fd-list__item');
@@ -140,7 +141,7 @@ describe('ComboboxComponent default values', () => {
     });
 
     it('should emit a onSelect event when click on a item', () => {
-        combobox.onPrimaryButtonClick(combobox.isOpen);
+        combobox.onPrimaryButtonClick();
         fixture.detectChanges();
 
         let listItems = overlayContainerEl.querySelectorAll('.fd-list__item');
@@ -153,7 +154,7 @@ describe('ComboboxComponent default values', () => {
         expect(component.selectedItem.payload).toEqual(component.dataSource[0]);
         expect(combobox.isOpen).toBeFalse();
 
-        combobox.onPrimaryButtonClick(combobox.isOpen);
+        combobox.onPrimaryButtonClick();
         fixture.detectChanges();
 
         listItems = overlayContainerEl.querySelectorAll('.fd-list__item');
@@ -169,7 +170,7 @@ describe('ComboboxComponent default values', () => {
         component.dataSource = [...component.dataSource];
         fixture.detectChanges();
 
-        combobox.onPrimaryButtonClick(combobox.isOpen);
+        combobox.onPrimaryButtonClick();
         fixture.detectChanges();
 
         const group = overlayContainerEl.querySelectorAll('.fd-list__group-header');
@@ -182,7 +183,7 @@ describe('ComboboxComponent default values', () => {
         component.dataSource = [...component.dataSource];
         fixture.detectChanges();
 
-        combobox.onPrimaryButtonClick(combobox.isOpen);
+        combobox.onPrimaryButtonClick();
         fixture.detectChanges();
 
         const secondaryColumns = overlayContainerEl.querySelectorAll('.fd-list__secondary');

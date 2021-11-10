@@ -60,6 +60,8 @@ export const selectPaginationTestArr7 = [
 ];
 export const selectPaginationTestText = 'Showing 1-50 of 50';
 export const playgroundPaginationItemArr = ['1', '2', '3', '4', '5'];
+export const playgroundPaginationItemArr2 = ['1', '2', '3', '4', '9'];
+export const playgroundPaginationItemArr3 = ['1', '6', '7', '8', '9'];
 export const playgroundPaginationTestText = [
     'Showing 1-1 of 5',
     'Showing 2-2 of 5',

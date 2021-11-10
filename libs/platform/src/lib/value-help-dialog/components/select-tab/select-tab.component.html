@@ -1,5 +1,5 @@
 <div class="table-header">
-    <h5 fd-title>
+    <h5 fd-title role="heading" aria-level="5">
         <ng-container i18n="@@platformI18nValueHelpDialogDisplayCountLabel">Items</ng-container> ({{
             displayedData.length
         }})
@@ -10,6 +10,7 @@
     fdInfiniteScroll
     (onScrollAction)="_showMoreElements()"
     [scrollPercent]="80"
+    role="table"
 >
     <table
         fd-table
@@ -18,12 +19,22 @@
         [popIn]="mobile"
         [noBorderX]="mobile"
         [noBorderY]="false"
+        [attr.aria-colcount]="_tableFilters.main.length"
+        [attr.aria-rowcount]="displayedData.length"
+        role="grid"
+        aria-multiselectable="true"
+        [attr.aria-labelledby]="selectTabTitleId + ' ' + selectTabCountId"
     >
+        <label [id]="selectTabCountId" fd-form-label class="fdp-value-help-dialog__hidden_lable"
+            >contains {{ displayedData.length }} rows and {{ _tableFilters.main.length }} column</label
+        >
+        <label [id]="selectTabTitleId" fd-form-label class="fdp-value-help-dialog__hidden_lable"
+            >Items ({{ displayedData.length }})
+        </label>
         <thead fd-table-header>
             <tr fd-table-row *ngIf="displayedData.length && _tableFilters">
                 <th fd-table-cell [fitContent]="mobile">
                     <fd-checkbox
-                        role="checkbox"
                         *ngIf="isMultiSelection"
                         [name]="uid + '-row-all'"
                         [compact]="true"
@@ -33,7 +44,11 @@
                         (ngModelChange)="_toggleAllRows()"
                     ></fd-checkbox>
                 </th>
-                <th fd-table-cell *ngFor="let filter of _tableFilters.main; trackBy: _trackByFilterFn">
+                <th
+                    fd-table-cell
+                    *ngFor="let filter of _tableFilters.main; trackBy: _trackByFilterFn; let colindex = index"
+                    [attr.aria-colindex]="colindex"
+                >
                     {{ filter.label }}
                 </th>
             </tr>
@@ -56,7 +71,6 @@
                 >
                     <td fd-table-cell [fitContent]="mobile">
                         <fd-checkbox
-                            role="checkbox"
                             *ngIf="isMultiSelection"
                             [name]="uid + '-row-' + i"
                             [compact]="true"
@@ -64,7 +78,13 @@
                             (change)="_toggleSelectRow(row)"
                         ></fd-checkbox>
                     </td>
-                    <td fd-table-cell *ngFor="let filter of _tableFilters.main">{{ row[filter.key] || '' }}</td>
+                    <td
+                        fd-table-cell
+                        *ngFor="let filter of _tableFilters.main; let rowIndex = index"
+                        [attr.aria-rowindex]="rowIndex"
+                    >
+                        {{ row[filter.key] || '' }}
+                    </td>
                 </tr>
 
                 <tr
@@ -74,7 +94,7 @@
                     [attr.aria-selected]="_selectedMap[row[uniqueKey]]"
                 >
                     <td fd-table-cell></td>
-                    <td fd-table-cell colspan="100%" [fitContent]="true">
+                    <td colspan="100%" [fitContent]="true">
                         <p fd-table-text *ngFor="let filter of _tableFilters.secondary">
                             <label>{{ filter.label }}:</label>
                             {{ row[filter.key] || '' }}

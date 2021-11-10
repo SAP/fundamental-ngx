@@ -6,23 +6,24 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
 import { SortDirection } from '../../../enums/sort-direction.enum';
 import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
 
-export interface SortDialogColumn {
+export interface SettingsSortDialogColumn {
     label: string;
     key: string;
 }
 
-export interface SortDialogData {
+export interface SettingsSortDialogData {
     direction: SortDirection;
     field: string;
-    columns: SortDialogColumn[];
+    columns: SettingsSortDialogColumn[];
 }
 
-export interface SortDialogResultData {
+export interface SettingsSortDialogResultData {
     field: string;
     direction: SortDirection;
 }
 
 const NOT_SORTED_OPTION_VALUE = null;
+const INITIAL_DIRECTION = SortDirection.ASC;
 
 @Component({
     templateUrl: './sorting.component.html',
@@ -30,12 +31,6 @@ const NOT_SORTED_OPTION_VALUE = null;
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SortingComponent implements Resettable {
-    /** Initially active direction */
-    initialDirection: SortDirection = SortDirection.ASC;
-
-    /** Initially active field. Used for restoring */
-    initialField: string = NOT_SORTED_OPTION_VALUE;
-
     /** Current selected direction */
     direction: SortDirection;
 
@@ -43,7 +38,7 @@ export class SortingComponent implements Resettable {
     field: string;
 
     /** Table columns */
-    readonly columns: SortDialogColumn[] = [];
+    readonly columns: SettingsSortDialogColumn[] = [];
 
     /** @hidden */
     readonly _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -58,20 +53,18 @@ export class SortingComponent implements Resettable {
 
     /** @hidden */
     constructor(public dialogRef: DialogRef) {
-        const data: SortDialogData = this.dialogRef.data;
+        const data: SettingsSortDialogData = this.dialogRef.data;
 
-        this.initialDirection = data.direction || this.initialDirection;
-        this.initialField = data.field || this.initialField;
         this.columns = data.columns || [];
 
-        this.direction = this.initialDirection;
-        this.field = this.initialField;
+        this.direction = data.direction ?? INITIAL_DIRECTION;
+        this.field = data.field ?? NOT_SORTED_OPTION_VALUE;
     }
 
     /** Reset changes to the initial state */
     reset(): void {
-        this.direction = this.initialDirection;
-        this.field = this.initialField;
+        this.direction = INITIAL_DIRECTION;
+        this.field = NOT_SORTED_OPTION_VALUE;
         this._isResetAvailableSubject$.next(false);
     }
 
@@ -82,7 +75,7 @@ export class SortingComponent implements Resettable {
 
     /** Confirm changes and close dialog */
     confirm(): void {
-        const result: SortDialogResultData = { direction: this.direction, field: this.field };
+        const result: SettingsSortDialogResultData = { direction: this.direction, field: this.field };
         this.dialogRef.close(result);
     }
 
@@ -101,7 +94,7 @@ export class SortingComponent implements Resettable {
     /** @hidden */
     _onModelChange(): void {
         // Use this coercion cause fd-radio-button triggers extra ngModelChange events on initial phase
-        const isInitialDiffers = this.initialDirection !== this.direction || this.initialField !== this.field;
+        const isInitialDiffers = this.direction !== INITIAL_DIRECTION || this.field !== NOT_SORTED_OPTION_VALUE;
         this._isResetAvailableSubject$.next(isInitialDiffers);
     }
 }

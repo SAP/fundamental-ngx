@@ -5,6 +5,7 @@ import {
     Component,
     ContentChild,
     ContentChildren,
+    ElementRef,
     EventEmitter,
     HostBinding,
     Inject,
@@ -26,7 +27,14 @@ import { DOCUMENT } from '@angular/common';
 import { BehaviorSubject, isObservable, merge, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
 
-import { ContentDensityEnum, ContentDensityService, FdDropEvent, RtlService } from '@fundamental-ngx/core/utils';
+import {
+    ContentDensityEnum,
+    ContentDensityService,
+    FdDropEvent,
+    resizeObservable,
+    intersectionObservable,
+    RtlService
+} from '@fundamental-ngx/core/utils';
 import { TableRowDirective } from '@fundamental-ngx/core/table';
 import { getNestedValue, isDataSource, isFunction, isString } from '@fundamental-ngx/platform/shared';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
@@ -54,6 +62,7 @@ import {
     FilterChange,
     FreezeChange,
     GroupChange,
+    RowComparator,
     SortChange,
     TableColumnFreezeEvent,
     TableColumnsChangeEvent,
@@ -64,8 +73,7 @@ import {
     TableRowSelectionChangeEvent,
     TableRowsRearrangeEvent,
     TableRowToggleOpenStateEvent,
-    TableSortChangeEvent,
-    RowComparator
+    TableSortChangeEvent
 } from './models';
 import { TableColumnResizeService } from './table-column-resize.service';
 import { TableColumnResizableSide } from './directives/table-cell-resizable.directive';
@@ -159,6 +167,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             this._initializeDS(value);
         }
     }
+
     get dataSource(): FdpTableDataSource<T> {
         return this._ds;
     }
@@ -170,6 +179,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     set state(value: TableState) {
         this.setTableState(value || DEFAULT_TABLE_STATE);
     }
+
     get state(): TableState {
         return this.getTableState();
     }
@@ -337,6 +347,10 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     @ViewChildren('columnHeaderPopover')
     readonly columnHeaderPopovers: QueryList<PopoverComponent>;
+
+    /** @hidden */
+    @ViewChild('tableContainer')
+    readonly tableContainer: ElementRef<HTMLDivElement>;
 
     /** @hidden */
     @ContentChildren(TableColumn)
@@ -574,6 +588,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         private readonly _tableService: TableService,
         private readonly _tableScrollDispatcher: TableScrollDispatcherService,
         private readonly _tableColumnResizeService: TableColumnResizeService,
+        private readonly _elRef: ElementRef,
         @Inject(DOCUMENT) private readonly _document: Document | null,
         @Optional() private readonly _rtlService: RtlService,
         @Optional() private readonly _contentDensityService: ContentDensityService
@@ -655,6 +670,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
         this._listenToColumnsWidthChange();
 
+        this._listenToTableWidthChanges();
+
         this._cdr.detectChanges();
     }
 
@@ -699,6 +716,12 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** Add Filter rule */
     addFilter(filterRules: CollectionFilter[]): void {
         this._tableService.addFilters(filterRules);
+        this._cdr.markForCheck();
+    }
+
+    /** Removes filters for the provided fields */
+    removeFilter(fields: string[]): void {
+        this._tableService.removeFilters(fields);
         this._cdr.markForCheck();
     }
 
@@ -816,16 +839,38 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** Manually triggers columns width recalculation */
     recalculateTableColumnWidth(): void {
+        const recalculateFn = () => {
+            const columnNames = this._visibleColumns.map((column) => column.name);
+            const offsetWidth = this._selectionColumnWidth + this._semanticHighlightingColumnWidth;
+
+            this._tableColumnResizeService.setColumnsWidth(columnNames, this.freezeColumnsTo, offsetWidth);
+            this._setFreezableInfo();
+
+            this._cdr.markForCheck();
+        };
+
         this._cdr.detectChanges();
 
-        this._tableColumnResizeService.setColumnsWidth(
-            this._visibleColumns.map((column) => column.name),
-            this.freezeColumnsTo,
-            this._selectionColumnWidth + this._semanticHighlightingColumnWidth
-        );
-        this._setFreezableInfo();
+        let elRect = this._elRef.nativeElement.getBoundingClientRect();
+        let elVisible = elRect.width && elRect.height;
 
-        this._cdr.markForCheck();
+        if (elVisible) {
+            recalculateFn();
+            return;
+        }
+
+        /** Element may not be visible due to any reason so process recalculation when it becomes visible */
+        const intersectionSubscription = intersectionObservable(this._elRef.nativeElement).subscribe((entries) => {
+            elRect = entries[0]?.boundingClientRect;
+            elVisible = elRect?.width && elRect?.height;
+
+            if (elVisible) {
+                recalculateFn();
+                intersectionSubscription.unsubscribe();
+            }
+        });
+
+        this._subscriptions.add(intersectionSubscription);
     }
 
     // Private API
@@ -957,14 +1002,18 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      * Filter triggered from column header
      */
     _columnHeaderFilterBy(field: string, value: string): void {
-        const collectionFilter: CollectionStringFilter = {
-            field: field,
-            value: value,
-            strategy: FILTER_STRING_STRATEGY.CONTAINS,
-            exclude: false
-        };
+        if (value) {
+            const collectionFilter: CollectionStringFilter = {
+                field: field,
+                value: value,
+                strategy: FILTER_STRING_STRATEGY.CONTAINS,
+                exclude: false
+            };
 
-        this.addFilter([collectionFilter]);
+            this.addFilter([collectionFilter]);
+        } else {
+            this.removeFilter([field]);
+        }
         this._closePopoverForColumnByFieldName(field);
     }
 
@@ -978,15 +1027,24 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** @hidden */
-    _getFixedTableStyles(): { [klass: string]: number } {
+    _getFixedTableStyles(): { [styleProp: string]: number } {
         const key = this._rtl ? 'padding-right.px' : 'padding-left.px';
         return { [key]: this._tablePadding };
     }
 
     /** @hidden */
-    _getSelectionCellStyles(): { [klass: string]: string } {
-        const key = this._rtl ? 'right' : 'left';
-        return { [key]: this._semanticHighlightingColumnWidth + 'px' };
+    _getCellHeightPx(parentRow: HTMLTableRowElement): string {
+        return parentRow ? parentRow.getBoundingClientRect().height + 'px' : 'unset';
+    }
+
+    /** @hidden */
+    _getSelectionCellStyles(parentRow: HTMLTableRowElement): { [styleProp: string]: string } {
+        const rtlKey = this._rtl ? 'right' : 'left';
+
+        return {
+            [rtlKey]: this._semanticHighlightingColumnWidth + 'px',
+            height: this._getCellHeightPx(parentRow)
+        };
     }
 
     _getRowClasses(row: TableRow<T>): string {
@@ -997,7 +1055,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** @hidden */
-    _getCellStyles(column: TableColumn): { [klass: string]: number | string } {
+    _getCellStyles(column: TableColumn): { [styleProp: string]: number | string } {
         const styles: { [property: string]: number | string } = {};
 
         if (this._freezableColumns.includes(column.name)) {
@@ -1834,7 +1892,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
             this._dataSourceItemsSubject.next(items);
 
-            this._cdr.markForCheck();
+            this._cdr.detectChanges();
         });
 
         this._subscriptions.add(this._dsSubscription);
@@ -1912,6 +1970,15 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     private _listenToColumnsWidthChange(): void {
         this._subscriptions.add(
             this._tableService.tableColumnsWidth$.subscribe(() => this.recalculateTableColumnWidth())
+        );
+    }
+
+    /** @hidden */
+    private _listenToTableWidthChanges(): void {
+        this._subscriptions.add(
+            resizeObservable(this.tableContainer.nativeElement)
+                .pipe(debounceTime(100))
+                .subscribe(() => this._cdr.detectChanges())
         );
     }
 

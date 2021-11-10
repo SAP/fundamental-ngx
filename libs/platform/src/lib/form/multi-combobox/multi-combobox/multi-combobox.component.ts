@@ -17,13 +17,11 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
-import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import { A, DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
-import { Direction } from '@angular/cdk/bidi';
 import { of } from 'rxjs';
 import { delay, takeUntil } from 'rxjs/operators';
 
-import { closestElement, DynamicComponentService, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { closestElement, DynamicComponentService, KeyUtil } from '@fundamental-ngx/core/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import { TokenizerComponent } from '@fundamental-ngx/core/token';
 import {
@@ -67,17 +65,10 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     @ViewChild(TokenizerComponent)
     tokenizer: TokenizerComponent;
 
-    /** @hidden */
-    @ViewChild(CdkConnectedOverlay)
-    _connectedOverlay: CdkConnectedOverlay;
-
     /** @hidden
      * List of selected suggestions
      * */
     _selected: SelectableOptionItem[] = [];
-
-    /** @hidden */
-    private _direction: Direction = 'ltr';
 
     /** @hidden */
     private _timeout: any; // NodeJS.Timeout
@@ -93,7 +84,6 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         readonly _multiComboboxConfig: MultiComboboxConfig,
         readonly _viewContainerRef: ViewContainerRef,
         readonly _injector: Injector,
-        @Optional() private _rtlService: RtlService,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
@@ -114,14 +104,6 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     /** @hidden */
     ngAfterViewInit(): void {
         super.ngAfterViewInit();
-
-        this._rtlService?.rtl
-            .pipe(takeUntil(this._destroyed))
-            .subscribe((isRtl) => (this._direction = isRtl ? 'rtl' : 'ltr'));
-
-        this._connectedOverlay?.attach
-            .pipe(takeUntil(this._destroyed))
-            .subscribe(() => this._connectedOverlay.overlayRef.setDirection(this._direction));
 
         if (this.mobile) {
             this._setUpMobileMode();

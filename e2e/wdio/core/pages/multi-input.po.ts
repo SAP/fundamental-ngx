@@ -13,7 +13,7 @@ export class MultiInputPo extends CoreBaseComponentPo {
     multiInputOptions = 'fd-multi-input[inputid="multiInput"] .fd-token__text span';
     buttonShowAll = 'a.fd-link';
     hiddenAddonButtonInputOptions = 'fd-multi-input[inputid="noAddonMultiInput1"] .fd-token__text span';
-    compactMultiInputOptions = 'div#rtl-ex1 .fd-token__text span';
+    compactMultiInputOptions = '.fd-token--compact .fd-token__text span';
     approveButton = '.fd-button--emphasized';
     multiSelectButton = '.custom-multi-input-select-all-bar-element button';
     mobileInputOptions = 'fd-multi-input-mobile-example .fd-token__text span';
@@ -28,6 +28,7 @@ export class MultiInputPo extends CoreBaseComponentPo {
     popover = '.fd-popover__popper';
     checkboxInput = this.popover + ' fd-checkbox';
     listItem = this.popover + ' .fd-list__item';
+    dialogCheckbox = '.fd-dialog fd-checkbox';
 
     open(): void {
         super.open(this.url);
