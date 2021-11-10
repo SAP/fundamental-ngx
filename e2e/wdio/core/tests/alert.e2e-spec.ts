@@ -18,7 +18,17 @@ import {
 
 describe('Alert test suite', () => {
     const alertPage = new AlertPo();
-    const { alerts, closeAlertButton, openOverlayButton, popupAlert, button, openCustomAlertButton, playgroundAlert, select, option } = alertPage;
+    const {
+        alerts,
+        closeAlertButton,
+        openOverlayButton,
+        popupAlert,
+        button,
+        openCustomAlertButton,
+        playgroundAlert,
+        select,
+        option
+    } = alertPage;
 
     beforeAll(() => {
         alertPage.open();

@@ -145,7 +145,7 @@ describe('Datetime picker suite', () => {
 
     it(
         'Verify The user can then choose the desired date from the calendar, and the time from the rotating wheel, ' +
-        'For the time, it’s possible to select hours, minutes, and even seconds.',
+            'For the time, it’s possible to select hours, minutes, and even seconds.',
         () => {
             click(datePickerButton);
             click(dateTimePickerPage.dayInCalendarButtonByValue('1'));
@@ -258,26 +258,29 @@ describe('Datetime picker suite', () => {
         const currentMonth = currentDate.getMonth() + 1;
         const currentDay = currentDate.getDate();
         const currentYear = currentDate.getFullYear();
-        let currentMinute = (currentDate.getMinutes()).toString();
+        let currentMinute = currentDate.getMinutes().toString();
         if (currentMinute === '0') {
             currentMinute = '00';
-        }
-        if (parseInt(currentMinute) < 10) {
+        } else if (parseInt(currentMinute) < 10) {
             currentMinute = '0' + currentMinute;
         }
         const currentHour = currentDate.toLocaleString('en-US', { timeZone: 'UTC', hour: 'numeric', hour12: true });
 
         if (currentHour[1] === ' ') {
-            validDate = `${currentMonth}/${currentDay}/${currentYear}, ${currentHour[0]}:${currentMinute} ${currentHour.slice(2, 4)}`;
+            validDate = `${currentMonth}/${currentDay}/${currentYear}, ${
+                currentHour[0]
+            }:${currentMinute} ${currentHour.slice(2, 4)}`;
         }
         if (currentHour[1] !== ' ') {
-            validDate = `${currentMonth}/${currentDay}/${currentYear}, ${currentHour.slice(0, 2)}:${currentMinute} ${currentHour.slice(3, 5)}`;
+            validDate = `${currentMonth}/${currentDay}/${currentYear}, ${currentHour.slice(
+                0,
+                2
+            )}:${currentMinute} ${currentHour.slice(3, 5)}`;
         }
 
         expect(getValue(datePickerInput, 8)).toBe(validDate);
         expect(getElementClass(inputGroup, 8)).not.toContain('error');
     });
-
 });
 
 function selectHoursAndMinutes(hour: number = 1, minute: number = 1): void {
