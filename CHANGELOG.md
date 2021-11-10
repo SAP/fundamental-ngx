@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.124 (2021-11-10)
+
+
+### Bug Fixes
+
+* **docs:** fix styles for mobile ([#7147](https://github.com/SAP/fundamental-ngx/issues/7147)) ([b631f0d](https://github.com/SAP/fundamental-ngx/commit/b631f0de14bce4b1641dfd21fbfae3ad23a52d94))
+
 ## 0.33.0-rc.123 (2021-11-10)
 
 
