@@ -4,6 +4,7 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
+    EventEmitter,
     forwardRef,
     HostBinding,
     Inject,
@@ -11,6 +12,7 @@ import {
     OnDestroy,
     OnInit,
     Optional,
+    Output,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
@@ -128,6 +130,9 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
     /** @hidden */
     @HostBinding('style.outline')
     readonly outline = 'none';
+
+    /** Emits event on focus change */
+    @Output() focusChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** Values returned by control. */
     public values: FdCheckboxValues = { trueValue: true, falseValue: false, thirdStateValue: null };
@@ -262,6 +267,18 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
         if (this._listItemComponent && this._platform.FIREFOX && KeyUtil.isKeyCode(event, SPACE)) {
             event.preventDefault();
         }
+    }
+
+    /** Handles blur event */
+    onBlur(): void {
+        if (typeof this.onTouched === 'function') {
+            this.onTouched();
+        }
+        this.focusChange.emit(false);
+    }
+    /** Handles focus event */
+    onFocus(): void {
+        this.focusChange.emit(true);
     }
 
     /** @hidden Based on current control value sets new control state. */

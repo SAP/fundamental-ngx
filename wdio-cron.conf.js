@@ -122,7 +122,7 @@ exports.config = {
     //
     specs: ['./e2e/wdio/**/*.e2e-spec.ts'],
     // Patterns to exclude.
-    exclude: ['./e2e/wdio/core/**/date-picker.e2e-spec.ts'],
+    exclude: [],
     suites: {
         platformA: [
             './e2e/wdio/platform/**/action-bar.e2e-spec.ts',
@@ -167,7 +167,9 @@ exports.config = {
             './e2e/wdio/platform/**/textarea.e2e-spec.ts',
             './e2e/wdio/platform/**/thumbnail.e2e-spec.ts',
             './e2e/wdio/platform/**/value-help-dialog.e2e-spec.ts',
-            './e2e/wdio/platform/**/time-picker.e2e-spec.ts'
+            './e2e/wdio/platform/**/table.e2e-spec.ts',
+            './e2e/wdio/platform/**/time-picker.e2e-spec.ts',
+            './e2e/wdio/platform/**/wizard-generator.e2e-spec.ts'
         ]
     },
     // ============

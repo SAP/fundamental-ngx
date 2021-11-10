@@ -31,3 +31,17 @@
         <label>Search Submit Term: </label><span>{{ compactSearchTerm }}</span>
     </div>
 </div>
+<h4>Without Suggestions</h4>
+<fdp-search-field
+    placeholder="Search"
+    (searchSubmit)="onSearchWithoutSuggestionsSubmit($event)"
+    (inputChange)="onInputWithoutSuggestionsChange($event)"
+></fdp-search-field>
+<div class="result-block">
+    <div class="result-field">
+        <label>Input Change Text: </label><span>{{ inputWithoutSuggestionsText }}</span>
+    </div>
+    <div class="result-field">
+        <label>Search Submit Term: </label><span>{{ searchWithoutSuggestionsTerm }}</span>
+    </div>
+</div>

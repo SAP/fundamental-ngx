@@ -1,4 +1,187 @@
 
+## 0.33.0-rc.124 (2021-11-10)
+
+
+### Bug Fixes
+
+* **docs:** fix styles for mobile ([#7147](https://github.com/SAP/fundamental-ngx/issues/7147)) ([b631f0d](https://github.com/SAP/fundamental-ngx/commit/b631f0de14bce4b1641dfd21fbfae3ad23a52d94))
+
+## 0.33.0-rc.123 (2021-11-10)
+
+
+### Bug Fixes
+
+* **platform:** table semantic column height ([#7146](https://github.com/SAP/fundamental-ngx/issues/7146)) ([90e2f7c](https://github.com/SAP/fundamental-ngx/commit/90e2f7cabb7157b2384e087ae8a7f4b6ad339bb2))
+
+## 0.33.0-rc.122 (2021-11-10)
+
+## 0.33.0-rc.121 (2021-11-09)
+
+
+### Bug Fixes
+
+* **platform:** table, fix column sorting issue ([#6702](https://github.com/SAP/fundamental-ngx/issues/6702)) ([#6703](https://github.com/SAP/fundamental-ngx/issues/6703)) ([11335be](https://github.com/SAP/fundamental-ngx/commit/11335be331d0e8a48e8dcfed79ad6c92a6d5f27e))
+
+## 0.33.0-rc.120 (2021-11-08)
+
+## 0.33.0-rc.119 (2021-11-08)
+
+
+### Bug Fixes
+
+* **platform:** table deffer columns width recalculation ([#7097](https://github.com/SAP/fundamental-ngx/issues/7097)) ([9205a72](https://github.com/SAP/fundamental-ngx/commit/9205a72a4fda1716c36e282c53389c795e071d78))
+
+## 0.33.0-rc.118 (2021-11-08)
+
+## 0.33.0-rc.117 (2021-11-08)
+
+## 0.33.0-rc.116 (2021-11-07)
+
+## 0.33.0-rc.115 (2021-11-06)
+
+## 0.33.0-rc.114 (2021-11-06)
+
+## 0.33.0-rc.113 (2021-11-06)
+
+
+### Bug Fixes
+
+* **platform:** search-field, fix empty suggestions ([#7087](https://github.com/SAP/fundamental-ngx/issues/7087)) ([261d086](https://github.com/SAP/fundamental-ngx/commit/261d086b29e8adf622163f166ea3de1bf86931ab))
+
+## 0.33.0-rc.112 (2021-11-06)
+
+## 0.33.0-rc.111 (2021-11-05)
+
+## 0.33.0-rc.110 (2021-11-05)
+
+
+### Bug Fixes
+
+* **platform:** table - resettable bugs ([#7064](https://github.com/SAP/fundamental-ngx/issues/7064)) ([cb09d7d](https://github.com/SAP/fundamental-ngx/commit/cb09d7d8b1482cf82770d553ca506427bde2b8d1))
+
+## 0.33.0-rc.109 (2021-11-05)
+
+## 0.33.0-rc.108 (2021-11-05)
+
+## 0.33.0-rc.107 (2021-11-05)
+
+## 0.33.0-rc.106 (2021-11-05)
+
+
+### Bug Fixes
+
+* **platform:** fix flaky unit test ([#7099](https://github.com/SAP/fundamental-ngx/issues/7099)) ([b8e0c3d](https://github.com/SAP/fundamental-ngx/commit/b8e0c3d1613f3064e2f874a6e3bb3f44e3c228dc))
+
+## 0.33.0-rc.105 (2021-11-05)
+
+
+### Bug Fixes
+
+* **platform:** table data source change ([#7107](https://github.com/SAP/fundamental-ngx/issues/7107)) ([949c3ba](https://github.com/SAP/fundamental-ngx/commit/949c3ba785c8bb394a0ac90252a185d9e39b9583))
+
+## 0.33.0-rc.104 (2021-11-05)
+
+## 0.33.0-rc.103 (2021-11-05)
+
+
+### Bug Fixes
+
+* **platform:** step-input, add state message ([#7042](https://github.com/SAP/fundamental-ngx/issues/7042)) ([1f0f14e](https://github.com/SAP/fundamental-ngx/commit/1f0f14e8ec034512d4f64c31cb6332eec3f7096f))
+
+## 0.33.0-rc.102 (2021-11-04)
+
+
+### Bug Fixes
+
+* **platform:** table - selection row height issue ([#7091](https://github.com/SAP/fundamental-ngx/issues/7091)) ([d22a5ff](https://github.com/SAP/fundamental-ngx/commit/d22a5ff9cb5b81701ffc202dab1feb14d3c4a3b7))
+
+## 0.33.0-rc.101 (2021-11-04)
+
+## 0.33.0-rc.100 (2021-11-04)
+
+
+### Bug Fixes
+
+* **platform:** empty icon tab bar ([#7092](https://github.com/SAP/fundamental-ngx/issues/7092)) ([759a65e](https://github.com/SAP/fundamental-ngx/commit/759a65e089b1aa7cb9559db5f0687498ef8892ac))
+
+## 0.33.0-rc.99 (2021-11-04)
+
+
+### Bug Fixes
+
+* **platform:** table bugs and improvements ([#7071](https://github.com/SAP/fundamental-ngx/issues/7071)) ([a65a9f5](https://github.com/SAP/fundamental-ngx/commit/a65a9f581d7b0b719dcc19b3cfb1cb96f2eecb04)), closes [#6080](https://github.com/SAP/fundamental-ngx/issues/6080) [#7005](https://github.com/SAP/fundamental-ngx/issues/7005) [#7008](https://github.com/SAP/fundamental-ngx/issues/7008) [#7002](https://github.com/SAP/fundamental-ngx/issues/7002) [#7011](https://github.com/SAP/fundamental-ngx/issues/7011) [#7022](https://github.com/SAP/fundamental-ngx/issues/7022)
+
+## 0.33.0-rc.98 (2021-11-04)
+
+
+### Bug Fixes
+
+* **platform:** fixing the empty error message and adding reset example ([#7018](https://github.com/SAP/fundamental-ngx/issues/7018)) ([a6485ce](https://github.com/SAP/fundamental-ngx/commit/a6485ceacedb1e9216948c43fb898491986d9543))
+
+## 0.33.0-rc.97 (2021-11-03)
+
+## 0.33.0-rc.96 (2021-11-03)
+
+
+### Bug Fixes
+
+* **platform:** replace using cdk overlay with Popover component ([#7032](https://github.com/SAP/fundamental-ngx/issues/7032)) ([835a832](https://github.com/SAP/fundamental-ngx/commit/835a832d751e91393c294e040c95bb9d35005a36))
+
+## 0.33.0-rc.95 (2021-11-03)
+
+## 0.33.0-rc.94 (2021-11-03)
+
+## 0.33.0-rc.93 (2021-11-02)
+
+
+### Bug Fixes
+
+* **core:** split button selection ([#7035](https://github.com/SAP/fundamental-ngx/issues/7035)) ([079c030](https://github.com/SAP/fundamental-ngx/commit/079c030c03050ffddbdbe773d7b5f734f566da51))
+
+## 0.33.0-rc.92 (2021-11-02)
+
+## 0.33.0-rc.91 (2021-11-02)
+
+## 0.33.0-rc.90 (2021-11-02)
+
+
+### Bug Fixes
+
+* **platform:** search-input, add mobile dynamic loading ([#7041](https://github.com/SAP/fundamental-ngx/issues/7041)) ([5e938d3](https://github.com/SAP/fundamental-ngx/commit/5e938d32a982459a7f98e5bbda618f10fae04fdf))
+
+## 0.33.0-rc.89 (2021-11-02)
+
+## 0.33.0-rc.88 (2021-11-02)
+
+
+### Bug Fixes
+
+* **platform:** table - bugs and improvements ([#7043](https://github.com/SAP/fundamental-ngx/issues/7043)) ([eee43e8](https://github.com/SAP/fundamental-ngx/commit/eee43e83e8664a6274f2f3cf23616516fbfced28)), closes [#7003](https://github.com/SAP/fundamental-ngx/issues/7003) [#7012](https://github.com/SAP/fundamental-ngx/issues/7012) [#7010](https://github.com/SAP/fundamental-ngx/issues/7010) [#7007](https://github.com/SAP/fundamental-ngx/issues/7007) [#7006](https://github.com/SAP/fundamental-ngx/issues/7006)
+
+## 0.33.0-rc.87 (2021-11-02)
+
+## 0.33.0-rc.86 (2021-11-02)
+
+## 0.33.0-rc.85 (2021-11-02)
+
+
+### Bug Fixes
+
+* **platform:** table navigation column width ([#7073](https://github.com/SAP/fundamental-ngx/issues/7073)) ([28ae176](https://github.com/SAP/fundamental-ngx/commit/28ae176c1ff143c66fd25a9e25ac7283e73b9dec))
+
+## 0.33.0-rc.84 (2021-11-01)
+
+## 0.33.0-rc.83 (2021-11-01)
+
+## 0.33.0-rc.82 (2021-11-01)
+
+## 0.33.0-rc.81 (2021-11-01)
+
+
+### Bug Fixes
+
+* **platform:** fix failing jest tests ([#7061](https://github.com/SAP/fundamental-ngx/issues/7061)) ([e4ddb31](https://github.com/SAP/fundamental-ngx/commit/e4ddb313aa0929344106db1f7478f1f26cac0e73))
+
 ## 0.33.0-rc.80 (2021-10-30)
 
 

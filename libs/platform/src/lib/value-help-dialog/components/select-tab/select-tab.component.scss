@@ -40,4 +40,7 @@ $block: fdp-value-help-dialog;
     &__empty-message {
         padding: 1rem 2rem;
     }
+    &__hidden_lable {
+        display: none;
+    }
 }

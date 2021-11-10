@@ -1,20 +1,37 @@
-<h5 fd-title class="define-condition-title" i18n="@@platformI18nValueHelpDialog.Define.Condition.Title">Product</h5>
+<h5
+    [id]="titleId"
+    role="heading"
+    aria-level="5"
+    fd-title
+    class="define-condition-title"
+    i18n="@@platformI18nValueHelpDialog.Define.Condition.Title"
+>
+    Product
+</h5>
 <ng-container *ngFor="let item of _conditions; trackBy: _trackByKeyAndType; index as i">
     <fd-layout-grid class="condition-row" [noGap]="true">
         <div fdLayoutGridCol="5">
+            <label id="CONDITIONPANEL_OPERATOR_LABEL" fd-form-label class="fdp-value-help-dialog__hidden_lable">
+                CONDITIONPANEL_OPERATOR_LABEL</label
+            >
+            <label [id]="selectedId" fd-form-label class="fdp-value-help-dialog__hidden_lable">
+                selected value {{ item.strategy }}</label
+            >
             <fd-select
                 class="vhd-condition-filters"
                 fdLayoutGridCol
                 colGrow
                 [class.fd-select-custom-class]="false"
-                i18n-placeholder="@@platformI18nValueHelpDialog.Define.Condition.StrategyPlaceholder"
-                placeholder="Select a strategy"
                 #sttr
                 [compact]="true"
                 [controlTemplate]="customSelectTemplate"
                 [name]="uid + '-' + type + '-strategy-' + item.id"
                 [(ngModel)]="item.strategy"
                 (valueChange)="_filterChanged()"
+                role="combobox"
+                aria-roledescription="select"
+                aria-haspopup="listbox"
+                [ariaLabelledBy]="titleId + ' ' + 'CONDITIONPANEL_OPERATOR_LABEL' + ' ' + selectedId"
             >
                 <ng-container *ngIf="_includeStrategy.length">
                     <li fd-list-group-header>Include</li>
@@ -122,10 +139,12 @@
             <button
                 fd-button
                 i18n-aria-label="@@platformI18nValueHelpDialog.Condition.RemoveLabel"
-                aria-label="Remove define condition"
+                ariaLabel="Remove Define Condition"
                 fdType="transparent"
                 glyph="decline"
                 [compact]="true"
+                title="Remove Define Condition"
+                i18n-title="@@platformI18nValueHelpDialog.defineTab.removeButton"
                 (click)="removeCondition(i)"
             ></button>
         </div>
@@ -140,9 +159,10 @@
                 fd-button
                 i18n-label="@@platformI18nValueHelpDialog.AddLabelDefineCondition"
                 i18n-aria-label="@@platformI18nValueHelpDialog.AddAriaLabelDefineCondition"
-                aria-label="Add new define condition"
+                aria-label="Add New Define Condition"
                 label="Add"
                 [compact]="true"
+                title="Add New Define Condition"
                 (click)="addEmptyCondition()"
             ></button>
         </div>

@@ -10,7 +10,8 @@ import {
     sendKeys,
     setValue,
     waitForElDisplayed,
-    waitForPresent
+    waitForPresent,
+    clickRightMouseBtn
 } from '../../driver/wdio';
 import { StepInputPo } from '../pages/step-input.po';
 import {
@@ -170,6 +171,19 @@ describe('Step input test suite', () => {
             setValue(formInput, '10', i);
             const quantity = getText(quantityText, i);
             checkTextValueContain(quantity, '10');
+        }
+    });
+
+    // skipped due to https://github.com/SAP/fundamental-ngx/issues/6963
+    xit('Verify increment and decrement buttons', () => {
+        const arr = getElementArrayLength(activeInput);
+        for (let i = 0; i < arr; i++) {
+            scrollIntoView(activeInput, i);
+            let defaultValue = getValue(activeInput, i);
+            clickRightMouseBtn(activeButtonIncrement, i);
+            expect(getValue(activeInput, i)).toEqual(defaultValue, 'value changed by clickin on right mouse button');
+            clickRightMouseBtn(activeButtonDecrement, i);
+            expect(getValue(activeInput, i)).toEqual(defaultValue, 'value changed by clickin on right mouse button');
         }
     });
 

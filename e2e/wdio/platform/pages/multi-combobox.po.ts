@@ -7,6 +7,7 @@ export class MultiComboboxPo extends BaseComponentPo {
     mobileModeExamples = 'fdp-multi-combobox-mobile-example ';
 
     expandButton = '#page-content .fd-input-group .fd-button';
+    mobileExpandButton = this.mobileModeExamples + '.fd-input-group .fd-button';
     token = '.fd-token__text';
     tokenCloseButton = '.fd-token .fd-token__close';
     tokenInputField = '.fdp-multi-combobox-tokenizer-custom';
@@ -21,6 +22,7 @@ export class MultiComboboxPo extends BaseComponentPo {
     dialogListItem = this.dialog + ' .fd-list__item[role="option"]';
     selectedDialogItem = this.dialog + ' .fd-list__item.is-selected';
     dialogInput = this.dialog + ' #mobile';
+    showSelectedItemsBtn = this.dialog + ' .fd-margin-begin--tiny';
 
     open(): void {
         super.open(this.url);

@@ -34,11 +34,14 @@ export class MenuInteractiveDirective {
     readonly fdMenuLinkClass: boolean = true;
 
     /** @hidden */
+    _fromSplitButton = false;
+
+    /** @hidden */
     constructor(public elementRef: ElementRef) {}
 
     /** @hidden */
     setSelected(isSelected: boolean): void {
-        this.selected = isSelected && this.ariaHaspopup;
+        this.selected = isSelected && (this.ariaHaspopup || this._fromSplitButton);
     }
 
     /** @hidden */

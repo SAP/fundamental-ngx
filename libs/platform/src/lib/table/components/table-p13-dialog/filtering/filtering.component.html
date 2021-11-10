@@ -25,7 +25,7 @@
                     <fdp-table-filter-rule
                         fdLayoutGridCol="10"
                         [rule]="rule"
-                        (ruleChange)="_onModelChange()"
+                        (ruleChange)="_recalculateResetAvailability()"
                         (ruleStateChange)="_onRuleStateChange()"
                     ></fdp-table-filter-rule>
                     <!-- Actions buttons -->
@@ -68,7 +68,7 @@
                     <fdp-table-filter-rule
                         fdLayoutGridCol="10"
                         [rule]="rule"
-                        (ruleChange)="_onModelChange()"
+                        (ruleChange)="_recalculateResetAvailability()"
                         (ruleStateChange)="_onRuleStateChange()"
                     ></fdp-table-filter-rule>
                     <!-- Actions buttons -->
