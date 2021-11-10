@@ -26,7 +26,7 @@ $block: fd-feed-list;
 
     &__link--more {
         cursor: pointer;
-        text-transform: capitalize;
+        text-transform: initial;
 
         &:hover {
             text-decoration: underline;

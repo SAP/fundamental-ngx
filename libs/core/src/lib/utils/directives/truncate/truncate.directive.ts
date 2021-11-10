@@ -200,7 +200,7 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
             ellipsisTextArray.pop();
         }
 
-        this._truncatedText = this._truncateTarget.textContent = ellipsisTextArray.join('') + ' ... ';
+        this._truncatedText = this._truncateTarget.textContent = ellipsisTextArray.join('') + ' … ';
     }
 
     /** @hidden */
