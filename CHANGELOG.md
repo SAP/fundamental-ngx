@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.126 (2021-11-10)
+
+
+### Bug Fixes
+
+* **platform:** dynamic page title inputs async ([#7135](https://github.com/SAP/fundamental-ngx/issues/7135)) ([ff437c7](https://github.com/SAP/fundamental-ngx/commit/ff437c7812f6dea25dae36a2f546ea5a965f4117))
+
 ## 0.33.0-rc.125 (2021-11-10)
 
 ## 0.33.0-rc.124 (2021-11-10)
