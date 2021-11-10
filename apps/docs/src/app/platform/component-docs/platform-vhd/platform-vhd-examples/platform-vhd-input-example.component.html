@@ -25,6 +25,7 @@
     tabs="select"
     [dataSource]="dataSource"
     (valueChange)="values.single = $event.selected[0]"
+    headerId="fdp-vhd-header-4"
 >
     <fdp-value-help-dialog-search placeholder="Search..."></fdp-value-help-dialog-search>
     <fdp-value-help-dialog-filter
@@ -45,16 +46,11 @@
             }}</fd-token>
         </ng-container>
         <button
-            fd-toolbar-item
-            fdOverflowPriority="never"
+            fd-button
             [compact]="true"
-            fd-button
-            fd-button
-            aria-label="Open value help dialog"
-            title="Open value help dialog"
-            label="Open and select"
-            glyph="value-help"
             (click)="vhd2.open()"
+            aria-label="Open value help dialog"
+            label="Open and select"
         ></button>
     </div>
 </div>
@@ -68,6 +64,7 @@
     tabs="select"
     [dataSource]="dataSource"
     (valueChange)="values.multi = $event.selected"
+    headerId="fdp-vhd-header-5"
 >
     <fdp-value-help-dialog-search placeholder="Search..."></fdp-value-help-dialog-search>
     <fdp-value-help-dialog-filter
@@ -107,6 +104,7 @@
     tabs="select"
     [dataSource]="dataSource"
     (valueChange)="values.once = $event.selected[0]"
+    headerId="fdp-vhd-header-6"
 >
     <fdp-value-help-dialog-search placeholder="Search..."></fdp-value-help-dialog-search>
     <fdp-value-help-dialog-filter
