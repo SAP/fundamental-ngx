@@ -46,7 +46,13 @@
 <!-- Table Header Columns -->
 <ng-template #tableHeaderRowTemplate>
     <tr fd-table-row #headerRow>
-        <th *ngIf="semanticHighlighting" class="fd-table__cell--fixed" fd-table-cell fd-table-status-indicator></th>
+        <th
+            *ngIf="semanticHighlighting"
+            class="fd-table__cell--fixed"
+            fd-table-cell
+            fd-table-status-indicator
+            [style.height]="_getCellHeightPx(headerRow)"
+        ></th>
 
         <th
             *ngIf="_isShownSelectionColumn"
@@ -291,6 +297,7 @@
                                 fd-table-cell
                                 fd-table-status-indicator
                                 [status]="row.value[semanticHighlighting]"
+                                [style.height]="_getCellHeightPx(tableRow)"
                             ></td>
 
                             <!-- Row Selection Cell -->
