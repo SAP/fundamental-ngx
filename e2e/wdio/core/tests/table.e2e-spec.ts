@@ -62,7 +62,8 @@ describe('Table test suite', () => {
         tableColumnSortingExample,
         listItem,
         markAllCheckboxesFF,
-        clickableTableRowFF
+        clickableTableRowFF,
+        selectedPage
     } = tablePage;
 
     beforeAll(() => {
@@ -354,6 +355,15 @@ describe('Table test suite', () => {
 
             click(linkPrevious);
             expect(getText(tableResult).trim()).toBe(paginationTestArr[2]);
+        });
+
+        // skipped due to https://github.com/SAP/fundamental-ngx/issues/7148
+        xit('should check that current page not changing after changing items per page', () => {
+            scrollIntoView(tablePaginationExample);
+            click(tablePaginationExample + button);
+            const defaultSelectedPage = getText(selectedPage);
+            click(menuItem);
+            expect(getText(selectedPage)).toBe(defaultSelectedPage);
         });
     });
 

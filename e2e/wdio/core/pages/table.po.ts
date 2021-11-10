@@ -36,6 +36,7 @@ export class TablePo extends CoreBaseComponentPo {
     tableInner = '.fd-table__inner';
     columnSortingInput = '.fd-popover__popper input';
     listItem = '.fd-list__item';
+    selectedPage = this.paginationLink + '.is-selected';
 
     open(): void {
         super.open(this.url);
