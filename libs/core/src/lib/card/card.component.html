@@ -1,6 +1,6 @@
 <ng-container *ngIf="!isLoading; else loaderTmpl">
     <!-- Badge -->
-    <div *ngIf="badge" class="fd-badge" [attr.tabindex]="badgeTabindex">{{ badge }}</div>
+    <div *ngIf="badge" class="fd-badge" tabindex="0">{{ badge }}</div>
 
     <!-- Header and Content -->
     <ng-content></ng-content>

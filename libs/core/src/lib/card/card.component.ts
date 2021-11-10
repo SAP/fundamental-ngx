@@ -32,9 +32,6 @@ export class CardComponent implements OnChanges, OnInit, CssClassBuilder, OnDest
     /** Badge */
     @Input() badge: string;
 
-    /** Tabindex for badge */
-    @Input() badgeTabindex = '0';
-
     /**
      * Whether to apply compact mode
      */
