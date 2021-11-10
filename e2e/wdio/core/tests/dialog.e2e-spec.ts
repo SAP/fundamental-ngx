@@ -209,11 +209,9 @@ describe('dialog test suite', () => {
 
     describe('complex dialog example', () => {
         it('should check dialog selections', () => {
-            if (browserIsFirefox()) {
-                refreshPage();
-            }
+            refreshPage();
             openDialog(complexDialog);
-            waitForNotDisplayed(busyIndicator);
+            waitForNotPresent(busyIndicator);
             waitForElDisplayed(dialogItems);
             const startingPrice = getText(dialogCartOutput);
 
