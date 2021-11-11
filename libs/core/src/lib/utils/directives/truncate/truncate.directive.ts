@@ -20,8 +20,7 @@ export enum DefaultTruncateCharCount {
 
 @Directive({
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-truncate]',
-    exportAs: 'fdTruncate'
+    selector: '[fd-truncate]'
 })
 export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
     /**
@@ -49,11 +48,6 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
      */
     @Output()
     charCountUpdate = new EventEmitter<boolean>();
-
-    /**
-     * Event with target instance for clamping
-     */
-    @Output() update = new EventEmitter<TruncateDirective>();
 
     /** @hidden */
     private _truncateTarget: HTMLElement;
@@ -113,7 +107,7 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
 
     /** @hidden */
     ngOnChanges(): void {
-        this.update.emit(this);
+        this.refreshTarget(this);
         this.reset();
         this.refreshTruncate();
     }
