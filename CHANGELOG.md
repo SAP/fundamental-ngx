@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.127 (2021-11-11)
+
+
+### Bug Fixes
+
+* **platform:** form field layout ([#7141](https://github.com/SAP/fundamental-ngx/issues/7141)) ([bd54014](https://github.com/SAP/fundamental-ngx/commit/bd540145fe3d6dac09d2d0f7866ad82ef9ec452e))
+
 ## 0.33.0-rc.126 (2021-11-10)
 
 
