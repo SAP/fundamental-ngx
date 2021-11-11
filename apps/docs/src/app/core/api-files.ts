@@ -118,7 +118,7 @@ export const API_FILES = {
     illustratedMessage: ['IllustratedMessageComponent'],
     infoLabel: ['InfoLabelComponent'],
     infiniteScroll: ['InfiniteScrollDirective'],
-    inlineHelp: ['InlineHelpComponent'],
+    inlineHelp: ['InlineHelpDirective'],
     inputGroup: ['InputGroupComponent'],
     layoutGrid: ['LayoutGridComponent', 'LayoutGridColDirective', 'LayoutGridRowDirective'],
     layoutPanel: [
