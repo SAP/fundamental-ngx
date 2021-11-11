@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.130 (2021-11-11)
+
+
+### Bug Fixes
+
+* **docs:** correct file name ([#7170](https://github.com/SAP/fundamental-ngx/issues/7170)) ([d2b38ec](https://github.com/SAP/fundamental-ngx/commit/d2b38ece43b313047ce9e7ca969a17255316e976))
+
 ## 0.33.0-rc.129 (2021-11-11)
 
 
