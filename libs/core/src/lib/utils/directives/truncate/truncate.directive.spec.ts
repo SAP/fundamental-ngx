@@ -2,13 +2,11 @@ import { Component, DebugElement, Input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { TruncateDirective, TruncateTargetDirective } from './truncate.directive';
+import { TruncateDirective } from './truncate.directive';
 
 @Component({
     template: `
-        <div fd-truncate [fdTruncateState]="true" [fdTruncateChars]="maxChars">
-            <div fd-truncate-target [fdTruncateTargetText]="text"></div>
-        </div>
+        <span fd-truncate [fdTruncateState]="true" [fdTruncateChars]="maxChars" [fdTruncateTargetText]="text"> </span>
     `
 })
 class TestComponent {
@@ -26,7 +24,7 @@ describe('TruncateDirective', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent, TruncateDirective, TruncateTargetDirective]
+            declarations: [TestComponent, TruncateDirective]
         });
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;

@@ -7,54 +7,15 @@ import {
     OnChanges,
     OnDestroy,
     Output,
-    Renderer2,
-    SimpleChanges
+    Renderer2
 } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { coerceNumberProperty } from '@angular/cdk/coercion';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
-export enum TruncateCharCount {
-    DEFAULT = 500,
-    LESS = 300
-}
-
-@Directive({
-    // tslint:disable-next-line:directive-selector
-    selector: '[fd-truncate-target]',
-    exportAs: 'fdTruncateTarget'
-})
-export class TruncateTargetDirective implements OnChanges, AfterViewInit {
-    /**
-     * Target text for clamping
-     */
-    @Input()
-    fdTruncateTargetText: string;
-
-    /**
-     * Event with target instance for clamping
-     */
-    @Output() update = new EventEmitter<TruncateTargetDirective>();
-
-    /** @hidden */
-    constructor(private readonly _elementRef: ElementRef) {}
-
-    /**
-     * Native element of clamping target
-     */
-    get targetElement(): HTMLElement {
-        return this._elementRef.nativeElement;
-    }
-
-    /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
-        this.update.emit(this);
-    }
-
-    /** @hidden */
-    ngAfterViewInit(): void {
-        this.update.emit(this);
-    }
+export enum DefaultTruncateCharCount {
+    MAX = 500,
+    MIN = 300
 }
 
 @Directive({
@@ -64,11 +25,17 @@ export class TruncateTargetDirective implements OnChanges, AfterViewInit {
 })
 export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
     /**
+     * Target text for clamping
+     */
+    @Input()
+    fdTruncateTargetText: string;
+
+    /**
      * Count chars for truncating
      */
     @Input()
     set fdTruncateChars(value: number) {
-        this._charCount = coerceNumberProperty(value);
+        this._customCharCount = coerceNumberProperty(value);
     }
 
     /**
@@ -83,6 +50,11 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
     @Output()
     charCountUpdate = new EventEmitter<boolean>();
 
+    /**
+     * Event with target instance for clamping
+     */
+    @Output() update = new EventEmitter<TruncateDirective>();
+
     /** @hidden */
     private _truncateTarget: HTMLElement;
 
@@ -93,7 +65,7 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
     private _truncatedText: string;
 
     /** @hidden */
-    private _charCount: number;
+    private _customCharCount: number;
 
     /** @hidden */
     private _widthCount: number;
@@ -141,6 +113,7 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
 
     /** @hidden */
     ngOnChanges(): void {
+        this.update.emit(this);
         this.reset();
         this.refreshTruncate();
     }
@@ -151,8 +124,8 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
         }
     }
 
-    refreshTarget(event: TruncateTargetDirective): void {
-        this._truncateTarget = event.targetElement;
+    refreshTarget(event: TruncateDirective): void {
+        this._truncateTarget = event.rootElement;
         this._originalText = event.fdTruncateTargetText;
         this.reset();
         this.refreshTruncate();
@@ -207,11 +180,11 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
     private _checkWidth(): void {
         const width = this.rootElement.offsetWidth;
 
-        this._maxChars = this._charCount
-            ? this._charCount
+        this._maxChars = this._customCharCount
+            ? this._customCharCount
             : width >= this._widthCount
-            ? TruncateCharCount.DEFAULT
-            : TruncateCharCount.LESS;
+            ? DefaultTruncateCharCount.MAX
+            : DefaultTruncateCharCount.MIN;
 
         if (this.fdTruncateState && this._hasMore) {
             this._truncate();

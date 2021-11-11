@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { TruncateTargetDirective, TruncateDirective } from './truncate.directive';
+import { TruncateDirective } from './truncate.directive';
 
 @NgModule({
     imports: [CommonModule],
-    exports: [TruncateTargetDirective, TruncateDirective],
-    declarations: [TruncateTargetDirective, TruncateDirective]
+    exports: [TruncateDirective],
+    declarations: [TruncateDirective]
 })
 export class TruncateModule {}

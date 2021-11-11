@@ -47,15 +47,16 @@
 </ng-template>
 
 <ng-template #feedContent let-param>
+    <ng-container *ngTemplateOutlet="param"></ng-container>
     <span
         #truncate="fdTruncate"
         fd-truncate
         [fdTruncateState]="isCollapsed"
         [fdTruncateChars]="maxChars"
+        [fdTruncateTargetText]="text"
         (charCountUpdate)="checkCharCount($event)"
+        (update)="truncate.refreshTarget($event)"
     >
-        <ng-container *ngTemplateOutlet="param"></ng-container>
-        <span fd-truncate-target [fdTruncateTargetText]="text" (update)="truncate.refreshTarget($event)"></span>
     </span>
     <a
         fd-link
