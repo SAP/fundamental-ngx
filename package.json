@@ -196,7 +196,7 @@
     "karma-webpack": "5.0.0",
     "lint-staged": "11.2.6",
     "nan": "2.14.2",
-    "ng-packagr": "12.2.1",
+    "ng-packagr": "12.2.5",
     "ngx-cva-test-suite": "~1.0.4",
     "prettier": "2.4.1",
     "rollup": "2.58.0",
