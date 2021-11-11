@@ -132,6 +132,22 @@ export class TableService {
         }
     }
 
+    /** Removes filters for the provided fields */
+    removeFilters(fields: string[]): void {
+        const prevState = this.getTableState();
+        const prevFilterRules = (prevState && prevState.filterBy) || [];
+
+        const newFilterRules: CollectionFilter[] = prevFilterRules.filter(
+            (existing) => !fields.includes(existing.field)
+        );
+
+        const state: TableState = { ...prevState, filterBy: newFilterRules };
+
+        this.setTableState(setCurrentPageToState(state, 1));
+
+        this.filterChange.emit({ current: state.filterBy, previous: prevFilterRules });
+    }
+
     /** Set group rules */
     setGroups(groups: CollectionGroup[]): void {
         const prevState = this.getTableState();

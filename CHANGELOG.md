@@ -1,4 +1,52 @@
 
+## 0.33.0-rc.129 (2021-11-11)
+
+
+### Bug Fixes
+
+* **platform:** hide password at wizard generator summary page ([#7166](https://github.com/SAP/fundamental-ngx/issues/7166)) ([132e60b](https://github.com/SAP/fundamental-ngx/commit/132e60bcbce0d051d2071af67833514dd1fe3109))
+
+## 0.33.0-rc.128 (2021-11-11)
+
+## 0.33.0-rc.127 (2021-11-11)
+
+
+### Bug Fixes
+
+* **platform:** form field layout ([#7141](https://github.com/SAP/fundamental-ngx/issues/7141)) ([bd54014](https://github.com/SAP/fundamental-ngx/commit/bd540145fe3d6dac09d2d0f7866ad82ef9ec452e))
+
+## 0.33.0-rc.126 (2021-11-10)
+
+
+### Bug Fixes
+
+* **platform:** dynamic page title inputs async ([#7135](https://github.com/SAP/fundamental-ngx/issues/7135)) ([ff437c7](https://github.com/SAP/fundamental-ngx/commit/ff437c7812f6dea25dae36a2f546ea5a965f4117))
+
+## 0.33.0-rc.125 (2021-11-10)
+
+## 0.33.0-rc.124 (2021-11-10)
+
+
+### Bug Fixes
+
+* **docs:** fix styles for mobile ([#7147](https://github.com/SAP/fundamental-ngx/issues/7147)) ([b631f0d](https://github.com/SAP/fundamental-ngx/commit/b631f0de14bce4b1641dfd21fbfae3ad23a52d94))
+
+## 0.33.0-rc.123 (2021-11-10)
+
+
+### Bug Fixes
+
+* **platform:** table semantic column height ([#7146](https://github.com/SAP/fundamental-ngx/issues/7146)) ([90e2f7c](https://github.com/SAP/fundamental-ngx/commit/90e2f7cabb7157b2384e087ae8a7f4b6ad339bb2))
+
+## 0.33.0-rc.122 (2021-11-10)
+
+## 0.33.0-rc.121 (2021-11-09)
+
+
+### Bug Fixes
+
+* **platform:** table, fix column sorting issue ([#6702](https://github.com/SAP/fundamental-ngx/issues/6702)) ([#6703](https://github.com/SAP/fundamental-ngx/issues/6703)) ([11335be](https://github.com/SAP/fundamental-ngx/commit/11335be331d0e8a48e8dcfed79ad6c92a6d5f27e))
+
 ## 0.33.0-rc.120 (2021-11-08)
 
 ## 0.33.0-rc.119 (2021-11-08)

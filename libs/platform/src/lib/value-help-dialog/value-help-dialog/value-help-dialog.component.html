@@ -31,7 +31,7 @@
                     i18n-aria-label="@@platformI18nValueHelpDialog.SelectionBarLabel"
                     *ngIf="!isMobileAdvancedSearchActive"
                 >
-                    <h5 fd-title class="selected-and-condition-title">
+                    <h5 fd-title class="selected-and-condition-title" [id]="id + '-selected-item'">
                         <ng-container *ngIf="hasSelectedAndConditions; else noItemsPanelTitle">
                             <ng-container i18n="@@platformI18nValueHelpDialog.SelectedAndConditionLabel"
                                 >Selected Items and Conditions
@@ -42,8 +42,8 @@
 
                     <div class="fdp-value-help-dialog__tokens-wrapper">
                         <div class="fdp-value-help-dialog__tokens">
-                            <fd-toolbar size="compact" [shouldOverflow]="true">
-                                <!-- Selected items -->
+                            <!-- Selected items -->
+                            <fd-tokenizer [tokenizerFocusable]="false" [compact]="true">
                                 <fd-token
                                     fd-toolbar-item
                                     fdOverflowPriority="high"
@@ -74,7 +74,13 @@
                                         [ngTemplateOutletContext]="{ item: item }"
                                     ></ng-container>
                                 </fd-token>
-                            </fd-toolbar>
+                                <input
+                                    fd-form-control
+                                    fd-tokenizer-input
+                                    [compact]="true"
+                                    [disabled]="!hasSelectedAndConditions"
+                                />
+                            </fd-tokenizer>
                         </div>
                         <button
                             (click)="clearSelectedAndConditionItems()"
@@ -83,6 +89,8 @@
                             fd-button
                             [disabled]="!hasSelectedAndConditions"
                             fdType="transparent"
+                            title="clear selected items"
+                            i18n-title="@@platformI18nValueHelpDialog.footer.declineButton"
                             glyph="decline"
                             i18n-aria-label="@@platformI18nValueHelpDialog.ClearSelectedAriaLabel"
                             aria-label="clear selected items"
@@ -154,6 +162,7 @@
                                 name="value-help-dialog-search"
                                 id="value-help-dialog-search"
                                 [placeholder]="searchField.placeholder"
+                                [attr.aria-label]="searchField.placeholder"
                             />
 
                             <span fd-input-group-addon [compact]="true" button="true">
@@ -193,6 +202,14 @@
                             "
                             [compact]="true"
                             (click)="toggleAdvancedSearch()"
+                            [attr.aria-label]="
+                                mobile
+                                    ? searchField.advancedSearchLabel
+                                    : isOpenAdvanced
+                                    ? searchField.hideAdvancedSearchLabel
+                                    : searchField.showAdvancedSearchLabel
+                            "
+                            i18n-aria-label="@@platformI18nValueHelpDialog.filter.Button"
                         ></button>
                         <button
                             fd-toolbar-item
@@ -202,6 +219,8 @@
                             label="Go"
                             fdType="emphasized"
                             [compact]="true"
+                            aria-label="Go"
+                            i18n-aria-label="@@platformI18nValueHelpDialog.Search.Button"
                         ></button>
                     </fd-toolbar>
                 </div>
@@ -296,16 +315,28 @@
 </ng-template>
 
 <ng-template #dialogTitleText>
-    <h5 fd-title>{{ dialogTitle }}</h5>
+    <h5 [attr.id]="headerId" fd-title>{{ dialogTitle }}</h5>
 </ng-template>
 
 <ng-template #tabLink let-title="title" let-type="type">
     <ng-container *ngIf="selectedTab === type && showSelectionTab && showDefineTab">
-        <button fd-button glyph="navigation-left-arrow" fdType="transparent" (click)="switchTab()"></button>
+        <button
+            fd-button
+            glyph="navigation-left-arrow"
+            fdType="transparent"
+            (click)="switchTab()"
+            i18n-title="@@platformI18nValueHelpDialog.selectTab.back"
+            title="Back"
+        ></button>
         <h5 fd-title>{{ title }}</h5>
     </ng-container>
     <ng-container *ngIf="selectedTab !== type">
-        <a fd-list-link (click)="switchTab(type)">
+        <a
+            fd-list-link
+            (click)="switchTab(type)"
+            i18n-title="@@platformI18nValueHelpDialog.selectTab.openDialog"
+            title="Open dialog"
+        >
             <span fd-list-title>{{ title }}</span>
             <i fd-list-icon glyph="navigation-right-arrow"></i>
         </a>
@@ -334,12 +365,18 @@
 <ng-template #desktopTabs>
     <nav fd-tab-nav class="fdp-value-help-dialog__tabs" *ngIf="showSelectionTab && showDefineTab">
         <div fd-tab-item (click)="switchTab(_tabTypes.selectFromList)" *ngIf="showSelectionTab">
-            <a fd-tab-link [active]="selectedTab === _tabTypes.selectFromList"
+            <a
+                fd-tab-link
+                [active]="selectedTab === _tabTypes.selectFromList"
+                [tabindex]="selectedTab === _tabTypes.selectFromList ? '0' : '-1'"
                 ><span fd-tab-tag>{{ selectTabTitle }}</span></a
             >
         </div>
         <div fd-tab-item (click)="switchTab(_tabTypes.defineConditions)" *ngIf="showDefineTab">
-            <a fd-tab-link [active]="selectedTab === _tabTypes.defineConditions"
+            <a
+                fd-tab-link
+                [active]="selectedTab === _tabTypes.defineConditions"
+                [tabindex]="selectedTab === _tabTypes.defineConditions ? '0' : '-1'"
                 ><span fd-tab-tag>{{ defineTabTitle }}</span></a
             >
         </div>
@@ -347,27 +384,50 @@
 </ng-template>
 
 <ng-template #mobileTabs>
-    <ul fd-list [compact]="true" *ngIf="!hasSelectedTab && showSelectionTab && showDefineTab">
-        <li fd-list-item *ngIf="showSelectionTab">
-            <a fd-list-link (click)="switchTab(_tabTypes.selectFromList)">
-                <span fd-list-title>{{ selectTabTitle }}</span>
-                <i fd-list-icon glyph="navigation-right-arrow"></i>
-            </a>
-        </li>
-        <li fd-list-item *ngIf="showDefineTab">
-            <a fd-list-link (click)="switchTab(_tabTypes.defineConditions)">
-                <span fd-list-title>{{ defineTabTitle }}</span>
-                <i fd-list-icon glyph="navigation-right-arrow"></i>
-            </a>
-        </li>
-    </ul>
+    <div *ngIf="!hasSelectedTab && showSelectionTab && showDefineTab">
+        <div fd-bar [inPage]="true" *ngIf="showSelectionTab">
+            <div fd-bar-left>
+                <fd-bar-element>
+                    {{ selectTabTitle }}
+                </fd-bar-element>
+            </div>
+            <div fd-bar-right>
+                <fd-bar-element>
+                    <fd-button-bar
+                        glyph="navigation-right-arrow"
+                        (click)="switchTab(_tabTypes.selectFromList)"
+                        title="{{ selectTabTitle }} tab "
+                        i18n-title="@@platformI18nValueHelpDialog.selectTab.selectTabTitle"
+                    ></fd-button-bar>
+                </fd-bar-element>
+            </div>
+        </div>
+        <div fd-bar [inPage]="true" *ngIf="showDefineTab">
+            <div fd-bar-left>
+                <fd-bar-element>
+                    {{ defineTabTitle }}
+                </fd-bar-element>
+            </div>
+            <div fd-bar-right>
+                <fd-bar-element>
+                    <fd-button-bar
+                        glyph="navigation-right-arrow"
+                        title="{{ defineTabTitle }} tab "
+                        i18n-title="@@platformI18nValueHelpDialog.defineTab.defineTabTitle"
+                        (click)="switchTab(_tabTypes.defineConditions)"
+                    >
+                    </fd-button-bar>
+                </fd-bar-element>
+            </div>
+        </div>
+    </div>
 </ng-template>
 
 <ng-template #selectedTabHeader>
     <ng-container [ngSwitch]="selectedTab">
         <ng-container *ngSwitchCase="_tabTypes.selectFromList">
             <ng-container
-                *ngTemplateOutlet="tabLink; context: { title: 'Select from list', type: selectedTab }"
+                *ngTemplateOutlet="tabLink; context: { title: selectTabTitle, type: selectedTab }"
             ></ng-container>
         </ng-container>
         <ng-container *ngSwitchCase="_tabTypes.advancedSearch">
