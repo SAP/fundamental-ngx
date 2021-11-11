@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.129 (2021-11-11)
+
+
+### Bug Fixes
+
+* **platform:** hide password at wizard generator summary page ([#7166](https://github.com/SAP/fundamental-ngx/issues/7166)) ([132e60b](https://github.com/SAP/fundamental-ngx/commit/132e60bcbce0d051d2071af67833514dd1fe3109))
+
 ## 0.33.0-rc.128 (2021-11-11)
 
 ## 0.33.0-rc.127 (2021-11-11)
