@@ -54,6 +54,12 @@ export class WizardGeneratorDefaultExampleComponent {
                             name: 'address2',
                             message: 'Address Line 2',
                             type: 'input'
+                        },
+                        {
+                            name: 'password',
+                            message: 'Password',
+                            type: 'password',
+                            controlType: 'password'
                         }
                     ]
                 }

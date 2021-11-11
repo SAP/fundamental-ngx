@@ -151,7 +151,10 @@ export class WizardSummaryStepComponent {
                 items: Object.keys(this._submittedForms[step.id][formId]).map((key) => {
                     return {
                         label: form.form.controls[key].formItem.message as string,
-                        value: formattedFormValue[key]
+                        value:
+                            form.form.controls[key].formItem.controlType !== 'password'
+                                ? formattedFormValue[key]
+                                : this._formatPasswordValue(formattedFormValue[key])
                     };
                 })
             };
@@ -160,5 +163,10 @@ export class WizardSummaryStepComponent {
         }
 
         return formattedStepValue;
+    }
+
+    /** @hidden */
+    private _formatPasswordValue(password: string): string {
+        return '*'.repeat(password.length);
     }
 }
