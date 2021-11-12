@@ -1,5 +1,4 @@
 import {
-    browserIsIEorSafari,
     click,
     getAlertText,
     getElementArrayLength,
@@ -35,10 +34,6 @@ describe('File uploader test suite', () => {
     });
 
     it('Verify browser button', () => {
-        if (browserIsIEorSafari()) {
-            console.log('Skip for IE and Safari');
-            return;
-        }
         const arrLength = getElementArrayLength(browseButton);
         for (let i = 0; i < arrLength; i++) {
             click(browseButton, i);

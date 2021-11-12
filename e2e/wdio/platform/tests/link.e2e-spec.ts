@@ -7,6 +7,7 @@ import {
     truncatedLink_alt_text
 } from '../fixtures/appData/link-page-contents';
 import {
+    browserIsSafari,
     click,
     getAttributeByName,
     getCurrentUrl,
@@ -16,6 +17,7 @@ import {
     getElementTitle,
     isElementClickable,
     mouseHoverElement,
+    refreshPage,
     scrollIntoView,
     waitForElDisplayed
 } from '../../driver/wdio';
@@ -114,10 +116,13 @@ describe('Link component test suite', () => {
     });
 
     it('should check link navigation to new page', () => {
+        if (browserIsSafari()) {
+            // unstable on Safari
+            return;
+        }
         waitForElDisplayed(iconLink);
         checkLinkTarget(iconLink, googleLink, 'input[type="text"]');
         linkPage.open();
-        waitForElDisplayed(iconLink);
     }, 2);
 
     it('should check orientation', () => {

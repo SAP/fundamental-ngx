@@ -116,7 +116,7 @@ describe('Datetime picker suite', () => {
                     scrollIntoView(activeDateTimePickerButton, i);
                     click(activeDateTimePickerButton, i);
                     waitForElDisplayed(calendarExpanded);
-                    expect(getText(currentDay, 0)).toBe(new Date().getDate().toString());
+                    expect(getText(currentDay, 0)).toContain(new Date().getDate().toString());
                 }
             }
         }
@@ -244,7 +244,7 @@ describe('Datetime picker suite', () => {
         for (let i = 0; i < datepickerButtonsLength; i++) {
             if (!getElementClass(datePickerButton, i).includes('disabled')) {
                 click(datePickerButton, i);
-                expect(getText(okButton + buttonText)).toEqual('OK');
+                expect(getText(okButton + buttonText).trim()).toEqual('OK');
                 click(okButton);
             }
         }
@@ -286,7 +286,7 @@ describe('Datetime picker suite', () => {
 });
 
 function selectHoursAndMinutes(hour: number = 1, minute: number = 1): void {
-    while (getText(selectedHours) !== hour.toString()) {
+    while (getText(selectedHours).trim() !== hour.toString()) {
         scrollIntoView(activeDateTimePickerButton, 1);
         click(navigationUpArrowButton);
     }

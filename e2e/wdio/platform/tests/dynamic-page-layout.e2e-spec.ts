@@ -45,7 +45,7 @@ describe('Dynamic Page Layout test suite:', () => {
         dynamicPageLayoutPage.open();
     }, 1);
 
-    afterEach(() => {
+    beforeEach(() => {
         refreshPage();
         waitForElDisplayed(dynamicPageLayoutPage.title);
     }, 1);

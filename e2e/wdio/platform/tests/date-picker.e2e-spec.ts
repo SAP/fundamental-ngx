@@ -1,4 +1,5 @@
 import {
+    browserIsSafari,
     click,
     elementArray,
     getCSSPropertyByName,
@@ -58,7 +59,7 @@ describe('Date picker suite', () => {
         datePickerPage.open();
     }, 1);
 
-    afterEach(() => {
+    beforeEach(() => {
         refreshPage();
         waitForPresent(inputDatePicker);
     }, 1);
@@ -105,7 +106,7 @@ describe('Date picker suite', () => {
                 scrollIntoView(buttonDatePicker, i);
                 click(buttonDatePicker, i);
                 waitForElDisplayed(calendarExpanded);
-                expect(getText(currentDay, 0)).toBe(new Date().getDate().toString());
+                expect(getText(currentDay, 0)).toContain(new Date().getDate().toString());
             }
         }
     });

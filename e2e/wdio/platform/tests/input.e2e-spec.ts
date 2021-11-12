@@ -1,6 +1,7 @@
 import {
     addValue,
     browserIsIEorSafari,
+    browserIsSafari,
     clearValue,
     click,
     doesItExist,
@@ -150,11 +151,6 @@ describe('Input should ', () => {
     });
 
     it('should have error border color', () => {
-        if (browserIsIEorSafari()) {
-            console.log('Skip for IE and Safari');
-            return;
-        }
-        waitForPresent(messagesComponentsInput);
         scrollIntoView(messagesComponentsInput);
         waitForElDisplayed(messagesComponentsInput);
         click(submitBtn);
@@ -165,14 +161,18 @@ describe('Input should ', () => {
     });
 
     it('should have visual cue for require input', () => {
-        waitForPresent(requiredInputLabel);
         scrollIntoView(requiredInputLabel);
         pause(2000);
         expect(executeScriptAfterTagAttr(requiredInputLabel, 'content')).toBe('"*"');
     });
 
     it('should have visual cue for information', () => {
-        expect(executeScriptBeforeTagAttr(questionMarkSpan, 'content')).toBe('""');
+        if (browserIsSafari()) {
+            expect(executeScriptBeforeTagAttr(questionMarkSpan, 'content')).toBe('');
+        }
+        if (!browserIsSafari()) {
+            expect(executeScriptBeforeTagAttr(questionMarkSpan, 'content')).toBe('""');
+        }
     });
 
     it('should implement autosuggestion', () => {

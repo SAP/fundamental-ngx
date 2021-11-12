@@ -13,7 +13,7 @@ export class ActionListItemPo extends BaseComponentPo {
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
-        waitForPresent(this.actionBtns);
+        waitForPresent(this.title);
     }
 
     getScreenshotFolder(): Record<string, any> {

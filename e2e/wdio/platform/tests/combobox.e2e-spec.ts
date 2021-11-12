@@ -50,9 +50,9 @@ describe('Combobox test suite', () => {
         comboBoxPage.open();
     }, 1);
 
-    afterEach(() => {
+    beforeEach(() => {
         refreshPage();
-        waitForPresent(pageTitle);
+        waitForPresent(comboBoxPage.title);
     }, 1);
 
     it('Verify each combobox consist of input and button', () => {

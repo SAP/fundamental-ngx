@@ -29,7 +29,6 @@ export class InputPo extends BaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
         waitForPresent(this.defaultInput);
     }
 
