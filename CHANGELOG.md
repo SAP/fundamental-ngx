@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.131 (2021-11-12)
+
+
+### Bug Fixes
+
+* **core:** fixing the flickering issue for the toolbar component ([#7100](https://github.com/SAP/fundamental-ngx/issues/7100)) ([c8ead39](https://github.com/SAP/fundamental-ngx/commit/c8ead3903218dd4a7c477962e9b6d4882da1af8a))
+
 ## 0.33.0-rc.130 (2021-11-11)
 
 
