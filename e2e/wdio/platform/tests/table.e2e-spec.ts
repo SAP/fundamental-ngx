@@ -133,7 +133,8 @@ describe('Table component test suite', function () {
         ellipsisButton,
         expandedOption,
         tableRowInitialState,
-        tableCellInitialState
+        tableCellInitialState,
+        buttonFilter
     } = tablePage;
 
     beforeAll(() => {
@@ -214,8 +215,7 @@ describe('Table component test suite', function () {
             expect(getAttributeByName(tableSingleRowSelectionExample + tableRow, 'aria-selected')).toBe('true');
         });
 
-        // skipped due to https://github.com/SAP/fundamental-ngx/issues/6545
-        xit('should check selected row not gets unselected', () => {
+        it('should check selected row not gets unselected', () => {
             scrollIntoView(tableSingleRowSelectionExample);
             setValue(tableSingleRowSelectionExample + input, 'Astro');
             click(tableSingleRowSelectionExample + button, 1);
@@ -268,8 +268,8 @@ describe('Table component test suite', function () {
             expect(getText(tableSortableExample + tableCellName)).toBe(nameEndTestText);
             expect(getText(tableSortableExample + tableCellName, 15)).toBe(nameStartTestText);
         });
-        // skipped due to https://github.com/SAP/fundamental-ngx/issues/7007
-        xit('should check after selecting sorting option popover closed', () => {
+
+        it('should check after selecting sorting option popover closed', () => {
             scrollIntoView(tableSortableExample);
             click(sortableIcon);
             click(sortableOption);
@@ -312,17 +312,18 @@ describe('Table component test suite', function () {
                 expect(getText(tableFilterableExample + tableCellStatus, i)).toBe(tableCellArr[3]);
             }
         });
-        // skipped due to https://github.com/SAP/fundamental-ngx/issues/7008
-        xit('should check on filter by price reset button is clickable', () => {
+
+        it('should check on filter by price reset button is clickable', () => {
             scrollIntoView(tableFilterableExample);
-            click(tableFilterableExample + button, 1);
+            click(tableFilterableExample + buttonFilter);
             click(dialogFilters);
             setValue(filterInput, '10');
+            setValue(filterInput, '40', 1);
             click(filterButtonOk);
 
-            click(tableFilterableExample + button, 1);
+            click(tableFilterableExample + buttonFilter);
             click(dialogFilters);
-            expect(getAttributeByName(filterResetButton, 'disabled')).toBe('false');
+            expect(isElementClickable(filterResetButton)).toBe(true, 'reset button not clickable');
         });
     });
 
@@ -398,14 +399,16 @@ describe('Table component test suite', function () {
             expect(doesItExist(busyIndicator)).toBe(false, 'busy indicator still displayed');
         });
 
-        // skipped due to https://github.com/SAP/fundamental-ngx/pull/6712
-        xit('should check ', () => {
+        it('should check ', () => {
             scrollIntoView(tableLoadingExample);
             click(tableLoadingExample + button);
             setValue(tableLoadingExample + input, 'Astro');
-            click(tableLoadingExample + button, 2);
+            click(tableLoadingExample + buttonSearch);
             click(tableLoadingExample + button);
-            expect(isEnabled(tableLoadingExample + button, 1)).toBe(false, 'x button enable');
+
+            expect(isElementClickable(tableLoadingExample + button, 1)).toBe(false, 'x button is clickable');
+            expect(isElementClickable(tableLoadingExample + button, 2)).toBe(false, 'x button search is clickable');
+            expect(isEnabled(tableLoadingExample + input)).toBe(false, 'input is enable');
         });
     });
 
@@ -574,6 +577,8 @@ describe('Table component test suite', function () {
         // skipped due to https://github.com/SAP/fundamental-ngx/issues/7005
         xit('should check Exclude section in dialog always open', () => {
             scrollIntoView(tableP13FilterExample);
+            click(tableP13FilterExample + buttonFilter);
+            expect(getAttributeByName(expandedOption, 'aria-expanded')).toBe('false');
         });
     });
 
@@ -589,8 +594,6 @@ describe('Table component test suite', function () {
 
         it('should check sorting of columns', () => {
             checkSortingColumns(tableP13GroupExample, ellipsisButton, 1);
-            click(tableP13FilterExample + ellipsisButton);
-            expect(getAttributeByName(expandedOption, 'aria-expanded')).toBe('false');
         });
     });
 
@@ -737,8 +740,8 @@ describe('Table component test suite', function () {
             findElementInTable(tableRowClassExample, tableCellArr);
         });
     });
-    // skipped due to https://github.com/SAP/fundamental-ngx/issues/7010
-    xdescribe('Check input fields', function () {
+
+    describe('Check input fields', function () {
         it('should check input fields does not change width', () => {
             const inputFieldLength = getElementArrayLength(allInputFields);
             for (let i = 0; i < inputFieldLength; i++) {
