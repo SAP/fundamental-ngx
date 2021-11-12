@@ -5,7 +5,7 @@
         glyph="decline"
         placeholder="Search"
         [compact]="true"
-        [disabled]="false"
+        [disabled]="loading"
         [button]="true"
         [(ngModel)]="searchTerm"
         (ngModelChange)="searchInputChanged($event)"
@@ -22,6 +22,7 @@
         glyph="refresh"
     ></button>
     <button
+        [disabled]="loading"
         fd-toolbar-item
         fd-button
         label="New Item"
