@@ -48,9 +48,9 @@ describe('Thumbnail field', () => {
         scrollIntoView(verticalGalleryImages);
         const arrLength = getElementArrayLength(verticalGalleryImages);
         for (let i = 0; arrLength - 1 > i; i++) {
-            const imageUrl = getAttributeByName(verticalGalleryImages, 'ng-reflect-image', i);
+            const imageUrl = getAttributeByName(verticalGalleryImages, 'style', i);
             click(verticalGalleryImages, i);
-            expect(getAttributeByName(mainImage, 'src', 0)).toContain(imageUrl);
+            expect(imageUrl).toContain(getAttributeByName(mainImage, 'src', 0));
         }
     });
 

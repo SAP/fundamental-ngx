@@ -226,9 +226,9 @@ describe('slider test suite', () => {
         });
 
         it('should check ability to disable slider', () => {
-            expect(getAttributeByName(playgroundExamples + sliderAttr, disabledAttribute)).toBe('false');
+            expect(getElementClass(playgroundExamples + sliderAttr)).not.toContain('is-disabled');
             click(inputCheckboxes, 3);
-            expect(getAttributeByName(playgroundExamples + sliderAttr, disabledAttribute)).toBe('true');
+            expect(getElementClass(playgroundExamples + sliderAttr)).toContain('is-disabled');
         });
     });
 
