@@ -225,8 +225,7 @@ describe('slider test suite', () => {
             expect(doesItExist(playgroundExamples + sliderLabels)).toBe(false);
         });
 
-        xit('should check ability to disable slider', () => {
-            // skipped due to issue https://github.com/SAP/fundamental-ngx/issues/4820
+        it('should check ability to disable slider', () => {
             expect(getAttributeByName(playgroundExamples + sliderAttr, disabledAttribute)).toBe('false');
             click(inputCheckboxes, 3);
             expect(getAttributeByName(playgroundExamples + sliderAttr, disabledAttribute)).toBe('true');

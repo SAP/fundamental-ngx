@@ -1,5 +1,11 @@
 import { ObjectStatusPo } from '../pages/object-status.po';
-import { getAttributeByName, getElementArrayLength, getTextArr, waitForElDisplayed } from '../../driver/wdio';
+import {
+    getAttributeByName,
+    getElementArrayLength,
+    getElementClass,
+    getTextArr,
+    waitForElDisplayed
+} from '../../driver/wdio';
 import { semanticText, genericColorText, objStatusText, sizeAttr } from '../fixtures/appData/object-status-contents';
 import { checkElArrIsClickable } from '../../helper/assertion-helper';
 
@@ -75,11 +81,10 @@ describe('Object Status test suite', () => {
     });
 
     describe('object status large design examples', () => {
-        // in prod mode missed attr: ng-reflect-large
-        xit('should check object status is large', () => {
+        it('should check object status is large', () => {
             const objectCount = getElementArrayLength(largeExamples);
             for (let i = 0; i < objectCount; i++) {
-                expect(getAttributeByName(largeExamples + status, sizeAttr, i)).toBe('true');
+                expect(getElementClass(largeExamples + status, i)).toContain('large');
             }
         });
 

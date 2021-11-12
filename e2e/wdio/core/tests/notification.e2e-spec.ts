@@ -8,7 +8,9 @@ import {
     scrollIntoView,
     waitForElDisplayed,
     isElementDisplayed,
-    waitForNotDisplayed
+    waitForNotDisplayed,
+    waitForPresent,
+    waitForNotPresent
 } from '../../driver/wdio';
 
 describe('Notification component test', () => {
@@ -117,8 +119,7 @@ describe('Notification component test', () => {
         }
     });
 
-    // rework for firebase build
-    xit('should check actions with notifications', () => {
+    it('should check actions with notifications', () => {
         for (let i = 0; i < 2; i++) {
             checkActions('Approve', approveButton, i);
             checkActions('Reject', rejectButton, i);
@@ -134,8 +135,8 @@ describe('Notification component test', () => {
         scrollIntoView(defaultExample + overflowButton, index);
         click(defaultExample + overflowButton, index);
         click(buttonChoice);
-        expect(isElementDisplayed(messageToast)).toBe(true);
+        expect(waitForPresent(messageToast)).toBe(true);
         expect(getText(messageToast)).toBe(`${action} action performed`);
-        waitForNotDisplayed(messageToast);
+        waitForNotPresent(messageToast);
     }
 });
