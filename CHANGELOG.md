@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.132 (2021-11-12)
+
+
+### Bug Fixes
+
+* **core,platform:** date time pickers active state ([#7088](https://github.com/SAP/fundamental-ngx/issues/7088)) ([867f6e4](https://github.com/SAP/fundamental-ngx/commit/867f6e44796ceaaf509e74a2c635b3d831d82ba3))
+
 ## 0.33.0-rc.131 (2021-11-12)
 
 
