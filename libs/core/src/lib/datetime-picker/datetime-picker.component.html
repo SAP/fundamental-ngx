@@ -1,9 +1,9 @@
 <div class="fd-datetime">
     <fd-popover
         [(isOpen)]="isOpen"
-        (isOpenChange)="_changeMessageVisibility()"
+        (isOpenChange)="_onOpenStateChanged($event)"
         [focusTrapped]="true"
-        [focusAutoCapture]="true"
+        [focusAutoCapture]="false"
         [triggers]="[]"
         [disabled]="disabled"
         [placement]="placement"
@@ -16,6 +16,13 @@
                 [state]="state"
                 [disabled]="disabled"
                 [isControl]="true"
+                [button]="true"
+                [buttonFocusable]="buttonFocusable"
+                glyph="date-time"
+                [isExpanded]="isOpen"
+                [glyphAriaLabel]="displayDatetimeToggleLabel"
+                [iconTitle]="displayDatetimeToggleLabel"
+                (addOnButtonClicked)="togglePopover()"
             >
                 <input
                     type="text"
@@ -27,25 +34,10 @@
                     [attr.aria-required]="required"
                     [placeholder]="placeholder"
                     [compact]="compact"
-                    [ngClass]="{ 'is-error': _isInvalidDateInput && useValidation }"
                     [disabled]="disabled"
                     (ngModelChange)="handleInputChange($event)"
                     (focus)="onTouched()"
                 />
-                <span fd-input-group-addon [state]="state" [compact]="compact" [button]="true">
-                    <button
-                        [disabled]="disabled"
-                        fd-button
-                        [glyph]="'date-time'"
-                        [fdType]="'transparent'"
-                        [compact]="compact"
-                        [attr.tabindex]="buttonFocusable ? 0 : -1"
-                        [attr.aria-label]="displayDatetimeToggleLabel"
-                        [class.is-expanded]="isOpen"
-                        [attr.aria-expanded]="isOpen"
-                        (click)="togglePopover()"
-                    ></button>
-                </span>
             </fd-input-group>
         </fd-popover-control>
         <fd-popover-body [attr.aria-expanded]="isOpen" [attr.aria-hidden]="!isOpen" [style.display]="'block'">

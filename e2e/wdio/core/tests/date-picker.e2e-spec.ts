@@ -218,7 +218,7 @@ describe('Datetime picker suite', () => {
     });
 
     it('should check states of input groups', () => {
-        expect(getElementClass(allowNullExample + inputGroup)).toContain('is-success');
+        expect(getElementClass(allowNullExample + inputGroup)).not.toContain('is-error');
         expect(getElementClass(formExample + inputGroup, 1)).toContain('is-information');
         expect(getElementClass(disableFuncExample + inputGroup)).toContain('is-success');
         expect(getElementClass(rangeDisabledExample + inputGroup)).toContain('is-success');

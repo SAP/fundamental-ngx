@@ -20,7 +20,7 @@ import { DateTimeFormats, DATE_TIME_FORMATS, DatetimeAdapter } from '@fundamenta
 
 import { CalendarService } from '../../calendar.service';
 import { CalendarYearGrid, CalendarYear } from '../../models/calendar-year-grid';
-import { DefaultCalendarActiveCellStrategy } from '../../models/common';
+import { DefaultCalendarActiveCellStrategy, FocusableCalendarView } from '../../models/common';
 import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
 
 /** Component representing the YearView of the Calendar Component. */
@@ -34,7 +34,7 @@ import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
     },
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestroy {
+export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestroy, FocusableCalendarView {
     /** The id of the calendar passed from the parent component */
     @Input()
     id: string;

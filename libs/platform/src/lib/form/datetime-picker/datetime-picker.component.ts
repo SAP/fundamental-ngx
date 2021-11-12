@@ -138,10 +138,10 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
     }
 
     /**
-     * Whether AddOn Button should be focusable, set to true by default
+     * Whether AddOn Button should be focusable, set to false by default
      */
     @Input()
-    buttonFocusable = true;
+    buttonFocusable = false;
 
     /**
      * Special days mark, it can be used by passing array of object with
