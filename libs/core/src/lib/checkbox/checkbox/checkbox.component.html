@@ -30,17 +30,20 @@
     [ngClass]="labelClass"
     [attr.title]="title"
     [class.fd-checkbox__label--compact]="compact"
+    [class.fd-checkbox__label--required]="required"
     (click)="checkByClick($event)"
 >
-    <ng-container *ngIf="label">
-        <span class="fd-checkbox__text">
-            {{ label }}
-        </span>
-    </ng-container>
+    <div class="fd-checkbox__label-container">
+        <ng-container *ngIf="label">
+            <span class="fd-checkbox__text">
+                {{ label }}
+            </span>
+        </ng-container>
 
-    <ng-container *ngIf="!label">
-        <span class="fd-checkbox__text">
-            <ng-content></ng-content>
-        </span>
-    </ng-container>
+        <ng-container *ngIf="!label">
+            <span class="fd-checkbox__text">
+                <ng-content></ng-content>
+            </span>
+        </ng-container>
+    </div>
 </label>
