@@ -21,6 +21,7 @@ export class ComboBoxPo extends BaseComponentPo {
     comboboxTwoColumns = '[name="columns"] input';
     optionsArray = '.fd-list__item';
     comboBoxInput = 'fdp-combobox input:not([id*="mobile"])';
+    mobileComboBoxInput = 'fdp-combobox input[id*=mobile]';
 
     selectedDropDownOption = (name: string) => {
         return `//span[contains(.,'${name}')]//ancestor::li[contains(@class, "is-selected")]`;
