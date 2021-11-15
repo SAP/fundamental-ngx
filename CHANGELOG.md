@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.140 (2021-11-15)
+
+
+### Bug Fixes
+
+* **platform:** radio-group, fix reflect value when set through reactive form ([#7150](https://github.com/SAP/fundamental-ngx/issues/7150)) ([b45c7a0](https://github.com/SAP/fundamental-ngx/commit/b45c7a047d60e95d7402e294fdc67d902925f164))
+
 ## 0.33.0-rc.139 (2021-11-15)
 
 ## 0.33.0-rc.138 (2021-11-15)
