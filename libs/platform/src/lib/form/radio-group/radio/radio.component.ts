@@ -108,7 +108,6 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
     /** @hidden Controlvalue accessor */
     writeValue(value: any): void {
         this._valueChange(value);
-        super.writeValue(value);
     }
 
     /** @hidden */
