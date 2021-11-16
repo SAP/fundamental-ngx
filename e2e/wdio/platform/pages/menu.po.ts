@@ -25,7 +25,7 @@ export class MenuPo extends BaseComponentPo {
     menuWithIconsIcon = this.menuWithIconsItem + ' fd-icon';
     menuWithIconsAddon = '#fdp-menu-menu-icons fd-menu-addon';
     selectedItemLabel = 'fdp-platform-menu-with-icons-example div';
-    
+
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);

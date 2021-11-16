@@ -58,7 +58,7 @@ describe('Menu component test suite', () => {
         const itemText = getText(menuWithIconsItemText);
         click(menuWithIconsItem);
         expect(getText(selectedItemLabel)).toEqual(`Item Selected: ${itemText}`);
-    }); 
+    });
 
     it('should check that all icons are displayed in Menu with icons example', () => {
         click(menuWithIconsBtn);
