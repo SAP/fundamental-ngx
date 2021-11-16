@@ -14,13 +14,14 @@ export class ComboBoxPo extends BaseComponentPo {
     root = '#page-content';
     pageTitle = 'fd-platform-combobox-header h1';
 
-    comboBoxRoot = '.fdp-combobox';
+    comboBoxRoot = 'fdp-combobox';
     comboBoxDropdownExpanded = '.fd-list';
     groupHeader = '.fd-list__group-header';
     comboboxWithGroup = 'input[ng-reflect-name="group"]';
     comboboxTwoColumns = '[name="columns"] input';
     optionsArray = '.fd-list__item';
     comboBoxInput = 'fdp-combobox input:not([id*="mobile"])';
+    mobileComboBoxInput = 'fdp-combobox input[id*=mobile]';
 
     selectedDropDownOption = (name: string) => {
         return `//span[contains(.,'${name}')]//ancestor::li[contains(@class, "is-selected")]`;

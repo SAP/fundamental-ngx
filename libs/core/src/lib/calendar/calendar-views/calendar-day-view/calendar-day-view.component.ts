@@ -27,6 +27,7 @@ import { ActiveCalendarDayCellStrategy as CalendarActiveDayCellStrategy, Calenda
 import { CalendarType, DaysOfWeek } from '../../calendar.component';
 import { CalendarService } from '../../calendar.service';
 import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
+import { FocusableCalendarView } from '../../models/common';
 
 /** Component representing the day view of the calendar. */
 @Component({
@@ -40,7 +41,7 @@ import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
     },
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy {
+export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy, FocusableCalendarView {
     /** Currently displayed month and year for days */
     @Input()
     set currentlyDisplayed(currentlyDisplayed: CalendarCurrent) {

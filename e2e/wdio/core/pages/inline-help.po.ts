@@ -11,6 +11,8 @@ export class InlineHelpPo extends CoreBaseComponentPo {
     inlineHelpStyledIcon = 'fd-inline-help-styled-example fd-icon';
     inlineHelpTemplateExample = 'fd-inline-help-template-example span';
     inlineHelpExampleExtended = '.docs-tile';
+    popover = 'div.fd-popover__popper';
+    inlineHelp = '.fd-inline-help__content';
 
     open(): void {
         super.open(this.url);

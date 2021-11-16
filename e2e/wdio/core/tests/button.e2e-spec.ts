@@ -6,10 +6,10 @@ import {
     scrollIntoView,
     setValue,
     click,
-    sendKeys,
     checkElementScreenshot,
     saveElementScreenshot,
-    getText
+    getText,
+    getElementClass
 } from '../../driver/wdio';
 import { testText, fdTypeOptions, iconOptions } from '../fixtures/appData/button-contents';
 import { buttonPlaygroundTag } from '../fixtures/testData/button-tags';
@@ -28,7 +28,10 @@ describe('Button test suite:', () => {
         checkboxMenu,
         checkboxCompact,
         dropDownMenu,
-        playgroundButtonText
+        playgroundButtonText,
+        playgroundButtonIcon,
+        menuOption,
+        dropDownOptionByValue
     } = buttonPage;
 
     beforeAll(() => {
@@ -91,51 +94,24 @@ describe('Button test suite:', () => {
             expect(getText(playgroundButtonText)).toEqual(testText);
         });
 
-        // skipped due to https://github.com/webdriverio/webdriverio/issues/3605
-        xit('verify type of dropdown menu', () => {
+        it('verify type of dropdown menu', () => {
             scrollIntoView(dropDownMenu);
             click(dropDownMenu);
-            for (let i = 0; i < fdTypeOptions.length; i++) {
-                setValue(dropDownMenu, fdTypeOptions[i]);
-                sendKeys(['Enter']);
+            for (let i = 1; i < fdTypeOptions.length; i++) {
+                click(menuOption, i);
                 click(playgroundButton);
-                expect(getAttributeByName(playgroundButton, 'ng-reflect-fd-type')).toEqual(fdTypeOptions[i]);
-                saveElementScreenshot(
-                    playgroundButton,
-                    buttonPlaygroundTag + `${fdTypeOptions[i]}`,
-                    buttonPage.getScreenshotFolder()
-                );
-                expect(
-                    checkElementScreenshot(
-                        playgroundButton,
-                        buttonPlaygroundTag + `${fdTypeOptions[i]}`,
-                        buttonPage.getScreenshotFolder()
-                    )
-                ).toBeLessThan(5, `Playground button mismatch`);
+                expect(getElementClass(playgroundButton)).toContain(fdTypeOptions[i - 1]);
             }
         });
 
-        // skipped due to https://github.com/webdriverio/webdriverio/issues/3605
-        xit('verify icon of dropdown menu', () => {
+        it('verify icon of dropdown menu', () => {
             scrollIntoView(dropDownMenu, 1);
             click(dropDownMenu, 1);
             for (let i = 0; i < iconOptions.length; i++) {
-                setValue(dropDownMenu, iconOptions[i], 1);
-                sendKeys(['Enter']);
+                click(dropDownOptionByValue(iconOptions[i]));
                 click(playgroundButton);
-                expect(getAttributeByName(playgroundButton, 'ng-reflect-glyph')).toEqual(iconOptions[i]);
-                saveElementScreenshot(
-                    playgroundButton,
-                    buttonPlaygroundTag + `${iconOptions[i]}`,
-                    buttonPage.getScreenshotFolder()
-                );
-                expect(
-                    checkElementScreenshot(
-                        playgroundButton,
-                        buttonPlaygroundTag + `${iconOptions[i]}`,
-                        buttonPage.getScreenshotFolder()
-                    )
-                ).toBeLessThan(5, `Playground button mismatch`);
+                expect(getElementClass(playgroundButtonIcon)).toContain(iconOptions[i]);
+                click(dropDownMenu, 1);
             }
         });
 

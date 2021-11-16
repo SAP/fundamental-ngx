@@ -5,22 +5,18 @@ import {
     click,
     clickAndMoveElement,
     doesItExist,
-    elementDisplayed,
     getAttributeByName,
     getElementArrayLength,
+    getElementClass,
     getText,
+    isElementDisplayed,
     mouseHoverElement,
     refreshPage,
     scrollIntoView,
     sendKeys,
     waitForElDisplayed
 } from '../../driver/wdio';
-import {
-    cozyAttribute,
-    disabledAttribute,
-    tickAttribute,
-    tickLabelAttribute
-} from '../fixtures/appData/slider-contents';
+import { cozySliderClass, disabledAttribute } from '../fixtures/appData/slider-contents';
 
 describe('slider test suite', () => {
     const sliderPage = new SliderPo();
@@ -48,7 +44,9 @@ describe('slider test suite', () => {
         inputCheckboxes,
         sliderTicks,
         sliderTooltipInput,
-        sliderTooltipInputFF
+        sliderTooltipInputFF,
+        ticksAnsMarksSliderTicks,
+        ticksAnsMarksSliderLabels
     } = sliderPage;
 
     beforeAll(() => {
@@ -98,16 +96,14 @@ describe('slider test suite', () => {
         });
     });
 
-    xdescribe('tick marks and labels examples', () => {
+    describe('tick marks and labels examples', () => {
         it('should check tick marks', () => {
-            // in prod mode missed attr: ng-reflect-show-ticks and ng-reflect-show-ticks-labels
             scrollIntoView(ticksAndLabelsExamples);
-            expect(getAttributeByName(ticksAndLabelsExamples + sliderAttr, tickAttribute)).toEqual('true');
+            expect(isElementDisplayed(ticksAnsMarksSliderTicks)).toBe(true, 'tick marks not displayed');
         });
 
         it('should check tick mark labels', () => {
-            expect(getAttributeByName(ticksAndLabelsExamples + sliderAttr, tickLabelAttribute, 1)).toEqual('true');
-            expect(elementDisplayed(ticksAndLabelsExamples + sliderLabels)).toBe(true);
+            expect(isElementDisplayed(ticksAnsMarksSliderLabels)).toBe(true, 'tick mark labels not displayed');
         });
     });
 
@@ -154,19 +150,17 @@ describe('slider test suite', () => {
         });
     });
 
-    xdescribe('disabled examples', () => {
-        // in prod mode missed attr: ng-reflect-disabled
+    describe('disabled examples', () => {
         it('should check range slider is disabled', () => {
             scrollIntoView(disabledExamples);
-            expect(getAttributeByName(disabledExamples + sliderAttr, disabledAttribute)).toBe('true');
+            expect(getElementClass(disabledExamples + sliderAttr)).toContain(disabledAttribute);
         });
     });
 
     describe('cozy examples', () => {
-        // in prod mode missed attr: ng-reflect-cozy
-        xit('should check cozy property', () => {
+        it('should check cozy property', () => {
             scrollIntoView(cozyExamples);
-            expect(getAttributeByName(cozyExamples + sliderAttr, cozyAttribute)).toBe('true');
+            expect(getElementClass(cozyExamples + sliderHandles)).toContain(cozySliderClass);
         });
 
         it('should check cozy slider', () => {
@@ -227,11 +221,10 @@ describe('slider test suite', () => {
             expect(doesItExist(playgroundExamples + sliderLabels)).toBe(false);
         });
 
-        xit('should check ability to disable slider', () => {
-            // in prod mode missed attr: ng-reflect-disabled
-            expect(getAttributeByName(playgroundExamples + sliderAttr, disabledAttribute)).toBe('false');
+        it('should check ability to disable slider', () => {
+            expect(getElementClass(playgroundExamples + sliderAttr)).not.toContain(disabledAttribute);
             click(inputCheckboxes, 3);
-            expect(getAttributeByName(playgroundExamples + sliderAttr, disabledAttribute)).toBe('true');
+            expect(getElementClass(playgroundExamples + sliderAttr)).toContain(disabledAttribute);
         });
     });
 

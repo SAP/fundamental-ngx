@@ -47,16 +47,14 @@
 </ng-template>
 
 <ng-template #feedContent let-param>
+    <ng-container *ngTemplateOutlet="param"></ng-container>
     <span
-        class="lineclamp"
-        #lineClamp="fdLineClamp"
-        fd-lineclamp
-        [fdLineclampState]="isCollapsed"
-        [fdLineClampLines]="maxRows"
-        (lineCountUpdate)="checkLineCount($event)"
+        fd-truncate
+        [fdTruncateState]="isCollapsed"
+        [fdTruncateChars]="maxChars"
+        [fdTruncateTargetText]="text"
+        (charCountUpdate)="checkCharCount($event)"
     >
-        <ng-container *ngTemplateOutlet="param"></ng-container>
-        <span fd-lineclamp-target [fdLineClampTargetText]="text" (update)="lineClamp.refreshTarget($event)"></span>
     </span>
     <a
         fd-link

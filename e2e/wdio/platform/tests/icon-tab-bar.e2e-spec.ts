@@ -96,8 +96,7 @@ describe('Info Label component test suite', () => {
             checkSelectingTabs(iconOnlyExample);
         });
 
-        // skipped due to https://github.com/SAP/fundamental-ngx/issues/6714
-        xit('should check that no labels in only iconName example', () => {
+        it('should check that no labels in only iconName example', () => {
             expect(doesItExist(iconOnlyExample + label)).toBe(false, 'label exists but should not');
             expect(doesItExist(iconOnlyExample + counter)).toBe(false, 'counter exists but should not');
         });

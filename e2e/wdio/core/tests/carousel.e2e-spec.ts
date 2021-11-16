@@ -10,7 +10,8 @@ import {
     waitForElDisplayed,
     clickAndDragElement,
     getElementClass,
-    pause
+    pause,
+    isElementDisplayed
 } from '../../driver/wdio';
 import { imgSource, active, numberedPages, loadErrorMsg } from '../fixtures/appData/carousel-contents';
 
@@ -166,13 +167,14 @@ describe('Carousel test suite', () => {
     });
 
     describe('carousel with navigation inside content area example', () => {
-        // skip due to issue https://github.com/SAP/fundamental-ngx/issues/4434
-        xit('should check navigation buttons shown on hover', () => {
+        it('should check navigation buttons shown on hover', () => {
+            scrollIntoView(displayedImg, 4);
             mouseHoverElement(displayedImg, 4);
-            expect(contentNavBtns).toBeVisible();
+            expect(waitForElDisplayed(contentNavBtns)).toBe(true, 'nav buttons not displyed on hover');
 
+            scrollIntoView(sectionTitle, 6);
             mouseHoverElement(sectionTitle, 6);
-            expect(contentNavBtns).not.toBeVisible();
+            expect(isElementDisplayed(contentNavBtns)).toBe(false, 'nav buttons displayed when mouse not hovering img');
         });
 
         it('should check numbered pagination', () => {
@@ -189,14 +191,17 @@ describe('Carousel test suite', () => {
     });
 
     describe('carousel with looped navigation example', () => {
-        // skip because of https://github.com/SAP/fundamental-ngx/issues/4432
-        xit('should check loop navigation', () => {
+        it('should check loop navigation', () => {
             const firstImg = getAttributeByName(displayedImg, imgSource, 5);
 
             click(navBtns, 14);
+            // pause for animation to complete
+            pause(1500);
             expect(getAttributeByName(displayedImg, imgSource, 5)).not.toBe(firstImg);
 
             click(navBtns, 15);
+            // pause for animation to complete
+            pause(1500);
             expect(getAttributeByName(displayedImg, imgSource, 5)).toBe(firstImg);
         });
     });
@@ -229,13 +234,14 @@ describe('Carousel test suite', () => {
     function checkCarouselNavigation(imgIndex: number, nextImgBtnIndex: number): void {
         const firstImg = getAttributeByName(displayedImg, imgSource, imgIndex);
 
+        scrollIntoView(navBtns, nextImgBtnIndex);
         click(navBtns, nextImgBtnIndex);
         // pause for animation to finish
-        pause(500);
+        pause(1500);
         expect(getAttributeByName(displayedImg, imgSource, imgIndex)).not.toBe(firstImg);
         click(navBtns, nextImgBtnIndex - 1);
         // pause for animation to finish
-        pause(500);
+        pause(1500);
         expect(getAttributeByName(displayedImg, imgSource, imgIndex)).toBe(firstImg);
     }
 });

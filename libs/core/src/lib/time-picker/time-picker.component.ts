@@ -20,17 +20,17 @@ import {
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Placement } from '@fundamental-ngx/core/shared';
 
-import { DATE_TIME_FORMATS, DateTimeFormats } from '@fundamental-ngx/core/datetime';
-import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
-import { createMissingDateImplementationError } from './errors';
-
+import { Placement, FormStates } from '@fundamental-ngx/core/shared';
+import { DatetimeAdapter, DATE_TIME_FORMATS, DateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { TimeComponent } from '@fundamental-ngx/core/time';
-import { FormStates } from '@fundamental-ngx/core/shared';
 import { PopoverFormMessageService } from '@fundamental-ngx/core/form';
 import { PopoverService } from '@fundamental-ngx/core/popover';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
+
+import { createMissingDateImplementationError } from './errors';
+
 @Component({
     selector: 'fd-time-picker',
     templateUrl: './time-picker.component.html',
@@ -169,6 +169,10 @@ export class TimePickerComponent<D>
     @Input()
     placement: Placement = 'bottom-start';
 
+    /** Whether to validate the time picker input. */
+    @Input()
+    useValidation = true;
+
     /**
      *  The state of the form control - applies css classes.
      *  Also this is applied to message.
@@ -181,15 +185,18 @@ export class TimePickerComponent<D>
     }
 
     get state(): FormStates {
+        if (this._state == null && this.useValidation && this._isInvalidTimeInput) {
+            return 'error';
+        }
         return this._state;
     }
     private _state: FormStates = null;
 
     /**
-     * Whether AddOn Button should be focusable, set to true by default
+     * Whether AddOn Button should be focusable, set to false by default
      */
     @Input()
-    buttonFocusable = true;
+    buttonFocusable = false;
 
     /**
      * When set to true, time inputs won't allow to have 1 digit
@@ -224,6 +231,10 @@ export class TimePickerComponent<D>
     /** @hidden */
     @ViewChild('inputGroupComponent', { read: ElementRef })
     _inputGroupElement: ElementRef;
+
+    /** @hidden */
+    @ViewChild(InputGroupInputDirective, { read: ElementRef })
+    _inputElement: ElementRef;
 
     /**
      * @hidden
@@ -385,14 +396,9 @@ export class TimePickerComponent<D>
      *  @hidden
      *  When the open state is changed, there should be at least one active item, which by default is hour.
      */
-    _handleIsOpenChange(isOpen: boolean): void {
+    _setIsOpen(isOpen: boolean): void {
         this.isOpen = isOpen;
-        this.isOpenChange.emit(this.isOpen);
-        this._changeMessageVisibility();
-        if (isOpen) {
-            this._changeDetectorRef.detectChanges();
-            this.child.focusActiveColumnIndicator();
-        }
+        this._onOpenStateChanged(isOpen);
     }
 
     /**
@@ -428,20 +434,20 @@ export class TimePickerComponent<D>
     _inputGroupClicked($event: MouseEvent): void {
         if (!this.isOpen && !this.disabled) {
             $event.stopPropagation();
-            this._handleIsOpenChange(true);
+            this._setIsOpen(true);
         }
     }
 
     /** @hidden */
     _addOnButtonClicked(): void {
         if (!this.disabled) {
-            this._handleIsOpenChange(!this.isOpen);
+            this._setIsOpen(!this.isOpen);
         }
     }
 
     /** @hidden */
     _popoverClosed(): void {
-        this._handleIsOpenChange(false);
+        this._setIsOpen(false);
     }
 
     /** @hidden */
@@ -521,6 +527,20 @@ export class TimePickerComponent<D>
             this._popoverFormMessage.hide();
         } else {
             this._popoverFormMessage.show();
+        }
+    }
+
+    /** @hidden */
+    _onOpenStateChanged(isOpen: boolean): void {
+        this.isOpenChange.emit(isOpen);
+        this._changeMessageVisibility();
+        if (isOpen) {
+            this._changeDetectorRef.detectChanges();
+            this.child.focusActiveColumnIndicator();
+        }
+        // focus input control every time popup is closed
+        if (!isOpen && this._inputElement) {
+            this._inputElement.nativeElement.focus();
         }
     }
 

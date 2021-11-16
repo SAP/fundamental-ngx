@@ -19,19 +19,16 @@ import {
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
-import { Placement } from '@fundamental-ngx/core/shared';
 
-import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
-import { DateTimeFormats, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
-import { CalendarComponent, DaysOfWeek, FdCalendarView } from '@fundamental-ngx/core/calendar';
-import { CalendarYearGrid } from '@fundamental-ngx/core/calendar';
-import { SpecialDayRule } from '@fundamental-ngx/core/shared';
-import { FormStates } from '@fundamental-ngx/core/shared';
-
-import { createMissingDateImplementationError } from './errors';
+import { Placement, SpecialDayRule, FormStates } from '@fundamental-ngx/core/shared';
+import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
+import { CalendarComponent, DaysOfWeek, FdCalendarView, CalendarYearGrid } from '@fundamental-ngx/core/calendar';
 import { PopoverFormMessageService } from '@fundamental-ngx/core/form';
 import { PopoverService } from '@fundamental-ngx/core/popover';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
+
+import { createMissingDateImplementationError } from './errors';
 
 /**
  * The datetime picker component is an opinionated composition of the fd-popover,
@@ -197,6 +194,9 @@ export class DatetimePickerComponent<D>
         this._popoverFormMessage.messageType = state;
     }
     get state(): FormStates {
+        if (this._state == null && this.useValidation && this.isInvalidDateInput) {
+            return 'error';
+        }
         return this._state;
     }
     /** @hidden */
@@ -206,7 +206,7 @@ export class DatetimePickerComponent<D>
      * Whether AddOn Button should be focusable, set to true by default
      */
     @Input()
-    buttonFocusable = true;
+    buttonFocusable = false;
 
     /**
      * Special days mark, it can be used by passing array of object with
@@ -294,6 +294,10 @@ export class DatetimePickerComponent<D>
     /** @hidden */
     @ViewChild('inputGroupComponent', { read: ElementRef })
     _inputGroupElement: ElementRef;
+
+    /** @hidden */
+    @ViewChild(InputGroupInputDirective, { read: ElementRef })
+    _inputElement: ElementRef;
 
     /**
      * @hidden
@@ -455,8 +459,7 @@ export class DatetimePickerComponent<D>
         if (!this.isOpen && !this.disabled) {
             this.onTouched();
             this.isOpen = true;
-            this.isOpenChange.emit(this.isOpen);
-            this._changeMessageVisibility();
+            this._onOpenStateChanged(this.isOpen);
         }
     }
 
@@ -465,8 +468,7 @@ export class DatetimePickerComponent<D>
         if (this.isOpen) {
             this.onClose.emit();
             this.isOpen = false;
-            this.isOpenChange.emit(this.isOpen);
-            this._changeMessageVisibility();
+            this._onOpenStateChanged(this.isOpen);
         }
     }
 
@@ -565,7 +567,10 @@ export class DatetimePickerComponent<D>
         this.closePopover();
     }
 
-    /** @hidden */
+    /**
+     * @hidden
+     * Looks like no one uses it. Should be removed?
+     */
     focusArrowLeft(): void {
         if (this._elRef.nativeElement.querySelector('#' + this._calendarComponent.id + '-left-arrow')) {
             this._elRef.nativeElement.querySelector('#' + this._calendarComponent.id + '-left-arrow').focus();
@@ -602,8 +607,22 @@ export class DatetimePickerComponent<D>
         }
     }
 
+    /** @hidden */
+    _onOpenStateChanged(isOpen: boolean): void {
+        this.isOpenChange.emit(isOpen);
+        this._changeMessageVisibility();
+        // focus input control every time popup is closed
+        if (!isOpen && this._inputElement) {
+            this._inputElement.nativeElement.focus();
+        }
+        // focus calendar cell on opening
+        if (isOpen && this._calendarComponent) {
+            this._calendarComponent.initialFocus();
+        }
+    }
+
     /** Method that provides information if model selected date/dates have properly types and are valid */
-    public isCurrentModelValid(): boolean {
+    isCurrentModelValid(): boolean {
         return this._isModelValid(this.date);
     }
 
@@ -613,7 +632,7 @@ export class DatetimePickerComponent<D>
     }
 
     private _setInput(dateTime: D): void {
-        this._inputFieldDate = this._isModelValid ? this._formatDateTime(dateTime) : '';
+        this._inputFieldDate = dateTime && this._isModelValid ? this._formatDateTime(dateTime) : '';
         this._changeDetRef.detectChanges();
     }
 

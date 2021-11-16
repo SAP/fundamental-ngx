@@ -26,7 +26,6 @@ import {
 import {
     acceptAlert,
     browserIsIE,
-    browserIsSafariorFF,
     click,
     getAlertText,
     getAttributeByName,
@@ -42,7 +41,8 @@ import {
     waitForElDisplayed,
     waitForInvisibilityOf,
     pause,
-    waitForNotPresent
+    waitForNotPresent,
+    browserIsSafari
 } from '../../driver/wdio';
 
 describe('List test suite:', () => {
@@ -222,9 +222,8 @@ describe('List test suite:', () => {
         });
 
         it('should check scroll', () => {
-            // skip for FF due to issue https://github.com/SAP/fundamental-ngx/issues/4107
-            if (browserIsSafariorFF()) {
-                console.log('skip FF due to #4107, skip Safari');
+            if (browserIsSafari()) {
+                console.log('skip Safari');
                 return;
             }
             scrollIntoView(vScrollListItems);

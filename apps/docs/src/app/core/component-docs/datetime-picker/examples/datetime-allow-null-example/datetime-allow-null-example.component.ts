@@ -11,11 +11,7 @@ import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
 @Component({
     selector: 'fd-date-time-picker-allow-null-example',
     template: `
-        <fd-datetime-picker
-            [allowNull]="false"
-            [(ngModel)]="selectedDay"
-            [state]="isInvalid() ? 'error' : 'success'"
-        ></fd-datetime-picker>
+        <fd-datetime-picker [allowNull]="false" [(ngModel)]="selectedDay"></fd-datetime-picker>
         <br />
         <br />
         <span>Selected Date: {{ selectedDay || 'null' }}</span>
@@ -32,11 +28,5 @@ import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
     ]
 })
 export class DatetimePickerAllowNullExampleComponent {
-    @ViewChild(DatetimePickerComponent) datePicker: DatetimePickerComponent<FdDate>;
-
     selectedDay: FdDate = FdDate.getNow();
-
-    isInvalid(): boolean {
-        return !this.selectedDay || !this.selectedDay.isDateValid();
-    }
 }
