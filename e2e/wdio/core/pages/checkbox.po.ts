@@ -15,6 +15,7 @@ export class CheckboxPo extends CoreBaseComponentPo {
     checkboxInput = this.checkbox + ' input';
     checkboxLabel = this.checkbox + ' label';
     link = this.checkbox + ' a';
+    tristateOutput = this.tristateCheckbox + 'div';
 
     open(): void {
         super.open(this.url);
