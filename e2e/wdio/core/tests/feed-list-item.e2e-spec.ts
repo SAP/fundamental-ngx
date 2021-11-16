@@ -4,7 +4,8 @@ import {
     doesItExist,
     getAlertText,
     getElementArrayLength,
-    getElementSize, getText,
+    getElementSize,
+    getText,
     isElementClickable,
     isElementDisplayed,
     refreshPage,
@@ -121,7 +122,7 @@ describe('Feed list item test suite:', () => {
             if (i === 3) {
                 expect(getText(example + linkMore, i)).toBe(testTextMore);
                 click(example + linkMore, i);
-                expect(getText(example + linkMore, i)).toBe(testTextLess)
+                expect(getText(example + linkMore, i)).toBe(testTextLess);
             } else {
                 scrollIntoView(example + linkMore, i);
                 const beforeSize = getElementSize(example + paragraphs, i);
