@@ -7,6 +7,9 @@ export class AlertPo extends CoreBaseComponentPo {
 
     button = ' button';
     alerts = 'fd-alert-example .fd-alert';
+    playgroundAlert = '.fd-playground .fd-alert ';
+    select = '#playgroundtype';
+    option = 'option';
     closeAlertButton = 'fd-alert-example .fd-alert' + this.button;
     openOverlayButton = 'fd-alert-component-as-content-example' + this.button;
     popupAlert = 'fd-alert-container fd-alert';

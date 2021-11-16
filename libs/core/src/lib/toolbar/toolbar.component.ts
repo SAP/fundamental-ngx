@@ -115,7 +115,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     toolbarItems: QueryList<ToolbarItemDirective>;
 
     /** @hidden */
-    overflowVisibility: Observable<boolean>;
+    overflowVisibility: Observable<boolean> = of(false);
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -524,7 +524,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     }
 
     private _changeOverflowVisibleState(visible: boolean): void {
-        this.overflowVisibility = of(visible).pipe(delay(1));
+        this.overflowVisibility = of(visible).pipe(debounceTime(1));
     }
 
     private _changeItemVisibilityState(element: HTMLElement, visible: boolean): void {

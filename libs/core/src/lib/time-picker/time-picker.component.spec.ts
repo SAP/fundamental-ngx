@@ -192,7 +192,7 @@ describe('TimePickerComponent', () => {
 
     it('should hide message on open', () => {
         const hideSpy = spyOn((<any>component)._popoverFormMessage, 'hide');
-        component._handleIsOpenChange(true);
+        component._setIsOpen(true);
         expect(hideSpy).toHaveBeenCalled();
     });
 
@@ -200,7 +200,7 @@ describe('TimePickerComponent', () => {
         component.isOpen = true;
 
         const showSpy = spyOn((<any>component)._popoverFormMessage, 'show');
-        component._handleIsOpenChange(false);
+        component._setIsOpen(false);
         expect(showSpy).toHaveBeenCalled();
     });
 });

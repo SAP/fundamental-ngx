@@ -35,6 +35,7 @@ import {
     CalendarAggregatedYearViewComponent
     // Comment to fix max-line-length error
 } from './calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
+import { FocusableCalendarView } from './models/common';
 
 let calendarUniqueId = 0;
 
@@ -536,6 +537,13 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
     }
 
     /**
+     * Set initial focus on one of the calendar's element
+     */
+    initialFocus(): void {
+        this._getActiveFocusableView()?.setFocusOnCell();
+    }
+
+    /**
      * @hidden
      * Function that handles changes from month view child component, changes actual view and changes currently displayed month
      */
@@ -634,6 +642,22 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
                 year: this._dateTimeAdapter.getYear(today),
                 month: this._dateTimeAdapter.getMonth(today)
             };
+        }
+    }
+
+    /** @hidden */
+    private _getActiveFocusableView(): FocusableCalendarView | null {
+        switch (this.activeView) {
+            case 'day':
+                return this._dayViewComponent;
+            case 'month':
+                return this._monthViewComponent;
+            case 'year':
+                return this._yearViewComponent;
+            case 'aggregatedYear':
+                return this._aggregatedYearViewComponent;
+            default:
+                return null;
         }
     }
 }

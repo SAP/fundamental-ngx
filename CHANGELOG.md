@@ -1,4 +1,58 @@
 
+## 0.33.0-rc.141 (2021-11-16)
+
+## 0.33.0-rc.140 (2021-11-15)
+
+
+### Bug Fixes
+
+* **platform:** radio-group, fix reflect value when set through reactive form ([#7150](https://github.com/SAP/fundamental-ngx/issues/7150)) ([b45c7a0](https://github.com/SAP/fundamental-ngx/commit/b45c7a047d60e95d7402e294fdc67d902925f164))
+
+## 0.33.0-rc.139 (2021-11-15)
+
+## 0.33.0-rc.138 (2021-11-15)
+
+
+### Bug Fixes
+
+* **core:** feed list item more less button align ([#7138](https://github.com/SAP/fundamental-ngx/issues/7138)) ([62e8a46](https://github.com/SAP/fundamental-ngx/commit/62e8a46994ba0ed100b2654612a05ceb64e5a641))
+
+## 0.33.0-rc.137 (2021-11-15)
+
+
+### Bug Fixes
+
+* **core,platform:** select, fix wrapping and trucation styles ([#7163](https://github.com/SAP/fundamental-ngx/issues/7163)) ([219ae93](https://github.com/SAP/fundamental-ngx/commit/219ae93ae0075c3442fe4481389ec2b38c5dff7d))
+
+## 0.33.0-rc.136 (2021-11-14)
+
+## 0.33.0-rc.135 (2021-11-12)
+
+## 0.33.0-rc.134 (2021-11-12)
+
+## 0.33.0-rc.133 (2021-11-12)
+
+## 0.33.0-rc.132 (2021-11-12)
+
+
+### Bug Fixes
+
+* **core,platform:** date time pickers active state ([#7088](https://github.com/SAP/fundamental-ngx/issues/7088)) ([867f6e4](https://github.com/SAP/fundamental-ngx/commit/867f6e44796ceaaf509e74a2c635b3d831d82ba3))
+
+## 0.33.0-rc.131 (2021-11-12)
+
+
+### Bug Fixes
+
+* **core:** fixing the flickering issue for the toolbar component ([#7100](https://github.com/SAP/fundamental-ngx/issues/7100)) ([c8ead39](https://github.com/SAP/fundamental-ngx/commit/c8ead3903218dd4a7c477962e9b6d4882da1af8a))
+
+## 0.33.0-rc.130 (2021-11-11)
+
+
+### Bug Fixes
+
+* **docs:** correct file name ([#7170](https://github.com/SAP/fundamental-ngx/issues/7170)) ([d2b38ec](https://github.com/SAP/fundamental-ngx/commit/d2b38ece43b313047ce9e7ca969a17255316e976))
+
 ## 0.33.0-rc.129 (2021-11-11)
 
 

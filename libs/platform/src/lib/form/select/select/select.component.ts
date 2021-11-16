@@ -120,7 +120,7 @@ export class SelectComponent extends BaseSelect implements OnInit, AfterViewInit
             const optionItem = option._getHtmlElement();
             // set maxWidth default is 40rem
             if (this.maxWidth) {
-                optionItem.setAttribute('style', 'max-width: ' + this.maxWidth + 'rem');
+                optionItem.setAttribute('style', 'max-width: ' + this.maxWidth + 'px');
             }
             // by default text will be overlapped, below it will help to truncate
             if (this.noWrapText) {
@@ -136,28 +136,6 @@ export class SelectComponent extends BaseSelect implements OnInit, AfterViewInit
     /** @hidden */
     ngAfterViewChecked(): void {
         this._cd.detectChanges();
-    }
-
-    /** @hidden */
-    _setColumnsRatio(firstColumnRatio: number, secondColumnRatio: number): void {
-        let firstColumnProportion: number;
-        let totalProportions: number;
-        let secondColumnProportion: number;
-
-        totalProportions = firstColumnRatio + secondColumnRatio;
-        firstColumnProportion = Math.round((firstColumnRatio / totalProportions) * 100);
-        secondColumnProportion = 100 - firstColumnProportion;
-
-        // setting option items
-        this.select._options.forEach((option) => {
-            const optionItem = option._getHtmlElement();
-            optionItem
-                .querySelector('.fd-list__title')
-                .setAttribute('style', 'width: ' + firstColumnProportion + 'rem');
-            optionItem
-                .querySelector('.fd-list__secondary')
-                .setAttribute('style', 'width: ' + secondColumnProportion + 'rem');
-        });
     }
 
     /**
@@ -213,14 +191,6 @@ export class SelectComponent extends BaseSelect implements OnInit, AfterViewInit
         );
     }
 
-    /**
-     * Define is selected item selected by display value
-     * @hidden
-     */
-    _isSelectedOptionItemByDisplayValue(selectedItem: any): boolean {
-        return this.selected && this.selected.label === selectedItem;
-    }
-
     /** @hidden */
     _onSelection(value: any): void {
         this.value = value;
@@ -254,5 +224,31 @@ export class SelectComponent extends BaseSelect implements OnInit, AfterViewInit
     /** @hidden */
     private _getSelectedOptionItem(text: string): OptionItem | undefined {
         return this._optionItems.find((item) => item.label === text);
+    }
+
+    /** @hidden */
+    private _setColumnsRatio(firstColumnRatio: number, secondColumnRatio: number): void {
+        let firstColumnProportion: number;
+        let totalProportions: number;
+        let secondColumnProportion: number;
+
+        totalProportions = firstColumnRatio + secondColumnRatio;
+        firstColumnProportion = Math.round((firstColumnRatio / totalProportions) * 100);
+        secondColumnProportion = 100 - firstColumnProportion;
+
+        // setting option items
+        this.select._options.forEach((option) => {
+            const optionItem = option._getHtmlElement();
+            const titleElement = <HTMLElement>optionItem.querySelector('.fd-list__title');
+            this._setOptionAttribute(titleElement, firstColumnProportion);
+
+            const secondaryElement = <HTMLElement>optionItem.querySelector('.fd-list__secondary');
+            this._setOptionAttribute(secondaryElement, secondColumnProportion);
+        });
+    }
+
+    /** @hidden */
+    private _setOptionAttribute(element: HTMLElement, proportion: number): void {
+        element.setAttribute('style', 'width: ' + proportion + '%; max-width: ' + proportion + '%');
     }
 }

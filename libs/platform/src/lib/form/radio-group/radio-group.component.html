@@ -55,7 +55,7 @@
                 [value]="getLookupValue(item)"
                 [contentDensity]="contentDensity"
                 [state]="state"
-                [disabled]="getListItemDisabledValue(item)"
+                [disabled]="_getListItemDisabledValue(item)"
                 [forceRender]="true"
             >
                 {{ getDisplayValue(item) }}

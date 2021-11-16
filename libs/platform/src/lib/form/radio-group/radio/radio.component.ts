@@ -41,12 +41,10 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
     /** value for Radio button */
     @Input()
     get value(): any {
-        return this.getValue();
+        return super.getValue();
     }
     set value(newValue: any) {
-        if (newValue) {
-            this._value = newValue;
-        }
+        this._value = newValue;
     }
 
     /**
@@ -67,11 +65,19 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
         super.state = state;
     }
 
-    /** @hidden
-     * used for radio button creation if list value present
-     */
+    /** used for radio button creation if list value present */
     @Input()
     forceRender = false;
+
+    /** reference of template */
+    @ViewChild('renderer')
+    renderer: TemplateRef<any>;
+
+    /** @hidden */
+    _currentValue: any;
+
+    /** @hidden Radio checked status */
+    _isChecked = false;
 
     /** click event to emit */
     @Output()
@@ -80,16 +86,6 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
     /** Access radio button child elemen passed as content of radio button group*/
     @ViewChild(CoreRadioButtonComponent, { static: false })
     private coreRadioButton: CoreRadioButtonComponent;
-
-    /** reference of template */
-    @ViewChild('renderer')
-    renderer: TemplateRef<any>;
-
-    /** @hidden */
-    currentValue: any;
-
-    /** @hidden Radio checked status */
-    isChecked = false;
 
     constructor(
         cd: ChangeDetectorRef,
@@ -111,9 +107,7 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
 
     /** @hidden Controlvalue accessor */
     writeValue(value: any): void {
-        if (value) {
-            this.valueChange(value);
-        }
+        this._valueChange(value);
     }
 
     /** @hidden */
@@ -122,40 +116,38 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
     }
 
     /** @hidden */
-    public valueChange(value: any): void {
+    _valueChange(value: any): void {
         if (this.disabled) {
             return;
         }
 
-        this.currentValue = value;
-        this.isChecked = this.currentValue === this.getValue();
-        if (this.isChecked) {
+        this._currentValue = value;
+        this._isChecked = this._currentValue === super.getValue();
+        if (this._isChecked) {
             this.checked.emit(this);
         }
-        this.tabIndex = this.isChecked ? 0 : -1;
+        this.tabIndex = this._isChecked ? 0 : -1;
         this._cd.detectChanges();
         this.onChange(value);
     }
 
     /** method for cdk FocusKeymanager */
-    public focus(): void {
-        if (this.coreRadioButton) {
-            this.coreRadioButton.elementRef().nativeElement.focus();
-        }
+    focus(): void {
+        this.coreRadioButton?.elementRef().nativeElement.focus();
     }
 
     /** method to select radio button */
-    public select(): void {
-        this.valueChange(this.getValue());
+    select(): void {
+        this._valueChange(super.getValue());
     }
 
     /** method to uncheck radio button */
-    public unselect(): void {
-        this.valueChange(undefined);
+    unselect(): void {
+        this._valueChange(undefined);
     }
 
     /** Setting tabIndex for radio accessibility */
-    public setTabIndex(index: 0 | -1): void {
+    setTabIndex(index: 0 | -1): void {
         this.tabIndex = index;
         this._cd.markForCheck();
     }

@@ -37,6 +37,10 @@ export class SliderPo extends CoreBaseComponentPo {
     sliderTicks = this.playgroundExamples + '.fd-slider__tick';
     inputCheckboxes = this.playgroundExamples + '.fd-checkbox__label';
 
+    // other selectors
+    ticksAnsMarksSliderTicks = this.ticksAndLabelsExamples + '.fd-slider__ticks';
+    ticksAnsMarksSliderLabels = this.ticksAndLabelsExamples + this.sliderLabels;
+
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);

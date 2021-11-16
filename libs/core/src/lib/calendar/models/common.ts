@@ -13,6 +13,10 @@ export interface BaseCalendarCell {
     index?: number; // list index
 }
 
+export interface FocusableCalendarView {
+    setFocusOnCell(): void;
+}
+
 /**
  * Calendar active cell strategy
  */
