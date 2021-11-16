@@ -698,7 +698,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             this._showMessage('error');
             return;
         }
-        // debugger;
+
         this._graphMetadata = generateApprovalFlowGraphMetadata(this._graph);
 
         const nodes = getGraphNodes(this._graph);
