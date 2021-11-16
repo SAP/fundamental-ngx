@@ -10,9 +10,8 @@ export class FeedListItemPo extends CoreBaseComponentPo {
     footerExample = 'fd-fli-footer-example ';
     mobileExample = 'fd-fli-mobile-example ';
 
-    paragraphs = '.lineclamp';
+    paragraphs = '.fd-feed-list__text';
     linkMore = '.fd-feed-list__link--more';
-    checkbox = 'input';
     links = '.fd-link:not(.fd-feed-list__link--more)';
     actionSettingsButton = 'button[glyph="action-settings"]';
     menuButton = '[glyph="menu"]';

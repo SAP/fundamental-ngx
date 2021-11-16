@@ -4,14 +4,14 @@ import {
     doesItExist,
     getAlertText,
     getElementArrayLength,
-    getElementSize,
+    getElementSize, getText,
     isElementClickable,
     isElementDisplayed,
     refreshPage,
     scrollIntoView,
     waitForPresent
 } from '../../driver/wdio';
-import { alertText } from '../fixtures/appData/feed-list-item-contents';
+import { alertText, testTextLess, testTextMore } from '../fixtures/appData/feed-list-item-contents';
 
 describe('Feed list item test suite:', () => {
     const feedListItemPage = new FeedListItemPo();
@@ -19,7 +19,6 @@ describe('Feed list item test suite:', () => {
         paragraphs,
         actionSettingsButton,
         simpleExample,
-        checkbox,
         links,
         avatarExample,
         actionExample,
@@ -117,16 +116,19 @@ describe('Feed list item test suite:', () => {
 
     function checkMoreText(example: string): void {
         scrollIntoView(example);
-        if (example === simpleExample) {
-            click(simpleExample + checkbox);
-        }
         const moreLinkLength = getElementArrayLength(example + linkMore);
         for (let i = 0; i < moreLinkLength; i++) {
-            scrollIntoView(example + linkMore, i);
-            const beforeSize = getElementSize(example + paragraphs, i);
-            click(example + linkMore, i);
-            const afterSize = getElementSize(example + paragraphs, i);
-            expect(afterSize.height).toBeGreaterThan(beforeSize.height);
+            if (i === 3) {
+                expect(getText(example + linkMore, i)).toBe(testTextMore);
+                click(example + linkMore, i);
+                expect(getText(example + linkMore, i)).toBe(testTextLess)
+            } else {
+                scrollIntoView(example + linkMore, i);
+                const beforeSize = getElementSize(example + paragraphs, i);
+                click(example + linkMore, i);
+                const afterSize = getElementSize(example + paragraphs, i);
+                expect(afterSize.height).toBeGreaterThan(beforeSize.height);
+            }
         }
     }
 
