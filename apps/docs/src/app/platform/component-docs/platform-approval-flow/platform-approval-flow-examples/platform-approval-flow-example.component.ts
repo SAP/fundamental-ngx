@@ -1,9 +1,10 @@
-import { Component, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
 import { Subscription, BehaviorSubject, Observable, of } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import {
     ApprovalDataSource,
+    ApprovalFlowComponent,
     ApprovalNode,
     ApprovalNodeActionsConfig,
     ApprovalProcess,
@@ -17,6 +18,9 @@ import {
     templateUrl: './platform-approval-flow-example.component.html'
 })
 export class PlatformApprovalFlowExampleComponent implements OnDestroy {
+    @ViewChild(ApprovalFlowComponent)
+    _approvalFlow: ApprovalFlowComponent;
+
     dataSource = new ApprovalFlowExampleDataSource('complex');
     examples = ['empty', 'simple', 'medium', 'complex'];
     selectedExample = 'complex';
@@ -30,6 +34,11 @@ export class PlatformApprovalFlowExampleComponent implements OnDestroy {
         disableAddParallel: false,
         disableEdit: false,
         disableRemove: false
+    };
+    nodeActionsConfigForNewNodes: ApprovalNodeActionsConfig = {
+        disableAddBefore: false,
+        disableAddAfter: false,
+        disableAddParallel: false
     };
     allStatuses = ['in progress', 'not started', 'approved', 'rejected'];
     sendReminderStatuses: ApprovalStatus[] = ['in progress', 'not started'];
@@ -77,6 +86,14 @@ export class PlatformApprovalFlowExampleComponent implements OnDestroy {
 
     nodeClick(node: ApprovalNode): void {
         console.log('Node click handler', node);
+    }
+
+    afterNodeAdd(node: ApprovalNode): void {
+        const meta = this._approvalFlow._graphMetadata[node.id];
+
+        meta.canAddNodeAfter = !this.nodeActionsConfigForNewNodes.disableAddAfter;
+        meta.canAddNodeBefore = !this.nodeActionsConfigForNewNodes.disableAddBefore;
+        meta.canAddParallel = !this.nodeActionsConfigForNewNodes.disableAddParallel;
     }
 
     setNotStarted(): void {

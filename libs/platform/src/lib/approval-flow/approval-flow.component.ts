@@ -90,8 +90,16 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** Text label for watchers list */
     @Input() watchersLabel = 'Watchers';
 
+    /** Enables or disables ability to add parallel nodes */
+    @Input() allowAddParallelNodes = true;
+
+    // დავამატებ (afterAdd)="onAdd(ახალი_დამატებული, მთელი_დატა)"
+
     /** Event emitted on approval flow node click. */
     @Output() nodeClick = new EventEmitter<ApprovalNode>();
+
+    /** Event emitted on approval flow node add */
+    @Output() afterNodeAdd = new EventEmitter<ApprovalNode>();
 
     /** @hidden */
     @ViewChild('graphContainerEl') _graphContainerEl: ElementRef;
@@ -247,6 +255,10 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         });
 
         this.nodeClick.emit(node);
+    }
+
+    _onNodeAdd(node: ApprovalNode): void {
+        this.afterNodeAdd.emit(node);
     }
 
     /** @hidden */
@@ -508,7 +520,9 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
             this._showMessage(node.approvalTeamId ? 'teamAddSuccess' : 'approverAddSuccess');
             this._approvalProcess.nodes.push(node);
+
             this._buildView(this._approvalProcess);
+            this._onNodeAdd(node);
         });
     }
 
@@ -684,7 +698,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             this._showMessage('error');
             return;
         }
-
+        // debugger;
         this._graphMetadata = generateApprovalFlowGraphMetadata(this._graph);
 
         const nodes = getGraphNodes(this._graph);

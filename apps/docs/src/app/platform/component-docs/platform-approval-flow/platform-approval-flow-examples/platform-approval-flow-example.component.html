@@ -6,6 +6,7 @@
     [allowSendRemindersForStatuses]="sendReminderStatuses"
     [isEditAvailable]="editModeEnabled"
     (nodeClick)="nodeClick($event)"
+    (afterNodeAdd)="afterNodeAdd($event)"
 >
 </fdp-approval-flow>
 
@@ -113,6 +114,38 @@
             (ngModelChange)="toggleSpecificNodeAction('disableRemove', $event)"
         />
         <label for="disableRemovingNode">Disable removing</label>
+    </p>
+</div>
+<p>Disable certain node actions for newly added nodes:</p>
+<div>
+    <p>
+        <input
+            id="disableAddingNodeBefore"
+            [disabled]="nodeActionsDisabled"
+            type="checkbox"
+            [(ngModel)]="nodeActionsConfigForNewNodes.disableAddBefore"
+        />
+        <label for="disableAddingNodeBefore">Disable adding before</label>
+    </p>
+
+    <p>
+        <input
+            id="disableAddingNodeAfter"
+            [disabled]="nodeActionsDisabled"
+            type="checkbox"
+            [(ngModel)]="nodeActionsConfigForNewNodes.disableAddAfter"
+        />
+        <label for="disableAddingNodeAfter">Disable adding after</label>
+    </p>
+
+    <p>
+        <input
+            id="disableAddingNodeParallel"
+            [disabled]="nodeActionsDisabled"
+            type="checkbox"
+            [(ngModel)]="nodeActionsConfigForNewNodes.disableAddParallel"
+        />
+        <label for="disableAddingNodeParallel">Disable adding parallel</label>
     </p>
 </div>
 <p style="display: flex; align-items: center">
