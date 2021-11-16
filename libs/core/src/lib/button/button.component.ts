@@ -39,7 +39,7 @@ import { applyCssClass } from '@fundamental-ngx/core/utils';
         '[attr.type]': 'type',
         '[attr.disabled]': '_disabled || null',
         '[attr.aria-label]':
-            'ariaLabel ? ariaLabel : specialButtonType.includes(fdType) ? label != null ?  label +" ,"+ fdType : glyph != undefined || glyph != null ? fdType +","+ glyph.split("-").join(" ")  : title : title'
+            'ariaLabel ? ariaLabel : specialButtonType.includes(fdType) ? label != null ? label : title : title'
     }
 })
 export class ButtonComponent extends BaseButton implements OnChanges, CssClassBuilder, OnInit, OnDestroy {
