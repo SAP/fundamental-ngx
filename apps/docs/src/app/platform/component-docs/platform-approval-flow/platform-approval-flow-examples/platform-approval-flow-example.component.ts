@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { Subscription, BehaviorSubject, Observable, of } from 'rxjs';
 import { take } from 'rxjs/operators';
 
@@ -18,6 +18,7 @@ import {
     templateUrl: './platform-approval-flow-example.component.html'
 })
 export class PlatformApprovalFlowExampleComponent implements OnDestroy {
+    /** @hidden */
     @ViewChild(ApprovalFlowComponent)
     _approvalFlow: ApprovalFlowComponent;
 
