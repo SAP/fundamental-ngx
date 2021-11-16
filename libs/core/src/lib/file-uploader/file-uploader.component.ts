@@ -201,6 +201,9 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
 
     /** @hidden */
     writeValue(files: File[]): void {
+        if (this._isEmpty()) {
+            return;
+        }
         if (!files) {
             this.clear();
         }
@@ -282,6 +285,10 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
         }
         this.validFiles = [];
         this.invalidFiles = [];
+    }
+
+    private _isEmpty(): boolean {
+        return this.validFiles.length === 0 && this.invalidFiles.length === 0;
     }
 
     /** @hidden */
