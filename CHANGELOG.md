@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.143 (2021-11-17)
+
+
+### Bug Fixes
+
+* **platform:** table columns' width recalсulation on resize ([#7192](https://github.com/SAP/fundamental-ngx/issues/7192)) ([db0322d](https://github.com/SAP/fundamental-ngx/commit/db0322d5db13ea0d344ffbd2e2a3252c3e99ff2b))
+
 ## 0.33.0-rc.142 (2021-11-16)
 
 ## 0.33.0-rc.141 (2021-11-16)

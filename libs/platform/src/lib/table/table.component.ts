@@ -846,9 +846,10 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             this._tableColumnResizeService.setColumnsWidth(columnNames, this.freezeColumnsTo, offsetWidth);
             this._setFreezableInfo();
 
-            this._cdr.markForCheck();
+            this._cdr.detectChanges();
         };
 
+        this._tableColumnResizeService.resetColumnsWidth();
         this._cdr.detectChanges();
 
         let elRect = this._elRef.nativeElement.getBoundingClientRect();
@@ -1978,7 +1979,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this._subscriptions.add(
             resizeObservable(this.tableContainer.nativeElement)
                 .pipe(debounceTime(100))
-                .subscribe(() => this._cdr.detectChanges())
+                .subscribe(() => this.recalculateTableColumnWidth())
         );
     }
 
