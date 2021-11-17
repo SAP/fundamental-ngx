@@ -4,13 +4,14 @@ import {
     click,
     doesItExist,
     getElementArrayLength,
-    getElementClass,
+    getElementSize,
     isElementClickable,
     isElementDisplayed,
     refreshPage,
     scrollIntoView,
     waitForPresent
 } from '../../driver/wdio';
+import { sizeS, sizeM, sizeL } from '../fixtures/appData/busy-indicator-contents';
 
 describe('Busy Indicator test suite:', () => {
     const busyIndicatorPage: BusyIndicatorPo = new BusyIndicatorPo();
@@ -85,15 +86,15 @@ describe('Busy Indicator test suite:', () => {
     });
 
     it('Verify busy indicator size has s', () => {
-        expect(getElementClass(busyIndicator, 1)).toContain('--s');
+        expect(getElementSize(busyIndicator, 1)).toEqual(sizeS);
     });
 
-    it('Verify busy indicator size has s', () => {
-        expect(getElementClass(busyIndicator, 2)).toContain('--m');
+    it('Verify busy indicator size has m', () => {
+        expect(getElementSize(busyIndicator, 2)).toEqual(sizeM);
     });
 
-    it('Verify busy indicator size has s', () => {
-        expect(getElementClass(busyIndicator, 3)).toContain('--l');
+    it('Verify busy indicator size has l', () => {
+        expect(getElementSize(busyIndicator, 3)).toEqual(sizeL);
     });
 
     it('Verify that label present in Busy Indicator Label example', () => {

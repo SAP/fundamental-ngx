@@ -8,7 +8,7 @@ export class BusyIndicatorPo extends CoreBaseComponentPo {
     enableDisableButton = 'fd-busy-indicator ~ button';
     busyIndicatorLabelExample = 'fd-busy-indicator-label-example ';
     busyIndicatorExtendedExample = 'fd-busy-indicator-extended-example ';
-    openBusyIndicatorButton = this.busyIndicatorExtendedExample + '.fd-button--standard'
+    openBusyIndicatorButton = this.busyIndicatorExtendedExample + '.fd-button--standard';
     formName = 'input[id="name"]';
     formSurname = 'input[id="surname"]';
     formPassword = 'input[id="password"]';
