@@ -5,6 +5,7 @@ export class ActionBarPo extends CoreBaseComponentPo {
     url = '/action-bar';
     root = '#page-content';
 
+    button = ' .fd-button';
     backButton = ' .fd-action-bar__back button';
     title = ' h2';
     description = ' .fd-action-bar__description';
