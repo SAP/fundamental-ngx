@@ -289,9 +289,9 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
 
     /** @hidden Handle dialog approval, closes popover and propagates data changes. */
     dialogApprove(): void {
-        this._propagateChange(true);
         this.inputText = '';
         this.showList(false);
+        this._propagateChange(true);
     }
 
     /** @hidden */

@@ -253,6 +253,9 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
      * */
     _flatSuggestions: SelectableOptionItem[];
 
+    /** @hidden */
+    _fullFlatSuggestions: SelectableOptionItem[];
+
     /** @hidden
      * List of selected suggestions
      * */
@@ -529,12 +532,12 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
 
         for (let i = 0; i <= this.selectedItems.length; i++) {
             const selectedItem = this.selectedItems[i];
-            const idx = this._flatSuggestions.findIndex(
+            const idx = this._fullFlatSuggestions.findIndex(
                 (item) => item.label === selectedItem || item.value === selectedItem
             );
             if (idx !== -1) {
-                this._selectedSuggestions.push(this._flatSuggestions[idx]);
-                this._flatSuggestions[idx].selected = true;
+                this._selectedSuggestions.push(this._fullFlatSuggestions[idx]);
+                this._fullFlatSuggestions[idx].selected = true;
             }
         }
 
@@ -605,6 +608,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     /** @hidden */
     private _openDataStream(ds: FdpMultiComboboxDataSource<any>): MultiComboBoxDataSource<any> {
         const initDataSource = this._toDataStream(ds);
+        let isInitDataSource = true;
 
         if (initDataSource === undefined) {
             throw new Error(`[dataSource] source did not match an array, Observable, or DataSource`);
@@ -624,6 +628,11 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
             .subscribe((data) => {
                 this._suggestions = this._convertToOptionItems(data);
                 this._flatSuggestions = this.isGroup ? this._flattenGroups(this._suggestions) : this._suggestions;
+
+                if (isInitDataSource) {
+                    this._fullFlatSuggestions = this._flatSuggestions;
+                    isInitDataSource = false;
+                }
 
                 this.stateChanges.next('initDataSource.open().');
 
