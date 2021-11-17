@@ -93,7 +93,11 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** Enables or disables ability to add parallel nodes */
     @Input() allowAddParallelNodes = true;
 
-    // დავამატებ (afterAdd)="onAdd(ახალი_დამატებული, მთელი_დატა)"
+    /** Disables save button, save button is enabled by default */
+    @Input() disableSaveButton = false;
+
+    /** Disables exit button, exit button is enabled by default */
+    @Input() disableExitButton = false;
 
     /** Event emitted on approval flow node click. */
     @Output() nodeClick = new EventEmitter<ApprovalNode>();

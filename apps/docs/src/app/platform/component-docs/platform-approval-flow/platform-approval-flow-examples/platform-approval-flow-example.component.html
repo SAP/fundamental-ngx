@@ -5,6 +5,8 @@
     [checkDueDate]="checkDueDate"
     [allowSendRemindersForStatuses]="sendReminderStatuses"
     [isEditAvailable]="editModeEnabled"
+    [disableSaveButton]="disableSaveButton"
+    [disableExitButton]="disableExitButton"
     (nodeClick)="nodeClick($event)"
     (afterNodeAdd)="afterNodeAdd($event)"
 >
@@ -51,6 +53,8 @@
 </p>
 <p>Enable "Edit mode": <input type="checkbox" [(ngModel)]="editModeEnabled" /></p>
 <p>Enable due date warnings: <input type="checkbox" [(ngModel)]="checkDueDate" /></p>
+<p>Disable "Save" button: <input type="checkbox" [(ngModel)]="disableSaveButton" /></p>
+<p>Disable "Exit" button: <input type="checkbox" [(ngModel)]="disableExitButton" /></p>
 <p>
     Set all statuses to "Not Started":
     <input type="checkbox" [(ngModel)]="setNotStartedStatuses" (ngModelChange)="setNotStarted()" />

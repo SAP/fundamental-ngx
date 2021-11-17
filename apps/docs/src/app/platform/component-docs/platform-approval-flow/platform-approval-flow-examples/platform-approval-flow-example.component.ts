@@ -44,6 +44,9 @@ export class PlatformApprovalFlowExampleComponent implements OnDestroy {
     allStatuses = ['in progress', 'not started', 'approved', 'rejected'];
     sendReminderStatuses: ApprovalStatus[] = ['in progress', 'not started'];
 
+    disableSaveButton = false;
+    disableExitButton = false;
+
     private _subscriptions = new Subscription();
 
     ngOnDestroy(): void {
