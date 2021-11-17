@@ -5,7 +5,8 @@ import {
     Input,
     OnChanges,
     ViewEncapsulation,
-    OnInit
+    OnInit,
+    HostBinding
 } from '@angular/core';
 import { applyCssClass } from '@fundamental-ngx/core/utils';
 import { CssClassBuilder } from '@fundamental-ngx/core/utils';
@@ -32,8 +33,7 @@ export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '[attr.tabindex]': 'clickable ? 0 : -1',
-        '[attr.aria-label]': 'ariaLabel ? (status ? ariaLabel : null) : null'
+        '[attr.tabindex]': 'clickable ? 0 : -1'
     }
 })
 export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder {
@@ -52,6 +52,33 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
      */
     @Input()
     status: ObjectStatus;
+
+    /** @hidden */
+    @HostBinding('attr.aria-label')
+    get _ariaLabel(): string {
+        if (!this.ariaLabel) {
+            const label = this._elementRef.nativeElement.textContent;
+            switch (this.status) {
+                case 'negative':
+                    this.ariaLabel = 'Alert ' + label;
+                    break;
+                case 'critical':
+                    this.ariaLabel = 'Warning ' + label;
+                    break;
+                case 'informative':
+                    this.ariaLabel = 'Information ' + label;
+                    break;
+                case 'positive':
+                    this.ariaLabel = 'Success ' + label;
+                    break;
+                default:
+                    this.ariaLabel = null;
+            }
+            return this.ariaLabel;
+        } else {
+            return this.ariaLabel;
+        }
+    }
 
     /**
      * Glyph (icon) of the Object Status.
@@ -99,27 +126,6 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
-
-        if (!this.ariaLabel) {
-            const label = this._elementRef.nativeElement.textContent;
-
-            switch (this.status) {
-                case 'negative':
-                    this.ariaLabel = 'Alert ' + label;
-                    break;
-                case 'critical':
-                    this.ariaLabel = 'Warning ' + label;
-                    break;
-                case 'informative':
-                    this.ariaLabel = 'Information ' + label;
-                    break;
-                case 'positive':
-                    this.ariaLabel = 'Success ' + label;
-                    break;
-                default:
-                    this.ariaLabel = null;
-            }
-        }
     }
 
     @applyCssClass

@@ -32,8 +32,6 @@ export class CardComponent implements OnChanges, OnInit, CssClassBuilder, OnDest
     /** Badge */
     @Input() badge: string;
 
-    /** @hidden */
-    _labelText = 'Card with label ';
     /**
      * Whether to apply compact mode
      */
