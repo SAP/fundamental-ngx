@@ -931,7 +931,7 @@ describe('TableComponent internal', () => {
         const tableBodyScrollTop = async (scrollTop) => {
             const container = tableBodyContainer.nativeElement as HTMLElement;
             container.scrollTop = scrollTop;
-            await new Promise((resolve) => setTimeout(() => resolve(null), 100));
+            await new Promise((resolve) => setTimeout(() => resolve(null), 200));
             fixture.detectChanges();
             calculateTableElementsMetaData();
         };
