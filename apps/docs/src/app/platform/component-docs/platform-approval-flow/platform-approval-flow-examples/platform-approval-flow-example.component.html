@@ -9,6 +9,7 @@
     [disableExitButton]="disableExitButton"
     (nodeClick)="nodeClick($event)"
     (afterNodeAdd)="afterNodeAdd($event)"
+    (afterNodeEdit)="afterNodeEdit($event)"
 >
 </fdp-approval-flow>
 
@@ -131,32 +132,35 @@
 <div>
     <p>
         <input
-            id="disableAddingNodeBefore"
+            id="disableAddingNodeBeforeForNewNodes"
             [disabled]="nodeActionsDisabled"
             type="checkbox"
             [(ngModel)]="nodeActionsConfigForNewNodes.disableAddBefore"
+            (ngModelChange)="newNodeSettingsChange()"
         />
-        <label for="disableAddingNodeBefore">Disable adding before</label>
+        <label for="disableAddingNodeBeforeForNewNodes">Disable adding before</label>
     </p>
 
     <p>
         <input
-            id="disableAddingNodeAfter"
+            id="disableAddingNodeAfterForNewNodes"
             [disabled]="nodeActionsDisabled"
             type="checkbox"
             [(ngModel)]="nodeActionsConfigForNewNodes.disableAddAfter"
+            (ngModelChange)="newNodeSettingsChange()"
         />
-        <label for="disableAddingNodeAfter">Disable adding after</label>
+        <label for="disableAddingNodeAfterForNewNodes">Disable adding after</label>
     </p>
 
     <p>
         <input
-            id="disableAddingNodeParallel"
+            id="disableAddingNodeParallelForNewNodes"
             [disabled]="nodeActionsDisabled"
             type="checkbox"
             [(ngModel)]="nodeActionsConfigForNewNodes.disableAddParallel"
+            (ngModelChange)="newNodeSettingsChange()"
         />
-        <label for="disableAddingNodeParallel">Disable adding parallel</label>
+        <label for="disableAddingNodeParallelForNewNodes">Disable adding parallel</label>
     </p>
 </div>
 <p>Disable "Save" button: <input type="checkbox" [(ngModel)]="disableSaveButton" /></p>

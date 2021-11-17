@@ -49,6 +49,8 @@ export class PlatformApprovalFlowExampleComponent implements OnDestroy {
 
     private _subscriptions = new Subscription();
 
+    private newNodes: ApprovalNode[] = [];
+
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
@@ -72,19 +74,32 @@ export class PlatformApprovalFlowExampleComponent implements OnDestroy {
 
     toggleSpecificNodeAction(field: keyof ApprovalNodeActionsConfig, state: boolean): void {
         this._subscriptions.add(
-            this.dataSource
-                .fetch()
-                .pipe(take(1))
-                .subscribe((approvalGraph) => {
-                    approvalGraph.nodes.forEach((node) => {
-                        node.actionsConfig = {
-                            ...node.actionsConfig,
-                            [field]: state
-                        };
-                    });
+            this.fetchOneFromDatasource().subscribe((approvalGraph) => {
+                approvalGraph.nodes.forEach((node) => {
+                    node.actionsConfig = {
+                        ...node.actionsConfig,
+                        [field]: state
+                    };
+                });
 
-                    this.dataSource.updateApprovals(approvalGraph.nodes);
-                })
+                this.dataSource.updateApprovals(approvalGraph.nodes);
+            })
+        );
+    }
+
+    newNodeSettingsChange(): void {
+        this._subscriptions.add(
+            this.fetchOneFromDatasource().subscribe((approvalGraph) => {
+                approvalGraph.nodes.forEach((node) => {
+                    if (this.newNodes.find((newNode) => newNode.id === node.id)) {
+                        const meta = this._approvalFlow.getMetadata(node.id);
+
+                        meta.canAddNodeAfter = !this.nodeActionsConfigForNewNodes.disableAddAfter;
+                        meta.canAddNodeBefore = !this.nodeActionsConfigForNewNodes.disableAddBefore;
+                        meta.canAddParallel = !this.nodeActionsConfigForNewNodes.disableAddParallel;
+                    }
+                });
+            })
         );
     }
 
@@ -93,15 +108,21 @@ export class PlatformApprovalFlowExampleComponent implements OnDestroy {
     }
 
     afterNodeAdd(node: ApprovalNode): void {
-        const meta = this._approvalFlow._graphMetadata[node.id];
+        this.newNodes.push(node);
 
-        meta.canAddNodeAfter = !this.nodeActionsConfigForNewNodes.disableAddAfter;
-        meta.canAddNodeBefore = !this.nodeActionsConfigForNewNodes.disableAddBefore;
-        meta.canAddParallel = !this.nodeActionsConfigForNewNodes.disableAddParallel;
+        this.newNodeSettingsChange();
+    }
+
+    afterNodeEdit(node: ApprovalNode): void {
+        this.newNodeSettingsChange();
     }
 
     setNotStarted(): void {
         this.dataSource.setDefaultStatus(this.setNotStartedStatuses ? 'not started' : null);
+    }
+
+    private fetchOneFromDatasource(): Observable<ApprovalProcess> {
+        return this.dataSource.fetch().pipe(take(1));
     }
 }
 

@@ -37,6 +37,7 @@ import { displayUserFn, getBlankApprovalGraphNode, getGraphNodes, isNodeTargetsI
 import {
     ApprovalDataSource,
     ApprovalGraphNode,
+    ApprovalGraphNodeMetadata,
     ApprovalNode,
     ApprovalProcess,
     ApprovalStatus,
@@ -104,6 +105,9 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     /** Event emitted on approval flow node add */
     @Output() afterNodeAdd = new EventEmitter<ApprovalNode>();
+
+    /** Event emitted on approval flow node edit */
+    @Output() afterNodeEdit = new EventEmitter<ApprovalNode>();
 
     /** @hidden */
     @ViewChild('graphContainerEl') _graphContainerEl: ElementRef;
@@ -265,6 +269,10 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         this.afterNodeAdd.emit(node);
     }
 
+    _onNodeEdit(node: ApprovalNode): void {
+        this.afterNodeEdit.emit(node);
+    }
+
     /** @hidden */
     _onNodeSelectionChange(event: GridListSelectionEvent<ApprovalGraphNode>): void {
         this._graph.columns.forEach((column) => {
@@ -298,6 +306,10 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                     duration: 5000
                 });
             });
+    }
+
+    getMetadata(nodeId: string): ApprovalGraphNodeMetadata {
+        return this._graphMetadata[nodeId];
     }
 
     /** Scroll to the next horizontal slide */
@@ -552,6 +564,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             this._updateNode(updatedNode);
             this._showMessage('nodeEdit');
             this._buildView(this._approvalProcess);
+            this._onNodeEdit(node);
         });
     }
 
