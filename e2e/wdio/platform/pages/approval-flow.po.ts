@@ -64,7 +64,7 @@ export class ApprovalFlowPo extends BaseComponentPo {
     notStartedNode = '//span[@class="fd-object-status fd-object-status--inverted"]/../../..';
     addApproverOptions = this.detailsDialog + ' .fd-select__control';
     approverOptionListItem = '.cdk-overlay-container .fd-list__item';
-    radioButton = this.detailsDialog + ' input[type="radio"]';
+    radioButton = this.detailsDialog + ' fd-radio-button';
     footerButtons = this.detailsDialog + ' .fd-bar__element .fd-button';
     nodeCardInfo = '.fdp-approval-flow-node__info';
     dialogCheckbox = this.detailsDialog + ' .fd-checkbox';
