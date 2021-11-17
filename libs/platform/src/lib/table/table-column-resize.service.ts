@@ -259,7 +259,8 @@ export class TableColumnResizeService implements OnDestroy {
     /** @hidden */
     private _calculateColumnsWidth(): void {
         this._columnsCellMap.forEach((cell, columnName) => {
-            this._columnsWidthMap.set(columnName, cell.nativeElement.offsetWidth);
+            const { width } = cell.nativeElement.getBoundingClientRect();
+            this._columnsWidthMap.set(columnName, width);
         });
     }
 
