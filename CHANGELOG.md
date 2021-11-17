@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.144 (2021-11-17)
+
+
+### Bug Fixes
+
+* **platform:** table, fix calculate columns width ([#7086](https://github.com/SAP/fundamental-ngx/issues/7086)) ([7623354](https://github.com/SAP/fundamental-ngx/commit/7623354c4878d18de50efc2bcadd453cd0780d5b))
+
 ## 0.33.0-rc.143 (2021-11-17)
 
 
