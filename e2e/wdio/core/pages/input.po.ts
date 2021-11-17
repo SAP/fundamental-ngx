@@ -3,7 +3,6 @@ import { CoreBaseComponentPo } from './core-base-component.po';
 
 export class InputPo extends CoreBaseComponentPo {
     readonly url = '/input';
-    readonly root = '#page-content';
 
     defaultInput = '#input-1';
     requiredInput = '#input-2';
@@ -36,6 +35,10 @@ export class InputPo extends CoreBaseComponentPo {
 
     requiredInputLabel = '.fd-form-label--required';
     inlineHelpLabels = '.fd-form-label__help';
+
+    allInputFields = '.fd-doc-component input:not([disabled], [readonly])';
+    questionMark = '.sap-icon--question-mark';
+    popoverHelp = 'fd-popover-body .fd-popover__popper ';
 
     open(): void {
         super.open(this.url);
