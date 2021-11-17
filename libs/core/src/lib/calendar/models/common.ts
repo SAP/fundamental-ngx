@@ -13,6 +13,10 @@ export interface BaseCalendarCell {
     index?: number; // list index
 }
 
+export interface FocusableCalendarView {
+    setFocusOnCell(): void;
+}
+
 /**
  * Calendar active cell strategy
  */
@@ -20,7 +24,7 @@ export abstract class AbstractCalendarActiveCellStrategy<T extends BaseCalendarC
     /**
      * Calculate which table cell should be active
      */
-    abstract getActiveCell(cells: T[]): T;
+    abstract getActiveCell(cells: T[]): T | null;
 }
 
 export class DefaultCalendarActiveCellStrategy<

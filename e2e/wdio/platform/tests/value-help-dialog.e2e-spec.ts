@@ -58,7 +58,10 @@ describe('Value help dialog test suite', () => {
         tableCheckboxesFF,
         mobileExampleDialog,
         xBtn,
-        showAllBtn
+        showAllBtn,
+        inputFields,
+        toolbarButtons,
+        conditionsButton
     } = valueHelpDialogPage;
 
     beforeAll(() => {
@@ -73,8 +76,7 @@ describe('Value help dialog test suite', () => {
     describe('Basic Value Help Dialog examples', () => {
         it('should check default view and header', () => {
             click(openDialogBtn);
-            // skip due to https://github.com/SAP/fundamental-ngx/issues/4573
-            // expect(getElementArrayLength(inputFields)).toBe(2);
+            expect(getElementArrayLength(inputFields)).toBe(2);
             expect(waitForElDisplayed(dialogHeader)).toBe(true);
             expect(['', null]).not.toContain(getText(dialogHeader));
         });
@@ -118,13 +120,12 @@ describe('Value help dialog test suite', () => {
             expect(getText(selectedTokens)).toEqual(selectedItem);
         });
 
-        // TODO: enable after resolving https://github.com/SAP/fundamental-ngx/issues/4957
-        xit('should check the inclusion conditional statements', () => {
+        it('should check the inclusion conditional statements', () => {
             click(openDialogBtn);
             click(formTabs, 1);
             click(conditionsInputField, 1);
             sendKeys(valueZero);
-            click(conditionSelectors);
+            click(conditionsButton);
 
             const optionsCount = getElementArrayLength(dropdownOptions);
             for (let i = 0; optionsCount > i; i++) {
@@ -133,12 +134,12 @@ describe('Value help dialog test suite', () => {
                     click(conditionsInputField, 2);
                     sendKeys(valueOne);
                     expect(getText(selectedTokens)).toEqual(conditionsValues[i]);
-                    click(conditionSelectors);
+                    click(conditionsButton);
                     continue;
                 }
                 click(dropdownOptions, i);
                 expect(getText(selectedTokens)).toEqual(conditionsValues[i]);
-                click(conditionSelectors);
+                click(conditionsButton);
             }
         });
 
@@ -149,14 +150,15 @@ describe('Value help dialog test suite', () => {
             waitForPresent(openDialogBtn);
         });
 
-        xit('should check advanced search options appear for each table column', () => {
-            // Skip due to: https://github.com/SAP/fundamental-ngx/issues/4588
+        it('should check advanced search options appear for table columns', () => {
             click(openDialogBtn);
+            waitForElDisplayed(toolbarButtons);
+            click(toolbarButtons);
             click(showAllBtn);
             const columnCount = getElementArrayLength(tableColumn);
 
-            for (let i = 0; columnCount > i; i++) {
-                expect(getText(advSearchLabels, i)).toEqual(getText(tableColumn, i));
+            for (let i = 0; columnCount - 1 > i; i++) {
+                expect(getText(advSearchLabels, i)).toContain(getText(tableColumn, i + 1));
             }
         });
 
@@ -181,13 +183,12 @@ describe('Value help dialog test suite', () => {
     });
 
     describe('custom strategy labels examples', () => {
-        // TODO: enable after resolving https://github.com/SAP/fundamental-ngx/issues/4957
-        xit('should check define conditions custom labels', () => {
+        it('should check define conditions custom labels', () => {
             scrollIntoView(openDialogBtn, 1);
             click(openDialogBtn, 1);
             click(conditionsInputField, 1);
             sendKeys(valueZero);
-            click(conditionSelectors);
+            click(conditionsButton);
 
             const optionsCount = getElementArrayLength(dropdownOptions);
             for (let i = 0; optionsCount > i; i++) {
@@ -197,13 +198,13 @@ describe('Value help dialog test suite', () => {
                     click(conditionsInputField, 2);
                     sendKeys(valueOne);
                     expect(getText(selectedTokens)).toEqual(conditionsValues[i]);
-                    click(conditionSelectors);
+                    click(conditionsButton);
                     continue;
                 }
                 expect(getText(dropdownOptions, i)).toEqual(customLabels[i]);
                 click(dropdownOptions, i);
                 expect(getText(selectedTokens)).toEqual(conditionsValues[i]);
-                click(conditionSelectors);
+                click(conditionsButton);
             }
         });
     });

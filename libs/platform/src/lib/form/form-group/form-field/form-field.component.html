@@ -2,8 +2,10 @@
     <div [horizontal]="labelLayout === 'horizontal'" fd-form-item class="fd-row">
         <div
             class="fd-col {{
-                labelLayout === 'horizontal' ? 'fd-col-md--4 fd-col-lg--4' : 'fd-col-md--12 fd-col-lg--12'
-            }} fd-col-xl--12"
+                labelLayout === 'horizontal'
+                    ? 'fd-col-md--4 fd-col-lg--4 fd-col-xl--4'
+                    : 'fd-col-md--12 fd-col-lg--12 fd-col-xl--12'
+            }}"
         >
             <label
                 [id]="'fdp-form-label-' + id"
@@ -23,8 +25,10 @@
 <ng-template #withFormMessage>
     <fdp-input-message-group
         class="fd-col {{
-            labelLayout === 'horizontal' ? 'fd-col-md--8 fd-col-lg--8' : 'fd-col-md--12 fd-col-lg--12'
-        }} fd-col-xl--12"
+            labelLayout === 'horizontal'
+                ? 'fd-col-md--8 fd-col-lg--8 fd-col-xl--8'
+                : 'fd-col-md--12 fd-col-lg--12 fd-col-xl--12'
+        }}"
     >
         <!--
          Todo: we should extend this on FormGroup Level and have error trigger strategy that will be applied to

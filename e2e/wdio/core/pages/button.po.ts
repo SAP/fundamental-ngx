@@ -13,14 +13,20 @@ export class ButtonPo extends CoreBaseComponentPo {
     disableStateButtons = 'fd-button-state-example button.is-disabled';
     playgroundButton = 'playground button';
     playgroundButtonText = 'playground .fd-button__text';
+    playgroundButtonIcon = this.playgroundButton + ' fd-icon';
     inputLabel = '.fd-input.form-control';
     dropDownMenu = 'select.form-control.ng-valid';
     checkboxCompact = 'label[for="playgroundcompact"]';
     checkboxMenu = 'label[for="playgroundfdMenu"]';
+    menuOption = this.dropDownMenu + ' option';
 
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
+    }
+
+    dropDownOptionByValue(option: string): any {
+        return `select.form-control.ng-valid option[value=${option}]`;
     }
 
     getScreenshotFolder(): object {

@@ -2,7 +2,7 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FeedListItemComponent } from './feed-list-item.component';
-import { PipeModule, LineClampModule } from '../../../utils/public_api';
+import { PipeModule, TruncateModule } from '../../../utils/public_api';
 import { LinkModule } from '../../../link/public_api';
 
 const componentClassPrefix = 'fd-feed-list__item';
@@ -23,7 +23,7 @@ describe('FeedListItemComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [FeedListItemComponent, FormattedTextTestComponent],
-            imports: [PipeModule, LineClampModule, LinkModule]
+            imports: [PipeModule, TruncateModule, LinkModule]
         })
             .overrideComponent(FeedListItemComponent, {
                 set: { changeDetection: ChangeDetectionStrategy.Default }
@@ -93,7 +93,7 @@ describe('FeedListItemComponent', () => {
         expect(text).toEqual(lessLabel.toLowerCase());
     });
 
-    it('should have abbility to toggle view', () => {
+    it('should have ability to toggle view', () => {
         component.isCollapsed = true;
         component.isRichText = false;
         component.hasMore = true;

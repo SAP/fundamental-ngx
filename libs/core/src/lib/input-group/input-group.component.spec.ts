@@ -46,7 +46,7 @@ describe('InputGroupComponent', () => {
             expect($event).toBeDefined();
             done();
         });
-        component.buttonClicked({});
+        component.buttonClicked({} as any);
     });
 
     it('should handle content density when compact input is not provided', () => {

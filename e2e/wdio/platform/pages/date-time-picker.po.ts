@@ -46,6 +46,7 @@ export class DateTimePicker extends BaseComponentPo {
     selectedMinutes = '(//div[contains(@class, "fd-time__wrapper")]//li[contains(@class, "fd-time__item")])[54]';
     period = '//span[contains(text(), " PM ")]/parent::li';
     buttonText = ' .fd-button__text';
+    inputGroup = this.root + ' .fd-input-group';
 
     getCurrentDayIndex = (): number => {
         for (let i = 0; i < this.currentMonthCalendarItem.length; i++) {

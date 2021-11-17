@@ -53,9 +53,6 @@ export class P13GroupingDialogComponent implements Resettable {
     /** Indicates when reset command is available */
     readonly isResetAvailable$: Observable<boolean> = this._isResetAvailableSubject$.asObservable();
 
-    /** Initial collection to reset */
-    readonly initialCollectionGroup: CollectionGroup[];
-
     /** Group rules to render */
     rules: GroupRule[] = [];
 
@@ -63,11 +60,9 @@ export class P13GroupingDialogComponent implements Resettable {
     constructor(private dialogRef: DialogRef) {
         const { columns, collectionGroup }: GroupDialogData = this.dialogRef.data;
 
-        this.initialCollectionGroup = [...collectionGroup];
-
         this.columns = columns || [];
 
-        this._initiateRules();
+        this._initiateRules(collectionGroup);
     }
 
     /** Reset changes to the initial state */
@@ -89,8 +84,9 @@ export class P13GroupingDialogComponent implements Resettable {
     }
 
     /** @hidden */
-    _onModelChange(): void {
-        this._isResetAvailableSubject$.next(true);
+    _recalculateResetAvailability(): void {
+        const hasOnlyOneEmptyRule = this.rules.length === 1 && !this.rules[0].isValid;
+        this._isResetAvailableSubject$.next(!hasOnlyOneEmptyRule);
     }
 
     /** @hidden */
@@ -102,7 +98,7 @@ export class P13GroupingDialogComponent implements Resettable {
             this.rules.push(new GroupRule());
         }
 
-        this._onModelChange();
+        this._recalculateResetAvailability();
     }
 
     /** @hidden */
@@ -113,23 +109,25 @@ export class P13GroupingDialogComponent implements Resettable {
     /** @hidden */
     _onRuleColumnKeyChange(rule: GroupRule, columnKey: string): void {
         rule.columnKey = columnKey;
-        this._onModelChange();
+        this._recalculateResetAvailability();
     }
 
     /** @hidden */
     _onRuleShowAsColumnChange(rule: GroupRule, value: boolean): void {
         rule.showAsColumn = value;
-        this._onModelChange();
+        this._recalculateResetAvailability();
     }
 
     /** @hidden */
-    private _initiateRules(): void {
-        this.rules = this._createGroupRules(this.initialCollectionGroup);
+    private _initiateRules(collectionGroup?: CollectionGroup[]): void {
+        this.rules = this._createGroupRules(collectionGroup);
 
         // Keep at least one item in the list
         if (this.rules.length === 0) {
             this.rules.push(new GroupRule());
         }
+
+        this._recalculateResetAvailability();
     }
 
     /** @hidden */

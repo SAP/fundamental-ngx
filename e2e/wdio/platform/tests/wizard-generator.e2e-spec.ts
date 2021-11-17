@@ -1,0 +1,980 @@
+import { WizardGeneratorPO } from '../pages/wizard-generator.po';
+import {
+    browserIsFirefox,
+    click,
+    currentPlatformName,
+    getElementArrayLength,
+    getElementClass,
+    getText,
+    getValue,
+    isElementClickable,
+    isElementDisplayed,
+    refreshPage,
+    scrollIntoView,
+    sendKeys,
+    setValue,
+    waitForElDisplayed
+} from '../../driver/wdio';
+import {
+    firstAdress,
+    secondAdress,
+    name,
+    cardDetails,
+    cardDetails2,
+    textArr,
+    errorMessageText
+} from '../fixtures/testData/wizard-generator';
+
+describe('Wizard generator test suite', () => {
+    const WizardGeneratorPage = new WizardGeneratorPO();
+    const {
+        defaultExample,
+        customizableGeneratorExample,
+        externalNavigationExample,
+        visibleSummaryExample,
+        responsiveExample,
+        summaryObjectsExample,
+        onChangeExample,
+        dialogExample,
+        customizableDialogExample,
+        branchingExample,
+        responsiveDialogExample,
+        step,
+        stepContainer,
+        select,
+        button,
+        listItem,
+        nextStepBtn,
+        listItemText,
+        input,
+        formLabel,
+        editButton,
+        nextStepBtn2,
+        checkboxLabel,
+        checkbox,
+        dialog,
+        dialogBarButton,
+        selectControl,
+        errorMessage
+    } = WizardGeneratorPage;
+
+    beforeAll(() => {
+        WizardGeneratorPage.open();
+    }, 1);
+
+    afterEach(() => {
+        waitForElDisplayed(WizardGeneratorPage.title);
+    }, 1);
+
+    describe('Default example', () => {
+        beforeEach(() => {
+            refreshPage();
+            waitForElDisplayed(WizardGeneratorPage.title);
+        }, 1);
+        describe('Basic way', () => {
+            it('should check basic way', () => {
+                completeFirstStep(defaultExample);
+                expect(getElementClass(defaultExample + step, 0)).toContain('completed', 'first step is not completed');
+                expect(getElementClass(defaultExample + step, 1)).toContain('current', 'you not moved to second step');
+            });
+
+            it('should check second step', () => {
+                completeFirstStep(defaultExample);
+                completeSecondStep(defaultExample);
+                expect(getElementClass(defaultExample + step, 1)).toContain(
+                    'completed',
+                    'second step is not completed'
+                );
+                expect(getElementClass(defaultExample + step, 2)).toContain('current', 'third step is not current');
+            });
+
+            it('should check third step and skip 4th step', () => {
+                completeFirstStep(defaultExample);
+                completeSecondStep(defaultExample);
+                completeThirdStep(defaultExample);
+                expect(getElementClass(defaultExample + step, 2)).toContain('completed', 'third step is not completed');
+                expect(getElementClass(defaultExample + step, 3)).toContain('completed', '4th step is not completed');
+            });
+
+            it('should check results', () => {
+                completeFirstStep(defaultExample);
+                completeSecondStep(defaultExample);
+                completeThirdStep(defaultExample);
+                checkResults(defaultExample);
+            });
+            it('should check editing', () => {
+                completeFirstStep(defaultExample);
+                completeSecondStep(defaultExample);
+                completeThirdStep(defaultExample);
+                checkResults(defaultExample);
+                checkEditing(defaultExample);
+            });
+        });
+
+        describe('Other cases', () => {
+            it('should check validation first required field', () => {
+                checkFirstRequiredFieldValidation(defaultExample);
+            });
+
+            it('should check validation second required field', () => {
+                checkSecondStepRequiredValidation(defaultExample);
+            });
+
+            it('should check validation third required field', () => {
+                checkThirdStepRequiredValidation(defaultExample);
+            });
+
+            it('should check navigation by steps', () => {
+                checkNavigationBySteps(defaultExample);
+            });
+
+            it('should check navigation by scrolling', () => {
+                checkNavigationByScrolling(defaultExample);
+            });
+        });
+    });
+
+    describe('responsive example', () => {
+        describe('Basic way', () => {
+            it('should check basic way', () => {
+                completeFirstStep(responsiveExample);
+                expect(getElementClass(responsiveExample + step, 0)).toContain(
+                    'completed',
+                    'first step is not completed'
+                );
+                expect(getElementClass(responsiveExample + step, 1)).toContain(
+                    'current',
+                    'you not moved to second step'
+                );
+                completeSecondStep(responsiveExample);
+
+                expect(getElementClass(responsiveExample + step, 1)).toContain(
+                    'completed',
+                    'second step is not completed'
+                );
+                expect(getElementClass(responsiveExample + step, 2)).toContain('current', 'third step is not current');
+                completeThirdStep(responsiveExample);
+
+                expect(getElementClass(responsiveExample + step, 2)).toContain(
+                    'completed',
+                    'third step is not completed'
+                );
+                expect(getElementClass(responsiveExample + step, 3)).toContain(
+                    'completed',
+                    '4th step is not completed'
+                );
+
+                checkResults(responsiveExample);
+            });
+        });
+
+        describe('Other cases', () => {
+            beforeEach(() => {
+                refreshPage();
+                waitForElDisplayed(WizardGeneratorPage.title);
+            }, 1);
+
+            it('should check validation first required field', () => {
+                checkFirstRequiredFieldValidation(responsiveExample);
+            });
+
+            it('should check validation second required field', () => {
+                checkSecondStepRequiredValidation(responsiveExample);
+            });
+
+            it('should check validation third required field', () => {
+                checkThirdStepRequiredValidation(responsiveExample);
+            });
+
+            it('should check navigation by steps', () => {
+                checkNavigationBySteps(responsiveExample);
+            });
+
+            it('should check navigation by scrolling', () => {
+                checkNavigationByScrolling(responsiveExample);
+            });
+        });
+    });
+
+    describe('visible summary example', () => {
+        describe('Basic way', () => {
+            it('should check basic way', () => {
+                completeFirstStep(visibleSummaryExample);
+                expect(getElementClass(visibleSummaryExample + step, 0)).toContain(
+                    'completed',
+                    'first step is not completed'
+                );
+                expect(getElementClass(visibleSummaryExample + step, 1)).toContain(
+                    'current',
+                    'you not moved to second step'
+                );
+
+                completeSecondStep(visibleSummaryExample);
+                expect(getElementClass(visibleSummaryExample + step, 1)).toContain(
+                    'completed',
+                    'second step is not completed'
+                );
+                expect(getElementClass(visibleSummaryExample + step, 2)).toContain(
+                    'current',
+                    'third step is not current'
+                );
+
+                completeThirdStep(visibleSummaryExample);
+                expect(getElementClass(visibleSummaryExample + step, 2)).toContain(
+                    'completed',
+                    'third step is not completed'
+                );
+                expect(getElementClass(visibleSummaryExample + step, 3)).toContain(
+                    'completed',
+                    '4th step is not completed'
+                );
+
+                checkResults(visibleSummaryExample);
+
+                // skipped for FF on macOS due to https://github.com/SAP/fundamental-ngx/issues/7038
+                if (!browserIsFirefox() && currentPlatformName() !== 'macOs') {
+                    checkEditing(visibleSummaryExample);
+                }
+            });
+        });
+        describe('Other cases', () => {
+            beforeEach(() => {
+                refreshPage();
+                waitForElDisplayed(WizardGeneratorPage.title);
+            }, 1);
+
+            it('should check validation first required field', () => {
+                checkFirstRequiredFieldValidation(visibleSummaryExample);
+            });
+
+            it('should check validation second required field', () => {
+                checkSecondStepRequiredValidation(visibleSummaryExample);
+            });
+
+            it('should check validation third required field', () => {
+                checkThirdStepRequiredValidation(visibleSummaryExample);
+            });
+
+            it('should check navigation by steps', () => {
+                checkNavigationBySteps(visibleSummaryExample);
+            });
+
+            it('should check navigation by scrolling', () => {
+                // skipped for FF on Windows due to https://github.com/SAP/fundamental-ngx/issues/7046
+                if (!browserIsFirefox() && currentPlatformName() !== 'Windows') {
+                    checkNavigationByScrolling(visibleSummaryExample);
+                }
+            });
+        });
+    });
+
+    describe('external navigation example', () => {
+        describe('Basic way', () => {
+            it('should check basic way', () => {
+                completeFirstStep(externalNavigationExample);
+                expect(getElementClass(externalNavigationExample + step, 0)).toContain(
+                    'completed',
+                    'first step is not completed'
+                );
+                expect(getElementClass(externalNavigationExample + step, 1)).toContain(
+                    'current',
+                    'you not moved to second step'
+                );
+
+                completeSecondStep(externalNavigationExample);
+                expect(getElementClass(externalNavigationExample + step, 1)).toContain(
+                    'completed',
+                    'second step is not completed'
+                );
+                expect(getElementClass(externalNavigationExample + step, 2)).toContain(
+                    'current',
+                    'third step is not current'
+                );
+
+                completeThirdStep(externalNavigationExample);
+                expect(getElementClass(externalNavigationExample + step, 2)).toContain(
+                    'completed',
+                    'third step is not completed'
+                );
+                expect(getElementClass(externalNavigationExample + step, 3)).toContain(
+                    'completed',
+                    '4th step is not completed'
+                );
+
+                checkResults(externalNavigationExample);
+            });
+        });
+        describe('Other cases', () => {
+            beforeEach(() => {
+                refreshPage();
+                waitForElDisplayed(WizardGeneratorPage.title);
+            }, 1);
+            it('should check validation first required field', () => {
+                checkFirstRequiredFieldValidation(externalNavigationExample);
+            });
+
+            it('should check validation second required field', () => {
+                checkSecondStepRequiredValidation(externalNavigationExample);
+            });
+
+            it('should check validation third required field', () => {
+                checkThirdStepRequiredValidation(externalNavigationExample);
+            });
+
+            it('should check navigation by steps', () => {
+                checkNavigationBySteps(externalNavigationExample);
+            });
+        });
+    });
+
+    describe('customizable example', () => {
+        describe('Basic way', () => {
+            it('should check basic way', () => {
+                completeFirstStep(customizableGeneratorExample);
+                expect(getElementClass(customizableGeneratorExample + step, 0)).toContain(
+                    'completed',
+                    'first step is not completed'
+                );
+                expect(getElementClass(customizableGeneratorExample + step, 1)).toContain(
+                    'current',
+                    'you not moved to second step'
+                );
+
+                completeSecondStep(customizableGeneratorExample);
+                expect(getElementClass(customizableGeneratorExample + step, 1)).toContain(
+                    'completed',
+                    'second step is not completed'
+                );
+                expect(getElementClass(customizableGeneratorExample + step, 2)).toContain(
+                    'current',
+                    'you not moved to third step'
+                );
+
+                completeThirdStep(customizableGeneratorExample);
+                expect(getElementClass(customizableGeneratorExample + step, 2)).toContain(
+                    'completed',
+                    'third step is not completed'
+                );
+                expect(getElementClass(customizableGeneratorExample + step, 3)).toContain(
+                    'completed',
+                    '4th step is not completed'
+                );
+
+                checkResults(customizableGeneratorExample);
+            });
+        });
+
+        describe('Other cases', () => {
+            beforeEach(() => {
+                refreshPage();
+                waitForElDisplayed(WizardGeneratorPage.title);
+            }, 1);
+            it('should check validation first required field', () => {
+                checkFirstRequiredFieldValidation(customizableGeneratorExample);
+            });
+
+            it('should check validation second required field', () => {
+                checkSecondStepRequiredValidation(customizableGeneratorExample);
+            });
+
+            it('should check validation third required field', () => {
+                checkThirdStepRequiredValidation(customizableGeneratorExample);
+            });
+
+            it('should check navigation by steps', () => {
+                checkNavigationBySteps(customizableGeneratorExample);
+            });
+        });
+    });
+
+    describe('summary object example', () => {
+        describe('Basic way', () => {
+            it('should check basic way', () => {
+                completeFirstStep(summaryObjectsExample);
+                expect(getElementClass(summaryObjectsExample + step, 0)).toContain(
+                    'completed',
+                    'first step is not completed'
+                );
+                expect(getElementClass(summaryObjectsExample + step, 1)).toContain(
+                    'current',
+                    'you not moved to second step'
+                );
+
+                completeSecondStep(summaryObjectsExample);
+                expect(getElementClass(summaryObjectsExample + step, 1)).toContain(
+                    'completed',
+                    'second step is not completed'
+                );
+                expect(getElementClass(summaryObjectsExample + step, 2)).toContain(
+                    'current',
+                    'you not moved to third step'
+                );
+
+                completeThirdStep(summaryObjectsExample);
+                expect(getElementClass(summaryObjectsExample + step, 2)).toContain(
+                    'completed',
+                    'third step is not completed'
+                );
+                expect(getElementClass(summaryObjectsExample + step, 3)).toContain(
+                    'completed',
+                    '4th step is not completed'
+                );
+
+                checkResults(summaryObjectsExample);
+            });
+        });
+
+        describe('Other cases', () => {
+            beforeEach(() => {
+                refreshPage();
+                waitForElDisplayed(WizardGeneratorPage.title);
+            }, 1);
+
+            it('should check validation first required field', () => {
+                checkFirstRequiredFieldValidation(summaryObjectsExample);
+            });
+
+            it('should check validation second required field', () => {
+                checkSecondStepRequiredValidation(summaryObjectsExample);
+            });
+
+            it('should check validation third required field', () => {
+                checkThirdStepRequiredValidation(summaryObjectsExample);
+            });
+
+            it('should check navigation by steps', () => {
+                checkNavigationBySteps(summaryObjectsExample);
+            });
+
+            it('should check navigation by scrolling', () => {
+                // skipped for FF on Windows due to https://github.com/SAP/fundamental-ngx/issues/7046
+                if (!browserIsFirefox() && currentPlatformName() !== 'Windows') {
+                    checkNavigationByScrolling(summaryObjectsExample);
+                }
+            });
+        });
+    });
+
+    describe('On change example', () => {
+        beforeEach(() => {
+            refreshPage();
+            waitForElDisplayed(WizardGeneratorPage.title);
+        }, 1);
+        it('should check basic way', () => {
+            scrollIntoView(onChangeExample);
+            setValue(onChangeExample + input, name);
+            click(onChangeExample + nextStepBtn);
+            expect(getElementClass(onChangeExample + step, 1)).toContain('current', 'you not moved to second step');
+            expect(getElementClass(onChangeExample + step, 0)).toContain('completed', 'first step not completed');
+            const defaultValue = getValue(onChangeExample + input, 1);
+            click(onChangeExample + nextStepBtn, 1);
+            expect(getText(onChangeExample + formLabel, 0)).toEqual(name, 'value is not equal entered value');
+            expect(getText(onChangeExample + formLabel, 1)).toEqual(defaultValue, 'value is not equal entered value');
+            click(onChangeExample + editButton);
+            setValue(onChangeExample + input, cardDetails2);
+            click(onChangeExample + nextStepBtn);
+            expect(getText(onChangeExample + formLabel, 0)).toEqual(cardDetails2, 'value is not equal changed value');
+        });
+
+        it('should check required fields validation', () => {
+            scrollIntoView(onChangeExample);
+            click(onChangeExample + nextStepBtn);
+            expect(getElementClass(onChangeExample + input)).toContain('error', 'error is not appeared');
+            setValue(onChangeExample + input, name);
+            click(onChangeExample + nextStepBtn);
+            // clear default value
+            const inputValue = getValue(onChangeExample + input, 1);
+            click(onChangeExample + input, 1);
+            for (let i = 0; i < inputValue.length; i++) {
+                sendKeys('Backspace');
+            }
+            expect(getElementClass(onChangeExample + input, 1)).toContain('error', 'error is not appeared');
+        });
+
+        it('should check default value from first input', () => {
+            scrollIntoView(onChangeExample);
+            setValue(onChangeExample + input, name);
+            click(onChangeExample + nextStepBtn);
+            expect(getValue(onChangeExample + input, 1)).toEqual(
+                name + '-repo',
+                'value is not equal entered value + default additional string'
+            );
+        });
+
+        it('should check navigation by steps', () => {
+            checkNavigationBySteps(onChangeExample);
+        });
+
+        it('should check navigation by scrolling', () => {
+            checkNavigationByScrolling(onChangeExample);
+        });
+    });
+
+    describe('dialog example', () => {
+        beforeEach(() => {
+            refreshPage();
+            waitForElDisplayed(WizardGeneratorPage.title);
+        }, 1);
+
+        describe('Basic way', () => {
+            it('should check basic way', () => {
+                click(dialogExample + button);
+                completeFirstStep(dialog);
+                expect(getElementClass(dialog + step, 0)).toContain('completed', 'first step is not completed');
+                expect(getElementClass(dialog + step, 1)).toContain('current', 'you not moved to second step');
+            });
+            it('should check second step', () => {
+                click(dialogExample + button);
+                completeFirstStep(dialog);
+                completeSecondStep(dialog);
+                expect(getElementClass(dialog + step, 1)).toContain('completed', 'first step is not completed');
+                expect(getElementClass(dialog + step, 2)).toContain('current', 'you not moved to third step');
+            });
+
+            it('should check third step', () => {
+                click(dialogExample + button);
+                completeFirstStep(dialog);
+                completeSecondStep(dialog);
+                completeThirdStep(dialog);
+                expect(getElementClass(dialog + step, 2)).toContain('completed', 'second step is not completed');
+                expect(getElementClass(dialog + step, 3)).toContain('completed', '4th step is not completed');
+            });
+
+            it('should check results', () => {
+                click(dialogExample + button);
+                completeFirstStep(dialog);
+                completeSecondStep(dialog);
+                completeThirdStep(dialog);
+                checkResults(dialog);
+            });
+
+            it('should check editing', () => {
+                click(dialogExample + button);
+                completeFirstStep(dialog);
+                completeSecondStep(dialog);
+                completeThirdStep(dialog);
+                checkResults(dialog);
+                checkEditing(dialog);
+            });
+        });
+
+        describe('Other cases', () => {
+            it('should check validation first required field', () => {
+                click(dialogExample + button);
+                checkFirstRequiredFieldValidation(dialog);
+            });
+
+            it('should check validation second required field', () => {
+                click(dialogExample + button);
+                checkSecondStepRequiredValidation(dialog);
+            });
+
+            it('should check validation third required field', () => {
+                click(dialogExample + button);
+                checkThirdStepRequiredValidation(dialog);
+            });
+
+            it('should check navigation by steps', () => {
+                click(dialogExample + button);
+                checkNavigationBySteps(dialog);
+            });
+
+            it('should check navigation by buttons', () => {
+                checkNavigationByButtonsInDialog(dialogExample);
+            });
+        });
+    });
+
+    describe('customizable dialog example', () => {
+        describe('Basic way', () => {
+            it('should check basic way', () => {
+                refreshPage();
+                waitForElDisplayed(WizardGeneratorPage.title);
+                click(customizableDialogExample + button);
+                completeFirstStep(dialog);
+                expect(getElementClass(dialog + step, 0)).toContain('completed', 'first step is not completed');
+                expect(getElementClass(dialog + step, 1)).toContain('current', 'you not moved to second step');
+
+                completeSecondStep(dialog);
+                expect(getElementClass(dialog + step, 1)).toContain('completed', 'second step is not completed');
+                expect(getElementClass(dialog + step, 2)).toContain('current', 'you not moved to third step');
+
+                completeThirdStep(dialog);
+                expect(getElementClass(dialog + step, 2)).toContain('completed', 'first step is not completed');
+                expect(getElementClass(dialog + step, 3)).toContain('completed', '4th step is not completed');
+
+                checkResults(dialog);
+            });
+        });
+        describe('Other cases', () => {
+            beforeEach(() => {
+                refreshPage();
+                waitForElDisplayed(WizardGeneratorPage.title);
+            }, 1);
+            it('should check validation first required field', () => {
+                click(customizableDialogExample + button);
+                checkFirstRequiredFieldValidation(dialog);
+            });
+
+            it('should check validation second required field', () => {
+                click(customizableDialogExample + button);
+                checkSecondStepRequiredValidation(dialog);
+            });
+
+            it('should check validation third required field', () => {
+                click(customizableDialogExample + button);
+                checkThirdStepRequiredValidation(dialog);
+            });
+
+            it('should check navigation by steps', () => {
+                click(customizableDialogExample + button);
+                checkNavigationBySteps(dialog);
+            });
+
+            it('should check navigation by buttons', () => {
+                checkNavigationByButtonsInDialog(customizableDialogExample);
+            });
+        });
+    });
+
+    describe('condition dialog example', () => {
+        describe('Basic way', () => {
+            it('should check basic way', () => {
+                refreshPage();
+                scrollIntoView(branchingExample);
+                click(branchingExample + button);
+                completeFirstStep(dialog);
+                expect(getElementClass(dialog + step, 0)).toContain('completed', 'first step is not completed');
+                expect(getElementClass(dialog + step, 1)).toContain('current', 'you not moved to second step');
+
+                completeSecondStep(dialog);
+                expect(getElementClass(dialog + step, 1)).toContain('completed', 'second step is not completed');
+                expect(getElementClass(dialog + step, 2)).toContain('current', 'you not moved to third step');
+
+                click(dialog + nextStepBtn2);
+                click(dialog + select);
+                const paymentMethod = getText(listItemText);
+                textArr.splice(3, 0, paymentMethod);
+
+                click(listItem);
+                click(dialog + nextStepBtn2);
+                expect(getElementClass(dialog + step, 2)).toContain('completed', 'third step is not completed');
+                expect(getElementClass(dialog + step, 3)).toContain('current', 'you are not moved to 5th step');
+
+                setValue(dialog + input, cardDetails);
+                click(dialog + nextStepBtn2);
+                click(dialog + nextStepBtn2);
+                expect(getElementClass(dialog + step, 4)).toContain('completed', '5th step is not completed');
+
+                for (let i = 1; i < 6; i++) {
+                    expect(getText(dialog + formLabel, i)).toBe(textArr[i - 1], 'value is not equal entered value');
+                }
+                // remove added value because it can force fail next result check
+                textArr.splice(3, 1);
+
+                // click(dialog + editButton, 3);
+                // setValue(dialog + input, cardDetails2);
+                // click(dialog + nextStepBtn2);
+                // expect(getText(dialog + formLabel, 5)).toBe(cardDetails2, 'value is not equal changed value');
+            });
+        });
+        describe('Other cases', () => {
+            beforeEach(() => {
+                refreshPage();
+                waitForElDisplayed(WizardGeneratorPage.title);
+            }, 1);
+            it('should check required fields validation', () => {
+                click(branchingExample + button);
+                click(dialog + nextStepBtn2);
+                expect(getElementClass(dialog + selectControl)).toContain('error', 'error is not appeared');
+                click(dialog + select);
+                click(listItem);
+                click(dialog + nextStepBtn2);
+                click(dialog + nextStepBtn2);
+                expect(getElementClass(dialog + input)).toContain('error', 'error is not appeared');
+                setValue(dialog + input, name);
+                setValue(dialog + input, firstAdress, 1);
+                click(dialog + nextStepBtn2);
+                click(dialog + nextStepBtn2);
+                expect(getElementClass(dialog + selectControl)).toContain('error', 'error is not appeared');
+                click(dialog + select);
+                click(listItem);
+                click(dialog + nextStepBtn2);
+                click(dialog + nextStepBtn2);
+                expect(getElementClass(dialog + input)).toContain('error', 'error is not appeared');
+            });
+
+            it('should check navigation by steps', () => {
+                click(branchingExample + button);
+                checkNavigationBySteps(dialog);
+            });
+
+            it('should check navigation by buttons', () => {
+                checkNavigationByButtonsInDialog(branchingExample);
+            });
+        });
+    });
+
+    describe('responsive dialog example', () => {
+        describe('Basic way', () => {
+            it('should check basic way', () => {
+                refreshPage();
+                waitForElDisplayed(WizardGeneratorPage.title);
+                scrollIntoView(responsiveDialogExample);
+                click(responsiveDialogExample + button);
+                completeFirstStep(dialog);
+                expect(getElementClass(dialog + step, 0)).toContain('completed', 'first step is not completed');
+                expect(getElementClass(dialog + step, 1)).toContain('current', 'you not moved to second step');
+
+                completeSecondStep(dialog);
+                expect(getElementClass(dialog + step, 1)).toContain('completed', 'second step is not completed');
+                expect(getElementClass(dialog + step, 2)).toContain('current', 'you not moved to third step');
+
+                completeThirdStep(dialog);
+                expect(getElementClass(dialog + step, 2)).toContain('completed', 'first step is not completed');
+                expect(getElementClass(dialog + step, 3)).toContain('completed', '4th step is not completed');
+
+                checkResults(dialog);
+            });
+        });
+
+        describe('Other cases', () => {
+            beforeEach(() => {
+                refreshPage();
+                waitForElDisplayed(WizardGeneratorPage.title);
+            }, 1);
+            it('should check validation first required field', () => {
+                click(responsiveDialogExample + button);
+                checkFirstRequiredFieldValidation(dialog);
+            });
+
+            it('should check validation second required field', () => {
+                click(responsiveDialogExample + button);
+                checkSecondStepRequiredValidation(dialog);
+            });
+
+            it('should check validation third required field', () => {
+                click(responsiveDialogExample + button);
+                checkThirdStepRequiredValidation(dialog);
+            });
+
+            it('should check navigation by steps', () => {
+                click(responsiveDialogExample + button);
+                checkNavigationBySteps(dialog);
+            });
+
+            it('should check navigation by buttons', () => {
+                checkNavigationByButtonsInDialog(responsiveDialogExample);
+            });
+        });
+    });
+
+    function checkNavigationByScrolling(selector: string): void {
+        scrollIntoView(selector);
+        if (selector === summaryObjectsExample) {
+            click(checkboxLabel);
+        }
+        if (selector === onChangeExample) {
+            setValue(selector + input, name);
+        }
+        if (selector !== summaryObjectsExample && selector !== onChangeExample) {
+            click(selector + select);
+            click(listItem);
+        }
+        selector === externalNavigationExample || selector === customizableGeneratorExample
+            ? click(selector + nextStepBtn2)
+            : click(selector + nextStepBtn);
+        expect(getElementClass(selector + step, 1)).toContain('current', 'second step is not current');
+        expect(getElementClass(selector + step, 0)).toContain('completed', 'first step is not completed');
+        scrollIntoView(selector + stepContainer);
+        scrollIntoView(selector + step);
+        expect(getElementClass(selector + step, 0)).toContain('current', 'step did not back to first');
+        expect(getElementClass(selector + step, 1)).toContain('upcoming', 'step did not back to first');
+    }
+
+    function checkNavigationByButtonsInDialog(selector: string): void {
+        scrollIntoView(selector);
+        click(selector + button);
+        click(dialog + select);
+        click(listItem);
+        click(dialog + nextStepBtn2);
+        expect(getElementArrayLength(dialogBarButton)).toBe(3, 'back button is appeared');
+        expect(getElementClass(dialog + step, 1)).toContain('current', 'second step is not current');
+        expect(getElementClass(dialog + step, 0)).toContain('completed', 'first step is not completed');
+        click(dialogBarButton);
+        expect(getElementClass(dialog + step, 0)).toContain('current', 'step did not back to first');
+        expect(getElementClass(dialog + step, 1)).toContain('upcoming', 'step did not back to first');
+        expect(getElementArrayLength(dialogBarButton)).toBe(2, 'back button is not hidden');
+    }
+
+    function checkNavigationBySteps(selector: string): void {
+        scrollIntoView(selector);
+        expect(isElementClickable(selector + '.fd-wizard__step-container', 1)).toBe(
+            false,
+            'second step clickable but should not'
+        );
+        if (selector === summaryObjectsExample) {
+            click(checkboxLabel);
+        }
+        if (selector === onChangeExample) {
+            setValue(selector + input, name);
+        }
+        if (selector !== summaryObjectsExample && selector !== onChangeExample) {
+            click(selector + select);
+            click(listItem);
+        }
+        selector === externalNavigationExample || selector === customizableGeneratorExample || selector === dialog
+            ? click(selector + nextStepBtn2)
+            : click(selector + nextStepBtn);
+        expect(getElementClass(selector + step, 1)).toContain('current', 'you not moved to second step');
+        expect(getElementClass(selector + step, 0)).toContain('completed', 'first step is not completed');
+        click(selector + '.fd-wizard__step-container');
+        expect(getElementClass(selector + step, 0)).toContain(
+            'current',
+            'you did not get back to first step by click on step tab'
+        );
+    }
+
+    function checkFirstRequiredFieldValidation(selector: string): void {
+        selector === externalNavigationExample || selector === customizableGeneratorExample || selector === dialog
+            ? click(selector + nextStepBtn2)
+            : click(selector + nextStepBtn);
+        if (selector !== summaryObjectsExample) {
+            expect(getElementClass(selector + selectControl)).toContain('error', 'error is not appeared');
+            click(selector + select);
+            click(listItem);
+        }
+        if (selector === summaryObjectsExample) {
+            expect(getElementClass(selector + checkbox)).toContain('error', 'error is not appeared');
+            click(checkboxLabel);
+        }
+    }
+
+    function checkSecondStepRequiredValidation(selector: string): void {
+        completeFirstStep(selector);
+        if (
+            selector !== externalNavigationExample &&
+            selector !== customizableGeneratorExample &&
+            selector !== dialog
+        ) {
+            click(selector + nextStepBtn, 1);
+        }
+        if (
+            selector === externalNavigationExample ||
+            selector === customizableGeneratorExample ||
+            selector === dialog
+        ) {
+            click(selector + nextStepBtn2);
+        }
+
+        for (let i = 0; i < 2; i++) {
+            click(selector + input, i);
+            expect(isElementDisplayed(errorMessage)).toBe(true);
+            expect(getText(errorMessage)).toBe(errorMessageText);
+        }
+    }
+
+    function checkThirdStepRequiredValidation(selector: string): void {
+        completeFirstStep(selector);
+        completeSecondStep(selector);
+        if (
+            selector !== externalNavigationExample &&
+            selector !== customizableGeneratorExample &&
+            selector !== dialog
+        ) {
+            click(selector + nextStepBtn, 2);
+            click(selector + input, 3);
+        }
+        if (
+            selector === externalNavigationExample ||
+            selector === customizableGeneratorExample ||
+            selector === dialog
+        ) {
+            click(selector + nextStepBtn2);
+            click(selector + input);
+        }
+        expect(isElementDisplayed(errorMessage)).toBe(true);
+        expect(getText(errorMessage)).toBe(errorMessageText);
+    }
+
+    function completeFirstStep(selector: string): void {
+        if (selector === summaryObjectsExample) {
+            click(checkboxLabel);
+        }
+        if (selector !== summaryObjectsExample) {
+            click(selector + select);
+            click(listItem);
+        }
+        if (
+            selector !== externalNavigationExample &&
+            selector !== customizableGeneratorExample &&
+            selector !== dialog
+        ) {
+            click(selector + nextStepBtn);
+        }
+
+        if (
+            selector === externalNavigationExample ||
+            selector === customizableGeneratorExample ||
+            selector === dialog
+        ) {
+            click(selector + nextStepBtn2);
+        }
+    }
+
+    function completeSecondStep(selector: string): void {
+        setValue(selector + input, name);
+        setValue(selector + input, firstAdress, 1);
+        setValue(selector + input, secondAdress, 2);
+        if (
+            selector !== externalNavigationExample &&
+            selector !== customizableGeneratorExample &&
+            selector !== dialog
+        ) {
+            click(selector + nextStepBtn, 1);
+        }
+        if (
+            selector === externalNavigationExample ||
+            selector === customizableGeneratorExample ||
+            selector === dialog
+        ) {
+            click(selector + nextStepBtn2);
+        }
+    }
+
+    function completeThirdStep(selector: string): void {
+        if (
+            selector === externalNavigationExample ||
+            selector === customizableGeneratorExample ||
+            selector === dialog
+        ) {
+            setValue(selector + input, cardDetails);
+            click(selector + nextStepBtn2);
+            click(selector + nextStepBtn2);
+        }
+        if (
+            selector !== externalNavigationExample &&
+            selector !== customizableGeneratorExample &&
+            selector !== dialog
+        ) {
+            setValue(selector + input, cardDetails, 3);
+            click(selector + nextStepBtn, 2);
+            click(selector + nextStepBtn, 3);
+        }
+    }
+
+    function checkResults(selector: string): void {
+        for (let i = 1; i < 5; i++) {
+            expect(getText(selector + formLabel, i)).toBe(textArr[i - 1]);
+        }
+    }
+
+    function checkEditing(selector: string): void {
+        click(selector + editButton, 2);
+        setValue(selector + input, cardDetails2);
+        selector === externalNavigationExample || selector === customizableGeneratorExample || selector === dialog
+            ? click(selector + nextStepBtn2)
+            : click(selector + nextStepBtn);
+        expect(getText(selector + formLabel, 4)).toBe(cardDetails2, 'current value is not equal changed value');
+    }
+});

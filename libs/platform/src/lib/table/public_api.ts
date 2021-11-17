@@ -6,27 +6,39 @@ export * from './table-column-resize.service';
 export * from './table-scroll-dispatcher.service';
 export * from './utils';
 
+export * from './components/no-data-wrapper/no-data-wrapper.component';
 export * from './components/reset-button/reset-button.component';
-
 export * from './components/table-column/table-column';
 export * from './components/table-column/table-column.component';
-
 export * from './components/table-column-resizer/table-column-resizer.component';
-
-export * from './components/table-p13-dialog/table-p13-dialog.component';
-export * from './components/table-p13-dialog/table-p13-sort.component';
-export * from './components/table-p13-dialog/table-p13-group.component';
-export * from './components/table-p13-dialog/table-p13-filter.component';
 export * from './components/table-p13-dialog/table-p13-columns.component';
-
-export * from './components/table-toolbar/table-toolbar.component';
+export * from './components/table-p13-dialog/table-p13-dialog.component';
+export * from './components/table-p13-dialog/table-p13-filter.component';
+export * from './components/table-p13-dialog/table-p13-group.component';
+export * from './components/table-p13-dialog/table-p13-sort.component';
+export * from './components/table-p13-dialog/columns/columns.component';
+export * from './components/table-p13-dialog/filtering/filter-rule.component';
+export * from './components/table-p13-dialog/filtering/filtering.component';
+export * from './components/table-p13-dialog/filtering/filtering.model';
+export * from './components/table-p13-dialog/grouping/grouping.component';
+export * from './components/table-p13-dialog/sorting/sorting.component';
+export * from './components/table-p13-dialog/sorting/get-available-sort-columns.pipe';
 export * from './components/table-toolbar/table-toolbar';
 export * from './components/table-toolbar/table-toolbar-actions.component';
+export * from './components/table-toolbar/table-toolbar.component';
 
 export * from './components/table-view-settings-dialog/table-view-settings-dialog.component';
 export * from './components/table-view-settings-dialog/table-view-settings-filter.component';
-
-export * from './components/no-data-wrapper/no-data-wrapper.component';
+export * from './components/table-view-settings-dialog/filtering/constants';
+export * from './components/table-view-settings-dialog/filtering/filter-custom.component';
+export * from './components/table-view-settings-dialog/filtering/filter-multi-select.component';
+export * from './components/table-view-settings-dialog/filtering/filter-single-select.component';
+export * from './components/table-view-settings-dialog/filtering/filter-step.component';
+export * from './components/table-view-settings-dialog/filtering/filters-active-step';
+export * from './components/table-view-settings-dialog/filtering/filters-list-step.component';
+export * from './components/table-view-settings-dialog/filtering/filters.component';
+export * from './components/table-view-settings-dialog/grouping/grouping.component';
+export * from './components/table-view-settings-dialog/sorting/sorting.component';
 
 export * from './directives/table-cell.directive';
 export * from './directives/table-cell-resizable.directive';

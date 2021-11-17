@@ -1,11 +1,6 @@
 $block: fd-feed-list;
 
 .#{$block} {
-    &__item--collapsible {
-        .lineclamp {
-            display: block;
-        }
-    }
     &__name a {
         max-width: 75%;
         display: inline-block;
@@ -31,6 +26,8 @@ $block: fd-feed-list;
 
     &__link--more {
         cursor: pointer;
+        text-transform: initial;
+
         &:hover {
             text-decoration: underline;
         }

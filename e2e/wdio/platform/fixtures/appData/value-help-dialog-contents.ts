@@ -22,9 +22,9 @@ export const customLabels = [
     'starts with',
     'ends with',
     'less than',
-    'less than or equal to',
+    'less than equal',
     'greater than',
-    'greater than or equal to',
+    'greater than equal',
     'empty',
     'not equal to',
     'not empty'

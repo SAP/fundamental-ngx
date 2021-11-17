@@ -251,7 +251,7 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
     }
 
     /** @hidden */
-    buttonClicked($event): void {
+    buttonClicked($event: MouseEvent): void {
         this.addOnButtonClicked.emit($event);
     }
 

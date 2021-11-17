@@ -19,7 +19,7 @@
                 <ng-container [ngTemplateOutlet]="selectInputControlTemplate"></ng-container>
             </fd-popover-control>
 
-            <fd-popover-body>
+            <fd-popover-body class="fd-popover-custom-select-body">
                 <ng-container [ngTemplateOutlet]="selectOptionsListTemplate"></ng-container>
             </fd-popover-body>
         </fd-popover>
@@ -48,8 +48,8 @@
         [attr.aria-haspopup]="!(this.readonly || this.disabled)"
         [attr.aria-required]="required"
         [attr.title]="triggerValue"
-        [attr.aria-label]="triggerValue"
-        [attr.aria-labelledby]="triggerValue"
+        [attr.aria-label]="ariaLabel"
+        [attr.aria-labelledby]="ariaLabelledBy"
         [attr.aria-activedescendant]="_getAriaActiveDescendant()"
         (focus)="_onFocus()"
         (blur)="_onBlur()"

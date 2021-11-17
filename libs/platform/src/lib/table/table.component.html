@@ -7,7 +7,7 @@
 
 <fd-busy-indicator [loading]="loading" block="true">
     <!-- Table Container -->
-    <div class="fdp-table__container" role="table">
+    <div class="fdp-table__container" role="table" #tableContainer>
         <!-- Table header outlet -->
         <ng-container [ngTemplateOutlet]="tableHeaderTemplate"></ng-container>
 
@@ -45,14 +45,20 @@
 
 <!-- Table Header Columns -->
 <ng-template #tableHeaderRowTemplate>
-    <tr fd-table-row>
-        <th *ngIf="semanticHighlighting" class="fd-table__cell--fixed" fd-table-cell fd-table-status-indicator></th>
+    <tr fd-table-row #headerRow>
+        <th
+            *ngIf="semanticHighlighting"
+            class="fd-table__cell--fixed"
+            fd-table-cell
+            fd-table-status-indicator
+            [style.height]="_getCellHeightPx(headerRow)"
+        ></th>
 
         <th
             *ngIf="_isShownSelectionColumn"
             fd-table-cell
             class="fd-table__cell--fixed fd-table__cell--checkbox"
-            [style]="_getSelectionCellStyles()"
+            [style]="_getSelectionCellStyles(headerRow)"
         >
             <fd-checkbox
                 *ngIf="selectionMode === SELECTION_MODE.MULTIPLE"
@@ -82,21 +88,27 @@
             >
                 <div
                     class="fd-table__text fd-table__text--no-wrap"
-                    [class.fd-table__inner]="_sortRulesMap.has(column.key)"
+                    [class.fd-table__inner]="_sortRulesMap.has(column.key) || _filterRulesMap.has(column.key)"
                 >
                     <ng-container
                         *ngTemplateOutlet="tableHeaderCellContentTemplate; context: { column: column }"
                     ></ng-container>
 
-                    <fd-icon
-                        *ngIf="_sortRulesMap.has(column.key)"
-                        fd-table-icon
-                        [glyph]="
-                            _sortRulesMap.get(column.key).direction === SORT_DIRECTION.ASC
-                                ? 'sort-ascending'
-                                : 'sort-descending'
-                        "
-                    ></fd-icon>
+                    <div
+                        class="fd-table__column-header-icons"
+                        *ngIf="_sortRulesMap.has(column.key) || _filterRulesMap.has(column.key)"
+                    >
+                        <fd-icon *ngIf="_filterRulesMap.has(column.key)" fd-table-icon glyph="filter"></fd-icon>
+                        <fd-icon
+                            *ngIf="_sortRulesMap.has(column.key)"
+                            fd-table-icon
+                            [glyph]="
+                                _sortRulesMap.get(column.key).direction === SORT_DIRECTION.ASC
+                                    ? 'sort-ascending'
+                                    : 'sort-descending'
+                            "
+                        ></fd-icon>
+                    </div>
                 </div>
 
                 <!-- Header menu -->
@@ -264,10 +276,13 @@
                             *ngSwitchDefault
                             fd-table-row
                             fd-dnd-item
+                            #tableRow
                             role="row"
+                            [applyDragItemClass]="_rowsDraggable"
                             [class]="_getRowClasses(row)"
                             [tabindex]="rowsActivable || !!row.navigatable ? 0 : -1"
-                            [hoverable]="_isShownSelectionColumn || !!row.navigatable"
+                            [focusable]="rowsActivable || !!row.navigatable"
+                            [hoverable]="rowsActivable || _isShownSelectionColumn || !!row.navigatable"
                             [activable]="rowsActivable || !!row.navigatable"
                             [attr.aria-selected]="row.checked"
                             [attr.aria-rowindex]="rowIdx"
@@ -282,6 +297,7 @@
                                 fd-table-cell
                                 fd-table-status-indicator
                                 [status]="row.value[semanticHighlighting]"
+                                [style.height]="_getCellHeightPx(tableRow)"
                             ></td>
 
                             <!-- Row Selection Cell -->
@@ -293,7 +309,7 @@
                                         role="rowheader"
                                         fd-table-cell
                                         fd-table-cell-selectable
-                                        [style]="_getSelectionCellStyles()"
+                                        [style]="_getSelectionCellStyles(tableRow)"
                                         [focusable]="true"
                                         [attr.aria-selected]="row.checked"
                                         (click)="_toggleSelectableRow(row)"
@@ -307,7 +323,7 @@
                                         class="fd-table__cell--fixed fd-table__cell--checkbox"
                                         role="cell"
                                         fd-table-cell
-                                        [style]="_getSelectionCellStyles()"
+                                        [style]="_getSelectionCellStyles(tableRow)"
                                     >
                                         <fd-checkbox
                                             [compact]="contentDensity !== CONTENT_DENSITY.COZY"

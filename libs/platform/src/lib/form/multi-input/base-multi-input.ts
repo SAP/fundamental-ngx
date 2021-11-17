@@ -137,10 +137,6 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     }
 
     set value(value: any) {
-        if (!value) {
-            return;
-        }
-
         const selectedItems = Array.isArray(value) ? value : [value];
         this.setAsSelected(this._convertToOptionItems(selectedItems));
         super.setValue(value);
@@ -337,10 +333,6 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
 
     /** write value for ControlValueAccessor */
     writeValue(value: any): void {
-        if (!value) {
-            return;
-        }
-
         const selectedItems = Array.isArray(value) ? value : [value];
         this.setAsSelected(this._convertToOptionItems(selectedItems));
         super.writeValue(value);

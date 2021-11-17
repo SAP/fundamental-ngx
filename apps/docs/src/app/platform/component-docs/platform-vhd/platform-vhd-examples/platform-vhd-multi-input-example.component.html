@@ -20,7 +20,6 @@
         label="Open value help dialog"
     ></button>
 </div>
-
 <fdp-value-help-dialog
     #vhd
     dialogTitle="Multiple selection"
@@ -31,6 +30,7 @@
     [dataSource]="dataSource"
     [value]="currentValue"
     (valueChange)="valueChange($event)"
+    headerId="fdp-vhd-header-7"
 >
     <fdp-value-help-dialog-search placeholder="Search..."></fdp-value-help-dialog-search>
     <fdp-value-help-dialog-filter

@@ -19,18 +19,22 @@ import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { Placement } from '@fundamental-ngx/core/shared';
-import { FormStates } from '@fundamental-ngx/core/shared';
-import { SpecialDayRule } from '@fundamental-ngx/core/shared';
-import { CalendarComponent, CalendarType, DaysOfWeek, FdCalendarView } from '@fundamental-ngx/core/calendar';
-import { CalendarYearGrid } from '@fundamental-ngx/core/calendar';
-import { DateRange } from '@fundamental-ngx/core/calendar';
-import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
-import { DateTimeFormats, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
-import { createMissingDateImplementationError } from './errors';
+import { Placement, SpecialDayRule, FormStates } from '@fundamental-ngx/core/shared';
+import {
+    CalendarComponent,
+    CalendarType,
+    DaysOfWeek,
+    FdCalendarView,
+    DateRange,
+    CalendarYearGrid
+} from '@fundamental-ngx/core/calendar';
+import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
 import { PopoverFormMessageService } from '@fundamental-ngx/core/form';
 import { PopoverService } from '@fundamental-ngx/core/popover';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
+
+import { createMissingDateImplementationError } from './errors';
 
 /**
  * The datetime picker component is an opinionated composition of the fd-popover and
@@ -178,6 +182,9 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
     }
     /** @hidden */
     get state(): FormStates {
+        if (this._state == null && this.useValidation && this._isInvalidDateInput) {
+            return 'error';
+        }
         return this._state;
     }
     /** @hidden */
@@ -187,7 +194,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
      * Whether AddOn Button should be focusable, set to true by default
      */
     @Input()
-    buttonFocusable = true;
+    buttonFocusable = false;
 
     /**
      * Special days mark, it can be used by passing array of object with
@@ -258,6 +265,10 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
     /** @hidden */
     @ViewChild('inputGroupComponent', { read: ElementRef })
     _inputGroupElement: ElementRef;
+
+    /** @hidden */
+    @ViewChild(InputGroupInputDirective, { read: ElementRef })
+    _inputElement: ElementRef;
 
     /** @hidden The value of the input */
     _inputFieldDate: string = null;
@@ -502,14 +513,15 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
             } else {
                 this._inputFieldDate = '';
             }
-        } else {
+        }
+        if (this.type === 'range') {
             /**
              * For range mode, if the date is invalid, model is changed, but it does not refresh currently
              * displayed day view, or input field text
              */
             selected = selected as DateRange<D>;
 
-            if (selected.start) {
+            if (selected?.start) {
                 this.selectedRangeDate = { start: selected.start, end: selected.end };
 
                 if (this._isRangeModelValid(this.selectedRangeDate)) {
@@ -522,8 +534,8 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
                 this._inputFieldDate = '';
             }
         }
-        this._changeDetectionRef.detectChanges();
         this._isInvalidDateInput = !this.isModelValid();
+        this._changeDetectionRef.detectChanges();
     }
 
     /**
@@ -631,16 +643,30 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
         }
     }
 
+    /** @hidden */
+    _onOpenStateChanged(isOpen: boolean): void {
+        this.isOpenChange.emit(isOpen);
+        this._changeMessageVisibility();
+        // focus input control every time popup is closed
+        if (!isOpen && this._inputElement) {
+            this._inputElement.nativeElement.focus();
+        }
+        // focus calendar cell on opening
+        if (isOpen && this._calendarComponent) {
+            this._calendarComponent.initialFocus();
+        }
+    }
+
     /** Method that returns info if single model given is valid */
     private _isSingleModelValid(date: D): boolean {
-        return (this._isDateValid(date) && !this.disableFunction(date)) || (!this._inputFieldDate && this.allowNull);
+        return (this._isDateValid(date) && !this.disableFunction(date)) || (!date && this.allowNull);
     }
 
     /** Method that returns info if range date model given is valid */
     private _isRangeModelValid(fdRangeDate: DateRange<D>): boolean {
         return (
             (fdRangeDate && this._isStartDateValid(fdRangeDate.start) && this._isEndDateValid(fdRangeDate.end)) ||
-            (!this._inputFieldDate && this.allowNull)
+            (!fdRangeDate.start && !fdRangeDate.end && this.allowNull)
         );
     }
 
