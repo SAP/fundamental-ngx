@@ -245,6 +245,7 @@ $fd-table-header-color-var: var(--sapList_HeaderBackground, #f2f2f2);
         overflow-y: scroll;
 
         &-hs {
+            width: 100%;
             position: relative;
             min-height: 0.5rem;
             overflow: scroll;
