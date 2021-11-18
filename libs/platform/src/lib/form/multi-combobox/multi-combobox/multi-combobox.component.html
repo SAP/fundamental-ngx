@@ -71,7 +71,7 @@
                 type="text"
                 role="combobox"
                 autocomplete="off"
-                aria-describedby="invalid-entry"
+                [aria-describedby]="status"
                 [attr.aria-label]="ariaLabel"
                 [attr.aria-labelledby]="ariaLabelledBy"
                 [attr.aria-autocomplete]="autoComplete && !mobile ? 'list' : null"
@@ -127,7 +127,7 @@
             type="text"
             role="combobox"
             autocomplete="off"
-            aria-describedby="invalid-entry"
+            [aria-describedby]="status"
             [attr.aria-label]="ariaLabel"
             [attr.aria-labelledby]="ariaLabelledBy"
             [attr.aria-autocomplete]="autoComplete && !mobile ? 'list' : null"
@@ -294,9 +294,9 @@
 
 <ng-template #errorMessageTemplate>
     <fd-form-message
-        id="invalid-entry"
         *ngIf="isSearchInvalid"
         type="error"
+        [id]="status"
         [embedded]="isOpen"
         i18n="
             multi-combobox search error message|The error message for this multi-combobox
