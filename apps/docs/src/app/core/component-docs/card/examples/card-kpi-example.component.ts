@@ -48,7 +48,7 @@ export class CardKpiExampleComponent implements AfterViewInit {
     }
 
     drawChart(visualization: Visualization): void {
-        const dataTabel = [
+        const dataTable = [
             ['Entities', 'Target', 'Cost', 'Revenue', { role: 'annotation' }],
             ['Weather', 5000, 2500, 3200, ''],
             ['Mechanics', 5000, 2500, 4300, ''],
@@ -57,7 +57,7 @@ export class CardKpiExampleComponent implements AfterViewInit {
 
         let labelText = '';
 
-        dataTabel.forEach((dataChart) => {
+        dataTable.forEach((dataChart) => {
             dataChart.forEach((chartData) => {
                 if (typeof chartData !== 'object') {
                     labelText += ` ${chartData}`;
@@ -65,7 +65,7 @@ export class CardKpiExampleComponent implements AfterViewInit {
             });
         });
 
-        const data = visualization.arrayToDataTable(dataTabel);
+        const data = visualization.arrayToDataTable(dataTable);
 
         this.renderer.setAttribute(this.chartContainer.nativeElement, 'aria-label', labelText);
         // Instantiate and draw our chart, passing in some options.

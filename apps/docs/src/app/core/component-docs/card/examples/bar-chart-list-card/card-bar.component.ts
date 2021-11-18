@@ -1,5 +1,7 @@
 import { Component, ChangeDetectionStrategy, Input, ViewEncapsulation, OnInit } from '@angular/core';
 
+export type CardBarStatus = 'information' | 'warning' | 'critical' | 'success';
+
 @Component({
     selector: 'fd-card-bar',
     templateUrl: './card-bar.component.html',
@@ -12,6 +14,6 @@ export class CardBarComponent {
     /** value in percentage, minimum 0, maximum 100 */
     @Input() value = 0;
 
-    /** color name: information, warning, critical, success */
-    @Input() color: string = null;
+    /** sttus name: information, warning, critical, success */
+    @Input() status: CardBarStatus = 'information';
 }
