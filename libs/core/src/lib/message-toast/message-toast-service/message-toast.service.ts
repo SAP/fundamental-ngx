@@ -70,14 +70,6 @@ export class MessageToastService {
 
         this._messageToasts.push(component);
 
-        if (typeof content === 'string') {
-            this._liveAnnouncer.announce(content);
-        } else {
-            setTimeout(() => {
-                this._liveAnnouncer.announce(this._messageToastContainerRef.location.nativeElement.textContent);
-            }, 1);
-        }
-
         return service;
     }
 
