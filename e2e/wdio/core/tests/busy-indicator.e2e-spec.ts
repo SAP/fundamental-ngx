@@ -2,13 +2,16 @@ import { BusyIndicatorPo } from '../pages/busy-indicator.po';
 import {
     addValue,
     click,
+    doesItExist,
     getElementArrayLength,
+    getElementSize,
     isElementClickable,
     isElementDisplayed,
     refreshPage,
     scrollIntoView,
     waitForPresent
 } from '../../driver/wdio';
+import { sizeS, sizeM, sizeL } from '../fixtures/appData/busy-indicator-contents';
 
 describe('Busy Indicator test suite:', () => {
     const busyIndicatorPage: BusyIndicatorPo = new BusyIndicatorPo();
@@ -22,7 +25,13 @@ describe('Busy Indicator test suite:', () => {
         formIndicator,
         smallIndicator,
         middleIndicator,
-        largeIndicator
+        largeIndicator,
+        busyIndicator,
+        busyIndicatorLabel,
+        busyIndicatorLabelExample,
+        messageToast,
+        openBusyIndicatorButton,
+        hideAllButton
     } = busyIndicatorPage;
     const text = 'test';
 
@@ -74,5 +83,45 @@ describe('Busy Indicator test suite:', () => {
         expect(isElementClickable(formPassword)).toBe(false);
         expect(isElementDisplayed(saveIndicator)).toBe(true);
         expect(isElementDisplayed(formIndicator)).toBe(true);
+    });
+
+    it('Verify busy indicator size has s', () => {
+        expect(getElementSize(busyIndicator, 1)).toEqual(sizeS);
+    });
+
+    it('Verify busy indicator size has m', () => {
+        expect(getElementSize(busyIndicator, 2)).toEqual(sizeM);
+    });
+
+    it('Verify busy indicator size has l', () => {
+        expect(getElementSize(busyIndicator, 3)).toEqual(sizeL);
+    });
+
+    it('Verify that label present in Busy Indicator Label example', () => {
+        scrollIntoView(busyIndicatorLabelExample);
+        expect(isElementDisplayed(busyIndicatorLabelExample + busyIndicatorLabel)).toBe(true);
+    });
+
+    it('should check opening busy indicator in message toast by clicking button', () => {
+        click(openBusyIndicatorButton);
+        expect(isElementDisplayed(messageToast + busyIndicator)).toBe(true);
+    });
+
+    it('should check that we can open few busy indicators in message toast', () => {
+        click(openBusyIndicatorButton);
+        click(openBusyIndicatorButton);
+        click(openBusyIndicatorButton);
+        expect(getElementArrayLength(messageToast + busyIndicator)).toBe(3);
+    });
+
+    it('should check closing all busy indicators in message toast by clicking Hide All button', () => {
+        click(openBusyIndicatorButton);
+        click(openBusyIndicatorButton);
+        click(hideAllButton);
+        expect(doesItExist(messageToast + busyIndicator)).toBe(false);
+    });
+
+    it('should check LTR and RTL', () => {
+        busyIndicatorPage.checkRtlSwitch();
     });
 });
