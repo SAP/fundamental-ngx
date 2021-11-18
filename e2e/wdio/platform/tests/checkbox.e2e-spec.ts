@@ -108,9 +108,7 @@ describe('Checkbox test suite', () => {
                 console.log('Skip for Safari and IE');
                 return;
             }
-            waitForPresent(disabledCheckboxWithoutForm);
             scrollIntoView(disabledCheckboxWithoutForm);
-            waitForElDisplayed(disabledCheckboxWithoutForm);
             checkIfDisabled(disabledCheckboxWithoutForm, 'aria-disabled', 'true');
         });
     });
