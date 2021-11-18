@@ -29,39 +29,63 @@ export type ScrollbarOverflowOptions = 'auto' | 'scroll' | 'hidden';
 export class ScrollbarComponent {
     /** Whether overflow horizontal content should be hidden. */
     @Input()
-    noHorizontalScroll = false;
+    set noHorizontalScroll(value: boolean) {
+        this._noHorizontalScroll = coerceBooleanProperty(value);
+    }
+    get noHorizontalScroll(): boolean {
+        return this._noHorizontalScroll;
+    }
 
     /** Whether overflow vertical content should be hidden. */
     @Input()
-    noVerticalScroll = false;
+    set noVerticalScroll(value: boolean) {
+        this._noVerticalScroll = coerceBooleanProperty(value);
+    }
+    get noVerticalScroll(): boolean {
+        return this._noVerticalScroll;
+    }
 
     /** Whether scrollbars should be visible even if content fits. */
     @Input()
-    alwaysVisible = false;
+    set alwaysVisible(value: boolean) {
+        this._alwaysVisible = coerceBooleanProperty(value);
+    }
+    get alwaysVisible(): boolean {
+        return this._alwaysVisible;
+    }
 
     /** @hidden */
     @HostBinding('style.overflow-x')
-    get _noHorizontalScroll(): ScrollbarOverflowOptions {
-        if (coerceBooleanProperty(this.noHorizontalScroll)) {
+    get _overflowX(): ScrollbarOverflowOptions {
+        if (this.noHorizontalScroll) {
             return 'hidden';
         }
 
-        return this._alwaysVisible;
+        return this._overflow;
     }
 
     /** @hidden */
     @HostBinding('style.overflow-y')
-    get _noVerticalScroll(): ScrollbarOverflowOptions {
-        if (coerceBooleanProperty(this.noVerticalScroll)) {
+    get _overflowY(): ScrollbarOverflowOptions {
+        if (this.noVerticalScroll) {
             return 'hidden';
         }
 
-        return this._alwaysVisible;
+        return this._overflow;
     }
 
     /** @hidden */
-    private get _alwaysVisible(): ScrollbarOverflowOptions {
-        if (coerceBooleanProperty(this.alwaysVisible)) {
+    private _noHorizontalScroll = false;
+
+    /** @hidden */
+    private _noVerticalScroll = false;
+
+    /** @hidden */
+    private _alwaysVisible = false;
+
+    /** @hidden */
+    private get _overflow(): ScrollbarOverflowOptions {
+        if (this.alwaysVisible) {
             return 'scroll';
         }
 

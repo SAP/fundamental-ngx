@@ -1,16 +1,29 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ElementRef, ViewChild } from '@angular/core';
+
 import { ScrollbarModule } from './scrollbar.module';
 
 @Component({
-    template: ` <div #componentElement fd-scrollbar></div> `
+    template: `
+        <div
+            #componentElement
+            fd-scrollbar
+            [noHorizontalScroll]="noHorizontalScroll"
+            [noVerticalScroll]="noVerticalScroll"
+            [alwaysVisible]="alwaysVisible"
+        ></div>
+    `
 })
 class TestComponent {
     @ViewChild('componentElement', { read: ElementRef })
     ref: ElementRef;
+
+    noHorizontalScroll = false;
+    noVerticalScroll = false;
+    alwaysVisible = false;
 }
 
-describe('Scrollbar Parent Component', () => {
+describe('Scrollbar Host Component', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
@@ -35,5 +48,27 @@ describe('Scrollbar Parent Component', () => {
 
     it('should assign class', () => {
         expect(component.ref.nativeElement.className).toBe('fd-scrollbar');
+    });
+
+    it('should hide horizontal overflow content', () => {
+        component.noHorizontalScroll = true;
+        fixture.detectChanges();
+
+        expect(component.ref.nativeElement.style.overflowX).toEqual('hidden');
+    });
+
+    it('should hide vertical overflow content', () => {
+        component.noVerticalScroll = true;
+        fixture.detectChanges();
+
+        expect(component.ref.nativeElement.style.overflowY).toEqual('hidden');
+    });
+
+    it('should make scrollbars always visible', () => {
+        component.alwaysVisible = true;
+        fixture.detectChanges();
+
+        expect(component.ref.nativeElement.style.overflowX).toEqual('scroll');
+        expect(component.ref.nativeElement.style.overflowY).toEqual('scroll');
     });
 });
