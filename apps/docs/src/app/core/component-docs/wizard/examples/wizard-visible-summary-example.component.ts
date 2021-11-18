@@ -1,12 +1,14 @@
-import { Component, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { Component, QueryList, TemplateRef, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { DialogService } from '@fundamental-ngx/core/dialog';
-import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
+import { WizardStepComponent, WizardStepStatus } from '@fundamental-ngx/core/wizard';
+import { WizardService } from 'libs/core/src/lib/wizard/wizard.service';
 
 @Component({
     selector: 'fd-wizard-visible-summary-example',
     templateUrl: './wizard-visible-summary-example.component.html',
     styleUrls: ['./wizard-visible-summary-example.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    providers: [WizardService]
 })
 export class WizardVisibleSummaryExampleComponent {
     step1status: WizardStepStatus = 'current';
@@ -21,7 +23,11 @@ export class WizardVisibleSummaryExampleComponent {
 
     currentStep = 1;
 
-    constructor(private _dialogService: DialogService) {}
+    /** @hidden */
+    @ViewChildren(WizardStepComponent)
+    wizardStepComponents: QueryList<WizardStepComponent>;
+
+    constructor(private _dialogService: DialogService, private _wizardService: WizardService) {}
 
     statusChanged(stepNumber: number, event: WizardStepStatus): void {
         if (event === 'current') {
@@ -84,5 +90,11 @@ export class WizardVisibleSummaryExampleComponent {
                 break;
             }
         }
+    }
+
+    // Handle focus on key press first example
+    /** @hidden */
+    handleFocus(event: KeyboardEvent, index: number) {
+        this._wizardService.progressBarKeyHandler(event, this.wizardStepComponents, index);
     }
 }

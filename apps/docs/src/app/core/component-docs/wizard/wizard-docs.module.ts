@@ -21,6 +21,7 @@ import { TitleModule } from '@fundamental-ngx/core/title';
 import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { WizardVisibleSummaryExampleComponent } from './examples/wizard-visible-summary-example.component';
+import { A11yModule } from '@angular/cdk/a11y';
 
 const routes: Routes = [
     {
@@ -45,7 +46,8 @@ const routes: Routes = [
         FormModule,
         TitleModule,
         LayoutGridModule,
-        DialogModule
+        DialogModule,
+        A11yModule
     ],
     exports: [RouterModule],
     declarations: [

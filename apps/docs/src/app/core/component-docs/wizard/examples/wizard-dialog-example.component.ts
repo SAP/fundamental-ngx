@@ -1,12 +1,14 @@
-import { Component, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { Component, QueryList, TemplateRef, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { DialogService } from '@fundamental-ngx/core/dialog';
-import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
+import { WizardStepComponent, WizardStepStatus } from '@fundamental-ngx/core/wizard';
+import { WizardService } from 'libs/core/src/lib/wizard/wizard.service';
 
 @Component({
     selector: 'fd-wizard-dialog-example',
     templateUrl: './wizard-dialog-example.component.html',
     styleUrls: ['./wizard-dialog-example.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    providers: [WizardService]
 })
 export class WizardDialogExampleComponent {
     step1status: WizardStepStatus = 'current';
@@ -21,7 +23,11 @@ export class WizardDialogExampleComponent {
 
     currentStep = 1;
 
-    constructor(private _dialogService: DialogService) {}
+    /** @hidden */
+    @ViewChildren(WizardStepComponent)
+    steps: QueryList<WizardStepComponent>;
+
+    constructor(private _dialogService: DialogService, private _wizardService: WizardService) {}
 
     statusChanged(stepNumber: number, event: WizardStepStatus): void {
         if (event === 'current') {

@@ -1,6 +1,6 @@
 <button fd-button (click)="enterFullscreenExample()">Click to open full screen</button>
 
-<div cdkScrollable class="docs-wizard-example-overlay" #overlay>
+<div cdkScrollable cdkTrapFocus class="docs-wizard-example-overlay" #overlay>
     <ng-container *ngIf="fullscreen">
         <div class="docs-wizard-example-overlay-content">
             <div class="docs-wizard-example-button">
@@ -10,13 +10,15 @@
             <!-- The Wizard -->
             <fd-wizard>
                 <fd-wizard-navigation>
-                    <ul fd-wizard-progress-bar size="md">
+                    <ul fd-wizard-progress-bar size="md" role="list" aria-label="Wizard Steps">
                         <li
                             fd-wizard-step
                             *ngFor="let step of steps; let i = index"
                             [status]="step.status"
                             (statusChange)="step.status = $event"
                             [label]="step.label"
+                            [ariaLabel]="step.label"
+                            (keydown)="handleFocus($event, i)"
                         >
                             <fd-wizard-step-indicator [glyph]="step.glyph"></fd-wizard-step-indicator>
                             <fd-wizard-content size="md">
