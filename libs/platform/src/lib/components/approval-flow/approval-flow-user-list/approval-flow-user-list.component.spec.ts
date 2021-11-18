@@ -8,6 +8,7 @@ import { PlatformListModule } from '../../list/list.module';
 import { StandardListItemModule } from '../../list/public_api';
 import { ApprovalUser } from '../interfaces';
 import { ApprovalFlowUserListComponent } from './approval-flow-user-list.component';
+import { SimpleChanges } from '@angular/core';
 
 
 describe('ApprovalFlowUserListComponent', () => {
@@ -47,7 +48,10 @@ describe('ApprovalFlowUserListComponent', () => {
         await fixture.whenStable();
 
         component.selectedUsers = approvalUsers;
+
+        component.ngOnChanges({ users: {} as any } as SimpleChanges);
         fixture.detectChanges();
+        await fixture.whenRenderingDone();
 
         component.ngAfterViewInit();
 
