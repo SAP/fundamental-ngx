@@ -44,11 +44,15 @@ export class PlatformApprovalFlowExampleComponent implements OnDestroy {
     allStatuses = ['in progress', 'not started', 'approved', 'rejected'];
     sendReminderStatuses: ApprovalStatus[] = ['in progress', 'not started'];
 
+    /** @hidden */
     disableSaveButton = false;
+
+    /** @hidden */
     disableExitButton = false;
 
     private _subscriptions = new Subscription();
 
+    /** @hidden */
     private newNodes: ApprovalNode[] = [];
 
     ngOnDestroy(): void {
@@ -92,7 +96,7 @@ export class PlatformApprovalFlowExampleComponent implements OnDestroy {
             this.fetchOneFromDatasource().subscribe((approvalGraph) => {
                 approvalGraph.nodes.forEach((node) => {
                     if (this.newNodes.find((newNode) => newNode.id === node.id)) {
-                        const meta = this._approvalFlow.getMetadata(node.id);
+                        const meta = this._approvalFlow.getNodeMetadataByNodeId(node.id);
 
                         meta.canAddNodeAfter = !this.nodeActionsConfigForNewNodes.disableAddAfter;
                         meta.canAddNodeBefore = !this.nodeActionsConfigForNewNodes.disableAddBefore;
@@ -107,12 +111,14 @@ export class PlatformApprovalFlowExampleComponent implements OnDestroy {
         console.log('Node click handler', node);
     }
 
+    /** Event listener for afterNodeAdd event */
     afterNodeAdd(node: ApprovalNode): void {
         this.newNodes.push(node);
 
         this.newNodeSettingsChange();
     }
 
+    /** Event listener for afterNodeEdit event */
     afterNodeEdit(node: ApprovalNode): void {
         this.newNodeSettingsChange();
     }

@@ -308,7 +308,8 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             });
     }
 
-    getMetadata(nodeId: string): ApprovalGraphNodeMetadata {
+    /** Retrive metadata by node id */
+    getNodeMetadataByNodeId(nodeId: string): ApprovalGraphNodeMetadata {
         return this._graphMetadata[nodeId];
     }
 
