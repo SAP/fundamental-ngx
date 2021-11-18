@@ -2,6 +2,7 @@ import { MenuPo } from '../pages/menu.po';
 import {
     click,
     getElementArrayLength,
+    getElementClass,
     getText,
     isElementDisplayed,
     mouseHoverElement,
@@ -21,7 +22,13 @@ describe('Menu component test suite', () => {
         menuItemOverlay,
         cascadingMenuBtn,
         cascadingMenuItemsArr,
-        cascadingVegMenuItemsArr
+        cascadingVegMenuItemsArr,
+        menuWithIconsBtn,
+        menuWithIconsItem,
+        menuWithIconsIcon,
+        menuWithIconsAddon,
+        menuWithIconsItemText,
+        selectedItemLabel
     } = menuPage;
 
     beforeAll(() => {
@@ -44,6 +51,39 @@ describe('Menu component test suite', () => {
         for (let i = 0; basicMenuBtnTextArr > i; i++) {
             expect(isElementDisplayed(menuBtnTextArr, i)).toBe(true);
         }
+    });
+
+    it('should check selecting item', () => {
+        click(menuWithIconsBtn);
+        const itemText = getText(menuWithIconsItemText);
+        click(menuWithIconsItem);
+        expect(getText(selectedItemLabel)).toEqual(`Item Selected: ${itemText}`);
+    });
+
+    it('should check that all icons are displayed in Menu with icons example', () => {
+        click(menuWithIconsBtn);
+        const iconsLength = getElementArrayLength(menuWithIconsIcon);
+        for (let i = 0; i < iconsLength; i++) {
+            expect(isElementDisplayed(menuWithIconsIcon, i)).toBe(true);
+        }
+    });
+
+    it('should check that icon can be aligned left', () => {
+        click(menuWithIconsBtn);
+        // means icon before span
+        expect(getElementClass(menuWithIconsAddon)).toContain('before');
+    });
+
+    it('should check that icon can be aligned right', () => {
+        click(menuWithIconsBtn);
+        // means icon after span
+        expect(getElementClass(menuWithIconsAddon, 3)).toContain('after');
+    });
+
+    it('should check that icon can be aligned right and left', () => {
+        click(menuWithIconsBtn);
+        expect(getElementClass(menuWithIconsAddon, 2)).toContain('after');
+        expect(getElementClass(menuWithIconsAddon, 1)).toContain('before');
     });
 
     it('should check menu item text', () => {

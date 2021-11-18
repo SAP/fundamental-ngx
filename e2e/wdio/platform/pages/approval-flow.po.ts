@@ -13,7 +13,7 @@ export class ApprovalFlowPo extends BaseComponentPo {
     detailsDialogSearchInput = this.detailsDialog + ' input';
     detailsDialogTeamMember = this.detailsDialog + ' li';
     detailsDialogTeamMemberName = this.detailsDialog + ' .fd-list__title';
-    detailsDialogTeamMemberCheckBox = this.detailsDialogTeamMember + ' input ';
+    detailsDialogTeamMemberCheckBox = this.detailsDialogTeamMember + ' fd-checkbox ';
     detailsDialogBackIcon = this.detailsDialog + ' fd-icon';
     detailsDialogHeader = ' fd-dialog-container .fd-dialog__header';
     detailsDialogAvatar = this.detailsDialog + ' fd-avatar';
@@ -67,7 +67,7 @@ export class ApprovalFlowPo extends BaseComponentPo {
     radioButton = this.detailsDialog + ' fd-radio-button';
     footerButtons = this.detailsDialog + ' .fd-bar__element .fd-button';
     nodeCardInfo = '.fdp-approval-flow-node__info';
-    dialogCheckbox = this.detailsDialog + ' .fd-checkbox';
+    dialogCheckbox = this.detailsDialog + ' fd-checkbox';
     reminderToaster = '.fd-message-toast-container .fd-message-toast';
     dueDateNode = '.fd-grid-list__item-body .fd-object-status--critical';
 

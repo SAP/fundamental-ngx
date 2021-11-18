@@ -14,6 +14,11 @@ export class AlertPo extends CoreBaseComponentPo {
     openOverlayButton = 'fd-alert-component-as-content-example' + this.button;
     popupAlert = 'fd-alert-container fd-alert';
     openCustomAlertButton = 'fd-alert-width-example' + this.button;
+    playgroundAlertText = '.fd-playground .fd-alert__text ';
+    messageField = '#playgroundmessage';
+    alertWidthField = '#playgroundwidth';
+    checkbox = '.fd-checkbox__label';
+    openAlertButton = 'playground .fd-button--standard';
 
     open(): void {
         super.open(this.url);
