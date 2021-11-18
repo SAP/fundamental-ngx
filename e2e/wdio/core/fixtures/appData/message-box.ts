@@ -15,5 +15,5 @@ export const sectionsArr = [
     'fd-semantic-types-example ',
     'fd-message-box-position-example ',
     'fd-message-box-mobile-example ',
-    'fd-complex-template-example ',
+    'fd-complex-template-example '
 ];

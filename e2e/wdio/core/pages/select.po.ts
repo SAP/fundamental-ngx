@@ -7,7 +7,7 @@ export class SelectPo extends CoreBaseComponentPo {
     selectModesExample = 'fd-select-mode-example';
     displayedText = ' .fd-select__text-content';
     buttons = ' button';
-    option = '[role="option"]';
+    option = ' [role="option"]';
     overlayContainer = '.cdk-overlay-container';
     selectSemanticStatesExample = 'fd-select-semantic-state-example';
     customControlExample = 'fd-select-custom-trigger';

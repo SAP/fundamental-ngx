@@ -121,7 +121,7 @@ describe('Message-box test suits', () => {
             checkClosingMessageBoxByPressEscape(mobileExample);
         });
     });
-    
+
     describe('Complex template example', () => {
         it('Should check working of message-boxes', () => {
             checkMessageBoxWorking(complexTemplateExample);

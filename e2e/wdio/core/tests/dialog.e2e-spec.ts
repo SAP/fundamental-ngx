@@ -524,11 +524,10 @@ describe('dialog test suite', () => {
         // skipped due to https://github.com/SAP/fundamental-ngx/issues/7195
         xit('should check required fields validation', () => {
             openDialog(formDialog);
-            for(let i = 1; i < 4; i++){
+            for (let i = 1; i < 4; i++) {
                 clearValue(dialogInput, i);
                 expect(getElementClass(dialogInput, i)).toContain('is-error');
             }
-            
         });
 
         it('should check close dialog via escape', () => {
@@ -540,7 +539,6 @@ describe('dialog test suite', () => {
             openDialog(formDialog);
             expect(getElementClass(dialogBody)).not.toContain('no-vertical-padding');
         });
-
     });
 
     xdescribe('visual regression', () => {
