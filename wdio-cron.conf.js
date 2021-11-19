@@ -23,7 +23,8 @@ const allCapabilities = [
         acceptInsecureCerts: true,
         'sauce:options': {
             screenResolution: '1920x1080',
-            name: 'e2e-win-edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH
+            name: 'e2e-win-edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+            maxDuration: 2200
         }
     },
     {
@@ -34,7 +35,8 @@ const allCapabilities = [
         acceptInsecureCerts: true,
         'sauce:options': {
             screenResolution: '1920x1440',
-            name: 'e2e-MAC-Edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH
+            name: 'e2e-MAC-Edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+            maxDuration: 2200
         }
     },
     {
@@ -45,7 +47,8 @@ const allCapabilities = [
         acceptInsecureCerts: true,
         'sauce:options': {
             name: 'e2e-win-firefox ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-            screenResolution: '1920x1080'
+            screenResolution: '1920x1080',
+            maxDuration: 2200
         }
     },
     {
@@ -56,7 +59,8 @@ const allCapabilities = [
         acceptInsecureCerts: true,
         'sauce:options': {
             screenResolution: '1920x1440',
-            name: 'e2e-MAC-firefox ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH
+            name: 'e2e-MAC-firefox ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+            maxDuration: 2200
         }
     },
     {
@@ -67,7 +71,8 @@ const allCapabilities = [
         acceptInsecureCerts: true,
         'sauce:options': {
             screenResolution: '1920x1080',
-            name: 'e2e-win-chrome ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH
+            name: 'e2e-win-chrome ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+            maxDuration: 2200
         }
     },
     {
@@ -78,7 +83,8 @@ const allCapabilities = [
         acceptInsecureCerts: true,
         'sauce:options': {
             name: 'e2e-MAC-chrome ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-            screenResolution: '1920x1440'
+            screenResolution: '1920x1440',
+            maxDuration: 2200
         }
     }
 
@@ -122,7 +128,7 @@ exports.config = {
     //
     specs: ['./e2e/wdio/**/*.e2e-spec.ts'],
     // Patterns to exclude.
-    exclude: [],
+    exclude: ['./e2e/wdio/platform/**/wizard-generator.e2e-spec.ts'],
     suites: {
         platformA: [
             './e2e/wdio/platform/**/action-bar.e2e-spec.ts',
@@ -169,8 +175,8 @@ exports.config = {
             './e2e/wdio/platform/**/thumbnail.e2e-spec.ts',
             './e2e/wdio/platform/**/time-picker.e2e-spec.ts',
             './e2e/wdio/platform/**/upload-collection.e2e-spec.ts',
-            './e2e/wdio/platform/**/value-help-dialog.e2e-spec.ts',
-            './e2e/wdio/platform/**/wizard-generator.e2e-spec.ts'
+            './e2e/wdio/platform/**/value-help-dialog.e2e-spec.ts'
+            // './e2e/wdio/platform/**/wizard-generator.e2e-spec.ts'
         ]
     },
     // ============
