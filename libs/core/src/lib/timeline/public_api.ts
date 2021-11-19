@@ -15,3 +15,11 @@ export * from './components/timeline-node-header/timeline-node-header.component'
 export * from './components/timeline-node-header/timeline-node-header-info/timeline-node-header-info.component';
 
 export * from './types';
+
+export * from './services/position-strategies/base-strategy';
+export * from './services/position-strategies/horizontal-double-sides-strategy';
+export * from './services/position-strategies/horizontal-single-side-strategy';
+export * from './services/position-strategies/position-strategy-factory';
+export * from './services/position-strategies/vertical-double-sides-strategy';
+export * from './services/position-strategies/vertical-single-side-strategy';
+export * from './services/timeline-position-control.service';
