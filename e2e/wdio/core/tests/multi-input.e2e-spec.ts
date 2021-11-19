@@ -3,6 +3,7 @@ import {
     doesItExist,
     getAttributeByName,
     getElementArrayLength,
+    getElementClass,
     getText,
     isElementDisplayed,
     refreshPage,
@@ -50,7 +51,9 @@ describe('Multi input test suite', () => {
         listItem,
         popover,
         compactExampleTokens,
-        dialogCheckbox
+        dialogCheckbox,
+        selectAllItemsBtn,
+        dialogListItem
     } = multiInputPage;
 
     beforeAll(() => {
@@ -208,6 +211,28 @@ describe('Multi input test suite', () => {
             for (let i = 0; i < inputOptionsLength - 8; i++) {
                 scrollIntoView(mobileInputOptions, i);
                 expect(getText(mobileInputOptions, i)).toBe(testOptionsArray1[i]);
+            }
+        });
+
+        it('should check selecting all items by clicking Select All button', () => {
+            scrollIntoView(activeDropdownButtons, 2);
+            click(activeDropdownButtons, 2);
+            const optionsLength = getElementArrayLength(dialogCheckbox);
+            click(selectAllItemsBtn);
+            for (let i = 0; i < optionsLength; i++) {
+                expect(getElementClass(dialogListItem, i)).toContain('is-selected');
+            }
+        });
+
+        // skipped due to https://github.com/SAP/fundamental-ngx/issues/7203
+        xit('should check unselecting all items after selecting by Select All button', () => {
+            scrollIntoView(activeDropdownButtons, 2);
+            click(activeDropdownButtons, 2);
+            const optionsLength = getElementArrayLength(dialogCheckbox);
+            click(selectAllItemsBtn);
+            click(selectAllItemsBtn);
+            for (let i = 0; i < optionsLength; i++) {
+                expect(getElementClass(dialogListItem, i)).not.toContain('is-selected');
             }
         });
     });
