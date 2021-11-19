@@ -53,6 +53,22 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
     @Input()
     status: ObjectStatus;
 
+    /** variable for i18n */
+    @Input()
+    statusNegative = 'negative';
+
+    /** variable for i18n */
+    @Input()
+    statusCritical = 'critical';
+
+    /** variable for i18n */
+    @Input()
+    statusPositive = 'positive';
+
+    /** variable for i18n */
+    @Input()
+    statusInformative = 'informative';
+
     /** @hidden */
     @HostBinding('attr.aria-label')
     get _ariaLabel(): string {
@@ -60,16 +76,16 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
             const label = this._elementRef.nativeElement.textContent;
             switch (this.status) {
                 case 'negative':
-                    this.ariaLabel = 'Alert ' + label;
+                    this.ariaLabel = this.statusNegative + ' ' + label;
                     break;
                 case 'critical':
-                    this.ariaLabel = 'Warning ' + label;
+                    this.ariaLabel = this.statusCritical + ' ' + label;
                     break;
                 case 'informative':
-                    this.ariaLabel = 'Information ' + label;
+                    this.ariaLabel = this.statusInformative + ' ' + label;
                     break;
                 case 'positive':
-                    this.ariaLabel = 'Success ' + label;
+                    this.ariaLabel = this.statusPositive + ' ' + label;
                     break;
                 default:
                     this.ariaLabel = null;
