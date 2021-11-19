@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.152 (2021-11-19)
+
+
+### Bug Fixes
+
+* **core:** disable field clear at suggestion select ([#7130](https://github.com/SAP/fundamental-ngx/issues/7130)) ([6685cfd](https://github.com/SAP/fundamental-ngx/commit/6685cfd923ff2527cb948f015fe2deb512d82692))
+
 ## 0.33.0-rc.151 (2021-11-18)
 
 ## 0.33.0-rc.150 (2021-11-18)
