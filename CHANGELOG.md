@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.154 (2021-11-19)
+
+
+### Bug Fixes
+
+* **core:** add liveAnnouncer to message-toast service ([#7103](https://github.com/SAP/fundamental-ngx/issues/7103)) ([e231dd2](https://github.com/SAP/fundamental-ngx/commit/e231dd281c9e4947ed8bd0dd156712f87a3960ad))
+
 ## 0.33.0-rc.153 (2021-11-19)
 
 
