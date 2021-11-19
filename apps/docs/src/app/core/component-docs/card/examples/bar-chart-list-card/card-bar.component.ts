@@ -14,6 +14,9 @@ export class CardBarComponent {
     /** value in percentage, minimum 0, maximum 100 */
     @Input() value = 0;
 
-    /** sttus name: information, warning, critical, success */
+    /** status name: information, warning, critical, success */
     @Input() status: CardBarStatus = 'information';
+
+    /** variable for i18n */
+    @Input() labeli18n: string = this.status;
 }
