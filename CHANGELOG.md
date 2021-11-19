@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.153 (2021-11-19)
+
+
+### Bug Fixes
+
+* **platform:** value help dialog table cell ([#7202](https://github.com/SAP/fundamental-ngx/issues/7202)) ([8eee662](https://github.com/SAP/fundamental-ngx/commit/8eee662eab9e275f3de69a1fb66a16134ea4ecc4))
+
 ## 0.33.0-rc.152 (2021-11-19)
 
 
