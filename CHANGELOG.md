@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.155 (2021-11-19)
+
+
+### Bug Fixes
+
+* **core,platform:** file uploader form reset ([#7101](https://github.com/SAP/fundamental-ngx/issues/7101)) ([24f69cd](https://github.com/SAP/fundamental-ngx/commit/24f69cdf58db8a561e2c7c682c3a22ccbe62d829))
+
 ## 0.33.0-rc.154 (2021-11-19)
 
 
