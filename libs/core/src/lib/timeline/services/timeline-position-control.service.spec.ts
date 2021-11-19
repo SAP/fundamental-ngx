@@ -1,11 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
+import { TimelineNodeComponent } from '@fundamental-ngx/core/timeline';
+
 import { TimelinePositionControlService } from './timeline-position-control.service';
 import { HorizontalSingleSideStrategy } from './position-strategies/horizontal-single-side-strategy';
 import { VerticalSingleSideStrategy } from './position-strategies/vertical-single-side-strategy';
 import { VerticalDoubleSidesStrategy } from './position-strategies/vertical-double-sides-strategy';
 import { HorizontalDoubleSidesStrategy } from './position-strategies/horizontal-double-sides-strategy';
-import { TimelineNodeComponent } from '@fundamental-ngx/core';
 
 describe('TimelinePositionControlService', () => {
     let service: TimelinePositionControlService;
