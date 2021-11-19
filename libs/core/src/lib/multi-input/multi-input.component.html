@@ -111,7 +111,7 @@
         >
             <fd-checkbox
                 [compact]="compact"
-                (ngModelChange)="_handleSelect($event, value)"
+                (ngModelChange)="_handleSelect($event, value, false)"
                 [ngModel]="selected.indexOf(value) !== -1"
             >
             </fd-checkbox>
