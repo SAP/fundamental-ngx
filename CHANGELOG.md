@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.156 (2021-11-19)
+
+
+### Bug Fixes
+
+* **core:** checkbox broken VoiceOver outline ([#7036](https://github.com/SAP/fundamental-ngx/issues/7036)) ([26144f5](https://github.com/SAP/fundamental-ngx/commit/26144f55268ebe3643d00a862b6b4bdf25d5be39))
+
 ## 0.33.0-rc.155 (2021-11-19)
 
 
