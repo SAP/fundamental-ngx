@@ -165,7 +165,7 @@
     "@wdio/sauce-service": "7.7.4",
     "@wdio/spec-reporter": "7.7.3",
     "@wdio/sync": "7.8.0",
-    "angular-cli-ghpages": "1.0.0-rc.1",
+    "angular-cli-ghpages": "1.0.0",
     "autoprefixer": "10.2.5",
     "axe-core": "4.3.5",
     "axe-html-reporter": "2.2.0",
