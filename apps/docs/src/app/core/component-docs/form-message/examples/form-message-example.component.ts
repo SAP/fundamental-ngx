@@ -16,5 +16,5 @@ export class FormMessageExampleComponent {
 
     options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];
 
-    selected = ['Apple', 'Banana'];
+    selected: string[] = ['Apple', 'Banana'];
 }
