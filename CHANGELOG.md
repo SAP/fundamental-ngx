@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.159 (2021-11-22)
+
+
+### Bug Fixes
+
+* **core:** fix combobox in shellbar ([#7196](https://github.com/SAP/fundamental-ngx/issues/7196)) ([043aec3](https://github.com/SAP/fundamental-ngx/commit/043aec3ec3c39fa255baf0594f67825570e91801))
+
 ## 0.33.0-rc.158 (2021-11-22)
 
 
