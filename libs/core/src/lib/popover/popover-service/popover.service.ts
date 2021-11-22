@@ -62,6 +62,9 @@ export class PopoverService extends BasePopoverClass {
     /** @hidden */
     private _templateData: PopoverTemplate;
 
+    /** @hidden */
+    private _prevTrigger: string;
+
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
@@ -222,11 +225,21 @@ export class PopoverService extends BasePopoverClass {
             this.triggers.forEach((trigger) => {
                 this._eventRef.push(
                     this._renderer.listen(this._triggerElement.nativeElement, trigger, () => {
-                        this.toggle();
+                        this._isToggle(trigger);
                     })
                 );
             });
         }
+    }
+
+    /** @hidden */
+    private _isToggle(trigger: string): void {
+        // prevent unexpected toggling when it triggers the same event
+        if (this._prevTrigger !== trigger || this.triggers?.length <= 1) {
+            this.toggle();
+        }
+
+        this._prevTrigger = trigger;
     }
 
     /** @hidden */

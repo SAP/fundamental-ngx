@@ -1,6 +1,6 @@
 <div fd-form-item class="fd-custom-form-item-message">
     <label fd-form-label for="input-message" id="label-input"> Message With Input </label>
-    <fd-form-input-message-group>
+    <fd-form-input-message-group [triggers]="['click']">
         <input
             fd-form-control
             type="text"
@@ -82,6 +82,22 @@
         </textarea>
         <fd-form-message type="information" id="message-textarea">
             This message is only triggered by focusing inside the textarea. The message box placement is also changed.
+        </fd-form-message>
+    </fd-form-input-message-group>
+</div>
+
+<div fd-form-item class="fd-custom-form-item-message">
+    <label fd-form-label for="input-54"> Message with Multi Input - Hover </label>
+    <fd-form-input-message-group [triggers]="['mouseover', 'mouseout']">
+        <fd-multi-input
+            id="input-54"
+            placeholder="Search here..."
+            state="information"
+            [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato', 'Kiwi', 'Strawberry', 'Blueberry', 'Orange']"
+            [(ngModel)]="selected"
+        ></fd-multi-input>
+        <fd-form-message type="information">
+            Pellentesque metus lacus commodo eget justo ut rutrum varius nunc
         </fd-form-message>
     </fd-form-input-message-group>
 </div>
