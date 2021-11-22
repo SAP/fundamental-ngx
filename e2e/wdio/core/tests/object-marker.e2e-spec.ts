@@ -2,7 +2,8 @@ import { ObjectMarkerPo } from '../pages/object-marker.po';
 import {
     click,
     getElementAriaLabel,
-    getElementArrayLength, getElementClass,
+    getElementArrayLength,
+    getElementClass,
     getElementTitle,
     refreshPage,
     scrollIntoView,

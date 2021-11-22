@@ -1,7 +1,9 @@
 import { TextPo } from '../pages/text.po';
 import {
     checkElementScreenshot,
-    click, getElementArrayLength, getElementSize,
+    click,
+    getElementArrayLength,
+    getElementSize,
     getImageTagBrowserPlatform,
     getText,
     refreshPage,
