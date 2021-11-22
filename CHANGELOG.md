@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.163 (2021-11-22)
+
+
+### Bug Fixes
+
+* **core:** static dialog nobackdrop position fix ([#7072](https://github.com/SAP/fundamental-ngx/issues/7072)) ([0fa9d6b](https://github.com/SAP/fundamental-ngx/commit/0fa9d6b44c693702971bb3f455076c309c2efd0e))
+
 ## 0.33.0-rc.162 (2021-11-22)
 
 
