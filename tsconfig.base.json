@@ -83,6 +83,7 @@
             "@fundamental-ngx/core/rating-indicator": ["libs/core/src/lib/rating-indicator/index.ts"],
             "@fundamental-ngx/core/resizable-card-layout": ["libs/core/src/lib/resizable-card-layout/index.ts"],
             "@fundamental-ngx/core/scroll-spy": ["libs/core/src/lib/scroll-spy/index.ts"],
+            "@fundamental-ngx/core/scrollbar": ["libs/core/src/lib/scrollbar/index.ts"],
             "@fundamental-ngx/core/segmented-button": ["libs/core/src/lib/segmented-button/index.ts"],
             "@fundamental-ngx/core/select": ["libs/core/src/lib/select/index.ts"],
             "@fundamental-ngx/core/shared": ["libs/core/src/lib/shared/index.ts"],

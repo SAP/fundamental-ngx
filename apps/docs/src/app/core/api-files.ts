@@ -397,5 +397,6 @@ export const API_FILES = {
         'TimelineNodeHeaderInfoTextDirective',
         'TimelineNodeActionDirective',
         'TimelineHeaderInfoSubTitleDirective'
-    ]
+    ],
+    scrollbar: ['ScrollbarComponent']
 };

@@ -509,6 +509,11 @@ export const ROUTES: Routes = [
                 path: 'timeline',
                 loadChildren: () =>
                     import('./component-docs/timeline/timeline-docs.module').then((m) => m.TimelineDocsModule)
+            },
+            {
+                path: 'scrollbar',
+                loadChildren: () =>
+                    import('./component-docs/scrollbar/scrollbar-docs.module').then((m) => m.ScrollbarDocsModule)
             }
         ]
     }
