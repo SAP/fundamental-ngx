@@ -40,15 +40,7 @@ interface RatingViewItem {
 @Component({
     selector: 'fd-rating-indicator',
     templateUrl: './rating-indicator.component.html',
-    styleUrls: [
-        './rating-indicator.component.scss',
-        /*
-         * NOTE: Will be remove this style after merge PR with fix for this issue:
-         * Issue link: https://github.com/SAP/fundamental-styles/issues/1753
-         * PR link: https://github.com/SAP/fundamental-styles/pull/1782
-         */
-        './rating-indicator.css'
-    ],
+    styleUrls: ['./rating-indicator.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
