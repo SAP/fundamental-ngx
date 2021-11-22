@@ -17,6 +17,7 @@ import {
     pause,
     refreshPage,
     scrollIntoView,
+    sendKeys,
     setValue,
     waitForElDisplayed,
     waitForPresent
@@ -52,7 +53,7 @@ import {
     massaTestText
 } from '../fixtures/appData/table-contents';
 
-describe('Table component test suite', function () {
+describe('Table component test suite', () => {
     const tablePage = new TablePo();
     const {
         tableDefaultExample,
@@ -146,7 +147,7 @@ describe('Table component test suite', function () {
         waitForPresent(tableDefaultExample);
     }, 1);
 
-    describe('Check Simple Table example', function () {
+    describe('Check Simple Table example', () => {
         it('should check alert messages', () => {
             checkAlertMessages(tableDefaultExample);
         });
@@ -156,7 +157,7 @@ describe('Table component test suite', function () {
         });
     });
 
-    describe('Check Custom Column Width & Column Resizing', function () {
+    describe('Check Custom Column Width & Column Resizing', () => {
         it('should check alert messages', () => {
             checkAlertMessages(tableCustomWidthExample);
         });
@@ -166,7 +167,7 @@ describe('Table component test suite', function () {
         });
     });
 
-    describe('Check Activable Rows', function () {
+    describe('Check Activable Rows', () => {
         it('should check alert messages', () => {
             checkAlertMessages(tableActivableExample);
         });
@@ -181,7 +182,7 @@ describe('Table component test suite', function () {
         });
     });
 
-    describe('Check Custom Column', function () {
+    describe('Check Custom Column', () => {
         it('should check table item single selection', () => {
             scrollIntoView(tableCustomColumnExample);
             setValue(tableCustomColumnExample + input, testText);
@@ -204,7 +205,7 @@ describe('Table component test suite', function () {
         });
     });
 
-    describe('Check Single Row Selection', function () {
+    describe('Check Single Row Selection', () => {
         it('should check table item single selection', () => {
             findElementInTable(tableSingleRowSelectionExample, tableCellArr);
         });
@@ -225,13 +226,13 @@ describe('Table component test suite', function () {
         });
     });
 
-    describe('Check Multi Row Selection', function () {
+    describe('Check Multi Row Selection', () => {
         it('should verify checkboxes', () => {
             checkAllCheckbox(tableMultipleRowSelectionExample);
         });
     });
 
-    describe('Check Column Sorting', function () {
+    describe('Check Column Sorting', () => {
         it('should check table item single selection', () => {
             findElementInTable(tableSortableExample, tableCellArr);
         });
@@ -277,7 +278,7 @@ describe('Table component test suite', function () {
         });
     });
 
-    describe('Check Column Filtering', function () {
+    describe('Check Column Filtering', () => {
         it('should check table item single selection', () => {
             findElementInTable(tableFilterableExample, tableCellArr, 1);
         });
@@ -327,7 +328,7 @@ describe('Table component test suite', function () {
         });
     });
 
-    describe('Check Column Grouping', function () {
+    describe('Check Column Grouping', () => {
         it('should check table item single selection', () => {
             findElementInTable(tableGroupableExample, tableCellArr);
         });
@@ -363,7 +364,7 @@ describe('Table component test suite', function () {
         });
     });
 
-    describe('Check Column Freezing', function () {
+    describe('Check Column Freezing', () => {
         it('should check table item single selection', () => {
             scrollIntoView(tableFreezableExample);
             setValue(tableFreezableExample + input, tableCellArr[1]);
@@ -381,7 +382,7 @@ describe('Table component test suite', function () {
         });
     });
 
-    describe('Check Loading/Busy State', function () {
+    describe('Check Loading/Busy State', () => {
         it('should check alert messages', () => {
             checkAlertMessages(tableLoadingExample);
         });
@@ -412,7 +413,7 @@ describe('Table component test suite', function () {
         });
     });
 
-    describe('Check Page Scrolling', function () {
+    describe('Check Page Scrolling', () => {
         it('should check table item single selection', () => {
             scrollIntoView(tablePageScrollingExample);
             setValue(tablePageScrollingExample + input, testText2);
@@ -439,7 +440,7 @@ describe('Table component test suite', function () {
         });
     });
 
-    describe('Check Initial State', function () {
+    describe('Check Initial State', () => {
         it('should check table item single selection', () => {
             scrollIntoView(tableInitialStateExample);
             setValue(tableInitialStateExample + input, testText3);
@@ -466,7 +467,7 @@ describe('Table component test suite', function () {
         });
     });
 
-    describe('Check Table columns visibility and order', function () {
+    describe('Check Table columns visibility and order', () => {
         it('should check table item single selection', () => {
             findElementInTable(tableP13ColumnsExample, tableCellArr4);
         });
@@ -481,7 +482,7 @@ describe('Table component test suite', function () {
         });
     });
 
-    describe('Check Sorting by multiple columns', function () {
+    describe('Check Sorting by multiple columns', () => {
         it('should check table item single selection', () => {
             findElementInTable(tableP13SortExample, tableCellArr4);
         });
@@ -545,7 +546,7 @@ describe('Table component test suite', function () {
         });
     });
 
-    describe('Check Filtering by multiple columns', function () {
+    describe('Check Filtering by multiple columns', () => {
         it('should check table item single selection', () => {
             findElementInTable(tableP13FilterExample, tableCellArr5);
         });
@@ -582,7 +583,7 @@ describe('Table component test suite', function () {
         });
     });
 
-    describe('Check Grouping by multiple columns', function () {
+    describe('Check Grouping by multiple columns', () => {
         it('should check table item single selection', () => {
             findElementInTable(tableP13GroupExample, tableCellArr4);
         });
@@ -597,7 +598,7 @@ describe('Table component test suite', function () {
         });
     });
 
-    describe('Check  Navigatable rows', function () {
+    describe('Check  Navigatable rows', () => {
         it('should check clickable elements', () => {
             scrollIntoView(tableNavigatableRowIndicatorExample);
             click(tableNavigatableRowIndicatorExample + button);
@@ -616,7 +617,7 @@ describe('Table component test suite', function () {
         });
     });
 
-    describe('Check placeholders', function () {
+    describe('Check placeholders', () => {
         it('should check placeholders in all input fields', () => {
             const inputLength = getElementArrayLength(inputFields);
             for (let i = 0; i < inputLength; i++) {
@@ -625,7 +626,7 @@ describe('Table component test suite', function () {
         });
     });
 
-    describe('Check playground', function () {
+    describe('Check playground', () => {
         it('should check table item single selection', () => {
             scrollIntoView(playgroundExample);
             setValue(playgroundExample + inputFields, tableCellArr[1]);
@@ -719,13 +720,13 @@ describe('Table component test suite', function () {
         expect(nonFilterRowCount).toEqual(16);
     });
 
-    describe('Check Custom component to render "No data" message', function () {
+    describe('Check Custom component to render "No data" message', () => {
         it('should check alert messages', () => {
             checkAlertMessages(tableNoItemsTemplateExample);
         });
     });
 
-    describe('Check Semantic Highlighting', function () {
+    describe('Check Semantic Highlighting', () => {
         it('should check alert messages', () => {
             checkAlertMessages(tableSemanticExample);
         });
@@ -735,13 +736,13 @@ describe('Table component test suite', function () {
         });
     });
 
-    describe('Check Row custom CSS class', function () {
+    describe('Check Row custom CSS class', () => {
         it('should check table item single selection', () => {
             findElementInTable(tableRowClassExample, tableCellArr);
         });
     });
 
-    describe('Check input fields', function () {
+    describe('Check input fields', () => {
         it('should check input fields does not change width', () => {
             const inputFieldLength = getElementArrayLength(allInputFields);
             for (let i = 0; i < inputFieldLength; i++) {
@@ -749,14 +750,16 @@ describe('Table component test suite', function () {
                     continue;
                 }
                 const beforeSize = getElementSize(allInputFields, i);
-                setValue(allInputFields, 'test', i);
+                scrollIntoView(allInputFields, i);
+                click(allInputFields, i);
+                sendKeys('test');
                 const afterSize = getElementSize(allInputFields, i);
                 expect(beforeSize).toEqual(afterSize);
             }
         });
     });
 
-    describe('Check orientation', function () {
+    describe('Check orientation', () => {
         it('should check RTL and LTR orientation', () => {
             const exampleAreaContainersArr = '.fd-doc-component';
             const rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
@@ -777,7 +780,7 @@ describe('Table component test suite', function () {
         });
     });
 
-    xdescribe('Check visual regression', function () {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             tablePage.saveExampleBaselineScreenshot();
             expect(tablePage.compareWithBaseline()).toBeLessThan(5);
