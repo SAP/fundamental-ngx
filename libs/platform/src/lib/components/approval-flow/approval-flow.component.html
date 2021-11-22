@@ -158,6 +158,7 @@
                 i18n-label="@@platformApprovalFlowEditModeSave"
                 [compact]="true"
                 fdType="emphasized"
+                [disabled]="disableSaveButton"
                 (click)="_saveEditModeChanges()"
             ></button>
         </fd-bar-element>
@@ -169,6 +170,7 @@
                 i18n-label="@@platformApprovalFlowEditModeExit"
                 [compact]="true"
                 fdType="transparent"
+                [disabled]="disableExitButton"
                 (click)="_exitEditMode()"
             ></button>
         </fd-bar-element>
