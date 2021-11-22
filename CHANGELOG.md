@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.157 (2021-11-22)
+
+
+### Features
+
+* **core:** scrollbar ([#7199](https://github.com/SAP/fundamental-ngx/issues/7199)) ([43aa6de](https://github.com/SAP/fundamental-ngx/commit/43aa6de6049459f899e78996faa94bef5ea22625))
+
 ## 0.33.0-rc.156 (2021-11-19)
 
 
