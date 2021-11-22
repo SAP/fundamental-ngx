@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.158 (2021-11-22)
+
+
+### Bug Fixes
+
+* **core:** intersection observable for unsupported browsers ([#7206](https://github.com/SAP/fundamental-ngx/issues/7206)) ([c8f9f80](https://github.com/SAP/fundamental-ngx/commit/c8f9f80f18143680cbb88b4f51858e0cc584e5b2))
+
 ## 0.33.0-rc.157 (2021-11-22)
 
 
