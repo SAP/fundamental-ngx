@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.162 (2021-11-22)
+
+
+### Bug Fixes
+
+* **core:** rating indicator, fix a11y issues ([#6602](https://github.com/SAP/fundamental-ngx/issues/6602)) ([943bc9a](https://github.com/SAP/fundamental-ngx/commit/943bc9ac39967658bfa3c5223233bb2d81d917d5)), closes [#6601](https://github.com/SAP/fundamental-ngx/issues/6601) [#6793](https://github.com/SAP/fundamental-ngx/issues/6793)
+
 ## 0.33.0-rc.161 (2021-11-22)
 
 ## 0.33.0-rc.160 (2021-11-22)
