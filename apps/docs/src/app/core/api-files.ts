@@ -228,6 +228,7 @@ export const API_FILES = {
     ],
     objectNumber: ['ObjectNumberComponent'],
     productSwitch: ['ProductSwitchComponent', 'ProductSwitchItem'],
+    progressIndicator: ['ProgressIndicatorComponent'],
     quickView: [
         'QuickViewComponent',
         'QuickViewTitleComponent',
