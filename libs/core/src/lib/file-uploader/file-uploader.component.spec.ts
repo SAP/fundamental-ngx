@@ -114,6 +114,7 @@ describe('FileUploaderComponent', () => {
         spyOn(component, 'onChange');
         component.clear();
         expect(component.inputRef.nativeElement.value).toEqual('');
-        expect(component.onChange).toHaveBeenCalledWith([]);
+        expect(component.validFiles).toEqual([]);
+        expect(component.invalidFiles).toEqual([]);
     });
 });

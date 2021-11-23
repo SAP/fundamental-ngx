@@ -29,10 +29,11 @@
             </fd-product-switch>
             <fd-combobox
                 [(ngModel)]="searchTerm"
-                [glyph]="'search'"
+                glyph="search"
                 [dropdownValues]="searchTerms"
-                [placeholder]="'Type some text...'"
-                [maxHeight]="'250px'"
+                placeholder="Type some text..."
+                maxHeight="250px"
+                [isSearch]="true"
             >
             </fd-combobox>
         </fd-shellbar-actions>

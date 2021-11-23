@@ -62,7 +62,8 @@ describe('Toolbar test suite', () => {
             checkClickableButton(overflowButton);
         });
 
-        it('verify checkbox', () => {
+        // skip visual cases
+        xit('verify checkbox', () => {
             const checkboxSquareTag = 'checkbox-square-';
             const checkboxTickTag = 'checkbox-tick-';
             scrollIntoView(checkbox);

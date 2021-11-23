@@ -33,7 +33,7 @@ import {
     OptionItem,
     SelectableOptionItem
 } from '@fundamental-ngx/platform/shared';
-import { BaseMultiCombobox, MultiComboboxSelectionChangeEvent } from '../commons/base-multi-combobox';
+import { BaseMultiCombobox } from '../commons/base-multi-combobox';
 import { MultiComboboxMobileComponent } from '../multi-combobox-mobile/multi-combobox/multi-combobox-mobile.component';
 import { PlatformMultiComboboxMobileModule } from '../multi-combobox-mobile/multi-combobox-mobile.module';
 import { MULTICOMBOBOX_COMPONENT } from '../multi-combobox.interface';
@@ -68,7 +68,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     /** @hidden
      * List of selected suggestions
      * */
-    _selected: SelectableOptionItem[] = [];
+    _selectedSuggestions: SelectableOptionItem[] = [];
 
     /** @hidden */
     private _timeout: any; // NodeJS.Timeout
@@ -109,17 +109,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
             this._setUpMobileMode();
         }
 
-        this._setSelectedItems();
-    }
-
-    /**
-     * @hidden
-     * Method to emit change event
-     */
-    emitChangeEvent<T>(value: T): void {
-        const event = new MultiComboboxSelectionChangeEvent(this, value);
-
-        this.selectionChange.emit(event);
+        this._setSelectedSuggestions();
     }
 
     /** @hidden */
@@ -127,9 +117,9 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         const idx = this._getTokenIndexByLabelOrValue(item);
 
         if (idx === -1) {
-            this._selected.push(item);
+            this._selectedSuggestions.push(item);
         } else {
-            this._selected.splice(idx, 1);
+            this._selectedSuggestions.splice(idx, 1);
         }
 
         item.selected = !item.selected;
@@ -161,7 +151,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
      * */
     handleSelectAllItems(select: boolean): void {
         this._flatSuggestions.forEach((item) => (item.selected = select));
-        this._selected = select ? [...this._flatSuggestions] : [];
+        this._selectedSuggestions = select ? [...this._flatSuggestions] : [];
 
         this._propagateChange();
     }
@@ -184,12 +174,12 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
             .pipe(takeUntil(this._destroyed), delay(1))
             .subscribe(() => {
                 const idx = this._getTokenIndexByLabelOrValue(token);
-                this._selected.splice(idx, 1);
+                this._selectedSuggestions.splice(idx, 1);
                 token.selected = false;
 
                 this._propagateChange(true);
 
-                if (!this._selected.length) {
+                if (!this._selectedSuggestions.length) {
                     this._focusToSearchField();
                 }
             });
@@ -198,8 +188,8 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     /** @hidden */
     moreClicked(): void {
         this._suggestions = this.isGroup
-            ? this._convertObjectsToGroupOptionItems(this._selected.map(({ value }) => value))
-            : [...this._selected];
+            ? this._convertObjectsToGroupOptionItems(this._selectedSuggestions.map(({ value }) => value))
+            : [...this._selectedSuggestions];
 
         this.showList(true);
         this.selectedShown$.next(true);
@@ -291,7 +281,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
 
     /** @hidden Handle dialog dismissing, closes popover and sets backup data. */
     dialogDismiss(backup: SelectableOptionItem[]): void {
-        this._selected = [...backup];
+        this._selectedSuggestions = [...backup];
         this.inputText = '';
         this.showList(false);
         this.selectedShown$.next(false);
@@ -299,50 +289,30 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
 
     /** @hidden Handle dialog approval, closes popover and propagates data changes. */
     dialogApprove(): void {
-        this._propagateChange(true);
         this.inputText = '';
         this.showList(false);
+        this._propagateChange(true);
     }
 
     /** @hidden */
     private _getTokenIndexByLabelOrValue(item: SelectableOptionItem): number {
-        return this._selected.findIndex((token) => token.label === item.label || token.value === item.value);
-    }
-
-    /** @hidden */
-    private _setSelectedItems(): void {
-        if (!this.selectedItems?.length) {
-            return;
-        }
-
-        for (let i = 0; i <= this.selectedItems.length; i++) {
-            const selectedItem = this.selectedItems[i];
-            const idx = this._flatSuggestions.findIndex(
-                (item) => item.label === selectedItem || item.value === selectedItem
-            );
-            if (idx !== -1) {
-                this._selected.push(this._flatSuggestions[idx]);
-                this._flatSuggestions[idx].selected = true;
-            }
-        }
-
-        this.cd.detectChanges();
+        return this._selectedSuggestions.findIndex((token) => token.label === item.label || token.value === item.value);
     }
 
     /** @hidden */
     private _mapAndUpdateModel(): void {
-        const selectedItems = this._selected.map(({ value }) => value);
+        const selectedItems = this._selectedSuggestions.map(({ value }) => value);
 
         // setting value, it will call setValue()
         this.value = selectedItems;
 
-        this.emitChangeEvent(selectedItems || null);
+        this._emitChangeEvent();
     }
 
     /** @hidden */
     private _propagateChange(emitInMobile?: boolean): void {
         if (!this.mobile || emitInMobile) {
-            this.onChange(this._selected);
+            this.onChange(this._selectedSuggestions);
             this._mapAndUpdateModel();
         }
     }

@@ -9,7 +9,10 @@ import {
     checkElementScreenshot,
     saveElementScreenshot,
     getText,
-    getElementClass
+    getElementClass,
+    refreshPage,
+    waitForPresent,
+    getElementSize
 } from '../../driver/wdio';
 import { testText, fdTypeOptions, iconOptions } from '../fixtures/appData/button-contents';
 import { buttonPlaygroundTag } from '../fixtures/testData/button-tags';
@@ -38,6 +41,11 @@ describe('Button test suite:', () => {
         buttonPage.open();
     }, 1);
 
+    afterEach(() => {
+        refreshPage();
+        waitForPresent(typeButtons);
+    }, 1);
+
     describe('Verify all buttons are clickable', () => {
         it('verify clickable buttons types', () => {
             const typeButtonsLength = getElementArrayLength(typeButtons);
@@ -61,6 +69,13 @@ describe('Button test suite:', () => {
                 scrollIntoView(sizeButtons, i);
                 expect(isElementClickable(sizeButtons, i)).toBe(true, `size button with index ${i} not clickable`);
             }
+        });
+
+        it('verify compact button', () => {
+            scrollIntoView(sizeButtons);
+            const cozySize = getElementSize(sizeButtons);
+            const compactSize = getElementSize(sizeButtons, 1);
+            expect(compactSize.height).toBeLessThan(cozySize.height);
         });
 
         it('verify buttons with icons', () => {
@@ -102,6 +117,18 @@ describe('Button test suite:', () => {
                 click(playgroundButton);
                 expect(getElementClass(playgroundButton)).toContain(fdTypeOptions[i - 1]);
             }
+        });
+
+        it('verify checkbox fdMenu', () => {
+            scrollIntoView(checkboxMenu);
+            click(checkboxMenu);
+            expect(getElementClass(playgroundButton)).toContain('fd-button--menu');
+        });
+
+        it('verify checkbox compact', () => {
+            scrollIntoView(checkboxCompact);
+            click(checkboxCompact);
+            expect(getElementClass(playgroundButton)).toContain('fd-button--compact');
         });
 
         it('verify icon of dropdown menu', () => {

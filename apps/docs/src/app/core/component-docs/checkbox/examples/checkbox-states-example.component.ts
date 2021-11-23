@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
     template: `
         <h4 fd-form-header>Checkbox States Examples</h4>
         <div>
-            States:
+            <p>States:</p>
             <fd-checkbox [(ngModel)]="checkboxValue1" label="No state"></fd-checkbox>
             <fd-checkbox [(ngModel)]="checkboxValue2" state="information" label="Info state"></fd-checkbox>
             <fd-checkbox [(ngModel)]="checkboxValue3" state="success" label="Success state"></fd-checkbox>
@@ -13,11 +13,11 @@ import { Component } from '@angular/core';
             <fd-checkbox [(ngModel)]="checkboxValue5" state="error" label="Error state"></fd-checkbox>
         </div>
         <div>
-            Disabled:
+            <p>Disabled:</p>
             <fd-checkbox [(ngModel)]="checkboxValue6" disabled="true" label="Disabled label"></fd-checkbox>
         </div>
         <div>
-            Compact:
+            <p>Compact:</p>
             <fd-checkbox [(ngModel)]="checkboxValue7" compact="true" label="Compact label"></fd-checkbox>
         </div>
     `

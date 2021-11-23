@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
-import { ValidatorFn, Validators, FormGroup } from '@angular/forms';
+import { ValidatorFn, Validators, FormGroup, FormControl } from '@angular/forms';
 
 @Component({
     selector: 'fdp-platform-textarea-counter-example',
@@ -8,11 +8,13 @@ import { ValidatorFn, Validators, FormGroup } from '@angular/forms';
 })
 export class PlatformTextareaCounterExampleComponent implements AfterViewInit {
     form: FormGroup;
-    value = 'Lorem ipsum, dolor sit amet';
-    private textareaValidator: ValidatorFn[];
-    private textareaNoCounterMessageValidator: ValidatorFn[];
+    textareaValidator: ValidatorFn[];
+    textareaNoCounterMessageValidator: ValidatorFn[];
     constructor(private _cd: ChangeDetectorRef) {
-        this.form = new FormGroup({});
+        this.form = new FormGroup({
+            detailedDescription: new FormControl('Lorem ipsum, dolor sit amet'),
+            noCounterMessageInteraction: new FormControl()
+        });
 
         this.textareaValidator = [Validators.maxLength(10), Validators.required];
         this.textareaNoCounterMessageValidator = [Validators.required];

@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { NEVER, Observable } from 'rxjs';
 
 /**
  * RxJS wrapper for IntersectionObserver class.
@@ -22,5 +22,9 @@ export function intersectionObservable(
                 io.disconnect();
             };
         });
+    } else {
+        // If browser doesn't support IntersectionObserver API never emit a value
+        // since we're not supporting IE11 and any other browser should have it.
+        return NEVER;
     }
 }

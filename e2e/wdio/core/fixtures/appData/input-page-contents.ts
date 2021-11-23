@@ -17,3 +17,4 @@ export const invalidInputLabelText = 'Invalid(Error) Input - Message appears on 
 export const warningInputLabelText = 'Warning Input - Example of message triggered only on focus/blur';
 export const informationInputLabelText = 'Information Input';
 export const inputMessageText = 'Pellentesque metus lacus commodo eget justo ut rutrum varius nunc';
+export const testText = 'Inline Help';

@@ -88,6 +88,7 @@ import { VerticalNavigationModule } from '@fundamental-ngx/core/vertical-navigat
 import { MicroProcessFlowModule } from '@fundamental-ngx/core/micro-process-flow';
 import { TimelineModule } from '@fundamental-ngx/core/timeline';
 import { ProgressIndicatorModule } from '@fundamental-ngx/core/progress-indicator';
+import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -182,7 +183,8 @@ import { ProgressIndicatorModule } from '@fundamental-ngx/core/progress-indicato
         UploadCollectionModule,
         MicroProcessFlowModule,
         TimelineModule,
-        ProgressIndicatorModule
+        ProgressIndicatorModule,
+        ScrollbarModule
     ]
 })
 export class FundamentalNgxCoreModule {}
