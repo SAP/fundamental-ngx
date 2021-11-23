@@ -265,10 +265,12 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         this.nodeClick.emit(node);
     }
 
+    /** @hidden */
     _onNodeAdd(node: ApprovalNode): void {
         this.afterNodeAdd.emit(node);
     }
 
+    /** @hidden */
     _onNodeEdit(node: ApprovalNode): void {
         this.afterNodeEdit.emit(node);
     }
