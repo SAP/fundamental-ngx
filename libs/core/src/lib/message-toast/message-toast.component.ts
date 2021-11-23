@@ -35,6 +35,7 @@ let messageToastUniqueId = 0;
     styleUrls: ['./message-toast.component.scss'],
     host: {
         '[attr.aria-label]': 'ariaLabel',
+        '[attr.aria-live]': '"polite"',
         '[attr.id]': 'id',
         '[style.width]': 'width',
         '[style.min-width]': 'minWidth',
