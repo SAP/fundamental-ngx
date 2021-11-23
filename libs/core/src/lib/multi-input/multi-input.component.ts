@@ -44,7 +44,6 @@ import {
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MultiInputMobileModule } from './multi-input-mobile/multi-input-mobile.module';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 let uniqueHiddenLabel = 0;
 /**
