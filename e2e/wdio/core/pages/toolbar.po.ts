@@ -3,8 +3,6 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class ToolbarPo extends CoreBaseComponentPo {
     url = '/toolbar';
-    root = '#page-content';
-    contentPage = '#page-content';
 
     button = ' .fd-button--standard.fd-button--compact';
     activeInfoToolbar = '.fd-toolbar--active';
@@ -29,6 +27,12 @@ export class ToolbarPo extends CoreBaseComponentPo {
     dateTimeButton = '.fd-button--transparent.fd-button--compact';
     okButton = '[fdtype="emphasized"]';
     dateTimeInput = 'input.fd-input--compact';
+    toolbarOverflowExample = 'fd-toolbar-overflow-example';
+    popoverInput = 'fd-popover-body input';
+    popoverButton = '.fd-toolbar__overflow-button';
+    popoverToggledButton = 'fd-popover-body button:not(.fd-toolbar__overflow-button, fd-split-button button)';
+    popoverSplitButton = 'fd-split-button button';
+    popoverDropDown = '.fd-button-split';
 
     dayInCalendarButtonByValue = (index: string): string => {
         return `//span[contains(@id,"day-${index}-")]/ancestor::td[not (contains(@class, 'fd-calendar__item--other-month'))]`;
@@ -37,7 +41,7 @@ export class ToolbarPo extends CoreBaseComponentPo {
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
-        waitForPresent(this.contentPage);
+        waitForPresent(this.title);
     }
 
     getScreenshotFolder(): object {
