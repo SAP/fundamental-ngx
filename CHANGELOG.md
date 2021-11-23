@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.167 (2021-11-23)
+
+
+### Bug Fixes
+
+* **platform:** should be able to reset form components ([#6832](https://github.com/SAP/fundamental-ngx/issues/6832)) ([0a1542c](https://github.com/SAP/fundamental-ngx/commit/0a1542c6a808f71ec8ddf7d59aca06c217911fd9)), closes [#6830](https://github.com/SAP/fundamental-ngx/issues/6830)
+
 ## 0.33.0-rc.166 (2021-11-23)
 
 
