@@ -215,20 +215,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
     /** Set control value */
     set value(value: SliderControlValue) {
-        if (!this._isValidControlValue(value, this.value)) {
-            return;
-        }
-
-        if (this._isRange) {
-            this._initRangeMode(value as number[] | SliderTickMark[]);
-        } else {
-            this._initSingeMode(value as number | SliderTickMark);
-        }
-
-        this._value = value;
-
-        this.onChange(value);
-        this.onTouched();
+        this._setValue(value);
     }
 
     /** @hidden */
@@ -442,7 +429,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
     /** @hidden */
     writeValue(value: SliderControlValue): void {
-        this.value = value;
+        this._setValue(value, false);
     }
 
     /** @hidden */
@@ -451,7 +438,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
             return;
         }
 
-        this.writeValue(this._calculateValueFromPointerPosition(event));
+        this._setValue(this._calculateValueFromPointerPosition(event));
         this._updatePopoversPosition();
     }
 
@@ -465,7 +452,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
             this._updatePopoversPosition();
 
             if (!this._isRange) {
-                this.writeValue(this._calculateValueFromPointerPosition(moveEvent));
+                this._setValue(this._calculateValueFromPointerPosition(moveEvent));
 
                 return;
             }
@@ -482,7 +469,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
             const value = this._calculateValueFromPointerPosition(moveEvent, false) as number;
             this._setRangeHandleValueAndPosition(handleIndex, value);
 
-            this.writeValue(this._constructRangeModelValue());
+            this._setValue(this._constructRangeModelValue());
         });
 
         const unsubscribeFromMouseup = this._renderer.listen('document', 'mouseup', () => {
@@ -545,10 +532,10 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
         newValue = this._processNewValue(newValue as number, !this._isRange);
 
         if (!this._isRange) {
-            this.writeValue(newValue);
+            this._setValue(newValue);
         } else {
             this._setRangeHandleValueAndPosition(handleIndex, newValue as number);
-            this.writeValue(this._constructRangeModelValue());
+            this._setValue(this._constructRangeModelValue());
         }
 
         this._updatePopoversPosition();
@@ -588,7 +575,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     _updateValueFromInput(value: string, target: SliderValueTargets): void {
         const newValue = this._processNewValue(+value) as number;
         if (!this._isRange && target === SliderValueTargets.SINGLE_SLIDER) {
-            this.writeValue(newValue);
+            this._setValue(newValue);
             this.handle.nativeElement.focus();
             this._updatePopoversPosition();
 
@@ -605,7 +592,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
             this.rangeHandle2.nativeElement.focus();
         }
 
-        this.writeValue(this._constructRangeModelValue());
+        this._setValue(this._constructRangeModelValue());
 
         this._updatePopoversPosition();
     }
@@ -618,6 +605,23 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
             this._rangeSliderHandle2CurrentValuePrefix = this.rangeSliderHandle2CurrentValuePrefix;
         } else {
             this._singleSliderCurrentValuePrefix = this.singleSliderCurrentValuePrefix;
+        }
+        this._cdr.markForCheck();
+    }
+
+    /** @hidden */
+    private _setValue(value: SliderControlValue, emitEvent = true): void {
+        if (this._isRange) {
+            this._initRangeMode((value ?? [0.0]) as number[] | SliderTickMark[]);
+        } else {
+            this._initSingeMode((value ?? 0) as number | SliderTickMark);
+        }
+
+        this._value = value;
+
+        if (emitEvent) {
+            this.onChange(value);
+            this.onTouched();
         }
         this._cdr.markForCheck();
     }
@@ -852,19 +856,6 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     }
 
     /** @hidden */
-    private _isValidControlValue(currentValue: SliderControlValue, previousValue: SliderControlValue): boolean {
-        if (!currentValue && currentValue !== 0) {
-            return false;
-        }
-
-        if (_isNumberValue(currentValue)) {
-            currentValue = coerceNumberProperty(currentValue);
-        }
-
-        return previousValue !== currentValue;
-    }
-
-    /** @hidden */
     private _initSingeMode(value: number | SliderTickMark): void {
         if (this.customValues.length > 0) {
             this._initSingeModeWithCustomValue(value as SliderTickMark);
@@ -891,10 +882,6 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
     /** @hidden */
     private _initRangeMode(value: number[] | SliderTickMark[]): void {
-        if (!(this._handle1Value === 0 && this._handle2Value === 0)) {
-            return;
-        }
-
         if (this.customValues.length > 0) {
             this._initRangeModeWithCustomValues(value as SliderTickMark[]);
 

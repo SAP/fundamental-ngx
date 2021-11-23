@@ -87,6 +87,7 @@ import { MessagePageModule } from '@fundamental-ngx/core/message-page';
 import { VerticalNavigationModule } from '@fundamental-ngx/core/vertical-navigation';
 import { MicroProcessFlowModule } from '@fundamental-ngx/core/micro-process-flow';
 import { TimelineModule } from '@fundamental-ngx/core/timeline';
+import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -180,7 +181,8 @@ import { TimelineModule } from '@fundamental-ngx/core/timeline';
         VerticalNavigationModule,
         UploadCollectionModule,
         MicroProcessFlowModule,
-        TimelineModule
+        TimelineModule,
+        ScrollbarModule
     ]
 })
 export class FundamentalNgxCoreModule {}

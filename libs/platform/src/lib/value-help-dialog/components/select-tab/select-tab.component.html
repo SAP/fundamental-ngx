@@ -94,7 +94,7 @@
                     [attr.aria-selected]="_selectedMap[row[uniqueKey]]"
                 >
                     <td fd-table-cell></td>
-                    <td colspan="100%" [fitContent]="true">
+                    <td colspan="100%" fd-table-cell [fitContent]="true">
                         <p fd-table-text *ngFor="let filter of _tableFilters.secondary">
                             <label>{{ filter.label }}:</label>
                             {{ row[filter.key] || '' }}

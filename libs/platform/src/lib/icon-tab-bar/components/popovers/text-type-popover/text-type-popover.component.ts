@@ -1,10 +1,20 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    EventEmitter,
+    Input,
+    OnChanges,
+    Output,
+    SimpleChanges
+} from '@angular/core';
 import { IconTabBarPopoverBase } from '../icon-tab-bar-popover-base.class';
 import { IconTabBarItem } from '../../../interfaces/icon-tab-bar-item.interface';
 
 @Component({
     selector: 'fdp-text-type-popover',
-    templateUrl: './text-type-popover.component.html'
+    templateUrl: './text-type-popover.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TextTypePopoverComponent extends IconTabBarPopoverBase implements OnChanges {
     /**
@@ -32,6 +42,9 @@ export class TextTypePopoverComponent extends IconTabBarPopoverBase implements O
     selectedSubItem: EventEmitter<any> = new EventEmitter<any>();
 
     /** @hidden */
+    _containsSelected = false;
+
+    /** @hidden */
     constructor(protected _cd: ChangeDetectorRef) {
         super(_cd);
     }
@@ -41,6 +54,9 @@ export class TextTypePopoverComponent extends IconTabBarPopoverBase implements O
         super.ngOnChanges(changes);
         if (!this.isExtraItemsMode && changes.parentTab) {
             this._setStyles(this.parentTab.subItems);
+        }
+        if (changes.selectedSubItemUid) {
+            this._calculateIfContainsSelected();
         }
     }
 
@@ -60,5 +76,23 @@ export class TextTypePopoverComponent extends IconTabBarPopoverBase implements O
      */
     _trackBy(item: IconTabBarItem): string {
         return item.uId;
+    }
+
+    /** @hidden */
+    private _calculateIfContainsSelected(): void {
+        this._containsSelected = this._getChildren(this.parentTab.subItems).some(
+            ({ uId }) => uId === this.selectedSubItemUid
+        );
+    }
+
+    /** @hidden */
+    private _getChildren(items: IconTabBarItem[]): IconTabBarItem[] {
+        return items.reduce((acc: IconTabBarItem[], item: IconTabBarItem) => {
+            acc = acc.concat(item);
+            if (item.subItems) {
+                acc = acc.concat(this._getChildren(item.subItems));
+            }
+            return acc;
+        }, []);
     }
 }
