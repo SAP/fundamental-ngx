@@ -111,7 +111,8 @@
                 "core-tree",
                 "core-upload-collection",
                 "core-vertical-navigation",
-                "core-splitter"
+                "core-splitter",
+                "core-scrollbar"
             ]
         },
         "core-action-bar": {
@@ -382,6 +383,10 @@
             "implicitDependencies": ["core-utils", "core-card"]
         },
         "core-scroll-spy": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
+        },
+        "core-scrollbar": {
             "tags": ["fd"],
             "implicitDependencies": ["core-utils"]
         },

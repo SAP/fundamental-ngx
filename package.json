@@ -1,6 +1,6 @@
 {
   "name": "fundamental-ngx",
-  "version": "0.33.0-rc.150",
+  "version": "0.33.0-rc.164",
   "license": "Apache-2.0",
   "main": "dist/libs/core/index.js",
   "description": "Fundamental Library for Angular is a themable Fiori Angular component library.",
@@ -165,7 +165,7 @@
     "@wdio/sauce-service": "7.7.4",
     "@wdio/spec-reporter": "7.7.3",
     "@wdio/sync": "7.8.0",
-    "angular-cli-ghpages": "1.0.0-rc.1",
+    "angular-cli-ghpages": "1.0.0",
     "autoprefixer": "10.2.5",
     "axe-core": "4.3.5",
     "axe-html-reporter": "2.2.0",

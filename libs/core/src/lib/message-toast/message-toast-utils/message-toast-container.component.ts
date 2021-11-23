@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'fd-message-toast-container',
@@ -24,4 +24,9 @@ export class MessageToastContainerComponent {
     /** @hidden */
     @HostBinding('class.fd-message-toast-container')
     fdMessageToastContainerClass = true;
+
+    /** Role attribute */
+    @Input()
+    @HostBinding('attr.role')
+    role = 'alert';
 }

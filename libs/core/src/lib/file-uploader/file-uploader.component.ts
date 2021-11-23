@@ -201,7 +201,13 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
 
     /** @hidden */
     writeValue(files: File[]): void {
-        // not needed - should be handled by user.
+        if (this._isEmpty()) {
+            return;
+        }
+        if (!files) {
+            this.clear();
+        }
+        this._propagateFiles();
     }
 
     /** @hidden */
@@ -236,6 +242,9 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
     setInputValue(selectedFiles: File[]): void {
         let fileName = '';
         selectedFiles.forEach((file) => (fileName = fileName.concat(' ' + file.name)));
+        if (!this.inputRefText) {
+            return;
+        }
         this.inputRefText.nativeElement.value = fileName;
         this.inputRefText.nativeElement.title = fileName;
         if (fileName) {
@@ -268,8 +277,18 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
      * Clears the files from the input.
      */
     public clear(): void {
-        this.inputRef.nativeElement.value = '';
-        this.onChange([]);
+        if (this.inputRef) {
+            this.inputRef.nativeElement.value = '';
+        }
+        if (this.inputRefText) {
+            this.inputRefText.nativeElement.value = '';
+        }
+        this.validFiles = [];
+        this.invalidFiles = [];
+    }
+
+    private _isEmpty(): boolean {
+        return this.validFiles.length === 0 && this.invalidFiles.length === 0;
     }
 
     /** @hidden */
