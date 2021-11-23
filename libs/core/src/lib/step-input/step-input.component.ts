@@ -80,11 +80,11 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** Sets Increment Button title attribute */
     @Input()
-    incrementButtonTitle = '';
+    incrementButtonTitle = 'Increment';
 
     /** Sets Decrement Button title attribute */
     @Input()
-    decrementButtonTitle = '';
+    decrementButtonTitle = 'Decrement';
 
     /** Sets input aria-label attribute */
     @Input()
@@ -141,6 +141,10 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     /** Sets state of the control. Can be `success`, `error`, `warning`, `information` or blank for default. */
     @Input()
     state: FormStates;
+
+    /** Holds the message with respect to state */
+    @Input()
+    stateMessage: string;
 
     /** Custom unit displayed as a label next to the input */
     @Input()
