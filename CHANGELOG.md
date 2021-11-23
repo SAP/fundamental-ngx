@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.166 (2021-11-23)
+
+
+### Bug Fixes
+
+* **platform:** fix icon-tab-bar nested selection ([#7205](https://github.com/SAP/fundamental-ngx/issues/7205)) ([4f1a866](https://github.com/SAP/fundamental-ngx/commit/4f1a86677534561d3b5e3d76d52b783f3a2e50e5))
+
 ## 0.33.0-rc.165 (2021-11-23)
 
 
