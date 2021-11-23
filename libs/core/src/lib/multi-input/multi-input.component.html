@@ -45,7 +45,7 @@
         [iconTitle]="title"
         (addOnButtonClicked)="_addOnButtonClicked()"
     >
-        <span [attr.id]="tokenHiddenId" aria-hidden="true" class="fd-multi-input__invisible-text">
+        <span [attr.id]="tokenCountReadTextId" aria-hidden="true" class="fd-multi-input__invisible-text">
             {{ _tokenCountText }}</span
         >
         <fd-tokenizer
@@ -92,7 +92,7 @@
                 (keydown)="_handleInputKeydown($event)"
                 [ngModelOptions]="{ standalone: true }"
                 [attr.id]="inputId"
-                [attr.aria-describedby]="tokenHiddenId"
+                [attr.aria-describedby]="tokenCountReadTextId"
                 [attr.aria-roledescription]="roleDescription"
             />
         </fd-tokenizer>

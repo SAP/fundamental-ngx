@@ -78,7 +78,7 @@ export class MultiInputComponent
 
     /** token  count hidden label */
     @Input()
-    tokenHiddenId: string = this.tokenCountHiddenLabel;
+    tokenCountReadTextId: string = this.tokenCountHiddenLabel;
 
     /** Placeholder for the input field. */
     @Input()
@@ -321,7 +321,6 @@ export class MultiInputComponent
         private readonly _dynamicComponentService: DynamicComponentService,
         private readonly _injector: Injector,
         private readonly _viewContainerRef: ViewContainerRef,
-        private _liveAnnouncer: LiveAnnouncer,
         @Optional() private readonly _rtlService: RtlService,
         @Optional() private readonly _contentDensityService: ContentDensityService,
         @Optional() private readonly _focusTrapService: FocusTrapService
