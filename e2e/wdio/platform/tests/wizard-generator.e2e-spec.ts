@@ -15,7 +15,8 @@ import {
     scrollIntoView,
     sendKeys,
     setValue,
-    waitForElDisplayed
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 import {
     firstAdress,
@@ -671,12 +672,14 @@ describe('Wizard generator test suite', () => {
             it('should check basic way', () => {
                 refreshPage();
                 scrollIntoView(branchingExample);
-                openDialog(branchingExample);
+                openDialog(branchingExample, 1500);
                 completeFirstStep(dialog);
+                pause(getPauseTime());
                 expect(getElementClass(dialog + step, 0)).toContain('completed', 'first step is not completed');
                 expect(getElementClass(dialog + step, 1)).toContain('current', 'you not moved to second step');
 
                 completeSecondStep(dialog);
+                pause(getPauseTime());
                 expect(getElementClass(dialog + step, 1)).toContain('completed', 'second step is not completed');
                 expect(getElementClass(dialog + step, 2)).toContain('current', 'you not moved to third step');
 
@@ -687,12 +690,14 @@ describe('Wizard generator test suite', () => {
                 textArr.splice(3, 0, paymentMethod);
 
                 click(listItem);
+                pause(getPauseTime());
                 click(dialog + nextStepBtn2);
                 pause(getPauseTime());
                 expect(getElementClass(dialog + step, 2)).toContain('completed', 'third step is not completed');
                 expect(getElementClass(dialog + step, 3)).toContain('current', 'you are not moved to 5th step');
 
                 setValue(dialog + input, cardDetails);
+                pause(getPauseTime());
                 click(dialog + nextStepBtn2);
                 click(dialog + nextStepBtn2);
                 pause(getPauseTime());
@@ -716,15 +721,17 @@ describe('Wizard generator test suite', () => {
                 waitForElDisplayed(WizardGeneratorPage.title);
             }, 1);
             it('should check required fields validation', () => {
-                openDialog(branchingExample);
+                openDialog(branchingExample, 1500);
                 click(dialog + nextStepBtn2);
                 expect(getElementClass(dialog + selectControl)).toContain('error', 'error is not appeared');
                 click(dialog + select);
+                pause(getPauseTime());
                 click(listItem);
                 click(dialog + nextStepBtn2);
                 click(dialog + nextStepBtn2);
                 pause(getPauseTime());
                 expect(getElementClass(dialog + input)).toContain('error', 'error is not appeared');
+                pause(getPauseTime());
                 setValue(dialog + input, name);
                 setValue(dialog + input, firstAdress, 1);
                 click(dialog + nextStepBtn2);
@@ -732,9 +739,10 @@ describe('Wizard generator test suite', () => {
                 pause(getPauseTime());
                 expect(getElementClass(dialog + selectControl)).toContain('error', 'error is not appeared');
                 click(dialog + select);
-                click(listItem);
-                click(dialog + nextStepBtn2);
                 pause(getPauseTime());
+                click(listItem);
+                pause(getPauseTime());
+                click(dialog + nextStepBtn2);
                 click(dialog + nextStepBtn2);
                 pause(getPauseTime());
                 expect(getElementClass(dialog + input)).toContain('error', 'error is not appeared');
@@ -757,20 +765,23 @@ describe('Wizard generator test suite', () => {
                 refreshPage();
                 waitForElDisplayed(WizardGeneratorPage.title);
                 scrollIntoView(responsiveDialogExample);
-                click(responsiveDialogExample + button);
-                pause(getPauseTime());
+                openDialog(responsiveDialogExample, 1500);
+
                 completeFirstStep(dialog);
+                pause(getPauseTime());
                 expect(getElementClass(dialog + step, 0)).toContain('completed', 'first step is not completed');
                 expect(getElementClass(dialog + step, 1)).toContain('current', 'you not moved to second step');
 
                 completeSecondStep(dialog);
+                pause(getPauseTime());
                 expect(getElementClass(dialog + step, 1)).toContain('completed', 'second step is not completed');
                 expect(getElementClass(dialog + step, 2)).toContain('current', 'you not moved to third step');
 
                 completeThirdStep(dialog);
+                pause(getPauseTime());
                 expect(getElementClass(dialog + step, 2)).toContain('completed', 'first step is not completed');
                 expect(getElementClass(dialog + step, 3)).toContain('completed', '4th step is not completed');
-
+                pause(getPauseTime());
                 checkResults(dialog);
             });
         });
@@ -786,17 +797,17 @@ describe('Wizard generator test suite', () => {
             });
 
             it('should check validation second required field', () => {
-                click(responsiveDialogExample + button);
+                openDialog(responsiveDialogExample, 1500);
                 checkSecondStepRequiredValidation(dialog);
             });
 
             it('should check validation third required field', () => {
-                click(responsiveDialogExample + button);
+                openDialog(responsiveDialogExample, 1500);
                 checkThirdStepRequiredValidation(dialog);
             });
 
             it('should check navigation by steps', () => {
-                click(responsiveDialogExample + button);
+                openDialog(responsiveDialogExample, 1500);
                 checkNavigationBySteps(dialog);
             });
 
@@ -1043,13 +1054,13 @@ describe('Wizard generator test suite', () => {
     }
 
     function getPauseTime(): number {
-        if (getCurrentUrl().includes('localhost')) {
+        if (getCurrentUrl().includes('localhost') || getCurrentUrl().includes('web.app')) {
             return 500;
         } else return 0;
     }
 
-    function openDialog(selector: string): void {
+    function openDialog(selector: string, pauseTime: number = getPauseTime()): void {
         click(selector + button);
-        pause(getPauseTime());
+        pause(pauseTime);
     }
 });
