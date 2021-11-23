@@ -12,7 +12,7 @@ export const MULTICOMBOBOX_COMPONENT = new InjectionToken<string[]>('MultiCombob
  */
 export interface MultiComboboxInterface extends MobileMode {
     _suggestions: SelectableOptionItem[];
-    _selected: SelectableOptionItem[];
+    _selectedSuggestions: SelectableOptionItem[];
     selectedShown$: BehaviorSubject<boolean>;
     openChange: Subject<boolean>;
 
