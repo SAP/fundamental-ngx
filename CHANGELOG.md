@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.165 (2021-11-23)
+
+
+### Bug Fixes
+
+* **platform:** radio-group, fix a11y issues ([#6603](https://github.com/SAP/fundamental-ngx/issues/6603)) ([d640a09](https://github.com/SAP/fundamental-ngx/commit/d640a09f875fe56e3d82c9f2a2fdf262dbd07803))
+
 ## 0.33.0-rc.164 (2021-11-22)
 
 ## 0.33.0-rc.163 (2021-11-22)
