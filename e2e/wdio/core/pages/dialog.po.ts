@@ -18,6 +18,7 @@ export class DialogPo extends CoreBaseComponentPo {
     customDialog = 'fd-dialog-backdrop-container-example ';
     playgroundDialog = 'playground ';
     dialogExamples = 'component-example ';
+    formDialog = 'fd-form-dialog-example ';
 
     // main selectors
     dialog = 'fd-dialog.fd-dialog--active ';
@@ -34,6 +35,8 @@ export class DialogPo extends CoreBaseComponentPo {
     checkboxes = 'fd-checkbox label';
     inputFields = '.form-group input';
     dialogBody = this.dialog + 'fd-dialog-body';
+    dialogInput = this.dialog + 'input';
+    formExampleResult = this.formDialog + 'p';
 
     open(): void {
         super.open(this.url);

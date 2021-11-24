@@ -7,6 +7,7 @@ import {
     getText,
     isElementClickable,
     refreshPage,
+    scrollIntoView,
     waitForElDisplayed,
     waitForInvisibilityOf
 } from '../../driver/wdio';
@@ -39,9 +40,6 @@ describe('Select component:', () => {
 
     describe('Select modes', () => {
         it('should be able to select the option for default select', () => {
-            if (browserIsFirefox()) {
-                return;
-            }
             const textBefore = getText(selectModesExample + displayedText);
             click(selectModesExample + buttons);
             waitForElDisplayed(option, 4);
@@ -51,9 +49,6 @@ describe('Select component:', () => {
         });
 
         it('should be able to select the option for compact select', () => {
-            if (browserIsFirefox()) {
-                return;
-            }
             const textBefore = getText(selectModesExample + displayedText, 1);
             click(selectModesExample + buttons, 1);
             waitForElDisplayed(option, 4);
@@ -70,9 +65,6 @@ describe('Select component:', () => {
 
     describe('Semantic state', () => {
         it('should be able to select the option Success state', () => {
-            if (browserIsFirefox()) {
-                return;
-            }
             const textBefore = getText(selectSemanticStatesExample + displayedText);
             click(selectSemanticStatesExample + buttons);
             waitForElDisplayed(option, 4);
@@ -82,9 +74,6 @@ describe('Select component:', () => {
         });
 
         it('should be able to select the option Warning state', () => {
-            if (browserIsFirefox()) {
-                return;
-            }
             const textBefore = getText(selectSemanticStatesExample + displayedText, 1);
             click(selectSemanticStatesExample + buttons, 1);
             waitForElDisplayed(option, 4);
@@ -94,9 +83,6 @@ describe('Select component:', () => {
         });
 
         it('should be able to select the option Error state', () => {
-            if (browserIsFirefox()) {
-                return;
-            }
             const textBefore = getText(selectSemanticStatesExample + displayedText, 2);
             click(selectSemanticStatesExample + buttons, 2);
             waitForElDisplayed(option, 4);
@@ -106,9 +92,6 @@ describe('Select component:', () => {
         });
 
         it('should be able to select the option Information state', () => {
-            if (browserIsFirefox()) {
-                return;
-            }
             const textBefore = getText(selectSemanticStatesExample + displayedText, 3);
             click(selectSemanticStatesExample + buttons, 3);
             waitForElDisplayed(option, 4);
@@ -120,9 +103,6 @@ describe('Select component:', () => {
 
     describe('Custom Control Content', () => {
         it('should be able to select the option', () => {
-            if (browserIsFirefox()) {
-                return;
-            }
             const textBefore = getText(customControlExample + displayedText);
             click(customControlExample + buttons);
             waitForElDisplayed(option, 4);
@@ -134,9 +114,6 @@ describe('Select component:', () => {
 
     describe('Extended Options', () => {
         it('should be able to select the option', () => {
-            if (browserIsFirefox()) {
-                return;
-            }
             const textBefore = getText(extendedOptionsExample + displayedText);
             click(extendedOptionsExample + buttons);
             waitForElDisplayed(option, 4);
@@ -148,9 +125,6 @@ describe('Select component:', () => {
 
     describe('Mobile Mode', () => {
         it('should be able to select the option', () => {
-            if (browserIsFirefox()) {
-                return;
-            }
             const textBefore = getText(mobileModeExample + displayedText);
             click(mobileModeExample + buttons);
             waitForElDisplayed(option);
@@ -162,9 +136,6 @@ describe('Select component:', () => {
 
     describe('Max Height', () => {
         it('should be able to select the option', () => {
-            if (browserIsFirefox()) {
-                return;
-            }
             const textBefore = getText(maxHeightExample + displayedText);
             click(maxHeightExample + buttons);
             waitForElDisplayed(option, 4);
@@ -176,9 +147,6 @@ describe('Select component:', () => {
 
     describe('Adding and Removing Options', () => {
         it('should be able to select the option', () => {
-            if (browserIsFirefox()) {
-                return;
-            }
             const textBefore = getText(addRemoveOptionExample + displayedText);
             click(addRemoveOptionExample + buttons, 2);
             waitForElDisplayed(option, 4);
@@ -188,9 +156,6 @@ describe('Select component:', () => {
         });
 
         it('should be able to add option', () => {
-            if (browserIsFirefox()) {
-                return;
-            }
             click(addRemoveOptionExample + buttons, 2);
             waitForElDisplayed(option, 4);
             const optionsCountBefore = getElementArrayLength(option);
@@ -204,9 +169,6 @@ describe('Select component:', () => {
         });
 
         it('should be able to add remove option', () => {
-            if (browserIsFirefox()) {
-                return;
-            }
             click(addRemoveOptionExample + buttons, 2);
             waitForElDisplayed(option, 4);
             const optionsCountBefore = getElementArrayLength(option);
@@ -218,13 +180,21 @@ describe('Select component:', () => {
 
             expect(optionsCountBefore).toEqual(optionsCountAfterRemoving + 1);
         });
+
+        it('should check that we not able to remove the last option', () => {
+            scrollIntoView(addRemoveOptionExample);
+            click(addRemoveOptionExample + buttons, 2);
+            const optionsCountBefore = getElementArrayLength(overlayContainer + option);
+            for (let i = 0; i < optionsCountBefore; i++) {
+                click(addRemoveOptionExample + buttons, 1);
+            }
+            click(addRemoveOptionExample + buttons, 1);
+            expect(getElementArrayLength(overlayContainer + option)).toBe(1);
+        });
     });
 
     describe('Programmatic Control', () => {
         it('should be able to select the option', () => {
-            if (browserIsFirefox()) {
-                return;
-            }
             const textBefore = getText(programmaticControlExample + displayedText);
             click(programmaticControlExample + buttons, 3);
             waitForElDisplayed(option, 4);
@@ -234,9 +204,6 @@ describe('Select component:', () => {
         });
 
         it('should be able to control select by buttons', () => {
-            if (browserIsFirefox()) {
-                return;
-            }
             const textBefore = getText(programmaticControlExample + displayedText);
             click(programmaticControlExample + buttons);
             const textAfter = getText(programmaticControlExample + displayedText);

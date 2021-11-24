@@ -3,11 +3,13 @@ import {
     clearValue,
     click,
     getElementArrayLength,
+    getElementClass,
     getElementPlaceholder,
     getElementSize,
     getText,
     getValue,
     isElementClickable,
+    isElementDisplayed,
     isEnabled,
     refreshPage,
     scrollIntoView,
@@ -24,7 +26,10 @@ describe('Input group component test', () => {
         playgroundCheckbox,
         playgroundInputField,
         rightTextAddon,
-        playgroundInputButton
+        playgroundInputButton,
+        iconExample,
+        icon,
+        inputGroup
     } = inputGroupPage;
 
     beforeAll(() => {
@@ -104,6 +109,17 @@ describe('Input group component test', () => {
         const compactHeight = getElementSize(inputFields, 7);
 
         expect(defaultHeight.height).toBeGreaterThan(compactHeight.height);
+    });
+
+    it('verify that icons in Icon add example are present', () => {
+        expect(isElementDisplayed(iconExample + icon)).toBe(true);
+    });
+
+    it('should check input group states', () => {
+        expect(getElementClass(inputGroup, 14)).toContain('information');
+        expect(getElementClass(inputGroup, 15)).toContain('success');
+        expect(getElementClass(inputGroup, 16)).toContain('warning');
+        expect(getElementClass(inputGroup, 17)).toContain('error');
     });
 
     describe('Check playground', () => {
