@@ -2,7 +2,9 @@ import { ToolbarPo } from '../pages/toolbar.po';
 import {
     checkElementScreenshot,
     click,
+    getAttributeByName,
     getElementArrayLength,
+    getElementPlaceholder,
     getImageTagBrowserPlatform,
     getText,
     getValue,
@@ -11,9 +13,10 @@ import {
     refreshPage,
     saveElementScreenshot,
     scrollIntoView,
+    setValue,
     waitForElDisplayed
 } from '../../driver/wdio';
-import { fruitArr, currentDay, date } from '../fixtures/appData/toolbar-contents';
+import { fruitArr, currentDay, date, placeholder, testText } from '../fixtures/appData/toolbar-contents';
 
 describe('Toolbar test suite', () => {
     const toolbarPage = new ToolbarPo();
@@ -40,7 +43,13 @@ describe('Toolbar test suite', () => {
         okButton,
         dateTimeInput,
         overflowPriorityExample,
-        overflowGroupingExample
+        overflowGroupingExample,
+        toolbarOverflowExample,
+        popoverInput,
+        popoverButton,
+        popoverToggledButton,
+        popoverSplitButton,
+        popoverDropDown
     } = toolbarPage;
 
     beforeAll(() => {
@@ -62,7 +71,6 @@ describe('Toolbar test suite', () => {
             checkClickableButton(overflowButton);
         });
 
-        // skip visual cases
         xit('verify checkbox', () => {
             const checkboxSquareTag = 'checkbox-square-';
             const checkboxTickTag = 'checkbox-tick-';
@@ -108,13 +116,51 @@ describe('Toolbar test suite', () => {
             }
         });
 
-        it('verify popover date time picker example', () => {
+        it('verify date time picker example', () => {
             scrollIntoView(dateTimeButton);
             click(dateTimeButton);
             click(dayInCalendarButtonByValue(currentDay.toString()));
             selectHoursMinutesAndPeriod();
             click(okButton);
             expect(getValue(dateTimeInput)).toEqual(date);
+        });
+
+        // skipped due to https://github.com/SAP/fundamental-ngx/issues/7234
+        xit('verify popover split button', () => {
+            scrollIntoView(toolbarOverflowExample + moreButton);
+            click(toolbarOverflowExample + moreButton);
+            expect(getAttributeByName(popoverDropDown, 'aria-expanded')).toBe('false');
+            click(popoverSplitButton);
+            expect(getAttributeByName(popoverDropDown, 'aria-expanded')).toBe('true');
+        });
+
+        it('verify popover input has placeholder', () => {
+            scrollIntoView(toolbarOverflowExample + moreButton);
+            click(toolbarOverflowExample + moreButton);
+            expect(getElementPlaceholder(popoverInput)).toBe(placeholder);
+        });
+
+        it('verify that possible enter value popover input', () => {
+            scrollIntoView(toolbarOverflowExample + moreButton);
+            click(toolbarOverflowExample + moreButton);
+            setValue(popoverInput, testText);
+            expect(getValue(popoverInput)).toBe(testText);
+        });
+
+        it('verify popover buttons are clickable', () => {
+            scrollIntoView(toolbarOverflowExample + moreButton);
+            click(toolbarOverflowExample + moreButton);
+            checkClickableButton(popoverButton);
+        });
+
+        it('verify popover toggle buttons are work correctly', () => {
+            scrollIntoView(toolbarOverflowExample + moreButton);
+            click(toolbarOverflowExample + moreButton);
+            const toggleButtonLength = getElementArrayLength(popoverToggledButton);
+            for (let i = 0; i < toggleButtonLength; i++) {
+                click(popoverToggledButton, i);
+                expect(getAttributeByName(popoverToggledButton, 'aria-pressed', i)).toBe('true');
+            }
         });
     });
 
