@@ -7,9 +7,12 @@ import {
     SimpleChanges,
     ElementRef,
     AfterViewInit,
-    ViewChild,
-    ChangeDetectorRef
+    ChangeDetectorRef,
+    OnInit,
+    OnDestroy
 } from '@angular/core';
+import { fromEvent, Subject } from 'rxjs';
+import { debounceTime, takeUntil } from 'rxjs/operators';
 
 export type ProgressIndicatorState = 'informative' | 'positive' | 'critical' | 'negative';
 
@@ -20,7 +23,7 @@ export type ProgressIndicatorState = 'informative' | 'positive' | 'critical' | '
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProgressIndicatorComponent implements OnChanges, AfterViewInit {
+export class ProgressIndicatorComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
     /** The text to display if you would like to override the default percentage text. */
     @Input()
     valueText: string;
@@ -52,9 +55,8 @@ export class ProgressIndicatorComponent implements OnChanges, AfterViewInit {
     /** @hidden */
     hasPopover = false;
 
-    /** @hidden */
-    @ViewChild('progressIndicator', { read: ElementRef })
-    _progressIndicator: ElementRef;
+    /** @hidden An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     constructor(private _elementRef: ElementRef, private _cdRef: ChangeDetectorRef) {}
 
@@ -63,6 +65,19 @@ export class ProgressIndicatorComponent implements OnChanges, AfterViewInit {
         if (changes.valueText) {
             this._handleTruncation();
         }
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        fromEvent(window, 'resize')
+            .pipe(debounceTime(60), takeUntil(this._onDestroy$))
+            .subscribe(() => this._handleTruncation());
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
     }
 
     /** @hidden */

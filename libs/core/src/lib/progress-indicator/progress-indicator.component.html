@@ -33,24 +33,23 @@
 </div>
 
 <ng-template #indicatorContainer>
-    <div class="fd-progress-indicator__container">
+    <div class="fd-progress-indicator__container" *ngIf="calculateProgressBarWidth() as progressBarWidth">
         <div
             class="fd-progress-indicator__progress-bar"
-            [ngClass]="{ 'fd-progress-indicator__progress-bar--animated': animate }"
-            [ngStyle]="{ 'min-width': calculateProgressBarWidth() + '%', width: calculateProgressBarWidth() + '%' }"
+            [class.fd-progress-indicator__progress-bar--animated]="animate"
+            [style.min-width.%]="progressBarWidth"
+            [style.width.%]="progressBarWidth"
         >
-            <span class="fd-progress-indicator__label" *ngIf="calculateProgressBarWidth() > 50 && !valueText"
+            <span class="fd-progress-indicator__label" *ngIf="progressBarWidth > 50 && !valueText"
                 >{{ valueNow }}%</span
             >
-            <span class="fd-progress-indicator__label" *ngIf="calculateProgressBarWidth() > 50 && valueText">{{
-                valueText
-            }}</span>
+            <span class="fd-progress-indicator__label" *ngIf="progressBarWidth > 50 && valueText">{{ valueText }}</span>
         </div>
         <div class="fd-progress-indicator__remaining">
-            <span class="fd-progress-indicator__label" *ngIf="calculateProgressBarWidth() <= 50 && !valueText"
+            <span class="fd-progress-indicator__label" *ngIf="progressBarWidth <= 50 && !valueText"
                 >{{ valueNow }}%</span
             >
-            <span class="fd-progress-indicator__label" *ngIf="calculateProgressBarWidth() <= 50 && valueText">{{
+            <span class="fd-progress-indicator__label" *ngIf="progressBarWidth <= 50 && valueText">{{
                 valueText
             }}</span>
         </div>
