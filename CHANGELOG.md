@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.168 (2021-11-24)
+
+
+### Bug Fixes
+
+* **core:** resizable-card-layout, fix resizable behavior on RTL mode ([#7177](https://github.com/SAP/fundamental-ngx/issues/7177)) ([ffd2da4](https://github.com/SAP/fundamental-ngx/commit/ffd2da47721fc08c8814d713810e555568c3fceb))
+
 ## 0.33.0-rc.167 (2021-11-23)
 
 
