@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.170 (2021-11-24)
+
+
+### Bug Fixes
+
+* **platform:** add ability to pass action to approval flow component ([#7194](https://github.com/SAP/fundamental-ngx/issues/7194)) ([d19457e](https://github.com/SAP/fundamental-ngx/commit/d19457e462050c8563692ee3c23d750ac6e14c21))
+
 ## 0.33.0-rc.169 (2021-11-24)
 
 ## 0.33.0-rc.168 (2021-11-24)
