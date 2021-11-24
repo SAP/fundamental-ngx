@@ -32,7 +32,7 @@ export class ValueHelpDialogPo extends BaseComponentPo {
     productNicknameColumn = 'table td:nth-of-type(8)';
     productZipcodeColumn = 'table td:nth-of-type(6)';
     tableCheckboxes = 'table fd-checkbox';
-    tableCheckboxesFF = 'table input[type="checkbox"]';
+    tableCheckboxesFF = 'table .fd-checkbox__label';
     tableColumn = 'table thead th.fd-table__cell.ng-star-inserted';
     tableRows = 'table tr';
     selectedItemID = 'tr[aria-selected="true"] td:nth-of-type(2)';

@@ -223,11 +223,12 @@ describe('dialog test suite', () => {
 
             expect(getText(dialogCartOutput)).not.toEqual(startingPrice);
             clearAndCloseDialog();
-        }, 1);
+        });
 
         it('should check ability to clear dialog/cart', () => {
             openDialog(complexDialog);
             waitForNotDisplayed(busyIndicator);
+            waitForElDisplayed(dialogItems);
 
             click(dialogItems, 1);
             click(dialogItems, 3);
@@ -235,7 +236,7 @@ describe('dialog test suite', () => {
 
             expect(getText(dialogCartOutput)).toEqual(defaultPrice);
             clearAndCloseDialog();
-        }, 1);
+        });
 
         it('should check dialog search', () => {
             if (browserIsFirefox()) {
@@ -250,7 +251,7 @@ describe('dialog test suite', () => {
 
             expect(getText(dialogItems).toLowerCase()).toContain(papayaFruit);
             clearAndCloseDialog();
-        }, 1);
+        });
 
         it('should check resizing dialog', () => {
             if (browserIsFirefox()) {

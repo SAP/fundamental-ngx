@@ -10,7 +10,8 @@ import {
     isElementDisplayed,
     waitForNotDisplayed,
     waitForPresent,
-    waitForNotPresent
+    waitForNotPresent,
+    pause
 } from '../../driver/wdio';
 
 describe('Notification component test', () => {
@@ -137,6 +138,6 @@ describe('Notification component test', () => {
         click(buttonChoice);
         expect(waitForPresent(messageToast)).toBe(true);
         expect(getText(messageToast)).toBe(`${action} action performed`);
-        waitForNotPresent(messageToast);
+        pause(1200);
     }
 });
