@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.174 (2021-11-25)
+
+
+### Bug Fixes
+
+* **platform:** table change detection ([#7242](https://github.com/SAP/fundamental-ngx/issues/7242)) ([908a250](https://github.com/SAP/fundamental-ngx/commit/908a250cd68eae3a90b6bc4a8e8d311f418e3656))
+
 ## 0.33.0-rc.173 (2021-11-25)
 
 ## 0.33.0-rc.172 (2021-11-24)
