@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input, ViewEncapsulation } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, ViewEncapsulation, OnInit } from '@angular/core';
 
 export type CardBarStatus = 'information' | 'warning' | 'critical' | 'success';
 
@@ -10,7 +10,7 @@ export type CardBarStatus = 'information' | 'warning' | 'critical' | 'success';
     encapsulation: ViewEncapsulation.None,
     host: { class: 'fd-card-bar-example' }
 })
-export class CardBarComponent {
+export class CardBarComponent implements OnInit {
     /** value in percentage, minimum 0, maximum 100 */
     @Input() value = 0;
 
@@ -18,5 +18,11 @@ export class CardBarComponent {
     @Input() status: CardBarStatus = 'information';
 
     /** variable for i18n */
-    @Input() labeli18n: string = this.status;
+    @Input() statusLabel: string = null;
+
+    ngOnInit(): void {
+        if (!this.statusLabel) {
+            this.statusLabel = this.status;
+        }
+    }
 }
