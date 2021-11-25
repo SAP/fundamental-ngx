@@ -1,4 +1,14 @@
 
+### [0.31.1](https://github.com/SAP/fundamental-ngx/compare/v0.31.0...v0.31.1) (2021-11-25)
+
+
+### Bug Fixes
+
+* **platform:** add [#6572](https://github.com/SAP/fundamental-ngx/issues/6572) fix ([c6639fb](https://github.com/SAP/fundamental-ngx/commit/c6639fb498be7e5da4adedaa49304d72bd9aa4a1))
+* **platform:** apply feature [#7001](https://github.com/SAP/fundamental-ngx/issues/7001) ([87c094e](https://github.com/SAP/fundamental-ngx/commit/87c094eceb0a3e25e2dedd31384d313b956b42bf))
+* **platform:** change version ([235d9fa](https://github.com/SAP/fundamental-ngx/commit/235d9fada7f4f852874b8424d4311552b60a5d7f))
+* **platform:** revert package json version change ([a593609](https://github.com/SAP/fundamental-ngx/commit/a5936096fde1ae4b47f008681eb1884a04ca478a))
+
 ## [0.31.0](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.200...v0.31.0) (2021-08-13)
 
 ## [0.31.0-rc.200](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.199...v0.31.0-rc.200) (2021-08-13)
