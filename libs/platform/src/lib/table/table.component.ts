@@ -21,7 +21,8 @@ import {
     TrackByFunction,
     ViewChild,
     ViewChildren,
-    ViewEncapsulation
+    ViewEncapsulation,
+    ViewRef
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { BehaviorSubject, isObservable, merge, Observable, of, Subscription } from 'rxjs';
@@ -31,8 +32,8 @@ import {
     ContentDensityEnum,
     ContentDensityService,
     FdDropEvent,
-    resizeObservable,
     intersectionObservable,
+    resizeObservable,
     RtlService
 } from '@fundamental-ngx/core/utils';
 import { TableRowDirective } from '@fundamental-ngx/core/table';
@@ -677,6 +678,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     ngOnDestroy(): void {
+        this._closeDataSource();
         this._subscriptions.unsubscribe();
     }
 
@@ -1311,7 +1313,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                 )
                 .subscribe((rows) => {
                     this._setTableRows(rows);
-
                     this._calculateIsShownNavigationColumn();
 
                     if (rows.length && !columnsWidthSet) {
@@ -1320,7 +1321,12 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                         return;
                     }
 
-                    this._cdr.markForCheck();
+                    /** Seems to be the only way to avoid ViewDestroyedError: Attempt to use a destroyed view: detectChange */
+                    setTimeout(() => {
+                        if (!(this._cdr as ViewRef).destroyed) {
+                            this._cdr.detectChanges();
+                        }
+                    });
                 })
         );
     }
@@ -1853,22 +1859,22 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     private _initializeDS(dataSource: FdpTableDataSource<T>): void {
-        if (isDataSource(this._tableDataSource)) {
-            this._closeDataSource(this._tableDataSource);
-        }
-
+        this._closeDataSource();
         this._resetAllSelectedRows();
 
         this._tableDataSource = this._openDataStream(dataSource);
     }
 
     /** @hidden */
-    private _closeDataSource(dataSource: TableDataSource<T>): void {
-        dataSource.close();
+    private _closeDataSource(): void {
+        if (!this._tableDataSource) {
+            return;
+        }
 
-        this._subscriptions.remove(this._dsSubscription);
+        this._tableDataSource.close();
 
         if (this._dsSubscription) {
+            this._dsSubscription.unsubscribe();
             this._dsSubscription = null;
         }
     }
@@ -1890,10 +1896,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
         this._dsSubscription = this._dsOpenedStream.subscribe((items) => {
             this._totalItems = dataSourceStream.dataProvider.totalItems;
-
             this._dataSourceItemsSubject.next(items);
-
-            this._cdr.detectChanges();
         });
 
         this._subscriptions.add(this._dsSubscription);
