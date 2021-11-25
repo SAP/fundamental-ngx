@@ -1874,8 +1874,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this._tableDataSource.close();
 
         if (this._dsSubscription) {
-            this._subscriptions.remove(this._dsSubscription);
-
             this._dsSubscription.unsubscribe();
             this._dsSubscription = null;
         }
