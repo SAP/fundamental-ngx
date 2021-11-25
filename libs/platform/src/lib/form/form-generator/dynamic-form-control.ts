@@ -1,10 +1,31 @@
-import { FormControl } from '@angular/forms';
+import { AbstractControlOptions, AsyncValidatorFn, FormControl, FormGroup, ValidatorFn } from '@angular/forms';
 
 import { DynamicAbstractControlOptions } from './interfaces/dynamic-abstract-control';
-import { DynamicFormItem } from './interfaces/dynamic-form-item';
+import { DynamicFormFieldGroup, DynamicFormFieldItem } from './interfaces/dynamic-form-item';
+
+export class DynamicFormControlGroup extends FormGroup {
+    public formItem: DynamicFormFieldGroup;
+    public type = 'group';
+    public controls: {
+        [key: string]: DynamicFormControl | DynamicFormControlGroup;
+    };
+
+    constructor(
+        formItem?: DynamicFormFieldGroup,
+        controls?: {
+            [key: string]: DynamicFormControl | DynamicFormControlGroup;
+        },
+        validatorOrOpts?: ValidatorFn | ValidatorFn[] | AbstractControlOptions | null,
+        asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null
+    ) {
+        super(controls, validatorOrOpts, asyncValidator);
+        this.formItem = formItem;
+    }
+}
 
 export class DynamicFormControl extends FormControl {
-    public formItem: DynamicFormItem;
+    public formItem: DynamicFormFieldItem;
+    public type = 'field';
 
     /**
      * @description Creates a new `DynamicFormControl` instance.
