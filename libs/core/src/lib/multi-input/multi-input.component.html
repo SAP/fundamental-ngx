@@ -125,6 +125,8 @@
                 [compact]="compact"
                 (ngModelChange)="_handleSelect($event, value, false)"
                 [ngModel]="selected.indexOf(value) !== -1"
+                role="checkbox"
+                [attr.aria-checked]="selected.indexOf(value) !== -1"
             >
             </fd-checkbox>
             <ng-container [ngTemplateOutlet]="itemSource" [ngTemplateOutletContext]="{ value: value }"></ng-container>

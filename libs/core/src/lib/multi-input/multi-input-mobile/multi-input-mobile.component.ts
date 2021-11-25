@@ -126,7 +126,7 @@ export class MultiInputMobileComponent
             backdropClickCloseable: false,
             escKeyCloseable: false,
             container: this._elementRef.nativeElement,
-            focusTrapped: true
+            focusTrapped: false
         });
     }
 }
