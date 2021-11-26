@@ -75,6 +75,10 @@
                     </fdp-form-field-group>
                 </ng-template>
             </ng-container>
+            <fdp-form-field [column]="1" [rank]="formControlItems.length + 1">
+                <!-- For user-defined elements, like submit button -->
+                <ng-container *ngTemplateOutlet="renderer"></ng-container>
+            </fdp-form-field>
         </fdp-form-group>
     </form>
 </fd-busy-indicator>
