@@ -253,7 +253,8 @@ jobs:
                   path: dist/apps/docs
                   key: dist-docs-${{ github.run_id }}
             - name: delete firebase preview
-              run: firebase hosting:channel:delete ${{ env.FIREBASE_CHANNEL }}
+              continue-on-error: true
+              run: npm run firebase hosting:channel:delete pr7252-firebase-improvement
 
     # run e2e tests
     e2e_smoke:
