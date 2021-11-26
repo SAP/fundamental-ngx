@@ -252,6 +252,8 @@ jobs:
               with:
                   path: dist/apps/docs
                   key: dist-docs-${{ github.run_id }}
+            - name: install firebase tools
+              run: npm install -g firebase-tools
             - name: delete firebase preview
               continue-on-error: true
               run: npm run firebase hosting:channel:delete pr7252-firebase-improvement
