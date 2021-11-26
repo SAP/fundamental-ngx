@@ -15,6 +15,7 @@ import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
 import { UNIQUE_KEY_SEPARATOR } from '../../constants';
 import { FdDnDEvent } from '../../directives/dnd/icon-bar-dnd-container.directive';
 import { TextTypePopoverComponent } from '../popovers/text-type-popover/text-type-popover.component';
+import { IconTabBarComponent } from '../../icon-tab-bar.component';
 
 /** @hidden */
 interface DataForReordering {
@@ -56,8 +57,8 @@ export class IconTabBarTextTypeComponent extends IconTabBarBase {
     reordered: EventEmitter<IconTabBarItem[]> = new EventEmitter<IconTabBarItem[]>();
 
     /** @hidden */
-    constructor(_cd: ChangeDetectorRef, _ngZone: NgZone) {
-        super(_cd, _ngZone);
+    constructor(_cd: ChangeDetectorRef, _ngZone: NgZone, _tabBar: IconTabBarComponent) {
+        super(_cd, _ngZone, _tabBar);
     }
 
     /**

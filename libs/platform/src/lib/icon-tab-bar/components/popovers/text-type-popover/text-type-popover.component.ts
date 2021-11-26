@@ -60,11 +60,6 @@ export class TextTypePopoverComponent extends IconTabBarPopoverBase implements O
     _containsSelected = false;
 
     /** @hidden */
-    constructor(protected _cd: ChangeDetectorRef) {
-        super(_cd);
-    }
-
-    /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         super.ngOnChanges(changes);
         if (!this.isExtraItemsMode && changes.parentTab) {

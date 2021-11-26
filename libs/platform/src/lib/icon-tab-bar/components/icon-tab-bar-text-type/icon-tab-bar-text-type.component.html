@@ -39,7 +39,9 @@
                     <span class="fd-icon-tab-bar__tag">{{ item.label }}</span>
                 </ng-template>
                 <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>
-                <div class="screenreader-only" *ngIf="item.color">{{ item.color }}</div>
+                <div class="screenreader-only" *ngIf="item.color">
+                    {{ (_colorAssociations && _colorAssociations[item.color]) || item.color }}
+                </div>
             </a>
             <ng-template #withPopover>
                 <fdp-text-type-popover

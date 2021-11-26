@@ -26,6 +26,8 @@ import { TabDestinyMode } from '../types';
 import { ICON_TAB_HIDDEN_CLASS_NAME, UNIQUE_KEY_SEPARATOR } from '../constants';
 import { ExtraButtonDirective } from '../directives/extra-button/extra-button.directive';
 import { IconTabBarPopoverBase } from './popovers/icon-tab-bar-popover-base.class';
+import { IconTabBarComponent } from '../icon-tab-bar.component';
+import { TabColorAssociations } from '../interfaces/tab-color-associations.interface';
 
 @Directive()
 export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit, OnDestroy {
@@ -98,7 +100,12 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     private _onDestroy$ = new Subject();
 
     /** @hidden */
-    constructor(protected _cd: ChangeDetectorRef, protected _ngZone: NgZone) {}
+    get _colorAssociations(): TabColorAssociations {
+        return this._tabBar.colorAssociations;
+    }
+
+    /** @hidden */
+    constructor(protected _cd: ChangeDetectorRef, protected _ngZone: NgZone, protected _tabBar: IconTabBarComponent) {}
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {

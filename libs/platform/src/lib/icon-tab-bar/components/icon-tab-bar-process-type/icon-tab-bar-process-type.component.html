@@ -52,7 +52,9 @@
                 <span class="fd-icon-tab-bar__tag">{{ item.label }}</span>
                 <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>
             </ng-template>
-            <div class="screenreader-only" *ngIf="item.color">{{ item.color }}</div>
+            <div class="screenreader-only" *ngIf="item.color">
+                {{ (_colorAssociations && _colorAssociations[item.color]) || item.color }}
+            </div>
         </a>
         <span *ngIf="_lastVisibleTabIndex !== idx" class="fd-icon-tab-bar__separator">
             <fd-icon glyph="process"></fd-icon>

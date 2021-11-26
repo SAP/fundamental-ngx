@@ -46,7 +46,9 @@
                 <span *ngIf="item.counter" class="fd-icon-tab-bar__counter">{{ item.counter }}</span>
             </div>
             <div class="fd-icon-tab-bar__label">{{ item.label }}</div>
-            <div class="screenreader-only" *ngIf="item.color">{{ item.color }}</div>
+            <div class="screenreader-only" *ngIf="item.color">
+                {{ (_colorAssociations && _colorAssociations[item.color]) || item.color }}
+            </div>
         </a>
     </li>
     <li
