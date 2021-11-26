@@ -277,7 +277,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
      * @description select extra item inside popover
      */
     async _selectExtraItem(selectedItem: IconTabBarItem): Promise<void> {
-        const deletedItem = this._tabs.splice(this._lastVisibleTabIndex, 1, selectedItem)[0] as IconTabBarItem;;
+        const deletedItem = this._tabs.splice(this._lastVisibleTabIndex, 1, selectedItem)[0] as IconTabBarItem;
         this._tabs.splice(selectedItem.index, 1, deletedItem);
 
         deletedItem.index = selectedItem.index;
