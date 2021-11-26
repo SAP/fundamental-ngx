@@ -3,18 +3,18 @@ import { AbstractControlOptions, AsyncValidatorFn, FormControl, FormGroup, Valid
 import { DynamicAbstractControlOptions } from './interfaces/dynamic-abstract-control';
 import { DynamicFormFieldGroup, DynamicFormFieldItem } from './interfaces/dynamic-form-item';
 
+export interface DynamicFormGroupControls {
+    [key: string]: DynamicFormControl | DynamicFormControlGroup;
+}
+
 export class DynamicFormControlGroup extends FormGroup {
     public formItem: DynamicFormFieldGroup;
     public type = 'group';
-    public controls: {
-        [key: string]: DynamicFormControl | DynamicFormControlGroup;
-    };
+    public controls: DynamicFormGroupControls;
 
     constructor(
         formItem?: DynamicFormFieldGroup,
-        controls?: {
-            [key: string]: DynamicFormControl | DynamicFormControlGroup;
-        },
+        controls?: DynamicFormGroupControls,
         validatorOrOpts?: ValidatorFn | ValidatorFn[] | AbstractControlOptions | null,
         asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null
     ) {

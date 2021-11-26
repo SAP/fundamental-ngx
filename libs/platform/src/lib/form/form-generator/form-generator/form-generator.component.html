@@ -54,20 +54,20 @@
                         [gapColumnLayout]="field.formItem?.guiOptions?.gapColumnLayout"
                         [formName]="field.formItem?.name"
                     >
-                        <ng-container *ngFor="let groupField of field.controls | keyvalue">
+                        <ng-container *ngFor="let groupField of _getOrderedControls(field.controls)">
                             <ng-container
                                 *fdpDynamicFormControlField="
                                     field;
-                                    show: shouldShowFields[groupField.value.formItem?.name] !== false
+                                    show: shouldShowFields[groupField.formItem?.name] !== false
                                 "
                             >
                                 <fdp-form-generator-field
                                     [form]="form"
-                                    [field]="groupField.value"
-                                    [shouldShow]="shouldShowFields[groupField.value.formItem?.name] !== false"
-                                    [formFieldName]="groupField.value.formItem?.name"
+                                    [field]="groupField"
+                                    [shouldShow]="shouldShowFields[groupField.formItem?.name] !== false"
+                                    [formFieldName]="groupField.formItem?.name"
                                     [formGroupNamePath]="field.formItem?.name"
-                                    [rank]="groupField.value.formItem?.rank"
+                                    [rank]="groupField.formItem?.rank"
                                     [i18n]="i18n"
                                 ></fdp-form-generator-field>
                             </ng-container>

@@ -18,7 +18,7 @@ import { ColumnLayout, LabelLayout } from '@fundamental-ngx/platform/shared';
 
 import { FormGeneratorService } from '../form-generator.service';
 import { DynamicFormItem, DynamicFormValue } from '../interfaces/dynamic-form-item';
-import { DynamicFormControl, DynamicFormControlGroup } from '../dynamic-form-control';
+import { DynamicFormControl, DynamicFormControlGroup, DynamicFormGroupControls } from '../dynamic-form-control';
 import { DynamicFormGroup } from '../interfaces/dynamic-form-group';
 import {
     DefaultGapLayout,
@@ -268,7 +268,7 @@ export class FormGeneratorComponent implements OnDestroy {
 
         this.form = form;
 
-        this.formControlItems = Object.values(form.controls);
+        this.formControlItems = this._getOrderedControls(form.controls);
 
         this.shouldShowFields = await this._fgService.checkVisibleFormItems(this.form);
 
@@ -301,5 +301,10 @@ export class FormGeneratorComponent implements OnDestroy {
      */
     submit(): void {
         this.ngForm.ngSubmit.emit();
+    }
+
+    /** @hidden */
+    _getOrderedControls(controls: DynamicFormGroupControls): (DynamicFormControl | DynamicFormControlGroup)[] {
+        return Object.values(controls).sort((a, b) => (a.formItem.rank > b.formItem.rank ? 1 : -1));
     }
 }
