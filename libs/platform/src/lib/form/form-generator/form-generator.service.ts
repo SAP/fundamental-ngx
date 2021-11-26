@@ -309,6 +309,46 @@ export class FormGeneratorService implements OnDestroy {
         return shouldShowFields;
     }
 
+    /**
+     * Is current form item is a field item.
+     * @param item form item.
+     * @returns is current form item is a field.
+     */
+    isFormFieldItem(item: DynamicFormItem): item is DynamicFormFieldItem {
+        return !!(item as DynamicFormFieldItem).type;
+    }
+
+    /**
+     * Method for searching a form control inside form group. Can also search inside ungrouped form group.
+     * @param form Form group.
+     * @param controlName Name of the form control.
+     * @returns Found form control.
+     */
+    getFormControl(form: DynamicFormGroup, controlName: string): DynamicFormControl | DynamicFormControlGroup {
+        let control = form.get(controlName);
+
+        // If no control found, try to find it in ungrouped group
+        if (!control) {
+            control = form.get(UNGROUPED_FORM_GROUP_NAME + '.' + controlName);
+        }
+
+        return control as DynamicFormControl | DynamicFormControlGroup;
+    }
+
+    /** @hidden */
+    _getFormValueWithoutUngrouped(value: any): any {
+        if (value[UNGROUPED_FORM_GROUP_NAME]) {
+            const ungroupedGroupValue: { [key: string]: any } = value[UNGROUPED_FORM_GROUP_NAME];
+            for (const [fieldName, fieldValue] of Object.entries(ungroupedGroupValue)) {
+                value[fieldName] = fieldValue;
+            }
+        }
+        delete value[UNGROUPED_FORM_GROUP_NAME];
+
+        return value;
+    }
+
+    /** @hidden */
     private async _checkFormControlsVisibility(
         form: DynamicFormGroup | DynamicFormControlGroup,
         formValue: any
@@ -406,45 +446,6 @@ export class FormGeneratorService implements OnDestroy {
         }
 
         return result;
-    }
-
-    /**
-     * Is current form item is a field item.
-     * @param item form item.
-     * @returns is current form item is a field.
-     */
-    isFormFieldItem(item: DynamicFormItem): item is DynamicFormFieldItem {
-        return !!(item as DynamicFormFieldItem).type;
-    }
-
-    /**
-     * Method for searching a form control inside form group. Can also search inside ungrouped form group.
-     * @param form Form group.
-     * @param controlName Name of the form control.
-     * @returns Found form control.
-     */
-    getFormControl(form: DynamicFormGroup, controlName: string): DynamicFormControl | DynamicFormControlGroup {
-        let control = form.get(controlName);
-
-        // If no control found, try to find it in ungrouped group
-        if (!control) {
-            control = form.get(UNGROUPED_FORM_GROUP_NAME + '.' + controlName);
-        }
-
-        return control as DynamicFormControl | DynamicFormControlGroup;
-    }
-
-    /** @hidden */
-    private _getFormValueWithoutUngrouped(value: any): any {
-        if (value[UNGROUPED_FORM_GROUP_NAME]) {
-            const ungroupedGroupValue: { [key: string]: any } = value[UNGROUPED_FORM_GROUP_NAME];
-            for (const [fieldName, fieldValue] of Object.entries(ungroupedGroupValue)) {
-                value[fieldName] = fieldValue;
-            }
-        }
-        delete value[UNGROUPED_FORM_GROUP_NAME];
-
-        return value;
     }
 
     /** @hidden */
