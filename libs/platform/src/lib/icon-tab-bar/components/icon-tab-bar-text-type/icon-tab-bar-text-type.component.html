@@ -21,12 +21,11 @@
             role="presentation"
         >
             <a
-                *ngIf="!item.subItems?.length"
+                *ngIf="!item.subItems?.length; else withPopover"
                 class="fd-icon-tab-bar__tab"
                 #tabItem
                 role="tab"
-                tabindex="0"
-                [attr.aria-placeholder]="item.color || null"
+                [attr.tabindex]="idx === 0 ? 0 : -1"
                 (click)="_selectItem(item, $event)"
                 (keydown)="_keyDownHandler($event, item, idx)"
                 [attr.aria-selected]="item.uId === _selectedUid"
@@ -40,17 +39,19 @@
                     <span class="fd-icon-tab-bar__tag">{{ item.label }}</span>
                 </ng-template>
                 <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>
+                <div class="screenreader-only" *ngIf="item.color">{{ item.color }}</div>
             </a>
-            <ng-container *ngIf="item.subItems?.length">
+            <ng-template #withPopover>
                 <fdp-text-type-popover
                     #tabItem
+                    [tabindex]="idx === 0 ? 0 : -1"
                     [parentTab]="item"
                     [selectedSubItemUid]="_selectedUid"
                     (selectedSubItem)="_selectItem($event)"
                     (keydown)="_keyDownHandler($event, item, idx)"
                 >
                 </fdp-text-type-popover>
-            </ng-container>
+            </ng-template>
         </li>
         <li
             *ngIf="_extraTabs.length"

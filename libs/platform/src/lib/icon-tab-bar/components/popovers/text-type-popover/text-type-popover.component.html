@@ -22,7 +22,13 @@
 <ng-container *ngIf="!isExtraItemsMode && parentTab">
     <fd-popover placement="bottom-end" [focusAutoCapture]="true" [focusTrapped]="true" #popover>
         <fd-popover-control>
-            <a [attr.aria-selected]="_containsSelected" class="fd-icon-tab-bar__tab" role="tab" tabindex="0" #dropdownTrigger>
+            <a
+                [attr.aria-selected]="_containsSelected"
+                class="fd-icon-tab-bar__tab"
+                role="tab"
+                [attr.tabindex]="tabindex"
+                #dropdownTrigger
+            >
                 <div class="fd-icon-tab-bar__tab-container">
                     <span class="fd-icon-tab-bar__tag">{{ parentTab.label }}</span>
                     <span class="fd-icon-tab-bar__arrow">
@@ -70,8 +76,9 @@
                 <span class="fd-list__title fd-icon-tab-bar__list-item-title">{{ item.label }}</span>
                 <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>
                 <span *ngIf="item.counter" class="fd-list__counter fd-icon-tab-bar__list-item-counter"
-                    >({{ item.counter }})</span
-                >
+                    >({{ item.counter }})
+                </span>
+                <div class="screenreader-only" *ngIf="item.color">{{ item.color }}</div>
             </a>
         </li>
         <ng-container *ngIf="item.subItems?.length">

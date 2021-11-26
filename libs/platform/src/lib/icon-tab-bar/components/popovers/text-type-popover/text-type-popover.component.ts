@@ -45,6 +45,12 @@ export class TextTypePopoverComponent extends IconTabBarPopoverBase implements O
     selectedSubItemUid: string;
 
     /**
+     * @description tabIndex of the particular item. Aplicable only for subitems mode
+     */
+    @Input()
+    tabindex = 0;
+
+    /**
      * @description Emits when some subTab is selected and isExtraItemsMode is disabled
      */
     @Output()

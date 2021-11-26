@@ -18,9 +18,8 @@
             class="fd-icon-tab-bar__tab"
             #tabItem
             role="tab"
-            tabindex="0"
+            [attr.tabindex]="idx === 0 ? 0 : -1"
             [attr.aria-selected]="item.uId === _selectedUid"
-            [attr.aria-placeholder]="item.color || null"
             (click)="_selectItem(item)"
             (keydown)="_keyDownHandler($event, item, idx)"
         >
@@ -36,6 +35,7 @@
                 <span class="fd-icon-tab-bar__counter">{{ item.counter }}</span>
                 <span class="fd-icon-tab-bar__label">{{ item.label }}</span>
             </div>
+            <div class="screenreader-only" *ngIf="item.color">{{ item.color }}</div>
         </a>
     </li>
     <li

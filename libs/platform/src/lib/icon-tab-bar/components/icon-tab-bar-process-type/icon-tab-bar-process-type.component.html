@@ -31,10 +31,9 @@
             (click)="_selectItem(item)"
             (keydown)="_keyDownHandler($event, item, idx)"
             [attr.aria-selected]="item.uId === _selectedUid"
-            [attr.aria-placeholder]="item.color || null"
             class="fd-icon-tab-bar__tab"
             #tabItem
-            tabindex="0"
+            [attr.tabindex]="idx === 0 ? 0 : -1"
             role="tab"
         >
             <ng-container *ngIf="item.icon; else processTextOnly">
@@ -53,6 +52,7 @@
                 <span class="fd-icon-tab-bar__tag">{{ item.label }}</span>
                 <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>
             </ng-template>
+            <div class="screenreader-only" *ngIf="item.color">{{ item.color }}</div>
         </a>
         <span *ngIf="_lastVisibleTabIndex !== idx" class="fd-icon-tab-bar__separator">
             <fd-icon glyph="process"></fd-icon>
