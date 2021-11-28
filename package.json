@@ -154,7 +154,7 @@
     "@nrwl/nx-cloud": "12.1.8",
     "@nrwl/schematics": "8.12.11",
     "@nrwl/tao": "12.9.0",
-    "@nrwl/workspace": "12.9.0",
+    "@nrwl/workspace": "13.2.3",
     "@schematics/angular": "~12.0.5",
     "@types/jasmine": "3.10.2",
     "@types/jasminewd2": "2.0.8",
