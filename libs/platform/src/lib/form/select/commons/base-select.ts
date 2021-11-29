@@ -196,6 +196,10 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
         this._isCompact = this.contentDensity !== 'cozy';
     }
 
+    get contentDensity(): ContentDensity {
+        return this._contentDensity;
+    }
+
     /** Data for suggestion list */
     get list(): any {
         return this._optionItems;
