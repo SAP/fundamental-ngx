@@ -95,11 +95,6 @@ export class SelectComponent extends BaseSelect implements OnInit, AfterViewInit
         super(cd, elementRef, ngControl, ngForm, _selectConfig, formField, formControl);
     }
 
-    /** @hidden
-     * extended by super class
-     */
-    ngOnInit(): void {}
-
     /** @hidden */
     ngAfterViewInit(): void {
         super.ngAfterViewInit();
