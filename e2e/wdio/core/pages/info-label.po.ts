@@ -6,6 +6,11 @@ export class InfoLabelPo extends CoreBaseComponentPo {
     readonly root = '#page-content';
 
     defaultLabel = 'fd-info-label-default-example fd-info-label';
+    infoLabel = 'fd-info-label';
+    textExample = 'fdp-platform-info-label-text-example ';
+    iconTextExample = 'fdp-platform-info-label-text-icon-example ';
+    icon = '.fd-info-label__icon';
+    labelText = '.fd-info-label__text';
 
     open(): void {
         super.open(this.url);
