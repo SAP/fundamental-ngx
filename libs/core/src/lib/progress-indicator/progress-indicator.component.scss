@@ -262,6 +262,7 @@
     padding-left: 0.5rem;
     overflow: hidden;
     white-space: normal;
+    max-width: 95vw;
 }
 .fd-progress-indicator__overflow::after,
 .fd-progress-indicator__overflow::before {
