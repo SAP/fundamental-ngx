@@ -1,11 +1,36 @@
 <header>Date Picker</header>
 <description>
-    Platform Date Picker is an extension of the Date Picker component present in
-    <fdp-link href="fundamental-ngx#/core/date-picker">fundamental-ngx/core</fdp-link> to work with
-    <fdp-link href="fundamental-ngx#/platform/form-container">Platform Form</fdp-link>. <br />
-    It keeps the same property and behavior with core Date picker. <br />
-    Platform Date Picker module uses DatetimeAdapter provider for handling date parsing and formatting.
-    <br />
+    <p>
+        Platform Date Picker is an extension of the Date Picker component present in
+        <fdp-link href="fundamental-ngx#/core/date-picker">fundamental-ngx/core</fdp-link> to work with
+        <fdp-link href="fundamental-ngx#/platform/form-container">Platform Form</fdp-link>. <br />
+        It keeps the same property and behavior with core Date picker. <br />
+    </p>
+    <fd-message-strip [dismissible]="false" type="information">
+        <b>IMPORTANT</b>
+        <br />
+        The Platform Date Picker component relies on provided datetime implementation (DatetimeAdapter) and datetime
+        formats (DateTimeFormats).
+        <br />
+        The current examples are based on FdDatetimeAdapter.
+        <br />
+        The FdDatetimeAdapter is based on native date api (formatting is based on
+        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat">
+            Intl object </a
+        >, parsing is based on
+        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse">
+            Date.parse() </a
+        >).
+        <br />
+        Since this adapter has some disadvantages, formatting may vary among browsers and parsing is limited to en
+        locale only.
+        <br />
+        You can use a custom fundamental adapter based on a third party library:
+        <a href="https://momentjs.com/" target="_blank">https://momentjs.com/</a>.
+        <br />
+        Please check examples and documentation on:
+        <b> <a routerLink="/core/moment-datetime-adapter" target="_blank"> Moment date time adapter </a> </b>.
+    </fd-message-strip>
     <br />
     <import module="PlatformDatePickerModule" subPackage="form"></import>
     <br />

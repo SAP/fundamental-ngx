@@ -1,18 +1,40 @@
 <header>Datetime Picker</header>
 <description>
-    The datetime picker component is an opinionated composition of the fd-popover, fd-calendar and fd-time components to
-    accomplish the UI pattern for picking a date and time.
-    <br /><br />
-    The Time Picker component <strong>relies on provided datetime implementation</strong> (<code>DatetimeAdapter</code>)
-    and <strong>datetime formats</strong> (<code>DateTimeFormats</code>).
-    <br />
-    Currently fundamental-ngx offer 2 kind of adapters: FdDateTimeAdapter and
-    <a fd-link routerLink="/core/moment-datetime-adapter">MomentDateTimeAdapter</a>. <br /><br />
-    The datetime picker supports the same keyboard navigability as the calendar and time components. The popover can be
-    opened by focusing the datetime picker input field and closed by focusing the icon button followed by pressing enter
-    or space.
-    <br /><br />
-    Fully compatible with Angular forms.
+    <p>
+        The datetime picker component is an opinionated composition of the fd-popover, fd-calendar and fd-time
+        components to accomplish the UI pattern for picking a date and time.
+        <br /><br />
+        The datetime picker supports the same keyboard navigability as the calendar and time components. The popover can
+        be opened by focusing the datetime picker input field and closed by focusing the icon button followed by
+        pressing enter or space.
+        <br /><br />
+        Fully compatible with Angular forms.
+    </p>
+    <fd-message-strip [dismissible]="false" type="information">
+        <b>IMPORTANT</b>
+        <br />
+        The Date Time Picker component relies on provided datetime implementation (DatetimeAdapter) and datetime formats
+        (DateTimeFormats).
+        <br />
+        The current examples are based on FdDatetimeAdapter.
+        <br />
+        The FdDatetimeAdapter is based on native date api (formatting is based on
+        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat">
+            Intl object </a
+        >, parsing is based on
+        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse">
+            Date.parse() </a
+        >).
+        <br />
+        Since this adapter has some disadvantages, formatting may vary among browsers and parsing is limited to en
+        locale only.
+        <br />
+        You can use a custom fundamental adapter based on a third party library:
+        <a href="https://momentjs.com/" target="_blank">https://momentjs.com/</a>.
+        <br />
+        Please check examples and documentation on:
+        <b> <a routerLink="/core/moment-datetime-adapter" target="_blank"> Moment date time adapter </a> </b>.
+    </fd-message-strip>
 </description>
 <import module="DatetimePickerModule" subPackage="datetime-picker"></import>
 
