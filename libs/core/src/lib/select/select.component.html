@@ -10,7 +10,7 @@
             [disabled]="disabled || readonly"
             [appendTo]="appendTo"
             [closeOnEscapeKey]="true"
-            [fillControlMode]="'at-least'"
+            fillControlMode="at-least"
             [maxWidth]="600"
             [closeOnOutsideClick]="closeOnOutsideClick"
             (isOpenChange)="_popoverOpenChangeHandle($event)"
@@ -29,9 +29,10 @@
 <ng-template #selectInputControlTemplate>
     <div
         class="fd-select__control"
-        role="list"
+        role="combobox"
+        aria-roledescription="Select"
         #selectControl
-        [ngClass]="state ? 'is-' + state : ''"
+        [class]="state ? 'is-' + state : ''"
         [class.is-active]="_isOpen"
         [class.is-expanded]="_isOpen"
         [class.is-disabled]="disabled"
@@ -45,7 +46,7 @@
         [attr.aria-disabled]="disabled"
         [attr.aria-readonly]="readonly"
         [attr.aria-controls]="controlId + '-list-box'"
-        [attr.aria-haspopup]="!(this.readonly || this.disabled)"
+        [attr.aria-haspopup]="!(readonly || disabled)"
         [attr.aria-required]="required"
         [attr.title]="triggerValue"
         [attr.aria-label]="ariaLabel"
@@ -54,7 +55,7 @@
         (focus)="_onFocus()"
         (blur)="_onBlur()"
     >
-        <div role="listitem" class="fd-select__text-content" [attr.aria-label]="triggerValue">
+        <div class="fd-select__text-content" [attr.aria-label]="triggerValue">
             <ng-container
                 [ngTemplateOutlet]="controlTemplate ? controlTemplate : defaultSelectContent"
                 [ngTemplateOutletContext]="{ $implicit: triggerValue, selected: selected }"
@@ -90,6 +91,7 @@
         [attr.id]="controlId + '-list-box'"
         [style.max-height]="maxHeight || calculatedMaxHeight + 'px'"
         [attr.tooltip]="triggerValue"
+        [attr.aria-labelledby]="controlId"
     >
         <li
             *ngIf="stateMessage"

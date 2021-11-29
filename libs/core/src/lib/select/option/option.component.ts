@@ -104,6 +104,14 @@ export class OptionComponent implements AfterViewChecked, OnDestroy, FocusableOp
     readonly _stateChanges = new Subject<void>();
 
     /** @hidden */
+    @HostBinding('attr.aria-setsize')
+    _ariaSetsize: number;
+
+    /** @hidden */
+    @HostBinding('attr.aria-posinset')
+    _ariaPosinset: number;
+
+    /** @hidden */
     private _mostRecentViewValue = '';
 
     /** @hidden */

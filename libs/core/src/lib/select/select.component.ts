@@ -704,6 +704,13 @@ export class SelectComponent
             .subscribe(() => {
                 this._changeDetectorRef.markForCheck();
             });
+
+        const optionsLength = this._options.length;
+
+        this._options.forEach((option, index) => {
+            option._ariaSetsize = optionsLength;
+            option._ariaPosinset = index + 1;
+        });
     }
 
     /**
