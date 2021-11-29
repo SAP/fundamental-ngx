@@ -50,9 +50,6 @@ export class TableColumnResizeService implements OnDestroy {
     /** @hidden */
     private _resizerPosition: number;
 
-    /** @hidden */
-    private _offsetWidth: number;
-
     /** @hidden
      * Temporary: Prevent from resizing when there are fixed columns. They are positioned absolutely and it breaks all.
      */
@@ -60,6 +57,9 @@ export class TableColumnResizeService implements OnDestroy {
 
     /** @hidden */
     private _scrollLeft = 0;
+
+    /** @hidden */
+    private _tableWidthPx = 0;
 
     /** @hidden */
     private _markForCheck = new Subject<void>();
@@ -117,10 +117,9 @@ export class TableColumnResizeService implements OnDestroy {
     }
 
     /** Initialize service with data, trigger columns width calculation. */
-    setColumnsWidth(visibleColumnNames: string[], freezeColumnsTo: string, offsetWidth: number): void {
+    setColumnsWidth(visibleColumnNames: string[], freezeColumnsTo: string): void {
         this._visibleColumnNames = visibleColumnNames;
         this._preventResize = this._visibleColumnNames.includes(freezeColumnsTo);
-        this._offsetWidth = offsetWidth;
 
         this._calculateColumnsWidth();
     }
@@ -147,7 +146,7 @@ export class TableColumnResizeService implements OnDestroy {
                     break;
                 case ColumnWidthChangeSource.WidthInput:
                     if (column.width) {
-                        return column.width;
+                        return this.getColumnWidth(column.width);
                     }
                     break;
             }
@@ -158,10 +157,22 @@ export class TableColumnResizeService implements OnDestroy {
         }
 
         if (column.width) {
-            return column.width;
+            return this.getColumnWidth(column.width);
         }
 
         return 'auto';
+    }
+
+    /** @hidden */
+    private getColumnWidth(width: string): string {
+        if (!width.trim().endsWith('%')) {
+            return width;
+        }
+        const percent = parseFloat(width);
+        if (!this._tableWidthPx) {
+            throw new Error('Cannot resolve column width until table width is set');
+        }
+        return (this._tableWidthPx * percent) / 100 + 'px';
     }
 
     /** Previous column name */
@@ -190,6 +201,11 @@ export class TableColumnResizeService implements OnDestroy {
         return columnsWidth;
     }
 
+    /** Sets initial table width. This will be used to relatively calculate columns' widths specified in percents */
+    setInitialTableWidth(widthPx: number): void {
+        this._tableWidthPx = widthPx;
+    }
+
     /** Register column's cell to get its dimensions in further. */
     registerColumnCell(columnName: string, cellElRef: ElementRef): void {
         this._columnsCellMap.set(columnName, cellElRef);
@@ -211,7 +227,7 @@ export class TableColumnResizeService implements OnDestroy {
 
         if (resizerPosition != null) {
             const scrollLeftOffset = this._scrollLeft * (this._rtl ? 1 : -1);
-            this._resizerPosition = resizerPosition + this._offsetWidth - TABLE_RESIZER_BORDER_WIDTH + scrollLeftOffset;
+            this._resizerPosition = resizerPosition - TABLE_RESIZER_BORDER_WIDTH + scrollLeftOffset;
         }
     }
 

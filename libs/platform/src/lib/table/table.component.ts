@@ -443,8 +443,11 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      */
     _nameToColumnMap: Map<string, TableColumn> = new Map();
 
-    /** @hidden */
-    _freezableColumns: string[] = [];
+    /**
+     * @hidden
+     * Freezable column names and their respective indexes
+     */
+    _freezableColumns: Map<string, number> = new Map();
 
     /** @hidden */
     _tablePadding = 0;
@@ -532,7 +535,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             !this._sortRulesMap.size &&
             !this._groupRulesMap.size &&
             !this._filterRulesMap.size &&
-            !this._freezableColumns.length
+            !this._freezableColumns.size
         );
     }
 
@@ -578,7 +581,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** @hidden */
-    private get _semanticHighlightingColumnWidth(): number {
+    get _semanticHighlightingColumnWidth(): number {
         return this.semanticHighlighting ? SEMANTIC_HIGHLIGHTING_COLUMN_WIDTH : 0;
     }
 
@@ -646,6 +649,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     ngAfterViewInit(): void {
         this._viewInitiated = true;
+
+        this._setInitialTableWidth();
 
         this._setInitialState();
 
@@ -759,7 +764,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** Unfreeze column */
     unfreeze(columnName: string): void {
-        const freezeToColumnIndex = this._freezableColumns.indexOf(columnName);
+        const freezeToColumnIndex = this._freezableColumns.get(columnName) ?? -1;
         const freezeToPreviousColumnName = this._freezableColumns[freezeToColumnIndex - 1];
 
         this.freezeColumnsTo = freezeToPreviousColumnName;
@@ -843,9 +848,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     recalculateTableColumnWidth(): void {
         const recalculateFn = () => {
             const columnNames = this._visibleColumns.map((column) => column.name);
-            const offsetWidth = this._selectionColumnWidth + this._semanticHighlightingColumnWidth;
 
-            this._tableColumnResizeService.setColumnsWidth(columnNames, this.freezeColumnsTo, offsetWidth);
+            this._tableColumnResizeService.setColumnsWidth(columnNames, this.freezeColumnsTo);
             this._setFreezableInfo();
 
             this._cdr.detectChanges();
@@ -1030,12 +1034,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** @hidden */
-    _getFixedTableStyles(): { [styleProp: string]: number } {
-        const key = this._rtl ? 'padding-right.px' : 'padding-left.px';
-        return { [key]: this._tablePadding };
-    }
-
-    /** @hidden */
     _getCellHeightPx(parentRow: HTMLTableRowElement): string {
         return parentRow ? parentRow.getBoundingClientRect().height + 'px' : 'unset';
     }
@@ -1046,6 +1044,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
         return {
             [rtlKey]: this._semanticHighlightingColumnWidth + 'px',
+            'min-width': SELECTION_COLUMN_WIDTH.get(this.contentDensity) + 'px',
+            'max-width': SELECTION_COLUMN_WIDTH.get(this.contentDensity) + 'px',
             height: this._getCellHeightPx(parentRow)
         };
     }
@@ -1061,8 +1061,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     _getCellStyles(column: TableColumn): { [styleProp: string]: number | string } {
         const styles: { [property: string]: number | string } = {};
 
-        if (this._freezableColumns.includes(column.name)) {
-            const key = this._rtl ? 'margin-right.px' : 'margin-left.px';
+        if (this._freezableColumns.has(column.name)) {
+            const key = this._rtl ? 'right.px' : 'left.px';
             styles[key] =
                 this._semanticHighlightingColumnWidth +
                 this._selectionColumnWidth +
@@ -1072,10 +1072,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         const columnWidth = this._tableColumnResizeService.getColumnWidthStyle(column);
         styles['min-width'] = columnWidth;
         styles['max-width'] = columnWidth;
-
-        if ((!this._isShownSelectionColumn && !this.semanticHighlighting) || this.freezeColumnsTo) {
-            styles['width'] = columnWidth;
-        }
+        styles['width'] = columnWidth;
 
         return styles;
     }
@@ -1291,6 +1288,13 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                 pageSize: this.pageSize || page.pageSize
             }
         });
+    }
+
+    /** @hidden */
+    private _setInitialTableWidth(): void {
+        this._tableColumnResizeService.setInitialTableWidth(
+            this.tableContainer.nativeElement.getBoundingClientRect().width
+        );
     }
 
     /** @hidden */
@@ -1540,7 +1544,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     private _setFreezableInfo(): void {
         this._freezableColumns = this._getFreezableColumns();
 
-        const freezeToNextColumnName = this._visibleColumns[this._freezableColumns.length]?.name;
+        const freezeToNextColumnName = this._visibleColumns[this._freezableColumns.size]?.name;
 
         this._tablePadding =
             this._semanticHighlightingColumnWidth +
@@ -1549,8 +1553,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** @hidden */
-    private _getFreezableColumns(): string[] {
-        const columnNames: string[] = [];
+    private _getFreezableColumns(): Map<string, number> {
+        const columnNames = new Map<string, number>();
         const columns = this._visibleColumns;
 
         if (!columns.length || !this.freezeColumnsTo) {
@@ -1562,14 +1566,15 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                 continue;
             }
 
-            columnNames.push(column.name);
+            // using columnNames.size as index of a column
+            columnNames.set(column.name, columnNames.size);
 
             if (column.name === this.freezeColumnsTo) {
                 return columnNames;
             }
         }
 
-        return [];
+        return new Map();
     }
 
     /** @hidden */
