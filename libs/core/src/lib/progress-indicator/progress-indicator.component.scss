@@ -1,3 +1,4 @@
+// TODO: import progress indicator
 // @import '~fundamental-styles/dist/progress-indicator';
 
 .fd-progress-indicator__progress-bar--animated {
@@ -259,8 +260,8 @@
     -ms-flex-pack: justify;
     justify-content: space-between;
     padding-left: 0.5rem;
-    line-height: 1;
     overflow: hidden;
+    white-space: normal;
 }
 .fd-progress-indicator__overflow::after,
 .fd-progress-indicator__overflow::before {

@@ -1,5 +1,4 @@
 <div
-    #progressIndicator
     class="fd-progress-indicator"
     tabindex="-1"
     role="progressbar"
@@ -8,7 +7,7 @@
     [attr.aria-valuemax]="valueMax"
     [attr.aria-valuetext]="valueText"
     [attr.aria-label]="valueText"
-    [ngClass]="state ? 'fd-progress-indicator--' + state : ''"
+    [class]="state ? 'fd-progress-indicator--' + state : ''"
 >
     <ng-container *ngIf="!hasPopover">
         <ng-container *ngTemplateOutlet="indicatorContainer"></ng-container>
@@ -33,7 +32,10 @@
 </div>
 
 <ng-template #indicatorContainer>
-    <div class="fd-progress-indicator__container" *ngIf="calculateProgressBarWidth() as progressBarWidth">
+    <div
+        class="fd-progress-indicator__container"
+        *ngIf="calculateProgressBarWidth() === 0 || calculateProgressBarWidth() as progressBarWidth"
+    >
         <div
             class="fd-progress-indicator__progress-bar"
             [class.fd-progress-indicator__progress-bar--animated]="animate"
