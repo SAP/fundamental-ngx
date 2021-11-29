@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.177 (2021-11-29)
+
+
+### Bug Fixes
+
+* **platform:** adjust select content density configuration ([#7267](https://github.com/SAP/fundamental-ngx/issues/7267)) ([ce14ee6](https://github.com/SAP/fundamental-ngx/commit/ce14ee6a8cc2228122326b4cc64b0cc9e14fa0b2))
+
 ## 0.33.0-rc.176 (2021-11-29)
 
 ## 0.33.0-rc.175 (2021-11-26)
