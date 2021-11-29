@@ -234,7 +234,7 @@ jobs:
                   firebaseServiceAccount: '${{ env.FIREBASE_SERVICE_ACCOUNT_TOKEN }}'
                   projectId: fundamental-ngx-gh
                   target: fundamental-ngx-gh
-                  channelId: ${{ env.FIREBASE_CHANNEL }}
+                  channelId: pr7252-firebase-improvement
                   expires: 2d
 
     # delete firebase preview on merge
@@ -254,9 +254,15 @@ jobs:
                   key: dist-docs-${{ github.run_id }}
             - name: install firebase tools
               run: npm install -g firebase-tools
+            - name: enable hosting
+              continue-on-error: true
+              run: npx firebase init hosting:github --token ${{  env.FIREBASE_SERVICE_ACCOUNT_TOKEN  }}
+            - name: get current list
+              continue-on-error: true
+              run: /usr/local/bin/npx firebase hosting:channel:list --token ${{  env.FIREBASE_SERVICE_ACCOUNT_TOKEN  }}
             - name: delete firebase preview
               continue-on-error: true
-              run: npm run firebase hosting:channel:delete pr7252-firebase-improvement
+              run: npx firebase hosting:channel:delete pr7252-firebase-improvement --token ${{  env.FIREBASE_SERVICE_ACCOUNT_TOKEN  }}
 
     # run e2e tests
     e2e_smoke:

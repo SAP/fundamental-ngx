@@ -1,0 +1,41 @@
+[debug] [2021-11-29T10:46:44.507Z] ----------------------------------------------------------------------
+[debug] [2021-11-29T10:46:44.509Z] Command:       /usr/bin/node /home/sean/projects/fundamental-ngx/node_modules/.bin/firebase hosting:channel:list
+[debug] [2021-11-29T10:46:44.509Z] CLI Version:   9.23.0
+[debug] [2021-11-29T10:46:44.509Z] Platform:      linux
+[debug] [2021-11-29T10:46:44.509Z] Node Version:  v13.9.0
+[debug] [2021-11-29T10:46:44.509Z] Time:          Mon Nov 29 2021 12:46:44 GMT+0200 (Eastern European Standard Time)
+[debug] [2021-11-29T10:46:44.509Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-11-29T10:46:44.548Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-11-29T10:46:44.548Z] > authorizing via signed-in user (sean.moore@valor-software.com)
+[debug] [2021-11-29T10:46:44.548Z] [iam] checking project fundamental-ngx-gh for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2021-11-29T10:46:44.550Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2021-11-29T10:46:44.550Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-11-29T10:46:44.721Z] <<< HTTP RESPONSE 200 {"pragma":"no-cache","expires":"Mon, 01 Jan 1990 00:00:00 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","date":"Mon, 29 Nov 2021 10:46:44 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-11-29T10:46:44.743Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/fundamental-ngx-gh:testIamPermissions  
+ {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2021-11-29T10:46:45.650Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Mon, 29 Nov 2021 10:46:45 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=723","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-11-29T10:46:45.652Z] [iam] error while checking permissions, command may fail: FirebaseError: Authorization failed. This account is missing the following required permissions on project fundamental-ngx-gh:
+
+  firebase.projects.get
+  firebasehosting.sites.update
+[debug] [2021-11-29T10:46:45.654Z] > refreshing access token with scopes: []
+[debug] [2021-11-29T10:46:45.654Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-11-29T10:46:45.820Z] <<< HTTP RESPONSE 200 {"pragma":"no-cache","cache-control":"no-cache, no-store, max-age=0, must-revalidate","date":"Mon, 29 Nov 2021 10:46:45 GMT","expires":"Mon, 01 Jan 1990 00:00:00 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-11-29T10:46:45.838Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/fundamental-ngx-gh [none]
+[debug] [2021-11-29T10:46:46.175Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/fundamental-ngx-gh 403
+[debug] [2021-11-29T10:46:46.176Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/fundamental-ngx-gh {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2021-11-29T10:46:46.177Z] HTTP Error: 403, The caller does not have permission
+[debug] [2021-11-29T10:46:46.311Z] FirebaseError: HTTP Error: 403, The caller does not have permission
+    at module.exports (/home/sean/projects/fundamental-ngx/node_modules/firebase-tools/lib/responseToError.js:38:12)
+    at Client.doRequest (/home/sean/projects/fundamental-ngx/node_modules/firebase-tools/lib/apiv2.js:241:23)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+    at async Client.request (/home/sean/projects/fundamental-ngx/node_modules/firebase-tools/lib/apiv2.js:96:20)
+    at async Object.getFirebaseProject (/home/sean/projects/fundamental-ngx/node_modules/firebase-tools/lib/management/projects.js:290:21)
+    at async Object.getDefaultHostingSite (/home/sean/projects/fundamental-ngx/node_modules/firebase-tools/lib/getDefaultHostingSite.js:8:21)
+    at async Object.requireHostingSite [as fn] (/home/sean/projects/fundamental-ngx/node_modules/firebase-tools/lib/requireHostingSite.js:9:18)
+    at async /home/sean/projects/fundamental-ngx/node_modules/firebase-tools/lib/command.js:188:17
+[error] 
+[error] Error: Failed to get Firebase project fundamental-ngx-gh. Please make sure the project exists and your account has permission to access it.
