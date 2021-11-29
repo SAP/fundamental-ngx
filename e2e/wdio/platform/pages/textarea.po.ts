@@ -3,7 +3,12 @@ import { waitForElDisplayed } from '../../driver/wdio';
 
 export class TextareaPo extends BaseComponentPo {
     url = '/textarea';
-    root = '#page-content';
+
+    textareaBasicExample = 'fdp-platform-textarea-basic-example ';
+    textareaAutogrowExample = 'fdp-platform-textarea-autogrow-example ';
+    textareaCounterExample = 'fdp-platform-textarea-counter-example ';
+    textareaCounterTemplateExample = 'fdp-platform-textarea-counter-template-example ';
+    textareaI18nExample = 'fdp-platform-textarea-i18n-example ';
 
     basicTextArea = '#basicTextarea';
     basicTextAreaLabel = '#fdp-form-label-basicTextarea';
@@ -29,6 +34,7 @@ export class TextareaPo extends BaseComponentPo {
     detailedTextAreaErrorMessage = '[type="error"]';
     detailedTextAreaCharacterCounter = `//div[label[@id='fdp-form-label-detailedDescription']]//div[@role="alert"]//span`;
     noPlatformsFormTextAreaLabel = '[for="textarea-1"]';
+    textarea = 'textarea:not(#readonlyDescription, #disabledDescription)';
 
     open(): void {
         super.open(this.url);

@@ -11,9 +11,12 @@ export class TextareaPo extends CoreBaseComponentPo {
 
     textarea = '.fd-textarea';
     label = '.fd-form-label';
+    compactTextarea = '.fd-textarea--compact';
+    basicTextArea = '.fd-textarea:not(.fd-textarea--compact)';
 
     helpIcon = '.sap-icon--question-mark';
     helpContent = '.fd-inline-help__content';
+    formMessage = '.fd-popover__popper fd-form-message';
 
     open(): void {
         super.open(this.url);

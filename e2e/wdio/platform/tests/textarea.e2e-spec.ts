@@ -2,9 +2,9 @@ import { TextareaPo } from '../pages/textarea.po';
 import {
     basic_text_area_label,
     basic_text_area_placeholder,
-    basic_text_area_popover,
-    compact_text_area_label,
-    disabled_text_area_label,
+    basic_text_area_popover, basicTextareaPlaceholderArr,
+    compact_text_area_label, counterTextareaPlaceholderArr,
+    disabled_text_area_label, growingTextareaPlaceholderArr,
     no_platforms_form_text_area_label,
     readonly_text_area_label
 } from '../fixtures/appData/textarea-page-content';
@@ -22,7 +22,7 @@ import {
     currentPlatformName,
     executeScriptAfterTagAttr,
     executeScriptBeforeTagAttr,
-    getAttributeByName,
+    getElementArrayLength, getElementPlaceholder,
     getElementSize,
     getText,
     getValue,
@@ -35,7 +35,7 @@ import {
     setValue,
     waitForElDisplayed,
     waitForPresent,
-    waitTextToBePresentInValue
+    waitTextToBePresentInValue,
 } from '../../driver/wdio';
 
 describe('Verify Textarea component', () => {
@@ -59,7 +59,13 @@ describe('Verify Textarea component', () => {
         detailedTextArea,
         detailedTextAreaErrorMessage,
         detailedTextAreaCharacterCounter,
-        noPlatformsFormTextAreaLabel
+        noPlatformsFormTextAreaLabel,
+        textarea,
+        textareaBasicExample,
+        textareaAutogrowExample,
+        textareaCounterExample,
+        textareaCounterTemplateExample,
+        textareaI18nExample
     } = textareaPage;
     const copyPasteBtn = currentPlatformName() === 'Mac OS X' ? 'Command' : 'Control';
 
@@ -138,10 +144,14 @@ describe('Verify Textarea component', () => {
         describe('placeholder should exhibit standard behaviour', () => {
             // The standard behaviour of place holder is under browser control, and can't be checked by webDriver,
             // Checking that placeholder is present.
-            it('should appear as hint text and remain as long as text area is empty', () => {
-                const textAriaPlaceholderBefore = getAttributeByName(basicTextArea, 'placeholder');
-
-                expect(textAriaPlaceholderBefore).toBe(basic_text_area_placeholder);
+            fit('should appear as hint text and remain as long as text area is empty', () => {
+                checkPlaceholder(textareaBasicExample, basicTextareaPlaceholderArr);
+                checkPlaceholder(textareaAutogrowExample, growingTextareaPlaceholderArr);
+                checkPlaceholder(textareaCounterExample, counterTextareaPlaceholderArr);
+                expect(getElementPlaceholder(textareaCounterTemplateExample + textarea))
+                    .toBe(counterTextareaPlaceholderArr[0]);
+                expect(getElementPlaceholder(textareaI18nExample + textarea))
+                    .toBe(counterTextareaPlaceholderArr[0]);
             });
         });
 
@@ -291,4 +301,12 @@ describe('Verify Textarea component', () => {
             });
         });
     });
+
+    function checkPlaceholder(example: string, placeholderArr: string[]): void {
+        scrollIntoView(example);
+        const textareaLength = getElementArrayLength(example + textarea);
+        for (let i = 0; i < textareaLength; i++) {
+            expect(getElementPlaceholder(example + textarea, i)).toBe(placeholderArr[i]);
+        }
+    }
 });
