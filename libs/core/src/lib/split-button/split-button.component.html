@@ -1,4 +1,11 @@
-<div class="fd-button-split fd-has-margin-right-small" role="group" aria-label="button-split" [fdMenuTrigger]="menu">
+<div
+    class="fd-button-split fd-has-margin-right-small"
+    role="group"
+    tabindex="-1"
+    [attr.aria-label]="arialLabel"
+    [fdMenuTrigger]="menu"
+    (focus)="_onGroupFocused()"
+>
     <button
         fd-button
         #mainActionButton
@@ -19,8 +26,9 @@
         [fdType]="fdType"
         [compact]="compact"
         [disabled]="disabled"
-        [attr.aria-label]="expandButtonAriaLabel"
+        [ariaLabel]="expandButtonAriaLabel"
+        [attr.title]="expandButtonTitle || expandButtonAriaLabel"
+        [class.is-active]="menu.isOpen"
     ></button>
-
     <ng-content select="fd-menu"></ng-content>
 </div>
