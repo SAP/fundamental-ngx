@@ -6,4 +6,9 @@ export const sections = [
 ];
 export const states = ['success', 'error', 'warning', 'information'];
 export const formMessageTestText = 'Pellentesque metus lacus commodo eget justo ut rutrum varius nunc';
-export const styleArr = ['fd-form-message--success', 'fd-form-message--error', 'fd-form-message--warning', 'fd-form-message--information'];
+export const styleArr = [
+    'fd-form-message--success',
+    'fd-form-message--error',
+    'fd-form-message--warning',
+    'fd-form-message--information'
+];

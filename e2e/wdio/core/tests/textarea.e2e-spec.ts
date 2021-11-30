@@ -14,14 +14,26 @@ import {
     isElementClickable,
     click,
     sendKeys,
-    waitForPresent, getElementSize
+    waitForPresent,
+    getElementSize
 } from '../../driver/wdio';
 
 import { formMessageTestText, sections, states, styleArr } from '../fixtures/appData/textarea-contents';
 
 describe('Textarea component test', () => {
     const textareaPage = new TextareaPo();
-    const { defaultExample, formExample, stateExample, textarea, label, helpIcon, helpContent, formMessage, basicTextArea, compactTextarea } = textareaPage;
+    const {
+        defaultExample,
+        formExample,
+        stateExample,
+        textarea,
+        label,
+        helpIcon,
+        helpContent,
+        formMessage,
+        basicTextArea,
+        compactTextarea
+    } = textareaPage;
 
     beforeAll(() => {
         textareaPage.open();
@@ -91,7 +103,10 @@ describe('Textarea component test', () => {
         for (let i = 0; i < inputLength - 2; i++) {
             scrollIntoView(stateExample + textarea, i);
             click(stateExample + textarea, i);
-            expect(isElementDisplayed(formMessage)).toBe(true, `form message does not displayed for input with index ${i}`);
+            expect(isElementDisplayed(formMessage)).toBe(
+                true,
+                `form message does not displayed for input with index ${i}`
+            );
         }
     });
 

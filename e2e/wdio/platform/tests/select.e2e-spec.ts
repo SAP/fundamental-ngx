@@ -2,14 +2,14 @@ import { SelectPo } from '../pages/select.po';
 import {
     click,
     getAttributeByName,
-    getElementArrayLength,
+    getElementArrayLength, getElementClass, getElementSize,
     getText,
     isElementClickable,
     refreshPage,
     scrollIntoView
 } from '../../driver/wdio';
 import {
-    disableSelectModeValueTestText,
+    disableSelectModeValueTestText, inputStateArr,
     maxHeightTestText,
     mobileExampleTestText,
     selectWithTwoColumnsTestText,
@@ -38,7 +38,8 @@ describe('Select test suite', () => {
         selectMaxHeightExample,
         selectNoneExample,
         selectNowrapExample,
-        selectInReactiveForms
+        selectInReactiveForms,
+        inputControl
     } = selectPage;
 
     beforeAll(() => {
@@ -68,6 +69,17 @@ describe('Select test suite', () => {
             expect(getAttributeByName(selectModeExample + displayText, 'aria-disabled', 2)).toBe('true');
             expect(getText(selectedValue_1, 2)).toBe(disableSelectModeValueTestText);
         });
+
+        it('verify select in read only mode', () => {
+            expect(getAttributeByName(selectModeExample + displayText, 'aria-readonly', 3)).toBe('true');
+        });
+
+        it('should check compact select be smaller than basic select', () => {
+            const basicInput = getElementSize(selectModeExample + displayText);
+            const compactInput = getElementSize(selectModeExample + displayText, 1);
+
+            expect(basicInput.height).toBeGreaterThan(compactInput.height);
+        });
     });
 
     describe('Check Select with Two Columns example', () => {
@@ -87,6 +99,16 @@ describe('Select test suite', () => {
                 const textAfter = getText(selectSemanticStateExample + displayText, i);
                 expect(textBefore).not.toEqual(textAfter);
             }
+        });
+
+
+        it('should check input states', () => {
+            scrollIntoView(selectSemanticStateExample);
+            const inputLength = getElementArrayLength(selectSemanticStateExample + inputControl);
+            for (let i = 0; i < inputLength; i++) {
+                expect(getElementClass(selectSemanticStateExample + inputControl, i)).toContain(inputStateArr[i]);
+            }
+
         });
     });
 

@@ -4,7 +4,7 @@ import {
     clearValue,
     click,
     getAttributeByName,
-    getElementArrayLength,
+    getElementArrayLength, getElementSize,
     getText,
     getValue,
     isElementClickable,
@@ -45,7 +45,8 @@ describe('Combobox component test suit', () => {
         mobileTitle,
         reactiveFormButton,
         reactiveFormText,
-        standardButton
+        standardButton,
+        compactInput
     } = comboboxPage;
 
     beforeAll(() => {
@@ -84,6 +85,13 @@ describe('Combobox component test suit', () => {
             setValue(allInputFields, 'Ba', 5);
             click(dropdownOption);
             expect(getValue(allInputFields, 5)).toBe(bananaTestText);
+        });
+
+        it('should check compact input be smaller than basic input', () => {
+            const basicInputS = getElementSize(allInputFields);
+            const compactInputS = getElementSize(compactInput);
+
+            expect(basicInputS.height).toBeGreaterThan(compactInputS.height);
         });
     });
 

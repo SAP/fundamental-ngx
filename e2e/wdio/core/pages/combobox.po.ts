@@ -3,7 +3,6 @@ import { waitForElDisplayed } from '../../driver/wdio';
 
 export class ComboboxPo extends CoreBaseComponentPo {
     url = '/combobox';
-    root = '#page-content';
 
     standardButton = '#background-ex0 button';
     dropdownPopover = 'fd-popover-body';
@@ -16,6 +15,7 @@ export class ComboboxPo extends CoreBaseComponentPo {
     mobileTitle = 'h1.fd-title--h5';
     reactiveFormButton = '#background-ex13 button';
     reactiveFormText = '#background-ex13 small';
+    compactInput = '.fd-input--compact';
 
     open(): void {
         super.open(this.url);
