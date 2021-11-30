@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ChangeDetectionStrategy, DebugElement } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
@@ -12,7 +12,6 @@ import { PlatformButtonModule } from '../button/public_api';
 describe('FeedInputComponent', () => {
     let component: FeedInputComponent;
     let fixture: ComponentFixture<FeedInputComponent>;
-    let hostEl: DebugElement;
     let textareaEl;
     let buttonEl;
 
@@ -33,7 +32,6 @@ describe('FeedInputComponent', () => {
 
         fixture.detectChanges();
 
-        hostEl = fixture.debugElement.query(By.css('.fd-feed-input'));
         textareaEl = fixture.debugElement.query(By.css('textarea'));
         buttonEl = fixture.debugElement.query(By.css('button'));
     });

@@ -411,7 +411,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
      * Returns transformed 1d array from 2d year grid.
      */
     private _getYearsList(): CalendarAggregatedYear[] {
-        return [].concat.apply([], this._calendarYearListGrid);
+        return [].concat(...this._calendarYearListGrid);
     }
 
     /**

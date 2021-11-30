@@ -1,11 +1,11 @@
 import { ComponentBasedDialogExampleComponent } from './component-based/component-based-dialog-example.component';
 import { DialogBackdropContainerExampleComponent } from './dialog-backdrop-container/dialog-backdrop-container-example.component';
 import { DialogComplexExampleComponent } from './dialog-complex/dialog-complex-example.component';
-import { DialogConfigurationExample } from './dialog-configuration/dialog-configuration-example.component';
+import { DialogConfigurationExampleComponent } from './dialog-configuration/dialog-configuration-example.component';
 import { DialogMobileExampleComponent } from './dialog-mobile/dialog-mobile-example.component';
 import { DialogObjectExampleComponent } from './dialog-object-example/dialog-object-example.component';
 import { DialogPositionExampleComponent } from './dialog-position/dialog-position-example.component';
-import { DialogStateExample } from './dialog-state/dialog-state-example.component';
+import { DialogStateExampleComponent } from './dialog-state/dialog-state-example.component';
 import { DialogStackedExampleComponent } from './stacked-dialogs/dialog-stacked-example.component';
 import { TemplateBasedDialogExampleComponent } from './template-based/template-based-dialog-example.component';
 import { FormDialogExampleComponent } from './dialog-form/form-dialog-example.component';
@@ -33,11 +33,11 @@ export const examples = [
     ComponentBasedDialogExampleComponent,
     DialogBackdropContainerExampleComponent,
     DialogComplexExampleComponent,
-    DialogConfigurationExample,
+    DialogConfigurationExampleComponent,
     DialogMobileExampleComponent,
     DialogObjectExampleComponent,
     DialogPositionExampleComponent,
-    DialogStateExample,
+    DialogStateExampleComponent,
     DialogStackedExampleComponent,
     TemplateBasedDialogExampleComponent,
     FormDialogExampleComponent,

@@ -104,15 +104,11 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         this._suggestions = value;
         if (Array.isArray(value)) {
             // convert suggestions to an array of string for "dropdown values"
-            const dropdownValues = value.map((suggestion: SuggestionItem) => {
-                return suggestion.value;
-            });
+            const dropdownValues = value.map((suggestion: SuggestionItem) => suggestion.value);
             this._dropdownValues$ = of(dropdownValues);
         } else if (isObservable<SuggestionItem[]>(value)) {
             this._dropdownValues$ = value.pipe(
-                map((suggestions: SuggestionItem[]) => {
-                    return suggestions.map((suggestion) => suggestion.value);
-                })
+                map((suggestions: SuggestionItem[]) => suggestions.map((suggestion) => suggestion.value))
             );
         } else {
             this._dropdownValues$ = of([]);
@@ -350,7 +346,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
 
     /** @hidden */
     ngOnDestroy(): void {
-        if (!!this._suggestionOverlayRef) {
+        if (this._suggestionOverlayRef) {
             this._suggestionOverlayRef.dispose();
             this._suggestionOverlayRef = null;
         }

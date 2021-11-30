@@ -52,6 +52,7 @@ export class MenuComponent
     implements MenuInterface, AfterContentInit, AfterViewInit, OnDestroy, OnInit
 {
     /** Set menu in mobile mode */
+    // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('mobile')
     set setMobileMode(value: boolean) {
         this.mobile = value;
@@ -118,7 +119,7 @@ export class MenuComponent
     private _mobileModeComponentRef: ComponentRef<MenuMobileComponent>;
 
     /** @hidden */
-    private _clickEventListener: Function;
+    private _clickEventListener: () => void;
 
     /** @hidden */
     constructor(

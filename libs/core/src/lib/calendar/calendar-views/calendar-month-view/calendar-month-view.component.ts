@@ -304,7 +304,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
      * Returns transformed 1d array from 2d month grid.
      */
     private _getMonthList(): CalendarMonth[] {
-        return [].concat.apply([], this._calendarMonthListGrid);
+        return [].concat(...this._calendarMonthListGrid);
     }
 
     /** @hidden */

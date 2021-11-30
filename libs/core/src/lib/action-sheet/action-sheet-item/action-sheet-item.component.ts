@@ -30,7 +30,7 @@ export interface ActionSheetClickEvent {
  * ```
  */
 @Component({
-    // tslint:disable-next-line:component-selector
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-action-sheet-item]',
     templateUrl: './action-sheet-item.component.html',
     encapsulation: ViewEncapsulation.None,
@@ -56,7 +56,7 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     @Input()
     compact = false;
 
-    /**Indicate if it's closing button **/
+    /** Indicate if it's closing button **/
     @Input()
     isCloseButton = false;
 
@@ -85,7 +85,7 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
 
     /** Handler for mouse events */
     @HostListener('click', ['$event'])
-    onClick(event: MouseEvent): void {
+    onClick(): void {
         this.clicked.emit({
             shouldClose: this.isCloseButton
         });

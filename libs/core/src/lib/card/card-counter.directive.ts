@@ -7,7 +7,7 @@ import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { CLASS_NAME } from './constants';
 
 @Directive({
-    // tslint:disable-next-line: directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-card-counter]'
 })
 export class CardCounterDirective implements OnInit, OnChanges, CssClassBuilder {

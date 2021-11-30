@@ -312,9 +312,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     ];
 
     /** @hidden */
-    private _displayFn = (value: any) => {
-        return this.displayValue(value);
-    };
+    private _displayFn = (value: any) => this.displayValue(value);
 
     /** @hidden */
     private _secondaryFn = (value: any) => {
@@ -546,7 +544,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
 
     /** @hidden */
     protected get ds(): MultiComboBoxDataSource<any> {
-        return <MultiComboBoxDataSource<any>>this.dataSource;
+        return this.dataSource as MultiComboBoxDataSource<any>;
     }
 
     /** @hidden */

@@ -265,9 +265,7 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
      * @param elm Focused HTML element.
      */
     setFocusedElementIndex(elm: HTMLElement): void {
-        this._focusedElementIndex = this.focusableItems.toArray().findIndex((item) => {
-            return item.elRef.nativeElement === elm;
-        });
+        this._focusedElementIndex = this.focusableItems.toArray().findIndex((item) => item.elRef.nativeElement === elm);
     }
 
     /**

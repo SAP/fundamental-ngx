@@ -17,7 +17,7 @@ export class ObjectMarkerPo extends CoreBaseComponentPo {
         waitForPresent(this.marker);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

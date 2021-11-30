@@ -129,10 +129,10 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
     @Input()
     inputHidden = false;
 
-    /*** It stores the valid files  */
+    /** * It stores the valid files  */
     validFiles: File[] = [];
 
-    /*** It stores the invalid files  */
+    /** * It stores the invalid files  */
     invalidFiles: File[] = [];
 
     /** Event fired when files are selected. Passed object is the array of files selected. */
@@ -145,10 +145,12 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
 
     /** Event fired when the dragged file enters the component boundaries. */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     readonly onDragEnter = new EventEmitter<void>();
 
     /** Event fired when the dragged file exits the component boundaries. */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     readonly onDragLeave = new EventEmitter<void>();
 
     /** @hidden */
@@ -178,10 +180,10 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
     }
 
     /** @hidden */
-    onChange: Function = () => {};
+    onChange: (values: File[]) => void = () => {};
 
     /** @hidden */
-    onTouched: Function = () => {};
+    onTouched = () => {};
 
     /** @hidden */
     registerOnChange(fn: any): void {

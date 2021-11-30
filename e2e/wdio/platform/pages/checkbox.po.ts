@@ -30,7 +30,7 @@ export class CheckboxPO extends BaseComponentPo {
         waitForPresent(this.binaryTempCheckbox);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

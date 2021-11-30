@@ -514,7 +514,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                     source.targets = [node.id];
                     break;
 
-                case 'after-all':
+                case 'after-all': {
                     const targetParents = this._graphMetadata[source.targets[0]]?.parents;
 
                     if (targetParents) {
@@ -531,7 +531,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                     }
 
                     break;
-
+                }
                 case 'parallel':
                     this._processAddingParallelNode(node, source, toNextSerial);
                     break;

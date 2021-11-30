@@ -40,9 +40,9 @@ export class SearchFieldMobileComponent
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
     constructor(
-        @Inject(SEARCH_FIELD_COMPONENT) searchFieldComponent: SearchFieldMobileInterface,
         elementRef: ElementRef,
         dialogService: DialogService,
+        @Inject(SEARCH_FIELD_COMPONENT) searchFieldComponent: SearchFieldMobileInterface,
         @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeConfigToken[]
     ) {
         super(elementRef, dialogService, searchFieldComponent, MobileModeControl.SEARCH_FIELD, mobileModes);

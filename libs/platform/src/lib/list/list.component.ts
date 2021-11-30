@@ -79,23 +79,23 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     @Input()
     ariaMultiselectable: boolean;
 
-    /**Title used on button when data loads on button click */
+    /** Title used on button when data loads on button click */
     @Input()
     loadTitle: string;
 
-    /**Wait time for new items */
+    /** Wait time for new items */
     @Input()
     delayTime: number;
 
-    /**Items to be loaded at once */
+    /** Items to be loaded at once */
     @Input()
     itemSize = 0;
 
-    /**Enables lazy loadMore of data */
+    /** Enables lazy loadMore of data */
     @Input()
     loadMore: boolean;
 
-    /**Enables data load on scroll for true
+    /** Enables data load on scroll for true
      * false: enables data loading on button
      * click
      */
@@ -106,11 +106,11 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     @Input()
     role = 'list';
 
-    /**ListType 'inactive' | 'active' | 'navigation' | 'detail' */
+    /** ListType 'inactive' | 'active' | 'navigation' | 'detail' */
     @Input()
     listType: ListType = 'active';
 
-    /**Max height for viewport to display scroll */
+    /** Max height for viewport to display scroll */
     @Input()
     maxHeight: string;
 
@@ -118,11 +118,11 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     @Input()
     noBorder = false;
 
-    /**Scroll offset percentage to trigger scroll event */
+    /** Scroll offset percentage to trigger scroll event */
     @Input()
     scrollOffsetPercentage: number;
 
-    /**enables selection styles */
+    /** enables selection styles */
     @Input()
     selection = false;
 
@@ -148,7 +148,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
      */
     @ContentChildren(BaseListItem, { descendants: true })
     listItems: QueryList<BaseListItem>;
-    /**@hidden
+    /** @hidden
      * To display loading symbol */
     _loading = false;
     /**
@@ -157,7 +157,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
      * used in template
      */
     _keyManager: FocusKeyManager<BaseListItem>;
-    /**@hidden */
+    /** @hidden */
     _items = [];
     /** @hidden
      */
@@ -166,16 +166,16 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
      * @hidden
      * Verfies partial navigation enabled */
     protected _partialNavigation = false;
-    /**@hidden
+    /** @hidden
      * The model backing of the component. */
     private _selectionModel: SelectionModel<BaseListItem>;
-    /**@hidden
+    /** @hidden
      * Whether list component has multiselection
      * binding in tempate to append class */
     private _multiSelect = false;
-    /**@hidden */
+    /** @hidden */
     private _selectedvalue: string;
-    /**@hidden
+    /** @hidden
      * Whether row level selection mode is enabled to list component
      * for all the items
      */
@@ -192,11 +192,11 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     /** @hidden
      */
     private _dsItems = [];
-    /**@hidden
+    /** @hidden
      * for data source handling
      */
     private _dsSubscription: Subscription | null;
-    /**@hidden
+    /** @hidden
      * for items impertaive and declartive approaches
      */
     private _itemsSubscription: Subscription | null;
@@ -258,7 +258,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
      */
     _isCompact = this._contentDensity === 'compact';
 
-    /**@hidden */
+    /** @hidden */
     protected _dataSource: FdpListDataSource<any>;
 
     /**
@@ -275,7 +275,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
         }
     }
 
-    /**@hidden
+    /** @hidden
      * Whether Navigation mode is included to list component
      * for all the items
      */
@@ -296,7 +296,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
         }
     }
 
-    /**@hidden
+    /** @hidden
      * Whether Navigation mode is included to list component
      * only a subset of the list items are navigable
      * you should indicate those by displaying a navigation arrow
@@ -314,7 +314,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
         this.itemEl.nativeElement.querySelector('ul').classList.add('fd-list--navigation-indication');
     }
 
-    /**@hidden
+    /** @hidden
      * Whether By line is present in list item*/
     private _hasByLine: boolean;
 
@@ -329,7 +329,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
         this.itemEl.nativeElement.querySelector('ul').classList.add('fd-list--byline');
     }
 
-    /**@hidden
+    /** @hidden
      * Whether object present in list item*/
     private _hasObject: boolean;
 
@@ -366,7 +366,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
         }
         this._selectionModel = new SelectionModel<BaseListItem>(this._multiSelect, this.selectedItems);
 
-        this._selectionModel.changed.subscribe((e) => {
+        this._selectionModel.changed.subscribe(() => {
             this.selectedItems = this._selectionModel.selected;
             const event = new SelectionChangeEvent();
             event.selectedItems = this.selectedItems;
@@ -376,7 +376,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     }
 
     /** @hidden */
-    /**Keyboard manager on list items, set values when passed via array */
+    /** Keyboard manager on list items, set values when passed via array */
     ngAfterViewInit(): void {
         this._keyManager = new FocusKeyManager<BaseListItem>(this.listItems).withWrap();
 
@@ -411,7 +411,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     }
 
     /** @hidden */
-    /**Setting values from list to list items
+    /** Setting values from list to list items
      * example:
      * Does list item has navigation,
      * should show arrows,
@@ -466,7 +466,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     }
 
     /** @hidden */
-    /**handline keyboard operations
+    /** handline keyboard operations
      * in template on list and list items
      */
     _handleKeyDown(event: KeyboardEvent): boolean {
@@ -482,7 +482,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
         }
     }
 
-    /**@hidden
+    /** @hidden
      * binded in template on scroll
      */
     _scrollHandler(): void {
@@ -492,14 +492,14 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     }
 
     /** @hidden */
-    /**load more on enter or space press */
+    /** load more on enter or space press */
     _loadOnkeyPress(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE)) {
             this._getMoreData();
         }
     }
 
-    /**@hidden
+    /** @hidden
      *  Handles lazy loading data
      * used in template
      * onscroll and on more button click
@@ -527,7 +527,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
             });
     }
 
-    /**@hidden
+    /** @hidden
      *  used in tempate to get Selected items from a list
      * event:any to avoid code duplication**/
     _onSelectionChanged(event: Event): void {
@@ -647,7 +647,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
         return this._tempItems;
     }
 
-    /**@hidden
+    /** @hidden
      /**List item with radio button styles,check,uncheckupdates
      * event:any to avoid code duplication
      */
@@ -712,7 +712,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     }
 
     /** @hidden */
-    /**List item with checkbox styles,check,uncheckupdates
+    /** List item with checkbox styles,check,uncheckupdates
      * event:any to avoid code duplication
      */
     private _handleMultiSelect(selectedItemId: string): void {
@@ -739,6 +739,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
         <ng-content></ng-content>
     </li>`
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class ListFooter extends BaseComponent {}
 
 @Component({
@@ -749,6 +750,7 @@ export class ListFooter extends BaseComponent {}
     </li>`,
     providers: [{ provide: BaseListItem, useExisting: forwardRef(() => ListGroupHeader) }]
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class ListGroupHeader extends BaseListItem implements OnInit {
     /**
      *  Displays list goup header title

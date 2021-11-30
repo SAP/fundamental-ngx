@@ -316,7 +316,6 @@ describe('Datetime picker suite', () => {
         click(section + calendarIcon, calendarIndex);
         const itemsLength = getElementArrayLength(calendarItem) - 1;
         let firstDayIndex, lastDayIndex;
-        let firstChosenDayText, secChosenDayText;
 
         for (let i = 0; i < itemsLength; i++) {
             if (!getElementClass(calendarItem, i).includes('other-month')) {
@@ -324,7 +323,8 @@ describe('Datetime picker suite', () => {
                 break;
             }
         }
-        firstChosenDayText = '0' + getText(calendarItem, firstDayIndex);
+
+        const firstChosenDayText = '0' + getText(calendarItem, firstDayIndex);
 
         for (let i = itemsLength; i !== 0; i--) {
             if (
@@ -336,7 +336,7 @@ describe('Datetime picker suite', () => {
             }
         }
 
-        secChosenDayText = getText(calendarItem, lastDayIndex);
+        const secChosenDayText = getText(calendarItem, lastDayIndex);
 
         click(calendarItem, firstDayIndex);
         click(calendarItem, lastDayIndex);

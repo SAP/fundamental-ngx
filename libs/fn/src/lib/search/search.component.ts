@@ -91,10 +91,10 @@ export class ExperimentalSearchComponent implements ControlValueAccessor, OnDest
     private _value = '';
 
     /** @hidden */
-    onChange: Function = () => {};
+    onChange: (value: any) => void = () => {};
 
     /** @hidden */
-    onTouched: Function = () => {};
+    onTouched = () => {};
 
     /** @hidden */
     constructor(private readonly _changeDetectorRef: ChangeDetectorRef) {}
@@ -128,7 +128,7 @@ export class ExperimentalSearchComponent implements ControlValueAccessor, OnDest
      * @hidden
      * @param fn User defined function that handles the *onChange* event of the search.
      */
-    registerOnChange(fn: Function): void {
+    registerOnChange(fn: (value: any) => void): void {
         this.onChange = fn;
     }
 
@@ -136,7 +136,7 @@ export class ExperimentalSearchComponent implements ControlValueAccessor, OnDest
      * @hidden
      * @param fn User defined function that handles the *onTouch* event of the search.
      */
-    registerOnTouched(fn: Function): void {
+    registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
 

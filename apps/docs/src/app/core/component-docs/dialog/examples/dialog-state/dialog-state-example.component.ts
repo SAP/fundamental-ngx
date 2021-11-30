@@ -5,7 +5,7 @@ import { DialogService } from '@fundamental-ngx/core/dialog';
     selector: 'fd-dialog-state-example',
     templateUrl: './dialog-state-example.component.html'
 })
-export class DialogStateExample {
+export class DialogStateExampleComponent {
     constructor(public dialogService: DialogService) {}
 
     openCloseDialog(template): void {

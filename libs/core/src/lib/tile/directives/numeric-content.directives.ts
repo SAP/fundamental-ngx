@@ -6,7 +6,7 @@ type NumericContentState = 'negative' | 'critical' | 'positive' | 'informative' 
 type NumericContentSize = 's' | 'm' | 'l' | null;
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-numeric-content]'
 })
 export class NumericContentDirective implements OnInit, OnChanges, CssClassBuilder {
@@ -68,7 +68,7 @@ export class NumericContentDirective implements OnInit, OnChanges, CssClassBuild
 }
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-numeric-content-launch-icon-container]'
 })
 export class NumericContentLaunchIconContainerDirective {
@@ -78,7 +78,7 @@ export class NumericContentLaunchIconContainerDirective {
 }
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-numeric-content-launch-icon]'
 })
 export class NumericContentLaunchIconDirective implements OnInit, OnChanges, CssClassBuilder {
@@ -118,7 +118,7 @@ export class NumericContentLaunchIconDirective implements OnInit, OnChanges, Css
 }
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-numeric-content-kpi-container]'
 })
 export class NumericContentKpiContainerDirective {
@@ -128,7 +128,7 @@ export class NumericContentKpiContainerDirective {
 }
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-numeric-content-kpi]'
 })
 export class NumericContentKpiDirective implements OnInit, OnChanges, CssClassBuilder {
@@ -172,7 +172,7 @@ export class NumericContentKpiDirective implements OnInit, OnChanges, CssClassBu
 }
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-numeric-content-scale-container]'
 })
 export class NumericContentScaleContainerDirective {
@@ -182,7 +182,7 @@ export class NumericContentScaleContainerDirective {
 }
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-numeric-content-scale-arrow]'
 })
 export class NumericContentScaleArrowDirective implements OnInit, OnChanges, CssClassBuilder {
@@ -222,7 +222,7 @@ export class NumericContentScaleArrowDirective implements OnInit, OnChanges, Css
 }
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-numeric-content-scale]'
 })
 export class NumericContentScaleDirective implements OnInit, OnChanges, CssClassBuilder {
@@ -262,7 +262,7 @@ export class NumericContentScaleDirective implements OnInit, OnChanges, CssClass
 }
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-numeric-content-scale-text]'
 })
 export class NumericContentScaleTextDirective {

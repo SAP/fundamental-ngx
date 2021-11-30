@@ -339,7 +339,7 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
      * Returns transformed 1d array from 2d year grid.
      */
     private _getYearList(): CalendarYear[] {
-        return [].concat.apply([], this._calendarYearListGrid);
+        return [].concat(...this._calendarYearListGrid);
     }
 
     /**

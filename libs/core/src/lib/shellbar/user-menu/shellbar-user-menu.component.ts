@@ -73,7 +73,7 @@ export class ShellbarUserMenuComponent {
     /**
      * @hidden
      */
-    itemClick(item: ShellbarUserMenu, event: any): void {
+    itemClick(item: ShellbarUserMenu, event: MouseEvent): void {
         this.itemClicked.emit();
         if (item.callback) {
             item.callback(event);

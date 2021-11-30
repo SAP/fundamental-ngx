@@ -1,4 +1,4 @@
-const VERSION_REGEX = /^(\d+)\.(\d+)\.?(\d+)?(\-[a-zA-Z0-9-.]+)?$/;
+const VERSION_REGEX = /^(\d+)\.(\d+)\.?(\d+)?(-[a-zA-Z0-9-.]+)?$/;
 
 /**
  * @hidden

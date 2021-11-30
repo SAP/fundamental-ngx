@@ -66,6 +66,7 @@ export class UploadCollectionDragnDropDirective {
 
     /** Event emitted when the dragged file enters the dropzone. */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     readonly onDropzone = new EventEmitter<boolean>();
 
     /** @hidden */

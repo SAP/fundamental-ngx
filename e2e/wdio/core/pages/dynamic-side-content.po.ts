@@ -12,7 +12,7 @@ export class DynamicSideContentPo extends CoreBaseComponentPo {
         waitForElDisplayed(this.pageHeader);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

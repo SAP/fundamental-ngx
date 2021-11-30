@@ -15,6 +15,7 @@ export class StepInputPo extends BaseComponentPo {
     allButtonIncrement = '//button[@title="Increment" and not(ancestor::div[contains(@class, "is-readonly")])]';
     allButtonDecrement = '//button[@title="Decrement" and not(ancestor::div[contains(@class, "is-readonly")])]';
     activeInput =
+        // eslint-disable-next-line max-len
         '//input[contains(@class, "fd-step-input__input") and not(ancestor::div[contains(@class, "is-disabled")]) and not (ancestor::div[contains(@class, "is-readonly")])]';
     reactiveFormInput = 'input#reactive-form-qty';
     formInput = 'input[name=qty]';
@@ -38,7 +39,7 @@ export class StepInputPo extends BaseComponentPo {
         waitForPresent(this.stepInputRoot);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

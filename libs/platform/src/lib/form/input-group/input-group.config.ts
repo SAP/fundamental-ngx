@@ -17,9 +17,8 @@ export class InputGroupConfig {
      * Create Provider factory function
      */
     static createProviderFactory(obj: Partial<InputGroupConfig>): (platformConfig: PlatformConfig) => InputGroupConfig {
-        const useFactory = (platformConfig: PlatformConfig): InputGroupConfig => {
-            return Object.assign(new InputGroupConfig(platformConfig), obj);
-        };
+        const useFactory = (platformConfig: PlatformConfig): InputGroupConfig =>
+            Object.assign(new InputGroupConfig(platformConfig), obj);
         return useFactory;
     }
 

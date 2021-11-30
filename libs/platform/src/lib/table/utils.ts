@@ -92,18 +92,17 @@ export const filterByDate = <D = any>(
         case FILTER_DATE_STRATEGY.BEFORE_OR_ON:
             return rows.filter((r) => adapter.compareDate(getNestedValue(filter.field, r.value), filterValue) <= 0);
         case FILTER_DATE_STRATEGY.BETWEEN:
-            return rows.filter((r) => {
-                return adapter.isBetween(getNestedValue(filter.field, r.value), filterValue, filterValue2);
-            });
+            return rows.filter((r) =>
+                adapter.isBetween(getNestedValue(filter.field, r.value), filterValue, filterValue2)
+            );
         case FILTER_DATE_STRATEGY.EQ:
         default:
             return rows.filter((r) => adapter.dateTimesEqual(getNestedValue(filter.field, r.value), filterValue));
     }
 };
 
-export const filterByBoolean = (rows: TableRow[], filter: CollectionBooleanFilter): TableRow[] => {
-    return rows.filter((r) => getNestedValue(filter.field, r.value) === filter.value);
-};
+export const filterByBoolean = (rows: TableRow[], filter: CollectionBooleanFilter): TableRow[] =>
+    rows.filter((r) => getNestedValue(filter.field, r.value) === filter.value);
 
 export const filterBySelect = (rows: TableRow[], filter: CollectionSelectFilter): TableRow[] => {
     // needs concat because of "error TS2345: Argument of type 'any' is not assignable to parameter of type 'never'".
@@ -115,8 +114,8 @@ export const filterBySelect = (rows: TableRow[], filter: CollectionSelectFilter)
     return rows.filter((r) => filterValues.includes(getNestedValue(filter.field, r.value)));
 };
 
-export const getUniqueListValuesByKey = <T, K extends keyof T>(list: T[], key: K): T[] => {
-    return Array.from(
+export const getUniqueListValuesByKey = <T, K extends keyof T>(list: T[], key: K): T[] =>
+    Array.from(
         list
             .reduce((map, item) => {
                 map.delete(item[key]);
@@ -125,7 +124,6 @@ export const getUniqueListValuesByKey = <T, K extends keyof T>(list: T[], key: K
             }, new Map<T[K], T>())
             .values()
     );
-};
 
 export const getScrollBarWidth = (document: Document): number => {
     const div = document.createElement('div');

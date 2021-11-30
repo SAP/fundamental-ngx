@@ -9,7 +9,6 @@ import { PaginationService } from './pagination.service';
 describe('Pagination Test', () => {
     let component: PaginationComponent;
     let fixture: ComponentFixture<PaginationComponent>;
-    let paginationServiceSpy: jasmine.SpyObj<PaginationService>;
 
     beforeEach(
         waitForAsync(() => {
@@ -24,8 +23,6 @@ describe('Pagination Test', () => {
                     set: { changeDetection: ChangeDetectionStrategy.Default }
                 })
                 .compileComponents();
-
-            paginationServiceSpy = TestBed.get(PaginationService);
         })
     );
 

@@ -90,7 +90,7 @@ export class ThumbnailComponent extends BaseComponent implements OnInit {
 
     openDialog(selectedMedia: Media, mediaList: Media[]): void {
         mediaList.forEach((item) => (item.overlayRequired = false));
-        const dialogRef = this._dialogService.open(ThumbnailDetailsComponent, {
+        this._dialogService.open(ThumbnailDetailsComponent, {
             backdropClickCloseable: false,
             escKeyCloseable: false,
             ariaLabelledBy: this.thumbnailId,

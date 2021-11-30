@@ -254,28 +254,30 @@ describe('Datetime picker suite', () => {
     xit('should check that date-time picker does not have error if it contains valid value', () => {
         scrollIntoView(inputGroup, 8);
         let validDate;
-        const currentDate = new Date();
-        const currentMonth = currentDate.getMonth() + 1;
-        const currentDay = currentDate.getDate();
-        const currentYear = currentDate.getFullYear();
-        let currentMinute = currentDate.getMinutes().toString();
-        if (currentMinute === '0') {
-            currentMinute = '00';
-        } else if (parseInt(currentMinute) < 10) {
-            currentMinute = '0' + currentMinute;
+        const currDate = new Date();
+        const currMonth = currDate.getMonth() + 1;
+        const currDay = currDate.getDate();
+        const currYear = currDate.getFullYear();
+        let currMinute = currDate.getMinutes().toString();
+        if (currMinute === '0') {
+            currMinute = '00';
+            // eslint-disable-next-line radix
+        } else if (parseInt(currMinute) < 10) {
+            currMinute = '0' + currMinute;
         }
-        const currentHour = currentDate.toLocaleString('en-US', { timeZone: 'UTC', hour: 'numeric', hour12: true });
+        const currentHour = currDate.toLocaleString('en-US', { timeZone: 'UTC', hour: 'numeric', hour12: true });
 
         if (currentHour[1] === ' ') {
-            validDate = `${currentMonth}/${currentDay}/${currentYear}, ${
-                currentHour[0]
-            }:${currentMinute} ${currentHour.slice(2, 4)}`;
+            validDate = `${currMonth}/${currDay}/${currYear}, ${currentHour[0]}:${currMinute} ${currentHour.slice(
+                2,
+                4
+            )}`;
         }
         if (currentHour[1] !== ' ') {
-            validDate = `${currentMonth}/${currentDay}/${currentYear}, ${currentHour.slice(
+            validDate = `${currMonth}/${currDay}/${currYear}, ${currentHour.slice(
                 0,
                 2
-            )}:${currentMinute} ${currentHour.slice(3, 5)}`;
+            )}:${currMinute} ${currentHour.slice(3, 5)}`;
         }
 
         expect(getValue(datePickerInput, 8)).toBe(validDate);

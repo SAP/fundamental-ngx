@@ -45,7 +45,7 @@ describe('AlertService', () => {
     });
 
     it('should open alert container', () => {
-        const alertRef: AlertRef = service.open('teststring', { dismissible: false, duration: -1 } as AlertConfig);
+        service.open('teststring', { dismissible: false, duration: -1 } as AlertConfig);
         expect(service['alertContainerRef']).toBeTruthy();
     });
 

@@ -18,7 +18,7 @@ export class InfoLabelPo extends CoreBaseComponentPo {
         waitForPresent(this.defaultLabel);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

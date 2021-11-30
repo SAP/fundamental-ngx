@@ -146,7 +146,7 @@ export class HtmlSanitizer {
 
     private _extendLinkTarget(node: HTMLElement): HTMLElement {
         if (node.tagName === 'A') {
-            if (!node.getAttribute('href') || /^\#/.test(node.getAttribute('href'))) {
+            if (!node.getAttribute('href') || /^#/.test(node.getAttribute('href'))) {
                 node.removeAttribute('target');
             } else {
                 const defTarget = this.attributeWhitelist['target'] || '_blank';

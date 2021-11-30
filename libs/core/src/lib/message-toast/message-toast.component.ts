@@ -105,6 +105,7 @@ export class MessageToastComponent implements OnInit, AfterViewInit {
 
     /** Event fired when the message toast is timeout. */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onHide: EventEmitter<undefined> = new EventEmitter<undefined>();
 
     /** @hidden */

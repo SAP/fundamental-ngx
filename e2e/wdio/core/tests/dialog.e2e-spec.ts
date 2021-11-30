@@ -449,7 +449,7 @@ describe('dialog test suite', () => {
 
         it('should check dialog verticalPadding option', () => {
             openDialog(playgroundDialog);
-            // tslint:disable-next-line:radix
+            // eslint-disable-next-line radix
             const dialogPaddingValue = parseInt(
                 getCSSPropertyByName(dialogBody, topPaddingProperty).value.replace('px', '')
             );
@@ -459,7 +459,7 @@ describe('dialog test suite', () => {
             closeDialog();
             click(playgroundDialog + checkboxes, 9);
             openDialog(playgroundDialog);
-            // tslint:disable-next-line:radix
+            // eslint-disable-next-line radix
             const newDialogPaddingValue = parseInt(
                 getCSSPropertyByName(dialogBody, topPaddingProperty).value.replace('px', '')
             );

@@ -69,7 +69,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     @Input()
     type: InputType;
 
-    /**boolean type represents the focus set for the respective multi input */
+    /** boolean type represents the focus set for the respective multi input */
     @Input()
     autofocus = false;
 

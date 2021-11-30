@@ -25,7 +25,7 @@ import {
 
 describe('Form Message test suite:', () => {
     const formMessagePage = new FormMessagePo();
-    const { messageWithInput, messageWithInputGroup, buttons, messageInformation, messageWithTextArea, inputFields } =
+    const { messageWithInput, messageWithInputGroup, buttons, messageInformation, messageWithTextArea } =
         formMessagePage;
 
     beforeAll(() => {

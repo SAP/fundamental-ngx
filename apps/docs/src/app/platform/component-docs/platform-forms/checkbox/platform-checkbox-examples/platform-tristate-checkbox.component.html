@@ -5,9 +5,9 @@
             name="paris-cb"
             value="Yes"
             [tristate]="true"
-            (checkedChange)="checkedChangeFunction($event)"
-            (indeterminateChange)="indeterminateChangeFunction($event)"
-            (change)="changeFunction($event)"
+            (checkedChange)="checkedChangeFunction()"
+            (indeterminateChange)="indeterminateChangeFunction()"
+            (change)="changeFunction()"
             [formControl]="paris.formControl"
         ></fdp-checkbox>
     </fdp-form-field>
@@ -24,9 +24,9 @@
     <fdp-form-field #venice id="venice" label="Venice" column="2" rank="2">
         <fdp-checkbox
             name="venice-cb"
-            (checkedChange)="checkedChangeFunction($event)"
-            (indeterminateChange)="indeterminateChangeFunction($event)"
-            (change)="changeFunction($event)"
+            (checkedChange)="checkedChangeFunction()"
+            (indeterminateChange)="indeterminateChangeFunction()"
+            (change)="changeFunction()"
             [tristate]="true"
             [formControl]="venice.formControl"
         ></fdp-checkbox>
@@ -69,9 +69,9 @@
             name="havana-cb"
             value="Yes"
             [tristate]="true"
-            (checkedChange)="checkedChangeFunction($event)"
-            (indeterminateChange)="indeterminateChangeFunction($event)"
-            (change)="changeFunction($event)"
+            (checkedChange)="checkedChangeFunction()"
+            (indeterminateChange)="indeterminateChangeFunction()"
+            (change)="changeFunction()"
             [(ngModel)]="havana"
         ></fdp-checkbox>
     </fdp-form-field>
@@ -89,9 +89,9 @@
             name="lisbon-cb"
             [tristate]="true"
             [(ngModel)]="lisbon"
-            (checkedChange)="checkedChangeFunction($event)"
-            (indeterminateChange)="indeterminateChangeFunction($event)"
-            (change)="changeFunction($event)"
+            (checkedChange)="checkedChangeFunction()"
+            (indeterminateChange)="indeterminateChangeFunction()"
+            (change)="changeFunction()"
         >
         </fdp-checkbox>
     </fdp-form-field>

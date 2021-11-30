@@ -10,7 +10,7 @@ import { AfterContentInit, ChangeDetectionStrategy, Component, ElementRef, ViewE
  * ```
  */
 @Component({
-    // tslint:disable-next-line:component-selector
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'fd-table-wrapper',
     template: `<ng-content></ng-content>`,
     styleUrls: ['./table.component.scss'],

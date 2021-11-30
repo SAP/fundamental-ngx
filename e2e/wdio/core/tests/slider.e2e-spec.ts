@@ -5,7 +5,6 @@ import {
     click,
     clickAndMoveElement,
     doesItExist,
-    getAttributeByName,
     getElementArrayLength,
     getElementClass,
     getText,
@@ -195,8 +194,9 @@ describe('slider test suite', () => {
             clearValue(sliderInput, 2);
             click(sliderInput, 2);
             sendKeys('20');
-            // tslint:disable:radix
+            // eslint-disable-next-line radix
             const firstLabelValue = parseInt(getText(firstSliderLabel));
+            // eslint-disable-next-line radix
             const secondLabelValue = parseInt(getText(secondSliderLabel));
 
             expect(secondLabelValue - firstLabelValue).toEqual(20);

@@ -1429,7 +1429,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
         source.forEach((item: T, index: number) => {
             const hasChildren =
-                item.hasOwnProperty(this.relationKey) &&
+                Object.prototype.hasOwnProperty.call(item, this.relationKey) &&
                 Array.isArray(item[this.relationKey]) &&
                 item[this.relationKey].length;
             const row = new TableRow(
@@ -2027,7 +2027,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         }
 
         if (isFunction(this.rowsClass)) {
-            rowClasses = (this.rowsClass as Function)(row.value) || '';
+            rowClasses = (this.rowsClass as any)(row.value) || '';
         }
 
         return rowClasses.trim();

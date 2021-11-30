@@ -19,7 +19,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import { Platform } from '@angular/cdk/platform';
-import { coerceNumberProperty, _isNumberValue } from '@angular/cdk/coercion';
+import { coerceNumberProperty } from '@angular/cdk/coercion';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 import { fromEvent, Subject } from 'rxjs';
@@ -407,18 +407,18 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     }
 
     /** @hidden */
-    onChange: Function = () => {};
+    onChange: (value: SliderControlValue) => void = () => {};
 
     /** @hidden */
-    onTouched: Function = () => {};
+    onTouched = () => {};
 
     /** @hidden */
-    registerOnChange(fn: Function): void {
+    registerOnChange(fn: (value: SliderControlValue) => void): void {
         this.onChange = fn;
     }
 
     /** @hidden */
-    registerOnTouched(fn: Function): void {
+    registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
 
@@ -598,7 +598,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     }
 
     /** @hidden reset default prefix on leaving the slider */
-    onBlur(event: MouseEvent | KeyboardEvent): void {
+    onBlur(): void {
         // reset prefix string for slider current value that need to be announced
         if (this._isRange) {
             this._rangeSliderHandle1CurrentValuePrefix = this.rangeSliderHandle1CurrentValuePrefix;

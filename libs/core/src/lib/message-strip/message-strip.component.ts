@@ -85,6 +85,7 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
 
     /** Event fired when the message-strip is dismissed. */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onDismiss: EventEmitter<void> = new EventEmitter<void>();
 
     /** @hidden */

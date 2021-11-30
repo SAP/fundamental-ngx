@@ -11,7 +11,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
  */
 @Component({
     // TODO to be discussed
-    // tslint:disable-next-line: component-selector
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-form-item]',
     template: `<ng-content></ng-content>`,
     styleUrls: ['./form-item.component.scss'],

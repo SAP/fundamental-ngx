@@ -1,4 +1,4 @@
-import { Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ButtonModule } from '@fundamental-ngx/core/button';
@@ -77,10 +77,7 @@ export class TestComponent {
 }
 
 describe('TileDirectives', () => {
-    let fixture: ComponentFixture<TestComponent>,
-        component: TestComponent,
-        debugElement: DebugElement,
-        element: HTMLElement;
+    let fixture: ComponentFixture<TestComponent>, component: TestComponent;
 
     beforeEach(
         waitForAsync(() => {
@@ -94,8 +91,6 @@ describe('TileDirectives', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;
-        debugElement = fixture.debugElement;
-        element = debugElement.nativeElement;
         fixture.detectChanges();
     });
 

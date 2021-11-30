@@ -4,7 +4,7 @@ import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 
 @Directive({
     // TODO to be discussed
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-tokenizer-input]'
 })
 export class TokenizerInputDirective implements OnInit, OnChanges, CssClassBuilder {

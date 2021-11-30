@@ -27,7 +27,7 @@
                 <ng-container *ngFor="let page of pages">
                     <a
                         class="fd-pagination__link"
-                        [class.is-selected]="currentPage == page"
+                        [class.is-selected]="currentPage === page"
                         tabindex="0"
                         (keypress)="onKeypressHandler(page, $event)"
                         (click)="goToPage(page, $event)"

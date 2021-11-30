@@ -275,9 +275,7 @@ describe('MomentDatetimeAdapter', () => {
     });
 
     it('should get year name for low year numbers', () => {
-        const createAndFormat = (year: number) => {
-            return adapter.getYearName(adapter.createDate(year, JAN, 1));
-        };
+        const createAndFormat = (year: number) => adapter.getYearName(adapter.createDate(year, JAN, 1));
 
         expect(createAndFormat(50)).toEqual('0050');
         expect(createAndFormat(99)).toEqual('0099');
@@ -293,9 +291,7 @@ describe('MomentDatetimeAdapter', () => {
     });
 
     it('should format Date with low year number', () => {
-        const createAndFormat = (year: number) => {
-            return adapter.format(adapter.createDate(year, JAN, 1), 'L');
-        };
+        const createAndFormat = (year: number) => adapter.format(adapter.createDate(year, JAN, 1), 'L');
 
         expect(createAndFormat(50)).toBe('01/01/0050');
         expect(createAndFormat(99)).toBe('01/01/0099');

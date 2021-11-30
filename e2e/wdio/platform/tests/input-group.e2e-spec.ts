@@ -3,7 +3,6 @@ import {
     click,
     executeScriptAfterTagAttr,
     executeScriptBeforeTagAttr,
-    getAttributeByName,
     getAttributeByNameArr,
     getElementPlaceholder,
     getElementSize,

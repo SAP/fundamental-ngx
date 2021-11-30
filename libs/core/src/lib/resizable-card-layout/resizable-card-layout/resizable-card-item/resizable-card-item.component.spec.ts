@@ -60,7 +60,7 @@ describe('ResizableCardItemComponent', () => {
         card.onMouseDown(mouseEvent1, 'both');
         const mouseEvent2 = new MouseEvent('changeWidth', { clientX: 200, clientY: 40 });
         card.onMouseMove(mouseEvent2);
-        card.onMouseUp(mouseEvent2);
+        card.onMouseUp();
 
         fixture.detectChanges();
 
@@ -75,7 +75,7 @@ describe('ResizableCardItemComponent', () => {
         card.onMouseDown(mouseEvent1, 'both');
         const mouseEvent2 = new MouseEvent('changeWidth', { clientX: 100, clientY: 20 });
         card.onMouseMove(mouseEvent2);
-        card.onMouseUp(mouseEvent2);
+        card.onMouseUp();
 
         fixture.detectChanges();
 
@@ -91,7 +91,7 @@ describe('ResizableCardItemComponent', () => {
         card.onMouseDown(mouseEvent1, 'both');
         const mouseEvent2 = new MouseEvent('resize', { clientX: 100, clientY: 20 });
         card.onMouseMove(mouseEvent2);
-        card.onMouseUp(mouseEvent2);
+        card.onMouseUp();
 
         fixture.detectChanges();
         expect(cardResized).toHaveBeenCalled();
@@ -104,7 +104,7 @@ describe('ResizableCardItemComponent', () => {
         card.onMouseDown(mouseEvent1, 'both');
         const mouseEvent2 = new MouseEvent('resize', { clientX: 210, clientY: 40 });
         card.onMouseMove(mouseEvent2);
-        card.onMouseUp(mouseEvent2);
+        card.onMouseUp();
 
         fixture.detectChanges();
 
@@ -119,7 +119,7 @@ describe('ResizableCardItemComponent', () => {
         card.onMouseDown(mouseEvent1, 'both');
         const mouseEvent2 = new MouseEvent('resize', { clientX: 200, clientY: 45 });
         card.onMouseMove(mouseEvent2);
-        card.onMouseUp(mouseEvent2);
+        card.onMouseUp();
 
         fixture.detectChanges();
 

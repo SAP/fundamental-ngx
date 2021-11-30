@@ -91,7 +91,7 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
     appendTo: ElementRef;
 
     @Input()
-    triggerValue: String;
+    triggerValue: string;
 
     @Input()
     fillControlMode: PopoverFillMode = 'at-least';

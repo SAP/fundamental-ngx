@@ -43,9 +43,7 @@ export class GridListPo extends CoreBaseComponentPo {
     gridListCheckbox = '.fd-grid-list__checkbox-label';
     button = '.fd-button';
 
-    gridListItemsByMode = (name: string) => {
-        return ` [selectionmode="${name}"] fd-grid-list-item`;
-    };
+    gridListItemsByMode = (name: string) => ` [selectionmode="${name}"] fd-grid-list-item`;
 
     open(): void {
         super.open(this.url);
@@ -53,7 +51,7 @@ export class GridListPo extends CoreBaseComponentPo {
         waitForElDisplayed(this.layoutPattern);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

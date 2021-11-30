@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { RadioButtonComponent } from './radio-button.component';
-import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormsModule, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -22,7 +22,7 @@ import { FormsModule, FormGroup, FormControl, ReactiveFormsModule } from '@angul
         </form>
     `
 })
-class TestRadioButtonComponentReactiveForms {
+class TestRadioButtonComponentReactiveFormsComponent {
     @ViewChild('radio1') radioButton1: RadioButtonComponent;
     @ViewChild('radio2') radioButton2: RadioButtonComponent;
 
@@ -33,31 +33,23 @@ class TestRadioButtonComponentReactiveForms {
 }
 
 describe('RadioButtonComponent reactive forms', () => {
-    let component: TestRadioButtonComponentReactiveForms;
-    let fixture: ComponentFixture<TestRadioButtonComponentReactiveForms>;
-    let changeDetectorRef: ChangeDetectorRef;
+    let component: TestRadioButtonComponentReactiveFormsComponent;
+    let fixture: ComponentFixture<TestRadioButtonComponentReactiveFormsComponent>;
 
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 imports: [FormsModule, ReactiveFormsModule],
-                declarations: [RadioButtonComponent, TestRadioButtonComponentReactiveForms]
+                declarations: [RadioButtonComponent, TestRadioButtonComponentReactiveFormsComponent]
             }).compileComponents();
         })
     );
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TestRadioButtonComponentReactiveForms);
+        fixture = TestBed.createComponent(TestRadioButtonComponentReactiveFormsComponent);
         component = fixture.componentInstance;
-        changeDetectorRef = fixture.componentRef.injector.get(ChangeDetectorRef);
         fixture.detectChanges();
     });
-
-    async function wait(componentFixture: ComponentFixture<any>): Promise<any> {
-        changeDetectorRef.markForCheck();
-        componentFixture.detectChanges();
-        await componentFixture.whenStable();
-    }
 
     it('should create', () => {
         expect(component).toBeTruthy();
@@ -70,12 +62,13 @@ describe('RadioButtonComponent reactive forms', () => {
 
     it('should check second radio', async () => {
         await fixture.whenStable();
-        new Promise(async () => {
-            component.radioButton2.inputElement.nativeElement.click();
-            await fixture.detectChanges();
-        }).then(() => {
-            expect(component.radioButton1.inputElement.nativeElement.checked).toBeFalsy();
-            expect(component.radioButton2.inputElement.nativeElement.checked).toBeTruthy();
-        });
+
+        component.radioButton2.inputElement.nativeElement.click();
+        fixture.detectChanges();
+
+        await fixture.whenStable();
+
+        expect(component.radioButton1.inputElement.nativeElement.checked).toBeFalsy();
+        expect(component.radioButton2.inputElement.nativeElement.checked).toBeTruthy();
     });
 });

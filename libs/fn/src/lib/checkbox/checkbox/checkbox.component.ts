@@ -99,6 +99,7 @@ export class ExperimentalCheckboxComponent implements ControlValueAccessor, OnDe
     private _subscriptions = new Subscription();
 
     /** Sets values returned by control. */
+    // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('values')
     set _values(checkboxValues: FnCheckboxValues) {
         this.values = { ...this.values, ...checkboxValues };
@@ -124,7 +125,7 @@ export class ExperimentalCheckboxComponent implements ControlValueAccessor, OnDe
     /** @hidden Reference to callback provided by FormControl.*/
     public onTouched = () => {};
     /** @hidden Reference to callback provided by FormControl.*/
-    public onValueChange = (_) => {};
+    public onValueChange: (value: any) => void = () => {};
 
     /** @hidden */
     constructor(

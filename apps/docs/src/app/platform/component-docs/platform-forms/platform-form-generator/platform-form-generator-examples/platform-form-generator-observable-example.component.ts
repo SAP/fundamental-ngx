@@ -12,13 +12,12 @@ import {
 } from '@fundamental-ngx/core/datetime';
 import { DynamicFormItem, DynamicFormValue, FormGeneratorComponent } from '@fundamental-ngx/platform/form';
 
-export const dummyAwaitablePromise = (timeout = 200) => {
-    return new Promise<boolean>((resolve) => {
+export const dummyAwaitablePromise = (timeout = 200) =>
+    new Promise<boolean>((resolve) => {
         setTimeout(() => {
             resolve(true);
         }, timeout);
     });
-};
 
 @Component({
     selector: 'fdp-platform-form-generator-observable-example',
@@ -107,7 +106,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
                 inline: true,
                 column: 2
             },
-            choices: (formValue) =>
+            choices: () =>
                 of([
                     'USA',
                     'Germany',
@@ -116,9 +115,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
                         value: 'Ukraine'
                     }
                 ]),
-            validate: (input, formValue) => {
-                return input?.length > 0 ? null : 'You need to select some country';
-            }
+            validate: (input) => (input?.length > 0 ? null : 'You need to select some country')
         },
         {
             type: 'list',
@@ -174,9 +171,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
             validators: [Validators.required],
             validate: (value: FdDate) =>
                 of(value !== null && value.year < 2020 ? null : 'You need to be born before 2020'),
-            transformer: (value: FdDate) => {
-                return value?.toDateString();
-            }
+            transformer: (value: FdDate) => value?.toDateString()
         },
         {
             type: 'switch',

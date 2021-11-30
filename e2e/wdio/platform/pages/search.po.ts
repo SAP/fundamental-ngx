@@ -24,7 +24,7 @@ export class SearchPo extends BaseComponentPo {
         waitForElDisplayed(this.searchFields);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

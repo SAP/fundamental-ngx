@@ -7,9 +7,7 @@ import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
  * @param _options options passed for this schematic
  */
 export function ngAdd(_options: any): Rule {
-    return (_tree: Tree, _context: SchematicContext) => {
-        return chain([endInstallTask()]);
-    };
+    return (_tree: Tree, _context: SchematicContext) => chain([endInstallTask()]);
 }
 
 /**

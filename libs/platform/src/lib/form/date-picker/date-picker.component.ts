@@ -231,30 +231,26 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
 
     /**
      * Function used to disable certain dates in the calendar.
-     * @param _ D
+     * @param value
      */
     @Input()
-    disableFunction = function (_: D): boolean {
-        return false;
-    };
+    disableFunction: (value: D) => boolean = () => false;
 
     /**
      * Function used to disable certain dates in the calendar for the range start selection.
-     * @param _ D
+     * @param value
      */
     @Input()
-    disableRangeStartFunction = function (_: D): boolean {
-        return false;
-    };
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    disableRangeStartFunction: (value: D) => boolean = () => false;
 
     /**
      * Function used to disable certain dates in the calendar for the range end selection.
-     * @param _ D
+     * @param value
      */
     @Input()
-    disableRangeEndFunction = function (_: D): boolean {
-        return false;
-    };
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    disableRangeEndFunction: (value: D) => boolean = () => false;
 
     constructor(
         protected _changeDetectorRef: ChangeDetectorRef,

@@ -42,13 +42,13 @@ export class FilterCustomComponent implements DoCheck {
      * @hidden
      * Currently selected value
      */
-    _value: object;
+    _value: Record<string, any>;
 
     /**
      * @hidden
      * Last emitted value
      */
-    _valueLastEmitted: object;
+    _valueLastEmitted: Record<string, any>;
 
     /** @hidden */
     ngDoCheck(): void {

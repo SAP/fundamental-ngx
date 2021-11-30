@@ -38,7 +38,7 @@ export class MultiInputPo extends CoreBaseComponentPo {
         waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

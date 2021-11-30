@@ -100,8 +100,7 @@ describe('Approval flow', () => {
         nodeCardInfo,
         dialogCheckbox,
         reminderToaster,
-        dueDateNode,
-        radioButtonAlt
+        dueDateNode
     } = approvalFlowPage;
 
     beforeAll(() => {

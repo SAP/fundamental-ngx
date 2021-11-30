@@ -3,7 +3,7 @@ import { coerceNumberProperty } from '@angular/cdk/coercion';
 import { AbstractControl, FormControl, NG_VALIDATORS, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fdp-condition-count-message]',
     providers: [{ provide: NG_VALIDATORS, useExisting: ConditionCountMessageDirective, multi: true }]
 })

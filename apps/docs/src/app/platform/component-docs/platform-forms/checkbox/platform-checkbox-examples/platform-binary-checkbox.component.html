@@ -4,9 +4,9 @@
         <fdp-checkbox
             [name]="'yellow-cb'"
             [isBinary]="true"
-            (checkedChange)="checkedChangeFunction($event)"
-            (indeterminateChange)="indeterminateChangeFunction($event)"
-            (change)="changeFunction($event)"
+            (checkedChange)="checkedChangeFunction()"
+            (indeterminateChange)="indeterminateChangeFunction()"
+            (change)="changeFunction()"
             [(ngModel)]="yellow"
         ></fdp-checkbox>
     </fdp-form-field>
@@ -34,9 +34,9 @@
             name="red-cb"
             [isBinary]="true"
             title="Red"
-            (checkedChange)="checkedChangeFunction($event)"
-            (indeterminateChange)="indeterminateChangeFunction($event)"
-            (change)="changeFunction($event)"
+            (checkedChange)="checkedChangeFunction()"
+            (indeterminateChange)="indeterminateChangeFunction()"
+            (change)="changeFunction()"
             contentDensity="compact"
             [formControl]="red.formControl"
         >
@@ -73,9 +73,9 @@
             name="disabled-cb"
             [isBinary]="true"
             title="Red"
-            (checkedChange)="checkedChangeFunction($event)"
-            (indeterminateChange)="indeterminateChangeFunction($event)"
-            (change)="changeFunction($event)"
+            (checkedChange)="checkedChangeFunction()"
+            (indeterminateChange)="indeterminateChangeFunction()"
+            (change)="changeFunction()"
             contentDensity="compact"
             disabled="true"
         ></fdp-checkbox>

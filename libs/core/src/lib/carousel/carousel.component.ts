@@ -500,7 +500,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     /** @hidden Handles notification on visible slide change */
     private _notifySlideChange(slideDirection: SlideDirection, firstActiveSlide?: CarouselItemInterface): void {
-        const activeSlides: CarouselItemComponent[] = new Array();
+        const activeSlides: CarouselItemComponent[] = [];
         const slides = this.slides.toArray();
         let firstActiveSlideIndex: number;
 
