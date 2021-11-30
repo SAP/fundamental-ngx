@@ -7,6 +7,7 @@ export class SelectPo extends BaseComponentPo {
 
     selectModeExample = 'fdp-select-mode-example';
     displayText = ' .fd-select__control';
+    select = ' fd-select';
     buttons = ' button';
     selectedValue_1 = 'fdp-select~small';
     selectWithTwoColumnsExample = 'fdp-select-columns-example';
