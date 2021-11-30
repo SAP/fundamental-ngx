@@ -13,6 +13,7 @@ import {
 } from '@angular/core';
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
+import { resizeObservable } from '@fundamental-ngx/core/utils';
 
 export type ProgressIndicatorState = 'informative' | 'positive' | 'critical' | 'negative';
 
@@ -69,9 +70,11 @@ export class ProgressIndicatorComponent implements OnInit, OnDestroy, OnChanges,
 
     /** @hidden */
     ngOnInit(): void {
-        fromEvent(window, 'resize')
-            .pipe(debounceTime(60), takeUntil(this._onDestroy$))
-            .subscribe(() => this._handleTruncation());
+        resizeObservable(this._elementRef.nativeElement)
+            .pipe(debounceTime(20), takeUntil(this._onDestroy$))
+            .subscribe((_) => {
+                this._handleTruncation();
+            });
     }
 
     /** @hidden */
