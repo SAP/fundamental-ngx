@@ -450,9 +450,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     _freezableColumns: Map<string, number> = new Map();
 
     /** @hidden */
-    _tablePadding = 0;
-
-    /** @hidden */
     _isShownSortSettingsInToolbar = false;
 
     /** @hidden */
@@ -585,6 +582,15 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         return this.semanticHighlighting ? SEMANTIC_HIGHLIGHTING_COLUMN_WIDTH : 0;
     }
 
+    /** @hidden Sum of widths of fixed columns (semantic highlighting, selection) */
+    get _fixedColumnsPadding(): number {
+        return this._semanticHighlightingColumnWidth + this._selectionColumnWidth;
+    }
+
+    get _tableWidthPx(): number {
+        return this.tableContainer.nativeElement.getBoundingClientRect().width;
+    }
+
     /** @hidden */
     constructor(
         private readonly _ngZone: NgZone,
@@ -641,6 +647,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     ngOnInit(): void {
+        this._tableColumnResizeService.setTableRef(this);
+
         this._calculateScrollbarWidth();
 
         this._isGroupTable = this.initialGroupBy?.length > 0;
@@ -649,8 +657,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     ngAfterViewInit(): void {
         this._viewInitiated = true;
-
-        this._setInitialTableWidth();
 
         this._setInitialState();
 
@@ -849,7 +855,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         const recalculateFn = () => {
             const columnNames = this._visibleColumns.map((column) => column.name);
 
-            this._tableColumnResizeService.setColumnsWidth(columnNames, this.freezeColumnsTo);
+            this._tableColumnResizeService.setColumnsWidth(columnNames);
             this._setFreezableInfo();
 
             this._cdr.detectChanges();
@@ -878,6 +884,14 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         });
 
         this._subscriptions.add(intersectionSubscription);
+    }
+
+    /** Gets the max allowed width for all freezable columns */
+    getMaxAllowedFreezableColumnsWidth(): number {
+        if (!this._freezableColumns.size) {
+            return 0;
+        }
+        return this._tableWidthPx - this._fixedColumnsPadding - this._scrollBarWidth - 1;
     }
 
     // Private API
@@ -1041,11 +1055,12 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     _getSelectionCellStyles(parentRow: HTMLTableRowElement): { [styleProp: string]: string } {
         const rtlKey = this._rtl ? 'right' : 'left';
+        const selectionColumnWidth = SELECTION_COLUMN_WIDTH.get(this.contentDensity) + 'px';
 
         return {
             [rtlKey]: this._semanticHighlightingColumnWidth + 'px',
-            'min-width': SELECTION_COLUMN_WIDTH.get(this.contentDensity) + 'px',
-            'max-width': SELECTION_COLUMN_WIDTH.get(this.contentDensity) + 'px',
+            'min-width': selectionColumnWidth,
+            'max-width': selectionColumnWidth,
             height: this._getCellHeightPx(parentRow)
         };
     }
@@ -1288,13 +1303,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                 pageSize: this.pageSize || page.pageSize
             }
         });
-    }
-
-    /** @hidden */
-    private _setInitialTableWidth(): void {
-        this._tableColumnResizeService.setInitialTableWidth(
-            this.tableContainer.nativeElement.getBoundingClientRect().width
-        );
     }
 
     /** @hidden */
@@ -1543,13 +1551,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     private _setFreezableInfo(): void {
         this._freezableColumns = this._getFreezableColumns();
-
-        const freezeToNextColumnName = this._visibleColumns[this._freezableColumns.size]?.name;
-
-        this._tablePadding =
-            this._semanticHighlightingColumnWidth +
-            this._selectionColumnWidth +
-            this._tableColumnResizeService.getPrevColumnsWidth(freezeToNextColumnName);
     }
 
     /** @hidden */
@@ -1987,7 +1988,12 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this._subscriptions.add(
             resizeObservable(this.tableContainer.nativeElement)
                 .pipe(debounceTime(100))
-                .subscribe(() => this.recalculateTableColumnWidth())
+                .subscribe(() => {
+                    this.recalculateTableColumnWidth();
+                    if (this._freezableColumns.size) {
+                        this._tableColumnResizeService.updateFrozenColumnsWidth();
+                    }
+                })
         );
     }
 
