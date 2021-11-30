@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.179 (2021-11-30)
+
+
+### Features
+
+* **core:** custom min width for fixed card layout ([#7251](https://github.com/SAP/fundamental-ngx/issues/7251)) ([c3299de](https://github.com/SAP/fundamental-ngx/commit/c3299de89efc4170a9e2b35dd3ab314b15f36144))
+
 ## 0.33.0-rc.178 (2021-11-29)
 
 ## 0.33.0-rc.177 (2021-11-29)
