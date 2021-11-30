@@ -131,6 +131,7 @@
         class="fd-pagination__input"
         #currentPageModel="ngModel"
         [ngModel]="currentPage"
-        (ngModelChange)="goToPage(currentPageModel.value)"
+        (keydown.enter)="goToPage(currentPageModel.value)"
+        (keydown.space)="goToPage(currentPageModel.value)"
     />
 </ng-template>
