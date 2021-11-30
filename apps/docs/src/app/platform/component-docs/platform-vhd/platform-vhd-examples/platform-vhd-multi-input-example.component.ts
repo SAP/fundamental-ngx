@@ -20,27 +20,23 @@ interface ExampleTestModel {
 const exampleDataSource = () => {
     const dataSource = Array(137)
         .fill(null)
-        .map((_value, index) => {
-            return {
-                id: index + 1,
-                name: `Name ${index + 1}`,
-                code: `${Math.floor(Math.random() * 99999)}`,
-                city: `City ${Math.floor(Math.random() * index)}`,
-                zipcode: `zipcode ${Math.floor(Math.random() * index)}`,
-                address: `Address ${Math.floor(Math.random() * index)}`,
-                nickname: `Nickname ${Math.floor(Math.random() * index)}`
-            };
-        });
+        .map((_value, index) => ({
+            id: index + 1,
+            name: `Name ${index + 1}`,
+            code: `${Math.floor(Math.random() * 99999)}`,
+            city: `City ${Math.floor(Math.random() * index)}`,
+            zipcode: `zipcode ${Math.floor(Math.random() * index)}`,
+            address: `Address ${Math.floor(Math.random() * index)}`,
+            nickname: `Nickname ${Math.floor(Math.random() * index)}`
+        }));
     return {
         dataSource: dataSource,
-        filters: Object.keys(dataSource[0]).map((value, index) => {
-            return {
-                key: value,
-                name: `${value}`,
-                label: `Product ${value}`,
-                advanced: index > 0
-            };
-        })
+        filters: Object.keys(dataSource[0]).map((value, index) => ({
+            key: value,
+            name: `${value}`,
+            label: `Product ${value}`,
+            advanced: index > 0
+        }))
     };
 };
 
@@ -78,7 +74,7 @@ export class PlatformVhdMultiInputExampleComponent implements OnInit {
         this._changeDetectorRef.detectChanges();
     }
 
-    parseFunc(value: string): object {
+    parseFunc(value: string): Record<string, any> {
         if (value && value.length) {
             return { name: value, id: Date.now() };
         }

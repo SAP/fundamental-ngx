@@ -27,26 +27,26 @@ export interface Name {
         </fdp-list>
     `
 })
-class DisplayListItemComponentTest {
+class DisplayListItemComponentTestComponent {
     @ViewChild(DisplayListItemComponent, { read: ElementRef, static: true })
     displayListElement: ElementRef;
 }
 
 describe('DisplayListItemComponent', () => {
-    let component: DisplayListItemComponentTest;
-    let fixture: ComponentFixture<DisplayListItemComponentTest>;
+    let component: DisplayListItemComponentTestComponent;
+    let fixture: ComponentFixture<DisplayListItemComponentTestComponent>;
 
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 imports: [DisplayListItemModule, PlatformListModule, RouterTestingModule],
-                declarations: [DisplayListItemComponentTest]
+                declarations: [DisplayListItemComponentTestComponent]
             }).compileComponents();
         })
     );
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(DisplayListItemComponentTest);
+        fixture = TestBed.createComponent(DisplayListItemComponentTestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
@@ -123,7 +123,6 @@ describe('DisplayListItemComponent', () => {
 });
 
 describe('DisplayListItemComponent functions', () => {
-    let component: DisplayListItemComponent;
     let fixture: ComponentFixture<DisplayListItemComponent>;
 
     beforeEach(
@@ -136,12 +135,11 @@ describe('DisplayListItemComponent functions', () => {
 
     beforeEach(() => {
         fixture = TestBed.createComponent(DisplayListItemComponent);
-        component = fixture.componentInstance;
         fixture.detectChanges();
     });
 });
 
-/**Impertive approach testing*/
+/** Impertive approach testing*/
 @Component({
     selector: 'fdp-test-display-list-item',
     template: `
@@ -155,7 +153,7 @@ describe('DisplayListItemComponent functions', () => {
         </fdp-list>
     `
 })
-class TestComponentContent {
+class TestComponentContentComponent {
     items: Name[] = [
         { title: 'title 1', secondary: 'secondary 1', navigationIndicator: 'true' },
         { title: 'title 2', secondary: 'secondary 2' },
@@ -168,30 +166,23 @@ class TestComponentContent {
 }
 
 describe('DisplayListItemComponent Imperative', () => {
-    let host: TestComponentContent;
-    let component: DisplayListItemComponent;
-    let fixture: ComponentFixture<TestComponentContent>;
+    let host: TestComponentContentComponent;
+    let fixture: ComponentFixture<TestComponentContentComponent>;
 
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 imports: [DisplayListItemModule, PlatformListModule, RouterTestingModule],
-                declarations: [TestComponentContent]
+                declarations: [TestComponentContentComponent]
             }).compileComponents();
         })
     );
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TestComponentContent);
+        fixture = TestBed.createComponent(TestComponentContentComponent);
         host = fixture.componentInstance;
-        component = host.displayListItem;
         fixture.detectChanges();
     });
-
-    async function wait(componentFixture: ComponentFixture<any>): Promise<void> {
-        componentFixture.detectChanges();
-        await componentFixture.whenStable();
-    }
 
     it('should create', () => {
         expect(host).toBeTruthy();

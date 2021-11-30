@@ -1,15 +1,17 @@
 import { Component, HostBinding, Input } from '@angular/core';
 
 @Component({
-    // tslint:disable-next-line:component-selector
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'fd-menu-addon',
     template: `
         <fd-icon [glyph]="glyph" *ngIf="glyph" role="presentation"></fd-icon>
         <ng-content></ng-content>
     `
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class MenuAddonDirective {
     /** Whether addon is used before or after text */
+    // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('position') set setAddonPosition(position: 'before' | 'after') {
         this.fdAddonBeforeClass = position === 'before';
         this.fdAddonAfterClass = position === 'after';

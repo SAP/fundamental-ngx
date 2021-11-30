@@ -409,7 +409,7 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
      * @param event: MouseEvent
      */
     @HostListener('document: mouseup', ['$event'])
-    onMouseUp(event: MouseEvent): void {
+    onMouseUp(): void {
         if (!this.resizable) {
             return;
         }
@@ -439,7 +439,7 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
     }
 
     /** Shows resize icon */
-    showResizeIcon(event: MouseEvent): void {
+    showResizeIcon(): void {
         if (!this.resizable) {
             return;
         }
@@ -447,7 +447,7 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
     }
 
     /** Hides resize icon */
-    hideResizeIcon(event: MouseEvent): void {
+    hideResizeIcon(): void {
         if (!this._resize) {
             this.showingResizeIcon = false;
         }

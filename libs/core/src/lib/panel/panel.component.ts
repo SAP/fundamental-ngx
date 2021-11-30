@@ -31,7 +31,7 @@ let panelExpandUniqueId = 0;
  * Modes: Tablet/Mobile (default) and Desktop (compact)
  */
 @Component({
-    // tslint:disable-next-line:component-selector
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'fd-panel',
     templateUrl: './panel.component.html',
     encapsulation: ViewEncapsulation.None,

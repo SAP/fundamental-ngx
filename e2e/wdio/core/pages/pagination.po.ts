@@ -24,7 +24,7 @@ export class PaginationPo extends CoreBaseComponentPo {
     playgroundExamples = '.fd-playground__content .fd-pagination';
     page = '.fd-pagination-direction-override-display .fd-pagination__link';
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

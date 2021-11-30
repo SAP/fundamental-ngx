@@ -19,6 +19,7 @@ export class InfiniteScrollDirective implements OnInit, OnDestroy {
 
     /** Event emitted when the scrollPercent threshold is met. */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onScrollAction = new EventEmitter<void>();
 
     /** @hidden */

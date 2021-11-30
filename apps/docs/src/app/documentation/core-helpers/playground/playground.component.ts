@@ -18,11 +18,13 @@ export class PlayGroundComponent {
      */
     @Input() resettable = false;
 
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     @Output() onFormChanges: EventEmitter<any> = new EventEmitter<any>();
 
     /**
      * Emits event when playground was resetted.
      */
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     @Output() onReset: EventEmitter<void> = new EventEmitter<void>();
 
     onSchemaValueChanges($event: any): void {

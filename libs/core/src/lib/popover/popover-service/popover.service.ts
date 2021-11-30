@@ -38,7 +38,7 @@ export class PopoverService extends BasePopoverClass {
     _onLoad = new Subject<ElementRef>();
 
     /** @hidden */
-    private _eventRef: Function[] = [];
+    private _eventRef: (() => void)[] = [];
 
     /** @hidden */
     private _overlayRef: OverlayRef;

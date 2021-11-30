@@ -20,7 +20,6 @@ describe('Carousel test suite', () => {
     const {
         navBtns,
         displayedImg,
-        carouselProperties,
         pageIndicators,
         displayedCards,
         multiDisplayedCards,

@@ -19,7 +19,7 @@ import { NestedItemService } from '../nested-item/nested-item.service';
 export class NestedLinkDirective {
     /** Function that is called on click event dispatch on this element. */
     @Input()
-    onClickCallback: Function;
+    onClickCallback: () => void;
 
     /** Whether this element is selected*/
     @Input()
@@ -63,7 +63,7 @@ export class NestedLinkDirective {
 
     /** Handler for mouse events */
     @HostListener('click', ['$event'])
-    onClick(event: MouseEvent): void {
+    onClick(): void {
         this._itemService.click.next();
         if (this.onClickCallback) {
             this.onClickCallback();

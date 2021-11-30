@@ -23,7 +23,7 @@ export class ListDataProvider extends DataProvider<Address> {
 
     fetch(params: Map<string, string>): Observable<Address[]> {
         let data = LIST_ELEMENTS;
-        if (!!params.get('name')) {
+        if (params.get('name')) {
             const keyword = params.get('name').toLowerCase();
             data = data.filter((city) => city.name.toLowerCase().indexOf(keyword) > -1);
         }
@@ -37,26 +37,26 @@ export class ListDataProvider extends DataProvider<Address> {
         <fdp-list #componentElement> <fdp-standard-list-item title="Title1"></fdp-standard-list-item></fdp-list>
     `
 })
-class StandardListItemComponentTest {
+class StandardListItemTestComponent {
     @ViewChild('StandardListItemComponent', { read: ElementRef, static: true })
     ref: ElementRef;
 }
 
 describe('StandardListItemComponent', () => {
-    let component: StandardListItemComponentTest;
-    let fixture: ComponentFixture<StandardListItemComponentTest>;
+    let component: StandardListItemTestComponent;
+    let fixture: ComponentFixture<StandardListItemTestComponent>;
 
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                declarations: [StandardListItemComponentTest],
+                declarations: [StandardListItemTestComponent],
                 imports: [StandardListItemModule, PlatformListModule, RouterTestingModule]
             }).compileComponents();
         })
     );
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(StandardListItemComponentTest);
+        fixture = TestBed.createComponent(StandardListItemTestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
@@ -100,7 +100,6 @@ class StandardListItemDataSourceTestComponent {
 }
 
 describe('Standard  List Item Component with DataSource', () => {
-    let host: StandardListItemDataSourceTestComponent;
     let fixture: ComponentFixture<StandardListItemDataSourceTestComponent>;
 
     beforeEach(
@@ -114,7 +113,6 @@ describe('Standard  List Item Component with DataSource', () => {
 
     beforeEach(() => {
         fixture = TestBed.createComponent(StandardListItemDataSourceTestComponent);
-        host = fixture.componentInstance;
         fixture.detectChanges();
     });
 

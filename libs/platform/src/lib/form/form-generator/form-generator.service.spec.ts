@@ -28,9 +28,7 @@ export const dummyFormItems: DynamicFormItem[] = [
         name: 'something',
         message: 'wow',
         default: 'test',
-        transformer: (value: string) => {
-            return `${value}!!!`;
-        }
+        transformer: (value: string) => `${value}!!!`
     }
 ];
 

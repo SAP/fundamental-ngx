@@ -62,7 +62,7 @@
                     placeholder="Select a movie"
                     [compact]="true"
                     [(value)]="selectedMovie"
-                    (valueChange)="onValueChange($event)"
+                    (valueChange)="onValueChange()"
                 >
                     <fd-option *ngFor="let movie of movies" [value]="movie">{{ movie }}</fd-option>
                 </fd-select>

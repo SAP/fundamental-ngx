@@ -46,9 +46,7 @@ import { PlatformValueHelpDialogModule } from '../value-help-dialog.module';
 class TestWrapperComponent {
     data = Array(10)
         .fill(null)
-        .map((_, i) => {
-            return { name: `Name ${i}`, type: `Type ${i}`, code: `${i}` };
-        });
+        .map((_, i) => ({ name: `Name ${i}`, type: `Type ${i}`, code: `${i}` }));
 
     @ViewChild(PlatformValueHelpDialogComponent, { static: true })
     vhdComponent: PlatformValueHelpDialogComponent<any>;

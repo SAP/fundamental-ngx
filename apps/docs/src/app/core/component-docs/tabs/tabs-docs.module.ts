@@ -7,9 +7,9 @@ import { TabsHeaderComponent } from './tabs-header/tabs-header.component';
 import { TabsDocsComponent } from './tabs-docs.component';
 import {
     examples,
-    TabNavigationExampleChildFirst,
-    TabNavigationExampleChildSecond,
-    TabNavigationExampleChildThird
+    TabNavigationExampleChildFirstComponent,
+    TabNavigationExampleChildSecondComponent,
+    TabNavigationExampleChildThirdComponent
 } from './examples';
 import { TabsModule } from '@fundamental-ngx/core/tabs';
 import { TitleModule } from '@fundamental-ngx/core/title';
@@ -27,9 +27,9 @@ const routes: Routes = [
                 path: '',
                 component: TabsDocsComponent,
                 children: [
-                    { path: 'tab1', component: TabNavigationExampleChildFirst },
-                    { path: 'tab2', component: TabNavigationExampleChildSecond },
-                    { path: 'tab3', component: TabNavigationExampleChildThird }
+                    { path: 'tab1', component: TabNavigationExampleChildFirstComponent },
+                    { path: 'tab2', component: TabNavigationExampleChildSecondComponent },
+                    { path: 'tab3', component: TabNavigationExampleChildThirdComponent }
                 ]
             },
             { path: 'api', component: ApiComponent, data: { content: API_FILES.tabs } }

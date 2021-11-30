@@ -6,7 +6,6 @@ import { CLASS_NAME } from './constants';
 
 describe('CardHeaderComponent', () => {
     let fixture: ComponentFixture<CardHeaderComponent>;
-    let cardHeader: CardHeaderComponent;
 
     beforeEach(
         waitForAsync(() => {
@@ -19,7 +18,6 @@ describe('CardHeaderComponent', () => {
 
     beforeEach(() => {
         fixture = TestBed.createComponent(CardHeaderComponent);
-        cardHeader = fixture.componentInstance;
         fixture.detectChanges();
     });
 

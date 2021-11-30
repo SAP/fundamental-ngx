@@ -14,11 +14,9 @@ import {
     isElementClickable,
     sendKeys,
     pause,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../driver/wdio';
 import { fullName, firstAdress, secAdress, update, firstAdressLength } from '../fixtures/testData/wizard.tags';
-import waitForExist from 'webdriverio/build/commands/element/waitForExist';
 
 describe('Wizard component test', () => {
     const wizardPage = new WizardPo();

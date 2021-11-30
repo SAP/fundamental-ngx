@@ -19,7 +19,7 @@ export class TimePickerPO extends BaseComponentPo {
     timeItem = 'span.fd-time__item';
     selectedValue = 'div.fd-time__current-indicator ~ span';
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

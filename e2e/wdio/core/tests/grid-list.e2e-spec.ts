@@ -92,7 +92,7 @@ describe('Grid-list test suite', () => {
         expect(getText(lockedStateItemText)).toBe(textLocked);
     });
 
-    // tslint:disable-next-line: max-line-length
+    // eslint-disable-next-line max-len
     it('Verify selecting multiple items in "Multi select mode" component -> Multiple items can be selected. Checkbox should be checked when item is selected', () => {
         const arrayLength = getElementArrayLength(gridListItemsByMode('multiSelect'));
         let selectedArrayLength = getElementArrayLength(multiSelectModeSelectedItems);

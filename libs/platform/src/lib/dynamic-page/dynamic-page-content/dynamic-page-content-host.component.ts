@@ -137,12 +137,12 @@ export class DynamicPageContentHostComponent implements OnInit {
         }
     }
 
-    /**@hidden */
+    /** @hidden */
     private _removeClassNameToHostElement(className: string): void {
         this._renderer.removeClass(this._elementRef.nativeElement, className);
     }
 
-    /**@hidden */
+    /** @hidden */
     private _addClassNameToHostElement(className: string): void {
         addClassNameToElement(this._renderer, this._elementRef.nativeElement, className);
     }

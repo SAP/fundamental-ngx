@@ -13,7 +13,7 @@ import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 export type LabelType = 'numeric' | 'icon';
 
 @Component({
-    // tslint:disable-next-line:component-selector
+    // eslint-disable-next-line @angular-eslint/component-selector
     // TODO @salarenko: DEPRECATED DIRECTIVE APPROACH - Remove in v0.23.0
     selector: 'fd-info-label, [fd-info-label]',
     templateUrl: './info-label.component.html',

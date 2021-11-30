@@ -76,7 +76,7 @@ export class IconTabBarProcessTypeComponent extends IconTabBarBase {
         }
         this._selectItem(selectedItem);
 
-        this._ngZone.onMicrotaskEmpty.pipe(take(1)).subscribe((_) => {
+        this._ngZone.onMicrotaskEmpty.pipe(take(1)).subscribe(() => {
             if (this.overflowDirective) {
                 const extra = this.overflowDirective.getAmountOfExtraItems();
                 isPreviousStepsStrategy

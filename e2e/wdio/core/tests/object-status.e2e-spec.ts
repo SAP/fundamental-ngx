@@ -1,12 +1,6 @@
 import { ObjectStatusPo } from '../pages/object-status.po';
-import {
-    getAttributeByName,
-    getElementArrayLength,
-    getElementClass,
-    getTextArr,
-    waitForElDisplayed
-} from '../../driver/wdio';
-import { semanticText, genericColorText, objStatusText, sizeAttr } from '../fixtures/appData/object-status-contents';
+import { getElementArrayLength, getElementClass, getTextArr, waitForElDisplayed } from '../../driver/wdio';
+import { semanticText, genericColorText, objStatusText } from '../fixtures/appData/object-status-contents';
 import { checkElArrIsClickable } from '../../helper/assertion-helper';
 
 describe('Object Status test suite', () => {

@@ -32,7 +32,7 @@ export class TestComponent {
 }
 
 describe('SplitButtonComponent', () => {
-    let fixture: ComponentFixture<TestComponent>, debugElement: DebugElement, element: HTMLElement;
+    let fixture: ComponentFixture<TestComponent>, debugElement: DebugElement;
 
     let component: DebugElement;
     let componentInstance: SplitButtonComponent;
@@ -50,7 +50,6 @@ describe('SplitButtonComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
         debugElement = fixture.debugElement;
-        element = debugElement.nativeElement;
         fixture.detectChanges();
         component = debugElement.query(By.directive(SplitButtonComponent));
         componentInstance = component.injector.get(SplitButtonComponent);

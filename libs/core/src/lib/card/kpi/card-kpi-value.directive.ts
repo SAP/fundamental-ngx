@@ -7,7 +7,7 @@ import { CLASS_NAME } from '../constants';
 export type KpiStatus = 'positive' | 'negative' | 'critical' | 'informative';
 
 @Directive({
-    // tslint:disable-next-line: directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-card-kpi-value]'
 })
 export class CardKpiValueDirective implements OnInit, CssClassBuilder {

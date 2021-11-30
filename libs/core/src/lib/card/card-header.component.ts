@@ -8,8 +8,7 @@ import {
     Input,
     HostBinding,
     Renderer2,
-    OnChanges,
-    SimpleChanges
+    OnChanges
 } from '@angular/core';
 
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
@@ -69,7 +68,7 @@ export class CardHeaderComponent implements OnInit, OnChanges, CssClassBuilder, 
     }
 
     /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
+    ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 

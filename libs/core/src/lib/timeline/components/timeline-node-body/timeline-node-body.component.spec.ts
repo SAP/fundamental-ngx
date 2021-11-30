@@ -4,17 +4,17 @@ import { Component } from '@angular/core';
 import { TimelineNodeBodyComponent } from './timeline-node-body.component';
 
 describe('TimelineNodeBodyComponent', () => {
-    let component: TimeLineNodeBodyTestApp;
-    let fixture: ComponentFixture<TimeLineNodeBodyTestApp>;
+    let component: TimeLineNodeBodyTestComponent;
+    let fixture: ComponentFixture<TimeLineNodeBodyTestComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [TimelineNodeBodyComponent, TimeLineNodeBodyTestApp]
+            declarations: [TimelineNodeBodyComponent, TimeLineNodeBodyTestComponent]
         }).compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TimeLineNodeBodyTestApp);
+        fixture = TestBed.createComponent(TimeLineNodeBodyTestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
@@ -37,7 +37,12 @@ describe('TimelineNodeBodyComponent', () => {
         </div>
     `
 })
-class TimeLineNodeBodyTestApp {
+class TimeLineNodeBodyTestComponent {
     maxLines = 2;
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+    content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+        in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    `;
 }

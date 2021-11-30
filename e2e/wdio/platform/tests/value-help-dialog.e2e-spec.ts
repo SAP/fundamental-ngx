@@ -56,7 +56,6 @@ describe('Value help dialog test suite', () => {
         advSearchOptions,
         advSearchToggle,
         tableCheckboxesFF,
-        mobileExampleDialog,
         xBtn,
         showAllBtn,
         inputFields,

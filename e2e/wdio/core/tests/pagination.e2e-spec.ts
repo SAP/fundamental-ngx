@@ -45,10 +45,7 @@ describe('Pagination test suite:', () => {
         toggledButton,
         playgroundInputFields,
         playgroundPages,
-        playgroundLabel,
-        playgroundExamples,
-        playground,
-        page
+        playgroundLabel
     } = paginationPage;
 
     beforeAll(() => {

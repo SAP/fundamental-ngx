@@ -287,30 +287,24 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
      * @param date date representation
      */
     @Input()
-    disableFunction = function (_: D): boolean {
-        return false;
-    };
+    disableFunction: (value: D) => boolean = () => false;
 
     /**
      * Function used to disable certain dates in the calendar for the range start selection.
      * @param date date representation
      */
     @Input()
-    disableRangeStartFunction = function (_: D): boolean {
-        return false;
-    };
+    disableRangeStartFunction: (value: D) => boolean = () => false;
 
     /**
      * Function used to disable certain dates in the calendar for the range end selection.
      * @param date date representation
      */
     @Input()
-    disableRangeEndFunction = function (_: D): boolean {
-        return false;
-    };
+    disableRangeEndFunction: (value: D) => boolean = () => false;
 
     /** @hidden */
-    onChange: any = (_: any) => {};
+    onChange: (value: any) => void = () => {};
 
     /** @hidden */
     onTouched: any = () => {};

@@ -43,7 +43,7 @@ export class ActionBarPo extends CoreBaseComponentPo {
         waitForPresent(this.actionBarBackButtonBackButton);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

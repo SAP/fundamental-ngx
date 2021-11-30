@@ -19,7 +19,7 @@ export enum DefaultTruncateCharCount {
 }
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-truncate]'
 })
 export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {

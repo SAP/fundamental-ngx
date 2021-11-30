@@ -18,7 +18,7 @@ export class FormMessagePo extends CoreBaseComponentPo {
         waitForPresent(this.messageWithInput);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

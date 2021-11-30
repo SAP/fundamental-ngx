@@ -201,27 +201,21 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
      * @param date date type
      */
     @Input()
-    disableFunction = function (date: D): boolean {
-        return false;
-    };
+    disableFunction: (date: D) => boolean = () => false;
 
     /**
      * Function used to disable certain dates in the calendar for the range start selection.
      * @param date date representation
      */
     @Input()
-    disableRangeStartFunction = function (date: D): boolean {
-        return false;
-    };
+    disableRangeStartFunction: (date: D) => boolean = () => false;
 
     /**
      * Function used to disable certain dates in the calendar for the range end selection.
      * @param date date representation
      */
     @Input()
-    disableRangeEndFunction = function (date: D): boolean {
-        return false;
-    };
+    disableRangeEndFunction: (date: D) => boolean = () => false;
 
     /** @hidden */
     constructor(

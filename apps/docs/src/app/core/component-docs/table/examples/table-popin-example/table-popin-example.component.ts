@@ -27,8 +27,8 @@ export class TablePopinExampleComponent implements OnInit {
             dateOfExpire: '12.06.2020',
             price: '5 EUR',
             country: 'India',
-            description:
-                'A banana is an elongated, edible fruit – botanically a berry – produced by several kinds of large herbaceous flowering plants in the genus Musa.',
+            description: `A banana is an elongated, edible fruit – botanically a berry – produced by several kinds of large herbaceous
+                flowering plants in the genus Musa.`,
             checked: false
         },
         {
@@ -38,8 +38,8 @@ export class TablePopinExampleComponent implements OnInit {
             dateOfExpire: '10.06.2020',
             price: '5,5 EUR',
             country: 'USA',
-            description:
-                'An apple is an edible fruit produced by an apple tree (Malus domestica). Apple trees are cultivated worldwide and are the most widely grown species in the genus Malus.',
+            description: `An apple is an edible fruit produced by an apple tree (Malus domestica).
+                Apple trees are cultivated worldwide and are the most widely grown species in the genus Malus.`,
             checked: false
         },
         {
@@ -49,8 +49,8 @@ export class TablePopinExampleComponent implements OnInit {
             dateOfExpire: '08.06.2020',
             price: '6 EUR',
             country: 'Mexico',
-            description:
-                'The pineapple (Ananas comosus) is a tropical plant with an edible fruit and the most economically significant plant in the family Bromeliaceae.',
+            description: `The pineapple (Ananas comosus) is a tropical plant with an edible fruit and the most
+                economically significant plant in the family Bromeliaceae.`,
             checked: false
         },
         {
@@ -60,8 +60,8 @@ export class TablePopinExampleComponent implements OnInit {
             dateOfExpire: '18.06.2020',
             price: '10 EUR',
             country: 'Spain',
-            description:
-                'The orange is the fruit of various citrus species in the family Rutaceae (see list of plants known as orange); it primarily refers to Citrus × sinensis.',
+            description: `The orange is the fruit of various citrus species in the family Rutaceae
+                (see list of plants known as orange); it primarily refers to Citrus × sinensis.`,
             checked: false
         }
     ];

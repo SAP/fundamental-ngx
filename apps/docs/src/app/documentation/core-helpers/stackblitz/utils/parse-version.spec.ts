@@ -23,8 +23,7 @@ describe('Parses version properly', () => {
         expect(() => parseVersion(undefined)).toThrow();
         expect(() => parseVersion(null)).toThrow();
         expect(() => parseVersion('')).toThrow();
-        // @ts-expect-error
-        expect(() => parseVersion(1)).toThrow();
+        expect(() => parseVersion(1 as any as string)).toThrow();
         expect(() => parseVersion('1')).toThrow();
         expect(() => parseVersion('1.')).toThrow();
         expect(() => parseVersion('1.0.0-')).toThrow();

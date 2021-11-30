@@ -267,9 +267,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     ];
 
     /** @hidden */
-    private _displayFn = (value: any) => {
-        return this.displayValue(value);
-    };
+    private _displayFn = (value: any) => this.displayValue(value);
 
     /** @hidden */
     private _secondaryFn = (value: any) => {
@@ -358,7 +356,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         this._cd.markForCheck();
     }
 
-    /**@hidden */
+    /** @hidden */
     convertObjectToMultiInputOption(items: any[]): MultiInputOption[] {
         return this._convertObjectsToOptionItems(items);
     }
@@ -462,7 +460,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
 
     /** @hidden */
     protected get ds(): MultiInputDataSource<any> {
-        return <MultiInputDataSource<any>>this.dataSource;
+        return this.dataSource as MultiInputDataSource<any>;
     }
 
     /** @hidden

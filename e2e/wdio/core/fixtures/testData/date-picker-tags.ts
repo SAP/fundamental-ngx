@@ -4,7 +4,7 @@ import { getElementArrayLength, getElementClass } from '../../../driver/wdio';
 
 const date = new Date();
 export const currentYear = date.getFullYear();
-export let currentDay = date.getDate();
+export const currentDay = date.getDate();
 export const currentMonth = date.getMonth() + 1;
 export const invalidDate = '99/99/9999';
 

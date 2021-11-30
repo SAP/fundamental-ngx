@@ -68,7 +68,7 @@ describe('IconTabBarProcessTypeComponent', () => {
 });
 
 const fakeOverflowDirective = {
-    getAmountOfExtraItems: (_) => AMOUNT_OF_EXTRA_TABS
+    getAmountOfExtraItems: () => AMOUNT_OF_EXTRA_TABS
 };
 
 const fakeNgZone = {
@@ -78,5 +78,5 @@ const fakeNgZone = {
 };
 
 const fakeCdr = {
-    detectChanges: (_) => null
+    detectChanges: () => null
 };

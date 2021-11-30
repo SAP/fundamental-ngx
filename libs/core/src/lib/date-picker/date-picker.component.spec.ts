@@ -185,7 +185,7 @@ describe('DatePickerComponent', () => {
     it('should handle single date blocked by disable function and set invalid', () => {
         spyOn(component.selectedDateChange, 'emit');
         spyOn(component, 'onChange');
-        component.disableFunction = (_: FdDate) => true;
+        component.disableFunction = () => true;
         const todayDate = new FdDate();
         const date = new FdDate(2000, 10, 10);
         const strDate = (<any>component)._formatDate(date);
@@ -203,8 +203,8 @@ describe('DatePickerComponent', () => {
         spyOn(component.selectedRangeDateChange, 'emit');
         spyOn(component, 'onChange');
         component.type = 'range';
-        component.disableRangeStartFunction = (_: FdDate) => true;
-        component.disableRangeEndFunction = (_: FdDate) => true;
+        component.disableRangeStartFunction = () => true;
+        component.disableRangeEndFunction = () => true;
         const todayDate = new FdDate();
         const date1 = new FdDate(2011, 10, 10);
         const date2 = new FdDate(2000, 10, 10);

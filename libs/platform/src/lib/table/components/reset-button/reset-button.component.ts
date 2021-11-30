@@ -24,7 +24,7 @@ export const RESETTABLE_TOKEN = new InjectionToken<Resettable>('Resettable');
         label="Reset"
         i18n-label="@@platformTableDialogResetChangesButton"
         (click)="resettable.reset()"
-        [disabled]="!(resettable.isResetAvailable$ | async)"
+        [disabled]="(resettable.isResetAvailable$ | async) === false"
     ></button>`,
     changeDetection: ChangeDetectionStrategy.OnPush
 })

@@ -94,7 +94,7 @@ export class NestedListTitleDirective {
 }
 
 @Component({
-    // tslint:disable-next-line:component-selector
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fdNestedListExpandIcon], [fd-nested-list-expand-icon]',
     template: `
         <ng-content></ng-content>

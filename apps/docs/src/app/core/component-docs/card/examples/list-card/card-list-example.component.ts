@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FdSelectChange } from '@fundamental-ngx/core/select';
 
 interface Casts {
     name?: string;
@@ -41,7 +40,7 @@ export class CardListExampleComponent implements OnInit {
         this.casts = this.movie1Casts;
     }
 
-    onValueChange(event: FdSelectChange): void {
+    onValueChange(): void {
         switch (this.selectedMovie) {
             case this.movies[0]:
                 this.casts = this.movie1Casts;

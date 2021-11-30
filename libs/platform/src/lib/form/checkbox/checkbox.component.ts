@@ -128,6 +128,7 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
 
     /** Emitting checkbox change event */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-native
     readonly change: EventEmitter<PlatformCheckboxChange> = new EventEmitter<PlatformCheckboxChange>();
 
     /** Event emitted when the checkbox's `indeterminate` value changes. */

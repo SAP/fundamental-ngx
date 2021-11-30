@@ -47,7 +47,7 @@ export class ResponsiveBreakPointConfig {
     providedIn: 'root'
 })
 export class ResponsiveBreakpointsService {
-    breakpoints: object = {};
+    breakpoints: Record<string, any> = {};
     activeBreakpoints: string[];
     minWidth = 'min-width';
     maxWidth = 'max-width';

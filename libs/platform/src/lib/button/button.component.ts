@@ -108,7 +108,7 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
         super(_changeDetector);
     }
 
-    /**@hidden */
+    /** @hidden */
     ngAfterViewInit(): void {
         this._elementRef.nativeElement.childNodes[0].classList.add('fd-ellipsis');
     }

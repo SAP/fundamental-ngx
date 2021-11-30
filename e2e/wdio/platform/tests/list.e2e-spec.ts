@@ -73,13 +73,11 @@ describe('List test suite:', () => {
         singleListItems,
         singleToolbar,
         singleRadioBtn,
-        navList,
         navListItems,
         navListLink,
         vScrollList,
         vScrollListItems,
         vScrollLoadIcon,
-        loadList,
         loadListItems,
         loadShowMoreBtn,
         loadIcon,
@@ -89,11 +87,8 @@ describe('List test suite:', () => {
         btnEditBtn,
         noDataListItems,
         noDataCompactList,
-        noSepList,
-        noSepListItems,
         unreadListAttr,
-        unreadListItems,
-        unreadListItemText
+        unreadListItems
     } = listPage;
 
     beforeAll(() => {

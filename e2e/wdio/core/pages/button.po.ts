@@ -28,7 +28,7 @@ export class ButtonPo extends CoreBaseComponentPo {
         return `select.form-control.ng-valid option[value=${option}]`;
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

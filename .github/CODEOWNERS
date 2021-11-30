@@ -1,6 +1,6 @@
 # This is a comment.
 # Each line is a file pattern followed by one or more owners.
 
-# changes to tslint or tsconfig files should be reviewed carefully
-**/tslint.json @valorkin @fkolar @droshev
+# Changes to eslint or tsconfig files should be reviewed carefully
+**/.eslint.json @valorkin @fkolar @droshev
 **/tsconfig.json @valorkin @fkolar @droshev

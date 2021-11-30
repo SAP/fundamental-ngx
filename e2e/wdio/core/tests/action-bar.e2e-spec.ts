@@ -1,13 +1,5 @@
 import { ActionBarPo } from '../pages/action-bar.po';
-import {
-    click,
-    doesItExist,
-    getElementArrayLength,
-    isElementClickable,
-    isElementDisplayed,
-    refreshPage,
-    waitForElDisplayed
-} from '../../driver/wdio';
+import { click, doesItExist, isElementDisplayed, refreshPage, waitForElDisplayed } from '../../driver/wdio';
 import { checkElArrIsClickable } from '../../helper/assertion-helper';
 import { backButton } from '../fixtures/appData/action-bar-contents';
 

@@ -96,7 +96,7 @@ export class OptionComponent implements AfterViewChecked, OnDestroy, FocusableOp
         return (this._elementRef.nativeElement.textContent || '').trim();
     }
 
-    /**used in components like autocomplete where focus must remain on the input.*/
+    /** used in components like autocomplete where focus must remain on the input.*/
     get active(): boolean {
         return this._active;
     }
@@ -112,9 +112,10 @@ export class OptionComponent implements AfterViewChecked, OnDestroy, FocusableOp
     /** @hidden */
     constructor(private _elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) {}
 
-    /**@hidden
-     *  Since select components could be using the option's label to display the selected values
-     *  and they don't have a way of knowing if the option's label has changed
+    /**
+     * @hidden
+     * Since select components could be using the option's label to display the selected values
+     * and they don't have a way of knowing if the option's label has changed
      * we have to check for changes in the DOM ourselves and dispatch an event
      */
     ngAfterViewChecked(): void {

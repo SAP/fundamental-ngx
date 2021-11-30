@@ -1,4 +1,4 @@
-import { OnInit, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { ExampleFile } from '../../../../documentation/core-helpers/code-example/example-file';
 
 import * as platformBasicTextareaSrc from '!raw-loader!./platform-textarea-examples/platform-textarea-basic-example.component.html';
@@ -19,7 +19,7 @@ import * as platformI18nTextareaTsCode from '!raw-loader!./platform-textarea-exa
     selector: 'app-textarea',
     templateUrl: './platform-textarea-docs.component.html'
 })
-export class PlatformTextareaDocsComponent implements OnInit {
+export class PlatformTextareaDocsComponent {
     textareaBasic: ExampleFile[] = [
         {
             language: 'html',
@@ -89,6 +89,4 @@ export class PlatformTextareaDocsComponent implements OnInit {
             component: 'PlatformTextareaI18nExampleComponent'
         }
     ];
-
-    ngOnInit(): void {}
 }

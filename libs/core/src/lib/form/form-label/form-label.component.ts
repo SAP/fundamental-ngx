@@ -11,7 +11,7 @@ import { Placement } from '@fundamental-ngx/core/shared';
  */
 @Component({
     // TODO to be discussed
-    // tslint:disable-next-line:component-selector
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-form-label]',
     templateUrl: './form-label.component.html',
     styleUrls: ['./form-label.component.scss'],

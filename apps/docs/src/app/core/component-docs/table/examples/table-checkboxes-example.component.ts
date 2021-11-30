@@ -60,7 +60,7 @@ export class TableCheckboxesExampleComponent {
         }
     ];
 
-    tableRowsCondensed: {}[] = [
+    tableRowsCondensed: Record<string, any>[] = [
         {
             column1: 'user.name@email.com',
             column2: 'Row 1',

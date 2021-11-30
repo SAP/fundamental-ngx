@@ -33,23 +33,16 @@ export class DateTimePicker extends CoreBaseComponentPo {
     calendarItem = '.fd-calendar__table td.fd-calendar__item';
     buttonText = ' .fd-button__text';
 
-    filterCalendarValue = (name: string): string => {
-        return `[id*="${name}"]`;
-    };
+    filterCalendarValue = (name: string): string => `[id*="${name}"]`;
 
-    getOptionById = (id: string): string => {
-        return `#${id}`;
-    };
+    getOptionById = (id: string): string => `#${id}`;
 
-    dayInCalendarButtonByValue = (index: string): string => {
-        return `//span[contains(@id,"day-${index}-")]/ancestor::td[not (contains(@class, 'fd-calendar__item--other-month'))]`;
-    };
+    dayInCalendarButtonByValue = (index: string): string =>
+        `//span[contains(@id,"day-${index}-")]/ancestor::td[not (contains(@class, 'fd-calendar__item--other-month'))]`;
 
-    yearInCalendarByValue = (year: number): string => {
-        return `[data-fd-calendar-year="${year}"]`;
-    };
+    yearInCalendarByValue = (year: number): string => `[data-fd-calendar-year="${year}"]`;
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

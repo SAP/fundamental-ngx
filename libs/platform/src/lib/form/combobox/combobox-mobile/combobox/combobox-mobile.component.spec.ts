@@ -34,7 +34,7 @@ describe('ComboboxMobileComponent', () => {
         dialogApprove(): void {
             //
         }
-        dialogDismiss(backup: string): void {
+        dialogDismiss(): void {
             //
         }
         detectChanges(): void {

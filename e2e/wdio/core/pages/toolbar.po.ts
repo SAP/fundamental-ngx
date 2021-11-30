@@ -34,9 +34,8 @@ export class ToolbarPo extends CoreBaseComponentPo {
     popoverSplitButton = 'fd-split-button button';
     popoverDropDown = '.fd-button-split';
 
-    dayInCalendarButtonByValue = (index: string): string => {
-        return `//span[contains(@id,"day-${index}-")]/ancestor::td[not (contains(@class, 'fd-calendar__item--other-month'))]`;
-    };
+    dayInCalendarButtonByValue = (index: string): string =>
+        `//span[contains(@id,"day-${index}-")]/ancestor::td[not (contains(@class, 'fd-calendar__item--other-month'))]`;
 
     open(): void {
         super.open(this.url);
@@ -44,7 +43,7 @@ export class ToolbarPo extends CoreBaseComponentPo {
         waitForPresent(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

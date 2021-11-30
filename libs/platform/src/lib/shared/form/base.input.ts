@@ -172,7 +172,7 @@ export abstract class BaseInput
     /** set when input field is mandatory form field */
     required: boolean;
 
-    onChange = (_: any) => {};
+    onChange: (value: any) => void = () => {};
     onTouched = () => {};
 
     constructor(
