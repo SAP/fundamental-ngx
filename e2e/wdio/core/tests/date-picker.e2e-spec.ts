@@ -22,7 +22,7 @@ import {
     invalidDate,
     getCurrentItemIndex,
     getCurrentMonth,
-    getNextDay,
+    getNextDay
 } from '../fixtures/testData/date-picker-tags';
 import { blockExamples } from '../fixtures/appData/date-picker-contents';
 

@@ -27,14 +27,14 @@ export function getNextDay(withZero: boolean): string {
     if (withZero) {
         // need to check that day number is less than 10 to return with 0, cz not needed to return 010 e.g.
         if (date.getDate() < 10) {
-            return '0' + (date.getDate()).toString();
+            return '0' + date.getDate().toString();
         }
         if (date.getDate() >= 10) {
-            return (date.getDate()).toString();
+            return date.getDate().toString();
         }
     }
     if (!withZero) {
-        return (date.getDate()).toString();
+        return date.getDate().toString();
     }
 }
 
