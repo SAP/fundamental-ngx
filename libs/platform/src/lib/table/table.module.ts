@@ -44,8 +44,10 @@ import { TableP13SortComponent } from './components/table-p13-dialog/table-p13-s
 import { TableP13FilterComponent } from './components/table-p13-dialog/table-p13-filter.component';
 import { TableP13GroupComponent } from './components/table-p13-dialog/table-p13-group.component';
 import { TableP13ColumnsComponent } from './components/table-p13-dialog/table-p13-columns.component';
-import { P13SortingDialogComponent } from './components/table-p13-dialog/sorting/sorting.component';
-import { GetAvailableSortColumnsPipe } from './components/table-p13-dialog/sorting/get-available-sort-columns.pipe';
+import {
+    P13SortingDialogComponent,
+    GetAvailableSortColumnsPipe
+} from './components/table-p13-dialog/sorting/sorting.component';
 import { P13GroupingDialogComponent } from './components/table-p13-dialog/grouping/grouping.component';
 import { P13FilteringDialogComponent } from './components/table-p13-dialog/filtering/filtering.component';
 import { FilterRuleComponent } from './components/table-p13-dialog/filtering/filter-rule.component';

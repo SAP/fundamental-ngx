@@ -36,19 +36,10 @@ import 'core-js/es/array';
 import 'core-js/es/regexp';
 import 'core-js/es/map';
 import 'core-js/es/weak-map';
-import 'core-js/es/set';
-
-/** IE10 and IE11 requires the following for NgClass support on SVG elements */
-import 'classlist.js'; // Run `npm install --save classlist.js`.
+import 'core-js/es/set'; // Run `npm install --save classlist.js`.
 
 /** Evergreen browsers require these. **/
-import 'core-js/es/reflect';
-
-/**
- * Required to support Web Animations `@angular/animation`.
- * Needed for: All but Chrome, Firefox and Opera. http://caniuse.com/#feat=web-animation
- **/
-import 'web-animations-js'; // Run `npm install --save web-animations-js`.
+import 'core-js/es/reflect'; // Run `npm install --save web-animations-js`.
 
 /** *************************************************************************************************
  * Zone JS is required by Angular itself.
