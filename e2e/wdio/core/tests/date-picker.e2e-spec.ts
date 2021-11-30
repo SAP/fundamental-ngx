@@ -23,7 +23,6 @@ import {
     getCurrentItemIndex,
     getCurrentMonth,
     getNextDay,
-    currentDay
 } from '../fixtures/testData/date-picker-tags';
 import { blockExamples } from '../fixtures/appData/date-picker-contents';
 
@@ -148,7 +147,7 @@ describe('Datetime picker suite', () => {
     it('should check that available only 2 next weeks in range disabled example', () => {
         click(rangeDisabledExample + calendarIcon);
         const currentDayIndex = getCurrentItemIndex();
-        const itemsLength = getElementArrayLength(currentMonthCalendarItem) + 5;
+        const itemsLength = getElementArrayLength(currentMonthCalendarItem);
 
         for (let i = currentDayIndex - 1; i !== 0; i--) {
             expect(isElementClickable(calendarItem, i)).toBe(false, `previous day not disabled`);
@@ -388,8 +387,8 @@ describe('Datetime picker suite', () => {
             click(altCalendarItem, currentDayIndex + 1);
 
             section === formattingExample
-                ? (chosenDate = `${getCurrentMonth(true)}/0${currentDay}/${currentYear.toString().slice(2)}`)
-                : (chosenDate = `${getCurrentMonth(false)}/${currentDay}/${currentYear}`);
+                ? (chosenDate = `${getCurrentMonth(true)}/${getNextDay(true)}/${currentYear.toString().slice(2)}`)
+                : (chosenDate = `${getCurrentMonth(false)}/${getNextDay(false)}/${currentYear}`);
 
             expect(getValue(section + calendarInput)).toContain(
                 chosenDate,

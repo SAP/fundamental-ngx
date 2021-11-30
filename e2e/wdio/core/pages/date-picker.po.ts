@@ -25,7 +25,7 @@ export class DatePickerPo extends CoreBaseComponentPo {
     calendar = '.fd-calendar';
     calendarItem = 'td.fd-calendar__item';
     altCalendarItem = 'table td.fd-calendar__item';
-    currentMonthCalendarItem = "//td[not(contains(@class, 'fd-calendar__item--other-month'))]";
+    currentMonthCalendarItem = '//td[not(contains(@class, \'fd-calendar__item--other-month\'))]';
     selectedTimeLine = '> div';
     selectedItem = '.is-active';
     currentItem = 'td.fd-calendar__item--current ';
@@ -40,6 +40,7 @@ export class DatePickerPo extends CoreBaseComponentPo {
     previousMonthButton = '.fd-calendar__action--arrow-left button';
     selectMonthButton = 'div > div:nth-child(2) > button';
     selectYearButton = 'div:nth-child(3) > button';
+    monthAttributeLabel = 'data-fd-calendar-month';
 
     open(): void {
         super.open(this.url);
