@@ -37,7 +37,7 @@ export class DateTimePicker extends BaseComponentPo {
     firstMonthButton = '(//td[contains(@id,"month")]/child::span)[1]';
     navigationUpArrowButton = 'button[glyph="navigation-up-arrow"]';
     navigationDownArrowButton = 'button[glyph="navigation-down-arrow"]';
-    timeItem = 'span.fd-time__item';
+    timeColumn = 'fd-time-column';
     okButton = 'button[fdtype="emphasized"]';
     cancelButton = 'button[label="Cancel"]';
     calendarContainer = 'div.fd-datetime__container';

@@ -538,7 +538,7 @@ export class TimePickerComponent<D>
         this._changeMessageVisibility();
         if (isOpen) {
             this._changeDetectorRef.detectChanges();
-            this.child.focusActiveColumnIndicator();
+            this.child.focusActiveColumn();
         }
         // focus input control every time popup is closed
         if (!isOpen && this._inputElement) {

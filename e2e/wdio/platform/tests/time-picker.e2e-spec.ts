@@ -31,7 +31,7 @@ describe('Time picker suite', () => {
         disabledInput,
         disabledButton,
         navigationDownArrowButton,
-        timeItem,
+        timeColumn,
         setToNullButton,
         setValidTimeButton,
         hoursColumn,
@@ -207,11 +207,11 @@ describe('Time picker suite', () => {
         while ($(selectedValue).getText() !== ` ${hour.toString()} `) {
             click(navigationDownArrowButton);
         }
-        click(timeItem, 1);
+        click(timeColumn, 1);
         while ($$(selectedValue)[1].getText() !== ` ${minute.toString()} `) {
             click(navigationDownArrowButton);
         }
-        click(timeItem, 2);
+        click(timeColumn, 2);
         while ($$(selectedValue)[2].getText() !== day_time) {
             click(navigationDownArrowButton);
         }

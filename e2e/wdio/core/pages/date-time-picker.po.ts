@@ -26,7 +26,7 @@ export class DateTimePicker extends CoreBaseComponentPo {
     selectedMinutes = '(//div[contains(@class, "fd-time__wrapper")]//li[contains(@class, "fd-time__item")])[54]';
     navigationUpArrowButton = 'button[glyph="navigation-up-arrow"]';
     navigationDownArrowButton = 'button[glyph="navigation-down-arrow"]';
-    timeItem = 'span.fd-time__item';
+    timeColumn = 'fd-time-column';
     period = '//span[contains(text(), " PM ")]/parent::li';
     optionButton = 'div.fd-select__control';
     countryOption = 'ul.fd-select-options';
