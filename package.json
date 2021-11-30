@@ -210,7 +210,7 @@
         "ng-packagr": "12.2.5",
         "ngx-cva-test-suite": "~1.0.4",
         "prettier": "2.4.1",
-        "rollup": "2.58.0",
+        "rollup": "2.60.2",
         "standard-version": "9.3.2",
         "ts-node": "9.1.1",
         "typedoc": "0.21.9",
