@@ -25,6 +25,7 @@ import { switchMap, takeUntil } from 'rxjs/operators';
 import NumberFormat = Intl.NumberFormat;
 import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { SafeHtml } from '@angular/platform-browser';
 
 let stepInputUniqueId = 0;
 
@@ -144,7 +145,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** Holds the message with respect to state */
     @Input()
-    stateMessage: string;
+    stateMessage: string | SafeHtml;
 
     /** Custom unit displayed as a label next to the input */
     @Input()
@@ -213,9 +214,6 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** @hidden */
     currencySign: string;
-
-    /** @hidden */
-    viewValue: string;
 
     /** @hidden */
     focused: boolean;
