@@ -133,5 +133,6 @@
         [ngModel]="currentPage"
         (keydown.enter)="goToPage(currentPageModel.value)"
         (keydown.space)="goToPage(currentPageModel.value)"
+        (blur)="_restoreInputValue(currentPageModel)"
     />
 </ng-template>

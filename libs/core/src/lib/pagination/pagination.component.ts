@@ -16,6 +16,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { NgModel } from '@angular/forms';
 
 import { ContentDensityService, RtlService } from '@fundamental-ngx/core/utils';
 
@@ -382,6 +383,12 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
             this.pageChangeStart.emit(maxPage);
         }
     };
+
+    /** @hidden */
+    _restoreInputValue(model: NgModel): void {
+        model.reset(this.currentPage);
+        this._cdr.markForCheck();
+    }
 
     /** @hidden */
     private _refreshPages(): void {

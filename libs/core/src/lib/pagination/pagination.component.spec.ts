@@ -6,6 +6,7 @@ import { PaginationModule } from '@fundamental-ngx/core';
 import { SelectComponent } from '@fundamental-ngx/core/select';
 
 import { PaginationComponent } from './pagination.component';
+import { NgModel } from '@angular/forms';
 
 const TOTAL_ITEMS = 3;
 const CURRENT_PAGE = 1;
@@ -138,6 +139,18 @@ describe('Pagination Component', () => {
             fixture.detectChanges();
 
             expect(component.currentPage).toBe(5);
+        });
+
+        it('should reset input field', () => {
+            const model = { reset: (value: any) => {} } as NgModel;
+            const modelMockSpy = spyOn(model, 'reset');
+
+            component.currentPage = 3;
+            fixture.detectChanges();
+
+            component._restoreInputValue(model);
+
+            expect(modelMockSpy).toHaveBeenCalledWith(component.currentPage);
         });
     });
 
