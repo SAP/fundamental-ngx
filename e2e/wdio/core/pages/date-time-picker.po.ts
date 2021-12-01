@@ -1,5 +1,5 @@
 import { CoreBaseComponentPo } from './core-base-component.po';
-import { waitForElDisplayed } from '../../driver/wdio';
+import { click, waitForElDisplayed } from '../../driver/wdio';
 
 export class DateTimePicker extends CoreBaseComponentPo {
     url = '/datetime-picker';
@@ -37,8 +37,9 @@ export class DateTimePicker extends CoreBaseComponentPo {
 
     getOptionById = (id: string): string => `#${id}`;
 
-    dayInCalendarButtonByValue = (index: string): string =>
-        `//span[contains(@id,"day-${index}-")]/ancestor::td[not (contains(@class, 'fd-calendar__item--other-month'))]`;
+    clickDayInCalendarButtonByValue = (dayNumber: number): void => {
+        click('.fd-calendar__table td.fd-calendar__item:not(.fd-calendar__item--other-month)', dayNumber - 1);
+    };
 
     yearInCalendarByValue = (year: number): string => `[data-fd-calendar-year="${year}"]`;
 

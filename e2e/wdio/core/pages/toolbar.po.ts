@@ -1,5 +1,5 @@
 import { CoreBaseComponentPo } from './core-base-component.po';
-import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
+import { click, waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class ToolbarPo extends CoreBaseComponentPo {
     url = '/toolbar';
@@ -34,8 +34,9 @@ export class ToolbarPo extends CoreBaseComponentPo {
     popoverSplitButton = 'fd-split-button button';
     popoverDropDown = '.fd-button-split';
 
-    dayInCalendarButtonByValue = (index: string): string =>
-        `//span[contains(@id,"day-${index}-")]/ancestor::td[not (contains(@class, 'fd-calendar__item--other-month'))]`;
+    clickDayInCalendarButtonByValue = (dayNumber: number): void => {
+        click('.fd-calendar__table td.fd-calendar__item:not(.fd-calendar__item--other-month)', dayNumber - 1);
+    };
 
     open(): void {
         super.open(this.url);
