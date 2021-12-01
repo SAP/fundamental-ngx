@@ -11,7 +11,7 @@ import { DateRange } from '@fundamental-ngx/core/calendar';
 @Component({
     selector: 'fd-calendar-range-example',
     template: ` <fd-calendar
-            [calType]="'range'"
+            calType="range"
             [disableFunction]="myDisableFunction2"
             [disableRangeStartFunction]="myDisableStartFunction"
             [disableRangeEndFunction]="myDisableEndFunction"

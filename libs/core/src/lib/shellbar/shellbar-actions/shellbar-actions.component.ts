@@ -24,7 +24,7 @@ import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.compo
  * <fd-shellbar-actions [user]="user"
  *                      [userMenu]="userMenu"
  *                      [productSwitcher]="productSwitcher">
- *        <button fd-button [fdType]="'standard'">Custom Button</button>
+ *        <button fd-button fdType="standard">Custom Button</button>
  *
  *        <fd-shellbar-action *ngFor="let action of actions"
  *                            [glyph]="action.glyph"

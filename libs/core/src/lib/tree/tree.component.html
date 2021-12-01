@@ -5,7 +5,7 @@
                 (click)="toggleDisplayAll()"
                 class="fd-tree__control"
                 aria-label="Expand all"
-                [ngClass]="{ 'is-pressed': !hideAll }"
+                [class.is-pressed]="!hideAll"
                 [attr.aria-pressed]="!hideAll"
             ></button>
             {{ headers[0] }}

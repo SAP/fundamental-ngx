@@ -68,7 +68,7 @@ let comboboxUniqueId = 0;
  * <fd-combobox
  *      [(ngModel)]="searchTerm"
  *      [dropdownValues]="dropdownValues"
- *      [placeholder]="'Type some text...'">
+ *      placeholder="Type some text...">
  * </fd-combobox>
  * ```
  */

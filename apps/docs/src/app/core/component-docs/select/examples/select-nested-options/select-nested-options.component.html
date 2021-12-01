@@ -3,7 +3,7 @@
         <span fd-list-title>Fruits</span>
     </li>
     <fd-option *ngFor="let option of fruits" [value]="option">
-        <i fd-list-icon [glyph]="'add'"></i>
+        <i fd-list-icon glyph="add"></i>
         <span fd-list-title>{{ option.name }}</span>
         <span fd-list-secondary>{{ option.kCal }} kcal</span>
     </fd-option>
@@ -12,7 +12,7 @@
         <span fd-list-title>Vegetables</span>
     </li>
     <fd-option *ngFor="let option of vegetables" [value]="option">
-        <i fd-list-icon [glyph]="'add'"></i>
+        <i fd-list-icon glyph="add"></i>
         <span fd-list-title>{{ option.name }}</span>
         <span fd-list-secondary>{{ option.kCal }} kcal</span>
     </fd-option>

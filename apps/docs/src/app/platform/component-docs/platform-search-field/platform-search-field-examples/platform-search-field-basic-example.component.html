@@ -1,6 +1,6 @@
 <h4>Cozy</h4>
 <fdp-search-field
-    [placeholder]="'Search'"
+    placeholder="Search"
     [suggestions]="suggestions"
     (searchSubmit)="onSearchSubmit($event)"
     (inputChange)="onInputChange($event)"
@@ -15,9 +15,9 @@
 </div>
 <h4>Compact</h4>
 <fdp-search-field
-    [placeholder]="'Search'"
+    placeholder="Search"
     [suggestions]="suggestions"
-    [contentDensity]="'compact'"
+    contentDensity="compact"
     ariaLabel="Search something"
     (searchSubmit)="onCompactSearchSubmit($event)"
     (inputChange)="onCompactInputChange($event)"

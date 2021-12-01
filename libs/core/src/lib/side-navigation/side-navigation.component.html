@@ -1,4 +1,4 @@
-<nav class="fd-side-nav" [ngClass]="{ 'fd-side-nav--condensed': condensed || sideNavigationConfiguration?.condensed }">
+<nav class="fd-side-nav" [class.fd-side-nav--condensed]="condensed || sideNavigationConfiguration?.condensed">
     <ng-container *ngIf="!sideNavigationConfiguration">
         <ng-content></ng-content>
     </ng-container>

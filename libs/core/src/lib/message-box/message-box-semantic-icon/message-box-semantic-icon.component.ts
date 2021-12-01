@@ -14,7 +14,7 @@ import {
  */
 @Component({
     selector: 'fd-message-box-semantic-icon',
-    template: `<i [ngClass]="'sap-icon--' + _getIcon" role="presentation"></i>`,
+    template: `<i [class]="'sap-icon--' + _getIcon" role="presentation"></i>`,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         { provide: MESSAGE_BOX_CONFIGURABLE_ELEMENT, useExisting: MessageBoxSemanticIconComponent, multi: true }

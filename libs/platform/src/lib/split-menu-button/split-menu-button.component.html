@@ -9,7 +9,8 @@
         fd-button
         #primaryBtn
         [label]="buttonLabel"
-        [ngStyle]="{ width: primaryButtonWidth, overflow: 'hidden' }"
+        [style.width]="primaryButtonWidth"
+        style="overflow: hidden"
         [attr.id]="id"
         [attr.name]="name"
         [attr.title]="title"
@@ -27,7 +28,7 @@
         [attr.name]="name"
         [attr.title]="menuTitle"
         [attr.aria-label]="menuTitle"
-        [glyph]="'slim-arrow-down'"
+        glyph="slim-arrow-down"
         [disabled]="disabled"
         [fdType]="type"
         [attr.tabindex]="tabindex"

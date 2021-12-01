@@ -1,7 +1,7 @@
 <div
     class="fd-popover__popper fd-popover__popper--cdk-custom"
     [class.fd-popover__popper--no-arrow]="_noArrow"
-    [ngClass]="_additionalBodyClass"
+    [class]="_additionalBodyClass"
     [cdkTrapFocus]="_focusTrapped"
     [style]="_marginStyle"
     [style.max-width.px]="_maxWidth"
@@ -14,5 +14,5 @@
     {{ text }}
     <ng-container *ngTemplateOutlet="_templateToDisplay"></ng-container>
     <ng-content select="[fd-popover-body-footer]"></ng-content>
-    <span class="fd-popover__arrow" [ngClass]="_arrowClasses" *ngIf="!_noArrow"></span>
+    <span class="fd-popover__arrow" [class]="_arrowClasses" *ngIf="!_noArrow"></span>
 </div>

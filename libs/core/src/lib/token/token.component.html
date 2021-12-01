@@ -4,12 +4,10 @@
     role="option"
     [attr.aria-roledescription]="ariaRoleDescription"
     (click)="tokenClickHandler($event)"
-    [ngClass]="{
-        'fd-token__disabled': disabled,
-        'fd-token--compact': compact,
-        'fd-token--selected': selected,
-        'fd-token--readonly': readOnly
-    }"
+    [class.fd-token__disabled]="disabled"
+    [class.fd-token--compact]="compact"
+    [class.fd-token--selected]="selected"
+    [class.fd-token--readonly]="readOnly"
     [attr.aria-selected]="selected"
     [attr.aria-readonly]="readOnly"
 >

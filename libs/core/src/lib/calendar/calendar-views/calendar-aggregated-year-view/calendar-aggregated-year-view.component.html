@@ -6,10 +6,8 @@
                     class="fd-calendar__item"
                     role="gridcell"
                     *ngFor="let cell of colYears; let colIndex = index"
-                    [ngClass]="{
-                        'fd-calendar__item--current': cell.current,
-                        'is-active': cell.selected
-                    }"
+                    [class.fd-calendar__item--current]="cell.current"
+                    [class.is-active]="cell.selected"
                     [attr.id]="cell.id"
                     [attr.tabindex]="cell.tabIndex"
                     [attr.data-fd-calendar-years]="cell.years.startYear + '-' + cell.years.endYear"

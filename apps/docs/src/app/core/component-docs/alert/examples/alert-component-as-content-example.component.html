@@ -4,7 +4,7 @@
 <button
     fd-button
     label="Dismiss All"
-    [fdType]="'emphasized'"
+    fdType="emphasized"
     (click)="alertService.dismissAll()"
     [disabled]="!alertService.hasOpenAlerts()"
 ></button>
@@ -16,7 +16,7 @@
     <button
         fd-button
         label="Click to dismiss"
-        [fdType]="'positive'"
+        fdType="positive"
         [compact]="true"
         (click)="alert.dismiss('Data passed back')"
     ></button>

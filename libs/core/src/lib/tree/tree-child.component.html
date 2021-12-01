@@ -4,14 +4,14 @@
             *ngFor="let cell of row.rowData; let i = index"
             [attr.data-index]="i"
             class="fd-tree__col"
-            [ngClass]="{ 'fd-tree__col--control': i === 0 }"
+            [class.fd-tree__col--control]="i === 0"
         >
             <button
                 (click)="toggleDisplayChildren()"
                 *ngIf="row.children && i === 0"
                 class="fd-tree__control"
                 aria-label="Expand"
-                [ngClass]="{ 'is-pressed': !hideChildren }"
+                [class.is-pressed]="!hideChildren"
                 [attr.aria-pressed]="!hideChildren"
             ></button>
             <ng-container *ngIf="typeOf(cell) === 'string'">
@@ -54,7 +54,7 @@
     </div>
     <ul
         *ngIf="row.children && row.children.length > 0"
-        [ngClass]="{ 'is-hidden': hideChildren }"
+        [class.is-hidden]="hideChildren"
         class="fd-tree__group"
         role="group"
     >
@@ -62,7 +62,7 @@
             *ngFor="let child of row.children"
             [displayTreeActions]="displayTreeActions"
             [row]="child"
-            [ngClass]="child.sublevelClass"
+            [class]="child.sublevelClass"
         >
         </fd-tree-child>
     </ul>

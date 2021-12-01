@@ -13,7 +13,7 @@
     [attr.aria-disabled]="disabled"
     [attr.aria-required]="required"
     [class.fd-checkbox--compact]="compact"
-    [ngClass]="state ? 'is-' + state : ''"
+    [class]="state ? 'is-' + state : ''"
     [ngModel]="isChecked"
     (ngModelChange)="nextValue()"
     (keydown)="checkByKey($event)"
@@ -27,7 +27,7 @@
     class="fd-checkbox__label"
     #labelElement
     [for]="inputId"
-    [ngClass]="labelClass"
+    [class]="labelClass"
     [attr.title]="title"
     [class.fd-checkbox__label--compact]="compact"
     [class.fd-checkbox__label--required]="required"
