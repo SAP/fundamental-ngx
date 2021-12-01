@@ -13,7 +13,7 @@ export interface NestedListModel {
 export interface NestedListLink {
     icon?: string;
     title: string;
-    callback?: Function;
+    callback?: () => void;
     href?: string;
     routerLink?: string;
     selected?: boolean;

@@ -96,6 +96,7 @@ export class RadioGroupComponent
 
     /** Selected radio button change event raised */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-native
     change: EventEmitter<RadioButtonComponent> = new EventEmitter<RadioButtonComponent>();
 
     /** @hidden */

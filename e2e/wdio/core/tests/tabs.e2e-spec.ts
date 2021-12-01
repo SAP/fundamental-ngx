@@ -2,15 +2,13 @@ import {
     browserIsFirefox,
     click,
     currentPlatformName,
-    doubleClick,
     getAttributeByName,
     getElementArrayLength,
     getElementClass,
     getText,
     refreshPage,
     scrollIntoView,
-    waitForElDisplayed,
-    pause
+    waitForElDisplayed
 } from '../../driver/wdio';
 import { TabsPo } from '../pages/tabs.po';
 

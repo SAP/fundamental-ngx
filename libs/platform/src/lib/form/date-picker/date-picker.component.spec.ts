@@ -385,7 +385,6 @@ describe('TestDatePickerComponent', () => {
 
         // for single type date picker, set value using control.
         const d1 = new FdDate(2020, 12, 14);
-        const d2 = new FdDate(2020, 12, 15);
         datePickerFormGroup.controls.birthday.setValue(d1);
         fixture.detectChanges();
         expect(datePickerFormGroup.controls.birthday.valid).toBeTruthy();

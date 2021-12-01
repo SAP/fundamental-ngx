@@ -109,10 +109,10 @@ export class ExperimentalSwitchComponent implements ControlValueAccessor, OnInit
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    onChange: Function = () => {};
+    onChange: (value: boolean) => void = () => {};
 
     /** @hidden */
-    onTouched: Function = () => {};
+    onTouched = () => {};
 
     constructor(
         private readonly _changeDetectorRef: ChangeDetectorRef,
@@ -177,7 +177,7 @@ export class ExperimentalSwitchComponent implements ControlValueAccessor, OnInit
      * @hidden
      * @param fn User defined function that handles the *onChange* event of the switch.
      */
-    registerOnChange(fn): void {
+    registerOnChange(fn: (value: boolean) => void): void {
         this.onChange = fn;
     }
 
@@ -185,7 +185,7 @@ export class ExperimentalSwitchComponent implements ControlValueAccessor, OnInit
      * @hidden
      * @param fn User defined function that handles the *onTouch* event of the switch.
      */
-    registerOnTouched(fn: Function): void {
+    registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
 

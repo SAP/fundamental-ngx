@@ -27,28 +27,30 @@ interface ResizeMove {
 })
 export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
     /** Element limiting resizable container growth */
-    // tslint:disable-next-line:no-input-rename
+    // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('fdResizeBoundary') resizeBoundary: string | HTMLElement = 'body';
 
     /** Whether resizable behaviour should be disabled */
-    // tslint:disable-next-line:no-input-rename
+    // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('fdResizeDisabled') disabled = false;
 
     /** Localization of resize handle inside resizable container */
-    // tslint:disable-next-line:no-input-rename
+    // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('fdResizeHandleLocation') resizeHandleLocation: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' =
         'bottom-right';
 
     /** Resize handle reference - should be used if Resize handle is not a ContentChild of resizable container */
-    // tslint:disable-next-line:no-input-rename
+    // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('fdResizeResizeHandleRef') set setResizeHandleReference(value: ResizeHandleDirective) {
         this.resizeHandleReference = value;
     }
 
     /** Emits event when resizing has tarted */
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     @Output() onResizeStart = new EventEmitter<void>();
 
     /** Emits event when resizing has ended */
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     @Output() onResizeEnd = new EventEmitter<void>();
 
     /** @hidden Reference to Resize handle */
@@ -224,12 +226,12 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
     private _getResizeEventsNotifiers(trigger$: Observable<boolean>): Observable<any> {
         const emitResizableStart$ = trigger$.pipe(
             filter((isActive) => isActive),
-            tap((_) => this.onResizeStart.emit())
+            tap(() => this.onResizeStart.emit())
         );
 
         const emitResizableEnd$ = trigger$.pipe(
             filter((isActive) => !isActive),
-            tap((_) => this.onResizeEnd.emit())
+            tap(() => this.onResizeEnd.emit())
         );
 
         return merge(emitResizableStart$, emitResizableEnd$);

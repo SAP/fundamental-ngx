@@ -11,7 +11,6 @@ import {
 } from '../fixtures/appData/menu-button-contents';
 import {
     click,
-    doubleClick,
     getAttributeByName,
     getElementArrayLength,
     getElementClass,
@@ -35,7 +34,6 @@ describe('Menu button test suite', () => {
         compactBtnAttrArr,
         compactBtnArr,
         sectionTitle,
-        menuTypeBtnAttrArr,
         menuTypeBtnArr
     } = menuBtnPage;
 

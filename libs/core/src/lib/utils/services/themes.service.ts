@@ -115,7 +115,7 @@ export class ThemesService {
 
     /** @hidden */
     private _getNativeParameterByName(paramName: string): string {
-        paramName = paramName.replace(/[\[\]]/g, '\\$&');
+        paramName = paramName.replace(/[[\]]/g, '\\$&');
         const regex = new RegExp('[?&]' + paramName + '(=([^&#]*)|&|#|$)'),
             results = regex.exec(window.location.href);
         if (!results || !results[2]) {

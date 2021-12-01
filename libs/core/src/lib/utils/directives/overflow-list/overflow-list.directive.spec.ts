@@ -9,7 +9,7 @@ const LIST_ITEM_WIDTH = 100;
 const LIST_WIDTH = 500;
 
 @Component({
-    // tslint:disable-next-line:component-selector
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'test-component',
     template: `
         <div #dirRoot class="list" fdOverflowList (overflowChanged)="onOverflowed($event)">

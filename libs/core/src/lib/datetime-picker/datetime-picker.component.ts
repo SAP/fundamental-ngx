@@ -280,6 +280,7 @@ export class DatetimePickerComponent<D>
 
     /** Event emitted when popover closes. */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     readonly onClose: EventEmitter<void> = new EventEmitter<void>();
 
     /** Indicates when datetime input is in invalid state. */
@@ -334,7 +335,7 @@ export class DatetimePickerComponent<D>
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    onChange = (_: D) => {};
+    onChange: (value: D) => void = () => {};
 
     /** @hidden */
     onTouched = () => {};
@@ -344,9 +345,7 @@ export class DatetimePickerComponent<D>
      * @param fdDate FdDate
      */
     @Input()
-    disableFunction = function (_: D): boolean {
-        return false;
-    };
+    disableFunction: (value: D) => void = () => false;
 
     /** @hidden */
     constructor(

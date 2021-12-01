@@ -16,7 +16,7 @@ export type ScrollbarOverflowOptions = 'auto' | 'scroll' | 'hidden';
  * ```
  */
 @Component({
-    // tslint:disable-next-line:component-selector
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-scrollbar]',
     template: ` <ng-content></ng-content>`,
     host: {

@@ -19,18 +19,13 @@ import {
 describe('Verify Panel', () => {
     const panelPage = new PanelPo();
     const {
-        expandablePanelRoot,
         expandablePanelBtn,
         expandablePanelTitle,
         expandablePanelContent,
-        fixedPanelSection,
         fixedPanelDescription,
-        compactPanelRoot,
         compactPanelBtn,
-        fixedHeightPanelRoot,
         fixedHeightPanelContentRegion,
         fixedHeightPanelContent,
-        actionPanelRoot,
         actionPanelBtn
     } = panelPage;
 

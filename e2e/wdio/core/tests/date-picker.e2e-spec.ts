@@ -11,8 +11,10 @@ import {
     isElementClickable,
     isElementDisplayed,
     mouseHoverElement,
+    pause,
     refreshPage,
     scrollIntoView,
+    sendKeys,
     setValue,
     waitForPresent
 } from '../../driver/wdio';
@@ -60,7 +62,8 @@ describe('Datetime picker suite', () => {
         currentMonthCalendarItem,
         getCurrentDayIndex,
         altCalendarItem,
-        monthAttributeLabel
+        monthAttributeLabel,
+        positionExample
     } = new DatePickerPo();
 
     beforeAll(() => {
@@ -250,23 +253,34 @@ describe('Datetime picker suite', () => {
     function checkChangingMonthByArrows(section: string): void {
         click(section + calendarIcon);
         click(selectMonthButton);
+        let previousMonthName = '',
+            nextMonthName = '';
+        // if current month is January - we do not have previous month in this year
+        if (getCurrentItemIndex() !== 0) {
+            previousMonthName = getAttributeByName(calendarItem, monthAttributeLabel, getCurrentItemIndex() - 1);
+            console.log(previousMonthName);
 
-        const previousMonthName = getAttributeByName(calendarItem, monthAttributeLabel, getCurrentItemIndex() - 1);
-        const nextMonthName = getAttributeByName(calendarItem, monthAttributeLabel, getCurrentItemIndex() + 1);
+            sendKeys(['ArrowLeft', 'Enter']);
+            expect(getAttributeByName(selectMonthButton, monthAttributeLabel)).toEqual(
+                previousMonthName,
+                `previous month is not chosen, ${section}`
+            );
+        }
+        refreshPage();
+        click(section + calendarIcon);
         click(selectMonthButton);
+        // if current month is December - we do not have next month in this year
+        if (getCurrentItemIndex() !== 11) {
+            nextMonthName = getAttributeByName(calendarItem, monthAttributeLabel, getCurrentItemIndex() + 1);
+            console.log(nextMonthName);
 
-        click(nextMonthButton);
-        expect(getAttributeByName(selectMonthButton, monthAttributeLabel)).toEqual(
-            nextMonthName,
-            `next month is not chosen`
-        );
-
-        click(previousMonthButton);
-        click(previousMonthButton);
-        expect(getAttributeByName(selectMonthButton, monthAttributeLabel)).toEqual(
-            previousMonthName,
-            `previous month is not chosen`
-        );
+            sendKeys(['ArrowRight', 'Enter']);
+            pause(3000);
+            expect(getAttributeByName(selectMonthButton, monthAttributeLabel)).toEqual(
+                nextMonthName,
+                `next month is not chosen, ${section}`
+            );
+        }
         click(section + calendarIcon);
     }
 
@@ -316,7 +330,6 @@ describe('Datetime picker suite', () => {
         click(section + calendarIcon, calendarIndex);
         const itemsLength = getElementArrayLength(calendarItem) - 1;
         let firstDayIndex, lastDayIndex;
-        let firstChosenDayText, secChosenDayText;
 
         for (let i = 0; i < itemsLength; i++) {
             if (!getElementClass(calendarItem, i).includes('other-month')) {
@@ -324,7 +337,8 @@ describe('Datetime picker suite', () => {
                 break;
             }
         }
-        firstChosenDayText = '0' + getText(calendarItem, firstDayIndex);
+
+        const firstChosenDayText = '0' + getText(calendarItem, firstDayIndex);
 
         for (let i = itemsLength; i !== 0; i--) {
             if (
@@ -336,7 +350,7 @@ describe('Datetime picker suite', () => {
             }
         }
 
-        secChosenDayText = getText(calendarItem, lastDayIndex);
+        const secChosenDayText = getText(calendarItem, lastDayIndex);
 
         click(calendarItem, firstDayIndex);
         click(calendarItem, lastDayIndex);
@@ -384,7 +398,7 @@ describe('Datetime picker suite', () => {
             click(section + calendarIcon);
         }
         if (currentDayIndex !== dayCount) {
-            click(altCalendarItem, currentDayIndex + 1);
+            click(altCalendarItem + ':not(.fd-calendar__item--other-month)', currentDayIndex + 1);
 
             section === formattingExample
                 ? (chosenDate = `${getCurrentMonth(true)}/${getNextDay(true)}/${currentYear.toString().slice(2)}`)

@@ -113,7 +113,7 @@ describe('Rating indicator test suite', () => {
             waitForPresent(ratingIndicatorPage.root);
             waitForElDisplayed(ratingIndicatorPage.title);
             click(inputsDynamicChanges);
-            // tslint:disable-next-line:radix
+            // eslint-disable-next-line radix
             for (let i = parseInt(getValue(inputsDynamicChanges)); i !== 1; i--) {
                 sendKeys('ArrowDown');
             }

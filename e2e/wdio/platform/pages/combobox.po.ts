@@ -23,33 +23,23 @@ export class ComboBoxPo extends BaseComponentPo {
     comboBoxInput = 'fdp-combobox input:not([id*="mobile"])';
     mobileComboBoxInput = 'fdp-combobox input[id*=mobile]';
 
-    selectedDropDownOption = (name: string) => {
-        return `//span[contains(.,'${name}')]//ancestor::li[contains(@class, "is-selected")]`;
-    };
+    selectedDropDownOption = (name: string) =>
+        `//span[contains(.,'${name}')]//ancestor::li[contains(@class, "is-selected")]`;
 
-    dropDownOption = (name: string) => {
-        return `//span[contains(.,'${name}')]//ancestor::li`;
-    };
+    dropDownOption = (name: string) => `//span[contains(.,'${name}')]//ancestor::li`;
 
-    comboBoxOptionHint = (typedCharacters: string, restCharacters: string) => {
-        return `//span[text()='${restCharacters}']//strong[text() = '${typedCharacters}']`;
-    };
+    comboBoxOptionHint = (typedCharacters: string, restCharacters: string) =>
+        `//span[text()='${restCharacters}']//strong[text() = '${typedCharacters}']`;
 
-    comboBoxButtons = (name: string) => {
-        return `//label[@id='fdp-form-label-${name}']/../../fdp-input-message-group//button`;
-    };
+    comboBoxButtons = (name: string) => `//label[@id='fdp-form-label-${name}']/../../fdp-input-message-group//button`;
 
-    comboBoxExpandedButtons = (name: string) => {
-        return `//label[@id='fdp-form-label-${name}']/../../fdp-input-message-group//button[contains (@class,"is-expanded")]`;
-    };
+    comboBoxExpandedButtons = (name: string) =>
+        `//label[@id='fdp-form-label-${name}']/../../fdp-input-message-group//button[contains (@class,"is-expanded")]`;
 
-    comboBoxInputs = (name: string) => {
-        return `//label[@id='fdp-form-label-${name}']/../../fdp-input-message-group//input`;
-    };
+    comboBoxInputs = (name: string) => `//label[@id='fdp-form-label-${name}']/../../fdp-input-message-group//input`;
 
-    filledComboBoxInputs = (name: string) => {
-        return `//label[@id='fdp-form-label-${name}']/../../fdp-input-message-group//input`;
-    };
+    filledComboBoxInputs = (name: string) =>
+        `//label[@id='fdp-form-label-${name}']/../../fdp-input-message-group//input`;
 
     expandDropdown(type: string): void {
         sendKeys(['Escape']);
@@ -74,7 +64,7 @@ export class ComboBoxPo extends BaseComponentPo {
         waitForPresent(this.pageTitle);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

@@ -1,4 +1,84 @@
 
+## 0.33.0-rc.187 (2021-12-01)
+
+## 0.33.0-rc.186 (2021-12-01)
+
+## 0.33.0-rc.185 (2021-12-01)
+
+## 0.33.0-rc.184 (2021-12-01)
+
+## 0.33.0-rc.183 (2021-11-30)
+
+## 0.33.0-rc.182 (2021-11-30)
+
+## 0.33.0-rc.181 (2021-11-30)
+
+## 0.33.0-rc.180 (2021-11-30)
+
+
+### Bug Fixes
+
+* **core:** fix split-button accessibility ([#7239](https://github.com/SAP/fundamental-ngx/issues/7239)) ([272321b](https://github.com/SAP/fundamental-ngx/commit/272321b9d8a47fe3bb6137649cb7b603887d8816))
+
+## 0.33.0-rc.179 (2021-11-30)
+
+
+### Features
+
+* **core:** custom min width for fixed card layout ([#7251](https://github.com/SAP/fundamental-ngx/issues/7251)) ([c3299de](https://github.com/SAP/fundamental-ngx/commit/c3299de89efc4170a9e2b35dd3ab314b15f36144))
+
+## 0.33.0-rc.178 (2021-11-29)
+
+## 0.33.0-rc.177 (2021-11-29)
+
+
+### Bug Fixes
+
+* **platform:** adjust select content density configuration ([#7267](https://github.com/SAP/fundamental-ngx/issues/7267)) ([ce14ee6](https://github.com/SAP/fundamental-ngx/commit/ce14ee6a8cc2228122326b4cc64b0cc9e14fa0b2))
+
+## 0.33.0-rc.176 (2021-11-29)
+
+## 0.33.0-rc.175 (2021-11-26)
+
+
+### Bug Fixes
+
+* **core:** form message inverted popover event triggers ([#7222](https://github.com/SAP/fundamental-ngx/issues/7222)) ([c226339](https://github.com/SAP/fundamental-ngx/commit/c2263391423e0ac3c1bb0e41aa14d8559e18d700))
+
+## 0.33.0-rc.174 (2021-11-25)
+
+
+### Bug Fixes
+
+* **platform:** table change detection ([#7242](https://github.com/SAP/fundamental-ngx/issues/7242)) ([908a250](https://github.com/SAP/fundamental-ngx/commit/908a250cd68eae3a90b6bc4a8e8d311f418e3656))
+
+## 0.33.0-rc.173 (2021-11-25)
+
+## 0.33.0-rc.172 (2021-11-24)
+
+## 0.33.0-rc.171 (2021-11-24)
+
+
+### Bug Fixes
+
+* **platform:** link, fix a11y issues ([#7201](https://github.com/SAP/fundamental-ngx/issues/7201)) ([8de156a](https://github.com/SAP/fundamental-ngx/commit/8de156a38e389c3a9b1d0b4dfe626077a5bb6838))
+
+## 0.33.0-rc.170 (2021-11-24)
+
+
+### Bug Fixes
+
+* **platform:** add ability to pass action to approval flow component ([#7194](https://github.com/SAP/fundamental-ngx/issues/7194)) ([d19457e](https://github.com/SAP/fundamental-ngx/commit/d19457e462050c8563692ee3c23d750ac6e14c21))
+
+## 0.33.0-rc.169 (2021-11-24)
+
+## 0.33.0-rc.168 (2021-11-24)
+
+
+### Bug Fixes
+
+* **core:** resizable-card-layout, fix resizable behavior on RTL mode ([#7177](https://github.com/SAP/fundamental-ngx/issues/7177)) ([ffd2da4](https://github.com/SAP/fundamental-ngx/commit/ffd2da47721fc08c8814d713810e555568c3fceb))
+
 ## 0.33.0-rc.167 (2021-11-23)
 
 

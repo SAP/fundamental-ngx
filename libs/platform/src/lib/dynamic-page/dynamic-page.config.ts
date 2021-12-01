@@ -33,9 +33,8 @@ export class DynamicPageConfig {
     static createProviderFactory(
         obj: Partial<DynamicPageConfig>
     ): (platformConfig: PlatformConfig) => DynamicPageConfig {
-        const useFactory = (platformConfig: PlatformConfig): DynamicPageConfig => {
-            return Object.assign(new DynamicPageConfig(platformConfig), obj);
-        };
+        const useFactory = (platformConfig: PlatformConfig): DynamicPageConfig =>
+            Object.assign(new DynamicPageConfig(platformConfig), obj);
         return useFactory;
     }
 

@@ -11,6 +11,7 @@ import {
     Input,
     OnDestroy,
     OnInit,
+    Optional,
     Output,
     QueryList,
     ViewEncapsulation
@@ -28,6 +29,7 @@ import {
     verticalResizeStep,
     horizontalResizeOffset
 } from './resizable-card-item/resizable-card-item.component';
+import { RtlService } from '@fundamental-ngx/core/utils';
 
 export type LayoutSize = 'sm' | 'md' | 'lg' | 'xl';
 export type ResizableCardLayoutConfig = Array<ResizableCardItemConfig>;
@@ -97,21 +99,27 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
     private _keyboardEventsManager: FocusKeyManager<ResizableCardItemComponent>;
 
     /** @hidden */
-    private _destroy$ = new Subject<boolean>();
+    private readonly _destroy$ = new Subject<boolean>();
 
     /** @hidden */
     private _layoutShifted = false;
 
     /** @hidden */
-    private _currentResizingCard: ResizableCardItemComponent;
+    private _directionPosition: 'left' | 'right' = 'left';
 
-    constructor(private readonly _cd: ChangeDetectorRef, private readonly _elementRef: ElementRef) {}
+    constructor(
+        private readonly _cd: ChangeDetectorRef,
+        private readonly _elementRef: ElementRef,
+        @Optional() private readonly _rtlService: RtlService
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
         this._columnsHeight = new Array(this._columns);
         this._columnsHeight.fill(0);
         // initialise value 0
+
+        this._subscribeToRtl();
 
         // detect initial window size and set layout
         this._createLayout();
@@ -197,7 +205,6 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
      */
     cardResizing(event: ResizedEvent): void {
         this.resizing.emit(event);
-        this._currentResizingCard = event.card;
         this._handleHorizontalResize(event);
         this._handleVerticalResize(event);
     }
@@ -208,7 +215,6 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
      */
     cardResizeComplete(event: ResizedEvent): void {
         this._layoutShifted = false;
-        this._currentResizingCard = null;
         this.arrangeCards(this.resizeCardItems.toArray());
         this.resized.emit(event);
     }
@@ -465,7 +471,7 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
      * @param card: ResizableCardItemComponent
      */
     private _updateColumnsHeight(card: ResizableCardItemComponent): void {
-        const columnsStart = Math.floor(card.left / horizontalResizeStep);
+        const columnsStart = Math.floor(card[this._directionPosition] / horizontalResizeStep);
 
         // Get width of current card resizing and assign width here for that card
         const cardBaseColSpan = Math.floor(card.cardWidth / horizontalResizeStep);
@@ -494,7 +500,7 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
      */
     private _setCardPositionValues(card: ResizableCardItemComponent, index: number): void {
         if (index === 0) {
-            card.left = 0 + this._paddingLeft;
+            card[this._directionPosition] = 0 + this._paddingLeft;
             card.top = 0;
             card.startingColumnPosition = 0;
             return;
@@ -527,11 +533,11 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
         let isFitting = false;
         let startingColumnPosition = -1;
 
-        // try to fit as left as possible from the column position
+        // try to fit as left (or right if Rtl) as possible from the column position
         startingColumnPosition = this._fitCardColumnPosition(card, columnPositions, height);
         if (startingColumnPosition !== -1) {
             isFitting = true;
-            card.left =
+            card[this._directionPosition] =
                 startingColumnPosition * horizontalResizeStep +
                 this._paddingLeft +
                 (startingColumnPosition > 0 ? gap * startingColumnPosition : 0);
@@ -616,5 +622,21 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
      */
     private _sortCards(firstCard: ResizableCardItemComponent, secondCard: ResizableCardItemComponent): number {
         return firstCard.rank - secondCard.rank;
+    }
+
+    /** get value for rtl */
+    private get _isRtl(): boolean {
+        return this._rtlService?.rtl.getValue();
+    }
+
+    /** @hidden Rtl change subscription */
+    private _subscribeToRtl(): void {
+        const refreshDirection = (isRtl) => {
+            this._directionPosition = isRtl ? 'right' : 'left';
+            this._cd.detectChanges();
+        };
+
+        refreshDirection(this._isRtl);
+        this._rtlService?.rtl.pipe(takeUntil(this._destroy$)).subscribe(refreshDirection);
     }
 }

@@ -37,7 +37,7 @@ export class ShellbarActionsMobileComponent implements AfterContentChecked {
     totalNotifications: number;
 
     /** @hidden */
-    actionClicked(item: ShellbarActionComponent, event: any): void {
+    actionClicked(item: ShellbarActionComponent, event: MouseEvent): void {
         if (item.callback) {
             item.callback(event);
         }

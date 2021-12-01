@@ -190,10 +190,12 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
     /** Emits whenever formFieldControl's state changes */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onChange: EventEmitter<string> = new EventEmitter<string>();
 
     /** Emits whenever column layout is changed */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onColumnChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /**
@@ -322,7 +324,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
         this.control = formFieldControl;
 
-        formFieldControl.stateChanges.pipe(startWith(null), takeUntil(this._destroyed)).subscribe((s) => {
+        formFieldControl.stateChanges.pipe(startWith(null), takeUntil(this._destroyed)).subscribe(() => {
             this._updateControlProperties();
             // need to call explicitly detectChanges() instead of markForCheck before the
             // modified validation state of the control passes over checked phase

@@ -32,7 +32,7 @@ export class MenuPo extends BaseComponentPo {
         waitForPresent(this.menuBtnArr);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

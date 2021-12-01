@@ -10,7 +10,7 @@ import { Directive } from '@angular/core';
  * ```
  */
 @Directive({
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-table-responsive-wrapper]',
     host: {
         style: 'overflow-x: auto'

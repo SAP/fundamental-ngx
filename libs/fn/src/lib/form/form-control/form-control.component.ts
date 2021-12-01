@@ -25,7 +25,7 @@ import { ExperimentalFormItemComponent } from '../form-item/form-item.component'
  * ```
  */
 @Component({
-    // tslint:disable-next-line:component-selector
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fn-form-control]',
     template: `<ng-content></ng-content>`,
     styleUrls: ['./form-control.component.scss'],

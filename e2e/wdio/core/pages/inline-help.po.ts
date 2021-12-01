@@ -20,7 +20,7 @@ export class InlineHelpPo extends CoreBaseComponentPo {
         waitForPresent(this.defaultInlineHelp);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder('/inline-help');
     }
 

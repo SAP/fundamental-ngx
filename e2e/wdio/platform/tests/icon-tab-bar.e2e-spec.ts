@@ -107,16 +107,10 @@ describe('Info Label component test suite', () => {
             checkSelectingTabs(nestedTabsExample);
         });
 
-        // skipped due to https://github.com/SAP/fundamental-ngx/issues/6743
-        xit('should check tab with expanded list', () => {
+        it('should check tab with expanded list', () => {
             click(nestedTabsExample + tabBarItem, 3);
             expect(isElementDisplayed(expandedList)).toBe(true, 'expanded list is not displayed');
-            const itemText = getText(listItem, 1);
             click(listItem, 1);
-            expect(getText(nestedTabsExample + tabBarItem)).toEqual(
-                itemText,
-                'text is not changed according to selected item'
-            );
             expect(getAttributeByName(nestedTabsExample + tabBarTab, 'aria-selected', 3)).toBe(
                 'true',
                 'tab is not selected'

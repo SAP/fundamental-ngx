@@ -2,7 +2,6 @@ import { Component, ElementRef, ViewChild, EventEmitter } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NotificationModule } from '../notification.module';
-import { NotificationGroupHeaderComponent } from './notification-group-header.component';
 
 @Component({
     template: `

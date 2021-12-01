@@ -51,14 +51,12 @@ export class PlatformSelectMaxHeightExampleComponent {
         new Fruit('D', 'pineapple', 11),
         new Fruit('E', 'watermelon', 10)
     ];
-    option = this.userList.map<OptionItem>((item) => {
-        return {
-            label: item.name + item.id,
-            value: item,
-            triggerValue: `(${item.id})`,
-            icon: ''
-        };
-    });
+    option = this.userList.map<OptionItem>((item) => ({
+        label: item.name + item.id,
+        value: item,
+        triggerValue: `(${item.id})`,
+        icon: ''
+    }));
 
     onSelect(item: FdpSelectionChangeEvent): void {
         if (item) {

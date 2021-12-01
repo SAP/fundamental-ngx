@@ -5,12 +5,15 @@ export class InputGroupPo extends CoreBaseComponentPo {
     url = '/input-group';
 
     inputFields = '.fd-input-group__input';
+    inputGroup = '.fd-input-group ';
     inputGroupSearchText = 'fd-input-group~small';
     inputButtons = 'component-example .fd-input-group__button:not(.is-disabled)';
     playgroundCheckbox = '.fd-checkbox__label';
     playgroundInputField = '.fd-input.form-control';
     rightTextAddon = '.fd-playground__content span';
     playgroundInputButton = '.fd-playground__content button';
+    iconExample = 'fd-input-group-icon-example ';
+    icon = this.inputGroup + '[class*="sap-icon"]';
 
     open(): void {
         super.open(this.url);
@@ -18,7 +21,7 @@ export class InputGroupPo extends CoreBaseComponentPo {
         waitForPresent(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

@@ -122,7 +122,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
         @Optional() private _columnLayout: FlexibleColumnLayoutComponent
     ) {}
 
-    /**@hidden */
+    /** @hidden */
     ngAfterViewInit(): void {
         this._sizeChangeHandle();
         this._removeShadowWhenTabComponent();
@@ -141,7 +141,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
         this._cd.detectChanges();
     }
 
-    /**@hidden */
+    /** @hidden */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
@@ -179,7 +179,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
      * - recheck size depending on width of DynamicPage
      */
     private _listenToLayoutChange(): void {
-        this._columnLayout.layoutChange.pipe(takeUntil(this._onDestroy$), delay(1500)).subscribe((_) => {
+        this._columnLayout.layoutChange.pipe(takeUntil(this._onDestroy$), delay(1500)).subscribe(() => {
             this.refreshSize();
             this._sizeChangeHandle();
         });
@@ -197,10 +197,10 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
     private _listenOnCollapse(): void {
         this._dynamicPageService.subheaderVisibilityChange
             .pipe(takeUntil(this._onDestroy$))
-            .subscribe((_) => this._setContainerPositions());
+            .subscribe(() => this._setContainerPositions());
     }
 
-    /**@hidden */
+    /** @hidden */
     private _getCalculatedFullHeight(element: HTMLElement): string {
         if (!element) {
             return null;
@@ -241,7 +241,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
     private _listenOnScroll(element: HTMLElement): void {
         fromEvent(element, 'scroll')
             .pipe(debounceTime(10), takeUntil(this._onDestroy$))
-            .subscribe((_) => {
+            .subscribe(() => {
                 const collapse = !this._dynamicPageService.pinned.value && element.scrollTop > 0;
                 this._dynamicPageService.collapsed.next(collapse);
             });
@@ -251,7 +251,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
     private _listenOnResize(): void {
         fromEvent(window, 'resize')
             .pipe(debounceTime(100), takeUntil(this._onDestroy$))
-            .subscribe((_) => {
+            .subscribe(() => {
                 this._setContainerPositions();
                 this._sizeChangeHandle();
             });

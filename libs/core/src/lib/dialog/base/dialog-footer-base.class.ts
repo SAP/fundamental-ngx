@@ -38,7 +38,7 @@ export abstract class DialogFooterBase implements AfterContentInit {
             }
         };
 
-        this.buttons.changes.pipe(startWith(1)).subscribe((_) =>
+        this.buttons.changes.pipe(startWith(1)).subscribe(() =>
             this.buttons.forEach((button) => {
                 addClassToButton(button._buttonComponent);
             })

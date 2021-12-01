@@ -27,7 +27,7 @@ import { CURRENT_STEP_STATUS, COMPLETED_STEP_STATUS } from '../constants';
 import { WIZARD, WizardComponentInterface } from '../wizard-injection-token';
 
 @Component({
-    // tslint:disable-next-line:component-selector
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-wizard-step]',
     host: {
         class: 'fd-wizard__step',

@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-    // tslint:disable-next-line:component-selector
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-illustrated-message-figcaption]',
     template: `
         <ng-content select="[fd-illustrated-message-title]"></ng-content>

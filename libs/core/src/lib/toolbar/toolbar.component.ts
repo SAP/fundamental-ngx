@@ -178,7 +178,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
                 debounceTime(50),
                 distinctUntilChanged()
             )
-            .subscribe((_) => this._onResize());
+            .subscribe(() => this._onResize());
     }
 
     /** @hidden */
@@ -301,7 +301,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
 
     /** @hidden */
     private _listenForItemChanges(): void {
-        this.toolbarItems.changes.pipe(filter((_) => this.shouldOverflow)).subscribe(() => this._onResize());
+        this.toolbarItems.changes.pipe(filter(() => this.shouldOverflow)).subscribe(() => this._onResize());
     }
 
     /** @hidden */
@@ -334,7 +334,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
             delete this._groupedCollectionPriority[itemGroup];
         }
 
-        // tslint:disable-next-line:no-unused-expression
+        // eslint-disable-next-line no-unused-expressions, @typescript-eslint/no-unused-expressions
         itemsToRemove &&
             itemsToRemove.forEach((item) => {
                 this._removeItemFromArray(this._normalElements, item);
@@ -400,13 +400,11 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
             .concat(
                 !groups[0]
                     ? []
-                    : groups[0].map((item) => {
-                          return {
-                              group: [item.element],
-                              maxPriority: OVERFLOW_PRIORITY_SCORE.get(this._getElementPriority(item.element)),
-                              minIndex: item.index
-                          };
-                      })
+                    : groups[0].map((item) => ({
+                          group: [item.element],
+                          maxPriority: OVERFLOW_PRIORITY_SCORE.get(this._getElementPriority(item.element)),
+                          minIndex: item.index
+                      }))
             )
             .sort((a, b) => b.maxPriority - a.maxPriority || a.minIndex - b.minIndex)
             .reduce((arr, i) => arr.concat(i.group), []);
@@ -555,9 +553,8 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
             return;
         }
 
-        const isSpacer = (element: ToolbarItemDirective): boolean => {
-            return element.elementRef.nativeElement.classList.contains('fd-toolbar__spacer');
-        };
+        const isSpacer = (element: ToolbarItemDirective): boolean =>
+            element.elementRef.nativeElement.classList.contains('fd-toolbar__spacer');
 
         let lastItem: ToolbarItemDirective = normalElements[normalElements.length - 1];
 
@@ -570,9 +567,8 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     /** @hidden */
     private _getOrderedItemsFollowingQuery(toolbarItems: ToolbarItemDirective[]): ToolbarItemDirective[] {
         const queryArray = this.toolbarItems.toArray();
-        const sortMethod = (a: ToolbarItemDirective, b: ToolbarItemDirective): number => {
-            return queryArray.findIndex((_item) => _item === a) > queryArray.findIndex((_item) => _item === b) ? 1 : -1;
-        };
+        const sortMethod = (a: ToolbarItemDirective, b: ToolbarItemDirective): number =>
+            queryArray.findIndex((_item) => _item === a) > queryArray.findIndex((_item) => _item === b) ? 1 : -1;
         return toolbarItems.sort(sortMethod);
     }
 }

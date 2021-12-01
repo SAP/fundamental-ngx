@@ -4,16 +4,16 @@ import { Component } from '@angular/core';
     selector: 'fd-tab-navigation-example-child-first',
     template: `<p>Tab Content 1</p>`
 })
-export class TabNavigationExampleChildFirst {}
+export class TabNavigationExampleChildFirstComponent {}
 
 @Component({
     selector: 'fd-tab-navigation-example-child-second',
     template: `<p>Tab Content 2</p>`
 })
-export class TabNavigationExampleChildSecond {}
+export class TabNavigationExampleChildSecondComponent {}
 
 @Component({
     selector: 'fd-tab-navigation-example-child-third',
     template: `<p>Tab Content 3</p>`
 })
-export class TabNavigationExampleChildThird {}
+export class TabNavigationExampleChildThirdComponent {}

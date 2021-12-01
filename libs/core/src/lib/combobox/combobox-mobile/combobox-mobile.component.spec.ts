@@ -29,7 +29,7 @@ describe('ComboboxMobileComponent', () => {
             cancelButtonText: 'cancel',
             hasCloseButton: true
         },
-        dialogDismiss: (backupArgument: string) => {},
+        dialogDismiss: () => {},
         dialogApprove: () => {},
         openChange: new EventEmitter<boolean>()
     };
@@ -52,7 +52,7 @@ describe('ComboboxMobileComponent', () => {
                 cancelButtonText: 'cancel',
                 hasCloseButton: true
             },
-            dialogDismiss: (backupArgument: string) => {},
+            dialogDismiss: () => {},
             dialogApprove: () => {},
             openChange: new EventEmitter<boolean>()
         };

@@ -27,7 +27,7 @@
                         ></button>
 
                         <button
-                            *ngIf="!(selectedShown$ | async)"
+                            *ngIf="(selectedShown$ | async) === false"
                             fd-button
                             glyph="multiselect-all"
                             fdType="transparent"

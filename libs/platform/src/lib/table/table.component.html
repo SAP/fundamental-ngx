@@ -455,14 +455,14 @@
             <span class="fd-table__expand" [class.fd-table__expand--open]="row.expanded" aria-hidden="true"></span>
 
             <!-- Group row template when no nested groups -->
-            <ng-container *ngIf="_groupRulesMap.size == 1">
+            <ng-container *ngIf="_groupRulesMap.size === 1">
                 <div class="fd-table__text fd-table__text--no-wrap">
                     {{ row.value?.value }} - {{ row.value?.count }}
                 </div>
             </ng-container>
 
             <!-- Group row template when there are nested groups -->
-            <ng-container *ngIf="_groupRulesMap.size != 1">
+            <ng-container *ngIf="_groupRulesMap.size !== 1">
                 <div class="fd-table__text fd-table__text--no-wrap">
                     <ng-container
                         *ngTemplateOutlet="

@@ -25,7 +25,7 @@ import {
     `,
     viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider]
 })
-export class PlatformFormGeneratorCustomSliderElement extends BaseDynamicFormGeneratorControl {
+export class PlatformFormGeneratorCustomSliderElementComponent extends BaseDynamicFormGeneratorControl {
     constructor() {
         super();
     }
@@ -62,7 +62,7 @@ export class PlatformFormGeneratorCustomComponentExampleComponent {
     ];
 
     constructor(private readonly _formGeneratorService: FormGeneratorService) {
-        this._formGeneratorService.addComponent(PlatformFormGeneratorCustomSliderElement, ['slider']);
+        this._formGeneratorService.addComponent(PlatformFormGeneratorCustomSliderElementComponent, ['slider']);
     }
 
     onFormCreated(): void {

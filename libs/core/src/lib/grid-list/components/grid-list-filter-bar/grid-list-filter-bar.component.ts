@@ -11,5 +11,6 @@ import { Component, Output, EventEmitter, ChangeDetectionStrategy } from '@angul
 export class GridListFilterBarComponent {
     /** Event is thrown, when the control button is clicked */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-native
     readonly close = new EventEmitter<void>();
 }

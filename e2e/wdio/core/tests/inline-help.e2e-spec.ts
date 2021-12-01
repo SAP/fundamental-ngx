@@ -1,5 +1,4 @@
 import {
-    checkElementScreenshot,
     click,
     getAttributeByName,
     getElementArrayLength,
@@ -7,7 +6,6 @@ import {
     isElementDisplayed,
     mouseHoverElement,
     refreshPage,
-    saveElementScreenshot,
     scrollIntoView,
     waitForElDisplayed,
     waitForPresent
@@ -24,7 +22,6 @@ describe('Inline help test suite', () => {
         inlineHelpStyledIcon,
         inlineHelpTemplateExample,
         exampleAreaContainersArr,
-        inlineHelpExampleExtended,
         popover,
         inlineHelp
     } = inlineHelpPage;

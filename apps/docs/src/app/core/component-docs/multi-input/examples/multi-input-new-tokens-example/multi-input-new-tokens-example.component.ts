@@ -22,7 +22,7 @@ export class MultiInputNewTokensExampleComponent {
         return obj.name;
     }
 
-    parseFunc(value: string): object {
+    parseFunc(value: string): Record<string, any> {
         return { name: value };
     }
 

@@ -32,8 +32,6 @@ describe('Checkbox test suite', () => {
         disabledCheckboxWithoutForm,
         checkboxWithValue,
         tristateCheckboxes,
-        acceptAllCheckbox,
-        termsAndConditionsCheckbox,
         tristateCheckboxParis,
         errorCheckboxes,
         presenceCheckbox,

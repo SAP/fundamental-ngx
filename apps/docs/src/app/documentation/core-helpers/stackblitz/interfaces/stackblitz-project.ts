@@ -1,8 +1,8 @@
 export interface StackblitzProject {
-    files: object;
+    files: Record<string, any>;
     title: string;
     description: string;
     template: string;
     tags: string[];
-    dependencies: object;
+    dependencies: Record<string, any>;
 }

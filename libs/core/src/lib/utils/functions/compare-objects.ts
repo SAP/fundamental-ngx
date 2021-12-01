@@ -36,7 +36,7 @@ export function compareObjects(obj1: any, obj2: any): boolean {
         return false;
     }
 
-    if (obj1.isPrototypeOf(obj2) || obj2.isPrototypeOf(obj1)) {
+    if (Object.prototype.isPrototypeOf.call(obj1, obj2) || Object.prototype.isPrototypeOf.call(obj2, obj1)) {
         return false;
     }
 
@@ -55,7 +55,7 @@ export function compareObjects(obj1: any, obj2: any): boolean {
 
     // Quick checking of one object being a subset of another.
     for (const p in obj2) {
-        if (obj2.hasOwnProperty(p) !== obj1.hasOwnProperty(p)) {
+        if (Object.prototype.hasOwnProperty.call(obj2, p) !== Object.prototype.hasOwnProperty.call(obj1, p)) {
             return false;
         } else if (typeof obj2[p] !== typeof obj1[p]) {
             return false;
@@ -63,7 +63,7 @@ export function compareObjects(obj1: any, obj2: any): boolean {
     }
 
     for (const p of Object.keys(obj1)) {
-        if (obj2.hasOwnProperty(p) !== obj1.hasOwnProperty(p)) {
+        if (Object.prototype.hasOwnProperty.call(obj2, p) !== Object.prototype.hasOwnProperty.call(obj1, p)) {
             return false;
         } else if (typeof obj2[p] !== typeof obj1[p]) {
             return false;

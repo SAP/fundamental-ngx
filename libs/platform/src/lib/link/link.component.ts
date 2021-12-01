@@ -107,6 +107,7 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
 
     /** Emitting link click event */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-native
     click: EventEmitter<MouseEvent | KeyboardEvent | TouchEvent> = new EventEmitter();
 
     @ContentChild(IconComponent)

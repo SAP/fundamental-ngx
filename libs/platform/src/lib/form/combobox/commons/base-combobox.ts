@@ -274,9 +274,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     ];
 
     /** @hidden */
-    private _displayFn = (value: any) => {
-        return this.displayValue(value);
-    };
+    private _displayFn = (value: any) => this.displayValue(value);
 
     /** @hidden */
     private _secondaryFn = (value: any) => {
@@ -502,7 +500,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
     /** @hidden */
     protected get ds(): ComboBoxDataSource<any> {
-        return <ComboBoxDataSource<any>>this.dataSource;
+        return this.dataSource as ComboBoxDataSource<any>;
     }
 
     /** @hidden Map grouped values to array. */

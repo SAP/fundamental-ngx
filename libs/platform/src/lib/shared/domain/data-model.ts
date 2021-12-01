@@ -50,7 +50,12 @@ export interface SelectableOptionItem extends OptionItem {
 }
 
 export function isSelectableItem(item: SelectItem): item is SelectItem {
-    return item && item.label !== undefined && item.value !== undefined && item.hasOwnProperty('selected');
+    return (
+        item &&
+        item.label !== undefined &&
+        item.value !== undefined &&
+        Object.prototype.hasOwnProperty.call(item, 'selected')
+    );
 }
 
 export function isSelectItem(item: SelectItem): item is SelectItem {

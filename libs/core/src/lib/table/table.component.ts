@@ -23,7 +23,7 @@ import { TableService } from './table.service';
  * ```
  */
 @Component({
-    // tslint:disable-next-line:component-selector
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'table[fd-table]',
     exportAs: 'fd-table',
     template: `<ng-content></ng-content>`,

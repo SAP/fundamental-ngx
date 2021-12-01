@@ -12,17 +12,11 @@ export class RadioButtonGroupPage extends BaseComponentPo {
     formGroup = 'fd-form-group[role=radiogroup]';
     errorMessage = '.is-error';
 
-    radioButtonInputByIndex = (index: number = 0) => {
-        return `[id="fd-popover-${index}"] input`;
-    };
+    radioButtonInputByIndex = (index: number = 0) => `[id="fd-popover-${index}"] input`;
 
-    radioButtonLabelByIndex = (index: number = 0) => {
-        return `[id="fd-popover-${index}"] label`;
-    };
+    radioButtonLabelByIndex = (index: number = 0) => `[id="fd-popover-${index}"] label`;
 
-    actionButtonByIndex = (index: number = 8) => {
-        return `#fdp-id-${index}`;
-    };
+    actionButtonByIndex = (index: number = 8) => `#fdp-id-${index}`;
 
     open(): void {
         super.open(this.url);
@@ -30,7 +24,7 @@ export class RadioButtonGroupPage extends BaseComponentPo {
         waitForPresent(this.formGroup);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

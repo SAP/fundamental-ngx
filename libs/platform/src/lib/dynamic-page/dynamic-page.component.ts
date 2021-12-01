@@ -341,7 +341,7 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
         }
     }
 
-    /**@hidden */
+    /** @hidden */
     private _isTabContentPresent(content: DynamicPageContentComponent[]): boolean {
         content.forEach((contentItem) => {
             if (contentItem.tabLabel) {
@@ -352,7 +352,7 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
         return this.isTabbed;
     }
 
-    /**@hidden */
+    /** @hidden */
     private _addClassNameToCustomElement(element: Element, className: string): void {
         addClassNameToElement(this._renderer, element, className);
     }
