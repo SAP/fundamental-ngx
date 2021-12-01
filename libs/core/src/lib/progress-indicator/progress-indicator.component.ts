@@ -72,7 +72,7 @@ export class ProgressIndicatorComponent implements OnInit, OnDestroy, OnChanges,
     ngOnInit(): void {
         resizeObservable(this._elementRef.nativeElement)
             .pipe(debounceTime(20), takeUntil(this._onDestroy$))
-            .subscribe((_) => {
+            .subscribe(() => {
                 this._handleTruncation();
             });
     }
