@@ -96,7 +96,11 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     @Input()
     set cardMinimumWidth(value: number) {
         this._cardMinimumWidth = coerceNumberProperty(value);
-        this.updateLayout();
+
+        // // If component is ready, do the recalculation.
+        if (this.layout) {
+            this.updateLayout();
+        }
     }
 
     get cardMinimumWidth(): number {
