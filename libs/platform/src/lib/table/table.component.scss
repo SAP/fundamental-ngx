@@ -394,4 +394,9 @@ $fd-table-header-color-var: var(--sapList_HeaderBackground, #f2f2f2);
             margin: 0;
         }
     }
+
+    .fd-table__expand-wrapper {
+        display: flex;
+        align-items: center;
+    }
 }
