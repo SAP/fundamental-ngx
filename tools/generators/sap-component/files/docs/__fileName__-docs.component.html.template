@@ -1,0 +1,8 @@
+<fd-docs-section-title id="default" componentName="<%= className %>"> <%= startCaseName %> Standard Usage </fd-docs-section-title>
+<description>
+  <!-- TODO -->
+</description>
+<component-example>
+    <fundamental-ngx-<%= name %>-default-example></fundamental-ngx-<%= name %>-default-example>
+</component-example>
+<code-example [exampleFiles]="<%= propertyName %>DefaultExample"></code-example>

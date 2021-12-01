@@ -1,0 +1,3 @@
+import { <%= className %>DefaultExampleComponent } from './default/<%= name %>-default-example.component';
+
+export const examples = [<%= className %>DefaultExampleComponent];

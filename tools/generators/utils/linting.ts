@@ -1,6 +1,7 @@
 import { Tree, Rule } from '@angular-devkit/schematics';
 import { updateJsonInTree } from '@nrwl/workspace/src/utils/ast-utils';
-import { offsetFromRoot, readWorkspace } from '@nrwl/workspace';
+import { readWorkspace } from '@nrwl/workspace';
+import { offsetFromRoot } from '@nrwl/devkit';
 
 /**
  * Adds overrides to lib's eslintrc file.
