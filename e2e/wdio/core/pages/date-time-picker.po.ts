@@ -38,8 +38,8 @@ export class DateTimePicker extends CoreBaseComponentPo {
     getOptionById = (id: string): string => `#${id}`;
 
     clickDayInCalendarButtonByValue = (dayNumber: number): void => {
-        click('.fd-calendar__table td.fd-calendar__item:not(.fd-calendar__item--other-month)', dayNumber - 1)
-    }
+        click('.fd-calendar__table td.fd-calendar__item:not(.fd-calendar__item--other-month)', dayNumber - 1);
+    };
 
     yearInCalendarByValue = (year: number): string => `[data-fd-calendar-year="${year}"]`;
 
