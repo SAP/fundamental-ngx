@@ -660,9 +660,9 @@ export class FormGroupComponent
             return [];
         }
 
-        const children = this.formGroupChildren.toArray().map((child) => {
-            return isFieldGroupWrapperChild(child) ? child.fieldRenderer : child;
-        });
+        const children = this.formGroupChildren
+            .toArray()
+            .map((child) => (isFieldGroupWrapperChild(child) ? child.fieldRenderer : child));
 
         return children.filter((child) => this._formGroupDirectChildren.includes(child));
     }
