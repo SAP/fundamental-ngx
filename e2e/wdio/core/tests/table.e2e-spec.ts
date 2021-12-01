@@ -4,6 +4,7 @@ import {
     browserIsFirefox,
     checkElementScreenshot,
     click,
+    clickAndMoveElement,
     getAlertText,
     getAttributeByName,
     getElementArrayLength,
@@ -28,6 +29,7 @@ import {
     tableCellArr2,
     testText
 } from '../fixtures/appData/table-content';
+import { checkElArrIsClickable } from '../../helper/assertion-helper';
 
 describe('Table test suite', () => {
     const tablePage = new TablePo();
@@ -63,7 +65,11 @@ describe('Table test suite', () => {
         listItem,
         markAllCheckboxesFF,
         clickableTableRowFF,
-        selectedPage
+        selectedPage,
+        tableCDKExample,
+        tableCellWOHeader,
+        tableActivableExample,
+        tableFocusableExample
     } = tablePage;
 
     beforeAll(() => {
@@ -232,6 +238,27 @@ describe('Table test suite', () => {
         });
     });
 
+    describe('Check Interactive Rows and Cells example', () => {
+        it('should check clickable links', () => {
+            scrollIntoView(tableActivableExample);
+            checkElArrIsClickable(tableActivableExample + link);
+        });
+
+        it('should check table has activable and hoverable states', () => {
+            scrollIntoView(tableActivableExample);
+            expect(getElementClass(tableActivableExample + tableRow)).toContain(
+                'fd-table__row--activable fd-table__row--hoverable'
+            );
+        });
+    });
+
+    describe('Check Focusable example', () => {
+        it('should check table has focusable states', () => {
+            scrollIntoView(tableFocusableExample);
+            expect(getElementClass(tableFocusableExample + tableRow)).toContain('fd-table__row--focusable');
+        });
+    });
+
     describe('Check Table with Checkboxes example', () => {
         it('should check that checkbox work correctly', () => {
             scrollIntoView(tableCheckboxesExample);
@@ -251,6 +278,11 @@ describe('Table test suite', () => {
                 );
             }
         });
+
+        it('should check clickable links', () => {
+            scrollIntoView(tableCheckboxesExample);
+            checkElArrIsClickable(tableCheckboxesExample + link);
+        });
     });
 
     describe('Check Table With Semantic Row Highlighting example', () => {
@@ -266,6 +298,25 @@ describe('Table test suite', () => {
                     `element with index ${i} not selected`
                 );
             }
+        });
+
+        it('should check clickable links', () => {
+            scrollIntoView(tableSemanticExample);
+            checkElArrIsClickable(tableSemanticExample + link);
+        });
+    });
+
+    describe('Check Table with Angular CDK example', () => {
+        it('should check drag and drop table row', () => {
+            scrollIntoView(tableCDKExample);
+            const originalTableCell = getText(tableCDKExample + tableCellWOHeader);
+            clickAndMoveElement(tableCDKExample + tableRow, 0, 50);
+            expect(getText(tableCDKExample + tableCellWOHeader)).not.toBe(originalTableCell);
+        });
+
+        it('should check clickable links', () => {
+            scrollIntoView(tableCDKExample);
+            checkElArrIsClickable(tableCDKExample + link);
         });
     });
 
@@ -297,7 +348,7 @@ describe('Table test suite', () => {
         });
     });
 
-    describe('Check Table with Non-navigatable Row example', () => {
+    describe('Check Table with navigatable rows example', () => {
         it('should check alert message', () => {
             scrollIntoView(tableNavigatableRowExample);
             const rowLength = getElementArrayLength(tableNavigatableRowExample + clickableTableRow);

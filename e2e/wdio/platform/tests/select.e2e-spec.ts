@@ -2,14 +2,17 @@ import { SelectPo } from '../pages/select.po';
 import {
     click,
     getAttributeByName,
-    getElementArrayLength, getElementClass, getElementSize,
+    getElementArrayLength,
+    getElementClass,
+    getElementSize,
     getText,
     isElementClickable,
     refreshPage,
     scrollIntoView
 } from '../../driver/wdio';
 import {
-    disableSelectModeValueTestText, inputStateArr,
+    disableSelectModeValueTestText,
+    inputStateArr,
     maxHeightTestText,
     mobileExampleTestText,
     selectWithTwoColumnsTestText,
@@ -101,14 +104,12 @@ describe('Select test suite', () => {
             }
         });
 
-
         it('should check input states', () => {
             scrollIntoView(selectSemanticStateExample);
             const inputLength = getElementArrayLength(selectSemanticStateExample + inputControl);
             for (let i = 0; i < inputLength; i++) {
                 expect(getElementClass(selectSemanticStateExample + inputControl, i)).toContain(inputStateArr[i]);
             }
-
         });
     });
 
