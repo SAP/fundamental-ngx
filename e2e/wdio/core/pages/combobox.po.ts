@@ -7,7 +7,7 @@ export class ComboboxPo extends CoreBaseComponentPo {
 
     standardButton = '#background-ex0 button';
     dropdownPopover = 'fd-popover-body';
-    dropdownOption = 'li.fd-list__item';
+    dropdownOption = 'li.fd-list__item:not(.fd-list__group-header)';
     smallText = 'div~small';
     smallText_2 = 'fd-combobox~small';
     allInputFields = this.root + ' .fd-input.fd-input-group__input';
