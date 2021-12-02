@@ -19,6 +19,7 @@
             [buttonFocusable]="buttonFocusable"
             [isControl]="true"
             [isExpanded]="isOpen"
+            [glyphAriaLabel]="timePickerButtonLabel"
             glyph="fob-watch"
         >
             <input
@@ -33,6 +34,7 @@
                 [attr.id]="inputId"
                 [placeholder]="_placeholder"
                 [attr.aria-label]="timePickerInputLabel"
+                [attr.aria-describedby]="_formValueStateMessageId"
                 [attr.aria-required]="required"
             />
         </fd-input-group>
@@ -58,3 +60,15 @@
         ></fd-time>
     </fd-popover-body>
 </fd-popover>
+
+<div style="display: none" aria-hidden="true">
+    <div [attr.id]="_formValueStateMessageId" aria-atomic="true" aria-live="assertive">
+        <ng-container [ngSwitch]="state">
+            <ng-container *ngSwitchCase="'success'">{{ valueStateSuccessMessage }}</ng-container>
+            <ng-container *ngSwitchCase="'information'">{{ valueStateInformationMessage }}</ng-container>
+            <ng-container *ngSwitchCase="'warning'">{{ valueStateWarningMessage }}</ng-container>
+            <ng-container *ngSwitchCase="'error'">{{ valueStateErrorMessage }}</ng-container>
+        </ng-container>
+        {{ _message }}
+    </div>
+</div>
