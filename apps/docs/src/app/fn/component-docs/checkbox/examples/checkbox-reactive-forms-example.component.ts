@@ -85,7 +85,7 @@ export class CheckboxReactiveFormsExampleComponent implements OnInit {
     }
 
     // This is equivalent for `Object.values` not supported by IE11
-    private getValuesFromObject(obj: Object): any[] {
+    private getValuesFromObject(obj: Record<string, any>): any[] {
         return Object.keys(obj).map((e) => obj[e]);
     }
 }

@@ -53,7 +53,6 @@ describe('TableColumnResizeService', () => {
     });
 
     it('should process resize', () => {
-        const columnIndex = 0;
         const clientStartX = 0;
         const clientEndX = 100;
         const initialColumnWidth = 100;
@@ -74,7 +73,6 @@ describe('TableColumnResizeService', () => {
     });
 
     it('should set min column width if after resize it smaller', () => {
-        const columnIndex = 0;
         const clientStartX = 0;
         const clientEndX = -80;
         const initialColumnWidth = 100;

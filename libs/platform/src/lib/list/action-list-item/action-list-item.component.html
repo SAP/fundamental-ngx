@@ -10,13 +10,7 @@
     [attr.aria-level]="ariaLevel"
     [attr.aria-posinet]="ariaPosinet"
 >
-    <button
-        #action
-        class="fd-list__title"
-        [attr.aria-label]="title"
-        [attr.title]="title"
-        (click)="_onActionClick($event)"
-    >
+    <button #action class="fd-list__title" [attr.aria-label]="title" [attr.title]="title" (click)="_onActionClick()">
         {{ title }}
     </button>
 </li>

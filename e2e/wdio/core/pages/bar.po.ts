@@ -13,7 +13,7 @@ export class BarPo extends CoreBaseComponentPo {
     pictures = '.fd-bar__right fd-avatar';
     saveCancelButtons = '.fd-bar__right button';
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

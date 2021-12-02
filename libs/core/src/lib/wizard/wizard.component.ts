@@ -177,16 +177,13 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
      * navigation and the wizard footer, and calculating the height based on their presence.
      */
     private _calculateContentHeight(): number {
-        let shellbarHeight: number,
-            wizardNavHeight = 0,
-            wizardFooterHeight: number,
-            dialogOffset: number;
-        shellbarHeight = this._getShellbarHeight();
+        let wizardNavHeight = 0;
+        const shellbarHeight = this._getShellbarHeight();
         if (!this._isCurrentStepSummary() || this.displaySummaryStep) {
             wizardNavHeight = this._getWizardNavHeight();
         }
-        wizardFooterHeight = this._getWizardFooterHeight();
-        dialogOffset = this._getDialogOffset();
+        const wizardFooterHeight = this._getWizardFooterHeight();
+        const dialogOffset = this._getDialogOffset();
 
         return shellbarHeight + wizardNavHeight + wizardFooterHeight + dialogOffset;
     }
@@ -382,7 +379,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
             _fromScrollToCurrentStep = true;
             this.steps.forEach((step, index) => {
                 if (step.status === CURRENT_STEP_STATUS && (!step.isSummary || this.displaySummaryStep)) {
-                    const child = <HTMLElement>this.wrapperContainer.nativeElement.children[index];
+                    const child = this.wrapperContainer.nativeElement.children[index] as HTMLElement;
                     const wizardNavigationHeight = this._elRef.nativeElement.querySelector(
                         '.' + WIZARD_NAVIGATION_CLASS
                     ).clientHeight;
@@ -403,9 +400,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     private _hideSomeStep(currentStep: WizardStepComponent): void {
         // If a small step was found, get the step with a visible label furthest away from the current step and hide the label
         let stepsArray = this.steps.toArray();
-        stepsArray = stepsArray.filter((step) => {
-            return !step.hasLabel(STEP_NO_LABEL_CLASS);
-        });
+        stepsArray = stepsArray.filter((step) => !step.hasLabel(STEP_NO_LABEL_CLASS));
         if (this.steps.last.isSummary && !this.displaySummaryStep) {
             stepsArray.pop();
         }

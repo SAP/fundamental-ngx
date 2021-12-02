@@ -11,7 +11,7 @@ import { applyCssClass } from '@fundamental-ngx/core/utils';
 import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 
 @Component({
-    // tslint:disable-next-line:component-selector
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fdLink], [fd-link]',
     template: ` <ng-content></ng-content> `,
     styleUrls: ['./link.component.scss'],

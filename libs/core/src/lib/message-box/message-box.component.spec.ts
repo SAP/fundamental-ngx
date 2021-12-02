@@ -8,7 +8,6 @@ import { CommonModule } from '@angular/common';
 import { Subject } from 'rxjs';
 
 import { MessageBoxConfig } from './utils/message-box-config.class';
-import { MessageBoxService } from './services/message-box.service';
 import { MessageBoxComponent } from './message-box.component';
 import { MessageBoxRef } from './utils/message-box-ref.class';
 import { MessageBoxModule } from './message-box.module';
@@ -40,7 +39,6 @@ describe('MessageBoxComponent', () => {
     let messageBoxComponent: MessageBoxComponent;
     let fixture: ComponentFixture<TemplateTestComponent>;
 
-    let messageBoxService: MessageBoxService;
     const messageBoxRef = new MessageBoxRef();
     const messageBoxConfig = new MessageBoxConfig();
     const routerEventsSubject = new Subject<RouterEvent>();
@@ -67,7 +65,6 @@ describe('MessageBoxComponent', () => {
         fixture = TestBed.createComponent(TemplateTestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
-        messageBoxService = TestBed.inject<MessageBoxService>(MessageBoxService);
         messageBoxComponent = fixture.componentInstance.messageBox;
         router = TestBed.inject(Router);
     }

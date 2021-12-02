@@ -72,6 +72,7 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
 
     /** Event emitted when row was selected. */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-native
     select = new EventEmitter<T[]>();
 
     @ViewChild(InfiniteScrollDirective) infiniteScrollTable: InfiniteScrollDirective;

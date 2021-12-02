@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+
 import * as listItemsRadioGroupSrc from '!raw-loader!./platform-radio-group-examples/platform-radio-group-list-items-example.component.html';
 import * as listItemsRadioGroupSrcCode from '!raw-loader!./platform-radio-group-examples/platform-radio-group-list-items-examples.component.ts';
 import * as listRadioGroupSrc from '!raw-loader!./platform-radio-group-examples/platform-radio-group-list-example.component.html';
@@ -14,7 +15,7 @@ import { ExampleFile } from '../../../../documentation/core-helpers/code-example
     selector: 'app-radio-group',
     templateUrl: './platform-radio-group-docs.component.html'
 })
-export class PlatformRadioGroupDocsComponent implements OnInit {
+export class PlatformRadioGroupDocsComponent {
     listItemsRadioGroup: ExampleFile[] = [
         {
             language: 'html',
@@ -70,8 +71,4 @@ export class PlatformRadioGroupDocsComponent implements OnInit {
             component: 'PlatformRadioGroupDisabledExampleComponent'
         }
     ];
-
-    constructor() {}
-
-    ngOnInit(): void {}
 }

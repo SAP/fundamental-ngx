@@ -29,26 +29,26 @@ import { ObjectListItemComponent } from './object-list-item.component';
         </fdp-list>
     `
 })
-class ObjectListItemComponentTest {
+class ObjectListItemTestComponent {
     @ViewChild(ObjectListItemComponent, { read: ElementRef, static: true })
     displayListElement: ElementRef;
 }
 
 describe('ObjectListItemComponent', () => {
-    let component: ObjectListItemComponentTest;
-    let fixture: ComponentFixture<ObjectListItemComponentTest>;
+    let component: ObjectListItemTestComponent;
+    let fixture: ComponentFixture<ObjectListItemTestComponent>;
 
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 imports: [PlatformListModule, ObjectListItemModule, RouterTestingModule],
-                declarations: [ObjectListItemComponentTest]
+                declarations: [ObjectListItemTestComponent]
             }).compileComponents();
         })
     );
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(ObjectListItemComponentTest);
+        fixture = TestBed.createComponent(ObjectListItemTestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
@@ -311,7 +311,7 @@ export class ListDataProvider extends DataProvider<Product> {
 
     fetch(params: Map<string, string>): Observable<Product[]> {
         let data = LIST_ELEMENTS;
-        if (!!params.get('name')) {
+        if (params.get('name')) {
             const keyword = params.get('name').toLowerCase();
             data = data.filter((item) => item.title.toLowerCase().indexOf(keyword) > -1);
         }

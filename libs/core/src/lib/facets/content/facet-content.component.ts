@@ -12,7 +12,7 @@ export class FacetContentComponent implements OnInit {
     /** @hidden */
     constructor(private _elementRef: ElementRef<HTMLElement>, private _renderer: Renderer2) {}
 
-    /**@hidden */
+    /** @hidden */
     ngOnInit(): void {
         this._addClassNameToHostElement(FACET_CLASS_NAME.facetContainer);
     }
@@ -21,7 +21,7 @@ export class FacetContentComponent implements OnInit {
         return this._elementRef;
     }
 
-    /**@hidden */
+    /** @hidden */
     private _addClassNameToHostElement(className: string): void {
         addClassNameToFacetElement(this._renderer, this._elementRef.nativeElement, className);
     }

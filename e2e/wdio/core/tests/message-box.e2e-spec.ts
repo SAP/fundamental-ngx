@@ -11,7 +11,7 @@ import {
     sendKeys,
     waitForElDisplayed
 } from '../../driver/wdio';
-import { iconsArr, buttonClassArr, sectionsArr } from '../fixtures/appData/message-box';
+import { iconsArr, buttonClassArr } from '../fixtures/appData/message-box';
 
 describe('Message-box test suits', () => {
     const messageBoxPage = new MessageBoxPo();
@@ -19,7 +19,6 @@ describe('Message-box test suits', () => {
         resultTxt,
         mobileExample,
         positionExample,
-        messageBoxExample,
         basedObjectExample,
         openTemplateExample,
         sematicTypesExample,

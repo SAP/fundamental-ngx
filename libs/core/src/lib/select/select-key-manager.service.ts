@@ -67,7 +67,11 @@ export class SelectKeyManagerService {
             const previouslySelectedOption = this._component.selected;
 
             if (KeyUtil.isKeyCode(event, [HOME, END])) {
-                KeyUtil.isKeyCode(event, HOME) ? manager.setFirstItemActive() : manager.setLastItemActive();
+                if (KeyUtil.isKeyCode(event, HOME)) {
+                    manager.setFirstItemActive();
+                } else {
+                    manager.setLastItemActive();
+                }
                 event.preventDefault();
             }
 
@@ -93,7 +97,11 @@ export class SelectKeyManagerService {
 
         if (KeyUtil.isKeyCode(event, [HOME, END])) {
             event.preventDefault();
-            KeyUtil.isKeyCode(event, HOME) ? manager.setFirstItemActive() : manager.setLastItemActive();
+            if (KeyUtil.isKeyCode(event, HOME)) {
+                manager.setFirstItemActive();
+            } else {
+                manager.setLastItemActive();
+            }
         } else if ((isArrowKey && event.altKey) || KeyUtil.isKeyCode(event, [ESCAPE])) {
             // Close the select on ALT + arrow key to match the native <select>
             event.preventDefault();

@@ -68,7 +68,7 @@ import { PlatformCheckboxModule } from '../checkbox/checkbox.module';
         </fdp-form-group>
     `
 })
-class TestReactiveCheckboxGroupComponnet {
+class TestReactiveCheckboxGroupComponent {
     phoneslist: string[] = ['Samsung', 'Apple', 'OnePlus', 'Redmi'];
     countryVisited = [new Country('Australia', 'Australia'), new Country('India', 'India'), new Country('USA', 'USA')];
 
@@ -93,20 +93,20 @@ class TestReactiveCheckboxGroupComponnet {
 }
 
 describe('CheckboxGroup component Reactive Form Test', () => {
-    let host: TestReactiveCheckboxGroupComponnet;
-    let fixture: ComponentFixture<TestReactiveCheckboxGroupComponnet>;
+    let host: TestReactiveCheckboxGroupComponent;
+    let fixture: ComponentFixture<TestReactiveCheckboxGroupComponent>;
 
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 imports: [FdpFormGroupModule, FormModule, PlatformCheckboxModule, FormsModule, ReactiveFormsModule],
-                declarations: [TestReactiveCheckboxGroupComponnet, CheckboxGroupComponent]
+                declarations: [TestReactiveCheckboxGroupComponent, CheckboxGroupComponent]
             }).compileComponents();
         })
     );
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TestReactiveCheckboxGroupComponnet);
+        fixture = TestBed.createComponent(TestReactiveCheckboxGroupComponent);
         host = fixture.componentInstance;
         fixture.detectChanges();
     });
@@ -321,7 +321,7 @@ describe('CheckboxGroup component Reactive Form Test', () => {
         </fdp-form-group>
     `
 })
-class TestTemplateDrivenCheckboxGroupComponnet {
+class TestTemplateDrivenCheckboxGroupComponent {
     phoneslist: string[] = ['Samsung', 'Apple', 'OnePlus', 'Redmi'];
     countryVisited = [new Country('Australia', 'Australia'), new Country('India', 'India'), new Country('USA', 'USA')];
     phones = ['Samsung', 'OnePlus'];
@@ -347,20 +347,20 @@ class TestTemplateDrivenCheckboxGroupComponnet {
 }
 
 describe('Checkbox Group Component Template driven Form Tests', () => {
-    let host: TestTemplateDrivenCheckboxGroupComponnet;
-    let fixture: ComponentFixture<TestTemplateDrivenCheckboxGroupComponnet>;
+    let host: TestTemplateDrivenCheckboxGroupComponent;
+    let fixture: ComponentFixture<TestTemplateDrivenCheckboxGroupComponent>;
 
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 imports: [FdpFormGroupModule, FormModule, PlatformCheckboxModule, FormsModule],
-                declarations: [TestTemplateDrivenCheckboxGroupComponnet, CheckboxGroupComponent]
+                declarations: [TestTemplateDrivenCheckboxGroupComponent, CheckboxGroupComponent]
             }).compileComponents();
         })
     );
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TestTemplateDrivenCheckboxGroupComponnet);
+        fixture = TestBed.createComponent(TestTemplateDrivenCheckboxGroupComponent);
         host = fixture.componentInstance;
         fixture.detectChanges();
     });
@@ -591,7 +591,7 @@ describe('Checkbox Group Component Template driven Form Tests', () => {
         </fdp-form-group>
     `
 })
-class TestReactiveCheckboxGroupWithData {
+class TestReactiveCheckboxGroupWithDataComponent {
     phoneslist: string[] = ['Samsung', 'Apple', 'OnePlus', 'Redmi'];
     countryVisited = [new Country('Australia', 'Australia'), new Country('India', 'India'), new Country('USA', 'USA')];
 
@@ -615,20 +615,20 @@ class TestReactiveCheckboxGroupWithData {
 }
 
 describe('CheckboxGroup component Reactive Form Test With FormGroup Data', () => {
-    let host: TestReactiveCheckboxGroupWithData;
-    let fixture: ComponentFixture<TestReactiveCheckboxGroupWithData>;
+    let host: TestReactiveCheckboxGroupWithDataComponent;
+    let fixture: ComponentFixture<TestReactiveCheckboxGroupWithDataComponent>;
 
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 imports: [FdpFormGroupModule, FormModule, PlatformCheckboxModule, FormsModule, ReactiveFormsModule],
-                declarations: [TestReactiveCheckboxGroupWithData, CheckboxGroupComponent]
+                declarations: [TestReactiveCheckboxGroupWithDataComponent, CheckboxGroupComponent]
             }).compileComponents();
         })
     );
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TestReactiveCheckboxGroupWithData);
+        fixture = TestBed.createComponent(TestReactiveCheckboxGroupWithDataComponent);
         host = fixture.componentInstance;
         fixture.detectChanges();
     });

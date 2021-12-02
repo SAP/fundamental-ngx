@@ -2,7 +2,7 @@ import { Directive, HostBinding } from '@angular/core';
 
 @Directive({
     // TODO to be discussed
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-illustrated-message-title]'
 })
 export class IllustratedMessageTitleDirective {

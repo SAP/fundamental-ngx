@@ -18,7 +18,7 @@ export class ActionBarPo extends BaseComponentPo {
         waitForPresent(this.pageTitle);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

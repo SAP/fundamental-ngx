@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { QuickViewModule } from '../quick-view.module';
-import { QuickViewGroupItemComponent } from './quick-view-group-item.component';
 
 @Component({
     template: `

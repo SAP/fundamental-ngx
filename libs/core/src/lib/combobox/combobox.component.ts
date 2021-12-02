@@ -124,7 +124,7 @@ export class ComboboxComponent
     /** Filter function. Accepts an array of objects and a search term as arguments
      * and returns a string. See search input examples for details. */
     @Input()
-    filterFn: Function = this._defaultFilter;
+    filterFn = this._defaultFilter;
 
     /** Whether the search input is disabled. **/
     @Input()
@@ -193,7 +193,7 @@ export class ComboboxComponent
 
     /** Search function to execute when the Enter key is pressed on the main input. */
     @Input()
-    searchFn: Function;
+    searchFn: () => void;
 
     /** Whether the search input should be displayed in compact mode. */
     @Input()
@@ -238,7 +238,7 @@ export class ComboboxComponent
      * An arrow function can be used to access the *this* keyword in the calling component.
      * See search input examples for details. */
     @Input()
-    displayFn: Function = this._defaultDisplay;
+    displayFn = this._defaultDisplay;
 
     /** Whether AddOn Button should be focusable, set to false by default */
     @Input()
@@ -348,10 +348,10 @@ export class ComboboxComponent
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    onChange: Function = () => {};
+    onChange: (value: any) => void = () => {};
 
     /** @hidden */
-    onTouched: Function = () => {};
+    onTouched = () => {};
 
     /** @hidden */
     constructor(
@@ -512,12 +512,12 @@ export class ComboboxComponent
     }
 
     /** @hidden */
-    registerOnChange(fn: Function): void {
+    registerOnChange(fn: (value: any) => void): void {
         this.onChange = fn;
     }
 
     /** @hidden */
-    registerOnTouched(fn: Function): void {
+    registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
 

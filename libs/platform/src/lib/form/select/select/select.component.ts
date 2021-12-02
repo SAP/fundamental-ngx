@@ -9,7 +9,6 @@ import {
     Host,
     Input,
     isDevMode,
-    OnInit,
     Optional,
     Output,
     Self,
@@ -33,7 +32,7 @@ import { SelectConfig } from '../select.config';
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: FormFieldControl, useExisting: SelectComponent, multi: true }]
 })
-export class SelectComponent extends BaseSelect implements OnInit, AfterViewInit, AfterViewChecked {
+export class SelectComponent extends BaseSelect implements AfterViewInit, AfterViewChecked {
     /**
      * @deprecated
      * Holds the control state of select
@@ -94,11 +93,6 @@ export class SelectComponent extends BaseSelect implements OnInit, AfterViewInit
     ) {
         super(cd, elementRef, ngControl, ngForm, _selectConfig, formField, formControl);
     }
-
-    /** @hidden
-     * extended by super class
-     */
-    ngOnInit(): void {}
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -228,13 +222,9 @@ export class SelectComponent extends BaseSelect implements OnInit, AfterViewInit
 
     /** @hidden */
     private _setColumnsRatio(firstColumnRatio: number, secondColumnRatio: number): void {
-        let firstColumnProportion: number;
-        let totalProportions: number;
-        let secondColumnProportion: number;
-
-        totalProportions = firstColumnRatio + secondColumnRatio;
-        firstColumnProportion = Math.round((firstColumnRatio / totalProportions) * 100);
-        secondColumnProportion = 100 - firstColumnProportion;
+        const totalProportions = firstColumnRatio + secondColumnRatio;
+        const firstColumnProportion = Math.round((firstColumnRatio / totalProportions) * 100);
+        const secondColumnProportion = 100 - firstColumnProportion;
 
         // setting option items
         this.select._options.forEach((option) => {

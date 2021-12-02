@@ -20,7 +20,7 @@ export type ButtonType = '' | 'secondary' | 'flat' | 'link' | 'outline' | 'naked
  * It uses a visual metaphor to inform the user of the state of the button.
  */
 @Component({
-    // tslint:disable-next-line:component-selector
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'button[fn-button], a[fn-button]',
     exportAs: 'fn-button',
     templateUrl: './button.component.html',

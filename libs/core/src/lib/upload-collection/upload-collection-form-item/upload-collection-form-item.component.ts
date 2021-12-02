@@ -40,10 +40,10 @@ export class UploadCollectionFormItemComponent implements ControlValueAccessor {
     }
 
     /** @hidden */
-    onChange: Function = () => {};
+    onChange: (value: string) => void = () => {};
 
     /** @hidden */
-    onTouched: Function = () => {};
+    onTouched = () => {};
 
     /** @hidden */
     writeValue(value: string): void {
@@ -51,12 +51,12 @@ export class UploadCollectionFormItemComponent implements ControlValueAccessor {
     }
 
     /** @hidden */
-    registerOnChange(fn: Function): void {
+    registerOnChange(fn: (value: string) => void): void {
         this.onChange = fn;
     }
 
     /** @hidden */
-    registerOnTouched(fn: Function): void {
+    registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
 }

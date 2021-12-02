@@ -7,7 +7,7 @@ export class BreadcrumbPo extends CoreBaseComponentPo {
     links = '.fd-breadcrumb__link';
     disabledLinks = '.fd-breadcrumb__item span';
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

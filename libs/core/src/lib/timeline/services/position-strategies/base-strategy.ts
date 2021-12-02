@@ -65,8 +65,7 @@ export abstract class BaseStrategy {
                 secondList[index].el.nativeElement.style.marginTop = `${this.SMALL_OFFSET}px`;
                 const prevNode = secondList[index - 1];
                 const diffBetween = prevNode
-                    ? // tslint:disable-next-line:max-line-length
-                      parallelNodeEl.offsetTop +
+                    ? parallelNodeEl.offsetTop +
                       this.VERTICAL_TOP_LIST_OFFSET -
                       (prevNode.el.nativeElement.offsetTop + prevNode.el.nativeElement.offsetHeight)
                     : -1;

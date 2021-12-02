@@ -5,5 +5,5 @@ import { NestedItemInterface } from '../nested-item/nested-item.interface';
 export interface NestedListInterface {
     nestedItems: QueryList<NestedItemInterface>;
     hidden: boolean;
-    detectChanges: Function;
+    detectChanges: () => void;
 }

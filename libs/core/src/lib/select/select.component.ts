@@ -224,7 +224,7 @@ export class SelectComponent
     @ViewChild(CdkConnectedOverlay)
     _overlayDir: CdkConnectedOverlay;
 
-    /**@hidden
+    /** @hidden
      * Referent to the option;s container
      */
     @ViewChild('optionPanel', { read: ElementRef })
@@ -437,10 +437,10 @@ export class SelectComponent
     }
 
     /** @hidden */
-    onChange: Function = () => {};
+    onChange: (value: any) => void = () => {};
 
     /** @hidden */
-    onTouched: Function = () => {};
+    onTouched = () => {};
 
     /** Toggles the open state of the select. */
     toggle(): void {
@@ -489,12 +489,12 @@ export class SelectComponent
     }
 
     /** @hidden */
-    registerOnChange(fn: Function): void {
+    registerOnChange(fn: (value: any) => void): void {
         this.onChange = fn;
     }
 
     /** @hidden */
-    registerOnTouched(fn: Function): void {
+    registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
 

@@ -5,6 +5,7 @@ import { VhdTab } from '../../models';
 @Component({
     template: ''
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class VhdBaseTab {
     /** Tab Title */
     @Input()

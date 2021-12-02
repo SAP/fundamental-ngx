@@ -33,21 +33,17 @@ describe('Combobox test suite', () => {
     const comboBoxPage: ComboBoxPo = new ComboBoxPo();
     const {
         pageTitle,
-        comboBoxRoot,
         comboBoxDropdownExpanded,
         groupHeader,
-        comboboxWithGroup,
         comboboxTwoColumns,
         optionsArray,
         comboBoxInput,
         mobileComboBoxInput,
         selectedDropDownOption,
-        dropDownOption,
         comboBoxOptionHint,
         comboBoxButtons,
         comboBoxExpandedButtons,
-        comboBoxInputs,
-        filledComboBoxInputs
+        comboBoxInputs
     } = comboBoxPage;
 
     beforeAll(() => {

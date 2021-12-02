@@ -22,7 +22,7 @@ export class FeedListItemPo extends CoreBaseComponentPo {
     optionCancel = '.fd-button--negative';
     avatar = 'fd-avatar';
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

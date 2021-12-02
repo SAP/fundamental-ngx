@@ -49,9 +49,7 @@ export class ValueHelpDialogPo extends BaseComponentPo {
     xBtn = 'button[glyph="decline"]';
     conditionsButton = 'fd-popover .fd-select__control .fd-button';
 
-    formInputField = (id: string) => {
-        return this.inputFields + `[id="${id}"]`;
-    };
+    formInputField = (id: string) => this.inputFields + `[id="${id}"]`;
 
     open(): void {
         super.open(this.url);
@@ -59,7 +57,7 @@ export class ValueHelpDialogPo extends BaseComponentPo {
         waitForElDisplayed(this.pageHeader);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

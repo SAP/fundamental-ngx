@@ -128,11 +128,11 @@ export class SearchFieldDataProvider extends DataProvider<string> {
 
     fetch(params: Map<string, string>): Observable<string[]> {
         let data = DATA;
-        if (!!params.get('keyword')) {
+        if (params.get('keyword')) {
             const keyword = params.get('keyword').toLowerCase();
             data = data.filter((item) => item.keyword.toLowerCase().indexOf(keyword) > -1);
         }
-        if (!!params.get('category')) {
+        if (params.get('category')) {
             data = data.filter((item) => item.category === params.get('category'));
         }
         return of(data.map((item) => item.keyword));

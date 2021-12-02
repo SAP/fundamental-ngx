@@ -341,7 +341,7 @@ export class TimePickerComponent<D>
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._InitialiseVariablesInMessageService();
+        this.initialiseVariablesInMessageService();
     }
 
     /**
@@ -351,13 +351,15 @@ export class TimePickerComponent<D>
     validate(control: AbstractControl): {
         [key: string]: any;
     } {
-        return this._isInvalidTimeInput
-            ? {
-                  timeValidation: {
-                      valid: false
-                  }
-              }
-            : null;
+        if (this._isInvalidTimeInput) {
+            return {
+                timeValidation: {
+                    valid: false
+                }
+            };
+        }
+
+        return null;
     }
 
     /**
@@ -570,7 +572,7 @@ export class TimePickerComponent<D>
     }
 
     /** @hidden */
-    private _InitialiseVariablesInMessageService(): void {
+    private initialiseVariablesInMessageService(): void {
         this._popoverFormMessage.init(this._inputGroupElement);
         this._popoverFormMessage.message = this._message;
         this._popoverFormMessage.triggers = this._messageTriggers;

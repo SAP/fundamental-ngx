@@ -103,12 +103,10 @@ function addStylePathToConfig(options: any): Rule {
         const workspaceJson: WorkspaceSchema = JSON.parse(workspaceConfig.toString());
 
         try {
-            // tslint:disable-next-line:no-non-null-assertion
             let stylesArray = (workspaceJson!.projects[options.project]!.architect!.build!.options as any)['styles'];
 
             if (!stylesArray.includes(fdStylesIconPath)) {
                 stylesArray = pushStylesToArray(stylesArray, fdStylesIconPath);
-                // tslint:disable-next-line:no-non-null-assertion
                 (workspaceJson!.projects[options.project]!.architect!.build!.options as any)['styles'] = stylesArray;
             } else {
                 console.log(`✅️ Found duplicate style path in angular.json. Skipping.`);

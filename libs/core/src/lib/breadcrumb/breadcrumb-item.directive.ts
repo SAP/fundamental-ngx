@@ -12,7 +12,7 @@ import { BreadcrumbLinkDirective } from './breadcrumb-link.directive';
  */
 @Directive({
     // TODO to be discussed
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: 'fd-breadcrumb-item',
     host: {
         class: 'fd-breadcrumb__item'

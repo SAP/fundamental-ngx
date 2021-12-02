@@ -391,7 +391,7 @@ describe('Checkbox test Component', () => {
         </fdp-form-group>
     `
 })
-class TestCheckboxComponentTemplateDriven {
+class TestCheckboxComponentTemplateDrivenComponent {
     @ViewChildren(CheckboxComponent)
     fdpCheckboxes: QueryList<CheckboxComponent>;
 
@@ -402,20 +402,20 @@ class TestCheckboxComponentTemplateDriven {
 }
 
 describe('Checkbox test Component with Template driven form', () => {
-    let host: TestCheckboxComponentTemplateDriven;
-    let fixture: ComponentFixture<TestCheckboxComponentTemplateDriven>;
+    let host: TestCheckboxComponentTemplateDrivenComponent;
+    let fixture: ComponentFixture<TestCheckboxComponentTemplateDrivenComponent>;
 
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 imports: [FdpFormGroupModule, FormModule, CheckboxModule, FormsModule, ReactiveFormsModule],
-                declarations: [TestCheckboxComponentTemplateDriven, CheckboxComponent]
+                declarations: [TestCheckboxComponentTemplateDrivenComponent, CheckboxComponent]
             }).compileComponents();
         })
     );
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TestCheckboxComponentTemplateDriven);
+        fixture = TestBed.createComponent(TestCheckboxComponentTemplateDrivenComponent);
         host = fixture.componentInstance;
         fixture.detectChanges();
         fixture.whenStable();

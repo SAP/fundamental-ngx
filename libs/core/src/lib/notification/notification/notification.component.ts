@@ -90,7 +90,6 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     /** @hidden */
     private _subscriptions = new Subscription();
 
-    // @ts-ignore
     constructor(
         private _elRef: ElementRef,
         private _componentFactoryResolver: ComponentFactoryResolver,

@@ -8,7 +8,6 @@ import {
     getValue,
     isElementClickable,
     isElementDisplayed,
-    pause,
     refreshPage,
     scrollIntoView,
     sendKeys,
@@ -35,7 +34,6 @@ describe('Datetime picker suite', () => {
         datePickerButton,
         calendarExpanded,
         datePickerInput,
-        topPage,
         selectYearButton,
         selectMonthButton,
         calendarYearsSection,
@@ -57,10 +55,10 @@ describe('Datetime picker suite', () => {
         buttonChange,
         optionButton,
         activeDay,
-        dayInCalendarButtonByValue,
         getOptionById,
         datePickerGroup,
-        buttonText
+        buttonText,
+        clickDayInCalendarButtonByValue
     } = new DateTimePicker();
 
     beforeAll(() => {
@@ -153,7 +151,7 @@ describe('Datetime picker suite', () => {
             'For the time, it’s possible to select hours, minutes, and even seconds.',
         () => {
             click(datePickerButton);
-            click(dateTimePickerPage.dayInCalendarButtonByValue('1'));
+            clickDayInCalendarButtonByValue(1);
             selectHoursMinutesAndPeriod();
             click(okButton);
             expect(getValue(datePickerInput)).toEqual(date);
@@ -162,7 +160,7 @@ describe('Datetime picker suite', () => {
 
     it('verify when the user selects cancel the action is aborted and the input field remains unchanged.', () => {
         click(datePickerButton);
-        click(dateTimePickerPage.dayInCalendarButtonByValue('1'));
+        clickDayInCalendarButtonByValue(1);
         selectHoursMinutesAndPeriod();
         click(cancelButton);
         expect(getValue(datePickerInput)).not.toEqual(date);
@@ -229,7 +227,7 @@ describe('Datetime picker suite', () => {
 
     it('verify simple datetime picker has correct default date', () => {
         click(datePickerButton);
-        click(dayInCalendarButtonByValue(currentDay.toString()));
+        clickDayInCalendarButtonByValue(currentDay);
         selectHoursMinutesAndPeriod();
         click(okButton);
         expect(getValue(datePickerInput)).toEqual(date2);
@@ -238,7 +236,7 @@ describe('Datetime picker suite', () => {
     it('verify programmatic change datetime picker has correct default date', () => {
         scrollIntoView(datePickerButton, 1);
         click(datePickerButton, 1);
-        click(dayInCalendarButtonByValue(currentDay.toString()));
+        clickDayInCalendarButtonByValue(currentDay);
         selectHoursMinutesAndPeriod();
         click(okButton);
         expect(getValue(datePickerInput, 1)).toEqual(date2);
@@ -249,7 +247,7 @@ describe('Datetime picker suite', () => {
     it('verify null validity datetime picker has correct default date', () => {
         scrollIntoView(datePickerButton, 2);
         click(datePickerButton, 2);
-        click(dayInCalendarButtonByValue(currentDay.toString()));
+        clickDayInCalendarButtonByValue(currentDay);
         selectHoursMinutesAndPeriod();
         click(okButton);
         expect(getValue(datePickerInput, 2)).toEqual(date2);
@@ -258,7 +256,7 @@ describe('Datetime picker suite', () => {
     it('verify formatting datetime picker has correct default date', () => {
         scrollIntoView(datePickerButton, 3);
         click(datePickerButton, 3);
-        click(dayInCalendarButtonByValue(currentDay.toString()));
+        clickDayInCalendarButtonByValue(currentDay);
         selectHoursAndMinutes();
         click(okButton);
         expect(getValue(datePickerInput, 3)).toEqual(date4);
@@ -267,7 +265,7 @@ describe('Datetime picker suite', () => {
     it('verify date time picker in reactive form has correct default date', () => {
         scrollIntoView(datePickerButton, 5);
         click(datePickerButton, 5);
-        click(dayInCalendarButtonByValue(currentDay.toString()));
+        clickDayInCalendarButtonByValue(currentDay);
         selectHoursMinutesAndPeriod();
         click(okButton);
         expect(getValue(datePickerInput, 5)).toEqual(date2);
@@ -282,7 +280,6 @@ describe('Datetime picker suite', () => {
                 click(getOptionById(i18n[i]));
                 click(datePickerButton, 7);
                 waitForElDisplayed(calendarExpanded);
-                scrollIntoView(dayInCalendarButtonByValue(currentDay.toString()));
                 selectHoursAndMinutes();
                 click(okButton);
                 expect(getValue(datePickerInput, 7)).toContain(dates[i]);

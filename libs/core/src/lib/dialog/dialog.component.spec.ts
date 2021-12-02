@@ -40,7 +40,6 @@ describe('DialogComponent', () => {
     let dialogComponent: DialogComponent;
     let fixture: ComponentFixture<TemplateTestComponent>;
 
-    let dialogService: DialogService;
     const dialogRef = new DialogRef();
     const dialogConfig = new DialogConfig();
     const routerEventsSubject = new Subject<RouterEvent>();
@@ -67,7 +66,6 @@ describe('DialogComponent', () => {
         fixture = TestBed.createComponent(TemplateTestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
-        dialogService = TestBed.inject<DialogService>(DialogService);
         dialogComponent = fixture.componentInstance.dialog;
         router = TestBed.inject(Router);
     }

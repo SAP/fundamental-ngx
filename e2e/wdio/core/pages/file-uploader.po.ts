@@ -15,7 +15,7 @@ export class FileUploaderPo extends CoreBaseComponentPo {
         waitForElDisplayed(this.root);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

@@ -11,7 +11,7 @@
 
 <div
     class="collapsed-overlay"
-    [ngClass]="{ 'overlay-init': !(sideCollapsed | async) }"
+    [ngClass]="{ 'overlay-init': (sideCollapsed | async) === false }"
     *ngIf="this.smallScreen"
     (click)="closeSideBar()"
 ></div>

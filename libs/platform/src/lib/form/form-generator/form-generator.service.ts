@@ -93,13 +93,11 @@ export class FormGeneratorService implements OnDestroy {
                 formItem.asyncValidators.push(validator);
             }
 
-            let formControl: DynamicFormControl;
-
             formItem.validators = formItem.validators || [Validators.nullValidator];
 
             formItem.required = formItem.required || formItem.validators.includes(Validators.required);
 
-            formControl = new DynamicFormControl(formItem.default, {
+            const formControl = new DynamicFormControl(formItem.default, {
                 validators: formItem.validators,
                 asyncValidators: formItem.asyncValidators,
                 dynamicFormItem: formItem,
@@ -303,9 +301,9 @@ export class FormGeneratorService implements OnDestroy {
             return [];
         }
 
-        return defaultChoices.map((c: string | number | SelectItem) => {
-            return typeof c === 'object' ? c : ({ label: c, value: c } as SelectItem);
-        }) as SelectItem[];
+        return defaultChoices.map((c: string | number | SelectItem) =>
+            typeof c === 'object' ? c : ({ label: c, value: c } as SelectItem)
+        ) as SelectItem[];
     }
 
     /**

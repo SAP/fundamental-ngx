@@ -38,15 +38,12 @@ describe('TableRowDirective', () => {
         return result;
     };
 
-    const getInnerTextFromNodes = (): string[] => {
-        return getElements().map((cell) => cell.innerHTML);
-    };
+    const getInnerTextFromNodes = (): string[] => getElements().map((cell) => cell.innerHTML);
 
-    const getVisibleCells = (): string[] => {
-        return getElements()
+    const getVisibleCells = (): string[] =>
+        getElements()
             .filter((cell) => !cell.classList.contains(HIDDEN_CLASS_NAME))
             .map((cell) => cell.innerHTML);
-    };
 
     beforeEach(
         waitForAsync(() => {

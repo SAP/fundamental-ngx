@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { ActionBarHeaderDirective } from './action-bar-header.directive';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActionBarModule } from '../action-bar.module';
 

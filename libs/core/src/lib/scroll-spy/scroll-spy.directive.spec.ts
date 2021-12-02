@@ -22,12 +22,7 @@ export class MockElementRef extends ElementRef {
 }
 
 describe('ScrollSpyDirective', () => {
-    let fixture: ComponentFixture<ScrollSpyTestComponent>,
-        component: ScrollSpyTestComponent,
-        debugElement: DebugElement,
-        element: HTMLElement;
-
-    let directive, directiveInstance;
+    let fixture: ComponentFixture<ScrollSpyTestComponent>, debugElement: DebugElement, directive;
 
     beforeEach(
         waitForAsync(() => {
@@ -40,12 +35,9 @@ describe('ScrollSpyDirective', () => {
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ScrollSpyTestComponent);
-        component = fixture.componentInstance;
         debugElement = fixture.debugElement;
-        element = debugElement.nativeElement;
         fixture.detectChanges();
         directive = debugElement.query(By.directive(ScrollSpyDirective));
-        directiveInstance = directive.injector.get(ScrollSpyDirective);
     });
 
     it('should create', () => {

@@ -26,7 +26,7 @@ export class MessageToastExampleComponent {
     }
 
     openFromTemplate(template): void {
-        const messageToast = this.messageToastService.open(template, {
+        this.messageToastService.open(template, {
             data: {
                 content: 'Message Toast created from template.'
             }

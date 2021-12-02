@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewEnca
 export type HeaderSizes = 1 | 2 | 3 | 4 | 5 | 6;
 
 @Component({
-    // tslint:disable-next-line
+    // eslint-disable-next-line
     selector: 'h1[fd-title], h2[fd-title], h3[fd-title], h4[fd-title], h5[fd-title], h6[fd-title]',
     exportAs: 'fd-title',
     template: '<ng-content></ng-content>',

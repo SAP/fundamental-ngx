@@ -91,7 +91,7 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
     appendTo: ElementRef;
 
     @Input()
-    triggerValue: String;
+    triggerValue: string;
 
     @Input()
     fillControlMode: PopoverFillMode = 'at-least';
@@ -194,6 +194,10 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
     set contentDensity(contentDensity: ContentDensity) {
         this._contentDensity = contentDensity;
         this._isCompact = this.contentDensity !== 'cozy';
+    }
+
+    get contentDensity(): ContentDensity {
+        return this._contentDensity;
     }
 
     /** Data for suggestion list */

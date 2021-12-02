@@ -63,7 +63,7 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
         return this.id + '-title';
     }
 
-    /**@hidden */
+    /** @hidden */
     constructor(
         elementRef: ElementRef,
         dialogService: DialogService,

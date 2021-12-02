@@ -19,7 +19,7 @@ import {
     FlexibleColumnLayout
 } from './constants';
 
-declare var viewport: any;
+declare let viewport: any;
 
 @Component({
     template: `

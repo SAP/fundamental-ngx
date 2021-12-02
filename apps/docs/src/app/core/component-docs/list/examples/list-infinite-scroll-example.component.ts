@@ -35,6 +35,6 @@ export class ListInfiniteScrollExampleComponent {
 
         return Array(ITEMS_AMOUNT_ON_LOAD)
             .fill(undefined)
-            .map((_) => `Element ${index++}`);
+            .map(() => `Element ${index++}`);
     }
 }

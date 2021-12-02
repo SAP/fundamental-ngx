@@ -15,8 +15,7 @@ import {
     scrollIntoView,
     sendKeys,
     setValue,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../driver/wdio';
 import {
     firstAdress,
@@ -1056,7 +1055,9 @@ describe('Wizard generator test suite', () => {
     function getPauseTime(): number {
         if (getCurrentUrl().includes('localhost') || getCurrentUrl().includes('web.app')) {
             return 500;
-        } else return 0;
+        } else {
+            return 0;
+        }
     }
 
     function openDialog(selector: string, pauseTime: number = getPauseTime()): void {

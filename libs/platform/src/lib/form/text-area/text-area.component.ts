@@ -273,12 +273,11 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         this._isPasted = true;
         /// For IE
         if (window['clipboardData']) {
-            const value = window['clipboardData'].getData('Text');
             // todo: handle for IE
             this.updateCounterInteractions();
         } else {
             // for other navigators
-            navigator['clipboard'].readText().then((clipText) => {
+            navigator['clipboard'].readText().then(() => {
                 this.updateCounterInteractions();
             });
         }

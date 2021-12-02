@@ -44,7 +44,7 @@ export function isType(obj: any): boolean {
     return isFunction(obj);
 }
 
-export function isStringMap(obj: any): obj is Object {
+export function isStringMap(obj: any): obj is Record<string, any> {
     return typeof obj === 'object' && obj !== null;
 }
 

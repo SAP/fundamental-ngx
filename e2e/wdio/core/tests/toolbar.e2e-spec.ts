@@ -38,7 +38,7 @@ describe('Toolbar test suite', () => {
         navigationDownArrowButton,
         timeItem,
         period,
-        dayInCalendarButtonByValue,
+        clickDayInCalendarButtonByValue,
         dateTimeButton,
         okButton,
         dateTimeInput,
@@ -119,7 +119,7 @@ describe('Toolbar test suite', () => {
         it('verify date time picker example', () => {
             scrollIntoView(dateTimeButton);
             click(dateTimeButton);
-            click(dayInCalendarButtonByValue(currentDay.toString()));
+            clickDayInCalendarButtonByValue(currentDay);
             selectHoursMinutesAndPeriod();
             click(okButton);
             expect(getValue(dateTimeInput)).toEqual(date);

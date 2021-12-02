@@ -137,10 +137,10 @@ describe('Step input component test suit', () => {
     });
 
     function checkClickByRightMouseBth(section: string): void {
-        let inputLength = getElementArrayLength(section + input);
+        const inputLength = getElementArrayLength(section + input);
         scrollIntoView(section);
         for (let i = 0; i < inputLength; i++) {
-            let defaultValue = getValue(section + input, i);
+            const defaultValue = getValue(section + input, i);
             clickRightMouseBtn(section + plusButton, i);
             expect(getValue(section + input, i)).toEqual(
                 defaultValue,
@@ -249,8 +249,7 @@ describe('Step input component test suit', () => {
     }
 
     function clearInputFF(section: string, index: number = 0): void {
-        let inputValue;
-        inputValue = getValue(section + input, index);
+        const inputValue = getValue(section + input, index);
         click(section + input, index);
         for (let j = 0; j < inputValue.length; j++) {
             sendKeys('Delete');

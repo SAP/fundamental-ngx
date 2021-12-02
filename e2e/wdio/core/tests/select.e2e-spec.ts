@@ -1,6 +1,5 @@
 import { SelectPo } from '../pages/select.po';
 import {
-    browserIsFirefox,
     click,
     getAttributeByName,
     getElementArrayLength,

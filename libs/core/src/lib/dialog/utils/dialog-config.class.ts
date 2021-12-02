@@ -1,4 +1,4 @@
-/* tslint:disable:no-inferrable-types */
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 /**
  * Configuration for opening a dialog with the DialogService.
  */

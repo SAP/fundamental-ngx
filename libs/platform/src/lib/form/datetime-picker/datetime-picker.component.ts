@@ -207,6 +207,7 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
 
     /** Event emitted when popover closes. */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     readonly onClose: EventEmitter<void> = new EventEmitter<void>();
 
     @ViewChild(DatetimePickerComponent)
@@ -220,9 +221,7 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
      * @param fdDate FdDate
      */
     @Input()
-    disableFunction = (_: D): boolean => {
-        return false;
-    };
+    disableFunction: (value: D) => boolean = () => false;
 
     constructor(
         protected _cd: ChangeDetectorRef,

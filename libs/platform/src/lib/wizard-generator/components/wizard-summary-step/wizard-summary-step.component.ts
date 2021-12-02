@@ -148,15 +148,13 @@ export class WizardSummaryStepComponent {
             const formattedForm: FormattedFormStep = {
                 title: form.title,
                 id: formId,
-                items: Object.keys(this._submittedForms[step.id][formId]).map((key) => {
-                    return {
-                        label: form.form.controls[key].formItem.message as string,
-                        value:
-                            form.form.controls[key].formItem.controlType !== 'password'
-                                ? formattedFormValue[key]
-                                : this._formatPasswordValue(formattedFormValue[key])
-                    };
-                })
+                items: Object.keys(this._submittedForms[step.id][formId]).map((key) => ({
+                    label: form.form.controls[key].formItem.message as string,
+                    value:
+                        form.form.controls[key].formItem.controlType !== 'password'
+                            ? formattedFormValue[key]
+                            : this._formatPasswordValue(formattedFormValue[key])
+                }))
             };
 
             formattedStepValue.push(formattedForm);

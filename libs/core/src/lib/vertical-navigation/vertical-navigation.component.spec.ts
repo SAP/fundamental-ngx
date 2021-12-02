@@ -50,7 +50,6 @@ class TestVerticalNavigationComponent {
 }
 
 describe('VerticalNavigationComponent', () => {
-    let verticalNavigationElementRef: ElementRef;
     let component: TestVerticalNavigationComponent;
     let fixture: ComponentFixture<TestVerticalNavigationComponent>;
 
@@ -67,7 +66,6 @@ describe('VerticalNavigationComponent', () => {
         fixture = TestBed.createComponent(TestVerticalNavigationComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
-        verticalNavigationElementRef = fixture.componentInstance.verticalNavigationElementRef;
     });
 
     it('Should create', () => {

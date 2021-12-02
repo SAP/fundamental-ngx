@@ -13,7 +13,6 @@ import { ExperimentalFormModule } from '@fundamental-ngx/fn/form';
 import { ExperimentalSwitchModule } from '@fundamental-ngx/fn/switch';
 import { ExperimentalButtonModule } from '@fundamental-ngx/fn/button';
 import { ExperimentalSearchModule } from '@fundamental-ngx/fn/search';
-import { ExperimentalTagModule } from '@fundamental-ngx/fn/tag';
 
 const routes: Routes = [
     {

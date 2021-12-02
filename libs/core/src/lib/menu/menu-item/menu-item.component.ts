@@ -40,7 +40,7 @@ export interface BaseSubmenu {
 export const SUBMENU = new InjectionToken<BaseSubmenu>('Submenu component dependency');
 
 @Component({
-    // tslint:disable-next-line:component-selector
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'li[fd-menu-item]',
     exportAs: 'fd-menu-item',
     templateUrl: './menu-item.component.html',
@@ -66,6 +66,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
 
     /** Emitted when the menu item is selected. */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onSelect: EventEmitter<void> = new EventEmitter<void>();
 
     /** @hidden Reference to the Menu Item title */
@@ -173,9 +174,9 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
         // Set focus on hover
         hoverSubscriptions.add(mouseEnter$.subscribe(() => this.menuService?.setFocused(this)));
 
-        const timerFactory$ = defer(() => {
-            return timer(this.menuService ? this.menuService.menu.openOnHoverTime : 0).pipe(takeUntil(mouseLeave$));
-        });
+        const timerFactory$ = defer(() =>
+            timer(this.menuService ? this.menuService.menu.openOnHoverTime : 0).pipe(takeUntil(mouseLeave$))
+        );
 
         const timeTrigger$ = mouseEnter$.pipe(switchMap(() => timerFactory$));
 

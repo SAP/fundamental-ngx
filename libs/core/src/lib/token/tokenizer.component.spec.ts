@@ -168,9 +168,6 @@ describe('TokenizerComponent', () => {
         );
         spyOn(component, 'addKeyboardListener');
         spyOn(component, 'handleKeyDown');
-        const event = new KeyboardEvent('keydown', {
-            key: 'ArrowRight'
-        });
 
         component.focusTokenElement(1);
 
@@ -256,8 +253,6 @@ describe('TokenizerComponent', () => {
             spyOn(token.tokenWrapperElement.nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
         });
         spyOn(component.input.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
-
-        const retVal = component.getCombinedTokenWidth();
     });
 
     it('should handle ngAfterContentInit', () => {

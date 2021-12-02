@@ -58,7 +58,7 @@ export class PopoverPo extends CoreBaseComponentPo {
         waitForElDisplayed(this.avatar);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

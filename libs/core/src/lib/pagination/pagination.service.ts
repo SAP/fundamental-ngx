@@ -46,9 +46,7 @@ export class PaginationService {
                         pages.push(i);
                     } else if (i === totalPages) {
                         pages.push(i);
-                    }
-                    // tslint:disable-next-line
-                    else if (
+                    } else if (
                         i >= pagination.currentPage - SIDE_CURRENT_DISPLAY_PAGES &&
                         i < pagination.currentPage + SIDE_CURRENT_DISPLAY_PAGES + 1
                     ) {

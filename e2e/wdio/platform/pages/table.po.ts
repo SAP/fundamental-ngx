@@ -92,7 +92,7 @@ export class TablePo extends BaseComponentPo {
         waitForPresent(this.tableDefaultExample);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 
