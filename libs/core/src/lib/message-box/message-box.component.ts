@@ -59,12 +59,14 @@ export class MessageBoxComponent
     }
 
     /** MessageBoxRef - should be used for Template based Dialog implementation  */
+    // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('messageBoxRef')
     set embeddedMessageBoxRef(value: MessageBoxRef) {
         this._messageBoxRef = value;
     }
 
     /** MessageBoxConfig - should be used for Template based Dialog implementation  */
+    // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('messageBoxConfig')
     set embeddedMessageBoxConfig(value: MessageBoxConfig) {
         this._messageBoxConfig = value;

@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 import { QuickViewModule } from '../quick-view.module';
-import { QuickViewGroupTitleComponent } from './quick-view-group-title.component';
 
 @Component({
     template: `

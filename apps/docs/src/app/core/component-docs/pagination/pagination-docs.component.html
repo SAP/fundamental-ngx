@@ -42,10 +42,23 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="mobile" componentName="pagination"> Mobile </fd-docs-section-title>
+<description>
+    Pagination component switches to mobile mode automatically when screen's size is smaller than 600px in width but can
+    set <code>mobile</code> or <code>[mobile]="true"</code> to show it always in mobile mode.
+</description>
+<component-example>
+    <fd-pagination-mobile-example></fd-pagination-mobile-example>
+</component-example>
+<code-example [exampleFiles]="paginationMobile"></code-example>
+
+<separator></separator>
+
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
     <fd-pagination
         [totalItems]="data.properties.totalItems"
         [itemsPerPage]="data.properties.itemsPerPage"
         [currentPage]="data.properties.currentPage"
+        [mobile]="data.properties.mobile"
     ></fd-pagination>
 </playground>

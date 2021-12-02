@@ -12,7 +12,7 @@ export class LinkPo extends CoreBaseComponentPo {
         waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

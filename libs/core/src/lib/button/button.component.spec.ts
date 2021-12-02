@@ -12,7 +12,7 @@ import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '@fundamental-ngx
 export class TestComponent {}
 
 describe('ButtonComponent', () => {
-    let fixture: ComponentFixture<TestComponent>, debugElement: DebugElement, element: HTMLElement;
+    let fixture: ComponentFixture<TestComponent>, debugElement: DebugElement;
 
     let component, componentInstance: ButtonComponent;
 
@@ -29,7 +29,6 @@ describe('ButtonComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
         debugElement = fixture.debugElement;
-        element = debugElement.nativeElement;
         fixture.detectChanges();
         component = debugElement.query(By.directive(ButtonComponent));
         componentInstance = component.injector.get(ButtonComponent);
@@ -74,8 +73,7 @@ export class AriaDisabledTestComponent {}
 describe('ButtonComponent – Disabled', () => {
     let disabledFixture: ComponentFixture<DisabledTestComponent>,
         ariaDisabledFixture: ComponentFixture<AriaDisabledTestComponent>,
-        debugElement: DebugElement,
-        element: HTMLElement;
+        debugElement: DebugElement;
 
     let component, componentInstance: ButtonComponent;
 
@@ -91,7 +89,6 @@ describe('ButtonComponent – Disabled', () => {
     it('should add is-disabled class to [disabled] button', () => {
         disabledFixture = TestBed.createComponent(DisabledTestComponent);
         debugElement = disabledFixture.debugElement;
-        element = debugElement.nativeElement;
         disabledFixture.detectChanges();
         component = debugElement.query(By.directive(ButtonComponent));
         componentInstance = component.injector.get(ButtonComponent);
@@ -104,7 +101,6 @@ describe('ButtonComponent – Disabled', () => {
     it('should add is-disabled class to [aria-disabled="true"] button', () => {
         ariaDisabledFixture = TestBed.createComponent(AriaDisabledTestComponent);
         debugElement = ariaDisabledFixture.debugElement;
-        element = debugElement.nativeElement;
         ariaDisabledFixture.detectChanges();
         component = debugElement.query(By.directive(ButtonComponent));
         componentInstance = component.injector.get(ButtonComponent);

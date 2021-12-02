@@ -77,7 +77,7 @@ export class ApprovalFlowPo extends BaseComponentPo {
         waitForPresent(this.watchers);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

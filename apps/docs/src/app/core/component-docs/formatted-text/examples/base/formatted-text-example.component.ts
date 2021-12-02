@@ -24,7 +24,9 @@ export class FormattedTextExampleComponent {
             <li>unordered list's item 3</li>
         </ul>
         <h1>Wrong link href will skipped</h1>
-        <a href="google.com" title="Redirect to google.com" style="color:#1a0dab;font-size:14px;">Link with wrong href google.com (instead http://www.google.com), title and style</a>
+        <a href="google.com" title="Redirect to google.com" style="color:#1a0dab;font-size:14px;">
+            Link with wrong href google.com (instead http://www.google.com), title and style
+        </a>
         <h1>Link with anchor</h1>
         <a href="#target1" title="Redirect to google.com">Anchor link to #target1</a>
     `;

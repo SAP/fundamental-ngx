@@ -1,5 +1,4 @@
 import { ElementRef, Injectable, Injector, Optional, Renderer2, TemplateRef, ViewContainerRef } from '@angular/core';
-
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 import {
     ConnectedPosition,
@@ -7,16 +6,16 @@ import {
     Overlay,
     OverlayConfig,
     OverlayRef,
-    ViewportRuler
+    ViewportRuler,
+    ConnectedOverlayPositionChange
 } from '@angular/cdk/overlay';
-import { ConnectedOverlayPositionChange } from '@angular/cdk/overlay';
-
 import { merge, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, startWith, takeUntil } from 'rxjs/operators';
 
-import { GetDefaultPosition, PopoverPosition } from '@fundamental-ngx/core/shared';
-import { BasePopoverClass } from '../base/base-popover.class';
 import { RtlService } from '@fundamental-ngx/core/utils';
+import { GetDefaultPosition, PopoverPosition } from '@fundamental-ngx/core/shared';
+
+import { BasePopoverClass } from '../base/base-popover.class';
 import { PopoverBodyComponent } from '../popover-body/popover-body.component';
 
 const MAX_BODY_SIZE = 99999999;
@@ -39,7 +38,7 @@ export class PopoverService extends BasePopoverClass {
     _onLoad = new Subject<ElementRef>();
 
     /** @hidden */
-    private _eventRef: Function[] = [];
+    private _eventRef: (() => void)[] = [];
 
     /** @hidden */
     private _overlayRef: OverlayRef;
@@ -61,6 +60,9 @@ export class PopoverService extends BasePopoverClass {
 
     /** @hidden */
     private _templateData: PopoverTemplate;
+
+    /** @hidden */
+    private _prevTrigger: string;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
@@ -90,11 +92,13 @@ export class PopoverService extends BasePopoverClass {
     initialise(triggerElement: ElementRef, config?: BasePopoverClass, templateData?: PopoverTemplate): void {
         this._templateData = templateData;
         this._triggerElement = triggerElement;
+
         if (config) {
             this.refreshConfiguration(config);
         }
 
         this._refreshTriggerListeners();
+
         if (this.isOpen) {
             this.open();
         }
@@ -105,10 +109,12 @@ export class PopoverService extends BasePopoverClass {
         if (this._overlayRef) {
             this._overlayRef.dispose();
 
-            if (this.isOpen) {
-                this.isOpenChange.emit(false);
-            }
+            const prevState = this.isOpen;
             this.isOpen = false;
+            if (prevState !== this.isOpen) {
+                this.isOpenChange.emit(this.isOpen);
+            }
+
             this._focusLastActiveElementBeforeOpen();
         }
     }
@@ -131,11 +137,11 @@ export class PopoverService extends BasePopoverClass {
                 this._listenOnResize();
             }
 
-            if (!this.isOpen) {
-                this.isOpenChange.emit(true);
-            }
-
+            const prevState = this.isOpen;
             this.isOpen = true;
+            if (prevState !== this.isOpen) {
+                this.isOpenChange.emit(this.isOpen);
+            }
 
             this._detectChanges();
 
@@ -185,6 +191,7 @@ export class PopoverService extends BasePopoverClass {
     onDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
+        this._removeTriggerListeners();
         if (this._overlayRef) {
             this._overlayRef.detach();
         }
@@ -196,19 +203,32 @@ export class PopoverService extends BasePopoverClass {
     refreshConfiguration(config: BasePopoverClass): void {
         const onlyChanged = Object.keys(new BasePopoverClass()).filter((key) => this[key] !== config[key]);
 
-        if (onlyChanged.some((key) => key === 'isOpen')) {
-            if (config['isOpen']) {
+        if (onlyChanged.includes('isOpen')) {
+            if (config.isOpen) {
                 this.open();
             } else {
                 this.close();
             }
         }
 
+        /**
+         * This overriding is dangerous thing and leads to unexpected behavior
+         * We have to avoid this.
+         */
         onlyChanged.forEach((key) => (this[key] = config[key]));
 
-        if (onlyChanged.some((key) => key === 'triggers')) {
+        if (onlyChanged.includes('triggers')) {
             this._refreshTriggerListeners();
         }
+    }
+
+    /**
+     * This method is intended to be called in order
+     * to postpone the main functionality but be able
+     * to enable it back in the future by initialise()
+     */
+    deactivate(): void {
+        this._removeTriggerListeners();
     }
 
     /** Refresh listeners on trigger element events */
@@ -218,15 +238,26 @@ export class PopoverService extends BasePopoverClass {
         }
 
         this._removeTriggerListeners();
+
         if (this.triggers?.length) {
             this.triggers.forEach((trigger) => {
                 this._eventRef.push(
                     this._renderer.listen(this._triggerElement.nativeElement, trigger, () => {
-                        this.toggle();
+                        this._isToggle(trigger);
                     })
                 );
             });
         }
+    }
+
+    /** @hidden */
+    private _isToggle(trigger: string): void {
+        // prevent unexpected toggling when it triggers the same event
+        if (this._prevTrigger !== trigger || this.triggers?.length <= 1) {
+            this.toggle();
+        }
+
+        this._prevTrigger = trigger;
     }
 
     /** @hidden */
@@ -298,6 +329,7 @@ export class PopoverService extends BasePopoverClass {
         positionChange
             .pipe(
                 takeUntil(this._placementRefresh$),
+                takeUntil(this._onDestroy$),
                 filter(() => !this.noArrow && !!this._getPopoverBody()),
                 distinctUntilChanged((previous, current) => previous.connectionPair === current.connectionPair)
             )

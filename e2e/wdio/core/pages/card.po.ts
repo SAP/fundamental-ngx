@@ -55,7 +55,7 @@ export class CardPo extends CoreBaseComponentPo {
         waitForPresent(this.cardTitle);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

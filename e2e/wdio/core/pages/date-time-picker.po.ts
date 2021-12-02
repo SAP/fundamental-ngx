@@ -1,5 +1,5 @@
 import { CoreBaseComponentPo } from './core-base-component.po';
-import { waitForElDisplayed } from '../../driver/wdio';
+import { click, waitForElDisplayed } from '../../driver/wdio';
 
 export class DateTimePicker extends CoreBaseComponentPo {
     url = '/datetime-picker';
@@ -33,23 +33,17 @@ export class DateTimePicker extends CoreBaseComponentPo {
     calendarItem = '.fd-calendar__table td.fd-calendar__item';
     buttonText = ' .fd-button__text';
 
-    filterCalendarValue = (name: string): string => {
-        return `[id*="${name}"]`;
+    filterCalendarValue = (name: string): string => `[id*="${name}"]`;
+
+    getOptionById = (id: string): string => `#${id}`;
+
+    clickDayInCalendarButtonByValue = (dayNumber: number): void => {
+        click('.fd-calendar__table td.fd-calendar__item:not(.fd-calendar__item--other-month)', dayNumber - 1);
     };
 
-    getOptionById = (id: string): string => {
-        return `#${id}`;
-    };
+    yearInCalendarByValue = (year: number): string => `[data-fd-calendar-year="${year}"]`;
 
-    dayInCalendarButtonByValue = (index: string): string => {
-        return `//span[contains(@id,"day-${index}-")]/ancestor::td[not (contains(@class, 'fd-calendar__item--other-month'))]`;
-    };
-
-    yearInCalendarByValue = (year: number): string => {
-        return `[data-fd-calendar-year="${year}"]`;
-    };
-
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

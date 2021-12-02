@@ -38,13 +38,12 @@ export class GridListPo extends CoreBaseComponentPo {
     gridListItemStatus = 'div#fd-grid-list-8 fd-grid-list-item';
     gridListLinkStatus = 'div#fd-grid-list-8 a';
     gridListLink = 'a.fd-link';
-    gridListToolbar = '.fd-toolbar.fd-toolbar--info';
+    gridListToolbar = '.fd-toolbar.fd-toolbar--info ';
     gridListRadioButton = '.fd-grid-list__item-toolbar .fd-grid-list__radio-label';
     gridListCheckbox = '.fd-grid-list__checkbox-label';
+    button = '.fd-button';
 
-    gridListItemsByMode = (name: string) => {
-        return ` [selectionmode="${name}"] fd-grid-list-item`;
-    };
+    gridListItemsByMode = (name: string) => ` [selectionmode="${name}"] fd-grid-list-item`;
 
     open(): void {
         super.open(this.url);
@@ -52,7 +51,7 @@ export class GridListPo extends CoreBaseComponentPo {
         waitForElDisplayed(this.layoutPattern);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

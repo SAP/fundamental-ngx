@@ -21,7 +21,7 @@ export class DisplayListItemPo extends BaseComponentPo {
         waitForPresent(this.displayLinks);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

@@ -1,5 +1,5 @@
 import { FormItemComponent } from './form-item.component';
-import { Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 @Component({
@@ -16,10 +16,7 @@ export class TestComponent {
 }
 
 describe('FormItemComponent', () => {
-    let fixture: ComponentFixture<TestComponent>,
-        component: TestComponent,
-        debugElement: DebugElement,
-        element: HTMLElement;
+    let fixture: ComponentFixture<TestComponent>, component: TestComponent;
 
     beforeEach(
         waitForAsync(() => {
@@ -32,8 +29,6 @@ describe('FormItemComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;
-        debugElement = fixture.debugElement;
-        element = debugElement.nativeElement;
         fixture.detectChanges();
     });
 

@@ -99,7 +99,7 @@
         <ul fd-list compact="true">
             <li fd-list-item>
                 <fd-checkbox
-                    [ngModel]="_selectedColumnsCount == _selectableColumns.length"
+                    [ngModel]="_selectedColumnsCount === _selectableColumns.length"
                     (ngModelChange)="_toggleSelectAll($event)"
                     [disabled]="_selectAllDisabled"
                     compact="true"

@@ -6,19 +6,19 @@ import { TimelinePositionControlService } from './services/timeline-position-con
 import { TimelineAxis, TimelineSidePosition } from './types';
 
 describe('TimelineComponent', () => {
-    let component: TimelineTestApp;
-    let fixture: ComponentFixture<TimelineTestApp>;
+    let component: TimelineTestComponent;
+    let fixture: ComponentFixture<TimelineTestComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [TimelineTestApp],
+            declarations: [TimelineTestComponent],
             imports: [TimelineModule],
             providers: [TimelinePositionControlService]
         }).compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TimelineTestApp);
+        fixture = TestBed.createComponent(TimelineTestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
@@ -46,10 +46,8 @@ describe('TimelineComponent', () => {
         component.data = [{ title: 'Title #1' }, { title: 'Title #2' }, { title: 'Title #3' }];
         fixture.detectChanges();
 
-        const nodeWithInitialIndexAttr = getNodes(fixture.debugElement.nativeElement).filter(
-            (node: Element, index: number) => {
-                return node.hasAttribute('initialIndex');
-            }
+        const nodeWithInitialIndexAttr = getNodes(fixture.debugElement.nativeElement).filter((node: Element) =>
+            node.hasAttribute('initialIndex')
         );
 
         expect(nodeWithInitialIndexAttr.length).toBe(0);
@@ -80,19 +78,19 @@ describe('TimelineComponent', () => {
 });
 
 describe('TimelineComponentWithTrackBy', () => {
-    let component: TimelineTestAppWithTrackBy;
-    let fixture: ComponentFixture<TimelineTestAppWithTrackBy>;
+    let component: TimelineTestWithTrackByComponent;
+    let fixture: ComponentFixture<TimelineTestWithTrackByComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [TimelineTestApp, TimelineTestAppWithTrackBy],
+            declarations: [TimelineTestComponent, TimelineTestWithTrackByComponent],
             imports: [TimelineModule],
             providers: [TimelinePositionControlService]
         }).compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TimelineTestAppWithTrackBy);
+        fixture = TestBed.createComponent(TimelineTestWithTrackByComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
@@ -112,10 +110,8 @@ describe('TimelineComponentWithTrackBy', () => {
         component.data = [{ title: 'Title #1' }, { title: 'Title #2' }, { title: 'Title #3' }];
         fixture.detectChanges();
 
-        const nodeWithInitialIndexAttr = getNodes(fixture.debugElement.nativeElement).filter(
-            (node: Element, index: number) => {
-                return node.hasAttribute('initialIndex');
-            }
+        const nodeWithInitialIndexAttr = getNodes(fixture.debugElement.nativeElement).filter((node: Element) =>
+            node.hasAttribute('initialIndex')
         );
 
         expect(nodeWithInitialIndexAttr.length).toBe(component.data.length);
@@ -133,7 +129,7 @@ describe('TimelineComponentWithTrackBy', () => {
         </div>
     `
 })
-class TimelineTestApp {
+class TimelineTestComponent {
     data = [{ title: 'Title #1' }, { title: 'Title #2' }, { title: 'Title #3' }];
 
     axis: TimelineAxis = 'vertical';
@@ -151,7 +147,7 @@ class TimelineTestApp {
         </div>
     `
 })
-class TimelineTestAppWithTrackBy extends TimelineTestApp {
+class TimelineTestWithTrackByComponent extends TimelineTestComponent {
     enableTrackBy = false;
 
     trackBy(index: number, item: any): string {

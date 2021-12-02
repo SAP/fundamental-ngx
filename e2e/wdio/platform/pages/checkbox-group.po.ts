@@ -34,7 +34,7 @@ export class CheckboxGroupPO extends BaseComponentPo {
         super.open(this.url);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

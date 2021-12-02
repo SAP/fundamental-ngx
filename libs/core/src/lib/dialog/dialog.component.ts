@@ -59,12 +59,14 @@ export class DialogComponent
     }
 
     /** DialogRef - should be used for Template based Dialog implementation */
+    // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('dialogRef')
     set embeddedDialogRef(value: DialogRef) {
         this._dialogRef = value;
     }
 
     /** DialogConfig - should be used for Template based Dialog implementation */
+    // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('dialogConfig')
     set embeddedDialogConfig(value: DialogConfig) {
         this.dialogConfig = value;

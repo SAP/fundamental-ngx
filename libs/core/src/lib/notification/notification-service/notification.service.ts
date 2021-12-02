@@ -46,7 +46,6 @@ export class NotificationService {
 
         // Pass Container reference to config
         notificationConfig.container = this.containerRef.location.nativeElement;
-        let notificationComponentRef: ComponentRef<NotificationComponent>;
 
         const injector = Injector.create({
             providers: [
@@ -57,7 +56,7 @@ export class NotificationService {
         });
 
         // Create Notification Component
-        notificationComponentRef = this._dynamicComponentService.createDynamicComponent(
+        const notificationComponentRef = this._dynamicComponentService.createDynamicComponent(
             content,
             NotificationComponent,
             notificationConfig,

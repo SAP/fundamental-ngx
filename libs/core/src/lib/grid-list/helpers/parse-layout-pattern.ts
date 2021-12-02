@@ -19,7 +19,7 @@ export function parseLayoutPattern(pattern: string, isBaseLayout = true): string
 function validateAndParseLayoutPattern(pattern: string, isBaseLayout: boolean): ParseLayout | undefined {
     const columnsNames = 'XL|L|M|S';
     const columnNumbers = isBaseLayout ? '12|6|4|3|2|1' : '12|11|10|9|8|7|6||4|3|2|1';
-    const reg = new RegExp(`(?!\-)((${columnsNames})(${columnNumbers}))`, 'gi');
+    const reg = new RegExp(`(?!-)((${columnsNames})(${columnNumbers}))`, 'gi');
     const match = pattern.match(reg);
     if (!match) {
         return;

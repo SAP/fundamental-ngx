@@ -18,7 +18,7 @@ import { PlatformFormGeneratorDocsComponent } from './platform-form-generator-do
 import { PlatformFormGeneratorExampleComponent } from './platform-form-generator-examples/platform-form-generator-example.component';
 import {
     PlatformFormGeneratorCustomComponentExampleComponent,
-    PlatformFormGeneratorCustomSliderElement
+    PlatformFormGeneratorCustomSliderElementComponent
 } from './platform-form-generator-examples/platform-form-generator-custom-component-example.component';
 import { PlatformFormGeneratorObservableExampleComponent } from './platform-form-generator-examples/platform-form-generator-observable-example.component';
 import { PlatformFormGeneratorProgramaticSubmitComponent } from './platform-form-generator-examples/platform-form-generator-programatic-submit.component';
@@ -54,7 +54,7 @@ const routes: Routes = [
         PlatformFormGeneratorHeaderComponent,
         PlatformFormGeneratorExampleComponent,
         PlatformFormGeneratorCustomComponentExampleComponent,
-        PlatformFormGeneratorCustomSliderElement,
+        PlatformFormGeneratorCustomSliderElementComponent,
         PlatformFormGeneratorObservableExampleComponent,
         PlatformFormGeneratorProgramaticSubmitComponent,
         PlatformFormGeneratorCustomErrorExampleComponent,

@@ -24,9 +24,11 @@ export class ApprovalFlowTeamListComponent {
     selectedTeamId: number;
 
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onTeamClick = new EventEmitter<ApprovalTeam>();
 
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onTeamRadioClick = new EventEmitter<ApprovalTeam>();
 
     /** @hidden */

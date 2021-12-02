@@ -243,7 +243,7 @@ export class DynamicPageHeaderInternalComponent implements OnInit, AfterViewInit
         }
     }
 
-    /**@hidden */
+    /** @hidden */
     ngOnDestroy(): void {
         this._toggleSubscription?.unsubscribe();
         this._expandSubscription?.unsubscribe();
@@ -414,17 +414,17 @@ export class DynamicPageHeaderInternalComponent implements OnInit, AfterViewInit
         this._pinUnpinAriaLabel = this._isPinned() ? this.unpinAriaLabel : this.pinAriaLabel;
     }
 
-    /**@hidden */
+    /** @hidden */
     private _setStyleToHostElement(attribute: string, value: any): void {
         this._renderer.setStyle(this._elementRef.nativeElement, attribute, value);
     }
 
-    /**@hidden */
+    /** @hidden */
     private _removeStyleFromHostElement(styleName: string): void {
         this._renderer.removeStyle(this._elementRef.nativeElement, styleName);
     }
 
-    /**@hidden */
+    /** @hidden */
     private _addClassNameToCustomElement(element: Element, className: string): void {
         addClassNameToElement(this._renderer, element, className);
     }

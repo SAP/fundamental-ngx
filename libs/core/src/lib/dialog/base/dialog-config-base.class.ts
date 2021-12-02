@@ -1,4 +1,4 @@
-/* tslint:disable:no-inferrable-types */
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 
 import { DynamicComponentConfig } from '@fundamental-ngx/core/utils';
 

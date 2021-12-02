@@ -141,19 +141,19 @@ export class TokenizerComponent
     private _contentDensitySubscription = new Subscription();
 
     /** @hidden */
-    /*Variable which will keep the index of the first token pressed in the tokenizer*/
+    /* Variable which will keep the index of the first token pressed in the tokenizer*/
     private _firstElementInSelection: number;
 
     /** @hidden */
-    /*Variable which will keep the index of the last token pressed in the tokenizer*/
+    /* Variable which will keep the index of the last token pressed in the tokenizer*/
     private _lastElementInSelection: number;
 
     /** @hidden */
-    /*Flag which will say if the last keyboard and click operation they used was using control*/
+    /* Flag which will say if the last keyboard and click operation they used was using control*/
     private _ctrlPrevious: boolean;
 
     /** @hidden */
-    /*Flag which will say if they held shift and clicked highlighting elements before or*/
+    /* Flag which will say if they held shift and clicked highlighting elements before or*/
     private _directionShiftIsRight: boolean;
 
     /** An RxJS Subject that will kill the data stream upon destruction (for unsubscribing)  */

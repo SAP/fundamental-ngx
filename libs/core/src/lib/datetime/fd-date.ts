@@ -86,7 +86,7 @@ export class FdDate {
      * @param minute 0 - 59
      * @param second 0 - 59
      */
-    // tslint:disable-next-line: unified-signatures
+    // eslint-disable-next-line @typescript-eslint/unified-signatures
     constructor(year: number, month?: number, day?: number, hour?: number, minute?: number, second?: number);
 
     constructor(...args: any[]) {

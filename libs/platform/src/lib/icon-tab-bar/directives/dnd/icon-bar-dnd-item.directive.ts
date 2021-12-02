@@ -113,7 +113,7 @@ export class IconBarDndItemDirective implements AfterViewInit, OnDestroy {
     /** @hidden */
     getElementCoordinates(): ElementChord {
         /** Takes distance from the beginning of window page */
-        const rect = <DOMRect>this.elementRef.nativeElement.getBoundingClientRect();
+        const rect: DOMRect = this.elementRef.nativeElement.getBoundingClientRect();
 
         /** Vertically distance is counted by distance from top of the side + half of the element height */
         return {

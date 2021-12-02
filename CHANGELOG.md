@@ -1,4 +1,64 @@
 
+## 0.33.0-rc.189 (2021-12-02)
+
+
+### Features
+
+* **core:** pagination layout & styles update ([#7233](https://github.com/SAP/fundamental-ngx/issues/7233)) ([e32ef97](https://github.com/SAP/fundamental-ngx/commit/e32ef970c6819a3b4134ca30ccff9f459281dab6))
+
+## 0.33.0-rc.188 (2021-12-02)
+
+
+### Bug Fixes
+
+* **core:** update layout when component initialized completely ([#7293](https://github.com/SAP/fundamental-ngx/issues/7293)) ([2ddd70a](https://github.com/SAP/fundamental-ngx/commit/2ddd70a73fa79a2609bbeccf1e56c477b7253ffe))
+
+## 0.33.0-rc.187 (2021-12-01)
+
+## 0.33.0-rc.186 (2021-12-01)
+
+## 0.33.0-rc.185 (2021-12-01)
+
+## 0.33.0-rc.184 (2021-12-01)
+
+## 0.33.0-rc.183 (2021-11-30)
+
+## 0.33.0-rc.182 (2021-11-30)
+
+## 0.33.0-rc.181 (2021-11-30)
+
+## 0.33.0-rc.180 (2021-11-30)
+
+
+### Bug Fixes
+
+* **core:** fix split-button accessibility ([#7239](https://github.com/SAP/fundamental-ngx/issues/7239)) ([272321b](https://github.com/SAP/fundamental-ngx/commit/272321b9d8a47fe3bb6137649cb7b603887d8816))
+
+## 0.33.0-rc.179 (2021-11-30)
+
+
+### Features
+
+* **core:** custom min width for fixed card layout ([#7251](https://github.com/SAP/fundamental-ngx/issues/7251)) ([c3299de](https://github.com/SAP/fundamental-ngx/commit/c3299de89efc4170a9e2b35dd3ab314b15f36144))
+
+## 0.33.0-rc.178 (2021-11-29)
+
+## 0.33.0-rc.177 (2021-11-29)
+
+
+### Bug Fixes
+
+* **platform:** adjust select content density configuration ([#7267](https://github.com/SAP/fundamental-ngx/issues/7267)) ([ce14ee6](https://github.com/SAP/fundamental-ngx/commit/ce14ee6a8cc2228122326b4cc64b0cc9e14fa0b2))
+
+## 0.33.0-rc.176 (2021-11-29)
+
+## 0.33.0-rc.175 (2021-11-26)
+
+
+### Bug Fixes
+
+* **core:** form message inverted popover event triggers ([#7222](https://github.com/SAP/fundamental-ngx/issues/7222)) ([c226339](https://github.com/SAP/fundamental-ngx/commit/c2263391423e0ac3c1bb0e41aa14d8559e18d700))
+
 ## 0.33.0-rc.174 (2021-11-25)
 
 

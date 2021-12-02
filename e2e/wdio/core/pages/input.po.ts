@@ -46,7 +46,7 @@ export class InputPo extends CoreBaseComponentPo {
         waitForPresent(this.defaultInput);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

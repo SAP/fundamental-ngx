@@ -206,7 +206,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
                 }),
                 take(1)
             )
-            .subscribe((event) => {
+            .subscribe(() => {
                 this.closeMenu();
             });
 
@@ -227,7 +227,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
             if (this._parentMenuCloseSubscription) {
                 this._parentMenuCloseSubscription.unsubscribe();
             }
-            this._parentMenuCloseSubscription = this._parentMenu.close.subscribe((method: MenuCloseMethod) => {
+            this._parentMenuCloseSubscription = this._parentMenu.close.subscribe(() => {
                 this.closeMenu();
             });
         }

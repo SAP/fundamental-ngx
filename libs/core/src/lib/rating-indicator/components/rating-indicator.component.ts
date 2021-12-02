@@ -191,9 +191,10 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
     }
 
     /** @hidden */
-    onChange: Function = () => {};
+    onChange: (value: number) => void = () => {};
+
     /** @hidden */
-    onTouched: Function = () => {};
+    onTouched = () => {};
 
     /** @hidden */
     ngOnInit(): void {
@@ -237,12 +238,12 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
     }
 
     /** @hidden */
-    registerOnChange(fn: Function): void {
+    registerOnChange(fn: (value: number) => void): void {
         this.onChange = fn;
     }
 
     /** @hidden */
-    registerOnTouched(fn: Function): void {
+    registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
     /** @hidden */

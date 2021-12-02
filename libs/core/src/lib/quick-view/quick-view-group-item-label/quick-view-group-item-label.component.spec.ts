@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { QuickViewModule } from '../quick-view.module';
-import { QuickViewGroupItemLabelComponent } from './quick-view-group-item-label.component';
 
 @Component({
     template: `<fd-quick-view-group-item-label> Group Item Label </fd-quick-view-group-item-label>`

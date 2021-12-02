@@ -20,13 +20,9 @@ export class ObjectNumberPo extends CoreBaseComponentPo {
     decimalObjExamples = 'fd-object-number-decimal-example ' + this.objectNumbers;
     truncationObjExample = 'fd-object-number-truncation-example' + this.objectNumbers;
 
-    objectNumberText = (exampleBlock: string) => {
-        return exampleBlock + ' ' + this.objText;
-    };
+    objectNumberText = (exampleBlock: string) => exampleBlock + ' ' + this.objText;
 
-    objectNumberUnit = (exampleBlock: string) => {
-        return exampleBlock + ' ' + this.objUnit;
-    };
+    objectNumberUnit = (exampleBlock: string) => exampleBlock + ' ' + this.objUnit;
 
     open(): void {
         super.open(this.url);
@@ -34,7 +30,7 @@ export class ObjectNumberPo extends CoreBaseComponentPo {
         waitForPresent(this.pageHeader);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

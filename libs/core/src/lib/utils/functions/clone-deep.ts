@@ -5,7 +5,7 @@ export function cloneDeep(value: any): any {
 
     const newObj = Array.isArray(value) ? [] : {};
     for (const key in value) {
-        if (value.hasOwnProperty(key)) {
+        if (Object.prototype.hasOwnProperty.call(value, key)) {
             const buffer = value[key];
             newObj[key] = buffer !== null && typeof buffer === 'object' ? cloneDeep(buffer) : buffer;
         }

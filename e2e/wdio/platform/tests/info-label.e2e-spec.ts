@@ -36,8 +36,7 @@ describe('Info Label component test suite', () => {
         labelsWithTextAndIconArr,
         labelsIconArr,
         labelsWithNumberOrIconArr,
-        accessibilityLabelsArr,
-        accessibilityAttrArr
+        accessibilityLabelsArr
     } = new InfoLabelPO();
     const infoLabelPage = new InfoLabelPO();
 
@@ -122,8 +121,6 @@ describe('Info Label component test suite', () => {
     });
 
     it('should check info label with aria label for accessibility', () => {
-        const ariaAttrArr = elementArray(accessibilityAttrArr);
-
         if (browserIsSafari()) {
             expect(getElementAriaLabel(accessibilityLabelsArr)).not.toBe(null);
             expect(getAttributeByName(accessibilityLabelsArr, ariaLabelledByAttribute, 1)).not.toBe(null);

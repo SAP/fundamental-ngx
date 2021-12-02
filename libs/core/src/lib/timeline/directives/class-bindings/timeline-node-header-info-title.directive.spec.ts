@@ -1,4 +1,3 @@
-import { TimelineNodeHeaderInfoTitleDirective } from './timeline-node-header-info-title.directive';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TimelineModule } from '@fundamental-ngx/core';
 import { Component, ElementRef, ViewChild } from '@angular/core';

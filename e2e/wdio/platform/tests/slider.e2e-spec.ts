@@ -15,7 +15,7 @@ import {
     sendKeys,
     waitForElDisplayed
 } from '../../driver/wdio';
-import { densityAttribute, disabledAttribute } from '../fixtures/appData/slider-content';
+import { densityAttribute } from '../fixtures/appData/slider-content';
 
 describe('slider test suite', () => {
     const sliderPage = new SliderPo();
@@ -25,7 +25,6 @@ describe('slider test suite', () => {
         valueLabels,
         tooltipExamples,
         sliderTooltip,
-        ticksAndLabelsExamples,
         sliderAttr,
         sliderLabels,
         customExamples,
@@ -199,8 +198,9 @@ describe('slider test suite', () => {
             clearValue(sliderInput, 2);
             click(sliderInput, 2);
             sendKeys('20');
-            // tslint:disable:radix
+            // eslint-disable-next-line radix
             const firstLabelValue = parseInt(getText(firstSliderLabel));
+            // eslint-disable-next-line radix
             const secondLabelValue = parseInt(getText(secondSliderLabel));
 
             expect(secondLabelValue - firstLabelValue).toEqual(20);

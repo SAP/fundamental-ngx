@@ -228,7 +228,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
     }
 
     /** @hidden */
-    onChange = (time: D) => {};
+    onChange: (value: D) => void = () => {};
 
     /** @hidden */
     onTouched = () => {};
@@ -444,36 +444,30 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
     private _constructHourViewItems(): void {
         this.hourViewItems = this._dateTimeAdapter
             .getHourNames({ meridian: this.meridian, twoDigit: this.keepTwoDigits })
-            .map((name, hour) => {
-                return {
-                    value: hour,
-                    label: name
-                };
-            });
+            .map((name, hour) => ({
+                value: hour,
+                label: name
+            }));
     }
 
     /** @hidden */
     private _constructMinuteViewItems(): void {
         this.minuteViewItems = this._dateTimeAdapter
             .getMinuteNames({ twoDigit: this.keepTwoDigits })
-            .map((name, minute) => {
-                return {
-                    value: minute,
-                    label: name
-                };
-            });
+            .map((name, minute) => ({
+                value: minute,
+                label: name
+            }));
     }
 
     /** @hidden */
     private _constructSecondViewItems(): void {
         this.secondViewItems = this._dateTimeAdapter
             .getSecondNames({ twoDigit: this.keepTwoDigits })
-            .map((name, second) => {
-                return {
-                    value: second,
-                    label: name
-                };
-            });
+            .map((name, second) => ({
+                value: second,
+                label: name
+            }));
     }
 
     /** @hidden */

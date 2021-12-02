@@ -150,7 +150,7 @@ class TestMenuButtonComponent {
 
     constructor() {}
 
-    clicked(event: any): void {
+    clicked(): void {
         this.menuButtonClicked = true;
     }
 
@@ -190,7 +190,7 @@ describe('Menu Button click on Item select', () => {
 
     it('clicked function should be called', () => {
         spyOn(host, 'clicked');
-        host.clicked({});
+        host.clicked();
         expect(host.clicked).toHaveBeenCalled();
     });
 

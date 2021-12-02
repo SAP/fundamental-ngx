@@ -38,7 +38,7 @@ describe('Date picker suite', () => {
     const {
         inputDatePicker,
         buttonDatePicker,
-        /*buttonDatePicker, inputDatePicker, */ calendarExpanded,
+        calendarExpanded,
         calendarYearsSection,
         currentDay,
         buttonGerman,

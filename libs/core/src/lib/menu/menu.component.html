@@ -8,12 +8,13 @@
         [id]="id"
         [attr.aria-labelledby]="ariaLabelledby"
         [attr.aria-label]="ariaLabel"
+        role="menu"
         [ngClass]="{
             'fd-menu--compact': compact,
             'fd-menu--mobile': mobile
         }"
     >
-        <ul class="fd-menu__list" [class.fd-menu__list--no-shadow]="mobile">
+        <ul role="none" class="fd-menu__list" [class.fd-menu__list--no-shadow]="mobile">
             <ng-content></ng-content>
         </ul>
     </nav>

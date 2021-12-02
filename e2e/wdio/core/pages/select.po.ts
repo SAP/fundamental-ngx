@@ -24,7 +24,7 @@ export class SelectPo extends CoreBaseComponentPo {
         waitForElDisplayed(this.selectModesExample);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

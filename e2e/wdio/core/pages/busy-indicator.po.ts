@@ -24,7 +24,7 @@ export class BusyIndicatorPo extends CoreBaseComponentPo {
     indicatorBlockWrapper = 'fd-busy-indicator-wrapper-example  fd-busy-indicator:nth-child(2)';
     messageToast = '.fd-message-toast-container ';
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

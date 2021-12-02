@@ -25,7 +25,7 @@ export class InfoLabelComponent {
     @Input()
     label: string;
 
-    /**define the colour of the info label starting form 1 to 10 */
+    /** define the colour of the info label starting form 1 to 10 */
     @Input()
     color: string;
 

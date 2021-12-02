@@ -46,20 +46,20 @@ export class InputGroupAddonBodyComponent implements OnInit {
     /** @hidden */
     private _contentDensity: ContentDensity;
 
-    /**@hidden */
+    /** @hidden */
     constructor(private _elementRef: ElementRef<HTMLElement>, private _renderer: Renderer2) {}
 
-    /**@hidden */
+    /** @hidden */
     ngOnInit(): void {
         this._addClassNameToHostElement(CSS_CLASS_NAME.addon);
     }
 
-    /**@hidden */
+    /** @hidden */
     private _addClassNameToHostElement(className: string): void {
         this._renderer.addClass(this._elementRef.nativeElement, className);
     }
 
-    /**@hidden */
+    /** @hidden */
     private _removeClassNameFromHostElement(className: string): void {
         this._renderer.removeClass(this._elementRef.nativeElement, className);
     }

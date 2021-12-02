@@ -4,13 +4,11 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 export class PaginationPo extends CoreBaseComponentPo {
     private url = '/pagination';
 
-    root = '#page-content';
-
     standardButton = 'fd-pagination-example .fd-button--standard';
     basicPaginationPages = 'fd-pagination-example .fd-pagination__link.ng-star-inserted';
     basicPaginationDiv = '.fd-button--standard~div.ng-star-inserted';
-    linkNext = 'a.fd-pagination__link--next';
-    linkPrevious = 'a.fd-pagination__link--previous';
+    linkNext = '[glyph="navigation-right-arrow"]';
+    linkPrevious = '[glyph="navigation-left-arrow"]';
     itemPaginationPages = '#background-ex1 .fd-pagination__link.ng-star-inserted';
     totalPagination = '.fd-pagination__total';
     dropdownButton = '.fd-select__button';
@@ -24,7 +22,7 @@ export class PaginationPo extends CoreBaseComponentPo {
     playgroundExamples = '.fd-playground__content .fd-pagination';
     page = '.fd-pagination-direction-override-display .fd-pagination__link';
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

@@ -15,10 +15,10 @@ export class MenuKeyboardService {
     disableKeydownHandling = false;
 
     /** Function that is supposed to be called, when focus escape before list */
-    focusEscapeBeforeList: Function;
+    focusEscapeBeforeList: () => void;
 
     /** Function that is supposed to be called, when focus escape after list */
-    focusEscapeAfterList: Function;
+    focusEscapeAfterList: () => void;
 
     /** Function that should be called every time, keydown event is used on some menu item,
      * it provides whole functionality for handling

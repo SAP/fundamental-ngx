@@ -27,9 +27,8 @@ export class ComboboxConfig {
      * Create Provider factory function
      */
     static createProviderFactory(obj: Partial<ComboboxConfig>): (platformConfig: PlatformConfig) => ComboboxConfig {
-        const useFactory = (platformConfig: PlatformConfig): ComboboxConfig => {
-            return Object.assign(new ComboboxConfig(platformConfig), obj);
-        };
+        const useFactory = (platformConfig: PlatformConfig): ComboboxConfig =>
+            Object.assign(new ComboboxConfig(platformConfig), obj);
         return useFactory;
     }
 

@@ -1,15 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
-import { Validators } from '@angular/forms';
 
 import { DynamicFormItem, DynamicFormValue, FormGeneratorComponent } from '@fundamental-ngx/platform/form';
 
-export const dummyAwaitablePromise = (timeout = 200) => {
-    return new Promise<boolean>((resolve) => {
+export const dummyAwaitablePromise = (timeout = 200) =>
+    new Promise<boolean>((resolve) => {
         setTimeout(() => {
             resolve(true);
         }, timeout);
     });
-};
 
 @Component({
     selector: 'fdp-platform-form-generator-no-colons-example',

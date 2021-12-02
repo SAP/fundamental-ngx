@@ -43,11 +43,9 @@ export class CalendarRangeExampleComponent {
         return day === 1;
     };
 
-    myDisableStartFunction = (date: FdDate): boolean => {
-        return this.datetimeAdapter.compareDate(date, new FdDate(2019, 10, 10)) > 0;
-    };
+    myDisableStartFunction = (date: FdDate): boolean =>
+        this.datetimeAdapter.compareDate(date, new FdDate(2019, 10, 10)) > 0;
 
-    myDisableEndFunction = (date: FdDate): boolean => {
-        return this.datetimeAdapter.compareDate(date, new FdDate(2019, 10, 20)) < 0;
-    };
+    myDisableEndFunction = (date: FdDate): boolean =>
+        this.datetimeAdapter.compareDate(date, new FdDate(2019, 10, 20)) < 0;
 }

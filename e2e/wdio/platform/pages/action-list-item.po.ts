@@ -15,7 +15,7 @@ export class ActionListItemPo extends BaseComponentPo {
         waitForPresent(this.actionBtns);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

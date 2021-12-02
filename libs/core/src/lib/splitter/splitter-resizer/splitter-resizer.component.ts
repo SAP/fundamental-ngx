@@ -50,6 +50,7 @@ export class SplitterResizerComponent implements OnDestroy {
 
     /** Event emitted while resizing. */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-native
     resize = new EventEmitter<number>();
 
     /** @hidden */

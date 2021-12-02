@@ -105,9 +105,7 @@ describe('NumberStepInputComponent main functionality', () => {
     let fixture: ComponentFixture<NumberStepInputMainFunctionalityHostComponent>;
     let stepInputComponent: NumberStepInputComponent;
 
-    const getInputDebugElement = () => {
-        return fixture.debugElement.query(By.css('.fd-step-input__input'));
-    };
+    const getInputDebugElement = () => fixture.debugElement.query(By.css('.fd-step-input__input'));
 
     beforeEach(
         waitForAsync(() => {
@@ -164,9 +162,7 @@ describe('NumberStepInputComponent main functionality', () => {
     });
 
     it('should use stepFn if provided to calculate increase step value', () => {
-        component.stepFn = (value: number, action: 'increase' | 'decrease'): number => {
-            return action === 'decrease' ? -1 : 1;
-        };
+        component.stepFn = (value: number, action: 'increase' | 'decrease'): number => (action === 'decrease' ? -1 : 1);
         const stepFnSpy = spyOn(component, 'stepFn').and.returnValue(10);
         component.value = 30;
         fixture.detectChanges();
@@ -180,9 +176,7 @@ describe('NumberStepInputComponent main functionality', () => {
     });
 
     it('should use stepFn if provided to calculate decrease step value', () => {
-        component.stepFn = (value: number, action: 'increase' | 'decrease'): number => {
-            return action === 'decrease' ? -1 : 1;
-        };
+        component.stepFn = (value: number, action: 'increase' | 'decrease'): number => (action === 'decrease' ? -1 : 1);
         const stepFnSpy = spyOn(component, 'stepFn').and.returnValue(10);
         component.value = 30;
         fixture.detectChanges();

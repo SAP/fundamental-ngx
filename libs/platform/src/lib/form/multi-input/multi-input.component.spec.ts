@@ -38,7 +38,7 @@ import { PlatformMultiInputModule } from './multi-input.module';
         </fdp-form-group>
     `
 })
-class PlatformMulitiInputTest {
+class PlatformMulitiInputTestComponent {
     @ViewChild(PlatformMultiInputComponent)
     platformMultiInputComponent: PlatformMultiInputComponent;
 
@@ -47,13 +47,12 @@ class PlatformMulitiInputTest {
 }
 
 describe('PlatformMultiInputComponent', () => {
-    let component: PlatformMulitiInputTest;
-    let fixture: ComponentFixture<PlatformMulitiInputTest>;
-    let multiInput: PlatformMultiInputComponent;
+    let component: PlatformMulitiInputTestComponent;
+    let fixture: ComponentFixture<PlatformMulitiInputTestComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [PlatformMulitiInputTest],
+            declarations: [PlatformMulitiInputTestComponent],
             imports: [
                 PlatformMultiInputModule,
                 ReactiveFormsModule,
@@ -66,16 +65,10 @@ describe('PlatformMultiInputComponent', () => {
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(PlatformMulitiInputTest);
+        fixture = TestBed.createComponent(PlatformMulitiInputTestComponent);
         component = fixture.componentInstance;
-        multiInput = component.platformMultiInputComponent;
         fixture.detectChanges();
     });
-
-    async function wait(componentFixture: ComponentFixture<any>): Promise<void> {
-        componentFixture.detectChanges();
-        await componentFixture.whenStable();
-    }
 
     it('should create', () => {
         expect(component).toBeTruthy();

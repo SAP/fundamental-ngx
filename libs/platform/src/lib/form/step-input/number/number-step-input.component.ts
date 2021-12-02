@@ -66,14 +66,14 @@ export class NumberStepInputComponent extends StepInputComponent {
         super(cd, ngControl, ngForm, formField, formControl, config, renderer, rtlService);
     }
 
-    /**@hidden
+    /** @hidden
      * Create change event instance
      */
     createChangeEvent(value: number): NumberStepInputChangeEvent {
         return new NumberStepInputChangeEvent(this, value);
     }
 
-    /**@hidden
+    /** @hidden
      * Format value taking into account LOCALE_ID
      */
     formatValue(value: number | null): string {
@@ -82,7 +82,7 @@ export class NumberStepInputComponent extends StepInputComponent {
         return formatNumber(value || 0, this.localeId, digitsInfo);
     }
 
-    /**@hidden
+    /** @hidden
      * In order to avoid issues trying to parse formatted number
      * (potentially specific for each local)
      * we have to simplify number format once it's in focus mode.
@@ -97,7 +97,7 @@ export class NumberStepInputComponent extends StepInputComponent {
         return value.toString(10);
     }
 
-    /**@hidden
+    /** @hidden
      * Used to parse entered value
      */
     parseValueInFocusMode(value: string | null): number | null {

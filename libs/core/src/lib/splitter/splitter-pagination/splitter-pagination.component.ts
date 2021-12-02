@@ -22,6 +22,7 @@ export class SplitterPaginationComponent {
 
     /** Event emitted on page change. */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onPageChange = new EventEmitter<string>();
 
     /** @hidden */

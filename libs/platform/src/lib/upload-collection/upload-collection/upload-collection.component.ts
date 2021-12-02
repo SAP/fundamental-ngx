@@ -296,7 +296,7 @@ export class UploadCollectionComponent {
         this._message = generateMessageStripeData(type, options);
     }
 
-    /**@hidden
+    /** @hidden
      * Opens the file selector.
      */
     _fileNameChange(e: FocusEvent, currentItem: UploadCollectionItem): void {
@@ -930,23 +930,21 @@ export class UploadCollectionComponent {
 
     /** @hidden */
     private _generateTemporaryNewFiles(files: File[]): UploadCollectionFile[] {
-        return files.map((file) => {
-            return {
-                documentId: uuidv4(),
-                type: 'file',
-                name: file.name,
-                uploadedBy: {
-                    id: uuidv4(),
-                    name: `You`
-                },
-                uploadedOn: new Date(),
-                fileSize: file.size,
-                version: 1,
-                url: '',
-                status: UploadCollectionItemStatus.LOADING,
-                file: file
-            };
-        });
+        return files.map((file) => ({
+            documentId: uuidv4(),
+            type: 'file',
+            name: file.name,
+            uploadedBy: {
+                id: uuidv4(),
+                name: `You`
+            },
+            uploadedOn: new Date(),
+            fileSize: file.size,
+            version: 1,
+            url: '',
+            status: UploadCollectionItemStatus.LOADING,
+            file: file
+        }));
     }
 
     /** @hidden */

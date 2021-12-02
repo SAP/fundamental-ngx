@@ -30,7 +30,6 @@ class TestObjectIdentifierComponent {
 }
 
 describe('ObjectIdentifierComponent', () => {
-    let objectIdentifierElementRef: ElementRef;
     let testComponent: TestObjectIdentifierComponent;
     let fixture: ComponentFixture<TestObjectIdentifierComponent>;
 
@@ -46,7 +45,6 @@ describe('ObjectIdentifierComponent', () => {
         fixture = TestBed.createComponent(TestObjectIdentifierComponent);
         testComponent = fixture.componentInstance;
         fixture.detectChanges();
-        objectIdentifierElementRef = fixture.componentInstance.objectIdentifierElementRef;
     });
 
     it('Should create', () => {

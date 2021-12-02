@@ -2,7 +2,7 @@ import { Directive, HostBinding, Input } from '@angular/core';
 
 /** Needed to bind specific class to group type popover control. */
 @Directive({
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-avatar-group-popover-control]',
     host: { class: 'fd-avatar-group__popover-control' }
 })

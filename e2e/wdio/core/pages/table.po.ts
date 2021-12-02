@@ -14,7 +14,7 @@ export class TablePo extends CoreBaseComponentPo {
     tableNavigatableRowExample = 'fd-table-navigatable-row-example';
     tablePaginationExample = 'fd-table-pagination-example';
 
-    link = ' a';
+    link = ' a:not(.fd-button)';
     busyIndicator = '.fd-busy-indicator';
     inputField = ' input';
     button = ' button';
@@ -29,8 +29,8 @@ export class TablePo extends CoreBaseComponentPo {
     menuItem = '.fd-menu__item';
     paginationLink = '.fd-pagination__link.ng-star-inserted';
     tableResult = '.fd-pagination__total';
-    linkPrevious = '.fd-pagination__link--previous';
-    linkNext = '.fd-pagination__link--next';
+    linkPrevious = '[glyph="navigation-left-arrow"]';
+    linkNext = '[glyph="navigation-right-arrow"]';
     inputGroup = ' .fd-input-group__input';
     dialogValue = '.fd-list__item.ng-star-inserted .fd-list__title';
     tableInner = '.fd-table__inner';
@@ -44,7 +44,7 @@ export class TablePo extends CoreBaseComponentPo {
         waitForPresent(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

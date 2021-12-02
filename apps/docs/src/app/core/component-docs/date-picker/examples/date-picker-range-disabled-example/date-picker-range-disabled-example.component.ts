@@ -36,19 +36,13 @@ export class DatePickerRangeDisabledExampleComponent {
         return this.customForm.get('dates').valid;
     }
 
-    disabledEndFunction = (fdDate: FdDate): boolean => {
-        return (
-            this.datetimeAdapter.compareDate(FdDate.getToday(), fdDate) > 0 ||
-            this.datetimeAdapter.compareDate(fdDate, this._getFutureDate(FdDate.getToday())) > 0
-        );
-    };
+    disabledEndFunction = (fdDate: FdDate): boolean =>
+        this.datetimeAdapter.compareDate(FdDate.getToday(), fdDate) > 0 ||
+        this.datetimeAdapter.compareDate(fdDate, this._getFutureDate(FdDate.getToday())) > 0;
 
-    disabledStartFunction = (fdDate: FdDate): boolean => {
-        return (
-            this.datetimeAdapter.compareDate(FdDate.getToday(), fdDate) > 0 ||
-            this.datetimeAdapter.compareDate(fdDate, this._getFutureDate(FdDate.getToday())) > 0
-        );
-    };
+    disabledStartFunction = (fdDate: FdDate): boolean =>
+        this.datetimeAdapter.compareDate(FdDate.getToday(), fdDate) > 0 ||
+        this.datetimeAdapter.compareDate(fdDate, this._getFutureDate(FdDate.getToday())) > 0;
 
     /** Get date for next 14 days. */
     private _getFutureDate(fdDate: FdDate): FdDate {

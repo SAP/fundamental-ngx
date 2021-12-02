@@ -17,7 +17,6 @@ export function getPackageVersionFromPackageJson(tree: Tree, name: string): stri
         return null;
     }
 
-    // tslint:disable-next-line:no-non-null-assertion
     const packageJson = JSON.parse(tree.read('package.json')!.toString('utf-8'));
 
     if (packageJson.dependencies && packageJson.dependencies[name]) {
@@ -33,7 +32,6 @@ export function hasPackage(tree: Tree, name: string): boolean | null {
         return null;
     }
 
-    // tslint:disable-next-line:no-non-null-assertion
     const packageJson = JSON.parse(tree.read('package.json')!.toString('utf-8'));
 
     return packageJson.dependencies && packageJson.dependencies[name];
@@ -50,11 +48,8 @@ export async function getSourceTreePath(host: Tree, options: any): Promise<strin
 export async function getDistPath(host: Tree, options: any): Promise<string> {
     const project = await getWorkspaceProject(host, options);
     const value = project.targets;
-    // tslint:disable-next-line:no-non-null-assertion
     const optionsRecord = value.get('build')!.options;
-    // tslint:disable-next-line: no-non-null-assertion
     const outputDistPath = optionsRecord!['outputPath'];
-    // tslint:disable-next-line: no-non-null-assertion
     const outputPath = outputDistPath!.toString();
     return outputPath;
 }

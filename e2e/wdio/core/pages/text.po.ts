@@ -15,7 +15,7 @@ export class TextPo extends CoreBaseComponentPo {
         waitForPresent(this.contentPage);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

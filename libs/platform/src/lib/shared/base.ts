@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Directive, InjectFlags, Input, OnDestroy, OnInit } from '@angular/core';
-// tslint:disable-next-line:nx-enforce-module-boundaries
+// eslint-disable-next-line
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 

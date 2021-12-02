@@ -94,7 +94,7 @@ xdescribe('DynamicPageComponent default values', () => {
     it('should apply valid height on content', () => {
         const size = '150px';
         fixture.detectChanges();
-        (<any>dynamicPageComponent)._getCalculatedFullHeight = (_element: HTMLElement): string => size;
+        (<any>dynamicPageComponent)._getCalculatedFullHeight = (): string => size;
         (<any>dynamicPageComponent)._setContainerPositions();
         fixture.detectChanges();
 
@@ -107,7 +107,7 @@ xdescribe('DynamicPageComponent default values', () => {
         component.tabs = true;
         fixture.detectChanges();
         const size = '150px';
-        (<any>dynamicPageComponent)._getCalculatedFullHeight = (_element: HTMLElement): string => size;
+        (<any>dynamicPageComponent)._getCalculatedFullHeight = (): string => size;
         (<any>dynamicPageComponent)._setTabsPosition();
         fixture.detectChanges();
 

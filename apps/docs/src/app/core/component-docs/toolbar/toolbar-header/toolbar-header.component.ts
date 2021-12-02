@@ -1,12 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'fd-toolbar-header',
     templateUrl: './toolbar-header.component.html',
     styleUrls: ['./toolbar-header.component.scss']
 })
-export class ToolbarHeaderComponent implements OnInit {
-    constructor() {}
-
-    ngOnInit(): void {}
-}
+export class ToolbarHeaderComponent {}

@@ -49,6 +49,7 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
 
     /** Event emitted after container's panes has resized. */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-native
     readonly resize = new EventEmitter<SplitterPaneResizeEvent[]>();
 
     /** @hidden */

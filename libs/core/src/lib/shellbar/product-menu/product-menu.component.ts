@@ -74,7 +74,7 @@ export class ProductMenuComponent {
     menu: MenuComponent;
 
     /** @hidden */
-    itemClicked(item: any, event: any): void {
+    itemClicked(item: any, event: MouseEvent): void {
         if (this.closePopoverOnSelect) {
             this.menu.close();
         }
