@@ -61,12 +61,15 @@ describe('Pagination test suite:', () => {
         it('should check selected pages by clicking each option', () => {
             scrollIntoView(standardButton);
             click(standardButton);
+            // pause for the new text to load
+            pause(250);
+            expect(getText(basicPaginationDiv)).toBe(basicPaginationTestArr[0]);
             const linksLength = getElementArrayLength(basicPaginationPages);
             for (let i = 0; i < linksLength; i++) {
                 click(basicPaginationPages, i);
                 // pause for the new text to load
                 pause(250);
-                expect(getText(basicPaginationDiv)).toBe(basicPaginationTestArr[i]);
+                expect(getText(basicPaginationDiv)).toBe(basicPaginationTestArr[i + 1]);
             }
         });
 
@@ -90,10 +93,11 @@ describe('Pagination test suite:', () => {
     describe('Check Pagination showing items example', () => {
         it('should check selected pages by clicking each option', () => {
             scrollIntoView(itemPaginationPages);
+            expect(getText(totalPagination).trim()).toBe(itemPaginationTestArr[0]);
             const linksLength = getElementArrayLength(itemPaginationPages);
             for (let i = 0; i < linksLength; i++) {
                 click(itemPaginationPages, i);
-                expect(getText(totalPagination).trim()).toBe(itemPaginationTestArr[i]);
+                expect(getText(totalPagination).trim()).toBe(itemPaginationTestArr[i + 1]);
             }
         });
 
@@ -107,7 +111,7 @@ describe('Pagination test suite:', () => {
         });
     });
 
-    describe('Check Pagination with per page select example', () => {
+    xdescribe('Check Pagination with per page select example', () => {
         it('should check default property for items per page by clicking each page', () => {
             scrollIntoView(selectPaginationPages);
             const linksLength = getElementArrayLength(selectPaginationPages);
@@ -248,7 +252,7 @@ describe('Pagination test suite:', () => {
         });
     });
 
-    describe('Check Playground example', () => {
+    xdescribe('Check Playground example', () => {
         it('should check that pages displayed correctly if total items more then 1', () => {
             scrollIntoView(playgroundInputFields);
             setValue(playgroundInputFields, '10');

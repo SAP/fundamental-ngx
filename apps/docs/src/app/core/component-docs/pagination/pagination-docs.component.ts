@@ -6,8 +6,11 @@ import * as paginationSrc from '!raw-loader!./examples/pagination-example.compon
 
 import * as paginationShowingSrc from '!raw-loader!./examples/pagination-showing-example.component.ts';
 
-import * as paginationPerPageHtml from '!raw-loader!./examples/pagination-per-page-example.component.html';
-import * as paginationPerPageTs from '!raw-loader!./examples/pagination-per-page-example.component.ts';
+import * as paginationPerPageHtml from '!raw-loader!./examples/pagination-per-page/pagination-per-page-example.component.html';
+import * as paginationPerPageTs from '!raw-loader!./examples/pagination-per-page/pagination-per-page-example.component.ts';
+
+import * as paginationMobileHtml from '!raw-loader!./examples/pagination-mobile/pagination-mobile-example.component.html';
+import * as paginationMobileTs from '!raw-loader!./examples/pagination-mobile/pagination-mobile-example.component.ts';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
@@ -30,8 +33,8 @@ export class PaginationDocsComponent {
                     currentPage: {
                         type: 'integer'
                     },
-                    displayText: {
-                        type: 'string'
+                    mobile: {
+                        type: 'boolean'
                     }
                 }
             }
@@ -46,7 +49,7 @@ export class PaginationDocsComponent {
             totalItems: 70,
             itemsPerPage: 2,
             currentPage: 5,
-            displayText: 'items'
+            mobile: false
         }
     };
 
@@ -67,6 +70,7 @@ export class PaginationDocsComponent {
             component: 'PaginationShowingExampleComponent'
         }
     ];
+
     paginationPerPageSrc: ExampleFile[] = [
         {
             language: 'html',
@@ -78,6 +82,20 @@ export class PaginationDocsComponent {
             code: paginationPerPageTs,
             fileName: 'pagination-per-page-example',
             component: 'PaginationPerPageExampleComponent'
+        }
+    ];
+
+    paginationMobile: ExampleFile[] = [
+        {
+            language: 'html',
+            code: paginationMobileHtml,
+            fileName: 'pagination-mobile-example'
+        },
+        {
+            language: 'typescript',
+            code: paginationMobileTs,
+            fileName: 'pagination-mobile-example',
+            component: 'PaginationMobileExampleComponent'
         }
     ];
 
