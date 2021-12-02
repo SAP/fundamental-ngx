@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.191 (2021-12-02)
+
+
+### Features
+
+* **core:** implement progress indicator ([#7223](https://github.com/SAP/fundamental-ngx/issues/7223)) ([961a34c](https://github.com/SAP/fundamental-ngx/commit/961a34c85438109714e71e3bcef11f00534d9fe8))
+
 ## 0.33.0-rc.190 (2021-12-02)
 
 ## 0.33.0-rc.189 (2021-12-02)
