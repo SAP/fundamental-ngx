@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.188 (2021-12-02)
+
+
+### Bug Fixes
+
+* **core:** update layout when component initialized completely ([#7293](https://github.com/SAP/fundamental-ngx/issues/7293)) ([2ddd70a](https://github.com/SAP/fundamental-ngx/commit/2ddd70a73fa79a2609bbeccf1e56c477b7253ffe))
+
 ## 0.33.0-rc.187 (2021-12-01)
 
 ## 0.33.0-rc.186 (2021-12-01)
