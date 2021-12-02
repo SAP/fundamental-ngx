@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.192 (2021-12-02)
+
+
+### Bug Fixes
+
+* **core:** fix progress indicator linter ([#7305](https://github.com/SAP/fundamental-ngx/issues/7305)) ([ba1a44c](https://github.com/SAP/fundamental-ngx/commit/ba1a44ceab18ce9c02b4c3c2d47f3771d395531f))
+
 ## 0.33.0-rc.191 (2021-12-02)
 
 
