@@ -92,6 +92,7 @@
                 "core-slider",
                 "core-split-button",
                 "core-status-indicator",
+                "core-progress-indicator",
                 "core-step-input",
                 "core-switch",
                 "core-table",
@@ -364,6 +365,10 @@
         "core-product-switch": {
             "tags": ["fd"],
             "implicitDependencies": ["core-utils", "core-menu", "core-popover"]
+        },
+        "core-progress-indicator": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
         },
         "core-quick-view": {
             "tags": ["fd"],
