@@ -11,13 +11,14 @@ import {
     OnInit,
     OnDestroy
 } from '@angular/core';
-import { fromEvent, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { resizeObservable } from '@fundamental-ngx/core/utils';
 
 export type ProgressIndicatorState = 'informative' | 'positive' | 'critical' | 'negative';
 
 @Component({
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'fd-progress-indicator',
     templateUrl: './progress-indicator.component.html',
     styleUrls: ['./progress-indicator.component.scss'],
