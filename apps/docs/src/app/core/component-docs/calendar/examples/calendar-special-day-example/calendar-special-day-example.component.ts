@@ -51,12 +51,9 @@ export class CalendarSpecialDayExampleComponent {
         }
         if (this.markNextWeek) {
             this.specialDays.push({
-                rule: (fdDate) => {
-                    return (
-                        this.datetimeAdapter.compareDate(fdDate, this.datetimeAdapter.today()) > 0 &&
-                        this.datetimeAdapter.compareDate(fdDate, this._getFutureDate(this.datetimeAdapter.today())) <= 0
-                    );
-                },
+                rule: (fdDate) =>
+                    this.datetimeAdapter.compareDate(fdDate, this.datetimeAdapter.today()) > 0 &&
+                    this.datetimeAdapter.compareDate(fdDate, this._getFutureDate(this.datetimeAdapter.today())) <= 0,
                 specialDayNumber: 10
             });
         }

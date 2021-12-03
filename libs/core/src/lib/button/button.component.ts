@@ -28,7 +28,7 @@ import { applyCssClass } from '@fundamental-ngx/core/utils';
  * ```
  */
 @Component({
-    // tslint:disable-next-line:component-selector
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'button[fd-button], a[fd-button]',
     exportAs: 'fd-button',
     templateUrl: './button.component.html',
@@ -38,8 +38,7 @@ import { applyCssClass } from '@fundamental-ngx/core/utils';
     host: {
         '[attr.type]': 'type',
         '[attr.disabled]': '_disabled || null',
-        '[attr.aria-label]':
-            'ariaLabel ? ariaLabel : specialButtonType.includes(fdType) ? label != null ?  label +" ,"+ fdType : glyph != undefined || glyph != null ? fdType +","+ glyph.split("-").join(" ")  : title : title'
+        '[attr.aria-label]': 'buttonArialabel'
     }
 })
 export class ButtonComponent extends BaseButton implements OnChanges, CssClassBuilder, OnInit, OnDestroy {
@@ -50,8 +49,24 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
     /** @hidden */
     specialButtonType: Array<string> = ['emphasized', 'positive', 'negative', 'attention'];
 
-    /** @hidden */
-    buttonArialabel: string;
+    /**
+     * Calculate aria-label attribute
+     * @hidden
+     */
+    get buttonArialabel(): string {
+        if (this.ariaLabel) {
+            return this.ariaLabel;
+        }
+        if (this.specialButtonType.includes(this.fdType)) {
+            if (this.label != null) {
+                return this.label + ', ' + this.fdType;
+            }
+            if (this.glyph != null) {
+                return this.fdType + ', ' + this.glyph.split('-').join(' ');
+            }
+        }
+        return null;
+    }
 
     /** @hidden */
     private _subscriptions = new Subscription();

@@ -54,7 +54,7 @@
 <ng-container *ngIf="!isExtraItemsMode && parentTab">
     <fd-popover placement="bottom-end" [focusAutoCapture]="true" [focusTrapped]="true" #popover>
         <fd-popover-control>
-            <a aria-selected="false" class="fd-icon-tab-bar__tab" role="tab" tabindex="0">
+            <a [attr.aria-selected]="_containsSelected" class="fd-icon-tab-bar__tab" role="tab" tabindex="0">
                 <div class="fd-icon-tab-bar__tab-container">
                     <span class="fd-icon-tab-bar__tag">{{ parentTab.label }}</span>
                     <span class="fd-icon-tab-bar__arrow">

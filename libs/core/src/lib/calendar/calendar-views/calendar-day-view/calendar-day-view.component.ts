@@ -27,6 +27,7 @@ import { ActiveCalendarDayCellStrategy as CalendarActiveDayCellStrategy, Calenda
 import { CalendarType, DaysOfWeek } from '../../calendar.component';
 import { CalendarService } from '../../calendar.service';
 import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
+import { FocusableCalendarView } from '../../models/common';
 
 /** Component representing the day view of the calendar. */
 @Component({
@@ -40,7 +41,7 @@ import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
     },
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy {
+export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy, FocusableCalendarView {
     /** Currently displayed month and year for days */
     @Input()
     set currentlyDisplayed(currentlyDisplayed: CalendarCurrent) {
@@ -200,27 +201,21 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
      * @param date date type
      */
     @Input()
-    disableFunction = function (date: D): boolean {
-        return false;
-    };
+    disableFunction: (date: D) => boolean = () => false;
 
     /**
      * Function used to disable certain dates in the calendar for the range start selection.
      * @param date date representation
      */
     @Input()
-    disableRangeStartFunction = function (date: D): boolean {
-        return false;
-    };
+    disableRangeStartFunction: (date: D) => boolean = () => false;
 
     /**
      * Function used to disable certain dates in the calendar for the range end selection.
      * @param date date representation
      */
     @Input()
-    disableRangeEndFunction = function (date: D): boolean {
-        return false;
-    };
+    disableRangeEndFunction: (date: D) => boolean = () => false;
 
     /** @hidden */
     constructor(

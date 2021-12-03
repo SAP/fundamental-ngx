@@ -23,7 +23,7 @@ export interface Action {
         </fdp-list>
     `
 })
-class ActionListItemComponentTest {
+class ActionListItemComponentTestComponent {
     @ViewChild(ActionListItemComponent, { read: ElementRef, static: true })
     actionListElement: ElementRef;
 
@@ -34,26 +34,26 @@ class ActionListItemComponentTest {
         this.itemclick = 'mouse is clicked';
     }
 
-    handleKeyboardEvent(event: KeyboardEvent): void {
+    handleKeyboardEvent(): void {
         this.enterPress = 'Enter is pressed';
     }
 }
 
 describe('ActionListItemComponent', () => {
-    let component: ActionListItemComponentTest;
-    let fixture: ComponentFixture<ActionListItemComponentTest>;
+    let component: ActionListItemComponentTestComponent;
+    let fixture: ComponentFixture<ActionListItemComponentTestComponent>;
 
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 imports: [PlatformListModule, RouterTestingModule],
-                declarations: [ActionListItemComponentTest, ActionListItemComponent]
+                declarations: [ActionListItemComponentTestComponent, ActionListItemComponent]
             }).compileComponents();
         })
     );
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(ActionListItemComponentTest);
+        fixture = TestBed.createComponent(ActionListItemComponentTestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
@@ -121,7 +121,6 @@ describe('ActionListItemComponent', () => {
 });
 
 describe('ActionListItemComponent functions', () => {
-    let component: ActionListItemComponent;
     let fixture: ComponentFixture<ActionListItemComponent>;
 
     beforeEach(
@@ -135,12 +134,11 @@ describe('ActionListItemComponent functions', () => {
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ActionListItemComponent);
-        component = fixture.componentInstance;
         fixture.detectChanges();
     });
 });
 
-/**Impertive approach testing*/
+/** Impertive approach testing*/
 @Component({
     selector: 'fdp-test-action-list-item',
     template: `
@@ -149,7 +147,7 @@ describe('ActionListItemComponent functions', () => {
         </fdp-list>
     `
 })
-class TestComponentContent {
+class TestComponentContentComponent {
     items: Action[] = [{ title: 'Action 1' }, { title: 'Action 2' }, { title: 'Action 3' }, { title: 'Action 4' }];
 
     @ViewChild(ActionListItemComponent)
@@ -157,30 +155,23 @@ class TestComponentContent {
 }
 
 describe('ActionListItemComponent Imperative', () => {
-    let host: TestComponentContent;
-    let component: ActionListItemComponent;
-    let fixture: ComponentFixture<TestComponentContent>;
+    let host: TestComponentContentComponent;
+    let fixture: ComponentFixture<TestComponentContentComponent>;
 
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 imports: [PlatformListModule, RouterTestingModule],
-                declarations: [TestComponentContent, ActionListItemComponent]
+                declarations: [TestComponentContentComponent, ActionListItemComponent]
             }).compileComponents();
         })
     );
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TestComponentContent);
+        fixture = TestBed.createComponent(TestComponentContentComponent);
         host = fixture.componentInstance;
-        component = host.actionListItem;
         fixture.detectChanges();
     });
-
-    async function wait(componentFixture: ComponentFixture<any>): Promise<void> {
-        componentFixture.detectChanges();
-        await componentFixture.whenStable();
-    }
 
     it('should create', () => {
         expect(host).toBeTruthy();

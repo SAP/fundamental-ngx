@@ -56,7 +56,7 @@ export class DatePickerPo extends CoreBaseComponentPo {
         }
     };
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

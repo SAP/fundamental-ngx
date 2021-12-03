@@ -56,7 +56,7 @@ export class TimePickerPo extends CoreBaseComponentPo {
         waitForPresent(this.root);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

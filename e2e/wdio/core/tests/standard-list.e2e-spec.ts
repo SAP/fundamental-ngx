@@ -1,17 +1,14 @@
 import { StandardListPo } from '../pages/standard-list.po';
 import {
     browserIsFirefox,
-    checkElementScreenshot,
     click,
     clickAndDragElement,
     doesItExist,
     executeScriptBeforeTagAttr,
     getElementArrayLength,
     getElementLocation,
-    getImageTagBrowserPlatform,
     getText,
     refreshPage,
-    saveElementScreenshot,
     scrollIntoView,
     sendKeys,
     waitForElDisplayed,
@@ -215,8 +212,6 @@ describe('Standard List test suite', () => {
 
     function checkSelections(exampleSelector: string, count: number, listExample: string): void {
         for (let i = 0; i < count; i++) {
-            const tag = `${listExample}-listItem-${i}-selected-state-${getImageTagBrowserPlatform()}-`;
-
             click(exampleSelector + listItems, i);
             expect(getElementClass(exampleSelector + listItems, i)).toContain('is-selected');
         }

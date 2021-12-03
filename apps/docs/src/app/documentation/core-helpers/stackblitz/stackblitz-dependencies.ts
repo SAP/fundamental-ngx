@@ -29,8 +29,8 @@ export class StackblitzDependencies {
         'focus-trap'
     ];
 
-    static getDependencies(): object {
-        const _dependencies: object = {};
+    static getDependencies(): Record<string, any> {
+        const _dependencies: Record<string, any> = {};
 
         const libVersion = parseVersion(packageInfo.version);
 

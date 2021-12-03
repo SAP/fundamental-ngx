@@ -47,7 +47,7 @@ class TableDataProviderMock extends TableDataProvider<SourceItem> {
     items = generateItems(50);
     totalItems = 50;
 
-    fetch(state: TableState): Observable<SourceItem[]> {
+    fetch(): Observable<SourceItem[]> {
         return of(this.items);
     }
 }
@@ -739,9 +739,9 @@ describe('TableComponent internal', () => {
                     fixture.detectChanges();
                     calculateTableElementsMetaData();
 
-                    const rowsClassesAssigned = tableBodyRows.every((row) => {
-                        return row.nativeElement.classList.contains(rowClass);
-                    });
+                    const rowsClassesAssigned = tableBodyRows.every((row) =>
+                        row.nativeElement.classList.contains(rowClass)
+                    );
 
                     expect(rowsClassesAssigned).toBeTrue();
                 });
@@ -752,9 +752,9 @@ describe('TableComponent internal', () => {
                     fixture.detectChanges();
                     calculateTableElementsMetaData();
 
-                    const rowsClassesAssigned = tableBodyRows.every((row, index) => {
-                        return row.nativeElement.classList.contains(hostComponent.table._tableRows[index].value.status);
-                    });
+                    const rowsClassesAssigned = tableBodyRows.every((row, index) =>
+                        row.nativeElement.classList.contains(hostComponent.table._tableRows[index].value.status)
+                    );
 
                     expect(rowsClassesAssigned).toBeTrue();
                 });
@@ -887,7 +887,6 @@ describe('TableComponent internal', () => {
         let hostComponent: TableHostComponent;
         let fixture: ComponentFixture<TableHostComponent>;
         let tableComponent: TableComponent<SourceItem>;
-        let dataSourceLastFetchState: TableState;
 
         beforeEach(
             waitForAsync(() => {
@@ -904,34 +903,27 @@ describe('TableComponent internal', () => {
             hostComponent = fixture.componentInstance;
 
             const originFetch = hostComponent.source.fetch;
-            spyOn(hostComponent.source, 'fetch').and.callFake((state: TableState) => {
-                dataSourceLastFetchState = state;
-                return originFetch.call(hostComponent.source, state);
-            });
+            spyOn(hostComponent.source, 'fetch').and.callFake((state: TableState) =>
+                originFetch.call(hostComponent.source, state)
+            );
 
             fixture.detectChanges();
 
             tableComponent = hostComponent.table;
         });
 
-        let tableHeaderCells: DebugElement[] = [];
         let tableBodyRows: DebugElement[] = [];
-        let tableRowCells2DArray: DebugElement[][] = [];
         let tableBodyContainer: DebugElement;
 
         const calculateTableElementsMetaData = () => {
-            tableHeaderCells = fixture.debugElement.queryAll(
-                By.css('.fdp-table__header .fd-table__row .fd-table__cell')
-            );
             tableBodyRows = fixture.debugElement.queryAll(By.css('.fdp-table__body .fd-table__row'));
-            tableRowCells2DArray = tableBodyRows.map((row) => row.queryAll(By.css('.fd-table__cell')));
             tableBodyContainer = fixture.debugElement.query(By.css('.fdp-table__body'));
         };
 
         const tableBodyScrollTop = async (scrollTop) => {
             const container = tableBodyContainer.nativeElement as HTMLElement;
             container.scrollTop = scrollTop;
-            await new Promise((resolve) => setTimeout(() => resolve(null), 100));
+            await new Promise((resolve) => setTimeout(() => resolve(null), 200));
             fixture.detectChanges();
             calculateTableElementsMetaData();
         };
@@ -1022,7 +1014,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
     items = generateTreeItems(treeItemParentsCount);
     totalItems = totalTreeItems;
 
-    fetch(state: TableState): Observable<SourceTreeItem[]> {
+    fetch(): Observable<SourceTreeItem[]> {
         return of(this.items);
     }
 }

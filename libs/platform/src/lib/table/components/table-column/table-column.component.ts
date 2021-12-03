@@ -70,6 +70,7 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
     label: string;
 
     /** Cell text alignment. */
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     /** @ts-ignore */
     @Input() set align(align: ColumnAlign) {
         let _align = ColumnAlignEnum.Start;
@@ -88,6 +89,7 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
         this._align$.next(_align);
     }
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     /** @ts-ignore */
     get align(): string {
         return this._align;

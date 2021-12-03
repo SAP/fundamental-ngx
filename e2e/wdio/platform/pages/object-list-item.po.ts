@@ -49,7 +49,7 @@ export class ObjectListItemPo extends BaseComponentPo {
         waitForPresent(this.allObjsList);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

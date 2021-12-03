@@ -19,13 +19,20 @@ export class MenuPo extends BaseComponentPo {
     cascadingVegMenuItemsArr = '#fdp-menu-vegetable-menu fdp-menu-item';
     cascadingLettuceItemsArr = '#fdp-menu-lettuce-menu fdp-menu-item';
 
+    menuWithIconsBtn = 'fdp-platform-menu-with-icons-example button';
+    menuWithIconsItem = '#fdp-menu-menu-icons fdp-menu-item';
+    menuWithIconsItemText = this.menuWithIconsItem + ' span';
+    menuWithIconsIcon = this.menuWithIconsItem + ' fd-icon';
+    menuWithIconsAddon = '#fdp-menu-menu-icons fd-menu-addon';
+    selectedItemLabel = 'fdp-platform-menu-with-icons-example div';
+
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
         waitForPresent(this.menuBtnArr);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

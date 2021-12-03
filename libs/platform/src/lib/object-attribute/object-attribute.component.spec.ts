@@ -60,7 +60,6 @@ describe('ObjectAttributeComponent', () => {
 export class ObjectAttributeContentProjectionTesterComponent {}
 
 describe('Content projection', () => {
-    let component: ObjectAttributeContentProjectionTesterComponent;
     let fixture: ComponentFixture<ObjectAttributeContentProjectionTesterComponent>;
 
     beforeEach(
@@ -74,13 +73,11 @@ describe('Content projection', () => {
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ObjectAttributeContentProjectionTesterComponent);
-        component = fixture.componentInstance;
         fixture.detectChanges();
     });
 
     it('Content projection should display the text', async () => {
         fixture = TestBed.createComponent(ObjectAttributeContentProjectionTesterComponent);
-        component = fixture.componentInstance;
         const innerHtml = fixture.debugElement.query(By.css('fdp-object-attribute')).nativeElement.innerHTML;
         expect(innerHtml).toContain('testing');
     });
@@ -91,23 +88,23 @@ describe('Content projection', () => {
     selector: 'fdp-object-attribute-test',
     template: ` <fdp-object-attribute linkText="label1" islink="true"></fdp-object-attribute> `
 })
-class TestComponentLink {}
+class LinkTestComponent {}
 
 describe('ObjectAttributeComponent With Link', () => {
-    let component: TestComponentLink;
-    let fixture: ComponentFixture<TestComponentLink>;
+    let component: LinkTestComponent;
+    let fixture: ComponentFixture<LinkTestComponent>;
 
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                declarations: [ObjectAttributeComponent, TestComponentLink],
+                declarations: [ObjectAttributeComponent, LinkTestComponent],
                 providers: []
             }).compileComponents();
         })
     );
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TestComponentLink);
+        fixture = TestBed.createComponent(LinkTestComponent);
         component = fixture.componentInstance;
 
         fixture.detectChanges();

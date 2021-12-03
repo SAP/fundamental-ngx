@@ -24,7 +24,7 @@ export class MenuButtonPo extends BaseComponentPo {
         waitForPresent(this.btnArrowIconsArr);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

@@ -4,7 +4,7 @@ import { startWith } from 'rxjs/operators';
 import { RtlService } from '@fundamental-ngx/core/utils';
 
 @Directive({
-    // tslint:disable-next-line: directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-slider-position]'
 })
 export class SliderPositionDirective implements OnInit, OnChanges, OnDestroy {

@@ -4,7 +4,6 @@
         "angular.json": "*",
         "package.json": "*",
         "tsconfig.json": "*",
-        "tslint.json": "*",
         "nx.json": "*"
     },
     "affected": {
@@ -93,6 +92,7 @@
                 "core-slider",
                 "core-split-button",
                 "core-status-indicator",
+                "core-progress-indicator",
                 "core-step-input",
                 "core-switch",
                 "core-table",
@@ -111,7 +111,8 @@
                 "core-tree",
                 "core-upload-collection",
                 "core-vertical-navigation",
-                "core-splitter"
+                "core-splitter",
+                "core-scrollbar"
             ]
         },
         "core-action-bar": {
@@ -365,6 +366,10 @@
             "tags": ["fd"],
             "implicitDependencies": ["core-utils", "core-menu", "core-popover"]
         },
+        "core-progress-indicator": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
+        },
         "core-quick-view": {
             "tags": ["fd"],
             "implicitDependencies": ["core-utils", "core-form", "core-popover", "core-bar"]
@@ -382,6 +387,10 @@
             "implicitDependencies": ["core-utils", "core-card"]
         },
         "core-scroll-spy": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
+        },
+        "core-scrollbar": {
             "tags": ["fd"],
             "implicitDependencies": ["core-utils"]
         },

@@ -85,7 +85,6 @@ describe('Fixed card layout test suite', () => {
             const clickElement = cardContentArr;
             const locationElement = cardDivArr;
 
-            // tslint:disable:radix
             const clickXLocation = Math.floor(getElementLocation(clickElement, 0, 'x'));
             const clickYLocation = Math.floor(getElementLocation(clickElement, 0, 'y'));
             const startXLocation = Math.floor(getElementLocation(locationElement, 0, 'x'));
@@ -156,7 +155,6 @@ describe('Fixed card layout test suite', () => {
     });
 
     function checkDragAndDrop(clickElement, startLocation, endLocation, endLocationIndex): void {
-        // tslint:disable:radix
         const clickXLocation = Math.floor(getElementLocation(clickElement, 0, 'x'));
         const clickYLocation = Math.floor(getElementLocation(clickElement, 0, 'y'));
         const startXLocation = Math.floor(getElementLocation(startLocation, 0, 'x'));

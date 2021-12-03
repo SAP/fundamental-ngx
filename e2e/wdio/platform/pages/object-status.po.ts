@@ -25,7 +25,7 @@ export class ObjectStatusPo extends BaseComponentPo {
         waitForPresent(this.pageHeader);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

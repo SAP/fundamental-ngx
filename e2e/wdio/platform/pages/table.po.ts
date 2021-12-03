@@ -28,6 +28,7 @@ export class TablePo extends BaseComponentPo {
 
     button = 'button';
     buttonSearch = '.fdp-search-field__submit';
+    buttonFilter = 'button[title="filter"]';
     tableRow = 'tbody .fd-table__row.ng-star-inserted ';
     tableRowInitialState = 'tbody .fd-table__row.ng-star-inserted:not([aria-rowindex="0"], [aria-rowindex="3"])';
     input = 'input';
@@ -77,8 +78,8 @@ export class TablePo extends BaseComponentPo {
     filterInput = 'fdp-filter-custom input';
     filterButtonOk = 'fd-dialog-footer button';
     filterResetButton = 'fdp-table-reset-button button';
-    allInputFields = 'fdp-search-field input';
-    sortableIcon = '.fd-table__icon';
+    allInputFields = 'fd-toolbar .fdp-search-field__input-group';
+    sortableIcon = 'fdp-platform-table-sortable-example th';
     sortableOption = 'fd-popover-body .fd-list__item';
     sortablePopover = 'fd-popover-body';
     buttonActionOne = '[label="Action One"] button';
@@ -91,7 +92,7 @@ export class TablePo extends BaseComponentPo {
         waitForPresent(this.tableDefaultExample);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

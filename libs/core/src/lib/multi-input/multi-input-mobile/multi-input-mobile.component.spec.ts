@@ -26,7 +26,7 @@ describe('MultiInputMobileComponent', () => {
     let mockedMultiInputComponent: Partial<MultiInputComponent> = {
         selected: backupData,
         mobileConfig: multiInputConfigObject,
-        dialogDismiss: (backupArguments: any[]) => {},
+        dialogDismiss: () => {},
         selectAllItems: () => {},
         dialogApprove: () => {},
         openChange: new EventEmitter<boolean>()
@@ -54,7 +54,7 @@ describe('MultiInputMobileComponent', () => {
                 cancelButtonText: 'cancel',
                 hasCloseButton: true
             },
-            dialogDismiss: (backupArguments: any[]) => {},
+            dialogDismiss: () => {},
             selectAllItems: () => {},
             dialogApprove: () => {},
             openChange: new EventEmitter<boolean>()

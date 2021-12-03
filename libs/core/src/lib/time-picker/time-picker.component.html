@@ -1,11 +1,11 @@
 <fd-popover
     [(isOpen)]="isOpen"
-    (isOpenChange)="isOpenChange.emit($event); _changeMessageVisibility()"
+    (isOpenChange)="_onOpenStateChanged($event)"
     [triggers]="[]"
     [disabled]="disabled"
     [placement]="placement"
     [closeOnEscapeKey]="true"
-    [focusAutoCapture]="true"
+    [focusAutoCapture]="false"
     [focusTrapped]="true"
 >
     <fd-popover-control>
@@ -25,10 +25,9 @@
                 type="text"
                 class="fd-input"
                 fd-input-group-input
-                #inputElement
                 [compact]="compact"
                 [value]="_inputTimeValue"
-                (focusout)="_timeInputChanged(inputElement.value)"
+                (focusout)="_timeInputChanged($event.currentTarget.value)"
                 (keyup.enter)="_timeInputChanged($event.currentTarget.value)"
                 [disabled]="disabled"
                 [attr.id]="inputId"

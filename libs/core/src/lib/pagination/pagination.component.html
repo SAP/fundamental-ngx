@@ -1,78 +1,138 @@
-<div class="fd-pagination__holder" *ngIf="totalItems">
-    <div class="fd-pagination__pages">
-        <span [attr.id]="id + '__total'" class="fd-pagination__total" [ngClass]="rtlClass" *ngIf="displayTotalItems">
-            <ng-container
-                [ngTemplateOutlet]="displayTextTemplate || showingItems"
-                [ngTemplateOutletContext]="{ showing: currentShowing }"
-            ></ng-container>
-        </span>
-        <nav
-            class="fd-pagination__nav"
-            [attr.aria-label]="ariaLabel"
-            [attr.aria-labelledby]="displayTotalItems ? id + '__total' : null"
-            *ngIf="totalItems >= itemsPerPage"
-        >
-            <a
-                class="fd-pagination__link fd-pagination__link--previous"
-                tabindex="0"
-                role="button"
-                [title]="previousLabel"
-                [attr.aria-label]="previousLabel"
-                [attr.aria-disabled]="isFirstPage"
-                (keypress)="onKeypressHandler(currentPage - 1, $event)"
-                (click)="previousPage()"
-            >
-            </a>
-            <div dir="ltr" class="fd-pagination-direction-override-display">
-                <ng-container *ngFor="let page of pages">
-                    <a
-                        class="fd-pagination__link"
-                        [class.is-selected]="currentPage == page"
-                        tabindex="0"
-                        (keypress)="onKeypressHandler(page, $event)"
-                        (click)="goToPage(page, $event)"
-                        *ngIf="page !== -1; else more"
-                        [attr.aria-current]="currentPage === page ? 'page' : undefined"
-                        [attr.aria-label]="pageLabel + ' ' + page"
-                    >
-                        {{ page }}
-                    </a>
-                </ng-container>
-            </div>
-            <a
-                class="fd-pagination__link fd-pagination__link--next"
-                [title]="nextLabel"
-                [attr.aria-label]="nextLabel"
-                tabindex="0"
-                role="button"
-                [attr.aria-disabled]="isLastPage"
-                (keypress)="onKeypressHandler(currentPage + 1, $event)"
-                (click)="nextPage()"
-            >
-            </a>
-        </nav>
-    </div>
+<ng-container *ngIf="totalItems">
     <div
         class="fd-pagination__per-page"
         *ngIf="itemsPerPageTemplate || (itemsPerPageOptions && itemsPerPageOptions.length)"
     >
         <ng-container
-            [ngTemplateOutlet]="itemsPerPageTemplate || perPageDefault"
-            [ngTemplateOutletContext]="{ onSelect: onChangePerPage }"
+            [ngTemplateOutlet]="itemsPerPageTemplate || perPage"
+            [ngTemplateOutletContext]="{ onSelect: _onChangePerPage }"
         ></ng-container>
     </div>
-</div>
+
+    <nav
+        class="fd-pagination__nav"
+        [attr.aria-label]="ariaLabel"
+        [attr.aria-labelledby]="displayTotalItems ? _totalPagesElementId : null"
+        *ngIf="totalItems >= itemsPerPage"
+    >
+        <a
+            fd-button
+            fdType="transparent"
+            glyph="media-rewind"
+            [disabled]="isFirstPage"
+            [compact]="compact"
+            class="fd-pagination__button fd-pagination__button--mobile"
+            [title]="firstLabel"
+            [attr.aria-label]="firstLabel"
+            [attr.aria-disabled]="isFirstPage"
+            (click)="goToFirstPage()"
+        ></a>
+
+        <a
+            fd-button
+            fdType="transparent"
+            glyph="navigation-left-arrow"
+            [disabled]="isFirstPage"
+            [compact]="compact"
+            class="fd-pagination__button"
+            [title]="previousLabel"
+            [attr.aria-label]="previousLabel"
+            [attr.aria-disabled]="isFirstPage"
+            (click)="previousPage()"
+        ></a>
+
+        <ng-container *ngFor="let page of _pages">
+            <ng-container *ngIf="page !== currentPage; else currentPageInput">
+                <a
+                    *ngIf="page !== -1; else more"
+                    fd-button
+                    fdType="transparent"
+                    [compact]="compact"
+                    class="fd-pagination__link"
+                    [title]="nextLabel"
+                    [attr.aria-label]="pageLabel + ' ' + page"
+                    (click)="goToPage(page, $event)"
+                    >{{ page }}</a
+                >
+            </ng-container>
+        </ng-container>
+
+        <a
+            fd-button
+            fdType="transparent"
+            glyph="navigation-right-arrow"
+            [disabled]="isLastPage"
+            [compact]="compact"
+            class="fd-pagination__button"
+            [title]="nextLabel"
+            [attr.aria-label]="nextLabel"
+            [attr.aria-disabled]="isLastPage"
+            (click)="nextPage()"
+        ></a>
+
+        <a
+            fd-button
+            fdType="transparent"
+            glyph="media-forward"
+            [disabled]="isLastPage"
+            [compact]="compact"
+            class="fd-pagination__button fd-pagination__button--mobile"
+            [title]="lastLabel"
+            [attr.aria-label]="lastLabel"
+            [attr.aria-disabled]="isLastPage"
+            (click)="goToLastPage()"
+        ></a>
+    </nav>
+
+    <span *ngIf="displayTotalItems" class="fd-pagination__total" [attr.id]="_totalPagesElementId">
+        <ng-container
+            [ngTemplateOutlet]="displayTextTemplate || total"
+            [ngTemplateOutletContext]="{ showing: _currentShowing }"
+        ></ng-container>
+    </span>
+</ng-container>
 
 <ng-template #more>
     <span class="fd-pagination__more" aria-hidden="true" aria-label="..." role="presentation"></span>
 </ng-template>
-<ng-template #showingItems let-showing="showing">
-    Showing {{ showing.from }}-{{ showing.to }} of {{ showing.of }}
+
+<ng-template #total let-showing="showing">
+    <span fd-form-label class="fd-pagination__total-label"> {{ showing.of }} Results </span>
 </ng-template>
 
-<ng-template #perPageDefault>
-    <span class="fd-pagination__total">{{ itemsPerPageLabel }}:</span>
-    <fd-select [value]="itemsPerPage" (valueChange)="onChangePerPage($event)">
+<ng-template #perPage>
+    <label fd-form-label class="fd-pagination__per-page-label">{{ itemsPerPageLabel }}:</label>
+
+    <fd-select
+        [compact]="compact"
+        class="fd-pagination__per-page-select"
+        [value]="itemsPerPage"
+        (valueChange)="_onChangePerPage($event)"
+    >
         <fd-option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</fd-option>
     </fd-select>
+</ng-template>
+
+<ng-template #currentPageInput>
+    <label fd-form-label class="fd-pagination__label" [attr.for]="_selectId"> {{ pageLabel }}: </label>
+
+    <input
+        fd-form-control
+        fd-only-digits
+        required
+        size="1"
+        min="1"
+        type="number"
+        [max]="_lastPage"
+        [attr.name]="_selectId"
+        [attr.id]="_selectId"
+        [state]="currentPageModel.invalid ? 'error' : null"
+        [compact]="compact"
+        class="fd-pagination__input"
+        #currentPageModel="ngModel"
+        [ngModel]="currentPage"
+        (keydown.enter)="goToPage(currentPageModel.value)"
+        (keydown.space)="goToPage(currentPageModel.value)"
+        (blur)="_restoreInputValue(currentPageModel)"
+    />
 </ng-template>

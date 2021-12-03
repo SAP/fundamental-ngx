@@ -41,7 +41,6 @@ class TestComponent {
 
 describe('DynamicPageHeaderInternalComponent', () => {
     let fixture: ComponentFixture<TestComponent>;
-    let pageHeaderComponent: DynamicPageHeaderInternalComponent;
     let component: TestComponent;
 
     beforeEach(
@@ -58,7 +57,6 @@ describe('DynamicPageHeaderInternalComponent', () => {
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;
         await wait(fixture);
-        pageHeaderComponent = component.dynamicPageHeaderComponent;
     });
 
     async function wait(componentFixture: ComponentFixture<any>): Promise<void> {

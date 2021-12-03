@@ -68,7 +68,7 @@
             [attr.aria-rowcount]="_totalItems"
             i18n-aria-label="@@platformTableSelectRow"
             [focusable]="true"
-            [fdp-table-cell-selectable]="_firstCellNavigationId"
+            [fd-table-cell-selectable]="_firstCellNavigationId"
             [class.fd-table__cell--checkbox]="selectionMode === SELECTION_MODE.MULTIPLE"
             [style]="_getSelectionCellStyles(headerRow)"
             (keydown.enter)="_toggleAllSelectableRows()"
@@ -93,7 +93,7 @@
                 role="columnheader"
                 [id]="id + '__' + column.name"
                 [focusable]="true"
-                [fdp-table-cell-selectable]="_getCellNavigationId(0, colIdx)"
+                [fd-table-cell-selectable]="_getCellNavigationId(0, colIdx)"
                 [fdp-table-cell-resizable]="_getColumnResizableSide(colIdx)"
                 [columnName]="column.name"
                 [attr.aria-colindex]="colIdx"
@@ -368,7 +368,7 @@
                                 fd-table-cell
                                 role="gridcell"
                                 [focusable]="true"
-                                [fdp-table-cell-selectable]="_getCellNavigationId(rowIdx + 1, colIdx)"
+                                [fd-table-cell-selectable]="_getCellNavigationId(rowIdx + 1, colIdx)"
                                 [headers]="id + '__' + column.name"
                                 [fdp-table-cell-resizable]="_getColumnResizableSide(colIdx)"
                                 [columnName]="column.name"
@@ -478,7 +478,7 @@
             fd-table-cell
             role="gridcell"
             [focusable]="true"
-            [fdp-table-cell-selectable]="_getCellNavigationId(rowIdx + 1, 0, true)"
+            [fd-table-cell-selectable]="_getCellNavigationId(rowIdx + 1, 0, true)"
             class="fd-table__cell--group fd-table__cell--fixed fd-table__cell--expand"
             [attr.colspan]="_tableColumnsLength"
             [attr.aria-expanded]="row.expanded"
@@ -490,14 +490,14 @@
             <span class="fd-table__expand" [class.fd-table__expand--open]="row.expanded" aria-hidden="true"></span>
 
             <!-- Group row template when no nested groups -->
-            <ng-container *ngIf="_groupRulesMap.size == 1">
+            <ng-container *ngIf="_groupRulesMap.size === 1">
                 <div class="fd-table__text fd-table__text--no-wrap">
                     {{ row.value?.value }} - {{ row.value?.count }}
                 </div>
             </ng-container>
 
             <!-- Group row template when there are nested groups -->
-            <ng-container *ngIf="_groupRulesMap.size != 1">
+            <ng-container *ngIf="_groupRulesMap.size !== 1">
                 <div class="fd-table__text fd-table__text--no-wrap">
                     <ng-container
                         *ngTemplateOutlet="

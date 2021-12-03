@@ -11,10 +11,7 @@ import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../../utils/publ
 export class TestComponent {}
 
 describe('FormControlComponent', () => {
-    let fixture: ComponentFixture<TestComponent>,
-        component: TestComponent,
-        debugElement: DebugElement,
-        element: HTMLElement;
+    let fixture: ComponentFixture<TestComponent>, component: TestComponent, debugElement: DebugElement;
 
     let directive, componentInstance;
 
@@ -31,7 +28,6 @@ describe('FormControlComponent', () => {
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;
         debugElement = fixture.debugElement;
-        element = debugElement.nativeElement;
         fixture.detectChanges();
         directive = debugElement.query(By.directive(FormControlComponent));
         componentInstance = directive.injector.get(FormControlComponent);

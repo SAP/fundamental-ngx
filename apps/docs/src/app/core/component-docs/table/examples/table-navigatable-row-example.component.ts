@@ -58,8 +58,8 @@ export class TableNavigatableRowExampleComponent {
             dateOfExpire: '12.06.2020',
             price: '5 EUR',
             country: 'India',
-            description:
-                'A banana is an elongated, edible fruit – botanically a berry – produced by several kinds of large herbaceous flowering plants in the genus Musa.',
+            description: `A banana is an elongated, edible fruit – botanically a berry – produced by several kinds of large herbaceous
+                flowering plants in the genus Musa.`,
             navigatable: true
         },
         {
@@ -69,8 +69,8 @@ export class TableNavigatableRowExampleComponent {
             dateOfExpire: '10.06.2020',
             price: '5,5 EUR',
             country: 'USA',
-            description:
-                'An apple is an edible fruit produced by an apple tree (Malus domestica). Apple trees are cultivated worldwide and are the most widely grown species in the genus Malus.',
+            description: `An apple is an edible fruit produced by an apple tree (Malus domestica).
+                Apple trees are cultivated worldwide and are the most widely grown species in the genus Malus.`,
             navigatable: false
         }
     ];

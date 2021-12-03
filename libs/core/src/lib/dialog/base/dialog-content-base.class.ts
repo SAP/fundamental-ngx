@@ -24,16 +24,16 @@ export class DialogContentBase {
     ariaDescribedBy?: string = null;
 
     /** Approve Button Click Callback */
-    approveButtonCallback?: Function;
+    approveButtonCallback?: () => void;
 
     /** Cancel Button Label */
     cancelButton?: string;
 
     /** Cancel Button Click Callback */
-    cancelButtonCallback?: Function;
+    cancelButtonCallback?: () => void;
 
     /** Close Button Callback */
-    closeButtonCallback?: Function;
+    closeButtonCallback?: () => void;
 
     /** close button title */
     closeButtonTitle?: string;

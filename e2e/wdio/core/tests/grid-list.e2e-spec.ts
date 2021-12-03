@@ -10,7 +10,8 @@ import {
     waitForClickable,
     waitForElDisplayed,
     getElementClass,
-    acceptAlert
+    acceptAlert,
+    doesItExist
 } from '../../driver/wdio';
 import { text, productTitle, textLocked, isSelected } from '../fixtures/appData/grid-list-content';
 
@@ -32,7 +33,9 @@ describe('Grid-list test suite', () => {
         gridListsTitle,
         multiSelectModeSelectedItems,
         singleSelectItemsSelected,
-        dragAndDropItems
+        dragAndDropItems,
+        gridListToolbar,
+        button
     } = gridListPage;
 
     beforeAll(() => {
@@ -89,7 +92,7 @@ describe('Grid-list test suite', () => {
         expect(getText(lockedStateItemText)).toBe(textLocked);
     });
 
-    // tslint:disable-next-line: max-line-length
+    // eslint-disable-next-line max-len
     it('Verify selecting multiple items in "Multi select mode" component -> Multiple items can be selected. Checkbox should be checked when item is selected', () => {
         const arrayLength = getElementArrayLength(gridListItemsByMode('multiSelect'));
         let selectedArrayLength = getElementArrayLength(multiSelectModeSelectedItems);
@@ -122,6 +125,12 @@ describe('Grid-list test suite', () => {
             expect(getText(dragAndDropItems, i)).toBe(secondItemTitle);
             expect(getText(dragAndDropItems, i + 1)).toBe(firstItemTitle);
         }
+    });
+
+    it('should check closing grid list toolbar', () => {
+        scrollIntoView(gridListToolbar);
+        click(gridListToolbar + button);
+        expect(doesItExist(gridListToolbar)).toBe(false);
     });
 
     describe('Check orientation', () => {

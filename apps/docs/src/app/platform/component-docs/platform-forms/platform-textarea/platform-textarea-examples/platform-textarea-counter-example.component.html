@@ -11,11 +11,10 @@
                 [validators]="textareaValidator"
             >
                 <fdp-textarea
-                    [formControl]="ff2.formControl"
+                    formControlName="detailedDescription"
                     name="detailedDescription"
                     [maxLength]="10"
                     [showExceededText]="true"
-                    [value]="value"
                 >
                 </fdp-textarea>
             </fdp-form-field>
@@ -30,7 +29,7 @@
                 [validators]="textareaNoCounterMessageValidator"
             >
                 <fdp-textarea
-                    [formControl]="ff3.formControl"
+                    formControl="noCounterMessageInteraction"
                     name="noCounterMessageInteraction"
                     [maxLength]="10"
                     [showExceededText]="false"

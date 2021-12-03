@@ -23,9 +23,12 @@ export class PaginationService {
         if (!pagination.currentPage) {
             pagination.currentPage = 1;
         }
-        const pages = [];
+
         this.validate(pagination);
+
+        const pages = [];
         const totalPages = this.getTotalPages(pagination);
+
         if (totalPages <= SIDE_CURRENT_DISPLAY_PAGES * 2 + MIN_CORNER_DISPLAY_PAGES + 1 + 2) {
             for (let i = 1; i <= totalPages; i++) {
                 pages.push(i);
@@ -46,9 +49,7 @@ export class PaginationService {
                         pages.push(i);
                     } else if (i === totalPages) {
                         pages.push(i);
-                    }
-                    // tslint:disable-next-line
-                    else if (
+                    } else if (
                         i >= pagination.currentPage - SIDE_CURRENT_DISPLAY_PAGES &&
                         i < pagination.currentPage + SIDE_CURRENT_DISPLAY_PAGES + 1
                     ) {
@@ -56,9 +57,11 @@ export class PaginationService {
                     }
                 }
             }
+
             if (pagination.currentPage > SIDE_CURRENT_DISPLAY_PAGES + 2) {
                 pages.splice(1, 0, this.buffer);
             }
+
             if (pagination.currentPage < totalPages - (SIDE_CURRENT_DISPLAY_PAGES + 1)) {
                 pages.splice(pages.length - 1, 0, this.buffer);
             }
@@ -74,6 +77,7 @@ export class PaginationService {
         if (!pagination.itemsPerPage) {
             return 0;
         }
+
         return Math.ceil(pagination.totalItems / pagination.itemsPerPage);
     }
 
@@ -88,6 +92,7 @@ export class PaginationService {
                     `"totalItems" must be a number greater than zero but got "${pagination.totalItems}". This warning only appears in development mode.`
                 );
             }
+
             if (isNaN(pagination.itemsPerPage) || pagination.itemsPerPage <= 0) {
                 console.warn(
                     `"itemsPerPage" must be a number greater than zero but got "${pagination.itemsPerPage}". This warning only appears in development mode.`

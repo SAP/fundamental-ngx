@@ -45,7 +45,6 @@ export class TestMenuComponent {
 describe('MenuComponent', () => {
     let menu: MenuComponent;
     let menuService: MenuService;
-    let menuItems: QueryList<MenuItemComponent>;
     let fixture: ComponentFixture<TestMenuComponent>;
 
     beforeEach(
@@ -62,7 +61,6 @@ describe('MenuComponent', () => {
         fixture = TestBed.createComponent(TestMenuComponent);
         fixture.detectChanges();
         menu = fixture.componentInstance.menu;
-        menuItems = fixture.componentInstance.menuItems;
         menuService = menu['_menuService'];
     });
 

@@ -5,7 +5,7 @@ import { ListNavigationItemArrowDirective } from '../directives/list-navigation-
 import { ListNavigationItemTextDirective } from '../directives/list-navigation-item-text.directive';
 
 @Component({
-    // tslint:disable-next-line:component-selector
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-list-navigation-item], [fdListNavigaitonItem]',
     templateUrl: './list-navigation-item.component.html',
     styleUrls: ['./list-navigation-item.component.scss']

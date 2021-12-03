@@ -32,11 +32,11 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
     @Input()
     isHorizontal = false;
 
-    /**Maximum limit for the thumbnail images to display */
+    /** Maximum limit for the thumbnail images to display */
     @Input()
     maxImages = 5;
 
-    /**Role description for the thumbnail image  */
+    /** Role description for the thumbnail image  */
     @Input()
     roleDescription = 'Image';
 
@@ -80,7 +80,7 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
         this.mediaList.forEach((item) => (item.selected = false));
         this.mediaList.forEach((item) => (item.overlayRequired = false));
         selectedMedia.selected = true;
-        const dialogRef = this._dialogService.open(ThumbnailDetailsComponent, {
+        this._dialogService.open(ThumbnailDetailsComponent, {
             backdropClickCloseable: false,
             escKeyCloseable: false,
             data: {

@@ -38,7 +38,7 @@ export class SplitMenuButtonPo extends BaseComponentPo {
         waitForPresent(this.arrowBtnArr);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

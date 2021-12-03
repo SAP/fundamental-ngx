@@ -186,7 +186,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, OnDestroy {
      * @description select extra item inside popover
      */
     _selectExtraItem(selectedItem: IconTabBarItem): void {
-        const deletedItem = <IconTabBarItem>this._tabs.splice(this._lastVisibleTabIndex, 1, selectedItem)[0];
+        const deletedItem = this._tabs.splice(this._lastVisibleTabIndex, 1, selectedItem)[0] as IconTabBarItem;
         this._tabs.splice(selectedItem.index, 1, deletedItem);
 
         deletedItem.index = selectedItem.index;
@@ -243,7 +243,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, OnDestroy {
      * @description trigger recalculation items, need to do it asynchronously after dom was rerendered
      */
     protected _triggerRecalculationVisibleItems(): void {
-        this._ngZone.onMicrotaskEmpty.pipe(take(1), takeUntil(this._onDestroy$)).subscribe((_) => {
+        this._ngZone.onMicrotaskEmpty.pipe(take(1), takeUntil(this._onDestroy$)).subscribe(() => {
             if (this.overflowDirective) {
                 const extra = this.overflowDirective.getAmountOfExtraItems();
                 this._recalculateVisibleItems(extra);

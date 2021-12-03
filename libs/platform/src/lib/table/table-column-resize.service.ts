@@ -111,13 +111,17 @@ export class TableColumnResizeService implements OnDestroy {
         this._resizerMoveSubscription.unsubscribe();
     }
 
+    /** Reset columns width */
+    resetColumnsWidth(): void {
+        this._columnsWidthMap.clear();
+    }
+
     /** Initialize service with data, trigger columns width calculation. */
     setColumnsWidth(visibleColumnNames: string[], freezeColumnsTo: string, offsetWidth: number): void {
         this._visibleColumnNames = visibleColumnNames;
         this._preventResize = this._visibleColumnNames.includes(freezeColumnsTo);
         this._offsetWidth = offsetWidth;
 
-        this._resetColumnsWidth();
         this._calculateColumnsWidth();
     }
 
@@ -255,13 +259,9 @@ export class TableColumnResizeService implements OnDestroy {
     /** @hidden */
     private _calculateColumnsWidth(): void {
         this._columnsCellMap.forEach((cell, columnName) => {
-            this._columnsWidthMap.set(columnName, cell.nativeElement.offsetWidth);
+            const { width } = cell.nativeElement.getBoundingClientRect();
+            this._columnsWidthMap.set(columnName, width);
         });
-    }
-
-    /** @hidden */
-    private _resetColumnsWidth(): void {
-        this._columnsWidthMap.clear();
     }
 
     /** Update column resizer position. */

@@ -35,6 +35,7 @@ import {
     CalendarAggregatedYearViewComponent
     // Comment to fix max-line-length error
 } from './calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
+import { FocusableCalendarView } from './models/common';
 
 let calendarUniqueId = 0;
 
@@ -230,7 +231,7 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
 
     /** That allows to define function that should happen, when focus should normally escape of component */
     @Input()
-    escapeFocusFunction: Function = (event?: KeyboardEvent): void => {
+    escapeFocusFunction = (event?: KeyboardEvent): void => {
         event?.preventDefault();
         this._calendarHeaderComponent?.focus();
     };
@@ -240,27 +241,21 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
      * @param date date
      */
     @Input()
-    disableFunction = function (date: D): boolean {
-        return false;
-    };
+    disableFunction: (date: D) => boolean = () => false;
 
     /**
      * Function used to disable certain dates in the calendar for the range start selection.
      * @param date date
      */
     @Input()
-    disableRangeStartFunction = function (date: D): boolean {
-        return false;
-    };
+    disableRangeStartFunction: (date: D) => boolean = () => false;
 
     /**
      * Function used to disable certain dates in the calendar for the range end selection.
      * @param date date
      */
     @Input()
-    disableRangeEndFunction = function (date: D): boolean {
-        return false;
-    };
+    disableRangeEndFunction: (date: D) => boolean = () => false;
 
     /** @hidden */
     onChange: (_: D | DateRange<D>) => void = () => {};
@@ -536,6 +531,13 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
     }
 
     /**
+     * Set initial focus on one of the calendar's element
+     */
+    initialFocus(): void {
+        this._getActiveFocusableView()?.setFocusOnCell();
+    }
+
+    /**
      * @hidden
      * Function that handles changes from month view child component, changes actual view and changes currently displayed month
      */
@@ -634,6 +636,22 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
                 year: this._dateTimeAdapter.getYear(today),
                 month: this._dateTimeAdapter.getMonth(today)
             };
+        }
+    }
+
+    /** @hidden */
+    private _getActiveFocusableView(): FocusableCalendarView | null {
+        switch (this.activeView) {
+            case 'day':
+                return this._dayViewComponent;
+            case 'month':
+                return this._monthViewComponent;
+            case 'year':
+                return this._yearViewComponent;
+            case 'aggregatedYear':
+                return this._aggregatedYearViewComponent;
+            default:
+                return null;
         }
     }
 }

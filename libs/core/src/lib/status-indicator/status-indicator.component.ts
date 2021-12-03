@@ -223,10 +223,9 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
                 this.binaryString = this._convertAngleToBinary(this.angle);
                 this._assignBinaryValue(this.binaryString);
                 break;
-            case 'radial':
+            case 'radial': {
                 const tempPercent = this.fillCalculator % 1;
                 const fillNumber = Number(tempPercent.toFixed(2));
-
                 const element = this._elementRef.nativeElement.querySelectorAll('svg');
 
                 for (let i = 1; i < element.length; i++) {
@@ -234,12 +233,11 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
                         fillNumber * 100,
                         element[i].getBBox()
                     );
-                    polygonPoints = sPointsAttributeValue.reduce((acc, item) => {
-                        return acc + item.x + ',' + item.y + ' ';
-                    }, '');
+                    polygonPoints = sPointsAttributeValue.reduce((acc, item) => acc + item.x + ',' + item.y + ' ', '');
                     this.pointsArray.push(polygonPoints);
                 }
                 break;
+            }
             case 'linearup':
                 this.binaryString = this._convertAngleToBinary(90);
                 this._assignBinaryValue(this.binaryString);
@@ -299,6 +297,7 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
 
     /** @hidden */
     private _getPolygonPointsForCircularFilling(iValue, _oBoundingBoxSvg): Array<Point> {
+        // eslint-disable-next-line @typescript-eslint/no-this-alias
         const that = this;
         const iAngle = 3.6 * iValue;
         const oBox = _oBoundingBoxSvg;

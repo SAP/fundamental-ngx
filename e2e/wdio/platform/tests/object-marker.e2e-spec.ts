@@ -11,7 +11,7 @@ import { checkElArrIsClickable } from '../../helper/assertion-helper';
 
 describe('Object marker test suite', () => {
     const objectMarkerPage = new ObjectMarkerPo();
-    const { marker, iconOnlyMarkers, clickableMarkers } = objectMarkerPage;
+    const { marker, iconOnlyMarkers } = objectMarkerPage;
 
     beforeAll(() => {
         objectMarkerPage.open();

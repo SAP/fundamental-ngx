@@ -17,23 +17,19 @@ interface ExampleTestModel {
 const exampleDataSource = () => {
     const dataSource = Array(100)
         .fill(null)
-        .map((_value, index) => {
-            return {
-                id: index + 1,
-                name: `Name ${index}`,
-                code: Math.floor(Math.random() * 99999),
-                city: `City ${Math.floor(Math.random() * index)}`
-            };
-        });
+        .map((_value, index) => ({
+            id: index + 1,
+            name: `Name ${index}`,
+            code: Math.floor(Math.random() * 99999),
+            city: `City ${Math.floor(Math.random() * index)}`
+        }));
     return {
         dataSource: dataSource,
-        filters: Object.keys(dataSource[0]).map((value, index) => {
-            return {
-                key: value,
-                label: `Product ${value}`,
-                advanced: index > 0
-            };
-        })
+        filters: Object.keys(dataSource[0]).map((value, index) => ({
+            key: value,
+            label: `Product ${value}`,
+            advanced: index > 0
+        }))
     };
 };
 
@@ -54,9 +50,7 @@ export class PlatformVhdTokenExampleComponent implements OnInit {
         this.dataSource = new ValueHelpDialogDataSource(new VhdDataProvider(data.dataSource));
     }
 
-    tokenizerFn = (row: ExampleTestModel) => {
-        return `${row.name} (Id: ${row.id})`;
-    };
+    tokenizerFn = (row: ExampleTestModel) => `${row.name} (Id: ${row.id})`;
 
     valueChange($event: VhdValueChangeEvent<ExampleTestModel[]>): void {
         console.log($event);

@@ -33,7 +33,7 @@ export class ActionSheetControlComponent {
 
     /** Handler for mouse events */
     @HostListener('click', ['$event'])
-    onClick(event: MouseEvent): void {
+    onClick(): void {
         this.clicked.emit();
     }
 }

@@ -45,6 +45,7 @@ export class FeedInputComponent implements AfterViewInit {
 
     /** @hidden Event emitted when user click on send button */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-native
     submit = new EventEmitter<string>();
 
     /** @hidden */

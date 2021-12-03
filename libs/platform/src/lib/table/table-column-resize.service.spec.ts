@@ -24,7 +24,9 @@ describe('TableColumnResizeService', () => {
         const columnNames = ['name'];
         const widthInPixels = 100;
         const tableColumn = { name: columnNames[0], width: null } as TableColumn;
-        const tableColumnCell = { nativeElement: { offsetWidth: widthInPixels } } as ElementRef;
+        const tableColumnCell = {
+            nativeElement: { getBoundingClientRect: () => ({ width: widthInPixels }) }
+        } as ElementRef;
 
         expect(service.getColumnWidthStyle(tableColumn)).toEqual('auto');
 
@@ -51,13 +53,14 @@ describe('TableColumnResizeService', () => {
     });
 
     it('should process resize', () => {
-        const columnIndex = 0;
         const clientStartX = 0;
         const clientEndX = 100;
         const initialColumnWidth = 100;
         const tableColumnNames = ['name'];
         const tableColumn = { name: tableColumnNames[0], width: null } as TableColumn;
-        const tableColumnCell = { nativeElement: { offsetWidth: initialColumnWidth } } as ElementRef;
+        const tableColumnCell = {
+            nativeElement: { getBoundingClientRect: () => ({ width: initialColumnWidth }) }
+        } as ElementRef;
 
         service.registerColumnCell(tableColumn.name, tableColumnCell);
         service.setColumnsWidth(tableColumnNames, null, 0);
@@ -70,13 +73,14 @@ describe('TableColumnResizeService', () => {
     });
 
     it('should set min column width if after resize it smaller', () => {
-        const columnIndex = 0;
         const clientStartX = 0;
         const clientEndX = -80;
         const initialColumnWidth = 100;
         const tableColumnNames = ['name'];
         const tableColumn = { name: tableColumnNames[0], width: null } as TableColumn;
-        const tableColumnCell = { nativeElement: { offsetWidth: initialColumnWidth } } as ElementRef;
+        const tableColumnCell = {
+            nativeElement: { getBoundingClientRect: () => ({ width: initialColumnWidth }) }
+        } as ElementRef;
 
         service.registerColumnCell(tableColumn.name, tableColumnCell);
         service.setColumnsWidth(tableColumnNames, null, 0);

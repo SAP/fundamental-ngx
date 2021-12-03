@@ -21,8 +21,6 @@ describe('Object list item suite:', () => {
         allObjIcons,
         allObjTitles,
         allObjAttrStatusRows,
-        objListAttr,
-        objListItem,
         obJListIntro,
         objListAttributes,
         objListStatuses,

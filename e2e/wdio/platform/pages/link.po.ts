@@ -18,7 +18,7 @@ export class LinkPo extends BaseComponentPo {
         waitForPresent(this.iconLink);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

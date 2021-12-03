@@ -3,7 +3,6 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class AvatarGroupPo extends CoreBaseComponentPo {
     private url = '/avatar-group';
-    root = '#page-content';
 
     firstExampleAvatar = '#background-ex0 fd-avatar';
     usedDetailsPopup = '.fd-form-item';
@@ -11,6 +10,7 @@ export class AvatarGroupPo extends CoreBaseComponentPo {
     secondExampleAvatar = '#background-ex1 .fd-avatar-group__item';
     popoverUserAvatar = 'fd-popover-body .fd-avatar';
     individualCard = 'fd-popover-body fd-quick-view';
+    contactLinks = 'fd-quick-view-group-item a';
 
     open(): void {
         super.open(this.url);
@@ -18,7 +18,7 @@ export class AvatarGroupPo extends CoreBaseComponentPo {
         waitForPresent(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

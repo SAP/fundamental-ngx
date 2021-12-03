@@ -2,6 +2,7 @@ import { DialogPo } from '../pages/dialog.po';
 import {
     browserIsFirefox,
     checkElementScreenshot,
+    clearValue,
     click,
     clickAndDragElement,
     clickWithOption,
@@ -9,6 +10,7 @@ import {
     getAttributeByName,
     getCSSPropertyByName,
     getElementArrayLength,
+    getElementClass,
     getElementLocation,
     getElementSize,
     getImageTagBrowserPlatform,
@@ -70,7 +72,9 @@ describe('dialog test suite', () => {
         dialogExamples,
         customDialog,
         dialogBody,
-        dialogContainer
+        dialogContainer,
+        formDialog,
+        dialogInput
     } = dialogPage;
 
     beforeAll(() => {
@@ -209,11 +213,9 @@ describe('dialog test suite', () => {
 
     describe('complex dialog example', () => {
         it('should check dialog selections', () => {
-            if (browserIsFirefox()) {
-                refreshPage();
-            }
+            refreshPage();
             openDialog(complexDialog);
-            waitForNotDisplayed(busyIndicator);
+            waitForNotPresent(busyIndicator);
             waitForElDisplayed(dialogItems);
             const startingPrice = getText(dialogCartOutput);
 
@@ -447,7 +449,7 @@ describe('dialog test suite', () => {
 
         it('should check dialog verticalPadding option', () => {
             openDialog(playgroundDialog);
-            // tslint:disable-next-line:radix
+            // eslint-disable-next-line radix
             const dialogPaddingValue = parseInt(
                 getCSSPropertyByName(dialogBody, topPaddingProperty).value.replace('px', '')
             );
@@ -457,7 +459,7 @@ describe('dialog test suite', () => {
             closeDialog();
             click(playgroundDialog + checkboxes, 9);
             openDialog(playgroundDialog);
-            // tslint:disable-next-line:radix
+            // eslint-disable-next-line radix
             const newDialogPaddingValue = parseInt(
                 getCSSPropertyByName(dialogBody, topPaddingProperty).value.replace('px', '')
             );
@@ -507,6 +509,35 @@ describe('dialog test suite', () => {
 
             expect(getElementSize(dialogContainer2, 0, 'width')).toBe(400);
             expect(getElementSize(dialogContainer2, 0, 'height')).toBe(400);
+        });
+    });
+
+    describe('Form dialog example', () => {
+        it('should check open-closing', () => {
+            const acceptBtn = 0;
+            const cancelBtn = 1;
+
+            checkDialogDismissals(formDialog, button, acceptBtn, continueStatus);
+            checkDialogDismissals(formDialog, button, cancelBtn, canceledStatus);
+        });
+
+        // skipped due to https://github.com/SAP/fundamental-ngx/issues/7195
+        xit('should check required fields validation', () => {
+            openDialog(formDialog);
+            for (let i = 1; i < 4; i++) {
+                clearValue(dialogInput, i);
+                expect(getElementClass(dialogInput, i)).toContain('is-error');
+            }
+        });
+
+        it('should check close dialog via escape', () => {
+            checkCloseDialogWithEscapeKey(formDialog, button);
+        });
+
+        it('should check turn off vertical paddings', () => {
+            click(formDialog + checkboxes, 1);
+            openDialog(formDialog);
+            expect(getElementClass(dialogBody)).not.toContain('no-vertical-padding');
         });
     });
 

@@ -17,7 +17,7 @@ export function getNestedValue(key: string, object: any): any {
  * @param target
  * @param ...sources
  */
-export function mergeDeep(target: Object, ...sources: Object[]): Object {
+export function mergeDeep(target: any, ...sources: any[]): any {
     if (!sources.length) {
         return target;
     }

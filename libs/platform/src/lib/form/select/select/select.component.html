@@ -33,7 +33,7 @@
         [attr.aria-labelledby]="ariaLabel"
         [attr.aria-disabled]="disabled"
     >
-        <fd-icon [glyph]="item.icon" class="fd-template-icon icon-margin"></fd-icon>
+        <fd-icon *ngIf="item.icon" [glyph]="item.icon" class="fd-template-icon icon-margin"></fd-icon>
         <ng-container
             [ngTemplateOutlet]="listItem"
             [ngTemplateOutletContext]="{ optionItem: item, index: index }"

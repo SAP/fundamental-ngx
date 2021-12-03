@@ -249,8 +249,7 @@ describe('Step input component test suit', () => {
     }
 
     function clearInputFF(section: string, index: number = 0): void {
-        let inputValue;
-        inputValue = getValue(section + input, index);
+        const inputValue = getValue(section + input, index);
         click(section + input, index);
         for (let j = 0; j < inputValue.length; j++) {
             sendKeys('Delete');

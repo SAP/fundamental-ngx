@@ -32,7 +32,7 @@ export class DynamicPageLayoutPo extends BaseComponentPo {
         waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

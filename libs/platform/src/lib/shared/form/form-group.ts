@@ -3,7 +3,7 @@ import { FormGroup, AbstractControl } from '@angular/forms';
 
 import { FormField } from './form-field';
 import { FormFieldGroup } from './form-field-group';
-import { LabelLayout, HintPlacement } from './form-options';
+import { LabelLayout, HintPlacement, ColumnLayout } from './form-options';
 
 /**
  * FormGroup base class.
@@ -17,47 +17,67 @@ export abstract class FormGroupContainer {
      */
     formGroup: FormGroup;
     /**
-     * Translations template reference
+     * Translations template reference.
      */
     i18Strings: TemplateRef<any>;
     /**
-     * Indicates when form is editable
+     * Indicates when form is editable.
      */
     editable: boolean;
     /**
-     * Indicates when labels should not be displayed
+     * Indicates when labels should not be displayed.
      */
     noLabelLayout: boolean;
+
     /**
-     * Define labels placement
+     * @deprecated
+     * Use labelColumnLayout, fieldColumnLayout and gapColumnLayout properties.
+     *
+     * Defines form field label placement.
      */
     labelLayout: LabelLayout;
+
     /**
-     * Define hints placement
+     * Defines label's column layout.
+     */
+    labelColumnLayout: ColumnLayout;
+
+    /**
+     * Defines field's column layout.
+     */
+    fieldColumnLayout: ColumnLayout;
+
+    /**
+     * Defines gap column layout.
+     */
+    gapColumnLayout: ColumnLayout;
+
+    /**
+     * Define hints placement.
      */
     hintPlacement: HintPlacement;
     /**
-     * Attach underlying form field
+     * Attach underlying form field.
      */
     addFormField: (formField: FormField) => void;
     /**
-     * Detach underlying form field
+     * Detach underlying form field.
      */
     removeFormField: (formField: FormField) => void;
     /**
-     * Attach formControl
+     * Attach formControl.
      */
     addFormControl: (name: string, control: AbstractControl) => void;
     /**
-     * Detach form formControl
+     * Detach form formControl.
      */
     removeFormControl: (name: string) => void;
     /**
-     * Attach underlying form field group
+     * Attach underlying form field group.
      */
     addFormFieldGroup: (formFieldGroup: FormFieldGroup) => void;
     /**
-     * Detach underlying form field group
+     * Detach underlying form field group.
      */
     removeFormFieldGroup: (formFieldGroup: FormFieldGroup) => void;
 }

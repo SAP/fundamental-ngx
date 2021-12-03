@@ -28,15 +28,7 @@ import {
 
 describe('Verify Feed Input component', () => {
     const feedInputPage = new FeedInputPo();
-    const {
-        feedInputTextArea,
-        feedInputAvatar,
-        feedInputButton,
-        feedInputNoAvatar,
-        disableInputTextArea,
-        disableInputButton,
-        activeInputTextAreas
-    } = new FeedInputPo();
+    const { feedInputTextArea, feedInputAvatar, feedInputButton, feedInputNoAvatar } = new FeedInputPo();
 
     beforeAll(() => {
         feedInputPage.open();

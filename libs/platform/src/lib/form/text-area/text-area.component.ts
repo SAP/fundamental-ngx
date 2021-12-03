@@ -237,21 +237,17 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
 
     /** write value for ControlValueAccessor */
     writeValue(value: any): void {
-        if (value) {
-            super.writeValue(value);
-            this.updateCounterInteractions();
-            this.stateChanges.next('textarea: writeValue');
-        }
+        super.writeValue(value ?? '');
+        this.updateCounterInteractions();
+        this.stateChanges.next('textarea: writeValue');
     }
 
     /** update the counter message and related interactions */
     updateCounterInteractions(): void {
-        if (this.value) {
-            this._textAreaCharCount = this.value.length;
-            if (this.maxLength) {
-                // newly added to avoid unnecessary iteration, remove if issue found
-                this.validateLengthOnCustomSet();
-            }
+        this._textAreaCharCount = this.value?.length ?? 0;
+        if (this.maxLength) {
+            // newly added to avoid unnecessary iteration, remove if issue found
+            this.validateLengthOnCustomSet();
         }
     }
 
@@ -277,12 +273,11 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         this._isPasted = true;
         /// For IE
         if (window['clipboardData']) {
-            const value = window['clipboardData'].getData('Text');
             // todo: handle for IE
             this.updateCounterInteractions();
         } else {
             // for other navigators
-            navigator['clipboard'].readText().then((clipText) => {
+            navigator['clipboard'].readText().then(() => {
                 this.updateCounterInteractions();
             });
         }

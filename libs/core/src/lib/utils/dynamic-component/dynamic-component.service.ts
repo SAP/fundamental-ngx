@@ -35,7 +35,7 @@ export class DynamicComponentService {
      * @param inject  enables to provide preconfigured component injector and dependencies
      */
     public createDynamicComponent<T>(
-        content: TemplateRef<any> | Type<any> | string | Object,
+        content: TemplateRef<any> | Type<any> | string | Record<string, any>,
         componentType: Type<T>,
         config: DynamicComponentConfig,
         inject: { injector?: Injector; services?: any[] } = {}
@@ -58,7 +58,7 @@ export class DynamicComponentService {
      * @param injector enables to provide preconfigured component injector
      */
     async createDynamicModule<M, C>(
-        content: TemplateRef<any> | Type<any> | string | Object,
+        content: TemplateRef<any> | Type<any> | string | Record<string, any>,
         moduleType: Type<M> | NgModuleFactory<M>,
         componentType: Type<C>,
         containerRef: ViewContainerRef,
@@ -114,9 +114,9 @@ export class DynamicComponentService {
 
     private _passExternalContent<V>(
         componentRef: ComponentRef<V>,
-        content: TemplateRef<any> | Type<any> | string | Object
+        content: TemplateRef<any> | Type<any> | string | Record<string, any>
     ): void {
-        if (componentRef.instance.hasOwnProperty('childContent')) {
+        if (Object.prototype.hasOwnProperty.call(componentRef.instance, 'childContent')) {
             (componentRef.instance as any).childContent = content;
         }
     }

@@ -215,10 +215,11 @@ export class ResizableCardLayoutExampleComponent {
                 this.showTableHeader = false;
                 this.card3TableData = [];
                 break;
-            default:
+            default: {
                 // 3 for table header
                 const index = (event.newCardHeightRowSpan - this.miniHeaderRowSpan - 3) / 3;
                 this.card3TableData = this._getTableData(index);
+            }
         }
     }
 

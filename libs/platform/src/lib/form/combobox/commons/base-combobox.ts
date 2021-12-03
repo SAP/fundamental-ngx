@@ -38,6 +38,7 @@ import { ListComponent } from '@fundamental-ngx/core/list';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import {
     ArrayComboBoxDataSource,
+    coerceArraySafe,
     CollectionBaseInput,
     ComboBoxDataSource,
     FormField,
@@ -143,11 +144,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     }
 
     set value(value: any) {
-        if (!value) {
-            return;
-        }
-
-        const selectedItems = Array.isArray(value) ? value : [value];
+        const selectedItems = coerceArraySafe(value);
         this.setAsSelected(this._convertToOptionItems(selectedItems));
         super.setValue(value);
     }
@@ -277,9 +274,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     ];
 
     /** @hidden */
-    private _displayFn = (value: any) => {
-        return this.displayValue(value);
-    };
+    private _displayFn = (value: any) => this.displayValue(value);
 
     /** @hidden */
     private _secondaryFn = (value: any) => {
@@ -348,11 +343,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
     /** write value for ControlValueAccessor */
     writeValue(value: any): void {
-        if (!value) {
-            return;
-        }
-
-        const selectedItems = Array.isArray(value) ? value : [value];
+        const selectedItems = coerceArraySafe(value);
         this.setAsSelected(this._convertToOptionItems(selectedItems));
         super.writeValue(value);
     }
@@ -509,7 +500,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
     /** @hidden */
     protected get ds(): ComboBoxDataSource<any> {
-        return <ComboBoxDataSource<any>>this.dataSource;
+        return this.dataSource as ComboBoxDataSource<any>;
     }
 
     /** @hidden Map grouped values to array. */

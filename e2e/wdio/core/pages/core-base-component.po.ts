@@ -29,7 +29,7 @@ export class CoreBaseComponentPo {
         }
     }
 
-    saveExampleBaselineScreenshot(specName: string, options: object = {}): void {
+    saveExampleBaselineScreenshot(specName: string, options: Record<string, any> = {}): void {
         const areasArray = elementArray(this.exampleAreaContainersArr);
         for (let i = 0; i < areasArray.length; i++) {
             waitForElDisplayed(this.exampleAreaContainersArr, i);
@@ -43,7 +43,7 @@ export class CoreBaseComponentPo {
         }
     }
 
-    compareWithBaseline(specName: string, options: object = {}): any {
+    compareWithBaseline(specName: string, options: Record<string, any> = {}): any {
         const areasArray = elementArray(this.exampleAreaContainersArr);
         let diff = 0;
         for (let i = 0; i < areasArray.length; i++) {
@@ -59,7 +59,7 @@ export class CoreBaseComponentPo {
         return diff;
     }
 
-    getScreenshotFolder(componentFolder: string): object {
+    getScreenshotFolder(componentFolder: string): Record<string, any> {
         return { baselineFolder: `${process.cwd()}${this.defaultScreenshotFolder}${componentFolder}` };
     }
 

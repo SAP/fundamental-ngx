@@ -5,7 +5,11 @@
     [checkDueDate]="checkDueDate"
     [allowSendRemindersForStatuses]="sendReminderStatuses"
     [isEditAvailable]="editModeEnabled"
+    [disableSaveButton]="disableSaveButton"
+    [disableExitButton]="disableExitButton"
     (nodeClick)="nodeClick($event)"
+    (afterNodeAdd)="afterNodeAdd($event)"
+    (afterNodeEdit)="afterNodeEdit($event)"
 >
 </fdp-approval-flow>
 
@@ -124,3 +128,40 @@
         [(ngModel)]="sendReminderStatuses"
     ></fd-multi-input>
 </p>
+<p>Disable certain node actions for newly added nodes:</p>
+<div>
+    <p>
+        <input
+            id="disableAddingNodeBeforeForNewNodes"
+            [disabled]="nodeActionsDisabled"
+            type="checkbox"
+            [(ngModel)]="nodeActionsConfigForNewNodes.disableAddBefore"
+            (ngModelChange)="newNodeSettingsChange()"
+        />
+        <label for="disableAddingNodeBeforeForNewNodes">Disable adding before</label>
+    </p>
+
+    <p>
+        <input
+            id="disableAddingNodeAfterForNewNodes"
+            [disabled]="nodeActionsDisabled"
+            type="checkbox"
+            [(ngModel)]="nodeActionsConfigForNewNodes.disableAddAfter"
+            (ngModelChange)="newNodeSettingsChange()"
+        />
+        <label for="disableAddingNodeAfterForNewNodes">Disable adding after</label>
+    </p>
+
+    <p>
+        <input
+            id="disableAddingNodeParallelForNewNodes"
+            [disabled]="nodeActionsDisabled"
+            type="checkbox"
+            [(ngModel)]="nodeActionsConfigForNewNodes.disableAddParallel"
+            (ngModelChange)="newNodeSettingsChange()"
+        />
+        <label for="disableAddingNodeParallelForNewNodes">Disable adding parallel</label>
+    </p>
+</div>
+<p>Disable "Save" button: <input type="checkbox" [(ngModel)]="disableSaveButton" /></p>
+<p>Disable "Exit" button: <input type="checkbox" [(ngModel)]="disableExitButton" /></p>

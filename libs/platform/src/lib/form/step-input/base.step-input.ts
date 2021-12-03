@@ -142,7 +142,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     /** @hidden */
     canDecrement = true;
 
-    /**@hidden
+    /** @hidden
      * Indicates if control has an error
      */
     isErrorState = false;
@@ -226,7 +226,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         this._listenToAlign();
     }
 
-    /**@hidden
+    /** @hidden
      * Override writeValue method to keep input view value up to date
      */
     writeValue(value: number): void {
@@ -267,7 +267,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         this.decrease(step);
     }
 
-    /**@hidden
+    /** @hidden
      * catch value during entering from view.
      */
     onEnterValue(value: string): void {
@@ -286,7 +286,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         }
     }
 
-    /**@hidden
+    /** @hidden
      * Commit entered value from view.
      */
     commitEnteredValue(): void {
@@ -305,7 +305,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         }
     }
 
-    /**@hidden
+    /** @hidden
      * Indicates when input gets focused
      */
     onFocus(): void {
@@ -320,7 +320,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         }
     }
 
-    /**@hidden
+    /** @hidden
      * Indicates when input loses focus
      */
     onBlur(): void {
@@ -332,7 +332,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     abstract createChangeEvent(value: number): StepInputChangeEvent;
 
     /** Format value for view presentation */
-    abstract formatValue(value: number): string;
+    abstract formatValue(value: number | null): string;
 
     /** Format value for "in focus" mode */
     abstract formatValueInFocusMode(value: number): string;
@@ -418,9 +418,6 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
 
     /** @hidden */
     private _updateViewValue(): void {
-        if (this._value === null) {
-            return;
-        }
         const formatted = this._formatValue();
         this._renderValue(formatted);
     }

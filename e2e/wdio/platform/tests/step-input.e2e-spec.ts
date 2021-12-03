@@ -36,7 +36,6 @@ describe('Step input test suite', () => {
         errorMessage,
         minMaxButtonDecrement,
         minMaxButtonIncrement,
-        inputWithoutForm,
         quantityText,
         formStatusText,
         fillInput

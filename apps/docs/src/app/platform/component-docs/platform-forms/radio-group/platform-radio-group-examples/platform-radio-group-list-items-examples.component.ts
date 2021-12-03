@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, NgForm } from '@angular/forms';
+import { MessageToastService } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fdp-platform-radio-group-list-items-example',
@@ -85,22 +86,24 @@ export class PlatformRadioGroupListItemsExampleComponent {
         }
     ];
 
+    constructor(private readonly _messageToastService: MessageToastService) {}
+
     onSubmit(form: NgForm): void {
         if (this.form1.controls.radiolo1.status === 'INVALID' && form.submitted) {
             this.form1.controls.radiolo1.markAsTouched();
         }
     }
 
-    onResetForm1(form: NgForm): void {
-        this.form1.reset();
-    }
+    onReset(form: FormGroup): void {
+        if (form.invalid) {
+            return;
+        }
 
-    onResetForm5(form: NgForm): void {
-        this.form5.reset();
-    }
-
-    onResetForm6(form: NgForm): void {
-        this.form6.reset();
+        form.reset();
+        const content = 'Form was successfully reset.';
+        this._messageToastService.open(content, {
+            duration: 5000
+        });
     }
 }
 

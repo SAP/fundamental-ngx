@@ -10,7 +10,7 @@ let panelContentUniqueId = 0;
  * ```
  */
 @Directive({
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-panel-content]'
 })
 export class PanelContentDirective {

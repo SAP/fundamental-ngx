@@ -44,14 +44,13 @@ describe('Thumbnail field', () => {
         expect(isElementDisplayed(mainVideo)).toBeTrue();
     });
 
-    // Skipped due https://github.com/SAP/fundamental-ngx/issues/4896
-    xit('should on click display image for vertical', () => {
+    it('should on click display image for vertical', () => {
         scrollIntoView(verticalGalleryImages);
         const arrLength = getElementArrayLength(verticalGalleryImages);
         for (let i = 0; arrLength - 1 > i; i++) {
-            const imageUrl = getAttributeByName(verticalGalleryImages, 'ng-reflect-image', i);
+            const imageUrl = getAttributeByName(verticalGalleryImages, 'style', i);
             click(verticalGalleryImages, i);
-            expect(getAttributeByName(mainImage, 'src', 0)).toContain(imageUrl);
+            expect(imageUrl).toContain(getAttributeByName(mainImage, 'src', 0));
         }
     });
 

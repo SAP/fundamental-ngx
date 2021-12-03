@@ -32,7 +32,7 @@ export abstract class DynamicComponentContainer<T = TemplateRef<any> | Type<any>
     }
 
     /** @hidden Load received content as embedded view */
-    protected _createFromTemplate(content: TemplateRef<any>, context: object): void {
+    protected _createFromTemplate(content: TemplateRef<any>, context: any): void {
         this.containerRef.clear();
         this._componentRef = this.containerRef.createEmbeddedView(content, context);
     }

@@ -46,10 +46,10 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
     text: string;
 
     /**
-     * Max preview rows of Feed text. If you have more than max rows text, you can toggle preview/full text with more/less button.
+     * Max preview characters of Feed text. If you have more than max characters text, you can toggle preview/full text with more/less button.
      */
     @Input()
-    maxRows = 2;
+    maxChars?: number;
 
     /**
      * Sets the `aria-label` attribute to the element.
@@ -139,8 +139,8 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
     }
 
     /** @hidden */
-    checkLineCount(count: number): void {
-        this.hasMore = count > +this.maxRows;
+    checkCharCount(isMore: boolean): void {
+        this.hasMore = isMore;
         this._changeDetectorRef.detectChanges();
     }
 }

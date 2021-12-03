@@ -53,7 +53,6 @@ describe('calendar test suite', () => {
         rangeHoverCalendar,
         specialDaysCalendar,
         markedWeekendDays,
-        markedMondays,
         gridCalendar,
         rangeCalendar,
         programmaticCalendar,

@@ -55,7 +55,8 @@ const {
     selectMonthButton,
     disabledFunctionExample,
     calendarContainer,
-    buttonText
+    buttonText,
+    inputGroup
 } = new DateTimePicker();
 
 describe('Datetime picker suite', () => {
@@ -237,17 +238,51 @@ describe('Datetime picker suite', () => {
         click(okButton);
         expect(getValue(datePickerInput)).toEqual(date);
     });
-});
 
-it('should check that OK buttons have correct text', () => {
-    const datepickerButtonsLength = getElementArrayLength(datePickerButton);
-    for (let i = 0; i < datepickerButtonsLength; i++) {
-        if (!getElementClass(datePickerButton, i).includes('disabled')) {
-            click(datePickerButton, i);
-            expect(getText(okButton + buttonText)).toEqual('OK');
-            click(okButton);
+    it('should check that OK buttons have correct text', () => {
+        const datepickerButtonsLength = getElementArrayLength(datePickerButton);
+        for (let i = 0; i < datepickerButtonsLength; i++) {
+            if (!getElementClass(datePickerButton, i).includes('disabled')) {
+                click(datePickerButton, i);
+                expect(getText(okButton + buttonText)).toEqual('OK');
+                click(okButton);
+            }
         }
-    }
+    });
+
+    // skipped due to https://github.com/SAP/fundamental-ngx/issues/7112
+    xit('should check that date-time picker does not have error if it contains valid value', () => {
+        scrollIntoView(inputGroup, 8);
+        let validDate;
+        const currDate = new Date();
+        const currMonth = currDate.getMonth() + 1;
+        const currDay = currDate.getDate();
+        const currYear = currDate.getFullYear();
+        let currMinute = currDate.getMinutes().toString();
+        if (currMinute === '0') {
+            currMinute = '00';
+            // eslint-disable-next-line radix
+        } else if (parseInt(currMinute) < 10) {
+            currMinute = '0' + currMinute;
+        }
+        const currentHour = currDate.toLocaleString('en-US', { timeZone: 'UTC', hour: 'numeric', hour12: true });
+
+        if (currentHour[1] === ' ') {
+            validDate = `${currMonth}/${currDay}/${currYear}, ${currentHour[0]}:${currMinute} ${currentHour.slice(
+                2,
+                4
+            )}`;
+        }
+        if (currentHour[1] !== ' ') {
+            validDate = `${currMonth}/${currDay}/${currYear}, ${currentHour.slice(
+                0,
+                2
+            )}:${currMinute} ${currentHour.slice(3, 5)}`;
+        }
+
+        expect(getValue(datePickerInput, 8)).toBe(validDate);
+        expect(getElementClass(inputGroup, 8)).not.toContain('error');
+    });
 });
 
 function selectHoursAndMinutes(hour: number = 1, minute: number = 1): void {

@@ -1,6 +1,7 @@
 import { QueryList } from '@angular/core';
 
 import { FormField } from './form-field';
+import { ColumnLayout } from './form-options';
 
 /**
  * FormFieldGroup base class
@@ -11,6 +12,24 @@ export abstract class FormFieldGroup {
     /** Group header*/
     label: string;
 
+    /** Group's form name */
+    formName: string;
+
     /** Group fields */
     fields: QueryList<FormField>;
+
+    /**
+     * Defines label's column layout.
+     */
+    labelColumnLayout: ColumnLayout;
+
+    /**
+     * Defines field's column layout.
+     */
+    fieldColumnLayout: ColumnLayout;
+
+    /**
+     * Defines gap column layout.
+     */
+    gapColumnLayout: ColumnLayout;
 }

@@ -29,6 +29,8 @@ export class MultiInputPo extends CoreBaseComponentPo {
     checkboxInput = this.popover + ' fd-checkbox';
     listItem = this.popover + ' .fd-list__item';
     dialogCheckbox = '.fd-dialog fd-checkbox';
+    selectAllItemsBtn = '.fd-button[glyph="multiselect-all"]';
+    dialogListItem = '.fd-dialog .fd-list__item';
 
     open(): void {
         super.open(this.url);
@@ -36,7 +38,7 @@ export class MultiInputPo extends CoreBaseComponentPo {
         waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

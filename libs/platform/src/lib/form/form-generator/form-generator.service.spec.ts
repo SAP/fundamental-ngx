@@ -4,10 +4,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { PlatformSliderModule } from '../../slider/slider.module';
 import { FormGeneratorService } from './form-generator.service';
-import { DynamicFormItem } from './interfaces/dynamic-form-item';
+import { DynamicFormFieldItem } from './interfaces/dynamic-form-item';
 import { BaseDynamicFormGeneratorControl, dynamicFormFieldProvider, dynamicFormGroupChildProvider } from './public_api';
 
-export const dummyFormItemsWithWhenCondition: DynamicFormItem[] = [
+export const dummyFormItemsWithWhenCondition: DynamicFormFieldItem[] = [
     {
         type: 'input',
         name: 'shouldBeVisible',
@@ -22,19 +22,17 @@ export const dummyFormItemsWithWhenCondition: DynamicFormItem[] = [
     }
 ];
 
-export const dummyFormItems: DynamicFormItem[] = [
+export const dummyFormItems: DynamicFormFieldItem[] = [
     {
         type: 'input',
         name: 'something',
         message: 'wow',
         default: 'test',
-        transformer: (value: string) => {
-            return `${value}!!!`;
-        }
+        transformer: (value: string) => `${value}!!!`
     }
 ];
 
-export const brokenFormItems: DynamicFormItem[] = [
+export const brokenFormItems: DynamicFormFieldItem[] = [
     {
         type: 'notExistingControlType',
         name: 'shouldNotBeInForm',
@@ -88,22 +86,32 @@ describe('FormGeneratorService', () => {
 
     it('should create empty form', async () => {
         const form = await service.generateForm('dummyForm', []);
-        expect(Object.keys(form.controls).length).toBe(0);
+        // There's always a default group called 'ungrouped'.
+        expect(Object.keys(form.controls).length).toBe(1);
     });
 
     it('should create form with controls', async () => {
         const form = await service.generateForm('dummyForm', dummyFormItems);
-        expect(form.controls.something).toBeTruthy();
+
+        const control = service.getFormControl(form, 'something');
+
+        expect(control).toBeTruthy();
     });
 
     it('should skip unknown form item type', async () => {
         const form = await service.generateForm('dummyForm', brokenFormItems);
-        expect(form.controls['shouldNotBeInForm']).toBeUndefined();
+
+        const nonExistingControl = service.getFormControl(form, 'shouldNotBeInForm');
+
+        expect(nonExistingControl).toBeNull();
     });
 
     it('should return transformed form value', async () => {
         const form = await service.generateForm('dummyForm', dummyFormItems);
-        form.controls.something.setValue('test');
+
+        const control = service.getFormControl(form, 'something');
+
+        control.setValue('test');
         const formValue = await service.getFormValue(form);
         expect(formValue.something).toEqual('test!!!');
     });
@@ -126,7 +134,10 @@ describe('FormGeneratorService', () => {
 
     it('should check show second field', async () => {
         const form = await service.generateForm('dummyForm', dummyFormItemsWithWhenCondition);
-        form.controls.shouldBeVisible.setValue(false);
+
+        const visibleControl = service.getFormControl(form, 'shouldBeVisible');
+
+        visibleControl.setValue(false);
         const visibleItems = await service.checkVisibleFormItems(form);
         expect(visibleItems.shouldBeHidden).toBeFalsy();
     });

@@ -301,18 +301,18 @@ export class ExperimentalSliderComponent
     }
 
     /** @hidden */
-    onChange: Function = () => {};
+    onChange: (value: SliderControlValue) => void = () => {};
 
     /** @hidden */
-    onTouched: Function = () => {};
+    onTouched = () => {};
 
     /** @hidden */
-    registerOnChange(fn: Function): void {
+    registerOnChange(fn: (value: SliderControlValue) => void): void {
         this.onChange = fn;
     }
 
     /** @hidden */
-    registerOnTouched(fn: Function): void {
+    registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
 
@@ -327,7 +327,7 @@ export class ExperimentalSliderComponent
     }
 
     /** @hidden */
-    onHandleClick(event: MouseEvent, element: HTMLElement): void {
+    onHandleClick(event: MouseEvent): void {
         event.stopPropagation();
         const unsubscribeFromMousemove = this._renderer.listen('document', 'mousemove', (moveEvent) => {
             this.writeValue(this._calculateValueFromPointerPosition(moveEvent));

@@ -35,6 +35,7 @@ let messageToastUniqueId = 0;
     styleUrls: ['./message-toast.component.scss'],
     host: {
         '[attr.aria-label]': 'ariaLabel',
+        '[attr.aria-live]': '"polite"',
         '[attr.id]': 'id',
         '[style.width]': 'width',
         '[style.min-width]': 'minWidth',
@@ -104,6 +105,7 @@ export class MessageToastComponent implements OnInit, AfterViewInit {
 
     /** Event fired when the message toast is timeout. */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onHide: EventEmitter<undefined> = new EventEmitter<undefined>();
 
     /** @hidden */

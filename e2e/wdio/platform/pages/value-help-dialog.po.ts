@@ -39,6 +39,7 @@ export class ValueHelpDialogPo extends BaseComponentPo {
     selectedItemName = 'tr[aria-selected="true"] td:nth-of-type(3)';
     selectedTokens = '.fd-tokenizer fd-token';
     showAllBtn = '.fdp-value-help-dialog__toggle-filters button';
+    toolbarButtons = '.fd-toolbar button';
 
     // define conditions form selectors
     addBtn = 'button[label="Add"]';
@@ -46,10 +47,9 @@ export class ValueHelpDialogPo extends BaseComponentPo {
     conditionSelectors = 'fd-popover .fd-select__text-content';
     dropdownOptions = 'ul fd-option';
     xBtn = 'button[glyph="decline"]';
+    conditionsButton = 'fd-popover .fd-select__control .fd-button';
 
-    formInputField = (id: string) => {
-        return this.inputFields + `[id="${id}"]`;
-    };
+    formInputField = (id: string) => this.inputFields + `[id="${id}"]`;
 
     open(): void {
         super.open(this.url);
@@ -57,7 +57,7 @@ export class ValueHelpDialogPo extends BaseComponentPo {
         waitForElDisplayed(this.pageHeader);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

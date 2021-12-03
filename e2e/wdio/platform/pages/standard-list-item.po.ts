@@ -51,7 +51,7 @@ export class StandardListItemPo extends BaseComponentPo {
         waitForPresent(this.sNoBorderList);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

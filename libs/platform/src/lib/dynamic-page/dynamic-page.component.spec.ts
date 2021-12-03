@@ -240,9 +240,7 @@ class TestNonCollapsibleComponent {
     @ViewChild(DynamicPageComponent) dynamicPage: DynamicPageComponent;
 }
 describe('DynamicPageComponent with collapsible set to false', () => {
-    let component: TestNonCollapsibleComponent;
     let fixture: ComponentFixture<TestNonCollapsibleComponent>;
-    let dynamicPage: DynamicPageComponent;
 
     beforeEach(
         waitForAsync(() => {
@@ -255,9 +253,7 @@ describe('DynamicPageComponent with collapsible set to false', () => {
     );
     beforeEach(() => {
         fixture = TestBed.createComponent(TestNonCollapsibleComponent);
-        component = fixture.componentInstance;
         fixture.detectChanges();
-        dynamicPage = component.dynamicPage;
     });
 
     it('should not show the collapse button', () => {
@@ -340,9 +336,7 @@ class HostTestComponent {
     @ViewChild(DynamicPageComponent) dynamicPage: DynamicPageComponent;
 }
 describe('DynamicPageComponent Content Projection', () => {
-    let component: HostTestComponent;
     let fixture: ComponentFixture<HostTestComponent>;
-    let dynamicPageComponent: DynamicPageComponent;
 
     beforeEach(
         waitForAsync(() => {
@@ -356,9 +350,7 @@ describe('DynamicPageComponent Content Projection', () => {
 
     beforeEach(() => {
         fixture = TestBed.createComponent(HostTestComponent);
-        component = fixture.componentInstance;
         fixture.detectChanges();
-        dynamicPageComponent = component.dynamicPage;
     });
 
     it('should create', () => {

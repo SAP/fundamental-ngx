@@ -291,7 +291,7 @@ export class WizardGeneratorService {
             for (const form of item.formGroups) {
                 wizardFormValue[item.id][form.id] = formatted
                     ? await this._formGeneratorService.getFormValue(forms[form.id]?.form)
-                    : forms[form.id]?.form.value;
+                    : this._formGeneratorService._getFormValueWithoutUngrouped(forms[form.id]?.form.value);
             }
         }
 
@@ -312,6 +312,7 @@ export class WizardGeneratorService {
      * @returns {Boolean} if steps are untouched, will return true, if yes - false
      */
     isStepsUntouched(): boolean {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         return [...this.stepsComponents].every(([_, component]) =>
             component.forms.toArray().every((item) => !item.form.touched)
         );
