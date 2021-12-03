@@ -1,6 +1,6 @@
 <ul fd-list [navigationIndicator]="true">
     <li fd-list-item>
-        <a fd-list-link [navigationIndicator]="true">
+        <a fd-list-link [navigationIndicator]="true" navigatableListItemScreenReaderText="Custom navigatable text">
             <span fd-list-title> Link List item 1 </span>
         </a>
     </li>
@@ -13,10 +13,10 @@
     <li fd-list-item>
         <span fd-list-title> List item 3 </span>
     </li>
-    <li fd-list-item>
-        <a fd-list-link [navigationIndicator]="true" [selected]="true">
+    <li fd-list-item [selected]="true">
+        <a fd-list-link [navigationIndicator]="true">
             <i fd-list-icon glyph="cart"></i>
-            <span fd-list-title> Link List item 4 </span>
+            <span fd-list-title> Link List item 4</span>
         </a>
     </li>
 </ul>

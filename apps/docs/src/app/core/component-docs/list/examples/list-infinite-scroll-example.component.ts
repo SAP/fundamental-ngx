@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 const ITEMS_AMOUNT_ON_LOAD = 5;
 
@@ -14,13 +15,17 @@ export class ListInfiniteScrollExampleComponent {
 
     loading = false;
 
+    constructor(private liveAnnouncer: LiveAnnouncer) {}
+
     loadMore(): void {
         this.loading = true;
+        this.liveAnnouncer.announce('Loading', 'assertive');
         of(this._getNewItems())
             .pipe(delay(2000))
             .subscribe((result) => {
                 this.items = this.items.concat(result);
                 this.loading = false;
+                this.liveAnnouncer.clear();
             });
     }
 

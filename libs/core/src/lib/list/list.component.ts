@@ -171,6 +171,10 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
         this._focusItems.changes.pipe(startWith(0), takeUntil(this._onDestroy$)).subscribe(() => {
             this._recheckLinks();
             this._listenOnItemsClick();
+            setTimeout(() => {
+                // using setTimeout to avoid ExpressionChangedAfterItHasBeenCheckedError
+                this.updateItemsProperties();
+            });
         });
     }
 
@@ -183,6 +187,18 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
         this._focusItems.forEach((item, index) =>
             item.clicked.pipe(takeUntil(refreshObs)).subscribe(() => this.setItemActive(index))
         );
+    }
+
+    /** @hidden */
+    private updateItemsProperties() {
+        let closestListHeader: ListGroupHeaderDirective | null = null;
+        this._focusItems.forEach((item) => {
+            if (item instanceof ListGroupHeaderDirective) {
+                closestListHeader = item;
+            } else if (item instanceof ListItemComponent && closestListHeader) {
+                item._relatedGroupHeaderId = closestListHeader.nativeElementId;
+            }
+        });
     }
 
     /** @hidden */

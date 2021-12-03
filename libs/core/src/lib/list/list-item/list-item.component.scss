@@ -1,0 +1,12 @@
+.fd-screenreader-only {
+    /* Outside the DOM flow */
+    position: absolute !important;
+    /* Nearly collapsed */
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    /* IE 7+ only support clip without commas */
+    clip: rect(1px 1px 1px 1px);
+    /* All other browsers */
+    clip: rect(1px, 1px, 1px, 1px);
+}

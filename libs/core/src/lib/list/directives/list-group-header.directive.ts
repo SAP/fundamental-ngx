@@ -12,6 +12,8 @@ import { coerceNumberProperty } from '@angular/cdk/coercion';
 
 import { ListFocusItem } from '../list-focus-item.model';
 
+let uniqueId = 0;
+
 @Directive({
     selector: '[fdListGroupHeader], [fd-list-group-header]',
     host: {
@@ -27,6 +29,16 @@ import { ListFocusItem } from '../list-focus-item.model';
     ]
 })
 export class ListGroupHeaderDirective extends ListFocusItem {
+    /** Whether to apply "aria-hidden" attribute. */
+    @Input()
+    @HostBinding('attr.aria-hidden')
+    ariaHidden = true;
+
+    /** id of an element to be applied */
+    @Input()
+    @HostBinding('attr.id')
+    nativeElementId: string | null = `fd-list-group-header-${++uniqueId}`;
+
     /** tab index attribute */
     @Input()
     @HostBinding('attr.tabindex')
