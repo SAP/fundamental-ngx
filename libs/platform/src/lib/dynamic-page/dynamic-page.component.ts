@@ -13,26 +13,20 @@ import {
     OnDestroy,
     QueryList,
     Renderer2,
-    ViewChild,
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map, startWith, throttleTime } from 'rxjs/operators';
+import { startWith } from 'rxjs/operators';
 
 import { TabPanelComponent } from '@fundamental-ngx/core/tabs';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
-import { CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
+import { DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
 import { DynamicPageContentHostComponent } from './dynamic-page-content/dynamic-page-content-host.component';
-import {
-    DynamicPageContentComponent,
-    DynamicPageTabChangeEvent
-} from './dynamic-page-content/dynamic-page-content.component';
+import { DynamicPageContentComponent } from './dynamic-page-content/dynamic-page-content.component';
 import { DynamicPageFooterComponent } from './dynamic-page-footer/dynamic-page-footer.component';
 import { DynamicPageHeaderComponent } from './dynamic-page-header/header/dynamic-page-header.component';
 import { DynamicPageTitleComponent } from './dynamic-page-header/title/dynamic-page-title.component';
 import { DynamicPageService } from './dynamic-page.service';
-import { addClassNameToElement } from './utils';
 
 @Component({
     selector: 'fdp-dynamic-page',
