@@ -4,7 +4,6 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ProgressIndicatorComponent } from './progress-indicator.component';
 
 @Component({
-    selector: 'fd-test-progress-indicator',
     template: `
         <fd-progress-indicator
             #indicatorRef
