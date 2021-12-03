@@ -3,7 +3,6 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class ListPo extends BaseComponentPo {
     private url = '/list';
-    root = '#page-content';
 
     // borderless examples
     noBorderListItems = 'fdp-platform-list-border-less-example li';
@@ -33,11 +32,13 @@ export class ListPo extends BaseComponentPo {
     multiListItems = 'fdp-platform-list-with-selection-example li';
     multiToolbar = 'fdp-platform-list-with-selection-example fd-toolbar';
     multiCheckbox = 'fdp-platform-list-with-selection-example fd-checkbox';
+    multiCheckBoxMark = 'fdp-platform-list-with-selection-example fdp-standard-list-item';
     // single selection examples
     singleList = 'fdp-platform-list-with-single-selection-example fdp-list ul';
     singleListItems = 'fdp-platform-list-with-single-selection-example li';
     singleToolbar = 'fdp-platform-list-with-single-selection-example fd-toolbar';
     singleRadioBtn = 'fdp-platform-list-with-single-selection-example fd-radio-button';
+    singleRadioBtnInput = 'fdp-platform-list-with-single-selection-example input';
     // navigation indicator examples
     navList = 'fdp-platform-list-with-navigation-example fdp-list';
     navListItems = 'fdp-platform-list-with-navigation-example li';
@@ -46,6 +47,7 @@ export class ListPo extends BaseComponentPo {
     vScrollList = 'fdp-platform-list-with-infinite-scroll-example fdp-list';
     vScrollListItems = 'fdp-platform-list-with-infinite-scroll-example fdp-standard-list-item li';
     vScrollLoadIcon = 'fd-busy-indicator .fd-busy-indicator--circle-0';
+    busyIndicator = '.fd-busy-indicator';
     // load on btn click examples
     loadList = 'fdp-platform-list-with-more-button-example fdp-list';
     loadListItems = 'fdp-platform-list-with-more-button-example li';
@@ -60,12 +62,14 @@ export class ListPo extends BaseComponentPo {
     noDataListItems = 'fdp-platform-list-with-nodata-example li';
     noDataCompactList = 'fdp-platform-list-with-nodata-example fdp-list:nth-of-type(2) ul';
     // no separator examples
-    noSepList = 'fdp-platform-list-with-no-seperator-example fdp-list';
+    noSepList = 'fdp-platform-list-with-no-seperator-example ul';
     noSepListItems = 'fdp-platform-list-with-no-seperator-example li';
     // unread data examples
     unreadListAttr = 'fdp-platform-list-with-unread-example fdp-standard-list-item';
     unreadListItems = 'fdp-platform-list-with-unread-example li';
     unreadListItemText = 'fdp-platform-list-with-unread-example li span';
+    cozyItem = '#fdp-list-item-8';
+    compactItem = '#fdp-list-item-12';
 
     open(): void {
         super.open(this.url);
