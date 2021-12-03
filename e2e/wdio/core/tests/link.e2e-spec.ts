@@ -50,7 +50,7 @@ describe('Link test suite', () => {
             expect(isElementDisplayed(rightArrowIcon)).toBe(true);
         });
 
-        it('should check link with right arrow', () => {
+        it('should check link with left arrow', () => {
             expect(getElementAriaLabel(links, 4)).toBe('Icon left');
             expect(isElementDisplayed(leftArrowIcon)).toBe(true);
         });
