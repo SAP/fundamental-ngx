@@ -14,23 +14,26 @@
     </fd-dynamic-page-header>
 
     <fd-dynamic-page-subheader
+        *ngIf="headerComponent"
         [collapsed]="headerComponent.collapsed"
         [collapsible]="headerComponent.collapsible"
         [pinnable]="headerComponent.pinnable"
+        [expandLabel]="headerComponent.expandLabel"
+        [collapseLabel]="headerComponent.collapseLabel"
+        [role]="headerComponent.role"
+        [id]="headerComponent.id"
+        [headerAriaLabel]="headerComponent.headerAriaLabel"
+        [pinAriaLabel]="headerComponent.pinAriaLabel"
+        [unpinAriaLabel]="headerComponent.unpinAriaLabel"
     >
         <ng-container [ngTemplateOutlet]="headerComponent.contentTemplateRef"></ng-container>
     </fd-dynamic-page-subheader>
 
     <fd-tab-list *ngIf="isTabbed" [stackContent]="true" maxContentHeight="auto">
         <ng-container *ngFor="let tab of tabs">
-            *ngIf="headerComponent"
             <fd-tab [title]="tab.tabLabel" [id]="tab.id">
                 <fd-dynamic-page-content>
                     <ng-container [ngTemplateOutlet]="tab.contentTemplateRef"></ng-container>
-                    [expandLabel]="headerComponent.expandLabel" [collapseLabel]="headerComponent.collapseLabel"
-                    [role]="headerComponent.role" [id]="headerComponent.id"
-                    [headerAriaLabel]="headerComponent.headerAriaLabel" [pinAriaLabel]="headerComponent.pinAriaLabel"
-                    [unpinAriaLabel]="headerComponent.unpinAriaLabel"
                 </fd-dynamic-page-content>
             </fd-tab>
         </ng-container>
