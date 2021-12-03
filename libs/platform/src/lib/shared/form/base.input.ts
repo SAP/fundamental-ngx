@@ -230,7 +230,7 @@ export abstract class BaseInput
             );
         }
 
-        const labelAndHelpId = `fdp-form-label-${this.id}`;
+        const labelAndHelpId = `fdp-form-label-content-${this.id}`;
         // if not specified, associate label and inline help ids with the input,
         // else add these ids to the specified ones
         if (!this.ariaLabelledBy) {

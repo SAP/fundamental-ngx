@@ -8,7 +8,7 @@
                 [inlineHelpTitle]="hint"
                 [inlineHelpBodyPlacement]="hintPlacement"
             >
-                <span *ngIf="!noLabelLayout">{{ label }}</span>
+                <span *ngIf="!noLabelLayout" [id]="'fdp-form-label-content-' + id">{{ label }}</span>
             </label>
         </div>
         <ng-container *ngTemplateOutlet="withFormMessage"></ng-container>
