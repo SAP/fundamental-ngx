@@ -9,32 +9,7 @@
         can then tab into the day/month/year selection grid and use the arrow keys to navigate around the grid and make
         a selection with the space bar or enter key.
     </p>
-    <fd-message-strip [dismissible]="false" type="information">
-        <b>IMPORTANT</b>
-        <br />
-        The Calendar component relies on provided datetime implementation (DatetimeAdapter) and datetime formats
-        (DateTimeFormats).
-        <br />
-        The current examples are based on FdDatetimeAdapter.
-        <br />
-        The FdDatetimeAdapter is based on native date api (formatting is based on
-        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat">
-            Intl object </a
-        >, parsing is based on
-        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse">
-            Date.parse() </a
-        >).
-        <br />
-        Since this adapter has some disadvantages, formatting may vary among browsers and parsing is limited to en
-        locale only.
-        <br />
-        You can use a custom fundamental adapter based on a third party library:
-        <a href="https://momentjs.com/" target="_blank">https://momentjs.com/</a>.
-        <br />
-        Please check examples and documentation on:
-        <b><a routerLink="/core/moment-datetime-adapter" target="_blank">Moment date time adapter</a></b
-        >.
-    </fd-message-strip>
+    <fd-datetime-important componentName="Calendar"></fd-datetime-important>
 </description>
 <import module="CalendarModule" subPackage="calendar"></import>
 
