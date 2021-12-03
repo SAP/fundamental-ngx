@@ -64,6 +64,7 @@ describe('Form Container test suite', () => {
         comboboxListItem,
         isInlineExampleComboboxBtn
     } = formContainerPage;
+
     beforeAll(() => {
         formContainerPage.open();
     }, 1);
@@ -180,13 +181,14 @@ describe('Form Container test suite', () => {
         });
 
         it('should be able to set value in step input', () => {
-            const setValue = '10.6';
+            const value = '10.6';
 
+            scrollIntoView(complexExampleStepInput);
             click(complexExampleStepInput);
-            clearValue(complexExampleStepInput);
-            sendKeys(setValue);
+            sendKeys(['Delete']);
+            sendKeys(value);
 
-            expect(getValue(complexExampleStepInput)).toEqual(setValue);
+            expect(getValue(complexExampleStepInput)).toEqual(value);
         });
 
         it('should be able to change value of step input with increase/decrease buttons', () => {
