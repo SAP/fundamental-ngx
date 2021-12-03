@@ -111,18 +111,6 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
 
     /**
      * @hidden
-     * reference to tabbed content container
-     */
-    @ViewChild('tabsContainer')
-    set _tabsContainer(tabsContainer: ElementRef<HTMLElement>) {
-        if (!tabsContainer?.nativeElement) {
-            return;
-        }
-        // this._setTabStyles(tabsContainer.nativeElement);
-    }
-
-    /**
-     * @hidden
      * whether tabbed content is present in this page
      */
     isTabbed = false;
@@ -215,7 +203,7 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
         }
     }
 
-    /**@hidden */
+    /** @hidden */
     private _isTabContentPresent(content: DynamicPageContentComponent[]): boolean {
         content.forEach((contentItem) => {
             if (contentItem.tabLabel) {
