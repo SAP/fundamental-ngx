@@ -311,6 +311,11 @@ $fd-table-header-color-var: var(--sapList_HeaderBackground, #f2f2f2);
     }
 
     .fd-table__cell {
+        &:focus {
+            outline: -webkit-focus-ring-color solid 0.125rem;
+            outline-offset: -0.125rem;
+        }
+
         &--checkbox {
             border-left: none;
             border-right: $fd-table-border;
