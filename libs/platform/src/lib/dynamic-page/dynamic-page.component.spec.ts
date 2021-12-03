@@ -4,7 +4,7 @@ import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angul
 import { By } from '@angular/platform-browser';
 
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { TabsModule } from '@fundamental-ngx/core/tabs';
+import { TabPanelComponent, TabsModule } from '@fundamental-ngx/core/tabs';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 
 import { DynamicPageContentComponent } from './dynamic-page-content/dynamic-page-content.component';
@@ -13,7 +13,7 @@ import { DynamicPageTitleComponent } from './dynamic-page-header/title/dynamic-p
 import { DynamicPageComponent } from './dynamic-page.component';
 import { DynamicPageService } from './dynamic-page.service';
 import { PlatformDynamicPageModule } from './dynamic-page.module';
-import { CLASS_NAME } from './constants';
+import { CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
 
 @Component({
     template: `
@@ -47,8 +47,8 @@ import { CLASS_NAME } from './constants';
     `
 })
 class TestComponent {
-    size = 'medium';
-    background = '';
+    size: DynamicPageResponsiveSize = 'medium';
+    background: DynamicPageBackgroundType = 'solid';
     @ViewChild(DynamicPageComponent) dynamicPage: DynamicPageComponent;
     @ViewChild(DynamicPageTitleComponent) dynamicPageTitleComponent: DynamicPageTitleComponent;
     @ViewChild(DynamicPageHeaderComponent) dynamicPageHeaderComponent: DynamicPageHeaderComponent;
@@ -89,50 +89,36 @@ describe('DynamicPageComponent default values', () => {
         expect(headerElement).toBeTruthy();
     });
 
-    describe('children options inheritance', () => {
-        it('should inherit size', async () => {
-            fixture.detectChanges();
-            expect(component.dynamicPageTitleComponent.size).toBe('medium');
-            component.dynamicPage.size = 'large';
-            component.dynamicPage.ngAfterContentInit();
-            fixture.detectChanges();
-            expect(component.dynamicPageTitleComponent.size).toBe('large');
-            component.dynamicPage.size = 'small';
-            component.dynamicPage.ngAfterContentInit();
-            fixture.detectChanges();
-            expect(component.dynamicPageTitleComponent.size).toBe('small');
-        });
+    it('should set proper style by size', async () => {
+        const dynamicPageElement = fixture.debugElement.query(By.css('.' + CLASS_NAME.dynamicPage)).nativeElement;
+        component.dynamicPage.size = 'large';
+        fixture.detectChanges();
+        expect(dynamicPageElement.classList.contains('fd-dynamic-page--lg')).toBeTruthy();
 
-        it('should inherit background styles', async () => {
-            fixture.detectChanges();
-            expect(component.dynamicPageTitleComponent.background).toBe('');
-            component.dynamicPage.background = 'solid';
-            component.dynamicPage.ngAfterContentInit();
-            fixture.detectChanges();
-            expect(component.dynamicPageTitleComponent.background).toBe('solid');
-            component.dynamicPage.background = 'transparent';
-            component.dynamicPage.ngAfterContentInit();
-            fixture.detectChanges();
-            expect(component.dynamicPageTitleComponent.background).toBe('transparent');
-            component.dynamicPage.background = 'list';
-            component.dynamicPage.ngAfterContentInit();
-            fixture.detectChanges();
-            expect(component.dynamicPageTitleComponent.background).toBe('list');
-        });
+        component.dynamicPage.size = 'small';
+        fixture.detectChanges();
+        expect(dynamicPageElement.classList.contains('fd-dynamic-page--sm')).toBeTruthy();
     });
 
-    // TODO: Unskip after fix
-    xit('should render content in view', () => {
+    it('should set background styles', async () => {
+        const dynamicPageElement = fixture.debugElement.query(By.css('.' + CLASS_NAME.dynamicPage)).nativeElement;
+        component.dynamicPage.background = 'transparent';
         fixture.detectChanges();
+        expect(dynamicPageElement.classList.contains('fd-dynamic-page--transparent-bg')).toBeTruthy();
 
-        expect(component.dynamicPageContentComponent.getElementRef().nativeElement.innerText).toBe(
-            'DynamicPage Content Text'
-        );
+        component.dynamicPage.background = 'list';
+        fixture.detectChanges();
+        expect(dynamicPageElement.classList.contains('fd-dynamic-page--list-bg')).toBeTruthy();
+    });
+
+    it('should render content in view', () => {
+        fixture.detectChanges();
+        const contentEl = fixture.debugElement.query(By.css('.' + CLASS_NAME.dynamicPageContent)).nativeElement;
+        expect(contentEl.innerText).toBe('DynamicPage Content Text');
     });
 
     it('should collapse header on click of title', async () => {
-        dynamicPageComponent.toggleCollapse();
-        component.dynamicPage.ngAfterViewInit();
+        component.dynamicPageHeaderComponent._onCollapseChange(true);
         fixture.detectChanges();
         const contentEl: HTMLElement = fixture.debugElement.query(
             By.css('.fd-dynamic-page__collapsible-header')
@@ -143,7 +129,7 @@ describe('DynamicPageComponent default values', () => {
     it('should collapse header on scroll', fakeAsync(() => {
         component.dynamicPage.ngAfterViewInit();
         const throttleTime = 100;
-        const contentEl = fixture.debugElement.query(By.css('fdp-dynamic-page-content-host'));
+        const contentEl = fixture.debugElement.query(By.css('fd-dynamic-page-content'));
 
         spyOn(component.dynamicPageHeaderComponent.collapseChange, 'emit');
 
@@ -163,18 +149,18 @@ describe('DynamicPageComponent default values', () => {
         <fdp-dynamic-page [size]="size" [background]="background">
             <fdp-dynamic-page-title></fdp-dynamic-page-title>
             <fdp-dynamic-page-header></fdp-dynamic-page-header>
-            <fdp-dynamic-page-content id="tab1" [tabLabel]="tabLabel1"
-                >DynamicPage Content Tabbed 1 Text</fdp-dynamic-page-content
-            >
-            <fdp-dynamic-page-content id="tab2" [tabLabel]="tabLabel2"
-                >DynamicPage Content Tabbed 2 Text</fdp-dynamic-page-content
-            >
+            <fdp-dynamic-page-content id="tab1" [tabLabel]="tabLabel1">
+                DynamicPage Content Tabbed 1 Text
+            </fdp-dynamic-page-content>
+            <fdp-dynamic-page-content id="tab2" [tabLabel]="tabLabel2">
+                DynamicPage Content Tabbed 2 Text
+            </fdp-dynamic-page-content>
         </fdp-dynamic-page>
     `
 })
 class TestTabbedComponent {
-    size = 'medium';
-    background = '';
+    size: DynamicPageResponsiveSize = 'medium';
+    background: DynamicPageBackgroundType = 'solid';
     tabLabel1 = 'Tab 1';
     tabLabel2 = 'Tab 2';
     @ViewChild(DynamicPageComponent) dynamicPage: DynamicPageComponent;
@@ -204,24 +190,25 @@ describe('DynamicPageComponent tabbed values', () => {
         expect(fixture).toBeTruthy();
     });
 
-    it('should add correct classes to tab content', async () => {
+    it('should render proper components', async () => {
         fixture.detectChanges();
-        const tabsContainer = fixture.debugElement.query(By.css('.fd-tabs'));
+        const tabsContainer = fixture.debugElement.query(By.css('.fd-tabs__content'));
+        const tabEl = fixture.debugElement.query(By.directive(TabPanelComponent));
         expect(tabsContainer).toBeTruthy();
-        expect(tabsContainer.nativeElement.classList.contains(CLASS_NAME.dynamicPageTabs)).toBeTruthy();
-        expect(tabsContainer.nativeElement.classList.contains(CLASS_NAME.dynamicPageTabsAddShadow)).toBeTruthy();
+        expect(tabEl).toBeTruthy();
     });
 
     it('should set default tab size', async () => {
         const tabsContainer = fixture.debugElement.query(By.css('.fd-tabs'));
-        expect(tabsContainer.nativeElement.classList.contains(CLASS_NAME.dynamicPageTabsMedium)).toBeTruthy();
+        fixture.detectChanges();
+        expect(tabsContainer.nativeElement.classList.contains('fd-tabs--m')).toBeTruthy();
     });
 
     it('should switch tabs', async () => {
         dynamicPageComponent.setSelectedTab('tab2');
         fixture.detectChanges();
         const tab2: HTMLElement = fixture.debugElement.query(By.css('#tab2')).nativeElement;
-        expect(tab2.getAttribute('aria-expanded')).toBe('true');
+        expect(tab2.getAttribute('id')).toBe('tab2');
     });
 });
 
@@ -235,8 +222,8 @@ describe('DynamicPageComponent tabbed values', () => {
     `
 })
 class TestNonCollapsibleComponent {
-    size = 'medium';
-    background = '';
+    size: DynamicPageResponsiveSize = 'medium';
+    background: DynamicPageBackgroundType = 'solid';
     @ViewChild(DynamicPageComponent) dynamicPage: DynamicPageComponent;
 }
 describe('DynamicPageComponent with collapsible set to false', () => {
@@ -331,8 +318,8 @@ describe('DynamicPageComponent with collapsible set to false', () => {
     `
 })
 class HostTestComponent {
-    size = 'medium';
-    background = 'solid';
+    size: DynamicPageResponsiveSize = 'medium';
+    background: DynamicPageBackgroundType = 'solid';
     @ViewChild(DynamicPageComponent) dynamicPage: DynamicPageComponent;
 }
 describe('DynamicPageComponent Content Projection', () => {
