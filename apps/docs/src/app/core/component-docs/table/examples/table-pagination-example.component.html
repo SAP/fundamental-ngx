@@ -21,9 +21,10 @@
             label="Items Per Page"
             fd-button
             [fdMenu]="true"
+            *ngIf="rtl$ | async as rtl"
             [fdMenuTrigger]="itemsPerPageMenu"
-            [style.margin-left]="(rtl$ | async) ? '20px' : '0'"
-            [style.margin-right]="(rtl$ | async) ? '0' : '20px'"
+            [style.margin-left]="rtl ? '20px' : '0'"
+            [style.margin-right]="rtl ? '0' : '20px'"
         ></button>
         <fd-pagination
             [totalItems]="totalItems"

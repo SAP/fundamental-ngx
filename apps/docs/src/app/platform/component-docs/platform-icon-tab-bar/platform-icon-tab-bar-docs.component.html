@@ -4,7 +4,7 @@
         The text-only variant is one of the most common types. It allows longer labels, and can also display counters
         next to the text to indicate the number of items on the tab page.
         <br />
-        To use the text type of the tabs you must pass input <code class="code-snippet">type="text"</code>
+        To use the text type of the tabs you must pass input <code class="code-snippet">[type]="'text'"</code>
     </p>
 </description>
 <component-example>
@@ -18,7 +18,7 @@
     Text type tabs (column mode)
 </fd-docs-section-title>
 <description>
-    <p>To use this mode you need to pass input<code class="code-snippet">layoutMode="column"</code></p>
+    <p>To use this mode you need to pass input<code class="code-snippet">[layoutMode]="'column'"</code></p>
 </description>
 <component-example>
     <fd-icon-tab-bar-text-type-example textTypeLayoutMode="column"></fd-icon-tab-bar-text-type-example>
@@ -33,7 +33,7 @@
     are optional. If you decide to use labels, use them for all tabs. You can use counters as needed.
     <br />
     To use the icon type of the tabs without labels you must pass input
-    <code class="code-snippet">type="icon-only"</code>
+    <code class="code-snippet">[type]="'icon-only'"</code>
 </description>
 <component-example>
     <fd-icon-tab-bar-icon-only-type-example></fd-icon-tab-bar-icon-only-type-example>
@@ -46,7 +46,7 @@
     Icon type tabs with labels
 </fd-docs-section-title>
 <description>
-    To use the icon type of the tabs you must pass input <code class="code-snippet">type="icon"</code>
+    To use the icon type of the tabs you must pass input <code class="code-snippet">[type]="'icon'"</code>
 </description>
 <component-example>
     <fd-icon-tab-bar-icon-type-example></fd-icon-tab-bar-icon-type-example>
@@ -69,7 +69,7 @@
             counter on every tab.
         </li>
     </ul>
-    To use the filter type of the tabs you must pass input <code class="code-snippet">type="filter"</code>
+    To use the filter type of the tabs you must pass input <code class="code-snippet">[type]="'filter'"</code>
 </description>
 <component-example>
     <fd-icon-tab-bar-filter-type-example></fd-icon-tab-bar-filter-type-example>
@@ -81,7 +81,7 @@
 <fd-docs-section-title id="process-type" componentName="icon-tab-bar"> Process type tabs </fd-docs-section-title>
 <description>
     You can also use the tab bar to depict a process. In this case, each tab stands for one step. To use the process
-    type of the tabs you must pass input <code class="code-snippet">type="process"</code>
+    type of the tabs you must pass input <code class="code-snippet">[type]="'process'"</code>
 </description>
 <component-example>
     <fd-icon-tab-bar-process-type-example></fd-icon-tab-bar-process-type-example>
@@ -100,7 +100,7 @@
         <br />
     </p>
     <fd-message-strip [dismissible]="false" type="information">
-        This feature is available only for tabs with <code class="code-snippet">type="text"</code>
+        This feature is available only for tabs with <code class="code-snippet">[type]="'text'"</code>
     </fd-message-strip>
 </description>
 <component-example>
@@ -118,7 +118,7 @@
         overflow menu. It is also possible to drag and drop tabs from the tab bar to the overflow menu and vice versa.
     </p>
     <fd-message-strip [dismissible]="false" type="information">
-        This feature is available only for tabs with <code class="code-snippet">type="text"</code>
+        This feature is available only for tabs with <code class="code-snippet">[type]="'text'"</code>
     </fd-message-strip>
 </description>
 <component-example>
