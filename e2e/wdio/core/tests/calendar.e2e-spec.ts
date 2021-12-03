@@ -67,7 +67,8 @@ describe('calendar test suite', () => {
         rangeHoverItems,
         setCalendarRange,
         mondays,
-        weekendDays
+        sundays,
+        saturdays
     } = calendarPage;
 
     beforeAll(() => {
@@ -229,17 +230,9 @@ describe('calendar test suite', () => {
     describe('calendar with special days example', () => {
         it('should check ability to mark weekends', () => {
             click(specialDaysCalendar + calendarOptions);
-            for (let i = 0; i < getElementArrayLength(specialDaysCalendar + weekendDays); i++) {
-                expect(getElementClass(specialDaysCalendar + weekendDays, i)).toContain('special-day');
-            }
-            // need to additionality check first and last days in calendar cz if they are days of other month
-            // they do not have class 'weekend', but anyway will be marked as weekend
-            const itemsLength = getElementArrayLength(specialDaysCalendar + calendarItem);
-            if (getElementClass(specialDaysCalendar + calendarItem).includes('other-month')) {
-                expect(getElementClass(specialDaysCalendar + calendarItem)).toContain('special-day');
-            }
-            if (getElementClass(specialDaysCalendar + calendarItem, itemsLength - 2).includes('other-month')) {
-                expect(getElementClass(specialDaysCalendar + calendarItem, itemsLength - 2)).toContain('special-day');
+            for (let i = 0; i < getElementArrayLength(saturdays); i++) {
+                expect(getElementClass(saturdays, i)).toContain('special-day');
+                expect(getElementClass(sundays, i)).toContain('special-day');
             }
         });
         // rework later when i'll get answer on the question how it should work exactly

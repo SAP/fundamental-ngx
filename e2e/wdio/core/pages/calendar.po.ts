@@ -53,7 +53,9 @@ export class CalendarPo extends CoreBaseComponentPo {
     markedDays = 'td[class*="fd-calendar__special-day"] span';
     rangeHoverItems = '.fd-calendar__item--range';
     calendarRow = 'tbody .fd-calendar__row';
-    mondays = this.specialDaysCalendar + this.calendarRow + this.calendarItem + ':nth-child(2)';
+    mondays = this.specialDaysCalendar + this.calendarRow + this.calendarItem + ':nth-child(2):not(.hidden-day)';
+    sundays = this.specialDaysCalendar + this.calendarRow + this.calendarItem + ':nth-child(1):not(.hidden-day)';
+    saturdays = this.specialDaysCalendar + this.calendarRow + this.calendarItem + ':nth-child(7):not(.hidden-day)';
 
     open(): void {
         super.open(this.url);
