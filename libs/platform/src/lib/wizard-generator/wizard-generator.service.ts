@@ -291,7 +291,7 @@ export class WizardGeneratorService {
             for (const form of item.formGroups) {
                 wizardFormValue[item.id][form.id] = formatted
                     ? await this._formGeneratorService.getFormValue(forms[form.id]?.form)
-                    : forms[form.id]?.form.value;
+                    : this._formGeneratorService._getFormValueWithoutUngrouped(forms[form.id]?.form.value);
             }
         }
 

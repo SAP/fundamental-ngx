@@ -29,7 +29,12 @@ export class WizardGeneratorOnchangeExampleComponent {
                             onchange: (value, forms) => {
                                 const repositoryForm = forms.get('repositoryInformation');
 
-                                repositoryForm.get('repositoryName').setValue(`${value}-repo`);
+                                const control = this._formGeneratorService.getFormControl(
+                                    repositoryForm,
+                                    'repositoryName'
+                                );
+
+                                control.setValue(`${value}-repo`);
                             }
                         }
                     ]
@@ -60,6 +65,8 @@ export class WizardGeneratorOnchangeExampleComponent {
             summary: true
         }
     ];
+
+    constructor(private _formGeneratorService: FormGeneratorService) {}
 
     wizardFinished(wizardValue: WizardGeneratorFormsValue): void {
         this.wizardValue = wizardValue;

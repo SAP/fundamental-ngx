@@ -13,44 +13,67 @@
             [mainTitle]="mainTitle"
             [formGroup]="form"
             [columnLayout]="columnLayout"
-            [labelLayout]="labelLayout"
+            [labelColumnLayout]="labelColumnLayout"
+            [fieldColumnLayout]="fieldColumnLayout"
+            [gapColumnLayout]="gapColumnLayout"
             [unifiedLayout]="unifiedLayout"
         >
-            <ng-container *ngFor="let field of formControlItems; trackBy: _trackFn; index as i">
-                <ng-container
-                    *fdpDynamicFormControlField="field; show: shouldShowFields[field.formItem.name] !== false"
+            <ng-container *ngFor="let field of formControlItems; trackBy: _trackFn">
+                <ng-сontainer
+                    *ngTemplateOutlet="
+                        field.type === 'field' ? fieldRenderer : groupRenderer;
+                        context: { field: field, formFieldName: field.formItem?.name, rank: field.formItem?.rank || 0 }
+                    "
+                ></ng-сontainer>
+                <ng-template
+                    #fieldRenderer
+                    let-field="field"
+                    let-formFieldName="formFieldName"
+                    let-formGroupName="formGroupName"
+                    let-rank="rank"
                 >
-                    <fdp-form-field
-                        [hint]="field.formItem?.guiOptions?.hint"
-                        [hintPlacement]="field.formItem?.guiOptions?.hintPlacement || 'left'"
-                        [placeholder]="
-                            field.formItem?.placeholder ||
-                            (field.formItem?.useMessageAsPlaceholder && field.formItem?.message)
-                        "
-                        [id]="field.formItem?.name"
-                        [i18Strings]="i18n"
-                        [column]="field.formItem?.guiOptions?.column || 1"
-                        [columnLayout]="field.formItem?.guiOptions?.columnLayout"
-                        [label]="
-                            field.formItem?.message + (field.formItem?.guiOptions?.appendColon !== false ? ':' : '')
-                        "
-                        [validators]="field.formItem?.validators"
-                        [required]="field.formItem?.required"
-                        [rank]="i"
-                        [labelLayout]="field.formItem?.guiOptions?.layout"
-                        [noLabelLayout]="field.formItem?.guiOptions?.noLabelLayout || false"
-                        #formField
+                    <ng-container
+                        *fdpDynamicFormControlField="field; show: shouldShowFields[field.formItem.name] !== false"
                     >
-                        <ng-container
-                            [formField]="formField"
+                        <fdp-form-generator-field
                             [form]="form"
-                            fdpDynamicFormControl
-                            [name]="field.formItem.name"
-                            [formItem]="field.formItem"
-                        >
+                            [shouldShow]="shouldShowFields[field.formItem.name] !== false"
+                            [field]="field"
+                            [formFieldName]="formFieldName"
+                            [formGroupNamePath]="formGroupName"
+                            [rank]="rank"
+                            [i18n]="i18n"
+                        ></fdp-form-generator-field>
+                    </ng-container>
+                </ng-template>
+                <ng-template #groupRenderer>
+                    <fdp-form-field-group
+                        [label]="field.formItem?.message"
+                        [labelColumnLayout]="field.formItem?.guiOptions?.labelColumnLayout"
+                        [fieldColumnLayout]="field.formItem?.guiOptions?.fieldColumnLayout"
+                        [gapColumnLayout]="field.formItem?.guiOptions?.gapColumnLayout"
+                        [formName]="field.formItem?.name"
+                    >
+                        <ng-container *ngFor="let groupField of _getOrderedControls(field.controls)">
+                            <ng-container
+                                *fdpDynamicFormControlField="
+                                    field;
+                                    show: shouldShowFields[groupField.formItem?.name] !== false
+                                "
+                            >
+                                <fdp-form-generator-field
+                                    [form]="form"
+                                    [field]="groupField"
+                                    [shouldShow]="shouldShowFields[groupField.formItem?.name] !== false"
+                                    [formFieldName]="groupField.formItem?.name"
+                                    [formGroupNamePath]="field.formItem?.name"
+                                    [rank]="groupField.formItem?.rank"
+                                    [i18n]="i18n"
+                                ></fdp-form-generator-field>
+                            </ng-container>
                         </ng-container>
-                    </fdp-form-field>
-                </ng-container>
+                    </fdp-form-field-group>
+                </ng-template>
             </ng-container>
             <fdp-form-field [column]="1" [rank]="formControlItems.length + 1">
                 <!-- For user-defined elements, like submit button -->

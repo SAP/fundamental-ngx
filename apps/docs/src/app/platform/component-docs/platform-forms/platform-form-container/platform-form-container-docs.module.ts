@@ -27,6 +27,7 @@ import { PlatformFormBasicExampleComponent } from './platform-form-container-exa
 import { PlatformFormGroupExampleComponent } from './platform-form-container-examples/platform-form-group/platform-form-group-example.component';
 import { PlatformFieldColumnChangeExampleComponent } from './platform-form-container-examples/platform-field-layout/platform-field-column-change-example.component';
 import { PlatformFieldIsInlineChangeExampleComponent } from './platform-form-container-examples/platform-field-layout/platform-field-isinline-change-example.component';
+import { PlatformFormCustomLayoutComponent } from './platform-form-container-examples/platform-form-custom-layout.component';
 
 const routes: Routes = [
     {
@@ -68,7 +69,8 @@ const routes: Routes = [
         PlatformFormGroupExampleComponent,
 
         PlatformFieldColumnChangeExampleComponent,
-        PlatformFieldIsInlineChangeExampleComponent
+        PlatformFieldIsInlineChangeExampleComponent,
+        PlatformFormCustomLayoutComponent
     ]
 })
 export class PlatformFormContainerDocsModule {}
