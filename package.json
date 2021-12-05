@@ -181,7 +181,7 @@
         "coveralls": "3.1.1",
         "dotenv": "8.2.0",
         "eslint": "7.22.0",
-        "eslint-config-prettier": "8.1.0",
+        "eslint-config-prettier": "8.3.0",
         "eslint-plugin-import": "latest",
         "eslint-plugin-jsdoc": "latest",
         "eslint-plugin-prefer-arrow": "latest",
