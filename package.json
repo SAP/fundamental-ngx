@@ -153,7 +153,7 @@
         "@commitlint/cli": "14.1.0",
         "@commitlint/config-conventional": "14.1.0",
         "@commitlint/travis-cli": "13.2.1",
-        "@nrwl/cli": "12.9.0",
+        "@nrwl/cli": "13.2.3",
         "@nrwl/eslint-plugin-nx": "12.9.0",
         "@nrwl/linter": "12.9.0",
         "@nrwl/nx-cloud": "12.1.8",
