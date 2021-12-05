@@ -160,7 +160,7 @@
         "@nrwl/schematics": "8.12.11",
         "@nrwl/tao": "12.9.0",
         "@nrwl/workspace": "12.9.0",
-        "@schematics/angular": "~12.0.5",
+        "@schematics/angular": "~13.0.4",
         "@types/jasmine": "3.10.2",
         "@types/jasminewd2": "2.0.8",
         "@typescript-eslint/eslint-plugin": "~4.28.3",
