@@ -3703,7 +3703,8 @@
                         }
                     },
                     "outputs": ["{options.outputPath}"],
-                    "defaultConfiguration": ""
+                    "defaultConfiguration": "",
+                    "dependsOn": []
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -3766,8 +3767,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core", "platform"]
+            "tags": []
         },
         "docs-e2e": {
             "root": "apps/docs-e2e",
