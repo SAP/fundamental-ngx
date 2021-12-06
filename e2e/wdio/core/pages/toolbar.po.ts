@@ -33,6 +33,7 @@ export class ToolbarPo extends CoreBaseComponentPo {
     popoverToggledButton = 'fd-popover-body button:not(.fd-toolbar__overflow-button, fd-split-button button)';
     popoverSplitButton = 'fd-split-button button';
     popoverDropDown = '.fd-button-split';
+    overflowInput = 'fd-toolbar-overflow-example .fd-input';
 
     clickDayInCalendarButtonByValue = (dayNumber: number): void => {
         click('.fd-calendar__table td.fd-calendar__item:not(.fd-calendar__item--other-month)', dayNumber - 1);

@@ -1,6 +1,6 @@
 {
     "name": "fundamental-ngx",
-    "version": "0.33.0-rc.194",
+    "version": "0.33.0-rc.197",
     "license": "Apache-2.0",
     "main": "dist/libs/core/index.js",
     "description": "Fundamental Library for Angular is a themable Fiori Angular component library.",
@@ -181,7 +181,7 @@
         "coveralls": "3.1.1",
         "dotenv": "8.2.0",
         "eslint": "7.22.0",
-        "eslint-config-prettier": "8.1.0",
+        "eslint-config-prettier": "8.3.0",
         "eslint-plugin-import": "latest",
         "eslint-plugin-jsdoc": "latest",
         "eslint-plugin-prefer-arrow": "latest",

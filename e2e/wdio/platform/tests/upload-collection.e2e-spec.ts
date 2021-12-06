@@ -250,6 +250,7 @@ describe('Upload collection test suite', () => {
         click(selector + transparentButton);
         setValue(dialogInputField, testFolder1);
         click(dialogCreateButton);
+        waitForNotDisplayed(selector + busyIndicator);
         expect(getText(selector + tableItemCount)).toBe('55');
         const countAfterAdd = getText(selector + tableItemCount);
         const countAfterAddNum = Number(countAfterAdd);
