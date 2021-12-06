@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.199 (2021-12-06)
+
+
+### Bug Fixes
+
+* **core:** time component accessibility ([#7280](https://github.com/SAP/fundamental-ngx/issues/7280)) ([32a79cc](https://github.com/SAP/fundamental-ngx/commit/32a79cc416eb7757b5ec5c1e16544723e4e1f9dc))
+
 ## 0.33.0-rc.198 (2021-12-06)
 
 ## 0.33.0-rc.197 (2021-12-05)
