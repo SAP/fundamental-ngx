@@ -120,10 +120,20 @@ describe('Notification component test', () => {
         }
     });
 
-    it('should check actions with notifications', () => {
+    it('should check approve actions with notification', () => {
         for (let i = 0; i < 2; i++) {
             checkActions('Approve', approveButton, i);
+        }
+    });
+
+    it('should check reject actions with notification', () => {
+        for (let i = 0; i < 2; i++) {
             checkActions('Reject', rejectButton, i);
+        }
+    });
+
+    it('should check forward actions with notification', () => {
+        for (let i = 0; i < 2; i++) {
             checkActions('Forward', forwardButton, i);
         }
     });

@@ -149,6 +149,17 @@ describe('Split menu button test suite', () => {
         expect(compactMenuItemHeight).toBeLessThan(cozyMenuItemHeight);
     });
 
+    it('should check changing width of split-button after selecting item', () => {
+        const defaultMenuWidth = getElementSize(iconBtnAttrArr, 2, 'width');
+        click(iconExArrowBtnArr, 2);
+        click(menuItemArr, 1);
+        const menuWidthAfterSelection = getElementSize(iconBtnAttrArr, 2, 'width');
+        expect(menuWidthAfterSelection).toBeGreaterThan(defaultMenuWidth);
+        click(iconExArrowBtnArr, 2);
+        click(menuItemArr);
+        expect(getElementSize(iconBtnAttrArr, 2, 'width')).toBeLessThan(menuWidthAfterSelection);
+    });
+
     xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             spMenuBtnPage.saveExampleBaselineScreenshot();
