@@ -38,92 +38,7 @@
                     }
                 }
             },
-            "tags": [],
-            "implicitDependencies": [
-                "core-icon",
-                "core-button",
-                "core-checkbox",
-                "core-dialog",
-                "core-action-bar",
-                "core-action-sheet",
-                "core-alert",
-                "core-avatar",
-                "core-avatar-group",
-                "core-bar",
-                "core-busy-indicator",
-                "core-calendar",
-                "core-card",
-                "core-carousel",
-                "core-combobox",
-                "core-date-picker",
-                "core-datetime",
-                "core-datetime-picker",
-                "core-dynamic-page",
-                "core-dynamic-side-content",
-                "core-facets",
-                "core-feed-input",
-                "core-feed-list-item",
-                "core-file-uploader",
-                "core-fixed-card-layout",
-                "core-flexible-column-layout",
-                "core-form",
-                "core-formatted-text",
-                "core-grid-list",
-                "core-illustrated-message",
-                "core-infinite-scroll",
-                "core-info-label",
-                "core-inline-help",
-                "core-input-group",
-                "core-layout-grid",
-                "core-layout-panel",
-                "core-link",
-                "core-list",
-                "core-menu",
-                "core-message-box",
-                "core-message-strip",
-                "core-notification",
-                "core-object-identifier",
-                "core-object-marker",
-                "core-object-number",
-                "core-object-status",
-                "core-pagination",
-                "core-panel",
-                "core-popover",
-                "core-product-switch",
-                "core-quick-view",
-                "core-radio",
-                "core-rating-indicator",
-                "core-resizable-card-layout",
-                "core-scroll-spy",
-                "core-segmented-button",
-                "core-select",
-                "core-shared",
-                "core-shellbar",
-                "core-side-navigation",
-                "core-slider",
-                "core-split-button",
-                "core-status-indicator",
-                "core-step-input",
-                "core-switch",
-                "core-table",
-                "core-tabs",
-                "core-text",
-                "core-tile",
-                "core-time",
-                "core-time-picker",
-                "core-title",
-                "core-token",
-                "core-toolbar",
-                "core-utils",
-                "core-message-toast",
-                "core-multi-input",
-                "core-wizard",
-                "core-tree",
-                "core-upload-collection",
-                "core-vertical-navigation",
-                "core-splitter",
-                "core-scrollbar"
-            ]
+            "tags": []
         },
         "core-action-bar": {
             "projectType": "library",
@@ -163,8 +78,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-action-sheet": {
             "projectType": "library",
@@ -204,8 +118,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-popover", "core-button", "core-dialog"]
+            "tags": ["fd"]
         },
         "core-alert": {
             "projectType": "library",
@@ -242,8 +155,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-button"]
+            "tags": ["fd"]
         },
         "core-avatar": {
             "projectType": "library",
@@ -280,8 +192,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-avatar-group": {
             "projectType": "library",
@@ -321,8 +232,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-bar": {
             "projectType": "library",
@@ -359,8 +269,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-button"]
+            "tags": ["fd"]
         },
         "core-breadcrumb": {
             "projectType": "library",
@@ -400,8 +309,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-menu", "core-popover"]
+            "tags": ["fd"]
         },
         "core-busy-indicator": {
             "projectType": "library",
@@ -441,8 +349,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-button": {
             "projectType": "library",
@@ -479,8 +386,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-icon"]
+            "tags": ["fd"]
         },
         "core-calendar": {
             "projectType": "library",
@@ -520,8 +426,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-card": {
             "projectType": "library",
@@ -558,8 +463,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-shared", "core-avatar", "core-object-status", "core-button"]
+            "tags": ["fd"]
         },
         "core-carousel": {
             "projectType": "library",
@@ -599,8 +503,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-checkbox": {
             "projectType": "library",
@@ -640,8 +543,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-combobox": {
             "projectType": "library",
@@ -681,8 +583,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-list", "core-menu"]
+            "tags": ["fd"]
         },
         "core-date-picker": {
             "projectType": "library",
@@ -722,17 +623,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": [
-                "core-utils",
-                "core-shared",
-                "core-calendar",
-                "core-form",
-                "core-icon",
-                "core-popover",
-                "core-input-group",
-                "core-button"
-            ]
+            "tags": ["fd"]
         },
         "core-datetime": {
             "projectType": "library",
@@ -772,8 +663,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-datetime-picker": {
             "projectType": "library",
@@ -813,15 +703,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": [
-                "core-utils",
-                "core-shared",
-                "core-datetime",
-                "core-calendar",
-                "core-form",
-                "core-time"
-            ]
+            "tags": ["fd"]
         },
         "core-dialog": {
             "projectType": "library",
@@ -858,15 +740,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": [
-                "core-title",
-                "core-bar",
-                "core-button",
-                "core-busy-indicator",
-                "core-utils",
-                "core-shared"
-            ]
+            "tags": ["fd"]
         },
         "core-dynamic-page": {
             "projectType": "library",
@@ -906,8 +780,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-shared", "core-toolbar", "core-breadcrumb", "core-tabs"]
+            "tags": ["fd"]
         },
         "core-dynamic-side-content": {
             "projectType": "library",
@@ -947,8 +820,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-facets": {
             "projectType": "library",
@@ -985,8 +857,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-form"]
+            "tags": ["fd"]
         },
         "core-feed-input": {
             "projectType": "library",
@@ -1026,8 +897,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-avatar", "core-form"]
+            "tags": ["fd"]
         },
         "core-feed-list-item": {
             "projectType": "library",
@@ -1067,8 +937,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-file-uploader": {
             "projectType": "library",
@@ -1108,8 +977,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-form", "core-button"]
+            "tags": ["fd"]
         },
         "core-fixed-card-layout": {
             "projectType": "library",
@@ -1149,8 +1017,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-flexible-column-layout": {
             "projectType": "library",
@@ -1190,8 +1057,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-form": {
             "projectType": "library",
@@ -1228,8 +1094,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-inline-help"]
+            "tags": ["fd"]
         },
         "core-formatted-text": {
             "projectType": "library",
@@ -1269,8 +1134,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-grid-list": {
             "projectType": "library",
@@ -1310,8 +1174,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-toolbar", "core-form"]
+            "tags": ["fd"]
         },
         "core-icon": {
             "projectType": "library",
@@ -1348,8 +1211,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-illustrated-message": {
             "projectType": "library",
@@ -1389,8 +1251,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-infinite-scroll": {
             "projectType": "library",
@@ -1430,8 +1291,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-info-label": {
             "projectType": "library",
@@ -1471,8 +1331,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-inline-help": {
             "projectType": "library",
@@ -1512,8 +1371,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-popover"]
+            "tags": ["fd"]
         },
         "core-input-group": {
             "projectType": "library",
@@ -1553,8 +1411,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-layout-grid": {
             "projectType": "library",
@@ -1594,8 +1451,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-layout-panel": {
             "projectType": "library",
@@ -1635,8 +1491,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-link": {
             "projectType": "library",
@@ -1673,8 +1528,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-list": {
             "projectType": "library",
@@ -1711,8 +1565,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-form", "core-checkbox"]
+            "tags": ["fd"]
         },
         "core-menu": {
             "projectType": "library",
@@ -1749,8 +1602,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-list", "core-mobile-mode"]
+            "tags": ["fd"]
         },
         "core-message-box": {
             "projectType": "library",
@@ -1790,8 +1642,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-dialog"]
+            "tags": ["fd"]
         },
         "core-message-page": {
             "projectType": "library",
@@ -1831,8 +1682,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-message-strip": {
             "projectType": "library",
@@ -1872,8 +1722,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-message-toast": {
             "projectType": "library",
@@ -1913,8 +1762,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-micro-process-flow": {
             "projectType": "library",
@@ -1954,8 +1802,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-shared", "core-popover"]
+            "tags": ["fd"]
         },
         "core-mobile-mode": {
             "projectType": "library",
@@ -1995,8 +1842,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-dialog"]
+            "tags": ["fd"]
         },
         "core-multi-input": {
             "projectType": "library",
@@ -2036,8 +1882,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-nested-list": {
             "projectType": "library",
@@ -2077,8 +1922,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-menu", "core-popover", "core-icon"]
+            "tags": ["fd"]
         },
         "core-notification": {
             "projectType": "library",
@@ -2118,8 +1962,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-object-identifier": {
             "projectType": "library",
@@ -2159,8 +2002,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-link"]
+            "tags": ["fd"]
         },
         "core-object-marker": {
             "projectType": "library",
@@ -2200,8 +2042,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-object-number": {
             "projectType": "library",
@@ -2241,8 +2082,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-object-status": {
             "projectType": "library",
@@ -2282,8 +2122,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-pagination": {
             "projectType": "library",
@@ -2323,8 +2162,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-select"]
+            "tags": ["fd"]
         },
         "core-panel": {
             "projectType": "library",
@@ -2361,8 +2199,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-button"]
+            "tags": ["fd"]
         },
         "core-popover": {
             "projectType": "library",
@@ -2399,8 +2236,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-mobile-mode"]
+            "tags": ["fd"]
         },
         "core-product-switch": {
             "projectType": "library",
@@ -2440,8 +2276,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-menu", "core-popover"]
+            "tags": ["fd"]
         },
         "core-progress-indicator": {
             "projectType": "library",
@@ -2481,7 +2316,8 @@
                         "exclude": ["**/node_modules/**"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-quick-view": {
             "projectType": "library",
@@ -2521,8 +2357,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-form", "core-popover", "core-bar"]
+            "tags": ["fd"]
         },
         "core-radio": {
             "projectType": "library",
@@ -2559,8 +2394,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-rating-indicator": {
             "projectType": "library",
@@ -2600,8 +2434,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-popover"]
+            "tags": ["fd"]
         },
         "core-resizable-card-layout": {
             "projectType": "library",
@@ -2641,8 +2474,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-card"]
+            "tags": ["fd"]
         },
         "core-scroll-spy": {
             "projectType": "library",
@@ -2682,8 +2514,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-scrollbar": {
             "projectType": "library",
@@ -2723,8 +2554,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-segmented-button": {
             "projectType": "library",
@@ -2764,8 +2594,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-select": {
             "projectType": "library",
@@ -2802,15 +2631,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": [
-                "core-utils",
-                "core-shared",
-                "core-popover",
-                "core-list",
-                "core-mobile-mode",
-                "core-busy-indicator"
-            ]
+            "tags": ["fd"]
         },
         "core-shared": {
             "projectType": "library",
@@ -2887,16 +2708,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": [
-                "core-utils",
-                "core-shared",
-                "core-combobox",
-                "core-menu",
-                "core-product-switch",
-                "core-popover",
-                "core-avatar"
-            ]
+            "tags": ["fd"]
         },
         "core-side-navigation": {
             "projectType": "library",
@@ -2936,8 +2748,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-nested-list"]
+            "tags": ["fd"]
         },
         "core-slider": {
             "projectType": "library",
@@ -2974,8 +2785,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-popover"]
+            "tags": ["fd"]
         },
         "core-split-button": {
             "projectType": "library",
@@ -3015,8 +2825,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-menu"]
+            "tags": ["fd"]
         },
         "core-splitter": {
             "projectType": "library",
@@ -3056,8 +2865,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-icon"]
+            "tags": ["fd"]
         },
         "core-status-indicator": {
             "projectType": "library",
@@ -3097,8 +2905,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-step-input": {
             "projectType": "library",
@@ -3138,8 +2945,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-button"]
+            "tags": ["fd"]
         },
         "core-switch": {
             "projectType": "library",
@@ -3176,8 +2982,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-table": {
             "projectType": "library",
@@ -3214,8 +3019,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-checkbox"]
+            "tags": ["fd"]
         },
         "core-tabs": {
             "projectType": "library",
@@ -3252,16 +3056,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": [
-                "core-utils",
-                "core-shared",
-                "core-scroll-spy",
-                "core-popover",
-                "core-menu",
-                "core-icon",
-                "core-checkbox"
-            ]
+            "tags": ["fd"]
         },
         "core-tests": {
             "projectType": "library",
@@ -3298,8 +3093,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-mobile-mode"]
+            "tags": ["fd"]
         },
         "core-text": {
             "projectType": "library",
@@ -3336,8 +3130,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-link"]
+            "tags": ["fd"]
         },
         "core-tile": {
             "projectType": "library",
@@ -3374,8 +3167,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "tags": ["fd"]
         },
         "core-time": {
             "projectType": "library",
@@ -3412,8 +3204,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-shared", "core-carousel", "core-datetime", "core-form"]
+            "tags": ["fd"]
         },
         "core-time-picker": {
             "projectType": "library",
@@ -3453,8 +3244,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-time", "core-popover"]
+            "tags": ["fd"]
         },
         "core-timeline": {
             "projectType": "library",
@@ -3494,8 +3284,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-icon", "core-text"]
+            "tags": ["fd"]
         },
         "core-title": {
             "projectType": "library",
@@ -3532,8 +3321,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-icon", "core-utils"]
+            "tags": ["fd"]
         },
         "core-token": {
             "projectType": "library",
@@ -3570,8 +3358,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-input-group", "core-form"]
+            "tags": ["fd"]
         },
         "core-toolbar": {
             "projectType": "library",
@@ -3608,8 +3395,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-popover", "core-button"]
+            "tags": ["fd"]
         },
         "core-tree": {
             "projectType": "library",
@@ -3646,8 +3432,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-popover", "core-menu"]
+            "tags": ["fd"]
         },
         "core-upload-collection": {
             "projectType": "library",
@@ -3687,14 +3472,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": [
-                "core-button",
-                "core-list",
-                "core-link",
-                "core-object-status",
-                "core-object-marker"
-            ]
+            "tags": ["fd"]
         },
         "core-utils": {
             "projectType": "library",
@@ -3731,8 +3509,7 @@
                     }
                 }
             },
-            "tags": [],
-            "implicitDependencies": ["core-shared"]
+            "tags": []
         },
         "core-vertical-navigation": {
             "projectType": "library",
@@ -3772,8 +3549,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-icon", "core-list"]
+            "tags": ["fd"]
         },
         "core-wizard": {
             "projectType": "library",
@@ -3810,14 +3586,7 @@
                     }
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": [
-                "core-utils",
-                "core-shared",
-                "core-dialog",
-                "core-mobile-mode",
-                "core-action-sheet"
-            ]
+            "tags": ["fd"]
         },
         "docs": {
             "root": "apps/docs/",
@@ -4063,25 +3832,7 @@
                 }
             },
             "tags": [],
-            "implicitDependencies": [
-                "core-utils",
-                "core-shared",
-                "core-button",
-                "core-icon",
-                "core-inline-help",
-                "core-popover",
-                "fn-tabs",
-                "fn-tag",
-                "fn-button",
-                "fn-checkbox",
-                "fn-form",
-                "fn-radio",
-                "fn-checkbox",
-                "fn-switch",
-                "fn-search",
-                "fn-select",
-                "fn-slider"
-            ]
+            "implicitDependencies": ["core"]
         },
         "fn-button": {
             "projectType": "library",
@@ -4119,7 +3870,7 @@
                 }
             },
             "tags": ["fn"],
-            "implicitDependencies": ["core-utils", "core-shared", "core-button"]
+            "implicitDependencies": ["core"]
         },
         "fn-checkbox": {
             "projectType": "library",
@@ -4157,7 +3908,7 @@
                 }
             },
             "tags": ["fn"],
-            "implicitDependencies": ["core-utils", "core-shared"]
+            "implicitDependencies": ["core"]
         },
         "fn-form": {
             "projectType": "library",
@@ -4195,7 +3946,7 @@
                 }
             },
             "tags": ["fn"],
-            "implicitDependencies": ["core-utils", "core-shared", "core-button", "core-icon", "core-inline-help"]
+            "implicitDependencies": ["core"]
         },
         "fn-radio": {
             "projectType": "library",
@@ -4233,7 +3984,7 @@
                 }
             },
             "tags": ["fn"],
-            "implicitDependencies": ["core-utils", "core-shared"]
+            "implicitDependencies": ["core"]
         },
         "fn-search": {
             "projectType": "library",
@@ -4271,7 +4022,7 @@
                 }
             },
             "tags": ["fn"],
-            "implicitDependencies": ["core-utils", "core-shared"]
+            "implicitDependencies": ["core"]
         },
         "fn-select": {
             "projectType": "library",
@@ -4309,7 +4060,7 @@
                 }
             },
             "tags": ["fn"],
-            "implicitDependencies": ["core-utils", "core-shared"]
+            "implicitDependencies": ["core"]
         },
         "fn-slider": {
             "projectType": "library",
@@ -4347,7 +4098,7 @@
                 }
             },
             "tags": ["fn"],
-            "implicitDependencies": ["core-utils", "core-shared", "core-popover"]
+            "implicitDependencies": ["core"]
         },
         "fn-switch": {
             "projectType": "library",
@@ -4385,7 +4136,7 @@
                 }
             },
             "tags": ["fn"],
-            "implicitDependencies": ["core-utils", "core-shared"]
+            "implicitDependencies": ["core"]
         },
         "fn-tabs": {
             "projectType": "library",
@@ -4423,7 +4174,7 @@
                 }
             },
             "tags": ["fn"],
-            "implicitDependencies": ["core-utils", "core-shared"]
+            "implicitDependencies": ["core"]
         },
         "fn-tag": {
             "projectType": "library",
@@ -4461,7 +4212,7 @@
                 }
             },
             "tags": ["fn"],
-            "implicitDependencies": ["core-utils", "core-shared"]
+            "implicitDependencies": ["core"]
         },
         "moment-adapter": {
             "root": "libs/moment-adapter",
@@ -4504,7 +4255,7 @@
                 }
             },
             "tags": ["fd"],
-            "implicitDependencies": ["core-datetime"]
+            "implicitDependencies": ["core"]
         },
         "platform": {
             "projectType": "library",
@@ -4542,36 +4293,7 @@
                 }
             },
             "tags": [],
-            "implicitDependencies": [
-                "core",
-                "platform-shared",
-                "platform-action-bar",
-                "platform-action-button-group",
-                "platform-approval-flow",
-                "platform-button",
-                "platform-dynamic-page",
-                "platform-feed-input",
-                "platform-form",
-                "platform-info-label",
-                "platform-link",
-                "platform-list",
-                "platform-menu",
-                "platform-menu-button",
-                "platform-object-attribute",
-                "platform-object-marker",
-                "platform-object-status",
-                "platform-page-footer",
-                "platform-panel",
-                "platform-search-field",
-                "platform-slider",
-                "platform-split-menu-button",
-                "platform-table",
-                "platform-thumbnail",
-                "platform-upload-collection",
-                "platform-value-help-dialog",
-                "platform-wizard-generator",
-                "platform-icon-tab-bar"
-            ]
+            "implicitDependencies": ["core"]
         },
         "platform-action-bar": {
             "projectType": "library",
@@ -4612,7 +4334,7 @@
                 }
             },
             "tags": ["fdp"],
-            "implicitDependencies": ["core-action-bar", "core-button", "core-utils", "platform-shared"]
+            "implicitDependencies": ["core"]
         },
         "platform-action-button-group": {
             "projectType": "library",
@@ -4653,7 +4375,7 @@
                 }
             },
             "tags": ["fdp"],
-            "implicitDependencies": ["core-action-bar"]
+            "implicitDependencies": ["core"]
         },
         "platform-approval-flow": {
             "projectType": "library",
@@ -4694,28 +4416,7 @@
                 }
             },
             "tags": ["fdp"],
-            "implicitDependencies": [
-                "core-avatar",
-                "core-button",
-                "core-checkbox",
-                "core-combobox",
-                "core-date-picker",
-                "core-dialog",
-                "core-form",
-                "core-icon",
-                "core-illustrated-message",
-                "core-menu",
-                "core-message-strip",
-                "core-message-toast",
-                "core-multi-input",
-                "core-radio",
-                "core-select",
-                "core-toolbar",
-                "core-utils",
-                "platform-object-status",
-                "platform-search-field",
-                "platform-list"
-            ]
+            "implicitDependencies": ["core"]
         },
         "platform-button": {
             "projectType": "library",
@@ -4756,7 +4457,7 @@
                 }
             },
             "tags": ["fdp"],
-            "implicitDependencies": ["core-button", "platform-shared"]
+            "implicitDependencies": ["core"]
         },
         "platform-dynamic-page": {
             "projectType": "library",
@@ -4797,7 +4498,7 @@
                 }
             },
             "tags": ["fdp"],
-            "implicitDependencies": ["core-tabs", "platform-button", "platform-shared"]
+            "implicitDependencies": ["core"]
         },
         "platform-feed-input": {
             "projectType": "library",
@@ -4838,7 +4539,7 @@
                 }
             },
             "tags": ["fdp"],
-            "implicitDependencies": ["core-avatar", "core-form", "platform-button"]
+            "implicitDependencies": ["core"]
         },
         "platform-form": {
             "projectType": "library",
@@ -4879,35 +4580,7 @@
                 }
             },
             "tags": ["fdp"],
-            "implicitDependencies": [
-                "core-bar",
-                "core-button",
-                "core-busy-indicator",
-                "core-calendar",
-                "core-checkbox",
-                "core-datetime",
-                "core-datetime-picker",
-                "core-date-picker",
-                "core-dialog",
-                "core-file-uploader",
-                "core-form",
-                "core-icon",
-                "core-inline-help",
-                "core-input-group",
-                "core-token",
-                "core-time-picker",
-                "core-popover",
-                "core-radio",
-                "core-select",
-                "core-switch",
-                "core-mobile-mode",
-                "core-list",
-                "core-menu",
-                "core-shared",
-                "core-utils",
-                "platform-list",
-                "platform-shared"
-            ]
+            "implicitDependencies": ["core"]
         },
         "platform-icon-tab-bar": {
             "projectType": "library",
@@ -4948,7 +4621,7 @@
                 }
             },
             "tags": ["fdp"],
-            "implicitDependencies": ["core-icon", "core-popover", "core-utils"]
+            "implicitDependencies": ["core"]
         },
         "platform-info-label": {
             "projectType": "library",
@@ -4989,7 +4662,7 @@
                 }
             },
             "tags": ["fdp"],
-            "implicitDependencies": ["core-info-label"]
+            "implicitDependencies": ["core"]
         },
         "platform-link": {
             "projectType": "library",
@@ -5030,7 +4703,7 @@
                 }
             },
             "tags": ["fdp"],
-            "implicitDependencies": ["core-link", "core-icon", "platform-shared"]
+            "implicitDependencies": ["core"]
         },
         "platform-list": {
             "projectType": "library",
@@ -5071,24 +4744,7 @@
                 }
             },
             "tags": ["fdp"],
-            "implicitDependencies": [
-                "core-avatar",
-                "core-button",
-                "core-checkbox",
-                "core-icon",
-                "core-form",
-                "core-list",
-                "core-radio",
-                "core-busy-indicator",
-                "core-infinite-scroll",
-                "core-object-identifier",
-                "core-object-marker",
-                "core-object-number",
-                "core-utils",
-                "platform-link",
-                "platform-object-status",
-                "platform-object-attribute"
-            ]
+            "implicitDependencies": ["core"]
         },
         "platform-menu": {
             "projectType": "library",
@@ -5129,7 +4785,7 @@
                 }
             },
             "tags": ["fdp"],
-            "implicitDependencies": ["core-utils", "platform-shared"]
+            "implicitDependencies": ["core"]
         },
         "platform-menu-button": {
             "projectType": "library",
@@ -5170,7 +4826,7 @@
                 }
             },
             "tags": ["fdp"],
-            "implicitDependencies": ["core-button", "platform-menu", "platform-shared"]
+            "implicitDependencies": ["core"]
         },
         "platform-object-attribute": {
             "projectType": "library",
@@ -5210,7 +4866,8 @@
                     }
                 }
             },
-            "tags": ["fdp"]
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-object-marker": {
             "projectType": "library",
@@ -5251,7 +4908,7 @@
                 }
             },
             "tags": ["fdp"],
-            "implicitDependencies": ["core-object-marker"]
+            "implicitDependencies": ["core"]
         },
         "platform-object-status": {
             "projectType": "library",
@@ -5292,7 +4949,7 @@
                 }
             },
             "tags": ["fdp"],
-            "implicitDependencies": ["core-object-status", "core-utils"]
+            "implicitDependencies": ["core"]
         },
         "platform-page-footer": {
             "projectType": "library",
@@ -5332,7 +4989,8 @@
                     }
                 }
             },
-            "tags": ["fdp"]
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-panel": {
             "projectType": "library",
@@ -5373,7 +5031,7 @@
                 }
             },
             "tags": ["fdp"],
-            "implicitDependencies": ["core-utils", "core-panel", "core-toolbar", "platform-shared"]
+            "implicitDependencies": ["core"]
         },
         "platform-search-field": {
             "projectType": "library",
@@ -5414,15 +5072,7 @@
                 }
             },
             "tags": ["fdp"],
-            "implicitDependencies": [
-                "core-icon",
-                "core-combobox",
-                "core-menu",
-                "core-utils",
-                "core-popover",
-                "platform-shared",
-                "platform-menu"
-            ]
+            "implicitDependencies": ["core"]
         },
         "platform-shared": {
             "projectType": "library",
@@ -5462,7 +5112,8 @@
                     }
                 }
             },
-            "tags": ["fdp"]
+            "tags": ["fdp"],
+            "implicitDependecies": ["core"]
         },
         "platform-slider": {
             "projectType": "library",
@@ -5503,7 +5154,7 @@
                 }
             },
             "tags": ["fdp"],
-            "implicitDependencies": ["core-slider", "platform-shared"]
+            "implicitDependencies": ["core"]
         },
         "platform-split-menu-button": {
             "projectType": "library",
@@ -5544,7 +5195,7 @@
                 }
             },
             "tags": ["fdp"],
-            "implicitDependencies": ["core-menu", "core-button", "core-utils", "platform-shared", "platform-menu"]
+            "implicitDependencies": ["core"]
         },
         "platform-table": {
             "projectType": "library",
@@ -5585,28 +5236,7 @@
                 }
             },
             "tags": ["fdp"],
-            "implicitDependencies": [
-                "core-busy-indicator",
-                "core-button",
-                "core-checkbox",
-                "core-date-picker",
-                "core-dialog",
-                "core-form",
-                "core-icon",
-                "core-input-group",
-                "core-layout-grid",
-                "core-list",
-                "core-panel",
-                "core-popover",
-                "core-radio",
-                "core-select",
-                "core-table",
-                "core-toolbar",
-                "core-utils",
-                "platform-form",
-                "platform-search-field",
-                "platform-shared"
-            ]
+            "implicitDependencies": ["core"]
         },
         "platform-thumbnail": {
             "projectType": "library",
@@ -5647,14 +5277,7 @@
                 }
             },
             "tags": ["fdp"],
-            "implicitDependencies": [
-                "core-avatar",
-                "core-carousel",
-                "core-dialog",
-                "core-button",
-                "core-utils",
-                "platform-shared"
-            ]
+            "implicitDependencies": ["core"]
         },
         "platform-upload-collection": {
             "projectType": "library",
@@ -5695,27 +5318,7 @@
                 }
             },
             "tags": ["fdp"],
-            "implicitDependencies": [
-                "core-toolbar",
-                "core-button",
-                "core-input-group",
-                "core-dialog",
-                "core-form",
-                "core-busy-indicator",
-                "core-message-strip",
-                "core-list",
-                "core-icon",
-                "core-breadcrumb",
-                "core-pagination",
-                "core-object-status",
-                "core-file-uploader",
-                "core-utils",
-                "platform-table",
-                "platform-menu",
-                "platform-button",
-                "platform-menu-button",
-                "platform-shared"
-            ]
+            "implicitDependencies": ["core"]
         },
         "platform-value-help-dialog": {
             "projectType": "library",
@@ -5756,28 +5359,7 @@
                 }
             },
             "tags": ["fdp"],
-            "implicitDependencies": [
-                "core-token",
-                "core-button",
-                "core-tabs",
-                "core-dialog",
-                "core-form",
-                "core-checkbox",
-                "core-layout-grid",
-                "core-toolbar",
-                "core-table",
-                "core-utils",
-                "core-icon",
-                "core-list",
-                "core-link",
-                "core-bar",
-                "core-select",
-                "core-panel",
-                "core-input-group",
-                "core-popover",
-                "core-infinite-scroll",
-                "platform-shared"
-            ]
+            "implicitDependencies": ["core"]
         },
         "platform-wizard-generator": {
             "projectType": "library",
@@ -5818,18 +5400,7 @@
                 }
             },
             "tags": ["fdp"],
-            "implicitDependencies": [
-                "core-dialog",
-                "core-button",
-                "core-wizard",
-                "core-title",
-                "core-layout-grid",
-                "core-form",
-                "core-utils",
-                "platform-form",
-                "platform-shared",
-                "platform-link"
-            ]
+            "implicitDependencies": ["core"]
         }
     }
 }
