@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.200 (2021-12-06)
+
+
+### Features
+
+* **platform:** switch to "position: sticky" and fix setting width in % ([#7275](https://github.com/SAP/fundamental-ngx/issues/7275)) ([d3c7546](https://github.com/SAP/fundamental-ngx/commit/d3c7546f58bea32313ee760fc4e0ec57fc417da8))
+
 ## 0.33.0-rc.199 (2021-12-06)
 
 
