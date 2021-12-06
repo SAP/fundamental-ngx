@@ -20,13 +20,13 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { KeyUtil, ContentDensityService, RtlService } from '@fundamental-ngx/core/utils';
+
 import { Meridian, SelectableViewItem } from './models';
 import { createMissingDateImplementationError } from './errors';
 import { TimeI18n } from './i18n/time-i18n';
 import { TimeColumnConfig } from './time-column/time-column-config';
 import { TimeColumnComponent } from './time-column/time-column.component';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 export type FdTimeActiveView = 'hour' | 'minute' | 'second' | 'meridian';
 
@@ -165,6 +165,11 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
      */
     activeMeridianViewItem: MeridianViewItem;
 
+    /** Component aria-label */
+    get _componentAriaLabel(): string {
+        return this._timeI18nLabels.componentAriaName;
+    }
+
     /** @hidden */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
@@ -177,7 +182,8 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         private _timeI18nLabels: TimeI18n,
         // Use @Optional to avoid angular injection error message and throw our own which is more precise one
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
-        @Optional() private _contentDensityService: ContentDensityService
+        @Optional() private _contentDensityService: ContentDensityService,
+        @Optional() private _rtlService: RtlService
     ) {
         if (!_dateTimeAdapter) {
             throw createMissingDateImplementationError('DateTimeAdapter');
@@ -307,42 +313,22 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
 
     /** @hidden */
     handleNextColumnFocus(column: FdTimeActiveView): void {
-        if (column === 'hour' && this.displayMinutes) {
-            this.changeActive('minute');
-        } else if (column === 'hour' && this.meridian) {
-            this.changeActive('meridian');
-        } else if (column === 'minute' && this.displaySeconds) {
-            this.changeActive('second');
-        } else if (column === 'minute' && this.meridian) {
-            this.changeActive('meridian');
-        } else if (column === 'second' && this.meridian) {
-            this.changeActive('meridian');
-        } else if (column === 'second') {
-            this.changeActive('hour');
-        } else if (column === 'meridian') {
-            this.changeActive('hour');
+        const columns = this._getVisibleColumnsWithRtl();
+        let nextIndex = columns.indexOf(column) + 1;
+        if (nextIndex >= columns.length) {
+            nextIndex = 0;
         }
+        this.changeActive(columns[nextIndex]);
     }
 
     /** @hidden */
     handlePreviousColumnFocus(column: FdTimeActiveView): void {
-        if (column === 'hour' && this.meridian) {
-            this.changeActive('meridian');
-        } else if (column === 'hour' && this.displaySeconds) {
-            this.changeActive('second');
-        } else if (column === 'minute') {
-            this.changeActive('hour');
-        } else if (column === 'second') {
-            this.changeActive('minute');
-        } else if (column === 'meridian') {
-            if (this.displaySeconds) {
-                this.changeActive('second');
-            } else if (this.displayMinutes) {
-                this.changeActive('minute');
-            } else {
-                this.changeActive('hour');
-            }
+        const columns = this._getVisibleColumnsWithRtl();
+        let nextIndex = columns.indexOf(column) - 1;
+        if (nextIndex < 0) {
+            nextIndex = columns.length - 1;
         }
+        this.changeActive(columns[nextIndex]);
     }
 
     /** @hidden */
@@ -350,11 +336,11 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
             this.handlePreviousColumnFocus(this.activeView);
             event.preventDefault();
-            this.focusActiveColumnIndicator();
+            this.focusActiveColumn();
         } else if (KeyUtil.isKeyCode(event, RIGHT_ARROW)) {
             this.handleNextColumnFocus(this.activeView);
             event.preventDefault();
-            this.focusActiveColumnIndicator();
+            this.focusActiveColumn();
         }
     }
 
@@ -386,7 +372,8 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         return {
             decreaseLabel: this._timeI18nLabels.decreaseHoursLabel,
             increaseLabel: this._timeI18nLabels.increaseHoursLabel,
-            label: this._timeI18nLabels.hoursLabel
+            label: this._timeI18nLabels.hoursLabel,
+            navigationInstruction: this._timeI18nLabels.navigationInstruction
         };
     }
 
@@ -395,7 +382,8 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         return {
             decreaseLabel: this._timeI18nLabels.decreaseMinutesLabel,
             increaseLabel: this._timeI18nLabels.increaseMinutesLabel,
-            label: this._timeI18nLabels.minutesLabel
+            label: this._timeI18nLabels.minutesLabel,
+            navigationInstruction: this._timeI18nLabels.navigationInstruction
         };
     }
 
@@ -404,7 +392,8 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         return {
             decreaseLabel: this._timeI18nLabels.decreaseSecondsLabel,
             increaseLabel: this._timeI18nLabels.increaseSecondsLabel,
-            label: this._timeI18nLabels.secondsLabel
+            label: this._timeI18nLabels.secondsLabel,
+            navigationInstruction: this._timeI18nLabels.navigationInstruction
         };
     }
 
@@ -413,13 +402,38 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         return {
             decreaseLabel: this._timeI18nLabels.decreasePeriodLabel,
             increaseLabel: this._timeI18nLabels.increasePeriodLabel,
-            label: this._timeI18nLabels.periodLabel
+            label: this._timeI18nLabels.periodLabel,
+            navigationInstruction: this._timeI18nLabels.navigationInstruction
         };
     }
 
     /** @hidden */
-    focusActiveColumnIndicator(): void {
-        this.columns.filter((column) => column.active)[0].indicator.nativeElement.focus();
+    focusActiveColumn(): void {
+        const column = this.columns.find(({ active }) => active);
+        column?.focus();
+    }
+
+    /**
+     * Get visible time columns
+     * @returns visible columns list @see {FdTimeActiveView[]}
+     */
+    private _getVisibleColumns(): FdTimeActiveView[] {
+        const allOptions: Array<[boolean, FdTimeActiveView]> = [
+            [this.displayHours, 'hour'],
+            [this.displayMinutes, 'minute'],
+            [this.displaySeconds, 'second'],
+            [this.meridian, 'meridian']
+        ];
+        return allOptions.filter(([enabled]) => enabled).map(([, view]) => view);
+    }
+
+    /**
+     * Get visible columns taking into account RTL
+     * @returns visible columns list @see {FdTimeActiveView[]}
+     */
+    private _getVisibleColumnsWithRtl(): FdTimeActiveView[] {
+        const columns = this._getVisibleColumns();
+        return this._rtlService?.rtl.value ? columns.reverse() : columns;
     }
 
     /** @hidden */

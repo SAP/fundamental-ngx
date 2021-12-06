@@ -16,7 +16,7 @@ export class TimePickerPO extends BaseComponentPo {
     disabledInput = this.disabledTimePicker + ' input';
     disabledButton = this.disabledTimePicker + ' button';
     navigationDownArrowButton = 'button[glyph="navigation-down-arrow"]';
-    timeItem = 'span.fd-time__item';
+    timeColumn = 'fd-time-column';
     selectedValue = 'div.fd-time__current-indicator ~ span';
     hoursColumn = '.fd-time .fd-time__col:nth-child(1) ';
     thirdColumn = '.fd-time .fd-time__col:nth-child(3) ';

@@ -88,6 +88,7 @@ describe('Time component test', () => {
         click(formExample + secondsColumn);
         const chosenSecondValue = getText(formExample3Second);
         click(formExample3Second);
+
         expect(getText(enableTimeRow)).toEqual(
             chosenHourValue + 'h ' + chosenMinuteValue + 'm ' + chosenSecondValue + 's',
             'Current value is not equal chosen value'
