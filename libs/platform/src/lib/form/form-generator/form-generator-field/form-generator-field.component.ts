@@ -3,7 +3,7 @@ import { FormField } from '@fundamental-ngx/platform/shared';
 import { FormFieldComponent } from '../../form-group/form-field/form-field.component';
 import { FORM_GROUP_CHILD_FIELD_TOKEN } from '../../form-group/constants';
 import { DynamicFormControl } from '../dynamic-form-control';
-import { DynamicFormGroup } from '../public_api';
+import { DynamicFormGroup } from '../interfaces/dynamic-form-group';
 
 const formFieldProvider: Provider = {
     provide: FormField,
