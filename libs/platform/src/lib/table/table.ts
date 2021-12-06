@@ -15,9 +15,6 @@ export abstract class Table {
     /** Freezable column names and their respective indexes */
     abstract get _freezableColumns(): ReadonlyMap<string, number>;
 
-    /** Computed width of the scrollbar for the table */
-    abstract get _scrollBarWidth(): number;
-
     /** Width of the table element in px */
     abstract get _tableWidthPx(): number;
 
