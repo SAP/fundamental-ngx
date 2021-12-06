@@ -378,4 +378,25 @@ $fd-table-header-color-var: var(--sapList_HeaderBackground, #f2f2f2);
     .fd-dnd-item {
         position: inherit;
     }
+
+    // TODO(d.stepanenko): styles below should be moved into fundamental-styles
+    .fd-table__cell--fixed {
+        position: sticky;
+        display: table-cell;
+    }
+
+    .fd-table__cell--checkbox fd-checkbox {
+        // positioning checkbox in the middle of the cell
+        display: flex;
+        height: 100%;
+        .fd-checkbox__label {
+            align-self: center;
+            margin: 0;
+        }
+    }
+
+    .fd-table__expand-wrapper {
+        display: flex;
+        align-items: center;
+    }
 }
