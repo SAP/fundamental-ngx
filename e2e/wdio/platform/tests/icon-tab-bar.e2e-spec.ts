@@ -10,7 +10,8 @@ import {
     getTextArr,
     isElementDisplayed,
     refreshPage,
-    scrollIntoView
+    scrollIntoView,
+    waitForPresent
 } from '../../driver/wdio';
 
 import { paddingsSizes } from '../fixtures/appData/icon-tab-bar-contents';
@@ -44,6 +45,11 @@ describe('Info Label component test suite', () => {
 
     beforeAll(() => {
         iconTabBarPage.open();
+    }, 1);
+
+    afterEach(() => {
+        refreshPage();
+        waitForPresent(iconExample);
     }, 1);
 
     describe('Text example', () => {
