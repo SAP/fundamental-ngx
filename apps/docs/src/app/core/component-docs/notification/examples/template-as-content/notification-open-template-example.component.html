@@ -1,4 +1,4 @@
-<button fd-button label="Open Notification" (click)="open(notificationTemplate)"></button>
+<button fd-button label="Open Notification" (click)="open()"></button>
 <span style="margin-left: 24px">{{ closeReason }}</span>
 
 <ng-template let-notification #notificationTemplate>
@@ -34,6 +34,7 @@
                 fdType="transparent"
                 glyph="decline"
                 title="close"
+                ariaLabel="Close"
                 [compact]="true"
                 (click)="notification.close('Close Button Click')"
             ></button>

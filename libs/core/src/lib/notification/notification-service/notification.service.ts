@@ -1,23 +1,32 @@
-import { ComponentRef, Injectable, Injector, Optional, TemplateRef, Type } from '@angular/core';
+import { ComponentRef, Inject, Injectable, Injector, Optional, TemplateRef, Type } from '@angular/core';
 import { DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
 import { NotificationComponent } from '../notification/notification.component';
 import { NotificationContainer } from '../notification-utils/notification-container';
 import { NotificationConfig } from '../notification-utils/notification-config';
 import { NotificationRef } from '../notification-utils/notification-ref';
+import { DOCUMENT } from '@angular/common';
 
 @Injectable()
 export class NotificationService {
     public notifications: {
         notificationComponent: ComponentRef<NotificationComponent>;
+        notificationConfig: Readonly<NotificationConfig>;
     }[] = [];
 
     public containerRef: ComponentRef<NotificationContainer>;
 
     /**
      * @hidden
+     * Element that was focused before the notification was opened. Being used to restore focus upon close.
+     */
+    private _elementFocusedBeforeNotificationWasOpened?: HTMLOrSVGElement;
+
+    /**
+     * @hidden
      */
     constructor(
         private _dynamicComponentService: DynamicComponentService,
+        @Inject(DOCUMENT) private _document: Document,
         @Optional() private _rtlService: RtlService
     ) {}
 
@@ -63,13 +72,21 @@ export class NotificationService {
             { injector }
         );
 
+        if (notificationConfig.shouldTrapFocus) {
+            const element = this._document.activeElement as HTMLElement | undefined;
+            this._elementFocusedBeforeNotificationWasOpened =
+                typeof element?.focus === 'function' ? element : undefined;
+            notificationComponentRef.instance.trapFocus();
+        }
+
         // Add To array
         this.notifications.push({
-            notificationComponent: notificationComponentRef
+            notificationComponent: notificationComponentRef,
+            notificationConfig: notificationConfig
         });
 
         const defaultBehaviourOnClose = (): void => {
-            this.destroyNotificationComponent(notificationComponentRef);
+            this._destroyNotificationComponent(notificationComponentRef);
             refSub.unsubscribe();
         };
 
@@ -81,7 +98,7 @@ export class NotificationService {
     /** Method to remove all of notifications from this service instance */
     public destroyAll(): void {
         this.notifications.forEach((notification) => {
-            this.destroyNotificationComponent(notification.notificationComponent);
+            this._destroyNotificationComponent(notification.notificationComponent);
         });
     }
 
@@ -90,23 +107,31 @@ export class NotificationService {
         return this.notifications && this.notifications.length > 0;
     }
 
-    /** Method that destroys the Notification component */
-    private destroyNotificationComponent(notification: ComponentRef<NotificationComponent>): void {
-        // Find Notification component in the array.
-        const arrayRef = this.notifications.find((item) => item.notificationComponent === notification);
-        const indexOf = this.notifications.indexOf(arrayRef);
-
-        // Destroy Component
-        this._dynamicComponentService.destroyComponent(arrayRef.notificationComponent);
-
-        // Remove it from Array
-        this.notifications[indexOf] = null;
-        this.notifications = this.notifications.filter((item) => item !== null && item !== undefined);
+    /** @hidden Method that destroys the Notification component */
+    private _destroyNotificationComponent(notification: ComponentRef<NotificationComponent>): void {
+        this.notifications = this.notifications.filter((item) => item.notificationComponent !== notification);
+        this._dynamicComponentService.destroyComponent(notification);
 
         // If there is no other notification Components, just remove container.
         if (this.notifications.length === 0) {
             this._dynamicComponentService.destroyComponent(this.containerRef);
             this.containerRef = null;
+            this._restoreFocus();
+        } else {
+            // otherwise attempt to move focus to previous notification
+            const last = this.notifications[this.notifications.length - 1];
+            if (last.notificationConfig.shouldTrapFocus) {
+                last.notificationComponent.instance.trapFocus();
+            } else {
+                this._restoreFocus();
+            }
+        }
+    }
+
+    /** @hidden attempts to focus previously selected element */
+    private _restoreFocus() {
+        if (typeof this._elementFocusedBeforeNotificationWasOpened?.focus === 'function') {
+            this._elementFocusedBeforeNotificationWasOpened.focus();
         }
     }
 }
