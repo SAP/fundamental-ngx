@@ -46,12 +46,12 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
     items: ExampleItem[] = ITEMS;
     totalItems = ITEMS.length;
 
-    fetch(tableState: TableState): Observable<ExampleItem[]> {
+    fetch(tableState?: TableState): Observable<ExampleItem[]> {
         this.items = ITEMS;
 
         // apply searching
-        if (tableState.searchInput) {
-            this.items = this.search(tableState);
+        if (tableState?.searchInput) {
+            this.items = this.search(this.items, tableState);
         }
 
         this.totalItems = this.items.length;
@@ -59,8 +59,7 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
         return of(this.items);
     }
 
-    private search({ searchInput, columns }: TableState): ExampleItem[] {
-        const items = this.items;
+    search(items: ExampleItem[], { searchInput, columns }: TableState): ExampleItem[] {
         const searchText = searchInput?.text || '';
         const keysToSearchBy = columns;
 

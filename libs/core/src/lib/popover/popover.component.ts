@@ -281,8 +281,6 @@ export class PopoverComponent
             injector
         );
 
-        console.log(111111, this._mobileModeComponentRef);
-
         this._listenOnTriggerRefClicks();
     }
 

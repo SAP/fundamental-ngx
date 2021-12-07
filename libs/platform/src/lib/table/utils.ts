@@ -3,6 +3,7 @@ import { get } from 'lodash-es';
 import {
     CollectionBooleanFilter,
     CollectionDateFilter,
+    CollectionFilter,
     CollectionNumberFilter,
     CollectionSelectFilter,
     CollectionStringFilter
@@ -132,3 +133,7 @@ export const getScrollBarWidth = (document: Document): number => {
     document.body.removeChild(div);
     return scrollbarWidth;
 };
+
+export function isCollectionFilter(item: any): item is CollectionFilter {
+    return item.type !== undefined && item.strategy !== undefined && item.value !== undefined;
+}

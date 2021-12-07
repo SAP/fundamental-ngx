@@ -32,6 +32,7 @@ export const components: SectionInterfaceContent[] = [
     { url: 'platform/object-attribute', name: 'Object Attribute' },
     { url: 'platform/radio-group', name: 'Radio Button Group' },
     { url: 'platform/search-field', name: 'Search Field' },
+    { url: 'platform/smart-filter-bar', name: 'Smart Filter Bar' },
     { url: 'platform/split-menu-button', name: 'Split Menu Button' },
     { url: 'platform/table', name: 'Table' },
     { url: 'platform/textarea', name: 'Textarea' },

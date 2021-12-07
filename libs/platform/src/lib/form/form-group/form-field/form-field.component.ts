@@ -33,8 +33,7 @@ import {
     LabelLayout,
     RESPONSIVE_BREAKPOINTS_CONFIG,
     ResponsiveBreakPointConfig,
-    ResponsiveBreakpointsService,
-    ColumnLayoutGridClass
+    ResponsiveBreakpointsService
 } from '@fundamental-ngx/platform/shared';
 import {
     DefaultHorizontalFieldLayout,
@@ -43,6 +42,7 @@ import {
     DefaultVerticalLabelLayout,
     FORM_GROUP_CHILD_FIELD_TOKEN
 } from '../constants';
+import { normalizeColumnLayout, generateColumnClass } from '../helpers';
 
 const formFieldProvider: Provider = {
     provide: FormField,
@@ -167,8 +167,8 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
             return;
         }
 
-        this._labelColumnLayout = this._normalizeColumnLayout(value);
-        this._labelColumnLayoutClass = this._getColumnLayoutClass(this._labelColumnLayout);
+        this._labelColumnLayout = normalizeColumnLayout(value);
+        this._labelColumnLayoutClass = generateColumnClass(this._labelColumnLayout);
     }
 
     /**
@@ -184,8 +184,8 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
             return;
         }
 
-        this._fieldColumnLayout = this._normalizeColumnLayout(value);
-        this._fieldColumnLayoutClass = this._getColumnLayoutClass(this._fieldColumnLayout);
+        this._fieldColumnLayout = normalizeColumnLayout(value);
+        this._fieldColumnLayoutClass = generateColumnClass(this._fieldColumnLayout);
     }
 
     /**
@@ -201,8 +201,8 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
             return;
         }
 
-        this._gapColumnLayout = this._normalizeColumnLayout(value);
-        this._gapColumnLayoutClass = this._getColumnLayoutClass(this._gapColumnLayout);
+        this._gapColumnLayout = normalizeColumnLayout(value);
+        this._gapColumnLayoutClass = generateColumnClass(this._gapColumnLayout);
     }
 
     /**
@@ -578,31 +578,9 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     }
 
     /** @hidden */
-    private _getColumnLayoutClass(layout: ColumnLayout): string {
-        return Object.entries(layout)
-            .reduce((overall, value) => {
-                overall.push(`fd-col-${ColumnLayoutGridClass[value[0]]}--${value[1]}`);
-                return overall;
-            }, [])
-            .join(' ');
-    }
-
-    /**
-     * @hidden
-     */
-    private _normalizeColumnLayout(layout: ColumnLayout, defaultColumn = 12): ColumnLayout {
-        layout['S'] = layout['S'] !== undefined ? layout['S'] : defaultColumn;
-        layout['M'] = layout['M'] || layout['S'];
-        layout['L'] = layout['L'] || layout['M'];
-        layout['XL'] = layout['XL'] || layout['L'];
-
-        return layout;
-    }
-
-    /** @hidden */
     private _setLayout(): void {
         try {
-            this.columnLayout = this._normalizeColumnLayout(this.columnLayout, 1);
+            this.columnLayout = normalizeColumnLayout(this.columnLayout, 1);
             this._sColumnNumber = this.columnLayout['S'];
             this._mdColumnNumber = this.columnLayout['M'];
             this._lgColumnNumber = this.columnLayout['L'];

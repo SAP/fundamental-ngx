@@ -21,7 +21,7 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
     }
 
     /**
-     * Opens a dialog component with with provided content.
+     * Opens a dialog component with provided content.
      * @param content Content of the dialog component.
      * @param dialogConfig Configuration of the dialog component.
      */

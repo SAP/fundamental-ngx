@@ -1,0 +1,19 @@
+.fdp-smart-filter-bar--conditions-dialog {
+    .actions-column {
+        min-width: auto;
+        flex: 0 0 auto;
+    }
+
+    .fd-popover-custom {
+        display: block;
+    }
+
+    .fd-dialog__body {
+        background-color: var(--sapBackgroundColor, #f7f7f7);
+    }
+
+    .fd-container.fd-form-layout-grid-container,
+    .fd-container.fd-form-layout-grid-container .fd-row .fd-col__form-group {
+        padding: 0 1rem;
+    }
+}

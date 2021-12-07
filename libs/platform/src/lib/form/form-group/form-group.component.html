@@ -28,6 +28,7 @@
                             <div
                                 *ngFor="let field of fields.value; trackBy: trackByFieldName"
                                 class="fd-col fd-col-wrap"
+                                [ngClass]="_inlineColumnLayoutClass"
                                 [style.order]="field.rank"
                             >
                                 <ng-container *ngTemplateOutlet="field?.renderer"></ng-container>

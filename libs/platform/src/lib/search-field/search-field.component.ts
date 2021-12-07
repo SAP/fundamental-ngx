@@ -94,6 +94,10 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     @Input()
     mobileConfig: MobileModeConfig;
 
+    /** Whether display Refresh button */
+    @Input()
+    disableRefresh = false;
+
     /** List of string values to populate suggestion dropdown selection. */
     @Input()
     get suggestions(): SuggestionItem[] | Observable<SuggestionItem[]> {

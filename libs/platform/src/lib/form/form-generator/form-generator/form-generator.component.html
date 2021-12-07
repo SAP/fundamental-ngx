@@ -17,6 +17,7 @@
             [fieldColumnLayout]="fieldColumnLayout"
             [gapColumnLayout]="gapColumnLayout"
             [unifiedLayout]="unifiedLayout"
+            [inlineColumnLayout]="inlineColumnLayout"
         >
             <ng-container *ngFor="let field of formControlItems; trackBy: _trackFn">
                 <ng-container
@@ -57,7 +58,7 @@
                         <ng-container *ngFor="let groupField of _getOrderedControls(field.controls)">
                             <ng-container
                                 *fdpDynamicFormControlField="
-                                    field;
+                                    groupField;
                                     show: shouldShowFields[groupField.formItem?.name] !== false
                                 "
                             >

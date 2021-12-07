@@ -68,6 +68,8 @@ export const FILTER_STRING_STRATEGY: Pick<
     LTE: 'lessThanOrEqualTo'
 };
 
+export type FilterAllStrategy = typeof FILTER_STRATEGY[keyof typeof FILTER_STRATEGY];
+
 export type FilterStringStrategy = typeof FILTER_STRING_STRATEGY[keyof typeof FILTER_STRING_STRATEGY];
 
 export const FILTER_STRING_STRATEGIES: ReadonlyArray<FilterStringStrategy> = Object.values(FILTER_STRING_STRATEGY);

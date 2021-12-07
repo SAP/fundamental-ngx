@@ -30,7 +30,7 @@ describe('TableColumnResizeService', () => {
         const widthInPixels = 100;
         const tableColumn = { name: columnNames[0], width: null } as TableColumn;
         const tableColumnCell = {
-            nativeElement: { getBoundingClientRect: () => ({ width: widthInPixels }) }
+            nativeElement: { getBoundingClientRect: () => ({ width: widthInPixels }), clientWidth: widthInPixels }
         } as ElementRef;
 
         expect(service.getColumnWidthStyle(tableColumn)).toEqual('auto');
@@ -71,7 +71,10 @@ describe('TableColumnResizeService', () => {
         const tableColumnNames = ['name'];
         const tableColumn = { name: tableColumnNames[0], width: null } as TableColumn;
         const tableColumnCell = {
-            nativeElement: { getBoundingClientRect: () => ({ width: initialColumnWidth }) }
+            nativeElement: {
+                getBoundingClientRect: () => ({ width: initialColumnWidth }),
+                clientWidth: initialColumnWidth
+            }
         } as ElementRef;
 
         service.registerColumnCell(tableColumn.name, tableColumnCell);
@@ -91,7 +94,10 @@ describe('TableColumnResizeService', () => {
         const tableColumnNames = ['name'];
         const tableColumn = { name: tableColumnNames[0], width: null } as TableColumn;
         const tableColumnCell = {
-            nativeElement: { getBoundingClientRect: () => ({ width: initialColumnWidth }) }
+            nativeElement: {
+                getBoundingClientRect: () => ({ width: initialColumnWidth }),
+                clientWidth: initialColumnWidth
+            }
         } as ElementRef;
 
         service.registerColumnCell(tableColumn.name, tableColumnCell);

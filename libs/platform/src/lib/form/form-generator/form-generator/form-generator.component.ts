@@ -144,6 +144,9 @@ export class FormGeneratorComponent implements OnDestroy {
     @Input()
     unifiedLayout = true;
 
+    @Input()
+    inlineColumnLayout: ColumnLayout = DefaultVerticalFieldLayout;
+
     /**
      * @description Event which notifies parent component that the form has been successfuly created
      * and all controls are in place.
@@ -216,6 +219,14 @@ export class FormGeneratorComponent implements OnDestroy {
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
+    }
+
+    /**
+     * Refreshes form items visibility with 'when' condition.
+     */
+    async refreshStepsVisibility(): Promise<void> {
+        this.shouldShowFields = await this._fgService.checkVisibleFormItems(this.form);
+        this._cd.markForCheck();
     }
 
     /**

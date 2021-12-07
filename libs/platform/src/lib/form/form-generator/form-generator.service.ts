@@ -179,7 +179,7 @@ export class FormGeneratorService implements OnDestroy {
 
         if (isFunction(formItem.onchange)) {
             formControl.valueChanges.pipe(debounceTime(50), takeUntil(this._onDestroy$)).subscribe(async (value) => {
-                const obj = formItem.onchange(value, this.forms);
+                const obj = formItem.onchange(value, this.forms, formControl);
 
                 await this._getFunctionValue(obj);
             });
@@ -217,6 +217,7 @@ export class FormGeneratorService implements OnDestroy {
 
             if (formItem.transformer) {
                 const obj = formItem.transformer(formValue[i], formValue, formItem);
+
                 formValue[i] = await this._getFunctionValue(obj);
             }
 

@@ -1,4 +1,4 @@
-import { AfterViewInit, Directive, ElementRef, HostListener, Input, Optional } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, HostListener, Input, OnDestroy, Optional } from '@angular/core';
 
 import { RtlService } from '@fundamental-ngx/core/utils';
 
@@ -12,7 +12,7 @@ export const TABLE_CELL_RESIZABLE_THRESHOLD_PX = 4;
  * Tracks mouse movement over the cell if the mouse pointer near the side of the cell, informs resize service.
  */
 @Directive({ selector: '[fdpTableCellResizable]' })
-export class PlatformTableCellResizableDirective implements AfterViewInit {
+export class PlatformTableCellResizableDirective implements AfterViewInit, OnDestroy {
     /** First column can be resized only by its end */
     @Input('fdpTableCellResizable')
     set resizableSide(value: TableColumnResizableSide) {
@@ -49,6 +49,10 @@ export class PlatformTableCellResizableDirective implements AfterViewInit {
         }
 
         this._tableColumnResizeService?.registerColumnCell(this.columnName, this._elRef);
+    }
+
+    ngOnDestroy(): void {
+        this._tableColumnResizeService?.unregisterColumnCell(this.columnName, this._elRef);
     }
 
     /** @hidden */

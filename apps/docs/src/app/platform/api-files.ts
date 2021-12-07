@@ -98,5 +98,15 @@ export const API_FILES = {
         'IconTabBarFilterTypeComponent',
         'IconTabBarPopoverComponent',
         'TextTypePopoverComponent'
+    ],
+    smartFilterBar: [
+        'SmartFilterBarComponent',
+        'SmartFilterBarConditionFieldComponent',
+        'SmartFilterBarConditionsDialogComponent',
+        'SmartFilterBarFieldDefinitionDirective',
+        'SmartFilterBarService',
+        'SmartFilterBarSubjectDirective',
+        'SmartFilterBarOptionsDataProvider',
+        'SmartFilterBarSettingsDialogComponent'
     ]
 };

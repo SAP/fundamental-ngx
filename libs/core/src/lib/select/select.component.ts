@@ -70,7 +70,7 @@ export class FdSelectChange {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '[class.fd-select-custom-class]': 'true',
+        '[class.fd-select-custom-class]': 'inline',
         '[class.fd-select-custom-class--mobile]': 'mobile'
     },
     providers: [
@@ -191,6 +191,10 @@ export class SelectComponent
     /** Select Input Mobile Configuration */
     @Input()
     mobileConfig: MobileModeConfig = { hasCloseButton: true };
+
+    /** Should select be inlined. */
+    @Input()
+    inline = true;
 
     /** Event emitted when the popover open state changes. */
     @Output()
