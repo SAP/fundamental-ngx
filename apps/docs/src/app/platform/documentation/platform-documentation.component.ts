@@ -43,6 +43,7 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
             { url: 'platform/textarea', name: 'Textarea' },
             { url: 'platform/thumbnail', name: 'Thumbnail' },
             { url: 'platform/time-picker', name: 'Time Picker' },
+            { url: 'platform/smart-filter-bar', name: 'Smart filter bar' },
             { url: 'platform/switch', name: 'Switch' },
             { url: 'platform/step-input', name: 'Step Input' },
             { url: 'platform/select', name: 'Select' },

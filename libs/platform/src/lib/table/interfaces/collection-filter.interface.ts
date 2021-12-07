@@ -4,11 +4,13 @@ import {
     FilterNumberStrategy,
     FilterStringStrategy,
     FilterBooleanStrategy,
-    FilterDefaultStrategy
+    FilterDefaultStrategy,
+    FilterableColumnDataType
 } from '../enums';
 
 interface BaseCollectionFilter<T> {
     field: string;
+    type?: FilterableColumnDataType;
     value: T;
     value2?: T;
     exclude?: boolean;

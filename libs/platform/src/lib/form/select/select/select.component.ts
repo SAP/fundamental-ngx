@@ -71,6 +71,9 @@ export class SelectComponent extends BaseSelect implements AfterViewInit, AfterV
         }
     }
 
+    @Input()
+    inline = true;
+
     /** Event emitted when the selected value of the select changes. */
     @Output()
     readonly valueChange: EventEmitter<FdSelectChange> = new EventEmitter<FdSelectChange>();

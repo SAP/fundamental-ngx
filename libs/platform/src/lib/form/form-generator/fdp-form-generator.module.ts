@@ -25,6 +25,9 @@ import { DynamicFormGeneratorDatepickerComponent } from './dynamic-form-generato
 import { DynamicFormGeneratorSwitchComponent } from './dynamic-form-generator-switch/dynamic-form-generator-switch.component';
 import { FormGeneratorService } from './form-generator.service';
 import { FormGeneratorFieldComponent } from './form-generator-field/form-generator-field.component';
+import { DynamicFormGeneratorMultiComboboxComponent } from './dynamic-form-generator-multi-combobox/dynamic-form-generator-multi-combobox.component';
+import { PlatformMultiComboboxModule } from '../multi-combobox/multi-combobox.module';
+import { PlatformMultiInputModule } from '../multi-input/multi-input.module';
 
 @NgModule({
     declarations: [
@@ -38,7 +41,8 @@ import { FormGeneratorFieldComponent } from './form-generator-field/form-generat
         DynamicFormGeneratorRadioComponent,
         DynamicFormGeneratorDatepickerComponent,
         DynamicFormGeneratorSwitchComponent,
-        FormGeneratorFieldComponent
+        FormGeneratorFieldComponent,
+        DynamicFormGeneratorMultiComboboxComponent
     ],
     imports: [
         CommonModule,
@@ -55,7 +59,9 @@ import { FormGeneratorFieldComponent } from './form-generator-field/form-generat
         PlatformDatePickerModule,
         PlatformSwitchModule,
         FormMessageModule,
-        BusyIndicatorModule
+        BusyIndicatorModule,
+        PlatformMultiComboboxModule,
+        PlatformMultiInputModule
     ],
     providers: [FormGeneratorService],
     exports: [

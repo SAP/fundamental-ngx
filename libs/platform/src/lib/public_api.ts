@@ -27,3 +27,4 @@ export * from '@fundamental-ngx/platform/upload-collection';
 export * from '@fundamental-ngx/platform/value-help-dialog';
 export * from '@fundamental-ngx/platform/wizard-generator';
 export * from '@fundamental-ngx/platform/icon-tab-bar';
+export * from '@fundamental-ngx/platform/smart-filter-bar';

@@ -37,7 +37,7 @@ import {
     RtlService
 } from '@fundamental-ngx/core/utils';
 import { TableRowDirective } from '@fundamental-ngx/core/table';
-import { getNestedValue, isDataSource, isFunction, isString } from '@fundamental-ngx/platform/shared';
+import { getNestedValue, isDataSource, isFunction, isString, SelectItem } from '@fundamental-ngx/platform/shared';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 
 import { TableService } from './table.service';
@@ -749,6 +749,11 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this._cdr.markForCheck();
     }
 
+    /** Get available column value variants. */
+    getColumnVariants(column: string): Observable<SelectItem[]> {
+        return this._tableDataSource.dataProvider.getFieldOptions(column);
+    }
+
     /** Freeze table to column */
     freezeToColumn(columnName: string): void {
         this.freezeColumnsTo = columnName;
@@ -824,6 +829,20 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this._cdr.markForCheck();
     }
 
+    /**
+     * Toggle row checked state.
+     * @param rowIndex Index of the row.
+     */
+    toggleSelectableRow(rowIndex: number): void {
+        const row = this._tableRows[rowIndex];
+
+        if (!row) {
+            return;
+        }
+
+        this._toggleSelectableRow(row);
+    }
+
     /** Remove the row navigation */
     removeRowNavigation(rowIndex: number): void {
         const row = this._tableRows[rowIndex];
@@ -874,6 +893,11 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         });
 
         this._subscriptions.add(intersectionSubscription);
+    }
+
+    /** Get table data source */
+    getDataSource(): TableDataSource<T> {
+        return this._tableDataSource;
     }
 
     // Private API

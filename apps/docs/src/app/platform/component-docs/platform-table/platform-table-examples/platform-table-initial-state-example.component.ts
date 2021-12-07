@@ -54,23 +54,23 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
     items: ExampleItem[] = [];
     totalItems = 0;
 
-    constructor(private dateTimeAdapter: DatetimeAdapter<FdDate>) {
+    constructor(public dateTimeAdapter: DatetimeAdapter<FdDate>) {
         super();
     }
 
-    fetch(tableState: TableState): Observable<ExampleItem[]> {
+    fetch(tableState?: TableState): Observable<ExampleItem[]> {
         this.items = [...ITEMS];
 
         // apply searching
-        if (tableState.searchInput) {
-            this.items = this.search(tableState);
+        if (tableState?.searchInput) {
+            this.items = this.search(this.items, tableState);
         }
         // apply filtering
-        if (tableState.filterBy) {
+        if (tableState?.filterBy) {
             this.items = this.filter(tableState);
         }
         // apply sorting
-        if (tableState.sortBy) {
+        if (tableState?.sortBy) {
             this.items = this.sort(tableState);
         }
 
@@ -154,8 +154,7 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
         return filterByString(item, rule as CollectionStringFilter);
     }
 
-    private search({ searchInput, columns }: TableState): ExampleItem[] {
-        const items = this.items;
+    search(items: ExampleItem[], { searchInput, columns }: TableState): ExampleItem[] {
         const searchText = searchInput?.text || '';
         const keysToSearchBy = columns;
 

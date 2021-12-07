@@ -798,6 +798,10 @@
             "tags": ["fdp"],
             "implicitDependencies": ["core-slider", "platform-shared"]
         },
+        "platform-smart-filter-bar": {
+            "tags": ["fdp"],
+            "implicitDependencies": ["platform-table"]
+        },
         "platform-split-menu-button": {
             "tags": ["fdp"],
             "implicitDependencies": ["core-menu", "core-button", "core-utils", "platform-shared", "platform-menu"]

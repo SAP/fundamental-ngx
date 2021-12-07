@@ -1,0 +1,41 @@
+<div>
+    <fd-toolbar [hasTitle]="true" fdType="transparent">
+        <fdp-search-field
+            (inputChange)="onSearchInputChange($event)"
+            (searchSubmit)="submitForm()"
+            contentDensity="compact"
+            [placeholder]="'Search'"
+            [disableRefresh]="true"
+        ></fdp-search-field>
+        <fd-toolbar-spacer></fd-toolbar-spacer>
+        <fdp-button
+            fd-toolbar-item
+            buttonType="emphasized"
+            contentDensity="compact"
+            (click)="submitForm()"
+            label="Go"
+        ></fdp-button>
+        <fdp-button fd-toolbar-item contentDensity="compact" (click)="submitForm()" glyph="synchronize"></fdp-button>
+        <fdp-button
+            fd-toolbar-item
+            contentDensity="compact"
+            (click)="showFilteringSettings()"
+            [label]="'Filters (' + _selectedFilters.length + ')'"
+        ></fdp-button>
+        <fdp-button
+            fd-toolbar-item
+            buttonType="transparent"
+            contentDensity="compact"
+            (click)="toggleFilterBar()"
+            [label]="_showFilterBar ? 'Hide filters' : 'Show filters'"
+        ></fdp-button>
+    </fd-toolbar>
+</div>
+
+<div *ngIf="_showFilterBar">
+    <fdp-form-generator
+        (formSubmitted)="onFormSubmitted($event)"
+        [inlineColumnLayout]="{ S: 12, M: 6, L: 4, XL: 3 }"
+        [formItems]="_formItems"
+    ></fdp-form-generator>
+</div>

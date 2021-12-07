@@ -1,0 +1,69 @@
+<fdp-smart-filter-bar [subject]="subject"></fdp-smart-filter-bar>
+
+<fdp-table
+    fdp-smart-filter-bar-subject
+    #subject="fdp-smart-filter-bar-subject"
+    [dataSource]="source"
+    [trackBy]="trackBy"
+    emptyTableMessage="No data found"
+>
+    <fdp-table-toolbar title="Order Line Items" [hideItemCount]="false">
+        <fdp-table-toolbar-actions>
+            <fdp-button label="Action One" (click)="alert('Action One')"></fdp-button>
+            <fdp-button label="Action Two" (click)="alert('Action Two')"></fdp-button>
+        </fdp-table-toolbar-actions>
+    </fdp-table-toolbar>
+
+    <fdp-column
+        fdp-smart-filter-bar-field-definition
+        filterable="true"
+        name="name"
+        key="name"
+        label="Name"
+        align="start"
+    >
+    </fdp-column>
+
+    <fdp-column
+        fdp-smart-filter-bar-field-definition
+        filterable="true"
+        name="description"
+        key="description"
+        label="Description"
+    >
+    </fdp-column>
+
+    <fdp-column fdp-smart-filter-bar-field-definition name="price" key="price.value" label="Price" align="end">
+    </fdp-column>
+
+    <fdp-column
+        fdp-smart-filter-bar-field-definition
+        filterType="multi-select"
+        filterable="true"
+        name="status"
+        key="status"
+        label="Status"
+        align="center"
+    >
+    </fdp-column>
+
+    <fdp-column
+        fdp-smart-filter-bar-field-definition
+        filterType="single-select"
+        filterable="true"
+        name="statusColor"
+        key="statusColor"
+        label="Status color"
+        align="center"
+    >
+    </fdp-column>
+
+    <fdp-column
+        fdp-smart-filter-bar-field-definition
+        filterable="true"
+        dataType="date"
+        name="date"
+        key="date"
+        label="Date"
+    ></fdp-column>
+</fdp-table>

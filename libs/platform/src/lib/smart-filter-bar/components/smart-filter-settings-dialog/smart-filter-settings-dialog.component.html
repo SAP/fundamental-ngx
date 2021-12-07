@@ -1,0 +1,71 @@
+<fd-dialog class="fdp-table-p13-filtering-dialog">
+    <fd-dialog-header>
+        <ng-template fdTemplate="header">
+            <div fd-bar-left>
+                <fd-bar-element>
+                    <h4 fd-title [headerSize]="4" i18n="@@platformTableP13FilterDialogHeader">Filters</h4>
+                </fd-bar-element>
+            </div>
+            <div fd-bar-right>
+                <fd-bar-element>
+                    <fdp-table-reset-button></fdp-table-reset-button>
+                </fd-bar-element>
+            </div>
+        </ng-template>
+    </fd-dialog-header>
+
+    <fd-dialog-body>
+        <fd-toolbar [hasTitle]="true" fdType="transparent">
+            <fdp-select
+                contentDensity="compact"
+                placeholder="Select an option"
+                (selectionChange)="onFilterVisibilityChange($event)"
+                [value]="_filterVisibilityOptions[0].value"
+                [list]="_filterVisibilityOptions"
+            >
+            </fdp-select>
+        </fd-toolbar>
+        <fdp-table
+            #table
+            contentDensity="compact"
+            [dataSource]="source"
+            selectionMode="multiple"
+            emptyTableMessage="No data found"
+            (rowSelectionChange)="onRowSelectionChange($event)"
+        >
+            <fdp-column name="label" key="label" label="Filter" align="start"> </fdp-column>
+            <fdp-column name="active" key="active" label="Active" align="center" width="150px">
+                <fdp-table-cell *fdpCellDef="let item">
+                    <fd-icon *ngIf="item.active" glyph="circle-task-2"></fd-icon>
+                </fdp-table-cell>
+            </fdp-column>
+        </fdp-table>
+    </fd-dialog-body>
+
+    <fd-dialog-footer>
+        <fd-dialog-footer-button>
+            <button
+                fd-button
+                fdType="emphasized"
+                fd-dialog-decisive-button
+                i18n-label="@@platformTableP13FilterDialogConfirmationBtn"
+                label="OK"
+                [compact]="true"
+                (click)="confirm()"
+            ></button>
+        </fd-dialog-footer-button>
+
+        <fd-dialog-footer-button>
+            <button
+                fd-button
+                fdType="transparent"
+                fd-dialog-decisive-button
+                fd-initial-focus
+                i18n-label="@@platformTableP13FilterDialogCancelBtn"
+                label="Cancel"
+                [compact]="true"
+                (click)="cancel()"
+            ></button>
+        </fd-dialog-footer-button>
+    </fd-dialog-footer>
+</fd-dialog>

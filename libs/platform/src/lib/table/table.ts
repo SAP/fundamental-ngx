@@ -1,5 +1,6 @@
 import { EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
+import { SelectItem } from '@fundamental-ngx/platform/shared';
 
 import { TableState } from './interfaces/table-state.interface';
 import { CollectionSort } from './interfaces/collection-sort.interface';
@@ -7,6 +8,7 @@ import { CollectionFilter } from './interfaces/collection-filter.interface';
 import { CollectionGroup } from './interfaces/collection-group.interface';
 import { SearchInput } from './interfaces/search-field.interface';
 import { TableColumn } from './components/table-column/table-column';
+import { TableDataSource } from './domain';
 
 export abstract class Table {
     /** Table columns definition list */
@@ -54,6 +56,9 @@ export abstract class Table {
     /** Set table columns */
     abstract setColumns(columns: string[]): void;
 
+    /** Toggle row checked state. */
+    abstract toggleSelectableRow(rowIndex: number): void;
+
     /** Freeze table columns to including */
     abstract freezeToColumn(columnKey: string): void;
 
@@ -80,4 +85,10 @@ export abstract class Table {
 
     /** Set current page */
     abstract setCurrentPage(currentPage: number): void;
+
+    /** Get available column value variants. */
+    abstract getColumnVariants(column: string): Observable<SelectItem[]>;
+
+    /** Get table data source */
+    abstract getDataSource(): TableDataSource<any>;
 }

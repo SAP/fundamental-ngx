@@ -44,6 +44,7 @@ import { PlatformTableSemanticExampleComponent } from './platform-table-examples
 import { PlatformTableRowClassExampleComponent } from './platform-table-examples/platform-table-row-class-example.component';
 import { PlatformTableNoOuterBordersExampleComponent } from './platform-table-examples/platform-table-no-outer-borders-example.component';
 import { PlatformTableWrapExampleComponent } from './platform-table-examples/platform-table-wrap-example.component';
+import { PlatformSmartFilterBarModule } from '@fundamental-ngx/platform';
 
 const routes: Routes = [
     {
@@ -70,7 +71,8 @@ const routes: Routes = [
         PlatformInputModule,
         PlatformSearchFieldModule,
         IllustratedMessageModule,
-        FdpFormGroupModule
+        FdpFormGroupModule,
+        PlatformSmartFilterBarModule
     ],
     exports: [RouterModule],
     declarations: [
