@@ -146,7 +146,7 @@ describe('Dynamic Page Layout test suite:', () => {
 
             expect(firstTabSelected).toBe('false');
             expect(secondTabSelected).toBe('true');
-            expect(getText(dynamicPageTabsContent)).toContain('tabs 2');
+            expect(getText(dynamicPageTabsContent, 1)).toContain('tabs 2');
         });
     });
 
