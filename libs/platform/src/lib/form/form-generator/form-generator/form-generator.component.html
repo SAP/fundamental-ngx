@@ -19,12 +19,12 @@
             [unifiedLayout]="unifiedLayout"
         >
             <ng-container *ngFor="let field of formControlItems; trackBy: _trackFn">
-                <ng-сontainer
+                <ng-container
                     *ngTemplateOutlet="
                         field.type === 'field' ? fieldRenderer : groupRenderer;
                         context: { field: field, formFieldName: field.formItem?.name, rank: field.formItem?.rank || 0 }
                     "
-                ></ng-сontainer>
+                ></ng-container>
                 <ng-template
                     #fieldRenderer
                     let-field="field"
