@@ -12,8 +12,8 @@ export class ShellbarBasicExampleComponent {
     };
 
     userMenu: ShellbarUserMenu[] = [
-        { text: 'Settings', callback: this.settingsCallback },
-        { text: 'Sign Out', callback: this.signOutCallback }
+        { text: 'Settings', callback: this.settingsCallback, glyph: 'action-settings' },
+        { text: 'Sign Out', callback: this.signOutCallback, glyph: 'log' }
     ];
 
     settingsCallback(): void {
