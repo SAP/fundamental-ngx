@@ -23,7 +23,7 @@ import {
     ViewEncapsulation,
     ViewRef
 } from '@angular/core';
-import { BehaviorSubject, isObservable, merge, Observable, of, Subscription } from 'rxjs';
+import { BehaviorSubject, fromEvent, isObservable, merge, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
 
 import {
@@ -674,6 +674,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
         this._listenToTableWidthChanges();
 
+        this._listenToTableContainerMouseLeave();
+
         this._cdr.detectChanges();
     }
 
@@ -894,6 +896,12 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     _getColumnResizableSide(columnIndex: number): TableColumnResizableSide {
         if (columnIndex === 0) {
             return 'end';
+        }
+
+        const isLastColumn = columnIndex === this._visibleColumns.length - 1;
+
+        if (isLastColumn && this._isShownNavigationColumn) {
+            return 'start';
         }
 
         return 'both';
@@ -1980,6 +1988,15 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                         this._tableColumnResizeService.updateFrozenColumnsWidth();
                     }
                 })
+        );
+    }
+
+    /** @hidden */
+    private _listenToTableContainerMouseLeave(): void {
+        this._subscriptions.add(
+            fromEvent(this.tableContainer.nativeElement, 'mouseleave').subscribe(() =>
+                this._tableColumnResizeService.hideResizer()
+            )
         );
     }
 
