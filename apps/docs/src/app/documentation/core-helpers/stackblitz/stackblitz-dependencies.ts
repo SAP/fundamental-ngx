@@ -1,4 +1,3 @@
-import { parseVersion } from './utils/parse-version';
 import packageInfo from '../../../../../../../package.json';
 import packageLockInfo from '../../../../../../../package-lock.json';
 
@@ -26,27 +25,21 @@ export class StackblitzDependencies {
         'moment',
         'tslib',
         'typescript',
-        'focus-trap'
+        'focus-trap',
+        'fast-deep-equal'
     ];
 
     static getDependencies(): Record<string, any> {
         const _dependencies: Record<string, any> = {};
 
-        const libVersion = parseVersion(packageInfo.version);
+        this._libDependencies.forEach((libDep) => (_dependencies[libDep] = packageInfo.version));
 
-        this._libDependencies.forEach((libDep) => (_dependencies[libDep] = libVersion));
-
-        this._dependencies.forEach((dep) => {
+        [...this._dependencies, ...this._ngDependencies].forEach((dep) => {
             if (packageLockInfo.dependencies && packageLockInfo.dependencies[dep]) {
-                _dependencies[dep] = parseVersion(packageLockInfo.dependencies[dep].version);
+                _dependencies[dep] = packageLockInfo.dependencies[dep].version;
             } else {
                 throw new Error('Dependency ' + dep + ' not found in package-lock.json');
             }
-        });
-
-        const ngVersion = this.resolveNgVersion(libVersion);
-        this._ngDependencies.forEach((dep) => {
-            _dependencies[dep] = ngVersion;
         });
 
         return _dependencies;
@@ -54,7 +47,7 @@ export class StackblitzDependencies {
 
     static getAngularJson(): string {
         return `
-        {
+{
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
@@ -133,23 +126,6 @@ export class StackblitzDependencies {
     }
   },
   "defaultProject": "fundamental-ngx-example"
-}
-        `;
-    }
-
-    /**
-     * ngx-fundamental introduced breaking change by migrating to Angular 12 in v0.33.0
-     * This function contrains an extra logic in order to bring compatibility between Angular and ngx-fundamental,
-     *
-     * @param parsedLibVersion ngx-fundamental version, that was processed by "parseVersion" function
-     * @returns version of Angular packages to be used
-     */
-    private static resolveNgVersion(parsedLibVersion: string): string {
-        const [, minor] = parsedLibVersion.split('.').map((n) => parseInt(n, 10));
-        if (minor === 32) {
-            return '^11';
-        } else {
-            return '^12';
-        }
+}`;
     }
 }
