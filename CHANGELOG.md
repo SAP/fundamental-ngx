@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.207 (2021-12-08)
+
+
+### Bug Fixes
+
+* **platform:** textarea clipboard api ([#7336](https://github.com/SAP/fundamental-ngx/issues/7336)) ([688724d](https://github.com/SAP/fundamental-ngx/commit/688724d3075fb4597ab231fb46c22eca57e9737d))
+
 ## 0.33.0-rc.206 (2021-12-08)
 
 ## 0.33.0-rc.205 (2021-12-08)
