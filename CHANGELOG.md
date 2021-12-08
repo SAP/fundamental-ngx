@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.205 (2021-12-08)
+
+
+### Features
+
+* **docs:** stackblitz angular 12, release candidates library version support ([#7334](https://github.com/SAP/fundamental-ngx/issues/7334)) ([4afaa68](https://github.com/SAP/fundamental-ngx/commit/4afaa68d6a41934d12e31932a1c5507d78500387))
+
 ## 0.33.0-rc.204 (2021-12-08)
 
 
