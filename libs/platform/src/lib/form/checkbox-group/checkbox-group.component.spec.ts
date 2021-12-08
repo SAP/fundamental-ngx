@@ -834,17 +834,9 @@ const CHECKBOX_GROUP_IDENTIFIER = 'platform-checkbox-group-unit-test';
 runValueAccessorTests({
     component: CheckboxGroupComponent,
     testModuleMetadata: {
-        imports: [
-            FdpFormGroupModule,
-            FormModule,
-            PlatformCheckboxGroupModule,
-            PlatformCheckboxModule,
-            FormsModule,
-            ReactiveFormsModule
-        ]
+        imports: [PlatformCheckboxGroupModule]
     },
     additionalSetup: (fixture, done) => {
-        fixture.componentInstance.list = ['a', 'b', 'c'];
         fixture.componentInstance.id = CHECKBOX_GROUP_IDENTIFIER;
         fixture.componentInstance.name = CHECKBOX_GROUP_IDENTIFIER;
         done();

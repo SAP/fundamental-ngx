@@ -495,7 +495,7 @@ const RADIO_GROUP_IDENTIFIER = 'platform-radio-group-unit-test';
 runValueAccessorTests({
     component: RadioGroupComponent,
     testModuleMetadata: {
-        imports: [FdpFormGroupModule, FormModule, PlatformRadioGroupModule, FormsModule, ReactiveFormsModule]
+        imports: [PlatformRadioGroupModule]
     },
     additionalSetup: (fixture, done) => {
         fixture.componentInstance.list = ['a', 'b', 'c'];
@@ -504,8 +504,10 @@ runValueAccessorTests({
         done();
     },
     supportsOnBlur: false,
-    internalValueChangeSetter: (fixture, value) => {
-        fixture.componentInstance.viewRadioButtons.find((b) => b.value === value)._valueChange(value, true);
-    },
+    internalValueChangeSetter: null,
+    // TODO: uncomment internalValueChangeSetter after ngx-cva-test-suite@1.1.0 is released
+    // internalValueChangeSetter: (fixture, value) => {
+    //     fixture.componentInstance.viewRadioButtons.find((b) => b.value === value)._valueChange(value, true);
+    // },
     getComponentValue: (fixture) => fixture.componentInstance.value
 });

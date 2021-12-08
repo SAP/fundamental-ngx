@@ -211,13 +211,13 @@ export class RadioGroupComponent
             return;
         }
 
-        let firstEnabledButtonIndex = -1;
         this._keyboardEventsManager = new FocusKeyManager(radioButtons).withWrap().withHorizontalOrientation('ltr');
 
         radioButtons.changes
             .pipe(
-                startWith(0),
+                startWith(radioButtons),
                 switchMap(() => {
+                    let firstEnabledButtonIndex = -1;
                     const checkedEvents = radioButtons.map((button, i) => {
                         if (this.list) {
                             button.state = this.state;
@@ -234,16 +234,16 @@ export class RadioGroupComponent
 
                         return button.checked.asObservable();
                     });
+
+                    // accessibility requirement
+                    if (!this._selected && radioButtons && firstEnabledButtonIndex > -1) {
+                        radioButtons.toArray()[firstEnabledButtonIndex].setTabIndex(0);
+                    }
                     return merge(...checkedEvents);
                 }),
                 takeUntil(this._destroy$)
             )
             .subscribe((ev) => this._selectedValueChanged(ev));
-
-        // accessibility requirement
-        if (!this._selected && radioButtons && firstEnabledButtonIndex > -1) {
-            radioButtons.toArray()[firstEnabledButtonIndex].setTabIndex(0);
-        }
     }
 
     /**
