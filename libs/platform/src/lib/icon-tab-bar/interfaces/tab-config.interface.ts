@@ -6,7 +6,10 @@ export interface TabConfig {
     label?: string;
     color?: SemanticColor;
     counter?: number;
-    active?: boolean; // selected tab
-    badge?: boolean; // should show red circle in top-right corner of tab
-    subItems?: TabConfig[]; // Nested tabs
+    /** whether the tab is selected */
+    active?: boolean;
+    /** if set to true, will show red circle in top-right corner of tab */
+    badge?: boolean;
+    /** config for nested tabs */
+    subItems?: TabConfig[];
 }
