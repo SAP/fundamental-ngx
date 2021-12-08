@@ -122,7 +122,7 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
         );
 
         // subscribe to _inlineCurrentValue in collection-form-field-inline-layout
-        this._inlineCurrentValue
+        this._inlineCurrentValue$
             .pipe(distinctUntilChanged())
             .subscribe((currentInline) => (this.isInline = currentInline));
     }

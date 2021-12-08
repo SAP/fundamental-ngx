@@ -12,7 +12,7 @@
         [ariaLabelledBy]="ariaLabelledBy"
         [ariaDescribedBy]="ariaDescribedBy"
         [ngModel]="_currentValue"
-        (ngModelChange)="_valueChange($event)"
+        (ngModelChange)="_valueChange($event, true)"
     >
         <ng-content></ng-content>
     </fd-radio-button>
