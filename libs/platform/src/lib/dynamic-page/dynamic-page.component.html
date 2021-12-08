@@ -1,4 +1,11 @@
-<fd-dynamic-page [autoResponsive]="autoResponsive" [background]="background" [size]="size">
+<fd-dynamic-page
+    [autoResponsive]="autoResponsive"
+    [background]="background"
+    [size]="size"
+    [expandContent]="expandContent"
+    [offset]="offset"
+    [ariaLabel]="ariaLabel"
+>
     <fd-dynamic-page-header *ngIf="titleComponent" [title]="titleComponent.title" [subtitle]="titleComponent.subtitle">
         <fd-breadcrumb>
             <ng-container [ngTemplateOutlet]="titleComponent.breadcrumbTemplate"></ng-container>

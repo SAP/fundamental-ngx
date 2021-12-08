@@ -61,8 +61,8 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     size: DynamicPageResponsiveSize = 'extra-large';
 
     /**
-     * user provided offset in px
-     * @deprecated
+     * provided offset in px
+     * Should be added, when there is something else at the bottom and dynamic page is not expanded to bottom's corners
      */
     @Input()
     offset = 0;
@@ -75,6 +75,12 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
      */
     @Input()
     autoResponsive = true;
+
+    /**
+     * Whether dynamic page should be expanded in whole page.
+     */
+    @Input()
+    expandContent = true;
 
     /** reference to title component  */
     @ContentChild(DynamicPageTitleComponent)
