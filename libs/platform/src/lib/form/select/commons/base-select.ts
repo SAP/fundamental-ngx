@@ -43,15 +43,17 @@ import {
     isString,
     OptionItem
 } from '@fundamental-ngx/platform/shared';
-import { SelectComponent } from '../select/select.component';
 import { SelectConfig } from '../select.config';
 import { TextAlignment } from '../../combobox';
 
 export type FdpSelectData<T> = OptionItem[] | Observable<T[]> | T[];
 
+/**
+ * @deprecated
+ * `FdpSelectionChangeEvent` will be removed in future versions in favour of plain value emission
+ */
 export class FdpSelectionChangeEvent {
     constructor(
-        public source: SelectComponent,
         public payload: any // Contains selected item
     ) {}
 }
@@ -331,40 +333,21 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
         }
     }
 
-    /**
-     * Method to emit change event
-     * @hidden
-     */
-    abstract _emitChangeEvent<K>(value: K): void;
-
-    /**
-     * Define is this item selected
-     * @hidden
-     */
-    abstract _isSelectedOptionItem(selectedItem: OptionItem): boolean;
-
-    /**
-     * Emit select OptionItem
-     * @hidden
-     * */
-    abstract _selectOptionItem(item: OptionItem): void;
-
-    /**
-     * Define value as selected
-     * @hidden
-     * */
-    abstract _setAsSelected(item: OptionItem[]): void;
-
     /** Is empty search field */
     get isEmptyValue(): boolean {
         return this.value.trim().length === 0;
     }
 
-    /** write value for ControlValueAccessor */
-    writeValue(value: any): void {
-        const selectedItems = Array.isArray(value) ? value : [value];
-        this._setAsSelected(this._convertToOptionItems(selectedItems));
-        super.writeValue(value);
+    protected setValue(newValue: any, emitOnChange = true) {
+        if (newValue !== this._value) {
+            this.writeValue(newValue);
+            if (emitOnChange) {
+                this.onChange(this.value);
+                this.onTouched();
+                this.selectionChange.emit({ payload: this.value });
+            }
+            this.cd.markForCheck();
+        }
     }
 
     /** @hidden
@@ -397,19 +380,12 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
     }
 
     /** @hidden */
-    handleOptionItem(value: OptionItem): void {
-        if (value) {
-            this._selectOptionItem(value);
-        }
-    }
-
-    /** @hidden */
     handlePressEnter(event: KeyboardEvent, value: OptionItem): void {
         if (!KeyUtil.isKeyCode(event, ENTER)) {
             return;
         }
 
-        this.handleOptionItem(value);
+        this.setValue(value);
     }
 
     /** Method passed to list component */
