@@ -281,11 +281,9 @@ describe('Wizard generator test suite', () => {
                 checkNavigationBySteps(visibleSummaryExample);
             });
 
-            it('should check navigation by scrolling', () => {
-                // skipped for FF on Windows due to https://github.com/SAP/fundamental-ngx/issues/7046
-                if (!browserIsFirefox() && currentPlatformName() !== 'Windows') {
-                    checkNavigationByScrolling(visibleSummaryExample);
-                }
+            xit('should check navigation by scrolling', () => {
+                // skipped due to https://github.com/SAP/fundamental-ngx/issues/7046
+                checkNavigationByScrolling(visibleSummaryExample);
             });
         });
     });
@@ -468,11 +466,9 @@ describe('Wizard generator test suite', () => {
                 checkNavigationBySteps(summaryObjectsExample);
             });
 
-            it('should check navigation by scrolling', () => {
-                // skipped for FF on Windows due to https://github.com/SAP/fundamental-ngx/issues/7046
-                if (!browserIsFirefox() && currentPlatformName() !== 'Windows') {
-                    checkNavigationByScrolling(summaryObjectsExample);
-                }
+            xit('should check navigation by scrolling', () => {
+                // skipped due to https://github.com/SAP/fundamental-ngx/issues/7046
+                checkNavigationByScrolling(summaryObjectsExample);
             });
         });
     });

@@ -118,6 +118,12 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
     @Input()
     isControl = false;
 
+    /**
+     * Whether should show focus outline
+     */
+    @Input()
+    showFocus = false;
+
     /** @hidden */
     @Input()
     isExpanded = false;
