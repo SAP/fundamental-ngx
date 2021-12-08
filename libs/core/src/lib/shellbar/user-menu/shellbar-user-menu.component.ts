@@ -11,7 +11,6 @@ import { ShellbarUserMenu } from '../model/shellbar-user-menu';
 @Component({
     selector: 'fd-shellbar-user-menu',
     templateUrl: './shellbar-user-menu.component.html',
-    styleUrls: ['./shellbar-user-menu.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShellbarUserMenuComponent {

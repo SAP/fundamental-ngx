@@ -33,12 +33,7 @@
         >
             <li fd-menu-item *ngFor="let item of userMenu" (click)="itemClick(item, $event)">
                 <div fd-menu-interactive>
-                    <fd-icon
-                        class="fd-shellbar__icon fd-margin-end--tiny"
-                        *ngIf="item.glyph"
-                        fd-menu-addon
-                        [glyph]="item.glyph"
-                    ></fd-icon>
+                    <fd-menu-addon *ngIf="item.glyph" position="before" [glyph]="item.glyph"></fd-menu-addon>
                     <span fd-menu-title>{{ item.text }}</span>
                 </div>
             </li>
