@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.202 (2021-12-08)
+
+
+### Bug Fixes
+
+* **core:** combobox a11y issues ([#6951](https://github.com/SAP/fundamental-ngx/issues/6951)) ([ec638c2](https://github.com/SAP/fundamental-ngx/commit/ec638c23dcbf9c27f2a1e0d35be7976ccfd5ef32))
+
 ## 0.33.0-rc.201 (2021-12-07)
 
 
