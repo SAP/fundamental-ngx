@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { DialogRef } from '@fundamental-ngx/core/dialog';
@@ -49,9 +49,12 @@ class ValidatedSortRule implements SortRule {
     providers: [{ provide: RESETTABLE_TOKEN, useExisting: P13SortingDialogComponent }],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class P13SortingDialogComponent implements Resettable {
+export class P13SortingDialogComponent implements Resettable, OnInit {
     /** Table columns available for sorting */
     readonly columns: SortDialogColumn[] = [];
+
+    /** @hidden */
+    private labelMap = new Map<string, string>();
 
     /** @hidden */
     private _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -71,6 +74,10 @@ export class P13SortingDialogComponent implements Resettable {
         this.columns = columns || [];
 
         this._initiateRules(collectionSort);
+    }
+
+    ngOnInit(): void {
+        this.columns.forEach((col) => this.labelMap.set(col.key, col.label));
     }
 
     /** Reset changes to the initial state */
@@ -132,9 +139,9 @@ export class P13SortingDialogComponent implements Resettable {
         return rule.columnKey;
     }
 
+    /** @hidden */
     _getAriaLabel(rule: ValidatedSortRule): string {
-        const columnLabel = this.columns.find((col) => col.key === rule.columnKey)?.label;
-        return `Sort by ${columnLabel}`;
+        return `Sort by ${this.labelMap.get(rule.columnKey)}`;
     }
 
     /** @hidden */

@@ -50,13 +50,14 @@ export class FdpCellSelectableDirective implements OnChanges {
     _onKeyDown(event: KeyboardEvent): void {
         if (
             KeyUtil.isKeyCode(event, F2) ||
-            (KeyUtil.isKeyCode(event, [ENTER, MAC_ENTER]) && !this._tableService.isFocusInsideTableCell)
+            (!this._tableService.isFocusInsideTableCell && KeyUtil.isKeyCode(event, ENTER))
         ) {
             this._tableService.processFocusInsideCell(this.navigationId);
+            return;
         }
 
         const arrowKeyCodes = [UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW];
-        if (KeyUtil.isKeyCode(event, arrowKeyCodes) && document.activeElement === this._elRef.nativeElement) {
+        if (document.activeElement === this._elRef.nativeElement && KeyUtil.isKeyCode(event, arrowKeyCodes)) {
             event.stopPropagation();
             event.preventDefault();
 

@@ -291,17 +291,11 @@ export class TableService {
 
         if (KeyUtil.isKeyCode(event, UP_ARROW)) {
             nextCellId = `${+rowIndex - 1},${colIndex}`;
-        }
-
-        if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
+        } else if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
             nextCellId = `${+rowIndex + 1},${colIndex}`;
-        }
-
-        if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
+        } else if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
             nextCellId = `${rowIndex},${+colIndex - (this._rtl ? -1 : 1)}`;
-        }
-
-        if (KeyUtil.isKeyCode(event, RIGHT_ARROW)) {
+        } else if (KeyUtil.isKeyCode(event, RIGHT_ARROW)) {
             nextCellId = `${rowIndex},${+colIndex + (this._rtl ? -1 : 1)}`;
         }
 

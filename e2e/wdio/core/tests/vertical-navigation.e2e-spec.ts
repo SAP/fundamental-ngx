@@ -11,7 +11,7 @@ import {
     isElementClickable
 } from '../../driver/wdio';
 
-describe('Vertical navigation component tests', function (): void {
+describe('Vertical navigation component tests', () => {
     const verticalNavigationPage = new VerticalNavigationPo();
     const {
         defaultExample,

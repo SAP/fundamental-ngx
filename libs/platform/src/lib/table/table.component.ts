@@ -2002,7 +2002,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this._subscriptions.add(
             fromEvent(this.tableContainer.nativeElement, 'keydown').subscribe((event: KeyboardEvent) => {
                 if (this.loading) {
-                    event.preventDefault();
                     return;
                 }
 

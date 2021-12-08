@@ -38,7 +38,6 @@ const keyMap: Map<number, string[]> = new Map([
     [ESCAPE, ['Escape', 'Esc']],
     [DELETE, ['Delete', 'Del']],
     [ENTER, ['Enter']],
-    [MAC_ENTER, ['Return']],
     [TAB, ['Tab']],
     [HOME, ['Home']],
     [END, ['End']],
