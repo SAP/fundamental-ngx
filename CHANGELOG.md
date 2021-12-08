@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.203 (2021-12-08)
+
+
+### Bug Fixes
+
+* **platform:** icon tab bar a11y issues ([#6997](https://github.com/SAP/fundamental-ngx/issues/6997)) ([8642298](https://github.com/SAP/fundamental-ngx/commit/8642298ae640ba75f0707bdc84fffa18f6f6b498))
+
 ## 0.33.0-rc.202 (2021-12-08)
 
 
