@@ -80,5 +80,6 @@ const fakeNgZone = {
 };
 
 const fakeCdr = {
-    detectChanges: () => null
+    detectChanges: () => null,
+    markForCheck: () => null
 };
