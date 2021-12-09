@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.210 (2021-12-09)
+
+
+### Bug Fixes
+
+* **platform:** menu, fix a11y issues ([#7269](https://github.com/SAP/fundamental-ngx/issues/7269)) ([8fcc928](https://github.com/SAP/fundamental-ngx/commit/8fcc928a3ae64f99e169f4e8f51fc20faa6b173b))
+
 ## 0.33.0-rc.209 (2021-12-09)
 
 
