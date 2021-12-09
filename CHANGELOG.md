@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.209 (2021-12-09)
+
+
+### Bug Fixes
+
+* **platform:** fix thumbnail responsive ([#7249](https://github.com/SAP/fundamental-ngx/issues/7249)) ([f3f834a](https://github.com/SAP/fundamental-ngx/commit/f3f834a5038a13088ca24705f0a70b55a5b446bb))
+
 ## 0.33.0-rc.208 (2021-12-09)
 
 
