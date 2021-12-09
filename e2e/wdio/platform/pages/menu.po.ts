@@ -11,7 +11,7 @@ export class MenuPo extends BaseComponentPo {
     menuHorizontalAvatarBtn = 'fdp-platform-menu-x-position-example fd-avatar';
     menuItemArr = '#fdp-menu-basic-menu fdp-menu-item';
     menuItemTextArr = '#fdp-menu-basic-menu fdp-menu-item span';
-    iconMenuIconArr = '.fd-button fd-icon';
+    iconMenuIconArr = 'component-example fd-icon';
     menuItemOverlay = '.cdk-overlay-container';
 
     cascadingMenuBtn = 'fdp-platform-menu-cascade-example button';
