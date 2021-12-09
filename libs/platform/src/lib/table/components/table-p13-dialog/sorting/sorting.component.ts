@@ -140,8 +140,8 @@ export class P13SortingDialogComponent implements Resettable, OnInit {
     }
 
     /** @hidden */
-    _getAriaLabel(rule: ValidatedSortRule): string {
-        return `Sort by ${this.labelMap.get(rule.columnKey)}`;
+    _getColumnLabel(rule: ValidatedSortRule): string {
+        return this.labelMap.get(rule.columnKey);
     }
 
     /** @hidden */

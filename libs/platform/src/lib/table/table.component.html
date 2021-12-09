@@ -381,6 +381,7 @@
                                 attr.aria-label="Row {{ rowIdx }} of {{ _totalItems }}, Column {{ colIdx }} of {{
                                     _tableColumnsLength
                                 }}. "
+                                i18n-ariaLabel="@@platformTableCellAriaLabelWithColAndRowIndex"
                                 [attr.data-nesting-level]="colIdx === 0 ? row.level + 1 : null"
                                 [tabindex]="_isTreeRowFirstCell(colIdx, row) ? 0 : -1"
                                 [focusable]="_isTreeRowFirstCell(colIdx, row)"

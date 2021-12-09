@@ -23,7 +23,7 @@
                 (valueChange)="_onRuleColumnKeyChange(rule, $event)"
                 [compact]="true"
                 placeholder="(none)"
-                [ariaLabel]="_getAriaLabel(rule)"
+                [ariaLabel]="'Sort by ' + _getColumnLabel(rule)"
                 i18n-ariaLabel="@@platformTableP13SortDialogRuleSortBy"
                 i18n-placeholder="@@platformTableP13SortDialogNoneSelectedColumn|Table column select placeholder"
             >

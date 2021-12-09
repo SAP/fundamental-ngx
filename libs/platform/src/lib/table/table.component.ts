@@ -1997,8 +1997,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             return;
         }
 
-        let shouldDelegateFocus = true;
-
         this._subscriptions.add(
             fromEvent(this.tableContainer.nativeElement, 'keydown').subscribe((event: KeyboardEvent) => {
                 if (this.loading) {
@@ -2028,11 +2026,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
         this._subscriptions.add(
             fromEvent(this.focusableMock.nativeElement, 'focus').subscribe(() => {
-                if (shouldDelegateFocus) {
-                    this._tableService.focusNextTableCell(FIRST_CELL_NAVIGATION_ID);
-                }
-
-                shouldDelegateFocus = true;
+                this._tableService.focusNextTableCell(FIRST_CELL_NAVIGATION_ID);
             })
         );
     }
