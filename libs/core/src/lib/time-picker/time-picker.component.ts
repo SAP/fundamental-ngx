@@ -17,7 +17,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
+import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -348,7 +348,7 @@ export class TimePickerComponent<D>
      * @hidden
      * Function that implements Validator Interface, adds validation support for forms
      */
-    validate(control: AbstractControl): {
+    validate(): {
         [key: string]: any;
     } {
         if (this._isInvalidTimeInput) {
@@ -538,7 +538,7 @@ export class TimePickerComponent<D>
         this._changeMessageVisibility();
         if (isOpen) {
             this._changeDetectorRef.detectChanges();
-            this.child.focusActiveColumnIndicator();
+            this.child.focusActiveColumn();
         }
         // focus input control every time popup is closed
         if (!isOpen && this._inputElement) {

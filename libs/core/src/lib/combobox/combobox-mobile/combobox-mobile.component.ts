@@ -3,6 +3,7 @@ import {
     Component,
     ElementRef,
     Inject,
+    isDevMode,
     OnDestroy,
     OnInit,
     Optional,
@@ -10,7 +11,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { takeUntil } from 'rxjs/operators';
+import { observeOn, takeUntil } from 'rxjs/operators';
 
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import {
@@ -21,6 +22,7 @@ import {
 } from '@fundamental-ngx/core/mobile-mode';
 
 import { COMBOBOX_COMPONENT, ComboboxInterface } from '../combobox.interface';
+import { asyncScheduler } from 'rxjs';
 
 @Component({
     selector: 'fd-combobox-mobile',
@@ -99,6 +101,8 @@ export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> i
             container: this._elementRef.nativeElement
         });
 
+        this._focusInputElementOnceOpened();
+
         const refSub = this.dialogRef.afterClosed.subscribe({
             error: (type) => {
                 if (type === 'escape') {
@@ -107,5 +111,24 @@ export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> i
                 }
             }
         });
+    }
+
+    /** @hidden */
+    private _focusInputElementOnceOpened(): void {
+        this.dialogRef.afterLoaded
+            .pipe(
+                observeOn(asyncScheduler), // making the listener async
+                takeUntil(this._onDestroy$)
+            )
+            .subscribe(() => {
+                try {
+                    const input = this._elementRef.nativeElement.querySelector('fd-input-group input[role="combobox"]');
+                    input.focus();
+                } catch (error) {
+                    if (isDevMode()) {
+                        console.error('Failed to focus combobox search input', error);
+                    }
+                }
+            });
     }
 }

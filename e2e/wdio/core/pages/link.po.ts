@@ -5,6 +5,8 @@ export class LinkPo extends CoreBaseComponentPo {
     private url = '/link';
     root = '#page-content';
     links = 'fd-link-example a';
+    rightArrowIcon = 'fd-icon[class*="arrow-right"]';
+    leftArrowIcon = 'fd-icon[class*="arrow-left"]';
 
     open(): void {
         super.open(this.url);

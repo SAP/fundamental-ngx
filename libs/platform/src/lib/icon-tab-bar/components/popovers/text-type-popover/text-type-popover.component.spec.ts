@@ -5,6 +5,7 @@ import { PopoverComponent } from '@fundamental-ngx/core/popover';
 
 import { TextTypePopoverComponent } from './text-type-popover.component';
 import { generateTabBarItems, generateTestConfig } from '../../../tests-helper';
+import { IconTabBarComponent } from '../../../icon-tab-bar.component';
 
 describe('TextTypePopoverComponent', () => {
     let component: TextTypePopoverComponent;
@@ -14,6 +15,7 @@ describe('TextTypePopoverComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [TextTypePopoverComponent],
+            providers: [{ provide: IconTabBarComponent, useValue: {} }],
             schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents();
     });
@@ -54,21 +56,25 @@ describe('TextTypePopoverComponent', () => {
             cssClasses: null,
             index: 0,
             uId: '0',
+            flatIndex: 0,
             subItems: [
                 {
                     cssClasses: null,
                     index: 1,
                     uId: '0.1',
+                    flatIndex: 1,
                     subItems: [
                         {
                             cssClasses: null,
                             index: 2,
                             uId: '0.1.2',
+                            flatIndex: 2,
                             subItems: [
                                 {
                                     cssClasses: null,
                                     index: 3,
-                                    uId: '0.1.2.3'
+                                    uId: '0.1.2.3',
+                                    flatIndex: 3
                                 }
                             ]
                         }

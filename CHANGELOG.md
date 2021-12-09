@@ -1,4 +1,64 @@
 
+## 0.33.0-rc.207 (2021-12-08)
+
+
+### Bug Fixes
+
+* **platform:** textarea clipboard api ([#7336](https://github.com/SAP/fundamental-ngx/issues/7336)) ([688724d](https://github.com/SAP/fundamental-ngx/commit/688724d3075fb4597ab231fb46c22eca57e9737d))
+
+## 0.33.0-rc.206 (2021-12-08)
+
+## 0.33.0-rc.205 (2021-12-08)
+
+
+### Features
+
+* **docs:** stackblitz angular 12, release candidates library version support ([#7334](https://github.com/SAP/fundamental-ngx/issues/7334)) ([4afaa68](https://github.com/SAP/fundamental-ngx/commit/4afaa68d6a41934d12e31932a1c5507d78500387))
+
+## 0.33.0-rc.204 (2021-12-08)
+
+
+### Bug Fixes
+
+* **platform:** textarea - a11y issues ([#7298](https://github.com/SAP/fundamental-ngx/issues/7298)) ([1520fa1](https://github.com/SAP/fundamental-ngx/commit/1520fa105f7609636f80c74a00dc212f7cd988cb))
+
+## 0.33.0-rc.203 (2021-12-08)
+
+
+### Bug Fixes
+
+* **platform:** icon tab bar a11y issues ([#6997](https://github.com/SAP/fundamental-ngx/issues/6997)) ([8642298](https://github.com/SAP/fundamental-ngx/commit/8642298ae640ba75f0707bdc84fffa18f6f6b498))
+
+## 0.33.0-rc.202 (2021-12-08)
+
+
+### Bug Fixes
+
+* **core:** combobox a11y issues ([#6951](https://github.com/SAP/fundamental-ngx/issues/6951)) ([ec638c2](https://github.com/SAP/fundamental-ngx/commit/ec638c23dcbf9c27f2a1e0d35be7976ccfd5ef32))
+
+## 0.33.0-rc.201 (2021-12-07)
+
+
+### Bug Fixes
+
+* **platform:** form generator typo ([#7331](https://github.com/SAP/fundamental-ngx/issues/7331)) ([bda647e](https://github.com/SAP/fundamental-ngx/commit/bda647ea35df7e1157344b44e01b4c80bff574f7))
+
+## 0.33.0-rc.200 (2021-12-06)
+
+
+### Features
+
+* **platform:** switch to "position: sticky" and fix setting width in % ([#7275](https://github.com/SAP/fundamental-ngx/issues/7275)) ([d3c7546](https://github.com/SAP/fundamental-ngx/commit/d3c7546f58bea32313ee760fc4e0ec57fc417da8))
+
+## 0.33.0-rc.199 (2021-12-06)
+
+
+### Bug Fixes
+
+* **core:** time component accessibility ([#7280](https://github.com/SAP/fundamental-ngx/issues/7280)) ([32a79cc](https://github.com/SAP/fundamental-ngx/commit/32a79cc416eb7757b5ec5c1e16544723e4e1f9dc))
+
+## 0.33.0-rc.198 (2021-12-06)
+
 ## 0.33.0-rc.197 (2021-12-05)
 
 ## 0.33.0-rc.196 (2021-12-03)

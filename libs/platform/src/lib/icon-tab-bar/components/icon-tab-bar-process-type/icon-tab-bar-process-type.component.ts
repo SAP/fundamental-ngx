@@ -1,16 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { take } from 'rxjs/operators';
 
 import { IconTabBarBase } from '../icon-tab-bar-base.class';
 import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
 import { ICON_TAB_HIDDEN_CLASS_NAME } from '../../constants';
 import { cloneDeep } from '@fundamental-ngx/core/utils';
+import { IconTabBarPopoverComponent } from '../popovers/icon-tab-bar-popover/icon-tab-bar-popover.component';
 
 @Component({
     selector: 'fdp-icon-tab-bar-process-type',
     templateUrl: './icon-tab-bar-process-type.component.html'
 })
 export class IconTabBarProcessTypeComponent extends IconTabBarBase {
+    /** @hidden list of tab html elements, that can receive focus */
+    @ViewChildren('tabItem') _tabUIElements: QueryList<ElementRef<HTMLElement>>;
+
+    /** @hidden */
+    @ViewChild(IconTabBarPopoverComponent) _tabBarPopover: IconTabBarPopoverComponent;
+
     /** @hidden */
     _offsetOverflowDirective = 30;
 
@@ -55,7 +62,7 @@ export class IconTabBarProcessTypeComponent extends IconTabBarBase {
      * @param selectedItem
      * @description select extra item inside popover
      */
-    _selectExtraItem(selectedItem: IconTabBarItem): void {
+    async _selectExtraItem(selectedItem: IconTabBarItem): Promise<void> {
         this._currentStepIndex = selectedItem.index;
         let amountOfPreviousSteps;
         let amountOfNextSteps;

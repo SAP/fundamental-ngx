@@ -116,6 +116,7 @@ export class AutoCompleteDirective {
 
     /** @hidden */
     private _moveIndicatorToLastCharacter(): void {
-        this._elementRef.nativeElement.setSelectionRange(this.inputText.length, this.inputText.length);
+        const inputTextLength = this.inputText?.length ?? 0;
+        this._elementRef.nativeElement.setSelectionRange(inputTextLength, inputTextLength);
     }
 }

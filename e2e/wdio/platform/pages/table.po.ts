@@ -40,7 +40,7 @@ export class TablePo extends BaseComponentPo {
     tableCellDescription = '[headers*="description"]';
     tableCellPrice = '[headers*="price"]';
     tableCellName = '[headers*="name"]';
-    buttonSortedOrder = 'li.fd-list__item';
+    buttonSortedOrder = 'li.fd-list__item:not(.fd-list__group-header)';
     checkbox = '.fd-checkbox__label';
     busyIndicator = 'fd-busy-indicator .fd-busy-indicator';
     filterItem = '.fd-list__item--link';
@@ -74,7 +74,7 @@ export class TablePo extends BaseComponentPo {
     dropdownList = '.fd-select-options';
     dropdownOption = 'fd-option.fd-list__item ';
     dialogButton = 'fd-dialog-body .fd-button--compact';
-    dialogFilters = 'fd-dialog-body .fd-list__item';
+    dialogFilters = 'fd-dialog-body .fd-list__item:not(.fd-list__group-header)';
     filterInput = 'fdp-filter-custom input';
     filterButtonOk = 'fd-dialog-footer button';
     filterResetButton = 'fdp-table-reset-button button';

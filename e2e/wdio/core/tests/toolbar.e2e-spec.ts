@@ -2,7 +2,6 @@ import { ToolbarPo } from '../pages/toolbar.po';
 import {
     checkElementScreenshot,
     click,
-    doesItExist,
     getAttributeByName,
     getElementArrayLength,
     getElementPlaceholder,
@@ -38,7 +37,7 @@ describe('Toolbar test suite', () => {
         selectedMinutes,
         navigationUpArrowButton,
         navigationDownArrowButton,
-        timeItem,
+        timeColumn,
         period,
         clickDayInCalendarButtonByValue,
         dateTimeButton,
@@ -215,11 +214,11 @@ describe('Toolbar test suite', () => {
         while (getText(selectedHours) !== hour.toString()) {
             click(navigationUpArrowButton);
         }
-        click(timeItem, 1);
+        click(timeColumn, 1);
         while (getText(selectedMinutes) !== minute.toString()) {
             click(navigationDownArrowButton);
         }
-        click(timeItem, 2);
+        click(timeColumn, 2);
         click(period);
     }
 });

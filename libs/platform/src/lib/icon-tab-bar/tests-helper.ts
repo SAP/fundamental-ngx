@@ -23,7 +23,7 @@ export function generateTestConfig(length: number, subTabs: boolean = false): Ta
     return items;
 }
 
-export function generateTabBarItems(config: TabConfig[]): IconTabBarItem[] {
+export function generateTabBarItems(config: TabConfig[], flatIndexRef = { value: 0 }): IconTabBarItem[] {
     return config.map((item, index) => {
         const result: IconTabBarItem = {
             ...item,
@@ -31,27 +31,33 @@ export function generateTabBarItems(config: TabConfig[]): IconTabBarItem[] {
             cssClasses: [],
             uId: index.toString(),
             hidden: false,
-            subItems: null
+            subItems: null,
+            flatIndex: flatIndexRef.value++
         };
         if (item.color) {
             result.cssClasses = [`fd-icon-tab-bar__item--${item.color}`];
         }
-        result.subItems = item.subItems?.length ? generateTestSubItems(item.subItems, result) : null;
+        result.subItems = item.subItems?.length ? generateTestSubItems(item.subItems, result, flatIndexRef) : null;
         return result;
     });
 }
 
-function generateTestSubItems(subItems: TabConfig[], parent: IconTabBarItem): IconTabBarItem[] {
+function generateTestSubItems(
+    subItems: TabConfig[],
+    parent: IconTabBarItem,
+    flatIndexRef: { value: number }
+): IconTabBarItem[] {
     return subItems?.map((item, index) => {
         const result: IconTabBarItem = {
             ...item,
             index: index,
             uId: `${parent.uId}${UNIQUE_KEY_SEPARATOR}${index}`,
             cssClasses: [],
-            subItems: null
+            subItems: null,
+            flatIndex: flatIndexRef.value++
         };
         if (Array.isArray(item.subItems) && item.subItems.length) {
-            result.subItems = generateTestSubItems(item.subItems, result);
+            result.subItems = generateTestSubItems(item.subItems, result, flatIndexRef);
         }
         return result;
     });

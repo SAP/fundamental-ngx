@@ -345,6 +345,9 @@ export class ComboboxComponent
     inputTextValue: string;
 
     /** @hidden */
+    clearInputBtnFocused = false;
+
+    /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
@@ -498,6 +501,7 @@ export class ComboboxComponent
         this.inputTextValue = '';
         this.inputTextChange.emit('');
         this.displayedValues = this.dropdownValues;
+        this.searchInputElement.nativeElement.focus();
         if (!this.mobile) {
             this._propagateChange();
         }
@@ -587,7 +591,7 @@ export class ComboboxComponent
             this.inputText = event.term;
             this.handleSearchTermChange();
         }
-        if (event.forceClose) {
+        if (event.forceClose && this.inputText) {
             this.isOpenChangeHandle(false);
         }
     }
@@ -600,6 +604,16 @@ export class ComboboxComponent
                 forceClose: false
             });
         }
+    }
+
+    /** @hidden */
+    clearInputBtnFocus(): void {
+        this.clearInputBtnFocused = true;
+    }
+
+    /** @hidden */
+    clearInputBtnBlur(): void {
+        this.clearInputBtnFocused = false;
     }
 
     /** Method that picks other value moved from current one by offset, called only when combobox is closed */
