@@ -13,14 +13,16 @@ import {
     selector: 'fdp-form-generator-slider',
     template: `
         <ng-container [formGroup]="form">
-            <fdp-slider
-                [contentDensity]="formItem.guiOptions?.contentDensity"
-                [customValues]="formItem.choices"
-                [showTicks]="formItem.guiOptions?.additionalData?.showTicks"
-                [showTicksLabels]="formItem.guiOptions?.additionalData?.showTicksLabels"
-                [name]="name"
-                [formControlName]="name"
-            ></fdp-slider>
+            <ng-container [formGroupName]="formGroupName">
+                <fdp-slider
+                    [contentDensity]="formItem.guiOptions?.contentDensity"
+                    [customValues]="formItem.choices"
+                    [showTicks]="formItem.guiOptions?.additionalData?.showTicks"
+                    [showTicksLabels]="formItem.guiOptions?.additionalData?.showTicksLabels"
+                    [name]="name"
+                    [formControlName]="name"
+                ></fdp-slider>
+            </ng-container>
         </ng-container>
     `,
     viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider]

@@ -26,7 +26,7 @@
         [style.padding-left.px]="_rtl ? _scrollBarWidth : 0"
         [style.padding-right.px]="_rtl ? 0 : _scrollBarWidth"
     >
-        <div class="fd-table--fixed" [ngStyle]="_getFixedTableStyles()" fdpTableScroller="horizontal">
+        <div class="fd-table--fixed" fdpTableScroller="horizontal">
             <table
                 class="fdp-table__header-table"
                 [class.fd-table--no-outer-border]="noOuterBorders"
@@ -51,7 +51,8 @@
             class="fd-table__cell--fixed"
             fd-table-cell
             fd-table-status-indicator
-            [style.height]="_getCellHeightPx(headerRow)"
+            [style.min-width]="_semanticHighlightingColumnWidth"
+            [style.max-width]="_semanticHighlightingColumnWidth"
         ></th>
 
         <th
@@ -79,7 +80,7 @@
                 [columnName]="column.name"
                 [id]="id + '__' + column.name"
                 [attr.aria-colindex]="colIdx"
-                [class.fd-table__cell--fixed]="_freezableColumns?.includes(column.name)"
+                [class.fd-table__cell--fixed]="_freezableColumns?.has(column.name)"
                 [class.fd-table__cell--fixed-last]="column.name === freezeColumnsTo"
                 [ngStyle]="_getCellStyles(column)"
                 [fdPopoverTrigger]="columnHeaderPopover"
@@ -157,7 +158,7 @@
                         <!-- Freeze -->
                         <ng-container *ngIf="column.freezable">
                             <li
-                                *ngIf="!_freezableColumns?.includes(column.name)"
+                                *ngIf="!_freezableColumns?.has(column.name); else unfreeze"
                                 class="fd-table__item--clickable"
                                 fd-list-item
                                 (click)="freezeToColumn(column.name)"
@@ -166,16 +167,17 @@
                                 <span></span>
                                 <span fd-list-title i18n="@@platformTableHeaderMenuFreeze">Freeze</span>
                             </li>
-                            <li
-                                *ngIf="_freezableColumns?.includes(column.name)"
-                                class="fd-table__item--clickable"
-                                fd-list-item
-                                (click)="unfreeze(column.name)"
-                                (keyup.enter)="unfreeze(column.name)"
-                            >
-                                <span></span>
-                                <span fd-list-title i18n="@@platformTableHeaderMenuUnfreeze">Unfreeze</span>
-                            </li>
+                            <ng-template #unfreeze>
+                                <li
+                                    class="fd-table__item--clickable"
+                                    fd-list-item
+                                    (click)="unfreeze(column.name)"
+                                    (keyup.enter)="unfreeze(column.name)"
+                                >
+                                    <span></span>
+                                    <span fd-list-title i18n="@@platformTableHeaderMenuUnfreeze">Unfreeze</span>
+                                </li>
+                            </ng-template>
                         </ng-container>
 
                         <!-- Filtering -->
@@ -239,7 +241,6 @@
         <div
             *ngIf="_tableRowsVisible.length || loading; else emptyTableTemplate"
             class="fd-table--fixed"
-            [ngStyle]="_getFixedTableStyles()"
             fdpTableScrollable
             fdpTableScroller="horizontal"
         >
@@ -297,7 +298,6 @@
                                 fd-table-cell
                                 fd-table-status-indicator
                                 [status]="row.value[semanticHighlighting]"
-                                [style.height]="_getCellHeightPx(tableRow)"
                             ></td>
 
                             <!-- Row Selection Cell -->
@@ -343,7 +343,7 @@
                                 role="cell"
                                 [headers]="id + '__' + column.name"
                                 [style.textAlign]="column.align"
-                                [class.fd-table__cell--fixed]="_freezableColumns?.includes(column.name)"
+                                [class.fd-table__cell--fixed]="_freezableColumns?.has(column.name)"
                                 [class.fd-table__cell--fixed-last]="column.name === freezeColumnsTo"
                                 [class.fd-table__cell--expand]="_isTreeRowFirstCell(colIdx, row)"
                                 [ngStyle]="_getCellStyles(column)"
@@ -452,27 +452,29 @@
             (click)="_toggleGroupRow(row)"
             (keyup.enter)="_toggleGroupRow(row)"
         >
-            <span class="fd-table__expand" [class.fd-table__expand--open]="row.expanded" aria-hidden="true"></span>
+            <div class="fd-table__expand-wrapper">
+                <span class="fd-table__expand" [class.fd-table__expand--open]="row.expanded" aria-hidden="true"></span>
 
-            <!-- Group row template when no nested groups -->
-            <ng-container *ngIf="_groupRulesMap.size === 1">
-                <div class="fd-table__text fd-table__text--no-wrap">
-                    {{ row.value?.value }} - {{ row.value?.count }}
-                </div>
-            </ng-container>
+                <!-- Group row template when no nested groups -->
+                <ng-container *ngIf="_groupRulesMap.size === 1">
+                    <div class="fd-table__text fd-table__text--no-wrap">
+                        {{ row.value?.value }} - {{ row.value?.count }}
+                    </div>
+                </ng-container>
 
-            <!-- Group row template when there are nested groups -->
-            <ng-container *ngIf="_groupRulesMap.size !== 1">
-                <div class="fd-table__text fd-table__text--no-wrap">
-                    <ng-container
-                        *ngTemplateOutlet="
-                            tableHeaderCellContentTemplate;
-                            context: { column: _keyToColumnMap.get(row.value?.field) }
-                        "
-                    ></ng-container
-                    >: {{ row.value?.value }}
-                </div>
-            </ng-container>
+                <!-- Group row template when there are nested groups -->
+                <ng-container *ngIf="_groupRulesMap.size !== 1">
+                    <div class="fd-table__text fd-table__text--no-wrap">
+                        <ng-container
+                            *ngTemplateOutlet="
+                                tableHeaderCellContentTemplate;
+                                context: { column: _keyToColumnMap.get(row.value?.field) }
+                            "
+                        ></ng-container
+                        >: {{ row.value?.value }}
+                    </div>
+                </ng-container>
+            </div>
         </td>
     </tr>
 </ng-template>

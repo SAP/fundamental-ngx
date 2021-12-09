@@ -350,6 +350,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'progress-indicator',
+                loadChildren: () =>
+                    import('./component-docs/progress-indicator/progress-indicator-docs.module').then(
+                        (m) => m.ProgressIndicatorDocsModule
+                    )
+            },
+            {
                 path: 'quick-view',
                 loadChildren: () =>
                     import('./component-docs/quick-view/quick-view-docs.module').then((m) => m.QuickViewDocsModule)

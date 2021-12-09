@@ -35,7 +35,8 @@ describe('List byline test suite', () => {
         for (let i = 0; i < checkboxLength; i++) {
             scrollIntoView(selectionExample + checkbox, i);
             if (i === 0) {
-                expect(getAttributeByName(selectionExample + listItem, 'aria-selected', i)).toBe('true');
+                click(selectionExample + checkbox, i);
+                expect(getAttributeByName(selectionExample + listItem, 'aria-selected', i)).toBe('false');
                 continue;
             }
             click(selectionExample + checkbox, i);

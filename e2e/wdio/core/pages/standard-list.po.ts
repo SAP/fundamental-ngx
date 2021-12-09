@@ -34,6 +34,8 @@ export class StandardListPo extends CoreBaseComponentPo {
     radioBtn = 'fd-radio-button';
     checkboxFocusElement = this.checkbox + ' input';
     radioBtnFocusElement = this.radioBtn + ' input';
+    deleteButton = 'button[glyph="delete"]';
+    listItemText = '.fd-list__title';
 
     open(): void {
         super.open(this.url);

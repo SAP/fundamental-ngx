@@ -3,6 +3,7 @@ import {
     click,
     getAttributeByName,
     getElementArrayLength,
+    getElementSize,
     getText,
     isElementClickable,
     refreshPage,
@@ -24,6 +25,7 @@ describe('Select test suite', () => {
     const {
         selectModeExample,
         displayText,
+        select,
         buttons,
         options,
         selectedValue_1,
@@ -93,6 +95,14 @@ describe('Select test suite', () => {
     describe('Check Custom Control Content With AutoResize example', () => {
         it('should be able to select the option', () => {
             checkOptions(customControlContentExample, 48);
+        });
+
+        it('should check changing width of select after selection', () => {
+            const defaultSelectWidth = getElementSize(customControlContentExample + select, 0, 'width');
+
+            checkOptions(customControlContentExample, 48);
+            const newSelectWidth = getElementSize(customControlContentExample + select, 0, 'width');
+            expect(newSelectWidth).toBeGreaterThan(defaultSelectWidth);
         });
     });
 

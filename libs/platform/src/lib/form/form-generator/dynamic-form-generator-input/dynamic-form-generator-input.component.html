@@ -1,9 +1,11 @@
 <ng-container [formGroup]="form" *ngIf="formField">
-    <fdp-input
-        [contentDensity]="formItem.guiOptions?.contentDensity"
-        [placeholder]="formItem.message"
-        [name]="name"
-        [type]="formItem.controlType || 'text'"
-        [formControlName]="name"
-    ></fdp-input>
+    <ng-container [formGroupName]="formGroupName">
+        <fdp-input
+            [contentDensity]="formItem.guiOptions?.contentDensity"
+            [placeholder]="formItem.message"
+            [name]="name"
+            [type]="formItem.controlType || 'text'"
+            [formControlName]="name"
+        ></fdp-input>
+    </ng-container>
 </ng-container>

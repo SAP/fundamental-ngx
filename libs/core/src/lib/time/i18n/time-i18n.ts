@@ -5,6 +5,9 @@ import { Injectable } from '@angular/core';
  */
 @Injectable({ providedIn: 'root' })
 export class TimeI18n {
+    /** Aria label for entire component */
+    componentAriaName = 'Time picker';
+
     /** Aria label for the 'increase hours' button */
     increaseHoursLabel = 'Increase hours';
 
@@ -40,4 +43,11 @@ export class TimeI18n {
 
     /** Aria label for the 'decrease period' button */
     decreasePeriodLabel = 'Decrease period';
+
+    /**
+     * Instruction how to navigate between options
+     * in the time column list and to switch between time columns
+     */
+    navigationInstruction =
+        'To move between items in this list, press top arrow or bottom arrow. To switch between lists press left arrow or right arrow.';
 }

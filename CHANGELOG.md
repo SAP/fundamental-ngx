@@ -1,4 +1,58 @@
 
+## 0.33.0-rc.201 (2021-12-07)
+
+
+### Bug Fixes
+
+* **platform:** form generator typo ([#7331](https://github.com/SAP/fundamental-ngx/issues/7331)) ([bda647e](https://github.com/SAP/fundamental-ngx/commit/bda647ea35df7e1157344b44e01b4c80bff574f7))
+
+## 0.33.0-rc.200 (2021-12-06)
+
+
+### Features
+
+* **platform:** switch to "position: sticky" and fix setting width in % ([#7275](https://github.com/SAP/fundamental-ngx/issues/7275)) ([d3c7546](https://github.com/SAP/fundamental-ngx/commit/d3c7546f58bea32313ee760fc4e0ec57fc417da8))
+
+## 0.33.0-rc.199 (2021-12-06)
+
+
+### Bug Fixes
+
+* **core:** time component accessibility ([#7280](https://github.com/SAP/fundamental-ngx/issues/7280)) ([32a79cc](https://github.com/SAP/fundamental-ngx/commit/32a79cc416eb7757b5ec5c1e16544723e4e1f9dc))
+
+## 0.33.0-rc.198 (2021-12-06)
+
+## 0.33.0-rc.197 (2021-12-05)
+
+## 0.33.0-rc.196 (2021-12-03)
+
+## 0.33.0-rc.195 (2021-12-03)
+
+## 0.33.0-rc.194 (2021-12-03)
+
+## 0.33.0-rc.193 (2021-12-03)
+
+
+### Features
+
+* **platform:** form generator group support ([#7243](https://github.com/SAP/fundamental-ngx/issues/7243)) ([1113588](https://github.com/SAP/fundamental-ngx/commit/11135883bfd08a135f80b7b80db2bb509b1986c6))
+
+## 0.33.0-rc.192 (2021-12-02)
+
+
+### Bug Fixes
+
+* **core:** fix progress indicator linter ([#7305](https://github.com/SAP/fundamental-ngx/issues/7305)) ([ba1a44c](https://github.com/SAP/fundamental-ngx/commit/ba1a44ceab18ce9c02b4c3c2d47f3771d395531f))
+
+## 0.33.0-rc.191 (2021-12-02)
+
+
+### Features
+
+* **core:** implement progress indicator ([#7223](https://github.com/SAP/fundamental-ngx/issues/7223)) ([961a34c](https://github.com/SAP/fundamental-ngx/commit/961a34c85438109714e71e3bcef11f00534d9fe8))
+
+## 0.33.0-rc.190 (2021-12-02)
+
 ## 0.33.0-rc.189 (2021-12-02)
 
 

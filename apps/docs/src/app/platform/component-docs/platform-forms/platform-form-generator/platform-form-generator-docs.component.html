@@ -43,7 +43,8 @@
         </li>
         <li>
             Inner form control should be wrapped with
-            <code>&lt;ng-container [formGroup]=&quot;form&quot;&gt;&lt;/ng-control&gt;</code>
+            <code>&lt;ng-container [formGroup]=&quot;form&quot;&gt;&lt;/ng-container&gt;</code>
+            and <code>&lt;ng-container [formGroupName]=&quot;formGroupName&quot;&gt;&lt;/ng-container&gt;</code>
             for appropriate binding to work.
         </li>
     </ul>
@@ -113,3 +114,34 @@
     <fdp-platform-form-generator-no-colons-example></fdp-platform-form-generator-no-colons-example>
 </component-example>
 <code-example [exampleFiles]="noLabelColonsFiles"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="custom-field-layout" componentName="form-generator">
+    Grouping of the fields
+</fd-docs-section-title>
+<description>
+    <p>Form generator supports grouping of the fields.</p>
+    <p>To achieve this, developers must pass group object into <code>[formItems]</code> input array.</p>
+</description>
+<component-example>
+    <fdp-platform-form-generator-grouping-example></fdp-platform-form-generator-grouping-example>
+</component-example>
+<code-example [exampleFiles]="groupingFiles"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="custom-field-layout" componentName="form-generator">
+    Custom form field column layout
+</fd-docs-section-title>
+<description>
+    <p>
+        Developers can define their own grid layout for the form field the same way as it's done for
+        <a routerLink="/platform/form-container">Form container</a>.
+    </p>
+    <p>Below is the example of how to define custom grid layout for the form field component:</p>
+</description>
+<component-example>
+    <fdp-platform-form-generator-custom-field-layout-example></fdp-platform-form-generator-custom-field-layout-example>
+</component-example>
+<code-example [exampleFiles]="customLayoutFiles"></code-example>

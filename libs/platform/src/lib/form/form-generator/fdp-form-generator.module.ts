@@ -24,6 +24,7 @@ import { DynamicFormGeneratorRadioComponent } from './dynamic-form-generator-rad
 import { DynamicFormGeneratorDatepickerComponent } from './dynamic-form-generator-datepicker/dynamic-form-generator-datepicker.component';
 import { DynamicFormGeneratorSwitchComponent } from './dynamic-form-generator-switch/dynamic-form-generator-switch.component';
 import { FormGeneratorService } from './form-generator.service';
+import { FormGeneratorFieldComponent } from './form-generator-field/form-generator-field.component';
 
 @NgModule({
     declarations: [
@@ -36,7 +37,8 @@ import { FormGeneratorService } from './form-generator.service';
         DynamicFormGeneratorSelectComponent,
         DynamicFormGeneratorRadioComponent,
         DynamicFormGeneratorDatepickerComponent,
-        DynamicFormGeneratorSwitchComponent
+        DynamicFormGeneratorSwitchComponent,
+        FormGeneratorFieldComponent
     ],
     imports: [
         CommonModule,
@@ -56,6 +58,18 @@ import { FormGeneratorService } from './form-generator.service';
         BusyIndicatorModule
     ],
     providers: [FormGeneratorService],
-    exports: [FormGeneratorComponent]
+    exports: [
+        FormGeneratorComponent,
+        DynamicFormControlFieldDirective,
+        DynamicFormControlDirective,
+        DynamicFormGeneratorCheckboxComponent,
+        DynamicFormGeneratorInputComponent,
+        DynamicFormGeneratorEditorComponent,
+        DynamicFormGeneratorSelectComponent,
+        DynamicFormGeneratorRadioComponent,
+        DynamicFormGeneratorDatepickerComponent,
+        DynamicFormGeneratorSwitchComponent,
+        FormGeneratorFieldComponent
+    ]
 })
 export class PlatformFormGeneratorModule {}

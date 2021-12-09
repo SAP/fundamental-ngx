@@ -1,5 +1,12 @@
 import { CoreBaseComponentPo } from './core-base-component.po';
-import { click, scrollIntoView, waitForElDisplayed, waitForPresent } from '../../driver/wdio';
+import {
+    click,
+    getElementArrayLength,
+    getElementClass,
+    scrollIntoView,
+    waitForElDisplayed,
+    waitForPresent
+} from '../../driver/wdio';
 
 export class CalendarPo extends CoreBaseComponentPo {
     url = '/calendar';
@@ -34,7 +41,7 @@ export class CalendarPo extends CoreBaseComponentPo {
     weekendDays = '.fd-calendar__item--weekend';
     disabledDays = '.fd-calendar__item.is-disabled';
     disabledWeekendDays = this.weekendDays + '.is-disabled';
-    calendarItem = 'td.fd-calendar__item';
+    calendarItem = ' td.fd-calendar__item';
     selectionOutput = '> div';
     calendarOptions = 'fd-checkbox label';
     okBtn = 'fd-button-bar' + this.button;
@@ -45,6 +52,10 @@ export class CalendarPo extends CoreBaseComponentPo {
     calendarDays = 'thead .fd-calendar__item';
     markedDays = 'td[class*="fd-calendar__special-day"] span';
     rangeHoverItems = '.fd-calendar__item--range';
+    calendarRow = 'tbody .fd-calendar__row';
+    mondays = this.specialDaysCalendar + this.calendarRow + this.calendarItem + ':nth-child(2):not(.hidden-day)';
+    sundays = this.specialDaysCalendar + this.calendarRow + this.calendarItem + ':nth-child(1):not(.hidden-day)';
+    saturdays = this.specialDaysCalendar + this.calendarRow + this.calendarItem + ':nth-child(7):not(.hidden-day)';
 
     open(): void {
         super.open(this.url);

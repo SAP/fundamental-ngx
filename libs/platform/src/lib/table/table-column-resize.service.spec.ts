@@ -5,6 +5,7 @@ import { TABLE_RESIZER_BORDER_WIDTH, TableColumnResizeService } from './table-co
 import { TableColumn } from './components/table-column/table-column';
 import { TABLE_COLUMN_MIN_WIDTH } from './constants';
 import { TableScrollDispatcherService } from './table-scroll-dispatcher.service';
+import { Table } from './table';
 
 describe('TableColumnResizeService', () => {
     let service: TableColumnResizeService;
@@ -14,6 +15,11 @@ describe('TableColumnResizeService', () => {
             providers: [TableColumnResizeService, TableScrollDispatcherService]
         });
         service = TestBed.inject(TableColumnResizeService);
+        service.setTableRef({
+            getMaxAllowedFreezableColumnsWidth: () => 1000,
+            _freezableColumns: new Map([['name', 0]]),
+            _tableWidthPx: 1400
+        } as any);
     });
 
     it('should be created', () => {
@@ -31,7 +37,7 @@ describe('TableColumnResizeService', () => {
         expect(service.getColumnWidthStyle(tableColumn)).toEqual('auto');
 
         service.registerColumnCell(tableColumn.name, tableColumnCell);
-        service.setColumnsWidth(columnNames, null, 0);
+        service.setColumnsWidth(columnNames);
 
         expect(service.getColumnWidthStyle(tableColumn)).toEqual(widthInPixels + 'px');
     });
@@ -43,10 +49,17 @@ describe('TableColumnResizeService', () => {
         expect(service.getColumnWidthStyle(tableColumn)).toEqual(width);
     });
 
+    it('if specified in percents, should return column width in px relatively to table width', () => {
+        const width = '20%';
+        const tableColumn = { name: 'name', width: width } as TableColumn;
+
+        expect(service.getColumnWidthStyle(tableColumn)).toEqual('280px');
+    });
+
     it('should set resizer', () => {
         const position = 0;
 
-        service.setColumnsWidth([], null, 0);
+        service.setColumnsWidth([]);
         service.setInitialResizerPosition(position, 'name');
 
         expect(service.resizerPosition).toEqual(position - TABLE_RESIZER_BORDER_WIDTH);
@@ -63,7 +76,7 @@ describe('TableColumnResizeService', () => {
         } as ElementRef;
 
         service.registerColumnCell(tableColumn.name, tableColumnCell);
-        service.setColumnsWidth(tableColumnNames, null, 0);
+        service.setColumnsWidth(tableColumnNames);
         service.setInitialResizerPosition(0, tableColumn.name);
 
         service.startResize({ clientX: clientStartX } as MouseEvent);
@@ -83,7 +96,7 @@ describe('TableColumnResizeService', () => {
         } as ElementRef;
 
         service.registerColumnCell(tableColumn.name, tableColumnCell);
-        service.setColumnsWidth(tableColumnNames, null, 0);
+        service.setColumnsWidth(tableColumnNames);
         service.setInitialResizerPosition(0, tableColumn.name);
 
         service.startResize({ clientX: clientStartX } as MouseEvent);

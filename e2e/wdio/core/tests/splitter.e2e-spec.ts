@@ -5,15 +5,13 @@ import {
     refreshPage,
     scrollIntoView,
     waitForElDisplayed,
-    getAttributeByName,
     clickAndMoveElement,
-    getAttributeByNameArr,
     getElementSize,
     waitForPresent,
     browserIsFirefox
 } from '../../driver/wdio';
 
-describe('Standard List test suite', function () {
+describe('Standard List test suite', () => {
     const splitterPage = new SplitterPo();
     const { basicExample, splitterSection, requiredWidthExample, sliderApiExample, button, resizer, paginationItem } =
         splitterPage;
@@ -81,22 +79,15 @@ describe('Standard List test suite', function () {
             return;
         }
         scrollIntoView(section + splitterSection);
-        const defaultSizesOfSections = getAttributeByNameArr(section + splitterSection, 'style');
+        const startingFirstColumnWidth = getElementSize(section + splitterSection, 0, 'width');
+        const startingSecondColumnWidth = getElementSize(section + splitterSection, 1, 'width');
+        const startingThirdColumnWidth = getElementSize(section + splitterSection, 2, 'width');
 
         clickAndMoveElement(section + resizer, -200, 0);
-        expect(getAttributeByName(section + splitterSection, 'style')).not.toEqual(
-            defaultSizesOfSections[0],
-            'width of section is not changed after resizing'
-        );
-
         clickAndMoveElement(section + resizer, 200, 0, 1);
-        expect(getAttributeByName(section + splitterSection, 'style', 1)).not.toEqual(
-            defaultSizesOfSections[1],
-            'width of section is not changed after resizing'
-        );
-        expect(getAttributeByName(section + splitterSection, 'style', 2)).not.toEqual(
-            defaultSizesOfSections[2],
-            'width of section is not changed after resizing'
-        );
+
+        expect(getElementSize(section + splitterSection, 0, 'width')).not.toEqual(startingFirstColumnWidth);
+        expect(getElementSize(section + splitterSection, 1, 'width')).not.toEqual(startingSecondColumnWidth);
+        expect(getElementSize(section + splitterSection, 2, 'width')).not.toEqual(startingThirdColumnWidth);
     }
 });

@@ -184,7 +184,6 @@ describe('TableComponent internal', () => {
 
         expect(serviceFreezeToSpy).toHaveBeenCalledWith(columnKey);
         expect(component.freezeColumnsTo).toEqual(columnKey);
-        expect(component._tablePadding).toEqual(0);
     });
 });
 

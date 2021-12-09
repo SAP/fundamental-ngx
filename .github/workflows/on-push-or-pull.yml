@@ -54,8 +54,11 @@ jobs:
               with:
                   path: ${{ env.CACHE_NODE_MODULES_PATH }}
                   key: node_modules-${{ hashFiles('**/package-lock.json') }}
-            - run: npm ci
-              if: steps.cache.outputs.cache-hit != 'true'
+            - uses: actions/setup-node@v2
+              with:
+                  node-version: 15.11.0
+            - name: install dependencies
+              run: npm ci
 
     # lint commit name
     commit_lint:
@@ -260,12 +263,17 @@ jobs:
               with:
                   path: ${{ env.CACHE_NODE_MODULES_PATH }}
                   key: node_modules-${{ hashFiles('**/package-lock.json') }}
+            - uses: actions/setup-node@v2
+              with:
+                  node-version: 15.11.0
 
             - name: smoke e2e on firebase
               env:
                   CAP_SLUG: ${{ matrix.browser }}
               if: ${{ needs.firebase_preview.outputs.output_url }}
               run: |
+                  npm rebuild
+                  npm ci
                   export DISPLAY=:99
                   chrome --version
                   sudo Xvfb -ac :99 -screen 0 1920x1080x24 > /dev/null 2>&1 & # optional
@@ -276,6 +284,8 @@ jobs:
                   CAP_SLUG: ${{ matrix.browser }}
               if: ${{ !needs.firebase_preview.outputs.output_url }}
               run: |
+                  npm rebuild
+                  npm ci
                   npx ng serve --no-watch --aot --prod &
                   npx wait-on http://localhost:4200
                   export DISPLAY=:99

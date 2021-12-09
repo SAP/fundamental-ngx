@@ -15,7 +15,7 @@ import { PlatformRadioGroupModule } from '../../radio-group/radio-group.module';
 import { PlatformTextAreaModule } from '../../text-area/text-area.module';
 import { PlatformDatePickerModule } from '../../date-picker/date-picker.module';
 import { PlatformSwitchModule } from '../../switch/switch.module';
-import { DynamicFormItem } from '../interfaces/dynamic-form-item';
+import { DynamicFormFieldItem } from '../interfaces/dynamic-form-item';
 import { FormGeneratorComponent } from './form-generator.component';
 import { DynamicFormControlDirective } from '../dynamic-form-control.directive';
 import { DynamicFormControlFieldDirective } from '../dynamic-form-control-field.directive';
@@ -43,7 +43,7 @@ export class HostComponent {
 
     formTitle = 'Test form title';
 
-    formItems: DynamicFormItem[] = [
+    formItems: DynamicFormFieldItem[] = [
         {
             name: 'firstQuestion',
             message: 'First question',

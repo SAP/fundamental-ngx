@@ -7,6 +7,7 @@ import { RtlService } from '@fundamental-ngx/core/utils';
 import { TableColumn } from './components/table-column/table-column';
 import { TABLE_COLUMN_MIN_WIDTH } from './constants';
 import { TableScrollDispatcherService } from './table-scroll-dispatcher.service';
+import { Table } from './table';
 
 export const TABLE_RESIZER_BORDER_WIDTH = 3;
 
@@ -51,14 +52,6 @@ export class TableColumnResizeService implements OnDestroy {
     private _resizerPosition: number;
 
     /** @hidden */
-    private _offsetWidth: number;
-
-    /** @hidden
-     * Temporary: Prevent from resizing when there are fixed columns. They are positioned absolutely and it breaks all.
-     */
-    private _preventResize = false;
-
-    /** @hidden */
     private _scrollLeft = 0;
 
     /** @hidden */
@@ -69,6 +62,9 @@ export class TableColumnResizeService implements OnDestroy {
 
     /** @hidden */
     private _resizerMoveSubscription = new Subscription();
+
+    /** @hidden */
+    private _tableRef: Table;
 
     /** Indicate if resizing process in progress. */
     get resizeInProgress(): boolean {
@@ -111,18 +107,38 @@ export class TableColumnResizeService implements OnDestroy {
         this._resizerMoveSubscription.unsubscribe();
     }
 
+    /** @hidden */
+    setTableRef(ref: Table): void {
+        this._tableRef = ref;
+    }
+
     /** Reset columns width */
     resetColumnsWidth(): void {
         this._columnsWidthMap.clear();
     }
 
     /** Initialize service with data, trigger columns width calculation. */
-    setColumnsWidth(visibleColumnNames: string[], freezeColumnsTo: string, offsetWidth: number): void {
+    setColumnsWidth(visibleColumnNames: string[]): void {
         this._visibleColumnNames = visibleColumnNames;
-        this._preventResize = this._visibleColumnNames.includes(freezeColumnsTo);
-        this._offsetWidth = offsetWidth;
 
         this._calculateColumnsWidth();
+    }
+
+    /** checks if freezable columns in total exceeds the size of table viewport. If yes, reduces each column equally  */
+    updateFrozenColumnsWidth(): void {
+        const maxWidth = this._tableRef.getMaxAllowedFreezableColumnsWidth();
+        const freezeToNextColumnName = this._visibleColumnNames[this._tableRef._freezableColumns.size];
+        const actualWidth = this.getPrevColumnsWidth(freezeToNextColumnName);
+        if (actualWidth > maxWidth) {
+            const reduceBy = actualWidth / maxWidth;
+            [...this._tableRef._freezableColumns.keys()].forEach((columnName) => {
+                const currentWidth = this._columnsWidthMap.get(columnName);
+                const newWidth = Math.floor(currentWidth / reduceBy);
+                this._columnsWidthMap.set(columnName, newWidth);
+                this._columnsWidthChangeSourceMap.set(columnName, ColumnWidthChangeSource.Resize);
+            });
+            this._markForCheck.next();
+        }
     }
 
     /**
@@ -147,7 +163,7 @@ export class TableColumnResizeService implements OnDestroy {
                     break;
                 case ColumnWidthChangeSource.WidthInput:
                     if (column.width) {
-                        return column.width;
+                        return this.getColumnWidth(column.width);
                     }
                     break;
             }
@@ -158,10 +174,22 @@ export class TableColumnResizeService implements OnDestroy {
         }
 
         if (column.width) {
-            return column.width;
+            return this.getColumnWidth(column.width);
         }
 
         return 'auto';
+    }
+
+    /** @hidden */
+    private getColumnWidth(width: string): string {
+        if (!width.trim().endsWith('%')) {
+            return width;
+        }
+        const percent = parseFloat(width);
+        if (!this._tableRef._tableWidthPx) {
+            throw new Error('Cannot resolve column width until table width is set');
+        }
+        return (this._tableRef._tableWidthPx * percent) / 100 + 'px';
     }
 
     /** Previous column name */
@@ -202,7 +230,7 @@ export class TableColumnResizeService implements OnDestroy {
 
     /** Set the appropriate column resizer position. */
     setInitialResizerPosition(resizerPosition: number, resizedColumn: string): void {
-        if (this.resizeInProgress || this._preventResize) {
+        if (this.resizeInProgress) {
             return;
         }
 
@@ -211,7 +239,7 @@ export class TableColumnResizeService implements OnDestroy {
 
         if (resizerPosition != null) {
             const scrollLeftOffset = this._scrollLeft * (this._rtl ? 1 : -1);
-            this._resizerPosition = resizerPosition + this._offsetWidth - TABLE_RESIZER_BORDER_WIDTH + scrollLeftOffset;
+            this._resizerPosition = resizerPosition - TABLE_RESIZER_BORDER_WIDTH + scrollLeftOffset;
         }
     }
 
@@ -285,6 +313,17 @@ export class TableColumnResizeService implements OnDestroy {
 
         if (diffX < 0 && columnWidth + diffX < TABLE_COLUMN_MIN_WIDTH) {
             newDiffX = diffX + (TABLE_COLUMN_MIN_WIDTH - (columnWidth + diffX));
+        }
+
+        if (newDiffX > 0 && this._tableRef._freezableColumns.has(this._resizedColumn)) {
+            const freezeToNextColumnName = this._visibleColumnNames[this._tableRef._freezableColumns.size];
+            const actualWidth = this.getPrevColumnsWidth(freezeToNextColumnName);
+            const newWidth = actualWidth + newDiffX;
+            const maxWidth = this._tableRef.getMaxAllowedFreezableColumnsWidth();
+            // in case "_resizedColumn" is freezable, make sure the overall width of freezable columns does not exceed the width of the table
+            if (newWidth >= maxWidth) {
+                newDiffX = maxWidth - actualWidth;
+            }
         }
 
         this._columnsWidthMap.set(this._resizedColumn, columnWidth + newDiffX);

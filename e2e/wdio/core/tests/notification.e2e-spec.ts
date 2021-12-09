@@ -10,7 +10,8 @@ import {
     isElementDisplayed,
     waitForNotDisplayed,
     waitForPresent,
-    waitForNotPresent
+    waitForNotPresent,
+    pause
 } from '../../driver/wdio';
 
 describe('Notification component test', () => {
@@ -119,10 +120,20 @@ describe('Notification component test', () => {
         }
     });
 
-    it('should check actions with notifications', () => {
+    it('should check approve actions with notification', () => {
         for (let i = 0; i < 2; i++) {
             checkActions('Approve', approveButton, i);
+        }
+    });
+
+    it('should check reject actions with notification', () => {
+        for (let i = 0; i < 2; i++) {
             checkActions('Reject', rejectButton, i);
+        }
+    });
+
+    it('should check forward actions with notification', () => {
+        for (let i = 0; i < 2; i++) {
             checkActions('Forward', forwardButton, i);
         }
     });
@@ -137,6 +148,6 @@ describe('Notification component test', () => {
         click(buttonChoice);
         expect(waitForPresent(messageToast)).toBe(true);
         expect(getText(messageToast)).toBe(`${action} action performed`);
-        waitForNotPresent(messageToast);
+        pause(1200);
     }
 });

@@ -34,8 +34,12 @@ jobs:
               with:
                   path: ${{ env.CACHE_NODE_MODULES_PATH }}
                   key: node_modules-${{ hashFiles('**/package-lock.json') }}
-            - run: npm ci
-              if: steps.cache.outputs.cache-hit != 'true'
+            - uses: actions/setup-node@v2
+              with:
+                  node-version: 15.11.0
+                  cache: npm
+            - name: install dependencies
+              run: npm ci
 
     # build core
     build-core:
@@ -211,8 +215,17 @@ jobs:
               with:
                   path: ${{ env.CACHE_NODE_MODULES_PATH }}
                   key: node_modules-${{ hashFiles('**/package-lock.json') }}
+            - uses: actions/setup-node@v2
+              with:
+                  node-version: 15.11.0
 
-            - name: smoke e2e on saucelabs with firebase deployment
+            - name: smoke e2e on saucelabs with localhost
               env:
                   CAP_SLUG: ${{ matrix.browser }}
-              run: TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio-cron.conf.js --${{ matrix.suite }} --baseUrl=https://fundamental-ngx-gh.web.app/fundamental-ngx
+              run: |
+                  npm rebuild
+                  npm ci
+                  sudo echo "127.0.0.1 sap.dev" | sudo tee -a /etc/hosts
+                  npx ng serve --disable-host-check --ssl --no-watch --aot --prod &
+                  npx wait-on https://localhost:4200
+                  TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio-cron.conf.js --${{ matrix.suite }} --baseUrl="https://sap.dev:4200/"

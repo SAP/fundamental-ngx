@@ -49,7 +49,7 @@ describe('Datetime picker suite', () => {
         selectedMinutes,
         navigationDownArrowButton,
         navigationUpArrowButton,
-        timeItem,
+        timeColumn,
         period,
         cancelButton,
         buttonChange,
@@ -306,7 +306,7 @@ describe('Datetime picker suite', () => {
         while (getText(selectedHours) !== hour.toString()) {
             click(navigationUpArrowButton);
         }
-        click(timeItem, 1);
+        click(timeColumn, 1);
         while (getText(selectedMinutes) !== minute.toString()) {
             click(navigationDownArrowButton);
         }
@@ -316,11 +316,11 @@ describe('Datetime picker suite', () => {
         while (getText(selectedHours) !== hour.toString()) {
             click(navigationUpArrowButton);
         }
-        click(timeItem, 1);
+        click(timeColumn, 1);
         while (getText(selectedMinutes) !== minute.toString()) {
             click(navigationDownArrowButton);
         }
-        click(timeItem, 2);
+        click(timeColumn, 2);
         click(period);
     }
 });
