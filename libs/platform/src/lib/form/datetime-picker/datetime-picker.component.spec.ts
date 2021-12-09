@@ -15,6 +15,7 @@ import { PlatformDatetimePickerModule } from './datetime-picker.module';
 import { FdpFormGroupModule } from '../form-group/fdp-form.module';
 import { FormFieldComponent } from '../form-group/form-field/form-field.component';
 import { PlatformDatetimePickerComponent } from './datetime-picker.component';
+import { runValueAccessorTests } from 'ngx-cva-test-suite';
 
 @Component({
     selector: 'fdp-test-datetime-picker',
@@ -177,4 +178,25 @@ describe('PlatformDatetimePickerComponent', () => {
         const customPopoverEl = fixture.debugElement.query(By.css('.fd-datetime .fd-popover-custom'));
         expect(customPopoverEl.nativeElement.style.display).toBe('inline');
     });
+});
+
+const DATE_TIME_PICKER_IDENTIFIER = 'platform-date-time-picker-unit-test';
+
+runValueAccessorTests({
+    component: PlatformDatetimePickerComponent,
+    testModuleMetadata: {
+        imports: [PlatformDatetimePickerModule, FdDatetimeModule]
+    },
+    additionalSetup: (fixture, done) => {
+        fixture.componentInstance.id = DATE_TIME_PICKER_IDENTIFIER;
+        fixture.componentInstance.name = DATE_TIME_PICKER_IDENTIFIER;
+        done();
+    },
+    supportsOnBlur: true,
+    nativeControlSelector: `input[id="${DATE_TIME_PICKER_IDENTIFIER}"]`,
+    internalValueChangeSetter: (fixture, value) => {
+        fixture.componentInstance.value = value;
+    },
+    getValues: () => [new FdDate(9, 5, 2021), new FdDate(10, 5, 2021), new FdDate(11, 5, 2021)],
+    getComponentValue: (fixture) => fixture.componentInstance.value
 });

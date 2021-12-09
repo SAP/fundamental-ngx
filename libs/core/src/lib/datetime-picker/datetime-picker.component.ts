@@ -43,7 +43,7 @@ import { createMissingDateImplementationError } from './errors';
     templateUrl: './datetime-picker.component.html',
     styleUrls: ['./datetime-picker.component.scss'],
     host: {
-        '(blur)': 'onTouched()'
+        '(blur)': 'handleOnTouched()'
     },
     providers: [
         {
@@ -283,6 +283,10 @@ export class DatetimePickerComponent<D>
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     readonly onClose: EventEmitter<void> = new EventEmitter<void>();
 
+    /** Event emitted when datepicker changes it's "touched" state. */
+    @Output()
+    readonly touched: EventEmitter<void> = new EventEmitter<void>();
+
     /** Indicates when datetime input is in invalid state. */
     get isInvalidDateInput(): boolean {
         return this._isInvalidDateInput;
@@ -438,7 +442,7 @@ export class DatetimePickerComponent<D>
 
     /** Toggles the popover. */
     togglePopover(): void {
-        this.onTouched();
+        this.handleOnTouched();
         if (this.isOpen) {
             this.closePopover();
         } else {
@@ -447,16 +451,22 @@ export class DatetimePickerComponent<D>
     }
 
     /**
-     * Method that handle calendar active view change and throws event.
+     * Method that handles calendar active view change and throws event.
      */
     handleCalendarActiveViewChange(activeView: FdCalendarView): void {
         this.activeViewChange.emit(activeView);
     }
 
+    /** Method that handles blur events on datetime picker input */
+    handleOnTouched(): void {
+        this.onTouched();
+        this.touched.next();
+    }
+
     /** Opens the popover. */
     openPopover(): void {
         if (!this.isOpen && !this.disabled) {
-            this.onTouched();
+            this.handleOnTouched();
             this.isOpen = true;
             this._onOpenStateChanged(this.isOpen);
         }

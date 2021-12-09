@@ -3,6 +3,7 @@ import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/t
 import { DATE_TIME_FORMATS, DateTimeFormats, FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { DatetimePickerComponent, DatetimePickerModule } from '@fundamental-ngx/core/datetime-picker';
 import { INVALID_DATE_ERROR } from '@fundamental-ngx/core/utils';
+import { runValueAccessorTests } from 'ngx-cva-test-suite';
 
 describe('DatetimePickerComponent', () => {
     let component: DatetimePickerComponent<FdDate>;
@@ -137,4 +138,24 @@ describe('DatetimePickerComponent', () => {
         component.closePopover();
         expect(showSpy).toHaveBeenCalled();
     });
+});
+
+const DATE_TIME_PICKER_IDENTIFIER = 'core-date-time-picker-unit-test';
+
+runValueAccessorTests({
+    component: DatetimePickerComponent,
+    testModuleMetadata: {
+        imports: [DatetimePickerModule, FdDatetimeModule]
+    },
+    additionalSetup: (fixture, done) => {
+        fixture.componentInstance.inputId = DATE_TIME_PICKER_IDENTIFIER;
+        done();
+    },
+    supportsOnBlur: true,
+    nativeControlSelector: `input[id="${DATE_TIME_PICKER_IDENTIFIER}"]`,
+    internalValueChangeSetter: (fixture, value) => {
+        fixture.componentInstance.handleInputChange(value);
+    },
+    getValues: () => [new FdDate(9, 5, 2021), new FdDate(10, 5, 2021), new FdDate(11, 5, 2021)],
+    getComponentValue: (fixture) => fixture.componentInstance.date
 });

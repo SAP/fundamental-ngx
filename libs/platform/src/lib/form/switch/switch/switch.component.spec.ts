@@ -192,7 +192,7 @@ const SWITCH_IDENTIFIER = 'platform-switch-unit-test';
 runValueAccessorTests({
     component: SwitchComponent,
     testModuleMetadata: {
-        imports: [PlatformSwitchModule, FdpFormGroupModule]
+        imports: [PlatformSwitchModule]
     },
     additionalSetup: (fixture, done) => {
         fixture.componentInstance.id = SWITCH_IDENTIFIER;
