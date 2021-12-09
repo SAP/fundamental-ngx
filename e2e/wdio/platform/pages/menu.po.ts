@@ -4,14 +4,14 @@ import { waitForPresent, waitForElDisplayed } from '../../driver/wdio';
 export class MenuPo extends BaseComponentPo {
     url = '/menu';
     root = '#page-content';
-    menuBtnArr = 'fdp-button button';
+    menuBtnArr = '.fd-button';
     menuBtn = 'fdp-platform-menu-basic-example button';
-    menuBtnTextArr = 'fdp-button button span';
+    menuBtnTextArr = '.fd-button span';
     menuAvatarBtn = 'fdp-platform-menu-basic-example fd-avatar';
     menuHorizontalAvatarBtn = 'fdp-platform-menu-x-position-example fd-avatar';
     menuItemArr = '#fdp-menu-basic-menu fdp-menu-item';
     menuItemTextArr = '#fdp-menu-basic-menu fdp-menu-item span';
-    iconMenuIconArr = 'fdp-button button fd-icon';
+    iconMenuIconArr = 'component-example fd-icon';
     menuItemOverlay = '.cdk-overlay-container';
 
     cascadingMenuBtn = 'fdp-platform-menu-cascade-example button';
