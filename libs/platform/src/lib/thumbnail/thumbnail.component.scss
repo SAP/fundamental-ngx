@@ -2,20 +2,22 @@
     $fdp-thumbnail-container-size: 33.125rem;
     $fdp-thumbnail-container-margin: 1rem;
     display: inline-flex;
-    width: auto;
+    width: 100%;
     height: auto;
 
     &.fdp-thumbnail-container--horizontal {
         display: block;
         .fdp-media-container {
-            width: $fdp-thumbnail-container-size;
+            width: 100%;
+            max-width: $fdp-thumbnail-container-size;
             height: $fdp-thumbnail-container-size;
             padding: 0.688rem;
             margin: 1rem;
+            inline-size: auto;
         }
     }
     img {
-        width: auto;
+        width: 100%;
         height: auto;
         max-width: $fdp-thumbnail-container-size;
         max-height: $fdp-thumbnail-container-size;
@@ -30,7 +32,7 @@
     }
 
     video {
-        width: auto;
+        width: 100%;
         height: auto;
         max-width: $fdp-thumbnail-container-size;
         max-height: $fdp-thumbnail-container-size;
@@ -46,7 +48,8 @@
 
     .fdp-media-container {
         position: relative;
-        width: $fdp-thumbnail-container-size;
+        width: 100%;
+        max-width: $fdp-thumbnail-container-size;
         height: $fdp-thumbnail-container-size;
         padding: 0.688rem;
         margin: 1rem;
