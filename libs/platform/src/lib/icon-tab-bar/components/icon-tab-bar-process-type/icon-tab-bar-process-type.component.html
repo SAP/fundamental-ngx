@@ -16,6 +16,7 @@
             [extraTabs]="_prevSteps"
             [label]="_prevSteps.length.toString()"
             [isSeparators]="true"
+            [colorAssociations]="colorAssociations"
             (selectedExtraItem)="_selectExtraItem($event)"
         ></fdp-icon-tab-bar-popover>
     </li>
@@ -53,7 +54,7 @@
                 <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>
             </ng-template>
             <div class="screenreader-only" *ngIf="item.color">
-                {{ (_colorAssociations && _colorAssociations[item.color]) || item.color }}
+                {{ (colorAssociations && colorAssociations[item.color]) || item.color }}
             </div>
         </a>
         <span *ngIf="_lastVisibleTabIndex !== idx" class="fd-icon-tab-bar__separator">
@@ -74,6 +75,7 @@
             [extraTabs]="_nextSteps"
             [isSeparators]="true"
             [label]="_nextSteps.length.toString()"
+            [colorAssociations]="colorAssociations"
             (selectedExtraItem)="_selectExtraItem($event)"
             (focusFirstVisibleItem)="_focusItem(0)"
             (focusLastVisibleItem)="_focusItem(_lastVisibleTabIndex)"

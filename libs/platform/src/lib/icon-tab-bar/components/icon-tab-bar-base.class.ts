@@ -26,7 +26,6 @@ import { TabDestinyMode } from '../types';
 import { ICON_TAB_HIDDEN_CLASS_NAME, UNIQUE_KEY_SEPARATOR } from '../constants';
 import { ExtraButtonDirective } from '../directives/extra-button/extra-button.directive';
 import { IconTabBarPopoverBase } from './popovers/icon-tab-bar-popover-base.class';
-import { IconTabBarComponent } from '../icon-tab-bar.component';
 import { TabColorAssociations } from '../interfaces/tab-color-associations.interface';
 
 @Directive()
@@ -50,6 +49,13 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
      */
     @Input()
     isRtl: boolean;
+
+    /**
+     * @description Associations for colors of the tabs.
+     * If any of the color associations provided, they'll be read by screenreader instead of the actual color
+     */
+    @Input()
+    colorAssociations: TabColorAssociations;
 
     /**
      * @description densityMode setter triggers tabs to re-calculation overflowed tabs
@@ -100,12 +106,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     private _onDestroy$ = new Subject();
 
     /** @hidden */
-    get _colorAssociations(): TabColorAssociations {
-        return this._tabBar.colorAssociations;
-    }
-
-    /** @hidden */
-    constructor(protected _cd: ChangeDetectorRef, protected _ngZone: NgZone, protected _tabBar: IconTabBarComponent) {}
+    constructor(protected _cd: ChangeDetectorRef, protected _ngZone: NgZone) {}
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
