@@ -39,7 +39,15 @@
     Page Responsive Behavior
 </fd-docs-section-title>
 <description>
-    The left and right paddings of the Dynamic Page can be adjusted according to the width of the container with the
+    AutoResponsive DynamicPage is enabled by default. This will auto apply certain sizes for breakpoints:
+    <ul>
+        <li>max-width: 599px - small</li>
+        <li>min-width: 600px and max-width: 1023px - medium</li>
+        <li>min-width: 1024px and max-width: 1439px - large</li>
+        <li>min-width: 1440px - extra large</li>
+    </ul>
+    AutoResponsive can be can be disabled by passing <code>[autoResponsive]="false"</code> then the left and right
+    paddings of the Dynamic Page can be adjusted according to the width of the container with the
     <code>[size]</code> property. Available values are: <code>small</code>, <code>medium</code>, <code>large</code> and
     <code>extra-large</code>
 </description>

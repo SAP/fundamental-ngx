@@ -1,64 +1,56 @@
-<section class="fd-dynamic-page" [attr.aria-label]="ariaLabel">
-    <header
-        class="fd-dynamic-page__header"
-        [class.fd-dynamic-page__header--not-collapsible]="!_headerCollapsible"
-        #header
-    >
-        <div>
-            <div *ngIf="titleComponent" (click)="toggleCollapse()" (keydown.enter)="toggleCollapse()">
-                <ng-container *ngTemplateOutlet="titleComponent.contentTemplateRef"></ng-container>
-            </div>
-            <fdp-dynamic-page-header-internal
-                *ngIf="headerComponent"
-                [collapsible]="headerComponent.collapsible"
-                [pinnable]="headerComponent.pinnable"
-                [collapsed]="headerComponent.collapsed"
-                [expandLabel]="headerComponent.expandLabel"
-                [collapseLabel]="headerComponent.collapseLabel"
-                [role]="headerComponent.role"
-                [id]="headerComponent.id"
-                [headerAriaLabel]="headerComponent.headerAriaLabel"
-                [pinAriaLabel]="headerComponent.pinAriaLabel"
-                [unpinAriaLabel]="headerComponent.unpinAriaLabel"
-                [background]="headerComponent.background"
-                [size]="headerComponent.size"
-                (collapseChange)="headerComponent._onCollapseChange($event)"
-            >
-                <ng-container [ngTemplateOutlet]="headerComponent.contentTemplateRef"></ng-container>
-            </fdp-dynamic-page-header-internal>
-        </div>
-    </header>
+<fd-dynamic-page
+    [autoResponsive]="autoResponsive"
+    [background]="background"
+    [size]="size"
+    [expandContent]="expandContent"
+    [offset]="offset"
+    [ariaLabel]="ariaLabel"
+>
+    <fd-dynamic-page-header *ngIf="titleComponent" [title]="titleComponent.title" [subtitle]="titleComponent.subtitle">
+        <fd-breadcrumb>
+            <ng-container [ngTemplateOutlet]="titleComponent.breadcrumbTemplate"></ng-container>
+        </fd-breadcrumb>
 
-    <div class="fd-dynamic-page__tabs--overflow" *ngIf="isTabbed" #tabsContainer>
-        <fd-tab-list (selectedTabChange)="_handleTabChange($event)" #dynamicPageTabs>
-            <ng-container *ngFor="let tab of tabs; let i = index">
-                <fd-tab [title]="tab.tabLabel" [id]="tab.id">
-                    <fdp-dynamic-page-content-host
-                        [background]="tab.background"
-                        [size]="tab.size"
-                        (scroll)="_onScrollContentSubject.next($event)"
-                    >
-                        <ng-container *ngTemplateOutlet="tab.contentTemplateRef"></ng-container>
-                        <!-- footer spacer -->
-                        <div class="footer-spacer" *ngIf="footerComponent"></div>
-                    </fdp-dynamic-page-content-host>
-                </fd-tab>
-            </ng-container>
-        </fd-tab-list>
-    </div>
-    <ng-container *ngIf="!isTabbed && contentComponent">
-        <fdp-dynamic-page-content-host
-            [id]="contentComponent.id"
-            [background]="contentComponent.background"
-            [size]="contentComponent.size"
-            (scroll)="_onScrollContentSubject.next($event)"
-        >
-            <ng-container *ngTemplateOutlet="contentComponent.contentTemplateRef"></ng-container>
-            <!-- footer spacer -->
-            <div class="footer-spacer" *ngIf="footerComponent"></div>
-        </fdp-dynamic-page-content-host>
-    </ng-container>
-    <footer>
-        <ng-container *ngIf="footerComponent" [ngTemplateOutlet]="footerComponent.contentTemplateRef"></ng-container>
-    </footer>
-</section>
+        <fd-dynamic-page-global-actions *ngIf="titleComponent.globalActionsComponent">
+            <ng-container [ngTemplateOutlet]="titleComponent.globalActionsComponent.contentTemplateRef"></ng-container>
+        </fd-dynamic-page-global-actions>
+
+        <fd-dynamic-page-layout-actions *ngIf="titleComponent.layoutActionsComponent">
+            <ng-container [ngTemplateOutlet]="titleComponent.layoutActionsComponent.contentTemplateRef"></ng-container>
+        </fd-dynamic-page-layout-actions>
+    </fd-dynamic-page-header>
+
+    <fd-dynamic-page-subheader
+        *ngIf="headerComponent"
+        [collapsed]="headerComponent.collapsed"
+        [collapsible]="headerComponent.collapsible"
+        [pinnable]="headerComponent.pinnable"
+        [expandLabel]="headerComponent.expandLabel"
+        [collapseLabel]="headerComponent.collapseLabel"
+        [role]="headerComponent.role"
+        [id]="headerComponent.id"
+        [headerAriaLabel]="headerComponent.headerAriaLabel"
+        [pinAriaLabel]="headerComponent.pinAriaLabel"
+        [unpinAriaLabel]="headerComponent.unpinAriaLabel"
+    >
+        <ng-container [ngTemplateOutlet]="headerComponent.contentTemplateRef"></ng-container>
+    </fd-dynamic-page-subheader>
+
+    <fd-tab-list *ngIf="isTabbed" [stackContent]="true" maxContentHeight="auto">
+        <ng-container *ngFor="let tab of tabs">
+            <fd-tab [title]="tab.tabLabel" [id]="tab.id">
+                <fd-dynamic-page-content>
+                    <ng-container [ngTemplateOutlet]="tab.contentTemplateRef"></ng-container>
+                </fd-dynamic-page-content>
+            </fd-tab>
+        </ng-container>
+    </fd-tab-list>
+
+    <fd-dynamic-page-content *ngIf="!isTabbed">
+        <ng-container [ngTemplateOutlet]="contentComponent.contentTemplateRef"></ng-container>
+    </fd-dynamic-page-content>
+
+    <fd-dynamic-page-footer *ngIf="footerComponent">
+        <ng-container [ngTemplateOutlet]="footerComponent.contentTemplateRef"></ng-container>
+    </fd-dynamic-page-footer>
+</fd-dynamic-page>

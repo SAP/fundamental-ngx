@@ -50,6 +50,10 @@ export class DynamicPageTitleComponent {
     @Input()
     size: DynamicPageResponsiveSize;
 
+    /** template of BreadsCrumbs */
+    @ViewChild('breadCrumbTemplate')
+    breadcrumbTemplate: TemplateRef<any>;
+
     /** reference to global actions component */
     @ContentChild(DynamicPageGlobalActionsComponent)
     globalActionsComponent: DynamicPageGlobalActionsComponent;
