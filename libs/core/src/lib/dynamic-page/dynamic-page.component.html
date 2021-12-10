@@ -11,7 +11,7 @@
 >
     <header class="fd-dynamic-page__header" [class.fd-dynamic-page__header--not-collapsible]="!_headerCollapsible">
         <div>
-            <div (click)="toggleCollapse()" (keydown.enter)="toggleCollapse()">
+            <div (click)="toggleCollapse()" (keydown.enter)="toggleCollapse()" role="none" tabindex="-1">
                 <ng-content select="fd-dynamic-page-header"></ng-content>
             </div>
             <ng-content select="fd-dynamic-page-subheader"></ng-content>

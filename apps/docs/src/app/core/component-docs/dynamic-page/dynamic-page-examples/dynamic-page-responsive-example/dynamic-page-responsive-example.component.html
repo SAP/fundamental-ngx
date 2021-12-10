@@ -30,7 +30,7 @@
                         fd-button
                         [compact]="compact"
                         fdType="positive"
-                        (click)="closePage()"
+                        (click)="handleAction('Page is accepted')"
                         label="Accept"
                         title="Accept"
                     ></button>
@@ -39,7 +39,7 @@
                         fd-button
                         [compact]="compact"
                         fdType="negative"
-                        (click)="closePage()"
+                        (click)="handleAction('Page is rejected')"
                         label="Reject"
                         title="Reject"
                     ></button>

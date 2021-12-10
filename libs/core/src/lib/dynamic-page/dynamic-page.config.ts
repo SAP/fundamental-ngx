@@ -24,4 +24,8 @@ export class DynamicPageConfig {
      * aria label for pin button when the Panel should be unpinned
      */
     unpinLabel = 'Unpin Header';
+
+    expandColumnLabel = 'Expand column';
+
+    collapseColumnLabel = 'Collapse column';
 }

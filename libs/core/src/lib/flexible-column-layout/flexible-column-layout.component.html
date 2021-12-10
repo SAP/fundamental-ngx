@@ -14,13 +14,14 @@
         <ng-container *ngTemplateOutlet="startColumn"></ng-container>
     </div>
     <!-- Left Separator -->
-    <div *ngIf="_leftColumnSeparator" class="fd-flexible-column-layout__separator">
+    <div *ngIf="_leftColumnSeparator" class="fd-flexible-column-layout__separator" aria-label="separator">
         <button
             fd-button
             [compact]="true"
             fdType="transparent"
             class="fd-flexible-column-layout__button"
             ariaLabel="Expand"
+            [title]="_leftColumnSeparator === 'left' ? 'Expand' : 'Collapse'"
             (click)="_handleLeftColumnSeparatorClick()"
         >
             <i
@@ -40,13 +41,14 @@
         <ng-container *ngTemplateOutlet="midColumn"></ng-container>
     </div>
     <!-- Right Separator -->
-    <div *ngIf="_rightColumnSeparator" class="fd-flexible-column-layout__separator">
+    <div *ngIf="_rightColumnSeparator" class="fd-flexible-column-layout__separator" aria-label="separator">
         <button
             fd-button
             [compact]="true"
             fdType="transparent"
             class="fd-flexible-column-layout__button"
             ariaLabel="Expand"
+            [title]="_rightColumnSeparator === 'left' ? 'Expand' : 'Collapse'"
             (click)="_handleRightColumnSeparatorClick()"
         >
             <i

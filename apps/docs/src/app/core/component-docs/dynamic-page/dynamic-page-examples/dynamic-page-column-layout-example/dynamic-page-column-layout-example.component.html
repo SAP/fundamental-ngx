@@ -59,7 +59,7 @@
                                 fd-button
                                 fdType="transparent"
                                 ariaLabel="Exit Fullscreen"
-                                (click)="closePage()"
+                                (click)="handleAction('Page is accepted')"
                                 title="Exit Fullscreen"
                             >
                                 <i class="sap-icon--exitfullscreen"></i>
@@ -68,7 +68,7 @@
                                 fd-button
                                 fdType="transparent"
                                 ariaLabel="Close"
-                                (click)="closePage()"
+                                (click)="handleAction('Page is rejected')"
                                 title="Close"
                             >
                                 <i class="sap-icon--decline"></i>
@@ -142,9 +142,16 @@
         </ng-template>
         <ng-template #midColumn>
             <div class="docs-fcl-example-section">
-                <h2>Mid Column</h2>
+                <h2 id="mid-column">Mid Column</h2>
                 <div>
-                    <button class="fd-button" (click)="changeLayout('ThreeColumnsMidExpanded')">Open Column 3</button>
+                    <button
+                        aria-labelledby="mid-column"
+                        title="Open Column 3"
+                        class="fd-button"
+                        (click)="changeLayout('ThreeColumnsMidExpanded')"
+                    >
+                        Open Column 3
+                    </button>
                 </div>
                 <fd-tab-list>
                     <fd-tab *ngFor="let tab of [1, 2, 3, 4]" [title]="'Tab ' + tab">

@@ -62,6 +62,12 @@ export class DynamicPageSubheaderComponent {
     @Input()
     collapseLabel: string = this._dynamicPageConfig.collapseLabel;
 
+    @Input()
+    expandColumnLabel: string = this._dynamicPageConfig.expandColumnLabel;
+
+    @Input()
+    collapseColumnLabel: string = this._dynamicPageConfig.collapseColumnLabel;
+
     /** Header role  */
     @Input()
     @HostBinding('attr.role')

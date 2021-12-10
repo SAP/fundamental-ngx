@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MessageToastService } from '@fundamental-ngx/core/message-toast';
 
 @Component({
     selector: 'fd-dynamic-page-basic-example',
@@ -23,6 +24,8 @@ import { Component } from '@angular/core';
 export class DynamicPageExampleComponent {
     visible = false;
 
+    constructor(private _messageToastService: MessageToastService) {}
+
     onCollapseChange(): void {
         console.log('collapse changed');
     }
@@ -33,5 +36,14 @@ export class DynamicPageExampleComponent {
 
     closePage(): void {
         this.visible = false;
+    }
+
+    handleAction(action: string): void {
+        this.closePage();
+        this._openToast(action);
+    }
+
+    private _openToast(content: string): void {
+        this._messageToastService.open(content, { duration: 3000 });
     }
 }
