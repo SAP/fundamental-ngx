@@ -1,4 +1,4 @@
-<div [ngClass]="_cssClassForContainer" class="fd-icon-tab-bar">
+<div class="fd-icon-tab-bar" [class]="_cssClassForContainer">
     <ng-container *ngIf="iconTabType === 'text'">
         <ng-container *ngTemplateOutlet="textType"></ng-container>
     </ng-container>

@@ -17,8 +17,8 @@
             (click)="onSelect(rate.value)"
         />
         <label class="fd-rating-indicator__label" [for]="rate.id" aria-hidden="true">
-            <i *ngIf="ratedIcon" class="rated" [ngClass]="unratedIcon"></i>
-            <i *ngIf="unratedIcon" class="unrated" [ngClass]="ratedIcon"></i>
+            <i *ngIf="ratedIcon" class="rated" [class]="unratedIcon"></i>
+            <i *ngIf="unratedIcon" class="unrated" [class]="ratedIcon"></i>
         </label>
     </ng-container>
 </div>
@@ -38,7 +38,7 @@
     placement="top"
     additionalBodyClass="fd-rating-indicator__popover"
 >
-    <div class="rate-sum-row" [ngClass]="sizeClass" *ngFor="let rating of _ratingItems; trackBy: trackByFn">
+    <div class="rate-sum-row" [class]="sizeClass" *ngFor="let rating of _ratingItems; trackBy: trackByFn">
         <div class="fd-rating-indicator__container rates">
             <ng-container *ngFor="let rate of _rates; trackBy: trackByFn">
                 <span
@@ -46,8 +46,8 @@
                     class="fd-rating-indicator__input"
                 ></span>
                 <label class="fd-rating-indicator__label">
-                    <i *ngIf="ratedIcon" class="rated" [ngClass]="unratedIcon"></i>
-                    <i *ngIf="unratedIcon" class="unrated" [ngClass]="ratedIcon"></i>
+                    <i *ngIf="ratedIcon" class="rated" [class]="unratedIcon"></i>
+                    <i *ngIf="unratedIcon" class="unrated" [class]="ratedIcon"></i>
                 </label>
             </ng-container>
         </div>

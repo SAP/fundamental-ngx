@@ -20,9 +20,9 @@
                 <ng-container *ngFor="let fields of isFieldGroupRow(row) | keyvalue; trackBy: trackByFn">
                     <div
                         class="fd-form-group fd-col"
+                        [class]="xlCol"
                         [class.fd-col__form-group]="!compact"
                         [class.fd-col--compact]="compact"
-                        [ngClass]="xlCol"
                     >
                         <div class="fd-form-item fd-row__form-item fd-row">
                             <div

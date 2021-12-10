@@ -10,7 +10,7 @@
             [disabled]="disabled || readonly"
             [appendTo]="appendTo"
             [closeOnEscapeKey]="true"
-            [fillControlMode]="'at-least'"
+            fillControlMode="at-least"
             [maxWidth]="600"
             [closeOnOutsideClick]="closeOnOutsideClick"
             (isOpenChange)="_popoverOpenChangeHandle($event)"
@@ -31,7 +31,7 @@
         class="fd-select__control"
         role="list"
         #selectControl
-        [ngClass]="state ? 'is-' + state : ''"
+        [class]="state ? 'is-' + state : ''"
         [class.is-active]="_isOpen"
         [class.is-expanded]="_isOpen"
         [class.is-disabled]="disabled"

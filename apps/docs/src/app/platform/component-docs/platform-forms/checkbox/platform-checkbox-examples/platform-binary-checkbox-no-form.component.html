@@ -1,9 +1,9 @@
 <h3>Binary Checkbox With Value</h3>
 <fdp-checkbox
-    [name]="'orion'"
+    name="orion"
     [isBinary]="true"
-    [label]="'Orion'"
-    [value]="'orion'"
+    label="Orion"
+    value="orion"
     title="Orion"
     [(checked)]="orion"
     (checkedChange)="checkedChangeFunction()"
@@ -13,26 +13,18 @@
 </fdp-checkbox>
 <div>value: {{ orion }}</div>
 
-<fdp-checkbox
-    [name]="'cygnus'"
-    [isBinary]="true"
-    [label]="'Cygnus'"
-    title="Cygnus"
-    [value]="'cygnus'"
-    [(checked)]="cygnus"
->
+<fdp-checkbox name="cygnus" [isBinary]="true" label="Cygnus" title="Cygnus" value="cygnus" [(checked)]="cygnus">
 </fdp-checkbox>
 <div>value: {{ cygnus }}</div>
 <br />
 <br />
 <h3>Binary Checkbox Without Value</h3>
-<fdp-checkbox [name]="'lyra'" [isBinary]="true" [label]="'Lyra'" title="Lyra" [(checked)]="lyra"> </fdp-checkbox>
+<fdp-checkbox name="lyra" [isBinary]="true" label="Lyra" title="Lyra" [(checked)]="lyra"> </fdp-checkbox>
 <div>value: {{ lyra }}</div>
 
-<fdp-checkbox [name]="'gemini'" [isBinary]="true" [label]="'Gemini'" title="Gemini" [(checked)]="gemini">
-</fdp-checkbox>
+<fdp-checkbox name="gemini" [isBinary]="true" label="Gemini" title="Gemini" [(checked)]="gemini"> </fdp-checkbox>
 <div>value: {{ gemini }}</div>
 
 <h3>Disabled Checkbox</h3>
-<fdp-checkbox [name]="'orion'" [isBinary]="true" [label]="'Orion'" title="Orion" [(checked)]="orion" [disabled]="true">
+<fdp-checkbox name="orion" [isBinary]="true" label="Orion" title="Orion" [(checked)]="orion" [disabled]="true">
 </fdp-checkbox>

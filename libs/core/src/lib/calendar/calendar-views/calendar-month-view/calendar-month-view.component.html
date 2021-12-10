@@ -10,10 +10,8 @@
                     class="fd-calendar__item"
                     role="gridcell"
                     *ngFor="let monthCell of colMonths; let colIndex = index"
-                    [ngClass]="{
-                        'fd-calendar__item--current': monthCell.current,
-                        'is-active': monthCell.selected
-                    }"
+                    [class.fd-calendar__item--current]="monthCell.current"
+                    [class.is-active]="monthCell.selected"
                     [attr.tabIndex]="monthCell.tabIndex"
                     [attr.id]="monthCell.id"
                     [attr.aria-selected]="monthCell.selected"

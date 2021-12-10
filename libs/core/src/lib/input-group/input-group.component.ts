@@ -32,7 +32,7 @@ let addOnInputRandomId = 0;
  * The input group includes form inputs with add-ons that allow the user to better understand the information being entered.
  *
  * ```html
- * <fd-input-group [placement]="'after'" [addOnText]="'$'" [placeholder]="'Amount'">
+ * <fd-input-group placement="after" addOnText="$" placeholder="Amount">
  * </fd-input-group>
  * ```
  */

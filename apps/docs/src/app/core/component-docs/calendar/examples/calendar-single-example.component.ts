@@ -10,7 +10,7 @@ import {
 @Component({
     selector: 'fd-calendar-single-example',
     template: `
-        <fd-calendar [calType]="'single'" [(ngModel)]="date" [disableFunction]="myDisableFunction"></fd-calendar>
+        <fd-calendar calType="single" [(ngModel)]="date" [disableFunction]="myDisableFunction"></fd-calendar>
         <br />
         <div>Selected Date: {{ date | date: 'shortDate' }}</div>
         <button fd-button label="Disable Wednesday" (click)="disableWednesday()"></button>

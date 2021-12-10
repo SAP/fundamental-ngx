@@ -12,7 +12,7 @@ import { Libraries } from '../../utilities/libraries';
                 [routerLink]="'/' + currentLibrary + '/' + componentName"
                 [fragment]="id"
             >
-                <fd-icon [glyph]="'chain-link'"></fd-icon>
+                <fd-icon glyph="chain-link"></fd-icon>
             </a>
             <ng-content></ng-content>
         </h2>

@@ -13,11 +13,9 @@
 <ng-container [ngSwitch]="activeView">
     <div
         class="fd-calendar__content"
-        [ngClass]="{
-            'fd-calendar__content--dates': activeView === 'day',
-            'fd-calendar__content--months': activeView === 'month',
-            'fd-calendar__content--years': activeView === 'year'
-        }"
+        [class.fd-calendar__content--dates]="activeView === 'day'"
+        [class.fd-calendar__content--months]="activeView === 'month'"
+        [class.fd-calendar__content--years]="activeView === 'year'"
     >
         <fd-calendar-day-view
             *ngSwitchCase="'day'"
