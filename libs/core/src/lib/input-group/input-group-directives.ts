@@ -10,7 +10,7 @@ import {
     Optional,
     Renderer2
 } from '@angular/core';
-import { InputGroupPlacement } from './input-group.component';
+import { InputGroupPlacement } from './types';
 import { FormStates } from '@fundamental-ngx/core/shared';
 import { Subscription } from 'rxjs';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';

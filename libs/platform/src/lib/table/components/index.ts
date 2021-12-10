@@ -13,7 +13,6 @@ export * from './table-p13-dialog/filtering/filter-rule.component';
 export * from './table-p13-dialog/filtering/filtering.component';
 export * from './table-p13-dialog/filtering/filtering.model';
 export * from './table-p13-dialog/grouping/grouping.component';
-export * from './table-p13-dialog/sorting/get-available-sort-columns.pipe';
 export * from './table-toolbar/table-toolbar';
 export * from './table-toolbar/table-toolbar-actions.component';
 export * from './table-toolbar/table-toolbar.component';

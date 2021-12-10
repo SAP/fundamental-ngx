@@ -84,7 +84,7 @@ jobs:
               with:
                   path: dist/libs/core
                   key: dist-core-${{ github.run_id }}
-            - run: npx nx build core --prod --with-deps --runner cloud
+            - run: npx nx build core --configuration production --runner cloud
 
     # build platform
     build-platform:
@@ -104,7 +104,7 @@ jobs:
               with:
                   path: dist/libs/platform
                   key: dist-platform-${{ github.run_id }}
-            - run: npx nx build platform --prod --with-deps --runner cloud
+            - run: npx nx build platform --configuration production --runner cloud
 
     # build moment-adapter
     build-moment-adapter:
@@ -124,7 +124,7 @@ jobs:
               with:
                   path: dist/libs/platform
                   key: dist-platform-${{ github.run_id }}
-            - run: npx nx build moment-adapter --configuration=production --with-deps --runner cloud
+            - run: npx nx build moment-adapter --configuration=production --runner cloud
 
     # build fn
     build-fn:
@@ -140,7 +140,7 @@ jobs:
               with:
                   path: dist/libs/core
                   key: dist-core-${{ github.run_id }}
-            - run: npx nx build fn --configuration=production --with-deps --runner cloud
+            - run: npx nx build fn --configuration=production --runner cloud
 
     # build docs
     build-docs:
@@ -165,7 +165,7 @@ jobs:
               with:
                   path: dist/apps/docs
                   key: dist-docs-${{ github.run_id }}
-            #      - run: npm run build-docs -- --prod --base-href="fundamental-ngx"
+            #      - run: npm run build-docs -- --configuration production --base-href="fundamental-ngx"
             - run: |
                   npm run compile-typedoc-all
                   npm run copy-docs
@@ -286,7 +286,7 @@ jobs:
               run: |
                   npm rebuild
                   npm ci
-                  npx ng serve --no-watch --aot --prod &
+                  npx ng serve --watch false --configuration production &
                   npx wait-on http://localhost:4200
                   export DISPLAY=:99
                   chrome --version

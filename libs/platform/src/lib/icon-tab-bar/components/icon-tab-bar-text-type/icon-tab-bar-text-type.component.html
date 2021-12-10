@@ -40,7 +40,7 @@
                 </ng-template>
                 <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>
                 <div class="screenreader-only" *ngIf="item.color">
-                    {{ (_colorAssociations && _colorAssociations[item.color]) || item.color }}
+                    {{ (colorAssociations && colorAssociations[item.color]) || item.color }}
                 </div>
             </a>
             <ng-template #withPopover>
@@ -49,6 +49,7 @@
                     [tabindex]="idx === 0 ? 0 : -1"
                     [parentTab]="item"
                     [selectedSubItemUid]="_selectedUid"
+                    [colorAssociations]="colorAssociations"
                     (selectedSubItem)="_selectItem($event)"
                     (keydown)="_keyDownHandler($event, item, idx)"
                 >
@@ -68,6 +69,7 @@
                 [isRtl]="isRtl"
                 [extraTabs]="_extraTabs"
                 [isExtraItemsMode]="true"
+                [colorAssociations]="colorAssociations"
                 (selectedExtraItem)="_selectExtraItem($event)"
                 (focusFirstVisibleItem)="_focusItem(0)"
                 (focusLastVisibleItem)="_focusItem(_lastVisibleTabIndex)"

@@ -21,7 +21,7 @@ import { delay, take, takeUntil } from 'rxjs/operators';
 
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 
-import { SplitterPaneContainerOrientation } from '../splitter-pane-container/splitter-pane-container.component';
+import { SplitterPaneContainerOrientation } from '../splitter-pane-container/splitter-pane-orientation.enum';
 
 /** @dynamic */
 @Component({

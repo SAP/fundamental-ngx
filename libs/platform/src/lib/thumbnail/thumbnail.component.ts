@@ -88,16 +88,16 @@ export class ThumbnailComponent extends BaseComponent implements OnInit {
         this.thumbnailClicked.emit(this._createClickEvent(this.selectedMedia));
     }
 
-    openDialog(selectedMedia: Media, mediaList: Media[]): void {
-        mediaList.forEach((item) => (item.overlayRequired = false));
+    openDialog(media: Media = this.selectedMedia): void {
+        this.mediaList.forEach((item) => (item.overlayRequired = false));
         this._dialogService.open(ThumbnailDetailsComponent, {
             backdropClickCloseable: false,
             escKeyCloseable: false,
             ariaLabelledBy: this.thumbnailId,
             data: {
                 thumbnailId: this.thumbnailId,
-                selectedMedia: selectedMedia,
-                mediaList: mediaList,
+                selectedMedia: media,
+                mediaList: this.mediaList,
                 rtl: this._isRtl(),
                 maxImages: this.maxImagesDisplay
             }

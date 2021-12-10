@@ -24,7 +24,7 @@ import { DateRange } from '../../models/date-range';
 import { CalendarCurrent } from '../../models/calendar-current';
 import { ActiveCalendarDayCellStrategy as CalendarActiveDayCellStrategy, CalendarDay } from '../../models/calendar-day';
 
-import { CalendarType, DaysOfWeek } from '../../calendar.component';
+import { CalendarType, DaysOfWeek } from '../../types';
 import { CalendarService } from '../../calendar.service';
 import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
 import { FocusableCalendarView } from '../../models/common';

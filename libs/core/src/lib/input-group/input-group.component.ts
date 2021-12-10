@@ -18,11 +18,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { fromEvent, Subject, Subscription } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 
-import { InputGroupAddOnDirective, InputGroupInputDirective } from './input-group-directives';
 import { FormStates } from '@fundamental-ngx/core/shared';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
-export type InputGroupPlacement = 'before' | 'after';
+import { InputGroupAddOnDirective, InputGroupInputDirective } from './input-group-directives';
+import { InputGroupPlacement } from './types';
+
 let addOnNonButtonRandomId = 0;
 let addOnButtonRandomId = 0;
 let addOnInputRandomId = 0;

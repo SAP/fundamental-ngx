@@ -11,6 +11,8 @@ import {
     OnDestroy,
     Optional,
     Output,
+    Pipe,
+    PipeTransform,
     QueryList,
     SkipSelf,
     ViewEncapsulation
@@ -25,11 +27,7 @@ import { SplitterComponent } from '../splitter.component';
 import { SplitterPaneResizeEvent } from '../interfaces/splitter-pane-resize-event.interface';
 import { SplitterSplitPaneComponent } from '../splitter-split-pane/splitter-split-pane.component';
 import { PANE_AUTO_SIZE, PANE_NONE_SIZE, RESIZER_SIZE_PX, ROOT_PAGE } from '../constants';
-
-export enum SplitterPaneContainerOrientation {
-    vertical = 'vertical',
-    horizontal = 'horizontal'
-}
+import { SplitterPaneContainerOrientation } from './splitter-pane-orientation.enum';
 
 @Component({
     selector: 'fd-splitter-pane-container',
@@ -427,5 +425,18 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
     /** @hidden */
     private _getPaneElement(paneId: string): HTMLElement {
         return this._elementRef.nativeElement.querySelector(`#${paneId}`);
+    }
+}
+
+@Pipe({ name: 'noDefaultPane' })
+export class NoDefaultPanePipe implements PipeTransform {
+    constructor(private readonly _splitterPaneContainer: SplitterPaneContainerComponent) {}
+
+    transform(value: SplitterSplitPaneComponent[], excludingCondition = true, ...args): any {
+        if (!excludingCondition) {
+            return value;
+        }
+
+        return value.filter((pane) => pane.id !== this._splitterPaneContainer._defaultPane?.id);
     }
 }
