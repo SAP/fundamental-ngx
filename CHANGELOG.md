@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.212 (2021-12-10)
+
+
+### Features
+
+* **platform:** refactor dynamic page on top of core ([#7310](https://github.com/SAP/fundamental-ngx/issues/7310)) ([fdedcc6](https://github.com/SAP/fundamental-ngx/commit/fdedcc6ab8a797e8b89b6b52a20f7274e11df0cb))
+
 ## 0.33.0-rc.211 (2021-12-10)
 
 
