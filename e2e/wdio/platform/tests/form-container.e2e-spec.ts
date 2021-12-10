@@ -77,8 +77,8 @@ describe('Form Container test suite', () => {
         it('should be able to mark checkboxes', () => {
             markAllCheckboxes(recommendedExampleCheckboxLabel);
         });
-        // unable enter text
-        xit('should be able to add text in the textareas', () => {
+
+        it('should be able to add text in the textareas', () => {
             checkAddingText(recommendedExampleTextArea);
         });
 
@@ -97,8 +97,8 @@ describe('Form Container test suite', () => {
         it('should be able to mark checkboxes', () => {
             markAllCheckboxes(possibleExampleCheckboxLabel);
         });
-        // unable enter text
-        xit('should be able to add text in the textareas', () => {
+
+        it('should be able to add text in the textareas', () => {
             checkAddingText(possibleExampleTextArea);
         });
 
@@ -117,8 +117,8 @@ describe('Form Container test suite', () => {
         it('should be able to mark checkboxes', () => {
             markAllCheckboxes(notRecommendedExampleCheckboxLabel);
         });
-        // unable enter text
-        xit('should be able to add text in the textareas', () => {
+
+        it('should be able to add text in the textareas', () => {
             checkAddingText(notRecommendedExampleTextArea);
         });
 
@@ -137,8 +137,8 @@ describe('Form Container test suite', () => {
         it('should be able to mark checkboxes', () => {
             markAllCheckboxes(complexExampleCheckboxLabel);
         });
-        // unable enter text
-        xit('should be able to add text in the textareas', () => {
+
+        it('should be able to add text in the textareas', () => {
             checkAddingText(complexExampleTextArea);
         });
 
@@ -208,15 +208,13 @@ describe('Form Container test suite', () => {
     });
 
     describe('Column Binding example', () => {
-        // unable enter text
-        xit('should be able to add text to the textarea', () => {
+        it('should be able to add text to the textarea', () => {
             checkAddingText(columnExampleTextArea);
         });
     });
 
     describe('Form Field Group example', () => {
-        // unable enter text
-        xit('should be able to add text to the textarea', () => {
+        it('should be able to add text to the textarea', () => {
             checkAddingText(formExampleTextArea);
         });
 
@@ -232,8 +230,7 @@ describe('Form Container test suite', () => {
     });
 
     describe('Change of column number for a field example', () => {
-        // unable enter text
-        xit('should be able to add text to the textarea', () => {
+        it('should be able to add text to the textarea', () => {
             checkAddingText(changeExampleTextArea);
         });
 
@@ -258,8 +255,7 @@ describe('Form Container test suite', () => {
     });
 
     describe('Change of isInline value for a field example', () => {
-        // unable enter text
-        xit('should be able to add text to the textarea', () => {
+        it('should be able to add text to the textarea', () => {
             checkAddingText(isInlineExampleTextArea);
         });
 
