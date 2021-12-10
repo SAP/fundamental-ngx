@@ -79,6 +79,7 @@ describe('Standard List Item test suite:', () => {
 
     describe('Standard List Item- Interactive state examples:', () => {
         // missed attribute "href"
+        // https://github.com/SAP/fundamental-ngx/issues/7343
         xit('should check links', () => {
             const linkCount = getElementArrayLength(sInteractiveLink);
             for (let i = 0; linkCount > i; i++) {
