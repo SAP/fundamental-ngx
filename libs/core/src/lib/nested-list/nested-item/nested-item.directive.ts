@@ -8,14 +8,15 @@ import {
     OnDestroy,
     Output
 } from '@angular/core';
-import { NestedLinkDirective } from '../nested-link/nested-link.directive';
-import { NestedListKeyboardService } from '../nested-list-keyboard.service';
-import { NestedItemInterface } from './nested-item.interface';
-import { NestedItemService } from './nested-item.service';
-import { NestedListContentDirective } from '../nested-content/nested-list-content.directive';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
+
+import { NestedLinkDirective } from '../nested-link/nested-link.directive';
+import { NestedListKeyboardService } from '../nested-list-keyboard.service';
+import { NestedListContentDirective } from '../nested-content/nested-list-content.directive';
 import { NestedListStateService } from '../nested-list-state.service';
+import { NestedItemInterface } from './nested-item.interface';
+import { NestedItemService } from './nested-item.service';
 
 let sideNavigationItemUniqueId = 0;
 
@@ -64,14 +65,23 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
     contentItem: NestedListContentDirective;
 
     /** @hidden */
-    constructor(
-        private _itemService: NestedItemService,
-        private _keyboardService: NestedListKeyboardService,
-        private _stateService: NestedListStateService
-    ) {}
+    @HostBinding('attr.aria-level')
+    _ariaLevel = null;
+
+    /** @hidden */
+    @HostBinding('attr.role')
+    private _role = 'treeitem';
 
     /** @hidden */
     private _expanded = false;
+
+    /** @hidden */
+    @HostBinding('attr.aria-expanded')
+    private _ariaExpanded = null;
+
+    /** @hidden */
+    @HostBinding('attr.aria-selected')
+    private _ariaSelected = null;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
@@ -80,12 +90,23 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
     private readonly _elementId: string = 'fdNestedItem' + sideNavigationItemUniqueId++;
 
     /** @hidden */
+    constructor(
+        private _itemService: NestedItemService,
+        private _keyboardService: NestedListKeyboardService,
+        private _stateService: NestedListStateService
+    ) {}
+
+    /** @hidden */
     ngAfterContentInit(): void {
         this._setUpSubscriptions();
         this._propagateHasChildrenProperty();
         this._passItemReferences();
         /** Propagate initial open state to children */
         this.propagateOpenChange(this._expanded);
+
+        if (this.linkItem) {
+            this._ariaSelected = this.linkItem.selected;
+        }
     }
 
     /** @hidden */
@@ -96,14 +117,15 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
 
     /** Check if the item element has any child */
     get hasChildren(): boolean {
-        return !!(this._itemService && this._itemService.list);
+        return !!this._itemService?.list;
     }
 
     /** Get all of the children item elements */
     get allChildrenItems(): NestedItemInterface[] {
-        if (this._itemService && this._itemService.list) {
+        if (this._itemService?.list) {
             return this._itemService.list.nestedItems.toArray();
         }
+
         return [];
     }
 
@@ -152,11 +174,12 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
         if (this._elementId === id) {
             return true;
         }
+
         if (this._itemService.list) {
             return !!this._itemService.list.nestedItems.find((item) => item.containsId(id));
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -165,6 +188,10 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
      */
     private propagateOpenChange(open: boolean): void {
         this._expanded = open;
+
+        if (this.hasChildren) {
+            this._ariaExpanded = this._expanded;
+        }
 
         /**
          * Propagate to child content directive, which contains icon and link
@@ -202,6 +229,10 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
 
     /** @hidden */
     private _setUpSubscriptions(): void {
+        if (this._stateService.condensed) {
+            this._role = 'menuitemradio';
+        }
+
         /** Subscribe to mouse click event, thrown by link item */
         this._itemService.toggle.pipe(takeUntil(this._onDestroy$)).subscribe(() => this.toggle());
 
@@ -227,6 +258,7 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
     /** @hidden */
     private _propagateHasChildrenProperty(): void {
         if (this.contentItem && this.hasChildren) {
+            this._ariaExpanded = false;
             this.contentItem.hasChildren = true;
             this.contentItem.changeDetRef.detectChanges();
         }
@@ -241,10 +273,13 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
 
     /** Change of selected state of content or link, if there is any children with I */
     private _selectedChange(id: string): void {
+        const selected = this.containsId(id);
+        this._ariaSelected = selected;
+
         if (this.contentItem) {
-            this.contentItem.changeSelected(this.containsId(id));
+            this.contentItem.changeSelected(selected);
         } else if (this.linkItem) {
-            this.linkItem.changeSelected(this.containsId(id));
+            this.linkItem.changeSelected(selected);
         }
     }
 }
