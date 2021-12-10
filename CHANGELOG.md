@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.211 (2021-12-10)
+
+
+### Bug Fixes
+
+* **core,platform:** fix unnecessary binding ([#7296](https://github.com/SAP/fundamental-ngx/issues/7296)) ([93806cb](https://github.com/SAP/fundamental-ngx/commit/93806cbc53c1c3c09be587fe52d719e143e1c41b))
+
 ## 0.33.0-rc.210 (2021-12-09)
 
 
