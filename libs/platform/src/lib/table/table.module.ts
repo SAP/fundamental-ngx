@@ -20,10 +20,11 @@ import { RadioModule } from '@fundamental-ngx/core/radio';
 import { SelectModule } from '@fundamental-ngx/core/select';
 import { TableModule } from '@fundamental-ngx/core/table';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
-
+import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
 import { PlatformInputModule } from '@fundamental-ngx/platform/form';
 import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+
 import { TableComponent } from './table.component';
 import { TableColumnComponent } from './components/table-column/table-column.component';
 import { TableToolbarComponent } from './components/table-toolbar/table-toolbar.component';
@@ -87,7 +88,8 @@ import { NoDataWrapperComponent } from './components/no-data-wrapper/no-data-wra
         DatePickerModule,
         BusyIndicatorModule,
         DragAndDropModule,
-        A11yModule
+        A11yModule,
+        ScrollbarModule
     ],
     declarations: [
         TableComponent,

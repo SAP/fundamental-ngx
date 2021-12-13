@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.208 (2021-12-09)
+
+
+### Features
+
+* **platform:** themeable scrollbar for table ([#7323](https://github.com/SAP/fundamental-ngx/issues/7323)) ([7ac904d](https://github.com/SAP/fundamental-ngx/commit/7ac904d49e4f9de4e1cc7d0026485b11a68652ab))
+
 ## 0.33.0-rc.207 (2021-12-08)
 
 

@@ -15,7 +15,7 @@
         <ng-container [ngTemplateOutlet]="tableBodyTemplate"></ng-container>
 
         <!-- Table column resizer for visually representing the resizing process -->
-        <fdp-table-column-resizer [style.bottom.px]="_scrollBarWidth"></fdp-table-column-resizer>
+        <fdp-table-column-resizer class="fdp-table__column-resizer"></fdp-table-column-resizer>
     </div>
 
     <div #focusableMock tabindex="0" [style.display]="loading ? 'none' : 'block'"></div>
@@ -23,11 +23,7 @@
 
 <!-- Table Header Template -->
 <ng-template #tableHeaderTemplate>
-    <div
-        class="fdp-table__header"
-        [style.padding-left.px]="_rtl ? _scrollBarWidth : 0"
-        [style.padding-right.px]="_rtl ? 0 : _scrollBarWidth"
-    >
+    <div class="fdp-table__header">
         <div class="fd-table--fixed" fdpTableScroller="horizontal">
             <table
                 fd-table
@@ -41,7 +37,7 @@
             </table>
         </div>
 
-        <div class="fdp-table__header-scrollbar-mock" [style.width.px]="_scrollBarWidth"></div>
+        <div class="fdp-table__header-scrollbar-mock"></div>
     </div>
 </ng-template>
 
@@ -253,6 +249,9 @@
     <div
         class="fdp-table__body"
         fdpTableScrollable
+        fd-scrollbar
+        alwaysVisible
+        noHorizontalScroll
         #verticalScrollable="tableScrollable"
         [style.height]="bodyHeight"
         [class.fixed-height]="!!bodyHeight"
@@ -432,43 +431,47 @@
     </div>
 
     <!-- Table Body horizontal scroll area -->
-    <div
-        fdpTableScrollable
-        fdpTableScroller="horizontal"
-        class="fdp-table__body-hs"
-        [class.fdp-table__body-hs--empty]="_scrollBarWidth === 0"
-    >
-        <div class="fdp-table__body-hs-spacer">
-            <table *ngIf="_tableRowsVisible.length" fd-table role="presentation" class="fdp-table__body-hs-table">
-                <tbody fd-table-body>
-                    <tr fd-table-row role="row">
-                        <th *ngIf="semanticHighlighting" fd-table-cell fd-table-status-indicator></th>
+    <div class="fdp-table__body-hs" [class.fdp-table__body-hs--empty]="_scrollBarWidth === 0">
+        <div
+            class="fdp-table__body-hs-wrap"
+            fdpTableScrollable
+            fdpTableScroller="horizontal"
+            fd-scrollbar
+            alwaysVisible
+            noVerticalScroll
+        >
+            <div class="fdp-table__body-hs-spacer">
+                <table *ngIf="_tableRowsVisible.length" fd-table role="presentation" class="fdp-table__body-hs-table">
+                    <tbody fd-table-body>
+                        <tr fd-table-row role="row">
+                            <th *ngIf="semanticHighlighting" fd-table-cell fd-table-status-indicator></th>
 
-                        <td
-                            *ngIf="_isShownSelectionColumn"
-                            fd-table-cell
-                            role="gridcell"
-                            class="fd-table__cell--checkbox"
-                            [style.min-width.px]="_selectionColumnWidth"
-                        ></td>
+                            <td
+                                *ngIf="_isShownSelectionColumn"
+                                fd-table-cell
+                                role="gridcell"
+                                class="fd-table__cell--checkbox"
+                                [style.min-width.px]="_selectionColumnWidth"
+                            ></td>
 
-                        <td
-                            *ngFor="let column of _visibleColumns"
-                            [ngStyle]="_getCellStyles(column)"
-                            fd-table-cell
-                            role="gridcell"
-                        ></td>
+                            <td
+                                *ngFor="let column of _visibleColumns"
+                                [ngStyle]="_getCellStyles(column)"
+                                fd-table-cell
+                                role="gridcell"
+                            ></td>
 
-                        <td *ngIf="_isShownNavigationColumn" fd-table-cell>
-                            <i
-                                fd-table-icon
-                                [navigation]="true"
-                                class="fdp-table__navigation-indicator sap-icon--slim-arrow-left"
-                            ></i>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                            <td *ngIf="_isShownNavigationColumn" fd-table-cell>
+                                <i
+                                    fd-table-icon
+                                    [navigation]="true"
+                                    class="fdp-table__navigation-indicator sap-icon--slim-arrow-left"
+                                ></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </ng-template>
