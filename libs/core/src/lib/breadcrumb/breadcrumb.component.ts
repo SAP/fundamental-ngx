@@ -49,6 +49,10 @@ export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
     @Input()
     compact?: boolean;
 
+    /** Allow keyboard navigation through breadcrumb link */
+    @Input()
+    arrowNavigation = false;
+
     /** @hidden */
     @ContentChildren(forwardRef(() => BreadcrumbItemComponent))
     breadcrumbItems: QueryList<BreadcrumbItemComponent>;
