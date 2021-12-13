@@ -15,6 +15,7 @@
                     [attr.tabIndex]="monthCell.tabIndex"
                     [attr.id]="monthCell.id"
                     [attr.aria-selected]="monthCell.selected"
+                    [attr.aria-pressed]="monthCell.selected"
                     [attr.aria-disabled]="monthCell.disabled"
                     [attr.data-fd-calendar-month]="monthCell.month"
                     (keydown)="_onKeydownMonthHandler($event, monthCell.index)"
