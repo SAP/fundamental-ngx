@@ -91,15 +91,3 @@ export async function getWorkspaceProject(host: Tree, options: any): Promise<wor
     }
     return project;
 }
-
-// Returns the default project for the application
-export async function getDefaultProject(host: Tree, options: any): Promise<any> {
-    const workspaceHost = createHost(host);
-    const { workspace } = await workspaces.readWorkspace('/', workspaceHost);
-
-    if (!options.project) {
-        options.project = workspace.extensions.defaultProject;
-    }
-
-    return options.project;
-}
