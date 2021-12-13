@@ -40,7 +40,7 @@
                 />
             </fd-input-group>
         </fd-popover-control>
-        <fd-popover-body [attr.aria-expanded]="isOpen" [attr.aria-hidden]="!isOpen" [style.display]="'block'">
+        <fd-popover-body [attr.aria-expanded]="isOpen" [attr.aria-hidden]="!isOpen" style="display: block">
             <fd-form-message [embedded]="true" *ngIf="_message" [type]="state">
                 {{ _message }}
             </fd-form-message>

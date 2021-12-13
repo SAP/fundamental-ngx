@@ -7,7 +7,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
     encapsulation: ViewEncapsulation.None
 })
 export class PlatformMenuCascadeExampleComponent {
-    public item = '';
+    item = '';
 
     onItemSelect(item: string): void {
         this.item = item;

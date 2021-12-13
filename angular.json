@@ -37,7 +37,8 @@
                         "lintFilePatterns": ["libs/core/src/lib/**/*.ts", "libs/core/src/lib/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": []
         },
         "core-action-bar": {
             "projectType": "library",
@@ -76,7 +77,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-action-sheet": {
             "projectType": "library",
@@ -115,7 +117,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-alert": {
             "projectType": "library",
@@ -151,7 +154,8 @@
                         "lintFilePatterns": ["libs/core/src/lib/alert/**/*.ts", "libs/core/src/lib/alert/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-avatar": {
             "projectType": "library",
@@ -187,7 +191,8 @@
                         "lintFilePatterns": ["libs/core/src/lib/avatar/**/*.ts", "libs/core/src/lib/avatar/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-avatar-group": {
             "projectType": "library",
@@ -226,7 +231,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-bar": {
             "projectType": "library",
@@ -262,7 +268,8 @@
                         "lintFilePatterns": ["libs/core/src/lib/bar/**/*.ts", "libs/core/src/lib/bar/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-breadcrumb": {
             "projectType": "library",
@@ -301,7 +308,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-busy-indicator": {
             "projectType": "library",
@@ -340,7 +348,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-button": {
             "projectType": "library",
@@ -376,7 +385,8 @@
                         "lintFilePatterns": ["libs/core/src/lib/button/**/*.ts", "libs/core/src/lib/button/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-calendar": {
             "projectType": "library",
@@ -415,7 +425,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-card": {
             "projectType": "library",
@@ -451,7 +462,8 @@
                         "lintFilePatterns": ["libs/core/src/lib/card/**/*.ts", "libs/core/src/lib/card/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-carousel": {
             "projectType": "library",
@@ -490,7 +502,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-checkbox": {
             "projectType": "library",
@@ -529,7 +542,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-combobox": {
             "projectType": "library",
@@ -568,7 +582,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-date-picker": {
             "projectType": "library",
@@ -607,7 +622,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-datetime": {
             "projectType": "library",
@@ -646,7 +662,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-datetime-picker": {
             "projectType": "library",
@@ -685,7 +702,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-dialog": {
             "projectType": "library",
@@ -721,7 +739,8 @@
                         "lintFilePatterns": ["libs/core/src/lib/dialog/**/*.ts", "libs/core/src/lib/dialog/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-dynamic-page": {
             "projectType": "library",
@@ -760,7 +779,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-dynamic-side-content": {
             "projectType": "library",
@@ -799,7 +819,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-facets": {
             "projectType": "library",
@@ -835,7 +856,8 @@
                         "lintFilePatterns": ["libs/core/src/lib/facets/**/*.ts", "libs/core/src/lib/facets/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-feed-input": {
             "projectType": "library",
@@ -874,7 +896,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-feed-list-item": {
             "projectType": "library",
@@ -913,7 +936,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-file-uploader": {
             "projectType": "library",
@@ -952,7 +976,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-fixed-card-layout": {
             "projectType": "library",
@@ -991,7 +1016,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-flexible-column-layout": {
             "projectType": "library",
@@ -1030,7 +1056,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-form": {
             "projectType": "library",
@@ -1066,7 +1093,8 @@
                         "lintFilePatterns": ["libs/core/src/lib/form/**/*.ts", "libs/core/src/lib/form/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-formatted-text": {
             "projectType": "library",
@@ -1105,7 +1133,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-grid-list": {
             "projectType": "library",
@@ -1144,7 +1173,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-icon": {
             "projectType": "library",
@@ -1180,7 +1210,8 @@
                         "lintFilePatterns": ["libs/core/src/lib/icon/**/*.ts", "libs/core/src/lib/icon/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-illustrated-message": {
             "projectType": "library",
@@ -1219,7 +1250,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-infinite-scroll": {
             "projectType": "library",
@@ -1258,7 +1290,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-info-label": {
             "projectType": "library",
@@ -1297,7 +1330,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-inline-help": {
             "projectType": "library",
@@ -1336,7 +1370,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-input-group": {
             "projectType": "library",
@@ -1375,7 +1410,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-layout-grid": {
             "projectType": "library",
@@ -1414,7 +1450,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-layout-panel": {
             "projectType": "library",
@@ -1453,7 +1490,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-link": {
             "projectType": "library",
@@ -1489,7 +1527,8 @@
                         "lintFilePatterns": ["libs/core/src/lib/link/**/*.ts", "libs/core/src/lib/link/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-list": {
             "projectType": "library",
@@ -1525,7 +1564,8 @@
                         "lintFilePatterns": ["libs/core/src/lib/list/**/*.ts", "libs/core/src/lib/list/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-menu": {
             "projectType": "library",
@@ -1561,7 +1601,8 @@
                         "lintFilePatterns": ["libs/core/src/lib/menu/**/*.ts", "libs/core/src/lib/menu/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-message-box": {
             "projectType": "library",
@@ -1600,7 +1641,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-message-page": {
             "projectType": "library",
@@ -1639,7 +1681,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-message-strip": {
             "projectType": "library",
@@ -1678,7 +1721,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-message-toast": {
             "projectType": "library",
@@ -1717,7 +1761,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-micro-process-flow": {
             "projectType": "library",
@@ -1756,7 +1801,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-mobile-mode": {
             "projectType": "library",
@@ -1795,7 +1841,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-multi-input": {
             "projectType": "library",
@@ -1834,7 +1881,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-nested-list": {
             "projectType": "library",
@@ -1873,7 +1921,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-notification": {
             "projectType": "library",
@@ -1912,7 +1961,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-object-identifier": {
             "projectType": "library",
@@ -1951,7 +2001,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-object-marker": {
             "projectType": "library",
@@ -1990,7 +2041,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-object-number": {
             "projectType": "library",
@@ -2029,7 +2081,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-object-status": {
             "projectType": "library",
@@ -2068,7 +2121,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-pagination": {
             "projectType": "library",
@@ -2107,7 +2161,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-panel": {
             "projectType": "library",
@@ -2143,7 +2198,8 @@
                         "lintFilePatterns": ["libs/core/src/lib/panel/**/*.ts", "libs/core/src/lib/panel/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-popover": {
             "projectType": "library",
@@ -2179,7 +2235,8 @@
                         "lintFilePatterns": ["libs/core/src/lib/popover/**/*.ts", "libs/core/src/lib/popover/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-product-switch": {
             "projectType": "library",
@@ -2218,7 +2275,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-progress-indicator": {
             "projectType": "library",
@@ -2258,7 +2316,8 @@
                         "exclude": ["**/node_modules/**"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-quick-view": {
             "projectType": "library",
@@ -2297,7 +2356,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-radio": {
             "projectType": "library",
@@ -2333,7 +2393,8 @@
                         "lintFilePatterns": ["libs/core/src/lib/radio/**/*.ts", "libs/core/src/lib/radio/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-rating-indicator": {
             "projectType": "library",
@@ -2372,7 +2433,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-resizable-card-layout": {
             "projectType": "library",
@@ -2411,7 +2473,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-scroll-spy": {
             "projectType": "library",
@@ -2450,7 +2513,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-scrollbar": {
             "projectType": "library",
@@ -2489,7 +2553,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-segmented-button": {
             "projectType": "library",
@@ -2528,7 +2593,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-select": {
             "projectType": "library",
@@ -2564,7 +2630,8 @@
                         "lintFilePatterns": ["libs/core/src/lib/select/**/*.ts", "libs/core/src/lib/select/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-shared": {
             "projectType": "library",
@@ -2600,7 +2667,8 @@
                         "lintFilePatterns": ["libs/core/src/lib/shared/**/*.ts", "libs/core/src/lib/shared/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-shellbar": {
             "projectType": "library",
@@ -2639,7 +2707,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-side-navigation": {
             "projectType": "library",
@@ -2678,7 +2747,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-slider": {
             "projectType": "library",
@@ -2714,7 +2784,8 @@
                         "lintFilePatterns": ["libs/core/src/lib/slider/**/*.ts", "libs/core/src/lib/slider/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-split-button": {
             "projectType": "library",
@@ -2753,7 +2824,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-splitter": {
             "projectType": "library",
@@ -2792,7 +2864,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-status-indicator": {
             "projectType": "library",
@@ -2831,7 +2904,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-step-input": {
             "projectType": "library",
@@ -2870,7 +2944,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-switch": {
             "projectType": "library",
@@ -2906,7 +2981,8 @@
                         "lintFilePatterns": ["libs/core/src/lib/switch/**/*.ts", "libs/core/src/lib/switch/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-table": {
             "projectType": "library",
@@ -2942,7 +3018,8 @@
                         "lintFilePatterns": ["libs/core/src/lib/table/**/*.ts", "libs/core/src/lib/table/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-tabs": {
             "projectType": "library",
@@ -2978,7 +3055,8 @@
                         "lintFilePatterns": ["libs/core/src/lib/tabs/**/*.ts", "libs/core/src/lib/tabs/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-tests": {
             "projectType": "library",
@@ -3014,7 +3092,8 @@
                         "lintFilePatterns": ["libs/core/src/lib/tests/**/*.ts", "libs/core/src/lib/tests/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-text": {
             "projectType": "library",
@@ -3050,7 +3129,8 @@
                         "lintFilePatterns": ["libs/core/src/lib/text/**/*.ts", "libs/core/src/lib/text/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-tile": {
             "projectType": "library",
@@ -3086,7 +3166,8 @@
                         "lintFilePatterns": ["libs/core/src/lib/tile/**/*.ts", "libs/core/src/lib/tile/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-time": {
             "projectType": "library",
@@ -3122,7 +3203,8 @@
                         "lintFilePatterns": ["libs/core/src/lib/time/**/*.ts", "libs/core/src/lib/time/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-time-picker": {
             "projectType": "library",
@@ -3161,7 +3243,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-timeline": {
             "projectType": "library",
@@ -3200,7 +3283,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-title": {
             "projectType": "library",
@@ -3236,7 +3320,8 @@
                         "lintFilePatterns": ["libs/core/src/lib/title/**/*.ts", "libs/core/src/lib/title/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-token": {
             "projectType": "library",
@@ -3272,7 +3357,8 @@
                         "lintFilePatterns": ["libs/core/src/lib/token/**/*.ts", "libs/core/src/lib/token/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-toolbar": {
             "projectType": "library",
@@ -3308,7 +3394,8 @@
                         "lintFilePatterns": ["libs/core/src/lib/toolbar/**/*.ts", "libs/core/src/lib/toolbar/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-tree": {
             "projectType": "library",
@@ -3344,7 +3431,8 @@
                         "lintFilePatterns": ["libs/core/src/lib/tree/**/*.ts", "libs/core/src/lib/tree/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-upload-collection": {
             "projectType": "library",
@@ -3383,7 +3471,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-utils": {
             "projectType": "library",
@@ -3419,7 +3508,8 @@
                         "lintFilePatterns": ["libs/core/src/lib/utils/**/*.ts", "libs/core/src/lib/utils/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": []
         },
         "core-vertical-navigation": {
             "projectType": "library",
@@ -3458,7 +3548,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-wizard": {
             "projectType": "library",
@@ -3494,7 +3585,8 @@
                         "lintFilePatterns": ["libs/core/src/lib/wizard/**/*.ts", "libs/core/src/lib/wizard/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "docs": {
             "root": "apps/docs/",
@@ -3611,7 +3703,8 @@
                         }
                     },
                     "outputs": ["{options.outputPath}"],
-                    "defaultConfiguration": ""
+                    "defaultConfiguration": "",
+                    "dependsOn": []
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -3673,7 +3766,8 @@
                         "baseHref": ""
                     }
                 }
-            }
+            },
+            "tags": []
         },
         "docs-e2e": {
             "root": "apps/docs-e2e",
@@ -3698,7 +3792,9 @@
                         "lintFilePatterns": ["apps/docs-e2e/**/*.ts", "apps/docs-e2e/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": [],
+            "implicitDependencies": ["docs"]
         },
         "fn": {
             "projectType": "library",
@@ -3734,7 +3830,9 @@
                         "lintFilePatterns": ["libs/fn/src/lib/**/*.ts", "libs/fn/src/lib/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": [],
+            "implicitDependencies": ["core"]
         },
         "fn-button": {
             "projectType": "library",
@@ -3770,7 +3868,9 @@
                         "lintFilePatterns": ["libs/fn/src/lib/button/**/*.ts", "libs/fn/src/lib/button/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fn"],
+            "implicitDependencies": ["core"]
         },
         "fn-checkbox": {
             "projectType": "library",
@@ -3806,7 +3906,9 @@
                         "lintFilePatterns": ["libs/fn/src/lib/checkbox/**/*.ts", "libs/fn/src/lib/checkbox/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fn"],
+            "implicitDependencies": ["core"]
         },
         "fn-form": {
             "projectType": "library",
@@ -3842,7 +3944,9 @@
                         "lintFilePatterns": ["libs/fn/src/lib/form/**/*.ts", "libs/fn/src/lib/form/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fn"],
+            "implicitDependencies": ["core"]
         },
         "fn-radio": {
             "projectType": "library",
@@ -3878,7 +3982,9 @@
                         "lintFilePatterns": ["libs/fn/src/lib/radio/**/*.ts", "libs/fn/src/lib/radio/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fn"],
+            "implicitDependencies": ["core"]
         },
         "fn-search": {
             "projectType": "library",
@@ -3914,7 +4020,9 @@
                         "lintFilePatterns": ["libs/fn/src/lib/search/**/*.ts", "libs/fn/src/lib/search/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fn"],
+            "implicitDependencies": ["core"]
         },
         "fn-select": {
             "projectType": "library",
@@ -3950,7 +4058,9 @@
                         "lintFilePatterns": ["libs/fn/src/lib/select/**/*.ts", "libs/fn/src/lib/select/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fn"],
+            "implicitDependencies": ["core"]
         },
         "fn-slider": {
             "projectType": "library",
@@ -3986,7 +4096,9 @@
                         "lintFilePatterns": ["libs/fn/src/lib/slider/**/*.ts", "libs/fn/src/lib/slider/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fn"],
+            "implicitDependencies": ["core"]
         },
         "fn-switch": {
             "projectType": "library",
@@ -4022,7 +4134,9 @@
                         "lintFilePatterns": ["libs/fn/src/lib/switch/**/*.ts", "libs/fn/src/lib/switch/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fn"],
+            "implicitDependencies": ["core"]
         },
         "fn-tabs": {
             "projectType": "library",
@@ -4058,7 +4172,9 @@
                         "lintFilePatterns": ["libs/fn/src/lib/tabs/**/*.ts", "libs/fn/src/lib/tabs/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fn"],
+            "implicitDependencies": ["core"]
         },
         "fn-tag": {
             "projectType": "library",
@@ -4094,7 +4210,9 @@
                         "lintFilePatterns": ["libs/fn/src/lib/tag/**/*.ts", "libs/fn/src/lib/tag/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fn"],
+            "implicitDependencies": ["core"]
         },
         "moment-adapter": {
             "root": "libs/moment-adapter",
@@ -4135,7 +4253,9 @@
                 "@nrwl/schematics:component": {
                     "styleext": "scss"
                 }
-            }
+            },
+            "tags": ["fd"],
+            "implicitDependencies": ["core"]
         },
         "platform": {
             "projectType": "library",
@@ -4171,7 +4291,9 @@
                         "lintFilePatterns": ["libs/platform/src/lib/**/*.ts", "libs/platform/src/lib/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": [],
+            "implicitDependencies": ["core"]
         },
         "platform-action-bar": {
             "projectType": "library",
@@ -4210,7 +4332,9 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-action-button-group": {
             "projectType": "library",
@@ -4249,7 +4373,9 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-approval-flow": {
             "projectType": "library",
@@ -4288,7 +4414,9 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-button": {
             "projectType": "library",
@@ -4327,7 +4455,9 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-dynamic-page": {
             "projectType": "library",
@@ -4366,7 +4496,9 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-feed-input": {
             "projectType": "library",
@@ -4405,7 +4537,9 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-form": {
             "projectType": "library",
@@ -4444,7 +4578,9 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-icon-tab-bar": {
             "projectType": "library",
@@ -4483,7 +4619,9 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-info-label": {
             "projectType": "library",
@@ -4522,7 +4660,9 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-link": {
             "projectType": "library",
@@ -4561,7 +4701,9 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-list": {
             "projectType": "library",
@@ -4600,7 +4742,9 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-menu": {
             "projectType": "library",
@@ -4639,7 +4783,9 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-menu-button": {
             "projectType": "library",
@@ -4678,7 +4824,9 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-object-attribute": {
             "projectType": "library",
@@ -4717,7 +4865,9 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-object-marker": {
             "projectType": "library",
@@ -4756,7 +4906,9 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-object-status": {
             "projectType": "library",
@@ -4795,7 +4947,9 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-page-footer": {
             "projectType": "library",
@@ -4834,7 +4988,9 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-panel": {
             "projectType": "library",
@@ -4873,7 +5029,9 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-search-field": {
             "projectType": "library",
@@ -4912,7 +5070,9 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-shared": {
             "projectType": "library",
@@ -4951,7 +5111,9 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependecies": ["core"]
         },
         "platform-slider": {
             "projectType": "library",
@@ -4990,7 +5152,9 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-split-menu-button": {
             "projectType": "library",
@@ -5029,7 +5193,9 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-table": {
             "projectType": "library",
@@ -5068,7 +5234,9 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-thumbnail": {
             "projectType": "library",
@@ -5107,7 +5275,9 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-upload-collection": {
             "projectType": "library",
@@ -5146,7 +5316,9 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-value-help-dialog": {
             "projectType": "library",
@@ -5185,7 +5357,9 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-wizard-generator": {
             "projectType": "library",
@@ -5224,37 +5398,9 @@
                         ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         }
-    },
-    "defaultProject": "docs",
-    "schematics": {
-        "@schematics/angular:component": {
-            "prefix": "fd",
-            "style": "scss"
-        },
-        "@schematics/angular:directive": {
-            "prefix": "fd"
-        },
-        "@nrwl/angular:application": {
-            "unitTestRunner": "jest"
-        },
-        "@nrwl/angular:library": {
-            "unitTestRunner": "jest"
-        },
-        "@nrwl/angular:component": {
-            "style": "scss"
-        },
-        "@nrwl/angular": {
-            "convert-tslint-to-eslint": {
-                "ignoreExistingTslintConfig": false,
-                "removeTSLintIfNoMoreTSLintTargets": true,
-                "skipFormat": false
-            }
-        }
-    },
-    "cli": {
-        "defaultCollection": "@nrwl/angular",
-        "analytics": false
     }
 }

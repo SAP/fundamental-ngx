@@ -37,15 +37,14 @@
                 class="fd-calendar__item"
                 role="gridcell"
                 *ngFor="let cell of row; let cellIndex = index"
-                [ngClass]="{
-                    'is-active': cell.selectedFirst || cell.selectedLast || cell.selected,
-                    'fd-calendar__item--range':
-                        (cell.selectedRange || cell.hoverRange) && !cell.selectedFirst && !cell.selectedLast,
-                    'fd-calendar__item--current': cell.current,
-                    'fd-calendar__item--weekend': cell.weekend && markWeekends && cell.monthStatus === 'current',
-                    'fd-calendar__item--other-month': cell.monthStatus !== 'current',
-                    'is-disabled': cell.disabled
-                }"
+                [class.is-active]="cell.selectedFirst || cell.selectedLast || cell.selected"
+                [class.fd-calendar__item--range]="
+                    (cell.selectedRange || cell.hoverRange) && !cell.selectedFirst && !cell.selectedLast
+                "
+                [class.fd-calendar__item--current]="cell.current"
+                [class.fd-calendar__item--weekend]="cell.weekend && markWeekends && cell.monthStatus === 'current'"
+                [class.fd-calendar__item--other-month]="cell.monthStatus !== 'current'"
+                [class.is-disabled]="cell.disabled"
                 [class]="cell.specialNumber ? 'fd-calendar__special-day--' + cell.specialNumber : ''"
                 [attr.id]="cell.id"
                 [attr.aria-selected]="cell.selected"

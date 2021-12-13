@@ -1,4 +1,41 @@
 
+## 0.33.0-rc.214 (2021-12-11)
+
+## 0.33.0-rc.213 (2021-12-10)
+
+
+### Features
+
+* **core,platform:** migrate to latest nx and angular 13 ([#7210](https://github.com/SAP/fundamental-ngx/issues/7210)) ([2daa848](https://github.com/SAP/fundamental-ngx/commit/2daa848c836b6910dea203d84a4fe2f036926ba0))
+
+## 0.33.0-rc.212 (2021-12-10)
+
+
+### Features
+
+* **platform:** refactor dynamic page on top of core ([#7310](https://github.com/SAP/fundamental-ngx/issues/7310)) ([fdedcc6](https://github.com/SAP/fundamental-ngx/commit/fdedcc6ab8a797e8b89b6b52a20f7274e11df0cb))
+
+## 0.33.0-rc.211 (2021-12-10)
+
+
+### Bug Fixes
+
+* **core,platform:** fix unnecessary binding ([#7296](https://github.com/SAP/fundamental-ngx/issues/7296)) ([93806cb](https://github.com/SAP/fundamental-ngx/commit/93806cbc53c1c3c09be587fe52d719e143e1c41b))
+
+## 0.33.0-rc.210 (2021-12-09)
+
+
+### Bug Fixes
+
+* **platform:** menu, fix a11y issues ([#7269](https://github.com/SAP/fundamental-ngx/issues/7269)) ([8fcc928](https://github.com/SAP/fundamental-ngx/commit/8fcc928a3ae64f99e169f4e8f51fc20faa6b173b))
+
+## 0.33.0-rc.209 (2021-12-09)
+
+
+### Bug Fixes
+
+* **platform:** fix thumbnail responsive ([#7249](https://github.com/SAP/fundamental-ngx/issues/7249)) ([f3f834a](https://github.com/SAP/fundamental-ngx/commit/f3f834a5038a13088ca24705f0a70b55a5b446bb))
+
 ## 0.33.0-rc.208 (2021-12-09)
 
 

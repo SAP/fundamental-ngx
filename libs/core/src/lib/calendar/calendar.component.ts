@@ -31,22 +31,11 @@ import { CalendarMonthViewComponent } from './calendar-views/calendar-month-view
 import { CalendarHeaderComponent } from './calendar-header/calendar-header.component';
 import { CalendarService } from './calendar.service';
 import { createMissingDateImplementationError } from './calendar-errors';
-import {
-    CalendarAggregatedYearViewComponent
-    // Comment to fix max-line-length error
-} from './calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
+import { CalendarAggregatedYearViewComponent } from './calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
 import { FocusableCalendarView } from './models/common';
+import { FdCalendarView, DaysOfWeek, CalendarType } from './types';
 
 let calendarUniqueId = 0;
-
-/** Type of calendar */
-export type CalendarType = 'single' | 'range';
-
-/** Type for the calendar view */
-export type FdCalendarView = 'day' | 'month' | 'year' | 'aggregatedYear';
-
-/** Type for the days of the week. */
-export type DaysOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 
 /**
  * Months: 1 = January, 12 = december.

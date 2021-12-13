@@ -22,7 +22,7 @@ import { MenuItemComponent } from './menu-item.component';
 @Directive({
     selector: `[fdpMenuTriggerFor]`,
     host: {
-        'aria-haspopup': 'true',
+        'aria-haspopup': 'menu',
         '[attr.aria-expanded]': 'isMenuOpen || null',
         '[attr.aria-controls]': 'isMenuOpen ? menu.menuId : null'
     }

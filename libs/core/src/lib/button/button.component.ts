@@ -23,8 +23,8 @@ import { applyCssClass } from '@fundamental-ngx/core/utils';
  * ``` selector: button[fd-button], a[fd-button] ```
  *
  * ```html
- * <button fd-button [label]="'Button Text'"></button>
- * <a fd-button [label]="'Button Text'"></a>
+ * <button fd-button label="Button Text"></button>
+ * <a fd-button label="Button Text"></a>
  * ```
  */
 @Component({

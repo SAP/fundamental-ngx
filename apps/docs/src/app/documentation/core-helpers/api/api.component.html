@@ -11,12 +11,7 @@
     ></button>
 
     <fd-menu #menu [fillControlMode]="null" placement="bottom-start">
-        <li
-            fd-menu-item
-            *ngFor="let file of files"
-            [ngClass]="{ 'is-selected': file === activeFile }"
-            (click)="getFile(file)"
-        >
+        <li fd-menu-item *ngFor="let file of files" [class.is-selected]="file === activeFile" (click)="getFile(file)">
             <div fd-menu-interactive>
                 <span fd-menu-title>{{ file }}</span>
             </div>

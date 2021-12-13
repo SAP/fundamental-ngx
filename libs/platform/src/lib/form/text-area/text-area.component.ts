@@ -91,7 +91,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
      * the exceeded count is displayed.
      */
     @Input()
-    maxLength = 0;
+    maxLength: number;
 
     /**
      * Whether counter message should be shown.
@@ -159,7 +159,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     hasTextExceeded = false;
 
     /** @hidden excess character count */
-    exceededCharCount: number = this.maxLength ? this.maxLength : 0;
+    exceededCharCount = 0;
 
     /** @hidden a string placeholder that toggles between 'remaining' and 'excess' for the select ICU expression */
     counterExcessOrRemaining = 'remaining';
@@ -204,7 +204,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         }
         // if not custom set, set counter to max length value, else it calculates remaining/exceeded characters.
         if (!this.value) {
-            this.exceededCharCount = this.maxLength ? this.maxLength : 0;
+            this.exceededCharCount = this.maxLength || 0;
         } else {
             this.isValueCustomSet = true;
         }

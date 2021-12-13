@@ -1,6 +1,6 @@
 <ng-template #renderer>
     <div [horizontal]="true" fd-form-item class="fd-row">
-        <div class="fd-col" [ngClass]="_labelColumnLayoutClass">
+        <div class="fd-col" [class]="_labelColumnLayoutClass">
             <label
                 [id]="'fdp-form-label-' + id"
                 [required]="editable && required"
@@ -12,13 +12,13 @@
             </label>
         </div>
         <ng-container *ngTemplateOutlet="withFormMessage"></ng-container>
-        <div class="fd-col" [ngClass]="_gapColumnLayoutClass"></div>
+        <div class="fd-col" [class]="_gapColumnLayoutClass"></div>
     </div>
     <span aria-hidden="true" style="display: none" [id]="'fdp-form-hint-' + id">{{ hint }}</span>
 </ng-template>
 
 <ng-template #withFormMessage>
-    <fdp-input-message-group class="fd-col" [ngClass]="_fieldColumnLayoutClass">
+    <fdp-input-message-group class="fd-col" [class]="_fieldColumnLayoutClass">
         <!--
          Todo: we should extend this on FormGroup Level and have error trigger strategy that will be applied to
          all the field e.g.: [triggers]="['mouseenter', 'mouseleave']"

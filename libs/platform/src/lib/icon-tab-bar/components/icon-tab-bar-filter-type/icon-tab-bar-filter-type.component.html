@@ -47,7 +47,7 @@
             </div>
             <div class="fd-icon-tab-bar__label">{{ item.label }}</div>
             <div class="screenreader-only" *ngIf="item.color">
-                {{ (_colorAssociations && _colorAssociations[item.color]) || item.color }}
+                {{ (colorAssociations && colorAssociations[item.color]) || item.color }}
             </div>
         </a>
     </li>
@@ -62,6 +62,7 @@
         <fdp-icon-tab-bar-popover
             [isRtl]="isRtl"
             [extraTabs]="_extraTabs"
+            [colorAssociations]="colorAssociations"
             (selectedExtraItem)="_selectExtraItem($event)"
             (focusFirstVisibleItem)="_focusItem(0)"
             (focusLastVisibleItem)="_focusItem(_lastVisibleTabIndex)"

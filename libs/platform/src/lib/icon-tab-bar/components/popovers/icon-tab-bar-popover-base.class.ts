@@ -14,7 +14,6 @@ import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { KeyUtil } from '@fundamental-ngx/core';
 import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
-import { IconTabBarComponent } from '../../icon-tab-bar.component';
 import { TabColorAssociations } from '../../interfaces/tab-color-associations.interface';
 
 @Directive()
@@ -47,6 +46,13 @@ export abstract class IconTabBarPopoverBase implements OnChanges {
     isSeparators = false;
 
     /**
+     * @description Associations for colors of the tabs.
+     * If any of the color associations provided, they'll be read by screenreader instead of the actual color
+     */
+    @Input()
+    colorAssociations: TabColorAssociations;
+
+    /**
      * @description Emits when some tab is selected.
      */
     @Output()
@@ -67,12 +73,7 @@ export abstract class IconTabBarPopoverBase implements OnChanges {
     _isOpen = false;
 
     /** @hidden */
-    get _colorAssociations(): TabColorAssociations {
-        return this._tabBar.colorAssociations;
-    }
-
-    /** @hidden */
-    constructor(protected _cd: ChangeDetectorRef, protected _tabBar: IconTabBarComponent) {}
+    constructor(protected _cd: ChangeDetectorRef) {}
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {

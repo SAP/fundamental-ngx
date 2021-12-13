@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    OnInit,
+    Pipe,
+    PipeTransform,
+    ViewEncapsulation
+} from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { DialogRef } from '@fundamental-ngx/core/dialog';
@@ -178,4 +186,12 @@ export class P13SortingDialogComponent implements Resettable, OnInit {
 
     /** @hidden */
     private _isRuleValid = (rule: ValidatedSortRule): boolean => rule?.isValid;
+}
+
+@Pipe({ name: 'getAvailableSortColumns', pure: false })
+export class GetAvailableSortColumnsPipe implements PipeTransform {
+    transform(columns: SortDialogColumn[], rules: SortRule[], currentKey: string): SortDialogColumn[] {
+        const usedKeys = new Set(rules.map((r) => r.columnKey));
+        return columns.filter((c) => !usedKeys.has(c.key) || currentKey === c.key);
+    }
 }

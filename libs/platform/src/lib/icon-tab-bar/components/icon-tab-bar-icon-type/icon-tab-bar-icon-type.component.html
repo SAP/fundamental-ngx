@@ -36,7 +36,7 @@
                 <span class="fd-icon-tab-bar__label">{{ item.label }}</span>
             </div>
             <div class="screenreader-only" *ngIf="item.color">
-                {{ (_colorAssociations && _colorAssociations[item.color]) || item.color }}
+                {{ (colorAssociations && colorAssociations[item.color]) || item.color }}
             </div>
         </a>
     </li>
@@ -52,6 +52,7 @@
             [showItemLabel]="showLabel"
             [isRtl]="isRtl"
             [extraTabs]="_extraTabs"
+            [colorAssociations]="colorAssociations"
             (selectedExtraItem)="_selectExtraItem($event)"
             (focusFirstVisibleItem)="_focusItem(0)"
             (focusLastVisibleItem)="_focusItem(_lastVisibleTabIndex)"

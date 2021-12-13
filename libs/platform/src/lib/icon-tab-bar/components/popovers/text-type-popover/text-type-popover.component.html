@@ -79,7 +79,7 @@
                     >({{ item.counter }})
                 </span>
                 <div class="screenreader-only" *ngIf="item.color">
-                    {{ (_colorAssociations && _colorAssociations[item.color]) || item.color }}
+                    {{ (colorAssociations && colorAssociations[item.color]) || item.color }}
                 </div>
             </a>
         </li>

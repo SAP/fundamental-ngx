@@ -10,10 +10,8 @@
                     class="fd-calendar__item"
                     role="gridcell"
                     *ngFor="let yearCell of colYears; let colIndex = index"
-                    [ngClass]="{
-                        'fd-calendar__item--current': yearCell.current,
-                        'is-active': yearCell.selected
-                    }"
+                    [class.fd-calendar__item--current]="yearCell.current"
+                    [class.is-active]="yearCell.selected"
                     [attr.id]="yearCell.id"
                     [attr.tabindex]="yearCell.tabIndex"
                     [attr.aria-selected]="yearCell.selected"
