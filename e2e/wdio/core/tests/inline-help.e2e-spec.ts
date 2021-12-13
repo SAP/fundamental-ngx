@@ -1,4 +1,5 @@
 import {
+    browserIsSafari,
     click,
     getAttributeByName,
     getElementArrayLength,
@@ -54,10 +55,14 @@ describe('Inline help test suite', () => {
         scrollIntoView(exampleAreaContainersArr, 1);
         click(inlineHelpButton);
         waitForPresent(popover);
-        expect(getText(popover)).toBe(defaultMessage);
+        expect(getText(popover).trim()).toBe(defaultMessage);
     });
 
     it('Verify styled inline help icon', () => {
+        // skipped due to hoverElement does not work in Safari
+        if (browserIsSafari()) {
+            return;
+        }
         scrollIntoView(exampleAreaContainersArr, 2);
         mouseHoverElement(inlineHelpStyledIcon);
         waitForPresent(popover);
@@ -66,6 +71,10 @@ describe('Inline help test suite', () => {
     });
 
     it('Verify template inline help example', () => {
+        // skipped due to hoverElement does not work in Safari
+        if (browserIsSafari()) {
+            return;
+        }
         scrollIntoView(exampleAreaContainersArr, 3);
         mouseHoverElement(inlineHelpTemplateExample);
         waitForPresent(popover);
@@ -74,6 +83,10 @@ describe('Inline help test suite', () => {
 
     // skipped due to https://github.com/SAP/fundamental-ngx/issues/6398
     xit('should check that inline help by hover does not work in other way after clicking button', () => {
+        // skipped due to hoverElement does not work in Safari
+        if (browserIsSafari()) {
+            return;
+        }
         scrollIntoView(inlineHelpIcons, 2);
         mouseHoverElement(inlineHelpIcons, 2);
         expect(isElementDisplayed(inlineHelp)).toBe(true);

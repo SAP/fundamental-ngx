@@ -11,7 +11,8 @@ import {
     getText,
     getTextArr,
     refreshPage,
-    sendKeys
+    sendKeys,
+    browserIsSafari
 } from '../../driver/wdio';
 import { emptyValuesArr } from '../fixtures/appData/menu-contents';
 
@@ -109,6 +110,10 @@ describe('Menu test suite', () => {
     });
 
     it('should show active path on the "menu with submenu"', () => {
+        // skip due to hoverElemenet does not work in Safari
+        if (browserIsSafari()) {
+            return;
+        }
         click(btnWithSubmenu);
         let menuItemsArrLength = getElementArrayLength(submenuItems);
         for (let i = 0; i < menuItemsArrLength; i++) {

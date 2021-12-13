@@ -8,7 +8,8 @@ import {
     scrollIntoView,
     waitForInvisibilityOf,
     getElementLocation,
-    waitForPresent
+    waitForPresent,
+    waitForElDisplayed
 } from '../../driver/wdio';
 
 describe('Fixed card layout test suite', () => {
@@ -34,7 +35,8 @@ describe('Fixed card layout test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(pageHeader);
+        waitForPresent(fxdCardLayoutPage.root);
+        waitForElDisplayed(fxdCardLayoutPage.title);
     }, 1);
 
     describe('main checks', () => {

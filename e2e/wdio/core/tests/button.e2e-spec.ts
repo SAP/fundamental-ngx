@@ -106,7 +106,7 @@ describe('Button test suite:', () => {
         it('verify changing text in label', () => {
             scrollIntoView(inputLabel);
             setValue(inputLabel, 'test');
-            expect(getText(playgroundButtonText)).toEqual(testText);
+            expect(getText(playgroundButtonText).trim()).toEqual(testText);
         });
 
         it('verify type of dropdown menu', () => {

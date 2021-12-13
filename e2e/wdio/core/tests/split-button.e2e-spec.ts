@@ -57,7 +57,7 @@ describe('Split-button test suite', () => {
             const menuItemValue = getText(splitMenuItem, i);
             click(splitMenuItem, i);
             acceptAlert();
-            const mainButtonValue = getText(mainBtn);
+            const mainButtonValue = getText(mainBtn).trim();
             expect(mainButtonValue).toEqual(menuItemValue, 'value on main button is not equal chosen value');
         }
     });

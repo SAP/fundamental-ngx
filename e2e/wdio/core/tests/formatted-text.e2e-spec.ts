@@ -1,5 +1,5 @@
 import { FormattedTextPo } from '../pages/formatted-text.po';
-import { browserIsFirefox, getAlertText, refreshPage, waitForElDisplayed } from '../../driver/wdio';
+import { browserIsFirefox, browserIsSafari, getAlertText, refreshPage, waitForElDisplayed } from '../../driver/wdio';
 
 describe('Formatted text component', () => {
     const formattedTextPage = new FormattedTextPo();
@@ -18,8 +18,8 @@ describe('Formatted text component', () => {
         try {
             getAlertText();
         } catch (e) {
-            if (browserIsFirefox()) {
-                // FF driver trows incorrect error for missing alert
+            if (browserIsFirefox() || browserIsSafari()) {
+                // Safari and FF driver trows incorrect error for missing alert
                 expect(e.message).toContain('unknown error');
                 return;
             }

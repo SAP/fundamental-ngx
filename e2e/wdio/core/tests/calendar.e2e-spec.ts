@@ -78,6 +78,7 @@ describe('calendar test suite', () => {
 
     afterEach(() => {
         refreshPage();
+        waitForElDisplayed(calendarPage.title);
     }, 1);
 
     describe('standard calendar example', () => {

@@ -8,7 +8,8 @@ import {
     clickAndMoveElement,
     getElementSize,
     waitForPresent,
-    browserIsFirefox
+    browserIsFirefox,
+    browserIsSafari
 } from '../../driver/wdio';
 
 describe('Standard List test suite', () => {
@@ -32,8 +33,8 @@ describe('Standard List test suite', () => {
         });
 
         it('should check resizing vertical nested sections', () => {
-            // FF skipped due to dragAndDrop does not work there
-            if (browserIsFirefox()) {
+            // FF and Safari skipped due to dragAndDrop does not work there
+            if (browserIsFirefox() || browserIsSafari()) {
                 return;
             }
             scrollIntoView(basicExample + splitterSection);
@@ -74,8 +75,8 @@ describe('Standard List test suite', () => {
     });
 
     function checkHorizontalResize(section: string): void {
-        // FF skipped due to dragAndDrop does not work there
-        if (browserIsFirefox()) {
+        // FF and Safari skipped due to dragAndDrop does not work there
+        if (browserIsFirefox() || browserIsSafari()) {
             return;
         }
         scrollIntoView(section + splitterSection);

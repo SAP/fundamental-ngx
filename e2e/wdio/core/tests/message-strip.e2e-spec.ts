@@ -93,7 +93,7 @@ describe('Message-strip test suite', () => {
         it('should check changing message in message-strip', () => {
             const defaultMessage = getText(messageStripMessage);
             setValue(messageInput, customMessage);
-            expect(getText(messageStripMessage)).toEqual(customMessage);
+            expect(getText(messageStripMessage).trim()).toEqual(customMessage);
             click(resetButton);
             expect(getText(messageStripMessage)).toEqual(defaultMessage);
         });

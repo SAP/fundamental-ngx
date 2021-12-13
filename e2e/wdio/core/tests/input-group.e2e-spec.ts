@@ -13,7 +13,9 @@ import {
     isEnabled,
     refreshPage,
     scrollIntoView,
-    setValue
+    setValue,
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 import { smallTestText, testText } from '../fixtures/appData/input-group-contents';
 
@@ -38,6 +40,8 @@ describe('Input group component test', () => {
 
     afterEach(() => {
         refreshPage();
+        waitForPresent(inputGroupPage.root);
+        waitForElDisplayed(inputGroupPage.title);
     }, 2);
 
     describe('Check all placeholders', () => {

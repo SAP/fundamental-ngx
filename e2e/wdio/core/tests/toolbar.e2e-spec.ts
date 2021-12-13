@@ -112,7 +112,7 @@ describe('Toolbar test suite', () => {
             const optionLength = getElementArrayLength(dropdownOption);
             for (let i = 0; i < optionLength; i++) {
                 click(dropdownOption, i);
-                expect(getText(inputFieldText)).toBe(fruitArr[i]);
+                expect(getText(inputFieldText).trim()).toBe(fruitArr[i]);
                 if (i !== 3) {
                     click(dropdownMenu);
                 }

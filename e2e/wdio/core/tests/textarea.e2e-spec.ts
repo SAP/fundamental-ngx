@@ -15,7 +15,8 @@ import {
     click,
     sendKeys,
     waitForPresent,
-    getElementSize
+    getElementSize,
+    browserIsSafari
 } from '../../driver/wdio';
 
 import { formMessageTestText, sections, states, styleArr } from '../fixtures/appData/textarea-contents';
@@ -72,6 +73,10 @@ describe('Textarea component test', () => {
     });
 
     it('should check inline help in inline help example', () => {
+        // skip due to hoverElement does not work in Safari
+        if (browserIsSafari()) {
+            return;
+        }
         scrollIntoView(helpIcon);
         mouseHoverElement(helpIcon);
         expect(isElementDisplayed(helpContent)).toBe(true);

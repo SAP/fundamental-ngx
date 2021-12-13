@@ -27,17 +27,17 @@ describe('Text component test', () => {
 
     describe('Check links More/Less', () => {
         it('should be clickable and display MORE/LESS text', () => {
-            expect(getText(linksExpandable)).toContain(testTextMore);
+            expect(getText(linksExpandable).toUpperCase()).toContain(testTextMore);
             click(linksExpandable);
-            expect(getText(linksExpandable)).toContain(testTextLess);
+            expect(getText(linksExpandable).toUpperCase()).toContain(testTextLess);
 
-            expect(getText(linksExpandable, 1)).toContain(testTextLess);
+            expect(getText(linksExpandable, 1).toUpperCase()).toContain(testTextLess);
             click(linksExpandable, 1);
-            expect(getText(linksExpandable, 1)).toContain(testTextMore);
+            expect(getText(linksExpandable, 1).toUpperCase()).toContain(testTextMore);
 
-            expect(getText(linksExpandable, 2)).toContain(testTextMoreLabel);
+            expect(getText(linksExpandable, 2).toUpperCase()).toContain(testTextMoreLabel);
             click(linksExpandable, 2);
-            expect(getText(linksExpandable, 2)).toContain(testTextLessLabel);
+            expect(getText(linksExpandable, 2).toUpperCase()).toContain(testTextLessLabel);
         });
     });
 

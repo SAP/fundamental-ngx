@@ -1,5 +1,6 @@
 import {
     addValue,
+    browserIsSafari,
     clearValue,
     click,
     getElementArrayLength,
@@ -93,12 +94,12 @@ describe('Input should ', () => {
 
     it('have associated label element to describe its purpose', () => {
         for (let i = 0; inputsArr.length > i; i++) {
-            expect(getPreviousElementText(inputsArr[i])).toBe(labelsArray[i]);
+            expect(getPreviousElementText(inputsArr[i]).trim()).toBe(labelsArray[i]);
         }
-        expect(getText(validInputLabel)).toBe(validInputLabelText);
-        expect(getText(invalidInputLabel)).toBe(invalidInputLabelText);
-        expect(getText(warningInputLabel)).toBe(warningInputLabelText);
-        expect(getText(informationInputLabel)).toBe(informationInputLabelText);
+        expect(getText(validInputLabel).trim()).toBe(validInputLabelText);
+        expect(getText(invalidInputLabel).trim()).toBe(invalidInputLabelText);
+        expect(getText(warningInputLabel).trim()).toBe(warningInputLabelText);
+        expect(getText(informationInputLabel).trim()).toBe(informationInputLabelText);
     });
 
     it('by default accept all kinds of input values – alphabet, numerical, special characters', () => {
@@ -146,17 +147,17 @@ describe('Input should ', () => {
 
     it('should have message attached to the input', () => {
         click(validInput);
-        expect(getText(formMessagePopover)).toBe(inputMessageText);
+        expect(getText(formMessagePopover).trim()).toBe(inputMessageText);
 
         scrollIntoView(invalidInput);
         mouseHoverElement(invalidInput);
-        expect(getText(formMessagePopover)).toBe(inputMessageText);
+        expect(getText(formMessagePopover).trim()).toBe(inputMessageText);
 
         click(warningInput);
-        expect(getText(formMessagePopover)).toBe(inputMessageText);
+        expect(getText(formMessagePopover).trim()).toBe(inputMessageText);
 
         click(informationInput);
-        expect(getText(formMessagePopover)).toBe(inputMessageText);
+        expect(getText(formMessagePopover).trim()).toBe(inputMessageText);
     });
 
     it('should add to more input fields by click Add btn', () => {
@@ -177,14 +178,18 @@ describe('Input should ', () => {
         scrollIntoView(questionMark);
         click(questionMark);
         expect(isElementDisplayed(popoverHelp)).toBe(true, 'popover not displayed');
-        expect(getText(popoverHelp)).toBe(testText);
+        expect(getText(popoverHelp).trim()).toBe(testText);
 
         click(questionMark, 1);
         expect(isElementDisplayed(popoverHelp)).toBe(true, 'popover not displayed');
-        expect(getText(popoverHelp)).toBe(testText);
+        expect(getText(popoverHelp).trim()).toBe(testText);
     });
 
     it('should check displayed popover by hover question mark', () => {
+        // skipped due to hoverElement does not work in Safari
+        if (browserIsSafari) {
+            return;
+        }
         scrollIntoView(questionMark);
         mouseHoverElement(questionMark);
         expect(isElementDisplayed(popoverHelp)).toBe(true, 'popover not displayed');
