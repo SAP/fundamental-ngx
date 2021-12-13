@@ -37,6 +37,17 @@ export function hasPackage(tree: Tree, name: string): boolean | null {
     return packageJson.dependencies && packageJson.dependencies[name];
 }
 
+// Check if a package exists in the package.json
+export function hasDevPackage(tree: Tree, name: string): boolean | null {
+    if (!tree.exists('package.json')) {
+        return null;
+    }
+
+    const packageJson = JSON.parse(tree.read('package.json')!.toString('utf-8'));
+
+    return packageJson.devDependencies && packageJson.devDependencies[name];
+}
+
 // Returns the source path for the application
 export async function getSourceTreePath(host: Tree, options: any): Promise<string> {
     const project = await getWorkspaceProject(host, options);

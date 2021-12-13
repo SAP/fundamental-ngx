@@ -1,7 +1,7 @@
 import { chain, externalSchematic, noop, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 import { addPackageJsonDependency, NodeDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
-import { getPackageVersionFromPackageJson, hasPackage } from '../utils/package-utils';
+import { getPackageVersionFromPackageJson, hasDevPackage, hasPackage } from '../utils/package-utils';
 
 import { readTranslationFiles } from '../utils/translation-utils';
 import { Schema } from './schema';
@@ -19,7 +19,7 @@ import { Schema } from './schema';
 export function ngAdd(options: Schema): Rule {
     return (tree: Tree) => {
         const coreInstalled = hasPackage(tree, '@fundamental-ngx/core');
-        const localizeInstalled = hasPackage(tree, '@angular/localize');
+        const localizeInstalled = hasDevPackage(tree, '@angular/localize');
 
         return chain([
             addDependencies(),
@@ -71,9 +71,9 @@ function addDependencies(): Rule {
             });
         }
 
-        if (!hasPackage(tree, '@angular/localize')) {
+        if (!hasDevPackage(tree, '@angular/localize')) {
             dependencies.push({
-                type: NodeDependencyType.Default,
+                type: NodeDependencyType.Dev,
                 version: `${ngCoreVersionTag}`,
                 name: '@angular/localize'
             });
