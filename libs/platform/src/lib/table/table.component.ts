@@ -1816,7 +1816,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         });
 
         this._onTableRowsChanged();
-        this._tableService.clearFocusableTableCells();
     }
 
     /** @hidden */
