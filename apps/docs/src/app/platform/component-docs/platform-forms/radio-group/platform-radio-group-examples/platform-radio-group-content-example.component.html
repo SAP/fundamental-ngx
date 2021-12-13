@@ -50,7 +50,7 @@
 <p>Radio group with disabled button and validation error</p>
 <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
     <fdp-form-group [formGroup]="form4">
-        <fdp-form-field #ffl4 id="radioc4" rank="1" required="true" label="select your favorite month">
+        <fdp-form-field #ffl4 id="radioc4" rank="1" [required]="true" label="select your favorite month">
             <fdp-radio-group
                 name="radioc4"
                 contentDensity="compact"
@@ -93,7 +93,7 @@
             [isInline]="false"
             formControlName="month"
         >
-            <fdp-radio-button value="january" disabled="true">January</fdp-radio-button>
+            <fdp-radio-button value="january" [disabled]="true">January</fdp-radio-button>
             <fdp-radio-button value="february">February</fdp-radio-button>
             <fdp-radio-button value="march">March</fdp-radio-button>
             <fdp-radio-button value="april">April</fdp-radio-button>
@@ -134,7 +134,7 @@
 <fdp-form-group>
     <fdp-form-field id="radioc8" rank="1">
         <fdp-radio-group name="radioc8" contentDensity="compact" [isInline]="false" [(ngModel)]="favoriteMonth">
-            <fdp-radio-button value="january" disabled="true">January</fdp-radio-button>
+            <fdp-radio-button value="january" [disabled]="true">January</fdp-radio-button>
             <fdp-radio-button value="february">February</fdp-radio-button>
             <fdp-radio-button value="march">March</fdp-radio-button>
             <fdp-radio-button value="april">April</fdp-radio-button>
