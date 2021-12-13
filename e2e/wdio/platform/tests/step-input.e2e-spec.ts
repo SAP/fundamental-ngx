@@ -11,7 +11,8 @@ import {
     setValue,
     waitForElDisplayed,
     waitForPresent,
-    clickRightMouseBtn
+    clickRightMouseBtn,
+    browserIsSafari
 } from '../../driver/wdio';
 import { StepInputPo } from '../pages/step-input.po';
 import {
@@ -137,6 +138,9 @@ describe('Step input test suite', () => {
     });
 
     it('Verify the value in the field becomes 0 or the minimum if the minimum is larger than 0.', () => {
+        if (browserIsSafari()) {
+            return;
+        }
         const arr = getElementArrayLength(activeInput);
 
         for (let i = 0; i < arr; i++) {

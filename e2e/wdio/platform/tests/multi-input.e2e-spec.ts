@@ -70,8 +70,6 @@ describe('Multi input test suite', () => {
                 multiInputPage.selectOption(optionsArr[1]);
                 expect(getText(filledInput, i)).toContain(optionsArr[0]);
                 expect(getText(filledInput, i)).toContain(optionsArr[1]);
-                expect(getText(filledInput, i).split('\n')[0]).toBe(optionsArr[0]);
-                expect(getText(filledInput, i).split('\n')[1]).toBe(optionsArr[1]);
             }
             if (i === mobileExample) {
                 multiInputPage.expandDropdown(activeDropdownButtons, i);
@@ -81,8 +79,6 @@ describe('Multi input test suite', () => {
                 click(approveButton);
                 expect(getText(filledInput, i)).toContain(optionsArr[0]);
                 expect(getText(filledInput, i)).toContain(optionsArr[1]);
-                expect(getText(filledInput, i).split('\n')[0]).toBe(optionsArr[0]);
-                expect(getText(filledInput, i).split('\n')[1]).toBe(optionsArr[1]);
             }
         }
     });

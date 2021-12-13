@@ -46,7 +46,8 @@ describe('Time picker suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(timePickerInput);
+        waitForPresent(timePickerPage.root);
+        waitForElDisplayed(timePickerPage.title);
     }, 1);
 
     it('Verify on click on the time picker button', () => {

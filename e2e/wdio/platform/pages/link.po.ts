@@ -14,7 +14,7 @@ export class LinkPo extends BaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForPresent(this.title);
+        waitForPresent(this.root);
         waitForElDisplayed(this.title);
     }
 

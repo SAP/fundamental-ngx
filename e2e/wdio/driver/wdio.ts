@@ -50,7 +50,7 @@ export function browserIsIE(): boolean {
 }
 
 export function browserIsSafari(): boolean {
-    return isBrowser('Safari');
+    return isBrowser('Safari') || isBrowser('safari');
 }
 
 export function browserIsSafariorFF(): boolean {

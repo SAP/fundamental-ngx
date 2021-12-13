@@ -19,7 +19,7 @@ import {
 } from '../fixtures/testData/textarea';
 import {
     addValue,
-    browserIsIEorSafari,
+    browserIsSafari,
     clearValue,
     click,
     currentPlatformName,
@@ -75,17 +75,13 @@ describe('Verify Textarea component', () => {
 
     beforeAll(() => {
         textareaPage.open();
-        waitForPresent(readOnlyTextAreaLabel);
     }, 1);
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(readOnlyTextAreaLabel);
+        waitForPresent(textareaPage.title);
     }, 1);
 
-    if (browserIsIEorSafari()) {
-        console.log('Skip for IE and Safari');
-    }
     describe('has Textarea and', () => {
         it('should allow the user to enter multiple lines of text', () => {
             setValue(basicTextArea, multiple_lines_text);
@@ -250,6 +246,9 @@ describe('Verify Textarea component', () => {
         });
 
         it('should grow if growing option is enabled (growing up to 80px)', () => {
+            if (browserIsSafari()) {
+                return;
+            }
             clearValue(growingHeightTextarea);
             const textareaSize1 = getElementSize(growingHeightTextarea);
             setValue(growingHeightTextarea, multiple_lines_text_8_lines);

@@ -29,7 +29,8 @@ export class InputPo extends BaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForPresent(this.defaultInput);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
     getScreenshotFolder(): Record<string, any> {
