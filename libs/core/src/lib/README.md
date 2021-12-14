@@ -19,7 +19,6 @@
 -   [7. Contributing](#7)
 -   [8. License](https://github.com/SAP/fundamental-ngx/blob/main/LICENSE.txt)
 -   [9. Similar Projects](#8)
--   [10. Using Jest in the host application](#9)
 
 ## <a name="1"></a>1. Description
 
@@ -126,21 +125,3 @@ Check out the [NEW_COMPONENT.md](https://github.com/SAP/fundamental-ngx/blob/mai
 ## <a name="9"></a>8. Similar Projects
 
 [Fundamental-react](https://github.com/SAP/fundamental-react) - React implementation of Fundamental Library Styles
-
-## <a name="10"></a>9. Using Jest in the host application
-
-If you're using Jest with [`jest-preset-angular`](https://www.npmjs.com/package/jest-preset-angular) you may see the following errors:
-
-```bash
-Unexpected value 'FundamentalNgxCoreModule' imported by the module 'DynamicTestModule'. Please add an @NgModule annotation.
-```
-
-This is happens because we publish library compiled with Template Engine (not Ivy) and NGCC doesn't compile it correctly because of settings in the preset.
-
-To fix such errors please add this to your `package.json` and reinstall npm packages.
-
-```json
-"postinstall-ivy": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
-"postinstall-ivy-umd": "ngcc --properties main --create-ivy-entry-points",
-"postinstall": "npm run postinstall-ivy && npm run postinstall-ivy-umd"
-```
