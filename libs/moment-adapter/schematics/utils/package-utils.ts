@@ -1,5 +1,4 @@
 import { Tree, SchematicsException } from '@angular-devkit/schematics';
-
 import * as ts from 'typescript';
 
 // Gets the ts source file from a path
