@@ -147,7 +147,7 @@ describe('Upload collection test suite', () => {
         click(selector + tableItem);
         click(selector + checkbox, 1);
         click(selector + ghostButton);
-        pause(300);
+        pause(1000);
         const folderName = getText(listItemTitle, 1);
         click(listItem, 1);
         click(moveButton);
