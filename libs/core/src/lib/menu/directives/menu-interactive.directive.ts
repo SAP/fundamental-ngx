@@ -18,16 +18,15 @@ export class MenuInteractiveDirective {
 
     /** @hidden */
     @HostBinding('attr.aria-controls')
-    ariaControls: string = null;
+    submenuId: string = null;
 
     /** @hidden */
     @HostBinding('class.is-selected')
-    @HostBinding('attr.aria-expanded')
     selected = false;
 
     /** @hidden */
     @HostBinding('attr.aria-haspopup')
-    ariaHaspopup = false;
+    ariaHaspopup: string = null;
 
     /** @hidden */
     @HostBinding('class.fd-menu__link')
@@ -37,11 +36,14 @@ export class MenuInteractiveDirective {
     _fromSplitButton = false;
 
     /** @hidden */
+    private _hasSubmenu = false;
+
+    /** @hidden */
     constructor(public elementRef: ElementRef) {}
 
     /** @hidden */
     setSelected(isSelected: boolean): void {
-        this.selected = isSelected && (this.ariaHaspopup || this._fromSplitButton);
+        this.selected = isSelected && (this._hasSubmenu || this._fromSplitButton);
     }
 
     /** @hidden */
@@ -52,7 +54,8 @@ export class MenuInteractiveDirective {
 
     /** @hidden */
     setSubmenu(hasSubmenu: boolean, itemId?: string): void {
-        this.ariaHaspopup = hasSubmenu;
-        this.ariaControls = hasSubmenu ? itemId || this.ariaControls : null;
+        this._hasSubmenu = hasSubmenu;
+        this.ariaHaspopup = hasSubmenu ? 'menu' : null;
+        this.submenuId = hasSubmenu ? itemId || this.submenuId : null;
     }
 }

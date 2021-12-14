@@ -1,4 +1,13 @@
-import { ElementRef, Injectable, Injector, Optional, Renderer2, TemplateRef, ViewContainerRef } from '@angular/core';
+import {
+    ElementRef,
+    Injectable,
+    Injector,
+    OnDestroy,
+    Optional,
+    Renderer2,
+    TemplateRef,
+    ViewContainerRef
+} from '@angular/core';
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 import {
     ConnectedPosition,
@@ -27,7 +36,7 @@ export interface PopoverTemplate {
 }
 
 @Injectable()
-export class PopoverService extends BasePopoverClass {
+export class PopoverService extends BasePopoverClass implements OnDestroy {
     /** String content displayed inside popover body */
     stringContent: string;
 
@@ -188,9 +197,10 @@ export class PopoverService extends BasePopoverClass {
     }
 
     /** Equivalent for ngOnDestroy method, whether component is destroyed, this method should be called */
-    onDestroy(): void {
+    ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
+        this._placementRefresh$.complete();
         this._removeTriggerListeners();
         if (this._overlayRef) {
             this._overlayRef.detach();

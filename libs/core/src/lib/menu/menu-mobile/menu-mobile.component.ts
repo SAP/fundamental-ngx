@@ -33,7 +33,8 @@ import {
 })
 export class MenuMobileComponent extends MobileModeBase<MenuInterface> implements OnInit, OnDestroy {
     /** @hidden */
-    @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
+    @ViewChild('dialogTemplate')
+    dialogTemplate: TemplateRef<any>;
 
     /** Current menu title */
     title: string;
@@ -50,13 +51,22 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
     /** @hidden Navigation icon name based on RTL */
     navigationIcon$: Observable<string>;
 
+    /**
+     * Compact mode
+     * @hidden
+     */
+    get compact(): boolean {
+        return this.menuComponent.compact;
+    }
+
+    /** @hidden */
     constructor(
         elementRef: ElementRef,
         dialogService: DialogService,
         private _menuService: MenuService,
         private _changeDetectorRef: ChangeDetectorRef,
         @Optional() private _rtlService: RtlService,
-        @Inject(MENU_COMPONENT) menuComponent: MenuInterface,
+        @Inject(MENU_COMPONENT) readonly menuComponent: MenuInterface,
         @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeConfigToken[]
     ) {
         super(elementRef, dialogService, menuComponent, MobileModeControl.MENU, mobileModes);
@@ -82,10 +92,7 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
 
     /** Navigate back to parent level of submenu */
     backToParentLevel(): void {
-        this._menuService.setActive(
-            false,
-            this._menuService.activeNodePath[this._menuService.activeNodePath.length - 1].item
-        );
+        this._menuService.goBackToParentMenuItem();
     }
 
     /** @hidden Opens the Dialog */

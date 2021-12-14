@@ -178,7 +178,6 @@ export class PopoverComponent
     ngOnDestroy(): void {
         this._destroyMobileComponent();
         this._destroyEventListeners();
-        this._popoverService.onDestroy();
     }
 
     /** @hidden */
@@ -280,8 +279,6 @@ export class PopoverComponent
             this._viewContainerRef,
             injector
         );
-
-        console.log(111111, this._mobileModeComponentRef);
 
         this._listenOnTriggerRefClicks();
     }

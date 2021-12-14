@@ -16,13 +16,12 @@ describe('MenuLinkDirective', () => {
     });
 
     it('should properly set selected state', () => {
-        directive.ariaHaspopup = true;
+        directive.setSubmenu(true, '123');
         directive.setSelected(true);
 
         expect(directive.selected).toBeTrue();
 
-        directive.setSelected(false);
-        directive.ariaHaspopup = false;
+        directive.setSubmenu(false, '123');
         directive.setSelected(true);
 
         expect(directive.selected).toBeFalse();
@@ -44,17 +43,17 @@ describe('MenuLinkDirective', () => {
         const menuId = 'test-id';
         directive.setSubmenu(true);
 
-        expect(directive.ariaHaspopup).toBeTrue();
-        expect(directive.ariaControls).toBeFalsy();
+        expect(directive.ariaHaspopup).toBe('menu');
+        expect(directive.submenuId).toBe(null);
 
         directive.setSubmenu(true, menuId);
 
-        expect(directive.ariaHaspopup).toBeTrue();
-        expect(directive.ariaControls).toEqual(menuId);
+        expect(directive.ariaHaspopup).toBe('menu');
+        expect(directive.submenuId).toEqual(menuId);
 
         directive.setSubmenu(false);
 
-        expect(directive.ariaHaspopup).toBeFalse();
-        expect(directive.ariaControls).toBeFalsy();
+        expect(directive.ariaHaspopup).toBe(null);
+        expect(directive.submenuId).toBe(null);
     });
 });

@@ -9,7 +9,8 @@
                             fdType="transparent"
                             id="menu-mobile-navigate-back"
                             [compact]="false"
-                            [attr.aria-label]="'Go to previous menu level: ' + title"
+                            [ariaLabel]="menuComponent.goToPreviousMenuLevelAriaLabel"
+                            [title]="menuComponent.goToPreviousMenuLevelAriaLabel"
                             [glyph]="navigationIcon$ | async"
                             (click)="backToParentLevel()"
                         ></button>
@@ -24,6 +25,8 @@
                             *ngIf="this.mobileConfig.hasCloseButton"
                             fd-dialog-close-button
                             [mobile]="true"
+                            [title]="menuComponent.closeMenuAriaLabel"
+                            [ariaLabel]="menuComponent.closeMenuAriaLabel"
                             (click)="close()"
                         ></button>
                     </fd-bar-element>
@@ -55,8 +58,8 @@
 </ng-template>
 
 <ng-template #subMenuTemplate>
-    <nav class="fd-menu fd-menu--mobile" [class.fd-menu--compact]="false">
-        <ul class="fd-menu__sublist">
+    <nav class="fd-menu fd-menu--mobile" [class.fd-menu--compact]="compact" role="menu" fdMenuKeydownListener>
+        <ul class="fd-menu__sublist" role="none">
             <ng-container *ngTemplateOutlet="view"></ng-container>
         </ul>
     </nav>

@@ -1,16 +1,16 @@
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MenuComponent } from './menu.component';
-import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MenuModule } from './menu.module';
-import { MenuItemComponent } from './menu-item/menu-item.component';
 import { MenuService } from './services/menu.service';
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY, DynamicComponentService } from '../utils/public_api';
 
 @Component({
     selector: 'fd-menu-test',
     template: `
-        <fd-menu #menu>
+        <fd-menu #menu [mobile]="isMobile">
             <li fd-menu-item tabindex="0">
                 <a href="#" fd-menu-interactive>
                     <span fd-menu-title>Option 1</span>
@@ -28,31 +28,30 @@ import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_
             </li>
         </fd-menu>
 
-        <button #trigger [fdMenuTrigger]="menu"></button>
+        <button #trigger [fdMenuTrigger]="menu">Menu button</button>
     `
 })
 export class TestMenuComponent {
     @ViewChild(MenuComponent)
     menu: MenuComponent;
 
-    @ViewChildren(MenuItemComponent)
-    menuItems: QueryList<MenuItemComponent>;
-
-    @ViewChildren('trigger', { read: ElementRef })
+    @ViewChild('trigger', { read: ElementRef })
     trigger: ElementRef;
+
+    isMobile = false;
 }
 
 describe('MenuComponent', () => {
     let menu: MenuComponent;
-    let menuService: MenuService;
+    let menuService: Readonly<MenuService>;
     let fixture: ComponentFixture<TestMenuComponent>;
 
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [MenuModule],
+                imports: [MenuModule, NoopAnimationsModule],
                 declarations: [TestMenuComponent],
-                providers: [ContentDensityService]
+                providers: [ContentDensityService, DynamicComponentService]
             }).compileComponents();
         })
     );
@@ -61,7 +60,7 @@ describe('MenuComponent', () => {
         fixture = TestBed.createComponent(TestMenuComponent);
         fixture.detectChanges();
         menu = fixture.componentInstance.menu;
-        menuService = menu['_menuService'];
+        menuService = menu._getMenuService();
     });
 
     it('should properly initialize menu', () => {
@@ -95,25 +94,44 @@ describe('MenuComponent', () => {
         expect(openEmitterSpy).toHaveBeenCalledWith(false);
     }));
 
-    it('should select mobile view', fakeAsync(() => {
-        const mobileViewSpy = spyOn<any>(menu, '_setupMobileMode');
-        menu.setMobileMode = true;
-        (<any>menu)._setupView();
+    it('should open menu in popover in desktop mode', () => {
+        expect(menu.isOpen).toBeFalse();
 
+        fixture.componentInstance.trigger.nativeElement.dispatchEvent(new MouseEvent('click'));
         fixture.detectChanges();
 
-        expect(mobileViewSpy).toHaveBeenCalled();
-    }));
+        expect(menu.isOpen).toBeTrue();
 
-    it('should select desktop view', () => {
-        const keyboardSupportSpy = spyOn<any>(menu, '_manageKeyboardSupport');
-        (<any>menu)._setupView();
+        const menuElement = document.querySelector('fd-popover-body .fd-menu');
 
-        menu.open();
+        expect(menuElement).not.toBe(null);
+        expect(menuElement.textContent).toContain('Option 1');
+        expect(menuElement.textContent).toContain('Option 2');
+        expect(menuElement.textContent).toContain('Option 3');
+    });
 
+    it('should open menu in dialog in mobile mode', async () => {
+        fixture.componentInstance.isMobile = true;
         fixture.detectChanges();
 
-        expect(keyboardSupportSpy).toHaveBeenCalled();
+        // fd-menu-mobile async creation
+        // fakeAsync + tick() throws error "2 timer(s) still in the queue."
+        await new Promise((resolve) => setTimeout(resolve));
+        fixture.detectChanges();
+
+        expect(menu.isOpen).toBeFalse();
+
+        fixture.componentInstance.trigger.nativeElement.dispatchEvent(new MouseEvent('click'));
+        fixture.detectChanges();
+
+        expect(menu.isOpen).toBeTrue();
+
+        const mobileMenu = document.querySelector('fd-dialog .fd-menu.fd-menu--mobile');
+
+        expect(mobileMenu).not.toBe(null);
+        expect(mobileMenu.textContent).toContain('Option 1');
+        expect(mobileMenu.textContent).toContain('Option 2');
+        expect(mobileMenu.textContent).toContain('Option 3');
     });
 
     it('should focus first element on open', fakeAsync(() => {
@@ -123,32 +141,4 @@ describe('MenuComponent', () => {
 
         expect(menu.menuItems.first.elementRef.nativeElement).toBe(document.activeElement);
     }));
-
-    it('should open after clicking on trigger on mobiles', () => {
-        menu.setMobileMode = true;
-        (<any>menu)._listenOnTriggerRefClicks();
-
-        expect(menu.isOpen).toBeFalse();
-
-        fixture.detectChanges();
-        menu.trigger.nativeElement.dispatchEvent(new MouseEvent('click'));
-
-        fixture.detectChanges();
-
-        expect(menu.isOpen).toBeTrue();
-    });
-
-    it('should destroy all references', () => {
-        const destroyEventsSpy = spyOn<any>(menu, '_destroyEventListeners');
-        const destroyMobileSpy = spyOn<any>(menu, '_destroyMobileComponent');
-        const menuServiceDestroySpy = spyOn<any>(menu['_menuService'], 'onDestroy');
-
-        menu.ngOnDestroy();
-
-        fixture.detectChanges();
-
-        expect(destroyEventsSpy).toHaveBeenCalled();
-        expect(destroyMobileSpy).toHaveBeenCalled();
-        expect(menuServiceDestroySpy).toHaveBeenCalled();
-    });
 });

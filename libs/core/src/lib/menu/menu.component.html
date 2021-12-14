@@ -3,12 +3,13 @@
 <ng-template #menuRootTemplate>
     <nav
         class="fd-menu"
-        fdInitialFocus
-        [enabled]="focusTrapped"
+        role="menu"
         [id]="id"
+        fdInitialFocus
+        fdMenuKeydownListener
+        [enabled]="focusTrapped"
         [attr.aria-labelledby]="ariaLabelledby"
         [attr.aria-label]="ariaLabel"
-        role="menu"
         [class.fd-menu--compact]="compact"
         [class.fd-menu--mobile]="mobile"
     >

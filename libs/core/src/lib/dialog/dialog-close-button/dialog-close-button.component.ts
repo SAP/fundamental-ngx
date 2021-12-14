@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 /**
- * Directive that applies fundamental dialog styling to a dialog close button.
+ * Component that applies fundamental dialog styling to a dialog close button.
  *
  * ```html
  * <button fd-dialog-close-button></button>
@@ -11,20 +11,22 @@ import { Component, Input } from '@angular/core';
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-dialog-close-button]',
     host: {
-        '[attr.aria-label]': '"close"',
-        '[class.fd-button]': 'true',
-        '[class.fd-button--compact]': '!mobile',
-        '[class.fd-button--transparent]': 'true',
-        '[attr.title]': 'title'
+        class: 'fd-button fd-button--transparent',
+        '[attr.title]': 'title',
+        '[attr.aria-label]': 'ariaLabel',
+        '[class.fd-button--compact]': '!mobile'
     },
     template: `<fd-icon glyph="decline"></fd-icon><ng-content></ng-content>`
 })
 export class DialogCloseButtonComponent {
-    /** Displays dialog close button in mobile mode */
     @Input()
     mobile = false;
 
-    /** add title dynamically to add a tooltip */
+    /** Set title attribute */
     @Input()
-    title: string;
+    title = 'Close';
+
+    /** set aria-Label attribute */
+    @Input()
+    ariaLabel = 'Close';
 }

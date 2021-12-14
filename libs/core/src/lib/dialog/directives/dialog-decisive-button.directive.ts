@@ -8,7 +8,7 @@ import { Directive } from '@angular/core';
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-dialog-decisive-button]',
     host: {
-        '[class.fd-dialog__decisive-button]': 'true'
+        class: 'fd-dialog__decisive-button'
     }
 })
 export class DialogDecisiveButtonDirective {}

@@ -19,7 +19,8 @@ import {
     TemplateRef,
     ViewChild,
     ViewContainerRef,
-    ViewEncapsulation
+    ViewEncapsulation,
+    forwardRef
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
@@ -45,7 +46,14 @@ let menuUniqueId = 0;
     styleUrls: ['menu.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [MenuService, PopoverService]
+    providers: [
+        MenuService,
+        PopoverService,
+        {
+            provide: MENU_COMPONENT,
+            useExisting: forwardRef(() => MenuComponent)
+        }
+    ]
 })
 export class MenuComponent
     extends BasePopoverClass
@@ -86,6 +94,20 @@ export class MenuComponent
     /** Aria-Labelledby for element describing navigation */
     @Input()
     ariaLabelledby: string = null;
+
+    /**
+     * Aria-label for close dialog button
+     * Applicable only for mobile mode
+     */
+    @Input()
+    closeMenuAriaLabel = 'Close menu';
+
+    /**
+     * Aria-label for close dialog button
+     * Applicable only for mobile mode
+     */
+    @Input()
+    goToPreviousMenuLevelAriaLabel = 'Go to previous menu level';
 
     /** Id of the control. */
     @Input()
@@ -135,6 +157,30 @@ export class MenuComponent
         @Optional() private readonly _dynamicComponentService: DynamicComponentService
     ) {
         super();
+
+        /**
+         * It's important to subscribe in the constructor
+         * to be sure this is the first subscription
+         * so menu.isOpen will be up to date.
+         *
+         * This is matter cause popoverService.initialise() copies
+         * "isOpenChange" event emitter and fires this
+         * before menu.isOpen gets actually updated.
+         *
+         * TODO: Needs refactoring to make things obvious
+         * and avoid such copying.
+         */
+        this._subscriptions.add(
+            this.isOpenChange.subscribe((isOpen) => {
+                this.isOpen = isOpen;
+                if (!isOpen) {
+                    // when popover got closed by its own mechanism (e.x. click outside)
+                    // we need to clean up menu as well
+                    this._cleanUpMenuAfterClose();
+                }
+                this._changeDetectorRef.markForCheck();
+            })
+        );
     }
 
     /** @hidden */
@@ -146,17 +192,6 @@ export class MenuComponent
                 })
             );
         }
-
-        /** keep isOpen up to date */
-        this.isOpenChange.subscribe((isOpen) => {
-            this.isOpen = isOpen;
-            if (!isOpen) {
-                // when popover got closed by its own mechanism (e.x. click outside)
-                // we need to clean up menu as well
-                this._cleanUpMenuAfterClose();
-            }
-            this._changeDetectorRef.markForCheck();
-        });
     }
 
     /** @hidden */
@@ -167,23 +202,21 @@ export class MenuComponent
 
     /** @hidden */
     ngAfterViewInit(): void {
+        this._menuService.setMenuMode(this.mobile);
         this._menuService.isMobileMode.subscribe((isMobile) => {
-            this._setupView();
             if (isMobile) {
                 // Since it is mobile it's needed to disable popoverService
                 this._popoverService.deactivate();
             }
+            this._setupView();
         });
-        this._menuService.setMenuMode(this.mobile);
     }
 
     /** @hidden */
     ngOnDestroy(): void {
         this._destroyMobileComponent();
         this._destroyEventListeners();
-        this._menuService.onDestroy();
         this._subscriptions.unsubscribe();
-        this._popoverService.onDestroy();
     }
 
     get trigger(): ElementRef {
@@ -233,15 +266,24 @@ export class MenuComponent
         this._popoverService.refreshPosition();
     }
 
+    _getMobileMenuComponentRef(): ComponentRef<MenuMobileComponent> {
+        return this._mobileModeComponentRef;
+    }
+
+    /** @hidden */
+    _getMenuService(): Readonly<MenuService> {
+        return this._menuService;
+    }
+
     /** @hidden */
     private _cleanUpMenuAfterClose(): void {
         this._menuService.resetMenuState();
     }
 
     /** @hidden Select and instantiate menu view mode */
-    private _setupView(): void {
+    private async _setupView(): Promise<void> {
         if (this.mobile) {
-            this._setupMobileMode();
+            await this._setupMobileMode();
         } else {
             this._setupPopoverService();
         }
@@ -250,23 +292,14 @@ export class MenuComponent
 
     /** @hidden */
     private _setupPopoverService(): void {
-        this._subscriptions.add(
-            this._popoverService._onLoad.subscribe((elementRef) => this._manageKeyboardSupport(elementRef))
-        );
-
         this._popoverService.templateContent = this.menuRootTemplate;
         this._popoverService.initialise(this._externalTrigger, this);
-    }
-
-    /** @hidden */
-    private _manageKeyboardSupport(elementRef: ElementRef): void {
-        this._menuService.addKeyboardSupport(elementRef);
     }
 
     /** @hidden Open Menu in mobile mode */
     private async _setupMobileMode(): Promise<void> {
         const injector = Injector.create({
-            providers: [{ provide: MENU_COMPONENT, useValue: this }],
+            providers: [],
             parent: this._injector
         });
 
@@ -284,11 +317,11 @@ export class MenuComponent
     /** @hidden Listen on menu items change and rebuild menu */
     private _listenOnMenuItemsChange(): void {
         this._subscriptions.add(this.menuItems.changes.subscribe(() => this._menuService.rebuildMenu()));
-        this.menuItems.forEach((m) => {
-            if (m.submenu && m.submenu.menuItems) {
-                this._subscriptions.add(m.submenu.menuItems.changes.subscribe(() => this._menuService.rebuildMenu()));
-            }
-        });
+        this.menuItems
+            .filter(({ submenu }) => !!submenu?.menuItems)
+            .forEach(({ submenu: { menuItems } }) => {
+                this._subscriptions.add(menuItems.changes.subscribe(() => this._menuService.rebuildMenu()));
+            });
     }
 
     /**

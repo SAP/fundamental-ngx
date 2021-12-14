@@ -1,10 +1,12 @@
-import { ElementRef, Injectable, Renderer2 } from '@angular/core';
-import { MenuItemComponent } from '../menu-item/menu-item.component';
-import { MenuComponent } from '../menu.component';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
-import { Observable, Subject } from 'rxjs';
+import { ElementRef, EventEmitter, Injectable, OnDestroy, Renderer2 } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { DOWN_ARROW, ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
+
+import { KeyUtil } from '@fundamental-ngx/core/utils';
+
+import { MenuItemComponent } from '../menu-item/menu-item.component';
+import { MenuInterface } from '../menu.interface';
 
 interface MenuNode {
     item: MenuItemComponent;
@@ -15,7 +17,7 @@ interface MenuNode {
 type MenuMap = Map<MenuItemComponent, MenuNode>;
 
 @Injectable()
-export class MenuService {
+export class MenuService implements OnDestroy {
     /** Map of menu items to menu nodes */
     menuMap: MenuMap;
 
@@ -26,29 +28,38 @@ export class MenuService {
     activeNodePath: MenuNode[] = [];
 
     /** Collection of active menu nodes */
-    private _isMobileMode: Subject<boolean> = new Subject();
+    private _isMobileMode$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
     /** @hidden */
-    private _menu: MenuComponent;
+    private _menu: MenuInterface;
 
     /** @hidden */
-    private _destroyKeyboardHandlerListener: () => void;
+    private _destroyKeyboardHandlerListener: () => void | null;
 
+    /** @hidden */
     constructor(private _renderer: Renderer2) {}
 
     /** Reference to menu component */
-    get menu(): MenuComponent {
+    get menu(): MenuInterface {
         return this._menu;
     }
 
     /** Returns menu mode observable */
     get isMobileMode(): Observable<boolean> {
-        return this._isMobileMode.asObservable().pipe(distinctUntilChanged());
+        return this._isMobileMode$.asObservable().pipe(distinctUntilChanged());
+    }
+
+    /**
+     * Returns isMobile mode flag
+     * @hidden
+     */
+    get _isMobileMode(): boolean {
+        return this._isMobileMode$.value;
     }
 
     /** Sets menu mode */
     setMenuMode(value: boolean): void {
-        this._isMobileMode.next(value);
+        this._isMobileMode$.next(value);
     }
 
     /** Sets given menu item as focused */
@@ -85,7 +96,7 @@ export class MenuService {
     }
 
     /** Initializes menu service based on given Menu Component */
-    setMenuRoot(menu: MenuComponent): void {
+    setMenuRoot(menu: MenuInterface): void {
         this._menu = menu;
         this.menuMap = this._buildMenuMap(this._menu);
     }
@@ -125,10 +136,27 @@ export class MenuService {
     removeKeyboardSupport(): void {
         if (this._destroyKeyboardHandlerListener) {
             this._destroyKeyboardHandlerListener();
+            this._destroyKeyboardHandlerListener = null;
         }
     }
 
-    onDestroy(): void {
+    /**
+     * Go back to the parent item
+     * and move focus on it.
+     * Similar behavior as Left Arrow Key
+     */
+    goBackToParentMenuItem(): void {
+        const parentItem = this.activeNodePath.slice(-1)[0]?.item;
+        if (!parentItem) {
+            return;
+        }
+        this.setActive(false, parentItem);
+        this._delayedFocusOnMenuItem(parentItem, this._isMobileMode);
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._isMobileMode$.complete();
         this.removeKeyboardSupport();
     }
 
@@ -137,7 +165,7 @@ export class MenuService {
         return node.parent ? node.parent.children : this.menuMap.get(null).children;
     }
 
-    /** @hidden Adds given element to the Active Node Path and setts as active*/
+    /** @hidden Adds given element to the Active Node Path and sets as active */
     private _addToActivePath(menuItem: MenuItemComponent): void {
         const menuNode = this.menuMap.get(menuItem);
         this._removeActiveSibling(menuItem);
@@ -164,10 +192,11 @@ export class MenuService {
         }
     }
 
-    /** @hidden
+    /**
+     * @hidden
      * - Builds Menu Nodes based on Menu Items
      * - Creates Map of the Menu Nodes */
-    private _buildMenuMap(menu: MenuComponent): MenuMap {
+    private _buildMenuMap(menu: MenuInterface): MenuMap {
         function buildNode(menuItem: MenuItemComponent): MenuNode {
             return {
                 item: menuItem,
@@ -221,19 +250,28 @@ export class MenuService {
         );
     }
 
+    /**
+     * Delayed focus on menu item.
+     * @param item MenuItemComponent to focus on
+     * @param delayed when focus must be delayed to the next tick
+     */
+    private _delayedFocusOnMenuItem(item: MenuItemComponent, delayed: boolean) {
+        delayed ? setTimeout(() => this.setFocused(item)) : this.setFocused(item);
+    }
+
+    /** @hidden */
     private _handleKey(event: KeyboardEvent): void {
-        const focusRight = (node) => setTimeout(() => this.setFocused(node.children[0].item));
         let matched = true;
 
         if (KeyUtil.isKeyCode(event, RIGHT_ARROW)) {
             if (this.focusedNode.children.length) {
                 this.setActive(true, this.focusedNode.item);
-                focusRight(this.focusedNode);
+                this._delayedFocusOnMenuItem(this.focusedNode.children[0].item, true);
             }
         } else if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
             if (this.focusedNode.parent.item) {
                 this.setActive(false, this.focusedNode.parent.item);
-                this.setFocused(this.focusedNode.parent.item);
+                this._delayedFocusOnMenuItem(this.focusedNode.parent.item, this._isMobileMode);
             }
         } else if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
             const closest = this._closestEnabled(this.focusedNode, 'down');
@@ -250,7 +288,7 @@ export class MenuService {
             this.setActive(true, focusedNode.item);
             focusedNode.item.click();
             if (focusedNode.children.length) {
-                focusRight(focusedNode);
+                this._delayedFocusOnMenuItem(focusedNode.children[0].item, true);
             }
         } else if (KeyUtil.isKeyCode(event, ESCAPE) && this.menu.closeOnEscapeKey) {
             this.menu.close();

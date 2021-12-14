@@ -1,5 +1,6 @@
-import { Directive, ElementRef, HostBinding, Input, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Directive, ElementRef, HostBinding, Input, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { startWith } from 'rxjs/operators';
 
 import { MenuComponent } from '../menu.component';
 
@@ -20,12 +21,15 @@ export class MenuTriggerDirective implements OnDestroy {
         this._setAriaAttributes(menu);
     }
 
+    /** @hidden */
     @HostBinding('attr.aria-haspopup')
-    ariaHasPopup: boolean;
+    ariaHasPopup: string;
 
+    /** @hidden */
     @HostBinding('attr.aria-controls')
     ariaControls: string;
 
+    /** @hidden */
     @HostBinding('attr.aria-expanded')
     ariaExpanded: boolean;
 
@@ -33,7 +37,7 @@ export class MenuTriggerDirective implements OnDestroy {
     private _menuSubscription: Subscription = new Subscription();
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(private _elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) {}
 
     /** @hidden */
     ngOnDestroy(): void {
@@ -43,8 +47,9 @@ export class MenuTriggerDirective implements OnDestroy {
     /** @hidden */
     private _subscribeToMenu(menu: MenuComponent): void {
         this._menuSubscription.add(
-            menu.isOpenChange.subscribe(() => {
+            menu.isOpenChange.pipe(startWith(menu)).subscribe(() => {
                 this._setAriaAttributes(menu);
+                this._changeDetectorRef.markForCheck();
             })
         );
     }
@@ -57,7 +62,7 @@ export class MenuTriggerDirective implements OnDestroy {
 
     /** @hidden */
     private _setAriaAttributes(menu?: MenuComponent): void {
-        this.ariaHasPopup = !!menu;
+        this.ariaHasPopup = menu ? 'menu' : null;
         this.ariaExpanded = menu?.isOpen;
         this.ariaControls = menu?.isOpen ? menu.id : null;
     }

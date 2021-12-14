@@ -61,9 +61,9 @@ describe('MenuTriggerDirective', () => {
 
         tick();
 
-        expect(directive.ariaHasPopup).toBeTrue();
+        expect(directive.ariaHasPopup).toBe('menu');
         expect(directive.ariaExpanded).toBeFalsy();
-        expect(directive.ariaControls).toBeFalsy();
+        expect(directive.ariaControls).toBe(null);
 
         menu.isOpen = true;
         menu.isOpenChange.emit(true);
