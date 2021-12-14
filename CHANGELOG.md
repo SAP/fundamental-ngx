@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.215 (2021-12-14)
+
+
+### Bug Fixes
+
+* **core,platform:** schematics ([#7363](https://github.com/SAP/fundamental-ngx/issues/7363)) ([8363c78](https://github.com/SAP/fundamental-ngx/commit/8363c78edd517648b9f2cdc09228c85e00ab31c5))
+
 ## 0.33.0-rc.214 (2021-12-11)
 
 ## 0.33.0-rc.213 (2021-12-10)
