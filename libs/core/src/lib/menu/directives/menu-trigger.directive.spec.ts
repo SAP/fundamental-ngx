@@ -40,7 +40,7 @@ describe('MenuTriggerDirective', () => {
 
     it('should set menu trigger', () => {
         const setTriggerSpy = spyOnProperty(menu, 'trigger', 'set');
-        const listenersSpy = spyOn<any>(directive, '_listenOnExpanded');
+        const listenersSpy = spyOn<any>(directive, '_subscribeToMenu');
         const attributesSpy = spyOn<any>(directive, '_setAriaAttributes');
 
         directive.menu = null;
@@ -62,13 +62,15 @@ describe('MenuTriggerDirective', () => {
         tick();
 
         expect(directive.ariaHasPopup).toBeTrue();
-        expect(directive.ariaExpanded).toBeFalse();
-        expect(directive.ariaControls).toEqual(menu.id);
+        expect(directive.ariaExpanded).toBeFalsy();
+        expect(directive.ariaControls).toBeFalsy();
 
+        menu.isOpen = true;
         menu.isOpenChange.emit(true);
 
         tick();
 
         expect(directive.ariaExpanded).toBeTrue();
+        expect(directive.ariaControls).toEqual(menu.id);
     }));
 });

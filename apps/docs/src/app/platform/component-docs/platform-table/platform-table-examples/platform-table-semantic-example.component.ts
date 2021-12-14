@@ -70,7 +70,7 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
     }
 }
 
-function getNestedValue<T extends {}>(key: string, object: T): any {
+function getNestedValue<T extends Record<string, any>>(key: string, object: T): any {
     return key.split('.').reduce((a, b) => a[b], object);
 }
 

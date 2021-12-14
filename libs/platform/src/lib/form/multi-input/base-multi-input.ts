@@ -137,10 +137,6 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     }
 
     set value(value: any) {
-        if (!value) {
-            return;
-        }
-
         const selectedItems = Array.isArray(value) ? value : [value];
         this.setAsSelected(this._convertToOptionItems(selectedItems));
         super.setValue(value);
@@ -271,9 +267,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     ];
 
     /** @hidden */
-    private _displayFn = (value: any) => {
-        return this.displayValue(value);
-    };
+    private _displayFn = (value: any) => this.displayValue(value);
 
     /** @hidden */
     private _secondaryFn = (value: any) => {
@@ -337,10 +331,6 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
 
     /** write value for ControlValueAccessor */
     writeValue(value: any): void {
-        if (!value) {
-            return;
-        }
-
         const selectedItems = Array.isArray(value) ? value : [value];
         this.setAsSelected(this._convertToOptionItems(selectedItems));
         super.writeValue(value);
@@ -366,7 +356,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         this._cd.markForCheck();
     }
 
-    /**@hidden */
+    /** @hidden */
     convertObjectToMultiInputOption(items: any[]): MultiInputOption[] {
         return this._convertObjectsToOptionItems(items);
     }
@@ -470,7 +460,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
 
     /** @hidden */
     protected get ds(): MultiInputDataSource<any> {
-        return <MultiInputDataSource<any>>this.dataSource;
+        return this.dataSource as MultiInputDataSource<any>;
     }
 
     /** @hidden

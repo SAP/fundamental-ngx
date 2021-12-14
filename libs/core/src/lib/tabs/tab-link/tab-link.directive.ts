@@ -12,7 +12,7 @@ import { AbstractFdNgxClass } from '@fundamental-ngx/core/utils';
  */
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-tab-link]',
     host: {
         role: 'tab',

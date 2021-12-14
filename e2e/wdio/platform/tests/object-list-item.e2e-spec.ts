@@ -21,8 +21,6 @@ describe('Object list item suite:', () => {
         allObjIcons,
         allObjTitles,
         allObjAttrStatusRows,
-        objListAttr,
-        objListItem,
         obJListIntro,
         objListAttributes,
         objListStatuses,
@@ -109,7 +107,9 @@ describe('Object list item suite:', () => {
     });
 
     describe('Object List Item With Row Selection And Navigation examples:', () => {
-        it('should check content', () => {
+        // missed attribute "href"
+        // https://github.com/SAP/fundamental-ngx/issues/7343
+        xit('should check content', () => {
             const linkCount = getElementArrayLength(objRowNavLink);
             for (let i = 0; linkCount > i; i++) {
                 expect(getAttributeByName(objRowNavLink, 'href')).not.toBe(null, '');

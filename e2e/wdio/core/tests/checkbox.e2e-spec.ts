@@ -8,6 +8,7 @@ import {
     getElementArrayLength,
     getText,
     isElementClickable,
+    isEnabled,
     refreshPage,
     scrollIntoView
 } from '../../driver/wdio';
@@ -35,7 +36,8 @@ describe('checkbox test suite', () => {
         checkbox,
         checkboxInput,
         checkboxLabel,
-        link
+        link,
+        tristateOutput
     } = checkboxPage;
 
     beforeAll(() => {
@@ -63,69 +65,46 @@ describe('checkbox test suite', () => {
     describe('tristate checkbox examples', () => {
         it('should check the 3 checkbox marking states', () => {
             scrollIntoView(tristateCheckbox);
+            const startValue = getText(tristateOutput).slice(39).trim();
 
-            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content')).toEqual(
-                emptyString,
-                'mark is present'
-            );
+            expect(startValue).toEqual('false');
 
             click(tristateCheckbox + checkboxLabel);
+            const secondValue = getText(tristateOutput).slice(39).trim();
 
-            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content')).not.toEqual(
-                emptyString,
-                'mark is not present'
-            );
+            expect(secondValue).toEqual('null');
 
             click(tristateCheckbox + checkboxLabel);
+            const thirdValue = getText(tristateOutput).slice(39).trim();
 
-            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content')).not.toEqual(
-                emptyString,
-                'mark is not present'
-            );
+            expect(thirdValue).toEqual('true');
 
             click(tristateCheckbox + checkboxLabel);
+            const fourthValue = getText(tristateOutput).slice(39).trim();
 
-            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content')).toEqual(
-                emptyString,
-                'mark is present'
-            );
+            expect(fourthValue).toEqual(startValue);
         });
 
         it('should check 3rd state not markable', () => {
             scrollIntoView(tristateCheckbox);
+            const startValue = getText(tristateOutput, 2).slice(41).trim();
 
-            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content', 1)).not.toEqual(
-                emptyString,
-                'mark is not present'
-            );
+            expect(startValue).toEqual('null');
 
             click(tristateCheckbox + checkboxLabel, 1);
+            const secondValue = getText(tristateOutput, 2).slice(41).trim();
 
-            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content', 1)).not.toEqual(
-                emptyString,
-                'mark is not present'
-            );
+            expect(secondValue).toEqual('true');
 
             click(tristateCheckbox + checkboxLabel, 1);
+            const thirdValue = getText(tristateOutput, 2).slice(41).trim();
 
-            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content', 1)).toEqual(
-                emptyString,
-                'mark is present'
-            );
+            expect(thirdValue).toEqual('false');
 
             click(tristateCheckbox + checkboxLabel, 1);
+            const fourthValue = getText(tristateOutput, 2).slice(41).trim();
 
-            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content', 1)).not.toEqual(
-                emptyString,
-                'mark is not present'
-            );
-
-            click(tristateCheckbox + checkboxLabel, 1);
-
-            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content', 1)).toEqual(
-                emptyString,
-                'mark is present'
-            );
+            expect(fourthValue).not.toEqual(startValue);
         });
     });
 
@@ -232,7 +211,7 @@ describe('checkbox test suite', () => {
 
         it('should check the checkbox and link are clickable', () => {
             expect(isElementClickable(customLabelCheckbox + checkboxLabel)).toBe(true, 'checkbox is not clickable');
-            expect(isElementClickable(customLabelCheckbox + link)).toBe(true, 'link is not clickable');
+            expect(isEnabled(customLabelCheckbox + link)).toBe(true);
         });
     });
 

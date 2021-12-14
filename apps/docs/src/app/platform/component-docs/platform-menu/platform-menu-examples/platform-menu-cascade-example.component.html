@@ -1,73 +1,53 @@
-<fdp-button buttonType="menu" [fdpMenuTriggerFor]="cascadeMenu" label="Grocery" title="Menu Button"></fdp-button>
+<button fd-button [fdpMenuTriggerFor]="cascadeMenu" label="Grocery" fdType="menu"></button>
 <div style="margin-top: 1rem"><label>Item Selected:</label> {{ item }}</div>
 
 <fdp-menu #cascadeMenu id="cascade-menu">
-    <fdp-menu-item [fdpMenuTriggerFor]="fruitMenu" title="Fruits">Fruits</fdp-menu-item>
-    <fdp-menu-item [fdpMenuTriggerFor]="vegetableMenu" title="Vegetables">Vegetables</fdp-menu-item>
+    <fdp-menu-item [fdpMenuTriggerFor]="fruitMenu">Fruits</fdp-menu-item>
+    <fdp-menu-item [fdpMenuTriggerFor]="vegetableMenu">Vegetables</fdp-menu-item>
 </fdp-menu>
 
 <fdp-menu #fruitMenu id="fruit-menu">
-    <fdp-menu-item [fdpMenuTriggerFor]="appleMenu" title="Apple">Apple</fdp-menu-item>
-    <fdp-menu-item [fdpMenuTriggerFor]="bananaMenu" title="Banana">Banana</fdp-menu-item>
-    <fdp-menu-item [fdpMenuTriggerFor]="orangeMenu" title="Orange">Orange</fdp-menu-item>
+    <fdp-menu-item [fdpMenuTriggerFor]="appleMenu">Apple</fdp-menu-item>
+    <fdp-menu-item [fdpMenuTriggerFor]="bananaMenu">Banana</fdp-menu-item>
+    <fdp-menu-item [fdpMenuTriggerFor]="orangeMenu">Orange</fdp-menu-item>
 </fdp-menu>
 
 <fdp-menu #appleMenu id="apple-menu">
-    <fdp-menu-item title="Braeburn Apple" (itemSelect)="onItemSelect('Braeburn Apple')">Braeburn Apple</fdp-menu-item>
-    <fdp-menu-item title="Fuji Apple" (itemSelect)="onItemSelect('Fuji Apple')">Fuji Apple</fdp-menu-item>
-    <fdp-menu-item title="Gala Apple" (itemSelect)="onItemSelect('Gala Apple')">Gala Apple</fdp-menu-item>
-    <fdp-menu-item title="Honeycrisp Apple" (itemSelect)="onItemSelect('Honeycrisp Apple')"
-        >Honeycrisp Apple
-    </fdp-menu-item>
-    <fdp-menu-item title="Red Delicious Apple" (itemSelect)="onItemSelect('Red Delicious Apple')"
-        >Red Delicious Apple
-    </fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Braeburn Apple')"> Braeburn Apple </fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Fuji Apple')">Fuji Apple</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Gala Apple')">Gala Apple</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Honeycrisp Apple')"> Honeycrisp Apple </fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Red Delicious Apple')"> Red Delicious Apple </fdp-menu-item>
 </fdp-menu>
 
 <fdp-menu #bananaMenu id="banana-menu">
-    <fdp-menu-item title="Cavendish Banana" (itemSelect)="onItemSelect('Cavendish Banana')"
-        >Cavendish Banana
-    </fdp-menu-item>
-    <fdp-menu-item title="Lady Finger Banana" (itemSelect)="onItemSelect('Lady Finger Banana')"
-        >Lady Finger Banana
-    </fdp-menu-item>
-    <fdp-menu-item title="Red Banana" (itemSelect)="onItemSelect('Red Banana')">Red Banana</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Cavendish Banana')"> Cavendish Banana </fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Lady Finger Banana')"> Lady Finger Banana </fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Red Banana')">Red Banana</fdp-menu-item>
 </fdp-menu>
 
 <fdp-menu #orangeMenu id="orange-menu">
-    <fdp-menu-item title="Blood Orange" (itemSelect)="onItemSelect('Blood Orange')">Blood Orange</fdp-menu-item>
-    <fdp-menu-item title="Navel Orange" (itemSelect)="onItemSelect('Navel Orange')">Navel Orange</fdp-menu-item>
-    <fdp-menu-item title="Valencia Orange" (itemSelect)="onItemSelect('Valencia Orange')"
-        >Valencia Orange
-    </fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Blood Orange')"> Blood Orange </fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Navel Orange')"> Navel Orange </fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Valencia Orange')"> Valencia Orange </fdp-menu-item>
 </fdp-menu>
 
 <fdp-menu #vegetableMenu id="vegetable-menu">
-    <fdp-menu-item title="Carrot" [fdpMenuTriggerFor]="carrotMenu">Carrot</fdp-menu-item>
-    <fdp-menu-item title="Lettuce" [fdpMenuTriggerFor]="lettuceMenu">Lettuce</fdp-menu-item>
+    <fdp-menu-item [fdpMenuTriggerFor]="carrotMenu">Carrot</fdp-menu-item>
+    <fdp-menu-item [fdpMenuTriggerFor]="lettuceMenu">Lettuce</fdp-menu-item>
 </fdp-menu>
 
 <fdp-menu #carrotMenu id="carrot-menu">
-    <fdp-menu-item title="Nantes Carrot" (itemSelect)="onItemSelect('Nantes Carrot')">Nantes Carrot</fdp-menu-item>
-    <fdp-menu-item title="Imperator Carrot" (itemSelect)="onItemSelect('Imperator Carrot')"
-        >Imperator Carrot
-    </fdp-menu-item>
-    <fdp-menu-item title="Chantenay Carrot" (itemSelect)="onItemSelect('Chantenay Carrot')"
-        >Chantenay Carrot
-    </fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Nantes Carrot')"> Nantes Carrot </fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Imperator Carrot')"> Imperator Carrot </fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Chantenay Carrot')"> Chantenay Carrot </fdp-menu-item>
 </fdp-menu>
 
 <fdp-menu #lettuceMenu id="lettuce-menu">
-    <fdp-menu-item title="Arugula" (itemSelect)="onItemSelect('Arugula')">Arugula</fdp-menu-item>
-    <fdp-menu-item title="Belgian Endive" (itemSelect)="onItemSelect('Belgian Endive')">Belgian Endive</fdp-menu-item>
-    <fdp-menu-item title="Butter Lettuce" (itemSelect)="onItemSelect('Butter Lettuce')">Butter Lettuce</fdp-menu-item>
-    <fdp-menu-item title="Iceberg Lettuce" (itemSelect)="onItemSelect('Iceberg Lettuce')"
-        >Iceberg Lettuce
-    </fdp-menu-item>
-    <fdp-menu-item title="Red Leaf Lettuce" (itemSelect)="onItemSelect('Red Leaf Lettuce')"
-        >Red Leaf Lettuce
-    </fdp-menu-item>
-    <fdp-menu-item title="Romaine Lettuce" (itemSelect)="onItemSelect('Romaine Lettuce')"
-        >Romaine Lettuce
-    </fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Arugula')">Arugula</fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Belgian Endive')"> Belgian Endive </fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Butter Lettuce')"> Butter Lettuce </fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Iceberg Lettuce')">Iceberg Lettuce </fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Red Leaf Lettuce')"> Red Leaf Lettuce </fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Romaine Lettuce')"> Romaine Lettuce </fdp-menu-item>
 </fdp-menu>

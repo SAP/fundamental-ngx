@@ -44,6 +44,7 @@ export class ModifyItemEvent {
 }
 
 @Directive({ selector: '[fdpItemDef]' })
+// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class ListItemDef implements ItemDef {
     constructor(/** @docs-private */ public templateRef: TemplateRef<any>) {}
 }
@@ -78,7 +79,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     @Input()
     counter?: string;
 
-    /**Description of the title*/
+    /** Description of the title*/
     @Input()
     description: string;
 
@@ -142,7 +143,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     @Input()
     listType: ListType = 'active';
 
-    /*** Whether Navigation mode is included to list component
+    /** * Whether Navigation mode is included to list component
      * for all the items
      */
     @Input()
@@ -183,7 +184,8 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     /** @hidden */
     @ViewChild(RadioButtonComponent)
     radioButtonComponent: RadioButtonComponent;
-    /** @hidden
+    /**
+     * @hidden
      * Whether By line mode is included to list component, by which
      *  list item will accomdate the data in 2 column
      */
@@ -195,14 +197,18 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
      * Used to define if contentDensity value is 'compact' or not.
      */
     _isCompact = this._contentDensity === 'compact';
-    /** @hidden
+    /**
+     * @hidden
      * Whether listitem has row level selection enabled */
     selectRow: boolean;
-    /** @hidden
+    /**
+     * @hidden
      * Whether listitem is selected binded to template */
     _selected: boolean;
-    /** @hidden
-     * get the focused element for key manager */
+    /**
+     * @hidden
+     * get the focused element for key manager
+     */
     _focused: boolean;
 
     /** @hidden */
@@ -249,7 +255,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     }
 
     /** @hidden */
-    /**To detect changes from parent-listbox to list item
+    /** To detect changes from parent-listbox to list item
      * for example single, multi option selection those details
      * will be deducted in list item
      */
@@ -269,7 +275,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     }
 
     /** @hidden */
-    /**Created focus on list item on mouseclick,
+    /** Created focus on list item on mouseclick,
      * Up,down arrow press */
     focus(): void {
         this.listItem.nativeElement.focus();
@@ -310,7 +316,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
         }
     }
 
-    /**@hidden
+    /** @hidden
      * Handler for mouse events */
     @HostListener('click', ['$event'])
     _onClick(event: MouseEvent): void {
@@ -336,7 +342,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     }
 
     /** @hidden */
-    /**on keydown append active styles on actionable item */
+    /** on keydown append active styles on actionable item */
     _onKeyDown(event: KeyboardEvent): void {
         if (this.anchor !== undefined && (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE))) {
             this.anchor.nativeElement.classList.add(IS_ACTIVE_CLASS);
@@ -344,7 +350,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     }
 
     /** @hidden */
-    /**on keyup remove active styles from actionable item*/
+    /** on keyup remove active styles from actionable item*/
     _onKeyUp(event: KeyboardEvent): void {
         if (this.anchor !== undefined && (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE))) {
             this.anchor.nativeElement.classList.remove(IS_ACTIVE_CLASS);

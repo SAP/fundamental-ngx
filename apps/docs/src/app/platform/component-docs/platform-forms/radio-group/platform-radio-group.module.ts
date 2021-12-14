@@ -5,7 +5,9 @@ import { API_FILES } from '../../../api-files';
 import { SharedDocumentationPageModule } from '../../../../documentation/shared-documentation-page.module';
 
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { MessageToastModule } from '@fundamental-ngx/core/message-toast';
 import { FdpFormGroupModule, PlatformRadioGroupModule } from '@fundamental-ngx/platform/form';
+
 import { PlatformRadioGroupHeaderComponent } from './platform-radio-group-header/platform-radio-group-header.component';
 import { PlatformRadioGroupDocsComponent } from './platform-radio-group-docs.component';
 import { PlatformRadioGroupContentExampleComponent } from './platform-radio-group-examples/platform-radio-group-content-examples.component';
@@ -30,7 +32,8 @@ const routes: Routes = [
         SharedDocumentationPageModule,
         PlatformRadioGroupModule,
         PlatformButtonModule,
-        FdpFormGroupModule
+        FdpFormGroupModule,
+        MessageToastModule
     ],
     exports: [RouterModule],
     declarations: [

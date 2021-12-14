@@ -11,8 +11,10 @@ import {
     isElementClickable,
     isElementDisplayed,
     mouseHoverElement,
+    pause,
     refreshPage,
     scrollIntoView,
+    sendKeys,
     setValue,
     waitForPresent
 } from '../../driver/wdio';
@@ -60,7 +62,8 @@ describe('Datetime picker suite', () => {
         currentMonthCalendarItem,
         getCurrentDayIndex,
         altCalendarItem,
-        monthAttributeLabel
+        monthAttributeLabel,
+        positionExample
     } = new DatePickerPo();
 
     beforeAll(() => {
@@ -147,7 +150,7 @@ describe('Datetime picker suite', () => {
     it('should check that available only 2 next weeks in range disabled example', () => {
         click(rangeDisabledExample + calendarIcon);
         const currentDayIndex = getCurrentItemIndex();
-        const itemsLength = getElementArrayLength(currentMonthCalendarItem) - 1;
+        const itemsLength = getElementArrayLength(currentMonthCalendarItem);
 
         for (let i = currentDayIndex - 1; i !== 0; i--) {
             expect(isElementClickable(calendarItem, i)).toBe(false, `previous day not disabled`);
@@ -177,6 +180,9 @@ describe('Datetime picker suite', () => {
             }
 
             for (let i = availableLengthNextMonth + 1; i < itemsLength; i++) {
+                if (i >= 31) {
+                    break;
+                }
                 expect(isElementClickable(currentMonthCalendarItem, i)).toBe(false, `element ${i} is not disabled`);
             }
         }
@@ -215,7 +221,7 @@ describe('Datetime picker suite', () => {
     });
 
     it('should check states of input groups', () => {
-        expect(getElementClass(allowNullExample + inputGroup)).toContain('is-success');
+        expect(getElementClass(allowNullExample + inputGroup)).not.toContain('is-error');
         expect(getElementClass(formExample + inputGroup, 1)).toContain('is-information');
         expect(getElementClass(disableFuncExample + inputGroup)).toContain('is-success');
         expect(getElementClass(rangeDisabledExample + inputGroup)).toContain('is-success');
@@ -247,23 +253,34 @@ describe('Datetime picker suite', () => {
     function checkChangingMonthByArrows(section: string): void {
         click(section + calendarIcon);
         click(selectMonthButton);
+        let previousMonthName = '',
+            nextMonthName = '';
+        // if current month is January - we do not have previous month in this year
+        if (getCurrentItemIndex() !== 0) {
+            previousMonthName = getAttributeByName(calendarItem, monthAttributeLabel, getCurrentItemIndex() - 1);
+            console.log(previousMonthName);
 
-        const previousMonthName = getAttributeByName(calendarItem, monthAttributeLabel, getCurrentItemIndex() - 1);
-        const nextMonthName = getAttributeByName(calendarItem, monthAttributeLabel, getCurrentItemIndex() + 1);
+            sendKeys(['ArrowLeft', 'Enter']);
+            expect(getAttributeByName(selectMonthButton, monthAttributeLabel)).toEqual(
+                previousMonthName,
+                `previous month is not chosen, ${section}`
+            );
+        }
+        refreshPage();
+        click(section + calendarIcon);
         click(selectMonthButton);
+        // if current month is December - we do not have next month in this year
+        if (getCurrentItemIndex() !== 11) {
+            nextMonthName = getAttributeByName(calendarItem, monthAttributeLabel, getCurrentItemIndex() + 1);
+            console.log(nextMonthName);
 
-        click(nextMonthButton);
-        expect(getAttributeByName(selectMonthButton, monthAttributeLabel)).toEqual(
-            nextMonthName,
-            `next month is not chosen`
-        );
-
-        click(previousMonthButton);
-        click(previousMonthButton);
-        expect(getAttributeByName(selectMonthButton, monthAttributeLabel)).toEqual(
-            previousMonthName,
-            `previous month is not chosen`
-        );
+            sendKeys(['ArrowRight', 'Enter']);
+            pause(3000);
+            expect(getAttributeByName(selectMonthButton, monthAttributeLabel)).toEqual(
+                nextMonthName,
+                `next month is not chosen, ${section}`
+            );
+        }
         click(section + calendarIcon);
     }
 
@@ -313,7 +330,6 @@ describe('Datetime picker suite', () => {
         click(section + calendarIcon, calendarIndex);
         const itemsLength = getElementArrayLength(calendarItem) - 1;
         let firstDayIndex, lastDayIndex;
-        let firstChosenDayText, secChosenDayText;
 
         for (let i = 0; i < itemsLength; i++) {
             if (!getElementClass(calendarItem, i).includes('other-month')) {
@@ -321,7 +337,8 @@ describe('Datetime picker suite', () => {
                 break;
             }
         }
-        firstChosenDayText = '0' + getText(calendarItem, firstDayIndex);
+
+        const firstChosenDayText = '0' + getText(calendarItem, firstDayIndex);
 
         for (let i = itemsLength; i !== 0; i--) {
             if (
@@ -333,7 +350,7 @@ describe('Datetime picker suite', () => {
             }
         }
 
-        secChosenDayText = getText(calendarItem, lastDayIndex);
+        const secChosenDayText = getText(calendarItem, lastDayIndex);
 
         click(calendarItem, firstDayIndex);
         click(calendarItem, lastDayIndex);
@@ -381,7 +398,7 @@ describe('Datetime picker suite', () => {
             click(section + calendarIcon);
         }
         if (currentDayIndex !== dayCount) {
-            click(currentMonthCalendarItem, currentDayIndex + 1);
+            click(altCalendarItem + ':not(.fd-calendar__item--other-month)', currentDayIndex + 1);
 
             section === formattingExample
                 ? (chosenDate = `${getCurrentMonth(true)}/${getNextDay(true)}/${currentYear.toString().slice(2)}`)

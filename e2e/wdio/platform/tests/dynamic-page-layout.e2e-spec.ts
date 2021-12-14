@@ -5,6 +5,7 @@ import {
     getAttributeByName,
     getCSSPropertyByName,
     getText,
+    pause,
     refreshPage,
     scrollIntoView,
     waitForClickable,
@@ -46,7 +47,7 @@ describe('Dynamic Page Layout test suite:', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(dynamicPageLayoutPage.title);
+        waitForElDisplayed(dynamicPageLayoutPage.title);
     }, 1);
 
     it('should check buttons titles', () => {
@@ -145,7 +146,7 @@ describe('Dynamic Page Layout test suite:', () => {
 
             expect(firstTabSelected).toBe('false');
             expect(secondTabSelected).toBe('true');
-            expect(getText(dynamicPageTabsContent)).toContain('tabs 2');
+            expect(getText(dynamicPageTabsContent, 1)).toContain('tabs 2');
         });
     });
 
@@ -180,7 +181,9 @@ describe('Dynamic Page Layout test suite:', () => {
             waitForElDisplayed(openColumnButton);
             click(openColumnButton);
             waitForElDisplayed(columnSectionHeader);
+            pause(500);
             click(dynamicPageCollapseIcon);
+            pause(500);
             expect(waitForNotDisplayed(dynamicPageCollapsibleHeader)).toBe(true);
         });
 

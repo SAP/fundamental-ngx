@@ -16,9 +16,7 @@ export class TextAreaConfig {
      * Create Provider factory function
      */
     static createProviderFactory(obj: Partial<TextAreaConfig>): () => TextAreaConfig {
-        const useFactory = (): TextAreaConfig => {
-            return Object.assign(new TextAreaConfig(), obj);
-        };
+        const useFactory = (): TextAreaConfig => Object.assign(new TextAreaConfig(), obj);
         return useFactory;
     }
 }

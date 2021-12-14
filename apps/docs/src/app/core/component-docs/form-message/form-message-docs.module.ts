@@ -9,6 +9,7 @@ import { SharedDocumentationPageModule } from '../../../documentation/shared-doc
 import { FormModule } from '@fundamental-ngx/core/form';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
 
 const routes: Routes = [
     {
@@ -27,7 +28,8 @@ const routes: Routes = [
         SharedDocumentationPageModule,
         FormModule,
         PopoverModule,
-        InputGroupModule
+        InputGroupModule,
+        MultiInputModule
     ],
     exports: [RouterModule],
     declarations: [FormMessageDocsComponent, FormMessageHeaderComponent, FormMessageExampleComponent]

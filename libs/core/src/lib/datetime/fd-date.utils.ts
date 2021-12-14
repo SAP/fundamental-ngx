@@ -30,7 +30,7 @@ export function toIso8601(fdDate: {
  * @param minute 0 - 59
  * @param second 0 - 59
  */
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 export function isValidByParams(params: {
     year: number;
     month?: number;

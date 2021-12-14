@@ -41,9 +41,6 @@ export class FiltersComponent implements Resettable, AfterViewInit {
     /** Reference to the available steps */
     readonly ACTIVE_STEP = ACTIVE_STEP;
 
-    /** Initially selected filters. Used for restoring */
-    initialFilterBy: CollectionFilter[];
-
     /** Currently applied filters rules */
     filterBy: CollectionFilter[];
 
@@ -87,10 +84,10 @@ export class FiltersComponent implements Resettable, AfterViewInit {
     /** @hidden */
     constructor(public dialogRef: DialogRef, private _cd: ChangeDetectorRef) {
         const dialogData: FiltersDialogData = this.dialogRef.data;
-        this.initialFilterBy = [...dialogData.filterBy];
         this.filterBy = [...dialogData.filterBy];
         this.viewSettingsFilters = dialogData.viewSettingsFilters;
         this.columns = dialogData.columns;
+        this._isResetAvailableSubject$.next(this.filterBy.length > 0);
     }
 
     /** Need it to keep activeFilterStepView rendering up to date */
@@ -130,7 +127,7 @@ export class FiltersComponent implements Resettable, AfterViewInit {
             this.filterBy.push(filter);
         }
 
-        this._isResetAvailableSubject$.next(true);
+        this._isResetAvailableSubject$.next(this.filterBy.length > 0);
 
         // To fix "Expression has changed after it was checked"
         this._cd.detectChanges();
@@ -138,7 +135,7 @@ export class FiltersComponent implements Resettable, AfterViewInit {
 
     /** Reset changes to the initial state */
     reset(): void {
-        this.filterBy = [...this.initialFilterBy];
+        this.filterBy = [];
         this._isResetAvailableSubject$.next(false);
         this._cd.detectChanges();
     }

@@ -28,16 +28,19 @@ export class TablePo extends BaseComponentPo {
 
     button = 'button';
     buttonSearch = '.fdp-search-field__submit';
-    tableRow = '.fd-dnd-item ';
+    buttonFilter = 'button[title="filter"]';
+    tableRow = 'tbody .fd-table__row.ng-star-inserted ';
+    tableRowInitialState = 'tbody .fd-table__row.ng-star-inserted:not([aria-rowindex="0"], [aria-rowindex="3"])';
     input = 'input';
     tableCell = 'td';
+    tableCellInitialState = '.fd-table__cell--expand';
     tableCellText = '.fd-table__text';
     buttonSortedBy = '.fd-list__item.ng-star-inserted';
     barButton = 'fd-button-bar ' + this.button;
     tableCellDescription = '[headers*="description"]';
     tableCellPrice = '[headers*="price"]';
     tableCellName = '[headers*="name"]';
-    buttonSortedOrder = 'li.fd-list__item';
+    buttonSortedOrder = 'li.fd-list__item:not(.fd-list__group-header)';
     checkbox = '.fd-checkbox__label';
     busyIndicator = 'fd-busy-indicator .fd-busy-indicator';
     filterItem = '.fd-list__item--link';
@@ -71,12 +74,12 @@ export class TablePo extends BaseComponentPo {
     dropdownList = '.fd-select-options';
     dropdownOption = 'fd-option.fd-list__item ';
     dialogButton = 'fd-dialog-body .fd-button--compact';
-    dialogFilters = 'fd-dialog-body .fd-list__item';
+    dialogFilters = 'fd-dialog-body .fd-list__item:not(.fd-list__group-header)';
     filterInput = 'fdp-filter-custom input';
     filterButtonOk = 'fd-dialog-footer button';
     filterResetButton = 'fdp-table-reset-button button';
-    allInputFields = 'fdp-search-field input';
-    sortableIcon = '.fd-table__icon';
+    allInputFields = 'fd-toolbar .fdp-search-field__input-group';
+    sortableIcon = 'fdp-platform-table-sortable-example th';
     sortableOption = 'fd-popover-body .fd-list__item';
     sortablePopover = 'fd-popover-body';
     buttonActionOne = '[label="Action One"] button';
@@ -89,7 +92,7 @@ export class TablePo extends BaseComponentPo {
         waitForPresent(this.tableDefaultExample);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

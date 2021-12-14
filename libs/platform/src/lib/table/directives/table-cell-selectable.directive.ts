@@ -4,7 +4,7 @@ import { SPACE } from '@angular/cdk/keycodes';
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fdTableCellSelectable], [fd-table-cell-selectable]'
 })
 export class FdpCellSelectableDirective {

@@ -3,7 +3,7 @@ import { Attribute, Directive } from '@angular/core';
 import { CalendarI18nLabels } from './i18n/calendar-i18n-labels';
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-calendar-close-button]',
     host: {
         class: 'fd-calendar__close-button',

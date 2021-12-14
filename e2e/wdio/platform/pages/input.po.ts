@@ -25,6 +25,7 @@ export class InputPo extends BaseComponentPo {
     autocompleteInput = 'input#form-input-10';
     autocompleteInputLabel = 'fdp-platform-input-auto-complete-validation-example label';
     autocompleteOptions = '.fd-popover__popper li';
+    errorMessage = '.fd-form-message--error span';
 
     open(): void {
         super.open(this.url);
@@ -32,7 +33,7 @@ export class InputPo extends BaseComponentPo {
         waitForPresent(this.defaultInput);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

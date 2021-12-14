@@ -3,7 +3,7 @@ import { Directive, ElementRef, Input } from '@angular/core';
 import { ApprovalFlowNewNodePlacement } from '../approval-flow-add-node/approval-flow-add-node.component';
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fdp-approval-flow-drop-zone]',
     exportAs: 'fdp-approval-flow-drop-zone'
 })

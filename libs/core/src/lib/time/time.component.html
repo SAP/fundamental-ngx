@@ -1,7 +1,9 @@
 <div
     class="fd-time"
     (keydown)="handleKeyDownEvent($event)"
-    [ngClass]="{ 'fd-time--compact': compact, 'fd-time--tablet': tablet }"
+    [class.fd-time--compact]="compact"
+    [class.fd-time--tablet]="tablet"
+    [attr.aria-label]="_componentAriaLabel"
 >
     <fd-time-column
         [active]="isActive('hour')"

@@ -37,7 +37,8 @@
                                         [title]="isFullScreen ? 'Exit Fullscreen' : 'Expand Fullscreen'"
                                     >
                                         <i
-                                            [ngClass]="isFullScreen ? 'sap-icon--exitfullscreen' : 'sap-icon--resize'"
+                                            [class.sap-icon--exitfullscreen]="isFullScreen"
+                                            [class.sap-icon--resize]="!isFullScreen"
                                         ></i>
                                     </button>
                                     <button
@@ -97,7 +98,8 @@
                                         [title]="isFullScreen ? 'Exit Fullscreen' : 'Expand Fullscreen'"
                                     >
                                         <i
-                                            [ngClass]="isFullScreen ? 'sap-icon--exitfullscreen' : 'sap-icon--resize'"
+                                            [class.sap-icon--exitfullscreen]="isFullScreen"
+                                            [class.sap-icon--resize]="!isFullScreen"
                                         ></i>
                                     </button>
                                     <button

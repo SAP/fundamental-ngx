@@ -28,7 +28,7 @@ export class CarouselPo extends CoreBaseComponentPo {
         waitForPresent(this.sectionTitle);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

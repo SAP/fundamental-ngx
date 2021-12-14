@@ -5,7 +5,6 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChild,
-    ContentChildren,
     ElementRef,
     EventEmitter,
     Input,
@@ -14,21 +13,21 @@ import {
     OnInit,
     Optional,
     Output,
-    QueryList,
     Renderer2,
     SimpleChanges,
     TemplateRef,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { SplitButtonActionTitle } from './split-button-utils/split-button.directives';
-import { ButtonType } from '@fundamental-ngx/core/button';
-import { MenuComponent, MenuInteractiveDirective } from '@fundamental-ngx/core/menu';
-import { MenuItemComponent } from '@fundamental-ngx/core/menu';
 import { Subscription } from 'rxjs';
-import { MainAction } from './main-action';
 import { first } from 'rxjs/operators';
+
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { ButtonType } from '@fundamental-ngx/core/button';
+import { MenuComponent, MenuItemComponent } from '@fundamental-ngx/core/menu';
+
+import { SplitButtonActionTitle } from './split-button-utils/split-button.directives';
+import { MainAction } from './main-action';
 
 export const splitButtonTextClass = 'fd-button-split__text';
 export const splitButtonTextCompactClass = 'fd-button-split__text--compact';
@@ -84,9 +83,13 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     @Input()
     fdType: ButtonType;
 
-    /** Aria-label used to describe expand button*/
+    /** Aria-label attribute used to describe expand button */
     @Input()
-    expandButtonAriaLabel = 'More';
+    expandButtonAriaLabel = 'More actions';
+
+    /** Title attribute used to describe expand button */
+    @Input()
+    expandButtonTitle: string;
 
     /** Selected menu item */
     @Input()
@@ -103,6 +106,10 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     @Input()
     mainAction: MainAction;
 
+    /** aria-label attribute */
+    @Input()
+    arialLabel = 'Split button';
+
     /** Event sent when primary button is clicked */
     @Output()
     readonly primaryButtonClicked: EventEmitter<Event> = new EventEmitter<Event>();
@@ -114,10 +121,6 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     /** @hidden */
     @ContentChild(MenuComponent)
     menu: MenuComponent;
-
-    /** @hidden */
-    @ContentChildren(MenuInteractiveDirective)
-    menuInteractives: QueryList<MenuInteractiveDirective>;
 
     /** @hidden */
     @ViewChild('mainActionButton', { read: ElementRef })
@@ -192,7 +195,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
                 const lastItem = items[items.length - 1];
                 if (lastItem && !lastItem.submenu) {
                     this.menu.close();
-                    this.menuActionBtn.nativeElement.focus();
+                    this._focusTriggerElement();
                 }
             })
         );
@@ -229,6 +232,15 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
         if (menuItem && (!this.mainAction || !this.mainAction.keepMainAction)) {
             menuItem.setSelected(true);
         }
+    }
+
+    /**
+     * Wrapper gets focused programmatically by menu
+     * when the "escape" button is pressed.
+     * In this case we need to transit focus to the "more actions" button
+     */
+    _onGroupFocused(): void {
+        this._focusTriggerElement();
     }
 
     /** @hidden */
@@ -275,6 +287,8 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
             this._menuItemSubscriptions.closed = false;
             this._setupMenuItemSubscriptions();
         });
+        // call markForCheck once menu open state gets changed
+        this._menuSubscription.add(this.menu.isOpenChange.subscribe(() => this._cdRef.markForCheck()));
     }
 
     /** @hidden */
@@ -298,5 +312,10 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
         } else {
             this._renderer.addClass(textSpanElement, splitButtonTextClass);
         }
+    }
+
+    /** @hidden */
+    private _focusTriggerElement(): void {
+        this.menuActionBtn?.nativeElement.focus();
     }
 }

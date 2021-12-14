@@ -9,7 +9,6 @@ import { RtlService } from '@fundamental-ngx/core/utils';
 import {
     ApprovalDataSource,
     ApprovalFlowComponent,
-    ApprovalNode,
     ApprovalProcess,
     ApprovalTeam,
     ApprovalUser,
@@ -226,10 +225,10 @@ export class TestApprovalFlowDataSource implements ApprovalDataSource {
             email: `${user.name.toLowerCase().split(' ').join('.')}@company.com`
         });
     }
-    updateWatchers(watchers: ApprovalUser[]): void {}
-    updateApproval(approval: ApprovalNode): void {}
-    updateApprovals(approvals: ApprovalNode[]): void {}
-    sendReminders(members: ApprovalUser[], approval: ApprovalNode): Observable<any> {
+    updateWatchers(): void {}
+    updateApproval(): void {}
+    updateApprovals(): void {}
+    sendReminders(): Observable<any> {
         return of(null);
     }
 

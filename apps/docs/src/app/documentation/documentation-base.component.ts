@@ -3,7 +3,6 @@ import { SectionInterface } from '../documentation/core-helpers/sections-toolbar
 import { SectionsToolbarComponent } from '../documentation/core-helpers/sections-toolbar/sections-toolbar.component';
 import { BehaviorSubject } from 'rxjs';
 
-const COLLAPSED_BREAKPOINT = 576;
 const SMALL_SCREEN_BREAKPOINT = 992;
 @Directive()
 export class DocumentationBaseComponent implements OnInit {

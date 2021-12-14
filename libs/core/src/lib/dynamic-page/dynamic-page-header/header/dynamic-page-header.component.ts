@@ -119,12 +119,12 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
         });
     }
 
-    /**@hidden */
+    /** @hidden */
     private _addClassNameToHostElement(className: string): void {
         addClassNameToElement(this._renderer, this._elementRef.nativeElement, className);
     }
 
-    /**@hidden */
+    /** @hidden */
     private _addClassNameToCustomElement(element: Element, className: string): void {
         addClassNameToElement(this._renderer, element, className);
     }

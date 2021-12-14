@@ -20,7 +20,7 @@ import { DateTimeFormats, DATE_TIME_FORMATS, DatetimeAdapter } from '@fundamenta
 
 import { CalendarService } from '../../calendar.service';
 import { CalendarMonth } from '../../models/calendar-month';
-import { DefaultCalendarActiveCellStrategy } from '../../models/common';
+import { DefaultCalendarActiveCellStrategy, FocusableCalendarView } from '../../models/common';
 import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
 
 /** Component representing the month view of the calendar. */
@@ -34,7 +34,7 @@ import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
     },
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChanges {
+export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChanges, FocusableCalendarView {
     /** The id of the calendar passed from the parent component */
     @Input()
     id: string;
@@ -304,7 +304,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
      * Returns transformed 1d array from 2d month grid.
      */
     private _getMonthList(): CalendarMonth[] {
-        return [].concat.apply([], this._calendarMonthListGrid);
+        return [].concat(...this._calendarMonthListGrid);
     }
 
     /** @hidden */

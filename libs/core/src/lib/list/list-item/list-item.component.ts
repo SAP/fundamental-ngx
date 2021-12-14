@@ -34,7 +34,7 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
  * The list item can contain plain text, links or actions.
  */
 @Component({
-    // tslint:disable-next-line:component-selector
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fdListItem] ,[fd-list-item]',
     templateUrl: './list-item.component.html',
     host: {
@@ -187,7 +187,7 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
 
     /** @hidden */
     private _listenOnButtonQueryChange(): void {
-        this.buttons.changes.pipe(takeUntil(this._onDestroy$), startWith(0)).subscribe((_) => {
+        this.buttons.changes.pipe(takeUntil(this._onDestroy$), startWith(0)).subscribe(() => {
             this.buttons.forEach(this._addClassToButtons);
         });
     }

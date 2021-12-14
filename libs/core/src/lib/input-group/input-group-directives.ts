@@ -10,7 +10,7 @@ import {
     Optional,
     Renderer2
 } from '@angular/core';
-import { InputGroupPlacement } from './input-group.component';
+import { InputGroupPlacement } from './types';
 import { FormStates } from '@fundamental-ngx/core/shared';
 import { Subscription } from 'rxjs';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
@@ -18,7 +18,7 @@ import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { applyCssClass } from '@fundamental-ngx/core/utils';
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-input-group-input]'
 })
 export class InputGroupInputDirective implements CssClassBuilder, OnInit, OnChanges, OnDestroy {
@@ -73,13 +73,13 @@ export class InputGroupInputDirective implements CssClassBuilder, OnInit, OnChan
 }
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-textarea-group-input]'
 })
 export class InputGroupTextareaDirective {}
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-input-group-addon]'
 })
 export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuilder, AfterContentInit, OnDestroy {

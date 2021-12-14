@@ -113,7 +113,7 @@ export class FacetComponent implements AfterViewInit {
                 // image should always be on the left
                 this._setStyleToHostElement('order', '-1');
                 break;
-            case 'rating-indicator':
+            case 'rating-indicator': {
                 const ratingIndicatorComponent = this._elementRef.nativeElement.querySelector('.fd-rating-indicator');
 
                 if (!ratingIndicatorComponent) {
@@ -143,7 +143,8 @@ export class FacetComponent implements AfterViewInit {
                 );
                 this._addClassNameToCustomElement(ratingIndicatorDynamicText, FACET_CLASS_NAME.marginTopTiny);
                 break;
-            case 'form':
+            }
+            case 'form': {
                 const formFacetContainer = this._elementRef.nativeElement.querySelectorAll('.fd-facet__container');
                 if (!formFacetContainer) {
                     return;
@@ -161,7 +162,8 @@ export class FacetComponent implements AfterViewInit {
                 });
 
                 break;
-            case 'key-value':
+            }
+            case 'key-value': {
                 // add class to object status
                 const objectStatusComponent = this._elementRef.nativeElement.querySelector('.fd-object-status');
                 if (!objectStatusComponent) {
@@ -184,6 +186,7 @@ export class FacetComponent implements AfterViewInit {
                 this._addClassNameToCustomElement(objectStatusIcon, FACET_CLASS_NAME.paddingNone);
                 this._addClassNameToCustomElement(objectStatusIcon, FACET_CLASS_NAME.marginEndTiny);
                 break;
+            }
             default:
                 break;
         }
@@ -203,12 +206,12 @@ export class FacetComponent implements AfterViewInit {
         this._elementRef.nativeElement.classList.add(`fd-margin-begin--md`);
     }
 
-    /**@hidden */
+    /** @hidden */
     private _setStyleToHostElement(attribute: string, value: any): void {
         this._renderer.setStyle(this._elementRef.nativeElement, attribute, value);
     }
 
-    /**@hidden */
+    /** @hidden */
     private _addClassNameToCustomElement(element: Element, className: string): void {
         addClassNameToFacetElement(this._renderer, element, className);
     }

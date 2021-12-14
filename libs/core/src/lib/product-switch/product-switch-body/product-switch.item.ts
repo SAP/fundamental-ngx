@@ -11,7 +11,7 @@ export interface ProductSwitchItem {
     image?: string;
 
     /** Callback function that will be called on selecting this product from dropdown */
-    callback?: Function;
+    callback?: (event: MouseEvent) => void;
 
     /** Icon of product item */
     icon?: string;

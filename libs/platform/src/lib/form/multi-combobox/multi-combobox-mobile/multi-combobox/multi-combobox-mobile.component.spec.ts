@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { DynamicComponentService } from '@fundamental-ngx/core/utils';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
-import { SelectableOptionItem } from '@fundamental-ngx/platform/shared';
 import { MultiComboboxComponent } from '../../multi-combobox/multi-combobox.component';
 import { MultiComboboxMobileComponent } from '../multi-combobox/multi-combobox-mobile.component';
 import { MULTICOMBOBOX_COMPONENT } from '../../multi-combobox.interface';
@@ -29,7 +28,7 @@ describe('MultiComboboxMobileComponent', () => {
             cancelButtonText: 'cancel',
             hasCloseButton: true
         },
-        dialogDismiss: (backup: SelectableOptionItem[]) => {},
+        dialogDismiss: () => {},
         dialogApprove: () => {},
         openChange: new EventEmitter<boolean>()
     };
@@ -58,7 +57,7 @@ describe('MultiComboboxMobileComponent', () => {
                 cancelButtonText: 'cancel',
                 hasCloseButton: true
             },
-            dialogDismiss: (backup: SelectableOptionItem[]) => {},
+            dialogDismiss: () => {},
             dialogApprove: () => {},
             openChange: new EventEmitter<boolean>()
         };

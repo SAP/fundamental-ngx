@@ -1,7 +1,6 @@
-import { Tree, SchematicsException } from '@angular-devkit/schematics';
-
-import * as ts from 'typescript';
 import { WorkspaceProject, WorkspaceSchema } from '@schematics/angular/utility/workspace-models';
+import { Tree, SchematicsException } from '@angular-devkit/schematics';
+import * as ts from 'typescript';
 
 // Checks if an import is included in the module.
 export function hasModuleImport(tree: Tree, modulePath: string, className: string): boolean {
@@ -18,7 +17,7 @@ export function hasModuleImport(tree: Tree, modulePath: string, className: strin
         throw new SchematicsException(`Could not find NgModule declaration inside: "${modulePath}"`);
     }
 
-    // tslint:disable-next-line:no-non-null-assertion
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     for (const property of ngModuleMetadata!.properties) {
         if (
             !ts.isPropertyAssignment(property) ||
@@ -42,7 +41,7 @@ function findNgModuleMetadata(rootNode: ts.Node): ts.ObjectLiteralExpression | n
     const nodeQueue: ts.Node[] = [...rootNode.getChildren()];
 
     while (nodeQueue.length) {
-        // tslint:disable-next-line:no-non-null-assertion
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const node = nodeQueue.shift()!;
 
         if (ts.isDecorator(node) && ts.isCallExpression(node.expression) && isNgModuleCallExpression(node.expression)) {

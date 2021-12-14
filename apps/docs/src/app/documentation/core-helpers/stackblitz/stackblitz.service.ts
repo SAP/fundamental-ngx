@@ -1,11 +1,14 @@
 import * as polyfills from '!raw-loader!./code-example-stack/polyfills.ts';
-import * as maints from '!raw-loader!./code-example-stack/main.ts';
-import * as stylesScss from '!raw-loader!./code-example-stack/styles.scss';
+import * as main from '!raw-loader!./code-example-stack/main.ts';
+import * as styles from '!raw-loader!./code-example-stack/styles.scss';
+/** Importing a JSON broken at the moment, https://github.com/webpack-contrib/raw-loader/issues/91 */
+import * as tsconfig from '!raw-loader!./code-example-stack/tsconfig.txt';
+
 import sdk from '@stackblitz/sdk';
+import { Inject, Injectable } from '@angular/core';
 import { StackblitzFile } from './interfaces/stackblitz-parameters';
 import { StackblitzDependencies } from './stackblitz-dependencies';
 import { StackblitzProject } from './interfaces/stackblitz-project';
-import { Inject, Injectable } from '@angular/core';
 import { Libraries } from '../../utilities/libraries';
 import { ExampleFile } from '../code-example/example-file';
 import { StackblitzModuleWrapper } from './stackblitz-module-wrapper';
@@ -28,10 +31,15 @@ export class StackblitzService {
     get defaultProjectInfo(): StackblitzProject {
         return {
             files: {
-                'src/main.ts': maints.default,
+                'src/main.ts': main.default,
                 'src/polyfills.ts': polyfills.default,
-                'src/styles.scss': stylesScss.default,
-                'angular.json': StackblitzDependencies.getAngularJson()
+                'src/styles.scss': styles.default,
+                'angular.json': StackblitzDependencies.getAngularJson(),
+                /**
+                 * We're providing custom tsconfig with "enableIvy": false due to the StackBlitz issue
+                 * https://github.com/stackblitz/core/issues/1364
+                 */
+                'tsconfig.json': tsconfig.default
             },
             title: 'Fundamental-NGX Example',
             description: 'Generated for you by fundamental-ngx team',
@@ -113,12 +121,13 @@ export class StackblitzService {
 
         return `
 import { Component } from '@angular/core';
-    @Component({
-        selector: '${libraryPrefix}${fileName}',
-        templateUrl: './${fileName}.component.html',
-        styleUrls: ['./${fileName}.component.scss']
-    })
-    export class ${componentName} {}`;
+
+@Component({
+    selector: '${libraryPrefix}${fileName}',
+    templateUrl: './${fileName}.component.html',
+    styleUrls: ['./${fileName}.component.scss']
+})
+export class ${componentName} {}`;
     }
 
     private getLibraryPrefix(): string {

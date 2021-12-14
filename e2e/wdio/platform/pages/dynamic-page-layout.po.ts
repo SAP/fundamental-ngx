@@ -11,15 +11,14 @@ export class DynamicPageLayoutPo extends BaseComponentPo {
     flexibleColumnExampleButton = 'fdp-platform-dynamic-page-flexible-column-example button';
 
     dynamicPage = 'fdp-dynamic-page';
-    dynamicPageCollapseIcon = '.fd-dynamic-page__collapse-button';
+    dynamicPageCollapseIcon = this.dynamicPage + ' .fd-dynamic-page__collapse-button';
     dynamicPageContentStart = 'fdp-dynamic-page-content-host br';
     dynamicPageContentEnd = 'fdp-dynamic-page-content-host .footer-spacer';
     dynamicPageTitle = '.fd-dynamic-page__title-container';
-    dynamicPageToolBar = '.fd-dynamic-page__toolbar';
-    dynamicPageTabs = '.fd-dynamic-page__tabs--overflow .fd-tabs__item';
-    dynamicPageTabsContent = 'fdp-dynamic-page-content-host';
-    dynamicPageToolBarAccept = this.dynamicPageToolBar + ' .fd-button--positive';
-    dynamicPageToolBarReject = this.dynamicPageToolBar + ' .fd-button--negative';
+    dynamicPageTabs = '.fd-dynamic-page .fd-tabs__item';
+    dynamicPageTabsContent = '.fd-dynamic-page__content';
+    dynamicPageToolBarAccept = this.dynamicPage + ' .fd-button--positive';
+    dynamicPageToolBarReject = this.dynamicPage + ' .fd-button--negative';
     dynamicPageCollapsibleHeader = this.dynamicPage + ' .fd-dynamic-page__collapsible-header-container [role="region"]';
 
     columnSection = 'section';
@@ -32,7 +31,7 @@ export class DynamicPageLayoutPo extends BaseComponentPo {
         waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

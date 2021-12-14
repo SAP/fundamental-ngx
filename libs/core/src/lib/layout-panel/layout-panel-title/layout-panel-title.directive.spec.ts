@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { LayoutPanelTitleDirective } from './layout-panel-title.directive';
+
 import { LayoutPanelModule } from '../layout-panel.module';
 
 @Component({

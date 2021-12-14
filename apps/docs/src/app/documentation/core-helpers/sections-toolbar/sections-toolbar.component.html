@@ -1,4 +1,4 @@
-<div class="sidebar" [ngClass]="{ 'sidebar-collapsed': sideCollapsed | async }">
+<div class="sidebar" [class.sidebar-collapsed]="sideCollapsed | async">
     <div class="fd-docs-search">
         <fd-input-group
             glyph="decline"

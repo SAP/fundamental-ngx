@@ -5,7 +5,7 @@
 <fdp-list
     [noBorder]="true"
     [dataSource]="_dataSource"
-    [selectionMode]="'single'"
+    selectionMode="single"
     [(ngModel)]="_selectedItem"
     (selectedItemChange)="_showItemInfo($event)"
     selection="true"
@@ -15,7 +15,7 @@
     <fdp-standard-list-item
         *fdpItemDef="let address"
         [title]="address.name"
-        [name]="'radio1'"
+        name="radio1"
         [value]="address.id"
         [id]="address.id"
     >

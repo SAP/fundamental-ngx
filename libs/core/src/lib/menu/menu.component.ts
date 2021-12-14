@@ -52,6 +52,7 @@ export class MenuComponent
     implements MenuInterface, AfterContentInit, AfterViewInit, OnDestroy, OnInit
 {
     /** Set menu in mobile mode */
+    // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('mobile')
     set setMobileMode(value: boolean) {
         this.mobile = value;
@@ -94,10 +95,6 @@ export class MenuComponent
     @Output()
     readonly activePath: EventEmitter<MenuItemComponent[]> = new EventEmitter<MenuItemComponent[]>();
 
-    /** @hidden Emits event when the menu is opened/closed */
-    @Output()
-    isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-
     /** @hidden Reference to the menu root template */
     @ViewChild('menuRootTemplate')
     menuRootTemplate: TemplateRef<any>;
@@ -122,7 +119,7 @@ export class MenuComponent
     private _mobileModeComponentRef: ComponentRef<MenuMobileComponent>;
 
     /** @hidden */
-    private _clickEventListener: Function;
+    private _clickEventListener: () => void;
 
     /** @hidden */
     constructor(
@@ -149,6 +146,12 @@ export class MenuComponent
                 })
             );
         }
+
+        /** keep isOpen up to date */
+        this.isOpenChange.subscribe((isOpen) => {
+            this.isOpen = isOpen;
+            this._changeDetectorRef.markForCheck();
+        });
     }
 
     /** @hidden */
@@ -159,8 +162,14 @@ export class MenuComponent
 
     /** @hidden */
     ngAfterViewInit(): void {
+        this._menuService.isMobileMode.subscribe((isMobile) => {
+            this._setupView();
+            if (isMobile) {
+                // Since it is mobile it's needed to disable popoverService
+                this._popoverService.deactivate();
+            }
+        });
         this._menuService.setMenuMode(this.mobile);
-        this._setupView();
     }
 
     /** @hidden */
@@ -185,18 +194,26 @@ export class MenuComponent
 
     /** Opens the menu */
     open(): void {
-        this.isOpen = true;
-        this._popoverService.open();
-        this.isOpenChange.emit(this.isOpen);
+        if (this.mobile) {
+            this.isOpen = true;
+            this.isOpenChange.emit(this.isOpen);
+        }
+        if (!this.mobile) {
+            this._popoverService.open();
+        }
         this._changeDetectorRef.markForCheck();
     }
 
     /** Closes the menu */
     close(): void {
-        this.isOpen = false;
-        this._popoverService.close();
+        if (this.mobile) {
+            this.isOpen = false;
+            this.isOpenChange.emit(this.isOpen);
+        }
+        if (!this.mobile) {
+            this._popoverService.close();
+        }
         this._menuService.resetMenuState();
-        this.isOpenChange.emit(this.isOpen);
         this._focusTrigger();
         this._changeDetectorRef.markForCheck();
     }

@@ -10,7 +10,7 @@
         (overflowChanged)="_recalculateVisibleItems($event)"
     >
         <li
-            *ngFor="let item of _tabs; trackBy: _trackBy"
+            *ngFor="let item of _tabs; let idx = index; trackBy: _trackByTab"
             [class]="item.cssClasses"
             fdOverflowListItem
             fdpIconBarDndItem
@@ -21,12 +21,13 @@
             role="presentation"
         >
             <a
-                *ngIf="!item.subItems?.length"
+                *ngIf="!item.subItems?.length; else withPopover"
                 class="fd-icon-tab-bar__tab"
+                #tabItem
                 role="tab"
-                tabindex="0"
+                [attr.tabindex]="idx === 0 ? 0 : -1"
                 (click)="_selectItem(item, $event)"
-                (keydown)="_keyDownHandler($event, item)"
+                (keydown)="_keyDownHandler($event, item, idx)"
                 [attr.aria-selected]="item.uId === _selectedUid"
             >
                 <span *ngIf="layoutMode === 'row'; else columnsMode" class="fd-icon-tab-bar__tag">
@@ -38,15 +39,22 @@
                     <span class="fd-icon-tab-bar__tag">{{ item.label }}</span>
                 </ng-template>
                 <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>
+                <div class="screenreader-only" *ngIf="item.color">
+                    {{ (colorAssociations && colorAssociations[item.color]) || item.color }}
+                </div>
             </a>
-            <ng-container *ngIf="item.subItems?.length">
+            <ng-template #withPopover>
                 <fdp-text-type-popover
+                    #tabItem
+                    [tabindex]="idx === 0 ? 0 : -1"
                     [parentTab]="item"
                     [selectedSubItemUid]="_selectedUid"
+                    [colorAssociations]="colorAssociations"
                     (selectedSubItem)="_selectItem($event)"
+                    (keydown)="_keyDownHandler($event, item, idx)"
                 >
                 </fdp-text-type-popover>
-            </ng-container>
+            </ng-template>
         </li>
         <li
             *ngIf="_extraTabs.length"
@@ -57,9 +65,14 @@
             [anchorIndexInsideParent]="_lastVisibleTabIndex"
         >
             <fdp-text-type-popover
+                #extraItemsPopover
+                [isRtl]="isRtl"
                 [extraTabs]="_extraTabs"
                 [isExtraItemsMode]="true"
+                [colorAssociations]="colorAssociations"
                 (selectedExtraItem)="_selectExtraItem($event)"
+                (focusFirstVisibleItem)="_focusItem(0)"
+                (focusLastVisibleItem)="_focusItem(_lastVisibleTabIndex)"
             >
             </fdp-text-type-popover>
         </li>

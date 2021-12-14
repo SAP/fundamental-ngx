@@ -65,9 +65,7 @@ describe('ComboboxComponent', () => {
     });
 
     it('should reset displayed values', () => {
-        component.displayFn = (item: any): string => {
-            return item.displayedValue;
-        };
+        component.displayFn = (item: any): string => item.displayedValue;
         component.inputText = 'displayedValue2';
         (<any>component)._refreshDisplayedValues();
         expect(component.displayedValues.length).toBe(1);
@@ -86,9 +84,7 @@ describe('ComboboxComponent', () => {
     it('should handle input entry on dropdown mode', () => {
         spyOn(component, 'onChange');
         component.communicateByObject = true;
-        component.displayFn = (item: any): string => {
-            return item.displayedValue;
-        };
+        component.displayFn = (item: any): string => item.displayedValue;
         component.inputText = 'displayedValue2';
         expect(component.onChange).toHaveBeenCalledWith({ value: 'value2', displayedValue: 'displayedValue2' });
     });
@@ -109,9 +105,7 @@ describe('ComboboxComponent', () => {
 
     it('should handle write value from outside on dropdown mode', () => {
         component.communicateByObject = true;
-        component.displayFn = (item: any): string => {
-            return item.displayedValue;
-        };
+        component.displayFn = (item: any): string => item.displayedValue;
         component.writeValue({ value: 'value2', displayedValue: 'displayedValue2' });
         expect(component.inputTextValue).toBe('displayedValue2');
     });
@@ -138,9 +132,7 @@ describe('ComboboxComponent', () => {
     it('should choose previous element', () => {
         component.open = false;
         spyOn(component, 'onMenuClickHandler');
-        component.displayFn = (item: any): string => {
-            return item.displayedValue;
-        };
+        component.displayFn = (item: any): string => item.displayedValue;
         component.inputTextValue = component.dropdownValues[1].displayedValue;
         component.onInputKeydownHandler(<any>{ stopPropagation: () => {}, preventDefault: () => {}, key: 'ArrowUp' });
 
@@ -150,9 +142,7 @@ describe('ComboboxComponent', () => {
     it('should choose next element, when there is nothing chosen', () => {
         component.open = false;
         spyOn(component, 'onMenuClickHandler');
-        component.displayFn = (item: any): string => {
-            return item.displayedValue;
-        };
+        component.displayFn = (item: any): string => item.displayedValue;
         component.inputTextValue = null;
         component.onInputKeydownHandler(<any>{ stopPropagation: () => {}, preventDefault: () => {}, key: 'ArrowDown' });
 
@@ -160,9 +150,7 @@ describe('ComboboxComponent', () => {
     });
 
     it('should reset displayed values on primary button click', () => {
-        component.displayFn = (item: any): string => {
-            return item.displayedValue;
-        };
+        component.displayFn = (item: any): string => item.displayedValue;
         component.open = false;
         component.inputText = 'displayedValue2';
         (<any>component)._refreshDisplayedValues();
@@ -172,9 +160,7 @@ describe('ComboboxComponent', () => {
     });
 
     it('should open and reset displayed values on alt+down', () => {
-        component.displayFn = (item: any): string => {
-            return item.displayedValue;
-        };
+        component.displayFn = (item: any): string => item.displayedValue;
         component.open = false;
         component.inputText = 'displayedValue2';
         (<any>component)._refreshDisplayedValues();
@@ -235,12 +221,42 @@ describe('ComboboxComponent', () => {
         expect(addOns.length).toBe(1);
         component.isSearch = true;
         component.communicateByObject = true;
-        component.displayFn = (item: any): string => {
-            return item.displayedValue;
-        };
+        component.displayFn = (item: any): string => item.displayedValue;
         component.inputText = 'displayedValue2';
         (<any>component)._cdRef.detectChanges();
         addOns = fixture.nativeElement.querySelectorAll('button');
         expect(addOns.length).toBe(2);
+    });
+
+    describe('rendered in shellbar', () => {
+        beforeEach(() => {
+            fixture = TestBed.createComponent(ComboboxComponent);
+            component = fixture.componentInstance;
+            component.dropdownValues = [
+                { value: 'value', displayedValue: 'displayedValue' },
+                { value: 'value2', displayedValue: 'displayedValue2' }
+            ];
+            component.searchFn = () => {};
+            component.inShellbar = true;
+            fixture.detectChanges();
+        });
+
+        it('should add extra classes', () => {
+            component.isSearch = true;
+            (<any>component)._cdRef.detectChanges();
+
+            const inputGroup = fixture.nativeElement.querySelector('.fd-input-group');
+            expect(inputGroup.classList.contains('fd-shellbar__input-group')).toBeTrue();
+
+            const input = fixture.nativeElement.querySelector('.fd-input');
+            expect(input.classList.contains('fd-shellbar__input-group__input')).toBeTrue();
+
+            const addOns = fixture.nativeElement.querySelectorAll('.fd-input-group__addon');
+            addOns.forEach((element) => {
+                expect(element.classList.contains('fd-shellbar__input-group__addon')).toBeTrue();
+                const button = element.querySelector('.fd-button');
+                expect(button.classList.contains('fd-shellbar__button')).toBeTrue();
+            });
+        });
     });
 });

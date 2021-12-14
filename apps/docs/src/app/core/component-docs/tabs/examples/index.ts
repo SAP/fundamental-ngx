@@ -4,9 +4,9 @@ import { TabCounterComponent } from './tab-counter-example/tab-counter.component
 import { TabFilterExampleComponent } from './tab-filter-example/tab-filter-example.component';
 import { TabIconOnlyExampleComponent } from './tab-icon-only-example/tab-icon-only-example.component';
 import {
-    TabNavigationExampleChildFirst,
-    TabNavigationExampleChildSecond,
-    TabNavigationExampleChildThird
+    TabNavigationExampleChildFirstComponent,
+    TabNavigationExampleChildSecondComponent,
+    TabNavigationExampleChildThirdComponent
 } from './tab-navigation-children/tab-navigation-children';
 import { TabProcessExampleComponent } from './tab-process-example/tab-process-example.component';
 import { TabStackedContentExampleComponent } from './tab-stacked-content-example/tab-stacked-content-example.component';
@@ -41,9 +41,9 @@ export const examples = [
     TabSelectionExampleComponent,
     ComplexTitleExampleComponent,
     TabCollapsibleExampleComponent,
-    TabNavigationExampleChildThird,
-    TabNavigationExampleChildFirst,
-    TabNavigationExampleChildSecond,
+    TabNavigationExampleChildThirdComponent,
+    TabNavigationExampleChildFirstComponent,
+    TabNavigationExampleChildSecondComponent,
     TabStackedContentExampleComponent,
     TabsNavigationModeExampleComponent,
     TabCollapsibleOverflowExampleComponent,

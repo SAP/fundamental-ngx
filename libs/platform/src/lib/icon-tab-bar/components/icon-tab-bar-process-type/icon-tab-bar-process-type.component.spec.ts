@@ -5,6 +5,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { generateTestConfig } from '../../tests-helper';
 import { OverflowListDirective } from '@fundamental-ngx/core/utils';
 import { of } from 'rxjs';
+import { IconTabBarComponent } from '../../icon-tab-bar.component';
 
 const AMOUNT_OF_EXTRA_TABS = 80;
 
@@ -15,6 +16,7 @@ describe('IconTabBarProcessTypeComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [IconTabBarProcessTypeComponent],
+            providers: [{ provide: IconTabBarComponent, useValue: {} }],
             schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents();
     });
@@ -68,7 +70,7 @@ describe('IconTabBarProcessTypeComponent', () => {
 });
 
 const fakeOverflowDirective = {
-    getAmountOfExtraItems: (_) => AMOUNT_OF_EXTRA_TABS
+    getAmountOfExtraItems: () => AMOUNT_OF_EXTRA_TABS
 };
 
 const fakeNgZone = {
@@ -78,5 +80,6 @@ const fakeNgZone = {
 };
 
 const fakeCdr = {
-    detectChanges: (_) => null
+    detectChanges: () => null,
+    markForCheck: () => null
 };

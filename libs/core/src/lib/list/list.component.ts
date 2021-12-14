@@ -30,7 +30,7 @@ type FocusItem = ListGroupHeaderDirective | ListItemComponent;
  * It is used to display a list of items with simple information such as scopes, names, etc.
  */
 @Component({
-    // tslint:disable-next-line:component-selector
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-list], [fdList]',
     templateUrl: `./list.component.html`,
     host: {

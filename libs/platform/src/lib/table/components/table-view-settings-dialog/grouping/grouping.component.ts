@@ -6,23 +6,24 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
 import { SortDirection } from '../../../enums/sort-direction.enum';
 import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
 
-export interface GroupDialogColumn {
+export interface SettingsGroupDialogColumn {
     label: string;
     key: string;
 }
 
-export interface GroupDialogData {
+export interface SettingsGroupDialogData {
     direction: SortDirection;
     field: string;
-    columns: GroupDialogColumn[];
+    columns: SettingsGroupDialogColumn[];
 }
 
-export interface GroupDialogResultData {
+export interface SettingsGroupDialogResultData {
     field: string;
     direction: SortDirection;
 }
 
 const NOT_GROUPED_OPTION_VALUE = null;
+const INITIAL_DIRECTION = SortDirection.ASC;
 
 @Component({
     templateUrl: './grouping.component.html',
@@ -30,12 +31,6 @@ const NOT_GROUPED_OPTION_VALUE = null;
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GroupingComponent implements Resettable {
-    /** Initially active direction */
-    initialDirection: SortDirection = SortDirection.ASC;
-
-    /** Initially active field */
-    initialField: string = null;
-
     /** Current selected direction */
     direction: SortDirection;
 
@@ -43,7 +38,7 @@ export class GroupingComponent implements Resettable {
     field: string;
 
     /** Table columns */
-    readonly columns: GroupDialogColumn[] = [];
+    readonly columns: SettingsGroupDialogColumn[] = [];
 
     /** @hidden */
     private _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -59,20 +54,18 @@ export class GroupingComponent implements Resettable {
 
     /** @hidden */
     constructor(public dialogRef: DialogRef) {
-        const data: GroupDialogData = this.dialogRef.data;
+        const data: SettingsGroupDialogData = this.dialogRef.data;
 
-        this.initialDirection = data.direction || this.initialDirection;
-        this.initialField = data.field || this.initialField;
         this.columns = data.columns || [];
 
-        this.direction = this.initialDirection;
-        this.field = this.initialField;
+        this.direction = data.direction ?? INITIAL_DIRECTION;
+        this.field = data.field ?? NOT_GROUPED_OPTION_VALUE;
     }
 
     /** Reset changes to the initial state */
     reset(): void {
-        this.direction = this.initialDirection;
-        this.field = this.initialField;
+        this.direction = INITIAL_DIRECTION;
+        this.field = NOT_GROUPED_OPTION_VALUE;
         this._isResetAvailableSubject$.next(false);
     }
 
@@ -83,7 +76,7 @@ export class GroupingComponent implements Resettable {
 
     /** Confirm changes and close dialog */
     confirm(): void {
-        const result: GroupDialogResultData = { field: this.field, direction: this.direction };
+        const result: SettingsGroupDialogResultData = { field: this.field, direction: this.direction };
         this.dialogRef.close(result);
     }
 
@@ -102,7 +95,7 @@ export class GroupingComponent implements Resettable {
     /** @hidden */
     _onModelChange(): void {
         // Use this coercion cause fd-radio-button triggers extra ngModelChange events on initial phase
-        const isInitialDiffers = this.initialDirection !== this.direction || this.initialField !== this.field;
+        const isInitialDiffers = this.direction !== INITIAL_DIRECTION || this.field !== NOT_GROUPED_OPTION_VALUE;
         this._isResetAvailableSubject$.next(isInitialDiffers);
     }
 }

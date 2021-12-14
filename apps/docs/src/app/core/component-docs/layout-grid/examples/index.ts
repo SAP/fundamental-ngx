@@ -5,7 +5,7 @@ import { LayoutGridNestingExampleComponent } from './layout-grid-nesting-example
 import { LayoutGridNoGapExampleComponent } from './layout-grid-no-gap-example.component';
 import { LayoutGridOffsetExampleComponent } from './layout-grid-offset-example.component';
 import { LayoutGridResponsiveExampleComponent } from './layout-grid-responsive-example.component';
-import { LayoutGridResponsiveOffsetExample } from './layout-grid-responsive-offset-example.component';
+import { LayoutGridResponsiveOffsetExampleComponent } from './layout-grid-responsive-offset-example.component';
 import { LayoutGridRowExampleComponent } from './layout-grid-row-example.component';
 
 export * from './layout-grid-basic-example.component';
@@ -24,7 +24,7 @@ export const examples = [
     LayoutGridNoGapExampleComponent,
     LayoutGridOffsetExampleComponent,
     LayoutGridNestingExampleComponent,
-    LayoutGridResponsiveOffsetExample,
+    LayoutGridResponsiveOffsetExampleComponent,
     LayoutGridGrowingExampleComponent,
     LayoutGridResponsiveExampleComponent,
     ExampleLayoutGridBlockComponent

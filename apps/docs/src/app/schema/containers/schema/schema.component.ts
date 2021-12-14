@@ -19,11 +19,13 @@ export class SchemaComponent implements OnInit, OnChanges, OnDestroy {
      */
     @Input() resettable = false;
 
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     @Output() onSchemaValues: EventEmitter<any> = new EventEmitter<any>();
 
     /**
      * Emits when playground needs to be resetted.
      */
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     @Output() onReset: EventEmitter<void> = new EventEmitter<void>();
 
     schemaGroup: FormGroup;

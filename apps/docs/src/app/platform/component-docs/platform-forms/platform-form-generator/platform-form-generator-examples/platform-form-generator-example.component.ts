@@ -10,13 +10,12 @@ import {
 } from '@fundamental-ngx/core/datetime';
 import { DynamicFormItem, DynamicFormValue, FormGeneratorComponent } from '@fundamental-ngx/platform/form';
 
-export const dummyAwaitablePromise = (timeout = 200) => {
-    return new Promise<boolean>((resolve) => {
+export const dummyAwaitablePromise = (timeout = 200) =>
+    new Promise<boolean>((resolve) => {
         setTimeout(() => {
             resolve(true);
         }, timeout);
     });
-};
 
 @Component({
     selector: 'fdp-platform-form-generator-example',
@@ -43,6 +42,33 @@ export class PlatformFormGeneratorExampleComponent {
     formValue: DynamicFormValue;
 
     questions: DynamicFormItem[] = [
+        {
+            name: 'some',
+            message: 'Some group name',
+            items: [
+                {
+                    type: 'input',
+                    name: 'nameInGroup',
+                    message: 'Your name (group)',
+                    default: 'John',
+                    placeholder: 'Please provide your name',
+                    guiOptions: {
+                        hint: 'Some contextual hint',
+                        column: 1
+                    },
+                    validate: async (value) => {
+                        await dummyAwaitablePromise();
+
+                        return value === 'John' ? null : 'Your name should be John';
+                    },
+                    transformer: async (value: any) => {
+                        await dummyAwaitablePromise();
+                        return `${value}777`;
+                    },
+                    validators: [Validators.required]
+                }
+            ]
+        },
         {
             type: 'input',
             name: 'name',
@@ -107,20 +133,16 @@ export class PlatformFormGeneratorExampleComponent {
                 inline: true,
                 column: 2
             },
-            choices: (formValue) => {
-                return [
-                    'USA',
-                    'Germany',
-                    {
-                        label: 'Ukraine',
-                        value: 'Ukraine'
-                    }
-                ];
-            },
+            choices: () => [
+                'USA',
+                'Germany',
+                {
+                    label: 'Ukraine',
+                    value: 'Ukraine'
+                }
+            ],
             validators: [Validators.required],
-            validate: (input, formValue) => {
-                return input?.length > 0 ? null : 'You need to select some country';
-            }
+            validate: (input) => (input?.length > 0 ? null : 'You need to select some country')
         },
         {
             type: 'list',
@@ -173,9 +195,7 @@ export class PlatformFormGeneratorExampleComponent {
                 column: 2
             },
             validators: [Validators.required],
-            validate: (result: string) => {
-                return result === 'Angular' ? null : 'You should pick Angular';
-            }
+            validate: (result: string) => (result === 'Angular' ? null : 'You should pick Angular')
         },
         {
             type: 'datepicker',
@@ -185,12 +205,9 @@ export class PlatformFormGeneratorExampleComponent {
                 column: 1
             },
             validators: [Validators.required],
-            validate: (value: FdDate) => {
-                return value !== null && value.year < 2020 ? null : 'You need to be born before 2020';
-            },
-            transformer: (value: FdDate) => {
-                return value?.toDateString();
-            }
+            validate: (value: FdDate) =>
+                value !== null && value.year < 2020 ? null : 'You need to be born before 2020',
+            transformer: (value: FdDate) => value?.toDateString()
         },
         {
             type: 'switch',
@@ -210,6 +227,8 @@ export class PlatformFormGeneratorExampleComponent {
     }
 
     async onFormSubmitted(value: DynamicFormValue): Promise<void> {
+        console.log(value);
+
         this.formValue = value;
 
         this.loading = true;

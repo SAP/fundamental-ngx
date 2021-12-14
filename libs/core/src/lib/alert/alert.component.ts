@@ -103,6 +103,7 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
 
     /** Event fired when the alert is dismissed. */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onDismiss: EventEmitter<undefined> = new EventEmitter<undefined>();
 
     /** @hidden */

@@ -1,0 +1,8 @@
+<fd-pagination
+    fd-toolbar-item
+    mobile
+    [totalItems]="totalItems"
+    [currentPage]="currentPage"
+    [itemsPerPageOptions]="[4, 8, 16]"
+    (pageChangeStart)="onPageChange($event)"
+></fd-pagination>

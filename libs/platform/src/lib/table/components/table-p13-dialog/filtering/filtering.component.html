@@ -25,7 +25,7 @@
                     <fdp-table-filter-rule
                         fdLayoutGridCol="10"
                         [rule]="rule"
-                        (ruleChange)="_onModelChange()"
+                        (ruleChange)="_recalculateResetAvailability()"
                         (ruleStateChange)="_onRuleStateChange()"
                     ></fdp-table-filter-rule>
                     <!-- Actions buttons -->
@@ -43,7 +43,7 @@
                         ></button>
 
                         <button
-                            *ngIf="_includeRules.length - 1 == i"
+                            *ngIf="_includeRules.length - 1 === i"
                             fd-button
                             fdType="transparent"
                             glyph="add"
@@ -68,7 +68,7 @@
                     <fdp-table-filter-rule
                         fdLayoutGridCol="10"
                         [rule]="rule"
-                        (ruleChange)="_onModelChange()"
+                        (ruleChange)="_recalculateResetAvailability()"
                         (ruleStateChange)="_onRuleStateChange()"
                     ></fdp-table-filter-rule>
                     <!-- Actions buttons -->
@@ -88,7 +88,7 @@
                         ></button>
 
                         <button
-                            *ngIf="_excludeRules.length - 1 == i"
+                            *ngIf="_excludeRules.length - 1 === i"
                             fd-button
                             fdType="transparent"
                             glyph="add"

@@ -28,8 +28,8 @@ export function closestElement(selector, element): Element | null {
 export function getClosest(selector, elem): Element | null {
     // .matches polyfill
     if (!Element.prototype.matches) {
-        /** @ts-ignore */
-        Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
+        Element.prototype.matches =
+            (Element.prototype as any).msMatchesSelector || Element.prototype.webkitMatchesSelector;
     }
 
     // get the closest matching element

@@ -83,7 +83,7 @@ export class DialogContainerComponent
     }
 
     /** @hidden Returns context for embedded template*/
-    private _templateContext(): object {
+    private _templateContext(): { $implicit: DialogRef; dialogConfig: DialogConfig } {
         return { $implicit: this._dialogRef, dialogConfig: this.dialogConfig };
     }
 

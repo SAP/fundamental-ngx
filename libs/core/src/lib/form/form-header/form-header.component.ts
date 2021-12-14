@@ -8,7 +8,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
  */
 @Component({
     // TODO to be discussed
-    // tslint:disable-next-line:component-selector
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-form-header]',
     template: `<span class="fd-form-header__text"><ng-content></ng-content></span>`,
     styleUrls: ['./form-header.component.scss'],

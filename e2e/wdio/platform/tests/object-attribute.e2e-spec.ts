@@ -1,6 +1,6 @@
 import { ObjectAttributePo } from '../pages/object-attribute.po';
 import { checkAttributeValueTrue, checkElementTextValue } from '../../helper/assertion-helper';
-import { getAttributeByName, refreshPage, waitForElDisplayed } from '../../driver/wdio';
+import { getAttributeByName, isElementDisplayed, refreshPage, waitForElDisplayed } from '../../driver/wdio';
 import {
     disabledAttribute,
     labelAttribute,
@@ -17,16 +17,32 @@ describe('object attribute test suite', () => {
         objectAttributePage.open();
     }, 1);
 
+    it('should check standalone text is displayed', () => {
+        expect(isElementDisplayed(standaloneTextObject)).toBe(true);
+    });
+
     it('should check standalone text attribute', () => {
         expect(getAttributeByName(standaloneTextObject, labelAttribute)).toBe(standaloneText);
+    });
+
+    it('should check link is displayed', () => {
+        expect(isElementDisplayed(linkObject)).toBe(true);
     });
 
     it('should check link attribute', () => {
         checkAttributeValueTrue(linkObject, linkAttribute);
     });
 
+    it('should check link is displayed', () => {
+        expect(isElementDisplayed(externalLinkObject)).toBe(true);
+    });
+
     it('should check link text', () => {
         checkElementTextValue(externalLinkObject, linkText);
+    });
+
+    it('should check disabled link is displayed', () => {
+        expect(isElementDisplayed(linkObject, 2)).toBe(true);
     });
 
     it('check disabled link', () => {

@@ -44,6 +44,7 @@ export abstract class FormField {
      */
     noLabelLayout: boolean;
     /**
+     * @deprecated
      * Define form field label placement
      */
     labelLayout: LabelLayout;
@@ -63,4 +64,6 @@ export abstract class FormField {
      * Unregister underlying form control
      */
     unregisterFormFieldControl: (control: FormFieldControl<any>) => void;
+
+    setDefaultColumnLayout: () => void;
 }

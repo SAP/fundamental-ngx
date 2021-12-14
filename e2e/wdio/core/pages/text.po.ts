@@ -7,6 +7,7 @@ export class TextPo extends CoreBaseComponentPo {
     contentPage = '#page-content';
     linksExpandable = 'a.fd-link';
     textParagraph = '.fd-text__lineclamp';
+    textExpandableExample = 'fd-text-expandable ';
 
     open(): void {
         super.open(this.url);
@@ -14,7 +15,7 @@ export class TextPo extends CoreBaseComponentPo {
         waitForPresent(this.contentPage);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

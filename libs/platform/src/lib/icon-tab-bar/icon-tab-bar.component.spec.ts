@@ -153,7 +153,7 @@ describe('IconTabBarComponent', () => {
     });
 });
 
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 function emulateDnD(draggableItem: HTMLElement, targetCoords: { clientX: number; clientY: number }): void {
     const mousedown = new MouseEvent('mousedown');
     draggableItem.dispatchEvent(mousedown);

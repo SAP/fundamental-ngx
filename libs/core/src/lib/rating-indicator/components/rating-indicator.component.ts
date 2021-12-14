@@ -40,15 +40,7 @@ interface RatingViewItem {
 @Component({
     selector: 'fd-rating-indicator',
     templateUrl: './rating-indicator.component.html',
-    styleUrls: [
-        './rating-indicator.component.scss',
-        /*
-         * NOTE: Will be remove this style after merge PR with fix for this issue:
-         * Issue link: https://github.com/SAP/fundamental-styles/issues/1753
-         * PR link: https://github.com/SAP/fundamental-styles/pull/1782
-         */
-        './rating-indicator.css'
-    ],
+    styleUrls: ['./rating-indicator.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
@@ -199,9 +191,10 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
     }
 
     /** @hidden */
-    onChange: Function = () => {};
+    onChange: (value: number) => void = () => {};
+
     /** @hidden */
-    onTouched: Function = () => {};
+    onTouched = () => {};
 
     /** @hidden */
     ngOnInit(): void {
@@ -245,12 +238,12 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
     }
 
     /** @hidden */
-    registerOnChange(fn: Function): void {
+    registerOnChange(fn: (value: number) => void): void {
         this.onChange = fn;
     }
 
     /** @hidden */
-    registerOnTouched(fn: Function): void {
+    registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
     /** @hidden */

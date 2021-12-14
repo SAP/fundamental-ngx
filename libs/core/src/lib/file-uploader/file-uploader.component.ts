@@ -129,10 +129,10 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
     @Input()
     inputHidden = false;
 
-    /*** It stores the valid files  */
+    /** * It stores the valid files  */
     validFiles: File[] = [];
 
-    /*** It stores the invalid files  */
+    /** * It stores the invalid files  */
     invalidFiles: File[] = [];
 
     /** Event fired when files are selected. Passed object is the array of files selected. */
@@ -145,10 +145,12 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
 
     /** Event fired when the dragged file enters the component boundaries. */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     readonly onDragEnter = new EventEmitter<void>();
 
     /** Event fired when the dragged file exits the component boundaries. */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     readonly onDragLeave = new EventEmitter<void>();
 
     /** @hidden */
@@ -178,10 +180,10 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
     }
 
     /** @hidden */
-    onChange: Function = () => {};
+    onChange: (values: File[]) => void = () => {};
 
     /** @hidden */
-    onTouched: Function = () => {};
+    onTouched = () => {};
 
     /** @hidden */
     registerOnChange(fn: any): void {
@@ -201,7 +203,13 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
 
     /** @hidden */
     writeValue(files: File[]): void {
-        // not needed - should be handled by user.
+        if (this._isEmpty()) {
+            return;
+        }
+        if (!files) {
+            this.clear();
+        }
+        this._propagateFiles();
     }
 
     /** @hidden */
@@ -236,6 +244,9 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
     setInputValue(selectedFiles: File[]): void {
         let fileName = '';
         selectedFiles.forEach((file) => (fileName = fileName.concat(' ' + file.name)));
+        if (!this.inputRefText) {
+            return;
+        }
         this.inputRefText.nativeElement.value = fileName;
         this.inputRefText.nativeElement.title = fileName;
         if (fileName) {
@@ -268,8 +279,18 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
      * Clears the files from the input.
      */
     public clear(): void {
-        this.inputRef.nativeElement.value = '';
-        this.onChange([]);
+        if (this.inputRef) {
+            this.inputRef.nativeElement.value = '';
+        }
+        if (this.inputRefText) {
+            this.inputRefText.nativeElement.value = '';
+        }
+        this.validFiles = [];
+        this.invalidFiles = [];
+    }
+
+    private _isEmpty(): boolean {
+        return this.validFiles.length === 0 && this.invalidFiles.length === 0;
     }
 
     /** @hidden */

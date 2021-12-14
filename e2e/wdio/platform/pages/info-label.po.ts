@@ -22,7 +22,7 @@ export class InfoLabelPO extends BaseComponentPo {
         waitForPresent(this.defaultLabel);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

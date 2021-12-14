@@ -144,9 +144,9 @@ export class ExperimentalSelectComponent implements AfterContentInit, OnDestroy,
             const focusedOption = this._getFocusedOption();
             if (focusedOption) {
                 event.preventDefault();
-                const visibleOptions = this.options.toArray().filter((option) => {
-                    return option.elementRef.nativeElement.style.display !== 'none';
-                });
+                const visibleOptions = this.options
+                    .toArray()
+                    .filter((option) => option.elementRef.nativeElement.style.display !== 'none');
                 const focusedIndex = visibleOptions.indexOf(focusedOption);
                 let newIndex = focusedIndex;
                 if (KeyUtil.isKeyCode(event, DOWN_ARROW) || (KeyUtil.isKeyCode(event, TAB) && !event.shiftKey)) {
@@ -188,10 +188,10 @@ export class ExperimentalSelectComponent implements AfterContentInit, OnDestroy,
     }
 
     /** @hidden */
-    onChange: Function = () => {};
+    onChange: (value: any) => void = () => {};
 
     /** @hidden */
-    onTouched: Function = () => {};
+    onTouched = () => {};
 
     /** @hidden */
     registerOnChange(fn: any): void {

@@ -6,5 +6,26 @@ import { Component } from '@angular/core';
     styleUrls: ['./platform-number-step-input-state-example.component.scss']
 })
 export class PlatformNumberStepInputStateExampleComponent {
-    states = ['default', 'success', 'error', 'warning', 'information'];
+    states = [
+        {
+            name: 'default',
+            message: 'Default state message'
+        },
+        {
+            name: 'success',
+            message: 'Success state message'
+        },
+        {
+            name: 'error',
+            message: 'Error state message'
+        },
+        {
+            name: 'warning',
+            message: 'Warning state message'
+        },
+        {
+            name: 'information',
+            message: 'Information state message'
+        }
+    ];
 }

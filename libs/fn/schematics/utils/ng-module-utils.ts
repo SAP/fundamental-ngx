@@ -18,7 +18,6 @@ export function hasModuleImport(tree: Tree, modulePath: string, className: strin
         throw new SchematicsException(`Could not find NgModule declaration inside: "${modulePath}"`);
     }
 
-    // tslint:disable-next-line:no-non-null-assertion
     for (const property of ngModuleMetadata!.properties) {
         if (
             !ts.isPropertyAssignment(property) ||
@@ -42,7 +41,6 @@ function findNgModuleMetadata(rootNode: ts.Node): ts.ObjectLiteralExpression | n
     const nodeQueue: ts.Node[] = [...rootNode.getChildren()];
 
     while (nodeQueue.length) {
-        // tslint:disable-next-line:no-non-null-assertion
         const node = nodeQueue.shift()!;
 
         if (ts.isDecorator(node) && ts.isCallExpression(node.expression) && isNgModuleCallExpression(node.expression)) {

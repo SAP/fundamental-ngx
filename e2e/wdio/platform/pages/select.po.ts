@@ -7,6 +7,7 @@ export class SelectPo extends BaseComponentPo {
 
     selectModeExample = 'fdp-select-mode-example';
     displayText = ' .fd-select__control';
+    select = ' fd-select';
     buttons = ' button';
     selectedValue_1 = 'fdp-select~small';
     selectWithTwoColumnsExample = 'fdp-select-columns-example';
@@ -30,7 +31,7 @@ export class SelectPo extends BaseComponentPo {
         waitForPresent(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

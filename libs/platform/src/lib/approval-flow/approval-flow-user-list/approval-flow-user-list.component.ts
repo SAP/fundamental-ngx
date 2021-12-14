@@ -48,9 +48,11 @@ export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges, 
     isSelectable = true;
 
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onUserClick = new EventEmitter<ApprovalUser>();
 
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onSelectionChange = new EventEmitter<ApprovalUser[]>();
 
     @ViewChild(ListComponent)

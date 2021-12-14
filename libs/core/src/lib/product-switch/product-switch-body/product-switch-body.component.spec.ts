@@ -47,7 +47,7 @@ export class TestComponent {
 }
 
 describe('ProductSwitchBodyComponent', () => {
-    let fixture: ComponentFixture<TestComponent>, debugElement: DebugElement, element: HTMLElement;
+    let fixture: ComponentFixture<TestComponent>, debugElement: DebugElement;
 
     let component, componentInstance: ProductSwitchBodyComponent;
 
@@ -63,7 +63,6 @@ describe('ProductSwitchBodyComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
         debugElement = fixture.debugElement;
-        element = debugElement.nativeElement;
         fixture.detectChanges();
         component = debugElement.query(By.directive(ProductSwitchBodyComponent));
         componentInstance = component.injector.get(ProductSwitchBodyComponent);

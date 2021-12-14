@@ -254,6 +254,7 @@ describe('dynamic side content test suite', () => {
         it('should check selecting tabs', () => {
             openPage(tabsExample);
             scrollIntoView(tabsContent, 1);
+            pause(1500);
             expect(getElementClass(tab, 1)).toContain(
                 'is-selected',
                 'tab is not highlited as selected after scroll to content'

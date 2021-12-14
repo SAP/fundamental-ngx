@@ -5,8 +5,8 @@ import { PlatformValueHelpDialogModule } from '../../value-help-dialog.module';
 import { DefineTabComponent } from './define-tab.component';
 
 describe('DefineTabComponent', () => {
-    let component: DefineTabComponent<any>;
-    let fixture: ComponentFixture<DefineTabComponent<any>>;
+    let component: DefineTabComponent;
+    let fixture: ComponentFixture<DefineTabComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({

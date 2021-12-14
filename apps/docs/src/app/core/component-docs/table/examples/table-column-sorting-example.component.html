@@ -12,15 +12,15 @@
                     <fd-popover-body>
                         <ul fd-list [compact]="true">
                             <li fd-list-item (click)="sortColumn1(true)">
-                                <i fd-list-icon [glyph]="'sort-ascending'"></i>
+                                <i fd-list-icon glyph="sort-ascending"></i>
                                 <span fd-list-title>Sort Ascending</span>
                             </li>
                             <li fd-list-item (click)="sortColumn1(false)">
-                                <i fd-list-icon [glyph]="'sort-descending'"></i>
+                                <i fd-list-icon glyph="sort-descending"></i>
                                 <span fd-list-title>Sort Descending</span>
                             </li>
                             <li fd-list-item>
-                                <i fd-list-icon [glyph]="'filter'"></i>
+                                <i fd-list-icon glyph="filter"></i>
                                 <div fd-form-item [horizontal]="true" (click)="$event.stopPropagation()">
                                     <label fd-form-label for="input-1">Filter</label>
                                     <input
