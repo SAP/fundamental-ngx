@@ -32,6 +32,7 @@ export class DynamicPageExampleComponent {
 
     openPage(): void {
         this.visible = true;
+        this._openToast('Dynamic Page has been opened');
     }
 
     closePage(): void {

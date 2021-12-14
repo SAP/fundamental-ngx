@@ -13,7 +13,7 @@ import { Directive, ElementRef, Input } from '@angular/core';
     selector: '[fd-breadcrumb-link]',
     host: {
         class: 'fd-breadcrumb__link',
-        role: 'list'
+        role: 'treeitem'
     }
 })
 export class BreadcrumbLinkDirective {

@@ -2,8 +2,6 @@
 <div class="overlay" *ngIf="visible">
     <fd-dynamic-page size="large" ariaLabel="Example Dynamic Page" [autoResponsive]="false">
         <fd-dynamic-page-header
-            tabindex="-1"
-            role="none"
             title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
             subtitle="sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
         >
@@ -67,7 +65,7 @@
                 </fd-toolbar>
             </fd-dynamic-page-layout-actions>
         </fd-dynamic-page-header>
-        <fd-dynamic-page-subheader [collapsible]="false" [pinnable]="false" [collapsed]="false">
+        <fd-dynamic-page-subheader id="subheader" [collapsible]="false" [pinnable]="false" [collapsed]="false">
             <span>
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam possimus corrupti architecto
                 perspiciatis, delectus necessitatibus incidunt numquam asperiores tenetur iure. Cum consequuntur impedit
@@ -129,3 +127,7 @@
         </fd-dynamic-page-footer>
     </fd-dynamic-page>
 </div>
+
+<ng-template id="open">
+    <p>Dynamic Page is opened</p>
+</ng-template>

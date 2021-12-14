@@ -14,7 +14,10 @@ import { DYNAMIC_PAGE_CLASS_NAME } from '../../constants';
     selector: 'fd-dynamic-page-layout-actions',
     template: '<ng-content></ng-content>',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    host: {
+        role: 'toolbar'
+    }
 })
 export class DynamicPageLayoutActionsComponent extends DynamicPageBaseActions implements AfterContentInit {
     constructor(

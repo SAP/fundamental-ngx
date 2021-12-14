@@ -37,7 +37,8 @@ import { Placement } from '@fundamental-ngx/core/shared';
     // eslint-disable-next-line
     selector: 'fd-breadcrumb',
     host: {
-        class: 'fd-breadcrumb'
+        class: 'fd-breadcrumb',
+        role: 'tree'
     },
     templateUrl: './breadcrumb.component.html',
     styleUrls: ['./breadcrumb.component.scss'],

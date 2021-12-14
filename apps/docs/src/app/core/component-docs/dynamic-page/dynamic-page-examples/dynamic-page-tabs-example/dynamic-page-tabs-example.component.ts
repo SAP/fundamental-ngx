@@ -37,6 +37,7 @@ export class DynamicPageTabsExampleComponent {
     openPage(stacked: boolean): void {
         this.stackedTabs = stacked;
         this.visible = true;
+        this._openToast('Dynamic Page has been opened');
     }
 
     closePage(): void {

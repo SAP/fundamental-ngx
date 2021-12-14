@@ -16,7 +16,10 @@ import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
     selector: 'fd-dynamic-page-global-actions',
     template: '<ng-content></ng-content>',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    host: {
+        role: 'toolbar'
+    }
 })
 export class DynamicPageGlobalActionsComponent extends DynamicPageBaseActions implements AfterContentInit {
     /** @hidden */
