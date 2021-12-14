@@ -1,11 +1,12 @@
+@use 'sass:math';
 @import 'fundamental-styles/index';
 
 // These styles will move to fundamental/styles
 $line-container-width: 1.5rem;
 $node-size: 0.375rem;
-$node-y-margins: ($line-container-width - $node-size) / 2;
+$node-y-margins: math.div($line-container-width - $node-size, 2);
 $node-line-size: 0.0625rem;
-$node-line-y-margins: ($line-container-width - $node-line-size) / 2;
+$node-line-y-margins: math.div($line-container-width - $node-line-size, 2);
 $line-width: 0.0625rem;
 
 .fd-timeline__post {

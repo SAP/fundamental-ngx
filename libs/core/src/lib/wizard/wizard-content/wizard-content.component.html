@@ -2,11 +2,11 @@
     <section
         [id]="wizardContentId"
         class="fd-wizard__content"
-        [ngClass]="
-            (tallContent ? 'fd-wizard-tall-content ' : '') +
+        [class]="
             (contentBackground ? 'fd-wizard__content--' + contentBackground + ' ' : '') +
             (size ? 'fd-wizard__content--' + size : '')
         "
+        [class.fd-wizard-tall-content]="tallContent"
     >
         <ng-content></ng-content>
     </section>

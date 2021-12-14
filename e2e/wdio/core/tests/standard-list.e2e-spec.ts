@@ -32,7 +32,9 @@ describe('Standard List test suite', () => {
         selectedItems,
         keyboardSupportList,
         dragAndDropList,
-        infiniteList
+        infiniteList,
+        deleteButton,
+        listItemText
     } = standardListPage;
 
     beforeAll(() => {
@@ -102,6 +104,15 @@ describe('Standard List test suite', () => {
             click(filterAndSortList + button, 4);
 
             expect(getElementArrayLength(filterAndSortList + listItems)).toEqual(startItemCount - 1);
+        });
+
+        it('should check deleting all items', () => {
+            const startItemCount = getElementArrayLength(filterAndSortList + listItems);
+            for (let i = 0; i < startItemCount; i++) {
+                click(filterAndSortList + deleteButton);
+            }
+            expect(getElementArrayLength(filterAndSortList + listItems)).toEqual(1);
+            expect(getText(filterAndSortList + listItemText)).toBe('No results found!');
         });
     });
 

@@ -4,6 +4,7 @@ import {
     doesItExist,
     getAttributeByName,
     getElementArrayLength,
+    getElementClass,
     getText,
     isElementClickable,
     isElementDisplayed,
@@ -64,7 +65,10 @@ describe('calendar test suite', () => {
         reactiveCalendarExamples,
         markedDays,
         rangeHoverItems,
-        setCalendarRange
+        setCalendarRange,
+        mondays,
+        sundays,
+        saturdays
     } = calendarPage;
 
     beforeAll(() => {
@@ -226,11 +230,12 @@ describe('calendar test suite', () => {
     describe('calendar with special days example', () => {
         it('should check ability to mark weekends', () => {
             click(specialDaysCalendar + calendarOptions);
-            expect(doesItExist(specialDaysCalendar + markedDays)).toBe(true);
-            click(specialDaysCalendar + calendarOptions);
-            expect(doesItExist(specialDaysCalendar + markedDays)).toBe(false);
+            for (let i = 0; i < getElementArrayLength(saturdays); i++) {
+                expect(getElementClass(saturdays, i)).toContain('special-day');
+                expect(getElementClass(sundays, i)).toContain('special-day');
+            }
         });
-
+        // rework later when i'll get answer on the question how it should work exactly
         it('should check ability to mark next week', () => {
             click(specialDaysCalendar + calendarOptions, 1);
             expect(doesItExist(specialDaysCalendar + markedDays)).toBe(true);
@@ -240,16 +245,20 @@ describe('calendar test suite', () => {
 
         it('should check ability to mark all Mondays', () => {
             click(specialDaysCalendar + calendarOptions, 2);
-            expect(doesItExist(specialDaysCalendar + markedDays)).toBe(true);
+            for (let i = 0; i < getElementArrayLength(mondays); i++) {
+                expect(getElementClass(mondays, i)).toContain('special-day');
+            }
             click(specialDaysCalendar + calendarOptions, 2);
-            expect(doesItExist(specialDaysCalendar + markedDays)).toBe(false);
+            for (let i = 0; i < getElementArrayLength(mondays); i++) {
+                expect(getElementClass(mondays, i)).not.toContain('special-day');
+            }
         });
 
         it('should check ability to mark past days', () => {
             click(specialDaysCalendar + calendarOptions, 3);
-            expect(doesItExist(specialDaysCalendar + markedDays)).toBe(true);
-            click(specialDaysCalendar + calendarOptions, 3);
-            expect(doesItExist(specialDaysCalendar + markedDays)).toBe(false);
+            for (let i = getCurrentDayIndex(specialDaysCalendar) - 1; i !== 0; i--) {
+                expect(getElementClass(specialDaysCalendar + calendarItem, i)).toContain('special-day');
+            }
         });
 
         it('should check calendar selections', () => {
@@ -425,5 +434,13 @@ describe('calendar test suite', () => {
         scrollIntoView(calendar);
         expect(doesItExist(calendar + currentDay)).toBe(true);
         expect(getElementArrayLength(calendar + currentDay)).toBe(1);
+    }
+
+    function getCurrentDayIndex(selector: string): number {
+        for (let i = 0; i < getElementArrayLength(selector + calendarItem); i++) {
+            if (getElementClass(selector + calendarItem, i).includes('current')) {
+                return i;
+            }
+        }
     }
 });

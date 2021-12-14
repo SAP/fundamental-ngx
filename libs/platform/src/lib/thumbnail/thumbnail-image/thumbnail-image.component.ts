@@ -1,7 +1,6 @@
 import {
     Component,
     Input,
-    Optional,
     Output,
     EventEmitter,
     OnChanges,
@@ -13,10 +12,7 @@ import {
     ElementRef
 } from '@angular/core';
 
-import { RtlService } from '@fundamental-ngx/core/utils';
-import { DialogService } from '@fundamental-ngx/core/dialog';
 import { Media } from '../thumbnail.interfaces';
-import { ThumbnailDetailsComponent } from '../thumbnail-details/thumbnail-details.component';
 
 @Component({
     selector: 'fdp-thumbnail-image',
@@ -47,21 +43,19 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
     @Output()
     thumbnailClicked: EventEmitter<Media> = new EventEmitter();
 
+    @Output()
+    openDetailsDialog = new EventEmitter<Media>();
+
     /** List of thumbnail images reference */
     @ViewChildren('thumbnailImage')
     thumbnailImages: QueryList<ElementRef>;
 
     /** @hidden */
-    constructor(
-        protected _changeDetectorRef: ChangeDetectorRef,
-        private _dialogService: DialogService,
-        @Optional() private _rtlService: RtlService
-    ) {}
+    constructor(protected _changeDetectorRef: ChangeDetectorRef) {}
 
     /** @hidden */
     ngOnInit(): void {
         this._setOverlay();
-        console.log('length', this.thumbnailImages.length);
     }
 
     /** @hidden */
@@ -76,22 +70,10 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
     }
 
     /** Opens the Dialog when the imgaes croses the maximum number of images to display */
-    openDialog(selectedMedia: Media, mediaList: Media[]): void {
+    openDialog(media: Media): void {
         this.mediaList.forEach((item) => (item.selected = false));
-        this.mediaList.forEach((item) => (item.overlayRequired = false));
-        selectedMedia.selected = true;
-        this._dialogService.open(ThumbnailDetailsComponent, {
-            backdropClickCloseable: false,
-            escKeyCloseable: false,
-            data: {
-                thumbnailId: this.thumbnailId,
-                selectedMedia: selectedMedia,
-                mediaList: mediaList,
-                rtl: this._isRtl(),
-                maxImages: this.maxImages
-            },
-            ariaLabelledBy: this.thumbnailId
-        });
+        media.selected = true;
+        this.openDetailsDialog.emit(media);
     }
 
     /** @hidden */
@@ -99,11 +81,6 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
         this.mediaList.forEach((item) => (item.selected = false));
         selectedMedia.selected = true;
         this.thumbnailClicked.emit(selectedMedia);
-    }
-
-    /** @hidden  returns boolean value for rtl */
-    private _isRtl(): boolean {
-        return this._rtlService?.rtl.getValue();
     }
 
     private _setOverlay(): void {

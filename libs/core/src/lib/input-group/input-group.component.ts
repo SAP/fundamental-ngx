@@ -18,11 +18,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { fromEvent, Subject, Subscription } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 
-import { InputGroupAddOnDirective, InputGroupInputDirective } from './input-group-directives';
 import { FormStates } from '@fundamental-ngx/core/shared';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
-export type InputGroupPlacement = 'before' | 'after';
+import { InputGroupAddOnDirective, InputGroupInputDirective } from './input-group-directives';
+import { InputGroupPlacement } from './types';
+
 let addOnNonButtonRandomId = 0;
 let addOnButtonRandomId = 0;
 let addOnInputRandomId = 0;
@@ -32,7 +33,7 @@ let addOnInputRandomId = 0;
  * The input group includes form inputs with add-ons that allow the user to better understand the information being entered.
  *
  * ```html
- * <fd-input-group [placement]="'after'" [addOnText]="'$'" [placeholder]="'Amount'">
+ * <fd-input-group placement="after" addOnText="$" placeholder="Amount">
  * </fd-input-group>
  * ```
  */
@@ -117,6 +118,12 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
      */
     @Input()
     isControl = false;
+
+    /**
+     * Whether should show focus outline
+     */
+    @Input()
+    showFocus = false;
 
     /** @hidden */
     @Input()

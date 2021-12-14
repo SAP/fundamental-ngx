@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { IconTabBarTextTypeComponent } from './icon-tab-bar-text-type.component';
 import { generateTestConfig } from '../../tests-helper';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { IconTabBarComponent } from '../../icon-tab-bar.component';
 
 describe('IconTabBarTextTypeComponent', () => {
     let component: IconTabBarTextTypeComponent;
@@ -11,6 +12,7 @@ describe('IconTabBarTextTypeComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [IconTabBarTextTypeComponent],
+            providers: [{ provide: IconTabBarComponent, useValue: {} }],
             schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents();
     });

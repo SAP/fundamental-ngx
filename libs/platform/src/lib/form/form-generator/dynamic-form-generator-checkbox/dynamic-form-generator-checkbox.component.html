@@ -1,10 +1,12 @@
 <ng-container [formGroup]="form">
-    <fdp-checkbox-group
-        [contentDensity]="formItem.guiOptions?.contentDensity"
-        [isInline]="formItem.guiOptions?.inline || false"
-        [inlineLayout]="formItem.guiOptions?.inlineLayout"
-        [name]="name"
-        [list]="formItem.choices"
-        [formControlName]="name"
-    ></fdp-checkbox-group>
+    <ng-container [formGroupName]="formGroupName">
+        <fdp-checkbox-group
+            [contentDensity]="formItem.guiOptions?.contentDensity"
+            [isInline]="formItem.guiOptions?.inline || false"
+            [inlineLayout]="formItem.guiOptions?.inlineLayout"
+            [name]="name"
+            [list]="formItem.choices"
+            [formControlName]="name"
+        ></fdp-checkbox-group>
+    </ng-container>
 </ng-container>

@@ -14,8 +14,8 @@ export class UploadCollectionPo extends BaseComponentPo {
     menuItem = '.fd-menu__item';
     tablePages = ' .fd-pagination__link.ng-star-inserted';
     tableResult = ' .fdp-upload-collection__pagination--total';
-    linkNext = ' .fd-pagination__link--next';
-    linkPrevious = ' .fd-pagination__link--previous';
+    linkNext = ' [glyph="navigation-right-arrow"]';
+    linkPrevious = ' [glyph="navigation-left-arrow"]';
     inputFields = ' .fd-input--compact';
     columnHeaders = ' [role="columnheader"]';
     tableContent = ' fd-icon~span';

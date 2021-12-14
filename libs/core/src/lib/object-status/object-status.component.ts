@@ -19,7 +19,7 @@ export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
         <i
             class="fd-object-status__icon"
             *ngIf="glyph"
-            [ngClass]="'sap-icon--' + glyph"
+            [class]="'sap-icon--' + glyph"
             [attr.role]="glyphAriaLabel ? 'presentation' : ''"
             [attr.aria-label]="glyphAriaLabel"
         ></i>

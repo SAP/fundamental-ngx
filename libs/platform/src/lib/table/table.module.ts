@@ -19,10 +19,11 @@ import { SelectModule } from '@fundamental-ngx/core/select';
 import { TableModule } from '@fundamental-ngx/core/table';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { DragAndDropModule } from '@fundamental-ngx/core/utils';
-
+import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
 import { PlatformInputModule } from '@fundamental-ngx/platform/form';
 import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+
 import { TableComponent } from './table.component';
 import { TableColumnComponent } from './components/table-column/table-column.component';
 import { TableToolbarComponent } from './components/table-toolbar/table-toolbar.component';
@@ -43,8 +44,10 @@ import { TableP13SortComponent } from './components/table-p13-dialog/table-p13-s
 import { TableP13FilterComponent } from './components/table-p13-dialog/table-p13-filter.component';
 import { TableP13GroupComponent } from './components/table-p13-dialog/table-p13-group.component';
 import { TableP13ColumnsComponent } from './components/table-p13-dialog/table-p13-columns.component';
-import { P13SortingDialogComponent } from './components/table-p13-dialog/sorting/sorting.component';
-import { GetAvailableSortColumnsPipe } from './components/table-p13-dialog/sorting/get-available-sort-columns.pipe';
+import {
+    P13SortingDialogComponent,
+    GetAvailableSortColumnsPipe
+} from './components/table-p13-dialog/sorting/sorting.component';
 import { P13GroupingDialogComponent } from './components/table-p13-dialog/grouping/grouping.component';
 import { P13FilteringDialogComponent } from './components/table-p13-dialog/filtering/filtering.component';
 import { FilterRuleComponent } from './components/table-p13-dialog/filtering/filter-rule.component';
@@ -85,7 +88,8 @@ import { NoDataWrapperComponent } from './components/no-data-wrapper/no-data-wra
         PanelModule,
         DatePickerModule,
         BusyIndicatorModule,
-        DragAndDropModule
+        DragAndDropModule,
+        ScrollbarModule
     ],
     declarations: [
         TableComponent,

@@ -91,7 +91,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
      * the exceeded count is displayed.
      */
     @Input()
-    maxLength = 0;
+    maxLength: number;
 
     /**
      * Whether counter message should be shown.
@@ -159,7 +159,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     hasTextExceeded = false;
 
     /** @hidden excess character count */
-    exceededCharCount: number = this.maxLength ? this.maxLength : 0;
+    exceededCharCount = 0;
 
     /** @hidden a string placeholder that toggles between 'remaining' and 'excess' for the select ICU expression */
     counterExcessOrRemaining = 'remaining';
@@ -204,7 +204,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         }
         // if not custom set, set counter to max length value, else it calculates remaining/exceeded characters.
         if (!this.value) {
-            this.exceededCharCount = this.maxLength ? this.maxLength : 0;
+            this.exceededCharCount = this.maxLength || 0;
         } else {
             this.isValueCustomSet = true;
         }
@@ -245,6 +245,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     /** update the counter message and related interactions */
     updateCounterInteractions(): void {
         this._textAreaCharCount = this.value?.length ?? 0;
+
         if (this.maxLength) {
             // newly added to avoid unnecessary iteration, remove if issue found
             this.validateLengthOnCustomSet();
@@ -258,29 +259,23 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
                 this._targetElement.focus();
                 this._targetElement.setSelectionRange(this.maxLength, this._textAreaCharCount);
             }
+
             this.counterExcessOrRemaining = this.excessText;
             this.exceededCharCount = this._textAreaCharCount - this.maxLength;
         } else {
             this.counterExcessOrRemaining = this.remainingText;
             this.exceededCharCount = this.maxLength - this._textAreaCharCount;
         }
-        // reset flag
+
         this._isPasted = false;
     }
 
     /** handle exceeded maxlength case when text is pasted */
     handlePasteInteraction(): void {
         this._isPasted = true;
-        /// For IE
-        if (window['clipboardData']) {
-            // todo: handle for IE
-            this.updateCounterInteractions();
-        } else {
-            // for other navigators
-            navigator['clipboard'].readText().then(() => {
-                this.updateCounterInteractions();
-            });
-        }
+
+        // Wrapped in timeout to make selecting range working
+        setTimeout(() => this.updateCounterInteractions());
     }
 
     /** handle auto growing of textarea */

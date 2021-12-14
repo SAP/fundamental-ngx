@@ -2,7 +2,7 @@ import { ComponentFactoryResolver, Directive, Input, OnInit, ViewContainerRef } 
 import { FormGroup } from '@angular/forms';
 
 import { FormField } from '@fundamental-ngx/platform/shared';
-import { DynamicFormItem } from './interfaces/dynamic-form-item';
+import { DynamicFormFieldItem } from './interfaces/dynamic-form-item';
 import { BaseDynamicFormGeneratorControl } from './base-dynamic-form-generator-control';
 import { FormGeneratorService } from './form-generator.service';
 
@@ -17,7 +17,7 @@ export class DynamicFormControlDirective implements OnInit {
     /**
      * @description @see DynamicFormItem
      */
-    @Input() formItem: DynamicFormItem;
+    @Input() formItem: DynamicFormFieldItem;
 
     /**
      * @description Represents form control name.
@@ -28,6 +28,8 @@ export class DynamicFormControlDirective implements OnInit {
      * @description Reference to the @see FormGroup class.
      */
     @Input() form: FormGroup;
+
+    @Input() formGroupNamePath: string;
 
     /**
      * @description Reference to the @see FormFieldComponent
@@ -59,5 +61,6 @@ export class DynamicFormControlDirective implements OnInit {
         componentRef.instance.name = this.name;
         componentRef.instance.form = this.form;
         componentRef.instance.formField = this.formField;
+        componentRef.instance.formGroupName = this.formGroupNamePath;
     }
 }

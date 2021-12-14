@@ -27,7 +27,7 @@ import { RtlService } from '@fundamental-ngx/core/utils';
             [attr.aria-labelledby]="expandAriaLabelledBy"
             (click)="toggleExpand()"
         >
-            <i [ngClass]="'sap-icon--' + _getButtonIcon()"></i>
+            <i [class]="'sap-icon--' + _getButtonIcon()"></i>
         </button>
         <div class="fd-notification__content">
             <ng-content select="fd-notification-header"></ng-content>

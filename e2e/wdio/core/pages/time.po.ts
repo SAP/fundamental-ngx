@@ -38,7 +38,7 @@ export class TimePo extends CoreBaseComponentPo {
 
     set11HoursBtn = this.programmaticallyExample + '.fd-button--standard';
     timeItem = 'li.fd-time__item';
-    enableTimeRow = this.formExample + 'span.ng-star-inserted';
+    enableTimeRow = this.formExample + 'fd-time + span';
 
     formExample1Hour = '#fd-time-column-101';
     formExample2Minute = '#fd-time-column-292';

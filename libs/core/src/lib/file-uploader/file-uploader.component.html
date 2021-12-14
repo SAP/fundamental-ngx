@@ -13,8 +13,8 @@
 >
     <input
         #textInput
-        [ngClass]="state ? ' is-' + state : ''"
         class="fd-input fd-file-uploader__input"
+        [class]="state ? ' is-' + state : ''"
         aria-live="polite"
         autocomplete="off"
         type="text"

@@ -19,7 +19,7 @@
 
     <fd-popover placement="top" [focusTrapped]="true" [focusAutoCapture]="true" title="menu2">
         <fd-popover-control>
-            <fd-icon [glyph]="'menu2'" ariaLabel="menu2"></fd-icon>
+            <fd-icon glyph="menu2" ariaLabel="menu2"></fd-icon>
         </fd-popover-control>
         <fd-popover-body *ngIf="list1 && list1.length">
             <ul fd-list>
@@ -32,11 +32,11 @@
 
     <fd-popover placement="bottom" [focusTrapped]="true" [focusAutoCapture]="true" title="money-bills">
         <fd-popover-control>
-            <fd-avatar size="m" [glyph]="'money-bills'" ariaLabel="money-bills" colorAccent="3"></fd-avatar>
+            <fd-avatar size="m" glyph="money-bills" ariaLabel="money-bills" colorAccent="3"></fd-avatar>
         </fd-popover-control>
         <fd-popover-body *ngIf="list1 && list1.length" style="min-width: 400px">
             <div fd-popover-body-header id="popover-bar-simple-header-1">
-                <div fd-bar [barDesign]="'header'">
+                <div fd-bar barDesign="header">
                     <div fd-bar-left>
                         <fd-button-bar glyph="navigation-left-arrow" fdType="standard" ariaLabel="Back"></fd-button-bar>
                         <fd-bar-element>Header</fd-bar-element>
@@ -57,12 +57,12 @@
         </fd-popover-control>
         <fd-popover-body *ngIf="list1 && list1.length">
             <div fd-popover-body-header id="popover-bar-simple-header-2">
-                <div fd-bar [barDesign]="'header-with-subheader'" [cozy]="true">
+                <div fd-bar barDesign="header-with-subheader" [cozy]="true">
                     <div fd-bar-left>
                         <fd-bar-element>Cozy Header</fd-bar-element>
                     </div>
                 </div>
-                <div fd-bar [barDesign]="'subheader'" [cozy]="true" id="popover-bar-simple-header-3">
+                <div fd-bar barDesign="subheader" [cozy]="true" id="popover-bar-simple-header-3">
                     <div fd-bar-middle>
                         <fd-bar-element [fullWidth]="true"
                             >SubHeader Middle section with Full Width Element
@@ -76,7 +76,7 @@
                 </li>
             </ul>
             <div fd-popover-body-footer>
-                <div fd-bar [barDesign]="'footer'" [cozy]="true">
+                <div fd-bar barDesign="footer" [cozy]="true">
                     <div fd-bar-right>
                         <fd-button-bar label="Save" fdType="emphasized"></fd-button-bar>
                         <fd-button-bar label="Cancel"></fd-button-bar>

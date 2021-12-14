@@ -20,6 +20,12 @@ import * as formFieldLayoutGeneratorSrc from '!raw-loader!./platform-form-genera
 import * as noColonsForLabelHtml from '!raw-loader!./platform-form-generator-examples/platform-form-generator-no-colons-example.component.html';
 import * as noColonsForLabelSrc from '!raw-loader!./platform-form-generator-examples/platform-form-generator-no-colons-example.component.ts';
 
+import * as groupingHtml from '!raw-loader!./platform-form-generator-examples/platform-form-generator-grouping-example.component.html';
+import * as groupingSrc from '!raw-loader!./platform-form-generator-examples/platform-form-generator-grouping-example.component.ts';
+
+import * as customFieldLayoutHtml from '!raw-loader!./platform-form-generator-examples/platform-form-generator-custom-field-layout-example.component.html';
+import * as customFieldLayoutSrc from '!raw-loader!./platform-form-generator-examples/platform-form-generator-custom-field-layout-example.component.ts';
+
 import { ExampleFile } from '../../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -122,6 +128,34 @@ export class PlatformFormGeneratorDocsComponent {
             code: noColonsForLabelSrc,
             fileName: 'platform-form-generator-no-colons-example',
             component: 'PlatformFormGeneratorNoColonsExampleComponent'
+        }
+    ];
+
+    groupingFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: groupingHtml,
+            fileName: 'platform-form-generator-grouping-example'
+        },
+        {
+            language: 'typescript',
+            code: groupingSrc,
+            fileName: 'platform-form-generator-grouping-example',
+            component: 'PlatformFormGeneratorGroupingExampleComponent'
+        }
+    ];
+
+    customLayoutFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: customFieldLayoutHtml,
+            fileName: 'platform-form-generator-custom-field-layout-example'
+        },
+        {
+            language: 'typescript',
+            code: customFieldLayoutSrc,
+            fileName: 'platform-form-generator-custom-field-layout-example',
+            component: 'PlatformFormGeneratorCustomFieldLayoutExampleComponent'
         }
     ];
 }

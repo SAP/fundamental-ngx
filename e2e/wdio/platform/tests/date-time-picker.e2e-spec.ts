@@ -47,7 +47,7 @@ const {
     navigationUpArrowButton,
     period,
     navigationDownArrowButton,
-    timeItem,
+    timeColumn,
     topPage,
     bottomPage,
     firstYearButton,
@@ -290,10 +290,10 @@ function selectHoursAndMinutes(hour: number = 1, minute: number = 1): void {
         scrollIntoView(activeDateTimePickerButton, 1);
         click(navigationUpArrowButton);
     }
-    click(timeItem, 1);
+    click(timeColumn, 1);
     while (getText(selectedMinutes) !== minute.toString()) {
         click(navigationDownArrowButton);
     }
-    click(timeItem, 2);
+    click(timeColumn, 2);
     click(period);
 }

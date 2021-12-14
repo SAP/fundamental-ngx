@@ -43,6 +43,33 @@ export class PlatformFormGeneratorExampleComponent {
 
     questions: DynamicFormItem[] = [
         {
+            name: 'some',
+            message: 'Some group name',
+            items: [
+                {
+                    type: 'input',
+                    name: 'nameInGroup',
+                    message: 'Your name (group)',
+                    default: 'John',
+                    placeholder: 'Please provide your name',
+                    guiOptions: {
+                        hint: 'Some contextual hint',
+                        column: 1
+                    },
+                    validate: async (value) => {
+                        await dummyAwaitablePromise();
+
+                        return value === 'John' ? null : 'Your name should be John';
+                    },
+                    transformer: async (value: any) => {
+                        await dummyAwaitablePromise();
+                        return `${value}777`;
+                    },
+                    validators: [Validators.required]
+                }
+            ]
+        },
+        {
             type: 'input',
             name: 'name',
             message: 'Your name',
@@ -200,6 +227,8 @@ export class PlatformFormGeneratorExampleComponent {
     }
 
     async onFormSubmitted(value: DynamicFormValue): Promise<void> {
+        console.log(value);
+
         this.formValue = value;
 
         this.loading = true;

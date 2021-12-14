@@ -6,6 +6,9 @@ $fd-table-border-var: var(--sapList_BorderWidth, 0.0625rem) solid var(--sapList_
 $fd-table-header-color: #f2f2f2;
 $fd-table-header-color-var: var(--sapList_HeaderBackground, #f2f2f2);
 
+$fd-table-scrollbar-width: var(--fdScrollbar_Dimension);
+$fd-table-scrollbar-width-with-border: calc(#{$fd-table-scrollbar-width} + var(--sapList_BorderWidth, 0.0625rem));
+
 .#{$block} {
     @mixin fd-rtl {
         @at-root {
@@ -31,6 +34,7 @@ $fd-table-header-color-var: var(--sapList_HeaderBackground, #f2f2f2);
         position: absolute;
         top: 0;
         right: 0;
+        width: $fd-table-scrollbar-width-with-border;
         height: 100%;
         box-sizing: border-box;
         border: $fd-table-border;
@@ -183,7 +187,7 @@ $fd-table-header-color-var: var(--sapList_HeaderBackground, #f2f2f2);
     }
 
     &__header,
-    &__body {
+    .#{$block}__body {
         position: relative;
         overflow: hidden;
         border-left: $fd-table-border;
@@ -208,6 +212,13 @@ $fd-table-header-color-var: var(--sapList_HeaderBackground, #f2f2f2);
     }
 
     &__header {
+        padding-right: $fd-table-scrollbar-width-with-border;
+
+        @include fd-rtl() {
+            padding-right: 0;
+            padding-left: $fd-table-scrollbar-width-with-border;
+        }
+
         &-scrollbar-mock {
             @include fdp-table-scrollbar-mock();
         }
@@ -242,34 +253,30 @@ $fd-table-header-color-var: var(--sapList_HeaderBackground, #f2f2f2);
     }
 
     &__body {
-        overflow-y: scroll;
-
         &-hs {
-            width: 100%;
-            position: relative;
-            min-height: 0.5rem;
-            overflow: scroll;
+            box-sizing: border-box;
             border-left: $fd-table-border;
             border-left: $fd-table-border-var;
+            background: var(--fdScrollbar_Track_Color, #ffffff);
+            padding-right: $fd-table-scrollbar-width;
 
-            &--empty {
-                position: absolute;
-                bottom: 0;
+            @include fd-rtl() {
+                padding-right: 0;
+                padding-left: $fd-table-scrollbar-width;
+                border-left: none;
+                border-right: $fd-table-border;
+                border-right: $fd-table-border-var;
+            }
+
+            &-wrap {
                 width: 100%;
-
-                border-color: transparent;
+                position: relative;
             }
 
             &-spacer {
                 position: absolute;
                 height: 1px;
                 visibility: hidden;
-            }
-
-            @include fd-rtl() {
-                border-left: none;
-                border-right: $fd-table-border;
-                border-right: $fd-table-border-var;
             }
         }
 
@@ -377,5 +384,31 @@ $fd-table-header-color-var: var(--sapList_HeaderBackground, #f2f2f2);
 
     .fd-dnd-item {
         position: inherit;
+    }
+
+    // TODO(d.stepanenko): styles below should be moved into fundamental-styles
+    .fd-table__cell--fixed {
+        position: sticky;
+        display: table-cell;
+    }
+
+    .fd-table__cell--checkbox fd-checkbox {
+        // positioning checkbox in the middle of the cell
+        display: flex;
+        height: 100%;
+        .fd-checkbox__label {
+            align-self: center;
+            margin: 0;
+        }
+    }
+
+    .fd-table__expand-wrapper {
+        display: flex;
+        align-items: center;
+    }
+    // END TODO
+
+    &__column-resizer {
+        bottom: $fd-table-scrollbar-width-with-border;
     }
 }

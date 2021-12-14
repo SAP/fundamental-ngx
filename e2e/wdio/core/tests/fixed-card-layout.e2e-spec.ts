@@ -79,8 +79,9 @@ describe('Fixed card layout test suite', () => {
             expect(newFirstCardText).not.toBe(originalFirstCardText);
             expect(newSwapCardText).not.toBe(originalSwapCardText);
         });
-
-        it('should check placeholder exists on drag', () => {
+        // unable to drag cards
+        // https://github.com/SAP/fundamental-ngx/issues/7342
+        xit('should check placeholder exists on drag', () => {
             scrollIntoView(cardDivArr);
             const clickElement = cardContentArr;
             const locationElement = cardDivArr;

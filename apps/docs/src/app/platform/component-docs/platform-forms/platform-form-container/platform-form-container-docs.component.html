@@ -50,6 +50,8 @@
 </component-example>
 <code-example [exampleFiles]="formContainerColumn"></code-example>
 
+<separator></separator>
+
 <fd-docs-section-title id="group" componentName="form-container"> Form Field Group </fd-docs-section-title>
 <description
     >Wrap fields with the <code>[form-field-group]</code> component to group them. You can use <code>[column]</code> and
@@ -102,3 +104,39 @@
     <fdp-platform-form-isinline-change-example></fdp-platform-form-isinline-change-example>
 </component-example>
 <code-example [exampleFiles]="formFieldInlineLayout"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="custom-field-layout" componentName="form-container"
+    >Customizing field layout</fd-docs-section-title
+>
+<description>
+    <p>By default, form field layout contains the following grid definition:</p>
+    <ul>
+        <li>Form field label: <code>fd-col-xl--4 fd-col-lg--4 fd-col-md--4 fd-col-sm--12</code></li>
+        <li>Form field control: <code>fd-col-xl--8 fd-col-lg--8 fd-col-md--8 fd-col-sm--12</code></li>
+        <li>Form field gap: <code>fd-col-sm--0 fd-col-md--0 fd-col-lg--0 fd-col-xl--0</code></li>
+    </ul>
+    <p>
+        This layout can be easily changed with
+        <code>[labelColumnLayout], [fieldColumnLayout] and [gapColumnLayout]</code> input properties.
+    </p>
+    <p>These properties are available on multiple levels for more flexible layout configuration:</p>
+    <ul>
+        <li><code>fdp-form-group</code></li>
+        <li><code>fdp-form-field-group</code></li>
+        <li><code>fdp-form-field</code></li>
+    </ul>
+    <p>The hierarchy of layout goes as follows:</p>
+    <p>
+        If <code>fdp-form-field</code> component is provided with input properties, they will be used as a grid columns
+        definitions. Otherwhise these definitions will be inherited from <code>fdp-form-field-group</code> component. If
+        form field is not wrapped into <code>fdp-form-field-group</code>, defintions will be taken from
+        <code>fdp-form-group</code>
+    </p>
+    <p></p>
+</description>
+<component-example>
+    <fdp-platform-form-custom-layout></fdp-platform-form-custom-layout>
+</component-example>
+<code-example [exampleFiles]="formContainerGroup"></code-example>

@@ -51,10 +51,7 @@
             "@fundamental-ngx/core/illustrated-message": ["libs/core/src/lib/illustrated-message/index.ts"],
             "@fundamental-ngx/core/infinite-scroll": ["libs/core/src/lib/infinite-scroll/index.ts"],
             "@fundamental-ngx/core/info-label": ["libs/core/src/lib/info-label/index.ts"],
-            "@fundamental-ngx/core/inline-help": [
-                "libs/core/src/lib/inline-help/inline-help/index.ts",
-                "libs/core/src/lib/inline-help/index.ts"
-            ],
+            "@fundamental-ngx/core/inline-help": ["libs/core/src/lib/inline-help/index.ts"],
             "@fundamental-ngx/core/input-group": ["libs/core/src/lib/input-group/index.ts"],
             "@fundamental-ngx/core/layout-grid": ["libs/core/src/lib/layout-grid/index.ts"],
             "@fundamental-ngx/core/layout-panel": ["libs/core/src/lib/layout-panel/index.ts"],
@@ -78,6 +75,7 @@
             "@fundamental-ngx/core/panel": ["libs/core/src/lib/panel/index.ts"],
             "@fundamental-ngx/core/popover": ["libs/core/src/lib/popover/index.ts"],
             "@fundamental-ngx/core/product-switch": ["libs/core/src/lib/product-switch/index.ts"],
+            "@fundamental-ngx/core/progress-indicator": ["libs/core/src/lib/progress-indicator/index.ts"],
             "@fundamental-ngx/core/quick-view": ["libs/core/src/lib/quick-view/index.ts"],
             "@fundamental-ngx/core/radio": ["libs/core/src/lib/radio/index.ts"],
             "@fundamental-ngx/core/rating-indicator": ["libs/core/src/lib/rating-indicator/index.ts"],

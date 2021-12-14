@@ -43,9 +43,11 @@ $fdp-thumbnail-image-border-color: var(--sapButton_Emphasized_Hover_BorderColor,
 
             .fdp-media-container {
                 position: relative;
-                width: $fdp-media-player-size;
                 height: $fdp-media-player-size;
-                margin: 0 25.438rem;
+                display: flex;
+                width: 84rem;
+                max-width: 100%;
+                justify-content: center;
                 &:focus,
                 &.is-focus {
                     outline-offset: 0.0625rem;
@@ -56,12 +58,11 @@ $fdp-thumbnail-image-border-color: var(--sapButton_Emphasized_Hover_BorderColor,
                 img {
                     max-width: $fdp-media-player-size;
                     max-height: $fdp-media-player-size;
-                    width: $fdp-media-player-size;
-                    height: $fdp-media-player-size;
+                    max-width: 100%;
+                    height: auto;
                     position: absolute;
                     padding: 0.688rem;
                     bottom: 0;
-                    left: 0;
                 }
                 video {
                     max-width: $fdp-media-player-size;
