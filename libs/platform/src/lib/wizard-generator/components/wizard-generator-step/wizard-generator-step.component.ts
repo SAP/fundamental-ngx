@@ -9,7 +9,6 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
@@ -192,7 +191,7 @@ export class WizardGeneratorStepComponent implements OnDestroy {
      * @param form
      * @param key
      */
-    private _trackDependencyFieldsChanges(form: FormGroup, key: string): void {
+    private _trackDependencyFieldsChanges(form: DynamicFormGroup, key: string): void {
         this._trackedFields = this._wizardGeneratorService.getDependencyFields(this.item.id);
 
         if (this._trackedFields && this._trackedFields[key]) {

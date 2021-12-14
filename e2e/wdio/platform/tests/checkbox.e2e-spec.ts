@@ -32,8 +32,6 @@ describe('Checkbox test suite', () => {
         disabledCheckboxWithoutForm,
         checkboxWithValue,
         tristateCheckboxes,
-        acceptAllCheckbox,
-        termsAndConditionsCheckbox,
         tristateCheckboxParis,
         errorCheckboxes,
         presenceCheckbox,
@@ -108,9 +106,7 @@ describe('Checkbox test suite', () => {
                 console.log('Skip for Safari and IE');
                 return;
             }
-            waitForPresent(disabledCheckboxWithoutForm);
             scrollIntoView(disabledCheckboxWithoutForm);
-            waitForElDisplayed(disabledCheckboxWithoutForm);
             checkIfDisabled(disabledCheckboxWithoutForm, 'aria-disabled', 'true');
         });
     });

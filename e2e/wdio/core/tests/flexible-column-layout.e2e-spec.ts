@@ -23,7 +23,9 @@ describe('Flexible column layout component test', () => {
         collapsButton,
         collapsibleHeader,
         pinButton,
-        columnButton
+        columnButton,
+        separator,
+        columnButton2
     } = flexibleColumnLayoutPage;
 
     beforeAll(() => {
@@ -89,6 +91,14 @@ describe('Flexible column layout component test', () => {
 
     it('should check separator for dynamic example', () => {
         checkSeparator(dynamicExample);
+    });
+    // skipped due to https://github.com/SAP/fundamental-ngx/issues/6518
+    xit('should check missed separator for default example', () => {
+        checkExistSeparator(defaultExample);
+    });
+    // skipped due to https://github.com/SAP/fundamental-ngx/issues/6519
+    xit('should check missed separator for default example', () => {
+        checkExistSeparator(dynamicExample);
     });
 
     it('should check orientation', () => {
@@ -181,5 +191,18 @@ describe('Flexible column layout component test', () => {
         expect(isElementDisplayed(column)).toBe(true, 'column is not displayed');
         click(exitExampleBtn);
         expect(doesItExist(column)).toBe(false);
+    }
+
+    function checkExistSeparator(section: string): void {
+        click(section + button);
+        click(columnButton2);
+        expect(waitForElDisplayed(separator)).toBe(true, 'separator is not displayed');
+
+        click(columnButton2, 1);
+        pause(1000);
+        click(separateButton, 1);
+        pause(1000);
+        expect(isElementDisplayed(separator)).toBe(true, 'separator is not displayed');
+        expect(isElementDisplayed(separator, 1)).toBe(true, 'separator is not displayed');
     }
 });

@@ -12,7 +12,10 @@ export class ComboboxMobileExampleComponent {
         title: 'Title',
         approveButtonText: 'Approve',
         cancelButtonText: 'Cancel',
-        hasCloseButton: true
+        hasCloseButton: true,
+        dialogConfig: {
+            ariaLabel: 'Title'
+        }
     };
 
     values: any[] = ['Apple', 'Banana', 'Pineapple', 'Tomato', 'Kiwi', 'Strawberry', 'Blueberry', 'Orange'];

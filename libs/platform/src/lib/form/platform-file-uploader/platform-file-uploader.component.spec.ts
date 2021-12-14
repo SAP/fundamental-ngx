@@ -36,7 +36,7 @@ import { FileUploaderSelectionChangeEvent, PlatformFileUploaderComponent } from 
         </fdp-form-group>
     `
 })
-class PlatformFileUploaderTest {
+class PlatformFileUploaderTestComponent {
     @ViewChild(PlatformFileUploaderComponent)
     platformFileUploader: PlatformFileUploaderComponent;
 
@@ -53,19 +53,19 @@ interface MockFile extends File {
 }
 
 describe('PlatformFileUploaderComponent', () => {
-    let component: PlatformFileUploaderTest;
-    let fixture: ComponentFixture<PlatformFileUploaderTest>;
+    let component: PlatformFileUploaderTestComponent;
+    let fixture: ComponentFixture<PlatformFileUploaderTestComponent>;
     let fileInput: PlatformFileUploaderComponent;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [PlatformFileUploaderTest],
+            declarations: [PlatformFileUploaderTestComponent],
             imports: [FormsModule, FdpFormGroupModule, PlatformFileUploaderModule]
         }).compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(PlatformFileUploaderTest);
+        fixture = TestBed.createComponent(PlatformFileUploaderTestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
         fileInput = component.platformFileUploader;

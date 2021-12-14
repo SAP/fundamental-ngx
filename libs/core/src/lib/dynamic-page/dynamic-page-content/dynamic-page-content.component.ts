@@ -34,7 +34,7 @@ export class DynamicPageContentComponent implements OnInit {
     /** @hidden */
     constructor(private _elementRef: ElementRef<HTMLElement>, public _renderer: Renderer2) {}
 
-    /**@hidden */
+    /** @hidden */
     ngOnInit(): void {
         this._addClassNameToHostElement(DYNAMIC_PAGE_CLASS_NAME.dynamicPageContent);
     }
@@ -44,7 +44,7 @@ export class DynamicPageContentComponent implements OnInit {
         return this._elementRef;
     }
 
-    /**@hidden */
+    /** @hidden */
     private _addClassNameToHostElement(className: string): void {
         addClassNameToElement(this._renderer, this._elementRef.nativeElement, className);
     }

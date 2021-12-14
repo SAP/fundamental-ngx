@@ -36,7 +36,6 @@ describe('Step input test suite', () => {
         errorMessage,
         minMaxButtonDecrement,
         minMaxButtonIncrement,
-        inputWithoutForm,
         quantityText,
         formStatusText,
         fillInput
@@ -179,7 +178,7 @@ describe('Step input test suite', () => {
         const arr = getElementArrayLength(activeInput);
         for (let i = 0; i < arr; i++) {
             scrollIntoView(activeInput, i);
-            let defaultValue = getValue(activeInput, i);
+            const defaultValue = getValue(activeInput, i);
             clickRightMouseBtn(activeButtonIncrement, i);
             expect(getValue(activeInput, i)).toEqual(defaultValue, 'value changed by clickin on right mouse button');
             clickRightMouseBtn(activeButtonDecrement, i);

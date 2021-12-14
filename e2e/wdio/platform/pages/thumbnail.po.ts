@@ -22,7 +22,7 @@ export class ThumbnailPo extends BaseComponentPo {
         waitForElDisplayed(this.mainImage);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

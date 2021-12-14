@@ -20,6 +20,7 @@ export const MOMENT_DATE_TIME_ADAPTER_OPTIONS = new InjectionToken<MomentDatetim
     }
 );
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export function MOMENT_DATE_TIME_ADAPTER_OPTIONS_FACTORY(): MomentDatetimeAdapterOptions {
     return {
         useUtc: false,
@@ -153,27 +154,21 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
         const format: string = meridian ? (twoDigit ? 'hh' : 'h') : twoDigit ? 'HH' : 'H';
         const momentDate = this._createMomentDate();
 
-        return range(24, (i) => {
-            return this.clone(momentDate).hour(i).format(format);
-        });
+        return range(24, (i) => this.clone(momentDate).hour(i).format(format));
     }
 
     getMinuteNames({ twoDigit }: { twoDigit: boolean }): string[] {
         const format: string = twoDigit ? 'mm' : 'm';
         const momentDate = this._createMomentDate();
 
-        return range(60, (i) => {
-            return this.clone(momentDate).minute(i).format(format);
-        });
+        return range(60, (i) => this.clone(momentDate).minute(i).format(format));
     }
 
     getSecondNames({ twoDigit }: { twoDigit: boolean }): string[] {
         const format: string = twoDigit ? 'ss' : 's';
         const momentDate = this._createMomentDate();
 
-        return range(60, (i) => {
-            return this.clone(momentDate).second(i).format(format);
-        });
+        return range(60, (i) => this.clone(momentDate).second(i).format(format));
     }
 
     // isLower property is responsible for the lower and upper cases of the result
@@ -331,7 +326,7 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
         const longDateFormat: LongDateFormatSpec = (this._momentLocaleData as any)._longDateFormat;
 
         for (const key in longDateFormat) {
-            if (longDateFormat.hasOwnProperty(key) && format === key) {
+            if (Object.prototype.hasOwnProperty.call(longDateFormat, key) && format === key) {
                 return longDateFormat[key];
             }
         }

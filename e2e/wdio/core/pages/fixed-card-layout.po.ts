@@ -24,7 +24,7 @@ export class FixedCardLayoutPo extends CoreBaseComponentPo {
         waitForPresent(this.pageHeader);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

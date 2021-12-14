@@ -32,18 +32,13 @@ import {
 import { fromEvent, isObservable, Observable, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import {
-    closestElement,
-    ContentDensity,
-    FocusEscapeDirection,
-    KeyUtil,
-    TemplateDirective
-} from '@fundamental-ngx/core/utils';
+import { ContentDensity, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/core/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import { ListComponent } from '@fundamental-ngx/core/list';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import {
     ArrayComboBoxDataSource,
+    coerceArraySafe,
     CollectionBaseInput,
     ComboBoxDataSource,
     FormField,
@@ -58,6 +53,7 @@ import {
     ObservableComboBoxDataSource,
     OptionItem
 } from '@fundamental-ngx/platform/shared';
+import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 
 import { AutoCompleteEvent } from '../../auto-complete/auto-complete.directive';
 import { ComboboxComponent } from '../combobox/combobox.component';
@@ -148,14 +144,30 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     }
 
     set value(value: any) {
-        if (!value) {
-            return;
-        }
-
-        const selectedItems = Array.isArray(value) ? value : [value];
+        const selectedItems = coerceArraySafe(value);
         this.setAsSelected(this._convertToOptionItems(selectedItems));
         super.setValue(value);
     }
+
+    /**
+     * Preset options for the Select body width, whatever is chosen, the body has a 600px limit.
+     * `at-least` will apply a minimum width to the body equivalent to the width of the control. - Default
+     * `equal` will apply a width to the body equivalent to the width of the control.
+     * 'fit-content' will apply width needed to properly display items inside, independent of control.
+     */
+    @Input()
+    fillControlMode: PopoverFillMode = 'at-least';
+
+    /**
+     * The trigger events that will open/close the options popover.
+     * Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp).
+     */
+    @Input()
+    triggers: string[] = [];
+
+    /** Whether the combobox should close, when a click is performed outside its boundaries. True by default */
+    @Input()
+    closeOnOutsideClick = true;
 
     /** Event emitted when item is selected. */
     @Output()
@@ -262,9 +274,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     ];
 
     /** @hidden */
-    private _displayFn = (value: any) => {
-        return this.displayValue(value);
-    };
+    private _displayFn = (value: any) => this.displayValue(value);
 
     /** @hidden */
     private _secondaryFn = (value: any) => {
@@ -333,28 +343,9 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
     /** write value for ControlValueAccessor */
     writeValue(value: any): void {
-        if (!value) {
-            return;
-        }
-
-        const selectedItems = Array.isArray(value) ? value : [value];
+        const selectedItems = coerceArraySafe(value);
         this.setAsSelected(this._convertToOptionItems(selectedItems));
         super.writeValue(value);
-    }
-
-    /** @hidden Close list */
-    close(event: MouseEvent): void {
-        const target = event.target as HTMLInputElement;
-        if (target && target.id === this.id) {
-            return;
-        }
-
-        if (!!closestElement(`#${this.id}-input-group-container`, target)) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-
-        this.showList(false);
     }
 
     /** @hidden */
@@ -367,7 +358,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     }
 
     /** @hidden */
-    showList(isOpen: boolean): void {
+    isOpenChangeHandle(isOpen: boolean): void {
         if (this.isOpen !== isOpen) {
             this.isOpen = isOpen;
             this.onTouched();
@@ -401,17 +392,17 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
      * Handle Click on Button
      * @hidden
      */
-    onPrimaryButtonClick(isOpen: boolean): void {
+    onPrimaryButtonClick(): void {
         // if it's mobile mode ignore this click
         if (this.mobile) {
             return;
         }
 
-        if (!isOpen) {
+        if (!this.isOpen) {
             this.searchTermChanged('');
         }
 
-        this.showList(!isOpen);
+        this.isOpenChangeHandle(!this.isOpen);
 
         if (this.isOpen && this.listComponent) {
             this.listComponent.setItemActive(0);
@@ -430,7 +421,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         }
 
         // otherwise show options
-        this.showList(true);
+        this.isOpenChangeHandle(true);
     }
 
     /**
@@ -446,7 +437,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
             event.preventDefault();
 
             if (event.altKey) {
-                this.showList(true);
+                this.isOpenChangeHandle(true);
             }
 
             if (this.isOpen && this.listComponent) {
@@ -461,9 +452,9 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         } else if (KeyUtil.isKeyCode(event, ESCAPE)) {
             event.stopPropagation();
 
-            this.showList(false);
+            this.isOpenChangeHandle(false);
         } else if (!event.ctrlKey && !KeyUtil.isKeyCode(event, this._nonOpeningKeys)) {
-            this.showList(true);
+            this.isOpenChangeHandle(true);
             const acceptedKeys =
                 !KeyUtil.isKeyCode(event, BACKSPACE) &&
                 !KeyUtil.isKeyType(event, 'alphabetical') &&
@@ -485,7 +476,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     _onCompleteTerm(event: AutoCompleteEvent): void {
         if (event.forceClose) {
             this.toggleSelectionByInputText(event.term);
-            this.showList(false);
+            this.isOpenChangeHandle(false);
         }
     }
 
@@ -509,7 +500,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
     /** @hidden */
     protected get ds(): ComboBoxDataSource<any> {
-        return <ComboBoxDataSource<any>>this.dataSource;
+        return this.dataSource as ComboBoxDataSource<any>;
     }
 
     /** @hidden Map grouped values to array. */
@@ -626,11 +617,12 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
     /** @hidden */
     private _getOptionsListWidth(): void {
+        const gap = 5;
         const { offsetWidth, clientWidth } = document.body;
         const { width, left } = (this._element.querySelector('fd-input-group') as HTMLElement).getBoundingClientRect();
         const scrollBarWidth = offsetWidth - clientWidth;
 
-        this.maxWidth = this.autoResize ? window.innerWidth - scrollBarWidth - left : this.minWidth;
+        this.maxWidth = this.autoResize ? window.innerWidth - scrollBarWidth - left - gap : this.minWidth;
         this.minWidth = width - 2;
 
         this._cd.detectChanges();

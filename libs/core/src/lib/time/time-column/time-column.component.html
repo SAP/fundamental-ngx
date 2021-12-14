@@ -4,19 +4,17 @@
     fd-button
     fdType="transparent"
     glyph="navigation-up-arrow"
+    tabindex="-1"
     [compact]="compact"
     [title]="timeConfig?.decreaseLabel"
     [ariaLabel]="timeConfig?.decreaseLabel"
     (keyup)="spinnerButtonKeyupHandle($event, true)"
     (click)="scrollUp($event)"
 ></button>
-<div
-    class="fd-time__wrapper"
-    [ngClass]="{ 'fd-time__wrapper--active': active, 'fd-time__wrapper--meridian': meridian }"
->
+<div class="fd-time__wrapper" [class.fd-time__wrapper--active]="active" [class.fd-time__wrapper--meridian]="meridian">
     <ul
         class="fd-time__list"
-        [ngClass]="{ 'fd-time-column-custom-hidden': !active }"
+        [class.fd-time-column-custom-hidden]="!active"
         [config]="config"
         (click)="indicator.focus()"
         (activeChange)="activeChangedHandle($event)"
@@ -40,11 +38,26 @@
     <div
         class="fd-time__current-indicator"
         #indicator
-        tabindex="-1"
-        [ngClass]="{ 'fd-time-column-custom-hidden': !active }"
-        [id]="currentIndicatorId"
-    ></div>
-    <span aria-live="polite" class="fd-time__item fd-time__item--collapsed">
+        tabindex="0"
+        role="listbox"
+        [attr.id]="currentIndicatorId"
+        [class.fd-time-column-custom-hidden]="!active"
+        [attr.aria-labelledby]="currentIndicatorValueId"
+        [attr.aria-description]="timeConfig?.navigationInstruction"
+        (focus)="_onFocusIndicator()"
+    >
+        <span
+            class="fd-time-column-custom-hidden"
+            aria-live="assertive"
+            aria-atomic="true"
+            [attr.aria-hidden]="!active"
+            [attr.id]="currentIndicatorValueId"
+            [class.fd-time-column-custom-hidden]="active"
+        >
+            {{ activeValue?.label }} {{ timeConfig?.label }}
+        </span>
+    </div>
+    <span *ngIf="!active" class="fd-time__item fd-time__item--collapsed">
         {{ activeValue?.label }}
     </span>
 </div>
@@ -53,6 +66,7 @@
     fd-button
     fdType="transparent"
     glyph="navigation-down-arrow"
+    tabindex="-1"
     [compact]="compact"
     [title]="timeConfig?.increaseLabel"
     [ariaLabel]="timeConfig?.increaseLabel"

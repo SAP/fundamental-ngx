@@ -4,18 +4,18 @@ import { Component } from '@angular/core';
 import { TimelineModule } from '@fundamental-ngx/core/timeline';
 
 describe('TimelineNodeComponent', () => {
-    let component: TimeLineNodeTestApp;
-    let fixture: ComponentFixture<TimeLineNodeTestApp>;
+    let component: TimeLineNodeTestComponent;
+    let fixture: ComponentFixture<TimeLineNodeTestComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [TimeLineNodeTestApp],
+            declarations: [TimeLineNodeTestComponent],
             imports: [TimelineModule]
         }).compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TimeLineNodeTestApp);
+        fixture = TestBed.createComponent(TimeLineNodeTestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
@@ -40,6 +40,6 @@ describe('TimelineNodeComponent', () => {
         </div>
     `
 })
-class TimeLineNodeTestApp {
+class TimeLineNodeTestComponent {
     data = [{ glyph: 'key' }];
 }

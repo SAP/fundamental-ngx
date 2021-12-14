@@ -23,7 +23,7 @@ export class ListDataProvider extends DataProvider<Address> {
 
     fetch(params: Map<string, string>): Observable<Address[]> {
         let data = LIST_ELEMENTS;
-        if (!!params.get('name')) {
+        if (params.get('name')) {
             const keyword = params.get('name').toLowerCase();
             data = data.filter((city) => city.name.toLowerCase().indexOf(keyword) > -1);
         }
@@ -46,26 +46,26 @@ export class ListDataProvider extends DataProvider<Address> {
         ></fdp-list>
     `
 })
-class ListComponentTest {
+class ListComponentTestComponent {
     @ViewChild(ListComponent, { read: ElementRef, static: true })
     listElement: ElementRef;
 }
 
 describe('ListComponent', () => {
-    let component: ListComponentTest;
-    let fixture: ComponentFixture<ListComponentTest>;
+    let component: ListComponentTestComponent;
+    let fixture: ComponentFixture<ListComponentTestComponent>;
 
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 imports: [PlatformListModule, StandardListItemModule, RouterTestingModule],
-                declarations: [ListComponentTest]
+                declarations: [ListComponentTestComponent]
             }).compileComponents();
         })
     );
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(ListComponentTest);
+        fixture = TestBed.createComponent(ListComponentTestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
@@ -127,7 +127,6 @@ class ListDataSourceTestComponent {
 }
 
 describe('ListComponent with DataSource', () => {
-    let host: ListDataSourceTestComponent;
     let fixture: ComponentFixture<ListDataSourceTestComponent>;
 
     beforeEach(
@@ -141,7 +140,6 @@ describe('ListComponent with DataSource', () => {
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ListDataSourceTestComponent);
-        host = fixture.componentInstance;
         fixture.detectChanges();
     });
 

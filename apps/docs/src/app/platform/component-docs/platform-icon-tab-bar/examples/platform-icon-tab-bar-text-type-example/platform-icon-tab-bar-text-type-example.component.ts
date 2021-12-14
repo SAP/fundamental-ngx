@@ -29,7 +29,19 @@ export class PlatformIconTabBarTextTypeExampleComponent implements OnInit {
                 {
                     label: 'Item 0',
                     counter: null,
-                    color: 'critical'
+                    color: 'critical',
+                    subItems: [
+                        {
+                            label: 'Item 0.1',
+                            counter: null,
+                            color: null
+                        },
+                        {
+                            label: 'Item 0.2',
+                            counter: null,
+                            color: null
+                        }
+                    ]
                 },
                 {
                     label: 'Item 1',

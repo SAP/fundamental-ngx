@@ -25,7 +25,10 @@ describe('Search field', () => {
         compactSearchResult,
         cozyWithCategoriesSearch,
         compactWithCategoriesSearch,
-        cozyWithDataSourceSearch
+        cozyWithDataSourceSearch,
+        okButton,
+        mobileExampleSearch,
+        categoryOption
     } = new SearchPo();
     const searchPage = new SearchPo();
 
@@ -65,11 +68,14 @@ describe('Search field', () => {
     it('should submit term by click on search icon ', () => {
         const arrLength = getElementArrayLength(searchFields);
         for (let i = 0; arrLength > i; i++) {
-            // skip new mobile example for now
-            if (i !== 5) {
-                // value without suggestion
+            if (i !== 6) {
                 setValue(searchFields, 'test', i);
                 click(searchIcons, 0);
+            }
+            if (i === 6) {
+                click(searchFields, i);
+                setValue(searchFields, 'test', 7);
+                click(okButton);
             }
         }
         expect(getText(cozySearchResult)).toContain('test');
@@ -83,15 +89,27 @@ describe('Search field', () => {
         expect(getText(cozyWithCategoriesSearch, 2)).toContain('test');
         expect(getText(compactWithCategoriesSearch, 2)).toContain('test');
         expect(getText(cozyWithDataSourceSearch, 2)).toContain('test');
+
+        expect(getText(mobileExampleSearch)).toContain('test');
+        expect(getText(mobileExampleSearch, 1)).toContain('test');
     });
 
     it('should clear search by click on click icon ', () => {
         const arrLength = getElementArrayLength(searchFields);
         for (let i = 0; arrLength > i; i++) {
             // value without suggestion
-            setValue(searchFields, 'test', i);
-            waitForElDisplayed(clearSearchIcon);
-            click(clearSearchIcon);
+            if (i !== 6) {
+                setValue(searchFields, 'test', i);
+                waitForElDisplayed(clearSearchIcon);
+                click(clearSearchIcon);
+            }
+            if (i === 6) {
+                click(searchFields, i);
+                setValue(searchFields, 'test', 7);
+                waitForElDisplayed(clearSearchIcon, 1);
+                click(clearSearchIcon, 1);
+                click(okButton);
+            }
         }
         expect(getText(cozySearchResult)).not.toContain('test');
         expect(getText(compactSearchResult)).not.toContain('test');
@@ -109,21 +127,31 @@ describe('Search field', () => {
     it('should have autosuggestion after one latter', () => {
         const arrLength = getElementArrayLength(searchFields);
         for (let i = 0; arrLength > i; i++) {
-            // value without suggestion
-            setValue(searchFields, 'ea', i);
-            waitForElDisplayed(autosuggestionItems);
-            getTextArr(autosuggestionItems).forEach((suggestionItemText) => {
-                expect(suggestionItemText).toContain('ea');
-            });
-            click(clearSearchIcon);
+            if (i !== 2 && i !== 6) {
+                // value without suggestion
+                setValue(searchFields, 'ea', i);
+                waitForElDisplayed(autosuggestionItems);
+                getTextArr(autosuggestionItems).forEach((suggestionItemText) => {
+                    expect(suggestionItemText).toContain('ea');
+                });
+                click(clearSearchIcon);
+            }
+            if (i === 6) {
+                click(searchFields, i);
+                setValue(searchFields, 'ea', 7);
+                waitForElDisplayed(autosuggestionItems);
+                getTextArr(autosuggestionItems).forEach((suggestionItemText) => {
+                    expect(suggestionItemText).toContain('ea');
+                });
+            }
         }
     });
 
     it('should compact be smaller than cozy', () => {
         const defaultCozySize = getElementSize(searchFields, 0, 'height');
         const defaultCompactSize = getElementSize(searchFields, 1, 'height');
-        const withCategoryCozySize = getElementSize(searchFields, 2, 'height');
-        const withCategoryCompactSize = getElementSize(searchFields, 3, 'height');
+        const withCategoryCozySize = getElementSize(searchFields, 3, 'height');
+        const withCategoryCompactSize = getElementSize(searchFields, 4, 'height');
 
         expect(defaultCozySize).toBeGreaterThan(defaultCompactSize);
         expect(withCategoryCozySize).toBeGreaterThan(withCategoryCompactSize);
@@ -138,8 +166,8 @@ describe('Search field', () => {
         const arrLength = getElementArrayLength(searchCategoryBtn);
         for (let i = 0; arrLength > i; i++) {
             click(searchCategoryBtn, i);
-            click(autosuggestionItems);
-            click(searchIcons, i + 2);
+            click(categoryOption);
+            click(searchIcons, i + 3);
         }
         expect(getText(cozyWithCategoriesSearch, 1)).toContain(expected_category);
         expect(getText(cozyWithCategoriesSearch, 3)).toContain(expected_category);

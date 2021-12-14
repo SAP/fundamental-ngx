@@ -14,7 +14,7 @@ import { SearchInput } from '@fundamental-ngx/platform/search-field';
 
 import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
 
-export interface TableColumn {
+export interface DialogTableColumn {
     label: string;
     key: string;
 }
@@ -22,7 +22,7 @@ export interface TableColumn {
 type VisibleColumnType = string; // ColumnKey
 
 export interface ColumnsDialogData {
-    availableColumns: TableColumn[];
+    availableColumns: DialogTableColumn[];
     visibleColumns: VisibleColumnType[];
 }
 
@@ -37,7 +37,7 @@ class SelectableColumn {
         /** Active */
         public active: boolean,
         /** Table Column it belongs to */
-        public column: TableColumn
+        public column: DialogTableColumn
     ) {}
 }
 
@@ -57,11 +57,8 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
     /** Indicates when reset command is available */
     readonly isResetAvailable$: Observable<boolean> = this._isResetAvailableSubject$.asObservable();
 
-    /** Initial collection to work with */
-    readonly initialVisibleColumnKeys: string[];
-
     /** Table columns available for grouping */
-    readonly availableColumns: TableColumn[] = [];
+    readonly availableColumns: DialogTableColumn[] = [];
 
     /** All available columns for interacting */
     _selectableColumns: SelectableColumn[] = [];
@@ -96,17 +93,15 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
 
     /** @hidden */
     constructor(private dialogRef: DialogRef, private cdr: ChangeDetectorRef) {
-        const { availableColumns, visibleColumns: visibleColumnKeys }: ColumnsDialogData = this.dialogRef.data;
-
-        this.initialVisibleColumnKeys = [...visibleColumnKeys];
+        const { availableColumns, visibleColumns }: ColumnsDialogData = this.dialogRef.data;
 
         this.availableColumns = availableColumns?.map(({ label, key }) => ({ label: label, key: key })) || [];
+
+        this._initiateColumns(visibleColumns);
     }
 
     /** @hidden */
     ngOnInit(): void {
-        this._initiateColumns();
-
         this._listenToFilterOptions();
     }
 
@@ -117,7 +112,7 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
 
     /** Reset to the initial state */
     reset(): void {
-        this._initiateColumns();
+        this._initiateColumns(this.availableColumns.map((c) => c.key));
         this._isResetAvailableSubject$.next(false);
     }
 
@@ -142,12 +137,25 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
     /** @hidden */
     _onToggleColumn(): void {
         this._countSelectedColumns();
-        this._onModelChange();
+        this._recalculateResetAvailability();
     }
 
     /** @hidden */
-    _onModelChange(): void {
-        this._isResetAvailableSubject$.next(true);
+    _recalculateResetAvailability(): void {
+        let resettable = false;
+        if (this._selectedColumnsCount !== this.availableColumns.length) {
+            // Initially all columns are selected. If not, reset should be active
+            resettable = true;
+        } else {
+            // if all are selected, check for columns order to match the initial one
+            for (let index = 0; index < this.availableColumns.length; index++) {
+                if (this._selectableColumns[index].column.key !== this.availableColumns[index].key) {
+                    resettable = true;
+                    break;
+                }
+            }
+        }
+        this._isResetAvailableSubject$.next(resettable);
     }
 
     /** @hidden */
@@ -200,20 +208,37 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
         return item?.column.key;
     }
 
-    /** @hidden */
-    private _initiateColumns(): void {
-        const visibleColumnKeys = this.initialVisibleColumnKeys;
-
-        this._selectableColumns = this.availableColumns.slice().map(
-            (column, index: number): SelectableColumn => ({
-                column: column,
-                selected: visibleColumnKeys.includes(column.key),
-                active: index === 0
+    /**
+     * @hidden
+     * @param visibleColumnKeys keys of columns that should be displayed as selected.
+     * Also, their order matters: it will be used
+     */
+    private _initiateColumns(visibleColumnKeys: string[]): void {
+        const visibleColumnIndexMap = new Map(visibleColumnKeys.map((key, index) => [key, index]));
+        this._selectableColumns = this.availableColumns
+            .slice()
+            // sorting columns in accordance with the order of visible columns
+            .sort((a, b) => {
+                const aIndex = visibleColumnIndexMap.get(a.key);
+                const bIndex = visibleColumnIndexMap.get(b.key);
+                if (aIndex === undefined || bIndex === undefined) {
+                    // preserving initial order of not selected column
+                    return 0;
+                }
+                return aIndex - bIndex;
             })
-        );
+            .map(
+                (column, index: number): SelectableColumn => ({
+                    column: column,
+                    selected: visibleColumnKeys.includes(column.key),
+                    active: index === 0
+                })
+            );
 
         // keep count of selected
         this._countSelectedColumns();
+
+        this._recalculateResetAvailability();
 
         // reset filter settings settings
         this._searchQuerySubject.next(INITIAL_SEARCH_TEXT);
@@ -265,7 +290,7 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
 
         this._calculateMovementButtonsState();
 
-        this._onModelChange();
+        this._recalculateResetAvailability();
     }
 
     /**

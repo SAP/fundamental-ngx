@@ -3,19 +3,26 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class FeedListItemPo extends CoreBaseComponentPo {
     private url = '/feed-list-item';
-    root = '#page-content';
+
+    simpleExample = 'fd-fli-simple-example ';
+    avatarExample = 'fd-fli-avatar-example ';
+    actionExample = 'fd-fli-action-example ';
+    footerExample = 'fd-fli-footer-example ';
+    mobileExample = 'fd-fli-mobile-example ';
+
     paragraphs = '.fd-feed-list__text';
-    linkMore = '.fd-link.fd-feed-list__link--more';
-    checkbox = 'input[id="toggle-text-righ1"]';
-    links = "a.fd-link[href*='example']";
+    linkMore = '.fd-feed-list__link--more';
+    links = '.fd-link:not(.fd-feed-list__link--more)';
     actionSettingsButton = 'button[glyph="action-settings"]';
-    menuButton = 'button[glyph="menu"]';
+    menuButton = '[glyph="menu"]';
     menuOption = '.fd-menu__link';
     overflowButton = '.fd-button--standard.fd-button--compact';
     overflowOption = '.fd-button--transparent.fd-button--text-alignment-left';
+    mobileMenu = 'fd-action-sheet-body';
     optionCancel = '.fd-button--negative';
+    avatar = 'fd-avatar';
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

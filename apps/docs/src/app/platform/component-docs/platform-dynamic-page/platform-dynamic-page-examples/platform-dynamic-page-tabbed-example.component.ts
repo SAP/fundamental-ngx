@@ -24,6 +24,8 @@ export class PlatformDynamicPageTabbedExampleComponent implements OnDestroy {
 
     pageTitle = 'Balenciaga Tripple S Trainers';
 
+    background = 'list';
+
     constructor(private _overflowHandlingService: PlatformDynamicPagePageOverflowService) {}
 
     onCollapseChange(event: DynamicPageCollapseChangeEvent): void {

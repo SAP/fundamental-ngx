@@ -8,14 +8,13 @@ import {
     OnDestroy,
     OnChanges,
     Output,
-    Renderer2,
-    SimpleChanges
+    Renderer2
 } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-lineclamp-target]',
     exportAs: 'fdLineClampTarget'
 })
@@ -42,7 +41,7 @@ export class LineClampTargetDirective implements OnChanges, AfterViewInit {
     }
 
     /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
+    ngOnChanges(): void {
         this.update.emit(this);
     }
 
@@ -53,7 +52,7 @@ export class LineClampTargetDirective implements OnChanges, AfterViewInit {
 }
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-lineclamp]',
     exportAs: 'fdLineClamp'
 })

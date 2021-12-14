@@ -19,6 +19,7 @@ import {
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 import { ENTER } from '@angular/cdk/keycodes';
+import { coerceNumberProperty } from '@angular/cdk/coercion';
 
 import { fromEvent, Observable, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -90,7 +91,7 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
     appendTo: ElementRef;
 
     @Input()
-    triggerValue: String;
+    triggerValue: string;
 
     @Input()
     fillControlMode: PopoverFillMode = 'at-least';
@@ -155,11 +156,23 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
 
     /** First Column ratio */
     @Input()
-    firstColumnRatio: number;
+    set firstColumnRatio(value: number) {
+        this._firstColumnRatio = coerceNumberProperty(value);
+    }
+
+    get firstColumnRatio(): number {
+        return this._firstColumnRatio;
+    }
 
     /** Secoond Column ratio */
     @Input()
-    secondColumnRatio: number;
+    set secondColumnRatio(value: number) {
+        this._secondColumnRatio = coerceNumberProperty(value);
+    }
+
+    get secondColumnRatio(): number {
+        return this._secondColumnRatio;
+    }
 
     /**
      * Min width of list container
@@ -181,6 +194,10 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
     set contentDensity(contentDensity: ContentDensity) {
         this._contentDensity = contentDensity;
         this._isCompact = this.contentDensity !== 'cozy';
+    }
+
+    get contentDensity(): ContentDensity {
+        return this._contentDensity;
     }
 
     /** Data for suggestion list */
@@ -263,6 +280,12 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
 
     /** @hidden */
     private _element: HTMLElement = this.elementRef.nativeElement;
+
+    /** @hidden */
+    private _firstColumnRatio: number;
+
+    /** @hidden */
+    private _secondColumnRatio: number;
 
     constructor(
         readonly cd: ChangeDetectorRef,

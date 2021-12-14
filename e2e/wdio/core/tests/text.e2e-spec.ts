@@ -2,6 +2,8 @@ import { TextPo } from '../pages/text.po';
 import {
     checkElementScreenshot,
     click,
+    getElementArrayLength,
+    getElementSize,
     getImageTagBrowserPlatform,
     getText,
     refreshPage,
@@ -13,7 +15,7 @@ import { testTextMore, testTextLess, testTextMoreLabel, testTextLessLabel } from
 
 describe('Text component test', () => {
     const textPage = new TextPo();
-    const { linksExpandable, textParagraph } = textPage;
+    const { linksExpandable, textParagraph, textExpandableExample } = textPage;
 
     beforeAll(() => {
         textPage.open();
@@ -37,78 +39,93 @@ describe('Text component test', () => {
             click(linksExpandable, 2);
             expect(getText(linksExpandable, 2)).toContain(testTextLessLabel);
         });
+    });
 
-        describe('Check orientation', () => {
-            it('should check RTL and LTR orientation', () => {
-                textPage.checkRtlSwitch();
-            });
+    describe('Check Text Expandable example', () => {
+        it('should check by clicking button "more" displayed more text', () => {
+            scrollIntoView(linksExpandable);
+            click(linksExpandable, 1);
+            const linksLength = getElementArrayLength(linksExpandable);
+            for (let i = 0; i < linksLength; i++) {
+                scrollIntoView(linksExpandable, i);
+                const beforeSize = getElementSize(textExpandableExample + textParagraph, i);
+                click(linksExpandable, i);
+                const afterSize = getElementSize(textExpandableExample + textParagraph, i);
+                expect(afterSize.height).toBeGreaterThan(beforeSize.height);
+            }
+        });
+    });
+
+    describe('Check orientation', () => {
+        it('should check RTL and LTR orientation', () => {
+            textPage.checkRtlSwitch();
+        });
+    });
+
+    xdescribe('Should check visual regression', () => {
+        it('should check visual regression for all examples', () => {
+            textPage.saveExampleBaselineScreenshot();
+            expect(textPage.compareWithBaseline()).toBeLessThan(5);
         });
 
-        xdescribe('Should check visual regression', () => {
-            it('should check visual regression for all examples', () => {
-                textPage.saveExampleBaselineScreenshot();
-                expect(textPage.compareWithBaseline()).toBeLessThan(5);
-            });
-
-            it('verify paragraph example after click "MORE" link', () => {
-                const paragraphTag = 'paragraph-0-';
-                scrollIntoView(textParagraph, 10);
-                click(linksExpandable);
-                saveElementScreenshot(
+        it('verify paragraph example after click "MORE" link', () => {
+            const paragraphTag = 'paragraph-0-';
+            scrollIntoView(textParagraph, 10);
+            click(linksExpandable);
+            saveElementScreenshot(
+                textParagraph,
+                paragraphTag + getImageTagBrowserPlatform(),
+                textPage.getScreenshotFolder(),
+                10
+            );
+            expect(
+                checkElementScreenshot(
                     textParagraph,
-                    paragraphTag + getImageTagBrowserPlatform(),
+                    'paragraph-0-' + getImageTagBrowserPlatform(),
                     textPage.getScreenshotFolder(),
                     10
-                );
-                expect(
-                    checkElementScreenshot(
-                        textParagraph,
-                        'paragraph-0-' + getImageTagBrowserPlatform(),
-                        textPage.getScreenshotFolder(),
-                        10
-                    )
-                ).toBeLessThan(5, `element item state mismatch`);
-            });
+                )
+            ).toBeLessThan(5, `element item state mismatch`);
+        });
 
-            it('verify paragraph example after you click "LESS" link', () => {
-                const paragraphTag = 'paragraph-1-';
-                scrollIntoView(textParagraph, 11);
-                click(linksExpandable, 1);
-                saveElementScreenshot(
+        it('verify paragraph example after you click "LESS" link', () => {
+            const paragraphTag = 'paragraph-1-';
+            scrollIntoView(textParagraph, 11);
+            click(linksExpandable, 1);
+            saveElementScreenshot(
+                textParagraph,
+                paragraphTag + getImageTagBrowserPlatform(),
+                textPage.getScreenshotFolder(),
+                11
+            );
+            expect(
+                checkElementScreenshot(
                     textParagraph,
-                    paragraphTag + getImageTagBrowserPlatform(),
+                    'paragraph-1-' + getImageTagBrowserPlatform(),
                     textPage.getScreenshotFolder(),
                     11
-                );
-                expect(
-                    checkElementScreenshot(
-                        textParagraph,
-                        'paragraph-1-' + getImageTagBrowserPlatform(),
-                        textPage.getScreenshotFolder(),
-                        11
-                    )
-                ).toBeLessThan(5, `element item state mismatch`);
-            });
+                )
+            ).toBeLessThan(5, `element item state mismatch`);
+        });
 
-            it('verify paragraph example after click "MORE LABEL" link', () => {
-                const paragraphTag = 'paragraph-2-';
-                scrollIntoView(textParagraph, 12);
-                click(linksExpandable, 2);
-                saveElementScreenshot(
+        it('verify paragraph example after click "MORE LABEL" link', () => {
+            const paragraphTag = 'paragraph-2-';
+            scrollIntoView(textParagraph, 12);
+            click(linksExpandable, 2);
+            saveElementScreenshot(
+                textParagraph,
+                paragraphTag + getImageTagBrowserPlatform(),
+                textPage.getScreenshotFolder(),
+                12
+            );
+            expect(
+                checkElementScreenshot(
                     textParagraph,
-                    paragraphTag + getImageTagBrowserPlatform(),
+                    'paragraph-2-' + getImageTagBrowserPlatform(),
                     textPage.getScreenshotFolder(),
                     12
-                );
-                expect(
-                    checkElementScreenshot(
-                        textParagraph,
-                        'paragraph-2-' + getImageTagBrowserPlatform(),
-                        textPage.getScreenshotFolder(),
-                        12
-                    )
-                ).toBeLessThan(5, `element item state mismatch`);
-            });
+                )
+            ).toBeLessThan(5, `element item state mismatch`);
         });
     });
 });

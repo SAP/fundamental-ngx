@@ -13,7 +13,7 @@ export class ObjectIdentifierPo extends CoreBaseComponentPo {
         waitForPresent(this.identifier);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

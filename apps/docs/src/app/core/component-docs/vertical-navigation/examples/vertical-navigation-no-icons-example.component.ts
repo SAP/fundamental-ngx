@@ -1,5 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
-import { ListNavigationItemComponent } from '@fundamental-ngx/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'fd-vertical-navigation-no-icons-example',

@@ -78,10 +78,10 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    onChange: Function = () => {};
+    onChange: (value: string | string[]) => void = () => {};
 
     /** @hidden */
-    onTouched: Function = () => {};
+    onTouched = () => {};
 
     constructor(private readonly _changeDetRef: ChangeDetectorRef) {}
 
@@ -101,7 +101,7 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
      * @hidden
      * @param fn User defined function that handles the *onChange* event of the SegmentedButtons.
      */
-    registerOnChange(fn: Function): void {
+    registerOnChange(fn: (value: string | string[]) => void): void {
         this.onChange = fn;
     }
 
@@ -109,7 +109,7 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
      * @hidden
      * @param fn User defined function that handles the *onTouch* event of the SegmentedButtons.
      */
-    registerOnTouched(fn: Function): void {
+    registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
 
@@ -131,7 +131,7 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
 
     /** @hidden */
     private _listenToButtonChanges(): void {
-        this._buttons.changes.pipe(startWith(1)).subscribe((_) => {
+        this._buttons.changes.pipe(startWith(1)).subscribe(() => {
             this._onRefresh$.next();
             this._buttons.forEach((button) => this._listenToTriggerEvents(button));
         });

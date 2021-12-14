@@ -112,9 +112,7 @@ export class PlatformFileUploaderComponent extends BaseInput implements OnInit {
      * Control Value Accessor
      */
     writeValue(value: File): void {
-        if (value) {
-            super.writeValue(value);
-        }
+        super.writeValue(value);
     }
 
     /** Sets value file data*/

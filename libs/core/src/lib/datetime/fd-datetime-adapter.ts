@@ -117,15 +117,11 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     }
 
     getMinuteNames({ twoDigit }: { twoDigit: boolean }): string[] {
-        return range(60, (minute) => {
-            return minute.toLocaleString(this.locale, { minimumIntegerDigits: twoDigit ? 2 : 1 });
-        });
+        return range(60, (minute) => minute.toLocaleString(this.locale, { minimumIntegerDigits: twoDigit ? 2 : 1 }));
     }
 
     getSecondNames({ twoDigit }: { twoDigit: boolean }): string[] {
-        return range(60, (second) => {
-            return second.toLocaleString(this.locale, { minimumIntegerDigits: twoDigit ? 2 : 1 });
-        });
+        return range(60, (second) => second.toLocaleString(this.locale, { minimumIntegerDigits: twoDigit ? 2 : 1 }));
     }
 
     getDayPeriodNames(): [string, string] {

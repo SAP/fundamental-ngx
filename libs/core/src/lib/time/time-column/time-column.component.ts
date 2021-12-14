@@ -19,12 +19,11 @@ import {
 import { Subject, Subscription } from 'rxjs';
 import { buffer, debounceTime, map } from 'rxjs/operators';
 import { DOWN_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
-import { CarouselDirective } from '@fundamental-ngx/core/carousel';
-import { CarouselItemDirective } from '@fundamental-ngx/core/carousel';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
-import { CarouselConfig, PanEndOutput } from '@fundamental-ngx/core/carousel';
-import { TimeColumnConfig } from './time-column-config';
 
+import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { CarouselDirective, CarouselItemDirective, CarouselConfig, PanEndOutput } from '@fundamental-ngx/core/carousel';
+
+import { TimeColumnConfig } from './time-column-config';
 import { SelectableViewItem } from '../models';
 
 let timeColumnUniqueId = 0;
@@ -39,7 +38,10 @@ export interface TimeColumnItemOutput<T> {
     templateUrl: './time-column.component.html',
     styleUrls: ['./time-column.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    host: {
+        class: 'fd-time__col'
+    }
 })
 export class TimeColumnComponent<K, T extends SelectableViewItem<K> = SelectableViewItem<K>>
     implements AfterViewInit, OnInit, OnDestroy
@@ -53,7 +55,8 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     compact = false;
 
     /**
-     * @Input When set to false, hides the buttons that increment and decrement the corresponding columns.
+     * @Input When set to false, hides the buttons that increment
+     * and decrement the corresponding columns.
      */
     @Input()
     spinners = true;
@@ -71,7 +74,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
         return this._activeValue;
     }
 
-    /** Defines if column is active, it has impact on behaviour and visual  */
+    /** Defines if column is active, it has impact on behavior and visual  */
     @Input()
     set active(value: boolean) {
         this._active = value;
@@ -85,8 +88,6 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     get active(): boolean {
         return this._active;
     }
-
-    private _active = false;
 
     /** Whether time column is meridian */
     @Input()
@@ -128,19 +129,28 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     @ViewChild('indicator', { read: ElementRef })
     indicator: ElementRef;
 
-    /* Whether the action bar also has a back button. */
-    @HostBinding('class.fd-time__col')
-    fdTimeColClass = true;
-
     /**
-     * Time to wait in milliseconds after the last keydown before focusing or selecting option based on numeric/alpha
-     * keys.
+     * Time to wait in milliseconds after the last keydown before
+     * focusing or selecting option based on numeric/alpha keys.
+     * @hidden
      */
     typeaheadDebounceInterval = 750;
 
+    /** @hidden */
     config: CarouselConfig;
 
-    currentIndicatorId: string = this.id + '-current-indicator';
+    /** @hidden */
+    get currentIndicatorId(): string {
+        return this.id + '-current-indicator';
+    }
+
+    /** @hidden */
+    get currentIndicatorValueId(): string {
+        return this.currentIndicatorId + '-value';
+    }
+
+    /** @hidden */
+    private _active = false;
 
     /** @hidden */
     private _queryKeyDownEvent: Subject<string> = new Subject<string>();
@@ -160,6 +170,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     /** @hidden */
     private _subscriptions: Subscription = new Subscription();
 
+    /** @hidden */
     constructor(private _changeDetRef: ChangeDetectorRef) {}
 
     /** @hidden */
@@ -282,13 +293,27 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
         this._pickTime(this.items.toArray()[index], true, true, true);
     }
 
+    /** Focus on column */
+    focus(): void {
+        this.indicator?.nativeElement.focus();
+    }
+
     /**
      * Create id for column item
      * @param index column item index
      * @returns column item id
+     * @hidden
      */
     _createColumnItemIdByIndex(index: number): string {
         return this.id + index;
+    }
+
+    /**
+     * On focus callback
+     * @hidden
+     */
+    _onFocusIndicator(): void {
+        this.activeStateChange.emit();
     }
 
     /**
@@ -298,6 +323,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
      * smooth => defines if transition time should be included in transform
      * emitEvent => defines if EventEmitter should be triggered by this change, set to false, when changed from outside
      * after => Defines if value was incremented/decremented, needed for hours to trigger AM/PM change
+     * @hidden
      */
     private _pickTime(item: CarouselItemDirective, smooth?: boolean, emitEvent?: boolean, after?: boolean): void {
         if (!item) {
@@ -319,7 +345,10 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
         }
     }
 
-    /** Returns item with passed value */
+    /**
+     * Returns item with passed value
+     * @hidden
+     */
     private _getItem(_item: T): CarouselItemDirective {
         return this.items.find((item) => item.value === _item);
     }
@@ -336,7 +365,10 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
         this.carousel.goToItem(array[index], smooth);
     }
 
-    /** Focus current indicator, which allows to handle keydown events inside column */
+    /**
+     * Focus current indicator, which allows to handle keydown events inside column
+     * @hidden
+     */
     private _focusIndicator(): void {
         if (document.getElementById(this.currentIndicatorId)) {
             document.getElementById(this.currentIndicatorId).focus();

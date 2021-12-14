@@ -9,13 +9,12 @@ import {
 } from '@fundamental-ngx/core/datetime';
 import { DynamicFormItem, DynamicFormValue, FormGeneratorComponent } from '@fundamental-ngx/platform/form';
 
-export const dummyAwaitablePromise = (timeout = 200) => {
-    return new Promise<boolean>((resolve) => {
+export const dummyAwaitablePromise = (timeout = 200) =>
+    new Promise<boolean>((resolve) => {
         setTimeout(() => {
             resolve(true);
         }, timeout);
     });
-};
 
 @Component({
     selector: 'fdp-platform-form-generator-field-layout-example',
@@ -111,20 +110,16 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
                 inlineLayout: { XL: true, L: false, M: true, S: false },
                 hint: 'XL: 2 true, L: 1 false, M: 2 true, S: 1 false'
             },
-            choices: (formValue) => {
-                return [
-                    'USA',
-                    'Germany',
-                    {
-                        label: 'Ukraine',
-                        value: 'Ukraine'
-                    }
-                ];
-            },
+            choices: () => [
+                'USA',
+                'Germany',
+                {
+                    label: 'Ukraine',
+                    value: 'Ukraine'
+                }
+            ],
             validators: [Validators.required],
-            validate: (input, formValue) => {
-                return input?.length > 0 ? null : 'You need to select some country';
-            }
+            validate: (input) => (input?.length > 0 ? null : 'You need to select some country')
         },
         {
             type: 'list',
@@ -182,9 +177,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
                 hint: 'XL: 2 false, L: 1 true, M: 1 false, S: 1 true'
             },
             validators: [Validators.required],
-            validate: (result: string) => {
-                return result === 'Angular' ? null : 'You should pick Angular';
-            }
+            validate: (result: string) => (result === 'Angular' ? null : 'You should pick Angular')
         },
         {
             type: 'datepicker',
@@ -195,12 +188,9 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
                 hint: 'XL: 1, L: 2, M: 1, S: 1'
             },
             validators: [Validators.required],
-            validate: (value: FdDate) => {
-                return value !== null && value.year < 2020 ? null : 'You need to be born before 2020';
-            },
-            transformer: (value: FdDate) => {
-                return value?.toDateString();
-            }
+            validate: (value: FdDate) =>
+                value !== null && value.year < 2020 ? null : 'You need to be born before 2020',
+            transformer: (value: FdDate) => value?.toDateString()
         },
         {
             type: 'switch',

@@ -7,6 +7,7 @@ import {
     getPreviousElementText,
     getText,
     getValue,
+    isElementDisplayed,
     isEnabled,
     mouseHoverElement,
     refreshPage,
@@ -21,6 +22,7 @@ import {
     inputMessageText,
     invalidInputLabelText,
     labelsArray,
+    testText,
     validInputLabelText,
     warningInputLabelText
 } from '../fixtures/appData/input-page-contents';
@@ -52,7 +54,10 @@ describe('Input should ', () => {
         warningInputLabel,
         informationInputLabel,
         addBtn,
-        reactivePrimaryInput2
+        reactivePrimaryInput2,
+        allInputFields,
+        popoverHelp,
+        questionMark
     } = inputPage;
 
     const inputsArr = [
@@ -157,6 +162,35 @@ describe('Input should ', () => {
     it('should add to more input fields by click Add btn', () => {
         click(addBtn);
         expect(getElementArrayLength(reactivePrimaryInput2)).toBe(2);
+    });
+
+    it('should check all input fields work correctly', () => {
+        const inputLength = getElementArrayLength(allInputFields);
+        for (let i = 0; i < inputLength; i++) {
+            scrollIntoView(allInputFields, i);
+            setValue(allInputFields, text + number + special_characters, i);
+            expect(getValue(allInputFields, i)).toBe(text + number + special_characters);
+        }
+    });
+
+    it('should check displayed popover by clicking and check text', () => {
+        scrollIntoView(questionMark);
+        click(questionMark);
+        expect(isElementDisplayed(popoverHelp)).toBe(true, 'popover not displayed');
+        expect(getText(popoverHelp)).toBe(testText);
+
+        click(questionMark, 1);
+        expect(isElementDisplayed(popoverHelp)).toBe(true, 'popover not displayed');
+        expect(getText(popoverHelp)).toBe(testText);
+    });
+
+    it('should check displayed popover by hover question mark', () => {
+        scrollIntoView(questionMark);
+        mouseHoverElement(questionMark);
+        expect(isElementDisplayed(popoverHelp)).toBe(true, 'popover not displayed');
+
+        mouseHoverElement(questionMark, 1);
+        expect(isElementDisplayed(popoverHelp)).toBe(true, 'popover not displayed');
     });
 
     it('should check RTL', () => {

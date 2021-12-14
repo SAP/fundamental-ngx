@@ -6,13 +6,13 @@
         [state]="state"
         [compact]="contentDensity === 'compact'"
         [disabled]="disabled"
-        [tabIndex]="isChecked ? 0 : tabIndex"
+        [tabIndex]="_isChecked ? 0 : tabIndex"
         [title]="title"
         [ariaLabel]="ariaLabel"
         [ariaLabelledBy]="ariaLabelledBy"
         [ariaDescribedBy]="ariaDescribedBy"
-        [ngModel]="currentValue"
-        (ngModelChange)="valueChange($event)"
+        [ngModel]="_currentValue"
+        (ngModelChange)="_valueChange($event)"
     >
         <ng-content></ng-content>
     </fd-radio-button>

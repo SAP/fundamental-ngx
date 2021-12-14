@@ -5,7 +5,7 @@ import { DialogService } from '@fundamental-ngx/core/dialog';
     selector: 'fd-dialog-configuration-example',
     templateUrl: './dialog-configuration-example.component.html'
 })
-export class DialogConfigurationExample {
+export class DialogConfigurationExampleComponent {
     constructor(public _dialogService: DialogService) {}
 
     openDraggableDialog(template): void {

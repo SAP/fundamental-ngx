@@ -5,5 +5,5 @@ export interface ShellbarUserMenu {
     /**
      *  Callback function that will be called on selecting this shellbar menu item from dropdown
      */
-    callback?: Function;
+    callback?: (event: MouseEvent) => void;
 }

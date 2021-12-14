@@ -9,6 +9,15 @@ import { SearchInput } from './interfaces/search-field.interface';
 import { TableColumn } from './components/table-column/table-column';
 
 export abstract class Table {
+    /** Sum of widths of fixed columns (semantic highlighting, selection) */
+    abstract get _fixedColumnsPadding(): number;
+
+    /** Freezable column names and their respective indexes */
+    abstract get _freezableColumns(): ReadonlyMap<string, number>;
+
+    /** Width of the table element in px */
+    abstract get _tableWidthPx(): number;
+
     /** Table columns definition list */
     abstract readonly tableColumnsStream: Observable<TableColumn[]>;
 
@@ -80,4 +89,7 @@ export abstract class Table {
 
     /** Set current page */
     abstract setCurrentPage(currentPage: number): void;
+
+    /** Gets the max allowed width for all freezable columns */
+    abstract getMaxAllowedFreezableColumnsWidth(): number;
 }

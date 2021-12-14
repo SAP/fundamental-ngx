@@ -39,9 +39,7 @@ describe('Input should ', () => {
         textInput,
         numberInput,
         compactInput,
-        readonlyInput,
         disabledInput,
-        inlineHelpInput,
         messagesComponentsInput,
         submitBtn,
         errorTextAttr,
@@ -52,7 +50,8 @@ describe('Input should ', () => {
         autocompleteInput,
         autocompleteInputLabel,
         autocompleteOptions,
-        disabledInputAttribute
+        disabledInputAttribute,
+        errorMessage
     } = inputPage;
 
     beforeAll(() => {
@@ -185,6 +184,12 @@ describe('Input should ', () => {
         const compactHeight = getElementSize(compactInput);
 
         expect(defaultHeight.height).toBeGreaterThan(compactHeight.height);
+    });
+
+    it('should check that validation does not work earlier than necessary', () => {
+        scrollIntoView(messagesComponentsInput);
+        click(messagesComponentsInput);
+        expect(doesItExist(errorMessage)).toBe(false);
     });
 
     it('should check RTL', () => {

@@ -7,10 +7,14 @@ import {
     HostBinding,
     HostListener,
     Input,
+    OnDestroy,
+    Optional,
     Output,
     ViewEncapsulation
 } from '@angular/core';
 import { FocusableOption } from '@angular/cdk/a11y';
+import { RtlService } from '@fundamental-ngx/core/utils';
+import { Subscription } from 'rxjs';
 
 export type ResizeDirection = 'vertical' | 'horizontal' | 'both';
 
@@ -43,7 +47,7 @@ let cardUniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class ResizableCardItemComponent implements FocusableOption {
+export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
     /** get card properties from the config */
     @Input()
     get config(): ResizableCardItemConfig {
@@ -164,7 +168,12 @@ export class ResizableCardItemComponent implements FocusableOption {
     /** Set left position for the card */
     @Input()
     @HostBinding('style.left.px')
-    left = 0;
+    left = null;
+
+    /** Set right position for the card */
+    @Input()
+    @HostBinding('style.right.px')
+    right = null;
 
     /** Set top position for the card*/
     @Input()
@@ -280,7 +289,25 @@ export class ResizableCardItemComponent implements FocusableOption {
     /** @hidden */
     private _rank: number;
 
-    constructor(private readonly _cd: ChangeDetectorRef, private readonly _elementRef: ElementRef) {}
+    /** @hidden */
+    private _rtl = false;
+
+    /** @hidden */
+    private _subscriptions = new Subscription();
+
+    constructor(
+        private readonly _cd: ChangeDetectorRef,
+        private readonly _elementRef: ElementRef,
+        @Optional() private readonly _rtlService: RtlService
+    ) {
+        if (this._rtlService) {
+            this._subscriptions.add(this._rtlService.rtl.subscribe((value) => (this._rtl = value)));
+        }
+    }
+
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
+    }
 
     /**
      * When resize handler is pressed and resizing may start.
@@ -382,7 +409,7 @@ export class ResizableCardItemComponent implements FocusableOption {
      * @param event: MouseEvent
      */
     @HostListener('document: mouseup', ['$event'])
-    onMouseUp(event: MouseEvent): void {
+    onMouseUp(): void {
         if (!this.resizable) {
             return;
         }
@@ -412,7 +439,7 @@ export class ResizableCardItemComponent implements FocusableOption {
     }
 
     /** Shows resize icon */
-    showResizeIcon(event: MouseEvent): void {
+    showResizeIcon(): void {
         if (!this.resizable) {
             return;
         }
@@ -420,7 +447,7 @@ export class ResizableCardItemComponent implements FocusableOption {
     }
 
     /** Hides resize icon */
-    hideResizeIcon(event: MouseEvent): void {
+    hideResizeIcon(): void {
         if (!this._resize) {
             this.showingResizeIcon = false;
         }
@@ -579,9 +606,16 @@ export class ResizableCardItemComponent implements FocusableOption {
      * @param xPosition: current x-position of cursor
      */
     private _horizontalResizing(xPosition: number): void {
-        this.cardWidth = this.cardWidth - (this._prevX - xPosition);
+        const difference = this._prevX - xPosition;
+        this.cardWidth = this._rtl ? this.cardWidth + difference : this.cardWidth - difference;
 
-        const maxCardWidth = this._maxColumn * horizontalResizeStep + (this._maxColumn - 1) * gap;
+        const totalIndentation = (this._maxColumn - 1) * gap;
+        const maxCardWidtWithoutIndentation = this._maxColumn * horizontalResizeStep;
+
+        const maxCardWidth = this._rtl
+            ? maxCardWidtWithoutIndentation - totalIndentation
+            : maxCardWidtWithoutIndentation + totalIndentation;
+
         if (this.cardWidth > maxCardWidth) {
             this.cardWidth = maxCardWidth;
         } else if (this.cardWidth < horizontalResizeStep) {

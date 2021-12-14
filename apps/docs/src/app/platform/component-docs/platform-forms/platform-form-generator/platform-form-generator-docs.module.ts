@@ -18,13 +18,15 @@ import { PlatformFormGeneratorDocsComponent } from './platform-form-generator-do
 import { PlatformFormGeneratorExampleComponent } from './platform-form-generator-examples/platform-form-generator-example.component';
 import {
     PlatformFormGeneratorCustomComponentExampleComponent,
-    PlatformFormGeneratorCustomSliderElement
+    PlatformFormGeneratorCustomSliderElementComponent
 } from './platform-form-generator-examples/platform-form-generator-custom-component-example.component';
 import { PlatformFormGeneratorObservableExampleComponent } from './platform-form-generator-examples/platform-form-generator-observable-example.component';
 import { PlatformFormGeneratorProgramaticSubmitComponent } from './platform-form-generator-examples/platform-form-generator-programatic-submit.component';
 import { PlatformFormGeneratorCustomErrorExampleComponent } from './platform-form-generator-examples/platform-form-generator-custom-error-example.component';
 import { PlatformFormGeneratorFieldLayoutExampleComponent } from './platform-form-generator-examples/platform-form-generator-field-layout-example.component';
 import { PlatformFormGeneratorNoColonsExampleComponent } from './platform-form-generator-examples/platform-form-generator-no-colons-example.component';
+import { PlatformFormGeneratorCustomFieldLayoutExampleComponent } from './platform-form-generator-examples/platform-form-generator-custom-field-layout-example.component';
+import { PlatformFormGeneratorGroupingExampleComponent } from './platform-form-generator-examples/platform-form-generator-grouping-example.component';
 
 const routes: Routes = [
     {
@@ -54,12 +56,14 @@ const routes: Routes = [
         PlatformFormGeneratorHeaderComponent,
         PlatformFormGeneratorExampleComponent,
         PlatformFormGeneratorCustomComponentExampleComponent,
-        PlatformFormGeneratorCustomSliderElement,
+        PlatformFormGeneratorCustomSliderElementComponent,
         PlatformFormGeneratorObservableExampleComponent,
         PlatformFormGeneratorProgramaticSubmitComponent,
         PlatformFormGeneratorCustomErrorExampleComponent,
         PlatformFormGeneratorFieldLayoutExampleComponent,
-        PlatformFormGeneratorNoColonsExampleComponent
+        PlatformFormGeneratorNoColonsExampleComponent,
+        PlatformFormGeneratorCustomFieldLayoutExampleComponent,
+        PlatformFormGeneratorGroupingExampleComponent
     ]
 })
 export class PlatformFormGeneratorDocsModule {}

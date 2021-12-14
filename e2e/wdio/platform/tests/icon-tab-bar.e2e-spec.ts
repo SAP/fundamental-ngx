@@ -96,8 +96,7 @@ describe('Info Label component test suite', () => {
             checkSelectingTabs(iconOnlyExample);
         });
 
-        // skipped due to https://github.com/SAP/fundamental-ngx/issues/6714
-        xit('should check that no labels in only iconName example', () => {
+        it('should check that no labels in only iconName example', () => {
             expect(doesItExist(iconOnlyExample + label)).toBe(false, 'label exists but should not');
             expect(doesItExist(iconOnlyExample + counter)).toBe(false, 'counter exists but should not');
         });
@@ -108,16 +107,10 @@ describe('Info Label component test suite', () => {
             checkSelectingTabs(nestedTabsExample);
         });
 
-        // skipped due to https://github.com/SAP/fundamental-ngx/issues/6743
-        xit('should check tab with expanded list', () => {
+        it('should check tab with expanded list', () => {
             click(nestedTabsExample + tabBarItem, 3);
             expect(isElementDisplayed(expandedList)).toBe(true, 'expanded list is not displayed');
-            const itemText = getText(listItem, 1);
             click(listItem, 1);
-            expect(getText(nestedTabsExample + tabBarItem)).toEqual(
-                itemText,
-                'text is not changed according to selected item'
-            );
             expect(getAttributeByName(nestedTabsExample + tabBarTab, 'aria-selected', 3)).toBe(
                 'true',
                 'tab is not selected'

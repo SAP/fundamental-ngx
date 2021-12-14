@@ -406,7 +406,6 @@ describe('Cascading Menu', () => {
     let overlayContainerEl: HTMLElement;
 
     let button: ElementRef<HTMLElement>;
-    let trigger: MenuTriggerDirective;
 
     beforeEach(
         waitForAsync(() => {
@@ -429,7 +428,6 @@ describe('Cascading Menu', () => {
         fixture.detectChanges();
 
         button = component.button;
-        trigger = component.trigger;
     });
 
     it('should identify menu items which trigger submenu with arrow icon', fakeAsync(() => {
@@ -793,7 +791,6 @@ describe('Cascading Menu - Position Before', () => {
     let overlayContainerEl: HTMLElement;
 
     let button: ElementRef<HTMLElement>;
-    let trigger: MenuTriggerDirective;
 
     beforeEach(
         waitForAsync(() => {
@@ -816,7 +813,6 @@ describe('Cascading Menu - Position Before', () => {
         fixture.detectChanges();
 
         button = component.button;
-        trigger = component.trigger;
     });
 
     it('should be able to show sub menu on LEFT ARROW click of trigger menu item (position-before, non-RTL)', fakeAsync(() => {
@@ -917,7 +913,6 @@ describe('Cascading Menu - Position After, RTL', () => {
     let overlayContainerEl: HTMLElement;
 
     let button: ElementRef<HTMLElement>;
-    let trigger: MenuTriggerDirective;
 
     const dirProvider = {
         rtl: of(true)
@@ -949,7 +944,6 @@ describe('Cascading Menu - Position After, RTL', () => {
         fixture.detectChanges();
 
         button = component.button;
-        trigger = component.trigger;
     });
 
     it('should be able to show sub menu on LEFT ARROW click of trigger menu item (position-after, RTL)', fakeAsync(() => {
@@ -1050,7 +1044,6 @@ describe('Cascading Menu - Position Before, RTL', () => {
     let overlayContainerEl: HTMLElement;
 
     let button: ElementRef<HTMLElement>;
-    let trigger: MenuTriggerDirective;
 
     const dirProvider = {
         rtl: of(true)
@@ -1082,7 +1075,6 @@ describe('Cascading Menu - Position Before, RTL', () => {
         fixture.detectChanges();
 
         button = component.button;
-        trigger = component.trigger;
     });
 
     it('should be able to show sub menu on RIGHT ARROW click of trigger menu item (position-before, RTL)', fakeAsync(() => {

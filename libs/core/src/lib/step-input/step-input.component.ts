@@ -95,7 +95,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     inputId = `fd-step-input-${stepInputUniqueId++}`;
 
     /** Set control value */
-    @Input('value')
+    @Input()
     set value(value: number) {
         if (value === null) {
             this._value = value;
@@ -180,10 +180,12 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** Emits event when input gets focused */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onFocusIn: EventEmitter<void> = new EventEmitter<void>();
 
     /** Emits event when input loses focus */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onFocusOut: EventEmitter<void> = new EventEmitter<void>();
 
     /** Emits new value when control value has changed */
@@ -242,10 +244,10 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     private _index: any;
 
     /** @hidden */
-    onChange: Function = () => {};
+    onChange: (value: number) => void = () => {};
 
     /** @hidden */
-    onTouched: Function = () => {};
+    onTouched = () => {};
 
     constructor(
         @Inject(LOCALE_ID) locale,
@@ -280,12 +282,12 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     }
 
     /** @hidden */
-    registerOnChange(fn: any): void {
+    registerOnChange(fn: (value: number) => void): void {
         this.onChange = fn;
     }
 
     /** @hidden */
-    registerOnTouched(fn: any): void {
+    registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
 
@@ -471,12 +473,12 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         const onMouseDown$ = fromEvent(elementRef.nativeElement, 'mousedown');
         const onMouseUp$ = fromEvent(window, 'mouseup');
 
-        const timerFactory$ = defer(() => {
-            return timer(500).pipe(
+        const timerFactory$ = defer(() =>
+            timer(500).pipe(
                 switchMap(() => interval(40)),
                 takeUntil(onMouseUp$)
-            );
-        });
+            )
+        );
 
         return merge(onMouseDown$, onMouseDown$.pipe(switchMap(() => timerFactory$)));
     }

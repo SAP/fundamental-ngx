@@ -1,7 +1,7 @@
 import { Directive, Input } from '@angular/core';
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-avatar-group-overflow-body]',
     host: {
         '[class.fd-avatar-group__overflow-body]': 'true',

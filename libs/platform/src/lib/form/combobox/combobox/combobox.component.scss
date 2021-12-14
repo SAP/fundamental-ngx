@@ -1,17 +1,4 @@
-@import '~@angular/cdk/overlay-prebuilt';
-
 .fdp-combobox {
-    &__list-container {
-        &.fd-popover__popper {
-            position: absolute !important;
-            overflow: hidden;
-
-            .fd-list--dropdown {
-                max-width: 100%;
-            }
-        }
-    }
-
     &__list {
         overflow: auto;
 

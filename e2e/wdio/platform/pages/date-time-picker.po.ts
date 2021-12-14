@@ -37,7 +37,7 @@ export class DateTimePicker extends BaseComponentPo {
     firstMonthButton = '(//td[contains(@id,"month")]/child::span)[1]';
     navigationUpArrowButton = 'button[glyph="navigation-up-arrow"]';
     navigationDownArrowButton = 'button[glyph="navigation-down-arrow"]';
-    timeItem = 'span.fd-time__item';
+    timeColumn = 'fd-time-column';
     okButton = 'button[fdtype="emphasized"]';
     cancelButton = 'button[label="Cancel"]';
     calendarContainer = 'div.fd-datetime__container';
@@ -46,6 +46,7 @@ export class DateTimePicker extends BaseComponentPo {
     selectedMinutes = '(//div[contains(@class, "fd-time__wrapper")]//li[contains(@class, "fd-time__item")])[54]';
     period = '//span[contains(text(), " PM ")]/parent::li';
     buttonText = ' .fd-button__text';
+    inputGroup = this.root + ' .fd-input-group';
 
     getCurrentDayIndex = (): number => {
         for (let i = 0; i < this.currentMonthCalendarItem.length; i++) {
@@ -55,21 +56,14 @@ export class DateTimePicker extends BaseComponentPo {
         }
     };
 
-    filterCalendarValue = (name: string): string => {
-        return `//td[contains(@id,"-view-${name}")]`;
-    };
+    filterCalendarValue = (name: string): string => `//td[contains(@id,"-view-${name}")]`;
 
-    dayInDisabledFunctionsCalendarByIndex = (index: string): string => {
-        return `#fd-calendar-9-day-view-day-${index}`;
-    };
+    dayInDisabledFunctionsCalendarByIndex = (index: string): string => `#fd-calendar-9-day-view-day-${index}`;
 
-    dayInCalendarButtonByValue = (index: string): string => {
-        return `//span[text()="${index}"]/ancestor::td[not (contains(@class, 'fd-calendar__item--other-month'))]`;
-    };
+    dayInCalendarButtonByValue = (index: string): string =>
+        `//span[text()="${index}"]/ancestor::td[not (contains(@class, 'fd-calendar__item--other-month'))]`;
 
-    yearInCalendarByValue = (year: number): string => {
-        return `[data-fd-calendar-year="${year}"]`;
-    };
+    yearInCalendarByValue = (year: number): string => `[data-fd-calendar-year="${year}"]`;
 
     open(): void {
         super.open(this.url);
@@ -77,7 +71,7 @@ export class DateTimePicker extends BaseComponentPo {
         waitForPresent(this.datePickerInput);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

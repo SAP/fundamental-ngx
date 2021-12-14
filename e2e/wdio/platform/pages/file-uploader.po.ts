@@ -17,7 +17,7 @@ export class FileUploaderPo extends BaseComponentPo {
         waitForPresent(this.fileUploaderRoot);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

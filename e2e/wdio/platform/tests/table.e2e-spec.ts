@@ -17,6 +17,7 @@ import {
     pause,
     refreshPage,
     scrollIntoView,
+    sendKeys,
     setValue,
     waitForElDisplayed,
     waitForPresent
@@ -52,7 +53,7 @@ import {
     massaTestText
 } from '../fixtures/appData/table-contents';
 
-describe('Table component test suite', function () {
+describe('Table component test suite', () => {
     const tablePage = new TablePo();
     const {
         tableDefaultExample,
@@ -131,7 +132,10 @@ describe('Table component test suite', function () {
         buttonActionOne,
         buttonActionTwo,
         ellipsisButton,
-        expandedOption
+        expandedOption,
+        tableRowInitialState,
+        tableCellInitialState,
+        buttonFilter
     } = tablePage;
 
     beforeAll(() => {
@@ -143,7 +147,7 @@ describe('Table component test suite', function () {
         waitForPresent(tableDefaultExample);
     }, 1);
 
-    describe('Check Simple Table example', function () {
+    describe('Check Simple Table example', () => {
         it('should check alert messages', () => {
             checkAlertMessages(tableDefaultExample);
         });
@@ -153,7 +157,7 @@ describe('Table component test suite', function () {
         });
     });
 
-    describe('Check Custom Column Width & Column Resizing', function () {
+    describe('Check Custom Column Width & Column Resizing', () => {
         it('should check alert messages', () => {
             checkAlertMessages(tableCustomWidthExample);
         });
@@ -163,7 +167,7 @@ describe('Table component test suite', function () {
         });
     });
 
-    describe('Check Activable Rows', function () {
+    describe('Check Activable Rows', () => {
         it('should check alert messages', () => {
             checkAlertMessages(tableActivableExample);
         });
@@ -178,7 +182,7 @@ describe('Table component test suite', function () {
         });
     });
 
-    describe('Check Custom Column', function () {
+    describe('Check Custom Column', () => {
         it('should check table item single selection', () => {
             scrollIntoView(tableCustomColumnExample);
             setValue(tableCustomColumnExample + input, testText);
@@ -201,7 +205,7 @@ describe('Table component test suite', function () {
         });
     });
 
-    describe('Check Single Row Selection', function () {
+    describe('Check Single Row Selection', () => {
         it('should check table item single selection', () => {
             findElementInTable(tableSingleRowSelectionExample, tableCellArr);
         });
@@ -212,8 +216,7 @@ describe('Table component test suite', function () {
             expect(getAttributeByName(tableSingleRowSelectionExample + tableRow, 'aria-selected')).toBe('true');
         });
 
-        // skipped due to https://github.com/SAP/fundamental-ngx/issues/6545
-        xit('should check selected row not gets unselected', () => {
+        it('should check selected row not gets unselected', () => {
             scrollIntoView(tableSingleRowSelectionExample);
             setValue(tableSingleRowSelectionExample + input, 'Astro');
             click(tableSingleRowSelectionExample + button, 1);
@@ -223,13 +226,13 @@ describe('Table component test suite', function () {
         });
     });
 
-    describe('Check Multi Row Selection', function () {
+    describe('Check Multi Row Selection', () => {
         it('should verify checkboxes', () => {
             checkAllCheckbox(tableMultipleRowSelectionExample);
         });
     });
 
-    describe('Check Column Sorting', function () {
+    describe('Check Column Sorting', () => {
         it('should check table item single selection', () => {
             findElementInTable(tableSortableExample, tableCellArr);
         });
@@ -266,8 +269,8 @@ describe('Table component test suite', function () {
             expect(getText(tableSortableExample + tableCellName)).toBe(nameEndTestText);
             expect(getText(tableSortableExample + tableCellName, 15)).toBe(nameStartTestText);
         });
-        // skipped due to https://github.com/SAP/fundamental-ngx/issues/7007
-        xit('should check after selecting sorting option popover closed', () => {
+
+        it('should check after selecting sorting option popover closed', () => {
             scrollIntoView(tableSortableExample);
             click(sortableIcon);
             click(sortableOption);
@@ -275,7 +278,7 @@ describe('Table component test suite', function () {
         });
     });
 
-    describe('Check Column Filtering', function () {
+    describe('Check Column Filtering', () => {
         it('should check table item single selection', () => {
             findElementInTable(tableFilterableExample, tableCellArr, 1);
         });
@@ -310,21 +313,22 @@ describe('Table component test suite', function () {
                 expect(getText(tableFilterableExample + tableCellStatus, i)).toBe(tableCellArr[3]);
             }
         });
-        // skipped due to https://github.com/SAP/fundamental-ngx/issues/7008
-        xit('should check on filter by price reset button is clickable', () => {
+
+        it('should check on filter by price reset button is clickable', () => {
             scrollIntoView(tableFilterableExample);
-            click(tableFilterableExample + button, 1);
+            click(tableFilterableExample + buttonFilter);
             click(dialogFilters);
             setValue(filterInput, '10');
+            setValue(filterInput, '40', 1);
             click(filterButtonOk);
 
-            click(tableFilterableExample + button, 1);
+            click(tableFilterableExample + buttonFilter);
             click(dialogFilters);
-            expect(getAttributeByName(filterResetButton, 'disabled')).toBe('false');
+            expect(isElementClickable(filterResetButton)).toBe(true, 'reset button not clickable');
         });
     });
 
-    describe('Check Column Grouping', function () {
+    describe('Check Column Grouping', () => {
         it('should check table item single selection', () => {
             findElementInTable(tableGroupableExample, tableCellArr);
         });
@@ -360,7 +364,7 @@ describe('Table component test suite', function () {
         });
     });
 
-    describe('Check Column Freezing', function () {
+    describe('Check Column Freezing', () => {
         it('should check table item single selection', () => {
             scrollIntoView(tableFreezableExample);
             setValue(tableFreezableExample + input, tableCellArr[1]);
@@ -378,7 +382,7 @@ describe('Table component test suite', function () {
         });
     });
 
-    describe('Check Loading/Busy State', function () {
+    describe('Check Loading/Busy State', () => {
         it('should check alert messages', () => {
             checkAlertMessages(tableLoadingExample);
         });
@@ -396,18 +400,20 @@ describe('Table component test suite', function () {
             expect(doesItExist(busyIndicator)).toBe(false, 'busy indicator still displayed');
         });
 
-        // skipped due to https://github.com/SAP/fundamental-ngx/pull/6712
-        xit('should check ', () => {
+        it('should check ', () => {
             scrollIntoView(tableLoadingExample);
             click(tableLoadingExample + button);
             setValue(tableLoadingExample + input, 'Astro');
-            click(tableLoadingExample + button, 2);
+            click(tableLoadingExample + buttonSearch);
             click(tableLoadingExample + button);
-            expect(isEnabled(tableLoadingExample + button, 1)).toBe(false, 'x button enable');
+
+            expect(isElementClickable(tableLoadingExample + button, 1)).toBe(false, 'x button is clickable');
+            expect(isElementClickable(tableLoadingExample + button, 2)).toBe(false, 'x button search is clickable');
+            expect(isEnabled(tableLoadingExample + input)).toBe(false, 'input is enable');
         });
     });
 
-    describe('Check Page Scrolling', function () {
+    describe('Check Page Scrolling', () => {
         it('should check table item single selection', () => {
             scrollIntoView(tablePageScrollingExample);
             setValue(tablePageScrollingExample + input, testText2);
@@ -434,31 +440,34 @@ describe('Table component test suite', function () {
         });
     });
 
-    describe('Check Initial State', function () {
+    describe('Check Initial State', () => {
         it('should check table item single selection', () => {
             scrollIntoView(tableInitialStateExample);
             setValue(tableInitialStateExample + input, testText3);
             click(tableInitialStateExample + buttonSearch);
-            const rowLength = getElementArrayLength(tableInitialStateExample + tableRow);
+            const rowLength = getElementArrayLength(tableInitialStateExample + tableRowInitialState);
             expect(rowLength).toEqual(1);
-            const cellLength = getElementArrayLength(tableInitialStateExample + tableRow + tableCellText);
+            const cellLength = getElementArrayLength(tableInitialStateExample + tableRowInitialState + tableCellText);
             for (let i = 0; i < cellLength; i++) {
-                expect(getText(tableInitialStateExample + tableRow + tableCellText, i)).toBe(tableCellArr3[i]);
+                expect(getText(tableInitialStateExample + tableRowInitialState + tableCellText, i)).toBe(
+                    tableCellArr3[i]
+                );
             }
         });
 
         it('should check cell expanded', () => {
             scrollIntoView(tableInitialStateExample);
-            click(tableInitialStateExample + tableCell);
-            click(tableInitialStateExample + tableCell, 1);
+            click(tableInitialStateExample + tableCellInitialState);
+            click(tableInitialStateExample + tableCellInitialState, 1);
 
-            expect(getAttributeByName(tableInitialStateExample + tableCell, 'aria-expanded')).toBe('false');
-            expect(getAttributeByName(tableInitialStateExample + tableCell, 'aria-expanded')).toBe('false');
-            expect(doesItExist(tableInitialStateExample + tableRow)).toBe(false, 'table row still displayed');
+            expect(getAttributeByName(tableInitialStateExample + tableCellInitialState, 'aria-expanded')).toBe('false');
+            expect(getAttributeByName(tableInitialStateExample + tableCellInitialState, 'aria-expanded', 1)).toBe(
+                'false'
+            );
         });
     });
 
-    describe('Check Table columns visibility and order', function () {
+    describe('Check Table columns visibility and order', () => {
         it('should check table item single selection', () => {
             findElementInTable(tableP13ColumnsExample, tableCellArr4);
         });
@@ -473,7 +482,7 @@ describe('Table component test suite', function () {
         });
     });
 
-    describe('Check Sorting by multiple columns', function () {
+    describe('Check Sorting by multiple columns', () => {
         it('should check table item single selection', () => {
             findElementInTable(tableP13SortExample, tableCellArr4);
         });
@@ -537,7 +546,7 @@ describe('Table component test suite', function () {
         });
     });
 
-    describe('Check Filtering by multiple columns', function () {
+    describe('Check Filtering by multiple columns', () => {
         it('should check table item single selection', () => {
             findElementInTable(tableP13FilterExample, tableCellArr5);
         });
@@ -569,10 +578,12 @@ describe('Table component test suite', function () {
         // skipped due to https://github.com/SAP/fundamental-ngx/issues/7005
         xit('should check Exclude section in dialog always open', () => {
             scrollIntoView(tableP13FilterExample);
+            click(tableP13FilterExample + buttonFilter);
+            expect(getAttributeByName(expandedOption, 'aria-expanded')).toBe('false');
         });
     });
 
-    describe('Check Grouping by multiple columns', function () {
+    describe('Check Grouping by multiple columns', () => {
         it('should check table item single selection', () => {
             findElementInTable(tableP13GroupExample, tableCellArr4);
         });
@@ -584,12 +595,10 @@ describe('Table component test suite', function () {
 
         it('should check sorting of columns', () => {
             checkSortingColumns(tableP13GroupExample, ellipsisButton, 1);
-            click(tableP13FilterExample + ellipsisButton);
-            expect(getAttributeByName(expandedOption, 'aria-expanded')).toBe('false');
         });
     });
 
-    describe('Check  Navigatable rows', function () {
+    describe('Check  Navigatable rows', () => {
         it('should check clickable elements', () => {
             scrollIntoView(tableNavigatableRowIndicatorExample);
             click(tableNavigatableRowIndicatorExample + button);
@@ -608,7 +617,7 @@ describe('Table component test suite', function () {
         });
     });
 
-    describe('Check placeholders', function () {
+    describe('Check placeholders', () => {
         it('should check placeholders in all input fields', () => {
             const inputLength = getElementArrayLength(inputFields);
             for (let i = 0; i < inputLength; i++) {
@@ -617,7 +626,7 @@ describe('Table component test suite', function () {
         });
     });
 
-    describe('Check playground', function () {
+    describe('Check playground', () => {
         it('should check table item single selection', () => {
             scrollIntoView(playgroundExample);
             setValue(playgroundExample + inputFields, tableCellArr[1]);
@@ -711,13 +720,13 @@ describe('Table component test suite', function () {
         expect(nonFilterRowCount).toEqual(16);
     });
 
-    describe('Check Custom component to render "No data" message', function () {
+    describe('Check Custom component to render "No data" message', () => {
         it('should check alert messages', () => {
             checkAlertMessages(tableNoItemsTemplateExample);
         });
     });
 
-    describe('Check Semantic Highlighting', function () {
+    describe('Check Semantic Highlighting', () => {
         it('should check alert messages', () => {
             checkAlertMessages(tableSemanticExample);
         });
@@ -727,13 +736,13 @@ describe('Table component test suite', function () {
         });
     });
 
-    describe('Check Row custom CSS class', function () {
+    describe('Check Row custom CSS class', () => {
         it('should check table item single selection', () => {
             findElementInTable(tableRowClassExample, tableCellArr);
         });
     });
-    // skipped due to https://github.com/SAP/fundamental-ngx/issues/7010
-    xdescribe('Check input fields', function () {
+
+    describe('Check input fields', () => {
         it('should check input fields does not change width', () => {
             const inputFieldLength = getElementArrayLength(allInputFields);
             for (let i = 0; i < inputFieldLength; i++) {
@@ -741,14 +750,16 @@ describe('Table component test suite', function () {
                     continue;
                 }
                 const beforeSize = getElementSize(allInputFields, i);
-                setValue(allInputFields, 'test', i);
+                scrollIntoView(allInputFields, i);
+                click(allInputFields, i);
+                sendKeys('test');
                 const afterSize = getElementSize(allInputFields, i);
                 expect(beforeSize).toEqual(afterSize);
             }
         });
     });
 
-    describe('Check orientation', function () {
+    describe('Check orientation', () => {
         it('should check RTL and LTR orientation', () => {
             const exampleAreaContainersArr = '.fd-doc-component';
             const rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
@@ -769,7 +780,7 @@ describe('Table component test suite', function () {
         });
     });
 
-    xdescribe('Check visual regression', function () {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             tablePage.saveExampleBaselineScreenshot();
             expect(tablePage.compareWithBaseline()).toBeLessThan(5);

@@ -60,24 +60,27 @@ export class TokenComponent implements OnInit, OnDestroy {
     @Input()
     readOnly = false;
 
-    /**label for close icon */
+    /** label for close icon */
     @Input()
     deleteButtonLabel = 'Deletable';
 
-    /**role description for token */
+    /** role description for token */
     @Input()
     ariaRoleDescription = 'token';
 
     /** Emitted when the *x* icon is clicked. Specifically, any pseudo-element. */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     readonly onCloseClick: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
     /** Emitted when token should be removed */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     readonly onRemove: EventEmitter<void> = new EventEmitter<void>();
 
     /** Emitted when a token is clicked. */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onTokenClick: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
 
     constructor(

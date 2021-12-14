@@ -23,7 +23,7 @@ export class PlatformChekboxTristateComponent implements AfterViewInit {
         agreements: new FormGroup({})
     });
 
-    public choices: Object = { termsAndConditions: true, marketing: true, newsletter: false };
+    public choices: Record<string, any> = { termsAndConditions: true, marketing: true, newsletter: false };
 
     // code for nested form group with tristate checkbox.
     ngAfterViewInit(): void {
@@ -31,11 +31,11 @@ export class PlatformChekboxTristateComponent implements AfterViewInit {
         this.setControlOnAgreementsChange();
     }
 
-    public checkedChangeFunction(event: any): void {}
+    public checkedChangeFunction(): void {}
 
-    public indeterminateChangeFunction(event: any): void {}
+    public indeterminateChangeFunction(): void {}
 
-    public changeFunction(event: any): void {}
+    public changeFunction(): void {}
 
     private setAgreementsOnAcceptAllChange(): void {
         this.registrationForm.get('acceptAll').valueChanges.subscribe((value) => this.acceptAll(value));
@@ -86,7 +86,7 @@ export class PlatformChekboxTristateComponent implements AfterViewInit {
     }
 
     // This is equivalent for `Object.values` not supported by IE11
-    private getValuesFromObject(obj: Object): any[] {
+    private getValuesFromObject(obj: Record<string, any>): any[] {
         return Object.keys(obj).map((e) => obj[e]);
     }
 }

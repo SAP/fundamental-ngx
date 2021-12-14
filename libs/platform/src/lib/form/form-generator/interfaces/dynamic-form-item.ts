@@ -8,11 +8,47 @@ import { DynamicFormGroup } from './dynamic-form-group';
 
 export type DynamicFormItemChoices = number | string | SelectItem;
 export type DynamicFormItemValidationResult = null | boolean | string;
+export type DynamicFormItem = DynamicFormFieldGroup | DynamicFormFieldItem;
+
+export interface DynamicFormFieldGroup {
+    /**
+     * @description
+     * Name of the form item in form.
+     */
+    name: string;
+
+    /**
+     * @description
+     * Display name of the form item.
+     * @param formValue the form value hash.
+     */
+    message?: string;
+
+    /**
+     * @description
+     * List of @see DynamicFormItem representing the list of items
+     * to be rendered in the form.
+     */
+    items?: DynamicFormFieldItem[];
+
+    /**
+     * @description
+     * Rank is used for ordering.
+     * Than lower number then higher priority.
+     */
+    rank?: number;
+
+    /**
+     * @description
+     * Additional set of options that can affect UI of the form field group.
+     */
+    guiOptions?: BaseDynamicFormItemGuiOptions;
+}
 
 /**
  * Dynamic form item object interface which is used for generating form controls of defined type with validation rules.
  */
-export interface DynamicFormItem {
+export interface DynamicFormFieldItem {
     /**
      * @description
      * Type of the form item. E.g. input, textarea, checkbox, etc.
@@ -99,7 +135,6 @@ export interface DynamicFormItem {
 
     /**
      * @description Set when form item is a mandatory one.
-     *
      */
     required?: boolean;
 
@@ -107,22 +142,26 @@ export interface DynamicFormItem {
      * @description Transforms raw form item value.
      * @param formItemValue raw form item value.
      * @param formValue the form value hash.
-     * @param formItem @see DynamicFormItem
+     * @param formItem @see DynamicFormFieldItem
      * @returns updated form item value to be used in the form value hash.
      */
-    transformer?: (formItemValue?: any, formValue?: DynamicFormValue, formItem?: DynamicFormItem) => any | Promise<any>;
+    transformer?: (
+        formItemValue?: any,
+        formValue?: DynamicFormValue,
+        formItem?: DynamicFormFieldItem
+    ) => any | Promise<any>;
 
     /**
      * @description Transforms raw form item value for render purposes.
      * @param formItemValue raw form item value.
      * @param formValue the form value hash.
-     * @param formItem @see DynamicFormItem
+     * @param formItem @see DynamicFormFieldItem
      * @returns updated form item value to be used in the form value hash for rendering purposes.
      */
     valueRenderer?: (
         formItemValue?: any,
         formValue?: DynamicFormValue,
-        formItem?: DynamicFormItem
+        formItem?: DynamicFormFieldItem
     ) => any | Promise<any>;
 
     /**
@@ -133,7 +172,7 @@ export interface DynamicFormItem {
     when?: (formValue?: DynamicFormValue) => boolean | Promise<boolean> | Observable<boolean>;
 
     /**
-     * @description Callback function that is triggered after field value has been changed
+     * @description Callback function that is triggered after field value has been changed.
      * @param fieldValue Field value.
      * @param formGeneratorService Form generator service instance.
      */
@@ -151,19 +190,52 @@ export interface DynamicFormItem {
      * Additional set of options that can affect UI of the form item form control.
      */
     guiOptions?: DynamicFormItemGuiOptions;
-}
 
-export interface DynamicFormItemGuiOptions {
     /**
      * @description
-     * Index of column if form has multi-column layout
+     * Rank is used for ordering.
+     * Than lower number then higher priority.
+     */
+    rank?: number;
+}
+
+export interface BaseDynamicFormItemGuiOptions {
+    /**
+     * @description
+     * Defines label's column layout.
+     */
+    labelColumnLayout?: ColumnLayout;
+
+    /**
+     * @description
+     * Defines field's column layout.
+     */
+    fieldColumnLayout?: ColumnLayout;
+
+    /**
+     * @description
+     * Defines gap column layout.
+     */
+    gapColumnLayout?: ColumnLayout;
+}
+
+export interface DynamicFormItemGuiOptions extends BaseDynamicFormItemGuiOptions {
+    /**
+     * @description
+     * Index of column if form has multi-column layout.
      */
     column?: number;
 
-    /** column arrangement for form-field based on screen size */
+    /**
+     * @description
+     * Column arrangement for form-field based on screen size.
+     */
     columnLayout?: ColumnLayout;
 
-    /** inline layout for list based form item */
+    /**
+     * @description
+     * Inline layout for list based form item.
+     */
     inlineLayout?: InlineLayout;
 
     /**
@@ -172,18 +244,28 @@ export interface DynamicFormItemGuiOptions {
      */
     hint?: string;
 
-    /** Define hint placement */
+    /**
+     * @description
+     * Define hint placement.
+     */
     hintPlacement?: HintPlacement;
 
-    /** Define form field label placement. */
+    /**
+     * @deprecated
+     * Use labelColumnLayout, fieldColumnLayout and gapColumnLayout properties.
+     * Define form field label placement.
+     */
     layout?: LabelLayout;
 
-    /** Flag indicating that label should be hidden */
+    /**
+     * @description
+     * Flag indicating that label should be hidden.
+     */
     noLabelLayout?: boolean;
 
     /**
      * @description
-     * If set, controls inner elements will be inlined
+     * If set, controls inner elements will be inlined.
      */
     inline?: boolean;
 
@@ -198,7 +280,10 @@ export interface DynamicFormItemGuiOptions {
      */
     additionalData?: any;
 
-    /** If label should be appended with colon. True by default */
+    /**
+     * @description
+     * If label should be appended with colon. True by default.
+     */
     appendColon?: boolean;
 }
 

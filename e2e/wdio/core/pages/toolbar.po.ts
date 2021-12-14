@@ -1,10 +1,8 @@
 import { CoreBaseComponentPo } from './core-base-component.po';
-import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
+import { click, waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class ToolbarPo extends CoreBaseComponentPo {
     url = '/toolbar';
-    root = '#page-content';
-    contentPage = '#page-content';
 
     button = ' .fd-button--standard.fd-button--compact';
     activeInfoToolbar = '.fd-toolbar--active';
@@ -24,23 +22,30 @@ export class ToolbarPo extends CoreBaseComponentPo {
     selectedMinutes = '(//div[contains(@class, "fd-time__wrapper")]//li[contains(@class, "fd-time__item")])[54]';
     navigationUpArrowButton = 'button[glyph="navigation-up-arrow"]';
     navigationDownArrowButton = 'button[glyph="navigation-down-arrow"]';
-    timeItem = 'span.fd-time__item';
+    timeColumn = 'fd-time-column';
     period = '//span[contains(text(), " PM ")]/parent::li';
     dateTimeButton = '.fd-button--transparent.fd-button--compact';
     okButton = '[fdtype="emphasized"]';
     dateTimeInput = 'input.fd-input--compact';
+    toolbarOverflowExample = 'fd-toolbar-overflow-example';
+    popoverInput = 'fd-popover-body input';
+    popoverButton = '.fd-toolbar__overflow-button';
+    popoverToggledButton = 'fd-popover-body button:not(.fd-toolbar__overflow-button, fd-split-button button)';
+    popoverSplitButton = 'fd-split-button button';
+    popoverDropDown = '.fd-button-split';
+    overflowInput = 'fd-toolbar-overflow-example .fd-input';
 
-    dayInCalendarButtonByValue = (index: string): string => {
-        return `//span[contains(@id,"day-${index}-")]/ancestor::td[not (contains(@class, 'fd-calendar__item--other-month'))]`;
+    clickDayInCalendarButtonByValue = (dayNumber: number): void => {
+        click('.fd-calendar__table td.fd-calendar__item:not(.fd-calendar__item--other-month)', dayNumber - 1);
     };
 
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
-        waitForPresent(this.contentPage);
+        waitForPresent(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

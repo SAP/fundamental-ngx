@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component } from '@angular/core';
 
 import { IconModule } from './icon.module';
-import { IconComponent } from './icon.component';
 
 const ICON_NAME = 'add';
 const FONT_NAME = 'SAP-icons';

@@ -294,9 +294,9 @@ function getBlankNodesAfterNode(node: ApprovalGraphNode, paths: ApprovalGraphNod
 
     if (pathWithBlankNodeAfter) {
         const nodeIndex = pathWithBlankNodeAfter.indexOf(node) + 1;
-        const nextNotBlankNodeIndex = pathWithBlankNodeAfter.findIndex((_node, _index) => {
-            return _index > nodeIndex && !_node.blank;
-        });
+        const nextNotBlankNodeIndex = pathWithBlankNodeAfter.findIndex(
+            (_node, _index) => _index > nodeIndex && !_node.blank
+        );
 
         blankNodes.push(
             ...pathWithBlankNodeAfter.slice(nodeIndex, nextNotBlankNodeIndex > 0 ? nextNotBlankNodeIndex : undefined)

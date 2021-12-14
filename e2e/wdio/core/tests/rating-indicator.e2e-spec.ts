@@ -11,7 +11,8 @@ import {
     getValue,
     sendKeys,
     waitForElDisplayed,
-    waitForPresent
+    waitForPresent,
+    currentPlatformName
 } from '../../driver/wdio';
 
 describe('Rating indicator test suite', () => {
@@ -105,10 +106,14 @@ describe('Rating indicator test suite', () => {
         });
 
         it('should check that minimal value in input is 1', () => {
+            if (currentPlatformName() !== 'windows') {
+                return;
+            }
             refreshPage();
             waitForPresent(ratingIndicatorPage.root);
             waitForElDisplayed(ratingIndicatorPage.title);
             click(inputsDynamicChanges);
+            // eslint-disable-next-line radix
             for (let i = parseInt(getValue(inputsDynamicChanges)); i !== 1; i--) {
                 sendKeys('ArrowDown');
             }

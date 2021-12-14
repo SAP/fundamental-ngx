@@ -44,13 +44,21 @@ export class PopoverPo extends CoreBaseComponentPo {
     centerButton = this.button + '[value="center"]';
     topButton = this.button + '[value="top"]';
     endButton = this.button + '[value="end"]';
+    dialogInput = 'fd-popover-control input';
+    popoverNoArrow = '.fd-popover__popper--no-arrow ';
+    paragraph = 'p';
+    triggerButtonContainer = 'fd-popover-container-example button';
+    mobilePopoverButton = 'fd-dialog-body button';
+    popoverMobileExample = 'fd-popover-mobile-example ';
+    mobileInput = 'fd-dialog-body input';
+    mobileFooterButton = 'fd-dialog-footer button';
 
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.avatar);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

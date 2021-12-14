@@ -326,7 +326,7 @@ describe('Approval flow', () => {
 
         it('should add the whole team as reviewer', () => {
             enterEditMode();
-            click(addNode, 1);
+            browserIsFirefox() ? click(addNode, 2) : click(addNode, 1);
             waitForElDisplayed(detailsDialog);
             click(addApproverOptions, 1);
             waitForElDisplayed(approverOptionListItem);
@@ -336,12 +336,14 @@ describe('Approval flow', () => {
             click(footerButtons);
             click(footerButtons);
 
-            expect(getText(nodeCardInfo, 4)).toContain('4 members\n' + 'Accounting team');
+            browserIsFirefox()
+                ? expect(getText(nodeCardInfo, 5)).toContain('4 members\n' + 'Accounting team')
+                : expect(getText(nodeCardInfo, 4)).toContain('4 members\n' + 'Accounting team');
         });
 
         it('should add anyone from team as reviewer', () => {
             enterEditMode();
-            click(addNode, 1);
+            browserIsFirefox() ? click(addNode, 2) : click(addNode, 1);
             waitForElDisplayed(detailsDialog);
             click(addApproverOptions, 1);
             waitForElDisplayed(approverOptionListItem);
@@ -351,7 +353,9 @@ describe('Approval flow', () => {
             click(footerButtons);
             click(footerButtons);
 
-            expect(getText(nodeCardInfo, 4)).toContain('4 members\n' + 'Accounting team');
+            browserIsFirefox()
+                ? expect(getText(nodeCardInfo, 5)).toContain('4 members\n' + 'Accounting team')
+                : expect(getText(nodeCardInfo, 4)).toContain('4 members\n' + 'Accounting team');
         });
 
         it('should be able to remove node by button', () => {
@@ -389,7 +393,7 @@ describe('Approval flow', () => {
         it('should add node before', () => {
             const startingNodeCount = getElementArrayLength(nodeCardInfo);
             enterEditMode();
-            click(approvalFlowNodeActionMenu, 4);
+            browserIsFirefox() ? click(approvalFlowNodeActionMenu, 5) : click(approvalFlowNodeActionMenu, 4);
             waitForElDisplayed(approvalFlowNodeActionMenuItem);
             click(approvalFlowNodeActionMenuItem);
             waitForElDisplayed(detailsDialog);
@@ -405,7 +409,7 @@ describe('Approval flow', () => {
         it('should add node after', () => {
             const startingNodeCount = getElementArrayLength(nodeCardInfo);
             enterEditMode();
-            click(approvalFlowNodeActionMenu, 4);
+            browserIsFirefox() ? click(approvalFlowNodeActionMenu, 5) : click(approvalFlowNodeActionMenu, 4);
             waitForElDisplayed(approvalFlowNodeActionMenuItem);
             click(approvalFlowNodeActionMenuItem, 1);
             waitForElDisplayed(detailsDialog);
@@ -508,7 +512,8 @@ describe('Approval flow', () => {
             const nodeCardCount = getElementArrayLength(nodeCardInfo);
 
             for (let i = 0; i < nodeCardCount; i++) {
-                expect(getText(nodeCardInfo, i)).toContain('not started');
+                scrollIntoView(nodeCardInfo, i);
+                expect(getText(nodeCardInfo, i)).toContain('not started', `index ${i} failed`);
             }
         });
 
@@ -528,40 +533,63 @@ describe('Approval flow', () => {
             markOption(disableAddingBeforeOption);
             enterEditMode();
 
-            checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[0], 4);
-            checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[0], 4);
+            browserIsFirefox()
+                ? checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[0], 5)
+                : checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[0], 4);
+
+            browserIsFirefox()
+                ? checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[0], 5)
+                : checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[0], 4);
         });
 
         it('check disable adding after', () => {
             markOption(disableAddingAfterOption);
             enterEditMode();
-
-            checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[1], 4);
-            checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[1], 4);
+            browserIsFirefox()
+                ? checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[1], 5)
+                : checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[1], 4);
+            browserIsFirefox()
+                ? checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[1], 5)
+                : checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[1], 4);
         });
 
         it('check disable adding parallel', () => {
             markOption(disableAddingParallelOption);
             enterEditMode();
 
-            checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[2], 4);
-            checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[2], 4);
+            browserIsFirefox()
+                ? checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[2], 5)
+                : checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[2], 4);
+
+            browserIsFirefox()
+                ? checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[2], 4)
+                : checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[2], 4);
         });
 
         it('check disable editing', () => {
             markOption(disableEditingOption);
             enterEditMode();
 
-            checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[3], 4);
-            checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[3], 4);
+            browserIsFirefox()
+                ? checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[3], 5)
+                : checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[3], 4);
+
+            browserIsFirefox()
+                ? checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[3], 5)
+                : checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[3], 4);
         });
 
         it('check disable remove', () => {
             markOption(disableRemovingOption);
             enterEditMode();
 
-            checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[4], 4);
-            checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[4], 4);
+            browserIsFirefox()
+                ? checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[4], 5)
+                : checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[4], 4);
+
+            browserIsFirefox()
+                ? checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[4], 5)
+                : checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[4], 4);
         });
 
         it('check disabling edit mode', () => {

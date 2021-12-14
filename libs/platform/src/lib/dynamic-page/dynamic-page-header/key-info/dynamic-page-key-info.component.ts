@@ -6,7 +6,7 @@ import { CLASS_NAME } from '../../constants';
     selector: 'fdp-dynamic-page-key-info',
     template: `
         <ng-template #contentTemplateRef>
-            <div [ngClass]="CLASS_NAME.dynamicPageKeyInfo">
+            <div [class]="CLASS_NAME.dynamicPageKeyInfo">
                 <ng-content></ng-content>
             </div>
         </ng-template>

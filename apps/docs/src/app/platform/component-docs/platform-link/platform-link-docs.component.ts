@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+
+import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
+
 import * as standardlinkSrc from '!raw-loader!./platform-link-examples/platform-link-standard-example.component.html';
 import * as emphasizedlinkSrc from '!raw-loader!./platform-link-examples/platform-link-emphasized-example.component.html';
 import * as disabledlinkSrc from '!raw-loader!./platform-link-examples/platform-link-disabled-example.component.html';
@@ -6,13 +9,12 @@ import * as disabledEmphasizedlinkSrc from '!raw-loader!./platform-link-examples
 import * as invertedlinkSrc from '!raw-loader!./platform-link-examples/platform-link-inverted-example.component.html';
 import * as truncatedlinkSrc from '!raw-loader!./platform-link-examples/platform-link-truncated-example.component.html';
 import * as iconlinkSrc from '!raw-loader!./platform-link-examples/platform-link-icon-example.component.html';
-import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-link',
     templateUrl: './platform-link-docs.component.html'
 })
-export class PlatformLinkDocsComponent implements OnInit {
+export class PlatformLinkDocsComponent {
     standardLink: ExampleFile[] = [
         {
             language: 'html',
@@ -68,8 +70,4 @@ export class PlatformLinkDocsComponent implements OnInit {
             fileName: 'platform-link-icon-example'
         }
     ];
-
-    constructor() {}
-
-    ngOnInit(): void {}
 }

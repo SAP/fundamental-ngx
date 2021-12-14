@@ -3,6 +3,7 @@ import {
     click,
     doesItExist,
     getElementArrayLength,
+    getElementClass,
     getText,
     getTextArr,
     refreshPage,
@@ -29,7 +30,9 @@ describe('multi-combobox test suite', () => {
         dialogButton,
         dialogListItem,
         selectedDialogItem,
-        dialogInput
+        dialogInput,
+        mobileExpandButton,
+        showSelectedItemsBtn
     } = multiComboboxPage;
     const mobileExample = 5;
     const nMoreExample = 4;
@@ -180,6 +183,25 @@ describe('multi-combobox test suite', () => {
 
             expect(selectedViewItemCount).toBe(2);
         });
+    });
+
+    // skipped due to https://github.com/SAP/fundamental-ngx/issues/6978
+    xit('should check that items not added if you did not click Save button', () => {
+        scrollIntoView(mobileModeExamples);
+        click(mobileExpandButton);
+        click(dialogListItem);
+        click(showSelectedItemsBtn);
+        expect(doesItExist(mobileModeExamples + token)).toBe(false);
+    });
+
+    // skipped due to https://github.com/SAP/fundamental-ngx/issues/7082
+    xit('should check that Show selected Items - Show all items works correct', () => {
+        scrollIntoView(mobileModeExamples);
+        click(mobileExpandButton);
+        click(dialogListItem);
+        click(showSelectedItemsBtn);
+        click(showSelectedItemsBtn);
+        expect(getElementClass(dialogListItem)).toContain('is-selected');
     });
 
     describe('orientation and visual regression checks', () => {

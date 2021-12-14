@@ -6,11 +6,12 @@ import { MenuModule } from '../menu/menu.module';
 import { ButtonModule } from '../button/button.module';
 import createSpy = jasmine.createSpy;
 import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/services/content-density.service';
+import { ButtonComponent } from '../button';
 
 @Component({
     selector: 'fd-test-component',
     template: `
-        <fd-split-button>
+        <fd-split-button [expandButtonTitle]="moreBtnTitle">
             <fd-menu>
                 <li fd-menu-item>
                     <div fd-menu-interactive>
@@ -26,12 +27,15 @@ import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/service
         </fd-split-button>
     `
 })
-export class TestComponent {}
+export class TestComponent {
+    moreBtnTitle: string;
+}
 
 describe('SplitButtonComponent', () => {
-    let fixture: ComponentFixture<TestComponent>, debugElement: DebugElement, element: HTMLElement;
+    let fixture: ComponentFixture<TestComponent>, debugElement: DebugElement;
 
-    let component, componentInstance: SplitButtonComponent;
+    let component: DebugElement;
+    let componentInstance: SplitButtonComponent;
 
     beforeEach(
         waitForAsync(() => {
@@ -46,7 +50,6 @@ describe('SplitButtonComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
         debugElement = fixture.debugElement;
-        element = debugElement.nativeElement;
         fixture.detectChanges();
         component = debugElement.query(By.directive(SplitButtonComponent));
         componentInstance = component.injector.get(SplitButtonComponent);
@@ -114,11 +117,39 @@ describe('SplitButtonComponent', () => {
 
     it('should add button text class', () => {
         fixture.detectChanges();
-        componentInstance.ngAfterViewInit();
         const textElement = componentInstance.mainActionBtn?.nativeElement.querySelector('.fd-button__text');
         expect(textElement.classList.contains(splitButtonTextClass));
         componentInstance.compact = true;
         componentInstance.ngOnChanges(<any>{ compact: true });
         expect(textElement.classList.contains(splitButtonTextCompactClass));
+    });
+
+    it('should has aria attributes', () => {
+        fixture.detectChanges();
+        // Default value
+        expect(componentInstance.arialLabel).toBeDefined();
+
+        const wrapperEl: HTMLElement = fixture.nativeElement.querySelector('.fd-button-split');
+        expect(wrapperEl.getAttribute('aria-label')).toBe(componentInstance.arialLabel);
+
+        // Default value
+        expect(componentInstance.expandButtonAriaLabel).toBeDefined();
+        const mainActionBtn = componentInstance.menuActionBtn?.nativeElement as HTMLElement;
+        expect(mainActionBtn.getAttribute('aria-label')).toBe(componentInstance.expandButtonAriaLabel);
+
+        expect(mainActionBtn.getAttribute('title')).toBe(componentInstance.expandButtonAriaLabel);
+        fixture.componentInstance.moreBtnTitle = 'More Actions Title';
+        fixture.detectChanges();
+        expect(mainActionBtn.getAttribute('title')).toBe('More Actions Title');
+    });
+
+    it('should add is-active class to more-actions button', () => {
+        const mainActionBtn = componentInstance.menuActionBtn?.nativeElement as HTMLElement;
+        expect(mainActionBtn.classList.contains('is-active')).toBeFalse();
+
+        componentInstance.menu.open();
+        fixture.detectChanges();
+
+        expect(mainActionBtn.classList.contains('is-active')).toBeTrue();
     });
 });

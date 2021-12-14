@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { OverlayModule } from '@angular/cdk/overlay';
 
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { DynamicComponentService, TemplateModule } from '@fundamental-ngx/core/utils';
@@ -23,7 +22,6 @@ import { OptionComponent } from './option/option.component';
         InputGroupModule,
         ListModule,
         ButtonModule,
-        OverlayModule,
         PlatformAutoCompleteModule,
         PopoverModule,
         IconModule,

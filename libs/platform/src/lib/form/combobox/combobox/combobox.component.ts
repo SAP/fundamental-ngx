@@ -17,11 +17,8 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
-import { CdkConnectedOverlay } from '@angular/cdk/overlay';
-import { Direction } from '@angular/cdk/bidi';
-import { takeUntil } from 'rxjs/operators';
 
-import { closestElement, DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
+import { closestElement, DynamicComponentService } from '@fundamental-ngx/core/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import {
     ComboBoxDataSource,
@@ -52,10 +49,6 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
     searchInputElement: ElementRef<HTMLInputElement>;
 
     /** @hidden */
-    @ViewChild(CdkConnectedOverlay)
-    _connectedOverlay: CdkConnectedOverlay;
-
-    /** @hidden */
     @ViewChild('controlTemplate')
     controlTemplate: TemplateRef<any>;
 
@@ -65,9 +58,6 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
 
     /** @hidden */
     _selectedElement?: OptionItem;
-
-    /** @hidden */
-    private _direction: Direction = 'ltr';
 
     constructor(
         readonly cd: ChangeDetectorRef,
@@ -80,7 +70,6 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
         private readonly _injector: Injector,
         @Optional() @Inject(DATA_PROVIDERS) private providers: Map<string, DataProvider<any>>,
         readonly _comboboxConfig: ComboboxConfig,
-        @Optional() private _rtlService: RtlService,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
@@ -100,16 +89,6 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
     ngAfterViewInit(): void {
         super.ngAfterViewInit();
 
-        this._rtlService?.rtl
-            .pipe(takeUntil(this._destroyed))
-            .subscribe((isRtl) => (this._direction = isRtl ? 'rtl' : 'ltr'));
-
-        if (this._connectedOverlay) {
-            this._connectedOverlay.attach
-                .pipe(takeUntil(this._destroyed))
-                .subscribe(() => this._connectedOverlay.overlayRef.setDirection(this._direction));
-        }
-
         if (this.mobile) {
             this._setUpMobileMode();
         }
@@ -117,6 +96,10 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
 
     /** @hidden */
     _onBlur(event: FocusEvent): void {
+        if (this.mobile) {
+            return;
+        }
+
         const target = event.relatedTarget as HTMLElement;
         if (target) {
             const isList = !!closestElement('.fdp-combobox__list-container', target);
@@ -153,7 +136,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
 
         this.inputText = item.label;
         this._checkAndUpdate(item);
-        this.showList(false);
+        this.isOpenChangeHandle(false);
     }
 
     /** @hidden Method to set as selected */
@@ -188,7 +171,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
         }
 
         this.inputText = term;
-        this.showList(false);
+        this.isOpenChangeHandle(false);
     }
 
     /** Handle dialog approval, closes popover and propagates data changes. */
@@ -201,7 +184,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
             this._updateModel(optionItem ? optionItem.value : this.inputText);
         }
 
-        this.showList(false);
+        this.isOpenChangeHandle(false);
     }
 
     /** @hidden if not selected update model */

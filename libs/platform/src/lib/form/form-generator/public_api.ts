@@ -19,3 +19,4 @@ export * from './interfaces/dynamic-form-group';
 export * from './interfaces/form-component-definition';
 export * from './providers/providers';
 export * from './base-dynamic-form-generator-control';
+export * from './form-generator-field/form-generator-field.component';

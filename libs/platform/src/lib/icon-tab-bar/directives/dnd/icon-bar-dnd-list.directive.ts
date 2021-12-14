@@ -53,7 +53,7 @@ export class IconBarDndListDirective implements AfterViewInit, OnDestroy {
 
         this._dndItems$
             .pipe(debounceTime(100), takeUntil(this._onDestroy$))
-            .subscribe((_) => this._dropListRef.withItems(this._dragRefItems));
+            .subscribe(() => this._dropListRef.withItems(this._dragRefItems));
     }
 
     /** @hidden */

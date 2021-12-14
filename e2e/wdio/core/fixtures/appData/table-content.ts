@@ -23,3 +23,4 @@ export const paginationTestArr = [
 export const dateTestText = 'date';
 export const testText = 'test';
 export const tableCellArr2 = ['Apple', 'Row 1', 'Row 1', '09-07-18'];
+export const paginationTestArr2 = ['Row 1', 'Row 6', 'Row 11', 'Row 16', 'Row 21'];

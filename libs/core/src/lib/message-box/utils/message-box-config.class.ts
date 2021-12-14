@@ -1,4 +1,4 @@
-/* tslint:disable:no-inferrable-types */
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 
 import { Injectable, InjectionToken, Injector } from '@angular/core';
 import { DialogConfigBase } from '@fundamental-ngx/core/dialog';

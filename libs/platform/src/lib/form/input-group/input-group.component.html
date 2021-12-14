@@ -1,4 +1,4 @@
-<div class="fd-input-group" [class.is-disabled]="disabled" [ngClass]="_controlStateClass">
+<div class="fd-input-group" [class.is-disabled]="disabled" [class]="_controlStateClass">
     <!-- Before input addons area -->
     <fdp-input-group-addon-body *ngFor="let addon of _beforeInputAddons" [contentDensity]="contentDensity">
         <ng-container *ngTemplateOutlet="addon.contentTemplateRef"></ng-container>

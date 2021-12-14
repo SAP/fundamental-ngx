@@ -139,7 +139,7 @@
                 *ngIf="secondary && !inverted"
                 [attr.aria-label]="secondary"
                 class="fd-list__byline-right"
-                [ngClass]="statusType ? 'fd-list__byline-right--' + statusType : ''"
+                [class]="statusType ? 'fd-list__byline-right--' + statusType : ''"
                 [attr.title]="secondary"
                 [attr.nowrap]="secondaryWrap"
             >
@@ -180,7 +180,7 @@
             *ngIf="selectionMode === 'single'"
             [value]="value"
             [name]="name"
-            [attr.role]="'radio'"
+            role="radio"
             [compact]="_isCompact"
             [(ngModel)]="selectionValue"
             [attr.aria-selected]="_selected"

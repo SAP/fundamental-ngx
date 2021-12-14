@@ -66,14 +66,14 @@ export class PlatformUploadCollectionDataProviderExample extends UploadCollectio
     download(data: DownloadEvent): Observable<void> {
         console.log('download', data);
 
-        const obs = data.items.map((file) => {
-            return this._http.get(file.url, { responseType: 'blob' }).pipe(
+        const obs = data.items.map((file) =>
+            this._http.get(file.url, { responseType: 'blob' }).pipe(
                 map((blob) => ({
                     blob: blob,
                     file: file
                 }))
-            );
-        });
+            )
+        );
 
         return merge(...obs).pipe(
             map(({ file, blob }) => {
