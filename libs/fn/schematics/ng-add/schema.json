@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/schema",
-    "id": "fundamental-ngx-ng-add",
+    "$id": "fundamental-ngx-ng-add",
     "title": "Fundamental Library for Angular ng-add schematic",
     "type": "object",
     "properties": {
