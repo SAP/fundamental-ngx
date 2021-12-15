@@ -103,11 +103,6 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, AfterC
     }
 
     /** @hidden */
-    ngAfterContentInit(): void {
-        this._breadcrumbComponent.arrowNavigation = true;
-    }
-
-    /** @hidden */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
