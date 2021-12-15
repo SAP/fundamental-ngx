@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.216 (2021-12-15)
+
+
+### Bug Fixes
+
+* **core,platform:** use approximate versions to avoid peer dependency errors ([#7366](https://github.com/SAP/fundamental-ngx/issues/7366)) ([33b2043](https://github.com/SAP/fundamental-ngx/commit/33b20436ad2f3a55b1fc5df8130a8f29f6ae0334))
+
 ## 0.33.0-rc.215 (2021-12-14)
 
 
