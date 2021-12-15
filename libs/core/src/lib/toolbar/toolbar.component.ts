@@ -56,6 +56,18 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     @Input()
     class: string;
 
+    /** Title for the button
+     * Default value: 'More'
+     */
+    @Input()
+    overflowControlTitle = 'More';
+
+    /** Aria-label for the button
+     * Default value: 'More'
+     */
+    @Input()
+    overflowControlAriaLabel = 'More';
+
     /** Determines if overflow button should be visible
      * Default value: false
      */
@@ -116,6 +128,9 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
 
     /** @hidden */
     overflowVisibility: Observable<boolean> = of(false);
+
+    /** @hidden */
+    _isOverflowOpen = false;
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -235,6 +250,11 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
         if (this._initialised) {
             this._onResize();
         }
+    }
+
+    /** @hidden */
+    _onIsOpenChange(open: boolean): void {
+        this._isOverflowOpen = open;
     }
 
     /** @hidden */

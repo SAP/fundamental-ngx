@@ -15,6 +15,10 @@ export class ToolbarSpacerComponent {
     @Input()
     width = '0px';
 
+    @HostBinding('style.maxWidth')
+    @Input()
+    maxWidth: string;
+
     /** Property allows user to pass additional class
      */
     @Input()

@@ -3,15 +3,16 @@
     <ng-container *ngIf="shouldOverflow">
         <span #overflowSpacer class="fd-toolbar__spacer"></span>
         <span class="fd-toolbar__separator" *ngIf="overflowVisibility | async"></span>
-        <fd-popover placement="bottom-end" [noArrow]="true" class="fd-popover">
+        <fd-popover placement="bottom-end" [noArrow]="true" class="fd-popover" (isOpenChange)="_onIsOpenChange($event)">
             <fd-popover-control>
                 <button
                     *ngIf="overflowVisibility | async"
                     fd-button
-                    title="More"
-                    aria-label="More"
+                    [attr.title]="overflowControlTitle"
+                    [attr.aria-label]="overflowControlAriaLabel"
                     aria-haspopup="true"
                     [compact]="size === 'compact'"
+                    [attr.aria-expanded]="_isOverflowOpen"
                     fdType="transparent"
                     glyph="overflow"
                 ></button>
