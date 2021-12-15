@@ -15,12 +15,13 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { BreadcrumbItemComponent } from './breadcrumb-item.component';
-import { ContentDensityService, ResizeObserverService, RtlService } from '@fundamental-ngx/core/utils';
 import { BehaviorSubject, firstValueFrom, map, startWith, Subscription, tap } from 'rxjs';
+
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { Placement } from '@fundamental-ngx/core/shared';
-
+import { ContentDensityService, ResizeObserverService, RtlService } from '@fundamental-ngx/core/utils';
+import { BreadcrumbItemComponent } from './breadcrumb-item.component';
+import { BREADCRUMB_COMPONENT } from './breadcrumb.interface';
 /**
  * Breadcrumb parent wrapper directive. Must have breadcrumb item child directives.
  *
@@ -43,7 +44,13 @@ import { Placement } from '@fundamental-ngx/core/shared';
     templateUrl: './breadcrumb.component.html',
     styleUrls: ['./breadcrumb.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: BREADCRUMB_COMPONENT,
+            useExisting: BreadcrumbComponent
+        }
+    ]
 })
 export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
     /** Whenever links wrapped inside overflow should be displayed in compact mode  */

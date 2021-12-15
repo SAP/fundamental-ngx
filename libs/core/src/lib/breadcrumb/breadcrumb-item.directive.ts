@@ -7,14 +7,15 @@ import {
     ElementRef,
     forwardRef,
     HostListener,
-    Injector,
-    Optional
+    Optional,
+    Inject
 } from '@angular/core';
-import { BreadcrumbLinkDirective } from './breadcrumb-link.directive';
-import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { LEFT_ARROW, RIGHT_ARROW, TAB } from '@angular/cdk/keycodes';
-import { BreadcrumbComponent } from './breadcrumb.component';
 import { Subscription } from 'rxjs';
+
+import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { BreadcrumbLinkDirective } from './breadcrumb-link.directive';
+import { BREADCRUMB_COMPONENT, BreadcrumbInterface } from './breadcrumb.interface';
 
 /**
  * Breadcrumb item directive. Must have child breadcrumb link directives.
@@ -60,10 +61,10 @@ export class BreadcrumbItemDirective implements AfterContentInit, AfterViewInit,
 
     constructor(
         private _elementRef: ElementRef,
-        private _injector: Injector,
-        @Optional() private _rtlService: RtlService
+        @Optional() private _rtlService: RtlService,
+        @Inject(BREADCRUMB_COMPONENT) private _breadcrumbComponent: BreadcrumbInterface
     ) {
-        this._subscription.add(this._rtlService.rtl.subscribe((isRtl) => (this._isRtl = isRtl)));
+        this._subscription.add(this._rtlService?.rtl.subscribe((isRtl) => (this._isRtl = isRtl)));
     }
 
     /** @hidden */
@@ -76,9 +77,9 @@ export class BreadcrumbItemDirective implements AfterContentInit, AfterViewInit,
         }
     }
 
+    /** @hidden */
     ngAfterViewInit(): void {
-        const breadcrumbComponent = this._injector.get<BreadcrumbComponent>(BreadcrumbComponent);
-        this._arrowNavigation = breadcrumbComponent.arrowNavigation;
+        this._arrowNavigation = this._breadcrumbComponent.arrowNavigation;
     }
 
     @HostListener('keydown', ['$event'])
