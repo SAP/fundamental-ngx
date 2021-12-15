@@ -3,7 +3,6 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class SelectPo extends BaseComponentPo {
     url = '/select';
-    root = '#page-content';
 
     selectModeExample = 'fdp-select-mode-example';
     displayText = ' .fd-select__control';
@@ -22,6 +21,7 @@ export class SelectPo extends BaseComponentPo {
     selectNoneExample = 'fdp-select-none-example';
     selectNowrapExample = 'fdp-select-nowrap-example';
     selectInReactiveForms = 'fdp-select-forms';
+    inputControl = ' .fd-select__control';
 
     options = (id) => `#fd-option-${id}`;
 
