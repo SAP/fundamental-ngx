@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.218 (2021-12-16)
+
+
+### Bug Fixes
+
+* **platform:** select - fix CVA behavior and remove extra methods ([#7338](https://github.com/SAP/fundamental-ngx/issues/7338)) ([d9e2642](https://github.com/SAP/fundamental-ngx/commit/d9e26424a061b7be79cfbf989cdb9c0a5f4d1804))
+
 ## 0.33.0-rc.217 (2021-12-15)
 
 ## 0.33.0-rc.216 (2021-12-15)
