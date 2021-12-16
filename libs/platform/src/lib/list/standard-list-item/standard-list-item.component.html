@@ -15,6 +15,7 @@
         [attr.aria-label]="ariaLabel"
         [attr.aria-level]="ariaLevel"
         [attr.aria-posinet]="ariaPosinet"
+        [attr.role]="role"
     >
         <ng-container *ngTemplateOutlet="selectionTemplate"> </ng-container>
         <a
@@ -45,6 +46,7 @@
         [attr.aria-posinet]="ariaPosinet"
         [class.fd-list__item--inactive]="listType === 'inactive'"
         (click)="_onItemClick()"
+        [attr.role]="role"
     >
         <ng-container *ngTemplateOutlet="selectionTemplate"></ng-container>
         <ng-container *ngTemplateOutlet="_hasByLine ? byLineTemplate : commonTemplate"></ng-container>
@@ -164,10 +166,9 @@
     <div
         fd-form-item
         class="fd-list__form-item"
-        *ngIf="(selectionMode === 'multi' || selectionMode === 'single') && !selectRow"
+        *ngIf="(selectionMode === 'multi' || selectionMode === 'single') && !rowSelection"
     >
         <fd-checkbox
-            #checkbox
             *ngIf="selectionMode === 'multi'"
             role="checkbox"
             (click)="$event.stopPropagation()"
@@ -177,7 +178,6 @@
         >
         </fd-checkbox>
         <fd-radio-button
-            #radio
             *ngIf="selectionMode === 'single'"
             [value]="value"
             [name]="name"

@@ -56,7 +56,7 @@ export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges, 
     onSelectionChange = new EventEmitter<ApprovalUser[]>();
 
     @ViewChild(ListComponent)
-    list: ListComponent;
+    list: ListComponent<ApprovalUser>;
 
     @ViewChildren(StandardListItemComponent)
     listItems: QueryList<StandardListItemComponent>;

@@ -63,6 +63,8 @@ export class PlatformStandardListItemWithSelectionExampleComponent implements Af
     _dataSource = new ListDataSource<Address>(new ListDataProvider());
     _selectedItems: any[] = [];
 
+    ariaLabel = '0 Items selected';
+
     constructor(private _render: Renderer2, private _elementRef: ElementRef) {}
 
     ngAfterViewInit(): void {
@@ -73,5 +75,7 @@ export class PlatformStandardListItemWithSelectionExampleComponent implements Af
 
     _showItemInfo(event: any): void {
         this._selectedItems = event.selectedItems;
+        const selectedItemsLength = this._selectedItems.length;
+        this.ariaLabel = selectedItemsLength > 1 ? `${selectedItemsLength} Items selected` : '1 Item selected';
     }
 }
