@@ -360,7 +360,7 @@ export class ListDataProvider extends DataProvider<Product> {
     `
 })
 class ObjectListItemDataSourceTestComponent {
-    @ViewChild(ListComponent, { static: true }) component: ListComponent;
+    @ViewChild(ListComponent, { static: true }) component: ListComponent<Product>;
     @ViewChild(ObjectListItemComponent, { static: true }) childComponent: ObjectListItemComponent;
     public _dataSource = new ListDataSource<Product>(new ListDataProvider());
 }
