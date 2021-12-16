@@ -176,7 +176,7 @@ describe('Datetime picker suite', () => {
             click(nextMonthButton);
 
             for (let i = 0; i < availableLengthNextMonth; i++) {
-                expect(isElementClickable(currentMonthCalendarItem, i)).toBe(true, `element ${i} is disabled`);
+                expect(isElementClickable(currentMonthCalendarItem, i)).toBe(false, `element ${i} is disabled`);
             }
 
             for (let i = availableLengthNextMonth + 1; i < itemsLength; i++) {
