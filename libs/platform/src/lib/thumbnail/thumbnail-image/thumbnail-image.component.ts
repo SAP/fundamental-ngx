@@ -16,7 +16,6 @@ import {
 import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { Media } from '../thumbnail.interfaces';
-import { ThumbnailDetailsComponent } from '../thumbnail-details/thumbnail-details.component';
 import { SPACE } from '@angular/cdk/keycodes';
 
 @Component({
@@ -48,6 +47,9 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
     @Output()
     thumbnailClicked: EventEmitter<Media> = new EventEmitter();
 
+    @Output()
+    openDetailsDialog = new EventEmitter<Media>();
+
     /** List of thumbnail images reference */
     @ViewChildren('thumbnailImage')
     thumbnailImages: QueryList<ElementRef>;
@@ -76,23 +78,10 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
     }
 
     /** Opens the Dialog when the imgaes croses the maximum number of images to display */
-    openDialog(selectedMedia: Media, mediaList: Media[]): void {
+    openDialog(media: Media, _mediaList: Media[]): void {
         this.mediaList.forEach((item) => (item.selected = false));
-        this.mediaList.forEach((item) => (item.overlayRequired = false));
-        selectedMedia.selected = true;
-        this._dialogService.open(ThumbnailDetailsComponent, {
-            backdropClickCloseable: false,
-            escKeyCloseable: false,
-            data: {
-                thumbnailId: this.thumbnailId,
-                selectedMedia: selectedMedia,
-                mediaList: mediaList,
-                rtl: this._isRtl(),
-                maxImages: this.maxImages
-            },
-            ariaLabelledBy: this.thumbnailId,
-            ariaModal: true
-        });
+        media.selected = true;
+        this.openDetailsDialog.emit(media);
     }
 
     /** @hidden */
