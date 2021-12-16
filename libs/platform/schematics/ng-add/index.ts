@@ -1,6 +1,6 @@
-import { chain, externalSchematic, noop, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
-import { addPackageJsonDependency, NodeDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
-import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
+import { chain, noop, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
+import { addPackageJsonDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
+import { NodePackageInstallTask, RunSchematicTask } from '@angular-devkit/schematics/tasks';
 import { getPackageVersionFromPackageJson, hasDevPackage, hasPackage } from '../utils/package-utils';
 
 import { readTranslationFiles } from '../utils/translation-utils';
@@ -22,11 +22,10 @@ export function ngAdd(options: Schema): Rule {
         const localizeInstalled = hasDevPackage(tree, '@angular/localize');
 
         return chain([
-            addDependencies(),
-            endInstallTask(),
             coreInstalled ? noop() : callCoreSchematic(options),
             localizeInstalled ? noop() : callLocalizeSchematic(options),
-            options.translations ? readTranslationFiles(options) : noop()
+            options.translations ? readTranslationFiles(options) : noop(),
+            endInstallTask()
         ]);
     };
 }
@@ -36,10 +35,27 @@ export function ngAdd(options: Schema): Rule {
  * @param options options passed for this schematic
  */
 function callCoreSchematic(options: Schema): Rule {
-    return (_: unknown, context: SchematicContext) => {
-        context.logger.info('Running @fundamental-ngx/core schematics...');
+    return (tree: Tree, context: SchematicContext) => {
+        context.logger.info('✅️ Added Fundamental NGX Core schematic to tasks');
 
-        return externalSchematic('@fundamental-ngx/core', 'ng-add', options);
+        addPackageJsonDependency(tree, {
+            type: NodeDependencyType.Default,
+            // Will be replaced with the real version during sync-version scipt run
+            version: `VERSION_PLACEHOLDER`,
+            name: '@fundamental-ngx/core'
+        });
+
+        const installTaskId = context.addTask(
+            new NodePackageInstallTask({
+                packageName: '@fundamental-ngx/core'
+            })
+        );
+
+        // Chain won't work here since we need the externals to be actually installed before we call their schemas
+        // This ensures the externals are a dependency of the node install, so they exist when their schemas run.
+        context.addTask(new RunSchematicTask('@fundamental-ngx/core', 'ng-add', options), [installTaskId]);
+
+        return tree;
     };
 }
 
@@ -48,42 +64,24 @@ function callCoreSchematic(options: Schema): Rule {
  * @param options options passed for this schematic
  */
 export function callLocalizeSchematic(options: Schema): any {
-    return (_: unknown, context: SchematicContext) => {
-        context.logger.info('Running @angular/localize schematics...');
-
-        return externalSchematic('@angular/localize', 'ng-add', options);
-    };
-}
-
-function addDependencies(): Rule {
     return (tree: Tree, context: SchematicContext) => {
-        context.logger.info('Adding dependent libraries...');
+        context.logger.info('✅️ Added Angular Localize schematic to tasks');
 
-        const ngCoreVersionTag = getPackageVersionFromPackageJson(tree, '@angular/core');
-        const dependencies: NodeDependency[] = [];
-
-        if (!hasPackage(tree, '@fundamental-ngx/core')) {
-            dependencies.push({
-                type: NodeDependencyType.Default,
-                // Will be replaced with the real version during sync-version scipt run
-                version: `VERSION_PLACEHOLDER`,
-                name: '@fundamental-ngx/core'
-            });
-        }
-
-        if (!hasDevPackage(tree, '@angular/localize')) {
-            dependencies.push({
-                type: NodeDependencyType.Dev,
-                version: `${ngCoreVersionTag}`,
-                name: '@angular/localize'
-            });
-        }
-
-        dependencies.forEach((dependency) => {
-            addPackageJsonDependency(tree, dependency);
-
-            console.log(`✅️ Added ${dependency.name} to ${dependency.type}.`);
+        addPackageJsonDependency(tree, {
+            type: NodeDependencyType.Dev,
+            version: `${getPackageVersionFromPackageJson(tree, '@angular/core')}`,
+            name: '@angular/localize'
         });
+
+        const installTaskId = context.addTask(
+            new NodePackageInstallTask({
+                packageName: '@angular/localize'
+            })
+        );
+
+        // Chain won't work here since we need the externals to be actually installed before we call their schemas
+        // This ensures the externals are a dependency of the node install, so they exist when their schemas run.
+        context.addTask(new RunSchematicTask('@angular/localize', 'ng-add', options), [installTaskId]);
 
         return tree;
     };
