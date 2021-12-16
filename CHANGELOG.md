@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.219 (2021-12-16)
+
+
+### Bug Fixes
+
+* **platform:** adding alt tags to the thumbnail component for accessibility ([#7289](https://github.com/SAP/fundamental-ngx/issues/7289)) ([37d7227](https://github.com/SAP/fundamental-ngx/commit/37d72278c2a54f42a432ec9646745c4902d155d2))
+
 ## 0.33.0-rc.218 (2021-12-16)
 
 
