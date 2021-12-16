@@ -236,7 +236,7 @@ describe('calendar test suite', () => {
             }
         });
         // rework later when i'll get answer on the question how it should work exactly
-        it('should check ability to mark next week', () => {
+        it('should check ability to mark next 7 days', () => {
             click(specialDaysCalendar + calendarOptions, 1);
             expect(doesItExist(specialDaysCalendar + markedDays)).toBe(true);
             click(specialDaysCalendar + calendarOptions, 1);
