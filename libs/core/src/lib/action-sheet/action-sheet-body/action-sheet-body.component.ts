@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, HostListener, Input, ViewEncapsulation } from '@angular/core';
-import { ActionSheetItemComponent } from '../action-sheet-item/action-sheet-item.component';
+
 import { KeyboardSupportService } from '@fundamental-ngx/core/utils';
+
+import { ActionSheetItemComponent } from '../action-sheet-item/action-sheet-item.component';
 
 /**
  * A component used to enforce a certain layout for the action sheet.
@@ -22,15 +24,16 @@ import { KeyboardSupportService } from '@fundamental-ngx/core/utils';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActionSheetBodyComponent {
-    /** Indicate if items should be in compact or compare mode. **/
+    /** Indicate if items should be in compact or compare mode. */
     @Input()
     compact = false;
 
-    /** Display in mobile view. **/
+    /** Display in mobile view. */
     @Input()
     mobile = false;
 
-    constructor(private _keyboardSupportService: KeyboardSupportService<ActionSheetItemComponent>) {}
+    /** @hidden */
+    constructor(private readonly _keyboardSupportService: KeyboardSupportService<ActionSheetItemComponent>) {}
 
     /** Handler for mouse events */
     @HostListener('click', ['$event'])

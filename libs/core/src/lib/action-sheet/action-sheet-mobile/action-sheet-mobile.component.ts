@@ -6,7 +6,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, TemplateRef } fr
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActionSheetMobileComponent {
-    /** Whenever links should be visible **/
+    /** Whenever links should be visible */
     open = false;
 
     /** @hidden */
@@ -14,8 +14,10 @@ export class ActionSheetMobileComponent {
         actionSheetBodyTemplate: TemplateRef<any>;
     } = null;
 
-    constructor(private _changeDetectionRef: ChangeDetectorRef) {}
+    /** @hidden */
+    constructor(private readonly _changeDetectionRef: ChangeDetectorRef) {}
 
+    /** @hidden */
     toggleOpenState(isOpen: boolean): void {
         this.open = isOpen;
         this._changeDetectionRef.detectChanges();
