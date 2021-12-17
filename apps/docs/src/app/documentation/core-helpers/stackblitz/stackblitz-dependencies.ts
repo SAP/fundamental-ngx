@@ -27,7 +27,7 @@ export class StackblitzDependencies {
         'typescript',
         'focus-trap',
         'fast-deep-equal',
-        'lodash'
+        'lodash-es'
     ];
 
     static getDependencies(): Record<string, any> {
