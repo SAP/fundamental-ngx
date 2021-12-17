@@ -34,7 +34,15 @@ import {
     ApprovalFlowNodeTarget
 } from './approval-flow-add-node/approval-flow-add-node.component';
 import { displayUserFn, getBlankApprovalGraphNode, getGraphNodes, isNodeTargetsIncludeId, trackByFn } from './helpers';
-import { ApprovalDataSource, ApprovalGraphNode, ApprovalNode, ApprovalProcess, ApprovalStatus, ApprovalUser } from './interfaces';
+import {
+    ApprovalDataSource,
+    ApprovalGraphNode,
+    ApprovalGraphNodeMetadata,
+    ApprovalNode,
+    ApprovalProcess,
+    ApprovalStatus,
+    ApprovalUser
+} from './interfaces';
 import { ApprovalFlowSelectTypeComponent, SelectTypeDialogFormData } from './approval-flow-select-type/approval-flow-select-type.component';
 import {
     ApprovalFlowGraph,
@@ -78,8 +86,23 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** Text label for watchers list */
     @Input() watchersLabel = 'Watchers';
 
+    /** Enables or disables ability to add parallel nodes */
+    @Input() allowAddParallelNodes = true;
+
+    /** Disables save button, save button is enabled by default */
+    @Input() disableSaveButton = false;
+
+    /** Disables exit button, exit button is enabled by default */
+    @Input() disableExitButton = false;
+
     /** Event emitted on approval flow node click. */
     @Output() nodeClick = new EventEmitter<ApprovalNode>();
+
+    /** Event emitted on approval flow node add */
+    @Output() afterNodeAdd = new EventEmitter<ApprovalNode>();
+
+    /** Event emitted on approval flow node edit */
+    @Output() afterNodeEdit = new EventEmitter<ApprovalNode>();
 
     /** @hidden */
     @ViewChild('graphContainerEl') _graphContainerEl: ElementRef;
@@ -239,6 +262,14 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         this.nodeClick.emit(node);
     }
 
+    _onNodeAdd(node: ApprovalNode): void {
+        this.afterNodeAdd.emit(node);
+    }
+
+    _onNodeEdit(node: ApprovalNode): void {
+        this.afterNodeEdit.emit(node);
+    }
+
     /** @hidden */
     _onNodeSelectionChange(event: GridListSelectionEvent<ApprovalGraphNode>): void {
         this._graph.columns.forEach(column => {
@@ -269,6 +300,11 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                 duration: 5000
             });
         });
+    }
+
+    /** Retrive metadata by node id */
+    getNodeMetadataByNodeId(nodeId: string): ApprovalGraphNodeMetadata {
+        return this._graphMetadata[nodeId];
     }
 
     /** Scroll to the next horizontal slide */
@@ -489,7 +525,9 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
             this._showMessage(node.approvalTeamId ? 'teamAddSuccess' : 'approverAddSuccess');
             this._approvalProcess.nodes.push(node);
+
             this._buildView(this._approvalProcess);
+            this._onNodeAdd(node);
         });
     }
 
@@ -515,6 +553,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             this._updateNode(updatedNode);
             this._showMessage('nodeEdit');
             this._buildView(this._approvalProcess);
+            this._onNodeEdit(node);
         });
     }
 

@@ -1,9 +1,10 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { Subscription, BehaviorSubject, Observable, of } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import {
     ApprovalDataSource,
+    ApprovalFlowComponent,
     ApprovalNode,
     ApprovalNodeActionsConfig,
     ApprovalProcess,
@@ -17,6 +18,10 @@ import {
     templateUrl: './platform-approval-flow-example.component.html'
 })
 export class PlatformApprovalFlowExampleComponent implements OnDestroy {
+    /** @hidden */
+    @ViewChild(ApprovalFlowComponent)
+    _approvalFlow: ApprovalFlowComponent;
+
     dataSource = new ApprovalFlowExampleDataSource('complex');
     examples = [
         'empty',
@@ -36,6 +41,12 @@ export class PlatformApprovalFlowExampleComponent implements OnDestroy {
         disableEdit: false,
         disableRemove: false
     }
+    /** Node action options for new (not saved) nodes */
+    nodeActionsConfigForNewNodes: ApprovalNodeActionsConfig = {
+        disableAddBefore: false,
+        disableAddAfter: false,
+        disableAddParallel: false
+    };
     allStatuses = [
         'in progress',
         'not started',
@@ -47,7 +58,16 @@ export class PlatformApprovalFlowExampleComponent implements OnDestroy {
         'not started'
     ];
 
+    /** @hidden */
+    disableSaveButton = false;
+
+    /** @hidden */
+    disableExitButton = false;
+
     private _subscriptions = new Subscription();
+
+    /** @hidden */
+    private newNodes: ApprovalNode[] = [];
 
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
@@ -58,8 +78,7 @@ export class PlatformApprovalFlowExampleComponent implements OnDestroy {
 
 
         this._subscriptions.add(
-            this.dataSource.fetch()
-                .pipe(take(1))
+            this.fetchOneFromDatasource()
                 .subscribe(approvalGraph => {
                     approvalGraph.nodes.forEach(node => {
                         node.disableActions = state;
@@ -72,18 +91,32 @@ export class PlatformApprovalFlowExampleComponent implements OnDestroy {
 
     toggleSpecificNodeAction(field: keyof ApprovalNodeActionsConfig, state: boolean): void {
         this._subscriptions.add(
-            this.dataSource.fetch()
-                .pipe(take(1))
-                .subscribe(approvalGraph => {
-                    approvalGraph.nodes.forEach(node => {
-                        node.actionsConfig = {
-                            ...node.actionsConfig,
-                            [field]: state
-                        };
-                    });
+            this.fetchOneFromDatasource().subscribe((approvalGraph) => {
+                approvalGraph.nodes.forEach((node) => {
+                    node.actionsConfig = {
+                        ...node.actionsConfig,
+                        [field]: state
+                    };
+                });
 
-                    this.dataSource.updateApprovals(approvalGraph.nodes);
-                })
+                this.dataSource.updateApprovals(approvalGraph.nodes);
+            })
+        );
+    }
+
+    newNodeSettingsChange(): void {
+        this._subscriptions.add(
+            this.fetchOneFromDatasource().subscribe((approvalGraph) => {
+                approvalGraph.nodes.forEach((node) => {
+                    if (this.newNodes.find((newNode) => newNode.id === node.id)) {
+                        const meta = this._approvalFlow.getNodeMetadataByNodeId(node.id);
+
+                        meta.canAddNodeAfter = !this.nodeActionsConfigForNewNodes.disableAddAfter;
+                        meta.canAddNodeBefore = !this.nodeActionsConfigForNewNodes.disableAddBefore;
+                        meta.canAddParallel = !this.nodeActionsConfigForNewNodes.disableAddParallel;
+                    }
+                });
+            })
         );
     }
 
@@ -91,8 +124,24 @@ export class PlatformApprovalFlowExampleComponent implements OnDestroy {
         console.log('Node click handler', node);
     }
 
+    /** Event listener for afterNodeAdd event */
+    afterNodeAdd(node: ApprovalNode): void {
+        this.newNodes.push(node);
+
+        this.newNodeSettingsChange();
+    }
+
+    /** Event listener for afterNodeEdit event */
+    afterNodeEdit(node: ApprovalNode): void {
+        this.newNodeSettingsChange();
+    }
+
     setNotStarted(): void {
         this.dataSource.setDefaultStatus(this.setNotStartedStatuses ? 'not started' : null);
+    }
+
+    private fetchOneFromDatasource(): Observable<ApprovalProcess> {
+        return this.dataSource.fetch().pipe(take(1));
     }
 }
 
@@ -218,6 +267,7 @@ const users: ApprovalUser[] = [
         imgUrl: 'https://randomuser.me/api/portraits/women/55.jpg'
     }
 ];
+
 const usersMap = {};
 users.forEach(u => usersMap[u.id] = u);
 
