@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
-import * as standardlinkSrc from '!raw-loader!./platform-link-examples/platform-link-standard-example.component.html';
-import * as emphasizedlinkSrc from '!raw-loader!./platform-link-examples/platform-link-emphasized-example.component.html';
-import * as disabledlinkSrc from '!raw-loader!./platform-link-examples/platform-link-disabled-example.component.html';
-import * as disabledEmphasizedlinkSrc from '!raw-loader!./platform-link-examples/platform-link-disabled-emphasized-example.component.html';
-import * as invertedlinkSrc from '!raw-loader!./platform-link-examples/platform-link-inverted-example.component.html';
-import * as truncatedlinkSrc from '!raw-loader!./platform-link-examples/platform-link-truncated-example.component.html';
-import * as iconlinkSrc from '!raw-loader!./platform-link-examples/platform-link-icon-example.component.html';
+import standardlinkSrc from '!./platform-link-examples/platform-link-standard-example.component.html?raw';
+import emphasizedlinkSrc from '!./platform-link-examples/platform-link-emphasized-example.component.html?raw';
+import disabledlinkSrc from '!./platform-link-examples/platform-link-disabled-example.component.html?raw';
+import disabledEmphasizedlinkSrc from '!./platform-link-examples/platform-link-disabled-emphasized-example.component.html?raw';
+import invertedlinkSrc from '!./platform-link-examples/platform-link-inverted-example.component.html?raw';
+import truncatedlinkSrc from '!./platform-link-examples/platform-link-truncated-example.component.html?raw';
+import iconlinkSrc from '!./platform-link-examples/platform-link-icon-example.component.html?raw';
 
 @Component({
     selector: 'app-link',

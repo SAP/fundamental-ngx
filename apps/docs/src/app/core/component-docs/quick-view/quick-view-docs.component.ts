@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
-import * as baseQuickViewH from '!raw-loader!./examples/quick-view-base-example.component.html';
-import * as baseQuickViewTs from '!raw-loader!./examples/quick-view-base-example.component.ts';
-import * as popoverQuickViewH from '!raw-loader!./examples/quick-view-popover-example.component.html';
-import * as popoverQuickViewTs from '!raw-loader!./examples/quick-view-popover-example.component.ts';
-import * as dialogQuickViewH from '!raw-loader!./examples/quick-view-dialog-example.component.html';
-import * as dialogQuickViewTs from '!raw-loader!./examples/quick-view-dialog-example.component.ts';
+import baseQuickViewH from '!./examples/quick-view-base-example.component.html?raw';
+import baseQuickViewTs from '!./examples/quick-view-base-example.component.ts?raw';
+import popoverQuickViewH from '!./examples/quick-view-popover-example.component.html?raw';
+import popoverQuickViewTs from '!./examples/quick-view-popover-example.component.ts?raw';
+import dialogQuickViewH from '!./examples/quick-view-dialog-example.component.html?raw';
+import dialogQuickViewTs from '!./examples/quick-view-dialog-example.component.ts?raw';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 

@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
-import * as aliSrc from '!raw-loader!./platform-action-list-item-examples/platform-action-list-item-example.component.html';
-import * as aliSrcTs from '!raw-loader!./platform-action-list-item-examples/platform-action-list-item-example.component';
-import * as borderLessALISrc from '!raw-loader!./platform-action-list-item-examples/platform-action-list-item-border-less-example.component.html';
-import * as borderLessALITs from '!raw-loader!./platform-action-list-item-examples/platform-action-list-item-border-less-example.component';
+import aliSrc from '!./platform-action-list-item-examples/platform-action-list-item-example.component.html?raw';
+import aliSrcTs from '!./platform-action-list-item-examples/platform-action-list-item-example.component?raw';
+import borderLessALISrc from '!./platform-action-list-item-examples/platform-action-list-item-border-less-example.component.html?raw';
+import borderLessALITs from '!./platform-action-list-item-examples/platform-action-list-item-border-less-example.component?raw';
 
 @Component({
     selector: 'app-action-list-item',

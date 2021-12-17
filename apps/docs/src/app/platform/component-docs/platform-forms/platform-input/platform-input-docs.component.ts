@@ -2,18 +2,18 @@ import { Component } from '@angular/core';
 
 import { ExampleFile } from '../../../../documentation/core-helpers/code-example/example-file';
 
-import * as platformInputDefaultTypesSrc from '!raw-loader!./platform-input-example/platform-input-example.component.html';
-import * as platformInputDefaultTypesTsSrc from '!raw-loader!./platform-input-example/platform-input-example.component';
+import platformInputDefaultTypesSrc from '!./platform-input-example/platform-input-example.component.html?raw';
+import platformInputDefaultTypesTsSrc from '!./platform-input-example/platform-input-example.component?raw';
 
-import * as platformInputReactiveFormValidationTypesSrc from '!raw-loader!./platform-input-example/platform-input-reactive-validation-example.component.html';
-import * as platformInputReactiveFormValidationTypesTsSrc from '!raw-loader!./platform-input-example/platform-input-reactive-validation-example.component';
+import platformInputReactiveFormValidationTypesSrc from '!./platform-input-example/platform-input-reactive-validation-example.component.html?raw';
+import platformInputReactiveFormValidationTypesTsSrc from '!./platform-input-example/platform-input-reactive-validation-example.component?raw';
 
-import * as platformInputAutoCompleteFormValidationTypesSrc from '!raw-loader!./platform-input-example/platform-input-auto-complete-validation-example.component.html';
-import * as platformInputAutoCompleteFormValidationTypesTsSrc from '!raw-loader!./platform-input-example/platform-input-auto-complete-validation-example.component';
-import * as platformInputAutoCompleteFormValidationTypesScssSrc from '!raw-loader!./platform-input-example/platform-input-auto-complete-validation-example.component.scss';
+import platformInputAutoCompleteFormValidationTypesSrc from '!./platform-input-example/platform-input-auto-complete-validation-example.component.html?raw';
+import platformInputAutoCompleteFormValidationTypesTsSrc from '!./platform-input-example/platform-input-auto-complete-validation-example.component?raw';
+import platformInputAutoCompleteFormValidationTypesScssSrc from '!./platform-input-example/platform-input-auto-complete-validation-example.component.scss?raw';
 
-import * as platformInputReactiveFormMinMaxValidationTypesSrc from '!raw-loader!./platform-input-example/platform-input-reactive-min-max-validation-example.component.html';
-import * as platformInputReactiveFormMinMaxValidationTypesTsSrc from '!raw-loader!./platform-input-example/platform-input-reactive-min-max-validation-example.component';
+import platformInputReactiveFormMinMaxValidationTypesSrc from '!./platform-input-example/platform-input-reactive-min-max-validation-example.component.html?raw';
+import platformInputReactiveFormMinMaxValidationTypesTsSrc from '!./platform-input-example/platform-input-reactive-min-max-validation-example.component?raw';
 
 @Component({
     selector: 'fd-platform-input-docs',

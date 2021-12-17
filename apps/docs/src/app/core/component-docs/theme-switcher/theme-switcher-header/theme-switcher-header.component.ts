@@ -7,18 +7,17 @@ import { ExampleFile } from '../../../../documentation/core-helpers/code-example
 })
 export class ThemeSwitcherHeaderComponent {
     file: ExampleFile = {
-        code: {
-            default: `{
-    "glob": "**/css_variables.css",
-    "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/",
-    "output": "./assets/theming-base/"
-},
-{
-    "glob": "**/*",
-    "input": "./node_modules/fundamental-styles/dist/theming/",
-    "output": "./assets/fundamental-styles-theming/"
-}`
-        },
+        code: `{
+                "glob": "**/css_variables.css",
+                "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/",
+                "output": "./assets/theming-base/"
+            },
+            {
+                "glob": "**/*",
+                "input": "./node_modules/fundamental-styles/dist/theming/",
+                "output": "./assets/fundamental-styles-theming/"
+            }
+        `,
         language: 'json'
     };
 }

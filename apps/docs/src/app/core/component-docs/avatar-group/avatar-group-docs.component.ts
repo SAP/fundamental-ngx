@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 
-import * as avatarGroupIndividualTs from '!raw-loader!./examples/avatar-group-individual-type-example.component.ts';
-import * as avatarGroupIndividualHtml from '!raw-loader!./examples/avatar-group-individual-type-example.component.html';
-import * as avatarGroupGroupTs from '!raw-loader!./examples/avatar-group-group-type-example.component.ts';
-import * as avatarGroupGroupHtml from '!raw-loader!./examples/avatar-group-group-type-example.component.html';
-import * as avatarGroupDataServiceTs from '!raw-loader!./examples/avatar-group-data-example.service.ts';
+import avatarGroupIndividualTs from '!./examples/avatar-group-individual-type-example.component.ts?raw';
+import avatarGroupIndividualHtml from '!./examples/avatar-group-individual-type-example.component.html?raw';
+import avatarGroupGroupTs from '!./examples/avatar-group-group-type-example.component.ts?raw';
+import avatarGroupGroupHtml from '!./examples/avatar-group-group-type-example.component.html?raw';
+import avatarGroupDataServiceTs from '!./examples/avatar-group-data-example.service.ts?raw';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 

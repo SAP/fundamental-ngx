@@ -1,8 +1,7 @@
-import * as polyfills from '!raw-loader!./code-example-stack/polyfills.ts';
-import * as main from '!raw-loader!./code-example-stack/main.ts';
-import * as styles from '!raw-loader!./code-example-stack/styles.scss';
-/** Importing a JSON broken at the moment, https://github.com/webpack-contrib/raw-loader/issues/91 */
-import * as tsconfig from '!raw-loader!./code-example-stack/tsconfig.txt';
+import polyfills from '!./code-example-stack/polyfills.ts?raw';
+import main from '!./code-example-stack/main.ts?raw';
+import styles from '!./code-example-stack/styles.scss?raw';
+import tsconfig from '!./code-example-stack/tsconfig.json?raw';
 
 import sdk from '@stackblitz/sdk';
 import { Inject, Injectable } from '@angular/core';
@@ -31,15 +30,15 @@ export class StackblitzService {
     get defaultProjectInfo(): StackblitzProject {
         return {
             files: {
-                'src/main.ts': main.default,
-                'src/polyfills.ts': polyfills.default,
-                'src/styles.scss': styles.default,
+                'src/main.ts': main,
+                'src/polyfills.ts': polyfills,
+                'src/styles.scss': styles,
                 'angular.json': StackblitzDependencies.getAngularJson(),
                 /**
                  * We're providing custom tsconfig with "enableIvy": false due to the StackBlitz issue
                  * https://github.com/stackblitz/core/issues/1364
                  */
-                'tsconfig.json': tsconfig.default
+                'tsconfig.json': tsconfig
             },
             title: 'Fundamental-NGX Example',
             description: 'Generated for you by fundamental-ngx team',
@@ -68,8 +67,7 @@ export class StackblitzService {
             } else if (example.language === 'scss') {
                 generatedFiles = this.handleScssFile(example);
             } else if (example.path !== undefined) {
-                defaultProjectInfo.files[`${example.path}/${example.fileName}.${example.language}`] =
-                    example.code.default;
+                defaultProjectInfo.files[`${example.path}/${example.fileName}.${example.language}`] = example.code;
                 return;
             }
 
@@ -195,13 +193,13 @@ export class ${componentName} {}`;
 
         generatedFile.html = {
             path: this.getFilePath(file, 'html'),
-            code: file.code.default
+            code: file.code
         };
 
         if (file.scssFileCode) {
             generatedFile.scss = {
                 path: this.getFilePath(file, 'scss'),
-                code: file.scssFileCode ? file.scssFileCode.default : ''
+                code: file.scssFileCode || ''
             };
         }
 
@@ -210,9 +208,7 @@ export class ${componentName} {}`;
         if (this.isStandAlone(exampleFiles, file)) {
             generatedFile.ts = {
                 path: this.getFilePath(file, 'ts'),
-                code: file.typescriptFileCode
-                    ? file.typescriptFileCode.default
-                    : this.getDefaultTypescriptFile(file.fileName)
+                code: file.typescriptFileCode || this.getDefaultTypescriptFile(file.fileName)
             };
         }
         return generatedFile;
@@ -224,13 +220,13 @@ export class ${componentName} {}`;
         if (file.scssFileCode) {
             generatedFile.scss = {
                 path: this.getFilePath(file, 'scss'),
-                code: file.scssFileCode ? file.scssFileCode.default : ''
+                code: file.scssFileCode || ''
             };
         }
 
         generatedFile.ts = {
             path: this.getFilePath(file, 'ts'),
-            code: file.code.default
+            code: file.code
         };
 
         return generatedFile;
@@ -241,7 +237,7 @@ export class ${componentName} {}`;
 
         generatedFile.scss = {
             path: this.getFilePath(file, 'scss'),
-            code: file.code.default
+            code: file.code
         };
 
         return generatedFile;

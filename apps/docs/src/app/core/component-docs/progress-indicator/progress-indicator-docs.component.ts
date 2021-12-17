@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import * as ProgressIndicatorDefaultComponent from '!raw-loader!./example/progress-indicator-default.component.html';
-import * as ProgressIndicatorDefaultComponentTs from '!raw-loader!./example/progress-indicator-default.component.ts';
-import * as ProgressIndicatorTruncationComponent from '!raw-loader!./example/progress-indicator-truncation.component.html';
-import * as ProgressIndicatorTruncationComponentTs from '!raw-loader!./example/progress-indicator-truncation.component.ts';
-import * as ProgressIndicatorAnimationComponent from '!raw-loader!./example/progress-indicator-animation.component.html';
-import * as ProgressIndicatorAnimationComponentTs from '!raw-loader!./example/progress-indicator-animation.component.ts';
-import * as ProgressIndicatorStateComponent from '!raw-loader!./example/progress-indicator-state.component.html';
-import * as ProgressIndicatorStateComponentTs from '!raw-loader!./example/progress-indicator-state.component.ts';
+import ProgressIndicatorDefaultComponent from '!./example/progress-indicator-default.component.html?raw';
+import ProgressIndicatorDefaultComponentTs from '!./example/progress-indicator-default.component.ts?raw';
+import ProgressIndicatorTruncationComponent from '!./example/progress-indicator-truncation.component.html?raw';
+import ProgressIndicatorTruncationComponentTs from '!./example/progress-indicator-truncation.component.ts?raw';
+import ProgressIndicatorAnimationComponent from '!./example/progress-indicator-animation.component.html?raw';
+import ProgressIndicatorAnimationComponentTs from '!./example/progress-indicator-animation.component.ts?raw';
+import ProgressIndicatorStateComponent from '!./example/progress-indicator-state.component.html?raw';
+import ProgressIndicatorStateComponentTs from '!./example/progress-indicator-state.component.ts?raw';
 
 @Component({
     selector: 'fd-progress-indicator-docs',

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import * as InfoLableDefaultExample from '!raw-loader!./examples/info-label-default-example.component.html';
-import * as InfoLableTextExample from '!raw-loader!./examples/info-label-text-example.component.html';
-import * as InfoLabelIconTextExample from '!raw-loader!./examples/info-label-text-icon-example.component.html';
-import * as InfoLableNumericIconExample from '!raw-loader!./examples/info-label-icon-numeric-example.component.html';
+import InfoLableDefaultExample from '!./examples/info-label-default-example.component.html?raw';
+import InfoLableTextExample from '!./examples/info-label-text-example.component.html?raw';
+import InfoLabelIconTextExample from '!./examples/info-label-text-icon-example.component.html?raw';
+import InfoLableNumericIconExample from '!./examples/info-label-icon-numeric-example.component.html?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

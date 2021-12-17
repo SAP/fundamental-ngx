@@ -1,21 +1,21 @@
 import { Component } from '@angular/core';
 
-import * as platformMultiInputSimpleExample from '!raw-loader!./platform-multi-input-example/platform-multi-input-example.component.html';
-import * as platformMultiInputSimpmleExampleTs from '!raw-loader!./platform-multi-input-example/platform-multi-input-example.component.ts';
-import * as platformMultiInputComplexExample from '!raw-loader!./platform-multi-input-example/platform-multi-input-complex-example.component.html';
-import * as platformMultiInputComplexExampleTs from '!raw-loader!./platform-multi-input-example/platform-multi-input-complex-example.component.ts';
-import * as platformMultiInputGroupedExample from '!raw-loader!./platform-multi-input-example/platform-multi-input-grouped-example.component.html';
-import * as platformMultiInputGroupedExampleTs from '!raw-loader!./platform-multi-input-example/platform-multi-input-grouped-example.component.ts';
-import * as platformMultiInputDeclineExample from '!raw-loader!./platform-multi-input-example/platform-multi-input-decline-example.component.html';
-import * as platformMultiInputDeclineExampleTs from '!raw-loader!./platform-multi-input-example/platform-multi-input-decline-example.component.ts';
-import * as platformMultiInputDisableExample from '!raw-loader!./platform-multi-input-example/platform-multi-input-disabled.component.html';
-import * as platformMultiInputDisableExampleTs from '!raw-loader!./platform-multi-input-example/platform-multi-input-disabled.component.ts';
-import * as platformMultiInputMobileExample from '!raw-loader!./platform-multi-input-example/platform-multi-input-mobile-example.component.html';
-import * as platformMultiInputMobileExampleTs from '!raw-loader!./platform-multi-input-example/platform-multi-input-mobile-example.component.ts';
-import * as platformMultiInputReactiveExample from '!raw-loader!./platform-multi-input-example/platform-multi-input-reactive-example.component.html';
-import * as platformMultiInputReactiveExampleTs from '!raw-loader!./platform-multi-input-example/platform-multi-input-reactive-example.component.ts';
-import * as PlatformMultiInputCompactExampleComponent from '!raw-loader!./platform-multi-input-example/platform-multi-input-compact-example.component.html';
-import * as PlatformMultiInputCompactExampleComponentTs from '!raw-loader!./platform-multi-input-example/platform-multi-input-compact-example.component.ts';
+import platformMultiInputSimpleExample from '!./platform-multi-input-example/platform-multi-input-example.component.html?raw';
+import platformMultiInputSimpmleExampleTs from '!./platform-multi-input-example/platform-multi-input-example.component.ts?raw';
+import platformMultiInputComplexExample from '!./platform-multi-input-example/platform-multi-input-complex-example.component.html?raw';
+import platformMultiInputComplexExampleTs from '!./platform-multi-input-example/platform-multi-input-complex-example.component.ts?raw';
+import platformMultiInputGroupedExample from '!./platform-multi-input-example/platform-multi-input-grouped-example.component.html?raw';
+import platformMultiInputGroupedExampleTs from '!./platform-multi-input-example/platform-multi-input-grouped-example.component.ts?raw';
+import platformMultiInputDeclineExample from '!./platform-multi-input-example/platform-multi-input-decline-example.component.html?raw';
+import platformMultiInputDeclineExampleTs from '!./platform-multi-input-example/platform-multi-input-decline-example.component.ts?raw';
+import platformMultiInputDisableExample from '!./platform-multi-input-example/platform-multi-input-disabled.component.html?raw';
+import platformMultiInputDisableExampleTs from '!./platform-multi-input-example/platform-multi-input-disabled.component.ts?raw';
+import platformMultiInputMobileExample from '!./platform-multi-input-example/platform-multi-input-mobile-example.component.html?raw';
+import platformMultiInputMobileExampleTs from '!./platform-multi-input-example/platform-multi-input-mobile-example.component.ts?raw';
+import platformMultiInputReactiveExample from '!./platform-multi-input-example/platform-multi-input-reactive-example.component.html?raw';
+import platformMultiInputReactiveExampleTs from '!./platform-multi-input-example/platform-multi-input-reactive-example.component.ts?raw';
+import PlatformMultiInputCompactExampleComponent from '!./platform-multi-input-example/platform-multi-input-compact-example.component.html?raw';
+import PlatformMultiInputCompactExampleComponentTs from '!./platform-multi-input-example/platform-multi-input-compact-example.component.ts?raw';
 
 import { ExampleFile } from '../../../../documentation/core-helpers/code-example/example-file';
 

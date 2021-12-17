@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 
-import * as smallProductSwitchH from '!raw-loader!./examples/product-switch-small-example.component.html';
-import * as smallProductSwitchTs from '!raw-loader!./examples/product-switch-small-example.component.ts';
+import smallProductSwitchH from '!./examples/product-switch-small-example.component.html?raw';
+import smallProductSwitchTs from '!./examples/product-switch-small-example.component.ts?raw';
 
-import * as productSwitchDndH from '!raw-loader!./examples/product-switch-dnd-example.component.html';
-import * as productSwitchDndTs from '!raw-loader!./examples/product-switch-dnd-example.component.ts';
+import productSwitchDndH from '!./examples/product-switch-dnd-example.component.html?raw';
+import productSwitchDndTs from '!./examples/product-switch-dnd-example.component.ts?raw';
 
-import * as listProductSwitchH from '!raw-loader!./examples/product-switch-list/product-switch-list-example.component.html';
-import * as listProductSwitchTs from '!raw-loader!./examples/product-switch-list/product-switch-list-example.component.ts';
+import listProductSwitchH from '!./examples/product-switch-list/product-switch-list-example.component.html?raw';
+import listProductSwitchTs from '!./examples/product-switch-list/product-switch-list-example.component.ts?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

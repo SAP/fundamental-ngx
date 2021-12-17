@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
-import * as messageStripExampleHtml from '!raw-loader!./examples/message-strip-example.component.html';
-import * as messageStripExampleScs from '!raw-loader!./examples/message-strip-example.component.scss';
-import * as messageStripNoIconExampleHtml from '!raw-loader!./examples/message-strip-noicon-example.component.html';
-import * as messageStripWidthExampleHtml from '!raw-loader!./examples/message-strip-width-example.component.html';
+import messageStripExampleHtml from '!./examples/message-strip-example.component.html?raw';
+import messageStripExampleScs from '!./examples/message-strip-example.component.scss?raw';
+import messageStripNoIconExampleHtml from '!./examples/message-strip-noicon-example.component.html?raw';
+import messageStripWidthExampleHtml from '!./examples/message-strip-width-example.component.html?raw';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 

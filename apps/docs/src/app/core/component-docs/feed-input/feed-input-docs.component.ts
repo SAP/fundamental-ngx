@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 
-import * as feedInputH from '!raw-loader!./examples/feed-input-example/feed-input-example.component.html';
-import * as feedInputPlaceholderH from '!raw-loader!./examples/feed-input-placeholder-example/feed-input-placeholder-example.component.html';
-import * as feedInputNoAvatarH from '!raw-loader!./examples/feed-input-no-avatar-example/feed-input-no-avatar-example.component.html';
-import * as feedInputDisabledH from '!raw-loader!./examples/feed-input-disabled-example/feed-input-disabled-example.component.html';
-import * as feedInputMaxHeightH from '!raw-loader!./examples/feed-input-grow-example/feed-input-grow-example.component.html';
+import feedInputH from '!./examples/feed-input-example/feed-input-example.component.html?raw';
+import feedInputPlaceholderH from '!./examples/feed-input-placeholder-example/feed-input-placeholder-example.component.html?raw';
+import feedInputNoAvatarH from '!./examples/feed-input-no-avatar-example/feed-input-no-avatar-example.component.html?raw';
+import feedInputDisabledH from '!./examples/feed-input-disabled-example/feed-input-disabled-example.component.html?raw';
+import feedInputMaxHeightH from '!./examples/feed-input-grow-example/feed-input-grow-example.component.html?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import * as fixedCardLayoutH from '!raw-loader!./examples/default/fixed-card-layout-examples.component.html';
-import * as disabledDragFixedCardLayoutH from '!raw-loader!./examples/disabled-drag-drop/fixed-card-layout-disabled-drag.component.html';
-import * as disabledDragFixedCardLayoutTs from '!raw-loader!./examples/disabled-drag-drop/fixed-card-layout-disabled-drag.component.ts';
-import * as mobileFixedCardlayoutH from '!raw-loader!./examples/mobile/fixed-card-layout-mobile-examples.component.html';
-import * as mobileFixedCardlayoutTs from '!raw-loader!./examples/mobile/fixed-card-layout-mobile-examples.component.ts';
+import fixedCardLayoutH from '!./examples/default/fixed-card-layout-examples.component.html?raw';
+import disabledDragFixedCardLayoutH from '!./examples/disabled-drag-drop/fixed-card-layout-disabled-drag.component.html?raw';
+import disabledDragFixedCardLayoutTs from '!./examples/disabled-drag-drop/fixed-card-layout-disabled-drag.component.ts?raw';
+import mobileFixedCardlayoutH from '!./examples/mobile/fixed-card-layout-mobile-examples.component.html?raw';
+import mobileFixedCardlayoutTs from '!./examples/mobile/fixed-card-layout-mobile-examples.component.ts?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

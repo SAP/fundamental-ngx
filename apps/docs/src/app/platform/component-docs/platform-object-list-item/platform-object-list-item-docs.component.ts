@@ -2,15 +2,15 @@ import { Component } from '@angular/core';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
-import * as borderLessOLISrc from '!raw-loader!./platform-object-list-item-examples/platform-object-list-item-border-less-example.component.html';
-import * as borderLessOLITs from '!raw-loader!./platform-object-list-item-examples/platform-object-list-item-border-less-example.component.ts';
-import * as rowSelectionOLISrc from '!raw-loader!./platform-object-list-item-examples/platform-object-list-item-with-row-selection-example.component.html';
-import * as rowSelectionOLITs from '!raw-loader!./platform-object-list-item-examples/platform-object-list-item-with-row-selection-example.component.ts';
-import * as declarativeOLISrc from '!raw-loader!./platform-object-list-item-examples/platform-object-list-item-example.component.html';
-import * as rowNavigationOLISrc from '!raw-loader!./platform-object-list-item-examples/platform-object-list-item-with-row-navigation-example.component.html';
-import * as rowNavigationOLITs from '!raw-loader!./platform-object-list-item-examples/platform-object-list-item-with-row-navigation-example.component.ts';
-import * as rowNavigationAndSelectionOLISrc from '!raw-loader!./platform-object-list-item-examples/platform-object-list-item-with-row-selection-and-navigation-example.component.html';
-import * as rowNavigationAndSelectionOLITs from '!raw-loader!./platform-object-list-item-examples/platform-object-list-item-with-row-selection-and-navigation-example.component.ts';
+import borderLessOLISrc from '!./platform-object-list-item-examples/platform-object-list-item-border-less-example.component.html?raw';
+import borderLessOLITs from '!./platform-object-list-item-examples/platform-object-list-item-border-less-example.component.ts?raw';
+import rowSelectionOLISrc from '!./platform-object-list-item-examples/platform-object-list-item-with-row-selection-example.component.html?raw';
+import rowSelectionOLITs from '!./platform-object-list-item-examples/platform-object-list-item-with-row-selection-example.component.ts?raw';
+import declarativeOLISrc from '!./platform-object-list-item-examples/platform-object-list-item-example.component.html?raw';
+import rowNavigationOLISrc from '!./platform-object-list-item-examples/platform-object-list-item-with-row-navigation-example.component.html?raw';
+import rowNavigationOLITs from '!./platform-object-list-item-examples/platform-object-list-item-with-row-navigation-example.component.ts?raw';
+import rowNavigationAndSelectionOLISrc from '!./platform-object-list-item-examples/platform-object-list-item-with-row-selection-and-navigation-example.component.html?raw';
+import rowNavigationAndSelectionOLITs from '!./platform-object-list-item-examples/platform-object-list-item-with-row-selection-and-navigation-example.component.ts?raw';
 
 @Component({
     selector: 'app-object-list-item',

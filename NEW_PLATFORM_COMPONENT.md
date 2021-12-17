@@ -139,7 +139,7 @@ Then copy/paste this block to `poster-docs.component.ts`:
 ```TypeScript
 import { Component } from '@angular/core';
 
-import * as posterHtml from '!raw-loader!./examples/poster-example/poster-example.component.ts';
+import posterHtml from '!./examples/poster-example/poster-example.component.ts?raw';
 
 @Component({
     selector: 'app-poster',

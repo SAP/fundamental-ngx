@@ -2,16 +2,16 @@ import { Component } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
-import * as inputGroupButtonSrc from '!raw-loader!./examples/input-group-button-example.component.html';
-import * as inputGroupIconSrc from '!raw-loader!./examples/input-group-icon-example.component.html';
-import * as inputGroupSearchSrc from '!raw-loader!./examples/input-group-search-example/input-group-search-example.component.html';
-import * as inputGroupSearchSrcTs from '!raw-loader!./examples/input-group-search-example/input-group-search-example.component.ts';
-import * as inputGroupTextSrc from '!raw-loader!./examples/input-group-text-example.component.html';
-import * as inputGroupTextCompactSrc from '!raw-loader!./examples/input-group-text-compact-example.component.html';
-import * as formInputTsSrc from '!raw-loader!./examples/input-group-form-example/input-group-form-example.component.ts';
-import * as formInputHtmlSrc from '!raw-loader!./examples/input-group-form-example/input-group-form-example.component.html';
-import * as complexInputHtml from '!raw-loader!./examples/input-group-complex-example.component.html';
-import * as statesInputHtml from '!raw-loader!./examples/input-group-states-example.component.html';
+import inputGroupButtonSrc from '!./examples/input-group-button-example.component.html?raw';
+import inputGroupIconSrc from '!./examples/input-group-icon-example.component.html?raw';
+import inputGroupSearchSrc from '!./examples/input-group-search-example/input-group-search-example.component.html?raw';
+import inputGroupSearchSrcTs from '!./examples/input-group-search-example/input-group-search-example.component.ts?raw';
+import inputGroupTextSrc from '!./examples/input-group-text-example.component.html?raw';
+import inputGroupTextCompactSrc from '!./examples/input-group-text-compact-example.component.html?raw';
+import formInputTsSrc from '!./examples/input-group-form-example/input-group-form-example.component.ts?raw';
+import formInputHtmlSrc from '!./examples/input-group-form-example/input-group-form-example.component.html?raw';
+import complexInputHtml from '!./examples/input-group-complex-example.component.html?raw';
+import statesInputHtml from '!./examples/input-group-states-example.component.html?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { Icons } from '../../../documentation/utilities/icons';
 

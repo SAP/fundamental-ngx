@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import * as ObjectIdentifierDefaultExample from '!raw-loader!./examples/object-identifier-default-example.component.html';
-import * as ObjectIdentifierLinksExample from '!raw-loader!./examples/object-identifier-link-example.component.html';
-import * as ObjectIdentifierBoldExampleHtml from '!raw-loader!./examples/object-identifier-bold-example.component.html';
-import * as ObjectIdentifierDescriptiveExampleHtml from '!raw-loader!./examples/object-identifier-descriptive-example.component.html';
-import * as ObjectIdentifierTableExampleHtml from '!raw-loader!./examples/object-identifier-table-example.component.html';
-import * as ObjectIdentifierTableExampleTs from '!raw-loader!./examples/object-identifier-table-example.component.ts';
+import ObjectIdentifierDefaultExample from '!./examples/object-identifier-default-example.component.html?raw';
+import ObjectIdentifierLinksExample from '!./examples/object-identifier-link-example.component.html?raw';
+import ObjectIdentifierBoldExampleHtml from '!./examples/object-identifier-bold-example.component.html?raw';
+import ObjectIdentifierDescriptiveExampleHtml from '!./examples/object-identifier-descriptive-example.component.html?raw';
+import ObjectIdentifierTableExampleHtml from '!./examples/object-identifier-table-example.component.html?raw';
+import ObjectIdentifierTableExampleTs from '!./examples/object-identifier-table-example.component.ts?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

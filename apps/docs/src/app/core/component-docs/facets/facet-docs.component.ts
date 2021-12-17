@@ -2,15 +2,15 @@ import { Component } from '@angular/core';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
-import * as FacetGroupExample from '!raw-loader!./facet-examples/facet-group-example.component.html';
-import * as FormFacetExample from '!raw-loader!./facet-examples/form-facet-example.component.html';
-import * as FormLinkFacetExample from '!raw-loader!./facet-examples/form-link-facet-example.component.html';
-import * as KeyValueFacetExample from '!raw-loader!./facet-examples/key-value-facet-example.component.html';
-import * as KeyValueFacetAlignmentExample from '!raw-loader!./facet-examples/key-value-facet-alignment-example.component.html';
-import * as ImageFacetExample from '!raw-loader!./facet-examples/image-facet-example.component.html';
-import * as RatingIndicatorFacetExample from '!raw-loader!./facet-examples/rating-indicator-facet-example.component.html';
-import * as CustomFacetExample from '!raw-loader!./facet-examples/custom-facet-example.component.html';
-import * as CustomFacetExampleTsCode from '!raw-loader!./facet-examples/custom-facet-example.component.ts';
+import FacetGroupExample from '!./facet-examples/facet-group-example.component.html?raw';
+import FormFacetExample from '!./facet-examples/form-facet-example.component.html?raw';
+import FormLinkFacetExample from '!./facet-examples/form-link-facet-example.component.html?raw';
+import KeyValueFacetExample from '!./facet-examples/key-value-facet-example.component.html?raw';
+import KeyValueFacetAlignmentExample from '!./facet-examples/key-value-facet-alignment-example.component.html?raw';
+import ImageFacetExample from '!./facet-examples/image-facet-example.component.html?raw';
+import RatingIndicatorFacetExample from '!./facet-examples/rating-indicator-facet-example.component.html?raw';
+import CustomFacetExample from '!./facet-examples/custom-facet-example.component.html?raw';
+import CustomFacetExampleTsCode from '!./facet-examples/custom-facet-example.component.ts?raw';
 
 @Component({
     selector: 'app-facet',

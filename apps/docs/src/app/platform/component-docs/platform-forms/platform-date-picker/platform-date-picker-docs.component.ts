@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 
-import * as datepickerHtml from '!raw-loader!./platform-date-picker-examples/platform-date-picker-example.component.html';
-import * as datepickerts from '!raw-loader!./platform-date-picker-examples/platform-date-picker-example.component';
-import * as datepickeri18nHtml from '!raw-loader!./platform-date-picker-examples/platform-date-picker-i18n-example.component.html';
-import * as datepickeri18nTs from '!raw-loader!./platform-date-picker-examples/platform-date-picker-i18n-example.component';
-import * as datepickerDisabledFnCodeTs from '!raw-loader!./platform-date-picker-examples/platform-date-picker-disable-func-example.component';
-import * as datepickerDisabledFnHtml from '!raw-loader!./platform-date-picker-examples/platform-date-picker-disable-func-example.component.html';
-import * as datepickerFormatTs from '!raw-loader!./platform-date-picker-examples/platform-date-picker-format-example.component';
-import * as datepickerFormatHtml from '!raw-loader!./platform-date-picker-examples/platform-date-picker-format-example.component.html';
+import datepickerHtml from '!./platform-date-picker-examples/platform-date-picker-example.component.html?raw';
+import datepickerts from '!./platform-date-picker-examples/platform-date-picker-example.component?raw';
+import datepickeri18nHtml from '!./platform-date-picker-examples/platform-date-picker-i18n-example.component.html?raw';
+import datepickeri18nTs from '!./platform-date-picker-examples/platform-date-picker-i18n-example.component?raw';
+import datepickerDisabledFnCodeTs from '!./platform-date-picker-examples/platform-date-picker-disable-func-example.component?raw';
+import datepickerDisabledFnHtml from '!./platform-date-picker-examples/platform-date-picker-disable-func-example.component.html?raw';
+import datepickerFormatTs from '!./platform-date-picker-examples/platform-date-picker-format-example.component?raw';
+import datepickerFormatHtml from '!./platform-date-picker-examples/platform-date-picker-format-example.component.html?raw';
 
 import { ExampleFile } from '../../../../documentation/core-helpers/code-example/example-file';
 

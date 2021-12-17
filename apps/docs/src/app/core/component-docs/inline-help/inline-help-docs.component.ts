@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
-import * as inlineHelpTs from '!raw-loader!./examples/inline-help-example.component.ts';
-import * as inlineHelpSrc from '!raw-loader!./examples/inline-help-example.component.html';
-import * as inlineHelpTriggerHtml from '!raw-loader!./examples/inline-help-trigger-example.component.html';
-import * as inlineHelpStylesTs from '!raw-loader!./examples/inline-help-styled-example.component.ts';
-import * as inlineHelpStylesHtml from '!raw-loader!./examples/inline-help-styled-example.component.html';
-import * as inlineHelpTemplateHtml from '!raw-loader!./examples/inline-help-template-example/inline-help-template-example.component.html';
+import inlineHelpTs from '!./examples/inline-help-example.component.ts?raw';
+import inlineHelpSrc from '!./examples/inline-help-example.component.html?raw';
+import inlineHelpTriggerHtml from '!./examples/inline-help-trigger-example.component.html?raw';
+import inlineHelpStylesTs from '!./examples/inline-help-styled-example.component.ts?raw';
+import inlineHelpStylesHtml from '!./examples/inline-help-styled-example.component.html?raw';
+import inlineHelpTemplateHtml from '!./examples/inline-help-template-example/inline-help-template-example.component.html?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

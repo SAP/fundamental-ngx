@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
-import * as buttonIconsExample from '!raw-loader!./platform-button-examples/platform-button-icons-example.component.html';
-import * as buttonSizesExample from '!raw-loader!./platform-button-examples/platform-button-sizes-example.component.html';
-import * as buttonStateExample from '!raw-loader!./platform-button-examples/platform-button-state-example.component.html';
-import * as buttonTypesExample from '!raw-loader!./platform-button-examples/platform-button-types-example.component.html';
-import * as buttonTruncateExample from '!raw-loader!./platform-button-examples/platform-button-truncate-example.component.html';
-import * as buttonScss from '!raw-loader!./platform-button-examples/platform-button-examples.scss';
+import buttonIconsExample from '!./platform-button-examples/platform-button-icons-example.component.html?raw';
+import buttonSizesExample from '!./platform-button-examples/platform-button-sizes-example.component.html?raw';
+import buttonStateExample from '!./platform-button-examples/platform-button-state-example.component.html?raw';
+import buttonTypesExample from '!./platform-button-examples/platform-button-types-example.component.html?raw';
+import buttonTruncateExample from '!./platform-button-examples/platform-button-truncate-example.component.html?raw';
+import buttonScss from '!./platform-button-examples/platform-button-examples.scss?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { Icons } from '../../../documentation/utilities/icons';
 
