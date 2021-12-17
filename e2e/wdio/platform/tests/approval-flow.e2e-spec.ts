@@ -17,7 +17,8 @@ import {
     waitForNotPresent,
     waitForPresent,
     scrollIntoView,
-    browserIsSafari
+    browserIsSafari,
+    pause
 } from '../../driver/wdio';
 import { ApprovalFlowPo } from '../pages/approval-flow.po';
 import {
@@ -243,6 +244,9 @@ describe('Approval flow', () => {
             waitForElDisplayed(addWhatchersInput);
             click(addWhatchersInput);
             sendKeys('Julie');
+
+            pause(1000);
+
             click(selectItem);
             click(bottomMenuItems);
             const watchersCountAfter = getElementArrayLength(watchersAvatar);
