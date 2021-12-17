@@ -1,4 +1,36 @@
 
+## 0.33.0-rc.220 (2021-12-16)
+
+## 0.33.0-rc.219 (2021-12-16)
+
+
+### Bug Fixes
+
+* **platform:** adding alt tags to the thumbnail component for accessibility ([#7289](https://github.com/SAP/fundamental-ngx/issues/7289)) ([37d7227](https://github.com/SAP/fundamental-ngx/commit/37d72278c2a54f42a432ec9646745c4902d155d2))
+
+## 0.33.0-rc.218 (2021-12-16)
+
+
+### Bug Fixes
+
+* **platform:** select - fix CVA behavior and remove extra methods ([#7338](https://github.com/SAP/fundamental-ngx/issues/7338)) ([d9e2642](https://github.com/SAP/fundamental-ngx/commit/d9e26424a061b7be79cfbf989cdb9c0a5f4d1804))
+
+## 0.33.0-rc.217 (2021-12-15)
+
+## 0.33.0-rc.216 (2021-12-15)
+
+
+### Bug Fixes
+
+* **core,platform:** use approximate versions to avoid peer dependency errors ([#7366](https://github.com/SAP/fundamental-ngx/issues/7366)) ([33b2043](https://github.com/SAP/fundamental-ngx/commit/33b20436ad2f3a55b1fc5df8130a8f29f6ae0334))
+
+## 0.33.0-rc.215 (2021-12-14)
+
+
+### Bug Fixes
+
+* **core,platform:** schematics ([#7363](https://github.com/SAP/fundamental-ngx/issues/7363)) ([8363c78](https://github.com/SAP/fundamental-ngx/commit/8363c78edd517648b9f2cdc09228c85e00ab31c5))
+
 ## 0.33.0-rc.214 (2021-12-11)
 
 ## 0.33.0-rc.213 (2021-12-10)

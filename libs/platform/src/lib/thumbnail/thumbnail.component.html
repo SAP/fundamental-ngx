@@ -11,7 +11,6 @@
     <div class="fdp-media-container">
         <img
             tabindex="0"
-            role="button"
             *ngIf="selectedMedia.mediaType === 'image'"
             [attr.title]="selectedMedia.label"
             [attr.aria-label]="selectedMedia.label"
@@ -22,7 +21,6 @@
         />
         <video
             tabindex="0"
-            role="button"
             *ngIf="selectedMedia.mediaType === 'video'"
             [src]="selectedMedia.mediaUrl"
             (click)="openDialog()"

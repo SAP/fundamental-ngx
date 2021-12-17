@@ -13,6 +13,9 @@ export class TablePo extends CoreBaseComponentPo {
     tablePopinExample = 'fd-table-popin-example';
     tableNavigatableRowExample = 'fd-table-navigatable-row-example';
     tablePaginationExample = 'fd-table-pagination-example';
+    tableActivableExample = 'fd-table-activable-example';
+    tableFocusableExample = 'fd-table-focusable-example';
+    tableCDKExample = 'fd-table-cdk-example';
 
     link = ' a:not(.fd-button)';
     busyIndicator = '.fd-busy-indicator';
@@ -37,6 +40,7 @@ export class TablePo extends CoreBaseComponentPo {
     columnSortingInput = '.fd-popover__popper input';
     listItem = '.fd-list__item';
     selectedPage = this.paginationLink + '.is-selected';
+    tableCellWOHeader = ' .fd-table__cell:not(.cdk-header-cell)';
 
     open(): void {
         super.open(this.url);

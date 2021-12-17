@@ -21,7 +21,8 @@ import {
     noBorderAttr,
     noDataText,
     scrollLoadAttr,
-    selectionAttr
+    selectionAttr,
+    listTitleArr
 } from '../fixtures/appData/list-contents';
 import {
     acceptAlert,
@@ -42,7 +43,11 @@ import {
     waitForInvisibilityOf,
     pause,
     waitForNotPresent,
-    browserIsSafari
+    browserIsSafari,
+    isElementDisplayed,
+    getTextArr,
+    getElementSize,
+    waitForPresent
 } from '../../driver/wdio';
 
 describe('List test suite:', () => {
@@ -88,11 +93,23 @@ describe('List test suite:', () => {
         noDataListItems,
         noDataCompactList,
         unreadListAttr,
-        unreadListItems
+        unreadListItems,
+        multiCheckBoxMark,
+        singleRadioBtnInput,
+        busyIndicator,
+        noSepList,
+        noSepListItems,
+        cozyItem,
+        compactItem
     } = listPage;
 
     beforeAll(() => {
         listPage.open();
+    }, 1);
+
+    afterEach(() => {
+        refreshPage();
+        waitForPresent(noBorderListItems);
     }, 1);
 
     describe('Borderless examples:', () => {
@@ -166,8 +183,19 @@ describe('List test suite:', () => {
             expect(getText(multiToolbar)).toBe('0 : Items selected');
             click(multiCheckbox);
             expect(getText(multiToolbar)).toBe('1 : Items selected');
+            expect(getAttributeByName(multiCheckBoxMark, 'aria-selected')).toBe('true');
+
             click(multiCheckbox, 1);
             expect(getText(multiToolbar)).toBe('2 : Items selected');
+            expect(getAttributeByName(multiCheckBoxMark, 'aria-selected', 1)).toBe('true');
+
+            click(multiCheckbox, 2);
+            expect(getText(multiToolbar)).toBe('3 : Items selected');
+            expect(getAttributeByName(multiCheckBoxMark, 'aria-selected', 2)).toBe('true');
+
+            click(multiCheckbox, 3);
+            expect(getText(multiToolbar)).toBe('4 : Items selected');
+            expect(getAttributeByName(multiCheckBoxMark, 'aria-selected', 3)).toBe('true');
         });
     });
 
@@ -176,14 +204,13 @@ describe('List test suite:', () => {
             checkElementText(singleListItems);
             checkElArrIsClickable(singleListItems);
         });
-
-        it('should check selection', () => {
-            const listItemId = getAttributeByName(singleListItems, 'id');
-
-            expect(getAttributeByName(singleList, ariaMultiSelectable)).toBe('false');
-            expect(getText(singleToolbar)).toContain(': selected');
-            click(singleRadioBtn);
-            expect(getText(singleToolbar)).toContain(listItemId + ' : selected');
+        // skipped due to https://github.com/SAP/fundamental-ngx/issues/7245
+        xit('should check selection', () => {
+            const radioBtnLength = getElementArrayLength(singleRadioBtn);
+            for (let i = 0; i < radioBtnLength; i++) {
+                click(singleRadioBtnInput, i);
+                expect(getAttributeByName(singleRadioBtn, 'aria-selected')).toBe('true');
+            }
         });
     });
 
@@ -227,6 +254,7 @@ describe('List test suite:', () => {
             sendKeys(['ArrowDown', 'ArrowDown', 'ArrowDown', 'ArrowDown', 'ArrowDown']);
             // pause to give the browser time to process actions and generate loading icons
             pause(650);
+            expect(isElementDisplayed(busyIndicator)).toBe(true);
             waitForNotPresent(vScrollLoadIcon);
             const itemsEndCount = getElementArrayLength(vScrollListItems);
             expect(itemsStartCount).not.toEqual(itemsEndCount);
@@ -290,12 +318,27 @@ describe('List test suite:', () => {
         });
     });
 
+    describe('With No Separator examples:', () => {
+        it('should do basic checks and check no data text', () => {
+            checkElArrIsClickable(noSepListItems);
+            checkElementTextValue(noSepListItems, listTitleArr);
+            expect(getElementClass(noSepList)).toContain('no-border');
+        });
+    });
+
     describe('With Unread Data examples:', () => {
         it('should do basic checks and check unread data', () => {
             checkElArrIsClickable(unreadListItems);
             checkElementText(unreadListItems);
             expect(getAttributeByName(unreadListAttr, itemUnreadStatus, 1)).toBe('true');
         });
+    });
+
+    it('should check the sizes compact and cozy', () => {
+        const cozySize = getElementSize(cozyItem);
+        const compactSize = getElementSize(compactItem);
+
+        expect(cozySize.height).toBeGreaterThan(compactSize.height);
     });
 
     describe('check orientation', () => {

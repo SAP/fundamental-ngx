@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/schema",
-    "id": "fundamental-ngx-ng-add",
+    "$id": "fundamental-ngx-ng-add",
     "title": "Fundamental Library for Angular ng-add schematic",
     "type": "object",
     "properties": {
@@ -13,8 +13,8 @@
         "styleFonts": {
             "type": "boolean",
             "default": true,
-            "description": "Whether default fonts from theming should be added to styles.scss.",
-            "x-prompt": "Add default font imports into styles.scss?"
+            "description": "Whether default fonts from theming should be added to styles file.",
+            "x-prompt": "Add default font imports into styles file?"
         },
         "project": {
             "type": "string",

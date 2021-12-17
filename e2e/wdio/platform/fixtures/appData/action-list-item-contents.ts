@@ -16,3 +16,21 @@ export const btnText = [
     'Action 3',
     'Action 4'
 ];
+export const alertTextArr = [
+    'invoked :Action 1',
+    'invoked :Action 2',
+    'invoked :Action 3',
+    'invoked :Action 4',
+    'invoked :Action 1',
+    'invoked :Action 2',
+    'invoked :Action 3',
+    'invoked :Action 4',
+    'invoked :Action 1',
+    'invoked :Action 2',
+    'invoked :Action 3',
+    'invoked :Action 4',
+    'invoked :Action 1',
+    'invoked :Action 2',
+    'invoked :Action 3',
+    'invoked :Action 4'
+];

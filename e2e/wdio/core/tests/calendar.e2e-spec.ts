@@ -238,7 +238,7 @@ describe('calendar test suite', () => {
                 expect(getElementClass(sundays, i)).toContain('special-day');
             }
         });
-
+      
         it('should check ability to mark next week', () => {
             click(specialDaysCalendar + calendarOptions, 1);
             const tomorrowsDayIndex = getCurrentDayIndex(specialDaysCalendar) + 1;
