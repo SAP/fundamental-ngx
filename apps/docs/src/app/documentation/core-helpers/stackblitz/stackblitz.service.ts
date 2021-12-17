@@ -2,6 +2,7 @@ import polyfills from '!./code-example-stack/polyfills.ts?raw';
 import main from '!./code-example-stack/main.ts?raw';
 import styles from '!./code-example-stack/styles.scss?raw';
 import tsconfig from '!./code-example-stack/tsconfig.json?raw';
+import angular from '!./code-example-stack/angular.json?raw';
 
 import sdk from '@stackblitz/sdk';
 import { Inject, Injectable } from '@angular/core';
@@ -33,7 +34,7 @@ export class StackblitzService {
                 'src/main.ts': main,
                 'src/polyfills.ts': polyfills,
                 'src/styles.scss': styles,
-                'angular.json': StackblitzDependencies.getAngularJson(),
+                'angular.json': angular,
                 /**
                  * We're providing custom tsconfig with "enableIvy": false due to the StackBlitz issue
                  * https://github.com/stackblitz/core/issues/1364
@@ -100,8 +101,7 @@ export class StackblitzService {
         defaultProjectInfo.files['src/index.html'] = `
 <html>
     <head>
-        <link rel="stylesheet"
-        href="node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_fiori_3/css_variables.css" />
+        <link rel="stylesheet" href="node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_fiori_3/css_variables.css" />
         <link rel="stylesheet" href="node_modules/fundamental-styles/dist/fonts.css" />
         <link rel="stylesheet" href="node_modules/fundamental-styles/dist/icon.css" />
     </head>

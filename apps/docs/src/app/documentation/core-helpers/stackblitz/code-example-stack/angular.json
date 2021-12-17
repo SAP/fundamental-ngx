@@ -1,0 +1,73 @@
+{
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "defaultProject": "fundamental-ngx-example",
+    "newProjectRoot": "projects",
+    "projects": {
+        "fundamental-ngx-example": {
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "configurations": {
+                        "production": {
+                            "aot": true,
+                            "buildOptimizer": true,
+                            "extractCss": true,
+                            "extractLicenses": true,
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "namedChunks": false,
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "vendorChunk": false
+                        }
+                    },
+                    "options": {
+                        "assets": [
+                            "src/favicon.ico",
+                            "src/assets",
+                            {
+                                "glob": "**/css_variables.css",
+                                "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/",
+                                "output": "./assets/theming-base/"
+                            },
+                            {
+                                "glob": "**/*",
+                                "input": "./node_modules/fundamental-styles/dist/theming/",
+                                "output": "./assets/fundamental-styles-theming/"
+                            }
+                        ],
+                        "index": "src/index.html",
+                        "main": "src/main.ts",
+                        "outputPath": "dist",
+                        "polyfills": "src/polyfills.ts",
+                        "scripts": [],
+                        "styles": ["src/styles.scss"],
+                        "tsConfig": "src/tsconfig.app.json"
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "fundamental-ngx-example:build:production"
+                        }
+                    },
+                    "options": {
+                        "browserTarget": "fundamental-ngx-example:build"
+                    }
+                }
+            },
+            "prefix": "app",
+            "projectType": "application",
+            "root": "",
+            "schematics": {},
+            "sourceRoot": "src"
+        }
+    },
+    "version": 1
+}

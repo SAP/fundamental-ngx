@@ -65,8 +65,7 @@ ${imports}
     ],
     imports: [
         ${moduleImports},
-        RouterModule.forRoot([{path: '#', component:${mainComponent}}],
-        { useHash: true }),
+        RouterModule.forRoot([{path: '#', component:${mainComponent}}], { useHash: true }),
     ],
     providers: [
         RtlService,
