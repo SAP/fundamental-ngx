@@ -210,6 +210,7 @@ export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
         this._cdRef.detectChanges();
     }
 
+    /** @hidden */
     @HostListener('keydown', ['$event'])
     handleArrowKeydown(event: KeyboardEvent): void {
         if (this.arrowNavigation) {

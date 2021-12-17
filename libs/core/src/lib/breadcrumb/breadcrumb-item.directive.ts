@@ -1,9 +1,8 @@
-import { AfterContentInit, OnDestroy, ContentChild, Directive, ElementRef, forwardRef } from '@angular/core';
+import { AfterContentInit, ContentChild, Directive, ElementRef, forwardRef } from '@angular/core';
 import { FocusableOption } from '@angular/cdk/a11y';
-import { Subscription } from 'rxjs';
 
-import { BreadcrumbLinkDirective } from './breadcrumb-link.directive';
 import { DynamicPageBaseActions } from '@fundamental-ngx/core/dynamic-page';
+import { BreadcrumbLinkDirective } from './breadcrumb-link.directive';
 
 /**
  * Breadcrumb item directive. Must have child breadcrumb link directives.
@@ -22,10 +21,7 @@ import { DynamicPageBaseActions } from '@fundamental-ngx/core/dynamic-page';
         class: 'fd-breadcrumb__item'
     }
 })
-export class BreadcrumbItemDirective
-    extends DynamicPageBaseActions
-    implements FocusableOption, AfterContentInit, OnDestroy
-{
+export class BreadcrumbItemDirective extends DynamicPageBaseActions implements FocusableOption, AfterContentInit {
     /** @hidden */
     get elementRef(): ElementRef {
         return this._elementRef;
@@ -36,9 +32,6 @@ export class BreadcrumbItemDirective
 
     /** @hidden */
     routerLink = '';
-
-    /** @hidden */
-    private _subscription = new Subscription();
 
     /** @hidden */
     @ContentChild(forwardRef(() => BreadcrumbLinkDirective))
@@ -56,11 +49,6 @@ export class BreadcrumbItemDirective
         if (this.breadcrumbLink && this.breadcrumbLink.routerLink) {
             this.routerLink = this.breadcrumbLink.routerLink;
         }
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._subscription.unsubscribe();
     }
 
     /** @hidden */
