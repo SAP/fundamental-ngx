@@ -5,16 +5,6 @@ require('ts-node').register({ transpileOnly: true });
 AllureReporter = require('@wdio/allure-reporter').default;
 
 const allCapabilities = [
-    // {
-    //     browserName: 'internet explorer',
-    //     browserVersion: 'latest',
-    //     platformName: 'Windows 10',
-    //     'sauce:options': {
-    //         screenResolution: '1920x1080',
-    //         name: 'e2e-win-internet-explorer ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-    //         requireWindowFocus: true,
-    //     }
-    // },
     {
         slug: 'ms-msedge',
         browserName: 'MicrosoftEdge',
@@ -86,17 +76,17 @@ const allCapabilities = [
             screenResolution: '1920x1440',
             maxDuration: 2200
         }
+    },
+    {
+        browserName: 'safari',
+        browserVersion: '13.1',
+        platformName: 'macOS 10.15',
+        'sauce:options': {
+            screenResolution: '1920x1440',
+            name: 'e2e-MAC-safari ' + process.env.TRAVIS_BUILD_ID,
+            maxDuration: 2200
+        }
     }
-
-    // {
-    //     browserName: 'safari',
-    //     browserVersion: '13.1',
-    //     platformName: 'macOS 10.15',
-    //     'sauce:options': {
-    //         screenResolution: '1920x1440',
-    //         name: 'e2e-MAC-safari ' + process.env.TRAVIS_BUILD_ID,
-    //     }
-    // }
 ];
 const capabilities = (
     process.env.CAP_SLUG ? allCapabilities.filter((item) => item.slug === process.env.CAP_SLUG) : allCapabilities
