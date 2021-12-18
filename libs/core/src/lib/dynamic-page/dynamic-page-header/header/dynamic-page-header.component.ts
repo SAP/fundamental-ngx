@@ -22,6 +22,7 @@ import { BreadcrumbComponent } from '@fundamental-ngx/core/breadcrumb';
 import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageResponsiveSize } from '../../constants';
 import { DynamicPageService } from '../../dynamic-page.service';
 import { addClassNameToElement } from '../../utils';
+import { DynamicPageLayoutActionsComponent } from '../actions/dynamic-page-layout-actions.component';
 import { DynamicPageGlobalActionsComponent } from '../actions/dynamic-page-global-actions.component';
 import { DynamicPageTitleContentComponent } from '../actions/dynamic-page-title-content.component';
 
@@ -62,6 +63,9 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, AfterC
     /** @hidden */
     @ContentChild(DynamicPageGlobalActionsComponent)
     _globalActions: DynamicPageGlobalActionsComponent;
+
+    @ContentChild(DynamicPageLayoutActionsComponent)
+    _layoutActions: DynamicPageLayoutActionsComponent;
 
     /** @hidden */
     @ContentChild(DynamicPageTitleContentComponent)
@@ -119,6 +123,13 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, AfterC
     /** @hidden */
     stopPropagation(event: MouseEvent): void {
         event.stopPropagation();
+    }
+
+    /** @hidden
+     * Set focus on first child when the tab out event fires from Breadcrumbs
+     */
+    focusLayoutAction(): void {
+        this._layoutActions?.toolbarComponent.toolbar.nativeElement.children[0].focus();
     }
 
     /**

@@ -1,7 +1,6 @@
 import { AfterContentInit, ContentChild, Directive, ElementRef, forwardRef } from '@angular/core';
 import { FocusableOption } from '@angular/cdk/a11y';
 
-import { DynamicPageBaseActions } from '@fundamental-ngx/core/dynamic-page';
 import { BreadcrumbLinkDirective } from './breadcrumb-link.directive';
 
 /**
@@ -21,7 +20,7 @@ import { BreadcrumbLinkDirective } from './breadcrumb-link.directive';
         class: 'fd-breadcrumb__item'
     }
 })
-export class BreadcrumbItemDirective extends DynamicPageBaseActions implements FocusableOption, AfterContentInit {
+export class BreadcrumbItemDirective implements FocusableOption, AfterContentInit {
     /** @hidden */
     get elementRef(): ElementRef {
         return this._elementRef;
@@ -37,9 +36,7 @@ export class BreadcrumbItemDirective extends DynamicPageBaseActions implements F
     @ContentChild(forwardRef(() => BreadcrumbLinkDirective))
     breadcrumbLink: BreadcrumbLinkDirective;
 
-    constructor(private _elementRef: ElementRef) {
-        super();
-    }
+    constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
     ngAfterContentInit(): void {

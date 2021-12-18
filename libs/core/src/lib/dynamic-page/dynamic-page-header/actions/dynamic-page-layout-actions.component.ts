@@ -6,16 +6,12 @@ import {
     ElementRef,
     Renderer2,
     ChangeDetectorRef,
-    ContentChild,
-    Optional,
-    OnDestroy
+    ContentChild
 } from '@angular/core';
 import { DynamicPageBaseActions } from './dynamic-page-base-actions';
 import { DYNAMIC_PAGE_CLASS_NAME } from '../../constants';
 import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
-import { DynamicPageService } from '../../dynamic-page.service';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-dynamic-page-layout-actions',
@@ -26,7 +22,7 @@ import { takeUntil } from 'rxjs/operators';
         role: 'toolbar'
     }
 })
-export class DynamicPageLayoutActionsComponent extends DynamicPageBaseActions implements AfterContentInit, OnDestroy {
+export class DynamicPageLayoutActionsComponent extends DynamicPageBaseActions implements AfterContentInit {
     @ContentChild(ToolbarComponent)
     toolbarComponent: ToolbarComponent;
 
@@ -36,8 +32,7 @@ export class DynamicPageLayoutActionsComponent extends DynamicPageBaseActions im
     constructor(
         private _elementRef: ElementRef,
         private _renderer: Renderer2,
-        private _changeDetRef: ChangeDetectorRef,
-        @Optional() private _dynamicPageService: DynamicPageService
+        private _changeDetRef: ChangeDetectorRef
     ) {
         super();
     }
@@ -49,23 +44,7 @@ export class DynamicPageLayoutActionsComponent extends DynamicPageBaseActions im
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this._listenFocus();
         this.addClassToToolbar(DYNAMIC_PAGE_CLASS_NAME.dynamicPageLayoutActionsToolbar, this._elementRef);
         this.addClassToToolbar(DYNAMIC_PAGE_CLASS_NAME.dynamicPageToolbar, this._elementRef);
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
-    }
-
-    /** @hidden
-     * Set focus on first child when the tab out event fires from Breadcrumbs
-     * */
-    private _listenFocus(): void {
-        this._dynamicPageService?.focusLayoutAction.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
-            this.toolbarComponent.toolbar.nativeElement.children[0].focus();
-        });
     }
 }

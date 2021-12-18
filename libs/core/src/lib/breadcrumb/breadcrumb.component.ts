@@ -8,6 +8,7 @@ import {
     HostListener,
     forwardRef,
     Input,
+    Inject,
     NgZone,
     OnDestroy,
     OnInit,
@@ -20,10 +21,11 @@ import { BehaviorSubject, firstValueFrom, map, startWith, Subscription, tap } fr
 import { TAB } from '@angular/cdk/keycodes';
 import { FocusKeyManager } from '@angular/cdk/a11y';
 
-import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { DynamicPageService } from '@fundamental-ngx/core/dynamic-page';
+import { DYNAMIC_PAGE_HEADER_COMPONENT, DynamicPageHeaderInterface } from '@fundamental-ngx/core/utils';
 import { ContentDensityService, ResizeObserverService, RtlService } from '@fundamental-ngx/core/utils';
 import { BreadcrumbItemDirective } from './breadcrumb-item.directive';
 import { BreadcrumbItemComponent } from './breadcrumb-item.component';
@@ -109,6 +111,7 @@ export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
         @Optional() private _rtlService: RtlService,
         @Optional() private _contentDensityService: ContentDensityService,
         @Optional() private _dynamicPageService: DynamicPageService,
+        @Optional() @Inject(DYNAMIC_PAGE_HEADER_COMPONENT) private _dynamicPageHeader: DynamicPageHeaderInterface,
         private _cdRef: ChangeDetectorRef,
         private _resizeObserver: ResizeObserverService,
         private _ngZone: NgZone
@@ -127,7 +130,7 @@ export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
 
             this._subscriptions.add(
                 this._keyManager.tabOut.subscribe(() => {
-                    this._dynamicPageService.focusLayoutAction.next();
+                    this._dynamicPageHeader.focusLayoutAction();
                 })
             );
         }
