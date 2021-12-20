@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.223 (2021-12-20)
+
+
+### Bug Fixes
+
+* **docs:** provide correct tsconfig paths ([#7411](https://github.com/SAP/fundamental-ngx/issues/7411)) ([784a421](https://github.com/SAP/fundamental-ngx/commit/784a421e119e8788049fd3e44e6391933021722d))
+
 ## 0.33.0-rc.222 (2021-12-20)
 
 ## 0.33.0-rc.221 (2021-12-20)
