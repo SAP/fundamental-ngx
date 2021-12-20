@@ -1,4 +1,5 @@
 import {
+    AfterContentInit,
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -25,6 +26,7 @@ import { addClassNameToElement } from '../../utils';
 import { DynamicPageLayoutActionsComponent } from '../actions/dynamic-page-layout-actions.component';
 import { DynamicPageGlobalActionsComponent } from '../actions/dynamic-page-global-actions.component';
 import { DynamicPageTitleContentComponent } from '../actions/dynamic-page-title-content.component';
+
 
 export const ActionSquashBreakpointPx = 1280;
 
@@ -106,6 +108,13 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, AfterC
     }
 
     /** @hidden */
+    ngAfterContentInit(): void {
+        this._breadcrumbComponent?.tabOut.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+            this._layoutActions?.toolbarComponent.toolbar.nativeElement.children[0].focus();
+        });
+    }
+
+    /** @hidden */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
@@ -123,13 +132,6 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, AfterC
     /** @hidden */
     stopPropagation(event: MouseEvent): void {
         event.stopPropagation();
-    }
-
-    /** @hidden
-     * Set focus on first child when the tab out event fires from Breadcrumbs
-     */
-    focusLayoutAction(): void {
-        this._layoutActions?.toolbarComponent.toolbar.nativeElement.children[0].focus();
     }
 
     /**

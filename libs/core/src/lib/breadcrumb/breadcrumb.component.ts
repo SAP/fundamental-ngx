@@ -5,14 +5,16 @@ import {
     Component,
     ContentChildren,
     ElementRef,
-    HostListener,
+    EventEmitter,
     forwardRef,
+    HostListener,
     Input,
     Inject,
     NgZone,
     OnDestroy,
     OnInit,
     Optional,
+    Output,
     QueryList,
     ViewChild,
     ViewEncapsulation
@@ -24,8 +26,8 @@ import { FocusKeyManager } from '@angular/cdk/a11y';
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { Placement } from '@fundamental-ngx/core/shared';
-import { DynamicPageService } from '@fundamental-ngx/core/dynamic-page';
 import { DYNAMIC_PAGE_HEADER_COMPONENT, DynamicPageHeaderInterface } from '@fundamental-ngx/core/utils';
+import { DynamicPageService } from '@fundamental-ngx/core/dynamic-page';
 import { ContentDensityService, ResizeObserverService, RtlService } from '@fundamental-ngx/core/utils';
 import { BreadcrumbItemDirective } from './breadcrumb-item.directive';
 import { BreadcrumbItemComponent } from './breadcrumb-item.component';
@@ -62,6 +64,10 @@ export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
     /** Allow keyboard navigation through breadcrumb link */
     @Input()
     arrowNavigation = false;
+
+    /** Whenever arrow navigation is allowed it emits an event when Tab key pressed */
+    @Output()
+    tabOut: EventEmitter<void> = new EventEmitter<void>();
 
     /** @hidden */
     @ContentChildren(forwardRef(() => BreadcrumbItemComponent))
@@ -123,14 +129,13 @@ export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
 
         if (this.arrowNavigation) {
             this._keyManager = new FocusKeyManager<BreadcrumbItemDirective>(this.breadcrumbItems)
-                .withWrap()
+                .withWrap(false)
                 .skipPredicate((item) => !(item.breadcrumbLink || item.href))
-                .withVerticalOrientation()
                 .withHorizontalOrientation(this._isRtl ? 'rtl' : 'ltr');
 
             this._subscriptions.add(
                 this._keyManager.tabOut.subscribe(() => {
-                    this._dynamicPageHeader.focusLayoutAction();
+                    this.tabOut.emit();
                 })
             );
         }
@@ -221,6 +226,7 @@ export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
                 this._keyManager.setActiveItem(0);
             }
 
+            // prevent tab key default behaviour to avoid unexpected children focus
             if (KeyUtil.isKeyCode(event, TAB)) {
                 event.preventDefault();
             }
