@@ -461,7 +461,7 @@
           <context context-type="linenumber">12,13</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="platformApprovalFlowSelectTypeNodeTypeParallel" datatype="html">
+      <trans-unit id="platformApprovalFlowSelectTypeDialogNodeTypeParallel" datatype="html">
         <source> Parallel approver </source>
         <context-group purpose="location">
           <context context-type="sourcefile">libs/platform/src/lib/components/approval-flow/approval-flow-select-type/approval-flow-select-type.component.html</context>
