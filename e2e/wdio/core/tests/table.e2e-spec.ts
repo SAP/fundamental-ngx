@@ -19,14 +19,13 @@ import {
     scrollIntoView,
     setValue,
     waitForElDisplayed,
-    getCurrentUrl
+    getCurrentUrl,
+    getValue
 } from '../../driver/wdio';
 import {
     alertText,
     componentExampleArr,
     dateTestText,
-    paginationTestArr,
-    paginationTestArr2,
     tableCellArr,
     tableCellArr2,
     testText
@@ -379,7 +378,7 @@ describe('Table test suite', () => {
         });
     });
 
-    describe('Check  Table With Pagination example', () => {
+    describe('Check Table With Pagination example', () => {
         it('should check how many table rows display on table', () => {
             scrollIntoView(tablePaginationExample);
             const fiveTableRows = getElementArrayLength(tablePaginationExample + tableRow);
@@ -396,30 +395,21 @@ describe('Table test suite', () => {
             expect(tenTableRows).toEqual(10);
         });
 
-        it('should check selected pages by clicking each option', () => {
+        it('should check selected pages by clicking options', () => {
             scrollIntoView(tablePaginationExample);
-            expect(getText(tablePaginationExample + link).trim()).toBe(paginationTestArr2[2]);
             click(paginationLink);
-            expect(getText(tablePaginationExample + link).trim()).toBe(paginationTestArr2[0]);
+            expect(getValue(tablePaginationExample + inputField)).toBe('1');
             click(paginationLink);
-            expect(getText(tablePaginationExample + link).trim()).toBe(paginationTestArr2[1]);
-            click(paginationLink, 2);
-            expect(getText(tablePaginationExample + link).trim()).toBe(paginationTestArr2[3]);
-            click(paginationLink, 3);
-            expect(getText(tablePaginationExample + link).trim()).toBe(paginationTestArr2[4]);
+            expect(getValue(tablePaginationExample + inputField)).toBe('2');
         });
 
         it('should check selected pages by clicking next and previous link', () => {
-            // skipped due to cannot reproduce failure, needs further investigation
-            if (getCurrentUrl().includes('localhost')) {
-                return;
-            }
             scrollIntoView(tablePaginationExample);
             click(linkNext);
-            expect(getText(tablePaginationExample + link).trim()).toBe(paginationTestArr2[3]);
+            expect(getValue(tablePaginationExample + inputField)).toBe('4');
 
             click(linkPrevious);
-            expect(getText(tablePaginationExample + link).trim()).toBe(paginationTestArr2[2]);
+            expect(getValue(tablePaginationExample + inputField)).toBe('3');
         });
 
         // skipped due to https://github.com/SAP/fundamental-ngx/issues/7148
