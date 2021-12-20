@@ -25,6 +25,8 @@ export class IconTabBarPO extends BaseComponentPo {
     overflowButton = this.overflowingExample + '.fd-icon-tab-bar__overflow';
     expandedList = '.cdk-overlay-container ';
     listItem = this.expandedList + '.fd-icon-tab-bar__list-item';
+    span = ' span';
+    popoverTab = '.fd-popover__popper span';
 
     open(): void {
         super.open(this.url);

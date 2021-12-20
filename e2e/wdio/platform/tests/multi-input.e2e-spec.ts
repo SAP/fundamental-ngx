@@ -1,5 +1,6 @@
 import {
     click,
+    doesItExist,
     getAttributeByNameArr,
     getElementArrayLength,
     getElementPlaceholder,
@@ -35,7 +36,9 @@ describe('Multi input test suite', () => {
         header,
         validationPopover,
         compactExampleTokens,
-        errorMessage
+        errorMessage,
+        declineButton,
+        listitems
     } = multiInputPage;
 
     beforeAll(() => {
@@ -259,14 +262,20 @@ describe('Multi input test suite', () => {
         expect(newTokenCount).toEqual(originalTokenCount + 1);
     });
 
-    // skipped due to https://github.com/SAP/fundamental-ngx/issues/6726
-    xit('should check error message after clear field in reactive example', () => {
+    it('should check error message after clear field in reactive example', () => {
         scrollIntoView(activeInputs, 7);
         multiInputPage.expandDropdown(activeDropdownButtons, 7);
         multiInputPage.selectOption('Alaska');
         click(crossButton('Alaska'));
         expect(isElementDisplayed(errorMessage)).toBe(true);
         expect(getText(errorMessage)).toBe('Value is required');
+    });
+
+    it('should check no cross icons in menu list items', () => {
+        scrollIntoView(activeDropdownButtons, 4);
+        click(activeDropdownButtons, 4);
+
+        expect(doesItExist(listitems + declineButton)).toBe(false);
     });
 
     xdescribe('Check visual regression', () => {

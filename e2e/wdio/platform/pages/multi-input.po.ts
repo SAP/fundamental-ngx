@@ -20,6 +20,8 @@ export class MultiInputPo extends BaseComponentPo {
     validationPopover = '.fd-popover__popper .fd-form-message';
     compactExampleTokens = 'fdp-platform-multi-input-compact-example fd-token';
     errorMessage = '.fd-form-message--error span';
+    declineButton = '.fd-button[glyph=decline]';
+    listitems = 'ul[role=list] [role="listitem"] li';
 
     crossButton = (option: string) => `//span[text() = '${option}']/../following-sibling::span`;
 

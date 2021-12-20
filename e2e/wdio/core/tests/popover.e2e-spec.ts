@@ -84,7 +84,8 @@ describe('Popover test suite', () => {
         mobilePopoverButton,
         button,
         mobileInput,
-        mobileFooterButton
+        mobileFooterButton,
+        scrollCheckbox
     } = popoverPage;
 
     beforeAll(() => {
@@ -341,6 +342,40 @@ describe('Popover test suite', () => {
                 expect(getText(scrollMessage)).toBe(messageTestText);
                 click(scrollButton, i);
             }
+        });
+
+        it('should check that popover message still present after scrolling', () => {
+            click(scrollButton);
+            scrollIntoView(scrollButton, 1);
+            expect(isElementDisplayed(scrollMessage)).toBe(true, 'message not displayed');
+        });
+
+        it('should check that popover message disappears after scrolling', () => {
+            click(scrollButton, 2);
+            scrollIntoView(scrollButton, 3);
+            scrollIntoView(scrollButton, 2);
+            expect(doesItExist(scrollMessage)).toBe(false, 'message not displayed');
+        });
+
+        it('should check that popover message disappears when you scroll away from message', () => {
+            // enable mode when message disappear when you scroll away
+            click(scrollCheckbox);
+            click(scrollButton, 3);
+            // scroll to element near the message(in the visible zone)
+            scrollIntoView(scrollButton, 1);
+            scrollIntoView(scrollButton, 3);
+            expect(isElementDisplayed(scrollMessage)).toBe(true, 'message is not displayed');
+            // scroll away
+            scrollIntoView(avatar);
+            scrollIntoView(scrollButton, 3);
+            expect(doesItExist(scrollMessage)).toBe(false);
+
+            // enable mode when message still present anyway
+            click(scrollCheckbox);
+            click(scrollButton, 3);
+            scrollIntoView(avatar);
+            scrollIntoView(scrollButton, 3);
+            expect(isElementDisplayed(scrollMessage)).toBe(true, 'message is not displayed');
         });
     });
 

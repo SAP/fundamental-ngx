@@ -32,6 +32,7 @@ export class PopoverPo extends CoreBaseComponentPo {
     popoverContainer = '#background-ex7 div';
     scrollButton = '#background-ex10 button';
     scrollMessage = '.fd-popover__popper--no-arrow div';
+    scrollCheckbox = 'fd-popover-scroll-example .fd-checkbox__label';
     plusButton = '#background-ex11 button';
     dynamicOption = '.fd-popover__popper .fd-nested-list__button';
     dynamicSubOption = '.level-2.fd-nested-list.ng-star-inserted li a span';

@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/schema",
-    "id": "fundamental-ngx-ng-add",
+    "$id": "fundamental-ngx-ng-add",
     "title": "Fundamental Platform Library for Angular ng-add schematic",
     "type": "object",
     "properties": {
@@ -16,12 +16,6 @@
             "$default": {
                 "$source": "projectName"
             }
-        },
-        "installations": {
-            "type": "boolean",
-            "default": true,
-            "description": "Whether all dependent libraries for Fundamental Platform Library should be installed.",
-            "x-prompt": "Install all dependent libraries for Fundamental Platform Library to your project?"
         }
     }
 }

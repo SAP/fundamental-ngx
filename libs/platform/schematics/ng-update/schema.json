@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/schema",
-    "id": "fundamental-ngx-ng-update",
+    "$id": "fundamental-ngx-ng-update",
     "title": "Fundamental Platform Library for Angular ng-update schematic",
     "type": "object",
     "properties": {
