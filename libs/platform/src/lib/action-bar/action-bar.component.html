@@ -1,4 +1,4 @@
-<div fd-action-bar>
+<div fd-action-bar role="toolbar">
     <div fd-action-bar-header>
         <div fd-action-bar-back *ngIf="showBackButton">
             <button
@@ -12,9 +12,9 @@
                 (click)="backButtonClick.emit()"
             ></button>
         </div>
-        <h3 fd-action-bar-title [attr.title]="title" data-tag="actionbar__title">
+        <div fd-action-bar-title aria-level="2" [attr.title]="title" data-tag="actionbar__title">
             {{ title }}
-        </h3>
+        </div>
         <ng-content selector="fdp-action-button-group"></ng-content>
     </div>
     <p
