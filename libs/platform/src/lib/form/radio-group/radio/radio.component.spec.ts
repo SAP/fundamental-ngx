@@ -1,10 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
 import { FormModule } from '@fundamental-ngx/core/form';
 import { RadioModule } from '@fundamental-ngx/core/radio';
+import { runValueAccessorTests } from 'ngx-cva-test-suite';
+import { PlatformRadioGroupModule } from '../radio-group.module';
 import { RadioButtonComponent } from './radio.component';
 
 @Component({
@@ -53,8 +55,8 @@ describe('RadioButtonComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [RadioModule, FormModule, FormsModule],
-                declarations: [RadioButtonComponent, TestRadioButtonComponent]
+                imports: [RadioModule, FormModule, FormsModule, PlatformRadioGroupModule],
+                declarations: [TestRadioButtonComponent]
             }).compileComponents();
         })
     );
@@ -126,4 +128,23 @@ describe('RadioButtonComponent', () => {
         expect(radioInputElems1.getAttribute('aria-checked')).toEqual('true');
         expect(radioInputElems1.getAttribute('tabindex')).toEqual('0');
     });
+});
+
+const RADIO_BUTTON_IDENTIFIER = 'platform-radio-button-unit-test';
+
+runValueAccessorTests({
+    component: RadioButtonComponent,
+    testModuleMetadata: {
+        imports: [FormModule, PlatformRadioGroupModule, FormsModule, ReactiveFormsModule]
+    },
+    additionalSetup: (fixture, done) => {
+        fixture.componentInstance.id = RADIO_BUTTON_IDENTIFIER;
+        fixture.componentInstance.name = RADIO_BUTTON_IDENTIFIER;
+        done();
+    },
+    supportsOnBlur: false,
+    internalValueChangeSetter: (fixture, value) => {
+        fixture.componentInstance._valueChange(value, true);
+    },
+    getComponentValue: (fixture) => fixture.componentInstance._currentValue
 });

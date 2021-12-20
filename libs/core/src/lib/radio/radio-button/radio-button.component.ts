@@ -193,7 +193,7 @@ export class RadioButtonComponent
 
     /** @hidden */
     writeValue(value: any): void {
-        this.valueChange(value);
+        this.valueChange(value, false);
     }
     // End implementation
 
@@ -223,13 +223,15 @@ export class RadioButtonComponent
     }
 
     /** @hidden */
-    valueChange(value: any): void {
+    valueChange(value: any, emitEvent = true): void {
         this.currentValue = value;
 
         this._setNativeElementCheckedState();
 
         this.changeDetectionRef.detectChanges();
-        this.onChange(value);
+        if (emitEvent) {
+            this.onChange(value);
+        }
     }
 
     /** @hidden */

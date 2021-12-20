@@ -137,16 +137,13 @@ export abstract class InLineLayoutCollectionBaseInput extends CollectionBaseInpu
     }
 
     /** @hidden */
-    protected _inlineCurrentValue = new BehaviorSubject<boolean>(false);
+    protected _inlineCurrentValue$ = new BehaviorSubject<boolean>(false);
 
     /** @hidden */
     protected _responsiveBreakPointConfig: ResponsiveBreakPointConfig;
 
     /** @hidden */
     private _inlineLayout: InlineLayout;
-
-    /** @hidden */
-    private _isInlineCurrent: boolean;
 
     /** @hidden */
     private _xlIsInline: boolean;
@@ -209,24 +206,19 @@ export abstract class InLineLayoutCollectionBaseInput extends CollectionBaseInpu
         if (this._isInLineLayoutEnabled) {
             switch (currentBreakingPointName) {
                 case 'S':
-                    this._isInlineCurrent = this._sIsInline;
-                    this._inlineCurrentValue.next(this._isInlineCurrent);
+                    this._inlineCurrentValue$.next(this._sIsInline);
                     break;
                 case 'M':
-                    this._isInlineCurrent = this._mdIsInline;
-                    this._inlineCurrentValue.next(this._isInlineCurrent);
+                    this._inlineCurrentValue$.next(this._mdIsInline);
                     break;
                 case 'L':
-                    this._isInlineCurrent = this._lgIsInline;
-                    this._inlineCurrentValue.next(this._isInlineCurrent);
+                    this._inlineCurrentValue$.next(this._lgIsInline);
                     break;
                 case 'XL':
-                    this._isInlineCurrent = this._xlIsInline;
-                    this._inlineCurrentValue.next(this._isInlineCurrent);
+                    this._inlineCurrentValue$.next(this._xlIsInline);
                     break;
                 default:
-                    this._isInlineCurrent = this._xlIsInline;
-                    this._inlineCurrentValue.next(this._isInlineCurrent);
+                    this._inlineCurrentValue$.next(this._xlIsInline);
             }
         }
     }
