@@ -1,4 +1,17 @@
 
+### [0.31.2](https://github.com/SAP/fundamental-ngx/compare/v0.31.0...v0.31.2) (2021-12-20)
+
+
+### Bug Fixes
+
+* **platform:** add [#6572](https://github.com/SAP/fundamental-ngx/issues/6572) fix ([c6639fb](https://github.com/SAP/fundamental-ngx/commit/c6639fb498be7e5da4adedaa49304d72bd9aa4a1))
+* **platform:** apply feature [#7001](https://github.com/SAP/fundamental-ngx/issues/7001) ([87c094e](https://github.com/SAP/fundamental-ngx/commit/87c094eceb0a3e25e2dedd31384d313b956b42bf))
+* **platform:** change version ([235d9fa](https://github.com/SAP/fundamental-ngx/commit/235d9fada7f4f852874b8424d4311552b60a5d7f))
+* **platform:** fix duplicated i18n strings ([de2ea20](https://github.com/SAP/fundamental-ngx/commit/de2ea2091669de35c2384652e3a2068011d7a675))
+* **platform:** fix import causing error when running xi18n ([4986764](https://github.com/SAP/fundamental-ngx/commit/4986764c1f52a14cb6740451e2f50ee0121f7eab))
+* **platform:** revert package json version change ([a593609](https://github.com/SAP/fundamental-ngx/commit/a5936096fde1ae4b47f008681eb1884a04ca478a))
+* **platform:** update i18n string names ([0bcfd7f](https://github.com/SAP/fundamental-ngx/commit/0bcfd7f3cee163446dac8cac7919c5d67221f6f4))
+
 ## [0.31.0](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.200...v0.31.0) (2021-08-13)
 
 ## [0.31.0-rc.200](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.199...v0.31.0-rc.200) (2021-08-13)
