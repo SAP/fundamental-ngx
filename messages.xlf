@@ -1,0 +1,2237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="platformI18nTextareaLabel" datatype="html">
+        <source>Detailed description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/docs/src/app/platform/component-docs/platform-forms/platform-textarea/platform-textarea-examples/platform-textarea-i18n-example.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nTextareaPlaceholder" datatype="html">
+        <source>Start entering detailed description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/docs/src/app/platform/component-docs/platform-forms/platform-textarea/platform-textarea-examples/platform-textarea-i18n-example.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nRequiredValidation" datatype="html">
+        <source> Value is required </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/docs/src/app/platform/component-docs/platform-forms/platform-textarea/platform-textarea-examples/platform-textarea-i18n-example.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nMaxlengthValidation" datatype="html">
+        <source> Please get your character count under limit. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/docs/src/app/platform/component-docs/platform-forms/platform-textarea/platform-textarea-examples/platform-textarea-i18n-example.component.html</context>
+          <context context-type="linenumber">33,34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="stdlink" datatype="html">
+        <source> text </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">apps/docs/src/app/platform/component-docs/platform-link/platform-link-examples/platform-link-standard-example.component.html</context>
+          <context context-type="linenumber">88,89</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d7b35c384aecd25a516200d6921836374613dfe7" datatype="html">
+        <source>Cancel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/core/src/lib/grid-list/components/grid-list-filter-bar/grid-list-filter-bar.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/core/src/lib/grid-list/components/grid-list-filter-bar/grid-list-filter-bar.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-add-node/approval-flow-add-node.component.html</context>
+          <context context-type="linenumber">203</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-add-node/approval-flow-add-node.component.html</context>
+          <context context-type="linenumber">230</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-add-node/approval-flow-add-node.component.html</context>
+          <context context-type="linenumber">256</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-approver-details/approval-flow-approver-details.component.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/dialogs/new-folder/new-folder.component.html</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">272</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="07416c64b3c31da4bf054c8125dcd6ce3b48c36a" datatype="html">
+        <source>Details</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/core/src/lib/grid-list/components/grid-list-item/grid-list-item.component.html</context>
+          <context context-type="linenumber">79</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/core/src/lib/grid-list/components/grid-list-item/grid-list-item.component.html</context>
+          <context context-type="linenumber">81</context>
+        </context-group>
+        <note priority="1" from="description">Button aria-label attribute</note>
+        <note priority="1" from="meaning">coreGridList.Item.Btn.Details</note>
+      </trans-unit>
+      <trans-unit id="2646290a6d8e045d95a04eaa79b20a3d2cc6e331" datatype="html">
+        <source>Delete</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/core/src/lib/grid-list/components/grid-list-item/grid-list-item.component.html</context>
+          <context context-type="linenumber">93</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/core/src/lib/grid-list/components/grid-list-item/grid-list-item.component.html</context>
+          <context context-type="linenumber">95</context>
+        </context-group>
+        <note priority="1" from="description">Button aria-label attribute</note>
+        <note priority="1" from="meaning">coreGridList.Item.Btn.Delete</note>
+      </trans-unit>
+      <trans-unit id="09409bf55be5d6ca70e5db5e4672fdc55e2078c3" datatype="html">
+        <source>Navigation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/core/src/lib/grid-list/components/grid-list-item/grid-list-item.component.html</context>
+          <context context-type="linenumber">106</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/core/src/lib/grid-list/components/grid-list-item/grid-list-item.component.html</context>
+          <context context-type="linenumber">108</context>
+        </context-group>
+        <note priority="1" from="description">Button aria-label attribute</note>
+        <note priority="1" from="meaning">coreGridList.Item.Btn.Navigation</note>
+      </trans-unit>
+      <trans-unit id="880d577b8d4d1d4a005a550609b0250ad711d497" datatype="html">
+        <source>Contains errors</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/core/src/lib/grid-list/components/grid-list-item/grid-list-item.component.html</context>
+          <context context-type="linenumber">187</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/core/src/lib/grid-list/components/grid-list-item/grid-list-item.component.html</context>
+          <context context-type="linenumber">189</context>
+        </context-group>
+        <note priority="1" from="description">Error label attribute</note>
+        <note priority="1" from="meaning">coreGridList.Item.Status.ContainsErrors</note>
+      </trans-unit>
+      <trans-unit id="1441fbfc561b189e7375c1a8e48f750694644937" datatype="html">
+        <source>Locked</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/core/src/lib/grid-list/components/grid-list-item/grid-list-item.component.html</context>
+          <context context-type="linenumber">199</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/core/src/lib/grid-list/components/grid-list-item/grid-list-item.component.html</context>
+          <context context-type="linenumber">201</context>
+        </context-group>
+        <note priority="1" from="description">Button aria-label attribute</note>
+        <note priority="1" from="meaning">coreGridList.Item.Status.Locked</note>
+      </trans-unit>
+      <trans-unit id="aa4b5e8e0dd73a1e163e6cea4ac4d62a212c36c1" datatype="html">
+        <source>Draft</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/core/src/lib/grid-list/components/grid-list-item/grid-list-item.component.html</context>
+          <context context-type="linenumber">212</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/core/src/lib/grid-list/components/grid-list-item/grid-list-item.component.html</context>
+          <context context-type="linenumber">214</context>
+        </context-group>
+        <note priority="1" from="description">Button aria-label attribute</note>
+        <note priority="1" from="meaning">coreGridList.Item.Status.Draft</note>
+      </trans-unit>
+      <trans-unit id="corePaginationItemsPerPageLabel" datatype="html">
+        <source>Results per page</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/core/src/lib/pagination/pagination.component.ts</context>
+          <context context-type="linenumber">107</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="corePaginationPreviousLabel" datatype="html">
+        <source>Previous</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/core/src/lib/pagination/pagination.component.ts</context>
+          <context context-type="linenumber">144</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="corePaginationNextLabel" datatype="html">
+        <source>Next</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/core/src/lib/pagination/pagination.component.ts</context>
+          <context context-type="linenumber">153</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="corePaginationPageLabel" datatype="html">
+        <source>Page </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/core/src/lib/pagination/pagination.component.ts</context>
+          <context context-type="linenumber">162</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="corePaginationAriaLabel" datatype="html">
+        <source>Pagination</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/core/src/lib/pagination/pagination.component.ts</context>
+          <context context-type="linenumber">171</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="corePaginationCurrentPageAriaLabel" datatype="html">
+        <source> Page <x id="page" equiv-text="this.currentPage"/> is current page</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/core/src/lib/pagination/pagination.component.ts</context>
+          <context context-type="linenumber">180</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowAddNodeDialogAddApprovers" datatype="html">
+        <source> Add approvers </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-add-node/approval-flow-add-node.component.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowAddNodeDialogEditApprover" datatype="html">
+        <source> Edit approver </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-add-node/approval-flow-add-node.component.html</context>
+          <context context-type="linenumber">16,17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowAddNodeDialogAddApproverTeam" datatype="html">
+        <source> User/Team </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-add-node/approval-flow-add-node.component.html</context>
+          <context context-type="linenumber">23,24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowAddNodeDialogUserDetailHeader" datatype="html">
+        <source>Detail</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-add-node/approval-flow-add-node.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7e892ba15f2c6c17e83510e273b3e10fc32ea016" datatype="html">
+        <source>Search</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-add-node/approval-flow-add-node.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-approver-details/approval-flow-approver-details.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowAddNodeDialogNodeType" datatype="html">
+        <source>Parallel or serial</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-add-node/approval-flow-add-node.component.html</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowAddNodeDialogNodeTypeSerial" datatype="html">
+        <source> Serial </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-add-node/approval-flow-add-node.component.html</context>
+          <context context-type="linenumber">67,68</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowAddNodeDialogNodeTypeParallel" datatype="html">
+        <source> Parallel </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-add-node/approval-flow-add-node.component.html</context>
+          <context context-type="linenumber">74,75</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowAddNodeDialogApproverType" datatype="html">
+        <source>Approver type</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-add-node/approval-flow-add-node.component.html</context>
+          <context context-type="linenumber">82</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fd16561966e95839d1785019e31e95edbe67f946" datatype="html">
+        <source> A user </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-add-node/approval-flow-add-node.component.html</context>
+          <context context-type="linenumber">91,92</context>
+        </context-group>
+        <note priority="1" from="description">platformApprovalFlowAddNodeDialogApproverTypeUser</note>
+      </trans-unit>
+      <trans-unit id="364eb4aef48572d04e55036b866d42f31d1f2924" datatype="html">
+        <source> Anyone on the team </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-add-node/approval-flow-add-node.component.html</context>
+          <context context-type="linenumber">98,99</context>
+        </context-group>
+        <note priority="1" from="description">platformApprovalFlowAddNodeDialogApproverTypeTeamAnyone</note>
+      </trans-unit>
+      <trans-unit id="7267ca461d897671be4403fed14cf3680e9db5df" datatype="html">
+        <source> Everyone on the team </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-add-node/approval-flow-add-node.component.html</context>
+          <context context-type="linenumber">105,106</context>
+        </context-group>
+        <note priority="1" from="description">platformApprovalFlowAddNodeDialogApproverTypeTeamEveryone</note>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowAddNodeDialogUserOrTeam" datatype="html">
+        <source>User/Team</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-add-node/approval-flow-add-node.component.html</context>
+          <context context-type="linenumber">113</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowAddToNext" datatype="html">
+        <source>Add to the next serial node</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-add-node/approval-flow-add-node.component.html</context>
+          <context context-type="linenumber">138</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-select-type/approval-flow-select-type.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowAddNodeDialogDueDate" datatype="html">
+        <source>Due date</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-add-node/approval-flow-add-node.component.html</context>
+          <context context-type="linenumber">142</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f6755cff4957d5c3c89bafce5651f1b6fa2b1fd9" datatype="html">
+        <source>Add</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-add-node/approval-flow-add-node.component.html</context>
+          <context context-type="linenumber">189</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-add-node/approval-flow-add-node.component.html</context>
+          <context context-type="linenumber">243</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+        <note priority="1" from="description">platformApprovalFlowDialogButtonAdd</note>
+      </trans-unit>
+      <trans-unit id="9ca82952a6bc860b5391d5975322d8af8ceddfa4" datatype="html">
+        <source>Select</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-add-node/approval-flow-add-node.component.html</context>
+          <context context-type="linenumber">217</context>
+        </context-group>
+        <note priority="1" from="description">platformApprovalFlowAddNodeDialogSelectButton</note>
+      </trans-unit>
+      <trans-unit id="f4e529ae5ffd73001d1ff4bbdeeb0a72e342e5c8" datatype="html">
+        <source>Close</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-add-node/approval-flow-add-node.component.html</context>
+          <context context-type="linenumber">270</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-add-node/approval-flow-add-node.component.html</context>
+          <context context-type="linenumber">284</context>
+        </context-group>
+        <note priority="1" from="description">platformApprovalFlowDialogButtonClose</note>
+      </trans-unit>
+      <trans-unit id="1282cbdd9ce0c2927472d763734a1e5d7516b89d" datatype="html">
+        <source>Send reminder</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-approver-details/approval-flow-approver-details.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+        <note priority="1" from="description">platformApprovalFlowDialogButtonSendReminder</note>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowUserDetailHeader" datatype="html">
+        <source>Detail</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-approver-details/approval-flow-approver-details.component.html</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowUndo" datatype="html">
+        <source> Undo </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-messages/approval-flow-messages.component.html</context>
+          <context context-type="linenumber">26,27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowApproverAddedAlert" datatype="html">
+        <source> 1 approver has been added </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-messages/approval-flow-messages.component.html</context>
+          <context context-type="linenumber">33,34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowTeamAddedAlert" datatype="html">
+        <source> 1 team has been added </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-messages/approval-flow-messages.component.html</context>
+          <context context-type="linenumber">39,40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowNodeEditedAlert" datatype="html">
+        <source> 1 approver has been edited </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-messages/approval-flow-messages.component.html</context>
+          <context context-type="linenumber">45,46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowNodeRemovedAlert" datatype="html">
+        <source> 1 approver has been removed </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-messages/approval-flow-messages.component.html</context>
+          <context context-type="linenumber">51,52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowNodesRemovedAlert" datatype="html">
+        <source> Approvers have been removed </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-messages/approval-flow-messages.component.html</context>
+          <context context-type="linenumber">57,58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowTeamRemovedAlert" datatype="html">
+        <source> 1 team has been removed </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-messages/approval-flow-messages.component.html</context>
+          <context context-type="linenumber">63,64</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalBuildGraphFailCheckData" datatype="html">
+        <source> There was an error when trying to build graph. Check the initial data. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-messages/approval-flow-messages.component.html</context>
+          <context context-type="linenumber">69,70</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowNodeMembers" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{node.approvers.length}}"/> members </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-node/approval-flow-node.component.html</context>
+          <context context-type="linenumber">61,63</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowNodeVariousTeams" datatype="html">
+        <source> Various teams </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-node/approval-flow-node.component.html</context>
+          <context context-type="linenumber">72,73</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowNodeStatusDueToday" datatype="html">
+        <source> Due today </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-node/approval-flow-node.component.html</context>
+          <context context-type="linenumber">88,89</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowNodeStatusDueInXDays" datatype="html">
+        <source> Due in <x id="INTERPOLATION" equiv-text="{{ dueDateThreshold - _dueIn }}"/> days </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-node/approval-flow-node.component.html</context>
+          <context context-type="linenumber">93,95</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowNodeStatusXDaysOverdue" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ _dueIn - dueDateThreshold }}"/> days overdue </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-node/approval-flow-node.component.html</context>
+          <context context-type="linenumber">99,101</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowNodeAddApproversBefore" datatype="html">
+        <source>Add approvers before</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-node/approval-flow-node.component.html</context>
+          <context context-type="linenumber">157</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowNodeAddApproversAfter" datatype="html">
+        <source>Add approvers after</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-node/approval-flow-node.component.html</context>
+          <context context-type="linenumber">165</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowNodeAddApproversParallel" datatype="html">
+        <source>Add parallel approvers</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-node/approval-flow-node.component.html</context>
+          <context context-type="linenumber">173</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowNodeEditApprover" datatype="html">
+        <source>Edit approver</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-node/approval-flow-node.component.html</context>
+          <context context-type="linenumber">181</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowNodeRemoveNode" datatype="html">
+        <source>Remove</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-node/approval-flow-node.component.html</context>
+          <context context-type="linenumber">189</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowSelectTypeDialogMoveApproverAs" datatype="html">
+        <source> Move approver as </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-select-type/approval-flow-select-type.component.html</context>
+          <context context-type="linenumber">5,6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowSelectTypeDialogParallelOrSerial" datatype="html">
+        <source> Parallel or serial </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-select-type/approval-flow-select-type.component.html</context>
+          <context context-type="linenumber">12,13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowSelectTypeDialogNodeTypeParallel" datatype="html">
+        <source> Parallel approver </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-select-type/approval-flow-select-type.component.html</context>
+          <context context-type="linenumber">24,25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowSelectTypeDialogNodeTypeSerial" datatype="html">
+        <source> Serial approver </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-select-type/approval-flow-select-type.component.html</context>
+          <context context-type="linenumber">36,37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowSelectTypeDialogConfirm" datatype="html">
+        <source>Confirm</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-select-type/approval-flow-select-type.component.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowSelectTypeDialogCancel" datatype="html">
+        <source>Cancel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-select-type/approval-flow-select-type.component.html</context>
+          <context context-type="linenumber">72</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalAddStep" datatype="html">
+        <source>Add a step</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-toolbar-actions/approval-flow-toolbar-actions.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalEdit" datatype="html">
+        <source>Edit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-toolbar-actions/approval-flow-toolbar-actions.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalAddApproversBefore" datatype="html">
+        <source>Add approvers before</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-toolbar-actions/approval-flow-toolbar-actions.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalAddApproversAfter" datatype="html">
+        <source>Add approvers after</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-toolbar-actions/approval-flow-toolbar-actions.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalAddApproversParallel" datatype="html">
+        <source>Add parallel approvers</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-toolbar-actions/approval-flow-toolbar-actions.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalRemove" datatype="html">
+        <source>Remove</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-toolbar-actions/approval-flow-toolbar-actions.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalEditApprover" datatype="html">
+        <source>Edit approver</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-toolbar-actions/approval-flow-toolbar-actions.component.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowSelectedUser" datatype="html">
+        <source> item selected </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-user-list/approval-flow-user-list.component.html</context>
+          <context context-type="linenumber">10,11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowSelectedUsers" datatype="html">
+        <source> items selected </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow-user-list/approval-flow-user-list.component.html</context>
+          <context context-type="linenumber">14,15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowWatchers" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ watchersLabel }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="30ac2ea0dcebb8f6ed19b6f09d72287006512d97" datatype="html">
+        <source>Search here...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow.component.html</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalPrevButton" datatype="html">
+        <source>Go to previous slide</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow.component.html</context>
+          <context context-type="linenumber">72</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalNextButton" datatype="html">
+        <source>Go to next slide</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow.component.html</context>
+          <context context-type="linenumber">82</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowEditModeSave" datatype="html">
+        <source>Save</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow.component.html</context>
+          <context context-type="linenumber">157</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowEditModeExit" datatype="html">
+        <source>Exit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow.component.html</context>
+          <context context-type="linenumber">169</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowReminderMessage" datatype="html">
+        <source> Reminder has been sent to <x id="INTERPOLATION" equiv-text="{{messageToast.data.targets[0].name}}"/> </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow.component.html</context>
+          <context context-type="linenumber">183,185</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowReminderMessageMultipleRecievers" datatype="html">
+        <source> Reminder has been sent to <x id="INTERPOLATION" equiv-text="{{messageToast.data.targets.length}}"/> members of <x id="INTERPOLATION_1" equiv-text="{{messageToast.data.node.description}}"/> </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow.component.html</context>
+          <context context-type="linenumber">187,189</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowEmptyTitle" datatype="html">
+        <source> Start adding approvers and watchers </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow.component.html</context>
+          <context context-type="linenumber">196,197</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformApprovalFlowEmptyHint" datatype="html">
+        <source> To add approvers click <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Add a step<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>. To add watchers, click the Watchers field. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/approval-flow/approval-flow.component.html</context>
+          <context context-type="linenumber">199,200</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformMultiCombobox.Mobile.ShowAllItemsButton" datatype="html">
+        <source>Show all items</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/form/multi-combobox/multi-combobox-mobile/multi-combobox/multi-combobox-mobile.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/form/multi-combobox/multi-combobox-mobile/multi-combobox/multi-combobox-mobile.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformMultiCombobox.Mobile.ShowSelectedItemsButton" datatype="html">
+        <source>Show selected items</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/form/multi-combobox/multi-combobox-mobile/multi-combobox/multi-combobox-mobile.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/form/multi-combobox/multi-combobox-mobile/multi-combobox/multi-combobox-mobile.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nMultiComboboxSearchErrorMessage" datatype="html">
+        <source> Invalid entry </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/form/multi-combobox/multi-combobox/multi-combobox.component.html</context>
+          <context context-type="linenumber">289,290</context>
+        </context-group>
+        <note priority="1" from="description">The error message for this multi-combobox </note>
+        <note priority="1" from="meaning">multi-combobox search error message</note>
+      </trans-unit>
+      <trans-unit id="platformI18nTextareaCounterMessageCharactersOverTheLimit" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ exceededCharCount | number: &apos;1.0-0&apos; }}"/> characters over the limit </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/form/text-area/text-area.component.html</context>
+          <context context-type="linenumber">29,31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nTextareaCounterMessageCharacterseRemaining" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ exceededCharCount | number: &apos;1.0-0&apos; }}"/> characters remaining </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/form/text-area/text-area.component.html</context>
+          <context context-type="linenumber">34,36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="list.loading" datatype="html">
+        <source>loading</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/list/list.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="list.loadingtitle" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{loadTitle}}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/list/list.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="objectList.Item.detail" datatype="html">
+        <source>detail</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/list/object-list-item/object-list-item.component.html</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="objectList.Item.delete" datatype="html">
+        <source>delete</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/list/object-list-item/object-list-item.component.html</context>
+          <context context-type="linenumber">77</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="standardList.Item.detail" datatype="html">
+        <source>detail</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/list/standard-list-item/standard-list-item.component.html</context>
+          <context context-type="linenumber">94</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="standardList.Item.delete" datatype="html">
+        <source>delete</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/list/standard-list-item/standard-list-item.component.html</context>
+          <context context-type="linenumber">97</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformSearchFieldClearButtonTitle" datatype="html">
+        <source>Clear</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/search-field/search-field.component.html</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformSearchFieldSubmitButtonTitle" datatype="html">
+        <source>search</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/search-field/search-field.component.html</context>
+          <context context-type="linenumber">67</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformSearchFieldSynchronizeButtonTitle" datatype="html">
+        <source>Synchronize</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/search-field/search-field.component.html</context>
+          <context context-type="linenumber">84</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableDialogResetChangesButton" datatype="html">
+        <source>Reset</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/reset-button/reset-button.component.ts</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13ColumnsDialogHeader" datatype="html">
+        <source>Columns</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/columns/columns.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13ColumnsDialogSearchPlaceholder" datatype="html">
+        <source>Search</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/columns/columns.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13ColumnsDialogsShowSelected" datatype="html">
+        <source> Show Selected </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/columns/columns.component.html</context>
+          <context context-type="linenumber">46,47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13ColumnsDialogShowAll" datatype="html">
+        <source> Show all </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/columns/columns.component.html</context>
+          <context context-type="linenumber">49,50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="91b15b906cebdff23eeebfb4c17cb94f94f183d4" datatype="html">
+        <source>Move to Top</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/columns/columns.component.html</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/columns/columns.component.html</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
+        <note priority="1" from="description">Button aria-label attribute</note>
+        <note priority="1" from="meaning">platformTableP13ColumnsDialogMoveToTopBtn</note>
+      </trans-unit>
+      <trans-unit id="87f663779bf8f652bda22b72b8342c833479a80f" datatype="html">
+        <source>Move Up</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/columns/columns.component.html</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/columns/columns.component.html</context>
+          <context context-type="linenumber">77</context>
+        </context-group>
+        <note priority="1" from="description">Button title attribute</note>
+        <note priority="1" from="meaning">platformTableP13ColumnsDialogMoveUpBtn</note>
+      </trans-unit>
+      <trans-unit id="c013ff2a1000805418481e93c2562f6a3330eaf7" datatype="html">
+        <source>Move Down</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/columns/columns.component.html</context>
+          <context context-type="linenumber">89</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/columns/columns.component.html</context>
+          <context context-type="linenumber">91</context>
+        </context-group>
+        <note priority="1" from="description">Button aria-label attribute</note>
+        <note priority="1" from="meaning">platformTableP13ColumnsDialogMoveDownBtn</note>
+      </trans-unit>
+      <trans-unit id="fc6f55175288d914775ac9a07bba493511659a19" datatype="html">
+        <source>Move to Bottom</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/columns/columns.component.html</context>
+          <context context-type="linenumber">103</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/columns/columns.component.html</context>
+          <context context-type="linenumber">105</context>
+        </context-group>
+        <note priority="1" from="description">Button aria-label attribute</note>
+        <note priority="1" from="meaning">platformTableP13ColumnsDialogMoveToBottomBtn</note>
+      </trans-unit>
+      <trans-unit id="platformTableP13ColumnsDialogSelectAll|Select All checkbox" datatype="html">
+        <source> Select All (<x id="INTERPOLATION" equiv-text="{{_selectedColumnsCount}}"/>/<x id="INTERPOLATION_1" equiv-text="{{_selectableColumns.length}}"/>) </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/columns/columns.component.html</context>
+          <context context-type="linenumber">125,127</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13ColumnsDialogConfirmationBtn" datatype="html">
+        <source>OK</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/columns/columns.component.html</context>
+          <context context-type="linenumber">156</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13ColumnsDialogCancelBtn" datatype="html">
+        <source>Cancel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/columns/columns.component.html</context>
+          <context context-type="linenumber">170</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13FilterStrategyLabelBetween" datatype="html">
+        <source> between </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/filtering/filter-rule.component.html</context>
+          <context context-type="linenumber">40,41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13FilterStrategyLabelContains" datatype="html">
+        <source> contains </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/filtering/filter-rule.component.html</context>
+          <context context-type="linenumber">46,47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13FilterStrategyLabelBeginsWith" datatype="html">
+        <source> begins with </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/filtering/filter-rule.component.html</context>
+          <context context-type="linenumber">52,53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13FilterStrategyLabelEndsWith" datatype="html">
+        <source> ends with </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/filtering/filter-rule.component.html</context>
+          <context context-type="linenumber">58,59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13FilterStrategyLabelEqualTo" datatype="html">
+        <source> equal to </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/filtering/filter-rule.component.html</context>
+          <context context-type="linenumber">64,65</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13FilterStrategyLabelGreaterThan" datatype="html">
+        <source> greater than </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/filtering/filter-rule.component.html</context>
+          <context context-type="linenumber">70,71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13FilterStrategyLabelGreaterThanOrEqualTo" datatype="html">
+        <source> greater than or equal to </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/filtering/filter-rule.component.html</context>
+          <context context-type="linenumber">76,77</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13FilterStrategyLabelLessThan" datatype="html">
+        <source> less than </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/filtering/filter-rule.component.html</context>
+          <context context-type="linenumber">82,83</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13FilterStrategyLabelLessThanOrEqualTo" datatype="html">
+        <source> less than or equal to </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/filtering/filter-rule.component.html</context>
+          <context context-type="linenumber">88,89</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13FilterStrategyLabelAfter" datatype="html">
+        <source> after </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/filtering/filter-rule.component.html</context>
+          <context context-type="linenumber">94,95</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13FilterStrategyLabelOnOrAfter" datatype="html">
+        <source> on or after </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/filtering/filter-rule.component.html</context>
+          <context context-type="linenumber">100,101</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13FilterStrategyLabelBefore" datatype="html">
+        <source> before </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/filtering/filter-rule.component.html</context>
+          <context context-type="linenumber">106,107</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13FilterStrategyLabelBeforeOrOn" datatype="html">
+        <source> before or on </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/filtering/filter-rule.component.html</context>
+          <context context-type="linenumber">112,113</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13FilterStrategyLabelNotDefined" datatype="html">
+        <source> Not Defined </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/filtering/filter-rule.component.html</context>
+          <context context-type="linenumber">118,119</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13FilterBooleanOptionNotDefined" datatype="html">
+        <source>   </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/filtering/filter-rule.component.html</context>
+          <context context-type="linenumber">196,197</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13FilterBooleanOptionTrue" datatype="html">
+        <source> Yes </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/filtering/filter-rule.component.html</context>
+          <context context-type="linenumber">202,203</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13FilterBooleanOptionFalse" datatype="html">
+        <source> No </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/filtering/filter-rule.component.html</context>
+          <context context-type="linenumber">208,209</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13FilterDialogHeader" datatype="html">
+        <source>Filter By</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/filtering/filtering.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13FilterDialogIncludePanelTitle" datatype="html">
+        <source> Include <x id="START_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;ng-container *ngIf=&quot;_validIncludeRulesCount &gt; 0&quot;&gt;"/>(<x id="INTERPOLATION" equiv-text="{{ _validIncludeRulesCount }}"/>)<x id="CLOSE_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;/ng-container&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/filtering/filtering.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4b98d7d2d19879843554253a157ca1e3c283ba71" datatype="html">
+        <source>Remove Filter</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/filtering/filtering.component.html</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/filtering/filtering.component.html</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+        <note priority="1" from="description">Button aria-label attribute</note>
+        <note priority="1" from="meaning">platformTableP13FilterDialogRemoveFilter</note>
+      </trans-unit>
+      <trans-unit id="0702c78da485806f8b4eda06457a5d5e1f5c3280" datatype="html">
+        <source>Add Filter</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/filtering/filtering.component.html</context>
+          <context context-type="linenumber">62</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/filtering/filtering.component.html</context>
+          <context context-type="linenumber">64</context>
+        </context-group>
+        <note priority="1" from="description">Button arial-label attribute</note>
+        <note priority="1" from="meaning">platformTableP13FilterDialogAddFilter</note>
+      </trans-unit>
+      <trans-unit id="platformTableP13FilterDialogExcludePanelTitle" datatype="html">
+        <source> Exclude <x id="START_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;ng-container *ngIf=&quot;_validExcludeRulesCount &gt; 0&quot;&gt;"/>(<x id="INTERPOLATION" equiv-text="{{ _validExcludeRulesCount }}"/>)<x id="CLOSE_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;/ng-container&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/filtering/filtering.component.html</context>
+          <context context-type="linenumber">80</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4ea7959cfce7e92ea27863e2bf3e84b1478fae4a" datatype="html">
+        <source>Remove Filter</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/filtering/filtering.component.html</context>
+          <context context-type="linenumber">98</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/filtering/filtering.component.html</context>
+          <context context-type="linenumber">100</context>
+        </context-group>
+        <note priority="1" from="description">Button aria-label attribute</note>
+        <note priority="1" from="meaning">platformTableP13FilterDialogRemoveFilterFromExclude</note>
+      </trans-unit>
+      <trans-unit id="3b6645b70b4eff3c425eb4c2b7035a37d9f04265" datatype="html">
+        <source>Add Filter</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/filtering/filtering.component.html</context>
+          <context context-type="linenumber">111</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/filtering/filtering.component.html</context>
+          <context context-type="linenumber">113</context>
+        </context-group>
+        <note priority="1" from="description">Button aria-label attribute</note>
+        <note priority="1" from="meaning">platformTableP13FilterDialogAddFilterToExclude</note>
+      </trans-unit>
+      <trans-unit id="platformTableP13FilterDialogConfirmationBtn" datatype="html">
+        <source>OK</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/filtering/filtering.component.html</context>
+          <context context-type="linenumber">130</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13FilterDialogCancelBtn" datatype="html">
+        <source>Cancel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/filtering/filtering.component.html</context>
+          <context context-type="linenumber">144</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13GroupDialogHeader" datatype="html">
+        <source>Group</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/grouping/grouping.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13GroupDialogNoneSelectedColumn|Table column select placeholder" datatype="html">
+        <source>(none)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/grouping/grouping.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13GroupDialogShowFieldAsColumn" datatype="html">
+        <source>Show Field as Column</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/grouping/grouping.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b3560c87e7e58cd7eea20b1b7f97dad139d049c6" datatype="html">
+        <source>Remove</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/grouping/grouping.component.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+        <note priority="1" from="description">Remove line aria-label attribute</note>
+        <note priority="1" from="meaning">platformTableP13GroupDialogRemoveGroup</note>
+      </trans-unit>
+      <trans-unit id="platformTableP13GroupDialogRemoveGroup|Remove line title attribute" datatype="html">
+        <source>Remove</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/grouping/grouping.component.html</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13GroupDialogAddNewGroup|Add new line aria-label attribute" datatype="html">
+        <source>Add new</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/grouping/grouping.component.html</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13GroupDialogAddNewGroup|Add new line title attribute" datatype="html">
+        <source>Add new</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/grouping/grouping.component.html</context>
+          <context context-type="linenumber">73</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13GroupDialogConfirmationBtn" datatype="html">
+        <source>OK</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/grouping/grouping.component.html</context>
+          <context context-type="linenumber">89</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13GroupDialogCancelBtn" datatype="html">
+        <source>Cancel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/grouping/grouping.component.html</context>
+          <context context-type="linenumber">103</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13SortDialogHeader" datatype="html">
+        <source>Sort</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/sorting/sorting.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13SortDialogNoneSelectedColumn|Table column select placeholder" datatype="html">
+        <source>(none)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/sorting/sorting.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13SortDialogNoneSelectedSorting|Sorting select placeholder" datatype="html">
+        <source>(none)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/sorting/sorting.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13SortDialogSortOrderAsc" datatype="html">
+        <source> Ascending </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/sorting/sorting.component.html</context>
+          <context context-type="linenumber">55,56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13SortDialogSortOrderDesc" datatype="html">
+        <source> Descending </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/sorting/sorting.component.html</context>
+          <context context-type="linenumber">61,62</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f66114262632c82bd7a96ee38b6c226e886baa89" datatype="html">
+        <source>Remove</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/sorting/sorting.component.html</context>
+          <context context-type="linenumber">72</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/sorting/sorting.component.html</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+        <note priority="1" from="description">Remove btn aria-label attribute</note>
+        <note priority="1" from="meaning">platformTableP13SortDialogRemoveSort</note>
+      </trans-unit>
+      <trans-unit id="90b319aee8ba47ef4c3e880e48198b90fd1d30f9" datatype="html">
+        <source>Add new</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/sorting/sorting.component.html</context>
+          <context context-type="linenumber">84</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/sorting/sorting.component.html</context>
+          <context context-type="linenumber">86</context>
+        </context-group>
+        <note priority="1" from="description">Add New btn aria-label attribute</note>
+        <note priority="1" from="meaning">platformTableP13SortDialogAddNewSort</note>
+      </trans-unit>
+      <trans-unit id="platformTableP13SortDialogConfirmationBtn" datatype="html">
+        <source>OK</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/sorting/sorting.component.html</context>
+          <context context-type="linenumber">102</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableP13SortDialogCancelBtn" datatype="html">
+        <source>Cancel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-p13-dialog/sorting/sorting.component.html</context>
+          <context context-type="linenumber">116</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableToolbarSearchPlaceholder" datatype="html">
+        <source>Search</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-toolbar/table-toolbar.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableToolbarActionButtonSort" datatype="html">
+        <source>sort</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-toolbar/table-toolbar.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableToolbarActionButtonFilter" datatype="html">
+        <source>filter</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-toolbar/table-toolbar.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableToolbarActionButtonGroup" datatype="html">
+        <source>group</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-toolbar/table-toolbar.component.html</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableToolbarActionButtonColumns" datatype="html">
+        <source>columns</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-toolbar/table-toolbar.component.html</context>
+          <context context-type="linenumber">73</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableFilterDialogNotFilteredLabel" datatype="html">
+        <source>(Not Filtered)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filter-single-select.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableFilterDialogFilterByLabel" datatype="html">
+        <source>Filter by: <x id="INTERPOLATION" equiv-text="{{ filter.label }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filter-step.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableFilterDialogFilterTitle" datatype="html">
+        <source>Filter</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters-list-step.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableFilterDialogFilterBy" datatype="html">
+        <source>Filter By</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters-list-step.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableFilterDialogConfirmBtn" datatype="html">
+        <source>OK</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableFilterDialogCancelBtn" datatype="html">
+        <source>Cancel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableGroupDialogHeader" datatype="html">
+        <source>Group</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-view-settings-dialog/grouping/grouping.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableGroupDialogGroupOrderHeader" datatype="html">
+        <source>Group Order</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-view-settings-dialog/grouping/grouping.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableGroupDialogGroupOrderAsc" datatype="html">
+        <source>Ascending</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-view-settings-dialog/grouping/grouping.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableGroupDialogGroupOrderDesc" datatype="html">
+        <source>Descending</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-view-settings-dialog/grouping/grouping.component.html</context>
+          <context context-type="linenumber">62</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableGroupDialogGroupByHeader" datatype="html">
+        <source>Group By</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-view-settings-dialog/grouping/grouping.component.html</context>
+          <context context-type="linenumber">72</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableGroupDialogNotGroupedLabel" datatype="html">
+        <source>(Not Grouped)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-view-settings-dialog/grouping/grouping.component.html</context>
+          <context context-type="linenumber">89</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableGroupDialogConfirmBtn" datatype="html">
+        <source>OK</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-view-settings-dialog/grouping/grouping.component.html</context>
+          <context context-type="linenumber">113</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableGroupDialogCancelBtn" datatype="html">
+        <source>Cancel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-view-settings-dialog/grouping/grouping.component.html</context>
+          <context context-type="linenumber">118</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableSortDialogHeader" datatype="html">
+        <source>Sort</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-view-settings-dialog/sorting/sorting.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableSortDialogSortOrderHeader" datatype="html">
+        <source>Sort Order</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-view-settings-dialog/sorting/sorting.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableSortDialogSortOrderAsc" datatype="html">
+        <source>Ascending</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-view-settings-dialog/sorting/sorting.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableSortDialogSortOrderDesc" datatype="html">
+        <source>Descending</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-view-settings-dialog/sorting/sorting.component.html</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableSortDialogSortByHeader" datatype="html">
+        <source>Sorted By</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-view-settings-dialog/sorting/sorting.component.html</context>
+          <context context-type="linenumber">73</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableSortDialogNotSortedLabel" datatype="html">
+        <source>(Not Sorted)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-view-settings-dialog/sorting/sorting.component.html</context>
+          <context context-type="linenumber">91</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableSortDialogConfirmBtn" datatype="html">
+        <source>OK</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-view-settings-dialog/sorting/sorting.component.html</context>
+          <context context-type="linenumber">118</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableSortDialogCancelBtn" datatype="html">
+        <source>Cancel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/components/table-view-settings-dialog/sorting/sorting.component.html</context>
+          <context context-type="linenumber">124</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableHeaderMenuSortAsc" datatype="html">
+        <source>Sort Ascending</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/table.component.html</context>
+          <context context-type="linenumber">124</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableHeaderMenuSortDesc" datatype="html">
+        <source>Sort Descending</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/table.component.html</context>
+          <context context-type="linenumber">139</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableHeaderMenuGroup" datatype="html">
+        <source>Group</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/table.component.html</context>
+          <context context-type="linenumber">155</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableHeaderMenuFreeze" datatype="html">
+        <source>Freeze</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/table.component.html</context>
+          <context context-type="linenumber">172</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableHeaderMenuUnfreeze" datatype="html">
+        <source>Unfreeze</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/table.component.html</context>
+          <context context-type="linenumber">185</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableHeaderMenuFilter" datatype="html">
+        <source>Filter</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/table.component.html</context>
+          <context context-type="linenumber">205</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformTableTreeRowToggle" datatype="html">
+        <source>Toggle row</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/table/table.component.html</context>
+          <context context-type="linenumber">369</context>
+        </context-group>
+        <note priority="1" from="description">Toggle tree row children</note>
+        <note priority="1" from="meaning">Toggle row</note>
+      </trans-unit>
+      <trans-unit id="platformThumbnailDetailsGotoPreviousTitle" datatype="html">
+        <source>Previous</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/thumbnail/thumbnail-details/thumbnail-details.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformThumbnailDetailsGotoPreviousLabel" datatype="html">
+        <source>Go to Previous</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/thumbnail/thumbnail-details/thumbnail-details.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformThumbnailDetailsGotoNextTitle" datatype="html">
+        <source>Next</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/thumbnail/thumbnail-details/thumbnail-details.component.html</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformThumbnailDetailsGotoNextLabel" datatype="html">
+        <source>Go to Next</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/thumbnail/thumbnail-details/thumbnail-details.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.MoveTo.Title" datatype="html">
+        <source> Move to </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/dialogs/move-to/move-to.component.html</context>
+          <context context-type="linenumber">12,13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.MoveTo.TitleFolder" datatype="html">
+        <source>Folder</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/dialogs/move-to/move-to.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.MoveTo.AllFile.Label" datatype="html">
+        <source>All files</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/dialogs/move-to/move-to.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.MoveTo.Btn.Confirm" datatype="html">
+        <source> Move </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/dialogs/move-to/move-to.component.html</context>
+          <context context-type="linenumber">74,75</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.MoveTo.Btn.Close" datatype="html">
+        <source> Cancel </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/dialogs/move-to/move-to.component.html</context>
+          <context context-type="linenumber">79,80</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.NewFolder.Title" datatype="html">
+        <source> New folder </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/dialogs/new-folder/new-folder.component.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.NewFolder.InputLabel" datatype="html">
+        <source> Name of new folder inside of </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/dialogs/new-folder/new-folder.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.NewFolder.InputLabel.AllFiles" datatype="html">
+        <source> All files </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/dialogs/new-folder/new-folder.component.html</context>
+          <context context-type="linenumber">19,20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4cb1562a7fe58db03eba57856032500b82344ad6" datatype="html">
+        <source>Type here...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/dialogs/new-folder/new-folder.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="70a67e04629f6d412db0a12d51820b480788d795" datatype="html">
+        <source>Create</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/dialogs/new-folder/new-folder.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Breadcrumb.Label.AllFiles" datatype="html">
+        <source> All files </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">27,28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Breadcrumb.Label.AllFilesWithTotal" datatype="html">
+        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>All files<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/> (<x id="START_TAG_SPAN_1" ctype="x-span_1" equiv-text="&lt;span [innerText]=&quot;_totalItems&quot;&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>) </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">30,32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ad8786cf1d931d7ecef8c9813bc17b007b12260d" datatype="html">
+        <source>Add</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+        <note priority="1" from="description">Title</note>
+        <note priority="1" from="meaning">platformUploadCollection.Btn.Add</note>
+      </trans-unit>
+      <trans-unit id="6b74467987623883f8365d202c2173d9e0271458" datatype="html">
+        <source>New Folder</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">83</context>
+        </context-group>
+        <note priority="1" from="description">platformUploadCollection.Btn.NewFolder</note>
+      </trans-unit>
+      <trans-unit id="0e6ab50ea97233289102ef3c87db02bff0578d59" datatype="html">
+        <source>New Folder</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">85</context>
+        </context-group>
+        <note priority="1" from="description">Title attribute</note>
+        <note priority="1" from="meaning">platformUploadCollection.Btn.NewFolder</note>
+      </trans-unit>
+      <trans-unit id="50a3f6e84659286ac4f27f4bd7c5d35ea2872999" datatype="html">
+        <source>Move to</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">99</context>
+        </context-group>
+        <note priority="1" from="description">platformUploadCollection.Btn.MoveTo</note>
+      </trans-unit>
+      <trans-unit id="4dfd6d5cc20e27357ef7675ac89c85fd62e1ddd3" datatype="html">
+        <source>Move to</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">101</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">375</context>
+        </context-group>
+        <note priority="1" from="description">Title attribute</note>
+        <note priority="1" from="meaning">platformUploadCollection.Btn.MoveTo</note>
+      </trans-unit>
+      <trans-unit id="dc75033a5238fdc4f462212c847a45ba8018a3fd" datatype="html">
+        <source>Download</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">112</context>
+        </context-group>
+        <note priority="1" from="description">platformUploadCollection.Btn.Download</note>
+      </trans-unit>
+      <trans-unit id="8d1d7568cc383c62eb626241373603b36db425b8" datatype="html">
+        <source>Download</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">114</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">380</context>
+        </context-group>
+        <note priority="1" from="description">Title attribute</note>
+        <note priority="1" from="meaning">platformUploadCollection.Btn.Download</note>
+      </trans-unit>
+      <trans-unit id="019d4bd6a5690f0cfa0ecf346a4e6bf7f0d8debb" datatype="html">
+        <source>Remove</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">124</context>
+        </context-group>
+        <note priority="1" from="description">platformUploadCollection.Btn.Remove</note>
+      </trans-unit>
+      <trans-unit id="b6dfccc55f029ce92c440cfb58f9ddc506f32587" datatype="html">
+        <source>Remove</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">126</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">389</context>
+        </context-group>
+        <note priority="1" from="description">Title attribute</note>
+        <note priority="1" from="meaning">platformUploadCollection.Btn.Remove</note>
+      </trans-unit>
+      <trans-unit id="444d0bf9f76aa682ea98df0d268287cba19cb129" datatype="html">
+        <source>Enter a name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">190</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Item.Name.AlreadyExists" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ item.type === &apos;file&apos; ? &apos;File&apos; : &apos;Folder&apos; }}"/> already exists with that name. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">197,199</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Item.Status.Successful" datatype="html">
+        <source> Successful </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">238,239</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Item.Status.Unsuccessful" datatype="html">
+        <source> Unsuccessful </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">246,247</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9b3d305551358858e1892169a94527e0cc4dbf5b" datatype="html">
+        <source>Run</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">259</context>
+        </context-group>
+        <note priority="1" from="description">platformUploadCollection.Btn.Run</note>
+      </trans-unit>
+      <trans-unit id="192f76725a7b8795dcc7e64499301e6c543bba84" datatype="html">
+        <source>Run</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">261</context>
+        </context-group>
+        <note priority="1" from="description">Title attribute</note>
+        <note priority="1" from="meaning">platformUploadCollection.Btn.Run</note>
+      </trans-unit>
+      <trans-unit id="0b0cfe1013d1f032641d1846abcd308c5fc776bf" datatype="html">
+        <source>Cancel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">274</context>
+        </context-group>
+        <note priority="1" from="description">Title attribute</note>
+        <note priority="1" from="meaning">platformUploadCollection.Btn.Cancel</note>
+      </trans-unit>
+      <trans-unit id="9b7a2f929ed5540bcc46f47df64e77434bde430a" datatype="html">
+        <source>More</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">290</context>
+        </context-group>
+        <note priority="1" from="description">Title attribute</note>
+        <note priority="1" from="meaning">platformUploadCollection.MenuBtn.More</note>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.DragDrop.Text" datatype="html">
+        <source> Drag files to upload </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">308,309</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Pagination.Total" datatype="html">
+        <source> Showing <x id="INTERPOLATION" equiv-text="{{ _countShowedItems }}"/>-<x id="INTERPOLATION_1" equiv-text="{{ _countNotShowedItems }}"/> of <x id="INTERPOLATION_2" equiv-text="{{ _totalItems }}"/> </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">331,333</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.ResultsPerPage.Title" datatype="html">
+        <source>Results per page</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">346</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5922763ef2498e5068ea36b7f00fa18a2cdb766a" datatype="html">
+        <source>Move to icon</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">374</context>
+        </context-group>
+        <note priority="1" from="description">Menu Action</note>
+        <note priority="1" from="meaning">platformUploadCollection.Icon.MoveTo</note>
+      </trans-unit>
+      <trans-unit id="d0ea592476e16340ed6b40b67be43ed8adaa5cff" datatype="html">
+        <source>Download icon</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">379</context>
+        </context-group>
+        <note priority="1" from="description">Menu Action</note>
+        <note priority="1" from="meaning">platformUploadCollection.Icon.Download</note>
+      </trans-unit>
+      <trans-unit id="f4801f32543b736fa358663fc12139b3ec411797" datatype="html">
+        <source>Update version icon</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">383</context>
+        </context-group>
+        <note priority="1" from="description">Menu Action</note>
+        <note priority="1" from="meaning">platformUploadCollection.Icon.UpdateVersion</note>
+      </trans-unit>
+      <trans-unit id="9c77f75be2a369c1c9233d4b4343a3c27113030a" datatype="html">
+        <source>Update version</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">384</context>
+        </context-group>
+        <note priority="1" from="description">Menu Action</note>
+        <note priority="1" from="meaning">platformUploadCollection.Btn.UpdateVersion</note>
+      </trans-unit>
+      <trans-unit id="521352f447a219724be9fe02c01598efd4236c77" datatype="html">
+        <source>Remove icon</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">388</context>
+        </context-group>
+        <note priority="1" from="description">Menu Action</note>
+        <note priority="1" from="meaning">platformUploadCollection.Icon.Remove</note>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Message.Create.Failed" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ payload.folder.name }}"/> has been failed to create. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">503,505</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Message.Create" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ payload.folder.name }}"/> has been created. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">506,508</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Message.UpdateVersion.Failed" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ payload.item.name }}"/> has been failed to update version. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">514,516</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Message.UpdateVersion" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ payload.item.name }}"/> has been updated version. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">517,519</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Message.FileRename.Failed" datatype="html">
+        <source> The file &quot;<x id="INTERPOLATION" equiv-text="{{ payload.item.name }}"/>&quot; has been failed to rename to &quot;<x id="INTERPOLATION_1" equiv-text="{{ payload.fileName }}"/>&quot;. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">525,527</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Message.FileRename" datatype="html">
+        <source> The file &quot;<x id="INTERPOLATION" equiv-text="{{ payload.item.name }}"/>&quot; has been renamed to &quot;<x id="INTERPOLATION_1" equiv-text="{{ payload.fileName }}"/>&quot;. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">528,530</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Message.Remove.FoldersAndFiles.Failed" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ count.folder }}"/> folders and <x id="INTERPOLATION_1" equiv-text="{{ count.file }}"/> files have been failed to remove. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">540,542</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Message.Remove.FoldersAndFiles" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ count.folder }}"/> folders and <x id="INTERPOLATION_1" equiv-text="{{ count.file }}"/> files have been removed. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">543,545</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Message.Remove.Folders.Failed" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ count.folder }}"/> folders have been failed to remove. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">553,555</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Message.Remove.Folders" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ count.folder }}"/> folders have been removed. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">556,558</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Message.Remove.Files.Failed" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ count.file }}"/> files have been failed to remove. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">566,568</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Message.Remove.Files" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ count.file }}"/> files have been removed. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">569,571</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Message.Remove.OneItem.Failed" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ payload.items[0].name }}"/> has been failed to remove. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">577,579</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Message.Remove.OneItem" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ payload.items[0].name }}"/> has been removed. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">580,582</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Message.Move.FoldersAndFiles.Failed" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ count.folder }}"/> folders and <x id="INTERPOLATION_1" equiv-text="{{ count.file}}"/> files have been failed to move to </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">593,595</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Message.Move.FoldersAndFiles" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ count.folder }}"/> folders and <x id="INTERPOLATION_1" equiv-text="{{ count.file}}"/> files have been moved to </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">596,598</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Message.Move.Folders.Failed" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ count.folder }}"/> folders have been failed to move to </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">611,613</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Message.Move.Folders" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ count.folder }}"/> folders have been moved to </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">614,616</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Message.Move.Files.Failed" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ count.file }}"/> files have been failed to move to </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">629,631</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Message.Move.Files" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ count.file }}"/> files have been moved to </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">632,634</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Message.Move.OneItem.Failed" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ payload.items[0].name }}"/> have been failed to move to </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">645,647</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Message.Move.OneItem" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ payload.items[0].name }}"/> have been moved to </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">648,650</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Message.TypeMismatch.Files" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ count.file }}"/> files have the wrong type. Allowed types: <x id="INTERPOLATION_1" equiv-text="{{ fileTypes.join(&apos;, &apos;) }}"/><x id="INTERPOLATION_2" equiv-text="{{ fileTypes.length &amp;&amp; mimeTypes?.length ? &apos;, &apos; : &apos;&apos; }}"/><x id="INTERPOLATION_3" equiv-text="{{ mimeTypes.join(&apos;, &apos;) }}"/>. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">662,664</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Message.TypeMismatch.OneItem" datatype="html">
+        <source> The file &quot;<x id="INTERPOLATION" equiv-text="{{ payload.items[0].name }}"/>&quot; has the wrong type. Allowed types: <x id="INTERPOLATION_1" equiv-text="{{ fileTypes.join(&apos;, &apos;) }}"/><x id="INTERPOLATION_2" equiv-text="{{ fileTypes.length &amp;&amp; mimeTypes?.length ? &apos;, &apos; : &apos;&apos; }}"/><x id="INTERPOLATION_3" equiv-text="{{ mimeTypes.join(&apos;, &apos;) }}"/>. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">666,668</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Message.FileSize.Files" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ count.file }}"/> files exceeded the maximum file size. Allowed max file size: <x id="INTERPOLATION_1" equiv-text="{{ maxFileSize }}"/>. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">675,677</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Message.FileSize.OneItem" datatype="html">
+        <source> The file &quot;<x id="INTERPOLATION" equiv-text="{{ payload.items[0].name }}"/>&quot; exceeded the maximum file size. Allowed max file size: <x id="INTERPOLATION_1" equiv-text="{{ maxFileSize }}"/>. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">679,681</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Message.FilenameLength.Files" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ count.file }}"/> files exceeded the maximum filename length. Allowed filename length: <x id="INTERPOLATION_1" equiv-text="{{ maxFilenameLength }}"/> characters. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">688,690</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformUploadCollection.Message.FilenameLength.OneItem" datatype="html">
+        <source> The name &quot;<x id="INTERPOLATION" equiv-text="{{ payload.items[0].name }}"/>&quot; exceeded the maximum filename length. Allowed filename length: <x id="INTERPOLATION_1" equiv-text="{{ maxFilenameLength }}"/> characters. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">692,694</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9d99c41a03bc8346010b39a6aafa33e5a8362b7c" datatype="html">
+        <source> All files
+</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.html</context>
+          <context context-type="linenumber">698,699</context>
+        </context-group>
+        <note priority="1" from="description">platformUploadCollection.Message.AllFiles</note>
+      </trans-unit>
+      <trans-unit id="platformI18nValueHelpDialog.Define.Condition.Title" datatype="html">
+        <source>Product</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/value-help-dialog/components/define-tab/define-tab.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nValueHelpDialog.Define.Condition.StrategyPlaceholder" datatype="html">
+        <source>Select a strategy</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/value-help-dialog/components/define-tab/define-tab.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nValueHelpDialog.Define.Condition.FromPlaceholder" datatype="html">
+        <source>from</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/value-help-dialog/components/define-tab/define-tab.component.html</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nValueHelpDialog.Define.Condition.ToPlaceholder" datatype="html">
+        <source>to</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/value-help-dialog/components/define-tab/define-tab.component.html</context>
+          <context context-type="linenumber">68</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nValueHelpDialog.Define.Condition.ValuePlaceholder" datatype="html">
+        <source>value</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/value-help-dialog/components/define-tab/define-tab.component.html</context>
+          <context context-type="linenumber">89</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nValueHelpDialog.Condition.RemoveLabel" datatype="html">
+        <source>Remove define condition</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/value-help-dialog/components/define-tab/define-tab.component.html</context>
+          <context context-type="linenumber">108</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nValueHelpDialog.AddAriaLabelDefineCondition" datatype="html">
+        <source>Add new define condition</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/value-help-dialog/components/define-tab/define-tab.component.html</context>
+          <context context-type="linenumber">126</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nValueHelpDialog.AddLabelDefineCondition" datatype="html">
+        <source>Add</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/value-help-dialog/components/define-tab/define-tab.component.html</context>
+          <context context-type="linenumber">127</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nValueHelpDialog.Define.Condition.Strategy.Label.Contains" datatype="html">
+        <source> contains </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/value-help-dialog/components/define-tab/define-tab.component.html</context>
+          <context context-type="linenumber">141,142</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nValueHelpDialog.Define.Condition.Strategy.Label.EqualTo" datatype="html">
+        <source> equal to </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/value-help-dialog/components/define-tab/define-tab.component.html</context>
+          <context context-type="linenumber">147,148</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nValueHelpDialog.Define.Condition.Strategy.Label.Between" datatype="html">
+        <source> between </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/value-help-dialog/components/define-tab/define-tab.component.html</context>
+          <context context-type="linenumber">153,154</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nValueHelpDialog.Define.Condition.Strategy.Label.StartsWith" datatype="html">
+        <source> starts with </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/value-help-dialog/components/define-tab/define-tab.component.html</context>
+          <context context-type="linenumber">159,160</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nValueHelpDialog.Define.Condition.Strategy.Label.EndsWith" datatype="html">
+        <source> ends with </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/value-help-dialog/components/define-tab/define-tab.component.html</context>
+          <context context-type="linenumber">165,166</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nValueHelpDialog.Define.Condition.Strategy.LessThan" datatype="html">
+        <source> less than </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/value-help-dialog/components/define-tab/define-tab.component.html</context>
+          <context context-type="linenumber">171,172</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nValueHelpDialog.Define.Condition.Strategy.Label.LessThanEqual" datatype="html">
+        <source> less than equal </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/value-help-dialog/components/define-tab/define-tab.component.html</context>
+          <context context-type="linenumber">177,178</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nValueHelpDialog.Define.Condition.Strategy.Label.GreaterThan&apos;" datatype="html">
+        <source> greater than </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/value-help-dialog/components/define-tab/define-tab.component.html</context>
+          <context context-type="linenumber">183,184</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nValueHelpDialog.Define.Condition.Strategy.Label.GreaterThanEqual" datatype="html">
+        <source> greater than equal </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/value-help-dialog/components/define-tab/define-tab.component.html</context>
+          <context context-type="linenumber">189,190</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nValueHelpDialog.Define.Condition.Strategy.Label.Empty" datatype="html">
+        <source> empty </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/value-help-dialog/components/define-tab/define-tab.component.html</context>
+          <context context-type="linenumber">195,196</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nValueHelpDialog.Define.Condition.Strategy.Label.NotEqualTo" datatype="html">
+        <source> not equal to </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/value-help-dialog/components/define-tab/define-tab.component.html</context>
+          <context context-type="linenumber">201,202</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nValueHelpDialog.Define.Condition.Strategy.Label.NotEmpty" datatype="html">
+        <source> not empty </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/value-help-dialog/components/define-tab/define-tab.component.html</context>
+          <context context-type="linenumber">207,208</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nValueHelpDialog.Condition.MaxCountError" datatype="html">
+        <source>Enter a value with no more than 7 characters</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/value-help-dialog/components/define-tab/define-tab.component.html</context>
+          <context context-type="linenumber">215</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nValueHelpDialogDisplayCountLabel" datatype="html">
+        <source>Items</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/value-help-dialog/components/select-tab/select-tab.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nValueHelpDialogMoreButton" datatype="html">
+        <source>More</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/value-help-dialog/components/select-tab/select-tab.component.html</context>
+          <context context-type="linenumber">72</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nValueHelpDialog.SelectionBarLabel" datatype="html">
+        <source>Selected and condition items</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/value-help-dialog/value-help-dialog/value-help-dialog.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nValueHelpDialog.SelectedAndConditionLabel" datatype="html">
+        <source>Selected Items and Conditions </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/value-help-dialog/value-help-dialog/value-help-dialog.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nValueHelpDialog.ClearSelectedAriaLabel" datatype="html">
+        <source>clear selected items</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/value-help-dialog/value-help-dialog/value-help-dialog.component.html</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nValueHelpDialog.SearchButton" datatype="html">
+        <source>Go</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/value-help-dialog/value-help-dialog/value-help-dialog.component.html</context>
+          <context context-type="linenumber">82</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nValueHelpDialog.SuccessButton" datatype="html">
+        <source>OK</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/value-help-dialog/value-help-dialog/value-help-dialog.component.html</context>
+          <context context-type="linenumber">92</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nValueHelpDialog.CancelButton" datatype="html">
+        <source>Cancel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/value-help-dialog/value-help-dialog/value-help-dialog.component.html</context>
+          <context context-type="linenumber">102</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nValueHelpDialog.Selected.EmptyLabel" datatype="html">
+        <source>No Items or Conditions Selected</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/value-help-dialog/value-help-dialog/value-help-dialog.component.html</context>
+          <context context-type="linenumber">113</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nValueHelpDialog.Search.Button" datatype="html">
+        <source>Go</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/value-help-dialog/value-help-dialog/value-help-dialog.component.html</context>
+          <context context-type="linenumber">163</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="platformI18nValueHelpDialog.Condition.Empty" datatype="html">
+        <source>Empty</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/value-help-dialog/value-help-dialog/value-help-dialog.component.html</context>
+          <context context-type="linenumber">321</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="PlatformFormGeneratorSummarySectionEditStep" datatype="html">
+        <source> Edit </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/platform/src/lib/wizard-generator/components/wizard-summary-step/wizard-summary-section/wizard-summary-section.component.html</context>
+          <context context-type="linenumber">18,19</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
