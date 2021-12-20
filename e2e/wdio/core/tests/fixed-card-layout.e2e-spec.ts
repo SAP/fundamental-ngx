@@ -9,7 +9,8 @@ import {
     waitForInvisibilityOf,
     getElementLocation,
     waitForPresent,
-    waitForElDisplayed
+    waitForElDisplayed,
+    browserIsSafari
 } from '../../driver/wdio';
 
 describe('Fixed card layout test suite', () => {
@@ -53,6 +54,11 @@ describe('Fixed card layout test suite', () => {
         });
 
         it('should drag a card from the header', () => {
+            if (browserIsSafari()) {
+                // test runner drag and drop methods not working properly on safari
+                return;
+            }
+
             const originalFirstCardText = getText(cardDivArr);
 
             scrollIntoView(cardHeaderArr);

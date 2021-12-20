@@ -46,6 +46,7 @@ describe('Checkbox test suite', () => {
 
     afterEach(() => {
         refreshPage();
+        waitForPresent(checkboxPage.root);
         waitForElDisplayed(checkboxPage.title);
     }, 1);
 

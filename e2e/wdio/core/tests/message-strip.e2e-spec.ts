@@ -8,7 +8,8 @@ import {
     refreshPage,
     setValue,
     getValue,
-    waitForElDisplayed
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 
 import { sections, messageTypes, playgroundStates } from '../fixtures/appData/message-strip.contents';
@@ -40,6 +41,7 @@ describe('Message-strip test suite', () => {
 
     beforeEach(() => {
         refreshPage();
+        waitForPresent(messageStripPage.root);
         waitForElDisplayed(messageStripPage.title);
     }, 1);
 

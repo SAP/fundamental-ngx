@@ -9,7 +9,8 @@ import {
     getElementArrayLength,
     setValue,
     sendKeys,
-    waitForElDisplayed
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 import { checkElArrIsClickable } from '../../helper/assertion-helper';
 
@@ -33,6 +34,7 @@ describe('Token component test', () => {
 
     beforeEach(() => {
         refreshPage();
+        waitForPresent(tokenPage.root);
         waitForElDisplayed(tokenPage.title);
     }, 2);
 

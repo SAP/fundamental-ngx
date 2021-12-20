@@ -47,6 +47,7 @@ describe('Verify Feed Input component', () => {
 
     beforeEach(() => {
         refreshPage();
+        waitForPresent(feedInputPage.root);
         waitForElDisplayed(feedInputPage.title);
     }, 1);
 

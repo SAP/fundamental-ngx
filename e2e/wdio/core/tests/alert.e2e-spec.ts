@@ -24,7 +24,6 @@ import {
 describe('Alert test suite', () => {
     const alertPage = new AlertPo();
     const {
-        alerts,
         closeAlertButton,
         openOverlayButton,
         popupAlert,
@@ -46,7 +45,8 @@ describe('Alert test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForElDisplayed(alerts);
+        waitForPresent(alertPage.root);
+        waitForElDisplayed(alertPage.title);
     }, 1);
 
     describe('main checks', () => {

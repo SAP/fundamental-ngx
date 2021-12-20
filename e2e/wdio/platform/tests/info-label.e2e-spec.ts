@@ -48,6 +48,7 @@ describe('Info Label component test suite', () => {
 
     beforeEach(() => {
         refreshPage();
+        waitForPresent(infoLabelPage.root);
         waitForPresent(infoLabelPage.title);
     }, 1);
 

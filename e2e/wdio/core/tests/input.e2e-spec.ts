@@ -82,7 +82,8 @@ describe('Input should ', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(defaultInput);
+        waitForPresent(inputPage.root);
+        waitForElDisplayed(inputPage.title);
     }, 1);
 
     it('be able to type something with keyboard', () => {

@@ -14,7 +14,8 @@ import {
     browserIsFirefox,
     clickRightMouseBtn,
     waitForElDisplayed,
-    browserIsSafari
+    browserIsSafari,
+    waitForPresent
 } from '../../driver/wdio';
 import { sections } from '../fixtures/appData/step-input-content';
 
@@ -40,6 +41,7 @@ describe('Step input component test suit', () => {
 
     beforeEach(() => {
         refreshPage();
+        waitForPresent(stepInputPage.root);
         waitForElDisplayed(stepInputPage.title);
     }, 2);
 

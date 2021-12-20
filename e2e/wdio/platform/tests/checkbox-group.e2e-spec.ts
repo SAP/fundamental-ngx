@@ -34,7 +34,8 @@ import {
     mouseHoverElement,
     refreshPage,
     scrollIntoView,
-    waitForElDisplayed
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 
 describe('Checkbox group test suite', () => {
@@ -62,6 +63,7 @@ describe('Checkbox group test suite', () => {
 
     beforeEach(() => {
         refreshPage();
+        waitForPresent(checkboxGroupPage.root);
         waitForElDisplayed(checkboxGroupPage.title);
     }, 2);
 

@@ -15,7 +15,9 @@ import {
     scrollIntoView,
     checkElementScreenshot,
     getElementArrayLength,
-    browserIsFirefox
+    browserIsFirefox,
+    waitForPresent,
+    waitForElDisplayed
 } from '../../driver/wdio';
 import { sections } from '../fixtures/appData/time-contents';
 
@@ -56,6 +58,8 @@ describe('Time component test', () => {
 
     afterEach(() => {
         refreshPage();
+        waitForPresent(timePage.root);
+        waitForElDisplayed(timePage.title);
     }, 2);
 
     it('Should check that change time by arrows works correct', () => {

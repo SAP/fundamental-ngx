@@ -97,7 +97,7 @@ describe('Popover test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        browserIsSafari() ? waitForPresent(popoverPage.root, 0, 10000) : waitForPresent(popoverPage.root);
+        waitForPresent(popoverPage.root);
         waitForElDisplayed(popoverPage.title);
     }, 1);
 

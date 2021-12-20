@@ -113,7 +113,7 @@ describe('Standard List test suite', () => {
                 click(filterAndSortList + deleteButton);
             }
             expect(getElementArrayLength(filterAndSortList + listItems)).toEqual(1);
-            expect(getText(filterAndSortList + listItemText)).toBe('No results found!');
+            expect(getText(filterAndSortList + listItemText).trim()).toBe('No results found!');
         });
     });
 

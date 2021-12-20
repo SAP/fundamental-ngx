@@ -15,7 +15,8 @@ import {
     sendKeys,
     pause,
     waitForElDisplayed,
-    browserIsSafari
+    browserIsSafari,
+    waitForPresent
 } from '../../driver/wdio';
 import { fullName, firstAdress, secAdress, update, firstAdressLength } from '../fixtures/testData/wizard.tags';
 
@@ -56,6 +57,7 @@ describe('Wizard component test', () => {
 
     beforeEach(() => {
         refreshPage();
+        waitForPresent(wizardPage.root);
         waitForElDisplayed(wizardPage.title);
     }, 2);
 

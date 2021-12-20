@@ -1,5 +1,5 @@
 import { CoreBaseComponentPo } from './core-base-component.po';
-import { click, waitForElDisplayed } from '../../driver/wdio';
+import { click, waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class DateTimePicker extends CoreBaseComponentPo {
     url = '/datetime-picker';
@@ -57,6 +57,7 @@ export class DateTimePicker extends CoreBaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 }

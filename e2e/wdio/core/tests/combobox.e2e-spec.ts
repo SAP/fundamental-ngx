@@ -15,7 +15,9 @@ import {
     refreshPage,
     scrollIntoView,
     sendKeys,
-    setValue
+    setValue,
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 
 import {
@@ -57,6 +59,8 @@ describe('Combobox component test suit', () => {
 
     afterEach(() => {
         refreshPage();
+        waitForPresent(comboboxPage.root);
+        waitForElDisplayed(comboboxPage.title);
     }, 2);
 
     it('verify placeholders in all input fields', () => {

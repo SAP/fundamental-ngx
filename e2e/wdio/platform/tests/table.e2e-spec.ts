@@ -145,8 +145,8 @@ describe('Table component test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForElDisplayed(tablePage.root);
-        waitForPresent(tablePage.title);
+        waitForPresent(tablePage.root);
+        waitForElDisplayed(tablePage.title);
     }, 1);
 
     if (browserIsSafari()) {

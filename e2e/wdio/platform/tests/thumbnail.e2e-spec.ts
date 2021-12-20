@@ -33,7 +33,8 @@ describe('Thumbnail field', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(mainImage);
+        waitForPresent(thumbnailPage.root);
+        waitForElDisplayed(thumbnailPage.title);
     }, 1);
 
     it('should be able to view all thumbnail images', () => {

@@ -66,7 +66,8 @@ describe('Multi input test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(multiInputPage.title);
+        waitForPresent(multiInputPage.root);
+        waitForElDisplayed(multiInputPage.title);
     }, 1);
 
     it('Check RTL/LTR orientation', () => {

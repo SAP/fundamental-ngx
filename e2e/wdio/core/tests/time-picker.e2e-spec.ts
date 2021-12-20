@@ -15,7 +15,8 @@ import {
     getPreviousElementText,
     clickPreviousElement,
     waitForElDisplayed,
-    browserIsSafari
+    browserIsSafari,
+    waitForPresent
 } from '../../driver/wdio';
 
 describe('Time-picker component test', () => {
@@ -59,6 +60,7 @@ describe('Time-picker component test', () => {
 
     beforeEach(() => {
         refreshPage();
+        waitForPresent(timePickerPage.root);
         waitForElDisplayed(timePickerPage.title);
     }, 2);
 

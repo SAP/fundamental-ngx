@@ -7,7 +7,9 @@ import {
     isElementClickable,
     refreshPage,
     scrollIntoView,
-    uploadFile
+    uploadFile,
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 
 import { placeholderTestTextArr, imagePath, titleValue } from '../fixtures/appData/file-uploader-contents';
@@ -22,6 +24,8 @@ describe('File uploader component test', () => {
 
     afterEach(() => {
         refreshPage();
+        waitForPresent(fileUploaderPage.root);
+        waitForElDisplayed(fileUploaderPage.title);
     }, 2);
 
     it('verify placeholders', () => {

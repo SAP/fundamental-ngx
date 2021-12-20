@@ -33,6 +33,7 @@ describe('Inline help test suite', () => {
 
     afterEach(() => {
         refreshPage();
+        waitForPresent(inlineHelpPage.root);
         waitForElDisplayed(inlineHelpPage.title);
     }, 1);
 

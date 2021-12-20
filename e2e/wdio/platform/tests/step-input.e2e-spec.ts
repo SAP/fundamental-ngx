@@ -25,7 +25,6 @@ import {
 describe('Step input test suite', () => {
     const stepInputPage: StepInputPo = new StepInputPo();
     const {
-        stepInputRoot,
         activeButtonIncrement,
         activeButtonDecrement,
         allInput,
@@ -48,8 +47,9 @@ describe('Step input test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(stepInputRoot);
-    }, 1);
+        waitForPresent(stepInputPage.root);
+        waitForElDisplayed(stepInputPage.title);
+    }, 2);
 
     it('Verify increment and decrement buttons', () => {
         const arr = getElementArrayLength(activeInput);

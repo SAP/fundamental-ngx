@@ -1,5 +1,4 @@
 import {
-    browserIsSafari,
     click,
     elementArray,
     getCSSPropertyByName,
@@ -61,8 +60,9 @@ describe('Date picker suite', () => {
 
     beforeEach(() => {
         refreshPage();
-        waitForPresent(inputDatePicker);
-    }, 1);
+        waitForPresent(datePickerPage.root);
+        waitForElDisplayed(datePickerPage.title);
+    }, 2);
 
     it('Verify in all the form factor user is able to see the date picker button and input field ', () => {
         const buttons = elementArray(buttonDatePicker);

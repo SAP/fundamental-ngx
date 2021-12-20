@@ -8,7 +8,9 @@ import {
     getText,
     refreshPage,
     saveElementScreenshot,
-    scrollIntoView
+    scrollIntoView,
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 
 import { testTextMore, testTextLess, testTextMoreLabel, testTextLessLabel } from '../fixtures/appData/text-contents';
@@ -23,6 +25,8 @@ describe('Text component test', () => {
 
     afterEach(() => {
         refreshPage();
+        waitForPresent(textPage.root);
+        waitForElDisplayed(textPage.title);
     }, 2);
 
     describe('Check links More/Less', () => {

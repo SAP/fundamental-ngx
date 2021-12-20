@@ -1,5 +1,5 @@
 import { DynamicSideContentPo } from '../pages/dynamic-side-content.po';
-import { refreshPage, waitForPresent } from '../../driver/wdio';
+import { refreshPage, waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 describe('dynamic side content test suite', () => {
     const dynamicSideContentPage = new DynamicSideContentPo();
@@ -10,7 +10,8 @@ describe('dynamic side content test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(dynamicSideContentPage.pageHeader);
+        waitForPresent(dynamicSideContentPage.root);
+        waitForElDisplayed(dynamicSideContentPage.title);
     }, 1);
 
     describe('check orientation', () => {

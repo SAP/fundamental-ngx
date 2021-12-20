@@ -78,13 +78,14 @@ const allCapabilities = [
         }
     },
     {
+        slug: 'osx-safari',
         browserName: 'safari',
         browserVersion: '13.1',
         platformName: 'macOS 10.15',
         'sauce:options': {
             screenResolution: '1920x1440',
             name: 'e2e-MAC-safari ' + process.env.TRAVIS_BUILD_ID,
-            maxDuration: 2200
+            maxDuration: 2500
         }
     }
 ];

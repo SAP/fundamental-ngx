@@ -63,6 +63,9 @@ export function goBack(): void {
 
 export function refreshPage(): void {
     browser.refresh();
+    if (browserIsSafari()) {
+        pause();
+    }
 }
 
 export function getAlertText(): string {

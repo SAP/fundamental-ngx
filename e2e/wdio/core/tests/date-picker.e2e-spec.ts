@@ -7,7 +7,6 @@ import {
     getAttributeByName,
     getElementArrayLength,
     getElementClass,
-    getNextElementText,
     getText,
     getValue,
     isElementClickable,
@@ -17,6 +16,7 @@ import {
     scrollIntoView,
     sendKeys,
     setValue,
+    waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 import { DatePickerPo } from '../pages/date-picker.po';
@@ -72,8 +72,14 @@ describe('Datetime picker suite', () => {
 
     beforeEach(() => {
         refreshPage();
-        waitForPresent(datePickerPage.title);
+        waitForPresent(datePickerPage.root);
+        waitForElDisplayed(datePickerPage.title);
     }, 1);
+
+    if (browserIsSafari()) {
+        // skip safari; runner gets stuck sometimes; flaky
+        return;
+    }
 
     it('should check calendar open close', () => {
         for (let i = 0; i < blockExamples.length; i++) {

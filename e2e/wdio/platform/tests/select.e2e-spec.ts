@@ -8,7 +8,9 @@ import {
     getText,
     isElementClickable,
     refreshPage,
-    scrollIntoView
+    scrollIntoView,
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 import {
     disableSelectModeValueTestText,
@@ -52,6 +54,8 @@ describe('Select test suite', () => {
 
     afterEach(() => {
         refreshPage();
+        waitForPresent(selectPage.root);
+        waitForElDisplayed(selectPage.title);
     }, 2);
 
     describe('Check Select Modes example', () => {

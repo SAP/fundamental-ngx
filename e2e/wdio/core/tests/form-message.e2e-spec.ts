@@ -11,6 +11,7 @@ import {
     refreshPage,
     scrollIntoView,
     setValue,
+    waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 
@@ -35,7 +36,8 @@ describe('Form Message test suite:', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(messageWithInput);
+        waitForPresent(formMessagePage.root);
+        waitForElDisplayed(formMessagePage.title);
     }, 1);
 
     it('should check message with input has placeholder', () => {

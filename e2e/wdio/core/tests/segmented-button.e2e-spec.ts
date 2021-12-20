@@ -1,5 +1,14 @@
 import { SegmentedButtonPo } from '../pages/segmented-button.po';
-import { acceptAlert, click, getAttributeByName, getElementClass, getText, refreshPage } from '../../driver/wdio';
+import {
+    acceptAlert,
+    click,
+    getAttributeByName,
+    getElementClass,
+    getText,
+    refreshPage,
+    waitForElDisplayed,
+    waitForPresent
+} from '../../driver/wdio';
 
 describe('Select component:', () => {
     const segmentedButtonPage = new SegmentedButtonPo();
@@ -24,6 +33,8 @@ describe('Select component:', () => {
 
     afterEach(() => {
         refreshPage();
+        waitForPresent(segmentedButtonPage.root);
+        waitForElDisplayed(segmentedButtonPage.title);
     }, 2);
 
     describe('Select modes', () => {

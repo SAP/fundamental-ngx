@@ -65,6 +65,7 @@ describe('Input Group should', () => {
 
     beforeEach(() => {
         refreshPage();
+        waitForPresent(inputGroupPage.root);
         waitForElDisplayed(inputGroupPage.title);
     }, 1);
 

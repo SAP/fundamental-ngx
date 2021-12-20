@@ -38,7 +38,8 @@ describe('Menu component test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(menuBtnArr);
+        waitForPresent(menuPage.root);
+        waitForElDisplayed(menuPage.title);
     }, 1);
 
     it('should check menu btn content', () => {

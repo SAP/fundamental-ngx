@@ -1,4 +1,4 @@
-import { waitForElDisplayed } from '../../driver/wdio';
+import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 import { CoreBaseComponentPo } from './core-base-component.po';
 
 export class LinkPo extends CoreBaseComponentPo {
@@ -10,7 +10,7 @@ export class LinkPo extends CoreBaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
+        waitForPresent(this.root);
         waitForElDisplayed(this.title);
     }
 

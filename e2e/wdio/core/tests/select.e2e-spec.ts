@@ -9,7 +9,8 @@ import {
     refreshPage,
     scrollIntoView,
     waitForElDisplayed,
-    waitForInvisibilityOf
+    waitForInvisibilityOf,
+    waitForPresent
 } from '../../driver/wdio';
 
 describe('Select component:', () => {
@@ -36,6 +37,8 @@ describe('Select component:', () => {
 
     afterEach(() => {
         refreshPage();
+        waitForPresent(selectPage.root);
+        waitForElDisplayed(selectPage.title);
     }, 2);
 
     describe('Select modes', () => {

@@ -1,9 +1,15 @@
 import { FormattedTextPo } from '../pages/formatted-text.po';
-import { browserIsFirefox, browserIsSafari, getAlertText, refreshPage, waitForElDisplayed } from '../../driver/wdio';
+import {
+    browserIsFirefox,
+    browserIsSafari,
+    getAlertText,
+    refreshPage,
+    waitForElDisplayed,
+    waitForPresent
+} from '../../driver/wdio';
 
 describe('Formatted text component', () => {
     const formattedTextPage = new FormattedTextPo();
-    const { inputHtmlText } = new FormattedTextPo();
 
     beforeAll(() => {
         formattedTextPage.open();
@@ -11,7 +17,8 @@ describe('Formatted text component', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForElDisplayed(inputHtmlText);
+        waitForPresent(formattedTextPage.root);
+        waitForElDisplayed(formattedTextPage.title);
     }, 2);
 
     it('check no alert is displayed on page', () => {

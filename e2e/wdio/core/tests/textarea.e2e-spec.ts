@@ -16,7 +16,8 @@ import {
     sendKeys,
     waitForPresent,
     getElementSize,
-    browserIsSafari
+    browserIsSafari,
+    waitForElDisplayed
 } from '../../driver/wdio';
 
 import { formMessageTestText, sections, states, styleArr } from '../fixtures/appData/textarea-contents';
@@ -42,7 +43,8 @@ describe('Textarea component test', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(textareaPage.title);
+        waitForPresent(textareaPage.root);
+        waitForElDisplayed(textareaPage.title);
     }, 1);
 
     it('should check orientation', () => {
@@ -121,11 +123,11 @@ describe('Textarea component test', () => {
         for (let i = 0; i < inputLength - 2; i++) {
             scrollIntoView(stateExample + textarea, i);
             click(stateExample + textarea, i);
-            expect(getText(formMessage)).toBe(formMessageTestText);
+            expect(getText(formMessage).trim()).toBe(formMessageTestText);
         }
     });
 
-    it('should check text of form message', () => {
+    it('should check class of form message', () => {
         scrollIntoView(stateExample);
         const inputLength = getElementArrayLength(stateExample + textarea);
         for (let i = 0; i < inputLength - 2; i++) {

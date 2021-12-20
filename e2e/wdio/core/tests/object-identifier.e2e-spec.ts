@@ -4,12 +4,13 @@ import {
     isElementClickable,
     refreshPage,
     scrollIntoView,
+    waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 
 describe('Object identifier test suite', () => {
     const objectIdentifierPage = new ObjectIdentifierPo();
-    const { identifier, clickableLinks } = objectIdentifierPage;
+    const { clickableLinks } = objectIdentifierPage;
 
     beforeAll(() => {
         objectIdentifierPage.open();
@@ -17,7 +18,8 @@ describe('Object identifier test suite', () => {
 
     beforeEach(() => {
         refreshPage();
-        waitForPresent(identifier);
+        waitForPresent(objectIdentifierPage.root);
+        waitForElDisplayed(objectIdentifierPage.title);
     }, 1);
 
     it('Verify each identifier is clickable', () => {

@@ -1,7 +1,6 @@
 import { TextareaPo } from '../pages/textarea.po';
 import {
     basic_text_area_label,
-    basic_text_area_placeholder,
     basic_text_area_popover,
     basicTextareaPlaceholderArr,
     compact_text_area_label,
@@ -79,7 +78,8 @@ describe('Verify Textarea component', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(textareaPage.title);
+        waitForPresent(textareaPage.root);
+        waitForElDisplayed(textareaPage.title);
     }, 1);
 
     describe('has Textarea and', () => {

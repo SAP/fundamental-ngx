@@ -25,7 +25,8 @@ import {
     setValue,
     waitForElDisplayed,
     waitForNotDisplayed,
-    waitForNotPresent
+    waitForNotPresent,
+    waitForPresent
 } from '../../driver/wdio';
 import {
     approvedStatus,
@@ -86,6 +87,7 @@ describe('dialog test suite', () => {
 
     beforeEach(() => {
         refreshPage();
+        waitForPresent(dialogPage.root);
         waitForElDisplayed(dialogPage.title);
     }, 1);
 
@@ -220,6 +222,8 @@ describe('dialog test suite', () => {
     describe('complex dialog example', () => {
         it('should check dialog selections', () => {
             refreshPage();
+            waitForPresent(dialogPage.root);
+            waitForElDisplayed(dialogPage.title);
             openDialog(complexDialog);
             pause(5000);
             waitForElDisplayed(dialogItems);

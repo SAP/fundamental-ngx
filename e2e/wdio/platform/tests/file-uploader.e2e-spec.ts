@@ -7,6 +7,7 @@ import {
     getText,
     refreshPage,
     uploadFile,
+    waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 import { FileUploaderPo } from '../pages/file-uploader.po';
@@ -14,8 +15,7 @@ import { imagePath, placeholderValue, titleValue } from '../fixtures/appData/fil
 
 describe('File uploader test suite', () => {
     const fileUploaderPage: FileUploaderPo = new FileUploaderPo();
-    const { fileUploaderRoot, fileUploaderInput, fileUploaderInputFile, browseButton, fileSelectedText } =
-        fileUploaderPage;
+    const { fileUploaderInput, fileUploaderInputFile, browseButton, fileSelectedText } = fileUploaderPage;
 
     beforeAll(() => {
         fileUploaderPage.open();
@@ -23,7 +23,8 @@ describe('File uploader test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(fileUploaderRoot);
+        waitForPresent(fileUploaderPage.root);
+        waitForElDisplayed(fileUploaderPage.title);
     }, 1);
 
     it('Verify placeholders', () => {

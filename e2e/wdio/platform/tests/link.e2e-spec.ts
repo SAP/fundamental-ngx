@@ -17,7 +17,6 @@ import {
     getElementTitle,
     isElementClickable,
     mouseHoverElement,
-    refreshPage,
     scrollIntoView,
     waitForElDisplayed
 } from '../../driver/wdio';
@@ -103,6 +102,10 @@ describe('Link component test suite', () => {
     });
 
     it('should check truncated link', () => {
+        if (browserIsSafari()) {
+            // mouse hover doesn't work
+            return;
+        }
         const truncatedLinkAltText = getElementTitle(truncatedLink);
 
         scrollIntoView(truncatedLink);

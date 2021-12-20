@@ -30,7 +30,6 @@ describe('Value help dialog test suite', () => {
         formInputField,
         goBtn,
         tableRows,
-        pageHeader,
         tableCheckboxes,
         selectedItemName,
         selectedTokens,
@@ -71,7 +70,8 @@ describe('Value help dialog test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForElDisplayed(pageHeader);
+        waitForPresent(valueHelpDialogPage.root);
+        waitForElDisplayed(valueHelpDialogPage.title);
     }, 1);
 
     if (browserIsSafari()) {

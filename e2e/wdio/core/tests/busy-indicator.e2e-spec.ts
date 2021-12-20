@@ -10,6 +10,7 @@ import {
     isElementDisplayed,
     refreshPage,
     scrollIntoView,
+    waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 import { sizeS, sizeM, sizeL } from '../fixtures/appData/busy-indicator-contents';
@@ -42,7 +43,8 @@ describe('Busy Indicator test suite:', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(smallIndicator);
+        waitForPresent(busyIndicatorPage.root);
+        waitForElDisplayed(busyIndicatorPage.title);
     }, 1);
 
     it('Verify all Indicators on the page', () => {

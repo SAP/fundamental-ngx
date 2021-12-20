@@ -11,6 +11,7 @@ import {
     isElementDisplayed,
     refreshPage,
     scrollIntoView,
+    waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 import { alertText, testTextLess, testTextMore } from '../fixtures/appData/feed-list-item-contents';
@@ -42,7 +43,8 @@ describe('Feed list item test suite:', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(feedListItemPage.title);
+        waitForPresent(feedListItemPage.root);
+        waitForElDisplayed(feedListItemPage.title);
     }, 1);
 
     it('should check clickability author and reply links', () => {

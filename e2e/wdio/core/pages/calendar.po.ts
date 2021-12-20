@@ -1,12 +1,5 @@
 import { CoreBaseComponentPo } from './core-base-component.po';
-import {
-    click,
-    getElementArrayLength,
-    getElementClass,
-    scrollIntoView,
-    waitForElDisplayed,
-    waitForPresent
-} from '../../driver/wdio';
+import { click, scrollIntoView, waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class CalendarPo extends CoreBaseComponentPo {
     url = '/calendar';
@@ -60,8 +53,8 @@ export class CalendarPo extends CoreBaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForPresent(this.title);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
     setCalendarRange(selector: string, startDateIndex: number, stopDateIndex: number): void {

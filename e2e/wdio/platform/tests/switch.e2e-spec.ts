@@ -8,7 +8,6 @@ import {
     semantic_switch_alternative_text
 } from '../fixtures/appData/swich-page-content';
 import {
-    browserIsIE,
     browserIsIEorSafari,
     browserIsSafari,
     click,
@@ -60,6 +59,7 @@ describe('Verify Switch component', () => {
 
     afterEach(() => {
         refreshPage();
+        waitForPresent(switchPage.root);
         waitForElDisplayed(switchPage.title);
     }, 1);
 

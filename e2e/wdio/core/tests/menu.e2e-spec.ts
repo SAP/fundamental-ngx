@@ -12,7 +12,8 @@ import {
     getTextArr,
     refreshPage,
     sendKeys,
-    browserIsSafari
+    browserIsSafari,
+    waitForPresent
 } from '../../driver/wdio';
 import { emptyValuesArr } from '../fixtures/appData/menu-contents';
 
@@ -44,6 +45,7 @@ describe('Menu test suite', () => {
 
     afterEach(() => {
         refreshPage();
+        waitForPresent(menuPage.root);
         waitForElDisplayed(menuPage.title);
     }, 1);
 

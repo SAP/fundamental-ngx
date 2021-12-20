@@ -10,7 +10,6 @@ import {
     isElementDisplayed,
     waitForNotDisplayed,
     waitForPresent,
-    waitForNotPresent,
     pause
 } from '../../driver/wdio';
 
@@ -47,6 +46,7 @@ describe('Notification component test', () => {
 
     beforeEach(() => {
         refreshPage();
+        waitForPresent(notificationPage.root);
         waitForElDisplayed(notificationPage.title);
     }, 2);
 

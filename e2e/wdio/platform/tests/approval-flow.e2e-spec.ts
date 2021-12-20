@@ -110,7 +110,8 @@ describe('Approval flow', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(approvalFlowPage.watchers);
+        waitForPresent(approvalFlowPage.root);
+        waitForElDisplayed(approvalFlowPage.title);
     }, 1);
 
     it('should have watchers section with watchers details displayed', () => {

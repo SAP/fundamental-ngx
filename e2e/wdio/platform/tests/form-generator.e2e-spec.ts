@@ -12,7 +12,8 @@ import {
     setValue,
     clickAndMoveElement,
     pause,
-    browserIsSafari
+    browserIsSafari,
+    waitForPresent
 } from '../../driver/wdio';
 import {
     requiredErrorMessage,
@@ -56,10 +57,11 @@ describe('Form generator test suite', () => {
 
     beforeEach(() => {
         refreshPage();
-        if (doesItExist(busyIndicator) === true) {
-            pause(1000);
-        }
+        waitForPresent(formGeneratorPage.root);
         waitForElDisplayed(formGeneratorPage.title);
+        if (doesItExist(busyIndicator) === true) {
+            pause(2000);
+        }
     }, 1);
 
     describe('Tests for default example', () => {

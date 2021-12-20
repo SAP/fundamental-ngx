@@ -48,7 +48,8 @@ describe('Multi input test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(multiInputPage.title);
+        waitForPresent(multiInputPage.root);
+        waitForElDisplayed(multiInputPage.title);
     }, 1);
 
     it('Verify multi input allows user to enter multiple values', () => {
@@ -264,7 +265,7 @@ describe('Multi input test suite', () => {
         multiInputPage.selectOption('Alaska');
         click(crossButton('Alaska'));
         expect(isElementDisplayed(errorMessage)).toBe(true);
-        expect(getText(errorMessage)).toBe('Value is required');
+        expect(getText(errorMessage).trim()).toBe('Value is required');
     });
 
     it('should check no cross icons in menu list items', () => {
