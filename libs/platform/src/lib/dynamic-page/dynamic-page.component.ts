@@ -12,7 +12,6 @@ import {
     Input,
     OnDestroy,
     QueryList,
-    Renderer2,
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
@@ -45,6 +44,10 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     /** aria label for the page */
     @Input()
     ariaLabel: string;
+
+    /** Whether or not tabs should be stacked. */
+    @Input()
+    stackContent = false;
 
     /**
      * sets background for content to `list`, `transparent`, or `solid` background color.
@@ -102,6 +105,7 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     @ContentChildren(DynamicPageContentComponent, { descendants: true })
     contentComponents: QueryList<DynamicPageContentComponent>;
 
+    /** Reference to tab items components */
     @ViewChildren(TabPanelComponent)
     dynamicPageTabs: QueryList<TabPanelComponent>;
 
@@ -113,21 +117,16 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
      * @hidden
      * whether tabbed content is present in this page
      */
-    isTabbed = false;
+    _isTabbed = false;
 
     /**
      * @hidden
      * holds the tab content
      */
-    tabs: DynamicPageContentComponent[] = [];
+    _tabs: DynamicPageContentComponent[] = [];
 
     /** @hidden */
-    constructor(
-        protected _cd: ChangeDetectorRef,
-        private _elementRef: ElementRef<HTMLElement>,
-        private _renderer: Renderer2,
-        private _dynamicPageService: DynamicPageService
-    ) {
+    constructor(protected _cd: ChangeDetectorRef, private _elementRef: ElementRef<HTMLElement>) {
         super(_cd);
     }
 
@@ -182,7 +181,7 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     private _createContentTabs(): void {
         const content = this.contentComponents.toArray();
         // reset array
-        this.tabs = [];
+        this._tabs = [];
         if (!this._isTabContentPresent(content)) {
             if (content.length > 1) {
                 throw new Error(
@@ -194,10 +193,10 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
 
         if (content) {
             content.forEach((contentItem) => {
-                if (!contentItem.tabLabel && this.isTabbed) {
+                if (!contentItem.tabLabel && this._isTabbed) {
                     throw new Error('At least one element is already tabbed, please provide a `tabLabel`.');
                 } else {
-                    this.tabs.push(contentItem);
+                    this._tabs.push(contentItem);
                 }
             });
         }
@@ -207,10 +206,10 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     private _isTabContentPresent(content: DynamicPageContentComponent[]): boolean {
         content.forEach((contentItem) => {
             if (contentItem.tabLabel) {
-                this.isTabbed = true;
+                this._isTabbed = true;
                 return;
             }
         });
-        return this.isTabbed;
+        return this._isTabbed;
     }
 }
