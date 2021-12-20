@@ -37,7 +37,7 @@ import {
 import { TableRowDirective } from '@fundamental-ngx/core/table';
 import { isDataSource, isFunction, isString } from '@fundamental-ngx/platform/shared';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
-import { get } from 'lodash';
+import { get } from 'lodash-es';
 
 import { TableService } from './table.service';
 import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilter, TableState } from './interfaces';

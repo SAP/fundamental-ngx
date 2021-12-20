@@ -1,5 +1,5 @@
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
-import { get } from 'lodash';
+import { get } from 'lodash-es';
 import {
     CollectionBooleanFilter,
     CollectionDateFilter,
