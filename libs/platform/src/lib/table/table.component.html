@@ -423,13 +423,7 @@
                                 role="cell"
                             ></td>
 
-                            <td *ngIf="_isShownNavigationColumn" fd-table-cell>
-                                <i
-                                    fd-table-icon
-                                    [navigation]="true"
-                                    class="fdp-table__navigation-indicator sap-icon--slim-arrow-left"
-                                ></i>
-                            </td>
+                            <td *ngIf="_isShownNavigationColumn" fd-table-cell class="fdp-table__cell--navigation"></td>
                         </tr>
                     </tbody>
                 </table>
