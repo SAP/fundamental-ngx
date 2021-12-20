@@ -26,6 +26,7 @@ import {
     executeScriptAfterTagAttr,
     executeScriptBeforeTagAttr,
     getElementArrayLength,
+    getElementClass,
     getElementPlaceholder,
     getElementSize,
     getText,
@@ -300,6 +301,16 @@ describe('Verify Textarea component', () => {
 
         it('should check over limit message for counter template textarea', () => {
             checkOverLimitMessage(textareaCounterTemplateExample + textarea, 10);
+        });
+
+        // skipped due to https://github.com/SAP/fundamental-ngx/issues/7284
+        xit('should check that textarea has error styles when we force error', () => {
+            click(textareaI18nExample + textarea);
+            // force error
+            sendKeys(['A', 'Backspace']);
+
+            expect(getElementClass(textareaI18nExample + textarea)).toContain('is-error');
+            expect(isElementDisplayed(message)).toBe(true);
         });
 
         // Disabled due to changes in inline help - now there is an icon instead of text
