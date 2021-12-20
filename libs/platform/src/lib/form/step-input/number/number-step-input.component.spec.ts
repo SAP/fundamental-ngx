@@ -363,7 +363,7 @@ describe('NumberStepInputComponent main functionality', () => {
         const wheelEventUp = new WheelEvent('wheel', { deltaY: -15 });
         const wheelEventDown = new WheelEvent('wheel', { deltaY: 15 });
 
-        inputEl.focus();
+        inputEl.dispatchEvent(new Event('focus'));
         fixture.detectChanges();
 
         inputEl.dispatchEvent(wheelEventUp);
