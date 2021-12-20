@@ -14,7 +14,6 @@ import {
 import { ResizeHandleDirective } from './resize-handle.directive';
 import { fromEvent, merge, Observable, Subscription } from 'rxjs';
 import { filter, map, mapTo, pairwise, takeUntil, tap } from 'rxjs/operators';
-import { closestElement } from '../../functions/closest-element';
 import { RtlService } from '../../services/rtl.service';
 
 interface ResizeMove {
@@ -63,7 +62,7 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
     private _isRtl = false;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef, @Optional() private _rtlService: RtlService) {}
+    constructor(private _elementRef: ElementRef<HTMLElement>, @Optional() private _rtlService: RtlService) {}
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -178,7 +177,7 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
     private _findResizeContainer(): Element {
         let resizeContainer: Element | null;
         if (typeof this.resizeBoundary === 'string') {
-            resizeContainer = closestElement(this.resizeBoundary, this._elementRef.nativeElement);
+            resizeContainer = this._elementRef.nativeElement.closest(this.resizeBoundary);
         } else {
             resizeContainer = this.resizeBoundary;
         }
