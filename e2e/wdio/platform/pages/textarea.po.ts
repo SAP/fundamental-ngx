@@ -35,6 +35,7 @@ export class TextareaPo extends BaseComponentPo {
     detailedTextAreaCharacterCounter = `//div[label[@id='fdp-form-label-detailedDescription']]//div[@role="alert"]//span`;
     noPlatformsFormTextAreaLabel = '[for="textarea-1"]';
     textarea = 'textarea:not(#readonlyDescription, #disabledDescription)';
+    message = '.fd-form-message';
 
     open(): void {
         super.open(this.url);

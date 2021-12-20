@@ -30,6 +30,7 @@ import {
     getElementSize,
     getText,
     getValue,
+    isElementDisplayed,
     isEnabled,
     mouseHoverElement,
     pause,
@@ -69,7 +70,8 @@ describe('Verify Textarea component', () => {
         textareaAutogrowExample,
         textareaCounterExample,
         textareaCounterTemplateExample,
-        textareaI18nExample
+        textareaI18nExample,
+        message
     } = textareaPage;
     const copyPasteBtn = currentPlatformName() === 'Mac OS X' ? 'Command' : 'Control';
 
@@ -279,6 +281,27 @@ describe('Verify Textarea component', () => {
             expect(currentText.length).toBe(10);
         });
 
+        it('should check over limit message for i18n textarea', () => {
+            checkOverLimitMessage(textareaI18nExample + textarea, 10);
+        });
+
+        it('should check over limit message for basic textarea', () => {
+            checkOverLimitMessage(textareaBasicExample + textarea, 10, 2);
+        });
+
+        it('should check over limit message for aurogrow textarea', () => {
+            checkOverLimitMessage(textareaAutogrowExample + textarea, 6, 1);
+            checkOverLimitMessage(textareaAutogrowExample + textarea, 6, 3);
+        });
+
+        it('should check over limit message for counter textarea', () => {
+            checkOverLimitMessage(textareaCounterExample + textarea, 10);
+        });
+
+        it('should check over limit message for counter template textarea', () => {
+            checkOverLimitMessage(textareaCounterTemplateExample + textarea, 10);
+        });
+
         // Disabled due to changes in inline help - now there is an icon instead of text
         xdescribe('have a visual cue ', () => {
             it('should have ? mark by default', () => {
@@ -308,5 +331,15 @@ describe('Verify Textarea component', () => {
         for (let i = 0; i < textareaLength; i++) {
             expect(getElementPlaceholder(example + textarea, i)).toBe(placeholderArr[i]);
         }
+    }
+
+    function checkOverLimitMessage(textarea: string, limit: number, i: number = 0): void {
+        clearValue(textarea, i);
+        click(textarea, i);
+        for (let i = 0; i < limit + 1; i++) {
+            sendKeys('A');
+        }
+        expect(isElementDisplayed(message)).toBe(true);
+        expect(getText(message)).toBe('Please get your character count under limit.');
     }
 });

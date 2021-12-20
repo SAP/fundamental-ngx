@@ -4,11 +4,14 @@ import {
     clearValue,
     click,
     doesItExist,
+    getAttributeByName,
     getElementArrayLength,
+    getElementClass,
     getText,
     refreshPage,
     scrollIntoView,
     sendKeys,
+    setValue,
     waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
@@ -60,7 +63,15 @@ describe('Value help dialog test suite', () => {
         showAllBtn,
         inputFields,
         toolbarButtons,
-        conditionsButton
+        conditionsButton,
+        cancelButton,
+        input,
+        dropDownItem,
+        openMobileExampleBtn,
+        dialogButton,
+        dialogInput,
+        token,
+        tokenizerClearButton
     } = valueHelpDialogPage;
 
     beforeAll(() => {
@@ -261,6 +272,8 @@ describe('Value help dialog test suite', () => {
             click(menuCheckboxes);
             click(menuDialogBtn);
             expect(getText(inputToken)).toEqual(itemName);
+            click(openDialogBtn, 3);
+            expect(getAttributeByName(tableRows, 'aria-selected')).toBe('true');
         });
 
         it('should check selection from main dialog', () => {
@@ -272,6 +285,60 @@ describe('Value help dialog test suite', () => {
             click(footerBtns, 1);
             waitForPresent(inputToken);
             expect(getText(inputToken)).toEqual(selectedItem.toUpperCase());
+        });
+
+        it('should check search field', () => {
+            click(openDialogBtn, 3);
+            const firstName = getText(productNameColumn).toLowerCase();
+            click(cancelButton);
+            click(input, 3);
+            sendKeys(firstName);
+            expect(getText(dropDownItem).toLowerCase()).toEqual(firstName);
+        });
+    });
+
+    describe('Mobile example', () => {
+        it('should check selecting in value help dialog', () => {
+            click(openMobileExampleBtn);
+            click(dialogButton);
+            clickTableCheckbox(1);
+            const text = getText(productNameColumn);
+            expect(getText(token)).toBe(text);
+        });
+
+        it('should check search in mobile example', () => {
+            click(openMobileExampleBtn);
+            click(dialogButton);
+            const text = getText(productNameColumn);
+            click(dialogButton, 2);
+            setValue(dialogInput, text);
+            click(dialogButton, 2);
+            const itemsQuantity = getElementArrayLength(productNameColumn);
+
+            for (let i = 0; i < itemsQuantity; i++) {
+                expect(getText(productNameColumn, i)).toContain(text);
+            }
+        });
+
+        it('should check unselecting token by tokenizer', () => {
+            click(openMobileExampleBtn);
+            click(dialogButton);
+            clickTableCheckbox(1);
+            clickTableCheckbox(2);
+            expect(getElementArrayLength(token)).toBe(2);
+            click(dialogButton + '[glyph=decline]');
+            expect(doesItExist(token)).toBe(false);
+            for (let i = 1; i < getElementArrayLength(tableRows) - 1; i++) {
+                expect(getAttributeByName(tableRows, 'aria-selected', i)).toBe('false');
+            }
+        });
+
+        it('should check that cross button is disable untill we select an item', () => {
+            click(openMobileExampleBtn);
+            click(dialogButton);
+            expect(getElementClass(tokenizerClearButton)).toContain('is-disabled');
+            clickTableCheckbox(1);
+            expect(getElementClass(tokenizerClearButton)).not.toContain('is-disabled');
         });
     });
 

@@ -2,12 +2,15 @@ import {
     browserIsFirefox,
     click,
     currentPlatformName,
+    doesItExist,
     getAttributeByName,
     getElementArrayLength,
     getElementClass,
     getText,
+    isElementDisplayed,
     refreshPage,
     scrollIntoView,
+    setValue,
     waitForElDisplayed
 } from '../../driver/wdio';
 import { TabsPo } from '../pages/tabs.po';
@@ -35,12 +38,17 @@ describe('Tabs test suite', () => {
         iconOnlyMode,
         compactCheckBox,
         threeTabsGroup,
-        icon1,
+        iconSelect,
         collapsibleTab,
         acceleratedIcon,
         fdIcon,
         filterMode,
-        fdTabFF
+        fdTabFF,
+        titleField,
+        counterField,
+        playGroundExample,
+        tabCount,
+        tabTitle
     } = tabsPage;
 
     beforeAll(() => {
@@ -125,9 +133,34 @@ describe('Tabs test suite', () => {
         click(modeSelect);
         click(iconOnlyMode);
         click(compactCheckBox);
-        click(icon1);
+        click(iconSelect);
         click(acceleratedIcon);
         expect(getElementClass(fdIcon)).toContain('accelerated');
+    });
+
+    it('should check set custom title in playground', () => {
+        const customTitle = 'Battle';
+        scrollIntoView(playGroundExample);
+        setValue(titleField, customTitle);
+        expect(getText(playGroundExample + tabTitle)).toBe(customTitle);
+    });
+
+    it('should check set custom title in playground', () => {
+        const customCount = '123';
+        scrollIntoView(playGroundExample);
+        setValue(counterField, customCount);
+        expect(getText(playGroundExample + tabCount)).toBe(customCount);
+    });
+
+    it('should check choosing icon for tab without icon mode', () => {
+        scrollIntoView(playGroundExample);
+        click(iconSelect);
+        click(acceleratedIcon);
+        // icon should not exist cz by default tabs mode is not icon
+        expect(doesItExist(fdIcon)).toBe(false);
+        click(modeSelect);
+        click(iconOnlyMode);
+        expect(isElementDisplayed(fdIcon)).toBe(true);
     });
 
     it('should check RTL and LTR orientation', () => {
