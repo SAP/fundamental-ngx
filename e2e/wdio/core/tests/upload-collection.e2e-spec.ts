@@ -11,7 +11,8 @@ import {
     refreshPage,
     scrollIntoView,
     setValue,
-    uploadFile
+    uploadFile,
+    waitForElDisplayed
 } from '../../driver/wdio';
 import {
     acceptAlertText,
@@ -44,6 +45,7 @@ describe('File uploader component test', () => {
 
     beforeAll(() => {
         uploadCollectionPage.open();
+        waitForElDisplayed(uploadCollectionPage.title);
     }, 1);
 
     afterEach(() => {
@@ -51,17 +53,29 @@ describe('File uploader component test', () => {
     }, 2);
 
     describe('Should check default example', () => {
-        it('should verify basic checks', () => {
+        it('should check possible click on file', () => {
             checkElArrIsClickable(uploadCollectionExample + link);
+        });
+
+        it('should check possible rename file', () => {
             checkFileNameChange(uploadCollectionExample);
+        });
+
+        it('should check possible delete file', () => {
             checkItemDecline(uploadCollectionExample);
         });
     });
 
     describe('Should check Small Mode example', () => {
-        it('should verify basic checks', () => {
+        it('should check possible click on file', () => {
             checkElArrIsClickable(uploadCollectionSmallExample + link);
+        });
+
+        it('should check possible rename file', () => {
             checkFileNameChange(uploadCollectionSmallExample);
+        });
+
+        it('should check possible delete file', () => {
             checkItemDecline(uploadCollectionSmallExample);
         });
 
@@ -74,7 +88,7 @@ describe('File uploader component test', () => {
     });
 
     describe('Should check Customization example', () => {
-        it('should verify basic checks', () => {
+        it('should check possible click on file', () => {
             checkElArrIsClickable(uploadCollectionCustomExample + link);
         });
 
@@ -95,9 +109,15 @@ describe('File uploader component test', () => {
     });
 
     describe('Should check Complex example', () => {
-        it('should verify basic checks', () => {
+        it('should check possible click on file', () => {
             checkElArrIsClickable(uploadCollectionComplexExample + link);
+        });
+
+        it('should check possible rename file', () => {
             checkFileNameChange(uploadCollectionComplexExample);
+        });
+
+        it('should check possible delete file', () => {
             checkItemDecline(uploadCollectionComplexExample);
         });
 
@@ -150,7 +170,6 @@ describe('File uploader component test', () => {
             acceptAlert();
             expect(getText(example + link, i)).toBe(testText + formatArr[i]);
         }
-        refreshPage();
     }
 
     function checkItemDecline(example: string): void {
@@ -163,6 +182,5 @@ describe('File uploader component test', () => {
         acceptAlert();
         const itemCount = getElementArrayLength(example + item);
         expect(itemCount).toEqual(2);
-        refreshPage();
     }
 });
