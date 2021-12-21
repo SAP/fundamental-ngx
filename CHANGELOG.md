@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.228 (2021-12-21)
+
+
+### Bug Fixes
+
+* **platform:** table disallow nav column resize ([#7339](https://github.com/SAP/fundamental-ngx/issues/7339)) ([66af857](https://github.com/SAP/fundamental-ngx/commit/66af85747614999be5f62da44d39b6a944292e9b))
+
 ## 0.33.0-rc.227 (2021-12-21)
 
 
