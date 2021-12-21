@@ -58,6 +58,10 @@
 
 ### Features
 
+### ⚠ BREAKING CHANGES
+
+* **core, platform:** angular 13 migration
+
 * **core,platform:** migrate to latest nx and angular 13 ([#7210](https://github.com/SAP/fundamental-ngx/issues/7210)) ([2daa848](https://github.com/SAP/fundamental-ngx/commit/2daa848c836b6910dea203d84a4fe2f036926ba0))
 
 ## 0.33.0-rc.212 (2021-12-10)
