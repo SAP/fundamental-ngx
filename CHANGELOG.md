@@ -1,4 +1,12 @@
 
+### [0.32.4](https://github.com/SAP/fundamental-ngx/compare/v0.32.3...v0.32.4) (2021-12-21)
+
+
+### Bug Fixes
+
+* **platform:** init 0.32.4 ([32950c9](https://github.com/SAP/fundamental-ngx/commit/32950c9767cdacdef1da64024aa870a3cf6de822))
+* **platform:** update messages xlf ([88c0cd8](https://github.com/SAP/fundamental-ngx/commit/88c0cd895a18a1c98bdb84446eac65a7440334a2))
+
 ### [0.32.3](https://github.com/SAP/fundamental-ngx/compare/v0.32.2...v0.32.3) (2021-10-26)
 
 
