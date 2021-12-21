@@ -1,4 +1,4 @@
-import { Attribute, Directive, ElementRef, HostBinding, Input, OnInit } from '@angular/core';
+import { Directive, ElementRef, HostBinding, Input, OnInit } from '@angular/core';
 
 @Directive({
     selector: '[fd-list-link], [fdListLink]'
