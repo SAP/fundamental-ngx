@@ -32,7 +32,7 @@ export class TextareaPo extends BaseComponentPo {
     detailedTextAreaLabel = '#fdp-form-label-detailedDescription > span';
     detailedTextArea = '#detailedDescription';
     detailedTextAreaErrorMessage = '[type="error"]';
-    detailedTextAreaCharacterCounter = `//div[label[@id='fdp-form-label-detailedDescription']]//div[@role="alert"]//span`;
+    detailedTextAreaCharacterCounter = `fdp-platform-textarea-counter-example fd-popover span`;
     noPlatformsFormTextAreaLabel = '[for="textarea-1"]';
     textarea = 'textarea:not(#readonlyDescription, #disabledDescription)';
     message = '.fd-form-message';

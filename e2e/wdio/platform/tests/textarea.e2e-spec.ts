@@ -199,9 +199,8 @@ describe('Verify Textarea component', () => {
 
             expect(errorText.trim()).toBe('Value is required');
         });
-        // TODO: Need to be fixed for EdgeWin
-        xit('should display the counter of characters allowed to input ', () => {
-            // need to sendKeys because of the issue with characters counter
+
+        it('should display the counter of characters allowed to input ', () => {
             addValue(detailedTextArea, 'test');
             const charCounterText1 = getText(detailedTextAreaCharacterCounter);
 
@@ -283,24 +282,24 @@ describe('Verify Textarea component', () => {
         });
 
         it('should check over limit message for i18n textarea', () => {
-            checkOverLimitMessage(textareaI18nExample + textarea, 10);
+            checkOverLimitMessage(textareaI18nExample, 10);
         });
 
         it('should check over limit message for basic textarea', () => {
-            checkOverLimitMessage(textareaBasicExample + textarea, 10, 2);
+            checkOverLimitMessage(textareaBasicExample, 10, 2);
         });
 
         it('should check over limit message for aurogrow textarea', () => {
-            checkOverLimitMessage(textareaAutogrowExample + textarea, 6, 1);
-            checkOverLimitMessage(textareaAutogrowExample + textarea, 6, 3);
+            checkOverLimitMessage(textareaAutogrowExample, 6, 1);
+            checkOverLimitMessage(textareaAutogrowExample, 6, 3);
         });
 
         it('should check over limit message for counter textarea', () => {
-            checkOverLimitMessage(textareaCounterExample + textarea, 10);
+            checkOverLimitMessage(textareaCounterExample, 10);
         });
 
         it('should check over limit message for counter template textarea', () => {
-            checkOverLimitMessage(textareaCounterTemplateExample + textarea, 10);
+            checkOverLimitMessage(textareaCounterTemplateExample, 10);
         });
 
         // skipped due to https://github.com/SAP/fundamental-ngx/issues/7284
@@ -344,13 +343,18 @@ describe('Verify Textarea component', () => {
         }
     }
 
-    function checkOverLimitMessage(textarea: string, limit: number, i: number = 0): void {
-        clearValue(textarea, i);
-        click(textarea, i);
+    function checkOverLimitMessage(section: string, limit: number, i: number = 0): void {
+        clearValue(section + textarea, i);
+        click(section + textarea, i);
         for (let i = 0; i < limit + 1; i++) {
             sendKeys('A');
         }
         expect(isElementDisplayed(message)).toBe(true);
-        expect(getText(message)).toBe('Please get your character count under limit.');
+        if (section === textareaBasicExample) {
+            expect(getText(message)).toBe('This is an example warning when used without forms.');
+        }
+        if (section !== textareaBasicExample) {
+            expect(getText(message)).toBe('Please get your character count under limit.');
+        }
     }
 });
