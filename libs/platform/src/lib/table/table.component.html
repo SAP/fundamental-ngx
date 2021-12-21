@@ -96,6 +96,7 @@
                         *ngIf="_sortRulesMap.has(column.key) || _filterRulesMap.has(column.key)"
                     >
                         <fd-icon *ngIf="_filterRulesMap.has(column.key)" fd-table-icon glyph="filter"></fd-icon>
+
                         <fd-icon
                             *ngIf="_sortRulesMap.has(column.key)"
                             fd-table-icon
@@ -201,10 +202,7 @@
             </th>
         </ng-container>
 
-        <th *ngIf="_isShownNavigationColumn" fd-table-cell role="columnheader">
-            <!-- Instead of setting the width, let's have an invisible icon so if it's change its width everything still will be okay. -->
-            <i fd-table-icon [navigation]="true" class="fdp-table__navigation-indicator sap-icon--slim-arrow-left"></i>
-        </th>
+        <th *ngIf="_isShownNavigationColumn" fd-table-cell class="fdp-table__cell--navigation" role="columnheader"></th>
 
         <th class="fd-table__cell--mock"></th>
     </tr>
@@ -376,7 +374,7 @@
                                 </div>
                             </td>
 
-                            <td *ngIf="_isShownNavigationColumn" fd-table-cell>
+                            <td *ngIf="_isShownNavigationColumn" fd-table-cell class="fdp-table__cell--navigation">
                                 <i
                                     *ngIf="row.navigatable"
                                     fd-table-icon
@@ -425,13 +423,7 @@
                                 role="cell"
                             ></td>
 
-                            <td *ngIf="_isShownNavigationColumn" fd-table-cell>
-                                <i
-                                    fd-table-icon
-                                    [navigation]="true"
-                                    class="fdp-table__navigation-indicator sap-icon--slim-arrow-left"
-                                ></i>
-                            </td>
+                            <td *ngIf="_isShownNavigationColumn" fd-table-cell class="fdp-table__cell--navigation"></td>
                         </tr>
                     </tbody>
                 </table>
