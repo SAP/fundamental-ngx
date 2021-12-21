@@ -6,7 +6,7 @@ export class RatingIndicatorPo extends CoreBaseComponentPo {
     root = '#page-content';
 
     starsRatingExamples = '[name="rating-0"]';
-    starsRatingDisplayMode = '[name="rating-6"]';
+    starsRatingDisabledMode = '[name="rating-6"]';
     starsRatingDynamicChanges = '[name="rating-13"]';
     containerDynamicChanges = '.is-display-mode';
     inputsBasicExample = 'fd-rating-indicator-example input.ng-pristine';
@@ -14,6 +14,8 @@ export class RatingIndicatorPo extends CoreBaseComponentPo {
     inputsDynamicChanges = 'fd-ri-dynamic-example input.ng-pristine';
     touchedInputsDynamicChanges = 'fd-ri-dynamic-example input.ng-dirty';
     sizeRatingIndicator = '[area-label="Total raiting"]';
+    starsRatingDisplayMode = 'fd-ri-display-mode-example .fd-rating-indicator__label';
+    textDisplayMode = 'fd-ri-display-mode-example .fd-rating-indicator__dynamic-text';
 
     open(): void {
         super.open(this.url);
