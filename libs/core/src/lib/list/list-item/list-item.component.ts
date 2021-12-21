@@ -116,6 +116,9 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
     @ContentChild(RadioButtonComponent)
     radio: RadioButtonComponent;
 
+    @ContentChild(ListLinkDirective)
+    linkComponent: ListLinkDirective;
+
     /** @hidden */
     @ContentChildren(ListLinkDirective)
     linkDirectives: QueryList<ListLinkDirective>;
@@ -133,6 +136,9 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
     /** @hidden */
     private _tabIndex = 0;
 
+    /** @hidden */
+    private _url: string;
+
     constructor(public elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) {
         super(elementRef);
     }
@@ -141,6 +147,8 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
     ngAfterContentInit(): void {
         this._listenOnLinkQueryChange();
         this._listenOnButtonQueryChange();
+
+        this._url = this.linkComponent?.href;
     }
 
     /** @hidden */
@@ -160,6 +168,9 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
             if (this.radio) {
                 this.radio.labelClicked(event);
                 this._muteEvent(event);
+            }
+            if (this.link && this._url) {
+                window.open(this._url, '_self');
             }
         }
         this.keyDown.emit(event);

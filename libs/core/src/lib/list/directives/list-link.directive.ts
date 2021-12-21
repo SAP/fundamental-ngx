@@ -1,9 +1,9 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { Attribute, Directive, ElementRef, HostBinding, Input, OnInit } from '@angular/core';
 
 @Directive({
     selector: '[fd-list-link], [fdListLink]'
 })
-export class ListLinkDirective {
+export class ListLinkDirective implements OnInit {
     /** Defines if navigation indicator arrow should be included inside list item */
     @Input()
     @HostBinding('class.fd-list__link--navigation-indicator')
@@ -22,4 +22,14 @@ export class ListLinkDirective {
     /** @hidden */
     @HostBinding('class.fd-list__link')
     fdListLinkClass = true;
+
+    /** Keeps href string */
+    href: string;
+
+    constructor(private _elementRef: ElementRef) {}
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.href = this._elementRef.nativeElement.getAttribute('href');
+    }
 }
