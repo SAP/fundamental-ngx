@@ -9,6 +9,7 @@ import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
 import { FormFieldComponent } from '../../form-group/form-field/form-field.component';
 import { PlatformStepInputModule } from '../step-input.module';
 import { NumberStepInputChangeEvent, NumberStepInputComponent } from './number-step-input.component';
+import { runValueAccessorTests } from 'ngx-cva-test-suite';
 
 @Component({
     template: `<fdp-number-step-input name="number"></fdp-number-step-input>`
@@ -546,4 +547,24 @@ describe('Basic number Step Input withing platforms form', () => {
 
         expect(host.result).toEqual({ qty: 100 });
     });
+});
+
+const STEP_INPUT_IDENTIFIER = 'platform-step-input-unit-test';
+
+runValueAccessorTests({
+    component: NumberStepInputComponent,
+    testModuleMetadata: {
+        imports: [PlatformStepInputModule]
+    },
+    additionalSetup: (fixture, done) => {
+        fixture.componentInstance.id = STEP_INPUT_IDENTIFIER;
+        fixture.componentInstance.name = STEP_INPUT_IDENTIFIER;
+        done();
+    },
+    supportsOnBlur: true,
+    nativeControlSelector: `input[id="${STEP_INPUT_IDENTIFIER}"]`,
+    internalValueChangeSetter: (fixture, value) => {
+        fixture.componentInstance.value = value;
+    },
+    getComponentValue: (fixture) => fixture.componentInstance.value
 });
