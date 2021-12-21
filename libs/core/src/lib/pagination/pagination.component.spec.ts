@@ -60,11 +60,9 @@ describe('Pagination Component', () => {
     });
 
     it('should handle mouseevent', () => {
-        const mouseEvent = new MouseEvent('click');
-        spyOn(mouseEvent, 'preventDefault');
         spyOn(component.pageChangeStart, 'emit');
 
-        component.goToPage(1, mouseEvent);
+        component.goToPage(1);
 
         expect(component.pageChangeStart.emit).toHaveBeenCalledWith(1);
     });
@@ -114,13 +112,26 @@ describe('Pagination Component', () => {
             component.totalItems = 3000;
             component.itemsPerPage = 25;
             component.currentPage = 1;
-            fixture.detectChanges();
+
+            // NgOnChanges won't be executed when changing inputs from code
+            component.ngOnChanges({ itemsPerPage: { currentValue: 25 } } as any);
+            component['_cdr'].detectChanges();
+
+            expect(component.itemsPerPage).toBe(25);
 
             component.totalItems = 10;
-            fixture.detectChanges();
+
+            // NgOnChanges won't be executed when changing inputs from code
+            component.ngOnChanges({ totalItems: 10 } as any);
+            component['_cdr'].detectChanges();
+
+            expect(component.itemsPerPage).toBe(10);
 
             component.totalItems = 500;
-            fixture.detectChanges();
+
+            // NgOnChanges won't be executed when changing inputs from code
+            component.ngOnChanges({ totalItems: 500 } as any);
+            component['_cdr'].detectChanges();
 
             expect(component.itemsPerPage).toBe(25);
         });
@@ -188,12 +199,12 @@ describe('Pagination Component', () => {
             expect(component.itemsPerPageOptions).toEqual([10, 20, 30, 40, 50]);
         });
 
-        it('should filter values and keep only > 0 AND < totalItems', async () => {
+        it('should filter values and keep only > 0', async () => {
             component.totalItems = 100;
             component.itemsPerPageOptions = [-10, 0, 10, 50, 100, 150];
             fixture.detectChanges();
 
-            expect(component.itemsPerPageOptions).toEqual([10, 50]);
+            expect(component.itemsPerPageOptions).toEqual([10, 50, 100, 150]);
         });
     });
 });
