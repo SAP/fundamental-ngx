@@ -7,6 +7,7 @@ import {
     getText,
     isElementDisplayed,
     refreshPage,
+    scrollIntoView,
     waitForPresent
 } from '../../driver/wdio';
 
@@ -79,6 +80,7 @@ describe('Split-button test suite', () => {
     });
 
     function checkMenuOpens(section: string): void {
+        scrollIntoView(section);
         const itemsLength = getElementArrayLength(section + arrowDownBtn);
         for (let i = 0; i < itemsLength; i++) {
             click(section + arrowDownBtn, i);

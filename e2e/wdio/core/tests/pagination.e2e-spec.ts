@@ -2,7 +2,7 @@ import { PaginationPo } from '../pages/pagination.po';
 import {
     click,
     doesItExist,
-    getCurrentUrl,
+    getAttributeByName,
     getElementArrayLength,
     getText,
     getValue,
@@ -15,35 +15,33 @@ import {
 import {
     basicPaginationTestArr,
     itemPaginationTestArr,
-    selectPaginationTestArr1,
-    selectPaginationTestArr2,
-    selectPaginationTestArr3,
-    selectPaginationTestArr4,
-    selectPaginationTestArr5,
-    selectPaginationTestArr6,
-    selectPaginationTestArr7,
-    selectPaginationTestText,
-    playgroundPaginationItemArr,
-    playgroundPaginationItemArr2,
-    playgroundPaginationItemArr3,
-    playgroundPaginationTestText,
-    playgroundLabelArr
+    playgroundLabelArr,
+    resultsArr,
+    ResultsArr2
 } from '../fixtures/appData/pagination-contents';
 
 describe('Pagination test suite:', () => {
     const paginationPage = new PaginationPo();
     const {
+        basicPaginationExample,
         standardButton,
-        basicPaginationDiv,
-        basicPaginationPages,
-        itemPaginationPages,
-        totalPagination,
+        pages,
+        basicPaginationText,
+        showingItemsPaginationExample,
+        showingItemsPaginationText,
         linkPrevious,
         linkNext,
-        selectPaginationPages,
+        itemsPerPageProperty,
+        input,
+        itemsPerPageTemplate,
+        dropdownPopoverOption,
+        selectControl,
+        itemsPerPageList,
+        segmentButton,
+        mobilePaginationExample,
+        mobileButton,
+        playgroundExample,
         dropdownButton,
-        dropDownOption,
-        toggledButton,
         playgroundInputFields,
         playgroundPages,
         playgroundLabel
@@ -59,221 +57,156 @@ describe('Pagination test suite:', () => {
     }, 1);
 
     describe('Check Basic Pagination example', () => {
-        it('should check selected pages by clicking each option', () => {
-            scrollIntoView(standardButton);
-            click(standardButton);
+        it('should check selected pages by clicking options', () => {
+            scrollIntoView(basicPaginationExample);
+            click(basicPaginationExample + standardButton);
             // pause for the new text to load
             pause(250);
-            expect(getText(basicPaginationDiv)).toBe(basicPaginationTestArr[0]);
-            const linksLength = getElementArrayLength(basicPaginationPages);
-            for (let i = 0; i < linksLength; i++) {
-                click(basicPaginationPages, i);
-                // pause for the new text to load
-                pause(250);
-                expect(getText(basicPaginationDiv)).toBe(basicPaginationTestArr[i + 1]);
-            }
+            expect(getText(basicPaginationText)).toBe(basicPaginationTestArr[0]);
+
+            click(basicPaginationExample + pages);
+            // pause for the new text to load
+            pause(250);
+            expect(getText(basicPaginationText)).toBe(basicPaginationTestArr[1]);
+            click(basicPaginationExample + pages, 3);
+            // pause for the new text to load
+            pause(250);
+            expect(getText(basicPaginationText)).toBe(basicPaginationTestArr[2]);
         });
 
         it('should check selected pages by clicking previous and next link', () => {
-            // skipped due to cannot reproduce failure, needs further investigation
-            if (getCurrentUrl().includes('localhost')) {
-                return;
-            }
-            scrollIntoView(linkNext);
-            click(standardButton);
+            // // skipped due to cannot reproduce failure, needs further investigation
+            // if (getCurrentUrl().includes('localhost')) {
+            //     return;
+            // }
+            scrollIntoView(basicPaginationExample);
+            click(basicPaginationExample + standardButton);
             // pause to give browser time to complete action
             pause(250);
-            click(linkNext);
+            click(basicPaginationExample + linkNext);
             // pause for the new text to load
             pause(250);
-            expect(getText(basicPaginationDiv)).toBe(basicPaginationTestArr[1]);
+            expect(getText(basicPaginationText)).toBe(basicPaginationTestArr[1]);
 
-            click(linkPrevious);
+            click(basicPaginationExample + linkPrevious);
             // pause for the new text to load
             pause(250);
-            expect(getText(basicPaginationDiv)).toBe(basicPaginationTestArr[0]);
+            expect(getText(basicPaginationText)).toBe(basicPaginationTestArr[0]);
+        });
+
+        it('should check disabled previous and next links', () => {
+            scrollIntoView(basicPaginationExample);
+            click(basicPaginationExample + standardButton);
+            // pause for the new text to load
+            pause(250);
+            expect(getAttributeByName(linkPrevious, 'aria-disabled')).toBe('true');
+
+            click(basicPaginationExample + pages, 3);
+            // pause for the new text to load
+            pause(250);
+            expect(getAttributeByName(linkNext, 'aria-disabled')).toBe('true');
         });
     });
 
     describe('Check Pagination showing items example', () => {
-        it('should check selected pages by clicking each option', () => {
-            scrollIntoView(itemPaginationPages);
-            expect(getText(totalPagination).trim()).toBe(itemPaginationTestArr[0]);
-            const linksLength = getElementArrayLength(itemPaginationPages);
-            for (let i = 0; i < linksLength; i++) {
-                click(itemPaginationPages, i);
-                expect(getText(totalPagination).trim()).toBe(itemPaginationTestArr[i + 1]);
-            }
+        it('should check selected pages by clicking options', () => {
+            scrollIntoView(showingItemsPaginationExample);
+            click(showingItemsPaginationExample + pages);
+            expect(getText(showingItemsPaginationExample + showingItemsPaginationText)).toBe(itemPaginationTestArr[1]);
+
+            click(showingItemsPaginationExample + pages, 1);
+            expect(getText(showingItemsPaginationExample + showingItemsPaginationText)).toBe(itemPaginationTestArr[2]);
         });
 
         it('should check selected pages by clicking previous and next link', () => {
-            // skipped due to cannot reproduce failure, needs further investigation
-            if (getCurrentUrl().includes('localhost')) {
-                return;
-            }
-            scrollIntoView(linkNext, 1);
-            click(linkNext, 1);
-            expect(getText(totalPagination).trim()).toBe(itemPaginationTestArr[1]);
+            scrollIntoView(showingItemsPaginationExample);
+            click(showingItemsPaginationExample + linkNext);
+            expect(getText(showingItemsPaginationExample + showingItemsPaginationText)).toBe(itemPaginationTestArr[1]);
 
-            click(linkPrevious, 1);
-            expect(getText(totalPagination).trim()).toBe(itemPaginationTestArr[0]);
+            click(showingItemsPaginationExample + linkPrevious);
+            expect(getText(showingItemsPaginationExample + showingItemsPaginationText)).toBe(itemPaginationTestArr[0]);
+        });
+
+        it('should check disabled previous and next links', () => {
+            checkArrowButtons(showingItemsPaginationExample, 3);
         });
     });
 
-    xdescribe('Check Pagination with per page select example', () => {
-        it('should check default property for items per page by clicking each page', () => {
-            scrollIntoView(selectPaginationPages);
-            const linksLength = getElementArrayLength(selectPaginationPages);
-            for (let i = 0; i < linksLength - 9; i++) {
-                click(selectPaginationPages, i);
-                // pause for the new text to load
-                pause(250);
-                expect(getText(totalPagination, 1).trim()).toBe(selectPaginationTestArr1[i]);
-            }
+    describe('Check Pagination with per page select example', () => {
+        it('verify default property for items per page basic checks', () => {
+            checkPages(itemsPerPageProperty);
+            checkPreviousNextLink(itemsPerPageProperty);
+            checkArrowButtons(itemsPerPageProperty, 2);
         });
 
-        it('should check default property for items per page by clicking previous and next link', () => {
-            // skipped due to cannot reproduce failure, needs further investigation
-            if (getCurrentUrl().includes('localhost')) {
-                return;
-            }
-            scrollIntoView(linkNext, 2);
-            click(linkNext, 2);
-            // pause for the new text to load
-            pause(250);
-            expect(getText(totalPagination, 1).trim()).toBe(selectPaginationTestArr1[1]);
-
-            click(linkPrevious, 2);
-            // pause for the new text to load
-            pause(250);
-            expect(getText(totalPagination, 1).trim()).toBe(selectPaginationTestArr1[0]);
+        it('verify default select template for items per page options basic checks', () => {
+            checkPages(itemsPerPageTemplate);
+            checkPreviousNextLink(itemsPerPageTemplate);
+            checkArrowButtons(itemsPerPageTemplate, 2);
         });
 
-        it('should check default select template for items per page(4) options', () => {
-            scrollIntoView(selectPaginationPages);
-            const linksLength = getElementArrayLength(selectPaginationPages);
-            for (let i = 4; i < linksLength - 5; i++) {
-                if (i === 6) {
-                    continue;
-                }
-                click(selectPaginationPages, i);
-                // pause for the new text to load
-                pause(250);
-                expect(getText(totalPagination, 2).trim()).toBe(selectPaginationTestArr2[i - 4]);
-            }
-        });
-
-        it('should check default select template for items per page(8) options', () => {
-            scrollIntoView(dropdownButton);
+        it('verify default select template for items per page results per page', () => {
+            scrollIntoView(itemsPerPageTemplate);
             click(dropdownButton);
-            click(dropDownOption, 1);
-            const linksLength = getElementArrayLength(selectPaginationPages);
-            for (let i = 4; i < linksLength - 5; i++) {
-                click(selectPaginationPages, i);
-                // pause for the new text to load
-                pause(250);
-                expect(getText(totalPagination, 2).trim()).toBe(selectPaginationTestArr3[i - 4]);
-            }
-        });
-
-        it('should check default select template for items per page(16) options', () => {
-            scrollIntoView(dropdownButton);
-            click(dropdownButton);
-            click(dropDownOption, 2);
-            const linksLength = getElementArrayLength(selectPaginationPages);
-            for (let i = 4; i < linksLength - 5; i++) {
-                click(selectPaginationPages, i);
-                // pause for the new text to load
-                pause(250);
-                expect(getText(totalPagination, 2).trim()).toBe(selectPaginationTestArr4[i - 4]);
-            }
-        });
-
-        it('should check default select template for items per page options by clicking previous and next link', () => {
-            // skipped due to cannot reproduce failure, needs further investigation
-            if (getCurrentUrl().includes('localhost')) {
-                return;
-            }
-            scrollIntoView(linkNext, 3);
-            click(linkNext, 3);
-            // pause for the new text to load
-            pause(250);
-            expect(getText(totalPagination, 2).trim()).toBe(selectPaginationTestArr2[1]);
-
-            click(linkPrevious, 3);
-            // pause for the new text to load
-            pause(250);
-            expect(getText(totalPagination, 2).trim()).toBe(selectPaginationTestArr2[0]);
-        });
-
-        it('should check list of buttons by clicking each option', () => {
-            scrollIntoView(selectPaginationPages);
-            const linksLength = getElementArrayLength(selectPaginationPages);
-            for (let i = 8; i < linksLength; i++) {
-                click(selectPaginationPages, i);
-                // pause for the new text to load
-                pause(250);
-                expect(getText(totalPagination, 4).trim()).toBe(selectPaginationTestArr5[i - 8]);
-            }
-        });
-
-        it('should check list of buttons by clicking by clicking previous and next link', () => {
-            // skipped due to cannot reproduce failure, needs further investigation
-            if (getCurrentUrl().includes('localhost')) {
-                return;
-            }
-            scrollIntoView(linkNext, 4);
-            click(linkNext, 4);
-            // pause for the new text to load
-            pause(250);
-            expect(getText(totalPagination, 4).trim()).toBe(selectPaginationTestArr5[1]);
-
-            click(linkPrevious, 4);
-            // pause for the new text to load
-            pause(250);
-            expect(getText(totalPagination, 4).trim()).toBe(selectPaginationTestArr5[0]);
-        });
-
-        it('should check list of buttons(2) by clicking each option', () => {
-            scrollIntoView(toggledButton);
-            click(toggledButton);
-            const linksLength = getElementArrayLength(selectPaginationPages);
-            for (let i = 8; i < linksLength; i++) {
-                if (i === 10) {
-                    continue;
+            const optionLength = getElementArrayLength(dropdownPopoverOption);
+            for (let i = 0; i < optionLength; i++) {
+                click(dropdownPopoverOption, i);
+                expect(getAttributeByName(selectControl, 'title')).toBe(resultsArr[i]);
+                if (i !== 2) {
+                    click(dropdownButton);
                 }
-                click(selectPaginationPages, i);
-                // pause for the new text to load
-                pause(250);
-                expect(getText(totalPagination, 4).trim()).toBe(selectPaginationTestArr6[i - 8]);
             }
         });
 
-        it('should check list of buttons(5) by clicking each option', () => {
-            scrollIntoView(toggledButton);
-            click(toggledButton, 1);
-            const linksLength = getElementArrayLength(selectPaginationPages);
-            for (let i = 8; i < linksLength; i++) {
-                if (i === 10) {
-                    continue;
-                }
-                click(selectPaginationPages, i);
-                // pause for the new text to load
-                pause(250);
-                expect(getText(totalPagination, 4).trim()).toBe(selectPaginationTestArr7[i - 8]);
-            }
+        it('verify Custom items per page - list of buttons basic checks', () => {
+            checkPages(itemsPerPageList);
+            checkPreviousNextLink(itemsPerPageList);
+            checkArrowButtons(itemsPerPageList, 3);
         });
 
-        it('should check list of buttons(100) by clicking each option', () => {
-            scrollIntoView(toggledButton);
-            click(toggledButton, 2);
-            // pause for the new text to load
-            pause(250);
-            expect(getText(totalPagination, 4).trim()).toBe(selectPaginationTestText);
+        it('verify Custom items per page - list of buttons max pages', () => {
+            scrollIntoView(itemsPerPageList);
+            const buttonLength = getElementArrayLength(itemsPerPageList + segmentButton);
+            for (let i = 0; i < buttonLength; i++) {
+                click(segmentButton, i);
+                expect(getAttributeByName(itemsPerPageList + input, 'max')).toBe(ResultsArr2[i]);
+            }
         });
     });
 
-    xdescribe('Check Playground example', () => {
+    describe('Check Mobile example', () => {
+        it('should check selected pages by clicking next and previous link', () => {
+            checkPreviousNextLink(mobilePaginationExample);
+        });
+
+        it('should check results per page', () => {
+            scrollIntoView(mobilePaginationExample);
+            click(mobilePaginationExample + dropdownButton);
+            const optionLength = getElementArrayLength(dropdownPopoverOption);
+            for (let i = 0; i < optionLength; i++) {
+                click(dropdownPopoverOption, i);
+                expect(getAttributeByName(selectControl, 'title', 1)).toBe(resultsArr[i]);
+                if (i !== 2) {
+                    click(mobilePaginationExample + dropdownButton);
+                }
+            }
+        });
+
+        it('should check disabled previous and next links', () => {
+            scrollIntoView(mobilePaginationExample);
+            click(mobilePaginationExample + mobileButton, 1);
+            expect(getValue(mobilePaginationExample + input)).toBe('13');
+            expect(getAttributeByName(mobilePaginationExample + linkNext, 'aria-disabled')).toBe('true');
+            expect(getAttributeByName(mobilePaginationExample + mobileButton, 'aria-disabled', 1)).toBe('true');
+
+            click(mobilePaginationExample + mobileButton);
+            expect(getValue(mobilePaginationExample + input)).toBe('1');
+            expect(getAttributeByName(mobilePaginationExample + linkPrevious, 'aria-disabled')).toBe('true');
+            expect(getAttributeByName(mobilePaginationExample + mobileButton, 'aria-disabled')).toBe('true');
+        });
+    });
+
+    describe('Check Playground example', () => {
         it('should check that pages displayed correctly if total items more then 1', () => {
             scrollIntoView(playgroundInputFields);
             setValue(playgroundInputFields, '10');
@@ -283,18 +216,7 @@ describe('Pagination test suite:', () => {
             const itemsPerPage = getValue(playgroundInputFields, 1);
             const itemsPerPageNum = Number(itemsPerPage);
             const actualItems = totalItemsNum / itemsPerPageNum;
-            expect(pagesLength).toEqual(actualItems);
-        });
-
-        it('should check that each option is displayed on the page', () => {
-            scrollIntoView(playgroundInputFields);
-            setValue(playgroundInputFields, '5');
-            setValue(playgroundInputFields, '1', 1);
-            const itemsLength = getElementArrayLength(playgroundPages);
-            for (let i = 0; i < itemsLength; i++) {
-                setValue(playgroundInputFields, playgroundPaginationItemArr[i], 2);
-                expect(getText(totalPagination, 5).trim()).toBe(playgroundPaginationTestText[i]);
-            }
+            expect(pagesLength + 1).toEqual(actualItems);
         });
 
         it('should check should check that filling all fields by 1 displayed only 1 page', () => {
@@ -307,7 +229,7 @@ describe('Pagination test suite:', () => {
             const itemsPerPage = getValue(playgroundInputFields, 1);
             const itemsPerPageNum = Number(itemsPerPage);
             const actualItems = totalItemsNum / itemsPerPageNum;
-            expect(pagesLength).toEqual(actualItems);
+            expect(pagesLength + 1).toEqual(actualItems);
         });
 
         it('should check that filling all fields by 0 pages are not displayed', () => {
@@ -327,20 +249,14 @@ describe('Pagination test suite:', () => {
             }
         });
 
-        it('should check pagination looks correct after selecting 3 page', () => {
-            // skipped due to cannot reproduce failure, needs further investigation
-            if (getCurrentUrl().includes('localhost')) {
-                return;
-            }
-            checkPaginationDisplaying('3', playgroundPaginationItemArr2);
-        });
-
-        it('should check pagination looks correct after selecting 7 page', () => {
-            // skipped due to cannot reproduce failure, needs further investigation
-            if (getCurrentUrl().includes('localhost')) {
-                return;
-            }
-            checkPaginationDisplaying('7', playgroundPaginationItemArr3);
+        it('should check pagination looks correct after selecting specific page', () => {
+            setValue(playgroundInputFields, '9');
+            setValue(playgroundInputFields, '1', 1);
+            setValue(playgroundInputFields, '3', 2);
+            pause(250);
+            const playgroundLink = getElementArrayLength(playgroundPages);
+            expect(playgroundLink + 1).toBe(5);
+            expect(getValue(playgroundExample + input)).toBe('3');
         });
     });
 
@@ -355,15 +271,31 @@ describe('Pagination test suite:', () => {
         });
     });
 
-    function checkPaginationDisplaying(currentPage: string, pagesArr: string[]): void {
-        setValue(playgroundInputFields, '9');
-        setValue(playgroundInputFields, '1', 1);
-        setValue(playgroundInputFields, currentPage, 2);
-        pause(250);
-        const pages = getElementArrayLength(playgroundPages);
-        expect(pages).toBe(5);
-        for (let i = 0; i < pages; i++) {
-            expect(getText(playgroundPages, i)).toEqual(pagesArr[i]);
-        }
+    function checkArrowButtons(example: string, index: number = 0): void {
+        scrollIntoView(example);
+        expect(getAttributeByName(example + linkPrevious, 'aria-disabled')).toBe('true');
+        click(example + pages, index);
+        expect(getAttributeByName(example + linkNext, 'aria-disabled')).toBe('true');
+        refreshPage();
+    }
+
+    function checkPages(example: string): void {
+        scrollIntoView(example);
+        click(example + pages);
+        expect(getValue(example + input)).toBe('2');
+
+        click(example + pages);
+        expect(getValue(example + input)).toBe('1');
+        refreshPage();
+    }
+
+    function checkPreviousNextLink(example: string): void {
+        scrollIntoView(example);
+        click(example + linkNext);
+        expect(getValue(example + input)).toBe('2');
+
+        click(example + linkPrevious);
+        expect(getValue(example + input)).toBe('1');
+        refreshPage();
     }
 });

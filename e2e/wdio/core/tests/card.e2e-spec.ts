@@ -67,7 +67,19 @@ describe('Card test suite:', () => {
         barChartTitle,
         barChartCounter,
         barChartItems,
-        barCharBars
+        barCharBars,
+        calendar,
+        calendarExampleContent,
+        calendarExampleHeader,
+        quickView,
+        quickViewExampleContent,
+        quickViewExampleHeader,
+        list,
+        listExampleContent,
+        listExampleHeader,
+        link,
+        linkListExampleContent,
+        linkListExampleHeader
     } = cardPage;
 
     beforeAll(() => {
@@ -167,6 +179,62 @@ describe('Card test suite:', () => {
         it('should check chart content', () => {
             checkElementTextValue(barChartItems, barChartItemsText);
             expect(isElementDisplayed(barCharBars)).toBe(true);
+        });
+    });
+
+    describe('Calendar example', () => {
+        it('should check that card header is displayed', () => {
+            expect(isElementDisplayed(calendarExampleHeader)).toBe(true);
+        });
+
+        it('should check that calendar displayed in card content', () => {
+            expect(isElementDisplayed(calendarExampleContent + calendar)).toBe(true);
+        });
+
+        it('should check that headers are clickable', () => {
+            checkElArrIsClickable(calendarExampleHeader);
+        });
+    });
+
+    describe('Calendar example', () => {
+        it('should check that card header is displayed', () => {
+            expect(isElementDisplayed(quickViewExampleHeader)).toBe(true);
+        });
+
+        it('should check that calendar displayed in card content', () => {
+            expect(isElementDisplayed(quickViewExampleContent + quickView)).toBe(true);
+        });
+
+        it('should check that headers are clickable', () => {
+            checkElArrIsClickable(quickViewExampleHeader);
+        });
+    });
+
+    describe('List example', () => {
+        it('should check that card header is displayed', () => {
+            expect(isElementDisplayed(listExampleHeader)).toBe(true);
+        });
+
+        it('should check that calendar displayed in card content', () => {
+            expect(isElementDisplayed(listExampleContent + list)).toBe(true);
+        });
+
+        it('should check that headers are clickable', () => {
+            checkElArrIsClickable(listExampleHeader);
+        });
+    });
+
+    describe('Link list example', () => {
+        it('should check that card header is displayed', () => {
+            expect(isElementDisplayed(linkListExampleHeader)).toBe(true);
+        });
+
+        it('should check that calendar displayed in card content', () => {
+            expect(isElementDisplayed(linkListExampleContent + list + link)).toBe(true);
+        });
+
+        it('should check that headers are clickable', () => {
+            checkElArrIsClickable(linkListExampleHeader);
         });
     });
 

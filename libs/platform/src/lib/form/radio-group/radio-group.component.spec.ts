@@ -8,6 +8,7 @@ import { SelectItem } from '@fundamental-ngx/platform/shared';
 import { RadioGroupComponent } from './radio-group.component';
 import { FdpFormGroupModule } from '../form-group/fdp-form.module';
 import { PlatformRadioGroupModule } from './radio-group.module';
+import { runValueAccessorTests } from 'ngx-cva-test-suite';
 
 @Component({
     selector: 'fdp-test-reative-fdp-form-group',
@@ -45,7 +46,7 @@ import { PlatformRadioGroupModule } from './radio-group.module';
                     [list]="paymentMethods"
                     [name]="'payment'"
                     [isInline]="true"
-                    [lookupKey]="'paymetMethod'"
+                    [lookupKey]="'paymentMethod'"
                     [displayKey]="'bank'"
                     [formControl]="fl4.formControl"
                 ></fdp-radio-group>
@@ -76,12 +77,12 @@ class TestRadioGroupReactiveFdpGroupComponent {
         new DeliveryMethod('Store Pickup', 'pickup', true)
     ];
 
-    paymentMethods: Paymet[] = [
-        new Paymet('citi debit', 'CITI'),
-        new Paymet('hdfc debit', 'HDFC'),
-        new Paymet('icici credit', 'ICICI'),
-        new Paymet('paytm wallet', 'Paytm'),
-        new Paymet('cod', 'COD')
+    paymentMethods: Payment[] = [
+        new Payment('citi debit', 'CITI'),
+        new Payment('hdfc debit', 'HDFC'),
+        new Payment('icici credit', 'ICICI'),
+        new Payment('paytm wallet', 'Paytm'),
+        new Payment('cod', 'COD')
     ];
 
     form1 = new FormGroup({
@@ -283,7 +284,7 @@ describe('Radio Group Test with Reactive fdp-form-group', () => {
                     [list]="paymentMethods"
                     [name]="'payment'"
                     [isInline]="true"
-                    [lookupKey]="'paymetMethod'"
+                    [lookupKey]="'paymentMethod'"
                     [displayKey]="'bank'"
                     [(ngModel)]="favPaymentMethod"
                 ></fdp-radio-group>
@@ -314,12 +315,12 @@ class TestRadioGroupTemplateDrivenFdpGroupComponent {
         new DeliveryMethod('Store Pickup', 'pickup', true)
     ];
 
-    paymentMethods: Paymet[] = [
-        new Paymet('citi debit', 'CITI'),
-        new Paymet('hdfc debit', 'HDFC'),
-        new Paymet('icici credit', 'ICICI'),
-        new Paymet('paytm wallet', 'Paytm'),
-        new Paymet('cod', 'COD')
+    paymentMethods: Payment[] = [
+        new Payment('citi debit', 'CITI'),
+        new Payment('hdfc debit', 'HDFC'),
+        new Payment('icici credit', 'ICICI'),
+        new Payment('paytm wallet', 'Paytm'),
+        new Payment('cod', 'COD')
     ];
 
     sizeOrdered = '5';
@@ -485,6 +486,28 @@ class DeliveryMethod implements SelectItem {
     constructor(public label: string, public value: string, public disabled: boolean) {}
 }
 
-class Paymet {
-    constructor(public paymetMethod: string, public bank: string) {}
+class Payment {
+    constructor(public paymentMethod: string, public bank: string) {}
 }
+
+const RADIO_GROUP_IDENTIFIER = 'platform-radio-group-unit-test';
+
+runValueAccessorTests({
+    component: RadioGroupComponent,
+    testModuleMetadata: {
+        imports: [PlatformRadioGroupModule]
+    },
+    additionalSetup: (fixture, done) => {
+        fixture.componentInstance.list = ['a', 'b', 'c'];
+        fixture.componentInstance.id = RADIO_GROUP_IDENTIFIER;
+        fixture.componentInstance.name = RADIO_GROUP_IDENTIFIER;
+        done();
+    },
+    supportsOnBlur: false,
+    internalValueChangeSetter: null,
+    // TODO: uncomment internalValueChangeSetter after ngx-cva-test-suite@1.1.0 is released
+    // internalValueChangeSetter: (fixture, value) => {
+    //     fixture.componentInstance.viewRadioButtons.find((b) => b.value === value)._valueChange(value, true);
+    // },
+    getComponentValue: (fixture) => fixture.componentInstance.value
+});

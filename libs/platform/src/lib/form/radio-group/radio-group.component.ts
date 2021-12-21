@@ -23,8 +23,8 @@ import {
 import { NgControl, NgForm } from '@angular/forms';
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
-import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { startWith, switchMap, takeUntil } from 'rxjs/operators';
+import { merge, Subject } from 'rxjs';
 
 import {
     FormField,
@@ -70,12 +70,11 @@ export class RadioGroupComponent
     /** To Display Radio buttons in a line */
     @Input()
     get isInline(): boolean {
-        return this._isInline;
+        return this._inlineCurrentValue$.value;
     }
 
     set isInline(inline: boolean) {
-        this._isInline = inline;
-        this._cd.markForCheck();
+        this._inlineCurrentValue$.next(inline);
     }
 
     /** None value radio button created */
@@ -111,9 +110,6 @@ export class RadioGroupComponent
     /** @hidden FocusKeyManager instance */
     private _keyboardEventsManager: FocusKeyManager<RadioButtonComponent>;
 
-    /** @hidden */
-    private _isInline: boolean;
-
     constructor(
         protected _cd: ChangeDetectorRef,
         readonly _responsiveBreakpointsService: ResponsiveBreakpointsService,
@@ -135,11 +131,6 @@ export class RadioGroupComponent
             _defaultResponsiveBreakPointConfig
         );
         this.id = `radio-group-${nextUniqueId++}`;
-
-        // subscribe to _inlineCurrentValue in inline-layout-collection-base-input
-        this._inlineCurrentValue
-            .pipe(distinctUntilChanged())
-            .subscribe((currentInline) => (this.isInline = currentInline));
     }
 
     /** Control Value Accessor */
@@ -152,11 +143,6 @@ export class RadioGroupComponent
     /** Access display value for objects, acts as checkbox label. */
     getDisplayValue(item: any): string {
         return this.displayValue(item);
-    }
-
-    /** Access lookup value for objects, acts as checkbox value. */
-    getLookupValue(item: any): string {
-        return this.lookupValue(item);
     }
 
     /**
@@ -225,32 +211,39 @@ export class RadioGroupComponent
             return;
         }
 
-        let firstEnabledButtonIndex = -1;
         this._keyboardEventsManager = new FocusKeyManager(radioButtons).withWrap().withHorizontalOrientation('ltr');
 
-        radioButtons.forEach((button, i) => {
-            if (this.list) {
-                button.state = this.state;
-            } else {
-                this._setProperties(button);
-            }
+        radioButtons.changes
+            .pipe(
+                startWith(radioButtons),
+                switchMap(() => {
+                    let firstEnabledButtonIndex = -1;
+                    const checkedEvents = radioButtons.map((button, i) => {
+                        if (this.list) {
+                            button.state = this.state;
+                        } else {
+                            this._setProperties(button);
+                        }
 
-            this._selectUnselect(button);
+                        this._selectUnselect(button);
 
-            // finding first enabled button to set tabIndex=0
-            if (!button.disabled && !this._disabled && firstEnabledButtonIndex < 0) {
-                firstEnabledButtonIndex = i;
-            }
+                        // finding first enabled button to set tabIndex=0
+                        if (!button.disabled && !this._disabled && firstEnabledButtonIndex < 0) {
+                            firstEnabledButtonIndex = i;
+                        }
 
-            button.checked.pipe(takeUntil(this._destroy$)).subscribe((ev) => this._selectedValueChanged(ev));
-        });
+                        return button.checked.asObservable();
+                    });
 
-        // accessibility requirement
-        if (!this._selected && radioButtons && firstEnabledButtonIndex > -1) {
-            radioButtons.toArray()[firstEnabledButtonIndex].setTabIndex(0);
-        }
-
-        this.onChange(this.value);
+                    // accessibility requirement
+                    if (!this._selected && radioButtons && firstEnabledButtonIndex > -1) {
+                        radioButtons.toArray()[firstEnabledButtonIndex].setTabIndex(0);
+                    }
+                    return merge(...checkedEvents);
+                }),
+                takeUntil(this._destroy$)
+            )
+            .subscribe((ev) => this._selectedValueChanged(ev));
     }
 
     /**
@@ -290,6 +283,7 @@ export class RadioGroupComponent
 
         this.value = button.value;
         this.change.emit(button);
+        this.onTouched();
     }
 
     /** @hidden resets tabIndex for first radio in radio group. for accessibility tabIndex was set */

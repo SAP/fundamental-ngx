@@ -68,7 +68,8 @@ describe('calendar test suite', () => {
         setCalendarRange,
         mondays,
         sundays,
-        saturdays
+        saturdays,
+        wednesdays
     } = calendarPage;
 
     beforeAll(() => {
@@ -90,10 +91,12 @@ describe('calendar test suite', () => {
         });
 
         it('should check disabling Wednesdays', () => {
-            const startingDisabledDaysCount = getElementArrayLength(standardCalendar + disabledDays);
+            const wednesdaysLength = getElementArrayLength(wednesdays);
 
             click(standardCalendar + calendarOptionsBtn);
-            expect(getElementArrayLength(standardCalendar + disabledDays)).not.toEqual(startingDisabledDaysCount);
+            for (let i = 0; i < wednesdaysLength; i++) {
+                expect(getAttributeByName(wednesdays, 'aria-disabled', i)).toBe('true');
+            }
         });
 
         it('should check selection output', () => {
@@ -235,12 +238,17 @@ describe('calendar test suite', () => {
                 expect(getElementClass(sundays, i)).toContain('special-day');
             }
         });
-        // rework later when i'll get answer on the question how it should work exactly
-        it('should check ability to mark next 7 days', () => {
+
+        it('should check ability to mark next week', () => {
             click(specialDaysCalendar + calendarOptions, 1);
-            expect(doesItExist(specialDaysCalendar + markedDays)).toBe(true);
+            const tomorrowsDayIndex = getCurrentDayIndex(specialDaysCalendar) + 1;
+            for (let i = tomorrowsDayIndex; i < tomorrowsDayIndex + 7; i++) {
+                expect(getElementClass(specialDaysCalendar + calendarItem, i)).toContain('special-day');
+            }
             click(specialDaysCalendar + calendarOptions, 1);
-            expect(doesItExist(specialDaysCalendar + markedDays)).toBe(false);
+            for (let i = tomorrowsDayIndex; i < tomorrowsDayIndex + 7; i++) {
+                expect(getElementClass(specialDaysCalendar + calendarItem, i)).not.toContain('special-day');
+            }
         });
 
         it('should check ability to mark all Mondays', () => {

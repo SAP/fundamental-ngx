@@ -1,4 +1,22 @@
 
+## 0.33.0-rc.224 (2021-12-20)
+
+
+### Bug Fixes
+
+* **platform:** adjust control-value-accessor behavior for checkbox group and radio group ([#7337](https://github.com/SAP/fundamental-ngx/issues/7337)) ([fdf143c](https://github.com/SAP/fundamental-ngx/commit/fdf143ce13e18a7bf84d67b85ab35da1685095c5))
+
+## 0.33.0-rc.223 (2021-12-20)
+
+
+### Bug Fixes
+
+* **docs:** provide correct tsconfig paths ([#7411](https://github.com/SAP/fundamental-ngx/issues/7411)) ([784a421](https://github.com/SAP/fundamental-ngx/commit/784a421e119e8788049fd3e44e6391933021722d))
+
+## 0.33.0-rc.222 (2021-12-20)
+
+## 0.33.0-rc.221 (2021-12-20)
+
 ## 0.33.0-rc.220 (2021-12-16)
 
 ## 0.33.0-rc.219 (2021-12-16)

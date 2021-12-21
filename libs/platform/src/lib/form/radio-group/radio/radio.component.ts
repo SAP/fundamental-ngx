@@ -83,7 +83,7 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
     @Output()
     readonly checked: EventEmitter<RadioButtonComponent> = new EventEmitter();
 
-    /** Access radio button child elemen passed as content of radio button group*/
+    /** Access radio button child element passed as content of radio button group */
     @ViewChild(CoreRadioButtonComponent, { static: false })
     private coreRadioButton: CoreRadioButtonComponent;
 
@@ -116,19 +116,22 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
     }
 
     /** @hidden */
-    _valueChange(value: any): void {
+    _valueChange(value: any, emitEvent = false): void {
         if (this.disabled) {
-            return;
+            emitEvent = false;
         }
 
         this._currentValue = value;
         this._isChecked = this._currentValue === super.getValue();
-        if (this._isChecked) {
+        if (this._isChecked && emitEvent) {
             this.checked.emit(this);
         }
         this.tabIndex = this._isChecked ? 0 : -1;
         this._cd.detectChanges();
-        this.onChange(value);
+        if (emitEvent) {
+            this.onChange(value);
+            this.onTouched();
+        }
     }
 
     /** method for cdk FocusKeymanager */
