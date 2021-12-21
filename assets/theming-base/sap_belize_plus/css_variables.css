@@ -2,13 +2,13 @@
 * Copyright (c) 2012-2020 SAP SE or an SAP affiliate company and Theming Base Content contributors. Licensed under the Apache License, Version 2.0 - see LICENSE.txt.
 *
 * Theming Engine 1.51.0
-* data:{"Path": "Base.baseLib.sap_belize_plus.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_belize","sap_base_fiori","baseTheme"], "Tags": ["Fiori_2","Fiori_3"], "FallbackThemeId": "sap_bluecrystal", "Version": { "Build":"11.1.31.20210826095054", "Source": "11.1.31", "Engine": "1.51.0"}}
+* data:{"Path": "Base.baseLib.sap_belize_plus.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_belize","sap_base_fiori","baseTheme"], "Tags": ["Fiori_2","Fiori_3"], "FallbackThemeId": "sap_bluecrystal", "Version": { "Build":"11.1.34.20211012133552", "Source": "11.1.34", "Engine": "1.51.0"}}
 */
 
-.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_belize_plus.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_belize","sap_base_fiori","baseTheme"], "Tags": ["Fiori_2","Fiori_3"], "FallbackThemeId": "sap_bluecrystal", "Version": { "Build":"11.1.31.20210826095054", "Source": "11.1.31", "Engine": "1.51.0"}}');}
+.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_belize_plus.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_belize","sap_base_fiori","baseTheme"], "Tags": ["Fiori_2","Fiori_3"], "FallbackThemeId": "sap_bluecrystal", "Version": { "Build":"11.1.34.20211012133552", "Source": "11.1.34", "Engine": "1.51.0"}}');}
 
 /**
-* Base.baseLib.baseTheme.base (Version 11.1.31)
+* Base.baseLib.baseTheme.base (Version 11.1.34)
 */
 
 @font-face {
@@ -54,6 +54,38 @@
   src: url('../../../Base/baseLib/baseTheme/fonts/72-Bold-full.woff2') format('woff2'), url('../../../Base/baseLib/baseTheme/fonts/72-Bold-full.woff') format('woff');
 }
 @font-face {
+  font-family: '72';
+  font-style: normal;
+  font-weight: 900;
+  src: local('72Black'), url('../../../Base/baseLib/baseTheme/fonts/72-Black.woff2') format('woff2'), url('../../../Base/baseLib/baseTheme/fonts/72-Black.woff') format('woff');
+}
+@font-face {
+  font-family: '72';
+  font-style: italic;
+  font-weight: 700;
+  src: local('72-BoldItalic'), url('../../../Base/baseLib/baseTheme/fonts/72-BoldItalic.woff2') format('woff2'), url('../../../Base/baseLib/baseTheme/fonts/72-BoldItalic.woff') format('woff');
+}
+@font-face {
+  font-family: '72';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: condensed;
+  src: local('72-Condensed'), url('../../../Base/baseLib/baseTheme/fonts/72-Condensed.woff2') format('woff2'), url('../../../Base/baseLib/baseTheme/fonts/72-Condensed.woff') format('woff');
+}
+@font-face {
+  font-family: '72';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: condensed;
+  src: local('72-CondensedBold'), url('../../../Base/baseLib/baseTheme/fonts/72-CondensedBold.woff2') format('woff2'), url('../../../Base/baseLib/baseTheme/fonts/72-CondensedBold.woff') format('woff');
+}
+@font-face {
+  font-family: '72';
+  font-style: italic;
+  font-weight: 400;
+  src: local('72-Italic'), url('../../../Base/baseLib/baseTheme/fonts/72-Italic.woff2') format('woff2'), url('../../../Base/baseLib/baseTheme/fonts/72-Italic.woff') format('woff');
+}
+@font-face {
   font-family: '72-Light';
   src: local('72-Light'), url('../../../Base/baseLib/baseTheme/fonts/72-Light.woff2') format('woff2'), url('../../../Base/baseLib/baseTheme/fonts/72-Light.woff') format('woff');
 }
@@ -68,6 +100,26 @@
 @font-face {
   font-family: '72-Boldfull';
   src: url('../../../Base/baseLib/baseTheme/fonts/72-Bold-full.woff2') format('woff2'), url('../../../Base/baseLib/baseTheme/fonts/72-Bold-full.woff') format('woff');
+}
+@font-face {
+  font-family: '72Black';
+  src: local('72Black'), url('../../../Base/baseLib/baseTheme/fonts/72-Black.woff2') format('woff2'), url('../../../Base/baseLib/baseTheme/fonts/72-Black.woff') format('woff');
+}
+@font-face {
+  font-family: '72-BoldItalic';
+  src: local('72-BoldItalic'), url('../../../Base/baseLib/baseTheme/fonts/72-BoldItalic.woff2') format('woff2'), url('../../../Base/baseLib/baseTheme/fonts/72-BoldItalic.woff') format('woff');
+}
+@font-face {
+  font-family: '72-Condensed';
+  src: local('72-Condensed'), url('../../../Base/baseLib/baseTheme/fonts/72-Condensed.woff2') format('woff2'), url('../../../Base/baseLib/baseTheme/fonts/72-Condensed.woff') format('woff');
+}
+@font-face {
+  font-family: '72-CondensedBold';
+  src: local('72-CondensedBold'), url('../../../Base/baseLib/baseTheme/fonts/72-CondensedBold.woff2') format('woff2'), url('../../../Base/baseLib/baseTheme/fonts/72-CondensedBold.woff') format('woff');
+}
+@font-face {
+  font-family: '72-Italic';
+  src: local('72-Italic'), url('../../../Base/baseLib/baseTheme/fonts/72-Italic.woff2') format('woff2'), url('../../../Base/baseLib/baseTheme/fonts/72-Italic.woff') format('woff');
 }
 @font-face {
   font-family: '72Mono';
@@ -96,7 +148,7 @@
 }
 
 /**
-* Base.baseLib.baseTheme.css_variables (Version 11.1.31)
+* Base.baseLib.baseTheme.css_variables (Version 11.1.34)
 */
 
 /*!SAP_POSTPROCESS_REDUCE_START*/
@@ -109,6 +161,7 @@
   --sapFontFamily: "72", "72full", Arial, Helvetica, sans-serif;
   --sapFontLightFamily: "72-Light", "72-Lightfull", "72", "72full", Arial, Helvetica, sans-serif;
   --sapFontBoldFamily: "72-Bold", "72-Boldfull", "72", "72full", Arial, Helvetica, sans-serif;
+  --sapFontBlackFamily: "72Black", "72", "72full", Arial, Helvetica, sans-serif;
   --sapFontHeaderFamily: "72", "72full", Arial, Helvetica, sans-serif;
   --sapFontSize: .875rem;
   --sapFontSmallSize: .75rem;
@@ -227,6 +280,13 @@
   --sapContent_TextShadow: 0 0 0.125rem #fff;
   --sapContent_ContrastTextShadow: 0 0 0.0625rem rgba(0,0,0,0.7);
   --sapContent_HeaderShadow: 0 0.125rem 0 0 #eff4f9, inset 0 -0.125rem 0 0 #d1e0ee;
+  --sapContent_Interaction_Shadow: none;
+  --sapContent_Selected_Shadow: none;
+  --sapContent_Negative_Shadow: none;
+  --sapContent_Critical_Shadow: none;
+  --sapContent_Positive_Shadow: none;
+  --sapContent_Informative_Shadow: none;
+  --sapContent_Neutral_Shadow: none;
   --sapContent_SearchHighlightColor: #d4f7db;
   --sapContent_HelpColor: #3f8600;
   --sapContent_LabelColor: #666;
@@ -257,6 +317,18 @@
   --sapContent_Illustrative_Color6: #c6cace;
   --sapContent_Illustrative_Color7: #e7e9ea;
   --sapContent_Illustrative_Color8: #fff;
+  --sapContent_Illustrative_Color9: #64edd2;
+  --sapContent_Illustrative_Color10: #ebf8ff;
+  --sapContent_Illustrative_Color11: #f31ded;
+  --sapContent_Illustrative_Color12: #5dc122;
+  --sapContent_Illustrative_Color13: #005dc9;
+  --sapContent_Illustrative_Color14: #004da5;
+  --sapContent_Illustrative_Color15: #cc7400;
+  --sapContent_Illustrative_Color16: #3b0ac6;
+  --sapContent_Illustrative_Color17: #00a58a;
+  --sapContent_Illustrative_Color18: #d1efff;
+  --sapContent_Illustrative_Color19: #b8e6ff;
+  --sapContent_Illustrative_Color20: #9eddff;
   --sapShell_Background: #cad8e6;
   --sapShell_BackgroundImage: linear-gradient(to bottom, #acc4dc, #e8ecf0);
   --sapShell_BackgroundGradient: linear-gradient(to bottom, #acc4dc, #e8ecf0);
@@ -264,6 +336,7 @@
   --sapShell_BackgroundImageRepeat: false;
   --sapShell_BorderColor: transparent;
   --sapShell_TextColor: #346187;
+  --sapShell_InteractiveBackground: transparent;
   --sapShell_InteractiveTextColor: #346187;
   --sapShell_InteractiveBorderColor: #346187;
   --sapShell_GroupTitleTextColor: #333;
@@ -526,6 +599,16 @@
   --sapAccentColor8: #759421;
   --sapAccentColor9: #925ace;
   --sapAccentColor10: #647987;
+  --sapAccentBackgroundColor1: #fff3b8;
+  --sapAccentBackgroundColor2: #ffd0e7;
+  --sapAccentBackgroundColor3: #fff0fa;
+  --sapAccentBackgroundColor4: #ffdcf3;
+  --sapAccentBackgroundColor5: #ded3ff;
+  --sapAccentBackgroundColor6: #d1efff;
+  --sapAccentBackgroundColor7: #c2fcee;
+  --sapAccentBackgroundColor8: #ebf5cb;
+  --sapAccentBackgroundColor9: #dafdf5;
+  --sapAccentBackgroundColor10: #eaecee;
   --sapLegend_WorkingBackground: #f7f7f7;
   --sapLegend_NonWorkingBackground: #f7f7f7;
   --sapLegend_CurrentDateTime: #ab218e;
@@ -617,6 +700,16 @@
   --sapFontUrl_72_Bold_full_woff: url('../../../Base/baseLib/baseTheme/fonts/72-Bold-full.woff');
   --sapFontUrl_72_Light_full_woff2: url('../../../Base/baseLib/baseTheme/fonts/72-Light-full.woff2');
   --sapFontUrl_72_Light_full_woff: url('../../../Base/baseLib/baseTheme/fonts/72-Light-full.woff');
+  --sapFontUrl_72_Black_woff2: url('../../../Base/baseLib/baseTheme/fonts/72-Black.woff2');
+  --sapFontUrl_72_Black_woff: url('../../../Base/baseLib/baseTheme/fonts/72-Black.woff');
+  --sapFontUrl_72_BoldItalic_woff2: url('../../../Base/baseLib/baseTheme/fonts/72-BoldItalic.woff2');
+  --sapFontUrl_72_BoldItalic_woff: url('../../../Base/baseLib/baseTheme/fonts/72-BoldItalic.woff');
+  --sapFontUrl_72_Condensed_woff2: url('../../../Base/baseLib/baseTheme/fonts/72-Condensed.woff2');
+  --sapFontUrl_72_Condensed_woff: url('../../../Base/baseLib/baseTheme/fonts/72-Condensed.woff');
+  --sapFontUrl_72_CondensedBold_woff2: url('../../../Base/baseLib/baseTheme/fonts/72-CondensedBold.woff2');
+  --sapFontUrl_72_CondensedBold_woff: url('../../../Base/baseLib/baseTheme/fonts/72-CondensedBold.woff');
+  --sapFontUrl_72_Italic_woff2: url('../../../Base/baseLib/baseTheme/fonts/72-Italic.woff2');
+  --sapFontUrl_72_Italic_woff: url('../../../Base/baseLib/baseTheme/fonts/72-Italic.woff');
   --sapFontUrl_72Mono_Regular_woff2: url('../../../Base/baseLib/baseTheme/fonts/72Mono-Regular.woff2');
   --sapFontUrl_72Mono_Regular_woff: url('../../../Base/baseLib/baseTheme/fonts/72Mono-Regular.woff');
   --sapFontUrl_72Mono_Regular_full_woff2: url('../../../Base/baseLib/baseTheme/fonts/72Mono-Regular-full.woff2');
@@ -638,22 +731,22 @@
 /*!SAP_POSTPROCESS_REDUCE_END*/
 
 /**
-* Base.baseLib.sap_base_fiori.base (Version 11.1.31)
+* Base.baseLib.sap_base_fiori.base (Version 11.1.34)
 */
 
 
 /**
-* Base.baseLib.sap_base_fiori.css_variables (Version 11.1.31)
+* Base.baseLib.sap_base_fiori.css_variables (Version 11.1.34)
 */
 
 
 /**
-* Base.baseLib.sap_belize.base (Version 11.1.31)
+* Base.baseLib.sap_belize.base (Version 11.1.34)
 */
 
 
 /**
-* Base.baseLib.sap_belize.css_variables (Version 11.1.31)
+* Base.baseLib.sap_belize.css_variables (Version 11.1.34)
 */
 
 

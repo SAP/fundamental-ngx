@@ -2,10 +2,10 @@
 * Copyright (c) 2012-2020 SAP SE or an SAP affiliate company and Theming Base Content contributors. Licensed under the Apache License, Version 2.0 - see LICENSE.txt.
 *
 * Theming Engine 1.51.0
-* data:{"Path": "Base.baseLib.sap_belize_hcw.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_belize_hcb","sap_belize","sap_base_fiori","baseTheme"], "Tags": ["Fiori_2","Fiori_3","HighContrast"], "FallbackThemeId": "sap_belize", "Version": { "Build":"11.1.31.20210826095054", "Source": "11.1.31", "Engine": "1.51.0"}}
+* data:{"Path": "Base.baseLib.sap_belize_hcw.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_belize_hcb","sap_belize","sap_base_fiori","baseTheme"], "Tags": ["Fiori_2","Fiori_3","HighContrast"], "FallbackThemeId": "sap_belize", "Version": { "Build":"11.1.34.20211012133552", "Source": "11.1.34", "Engine": "1.51.0"}}
 */
 
-.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_belize_hcw.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_belize_hcb","sap_belize","sap_base_fiori","baseTheme"], "Tags": ["Fiori_2","Fiori_3","HighContrast"], "FallbackThemeId": "sap_belize", "Version": { "Build":"11.1.31.20210826095054", "Source": "11.1.31", "Engine": "1.51.0"}}');}
+.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_belize_hcw.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_belize_hcb","sap_belize","sap_base_fiori","baseTheme"], "Tags": ["Fiori_2","Fiori_3","HighContrast"], "FallbackThemeId": "sap_belize", "Version": { "Build":"11.1.34.20211012133552", "Source": "11.1.34", "Engine": "1.51.0"}}');}
 :root {
   --sapBrandColor: #ec8b46;
   --sapHighlightColor: #ec8b46;
@@ -15,6 +15,7 @@
   --sapFontFamily: "72", "72full", Arial, Helvetica, sans-serif;
   --sapFontLightFamily: "72-Light", "72-Lightfull", "72", "72full", Arial, Helvetica, sans-serif;
   --sapFontBoldFamily: "72-Bold", "72-Boldfull", "72", "72full", Arial, Helvetica, sans-serif;
+  --sapFontBlackFamily: "72Black", "72", "72full", Arial, Helvetica, sans-serif;
   --sapFontHeaderFamily: "72", "72full", Arial, Helvetica, sans-serif;
   --sapFontSize: .875rem;
   --sapFontSmallSize: .75rem;
@@ -133,6 +134,13 @@
   --sapContent_TextShadow: -1px 0 #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff;
   --sapContent_ContrastTextShadow: none;
   --sapContent_HeaderShadow: inset 0 -0.125rem #000;
+  --sapContent_Interaction_Shadow: none;
+  --sapContent_Selected_Shadow: none;
+  --sapContent_Negative_Shadow: none;
+  --sapContent_Critical_Shadow: none;
+  --sapContent_Positive_Shadow: none;
+  --sapContent_Informative_Shadow: none;
+  --sapContent_Neutral_Shadow: none;
   --sapContent_SearchHighlightColor: #ec8b46;
   --sapContent_HelpColor: #006500;
   --sapContent_LabelColor: #000;
@@ -163,13 +171,26 @@
   --sapContent_Illustrative_Color6: #c6cace;
   --sapContent_Illustrative_Color7: #e7e9ea;
   --sapContent_Illustrative_Color8: #fff;
+  --sapContent_Illustrative_Color9: #64edd2;
+  --sapContent_Illustrative_Color10: #ebf8ff;
+  --sapContent_Illustrative_Color11: #f31ded;
+  --sapContent_Illustrative_Color12: #5dc122;
+  --sapContent_Illustrative_Color13: #005dc9;
+  --sapContent_Illustrative_Color14: #004da5;
+  --sapContent_Illustrative_Color15: #cc7400;
+  --sapContent_Illustrative_Color16: #3b0ac6;
+  --sapContent_Illustrative_Color17: #00a58a;
+  --sapContent_Illustrative_Color18: #d1efff;
+  --sapContent_Illustrative_Color19: #b8e6ff;
+  --sapContent_Illustrative_Color20: #9eddff;
   --sapShell_Background: #fff;
-  --sapShell_BackgroundImage: #fff;
-  --sapShell_BackgroundGradient: #fff;
+  --sapShell_BackgroundImage: linear-gradient(to bottom, #fff, #fff);
+  --sapShell_BackgroundGradient: linear-gradient(to bottom, #fff, #fff);
   --sapShell_BackgroundImageOpacity: 1.0;
   --sapShell_BackgroundImageRepeat: false;
   --sapShell_BorderColor: #000;
   --sapShell_TextColor: #000;
+  --sapShell_InteractiveBackground: #fff;
   --sapShell_InteractiveTextColor: #000;
   --sapShell_InteractiveBorderColor: #000;
   --sapShell_GroupTitleTextColor: #000;
@@ -432,6 +453,16 @@
   --sapAccentColor8: #26340b;
   --sapAccentColor9: #6c32a9;
   --sapAccentColor10: #4a5964;
+  --sapAccentBackgroundColor1: #fff3b8;
+  --sapAccentBackgroundColor2: #ffd0e7;
+  --sapAccentBackgroundColor3: #fff0fa;
+  --sapAccentBackgroundColor4: #ffdcf3;
+  --sapAccentBackgroundColor5: #ded3ff;
+  --sapAccentBackgroundColor6: #d1efff;
+  --sapAccentBackgroundColor7: #c2fcee;
+  --sapAccentBackgroundColor8: #ebf5cb;
+  --sapAccentBackgroundColor9: #dafdf5;
+  --sapAccentBackgroundColor10: #eaecee;
   --sapLegend_WorkingBackground: #d9d9d9;
   --sapLegend_NonWorkingBackground: #b3b3b3;
   --sapLegend_CurrentDateTime: #961d7c;
@@ -523,6 +554,16 @@
   --sapFontUrl_72_Bold_full_woff: url('../../../Base/baseLib/baseTheme/fonts/72-Bold-full.woff');
   --sapFontUrl_72_Light_full_woff2: url('../../../Base/baseLib/baseTheme/fonts/72-Light-full.woff2');
   --sapFontUrl_72_Light_full_woff: url('../../../Base/baseLib/baseTheme/fonts/72-Light-full.woff');
+  --sapFontUrl_72_Black_woff2: url('../../../Base/baseLib/baseTheme/fonts/72-Black.woff2');
+  --sapFontUrl_72_Black_woff: url('../../../Base/baseLib/baseTheme/fonts/72-Black.woff');
+  --sapFontUrl_72_BoldItalic_woff2: url('../../../Base/baseLib/baseTheme/fonts/72-BoldItalic.woff2');
+  --sapFontUrl_72_BoldItalic_woff: url('../../../Base/baseLib/baseTheme/fonts/72-BoldItalic.woff');
+  --sapFontUrl_72_Condensed_woff2: url('../../../Base/baseLib/baseTheme/fonts/72-Condensed.woff2');
+  --sapFontUrl_72_Condensed_woff: url('../../../Base/baseLib/baseTheme/fonts/72-Condensed.woff');
+  --sapFontUrl_72_CondensedBold_woff2: url('../../../Base/baseLib/baseTheme/fonts/72-CondensedBold.woff2');
+  --sapFontUrl_72_CondensedBold_woff: url('../../../Base/baseLib/baseTheme/fonts/72-CondensedBold.woff');
+  --sapFontUrl_72_Italic_woff2: url('../../../Base/baseLib/baseTheme/fonts/72-Italic.woff2');
+  --sapFontUrl_72_Italic_woff: url('../../../Base/baseLib/baseTheme/fonts/72-Italic.woff');
   --sapFontUrl_72Mono_Regular_woff2: url('../../../Base/baseLib/baseTheme/fonts/72Mono-Regular.woff2');
   --sapFontUrl_72Mono_Regular_woff: url('../../../Base/baseLib/baseTheme/fonts/72Mono-Regular.woff');
   --sapFontUrl_72Mono_Regular_full_woff2: url('../../../Base/baseLib/baseTheme/fonts/72Mono-Regular-full.woff2');

@@ -213,4 +213,6 @@
   --fdTool_Header_Object_Status_Background_Color_Inverted_Negative: var(--sapShell_NegativeColor);
   --fdTool_Header_Object_Status_Background_Color_Inverted_Neutral: var(--sapShell_NeutralColor);
   --fdTool_Header_Object_Status_Background_Color_Inverted_Informative: var(--sapShell_InformativeColor);
+  /* Micro Process Flow */
+  --fdMicro_Process_Flow_Icon_Color: var(--sapContent_ContrastIconColor);
 }
