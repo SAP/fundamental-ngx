@@ -40,7 +40,7 @@ export class WizardBranchingExampleComponent {
 
     oldPayment = '';
 
-    init = true;
+    init = false;
 
     constructor(private _dialogService: DialogService) {}
 
@@ -51,9 +51,9 @@ export class WizardBranchingExampleComponent {
     }
 
     paymentSelectionChanged(dialog: TemplateRef<any>): void {
-        if (this.init && this.paymentSelection) {
+        if (!this.init) {
             this.oldPayment = this.paymentSelection;
-            this.init = false;
+            this.init = true;
         } else if (this.oldPayment !== this.paymentSelection) {
             const dialogRef = this._dialogService.open(dialog, { responsivePadding: true });
 

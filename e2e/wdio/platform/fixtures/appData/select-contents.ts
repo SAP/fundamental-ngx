@@ -6,3 +6,4 @@ export const mobileExampleTestText = 'Selected: PlumsC';
 export const maxHeightTestText = 'Selected value: "PlumsC"';
 export const testTextValue6 = 'Selected Item: "Apple"';
 export const testTextValue7 = 'Form Selected Item: { "field": "Apple" }';
+export const inputStateArr = ['is-success', 'is-error', 'is-warning', 'is-information'];

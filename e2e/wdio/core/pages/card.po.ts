@@ -49,6 +49,22 @@ export class CardPo extends CoreBaseComponentPo {
     barChartItems = 'fd-bar-chart-list-card-example li span';
     barCharBars = 'fd-bar-chart-list-card-example fd-card-bar';
 
+    quickViewExampleHeader = 'fd-card-quick-view-example fd-card-header';
+    quickViewExampleContent = 'fd-card-quick-view-example fd-card-content ';
+    quickView = '.fd-quick-view';
+
+    calendarExampleHeader = 'fd-card-calendar-example fd-card-header';
+    calendarExampleContent = 'fd-card-calendar-example fd-card-content ';
+    calendar = '.fd-calendar';
+
+    listExampleHeader = 'fd-card-list-example fd-card-header';
+    listExampleContent = 'fd-card-list-example fd-card-content ';
+    list = '.fd-list ';
+
+    linkListExampleHeader = 'fd-card-link-list-example fd-card-header';
+    linkListExampleContent = 'fd-card-link-list-example fd-card-content ';
+    link = 'a';
+
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);

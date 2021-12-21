@@ -14,14 +14,26 @@ import {
     isElementClickable,
     click,
     sendKeys,
-    waitForPresent
+    waitForPresent,
+    getElementSize
 } from '../../driver/wdio';
 
-import { sections, states } from '../fixtures/appData/textarea-contents';
+import { formMessageTestText, sections, states, styleArr } from '../fixtures/appData/textarea-contents';
 
 describe('Textarea component test', () => {
     const textareaPage = new TextareaPo();
-    const { defaultExample, formExample, stateExample, textarea, label, helpIcon, helpContent } = textareaPage;
+    const {
+        defaultExample,
+        formExample,
+        stateExample,
+        textarea,
+        label,
+        helpIcon,
+        helpContent,
+        formMessage,
+        basicTextArea,
+        compactTextarea
+    } = textareaPage;
 
     beforeAll(() => {
         textareaPage.open();
@@ -76,6 +88,46 @@ describe('Textarea component test', () => {
         click(stateExample + textarea, 5);
         sendKeys('test');
         expect(getValue(stateExample + textarea, 5)).toBe('');
+    });
+
+    it('should have compact smaller than basic', () => {
+        const basicTextareaSize = getElementSize(basicTextArea);
+        const compactTextareaSize = getElementSize(compactTextarea);
+
+        expect(basicTextareaSize.height).toBeGreaterThan(compactTextareaSize.height);
+    });
+
+    it('should check display form message', () => {
+        scrollIntoView(stateExample);
+        const inputLength = getElementArrayLength(stateExample + textarea);
+        for (let i = 0; i < inputLength - 2; i++) {
+            scrollIntoView(stateExample + textarea, i);
+            click(stateExample + textarea, i);
+            expect(isElementDisplayed(formMessage)).toBe(
+                true,
+                `form message does not displayed for input with index ${i}`
+            );
+        }
+    });
+
+    it('should check text of form message', () => {
+        scrollIntoView(stateExample);
+        const inputLength = getElementArrayLength(stateExample + textarea);
+        for (let i = 0; i < inputLength - 2; i++) {
+            scrollIntoView(stateExample + textarea, i);
+            click(stateExample + textarea, i);
+            expect(getText(formMessage)).toBe(formMessageTestText);
+        }
+    });
+
+    it('should check text of form message', () => {
+        scrollIntoView(stateExample);
+        const inputLength = getElementArrayLength(stateExample + textarea);
+        for (let i = 0; i < inputLength - 2; i++) {
+            scrollIntoView(stateExample + textarea, i);
+            click(stateExample + textarea, i);
+            expect(getElementClass(formMessage)).toContain(styleArr[i]);
+        }
     });
 
     xit('should check visual regression for all examples', () => {

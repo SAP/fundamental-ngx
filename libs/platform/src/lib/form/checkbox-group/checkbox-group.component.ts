@@ -17,7 +17,6 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
-import { distinctUntilChanged } from 'rxjs/operators';
 
 import {
     FormField,
@@ -59,12 +58,11 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
      */
     @Input()
     get isInline(): boolean {
-        return this._isInline;
+        return this._inlineCurrentValue$.value;
     }
 
     set isInline(inline: boolean) {
-        this._isInline = inline;
-        this._cd.markForCheck();
+        this._inlineCurrentValue$.next(inline);
     }
 
     /**
@@ -97,9 +95,6 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
     /** @hidden used for two way binding, when used outside form */
     private _checked: string[];
 
-    /** @hidden */
-    private _isInline: boolean;
-
     constructor(
         cd: ChangeDetectorRef,
         readonly _responsiveBreakpointsService: ResponsiveBreakpointsService,
@@ -120,18 +115,6 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
             formControl,
             _defaultResponsiveBreakPointConfig
         );
-
-        // subscribe to _inlineCurrentValue in collection-form-field-inline-layout
-        this._inlineCurrentValue
-            .pipe(distinctUntilChanged())
-            .subscribe((currentInline) => (this.isInline = currentInline));
-    }
-
-    writeValue(value: any): void {
-        if (value) {
-            super.writeValue(value);
-            this.stateChanges.next('CBG: writevalue');
-        }
     }
 
     /**

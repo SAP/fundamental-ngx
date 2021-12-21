@@ -39,6 +39,9 @@ export class StandardListItemPo extends BaseComponentPo {
     sMultiAvatar = 'fdp-platform-standard-list-item-with-selection-example fd-avatar';
     sMultiToolbar = 'fdp-platform-standard-list-item-with-selection-example fd-toolbar';
     sMultiCheckbox = 'fdp-platform-standard-list-item-with-selection-example fd-checkbox';
+    // navigation indicator with multiselect examples
+    sNavList = 'fdp-platform-standard-list-item-with-navigation-example li';
+    sNavCheckbox = 'fdp-platform-standard-list-item-with-navigation-example fd-checkbox';
     // inverted secondary types examples
     sInvtAttr = 'fdp-standard-list-item-with-inverted-secondary-type-example fdp-list';
     sInvtList = 'fdp-standard-list-item-with-inverted-secondary-type-example li';

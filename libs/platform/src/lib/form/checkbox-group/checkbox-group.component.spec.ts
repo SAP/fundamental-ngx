@@ -7,8 +7,10 @@ import { FormModule } from '@fundamental-ngx/core/form';
 import { SelectItem } from '@fundamental-ngx/platform/shared';
 import { FdpFormGroupModule } from './../form-group/fdp-form.module';
 import { CheckboxGroupComponent } from './checkbox-group.component';
-import { CheckboxComponent } from '../checkbox/checkbox.component';
+import { PlatformCheckboxGroupModule } from './checkbox-group.module';
+import { CheckboxComponent, PlatformCheckboxChange } from '../checkbox/checkbox.component';
 import { PlatformCheckboxModule } from '../checkbox/checkbox.module';
+import { runValueAccessorTests } from 'ngx-cva-test-suite';
 
 @Component({
     selector: 'fdp-cbg-reactive-test',
@@ -99,8 +101,15 @@ describe('CheckboxGroup component Reactive Form Test', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [FdpFormGroupModule, FormModule, PlatformCheckboxModule, FormsModule, ReactiveFormsModule],
-                declarations: [TestReactiveCheckboxGroupComponent, CheckboxGroupComponent]
+                imports: [
+                    FdpFormGroupModule,
+                    FormModule,
+                    PlatformCheckboxGroupModule,
+                    PlatformCheckboxModule,
+                    FormsModule,
+                    ReactiveFormsModule
+                ],
+                declarations: [TestReactiveCheckboxGroupComponent]
             }).compileComponents();
         })
     );
@@ -225,10 +234,14 @@ describe('CheckboxGroup component Reactive Form Test', () => {
         fixture.detectChanges();
 
         const fdpCheckboxElem = fixture.debugElement.queryAll(By.css('fdp-checkbox'));
-        expect(fdpCheckboxElem[11].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('false');
-        expect(fdpCheckboxElem[12].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('true');
-        expect(fdpCheckboxElem[13].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('false');
-        expect(fdpCheckboxElem[14].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('true');
+        const input11: HTMLInputElement = fdpCheckboxElem[11].nativeElement.querySelector('input[type="checkbox"');
+        const input12: HTMLInputElement = fdpCheckboxElem[12].nativeElement.querySelector('input[type="checkbox"');
+        const input13: HTMLInputElement = fdpCheckboxElem[13].nativeElement.querySelector('input[type="checkbox"');
+        const input14: HTMLInputElement = fdpCheckboxElem[14].nativeElement.querySelector('input[type="checkbox"');
+        expect(input11.hasAttribute('disabled')).toBe(false);
+        expect(input12.hasAttribute('disabled')).toBe(true);
+        expect(input13.hasAttribute('disabled')).toBe(false);
+        expect(input14.hasAttribute('disabled')).toBe(true);
     });
 
     it('should create checkbox group with enabled and disabled checkboxes from passed checkboxes', async () => {
@@ -236,10 +249,14 @@ describe('CheckboxGroup component Reactive Form Test', () => {
         fixture.detectChanges();
 
         const fdpCheckboxElem = fixture.debugElement.queryAll(By.css('fdp-checkbox'));
-        expect(fdpCheckboxElem[15].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('true');
-        expect(fdpCheckboxElem[16].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('false');
-        expect(fdpCheckboxElem[17].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('true');
-        expect(fdpCheckboxElem[18].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('false');
+        const input15: HTMLInputElement = fdpCheckboxElem[15].nativeElement.querySelector('input[type="checkbox"');
+        const input16: HTMLInputElement = fdpCheckboxElem[16].nativeElement.querySelector('input[type="checkbox"');
+        const input17: HTMLInputElement = fdpCheckboxElem[17].nativeElement.querySelector('input[type="checkbox"');
+        const input18: HTMLInputElement = fdpCheckboxElem[18].nativeElement.querySelector('input[type="checkbox"');
+        expect(input15.hasAttribute('disabled')).toBe(true);
+        expect(input16.hasAttribute('disabled')).toBe(false);
+        expect(input17.hasAttribute('disabled')).toBe(true);
+        expect(input18.hasAttribute('disabled')).toBe(false);
     });
 
     it('should create checkboxes with any type of objects with lookupKey and displayKey given', async () => {
@@ -353,8 +370,14 @@ describe('Checkbox Group Component Template driven Form Tests', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [FdpFormGroupModule, FormModule, PlatformCheckboxModule, FormsModule],
-                declarations: [TestTemplateDrivenCheckboxGroupComponent, CheckboxGroupComponent]
+                imports: [
+                    FdpFormGroupModule,
+                    FormModule,
+                    PlatformCheckboxGroupModule,
+                    PlatformCheckboxModule,
+                    FormsModule
+                ],
+                declarations: [TestTemplateDrivenCheckboxGroupComponent]
             }).compileComponents();
         })
     );
@@ -497,10 +520,14 @@ describe('Checkbox Group Component Template driven Form Tests', () => {
         fixture.detectChanges();
 
         const fdpCheckboxElem = fixture.debugElement.queryAll(By.css('fdp-checkbox'));
-        expect(fdpCheckboxElem[11].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('false');
-        expect(fdpCheckboxElem[12].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('true');
-        expect(fdpCheckboxElem[13].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('false');
-        expect(fdpCheckboxElem[14].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('true');
+        const input11: HTMLInputElement = fdpCheckboxElem[11].nativeElement.querySelector('input[type="checkbox"');
+        const input12: HTMLInputElement = fdpCheckboxElem[12].nativeElement.querySelector('input[type="checkbox"');
+        const input13: HTMLInputElement = fdpCheckboxElem[13].nativeElement.querySelector('input[type="checkbox"');
+        const input14: HTMLInputElement = fdpCheckboxElem[14].nativeElement.querySelector('input[type="checkbox"');
+        expect(input11.hasAttribute('disabled')).toBe(false);
+        expect(input12.hasAttribute('disabled')).toBe(true);
+        expect(input13.hasAttribute('disabled')).toBe(false);
+        expect(input14.hasAttribute('disabled')).toBe(true);
     });
 
     it('should create checkbox group with enabled and disabled checkboxes from passed checkboxes', async () => {
@@ -508,10 +535,14 @@ describe('Checkbox Group Component Template driven Form Tests', () => {
         fixture.detectChanges();
 
         const fdpCheckboxElem = fixture.debugElement.queryAll(By.css('fdp-checkbox'));
-        expect(fdpCheckboxElem[15].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('true');
-        expect(fdpCheckboxElem[16].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('false');
-        expect(fdpCheckboxElem[17].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('true');
-        expect(fdpCheckboxElem[18].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('false');
+        const input15: HTMLInputElement = fdpCheckboxElem[15].nativeElement.querySelector('input[type="checkbox"');
+        const input16: HTMLInputElement = fdpCheckboxElem[16].nativeElement.querySelector('input[type="checkbox"');
+        const input17: HTMLInputElement = fdpCheckboxElem[17].nativeElement.querySelector('input[type="checkbox"');
+        const input18: HTMLInputElement = fdpCheckboxElem[18].nativeElement.querySelector('input[type="checkbox"');
+        expect(input15.hasAttribute('disabled')).toBe(true);
+        expect(input16.hasAttribute('disabled')).toBe(false);
+        expect(input17.hasAttribute('disabled')).toBe(true);
+        expect(input18.hasAttribute('disabled')).toBe(false);
     });
 
     it('should create checkboxes with any type of objects with lookupKey and displayKey given', async () => {
@@ -621,8 +652,15 @@ describe('CheckboxGroup component Reactive Form Test With FormGroup Data', () =>
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [FdpFormGroupModule, FormModule, PlatformCheckboxModule, FormsModule, ReactiveFormsModule],
-                declarations: [TestReactiveCheckboxGroupWithDataComponent, CheckboxGroupComponent]
+                imports: [
+                    FdpFormGroupModule,
+                    FormModule,
+                    PlatformCheckboxGroupModule,
+                    PlatformCheckboxModule,
+                    FormsModule,
+                    ReactiveFormsModule
+                ],
+                declarations: [TestReactiveCheckboxGroupWithDataComponent]
             }).compileComponents();
         })
     );
@@ -747,10 +785,14 @@ describe('CheckboxGroup component Reactive Form Test With FormGroup Data', () =>
         fixture.detectChanges();
 
         const fdpCheckboxElem = fixture.debugElement.queryAll(By.css('fdp-checkbox'));
-        expect(fdpCheckboxElem[11].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('false');
-        expect(fdpCheckboxElem[12].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('true');
-        expect(fdpCheckboxElem[13].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('false');
-        expect(fdpCheckboxElem[14].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('true');
+        const input11: HTMLInputElement = fdpCheckboxElem[11].nativeElement.querySelector('input[type="checkbox"');
+        const input12: HTMLInputElement = fdpCheckboxElem[12].nativeElement.querySelector('input[type="checkbox"');
+        const input13: HTMLInputElement = fdpCheckboxElem[13].nativeElement.querySelector('input[type="checkbox"');
+        const input14: HTMLInputElement = fdpCheckboxElem[14].nativeElement.querySelector('input[type="checkbox"');
+        expect(input11.hasAttribute('disabled')).toBe(false);
+        expect(input12.hasAttribute('disabled')).toBe(true);
+        expect(input13.hasAttribute('disabled')).toBe(false);
+        expect(input14.hasAttribute('disabled')).toBe(true);
     });
 
     it('should create checkbox group with enabled and disabled checkboxes from passed checkboxes', async () => {
@@ -758,10 +800,14 @@ describe('CheckboxGroup component Reactive Form Test With FormGroup Data', () =>
         fixture.detectChanges();
 
         const fdpCheckboxElem = fixture.debugElement.queryAll(By.css('fdp-checkbox'));
-        expect(fdpCheckboxElem[15].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('true');
-        expect(fdpCheckboxElem[16].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('false');
-        expect(fdpCheckboxElem[17].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('true');
-        expect(fdpCheckboxElem[18].nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('false');
+        const input15: HTMLInputElement = fdpCheckboxElem[15].nativeElement.querySelector('input[type="checkbox"');
+        const input16: HTMLInputElement = fdpCheckboxElem[16].nativeElement.querySelector('input[type="checkbox"');
+        const input17: HTMLInputElement = fdpCheckboxElem[17].nativeElement.querySelector('input[type="checkbox"');
+        const input18: HTMLInputElement = fdpCheckboxElem[18].nativeElement.querySelector('input[type="checkbox"');
+        expect(input15.hasAttribute('disabled')).toBe(true);
+        expect(input16.hasAttribute('disabled')).toBe(false);
+        expect(input17.hasAttribute('disabled')).toBe(true);
+        expect(input18.hasAttribute('disabled')).toBe(false);
     });
 });
 
@@ -782,3 +828,24 @@ class Item {
         public rate: number
     ) {}
 }
+
+const CHECKBOX_GROUP_IDENTIFIER = 'platform-checkbox-group-unit-test';
+
+runValueAccessorTests({
+    component: CheckboxGroupComponent,
+    testModuleMetadata: {
+        imports: [PlatformCheckboxGroupModule]
+    },
+    additionalSetup: (fixture, done) => {
+        fixture.componentInstance.id = CHECKBOX_GROUP_IDENTIFIER;
+        fixture.componentInstance.name = CHECKBOX_GROUP_IDENTIFIER;
+        done();
+    },
+    supportsOnBlur: false,
+    internalValueChangeSetter: (fixture, value) => {
+        const event = new PlatformCheckboxChange();
+        event.checked = value;
+        fixture.componentInstance.groupValueChanges(event);
+    },
+    getComponentValue: (fixture) => fixture.componentInstance.value
+});

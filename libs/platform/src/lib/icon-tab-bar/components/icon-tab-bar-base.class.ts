@@ -106,6 +106,9 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     private _onDestroy$ = new Subject();
 
     /** @hidden */
+    private _destroyed = false;
+
+    /** @hidden */
     constructor(protected _cd: ChangeDetectorRef, protected _ngZone: NgZone) {}
 
     /** @hidden */
@@ -134,6 +137,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
+        this._destroyed = true;
     }
 
     /**
@@ -336,7 +340,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
      */
     protected async _triggerRecalculationVisibleItems(): Promise<void> {
         await this._ngZone.onMicrotaskEmpty.pipe(take(1), takeUntil(this._onDestroy$)).toPromise();
-        if (this.overflowDirective) {
+        if (this.overflowDirective && !this._destroyed) {
             const extra = this.overflowDirective.getAmountOfExtraItems();
             this._recalculateVisibleItems(extra);
             this.extraBtnDirective?.calculatePosition();

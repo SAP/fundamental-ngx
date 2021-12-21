@@ -150,8 +150,7 @@ describe('Datetime picker suite', () => {
     it('should check that available only 2 next weeks in range disabled example', () => {
         click(rangeDisabledExample + calendarIcon);
         const currentDayIndex = getCurrentItemIndex();
-        const itemsLength = getElementArrayLength(currentMonthCalendarItem);
-
+        const itemsLength = getElementArrayLength(altCalendarItem);
         for (let i = currentDayIndex - 1; i !== 0; i--) {
             expect(isElementClickable(calendarItem, i)).toBe(false, `previous day not disabled`);
         }

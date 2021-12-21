@@ -24,7 +24,7 @@ export class DatePickerPo extends CoreBaseComponentPo {
     calendarIcon = '.fd-button';
     calendar = '.fd-calendar';
     calendarItem = 'td.fd-calendar__item';
-    altCalendarItem = 'table td.fd-calendar__item';
+    altCalendarItem = 'table td.fd-calendar__item:not(.hidden-day)';
     currentMonthCalendarItem = "//td[not(contains(@class, 'fd-calendar__item--other-month'))]";
     selectedTimeLine = '> div';
     selectedItem = '.is-active';

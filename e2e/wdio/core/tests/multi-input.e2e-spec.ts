@@ -4,6 +4,7 @@ import {
     getAttributeByName,
     getElementArrayLength,
     getElementClass,
+    getElementSize,
     getText,
     isElementDisplayed,
     refreshPage,
@@ -53,7 +54,8 @@ describe('Multi input test suite', () => {
         compactExampleTokens,
         dialogCheckbox,
         selectAllItemsBtn,
-        dialogListItem
+        dialogListItem,
+        compactInput
     } = multiInputPage;
 
     beforeAll(() => {
@@ -358,6 +360,13 @@ describe('Multi input test suite', () => {
                 expect(getText(templateOptions, i)).toBe(testOptionsArray6[i]);
             }
         });
+    });
+
+    it('should check compact input be smaller than basic input', () => {
+        const basicInputS = getElementSize(activeInputs);
+        const compactInputS = getElementSize(compactInput);
+
+        expect(basicInputS.height).toBeGreaterThan(compactInputS.height);
     });
 
     xdescribe('Check visual regression', () => {

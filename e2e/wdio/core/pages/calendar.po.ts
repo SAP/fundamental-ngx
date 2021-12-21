@@ -56,6 +56,7 @@ export class CalendarPo extends CoreBaseComponentPo {
     mondays = this.specialDaysCalendar + this.calendarRow + this.calendarItem + ':nth-child(2):not(.hidden-day)';
     sundays = this.specialDaysCalendar + this.calendarRow + this.calendarItem + ':nth-child(1):not(.hidden-day)';
     saturdays = this.specialDaysCalendar + this.calendarRow + this.calendarItem + ':nth-child(7):not(.hidden-day)';
+    wednesdays = this.standardCalendar + this.calendarRow + this.calendarItem + ':nth-child(4):not(.hidden-day)';
 
     open(): void {
         super.open(this.url);

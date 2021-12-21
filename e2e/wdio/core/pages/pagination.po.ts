@@ -4,23 +4,33 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 export class PaginationPo extends CoreBaseComponentPo {
     private url = '/pagination';
 
-    standardButton = 'fd-pagination-example .fd-button--standard';
-    basicPaginationPages = 'fd-pagination-example .fd-pagination__link.ng-star-inserted';
-    basicPaginationDiv = '.fd-button--standard~div.ng-star-inserted';
+    basicPaginationExample = '#background-ex0 ';
+    showingItemsPaginationExample = '#background-ex1 ';
+    perPagePaginationExample = 'fd-pagination-per-page-example ';
+    mobilePaginationExample = 'fd-pagination-mobile-example ';
+    playgroundExample = '.fd-playground ';
+
+    standardButton = '.fd-button--standard';
+    pages = '.fd-pagination__link';
     linkNext = '[glyph="navigation-right-arrow"]';
     linkPrevious = '[glyph="navigation-left-arrow"]';
-    itemPaginationPages = '#background-ex1 .fd-pagination__link.ng-star-inserted';
-    totalPagination = '.fd-pagination__total';
+    basicPaginationText = '.fd-button--standard~div.ng-star-inserted';
+    showingItemsPaginationText = '.fd-pagination__total';
+    input = 'input';
     dropdownButton = '.fd-select__button';
-    dropDownOption = 'fd-option.fd-list__item';
-    toggledButton = 'fd-segmented-button button';
-    selectPaginationPages = '#background-ex2 .fd-pagination__link.ng-star-inserted';
+    dropdownPopover = '.fd-popover-custom-select-body';
+    dropdownPopoverOption = '.fd-list__item';
+    selectControl = '.fd-select__control';
+    segmentButton = 'fd-segmented-button button';
+    mobileButton = '.fd-pagination__button--mobile';
     playgroundInputFields = '.form-control';
     playground = '.fd-playground__content ';
     playgroundPages = '.fd-playground__content .fd-pagination__link.ng-star-inserted';
     playgroundLabel = '.fd-playground__schema .fd-form-label';
-    playgroundExamples = '.fd-playground__content .fd-pagination';
-    page = '.fd-pagination-direction-override-display .fd-pagination__link';
+
+    itemsPerPageProperty = '[arialabel="Pagination with itemsPerPage property"] ';
+    itemsPerPageTemplate = '[arialabel="Pagination with itemsPerPageOptions property"] ';
+    itemsPerPageList = '[arialabel="Pagination with custom items"] ';
 
     getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
