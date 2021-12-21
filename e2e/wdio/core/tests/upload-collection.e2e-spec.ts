@@ -45,11 +45,11 @@ describe('File uploader component test', () => {
 
     beforeAll(() => {
         uploadCollectionPage.open();
-        waitForElDisplayed(uploadCollectionPage.title);
     }, 1);
 
-    afterEach(() => {
+    beforeEach(() => {
         refreshPage();
+        waitForElDisplayed(uploadCollectionPage.title);
     }, 2);
 
     describe('Should check default example', () => {
