@@ -4,6 +4,8 @@ import { KeyboardSupportService } from '@fundamental-ngx/core/utils';
 
 import { ActionSheetItemComponent } from '../action-sheet-item/action-sheet-item.component';
 
+let ActionSheetBodyUniqueId = 0;
+
 /**
  * A component used to enforce a certain layout for the action sheet.
  * ```html
@@ -24,6 +26,10 @@ import { ActionSheetItemComponent } from '../action-sheet-item/action-sheet-item
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActionSheetBodyComponent {
+    /** Id of the Action Sheet Body. */
+    @Input()
+    actionSheetBodyId = `fd-action-sheet-body-${ActionSheetBodyUniqueId++}`;
+
     /** Indicate if items should be in compact or compare mode. */
     @Input()
     compact = false;
@@ -31,6 +37,14 @@ export class ActionSheetBodyComponent {
     /** Display in mobile view. */
     @Input()
     mobile = false;
+
+    /** Aria-label for Action Sheet Body. */
+    @Input()
+    ariaLabel: string;
+
+    /** Aria-Labelledby for element describing Action Sheet Body. */
+    @Input()
+    ariaLabelledby: string;
 
     /** @hidden */
     constructor(private readonly _keyboardSupportService: KeyboardSupportService<ActionSheetItemComponent>) {}

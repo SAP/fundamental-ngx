@@ -257,7 +257,10 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     /** @hidden */
     private async _setUpMobileMode(): Promise<void> {
         this.actionSheetMobileDynamic = await this._dynamicComponentService.createDynamicModule(
-            { actionSheetBodyTemplate: this.actionSheetBodyTemplate },
+            {
+                actionSheetBodyTemplate: this.actionSheetBodyTemplate,
+                isOpenChangeHandle: this.isOpenChangeHandle.bind(this)
+            },
             ActionSheetMobileModule,
             ActionSheetMobileComponent,
             this._viewContainerRef

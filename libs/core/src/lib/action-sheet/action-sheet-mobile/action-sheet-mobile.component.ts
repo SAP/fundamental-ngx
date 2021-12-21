@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, TemplateRef } from '@angular/core';
 
+type OpenChangeHandle = (isOpen: boolean) => void;
+
 @Component({
     selector: 'fd-action-sheet-mobile',
     templateUrl: './action-sheet-mobile.component.html',
@@ -12,7 +14,13 @@ export class ActionSheetMobileComponent {
     /** @hidden */
     childContent: {
         actionSheetBodyTemplate: TemplateRef<any>;
+        isOpenChangeHandle: OpenChangeHandle;
     } = null;
+
+    /** @hidden */
+    get _isOpenChangeHandle(): OpenChangeHandle {
+        return this.childContent.isOpenChangeHandle;
+    }
 
     /** @hidden */
     constructor(private readonly _changeDetectionRef: ChangeDetectorRef) {}
@@ -20,6 +28,6 @@ export class ActionSheetMobileComponent {
     /** @hidden */
     toggleOpenState(isOpen: boolean): void {
         this.open = isOpen;
-        this._changeDetectionRef.detectChanges();
+        this._changeDetectionRef.markForCheck();
     }
 }
