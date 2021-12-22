@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.230 (2021-12-22)
+
+
+### Bug Fixes
+
+* **core:** fixing accessibility of datetime picker component ([#6841](https://github.com/SAP/fundamental-ngx/issues/6841)) ([6b4ac4b](https://github.com/SAP/fundamental-ngx/commit/6b4ac4b900f46195bd7ec73627a5556d83525da8))
+
 ## 0.33.0-rc.229 (2021-12-22)
 
 
