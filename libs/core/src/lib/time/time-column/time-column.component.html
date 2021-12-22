@@ -6,8 +6,8 @@
     glyph="navigation-up-arrow"
     tabindex="-1"
     [compact]="compact"
+    [title]="timeConfig?.decreaseLabel"
     [ariaLabel]="timeConfig?.decreaseLabel"
-    [attr.title]="timeConfig?.decreaseLabel"
     (keyup)="spinnerButtonKeyupHandle($event, true)"
     (click)="scrollUp($event)"
 ></button>
@@ -26,10 +26,11 @@
             fdCarouselItem
             *ngFor="let row of rows; let index = index"
             #item="fdCarouselItem"
+            [attr.tabindex]="row.label === activeValue?.label ? 0 : -1"
             [id]="_createColumnItemIdByIndex(index)"
             [value]="row"
         >
-            <span class="fd-time__unit" (click)="pick(item, index)">
+            <span class="fd-time__unit" role="button" [attr.aria-label]="row.label" (click)="pick(item, index)">
                 {{ row.label }}
             </span>
         </li>
@@ -67,8 +68,8 @@
     glyph="navigation-down-arrow"
     tabindex="-1"
     [compact]="compact"
+    [title]="timeConfig?.increaseLabel"
     [ariaLabel]="timeConfig?.increaseLabel"
-    [attr.title]="timeConfig?.increaseLabel"
     (keyup)="spinnerButtonKeyupHandle($event)"
     (click)="scrollDown()"
 ></button>
