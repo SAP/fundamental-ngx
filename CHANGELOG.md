@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.229 (2021-12-22)
+
+
+### Bug Fixes
+
+* **core,platform:** add ability to define stacked tabs property ([#7410](https://github.com/SAP/fundamental-ngx/issues/7410)) ([2758f0b](https://github.com/SAP/fundamental-ngx/commit/2758f0b22509f9323c3004317eafcf791929fe7f))
+
 ## 0.33.0-rc.228 (2021-12-21)
 
 
