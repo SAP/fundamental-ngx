@@ -6,6 +6,11 @@
             "factory": "./ng-add/index#ngAdd",
             "schema": "./ng-add/schema.json"
         },
+        "ng-update": {
+            "description": "Updates existing @fundamental-ngx/platform.",
+            "factory": "./ng-update/index#ngUpdate",
+            "schema": "./ng-update/schema.json"
+        },
         "read-translation-files": {
             "description": "Read translation files. Runned as schematics to ensure the tasks order.",
             "factory": "./utils/translation-utils#readTranslationFiles",
