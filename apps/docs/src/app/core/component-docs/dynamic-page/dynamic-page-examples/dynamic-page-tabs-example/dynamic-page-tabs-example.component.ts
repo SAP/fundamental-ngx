@@ -23,13 +23,16 @@ import { Component } from '@angular/core';
 export class DynamicPageTabsExampleComponent {
     visible = false;
 
+    stackedTabs = false;
+
     pageTitle = 'Balenciaga Tripple S Trainers';
 
     onCollapseChange(): void {
         console.log('collapse changed');
     }
 
-    openPage(): void {
+    openPage(stacked: boolean): void {
+        this.stackedTabs = stacked;
         this.visible = true;
     }
 

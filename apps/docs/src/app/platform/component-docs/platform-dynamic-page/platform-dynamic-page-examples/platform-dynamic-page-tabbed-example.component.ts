@@ -26,13 +26,16 @@ export class PlatformDynamicPageTabbedExampleComponent implements OnDestroy {
 
     background = 'list';
 
+    stackedTabs = false;
+
     constructor(private _overflowHandlingService: PlatformDynamicPagePageOverflowService) {}
 
     onCollapseChange(event: DynamicPageCollapseChangeEvent): void {
         console.log('collapse changed');
     }
 
-    openPage(): void {
+    openPage(stacked: boolean): void {
+        this.stackedTabs = stacked;
         this.overlay.nativeElement.style.width = '100%';
         this.fullscreen = true;
         this._overflowHandlingService.isExampleOpened.next(true);

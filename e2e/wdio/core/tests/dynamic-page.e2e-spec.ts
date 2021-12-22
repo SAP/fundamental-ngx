@@ -252,14 +252,14 @@ describe('dynamic side content test suite', () => {
         });
 
         it('should check selecting tabs', () => {
-            openPage(tabsExample);
+            openPage(tabsExample, 1);
             scrollIntoView(tabsContent, 1);
             pause(1500);
             expect(getElementClass(tab, 1)).toContain(
                 'is-selected',
                 'tab is not highlited as selected after scroll to content'
             );
-            expect(getElementClass(tab, 0)).not.toContain('is-selected', 'tab is selected, but should not');
+            expect(getElementClass(tab)).not.toContain('is-selected', 'tab is selected, but should not');
             expect(getElementClass(tab, 2)).not.toContain('is-selected', 'tab is selected, but should not');
         });
 
@@ -325,8 +325,8 @@ describe('dynamic side content test suite', () => {
         expect(doesItExist(dynamicPageContent)).toBe(false, 'dynamic page is not closed');
     }
 
-    function openPage(section: string): void {
-        click(section + button);
+    function openPage(section: string, index: number = 0): void {
+        click(section + button, index);
         waitForElDisplayed(dynamicPageContent);
     }
 
