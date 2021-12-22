@@ -36,6 +36,12 @@ export class DynamicPageColumnLayoutExampleComponent {
      */
     localLayout: FlexibleColumnLayout = 'OneColumnStartFullScreen';
 
+    separatorAriaLabel = 'separator';
+
+    expandTitle = 'Expand';
+
+    collapseTitle = 'Collapse';
+
     constructor(private _messageToastService: MessageToastService) {}
 
     /**

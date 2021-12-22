@@ -17,8 +17,7 @@
     <div
         *ngIf="_leftColumnSeparator"
         class="fd-flexible-column-layout__separator"
-        i18n-aria-label="coreFlexibleColumnLayout.Left.Separator|Separator aria-label attribute"
-        aria-label="separator"
+        [attr.aria-label]="separatorAriaLabel"
     >
         <button
             fd-button
@@ -26,8 +25,7 @@
             fdType="transparent"
             class="fd-flexible-column-layout__button"
             ariaLabel="Expand"
-            i18n-title="coreFlexibleColumnLayount.Left.Separator.Toogle|Left title attribute"
-            [title]="_leftColumnSeparator === 'left' ? 'Expand' : 'Collapse'"
+            [title]="_leftColumnSeparator === 'left' ? expandTitle : collapseTitle"
             (click)="_handleLeftColumnSeparatorClick()"
         >
             <i
@@ -50,8 +48,7 @@
     <div
         *ngIf="_rightColumnSeparator"
         class="fd-flexible-column-layout__separator"
-        i18n-aria-label="coreFlexibleColumnLayout.Right.Separator|Separator aria-label attribute"
-        aria-label="separator"
+        [attr.aria-label]="separatorAriaLabel"
     >
         <button
             fd-button
@@ -59,8 +56,7 @@
             fdType="transparent"
             class="fd-flexible-column-layout__button"
             ariaLabel="Expand"
-            i18n-title="coreFlexibleColumnLayount.Right.Separator.Toogle|Right title attribute"
-            [title]="_rightColumnSeparator === 'left' ? 'Expand' : 'Collapse'"
+            [title]="_rightColumnSeparator === 'left' ? expandTitle : collapseTitle"
             (click)="_handleRightColumnSeparatorClick()"
         >
             <i

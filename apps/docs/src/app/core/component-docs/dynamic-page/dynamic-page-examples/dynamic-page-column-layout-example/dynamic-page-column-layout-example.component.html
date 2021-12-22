@@ -1,6 +1,12 @@
 <button fd-button (click)="openPage()">Click to open full screen</button>
 <div class="overlay" *ngIf="visible">
-    <fd-flexible-column-layout [layout]="localLayout" (layoutChange)="changeLayout($event)">
+    <fd-flexible-column-layout
+        [separatorAriaLabel]="separatorAriaLabel"
+        [expandTitle]="expandTitle"
+        [collapseTitle]="collapseTitle"
+        [layout]="localLayout"
+        (layoutChange)="changeLayout($event)"
+    >
         <ng-template #startColumn>
             <fd-dynamic-page [autoResponsive]="true" ariaLabel="Example Dynamic Page">
                 <fd-dynamic-page-header
