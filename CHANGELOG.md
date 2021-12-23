@@ -1,4 +1,11 @@
 
+### [0.32.6](https://github.com/SAP/fundamental-ngx/compare/v0.32.5...v0.32.6) (2021-12-23)
+
+
+### Bug Fixes
+
+* **core:** close sub-menu ([#7418](https://github.com/SAP/fundamental-ngx/issues/7418)) ([88a5cba](https://github.com/SAP/fundamental-ngx/commit/88a5cba8d30ca30e37443b99546c6b135766a6fc))
+
 ### [0.32.5](https://github.com/SAP/fundamental-ngx/compare/v0.32.3...v0.32.5) (2021-12-21)
 
 
