@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.235 (2021-12-23)
+
+
+### Bug Fixes
+
+* **core:** step-input, fix a11y issues ([#7235](https://github.com/SAP/fundamental-ngx/issues/7235)) ([8ad09eb](https://github.com/SAP/fundamental-ngx/commit/8ad09eb45abfe64e08a96ce9c07ea534bef8c663))
+
 ## 0.33.0-rc.234 (2021-12-23)
 
 ## 0.33.0-rc.233 (2021-12-23)
