@@ -163,9 +163,9 @@ describe('Datetime picker suite', () => {
             }
         }
 
-        if (currentDayIndex + 15 > itemsLength) {
+        if (currentDayIndex + 14 > itemsLength) {
             const lengthDifference = itemsLength - currentDayIndex;
-            const availableLengthNextMonth = 15 - lengthDifference;
+            const availableLengthNextMonth = 14 - lengthDifference;
 
             for (let i = currentDayIndex; i < lengthDifference; i++) {
                 expect(isElementClickable(currentMonthCalendarItem, i)).toBe(true, `element ${i} is disabled`);
@@ -177,7 +177,7 @@ describe('Datetime picker suite', () => {
                 expect(isElementClickable(currentMonthCalendarItem, i)).toBe(true, `element ${i} is disabled`);
             }
 
-            for (let i = availableLengthNextMonth + 1; i < itemsLength; i++) {
+            for (let i = availableLengthNextMonth + 2; i < itemsLength; i++) {
                 if (i >= 31) {
                     break;
                 }

@@ -1,6 +1,6 @@
 <button fd-button (click)="enterFullscreenExample()">Click to open full screen</button>
 
-<div cdkScrollable class="docs-wizard-example-overlay" #overlay>
+<div cdkScrollable cdkTrapFocus class="docs-wizard-example-overlay" #overlay>
     <ng-container *ngIf="fullscreen">
         <div class="docs-wizard-example-overlay-content">
             <div class="docs-wizard-example-button">
@@ -10,12 +10,14 @@
             <!-- The Wizard -->
             <fd-wizard [appendToWizard]="false">
                 <fd-wizard-navigation>
-                    <ul fd-wizard-progress-bar size="sm">
+                    <ul fd-wizard-progress-bar size="sm" role="list" aria-label="Wizard Steps">
                         <li
                             fd-wizard-step
                             [status]="step1status"
                             (statusChange)="statusChanged(1, $event)"
                             label="Step 1: One Line"
+                            ariaLabel="Step 1: One Line"
+                            (keydown)="handleFocus($event, 0)"
                         >
                             <fd-wizard-step-indicator glyph="accept"></fd-wizard-step-indicator>
                             <fd-wizard-content size="md" contentBackground="solid">
@@ -32,6 +34,8 @@
                             [status]="step2status"
                             (statusChange)="statusChanged(2, $event)"
                             label="Step 2: Another Step"
+                            ariaLabel="Step 2: Another Step"
+                            (keydown)="handleFocus($event, 1)"
                         >
                             <fd-wizard-step-indicator>2</fd-wizard-step-indicator>
                             <fd-wizard-content size="md">
@@ -49,6 +53,8 @@
                             (statusChange)="statusChanged(3, $event)"
                             label="Step 3: One line truncates"
                             optionalText="(Optional)"
+                            ariaLabel="Step 3: One line truncates"
+                            (keydown)="handleFocus($event, 2)"
                         >
                             <fd-wizard-step-indicator>3</fd-wizard-step-indicator>
                             <fd-wizard-content size="md"> Wizard Content for step 3 </fd-wizard-content>

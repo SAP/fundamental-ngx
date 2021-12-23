@@ -6,12 +6,14 @@
         <fd-dialog-body>
             <fd-wizard [appendToWizard]="false" [displaySummaryStep]="true">
                 <fd-wizard-navigation>
-                    <ul fd-wizard-progress-bar size="sm">
+                    <ul fd-wizard-progress-bar size="sm" role="list" aria-label="Wizard Steps">
                         <li
                             fd-wizard-step
                             [status]="step1status"
                             (statusChange)="statusChanged(1, $event)"
                             label="Product Type"
+                            ariaLabel="Step 1: Product Type"
+                            (keydown)="handleFocus($event, 0)"
                         >
                             <fd-wizard-step-indicator>1</fd-wizard-step-indicator>
                             <fd-wizard-content size="sm">
@@ -38,6 +40,8 @@
                             [status]="step2status"
                             (statusChange)="statusChanged(2, $event)"
                             label="Customer Information"
+                            ariaLabel="Step 2: Customer Information"
+                            (keydown)="handleFocus($event, 1)"
                         >
                             <fd-wizard-step-indicator>2</fd-wizard-step-indicator>
                             <fd-wizard-content size="sm">
@@ -104,6 +108,8 @@
                             (statusChange)="statusChanged(3, $event)"
                             label="Additional Information"
                             optionalText="(Optional)"
+                            ariaLabel="Step 3: Additional Information"
+                            (keydown)="handleFocus($event, 2)"
                         >
                             <fd-wizard-step-indicator>3</fd-wizard-step-indicator>
                             <fd-wizard-content size="sm">
@@ -127,6 +133,8 @@
                             [status]="step4status"
                             (statusChange)="statusChanged(4, $event)"
                             label="Pricing and Payment"
+                            ariaLabel="Step 4: Pricing and Payment"
+                            (keydown)="handleFocus($event, 3)"
                         >
                             <fd-wizard-step-indicator>4</fd-wizard-step-indicator>
                             <fd-wizard-content size="sm">
@@ -150,10 +158,12 @@
                             [isSummary]="true"
                             (statusChange)="statusChanged(5, $event)"
                             label="Visible summary step"
+                            ariaLabel="Step 5: Visible summary step"
+                            (keydown)="handleFocus($event, 4)"
                         >
                             <fd-wizard-step-indicator>5</fd-wizard-step-indicator>
                             <fd-wizard-content size="sm">
-                                <h4 class="fd-title fd-title--h4">1. Product Type</h4>
+                                <h4 class="fd-title fd-title--h4" id="fd-wizard-product-type">1. Product Type</h4>
                                 <fd-layout-grid style="margin-bottom: 2rem">
                                     <div fdLayoutGridCol="4" colMd="2" colLg="2" colXl="2">
                                         <label fd-form-label style="float: right">Type:</label>
@@ -162,10 +172,19 @@
                                         <label fd-form-label style="color: black">Mobile</label>
                                     </div>
                                     <div fdLayoutGridCol="1" colMd="5" colLg="5" colXl="5">
-                                        <a [routerLink]="['./']" fd-link (click)="goToStep(1)">Edit</a>
+                                        <a
+                                            aria-labelledby="fd-wizard-product-type"
+                                            [routerLink]="['./']"
+                                            fd-link
+                                            (click)="goToStep(1)"
+                                            title="edit"
+                                            >Edit</a
+                                        >
                                     </div>
                                 </fd-layout-grid>
-                                <h4 class="fd-title fd-title--h4">2. Customer Information</h4>
+                                <h4 class="fd-title fd-title--h4" id="fd-wizard-customer-info">
+                                    2. Customer Information
+                                </h4>
                                 <fd-layout-grid>
                                     <div fdLayoutGridCol="4" colMd="2" colLg="2" colXl="2">
                                         <label fd-form-label style="float: right">Full Name:</label><br />
@@ -184,10 +203,19 @@
                                         <br />
                                         <br />
                                         <br />
-                                        <a [routerLink]="['./']" fd-link (click)="goToStep(2)">Edit</a>
+                                        <a
+                                            aria-labelledby="fd-wizard-customer-info"
+                                            [routerLink]="['./']"
+                                            fd-link
+                                            (click)="goToStep(2)"
+                                            title="edit"
+                                            >Edit</a
+                                        >
                                     </div>
                                 </fd-layout-grid>
-                                <h4 class="fd-title fd-title--h4">3. Additional Information</h4>
+                                <h4 class="fd-title fd-title--h4" id="fd-wizard-additional-info">
+                                    3. Additional Information
+                                </h4>
                                 <fd-layout-grid>
                                     <div fdLayoutGridCol="4" colMd="2" colLg="2" colXl="2">
                                         <label fd-form-label style="float: right">Name:</label><br />
@@ -205,10 +233,19 @@
                                         <br />
                                         <br />
                                         <br />
-                                        <a [routerLink]="['./']" fd-link (click)="goToStep(3)">Edit</a>
+                                        <a
+                                            aria-labelledby="fd-wizard-additional-info"
+                                            [routerLink]="['./']"
+                                            fd-link
+                                            (click)="goToStep(3)"
+                                            title="edit"
+                                            >Edit</a
+                                        >
                                     </div>
                                 </fd-layout-grid>
-                                <h4 class="fd-title fd-title--h4">4. Payment Information</h4>
+                                <h4 class="fd-title fd-title--h4" id="fd-wizard-payment-info">
+                                    4. Payment Information
+                                </h4>
                                 <fd-layout-grid>
                                     <div fdLayoutGridCol="4" colMd="2" colLg="2" colXl="2">
                                         <label fd-form-label style="float: right">Payment Type:</label><br />
@@ -217,7 +254,14 @@
                                         <label fd-form-label style="color: black"></label><br />
                                     </div>
                                     <div fdLayoutGridCol="1" colMd="5" colLg="5" colXl="5">
-                                        <a [routerLink]="['./']" fd-link (click)="goToStep(4)">Edit</a>
+                                        <a
+                                            aria-labelledby="fd-wizard-payment-info"
+                                            [routerLink]="['./']"
+                                            fd-link
+                                            (click)="goToStep(4)"
+                                            title="edit"
+                                            >Edit</a
+                                        >
                                     </div>
                                 </fd-layout-grid>
                             </fd-wizard-content>

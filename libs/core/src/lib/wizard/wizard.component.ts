@@ -60,7 +60,11 @@ export const handleTimeoutReference = () => {
             provide: WIZARD,
             useExisting: WizardComponent
         }
-    ]
+    ],
+    host: {
+        role: 'region',
+        '[attr.aria-label]': 'ariaLabel'
+    }
 })
 export class WizardComponent implements AfterViewInit, OnDestroy {
     /**
@@ -86,6 +90,10 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     @Input()
     displaySummaryStep = false;
+
+    /** adding aria label to the component */
+    @Input()
+    ariaLabel = 'Wizard';
 
     /** @hidden */
     @ContentChildren(WizardStepComponent, { descendants: true })
