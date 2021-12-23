@@ -14,14 +14,13 @@ import {
         <form [formGroup]="customForm" class="flex-form">
             <div>
                 <div fd-form-item>
-                    <label fd-form-label required="true">Date Picker</label>
+                    <label for="fd-date-picker-form-example-1" fd-form-label required="true">Date Picker</label>
                     <fd-date-picker
                         [state]="isValid() ? 'success' : 'error'"
-                        [message]="
-                            isValid() ? 'This is valid(success) DatePicker' : 'This is invalid(error) DatePicker'
-                        "
+                        [message]="isValid() ? 'This is valid Date picker' : 'This is invalid Date picker'"
                         required="true"
                         formControlName="date"
+                        inputId="fd-date-picker-form-example-1"
                     >
                     </fd-date-picker>
                 </div>
@@ -36,11 +35,12 @@ import {
             <br />
 
             <div fd-form-item>
-                <label fd-form-label>Disabled Date Picker</label>
+                <label for="fd-date-picker-form-example-2" fd-form-label>Disabled Date Picker</label>
                 <fd-date-picker
                     state="information"
                     message="This is disabled DatePicker"
                     formControlName="disabledDate"
+                    inputId="fd-date-picker-form-example-2"
                 >
                 </fd-date-picker>
                 <br />
