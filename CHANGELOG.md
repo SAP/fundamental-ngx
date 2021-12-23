@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.231 (2021-12-23)
+
+
+### Bug Fixes
+
+* **core:** date picker accessibility ([#7324](https://github.com/SAP/fundamental-ngx/issues/7324)) ([765fea3](https://github.com/SAP/fundamental-ngx/commit/765fea379cff5e3c08c883bd42106b451c9a464b))
+
 ## 0.33.0-rc.230 (2021-12-22)
 
 
