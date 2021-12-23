@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.236 (2021-12-23)
+
+
+### Bug Fixes
+
+* **core:** core time-picker accessibility ([#7304](https://github.com/SAP/fundamental-ngx/issues/7304)) ([7847879](https://github.com/SAP/fundamental-ngx/commit/78478790410e1ec512be8a919e4d900049f6fd48))
+
 ## 0.33.0-rc.235 (2021-12-23)
 
 
