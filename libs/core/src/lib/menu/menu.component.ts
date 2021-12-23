@@ -145,6 +145,16 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
                 })
             );
         }
+
+        /** keep isOpen up to date */
+        this.isOpenChange.subscribe((isOpen) => {
+            if (!isOpen) {
+                // when popover got closed by its own mechanism (e.x. click outside)
+                // we need to clean up menu as well
+                this._cleanUpMenuAfterClose();
+                this._changeDetectorRef.markForCheck();
+            }
+        });
     }
 
     /** @hidden */
@@ -191,8 +201,8 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
     close(): void {
         this.isOpen = false;
         this._popoverService.close();
-        this._menuService.resetMenuState();
         this.isOpenChange.emit(this.isOpen);
+        this._cleanUpMenuAfterClose();
         this._focusTrigger();
         this._changeDetectorRef.markForCheck();
     }
@@ -205,6 +215,11 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
     /** Method called to refresh position of opened popover */
     refreshPosition(): void {
         this._popoverService.refreshPosition();
+    }
+
+    /** @hidden */
+    private _cleanUpMenuAfterClose(): void {
+        this._menuService.resetMenuState();
     }
 
     /** @hidden Select and instantiate menu view mode */
