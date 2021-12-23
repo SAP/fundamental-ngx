@@ -1,6 +1,7 @@
 import { ValueHelpDialogPo } from '../pages/value-help-dialog.po';
 import {
     browserIsFirefox,
+    browserIsSafari,
     clearValue,
     click,
     doesItExist,
@@ -289,11 +290,11 @@ describe('Value help dialog test suite', () => {
 
         it('should check search field', () => {
             click(openDialogBtn, 3);
-            const firstName = getText(productNameColumn).toLowerCase();
+            const firstName = getText(productNameColumn).toLowerCase().trim();
             click(cancelButton);
             click(input, 3);
             sendKeys(firstName);
-            expect(getText(dropDownItem).toLowerCase()).toEqual(firstName);
+            expect(getText(dropDownItem).toLowerCase().trim()).toEqual(firstName);
         });
     });
 
@@ -302,8 +303,8 @@ describe('Value help dialog test suite', () => {
             click(openMobileExampleBtn);
             click(dialogButton);
             clickTableCheckbox(1);
-            const text = getText(productNameColumn);
-            expect(getText(token)).toBe(text);
+            const text = getText(productNameColumn).trim();
+            expect(getText(token).trim()).toBe(text);
         });
 
         it('should check search in mobile example', () => {
@@ -353,11 +354,15 @@ describe('Value help dialog test suite', () => {
 
         for (let i = 1; resultsCount > i; i++) {
             scrollIntoView(selector, i);
-            expect(getText(selector, i).toLowerCase()).toContain(expectation);
+            expect(getText(selector, i).toLowerCase().trim()).toContain(expectation);
         }
     }
 
     function clickTableCheckbox(index: number): void {
-        return browserIsFirefox() ? click(tableCheckboxesFF, index) : click(tableCheckboxes, index);
+        browserIsFirefox()
+            ? click(tableCheckboxesFF, index)
+            : browserIsSafari()
+            ? click('table .fd-table__cell--checkbox', index)
+            : click(tableCheckboxes, index);
     }
 });

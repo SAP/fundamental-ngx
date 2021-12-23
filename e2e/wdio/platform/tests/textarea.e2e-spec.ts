@@ -344,6 +344,7 @@ describe('Verify Textarea component', () => {
     }
 
     function checkOverLimitMessage(section: string, limit: number, i: number = 0): void {
+        scrollIntoView(section);
         clearValue(section + textarea, i);
         click(section + textarea, i);
         for (let i = 0; i < limit + 1; i++) {
@@ -351,10 +352,10 @@ describe('Verify Textarea component', () => {
         }
         expect(isElementDisplayed(message)).toBe(true);
         if (section === textareaBasicExample) {
-            expect(getText(message)).toBe('This is an example warning when used without forms.');
+            expect(getText(message).trim()).toBe('This is an example warning when used without forms.');
         }
         if (section !== textareaBasicExample) {
-            expect(getText(message)).toBe('Please get your character count under limit.');
+            expect(getText(message).trim()).toBe('Please get your character count under limit.');
         }
     }
 });
