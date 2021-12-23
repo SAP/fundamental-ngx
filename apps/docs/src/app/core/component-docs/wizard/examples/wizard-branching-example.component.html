@@ -74,6 +74,7 @@
                                                 id="radio-2"
                                                 name="radio-name-1"
                                                 [(ngModel)]="paymentSelection"
+                                                (ngModelChange)="paymentSelectionChanged(confirmationDialog)"
                                                 aria-label="Credit Card"
                                             >
                                                 Credit Card
