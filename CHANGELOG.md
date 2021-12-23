@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.233 (2021-12-23)
+
+
+### Bug Fixes
+
+* **core:** adding arialabel and roles to handle a11y for wizard component ([#7198](https://github.com/SAP/fundamental-ngx/issues/7198)) ([6ab97c5](https://github.com/SAP/fundamental-ngx/commit/6ab97c58705220bf9f3866c1ac03bcee939d0f5a))
+
 ## 0.33.0-rc.232 (2021-12-23)
 
 
