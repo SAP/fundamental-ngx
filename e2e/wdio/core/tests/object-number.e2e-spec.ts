@@ -125,8 +125,7 @@ function checkObjectValues(selector, dataArr): void {
 
     for (let i = 0; i < objectCount; i++) {
         const unitValue = getAttributeByName(selector, unitAttr, i);
-        const textValue = getText(selector, i);
-
-        expect(textValue).toEqual(dataArr[i] + ' ' + unitValue);
+        const textValue = getText(selector + ' .fd-object-number__text', i).trim();
+        expect(textValue + ' ' + unitValue).toEqual(dataArr[i] + ' ' + unitValue);
     }
 }

@@ -46,7 +46,7 @@ export class PaginationPo extends CoreBaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForPresent(this.standardButton);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 }

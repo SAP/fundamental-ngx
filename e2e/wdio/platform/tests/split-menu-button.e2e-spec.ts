@@ -48,7 +48,8 @@ describe('Split menu button test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(arrowBtnArr);
+        waitForPresent(spMenuBtnPage.root);
+        waitForElDisplayed(spMenuBtnPage.title);
     }, 1);
 
     // Wasn't debuged yet in IE and Safari

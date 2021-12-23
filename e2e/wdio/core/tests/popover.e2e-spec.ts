@@ -1,6 +1,7 @@
 import { PopoverPo } from '../pages/popover.po';
 import {
     acceptAlert,
+    browserIsSafari,
     click,
     doesItExist,
     getAlertText,
@@ -13,7 +14,9 @@ import {
     isElementDisplayed,
     mouseHoverElement,
     refreshPage,
-    scrollIntoView
+    scrollIntoView,
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 
 import {
@@ -94,6 +97,8 @@ describe('Popover test suite', () => {
 
     afterEach(() => {
         refreshPage();
+        waitForPresent(popoverPage.root);
+        waitForElDisplayed(popoverPage.title);
     }, 1);
 
     describe('Check Basic Popovers', () => {
@@ -147,8 +152,8 @@ describe('Popover test suite', () => {
         it('should check that button popover have header, subheader and buttons are clickable', () => {
             scrollIntoView(basicPopoverButton);
             click(basicPopoverButton);
-            expect(getText(barElement)).toBe(cozyHeaderTestText);
-            expect(getText(barElement, 1)).toBe(subheaderTestText);
+            expect(getText(barElement).trim()).toBe(cozyHeaderTestText);
+            expect(getText(barElement, 1).trim()).toBe(subheaderTestText);
 
             expect(isElementClickable(barElement, 2)).toBe(true, `save button not clickable`);
             expect(isElementClickable(barElement, 3)).toBe(true, `cancel button not clickable`);
@@ -278,6 +283,10 @@ describe('Popover test suite', () => {
 
     describe('Check Fill Control Width', () => {
         it('should check fill control width example', () => {
+            // skipped due to hoverElement does not work in Safari
+            if (browserIsSafari()) {
+                return;
+            }
             scrollIntoView(hoverElement);
             mouseHoverElement(hoverElement);
             expect(isElementDisplayed(popoverNoArrow)).toBe(true, 'popover not displayed');

@@ -1,5 +1,6 @@
 import {
     browserIsIEorSafari,
+    browserIsSafari,
     click,
     executeScriptAfterTagAttr,
     executeScriptBeforeTagAttr,
@@ -62,9 +63,10 @@ describe('Input Group should', () => {
         waitForPresent(leftAlignedTextInput);
     }, 1);
 
-    afterEach(() => {
+    beforeEach(() => {
         refreshPage();
-        waitForPresent(leftAlignedTextInput);
+        waitForPresent(inputGroupPage.root);
+        waitForElDisplayed(inputGroupPage.title);
     }, 1);
 
     it('have associated label element to describe its purpose', () => {
@@ -166,14 +168,14 @@ describe('Input Group should', () => {
         click(withFormInputButtonAddon);
         mouseHoverElement(withFormInput);
 
-        expect(executeScriptBeforeTagAttr(withFormInputQuestionMark, 'content')).toBe('""');
-        expect(executeScriptAfterTagAttr(withFormInputAsterixMark, 'content')).toBe('"*"');
-        // TODO: Uncomment after merge
-        /*        if (browserIsSafari()) {
-            expect(getText(inputGroupPage.withFormInputErrorTooltip)).toEqual('Value is required');
-            return;
+        if (browserIsSafari()) {
+            expect(executeScriptBeforeTagAttr(withFormInputQuestionMark, 'content')).toBe('');
         }
-        console.log('Skip hover check for Safari');*/
+        if (!browserIsSafari()) {
+            expect(executeScriptBeforeTagAttr(withFormInputQuestionMark, 'content')).toBe('""');
+        }
+        expect(executeScriptAfterTagAttr(withFormInputAsterixMark, 'content')).toBe('"*"');
+        expect(getText(inputGroupPage.withFormInputErrorTooltip).trim()).toEqual('Value is required');
     });
 
     it('with form input have info tooltip', () => {

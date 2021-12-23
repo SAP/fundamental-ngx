@@ -36,7 +36,8 @@ describe('Verify Feed Input component', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForElDisplayed(feedInputAvatar);
+        waitForPresent(feedInputPage.root);
+        waitForElDisplayed(feedInputPage.title);
     }, 1);
 
     it('should have correct placeholder assigned', () => {

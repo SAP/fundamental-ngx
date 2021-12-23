@@ -6,6 +6,7 @@ import {
     getElementArrayLength,
     getText,
     refreshPage,
+    waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 import { ObjectListItemPo } from '../pages/object-list-item.po';
@@ -49,7 +50,8 @@ describe('Object list item suite:', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(allObjsList);
+        waitForPresent(objListPage.root);
+        waitForElDisplayed(objListPage.title);
     }, 1);
 
     describe('Basic checks:', () => {

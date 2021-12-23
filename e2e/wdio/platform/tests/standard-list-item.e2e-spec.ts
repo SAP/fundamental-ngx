@@ -5,6 +5,7 @@ import {
     getElementArrayLength,
     getText,
     refreshPage,
+    waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 import {
@@ -53,7 +54,8 @@ describe('Standard List Item test suite:', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(sNoBorderList);
+        waitForPresent(standardListPage.root);
+        waitForElDisplayed(standardListPage.title);
     }, 1);
 
     describe('Standard List Item - Border Less examples:', () => {

@@ -8,7 +8,8 @@ import {
     getText,
     isElementDisplayed,
     refreshPage,
-    waitForElDisplayed
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 import { checkElArrIsClickable } from '../../helper/assertion-helper';
 import { emptyDataArr, focusAttribute } from '../fixtures/appData/product-switch-contents';
@@ -23,6 +24,7 @@ describe('product switch test suite', () => {
 
     beforeEach(() => {
         refreshPage();
+        waitForPresent(productSwitchPage.root);
         waitForElDisplayed(productSwitchPage.title);
     }, 1);
 

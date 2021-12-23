@@ -8,7 +8,8 @@ import {
     getText,
     refreshPage,
     scrollIntoView,
-    waitForElDisplayed
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 
 import {
@@ -85,7 +86,9 @@ describe('Radio button group  Test Suite', () => {
 
     afterEach(() => {
         refreshPage();
-    }, 1);
+        waitForPresent(radioButtonGroupPage.root);
+        waitForElDisplayed(radioButtonGroupPage.title);
+    }, 2);
 
     it('Verify Radio button buttons can be aligned vertically and horizontally.', () => {
         const groupButtons = elementArray(formGroup);
