@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.232 (2021-12-23)
+
+
+### Bug Fixes
+
+* **core:** close sub-menu ([#7418](https://github.com/SAP/fundamental-ngx/issues/7418)) ([20de5bb](https://github.com/SAP/fundamental-ngx/commit/20de5bb235c1d539ce75d64bf534c59c8feec91b))
+
 ## 0.33.0-rc.231 (2021-12-23)
 
 
