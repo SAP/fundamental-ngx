@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.239 (2021-12-23)
+
+
+### Bug Fixes
+
+* **core:** remove obsolete utils ([#7407](https://github.com/SAP/fundamental-ngx/issues/7407)) ([7c3c1dd](https://github.com/SAP/fundamental-ngx/commit/7c3c1dd7cc55519f16fbfab1746a5f1b5c0805e4))
+
 ## 0.33.0-rc.238 (2021-12-23)
 
 ## 0.33.0-rc.237 (2021-12-23)
