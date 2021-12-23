@@ -21,6 +21,7 @@ export class TimePickerPO extends BaseComponentPo {
     hoursColumn = '.fd-time .fd-time__col:nth-child(1) ';
     thirdColumn = '.fd-time .fd-time__col:nth-child(3) ';
     columnItem = '.fd-time__item:not(.fd-time__item--collapsed)';
+    selectedTimeItem = '.fd-time__item:nth-child(12)';
 
     getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);

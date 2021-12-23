@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, QueryList, ViewChildren } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
-import { FormModule } from '@fundamental-ngx/core/form';
-import { SwitchModule } from '@fundamental-ngx/core/switch';
 import { SwitchComponent, SwitchChangeEvent } from './switch.component';
 import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
+import { PlatformSwitchModule } from '../switch.module';
+import { runValueAccessorTests } from 'ngx-cva-test-suite';
 
 @Component({
     selector: 'fdp-test-switch',
@@ -86,8 +86,8 @@ describe('SwitchComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [FdpFormGroupModule, FormModule, FormsModule, ReactiveFormsModule, SwitchModule],
-                declarations: [TestSwitchComponent, SwitchComponent]
+                imports: [FdpFormGroupModule, ReactiveFormsModule, PlatformSwitchModule],
+                declarations: [TestSwitchComponent]
             }).compileComponents();
         })
     );
@@ -185,4 +185,23 @@ describe('SwitchComponent', () => {
 
         expect(switches[3].switchCurrentValue).toBeTruthy();
     });
+});
+
+const SWITCH_IDENTIFIER = 'platform-switch-unit-test';
+
+runValueAccessorTests({
+    component: SwitchComponent,
+    testModuleMetadata: {
+        imports: [PlatformSwitchModule]
+    },
+    additionalSetup: (fixture, done) => {
+        fixture.componentInstance.id = SWITCH_IDENTIFIER;
+        fixture.componentInstance.name = SWITCH_IDENTIFIER;
+        done();
+    },
+    supportsOnBlur: false,
+    internalValueChangeSetter: (fixture, value) => {
+        fixture.componentInstance.onValueChange(value);
+    },
+    getComponentValue: (fixture) => fixture.componentInstance.value
 });

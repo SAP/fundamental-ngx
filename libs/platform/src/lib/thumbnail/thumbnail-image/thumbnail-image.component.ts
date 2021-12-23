@@ -1,6 +1,7 @@
 import {
     Component,
     Input,
+    Optional,
     Output,
     EventEmitter,
     OnChanges,
@@ -12,7 +13,10 @@ import {
     ElementRef
 } from '@angular/core';
 
+import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { DialogService } from '@fundamental-ngx/core/dialog';
 import { Media } from '../thumbnail.interfaces';
+import { SPACE } from '@angular/cdk/keycodes';
 
 @Component({
     selector: 'fdp-thumbnail-image',
@@ -51,7 +55,11 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
     thumbnailImages: QueryList<ElementRef>;
 
     /** @hidden */
-    constructor(protected _changeDetectorRef: ChangeDetectorRef) {}
+    constructor(
+        protected _changeDetectorRef: ChangeDetectorRef,
+        private _dialogService: DialogService,
+        @Optional() private _rtlService: RtlService
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -77,15 +85,27 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
     }
 
     /** @hidden */
-    thumbnailClick(selectedMedia: Media): void {
+    thumbnailClick(selectedMedia: Media, event?: KeyboardEvent | MouseEvent): void {
+        if (event instanceof KeyboardEvent && KeyUtil.isKeyCode(event, SPACE)) {
+            event?.preventDefault();
+        }
         this.mediaList.forEach((item) => (item.selected = false));
         selectedMedia.selected = true;
         this.thumbnailClicked.emit(selectedMedia);
+    }
+
+    /** @hidden  returns boolean value for rtl */
+    private _isRtl(): boolean {
+        return this._rtlService?.rtl.getValue();
     }
 
     private _setOverlay(): void {
         if (this.mediaList.length > this.maxImages) {
             this.mediaList[this.maxImages - 1].overlayRequired = true;
         }
+    }
+
+    openImage(image: Media, $event: KeyboardEvent | MouseEvent) {
+        image.overlayRequired ? this.openDialog(image, this.mediaList) : this.thumbnailClick(image, $event);
     }
 }

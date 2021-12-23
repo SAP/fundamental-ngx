@@ -4,10 +4,10 @@ import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 /**
  * ng add schematic that
  * - install moment-adapter package
- * @param _options options passed for this schematic
+ * @param options options passed for this schematic
  */
-export function ngAdd(_options: any): Rule {
-    return (_tree: Tree, _context: SchematicContext) => chain([endInstallTask()]);
+export function ngAdd(): Rule {
+    return () => chain([endInstallTask()]);
 }
 
 /**
@@ -16,6 +16,7 @@ export function ngAdd(_options: any): Rule {
 function endInstallTask(): Rule {
     return (tree: Tree, context: SchematicContext) => {
         context.addTask(new NodePackageInstallTask());
+
         return tree;
     };
 }

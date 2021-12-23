@@ -701,6 +701,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
         this._listenToTableWidthChanges();
 
+        this._listenToTableContainerMouseLeave();
+
         this._cdr.detectChanges();
     }
 
@@ -921,6 +923,12 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     _getColumnResizableSide(columnIndex: number): TableColumnResizableSide {
         if (columnIndex === 0) {
             return 'end';
+        }
+
+        const isLastColumn = columnIndex === this._visibleColumns.length - 1;
+
+        if (isLastColumn && this._isShownNavigationColumn) {
+            return 'start';
         }
 
         return 'both';
@@ -2043,6 +2051,15 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                         this._tableColumnResizeService.updateFrozenColumnsWidth();
                     }
                 })
+        );
+    }
+
+    /** @hidden */
+    private _listenToTableContainerMouseLeave(): void {
+        this._subscriptions.add(
+            fromEvent(this.tableContainer.nativeElement, 'mouseleave').subscribe(() =>
+                this._tableColumnResizeService.hideResizer()
+            )
         );
     }
 

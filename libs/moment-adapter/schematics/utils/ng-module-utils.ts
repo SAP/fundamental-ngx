@@ -1,7 +1,6 @@
-import { Tree, SchematicsException } from '@angular-devkit/schematics';
-
-import * as ts from 'typescript';
 import { WorkspaceProject, WorkspaceSchema } from '@schematics/angular/utility/workspace-models';
+import { Tree, SchematicsException } from '@angular-devkit/schematics';
+import * as ts from 'typescript';
 
 // Checks if an import is included in the module.
 export function hasModuleImport(tree: Tree, modulePath: string, className: string): boolean {

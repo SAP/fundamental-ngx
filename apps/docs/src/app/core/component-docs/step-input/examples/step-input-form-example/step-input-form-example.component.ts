@@ -8,7 +8,7 @@ import { FormControl } from '@angular/forms';
             <div class="step-input-example">
                 <label fd-form-label for="reactive-form-input" required="true">Reactive forms</label>
                 <fd-step-input
-                    id="reactive-form-input"
+                    inputId="reactive-form-input"
                     required="true"
                     [formControl]="stepInputFormControl1"
                 ></fd-step-input>
@@ -34,13 +34,13 @@ import { FormControl } from '@angular/forms';
 
             <div class="step-input-example">
                 <label fd-form-label for="template-form-input">Template Driven forms</label>
-                <fd-step-input id="template-form-input" [(ngModel)]="value1"></fd-step-input>
+                <fd-step-input inputId="template-form-input" [(ngModel)]="value1"></fd-step-input>
                 <small>Value: {{ value1 }}</small>
             </div>
 
             <div class="step-input-example">
                 <label fd-form-label for="reactive-form-input">Disabled control</label>
-                <fd-step-input id="reactive-form-input" [formControl]="stepInputFormControl2"></fd-step-input>
+                <fd-step-input inputId="reactive-form-input" [formControl]="stepInputFormControl2"></fd-step-input>
                 <table [style.fontSize]="'smaller'">
                     <tr>
                         <td>Value:</td>
@@ -63,7 +63,7 @@ import { FormControl } from '@angular/forms';
 
             <div class="step-input-example">
                 <label fd-form-label for="template-form-input">Readonly control</label>
-                <fd-step-input id="template-form-input" [(ngModel)]="value2" [readonly]="true"></fd-step-input>
+                <fd-step-input inputId="template-form-input" [(ngModel)]="value2" [readonly]="true"></fd-step-input>
                 <small>Value: {{ value2 }}</small>
             </div>
         </div>

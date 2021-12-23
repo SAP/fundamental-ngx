@@ -98,16 +98,26 @@ describe('Input should ', () => {
 
         expect(getValue(textInput)).toEqual(number + special_characters + text); // ???
     });
-    // TODO: it is not working the same for manual and automation.
-    xit('impose any filters on the kind of input values the component receives (number)', () => {
+
+    it('impose any filters on the kind of input values the component receives (number)', () => {
         waitForElDisplayed(numberInput);
         click(numberInput);
 
         sendKeys(number);
         sendKeys(special_characters);
-        sendKeys(text);
+        expect(getValue(numberInput)).toEqual(number);
+    });
 
-        expect(getText(numberInput)).toEqual(number);
+    it('should check increase/decriase value by arrows', () => {
+        waitForElDisplayed(numberInput);
+        click(numberInput);
+
+        sendKeys('ArrowUp');
+        expect(getValue(numberInput)).toEqual('1');
+
+        sendKeys('ArrowDown');
+        sendKeys('ArrowDown');
+        expect(getValue(numberInput)).toEqual('-1');
     });
 
     it('wrap the input characters to the next line', () => {

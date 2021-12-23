@@ -5,16 +5,6 @@
             "description": "Adds @fundamental-ngx/platform to the project.",
             "factory": "./ng-add/index#ngAdd",
             "schema": "./ng-add/schema.json"
-        },
-        "addCoreSchematic": {
-            "description": "Calls dependency add schemas",
-            "private": true,
-            "factory": "./ng-add/index#addCoreSchematic"
-        },
-        "addLocalizeSchematic": {
-            "description": "Calls ng add localize schematic",
-            "private": true,
-            "factory": "./utils/translation-utils#addLocalizeSchematic"
         }
     }
 }

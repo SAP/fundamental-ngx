@@ -2,6 +2,7 @@ import {
     click,
     clickNextElement,
     doesItExist,
+    focusElement,
     getAttributeByName,
     getElementArrayLength,
     getElementClass,
@@ -10,7 +11,6 @@ import {
     getValue,
     isElementClickable,
     isElementDisplayed,
-    mouseHoverElement,
     pause,
     refreshPage,
     scrollIntoView,
@@ -48,10 +48,10 @@ describe('Datetime picker suite', () => {
         selectedTimeLine,
         currentItem,
         inputGroup,
+        inputGroupInputElement,
         frenchButton,
         germanButton,
         bulgarianButton,
-        previousMonthButton,
         nextMonthButton,
         calendarBody,
         calendarRow,
@@ -62,8 +62,7 @@ describe('Datetime picker suite', () => {
         currentMonthCalendarItem,
         getCurrentDayIndex,
         altCalendarItem,
-        monthAttributeLabel,
-        positionExample
+        monthAttributeLabel
     } = new DatePickerPo();
 
     beforeAll(() => {
@@ -150,8 +149,7 @@ describe('Datetime picker suite', () => {
     it('should check that available only 2 next weeks in range disabled example', () => {
         click(rangeDisabledExample + calendarIcon);
         const currentDayIndex = getCurrentItemIndex();
-        const itemsLength = getElementArrayLength(currentMonthCalendarItem);
-
+        const itemsLength = getElementArrayLength(altCalendarItem);
         for (let i = currentDayIndex - 1; i !== 0; i--) {
             expect(isElementClickable(calendarItem, i)).toBe(false, `previous day not disabled`);
         }
@@ -165,9 +163,9 @@ describe('Datetime picker suite', () => {
             }
         }
 
-        if (currentDayIndex + 15 > itemsLength) {
+        if (currentDayIndex + 14 > itemsLength) {
             const lengthDifference = itemsLength - currentDayIndex;
-            const availableLengthNextMonth = 15 - lengthDifference;
+            const availableLengthNextMonth = 14 - lengthDifference;
 
             for (let i = currentDayIndex; i < lengthDifference; i++) {
                 expect(isElementClickable(currentMonthCalendarItem, i)).toBe(true, `element ${i} is disabled`);
@@ -179,7 +177,7 @@ describe('Datetime picker suite', () => {
                 expect(isElementClickable(currentMonthCalendarItem, i)).toBe(true, `element ${i} is disabled`);
             }
 
-            for (let i = availableLengthNextMonth + 1; i < itemsLength; i++) {
+            for (let i = availableLengthNextMonth + 2; i < itemsLength; i++) {
                 if (i >= 31) {
                     break;
                 }
@@ -234,21 +232,25 @@ describe('Datetime picker suite', () => {
         expect(getElementClass(calendar)).toContain('compact', `calendar is not compact`);
     });
 
-    it('should check hovering on the input group', () => {
-        checkHoverOnInputGroup(disableFuncExample, 'success');
-        checkHoverOnInputGroup(formExample, 'success');
-        checkHoverOnInputGroup(formExample, 'information', 1);
+    it('should check message when input group in focus state', () => {
+        focusElement(disableFuncExample + inputGroupInputElement);
+        expect(isElementDisplayed(message + 'success'))
+            .withContext(`message is not displayed`)
+            .toBeTrue();
+
+        focusElement(formExample + inputGroupInputElement);
+        expect(isElementDisplayed(message + 'success'))
+            .withContext(`message is not displayed`)
+            .toBeTrue();
+
+        // disabled input can not be focused so no message
+        focusElement(formExample + inputGroupInputElement, 1);
+        expect(() => isElementDisplayed(message + 'information')).toThrowError();
     });
 
     it('should check RTL and LTR orientation', () => {
         datePickerPage.checkRtlSwitch();
     });
-
-    function checkHoverOnInputGroup(section: string, messageType: string, index: number = 0): void {
-        scrollIntoView(section);
-        mouseHoverElement(section + inputGroup, index);
-        expect(isElementDisplayed(message + messageType)).toBe(true, `message did not displayed`);
-    }
 
     function checkChangingMonthByArrows(section: string): void {
         click(section + calendarIcon);

@@ -4,6 +4,7 @@ import {
     browserIsFirefox,
     checkElementScreenshot,
     click,
+    clickAndMoveElement,
     getAlertText,
     getAttributeByName,
     getElementArrayLength,
@@ -18,18 +19,18 @@ import {
     scrollIntoView,
     setValue,
     waitForElDisplayed,
-    getCurrentUrl
+    getCurrentUrl,
+    getValue
 } from '../../driver/wdio';
 import {
     alertText,
     componentExampleArr,
     dateTestText,
-    paginationTestArr,
-    paginationTestArr2,
     tableCellArr,
     tableCellArr2,
     testText
 } from '../fixtures/appData/table-content';
+import { checkElArrIsClickable } from '../../helper/assertion-helper';
 
 describe('Table test suite', () => {
     const tablePage = new TablePo();
@@ -65,7 +66,11 @@ describe('Table test suite', () => {
         listItem,
         markAllCheckboxesFF,
         clickableTableRowFF,
-        selectedPage
+        selectedPage,
+        tableCDKExample,
+        tableCellWOHeader,
+        tableActivableExample,
+        tableFocusableExample
     } = tablePage;
 
     beforeAll(() => {
@@ -238,6 +243,27 @@ describe('Table test suite', () => {
         });
     });
 
+    describe('Check Interactive Rows and Cells example', () => {
+        it('should check clickable links', () => {
+            scrollIntoView(tableActivableExample);
+            checkElArrIsClickable(tableActivableExample + link);
+        });
+
+        it('should check table has activable and hoverable states', () => {
+            scrollIntoView(tableActivableExample);
+            expect(getElementClass(tableActivableExample + tableRow)).toContain(
+                'fd-table__row--activable fd-table__row--hoverable'
+            );
+        });
+    });
+
+    describe('Check Focusable example', () => {
+        it('should check table has focusable states', () => {
+            scrollIntoView(tableFocusableExample);
+            expect(getElementClass(tableFocusableExample + tableRow)).toContain('fd-table__row--focusable');
+        });
+    });
+
     describe('Check Table with Checkboxes example', () => {
         it('should check that checkbox work correctly', () => {
             scrollIntoView(tableCheckboxesExample);
@@ -257,6 +283,11 @@ describe('Table test suite', () => {
                 );
             }
         });
+
+        it('should check clickable links', () => {
+            scrollIntoView(tableCheckboxesExample);
+            checkElArrIsClickable(tableCheckboxesExample + link);
+        });
     });
 
     describe('Check Table With Semantic Row Highlighting example', () => {
@@ -272,6 +303,25 @@ describe('Table test suite', () => {
                     `element with index ${i} not selected`
                 );
             }
+        });
+
+        it('should check clickable links', () => {
+            scrollIntoView(tableSemanticExample);
+            checkElArrIsClickable(tableSemanticExample + link);
+        });
+    });
+
+    describe('Check Table with Angular CDK example', () => {
+        it('should check drag and drop table row', () => {
+            scrollIntoView(tableCDKExample);
+            const originalTableCell = getText(tableCDKExample + tableCellWOHeader);
+            clickAndMoveElement(tableCDKExample + tableRow, 0, 50);
+            expect(getText(tableCDKExample + tableCellWOHeader)).not.toBe(originalTableCell);
+        });
+
+        it('should check clickable links', () => {
+            scrollIntoView(tableCDKExample);
+            checkElArrIsClickable(tableCDKExample + link);
         });
     });
 
@@ -303,7 +353,7 @@ describe('Table test suite', () => {
         });
     });
 
-    describe('Check Table with Non-navigatable Row example', () => {
+    describe('Check Table with navigatable rows example', () => {
         it('should check alert message', () => {
             scrollIntoView(tableNavigatableRowExample);
             const rowLength = getElementArrayLength(tableNavigatableRowExample + clickableTableRow);
@@ -328,7 +378,7 @@ describe('Table test suite', () => {
         });
     });
 
-    describe('Check  Table With Pagination example', () => {
+    describe('Check Table With Pagination example', () => {
         it('should check how many table rows display on table', () => {
             scrollIntoView(tablePaginationExample);
             const fiveTableRows = getElementArrayLength(tablePaginationExample + tableRow);
@@ -345,30 +395,21 @@ describe('Table test suite', () => {
             expect(tenTableRows).toEqual(10);
         });
 
-        it('should check selected pages by clicking each option', () => {
+        it('should check selected pages by clicking options', () => {
             scrollIntoView(tablePaginationExample);
-            expect(getText(tablePaginationExample + link).trim()).toBe(paginationTestArr2[2]);
             click(paginationLink);
-            expect(getText(tablePaginationExample + link).trim()).toBe(paginationTestArr2[0]);
+            expect(getValue(tablePaginationExample + inputField)).toBe('1');
             click(paginationLink);
-            expect(getText(tablePaginationExample + link).trim()).toBe(paginationTestArr2[1]);
-            click(paginationLink, 2);
-            expect(getText(tablePaginationExample + link).trim()).toBe(paginationTestArr2[3]);
-            click(paginationLink, 3);
-            expect(getText(tablePaginationExample + link).trim()).toBe(paginationTestArr2[4]);
+            expect(getValue(tablePaginationExample + inputField)).toBe('2');
         });
 
         it('should check selected pages by clicking next and previous link', () => {
-            // skipped due to cannot reproduce failure, needs further investigation
-            if (getCurrentUrl().includes('localhost')) {
-                return;
-            }
             scrollIntoView(tablePaginationExample);
             click(linkNext);
-            expect(getText(tablePaginationExample + link).trim()).toBe(paginationTestArr2[3]);
+            expect(getValue(tablePaginationExample + inputField)).toBe('4');
 
             click(linkPrevious);
-            expect(getText(tablePaginationExample + link).trim()).toBe(paginationTestArr2[2]);
+            expect(getValue(tablePaginationExample + inputField)).toBe('3');
         });
 
         // skipped due to https://github.com/SAP/fundamental-ngx/issues/7148

@@ -5,12 +5,7 @@
             "version": "0.20.1-rc.2",
             "factory": "./ng-update/index#ngUpdate",
             "schema": "./ng-update/schema.json",
-            "description": "*****Updating Fundamental NGX Platform library translations*****"
-        },
-        "addLocalizeSchematic": {
-            "description": "Calls ng update localize schematic",
-            "private": true,
-            "factory": "./utils/translation-utils#addLocalizeSchematic"
+            "description": "Update Fundamental NGX Platform library & translations"
         }
     }
 }

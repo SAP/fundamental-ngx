@@ -25,6 +25,8 @@ import { switchMap, takeUntil } from 'rxjs/operators';
 import NumberFormat = Intl.NumberFormat;
 import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { SafeHtml } from '@angular/platform-browser';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 let stepInputUniqueId = 0;
 
@@ -80,15 +82,19 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** Sets Increment Button title attribute */
     @Input()
-    incrementButtonTitle = '';
+    incrementButtonTitle = 'Increment';
 
     /** Sets Decrement Button title attribute */
     @Input()
-    decrementButtonTitle = '';
+    decrementButtonTitle = 'Decrement';
 
     /** Sets input aria-label attribute */
     @Input()
     ariaLabel: string = null;
+
+    /** Aria defines role description for the Step Input. */
+    @Input()
+    ariaRoleDescription = 'Step Input';
 
     /** Sets input id */
     @Input()
@@ -141,6 +147,10 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     /** Sets state of the control. Can be `success`, `error`, `warning`, `information` or blank for default. */
     @Input()
     state: FormStates;
+
+    /** Holds the message with respect to state */
+    @Input()
+    stateMessage: string | SafeHtml;
 
     /** Custom unit displayed as a label next to the input */
     @Input()
@@ -211,9 +221,6 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     currencySign: string;
 
     /** @hidden */
-    viewValue: string;
-
-    /** @hidden */
     focused: boolean;
 
     /** @hidden */
@@ -252,6 +259,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     constructor(
         @Inject(LOCALE_ID) locale,
         private _changeDetectorRef: ChangeDetectorRef,
+        private readonly _liveAnnouncer: LiveAnnouncer,
         @Optional() private _contentDensityService: ContentDensityService
     ) {
         this.locale = locale;
@@ -446,7 +454,9 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** @hidden */
     private _updateViewValue(): void {
-        this.inputElement.nativeElement.value = this._formatToViewValue(this.value);
+        const value = this._formatToViewValue(this.value);
+        this.inputElement.nativeElement.value = value;
+        this._liveAnnouncer.announce(value);
     }
 
     /** @hidden */

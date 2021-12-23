@@ -93,7 +93,6 @@ export class ThumbnailComponent extends BaseComponent implements OnInit {
         this._dialogService.open(ThumbnailDetailsComponent, {
             backdropClickCloseable: false,
             escKeyCloseable: false,
-            ariaLabelledBy: this.thumbnailId,
             data: {
                 thumbnailId: this.thumbnailId,
                 selectedMedia: media,

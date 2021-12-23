@@ -2,6 +2,7 @@
     [attr.aria-label]="ariaLabel"
     [attr.ariaLabelledBy]="ariaLabelledBy"
     [attr.ariaDescribedBy]="ariaDescribedBy"
+    [inputId]="id"
     [placeholder]="placeholder"
     [compact]="contentDensity === 'compact'"
     [required]="required"
@@ -34,6 +35,7 @@
     (ngModelChange)="handleDatetimeInputChange($event)"
     (activeViewChange)="handleActiveViewChange($event)"
     (isOpenChange)="handleOpenChange($event)"
+    (touched)="onTouched()"
 >
     <ng-content></ng-content>
 </fd-datetime-picker>

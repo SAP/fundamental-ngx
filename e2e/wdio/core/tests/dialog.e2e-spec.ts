@@ -16,6 +16,7 @@ import {
     getImageTagBrowserPlatform,
     getText,
     isElementDisplayed,
+    pause,
     refreshPage,
     saveElementScreenshot,
     scrollIntoView,
@@ -215,7 +216,7 @@ describe('dialog test suite', () => {
         it('should check dialog selections', () => {
             refreshPage();
             openDialog(complexDialog);
-            waitForNotPresent(busyIndicator);
+            pause(5000);
             waitForElDisplayed(dialogItems);
             const startingPrice = getText(dialogCartOutput);
 
@@ -227,7 +228,7 @@ describe('dialog test suite', () => {
 
         it('should check ability to clear dialog/cart', () => {
             openDialog(complexDialog);
-            waitForNotDisplayed(busyIndicator);
+            pause(5000);
             waitForElDisplayed(dialogItems);
 
             click(dialogItems, 1);
@@ -244,7 +245,7 @@ describe('dialog test suite', () => {
                 return;
             }
             openDialog(complexDialog);
-            waitForNotPresent(busyIndicator);
+            pause(5000);
 
             click(searchBar);
             sendKeys(papayaFruit);
@@ -259,7 +260,7 @@ describe('dialog test suite', () => {
                 return;
             }
             openDialog(complexDialog);
-            waitForNotPresent(busyIndicator);
+            pause(5000);
             const startStyle = getAttributeByName(dialogContainer, styleAttribute);
 
             checkResizingDialog(dialogContainer);

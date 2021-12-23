@@ -1,84 +1,149 @@
+import { SchematicContext } from '@angular-devkit/schematics';
 import { Tree } from '@angular-devkit/schematics/src/tree/interface';
 
-import {
-    getSourceTreePath,
-    getDistPath,
-    hasPackage,
-    getPackageVersionFromPackageJson,
-    getDefaultProject
-} from './package-utils';
-import { SchematicContext, Rule, externalSchematic, chain } from '@angular-devkit/schematics';
-import { NodeDependency, addPackageJsonDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
-import { NodePackageInstallTask, RunSchematicTask } from '@angular-devkit/schematics/tasks';
+import { getSourceTreePath, getDistPath } from './package-utils';
+import { supportedLanguages } from './supported-languages';
 
 /**
- * adds `@angular/localize` to package.json as dependency, and adds call to localize schematic to tasks.
- * @param _options options passed for this schematic
+ * adds/updates translations to host app if host app opts to have translations added to their app
+ * @param options options passed for this schematic
  */
-export function addLocalizeLib(_options: any): Rule {
-    return (tree: Tree, context: SchematicContext) => {
-        if (_options.translations) {
-            context.logger.info('***** Adding @angular/localize to your application *****');
-            let ngCoreVersionTag = getPackageVersionFromPackageJson(tree, '@angular/core');
-            const tempVersion = ngCoreVersionTag ? ngCoreVersionTag : '9.0.0';
-            let majorVersionString = tempVersion.split('.')[0];
-            if (majorVersionString.startsWith('~') || majorVersionString.startsWith('^')) {
-                majorVersionString = majorVersionString.slice(1, majorVersionString.length);
+export function readTranslationFiles(options: any): any {
+    return async (tree: Tree, context: SchematicContext) => {
+        const translationPromise = new Promise<Tree>((resolve, reject) => {
+            try {
+                const angularJsonFile = tree.read('angular.json');
+
+                if (angularJsonFile) {
+                    const angularJsonFileObject = JSON.parse(angularJsonFile.toString('utf-8'));
+                    const project = options.project || Object.keys(angularJsonFileObject['projects'])[0];
+
+                    // set default project path
+                    if (!options.project) {
+                        options.name = project;
+                    }
+
+                    const projectObject = angularJsonFileObject.projects[project];
+                    // TODO: get the languages supported from platform, and fetch from a separate file probably
+                    const languages = supportedLanguages;
+
+                    let availableLanguages = 0;
+                    languages.forEach((language) => {
+                        if (projectObject.architect.build.configurations[language]) {
+                            availableLanguages++;
+                        }
+                    });
+
+                    languages.forEach(async (language) => {
+                        if (availableLanguages === 0 || languages.length > availableLanguages) {
+                            if (!projectObject.architect.build.configurations[language]) {
+                                // not present, add the language settings to serve and build configurations in angular.json
+                                await writeToAngularConfig(tree, options, angularJsonFileObject, language);
+                                // create the extraction .xlf files from the platform lib and place in host app's locale folder
+                                await createExtractionFiles(tree, options, language);
+
+                                context.logger.info(
+                                    '✅️ Added translations for language "' +
+                                        language +
+                                        '" from ngx/platform to ' +
+                                        project
+                                );
+                            }
+                        } else {
+                            const languageObject = projectObject.architect.build.configurations[language].i18nFile;
+                            const hostAppXlfContent = tree.read(languageObject.toString());
+
+                            if (hostAppXlfContent) {
+                                // merge the extraction .xlf files from the platform lib into the host app's files
+                                await updateExtractionFiles(tree, options, hostAppXlfContent, language);
+                            }
+                        }
+
+                        resolve(tree);
+                    });
+                } else {
+                    reject();
+                }
+            } catch (e) {
+                context.logger.info('🚫 Failed to add translations correctly.\n' + e);
             }
-            const majorVersion: number = parseInt(majorVersionString, 10);
-            // placing the first version of localize lib, ideally host app should be upgrading to version > 9.
-            if (majorVersion < 9) {
-                ngCoreVersionTag = '9.0.0';
-            }
-            let dependency: NodeDependency;
-            if (!hasPackage(tree, '@angular/localize')) {
-                dependency = {
-                    type: NodeDependencyType.Default,
-                    version: `${ngCoreVersionTag}`,
-                    name: '@angular/localize'
-                };
-                addPackageJsonDependency(tree, dependency);
-                console.log(`✅️ Added ${dependency.name} to ${dependency.type} to your application`);
-            }
-        }
+        });
+
+        tree = await translationPromise;
+
         return tree;
     };
 }
 
 /**
- * installs `@angular/localize` lib and makes call to the localize schematic
+ * Merges the extraction .xlf files from the platform lib into the host app's files
+ * @param tree the file tree
  * @param options options passed for this schematic
+ * @param fileContent the host applications language .xlf file
+ * @param language the language for which translations from lib will be applied to
  */
-export function callLocalizeSchematic(_options: any): any {
-    return async (_tree: Tree, context: SchematicContext) => {
-        context.logger.info('Adding localize schematic to tasks');
-        const installTaskId = context.addTask(
-            new NodePackageInstallTask({
-                packageName: '@angular/localize'
-            })
-        );
+async function updateExtractionFiles(tree: Tree, options: any, fileContent: any, language: string): Promise<Tree> {
+    const srcPath = await getSourceTreePath(tree, options);
+    const libXlfFileContent = tree.read(
+        'node_modules/@fundamental-ngx/platform/schematics/locale/' + language + '/messages.' + language + '.xlf'
+    );
 
-        // check if project name is available
-        if (!_options.project) {
-            _options.name = await getDefaultProject(_tree, _options);
-        }
+    if (libXlfFileContent) {
+        const builder = new (require('xml2js').Builder)();
+        let finalXlfContent: any;
 
-        // Calling only chain won't work here since we need the external lib to be actually installed before we call their schemas.
-        // This ensures the external lib is a dependency of the node install, so they exist when their schemas run.
-        context.addTask(new RunSchematicTask('addLocalizeSchematic', _options), [installTaskId]);
-        return _tree;
-    };
-}
+        require('xml2js').parseString(libXlfFileContent.toString(), function (err: any, libFile: any): void {
+            if (err) {
+                console.log(err);
+            }
 
-/**
- * runs the localize library's ng-add schematic that will also write to polyfills.ts
- * @param options options passed for this schematic
- */
-export function addLocalizeSchematic(options: any): Rule {
-    return (_tree: Tree, _context: SchematicContext) => {
-        _context.logger.info('Running localize schematics...\n');
-        return chain([externalSchematic('@angular/localize', 'ng-add', options)]);
-    };
+            // replace lib paths with node_modules paths
+            const modifiedLibFile = replaceLibPaths(libFile);
+
+            if (fileContent) {
+                // don't simply overwrite, merge here with existing file
+                // add the transUnits from lib to this file
+                require('xml2js').parseString(fileContent.toString(), function (error: any, hostFile: any): void {
+                    if (error) {
+                        console.log(error);
+                    }
+
+                    // compare the host file with the lib file to check if host file already has some lib trans-units
+                    // and append these trans units only if it is not already existing
+                    modifiedLibFile.xliff.file[0].body[0]['trans-unit'].forEach((libTransUnit: any) => {
+                        // append trans-unit only if not found
+                        let matchFound = false;
+                        hostFile.xliff.file[0].body[0]['trans-unit'].forEach((transUnit: any, hostIndex: number) => {
+                            if (transUnit['$'].id === libTransUnit['$'].id) {
+                                // lib trans unit already present in host file, don't add it
+                                matchFound = true;
+                                // match found, overwrite existing trans-unit in host app with updated lib trans unit
+                                hostFile.xliff.file[0].body[0]['trans-unit'][hostIndex] = libTransUnit;
+                            }
+                        });
+
+                        // if not found, add this trans unit to host file
+                        if (!matchFound) {
+                            hostFile.xliff.file[0].body[0]['trans-unit'][
+                                hostFile.xliff.file[0].body[0]['trans-unit'].length
+                            ] = libTransUnit;
+                        }
+                    });
+
+                    // write modified file as xml object
+                    finalXlfContent = builder.buildObject(hostFile);
+                });
+
+                try {
+                    tree.overwrite(srcPath + '/locale/' + language + '/messages.' + language + '.xlf', finalXlfContent);
+                } catch (e) {
+                    console.log('🚫 There was a problem with updating translation files.\n' + e);
+                }
+            }
+        });
+    }
+
+    return tree;
 }
 
 /**
@@ -88,7 +153,7 @@ export function addLocalizeSchematic(options: any): Rule {
  * @param angularJsonFileObject the angular.json file
  * @param language the language that will be added to the build and serve configurations
  */
-export async function writeToAngularConfig(
+async function writeToAngularConfig(
     tree: Tree,
     options: any,
     angularJsonFileObject: any,
@@ -97,15 +162,14 @@ export async function writeToAngularConfig(
     const srcPath = await getSourceTreePath(tree, options);
     const distPath = await getDistPath(tree, options);
 
-    const project = options.project ? options.project : Object.keys(angularJsonFileObject['projects'])[0];
+    const project = options.project || Object.keys(angularJsonFileObject['projects'])[0];
     const projectObject = angularJsonFileObject.projects[project];
+
     if (projectObject) {
         // adding build configurations
         const buildConfigObject = projectObject.architect.build.configurations;
-        let languageObj = {};
-        let languageServeObj = {};
         // the output path and i18n file path for host app
-        languageObj = {
+        const languageObj = {
             [language]: {
                 aot: true,
                 outputPath: distPath + '/locale/' + language,
@@ -120,7 +184,7 @@ export async function writeToAngularConfig(
         // adding serve configurations
         const serveConfigObject = projectObject.architect.serve.configurations;
         const defaultServeConfig = projectObject.architect['extract-i18n'].options.browserTarget;
-        languageServeObj = {
+        const languageServeObj = {
             [language]: {
                 browserTarget: defaultServeConfig + ':' + language
             }
@@ -130,7 +194,7 @@ export async function writeToAngularConfig(
         try {
             tree.overwrite('angular.json', JSON.stringify(angularJsonFileObject, null, 2));
         } catch (e) {
-            console.log(e + '\n🚫 There was a problem writing to file. ');
+            console.log('🚫 There was a problem writing to file.\n' + e);
         }
     }
 }
@@ -141,11 +205,12 @@ export async function writeToAngularConfig(
  * @param options options passed for this schematic
  * @param language the language for which translations from lib will be applied to
  */
-export async function createExtractionFiles(tree: Tree, options: any, language: string): Promise<void> {
+async function createExtractionFiles(tree: Tree, options: any, language: string): Promise<void> {
     const srcPath = await getSourceTreePath(tree, options);
     const libXlfFileContent = tree.read(
         'node_modules/@fundamental-ngx/platform/schematics/locale/' + language + '/messages.' + language + '.xlf'
     );
+
     if (libXlfFileContent) {
         const builder = new (require('xml2js').Builder)(); // builder that will write back to xml
         let finalXlfContent: any;
@@ -154,6 +219,7 @@ export async function createExtractionFiles(tree: Tree, options: any, language: 
             if (err) {
                 console.log(err);
             }
+
             // replace lib paths with node_modules paths
             const modifiedLibFile = replaceLibPaths(libFile);
 
@@ -163,7 +229,7 @@ export async function createExtractionFiles(tree: Tree, options: any, language: 
             try {
                 tree.create(srcPath + '/locale/' + language + '/messages.' + language + '.xlf', finalXlfContent);
             } catch (e) {
-                console.log(e + '\n🚫 There was a problem writing to file. ');
+                console.log('🚫 There was a problem writing to file.\n' + e);
             }
         });
     } else {
@@ -178,7 +244,7 @@ export async function createExtractionFiles(tree: Tree, options: any, language: 
  * with node_modules/@fundamental-ngx/platform/lib/components/form/text-area/text-area.component.d.ts
  * @param libFile the .xlf file from the lib where path replacement should happen before being copied to host app's .xlf file
  */
-export function replaceLibPaths(libFile: any): any {
+function replaceLibPaths(libFile: any): any {
     const modifiedLibFile = libFile;
     const transUnitsToRemove: string[] = []; // tracks non-platform-lib trans-units
 

@@ -19,12 +19,13 @@ export class DatePickerPo extends CoreBaseComponentPo {
     months = '.fd-calendar__months';
     calendarRow = '.fd-calendar__row';
     inputGroup = '.fd-input-group';
+    inputGroupInputElement = '.fd-input-group .fd-input';
     calendarBody = '.fd-calendar__group:nth-child(2) ';
     calendarInput = '.fd-input';
     calendarIcon = '.fd-button';
     calendar = '.fd-calendar';
     calendarItem = 'td.fd-calendar__item';
-    altCalendarItem = 'table td.fd-calendar__item';
+    altCalendarItem = 'table td.fd-calendar__item:not(.hidden-day)';
     currentMonthCalendarItem = "//td[not(contains(@class, 'fd-calendar__item--other-month'))]";
     selectedTimeLine = '> div';
     selectedItem = '.is-active';

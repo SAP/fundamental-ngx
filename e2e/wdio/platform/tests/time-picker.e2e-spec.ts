@@ -36,7 +36,8 @@ describe('Time picker suite', () => {
         setValidTimeButton,
         hoursColumn,
         columnItem,
-        thirdColumn
+        thirdColumn,
+        selectedTimeItem
     } = timePickerPage;
 
     beforeAll(() => {
@@ -221,7 +222,8 @@ describe('Time picker suite', () => {
         click(activeTimePickerButton, buttonIndex);
         const arr = [];
         for (let i = 0; i < getElementArrayLength(hoursColumn + columnItem); i++) {
-            arr.push(parseInt(getText(hoursColumn + columnItem, i), 10));
+            arr.push(parseInt(getText(hoursColumn + selectedTimeItem), 10));
+            click(navigationDownArrowButton);
         }
 
         const max = arr.reduce(function (a, b) {

@@ -1,13 +1,17 @@
 import { IconTabBarPO } from '../pages/icon-tab-bar.po';
 import {
     click,
+    clickAndMoveElement,
     doesItExist,
     getAttributeByName,
     getElementArrayLength,
     getElementClass,
     getText,
+    getTextArr,
     isElementDisplayed,
-    refreshPage
+    refreshPage,
+    scrollIntoView,
+    waitForPresent
 } from '../../driver/wdio';
 
 import { paddingsSizes } from '../fixtures/appData/icon-tab-bar-contents';
@@ -34,11 +38,18 @@ describe('Info Label component test suite', () => {
         expandedList,
         overflowButton,
         listItem,
-        tabBarTab
+        tabBarTab,
+        span,
+        popoverTab
     } = new IconTabBarPO();
 
     beforeAll(() => {
         iconTabBarPage.open();
+    }, 1);
+
+    afterEach(() => {
+        refreshPage();
+        waitForPresent(iconExample);
     }, 1);
 
     describe('Text example', () => {
@@ -121,6 +132,21 @@ describe('Info Label component test suite', () => {
     describe('Reordering example', () => {
         it('should check selecting tabs in columns example', () => {
             checkSelectingTabs(reorderingExample);
+        });
+
+        it('should check drag and drop tabs ', () => {
+            scrollIntoView(reorderingExample);
+            const originalTab = getText(reorderingExample + tabBarTab + span);
+            clickAndMoveElement(reorderingExample + tabBarTab, 50, 0);
+            expect(getText(reorderingExample + tabBarTab + span)).not.toBe(originalTab);
+        });
+
+        it('should check drag and drop tabs into tab', () => {
+            scrollIntoView(reorderingExample);
+            clickAndMoveElement(reorderingExample + tabBarTab, 75, 0);
+            click(reorderingExample + tabBarTab);
+            const textArr = ['Item 0', '(55)'];
+            expect(getTextArr(popoverTab)).toEqual(textArr);
         });
     });
 
