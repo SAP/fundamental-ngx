@@ -21,7 +21,7 @@ import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { Placement, FormStates } from '@fundamental-ngx/core/shared';
+import { Placement, FormStates, ValueStateAriaMessageService } from '@fundamental-ngx/core/shared';
 import { DatetimeAdapter, DATE_TIME_FORMATS, DateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { TimeComponent } from '@fundamental-ngx/core/time';
 import { PopoverFormMessageService } from '@fundamental-ngx/core/form';
@@ -30,6 +30,8 @@ import { ContentDensityService } from '@fundamental-ngx/core/utils';
 import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
 
 import { createMissingDateImplementationError } from './errors';
+
+let timePickerCounter = 0;
 
 @Component({
     selector: 'fd-time-picker',
@@ -123,6 +125,10 @@ export class TimePickerComponent<D>
     /** Aria label for the time picker input. */
     @Input()
     timePickerInputLabel = 'Time picker input';
+
+    /** Aria label for the time picker toggle button. */
+    @Input()
+    timePickerButtonLabel = 'Open picker';
 
     /** Whether a null input is considered valid(success). */
     @Input()
@@ -220,6 +226,30 @@ export class TimePickerComponent<D>
     @Input()
     parseFormat: unknown;
 
+    /**
+     * Value state "success" aria message.
+     */
+    @Input()
+    valueStateSuccessMessage: string = this._valueStateAriaMessagesService.success;
+
+    /**
+     * Value state "information" aria message.
+     */
+    @Input()
+    valueStateInformationMessage: string = this._valueStateAriaMessagesService.information;
+
+    /**
+     * Value state "warning" aria message.
+     */
+    @Input()
+    valueStateWarningMessage: string = this._valueStateAriaMessagesService.warning;
+
+    /**
+     * Value state "error" aria message.
+     */
+    @Input()
+    valueStateErrorMessage: string = this._valueStateAriaMessagesService.error;
+
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
     isOpenChange = new EventEmitter<boolean>();
@@ -266,6 +296,8 @@ export class TimePickerComponent<D>
      */
     _inputTimeValue = '';
 
+    _formValueStateMessageId = `fd-time-picker-form-message-${timePickerCounter++}`;
+
     /** @hidden */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
@@ -289,7 +321,8 @@ export class TimePickerComponent<D>
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
         private _popoverFormMessage: PopoverFormMessageService,
-        @Optional() private _contentDensityService: ContentDensityService
+        @Optional() private _contentDensityService: ContentDensityService,
+        private _valueStateAriaMessagesService: ValueStateAriaMessageService
     ) {
         if (!this._dateTimeAdapter) {
             throw createMissingDateImplementationError('DateTimeAdapter');
