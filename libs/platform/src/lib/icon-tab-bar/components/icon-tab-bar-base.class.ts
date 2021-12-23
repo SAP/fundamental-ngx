@@ -18,8 +18,9 @@ import {
 import { take, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
-import { OverflowListDirective, cloneDeep, KeyUtil } from '@fundamental-ngx/core/utils';
+import { OverflowListDirective, KeyUtil } from '@fundamental-ngx/core/utils';
 import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
+import { cloneDeep } from 'lodash-es';
 import { IconTabBarItem } from '../interfaces/icon-tab-bar-item.interface';
 import { TabConfig } from '../interfaces/tab-config.interface';
 import { TabDestinyMode } from '../types';

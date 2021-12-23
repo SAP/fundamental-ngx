@@ -35,8 +35,9 @@ import {
     RtlService
 } from '@fundamental-ngx/core/utils';
 import { TableRowDirective } from '@fundamental-ngx/core/table';
-import { getNestedValue, isDataSource, isFunction, isString } from '@fundamental-ngx/platform/shared';
+import { isDataSource, isFunction, isString } from '@fundamental-ngx/platform/shared';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { get } from 'lodash-es';
 
 import { TableService } from './table.service';
 import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilter, TableState } from './interfaces';
@@ -1653,7 +1654,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
         // Build map of unique values for a given group rule
         const valuesHash = rows.reduce((hash, row) => {
-            const modelValue = getNestedValue(rule.field, row.value);
+            const modelValue = get(row.value, rule.field);
 
             if (!hash.has(modelValue)) {
                 hash.set(modelValue, []);

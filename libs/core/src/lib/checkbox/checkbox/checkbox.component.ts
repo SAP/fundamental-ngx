@@ -19,13 +19,8 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FdCheckboxValues } from './fd-checkbox-values.interface';
 import { Platform } from '@angular/cdk/platform';
-import {
-    LIST_ITEM_COMPONENT,
-    ListItemInterface,
-    compareObjects,
-    KeyUtil,
-    ContentDensityService
-} from '@fundamental-ngx/core/utils';
+import { LIST_ITEM_COMPONENT, ListItemInterface, KeyUtil, ContentDensityService } from '@fundamental-ngx/core/utils';
+import equal from 'fast-deep-equal';
 import { SPACE } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs';
 import { FormStates } from '@fundamental-ngx/core/shared';
@@ -284,11 +279,11 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
 
     /** @hidden Based on current control value sets new control state. */
     private _setState(): void {
-        if (this._compare(this.checkboxValue, this.values.trueValue)) {
+        if (equal(this.checkboxValue, this.values.trueValue)) {
             this.checkboxState = 'checked';
-        } else if (this._compare(this.checkboxValue, this.values.falseValue)) {
+        } else if (equal(this.checkboxValue, this.values.falseValue)) {
             this.checkboxState = 'unchecked';
-        } else if (this.tristate && this._compare(this.checkboxValue, this.values.thirdStateValue)) {
+        } else if (this.tristate && equal(this.checkboxValue, this.values.thirdStateValue)) {
             this.checkboxState = 'indeterminate';
         } else if (!this.checkboxValue) {
             this.checkboxState = 'unchecked';
@@ -314,11 +309,6 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
                 }
             }
         }
-    }
-
-    /** @hidden Compares values */
-    private _compare(val1: any, val2: any): boolean {
-        return typeof val1 === 'object' ? compareObjects(val1, val2) : val1 === val2;
     }
 
     /** @hidden Determines event source based on key code */

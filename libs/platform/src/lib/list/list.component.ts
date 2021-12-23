@@ -29,7 +29,7 @@ import { DOWN_ARROW, ENTER, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import { isObservable, Observable, of, Subject, Subscription } from 'rxjs';
 import { delay, takeUntil, tap } from 'rxjs/operators';
 
-import { closestElement, ContentDensity, KeyUtil } from '@fundamental-ngx/core/utils';
+import { ContentDensity, KeyUtil } from '@fundamental-ngx/core/utils';
 import {
     ArrayListDataSource,
     BaseComponent,
@@ -541,8 +541,8 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     @HostListener('click', ['$event'])
     _updateNavigation(event: Event): void {
         let selectedItemId = '0';
-        const el = event.target as HTMLElement;
-        const parent = closestElement('.fd-list__item', event.target);
+        const el = event.target instanceof HTMLElement && event.target;
+        const parent = el?.closest('.fd-list__item');
         if (parent !== null && parent !== undefined) {
             selectedItemId = parent.getAttribute('id');
         }
@@ -652,7 +652,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
      * event:any to avoid code duplication
      */
     private _handleSingleSelect(event: Event, selectedItemId: string): void {
-        const parent = closestElement('.fd-list__item', event.target);
+        const parent = event.target instanceof HTMLElement && event.target.closest('.fd-list__item');
         const radio = parent ? parent.querySelector('input') : null;
         this._selectedvalue = radio ? radio.getAttribute('ng-reflect-value') : null;
 

@@ -18,7 +18,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import { DATE_TIME_FORMATS, DateTimeFormats, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import { SpecialDayRule } from '@fundamental-ngx/core/shared';
-import { compareObjects } from '@fundamental-ngx/core/utils';
+import equal from 'fast-deep-equal';
 
 import { DateRange } from '../../models/date-range';
 import { CalendarCurrent } from '../../models/calendar-current';
@@ -45,7 +45,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
     /** Currently displayed month and year for days */
     @Input()
     set currentlyDisplayed(currentlyDisplayed: CalendarCurrent) {
-        if (!compareObjects(currentlyDisplayed, this._currentlyDisplayed)) {
+        if (!equal(currentlyDisplayed, this._currentlyDisplayed)) {
             this._currentlyDisplayed = currentlyDisplayed;
             this._buildDayViewGrid();
         }

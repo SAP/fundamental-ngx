@@ -4,7 +4,7 @@ import { take } from 'rxjs/operators';
 import { IconTabBarBase } from '../icon-tab-bar-base.class';
 import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
 import { ICON_TAB_HIDDEN_CLASS_NAME } from '../../constants';
-import { cloneDeep } from '@fundamental-ngx/core/utils';
+import { cloneDeep } from 'lodash-es';
 import { IconTabBarPopoverComponent } from '../popovers/icon-tab-bar-popover/icon-tab-bar-popover.component';
 
 @Component({
