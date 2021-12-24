@@ -19,8 +19,8 @@ import { Schema } from './schema';
 export function ngAdd(options: Schema): Rule {
     return (tree: Tree) => {
         const coreInstalled = hasPackage(tree, '@fundamental-ngx/core');
-        const localizeInstalled = hasDevPackage(tree, '@angular/localize') || hasPackage(tree, "@angular/localize");
-        const XML2JSinstalled = hasDevPackage(tree, "xml2js") || hasPackage(tree, "xml2js");
+        const localizeInstalled = hasDevPackage(tree, '@angular/localize') || hasPackage(tree, '@angular/localize');
+        const XML2JSinstalled = hasDevPackage(tree, 'xml2js') || hasPackage(tree, 'xml2js');
 
         return chain([
             coreInstalled ? noop() : callCoreSchematic(options),

@@ -13,14 +13,10 @@ import { processTranslations } from '../utils/translation-utils';
  */
 export function ngUpdate(options: Schema): Rule {
     return (tree: Tree) => {
-        const XML2JSinstalled = hasDevPackage(tree, "xml2js") || hasPackage(tree, "xml2js");
+        const XML2JSinstalled = hasDevPackage(tree, 'xml2js') || hasPackage(tree, 'xml2js');
 
-        return chain([
-            options.translations ? processTranslations(options, XML2JSinstalled) : noop(),
-            endInstallTask()
-        ]);
-    }
-
+        return chain([options.translations ? processTranslations(options, XML2JSinstalled) : noop(), endInstallTask()]);
+    };
 }
 
 /**

@@ -1,5 +1,9 @@
 import { Rule, SchematicContext, TaskId } from '@angular-devkit/schematics';
-import { addPackageJsonDependency, removePackageJsonDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
+import {
+    addPackageJsonDependency,
+    removePackageJsonDependency,
+    NodeDependencyType
+} from '@schematics/angular/utility/dependencies';
 import { NodePackageInstallTask, RunSchematicTask } from '@angular-devkit/schematics/tasks';
 import { Tree } from '@angular-devkit/schematics/src/tree/interface';
 
@@ -33,19 +37,22 @@ export function processTranslations(options: Schema, XML2JSInstalled: boolean | 
         }
 
         const dependentTasksArray = installTaskId ? [installTaskId] : [];
-        const readTranslationFilesTaskId = context.addTask(new RunSchematicTask('read-translation-files', options), dependentTasksArray);
+        const readTranslationFilesTaskId = context.addTask(
+            new RunSchematicTask('read-translation-files', options),
+            dependentTasksArray
+        );
 
         if (!XML2JSInstalled) {
             context.addTask(new RunSchematicTask('remove-xml-to-js', options), [readTranslationFilesTaskId]);
         }
 
         return tree;
-    }
+    };
 }
 
 export function removeXML2JSPackage(): Rule {
     return (tree: Tree, context: SchematicContext) => {
-        removePackageJsonDependency(tree, "xml2js");
+        removePackageJsonDependency(tree, 'xml2js');
 
         context.logger.info('✅️ Removed XML2JS package from dependencies');
 
