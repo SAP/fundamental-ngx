@@ -4,7 +4,8 @@ import {
     getElementClass,
     getElementTitle,
     isElementClickable,
-    scrollIntoView
+    scrollIntoView,
+    getElementSize
 } from '../../driver/wdio';
 
 describe('Button test suite:', () => {
@@ -52,6 +53,13 @@ describe('Button test suite:', () => {
     it('should check truncated text button', () => {
         expect(getElementTitle(truncatedButton)).toContain('Looooooooooong Text Button', 'Text title is not matching');
         expect(isElementClickable(truncatedButton)).toBe(true, 'truncated button with index disable');
+    });
+
+    it('should compact be smaller than normal', () => {
+        const normalSize = getElementSize(sizeButtons);
+        const compactSize = getElementSize(sizeButtons, 1);
+
+        expect(normalSize.height).toBeGreaterThan(compactSize.height);
     });
 
     describe('Check visual regression basic', () => {
