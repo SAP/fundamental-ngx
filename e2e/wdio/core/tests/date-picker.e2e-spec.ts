@@ -1,4 +1,5 @@
 import {
+    browserIsSafari,
     click,
     clickNextElement,
     doesItExist,
@@ -6,7 +7,6 @@ import {
     getAttributeByName,
     getElementArrayLength,
     getElementClass,
-    getNextElementText,
     getText,
     getValue,
     isElementClickable,
@@ -16,6 +16,7 @@ import {
     scrollIntoView,
     sendKeys,
     setValue,
+    waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 import { DatePickerPo } from '../pages/date-picker.po';
@@ -71,8 +72,14 @@ describe('Datetime picker suite', () => {
 
     beforeEach(() => {
         refreshPage();
-        waitForPresent(datePickerPage.title);
+        waitForPresent(datePickerPage.root);
+        waitForElDisplayed(datePickerPage.title);
     }, 1);
+
+    if (browserIsSafari()) {
+        // skip safari; runner gets stuck sometimes; flaky
+        return;
+    }
 
     it('should check calendar open close', () => {
         for (let i = 0; i < blockExamples.length; i++) {
@@ -233,6 +240,9 @@ describe('Datetime picker suite', () => {
     });
 
     it('should check message when input group in focus state', () => {
+        if (browserIsSafari()) {
+            return;
+        }
         focusElement(disableFuncExample + inputGroupInputElement);
         expect(isElementDisplayed(message + 'success'))
             .withContext(`message is not displayed`)
@@ -260,7 +270,6 @@ describe('Datetime picker suite', () => {
         // if current month is January - we do not have previous month in this year
         if (getCurrentItemIndex() !== 0) {
             previousMonthName = getAttributeByName(calendarItem, monthAttributeLabel, getCurrentItemIndex() - 1);
-            console.log(previousMonthName);
 
             sendKeys(['ArrowLeft', 'Enter']);
             expect(getAttributeByName(selectMonthButton, monthAttributeLabel)).toEqual(
@@ -289,7 +298,7 @@ describe('Datetime picker suite', () => {
     function checkChoosingYear(section: string): void {
         click(section + calendarIcon);
         click(selectYearButton);
-        const nextYear = getNextElementText(currentItem);
+        const nextYear = getAttributeByName(calendarItem, 'data-fd-calendar-year', getCurrentDayIndex() + 1);
         clickNextElement(currentItem);
         expect(getText(selectYearButton)).toEqual(nextYear);
         click(section + calendarIcon);
@@ -340,7 +349,7 @@ describe('Datetime picker suite', () => {
             }
         }
 
-        const firstChosenDayText = '0' + getText(calendarItem, firstDayIndex);
+        const firstChosenDayText = '0' + getText(calendarItem + ' .fd-calendar__text', firstDayIndex);
 
         for (let i = itemsLength; i !== 0; i--) {
             if (
@@ -352,7 +361,7 @@ describe('Datetime picker suite', () => {
             }
         }
 
-        const secChosenDayText = getText(calendarItem, lastDayIndex);
+        const secChosenDayText = getText(calendarItem + ' .fd-calendar__text', lastDayIndex);
 
         click(calendarItem, firstDayIndex);
         click(calendarItem, lastDayIndex);

@@ -1,5 +1,5 @@
 import { CoreBaseComponentPo } from './core-base-component.po';
-import { waitForElDisplayed } from '../../driver/wdio';
+import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class ButtonPo extends CoreBaseComponentPo {
     private url = '/button';
@@ -21,7 +21,8 @@ export class ButtonPo extends CoreBaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
     dropDownOptionByValue(option: string): any {

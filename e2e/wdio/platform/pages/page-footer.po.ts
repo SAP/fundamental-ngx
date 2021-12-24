@@ -8,8 +8,8 @@ export class PageFooterPo extends BaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForPresent(this.title);
-        waitForElDisplayed(this.root);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
     getScreenshotFolder(): Record<string, any> {

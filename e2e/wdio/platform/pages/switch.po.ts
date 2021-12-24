@@ -1,5 +1,5 @@
 import { BaseComponentPo } from './base-component.po';
-import { waitForElDisplayed } from '../../driver/wdio';
+import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class SwitchPo extends BaseComponentPo {
     private url = '/switch';
@@ -37,7 +37,8 @@ export class SwitchPo extends BaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
     getScreenshotFolder(): Record<string, any> {

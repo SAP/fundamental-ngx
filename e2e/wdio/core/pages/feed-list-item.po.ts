@@ -36,7 +36,7 @@ export class FeedListItemPo extends CoreBaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForPresent(this.paragraphs);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 }

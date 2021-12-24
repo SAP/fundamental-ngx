@@ -1,5 +1,6 @@
 import { MenuPo } from '../pages/menu.po';
 import {
+    browserIsSafari,
     click,
     getElementArrayLength,
     getElementClass,
@@ -37,7 +38,8 @@ describe('Menu component test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(menuBtnArr);
+        waitForPresent(menuPage.root);
+        waitForElDisplayed(menuPage.title);
     }, 1);
 
     it('should check menu btn content', () => {
@@ -92,6 +94,10 @@ describe('Menu component test suite', () => {
     });
 
     it('should check cascading menu', () => {
+        if (browserIsSafari()) {
+            // mouse hover doesn't work in safari (checkCascadingMenu method)
+            return;
+        }
         click(cascadingMenuBtn);
         waitForElDisplayed(cascadingMenuItemsArr);
         checkCascadingMenu(cascadingMenuItemsArr, cascadingVegMenuItemsArr);

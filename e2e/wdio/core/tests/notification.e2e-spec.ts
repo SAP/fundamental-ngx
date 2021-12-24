@@ -46,6 +46,7 @@ describe('Notification component test', () => {
 
     beforeEach(() => {
         refreshPage();
+        waitForPresent(notificationPage.root);
         waitForElDisplayed(notificationPage.title);
     }, 2);
 

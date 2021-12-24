@@ -8,7 +8,8 @@ import {
     refreshPage,
     setValue,
     getValue,
-    waitForElDisplayed
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 
 import { sections, messageTypes, playgroundStates } from '../fixtures/appData/message-strip.contents';
@@ -40,6 +41,7 @@ describe('Message-strip test suite', () => {
 
     beforeEach(() => {
         refreshPage();
+        waitForPresent(messageStripPage.root);
         waitForElDisplayed(messageStripPage.title);
     }, 1);
 
@@ -93,7 +95,7 @@ describe('Message-strip test suite', () => {
         it('should check changing message in message-strip', () => {
             const defaultMessage = getText(messageStripMessage);
             setValue(messageInput, customMessage);
-            expect(getText(messageStripMessage)).toEqual(customMessage);
+            expect(getText(messageStripMessage).trim()).toEqual(customMessage);
             click(resetButton);
             expect(getText(messageStripMessage)).toEqual(defaultMessage);
         });

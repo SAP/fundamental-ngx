@@ -6,7 +6,8 @@ import {
     getAttributeByName,
     isElementDisplayed,
     isElementClickable,
-    waitForPresent
+    waitForPresent,
+    waitForElDisplayed
 } from '../../driver/wdio';
 
 describe('Tile component test', () => {
@@ -35,7 +36,8 @@ describe('Tile component test', () => {
 
     beforeEach(() => {
         refreshPage();
-        waitForPresent(tilePage.title);
+        waitForPresent(tilePage.root);
+        waitForElDisplayed(tilePage.title);
     }, 1);
 
     it('should check that tile clickable', () => {

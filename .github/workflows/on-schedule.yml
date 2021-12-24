@@ -208,7 +208,7 @@ jobs:
             # https://github.com/cypress-io/github-action/issues/48
             fail-fast: false
             matrix:
-                suite: ['suite platformA', 'suite platformB', 'spec core']
+                suite: ['suite platformA', 'suite platformB', 'suite coreA', 'suite coreB']
         steps:
             - uses: actions/checkout@v2
             - uses: actions/cache@v2

@@ -1,5 +1,5 @@
 import { BaseComponentPo } from './base-component.po';
-import { waitForElDisplayed } from '../../driver/wdio';
+import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class SearchPo extends BaseComponentPo {
     url = '/search-field';
@@ -21,7 +21,8 @@ export class SearchPo extends BaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.searchFields);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
     getScreenshotFolder(): Record<string, any> {

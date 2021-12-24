@@ -50,7 +50,7 @@ export function browserIsIE(): boolean {
 }
 
 export function browserIsSafari(): boolean {
-    return isBrowser('Safari');
+    return isBrowser('Safari') || isBrowser('safari');
 }
 
 export function browserIsSafariorFF(): boolean {
@@ -63,6 +63,9 @@ export function goBack(): void {
 
 export function refreshPage(): void {
     browser.refresh();
+    if (browserIsSafari()) {
+        pause();
+    }
 }
 
 export function getAlertText(): string {
@@ -160,7 +163,7 @@ export function getTextArr(selector: string, sliceStart?: number, sliceEnd?: num
     checkSelectorExists(selector);
     return $$(selector)
         .slice(sliceStart, sliceEnd)
-        .map((element) => element.getText());
+        .map((element) => element.getText().trim());
 }
 
 export function waitForElDisplayed(selector: string, index: number = 0, waitTime = defaultWaitTime()): boolean {
@@ -506,12 +509,12 @@ export function applyState(state: 'hover' | 'active' | 'focus', selector: string
     }
 }
 
-export function getPreviousElement(selector: string, index: number = 0) {
+export function getPreviousElement(selector: string, index: number = 0): void {
     checkSelectorExists(selector, index);
     return $$(selector)[index].previousElement();
 }
 
-export function getNextElement(selector: string, index: number = 0) {
+export function getNextElement(selector: string, index: number = 0): void {
     checkSelectorExists(selector, index);
     return $$(selector)[index].nextElement();
 }

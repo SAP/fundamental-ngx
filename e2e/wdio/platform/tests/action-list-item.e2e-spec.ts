@@ -8,6 +8,7 @@ import {
     getElementClass,
     getElementSize,
     refreshPage,
+    waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 import { alertTextArr, btnText } from '../fixtures/appData/action-list-item-contents';
@@ -22,7 +23,8 @@ describe('Action List Item Test Suite:', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(actionBtns);
+        waitForPresent(actionListPage.root);
+        waitForElDisplayed(actionListPage.title);
     }, 1);
 
     describe('Main checks:', () => {

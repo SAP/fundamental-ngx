@@ -8,6 +8,7 @@ import {
     isElementDisplayed,
     refreshPage,
     scrollIntoView,
+    waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 
@@ -31,7 +32,8 @@ describe('Split-button test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(mainBtn);
+        waitForPresent(splitButtonPage.root);
+        waitForElDisplayed(splitButtonPage.title);
     }, 1);
 
     it('should expand the menu and button shall invoke drop down menu', () => {
@@ -42,7 +44,7 @@ describe('Split-button test suite', () => {
         checkMenuOpens(iconBehaviorExample);
     });
 
-    it('Verify split button does not have less than 2 buuttons', () => {
+    it('Verify split button does not have less than 2 buttons', () => {
         checkSplitMenuQuantity(buttonBehaviorExample);
         checkSplitMenuQuantity(iconBehaviorExample);
         checkSplitMenuQuantity(buttonTypesExample);
@@ -57,7 +59,7 @@ describe('Split-button test suite', () => {
             const menuItemValue = getText(splitMenuItem, i);
             click(splitMenuItem, i);
             acceptAlert();
-            const mainButtonValue = getText(mainBtn);
+            const mainButtonValue = getText(mainBtn).trim();
             expect(mainButtonValue).toEqual(menuItemValue, 'value on main button is not equal chosen value');
         }
     });
@@ -83,6 +85,7 @@ describe('Split-button test suite', () => {
         scrollIntoView(section);
         const itemsLength = getElementArrayLength(section + arrowDownBtn);
         for (let i = 0; i < itemsLength; i++) {
+            scrollIntoView(section + arrowDownBtn, i);
             click(section + arrowDownBtn, i);
             expect(isElementDisplayed(splitMenu)).toBe(true, 'drop-down is not closed');
             click(section + arrowDownBtn, i);

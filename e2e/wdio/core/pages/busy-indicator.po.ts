@@ -38,7 +38,7 @@ export class BusyIndicatorPo extends CoreBaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForPresent(this.enableDisableButton);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 }

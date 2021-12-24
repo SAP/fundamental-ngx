@@ -43,7 +43,8 @@ describe('Menu button test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(btnArrowIconsArr);
+        waitForPresent(menuBtnPage.root);
+        waitForElDisplayed(menuBtnPage.title);
     }, 1);
 
     describe('Check general menu button states', () => {

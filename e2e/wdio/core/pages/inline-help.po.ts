@@ -16,8 +16,8 @@ export class InlineHelpPo extends CoreBaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForPresent(this.defaultInlineHelp);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
     getScreenshotFolder(): Record<string, any> {

@@ -21,7 +21,7 @@ import { A, DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@angular/cdk
 import { of } from 'rxjs';
 import { delay, takeUntil } from 'rxjs/operators';
 
-import { closestElement, DynamicComponentService, KeyUtil } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService, KeyUtil } from '@fundamental-ngx/core/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import { TokenizerComponent } from '@fundamental-ngx/core/token';
 import {
@@ -200,7 +200,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     onBlur(event: FocusEvent): void {
         const target = event.relatedTarget as HTMLElement;
         if (target) {
-            const isList = !!closestElement('.fdp-multi-combobox__list-container', target);
+            const isList = !!target.closest('.fdp-multi-combobox__list-container');
             if (isList) {
                 return;
             }

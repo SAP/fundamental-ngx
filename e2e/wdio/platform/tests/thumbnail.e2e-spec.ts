@@ -33,7 +33,8 @@ describe('Thumbnail field', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(mainImage);
+        waitForPresent(thumbnailPage.root);
+        waitForElDisplayed(thumbnailPage.title);
     }, 1);
 
     it('should be able to view all thumbnail images', () => {
@@ -59,7 +60,10 @@ describe('Thumbnail field', () => {
         const arrLength = getElementArrayLength(horizontalGalleryImages);
         for (let i = 0; arrLength > i; i++) {
             const imageUrl = getAttributeByName(horizontalGalleryImages, 'style', i);
-            const trimmedImageUrl = imageUrl.replace('background-image: url("', '').replace('");', '');
+            const trimmedImageUrl = imageUrl
+                .replace('background-image: url("', '')
+                .replace('");', '')
+                .replace('https:', '');
             click(horizontalGalleryImages, i);
             expect(getAttributeByName(mainImage, 'src', 1)).toContain(trimmedImageUrl);
         }

@@ -8,7 +8,8 @@ import {
     isElementDisplayed,
     refreshPage,
     scrollIntoView,
-    waitForElDisplayed
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 
 describe('Panel test suite', () => {
@@ -22,7 +23,8 @@ describe('Panel test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForElDisplayed(toggleButton);
+        waitForPresent(panelPage.root);
+        waitForElDisplayed(panelPage.title);
     }, 1);
 
     it('should check orientation', () => {

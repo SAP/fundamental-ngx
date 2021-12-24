@@ -53,8 +53,8 @@ export class CalendarPo extends CoreBaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForPresent(this.title);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
     setCalendarRange(selector: string, startDateIndex: number, stopDateIndex: number): void {

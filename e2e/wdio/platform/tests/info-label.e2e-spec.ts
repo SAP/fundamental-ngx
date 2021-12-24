@@ -26,7 +26,9 @@ import {
     getCSSPropertyByName,
     getElementAriaLabel,
     getText,
-    waitForElDisplayed
+    refreshPage,
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 
 describe('Info Label component test suite', () => {
@@ -40,8 +42,14 @@ describe('Info Label component test suite', () => {
     } = new InfoLabelPO();
     const infoLabelPage = new InfoLabelPO();
 
-    beforeEach(() => {
+    beforeAll(() => {
         infoLabelPage.open();
+    }, 1);
+
+    beforeEach(() => {
+        refreshPage();
+        waitForPresent(infoLabelPage.root);
+        waitForPresent(infoLabelPage.title);
     }, 1);
 
     it('should check default label info', () => {

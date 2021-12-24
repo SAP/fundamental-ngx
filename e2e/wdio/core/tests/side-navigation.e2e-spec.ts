@@ -5,7 +5,8 @@ import {
     getElementClass,
     refreshPage,
     waitForPresent,
-    scrollIntoView
+    scrollIntoView,
+    waitForElDisplayed
 } from '../../driver/wdio';
 import { SideNavigationPo } from '../pages/side-navigation.po';
 import { blockExamples } from '../fixtures/appData/side-navigation-content';
@@ -39,7 +40,8 @@ describe('Side-navigation test suite', () => {
 
     beforeEach(() => {
         refreshPage();
-        waitForPresent(sideNavigationPage.title);
+        waitForPresent(sideNavigationPage.root);
+        waitForElDisplayed(sideNavigationPage.title);
     }, 1);
 
     it('should check list item select', () => {

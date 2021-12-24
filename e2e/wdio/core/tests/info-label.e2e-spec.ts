@@ -12,7 +12,7 @@ describe('Info Label component test suite', () => {
     const infoLabelPage = new InfoLabelPo();
     const { infoLabel, textExample, iconTextExample, icon, labelText } = infoLabelPage;
 
-    beforeEach(() => {
+    beforeAll(() => {
         infoLabelPage.open();
     }, 2);
 

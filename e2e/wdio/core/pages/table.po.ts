@@ -26,7 +26,7 @@ export class TablePo extends CoreBaseComponentPo {
     tableRow = ' .fd-table__body .fd-table__row';
     tableCell = ' .fd-table__cell';
     markAllCheckboxes = ' .fd-table__header fd-checkbox';
-    markAllCheckboxesFF = ' .fd-table__header fd-checkbox label';
+    markAllCheckboxesFF = ' .fd-table__header .fd-table__cell--checkbox';
     clickableTableRow = ' .fd-table__row--activable';
     clickableTableRowFF = ' .fd-table__row--activable .fd-table__cell:nth-of-type(2)';
     menuItem = '.fd-menu__item';
@@ -44,8 +44,8 @@ export class TablePo extends CoreBaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForPresent(this.title);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
     getScreenshotFolder(): Record<string, any> {

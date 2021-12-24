@@ -11,6 +11,7 @@ export class FormContainerPo extends BaseComponentPo {
     helpIcon = '.fd-form-label__help';
     fdSwitch = 'fd-switch label';
     dropdownOption = '.cdk-overlay-container fd-option';
+    dropdownOptionAlt = 'ul .fd-list__item span';
     comboboxListItem = '.cdk-overlay-container li';
 
     recommendedExamples = 'fdp-platform-form-container-recommended-example ';
@@ -70,7 +71,7 @@ export class FormContainerPo extends BaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForPresent(this.title);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 }

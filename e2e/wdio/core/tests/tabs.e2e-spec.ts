@@ -8,7 +8,8 @@ import {
     getText,
     refreshPage,
     scrollIntoView,
-    waitForElDisplayed
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 import { TabsPo } from '../pages/tabs.po';
 
@@ -49,6 +50,7 @@ describe('Tabs test suite', () => {
 
     beforeEach(() => {
         refreshPage();
+        waitForPresent(tabsPage.root);
         waitForElDisplayed(tabsPage.title);
     }, 1);
 

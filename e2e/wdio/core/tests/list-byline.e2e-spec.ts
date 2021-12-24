@@ -6,7 +6,8 @@ import {
     click,
     getElementArrayLength,
     isElementClickable,
-    getAttributeByName
+    getAttributeByName,
+    waitForPresent
 } from '../../driver/wdio';
 
 describe('List byline test suite', () => {
@@ -20,6 +21,7 @@ describe('List byline test suite', () => {
 
     afterEach(() => {
         refreshPage();
+        waitForPresent(listBylinePage.root);
         waitForElDisplayed(listBylinePage.title);
     }, 1);
 

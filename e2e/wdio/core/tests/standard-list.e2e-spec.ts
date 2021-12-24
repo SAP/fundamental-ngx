@@ -13,7 +13,8 @@ import {
     sendKeys,
     waitForElDisplayed,
     waitForNotDisplayed,
-    getElementClass
+    getElementClass,
+    setValue
 } from '../../driver/wdio';
 
 describe('Standard List test suite', () => {
@@ -61,7 +62,7 @@ describe('Standard List test suite', () => {
         it('should check ability to search', () => {
             scrollIntoView(filterAndSortList);
             click(filterAndSortList + searchBar);
-            sendKeys('apple');
+            setValue(filterAndSortList + searchBar, 'apple');
             const resultCount = getElementArrayLength(filterAndSortList + listItems);
             for (let i = 0; i < resultCount; i++) {
                 expect(getText(filterAndSortList + listItems, i).toLowerCase()).toContain('apple');
@@ -73,7 +74,7 @@ describe('Standard List test suite', () => {
 
             scrollIntoView(filterAndSortList);
             click(filterAndSortList + searchBar);
-            sendKeys('apple');
+            setValue(filterAndSortList + searchBar, 'apple');
 
             expect(getElementArrayLength(filterAndSortList + listItems)).not.toEqual(startItemCount);
 
@@ -112,7 +113,7 @@ describe('Standard List test suite', () => {
                 click(filterAndSortList + deleteButton);
             }
             expect(getElementArrayLength(filterAndSortList + listItems)).toEqual(1);
-            expect(getText(filterAndSortList + listItemText)).toBe('No results found!');
+            expect(getText(filterAndSortList + listItemText).trim()).toBe('No results found!');
         });
     });
 

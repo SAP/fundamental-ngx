@@ -1,6 +1,7 @@
 import { DialogPo } from '../pages/dialog.po';
 import {
     browserIsFirefox,
+    browserIsSafari,
     checkElementScreenshot,
     clearValue,
     click,
@@ -21,9 +22,11 @@ import {
     saveElementScreenshot,
     scrollIntoView,
     sendKeys,
+    setValue,
     waitForElDisplayed,
     waitForNotDisplayed,
-    waitForNotPresent
+    waitForNotPresent,
+    waitForPresent
 } from '../../driver/wdio';
 import {
     approvedStatus,
@@ -84,6 +87,7 @@ describe('dialog test suite', () => {
 
     beforeEach(() => {
         refreshPage();
+        waitForPresent(dialogPage.root);
         waitForElDisplayed(dialogPage.title);
     }, 1);
 
@@ -176,6 +180,9 @@ describe('dialog test suite', () => {
         });
 
         it('should check dialog is resizeable', () => {
+            if (browserIsSafari()) {
+                return;
+            }
             openDialog(configurationDialog, 1);
 
             checkResizingDialog();
@@ -215,6 +222,8 @@ describe('dialog test suite', () => {
     describe('complex dialog example', () => {
         it('should check dialog selections', () => {
             refreshPage();
+            waitForPresent(dialogPage.root);
+            waitForElDisplayed(dialogPage.title);
             openDialog(complexDialog);
             pause(5000);
             waitForElDisplayed(dialogItems);
@@ -235,7 +244,7 @@ describe('dialog test suite', () => {
             click(dialogItems, 3);
             click(dialog + button);
 
-            expect(getText(dialogCartOutput)).toEqual(defaultPrice);
+            expect(getText(dialogCartOutput).trim()).toEqual(defaultPrice);
             clearAndCloseDialog();
         });
 
@@ -248,15 +257,16 @@ describe('dialog test suite', () => {
             pause(5000);
 
             click(searchBar);
-            sendKeys(papayaFruit);
+            setValue(searchBar, papayaFruit);
 
             expect(getText(dialogItems).toLowerCase()).toContain(papayaFruit);
             clearAndCloseDialog();
         });
 
         it('should check resizing dialog', () => {
-            if (browserIsFirefox()) {
+            if (browserIsFirefox() || browserIsSafari()) {
                 // skip FF due to unknown issue where FF tries to run openDialog twice
+                // skip Safari due to dragNdrop does not work
                 return;
             }
             openDialog(complexDialog);
@@ -438,6 +448,9 @@ describe('dialog test suite', () => {
         });
 
         it('should check dialog resizable option', () => {
+            if (browserIsSafari()) {
+                return;
+            }
             openDialog(playgroundDialog);
 
             expect(doesItExist(resizeHandle)).toBe(false, 'resize handle exists when it should not');
@@ -470,10 +483,14 @@ describe('dialog test suite', () => {
         });
 
         it('should check dialog width and height options', () => {
+            // skipped due to getElement size works incorrect in Safari
+            if (browserIsSafari()) {
+                return;
+            }
             click(playgroundDialog + inputFields);
-            sendKeys('400px');
+            setValue(playgroundDialog + inputFields, '400px');
             click(playgroundDialog + inputFields, 1);
-            sendKeys('400px');
+            setValue(playgroundDialog + inputFields, '400px', 1);
             openDialog(playgroundDialog);
 
             expect(getElementSize(dialogContainer2, 0, 'width')).toBe(400);
@@ -481,6 +498,9 @@ describe('dialog test suite', () => {
         });
 
         it('should check dialog min/max width and height options', () => {
+            if (browserIsSafari()) {
+                return;
+            }
             click(playgroundDialog + checkboxes, 8);
             click(playgroundDialog + inputFields, 2);
             sendKeys('400px');

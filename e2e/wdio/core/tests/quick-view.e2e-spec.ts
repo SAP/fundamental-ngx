@@ -1,4 +1,12 @@
-import { click, getText, refreshPage, scrollIntoView, waitForClickable, waitForElDisplayed } from '../../driver/wdio';
+import {
+    click,
+    getText,
+    refreshPage,
+    scrollIntoView,
+    waitForClickable,
+    waitForElDisplayed,
+    waitForPresent
+} from '../../driver/wdio';
 import { QuickViewPo } from '../pages/quick-view.po';
 import { address, companyName, email, mobile, phone, popoverHeaderValue } from '../fixtures/appData/quick-view-content';
 
@@ -31,7 +39,8 @@ describe('Quick view  test suite:', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForElDisplayed(openDialogButton);
+        waitForPresent(quickViewPage.root);
+        waitForElDisplayed(quickViewPage.title);
     }, 1);
 
     it('should check basic quick view', () => {

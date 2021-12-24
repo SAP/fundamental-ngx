@@ -36,7 +36,7 @@ export class UploadCollectionPo extends BaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForPresent(this.title);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 }

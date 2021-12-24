@@ -19,7 +19,7 @@ export class BarPo extends CoreBaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForPresent(this.arrowButtons);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 }

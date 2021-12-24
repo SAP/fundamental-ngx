@@ -1,5 +1,5 @@
 import { CoreBaseComponentPo } from './core-base-component.po';
-import { click, waitForElDisplayed } from '../../driver/wdio';
+import { click, waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class DateTimePicker extends CoreBaseComponentPo {
     url = '/datetime-picker';
@@ -12,7 +12,7 @@ export class DateTimePicker extends CoreBaseComponentPo {
     buttonChange = 'button[label="Change"]';
     disabledDateTimePickerButton = '.is-disabled button';
     disabledDateTimePickerInput = '.is-disabled input';
-    activeDay = '//*[contains(@class, "fd-calendar__item--current") or contains(@class, "is-active")]';
+    activeDay = '.fd-calendar__item--current';
     calendarYearsSection = '.fd-calendar__content--years';
     selectYearButton = '.fd-calendar__action:nth-child(3) .fd-button';
     selectMonthButton = '.fd-calendar__action:nth-child(2) .fd-button';
@@ -57,6 +57,7 @@ export class DateTimePicker extends CoreBaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 }

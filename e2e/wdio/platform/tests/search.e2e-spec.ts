@@ -9,7 +9,8 @@ import {
     isEnabled,
     refreshPage,
     setValue,
-    waitForElDisplayed
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 import { SearchPo } from '../pages/search.po';
 import { expected_category, search_placeholder } from '../fixtures/appData/search-page-content';
@@ -38,6 +39,8 @@ describe('Search field', () => {
 
     afterEach(() => {
         refreshPage();
+        waitForPresent(searchPage.root);
+        waitForElDisplayed(searchPage.title);
     });
 
     it('should be present and enabled', () => {
