@@ -4,6 +4,7 @@
             class="fd-button fd-shellbar__button fd-shellbar__button--user-menu"
             [disabled]="disabled"
             [fdMenuTrigger]="menu"
+            [attr.aria-label]="user.ariaLabel"
         >
             <fd-avatar
                 size="xs"
@@ -11,6 +12,7 @@
                 colorAccent="{{ user.colorAccent }}"
                 [circle]="true"
                 label="{{ user.fullName }}"
+                [attr.alt]="user.alt"
             >
             </fd-avatar>
             <fd-avatar
@@ -19,6 +21,7 @@
                 size="xs"
                 *ngIf="user.image"
                 image="{{ user.image }}"
+                [attr.alt]="user.alt"
             ></fd-avatar>
         </button>
         <fd-menu
@@ -30,8 +33,9 @@
             [closeOnEscapeKey]="closeOnEscapeKey"
             [noArrow]="false"
             [closeOnOutsideClick]="closeOnOutsideClick"
+            role="listbox"
         >
-            <li fd-menu-item *ngFor="let item of userMenu" (click)="itemClick(item, $event)">
+            <li fd-menu-item *ngFor="let item of userMenu" (click)="itemClick(item, $event)" role="listitem">
                 <div fd-menu-interactive>
                     <span fd-menu-title>{{ item.text }}</span>
                 </div>

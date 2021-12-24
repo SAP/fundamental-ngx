@@ -13,4 +13,19 @@ export interface ShellbarUser {
      * please visit: https://sap.github.io/fundamental-styles/components/identifier.html
      */
     colorAccent?: number;
+
+    /**
+     * Alternative text for the component.
+     */
+    alt?: string;
+
+    /**
+     * Has popup type
+     */
+    hasPopUp?: string;
+
+    /**
+     * aria Label for the user menu
+     */
+    ariaLabel?: string;
 }

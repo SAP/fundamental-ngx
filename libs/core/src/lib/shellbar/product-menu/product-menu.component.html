@@ -6,8 +6,9 @@
         [compact]="false"
         [disabled]="disabled"
         [fdMenuTrigger]="menu"
+        [attr.aria-labelledby]="titleId"
     >
-        <span class="fd-shellbar__title">{{ control }}</span>
+        <span class="fd-shellbar__title" [attr.id]="titleId">{{ control }}</span>
         <i role="presentation" class="sap-icon--megamenu fd-shellbar__button--icon"></i>
     </button>
 
@@ -18,8 +19,9 @@
         [fillControlMode]="fillControlMode"
         [closeOnEscapeKey]="closeOnEscapeKey"
         [closeOnOutsideClick]="closeOnOutsideClick"
+        role="listbox"
     >
-        <li *ngFor="let item of items" (click)="itemClicked(item, $event)" fd-menu-item>
+        <li *ngFor="let item of items" (click)="itemClicked(item, $event)" fd-menu-item role="listitem">
             <a
                 [attr.href]="item.link ? item.link : null"
                 [attr.target]="item.newTab ? '_blank' : null"

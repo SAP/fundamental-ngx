@@ -1,18 +1,18 @@
 <fd-segmented-button [(ngModel)]="currentSize">
-    <button fd-button value="s">S</button>
-    <button fd-button value="m">M</button>
-    <button fd-button value="l">L</button>
-    <button fd-button value="xl">XL</button>
+    <button fd-button value="s" ariaLabel="small">S</button>
+    <button fd-button value="m" ariaLabel="Medium">M</button>
+    <button fd-button value="l" ariaLabel="Large">L</button>
+    <button fd-button value="xl" ariaLabel="Extra Large">XL</button>
 </fd-segmented-button>
 
 <div style="margin-top: 60px" [style.maxWidth]="sizesWidth[currentSize] + 'px'">
     <fd-shellbar [size]="currentSize">
         <fd-shellbar-logo>
-            <a href="#" class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
+            <a href="#" class="fd-shellbar__logo fd-shellbar__logo--image-replaced" alt="SAP Logo"></a>
         </fd-shellbar-logo>
         <fd-product-menu [control]="productMenuControl" [closePopoverOnSelect]="true" [items]="productMenuItems">
         </fd-product-menu>
-        <fd-shellbar-subtitle> Subtitle </fd-shellbar-subtitle>
+        <fd-shellbar-subtitle id="fd-shell-bar-sub-title-0"> Subtitle </fd-shellbar-subtitle>
         <fd-shellbar-actions [user]="user" [userMenu]="userMenu">
             <fd-shellbar-action
                 *ngFor="let action of actions"
@@ -23,7 +23,7 @@
                 [notificationLabel]="action.notificationLabel"
             >
             </fd-shellbar-action>
-            <fd-product-switch>
+            <fd-product-switch hasPopUp="menu">
                 <fd-product-switch-body [products]="productSwitcher" [forceListMode]="currentSize === 's'">
                 </fd-product-switch-body>
             </fd-product-switch>
@@ -34,6 +34,7 @@
                 placeholder="Type some text..."
                 maxHeight="250px"
                 [isSearch]="true"
+                ariaLabelledBy="fd-shell-bar-sub-title-0"
             >
             </fd-combobox>
         </fd-shellbar-actions>

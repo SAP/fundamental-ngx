@@ -12,6 +12,8 @@ import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
  * </fd-product-menu>
  * ```
  */
+let uniqueHiddenLabel = 0;
+
 @Component({
     selector: 'fd-product-menu',
     templateUrl: './product-menu.component.html',
@@ -20,6 +22,12 @@ import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductMenuComponent {
+    /**
+     * id fo the product menu
+     */
+    @Input()
+    titleId = `fd-shell-bar-title-id-${uniqueHiddenLabel++}`;
+
     /** Whether the popover should close when the escape key is pressed. */
     @Input()
     closeOnEscapeKey = true;

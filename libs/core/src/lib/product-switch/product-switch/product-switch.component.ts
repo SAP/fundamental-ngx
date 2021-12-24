@@ -19,4 +19,10 @@ export class ProductSwitchComponent extends BasePopoverClass {
     /** Whether the product switch is disabled. */
     @Input()
     disabled = false;
+
+    /**
+     * has popoup menu
+     */
+    @Input()
+    hasPopUp: string;
 }

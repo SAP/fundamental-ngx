@@ -20,6 +20,8 @@
             placement="bottom-end"
             [user]="user"
             [userMenu]="userMenu"
+            [attr.aria-haspopup]="user.hasPopUp"
+            [attr.aria-label]="user.ariaLabel"
             (itemClicked)="triggerItems()"
         ></fd-shellbar-user-menu>
     </ng-container>

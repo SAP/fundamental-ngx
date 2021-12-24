@@ -49,7 +49,10 @@ export class ShellbarCollapsibleExampleComponent {
 
     user: ShellbarUser = {
         initials: 'WW',
-        colorAccent: 1
+        colorAccent: 1,
+        alt: 'User Profile',
+        hasPopUp: 'menu',
+        ariaLabel: 'User'
     };
 
     userMenu: ShellbarUserMenu[] = [

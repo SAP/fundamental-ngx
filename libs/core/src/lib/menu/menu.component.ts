@@ -67,6 +67,10 @@ export class MenuComponent
     @Input()
     compact?: boolean;
 
+    /** role of the menu is ddefeined in the property for the component */
+    @Input()
+    role = 'none';
+
     /** Whether the popover should be focusTrapped. */
     @Input()
     focusTrapped = true;

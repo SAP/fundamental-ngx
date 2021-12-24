@@ -48,7 +48,7 @@ export const SUBMENU = new InjectionToken<BaseSubmenu>('Submenu component depend
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {
-        'attr.role': 'presentation',
+        '[attr.role]': 'role',
         '[class.fd-menu__item]': 'true'
     }
 })
@@ -64,6 +64,10 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     /** Reference to sub-menu component */
     @Input()
     submenu: BaseSubmenu | undefined;
+
+    /** Reference to role of the component */
+    @Input()
+    role = 'presentation';
 
     /** Emitted when the menu item is selected. */
     @Output()
