@@ -95,7 +95,6 @@ describe('PaginationService', () => {
         // pages:   1 .. 4 5 6 7 8 ... 100
         // indexes: 0 1  2 3 4 5 6 7   8
 
-
         const pages = service.getPages(pagination);
 
         expect(pages[1]).toEqual(service.moreElementValue);
@@ -115,6 +114,6 @@ describe('PaginationService', () => {
         const pages = service.getPages(pagination);
 
         expect(pages[1]).toEqual(service.moreElementValue);
-        expect(pages.filter(value => value === service.moreElementValue).length).toEqual(1);
+        expect(pages.filter((value) => value === service.moreElementValue).length).toEqual(1);
     });
 });

@@ -59,7 +59,10 @@ export class PaginationService {
         return [
             ...pages.slice(0, CORNER_DISPLAY_PAGES),
             this.moreElementValue,
-            ...pages.slice(pagination.currentPage - SIDE_CURRENT_DISPLAY_PAGES - 1, pagination.currentPage + SIDE_CURRENT_DISPLAY_PAGES),
+            ...pages.slice(
+                pagination.currentPage - SIDE_CURRENT_DISPLAY_PAGES - 1,
+                pagination.currentPage + SIDE_CURRENT_DISPLAY_PAGES
+            ),
             this.moreElementValue,
             ...pages.slice(totalPages - CORNER_DISPLAY_PAGES)
         ];
