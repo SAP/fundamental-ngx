@@ -20,12 +20,13 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
+import { defer, fromEvent, Observable, Subscription, timer } from 'rxjs';
+import { filter, switchMap, takeUntil } from 'rxjs/operators';
+
 import { MenuTitleDirective } from '../directives/menu-title.directive';
 import { DefaultMenuItem } from '../default-menu-item.class';
 import { MenuInteractiveDirective } from '../directives/menu-interactive.directive';
 import { MenuService } from '../services/menu.service';
-import { defer, fromEvent, Observable, Subscription, timer } from 'rxjs';
-import { filter, sample, switchMap, takeUntil } from 'rxjs/operators';
 
 let menuUniqueId = 0;
 
@@ -178,16 +179,23 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
             timer(this.menuService ? this.menuService.menu.openOnHoverTime : 0).pipe(takeUntil(mouseLeave$))
         );
 
-        const timeTrigger$ = mouseEnter$.pipe(switchMap(() => timerFactory$));
-
-        // Set active on long hover
+        // Set active on hover
         hoverSubscriptions.add(
             mouseEnter$
                 .pipe(
-                    filter(() => !!this.submenu),
-                    sample(timeTrigger$)
+                    filter(() => !!this.menuService),
+                    switchMap(() => timerFactory$)
                 )
-                .subscribe(() => this.menuService?.setActive(true, this))
+                .subscribe(() => {
+                    if (this.submenu) {
+                        // Open submenu
+                        this.menuService.setActive(true, this);
+                    }
+                    if (!this.submenu) {
+                        // Close sibling submenu if opened
+                        this.menuService.setInactiveSiblingMenuItem(this);
+                    }
+                })
         );
 
         return hoverSubscriptions;

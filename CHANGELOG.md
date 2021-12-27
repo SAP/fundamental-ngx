@@ -1,4 +1,84 @@
 
+## 0.33.0-rc.239 (2021-12-23)
+
+
+### Bug Fixes
+
+* **core:** remove obsolete utils ([#7407](https://github.com/SAP/fundamental-ngx/issues/7407)) ([7c3c1dd](https://github.com/SAP/fundamental-ngx/commit/7c3c1dd7cc55519f16fbfab1746a5f1b5c0805e4))
+
+## 0.33.0-rc.238 (2021-12-23)
+
+## 0.33.0-rc.237 (2021-12-23)
+
+## 0.33.0-rc.236 (2021-12-23)
+
+
+### Bug Fixes
+
+* **core:** core time-picker accessibility ([#7304](https://github.com/SAP/fundamental-ngx/issues/7304)) ([7847879](https://github.com/SAP/fundamental-ngx/commit/78478790410e1ec512be8a919e4d900049f6fd48))
+
+## 0.33.0-rc.235 (2021-12-23)
+
+
+### Bug Fixes
+
+* **core:** step-input, fix a11y issues ([#7235](https://github.com/SAP/fundamental-ngx/issues/7235)) ([8ad09eb](https://github.com/SAP/fundamental-ngx/commit/8ad09eb45abfe64e08a96ce9c07ea534bef8c663))
+
+## 0.33.0-rc.234 (2021-12-23)
+
+## 0.33.0-rc.233 (2021-12-23)
+
+
+### Bug Fixes
+
+* **core:** adding arialabel and roles to handle a11y for wizard component ([#7198](https://github.com/SAP/fundamental-ngx/issues/7198)) ([6ab97c5](https://github.com/SAP/fundamental-ngx/commit/6ab97c58705220bf9f3866c1ac03bcee939d0f5a))
+
+## 0.33.0-rc.232 (2021-12-23)
+
+
+### Bug Fixes
+
+* **core:** close sub-menu ([#7418](https://github.com/SAP/fundamental-ngx/issues/7418)) ([20de5bb](https://github.com/SAP/fundamental-ngx/commit/20de5bb235c1d539ce75d64bf534c59c8feec91b))
+
+## 0.33.0-rc.231 (2021-12-23)
+
+
+### Bug Fixes
+
+* **core:** date picker accessibility ([#7324](https://github.com/SAP/fundamental-ngx/issues/7324)) ([765fea3](https://github.com/SAP/fundamental-ngx/commit/765fea379cff5e3c08c883bd42106b451c9a464b))
+
+## 0.33.0-rc.230 (2021-12-22)
+
+
+### Bug Fixes
+
+* **core:** fixing accessibility of datetime picker component ([#6841](https://github.com/SAP/fundamental-ngx/issues/6841)) ([6b4ac4b](https://github.com/SAP/fundamental-ngx/commit/6b4ac4b900f46195bd7ec73627a5556d83525da8))
+
+## 0.33.0-rc.229 (2021-12-22)
+
+
+### Bug Fixes
+
+* **core,platform:** add ability to define stacked tabs property ([#7410](https://github.com/SAP/fundamental-ngx/issues/7410)) ([2758f0b](https://github.com/SAP/fundamental-ngx/commit/2758f0b22509f9323c3004317eafcf791929fe7f))
+
+## 0.33.0-rc.228 (2021-12-21)
+
+
+### Bug Fixes
+
+* **platform:** table disallow nav column resize ([#7339](https://github.com/SAP/fundamental-ngx/issues/7339)) ([66af857](https://github.com/SAP/fundamental-ngx/commit/66af85747614999be5f62da44d39b6a944292e9b))
+
+## 0.33.0-rc.227 (2021-12-21)
+
+
+### Bug Fixes
+
+* **platform:** schematics ([#7389](https://github.com/SAP/fundamental-ngx/issues/7389)) ([7e1e1f6](https://github.com/SAP/fundamental-ngx/commit/7e1e1f6f6659a87724bfd06c15933d7a1a6f436b))
+
+## 0.33.0-rc.226 (2021-12-21)
+
+## 0.33.0-rc.225 (2021-12-21)
+
 ## 0.33.0-rc.224 (2021-12-20)
 
 
@@ -55,6 +135,10 @@
 
 
 ### Features
+
+### ⚠ BREAKING CHANGES
+
+* **core, platform:** angular 13 migration
 
 * **core,platform:** migrate to latest nx and angular 13 ([#7210](https://github.com/SAP/fundamental-ngx/issues/7210)) ([2daa848](https://github.com/SAP/fundamental-ngx/commit/2daa848c836b6910dea203d84a4fe2f036926ba0))
 

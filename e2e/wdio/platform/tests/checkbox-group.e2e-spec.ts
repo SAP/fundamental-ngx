@@ -33,7 +33,9 @@ import {
     isElementDisplayed,
     mouseHoverElement,
     refreshPage,
-    scrollIntoView
+    scrollIntoView,
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 
 describe('Checkbox group test suite', () => {
@@ -57,11 +59,13 @@ describe('Checkbox group test suite', () => {
 
     beforeAll(() => {
         checkboxGroupPage.open();
-    }, 1);
+    }, 2);
 
-    afterEach(() => {
+    beforeEach(() => {
         refreshPage();
-    }, 1);
+        waitForPresent(checkboxGroupPage.root);
+        waitForElDisplayed(checkboxGroupPage.title);
+    }, 2);
 
     describe('Checkbox Group created with List of Values.', () => {
         // TODO: Need to revise this one and consider using nexElement method
@@ -438,13 +442,13 @@ describe('Checkbox group test suite', () => {
             scrollIntoView(formValidationCheckboxesArr, 8);
             clickNextElement(formValidationCheckboxesArr, 8);
             clickNextElement(formValidationCheckboxesArr, 8);
-            expect(getText(errorTooltip)).toEqual(workExpierenceErrorMessage);
+            expect(getText(errorTooltip).trim()).toEqual(workExpierenceErrorMessage);
             clickNextElement(formValidationCheckboxesArr, 7);
             clickNextElement(formValidationCheckboxesArr, 7);
-            expect(getText(errorTooltip)).toEqual(engineeringErrorMessage);
+            expect(getText(errorTooltip).trim()).toEqual(engineeringErrorMessage);
             clickNextElement(formValidationCheckboxesArr, 6);
             clickNextElement(formValidationCheckboxesArr, 6);
-            expect(getText(errorTooltip)).toEqual(graduationErrorMessage);
+            expect(getText(errorTooltip).trim()).toEqual(graduationErrorMessage);
         });
 
         it('should check selecting checkboxes created from list of SelectItem Objects and value is required', () => {
@@ -493,7 +497,7 @@ function checkCheckboxSelecting(
                     .includes(expectedOutputLabelsArr[j].toLocaleLowerCase())
             ) {
                 click(labelsArray, i);
-                expect(getText(outputLabel, outputLabelIndex).toLocaleLowerCase()).not.toContain(
+                expect(getText(outputLabel, outputLabelIndex).toLocaleLowerCase().trim()).not.toContain(
                     expectedOutputLabelsArr[j].toLocaleLowerCase()
                 );
             } else if (
@@ -502,7 +506,7 @@ function checkCheckboxSelecting(
                     .includes(expectedOutputLabelsArr[j].toLocaleLowerCase())
             ) {
                 click(labelsArray, i);
-                expect(getText(outputLabel, outputLabelIndex).toLocaleLowerCase()).toContain(
+                expect(getText(outputLabel, outputLabelIndex).toLocaleLowerCase().trim()).toContain(
                     expectedOutputLabelsArr[j].toLocaleLowerCase()
                 );
             }

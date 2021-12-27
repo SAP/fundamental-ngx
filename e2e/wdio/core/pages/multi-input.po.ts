@@ -1,4 +1,4 @@
-import { waitForElDisplayed } from '../../driver/wdio';
+import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 import { CoreBaseComponentPo } from './core-base-component.po';
 
 export class MultiInputPo extends CoreBaseComponentPo {
@@ -34,7 +34,7 @@ export class MultiInputPo extends CoreBaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
+        waitForPresent(this.root);
         waitForElDisplayed(this.title);
     }
 

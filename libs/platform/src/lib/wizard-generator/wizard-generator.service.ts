@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
-import { isFunction, mergeDeep, selectStrategy } from '@fundamental-ngx/platform/shared';
+import { isFunction, selectStrategy } from '@fundamental-ngx/platform/shared';
 import { FormGeneratorService } from '@fundamental-ngx/platform/form';
 import {
     WizardGeneratorStepComponent,
@@ -13,6 +13,7 @@ import {
     WizardGeneratorItem,
     WizardVisibleSteps
 } from './interfaces/wizard-generator-item.interface';
+import { merge } from 'lodash-es';
 
 export type StepsComponents = Map<string, WizardGeneratorStepComponent>;
 
@@ -184,7 +185,7 @@ export class WizardGeneratorService {
         this.dependencySteps = newItems.reduce((steps, step) => {
             if (step.dependencyFields) {
                 for (const [id, forms] of Object.entries(step.dependencyFields)) {
-                    steps[id] = mergeDeep(steps[id] || {}, forms);
+                    steps[id] = merge(steps[id] || {}, forms);
                 }
             }
 

@@ -1,5 +1,6 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
+import { Component, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
+import { WizardStepComponent, WizardStepStatus } from '@fundamental-ngx/core/wizard';
+import { WizardService } from 'libs/core/src/lib/wizard/wizard.service';
 
 @Component({
     selector: 'fd-wizard-mobile-example',
@@ -15,7 +16,8 @@ import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
     ],
     host: {
         class: 'fd-wizard-mobile-docs'
-    }
+    },
+    providers: [WizardService]
 })
 export class WizardMobileExampleComponent {
     example1step1status: WizardStepStatus = 'current';
@@ -25,6 +27,12 @@ export class WizardMobileExampleComponent {
     example2step1status: WizardStepStatus = 'current';
     example2step2status: WizardStepStatus = 'upcoming';
     example2step3status: WizardStepStatus = 'upcoming';
+
+    /** @hidden */
+    @ViewChildren(WizardStepComponent)
+    steps: QueryList<WizardStepComponent>;
+
+    constructor(private _wizardService: WizardService) {}
 
     statusChanged(exampleNumber: number, stepNumber: number, event: WizardStepStatus): void {
         if (event === 'current') {
@@ -90,5 +98,17 @@ export class WizardMobileExampleComponent {
     finish2Wizard(): void {
         alert('Wizard steps are completed.');
         this.example2goToStep(1);
+    }
+
+    // Handle focus on key press first example
+    /** @hidden */
+    handleFocus(event: KeyboardEvent, index: number) {
+        this._wizardService.progressBarKeyHandler(event, this.steps, index);
+    }
+
+    // Handle focus on key press second example
+    /** @hidden */
+    handleFocus1(event: KeyboardEvent, index: number) {
+        this._wizardService.progressBarKeyHandler(event, this.steps, index);
     }
 }

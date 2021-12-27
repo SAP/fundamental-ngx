@@ -11,7 +11,8 @@ import {
     setValue,
     waitForElDisplayed,
     waitForPresent,
-    clickRightMouseBtn
+    clickRightMouseBtn,
+    browserIsSafari
 } from '../../driver/wdio';
 import { StepInputPo } from '../pages/step-input.po';
 import {
@@ -24,7 +25,6 @@ import {
 describe('Step input test suite', () => {
     const stepInputPage: StepInputPo = new StepInputPo();
     const {
-        stepInputRoot,
         activeButtonIncrement,
         activeButtonDecrement,
         allInput,
@@ -47,8 +47,9 @@ describe('Step input test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(stepInputRoot);
-    }, 1);
+        waitForPresent(stepInputPage.root);
+        waitForElDisplayed(stepInputPage.title);
+    }, 2);
 
     it('Verify increment and decrement buttons', () => {
         const arr = getElementArrayLength(activeInput);
@@ -137,6 +138,9 @@ describe('Step input test suite', () => {
     });
 
     it('Verify the value in the field becomes 0 or the minimum if the minimum is larger than 0.', () => {
+        if (browserIsSafari()) {
+            return;
+        }
         const arr = getElementArrayLength(activeInput);
 
         for (let i = 0; i < arr; i++) {

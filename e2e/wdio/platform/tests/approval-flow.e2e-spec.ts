@@ -16,7 +16,8 @@ import {
     waitForElDisplayed,
     waitForNotPresent,
     waitForPresent,
-    scrollIntoView
+    scrollIntoView,
+    browserIsSafari
 } from '../../driver/wdio';
 import { ApprovalFlowPo } from '../pages/approval-flow.po';
 import {
@@ -109,7 +110,8 @@ describe('Approval flow', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(approvalFlowPage.watchers);
+        waitForPresent(approvalFlowPage.root);
+        waitForElDisplayed(approvalFlowPage.title);
     }, 1);
 
     it('should have watchers section with watchers details displayed', () => {
@@ -336,9 +338,15 @@ describe('Approval flow', () => {
             click(footerButtons);
             click(footerButtons);
 
-            browserIsFirefox()
-                ? expect(getText(nodeCardInfo, 5)).toContain('4 members\n' + 'Accounting team')
-                : expect(getText(nodeCardInfo, 4)).toContain('4 members\n' + 'Accounting team');
+            if (browserIsFirefox()) {
+                expect(getText(nodeCardInfo, 5)).toContain('4 members\n' + 'Accounting team');
+            }
+            if (browserIsSafari()) {
+                expect(getText(nodeCardInfo, 4)).toContain('4 members  Accounting team');
+            }
+            if (!browserIsFirefox() && !browserIsSafari()) {
+                expect(getText(nodeCardInfo, 4)).toContain('4 members\n' + 'Accounting team');
+            }
         });
 
         it('should add anyone from team as reviewer', () => {
@@ -353,9 +361,15 @@ describe('Approval flow', () => {
             click(footerButtons);
             click(footerButtons);
 
-            browserIsFirefox()
-                ? expect(getText(nodeCardInfo, 5)).toContain('4 members\n' + 'Accounting team')
-                : expect(getText(nodeCardInfo, 4)).toContain('4 members\n' + 'Accounting team');
+            if (browserIsFirefox()) {
+                expect(getText(nodeCardInfo, 5)).toContain('4 members\n' + 'Accounting team');
+            }
+            if (browserIsSafari()) {
+                expect(getText(nodeCardInfo, 4)).toContain('4 members  Accounting team');
+            }
+            if (!browserIsFirefox() && !browserIsSafari()) {
+                expect(getText(nodeCardInfo, 4)).toContain('4 members\n' + 'Accounting team');
+            }
         });
 
         it('should be able to remove node by button', () => {
@@ -644,15 +658,15 @@ describe('Approval flow', () => {
     function checkApproveNodeDetailsDialogContent(): void {
         expect(isElementDisplayed(detailsDialog)).toBe(true);
         expect(isElementDisplayed(detailsDialogAvatar)).toBe(true);
-        expect(getText(detailsDialogCancelBtn)).toBe(details_dialog_cancel_btn);
-        expect(getText(detailsDialogSendReminderBtn)).toBe(details_dialog_send_reminder_btn);
+        expect(getText(detailsDialogCancelBtn)).toContain(details_dialog_cancel_btn);
+        expect(getText(detailsDialogSendReminderBtn).trim()).toBe(details_dialog_send_reminder_btn);
         expect(getText(detailsDialogHeader)).toBe(details_dialog_header);
     }
 
     function checkWatchersDetailsDialogContent(): void {
         expect(isElementDisplayed(detailsDialog)).toBe(true);
         expect(isElementDisplayed(detailsDialogAvatar)).toBe(true);
-        expect(getText(detailsDialogCancelBtn)).toBe(details_dialog_cancel_btn);
+        expect(getText(detailsDialogCancelBtn)).toContain(details_dialog_cancel_btn);
         expect(getText(detailsDialogHeader)).toBe(details_dialog_header);
     }
 

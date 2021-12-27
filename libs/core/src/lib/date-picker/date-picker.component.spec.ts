@@ -1,15 +1,18 @@
 import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
+import { Component, ViewChild } from '@angular/core';
 
 import { FormMessageModule } from '@fundamental-ngx/core/form';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { CalendarModule, DateRange } from '@fundamental-ngx/core/calendar';
-import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
+import { FormStates } from '@fundamental-ngx/core/shared';
 import { DatetimeAdapter, FdDate, FdDatetimeAdapter, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '@fundamental-ngx/core/utils';
+
+import { DatePickerModule, DatePickerComponent } from './public_api';
 
 describe('DatePickerComponent', () => {
     let component: DatePickerComponent<FdDate>;
@@ -44,10 +47,6 @@ describe('DatePickerComponent', () => {
     beforeEach(inject([DatetimeAdapter], (dateAdapter: FdDatetimeAdapter) => {
         adapter = dateAdapter;
     }));
-
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
 
     it('should open the calendar', () => {
         component.isOpen = false;
@@ -98,7 +97,7 @@ describe('DatePickerComponent', () => {
         const dateStrLast = (<any>component)._formatDate(dateLast);
         component._inputFieldDate = '';
         component.handleRangeDateChange({ start: dateStart, end: dateLast });
-        expect(component._inputFieldDate).toBe(dateStrStart + component.rangeDelimiter + dateStrLast);
+        expect(component._inputFieldDate).toBe(dateStrStart + component._rangeDelimiter + dateStrLast);
         expect(component.onChange).toHaveBeenCalledWith({ start: dateStart, end: dateLast });
         expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: dateStart, end: dateLast });
     });
@@ -271,5 +270,121 @@ describe('DatePickerComponent', () => {
         component.closeCalendar();
         fixture.detectChanges();
         expect(showSpy).toHaveBeenCalled();
+    });
+});
+
+describe('DatePickerComponent Accessibility', () => {
+    let fixture: ComponentFixture<HostComponent>;
+
+    @Component({
+        template: `
+            <fd-date-picker
+                [type]="type"
+                [dateInputLabel]="dateInputLabel"
+                [dateRangeInputLabel]="dateRangeInputLabel"
+                [message]="message"
+                [state]="state"
+                [required]="required"
+                [valueStateSuccessMessage]="valueStateSuccessMessage"
+                [valueStateInformationMessage]="valueStateInformationMessage"
+                [valueStateWarningMessage]="valueStateWarningMessage"
+                [valueStateErrorMessage]="valueStateErrorMessage"
+            ></fd-date-picker>
+        `
+    })
+    class HostComponent {
+        @ViewChild(DatePickerComponent) datePicker: DatePickerComponent<FdDate>;
+
+        type = 'single';
+        dateInputLabel = 'Date input';
+        dateRangeInputLabel = 'Date range input';
+        message = 'This is a message';
+        required = false;
+        state: FormStates = null;
+        valueStateSuccessMessage = 'Value state Success';
+        valueStateInformationMessage = 'Value state Information';
+        valueStateWarningMessage = 'Value state Warning';
+        valueStateErrorMessage = 'Value state Error';
+    }
+
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [HostComponent],
+                imports: [FdDatetimeModule, DatePickerModule],
+                providers: []
+            }).compileComponents();
+        })
+    );
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent<HostComponent>(HostComponent);
+        fixture.detectChanges();
+    });
+
+    function getInputElement(): HTMLInputElement {
+        return fixture.nativeElement.querySelector('.fd-input');
+    }
+
+    function getToggleElement(): HTMLButtonElement {
+        return fixture.nativeElement.querySelector('.fd-button');
+    }
+
+    it('adds aria-label for date picker', () => {
+        fixture.componentInstance.type = 'single';
+        fixture.detectChanges();
+        expect(getInputElement().getAttribute('aria-label')).toBe('Date input');
+    });
+
+    it('adds aria-label for date range picker', () => {
+        fixture.componentInstance.type = 'range';
+        fixture.detectChanges();
+        expect(getInputElement().getAttribute('aria-label')).toBe('Date range input');
+    });
+
+    it('has aria-required property based on required input', () => {
+        fixture.componentInstance.required = false;
+        fixture.detectChanges();
+        expect(getInputElement().getAttribute('aria-required')).toBe('false');
+        fixture.componentInstance.required = true;
+        fixture.detectChanges();
+        expect(getInputElement().getAttribute('aria-required')).toBe('true');
+    });
+
+    it('has aria-haspopup property set to "grid"', () => {
+        expect(getInputElement().getAttribute('aria-haspopup')).toBe('grid');
+    });
+
+    it('has aria-expanded property based on opened/closed state', () => {
+        expect(getInputElement().getAttribute('aria-expanded')).toBe('false');
+        getToggleElement().click();
+        fixture.detectChanges();
+        expect(getInputElement().getAttribute('aria-expanded')).toBe('true');
+    });
+
+    it('has aria-describedby referencing to "message" prop', () => {
+        const messageId = getInputElement().getAttribute('aria-describedby');
+        expect(messageId).toBeDefined();
+        expect(document.getElementById(messageId).textContent).toContain('This is a message');
+    });
+
+    it('has aria-describedby referencing to value state message based on "state" prop', () => {
+        const messageId = getInputElement().getAttribute('aria-describedby');
+
+        fixture.componentInstance.state = 'error';
+        fixture.detectChanges();
+        expect(document.getElementById(messageId).textContent).toContain('Value state Error');
+
+        fixture.componentInstance.state = 'warning';
+        fixture.detectChanges();
+        expect(document.getElementById(messageId).textContent).toContain('Value state Warning');
+
+        fixture.componentInstance.state = 'information';
+        fixture.detectChanges();
+        expect(document.getElementById(messageId).textContent).toContain('Value state Information');
+
+        fixture.componentInstance.state = 'success';
+        fixture.detectChanges();
+        expect(document.getElementById(messageId).textContent).toContain('Value state Success');
     });
 });

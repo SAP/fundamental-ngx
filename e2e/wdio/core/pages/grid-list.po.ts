@@ -1,5 +1,5 @@
 import { CoreBaseComponentPo } from './core-base-component.po';
-import { waitForElDisplayed } from '../../driver/wdio';
+import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class GridListPo extends CoreBaseComponentPo {
     private url = '/grid-list';
@@ -47,8 +47,8 @@ export class GridListPo extends CoreBaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForElDisplayed(this.layoutPattern);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
     getScreenshotFolder(): Record<string, any> {

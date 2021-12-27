@@ -37,7 +37,7 @@ export class TimePickerPO extends BaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForPresent(this.timePickerInput);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 }

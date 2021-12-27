@@ -1,5 +1,6 @@
-import { Component, ElementRef, ViewChild, ViewEncapsulation } from '@angular/core';
-import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
+import { Component, ElementRef, QueryList, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
+import { WizardStepComponent, WizardStepStatus } from '@fundamental-ngx/core/wizard';
+import { WizardService } from 'libs/core/src/lib/wizard/wizard.service';
 
 @Component({
     selector: 'fd-wizard-customizable-example',
@@ -8,7 +9,8 @@ import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
     encapsulation: ViewEncapsulation.None,
     host: {
         class: 'fd-wizard-example'
-    }
+    },
+    providers: [WizardService]
 })
 export class WizardCustomizableExampleComponent {
     /**
@@ -17,6 +19,10 @@ export class WizardCustomizableExampleComponent {
      */
     @ViewChild('overlay')
     overlay: ElementRef<HTMLElement>;
+
+    /** @hidden */
+    @ViewChildren(WizardStepComponent)
+    steps: QueryList<WizardStepComponent>;
 
     /**
      * documentation related property
@@ -27,6 +33,8 @@ export class WizardCustomizableExampleComponent {
     step1status: WizardStepStatus = 'current';
     step2status: WizardStepStatus = 'upcoming';
     step3status: WizardStepStatus = 'upcoming';
+
+    constructor(private _wizardService: WizardService) {}
 
     statusChanged(stepNumber: number, event: WizardStepStatus): void {
         if (event === 'current') {
@@ -75,5 +83,11 @@ export class WizardCustomizableExampleComponent {
         event.stopPropagation();
         this.fullscreen = false;
         this.overlay.nativeElement.style.width = '0%';
+    }
+
+    // Handle focus on key press
+    /** @hidden */
+    handleFocus(event: KeyboardEvent, index: number) {
+        this._wizardService.progressBarKeyHandler(event, this.steps, index);
     }
 }

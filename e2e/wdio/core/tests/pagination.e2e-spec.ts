@@ -1,5 +1,6 @@
 import { PaginationPo } from '../pages/pagination.po';
 import {
+    browserIsSafari,
     click,
     doesItExist,
     getAttributeByName,
@@ -10,6 +11,7 @@ import {
     refreshPage,
     scrollIntoView,
     setValue,
+    waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 import {
@@ -53,7 +55,8 @@ describe('Pagination test suite:', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(standardButton);
+        waitForPresent(paginationPage.root);
+        waitForElDisplayed(paginationPage.title);
     }, 1);
 
     describe('Check Basic Pagination example', () => {
@@ -61,17 +64,17 @@ describe('Pagination test suite:', () => {
             scrollIntoView(basicPaginationExample);
             click(basicPaginationExample + standardButton);
             // pause for the new text to load
-            pause(250);
-            expect(getText(basicPaginationText)).toBe(basicPaginationTestArr[0]);
+            pause(2000);
+            expect(getText(basicPaginationText).trim()).toBe(basicPaginationTestArr[0]);
 
             click(basicPaginationExample + pages);
             // pause for the new text to load
-            pause(250);
-            expect(getText(basicPaginationText)).toBe(basicPaginationTestArr[1]);
+            pause(2000);
+            expect(getText(basicPaginationText).trim()).toBe(basicPaginationTestArr[1]);
             click(basicPaginationExample + pages, 3);
             // pause for the new text to load
-            pause(250);
-            expect(getText(basicPaginationText)).toBe(basicPaginationTestArr[2]);
+            pause(2000);
+            expect(getText(basicPaginationText).trim()).toBe(basicPaginationTestArr[2]);
         });
 
         it('should check selected pages by clicking previous and next link', () => {
@@ -82,28 +85,28 @@ describe('Pagination test suite:', () => {
             scrollIntoView(basicPaginationExample);
             click(basicPaginationExample + standardButton);
             // pause to give browser time to complete action
-            pause(250);
+            pause(2000);
             click(basicPaginationExample + linkNext);
             // pause for the new text to load
-            pause(250);
-            expect(getText(basicPaginationText)).toBe(basicPaginationTestArr[1]);
+            pause(2000);
+            expect(getText(basicPaginationText).trim()).toBe(basicPaginationTestArr[1]);
 
             click(basicPaginationExample + linkPrevious);
             // pause for the new text to load
-            pause(250);
-            expect(getText(basicPaginationText)).toBe(basicPaginationTestArr[0]);
+            pause(2000);
+            expect(getText(basicPaginationText).trim()).toBe(basicPaginationTestArr[0]);
         });
 
         it('should check disabled previous and next links', () => {
             scrollIntoView(basicPaginationExample);
             click(basicPaginationExample + standardButton);
             // pause for the new text to load
-            pause(250);
+            pause(2000);
             expect(getAttributeByName(linkPrevious, 'aria-disabled')).toBe('true');
 
             click(basicPaginationExample + pages, 3);
             // pause for the new text to load
-            pause(250);
+            pause(2000);
             expect(getAttributeByName(linkNext, 'aria-disabled')).toBe('true');
         });
     });
@@ -112,19 +115,27 @@ describe('Pagination test suite:', () => {
         it('should check selected pages by clicking options', () => {
             scrollIntoView(showingItemsPaginationExample);
             click(showingItemsPaginationExample + pages);
-            expect(getText(showingItemsPaginationExample + showingItemsPaginationText)).toBe(itemPaginationTestArr[1]);
+            expect(getText(showingItemsPaginationExample + showingItemsPaginationText).trim()).toBe(
+                itemPaginationTestArr[1]
+            );
 
             click(showingItemsPaginationExample + pages, 1);
-            expect(getText(showingItemsPaginationExample + showingItemsPaginationText)).toBe(itemPaginationTestArr[2]);
+            expect(getText(showingItemsPaginationExample + showingItemsPaginationText).trim()).toBe(
+                itemPaginationTestArr[2]
+            );
         });
 
         it('should check selected pages by clicking previous and next link', () => {
             scrollIntoView(showingItemsPaginationExample);
             click(showingItemsPaginationExample + linkNext);
-            expect(getText(showingItemsPaginationExample + showingItemsPaginationText)).toBe(itemPaginationTestArr[1]);
+            expect(getText(showingItemsPaginationExample + showingItemsPaginationText).trim()).toBe(
+                itemPaginationTestArr[1]
+            );
 
             click(showingItemsPaginationExample + linkPrevious);
-            expect(getText(showingItemsPaginationExample + showingItemsPaginationText)).toBe(itemPaginationTestArr[0]);
+            expect(getText(showingItemsPaginationExample + showingItemsPaginationText).trim()).toBe(
+                itemPaginationTestArr[0]
+            );
         });
 
         it('should check disabled previous and next links', () => {
@@ -245,7 +256,7 @@ describe('Pagination test suite:', () => {
             scrollIntoView(playgroundLabel);
             const labelLength = getElementArrayLength(playgroundLabel);
             for (let i = 0; i < labelLength; i++) {
-                expect(getText(playgroundLabel, i)).toBe(playgroundLabelArr[i]);
+                expect(getText(playgroundLabel, i).trim()).toBe(playgroundLabelArr[i]);
             }
         });
 

@@ -60,8 +60,8 @@ export class ComboBoxPo extends BaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForPresent(this.pageTitle);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.pageTitle);
     }
 
     getScreenshotFolder(): Record<string, any> {

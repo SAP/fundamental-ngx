@@ -411,4 +411,10 @@ $fd-table-scrollbar-width-with-border: calc(#{$fd-table-scrollbar-width} + var(-
     &__column-resizer {
         bottom: $fd-table-scrollbar-width-with-border;
     }
+
+    &__cell--navigation {
+        width: 4rem;
+        min-width: 4rem;
+        max-width: 4rem;
+    }
 }

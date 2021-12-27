@@ -45,8 +45,9 @@ describe('Dynamic Page Layout test suite:', () => {
         dynamicPageLayoutPage.open();
     }, 1);
 
-    afterEach(() => {
+    beforeEach(() => {
         refreshPage();
+        waitForPresent(dynamicPageLayoutPage.root);
         waitForElDisplayed(dynamicPageLayoutPage.title);
     }, 1);
 
@@ -146,7 +147,7 @@ describe('Dynamic Page Layout test suite:', () => {
 
             expect(firstTabSelected).toBe('false');
             expect(secondTabSelected).toBe('true');
-            expect(getText(dynamicPageTabsContent, 1)).toContain('tabs 2');
+            expect(getText(dynamicPageTabsContent)).toContain('tabs 2');
         });
     });
 

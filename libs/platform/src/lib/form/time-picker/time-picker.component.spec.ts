@@ -8,6 +8,7 @@ import { FormFieldComponent } from '../form-group/form-field/form-field.componen
 import { FdpFormGroupModule } from '../form-group/fdp-form.module';
 import { PlatformTimePickerModule } from './time-picker.module';
 import { PlatformTimePickerComponent } from './time-picker.component';
+import { runValueAccessorTests } from 'ngx-cva-test-suite';
 
 @Component({
     selector: 'fdp-test-time-picker',
@@ -140,4 +141,23 @@ describe('PlatformTimePickerComponent', () => {
         expect(formControl.value).toBeNull();
         expect(inputEl.nativeElement.classList.contains('is-error')).toBeTrue();
     });
+});
+
+const TIME_PICKER_IDENTIFIER = 'platform-time-picker-unit-test';
+
+runValueAccessorTests({
+    component: PlatformTimePickerComponent,
+    testModuleMetadata: {
+        imports: [PlatformTimePickerModule, FdDatetimeModule]
+    },
+    additionalSetup: (fixture, done) => {
+        fixture.componentInstance.id = TIME_PICKER_IDENTIFIER;
+        fixture.componentInstance.name = TIME_PICKER_IDENTIFIER;
+        done();
+    },
+    supportsOnBlur: false,
+    internalValueChangeSetter: (fixture, value) => {
+        fixture.componentInstance.handleTimeChange(value);
+    },
+    getComponentValue: (fixture) => fixture.componentInstance.value
 });

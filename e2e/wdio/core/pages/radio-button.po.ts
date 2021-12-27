@@ -1,5 +1,5 @@
 import { CoreBaseComponentPo } from './core-base-component.po';
-import { waitForElDisplayed } from '../../driver/wdio';
+import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class RadioButtonPo extends CoreBaseComponentPo {
     url = '/radio';
@@ -12,7 +12,8 @@ export class RadioButtonPo extends CoreBaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
     getScreenshotFolder(): Record<string, any> {

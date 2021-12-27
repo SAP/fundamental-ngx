@@ -11,7 +11,9 @@ import {
     doesItExist,
     setValue,
     clickAndMoveElement,
-    pause
+    pause,
+    browserIsSafari,
+    waitForPresent
 } from '../../driver/wdio';
 import {
     requiredErrorMessage,
@@ -55,10 +57,11 @@ describe('Form generator test suite', () => {
 
     beforeEach(() => {
         refreshPage();
-        if (doesItExist(busyIndicator) === true) {
-            pause(1000);
-        }
+        waitForPresent(formGeneratorPage.root);
         waitForElDisplayed(formGeneratorPage.title);
+        if (doesItExist(busyIndicator) === true) {
+            pause(2000);
+        }
     }, 1);
 
     describe('Tests for default example', () => {
@@ -154,7 +157,19 @@ describe('Form generator test suite', () => {
         clickAndMoveElement(sliderPoint, -400, 0);
         expect(doesItExist(formValue)).toBe(false, 'form value row exists');
         click(customExample + submitButton);
-        expect(getText(formValue)).toEqual('Form value: { "some_slider": { "value": 20, "label": "Twenty" } }');
+        if (!browserIsSafari()) {
+            expect(getText(formValue)).toEqual('Form value: { "some_slider": { "value": 20, "label": "Twenty" } }');
+        }
+        if (browserIsSafari()) {
+            expect(getText(formValue)).toEqual(
+                'Form value: {\n' +
+                    '  "some_slider": {\n' +
+                    '    "value": 20,\n' +
+                    '    "label": "Twenty"\n' +
+                    '  }\n' +
+                    '}'
+            );
+        }
     });
 
     it('should check custom error example', () => {

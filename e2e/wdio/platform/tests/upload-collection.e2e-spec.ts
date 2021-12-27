@@ -63,7 +63,8 @@ describe('Upload collection test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(defaultExample);
+        waitForPresent(uploadCollectionPage.root);
+        waitForElDisplayed(uploadCollectionPage.title);
     }, 1);
 
     it('should check the possibility of creating table item for Default and Without Pagination and Search examples', () => {
@@ -125,7 +126,7 @@ describe('Upload collection test suite', () => {
         checkRenaming(defaultExample);
     });
 
-    it('should check moving folders', () => {
+    xit('should check moving folders', () => {
         // skipped due to cannot reproduce failure, needs further investigation
         if (getCurrentUrl().includes('localhost')) {
             return;
@@ -139,19 +140,18 @@ describe('Upload collection test suite', () => {
     });
 
     function checkMovingFolders(selector: string): void {
-        const movedFolderName = getText(selector + fileNameLabel);
+        const movedFolderName = getText(selector + fileNameLabel).trim();
         click(selector + tableItem);
         click(selector + checkbox, 1);
         click(selector + ghostButton);
         pause(1000);
-
-        const folderName = getText(listItemTitle, 1);
+        const folderName = getText(listItemTitle, 1).trim();
         click(listItem, 1);
         click(moveButton);
         const itemsLength = getElementArrayLength(selector + tableItem);
         for (let i = 0; i < itemsLength; i++) {
             scrollIntoView(selector + tableItem, i);
-            if (getText(selector + fileNameLabel, i) === folderName) {
+            if (getText(selector + fileNameLabel, i).trim() === folderName) {
                 click(selector + fileNameLabel, i);
                 break;
             }
@@ -159,7 +159,7 @@ describe('Upload collection test suite', () => {
         let j = 0;
         const subItemsLength = getElementArrayLength(selector + tableItem);
         for (let i = 0; i < subItemsLength; i++) {
-            if (getText(selector + fileNameLabel, i) === movedFolderName) {
+            if (getText(selector + fileNameLabel, i).trim() === movedFolderName) {
                 j = 1;
                 break;
             }
@@ -176,7 +176,7 @@ describe('Upload collection test suite', () => {
         const newName = getValue(selector + inputFields);
         click(selector + checkbox, 1);
         waitForNotDisplayed(selector + busyIndicator);
-        expect(getText(selector + fileNameLabel)).toEqual(newName);
+        expect(getText(selector + fileNameLabel).trim()).toEqual(newName);
     }
 
     function checkDisplayedItemsPerPage(selector: string): void {
@@ -206,28 +206,28 @@ describe('Upload collection test suite', () => {
 
     function checkSelectedPages(selector: string): void {
         scrollIntoView(selector + tablePages);
-        expect(getText(selector + tableResult)).toBe(paginationTestArr[0]);
+        expect(getText(selector + tableResult).trim()).toBe(paginationTestArr[0]);
         const linksLength = getElementArrayLength(selector + tablePages);
         for (let i = 0; i < linksLength; i++) {
             click(selector + tablePages, i);
-            expect(getText(selector + tableResult)).toBe(paginationTestArr[i + 1]);
+            expect(getText(selector + tableResult).trim()).toBe(paginationTestArr[i + 1]);
         }
     }
 
     function checkSelectedPagesByNextPrevious(selector: string): void {
         scrollIntoView(selector + linkNext);
         click(selector + linkNext);
-        expect(getText(selector + tableResult)).toBe(paginationTestArr[1]);
+        expect(getText(selector + tableResult).trim()).toBe(paginationTestArr[1]);
 
         click(selector + linkPrevious);
-        expect(getText(selector + tableResult)).toBe(paginationTestArr[0]);
+        expect(getText(selector + tableResult).trim()).toBe(paginationTestArr[0]);
     }
 
     function checkColumnHeaderText(selector: string, str: string = ''): void {
         scrollIntoView(selector + columnHeaders + str);
         const headerLength = getElementArrayLength(selector + columnHeaders + str);
         for (let i = 0; i < headerLength; i++) {
-            expect(getText(selector + columnHeaders + str, i)).toBe(columnHeaderTestArr[i]);
+            expect(getText(selector + columnHeaders + str, i).trim()).toBe(columnHeaderTestArr[i]);
         }
     }
 
@@ -237,34 +237,33 @@ describe('Upload collection test suite', () => {
         const contentLength = getElementArrayLength(selector + tableContent);
         expect(contentLength).toEqual(4);
         for (let i = 0; i < contentLength; i++) {
-            expect(getText(selector + tableContent, i)).toBe(testFolderArr[i]);
+            expect(getText(selector + tableContent, i).trim()).toBe(testFolderArr[i]);
         }
     }
 
     function checkCreatingFolder(selector: string): void {
         scrollIntoView(selector);
-        const countBeforeAdd = getText(selector + tableItemCount);
+        const countBeforeAdd = getText(selector + tableItemCount).trim();
         const countBeforeAddNum = Number(countBeforeAdd);
         expect(countBeforeAddNum).toEqual(54);
         click(selector + transparentButton);
         setValue(dialogInputField, testFolder1);
         click(dialogCreateButton);
-        waitForNotDisplayed(selector + busyIndicator);
-        expect(getText(selector + tableItemCount)).toBe('55');
-        const countAfterAdd = getText(selector + tableItemCount);
+        expect(getText(selector + tableItemCount).trim()).toBe('55');
+        const countAfterAdd = getText(selector + tableItemCount).trim();
         const countAfterAddNum = Number(countAfterAdd);
         expect(countAfterAddNum).toEqual(55);
-        expect(getText(selector + tableContent, 4)).toBe(testFolder1);
+        expect(getText(selector + tableContent, 4).trim()).toBe(testFolder1);
     }
 
     function checkRemovingItem(selector: string): void {
         scrollIntoView(selector);
-        const countBeforeRemove = getText(selector + tableItemCount);
+        const countBeforeRemove = getText(selector + tableItemCount).trim();
         const countBeforeRemoveNum = Number(countBeforeRemove);
         expect(countBeforeRemoveNum).toEqual(54);
         click(selector + transparentButton, 5);
         click(menuButton, 3);
-        const countAfterRemove = getText(selector + tableItemCount);
+        const countAfterRemove = getText(selector + tableItemCount).trim();
         const countAfterRemoveNum = Number(countAfterRemove);
         expect(countAfterRemoveNum).toEqual(53);
     }

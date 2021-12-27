@@ -8,7 +8,8 @@ import {
     doesItExist,
     scrollIntoView,
     getElementArrayLength,
-    waitForNotDisplayed
+    waitForNotDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 
 describe('Textarea component test', () => {
@@ -21,6 +22,7 @@ describe('Textarea component test', () => {
 
     beforeEach(() => {
         refreshPage();
+        waitForPresent(messageToastPage.root);
         waitForElDisplayed(messageToastPage.title);
     }, 2);
 

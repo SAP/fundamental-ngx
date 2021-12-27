@@ -58,10 +58,11 @@ describe('Date picker suite', () => {
         datePickerPage.open();
     }, 1);
 
-    afterEach(() => {
+    beforeEach(() => {
         refreshPage();
-        waitForPresent(inputDatePicker);
-    }, 1);
+        waitForPresent(datePickerPage.root);
+        waitForElDisplayed(datePickerPage.title);
+    }, 2);
 
     it('Verify in all the form factor user is able to see the date picker button and input field ', () => {
         const buttons = elementArray(buttonDatePicker);
@@ -105,7 +106,7 @@ describe('Date picker suite', () => {
                 scrollIntoView(buttonDatePicker, i);
                 click(buttonDatePicker, i);
                 waitForElDisplayed(calendarExpanded);
-                expect(getText(currentDay, 0)).toBe(new Date().getDate().toString());
+                expect(getText(currentDay, 0)).toContain(new Date().getDate().toString());
             }
         }
     });

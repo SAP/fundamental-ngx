@@ -1,5 +1,5 @@
 import { CoreBaseComponentPo } from './core-base-component.po';
-import { waitForElDisplayed } from '../../driver/wdio';
+import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class FeedInputPo extends CoreBaseComponentPo {
     private url = '/feed-input';
@@ -15,8 +15,8 @@ export class FeedInputPo extends CoreBaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForElDisplayed(this.feedInput);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
     getScreenshotFolder(): Record<string, any> {

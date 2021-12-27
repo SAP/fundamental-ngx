@@ -1,5 +1,14 @@
 import { SegmentedButtonPo } from '../pages/segmented-button.po';
-import { acceptAlert, click, getAttributeByName, getElementClass, getText, refreshPage } from '../../driver/wdio';
+import {
+    acceptAlert,
+    click,
+    getAttributeByName,
+    getElementClass,
+    getText,
+    refreshPage,
+    waitForElDisplayed,
+    waitForPresent
+} from '../../driver/wdio';
 
 describe('Select component:', () => {
     const segmentedButtonPage = new SegmentedButtonPo();
@@ -24,6 +33,8 @@ describe('Select component:', () => {
 
     afterEach(() => {
         refreshPage();
+        waitForPresent(segmentedButtonPage.root);
+        waitForElDisplayed(segmentedButtonPage.title);
     }, 2);
 
     describe('Select modes', () => {
@@ -91,19 +102,19 @@ describe('Select component:', () => {
                 );
                 switch (i) {
                     case 0:
-                        expect(getText(formExample + firstFormButtonsSection + chosenValue + ':nth-child(4)')).toEqual(
-                            'Value: first'
-                        );
+                        expect(
+                            getText(formExample + firstFormButtonsSection + chosenValue + ':nth-child(4)').trim()
+                        ).toEqual('Value: first');
                         break;
                     case 1:
-                        expect(getText(formExample + firstFormButtonsSection + chosenValue + ':nth-child(4)')).toEqual(
-                            'Value: second'
-                        );
+                        expect(
+                            getText(formExample + firstFormButtonsSection + chosenValue + ':nth-child(4)').trim()
+                        ).toEqual('Value: second');
                         break;
                     case 2:
-                        expect(getText(formExample + firstFormButtonsSection + chosenValue + ':nth-child(4)')).toEqual(
-                            'Value: third'
-                        );
+                        expect(
+                            getText(formExample + firstFormButtonsSection + chosenValue + ':nth-child(4)').trim()
+                        ).toEqual('Value: third');
                         break;
                 }
             }
@@ -116,13 +127,13 @@ describe('Select component:', () => {
         });
 
         it('should check touched status in Form Example', () => {
-            expect(getText(formExample + firstFormButtonsSection + chosenValue + ':nth-child(8)')).toEqual(
+            expect(getText(formExample + firstFormButtonsSection + chosenValue + ':nth-child(8)').trim()).toEqual(
                 'Touched: false'
             );
             expect(getElementClass(firstFormSegment)).toContain('ng-untouched');
             click(firstFormSegment + button);
             expect(getElementClass(firstFormSegment)).not.toContain('ng-untouched');
-            expect(getText(formExample + firstFormButtonsSection + chosenValue + ':nth-child(8)')).toEqual(
+            expect(getText(formExample + firstFormButtonsSection + chosenValue + ':nth-child(8)').trim()).toEqual(
                 'Touched: true'
             );
         });

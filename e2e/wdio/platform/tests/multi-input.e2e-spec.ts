@@ -48,7 +48,8 @@ describe('Multi input test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(multiInputPage.title);
+        waitForPresent(multiInputPage.root);
+        waitForElDisplayed(multiInputPage.title);
     }, 1);
 
     it('Verify multi input allows user to enter multiple values', () => {
@@ -70,8 +71,6 @@ describe('Multi input test suite', () => {
                 multiInputPage.selectOption(optionsArr[1]);
                 expect(getText(filledInput, i)).toContain(optionsArr[0]);
                 expect(getText(filledInput, i)).toContain(optionsArr[1]);
-                expect(getText(filledInput, i).split('\n')[0]).toBe(optionsArr[0]);
-                expect(getText(filledInput, i).split('\n')[1]).toBe(optionsArr[1]);
             }
             if (i === mobileExample) {
                 multiInputPage.expandDropdown(activeDropdownButtons, i);
@@ -81,8 +80,6 @@ describe('Multi input test suite', () => {
                 click(approveButton);
                 expect(getText(filledInput, i)).toContain(optionsArr[0]);
                 expect(getText(filledInput, i)).toContain(optionsArr[1]);
-                expect(getText(filledInput, i).split('\n')[0]).toBe(optionsArr[0]);
-                expect(getText(filledInput, i).split('\n')[1]).toBe(optionsArr[1]);
             }
         }
     });
@@ -268,7 +265,7 @@ describe('Multi input test suite', () => {
         multiInputPage.selectOption('Alaska');
         click(crossButton('Alaska'));
         expect(isElementDisplayed(errorMessage)).toBe(true);
-        expect(getText(errorMessage)).toBe('Value is required');
+        expect(getText(errorMessage).trim()).toBe('Value is required');
     });
 
     it('should check no cross icons in menu list items', () => {

@@ -7,6 +7,7 @@ import {
     getElementTitle,
     refreshPage,
     scrollIntoView,
+    waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 import { iconStatusesList } from '../fixtures/appData/object-marker-content';
@@ -21,7 +22,8 @@ describe('Object marker test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(marker);
+        waitForPresent(objectMarkerPage.root);
+        waitForElDisplayed(objectMarkerPage.title);
     }, 1);
 
     it('Verify each marker is clickable', () => {

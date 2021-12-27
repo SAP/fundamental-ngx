@@ -1,5 +1,6 @@
-import { Component, ElementRef, ViewChild, ViewEncapsulation } from '@angular/core';
-import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
+import { Component, ElementRef, QueryList, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
+import { WizardStepComponent, WizardStepStatus } from '@fundamental-ngx/core/wizard';
+import { WizardService } from 'libs/core/src/lib/wizard/wizard.service';
 
 @Component({
     selector: 'fd-wizard-example',
@@ -8,7 +9,8 @@ import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
     encapsulation: ViewEncapsulation.None,
     host: {
         class: 'fd-wizard-example'
-    }
+    },
+    providers: [WizardService]
 })
 export class WizardExampleComponent {
     /**
@@ -33,6 +35,12 @@ export class WizardExampleComponent {
     fullName = '';
     addressLine1 = '';
     addressLine2 = '';
+
+    /** @hidden */
+    @ViewChildren(WizardStepComponent)
+    steps: QueryList<WizardStepComponent>;
+
+    constructor(private _wizardService: WizardService) {}
 
     statusChanged(stepNumber: number, event: WizardStepStatus): void {
         if (event === 'current') {
@@ -103,5 +111,9 @@ export class WizardExampleComponent {
         event.stopPropagation();
         this.fullscreen = false;
         this.overlay.nativeElement.style.width = '0%';
+    }
+
+    handleFocus(event: KeyboardEvent, index: number) {
+        this._wizardService.progressBarKeyHandler(event, this.steps, index);
     }
 }

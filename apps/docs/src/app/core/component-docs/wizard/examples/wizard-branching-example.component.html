@@ -1,6 +1,6 @@
 <button fd-button (click)="enterFullscreenExample()">Click to open full screen</button>
 
-<div cdkScrollable class="docs-wizard-example-overlay" #overlay>
+<div cdkScrollable cdkTrapFocus class="docs-wizard-example-overlay" #overlay>
     <ng-container *ngIf="fullscreen">
         <div class="docs-wizard-example-overlay-content">
             <div class="docs-wizard-example-button">
@@ -10,12 +10,14 @@
             <!-- The Wizard -->
             <fd-wizard>
                 <fd-wizard-navigation>
-                    <ul fd-wizard-progress-bar size="xl">
+                    <ul fd-wizard-progress-bar size="xl" aria-label="Wizard Steps">
                         <li
                             fd-wizard-step
                             [status]="step1status"
                             (statusChange)="statusChanged(1, $event)"
                             label="Step 1: One Line"
+                            ariaLabel="Step 1: One Line"
+                            (keydown)="handleFocus($event, 0)"
                         >
                             <fd-wizard-step-indicator glyph="accept"></fd-wizard-step-indicator>
                             <fd-wizard-content size="xl">
@@ -44,30 +46,42 @@
                             [status]="step2status"
                             (statusChange)="statusChanged(2, $event)"
                             label="Step 2: Payment Selection"
+                            ariaLabel="Step 2: Payment Selection"
+                            (keydown)="handleFocus($event, 1)"
                         >
                             <fd-wizard-step-indicator>2</fd-wizard-step-indicator>
                             <fd-wizard-content size="xl">
-                                Please select a payment type:
-                                <fd-radio-button
-                                    #bankButton
-                                    value="bank"
-                                    id="radio-1"
-                                    name="radio-name-1"
-                                    [(ngModel)]="paymentSelection"
-                                    (ngModelChange)="paymentSelectionChanged(confirmationDialog)"
-                                >
-                                    Bank Transfer
-                                </fd-radio-button>
-                                <fd-radio-button
-                                    #creditButton
-                                    value="credit"
-                                    id="radio-2"
-                                    name="radio-name-2"
-                                    [(ngModel)]="paymentSelection"
-                                    (ngModelChange)="paymentSelectionChanged(confirmationDialog)"
-                                >
-                                    Credit Card
-                                </fd-radio-button>
+                                <fieldset fd-fieldset>
+                                    <legend fd-form-legend>Please select a payment type:</legend>
+                                    <fd-form-group>
+                                        <div fd-form-item>
+                                            <fd-radio-button
+                                                #bankButton
+                                                value="bank"
+                                                id="radio-1"
+                                                name="radio-name-1"
+                                                [(ngModel)]="paymentSelection"
+                                                (ngModelChange)="paymentSelectionChanged(confirmationDialog)"
+                                                aria-label="Bank Transfer"
+                                            >
+                                                Bank Transfer
+                                            </fd-radio-button>
+                                        </div>
+                                        <div fd-form-item>
+                                            <fd-radio-button
+                                                #creditButton
+                                                value="credit"
+                                                id="radio-2"
+                                                name="radio-name-1"
+                                                [(ngModel)]="paymentSelection"
+                                                (ngModelChange)="paymentSelectionChanged(confirmationDialog)"
+                                                aria-label="Credit Card"
+                                            >
+                                                Credit Card
+                                            </fd-radio-button>
+                                        </div>
+                                    </fd-form-group>
+                                </fieldset>
                                 <fd-wizard-next-step>
                                     <button
                                         [disabled]="!paymentSelection"
@@ -89,6 +103,8 @@
                             [label]="
                                 paymentSelection === 'bank' ? 'Step 3: Bank Details' : 'Step 3: Credit Card Details'
                             "
+                            ariaLabel="Step 3: Bank Details"
+                            (keydown)="handleFocus($event, 2)"
                         >
                             <fd-wizard-step-indicator>3</fd-wizard-step-indicator>
                             <fd-wizard-content size="xl">
