@@ -52,7 +52,7 @@ describe('File uploader component test', () => {
         }
     });
 
-    fit('verify compact input smaller than basic', () => {
+    it('verify compact input smaller than basic', () => {
         const basicInput = getElementSize(fileUploaderExample + fileUploaderInput);
         const compactInput = getElementSize(fileUploaderCompactExample + fileUploaderInput);
 

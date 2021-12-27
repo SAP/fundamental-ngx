@@ -18,3 +18,4 @@ export const warningInputLabelText = 'Warning Input - Example of message trigger
 export const informationInputLabelText = 'Information Input';
 export const inputMessageText = 'Pellentesque metus lacus commodo eget justo ut rutrum varius nunc';
 export const testText = 'Inline Help';
+export const stateClassesArr = ['is-success', 'is-error', 'is-warning', 'is-information'];

@@ -40,6 +40,9 @@ export class InputPo extends CoreBaseComponentPo {
     questionMark = '.sap-icon--question-mark';
     popoverHelp = 'fd-popover-body .fd-popover__popper ';
 
+    inputStateExample = 'fd-input-state-example ';
+    input = 'input:not([disabled], [readonly])';
+
     open(): void {
         super.open(this.url);
         waitForPresent(this.root);
