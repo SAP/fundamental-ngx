@@ -25,10 +25,10 @@
         aria-multiselectable="true"
         [attr.aria-labelledby]="selectTabTitleId + ' ' + selectTabCountId"
     >
-        <label [id]="selectTabCountId" fd-form-label class="fdp-value-help-dialog__hidden_lable"
+        <label [id]="selectTabCountId" fd-form-label class="fdp-value-help-dialog__hidden_label"
             >contains {{ displayedData.length }} rows and {{ _tableFilters.main.length }} column</label
         >
-        <label [id]="selectTabTitleId" fd-form-label class="fdp-value-help-dialog__hidden_lable"
+        <label [id]="selectTabTitleId" fd-form-label class="fdp-value-help-dialog__hidden_label"
             >Items ({{ displayedData.length }})
         </label>
         <thead fd-table-header>
