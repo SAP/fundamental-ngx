@@ -11,14 +11,14 @@ import {
     waitForElDisplayed,
     getElementClass,
     acceptAlert,
-    doesItExist
+    doesItExist,
+    waitForPresent
 } from '../../driver/wdio';
 import { text, productTitle, textLocked, isSelected } from '../fixtures/appData/grid-list-content';
 
 describe('Grid-list test suite', () => {
     const gridListPage = new GridListPo();
     const {
-        layoutPattern,
         singleSelectItems,
         multiSelectModeCheckboxes,
         moreButton,
@@ -44,7 +44,8 @@ describe('Grid-list test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForElDisplayed(layoutPattern);
+        waitForPresent(gridListPage.root);
+        waitForElDisplayed(gridListPage.title);
     }, 1);
 
     it('Verify clicking on read-more button', () => {
@@ -89,7 +90,7 @@ describe('Grid-list test suite', () => {
     it(`Verify states: Text should be in bold if item is on unread state, Error message should be displayed in footer if item is on 'error' state
     Locker button should be displayed in footer if item is on 'locked' state, Draft button should be displayed in footer if item is on 'draft' state`, () => {
         waitForClickable(lockedStateItemButton);
-        expect(getText(lockedStateItemText)).toBe(textLocked);
+        expect(getText(lockedStateItemText).trim()).toBe(textLocked);
     });
 
     // eslint-disable-next-line max-len

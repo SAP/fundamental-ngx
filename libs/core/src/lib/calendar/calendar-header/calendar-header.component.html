@@ -16,7 +16,7 @@
             ></button>
         </div>
         <ng-container *ngIf="isOnDayView || isOnMonthView">
-            <div class="fd-calendar__action" aria-live="polite">
+            <div class="fd-calendar__action">
                 <!-- Select month button -->
                 <button
                     fd-button
@@ -30,7 +30,7 @@
                     <span [attr.id]="_monthButtonLabelId">{{ selectMonthLabel }}</span>
                 </button>
             </div>
-            <div class="fd-calendar__action" aria-live="polite">
+            <div class="fd-calendar__action">
                 <!-- Select year button -->
                 <button
                     fd-button

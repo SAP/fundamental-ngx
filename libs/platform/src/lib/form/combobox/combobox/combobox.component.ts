@@ -18,7 +18,7 @@ import {
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 
-import { closestElement, DynamicComponentService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService } from '@fundamental-ngx/core/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import {
     ComboBoxDataSource,
@@ -102,7 +102,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
 
         const target = event.relatedTarget as HTMLElement;
         if (target) {
-            const isList = !!closestElement('.fdp-combobox__list-container', target);
+            const isList = !!target.closest('.fdp-combobox__list-container');
             if (isList) {
                 return;
             }

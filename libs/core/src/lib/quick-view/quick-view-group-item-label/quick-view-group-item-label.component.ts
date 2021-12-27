@@ -1,5 +1,4 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef } from '@angular/core';
-import { getClosest } from '@fundamental-ngx/core/utils';
 
 @Component({
     selector: 'fd-quick-view-group-item-label',
@@ -8,7 +7,7 @@ import { getClosest } from '@fundamental-ngx/core/utils';
 })
 export class QuickViewGroupItemLabelComponent implements AfterViewInit {
     /** @hidden */
-    constructor(private readonly _elRef: ElementRef) {}
+    constructor(private readonly _elRef: ElementRef<Element>) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -18,10 +17,11 @@ export class QuickViewGroupItemLabelComponent implements AfterViewInit {
     /** @hidden
      * Needed for binding the id to the label element (and this id needed for aria-labelledby of proper element). */
     private _bindElementAttributes(): void {
-        const parentId = getClosest('.fd-form-item', this._elRef.nativeElement)?.id;
+        const parentId = this._elRef.nativeElement.closest('.fd-form-item')?.id;
 
-        if (this._elRef.nativeElement.firstChild && parentId) {
-            this._elRef.nativeElement.firstChild.setAttribute('id', `${parentId}-label`);
+        const child = this._elRef.nativeElement.firstChild;
+        if (child instanceof Element && parentId) {
+            child.setAttribute('id', `${parentId}-label`);
         }
     }
 }

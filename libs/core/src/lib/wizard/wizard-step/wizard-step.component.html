@@ -1,12 +1,13 @@
 <div class="fd-wizard__step-wrapper">
     <a
+        #progressBarLink
         class="fd-wizard__step-container"
-        [attr.aria-label]="ariaLabel"
-        tabindex="0"
         (click)="stepContainerKeypress()"
         (keypress)="stepContainerKeypress($event)"
         [style.cursor]="visited ? 'pointer' : 'auto'"
         [style.pointer-events]="visited ? 'auto' : 'none'"
+        [attr.tabindex]="status === 'current' ? 0 : -1"
+        [attr.aria-roledescription]="ariaRoleDecription"
     >
         <ng-content select="fd-wizard-step-indicator"></ng-content>
         <div class="fd-wizard__label-container" [class.fd-wizard__label-container--optional]="optionalText">

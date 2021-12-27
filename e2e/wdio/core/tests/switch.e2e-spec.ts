@@ -6,6 +6,7 @@ import {
     getElementClass,
     pause,
     refreshPage,
+    waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 import { SwitchPo } from '../pages/switch.po';
@@ -13,7 +14,6 @@ import { SwitchPo } from '../pages/switch.po';
 describe('Switch test suite', () => {
     const switchPage = new SwitchPo();
     const {
-        switchSizes,
         switchSizesExample,
         toggle,
         toggleInput,
@@ -35,7 +35,8 @@ describe('Switch test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(switchSizes);
+        waitForPresent(switchPage.root);
+        waitForElDisplayed(switchPage.title);
     }, 1);
 
     it('Should check turn on/ Turn off switch toggle', () => {

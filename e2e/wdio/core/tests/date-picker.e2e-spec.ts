@@ -1,21 +1,22 @@
 import {
+    browserIsSafari,
     click,
     clickNextElement,
     doesItExist,
+    focusElement,
     getAttributeByName,
     getElementArrayLength,
     getElementClass,
-    getNextElementText,
     getText,
     getValue,
     isElementClickable,
     isElementDisplayed,
-    mouseHoverElement,
     pause,
     refreshPage,
     scrollIntoView,
     sendKeys,
     setValue,
+    waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 import { DatePickerPo } from '../pages/date-picker.po';
@@ -48,10 +49,10 @@ describe('Datetime picker suite', () => {
         selectedTimeLine,
         currentItem,
         inputGroup,
+        inputGroupInputElement,
         frenchButton,
         germanButton,
         bulgarianButton,
-        previousMonthButton,
         nextMonthButton,
         calendarBody,
         calendarRow,
@@ -62,8 +63,7 @@ describe('Datetime picker suite', () => {
         currentMonthCalendarItem,
         getCurrentDayIndex,
         altCalendarItem,
-        monthAttributeLabel,
-        positionExample
+        monthAttributeLabel
     } = new DatePickerPo();
 
     beforeAll(() => {
@@ -72,8 +72,14 @@ describe('Datetime picker suite', () => {
 
     beforeEach(() => {
         refreshPage();
-        waitForPresent(datePickerPage.title);
+        waitForPresent(datePickerPage.root);
+        waitForElDisplayed(datePickerPage.title);
     }, 1);
+
+    if (browserIsSafari()) {
+        // skip safari; runner gets stuck sometimes; flaky
+        return;
+    }
 
     it('should check calendar open close', () => {
         for (let i = 0; i < blockExamples.length; i++) {
@@ -164,9 +170,9 @@ describe('Datetime picker suite', () => {
             }
         }
 
-        if (currentDayIndex + 15 > itemsLength) {
+        if (currentDayIndex + 14 > itemsLength) {
             const lengthDifference = itemsLength - currentDayIndex;
-            const availableLengthNextMonth = 15 - lengthDifference;
+            const availableLengthNextMonth = 14 - lengthDifference;
 
             for (let i = currentDayIndex; i < lengthDifference; i++) {
                 expect(isElementClickable(currentMonthCalendarItem, i)).toBe(true, `element ${i} is disabled`);
@@ -178,7 +184,7 @@ describe('Datetime picker suite', () => {
                 expect(isElementClickable(currentMonthCalendarItem, i)).toBe(true, `element ${i} is disabled`);
             }
 
-            for (let i = availableLengthNextMonth + 1; i < itemsLength; i++) {
+            for (let i = availableLengthNextMonth + 2; i < itemsLength; i++) {
                 if (i >= 31) {
                     break;
                 }
@@ -233,21 +239,28 @@ describe('Datetime picker suite', () => {
         expect(getElementClass(calendar)).toContain('compact', `calendar is not compact`);
     });
 
-    it('should check hovering on the input group', () => {
-        checkHoverOnInputGroup(disableFuncExample, 'success');
-        checkHoverOnInputGroup(formExample, 'success');
-        checkHoverOnInputGroup(formExample, 'information', 1);
+    it('should check message when input group in focus state', () => {
+        if (browserIsSafari()) {
+            return;
+        }
+        focusElement(disableFuncExample + inputGroupInputElement);
+        expect(isElementDisplayed(message + 'success'))
+            .withContext(`message is not displayed`)
+            .toBeTrue();
+
+        focusElement(formExample + inputGroupInputElement);
+        expect(isElementDisplayed(message + 'success'))
+            .withContext(`message is not displayed`)
+            .toBeTrue();
+
+        // disabled input can not be focused so no message
+        focusElement(formExample + inputGroupInputElement, 1);
+        expect(() => isElementDisplayed(message + 'information')).toThrowError();
     });
 
     it('should check RTL and LTR orientation', () => {
         datePickerPage.checkRtlSwitch();
     });
-
-    function checkHoverOnInputGroup(section: string, messageType: string, index: number = 0): void {
-        scrollIntoView(section);
-        mouseHoverElement(section + inputGroup, index);
-        expect(isElementDisplayed(message + messageType)).toBe(true, `message did not displayed`);
-    }
 
     function checkChangingMonthByArrows(section: string): void {
         click(section + calendarIcon);
@@ -257,7 +270,6 @@ describe('Datetime picker suite', () => {
         // if current month is January - we do not have previous month in this year
         if (getCurrentItemIndex() !== 0) {
             previousMonthName = getAttributeByName(calendarItem, monthAttributeLabel, getCurrentItemIndex() - 1);
-            console.log(previousMonthName);
 
             sendKeys(['ArrowLeft', 'Enter']);
             expect(getAttributeByName(selectMonthButton, monthAttributeLabel)).toEqual(
@@ -286,7 +298,7 @@ describe('Datetime picker suite', () => {
     function checkChoosingYear(section: string): void {
         click(section + calendarIcon);
         click(selectYearButton);
-        const nextYear = getNextElementText(currentItem);
+        const nextYear = getAttributeByName(calendarItem, 'data-fd-calendar-year', getCurrentDayIndex() + 1);
         clickNextElement(currentItem);
         expect(getText(selectYearButton)).toEqual(nextYear);
         click(section + calendarIcon);
@@ -337,7 +349,7 @@ describe('Datetime picker suite', () => {
             }
         }
 
-        const firstChosenDayText = '0' + getText(calendarItem, firstDayIndex);
+        const firstChosenDayText = '0' + getText(calendarItem + ' .fd-calendar__text', firstDayIndex);
 
         for (let i = itemsLength; i !== 0; i--) {
             if (
@@ -349,7 +361,7 @@ describe('Datetime picker suite', () => {
             }
         }
 
-        const secChosenDayText = getText(calendarItem, lastDayIndex);
+        const secChosenDayText = getText(calendarItem + ' .fd-calendar__text', lastDayIndex);
 
         click(calendarItem, firstDayIndex);
         click(calendarItem, lastDayIndex);

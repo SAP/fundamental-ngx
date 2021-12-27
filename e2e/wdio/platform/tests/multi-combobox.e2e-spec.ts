@@ -45,7 +45,8 @@ describe('multi-combobox test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(multiComboboxPage.title);
+        waitForPresent(multiComboboxPage.root);
+        waitForElDisplayed(multiComboboxPage.title);
     }, 1);
 
     describe('Main checks', () => {

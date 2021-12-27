@@ -11,7 +11,8 @@ import {
     mouseHoverElement,
     refreshPage,
     scrollIntoView,
-    waitForElDisplayed
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 import {
     activeClass,
@@ -34,7 +35,6 @@ describe('calendar test suite', () => {
         standardCalendar,
         selectedDays,
         currentDay,
-        disabledDays,
         button,
         calendarOptionsBtn,
         mobileExamples,
@@ -63,7 +63,6 @@ describe('calendar test suite', () => {
         singleReactiveCalendar,
         rangeReactiveCalendar,
         reactiveCalendarExamples,
-        markedDays,
         rangeHoverItems,
         setCalendarRange,
         mondays,
@@ -78,6 +77,8 @@ describe('calendar test suite', () => {
 
     afterEach(() => {
         refreshPage();
+        waitForPresent(calendarPage.root);
+        waitForElDisplayed(calendarPage.title);
     }, 1);
 
     describe('standard calendar example', () => {

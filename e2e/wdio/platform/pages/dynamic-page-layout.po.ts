@@ -1,5 +1,5 @@
 import { BaseComponentPo } from './base-component.po';
-import { waitForElDisplayed } from '../../driver/wdio';
+import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class DynamicPageLayoutPo extends BaseComponentPo {
     private url = '/dynamic-page';
@@ -28,6 +28,7 @@ export class DynamicPageLayoutPo extends BaseComponentPo {
 
     open(): void {
         super.open(this.url);
+        waitForPresent(this.root);
         waitForElDisplayed(this.title);
     }
 

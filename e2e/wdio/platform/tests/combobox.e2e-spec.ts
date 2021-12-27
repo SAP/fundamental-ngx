@@ -32,7 +32,6 @@ import { checkNotFocused, checkTextValueContain } from '../../helper/assertion-h
 describe('Combobox test suite', () => {
     const comboBoxPage: ComboBoxPo = new ComboBoxPo();
     const {
-        pageTitle,
         comboBoxDropdownExpanded,
         groupHeader,
         comboboxTwoColumns,
@@ -50,9 +49,10 @@ describe('Combobox test suite', () => {
         comboBoxPage.open();
     }, 1);
 
-    afterEach(() => {
+    beforeEach(() => {
         refreshPage();
-        waitForPresent(pageTitle);
+        waitForPresent(comboBoxPage.root);
+        waitForElDisplayed(comboBoxPage.title);
     }, 1);
 
     it('Verify each combobox consist of input and button', () => {

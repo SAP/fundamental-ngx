@@ -109,7 +109,8 @@ describe('List test suite:', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(noBorderListItems);
+        waitForPresent(listPage.root);
+        waitForElDisplayed(listPage.title);
     }, 1);
 
     describe('Borderless examples:', () => {

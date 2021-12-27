@@ -1,6 +1,7 @@
 import { SliderPo } from '../pages/slider.po';
 import {
     browserIsFirefox,
+    browserIsSafari,
     clearValue,
     click,
     clickAndMoveElement,
@@ -13,7 +14,9 @@ import {
     refreshPage,
     scrollIntoView,
     sendKeys,
-    waitForElDisplayed
+    setValue,
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 import { cozySliderClass, disabledAttribute } from '../fixtures/appData/slider-contents';
 
@@ -52,6 +55,12 @@ describe('slider test suite', () => {
         sliderPage.open();
     }, 1);
 
+    beforeEach(() => {
+        refreshPage();
+        waitForPresent(sliderPage.root);
+        waitForElDisplayed(sliderPage.title);
+    }, 1);
+
     describe('basic examples', () => {
         it('should check slider with default state', () => {
             const startValue = getText(basicExamples + valueLabels);
@@ -79,12 +88,20 @@ describe('slider test suite', () => {
 
     describe('tooltip examples', () => {
         it('should check readonly tooltip', () => {
+            // skip due to hoverElement does not work in Safari
+            if (browserIsSafari()) {
+                return;
+            }
             scrollIntoView(tooltipExamples);
             mouseHoverElement(tooltipExamples + sliderHandles);
             expect(waitForElDisplayed(sliderTooltip)).toBe(true);
         });
 
         it('should check tooltip with input', () => {
+            // skip due to hoverElement does not work in Safari
+            if (browserIsSafari()) {
+                return;
+            }
             click(tooltipExamples + sliderHandles, 1);
             mouseHoverElement(tooltipExamples + sliderHandles, 1);
             waitForElDisplayed(sliderTooltipInput);
@@ -117,32 +134,49 @@ describe('slider test suite', () => {
 
     describe('range slider examples', () => {
         it('should check default range slider', () => {
+            let startValuesArr, startMinValue, startMaxValue;
             scrollIntoView(rangeExamples);
-            const startValuesArr = getText(rangeExamples + valueLabels).split('\n');
-            const startMinValue = startValuesArr[0];
-            const startMaxValue = startValuesArr[1];
+            if (browserIsSafari()) {
+                startValuesArr = getText(rangeExamples + valueLabels);
+                startMinValue = startValuesArr.slice(0, 14);
+                startMaxValue = startValuesArr.slice(15);
+            } else {
+                startValuesArr = getText(rangeExamples + valueLabels).split('\n');
+                startMinValue = startValuesArr[0];
+                startMaxValue = startValuesArr[1];
+            }
 
             clickAndMoveElement(rangeExamples + sliderHandles, -75, 0);
             scrollIntoView(rangeExamples);
             clickAndMoveElement(rangeExamples + sliderHandles, 75, 0, 1);
-            const endValuesArr = getText(rangeExamples + valueLabels).split('\n');
-            const endMinValue = endValuesArr[0];
-            const endMaxValue = endValuesArr[1];
+            let endValuesArr, endMinValue, endMaxValue;
+            if (browserIsSafari()) {
+                endValuesArr = getText(rangeExamples + valueLabels);
+                endMinValue = endValuesArr.slice(0, 14);
+                endMaxValue = endValuesArr.slice(15);
+            } else {
+                endValuesArr = getText(rangeExamples + valueLabels).split('\n');
+                endMinValue = endValuesArr[0];
+                endMaxValue = endValuesArr[1];
+            }
 
             expect(startMinValue).not.toEqual(endMinValue);
             expect(startMaxValue).not.toEqual(endMaxValue);
         });
 
         it('should check range slider with custom values', () => {
+            let startMinValue, startMaxValue;
             const startValuesArr = getText(rangeExamples + valueLabels, 1).split('\n');
-            const startMinValue = startValuesArr[0];
-            const startMaxValue = startValuesArr[1];
+            browserIsSafari() ? (startMinValue = startValuesArr[1]) : (startMinValue = startValuesArr[0]);
+            browserIsSafari() ? (startMaxValue = startValuesArr[4]) : (startMaxValue = startValuesArr[1]);
 
             clickAndMoveElement(rangeExamples + sliderHandles, -200, 0, 2);
             clickAndMoveElement(rangeExamples + sliderHandles, 200, 0, 3);
+
             const endValuesArr = getText(rangeExamples + valueLabels, 1).split('\n');
-            const endMinValue = endValuesArr[0];
-            const endMaxValue = endValuesArr[1];
+            let endMinValue, endMaxValue;
+            browserIsSafari() ? (endMinValue = endValuesArr[1]) : (endMinValue = endValuesArr[0]);
+            browserIsSafari() ? (endMaxValue = endValuesArr[4]) : (endMinValue = endValuesArr[1]);
 
             expect(startMinValue).not.toEqual(endMinValue);
             expect(startMaxValue).not.toEqual(endMaxValue);
@@ -181,10 +215,10 @@ describe('slider test suite', () => {
         it('should check custom min and max values', () => {
             clearValue(sliderInput);
             click(sliderInput);
-            sendKeys('-10');
+            setValue(sliderInput, '-10');
             clearValue(sliderInput, 1);
             click(sliderInput, 1);
-            sendKeys('110');
+            setValue(sliderInput, '110', 1);
 
             expect(getText(firstSliderLabel)).toEqual('-10');
             expect(getText(lastSliderLabel)).toEqual('110');
@@ -193,7 +227,7 @@ describe('slider test suite', () => {
         it('should check step values', () => {
             clearValue(sliderInput, 2);
             click(sliderInput, 2);
-            sendKeys('20');
+            setValue(sliderInput, '20', 2);
             // eslint-disable-next-line radix
             const firstLabelValue = parseInt(getText(firstSliderLabel));
             // eslint-disable-next-line radix
@@ -215,6 +249,8 @@ describe('slider test suite', () => {
         });
 
         it('should check hide/show tick labels', () => {
+            click(inputCheckboxes, 1);
+            expect(doesItExist(playgroundExamples + sliderLabels)).toBe(false);
             click(inputCheckboxes, 1);
             expect(doesItExist(playgroundExamples + sliderLabels)).toBe(true);
             click(inputCheckboxes, 2);

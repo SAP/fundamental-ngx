@@ -1,9 +1,7 @@
-import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
 import { MenuComponent, MenuInteractiveDirective, MenuItemComponent, MenuModule } from '@fundamental-ngx/core/menu';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
 
 @Component({
     template: `
@@ -137,22 +135,29 @@ describe('MenuItemComponent', () => {
 
 @Component({
     template: `
-        <fd-menu>
-            <li fd-menu-item #menuItem [submenu]="submenu">
-                <div fd-menu-interactive></div>
+        <button [fdMenuTrigger]="menu">Menu With sub-menu</button>
+        <fd-menu #menu>
+            <li fd-menu-item>
+                <div fd-menu-interactive>Option 1</div>
+            </li>
+            <li fd-menu-item #menuItemWithNestedMenu [submenu]="submenu">
+                <div fd-menu-interactive>Option 2 with submenu</div>
+            </li>
+            <li fd-menu-item>
+                <div fd-menu-interactive>Option 3</div>
             </li>
         </fd-menu>
 
         <fd-submenu #submenu>
             <li fd-menu-item #menuNestedItem>
-                <div fd-menu-interactive></div>
+                <div fd-menu-interactive>Option 2.1</div>
             </li>
         </fd-submenu>
     `
 })
 class TesNestedMenuItemComponent {
     @ViewChild(MenuComponent) menu: MenuComponent;
-    @ViewChild('menuItem') menuItem: MenuItemComponent;
+    @ViewChild('menuItemWithNestedMenu') menuItemWithNestedMenu: MenuItemComponent;
     @ViewChild('menuNestedItem') menuNestedItem: MenuItemComponent;
     @ViewChild(MenuInteractiveDirective) menuInteractive: MenuInteractiveDirective;
 }
@@ -160,86 +165,107 @@ class TesNestedMenuItemComponent {
 describe('MenuItemComponent nested', () => {
     let fixture: ComponentFixture<TesNestedMenuItemComponent>;
     let menu: MenuComponent;
-    let menuItem: MenuItemComponent;
-    let menuNestedItem: MenuItemComponent;
-    let menuInteractive: MenuInteractiveDirective;
+    let menuItemWithNestedMenu: MenuItemComponent;
+    let nestedMenuItem: MenuItemComponent;
+    let menuInteractiveWithNested: MenuInteractiveDirective;
 
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 declarations: [TesNestedMenuItemComponent],
-                imports: [CommonModule, PopoverModule, MenuModule]
+                imports: [MenuModule]
             }).compileComponents();
         })
     );
 
-    beforeEach(() => {
-        fixture = TestBed.createComponent(TesNestedMenuItemComponent);
-        fixture.detectChanges();
-        menu = fixture.componentInstance.menu;
-        menuItem = fixture.componentInstance.menuItem;
-        menuNestedItem = fixture.componentInstance.menuNestedItem;
-        menuInteractive = fixture.componentInstance.menuInteractive;
-    });
+    beforeEach(
+        waitForAsync(() => {
+            fixture = TestBed.createComponent(TesNestedMenuItemComponent);
+            fixture.detectChanges();
+            menu = fixture.componentInstance.menu;
+            menuItemWithNestedMenu = fixture.componentInstance.menuItemWithNestedMenu;
+            nestedMenuItem = fixture.componentInstance.menuNestedItem;
+            menuInteractiveWithNested = menuItemWithNestedMenu.menuInteractive;
+        })
+    );
 
     it('should create', () => {
         expect(menu).toBeTruthy();
-        expect(menuItem).toBeTruthy();
-        expect(menuNestedItem).toBeTruthy();
-        expect(menuInteractive).toBeTruthy();
+        expect(menuItemWithNestedMenu).toBeTruthy();
+        expect(nestedMenuItem).toBeTruthy();
+        expect(menuInteractiveWithNested).toBeTruthy();
     });
 
     it('should have menu service', () => {
-        expect(menuItem.menuService).toBeTruthy();
+        expect(menuItemWithNestedMenu.menuService).toBeTruthy();
     });
 
     it('should have submenu', () => {
-        expect(menuItem.submenu).toBeTruthy();
-        expect(menuItem.submenuVisible).toBeFalse();
+        expect(menuItemWithNestedMenu.submenu).toBeTruthy();
+        expect(menuItemWithNestedMenu.submenuVisible).toBeFalse();
     });
 
     it('should open/close submenu', fakeAsync(() => {
-        const setSelectedSpy = spyOn(menuInteractive, 'setSelected');
+        const setSelectedSpy = spyOn(menuInteractiveWithNested, 'setSelected');
 
         menu.open();
         fixture.detectChanges();
 
         tick();
 
-        menuItem.setSelected(true);
+        menuItemWithNestedMenu.setSelected(true);
 
         expect(setSelectedSpy).toHaveBeenCalledWith(true);
-        expect(menuItem.submenuVisible).toBeTrue();
+        expect(menuItemWithNestedMenu.submenuVisible).toBeTrue();
 
-        menuItem.setSelected(false);
+        menuItemWithNestedMenu.setSelected(false);
 
         expect(setSelectedSpy).toHaveBeenCalledWith(false);
-        expect(menuItem.submenuVisible).toBeFalse();
+        expect(menuItemWithNestedMenu.submenuVisible).toBeFalse();
     }));
 
     it('should open submenu on menu item hover', fakeAsync(() => {
-        const openSubmenuSpy = spyOn(menuItem, 'setSelected').and.callThrough();
+        const openSubmenuSpy = spyOn(menuItemWithNestedMenu, 'setSelected').and.callThrough();
 
         menu.open();
         fixture.detectChanges();
 
         tick();
 
-        menuInteractive.elementRef.nativeElement.dispatchEvent(new MouseEvent('mouseenter'));
+        menuInteractiveWithNested.elementRef.nativeElement.dispatchEvent(new MouseEvent('mouseenter'));
 
         tick();
 
         expect(openSubmenuSpy).toHaveBeenCalled();
-        expect(menuItem.submenuVisible).toBeTrue();
+        expect(menuItemWithNestedMenu.submenuVisible).toBeTrue();
+    }));
+
+    it('should close sibling opened submenu when mouse goes on another menu item', fakeAsync(() => {
+        menu.open();
+        fixture.detectChanges();
+        tick();
+
+        // Hover on the second option
+        menuInteractiveWithNested.elementRef.nativeElement.dispatchEvent(new MouseEvent('mouseenter'));
+        tick();
+        // Since hover on the second option submenu is shown
+        expect(menuItemWithNestedMenu.submenuVisible).toBeTrue();
+
+        // Hover moves on sibling menu item
+        menu.menuItems.first.menuInteractive.elementRef.nativeElement.dispatchEvent(new MouseEvent('mouseenter'));
+        tick();
+
+        // the second option submenu gets closed
+        expect(menuItemWithNestedMenu.submenuVisible).toBeFalse();
     }));
 
     it('should configure menu interactive', () => {
-        const setSubmenuSpy = spyOn(menuInteractive, 'setSubmenu');
-        const setDisabledSpy = spyOn(menuInteractive, 'setDisabled');
+        const setSubmenuSpy = spyOn(menuInteractiveWithNested, 'setSubmenu');
+        const setDisabledSpy = spyOn(menuInteractiveWithNested, 'setDisabled');
 
-        menuItem.ngAfterContentInit();
+        menuItemWithNestedMenu.ngAfterContentInit();
 
-        expect(setDisabledSpy).toHaveBeenCalledWith(menuItem.disabled);
-        expect(setSubmenuSpy).toHaveBeenCalledWith(true, menuItem.itemId);
+        expect(setDisabledSpy).toHaveBeenCalledWith(menuItemWithNestedMenu.disabled);
+        expect(setSubmenuSpy).toHaveBeenCalledWith(true, menuItemWithNestedMenu.itemId);
     });
 });

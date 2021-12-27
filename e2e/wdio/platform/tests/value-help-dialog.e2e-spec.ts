@@ -32,7 +32,6 @@ describe('Value help dialog test suite', () => {
         formInputField,
         goBtn,
         tableRows,
-        pageHeader,
         tableCheckboxes,
         selectedItemName,
         selectedTokens,
@@ -81,8 +80,15 @@ describe('Value help dialog test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForElDisplayed(pageHeader);
+        waitForPresent(valueHelpDialogPage.root);
+        waitForElDisplayed(valueHelpDialogPage.title);
     }, 1);
+
+    if (browserIsSafari()) {
+        // skip safari; many test runner issues here
+        console.log('skip safari');
+        return;
+    }
 
     describe('Basic Value Help Dialog examples', () => {
         it('should check default view and header', () => {
@@ -95,7 +101,7 @@ describe('Value help dialog test suite', () => {
         it('should check the basic search results', () => {
             click(openDialogBtn);
             click(formInputField(basicSearchId));
-            sendKeys(searchValues[0]);
+            setValue(formInputField(basicSearchId), searchValues[0]);
             click(goBtn);
             checkResults(tableRows, searchValues[0]);
         });
@@ -116,7 +122,7 @@ describe('Value help dialog test suite', () => {
 
             for (let i = 0; advSearchFieldCount > i; i++) {
                 click(formInputField(inputIDs[i]));
-                sendKeys(searchValues[i]);
+                setValue(formInputField(inputIDs[i]), searchValues[i]);
                 click(goBtn);
                 checkResults(searchResultsColumnsArr[i], searchValues[i]);
                 click(formInputField(inputIDs[i]));
@@ -128,7 +134,7 @@ describe('Value help dialog test suite', () => {
             click(openDialogBtn);
             clickTableCheckbox(1);
             const selectedItem = getText(selectedItemName);
-            expect(getText(selectedTokens)).toEqual(selectedItem);
+            expect(getText(selectedTokens).trim()).toEqual(selectedItem);
         });
 
         it('should check the inclusion conditional statements', () => {
@@ -144,12 +150,12 @@ describe('Value help dialog test suite', () => {
                     click(dropdownOptions, i);
                     click(conditionsInputField, 2);
                     sendKeys(valueOne);
-                    expect(getText(selectedTokens)).toEqual(conditionsValues[i]);
+                    expect(getText(selectedTokens).trim()).toEqual(conditionsValues[i]);
                     click(conditionsButton);
                     continue;
                 }
                 click(dropdownOptions, i);
-                expect(getText(selectedTokens)).toEqual(conditionsValues[i]);
+                expect(getText(selectedTokens).trim()).toEqual(conditionsValues[i]);
                 click(conditionsButton);
             }
         });
@@ -169,7 +175,7 @@ describe('Value help dialog test suite', () => {
             const columnCount = getElementArrayLength(tableColumn);
 
             for (let i = 0; columnCount - 1 > i; i++) {
-                expect(getText(advSearchLabels, i)).toContain(getText(tableColumn, i + 1));
+                expect(getText(advSearchLabels, i).trim()).toContain(getText(tableColumn, i + 1).trim());
             }
         });
 
@@ -204,17 +210,17 @@ describe('Value help dialog test suite', () => {
             const optionsCount = getElementArrayLength(dropdownOptions);
             for (let i = 0; optionsCount > i; i++) {
                 if (i === 2) {
-                    expect(getText(dropdownOptions, i)).toEqual(customLabels[i]);
+                    expect(getText(dropdownOptions, i).trim()).toEqual(customLabels[i]);
                     click(dropdownOptions, i);
                     click(conditionsInputField, 2);
                     sendKeys(valueOne);
-                    expect(getText(selectedTokens)).toEqual(conditionsValues[i]);
+                    expect(getText(selectedTokens).trim()).toEqual(conditionsValues[i]);
                     click(conditionsButton);
                     continue;
                 }
-                expect(getText(dropdownOptions, i)).toEqual(customLabels[i]);
+                expect(getText(dropdownOptions, i).trim()).toEqual(customLabels[i]);
                 click(dropdownOptions, i);
-                expect(getText(selectedTokens)).toEqual(conditionsValues[i]);
+                expect(getText(selectedTokens).trim()).toEqual(conditionsValues[i]);
                 click(conditionsButton);
             }
         });
@@ -225,9 +231,9 @@ describe('Value help dialog test suite', () => {
             scrollIntoView(openDialogBtn, 2);
             click(openDialogBtn, 2);
             clickTableCheckbox(1);
-            const selectedItem = getText(selectedItemName);
-            const selectedItemId = getText(selectedItemID);
-            expect(getText(selectedTokens)).toEqual(selectedItem + ` (Id: ${selectedItemId})`);
+            const selectedItem = getText(selectedItemName).trim();
+            const selectedItemId = getText(selectedItemID).trim();
+            expect(getText(selectedTokens).trim()).toEqual(selectedItem + ` (Id: ${selectedItemId})`);
         });
     });
 
@@ -236,12 +242,12 @@ describe('Value help dialog test suite', () => {
             scrollIntoView(miniOpenDialogBtn);
             click(miniOpenDialogBtn);
             click(productNameColumn, 1);
-            const selectedItem = getText(selectedItemName);
-            expect(getText(selectedTokens)).toEqual(selectedItem);
+            const selectedItem = getText(selectedItemName).trim();
+            expect(getText(selectedTokens).trim()).toEqual(selectedItem);
             click(productNameColumn, 4);
-            const newSelectedItem = getText(selectedItemName);
+            const newSelectedItem = getText(selectedItemName).trim();
             expect(getElementArrayLength(selectedTokens)).toBe(1);
-            expect(getText(selectedTokens)).toEqual(newSelectedItem);
+            expect(getText(selectedTokens).trim()).toEqual(newSelectedItem);
         });
 
         it('should check multi selection results', () => {
@@ -253,7 +259,7 @@ describe('Value help dialog test suite', () => {
 
             const tokensCount = getElementArrayLength(selectedTokens);
             for (let i = 0; tokensCount > i; i++) {
-                expect(getText(selectedItemName, i)).toEqual(getText(selectedTokens, i));
+                expect(getText(selectedItemName, i).trim()).toEqual(getText(selectedTokens, i).trim());
             }
         });
 
@@ -269,7 +275,7 @@ describe('Value help dialog test suite', () => {
         it('should check selection from mini dialog menu', () => {
             scrollIntoView(menuDialogBtn);
             click(menuDialogBtn);
-            const itemName = getText(menuItemNames);
+            const itemName = getText(menuItemNames).trim();
             click(menuCheckboxes);
             click(menuDialogBtn);
             expect(getText(inputToken)).toEqual(itemName);
@@ -281,11 +287,11 @@ describe('Value help dialog test suite', () => {
             scrollIntoView(openDialogBtn, 3);
             click(openDialogBtn, 3);
             clickTableCheckbox(1);
-            const selectedItem = getText(selectedItemName);
-            expect(getText(selectedTokens)).toEqual(selectedItem);
+            const selectedItem = getText(selectedItemName).trim();
+            expect(getText(selectedTokens).trim()).toEqual(selectedItem);
             click(footerBtns, 1);
             waitForPresent(inputToken);
-            expect(getText(inputToken)).toEqual(selectedItem.toUpperCase());
+            expect(getText(inputToken).trim()).toEqual(selectedItem.toUpperCase());
         });
 
         it('should check search field', () => {

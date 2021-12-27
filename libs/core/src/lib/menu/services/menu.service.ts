@@ -57,8 +57,11 @@ export class MenuService {
         this.focusedNode.item.focus();
     }
 
-    /** Sets state of a given menu item
-     * @param isActive - Whether should be set as active or inactive*/
+    /**
+     * Sets state of a given menu item
+     * @param isActive - Whether should be set as active or inactive
+     * @param menuItem `MenuItemComponent` that should be set as active or inactive
+     */
     setActive(isActive: boolean, menuItem: MenuItemComponent): void {
         if (isActive && menuItem.disabled) {
             return;
@@ -69,6 +72,15 @@ export class MenuService {
         } else {
             this._removeFromActivePath(menuItem);
         }
+        this._emitActivePath();
+    }
+
+    /**
+     * Close active sibling submenu if any
+     * @param menuItem to look for active siblings
+     */
+    setInactiveSiblingMenuItem(menuItem: MenuItemComponent): void {
+        this._removeActiveSibling(menuItem);
         this._emitActivePath();
     }
 

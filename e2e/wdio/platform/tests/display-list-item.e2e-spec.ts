@@ -1,5 +1,12 @@
 import { DisplayListItemPo } from '../pages/display-list-item.po';
-import { click, getCurrentUrl, getElementClass, refreshPage, waitForPresent } from '../../driver/wdio';
+import {
+    click,
+    getCurrentUrl,
+    getElementClass,
+    refreshPage,
+    waitForElDisplayed,
+    waitForPresent
+} from '../../driver/wdio';
 import { checkElArrIsClickable, checkElementText, checkElementTextValue } from '../../helper/assertion-helper';
 import { navTitlesArr, navUrl } from '../fixtures/appData/display-list-item-contents';
 
@@ -21,7 +28,8 @@ describe('Display List Item test suite:', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(displayLinks);
+        waitForPresent(displayListPage.root);
+        waitForElDisplayed(displayListPage.title);
     }, 1);
 
     describe('Display List Item - cozy and comfy examples:', () => {

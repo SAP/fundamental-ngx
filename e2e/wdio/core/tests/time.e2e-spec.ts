@@ -15,7 +15,9 @@ import {
     scrollIntoView,
     checkElementScreenshot,
     getElementArrayLength,
-    browserIsFirefox
+    browserIsFirefox,
+    waitForPresent,
+    waitForElDisplayed
 } from '../../driver/wdio';
 import { sections } from '../fixtures/appData/time-contents';
 
@@ -56,6 +58,8 @@ describe('Time component test', () => {
 
     afterEach(() => {
         refreshPage();
+        waitForPresent(timePage.root);
+        waitForElDisplayed(timePage.title);
     }, 2);
 
     it('Should check that change time by arrows works correct', () => {
@@ -74,22 +78,22 @@ describe('Time component test', () => {
 
     it('Should check if the button Set Hours to 11 works correctly', () => {
         click(set11HoursBtn);
-        expect(getText(programmaticallyExample + currentHour)).toEqual('11', 'Current hour is not 11');
+        expect(getText(programmaticallyExample + currentHour).trim()).toEqual('11', 'Current hour is not 11');
     });
 
     it('should check that Enabled time to equal chosen time', () => {
-        const chosenHourValue = getText(formExample1Hour);
+        const chosenHourValue = getText(formExample1Hour).trim();
         click(formExample1Hour);
 
         click(formExample + minutesColumn);
-        const chosenMinuteValue = getText(formExample2Minute);
+        const chosenMinuteValue = getText(formExample2Minute).trim();
         click(formExample2Minute);
 
         click(formExample + secondsColumn);
-        const chosenSecondValue = getText(formExample3Second);
+        const chosenSecondValue = getText(formExample3Second).trim();
         click(formExample3Second);
 
-        expect(getText(enableTimeRow)).toEqual(
+        expect(getText(enableTimeRow).trim()).toEqual(
             chosenHourValue + 'h ' + chosenMinuteValue + 'm ' + chosenSecondValue + 's',
             'Current value is not equal chosen value'
         );

@@ -19,6 +19,7 @@ export class DatePickerPo extends CoreBaseComponentPo {
     months = '.fd-calendar__months';
     calendarRow = '.fd-calendar__row';
     inputGroup = '.fd-input-group';
+    inputGroupInputElement = '.fd-input-group .fd-input';
     calendarBody = '.fd-calendar__group:nth-child(2) ';
     calendarInput = '.fd-input';
     calendarIcon = '.fd-button';
@@ -44,8 +45,8 @@ export class DatePickerPo extends CoreBaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForPresent(this.title);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
     getCurrentDayIndex = (): number => {

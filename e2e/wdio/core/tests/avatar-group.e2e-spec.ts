@@ -7,6 +7,7 @@ import {
     refreshPage,
     scrollIntoView,
     sendKeys,
+    waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 import { checkElArrIsClickable } from '../../helper/assertion-helper';
@@ -29,7 +30,8 @@ describe('Avatar test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(avatarGroupPage.title);
+        waitForPresent(avatarGroupPage.root);
+        waitForElDisplayed(avatarGroupPage.title);
     }, 1);
 
     it('should have details popup on click', () => {

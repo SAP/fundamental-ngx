@@ -1,7 +1,16 @@
-import { Component, ElementRef, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+    Component,
+    ElementRef,
+    QueryList,
+    TemplateRef,
+    ViewChild,
+    ViewChildren,
+    ViewEncapsulation
+} from '@angular/core';
 import { DialogService } from '@fundamental-ngx/core/dialog';
-import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
+import { WizardStepComponent, WizardStepStatus } from '@fundamental-ngx/core/wizard';
 import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
+import { WizardService } from 'libs/core/src/lib/wizard/wizard.service';
 
 @Component({
     selector: 'fd-wizard-branching-example',
@@ -10,7 +19,8 @@ import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
     encapsulation: ViewEncapsulation.None,
     host: {
         class: 'fd-wizard-example'
-    }
+    },
+    providers: [WizardService]
 })
 export class WizardBranchingExampleComponent {
     /**
@@ -25,6 +35,10 @@ export class WizardBranchingExampleComponent {
 
     @ViewChild('creditButton')
     creditButton: RadioButtonComponent;
+
+    /** @hidden */
+    @ViewChildren(WizardStepComponent)
+    steps: QueryList<WizardStepComponent>;
 
     /**
      * documentation related property
@@ -42,7 +56,7 @@ export class WizardBranchingExampleComponent {
 
     init = false;
 
-    constructor(private _dialogService: DialogService) {}
+    constructor(private _dialogService: DialogService, private _wizardService: WizardService) {}
 
     statusChanged(stepNumber: number, event: WizardStepStatus): void {
         if (event === 'current') {
@@ -111,5 +125,11 @@ export class WizardBranchingExampleComponent {
         event.stopPropagation();
         this.fullscreen = false;
         this.overlay.nativeElement.style.width = '0%';
+    }
+
+    // Handle focus on key press
+    /** @hidden */
+    handleFocus(event: KeyboardEvent, index: number) {
+        this._wizardService.progressBarKeyHandler(event, this.steps, index);
     }
 }

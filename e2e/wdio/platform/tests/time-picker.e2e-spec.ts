@@ -46,7 +46,8 @@ describe('Time picker suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(timePickerInput);
+        waitForPresent(timePickerPage.root);
+        waitForElDisplayed(timePickerPage.title);
     }, 1);
 
     it('Verify on click on the time picker button', () => {
@@ -205,15 +206,15 @@ describe('Time picker suite', () => {
     });
 
     function selectHoursAndMinutes(hour: number = 1, minute: number = 1, day_time: string = ' PM '): void {
-        while ($(selectedValue).getText() !== ` ${hour.toString()} `) {
+        while (getText(selectedValue).trim() !== ` ${hour.toString()} `) {
             click(navigationDownArrowButton);
         }
         click(timeColumn, 1);
-        while ($$(selectedValue)[1].getText() !== ` ${minute.toString()} `) {
+        while (getText(selectedValue, 1).trim() !== ` ${minute.toString()} `) {
             click(navigationDownArrowButton);
         }
         click(timeColumn, 2);
-        while ($$(selectedValue)[2].getText() !== day_time) {
+        while (getText(selectedValue, 2).trim() !== day_time) {
             click(navigationDownArrowButton);
         }
     }
@@ -222,21 +223,22 @@ describe('Time picker suite', () => {
         click(activeTimePickerButton, buttonIndex);
         const arr = [];
         for (let i = 0; i < getElementArrayLength(hoursColumn + columnItem); i++) {
+            // eslint-disable-next-line
             arr.push(parseInt(getText(hoursColumn + selectedTimeItem)));
             click(navigationDownArrowButton);
         }
 
-        let max = arr.reduce(function (a, b) {
+        const max = arr.reduce(function (a, b) {
             return Math.max(a, b);
         });
 
-        if (format == '12h') {
+        if (format === '12h') {
             expect(max).not.toBeGreaterThan(12);
             click(thirdColumn);
-            expect(getText(thirdColumn + columnItem)).toBe('AM');
-            expect(getText(thirdColumn + columnItem, 1)).toBe('PM');
+            expect(getText(thirdColumn + columnItem).trim()).toBe('AM');
+            expect(getText(thirdColumn + columnItem, 1).trim()).toBe('PM');
         }
-        if (format == '24h') {
+        if (format === '24h') {
             expect(max).toBe(23);
         }
     }

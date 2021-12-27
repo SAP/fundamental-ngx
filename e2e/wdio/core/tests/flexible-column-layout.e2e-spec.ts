@@ -8,7 +8,8 @@ import {
     pause,
     refreshPage,
     waitForElDisplayed,
-    waitForNotDisplayed
+    waitForNotDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 
 describe('Flexible column layout component test', () => {
@@ -34,6 +35,7 @@ describe('Flexible column layout component test', () => {
 
     beforeEach(() => {
         refreshPage();
+        waitForPresent(flexibleColumnLayoutPage.root);
         waitForElDisplayed(flexibleColumnLayoutPage.title);
     }, 2);
 

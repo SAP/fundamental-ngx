@@ -12,7 +12,8 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { compareObjects, KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
+import equal from 'fast-deep-equal';
 import { SPACE } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs';
 
@@ -214,19 +215,14 @@ export class ExperimentalCheckboxComponent implements ControlValueAccessor, OnDe
 
     /** @hidden Based on current control value sets new control state. */
     private _setState(): void {
-        if (this._compare(this.checkboxValue, this.values.trueValue)) {
+        if (equal(this.checkboxValue, this.values.trueValue)) {
             this.checkboxState = 'checked';
-        } else if (this._compare(this.checkboxValue, this.values.falseValue)) {
+        } else if (equal(this.checkboxValue, this.values.falseValue)) {
             this.checkboxState = 'unchecked';
         } else if (!this.checkboxValue) {
             this.checkboxState = 'unchecked';
         }
         this._previousState = this.checkboxState;
-    }
-
-    /** @hidden Compares values */
-    private _compare(val1: any, val2: any): boolean {
-        return typeof val1 === 'object' ? compareObjects(val1, val2) : val1 === val2;
     }
 
     /** Method to trigger change detection in component */

@@ -5,6 +5,7 @@ import {
     getText,
     isElementClickable,
     refreshPage,
+    waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 
@@ -19,7 +20,8 @@ describe('dynamic side content test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(link);
+        waitForPresent(facetsPage.root);
+        waitForElDisplayed(facetsPage.title);
     }, 1);
 
     it('Should check raiting indicator', () => {

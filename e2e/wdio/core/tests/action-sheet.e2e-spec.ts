@@ -10,7 +10,8 @@ import {
     saveElementScreenshot,
     scrollIntoView,
     waitForElDisplayed,
-    waitForNotDisplayed
+    waitForNotDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 import { checkElArrIsClickable } from '../../helper/assertion-helper';
 import { alertMessages, compactValue } from '../fixtures/appData/action-sheet-content';
@@ -26,7 +27,8 @@ describe('Action sheet test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForElDisplayed(actionSheetMenuButton);
+        waitForPresent(actionSheetPage.root);
+        waitForElDisplayed(actionSheetPage.title);
     }, 1);
 
     it('should check action sheet items are clickable', () => {

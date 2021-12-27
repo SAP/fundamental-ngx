@@ -12,7 +12,8 @@ import {
     getElementClass,
     refreshPage,
     waitForPresent,
-    getElementSize
+    getElementSize,
+    waitForElDisplayed
 } from '../../driver/wdio';
 import { testText, fdTypeOptions, iconOptions } from '../fixtures/appData/button-contents';
 import { buttonPlaygroundTag } from '../fixtures/testData/button-tags';
@@ -43,7 +44,8 @@ describe('Button test suite:', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(typeButtons);
+        waitForPresent(buttonPage.root);
+        waitForElDisplayed(buttonPage.title);
     }, 1);
 
     describe('Verify all buttons are clickable', () => {
@@ -106,7 +108,7 @@ describe('Button test suite:', () => {
         it('verify changing text in label', () => {
             scrollIntoView(inputLabel);
             setValue(inputLabel, 'test');
-            expect(getText(playgroundButtonText)).toEqual(testText);
+            expect(getText(playgroundButtonText).trim()).toEqual(testText);
         });
 
         it('verify type of dropdown menu', () => {

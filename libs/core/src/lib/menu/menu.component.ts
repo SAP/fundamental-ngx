@@ -150,6 +150,11 @@ export class MenuComponent
         /** keep isOpen up to date */
         this.isOpenChange.subscribe((isOpen) => {
             this.isOpen = isOpen;
+            if (!isOpen) {
+                // when popover got closed by its own mechanism (e.x. click outside)
+                // we need to clean up menu as well
+                this._cleanUpMenuAfterClose();
+            }
             this._changeDetectorRef.markForCheck();
         });
     }
@@ -213,7 +218,7 @@ export class MenuComponent
         if (!this.mobile) {
             this._popoverService.close();
         }
-        this._menuService.resetMenuState();
+        this._cleanUpMenuAfterClose();
         this._focusTrigger();
         this._changeDetectorRef.markForCheck();
     }
@@ -226,6 +231,11 @@ export class MenuComponent
     /** Method called to refresh position of opened popover */
     refreshPosition(): void {
         this._popoverService.refreshPosition();
+    }
+
+    /** @hidden */
+    private _cleanUpMenuAfterClose(): void {
+        this._menuService.resetMenuState();
     }
 
     /** @hidden Select and instantiate menu view mode */

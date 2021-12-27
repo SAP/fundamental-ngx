@@ -10,7 +10,8 @@ import {
     refreshPage,
     scrollIntoView,
     waitForElDisplayed,
-    browserIsFirefox
+    browserIsFirefox,
+    waitForPresent
 } from '../../driver/wdio';
 
 import { blockExamples } from '../fixtures/appData/resizable-card-layout.contents';
@@ -44,6 +45,7 @@ describe('Resizable card layout component:', () => {
 
     beforeEach(() => {
         refreshPage();
+        waitForPresent(resizableCardLayoutPage.root);
         waitForElDisplayed(resizableCardLayoutPage.title);
     }, 2);
 

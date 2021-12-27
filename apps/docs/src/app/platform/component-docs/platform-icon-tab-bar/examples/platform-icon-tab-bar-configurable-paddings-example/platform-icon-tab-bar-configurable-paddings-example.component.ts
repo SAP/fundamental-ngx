@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { cloneDeep } from '@fundamental-ngx/core';
+import { cloneDeep } from 'lodash-es';
 import { textTypeConfig } from '../config-for-examples/text-type.config';
 
 @Component({

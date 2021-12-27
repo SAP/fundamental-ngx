@@ -30,16 +30,20 @@
                 [compact]="compact"
                 [disabled]="disabled"
                 [placeholder]="placeholder"
-                [attr.aria-label]="dateInputLabel"
                 [attr.id]="inputId"
+                aria-haspopup="grid"
+                aria-autocomplete="none"
+                [attr.aria-expanded]="isOpen"
+                [attr.aria-label]="_dateInputArialLabel"
                 [attr.aria-required]="required"
+                [attr.aria-describedby]="_formValueStateMessageId"
                 [(ngModel)]="_inputFieldDate"
                 (ngModelChange)="handleInputChange($event)"
                 (focus)="onTouched()"
             />
         </fd-input-group>
     </fd-popover-control>
-    <fd-popover-body style="display: block" [attr.aria-expanded]="isOpen" [attr.aria-hidden]="!isOpen">
+    <fd-popover-body [attr.aria-expanded]="isOpen" [attr.aria-hidden]="!isOpen">
         <fd-form-message [embedded]="true" *ngIf="_message" [type]="state">
             {{ _message }}
         </fd-form-message>
@@ -68,3 +72,15 @@
         ></fd-calendar>
     </fd-popover-body>
 </fd-popover>
+
+<div style="display: none" aria-hidden="true">
+    <div [attr.id]="_formValueStateMessageId" aria-atomic="true" aria-live="assertive">
+        <ng-container [ngSwitch]="state">
+            <ng-container *ngSwitchCase="'success'">{{ valueStateSuccessMessage }}</ng-container>
+            <ng-container *ngSwitchCase="'information'">{{ valueStateInformationMessage }}</ng-container>
+            <ng-container *ngSwitchCase="'warning'">{{ valueStateWarningMessage }}</ng-container>
+            <ng-container *ngSwitchCase="'error'">{{ valueStateErrorMessage }}</ng-container>
+        </ng-container>
+        {{ _message }}
+    </div>
+</div>

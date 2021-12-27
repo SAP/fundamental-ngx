@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { iconTypeConfig, longIconTypeConfig } from '../config-for-examples/icon-type-config';
-import { cloneDeep } from '@fundamental-ngx/core/utils';
+import { cloneDeep } from 'lodash-es';
 import { TabConfig } from '../../platform-icon-tab-bar-docs.component';
 
 @Component({

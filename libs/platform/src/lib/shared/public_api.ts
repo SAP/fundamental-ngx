@@ -29,4 +29,3 @@ export * from './pipes/pipe.module';
 export * from './testing/event-objects';
 
 export * from './utils/lang';
-export * from './utils/object';

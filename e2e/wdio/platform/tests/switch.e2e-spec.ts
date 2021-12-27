@@ -8,7 +8,6 @@ import {
     semantic_switch_alternative_text
 } from '../fixtures/appData/swich-page-content';
 import {
-    browserIsIE,
     browserIsIEorSafari,
     browserIsSafari,
     click,
@@ -60,6 +59,7 @@ describe('Verify Switch component', () => {
 
     afterEach(() => {
         refreshPage();
+        waitForPresent(switchPage.root);
         waitForElDisplayed(switchPage.title);
     }, 1);
 
@@ -90,8 +90,7 @@ describe('Verify Switch component', () => {
         it('should default change state on hover', () => {
             const handelColorBefore = getCSSPropertyByName(defaultSwitchHandel, 'background-color');
             // capture handel color on Mouse hover
-            if (browserIsIEorSafari()) {
-                console.log('Skip for Safari and IE');
+            if (browserIsSafari()) {
                 return;
             }
 
@@ -103,9 +102,8 @@ describe('Verify Switch component', () => {
 
         it('should compact default change state on hover', () => {
             const handelColorBefore = getCSSPropertyByName(defaultCompactSwitchHandel, 'background-color');
-            // capture handel color on Mouse hover
             if (browserIsIEorSafari()) {
-                console.log('Skip for Safari and IE');
+                // mouse hover doesn't work for safari
                 return;
             }
             mouseHoverElement(defaultCompactSwitchHandel);
@@ -136,8 +134,7 @@ describe('Verify Switch component', () => {
 
         it('should not be able to interact with disabled form switch', () => {
             // TODO: Investigate problem with disabled switch in Safari
-            if (browserIsIEorSafari()) {
-                console.log('Skip for Safari and IE');
+            if (browserIsSafari()) {
                 return;
             }
             waitForPresent(formDisabledSwitchInput);
@@ -151,7 +148,6 @@ describe('Verify Switch component', () => {
             const handelColorBefore = getCSSPropertyByName(disabledSwitchHandel, 'background-color');
             // capture handel color on Mouse hover
             if (browserIsSafari()) {
-                console.log('Skip for Safari');
                 return;
             }
             scrollIntoView(disabledSwitchHandel);
@@ -165,7 +161,6 @@ describe('Verify Switch component', () => {
             const handelColorBefore = getCSSPropertyByName(formDisabledSwitchHandel, 'background-color');
             // capture handel color on Mouse hover
             if (browserIsSafari()) {
-                console.log('Skip for Safari');
                 return;
             }
             scrollIntoView(formDisabledSwitchHandel);
@@ -205,11 +200,6 @@ describe('Verify Switch component', () => {
 
     describe('has semantic switch and', () => {
         it('should change something from positive to negative', () => {
-            if (browserIsIE()) {
-                console.log('Skip for IE');
-                return;
-            }
-
             // capture before state
             const isCheckedBefore = getAttributeByName(semanticSwitchInput, 'aria-checked');
             const onIconStateBefore = getCSSPropertyByName(semanticSwitchIconOn, 'visibility');
@@ -268,8 +258,7 @@ describe('Verify Switch component', () => {
         it('should semantic compact change state on hover', () => {
             const handelColorBefore = getCSSPropertyByName(semanticCompactSwitchHandel, 'background-color');
             // capture handel color on Mouse hover
-            if (browserIsIEorSafari()) {
-                console.log('Skip for Safari and IE');
+            if (browserIsSafari()) {
                 return;
             }
             scrollIntoView(semanticCompactSwitchHandel);

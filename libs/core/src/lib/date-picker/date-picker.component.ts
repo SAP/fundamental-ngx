@@ -36,6 +36,8 @@ import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
 
 import { createMissingDateImplementationError } from './errors';
 
+let datePickerCounter = 0;
+
 /**
  * The datetime picker component is an opinionated composition of the fd-popover and
  * fd-calendar components to accomplish the UI pattern for picking a date.
@@ -110,7 +112,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
         this._popoverFormMessage.triggers = triggers;
     }
     /** @hidden */
-    _messageTriggers: string[] = ['mouseenter', 'mouseleave'];
+    _messageTriggers: string[] = ['focusin', 'focusout'];
 
     /** The currently selected CalendarDay model */
     @Input()
@@ -139,9 +141,37 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
     @Input()
     dateInputLabel = 'Date input';
 
+    /** Aria label for the datepicker input. */
+    @Input()
+    dateRangeInputLabel = 'Date range input';
+
     /** Aria label for the button to show/hide the calendar. */
     @Input()
-    displayCalendarToggleLabel = 'Display calendar toggle';
+    displayCalendarToggleLabel = 'Open picker';
+
+    /**
+     * Value state "success" aria message.
+     */
+    @Input()
+    valueStateSuccessMessage = 'Value state Success';
+
+    /**
+     * Value state "information" aria message.
+     */
+    @Input()
+    valueStateInformationMessage = 'Value state Information';
+
+    /**
+     * Value state "warning" aria message.
+     */
+    @Input()
+    valueStateWarningMessage = 'Value state Warning';
+
+    /**
+     * Value state "error" aria message.
+     */
+    @Input()
+    valueStateErrorMessage = 'Value state Error';
 
     /** Whether a null input is considered valid. */
     @Input()
@@ -277,6 +307,9 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
     _isInvalidDateInput = false;
 
     /** @hidden */
+    readonly _formValueStateMessageId = `fd-date-picker-form-message-${datePickerCounter++}`;
+
+    /** @hidden */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
@@ -310,8 +343,16 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
     onTouched: any = () => {};
 
     /** @hidden */
-    get rangeDelimiter(): string {
+    get _rangeDelimiter(): string {
         return this._dateTimeFormats.rangeDelimiter;
+    }
+
+    /**
+     * Date input aria label based on type
+     * @hidden
+     */
+    get _dateInputArialLabel(): string {
+        return this.type === 'range' ? this.dateRangeInputLabel : this.dateInputLabel;
     }
 
     /** @hidden */
@@ -578,7 +619,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
                 this.selectedRangeDateChange.emit(this.selectedRangeDate);
                 return;
             }
-            const [startDateStr, endDateStr] = dateStr.split(this.rangeDelimiter);
+            const [startDateStr, endDateStr] = dateStr.split(this._rangeDelimiter);
             const startDate = this._dateTimeAdapter.parse(startDateStr, this._dateTimeFormats.parse.dateInput);
             const endDate = this._dateTimeAdapter.parse(endDateStr, this._dateTimeFormats.parse.dateInput);
 
@@ -695,7 +736,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
     private _formatDateRange(dateRange: DateRange<D>): string {
         const startDate = this._formatDate(dateRange.start);
         const endDate = this._formatDate(dateRange.end);
-        return startDate + this.rangeDelimiter + endDate;
+        return startDate + this._rangeDelimiter + endDate;
     }
 
     /** @hidden */

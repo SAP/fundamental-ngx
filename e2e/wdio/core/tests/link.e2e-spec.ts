@@ -4,7 +4,9 @@ import {
     getElementArrayLength,
     isElementClickable,
     isElementDisplayed,
-    refreshPage
+    refreshPage,
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 
 describe('Link test suite', () => {
@@ -17,6 +19,8 @@ describe('Link test suite', () => {
 
     afterEach(() => {
         refreshPage();
+        waitForPresent(linkPage.root);
+        waitForElDisplayed(linkPage.title);
     }, 1);
 
     describe('check links', () => {
