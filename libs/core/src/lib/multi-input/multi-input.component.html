@@ -141,7 +141,7 @@
         <ng-container *ngIf="itemTemplate">
             <ng-container
                 [ngTemplateOutlet]="itemTemplate"
-                [ngTemplateOutletContext]="{ $implicit: option }"
+                [ngTemplateOutletContext]="{ $implicit: option.item }"
             ></ng-container>
         </ng-container>
     </ng-template>

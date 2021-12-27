@@ -291,10 +291,10 @@ export class MultiInputComponent
     tokenizer: TokenizerComponent;
 
     /** @hidden */
-    readonly _searchTermCtrl = new FormControl('');
+    readonly optionItems$ = new BehaviorSubject<Map<OptionItem['value'], OptionItem>>(new Map());
 
     /** @hidden */
-    readonly optionItems$ = new BehaviorSubject<OptionItem[]>([]);
+    readonly _searchTermCtrl = new FormControl('');
 
     /** @hidden */
     readonly _selectionModel = new SelectionModel<any>(true);
@@ -302,7 +302,7 @@ export class MultiInputComponent
     /** @hidden */
     readonly viewModel$: Observable<ViewModel> = this._getViewModel();
 
-    /**  @hidden */
+    /** @hidden */
     _dir: string;
 
     /** @hidden */
@@ -363,7 +363,8 @@ export class MultiInputComponent
         this.buildComponentCssClass();
 
         if (changes.dropdownValues || changes.searchTerm || changes.valueFn || changes.displayFn) {
-            this.optionItems$.next((this.dropdownValues ?? []).map((item) => this._getOptionItem(item)));
+            const optionItems = (this.dropdownValues ?? []).map((item) => this._getOptionItem(item));
+            this.optionItems$.next(new Map(optionItems.map((o) => [o.value, o])));
             this._changeDetRef.markForCheck();
         }
 
@@ -495,6 +496,8 @@ export class MultiInputComponent
             this._selectionModel.deselect(value);
         }
 
+        this._removeValuesWithoutOptions();
+
         // Handle popover placement update
         if (this._shouldPopoverBeUpdated(previousLength, this._selectionModel.selected.length)) {
             this.popoverRef.refreshPosition();
@@ -561,6 +564,7 @@ export class MultiInputComponent
             this._searchTermCtrl.setValue('');
             this.open = false;
         }
+        this._removeValuesWithoutOptions();
     }
 
     /**
@@ -579,6 +583,7 @@ export class MultiInputComponent
         this._propagateChange(true);
         this.openChangeHandle(false);
         this._resetSearchTerm();
+        this._removeValuesWithoutOptions();
     }
 
     /** @hidden */
@@ -606,7 +611,8 @@ export class MultiInputComponent
         const searchLower = searchTerm.toLocaleLowerCase();
         return contentArray.filter((item) => {
             if (item) {
-                const term = this.displayFn(item).toLocaleLowerCase();
+                const displayedValue = this.displayFn(item);
+                const term = typeof displayedValue === 'string' ? displayedValue.toLocaleLowerCase() : '';
 
                 return this.includes ? term.includes(searchLower) : term.startsWith(searchLower);
             }
@@ -672,6 +678,18 @@ export class MultiInputComponent
         );
     }
 
+    /**
+     * @hidden
+     * Removes values if corresponding option is not found
+     */
+    private _removeValuesWithoutOptions() {
+        this._selectionModel.selected.forEach((value) => {
+            if (!this.optionItems$.value.has(value)) {
+                this._selectionModel.deselect(value);
+            }
+        });
+    }
+
     /** @hidden */
     private _resetSearchTerm(): void {
         this._searchTermCtrl.setValue('');
@@ -691,7 +709,7 @@ export class MultiInputComponent
     private _getViewModel(): Observable<ViewModel> {
         return combineLatest([
             this._searchTermCtrl.valueChanges.pipe(startWith(this._searchTermCtrl.value)),
-            this.optionItems$,
+            this.optionItems$.pipe(map((itemsMap) => [...itemsMap.values()])),
             this._selectionModel.changed.pipe(startWith(undefined))
         ]).pipe(
             map(([, optionItems]) => {

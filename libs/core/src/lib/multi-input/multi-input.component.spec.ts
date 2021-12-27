@@ -237,4 +237,21 @@ describe('MultiInputComponent', () => {
         expect(vm.displayedOptions.length).toEqual(1);
         expect(component.selected).toEqual(['foo']);
     });
+
+    it('on selection should remove values, that are not represented as options', async () => {
+        updateComponentInput('dropdownValues', ['foo', 'baz', 'bar']);
+        updateComponentInput('selected', ['foo1']);
+
+        const vm1 = await component.viewModel$.pipe(first()).toPromise();
+        expect(vm1.displayedOptions.length).toEqual(3);
+        expect(vm1.selectedOptions.length).toEqual(0);
+        expect(component.selected).toEqual(['foo1']);
+
+        component._handleSelect(true, component.dropdownValues[1]);
+
+        const vm2 = await component.viewModel$.pipe(first()).toPromise();
+        expect(vm2.displayedOptions.length).toEqual(3);
+        expect(vm2.selectedOptions.length).toEqual(1);
+        expect(component.selected).toEqual(['baz']);
+    });
 });
