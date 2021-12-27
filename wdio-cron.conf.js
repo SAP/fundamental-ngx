@@ -119,7 +119,7 @@ exports.config = {
     //
     specs: ['./e2e/wdio/**/*.e2e-spec.ts'],
     // Patterns to exclude.
-    exclude: ['./e2e/wdio/core/**/splitter.e2e-spec.ts'],
+    exclude: ['./e2e/wdio/core/**/splitter.e2e-spec.ts', './e2e/wdio/core/**/wizard.e2e-spec.ts'],
     suites: {
         platformA: [
             './e2e/wdio/platform/**/action-bar.e2e-spec.ts',
