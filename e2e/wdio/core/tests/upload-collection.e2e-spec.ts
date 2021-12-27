@@ -12,7 +12,7 @@ import {
     scrollIntoView,
     setValue,
     uploadFile,
-    waitForElDisplayed
+    waitForElDisplayed, waitForPresent
 } from '../../driver/wdio';
 import {
     acceptAlertText,
@@ -49,6 +49,7 @@ describe('File uploader component test', () => {
 
     beforeEach(() => {
         refreshPage();
+        waitForPresent(uploadCollectionPage.root);
         waitForElDisplayed(uploadCollectionPage.title);
     }, 2);
 
@@ -104,7 +105,7 @@ describe('File uploader component test', () => {
             click(okButton);
             expect(getAlertText()).toBe(acceptAlertText);
             acceptAlert();
-            expect(getText(uploadCollectionCustomExample + link, 2)).toBe(testText + formatArr[2]);
+            expect(getText(uploadCollectionCustomExample + link, 2).trim()).toBe(testText + formatArr[2]);
         });
     });
 
@@ -126,7 +127,7 @@ describe('File uploader component test', () => {
             uploadFile(fileUploaderInputFile, imagePath);
             const afterUploadItems = getElementArrayLength(uploadCollectionComplexExample + item);
             expect(afterUploadItems).toEqual(4);
-            expect(getText(uploadCollectionComplexExample + link, 3)).toBe(imageText);
+            expect(getText(uploadCollectionComplexExample + link, 3).trim()).toBe(imageText);
         });
 
         it('should check if file download button is active', () => {
@@ -168,7 +169,7 @@ describe('File uploader component test', () => {
             click(okButton);
             expect(getAlertText()).toBe(acceptAlertText);
             acceptAlert();
-            expect(getText(example + link, i)).toBe(testText + formatArr[i]);
+            expect(getText(example + link, i).trim()).toBe(testText + formatArr[i]);
         }
     }
 
