@@ -242,7 +242,11 @@ describe('calendar test suite', () => {
 
         it('should check ability to mark next week', () => {
             click(specialDaysCalendar + calendarOptions, 1);
-            const tomorrowsDayIndex = getCurrentDayIndex(specialDaysCalendar) + 1;
+            let tomorrowsDayIndex = getCurrentDayIndex(specialDaysCalendar) + 1;
+            if (tomorrowsDayIndex + 7 > getElementArrayLength(specialDaysCalendar + calendarItem)) {
+                click(specialDaysCalendar + rightArrowBtn);
+                tomorrowsDayIndex = getCurrentDayIndex(specialDaysCalendar) + 1;
+            }
             for (let i = tomorrowsDayIndex; i < tomorrowsDayIndex + 7; i++) {
                 expect(getElementClass(specialDaysCalendar + calendarItem, i)).toContain('special-day');
             }

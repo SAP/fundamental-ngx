@@ -13,7 +13,6 @@ import {
     setValue,
     waitForElDisplayed,
     waitForPresent
-
 } from '../../driver/wdio';
 import { TabsPo } from '../pages/tabs.po';
 
