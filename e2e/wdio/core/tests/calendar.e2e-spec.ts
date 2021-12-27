@@ -245,7 +245,7 @@ describe('calendar test suite', () => {
             let tomorrowsDayIndex = getCurrentDayIndex(specialDaysCalendar) + 1;
             if (tomorrowsDayIndex + 7 > getElementArrayLength(specialDaysCalendar + calendarItem)) {
                 click(specialDaysCalendar + rightArrowBtn);
-                tomorrowsDayIndex = getCurrentDayIndex(specialDaysCalendar) + 1;
+                tomorrowsDayIndex = getCurrentDayIndex(specialDaysCalendar, 'is-active') + 1;
             }
             for (let i = tomorrowsDayIndex; i < tomorrowsDayIndex + 7; i++) {
                 expect(getElementClass(specialDaysCalendar + calendarItem, i)).toContain('special-day');
@@ -449,9 +449,9 @@ describe('calendar test suite', () => {
         expect(getElementArrayLength(calendar + currentDay)).toBe(1);
     }
 
-    function getCurrentDayIndex(selector: string): number {
+    function getCurrentDayIndex(selector: string, Class: string = 'current'): number {
         for (let i = 0; i < getElementArrayLength(selector + calendarItem); i++) {
-            if (getElementClass(selector + calendarItem, i).includes('current')) {
+            if (getElementClass(selector + calendarItem, i).includes(Class)) {
                 return i;
             }
         }
