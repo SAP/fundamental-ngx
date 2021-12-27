@@ -75,7 +75,7 @@ describe('calendar test suite', () => {
         calendarPage.open();
     }, 1);
 
-    afterEach(() => {
+    beforeEach(() => {
         refreshPage();
         waitForPresent(calendarPage.root);
         waitForElDisplayed(calendarPage.title);
