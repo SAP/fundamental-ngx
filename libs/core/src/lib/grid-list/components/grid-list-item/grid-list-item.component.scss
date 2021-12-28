@@ -14,6 +14,12 @@
         background-color: transparent;
     }
 
+    .fd-dnd-item {
+        .fd-grid-list__item {
+            overflow: visible;
+        }
+    }
+
     &__item {
         .drop-area__line--vertical {
             height: 100%;
