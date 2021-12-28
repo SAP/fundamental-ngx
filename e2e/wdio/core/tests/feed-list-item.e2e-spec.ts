@@ -34,7 +34,9 @@ describe('Feed list item test suite:', () => {
         overflowButton,
         overflowOption,
         mobileMenu,
-        optionCancel
+        optionCancel,
+        actionMenuButton,
+        icon
     } = feedListItemPage;
 
     beforeAll(() => {
@@ -101,6 +103,16 @@ describe('Feed list item test suite:', () => {
 
         click(optionCancel);
         expect(doesItExist(mobileMenu)).toBe(false, 'mobile menu still displayed');
+    });
+
+    // skipped due to https://github.com/SAP/fundamental-ngx/issues/7227
+    xit('should check that icons are present near menu items', () => {
+        scrollIntoView(actionExample);
+        click(actionMenuButton);
+        const menuItemsLength = getElementArrayLength(menuOption);
+        for (let i = 0; i < menuItemsLength; i++) {
+            expect(isElementDisplayed(menuOption + icon, i)).toBe(true);
+        }
     });
 
     it('should check RTL and LTR orientation', () => {
