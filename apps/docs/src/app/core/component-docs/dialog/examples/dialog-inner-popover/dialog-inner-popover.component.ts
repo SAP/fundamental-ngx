@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 
+interface Option {
+    name: string;
+}
+
 @Component({
     selector: 'fd-dialog-inner-popover-example',
     template: `
@@ -18,28 +22,28 @@ export class DialogInnerPopoverComponent {
             data: {
                 title: `Pineapple Fun Facts`,
                 firstOptions: [
-                    { name: 'Photo Voltaic', icon: 'photo-voltaic' },
-                    { name: 'Settings', icon: 'settings' },
-                    { name: 'Heating Cooling', icon: 'heating-cooling' },
-                    { name: 'Competitor', icon: 'competitor' },
-                    { name: 'Chalkboard', icon: 'chalkboard' },
-                    { name: 'Database', icon: 'database' },
-                    { name: 'Passenger Train', icon: 'passenger-train' },
-                    { name: 'World', icon: 'world' },
-                    { name: 'Shield', icon: 'shield' },
-                    { name: 'Journey Change', icon: 'journey-change' }
+                    { name: 'Photo Voltaic' },
+                    { name: 'Settings' },
+                    { name: 'Heating Cooling' },
+                    { name: 'Competitor' },
+                    { name: 'Chalkboard' },
+                    { name: 'Database' },
+                    { name: 'Passenger Train' },
+                    { name: 'World' },
+                    { name: 'Shield' },
+                    { name: 'Journey Change' }
                 ],
                 secondOptions: [
-                    { name: 'Photo Voltaic', icon: 'photo-voltaic' },
-                    { name: 'Settings', icon: 'settings' },
-                    { name: 'Heating Cooling', icon: 'heating-cooling' },
-                    { name: 'Competitor', icon: 'competitor' },
-                    { name: 'Chalkboard', icon: 'chalkboard' },
-                    { name: 'Database', icon: 'database' },
-                    { name: 'Passenger Train', icon: 'passenger-train' },
-                    { name: 'World', icon: 'world' },
-                    { name: 'Shield', icon: 'shield' },
-                    { name: 'Journey Change', icon: 'journey-change' }
+                    { name: 'Apple' },
+                    { name: 'Tomato' },
+                    { name: 'Banana' },
+                    { name: 'Grapes' },
+                    { name: 'Pumpkin' },
+                    { name: 'Kiwi' },
+                    { name: 'Mango' },
+                    { name: 'Cucumber' },
+                    { name: 'Garlic' },
+                    { name: 'Pear' }
                 ]
             },
             width: '400px',
@@ -68,14 +72,19 @@ export class DialogInnerPopoverComponent {
 
             <fd-dialog-body>
                 <div id="fd-dialog-body-1" role="listbox">
+                    <label for="first-list">The first list of options:</label>
                     <fd-multi-input
+                        inputId="first-list"
                         [dropdownValues]="firstOptions"
                         placeholder="Search here..."
                         [displayFn]="displayFunction"
                         [(ngModel)]="selected"
+                        style="margin-bottom: 1rem"
                     ></fd-multi-input>
 
+                    <label for="second-list">The second list of options:</label>
                     <fd-multi-input
+                        inputId="second-list"
                         [dropdownValues]="secondOptions"
                         placeholder="Search here..."
                         [displayFn]="displayFunction"
@@ -107,20 +116,20 @@ export class DialogInnerPopoverComponent {
     `
 })
 export class DialogInnerPopoverExampleComponent {
+    firstOptions: Option[];
+
+    selected: Option[] = [];
+
+    secondOptions: Option[];
+
+    selected2: Option[] = [];
+
     constructor(public dialogRef: DialogRef) {
         this.firstOptions = this.dialogRef.data.firstOptions;
         this.secondOptions = this.dialogRef.data.secondOptions;
     }
 
-    firstOptions: any[];
-
-    selected = [];
-
-    secondOptions: any[];
-
-    selected2 = [];
-
-    displayFunction(item: { name: string; icon: string }): string {
+    displayFunction(item: Option): string {
         if (item) {
             return item.name;
         } else {
