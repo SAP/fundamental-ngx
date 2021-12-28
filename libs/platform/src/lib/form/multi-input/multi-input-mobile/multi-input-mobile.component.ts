@@ -46,7 +46,7 @@ export class PlatformMultiInputMobileComponent
     } = null;
 
     /** @hidden */
-    private _selectedBackup: string;
+    private _selectedBackup: any[];
 
     constructor(
         elementRef: ElementRef,
@@ -85,10 +85,11 @@ export class PlatformMultiInputMobileComponent
 
     private _toggleDialog(open: boolean): void {
         if (!open) {
+            this._handleApprove();
             return;
         }
 
-        this._selectedBackup = this._component.inputText;
+        this._selectedBackup = [...this._component._selected];
         if (!this._dialogService.hasOpenDialogs()) {
             this._open();
         }

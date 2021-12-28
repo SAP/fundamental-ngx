@@ -406,18 +406,6 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     }
 
     /**
-     * Handle Click on Button
-     * @hidden
-     */
-    onPrimaryButtonClick(isOpen: boolean): void {
-        if (!isOpen) {
-            this.searchTermChanged('');
-        }
-
-        this.showList(!isOpen);
-    }
-
-    /**
      * Handle Keydown on Input
      * @hidden
      */
