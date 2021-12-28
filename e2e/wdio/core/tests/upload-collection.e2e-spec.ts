@@ -1,6 +1,7 @@
 import { UploadCollectionPo } from '../pages/upload-collection.po';
 import {
     acceptAlert,
+    browserIsSafari,
     click,
     getAlertText,
     getAttributeByName,
@@ -123,6 +124,9 @@ describe('File uploader component test', () => {
         });
 
         it('should check upload files', () => {
+            if (browserIsSafari()) {
+                return;
+            }
             scrollIntoView(uploadCollectionComplexExample);
             uploadFile(fileUploaderInputFile, imagePath);
             const afterUploadItems = getElementArrayLength(uploadCollectionComplexExample + item);
@@ -150,6 +154,9 @@ describe('File uploader component test', () => {
     });
 
     it('should check LTR and RTL orientation', () => {
+        if (browserIsSafari()) {
+            return;
+        }
         uploadCollectionPage.checkRtlSwitch();
     });
 

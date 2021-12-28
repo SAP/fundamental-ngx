@@ -249,6 +249,7 @@ exports.config = {
             './e2e/wdio/core/**/title.e2e-spec.ts',
             './e2e/wdio/core/**/token.e2e-spec.ts',
             './e2e/wdio/core/**/toolbar.e2e-spec.ts',
+            './e2e/wdio/core/**/upload-collection.e2e-spec.ts',
             './e2e/wdio/core/**/vertical-navigation.e2e-spec.ts',
             './e2e/wdio/core/**/wizard.e2e-spec.ts'
         ]
