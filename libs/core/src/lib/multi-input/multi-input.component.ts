@@ -477,7 +477,8 @@ export class MultiInputComponent
 
     /** Method that selects all possible options. */
     selectAllItems(): void {
-        this.selected = [...this.dropdownValues].map(({ value }) => value);
+        this.selected = [...this.dropdownValues];
+        this._removeValuesWithoutOptions();
 
         // On Mobile mode changes are propagated only on approve.
         this._propagateChange();
@@ -722,8 +723,13 @@ export class MultiInputComponent
                         this._getOptionItem(item)
                     );
                 }
+                // selected options should be displayed in the same order as they're selected
+                const orderMap = new Map(this._selectionModel.selected.map((v, i) => [v, i]));
+                const selectedOptions = optionItems
+                    .filter((item) => this._selectionModel.isSelected(item.value))
+                    .sort((a, b) => orderMap.get(a.value) - orderMap.get(b.value));
                 return {
-                    selectedOptions: optionItems.filter((item) => this._selectionModel.isSelected(item.value)),
+                    selectedOptions: selectedOptions,
                     displayedOptions: displayedOptions
                 };
             })
