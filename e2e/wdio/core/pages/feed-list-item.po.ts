@@ -14,13 +14,15 @@ export class FeedListItemPo extends CoreBaseComponentPo {
     linkMore = '.fd-feed-list__link--more';
     links = '.fd-link:not(.fd-feed-list__link--more)';
     actionSettingsButton = 'button[glyph="action-settings"]';
+    actionMenuButton = 'button[glyph="menu"]';
     menuButton = '[glyph="menu"]';
-    menuOption = '.fd-menu__link';
+    menuOption = '.fd-menu__item';
     overflowButton = '.fd-button--standard.fd-button--compact';
     overflowOption = '.fd-button--transparent.fd-button--text-alignment-left';
     mobileMenu = 'fd-action-sheet-body';
     optionCancel = '.fd-button--negative';
     avatar = 'fd-avatar';
+    icon = ' fd-icon';
 
     getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
