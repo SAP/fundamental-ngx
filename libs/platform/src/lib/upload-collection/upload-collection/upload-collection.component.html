@@ -154,6 +154,7 @@
                 selectionMode="multiple"
                 emptyTableMessage=""
                 noHorizontalBorders="true"
+                [trackBy]="_trackByDocumentId"
                 (rowSelectionChange)="_onRowSelectionChange($event)"
             >
                 <fdp-column name="name" label="Name" width="8rem">

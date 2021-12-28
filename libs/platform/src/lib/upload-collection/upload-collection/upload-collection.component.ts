@@ -727,6 +727,11 @@ export class UploadCollectionComponent {
     }
 
     /** @hidden */
+    _trackByDocumentId(index: number, item: UploadCollectionItem): UploadCollectionItem['documentId'] {
+        return item.documentId;
+    }
+
+    /** @hidden */
     private _validateFiles(files: File[]): void {
         this._validatedFiles = this._filesValidatorService.validation(files, {
             maxFileSize: this.maxFileSize,
