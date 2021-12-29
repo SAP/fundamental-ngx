@@ -13,7 +13,8 @@ import {
     scrollIntoView,
     setValue,
     uploadFile,
-    waitForElDisplayed, waitForPresent
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 import {
     acceptAlertText,
