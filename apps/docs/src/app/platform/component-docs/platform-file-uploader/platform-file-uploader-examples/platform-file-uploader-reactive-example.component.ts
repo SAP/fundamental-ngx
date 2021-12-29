@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup, NgForm, ValidatorFn, Validators } from '@angular/forms';
 
 import { FileUploaderInvalidChangeEvent, FileUploaderSelectionChangeEvent } from '@fundamental-ngx/platform/form';
-import { PlatformFileUploaderComponent } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-file-uploader-reactive-example',
@@ -11,10 +10,9 @@ import { PlatformFileUploaderComponent } from '@fundamental-ngx/platform/form';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlatformFileUploaderReactiveExampleComponent {
-    @ViewChild(PlatformFileUploaderComponent) platformFileUploaderComponent: PlatformFileUploaderComponent;
-
     files: File[];
     invalidFiles: File[];
+    inputFocused = false;
     customForm: FormGroup = new FormGroup({});
     requiredDateValidator: ValidatorFn[] = [Validators.required];
 
@@ -36,7 +34,7 @@ export class PlatformFileUploaderReactiveExampleComponent {
         if (this.customForm.valid) {
             alert('form file Uploaded successfully');
         } else {
-            this.platformFileUploaderComponent.focusFileUploaderInput();
+            this.inputFocused = true;
         }
     }
 }

@@ -17,7 +17,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { stateType } from '@fundamental-ngx/core/radio';
 import { FileUploaderService, FileUploadOutput } from './file-uploader.service';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { ENTER, SPACE, TAB } from '@angular/cdk/keycodes';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
@@ -133,11 +133,25 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
     @Input()
     inputHidden = false;
 
+    /** Specifies if input is focused from outside the component */
+    @Input() set inputFocused(focused: boolean) {
+        this._inputFocused = focused;
+        if (focused) {
+            this.inputRefText.nativeElement.focus();
+        }
+    }
+
+    get inputFocused() {
+        return this._inputFocused;
+    }
+
     /** * It stores the valid files  */
     validFiles: File[] = [];
 
     /** * It stores the invalid files  */
     invalidFiles: File[] = [];
+
+    private _inputFocused: boolean;
 
     /** Event fired when files are selected. Passed object is the array of files selected. */
     @Output()
@@ -176,13 +190,6 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
                 })
             );
         }
-        this._subscriptions.add(
-            this.fileUploaderInputFocused.subscribe((focused: boolean) => {
-                if (focused) {
-                    this.inputRefText.nativeElement.focus();
-                }
-            })
-        );
     }
 
     /** @hidden */
