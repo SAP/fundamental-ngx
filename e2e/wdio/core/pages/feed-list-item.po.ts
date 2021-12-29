@@ -4,25 +4,24 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 export class FeedListItemPo extends CoreBaseComponentPo {
     private url = '/feed-list-item';
 
-    simpleExample = 'fd-fli-simple-example ';
-    avatarExample = 'fd-fli-avatar-example ';
-    actionExample = 'fd-fli-action-example ';
-    footerExample = 'fd-fli-footer-example ';
-    mobileExample = 'fd-fli-mobile-example ';
+    readonly simpleExample = 'fd-fli-simple-example ';
+    readonly avatarExample = 'fd-fli-avatar-example ';
+    readonly actionExample = 'fd-fli-action-example ';
+    readonly footerExample = 'fd-fli-footer-example ';
+    readonly mobileExample = 'fd-fli-mobile-example ';
 
-    paragraphs = '.fd-feed-list__text';
-    linkMore = '.fd-feed-list__link--more';
-    links = '.fd-link:not(.fd-feed-list__link--more)';
-    actionSettingsButton = 'button[glyph="action-settings"]';
-    actionMenuButton = 'button[glyph="menu"]';
-    menuButton = '[glyph="menu"]';
-    menuOption = '.fd-menu__item';
-    overflowButton = '.fd-button--standard.fd-button--compact';
-    overflowOption = '.fd-button--transparent.fd-button--text-alignment-left';
-    mobileMenu = 'fd-action-sheet-body';
-    optionCancel = '.fd-button--negative';
-    avatar = 'fd-avatar';
-    icon = ' fd-icon';
+    readonly paragraphs = '.fd-feed-list__text';
+    readonly linkMore = '.fd-feed-list__link--more';
+    readonly links = '.fd-link:not(.fd-feed-list__link--more)';
+    readonly actionSettingsButton = 'button[glyph="action-settings"]';
+    readonly actionMenuButton = 'fd-fli-action-example button[glyph="overflow"]';
+    readonly actionMenuButtonOption = '.fd-action-sheet__item .fd-button';
+    readonly overflowButton = 'fd-fli-mobile-example button[glyph="overflow"]';
+    readonly overflowOption = '.fd-action-sheet__item .fd-button';
+    readonly mobileMenu = 'fd-action-sheet-body';
+    readonly optionCancel = '.fd-button--negative';
+    readonly avatar = 'fd-avatar';
+    readonly icon = ' fd-icon';
 
     getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);

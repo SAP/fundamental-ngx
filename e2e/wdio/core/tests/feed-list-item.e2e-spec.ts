@@ -29,14 +29,13 @@ describe('Feed list item test suite:', () => {
         mobileExample,
         linkMore,
         avatar,
-        menuButton,
-        menuOption,
         overflowButton,
         overflowOption,
         mobileMenu,
         optionCancel,
         actionMenuButton,
-        icon
+        icon,
+        actionMenuButtonOption
     } = feedListItemPage;
 
     beforeAll(() => {
@@ -79,11 +78,11 @@ describe('Feed list item test suite:', () => {
     });
 
     it('should check clickability popovers menu links', () => {
-        scrollIntoView(actionSettingsButton);
-        click(menuButton);
-        const optionLength = getElementArrayLength(menuOption);
+        scrollIntoView(actionMenuButton);
+        click(actionMenuButton);
+        const optionLength = getElementArrayLength(actionMenuButtonOption);
         for (let i = 0; i < optionLength; i++) {
-            expect(isElementClickable(menuOption, i)).toBe(true, `option with index ${i} not clickable`);
+            expect(isElementClickable(actionMenuButtonOption, i)).toBe(true, `option with index ${i} not clickable`);
         }
     });
 
@@ -105,13 +104,12 @@ describe('Feed list item test suite:', () => {
         expect(doesItExist(mobileMenu)).toBe(false, 'mobile menu still displayed');
     });
 
-    // skipped due to https://github.com/SAP/fundamental-ngx/issues/7227
-    xit('should check that icons are present near menu items', () => {
+    it('should check that icons are present near menu items', () => {
         scrollIntoView(actionExample);
         click(actionMenuButton);
-        const menuItemsLength = getElementArrayLength(menuOption);
+        const menuItemsLength = getElementArrayLength(actionMenuButtonOption);
         for (let i = 0; i < menuItemsLength; i++) {
-            expect(isElementDisplayed(menuOption + icon, i)).toBe(true);
+            expect(isElementDisplayed(actionMenuButtonOption + icon, i)).toBe(true);
         }
     });
 
