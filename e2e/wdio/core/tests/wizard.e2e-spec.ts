@@ -48,7 +48,8 @@ describe('Wizard component test', () => {
         radioButton,
         dialogContainer,
         continueButton,
-        cancelButton
+        cancelButton,
+        radioButtonLabel
     } = wizardPage;
 
     beforeAll(() => {
@@ -164,15 +165,18 @@ describe('Wizard component test', () => {
         click(branchingExample + button);
         waitForElDisplayed(wizard + nextStep);
         click(wizard + nextStep);
-        click(radioButton);
+        click(radioButtonLabel);
         expect(getAttributeByName(radioButton, 'aria-checked')).toBe('true', 'radio button is not selected');
-        click(radioButton, 1);
+        click(radioButtonLabel, 1);
         // pause for dialog element to be created
         pause(500);
         expect(waitForElDisplayed(dialogContainer)).toBe(true, 'dialog container did not open');
         click(cancelButton);
         expect(getAttributeByName(radioButton, 'aria-checked')).toBe('true', 'focus dissapeared');
-        click(radioButton, 1);
+        click(radioButtonLabel, 1);
+        // pause for dialog element to be created
+        pause(500);
+        waitForElDisplayed(dialogContainer);
         click(continueButton);
         expect(getAttributeByName(radioButton, 'aria-checked', 1)).toBe('true', 'focus did not change');
     }, 1);
