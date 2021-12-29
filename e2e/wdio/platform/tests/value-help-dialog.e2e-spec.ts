@@ -9,6 +9,7 @@ import {
     getElementArrayLength,
     getElementClass,
     getText,
+    isElementDisplayed,
     refreshPage,
     scrollIntoView,
     sendKeys,
@@ -223,6 +224,15 @@ describe('Value help dialog test suite', () => {
                 expect(getText(selectedTokens).trim()).toEqual(conditionsValues[i]);
                 click(conditionsButton);
             }
+        });
+
+        // skipp due to https://github.com/SAP/fundamental-ngx/issues/7458
+        xit('should check that we can add condition by press Enter', () => {
+            click(openDialogBtn, 1);
+            click(conditionsInputField, 1);
+            sendKeys(valueZero);
+            sendKeys('Enter');
+            expect(isElementDisplayed(token)).toBe(true);
         });
     });
 
