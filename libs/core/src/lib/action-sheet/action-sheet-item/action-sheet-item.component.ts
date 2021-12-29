@@ -37,7 +37,7 @@ export interface ActionSheetClickEvent {
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         class: 'fd-action-sheet__item',
-        '[attr.role]': "'none'"
+        role: 'none'
     }
 })
 export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
@@ -53,7 +53,7 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     @Input()
     negative = false;
 
-    /** Indicate if items should be in compact or compare mode. */
+    /** Indicate if items should be in compact mode. */
     @Input()
     compact = false;
 

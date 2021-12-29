@@ -191,6 +191,10 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
 
     /** @hidden */
     isOpenChangeHandle(isOpen: boolean): void {
+        if (this.isOpen === isOpen) {
+            return;
+        }
+
         this.isOpen = isOpen;
 
         if (this.mobile && this.actionSheetMobileDynamic) {

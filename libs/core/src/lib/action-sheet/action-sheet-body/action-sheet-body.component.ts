@@ -4,7 +4,7 @@ import { KeyboardSupportService } from '@fundamental-ngx/core/utils';
 
 import { ActionSheetItemComponent } from '../action-sheet-item/action-sheet-item.component';
 
-let ActionSheetBodyUniqueId = 0;
+let actionSheetBodyUniqueIdCounter = 0;
 
 /**
  * A component used to enforce a certain layout for the action sheet.
@@ -28,7 +28,7 @@ let ActionSheetBodyUniqueId = 0;
 export class ActionSheetBodyComponent {
     /** Id of the Action Sheet Body. */
     @Input()
-    actionSheetBodyId = `fd-action-sheet-body-${ActionSheetBodyUniqueId++}`;
+    actionSheetBodyId = `fd-action-sheet-body-${actionSheetBodyUniqueIdCounter++}`;
 
     /** Indicate if items should be in compact or compare mode. */
     @Input()
