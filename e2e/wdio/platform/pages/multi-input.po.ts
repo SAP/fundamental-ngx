@@ -22,6 +22,7 @@ export class MultiInputPo extends BaseComponentPo {
     errorMessage = '.fd-form-message--error span';
     declineButton = '.fd-button[glyph=decline]';
     listitems = 'ul[role=list] [role="listitem"] li';
+    reactiveExample = 'fdp-platform-multi-input-reactive-example';
 
     crossButton = (option: string) => `//span[text() = '${option}']/../following-sibling::span`;
 

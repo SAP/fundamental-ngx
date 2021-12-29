@@ -38,6 +38,7 @@
         [compact]="contentDensity === 'compact'"
         (keydown)="removeSelectedTokens($event)"
         (addOnButtonClicked)="addOnButtonClick()"
+        (click)="onInputGroupClicked()"
     >
         <span [attr.id]="tokenHiddenId" aria-hidden="true" class="fdp-multi-input__invisible-text"
             >Contains {{ selected.length || 'no' }} token</span
@@ -81,7 +82,7 @@
                 (ngModelChange)="searchTermChanged()"
                 [ngModelOptions]="{ standalone: true }"
                 [placeholder]="placeholder"
-                (focus)="onTouched()"
+                (blur)="onTouched()"
                 [attr.aria-expanded]="isOpen && _suggestions.length > 0"
                 [readonly]="readonly"
                 aria-haspopup="listbox"

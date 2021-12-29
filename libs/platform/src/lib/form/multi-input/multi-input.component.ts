@@ -235,6 +235,13 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     }
 
     /** @hidden */
+    onInputGroupClicked(): void {
+        if (this.mobile && !this.isOpen) {
+            this.open();
+        }
+    }
+
+    /** @hidden */
     moreClicked(): void {
         this.open();
         this._suggestions = this.selected;
