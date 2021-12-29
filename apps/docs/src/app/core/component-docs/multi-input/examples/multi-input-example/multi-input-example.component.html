@@ -6,7 +6,7 @@
     [(ngModel)]="selected"
 ></fd-multi-input>
 
-Selected: [{{ selected.toLocaleString() }}]
+Selected: {{ selected | json }}
 
 <br /><br />
 
@@ -19,20 +19,20 @@ Selected: [{{ selected.toLocaleString() }}]
     [(ngModel)]="secondSelected"
 ></fd-multi-input>
 
-Selected: [{{ secondSelected.toLocaleString() }}]
+Selected: {{ secondSelected | json }}
 
 <br /><br />
 
 <label fd-label for="noAddonMultiInput1">Hidden Addon Button</label>
 <fd-multi-input
     inputId="noAddonMultiInput1"
-    [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato']"
+    [dropdownValues]="['Kiwi', 'Apple', 'Banana', 'Pineapple', 'Tomato']"
     placeholder="Search here..."
     [(ngModel)]="thirdSelected"
     [displayAddonButton]="false"
 ></fd-multi-input>
 
-Selected: [{{ thirdSelected.toLocaleString() }}]
+Selected: {{ thirdSelected | json }}
 
 <br /><br />
 
@@ -46,4 +46,18 @@ Selected: [{{ thirdSelected.toLocaleString() }}]
     [(ngModel)]="selectedDisabledAutoComplete"
 ></fd-multi-input>
 
-Selected: [{{ selectedDisabledAutoComplete.toLocaleString() }}]
+Selected: {{ selectedDisabledAutoComplete | json }}
+
+<br /><br />
+
+<label fd-label for="multiInputDisabledAutoComplete">With Object Values</label>
+<fd-multi-input
+    inputId="multiInputWithObjectValues"
+    [dropdownValues]="objectValues"
+    [displayFn]="objectValuesDisplayFn"
+    [valueFn]="objectValuesValueFn"
+    placeholder="Search here..."
+    [(ngModel)]="selectedObjectValues"
+></fd-multi-input>
+
+Selected: {{ selectedObjectValues | json }}

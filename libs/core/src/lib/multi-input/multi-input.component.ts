@@ -19,9 +19,9 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DOWN_ARROW, TAB, SPACE, ENTER, UP_ARROW, ESCAPE } from '@angular/cdk/keycodes';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
@@ -44,6 +44,8 @@ import {
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MultiInputMobileModule } from './multi-input-mobile/multi-input-mobile.module';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
+import { SelectionModel } from '@angular/cdk/collections';
+import { map, startWith } from 'rxjs/operators';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -106,7 +108,12 @@ export class MultiInputComponent
 
     /** Search term, or more specifically the value of the inner input field. */
     @Input()
-    searchTerm = '';
+    get searchTerm(): string {
+        return this._searchTermCtrl.value;
+    }
+    set searchTerm(value: string) {
+        this._searchTermCtrl.setValue(value);
+    }
 
     /** Id attribute for input element inside MultiInput component */
     @Input()
@@ -118,28 +125,49 @@ export class MultiInputComponent
 
     /** Selected dropdown items. */
     @Input()
-    selected: any[] = [];
+    get selected(): any[] {
+        return this._selectionModel.selected;
+    }
+    set selected(values: any[]) {
+        this._selectionModel.clear();
+        values?.forEach((item) => this._selectionModel.select(item));
+    }
 
     /** user's custom classes */
     @Input()
     class: string;
 
-    /** Filter function. Accepts an array and a string as arguments, and outputs an array.
+    /**
+     * Filter function. Accepts an array and a string as arguments, and outputs an array.
      * An arrow function can be used to access the *this* keyword in the calling component.
-     * See multi input examples for details. */
+     * See multi input examples for details.
+     */
     @Input()
     filterFn = this._defaultFilter;
 
-    /** Display function. Accepts an object of the same type as the
+    /**
+     * Value function. Accepts an object of the same type as the
+     * items passed to dropdownValues as argument, and outputs any property, that should be used as value.
+     * An arrow function can be used to access the *this* keyword in the calling component.
+     * See multi input examples for details.
+     */
+    @Input()
+    valueFn = this._defaultValueFn;
+
+    /**
+     * Display function. Accepts an object of the same type as the
      * items passed to dropdownValues as argument, and outputs a string.
      * An arrow function can be used to access the *this* keyword in the calling component.
-     * See multi input examples for details. */
+     * See multi input examples for details.
+     */
     @Input()
     displayFn = this._defaultDisplay;
 
-    /** Parse function. Used for submitting new tokens. Accepts a string by default.
+    /**
+     * Parse function. Used for submitting new tokens. Accepts a string by default.
      * An arrow function can be used to access the *this* keyword in the calling component.
-     * See multi input examples for details. */
+     * See multi input examples for details.
+     */
     @Input()
     newTokenParseFn = this._defaultParse;
 
@@ -263,9 +291,18 @@ export class MultiInputComponent
     tokenizer: TokenizerComponent;
 
     /** @hidden */
-    displayedValues: any[] = [];
+    readonly optionItems$ = new BehaviorSubject<Map<OptionItem['value'], OptionItem>>(new Map());
 
-    /**  @hidden */
+    /** @hidden */
+    readonly _searchTermCtrl = new FormControl('');
+
+    /** @hidden */
+    readonly _selectionModel = new SelectionModel<any>(true);
+
+    /** @hidden */
+    readonly viewModel$: Observable<ViewModel> = this._getViewModel();
+
+    /** @hidden */
     _dir: string;
 
     /** @hidden */
@@ -303,10 +340,6 @@ export class MultiInputComponent
 
         this.buildComponentCssClass();
 
-        if (this.dropdownValues) {
-            this.displayedValues = this.dropdownValues;
-        }
-
         this._subscriptions.add(
             this._rtlService?.rtl.subscribe((isRtl) => {
                 this._dir = isRtl ? 'rtl' : 'ltr';
@@ -317,18 +350,26 @@ export class MultiInputComponent
         if (!this.inputId) {
             this.inputId = uuidv4();
         }
+
+        this._subscriptions.add(
+            this._searchTermCtrl.valueChanges.subscribe((searchTerm) => {
+                this.searchTermChange.emit(searchTerm);
+            })
+        );
     }
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         this.buildComponentCssClass();
 
-        if (this._shouldFilterValues(changes)) {
-            this.displayedValues = this.dropdownValues;
-            if (this.searchTerm) {
-                this.displayedValues = this.filterFn(this.dropdownValues, this.searchTerm);
-            }
+        if (changes.dropdownValues || changes.searchTerm || changes.valueFn || changes.displayFn) {
+            const optionItems = (this.dropdownValues ?? []).map((item) => this._getOptionItem(item));
+            this.optionItems$.next(new Map(optionItems.map((o) => [o.value, o])));
             this._changeDetRef.markForCheck();
+        }
+
+        if (changes.disabled) {
+            this.disabled ? this._searchTermCtrl.disable() : this._searchTermCtrl.enable();
         }
     }
 
@@ -390,9 +431,7 @@ export class MultiInputComponent
 
     /** @hidden */
     writeValue(selected: any[]): void {
-        if (selected) {
-            this.selected = selected;
-        }
+        this.selected = selected;
 
         this._changeDetRef.markForCheck();
     }
@@ -439,6 +478,7 @@ export class MultiInputComponent
     /** Method that selects all possible options. */
     selectAllItems(): void {
         this.selected = [...this.dropdownValues];
+        this._removeValuesWithoutOptions();
 
         // On Mobile mode changes are propagated only on approve.
         this._propagateChange();
@@ -450,20 +490,17 @@ export class MultiInputComponent
             event.preventDefault(); // prevent this function from being called twice when checkbox updates
         }
 
+        const previousLength = this._selectionModel.selected.length;
         if (checked) {
-            this.selected.push(value);
+            this._selectionModel.select(value);
         } else {
-            const selectedIndex = this.selected.indexOf(value);
-
-            if (selectedIndex > -1) {
-                // remove the token whose close button was explicitly clicked
-                this.selected.splice(this.selected.indexOf(value), 1);
-            }
+            this._selectionModel.deselect(value);
         }
 
-        const previousLength = this.selected.length;
+        this._removeValuesWithoutOptions();
+
         // Handle popover placement update
-        if (this._shouldPopoverBeUpdated(previousLength, this.selected.length)) {
+        if (this._shouldPopoverBeUpdated(previousLength, this._selectionModel.selected.length)) {
             this.popoverRef.refreshPosition();
         }
 
@@ -488,29 +525,16 @@ export class MultiInputComponent
                 this.listComponent.setItemActive(0);
                 event.preventDefault();
             }
-        }
-
-        if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW, ENTER])) {
+        } else if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW, ENTER])) {
             this.openChangeHandle(true);
-        }
-
-        if (KeyUtil.isKeyCode(event, ESCAPE)) {
+        } else if (KeyUtil.isKeyCode(event, ESCAPE)) {
             this.openChangeHandle(false);
-        }
-
-        if (KeyUtil.isKeyCode(event, TAB) && this.open) {
+        } else if (KeyUtil.isKeyCode(event, TAB) && this.open) {
             if (this.listComponent) {
                 this.listComponent.setItemActive(0);
                 event.preventDefault();
             }
-        }
-    }
-
-    /** @hidden */
-    _handleSearchTermChange(searchTerm: string): void {
-        if (this.searchTerm !== searchTerm) {
-            this._applySearchTermChange(searchTerm);
-
+        } else if (KeyUtil.isKeyType(event, 'alphabetical') || KeyUtil.isKeyType(event, 'numeric')) {
             if (!this.open) {
                 this.openChangeHandle(true);
             }
@@ -521,7 +545,7 @@ export class MultiInputComponent
     _showAllClicked(event: Event): void {
         event.preventDefault();
         event.stopPropagation();
-        this._applySearchTermChange('');
+        this._searchTermCtrl.setValue('');
         this.searchInputElement.nativeElement.focus();
     }
 
@@ -534,20 +558,21 @@ export class MultiInputComponent
 
     /** @hidden */
     _onSubmit(): void {
-        if (this.allowNewTokens && this.newTokenValidateFn(this.searchTerm)) {
-            const newToken = this.newTokenParseFn(this.searchTerm);
+        if (this.allowNewTokens && this.newTokenValidateFn(this._searchTermCtrl.value)) {
+            const newToken = this.newTokenParseFn(this._searchTermCtrl.value);
             this.dropdownValues.push(newToken);
             this._handleSelect(true, newToken);
-            this._applySearchTermChange('');
+            this._searchTermCtrl.setValue('');
             this.open = false;
         }
+        this._removeValuesWithoutOptions();
     }
 
     /**
      * Handle dialog dismissing, closes popover and sets backup data.
      */
     dialogDismiss(selectedBackup: any[]): void {
-        this.selected = [...selectedBackup];
+        this.selected = selectedBackup;
         this.openChangeHandle(false);
         this._resetSearchTerm();
     }
@@ -559,19 +584,12 @@ export class MultiInputComponent
         this._propagateChange(true);
         this.openChangeHandle(false);
         this._resetSearchTerm();
+        this._removeValuesWithoutOptions();
     }
 
     /** @hidden */
     _moreClicked(): void {
         this.openChangeHandle(true);
-        const newDisplayedValues: any[] = [];
-        this.displayedValues.forEach((value) => {
-            if (this.selected.indexOf(value) !== -1) {
-                newDisplayedValues.push(value);
-            }
-        });
-        this.displayedValues = newDisplayedValues;
-        this._changeDetRef.detectChanges();
     }
 
     /** @hidden */
@@ -590,23 +608,21 @@ export class MultiInputComponent
     }
 
     /** @hidden */
-    private _applySearchTermChange(searchTerm: string): void {
-        this.searchTerm = searchTerm;
-        this.searchTermChange.emit(this.searchTerm);
-        this.displayedValues = this.filterFn(this.dropdownValues, this.searchTerm);
-        this._changeDetRef.detectChanges();
-    }
-
-    /** @hidden */
     private _defaultFilter(contentArray: any[], searchTerm: string = ''): any[] {
         const searchLower = searchTerm.toLocaleLowerCase();
         return contentArray.filter((item) => {
             if (item) {
-                const term = this.displayFn(item).toLocaleLowerCase();
+                const displayedValue = this.displayFn(item);
+                const term = typeof displayedValue === 'string' ? displayedValue.toLocaleLowerCase() : '';
 
                 return this.includes ? term.includes(searchLower) : term.startsWith(searchLower);
             }
         });
+    }
+
+    /** @hidden */
+    private _defaultValueFn(value: any): any {
+        return value;
     }
 
     /** @hidden */
@@ -633,8 +649,9 @@ export class MultiInputComponent
     /** @hidden */
     private _propagateChange(emitInMobile?: boolean): void {
         if (!this.mobile || emitInMobile) {
-            this.onChange(this.selected);
-            this.selectedChange.emit(this.selected);
+            const selected = [...this._selectionModel.selected];
+            this.onChange(selected);
+            this.selectedChange.emit(selected);
         }
     }
 
@@ -662,15 +679,71 @@ export class MultiInputComponent
         );
     }
 
+    /**
+     * @hidden
+     * Removes values if corresponding option is not found
+     */
+    private _removeValuesWithoutOptions() {
+        this._selectionModel.selected.forEach((value) => {
+            if (!this.optionItems$.value.has(value)) {
+                this._selectionModel.deselect(value);
+            }
+        });
+    }
+
     /** @hidden */
     private _resetSearchTerm(): void {
-        this.searchTerm = '';
-        this._applySearchTermChange(this.searchTerm);
+        this._searchTermCtrl.setValue('');
         this._changeDetRef.detectChanges();
     }
 
     /** @hidden */
-    private _shouldFilterValues(changes: SimpleChanges): boolean {
-        return this.dropdownValues && !!(changes.dropdownValues || changes.searchTerm);
+    private _getOptionItem(item: any): OptionItem {
+        return {
+            item: item,
+            label: this.displayFn(item),
+            value: this.valueFn(item)
+        };
     }
+
+    /** @hidden */
+    private _getViewModel(): Observable<ViewModel> {
+        return combineLatest([
+            this._searchTermCtrl.valueChanges.pipe(startWith(this._searchTermCtrl.value)),
+            this.optionItems$.pipe(map((itemsMap) => [...itemsMap.values()])),
+            this._selectionModel.changed.pipe(startWith(undefined))
+        ]).pipe(
+            map(([, optionItems]) => {
+                // not using "searchTerm" value from combineLatest as it will be wrong for late subscribers, if any
+                const searchTerm = this._searchTermCtrl.value;
+                let displayedOptions = optionItems;
+                if (searchTerm) {
+                    const filtered = this.filterFn(this.dropdownValues, searchTerm);
+                    displayedOptions = (Array.isArray(filtered) ? filtered : []).map((item) =>
+                        this._getOptionItem(item)
+                    );
+                }
+                // selected options should be displayed in the same order as they're selected
+                const orderMap = new Map(this._selectionModel.selected.map((v, i) => [v, i]));
+                const selectedOptions = optionItems
+                    .filter((item) => this._selectionModel.isSelected(item.value))
+                    .sort((a, b) => orderMap.get(a.value) - orderMap.get(b.value));
+                return {
+                    selectedOptions: selectedOptions,
+                    displayedOptions: displayedOptions
+                };
+            })
+        );
+    }
+}
+
+interface OptionItem<T = any> {
+    label: string;
+    value: any;
+    item: T;
+}
+
+interface ViewModel {
+    selectedOptions: OptionItem[];
+    displayedOptions: OptionItem[];
 }

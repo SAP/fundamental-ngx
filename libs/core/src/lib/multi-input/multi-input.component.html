@@ -1,143 +1,148 @@
-<div class="fd-multi-input fd-multi-input-custom">
-    <div class="fd-multi-input-field">
-        <ng-container [ngTemplateOutlet]="control" *ngIf="mobile && !open"></ng-container>
-        <fd-popover
-            additionalBodyClass="fd-popover-custom-list"
-            *ngIf="!mobile"
-            [isOpen]="open"
-            (isOpenChange)="openChangeHandle($event)"
-            [triggers]="[]"
-            [maxWidth]="bodyMaxWidth"
-            [focusTrapped]="true"
-            [disabled]="disabled"
-            [fillControlMode]="fillControlMode"
-            class="fd-multi-input-popover-custom"
-        >
-            <fd-popover-control>
-                <form (submit)="_onSubmit()">
-                    <ng-container>
+<ng-container *ngIf="viewModel$ | async as vm">
+    <div class="fd-multi-input fd-multi-input-custom">
+        <div class="fd-multi-input-field">
+            <ng-container [ngTemplateOutlet]="control" *ngIf="mobile && !open"></ng-container>
+            <fd-popover
+                additionalBodyClass="fd-popover-custom-list"
+                *ngIf="!mobile"
+                [isOpen]="open"
+                (isOpenChange)="openChangeHandle($event)"
+                (input)="!open && openChangeHandle(true)"
+                [triggers]="[]"
+                [maxWidth]="bodyMaxWidth"
+                [focusTrapped]="true"
+                [disabled]="disabled"
+                [fillControlMode]="fillControlMode"
+                class="fd-multi-input-popover-custom"
+            >
+                <fd-popover-control>
+                    <form (submit)="_onSubmit()">
                         <ng-container *ngTemplateOutlet="control"></ng-container>
-                    </ng-container>
-                </form>
-            </fd-popover-control>
-            <fd-popover-body
-                [attr.aria-hidden]="!open"
-                [class.fd-popover__body--hidden]="!displayedValues || !displayedValues.length"
-            >
-                <ng-container *ngTemplateOutlet="list"></ng-container>
-                <ng-content></ng-content>
-            </fd-popover-body>
-        </fd-popover>
+                    </form>
+                </fd-popover-control>
+                <fd-popover-body
+                    [attr.aria-hidden]="!open"
+                    [class.fd-popover__body--hidden]="!vm.displayedOptions.length"
+                >
+                    <ng-container *ngTemplateOutlet="list"></ng-container>
+                    <ng-content></ng-content>
+                </fd-popover-body>
+            </fd-popover>
+        </div>
     </div>
-</div>
 
-<ng-template #control>
-    <fd-input-group
-        class="fd-multi-input-input-group-custom"
-        [state]="state"
-        [buttonFocusable]="buttonFocusable"
-        [button]="displayAddonButton"
-        [compact]="compact"
-        [disabled]="disabled"
-        [isExpanded]="open && !mobile && displayedValues && displayedValues.length"
-        [isControl]="true"
-        [glyph]="displayAddonButton ? glyph : ''"
-        [iconTitle]="title"
-        (addOnButtonClicked)="_addOnButtonClicked()"
-    >
-        <fd-tokenizer
-            [compactCollapse]="compactCollapse"
+    <ng-template #control>
+        <fd-input-group
+            class="fd-multi-input-input-group-custom"
+            [state]="state"
+            [buttonFocusable]="buttonFocusable"
+            [button]="displayAddonButton"
             [compact]="compact"
-            [open]="open"
-            [tokenizerFocusable]="false"
-            (moreClickedEvent)="_moreClicked()"
-            class="fd-multi-input-tokenizer-custom"
-            [class.fd-multi-input-tokenizer-custom--compact]="compact"
-            tabindex="-1"
+            [disabled]="disabled"
+            [isExpanded]="open && !mobile && vm.displayedOptions.length > 0"
+            [isControl]="true"
+            [glyph]="displayAddonButton ? glyph : ''"
+            [iconTitle]="title"
+            (addOnButtonClicked)="_addOnButtonClicked()"
         >
-            <fd-token
-                *ngFor="let token of selected"
+            <fd-tokenizer
+                [compactCollapse]="compactCollapse"
                 [compact]="compact"
-                [disabled]="disabled"
-                (onCloseClick)="_handleSelect(false, token, true, $event)"
-                (onRemove)="_handleSelect(false, token, false)"
+                [open]="open"
+                [tokenizerFocusable]="false"
+                (moreClickedEvent)="_moreClicked()"
+                class="fd-multi-input-tokenizer-custom"
+                [class.fd-multi-input-tokenizer-custom--compact]="compact"
+                tabindex="-1"
             >
-                <span [innerHtml]="token | displayFnPipe: displayFn"></span>
-            </fd-token>
-            <input
-                type="text"
-                class="fd-input fd-tokenizer__input fd-multi-input-tokenizer-input"
-                autocomplete="off"
-                fd-form-control
-                fd-input-group-input
-                fd-auto-complete
-                #searchInputElement
-                [displayFn]="displayFn"
-                [inputText]="searchTerm"
-                [options]="dropdownValues"
-                [enable]="autoComplete && !mobile"
-                [placeholder]="placeholder"
-                [ngModel]="searchTerm"
-                [compact]="compact"
-                [disabled]="disabled"
-                [attr.aria-required]="required"
-                [class.fd-input--compact]="compact"
-                (ngModelChange)="_handleSearchTermChange($event)"
-                (keydown)="_handleInputKeydown($event)"
-                [ngModelOptions]="{ standalone: true }"
-                [attr.id]="inputId"
-            />
-        </fd-tokenizer>
-    </fd-input-group>
-</ng-template>
+                <fd-token
+                    *ngFor="let option of vm.selectedOptions"
+                    [compact]="compact"
+                    [disabled]="disabled"
+                    (onCloseClick)="_handleSelect(false, option.value, true, $event)"
+                    (onRemove)="_handleSelect(false, option.value, false)"
+                >
+                    <span [innerHtml]="option.label"></span>
+                </fd-token>
+                <input
+                    type="text"
+                    class="fd-input fd-tokenizer__input fd-multi-input-tokenizer-input"
+                    autocomplete="off"
+                    fd-form-control
+                    fd-input-group-input
+                    fd-auto-complete
+                    #searchInputElement
+                    [displayFn]="displayFn"
+                    [inputText]="_searchTermCtrl.value"
+                    [options]="dropdownValues"
+                    [enable]="autoComplete && !mobile"
+                    [placeholder]="placeholder"
+                    [formControl]="_searchTermCtrl"
+                    [compact]="compact"
+                    [attr.aria-required]="required"
+                    [class.fd-input--compact]="compact"
+                    (keydown)="_handleInputKeydown($event)"
+                    [attr.id]="inputId"
+                />
+            </fd-tokenizer>
+        </fd-input-group>
+    </ng-template>
 
-<ng-template #list>
-    <ul
-        *ngIf="displayedValues && displayedValues.length"
-        fd-list
-        class="fd-multi-input-menu-overflow"
-        [selection]="true"
-        [mobileMode]="mobile"
-        [compact]="compact"
-        [style.maxHeight]="!mobile ? maxHeight : 'auto'"
-        (focusEscapeList)="handleListFocusEscape($event)"
-        [style.minWidth]="'100%'"
-    >
-        <li
-            *ngFor="let value of displayedValues"
-            fd-list-item
-            (click)="dialogApprove()"
-            [selected]="selected.indexOf(value) !== -1"
+    <ng-template #list>
+        <ul
+            *ngIf="vm.displayedOptions.length"
+            fd-list
+            class="fd-multi-input-menu-overflow"
+            [selection]="true"
+            [mobileMode]="mobile"
+            [compact]="compact"
+            [style.maxHeight]="!mobile ? maxHeight : 'auto'"
+            (focusEscapeList)="handleListFocusEscape($event)"
+            [style.minWidth]="'100%'"
         >
-            <fd-checkbox
-                [compact]="compact"
-                (ngModelChange)="_handleSelect($event, value, false)"
-                [ngModel]="selected.indexOf(value) !== -1"
+            <li
+                *ngFor="let option of vm.displayedOptions"
+                fd-list-item
+                (click)="dialogApprove()"
+                [selected]="_selectionModel.isSelected(option.value)"
             >
-            </fd-checkbox>
-            <ng-container [ngTemplateOutlet]="itemSource" [ngTemplateOutletContext]="{ value: value }"></ng-container>
-        </li>
-        <li
-            *ngIf="showAllButton && displayedValues.length < dropdownValues.length"
-            fd-list-item
-            class="fd-multi-input-show-all"
-            (keyDown)="_showAllKeyDown($event)"
-            (click)="_showAllClicked($event)"
+                <fd-checkbox
+                    [compact]="compact"
+                    (ngModelChange)="_handleSelect($event, option.value, false)"
+                    [ngModel]="_selectionModel.isSelected(option.value)"
+                >
+                    <!-- TODO -->
+                </fd-checkbox>
+                <ng-container
+                    [ngTemplateOutlet]="itemSource"
+                    [ngTemplateOutletContext]="{ option: option }"
+                ></ng-container>
+            </li>
+            <li
+                *ngIf="showAllButton && vm.displayedOptions.length < dropdownValues.length"
+                fd-list-item
+                class="fd-multi-input-show-all"
+                (keyDown)="_showAllKeyDown($event)"
+                (click)="_showAllClicked($event)"
+            >
+                <a fd-link tabindex="0">Show All ({{ dropdownValues.length }})</a>
+            </li>
+        </ul>
+    </ng-template>
+
+    <ng-template let-option="option" #itemSource>
+        <span
+            *ngIf="!itemTemplate"
+            fd-list-title
+            [innerHtml]="option.label | highlight: _searchTermCtrl.value:highlight"
         >
-            <a fd-link tabindex="0">Show All ({{ dropdownValues.length }})</a>
-        </li>
-    </ul>
-</ng-template>
+        </span>
 
-<ng-template let-value="value" #itemSource>
-    <span
-        *ngIf="!itemTemplate"
-        fd-list-title
-        [innerHtml]="value | displayFnPipe: displayFn | highlight: searchTerm:highlight"
-    >
-    </span>
-
-    <ng-container *ngIf="itemTemplate">
-        <ng-container [ngTemplateOutlet]="itemTemplate" [ngTemplateOutletContext]="{ $implicit: value }"></ng-container>
-    </ng-container>
-</ng-template>
+        <ng-container *ngIf="itemTemplate">
+            <ng-container
+                [ngTemplateOutlet]="itemTemplate"
+                [ngTemplateOutletContext]="{ $implicit: option.item }"
+            ></ng-container>
+        </ng-container>
+    </ng-template>
+</ng-container>
