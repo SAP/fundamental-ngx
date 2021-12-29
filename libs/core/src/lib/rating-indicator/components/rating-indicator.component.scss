@@ -12,7 +12,7 @@ $block: fd-rating-indicator;
             padding: 0.5rem 1rem;
             margin: 0;
 
-            .fd-rating-indicator__container {
+            .#{$block}__container {
                 margin-right: 0.5rem;
             }
         }
