@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.241 (2021-12-29)
+
+
+### Bug Fixes
+
+* **core:** multi-select doesn't work with objects ([#7419](https://github.com/SAP/fundamental-ngx/issues/7419)) ([86d6219](https://github.com/SAP/fundamental-ngx/commit/86d6219bce88382c4d634b41cb413811bd75bd90))
+
 ## 0.33.0-rc.240 (2021-12-28)
 
 ## 0.33.0-rc.239 (2021-12-23)
