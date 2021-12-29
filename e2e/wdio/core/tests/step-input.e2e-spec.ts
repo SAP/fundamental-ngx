@@ -186,6 +186,9 @@ describe('Step input component test suit', () => {
             browserIsFirefox() || browserIsSafari() ? clearInputFF(section, i) : clearInput(section, i);
             setValue(section + input, '0', i);
             defaultValue = parseFloat(getValue(section + input, i));
+            /* for states example, popover can block minus(-) btn when page scrolled for clicks;
+            click on input label to remove popover before clicking minus btn */
+            click(section + 'label');
             if (sign === '+') {
                 click(section + plusButton, i);
                 expect(parseFloat(getValue(section + input, i))).toBeGreaterThan(defaultValue);
