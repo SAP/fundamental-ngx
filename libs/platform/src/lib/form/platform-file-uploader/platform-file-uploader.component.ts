@@ -16,6 +16,7 @@ import { NgControl, NgForm } from '@angular/forms';
 
 import { ContentDensity } from '@fundamental-ngx/core/utils';
 import { BaseInput, ControlState, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
+import { Subject } from 'rxjs';
 
 export class FileUploaderInvalidChangeEvent {
     constructor(
@@ -98,6 +99,9 @@ export class PlatformFileUploaderComponent extends BaseInput implements OnInit {
         super.state = state;
     }
 
+    /** subject that emits a new value every time file uploader input needs to be focused */
+    fileUploaderInputFocused: Subject<boolean> = new Subject();
+
     /** Event emitted when valid file is uploded. */
     @Output()
     selectionChange: EventEmitter<FileUploaderSelectionChangeEvent> = new EventEmitter<FileUploaderSelectionChangeEvent>();
@@ -151,5 +155,9 @@ export class PlatformFileUploaderComponent extends BaseInput implements OnInit {
         this.files = fileArray;
         const event = new FileUploaderInvalidChangeEvent(this, this.files);
         this.invalidFileChange.emit(event);
+    }
+
+    focusFileUploaderInput() {
+        this.fileUploaderInputFocused.next(true);
     }
 }

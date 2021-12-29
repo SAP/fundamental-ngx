@@ -17,6 +17,7 @@
         [class]="state ? ' is-' + state : ''"
         aria-live="polite"
         autocomplete="off"
+        [attr.aria-invalid]="state === 'error' ? 'true' : 'false'"
         type="text"
         tabindex="0"
         [id]="id"

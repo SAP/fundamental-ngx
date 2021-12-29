@@ -17,7 +17,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { stateType } from '@fundamental-ngx/core/radio';
 import { FileUploaderService, FileUploadOutput } from './file-uploader.service';
-import { Subscription } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { ENTER, SPACE, TAB } from '@angular/cdk/keycodes';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
@@ -125,6 +125,10 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
     @Input()
     fileLimit: number;
 
+    /** observable that emits a new value every time file uploader input is focused */
+    @Input()
+    fileUploaderInputFocused: Observable<boolean>;
+
     /** Whether or not to hide the input, leaving only the upload/browse button. */
     @Input()
     inputHidden = false;
@@ -172,6 +176,13 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
                 })
             );
         }
+        this._subscriptions.add(
+            this.fileUploaderInputFocused.subscribe((focused: boolean) => {
+                if (focused) {
+                    this.inputRefText.nativeElement.focus();
+                }
+            })
+        );
     }
 
     /** @hidden */
