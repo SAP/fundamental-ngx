@@ -32,6 +32,7 @@ import {
 
 import { BehaviorSubject, fromEvent, isObservable, Observable, Subject, Subscription } from 'rxjs';
 import { filter, takeUntil, tap } from 'rxjs/operators';
+import equal from 'fast-deep-equal';
 
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import { ContentDensity, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/core/utils';
@@ -641,6 +642,21 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
                 if (isInitDataSource) {
                     this._fullFlatSuggestions = this._flatSuggestions;
                     isInitDataSource = false;
+                }
+
+                const isSelectedShown = this.selectedShown$.getValue();
+
+                if (isSelectedShown && this._selectedSuggestions.length > 0) {
+                    const selectedSuggestionsLength = this._selectedSuggestions.length;
+
+                    for (let i = 0; i < selectedSuggestionsLength; i++) {
+                        const selectedSuggestion = this._selectedSuggestions[i];
+                        const idx = this._suggestions.findIndex((item) => equal(item.value, selectedSuggestion.value));
+
+                        if (idx !== -1) {
+                            this._suggestions[idx].selected = true;
+                        }
+                    }
                 }
 
                 this.stateChanges.next('initDataSource.open().');

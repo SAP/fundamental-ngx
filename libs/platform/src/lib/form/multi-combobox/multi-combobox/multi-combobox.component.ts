@@ -39,6 +39,7 @@ import { PlatformMultiComboboxMobileModule } from '../multi-combobox-mobile/mult
 import { MULTICOMBOBOX_COMPONENT } from '../multi-combobox.interface';
 import { MultiComboboxConfig } from '../multi-combobox.config';
 import { AutoCompleteEvent } from '../../auto-complete/auto-complete.directive';
+import equal from 'fast-deep-equal';
 
 @Component({
     selector: 'fdp-multi-combobox',
@@ -189,7 +190,9 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     moreClicked(): void {
         this._suggestions = this.isGroup
             ? this._convertObjectsToGroupOptionItems(this._selectedSuggestions.map(({ value }) => value))
-            : [...this._selectedSuggestions];
+            : this._suggestions.filter((value) =>
+                  this._selectedSuggestions.some((item) => equal(item.value, value.value))
+              );
 
         this.showList(true);
         this.selectedShown$.next(true);
