@@ -125,10 +125,6 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
     @Input()
     fileLimit: number;
 
-    /** observable that emits a new value every time file uploader input is focused */
-    @Input()
-    fileUploaderInputFocused: Observable<boolean>;
-
     /** Whether or not to hide the input, leaving only the upload/browse button. */
     @Input()
     inputHidden = false;
