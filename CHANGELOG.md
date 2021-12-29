@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.243 (2021-12-29)
+
+
+### Bug Fixes
+
+* **core:** grid-list, not show indicator of new position on drag ([#7453](https://github.com/SAP/fundamental-ngx/issues/7453)) ([fad883d](https://github.com/SAP/fundamental-ngx/commit/fad883d8c81d4c63490f084eef9106e93a02052d))
+
 ## 0.33.0-rc.242 (2021-12-29)
 
 
