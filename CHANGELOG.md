@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.242 (2021-12-29)
+
+
+### Bug Fixes
+
+* **platform:** vhd controls styles ([#7448](https://github.com/SAP/fundamental-ngx/issues/7448)) ([4523eec](https://github.com/SAP/fundamental-ngx/commit/4523eec21963f70203f622b2724659b4752c618b))
+
 ## 0.33.0-rc.241 (2021-12-29)
 
 
