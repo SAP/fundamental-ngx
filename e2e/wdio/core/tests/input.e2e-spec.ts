@@ -3,7 +3,9 @@ import {
     browserIsSafari,
     clearValue,
     click,
+    getAttributeByName,
     getElementArrayLength,
+    getElementClass,
     getElementSize,
     getPreviousElementText,
     getText,
@@ -23,6 +25,7 @@ import {
     inputMessageText,
     invalidInputLabelText,
     labelsArray,
+    stateClassesArr,
     testText,
     validInputLabelText,
     warningInputLabelText
@@ -58,7 +61,9 @@ describe('Input should ', () => {
         reactivePrimaryInput2,
         allInputFields,
         popoverHelp,
-        questionMark
+        questionMark,
+        inputStateExample,
+        input
     } = inputPage;
 
     const inputsArr = [
@@ -197,6 +202,15 @@ describe('Input should ', () => {
 
         mouseHoverElement(questionMark, 1);
         expect(isElementDisplayed(popoverHelp)).toBe(true, 'popover not displayed');
+    });
+
+    it('should check states', () => {
+        scrollIntoView(inputStateExample);
+        const checkboxCount = getElementArrayLength(inputStateExample + input);
+
+        for (let i = 0; i < checkboxCount; i++) {
+            expect(getElementClass(inputStateExample + input, i)).toContain(stateClassesArr[i]);
+        }
     });
 
     it('should check RTL', () => {

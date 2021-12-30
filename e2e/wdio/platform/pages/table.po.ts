@@ -25,6 +25,9 @@ export class TablePo extends BaseComponentPo {
     tableNoItemsTemplateExample = 'fdp-platform-table-no-items-template-example ';
     tableSemanticExample = 'fdp-platform-table-semantic-example ';
     tableRowClassExample = 'fdp-platform-table-row-class-example ';
+    tableTreeExample = 'fdp-platform-table-tree-example ';
+    tableWrapExample = 'fdp-platform-table-wrap-example ';
+    tableNoOuterBordersExample = 'fdp-platform-table-no-outer-borders-example ';
 
     button = 'button';
     buttonSearch = '.fdp-search-field__submit';
@@ -85,7 +88,8 @@ export class TablePo extends BaseComponentPo {
     buttonActionOne = '[label="Action One"] button';
     buttonActionTwo = '[label="Action Two"] button';
     ellipsisButton = '.fd-ellipsis';
-
+    synchronizeButton = '.fdp-search-field__loading';
+    arrowButton = '.fd-table__cell--expand';
     open(): void {
         super.open(this.url);
         waitForPresent(this.root);

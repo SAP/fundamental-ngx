@@ -14,6 +14,7 @@ import {
 } from '../../driver/wdio';
 import { SearchPo } from '../pages/search.po';
 import { expected_category, search_placeholder } from '../fixtures/appData/search-page-content';
+import { checkElArrIsClickable } from '../../helper/assertion-helper';
 
 describe('Search field', () => {
     const {
@@ -29,7 +30,8 @@ describe('Search field', () => {
         cozyWithDataSourceSearch,
         okButton,
         mobileExampleSearch,
-        categoryOption
+        categoryOption,
+        synchronizeButton
     } = new SearchPo();
     const searchPage = new SearchPo();
 
@@ -180,6 +182,10 @@ describe('Search field', () => {
 
         expect(getText(cozyWithDataSourceSearch, 1)).toContain(expected_category);
         expect(getText(cozyWithDataSourceSearch, 3)).toContain(expected_category);
+    });
+
+    it('should check clickability synchronize button', () => {
+        checkElArrIsClickable(synchronizeButton);
     });
 
     it('should check rtl switch', () => {
