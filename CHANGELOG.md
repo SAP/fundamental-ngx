@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.248 (2021-12-30)
+
+
+### Bug Fixes
+
+* **core:** step-input - keyboard interaction ([#7449](https://github.com/SAP/fundamental-ngx/issues/7449)) ([4bd6b9e](https://github.com/SAP/fundamental-ngx/commit/4bd6b9ed3bcf249ee81fedfa97257f79360ce9d2))
+
 ## 0.33.0-rc.247 (2021-12-30)
 
 ## 0.33.0-rc.246 (2021-12-30)
