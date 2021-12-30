@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ValidatorFn, Validators } from '@angular/forms';
 
 import {
     DatetimeAdapter,
@@ -33,6 +34,7 @@ export class PlatformTimePickerTemplateExampleComponent {
     timeAllowNull: FdDate = new FdDate().setTime(12, 0, 0);
     timeDisabled: FdDate = new FdDate().setTime(12, 0, 0);
     displayFormat = { hour: 'numeric', minute: '2-digit', second: '2-digit', hour12: false };
+    requiredTimeValidator: ValidatorFn[] = [Validators.required];
 
     setNull(): void {
         this.timeAllowNull = null;
