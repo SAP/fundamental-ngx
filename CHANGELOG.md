@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.252 (2021-12-30)
+
+
+### Bug Fixes
+
+* **core:** rating-indicator, update styles ([#7456](https://github.com/SAP/fundamental-ngx/issues/7456)) ([29674c1](https://github.com/SAP/fundamental-ngx/commit/29674c14a5564621dff7282a3db783734c2c9b69))
+
 ## 0.33.0-rc.251 (2021-12-30)
 
 ## 0.33.0-rc.250 (2021-12-30)
