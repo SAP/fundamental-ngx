@@ -5,7 +5,10 @@ import {
     getElementTitle,
     isElementClickable,
     scrollIntoView,
-    getElementSize
+    getElementSize,
+    refreshPage,
+    waitForPresent,
+    waitForElDisplayed
 } from '../../driver/wdio';
 
 describe('Button test suite:', () => {
@@ -14,6 +17,12 @@ describe('Button test suite:', () => {
 
     beforeAll(() => {
         buttonPage.open();
+    }, 1);
+
+    afterEach(() => {
+        refreshPage();
+        waitForPresent(buttonPage.root);
+        waitForElDisplayed(buttonPage.title);
     }, 1);
 
     it('verify clickable buttons types', () => {
