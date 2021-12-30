@@ -1,4 +1,29 @@
 
+## 0.33.0-rc.245 (2021-12-29)
+
+## 0.33.0-rc.244 (2021-12-29)
+
+## 0.33.0-rc.243 (2021-12-29)
+
+
+### Bug Fixes
+
+* **core:** grid-list, not show indicator of new position on drag ([#7453](https://github.com/SAP/fundamental-ngx/issues/7453)) ([fad883d](https://github.com/SAP/fundamental-ngx/commit/fad883d8c81d4c63490f084eef9106e93a02052d))
+
+## 0.33.0-rc.242 (2021-12-29)
+
+
+### Bug Fixes
+
+* **platform:** vhd controls styles ([#7448](https://github.com/SAP/fundamental-ngx/issues/7448)) ([4523eec](https://github.com/SAP/fundamental-ngx/commit/4523eec21963f70203f622b2724659b4752c618b))
+
+## 0.33.0-rc.241 (2021-12-29)
+
+
+### Bug Fixes
+
+* **core:** multi-select doesn't work with objects ([#7419](https://github.com/SAP/fundamental-ngx/issues/7419)) ([86d6219](https://github.com/SAP/fundamental-ngx/commit/86d6219bce88382c4d634b41cb413811bd75bd90))
+
 ## 0.33.0-rc.240 (2021-12-28)
 
 ## 0.33.0-rc.239 (2021-12-23)

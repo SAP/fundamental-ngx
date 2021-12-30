@@ -1,3 +1,4 @@
+import { SimpleChange } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { MultiInputComponent, MultiInputModule } from '@fundamental-ngx/core/multi-input';
@@ -7,10 +8,23 @@ import {
     DynamicComponentService,
     RtlService
 } from '@fundamental-ngx/core/utils';
+import { first } from 'rxjs/operators';
 
 describe('MultiInputComponent', () => {
     let component: MultiInputComponent;
     let fixture: ComponentFixture<MultiInputComponent>;
+
+    /**
+     * ngOnChanges is not being called when input values are set to component instance directly.
+     * `updateComponentInput` function adds this logic
+     */
+    function updateComponentInput(inputName: string, value: any) {
+        component[inputName] = value;
+        component.ngOnChanges({
+            [inputName]: new SimpleChange(null, value, false)
+        });
+        fixture.detectChanges();
+    }
 
     beforeEach(
         waitForAsync(() => {
@@ -24,19 +38,15 @@ describe('MultiInputComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(MultiInputComponent);
         component = fixture.componentInstance;
-        component.dropdownValues = ['displayedValue', 'displayedValue2'];
+        updateComponentInput('dropdownValues', ['displayedValue', 'displayedValue2']);
         fixture.detectChanges();
     });
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
-
     it('should handle content density when compact input is not provided', () => {
-        spyOn(component, 'buildComponentCssClass');
-        component.ngOnInit();
         expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
-        expect(component.buildComponentCssClass).toHaveBeenCalled();
+        const classList = (fixture.nativeElement as HTMLElement).classList;
+        expect(classList.contains('fd-multi-input')).toBeTrue();
+        expect(classList.contains('fd-multi-input-custom')).toBeTrue();
     });
 
     it('should set placeholder', async () => {
@@ -54,13 +64,16 @@ describe('MultiInputComponent', () => {
         await fixture.whenStable();
         spyOn(component.searchTermChange, 'emit');
         spyOn(component, 'filterFn');
-        spyOn(component, 'openChangeHandle');
-        component.ngOnInit();
+        spyOn(component, 'openChangeHandle').and.callThrough();
 
         const text = 'test';
         const inputElement = fixture.nativeElement.querySelector('.fd-input');
         inputElement.value = text;
         inputElement.dispatchEvent(new Event('input'));
+        // openChangeHandle will be triggered by keydown event
+        inputElement.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyA' }));
+
+        await fixture.whenStable();
 
         expect(component.searchTerm).toBe(text);
         expect(component.searchTermChange.emit).toHaveBeenCalled();
@@ -70,8 +83,7 @@ describe('MultiInputComponent', () => {
 
     it('should filter dropdown values', async () => {
         await fixture.whenStable();
-        component.dropdownValues = ['test1', 'test2', 'foobar'];
-        component.ngOnInit();
+        updateComponentInput('dropdownValues', ['test1', 'test2', 'foobar']);
 
         spyOn(component, 'filterFn').and.callThrough();
 
@@ -82,14 +94,14 @@ describe('MultiInputComponent', () => {
         fixture.detectChanges();
 
         expect(component.filterFn).toHaveBeenCalled();
-        expect(component.displayedValues.length).toBe(1);
         expect(component.dropdownValues.length).toBe(3);
+        const vm = await component.viewModel$.pipe(first()).toPromise();
+        expect(vm.displayedOptions.length).toBe(1);
     });
 
     it('should open/close popover on input addon click', async () => {
         await fixture.whenStable();
-        component.dropdownValues = ['test1', 'test2', 'foobar'];
-        component.ngOnInit();
+        updateComponentInput('dropdownValues', ['test1', 'test2', 'foobar']);
         component.open = false;
 
         const inputButtonElement = fixture.nativeElement.querySelector('.fd-input-group__button');
@@ -108,13 +120,11 @@ describe('MultiInputComponent', () => {
         spyOn(component.selectedChange, 'emit');
         spyOn(component, 'onChange');
         spyOn(component, '_handleSelect').and.callThrough();
-        component.dropdownValues = ['test1', 'test2', 'foobar'];
-        component.ngOnInit();
+        updateComponentInput('dropdownValues', ['test1', 'test2', 'foobar']);
         fixture.detectChanges();
         component.open = true;
         fixture.detectChanges();
 
-        (component as any)._changeDetRef.markForCheck();
         component.selected = ['test1'];
         fixture.detectChanges();
 
@@ -126,8 +136,7 @@ describe('MultiInputComponent', () => {
         spyOn(component.selectedChange, 'emit');
         spyOn(component, 'onChange');
         spyOn(component, '_handleSelect').and.callThrough();
-        component.dropdownValues = ['test1', 'test2', 'foobar'];
-        component.ngOnInit();
+        updateComponentInput('dropdownValues', ['test1', 'test2', 'foobar']);
         component.open = true;
         fixture.detectChanges();
 
@@ -200,16 +209,49 @@ describe('MultiInputComponent', () => {
     it('should handle showAll button', async () => {
         await fixture.whenStable();
         const event = new MouseEvent('click');
-        component.searchTerm = 'term';
-        component.dropdownValues = ['term1', 'term2', 'value'];
+        updateComponentInput('searchTerm', 'term');
+        updateComponentInput('dropdownValues', ['term1', 'term2', 'value']);
         spyOn(event, 'preventDefault');
         spyOn(event, 'stopPropagation');
-        spyOn(<any>component, '_applySearchTermChange').and.callThrough();
         component._showAllClicked(event);
         expect(event.preventDefault).toHaveBeenCalled();
         expect(event.stopPropagation).toHaveBeenCalled();
         expect(component.searchTerm).toBe('');
-        expect(component.displayedValues.length).toEqual(component.dropdownValues.length);
-        expect((<any>component)._applySearchTermChange).toHaveBeenCalled();
+
+        const vm = await component.viewModel$.pipe(first()).toPromise();
+
+        expect(vm.displayedOptions.length).toBe(component.dropdownValues.length);
+    });
+
+    it('should support object values', async () => {
+        updateComponentInput('searchTerm', 'f');
+        updateComponentInput(
+            'dropdownValues',
+            ['foo', 'baz', 'bar'].map((v) => ({ value: v, name: v.toUpperCase() }))
+        );
+        updateComponentInput('valueFn', (el) => el.value);
+        updateComponentInput('displayFn', (el) => el.name);
+        updateComponentInput('selected', ['foo']);
+
+        const vm = await component.viewModel$.pipe(first()).toPromise();
+        expect(vm.displayedOptions.length).toEqual(1);
+        expect(component.selected).toEqual(['foo']);
+    });
+
+    it('on selection should remove values, that are not represented as options', async () => {
+        updateComponentInput('dropdownValues', ['foo', 'baz', 'bar']);
+        updateComponentInput('selected', ['foo1']);
+
+        const vm1 = await component.viewModel$.pipe(first()).toPromise();
+        expect(vm1.displayedOptions.length).toEqual(3);
+        expect(vm1.selectedOptions.length).toEqual(0);
+        expect(component.selected).toEqual(['foo1']);
+
+        component._handleSelect(true, component.dropdownValues[1]);
+
+        const vm2 = await component.viewModel$.pipe(first()).toPromise();
+        expect(vm2.displayedOptions.length).toEqual(3);
+        expect(vm2.selectedOptions.length).toEqual(1);
+        expect(component.selected).toEqual(['baz']);
     });
 });

@@ -19,6 +19,12 @@ $block: fdp-value-help-dialog;
         min-height: 1.625rem;
     }
 
+    &__advanced-search,
+    .fd-dialog__body {
+        background-color: #f7f7f7;
+        background-color: var(--sapBackgroundColor, #f7f7f7);
+    }
+
     &__advanced-filters {
         padding-top: 1rem;
         label {
@@ -157,5 +163,9 @@ $block: fdp-value-help-dialog;
         .fd-button {
             margin-left: 0.5rem;
         }
+    }
+
+    &__hidden_label {
+        display: none;
     }
 }

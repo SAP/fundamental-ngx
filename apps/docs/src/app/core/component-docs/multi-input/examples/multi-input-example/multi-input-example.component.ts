@@ -9,4 +9,18 @@ export class MultiInputExampleComponent {
     secondSelected = ['Pineapple'];
     thirdSelected = ['Kiwi'];
     selectedDisabledAutoComplete = ['Kiwi'];
+
+    objectValues = [
+        { label: 'Apple', value: 'apple_value' },
+        { label: 'Banana', value: 'banana_value' },
+        { label: 'Pineapple', value: 'pineapple_value' },
+        { label: 'Tomato', value: 'tomato_value' },
+        { label: 'Kiwi', value: 'kiwi_value' },
+        { label: 'Strawberry', value: 'strawberry_value' },
+        { label: 'Blueberry', value: 'blueberry_value' },
+        { label: 'Orange', value: 'orange_value' }
+    ];
+    selectedObjectValues = ['apple_value', 'blueberry_value'];
+    objectValuesDisplayFn = (v) => v.label;
+    objectValuesValueFn = (v) => v.value;
 }

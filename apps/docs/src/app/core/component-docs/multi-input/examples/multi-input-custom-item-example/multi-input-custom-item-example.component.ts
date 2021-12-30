@@ -18,7 +18,9 @@ export class MultiInputCustomItemExampleComponent {
         { name: 'Journey Change', icon: 'journey-change' }
     ];
 
-    selected = [this.values[0], this.values[3], this.values[4]];
+    selected = [this.values[0], this.values[3], this.values[4]].map((el) => el.name);
+
+    valueFn = (item) => item.name;
 
     displayFunction(item: { name: string; icon: string }): string {
         if (item) {
