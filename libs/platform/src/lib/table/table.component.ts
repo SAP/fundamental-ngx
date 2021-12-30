@@ -1906,7 +1906,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this._dsSubscription = this._dsOpenedStream.subscribe((items) => {
             this._totalItems = dataSourceStream.dataProvider.totalItems;
             this._dataSourceItemsSubject.next(items);
-            this._cdr.detectChanges();
+            // calling "detectChanges" may result in content jumps
+            // using markForCheck in order to let "items" changes to get applied in the UI first
+            this._cdr.markForCheck();
         });
 
         this._subscriptions.add(this._dsSubscription);
