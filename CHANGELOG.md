@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.250 (2021-12-30)
+
+
+### Bug Fixes
+
+* **platform:** upload collection fixes ([#7452](https://github.com/SAP/fundamental-ngx/issues/7452)) ([5916f55](https://github.com/SAP/fundamental-ngx/commit/5916f555190f9ed68662862667a2f3742f4bc32b))
+
 ## 0.33.0-rc.249 (2021-12-30)
 
 ## 0.33.0-rc.248 (2021-12-30)
