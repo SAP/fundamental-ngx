@@ -92,12 +92,17 @@ describe('Datetime picker suite', () => {
     it('should check choosing date', () => {
         for (let i = 0; i < blockExamples.length; i++) {
             if (
-                blockExamples[i] !== internationalExample &&
-                blockExamples[i] !== disabledExample &&
-                blockExamples[i] !== formRangeExample
+                // skip internationalExample disabledExample rangeDisabledExample formRangeExample, disabledDatePicker
+                i !== 2 &&
+                i !== 6 &&
+                i !== 7 &&
+                i !== 8 &&
+                i !== 10
             ) {
                 checkChoosingDate(blockExamples[i]);
                 refreshPage();
+                waitForPresent(datePickerPage.root);
+                waitForElDisplayed(datePickerPage.title);
             }
         }
     });
@@ -283,7 +288,6 @@ describe('Datetime picker suite', () => {
         // if current month is December - we do not have next month in this year
         if (getCurrentItemIndex() !== 11) {
             nextMonthName = getAttributeByName(calendarItem, monthAttributeLabel, getCurrentItemIndex() + 1);
-            console.log(nextMonthName);
 
             sendKeys(['ArrowRight', 'Enter']);
             pause(3000);
@@ -402,13 +406,13 @@ describe('Datetime picker suite', () => {
         scrollIntoView(section + calendarIcon);
         click(section + calendarIcon);
         const currentDayIndex = getCurrentDayIndex();
-        const dayCount = getElementArrayLength(currentMonthCalendarItem);
+        const dayCount = getElementArrayLength(currentMonthCalendarItem) - 1;
 
-        if (currentDayIndex === dayCount) {
+        if (currentDayIndex === dayCount - 1) {
             click(altCalendarItem, currentDayIndex - 1);
             click(section + calendarIcon);
         }
-        if (currentDayIndex !== dayCount) {
+        if (currentDayIndex !== dayCount - 1) {
             click(altCalendarItem + ':not(.fd-calendar__item--other-month)', currentDayIndex + 1);
 
             section === formattingExample
