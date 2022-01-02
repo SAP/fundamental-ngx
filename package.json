@@ -162,7 +162,7 @@
         "@nrwl/tao": "13.2.3",
         "@nrwl/workspace": "13.2.3",
         "@schematics/angular": "~13.0.3",
-        "@types/jasmine": "3.10.2",
+        "@types/jasmine": "3.10.3",
         "@types/jasminewd2": "2.0.8",
         "@types/lodash-es": "4.17.5",
         "@typescript-eslint/eslint-plugin": "4.33.0",
