@@ -20,15 +20,11 @@ mergeable:
                 - required:
                       reviewers: ['droshev']
                 - required:
-                      reviewers: ['fkolar']
+                      reviewers: ['dimamarksman']
                 - required:
-                      reviewers: ['KevinOkamoto']
-                - required:
-                      reviewers: ['JKMarkowski']
+                      reviewers: ['Betrozov']
                 - required:
                       reviewers: ['mikerodonnell89']
-                - required:
-                      reviewers: ['valorkin']
                 - min:
                       count: 2
     - when: schedule.repository
