@@ -14,7 +14,7 @@ const allCapabilities = [
         'sauce:options': {
             screenResolution: '1920x1080',
             name: 'e2e-win-edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-            maxDuration: 2200
+            maxDuration: 2500
         }
     },
     {
@@ -26,7 +26,7 @@ const allCapabilities = [
         'sauce:options': {
             screenResolution: '1920x1440',
             name: 'e2e-MAC-Edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-            maxDuration: 2200
+            maxDuration: 2500
         }
     },
     {
@@ -38,7 +38,7 @@ const allCapabilities = [
         'sauce:options': {
             name: 'e2e-win-firefox ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
             screenResolution: '1920x1080',
-            maxDuration: 2200
+            maxDuration: 2500
         }
     },
     {
@@ -50,7 +50,7 @@ const allCapabilities = [
         'sauce:options': {
             screenResolution: '1920x1440',
             name: 'e2e-MAC-firefox ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-            maxDuration: 2200
+            maxDuration: 2500
         }
     },
     {
@@ -62,7 +62,7 @@ const allCapabilities = [
         'sauce:options': {
             screenResolution: '1920x1080',
             name: 'e2e-win-chrome ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-            maxDuration: 2200
+            maxDuration: 2500
         }
     },
     {
@@ -74,7 +74,7 @@ const allCapabilities = [
         'sauce:options': {
             name: 'e2e-MAC-chrome ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
             screenResolution: '1920x1440',
-            maxDuration: 2200
+            maxDuration: 2500
         }
     },
     {
