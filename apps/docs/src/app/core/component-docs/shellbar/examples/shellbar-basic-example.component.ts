@@ -11,7 +11,7 @@ export class ShellbarBasicExampleComponent {
         colorAccent: 11,
         alt: 'User Profile',
         hasPopUp: 'menu',
-        ariaLabel: 'User'
+        ariaLabel: 'User Profile'
     };
 
     userMenu: ShellbarUserMenu[] = [
