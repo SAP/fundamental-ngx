@@ -14,7 +14,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ExperimentalOptionComponent } from './option/option.component';
-import { KeyUtil } from '@fundamental-ngx/core';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';

@@ -1,5 +1,7 @@
 import { Component, ContentChildren, Input, QueryList, TemplateRef, ViewChild } from '@angular/core';
-import { DialogService, FileUploaderComponent, UploadCollectionItemDirective } from '@fundamental-ngx/core';
+import { DialogService } from '@fundamental-ngx/core/dialog';
+import { FileUploaderComponent } from '@fundamental-ngx/core/file-uploader';
+import { UploadCollectionItemDirective } from '@fundamental-ngx/core/upload-collection';
 
 @Component({
     selector: 'fd-upload-collection-complex-example',

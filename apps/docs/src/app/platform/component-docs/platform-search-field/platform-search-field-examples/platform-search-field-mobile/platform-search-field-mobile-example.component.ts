@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { SearchInput, SuggestionItem } from '@fundamental-ngx/platform';
+import { SearchInput, SuggestionItem } from '@fundamental-ngx/platform/search-field';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 
 @Component({

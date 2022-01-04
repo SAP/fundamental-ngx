@@ -18,7 +18,9 @@ export function addEslintJsonOverrides(tree: Tree, projectName: string): Rule {
         const tsRuleIndex = overrides.findIndex((rule) => rule.files?.length === 1 && rule.files[0] === '*.ts');
         if (tsRuleIndex !== -1) {
             if (Array.isArray(overrides[tsRuleIndex].extends)) {
-                overrides[tsRuleIndex].extends.push(overridePath);
+                if (!overrides[tsRuleIndex].extends.includes(overridePath)) {
+                    overrides[tsRuleIndex].extends.push(overridePath);
+                }
             } else {
                 overrides[tsRuleIndex].extends = [overridePath];
             }
