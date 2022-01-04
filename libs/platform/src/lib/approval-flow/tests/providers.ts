@@ -1,12 +1,12 @@
 import { cloneDeep } from 'lodash-es';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { ApprovalTeam, ApprovalUser } from '../interfaces';
 import { DataProvider, ProviderParams } from '../../shared';
 import { users, teams } from './data';
 
 export class UserDataProvider extends DataProvider<ApprovalUser> {
-    fetch(params: ProviderParams) {
+    fetch(params: ProviderParams): Observable<ApprovalUser[]> {
         let result = users;
         const query = params.get('query')?.toLowerCase();
         if (query) {
@@ -15,7 +15,7 @@ export class UserDataProvider extends DataProvider<ApprovalUser> {
         return of(cloneDeep(result)).pipe(delay(500));
     }
 
-    getOne(params: ProviderParams) {
+    getOne(params: ProviderParams): Observable<ApprovalUser & { phone: string; email: string }> {
         const id = params.get('id');
         const found = users.find((user) => user.id === id);
         return of({
@@ -27,7 +27,7 @@ export class UserDataProvider extends DataProvider<ApprovalUser> {
 }
 
 export class TeamDataProvider extends DataProvider<ApprovalTeam> {
-    fetch(params: ProviderParams) {
+    fetch(params: ProviderParams): Observable<ApprovalTeam[]> {
         let result = teams;
         const query = params.get('query')?.toLowerCase();
         if (query) {

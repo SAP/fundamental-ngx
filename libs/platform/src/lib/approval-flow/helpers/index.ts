@@ -10,15 +10,15 @@ export function isNodeStarted(node: ApprovalNode): boolean {
 }
 
 export function displayTeamFn(team: ApprovalTeam): string {
-    return team.name;
+    return team?.name;
 }
 
 export function displayUserFn(user: ApprovalUser): string {
-    return user.name;
+    return user?.name;
 }
 
 export function userValueFn(user: ApprovalUser): string {
-    return user.id;
+    return user?.id;
 }
 
 export function filterByName(obj: { name: string }, searchString: string): boolean {
@@ -26,7 +26,7 @@ export function filterByName(obj: { name: string }, searchString: string): boole
 }
 
 export function trackByFn(index: number, item: { id: string }): number | string {
-    return item.id ?? index;
+    return item?.id ?? index;
 }
 
 export function getGraphNodes(graph: ApprovalFlowGraph): ApprovalGraphNode[] {

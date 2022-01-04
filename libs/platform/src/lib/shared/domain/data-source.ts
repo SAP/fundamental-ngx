@@ -66,7 +66,8 @@
  *
  */
 import { InjectionToken } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 export enum MatchingStrategy {
     STARTS_WITH_PER_TERM = 'starts with per term',
@@ -154,6 +155,8 @@ export class ComboBoxDataSource<T> implements DataSource<T> {
     static readonly MaxLimit = 5;
     protected dataChanges: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
 
+    protected _onDestroy$ = new Subject<void>();
+
     constructor(public dataProvider: DataProvider<any>) {}
 
     match(predicate: string | Map<string, string> = new Map<string, string>()): void {
@@ -177,10 +180,12 @@ export class ComboBoxDataSource<T> implements DataSource<T> {
     }
 
     open(): Observable<T[]> {
-        return this.dataChanges.asObservable();
+        return this.dataChanges.pipe(takeUntil(this._onDestroy$));
     }
 
-    close(): void {}
+    close(): void {
+        this._onDestroy$.next();
+    }
 }
 
 export class MultiComboBoxDataSource<T> extends ComboBoxDataSource<T> {

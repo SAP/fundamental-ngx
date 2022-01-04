@@ -567,7 +567,7 @@ class UserDataProvider extends DataProvider<ApprovalUser> {
         return of(cloneDeep(result)).pipe(delay(500));
     }
 
-    getOne(params: ProviderParams): Observable<(ApprovalUser & {phone: string, email: string})> {
+    getOne(params: ProviderParams): Observable<ApprovalUser & { phone: string; email: string }> {
         const id = params.get('id');
         const found = users.find((user) => user.id === id);
         return of({

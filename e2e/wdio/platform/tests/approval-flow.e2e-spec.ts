@@ -231,6 +231,7 @@ describe('Approval flow', () => {
             waitForElDisplayed(addWhatchersInput);
             click(addWhatchersInput);
             sendKeys('Alvin');
+            pause(500);
             click(selectItem);
             click(bottomMenuItems);
             const watchersCountAfter = getElementArrayLength(watchersAvatar);
@@ -263,6 +264,7 @@ describe('Approval flow', () => {
             click(detailsDialogParallelSerialSelect);
             click(detailsDialogParallelSerialSelectOption);
             click(detailsDialogUserTeamButton);
+            pause(500);
             waitForElDisplayed(detailsDialogTeamMemberCheckBox);
             click(detailsDialogTeamMemberCheckBox, 3);
             click(detailsDialogSendReminderBtn);
@@ -282,6 +284,7 @@ describe('Approval flow', () => {
             click(detailsDialogParallelSerialSelect);
             click(detailsDialogParallelSerialSelectOption, 1);
             click(detailsDialogUserTeamButton);
+            pause(500);
             waitForElDisplayed(detailsDialogTeamMemberCheckBox);
             click(detailsDialogTeamMemberCheckBox, 4);
             click(detailsDialogSendReminderBtn);
@@ -302,6 +305,7 @@ describe('Approval flow', () => {
             waitForElDisplayed(topActionButtons);
             click(topActionButtons);
             click(detailsDialogUserTeamButton);
+            pause(500);
             waitForElDisplayed(detailsDialogTeamMemberCheckBox);
             click(detailsDialogTeamMemberCheckBox, 4);
             click(detailsDialogSendReminderBtn);
@@ -320,6 +324,7 @@ describe('Approval flow', () => {
             waitForElDisplayed(approvalFlowNodeActionMenuItem);
             click(approvalFlowNodeActionMenuItem);
             click(detailsDialogUserTeamButton);
+            pause(500);
             waitForElDisplayed(detailsDialogTeamMemberCheckBox);
             click(detailsDialogTeamMemberCheckBox, 4);
             click(detailsDialogSendReminderBtn);
@@ -335,6 +340,7 @@ describe('Approval flow', () => {
             browserIsFirefox() ? click(addNode, 2) : click(addNode, 1);
             waitForElDisplayed(detailsDialog);
             click(addApproverOptions, 1);
+            pause(500);
             waitForElDisplayed(approverOptionListItem);
             click(approverOptionListItem, 2);
             click(detailsDialogUserTeamButton);
@@ -358,6 +364,7 @@ describe('Approval flow', () => {
             browserIsFirefox() ? click(addNode, 2) : click(addNode, 1);
             waitForElDisplayed(detailsDialog);
             click(addApproverOptions, 1);
+            pause(500);
             waitForElDisplayed(approverOptionListItem);
             click(approverOptionListItem, 1);
             click(detailsDialogUserTeamButton);
@@ -416,6 +423,7 @@ describe('Approval flow', () => {
             click(approvalFlowNodeActionMenuItem);
             waitForElDisplayed(detailsDialog);
             click(detailsDialogUserTeamButton);
+            pause(500);
             waitForElDisplayed(dialogCheckbox);
             click(dialogCheckbox);
             click(footerButtons);
@@ -432,6 +440,7 @@ describe('Approval flow', () => {
             click(approvalFlowNodeActionMenuItem, 1);
             waitForElDisplayed(detailsDialog);
             click(detailsDialogUserTeamButton);
+            pause(500);
             waitForElDisplayed(dialogCheckbox);
             click(dialogCheckbox);
             click(footerButtons);
