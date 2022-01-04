@@ -56,6 +56,8 @@ describe('Date picker suite', () => {
 
     beforeAll(() => {
         datePickerPage.open();
+        waitForPresent(datePickerPage.root);
+        waitForElDisplayed(datePickerPage.title);
     }, 1);
 
     beforeEach(() => {
