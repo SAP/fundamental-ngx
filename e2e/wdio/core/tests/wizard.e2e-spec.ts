@@ -167,6 +167,7 @@ describe('Wizard component test', () => {
         click(wizard + nextStep);
         click(radioButtonLabel);
         expect(getAttributeByName(radioButton, 'aria-checked')).toBe('true', 'radio button is not selected');
+        pause(500);
         click(radioButtonLabel, 1);
         // pause for dialog element to be created
         pause(500);
