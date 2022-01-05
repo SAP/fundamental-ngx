@@ -73,7 +73,7 @@ export class AvatarGroupOverflowBodyDirective implements AfterViewInit, OnDestro
     /** @hidden */
     @HostListener('keyup', ['$event'])
     keyUpHandler(event: KeyboardEvent): void {
-        if (KeyUtil.isKeyCode(event, [TAB])) {
+        if (KeyUtil.isKeyCode(event, TAB)) {
             const index = this.overflowItems.toArray().findIndex((item) => item._element === event.target);
             if (index !== -1) {
                 this._keyboardEventsManager.setActiveItem(index);

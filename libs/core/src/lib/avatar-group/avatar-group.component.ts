@@ -86,12 +86,16 @@ export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, O
 
     /** @hidden */
     private get _avatarGroupItemWidth(): number {
-        return this.mainItems.first?._element?.offsetWidth;
+        return this.mainItems.first?._element.offsetWidth ?? 0;
     }
 
     /** @hidden */
     private get _avatarGroupItemWithMarginsWidth(): number {
-        const elementStyles = getComputedStyle(this.mainItems.first?._element);
+        if (!this.mainItems.first) {
+            return this._avatarGroupItemWidth;
+        }
+
+        const elementStyles = getComputedStyle(this.mainItems.first._element);
 
         return (
             this._avatarGroupItemWidth +
@@ -145,7 +149,7 @@ export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, O
     /** @hidden */
     @HostListener('keyup', ['$event'])
     keyUpHandler(event: KeyboardEvent): void {
-        if (KeyUtil.isKeyCode(event, [TAB])) {
+        if (KeyUtil.isKeyCode(event, TAB)) {
             const index = this.mainItems.toArray().findIndex((item) => item._element === event.target);
             if (index !== -1) {
                 this._keyboardEventsManager.setActiveItem(index);
@@ -153,6 +157,8 @@ export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, O
         }
 
         if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW])) {
+            event.preventDefault();
+
             // passing the event to key manager so we get a change fired
             this._keyboardEventsManager.onKeydown(event);
         }
