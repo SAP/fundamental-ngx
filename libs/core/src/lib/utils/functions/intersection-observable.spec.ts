@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { from } from 'rxjs';
 import { delayWhen, first } from 'rxjs/operators';
 
-import { intersectionObservable } from '@fundamental-ngx/core';
+import { intersectionObservable } from './intersection-observable';
 
 const ELEMENT_DISPLAY: 'none' | 'block' = 'none';
 

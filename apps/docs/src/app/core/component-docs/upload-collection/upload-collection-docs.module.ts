@@ -8,21 +8,19 @@ import { UploadCollectionExampleComponent } from './examples/upload-collection-e
 import { UploadCollectionHeaderComponent } from './upload-collection-header/upload-collection-header.component';
 import { UploadCollectionModule } from '@fundamental-ngx/core/upload-collection';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
-import {
-    CheckboxModule,
-    DialogModule,
-    FileUploaderModule,
-    InputGroupModule,
-    ListModule,
-    MessagePageModule,
-    ObjectMarkerModule,
-    ObjectStatusModule,
-    ToolbarModule
-} from '@fundamental-ngx/core';
 import { UploadCollectionSmallExampleComponent } from './examples/upload-collection-small-example.component';
 import { UploadCollectionCustomExampleComponent } from './examples/upload-collection-custom-example.component';
 import { UploadCollectionEmptyExampleComponent } from './examples/upload-collection-empty-example.component';
 import { UploadCollectionComplexExampleComponent } from './examples/upload-collection-complex-example.component';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { ObjectMarkerModule } from '@fundamental-ngx/core/object-marker';
+import { MessagePageModule } from '@fundamental-ngx/core/message-page';
+import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { FileUploaderModule } from '@fundamental-ngx/core/file-uploader';
+import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 
 const routes: Routes = [
     {

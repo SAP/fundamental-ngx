@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
 import { OverflowListDirective } from './overflow-list.directive';
-import { OverflowListItemDirective } from '@fundamental-ngx/core';
+import { OverflowListItemDirective } from './overflow-list-item.directive';
 import { ViewportRuler } from '@angular/cdk/overlay';
 
 const LIST_ITEM_WIDTH = 100;
