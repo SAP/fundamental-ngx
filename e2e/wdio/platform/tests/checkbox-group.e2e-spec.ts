@@ -59,6 +59,8 @@ describe('Checkbox group test suite', () => {
 
     beforeAll(() => {
         checkboxGroupPage.open();
+        waitForPresent(checkboxGroupPage.root);
+        waitForElDisplayed(checkboxGroupPage.title);
     }, 2);
 
     beforeEach(() => {
