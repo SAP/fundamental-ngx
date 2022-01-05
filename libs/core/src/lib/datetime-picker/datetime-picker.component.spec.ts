@@ -73,7 +73,7 @@ describe('DatetimePickerComponent', () => {
     it('should not update input with invalid time', () => {
         component.allowNull = false;
         component.handleInputChange('hello');
-        expect(component.isInvalidDateInput).toEqual(true);
+        expect(component._isInvalidDateInput).toEqual(true);
     });
 
     it('should update input from calendar', () => {

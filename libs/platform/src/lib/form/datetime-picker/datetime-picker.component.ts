@@ -223,6 +223,11 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
     @Input()
     disableFunction: (value: D) => boolean = () => false;
 
+    /** @hidden */
+    get _isRequired(): boolean {
+        return !!this.formField?.required;
+    }
+
     constructor(
         protected _cd: ChangeDetectorRef,
         readonly elementRef: ElementRef,

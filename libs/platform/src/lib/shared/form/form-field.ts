@@ -57,6 +57,10 @@ export abstract class FormField {
      */
     control: FormFieldControl<any> | null;
     /**
+     * Set when form field is a mandatory one.
+     */
+    required: boolean;
+    /**
      * Register underlying form control
      */
     registerFormFieldControl: (control: FormFieldControl<any>) => void;

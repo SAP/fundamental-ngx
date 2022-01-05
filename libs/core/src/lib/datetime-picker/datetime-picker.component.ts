@@ -289,7 +289,7 @@ export class DatetimePickerComponent<D>
 
     /** Indicates when datetime input is in invalid state. */
     get isInvalidDateInput(): boolean {
-        return this._isInvalidDateInput;
+        return this._isInvalidDateInput && this._touched;
     }
 
     /** @hidden Reference to the inner calendar component. */
@@ -337,6 +337,9 @@ export class DatetimePickerComponent<D>
 
     /** @hidden */
     private _subscriptions = new Subscription();
+
+    /** @hidden */
+    private _touched = false;
 
     /** @hidden */
     onChange: (value: D) => void = () => {};
@@ -422,6 +425,11 @@ export class DatetimePickerComponent<D>
     /** @hidden */
     ngAfterViewInit(): void {
         this._InitialiseVariablesInMessageService();
+        // update bindings after rendering
+        // is needed to preperly reflect error state
+        setTimeout(() => {
+            this._changeDetRef.markForCheck();
+        });
     }
 
     /**
@@ -459,6 +467,7 @@ export class DatetimePickerComponent<D>
 
     /** Method that handles blur events on datetime picker input */
     handleOnTouched(): void {
+        this._touched = true;
         this.onTouched();
         this.touched.next();
     }
