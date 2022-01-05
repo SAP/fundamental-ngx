@@ -28,7 +28,7 @@ let illustratedMessageUniqueId = 0;
     selector: '[fd-illustrated-message]',
     template: `
         <svg class="fd-illustrated-message__illustration" *ngIf="!noSvg">
-            <use [attr.xlink:href]="_href"></use>
+            <use [attr.href]="_href"></use>
         </svg>
         <ng-content select="[fd-illustrated-message-figcaption]"></ng-content>
         <ng-content select="fd-illustrated-message-actions"></ng-content>
