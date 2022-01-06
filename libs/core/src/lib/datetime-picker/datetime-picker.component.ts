@@ -342,7 +342,7 @@ export class DatetimePickerComponent<D>
     onChange: (value: D) => void = () => {};
 
     /** @hidden */
-    onTouched = () => {};
+    onTouched = (): void => {};
 
     /**
      * Function used to disable certain dates in the calendar.

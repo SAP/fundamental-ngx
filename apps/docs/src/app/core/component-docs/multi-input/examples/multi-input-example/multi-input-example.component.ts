@@ -21,6 +21,6 @@ export class MultiInputExampleComponent {
         { label: 'Orange', value: 'orange_value' }
     ];
     selectedObjectValues = ['apple_value', 'blueberry_value'];
-    objectValuesDisplayFn = (v) => v.label;
-    objectValuesValueFn = (v) => v.value;
+    objectValuesDisplayFn = (v): string => v.label;
+    objectValuesValueFn = (v): string => v.value;
 }

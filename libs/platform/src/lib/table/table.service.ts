@@ -57,7 +57,7 @@ export class TableService {
     search(searchInput: SearchInput): void {
         const prevState = this.getTableState();
 
-        const state: TableState = { ...prevState, searchInput: searchInput };
+        const state: TableState = { ...prevState, searchInput };
 
         this.setTableState(setCurrentPageToState(state, 1));
 
@@ -229,6 +229,6 @@ export class TableService {
 }
 
 function setCurrentPageToState(state: TableState, currentPage: number): TableState {
-    const newPageState: CollectionPage = { ...state.page, currentPage: currentPage };
+    const newPageState: CollectionPage = { ...state.page, currentPage };
     return { ...state, page: newPageState };
 }

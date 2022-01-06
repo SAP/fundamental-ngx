@@ -105,7 +105,7 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
         }
     }
 
-    openImage(image: Media, $event: KeyboardEvent | MouseEvent) {
+    openImage(image: Media, $event: KeyboardEvent | MouseEvent): void {
         image.overlayRequired ? this.openDialog(image, this.mediaList) : this.thumbnailClick(image, $event);
     }
 }

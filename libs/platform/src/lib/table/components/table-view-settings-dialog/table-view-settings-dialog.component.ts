@@ -124,7 +124,7 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
         const state = this._getTableState();
         const columns = this._getTableColumns();
         const dialogData: FiltersDialogData = {
-            columns: columns,
+            columns,
             viewSettingsFilters: this.filters.toArray(),
             filterBy: state?.filterBy
         };
@@ -219,7 +219,7 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
 
     /** @hidden */
     private _applySorting(field: string, direction: SortDirection): void {
-        this._table?.sort(field ? [{ field: field, direction: direction }] : []);
+        this._table?.sort(field ? [{ field, direction }] : []);
     }
 
     /** @hidden */
@@ -229,7 +229,7 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
 
     /** @hidden */
     private _applyGrouping(field: string, direction: SortDirection): void {
-        this._table?.group(field ? [{ field: field, direction: direction, showAsColumn: true }] : []);
+        this._table?.group(field ? [{ field, direction, showAsColumn: true }] : []);
     }
 
     /** @hidden */

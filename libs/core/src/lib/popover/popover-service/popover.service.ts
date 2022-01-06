@@ -265,7 +265,7 @@ export class PopoverService extends BasePopoverClass {
         const direction = this._getDirection();
 
         return new OverlayConfig({
-            direction: direction,
+            direction,
             disposeOnNavigation: this.closeOnNavigation,
             positionStrategy: position,
             scrollStrategy: this.scrollStrategy || this._overlay.scrollStrategies.reposition()

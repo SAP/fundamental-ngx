@@ -374,7 +374,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     }
 
     /** @hidden */
-    _onChangePerPage = (event: number) => {
+    _onChangePerPage = (event: number): void => {
         this.itemsPerPage = event;
         this._refreshPages();
 

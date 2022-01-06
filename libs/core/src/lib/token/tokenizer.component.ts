@@ -292,7 +292,7 @@ export class TokenizerComponent
     /** @hidden */
     addKeyboardListener(element: HTMLElement, newIndex: number): void {
         // function needs to be defined in order to be referenced later by addEventListener/removeEventListener
-        const handleFunctionReference = (e) => {
+        const handleFunctionReference = (e): void => {
             if (newIndex || newIndex === 0) {
                 this.handleKeyDown(e, newIndex);
             }

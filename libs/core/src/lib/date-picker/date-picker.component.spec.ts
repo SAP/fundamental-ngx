@@ -150,7 +150,7 @@ describe('DatePickerComponent', () => {
         const start: FdDate = adapter.parse('start');
         const end: FdDate = adapter.parse('end');
         expect(component._isInvalidDateInput).toBe(true);
-        expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: start, end: end });
+        expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start, end });
         expect(component.isModelValid()).toBe(false);
     });
 

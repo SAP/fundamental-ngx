@@ -41,8 +41,8 @@ describe('IconTabBarTextTypeComponent', () => {
         const draggableItem = component._tabs[0];
         const targetItem = component._tabs[1];
         component._onDropped({
-            draggableItem: draggableItem,
-            targetItem: targetItem,
+            draggableItem,
+            targetItem,
             action: 'insert'
         });
         const child = targetItem.subItems.find((item) => item.label === draggableItem.label);
@@ -56,8 +56,8 @@ describe('IconTabBarTextTypeComponent', () => {
         const targetItemPreviousUid = targetItem.uId;
 
         component._onDropped({
-            draggableItem: draggableItem,
-            targetItem: targetItem,
+            draggableItem,
+            targetItem,
             action: 'replace'
         });
         const dragItemCurrentUid = draggableItem.uId;

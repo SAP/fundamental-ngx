@@ -262,8 +262,8 @@ export class FormGeneratorService implements OnDestroy {
         }
 
         this._formComponentDefinitions.push({
-            types: types,
-            component: component
+            types,
+            component
         });
 
         return true;

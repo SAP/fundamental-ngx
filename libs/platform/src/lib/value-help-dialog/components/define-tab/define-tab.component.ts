@@ -160,11 +160,11 @@ export class DefineTabComponent extends VhdBaseTab implements OnChanges {
     /** @hidden */
     private _refreshStrategies(): void {
         this._includeStrategy = Object.keys(VhdDefineIncludeStrategy).map((key) => ({
-            key: key,
+            key,
             type: VhdDefineType.include
         }));
         this._excludeStrategy = Object.keys(VhdDefineExcludeStrategy).map((key) => ({
-            key: key,
+            key,
             type: VhdDefineType.exclude
         }));
     }

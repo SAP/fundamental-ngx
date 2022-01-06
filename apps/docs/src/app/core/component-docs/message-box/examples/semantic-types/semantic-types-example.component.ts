@@ -33,9 +33,9 @@ export class SemanticTypesExampleComponent {
                 closeButtonCallback: () => messageBoxRef.dismiss('Dismissed')
             },
             {
-                type: type,
-                showSemanticIcon: showSemanticIcon,
-                customSemanticIcon: customSemanticIcon,
+                type,
+                showSemanticIcon,
+                customSemanticIcon,
                 ariaLabelledBy: 'fd-message-box-semantic-types-header fd-message-box-semantic-types-body',
                 ariaDescribedBy: 'fd-message-box-semantic-types-types'
             }

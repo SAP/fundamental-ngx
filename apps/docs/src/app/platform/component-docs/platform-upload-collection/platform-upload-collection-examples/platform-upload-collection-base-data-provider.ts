@@ -52,7 +52,7 @@ export class PlatformUploadCollectionDataProviderExample extends UploadCollectio
 
                     return {
                         temporaryDocumentId: item.documentId,
-                        item: item
+                        item
                     };
                 });
 
@@ -69,8 +69,8 @@ export class PlatformUploadCollectionDataProviderExample extends UploadCollectio
         const obs = data.items.map((file) =>
             this._http.get(file.url, { responseType: 'blob' }).pipe(
                 map((blob) => ({
-                    blob: blob,
-                    file: file
+                    blob,
+                    file
                 }))
             )
         );

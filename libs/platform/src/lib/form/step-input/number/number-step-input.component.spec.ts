@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 
@@ -106,7 +106,7 @@ describe('NumberStepInputComponent main functionality', () => {
     let fixture: ComponentFixture<NumberStepInputMainFunctionalityHostComponent>;
     let stepInputComponent: NumberStepInputComponent;
 
-    const getInputDebugElement = () => fixture.debugElement.query(By.css('.fd-step-input__input'));
+    const getInputDebugElement = (): DebugElement => fixture.debugElement.query(By.css('.fd-step-input__input'));
 
     beforeEach(
         waitForAsync(() => {

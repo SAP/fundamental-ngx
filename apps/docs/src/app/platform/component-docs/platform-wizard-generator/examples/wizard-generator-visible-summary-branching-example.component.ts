@@ -195,12 +195,9 @@ export class WizardGeneratorVisibleSummaryBranchingExampleComponent implements O
                 }
             })
             .afterClosed.pipe(takeUntil(this._onDestroy$))
-            .subscribe(
-                (wizardValue: WizardGeneratorFormsValue) => {
-                    this.wizardValue = wizardValue;
-                },
-                () => {}
-            );
+            .subscribe((wizardValue: WizardGeneratorFormsValue) => {
+                this.wizardValue = wizardValue;
+            });
     }
 
     wizardFinished(wizardValue: WizardGeneratorFormsValue): void {

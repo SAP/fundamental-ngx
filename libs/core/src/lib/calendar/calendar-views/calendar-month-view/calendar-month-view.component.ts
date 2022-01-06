@@ -253,13 +253,13 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
         const monthList: CalendarMonth[] = monthNames.map((monthName, index): CalendarMonth => {
             const month = index + this.monthOffset;
             return {
-                month: month,
+                month,
                 label: monthName,
                 ariaLabel: this._dateTimeAdapter.format(
                     this._dateTimeAdapter.createDate(this.year, month, 1),
                     this._dateTimeFormats.display.monthA11yLabel
                 ),
-                index: index,
+                index,
                 selected: month === this.monthSelected,
                 current: month === this.currentMonth,
                 tabIndex: month === this.monthSelected ? 0 : -1

@@ -544,7 +544,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     /** @hidden Rtl change subscription */
     private _subscribeToRtl(): void {
-        const refreshDirection = () => {
+        const refreshDirection = (): void => {
             this.dir = this._isRtl() ? 'rtl' : 'ltr';
             this._carouselService.isRtl = this.dir === 'rtl';
 

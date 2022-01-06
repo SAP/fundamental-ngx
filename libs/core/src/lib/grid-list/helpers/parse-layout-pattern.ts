@@ -31,7 +31,7 @@ function validateAndParseLayoutPattern(pattern: string, isBaseLayout: boolean): 
 
         res[size] = {
             pattern: item,
-            size: size,
+            size,
             value: isBaseLayout ? 12 / num : num
         };
 

@@ -446,7 +446,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         const inputEl = this._getInputNativeElement();
         const selectionStart = inputEl?.selectionStart || 0;
         const selectionEnd = inputEl?.selectionEnd || 0;
-        return { selectionStart: selectionStart, selectionEnd: selectionEnd };
+        return { selectionStart, selectionEnd };
     }
 
     /** @hidden */

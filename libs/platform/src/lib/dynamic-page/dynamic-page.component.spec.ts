@@ -57,7 +57,6 @@ class TestComponent {
 describe('DynamicPageComponent default values', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
-    let dynamicPageComponent: DynamicPageComponent;
     let dynamicPageServiceSpy: jasmine.SpyObj<DynamicPageService>;
 
     beforeEach(
@@ -76,7 +75,6 @@ describe('DynamicPageComponent default values', () => {
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
-        dynamicPageComponent = component.dynamicPage;
     });
 
     it('should create', () => {

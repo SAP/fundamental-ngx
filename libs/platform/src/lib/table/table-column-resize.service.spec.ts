@@ -5,7 +5,6 @@ import { TABLE_RESIZER_BORDER_WIDTH, TableColumnResizeService } from './table-co
 import { TableColumn } from './components/table-column/table-column';
 import { TABLE_COLUMN_MIN_WIDTH } from './constants';
 import { TableScrollDispatcherService } from './table-scroll-dispatcher.service';
-import { Table } from './table';
 
 describe('TableColumnResizeService', () => {
     let service: TableColumnResizeService;
@@ -44,14 +43,14 @@ describe('TableColumnResizeService', () => {
 
     it('should return column width based on column property', () => {
         const width = '100px';
-        const tableColumn = { name: 'name', width: width } as TableColumn;
+        const tableColumn = { name: 'name', width } as TableColumn;
 
         expect(service.getColumnWidthStyle(tableColumn)).toEqual(width);
     });
 
     it('if specified in percents, should return column width in px relatively to table width', () => {
         const width = '20%';
-        const tableColumn = { name: 'name', width: width } as TableColumn;
+        const tableColumn = { name: 'name', width } as TableColumn;
 
         expect(service.getColumnWidthStyle(tableColumn)).toEqual('280px');
     });

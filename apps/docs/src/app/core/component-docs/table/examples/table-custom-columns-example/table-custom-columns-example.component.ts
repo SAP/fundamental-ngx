@@ -42,7 +42,7 @@ export class TableCustomColumnsExampleComponent {
         this.originalDisplayedColumns = [];
 
         Object.keys(this.dataSource[0]).forEach((key) => {
-            this.originalDisplayedColumns.push({ key: key, checked: true });
+            this.originalDisplayedColumns.push({ key, checked: true });
         });
     }
 

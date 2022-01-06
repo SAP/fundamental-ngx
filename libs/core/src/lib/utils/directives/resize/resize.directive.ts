@@ -117,9 +117,9 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
             filter((move) => isBoundaryOverflow(move))
         );
 
-        const setupResizer = () =>
+        const setupResizer = (): void => {
             resizingCursorMovement$.pipe(takeUntil(mouseUpEvent$)).subscribe((event) => resize(event));
-
+        };
         const setupResize$ = resizeActive$.pipe(
             filter((isActive) => isActive),
             tap(() => setupResizer())

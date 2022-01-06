@@ -48,7 +48,7 @@ describe('MessageBoxFooterComponent', () => {
         const fixture = TestBed.createComponent(testComponent as any as Type<V>);
         const component = fixture.componentInstance;
 
-        return { fixture: fixture, component: component };
+        return { fixture, component };
     }
 
     it('should create', async () => {

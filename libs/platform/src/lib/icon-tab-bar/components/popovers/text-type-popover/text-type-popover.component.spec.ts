@@ -32,7 +32,7 @@ describe('TextTypePopoverComponent', () => {
         const extraTabs = generateTabBarItems(config);
         component.extraTabs = extraTabs;
         component.extraTabs[0].color = colorToTest;
-        component.ngOnChanges({ extraTabs: extraTabs } as unknown as SimpleChanges);
+        component.ngOnChanges({ extraTabs } as unknown as SimpleChanges);
 
         const appliedStyle = component.extraTabs[0].cssClasses.includes(`fd-icon-tab-bar__list-item--${colorToTest}`);
         expect(appliedStyle).toBeTruthy();

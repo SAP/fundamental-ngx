@@ -183,7 +183,7 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
     onChange: (values: File[]) => void = () => {};
 
     /** @hidden */
-    onTouched = () => {};
+    onTouched = (): void => {};
 
     /** @hidden */
     registerOnChange(fn: any): void {

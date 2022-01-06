@@ -124,7 +124,7 @@ export class ExperimentalCheckboxComponent implements ControlValueAccessor, OnDe
     private _previousState: fnCheckboxTypes;
 
     /** @hidden Reference to callback provided by FormControl.*/
-    public onTouched = () => {};
+    public onTouched = (): void => {};
     /** @hidden Reference to callback provided by FormControl.*/
     public onValueChange: (value: any) => void = () => {};
 

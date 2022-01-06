@@ -110,7 +110,7 @@ export class AutoCompleteDirective {
     private _sendCompleteEvent(forceClose: boolean): void {
         this.onComplete.emit({
             term: this._elementRef.nativeElement.value,
-            forceClose: forceClose
+            forceClose
         });
     }
 

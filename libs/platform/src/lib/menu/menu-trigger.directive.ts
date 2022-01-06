@@ -278,8 +278,8 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         const scrollStrategy = this._overlay.scrollStrategies.reposition();
 
         const overlayConfig = new OverlayConfig({
-            positionStrategy: positionStrategy,
-            scrollStrategy: scrollStrategy,
+            positionStrategy,
+            scrollStrategy,
             backdropClass: 'cdk-overlay-transparent-backdrop'
         });
         return overlayConfig;

@@ -74,7 +74,7 @@ describe('ComboboxComponent', () => {
     });
 
     it('should registerOnChange and registerOnTouched', () => {
-        const fn = () => {};
+        const fn = (): void => {};
         component.registerOnChange(fn);
         component.registerOnTouched(fn);
         expect(component.onChange).toBe(fn);

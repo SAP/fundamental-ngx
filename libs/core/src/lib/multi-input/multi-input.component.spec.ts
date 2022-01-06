@@ -18,7 +18,7 @@ describe('MultiInputComponent', () => {
      * ngOnChanges is not being called when input values are set to component instance directly.
      * `updateComponentInput` function adds this logic
      */
-    function updateComponentInput(inputName: string, value: any) {
+    function updateComponentInput(inputName: string, value: any): void {
         component[inputName] = value;
         component.ngOnChanges({
             [inputName]: new SimpleChange(null, value, false)

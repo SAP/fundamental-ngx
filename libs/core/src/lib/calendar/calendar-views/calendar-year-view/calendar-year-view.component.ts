@@ -277,7 +277,7 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
         for (let x = 0; x < displayedYearsAmount; ++x) {
             const year = this._firstYearInList + x;
             calendarYearList.push({
-                year: year,
+                year,
                 label: this._getYearName(year),
                 ariaLabel: this._getAriaYearName(year),
                 selected: year === this.yearSelected,

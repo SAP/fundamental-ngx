@@ -81,7 +81,7 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
     onChange: (value: string | string[]) => void = () => {};
 
     /** @hidden */
-    onTouched = () => {};
+    onTouched = (): void => {};
 
     constructor(private readonly _changeDetRef: ChangeDetectorRef) {}
 
