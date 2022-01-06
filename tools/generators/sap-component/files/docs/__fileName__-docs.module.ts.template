@@ -6,7 +6,7 @@ import { API_FILES } from '../../api-files';
 import { <%= className %>HeaderComponent } from './<%= name %>-header/<%= name %>-header.component';
 import { <%= className %>DocsComponent } from './<%= name %>-docs.component';
 import { examples } from './examples';
-import { <%= moduleName %>Module } from '@fundamental-ngx/<%= projectTag %>/<%= name %>';
+import { <%= moduleName %>Module } from '@fundamental-ngx/<%= projectName %>/<%= name %>';
 
 const routes: Routes = [
     {
