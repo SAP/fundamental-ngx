@@ -21,7 +21,10 @@ import { Subscription } from 'rxjs';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 @Directive({
-    selector: '[fdNestedList], [fd-nested-list]'
+    selector: '[fdNestedList], [fd-nested-list]',
+    host: {
+        role: 'listitem'
+    }
 })
 export class NestedListDirective implements AfterContentInit, NestedListInterface, OnInit, OnDestroy {
     /** In case the user wants to no use icons for items in this list */

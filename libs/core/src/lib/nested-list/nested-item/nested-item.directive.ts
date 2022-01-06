@@ -21,7 +21,10 @@ let sideNavigationItemUniqueId = 0;
 
 @Directive({
     selector: '[fdNestedItem], [fd-nested-list-item]',
-    providers: [NestedItemService]
+    providers: [NestedItemService],
+    host: {
+        role: 'listitem'
+    }
 })
 export class NestedItemDirective implements AfterContentInit, NestedItemInterface, OnDestroy {
     /** Whether item should be expanded */

@@ -67,7 +67,7 @@ export class MenuComponent
     @Input()
     compact?: boolean;
 
-    /** role of the menu is ddefeined in the property for the component */
+    /** role of the menu is defined in the property for the component */
     @Input()
     role = 'none';
 
