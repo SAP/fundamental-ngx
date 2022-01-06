@@ -1,6 +1,6 @@
 import { chain, Rule } from '@angular-devkit/schematics';
 import { readWorkspaceJson } from '@nrwl/workspace';
-import { addEslintJsonOverrides } from '../../utils/linting';
+import { addEslintJsonOverrides } from '../utils/linting';
 
 interface AddEslintOverridesSchema {
     project?: string;

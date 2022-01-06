@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { CoreDocumentationComponent } from './documentation/fn-documentation.component';
 import { HomeDocsComponent } from './component-docs/fn-home/fn-home.component';
 
+// BEING UPDATED WITH THE SAP-COMPONENT SCHEMATIC; DO NOT MODIFY THE STRUCTURE!
 export const ROUTES: Routes = [
     {
         path: '',
