@@ -290,12 +290,12 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
             };
 
             calendarYearList.push({
-                years: years,
+                years,
                 label: this._getYearsName(years),
                 ariaLabel: this._getAriaYearsName(years),
                 selected: this._isBetween(years, this.yearSelected),
                 current: this._isBetween(years, this._currentYear),
-                index: index
+                index
             });
         }
 

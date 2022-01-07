@@ -531,7 +531,7 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
      * Function that handles changes from month view child component, changes actual view and changes currently displayed month
      */
     handleMonthViewChange(month: number): void {
-        this._currentlyDisplayed = { month: month, year: this._currentlyDisplayed.year };
+        this._currentlyDisplayed = { month, year: this._currentlyDisplayed.year };
         this.activeView = 'day';
         this.onDaysViewSelected();
         this.activeViewChange.emit(this.activeView);

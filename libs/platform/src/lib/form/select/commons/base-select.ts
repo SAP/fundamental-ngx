@@ -338,7 +338,7 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
         return this.value.trim().length === 0;
     }
 
-    protected setValue(newValue: any, emitOnChange = true) {
+    protected setValue(newValue: any, emitOnChange = true): void {
         if (newValue !== this._value) {
             this.writeValue(newValue);
             if (emitOnChange) {
@@ -466,7 +466,7 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
             selectItems.push({
                 label: this.displayValue(value),
                 secondaryText: this.objectGet(value, this.secondaryKey),
-                value: value
+                value
             });
         }
 
@@ -482,7 +482,7 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
 
         for (let i = 0; i < items.length; i++) {
             const value = items[i];
-            selectItems.push({ label: value, value: value });
+            selectItems.push({ label: value, value });
         }
 
         return selectItems;
@@ -499,7 +499,7 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
             const value = items[i];
             selectItems.push({
                 label: this.displayValue(value),
-                value: value
+                value
             });
         }
 

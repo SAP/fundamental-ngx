@@ -410,7 +410,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     onChange: (value: SliderControlValue) => void = () => {};
 
     /** @hidden */
-    onTouched = () => {};
+    onTouched = (): void => {};
 
     /** @hidden */
     registerOnChange(fn: (value: SliderControlValue) => void): void {
@@ -784,7 +784,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
                     const value = Math.round(i * this.step * 100) / 100;
                     const position = (value / (this.max - this.min)) * 100;
 
-                    return { value: value, position: position, label: `${this.min + value}` };
+                    return { value, position, label: `${this.min + value}` };
                 });
             }
         }

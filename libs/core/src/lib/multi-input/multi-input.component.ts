@@ -312,7 +312,7 @@ export class MultiInputComponent
     onChange: (value: any) => void = () => {};
 
     /** @hidden */
-    onTouched = () => {};
+    onTouched = (): void => {};
 
     /** @hidden */
     constructor(
@@ -683,7 +683,7 @@ export class MultiInputComponent
      * @hidden
      * Removes values if corresponding option is not found
      */
-    private _removeValuesWithoutOptions() {
+    private _removeValuesWithoutOptions(): void {
         this._selectionModel.selected.forEach((value) => {
             if (!this.optionItems$.value.has(value)) {
                 this._selectionModel.deselect(value);
@@ -700,7 +700,7 @@ export class MultiInputComponent
     /** @hidden */
     private _getOptionItem(item: any): OptionItem {
         return {
-            item: item,
+            item,
             label: this.displayFn(item),
             value: this.valueFn(item)
         };
@@ -729,8 +729,8 @@ export class MultiInputComponent
                     .filter((item) => this._selectionModel.isSelected(item.value))
                     .sort((a, b) => orderMap.get(a.value) - orderMap.get(b.value));
                 return {
-                    selectedOptions: selectedOptions,
-                    displayedOptions: displayedOptions
+                    selectedOptions,
+                    displayedOptions
                 };
             })
         );

@@ -267,10 +267,10 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     ];
 
     /** @hidden */
-    private _displayFn = (value: any) => this.displayValue(value);
+    private _displayFn = (value: any): string => this.displayValue(value);
 
     /** @hidden */
-    private _secondaryFn = (value: any) => {
+    private _secondaryFn = (value: any): string => {
         if (isOptionItem(value)) {
             return value.secondaryText;
         } else if (isJsObject(value) && this.description) {
@@ -671,7 +671,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
                 label: this.displayValue(value),
                 avatarSrc: this.avatarsrc ? this.objectGet(value, this.avatarsrc) : null,
                 description: this.description ? this.objectGet(value, this.description) : null,
-                value: value
+                value
             });
         }
 
@@ -686,7 +686,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         const selectItems: MultiInputOption[] = [];
         for (let i = 0; i < items.length; i++) {
             const value = items[i];
-            selectItems.push({ label: value, value: value });
+            selectItems.push({ label: value, value });
         }
 
         return selectItems;
@@ -703,7 +703,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
             const value = items[i];
             selectItems.push({
                 label: this.displayValue(value),
-                value: value
+                value
             });
         }
 

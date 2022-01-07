@@ -47,7 +47,7 @@ describe('DialogFooterComponent', () => {
         const fixture = TestBed.createComponent(testComponent as any as Type<V>);
         const component = fixture.componentInstance;
 
-        return { fixture: fixture, component: component };
+        return { fixture, component };
     }
 
     async function wait(componentFixture: ComponentFixture<any>): Promise<void> {

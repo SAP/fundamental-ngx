@@ -159,7 +159,7 @@ export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
         }
         const lineClampHeight = Math.ceil(this.getLineHeight() * this._lineCount);
         const ellipsisTextArray = this._originalText.split(' ');
-        const ellipsisText = () => {
+        const ellipsisText = (): void => {
             if (this.rootElement.scrollHeight > lineClampHeight) {
                 ellipsisTextArray.pop();
                 this._lineClampTarget.textContent = ellipsisTextArray.join(' ') + '...';

@@ -591,8 +591,8 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
             .withPositions(positions);
         const scrollStrategy = this._overlay.scrollStrategies.reposition();
         return new OverlayConfig({
-            positionStrategy: positionStrategy,
-            scrollStrategy: scrollStrategy,
+            positionStrategy,
+            scrollStrategy,
             backdropClass: 'cdk-overlay-transparent-backdrop',
             width: this.inputGroup.nativeElement.offsetWidth
         });

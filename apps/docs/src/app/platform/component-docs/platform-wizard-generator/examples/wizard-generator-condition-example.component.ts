@@ -192,12 +192,9 @@ export class WizardGeneratorConditionExampleComponent implements OnDestroy {
                 }
             })
             .afterClosed.pipe(takeUntil(this._onDestroy$))
-            .subscribe(
-                (wizardValue: WizardGeneratorFormsValue) => {
-                    this.wizardValue = wizardValue;
-                },
-                () => {}
-            );
+            .subscribe((wizardValue: WizardGeneratorFormsValue) => {
+                this.wizardValue = wizardValue;
+            });
     }
 
     wizardFinished(wizardValue: WizardGeneratorFormsValue): void {

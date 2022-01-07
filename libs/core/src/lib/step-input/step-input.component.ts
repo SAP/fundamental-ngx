@@ -254,7 +254,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     onChange: (value: number) => void = () => {};
 
     /** @hidden */
-    onTouched = () => {};
+    onTouched = (): void => {};
 
     constructor(
         @Inject(LOCALE_ID) locale,
@@ -344,7 +344,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** @hidden */
     handleKeyDown(event: KeyboardEvent): void {
-        const muteEvent = (evnt: Event) => {
+        const muteEvent = (evnt: Event): void => {
             evnt.stopPropagation();
             evnt.preventDefault();
         };

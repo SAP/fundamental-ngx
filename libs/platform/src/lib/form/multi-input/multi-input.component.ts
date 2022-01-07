@@ -181,7 +181,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
      * An arrow function can be used to access the *this* keyword in the calling component.
      * See multi input examples for details. */
     @Input()
-    displayFn = (str: string) => str;
+    displayFn = (str: string): string => str;
 
     /** @hidden */
     ngOnInit(): void {

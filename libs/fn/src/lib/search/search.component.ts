@@ -94,7 +94,7 @@ export class ExperimentalSearchComponent implements ControlValueAccessor, OnDest
     onChange: (value: any) => void = () => {};
 
     /** @hidden */
-    onTouched = () => {};
+    onTouched = (): void => {};
 
     /** @hidden */
     constructor(private readonly _changeDetectorRef: ChangeDetectorRef) {}

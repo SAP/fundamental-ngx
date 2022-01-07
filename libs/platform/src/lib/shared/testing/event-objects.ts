@@ -55,7 +55,7 @@ export function createTouchEvent(type: string, pageX = 0, pageY = 0): Event {
     // In favor of creating events that work for most of the browsers, the event is created
     // as a basic UI Event. The necessary details for the event will be set manually.
     const event = document.createEvent('UIEvent');
-    const touchDetails = { pageX: pageX, pageY: pageY };
+    const touchDetails = { pageX, pageY };
 
     // TS3.6 removes the initUIEvent method and suggests porting to "new UIEvent()".
     (event as any).initUIEvent(type, true, true, window, 0);

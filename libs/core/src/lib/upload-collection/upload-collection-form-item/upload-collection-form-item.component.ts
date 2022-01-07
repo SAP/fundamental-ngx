@@ -43,7 +43,7 @@ export class UploadCollectionFormItemComponent implements ControlValueAccessor {
     onChange: (value: string) => void = () => {};
 
     /** @hidden */
-    onTouched = () => {};
+    onTouched = (): void => {};
 
     /** @hidden */
     writeValue(value: string): void {

@@ -28,10 +28,10 @@ describe('ApprovalFlowAddNodeComponent', () => {
     const approvalFlowDataSource = new TestApprovalFlowDataSource();
 
     dialogRef.data = {
-        approvalFlowDataSource: approvalFlowDataSource,
+        approvalFlowDataSource,
         userDetailsTemplate: null,
         rtl: false,
-        node: node
+        node
     };
 
     beforeEach(async () => {

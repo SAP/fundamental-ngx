@@ -250,7 +250,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
         const dialog = this._dialogService.open(ApprovalFlowApproverDetailsComponent, {
             data: {
-                node: node,
+                node,
                 allowSendReminder: this.allowSendRemindersForStatuses.includes(node.status),
                 ...this._defaultDialogOptions
             }
@@ -288,7 +288,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     _onWatcherClick(watcher: ApprovalUser): void {
         this._dialogService.open(ApprovalFlowApproverDetailsComponent, {
             data: {
-                watcher: watcher,
+                watcher,
                 ...this._defaultDialogOptions
             }
         });
@@ -302,8 +302,8 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             .subscribe(() => {
                 this._messageToastService.open(this._reminderTemplate, {
                     data: {
-                        targets: targets,
-                        node: node
+                        targets,
+                        node
                     },
                     duration: 5000
                 });
@@ -466,7 +466,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         const dialog = this._dialogService.open(ApprovalFlowAddNodeComponent, {
             data: {
                 nodeTarget: type,
-                showNodeTypeSelect: showNodeTypeSelect,
+                showNodeTypeSelect,
                 node: Object.assign(getBlankApprovalGraphNode(), { blank: false }),
                 checkDueDate: this.checkDueDate,
                 ...this._defaultDialogOptions
@@ -706,7 +706,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     private _showMessage(type: ApprovalFlowMessageType): void {
-        this._messages = [{ type: type }];
+        this._messages = [{ type }];
     }
 
     /** @hidden Build Approval Flow graph and render it */
@@ -862,37 +862,42 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         columnIndex: number,
         direction: 'left' | 'right',
         stepSize = 1
-    ) => {
+    ): { nextNode: ApprovalGraphNode; stepSize: number } => {
         const indexDiff = direction === 'right' ? 1 : -1;
         const nextColumn = this._graph.columns[columnIndex + indexDiff];
         const nextNode = nextColumn?.nodes[nodeIndex];
 
         if (!nextNode) {
-            return { nextNode: undefined, stepSize: stepSize };
+            return { nextNode: undefined, stepSize };
         }
 
         if (nextNode.blank || nextNode.space) {
             return this._getNextHorizontalNode(nodeIndex, columnIndex + indexDiff, direction, stepSize + 1);
         }
 
-        return { nextNode: nextNode, stepSize: stepSize };
+        return { nextNode, stepSize };
     };
 
     /** @hidden */
-    private _getNextVerticalNode = (nodeIndex: number, columnIndex: number, direction: 'up' | 'down', stepSize = 1) => {
+    private _getNextVerticalNode = (
+        nodeIndex: number,
+        columnIndex: number,
+        direction: 'up' | 'down',
+        stepSize = 1
+    ): { nextNode: ApprovalGraphNode; stepSize: number } => {
         const indexDiff = direction === 'down' ? 1 : -1;
         const currColumn = this._graph.columns[columnIndex];
         const nextNode = currColumn.nodes[nodeIndex + indexDiff];
 
         if (!nextNode) {
-            return { nextNode: undefined, stepSize: stepSize };
+            return { nextNode: undefined, stepSize };
         }
 
         if (nextNode.blank || nextNode.space) {
             return this._getNextVerticalNode(nodeIndex + indexDiff, columnIndex, direction, stepSize + 1);
         }
 
-        return { nextNode: nextNode, stepSize: stepSize };
+        return { nextNode, stepSize };
     };
 
     /** @hidden */

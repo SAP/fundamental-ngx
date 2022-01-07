@@ -318,7 +318,7 @@ export class UploadCollectionComponent {
             };
             const filenameLengthEvent = new FilenameLengthExceedEvent(this, payload);
 
-            this.showMessage(MessageType.FILE_NAME_LENGTH, { payload: payload, type: MessageStripType.ERROR });
+            this.showMessage(MessageType.FILE_NAME_LENGTH, { payload, type: MessageStripType.ERROR });
 
             this.filenameLengthExceed.emit(filenameLengthEvent);
 
@@ -431,7 +431,7 @@ export class UploadCollectionComponent {
             const folder = this._generateTemporaryNewFolder(folderName);
             const parentFolderId = this._getCurrentFolderId();
             const data = {
-                parentFolderId: parentFolderId,
+                parentFolderId,
                 folder: { ...folder }
             };
 
@@ -473,7 +473,7 @@ export class UploadCollectionComponent {
             height: '350px',
             data: {
                 items: this.dataSource.dataProvider.items,
-                currentFolder: currentFolder,
+                currentFolder,
                 movableFolders: movableItems.filter((item) => item.type === 'folder'),
                 maxFilenameLength: this.maxFilenameLength
             }
@@ -489,8 +489,8 @@ export class UploadCollectionComponent {
 
                 if (folderName) {
                     payload.newFolder = {
-                        parentFolderId: parentFolderId,
-                        folderName: folderName
+                        parentFolderId,
+                        folderName
                     };
                 }
 
@@ -506,13 +506,13 @@ export class UploadCollectionComponent {
                     .subscribe({
                         next: () => {
                             this.showMessage(MessageType.MOVE, {
-                                payload: payload,
+                                payload,
                                 type: MessageStripType.SUCCESS
                             });
                         },
                         error: () => {
                             this.showMessage(MessageType.MOVE, {
-                                payload: payload,
+                                payload,
                                 type: MessageStripType.ERROR
                             });
                         }
@@ -533,7 +533,7 @@ export class UploadCollectionComponent {
         const _activeItem = { ...this._activeItem };
         const items = (multiple ? this.selectedItems : [_activeItem]) as UploadCollectionFile[];
 
-        this.dataSource.download({ items: items }).subscribe();
+        this.dataSource.download({ items }).subscribe();
     }
 
     /** @hidden */
@@ -544,7 +544,7 @@ export class UploadCollectionComponent {
 
         const _activeItem = { ...this._activeItem };
         const items = multiple ? this.selectedItems : [_activeItem];
-        const data = { parentFolderId: this._getCurrentFolderId(), items: items };
+        const data = { parentFolderId: this._getCurrentFolderId(), items };
 
         this.dataSource
             .delete(data)
@@ -757,7 +757,7 @@ export class UploadCollectionComponent {
             const payload = { items: typeMismatch };
             const event = new TypeMismatchEvent(this, payload);
 
-            this.showMessage(MessageType.TYPE_MISMATCH, { payload: payload, type: MessageStripType.ERROR });
+            this.showMessage(MessageType.TYPE_MISMATCH, { payload, type: MessageStripType.ERROR });
 
             this.typeMismatch.emit(event);
         }
@@ -766,7 +766,7 @@ export class UploadCollectionComponent {
             const payload = { items: filenameLengthExceed };
             const event = new FilenameLengthExceedEvent(this, payload);
 
-            this.showMessage(MessageType.FILE_NAME_LENGTH, { payload: payload, type: MessageStripType.ERROR });
+            this.showMessage(MessageType.FILE_NAME_LENGTH, { payload, type: MessageStripType.ERROR });
 
             this.filenameLengthExceed.emit(event);
         }
@@ -775,7 +775,7 @@ export class UploadCollectionComponent {
             const payload = { items: fileSizeExceed };
             const event = new FileSizeExceedEvent(this, payload);
 
-            this.showMessage(MessageType.FILE_SIZE, { payload: payload, type: MessageStripType.ERROR });
+            this.showMessage(MessageType.FILE_SIZE, { payload, type: MessageStripType.ERROR });
 
             this.fileSizeExceed.emit(event);
         }
@@ -792,7 +792,7 @@ export class UploadCollectionComponent {
         const data = {
             parentFolderId: this._getCurrentFolderId(),
             item: this._currentUpdateFileVersion,
-            newItem: newItem
+            newItem
         };
 
         this._findParentFolderAndUpdateItem(currentFolderId, currentItem);
@@ -948,7 +948,7 @@ export class UploadCollectionComponent {
             version: 1,
             url: '',
             status: UploadCollectionItemStatus.LOADING,
-            file: file
+            file
         }));
     }
 

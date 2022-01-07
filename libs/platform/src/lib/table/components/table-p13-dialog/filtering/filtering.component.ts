@@ -164,9 +164,9 @@ export class P13FilteringDialogComponent implements Resettable {
         return rules.filter(this._isRuleValid).map(
             ({ columnKey, strategy, value, value2 }): CollectionFilter => ({
                 field: columnKey,
-                value: value,
-                value2: value2,
-                strategy: strategy,
+                value,
+                value2,
+                strategy,
                 exclude: null
             })
         );

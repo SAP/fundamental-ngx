@@ -192,7 +192,7 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
 
 /* UTILS */
 
-const sort = <T extends Record<string, any>>(a: T, b: T, key?: string) => {
+const sort = <T extends Record<string, any>>(a: T, b: T, key?: string): number => {
     if (key) {
         a = getNestedValue(key, a);
         b = getNestedValue(key, b);

@@ -163,7 +163,7 @@ export class ${componentName} {}`;
     /** this function transform that-word, or that_word to ThatWord */
     private transformSnakeCaseToPascalCase(snakeCase: string): string {
         if (snakeCase) {
-            const snakeToCamel = (str) => str.replace(/([-_]\w)/g, (g) => g[1].toUpperCase());
+            const snakeToCamel = (str): string => str.replace(/([-_]\w)/g, (g) => g[1].toUpperCase());
             const camelCase = snakeToCamel(snakeCase);
             return camelCase[0].toUpperCase() + camelCase.substr(1);
         } else {
@@ -176,8 +176,8 @@ export class ${componentName} {}`;
         const componentName = example.component || this.transformSnakeCaseToPascalCase(example.fileName);
 
         return {
-            path: path,
-            componentName: componentName,
+            path,
+            componentName,
             basis: this.getFileBasis(example),
             selector: this.getLibraryPrefix() + example.fileName,
             entryComponent: example.entryComponent,

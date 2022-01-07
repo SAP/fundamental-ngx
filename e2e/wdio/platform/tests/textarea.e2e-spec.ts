@@ -346,7 +346,7 @@ describe('Verify Textarea component', () => {
         scrollIntoView(section);
         clearValue(section + textarea, i);
         click(section + textarea, i);
-        for (let i = 0; i < limit + 1; i++) {
+        for (let idx = 0; idx < limit + 1; idx++) {
             sendKeys('A');
         }
         expect(isElementDisplayed(message)).toBe(true);

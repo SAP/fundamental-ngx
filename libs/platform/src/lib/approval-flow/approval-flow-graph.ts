@@ -91,13 +91,13 @@ export function generateApprovalFlowGraphMetadata(graph: ApprovalFlowGraph): App
                 columnIndex === graph.columns.length - 1 && column.nodes.length > 1 && nodeIndex === 0;
 
             metadata[node.id] = {
-                parents: parents,
-                isRoot: isRoot,
-                isFinal: isFinal,
+                parents,
+                isRoot,
+                isFinal,
                 parallelStart: node.targets.length > 1,
-                parallelEnd: parallelEnd,
-                columnIndex: columnIndex,
-                nodeIndex: nodeIndex,
+                parallelEnd,
+                columnIndex,
+                nodeIndex,
                 canAddNodeBefore: !isNodeStarted(node) && !parentsApproved,
                 canAddNodeBeforeAll: isRoot && firstOfMultipleRootNodes,
                 canAddNodeAfter: !isNodeApproved(node),
@@ -106,8 +106,8 @@ export function generateApprovalFlowGraphMetadata(graph: ApprovalFlowGraph): App
                 canAddParallel: !isNodeApproved(node),
                 isVerticalLineBeforeSolid: node.space && graph.columns[columnIndex - 1]?.allNodesApproved,
                 isVerticalLineAfterSolid: node.space && column.allNodesApproved,
-                firstOfMultipleRootNodes: firstOfMultipleRootNodes,
-                firstOfMultipleFinalNodes: firstOfMultipleFinalNodes,
+                firstOfMultipleRootNodes,
+                firstOfMultipleFinalNodes,
                 rootNodesApproved: columnIndex === 0 && column.allNodesApproved
             };
         });
@@ -314,7 +314,7 @@ function getBlankNodes(count: number, status: ApprovalStatus): ApprovalGraphNode
     let nodeId: string;
 
     for (let i = count; i > 0; i--) {
-        node = Object.assign({}, getBlankApprovalGraphNode(), { targets: nodeId ? [nodeId] : [], status: status });
+        node = Object.assign({}, getBlankApprovalGraphNode(), { targets: nodeId ? [nodeId] : [], status });
         nodeId = node.id;
 
         nodes.unshift(node);
@@ -484,7 +484,7 @@ function getGraphColumnsFromPaths(columns: ApprovalGraphNode[][]): ApprovalGraph
     columns.forEach((column, index) => {
         graphColumns.push({
             nodes: column,
-            index: index,
+            index,
             allNodesApproved: column.every((node) => isNodeApproved(node))
         });
     });

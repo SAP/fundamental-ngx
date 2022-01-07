@@ -631,7 +631,7 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
 
     /** @hidden Rtl change subscription */
     private _subscribeToRtl(): void {
-        const refreshDirection = (isRtl) => {
+        const refreshDirection = (isRtl): void => {
             this._directionPosition = isRtl ? 'right' : 'left';
             this._cd.detectChanges();
         };

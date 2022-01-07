@@ -171,7 +171,7 @@ export class HtmlSanitizer {
             iframeDoc.write('<body></body>');
         }
 
-        return { iframe: iframe, iframeDoc: iframeDoc };
+        return { iframe, iframeDoc };
     }
 
     private _removeSafeWrapper(): void {

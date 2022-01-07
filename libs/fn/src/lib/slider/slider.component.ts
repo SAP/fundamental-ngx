@@ -304,7 +304,7 @@ export class ExperimentalSliderComponent
     onChange: (value: SliderControlValue) => void = () => {};
 
     /** @hidden */
-    onTouched = () => {};
+    onTouched = (): void => {};
 
     /** @hidden */
     registerOnChange(fn: (value: SliderControlValue) => void): void {

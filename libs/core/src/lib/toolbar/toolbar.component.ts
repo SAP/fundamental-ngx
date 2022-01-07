@@ -361,7 +361,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
 
     /** @hidden Sort by group and priority and initial position */
     private _getSortedByPriorityAndGroupItems(): ToolbarItemDirective[] {
-        const notSorted = this.toolbarItems.toArray().map((element, index) => ({ element: element, index: index }));
+        const notSorted = this.toolbarItems.toArray().map((element, index) => ({ element, index }));
 
         const groups = notSorted.reduce((gr, item) => {
             let groupId = this._getElementGroup(item.element);
@@ -395,7 +395,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
                     );
                 }
 
-                return { group: groups[g].map(({ element }) => element), minIndex: minIndex, maxPriority: maxPriority };
+                return { group: groups[g].map(({ element }) => element), minIndex, maxPriority };
             })
             .concat(
                 !groups[0]

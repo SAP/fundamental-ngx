@@ -1,4 +1,4 @@
-import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { WizardStepComponent, WizardStepStatus } from '.';
 
@@ -25,8 +25,6 @@ class TemplateTestComponent {
 
 describe('WizardService', () => {
     let service: WizardService;
-    let anchors: WizardStepComponent[];
-    let wSteps: QueryList<WizardStepComponent>;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -35,9 +33,6 @@ describe('WizardService', () => {
         }).compileComponents();
 
         service = TestBed.get(WizardService);
-        const componentInstance = TestBed.createComponent(TemplateTestComponent).componentInstance;
-        anchors = [componentInstance.anchor1, componentInstance.anchor2, componentInstance.anchor3];
-        wSteps = componentInstance.steps;
     });
 
     it('should create', () => {

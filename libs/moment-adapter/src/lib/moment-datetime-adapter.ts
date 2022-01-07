@@ -219,9 +219,9 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
         }
 
         const result = this._createMomentDate({
-            year: year,
+            year,
             month: month !== 0 ? month - 1 : month,
-            date: date
+            date
         }).locale(this.locale);
 
         if (!result.isValid()) {
@@ -240,15 +240,15 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
     }
 
     addCalendarYears(date: Moment, years: number): Moment {
-        return this.clone(date).add({ years: years });
+        return this.clone(date).add({ years });
     }
 
     addCalendarMonths(date: Moment, months: number): Moment {
-        return this.clone(date).add({ months: months });
+        return this.clone(date).add({ months });
     }
 
     addCalendarDays(date: Moment, days: number): Moment {
-        return this.clone(date).add({ days: days });
+        return this.clone(date).add({ days });
     }
 
     clone(date: Moment): Moment {

@@ -113,7 +113,7 @@ export class WizardExampleComponent {
         this.overlay.nativeElement.style.width = '0%';
     }
 
-    handleFocus(event: KeyboardEvent, index: number) {
+    handleFocus(event: KeyboardEvent, index: number): void {
         this._wizardService.progressBarKeyHandler(event, this.steps, index);
     }
 }

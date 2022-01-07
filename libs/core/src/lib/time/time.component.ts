@@ -237,7 +237,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
     onChange: (value: D) => void = () => {};
 
     /** @hidden */
-    onTouched = () => {};
+    onTouched = (): void => {};
 
     /** @hidden */
     registerOnChange(fn: (time: D) => void): void {

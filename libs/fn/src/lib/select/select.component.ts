@@ -191,7 +191,7 @@ export class ExperimentalSelectComponent implements AfterContentInit, OnDestroy,
     onChange: (value: any) => void = () => {};
 
     /** @hidden */
-    onTouched = () => {};
+    onTouched = (): void => {};
 
     /** @hidden */
     registerOnChange(fn: any): void {

@@ -354,7 +354,7 @@ export class ComboboxComponent
     onChange: (value: any) => void = () => {};
 
     /** @hidden */
-    onTouched = () => {};
+    onTouched = (): void => {};
 
     /** @hidden */
     constructor(
@@ -455,7 +455,7 @@ export class ComboboxComponent
             const index: number = this.dropdownValues.findIndex((_value) => _value === value);
             this._handleClickActions(value);
             this.filterHighlight = false;
-            this.itemClicked.emit({ item: value, index: index });
+            this.itemClicked.emit({ item: value, index });
         }
     }
 

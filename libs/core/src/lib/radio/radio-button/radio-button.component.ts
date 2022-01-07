@@ -170,10 +170,10 @@ export class RadioButtonComponent
 
     // ControlValueAccessor implementation
     /** @hidden */
-    onChange: any = () => {};
+    onChange: any = (): void => {};
 
     /** @hidden */
-    onTouched: any = () => {};
+    onTouched: any = (): void => {};
 
     /** @hidden */
     registerOnChange(fn: any): void {

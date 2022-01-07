@@ -754,9 +754,9 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
         const dateNames = this._dateTimeAdapter.getDateNames();
         const isPast = this._dateTimeAdapter.compareDate(date, this._dateTimeAdapter.today()) < 0;
         const day: CalendarDay<D> = {
-            date: date,
+            date,
             label: dateNames[dayOfMonth - 1],
-            weekDay: weekDay,
+            weekDay,
             weekend: this._isWeekendDay(weekDay),
             ariaLabel: this._dateTimeAdapter.format(date, this._dateTimeFormats.display.dateA11yLabel),
             specialNumber: this._getSpecialDay(date),
