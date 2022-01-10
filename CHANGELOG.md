@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.263 (2022-01-10)
+
+
+### Bug Fixes
+
+* **docs:** ng13.1, asset modules instead of raw-loader, stackblitz improvements ([#7398](https://github.com/SAP/fundamental-ngx/issues/7398)) ([00c679d](https://github.com/SAP/fundamental-ngx/commit/00c679ddcd257a8f65a5c2b83f070050a91562b9))
+
 ## 0.33.0-rc.262 (2022-01-10)
 
 
