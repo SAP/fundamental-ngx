@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.262 (2022-01-10)
+
+
+### Bug Fixes
+
+* **platform:** schematics' translations tasks ([#7421](https://github.com/SAP/fundamental-ngx/issues/7421)) ([3190a15](https://github.com/SAP/fundamental-ngx/commit/3190a15ac43658a42cf41b849663ddb721d04818))
+
 ## 0.33.0-rc.261 (2022-01-10)
 
 
