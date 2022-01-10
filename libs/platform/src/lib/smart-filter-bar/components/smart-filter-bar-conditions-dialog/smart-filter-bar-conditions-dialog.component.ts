@@ -93,8 +93,6 @@ export class SmartFilterBarConditionsDialogComponent {
                 return f;
             });
 
-            console.log(formsResult);
-
             this._dialogRef.close(
                 formsResult.filter((c: SmartFilterBarCondition) => c.value !== undefined && c.value !== null)
             );
