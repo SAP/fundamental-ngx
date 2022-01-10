@@ -80,7 +80,10 @@ export class ListItemComponent
     @Input()
     @HostBinding('attr.tabindex')
     get tabindex(): number {
-        return this._tabIndex;
+        if (this._isFirstItem && isNaN(this._tabIndex)) {
+            return 0;
+        }
+        return this._tabIndex ?? -1;
     }
     set tabindex(value: number) {
         this._tabIndex = coerceNumberProperty(value, -1);
@@ -151,9 +154,6 @@ export class ListItemComponent
     @ContentChildren(ButtonComponent, { descendants: true })
     buttons: QueryList<ButtonComponent>;
 
-    /** @hidden Implementation of KeyboardSupportItemInterface | TODO Revisit KeyboardSupportItemInterface*/
-    clicked = new EventEmitter<MouseEvent>();
-
     /** @hidden An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
@@ -161,7 +161,7 @@ export class ListItemComponent
     private readonly _onLinkListChanged$ = new Subject<void>();
 
     /** @hidden */
-    private _tabIndex = 0;
+    private _tabIndex: number | undefined;
 
     /** @hidden */
     screenReaderContent = '';
@@ -230,7 +230,7 @@ export class ListItemComponent
     /** Handler for mouse events */
     @HostListener('click', ['$event'])
     onClick(event: MouseEvent): void {
-        this.clicked.emit(event);
+        this._clicked$.next(event);
         if (this.checkbox && !this.link) {
             if (!this.checkbox.elementRef.nativeElement.contains(event.target as Node)) {
                 // clicking on the checkbox is not suppressed

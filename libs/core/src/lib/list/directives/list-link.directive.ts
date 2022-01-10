@@ -22,7 +22,8 @@ export class ListLinkDirective implements OnChanges {
     /** Emits when some of the properties, that should be read by screenreader, are changed */
     readonly _onReadablePropertyChanged$ = new Subject<void>();
 
-    ngOnChanges(changes: SimpleChanges) {
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
         if (changes.navigationIndicator || changes.navigated) {
             this._onReadablePropertyChanged$.next();
         }

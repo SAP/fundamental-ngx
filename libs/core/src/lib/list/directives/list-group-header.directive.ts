@@ -29,11 +29,6 @@ let uniqueId = 0;
     ]
 })
 export class ListGroupHeaderDirective extends ListFocusItem {
-    /** Whether to apply "aria-hidden" attribute. */
-    @Input()
-    @HostBinding('attr.aria-hidden')
-    ariaHidden = true;
-
     /** id of an element to be applied */
     @Input()
     @HostBinding('attr.id')
@@ -51,9 +46,6 @@ export class ListGroupHeaderDirective extends ListFocusItem {
     /** @hidden Implementation of KeyboardSupportItemInterface */
     @Output()
     keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
-
-    /** @hidden */
-    clicked = new EventEmitter<MouseEvent>();
 
     /** @hidden */
     private _tabIndex = -1;
