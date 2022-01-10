@@ -143,7 +143,7 @@ export class PlatformSmartFilterBarCustomFilterExampleComponent {
                     ? undefined
                     : ([
                           {
-                              value: value,
+                              value,
                               operator: 'equalTo'
                           }
                       ] as SmartFilterBarCondition[])

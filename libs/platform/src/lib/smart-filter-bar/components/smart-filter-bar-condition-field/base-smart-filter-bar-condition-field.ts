@@ -24,7 +24,7 @@ export abstract class BaseSmartFilterBarConditionField extends BaseDynamicFormGe
     /**
      * Method for opening conditions configuration dialog.
      */
-    openConditionsDialog = () => {
+    openConditionsDialog: () => void = () => {
         const currentValue = this.getField().value;
 
         const dialogData: SmartFilterBarConditionBuilder = {
