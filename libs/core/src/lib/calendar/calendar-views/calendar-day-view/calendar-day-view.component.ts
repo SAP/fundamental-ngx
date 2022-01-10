@@ -201,7 +201,19 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
      * @param date date type
      */
     @Input()
-    disableFunction: (date: D) => boolean = () => false;
+    set disableFunction(disableFunc: (date: D) => boolean) {
+        if (this._disableFunction.toString() !== disableFunc.toString()) {
+            this._disableFunction = disableFunc;
+            this._buildDayViewGrid();
+        }
+    }
+
+    get disableFunction(): (date: D) => boolean {
+        return this._disableFunction;
+    }
+
+    /** @hidden */
+    private _disableFunction: (date: D) => boolean = () => false;
 
     /**
      * Function used to disable certain dates in the calendar for the range start selection.
@@ -247,7 +259,12 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         /** Changes of those properties are done inside its setters */
-        if (!changes['selectedDate'] && !changes['selectedRangeDate'] && !changes['currentlyDisplayed']) {
+        if (
+            !changes['selectedDate'] &&
+            !changes['selectedRangeDate'] &&
+            !changes['currentlyDisplayed'] &&
+            !changes['disableFunction']
+        ) {
             this._buildDayViewGrid();
         }
     }
