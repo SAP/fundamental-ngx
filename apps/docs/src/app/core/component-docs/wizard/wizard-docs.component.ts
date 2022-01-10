@@ -1,22 +1,22 @@
 import { Component } from '@angular/core';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import * as wizardHtml from '!raw-loader!./examples/wizard-example.component.html';
-import * as wizardTs from '!raw-loader!./examples/wizard-example.component.ts';
-import * as wizardScss from '!raw-loader!./examples/wizard-example.component.scss';
-import * as wizardCustomizableHtml from '!raw-loader!./examples/wizard-customizable-example.component.html';
-import * as wizardCustomizableTs from '!raw-loader!./examples/wizard-customizable-example.component.ts';
-import * as wizardMobileHtml from '!raw-loader!./examples/wizard-mobile-example.component.html';
-import * as wizardMobileTs from '!raw-loader!./examples/wizard-mobile-example.component.ts';
-import * as wizardBranchingHtml from '!raw-loader!./examples/wizard-branching-example.component.html';
-import * as wizardBranchingTs from '!raw-loader!./examples/wizard-branching-example.component.ts';
-import * as wizardDialogHtml from '!raw-loader!./examples/wizard-dialog-example.component.html';
-import * as wizardDialogTs from '!raw-loader!./examples/wizard-dialog-example.component.ts';
-import * as wizardNgForHtml from '!raw-loader!./examples/wizard-ngfor-example.component.html';
-import * as wizardNgForTs from '!raw-loader!./examples/wizard-ngfor-example.component.ts';
+import wizardHtml from '!./examples/wizard-example.component.html?raw';
+import wizardTs from '!./examples/wizard-example.component.ts?raw';
+import wizardScss from '!./examples/wizard-example.component.scss?raw';
+import wizardCustomizableHtml from '!./examples/wizard-customizable-example.component.html?raw';
+import wizardCustomizableTs from '!./examples/wizard-customizable-example.component.ts?raw';
+import wizardMobileHtml from '!./examples/wizard-mobile-example.component.html?raw';
+import wizardMobileTs from '!./examples/wizard-mobile-example.component.ts?raw';
+import wizardBranchingHtml from '!./examples/wizard-branching-example.component.html?raw';
+import wizardBranchingTs from '!./examples/wizard-branching-example.component.ts?raw';
+import wizardDialogHtml from '!./examples/wizard-dialog-example.component.html?raw';
+import wizardDialogTs from '!./examples/wizard-dialog-example.component.ts?raw';
+import wizardNgForHtml from '!./examples/wizard-ngfor-example.component.html?raw';
+import wizardNgForTs from '!./examples/wizard-ngfor-example.component.ts?raw';
 
-import * as wizardVisibleSummaryHtml from '!raw-loader!./examples/wizard-visible-summary-example.component.html';
-import * as wizardVisibleSummaryTs from '!raw-loader!./examples/wizard-visible-summary-example.component.ts';
+import wizardVisibleSummaryHtml from '!./examples/wizard-visible-summary-example.component.html?raw';
+import wizardVisibleSummaryTs from '!./examples/wizard-visible-summary-example.component.ts?raw';
 
 @Component({
     selector: 'app-wizard',

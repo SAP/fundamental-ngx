@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import * as formMessageHtml from '!raw-loader!./examples/form-message-example.component.html';
-import * as formMessageTs from '!raw-loader!./examples/form-message-example.component.ts';
+import formMessageHtml from '!./examples/form-message-example.component.html?raw';
+import formMessageTs from '!./examples/form-message-example.component.ts?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

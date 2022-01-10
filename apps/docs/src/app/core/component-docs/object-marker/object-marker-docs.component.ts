@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import * as ObjectMarkerExample from '!raw-loader!./examples/object-marker-example.component.html';
-import * as ObjectMarkerIconandText from '!raw-loader!./examples/object-marker-Icon-text-example.component.html';
-import * as ObjectMarkerClickable from '!raw-loader!./examples/object-marker-clickable-example.component.html';
-import * as ObjectMarkerText from '!raw-loader!./examples/object-marker-text-example.component.html';
-import * as ObjectMarkerClickAble from '!raw-loader!./examples/object-marker-clickable-example.component.ts';
+import ObjectMarkerExample from '!./examples/object-marker-example.component.html?raw';
+import ObjectMarkerIconandText from '!./examples/object-marker-Icon-text-example.component.html?raw';
+import ObjectMarkerClickable from '!./examples/object-marker-clickable-example.component.html?raw';
+import ObjectMarkerText from '!./examples/object-marker-text-example.component.html?raw';
+import ObjectMarkerClickAble from '!./examples/object-marker-clickable-example.component.ts?raw';
 
 @Component({
     selector: 'fd-object-marker-docs',

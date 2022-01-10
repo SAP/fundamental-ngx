@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import * as messageToastContentExample from '!raw-loader!./examples/message-toast-content-example.component.ts';
-import * as messageToastExample from '!raw-loader!./examples/message-toast-example.component.ts';
-import * as messageToastExampleHtml from '!raw-loader!./examples/message-toast-example.component.html';
-import * as messageToastExampleScss from '!raw-loader!./examples/message-toast-example.component.scss';
+import messageToastContentExample from '!./examples/message-toast-content-example.component.ts?raw';
+import messageToastExample from '!./examples/message-toast-example.component.ts?raw';
+import messageToastExampleHtml from '!./examples/message-toast-example.component.html?raw';
+import messageToastExampleScss from '!./examples/message-toast-example.component.scss?raw';
 
 @Component({
     selector: 'app-message-toast',

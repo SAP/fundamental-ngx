@@ -1,10 +1,6 @@
 import { Component, ChangeDetectionStrategy, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 
-import {
-    DynamicPageCollapseChangeEvent,
-    DynamicPageComponent,
-    DynamicPageTabChangeEvent
-} from '@fundamental-ngx/platform/dynamic-page';
+import { DynamicPageComponent, DynamicPageTabChangeEvent } from '@fundamental-ngx/platform/dynamic-page';
 import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-page-overflow.service';
 
 @Component({
@@ -30,7 +26,7 @@ export class PlatformDynamicPageTabbedExampleComponent implements OnDestroy {
 
     constructor(private _overflowHandlingService: PlatformDynamicPagePageOverflowService) {}
 
-    onCollapseChange(event: DynamicPageCollapseChangeEvent): void {
+    onCollapseChange(): void {
         console.log('collapse changed');
     }
 

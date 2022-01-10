@@ -119,7 +119,7 @@ export class PlatformApprovalFlowExampleComponent implements OnDestroy {
     }
 
     /** Event listener for afterNodeEdit event */
-    afterNodeEdit(node: ApprovalNode): void {
+    afterNodeEdit(): void {
         this.newNodeSettingsChange();
     }
 
@@ -567,7 +567,7 @@ export class ApprovalFlowExampleDataSource implements ApprovalDataSource {
         this.selectGraph(this.selectedGraph);
     }
 
-    updateApproval(approval: ApprovalNode): void {
+    updateApproval(): void {
         console.log('call "updateApproval" method from ApprovalDataSource implementation class');
     }
 
@@ -578,7 +578,7 @@ export class ApprovalFlowExampleDataSource implements ApprovalDataSource {
         this.selectGraph(this.selectedGraph);
     }
 
-    sendReminders(members: ApprovalUser[], approval: ApprovalNode): Observable<any> {
+    sendReminders(): Observable<any> {
         console.log('call "sendReminders" method from ApprovalDataSource implementation class');
         return of(null);
     }

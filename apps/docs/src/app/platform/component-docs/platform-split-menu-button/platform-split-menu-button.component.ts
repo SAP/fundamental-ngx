@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import * as splitMenuButtonTypesHtml from '!raw-loader!./platform-split-menu-button-examples/platform-split-button-types-example.component.html';
-import * as splitMenuButtonTypesCode from '!raw-loader!./platform-split-menu-button-examples/platform-split-button-types-example.component.ts';
-import * as splitMenuButtonIconsHtml from '!raw-loader!./platform-split-menu-button-examples/platform-split-button-icons-example.component.html';
-import * as splitMenuButtonIconsCode from '!raw-loader!./platform-split-menu-button-examples/platform-split-button-icons-example.component.ts';
-import * as splitMenuButtonBehaviorHtml from '!raw-loader!./platform-split-menu-button-examples/platform-split-button-behaviors-example.component.html';
-import * as splitMenuButtonBehaviorCode from '!raw-loader!./platform-split-menu-button-examples/platform-split-button-behaviors-example.component.ts';
+import splitMenuButtonTypesHtml from '!./platform-split-menu-button-examples/platform-split-button-types-example.component.html?raw';
+import splitMenuButtonTypesCode from '!./platform-split-menu-button-examples/platform-split-button-types-example.component.ts?raw';
+import splitMenuButtonIconsHtml from '!./platform-split-menu-button-examples/platform-split-button-icons-example.component.html?raw';
+import splitMenuButtonIconsCode from '!./platform-split-menu-button-examples/platform-split-button-icons-example.component.ts?raw';
+import splitMenuButtonBehaviorHtml from '!./platform-split-menu-button-examples/platform-split-button-behaviors-example.component.html?raw';
+import splitMenuButtonBehaviorCode from '!./platform-split-menu-button-examples/platform-split-button-behaviors-example.component.ts?raw';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 

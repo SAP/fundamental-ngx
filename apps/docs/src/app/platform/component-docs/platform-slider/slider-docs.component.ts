@@ -1,21 +1,21 @@
 import { Component } from '@angular/core';
 
-import * as sliderBasicHtml from '!raw-loader!./examples/base/slider-basic-example.component.html';
-import * as sliderBasicTs from '!raw-loader!./examples/base/slider-basic-example.component';
-import * as sliderRangeHtml from '!raw-loader!./examples/range/slider-range-example.component.html';
-import * as sliderRangeTs from '!raw-loader!./examples/range/slider-range-example.component';
-import * as sliderFormFieldHtml from '!raw-loader!./examples/form-field/slider-form-field-example.component.html';
-import * as sliderFormFieldTs from '!raw-loader!./examples/form-field/slider-form-field-example.component';
-import * as sliderTicksAndLabelsHtml from '!raw-loader!./examples/ticks-and-labels/slider-ticks-and-labels-example.component.html';
-import * as sliderTicksAndLabelsTs from '!raw-loader!./examples/ticks-and-labels/slider-ticks-and-labels-example.component';
-import * as sliderDisabledHtml from '!raw-loader!./examples/disabled/slider-disabled-example.component.html';
-import * as sliderDisabledTs from '!raw-loader!./examples/disabled/slider-disabled-example.component';
-import * as customValuesHtml from '!raw-loader!./examples/custom-values/slider-custom-values-example.component.html';
-import * as customValuesTs from '!raw-loader!./examples/custom-values/slider-custom-values-example.component';
-import * as sliderTooltipHtml from '!raw-loader!./examples/tooltip/slider-tooltip-example.component.html';
-import * as sliderTooltipTs from '!raw-loader!./examples/tooltip/slider-tooltip-example.component';
-import * as sliderCozyHtml from '!raw-loader!./examples/cozy/slider-cozy-example.component.html';
-import * as sliderCozyTs from '!raw-loader!./examples/cozy/slider-cozy-example.component';
+import sliderBasicHtml from '!./examples/base/slider-basic-example.component.html?raw';
+import sliderBasicTs from '!./examples/base/slider-basic-example.component?raw';
+import sliderRangeHtml from '!./examples/range/slider-range-example.component.html?raw';
+import sliderRangeTs from '!./examples/range/slider-range-example.component?raw';
+import sliderFormFieldHtml from '!./examples/form-field/slider-form-field-example.component.html?raw';
+import sliderFormFieldTs from '!./examples/form-field/slider-form-field-example.component?raw';
+import sliderTicksAndLabelsHtml from '!./examples/ticks-and-labels/slider-ticks-and-labels-example.component.html?raw';
+import sliderTicksAndLabelsTs from '!./examples/ticks-and-labels/slider-ticks-and-labels-example.component?raw';
+import sliderDisabledHtml from '!./examples/disabled/slider-disabled-example.component.html?raw';
+import sliderDisabledTs from '!./examples/disabled/slider-disabled-example.component?raw';
+import customValuesHtml from '!./examples/custom-values/slider-custom-values-example.component.html?raw';
+import customValuesTs from '!./examples/custom-values/slider-custom-values-example.component?raw';
+import sliderTooltipHtml from '!./examples/tooltip/slider-tooltip-example.component.html?raw';
+import sliderTooltipTs from '!./examples/tooltip/slider-tooltip-example.component?raw';
+import sliderCozyHtml from '!./examples/cozy/slider-cozy-example.component.html?raw';
+import sliderCozyTs from '!./examples/cozy/slider-cozy-example.component?raw';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';

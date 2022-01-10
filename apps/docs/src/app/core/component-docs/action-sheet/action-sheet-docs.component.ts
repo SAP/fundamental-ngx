@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
-import * as actionSheetCompactSrc from '!raw-loader!./examples/action-sheet-compact/action-sheet-compact-example.component.html';
-import * as actionSheetCompactSrcTs from '!raw-loader!./examples/action-sheet-compact/action-sheet-compact-example.component.ts';
-import * as actionSheetDefaultSrc from '!raw-loader!./examples/action-sheet-default/action-sheet-default-example.component.html';
-import * as actionSheetDefaultSrcTs from '!raw-loader!./examples/action-sheet-default/action-sheet-default-example.component.ts';
-import * as actionSheetMobileSrc from '!raw-loader!./examples/action-sheet-mobile/action-sheet-mobile-example.component.html';
-import * as actionSheetMobileSrcTs from '!raw-loader!./examples/action-sheet-mobile/action-sheet-mobile-example.component.ts';
+import actionSheetCompactSrc from '!./examples/action-sheet-compact/action-sheet-compact-example.component.html?raw';
+import actionSheetCompactSrcTs from '!./examples/action-sheet-compact/action-sheet-compact-example.component.ts?raw';
+import actionSheetDefaultSrc from '!./examples/action-sheet-default/action-sheet-default-example.component.html?raw';
+import actionSheetDefaultSrcTs from '!./examples/action-sheet-default/action-sheet-default-example.component.ts?raw';
+import actionSheetMobileSrc from '!./examples/action-sheet-mobile/action-sheet-mobile-example.component.html?raw';
+import actionSheetMobileSrcTs from '!./examples/action-sheet-mobile/action-sheet-mobile-example.component.ts?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

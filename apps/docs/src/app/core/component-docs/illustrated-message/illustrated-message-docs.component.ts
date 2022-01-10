@@ -1,21 +1,21 @@
 import { Component } from '@angular/core';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import * as illustratedMessageSrc from '!raw-loader!./examples/illustrated-message-example.component.html';
-import * as illustratedMessageTsCode from '!raw-loader!./examples/illustrated-message-example.component.ts';
+import illustratedMessageSrc from '!./examples/illustrated-message-example.component.html?raw';
+import illustratedMessageTsCode from '!./examples/illustrated-message-example.component.ts?raw';
 
-import * as illustratedMessageDialogSrc from '!raw-loader!./examples/illustrated-message-dialog-example.component.html';
-import * as illustratedMessageDialogTsCode from '!raw-loader!./examples/illustrated-message-dialog-example.component.ts';
+import illustratedMessageDialogSrc from '!./examples/illustrated-message-dialog-example.component.html?raw';
+import illustratedMessageDialogTsCode from '!./examples/illustrated-message-dialog-example.component.ts?raw';
 
-import * as illustratedMessageSpotSrc from '!raw-loader!./examples/illustrated-message-spot-example.component.html';
-import * as illustratedMessageSpotTsCode from '!raw-loader!./examples/illustrated-message-spot-example.component.ts';
+import illustratedMessageSpotSrc from '!./examples/illustrated-message-spot-example.component.html?raw';
+import illustratedMessageSpotTsCode from '!./examples/illustrated-message-spot-example.component.ts?raw';
 
-import * as illustration from '!raw-loader!../../../../assets/images/sapIllus-Dialog-NoMail.svg';
-import * as illustrationSceneNoMail from '!raw-loader!../../../../assets/images/sapIllus-Scene-NoMail.svg';
+import illustration from '!../../../../assets/images/sapIllus-Dialog-NoMail.svg?raw';
+import illustrationSceneNoMail from '!../../../../assets/images/sapIllus-Scene-NoMail.svg?raw';
 
-import * as illustrationDialogNoMail from '!raw-loader!../../../../assets/images/sapIllus-Dialog-NoMail.svg';
+import illustrationDialogNoMail from '!../../../../assets/images/sapIllus-Dialog-NoMail.svg?raw';
 
-import * as illustrationSpotNoMail from '!raw-loader!../../../../assets/images/sapIllus-Spot-NoMail.svg';
+import illustrationSpotNoMail from '!../../../../assets/images/sapIllus-Spot-NoMail.svg?raw';
 
 @Component({
     selector: 'app-illustrated-message',

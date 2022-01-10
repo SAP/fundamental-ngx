@@ -2,26 +2,26 @@ import { Component } from '@angular/core';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
-import * as templateBasedTs from '!raw-loader!./examples/template-based/template-based-message-box-example.component.ts';
-import * as templateBasedHtml from '!raw-loader!./examples/template-based/template-based-message-box-example.component.html';
+import templateBasedTs from '!./examples/template-based/template-based-message-box-example.component.ts?raw';
+import templateBasedHtml from '!./examples/template-based/template-based-message-box-example.component.html?raw';
 
-import * as componentBasedTs from '!raw-loader!./examples/component-based/component-based-message-box-example.component.ts';
-import * as componentBasedExampleTs from '!raw-loader!./examples/component-based/message-box-example.component.ts';
+import componentBasedTs from '!./examples/component-based/component-based-message-box-example.component.ts?raw';
+import componentBasedExampleTs from '!./examples/component-based/message-box-example.component.ts?raw';
 
-import * as objectBasedTs from '!raw-loader!./examples/object-based/object-based-message-box-example.component.ts';
-import * as objectBasedHtml from '!raw-loader!./examples/object-based/object-based-message-box-example.component.html';
+import objectBasedTs from '!./examples/object-based/object-based-message-box-example.component.ts?raw';
+import objectBasedHtml from '!./examples/object-based/object-based-message-box-example.component.html?raw';
 
-import * as semanticTypesTs from '!raw-loader!./examples/semantic-types/semantic-types-example.component.ts';
-import * as semanticTypesHtml from '!raw-loader!./examples/semantic-types/semantic-types-example.component.html';
+import semanticTypesTs from '!./examples/semantic-types/semantic-types-example.component.ts?raw';
+import semanticTypesHtml from '!./examples/semantic-types/semantic-types-example.component.html?raw';
 
-import * as customPositionHtml from '!raw-loader!./examples/custom-position/message-box-position-example.component.html';
-import * as customPositionTs from '!raw-loader!./examples/custom-position/message-box-position-example.component.ts';
+import customPositionHtml from '!./examples/custom-position/message-box-position-example.component.html?raw';
+import customPositionTs from '!./examples/custom-position/message-box-position-example.component.ts?raw';
 
-import * as mobileModeHtml from '!raw-loader!./examples/mobile-mode/message-box-mobile-example.component.html';
-import * as mobileModeTs from '!raw-loader!./examples/mobile-mode/message-box-mobile-example.component.ts';
+import mobileModeHtml from '!./examples/mobile-mode/message-box-mobile-example.component.html?raw';
+import mobileModeTs from '!./examples/mobile-mode/message-box-mobile-example.component.ts?raw';
 
-import * as complexTemplateTs from '!raw-loader!./examples/complex-template/complex-template-example.component.ts';
-import * as complexTemplateExampleTs from '!raw-loader!./examples/complex-template/message-box-complex-example.component.ts';
+import complexTemplateTs from '!./examples/complex-template/complex-template-example.component.ts?raw';
+import complexTemplateExampleTs from '!./examples/complex-template/message-box-complex-example.component.ts?raw';
 
 @Component({
     selector: 'app-message-box-docs',

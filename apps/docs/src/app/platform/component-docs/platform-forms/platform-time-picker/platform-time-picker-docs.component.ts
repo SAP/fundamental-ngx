@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 
 import { ExampleFile } from '../../../../documentation/core-helpers/code-example/example-file';
-import * as timePickerBasicHtml from '!raw-loader!./examples/platform-time-picker-basic-example.component.html';
-import * as timePickerBasicTs from '!raw-loader!./examples/platform-time-picker-basic-example.component.ts';
-import * as timePickerReactiveHtml from '!raw-loader!./examples/platform-time-picker-reactive-example.component.html';
-import * as timePickerReactiveTs from '!raw-loader!./examples/platform-time-picker-reactive-example.component.ts';
-import * as timePickerTemplateHtml from '!raw-loader!./examples/platform-time-picker-template-example.component.html';
-import * as timePickerTemplateTs from '!raw-loader!./examples/platform-time-picker-template-example.component.ts';
+import timePickerBasicHtml from '!./examples/platform-time-picker-basic-example.component.html?raw';
+import timePickerBasicTs from '!./examples/platform-time-picker-basic-example.component.ts?raw';
+import timePickerReactiveHtml from '!./examples/platform-time-picker-reactive-example.component.html?raw';
+import timePickerReactiveTs from '!./examples/platform-time-picker-reactive-example.component.ts?raw';
+import timePickerTemplateHtml from '!./examples/platform-time-picker-template-example.component.html?raw';
+import timePickerTemplateTs from '!./examples/platform-time-picker-template-example.component.ts?raw';
 
 @Component({
     selector: 'app-time-picker',

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import * as basicInfiniteTs from '!raw-loader!./examples/infinite-scroll-basic-example/infinite-scroll-basic-example.component.ts';
-import * as basicInfiniteHtml from '!raw-loader!./examples/infinite-scroll-basic-example/infinite-scroll-basic-example.component.html';
+import basicInfiniteTs from '!./examples/infinite-scroll-basic-example/infinite-scroll-basic-example.component.ts?raw';
+import basicInfiniteHtml from '!./examples/infinite-scroll-basic-example/infinite-scroll-basic-example.component.html?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

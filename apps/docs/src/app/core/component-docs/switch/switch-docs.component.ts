@@ -1,20 +1,20 @@
 import { Component } from '@angular/core';
-import * as switchSizeExample from '!raw-loader!./examples/switch-sizes-example/switch-sizes-example.component.html';
-import * as switchSizeExampleTsCode from '!raw-loader!./examples/switch-sizes-example/switch-sizes-example.component.ts';
-import * as switchSizeExampleScssCode from '!raw-loader!./examples/switch-sizes-example/switch-sizes-example.component.scss';
-import * as switchDisableExample from '!raw-loader!./examples/disabled-switch-example/disabled-switch-example.component.html';
-import * as switchDisableExampleTsCode from '!raw-loader!./examples/disabled-switch-example/disabled-switch-example.component.ts';
-import * as switchDisableExampleScssCode from '!raw-loader!./examples/disabled-switch-example/disabled-switch-example.component.scss';
-import * as switchBindingExampleHtml from '!raw-loader!./examples/switch-binding-example/switch-binding-example.component.html';
-import * as switchBindingExampleTsCode from '!raw-loader!./examples/switch-binding-example/switch-binding-example.component.ts';
-import * as switchBindingExampleScssCode from '!raw-loader!./examples/switch-binding-example/switch-binding-example.component.scss';
+import switchSizeExample from '!./examples/switch-sizes-example/switch-sizes-example.component.html?raw';
+import switchSizeExampleTsCode from '!./examples/switch-sizes-example/switch-sizes-example.component.ts?raw';
+import switchSizeExampleScssCode from '!./examples/switch-sizes-example/switch-sizes-example.component.scss?raw';
+import switchDisableExample from '!./examples/disabled-switch-example/disabled-switch-example.component.html?raw';
+import switchDisableExampleTsCode from '!./examples/disabled-switch-example/disabled-switch-example.component.ts?raw';
+import switchDisableExampleScssCode from '!./examples/disabled-switch-example/disabled-switch-example.component.scss?raw';
+import switchBindingExampleHtml from '!./examples/switch-binding-example/switch-binding-example.component.html?raw';
+import switchBindingExampleTsCode from '!./examples/switch-binding-example/switch-binding-example.component.ts?raw';
+import switchBindingExampleScssCode from '!./examples/switch-binding-example/switch-binding-example.component.scss?raw';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
-import * as switchFormExampleHtmlSrc from '!raw-loader!./examples/switch-form-example/switch-forms-example.component.html';
-import * as switchFormExampleTsCode from '!raw-loader!./examples/switch-form-example/switch-forms-example.component.ts';
-import * as semanticSwitchExampleHtml from '!raw-loader!./examples/semantic-switch-example/semantic-switch-example.component.html';
-import * as semanticSwitchExampleTs from '!raw-loader!./examples/semantic-switch-example/semantic-switch-example.component.ts';
-import * as switchFormExampleScssCode from '!raw-loader!./examples/switch-form-example/switch-forms-example.component.scss';
+import switchFormExampleHtmlSrc from '!./examples/switch-form-example/switch-forms-example.component.html?raw';
+import switchFormExampleTsCode from '!./examples/switch-form-example/switch-forms-example.component.ts?raw';
+import semanticSwitchExampleHtml from '!./examples/semantic-switch-example/semantic-switch-example.component.html?raw';
+import semanticSwitchExampleTs from '!./examples/semantic-switch-example/semantic-switch-example.component.ts?raw';
+import switchFormExampleScssCode from '!./examples/switch-form-example/switch-forms-example.component.scss?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

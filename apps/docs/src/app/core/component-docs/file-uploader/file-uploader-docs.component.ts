@@ -1,22 +1,22 @@
 import { Component } from '@angular/core';
 
-import * as fileUploaderCompactH from '!raw-loader!./examples/file-uploader-compact-example/file-uploader-compact-example.component.html';
-import * as fileUploaderCompactT from '!raw-loader!./examples/file-uploader-compact-example/file-uploader-compact-example.component.ts';
+import fileUploaderCompactH from '!./examples/file-uploader-compact-example/file-uploader-compact-example.component.html?raw';
+import fileUploaderCompactT from '!./examples/file-uploader-compact-example/file-uploader-compact-example.component.ts?raw';
 
-import * as fileUploaderTruncationH from '!raw-loader!./examples/file-uploader-truncation-example/file-uploader-truncation-example.component.html';
-import * as fileUploaderTruncationT from '!raw-loader!./examples/file-uploader-truncation-example/file-uploader-truncation-example.component.ts';
+import fileUploaderTruncationH from '!./examples/file-uploader-truncation-example/file-uploader-truncation-example.component.html?raw';
+import fileUploaderTruncationT from '!./examples/file-uploader-truncation-example/file-uploader-truncation-example.component.ts?raw';
 
-import * as fileUploaderH from '!raw-loader!./examples/file-uploader-example/file-uploader-example.component.html';
-import * as fileUploaderT from '!raw-loader!./examples/file-uploader-example/file-uploader-example.component.ts';
+import fileUploaderH from '!./examples/file-uploader-example/file-uploader-example.component.html?raw';
+import fileUploaderT from '!./examples/file-uploader-example/file-uploader-example.component.ts?raw';
 
-import * as fileUploaderInvalidH from '!raw-loader!./examples/file-uploader-drag-disabled-example/file-uploader-drag-disabled-example.component.html';
-import * as fileUploaderInvalidT from '!raw-loader!./examples/file-uploader-drag-disabled-example/file-uploader-drag-disabled-example.component.ts';
+import fileUploaderInvalidH from '!./examples/file-uploader-drag-disabled-example/file-uploader-drag-disabled-example.component.html?raw';
+import fileUploaderInvalidT from '!./examples/file-uploader-drag-disabled-example/file-uploader-drag-disabled-example.component.ts?raw';
 
-import * as fileUploaderMaxT from '!raw-loader!./examples/file-uploader-max-example/file-uploader-max-example.component.ts';
-import * as fileUploaderMaxH from '!raw-loader!./examples/file-uploader-max-example/file-uploader-max-example.component.html';
+import fileUploaderMaxT from '!./examples/file-uploader-max-example/file-uploader-max-example.component.ts?raw';
+import fileUploaderMaxH from '!./examples/file-uploader-max-example/file-uploader-max-example.component.html?raw';
 
-import * as fileUploaderMinT from '!raw-loader!./examples/file-uploader-min-example/file-uploader-min-example.component.ts';
-import * as fileUploaderMinH from '!raw-loader!./examples/file-uploader-min-example/file-uploader-min-example.component.html';
+import fileUploaderMinT from '!./examples/file-uploader-min-example/file-uploader-min-example.component.ts?raw';
+import fileUploaderMinH from '!./examples/file-uploader-min-example/file-uploader-min-example.component.html?raw';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 

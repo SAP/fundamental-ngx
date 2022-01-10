@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
 
-import * as fliSimpleH from '!raw-loader!./examples/fli-simple/fli-simple-example.component.html';
-import * as fliSimpleT from '!raw-loader!./examples/fli-simple/fli-simple-example.component.ts';
+import fliSimpleH from '!./examples/fli-simple/fli-simple-example.component.html?raw';
+import fliSimpleT from '!./examples/fli-simple/fli-simple-example.component.ts?raw';
 
-import * as fliAvatarH from '!raw-loader!./examples/fli-avatar/fli-avatar-example.component.html';
-import * as fliAvatarT from '!raw-loader!./examples/fli-avatar/fli-avatar-example.component.ts';
+import fliAvatarH from '!./examples/fli-avatar/fli-avatar-example.component.html?raw';
+import fliAvatarT from '!./examples/fli-avatar/fli-avatar-example.component.ts?raw';
 
-import * as fliActionH from '!raw-loader!./examples/fli-action/fli-action-example.component.html';
-import * as fliActionT from '!raw-loader!./examples/fli-action/fli-action-example.component.ts';
+import fliActionH from '!./examples/fli-action/fli-action-example.component.html?raw';
+import fliActionT from '!./examples/fli-action/fli-action-example.component.ts?raw';
 
-import * as fliFooterH from '!raw-loader!./examples/fli-footer/fli-footer-example.component.html';
-import * as fliFooterT from '!raw-loader!./examples/fli-footer/fli-footer-example.component.ts';
+import fliFooterH from '!./examples/fli-footer/fli-footer-example.component.html?raw';
+import fliFooterT from '!./examples/fli-footer/fli-footer-example.component.ts?raw';
 
-import * as fliMobileH from '!raw-loader!./examples/fli-mobile/fli-mobile-example.component.html';
-import * as fliMobileT from '!raw-loader!./examples/fli-mobile/fli-mobile-example.component.ts';
+import fliMobileH from '!./examples/fli-mobile/fli-mobile-example.component.html?raw';
+import fliMobileT from '!./examples/fli-mobile/fli-mobile-example.component.ts?raw';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 

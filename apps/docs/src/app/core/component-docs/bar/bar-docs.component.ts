@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
 
-import * as barDefaultExampleHtml from '!raw-loader!./examples/bar-default-example.component.html';
-import * as barDefaultExampleTs from '!raw-loader!./examples/bar-default-example.component.ts';
-import * as barHeaderExampleHtml from '!raw-loader!./examples/bar-header-example.component.html';
-import * as barHeaderExampleTs from '!raw-loader!./examples/bar-header-example.component.ts';
-import * as barSubHeaderExampleHtml from '!raw-loader!./examples/bar-subheader-example.component.html';
-import * as barHeaderSubHeaderExampleHtml from '!raw-loader!./examples/bar-header-subheader-example.component.html';
-import * as barFooterExampleHtml from '!raw-loader!./examples/bar-footer-example.component.html';
-import * as barFloatingFooterExampleHtml from '!raw-loader!./examples/bar-floating-footer-example.component.html';
-import * as barPageExampleHtml from '!raw-loader!./examples/bar-page-example.component.html';
-import * as barPageExampleTs from '!raw-loader!./examples/bar-page-example.component.ts';
-import * as barPageResponsiveExampleHtml from '!raw-loader!./examples/bar-page-responsive-example.component.html';
-import * as barPageResponsiveExampleTs from '!raw-loader!./examples/bar-page-responsive-example.component.ts';
-import * as barWithTitleExampleHtml from '!raw-loader!./examples/bar-with-title-example.component.html';
-import * as barWithTitleExampleTs from '!raw-loader!./examples/bar-with-title-example.component.ts';
+import barDefaultExampleHtml from '!./examples/bar-default-example.component.html?raw';
+import barDefaultExampleTs from '!./examples/bar-default-example.component.ts?raw';
+import barHeaderExampleHtml from '!./examples/bar-header-example.component.html?raw';
+import barHeaderExampleTs from '!./examples/bar-header-example.component.ts?raw';
+import barSubHeaderExampleHtml from '!./examples/bar-subheader-example.component.html?raw';
+import barHeaderSubHeaderExampleHtml from '!./examples/bar-header-subheader-example.component.html?raw';
+import barFooterExampleHtml from '!./examples/bar-footer-example.component.html?raw';
+import barFloatingFooterExampleHtml from '!./examples/bar-floating-footer-example.component.html?raw';
+import barPageExampleHtml from '!./examples/bar-page-example.component.html?raw';
+import barPageExampleTs from '!./examples/bar-page-example.component.ts?raw';
+import barPageResponsiveExampleHtml from '!./examples/bar-page-responsive-example.component.html?raw';
+import barPageResponsiveExampleTs from '!./examples/bar-page-responsive-example.component.ts?raw';
+import barWithTitleExampleHtml from '!./examples/bar-with-title-example.component.html?raw';
+import barWithTitleExampleTs from '!./examples/bar-with-title-example.component.ts?raw';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 

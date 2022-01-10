@@ -5,7 +5,7 @@
             ariaLabel="Semantic Switch"
             ariaLabelledby="semantic-switch-label"
             [semantic]="true"
-            (switchChange)="onSwitchChange($event)"
+            (switchChange)="onSwitchChange()"
         >
         </fdp-switch>
     </fdp-form-field>
@@ -18,7 +18,7 @@
             contentDensity="compact"
             [semantic]="true"
             [(ngModel)]="switched"
-            (switchChange)="onSwitchChange($event)"
+            (switchChange)="onSwitchChange()"
         >
         </fdp-switch>
     </fdp-form-field>

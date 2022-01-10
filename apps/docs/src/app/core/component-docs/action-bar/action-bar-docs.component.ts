@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 
-import * as backButtonExample from '!raw-loader!./examples/action-bar-back-example.component.html';
-import * as backButtonExampleTs from '!raw-loader!./examples/action-bar-back-example.component.ts';
-import * as titleTruncationExample from '!raw-loader!./examples/action-bar-long-string-title-truncation-example.component.html';
-import * as titleTruncationExampleTs from '!raw-loader!./examples/action-bar-long-string-title-truncation-example.component.ts';
-import * as contextualMenuExample from '!raw-loader!./examples/action-bar-contextual-menu-example.component.html';
-import * as mobileExample from '!raw-loader!./examples/action-bar-mobile-example.component.html';
-import * as mobileExampleTs from '!raw-loader!./examples/action-bar-mobile-example.component.ts';
-import * as noBackButtonExample from '!raw-loader!./examples/action-bar-no-back-example.component.html';
+import backButtonExample from '!./examples/action-bar-back-example.component.html?raw';
+import backButtonExampleTs from '!./examples/action-bar-back-example.component.ts?raw';
+import titleTruncationExample from '!./examples/action-bar-long-string-title-truncation-example.component.html?raw';
+import titleTruncationExampleTs from '!./examples/action-bar-long-string-title-truncation-example.component.ts?raw';
+import contextualMenuExample from '!./examples/action-bar-contextual-menu-example.component.html?raw';
+import mobileExample from '!./examples/action-bar-mobile-example.component.html?raw';
+import mobileExampleTs from '!./examples/action-bar-mobile-example.component.ts?raw';
+import noBackButtonExample from '!./examples/action-bar-no-back-example.component.html?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

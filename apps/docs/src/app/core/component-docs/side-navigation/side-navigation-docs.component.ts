@@ -1,23 +1,23 @@
 import { Component } from '@angular/core';
 
-import * as sideNavigationSrc from '!raw-loader!./examples/side-navigation-example.component.html';
-import * as sideNavigationScsscode from '!raw-loader!./examples/side-navigation-examples.component.scss';
-import * as sideNavigationIconsSrc from '!raw-loader!./examples/side-navigation-icons-example.component.html';
-import * as sideNavigationTitlesSrc from '!raw-loader!./examples/side-navigation-titles-example.component.html';
-import * as sideNavigationCompactSrc from '!raw-loader!./examples/side-navigation-compact-example.component.html';
-import * as sideNavigationMultiLevelSrc from '!raw-loader!./examples/side-navigation-three-levels-example/side-navigation-three-levels-example.component.html';
-import * as sideNavigationNonSelectSrc from '!raw-loader!./examples/side-navigation-non-selectable-example/side-navigation-non-selectable-example.component.html';
-import * as sideNavigationMultiLevelSrcTs from '!raw-loader!./examples/side-navigation-three-levels-example/side-navigation-three-levels-example.component.ts';
-import * as programmaticallySideNavigationSrc from '!raw-loader!./examples/side-navigation-programmatically-example/side-navigation-programmatically-example.component.html';
-import * as programmaticallySideNavigationSrcTs from '!raw-loader!./examples/side-navigation-programmatically-example/side-navigation-programmatically-example.component.ts';
-import * as sideNavigationMultiSelectedSrc from '!raw-loader!./examples/side-navigation-multiple-selected-example/side-navigation-multiple-selected-example.component.html';
-import * as sideNavigationMultiSelectedSrcTs from '!raw-loader!./examples/side-navigation-multiple-selected-example/side-navigation-multiple-selected-example.component.ts';
-import * as sideNavigationCondensedSrc from '!raw-loader!./examples/side-navigation-condensed-example/side-navigation-condensed-example.component.html';
-import * as sideNavigationCondensedSrcTs from '!raw-loader!./examples/side-navigation-condensed-example/side-navigation-condensed-example.component.ts';
-import * as sideNavigationObjectSrc from '!raw-loader!./examples/side-navigation-object-example/side-navigation-object-example.component.html';
-import * as sideNavigationObjectSrcTs from '!raw-loader!./examples/side-navigation-object-example/side-navigation-object-example.component.ts';
-import * as sideNavigationCondensedObjectSrc from '!raw-loader!./examples/side-navigation-condensed-object-example/side-navigation-condensed-object-example.component.html';
-import * as sideNavigationCondensedObjectSrcTs from '!raw-loader!./examples/side-navigation-condensed-object-example/side-navigation-condensed-object-example.component.ts';
+import sideNavigationSrc from '!./examples/side-navigation-example.component.html?raw';
+import sideNavigationScsscode from '!./examples/side-navigation-examples.component.scss?raw';
+import sideNavigationIconsSrc from '!./examples/side-navigation-icons-example.component.html?raw';
+import sideNavigationTitlesSrc from '!./examples/side-navigation-titles-example.component.html?raw';
+import sideNavigationCompactSrc from '!./examples/side-navigation-compact-example.component.html?raw';
+import sideNavigationMultiLevelSrc from '!./examples/side-navigation-three-levels-example/side-navigation-three-levels-example.component.html?raw';
+import sideNavigationNonSelectSrc from '!./examples/side-navigation-non-selectable-example/side-navigation-non-selectable-example.component.html?raw';
+import sideNavigationMultiLevelSrcTs from '!./examples/side-navigation-three-levels-example/side-navigation-three-levels-example.component.ts?raw';
+import programmaticallySideNavigationSrc from '!./examples/side-navigation-programmatically-example/side-navigation-programmatically-example.component.html?raw';
+import programmaticallySideNavigationSrcTs from '!./examples/side-navigation-programmatically-example/side-navigation-programmatically-example.component.ts?raw';
+import sideNavigationMultiSelectedSrc from '!./examples/side-navigation-multiple-selected-example/side-navigation-multiple-selected-example.component.html?raw';
+import sideNavigationMultiSelectedSrcTs from '!./examples/side-navigation-multiple-selected-example/side-navigation-multiple-selected-example.component.ts?raw';
+import sideNavigationCondensedSrc from '!./examples/side-navigation-condensed-example/side-navigation-condensed-example.component.html?raw';
+import sideNavigationCondensedSrcTs from '!./examples/side-navigation-condensed-example/side-navigation-condensed-example.component.ts?raw';
+import sideNavigationObjectSrc from '!./examples/side-navigation-object-example/side-navigation-object-example.component.html?raw';
+import sideNavigationObjectSrcTs from '!./examples/side-navigation-object-example/side-navigation-object-example.component.ts?raw';
+import sideNavigationCondensedObjectSrc from '!./examples/side-navigation-condensed-object-example/side-navigation-condensed-object-example.component.html?raw';
+import sideNavigationCondensedObjectSrcTs from '!./examples/side-navigation-condensed-object-example/side-navigation-condensed-object-example.component.ts?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
