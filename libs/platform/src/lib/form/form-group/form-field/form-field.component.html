@@ -1,6 +1,6 @@
 <ng-template #renderer>
     <div [horizontal]="true" fd-form-item class="fd-row">
-        <div class="fd-col" [class]="_labelColumnLayoutClass">
+        <div class="fd-col" [class]="_labelColumnLayoutClass" *ngIf="!noLabelLayout">
             <label
                 [id]="'fdp-form-label-' + id"
                 [required]="editable && required"

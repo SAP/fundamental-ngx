@@ -1,4 +1,4 @@
-<fd-dialog class="fdp-smart-filter-bar--conditions-dialog">
+<fd-dialog class="fdp-smart-filter-bar__conditions-dialog">
     <fd-dialog-header>
         <ng-template fdTemplate="header">
             <div fd-bar-left>
@@ -21,7 +21,7 @@
                             columnLayout="XL3-L3-M3-S3"
                         ></fdp-form-generator>
                     </div>
-                    <div class="actions-column" colGrow fdLayoutGridCol>
+                    <div class="fdp-smart-filter-bar__actions-column" colGrow fdLayoutGridCol>
                         <fdp-button
                             (click)="removeCondition(i)"
                             buttonType="transparent"
@@ -34,10 +34,10 @@
                     </div>
                 </div>
             </fd-layout-grid>
-            <fd-layout-grid class="condition-row new-condition-row">
+            <fd-layout-grid>
                 <div fdLayoutGridRow>
                     <div colGrow fdLayoutGridCol>&nbsp;</div>
-                    <div class="actions-column" fdLayoutGridCol>
+                    <div class="fdp-smart-filter-bar__actions-column" fdLayoutGridCol>
                         <fdp-button
                             (click)="addCondition()"
                             contentDensity="compact"

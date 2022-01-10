@@ -65,18 +65,6 @@ export class ObservableTableDataProviderExample extends ObservableTableDataProvi
         super(of(items), dateTimeAdapter);
     }
 
-    fetchData(state: TableState): Observable<ExampleItem[]> {
-        if (this.filterBy) {
-            // state.filterBy = [...state.filterBy, ...this.filterBy];
-        }
-
-        if (this.searchInput) {
-            state.searchInput = this.searchInput;
-        }
-
-        return this.fetch(state);
-    }
-
     /**
      * Method for retrieving the data.
      * @param state @see TableState Set of table parameters.
@@ -239,8 +227,6 @@ export class ObservableTableDataProviderExample extends ObservableTableDataProvi
         let itemValue = get(item, filter.field);
 
         itemValue = itemValue ? itemValue.toLocaleLowerCase() : itemValue;
-
-        console.log(itemValue);
 
         let result: boolean;
 

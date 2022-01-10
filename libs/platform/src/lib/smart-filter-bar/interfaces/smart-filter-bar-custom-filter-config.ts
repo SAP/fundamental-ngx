@@ -3,6 +3,7 @@ import { BaseDynamicFormGeneratorControl } from '@fundamental-ngx/platform/form'
 import { FilterAllStrategy } from '@fundamental-ngx/platform/table';
 import { Observable } from 'rxjs';
 import { SmartFilterBarCondition } from './smart-filter-bar-condition';
+import { SelectItem } from '@fundamental-ngx/platform/shared';
 
 export interface SmartFilterBarCustomFilterConfig {
     /**
@@ -24,7 +25,7 @@ export interface SmartFilterBarCustomFilterConfig {
      * @param value raw filter item value.
      * @returns updated filter item value to be used in the filters value hash.
      */
-    valueTransformer?: (value: any) => SmartFilterBarCondition[] | undefined;
+    valueTransformer?: (value: any) => SelectItem<SmartFilterBarCondition>[] | any[] | undefined;
 
     /**
      * Transforms filter raw value so it could be rendered in renderer component.

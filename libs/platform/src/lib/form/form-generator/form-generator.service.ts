@@ -254,13 +254,10 @@ export class FormGeneratorService implements OnDestroy {
             c.types.filter((t) => types.includes(t))
         );
 
-        for (const existingComponent of existingComponents) {
+        existingComponents.forEach((existingComponent, index) => {
             existingComponent.types = existingComponent.types.filter((t) => !types.includes(t));
-
-            const index = this._formComponentDefinitions.findIndex((c) => c.component === existingComponent.component);
-
             this._formComponentDefinitions[index] = existingComponent;
-        }
+        });
 
         this._formComponentDefinitions.push({
             types,

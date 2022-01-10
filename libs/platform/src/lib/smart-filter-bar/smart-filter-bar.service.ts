@@ -13,6 +13,7 @@ import { SmartFilterBarCondition } from './interfaces/smart-filter-bar-condition
 
 @Injectable()
 export class SmartFilterBarService {
+    /** @hidden */
     private _customFilterConditions: Map<Type<BaseDynamicFormGeneratorControl>, SmartFilterBarCustomFilterConfig> =
         new Map<Type<BaseDynamicFormGeneratorControl>, SmartFilterBarCustomFilterConfig>();
 

@@ -55,7 +55,10 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
     /** @hidden */
     private _selectedFilters: string[] = [];
 
-    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    /**
+     * @hidden
+     * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
+     */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */

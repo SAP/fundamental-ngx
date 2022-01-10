@@ -139,6 +139,7 @@ export class SmartFilterBarConditionsDialogComponent {
         });
     }
 
+    /** @hidden */
     private _generateFormGeneratorItems(condition?: SmartFilterBarCondition): DynamicFormItem[] {
         return [
             {

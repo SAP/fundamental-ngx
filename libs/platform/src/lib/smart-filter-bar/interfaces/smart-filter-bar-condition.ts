@@ -1,6 +1,7 @@
-import { FILTER_STRATEGY, FilterableColumnDataType, FilterStrategy } from '@fundamental-ngx/platform/table';
+import { FilterableColumnDataType, FilterStrategy } from '@fundamental-ngx/platform/table';
 import { SelectItem } from '@fundamental-ngx/platform/shared';
 import { InputType } from '@fundamental-ngx/platform/form';
+import { SmartFilterBarStrategyLabels } from './strategy-labels.type';
 
 export interface SmartFilterBarConditionBuilder {
     /**
@@ -31,9 +32,7 @@ export interface SmartFilterBarConditionBuilder {
     /**
      * Condition strategy labels.
      */
-    defineStrategyLabels: {
-        [key in typeof FILTER_STRATEGY[keyof typeof FILTER_STRATEGY]]: string;
-    };
+    defineStrategyLabels: SmartFilterBarStrategyLabels;
 }
 
 export interface SmartFilterBarCondition<T = any> {

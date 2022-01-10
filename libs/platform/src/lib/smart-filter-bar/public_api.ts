@@ -13,6 +13,7 @@ export * from './interfaces/smart-filter-bar-field-definition';
 export * from './interfaces/smart-filter-bar-settings-dialog-config';
 export * from './interfaces/smart-filter-dynamic-form-item';
 export * from './interfaces/smart-filter-bar-visibility-category';
+export * from './interfaces/strategy-labels.type';
 export * from './constants';
 export * from './providers/smart-filter-bar.provider';
 export * from './smart-filter-bar.class';

@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FdDate } from '@fundamental-ngx/core/datetime';
-import { FILTER_STRATEGY } from '@fundamental-ngx/platform/table';
-import { SmartFilterBarVisibilityCategory } from '@fundamental-ngx/platform/smart-filter-bar';
+import {
+    SmartFilterBarStrategyLabels,
+    SmartFilterBarVisibilityCategoryLabels
+} from '@fundamental-ngx/platform/smart-filter-bar';
 
 @Component({
     selector: 'fdp-platform-smart-filter-bar-custom-labels-example',
@@ -12,9 +14,7 @@ import { SmartFilterBarVisibilityCategory } from '@fundamental-ngx/platform/smar
 export class PlatformSmartFilterBarCustomLabelsExampleComponent {
     source: ExampleItem[] = ITEMS;
 
-    defineStrategyLabels: {
-        [key in typeof FILTER_STRATEGY[keyof typeof FILTER_STRATEGY]]: string;
-    } = {
+    defineStrategyLabels: SmartFilterBarStrategyLabels = {
         contains: 'custom "contains" label',
         equalTo: 'custom "equal to" label',
         between: 'custom "between" label',
@@ -30,9 +30,7 @@ export class PlatformSmartFilterBarCustomLabelsExampleComponent {
         beforeOrOn: 'custom "before or on" label'
     };
 
-    filtersVisibilityCategoryLabels: {
-        [key in SmartFilterBarVisibilityCategory]: string;
-    } = {
+    filtersVisibilityCategoryLabels: SmartFilterBarVisibilityCategoryLabels = {
         all: 'Custom "All" label',
         visible: 'Custom "Visible" label',
         active: 'Custom "Active" label',

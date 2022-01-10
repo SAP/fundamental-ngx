@@ -5,9 +5,12 @@ import {
     CollectionBooleanFilter,
     CollectionDateFilter,
     CollectionFilter,
+    CollectionFilterAndGroup,
+    CollectionFilterGroup,
     CollectionNumberFilter,
     CollectionSelectFilter,
     CollectionStringFilter,
+    isCollectionFilter,
     TableDataProvider,
     TableDataSource,
     TableState
@@ -90,13 +93,21 @@ export class PlatformSmartFilterBarCustomFilterExampleComponent {
         const sliderConfig: SmartFilterBarCustomFilterConfig = {
             conditionComponent: PlatformSmartFilterBarSliderComponent,
             types: ['price-slider'],
-            filterStrategies: ['equalTo', 'greaterThan', 'greaterThanOrEqualTo', 'lessThan', 'lessThanOrEqualTo'],
-            valueTransformer: (filter: SmartFilterBarCondition[]) => {
-                filter?.forEach((f) => {
-                    f.value = isSelectItem(f.value) ? f.value.value : f.value;
-                    f.value2 = isSelectItem(f.value2) ? f.value2.value : f.value2;
+            filterStrategies: [
+                'equalTo',
+                'greaterThan',
+                'greaterThanOrEqualTo',
+                'lessThan',
+                'lessThanOrEqualTo',
+                'between'
+            ],
+            valueTransformer: (filters: SelectItem<SmartFilterBarCondition>[]) => {
+                const transformedFilters = filters?.map((f) => f.value);
+                transformedFilters?.forEach((f) => {
+                    f.value2 = isSelectItem(f.value2) ? this.getSelectItemValue(f.value2) : f.value2;
+                    f.value = isSelectItem(f.value) ? this.getSelectItemValue(f.value) : f.value;
                 });
-                return filter;
+                return transformedFilters;
             },
             valueRenderer: (condition: SmartFilterBarCondition<SelectItem>) => {
                 const value1 = condition.value?.value;
@@ -161,6 +172,10 @@ export class PlatformSmartFilterBarCustomFilterExampleComponent {
     alert(message: string): void {
         alert(message);
     }
+
+    getSelectItemValue(item: SelectItem): any {
+        return item.value;
+    }
 }
 
 export interface ExampleItem {
@@ -222,7 +237,7 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
      * @param filters Set of column filters.
      * @returns Array of filtered items.
      */
-    applyFiltering(items: ExampleItem[], filters: CollectionFilter[]): ExampleItem[] {
+    applyFiltering(items: ExampleItem[], filters: CollectionFilterAndGroup[]): ExampleItem[] {
         items = items.filter((i) => this.getFilteringStrategy(i, filters));
         return items;
     }
@@ -239,12 +254,10 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
             take(1),
             map((data) => {
                 const options: SelectItem[] = data
-                    .map((item) => get(item, field))
-                    .filter((item) => item !== undefined)
-                    .sort((a, b) => (a > b ? 1 : a === b ? 0 : -1))
+                    .filter((item) => get(item, field) !== undefined)
                     .map((item) => ({
-                        label: item,
-                        value: item
+                        label: get(item, field),
+                        value: get(item, field)
                     }));
 
                 return options;
@@ -253,37 +266,65 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
     }
 
     /**
-     * Method which selects appropriate filtering strategy of the field depending on the field type.
+     * Method which selects appropriate filtering strategy of the field depending on the filter type.
      * Developers can override this method to extend the filtering functionality.
      * @param item item of the data source.
      * @param filters Set of column filters.
      * @returns Whether or not item should be included in data array.
      */
-    getFilteringStrategy(item: ExampleItem, filters: CollectionFilter[]): boolean {
+    getFilteringStrategy(item: ExampleItem, filters: CollectionFilterAndGroup[]): boolean {
         return filters
-            .filter(({ field }) => !!field)
+            .filter((condition) => condition.field)
             .every((filter) => {
-                let result = false;
-                switch (filter.type) {
-                    case 'boolean':
-                        result = this._filterBoolean(item, filter as CollectionBooleanFilter);
-                        break;
-                    case 'number':
-                        result = this._filterNumber(item, filter as CollectionNumberFilter);
-                        break;
-                    case 'date':
-                        result = this._filterDate(item, filter as CollectionDateFilter, this.dateTimeAdapter);
-                        break;
-                    case 'string':
-                    default:
-                        result = Array.isArray(filter.value)
-                            ? this._filterArray(item, filter as CollectionSelectFilter)
-                            : this._filterString(item, filter as CollectionStringFilter);
-                        break;
+                if (isCollectionFilter(filter)) {
+                    return this.collectionFilterStrategy(item, filter);
                 }
 
-                return result;
+                return this.collectionFilterGroupStrategy(item, filter);
             });
+    }
+
+    /**
+     * Method which filters item depending on applied condition result.
+     * Developers can override this method to extend its functionality
+     * @param item Item to apply conditions to.
+     * @param filter Column filter.
+     * @returns {boolean} Whether this item should be present in filtered array of items.
+     */
+    collectionFilterStrategy(item: ExampleItem, filter: CollectionFilter): boolean {
+        let result: boolean;
+
+        switch (filter.type) {
+            case 'boolean':
+                result = this._filterBoolean(item, filter as CollectionBooleanFilter);
+                break;
+            case 'number':
+                result = this._filterNumber(item, filter as CollectionNumberFilter);
+                break;
+            case 'date':
+                result = this._filterDate(item, filter as CollectionDateFilter, this.dateTimeAdapter);
+                break;
+            case 'string':
+            default:
+                result = Array.isArray(filter.value)
+                    ? this._filterArray(item, filter as CollectionSelectFilter)
+                    : this._filterString(item, filter as CollectionStringFilter);
+                break;
+        }
+
+        return result;
+    }
+
+    /**
+     * Method which applies group filtering conditions for the item.
+     * @param item Item to apply conditions to.
+     * @param filter Filter group.
+     * @returns {boolean} Whether this item should be present in filtered items array.
+     */
+    collectionFilterGroupStrategy(item: ExampleItem, filter: CollectionFilterGroup): boolean {
+        return filter.strategy === 'and'
+            ? filter.filters.every((f) => this.collectionFilterStrategy(item, f))
+            : filter.filters.some((f) => this.collectionFilterStrategy(item, f));
     }
 
     /**

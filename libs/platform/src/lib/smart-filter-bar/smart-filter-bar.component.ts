@@ -38,10 +38,11 @@ import { SmartFilterBarCondition } from './interfaces/smart-filter-bar-condition
 import { SmartFilterSettingsDialogConfig } from './interfaces/smart-filter-bar-settings-dialog-config';
 import { SmartFilterBarService } from './smart-filter-bar.service';
 import { SMART_FILTER_BAR_RENDERER_COMPONENT } from './constants';
-import { SmartFilterBarVisibilityCategory } from './interfaces/smart-filter-bar-visibility-category';
+import { SmartFilterBarVisibilityCategoryLabels } from './interfaces/smart-filter-bar-visibility-category';
 import { SmartFilterBar } from './smart-filter-bar.class';
 import { SmartFilterBarConditionFieldComponent } from './components/smart-filter-bar-condition-field/smart-filter-bar-condition-field.component';
 import { getSelectItemValue } from './helpers';
+import { SmartFilterBarStrategyLabels } from './interfaces/strategy-labels.type';
 
 const defaultColumnsLayout = { S: 12, M: 6, L: 4, XL: 3 };
 
@@ -99,7 +100,7 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
      * Condition strategy labels.
      */
     @Input()
-    defineStrategyLabels: SmartFilterBar['defineStrategyLabels'] = {
+    defineStrategyLabels: SmartFilterBarStrategyLabels = {
         contains: 'contains',
         equalTo: 'equal to',
         between: 'between',
@@ -119,9 +120,7 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
      * Filters visibility category labels.
      */
     @Input()
-    filtersVisibilityCategoryLabels: {
-        [key in SmartFilterBarVisibilityCategory]: string;
-    } = {
+    filtersVisibilityCategoryLabels: SmartFilterBarVisibilityCategoryLabels = {
         all: 'All',
         visible: 'Visible',
         active: 'Active',
@@ -177,6 +176,11 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
         this._unsubscribeFromSubject();
     }
 
+    /**
+     * Transforms condition value into human-readable text.
+     * @param condition Smart filter bar condition.
+     * @param filterType Condition filter type.
+     */
     async getDisplayValue(condition: SmartFilterBarCondition, filterType: string): Promise<string> {
         return this._smartFilterBarService.getDisplayValue(condition, filterType);
     }

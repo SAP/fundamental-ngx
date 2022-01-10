@@ -7,7 +7,7 @@ import { isBlank } from './../utils/lang';
  *
  * Used in various controls: Select, RadioGroup, CheckboxGroup, Combobox
  */
-export interface SelectItem {
+export interface SelectItem<T = any> {
     /**
      * Item text shown in the popup
      */
@@ -16,7 +16,7 @@ export interface SelectItem {
     /**
      * References to the object instance
      */
-    value: any;
+    value: T;
     disabled?: boolean;
 
     icon?: string;
