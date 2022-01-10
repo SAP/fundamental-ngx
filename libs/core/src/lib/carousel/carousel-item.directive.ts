@@ -1,6 +1,6 @@
 import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
 
-let uniqueCarouselItemId = 0;
+let carouselItemCounter = 0;
 
 @Directive({
     selector: '[fd-carousel-item], [fdCarouselItem]',
@@ -22,22 +22,23 @@ export class CarouselItemDirective {
     /** Carousel Id, it has some default value if not set,  */
     @Input()
     @HostBinding('attr.id')
-    id: string = 'carousel-item-id-' + uniqueCarouselItemId++;
+    id: string = 'carousel-item-id-' + carouselItemCounter++;
 
-    constructor(private _elementRef: ElementRef) {}
+    /** @hidden */
+    constructor(private readonly _elementRef: ElementRef<HTMLElement>) {}
+
+    /** Native element  */
+    get element(): HTMLElement {
+        return this._elementRef.nativeElement;
+    }
 
     /** Width of element */
     getWidth(): number {
-        return this._elementRef.nativeElement.getBoundingClientRect().width || this.initialWidth;
+        return this.element.getBoundingClientRect().width || this.initialWidth;
     }
 
     /** Height of element */
     getHeight(): number {
-        return this._elementRef.nativeElement.getBoundingClientRect().height || this.initialHeight;
-    }
-
-    /** Native element  */
-    getElement(): any {
-        return this._elementRef.nativeElement;
+        return this.element.getBoundingClientRect().height || this.initialHeight;
     }
 }
