@@ -214,7 +214,7 @@
         "ngx-cva-test-suite": "~1.0.4",
         "postcss": "^8.3.9",
         "postcss-import": "^14.0.2",
-        "postcss-preset-env": "^6.7.0",
+        "postcss-preset-env": "^7.2.0",
         "postcss-url": "^10.1.1",
         "prettier": "2.4.1",
         "rollup": "2.60.2",
