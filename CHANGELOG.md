@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.261 (2022-01-10)
+
+
+### Bug Fixes
+
+* **platform:** fix empty password field error ([#7508](https://github.com/SAP/fundamental-ngx/issues/7508)) ([b2207e9](https://github.com/SAP/fundamental-ngx/commit/b2207e98489f1c9975179ba1dacc86f59c50747e))
+
 ## 0.33.0-rc.260 (2022-01-10)
 
 ## 0.33.0-rc.259 (2022-01-09)
