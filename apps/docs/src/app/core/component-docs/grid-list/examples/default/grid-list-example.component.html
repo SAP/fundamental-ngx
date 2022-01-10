@@ -34,12 +34,7 @@
         ></button>
     </fd-grid-list-title-bar>
 
-    <fd-grid-list-item
-        *ngFor="let item of list"
-        [type]="item.type"
-        [counter]="item.counter"
-        (navigate)="navigate($event)"
-    >
+    <fd-grid-list-item *ngFor="let item of list" [type]="item.type" [counter]="item.counter" (navigate)="navigate()">
         <div class="fd-grid-list-item-body--container">
             <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
             <div class="fd-grid-list-item-body--content">

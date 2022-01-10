@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 
-import { DynamicPageCollapseChangeEvent } from '@fundamental-ngx/platform/dynamic-page';
 import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-page-overflow.service';
 
 @Component({
@@ -19,7 +18,7 @@ export class PlatformDynamicPageExampleComponent implements OnDestroy {
 
     constructor(private _overflowHandlingService: PlatformDynamicPagePageOverflowService) {}
 
-    onCollapseChange(event: DynamicPageCollapseChangeEvent): void {
+    onCollapseChange(): void {
         console.log('collapse changed');
     }
 
