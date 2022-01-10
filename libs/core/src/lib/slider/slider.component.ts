@@ -261,6 +261,10 @@ export class SliderComponent
     _popovers: QueryList<PopoverComponent>;
 
     /** @hidden */
+    @ViewChildren('sliderTooltipWrapper')
+    _sliderTooltipWrappers: QueryList<ElementRef<HTMLDivElement>>;
+
+    /** @hidden */
     _value: number | SliderTickMark | SliderTickMark[] | number[] = 0;
 
     /** @hidden */
@@ -389,7 +393,7 @@ export class SliderComponent
     }
 
     /** @hidden */
-    ngAfterViewInit() {
+    ngAfterViewInit(): void {
         this._listenToInteractionChanges();
     }
 
@@ -942,7 +946,7 @@ export class SliderComponent
     }
 
     /** @hidden */
-    private _listenToInteractionChanges() {
+    private _listenToInteractionChanges(): void {
         combineLatest([
             this._handleFocused$,
             this._rangeHandle1Focused$,
@@ -996,9 +1000,7 @@ export class SliderComponent
      * If yes, returns "true" instantly and "false" once it's not hovered anymore.
      */
     private _isPopoverHovered(): Observable<boolean> {
-        const popoverBody = document
-            .querySelector('.fd-popover__popper--cdk-custom.fd-slider--tooltip-popover')
-            ?.closest('fd-popover-body');
+        const popoverBody = this._sliderTooltipWrappers.first?.nativeElement.closest('fd-popover-body');
         if (popoverBody?.matches(':hover')) {
             return fromEvent(popoverBody, 'mouseleave').pipe(mapTo(false), take(1), startWith(true));
         }

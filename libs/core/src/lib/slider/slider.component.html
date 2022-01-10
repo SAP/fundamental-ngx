@@ -198,6 +198,7 @@
 
 <ng-template #popoverInner let-target="target" let-position="position">
     <div
+        #sliderTooltipWrapper
         class="fd-slider--tooltip-wrapper"
         (click)="$event.stopPropagation()"
         (keydown)="$event.stopPropagation()"
