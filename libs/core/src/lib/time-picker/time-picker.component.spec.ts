@@ -1,3 +1,4 @@
+import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 
@@ -7,8 +8,11 @@ import { FormMessageModule } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { TimeModule } from '@fundamental-ngx/core/time';
-import { TimePickerComponent } from '@fundamental-ngx/core/time-picker';
 import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '@fundamental-ngx/core/utils';
+import { runValueAccessorTests } from 'ngx-cva-test-suite';
+
+import { TimePickerComponent } from './time-picker.component';
+import { TimePickerModule } from './time-picker.module';
 
 describe('TimePickerComponent', () => {
     let component: TimePickerComponent<FdDate>;
@@ -203,4 +207,33 @@ describe('TimePickerComponent', () => {
         component._setIsOpen(false);
         expect(showSpy).toHaveBeenCalled();
     });
+});
+
+@Component({
+    template: `<fd-time-picker></fd-time-picker>`
+})
+class TimePickerHostComponent {
+    @ViewChild(TimePickerComponent) picker: TimePickerComponent<FdDate>;
+}
+runValueAccessorTests<TimePickerComponent<FdDate>, TimePickerHostComponent>({
+    component: TimePickerComponent,
+    testModuleMetadata: {
+        imports: [TimePickerModule, FdDatetimeModule],
+        declarations: [TimePickerHostComponent]
+    },
+    hostTemplate: {
+        getTestingComponent: (fixture) => fixture.componentInstance.picker,
+        hostComponent: TimePickerHostComponent
+    },
+    supportsOnBlur: true,
+    nativeControlSelector: 'fd-time-picker',
+    internalValueChangeSetter: (fixture, value) => {
+        fixture.componentInstance.picker._timeComponentValueChanged(value);
+    },
+    getComponentValue: (fixture) => fixture.componentInstance.picker.time,
+    getValues: () => [
+        new FdDate(2021, 10, 10).setTime(8, 16, 0),
+        new FdDate(2021, 10, 10).setTime(8, 17, 0),
+        new FdDate(2021, 10, 10).setTime(8, 18, 0)
+    ]
 });

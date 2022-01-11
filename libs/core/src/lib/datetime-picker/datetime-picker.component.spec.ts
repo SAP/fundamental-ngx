@@ -156,6 +156,6 @@ runValueAccessorTests({
     internalValueChangeSetter: (fixture, value) => {
         fixture.componentInstance.handleInputChange(value);
     },
-    getValues: () => [new FdDate(9, 5, 2021), new FdDate(10, 5, 2021), new FdDate(11, 5, 2021)],
+    getValues: () => [new FdDate(2021, 9, 5), new FdDate(2021, 10, 5), new FdDate(2021, 11, 5)],
     getComponentValue: (fixture) => fixture.componentInstance.date
 });

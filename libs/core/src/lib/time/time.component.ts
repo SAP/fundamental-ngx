@@ -189,8 +189,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
             throw createMissingDateImplementationError('DateTimeAdapter');
         }
 
-        // Set default time 00:00:00
-        this.time = _dateTimeAdapter.today();
+        this.time = this._getDefaultValue();
     }
 
     /** @hidden */
@@ -347,7 +346,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
     /** @hidden */
     writeValue(time: D): void {
         if (!time || !this._dateTimeAdapter.isValid(time)) {
-            return;
+            time = this._getDefaultValue();
         }
         this.time = time;
 
@@ -552,5 +551,13 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
     /** @hidden */
     private _isPm(hours: number = this._getModelHour()): boolean {
         return hours >= 12;
+    }
+
+    /**
+     * @hidden
+     * @returns default time 00:00:00
+     */
+    private _getDefaultValue(): D {
+        return this._dateTimeAdapter.today();
     }
 }

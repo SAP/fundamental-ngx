@@ -678,8 +678,8 @@ describe('SearchFieldComponent', () => {
         expect(component._showDropdown).toBeFalsy();
     });
 
-    // TODO: Unskip after fix
-    it('should return focus to the input field after suggestion item is selected', () => {
+    // TODO: flaky test  https://github.com/SAP/fundamental-ngx/issues/7534
+    xit('should return focus to the input field after suggestion item is selected', () => {
         // set up component
         host.placeholder = 'Search';
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
