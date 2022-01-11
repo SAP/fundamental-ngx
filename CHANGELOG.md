@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.264 (2022-01-11)
+
+
+### Bug Fixes
+
+* **core:** popover vertical overflow ([#7528](https://github.com/SAP/fundamental-ngx/issues/7528)) ([2bc4131](https://github.com/SAP/fundamental-ngx/commit/2bc4131d0b2080d3f26a45eb84a80e07738cab8e))
+
 ## 0.33.0-rc.263 (2022-01-10)
 
 
