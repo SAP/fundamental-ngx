@@ -66,7 +66,8 @@
  *
  */
 import { InjectionToken } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 export enum MatchingStrategy {
     STARTS_WITH_PER_TERM = 'starts with per term',
@@ -98,6 +99,7 @@ export function isDataSource(value: any): value is DataSource<any> {
     return value && typeof value.open === 'function';
 }
 
+export type ProviderParams = ReadonlyMap<string, any>;
 /**
  * Provider is a data driver that can access data and retrieve them. It knows how to get 1
  * or more records, maybe do paging and some other things.
@@ -108,7 +110,7 @@ export abstract class DataProvider<T> {
     protected _matchingStrategy: MatchingStrategy = MatchingStrategy.STARTS_WITH;
     protected _matchingBy: MatchingBy | null = null;
 
-    abstract fetch(params: Map<string, any>): Observable<T[]>;
+    abstract fetch(params: ProviderParams): Observable<T[]>;
 
     /**
      * Tells if this DataProvider supports INSERT, REMOVE
@@ -118,19 +120,21 @@ export abstract class DataProvider<T> {
         return false;
     }
 
-    /**
-     * Implement to support CRUD operations.
-     *
-     */
-    insert(obj: any): void {
+    // Implement to support CRUD operations.
+
+    getOne(params: ProviderParams): Observable<T> {
         throw new Error('Not supported');
     }
 
-    remove(obj: any): void {
+    insert(payload: any, params?: ProviderParams): Observable<T> {
         throw new Error('Not supported');
     }
 
-    update(obj: any): void {
+    remove(params: ProviderParams): Observable<boolean> {
+        throw new Error('Not supported');
+    }
+
+    update(payload: any, params?: ProviderParams): Observable<T> {
         throw new Error('Not supported');
     }
 
@@ -151,9 +155,11 @@ export class ComboBoxDataSource<T> implements DataSource<T> {
     static readonly MaxLimit = 5;
     protected dataChanges: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
 
+    protected _onDestroy$ = new Subject<void>();
+
     constructor(public dataProvider: DataProvider<any>) {}
 
-    match(predicate?: string | Map<string, string>): void {
+    match(predicate: string | Map<string, string> = new Map<string, string>()): void {
         const searchParam = new Map();
 
         if (typeof predicate === 'string') {
@@ -174,10 +180,12 @@ export class ComboBoxDataSource<T> implements DataSource<T> {
     }
 
     open(): Observable<T[]> {
-        return this.dataChanges.asObservable();
+        return this.dataChanges.pipe(takeUntil(this._onDestroy$));
     }
 
-    close(): void {}
+    close(): void {
+        this._onDestroy$.next();
+    }
 }
 
 export class MultiComboBoxDataSource<T> extends ComboBoxDataSource<T> {
@@ -200,6 +208,18 @@ export class ListDataSource<T> extends ComboBoxDataSource<T> {
 
 export class MultiInputDataSource<T> extends ComboBoxDataSource<T> {
     constructor(public dataProvider: DataProvider<any>) {
+        super(dataProvider);
+    }
+}
+
+export class ApprovalFlowUserDataSource<T> extends ComboBoxDataSource<T> {
+    constructor(public dataProvider: DataProvider<T>) {
+        super(dataProvider);
+    }
+}
+
+export class ApprovalFlowTeamDataSource<T> extends ComboBoxDataSource<T> {
+    constructor(public dataProvider: DataProvider<T>) {
         super(dataProvider);
     }
 }

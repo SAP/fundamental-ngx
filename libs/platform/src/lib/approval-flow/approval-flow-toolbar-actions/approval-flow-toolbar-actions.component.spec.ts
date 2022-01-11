@@ -11,6 +11,7 @@ const users: ApprovalUser[] = [
     {
         id: 'uid81955',
         name: 'Josephine Carlson',
+        teamId: 'teamId2',
         description: 'Sales team',
         imgUrl: 'https://randomuser.me/api/portraits/women/88.jpg'
     }

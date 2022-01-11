@@ -39,7 +39,6 @@
                 i18n-placeholder
                 placeholder="Search"
                 contentDensity="compact"
-                [inputText]="_searchString"
                 [suggestions]="[]"
                 (inputChange)="_onSearchStringChange($event.text)"
             ></fdp-search-field>
@@ -115,6 +114,7 @@
                     *ngIf="_isSingleUserMode"
                     [compact]="true"
                     [showAllButton]="false"
+                    [dropdownValues]="_selectedApprovers"
                     [(ngModel)]="_selectedApprovers"
                     [displayFn]="_displayUserFn"
                     (openChange)="_goToSelectMode()"
@@ -125,6 +125,7 @@
                     *ngIf="!_isSingleUserMode"
                     [compact]="true"
                     [showAllButton]="false"
+                    [dropdownValues]="_selectedTeamArray"
                     [(ngModel)]="_selectedTeamArray"
                     [displayFn]="_displayTeamFn"
                     (openChange)="_goToSelectMode()"
@@ -154,7 +155,7 @@
             <fdp-approval-flow-team-list
                 *ngIf="viewService.isSelectTeamMode"
                 [isRtl]="_data.rtl"
-                [teams]="_filteredTeams"
+                [teams]="_teams"
                 [selectedTeamId]="_selectedTeam?.id"
                 (onTeamClick)="_viewTeamMembers($event)"
                 (onTeamRadioClick)="_setSelectedTeam($event)"
@@ -162,7 +163,7 @@
 
             <fdp-approval-flow-user-list
                 *ngIf="viewService.isSelectUserMode || viewService.isTeamMembersMode"
-                [users]="viewService.isSelectUserMode ? _filteredApprovers : _filteredTeamMembers"
+                [users]="viewService.isSelectUserMode ? _approvers : _filteredTeamMembers"
                 [isSelectable]="viewService.isSelectUserMode"
                 [selectedUsers]="_selectedApprovers"
                 (onUserClick)="_seeUserDetails($event)"

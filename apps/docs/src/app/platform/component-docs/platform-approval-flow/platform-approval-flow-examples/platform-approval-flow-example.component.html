@@ -1,7 +1,10 @@
 <fdp-approval-flow
     title="Basic Approval Flow Demo"
-    [dataSource]="dataSource"
+    [value]="approvalProcess"
     [userDetailsTemplate]="userDetailsTemplate"
+    [userDataSource]="userDataSource"
+    [watcherDataSource]="watcherDataSource"
+    [teamDataSource]="teamDataSource"
     [checkDueDate]="checkDueDate"
     [allowSendRemindersForStatuses]="sendReminderStatuses"
     [isEditAvailable]="editModeEnabled"
@@ -9,7 +12,9 @@
     [disableExitButton]="disableExitButton"
     (nodeClick)="nodeClick($event)"
     (afterNodeAdd)="afterNodeAdd($event)"
-    (afterNodeEdit)="afterNodeEdit()"
+    (afterNodeEdit)="afterNodeEdit($event)"
+    (valueChange)="valueChanged($event)"
+    (sendReminders)="sendReminders($event)"
 >
 </fdp-approval-flow>
 
@@ -44,11 +49,22 @@
     </p>
 </ng-template>
 
+<ng-template let-messageToast #reminderTemplate>
+    <ng-container *ngIf="messageToast.data.targets.length === 1; else multipleReceivers">
+        Reminder has been sent to {{ messageToast.data.targets[0].name }}
+    </ng-container>
+
+    <ng-template #multipleReceivers>
+        Reminder has been sent to {{ messageToast.data.targets.length }} members of
+        {{ messageToast.data.node.description }}
+    </ng-template>
+</ng-template>
+
 <!-- Playground code below, not related to the component itself -->
 
 <p>
     Selected example:
-    <select [(ngModel)]="selectedExample" (ngModelChange)="dataSource.selectGraph(selectedExample)">
+    <select [(ngModel)]="selectedExample" (ngModelChange)="changeExampleData()">
         <option *ngFor="let example of examples" [value]="example">{{ example | titlecase }}</option>
     </select>
 </p>

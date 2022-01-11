@@ -1,17 +1,25 @@
-import { Component, OnDestroy, ViewChild } from '@angular/core';
-import { Subscription, BehaviorSubject, Observable, of } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { Component, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
+import { Subscription, of, Observable } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 import {
-    ApprovalDataSource,
     ApprovalFlowComponent,
     ApprovalNode,
     ApprovalNodeActionsConfig,
     ApprovalProcess,
     ApprovalStatus,
     ApprovalTeam,
-    ApprovalUser
+    ApprovalUser,
+    SendRemindersData
 } from '@fundamental-ngx/platform/approval-flow';
+import {
+    DataProvider,
+    ProviderParams,
+    ApprovalFlowUserDataSource,
+    ApprovalFlowTeamDataSource
+} from '@fundamental-ngx/platform/shared';
+import { cloneDeep } from 'lodash-es';
+import { MessageToastService } from '@fundamental-ngx/core/message-toast';
 
 @Component({
     selector: 'fdp-platform-approval-flow-example',
@@ -22,9 +30,16 @@ export class PlatformApprovalFlowExampleComponent implements OnDestroy {
     @ViewChild(ApprovalFlowComponent)
     _approvalFlow: ApprovalFlowComponent;
 
-    dataSource = new ApprovalFlowExampleDataSource('complex');
-    examples = ['empty', 'simple', 'medium', 'complex'];
-    selectedExample = 'complex';
+    @ViewChild('reminderTemplate') _reminderTemplate: TemplateRef<any>;
+
+    examples: GraphTypes[] = ['empty', 'simple', 'medium', 'complex'];
+    selectedExample: GraphTypes = 'complex';
+    approvalProcess: ApprovalProcess = graphs[this.selectedExample];
+
+    userDataSource = new ApprovalFlowUserDataSource(new UserDataProvider());
+    watcherDataSource = new ApprovalFlowUserDataSource(new UserDataProvider());
+    teamDataSource = new ApprovalFlowTeamDataSource(new TeamDataProvider());
+
     checkDueDate = false;
     setNotStartedStatuses = false;
     editModeEnabled = true;
@@ -53,58 +68,65 @@ export class PlatformApprovalFlowExampleComponent implements OnDestroy {
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    private newNodes: ApprovalNode[] = [];
+    private newNodes = new Map<ApprovalNode['id'], ApprovalNode>();
+
+    constructor(private readonly _messageToastService: MessageToastService) {}
 
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 
+    valueChanged(updatedApprovalProcess: ApprovalProcess): void {
+        console.log('valueChanged', updatedApprovalProcess);
+    }
+
+    sendReminders(data: SendRemindersData): void {
+        this._messageToastService.open(this._reminderTemplate, {
+            data: {
+                targets: data.users,
+                node: data.node
+            },
+            duration: 5000
+        });
+    }
+
+    changeExampleData(): void {
+        this.approvalProcess = cloneDeep(graphs[this.selectedExample]);
+    }
+
     toggleNodeActions(state: boolean): void {
-        this._subscriptions.add(undefined);
-
-        this._subscriptions.add(
-            this.dataSource
-                .fetch()
-                .pipe(take(1))
-                .subscribe((approvalGraph) => {
-                    approvalGraph.nodes.forEach((node) => {
-                        node.disableActions = state;
-                    });
-
-                    this.dataSource.updateApprovals(approvalGraph.nodes);
-                })
-        );
+        const approvalProcess = this._approvalFlow.approvalProcess;
+        const updatedState = cloneDeep(approvalProcess);
+        updatedState.nodes.forEach((node) => {
+            node.disableActions = state;
+        });
+        this.approvalProcess = updatedState;
     }
 
     toggleSpecificNodeAction(field: keyof ApprovalNodeActionsConfig, state: boolean): void {
-        this._subscriptions.add(
-            this.fetchOneFromDatasource().subscribe((approvalGraph) => {
-                approvalGraph.nodes.forEach((node) => {
-                    node.actionsConfig = {
-                        ...node.actionsConfig,
-                        [field]: state
-                    };
-                });
-
-                this.dataSource.updateApprovals(approvalGraph.nodes);
-            })
-        );
+        const approvalProcess = this._approvalFlow.approvalProcess;
+        const updatedState = cloneDeep(approvalProcess);
+        updatedState.nodes.forEach((node) => {
+            node.actionsConfig = {
+                ...node.actionsConfig,
+                [field]: state
+            };
+        });
+        this.approvalProcess = updatedState;
     }
 
     newNodeSettingsChange(): void {
-        this._subscriptions.add(
-            this.fetchOneFromDatasource().subscribe((approvalGraph) => {
-                approvalGraph.nodes.forEach((node) => {
-                    if (this.newNodes.find((newNode) => newNode.id === node.id)) {
-                        const meta = this._approvalFlow.getNodeMetadataByNodeId(node.id);
+        const approvalProcess = this._approvalFlow.approvalProcess;
 
-                        meta.canAddNodeAfter = !this.nodeActionsConfigForNewNodes.disableAddAfter;
-                        meta.canAddNodeBefore = !this.nodeActionsConfigForNewNodes.disableAddBefore;
-                        meta.canAddParallel = !this.nodeActionsConfigForNewNodes.disableAddParallel;
-                    }
-                });
-            })
-        );
+        approvalProcess.nodes.forEach((node) => {
+            if (this.newNodes.has(node.id)) {
+                const meta = this._approvalFlow.getNodeMetadataByNodeId(node.id);
+
+                meta.canAddNodeAfter = !this.nodeActionsConfigForNewNodes.disableAddAfter;
+                meta.canAddNodeBefore = !this.nodeActionsConfigForNewNodes.disableAddBefore;
+                meta.canAddParallel = !this.nodeActionsConfigForNewNodes.disableAddParallel;
+            }
+        });
     }
 
     nodeClick(node: ApprovalNode): void {
@@ -113,22 +135,34 @@ export class PlatformApprovalFlowExampleComponent implements OnDestroy {
 
     /** Event listener for afterNodeAdd event */
     afterNodeAdd(node: ApprovalNode): void {
-        this.newNodes.push(node);
+        console.log('After node add handler', node);
+        this.newNodes.set(node.id, node);
 
         this.newNodeSettingsChange();
     }
 
     /** Event listener for afterNodeEdit event */
-    afterNodeEdit(): void {
+    afterNodeEdit(node: ApprovalNode): void {
+        console.log('After node edit handler', node);
         this.newNodeSettingsChange();
     }
 
     setNotStarted(): void {
-        this.dataSource.setDefaultStatus(this.setNotStartedStatuses ? 'not started' : null);
-    }
+        const approvalProcess = this._approvalFlow.approvalProcess;
+        const initialNodeMap = new Map((graphs[this.selectedExample] as ApprovalProcess).nodes.map((n) => [n.id, n]));
+        const updatedState = cloneDeep(approvalProcess);
+        updatedState.nodes = updatedState.nodes.map((n) => {
+            const status =
+                this.setNotStartedStatuses || !initialNodeMap.has(n.id)
+                    ? 'not started'
+                    : initialNodeMap.get(n.id).status;
+            return {
+                ...n,
+                status
+            };
+        });
 
-    private fetchOneFromDatasource(): Observable<ApprovalProcess> {
-        return this.dataSource.fetch().pipe(take(1));
+        this.approvalProcess = updatedState;
     }
 }
 
@@ -141,114 +175,133 @@ const DAY_IN_MILLISECONDS = 1000 * 60 * 60 * 24;
 const users: ApprovalUser[] = [
     {
         id: 'uid28141',
+        teamId: 'teamId3',
         name: 'Luis Franklin',
         description: 'Legal team',
         imgUrl: 'https://randomuser.me/api/portraits/men/91.jpg'
     },
     {
         id: 'uid08141',
+        teamId: 'teamId3',
         name: 'Renee Miles',
         description: 'Legal team',
         imgUrl: 'https://randomuser.me/api/portraits/women/11.jpg'
     },
     {
         id: 'uid99641',
+        teamId: 'teamId3',
         name: 'Elaine Myers',
         description: 'Legal team',
         imgUrl: 'https://randomuser.me/api/portraits/women/75.jpg'
     },
     {
         id: 'uid38141',
+        teamId: 'teamId4',
         name: 'Emma Cole',
         description: 'Marketing team',
         imgUrl: 'https://randomuser.me/api/portraits/women/91.jpg'
     },
     {
         id: 'uid37866',
+        teamId: 'teamId4',
         name: 'Daniel Sullivan',
         description: 'Marketing team',
         imgUrl: 'https://randomuser.me/api/portraits/men/9.jpg'
     },
     {
         id: 'uid09141',
+        teamId: 'teamId4',
         name: 'Salvador Duncan',
         description: 'Marketing team',
         imgUrl: 'https://randomuser.me/api/portraits/men/14.jpg'
     },
     {
         id: 'uid09641',
+        teamId: 'teamId4',
         name: 'Caleb Taylor',
         description: 'Marketing team',
         imgUrl: 'https://randomuser.me/api/portraits/men/17.jpg'
     },
     {
         id: 'uid99651',
+        teamId: 'teamId4',
         name: 'Julie Peters',
         description: 'Marketing team',
         imgUrl: 'https://randomuser.me/api/portraits/women/77.jpg'
     },
     {
         id: 'uid99655',
+        teamId: 'teamId4',
         name: 'Fred Gibson',
         description: 'Marketing team',
         imgUrl: 'https://randomuser.me/api/portraits/men/45.jpg'
     },
     {
         id: 'uid81355',
+        teamId: 'teamId4',
         name: 'George Carter',
         description: 'Marketing team',
         imgUrl: 'https://randomuser.me/api/portraits/men/85.jpg'
     },
     {
         id: 'uid81353',
+        teamId: 'teamId4',
         name: 'Lillian Walker',
         description: 'Marketing team',
         imgUrl: 'https://randomuser.me/api/portraits/women/25.jpg'
     },
     {
         id: 'uid81955',
+        teamId: 'teamId2',
         name: 'Josephine Carlson',
         description: 'Sales team',
         imgUrl: 'https://randomuser.me/api/portraits/women/88.jpg'
     },
     {
         id: 'uid77135',
+        teamId: 'teamId2',
         name: 'Tristan Sutton',
         description: 'Sales team',
         imgUrl: 'https://randomuser.me/api/portraits/men/5.jpg'
     },
     {
         id: 'uid77115',
+        teamId: 'teamId2',
         name: 'Alvin Stephens',
         description: 'Sales team',
         imgUrl: 'https://randomuser.me/api/portraits/men/78.jpg'
     },
     {
         id: 'uid77111',
+        teamId: 'teamId2',
         name: 'Logan Herrera',
         description: 'Sales team',
         imgUrl: 'https://randomuser.me/api/portraits/men/53.jpg'
     },
     {
         id: 'uid66141',
+        teamId: 'teamId1',
         name: 'Melissa Martin',
         description: 'Accounting team',
         imgUrl: 'https://randomuser.me/api/portraits/women/87.jpg'
     },
     {
         id: 'uid66151',
+        teamId: 'teamId1',
         name: 'Sofia Hanson',
         description: 'Accounting team',
         imgUrl: 'https://randomuser.me/api/portraits/women/24.jpg'
     },
     {
         id: 'uid66161',
+        teamId: 'teamId1',
         name: 'Jill Fuller',
         description: 'Accounting team',
         imgUrl: 'https://randomuser.me/api/portraits/women/64.jpg'
     },
     {
         id: 'uid66171',
+        teamId: 'teamId1',
         name: 'Ella Franklin',
         description: 'Accounting team',
         imgUrl: 'https://randomuser.me/api/portraits/women/55.jpg'
@@ -263,25 +316,27 @@ const teams: ApprovalTeam[] = [
         id: 'teamId1',
         name: 'Accounting team',
         description: '',
-        members: ['uid66171', 'uid66161', 'uid66151', 'uid66141']
+        members: ['uid66171', 'uid66161', 'uid66151', 'uid66141'].map((id) => getUser(id))
     },
     {
         id: 'teamId2',
         name: 'Sales team',
         description: '',
-        members: ['uid77111', 'uid77115', 'uid77135', 'uid81955']
+        members: ['uid77111', 'uid77115', 'uid77135', 'uid81955'].map((id) => getUser(id))
     },
     {
         id: 'teamId3',
         name: 'Legal team',
         description: '',
-        members: ['uid28141', 'uid08141', 'uid99641']
+        members: ['uid28141', 'uid08141', 'uid99641'].map((id) => getUser(id))
     },
     {
         id: 'teamId4',
         name: 'Marketing team',
         description: '',
-        members: ['uid38141', 'uid37866', 'uid09141', 'uid81353', 'uid81355', 'uid99655', 'uid09641', 'uid99651']
+        members: ['uid38141', 'uid37866', 'uid09141', 'uid81353', 'uid81355', 'uid99655', 'uid09641', 'uid99651'].map(
+            (id) => getUser(id)
+        )
     }
 ];
 
@@ -485,7 +540,7 @@ const complexGraph: ApprovalProcess = {
     ]
 };
 
-const graphs = {
+const graphs: Record<GraphTypes, ApprovalProcess> = {
     empty: emptyGraph,
     simple: simpleGraph,
     medium: mediumGraph,
@@ -502,84 +557,34 @@ function daysFromNow(days: number): Date {
 
 type GraphTypes = 'empty' | 'simple' | 'medium' | 'complex';
 
-export class ApprovalFlowExampleDataSource implements ApprovalDataSource {
-    selectedGraph: GraphTypes;
-    defaultStatus: ApprovalStatus | null = null;
-
-    readonly state: BehaviorSubject<ApprovalProcess>;
-
-    constructor(selectedGraph: string = 'complex') {
-        this.selectedGraph = selectedGraph as GraphTypes;
-        this.state = new BehaviorSubject<ApprovalProcess>(graphs[this.selectedGraph]);
+class UserDataProvider extends DataProvider<ApprovalUser> {
+    fetch(params: ProviderParams): Observable<ApprovalUser[]> {
+        let result = users;
+        const query = params.get('query')?.toLowerCase();
+        if (query) {
+            result = result.filter((u) => u.name?.toLowerCase().startsWith(query));
+        }
+        return of(cloneDeep(result)).pipe(delay(500));
     }
 
-    setDefaultStatus(status: ApprovalStatus | null): void {
-        this.defaultStatus = status;
-        this.selectGraph(this.selectedGraph);
-    }
-
-    selectGraph(selectedGraph: string = 'complex'): void {
-        this.selectedGraph = selectedGraph as GraphTypes;
-        const graph = { ...graphs[this.selectedGraph] };
-
-        graph.nodes = graph.nodes.map((n) => {
-            const nodeCopy = { ...n };
-
-            if (this.defaultStatus) {
-                nodeCopy.status = this.defaultStatus;
-            }
-
-            return nodeCopy;
-        });
-
-        this.state.next(graph);
-    }
-
-    fetch(): Observable<ApprovalProcess> {
-        return this.state;
-    }
-
-    fetchUser(id: string): Observable<any> {
-        const user = users.find((u) => u.id === id);
-
+    getOne(params: ProviderParams): Observable<ApprovalUser & { phone: string; email: string }> {
+        const id = params.get('id');
+        const found = users.find((user) => user.id === id);
         return of({
+            ...found,
             phone: Math.random().toFixed(13).toString().replace('0.', ''),
-            email: `${user.name.toLowerCase().split(' ').join('.')}@company.com`
+            email: `${found.name.toLowerCase().split(' ').join('.')}@company.com`
         });
     }
+}
 
-    fetchApprovers(): Observable<ApprovalUser[]> {
-        return of(users);
-    }
-
-    fetchWatchers(): Observable<ApprovalUser[]> {
-        return of(users);
-    }
-
-    fetchTeams(): Observable<ApprovalTeam[]> {
-        return of(teams);
-    }
-
-    updateWatchers(watchers: ApprovalUser[]): void {
-        console.log('call "updateWatchers" method from ApprovalDataSource implementation class');
-        const currentGraph = graphs[this.selectedGraph];
-        currentGraph.watchers = watchers;
-        this.selectGraph(this.selectedGraph);
-    }
-
-    updateApproval(): void {
-        console.log('call "updateApproval" method from ApprovalDataSource implementation class');
-    }
-
-    updateApprovals(approvals: ApprovalNode[]): void {
-        console.log('call "updateApprovals" method from ApprovalDataSource implementation class');
-        const currentGraph = graphs[this.selectedGraph];
-        currentGraph.nodes = approvals;
-        this.selectGraph(this.selectedGraph);
-    }
-
-    sendReminders(): Observable<any> {
-        console.log('call "sendReminders" method from ApprovalDataSource implementation class');
-        return of(null);
+class TeamDataProvider extends DataProvider<ApprovalTeam> {
+    fetch(params: ProviderParams): Observable<ApprovalTeam[]> {
+        let result = teams;
+        const query = params.get('query')?.toLowerCase();
+        if (query) {
+            result = result.filter((u) => u.name?.toLowerCase().startsWith(query));
+        }
+        return of(cloneDeep(result)).pipe(delay(500));
     }
 }

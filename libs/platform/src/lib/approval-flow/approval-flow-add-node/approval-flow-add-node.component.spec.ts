@@ -1,15 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { of } from 'rxjs';
 
 import { DialogConfig, DialogRef } from '@fundamental-ngx/core/dialog';
 import { PlatformApprovalFlowModule } from '../approval-flow.module';
-import { APPROVAL_FLOW_APPROVER_TYPES, ApprovalFlowAddNodeComponent } from './approval-flow-add-node.component';
-import { TestApprovalFlowDataSource } from '../approval-flow.component.spec';
+import {
+    APPROVAL_FLOW_APPROVER_TYPES,
+    ApprovalFlowAddNodeComponent,
+    AddNodeDialogRefData
+} from './approval-flow-add-node.component';
 import { ApprovalNode, ApprovalTeam } from '../interfaces';
 import { ApprovalFlowAddNodeViewService } from '../services/approval-flow-add-node-view.service';
-import { first } from 'rxjs/operators';
 import '@angular/localize/init';
+import { ApprovalFlowTeamDataSource, ApprovalFlowUserDataSource } from '@fundamental-ngx/platform/shared';
+import { TeamDataProvider, UserDataProvider } from '../tests/providers';
+import { teams } from '../tests/data';
 
 const node: ApprovalNode = {
     id: 'id1',
@@ -23,15 +27,15 @@ describe('ApprovalFlowAddNodeComponent', () => {
     let component: ApprovalFlowAddNodeComponent;
     let fixture: ComponentFixture<ApprovalFlowAddNodeComponent>;
 
-    const dialogRef = new DialogRef();
+    const dialogRef = new DialogRef<AddNodeDialogRefData>();
     const dialogConfig = new DialogConfig();
-    const approvalFlowDataSource = new TestApprovalFlowDataSource();
 
     dialogRef.data = {
-        approvalFlowDataSource,
         userDetailsTemplate: null,
         rtl: false,
-        node
+        node,
+        teamDataSource: new ApprovalFlowTeamDataSource(new TeamDataProvider()),
+        userDataSource: new ApprovalFlowUserDataSource(new UserDataProvider())
     };
 
     beforeEach(async () => {
@@ -55,13 +59,8 @@ describe('ApprovalFlowAddNodeComponent', () => {
     });
 
     it('should init dialog with passed data', () => {
-        const teams = [];
-        const approvers = [];
-
-        const approversSpy = spyOn(component._data.approvalFlowDataSource, 'fetchApprovers').and.returnValue(
-            of(approvers)
-        );
-        const teamsSpy = spyOn(component._data.approvalFlowDataSource, 'fetchTeams').and.returnValue(of(teams));
+        const approversSpy = spyOn(component._data.userDataSource, 'match').and.callThrough();
+        const teamsSpy = spyOn(component._data.teamDataSource, 'match').and.callThrough();
 
         component._data.isEdit = true;
         component._data.nodeTarget = 'before';
@@ -74,9 +73,8 @@ describe('ApprovalFlowAddNodeComponent', () => {
     });
 
     it('should map users of the selected team to the node approvers', async () => {
-        const teams = await approvalFlowDataSource.fetchTeams().pipe(first()).toPromise();
         const team = teams[0];
-        const teamMemberIds = team.members.map((memberId) => memberId).join(',');
+        const teamMemberIds = team.members.map((member) => member.id).join(',');
 
         component._approverType = APPROVAL_FLOW_APPROVER_TYPES.EVERYONE;
         component._setSelectedTeam(team);
@@ -102,7 +100,6 @@ describe('ApprovalFlowAddNodeComponent', () => {
     it('should confirm selected team', async () => {
         const viewServiceSpy = spyOn(TestBed.inject(ApprovalFlowAddNodeViewService), 'resetView').and.callThrough();
 
-        const teams = await approvalFlowDataSource.fetchTeams().pipe(first()).toPromise();
         const approvalTeam: ApprovalTeam = teams[0];
         component._data.isEdit = true;
 

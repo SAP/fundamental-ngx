@@ -4,12 +4,15 @@ import {
     Component,
     ElementRef,
     EventEmitter,
+    Inject,
     Input,
+    OnChanges,
     OnDestroy,
     OnInit,
     Optional,
     Output,
     QueryList,
+    SimpleChanges,
     TemplateRef,
     ViewChild,
     ViewChildren,
@@ -18,30 +21,41 @@ import {
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import { CdkDrag } from '@angular/cdk/drag-drop';
 import { fromEvent, Subscription } from 'rxjs';
-import { debounceTime, take } from 'rxjs/operators';
+import { debounceTime } from 'rxjs/operators';
 
 import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
-import { MessageToastService } from '@fundamental-ngx/core/message-toast';
 import { GridListComponent, GridListSelectionEvent } from '@fundamental-ngx/core/grid-list';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 
-import { ApprovalFlowApproverDetailsComponent } from './approval-flow-approver-details/approval-flow-approver-details.component';
+import {
+    ApprovalFlowApproverDetailsComponent,
+    ApprovalFlowApproverDetailsDialogRefData
+} from './approval-flow-approver-details/approval-flow-approver-details.component';
 import { ApprovalFlowNodeComponent } from './approval-flow-node/approval-flow-node.component';
 import {
     AddNodeDialogFormData,
     APPROVAL_FLOW_NODE_TYPES,
     ApprovalFlowAddNodeComponent,
+    AddNodeDialogRefData,
     ApprovalFlowNodeTarget
 } from './approval-flow-add-node/approval-flow-add-node.component';
-import { displayUserFn, getBlankApprovalGraphNode, getGraphNodes, isNodeTargetsIncludeId, trackByFn } from './helpers';
 import {
-    ApprovalDataSource,
+    displayUserFn,
+    getBlankApprovalGraphNode,
+    getGraphNodes,
+    isNodeTargetsIncludeId,
+    trackByFn,
+    userValueFn
+} from './helpers';
+import {
     ApprovalGraphNode,
     ApprovalGraphNodeMetadata,
     ApprovalNode,
     ApprovalProcess,
     ApprovalStatus,
-    ApprovalUser
+    ApprovalTeam,
+    ApprovalUser,
+    SendRemindersData
 } from './interfaces';
 import {
     ApprovalFlowSelectTypeComponent,
@@ -57,6 +71,13 @@ import {
     ApprovalFlowMessage,
     ApprovalFlowMessageType
 } from './approval-flow-messages/approval-flow-messages.component';
+import {
+    DataProvider,
+    DATA_PROVIDERS,
+    ApprovalFlowTeamDataSource,
+    ApprovalFlowUserDataSource
+} from '@fundamental-ngx/platform/shared';
+import { cloneDeep, uniqBy } from 'lodash-es';
 
 @Component({
     selector: 'fdp-approval-flow',
@@ -65,12 +86,20 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class ApprovalFlowComponent implements OnInit, OnDestroy {
+export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
     /** Title which is displayed in the header of the Approval Flow component. */
     @Input() title = 'Approval process';
 
-    /** Data source for the Approval Flow component. */
-    @Input() dataSource: ApprovalDataSource;
+    @Input() value: ApprovalProcess;
+
+    /** Data source for the users of Approval Flow component. */
+    @Input() userDataSource: ApprovalFlowUserDataSource<ApprovalUser>;
+
+    /** Data source for the watchers of Approval Flow component. */
+    @Input() watcherDataSource: ApprovalFlowUserDataSource<ApprovalUser>;
+
+    /** Data source for the teams of Approval Flow component. */
+    @Input() teamDataSource: ApprovalFlowTeamDataSource<ApprovalTeam>;
 
     /** A reference to the user details template */
     @Input() userDetailsTemplate: TemplateRef<any>;
@@ -100,6 +129,27 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** Disables exit button, exit button is enabled by default */
     @Input() disableExitButton = false;
 
+    /**
+     * Name of the entity for which users DataProvider will be loaded.
+     * Internally we should be able to do lookup to some registry
+     * and retrieve the best matching DataProvider that is set on application level
+     */
+    @Input() usersDataProviderEntityKey?: string;
+
+    /**
+     * Name of the entity for which teams DataProvider will be loaded.
+     * Internally we should be able to do lookup to some registry
+     * and retrieve the best matching DataProvider that is set on application level
+     */
+    @Input() teamsDataProviderEntityKey?: string;
+
+    /**
+     * Name of the entity for which approval flow DataProvider will be loaded.
+     * Internally we should be able to do lookup to some registry
+     * and retrieve the best matching DataProvider that is set on application level
+     */
+    @Input() watchersDataProviderEntityKey?: string;
+
     /** Event emitted on approval flow node click. */
     @Output() nodeClick = new EventEmitter<ApprovalNode>();
 
@@ -109,14 +159,17 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** Event emitted on approval flow node edit */
     @Output() afterNodeEdit = new EventEmitter<ApprovalNode>();
 
+    /** Event emitted whenver save is clicked in edit mode  */
+    @Output() valueChange = new EventEmitter<ApprovalProcess>();
+
+    /** Event emitted whenever reminders should be sent */
+    @Output() sendReminders = new EventEmitter<SendRemindersData>();
+
     /** @hidden */
     @ViewChild('graphContainerEl') _graphContainerEl: ElementRef;
 
     /** @hidden */
     @ViewChild('graphEl') _graphEl: ElementRef;
-
-    /** @hidden */
-    @ViewChild('reminderTemplate') _reminderTemplate: TemplateRef<any>;
 
     /** @hidden */
     @ViewChild('gridList') _gridList: GridListComponent<ApprovalGraphNode>;
@@ -158,13 +211,19 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     _usersForWatchersList: ApprovalUser[] = [];
 
     /** @hidden */
-    _selectedWatchers: ApprovalUser[] = [];
+    private _selectedWatchers: ApprovalUser[] = [];
+
+    /** @hidden */
+    _selectedWatcherIds: ApprovalUser['id'][] = [];
 
     /** @hidden */
     _messages: ApprovalFlowMessage[] = [];
 
     /** @hidden */
     _displayUserFn = displayUserFn;
+
+    /** @hidden */
+    _userValueFn = userValueFn;
 
     /** @hidden */
     _trackByFn = trackByFn;
@@ -192,10 +251,15 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** @hidden */
     constructor(
         private readonly _dialogService: DialogService,
-        private readonly _messageToastService: MessageToastService,
         private readonly _cdr: ChangeDetectorRef,
+        @Optional() @Inject(DATA_PROVIDERS) private providers: Map<string, DataProvider<any>>,
         @Optional() private readonly _rtlService: RtlService
     ) {}
+
+    /** Returns snapshot of the current and initial states of approval process */
+    get approvalProcess(): ApprovalProcess {
+        return cloneDeep(this._approvalProcess);
+    }
 
     /** @hidden */
     get _rtl(): boolean {
@@ -209,18 +273,41 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     ngOnInit(): void {
-        if (!this.dataSource) {
-            return;
+        if (!this.userDataSource) {
+            const usersDP = this.usersDataProviderEntityKey && this.providers?.get(this.usersDataProviderEntityKey);
+            if (usersDP) {
+                this.userDataSource = new ApprovalFlowUserDataSource(usersDP);
+            } else {
+                console.error('Could not resolve users data source');
+            }
+        }
+        if (!this.watcherDataSource) {
+            const watchersDP =
+                this.watchersDataProviderEntityKey && this.providers?.get(this.watchersDataProviderEntityKey);
+            if (watchersDP) {
+                this.watcherDataSource = new ApprovalFlowUserDataSource(watchersDP);
+            } else {
+                console.error('Could not resolve watchers data source');
+            }
+        }
+        if (!this.teamDataSource) {
+            const teamsDP = this.teamsDataProviderEntityKey && this.providers?.get(this.teamsDataProviderEntityKey);
+            if (teamsDP) {
+                this.teamDataSource = new ApprovalFlowTeamDataSource(teamsDP);
+            } else {
+                console.error('Could not resolve teams data source');
+            }
         }
 
-        this._subscriptions.add(
-            this.dataSource.fetch().subscribe((approvalProcess) => {
-                this._initialApprovalProcess = cloneApprovalProcess(approvalProcess);
-                this._buildView(approvalProcess);
-            })
-        );
-
         this._listenOnResize();
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes.value) {
+            const process = this.value ?? { watchers: [], nodes: [] };
+            this._initialApprovalProcess = cloneDeep(process);
+            this._buildView(process);
+        }
     }
 
     /** @hidden */
@@ -248,17 +335,20 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             return;
         }
 
-        const dialog = this._dialogService.open(ApprovalFlowApproverDetailsComponent, {
-            data: {
-                node,
-                allowSendReminder: this.allowSendRemindersForStatuses.includes(node.status),
-                ...this._defaultDialogOptions
+        const dialog = this._dialogService.open<ApprovalFlowApproverDetailsDialogRefData>(
+            ApprovalFlowApproverDetailsComponent,
+            {
+                data: {
+                    node,
+                    allowSendReminder: this.allowSendRemindersForStatuses.includes(node.status),
+                    ...this._defaultDialogOptions
+                }
             }
-        });
+        );
 
         dialog.afterClosed.subscribe((reminderTargets) => {
             if (Array.isArray(reminderTargets)) {
-                this._sendReminders(reminderTargets, node);
+                this.sendReminders.emit({ users: reminderTargets, node });
             }
         });
 
@@ -286,28 +376,12 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     /** @hidden Watcher's avatar click handler */
     _onWatcherClick(watcher: ApprovalUser): void {
-        this._dialogService.open(ApprovalFlowApproverDetailsComponent, {
+        this._dialogService.open<ApprovalFlowApproverDetailsDialogRefData>(ApprovalFlowApproverDetailsComponent, {
             data: {
                 watcher,
                 ...this._defaultDialogOptions
             }
         });
-    }
-
-    /** @hidden Send approval reminders to selected users */
-    _sendReminders(targets: ApprovalUser[], node: ApprovalNode): void {
-        this.dataSource
-            .sendReminders(targets, node)
-            .pipe(take(1))
-            .subscribe(() => {
-                this._messageToastService.open(this._reminderTemplate, {
-                    data: {
-                        targets,
-                        node
-                    },
-                    duration: 5000
-                });
-            });
     }
 
     /** Retrive metadata by node id */
@@ -413,37 +487,45 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     /** @hidden Fetch all necessary data and enter edit mode */
     _enterEditMode(): void {
-        this._editModeInitSub = this.dataSource
-            .fetchWatchers()
-            .pipe(take(1))
-            .subscribe((watchers) => {
-                this._usersForWatchersList = watchers;
-                this._selectedWatchers = [...this._approvalProcess.watchers];
-                this._isEditMode = true;
-                this._initialApprovalProcess = cloneApprovalProcess(this._approvalProcess);
-            });
+        // there's no support for searching in multi-input, so grabbing all watchers
+        // triggering initial loading of data in data sources
+        this.watcherDataSource.match();
+        this._editModeInitSub = this.watcherDataSource.open().subscribe((watchers) => {
+            this._usersForWatchersList = watchers;
+            this._selectedWatchers = this._approvalProcess.watchers;
+            this._selectedWatcherIds = this._selectedWatchers.map((w) => w.id);
+            this._isEditMode = true;
+            this._initialApprovalProcess = cloneDeep(this._approvalProcess);
+            this._cdr.detectChanges();
+        });
+        this._subscriptions.add(this._editModeInitSub);
     }
 
     /** @hidden Send update approval process calls to DataSource and exit edit mode*/
     _saveEditModeChanges(): void {
         this._editModeInitSub?.unsubscribe();
+        this.watcherDataSource.close();
 
         this._initialApprovalProcess = null;
         this._isEditMode = false;
         this._messages = [];
 
-        this.dataSource.updateApprovals(this._approvalProcess.nodes);
+        const updated = {
+            ...this._approvalProcess,
+            watchers: this._selectedWatchers
+        };
 
-        if (this._isWatchersListChanged) {
-            this.dataSource.updateWatchers(this._selectedWatchers);
-        }
+        this._buildView(updated);
+
+        this.valueChange.emit(updated);
     }
 
     /** @hidden Restore initial approval flow state and exit edit mode */
     _exitEditMode(): void {
         this._editModeInitSub?.unsubscribe();
+        this.watcherDataSource.close();
 
-        this._approvalProcess = cloneApprovalProcess(this._initialApprovalProcess);
+        this._approvalProcess = cloneDeep(this._initialApprovalProcess);
         this._initialApprovalProcess = null;
         this._isEditMode = false;
         this._messages = [];
@@ -451,9 +533,21 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         this._buildView(this._approvalProcess);
     }
 
+    /** @hidden */
+    _watchersSelectionChanged(selectedIds: ApprovalUser['id'][]): void {
+        const idsSet = new Set(selectedIds);
+        // updating watchers selection
+        // since it's possible "_usersForWatchersList" might not contain all selected values,
+        // determine current selection based on what's already selected and "_usersForWatchersList"
+        this._selectedWatchers = uniqBy(
+            this._selectedWatchers.concat(this._usersForWatchersList).filter((user) => idsSet.has(user.id)),
+            (u) => u.id
+        );
+    }
+
     /** @hidden Restore previously saved approval process state */
     _undoLastAction(): void {
-        this._approvalProcess = cloneApprovalProcess(this._previousApprovalProcess);
+        this._approvalProcess = cloneDeep(this._previousApprovalProcess);
         this._previousApprovalProcess = null;
 
         this._buildView(this._approvalProcess);
@@ -463,7 +557,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     _addNode(source: ApprovalGraphNode, type: ApprovalFlowNodeTarget): void {
         const showNodeTypeSelect = type === 'before' && !source.actionsConfig?.disableAddParallel;
 
-        const dialog = this._dialogService.open(ApprovalFlowAddNodeComponent, {
+        const dialog = this._dialogService.open<AddNodeDialogRefData>(ApprovalFlowAddNodeComponent, {
             data: {
                 nodeTarget: type,
                 showNodeTypeSelect,
@@ -547,7 +641,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     /** @hidden Open edit node dialog */
     _editNode(node: ApprovalNode): void {
-        const dialog = this._dialogService.open(ApprovalFlowAddNodeComponent, {
+        const dialog = this._dialogService.open<AddNodeDialogRefData>(ApprovalFlowAddNodeComponent, {
             data: {
                 isEdit: true,
                 node: Object.assign({}, node),
@@ -711,6 +805,12 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     /** @hidden Build Approval Flow graph and render it */
     private _buildView(approvalProcess: ApprovalProcess): void {
+        if (!approvalProcess.nodes) {
+            approvalProcess.nodes = [];
+        }
+        if (!approvalProcess.watchers) {
+            approvalProcess.watchers = [];
+        }
         this._approvalProcess = approvalProcess;
         this._graph = generateApprovalFlowGraph(this._approvalProcess.nodes);
 
@@ -836,7 +936,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     /** @hidden Save current state of approval process data to be able to undo an action made in edit mode */
     private _cacheCurrentApprovalProcess(): void {
-        this._previousApprovalProcess = cloneApprovalProcess(this._approvalProcess);
+        this._previousApprovalProcess = cloneDeep(this._approvalProcess);
     }
 
     /** @hidden Check if need to add carousel controls */
@@ -911,22 +1011,13 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     }
 
     /** @hidden */
-    private get _defaultDialogOptions(): any {
+    private get _defaultDialogOptions(): DefaultDialogOptions {
         return {
-            approvalFlowDataSource: this.dataSource,
+            teamDataSource: this.teamDataSource,
+            userDataSource: this.userDataSource,
             userDetailsTemplate: this.userDetailsTemplate,
             rtl: this._rtl
         };
-    }
-
-    /** @hidden */
-    private get _isWatchersListChanged(): boolean {
-        return (
-            this._selectedWatchers.length !== this._approvalProcess.watchers.length ||
-            this._selectedWatchers.some(
-                (watcher) => !this._approvalProcess.watchers.find((_watcher) => _watcher === watcher)
-            )
-        );
     }
 
     /** @hidden */
@@ -977,9 +1068,9 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     }
 }
 
-function cloneApprovalProcess(approvalProcess: ApprovalProcess): ApprovalProcess {
-    return {
-        watchers: [...approvalProcess.watchers],
-        nodes: approvalProcess.nodes.map((n) => ({ ...n, targets: [...n.targets], approvers: [...n.approvers] }))
-    };
+interface DefaultDialogOptions {
+    teamDataSource: ApprovalFlowTeamDataSource<ApprovalTeam>;
+    userDataSource: ApprovalFlowUserDataSource<ApprovalUser>;
+    userDetailsTemplate: TemplateRef<any>;
+    rtl: boolean;
 }

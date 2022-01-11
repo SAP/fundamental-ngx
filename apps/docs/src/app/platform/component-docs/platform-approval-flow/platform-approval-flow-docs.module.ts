@@ -5,6 +5,7 @@ import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
 import { RtlService } from '@fundamental-ngx/core/utils';
 import { PlatformApprovalFlowModule } from '@fundamental-ngx/platform/approval-flow';
+import { MessageToastModule } from '@fundamental-ngx/core/message-toast';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
@@ -29,7 +30,8 @@ const routes: Routes = [
         SharedDocumentationPageModule,
         PlatformApprovalFlowModule,
         FdDatetimeModule,
-        MultiInputModule
+        MultiInputModule,
+        MessageToastModule
     ],
     exports: [RouterModule],
     declarations: [
