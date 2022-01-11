@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.265 (2022-01-11)
+
+
+### Bug Fixes
+
+* **core:** carousel, fix console error, arrows ([#7529](https://github.com/SAP/fundamental-ngx/issues/7529)) ([795760d](https://github.com/SAP/fundamental-ngx/commit/795760d5df4c6f27001a21bdde52438740c1328b))
+
 ## 0.33.0-rc.264 (2022-01-11)
 
 
