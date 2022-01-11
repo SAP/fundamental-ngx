@@ -1,20 +1,20 @@
 import { Component } from '@angular/core';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
-import * as platformBasicSfbSrc from '!raw-loader!./platform-smart-filter-bar-examples/platform-smart-filter-bar-basic-example.component.html';
-import * as platformBasicSfbTsCode from '!raw-loader!./platform-smart-filter-bar-examples/platform-smart-filter-bar-basic-example.component.ts';
+import platformBasicSfbSrc from '!./platform-smart-filter-bar-examples/platform-smart-filter-bar-basic-example.component.html?raw';
+import platformBasicSfbTsCode from '!./platform-smart-filter-bar-examples/platform-smart-filter-bar-basic-example.component.ts?raw';
 
-import * as platformSfbCustomDataSourceSrc from '!raw-loader!./platform-smart-filter-bar-examples/platform-smart-filter-bar-observable-example.component.html';
-import * as platformSfbCustomDataSourceTsCode from '!raw-loader!./platform-smart-filter-bar-examples/platform-smart-filter-bar-observable-example.component.ts';
+import platformSfbCustomDataSourceSrc from '!./platform-smart-filter-bar-examples/platform-smart-filter-bar-observable-example.component.html?raw';
+import platformSfbCustomDataSourceTsCode from '!./platform-smart-filter-bar-examples/platform-smart-filter-bar-observable-example.component.ts?raw';
 
-import * as platformSfbCustomFiltersSrc from '!raw-loader!./platform-smart-filter-bar-examples/platform-smart-filter-bar-custom-filter-example.component.html';
-import * as platformSfbCustomFiltersTsCode from '!raw-loader!./platform-smart-filter-bar-examples/platform-smart-filter-bar-custom-filter-example.component.ts';
+import platformSfbCustomFiltersSrc from '!./platform-smart-filter-bar-examples/platform-smart-filter-bar-custom-filter-example.component.html?raw';
+import platformSfbCustomFiltersTsCode from '!./platform-smart-filter-bar-examples/platform-smart-filter-bar-custom-filter-example.component.ts?raw';
 
-import * as platformSfbCustomLabelsSrc from '!raw-loader!./platform-smart-filter-bar-examples/platform-smart-filter-bar-custom-labels-example.component.html';
-import * as platformSfbCustomLabelsTsCode from '!raw-loader!./platform-smart-filter-bar-examples/platform-smart-filter-bar-custom-labels-example.component.ts';
+import platformSfbCustomLabelsSrc from '!./platform-smart-filter-bar-examples/platform-smart-filter-bar-custom-labels-example.component.html?raw';
+import platformSfbCustomLabelsTsCode from '!./platform-smart-filter-bar-examples/platform-smart-filter-bar-custom-labels-example.component.ts?raw';
 
-import * as platformSfbDynamicPageSrc from '!raw-loader!./platform-smart-filter-bar-examples/platform-smart-filter-bar-dynamic-page-example.component.html';
-import * as platformSfbDynamicPageTsCode from '!raw-loader!./platform-smart-filter-bar-examples/platform-smart-filter-bar-dynamic-page-example.component.ts';
+import platformSfbDynamicPageSrc from '!./platform-smart-filter-bar-examples/platform-smart-filter-bar-dynamic-page-example.component.html?raw';
+import platformSfbDynamicPageTsCode from '!./platform-smart-filter-bar-examples/platform-smart-filter-bar-dynamic-page-example.component.ts?raw';
 
 @Component({
     selector: 'app-smart-filter-bar',
