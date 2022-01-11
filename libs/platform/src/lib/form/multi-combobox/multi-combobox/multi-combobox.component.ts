@@ -17,13 +17,13 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
-import { A, DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
+import { A, CONTROL, DOWN_ARROW, ENTER, ESCAPE, META, SHIFT, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import { of } from 'rxjs';
 import { delay, takeUntil } from 'rxjs/operators';
+import equal from 'fast-deep-equal';
 
 import { DynamicComponentService, KeyUtil } from '@fundamental-ngx/core/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
-import { TokenizerComponent } from '@fundamental-ngx/core/token';
 import {
     DATA_PROVIDERS,
     DataProvider,
@@ -33,13 +33,13 @@ import {
     OptionItem,
     SelectableOptionItem
 } from '@fundamental-ngx/platform/shared';
+
 import { BaseMultiCombobox } from '../commons/base-multi-combobox';
 import { MultiComboboxMobileComponent } from '../multi-combobox-mobile/multi-combobox/multi-combobox-mobile.component';
 import { PlatformMultiComboboxMobileModule } from '../multi-combobox-mobile/multi-combobox-mobile.module';
 import { MULTICOMBOBOX_COMPONENT } from '../multi-combobox.interface';
 import { MultiComboboxConfig } from '../multi-combobox.config';
 import { AutoCompleteEvent } from '../../auto-complete/auto-complete.directive';
-import equal from 'fast-deep-equal';
 
 @Component({
     selector: 'fdp-multi-combobox',
@@ -51,10 +51,6 @@ import equal from 'fast-deep-equal';
 })
 export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit, AfterViewInit {
     /** @hidden */
-    @ViewChild('controlTemplate')
-    controlTemplate: TemplateRef<any>;
-
-    /** @hidden */
     @ViewChild('mobileControlTemplate')
     mobileControlTemplate: TemplateRef<any>;
 
@@ -62,17 +58,11 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     @ViewChild('listTemplate')
     listTemplate: TemplateRef<any>;
 
-    /** @hidden */
-    @ViewChild(TokenizerComponent)
-    tokenizer: TokenizerComponent;
-
-    /** @hidden
+    /**
+     * @hidden
      * List of selected suggestions
-     * */
+     */
     _selectedSuggestions: SelectableOptionItem[] = [];
-
-    /** @hidden */
-    private _timeout: any; // NodeJS.Timeout
 
     constructor(
         readonly cd: ChangeDetectorRef,
@@ -81,10 +71,10 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         @Optional() @SkipSelf() readonly ngForm: NgForm,
         @Optional() readonly dialogConfig: DialogConfig,
         readonly _dynamicComponentService: DynamicComponentService,
-        @Optional() @Inject(DATA_PROVIDERS) private providers: Map<string, DataProvider<any>>,
+        @Optional() @Inject(DATA_PROVIDERS) private _providers: Map<string, DataProvider<any>>,
         readonly _multiComboboxConfig: MultiComboboxConfig,
-        readonly _viewContainerRef: ViewContainerRef,
-        readonly _injector: Injector,
+        private readonly _viewContainerRef: ViewContainerRef,
+        private readonly _injector: Injector,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
@@ -95,7 +85,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     ngOnInit(): void {
         super.ngOnInit();
 
-        const providers = this.providers?.size === 0 ? this._multiComboboxConfig.providers : this.providers;
+        const providers = this._providers?.size === 0 ? this._multiComboboxConfig.providers : this._providers;
         // if we have both prefer dataSource
         if (!this.dataSource && this.entityClass && providers.has(this.entityClass)) {
             this.dataSource = new MultiComboBoxDataSource(providers.get(this.entityClass));
@@ -160,7 +150,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     /** @hidden */
     navigateByTokens(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW]) && this.isOpen) {
-            this.listComponent.items?.first?.focus();
+            this.listComponent.items?.first.focus();
         }
     }
 
@@ -212,37 +202,6 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         }
     }
 
-    /** @hidden */
-    validateOnKeyup(event: KeyboardEvent): void {
-        const isPrintableKey = event.key?.length === 1;
-        if (!event.shiftKey && !isPrintableKey) {
-            return;
-        }
-
-        if (this.inputText && this.isListEmpty) {
-            this.inputText = this.inputText.slice(0, -1);
-
-            this.isSearchInvalid = true;
-            this.state = 'error';
-            this.inputText ? this.showList(true) : this.showList(false);
-
-            this.searchTermChanged('');
-
-            if (this._timeout) {
-                clearTimeout(this._timeout);
-            }
-            const threeSeconds = 3000;
-            this._timeout = setTimeout(() => {
-                this.isSearchInvalid = false;
-                this.state = 'default';
-                this.cd.markForCheck();
-            }, threeSeconds);
-        } else {
-            this.isSearchInvalid = false;
-            this.state = 'default';
-        }
-    }
-
     /**
      * @hidden
      * Method to set input text as item label.
@@ -258,7 +217,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     }
 
     /** @hidden */
-    onItemKeyDownHandler(event: KeyboardEvent, item: SelectableOptionItem, index = 0): void {
+    onItemKeyDownHandler(event: KeyboardEvent, index = 0): void {
         if (KeyUtil.isKeyCode(event, ESCAPE)) {
             this._focusToSearchField();
             this.close();
@@ -268,14 +227,18 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         } else if (KeyUtil.isKeyCode(event, TAB)) {
             event.preventDefault();
             this.listComponent?.setItemActive(index + 1);
-        } else if ((event.ctrlKey || event.metaKey) && event.shiftKey && KeyUtil.isKeyCode(event, A)) {
+        } else if (
+            KeyUtil.isKeyCode(event, [CONTROL, META]) &&
+            KeyUtil.isKeyCode(event, SHIFT) &&
+            KeyUtil.isKeyCode(event, A)
+        ) {
             // unselect all
             event.preventDefault();
             this.handleSelectAllItems(false);
-        } else if ((event.ctrlKey || event.metaKey) && KeyUtil.isKeyCode(event, A)) {
+        } else if (KeyUtil.isKeyCode(event, [CONTROL, META]) && KeyUtil.isKeyCode(event, A)) {
             event.preventDefault();
             this.handleSelectAllItems(true);
-        } else if (!KeyUtil.isKeyCode(event, ENTER) && !KeyUtil.isKeyCode(event, SPACE)) {
+        } else if (!KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
             return;
         } else if (KeyUtil.isKeyCode(event, ENTER) && !this.mobile) {
             this.close();
@@ -299,7 +262,9 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
 
     /** @hidden */
     private _getTokenIndexByLabelOrValue(item: SelectableOptionItem): number {
-        return this._selectedSuggestions.findIndex((token) => token.label === item.label || token.value === item.value);
+        return this._selectedSuggestions.findIndex(
+            (token) => token.label === item.label || equal(token.value, item.value)
+        );
     }
 
     /** @hidden */
