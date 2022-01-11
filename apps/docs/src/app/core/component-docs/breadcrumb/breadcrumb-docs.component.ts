@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
-import * as breadcrumbHrefExample from '!raw-loader!./examples/breadcrumb-href-example.component.html';
-import * as breadcrumbResponsiveExample from '!raw-loader!./examples/breadcrumb-responsive-example.component.html';
-import * as breadcrumbRouterLinkExample from '!raw-loader!./examples/breadcrumb-routerLink-example.component.html';
+import breadcrumbHrefExample from '!./examples/breadcrumb-href-example.component.html?raw';
+import breadcrumbResponsiveExample from '!./examples/breadcrumb-responsive-example.component.html?raw';
+import breadcrumbRouterLinkExample from '!./examples/breadcrumb-routerLink-example.component.html?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

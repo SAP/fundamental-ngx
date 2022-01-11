@@ -39,6 +39,8 @@ describe('Menu button test suite', () => {
 
     beforeAll(() => {
         menuBtnPage.open();
+        waitForPresent(menuBtnPage.root);
+        waitForElDisplayed(menuBtnPage.title);
     }, 1);
 
     afterEach(() => {

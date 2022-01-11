@@ -309,7 +309,7 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
     private _setPanes(): void {
         this._resizePanesToFitInContainer(true);
 
-        const setDirectPanesSubscription = () => {
+        const setDirectPanesSubscription = (): void => {
             this._directPaneSubscription$.unsubscribe();
             this._directPaneSubscription$ = new Subscription();
 
@@ -432,7 +432,7 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
 export class NoDefaultPanePipe implements PipeTransform {
     constructor(private readonly _splitterPaneContainer: SplitterPaneContainerComponent) {}
 
-    transform(value: SplitterSplitPaneComponent[], excludingCondition = true, ...args): any {
+    transform(value: SplitterSplitPaneComponent[], excludingCondition = true): SplitterSplitPaneComponent[] {
         if (!excludingCondition) {
             return value;
         }

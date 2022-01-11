@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
     templateUrl: './multi-input-custom-item-example.component.html'
 })
 export class MultiInputCustomItemExampleComponent {
-    values = [
+    values: Item[] = [
         { name: 'Photo Voltaic', icon: 'photo-voltaic' },
         { name: 'Settings', icon: 'settings' },
         { name: 'Heating Cooling', icon: 'heating-cooling' },
@@ -20,13 +20,18 @@ export class MultiInputCustomItemExampleComponent {
 
     selected = [this.values[0], this.values[3], this.values[4]].map((el) => el.name);
 
-    valueFn = (item) => item.name;
+    valueFn = (item: Item): string => item.name;
 
-    displayFunction(item: { name: string; icon: string }): string {
+    displayFunction(item: Item): string {
         if (item) {
             return item.name;
         } else {
             return '';
         }
     }
+}
+
+interface Item {
+    name: string;
+    icon: string;
 }

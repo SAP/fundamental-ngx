@@ -12,7 +12,7 @@
     </ng-container>
 
     <div class="fd-carousel__content fd-carousel__content--display">
-        <ng-container *ngIf="!navigatorInPageIndicator">
+        <ng-container *ngIf="_showNavigationButtonInContent">
             <ng-container *ngTemplateOutlet="buttonLeft"></ng-container>
         </ng-container>
 
@@ -20,7 +20,7 @@
             <ng-content></ng-content>
         </div>
 
-        <ng-container *ngIf="!navigatorInPageIndicator">
+        <ng-container *ngIf="_showNavigationButtonInContent">
             <ng-container *ngTemplateOutlet="buttonRight"></ng-container>
         </ng-container>
     </div>
@@ -36,13 +36,13 @@
 
 <ng-template #pageIndicatorContainer>
     <div class="fd-carousel__page-indicator-container">
-        <ng-container *ngIf="navigatorInPageIndicator">
+        <ng-container *ngIf="_showNavigationButtonInPageIndicatorContainer">
             <ng-container *ngTemplateOutlet="buttonLeft"></ng-container>
         </ng-container>
 
         <ng-container *ngTemplateOutlet="pageIndicators"></ng-container>
 
-        <ng-container *ngIf="navigatorInPageIndicator">
+        <ng-container *ngIf="_showNavigationButtonInPageIndicatorContainer">
             <ng-container *ngTemplateOutlet="buttonRight"></ng-container>
         </ng-container>
     </div>

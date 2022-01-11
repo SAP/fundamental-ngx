@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 
-import * as formattedTextHtml from '!raw-loader!./examples/base/formatted-text-example.component.html';
-import * as formattedTextTs from '!raw-loader!./examples/base/formatted-text-example.component.ts';
+import formattedTextHtml from '!./examples/base/formatted-text-example.component.html?raw';
+import formattedTextTs from '!./examples/base/formatted-text-example.component.ts?raw';
 
-import * as linkFormattedTextHtml from '!raw-loader!./examples/links/formatted-text-links-example.component.html';
-import * as linkFormattedTextTs from '!raw-loader!./examples/links/formatted-text-links-example.component.ts';
+import linkFormattedTextHtml from '!./examples/links/formatted-text-links-example.component.html?raw';
+import linkFormattedTextTs from '!./examples/links/formatted-text-links-example.component.ts?raw';
 
-import * as scriptFormattedTextHtml from '!raw-loader!./examples/script/formatted-text-script-example.component.html';
-import * as scriptFormattedTextTs from '!raw-loader!./examples/script/formatted-text-script-example.component.ts';
+import scriptFormattedTextHtml from '!./examples/script/formatted-text-script-example.component.html?raw';
+import scriptFormattedTextTs from '!./examples/script/formatted-text-script-example.component.ts?raw';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 

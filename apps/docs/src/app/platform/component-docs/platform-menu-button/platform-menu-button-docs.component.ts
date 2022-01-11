@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import * as menuButtonSrc from '!raw-loader!./platform-menu-button-examples/platform-menu-button-example.component.html';
-import * as cozyMenuButtonSrc from '!raw-loader!./platform-menu-button-examples/platform-menu-button-cozy-example.component.html';
-import * as compactMenuButtonSrc from '!raw-loader!./platform-menu-button-examples/platform-menu-button-compact-example.component.html';
+import menuButtonSrc from '!./platform-menu-button-examples/platform-menu-button-example.component.html?raw';
+import cozyMenuButtonSrc from '!./platform-menu-button-examples/platform-menu-button-cozy-example.component.html?raw';
+import compactMenuButtonSrc from '!./platform-menu-button-examples/platform-menu-button-compact-example.component.html?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

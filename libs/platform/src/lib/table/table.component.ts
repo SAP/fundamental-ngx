@@ -845,7 +845,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** Manually triggers columns width recalculation */
     recalculateTableColumnWidth(): void {
-        const recalculateFn = () => {
+        const recalculateFn = (): void => {
             const columnNames = this._visibleColumns.map((column) => column.name);
 
             this._tableColumnResizeService.setColumnsWidth(columnNames);
@@ -1017,7 +1017,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      * Group By triggered from column header
      */
     _columnHeaderGroupBy(field: string): void {
-        this.group([{ field: field, direction: SortDirection.NONE, showAsColumn: true }]);
+        this.group([{ field, direction: SortDirection.NONE, showAsColumn: true }]);
         this._closePopoverForColumnByFieldName(field);
     }
 
@@ -1028,8 +1028,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     _columnHeaderFilterBy(field: string, value: string): void {
         if (value) {
             const collectionFilter: CollectionStringFilter = {
-                field: field,
-                value: value,
+                field,
+                value,
                 strategy: FILTER_STRING_STRATEGY.CONTAINS,
                 exclude: false
             };
@@ -1046,7 +1046,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      * Sort triggered from column header
      */
     _columnHeaderSortBy(field: string, direction: SortDirection): void {
-        this.sort([{ field: field, direction: direction }]);
+        this.sort([{ field, direction }]);
         this._closePopoverForColumnByFieldName(field);
     }
 
@@ -1678,7 +1678,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                 TableRowType.GROUP,
                 false,
                 0,
-                { field: rule.field, value: value, count: 0 },
+                { field: rule.field, value, count: 0 },
                 parent,
                 level,
                 true /** expandable */,

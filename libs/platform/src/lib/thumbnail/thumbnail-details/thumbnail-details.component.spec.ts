@@ -31,8 +31,8 @@ describe('ThumbnailDetailsComponent', () => {
         }
     ];
     dialogRef.data = {
-        selectedMedia: selectedMedia,
-        mediaList: mediaList,
+        selectedMedia,
+        mediaList,
         rtl: false,
         maxImages: 5
     };

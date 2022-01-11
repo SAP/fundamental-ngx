@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
-import * as titleSemanticHtml from '!raw-loader!./examples/title-semantic-example.component.html';
-import * as titleElisionHtml from '!raw-loader!./examples/title-elision-example.component.html';
-import * as titleVisualHtml from '!raw-loader!./examples/title-visual-example.component.html';
-import * as titleWrappingHtml from '!raw-loader!./examples/title-wrapping-example.component.html';
+import titleSemanticHtml from '!./examples/title-semantic-example.component.html?raw';
+import titleElisionHtml from '!./examples/title-elision-example.component.html?raw';
+import titleVisualHtml from '!./examples/title-visual-example.component.html?raw';
+import titleWrappingHtml from '!./examples/title-wrapping-example.component.html?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import * as objectStatusDefaultTs from '!raw-loader!./examples/object-status-default-example.component.ts';
-import * as objectStatusDefaultHtml from '!raw-loader!./examples/object-status-default-example.component.html';
-import * as ObjectStatusTextExample from '!raw-loader!./examples/object-status-text-example.component.html';
-import * as ObjectStatusGenericTextExample from '!raw-loader!./examples/object-status-generic-text-example.component.html';
-import * as ObjectStatusTextIconExample from '!raw-loader!./examples/object-status-icon-text-example.component.html';
-import * as ObjectStatusClickableAndIConExample from '!raw-loader!./examples/object-status-clickable-and-icon-example.component.html';
-import * as ObjectStatusInvertedTextExample from '!raw-loader!./examples/object-status-inverted-example.component.html';
-import * as ObjectStatusInvertedGenericExample from '!raw-loader!./examples/object-status-inverted-generic-text-example.component.html';
-import * as ObjectStatusLargeExample from '!raw-loader!./examples/object-status-large-example.component.html';
-import * as objectStatusExamplesScss from '!raw-loader!./examples/object-status-examples.component.scss';
+import objectStatusDefaultTs from '!./examples/object-status-default-example.component.ts?raw';
+import objectStatusDefaultHtml from '!./examples/object-status-default-example.component.html?raw';
+import ObjectStatusTextExample from '!./examples/object-status-text-example.component.html?raw';
+import ObjectStatusGenericTextExample from '!./examples/object-status-generic-text-example.component.html?raw';
+import ObjectStatusTextIconExample from '!./examples/object-status-icon-text-example.component.html?raw';
+import ObjectStatusClickableAndIConExample from '!./examples/object-status-clickable-and-icon-example.component.html?raw';
+import ObjectStatusInvertedTextExample from '!./examples/object-status-inverted-example.component.html?raw';
+import ObjectStatusInvertedGenericExample from '!./examples/object-status-inverted-generic-text-example.component.html?raw';
+import ObjectStatusLargeExample from '!./examples/object-status-large-example.component.html?raw';
+import objectStatusExamplesScss from '!./examples/object-status-examples.component.scss?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

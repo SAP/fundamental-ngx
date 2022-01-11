@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
-import * as defaultExampleTs from '!raw-loader!./examples/scrollbar-example.component.ts';
-import * as noHorizontalScrollExampleTs from '!raw-loader!./examples/scrollbar-no-horizontal-example.component.ts';
-import * as noVerticalScrollExampleTs from '!raw-loader!./examples/scrollbar-no-vertical-example.component.ts';
+import defaultExampleTs from '!./examples/scrollbar-example.component.ts?raw';
+import noHorizontalScrollExampleTs from '!./examples/scrollbar-no-horizontal-example.component.ts?raw';
+import noVerticalScrollExampleTs from '!./examples/scrollbar-no-vertical-example.component.ts?raw';
 
 @Component({
     selector: 'app-scrollbar',

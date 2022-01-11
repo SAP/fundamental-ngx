@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import * as listCheckboxGroupHtml from '!raw-loader!./platform-checkbox-group-examples/platform-checkbox-group-list.component.html';
-import * as listCheckboxGroupTs from '!raw-loader!./platform-checkbox-group-examples/platform-checkbox-group-list.component.ts';
-import * as listObjectCheckboxGroupHtml from '!raw-loader!./platform-checkbox-group-examples/platform-checkbox-group-list-object.component.html';
-import * as listObjectCheckboxGroupTs from '!raw-loader!./platform-checkbox-group-examples/platform-checkbox-group-list-object.component.ts';
-import * as contentCheckboxGroupHtml from '!raw-loader!./platform-checkbox-group-examples/platform-checkbox-group-content-checkbox.component.html';
-import * as contentCheckboxGroupTs from '!raw-loader!./platform-checkbox-group-examples/platform-checkbox-group-content-checkbox.component.ts';
-import * as checkboxGroupExampleHtml from '!raw-loader!./platform-checkbox-group-examples/platform-checkbox-group-example.component.html';
-import * as checkboxGroupExampleTs from '!raw-loader!./platform-checkbox-group-examples/platform-checkbox-group-examples.component.ts';
+import listCheckboxGroupHtml from '!./platform-checkbox-group-examples/platform-checkbox-group-list.component.html?raw';
+import listCheckboxGroupTs from '!./platform-checkbox-group-examples/platform-checkbox-group-list.component.ts?raw';
+import listObjectCheckboxGroupHtml from '!./platform-checkbox-group-examples/platform-checkbox-group-list-object.component.html?raw';
+import listObjectCheckboxGroupTs from '!./platform-checkbox-group-examples/platform-checkbox-group-list-object.component.ts?raw';
+import contentCheckboxGroupHtml from '!./platform-checkbox-group-examples/platform-checkbox-group-content-checkbox.component.html?raw';
+import contentCheckboxGroupTs from '!./platform-checkbox-group-examples/platform-checkbox-group-content-checkbox.component.ts?raw';
+import checkboxGroupExampleHtml from '!./platform-checkbox-group-examples/platform-checkbox-group-example.component.html?raw';
+import checkboxGroupExampleTs from '!./platform-checkbox-group-examples/platform-checkbox-group-examples.component.ts?raw';
 import { ExampleFile } from '../../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

@@ -27,7 +27,7 @@ export function generateTabBarItems(config: TabConfig[], flatIndexRef = { value:
     return config.map((item, index) => {
         const result: IconTabBarItem = {
             ...item,
-            index: index,
+            index,
             cssClasses: [],
             uId: index.toString(),
             hidden: false,
@@ -50,7 +50,7 @@ function generateTestSubItems(
     return subItems?.map((item, index) => {
         const result: IconTabBarItem = {
             ...item,
-            index: index,
+            index,
             uId: `${parent.uId}${UNIQUE_KEY_SEPARATOR}${index}`,
             cssClasses: [],
             subItems: null,

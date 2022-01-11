@@ -1,24 +1,24 @@
 import { Component } from '@angular/core';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import * as StatusIndicatorDefaultComponent from '!raw-loader!./example/status-indicator-default.component.html';
-import * as StatusIndicatorSizeComponent from '!raw-loader!./example/status-indicator-size.component.html';
-import * as StatusIndicatorFillTypeComponent from '!raw-loader!./example/status-indicator-fill-type.component.html';
-import * as StatusIndicatorLabelComponent from '!raw-loader!./example/status-indicator-label.component.html';
-import * as StatusIndicatorAngledFillingComponent from '!raw-loader!./example/status-indicator-angled-filling.component.html';
-import * as StatusIndicatorCircularFillingClockComponent from '!raw-loader!./example/status-indicator-cirular-fill-clockwise.component.html';
-import * as StatusIndicatorCircularFillingAntiClockComponent from '!raw-loader!./example/status-indicator-cirular-fill-anti-clockwise.component.html';
-import * as StatusIndicatorlinearFillingComponent from '!raw-loader!./example/status-indicator-linear-fill-type.component.html';
-import * as StatusIndicatorDefaultComponentTs from '!raw-loader!./example/status-indicator-default.component.ts';
-import * as StatusIndicatorSizeComponentTs from '!raw-loader!./example/status-indicator-size.component.ts';
-import * as StatusIndicatorFillTypeComponentTs from '!raw-loader!./example/status-indicator-fill-type.component.ts';
-import * as StatusIndicatorLabelComponentTs from '!raw-loader!./example/status-indicator-label.component.ts';
-import * as StatusIndicatorAngledFillingComponentTs from '!raw-loader!./example/status-indicator-angled-filling.component.ts';
-import * as StatusIndicatorCircularFillingClockComponentTs from '!raw-loader!./example/status-indicator-cirular-fill-clockwise.component.ts';
-import * as StatusIndicatorCircularFillingAntiClockComponentTs from '!raw-loader!./example/status-indicator-cirular-fill-anti-clockwise.component.ts';
-import * as StatusIndicatorlinearFillingComponentTs from '!raw-loader!./example/status-indicator-linear-fill-type.component.ts';
-import * as StatusIndicatorClickAbleFillingComponent from '!raw-loader!./example/status-indicator-clickable-type.component.html';
-import * as StatusIndicatorClickAbleFillingComponentTs from '!raw-loader!./example/status-indicator-clickable-type.component.ts';
+import StatusIndicatorDefaultComponent from '!./example/status-indicator-default.component.html?raw';
+import StatusIndicatorSizeComponent from '!./example/status-indicator-size.component.html?raw';
+import StatusIndicatorFillTypeComponent from '!./example/status-indicator-fill-type.component.html?raw';
+import StatusIndicatorLabelComponent from '!./example/status-indicator-label.component.html?raw';
+import StatusIndicatorAngledFillingComponent from '!./example/status-indicator-angled-filling.component.html?raw';
+import StatusIndicatorCircularFillingClockComponent from '!./example/status-indicator-cirular-fill-clockwise.component.html?raw';
+import StatusIndicatorCircularFillingAntiClockComponent from '!./example/status-indicator-cirular-fill-anti-clockwise.component.html?raw';
+import StatusIndicatorlinearFillingComponent from '!./example/status-indicator-linear-fill-type.component.html?raw';
+import StatusIndicatorDefaultComponentTs from '!./example/status-indicator-default.component.ts?raw';
+import StatusIndicatorSizeComponentTs from '!./example/status-indicator-size.component.ts?raw';
+import StatusIndicatorFillTypeComponentTs from '!./example/status-indicator-fill-type.component.ts?raw';
+import StatusIndicatorLabelComponentTs from '!./example/status-indicator-label.component.ts?raw';
+import StatusIndicatorAngledFillingComponentTs from '!./example/status-indicator-angled-filling.component.ts?raw';
+import StatusIndicatorCircularFillingClockComponentTs from '!./example/status-indicator-cirular-fill-clockwise.component.ts?raw';
+import StatusIndicatorCircularFillingAntiClockComponentTs from '!./example/status-indicator-cirular-fill-anti-clockwise.component.ts?raw';
+import StatusIndicatorlinearFillingComponentTs from '!./example/status-indicator-linear-fill-type.component.ts?raw';
+import StatusIndicatorClickAbleFillingComponent from '!./example/status-indicator-clickable-type.component.html?raw';
+import StatusIndicatorClickAbleFillingComponentTs from '!./example/status-indicator-clickable-type.component.ts?raw';
 
 @Component({
     selector: 'fd-status-indicator-docs',

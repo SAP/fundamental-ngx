@@ -1,30 +1,30 @@
 import { Component } from '@angular/core';
-import * as defaultFormGeneratorhtml from '!raw-loader!./platform-form-generator-examples/platform-form-generator-example.component.html';
-import * as defaultFormGeneratorSrc from '!raw-loader!./platform-form-generator-examples/platform-form-generator-example.component.ts';
+import defaultFormGeneratorhtml from '!./platform-form-generator-examples/platform-form-generator-example.component.html?raw';
+import defaultFormGeneratorSrc from '!./platform-form-generator-examples/platform-form-generator-example.component.ts?raw';
 
-import * as defaultObservableFormGeneratorhtml from '!raw-loader!./platform-form-generator-examples/platform-form-generator-observable-example.component.html';
-import * as defaultObservableFormGeneratorSrc from '!raw-loader!./platform-form-generator-examples/platform-form-generator-observable-example.component.ts';
+import defaultObservableFormGeneratorhtml from '!./platform-form-generator-examples/platform-form-generator-observable-example.component.html?raw';
+import defaultObservableFormGeneratorSrc from '!./platform-form-generator-examples/platform-form-generator-observable-example.component.ts?raw';
 
-import * as customFormGeneratorhtml from '!raw-loader!./platform-form-generator-examples/platform-form-generator-custom-component-example.component.html';
-import * as customFormGeneratorSrc from '!raw-loader!./platform-form-generator-examples/platform-form-generator-custom-component-example.component.ts';
+import customFormGeneratorhtml from '!./platform-form-generator-examples/platform-form-generator-custom-component-example.component.html?raw';
+import customFormGeneratorSrc from '!./platform-form-generator-examples/platform-form-generator-custom-component-example.component.ts?raw';
 
-import * as programaticSubmitHtml from '!raw-loader!./platform-form-generator-examples/platform-form-generator-programatic-submit.component.html';
-import * as programaticSubmitSrc from '!raw-loader!./platform-form-generator-examples/platform-form-generator-programatic-submit.component.ts';
+import programaticSubmitHtml from '!./platform-form-generator-examples/platform-form-generator-programatic-submit.component.html?raw';
+import programaticSubmitSrc from '!./platform-form-generator-examples/platform-form-generator-programatic-submit.component.ts?raw';
 
-import * as customErrorsHtml from '!raw-loader!./platform-form-generator-examples/platform-form-generator-custom-error-example.component.html';
-import * as customErrorsSrc from '!raw-loader!./platform-form-generator-examples/platform-form-generator-custom-error-example.component.ts';
+import customErrorsHtml from '!./platform-form-generator-examples/platform-form-generator-custom-error-example.component.html?raw';
+import customErrorsSrc from '!./platform-form-generator-examples/platform-form-generator-custom-error-example.component.ts?raw';
 
-import * as formFieldLayoutGeneratorhtml from '!raw-loader!./platform-form-generator-examples/platform-form-generator-field-layout-example.component.html';
-import * as formFieldLayoutGeneratorSrc from '!raw-loader!./platform-form-generator-examples/platform-form-generator-field-layout-example.component.ts';
+import formFieldLayoutGeneratorhtml from '!./platform-form-generator-examples/platform-form-generator-field-layout-example.component.html?raw';
+import formFieldLayoutGeneratorSrc from '!./platform-form-generator-examples/platform-form-generator-field-layout-example.component.ts?raw';
 
-import * as noColonsForLabelHtml from '!raw-loader!./platform-form-generator-examples/platform-form-generator-no-colons-example.component.html';
-import * as noColonsForLabelSrc from '!raw-loader!./platform-form-generator-examples/platform-form-generator-no-colons-example.component.ts';
+import noColonsForLabelHtml from '!./platform-form-generator-examples/platform-form-generator-no-colons-example.component.html?raw';
+import noColonsForLabelSrc from '!./platform-form-generator-examples/platform-form-generator-no-colons-example.component.ts?raw';
 
-import * as groupingHtml from '!raw-loader!./platform-form-generator-examples/platform-form-generator-grouping-example.component.html';
-import * as groupingSrc from '!raw-loader!./platform-form-generator-examples/platform-form-generator-grouping-example.component.ts';
+import groupingHtml from '!./platform-form-generator-examples/platform-form-generator-grouping-example.component.html?raw';
+import groupingSrc from '!./platform-form-generator-examples/platform-form-generator-grouping-example.component.ts?raw';
 
-import * as customFieldLayoutHtml from '!raw-loader!./platform-form-generator-examples/platform-form-generator-custom-field-layout-example.component.html';
-import * as customFieldLayoutSrc from '!raw-loader!./platform-form-generator-examples/platform-form-generator-custom-field-layout-example.component.ts';
+import customFieldLayoutHtml from '!./platform-form-generator-examples/platform-form-generator-custom-field-layout-example.component.html?raw';
+import customFieldLayoutSrc from '!./platform-form-generator-examples/platform-form-generator-custom-field-layout-example.component.ts?raw';
 
 import { ExampleFile } from '../../../../documentation/core-helpers/code-example/example-file';
 

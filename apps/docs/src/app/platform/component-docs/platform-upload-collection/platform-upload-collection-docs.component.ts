@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
 
-import * as uploadCollectionDataProviderTs from '!raw-loader!./platform-upload-collection-examples/platform-upload-collection-base-data-provider';
-import * as uploadCollectionTs from '!raw-loader!./platform-upload-collection-examples/platform-upload-collection-example.component';
-import * as uploadCollectionHtml from '!raw-loader!./platform-upload-collection-examples/platform-upload-collection-example.component.html';
+import uploadCollectionDataProviderTs from '!./platform-upload-collection-examples/platform-upload-collection-base-data-provider?raw';
+import uploadCollectionTs from '!./platform-upload-collection-examples/platform-upload-collection-example.component?raw';
+import uploadCollectionHtml from '!./platform-upload-collection-examples/platform-upload-collection-example.component.html?raw';
 
-import * as uploadCollectionDisabledTs from '!raw-loader!./platform-upload-collection-examples/platform-upload-collection-disabled-example.component';
-import * as uploadCollectionDisabledHtml from '!raw-loader!./platform-upload-collection-examples/platform-upload-collection-disabled-example.component.html';
+import uploadCollectionDisabledTs from '!./platform-upload-collection-examples/platform-upload-collection-disabled-example.component?raw';
+import uploadCollectionDisabledHtml from '!./platform-upload-collection-examples/platform-upload-collection-disabled-example.component.html?raw';
 
-import * as uploadCollectionReadonlyTs from '!raw-loader!./platform-upload-collection-examples/platform-upload-collection-readonly-example.component';
-import * as uploadCollectionReadonlyHtml from '!raw-loader!./platform-upload-collection-examples/platform-upload-collection-readonly-example.component.html';
+import uploadCollectionReadonlyTs from '!./platform-upload-collection-examples/platform-upload-collection-readonly-example.component?raw';
+import uploadCollectionReadonlyHtml from '!./platform-upload-collection-examples/platform-upload-collection-readonly-example.component.html?raw';
 
-import * as uploadCollectionTurnOffTs from '!raw-loader!./platform-upload-collection-examples/platform-upload-collection-turn-off-example.component';
-import * as uploadCollectionTurnOffHtml from '!raw-loader!./platform-upload-collection-examples/platform-upload-collection-turn-off-example.component.html';
+import uploadCollectionTurnOffTs from '!./platform-upload-collection-examples/platform-upload-collection-turn-off-example.component?raw';
+import uploadCollectionTurnOffHtml from '!./platform-upload-collection-examples/platform-upload-collection-turn-off-example.component.html?raw';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 

@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 
 import { DynamicFormItem, DynamicFormValue, FormGeneratorComponent } from '@fundamental-ngx/platform/form';
 
-export const dummyAwaitablePromise = (timeout = 200) =>
+export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
     new Promise<boolean>((resolve) => {
         setTimeout(() => {
             resolve(true);

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { ColumnLayout } from '@fundamental-ngx/platform';
+import { ColumnLayout } from '@fundamental-ngx/platform/shared';
 
 @Component({
     selector: 'fdp-platform-form-custom-layout',

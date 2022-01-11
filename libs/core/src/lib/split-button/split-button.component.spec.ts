@@ -6,7 +6,6 @@ import { MenuModule } from '../menu/menu.module';
 import { ButtonModule } from '../button/button.module';
 import createSpy = jasmine.createSpy;
 import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/services/content-density.service';
-import { ButtonComponent } from '../button';
 
 @Component({
     selector: 'fd-test-component',

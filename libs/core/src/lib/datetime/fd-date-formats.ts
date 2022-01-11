@@ -12,14 +12,14 @@ const dateTimeInput = {
 
 export const FD_DATETIME_FORMATS: DateTimeFormats = {
     parse: {
-        dateInput: dateInput,
-        timeInput: timeInput,
-        dateTimeInput: dateTimeInput
+        dateInput,
+        timeInput,
+        dateTimeInput
     },
     display: {
-        dateInput: dateInput,
-        timeInput: timeInput,
-        dateTimeInput: dateTimeInput,
+        dateInput,
+        timeInput,
+        dateTimeInput,
 
         dateA11yLabel: { year: 'numeric', month: 'long', day: 'numeric' },
         monthA11yLabel: { month: 'long', year: 'numeric' },

@@ -118,7 +118,7 @@ export class ApprovalFlowToolbarActionsComponent {
     /** @hidden */
     _addNode(target: ApprovalFlowNodeTarget): void {
         const node = this.selectedNodes[0];
-        this.addNode.emit({ node: node, target: target });
+        this.addNode.emit({ node, target });
     }
 
     /** @hidden */

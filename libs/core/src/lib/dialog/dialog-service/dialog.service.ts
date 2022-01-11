@@ -44,12 +44,12 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
             content,
             DialogContainerComponent,
             dialogConfig,
-            { injector: injector }
+            { injector }
         );
 
         this._dialogs.push(component);
 
-        const defaultBehaviourOnClose = () => {
+        const defaultBehaviourOnClose = (): void => {
             this._destroyDialog(component);
             refSub.unsubscribe();
         };

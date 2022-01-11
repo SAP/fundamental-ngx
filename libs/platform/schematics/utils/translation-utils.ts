@@ -1,8 +1,64 @@
-import { SchematicContext } from '@angular-devkit/schematics';
+import { Rule, SchematicContext, TaskId } from '@angular-devkit/schematics';
+import {
+    addPackageJsonDependency,
+    removePackageJsonDependency,
+    NodeDependencyType
+} from '@schematics/angular/utility/dependencies';
+import { NodePackageInstallTask, RunSchematicTask } from '@angular-devkit/schematics/tasks';
 import { Tree } from '@angular-devkit/schematics/src/tree/interface';
 
 import { getSourceTreePath, getDistPath } from './package-utils';
 import { supportedLanguages } from './supported-languages';
+import { Schema } from '../ng-add/schema';
+
+/**
+ * Install XML2JS if needed
+ * Read/update translation files
+ * Remove XML2JS after run if it wasn't present before
+ */
+export function processTranslations(options: Schema, XML2JSInstalled: boolean | null) {
+    return (tree: Tree, context: SchematicContext) => {
+        let installTaskId: TaskId | undefined;
+
+        if (!XML2JSInstalled) {
+            addPackageJsonDependency(tree, {
+                type: NodeDependencyType.Dev,
+                version: 'latest',
+                name: 'xml2js'
+            });
+
+            installTaskId = context.addTask(
+                new NodePackageInstallTask({
+                    packageName: 'xml2js'
+                })
+            );
+
+            context.logger.info('✅️ Added XML2JS package to dependencies');
+        }
+
+        const dependentTasksArray = installTaskId ? [installTaskId] : [];
+        const readTranslationFilesTaskId = context.addTask(
+            new RunSchematicTask('read-translation-files', options),
+            dependentTasksArray
+        );
+
+        if (!XML2JSInstalled) {
+            context.addTask(new RunSchematicTask('remove-xml-to-js', options), [readTranslationFilesTaskId]);
+        }
+
+        return tree;
+    };
+}
+
+export function removeXML2JSPackage(): Rule {
+    return (tree: Tree, context: SchematicContext) => {
+        removePackageJsonDependency(tree, 'xml2js');
+
+        context.logger.info('✅️ Removed XML2JS package from dependencies');
+
+        return tree;
+    };
+}
 
 /**
  * adds/updates translations to host app if host app opts to have translations added to their app

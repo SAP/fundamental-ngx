@@ -2,14 +2,14 @@ import { Component } from '@angular/core';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
-import * as dynamicPageBasicExample from '!raw-loader!./dynamic-page-examples/dynamic-page-example.component.html';
-import * as dynamicPageBasicExampleTsCode from '!raw-loader!./dynamic-page-examples/dynamic-page-example.component.ts';
-import * as dynamicPageTabsExampleTsCode from '!raw-loader!./dynamic-page-examples/dynamic-page-tabs-example/dynamic-page-tabs-example.component.ts';
-import * as dynamicPageTabsExampleHtmlCode from '!raw-loader!./dynamic-page-examples/dynamic-page-tabs-example/dynamic-page-tabs-example.component.html';
-import * as dynamicPageColumnExampleTsCode from '!raw-loader!./dynamic-page-examples/dynamic-page-column-layout-example/dynamic-page-column-layout-example.component.ts';
-import * as dynamicPageColumnExampleHtmlCode from '!raw-loader!./dynamic-page-examples/dynamic-page-column-layout-example/dynamic-page-column-layout-example.component.html';
-import * as dynamicPageResponsiveExampleTsCode from '!raw-loader!./dynamic-page-examples/dynamic-page-responsive-example/dynamic-page-responsive-example.component.ts';
-import * as dynamicPageResponsiveExampleHtmlCode from '!raw-loader!./dynamic-page-examples/dynamic-page-responsive-example/dynamic-page-responsive-example.component.html';
+import dynamicPageBasicExample from '!./dynamic-page-examples/dynamic-page-example.component.html?raw';
+import dynamicPageBasicExampleTsCode from '!./dynamic-page-examples/dynamic-page-example.component.ts?raw';
+import dynamicPageTabsExampleTsCode from '!./dynamic-page-examples/dynamic-page-tabs-example/dynamic-page-tabs-example.component.ts?raw';
+import dynamicPageTabsExampleHtmlCode from '!./dynamic-page-examples/dynamic-page-tabs-example/dynamic-page-tabs-example.component.html?raw';
+import dynamicPageColumnExampleTsCode from '!./dynamic-page-examples/dynamic-page-column-layout-example/dynamic-page-column-layout-example.component.ts?raw';
+import dynamicPageColumnExampleHtmlCode from '!./dynamic-page-examples/dynamic-page-column-layout-example/dynamic-page-column-layout-example.component.html?raw';
+import dynamicPageResponsiveExampleTsCode from '!./dynamic-page-examples/dynamic-page-responsive-example/dynamic-page-responsive-example.component.ts?raw';
+import dynamicPageResponsiveExampleHtmlCode from '!./dynamic-page-examples/dynamic-page-responsive-example/dynamic-page-responsive-example.component.html?raw';
 
 @Component({
     selector: 'app-dynamic-page',

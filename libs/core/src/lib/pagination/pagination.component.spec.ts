@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
-import { PaginationModule } from '@fundamental-ngx/core';
+import { PaginationModule } from './pagination.module';
 import { SelectComponent } from '@fundamental-ngx/core/select';
 
 import { PaginationComponent } from './pagination.component';

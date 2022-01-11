@@ -173,7 +173,7 @@ export class MessageToastComponent implements OnInit, AfterViewInit {
                         this.ngZone.run(() => this.close());
                         return;
                     }
-                    const wait = () => {
+                    const wait = (): void => {
                         if (this.mouseOverMessageToast === true) {
                             setTimeout(wait, 500);
                         } else {

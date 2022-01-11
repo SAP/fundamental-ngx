@@ -7,7 +7,7 @@ import hljs from 'highlight.js/lib';
     styles: ['.bordered { border: 1px solid beige }'],
     template: `
         <pre [class.bordered]="standAlone">
-            <code #code class="hljs" [class]="file.language">{{file.code?.default}}</code>
+            <code #code class="hljs" [class]="file.language">{{ file.code }}</code>
         </pre>
     `
 })

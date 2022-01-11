@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { TimelineModule } from '@fundamental-ngx/core';
 import { Component, ElementRef, ViewChild } from '@angular/core';
+
+import { TimelineModule } from './../../timeline.module';
 
 describe('TimelineNodeHeaderInfoTitleDirective', () => {
     let component: TestComponent;

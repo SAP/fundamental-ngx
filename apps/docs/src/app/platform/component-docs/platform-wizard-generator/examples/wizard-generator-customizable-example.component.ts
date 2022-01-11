@@ -157,12 +157,9 @@ export class WizardGeneratorCustomizableExampleComponent implements OnDestroy {
                 }
             })
             .afterClosed.pipe(takeUntil(this._onDestroy$))
-            .subscribe(
-                (wizardValue: WizardGeneratorFormsValue) => {
-                    this.wizardValue = wizardValue;
-                },
-                () => {}
-            );
+            .subscribe((wizardValue: WizardGeneratorFormsValue) => {
+                this.wizardValue = wizardValue;
+            });
     }
 
     _editStep(event: MouseEvent, stepId: string, callback: (stepId: string) => void): void {

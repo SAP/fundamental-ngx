@@ -1,23 +1,23 @@
 import { Component } from '@angular/core';
 
-import * as dateTimeSimpleHtml from '!raw-loader!./examples/datetime-example/datetime-example.component.html';
-import * as dateTimeSimpleTs from '!raw-loader!./examples/datetime-example/datetime-example.component.ts';
+import dateTimeSimpleHtml from '!./examples/datetime-example/datetime-example.component.html?raw';
+import dateTimeSimpleTs from '!./examples/datetime-example/datetime-example.component.ts?raw';
 
-import * as dateTimeProgHtml from '!raw-loader!./examples/datetime-program-example/datetime-program-example.component.html';
-import * as dateTimeProgTs from '!raw-loader!./examples/datetime-program-example/datetime-program-example.component.ts';
+import dateTimeProgHtml from '!./examples/datetime-program-example/datetime-program-example.component.html?raw';
+import dateTimeProgTs from '!./examples/datetime-program-example/datetime-program-example.component.ts?raw';
 
-import * as dateTimePickerAllowNullTs from '!raw-loader!./examples/datetime-allow-null-example/datetime-allow-null-example.component.ts';
+import dateTimePickerAllowNullTs from '!./examples/datetime-allow-null-example/datetime-allow-null-example.component.ts?raw';
 
-import * as dateTimeFormatHtml from '!raw-loader!./examples/datetime-format-example/datetime-format-example.component.html';
-import * as dateTimeFormatTs from '!raw-loader!./examples/datetime-format-example/datetime-format-example.component.ts';
+import dateTimeFormatHtml from '!./examples/datetime-format-example/datetime-format-example.component.html?raw';
+import dateTimeFormatTs from '!./examples/datetime-format-example/datetime-format-example.component.ts?raw';
 
-import * as datetimeI18nComplexTs from '!raw-loader!./examples/datetime-picker-complex-i18n-example/datetime-picker-complex-i18n-example.component.ts';
-import * as datetimeI18nComplexH from '!raw-loader!./examples/datetime-picker-complex-i18n-example/datetime-picker-complex-i18n-example.component.html';
+import datetimeI18nComplexTs from '!./examples/datetime-picker-complex-i18n-example/datetime-picker-complex-i18n-example.component.ts?raw';
+import datetimeI18nComplexH from '!./examples/datetime-picker-complex-i18n-example/datetime-picker-complex-i18n-example.component.html?raw';
 
-import * as dateTimeDisabledHtml from '!raw-loader!./examples/datetime-disabled-example/datetime-disabled-example.component.html';
-import * as dateTimeDisabledTs from '!raw-loader!./examples/datetime-disabled-example/datetime-disabled-example.component.ts';
-import * as dateTimeFormHtml from '!raw-loader!./examples/datetime-form-example/datetime-form-example.component.html';
-import * as dateTimeFormTs from '!raw-loader!./examples/datetime-form-example/datetime-form-example.component.ts';
+import dateTimeDisabledHtml from '!./examples/datetime-disabled-example/datetime-disabled-example.component.html?raw';
+import dateTimeDisabledTs from '!./examples/datetime-disabled-example/datetime-disabled-example.component.ts?raw';
+import dateTimeFormHtml from '!./examples/datetime-form-example/datetime-form-example.component.html?raw';
+import dateTimeFormTs from '!./examples/datetime-form-example/datetime-form-example.component.ts?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

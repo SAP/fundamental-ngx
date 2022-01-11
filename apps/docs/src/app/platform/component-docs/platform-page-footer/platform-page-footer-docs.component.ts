@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
-import * as platformFooterExampleHtml from '!raw-loader!./platform-page-footer-example/platform-page-footer-example.component.html';
-import * as platformFooterWithIconHtml from '!raw-loader!./platform-page-footer-example/platform-page-footer-with-icon-example.component.html';
-import * as platformFooterWithMultipleLineHtml from '!raw-loader!./platform-page-footer-example/platform-page-footer-multiple-line-example.component.html';
+import platformFooterExampleHtml from '!./platform-page-footer-example/platform-page-footer-example.component.html?raw';
+import platformFooterWithIconHtml from '!./platform-page-footer-example/platform-page-footer-with-icon-example.component.html?raw';
+import platformFooterWithMultipleLineHtml from '!./platform-page-footer-example/platform-page-footer-multiple-line-example.component.html?raw';
 
 @Component({
     selector: 'fdp-platform-page-footer-docs',

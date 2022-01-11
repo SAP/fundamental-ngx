@@ -4,7 +4,6 @@ import { whenStable } from '@fundamental-ngx/core/tests';
 import { StepInputComponent } from './step-input.component';
 import { StepInputModule } from './step-input.module';
 import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
-import { SPACE } from '@angular/cdk/keycodes';
 
 const initialValue = 100;
 

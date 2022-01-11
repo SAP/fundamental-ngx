@@ -222,7 +222,9 @@ export class MenuService {
     }
 
     private _handleKey(event: KeyboardEvent): void {
-        const focusRight = (node) => setTimeout(() => this.setFocused(node.children[0].item));
+        const focusRight = (node): void => {
+            setTimeout(() => this.setFocused(node.children[0].item));
+        };
         let matched = true;
 
         if (KeyUtil.isKeyCode(event, RIGHT_ARROW)) {

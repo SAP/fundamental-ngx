@@ -138,10 +138,10 @@ export class ExperimentalRadioButtonComponent implements OnChanges, AfterViewIni
 
     // ControlValueAccessor implementation
     /** @hidden */
-    onChange: any = () => {};
+    onChange: any = (): void => {};
 
     /** @hidden */
-    onTouched: any = () => {};
+    onTouched: any = (): void => {};
 
     /** @hidden */
     registerOnChange(fn: any): void {

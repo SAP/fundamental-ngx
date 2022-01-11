@@ -161,7 +161,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
         return config.map((item, index) => {
             const result: IconTabBarItem = {
                 ...item,
-                index: index,
+                index,
                 cssClasses: [],
                 uId: index.toString(),
                 hidden: false,
@@ -187,7 +187,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
         return subItems?.map((item, index) => {
             const result: IconTabBarItem = {
                 ...item,
-                index: index,
+                index,
                 uId: `${parent.uId}${UNIQUE_KEY_SEPARATOR}${index}`,
                 cssClasses: [],
                 subItems: null,

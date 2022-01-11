@@ -78,9 +78,9 @@ function generateFiles(number: number): UploadCollectionFile[] {
                 id: uuidv4(),
                 name: `${firstName} ${generateRandomLetter()}.`
             },
-            url: url,
+            url,
             uploadedOn: randomDate(new Date(2018, 0, 1), new Date()),
-            fileSize: fileSize,
+            fileSize,
             version: Math.floor(Math.random() * 10) || 1
         });
     }
@@ -108,7 +108,7 @@ function generateFolders(numberOfFolders: number, maxLevelNesting = 3, currentLe
                 name: `${firstName} ${generateRandomLetter()}.`
             },
             uploadedOn: randomDate(new Date(2018, 0, 1), new Date()),
-            files: files
+            files
         });
     }
 

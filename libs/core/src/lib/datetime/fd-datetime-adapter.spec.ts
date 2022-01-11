@@ -240,7 +240,7 @@ describe('FdDatetimeAdapter', () => {
     });
 
     it('should get year name for low year numbers', () => {
-        const createAndFormat = (year: number) => adapter.getYearName(adapter.createDate(year, 1, 1));
+        const createAndFormat = (year: number): string => adapter.getYearName(adapter.createDate(year, 1, 1));
 
         expect(createAndFormat(50)).toBe('50');
         expect(createAndFormat(99)).toBe('99');
@@ -279,7 +279,7 @@ describe('FdDatetimeAdapter', () => {
     });
 
     it('should format Date with low year number', () => {
-        const createAndFormat = (year: number) => adapter.format(adapter.createDate(year, 1, 1), {});
+        const createAndFormat = (year: number): string => adapter.format(adapter.createDate(year, 1, 1), {});
 
         expect(createAndFormat(50)).toBe('1/1/50');
         expect(createAndFormat(99)).toBe('1/1/99');

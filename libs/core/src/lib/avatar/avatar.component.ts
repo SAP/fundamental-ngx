@@ -234,7 +234,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
         this._image = value;
 
         if (value) {
-            this._verifyImageUrl(value, () => {}, this._onErrorCallback);
+            this._verifyImageUrl(value, (): void => {}, this._onErrorCallback);
         } else {
             this._bgImage = null;
         }

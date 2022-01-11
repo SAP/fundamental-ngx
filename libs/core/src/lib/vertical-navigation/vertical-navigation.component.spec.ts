@@ -3,7 +3,8 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { VerticalNavigationComponent } from './vertical-navigation.component';
 import { LinkComponent } from '../link/link.component';
-import { IconModule, ListModule, ListNavigationItemComponent } from '@fundamental-ngx/core';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { ListNavigationItemComponent, ListModule } from '@fundamental-ngx/core/list';
 
 @Component({
     selector: 'fd-test-vertical-navigation',

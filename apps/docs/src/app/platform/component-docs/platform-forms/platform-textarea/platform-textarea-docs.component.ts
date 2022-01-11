@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
 import { ExampleFile } from '../../../../documentation/core-helpers/code-example/example-file';
 
-import * as platformBasicTextareaSrc from '!raw-loader!./platform-textarea-examples/platform-textarea-basic-example.component.html';
-import * as platformBasicTextareaTsCode from '!raw-loader!./platform-textarea-examples/platform-textarea-basic-example.component.ts';
+import platformBasicTextareaSrc from '!./platform-textarea-examples/platform-textarea-basic-example.component.html?raw';
+import platformBasicTextareaTsCode from '!./platform-textarea-examples/platform-textarea-basic-example.component.ts?raw';
 
-import * as platformCounterTextareaSrc from '!raw-loader!./platform-textarea-examples/platform-textarea-counter-example.component.html';
-import * as platformCounterTextareaTsCode from '!raw-loader!./platform-textarea-examples/platform-textarea-counter-example.component.ts';
-import * as platformTemplateCounterTextareaSrc from '!raw-loader!./platform-textarea-examples/platform-textarea-counter-template-example.component.html';
-import * as platformTemplateCounterTextareaTsCode from '!raw-loader!./platform-textarea-examples/platform-textarea-counter-template-example.component.ts';
+import platformCounterTextareaSrc from '!./platform-textarea-examples/platform-textarea-counter-example.component.html?raw';
+import platformCounterTextareaTsCode from '!./platform-textarea-examples/platform-textarea-counter-example.component.ts?raw';
+import platformTemplateCounterTextareaSrc from '!./platform-textarea-examples/platform-textarea-counter-template-example.component.html?raw';
+import platformTemplateCounterTextareaTsCode from '!./platform-textarea-examples/platform-textarea-counter-template-example.component.ts?raw';
 
-import * as platformAutogrowTextareaSrc from '!raw-loader!./platform-textarea-examples/platform-textarea-autogrow-example.component.html';
-import * as platformAutogrowTextareaTsCode from '!raw-loader!./platform-textarea-examples/platform-textarea-autogrow-example.component.ts';
+import platformAutogrowTextareaSrc from '!./platform-textarea-examples/platform-textarea-autogrow-example.component.html?raw';
+import platformAutogrowTextareaTsCode from '!./platform-textarea-examples/platform-textarea-autogrow-example.component.ts?raw';
 
-import * as platformI18nTextareaSrc from '!raw-loader!./platform-textarea-examples/platform-textarea-i18n-example.component.html';
-import * as platformI18nTextareaTsCode from '!raw-loader!./platform-textarea-examples/platform-textarea-i18n-example.component.ts';
+import platformI18nTextareaSrc from '!./platform-textarea-examples/platform-textarea-i18n-example.component.html?raw';
+import platformI18nTextareaTsCode from '!./platform-textarea-examples/platform-textarea-i18n-example.component.ts?raw';
 
 @Component({
     selector: 'app-textarea',

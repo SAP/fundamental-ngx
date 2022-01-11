@@ -17,7 +17,14 @@ interface ExampleTestModel {
     nickname: string;
 }
 
-const exampleDataSource = () => {
+interface FilterData {
+    key: string;
+    name: string;
+    label: string;
+    advanced: boolean;
+}
+
+const exampleDataSource = (): { dataSource: ExampleTestModel[]; filters: FilterData[] } => {
     const dataSource = Array(137)
         .fill(null)
         .map((_value, index) => ({
@@ -30,7 +37,7 @@ const exampleDataSource = () => {
             nickname: `Nickname ${Math.floor(Math.random() * index)}`
         }));
     return {
-        dataSource: dataSource,
+        dataSource,
         filters: Object.keys(dataSource[0]).map((value, index) => ({
             key: value,
             name: `${value}`,
@@ -45,7 +52,7 @@ const exampleDataSource = () => {
     templateUrl: './platform-vhd-input-example.component.html'
 })
 export class PlatformVhdInputExampleComponent implements OnInit {
-    filters: any;
+    filters: FilterData[];
     dataSource: ValueHelpDialogDataSource<ExampleTestModel>;
 
     values = {

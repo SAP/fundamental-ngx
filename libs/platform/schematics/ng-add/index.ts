@@ -3,7 +3,7 @@ import { addPackageJsonDependency, NodeDependencyType } from '@schematics/angula
 import { NodePackageInstallTask, RunSchematicTask } from '@angular-devkit/schematics/tasks';
 import { getPackageVersionFromPackageJson, hasDevPackage, hasPackage } from '../utils/package-utils';
 
-import { readTranslationFiles } from '../utils/translation-utils';
+import { processTranslations } from '../utils/translation-utils';
 import { Schema } from './schema';
 
 /**
@@ -19,12 +19,13 @@ import { Schema } from './schema';
 export function ngAdd(options: Schema): Rule {
     return (tree: Tree) => {
         const coreInstalled = hasPackage(tree, '@fundamental-ngx/core');
-        const localizeInstalled = hasDevPackage(tree, '@angular/localize');
+        const localizeInstalled = hasDevPackage(tree, '@angular/localize') || hasPackage(tree, '@angular/localize');
+        const XML2JSinstalled = hasDevPackage(tree, 'xml2js') || hasPackage(tree, 'xml2js');
 
         return chain([
             coreInstalled ? noop() : callCoreSchematic(options),
             localizeInstalled ? noop() : callLocalizeSchematic(options),
-            options.translations ? readTranslationFiles(options) : noop(),
+            options.translations ? processTranslations(options, XML2JSinstalled) : noop(),
             endInstallTask()
         ]);
     };

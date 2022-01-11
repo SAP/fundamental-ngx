@@ -15,11 +15,6 @@ export * from './approval-flow-user-list/approval-flow-user-list.component';
 
 export * from './helpers';
 
-export * from './interfaces/approval-data-source';
-export * from './interfaces/approval-node';
-export * from './interfaces/approval-process';
-export * from './interfaces/approval-status';
-export * from './interfaces/approval-user';
-export * from './interfaces/approval-team';
+export * from './interfaces';
 
 export * from './services/approval-flow-add-node-view.service';

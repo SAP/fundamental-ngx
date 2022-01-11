@@ -49,8 +49,10 @@
                 i18n-placeholder
                 placeholder="Search here..."
                 [displayFn]="_displayUserFn"
+                [valueFn]="_userValueFn"
                 [showAllButton]="true"
-                [(ngModel)]="_selectedWatchers"
+                [(ngModel)]="_selectedWatcherIds"
+                (ngModelChange)="_watchersSelectionChanged($event)"
             ></fd-multi-input>
         </div>
     </div>
@@ -197,20 +199,6 @@
         </fd-bar-element>
     </div>
 </div>
-
-<ng-template let-messageToast #reminderTemplate>
-    <ng-container
-        *ngIf="messageToast.data.targets.length === 1; else multipleReceivers"
-        i18n="@@platformApprovalFlowReminderMessage"
-    >
-        Reminder has been sent to {{ messageToast.data.targets[0].name }}
-    </ng-container>
-
-    <ng-template #multipleReceivers i18n="@@platformApprovalFlowReminderMessageMultipleRecievers">
-        Reminder has been sent to {{ messageToast.data.targets.length }} members of
-        {{ messageToast.data.node.description }}
-    </ng-template>
-</ng-template>
 
 <ng-template #emptyApprovalFlowGraph>
     <figure fd-illustrated-message type="spot" [svgConfig]="_emptyApprovalFlowSpotConfig">

@@ -262,8 +262,8 @@ export class FormGeneratorService implements OnDestroy {
         }
 
         this._formComponentDefinitions.push({
-            types: types,
-            component: component
+            types,
+            component
         });
 
         return true;
@@ -450,6 +450,6 @@ export class FormGeneratorService implements OnDestroy {
 
     /** @hidden */
     private _formatPasswordValue(password: string): string {
-        return '*'.repeat(password.length);
+        return '*'.repeat(password?.length);
     }
 }

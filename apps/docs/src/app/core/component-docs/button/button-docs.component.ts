@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
-import * as buttonScss from '!raw-loader!./examples/button-examples.component.scss';
-import * as buttonOptionsExample from '!raw-loader!./examples/button-menu-example.component.html';
-import * as buttonIconsExample from '!raw-loader!./examples/button-icons-example.component.html';
-import * as buttonSizesExample from '!raw-loader!./examples/button-sizes-example.component.html';
-import * as buttonStateExample from '!raw-loader!./examples/button-state-example.component.html';
-import * as buttonTypesExample from '!raw-loader!./examples/button-types-example.component.html';
+import buttonScss from '!./examples/button-examples.component.scss?raw';
+import buttonOptionsExample from '!./examples/button-menu-example.component.html?raw';
+import buttonIconsExample from '!./examples/button-icons-example.component.html?raw';
+import buttonSizesExample from '!./examples/button-sizes-example.component.html?raw';
+import buttonStateExample from '!./examples/button-state-example.component.html?raw';
+import buttonTypesExample from '!./examples/button-types-example.component.html?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { Icons } from '../../../documentation/utilities/icons';
 

@@ -1,30 +1,30 @@
 import { Component } from '@angular/core';
 
-import * as layoutGridBlockSrc from '!raw-loader!./examples/example-layout-grid-block.component.ts';
+import layoutGridBlockSrc from '!./examples/example-layout-grid-block.component.ts?raw';
 
-import * as layoutGridBasicSrcTs from '!raw-loader!./examples/layout-grid-basic-example.component.ts';
-import * as layoutGridBasicSrc from '!raw-loader!./examples/layout-grid-basic-example.component.html';
+import layoutGridBasicSrcTs from '!./examples/layout-grid-basic-example.component.ts?raw';
+import layoutGridBasicSrc from '!./examples/layout-grid-basic-example.component.html?raw';
 
-import * as growingGridBasicSrcTs from '!raw-loader!./examples/layout-grid-growing-example.component.ts';
-import * as growingGridBasicSrc from '!raw-loader!./examples/layout-grid-growing-example.component.html';
+import growingGridBasicSrcTs from '!./examples/layout-grid-growing-example.component.ts?raw';
+import growingGridBasicSrc from '!./examples/layout-grid-growing-example.component.html?raw';
 
-import * as layoutGridOffsetSrcTs from '!raw-loader!./examples/layout-grid-offset-example.component.ts';
-import * as layoutGridOffsetSrc from '!raw-loader!./examples/layout-grid-offset-example.component.html';
+import layoutGridOffsetSrcTs from '!./examples/layout-grid-offset-example.component.ts?raw';
+import layoutGridOffsetSrc from '!./examples/layout-grid-offset-example.component.html?raw';
 
-import * as layoutGridResponsiveSrcTs from '!raw-loader!./examples/layout-grid-responsive-example.component.ts';
-import * as layoutGridResponsiveSrc from '!raw-loader!./examples/layout-grid-responsive-example.component.html';
+import layoutGridResponsiveSrcTs from '!./examples/layout-grid-responsive-example.component.ts?raw';
+import layoutGridResponsiveSrc from '!./examples/layout-grid-responsive-example.component.html?raw';
 
-import * as layoutGridResponsiveOffsetSrcTs from '!raw-loader!./examples/layout-grid-responsive-offset-example.component.ts';
-import * as layoutGridResponsiveOffsetSrc from '!raw-loader!./examples/layout-grid-responsive-offset-example.component.html';
+import layoutGridResponsiveOffsetSrcTs from '!./examples/layout-grid-responsive-offset-example.component.ts?raw';
+import layoutGridResponsiveOffsetSrc from '!./examples/layout-grid-responsive-offset-example.component.html?raw';
 
-import * as layoutGridNestingSrcTs from '!raw-loader!./examples/layout-grid-nesting-example.component.ts';
-import * as layoutGridNestingSrc from '!raw-loader!./examples/layout-grid-nesting-example.component.html';
+import layoutGridNestingSrcTs from '!./examples/layout-grid-nesting-example.component.ts?raw';
+import layoutGridNestingSrc from '!./examples/layout-grid-nesting-example.component.html?raw';
 
-import * as layoutGridRowSrcTs from '!raw-loader!./examples/layout-grid-row-example.component.ts';
-import * as layoutGridRowSrc from '!raw-loader!./examples/layout-grid-row-example.component.html';
+import layoutGridRowSrcTs from '!./examples/layout-grid-row-example.component.ts?raw';
+import layoutGridRowSrc from '!./examples/layout-grid-row-example.component.html?raw';
 
-import * as layoutGridNoGapSrcTs from '!raw-loader!./examples/layout-grid-no-gap-example.component.ts';
-import * as layoutGridNoGapSrc from '!raw-loader!./examples/layout-grid-no-gap-example.component.html';
+import layoutGridNoGapSrcTs from '!./examples/layout-grid-no-gap-example.component.ts?raw';
+import layoutGridNoGapSrc from '!./examples/layout-grid-no-gap-example.component.html?raw';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 

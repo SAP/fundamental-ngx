@@ -3,6 +3,7 @@ import { CoreDocumentationComponent } from './documentation/core-documentation.c
 import { HomeDocsComponent } from './component-docs/core-home/core-home.component';
 import { NewComponentComponent } from './component-docs/new-component/new-component.component';
 
+// BEING UPDATED WITH THE SAP-COMPONENT SCHEMATIC; DO NOT MODIFY THE STRUCTURE!
 export const ROUTES: Routes = [
     {
         path: '',

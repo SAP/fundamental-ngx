@@ -340,7 +340,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
         if (emitEvent) {
             this.activeValueChange.emit({
                 value: item.value,
-                after: after
+                after
             });
         }
     }

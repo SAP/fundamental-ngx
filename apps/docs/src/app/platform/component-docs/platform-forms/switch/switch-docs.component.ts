@@ -2,15 +2,15 @@ import { Component } from '@angular/core';
 
 import { ExampleFile } from '../../../../documentation/core-helpers/code-example/example-file';
 
-import * as switchSizeHtml from '!raw-loader!./switch-examples/switch-sizes-example/switch-sizes-example.component.html';
-import * as switchDisableHtml from '!raw-loader!./switch-examples/disabled-switch-example/disabled-switch-example.component.html';
-import * as switchDisableTs from '!raw-loader!./switch-examples/disabled-switch-example/disabled-switch-example.component';
-import * as switchSemanticHtml from '!raw-loader!./switch-examples/semantic-switch-example/semantic-switch-example.component.html';
-import * as switchSemanticTs from '!raw-loader!./switch-examples/semantic-switch-example/semantic-switch-example.component.ts';
-import * as switchFormExampleHtml from '!raw-loader!./switch-examples/switch-form-example/switch-forms-example.component.html';
-import * as switchFormExampleTs from '!raw-loader!./switch-examples/switch-form-example/switch-forms-example.component.ts';
-import * as switchConfigExampleHtml from '!raw-loader!./switch-examples/switch-config-example/switch-config-example.component.html';
-import * as switchConfigExampleTs from '!raw-loader!./switch-examples/switch-config-example/switch-config-example.component.ts';
+import switchSizeHtml from '!./switch-examples/switch-sizes-example/switch-sizes-example.component.html?raw';
+import switchDisableHtml from '!./switch-examples/disabled-switch-example/disabled-switch-example.component.html?raw';
+import switchDisableTs from '!./switch-examples/disabled-switch-example/disabled-switch-example.component?raw';
+import switchSemanticHtml from '!./switch-examples/semantic-switch-example/semantic-switch-example.component.html?raw';
+import switchSemanticTs from '!./switch-examples/semantic-switch-example/semantic-switch-example.component.ts?raw';
+import switchFormExampleHtml from '!./switch-examples/switch-form-example/switch-forms-example.component.html?raw';
+import switchFormExampleTs from '!./switch-examples/switch-form-example/switch-forms-example.component.ts?raw';
+import switchConfigExampleHtml from '!./switch-examples/switch-config-example/switch-config-example.component.html?raw';
+import switchConfigExampleTs from '!./switch-examples/switch-config-example/switch-config-example.component.ts?raw';
 
 @Component({
     selector: 'app-switch',

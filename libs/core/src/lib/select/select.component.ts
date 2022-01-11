@@ -348,7 +348,7 @@ export class SelectComponent
     }
 
     /** @hidden */
-    _compareWith = (o1: any, o2: any) => o1 === o2;
+    _compareWith = (o1: any, o2: any): boolean => o1 === o2;
 
     /** Function to compare the option values with the selected values. */
     get compareWith(): (o1: any, o2: any) => boolean {
@@ -440,7 +440,7 @@ export class SelectComponent
     onChange: (value: any) => void = () => {};
 
     /** @hidden */
-    onTouched = () => {};
+    onTouched = (): void => {};
 
     /** Toggles the open state of the select. */
     toggle(): void {

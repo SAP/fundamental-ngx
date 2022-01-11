@@ -173,7 +173,7 @@ export abstract class BaseInput
     required: boolean;
 
     onChange: (value: any) => void = () => {};
-    onTouched = () => {};
+    onTouched = (): void => {};
 
     constructor(
         cd: ChangeDetectorRef,

@@ -8,7 +8,6 @@ import {
     CollectionBooleanFilter,
     CollectionDateFilter,
     CollectionNumberFilter,
-    CollectionSelectFilter,
     CollectionStringFilter,
     SortDirection,
     TableDataProvider,
@@ -147,7 +146,7 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
 
 /* UTILS */
 
-const sort = <T extends Record<string, any>>(a: T, b: T, key?: string) => {
+const sort = <T extends Record<string, any>>(a: T, b: T, key?: string): number => {
     if (key) {
         a = getNestedValue(key, a);
         b = getNestedValue(key, b);
@@ -276,20 +275,6 @@ const filterByBoolean = (item: ExampleItem, filter: CollectionBooleanFilter): bo
     }
 
     return filter.exclude ? !result : result;
-};
-
-const filterBySelect = (item: ExampleItem, filter: CollectionSelectFilter): boolean => {
-    const filterValues = filter.value;
-    const itemValue = getNestedValue(filter.field, item);
-    let result = false;
-
-    switch (filter.strategy) {
-        case 'equalTo':
-        default:
-            result = filterValues.includes(itemValue);
-    }
-
-    return !filterValues.length || filter.exclude ? !result : result;
 };
 
 // Example items

@@ -312,10 +312,10 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     ];
 
     /** @hidden */
-    private _displayFn = (value: any) => this.displayValue(value);
+    private _displayFn = (value: any): string => this.displayValue(value);
 
     /** @hidden */
-    private _secondaryFn = (value: any) => {
+    private _secondaryFn = (value: any): string => {
         if (isOptionItem(value)) {
             return value.secondaryText;
         } else if (isJsObject(value) && this.secondaryKey) {
@@ -788,7 +788,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
             selectItems.push({
                 label: this.displayValue(value),
                 secondaryText: this.objectGet(value, this.secondaryKey),
-                value: value,
+                value,
                 selected: this.selectedItems?.includes(value) || false
             });
         }
@@ -806,7 +806,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
             const value = items[i];
             selectItems.push({
                 label: value,
-                value: value,
+                value,
                 selected: this.selectedItems?.includes(value) || false
             });
         }
@@ -825,7 +825,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
             const value = items[i];
             selectItems.push({
                 label: this.displayValue(value),
-                value: value,
+                value,
                 selected: this.selectedItems?.includes(value) || false
             });
         }

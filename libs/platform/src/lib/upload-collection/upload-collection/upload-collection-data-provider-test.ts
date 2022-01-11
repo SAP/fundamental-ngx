@@ -75,7 +75,7 @@ export class UploadCollectionDataProviderTest extends UploadCollectionDataProvid
 
             return {
                 temporaryDocumentId: item.documentId,
-                item: item
+                item
             };
         });
 

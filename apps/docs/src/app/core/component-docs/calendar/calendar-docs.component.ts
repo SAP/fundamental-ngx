@@ -1,24 +1,24 @@
 import { Component } from '@angular/core';
 
-import * as calendarRangeSrc from '!raw-loader!./examples/calendar-range-example.component.ts';
-import * as calendarOptionHtml from '!raw-loader!./examples/calendar-options-example/calendar-options-example.component.html';
-import * as calendarOptionSrc from '!raw-loader!./examples/calendar-options-example/calendar-options-example.component.ts';
-import * as calendarMarkHoverSrc from '!raw-loader!./examples/calendar-mark-hover/calendar-mark-hover.component.ts';
-import * as calendarMarkHoverHtml from '!raw-loader!./examples/calendar-mark-hover/calendar-mark-hover.component.html';
-import * as calendarSpecialSrc from '!raw-loader!./examples/calendar-special-day-example/calendar-special-day-example.component.ts';
-import * as calendarSpecialHtml from '!raw-loader!./examples/calendar-special-day-example/calendar-special-day-example.component.html';
-import * as calendarGridSrc from '!raw-loader!./examples/calendar-grid-example/calendar-grid-example.component.ts';
-import * as calendarGridHtml from '!raw-loader!./examples/calendar-grid-example/calendar-grid-example.component.html';
-import * as calendarSingleSrc from '!raw-loader!./examples/calendar-single-example.component.ts';
-import * as calendarMondayStartSrc from '!raw-loader!./examples/calendar-monday-start-example.component.ts';
-import * as calendarIntlSrc from '!raw-loader!./examples/calendar-i18n-example.component.ts';
-import * as calendarIntlMomentSrc from '!raw-loader!./examples/calendar--i18n-moment-example.component.ts';
-import * as calendarMobileSrc from '!raw-loader!./examples/calendar-mobile-example/calendar-mobile-example.component.ts';
-import * as calendarMobileHtml from '!raw-loader!./examples/calendar-mobile-example/calendar-mobile-example.component.html';
-import * as calendarFormSourceT from '!raw-loader!./examples/calendar-form-example/calendar-form-example.component.ts';
-import * as calendarFormSourceH from '!raw-loader!./examples/calendar-form-example/calendar-form-example.component.html';
-import * as calendarFormSourceScss from '!raw-loader!./examples/calendar-form-example/calendar-form-example.component.scss';
-import * as calendarProgrammaticallySource from '!raw-loader!./examples/calendar-programmatically-change-example.component.ts';
+import calendarRangeSrc from '!./examples/calendar-range-example.component.ts?raw';
+import calendarOptionHtml from '!./examples/calendar-options-example/calendar-options-example.component.html?raw';
+import calendarOptionSrc from '!./examples/calendar-options-example/calendar-options-example.component.ts?raw';
+import calendarMarkHoverSrc from '!./examples/calendar-mark-hover/calendar-mark-hover.component.ts?raw';
+import calendarMarkHoverHtml from '!./examples/calendar-mark-hover/calendar-mark-hover.component.html?raw';
+import calendarSpecialSrc from '!./examples/calendar-special-day-example/calendar-special-day-example.component.ts?raw';
+import calendarSpecialHtml from '!./examples/calendar-special-day-example/calendar-special-day-example.component.html?raw';
+import calendarGridSrc from '!./examples/calendar-grid-example/calendar-grid-example.component.ts?raw';
+import calendarGridHtml from '!./examples/calendar-grid-example/calendar-grid-example.component.html?raw';
+import calendarSingleSrc from '!./examples/calendar-single-example.component.ts?raw';
+import calendarMondayStartSrc from '!./examples/calendar-monday-start-example.component.ts?raw';
+import calendarIntlSrc from '!./examples/calendar-i18n-example.component.ts?raw';
+import calendarIntlMomentSrc from '!./examples/calendar--i18n-moment-example.component.ts?raw';
+import calendarMobileSrc from '!./examples/calendar-mobile-example/calendar-mobile-example.component.ts?raw';
+import calendarMobileHtml from '!./examples/calendar-mobile-example/calendar-mobile-example.component.html?raw';
+import calendarFormSourceT from '!./examples/calendar-form-example/calendar-form-example.component.ts?raw';
+import calendarFormSourceH from '!./examples/calendar-form-example/calendar-form-example.component.html?raw';
+import calendarFormSourceScss from '!./examples/calendar-form-example/calendar-form-example.component.scss?raw';
+import calendarProgrammaticallySource from '!./examples/calendar-programmatically-change-example.component.ts?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -77,24 +77,24 @@ myDisableFunction = function(d: FdDate): boolean {
 
 // Mark weekends with special day number 10
 specialDay: SpecialDayRule[] = [
-    { 
+    {
         specialDayNumber: 10,
-        rule: fdDate => fdDate.getDay() === 7 || fdDate.getDay() === 1 
+        rule: fdDate => fdDate.getDay() === 7 || fdDate.getDay() === 1
     }
 ]
 
 
 // Mark Monday with special day number 5
 specialDay: SpecialDayRule[] = [
-    { 
+    {
         specialDayNumber: 5,
-        rule: fdDate => fdDate.getDay() === 2 
+        rule: fdDate => fdDate.getDay() === 2
     }
 ]
 
 // Mark Days inside a range with number 3 and all tuesdays with number 6
 specialDay: SpecialDayRule[] = [
-    { 
+    {
         specialDayNumber: 3,
         rule: fdDate => {
             let firstDay = new FdDate(2018, 7, 5);
@@ -102,16 +102,16 @@ specialDay: SpecialDayRule[] = [
             return d.getTimeStamp() > firstDay.getTimeStamp() && d.getTimeStamp() < lastDay.getTimeStamp()
         },
     },
-    { 
+    {
         specialDayNumber: 6,
-        rule: fdDate => fdDate.getDay() === 3 
+        rule: fdDate => fdDate.getDay() === 3
     }
 ]`;
 
     calendarSingleSource: ExampleFile[] = [
         {
             language: 'typescript',
-            code: { default: this.exampleFunctionsHtml },
+            code: this.exampleFunctionsHtml,
             component: 'CalendarSingleExampleComponent',
             fileName: 'calendar-single-example',
             name: 'Example Block/Disable Functions'
@@ -168,7 +168,7 @@ specialDay: SpecialDayRule[] = [
             language: 'typescript',
             component: 'CalendarSpecialDayExampleComponent',
             fileName: 'calendar-special-day-example',
-            code: { default: this.exampleSpecialDays },
+            code: this.exampleSpecialDays,
             name: 'Example Special Day Functions'
         },
         {

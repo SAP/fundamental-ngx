@@ -13,6 +13,7 @@ const node: ApprovalNode = {
         {
             id: 'uid66161',
             name: 'Jill Fuller',
+            teamId: 'teamId1',
             description: 'Accounting team',
             imgUrl: 'https://randomuser.me/api/portraits/women/64.jpg'
         }

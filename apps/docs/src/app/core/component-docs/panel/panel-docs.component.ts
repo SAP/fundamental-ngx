@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
-import * as panelExpandableSrc from '!raw-loader!./examples/panel-expandable-example.component.html';
-import * as panelFixedSrc from '!raw-loader!./examples/panel-fixed-example.component.html';
-import * as panelCompactSrc from '!raw-loader!./examples/panel-compact-example.component.html';
-import * as panelFixedHeightSrc from '!raw-loader!./examples/panel-fixed-height-example.component.html';
+import panelExpandableSrc from '!./examples/panel-expandable-example.component.html?raw';
+import panelFixedSrc from '!./examples/panel-fixed-example.component.html?raw';
+import panelCompactSrc from '!./examples/panel-compact-example.component.html?raw';
+import panelFixedHeightSrc from '!./examples/panel-fixed-height-example.component.html?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

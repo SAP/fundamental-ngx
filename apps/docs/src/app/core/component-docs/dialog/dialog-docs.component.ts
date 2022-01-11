@@ -1,43 +1,43 @@
 import { Component } from '@angular/core';
 
-import * as templateBasedDialogTs from '!raw-loader!./examples/template-based/template-based-dialog-example.component.ts';
-import * as templateBasedDialogHtml from '!raw-loader!./examples/template-based/template-based-dialog-example.component.html';
+import templateBasedDialogTs from '!./examples/template-based/template-based-dialog-example.component.ts?raw';
+import templateBasedDialogHtml from '!./examples/template-based/template-based-dialog-example.component.html?raw';
 
-import * as componentBasedDialogTs from '!raw-loader!./examples/component-based/component-based-dialog-example.component.ts';
-import * as componentBasedDialogExampleTs from '!raw-loader!./examples/component-based/dialog-example.component.ts';
+import componentBasedDialogTs from '!./examples/component-based/component-based-dialog-example.component.ts?raw';
+import componentBasedDialogExampleTs from '!./examples/component-based/dialog-example.component.ts?raw';
 
-import * as customConfigurationDialogTs from '!raw-loader!./examples/dialog-configuration/dialog-configuration-example.component.ts';
-import * as customConfigurationDialogHtml from '!raw-loader!./examples/dialog-configuration/dialog-configuration-example.component.html';
+import customConfigurationDialogTs from '!./examples/dialog-configuration/dialog-configuration-example.component.ts?raw';
+import customConfigurationDialogHtml from '!./examples/dialog-configuration/dialog-configuration-example.component.html?raw';
 
-import * as stateDialogTs from '!raw-loader!./examples/dialog-state/dialog-state-example.component.ts';
-import * as stateDialogHtml from '!raw-loader!./examples/dialog-state/dialog-state-example.component.html';
+import stateDialogTs from '!./examples/dialog-state/dialog-state-example.component.ts?raw';
+import stateDialogHtml from '!./examples/dialog-state/dialog-state-example.component.html?raw';
 
-import * as positionHtml from '!raw-loader!./examples/dialog-position/dialog-position-example.component.html';
-import * as positionTs from '!raw-loader!./examples/dialog-position/dialog-position-example.component.ts';
+import positionHtml from '!./examples/dialog-position/dialog-position-example.component.html?raw';
+import positionTs from '!./examples/dialog-position/dialog-position-example.component.ts?raw';
 
-import * as dialogMobileHtml from '!raw-loader!./examples/dialog-mobile/dialog-mobile-example.component.html';
-import * as dialogMobileTs from '!raw-loader!./examples/dialog-mobile/dialog-mobile-example.component.ts';
+import dialogMobileHtml from '!./examples/dialog-mobile/dialog-mobile-example.component.html?raw';
+import dialogMobileTs from '!./examples/dialog-mobile/dialog-mobile-example.component.ts?raw';
 
-import * as dialogStackedTs from '!raw-loader!./examples/stacked-dialogs/dialog-stacked-example.component.ts';
-import * as firstDialogStackedTs from '!raw-loader!./examples/stacked-dialogs/first-dialog-example.component.ts';
-import * as secondDialogStackedTs from '!raw-loader!./examples/stacked-dialogs/second-dialog-example.component.ts';
+import dialogStackedTs from '!./examples/stacked-dialogs/dialog-stacked-example.component.ts?raw';
+import firstDialogStackedTs from '!./examples/stacked-dialogs/first-dialog-example.component.ts?raw';
+import secondDialogStackedTs from '!./examples/stacked-dialogs/second-dialog-example.component.ts?raw';
 
-import * as backdropContainerTs from '!raw-loader!./examples/dialog-backdrop-container/dialog-backdrop-container-example.component.ts';
-import * as backdropContainerHtml from '!raw-loader!./examples/dialog-backdrop-container/dialog-backdrop-container-example.component.html';
+import backdropContainerTs from '!./examples/dialog-backdrop-container/dialog-backdrop-container-example.component.ts?raw';
+import backdropContainerHtml from '!./examples/dialog-backdrop-container/dialog-backdrop-container-example.component.html?raw';
 
-import * as complexDialogTs from '!raw-loader!./examples/dialog-complex/dialog-complex-example.component.ts';
-import * as complexDialogHtml from '!raw-loader!./examples/dialog-complex/dialog-complex-example.component.html';
+import complexDialogTs from '!./examples/dialog-complex/dialog-complex-example.component.ts?raw';
+import complexDialogHtml from '!./examples/dialog-complex/dialog-complex-example.component.html?raw';
 
-import * as objectDialogTs from '!raw-loader!./examples/dialog-object-example/dialog-object-example.component.ts';
-import * as objectDialogHtml from '!raw-loader!./examples/dialog-object-example/dialog-object-example.component.html';
+import objectDialogTs from '!./examples/dialog-object-example/dialog-object-example.component.ts?raw';
+import objectDialogHtml from '!./examples/dialog-object-example/dialog-object-example.component.html?raw';
 
-import * as autoLabelTs from '!raw-loader!./examples/auto-label/auto-label-dialog-example.component.ts';
-import * as autoLabelHtml from '!raw-loader!./examples/auto-label/auto-label-dialog-example.component.html';
+import autoLabelTs from '!./examples/auto-label/auto-label-dialog-example.component.ts?raw';
+import autoLabelHtml from '!./examples/auto-label/auto-label-dialog-example.component.html?raw';
 
-import * as formDialogTs from '!raw-loader!./examples/dialog-form/form-dialog-example.component.ts';
-import * as formDialogHtml from '!raw-loader!./examples/dialog-form/form-dialog-example.component.html';
+import formDialogTs from '!./examples/dialog-form/form-dialog-example.component.ts?raw';
+import formDialogHtml from '!./examples/dialog-form/form-dialog-example.component.html?raw';
 
-import * as popoverDialogTs from '!raw-loader!./examples/dialog-inner-popover/dialog-inner-popover.component.ts';
+import popoverDialogTs from '!./examples/dialog-inner-popover/dialog-inner-popover.component.ts?raw';
 
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';

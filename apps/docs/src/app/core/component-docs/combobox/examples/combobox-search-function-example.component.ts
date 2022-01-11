@@ -19,7 +19,7 @@ export class ComboboxSearchFunctionExampleComponent {
         'Oranges'
     ];
 
-    customSearchFunction = () => {
+    customSearchFunction = (): void => {
         alert('Custom Function Called');
     };
 }

@@ -86,7 +86,7 @@ describe('TimeColumnComponent', () => {
 
         spyOn(component.activeValueChange, 'emit');
         component.activeChangedHandle({
-            item: item,
+            item,
             after: false
         });
 
@@ -107,7 +107,7 @@ describe('TimeColumnComponent', () => {
 
         spyOn(component.activeValueChange, 'emit');
         component.activeChangedHandle({
-            item: item,
+            item,
             after: false
         });
 

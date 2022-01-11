@@ -2,29 +2,29 @@ import { Component } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
-import * as timeSrc from '!raw-loader!./examples/time-example.component.html';
-import * as timeMeridianSrc from '!raw-loader!./examples/time-12-example.component.html';
-import * as timeSizesSrcTs from '!raw-loader!./examples/time-sizes-example.component.ts';
-import * as timeSizesSrcH from '!raw-loader!./examples/time-sizes-example.component.html';
-import * as timeNoSecondsSrc from '!raw-loader!./examples/time-no-seconds-example.component.html';
-import * as timeOnlyHoursSrc from '!raw-loader!./examples/time-only-hours-example.component.html';
+import timeSrc from '!./examples/time-example.component.html?raw';
+import timeMeridianSrc from '!./examples/time-12-example.component.html?raw';
+import timeSizesSrcTs from '!./examples/time-sizes-example.component.ts?raw';
+import timeSizesSrcH from '!./examples/time-sizes-example.component.html?raw';
+import timeNoSecondsSrc from '!./examples/time-no-seconds-example.component.html?raw';
+import timeOnlyHoursSrc from '!./examples/time-only-hours-example.component.html?raw';
 
-import * as timeProgramTs from '!raw-loader!./examples/time-programmatically-example.component.ts';
-import * as timeProgramH from '!raw-loader!./examples/time-programmatically-example.component.html';
+import timeProgramTs from '!./examples/time-programmatically-example.component.ts?raw';
+import timeProgramH from '!./examples/time-programmatically-example.component.html?raw';
 
-import * as timeSrcTs from '!raw-loader!./examples/time-example.component.ts';
-import * as timeMeridianSrcTs from '!raw-loader!./examples/time-12-example.component.ts';
-import * as timeNoSpinnersSrcTs from '!raw-loader!./examples/time-no-spinners-example/time-no-spinners-example.component.ts';
-import * as timeNoSpinnersSrcH from '!raw-loader!./examples/time-no-spinners-example/time-no-spinners-example.component.html';
-import * as timeNoSecondsSrcTs from '!raw-loader!./examples/time-no-seconds-example.component.ts';
-import * as timeOnlyHoursSrcTs from '!raw-loader!./examples/time-only-hours-example.component.ts';
-import * as timeTwoDigitsSrcTs from '!raw-loader!./examples/time-two-digits-example/time-two-digits-example.component.ts';
-import * as timeTwoDigitsSrcH from '!raw-loader!./examples/time-two-digits-example/time-two-digits-example.component.html';
+import timeSrcTs from '!./examples/time-example.component.ts?raw';
+import timeMeridianSrcTs from '!./examples/time-12-example.component.ts?raw';
+import timeNoSpinnersSrcTs from '!./examples/time-no-spinners-example/time-no-spinners-example.component.ts?raw';
+import timeNoSpinnersSrcH from '!./examples/time-no-spinners-example/time-no-spinners-example.component.html?raw';
+import timeNoSecondsSrcTs from '!./examples/time-no-seconds-example.component.ts?raw';
+import timeOnlyHoursSrcTs from '!./examples/time-only-hours-example.component.ts?raw';
+import timeTwoDigitsSrcTs from '!./examples/time-two-digits-example/time-two-digits-example.component.ts?raw';
+import timeTwoDigitsSrcH from '!./examples/time-two-digits-example/time-two-digits-example.component.html?raw';
 
-import * as timeI18nSrc from '!raw-loader!./examples/time-i18n-example.component.ts';
-import * as timeFormHtmlSrc from '!raw-loader!./examples/time-form-example.component.html';
-import * as timeFormTsSrc from '!raw-loader!./examples/time-form-example.component.ts';
-import * as timeFormScssSrc from '!raw-loader!./examples/time-form-example.component.scss';
+import timeI18nSrc from '!./examples/time-i18n-example.component.ts?raw';
+import timeFormHtmlSrc from '!./examples/time-form-example.component.html?raw';
+import timeFormTsSrc from '!./examples/time-form-example.component.ts?raw';
+import timeFormScssSrc from '!./examples/time-form-example.component.scss?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

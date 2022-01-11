@@ -101,7 +101,7 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
         /** Vertically distance is counted by distance from top of the side + half of the element height */
         return {
             x: rect.left,
-            position: position,
+            position,
             y: rect.top,
             stickToPosition: this.stickInPlace,
             width: rect.width,

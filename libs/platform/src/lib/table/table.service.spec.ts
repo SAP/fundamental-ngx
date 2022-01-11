@@ -44,7 +44,7 @@ describe('TableServiceService', () => {
         const setTableStateSpy = spyOn(service, 'setTableState').and.callThrough();
         const sortChangeSpy = spyOn(service.sortChange, 'emit').and.callThrough();
         const field = 'name';
-        const newSortBy = [{ field: field, direction: SortDirection.ASC }];
+        const newSortBy = [{ field, direction: SortDirection.ASC }];
         const newState: TableState = { ...DEFAULT_TABLE_STATE, sortBy: newSortBy };
         const event: SortChange = { current: newSortBy, previous: DEFAULT_TABLE_STATE.sortBy };
 
@@ -58,7 +58,7 @@ describe('TableServiceService', () => {
         const setTableStateSpy = spyOn(service, 'setTableState').and.callThrough();
         const groupChangeSpy = spyOn(service.groupChange, 'emit').and.callThrough();
         const field = 'name';
-        const newGroupBy: CollectionGroup[] = [{ field: field, direction: SortDirection.ASC, showAsColumn: true }];
+        const newGroupBy: CollectionGroup[] = [{ field, direction: SortDirection.ASC, showAsColumn: true }];
         const newState: TableState = { ...DEFAULT_TABLE_STATE, groupBy: newGroupBy };
         const event: GroupChange = { current: newGroupBy, previous: DEFAULT_TABLE_STATE.groupBy };
 

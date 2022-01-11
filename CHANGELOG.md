@@ -1,4 +1,65 @@
 
+## 0.33.0-rc.267 (2022-01-11)
+
+
+### Features
+
+* **platform:** approval flow dataSource updates ([#7393](https://github.com/SAP/fundamental-ngx/issues/7393)) ([e516681](https://github.com/SAP/fundamental-ngx/commit/e5166811247276d046bfeb2b645b2bf0cc2e860c))
+
+## 0.33.0-rc.266 (2022-01-11)
+
+
+### Bug Fixes
+
+* **platform:** multi-input issues ([#7457](https://github.com/SAP/fundamental-ngx/issues/7457)) ([a519742](https://github.com/SAP/fundamental-ngx/commit/a5197426dfe189ab88dacc0fecee18f5b20b4b8b))
+
+## 0.33.0-rc.265 (2022-01-11)
+
+
+### Bug Fixes
+
+* **core:** carousel, fix console error, arrows ([#7529](https://github.com/SAP/fundamental-ngx/issues/7529)) ([795760d](https://github.com/SAP/fundamental-ngx/commit/795760d5df4c6f27001a21bdde52438740c1328b))
+
+## 0.33.0-rc.264 (2022-01-11)
+
+
+### Bug Fixes
+
+* **core:** popover vertical overflow ([#7528](https://github.com/SAP/fundamental-ngx/issues/7528)) ([2bc4131](https://github.com/SAP/fundamental-ngx/commit/2bc4131d0b2080d3f26a45eb84a80e07738cab8e))
+
+## 0.33.0-rc.263 (2022-01-10)
+
+
+### Bug Fixes
+
+* **docs:** ng13.1, asset modules instead of raw-loader, stackblitz improvements ([#7398](https://github.com/SAP/fundamental-ngx/issues/7398)) ([00c679d](https://github.com/SAP/fundamental-ngx/commit/00c679ddcd257a8f65a5c2b83f070050a91562b9))
+
+## 0.33.0-rc.262 (2022-01-10)
+
+
+### Bug Fixes
+
+* **platform:** schematics' translations tasks ([#7421](https://github.com/SAP/fundamental-ngx/issues/7421)) ([3190a15](https://github.com/SAP/fundamental-ngx/commit/3190a15ac43658a42cf41b849663ddb721d04818))
+
+## 0.33.0-rc.261 (2022-01-10)
+
+
+### Bug Fixes
+
+* **platform:** fix empty password field error ([#7508](https://github.com/SAP/fundamental-ngx/issues/7508)) ([b2207e9](https://github.com/SAP/fundamental-ngx/commit/b2207e98489f1c9975179ba1dacc86f59c50747e))
+
+## 0.33.0-rc.260 (2022-01-10)
+
+## 0.33.0-rc.259 (2022-01-09)
+
+## 0.33.0-rc.258 (2022-01-07)
+
+## 0.33.0-rc.257 (2022-01-06)
+
+## 0.33.0-rc.256 (2022-01-05)
+
+## 0.33.0-rc.255 (2022-01-05)
+
 ## 0.33.0-rc.254 (2022-01-04)
 
 ## 0.33.0-rc.253 (2022-01-02)

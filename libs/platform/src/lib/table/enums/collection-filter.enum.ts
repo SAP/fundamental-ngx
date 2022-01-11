@@ -91,7 +91,9 @@ export type FilterDefaultStrategy = typeof FILTER_DEFAULT_STRATEGY[keyof typeof 
 export const FILTER_DEFAULT_STRATEGIES: ReadonlyArray<FilterStringStrategy> = Object.values(FILTER_DEFAULT_STRATEGY);
 
 // Get Possible strategies based on data type
-export const getFilterStrategiesBasedOnDataType = (dataType: FilterableColumnDataType) => {
+export const getFilterStrategiesBasedOnDataType = (
+    dataType: FilterableColumnDataType
+): readonly FilterStringStrategy[] | readonly FilterDateStrategy[] => {
     switch (dataType) {
         case FilterableColumnDataType.STRING:
             return FILTER_STRING_STRATEGIES;
