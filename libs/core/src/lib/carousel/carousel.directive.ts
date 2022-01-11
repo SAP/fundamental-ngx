@@ -1,6 +1,5 @@
 import {
     AfterContentInit,
-    ChangeDetectorRef,
     ContentChildren,
     Directive,
     ElementRef,
@@ -9,6 +8,7 @@ import {
     Output,
     QueryList
 } from '@angular/core';
+
 import { CarouselConfig, CarouselService, PanEndOutput } from './carousel.service';
 import { CarouselItemDirective } from './carousel-item.directive';
 
@@ -45,18 +45,14 @@ export class CarouselDirective implements AfterContentInit {
     items: QueryList<CarouselItemDirective>;
 
     /** @hidden */
-    constructor(
-        private _elementRef: ElementRef,
-        private _changeDetRef: ChangeDetectorRef,
-        private _carouselService: CarouselService
-    ) {}
+    constructor(private readonly _elementRef: ElementRef, private readonly _carouselService: CarouselService) {}
 
     /** @hidden */
     ngAfterContentInit(): void {
         this._carouselService.initialise(this.config, this.items, this._elementRef);
 
-        this._carouselService.activeChange.subscribe((event) => this.activeChange.emit(event));
-        this._carouselService.dragStateChange.subscribe((event) => this.dragStateChange.emit(event));
+        this._carouselService.activeChange$.subscribe((event) => this.activeChange.emit(event));
+        this._carouselService.dragStateChange$.subscribe((event) => this.dragStateChange.emit(event));
     }
 
     /** Change active element */

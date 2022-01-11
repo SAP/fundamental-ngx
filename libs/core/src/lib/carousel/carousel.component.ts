@@ -20,6 +20,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
+import { Direction } from '@angular/cdk/bidi';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
@@ -40,7 +41,7 @@ export enum SlideDirection {
     PREVIOUS
 }
 
-let carouselUniqueId = 0;
+let carouselCounter = 0;
 
 class CarouselActiveSlides {
     constructor(public readonly activeItems: CarouselItemComponent[], public readonly slideDirection: string) {}
@@ -58,7 +59,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     /** Id for the Carousel. */
     @Input()
     @HostBinding('attr.id')
-    id = `fd-carousel-${carouselUniqueId++}`;
+    id = `fd-carousel-${carouselCounter++}`;
 
     /** Sets aria-label attribute for carousel */
     @Input()
@@ -184,7 +185,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     currentActiveSlidesStartIndex = 0;
 
     /** @hidden handles rtl service */
-    dir = 'ltr';
+    dir: Direction = 'ltr';
 
     /** @hidden Make left navigation button disabled */
     leftButtonDisabled = false;
@@ -195,14 +196,19 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     /** @hidden Fake array for counting number of page indicator */
     pageIndicatorsCountArray: number[] = [];
 
+    /** @hidden */
     private _resourceStrings = CarouselResourceStringsEN;
 
+    /** @hidden */
     private _config: CarouselConfig = {};
 
+    /** @hidden */
     private _slidesCopy = [];
 
+    /** @hidden */
     private _previousVisibleSlidesCount: number;
 
+    /** @hidden */
     private _slideSwiped = false;
 
     /** @hidden An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing) */
@@ -210,10 +216,10 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     /** @hidden */
     constructor(
-        private readonly _elementRef: ElementRef,
-        private _renderer: Renderer2,
-        private _changeDetectorRef: ChangeDetectorRef,
-        private _carouselService: CarouselService,
+        private readonly _elementRef: ElementRef<HTMLElement>,
+        private readonly _renderer: Renderer2,
+        private readonly _changeDetectorRef: ChangeDetectorRef,
+        private readonly _carouselService: CarouselService,
         @Optional() private readonly _rtlService: RtlService
     ) {}
 
@@ -276,6 +282,16 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
+    }
+
+    /** @hidden */
+    get _showNavigationButtonInPageIndicatorContainer(): boolean {
+        return this.navigatorInPageIndicator && this.pageIndicatorsCountArray.length > 0;
+    }
+
+    /** @hidden */
+    get _showNavigationButtonInContent(): boolean {
+        return !this.navigatorInPageIndicator && this.pageIndicatorsCountArray.length > 0;
     }
 
     /** @hidden */
@@ -350,12 +366,8 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     /** @hidden Subscribe to carousel service events */
     private _subscribeServiceEvents(): void {
-        this._carouselService.activeChange
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe((event) => this._onSlideSwipe(event));
-        this._carouselService.dragStateChange
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe((event) => this._onSlideDrag(event));
+        this._carouselService.activeChange$.subscribe((event) => this._onSlideSwipe(event));
+        this._carouselService.dragStateChange$.subscribe((event) => this._onSlideDrag(event));
     }
 
     /**
@@ -438,13 +450,18 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         // Handles navigator button enabled/disabled state
         this._buttonVisibility();
 
+        let arrayLength = 0;
         // set page indicator count with fake array, to use in template
         if (this.loop && this.visibleSlidesCount > 1) {
             // If loop with multi item visible.
-            this.pageIndicatorsCountArray = new Array(this.slides.length);
+            arrayLength = this.slides.length;
         } else {
-            this.pageIndicatorsCountArray = new Array(this.slides.length - this.visibleSlidesCount + 1);
+            arrayLength = this.slides.length - this.visibleSlidesCount + 1;
         }
+
+        this.pageIndicatorsCountArray = new Array(arrayLength > 0 ? arrayLength : 0);
+
+        this._goToFirstItem();
 
         this.slides.forEach((_slide, index) => {
             if (
@@ -456,6 +473,18 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
                 _slide.visibility = 'hidden';
             }
         });
+    }
+
+    /** @hidden */
+    private _goToFirstItem(): void {
+        if (
+            this.pageIndicatorsCountArray.length === 0 &&
+            this._carouselService.currentTransitionPx !== 0 &&
+            this.slides.length > 1
+        ) {
+            this.currentActiveSlidesStartIndex = 0;
+            this._carouselService.goToItem(this.slides.first);
+        }
     }
 
     /** @hidden Initialize config for Carousel service */
@@ -501,7 +530,6 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     /** @hidden Handles notification on visible slide change */
     private _notifySlideChange(slideDirection: SlideDirection, firstActiveSlide?: CarouselItemInterface): void {
         const activeSlides: CarouselItemComponent[] = [];
-        const slides = this.slides.toArray();
         let firstActiveSlideIndex: number;
 
         if (this.loop) {
@@ -515,8 +543,12 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         }
 
         for (let activeSlideIndex = 0; activeSlideIndex < this.visibleSlidesCount; activeSlideIndex++) {
-            activeSlides.push(slides[firstActiveSlideIndex + activeSlideIndex]);
-            this.slides.toArray()[firstActiveSlideIndex + activeSlideIndex].visibility = 'visible';
+            const index = firstActiveSlideIndex + activeSlideIndex;
+            const slide = this.slides.get(index);
+            if (slide) {
+                activeSlides.push(slide);
+                slide.visibility = 'visible';
+            }
         }
 
         this._manageSlideVisibility(firstActiveSlideIndex);
