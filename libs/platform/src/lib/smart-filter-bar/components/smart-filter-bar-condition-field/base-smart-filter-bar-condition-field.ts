@@ -40,7 +40,7 @@ export abstract class BaseSmartFilterBarConditionField extends BaseDynamicFormGe
         const dialogRef = this._dialogService.open(SmartFilterBarConditionsDialogComponent, {
             data: dialogData,
             width: '67.5rem',
-            height: '98%'
+            minHeight: '30%'
         });
 
         dialogRef.afterClosed.pipe(take(1)).subscribe(

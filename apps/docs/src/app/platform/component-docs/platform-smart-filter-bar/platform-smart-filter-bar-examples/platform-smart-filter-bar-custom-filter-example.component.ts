@@ -169,10 +169,6 @@ export class PlatformSmartFilterBarCustomFilterExampleComponent {
         return item.id;
     }
 
-    alert(message: string): void {
-        alert(message);
-    }
-
     getSelectItemValue(item: SelectItem): any {
         return item.value;
     }

@@ -189,8 +189,6 @@ export class TableDataProvider<T> {
         items = items.filter((item) => {
             const valuesForSearch = keysToSearchBy.map((key) => get(item, key));
 
-            console.log(keysToSearchBy);
-
             return valuesForSearch
                 .filter((value) => !!value)
                 .map((value): string => value.toString())

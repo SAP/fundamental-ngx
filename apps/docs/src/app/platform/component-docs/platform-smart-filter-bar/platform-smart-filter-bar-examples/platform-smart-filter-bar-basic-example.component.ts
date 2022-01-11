@@ -13,10 +13,6 @@ export class PlatformSmartFilterBarBasicExampleComponent {
     trackBy(_: number, item: ExampleItem): number {
         return item.id;
     }
-
-    alert(message: string): void {
-        alert(message);
-    }
 }
 
 export interface ExampleItem {

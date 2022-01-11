@@ -1,44 +1,39 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 import { FdDate } from '@fundamental-ngx/core/datetime';
-import {
-    SmartFilterBarStrategyLabels,
-    SmartFilterBarVisibilityCategoryLabels
-} from '@fundamental-ngx/platform/smart-filter-bar';
 
 @Component({
-    selector: 'fdp-platform-smart-filter-bar-custom-labels-example',
-    templateUrl: './platform-smart-filter-bar-custom-labels-example.component.html',
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'fdp-platform-smart-filter-bar-dynamic-page-example',
+    templateUrl: './platform-smart-filter-bar-dynamic-page-example.component.html',
+    styles: [
+        `
+            .overlay {
+                height: 100%;
+                width: 100%;
+                position: fixed;
+                z-index: 10;
+                top: 0;
+                left: 0;
+                background-color: rgb(255, 255, 255);
+            }
+        `
+    ]
 })
-export class PlatformSmartFilterBarCustomLabelsExampleComponent {
+export class PlatformSmartFilterBarDynamicPageExampleComponent {
+    visible = false;
+
     source: ExampleItem[] = ITEMS;
 
-    defineStrategyLabels: SmartFilterBarStrategyLabels = {
-        contains: 'custom "contains" label',
-        equalTo: 'custom "equal to" label',
-        between: 'custom "between" label',
-        beginsWith: 'custom "starts with" label',
-        endsWith: 'custom "ends with" label',
-        lessThan: 'custom "less than" label',
-        lessThanOrEqualTo: 'custom "less than or equal to" label',
-        greaterThan: 'custom "greater than" label',
-        greaterThanOrEqualTo: 'custom "greater than or equal to" label',
-        after: 'custom "after" label',
-        onOrAfter: 'custom "on or after" label',
-        before: 'custom "before" label',
-        beforeOrOn: 'custom "before or on" label'
-    };
+    onCollapseChange(): void {
+        console.log('collapse changed');
+    }
 
-    filtersVisibilityCategoryLabels: SmartFilterBarVisibilityCategoryLabels = {
-        all: 'Custom "All" label',
-        visible: 'Custom "Visible" label',
-        active: 'Custom "Active" label',
-        visibleAndActive: 'Custom "Visible and active" label',
-        mandatory: 'Custom "Mandatory" label'
-    };
+    openPage(): void {
+        this.visible = true;
+    }
 
-    constructor() {}
+    closePage(): void {
+        this.visible = false;
+    }
 
     trackBy(_: number, item: ExampleItem): number {
         return item.id;

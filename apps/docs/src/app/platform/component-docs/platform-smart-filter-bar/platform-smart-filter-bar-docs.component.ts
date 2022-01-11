@@ -13,6 +13,9 @@ import * as platformSfbCustomFiltersTsCode from '!raw-loader!./platform-smart-fi
 import * as platformSfbCustomLabelsSrc from '!raw-loader!./platform-smart-filter-bar-examples/platform-smart-filter-bar-custom-labels-example.component.html';
 import * as platformSfbCustomLabelsTsCode from '!raw-loader!./platform-smart-filter-bar-examples/platform-smart-filter-bar-custom-labels-example.component.ts';
 
+import * as platformSfbDynamicPageSrc from '!raw-loader!./platform-smart-filter-bar-examples/platform-smart-filter-bar-dynamic-page-example.component.html';
+import * as platformSfbDynamicPageTsCode from '!raw-loader!./platform-smart-filter-bar-examples/platform-smart-filter-bar-dynamic-page-example.component.ts';
+
 @Component({
     selector: 'app-smart-filter-bar',
     templateUrl: './platform-smart-filter-bar-docs.component.html'
@@ -71,6 +74,20 @@ export class PlatformSmartFilterBarDocsComponent {
             code: platformSfbCustomLabelsTsCode,
             fileName: 'platform-smart-filter-bar-custom-labels-example',
             component: 'PlatformSmartFilterBarCustomLabelsExampleComponent'
+        }
+    ];
+
+    sfbDynamicPage: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformSfbDynamicPageSrc,
+            fileName: 'platform-smart-filter-bar-dynamic-page-example'
+        },
+        {
+            language: 'typescript',
+            code: platformSfbDynamicPageTsCode,
+            fileName: 'platform-smart-filter-bar-dynamic-page-example',
+            component: 'PlatformSmartFilterBarDynamicPageExampleComponent'
         }
     ];
 }
