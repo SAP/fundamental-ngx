@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.266 (2022-01-11)
+
+
+### Bug Fixes
+
+* **platform:** multi-input issues ([#7457](https://github.com/SAP/fundamental-ngx/issues/7457)) ([a519742](https://github.com/SAP/fundamental-ngx/commit/a5197426dfe189ab88dacc0fecee18f5b20b4b8b))
+
 ## 0.33.0-rc.265 (2022-01-11)
 
 
