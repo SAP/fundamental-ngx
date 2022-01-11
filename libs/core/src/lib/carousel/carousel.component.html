@@ -35,15 +35,16 @@
 </div>
 
 <ng-template #pageIndicatorContainer>
-    <div
-        class="fd-carousel__page-indicator-container"
-        *ngIf="navigatorInPageIndicator && pageIndicatorsCountArray.length > 0"
-    >
-        <ng-container *ngTemplateOutlet="buttonLeft"></ng-container>
+    <div class="fd-carousel__page-indicator-container">
+        <ng-container *ngIf="navigatorInPageIndicator && pageIndicatorsCountArray.length > 0">
+            <ng-container *ngTemplateOutlet="buttonLeft"></ng-container>
+        </ng-container>
 
         <ng-container *ngTemplateOutlet="pageIndicators"></ng-container>
 
-        <ng-container *ngTemplateOutlet="buttonRight"></ng-container>
+        <ng-container *ngIf="navigatorInPageIndicator && pageIndicatorsCountArray.length > 0">
+            <ng-container *ngTemplateOutlet="buttonRight"></ng-container>
+        </ng-container>
     </div>
 </ng-template>
 
