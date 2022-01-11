@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.268 (2022-01-11)
+
+
+### Bug Fixes
+
+* **core/platform:** slider - show tooltip properly ([#7481](https://github.com/SAP/fundamental-ngx/issues/7481)) ([bf1e8ad](https://github.com/SAP/fundamental-ngx/commit/bf1e8ad1886d9b2f6099cc591085ea6a51a2a2af))
+
 ## 0.33.0-rc.267 (2022-01-11)
 
 
