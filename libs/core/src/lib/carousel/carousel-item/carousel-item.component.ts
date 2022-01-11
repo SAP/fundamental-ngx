@@ -9,7 +9,9 @@ import {
 } from '@angular/core';
 import { CarouselItemInterface } from '../carousel.service';
 
-let carouselItemUniqueId = 0;
+export type Visibility = 'visible' | 'hidden';
+
+let carouselItemCounter = 0;
 
 @Component({
     selector: 'fd-carousel-item',
@@ -22,7 +24,7 @@ export class CarouselItemComponent implements CarouselItemInterface {
     /** Id of the Carousel items. */
     @Input()
     @HostBinding('attr.id')
-    id = `fd-carousel-item-${carouselItemUniqueId++}`;
+    id = `fd-carousel-item-${carouselItemCounter++}`;
 
     /** Sets aria-label attribute for carousel item */
     @Input()
@@ -77,32 +79,36 @@ export class CarouselItemComponent implements CarouselItemInterface {
     ieAutoWidth = true;
 
     /** @hidden Hide/show slide, useful for managing tab order */
-    _visibility: 'visible' | 'hidden' = 'visible';
+    _visibility: Visibility = 'visible';
 
     /** @hidden */
-    set visibility(visibility: 'visible' | 'hidden') {
+    set visibility(visibility: Visibility) {
         this._visibility = visibility;
         this._changeDetectorRef.detectChanges();
     }
 
-    get visibility(): 'visible' | 'hidden' {
+    get visibility(): Visibility {
         return this._visibility;
     }
 
-    constructor(private readonly _changeDetectorRef: ChangeDetectorRef, private readonly _elementRef: ElementRef) {}
+    /** @hidden */
+    constructor(
+        private readonly _changeDetectorRef: ChangeDetectorRef,
+        private readonly _elementRef: ElementRef<HTMLElement>
+    ) {}
+
+    /** Native element  */
+    get element(): HTMLElement {
+        return this._elementRef.nativeElement;
+    }
 
     /** Width of element */
     getWidth(): number {
-        return this._elementRef.nativeElement.getBoundingClientRect().width || this.initialWidth;
+        return this.element.getBoundingClientRect().width || this.initialWidth;
     }
 
     /** Height of element */
     getHeight(): number {
-        return this._elementRef.nativeElement.getBoundingClientRect().height || this.initialHeight;
-    }
-
-    /** Native element  */
-    getElement(): any {
-        return this._elementRef.nativeElement;
+        return this.element.getBoundingClientRect().height || this.initialHeight;
     }
 }

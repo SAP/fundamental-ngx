@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 import * as carouselOneActiveItemTs from '!raw-loader!./examples/carousel-one-active-item-example.component.ts';
 import * as carouselOneActiveItemHtml from '!raw-loader!./examples/carousel-one-active-item-example.component.html';
 import * as carouselVerticalTs from '!raw-loader!./examples/carousel-vertical-direction-example.component.ts';
@@ -19,6 +20,8 @@ import * as carouselErrorMessageTs from '!raw-loader!./examples/carousel-error-m
 import * as carouselErrorMessageHtml from '!raw-loader!./examples/carousel-error-message-example.component.html';
 import * as carouselLoadingContentTs from '!raw-loader!./examples/carousel-loading-content-example.component.ts';
 import * as carouselLoadingContentHtml from '!raw-loader!./examples/carousel-loading-content-example.component.html';
+import * as carouselExampleScss from '!raw-loader!./examples/carousel-example.component.scss';
+
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -67,7 +70,8 @@ export class CarouselDocsComponent {
             language: 'html',
             fileName: 'carousel-multiple-active-item-example',
             component: 'CarouselMultipleActiveItemExampleComponent',
-            code: carouselMultipleActiveItemHtml
+            code: carouselMultipleActiveItemHtml,
+            scssFileCode: carouselExampleScss
         }
     ];
 
@@ -82,7 +86,8 @@ export class CarouselDocsComponent {
             language: 'html',
             fileName: 'carousel-dynamic-items-example',
             component: 'CarouselDynamicItemsExampleComponent',
-            code: carouselDynamicItemsHtml
+            code: carouselDynamicItemsHtml,
+            scssFileCode: carouselExampleScss
         }
     ];
 
