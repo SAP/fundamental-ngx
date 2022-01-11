@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.267 (2022-01-11)
+
+
+### Features
+
+* **platform:** approval flow dataSource updates ([#7393](https://github.com/SAP/fundamental-ngx/issues/7393)) ([e516681](https://github.com/SAP/fundamental-ngx/commit/e5166811247276d046bfeb2b645b2bf0cc2e860c))
+
 ## 0.33.0-rc.266 (2022-01-11)
 
 
