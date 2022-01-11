@@ -197,17 +197,8 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     /** @hidden */
     listTemplate: TemplateRef<any>;
 
-    /** Get the input text of the input. */
-    get inputText(): string {
-        return this._inputTextValue;
-    }
-
-    /** Set the input text of the input. */
-    set inputText(value: string) {
-        this._inputTextValue = value;
-
-        this.onTouched();
-    }
+    /** input text of the input. */
+    inputText: string;
 
     /** Whether the Multi Input is opened. */
     isOpen = false;
@@ -245,8 +236,6 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
 
     protected _dataSource: FdpMultiInputDataSource<any>;
 
-    /** @hidden */
-    private _inputTextValue: string;
     /** @hidden */
     private _matchingStrategy: MatchingStrategy = this.multiInputConfig.matchingStrategy;
     /** @hidden */
@@ -347,12 +336,14 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     open(): void {
         this.isOpen = true;
         this.isOpenChange.emit(this.isOpen);
+        this.openChange.next(this.isOpen);
         this._cd.markForCheck();
     }
     /** Closes the select popover body. */
     close(): void {
         this.isOpen = false;
         this.isOpenChange.emit(this.isOpen);
+        this.openChange.next(this.isOpen);
         this._cd.markForCheck();
     }
 
@@ -376,17 +367,13 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
 
     /** @hidden */
     showList(isOpen: boolean): void {
-        if (this.isOpen !== isOpen) {
-            this.isOpen = isOpen;
-            this.onTouched();
-            this.openChange.next(isOpen);
-        }
-
-        if (!this.isOpen) {
+        if (!isOpen) {
             this.searchTermChanged('');
         }
 
-        this.cd.detectChanges();
+        if (this.isOpen !== isOpen) {
+            isOpen ? this.open() : this.close();
+        }
     }
 
     /** @hidden */
@@ -403,18 +390,6 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         }
 
         this.handleOptionItem(value);
-    }
-
-    /**
-     * Handle Click on Button
-     * @hidden
-     */
-    onPrimaryButtonClick(isOpen: boolean): void {
-        if (!isOpen) {
-            this.searchTermChanged('');
-        }
-
-        this.showList(!isOpen);
     }
 
     /**
