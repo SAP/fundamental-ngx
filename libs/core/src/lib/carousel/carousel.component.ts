@@ -20,6 +20,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
+import { Direction } from '@angular/cdk/bidi';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
@@ -28,7 +29,6 @@ import { RtlService } from '@fundamental-ngx/core/utils';
 import { CarouselItemComponent } from './carousel-item/carousel-item.component';
 import { CarouselResourceStringsEN, FdCarouselResourceStrings } from './i18n/carousel-resources';
 import { CarouselConfig, CarouselItemInterface, CarouselService, PanEndOutput } from './carousel.service';
-import { Direction } from '@angular/cdk/bidi';
 
 /** Page limit to switch to numerical indicator */
 const ICON_PAGE_INDICATOR_LIMIT = 8;
@@ -285,6 +285,16 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     }
 
     /** @hidden */
+    get _showNavigationButtonInPageIndicatorContainer(): boolean {
+        return this.navigatorInPageIndicator && this.pageIndicatorsCountArray.length > 0;
+    }
+
+    /** @hidden */
+    get _showNavigationButtonInContent(): boolean {
+        return !this.navigatorInPageIndicator && this.pageIndicatorsCountArray.length > 0;
+    }
+
+    /** @hidden */
     get getPageIndicatorLabel(): string {
         return `${this.currentActiveSlidesStartIndex + 1} ${this.resourceStrings.fd_carousel_of} ${
             this.pageIndicatorsCountArray.length
@@ -356,8 +366,8 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     /** @hidden Subscribe to carousel service events */
     private _subscribeServiceEvents(): void {
-        this._carouselService.activeChange.subscribe((event) => this._onSlideSwipe(event));
-        this._carouselService.dragStateChange.subscribe((event) => this._onSlideDrag(event));
+        this._carouselService.activeChange$.subscribe((event) => this._onSlideSwipe(event));
+        this._carouselService.dragStateChange$.subscribe((event) => this._onSlideDrag(event));
     }
 
     /**

@@ -19,6 +19,7 @@ import carouselErrorMessageTs from '!./examples/carousel-error-message-example.c
 import carouselErrorMessageHtml from '!./examples/carousel-error-message-example.component.html?raw';
 import carouselLoadingContentTs from '!./examples/carousel-loading-content-example.component.ts?raw';
 import carouselLoadingContentHtml from '!./examples/carousel-loading-content-example.component.html?raw';
+import carouselExampleScss from '!./examples/carousel-example.component.scss?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -67,7 +68,8 @@ export class CarouselDocsComponent {
             language: 'html',
             fileName: 'carousel-multiple-active-item-example',
             component: 'CarouselMultipleActiveItemExampleComponent',
-            code: carouselMultipleActiveItemHtml
+            code: carouselMultipleActiveItemHtml,
+            scssFileCode: carouselExampleScss
         }
     ];
 
@@ -82,7 +84,8 @@ export class CarouselDocsComponent {
             language: 'html',
             fileName: 'carousel-dynamic-items-example',
             component: 'CarouselDynamicItemsExampleComponent',
-            code: carouselDynamicItemsHtml
+            code: carouselDynamicItemsHtml,
+            scssFileCode: carouselExampleScss
         }
     ];
 

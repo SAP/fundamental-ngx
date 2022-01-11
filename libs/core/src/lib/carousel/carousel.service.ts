@@ -35,10 +35,10 @@ export interface PanEndOutput {
 })
 export class CarouselService implements OnDestroy {
     /** Event thrown when element is dragged. Emits "true" when drag starts and "false" when drag ends. */
-    readonly dragStateChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+    readonly dragStateChange$: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** Event thrown, when active element is changed */
-    readonly activeChange: EventEmitter<PanEndOutput> = new EventEmitter<PanEndOutput>();
+    readonly activeChange$: EventEmitter<PanEndOutput> = new EventEmitter<PanEndOutput>();
 
     /** Configuration for carousel */
     config: CarouselConfig;
@@ -96,8 +96,8 @@ export class CarouselService implements OnDestroy {
         this._onDestroy$.next();
         this._onDestroy$.complete();
 
-        this.activeChange.complete();
-        this.dragStateChange.complete();
+        this.activeChange$.complete();
+        this.dragStateChange$.complete();
     }
 
     /** set initial values for the service */
@@ -290,19 +290,19 @@ export class CarouselService implements OnDestroy {
 
         if (!this.active) {
             this.active = closestItem;
-            this.activeChange.emit({
+            this.activeChange$.emit({
                 item: closestItem,
                 after: delta < 0
             });
         } else if (this.active !== closestItem) {
             this.active = closestItem;
-            this.activeChange.emit({
+            this.activeChange$.emit({
                 item: closestItem,
                 after: delta < 0
             });
         }
 
-        this.dragStateChange.emit(false);
+        this.dragStateChange$.emit(false);
         this._lastDistance = 0;
     }
 
@@ -319,7 +319,7 @@ export class CarouselService implements OnDestroy {
     /** @hidden Pam Start handler, removes transition duration, */
     private _handlePanStart(): void {
         this._element.style.transitionDuration = '0s';
-        this.dragStateChange.emit(true);
+        this.dragStateChange$.emit(true);
     }
 
     /** @hidden */
@@ -383,7 +383,7 @@ export class CarouselService implements OnDestroy {
             if (this._dragStarted) {
                 this._handlePanEnd(this._getDraggedDelta(this._getDragCoordinate(event)));
             } else {
-                this.dragStateChange.emit(false);
+                this.dragStateChange$.emit(false);
             }
 
             this._listenToMouseMove = false;

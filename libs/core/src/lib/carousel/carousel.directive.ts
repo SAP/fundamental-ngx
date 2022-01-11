@@ -51,8 +51,8 @@ export class CarouselDirective implements AfterContentInit {
     ngAfterContentInit(): void {
         this._carouselService.initialise(this.config, this.items, this._elementRef);
 
-        this._carouselService.activeChange.subscribe((event) => this.activeChange.emit(event));
-        this._carouselService.dragStateChange.subscribe((event) => this.dragStateChange.emit(event));
+        this._carouselService.activeChange$.subscribe((event) => this.activeChange.emit(event));
+        this._carouselService.dragStateChange$.subscribe((event) => this.dragStateChange.emit(event));
     }
 
     /** Change active element */
