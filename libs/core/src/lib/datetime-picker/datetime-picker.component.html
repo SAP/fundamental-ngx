@@ -46,64 +46,66 @@
             [attr.aria-hidden]="!isOpen"
             [style.display]="'block'"
         >
-            <fd-form-message id="fd-form-message" [embedded]="true" *ngIf="_message" [type]="state">
-                {{ _message }}
-            </fd-form-message>
-            <ng-content></ng-content>
-            <div class="fd-datetime__container">
-                <fd-calendar
-                    calType="single"
-                    [activeView]="activeView"
-                    [disableFunction]="disableFunction ? disableFunction : null"
-                    [selectedDate]="_tempDate"
-                    [escapeFocusFunction]="null"
-                    [compact]="compact"
-                    [markWeekends]="markWeekends"
-                    [specialDaysRules]="specialDaysRules"
-                    [showWeekNumbers]="showWeekNumbers"
-                    [aggregatedYearGrid]="aggregatedYearGrid"
-                    [yearGrid]="yearGrid"
-                    [startingDayOfWeek]="startingDayOfWeek"
-                    (activeViewChange)="handleCalendarActiveViewChange($event)"
-                    (selectedDateChange)="handleDateChange($event)"
-                    (isValidDateChange)="setInvalidDateInputHandler($event)"
-                ></fd-calendar>
-                <div class="fd-datetime__separator"></div>
-                <fd-time
-                    *ngIf="isOpen"
-                    [disabled]="disabled"
-                    [keepTwoDigits]="keepTwoDigitsTime"
-                    [ngModel]="_tempTime"
-                    [compact]="compact"
-                    [spinnerButtons]="spinnerButtons"
-                    [meridian]="_meridian"
-                    [displaySeconds]="_displaySeconds"
-                    [displayMinutes]="_displayMinutes"
-                    [displayHours]="_displayHours"
-                    (ngModelChange)="handleTimeChange($event)"
-                ></fd-time>
-            </div>
-            <div fd-popover-body-footer *ngIf="showFooter">
-                <div fd-bar barDesign="footer" [cozy]="!compact">
-                    <div fd-bar-right>
-                        <fd-bar-element>
-                            <button
-                                fd-button
-                                fdType="emphasized"
-                                label="OK"
-                                [compact]="compact"
-                                (click)="submit()"
-                            ></button>
-                        </fd-bar-element>
-                        <fd-bar-element>
-                            <button
-                                fd-button
-                                fdType="transparent"
-                                [compact]="compact"
-                                label="Cancel"
-                                (click)="cancel()"
-                            ></button>
-                        </fd-bar-element>
+            <div class="fd-popover__wrapper fd-datetime__wrapper">
+                <fd-form-message id="fd-form-message" [embedded]="true" *ngIf="_message" [type]="state">
+                    {{ _message }}
+                </fd-form-message>
+                <ng-content></ng-content>
+                <div class="fd-datetime__container">
+                    <fd-calendar
+                        calType="single"
+                        [activeView]="activeView"
+                        [disableFunction]="disableFunction ? disableFunction : null"
+                        [selectedDate]="_tempDate"
+                        [escapeFocusFunction]="null"
+                        [compact]="compact"
+                        [markWeekends]="markWeekends"
+                        [specialDaysRules]="specialDaysRules"
+                        [showWeekNumbers]="showWeekNumbers"
+                        [aggregatedYearGrid]="aggregatedYearGrid"
+                        [yearGrid]="yearGrid"
+                        [startingDayOfWeek]="startingDayOfWeek"
+                        (activeViewChange)="handleCalendarActiveViewChange($event)"
+                        (selectedDateChange)="handleDateChange($event)"
+                        (isValidDateChange)="setInvalidDateInputHandler($event)"
+                    ></fd-calendar>
+                    <div class="fd-datetime__separator"></div>
+                    <fd-time
+                        *ngIf="isOpen"
+                        [disabled]="disabled"
+                        [keepTwoDigits]="keepTwoDigitsTime"
+                        [ngModel]="_tempTime"
+                        [compact]="compact"
+                        [spinnerButtons]="spinnerButtons"
+                        [meridian]="_meridian"
+                        [displaySeconds]="_displaySeconds"
+                        [displayMinutes]="_displayMinutes"
+                        [displayHours]="_displayHours"
+                        (ngModelChange)="handleTimeChange($event)"
+                    ></fd-time>
+                </div>
+                <div fd-popover-body-footer *ngIf="showFooter">
+                    <div fd-bar barDesign="footer" [cozy]="!compact">
+                        <div fd-bar-right>
+                            <fd-bar-element>
+                                <button
+                                    fd-button
+                                    fdType="emphasized"
+                                    label="OK"
+                                    [compact]="compact"
+                                    (click)="submit()"
+                                ></button>
+                            </fd-bar-element>
+                            <fd-bar-element>
+                                <button
+                                    fd-button
+                                    fdType="transparent"
+                                    [compact]="compact"
+                                    label="Cancel"
+                                    (click)="cancel()"
+                                ></button>
+                            </fd-bar-element>
+                        </div>
                     </div>
                 </div>
             </div>
