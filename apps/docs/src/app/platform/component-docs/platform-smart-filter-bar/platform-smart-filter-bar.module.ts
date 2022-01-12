@@ -12,6 +12,7 @@ import { PlatformDatePickerModule } from '@fundamental-ngx/platform/form';
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { BarModule } from '@fundamental-ngx/core/bar';
+import { TitleModule } from '@fundamental-ngx/core/title';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
@@ -55,7 +56,8 @@ const routes: Routes = [
         DynamicPageModule,
         BreadcrumbModule,
         ToolbarModule,
-        BarModule
+        BarModule,
+        TitleModule
     ],
     exports: [RouterModule],
     declarations: [

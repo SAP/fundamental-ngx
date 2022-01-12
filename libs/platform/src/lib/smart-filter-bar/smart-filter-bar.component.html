@@ -34,10 +34,11 @@
     </fd-toolbar>
 </div>
 
-<div *ngIf="_showFilterBar">
+<div class="fdp-smart-filter-bar__filters" *ngIf="_showFilterBar">
     <fdp-form-generator
         (formCreated)="_onFormCreated()"
         (formSubmitted)="_onFormSubmitted($event)"
+        [noAdditionalContent]="true"
         [formItems]="_formItems"
         [inlineColumnLayout]="filtersColumnLayout"
     ></fdp-form-generator>

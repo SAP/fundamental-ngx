@@ -140,12 +140,20 @@ export class FormGeneratorComponent implements OnDestroy {
     @Input()
     gapColumnLayout: ColumnLayout = DefaultGapLayout;
 
-    /** Whether or not all form items should have identical layout provided for form group. */
+    /** Whether all form items should have identical layout provided for form group. */
     @Input()
     unifiedLayout = true;
 
     @Input()
     inlineColumnLayout: ColumnLayout = DefaultVerticalFieldLayout;
+
+    /**
+     * @hidden
+     * Removes extra empty row.
+     * TODO: remove after #7533 has been fixed.
+     */
+    @Input()
+    noAdditionalContent = false;
 
     /**
      * @description Event which notifies parent component that the form has been successfuly created

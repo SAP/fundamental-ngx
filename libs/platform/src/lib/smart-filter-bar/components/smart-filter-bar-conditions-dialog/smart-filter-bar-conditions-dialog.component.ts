@@ -11,7 +11,6 @@ import { getSelectItemValue } from '../../helpers';
 @Component({
     selector: 'fdp-smart-filter-bar-conditions-dialog',
     templateUrl: './smart-filter-bar-conditions-dialog.component.html',
-    styleUrls: ['./smart-filter-bar-conditions-dialog.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })

@@ -1,0 +1,71 @@
+$fd-block: fdp-smart-filter-bar;
+
+@mixin fd-responsive-paddings() {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    @media (min-width: 600px) {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+.#{$fd-block} {
+    display: block;
+    box-shadow: var(--sapContent_HeaderShadow);
+    background-color: var(--sapObjectHeader_Background);
+
+    &--transparent {
+        background-color: var(--sapToolbar_Background);
+        box-shadow: none;
+    }
+
+    .fd-toolbar {
+        &--title {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            height: 3rem;
+            min-height: 3rem;
+            border-bottom: none;
+            @include fd-responsive-paddings();
+        }
+
+        fdp-search-field {
+            min-width: 15.5rem;
+        }
+    }
+
+    .#{$fd-block}__filters {
+        @include fd-responsive-paddings();
+    }
+
+    .fd-container.fd-form-layout-grid-container {
+        padding: 0;
+
+        .fd-row {
+            .fd-col__form-group {
+                padding-left: 0.25rem;
+                padding-right: 0.25rem;
+            }
+        }
+    }
+
+    &__conditions-dialog {
+        .#{$fd-block}__actions-column {
+            min-width: auto;
+            flex: 0 0 auto;
+        }
+
+        .fd-popover-custom {
+            display: block;
+        }
+
+        .fd-dialog__body {
+            background-color: var(--sapBackgroundColor, #f7f7f7);
+        }
+
+        .fd-container.fd-form-layout-grid-container,
+        .fd-container.fd-form-layout-grid-container .fd-row .fd-col__form-group {
+            padding: 0 1rem;
+        }
+    }
+}

@@ -43,6 +43,7 @@ import { SmartFilterBar } from './smart-filter-bar.class';
 import { SmartFilterBarConditionFieldComponent } from './components/smart-filter-bar-condition-field/smart-filter-bar-condition-field.component';
 import { getSelectItemValue } from './helpers';
 import { SmartFilterBarStrategyLabels } from './interfaces/strategy-labels.type';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 const defaultColumnsLayout = { S: 12, M: 6, L: 4, XL: 3 };
 
@@ -65,9 +66,14 @@ const smartFilterBarProvider: Provider = {
 @Component({
     selector: 'fdp-smart-filter-bar',
     templateUrl: './smart-filter-bar.component.html',
+    styleUrls: ['./smart-filter-bar.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [smartFilterBarProvider]
+    providers: [smartFilterBarProvider],
+    host: {
+        class: 'fdp-smart-filter-bar',
+        '[class.fdp-smart-filter-bar--transparent]': 'transparent'
+    }
 })
 export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
     /**
@@ -93,8 +99,23 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
     @Input()
     hideFiltersLabel = 'Hide filters';
 
+    /**
+     * 'Filters' button label.
+     */
     @Input()
     filtersLabel = 'Filters';
+
+    /**
+     * Whether smart filter bar background should be transparent.
+     */
+    @Input()
+    set transparent(value: boolean) {
+        this._transparent = coerceBooleanProperty(value);
+    }
+
+    get transparent(): boolean {
+        return this._transparent;
+    }
 
     /**
      * Condition strategy labels.
@@ -156,6 +177,9 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
     private _subscriptions = new Subscription();
     /** @hidden */
     private _subjectSubscriptions = new Subscription();
+
+    /** @hidden */
+    private _transparent = false;
 
     /** @hidden */
     constructor(
