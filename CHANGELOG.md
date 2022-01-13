@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.269 (2022-01-13)
+
+
+### Features
+
+* **docs:** update "new component" readme ([#7511](https://github.com/SAP/fundamental-ngx/issues/7511)) ([8cbfe49](https://github.com/SAP/fundamental-ngx/commit/8cbfe491200788dea33154a40d38f349c438637b))
+
 ## 0.33.0-rc.268 (2022-01-11)
 
 
