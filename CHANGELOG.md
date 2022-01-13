@@ -1,4 +1,11 @@
 
+### [0.32.9](https://github.com/SAP/fundamental-ngx/compare/v0.32.8...v0.32.9) (2022-01-13)
+
+
+### Bug Fixes
+
+* **core:** grid list layout ([724ead0](https://github.com/SAP/fundamental-ngx/commit/724ead0fe7742dee157740d99e59d661e8d6ec53))
+
 ### [0.32.8](https://github.com/SAP/fundamental-ngx/compare/v0.32.7...v0.32.8) (2022-01-13)
 
 
