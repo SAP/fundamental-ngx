@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.271 (2022-01-13)
+
+
+### Features
+
+* **platform:** smart filter bar ([#7504](https://github.com/SAP/fundamental-ngx/issues/7504)) ([38a9410](https://github.com/SAP/fundamental-ngx/commit/38a9410ea1456fc244d0d0e689bd884bed56b66d))
+
 ## 0.33.0-rc.270 (2022-01-13)
 
 
