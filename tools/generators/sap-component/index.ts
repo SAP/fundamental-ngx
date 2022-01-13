@@ -142,7 +142,7 @@ function addDocsComponents(schema: SapComponentSchema): Rule {
             ...names(schema.name),
             moduleName: getModuleName(schema),
             projectTag: getProjectTag(schema),
-            projectName: schema.project,
+            projectDirName: getProjectDirName(schema),
             startCaseName: startCaseName(schema.name)
         }),
         move(`apps/docs/src/app/${getProjectDirName(schema)}/component-docs/${schema.name}`)
@@ -156,7 +156,17 @@ function updateLibraryData(schema: SapComponentSchema): Rule {
     const newName = `${getProjectDirName(schema)}-${schema.name}`;
     return chain([
         updateJsonInTree('/angular.json', (angularJson) => {
-            angularJson.projects[newName] = angularJson.projects[oldName];
+            const config = angularJson.projects[oldName];
+
+            // since we're placing everything in the root of the library, need to update configs
+            config.sourceRoot = config.root;
+            config.architect.build.outputs[0] = config.architect.build.outputs[0].replace('/src/lib', '');
+            config.architect.test.options.main = config.architect.test.options.main.replace('src/test.ts', 'test.ts');
+            config.architect.lint.options.lintFilePatterns = config.architect.lint.options.lintFilePatterns.map((str) =>
+                str.replace('src/**', '**')
+            );
+
+            angularJson.projects[newName] = config;
             delete angularJson.projects[oldName];
 
             if (schema.project === 'platform') {
@@ -164,6 +174,12 @@ function updateLibraryData(schema: SapComponentSchema): Rule {
             }
 
             return angularJson;
+        }),
+        updateJsonInTree('/tsconfig.base.json', (tsconfigJson) => {
+            tsconfigJson.compilerOptions.paths[getImportPath(schema)][0] = tsconfigJson.compilerOptions.paths[
+                getImportPath(schema)
+            ][0].replace('src/index.ts', 'index.ts');
+            return tsconfigJson;
         }),
         move(`${getLibraryDirectory(schema)}/src/test.ts`, `${getLibraryDirectory(schema)}/test.ts`),
         (tree) => {
@@ -184,12 +200,6 @@ function updateLibraryData(schema: SapComponentSchema): Rule {
             replaceContentInFile(tree, `${getLibraryDirectory(schema)}/tsconfig.spec.json`, [
                 ['"src/test.ts"', '"./test.ts"']
             ]);
-            replaceContentInFile(tree, `/tsconfig.base.json`, [
-                [
-                    `["libs/${schema.project}/src/lib/${schema.name}/src/index.ts"]`,
-                    `["libs/${schema.project}/src/lib/${schema.name}/index.ts"]`
-                ]
-            ]);
             // renaming module class name
             const oldModuleName = strings.classify(oldName);
             replaceContentInFile(tree, newModulePath, [[oldModuleName, getModuleName(schema)]]);
@@ -209,8 +219,13 @@ function updateLibraryData(schema: SapComponentSchema): Rule {
                 tree,
                 `${getLibraryDirectory(schema, false)}/${moduleName}`,
                 getModuleName(schema) + 'Module',
-                `@fundamental-ngx/${schema.project}/${schema.name}`
+                getImportPath(schema)
             );
+
+            // add created module to exports from root package's public_api.ts
+            let modulePublicApiContent = tree.read(`${getLibraryDirectory(schema, false)}/public_api.ts`).toString();
+            modulePublicApiContent = modulePublicApiContent + `export * from '${getImportPath(schema)}';\n`;
+            tree.overwrite(`${getLibraryDirectory(schema, false)}/public_api.ts`, modulePublicApiContent);
         }
     ]);
 }
