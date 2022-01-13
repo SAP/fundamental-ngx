@@ -311,8 +311,8 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
     private _listenOnKeyboardTabSelect(): void {
         this._tabsService.tabSelected
             .pipe(
-                takeUntil(this._onDestroy$),
-                map((index) => this._visualOrder.visible[index].panel)
+                map((index) => this._visualOrder.visible[index].panel),
+                takeUntil(this._onDestroy$)
             )
             .subscribe((tabPanel) => this._expandTab(tabPanel, !tabPanel.expanded));
     }
@@ -336,8 +336,8 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
 
         this.tabPanels.changes
             .pipe(
-                takeUntil(this._onDestroy$),
-                switchMap(() => $tabHeadersSource)
+                switchMap(() => $tabHeadersSource),
+                takeUntil(this._onDestroy$)
             )
             .subscribe((tabHeaders) => {
                 this._cacheTabsWidth(tabHeaders);
@@ -478,7 +478,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
         if (!(currentScrollPosition === maximumScrollTop && distanceToScroll > maximumScrollTop)) {
             !this._init ? (this._disableScrollSpy = true) : (this._init = false);
             fromEvent(containerElement, 'scroll')
-                .pipe(takeUntil(this._onDestroy$), debounceTime(100), first())
+                .pipe(debounceTime(100), first(), takeUntil(this._onDestroy$))
                 .subscribe(() => (this._disableScrollSpy = false));
             scrollTop(containerElement, distanceToScroll);
         }
