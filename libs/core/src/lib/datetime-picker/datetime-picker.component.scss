@@ -1,6 +1,10 @@
 .fd-datetime {
     display: block;
 
+    &__wrapper {
+        max-height: 80vh;
+    }
+
     &__container {
         display: flex;
         align-items: center;
