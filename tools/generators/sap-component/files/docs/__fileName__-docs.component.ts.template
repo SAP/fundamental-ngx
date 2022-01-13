@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
-import * as <%= propertyName %>DefaultExampleHtml from '!raw-loader!./examples/default/<%= fileName %>-default-example.component.html';
-import * as <%= propertyName %>DefaultExampleTs from '!raw-loader!./examples/default/<%= fileName %>-default-example.component.ts';
+import <%= propertyName %>DefaultExampleHtml from '!./examples/default/<%= fileName %>-default-example.component.html?raw';
+import <%= propertyName %>DefaultExampleTs from '!./examples/default/<%= fileName %>-default-example.component.ts?raw';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 

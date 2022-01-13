@@ -71,8 +71,8 @@ apps/docs/src/app/core/component-docs/poster-editor/examples/
 
 ```typescript
 // add imports on top
-import * as posterEditorComplexExampleHtml from '!raw-loader!./examples/complex/poster-editor-complex-example.component.html';
-import * as posterEditorComplexExampleTs from '!raw-loader!./examples/complex/poster-editor-complex-example.component.ts';
+import posterEditorComplexExampleHtml from '!./examples/complex/poster-editor-complex-example.component.html?raw';
+import posterEditorComplexExampleTs from '!./examples/complex/poster-editor-complex-example.component.ts?raw';
 
 ...
 export class PosterEditorDocsComponent {
