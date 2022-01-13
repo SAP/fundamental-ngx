@@ -1,4 +1,11 @@
 
+### [0.32.10](https://github.com/SAP/fundamental-ngx/compare/v0.32.9...v0.32.10) (2022-01-13)
+
+
+### Bug Fixes
+
+* **core:** carousel, fix page indicator container ([#7541](https://github.com/SAP/fundamental-ngx/issues/7541)) ([64df6ae](https://github.com/SAP/fundamental-ngx/commit/64df6aee43354b1752cf2928f0694b7a57f35768))
+
 ### [0.32.9](https://github.com/SAP/fundamental-ngx/compare/v0.32.8...v0.32.9) (2022-01-13)
 
 
