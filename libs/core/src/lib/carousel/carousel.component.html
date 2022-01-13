@@ -7,7 +7,7 @@
     [attr.dir]="dir"
     (click)="_focus()"
 >
-    <ng-container *ngIf="pageIndicatorContainer && pageIndicatorsOrientation === 'top'">
+    <ng-container *ngIf="_showPageIndicatorContainer && pageIndicatorsOrientation === 'top'">
         <ng-container *ngTemplateOutlet="pageIndicatorContainer"></ng-container>
     </ng-container>
 
@@ -25,7 +25,7 @@
         </ng-container>
     </div>
 
-    <ng-container *ngIf="pageIndicatorContainer && pageIndicatorsOrientation === 'bottom'">
+    <ng-container *ngIf="_showPageIndicatorContainer && pageIndicatorsOrientation === 'bottom'">
         <ng-container *ngTemplateOutlet="pageIndicatorContainer"></ng-container>
     </ng-container>
 
