@@ -95,7 +95,7 @@ export function getMatchingStrategyStartsWithPerTermReqexp(value: string): RegEx
     return new RegExp(`(\\s|^)(${value})`, 'gi');
 }
 
-export function isDataSource(value: any): value is DataSource<any> {
+export function isDataSource<T = any>(value: any): value is DataSource<T> {
     return value && typeof value.open === 'function';
 }
 

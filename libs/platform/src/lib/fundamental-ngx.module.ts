@@ -48,6 +48,7 @@ import { PlatformUploadCollectionModule } from '@fundamental-ngx/platform/upload
 import { PlatformValueHelpDialogModule } from '@fundamental-ngx/platform/value-help-dialog';
 import { PlatformWizardGeneratorModule } from '@fundamental-ngx/platform/wizard-generator';
 import { PlatformIconTabBarModule } from '@fundamental-ngx/platform/icon-tab-bar';
+import { PlatformSmartFilterBarModule } from '@fundamental-ngx/platform/smart-filter-bar';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -96,7 +97,8 @@ import { PlatformIconTabBarModule } from '@fundamental-ngx/platform/icon-tab-bar
         PlatformTimePickerModule,
         PlatformDatePickerModule,
         PlatformFormGeneratorModule,
-        PlatformIconTabBarModule
+        PlatformIconTabBarModule,
+        PlatformSmartFilterBarModule
     ],
     providers: []
 })

@@ -39,5 +39,6 @@ export abstract class BaseDynamicFormGeneratorControl implements BaseDynamicForm
      */
     @Input() formField: FormField;
 
+    /** @description Inner form group name */
     @Input() formGroupName: string;
 }

@@ -17,6 +17,7 @@
             [fieldColumnLayout]="fieldColumnLayout"
             [gapColumnLayout]="gapColumnLayout"
             [unifiedLayout]="unifiedLayout"
+            [inlineColumnLayout]="inlineColumnLayout"
         >
             <ng-container *ngFor="let field of formControlItems; trackBy: _trackFn">
                 <ng-container
@@ -57,7 +58,7 @@
                         <ng-container *ngFor="let groupField of _getOrderedControls(field.controls)">
                             <ng-container
                                 *fdpDynamicFormControlField="
-                                    field;
+                                    groupField;
                                     show: shouldShowFields[groupField.formItem?.name] !== false
                                 "
                             >
@@ -75,7 +76,7 @@
                     </fdp-form-field-group>
                 </ng-template>
             </ng-container>
-            <fdp-form-field [column]="1" [rank]="formControlItems.length + 1">
+            <fdp-form-field *ngIf="!noAdditionalContent" [column]="1" [rank]="formControlItems.length + 1">
                 <!-- For user-defined elements, like submit button -->
                 <ng-container *ngTemplateOutlet="renderer"></ng-container>
             </fdp-form-field>

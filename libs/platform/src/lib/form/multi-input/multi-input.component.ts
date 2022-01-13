@@ -30,7 +30,8 @@ import {
     FormField,
     FormFieldControl,
     MultiInputDataSource,
-    MultiInputOption
+    MultiInputOption,
+    isFunction
 } from '@fundamental-ngx/platform/shared';
 import { ListComponent, SelectionType } from '@fundamental-ngx/platform/list';
 
@@ -135,6 +136,10 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     @Input()
     closeOnOutsideClick = true;
 
+    /** Callback function when add-on button clicked. */
+    @Input()
+    addOnButtonClickFn: () => void;
+
     /** @hidden */
     @ViewChild(TokenizerComponent)
     tokenizer: TokenizerComponent;
@@ -231,6 +236,11 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
 
     /** @hidden */
     addOnButtonClick(): void {
+        if (isFunction(this.addOnButtonClickFn)) {
+            this.addOnButtonClickFn();
+            return;
+        }
+
         this.showList(!this.isOpen);
     }
 

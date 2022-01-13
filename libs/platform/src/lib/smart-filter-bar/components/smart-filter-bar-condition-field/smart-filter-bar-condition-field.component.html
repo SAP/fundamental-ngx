@@ -1,0 +1,15 @@
+<ng-container [formGroup]="form">
+    <ng-container [formGroupName]="formGroupName">
+        <fdp-multi-input
+            [addOnButtonClickFn]="openConditionsDialog"
+            [autofocus]="true"
+            [contentDensity]="formItem.guiOptions?.contentDensity"
+            [dataSource]="formItem.choices"
+            [formControlName]="name"
+            [name]="name"
+            [placeholder]="formItem.placeholder || formItem.message"
+            displayKey="displayValue"
+        >
+        </fdp-multi-input>
+    </ng-container>
+</ng-container>

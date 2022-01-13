@@ -72,6 +72,7 @@ import {
     DefaultVerticalLabelLayout,
     FORM_GROUP_CHILD_FIELD_TOKEN
 } from './constants';
+import { normalizeColumnLayout, generateColumnClass } from './helpers';
 
 export const formGroupProvider: Provider = {
     provide: FormGroupContainer,
@@ -210,6 +211,25 @@ export class FormGroupComponent
         this.fieldColumnLayout =
             this._labelLayout === 'horizontal' ? DefaultHorizontalFieldLayout : DefaultVerticalFieldLayout;
     }
+
+    /**
+     * Defines column layout for inline items.
+     */
+    @Input()
+    set inlineColumnLayout(value: ColumnLayout) {
+        this._inlineColumnLayout = normalizeColumnLayout(value);
+        this._updateInlineColumnLayout();
+    }
+
+    get inlineColumnLayout(): ColumnLayout {
+        return this._inlineColumnLayout;
+    }
+
+    /** @hidden */
+    _inlineColumnLayoutClass: string;
+
+    /** @hidden */
+    private _inlineColumnLayout = DefaultVerticalFieldLayout;
 
     /**
      * Defines label's column layout.
@@ -394,6 +414,7 @@ export class FormGroupComponent
             );
         }
         this.buildComponentCssClass();
+        this._updateInlineColumnLayout();
     }
 
     /** @hidden */
@@ -665,5 +686,10 @@ export class FormGroupComponent
             .map((child) => (isFieldGroupWrapperChild(child) ? child.fieldRenderer : child));
 
         return children.filter((child) => this._formGroupDirectChildren.includes(child));
+    }
+
+    /** @hidden */
+    private _updateInlineColumnLayout(): void {
+        this._inlineColumnLayoutClass = generateColumnClass(this.inlineColumnLayout);
     }
 }

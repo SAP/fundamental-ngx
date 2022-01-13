@@ -4,11 +4,13 @@ import {
     FilterNumberStrategy,
     FilterStringStrategy,
     FilterBooleanStrategy,
-    FilterDefaultStrategy
+    FilterDefaultStrategy,
+    FilterableColumnDataType
 } from '../enums';
 
 interface BaseCollectionFilter<T> {
     field: string;
+    type?: FilterableColumnDataType;
     value: T;
     value2?: T;
     exclude?: boolean;
@@ -45,3 +47,13 @@ export type CollectionFilter =
     | CollectionSelectFilter
     | CollectionBooleanFilter
     | CollectionCustomFilter;
+
+export type CollectionFilterGroupStrategy = 'and' | 'or';
+
+export type CollectionFilterAndGroup = CollectionFilter | CollectionFilterGroup;
+
+export interface CollectionFilterGroup {
+    filters: CollectionFilter[];
+    strategy: CollectionFilterGroupStrategy;
+    field: string;
+}

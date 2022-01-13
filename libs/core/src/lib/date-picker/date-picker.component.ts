@@ -55,7 +55,7 @@ let datePickerCounter = 0;
     host: {
         '(blur)': 'onTouched()',
         '[class.fd-date-picker]': 'true',
-        '[class.fd-date-picker-custom]': 'true'
+        '[class.fd-date-picker-custom]': 'inline'
     },
     providers: [
         {
@@ -271,6 +271,10 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
     /** Whether the date picker is open. Can be used through two-way binding. */
     @Input()
     isOpen = false;
+
+    /** Should date picker be inlined. */
+    @Input()
+    inline = true;
 
     /** Event emitted when the state of the isOpen property changes. */
     @Output()

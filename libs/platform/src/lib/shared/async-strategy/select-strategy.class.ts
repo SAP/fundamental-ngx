@@ -12,18 +12,18 @@ import { ValueStrategy } from './value-strategy.class';
  * @param obj object to get value from
  * @returns appropriate strategy to retrieve value from the object
  */
-export function selectStrategy(obj: Observable<any> | Promise<any> | (() => void)): SubscriptionStrategy {
+export function selectStrategy<T = any>(obj: Observable<T> | Promise<T> | (() => void) | T): SubscriptionStrategy<T> {
     if (isPromise(obj)) {
-        return new PromiseStrategy();
+        return new PromiseStrategy<T>();
     }
 
     if (isSubscribable(obj)) {
-        return new ObservableStrategy();
+        return new ObservableStrategy<T>();
     }
 
     if (isFunction(obj)) {
-        return new FunctionStrategy();
+        return new FunctionStrategy<T>();
     }
 
-    return new ValueStrategy();
+    return new ValueStrategy<T>();
 }

@@ -2,7 +2,7 @@ import { Observable, Subject } from 'rxjs';
 
 export class DialogRefBase<T, P = any> {
     /** @hidden */
-    protected readonly _afterClosed = new Subject<any>();
+    protected readonly _afterClosed = new Subject<P>();
 
     /** @hidden */
     protected readonly _afterLoaded = new Subject<any>();
@@ -23,7 +23,7 @@ export class DialogRefBase<T, P = any> {
      * Closes the dialog and passes the argument to the afterClosed observable.
      * @param result Value passed back to the observable as a result.
      */
-    close(result?: any): void {
+    close(result?: P): void {
         this._afterClosed.next(result);
         this._afterClosed.complete();
     }

@@ -1,4 +1,5 @@
 export enum FilterType {
+    INPUT = 'input',
     SINGLE = 'single-select',
     MULTI = 'multi-select',
     CATEGORY = 'category',

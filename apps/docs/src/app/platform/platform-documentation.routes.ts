@@ -330,6 +330,13 @@ export const ROUTES: Routes = [
                     import('./component-docs/platform-icon-tab-bar/platform-icon-tab-bar-docs.module').then(
                         (m) => m.PlatformIconTabBarDocsModule
                     )
+            },
+            {
+                path: 'smart-filter-bar',
+                loadChildren: () =>
+                    import('./component-docs/platform-smart-filter-bar/platform-smart-filter-bar.module').then(
+                        (m) => m.PlatformSmartFilterBarDocsModule
+                    )
             }
         ]
     }

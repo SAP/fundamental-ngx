@@ -828,6 +828,20 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this._cdr.markForCheck();
     }
 
+    /**
+     * Toggle row checked state.
+     * @param rowIndex Index of the row.
+     */
+    toggleSelectableRow(rowIndex: number): void {
+        const row = this._tableRows[rowIndex];
+
+        if (!row) {
+            return;
+        }
+
+        this._toggleSelectableRow(row);
+    }
+
     /** Remove the row navigation */
     removeRowNavigation(rowIndex: number): void {
         const row = this._tableRows[rowIndex];
@@ -889,6 +903,11 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         const scrollbarSizeInPx = 12;
 
         return this._tableWidthPx - this._fixedColumnsPadding - scrollbarSizeInPx - 1;
+    }
+
+    /** Get table data source */
+    getDataSource(): TableDataSource<T> {
+        return this._tableDataSource;
     }
 
     // Private API
@@ -1219,6 +1238,11 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     _columnTrackBy(index: number, column: TableColumn): string {
         return column.name;
+    }
+
+    /** Fetch data source data. */
+    fetch(): void {
+        this._tableDataSource.fetch(this.getTableState());
     }
 
     /** @hidden */

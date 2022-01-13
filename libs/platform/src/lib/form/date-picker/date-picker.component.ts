@@ -204,6 +204,10 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     @Input()
     isOpen = false;
 
+    /** Should date picker be inlined. */
+    @Input()
+    inline = true;
+
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
     readonly isOpenChange = new EventEmitter<boolean>();

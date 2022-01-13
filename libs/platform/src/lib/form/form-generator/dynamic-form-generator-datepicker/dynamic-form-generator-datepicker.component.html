@@ -5,6 +5,7 @@
             [placeholder]="formItem.placeholder || formItem.message"
             [name]="name"
             [formControlName]="name"
+            [inline]="formItem.guiOptions?.inline !== false"
             [allowNull]="false"
         ></fdp-date-picker>
     </ng-container>
