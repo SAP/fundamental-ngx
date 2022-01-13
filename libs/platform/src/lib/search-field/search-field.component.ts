@@ -148,6 +148,20 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         this._showCategoryDropdown = Array.isArray(value) && value.length > 0;
     }
 
+    /** Current category, value should be present in categories array */
+    @Input()
+    set currentCategory(value: ValueLabelItem) {
+        if (
+            this._showCategoryDropdown &&
+            this.categories.find((category) => category.label === value.label && category.value === value.value)
+        ) {
+            this.setCurrentCategory(value);
+        }
+    }
+    get currentCategory(): ValueLabelItem {
+        return this._currentCategory;
+    }
+
     /** Set label for category dropdown button. */
     @Input()
     categoryLabel = 'Category';
@@ -298,7 +312,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     get searchFieldValue(): SearchInput {
         return {
             text: this.inputText,
-            category: this._currentCategory?.value ? this._currentCategory.value : null
+            category: this._currentCategory.value || null
         };
     }
 
@@ -397,12 +411,11 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         if (this.dataSource) {
             const match = new Map();
             match.set('keyword', inputStr);
-            match.set(
-                'category',
-                this._currentCategory && this._currentCategory.value ? this._currentCategory.value : null
-            );
+            match.set('category', this._currentCategory?.value || null);
+
             this.dataSource.match(match);
         }
+
         this._updateSearchAnnoucementText();
     }
 
