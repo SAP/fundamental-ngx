@@ -286,12 +286,17 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     /** @hidden */
     get _showNavigationButtonInPageIndicatorContainer(): boolean {
-        return this.navigatorInPageIndicator && this.pageIndicatorsCountArray.length > 0;
+        return this.navigatorInPageIndicator && this.pageIndicatorsCountArray.length > 1;
     }
 
     /** @hidden */
     get _showNavigationButtonInContent(): boolean {
-        return !this.navigatorInPageIndicator && this.pageIndicatorsCountArray.length > 0;
+        return !this.navigatorInPageIndicator && this.pageIndicatorsCountArray.length > 1;
+    }
+
+    /** @hidden */
+    get _showPageIndicatorContainer(): boolean {
+        return this.pageIndicatorContainer && (this.pageIndicatorsCountArray.length > 0 || this.numericIndicator);
     }
 
     /** @hidden */
@@ -459,7 +464,9 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
             arrayLength = this.slides.length - this.visibleSlidesCount + 1;
         }
 
-        this.pageIndicatorsCountArray = new Array(arrayLength > 0 ? arrayLength : 0);
+        const pageIndicatorsIfZeroCount = this.slides.length === 0 ? 0 : 1;
+
+        this.pageIndicatorsCountArray = new Array(arrayLength > 0 ? arrayLength : pageIndicatorsIfZeroCount);
 
         this._goToFirstItem();
 
