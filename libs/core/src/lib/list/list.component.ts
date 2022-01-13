@@ -17,7 +17,7 @@ import {
 } from '@angular/core';
 import { ListItemComponent } from './list-item/list-item.component';
 import { merge, Observable, Subject, Subscription } from 'rxjs';
-import { mapTo, startWith, takeUntil } from 'rxjs/operators';
+import { map, startWith, takeUntil } from 'rxjs/operators';
 import { FocusEscapeDirection, KeyboardSupportService } from '@fundamental-ngx/core/utils';
 import { ListGroupHeaderDirective } from './directives/list-group-header.directive';
 import { ListFocusItem } from './list-focus-item.model';
@@ -161,8 +161,12 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
     }
 
     /** Set fake focus on element with passed index */
-    setItemActive(index: number): void {
-        this._keyboardSupportService.keyManager.setActiveItem(index);
+    setItemActive(index: number, updateOnly = false): void {
+        if (updateOnly) {
+            this._keyboardSupportService.keyManager.updateActiveItem(index);
+        } else {
+            this._keyboardSupportService.keyManager.setActiveItem(index);
+        }
     }
 
     /** @hidden */
@@ -183,12 +187,16 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
         this._onRefresh$.next();
         /** Merge refresh/destroy observables */
         const refreshObs = merge(this._onRefresh$, this._onDestroy$);
-        const interactionChangesIndexes: Observable<number>[] = this._focusItems.map((item, index) =>
-            merge(item._clicked$, item._focused$).pipe(mapTo(index))
+        const interactionChangesIndexes: Observable<{ index: number; updateOnly: boolean }>[] = this._focusItems.map(
+            (item, index) =>
+                merge(
+                    item._clicked$.pipe(map(() => ({ index, updateOnly: false }))),
+                    item._focused$.pipe(map(({ focusedWithin }) => ({ index, updateOnly: focusedWithin })))
+                )
         );
         merge(...interactionChangesIndexes)
             .pipe(takeUntil(refreshObs))
-            .subscribe((index) => this.setItemActive(index));
+            .subscribe(({ index, updateOnly }) => this.setItemActive(index, updateOnly));
     }
 
     /** @hidden */

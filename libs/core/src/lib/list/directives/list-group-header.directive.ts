@@ -8,7 +8,6 @@ import {
     Input,
     Output
 } from '@angular/core';
-import { coerceNumberProperty } from '@angular/cdk/coercion';
 
 import { ListFocusItem } from '../list-focus-item.model';
 
@@ -34,21 +33,9 @@ export class ListGroupHeaderDirective extends ListFocusItem {
     @HostBinding('attr.id')
     nativeElementId: string | null = `fd-list-group-header-${++uniqueId}`;
 
-    /** tab index attribute */
-    @Input()
-    @HostBinding('attr.tabindex')
-    get tabindex(): number {
-        return this._tabIndex;
-    }
-    set tabindex(value: number) {
-        this._tabIndex = coerceNumberProperty(value, -1);
-    }
     /** @hidden Implementation of KeyboardSupportItemInterface */
     @Output()
     keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
-
-    /** @hidden */
-    private _tabIndex = -1;
 
     constructor(readonly elementRef: ElementRef) {
         super(elementRef);

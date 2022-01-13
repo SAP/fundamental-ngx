@@ -18,7 +18,6 @@ import {
     SimpleChanges,
     ViewEncapsulation
 } from '@angular/core';
-import { coerceNumberProperty } from '@angular/cdk/coercion';
 
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
@@ -75,19 +74,6 @@ export class ListItemComponent
      */
     @Input()
     ariaDescribedBy: string;
-
-    /** tab index attribute */
-    @Input()
-    @HostBinding('attr.tabindex')
-    get tabindex(): number {
-        if (this._isFirstItem && isNaN(this._tabIndex)) {
-            return 0;
-        }
-        return this._tabIndex ?? -1;
-    }
-    set tabindex(value: number) {
-        this._tabIndex = coerceNumberProperty(value, -1);
-    }
 
     /** Whether there is no data inside list item */
     @Input()
@@ -161,9 +147,6 @@ export class ListItemComponent
     private readonly _onLinkListChanged$ = new Subject<void>();
 
     /** @hidden */
-    private _tabIndex: number | undefined;
-
-    /** @hidden */
     screenReaderContent = '';
 
     /** @hidden group header id, that is being set by parent list component */
@@ -172,7 +155,7 @@ export class ListItemComponent
     /** @hidden */
     @HostBinding('attr.aria-describedBy')
     get getCombinedAriaDescribedBy(): string {
-        let describedBy = this.uniqueId + '-screenReader-content';
+        let describedBy = this._uniqueId + '-screenReader-content';
         if (this.ariaDescribedBy) {
             describedBy += ' ' + this.ariaDescribedBy;
         }
@@ -182,7 +165,8 @@ export class ListItemComponent
         return describedBy;
     }
 
-    readonly uniqueId = 'fdp-list-item-' + ++listItemUniqueId;
+    /** @hidden */
+    readonly _uniqueId = 'fdp-list-item-' + ++listItemUniqueId;
 
     constructor(public elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) {
         super(elementRef);
