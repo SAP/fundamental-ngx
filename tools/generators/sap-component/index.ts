@@ -142,6 +142,7 @@ function addDocsComponents(schema: SapComponentSchema): Rule {
             ...names(schema.name),
             moduleName: getModuleName(schema),
             projectTag: getProjectTag(schema),
+            projectName: schema.project,
             startCaseName: startCaseName(schema.name)
         }),
         move(`apps/docs/src/app/${getProjectDirName(schema)}/component-docs/${schema.name}`)
@@ -183,6 +184,12 @@ function updateLibraryData(schema: SapComponentSchema): Rule {
             replaceContentInFile(tree, `${getLibraryDirectory(schema)}/tsconfig.spec.json`, [
                 ['"src/test.ts"', '"./test.ts"']
             ]);
+            replaceContentInFile(tree, `/tsconfig.base.json`, [
+                [
+                    `["libs/${schema.project}/src/lib/${schema.name}/src/index.ts"]`,
+                    `["libs/${schema.project}/src/lib/${schema.name}/index.ts"]`
+                ]
+            ]);
             // renaming module class name
             const oldModuleName = strings.classify(oldName);
             replaceContentInFile(tree, newModulePath, [[oldModuleName, getModuleName(schema)]]);
@@ -202,7 +209,7 @@ function updateLibraryData(schema: SapComponentSchema): Rule {
                 tree,
                 `${getLibraryDirectory(schema, false)}/${moduleName}`,
                 getModuleName(schema) + 'Module',
-                `@fundamental-ngx/${getProjectTag(schema)}/${schema.name}`
+                `@fundamental-ngx/${schema.project}/${schema.name}`
             );
         }
     ]);
