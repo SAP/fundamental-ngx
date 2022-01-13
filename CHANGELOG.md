@@ -1,4 +1,11 @@
 
+### [0.32.8](https://github.com/SAP/fundamental-ngx/compare/v0.32.7...v0.32.8) (2022-01-13)
+
+
+### Bug Fixes
+
+* **core:** fix no elements in sequence error ([3f2d295](https://github.com/SAP/fundamental-ngx/commit/3f2d295a756d974f8c108958642585d7371513b4))
+
 ### [0.32.7](https://github.com/SAP/fundamental-ngx/compare/v0.32.6...v0.32.7) (2022-01-11)
 
 
