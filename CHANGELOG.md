@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.270 (2022-01-13)
+
+
+### Bug Fixes
+
+* **core:** datetime vertical overflow ([#7537](https://github.com/SAP/fundamental-ngx/issues/7537)) ([671f83e](https://github.com/SAP/fundamental-ngx/commit/671f83eb6c7587cc18f72e6c8b4a31d2c36d41be))
+
 ## 0.33.0-rc.269 (2022-01-13)
 
 
