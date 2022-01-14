@@ -9,6 +9,8 @@
         "@angular/cdk",
         "@sap-theming/theming-base-content",
         "focus-trap",
-        "fundamental-styles"
+        "fundamental-styles",
+        "lodash-es",
+        "fast-deep-equal"
     ]
 }
