@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.274 (2022-01-14)
+
+
+### Bug Fixes
+
+* **core/platform:** datetime-picker "invalid" state visibiity ([#7509](https://github.com/SAP/fundamental-ngx/issues/7509)) ([074c457](https://github.com/SAP/fundamental-ngx/commit/074c45764ed55d02f2d07e081b544c5261155b08))
+
 ## 0.33.0-rc.273 (2022-01-14)
 
 
