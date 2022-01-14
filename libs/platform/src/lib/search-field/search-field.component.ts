@@ -7,6 +7,7 @@ import {
     EventEmitter,
     HostListener,
     Injector,
+    Inject,
     Input,
     OnDestroy,
     OnInit,
@@ -21,14 +22,15 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@angular/cdk/keycodes';
 import { ConnectedPosition, Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { FocusableOption, FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { Direction } from '@angular/cdk/bidi';
 
-import { fromEvent, isObservable, Observable, of, Subject, Subscription } from 'rxjs';
-import { filter, map, take, takeUntil, tap } from 'rxjs/operators';
+import { fromEvent, isObservable, merge, Observable, of, Subject } from 'rxjs';
+import { filter, map, take, takeUntil } from 'rxjs/operators';
 
 import { DynamicComponentService, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
@@ -203,7 +205,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
 
     /** @hidden Focus state */
     get isFocused(): boolean {
-        return this._isFocused;
+        return this._document?.activeElement === this.inputField?.nativeElement;
     }
 
     /**
@@ -279,22 +281,10 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     private _suggestionkeyManager: FocusKeyManager<SearchFieldSuggestionDirective>;
 
     /** @hidden */
-    private _isFocused = false;
+    private readonly _onDestroy$ = new Subject<void>();
 
     /** @hidden */
-    private _rtlChangeSubscription = Subscription.EMPTY;
-
-    /** @hidden */
-    private _outsideClickSubscription = Subscription.EMPTY;
-
-    /** @hidden */
-    private _dataSourceSubscription = Subscription.EMPTY;
-
-    /** @hidden */
-    private _suggestionSubscription = Subscription.EMPTY;
-
-    /** @hidden */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _dataSourceChanged$ = new Subject<void>();
 
     @ViewChild('categoryDropdown', { static: false }) categoryDropdown: PopoverComponent;
     @ViewChild('inputGroup', { static: false }) inputGroup: ElementRef<HTMLElement>;
@@ -318,7 +308,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         private readonly _injector: Injector,
         protected readonly _cd: ChangeDetectorRef,
         @Optional() private readonly _rtl: RtlService,
-        private readonly _elementRef: ElementRef,
+        @Inject(DOCUMENT) private readonly _document: Document,
         private readonly _liveAnnouncer: LiveAnnouncer,
         readonly _dynamicComponentService: DynamicComponentService
     ) {
@@ -335,13 +325,11 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         this._isRefresh = true;
 
         if (this._rtl) {
-            this._rtlChangeSubscription = this._rtl.rtl.subscribe((isRtl: boolean) => {
+            this._rtl.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl: boolean) => {
                 this._dir = isRtl ? 'rtl' : 'ltr';
                 this._cd.detectChanges();
             });
         }
-
-        this._listenElementEvents();
 
         if (this.mobile) {
             this._setUpMobileMode();
@@ -354,10 +342,6 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
             this._suggestionOverlayRef.dispose();
             this._suggestionOverlayRef = null;
         }
-        this._rtlChangeSubscription.unsubscribe();
-        this._outsideClickSubscription.unsubscribe();
-        this._dataSourceSubscription.unsubscribe();
-        this._suggestionSubscription.unsubscribe();
         this._onDestroy$.next();
     }
 
@@ -382,18 +366,6 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         } else if (KeyUtil.isKeyCode(event, [ESCAPE])) {
             this.closeSuggestionMenu(true);
         }
-    }
-
-    /** Capturing focus in mobile mode */
-    onFocus(): void {
-        this._isFocused = true;
-        this._cd.markForCheck();
-    }
-
-    /** Capturing blur in mobile mode */
-    onBlur(): void {
-        this._isFocused = false;
-        this._cd.markForCheck();
     }
 
     /**
@@ -464,7 +436,6 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         this.searchSubmit.emit(this.searchFieldValue);
 
         this._isRefresh = true;
-        this._isFocused = false;
 
         if (this.inputText) {
             this._isSearchDone = true;
@@ -501,7 +472,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         this._suggestionOverlayRef.attach(this._suggestionPortal);
 
         // add subscription to capture outside clicks
-        this._outsideClickSubscription = fromEvent<MouseEvent>(document, 'click')
+        fromEvent<MouseEvent>(document, 'click')
             .pipe(
                 filter((event) => {
                     const target = event.target as HTMLElement;
@@ -511,7 +482,8 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
                         this._showDropdown
                     );
                 }),
-                take(1)
+                take(1),
+                takeUntil(this._onDestroy$)
             )
             .subscribe((event) => {
                 const target = event.target as HTMLElement;
@@ -566,10 +538,10 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         this.cancelSearch.emit(this.searchFieldValue);
 
         this._isRefresh = true;
-        this._isFocused = false;
         this._isSearchDone = false;
 
         this.closeSuggestionMenu(false);
+        this.inputField.nativeElement.focus();
     }
 
     /** @hidden */
@@ -604,9 +576,13 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
 
     /** @hidden */
     _initializeDataSource(dataSource: SearchFieldDataSource<any>): void {
-        this._dataSourceSubscription = dataSource.open().subscribe((data) => {
-            this._dropdownValues$ = of(data);
-        });
+        this._dataSourceChanged$.next();
+        dataSource
+            .open()
+            .pipe(takeUntil(merge(this._onDestroy$, this._dataSourceChanged$)))
+            .subscribe((data) => {
+                this._dropdownValues$ = of(data);
+            });
         this._dataSource = dataSource;
     }
 
@@ -616,7 +592,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
      */
     private _getSuggestionsLength(): number {
         let count = 0;
-        this._suggestionSubscription = this._dropdownValues$.subscribe((suggestions) => {
+        this._dropdownValues$.pipe(takeUntil(this._onDestroy$)).subscribe((suggestions) => {
             suggestions?.forEach((suggestion) => {
                 if (this.inputText && suggestion?.toLowerCase().indexOf(this.inputText?.trim()?.toLowerCase()) > -1) {
                     count++;
@@ -625,33 +601,6 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         });
 
         return count;
-    }
-
-    /** @hidden */
-    private _listenElementEvents(): void {
-        fromEvent(this._elementRef.nativeElement, 'focus', { capture: true })
-            .pipe(
-                map((event: MouseEvent) => {
-                    const target = event.target as HTMLElement;
-                    if (!target.id || target.id.includes('fd-button-bar-id')) {
-                        return;
-                    }
-
-                    this._isFocused = true;
-                    this._cd.markForCheck();
-                }),
-                takeUntil(this._onDestroy$)
-            )
-            .subscribe();
-        fromEvent(this._elementRef.nativeElement, 'blur', { capture: true })
-            .pipe(
-                tap(() => {
-                    this._isFocused = false;
-                    this._cd.markForCheck();
-                }),
-                takeUntil(this._onDestroy$)
-            )
-            .subscribe();
     }
 
     /** @hidden */
