@@ -455,12 +455,15 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         if (formFieldControl?.ngControl?.control) {
             const control = formFieldControl.ngControl.control;
 
-            if (
-                this.required &&
-                !this.validators.includes(Validators.required) &&
-                !this.validators.includes(Validators.requiredTrue)
-            ) {
+            const hasRequiredValidator =
+                this.validators.includes(Validators.required) || this.validators.includes(Validators.requiredTrue);
+
+            if (this.required && !hasRequiredValidator) {
                 this.validators.push(Validators.required);
+            }
+
+            if (hasRequiredValidator) {
+                this.required = true;
             }
 
             // if form control is disabled, in reactive form approach
