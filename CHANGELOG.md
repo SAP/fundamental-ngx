@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.273 (2022-01-14)
+
+
+### Bug Fixes
+
+* **platform:** search-field - fix focus ([#7478](https://github.com/SAP/fundamental-ngx/issues/7478)) ([06ab52d](https://github.com/SAP/fundamental-ngx/commit/06ab52d3ce11b26f0cc18832f5e612f14483c4bd))
+
 ## 0.33.0-rc.272 (2022-01-13)
 
 ## 0.33.0-rc.271 (2022-01-13)
