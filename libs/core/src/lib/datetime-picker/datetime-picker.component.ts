@@ -127,7 +127,7 @@ export class DatetimePickerComponent<D>
         this._popoverFormMessage.triggers = triggers;
     }
     /** @hidden */
-    _messageTriggers: string[] = ['mouseenter', 'mouseleave'];
+    _messageTriggers: string[] = ['focusin', 'focusout'];
 
     /**
      * Whether the time component shows minutes.
