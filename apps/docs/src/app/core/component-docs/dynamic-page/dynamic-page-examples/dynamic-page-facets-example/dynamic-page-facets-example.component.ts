@@ -22,7 +22,6 @@ import { Component } from '@angular/core';
 })
 export class DynamicPageFacetsExampleComponent {
     visible = false;
-    facet = false;
 
     onCollapseChange(): void {
         console.log('collapse changed');
