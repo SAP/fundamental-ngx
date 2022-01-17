@@ -42,6 +42,12 @@ export class WizardDialogExampleComponent {
         });
     }
 
+    // Handle focus on key press
+    /** @hidden */
+    handleFocus(event: KeyboardEvent, index: number): void {
+        this._wizardService.progressBarKeyHandler(event, this.steps, index);
+    }
+
     goToStep(step: number): void {
         switch (step) {
             case 1: {

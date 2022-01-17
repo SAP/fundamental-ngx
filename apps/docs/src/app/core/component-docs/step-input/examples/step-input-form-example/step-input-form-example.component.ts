@@ -6,10 +6,10 @@ import { FormControl } from '@angular/forms';
     template: `
         <div class="step-input-example-container">
             <div class="step-input-example">
-                <label fd-form-label for="reactive-form-input" required="true">Reactive forms</label>
+                <label fd-form-label for="reactive-form-input" [required]="true">Reactive forms</label>
                 <fd-step-input
                     inputId="reactive-form-input"
-                    required="true"
+                    [required]="true"
                     [formControl]="stepInputFormControl1"
                 ></fd-step-input>
                 <table [style.fontSize]="'smaller'">

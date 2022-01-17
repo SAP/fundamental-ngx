@@ -6,7 +6,7 @@
         fd-list-item
         [attr.id]="id"
         [selected]="_selected"
-        tabindex="-1"
+        [tabindex]="-1"
         (click)="_onItemClick()"
         (keydown)="_onKeyDown($event)"
         (keyup)="_onKeyUp($event)"
@@ -38,7 +38,7 @@
         [attr.id]="id"
         [selected]="_selected"
         (keydown)="_onKeyDown($event)"
-        tabindex="-1"
+        [tabindex]="-1"
         (keyup)="_onKeyUp($event)"
         [attr.aria-label]="ariaLabel"
         [attr.aria-level]="ariaLevel"
@@ -56,7 +56,7 @@
         #listItem
         fd-list-item
         [attr.id]="id"
-        tabindex="0"
+        [tabindex]="0"
         [attr.aria-label]="ariaLabel"
         [attr.aria-level]="ariaLevel"
         [attr.aria-posinet]="ariaPosinet"

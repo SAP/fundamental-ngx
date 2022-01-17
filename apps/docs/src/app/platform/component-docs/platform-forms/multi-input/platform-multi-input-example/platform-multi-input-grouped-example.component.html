@@ -5,7 +5,7 @@
             label="Default Multi Input Field"
             id="input-grouped"
             name="reactiveFormInput"
-            rank="1"
+            [rank]="1"
             placeholder="Field placeholder text"
         >
             <fdp-multi-input
@@ -16,7 +16,7 @@
                 name="fdp-name"
                 [dataSource]="list_elements"
                 displayKey="name"
-                group="true"
+                [group]="true"
                 groupKey="type"
             >
             </fdp-multi-input>

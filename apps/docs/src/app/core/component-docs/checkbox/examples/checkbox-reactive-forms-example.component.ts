@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
             <fd-checkbox
                 formControlName="acceptAll"
                 label="Accept all"
-                tristate="true"
+                [tristate]="true"
                 [tristateSelectable]="false"
             ></fd-checkbox>
             <fieldset formGroupName="agreements">

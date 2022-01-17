@@ -1,5 +1,5 @@
 <fdp-form-group [noLabelLayout]="false">
-    <fdp-form-field id="columns" label="Two Columns" required="true">
+    <fdp-form-field id="columns" label="Two Columns" [required]="true">
         <fdp-multi-combobox
             name="columns"
             placeholder="Type some text..."
@@ -7,7 +7,7 @@
             [dataSource]="dataSource"
             displayKey="name"
             secondaryKey="type"
-            showSecondaryText="true"
+            [showSecondaryText]="true"
             secondaryTextAlignment="right"
             (selectionChange)="onSelect($event)"
             [selectedItems]="selectedItems"

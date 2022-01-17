@@ -5,7 +5,7 @@
         id="input2"
         name="compactFileUploader"
         zone="zLeft"
-        rank="1"
+        [rank]="1"
         placeholder="Field placeholder text"
     >
         <fdp-file-uploader
@@ -18,7 +18,7 @@
             buttonAriaLabel="browse file"
             accept=".png,.jpg,.jpeg"
             [(ngModel)]="files"
-            multiple="true"
+            [multiple]="true"
             contentDensity="compact"
             (selectionChange)="handleFileSelection($event)"
         ></fdp-file-uploader>

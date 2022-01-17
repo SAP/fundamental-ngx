@@ -27,7 +27,7 @@
     <fdp-input-group-addon-body
         *ngFor="let addon of _afterInputAddons"
         [contentDensity]="contentDensity"
-        [hasButton]="addon.button"
+        [hasButton]="!!addon.button"
     >
         <ng-container *ngTemplateOutlet="addon.contentTemplateRef"></ng-container>
     </fdp-input-group-addon-body>

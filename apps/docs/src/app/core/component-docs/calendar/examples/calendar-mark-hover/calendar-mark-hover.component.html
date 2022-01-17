@@ -2,7 +2,7 @@
 <br />
 <br />
 Start:
-{{ rangeDate.start | date: 'shortDate' }}
+{{ rangeDate.start.toDate() | date: 'shortDate' }}
 <br />
 End:
-{{ rangeDate.end | date: 'shortDate' }}
+{{ rangeDate.end.toDate() | date: 'shortDate' }}

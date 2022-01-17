@@ -9,7 +9,7 @@
                 data-tag="actionbar__back-button"
                 [attr.title]="backButtonLabel"
                 [glyph]="navigationArrow$ | async"
-                (click)="backButtonClick.emit($event)"
+                (click)="backButtonClick.emit()"
             ></button>
         </div>
         <h3 fd-action-bar-title [attr.title]="title" data-tag="actionbar__title">

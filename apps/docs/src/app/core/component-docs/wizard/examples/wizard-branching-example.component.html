@@ -42,7 +42,7 @@
                         </li>
                         <li
                             fd-wizard-step
-                            branching="true"
+                            [branching]="true"
                             [status]="step2status"
                             (statusChange)="statusChanged(2, $event)"
                             label="Step 2: Payment Selection"

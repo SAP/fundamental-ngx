@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'fd-avatar-background-image-with-alter-options-example',
+    selector: 'fd-avatar-default-image-with-alternative-options-example',
     templateUrl: './avatar-default-image-with-alternative-options-example.component.html',
     styles: [
         `

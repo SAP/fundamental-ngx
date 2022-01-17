@@ -5,7 +5,7 @@
             label="Default Multi Input Field"
             id="input-complex"
             name="reactiveFormInput"
-            rank="1"
+            [rank]="1"
             placeholder="Field placeholder text"
         >
             <fdp-multi-input
@@ -17,8 +17,8 @@
                 [dataSource]="list_elements"
                 displayKey="state"
                 description="description"
-                showSecondaryText="true"
-                hasByLine="true"
+                [showSecondaryText]="true"
+                [hasByLine]="true"
             >
             </fdp-multi-input>
         </fdp-form-field>

@@ -1,4 +1,4 @@
-<fd-toolbar fdType="info" active="true">
+<fd-toolbar fdType="info" [active]="true">
     <label fd-toolbar-label>{{ _selectedItems }} : is selected</label>
 </fd-toolbar>
 <fdp-list
@@ -7,7 +7,7 @@
     [navigated]="true"
     [rowSelection]="true"
     selectionMode="single"
-    noBorder="true"
+    [noBorder]="true"
     [(ngModel)]="_selectedItems"
     (selectedItemChange)="_showItemInfo($event)"
     [ariaMultiselectable]="false"

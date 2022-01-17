@@ -1,5 +1,5 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { coerceArray, coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
+import { BooleanInput, coerceArray, coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -68,7 +68,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
 
     /** Whether component should be shown in the mobile mode. */
     @Input()
-    set mobile(value: boolean) {
+    set mobile(value: BooleanInput) {
         this._mobile = coerceBooleanProperty(value);
     }
     get mobile(): boolean {

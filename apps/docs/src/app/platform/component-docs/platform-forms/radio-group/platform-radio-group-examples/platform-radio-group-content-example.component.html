@@ -1,7 +1,7 @@
 <h3>Use With Reactive Form</h3>
 <p>Compact radio group with 'default' state and with default selection</p>
 <fdp-form-group [formGroup]="form1">
-    <fdp-form-field #ffl1 id="radioc1" rank="1">
+    <fdp-form-field #ffl1 id="radioc1" [rank]="1">
         <fdp-radio-group
             name="radioc1"
             contentDensity="compact"
@@ -21,7 +21,7 @@
 
 <p>Inline cozy radio group</p>
 <fdp-form-group [formGroup]="form2">
-    <fdp-form-field #ffl2 id="radioc2" rank="1">
+    <fdp-form-field #ffl2 id="radioc2" [rank]="1">
         <fdp-radio-group name="radioc2" contentDensity="cozy" [isInline]="true" [formControl]="ffl2.formControl">
             <fdp-radio-button value="winter">Winter</fdp-radio-button>
             <fdp-radio-button value="spring">Spring</fdp-radio-button>
@@ -35,7 +35,7 @@
 
 <p>Radio group with default property values</p>
 <fdp-form-group [formGroup]="form3" [object]="form3Data">
-    <fdp-form-field #ffl3 id="radioc3" rank="1">
+    <fdp-form-field #ffl3 id="radioc3" [rank]="1">
         <fdp-radio-group name="radioc3" [isInline]="true" [formControl]="ffl3.formControl">
             <fdp-radio-button value="winter">Winter</fdp-radio-button>
             <fdp-radio-button value="spring">Spring</fdp-radio-button>
@@ -50,7 +50,7 @@
 <p>Radio group with disabled button and validation error</p>
 <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
     <fdp-form-group [formGroup]="form4">
-        <fdp-form-field #ffl4 id="radioc4" rank="1" required="true" label="select your favorite month">
+        <fdp-form-field #ffl4 id="radioc4" [rank]="1" [required]="true" label="select your favorite month">
             <fdp-radio-group
                 name="radioc4"
                 contentDensity="compact"
@@ -85,7 +85,7 @@
 
 <p>Radio group using FormGroup and FormControl</p>
 <fdp-form-group [formGroup]="form5">
-    <fdp-form-field id="radioc5" rank="1">
+    <fdp-form-field id="radioc5" [rank]="1">
         <fdp-radio-group
             name="radioc5"
             contentDensity="compact"
@@ -93,7 +93,7 @@
             [isInline]="false"
             formControlName="month"
         >
-            <fdp-radio-button value="january" disabled="true">January</fdp-radio-button>
+            <fdp-radio-button value="january" [disabled]="true">January</fdp-radio-button>
             <fdp-radio-button value="february">February</fdp-radio-button>
             <fdp-radio-button value="march">March</fdp-radio-button>
             <fdp-radio-button value="april">April</fdp-radio-button>
@@ -106,7 +106,7 @@
 <h3>Use With Template Driven Form</h3>
 <p>Inline compact radio group with default selection</p>
 <fdp-form-group>
-    <fdp-form-field id="radioc6" rank="1">
+    <fdp-form-field id="radioc6" [rank]="1">
         <fdp-radio-group name="radioc6" contentDensity="compact" [isInline]="true" [(ngModel)]="favoriteSeason">
             <fdp-radio-button value="winter">Winter</fdp-radio-button>
             <fdp-radio-button value="spring">Spring</fdp-radio-button>
@@ -119,7 +119,7 @@
 
 <p>Inline compact radio group</p>
 <fdp-form-group>
-    <fdp-form-field id="radioc7" rank="1">
+    <fdp-form-field id="radioc7" [rank]="1">
         <fdp-radio-group name="radioc7" contentDensity="compact" [isInline]="true" [(ngModel)]="favoriteSeason2">
             <fdp-radio-button value="winter">Winter</fdp-radio-button>
             <fdp-radio-button value="spring">Spring</fdp-radio-button>
@@ -132,9 +132,9 @@
 
 <p>Radio group with disabled item</p>
 <fdp-form-group>
-    <fdp-form-field id="radioc8" rank="1">
+    <fdp-form-field id="radioc8" [rank]="1">
         <fdp-radio-group name="radioc8" contentDensity="compact" [isInline]="false" [(ngModel)]="favoriteMonth">
-            <fdp-radio-button value="january" disabled="true">January</fdp-radio-button>
+            <fdp-radio-button value="january" [disabled]="true">January</fdp-radio-button>
             <fdp-radio-button value="february">February</fdp-radio-button>
             <fdp-radio-button value="march">March</fdp-radio-button>
             <fdp-radio-button value="april">April</fdp-radio-button>

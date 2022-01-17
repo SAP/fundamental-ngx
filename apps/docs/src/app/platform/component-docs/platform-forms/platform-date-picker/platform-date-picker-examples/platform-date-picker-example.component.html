@@ -9,9 +9,9 @@
     <fdp-form-field
         #ffl1
         id="birthday"
-        column="1"
-        rank="1"
-        required="true"
+        [column]="1"
+        [rank]="1"
+        [required]="true"
         placeholder="Enter your birthday"
         label="Pre-populated single type date-picker:"
         [validators]="requiredDateValidator"
@@ -20,7 +20,7 @@
         </fdp-date-picker>
     </fdp-form-field>
 
-    <fdp-form-field #ffl2 id="examdate" column="2" rank="1" required="true" label="Single type date-picker:">
+    <fdp-form-field #ffl2 id="examdate" [column]="2" [rank]="1" [required]="true" label="Single type date-picker:">
         <fdp-date-picker
             name="examdate"
             type="single"
@@ -34,8 +34,8 @@
     <fdp-form-field
         #ffl3
         id="holiday"
-        column="1"
-        rank="1"
+        [column]="1"
+        [rank]="1"
         [validators]="rangeDateValidator"
         label="Pre-populated range type date-picker:"
     >
@@ -43,7 +43,7 @@
             name="holiday"
             type="range"
             [allowNull]="false"
-            rangeHoverEffect="true"
+            [rangeHoverEffect]="true"
             contentDensity="compact"
             placeholder="Holiday in between?"
             [formControl]="ffl3.formControl"
@@ -51,7 +51,7 @@
         </fdp-date-picker>
     </fdp-form-field>
 
-    <fdp-form-field #ffl4 id="journeydate" column="2" rank="2" label="Range type date-picker:">
+    <fdp-form-field #ffl4 id="journeydate" [column]="2" [rank]="2" label="Range type date-picker:">
         <fdp-date-picker
             name="journeydate"
             type="range"
@@ -61,7 +61,7 @@
         >
         </fdp-date-picker>
     </fdp-form-field>
-    <fdp-form-field #ffl5 id="disableddate" column="1" rank="2" label="Disabled Date Picker:" disabled="true">
+    <fdp-form-field #ffl5 id="disableddate" [column]="1" [rank]="2" label="Disabled Date Picker:" [disabled]="true">
         <fdp-date-picker
             name="disableddate"
             type="single"
@@ -93,7 +93,7 @@
 <h3>Date Picker with Template Driven Form.</h3>
 <!--Template Driven Form-->
 <fdp-form-group columnLayout="XL2-L2-M1-S1">
-    <fdp-form-field id="birthday" column="1" rank="1" required="true" label="Birth Date:">
+    <fdp-form-field id="birthday" [column]="1" [rank]="1" [required]="true" label="Birth Date:">
         <fdp-date-picker
             name="birthday"
             placeholder="mm/dd/yyyy"
@@ -104,7 +104,14 @@
         </fdp-date-picker>
     </fdp-form-field>
 
-    <fdp-form-field id="holiday" column="1" rank="2" required="true" label="Holiday:" [validators]="rangeDateValidator">
+    <fdp-form-field
+        id="holiday"
+        [column]="1"
+        [rank]="2"
+        [required]="true"
+        label="Holiday:"
+        [validators]="rangeDateValidator"
+    >
         <fdp-date-picker
             name="holiday"
             type="range"
@@ -116,8 +123,13 @@
         </fdp-date-picker>
     </fdp-form-field>
 
-    <fdp-form-field id="disableddate" column="2" rank="1" label="Disabled Date Picker:">
-        <fdp-date-picker name="disabledDate" type="single" disabled="true" [(ngModel)]="disabledDate"></fdp-date-picker>
+    <fdp-form-field id="disableddate" [column]="2" [rank]="1" label="Disabled Date Picker:">
+        <fdp-date-picker
+            name="disabledDate"
+            type="single"
+            [disabled]="true"
+            [(ngModel)]="disabledDate"
+        ></fdp-date-picker>
     </fdp-form-field>
 
     <ng-template #i18n let-errors>

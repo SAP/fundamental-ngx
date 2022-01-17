@@ -7,9 +7,9 @@
         label="Your presence is necessary"
         hint="hint text"
         hintPlacement="left"
-        rank="10"
-        column="1"
-        required="true"
+        [rank]="10"
+        [column]="1"
+        [required]="true"
     >
         <fdp-checkbox
             name="presence-cb"
@@ -25,9 +25,9 @@
         [validators]="validators"
         hint="hint text"
         hintPlacement="left"
-        rank="15"
-        column="2"
-        required="true"
+        [rank]="15"
+        [column]="2"
+        [required]="true"
     >
         <fdp-checkbox
             name="aggrement-cb"
@@ -39,7 +39,7 @@
         </fdp-checkbox>
     </fdp-form-field>
 
-    <fdp-form-field id="button-1" rank="20" column="2">
+    <fdp-form-field id="button-1" [rank]="20" [column]="2">
         <fdp-button buttonType="emphasized" (click)="onSubmit()" label="Submit"></fdp-button>
     </fdp-form-field>
 

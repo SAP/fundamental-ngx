@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 
 export type ScrollbarOverflowOptions = 'auto' | 'scroll' | 'hidden';
 
@@ -29,7 +29,7 @@ export type ScrollbarOverflowOptions = 'auto' | 'scroll' | 'hidden';
 export class ScrollbarComponent {
     /** Whether overflow horizontal content should be hidden. */
     @Input()
-    set noHorizontalScroll(value: boolean) {
+    set noHorizontalScroll(value: BooleanInput) {
         this._noHorizontalScroll = coerceBooleanProperty(value);
     }
     get noHorizontalScroll(): boolean {
@@ -38,7 +38,7 @@ export class ScrollbarComponent {
 
     /** Whether overflow vertical content should be hidden. */
     @Input()
-    set noVerticalScroll(value: boolean) {
+    set noVerticalScroll(value: BooleanInput) {
         this._noVerticalScroll = coerceBooleanProperty(value);
     }
     get noVerticalScroll(): boolean {
@@ -47,7 +47,7 @@ export class ScrollbarComponent {
 
     /** Whether scrollbars should be visible even if content fits. */
     @Input()
-    set alwaysVisible(value: boolean) {
+    set alwaysVisible(value: BooleanInput) {
         this._alwaysVisible = coerceBooleanProperty(value);
     }
     get alwaysVisible(): boolean {

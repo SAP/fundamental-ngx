@@ -8,7 +8,7 @@ import { ValidatorFn, Validators, FormGroup } from '@angular/forms';
 })
 export class PlatformTextareaAutogrowExampleComponent {
     form: FormGroup;
-    private textareaValidator: ValidatorFn[];
+    textareaValidator: ValidatorFn[];
     tValue = '1\n2\n3\n4\n5\n6';
 
     constructor() {
