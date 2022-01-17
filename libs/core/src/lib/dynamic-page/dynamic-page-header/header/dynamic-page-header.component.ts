@@ -17,6 +17,7 @@ import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageResponsiveSize } from '../../consta
 import { DynamicPageService } from '../../dynamic-page.service';
 import { addClassNameToElement } from '../../utils';
 import { BreadcrumbComponent } from '@fundamental-ngx/core/breadcrumb';
+import { FacetComponent } from '@fundamental-ngx/core/facets';
 import { DynamicPageGlobalActionsComponent } from '../actions/dynamic-page-global-actions.component';
 import { DynamicPageTitleContentComponent } from '../actions/dynamic-page-title-content.component';
 
@@ -36,6 +37,9 @@ export const ActionSquashBreakpointPx = 1280;
     }
 })
 export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
+    /** @hidden */
+    collapsed = false;
+
     /** Title property for dynamic page */
     @Input()
     title: string;
@@ -47,6 +51,9 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     /** @hidden */
     @ContentChild(BreadcrumbComponent)
     _breadcrumbComponent: BreadcrumbComponent;
+
+    @ContentChild(FacetComponent)
+    _facetComponent: FacetComponent;
 
     /** @hidden */
     @ContentChild(DynamicPageGlobalActionsComponent)
@@ -83,6 +90,11 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     /** @hidden */
     ngAfterViewInit(): void {
         this._addCustomClassToBreadcrumb();
+
+        this._dynamicPageService.collapsed.pipe(takeUntil(this._onDestroy$)).subscribe((res) => {
+            this.collapsed = res;
+            this._changeDetRef.markForCheck();
+        });
     }
 
     /** @hidden */

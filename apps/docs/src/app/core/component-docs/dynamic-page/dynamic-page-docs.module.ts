@@ -10,12 +10,19 @@ import { DynamicPageDocsHeaderComponent } from './dynamic-page-header/dynamic-pa
 import { DynamicPageTabsExampleComponent } from './dynamic-page-examples/dynamic-page-tabs-example/dynamic-page-tabs-example.component';
 import { DynamicPageColumnLayoutExampleComponent } from './dynamic-page-examples/dynamic-page-column-layout-example/dynamic-page-column-layout-example.component';
 import { DynamicPageResponsiveExampleComponent } from './dynamic-page-examples/dynamic-page-responsive-example/dynamic-page-responsive-example.component';
+import { DynamicPageFacetsExampleComponent } from './dynamic-page-examples/dynamic-page-facets-example/dynamic-page-facets-example.component';
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { FlexibleColumnLayoutModule } from '@fundamental-ngx/core/flexible-column-layout';
 import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { FacetModule } from '@fundamental-ngx/core/facets';
+import { TextModule } from '@fundamental-ngx/core/text';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { ObjectNumberModule } from '@fundamental-ngx/core/object-number';
+import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
+import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 
 const routes: Routes = [
     {
@@ -37,7 +44,13 @@ const routes: Routes = [
         BarModule,
         FlexibleColumnLayoutModule,
         DynamicPageModule,
-        SegmentedButtonModule
+        SegmentedButtonModule,
+        FacetModule,
+        TextModule,
+        RatingIndicatorModule,
+        AvatarModule,
+        ObjectNumberModule,
+        ObjectStatusModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -46,7 +59,8 @@ const routes: Routes = [
         DynamicPageExampleComponent,
         DynamicPageTabsExampleComponent,
         DynamicPageColumnLayoutExampleComponent,
-        DynamicPageResponsiveExampleComponent
+        DynamicPageResponsiveExampleComponent,
+        DynamicPageFacetsExampleComponent
     ]
 })
 export class DynamicPageDocsModule {}
