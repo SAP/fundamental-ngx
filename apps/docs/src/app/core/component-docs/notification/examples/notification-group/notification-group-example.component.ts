@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IndicatorStates } from '../../../../../../../../../libs/core/src/lib';
+
+import { IndicatorStates } from '@fundamental-ngx/core/notification';
 
 export type Notification = {
     avatar: string;
