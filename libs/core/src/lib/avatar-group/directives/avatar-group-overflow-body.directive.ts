@@ -113,8 +113,7 @@ export class AvatarGroupOverflowBodyDirective implements AfterViewInit, OnDestro
 
         const rtlSub = this._rtlService.rtl.subscribe((isRtl) => {
             this._dir = isRtl ? 'rtl' : 'ltr';
-
-            this._keyboardEventsManager = this._keyboardEventsManager.withHorizontalOrientation(this._dir);
+            this._keyboardEventsManager.withHorizontalOrientation(this._dir);
         });
 
         this._subscription.add(rtlSub);
