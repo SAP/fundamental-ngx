@@ -1,6 +1,5 @@
 import { PaginationPo } from '../pages/pagination.po';
 import {
-    browserIsSafari,
     click,
     doesItExist,
     getAttributeByName,
@@ -67,11 +66,12 @@ describe('Pagination test suite:', () => {
             pause(2000);
             expect(getText(basicPaginationText).trim()).toBe(basicPaginationTestArr[0]);
 
-            click(basicPaginationExample + pages);
+            click(basicPaginationExample + pages, 1);
             // pause for the new text to load
             pause(2000);
             expect(getText(basicPaginationText).trim()).toBe(basicPaginationTestArr[1]);
-            click(basicPaginationExample + pages, 3);
+
+            click(basicPaginationExample + pages, 4);
             // pause for the new text to load
             pause(2000);
             expect(getText(basicPaginationText).trim()).toBe(basicPaginationTestArr[2]);
@@ -99,12 +99,13 @@ describe('Pagination test suite:', () => {
 
         it('should check disabled previous and next links', () => {
             scrollIntoView(basicPaginationExample);
+
             click(basicPaginationExample + standardButton);
             // pause for the new text to load
             pause(2000);
             expect(getAttributeByName(linkPrevious, 'aria-disabled')).toBe('true');
 
-            click(basicPaginationExample + pages, 3);
+            click(basicPaginationExample + pages, 4);
             // pause for the new text to load
             pause(2000);
             expect(getAttributeByName(linkNext, 'aria-disabled')).toBe('true');
@@ -114,12 +115,13 @@ describe('Pagination test suite:', () => {
     describe('Check Pagination showing items example', () => {
         it('should check selected pages by clicking options', () => {
             scrollIntoView(showingItemsPaginationExample);
-            click(showingItemsPaginationExample + pages);
+
+            click(showingItemsPaginationExample + pages, 1);
             expect(getText(showingItemsPaginationExample + showingItemsPaginationText).trim()).toBe(
                 itemPaginationTestArr[1]
             );
 
-            click(showingItemsPaginationExample + pages, 1);
+            click(showingItemsPaginationExample + pages, 2);
             expect(getText(showingItemsPaginationExample + showingItemsPaginationText).trim()).toBe(
                 itemPaginationTestArr[2]
             );
@@ -139,7 +141,7 @@ describe('Pagination test suite:', () => {
         });
 
         it('should check disabled previous and next links', () => {
-            checkArrowButtons(showingItemsPaginationExample, 3);
+            checkArrowButtons(showingItemsPaginationExample, 4);
         });
     });
 
@@ -147,13 +149,13 @@ describe('Pagination test suite:', () => {
         it('verify default property for items per page basic checks', () => {
             checkPages(itemsPerPageProperty);
             checkPreviousNextLink(itemsPerPageProperty);
-            checkArrowButtons(itemsPerPageProperty, 2);
+            checkArrowButtons(itemsPerPageProperty, 7);
         });
 
         it('verify default select template for items per page options basic checks', () => {
             checkPages(itemsPerPageTemplate);
             checkPreviousNextLink(itemsPerPageTemplate);
-            checkArrowButtons(itemsPerPageTemplate, 2);
+            checkArrowButtons(itemsPerPageTemplate, 7);
         });
 
         it('verify default select template for items per page results per page', () => {
@@ -172,7 +174,7 @@ describe('Pagination test suite:', () => {
         it('verify Custom items per page - list of buttons basic checks', () => {
             checkPages(itemsPerPageList);
             checkPreviousNextLink(itemsPerPageList);
-            checkArrowButtons(itemsPerPageList, 3);
+            checkArrowButtons(itemsPerPageList, 7);
         });
 
         it('verify Custom items per page - list of buttons max pages', () => {
@@ -227,7 +229,7 @@ describe('Pagination test suite:', () => {
             const itemsPerPage = getValue(playgroundInputFields, 1);
             const itemsPerPageNum = Number(itemsPerPage);
             const actualItems = totalItemsNum / itemsPerPageNum;
-            expect(pagesLength + 1).toEqual(actualItems);
+            expect(pagesLength).toEqual(actualItems);
         });
 
         it('should check should check that filling all fields by 1 displayed only 1 page', () => {
@@ -240,7 +242,7 @@ describe('Pagination test suite:', () => {
             const itemsPerPage = getValue(playgroundInputFields, 1);
             const itemsPerPageNum = Number(itemsPerPage);
             const actualItems = totalItemsNum / itemsPerPageNum;
-            expect(pagesLength + 1).toEqual(actualItems);
+            expect(pagesLength).toEqual(actualItems);
         });
 
         it('should check that filling all fields by 0 pages are not displayed', () => {
@@ -261,12 +263,12 @@ describe('Pagination test suite:', () => {
         });
 
         it('should check pagination looks correct after selecting specific page', () => {
-            setValue(playgroundInputFields, '9');
+            setValue(playgroundInputFields, '10');
             setValue(playgroundInputFields, '1', 1);
             setValue(playgroundInputFields, '3', 2);
             pause(250);
             const playgroundLink = getElementArrayLength(playgroundPages);
-            expect(playgroundLink + 1).toBe(5);
+            expect(playgroundLink).toBe(8);
             expect(getValue(playgroundExample + input)).toBe('3');
         });
     });
@@ -284,29 +286,33 @@ describe('Pagination test suite:', () => {
 
     function checkArrowButtons(example: string, index: number = 0): void {
         scrollIntoView(example);
+
+        click(example + pages);
         expect(getAttributeByName(example + linkPrevious, 'aria-disabled')).toBe('true');
+
         click(example + pages, index);
         expect(getAttributeByName(example + linkNext, 'aria-disabled')).toBe('true');
+
         refreshPage();
     }
 
     function checkPages(example: string): void {
         scrollIntoView(example);
         click(example + pages);
-        expect(getValue(example + input)).toBe('2');
-
-        click(example + pages);
         expect(getValue(example + input)).toBe('1');
+
+        click(example + pages, 1);
+        expect(getValue(example + input)).toBe('2');
         refreshPage();
     }
 
     function checkPreviousNextLink(example: string): void {
         scrollIntoView(example);
         click(example + linkNext);
-        expect(getValue(example + input)).toBe('2');
+        expect(getValue(example + input)).toBe('3');
 
         click(example + linkPrevious);
-        expect(getValue(example + input)).toBe('1');
+        expect(getValue(example + input)).toBe('2');
         refreshPage();
     }
 });
