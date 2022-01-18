@@ -1,7 +1,7 @@
 import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 import { Injectable, Optional, QueryList } from '@angular/core';
 import { WizardStepComponent } from '.';
-import { KeyUtil, RtlService } from '../utils';
+import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { COMPLETED_STEP_STATUS, CURRENT_STEP_STATUS } from './constants';
 
 @Injectable()

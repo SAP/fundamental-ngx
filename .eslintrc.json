@@ -5,13 +5,25 @@
             "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
             "rules": {
                 "@nrwl/nx/enforce-module-boundaries": [
-                    "off",
+                    "error",
                     {
                         "allow": [],
                         "depConstraints": [
                             {
-                                "onlyDependOnLibsWithTags": ["*"],
-                                "sourceTag": "*"
+                                "sourceTag": "fd",
+                                "onlyDependOnLibsWithTags": ["fd"]
+                            },
+                            {
+                                "sourceTag": "fdp",
+                                "onlyDependOnLibsWithTags": ["fd", "fdp"]
+                            },
+                            {
+                                "sourceTag": "fn",
+                                "onlyDependOnLibsWithTags": ["fd", "fn"]
+                            },
+                            {
+                                "sourceTag": "docs",
+                                "onlyDependOnLibsWithTags": ["fd", "fdp", "fn"]
                             }
                         ],
                         "enforceBuildableLibDependency": true
