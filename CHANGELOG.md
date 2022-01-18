@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.278 (2022-01-18)
+
+
+### Bug Fixes
+
+* **core:** replace deprecated attribute from illustrated messages ([#7507](https://github.com/SAP/fundamental-ngx/issues/7507)) ([022a7d4](https://github.com/SAP/fundamental-ngx/commit/022a7d4681e3ab2c780aade80dc9701bb0263924))
+
 ## 0.33.0-rc.277 (2022-01-18)
 
 
