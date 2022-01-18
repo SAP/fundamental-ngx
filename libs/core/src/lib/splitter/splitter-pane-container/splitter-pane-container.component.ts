@@ -27,7 +27,10 @@ import { SplitterComponent } from '../splitter.component';
 import { SplitterPaneResizeEvent } from '../interfaces/splitter-pane-resize-event.interface';
 import { SplitterSplitPaneComponent } from '../splitter-split-pane/splitter-split-pane.component';
 import { PANE_AUTO_SIZE, PANE_NONE_SIZE, RESIZER_SIZE_PX, ROOT_PAGE } from '../constants';
-import { SplitterPaneContainerOrientation } from './splitter-pane-orientation.enum';
+import {
+    SplitterPaneContainerOrientation,
+    SplitterPaneContainerOrientationType
+} from './splitter-pane-orientation.enum';
 
 @Component({
     selector: 'fd-splitter-pane-container',
@@ -43,7 +46,7 @@ import { SplitterPaneContainerOrientation } from './splitter-pane-orientation.en
 export class SplitterPaneContainerComponent implements AfterContentInit, AfterViewInit, OnDestroy {
     /** Pane type - vertical (default) or horizontal. */
     @Input()
-    orientation: SplitterPaneContainerOrientation = SplitterPaneContainerOrientation.vertical;
+    orientation: SplitterPaneContainerOrientationType = SplitterPaneContainerOrientation.vertical;
 
     /** Event emitted after container's panes has resized. */
     @Output()

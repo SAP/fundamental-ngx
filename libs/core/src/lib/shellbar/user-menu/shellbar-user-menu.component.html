@@ -8,13 +8,13 @@
             <fd-avatar
                 size="xs"
                 *ngIf="!user.image"
-                colorAccent="{{ user.colorAccent }}"
+                [colorAccent]="user.colorAccent"
                 [circle]="true"
                 label="{{ user.fullName }}"
             >
             </fd-avatar>
             <fd-avatar
-                colorAccent="{{ user.colorAccent }}"
+                [colorAccent]="user.colorAccent"
                 [circle]="true"
                 size="xs"
                 *ngIf="user.image"

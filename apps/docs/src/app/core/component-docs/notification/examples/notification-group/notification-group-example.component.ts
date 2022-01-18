@@ -1,4 +1,16 @@
 import { Component } from '@angular/core';
+import { IndicatorStates } from '../../../../../../../../../libs/core/src/lib';
+
+export type Notification = {
+    avatar: string;
+    indicator: IndicatorStates;
+    title: string;
+    unread: boolean;
+    paragraph: string;
+    footerContent1: string;
+    footerContent2: string;
+    actionButton: string;
+};
 
 @Component({
     selector: 'fd-notification-group-example',
@@ -10,7 +22,7 @@ export class NotificationGroupExampleComponent {
     expandedByType2 = false;
     expandedByPriority = true;
 
-    notifications = [
+    notifications: Notification[] = [
         {
             avatar: 'batch-payments',
             indicator: 'success',
@@ -35,7 +47,7 @@ export class NotificationGroupExampleComponent {
         }
     ];
 
-    notificationsWarning = [
+    notificationsWarning: Notification[] = [
         {
             avatar: 'work-history',
             indicator: 'warning',

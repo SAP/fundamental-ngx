@@ -163,7 +163,7 @@
                         >
                             <fd-wizard-step-indicator>5</fd-wizard-step-indicator>
                             <fd-wizard-content size="sm">
-                                <h4 class="fd-title fd-title--h4" [id]="id">1. Product Type</h4>
+                                <h4 class="fd-title fd-title--h4" id="product-type-title">1. Product Type</h4>
                                 <fd-layout-grid style="margin-bottom: 2rem">
                                     <div [fdLayoutGridCol]="4" [colMd]="2" [colLg]="2" [colXl]="2">
                                         <label fd-form-label style="float: right">Type:</label>
@@ -176,12 +176,14 @@
                                             [routerLink]="['./']"
                                             fd-link
                                             (click)="goToStep(1)"
-                                            [attr.aria-labelledby]="id"
+                                            aria-labelledby="product-type-title"
                                             >Edit</a
                                         >
                                     </div>
                                 </fd-layout-grid>
-                                <h4 class="fd-title fd-title--h4" [id]="id">2. Customer Information</h4>
+                                <h4 class="fd-title fd-title--h4" id="customer-information-title">
+                                    2. Customer Information
+                                </h4>
                                 <fd-layout-grid>
                                     <div [fdLayoutGridCol]="4" [colMd]="2" [colLg]="2" [colXl]="2">
                                         <label fd-form-label style="float: right">Full Name:</label><br />
@@ -204,12 +206,14 @@
                                             [routerLink]="['./']"
                                             fd-link
                                             (click)="goToStep(2)"
-                                            [attr.aria-labelledby]="id"
+                                            aria-labelledby="customer-information-title"
                                             >Edit</a
                                         >
                                     </div>
                                 </fd-layout-grid>
-                                <h4 class="fd-title fd-title--h4" [id]="id">3. Additional Information</h4>
+                                <h4 class="fd-title fd-title--h4" id="additional-information-id">
+                                    3. Additional Information
+                                </h4>
                                 <fd-layout-grid>
                                     <div [fdLayoutGridCol]="4" [colMd]="2" [colLg]="2" [colXl]="2">
                                         <label fd-form-label style="float: right">Name:</label><br />
@@ -231,7 +235,7 @@
                                             [routerLink]="['./']"
                                             fd-link
                                             (click)="goToStep(3)"
-                                            [attr.aria-labelledby]="id"
+                                            aria-labelledby="additional-information-id"
                                             >Edit</a
                                         >
                                     </div>
