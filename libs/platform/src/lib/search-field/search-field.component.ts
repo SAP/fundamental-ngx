@@ -307,7 +307,7 @@ export class SearchFieldComponent
     get searchFieldValue(): SearchInput {
         return {
             text: this.inputText,
-            category: this._currentCategory?.value
+            category: this._currentCategory?.value || null
         };
     }
 
