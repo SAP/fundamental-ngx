@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.277 (2022-01-18)
+
+
+### Bug Fixes
+
+* **core,platform,fn:** lodash-es, fast-deep-equal as deps & docs upate about jest issue with lodash-es ([#7544](https://github.com/SAP/fundamental-ngx/issues/7544)) ([9221ad8](https://github.com/SAP/fundamental-ngx/commit/9221ad8e6dc4c17c2ea7c0ec6f9cbebf49edc524))
+
 ## 0.33.0-rc.276 (2022-01-18)
 
 ## 0.33.0-rc.275 (2022-01-14)
