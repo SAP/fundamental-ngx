@@ -23,7 +23,6 @@ export class WizardDialogExampleComponent {
 
     currentStep = 1;
 
-    /** @hidden */
     @ViewChildren(WizardStepComponent)
     steps: QueryList<WizardStepComponent>;
 
@@ -42,8 +41,6 @@ export class WizardDialogExampleComponent {
         });
     }
 
-    // Handle focus on key press
-    /** @hidden */
     handleFocus(event: KeyboardEvent, index: number): void {
         this._wizardService.progressBarKeyHandler(event, this.steps, index);
     }
