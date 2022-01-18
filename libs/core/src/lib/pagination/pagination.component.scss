@@ -9,8 +9,4 @@ $block: fd-pagination;
             margin: 0;
         }
     }
-
-    & .#{$block}__link:active {
-        display: flex;
-    }
 }

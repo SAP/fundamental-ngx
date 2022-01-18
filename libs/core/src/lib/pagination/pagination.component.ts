@@ -111,7 +111,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      * This property is mainly provided to support reading in the right language for screen reader.
      */
     @Input()
-    itemsPerPageLabel = 'Results per page';
+    itemsPerPageLabel = 'Results per Page';
 
     /** Represents the options for items per page. */
     @Input()
