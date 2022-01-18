@@ -23,6 +23,7 @@ import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { ObjectNumberModule } from '@fundamental-ngx/core/object-number';
 import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { DynamicPageDynamicContainerHeightExampleComponent } from './dynamic-page-examples/dynamic-page-dynamic-container-height-example/dynamic-page-dynamic-container-height-example.component';
 
 const routes: Routes = [
     {
@@ -60,6 +61,7 @@ const routes: Routes = [
         DynamicPageTabsExampleComponent,
         DynamicPageColumnLayoutExampleComponent,
         DynamicPageResponsiveExampleComponent,
+        DynamicPageDynamicContainerHeightExampleComponent,
         DynamicPageFacetsExampleComponent
     ]
 })

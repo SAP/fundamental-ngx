@@ -5,6 +5,8 @@
 </component-example>
 <code-example [exampleFiles]="dynamicPageBasic"></code-example>
 
+<separator></separator>
+
 <fd-docs-section-title id="tabbed" componentName="dynamic-page"> Dynamic Page with Tabs </fd-docs-section-title>
 <description>
     There is used tab component inside DynamicPage - Content should be wrapped in <code>tab-items</code>
@@ -14,6 +16,8 @@
 </component-example>
 <code-example [exampleFiles]="dynamicPageTabs"></code-example>
 
+<separator></separator>
+
 <fd-docs-section-title id="layout" componentName="dynamic-page">
     Dynamic Page inside Column Layout
 </fd-docs-section-title>
@@ -21,6 +25,8 @@
     <fd-dynamic-page-column-layout-example></fd-dynamic-page-column-layout-example>
 </component-example>
 <code-example [exampleFiles]="dynamicPageColumn"></code-example>
+
+<separator></separator>
 
 <fd-docs-section-title id="reponsive" componentName="dynamic-page"> Responsive Dynamic Page </fd-docs-section-title>
 <description>
@@ -38,6 +44,8 @@
 </component-example>
 <code-example [exampleFiles]="dynamicPageResponsive"></code-example>
 
+<separator></separator>
+
 <fd-docs-section-title id="facets" componentName="dynamic-page"> Dynamic Page with Facets </fd-docs-section-title>
 <description
     >The Dynamic Page header can consist of various facet types, such as Form facet, Key-value facet, Image facet, and
@@ -48,3 +56,25 @@
     <fd-dynamic-page-facets-example></fd-dynamic-page-facets-example>
 </component-example>
 <code-example [exampleFiles]="dynamicPageFacets"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="dynamic-height" componentName="dynamic-page"
+    >Dynamic height of parent element</fd-docs-section-title
+>
+<description>
+    <p>
+        By default, Dynamic Dage component automatically calculates amount of free space it can take, and recalculates
+        it on window resize.
+    </p>
+    <p>
+        If you plan on using Dynamic Page component inside container with dynamic content height (e.g. some elements
+        inside container can appear after Dynamic Page component has been initiated), you need to apply
+        <code>fd-dynamic-page-wrapper</code> directive to that container in order for Dynamic Page component to listen
+        container's size changes instead of window size changes.
+    </p>
+</description>
+<component-example>
+    <fd-dynamic-page-dynamic-container-height-example></fd-dynamic-page-dynamic-container-height-example>
+</component-example>
+<code-example [exampleFiles]="dynamicPageResponsive"></code-example>
