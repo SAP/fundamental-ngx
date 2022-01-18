@@ -17,7 +17,6 @@ import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageResponsiveSize } from '../../consta
 import { DynamicPageService } from '../../dynamic-page.service';
 import { addClassNameToElement } from '../../utils';
 import { BreadcrumbComponent } from '@fundamental-ngx/core/breadcrumb';
-import { FacetComponent } from '@fundamental-ngx/core/facets';
 import { DynamicPageGlobalActionsComponent } from '../actions/dynamic-page-global-actions.component';
 import { DynamicPageTitleContentComponent } from '../actions/dynamic-page-title-content.component';
 
@@ -51,9 +50,6 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     /** @hidden */
     @ContentChild(BreadcrumbComponent)
     _breadcrumbComponent: BreadcrumbComponent;
-
-    @ContentChild(FacetComponent)
-    _facetComponent: FacetComponent;
 
     /** @hidden */
     @ContentChild(DynamicPageGlobalActionsComponent)
