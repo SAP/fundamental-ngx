@@ -1,34 +1,34 @@
 import { Component } from '@angular/core';
 
-import * as simpleH from '!raw-loader!./examples/multi-input-example/multi-input-example.component.html';
-import * as simpleT from '!raw-loader!./examples/multi-input-example/multi-input-example.component.ts';
+import simpleH from '!./examples/multi-input-example/multi-input-example.component.html?raw';
+import simpleT from '!./examples/multi-input-example/multi-input-example.component.ts?raw';
 
-import * as displayH from '!raw-loader!./examples/multi-input-displaywith-example/multi-input-displaywith-example.component.html';
-import * as displayT from '!raw-loader!./examples/multi-input-displaywith-example/multi-input-displaywith-example.component.ts';
+import displayH from '!./examples/multi-input-displaywith-example/multi-input-displaywith-example.component.html?raw';
+import displayT from '!./examples/multi-input-displaywith-example/multi-input-displaywith-example.component.ts?raw';
 
-import * as filterH from '!raw-loader!./examples/multi-input-filter-example/multi-input-filter-example.component.html';
-import * as filterT from '!raw-loader!./examples/multi-input-filter-example/multi-input-filter-example.component.ts';
+import filterH from '!./examples/multi-input-filter-example/multi-input-filter-example.component.html?raw';
+import filterT from '!./examples/multi-input-filter-example/multi-input-filter-example.component.ts?raw';
 
-import * as includesH from '!raw-loader!./examples/multi-input-includes-example/multi-input-includes-example.component.html';
-import * as includesT from '!raw-loader!./examples/multi-input-includes-example/multi-input-includes-example.component.ts';
+import includesH from '!./examples/multi-input-includes-example/multi-input-includes-example.component.html?raw';
+import includesT from '!./examples/multi-input-includes-example/multi-input-includes-example.component.ts?raw';
 
-import * as asyncH from '!raw-loader!./examples/multi-input-async-example/multi-input-async-example.component.html';
-import * as asyncT from '!raw-loader!./examples/multi-input-async-example/multi-input-async-example.component.ts';
+import asyncH from '!./examples/multi-input-async-example/multi-input-async-example.component.html?raw';
+import asyncT from '!./examples/multi-input-async-example/multi-input-async-example.component.ts?raw';
 
-import * as compactH from '!raw-loader!./examples/multi-input-compact-example/multi-input-compact-example.component.html';
-import * as compactT from '!raw-loader!./examples/multi-input-compact-example/multi-input-compact-example.component.ts';
+import compactH from '!./examples/multi-input-compact-example/multi-input-compact-example.component.html?raw';
+import compactT from '!./examples/multi-input-compact-example/multi-input-compact-example.component.ts?raw';
 
-import * as formH from '!raw-loader!./examples/multi-input-form-example/multi-input-form-example.component.html';
-import * as formT from '!raw-loader!./examples/multi-input-form-example/multi-input-form-example.component.ts';
+import formH from '!./examples/multi-input-form-example/multi-input-form-example.component.html?raw';
+import formT from '!./examples/multi-input-form-example/multi-input-form-example.component.ts?raw';
 
-import * as newTokensH from '!raw-loader!./examples/multi-input-new-tokens-example/multi-input-new-tokens-example.component.html';
-import * as newTokensT from '!raw-loader!./examples/multi-input-new-tokens-example/multi-input-new-tokens-example.component.ts';
+import newTokensH from '!./examples/multi-input-new-tokens-example/multi-input-new-tokens-example.component.html?raw';
+import newTokensT from '!./examples/multi-input-new-tokens-example/multi-input-new-tokens-example.component.ts?raw';
 
-import * as mobileH from '!raw-loader!./examples/multi-input-mobile-example/multi-input-mobile-example.component.html';
-import * as mobileT from '!raw-loader!./examples/multi-input-mobile-example/multi-input-mobile-example.component.ts';
+import mobileH from '!./examples/multi-input-mobile-example/multi-input-mobile-example.component.html?raw';
+import mobileT from '!./examples/multi-input-mobile-example/multi-input-mobile-example.component.ts?raw';
 
-import * as customH from '!raw-loader!./examples/multi-input-custom-item-example/multi-input-custom-item-example.component.html';
-import * as customT from '!raw-loader!./examples/multi-input-custom-item-example/multi-input-custom-item-example.component.ts';
+import customH from '!./examples/multi-input-custom-item-example/multi-input-custom-item-example.component.html?raw';
+import customT from '!./examples/multi-input-custom-item-example/multi-input-custom-item-example.component.ts?raw';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 

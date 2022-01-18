@@ -7,8 +7,8 @@
         class="fd-resizable-card-layout__item--border-display fd-resizable-card-layout__item--resize-transition"
         [style.width.px]="cardWidth"
         [style.height.px]="cardHeight"
-        (mouseenter)="showResizeIcon($event)"
-        (mouseleave)="hideResizeIcon($event)"
+        (mouseenter)="showResizeIcon()"
+        (mouseleave)="hideResizeIcon()"
     >
         <div class="fd-resizable-card-layout__card">
             <ng-content></ng-content>

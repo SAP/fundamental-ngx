@@ -11,6 +11,8 @@
         "focus-trap",
         "fundamental-styles",
         "@fundamental-ngx/core",
-        "xml2js"
+        "xml2js",
+        "lodash-es",
+        "fast-deep-equal"
     ]
 }

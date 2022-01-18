@@ -8,7 +8,7 @@ import {
 } from './upload-collection-simple.directives';
 
 @Directive({
-    // tslint:disable-next-line: directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-upload-collection-item]',
     host: { class: 'fd-upload-collection__item' }
 })
@@ -91,7 +91,7 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
                 this._titleContainerDirective?._objectMarkerComponents?.forEach((objectMarker) => {
                     styles.push(objectMarker.elementRef().nativeElement.style);
                 });
-                !!event
+                event
                     ? styles.forEach((style) => (style.display = 'none'))
                     : styles.forEach((style) => (style.display = 'inline-block'));
                 if (event) {

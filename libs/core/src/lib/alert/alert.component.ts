@@ -103,6 +103,7 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
 
     /** Event fired when the alert is dismissed. */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onDismiss: EventEmitter<undefined> = new EventEmitter<undefined>();
 
     /** @hidden */
@@ -188,7 +189,7 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
             this.ngZone.runOutsideAngular(() => {
                 setTimeout(() => {
                     if (this.mousePersist) {
-                        const wait = () => {
+                        const wait = (): void => {
                             if (this.mouseInAlert === true) {
                                 setTimeout(wait, 500);
                             } else {

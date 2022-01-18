@@ -200,16 +200,18 @@ describe('Input group within platform form', () => {
 
     it('should mark form field as touched when gets blurred', async () => {
         const formControl = host.form.get('qty');
-        const inputEl = fixture.debugElement.query(By.css('fdp-input input'));
+        const inputEl = fixture.debugElement.query(By.css('fdp-input input[id="qty"]'));
 
         expect(formControl.touched).not.toBeTrue();
 
-        inputEl.nativeElement.focus();
+        const focusEvent = new Event('focus');
+        inputEl.nativeElement?.dispatchEvent(focusEvent);
         await wait(fixture);
 
         expect(formControl.touched).toBeFalse();
 
-        inputEl.nativeElement.blur();
+        const blurEvent = new Event('blur');
+        inputEl.nativeElement?.dispatchEvent(blurEvent);
         await wait(fixture);
 
         expect(formControl.touched).toBeTrue();

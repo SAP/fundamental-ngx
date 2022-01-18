@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import * as themeSwitcherSrc from '!raw-loader!./examples/theme-switcher-example.component.html';
-import * as themeUrlSrc from '!raw-loader!./examples/theme-url-example.component.html';
-import * as themeSwitcherSrcTs from '!raw-loader!./examples/theme-switcher-example.component.ts';
-import * as themeUrlSrcTs from '!raw-loader!./examples/theme-url-example.component.ts';
+import themeSwitcherSrc from '!./examples/theme-switcher-example.component.html?raw';
+import themeUrlSrc from '!./examples/theme-url-example.component.html?raw';
+import themeSwitcherSrcTs from '!./examples/theme-switcher-example.component.ts?raw';
+import themeUrlSrcTs from '!./examples/theme-url-example.component.ts?raw';
 import { DocsThemeService } from '../../../documentation/services/docs-theme.service';
 import { ThemeServiceOutput } from '@fundamental-ngx/core/utils';
 

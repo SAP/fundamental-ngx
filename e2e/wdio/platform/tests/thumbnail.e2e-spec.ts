@@ -33,7 +33,8 @@ describe('Thumbnail field', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(mainImage);
+        waitForPresent(thumbnailPage.root);
+        waitForElDisplayed(thumbnailPage.title);
     }, 1);
 
     it('should be able to view all thumbnail images', () => {
@@ -44,14 +45,13 @@ describe('Thumbnail field', () => {
         expect(isElementDisplayed(mainVideo)).toBeTrue();
     });
 
-    // Skipped due https://github.com/SAP/fundamental-ngx/issues/4896
-    xit('should on click display image for vertical', () => {
+    it('should on click display image for vertical', () => {
         scrollIntoView(verticalGalleryImages);
         const arrLength = getElementArrayLength(verticalGalleryImages);
         for (let i = 0; arrLength - 1 > i; i++) {
-            const imageUrl = getAttributeByName(verticalGalleryImages, 'ng-reflect-image', i);
+            const imageUrl = getAttributeByName(verticalGalleryImages, 'style', i);
             click(verticalGalleryImages, i);
-            expect(getAttributeByName(mainImage, 'src', 0)).toContain(imageUrl);
+            expect(imageUrl).toContain(getAttributeByName(mainImage, 'src', 0));
         }
     });
 
@@ -60,7 +60,10 @@ describe('Thumbnail field', () => {
         const arrLength = getElementArrayLength(horizontalGalleryImages);
         for (let i = 0; arrLength > i; i++) {
             const imageUrl = getAttributeByName(horizontalGalleryImages, 'style', i);
-            const trimmedImageUrl = imageUrl.replace('background-image: url("', '').replace('");', '');
+            const trimmedImageUrl = imageUrl
+                .replace('background-image: url("', '')
+                .replace('");', '')
+                .replace('https:', '');
             click(horizontalGalleryImages, i);
             expect(getAttributeByName(mainImage, 'src', 1)).toContain(trimmedImageUrl);
         }

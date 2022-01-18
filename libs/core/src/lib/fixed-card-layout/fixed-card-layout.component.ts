@@ -28,6 +28,7 @@ import { debounceTime, takeUntil } from 'rxjs/operators';
 
 import { RtlService } from '@fundamental-ngx/core/utils';
 import { FixedCardLayoutItemComponent } from './fixed-card-layout-item/fixed-card-layout-item.component';
+import { coerceNumberProperty } from '@angular/cdk/coercion';
 
 const CARD_MINIMUM_WIDTH = 320; // in px; 20rem max card size
 const CARD_GAP_WIDTH = 16; // gap=1rem==16px
@@ -91,6 +92,21 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     @Input()
     dragStartDelay = DRAG_START_DELAY;
 
+    /** Card's minimum width in pixels. */
+    @Input()
+    set cardMinimumWidth(value: number) {
+        this._cardMinimumWidth = coerceNumberProperty(value);
+
+        // // If component is ready, do the recalculation.
+        if (this.layout) {
+            this.updateLayout();
+        }
+    }
+
+    get cardMinimumWidth(): number {
+        return this._cardMinimumWidth;
+    }
+
     /** Event to emit, when layout changes */
     @Output()
     layoutChange: EventEmitter<Layout> = new EventEmitter<Layout>();
@@ -119,6 +135,9 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
 
     /** @hidden FocusKeyManager instance */
     private _keyboardEventsManager: FocusKeyManager<FixedCardLayoutItemComponent>;
+
+    /** @hidden */
+    private _cardMinimumWidth = CARD_MINIMUM_WIDTH;
 
     constructor(
         private readonly _changeDetector: ChangeDetectorRef,
@@ -250,9 +269,9 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
 
         // get fd-card-layout width and calculate how many cards can fit into it
         const availableLayoutWidth = this.getWidthAvailable();
-        const numberOfCardsWithNoGap = Math.floor(availableLayoutWidth / CARD_MINIMUM_WIDTH);
+        const numberOfCardsWithNoGap = Math.floor(availableLayoutWidth / this.cardMinimumWidth);
         const requiredWidthWithGap =
-            numberOfCardsWithNoGap * CARD_MINIMUM_WIDTH + (numberOfCardsWithNoGap - 1) * CARD_GAP_WIDTH;
+            numberOfCardsWithNoGap * this.cardMinimumWidth + (numberOfCardsWithNoGap - 1) * CARD_GAP_WIDTH;
 
         if (requiredWidthWithGap > availableLayoutWidth) {
             columnCount = numberOfCardsWithNoGap - 1;

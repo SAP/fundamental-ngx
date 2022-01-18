@@ -187,14 +187,17 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
 
     /** Event emitted on add node button clicked, value is the placement for the new node */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onAdd = new EventEmitter<ApprovalFlowNodeTarget>();
 
     /** Event emitted on edit node button clicked */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onEdit = new EventEmitter<void>();
 
     /** Event emitted on delete node button clicked */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onDelete = new EventEmitter<void>();
 
     /** @hidden */

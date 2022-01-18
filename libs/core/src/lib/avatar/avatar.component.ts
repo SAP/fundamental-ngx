@@ -30,7 +30,7 @@ const ALTER_ICON_OPTIONS = {
 
 @Component({
     // TODO to be discussed
-    // tslint:disable-next-line:component-selector
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'fd-avatar',
     templateUrl: './avatar.component.html',
     styleUrls: ['./avatar.component.scss'],
@@ -234,14 +234,14 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
         this._image = value;
 
         if (value) {
-            this._verifyImageUrl(value, () => {}, this._onErrorCallback);
+            this._verifyImageUrl(value, (): void => {}, this._onErrorCallback);
         } else {
             this._bgImage = null;
         }
     }
 
     /** @hidden */
-    private _verifyImageUrl(srcValue: string, onLoadCallback: Function, onErrorCallback: Function): void {
+    private _verifyImageUrl(srcValue: string, onLoadCallback: () => void, onErrorCallback: () => void): void {
         const img = new Image();
         img.onload = onLoadCallback.bind(this);
         img.onerror = onErrorCallback.bind(this);

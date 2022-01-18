@@ -1,0 +1,29 @@
+<fdp-form-field
+    [hint]="field.formItem?.guiOptions?.hint"
+    [hintPlacement]="field.formItem?.guiOptions?.hintPlacement || 'left'"
+    [placeholder]="field.formItem?.placeholder || (field.formItem?.useMessageAsPlaceholder && field.formItem?.message)"
+    [id]="formFieldName"
+    [i18Strings]="i18n"
+    [column]="field.formItem?.guiOptions?.column || 1"
+    [columnLayout]="field.formItem?.guiOptions?.columnLayout"
+    [label]="field.formItem?.message + (field.formItem?.guiOptions?.appendColon !== false ? ':' : '')"
+    [validators]="field.formItem?.validators"
+    [required]="field.formItem?.required"
+    [rank]="rank"
+    [labelColumnLayout]="field.formItem?.guiOptions?.labelColumnLayout"
+    [fieldColumnLayout]="field.formItem?.guiOptions?.fieldColumnLayout"
+    [gapColumnLayout]="field.formItem?.guiOptions?.gapColumnLayout"
+    [noLabelLayout]="field.formItem?.guiOptions?.noLabelLayout || false"
+    [formGroup]="form"
+    #formField
+>
+    <ng-container
+        [formField]="formField"
+        [form]="form"
+        [formGroupNamePath]="formGroupNamePath"
+        fdpDynamicFormControl
+        [name]="formFieldName"
+        [formItem]="field.formItem"
+    >
+    </ng-container>
+</fdp-form-field>

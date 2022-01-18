@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
-import * as defaultFlexibleColumnLayoutHtml from '!raw-loader!./examples/default/flexible-column-layout-example.component.html';
-import * as defaultFlexibleColumnLayoutTs from '!raw-loader!./examples/default/flexible-column-layout-example.component.ts';
-import * as defaultFlexibleColumnLayoutScss from '!raw-loader!./examples/default/flexible-column-layout-example.component.scss';
+import defaultFlexibleColumnLayoutHtml from '!./examples/default/flexible-column-layout-example.component.html?raw';
+import defaultFlexibleColumnLayoutTs from '!./examples/default/flexible-column-layout-example.component.ts?raw';
+import defaultFlexibleColumnLayoutScss from '!./examples/default/flexible-column-layout-example.component.scss?raw';
 
-import * as flexibleColumnLayoutDynamicPageHtml from '!raw-loader!./examples/dynamic-page/flexible-column-layout-dynamic-page-example.component.html';
-import * as flexibleColumnLayoutDynamicPageTs from '!raw-loader!./examples/dynamic-page/flexible-column-layout-dynamic-page-example.component.ts';
-import * as flexibleColumnLayoutDynamicPageScss from '!raw-loader!./examples/dynamic-page/flexible-column-layout-dynamic-page-example.component.scss';
+import flexibleColumnLayoutDynamicPageHtml from '!./examples/dynamic-page/flexible-column-layout-dynamic-page-example.component.html?raw';
+import flexibleColumnLayoutDynamicPageTs from '!./examples/dynamic-page/flexible-column-layout-dynamic-page-example.component.ts?raw';
+import flexibleColumnLayoutDynamicPageScss from '!./examples/dynamic-page/flexible-column-layout-dynamic-page-example.component.scss?raw';
 
 @Component({
     selector: 'fd-flexible-column-layout-docs',

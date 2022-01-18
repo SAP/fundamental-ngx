@@ -27,16 +27,10 @@ export class WizardGeneratorSummaryObjectsExampleComponent {
                                 inline: true,
                                 column: 2
                             },
-                            choices: () => {
-                                return ['TV', 'Console', 'Laptop'];
-                            },
+                            choices: () => ['TV', 'Console', 'Laptop'],
                             validators: [Validators.required],
-                            validate: (input) => {
-                                return input?.length > 0 ? null : 'You need to select at least one product';
-                            },
-                            valueRenderer: (value: string[]) => {
-                                return value.join(', ');
-                            }
+                            validate: (input) => (input?.length > 0 ? null : 'You need to select at least one product'),
+                            valueRenderer: (value: string[]) => value.join(', ')
                         }
                     ]
                 }

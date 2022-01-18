@@ -1,17 +1,17 @@
 import { Component, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
-import * as PlatformObjectStatusDefaultExampleScss from '!raw-loader!./platform-object-status-example/platform-object-status-example.component.scss';
-import * as PlatformObjectStatusDefaultExample from '!raw-loader!./platform-object-status-example/platform-object-status-example.component.html';
-import * as PlatformObjectStatusTextExample from '!raw-loader!./platform-object-status-example/platform-object-status-text-example.component.html';
-import * as PlatformObjectStatusGenericTextExample from '!raw-loader!./platform-object-status-example/platform-object-status-generic-text-example.component.html';
-import * as PlatformObjectStatusTextIconExample from '!raw-loader!./platform-object-status-example/platform-object-status-icon-text-example.component.html';
-import * as PlatformObjectStatusClickableAndIConExample from '!raw-loader!./platform-object-status-example/platform-object-status-clickable-and-icon-example.component.html';
-import * as PlatformObjectStatusInvertedTextExample from '!raw-loader!./platform-object-status-example/platform-object-status-inverted-example.component.html';
-import * as PlatformObjectStatusInvertedGenericExample from '!raw-loader!./platform-object-status-example/platform-object-status-inverted-generic-text-example.component.html';
-import * as PlatformObjectStatusLargeExample from '!raw-loader!./platform-object-status-example/platform-object-status-large-example.component.html';
-import * as PlatformObjectStatusClickableAndIconExampleTs from '!raw-loader!./platform-object-status-example/platform-object-status-clickable-and-icon-example.component';
-import * as PlatformObjectStatusLargeExampleTs from '!raw-loader!./platform-object-status-example/platform-object-status-large-example.component';
+import PlatformObjectStatusDefaultExampleScss from '!./platform-object-status-example/platform-object-status-example.component.scss?raw';
+import PlatformObjectStatusDefaultExample from '!./platform-object-status-example/platform-object-status-example.component.html?raw';
+import PlatformObjectStatusTextExample from '!./platform-object-status-example/platform-object-status-text-example.component.html?raw';
+import PlatformObjectStatusGenericTextExample from '!./platform-object-status-example/platform-object-status-generic-text-example.component.html?raw';
+import PlatformObjectStatusTextIconExample from '!./platform-object-status-example/platform-object-status-icon-text-example.component.html?raw';
+import PlatformObjectStatusClickableAndIConExample from '!./platform-object-status-example/platform-object-status-clickable-and-icon-example.component.html?raw';
+import PlatformObjectStatusInvertedTextExample from '!./platform-object-status-example/platform-object-status-inverted-example.component.html?raw';
+import PlatformObjectStatusInvertedGenericExample from '!./platform-object-status-example/platform-object-status-inverted-generic-text-example.component.html?raw';
+import PlatformObjectStatusLargeExample from '!./platform-object-status-example/platform-object-status-large-example.component.html?raw';
+import PlatformObjectStatusClickableAndIconExampleTs from '!./platform-object-status-example/platform-object-status-clickable-and-icon-example.component?raw';
+import PlatformObjectStatusLargeExampleTs from '!./platform-object-status-example/platform-object-status-large-example.component?raw';
 
 @Component({
     selector: 'fdp-platform-object-status-docs',

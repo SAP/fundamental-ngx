@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { longTextTypeConfig, textTypeConfig } from '../config-for-examples/text-type.config';
-import { cloneDeep } from '@fundamental-ngx/core/utils';
+import { cloneDeep } from 'lodash-es';
 import { TabConfig } from '../../platform-icon-tab-bar-docs.component';
 
 @Component({
@@ -29,7 +29,19 @@ export class PlatformIconTabBarTextTypeExampleComponent implements OnInit {
                 {
                     label: 'Item 0',
                     counter: null,
-                    color: 'critical'
+                    color: 'critical',
+                    subItems: [
+                        {
+                            label: 'Item 0.1',
+                            counter: null,
+                            color: null
+                        },
+                        {
+                            label: 'Item 0.2',
+                            counter: null,
+                            color: null
+                        }
+                    ]
                 },
                 {
                     label: 'Item 1',

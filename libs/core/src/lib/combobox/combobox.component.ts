@@ -68,7 +68,7 @@ let comboboxUniqueId = 0;
  * <fd-combobox
  *      [(ngModel)]="searchTerm"
  *      [dropdownValues]="dropdownValues"
- *      [placeholder]="'Type some text...'">
+ *      placeholder="Type some text...">
  * </fd-combobox>
  * ```
  */
@@ -124,7 +124,7 @@ export class ComboboxComponent
     /** Filter function. Accepts an array of objects and a search term as arguments
      * and returns a string. See search input examples for details. */
     @Input()
-    filterFn: Function = this._defaultFilter;
+    filterFn = this._defaultFilter;
 
     /** Whether the search input is disabled. **/
     @Input()
@@ -193,7 +193,7 @@ export class ComboboxComponent
 
     /** Search function to execute when the Enter key is pressed on the main input. */
     @Input()
-    searchFn: Function;
+    searchFn: () => void;
 
     /** Whether the search input should be displayed in compact mode. */
     @Input()
@@ -238,7 +238,7 @@ export class ComboboxComponent
      * An arrow function can be used to access the *this* keyword in the calling component.
      * See search input examples for details. */
     @Input()
-    displayFn: Function = this._defaultDisplay;
+    displayFn = this._defaultDisplay;
 
     /** Whether AddOn Button should be focusable, set to false by default */
     @Input()
@@ -345,13 +345,16 @@ export class ComboboxComponent
     inputTextValue: string;
 
     /** @hidden */
+    clearInputBtnFocused = false;
+
+    /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    onChange: Function = () => {};
+    onChange: (value: any) => void = () => {};
 
     /** @hidden */
-    onTouched: Function = () => {};
+    onTouched = (): void => {};
 
     /** @hidden */
     constructor(
@@ -452,7 +455,7 @@ export class ComboboxComponent
             const index: number = this.dropdownValues.findIndex((_value) => _value === value);
             this._handleClickActions(value);
             this.filterHighlight = false;
-            this.itemClicked.emit({ item: value, index: index });
+            this.itemClicked.emit({ item: value, index });
         }
     }
 
@@ -498,6 +501,7 @@ export class ComboboxComponent
         this.inputTextValue = '';
         this.inputTextChange.emit('');
         this.displayedValues = this.dropdownValues;
+        this.searchInputElement.nativeElement.focus();
         if (!this.mobile) {
             this._propagateChange();
         }
@@ -512,12 +516,12 @@ export class ComboboxComponent
     }
 
     /** @hidden */
-    registerOnChange(fn: Function): void {
+    registerOnChange(fn: (value: any) => void): void {
         this.onChange = fn;
     }
 
     /** @hidden */
-    registerOnTouched(fn: Function): void {
+    registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
 
@@ -587,7 +591,7 @@ export class ComboboxComponent
             this.inputText = event.term;
             this.handleSearchTermChange();
         }
-        if (event.forceClose) {
+        if (event.forceClose && this.inputText) {
             this.isOpenChangeHandle(false);
         }
     }
@@ -600,6 +604,16 @@ export class ComboboxComponent
                 forceClose: false
             });
         }
+    }
+
+    /** @hidden */
+    clearInputBtnFocus(): void {
+        this.clearInputBtnFocused = true;
+    }
+
+    /** @hidden */
+    clearInputBtnBlur(): void {
+        this.clearInputBtnFocused = false;
     }
 
     /** Method that picks other value moved from current one by offset, called only when combobox is closed */

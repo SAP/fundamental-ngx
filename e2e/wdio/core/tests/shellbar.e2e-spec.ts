@@ -16,7 +16,8 @@ import {
     refreshPage,
     scrollIntoView,
     sendKeys,
-    waitForElDisplayed
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 
 describe('shellbar test suite', () => {
@@ -50,6 +51,7 @@ describe('shellbar test suite', () => {
 
     afterEach(() => {
         refreshPage();
+        waitForPresent(shellbarPage.root);
         waitForElDisplayed(shellbarPage.title);
     }, 1);
 

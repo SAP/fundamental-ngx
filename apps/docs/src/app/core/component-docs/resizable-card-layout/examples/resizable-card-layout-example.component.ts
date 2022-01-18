@@ -148,7 +148,7 @@ export class ResizableCardLayoutExampleComponent {
                 break;
 
             case 'card2':
-                this._handleCard2Data(event);
+                this._handleCard2Data();
                 break;
 
             case 'card3':
@@ -184,7 +184,7 @@ export class ResizableCardLayoutExampleComponent {
         }
     }
 
-    private _handleCard2Data(event: ResizedEvent): void {}
+    private _handleCard2Data(): void {}
 
     private _handleCard3Data(event: ResizedEvent): void {
         // columns data
@@ -215,10 +215,11 @@ export class ResizableCardLayoutExampleComponent {
                 this.showTableHeader = false;
                 this.card3TableData = [];
                 break;
-            default:
+            default: {
                 // 3 for table header
                 const index = (event.newCardHeightRowSpan - this.miniHeaderRowSpan - 3) / 3;
                 this.card3TableData = this._getTableData(index);
+            }
         }
     }
 

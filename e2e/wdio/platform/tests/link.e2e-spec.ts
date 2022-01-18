@@ -7,6 +7,7 @@ import {
     truncatedLink_alt_text
 } from '../fixtures/appData/link-page-contents';
 import {
+    browserIsSafari,
     click,
     getAttributeByName,
     getCurrentUrl,
@@ -101,6 +102,10 @@ describe('Link component test suite', () => {
     });
 
     it('should check truncated link', () => {
+        if (browserIsSafari()) {
+            // mouse hover doesn't work
+            return;
+        }
         const truncatedLinkAltText = getElementTitle(truncatedLink);
 
         scrollIntoView(truncatedLink);
@@ -114,10 +119,13 @@ describe('Link component test suite', () => {
     });
 
     it('should check link navigation to new page', () => {
+        if (browserIsSafari()) {
+            // unstable on Safari
+            return;
+        }
         waitForElDisplayed(iconLink);
         checkLinkTarget(iconLink, googleLink, 'input[type="text"]');
         linkPage.open();
-        waitForElDisplayed(iconLink);
     }, 2);
 
     it('should check orientation', () => {

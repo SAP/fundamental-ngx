@@ -13,7 +13,9 @@ import {
     scrollIntoView,
     browserIsFirefox,
     clickRightMouseBtn,
-    waitForElDisplayed
+    waitForElDisplayed,
+    browserIsSafari,
+    waitForPresent
 } from '../../driver/wdio';
 import { sections } from '../fixtures/appData/step-input-content';
 
@@ -39,6 +41,7 @@ describe('Step input component test suit', () => {
 
     beforeEach(() => {
         refreshPage();
+        waitForPresent(stepInputPage.root);
         waitForElDisplayed(stepInputPage.title);
     }, 2);
 
@@ -65,11 +68,11 @@ describe('Step input component test suit', () => {
 
     it('should check that minimum - maximum value for step input is from -10 to 10', () => {
         scrollIntoView(configExample + input, 5);
-        clearInput(configExample, 5);
+        browserIsFirefox() || browserIsSafari() ? clearInputFF(configExample, 5) : clearInput(configExample, 5);
         setValue(configExample + input, '10', 5);
         sendKeys('Enter');
         expect(getElementClass(configExample + plusButton, 5)).toContain('is-disabled', 'button is not disabled');
-        clearInput(configExample, 5);
+        browserIsFirefox() || browserIsSafari() ? clearInputFF(configExample, 5) : clearInput(configExample, 5);
         setValue(configExample + input, '-10', 5);
         sendKeys('Enter');
         expect(getElementClass(configExample + minusButton, 5)).toContain('is-disabled', 'button is not disabled');
@@ -77,13 +80,13 @@ describe('Step input component test suit', () => {
 
     it('should check data entry more than minimum and maximum', () => {
         scrollIntoView(configExample + input, 5);
-        clearInput(configExample, 5);
+        browserIsFirefox() || browserIsSafari() ? clearInputFF(configExample, 5) : clearInput(configExample, 5);
         setValue(configExample + input, '20', 5);
         sendKeys('Enter');
         expect(getValue(configExample + input, 5)).toEqual('10');
         expect(getElementClass(configExample + plusButton, 5)).toContain('is-disabled', 'button is not disabled');
 
-        clearInput(configExample, 5);
+        browserIsFirefox() || browserIsSafari() ? clearInputFF(configExample, 5) : clearInput(configExample, 5);
         setValue(configExample + input, '-20', 5);
         sendKeys('Enter');
         expect(getValue(configExample + input, 5)).toEqual('-10');
@@ -101,7 +104,7 @@ describe('Step input component test suit', () => {
 
     it('should check Saudi Arabia locale', () => {
         scrollIntoView(configExample + input, 5);
-        clearInput(configExample, 5);
+        browserIsFirefox() || browserIsSafari() ? clearInputFF(configExample, 5) : clearInput(configExample, 5);
         setValue(localExample + input, '5', 2);
         sendKeys('Enter');
         expect(getValue(localExample + input, 2)).toEqual('٥');
@@ -137,10 +140,10 @@ describe('Step input component test suit', () => {
     });
 
     function checkClickByRightMouseBth(section: string): void {
-        let inputLength = getElementArrayLength(section + input);
+        const inputLength = getElementArrayLength(section + input);
         scrollIntoView(section);
         for (let i = 0; i < inputLength; i++) {
-            let defaultValue = getValue(section + input, i);
+            const defaultValue = getValue(section + input, i);
             clickRightMouseBtn(section + plusButton, i);
             expect(getValue(section + input, i)).toEqual(
                 defaultValue,
@@ -164,7 +167,7 @@ describe('Step input component test suit', () => {
         for (let i = 0; i < inputLength; i++) {
             scrollIntoView(section + input, i);
             defaultValue = getValue(section + input, i);
-            browserIsFirefox() ? clearInputFF(configExample, 5) : clearInput(configExample, 5);
+            browserIsFirefox || browserIsSafari() ? clearInputFF(configExample, 5) : clearInput(configExample, 5);
             setValue(section + input, 'asd123', i);
             sendKeys('Enter');
             expect(getValue(section + input, i)).toEqual(defaultValue);
@@ -180,9 +183,12 @@ describe('Step input component test suit', () => {
 
         for (let i = 0; i < inputLength; i++) {
             scrollIntoView(section + input, i);
-            browserIsFirefox() ? clearInputFF(section, i) : clearInput(section, i);
+            browserIsFirefox() || browserIsSafari() ? clearInputFF(section, i) : clearInput(section, i);
             setValue(section + input, '0', i);
             defaultValue = parseFloat(getValue(section + input, i));
+            /* for states example, popover can block minus(-) btn when page scrolled for clicks;
+            click on input label to remove popover before clicking minus btn */
+            click(section + 'label');
             if (sign === '+') {
                 click(section + plusButton, i);
                 expect(parseFloat(getValue(section + input, i))).toBeGreaterThan(defaultValue);
@@ -207,7 +213,7 @@ describe('Step input component test suit', () => {
             scrollIntoView(section + input, i);
             additionalText = '';
 
-            browserIsFirefox() ? clearInputFF(section, i) : clearInput(section, i);
+            browserIsFirefox() || browserIsSafari() ? clearInputFF(section, i) : clearInput(section, i);
 
             sign === '+'
                 ? setValue(section + input, plusValue.toString(), i)
@@ -249,8 +255,7 @@ describe('Step input component test suit', () => {
     }
 
     function clearInputFF(section: string, index: number = 0): void {
-        let inputValue;
-        inputValue = getValue(section + input, index);
+        const inputValue = getValue(section + input, index);
         click(section + input, index);
         for (let j = 0; j < inputValue.length; j++) {
             sendKeys('Delete');

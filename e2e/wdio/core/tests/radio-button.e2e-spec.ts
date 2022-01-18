@@ -1,5 +1,13 @@
 import { RadioButtonPo } from '../pages/radio-button.po';
-import { click, getAttributeByName, getElementArrayLength, refreshPage, scrollIntoView } from '../../driver/wdio';
+import {
+    click,
+    getAttributeByName,
+    getElementArrayLength,
+    refreshPage,
+    scrollIntoView,
+    waitForElDisplayed,
+    waitForPresent
+} from '../../driver/wdio';
 
 describe('Radio button component test', () => {
     const radioButtonPage = new RadioButtonPo();
@@ -11,6 +19,8 @@ describe('Radio button component test', () => {
 
     afterEach(() => {
         refreshPage();
+        waitForPresent(radioButtonPage.root);
+        waitForElDisplayed(radioButtonPage.title);
     }, 2);
 
     it('verify disable radio buttons', () => {

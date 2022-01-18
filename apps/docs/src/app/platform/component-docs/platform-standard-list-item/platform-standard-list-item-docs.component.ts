@@ -2,21 +2,21 @@ import { Component } from '@angular/core';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
-import * as sliSrc from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-example.component.html';
-import * as borderLessSLISrc from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-border-less-example.component.html';
-import * as borderLessSLITs from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-border-less-example.component.ts';
-import * as sliWithSecondaryType from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-secondary-type-example.component.html';
-import * as sliWithInvertedSecondaryType from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-inverted-secondary-type-example.component.html';
-import * as sliWithFooter from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-footer-example.component.html';
-import * as sliWithFooterTs from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-footer-example.component';
-import * as sliWithGroupHeader from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-group-header-example.component.html';
-import * as sliWithSelection from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-selection-example.component.html';
-import * as sliWithSelectionTs from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-selection-example.component.ts';
-import * as sliWithSingleSelection from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-single-selection-example.component.html';
-import * as sliWithSingleSelectionTs from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-single-selection-example.component.ts';
-import * as sliWithNavigation from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-navigation-example.component.html';
-import * as sliWithNavigationTs from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-navigation-example.component';
-import * as sli from '!raw-loader!./platform-standard-list-item-examples/platform-non-byline-standard-list-item-example.component.html';
+import sliSrc from '!./platform-standard-list-item-examples/platform-standard-list-item-example.component.html?raw';
+import borderLessSLISrc from '!./platform-standard-list-item-examples/platform-standard-list-item-border-less-example.component.html?raw';
+import borderLessSLITs from '!./platform-standard-list-item-examples/platform-standard-list-item-border-less-example.component.ts?raw';
+import sliWithSecondaryType from '!./platform-standard-list-item-examples/platform-standard-list-item-with-secondary-type-example.component.html?raw';
+import sliWithInvertedSecondaryType from '!./platform-standard-list-item-examples/platform-standard-list-item-with-inverted-secondary-type-example.component.html?raw';
+import sliWithFooter from '!./platform-standard-list-item-examples/platform-standard-list-item-with-footer-example.component.html?raw';
+import sliWithFooterTs from '!./platform-standard-list-item-examples/platform-standard-list-item-with-footer-example.component?raw';
+import sliWithGroupHeader from '!./platform-standard-list-item-examples/platform-standard-list-item-with-group-header-example.component.html?raw';
+import sliWithSelection from '!./platform-standard-list-item-examples/platform-standard-list-item-with-selection-example.component.html?raw';
+import sliWithSelectionTs from '!./platform-standard-list-item-examples/platform-standard-list-item-with-selection-example.component.ts?raw';
+import sliWithSingleSelection from '!./platform-standard-list-item-examples/platform-standard-list-item-with-single-selection-example.component.html?raw';
+import sliWithSingleSelectionTs from '!./platform-standard-list-item-examples/platform-standard-list-item-with-single-selection-example.component.ts?raw';
+import sliWithNavigation from '!./platform-standard-list-item-examples/platform-standard-list-item-with-navigation-example.component.html?raw';
+import sliWithNavigationTs from '!./platform-standard-list-item-examples/platform-standard-list-item-with-navigation-example.component?raw';
+import sli from '!./platform-standard-list-item-examples/platform-non-byline-standard-list-item-example.component.html?raw';
 
 @Component({
     selector: 'app-standard-list-item',

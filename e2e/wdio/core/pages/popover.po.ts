@@ -1,5 +1,5 @@
 import { CoreBaseComponentPo } from './core-base-component.po';
-import { waitForElDisplayed } from '../../driver/wdio';
+import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class PopoverPo extends CoreBaseComponentPo {
     private url = '/popover';
@@ -32,6 +32,7 @@ export class PopoverPo extends CoreBaseComponentPo {
     popoverContainer = '#background-ex7 div';
     scrollButton = '#background-ex10 button';
     scrollMessage = '.fd-popover__popper--no-arrow div';
+    scrollCheckbox = 'fd-popover-scroll-example .fd-checkbox__label';
     plusButton = '#background-ex11 button';
     dynamicOption = '.fd-popover__popper .fd-nested-list__button';
     dynamicSubOption = '.level-2.fd-nested-list.ng-star-inserted li a span';
@@ -44,13 +45,22 @@ export class PopoverPo extends CoreBaseComponentPo {
     centerButton = this.button + '[value="center"]';
     topButton = this.button + '[value="top"]';
     endButton = this.button + '[value="end"]';
+    dialogInput = 'fd-popover-control input';
+    popoverNoArrow = '.fd-popover__popper--no-arrow ';
+    paragraph = 'p';
+    triggerButtonContainer = 'fd-popover-container-example button';
+    mobilePopoverButton = 'fd-dialog-body button';
+    popoverMobileExample = 'fd-popover-mobile-example ';
+    mobileInput = 'fd-dialog-body input';
+    mobileFooterButton = 'fd-dialog-footer button';
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.avatar);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

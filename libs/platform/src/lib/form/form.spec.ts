@@ -131,7 +131,8 @@ describe('Platform Form', () => {
 
     it('should highlight the required fields', () => {
         const labels: DebugElement[] = fixture.debugElement.queryAll(By.css('label'));
-        const getFormLabelElement = (label: DebugElement) => label.query(By.css('span')).nativeElement as HTMLElement;
+        const getFormLabelElement = (label: DebugElement): HTMLElement =>
+            label.query(By.css('span')).nativeElement as HTMLElement;
 
         expect(getFormLabelElement(labels[0]).classList.contains('fd-form-label--required')).toBeTrue();
         expect(getFormLabelElement(labels[1]).classList.contains('fd-form-label--required')).toBeTrue();

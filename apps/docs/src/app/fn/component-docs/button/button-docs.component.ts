@@ -1,11 +1,11 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
-import * as buttonrc from '!raw-loader!./examples/button-example/button-example.component.html';
-import * as buttonsecondaryrc from '!raw-loader!./examples/button-example/button-secondary-example.component.html';
-import * as buttonflatrc from '!raw-loader!./examples/button-example/button-flat-example.component.html';
-import * as buttonoutlinerc from '!raw-loader!./examples/button-example/button-outline-example.component.html';
-import * as buttonlinkrc from '!raw-loader!./examples/button-example/button-link-example.component.html';
-import * as buttonnakedrc from '!raw-loader!./examples/button-example/button-naked-example.component.html';
+import buttonrc from '!./examples/button-example/button-example.component.html?raw';
+import buttonsecondaryrc from '!./examples/button-example/button-secondary-example.component.html?raw';
+import buttonflatrc from '!./examples/button-example/button-flat-example.component.html?raw';
+import buttonoutlinerc from '!./examples/button-example/button-outline-example.component.html?raw';
+import buttonlinkrc from '!./examples/button-example/button-link-example.component.html?raw';
+import buttonnakedrc from '!./examples/button-example/button-naked-example.component.html?raw';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 

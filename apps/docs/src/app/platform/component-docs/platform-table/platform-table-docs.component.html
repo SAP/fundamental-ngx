@@ -12,10 +12,12 @@
 </fd-docs-section-title>
 <description>
     <p>
-        Use <code>width</code> on the table column for setting custom width for the column cells. Setting width in
-        percents (%) currently not supported due to the technical reasons. For the columns without width set it will be
-        calculated automatically based on the body cell content but not header cell content.
+        Use <code>width</code> on the table column for setting custom width for the column cells. For the columns
+        without width set it will be calculated automatically based on the body cell content but not header cell
+        content.
     </p>
+
+    <p>Note that if width is set in percents (%), it will be calculated relatively to initial table width.</p>
 
     <p>
         Columns width will be recalculated on any <code>width</code> change but you also can use table's method
@@ -150,8 +152,6 @@
         When using this features it's very important to set the <code>width</code> for the every column as table cells
         width won't be calculated properly.
     </p>
-
-    <p>Consider that currently resizing isn't possible within the table with frozen columns.</p>
 </description>
 <component-example>
     <fdp-platform-table-freezable-example></fdp-platform-table-freezable-example>

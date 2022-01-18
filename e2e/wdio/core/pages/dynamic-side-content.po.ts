@@ -1,4 +1,4 @@
-import { waitForElDisplayed } from '../../driver/wdio';
+import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 import { CoreBaseComponentPo } from './core-base-component.po';
 
 export class DynamicSideContentPo extends CoreBaseComponentPo {
@@ -8,11 +8,11 @@ export class DynamicSideContentPo extends CoreBaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForElDisplayed(this.pageHeader);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

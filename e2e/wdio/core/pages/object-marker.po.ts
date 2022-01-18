@@ -7,15 +7,17 @@ export class ObjectMarkerPo extends CoreBaseComponentPo {
 
     marker = 'span.fd-object-marker';
     iconOnlyMarkers = 'fd-object-marker-example span';
-    clickableMarkers = '[ng-reflect-clickable="true"]';
+    objectMarkerClickableExample = 'fd-object-marker-clickable-example ';
+    link = 'a';
+    icon = 'i';
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForPresent(this.marker);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

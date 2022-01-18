@@ -1,14 +1,17 @@
 import { FormMessagePo } from '../pages/form-message.po';
 import {
+    browserIsSafari,
     click,
     getElementPlaceholder,
     getText,
     getValue,
     isElementClickable,
+    isElementDisplayed,
     mouseHoverElement,
     refreshPage,
     scrollIntoView,
     setValue,
+    waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 
@@ -24,7 +27,7 @@ import {
 
 describe('Form Message test suite:', () => {
     const formMessagePage = new FormMessagePo();
-    const { messageWithInput, messageWithInputGroup, buttons, messageInformation, messageWithTextArea, inputFields } =
+    const { messageWithInput, messageWithInputGroup, buttons, messageInformation, messageWithTextArea } =
         formMessagePage;
 
     beforeAll(() => {
@@ -33,7 +36,8 @@ describe('Form Message test suite:', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(messageWithInput);
+        waitForPresent(formMessagePage.root);
+        waitForElDisplayed(formMessagePage.title);
     }, 1);
 
     it('should check message with input has placeholder', () => {
@@ -45,7 +49,7 @@ describe('Form Message test suite:', () => {
         scrollIntoView(messageWithInput);
         setValue(messageWithInput, testText);
         expect(getValue(messageWithInput)).toBe(testText);
-        expect(getText(messageInformation)).toBe(hoverEventMessageInput);
+        expect(getText(messageInformation).trim()).toBe(hoverEventMessageInput);
     });
 
     it('should check message with input group field', () => {
@@ -53,10 +57,14 @@ describe('Form Message test suite:', () => {
         setValue(messageWithInputGroup, testText, 1);
         expect(getValue(messageWithInputGroup, 1)).toBe(testText);
         click(buttons, 1);
-        expect(getText(messageInformation)).toBe(clickEventMessage);
+        expect(getText(messageInformation).trim()).toBe(clickEventMessage);
     });
 
     it('should check message with input group field - hover', () => {
+        // skipped due to hoverElement does not work in Safari
+        if (browserIsSafari()) {
+            return;
+        }
         scrollIntoView(messageWithInputGroup, 2);
         mouseHoverElement(messageWithInputGroup, 2);
         expect(getText(messageInformation)).toBe(hoverEventMessageInputGroup);
@@ -69,7 +77,17 @@ describe('Form Message test suite:', () => {
         scrollIntoView(messageWithTextArea);
         setValue(messageWithTextArea, testMultilineText);
         expect(getValue(messageWithTextArea)).toBe(testMultilineText);
-        expect(getText(messageInformation)).toBe(eventMessageTextArea);
+        expect(getText(messageInformation).trim()).toBe(eventMessageTextArea);
+    });
+
+    // skipped due to https://github.com/SAP/fundamental-ngx/issues/6982
+    xit('should check that messaging by hover does not work in other way after clicking button', () => {
+        scrollIntoView(messageWithInputGroup, 2);
+        mouseHoverElement(messageWithInputGroup, 2);
+        expect(isElementDisplayed(messageInformation)).toBe(true);
+        click(buttons, 2);
+        mouseHoverElement(messageWithInputGroup, 2);
+        expect(isElementDisplayed(messageInformation)).toBe(true);
     });
 
     xdescribe('Check visual regression', () => {

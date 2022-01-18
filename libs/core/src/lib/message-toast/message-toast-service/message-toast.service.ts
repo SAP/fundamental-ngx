@@ -1,3 +1,4 @@
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Injectable, ComponentRef, TemplateRef, Type } from '@angular/core';
 import { MessageToastComponent } from '../message-toast.component';
 import { MessageToastContainerComponent } from '../message-toast-utils/message-toast-container.component';
@@ -14,7 +15,7 @@ export class MessageToastService {
     private _messageToastContainerRef: ComponentRef<MessageToastContainerComponent>;
 
     /** @hidden */
-    constructor(private _dynamicComponentService: DynamicComponentService) {}
+    constructor(private _dynamicComponentService: DynamicComponentService, private _liveAnnouncer: LiveAnnouncer) {}
 
     /**
      * Returns true if there are some message toasts currently open. False otherwise.
@@ -68,6 +69,7 @@ export class MessageToastService {
         });
 
         this._messageToasts.push(component);
+
         return service;
     }
 

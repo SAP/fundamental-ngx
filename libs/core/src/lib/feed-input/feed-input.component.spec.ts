@@ -4,7 +4,6 @@ import { By } from '@angular/platform-browser';
 
 import {
     FeedInputButtonDirective,
-    FeedInputComponent,
     FeedInputModule,
     FeedInputTextareaDirective
 } from '@fundamental-ngx/core/feed-input';

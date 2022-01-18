@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 
-import * as uploadCollectionHtml from '!raw-loader!./examples/upload-collection-example.component.html';
-import * as uploadCollectionTs from '!raw-loader!./examples/upload-collection-example.component.ts';
-import * as uploadCollectionSmallHtml from '!raw-loader!./examples/upload-collection-small-example.component.html';
-import * as uploadCollectionSmallTs from '!raw-loader!./examples/upload-collection-small-example.component.ts';
-import * as uploadCollectionCustomHtml from '!raw-loader!./examples/upload-collection-custom-example.component.html';
-import * as uploadCollectionCustomTs from '!raw-loader!./examples/upload-collection-custom-example.component.ts';
-import * as uploadCollectionComplexHtml from '!raw-loader!./examples/upload-collection-complex-example.component.html';
-import * as uploadCollectionComplexTs from '!raw-loader!./examples/upload-collection-complex-example.component.ts';
-import * as uploadCollectionEmptyHtml from '!raw-loader!./examples/upload-collection-empty-example.component.html';
-import * as uploadCollectionEmptyTs from '!raw-loader!./examples/upload-collection-empty-example.component.ts';
+import uploadCollectionHtml from '!./examples/upload-collection-example.component.html?raw';
+import uploadCollectionTs from '!./examples/upload-collection-example.component.ts?raw';
+import uploadCollectionSmallHtml from '!./examples/upload-collection-small-example.component.html?raw';
+import uploadCollectionSmallTs from '!./examples/upload-collection-small-example.component.ts?raw';
+import uploadCollectionCustomHtml from '!./examples/upload-collection-custom-example.component.html?raw';
+import uploadCollectionCustomTs from '!./examples/upload-collection-custom-example.component.ts?raw';
+import uploadCollectionComplexHtml from '!./examples/upload-collection-complex-example.component.html?raw';
+import uploadCollectionComplexTs from '!./examples/upload-collection-complex-example.component.ts?raw';
+import uploadCollectionEmptyHtml from '!./examples/upload-collection-empty-example.component.html?raw';
+import uploadCollectionEmptyTs from '!./examples/upload-collection-empty-example.component.ts?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

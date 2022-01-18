@@ -8,14 +8,13 @@ import {
     OnDestroy,
     OnChanges,
     Output,
-    Renderer2,
-    SimpleChanges
+    Renderer2
 } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-lineclamp-target]',
     exportAs: 'fdLineClampTarget'
 })
@@ -42,7 +41,7 @@ export class LineClampTargetDirective implements OnChanges, AfterViewInit {
     }
 
     /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
+    ngOnChanges(): void {
         this.update.emit(this);
     }
 
@@ -53,7 +52,7 @@ export class LineClampTargetDirective implements OnChanges, AfterViewInit {
 }
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-lineclamp]',
     exportAs: 'fdLineClamp'
 })
@@ -160,7 +159,7 @@ export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
         }
         const lineClampHeight = Math.ceil(this.getLineHeight() * this._lineCount);
         const ellipsisTextArray = this._originalText.split(' ');
-        const ellipsisText = () => {
+        const ellipsisText = (): void => {
             if (this.rootElement.scrollHeight > lineClampHeight) {
                 ellipsisTextArray.pop();
                 this._lineClampTarget.textContent = ellipsisTextArray.join(' ') + '...';

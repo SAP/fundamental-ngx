@@ -1,4 +1,4 @@
-import { Component, DebugElement, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import {
     NumericContentDirective,
@@ -46,10 +46,7 @@ export class TestComponent {
 }
 
 describe('NumericContentDirectives', () => {
-    let fixture: ComponentFixture<TestComponent>,
-        component: TestComponent,
-        debugElement: DebugElement,
-        element: HTMLElement;
+    let fixture: ComponentFixture<TestComponent>, component: TestComponent;
 
     beforeEach(
         waitForAsync(() => {
@@ -73,8 +70,6 @@ describe('NumericContentDirectives', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;
-        debugElement = fixture.debugElement;
-        element = debugElement.nativeElement;
         fixture.detectChanges();
     });
 

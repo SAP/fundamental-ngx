@@ -1,22 +1,22 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
-import * as basicTokenH from '!raw-loader!./examples/token-example/token-example.component.html';
-import * as basicTokenTs from '!raw-loader!./examples/token-example/token-example.component.ts';
+import basicTokenH from '!./examples/token-example/token-example.component.html?raw';
+import basicTokenTs from '!./examples/token-example/token-example.component.ts?raw';
 
-import * as selectedTokenH from '!raw-loader!./examples/token-selected-example/token-selected-example.component.html';
-import * as selectedTokenTs from '!raw-loader!./examples/token-selected-example/token-selected-example.component.ts';
+import selectedTokenH from '!./examples/token-selected-example/token-selected-example.component.html?raw';
+import selectedTokenTs from '!./examples/token-selected-example/token-selected-example.component.ts?raw';
 
-import * as readOnlyTokenH from '!raw-loader!./examples/token-readonly-example/token-readonly-example.component.html';
-import * as readOnlyTokenTs from '!raw-loader!./examples/token-readonly-example/token-readonly-example.component.ts';
+import readOnlyTokenH from '!./examples/token-readonly-example/token-readonly-example.component.html?raw';
+import readOnlyTokenTs from '!./examples/token-readonly-example/token-readonly-example.component.ts?raw';
 
-import * as compactTokenH from '!raw-loader!./examples/token-compact-example/token-compact-example.component.html';
-import * as compactTokenTs from '!raw-loader!./examples/token-compact-example/token-compact-example.component.ts';
+import compactTokenH from '!./examples/token-compact-example/token-compact-example.component.html?raw';
+import compactTokenTs from '!./examples/token-compact-example/token-compact-example.component.ts?raw';
 
-import * as tokenizerH from '!raw-loader!./examples/tokenizer-example/tokenizer-example.component.html';
-import * as tokenizerTsCode from '!raw-loader!./examples/tokenizer-example/tokenizer-example.component.ts';
+import tokenizerH from '!./examples/tokenizer-example/tokenizer-example.component.html?raw';
+import tokenizerTsCode from '!./examples/tokenizer-example/tokenizer-example.component.ts?raw';
 
-import * as tokenizerCompactH from '!raw-loader!./examples/tokenizer-compact-example/tokenizer-compact-example.component.html';
-import * as tokenizerCompactTsCode from '!raw-loader!./examples/tokenizer-compact-example/tokenizer-compact-example.component.ts';
+import tokenizerCompactH from '!./examples/tokenizer-compact-example/tokenizer-compact-example.component.html?raw';
+import tokenizerCompactTsCode from '!./examples/tokenizer-compact-example/tokenizer-compact-example.component.ts?raw';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 

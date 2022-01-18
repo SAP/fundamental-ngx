@@ -19,7 +19,7 @@ export interface ElementPosition {
 }
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-dnd-item]',
     providers: [DragDrop]
 })
@@ -94,14 +94,14 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
     /** @hidden */
     getElementCoordinates(isBefore: boolean, gridMode: boolean): ElementChord {
         /** Takes distance from the beginning of window page */
-        const rect = <DOMRect>this.elementRef.nativeElement.getBoundingClientRect();
+        const rect: DOMRect = this.elementRef.nativeElement.getBoundingClientRect();
 
         const position: LinkPosition = isBefore ? 'before' : 'after';
 
         /** Vertically distance is counted by distance from top of the side + half of the element height */
         return {
             x: rect.left,
-            position: position,
+            position,
             y: rect.top,
             stickToPosition: this.stickInPlace,
             width: rect.width,

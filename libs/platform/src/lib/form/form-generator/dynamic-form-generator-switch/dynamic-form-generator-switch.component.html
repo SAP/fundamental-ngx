@@ -1,8 +1,10 @@
 <ng-container [formGroup]="form">
-    <fdp-switch
-        [contentDensity]="formItem.guiOptions?.contentDensity"
-        [name]="name"
-        [semantic]="formItem.guiOptions?.additionalData?.semantic"
-        [formControlName]="name"
-    ></fdp-switch>
+    <ng-container [formGroupName]="formGroupName">
+        <fdp-switch
+            [contentDensity]="formItem.guiOptions?.contentDensity"
+            [name]="name"
+            [semantic]="formItem.guiOptions?.additionalData?.semantic"
+            [formControlName]="name"
+        ></fdp-switch>
+    </ng-container>
 </ng-container>

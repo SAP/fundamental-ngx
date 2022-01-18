@@ -21,10 +21,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FormStates } from '@fundamental-ngx/core/shared';
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { defer, fromEvent, interval, merge, Observable, Subscription, timer } from 'rxjs';
-import { switchMap, takeUntil } from 'rxjs/operators';
+import { filter, switchMap, takeUntil } from 'rxjs/operators';
 import NumberFormat = Intl.NumberFormat;
-import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, ENTER, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { SafeHtml } from '@angular/platform-browser';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 let stepInputUniqueId = 0;
 
@@ -80,22 +82,26 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** Sets Increment Button title attribute */
     @Input()
-    incrementButtonTitle = '';
+    incrementButtonTitle = 'Increment';
 
     /** Sets Decrement Button title attribute */
     @Input()
-    decrementButtonTitle = '';
+    decrementButtonTitle = 'Decrement';
 
     /** Sets input aria-label attribute */
     @Input()
     ariaLabel: string = null;
+
+    /** Aria defines role description for the Step Input. */
+    @Input()
+    ariaRoleDescription = 'Step Input';
 
     /** Sets input id */
     @Input()
     inputId = `fd-step-input-${stepInputUniqueId++}`;
 
     /** Set control value */
-    @Input('value')
+    @Input()
     set value(value: number) {
         if (value === null) {
             this._value = value;
@@ -142,6 +148,10 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     @Input()
     state: FormStates;
 
+    /** Holds the message with respect to state */
+    @Input()
+    stateMessage: string | SafeHtml;
+
     /** Custom unit displayed as a label next to the input */
     @Input()
     unit: string;
@@ -180,10 +190,12 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** Emits event when input gets focused */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onFocusIn: EventEmitter<void> = new EventEmitter<void>();
 
     /** Emits event when input loses focus */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onFocusOut: EventEmitter<void> = new EventEmitter<void>();
 
     /** Emits new value when control value has changed */
@@ -192,11 +204,11 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** @hidden */
     @ViewChild('incrementBtn', { read: ElementRef })
-    incrementButton: ElementRef;
+    incrementButton: ElementRef<HTMLButtonElement>;
 
     /** @hidden */
     @ViewChild('decrementBtn', { read: ElementRef })
-    decrementButton: ElementRef;
+    decrementButton: ElementRef<HTMLButtonElement>;
 
     /** @hidden */
     @ViewChild('inputElement', { read: ElementRef, static: true })
@@ -207,9 +219,6 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** @hidden */
     currencySign: string;
-
-    /** @hidden */
-    viewValue: string;
 
     /** @hidden */
     focused: boolean;
@@ -242,14 +251,15 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     private _index: any;
 
     /** @hidden */
-    onChange: Function = () => {};
+    onChange: (value: number) => void = () => {};
 
     /** @hidden */
-    onTouched: Function = () => {};
+    onTouched = (): void => {};
 
     constructor(
         @Inject(LOCALE_ID) locale,
         private _changeDetectorRef: ChangeDetectorRef,
+        private readonly _liveAnnouncer: LiveAnnouncer,
         @Optional() private _contentDensityService: ContentDensityService
     ) {
         this.locale = locale;
@@ -280,12 +290,12 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     }
 
     /** @hidden */
-    registerOnChange(fn: any): void {
+    registerOnChange(fn: (value: number) => void): void {
         this.onChange = fn;
     }
 
     /** @hidden */
-    registerOnTouched(fn: any): void {
+    registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
 
@@ -334,7 +344,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** @hidden */
     handleKeyDown(event: KeyboardEvent): void {
-        const muteEvent = (evnt: Event) => {
+        const muteEvent = (evnt: Event): void => {
             evnt.stopPropagation();
             evnt.preventDefault();
         };
@@ -444,7 +454,9 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** @hidden */
     private _updateViewValue(): void {
-        this.inputElement.nativeElement.value = this._formatToViewValue(this.value);
+        const value = this._formatToViewValue(this.value);
+        this.inputElement.nativeElement.value = value;
+        this._liveAnnouncer.announce(value);
     }
 
     /** @hidden */
@@ -466,19 +478,32 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         }
     }
 
-    /** @hidden */
+    /**
+     * @hidden
+     * Listens for click or space/enter keydown events.
+     *
+     * For long clicks will continuously emit event until "mouseup" event is detected
+     */
     private _setupButtonListener(elementRef: ElementRef): Observable<any> {
         const onMouseDown$ = fromEvent(elementRef.nativeElement, 'mousedown');
         const onMouseUp$ = fromEvent(window, 'mouseup');
+        const onKeyDown$ = fromEvent<KeyboardEvent>(elementRef.nativeElement, 'keydown').pipe(
+            filter((event) => KeyUtil.isKeyCode(event, [SPACE, ENTER]))
+        );
 
-        const timerFactory$ = defer(() => {
-            return timer(500).pipe(
+        const timerFactory$ = defer(() =>
+            timer(500).pipe(
                 switchMap(() => interval(40)),
                 takeUntil(onMouseUp$)
-            );
-        });
+            )
+        );
 
-        return merge(onMouseDown$, onMouseDown$.pipe(switchMap(() => timerFactory$)));
+        return merge(
+            onMouseDown$,
+            onMouseDown$.pipe(switchMap(() => timerFactory$)),
+            // while key is pressed, event will be emitted continuously, so there's no need for timerFactory$
+            onKeyDown$
+        );
     }
 
     /** @hidden */

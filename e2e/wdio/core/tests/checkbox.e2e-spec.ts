@@ -1,6 +1,7 @@
 import { CheckboxPo } from '../pages/checkbox.po';
 import {
     applyState,
+    browserIsSafari,
     click,
     executeScriptBeforeTagAttr,
     getAttributeByName,
@@ -8,11 +9,14 @@ import {
     getElementArrayLength,
     getText,
     isElementClickable,
+    isEnabled,
     refreshPage,
-    scrollIntoView
+    scrollIntoView,
+    waitForElDisplayed
 } from '../../driver/wdio';
 import {
     acceptAllTrue,
+    allMarkedTrueSF,
     allMarkedFalse,
     allMarkedTrue,
     altCustomLabel,
@@ -20,7 +24,8 @@ import {
     customLabelsArr,
     emptyDataArr,
     emptyString,
-    stateClassesArr
+    stateClassesArr,
+    allMarkedFalseSF
 } from '../fixtures/appData/checkbox-content';
 
 describe('checkbox test suite', () => {
@@ -35,7 +40,8 @@ describe('checkbox test suite', () => {
         checkbox,
         checkboxInput,
         checkboxLabel,
-        link
+        link,
+        tristateOutput
     } = checkboxPage;
 
     beforeAll(() => {
@@ -62,115 +68,140 @@ describe('checkbox test suite', () => {
 
     describe('tristate checkbox examples', () => {
         it('should check the 3 checkbox marking states', () => {
+            let trimCount;
+            if (browserIsSafari()) {
+                trimCount = 42;
+            } else {
+                trimCount = 39;
+            }
             scrollIntoView(tristateCheckbox);
+            const startValue = getText(tristateOutput).slice(trimCount).trim();
 
-            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content')).toEqual(
-                emptyString,
-                'mark is present'
-            );
+            expect(startValue).toEqual('false');
 
             click(tristateCheckbox + checkboxLabel);
+            const secondValue = getText(tristateOutput).slice(trimCount).trim();
 
-            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content')).not.toEqual(
-                emptyString,
-                'mark is not present'
-            );
+            expect(secondValue).toEqual('null');
 
             click(tristateCheckbox + checkboxLabel);
+            const thirdValue = getText(tristateOutput).slice(trimCount).trim();
 
-            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content')).not.toEqual(
-                emptyString,
-                'mark is not present'
-            );
+            expect(thirdValue).toEqual('true');
 
             click(tristateCheckbox + checkboxLabel);
+            const fourthValue = getText(tristateOutput).slice(trimCount).trim();
 
-            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content')).toEqual(
-                emptyString,
-                'mark is present'
-            );
+            expect(fourthValue).toEqual(startValue);
         });
 
         it('should check 3rd state not markable', () => {
+            let trimCount;
+            if (browserIsSafari()) {
+                trimCount = 44;
+            } else {
+                trimCount = 41;
+            }
             scrollIntoView(tristateCheckbox);
+            const startValue = getText(tristateOutput, 2).slice(trimCount).trim();
 
-            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content', 1)).not.toEqual(
-                emptyString,
-                'mark is not present'
-            );
+            expect(startValue).toEqual('null');
 
             click(tristateCheckbox + checkboxLabel, 1);
+            const secondValue = getText(tristateOutput, 2).slice(trimCount).trim();
 
-            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content', 1)).not.toEqual(
-                emptyString,
-                'mark is not present'
-            );
+            expect(secondValue).toEqual('true');
 
             click(tristateCheckbox + checkboxLabel, 1);
+            const thirdValue = getText(tristateOutput, 2).slice(trimCount).trim();
 
-            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content', 1)).toEqual(
-                emptyString,
-                'mark is present'
-            );
+            expect(thirdValue).toEqual('false');
 
             click(tristateCheckbox + checkboxLabel, 1);
+            const fourthValue = getText(tristateOutput, 2).slice(trimCount).trim();
 
-            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content', 1)).not.toEqual(
-                emptyString,
-                'mark is not present'
-            );
-
-            click(tristateCheckbox + checkboxLabel, 1);
-
-            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content', 1)).toEqual(
-                emptyString,
-                'mark is present'
-            );
+            expect(fourthValue).not.toEqual(startValue);
         });
     });
 
     describe('checkbox custom values examples', () => {
         it('should check 2 state custom labels', () => {
             scrollIntoView(customValueCheckbox);
-            const initialTextArr = getText(customValueCheckbox).split('\n');
-            const firstExampleValue1 = initialTextArr[1].replace('Value: ', '');
+            if (browserIsSafari()) {
+                let initialTextSafari = getText(customValueCheckbox + 'div')
+                    .slice(-4)
+                    .trim();
+                expect(initialTextSafari).toEqual(customLabelsArr[0]);
 
-            expect(firstExampleValue1).toEqual(customLabelsArr[0]);
+                click(customValueCheckbox + checkboxLabel);
+                initialTextSafari = getText(customValueCheckbox + 'div')
+                    .slice(-3)
+                    .trim();
+                expect(initialTextSafari).toEqual(customLabelsArr[1]);
+            }
+            if (!browserIsSafari()) {
+                const initialTextArr = getText(customValueCheckbox).split('\n');
+                const firstExampleValue1 = initialTextArr[1].replace('Value: ', '');
 
-            click(customValueCheckbox + checkboxLabel);
-            const secondTextArr = getText(customValueCheckbox).split('\n');
-            const firstExampleValue2 = secondTextArr[1].replace('Value: ', '');
+                expect(firstExampleValue1).toEqual(customLabelsArr[0]);
 
-            expect(firstExampleValue2).toEqual(customLabelsArr[1]);
+                click(customValueCheckbox + checkboxLabel);
+                const secondTextArr = getText(customValueCheckbox).split('\n');
+                const firstExampleValue2 = secondTextArr[1].replace('Value: ', '');
+
+                expect(firstExampleValue2).toEqual(customLabelsArr[1]);
+            }
         });
 
         it('should check 3 state custom labels', () => {
-            scrollIntoView(customValueCheckbox);
-            const initialTextArr = getText(customValueCheckbox).split('\n');
-            const secondExampleValue1 = initialTextArr[3].replace('Value: ', '');
+            if (browserIsSafari()) {
+                let initialTextSafari = getText(customValueCheckbox + 'div', 2)
+                    .slice(-4)
+                    .trim();
+                expect(initialTextSafari).toEqual(customLabelsArr[0]);
 
-            expect(secondExampleValue1).toEqual(customLabelsArr[0]);
+                click(customValueCheckbox + checkboxLabel, 1);
+                initialTextSafari = getText(customValueCheckbox + 'div', 2)
+                    .slice(-3)
+                    .trim();
+                expect(initialTextSafari).toEqual(customLabelsArr[1]);
 
-            click(customValueCheckbox + checkboxLabel, 1);
-            const secondTextArr = getText(customValueCheckbox).split('\n');
-            const secondExampleValue2 = secondTextArr[3].replace('Value: ', '');
+                click(customValueCheckbox + checkboxLabel, 1);
+                initialTextSafari = getText(customValueCheckbox + 'div', 2)
+                    .slice(-23)
+                    .trim();
+                expect(initialTextSafari).toEqual(customLabelsArr[2]);
+            }
+            if (!browserIsSafari()) {
+                scrollIntoView(customValueCheckbox);
+                const initialTextArr = getText(customValueCheckbox).split('\n');
+                const secondExampleValue1 = initialTextArr[3].replace('Value: ', '');
 
-            expect(secondExampleValue2).toEqual(customLabelsArr[1]);
+                expect(secondExampleValue1).toEqual(customLabelsArr[0]);
 
-            click(customValueCheckbox + checkboxLabel, 1);
-            const thirdTextArr = getText(customValueCheckbox).split('\n');
-            const secondExampleValue3 = thirdTextArr[3].replace('Value: ', '');
+                click(customValueCheckbox + checkboxLabel, 1);
+                const secondTextArr = getText(customValueCheckbox).split('\n');
+                const secondExampleValue2 = secondTextArr[3].replace('Value: ', '');
 
-            expect(secondExampleValue3).toEqual(customLabelsArr[2]);
+                expect(secondExampleValue2).toEqual(customLabelsArr[1]);
+
+                click(customValueCheckbox + checkboxLabel, 1);
+                const thirdTextArr = getText(customValueCheckbox).split('\n');
+                const secondExampleValue3 = thirdTextArr[3].replace('Value: ', '');
+
+                expect(secondExampleValue3).toEqual(customLabelsArr[2]);
+            }
         });
     });
 
     describe('checkbox with reactive form examples', () => {
         afterEach(() => {
             refreshPage();
+            waitForElDisplayed(checkboxPage.title);
         }, 1);
 
         it('check that marking accept all will mark/unmark all options', () => {
+            let allMarked, outputValue;
             scrollIntoView(reactiveFormCheckbox);
             const checkboxCount = getElementArrayLength(reactiveFormCheckbox + checkbox);
             click(reactiveFormCheckbox + checkboxLabel);
@@ -181,9 +212,16 @@ describe('checkbox test suite', () => {
                 );
             }
             const textArr = getText(reactiveFormCheckbox).split('\n');
-            const outputValue1 = textArr[5];
+            if (browserIsSafari()) {
+                outputValue = textArr[1].trim();
+                allMarked = allMarkedTrueSF;
+            }
+            if (!browserIsSafari()) {
+                outputValue = textArr[5];
+                allMarked = allMarkedTrue;
+            }
 
-            expect(outputValue1).toEqual(allMarkedTrue, 'marking acceptall doesnt mark all options');
+            expect(outputValue).toEqual(allMarked, 'marking acceptall doesnt mark all options');
 
             click(reactiveFormCheckbox + checkboxLabel);
 
@@ -193,9 +231,15 @@ describe('checkbox test suite', () => {
                 );
             }
             const textArr2 = getText(reactiveFormCheckbox).split('\n');
-            const outputValue2 = textArr2[5];
-
-            expect(outputValue2).toEqual(allMarkedFalse, 'unmarking acceptall doesnt unmark all options');
+            if (browserIsSafari()) {
+                outputValue = textArr2[1].trim();
+                allMarked = allMarkedFalseSF;
+            }
+            if (!browserIsSafari()) {
+                outputValue = textArr2[5];
+                allMarked = allMarkedFalse;
+            }
+            expect(outputValue).toEqual(allMarked, 'unmarking acceptall doesnt unmark all options');
         });
 
         it("check that marking 1 option doesn't mark accept all box", () => {
@@ -208,6 +252,7 @@ describe('checkbox test suite', () => {
         });
 
         it('check marking all options marks accept all box', () => {
+            let outputValue, allMarked;
             scrollIntoView(reactiveFormCheckbox);
             const checkboxCount = getElementArrayLength(reactiveFormCheckbox + checkbox);
 
@@ -215,24 +260,36 @@ describe('checkbox test suite', () => {
                 click(reactiveFormCheckbox + checkboxLabel, i);
             }
             const textArr = getText(reactiveFormCheckbox).split('\n');
-            const outputValue = textArr[5];
-
-            expect(outputValue).toEqual(allMarkedTrue, 'all options not marked');
+            if (!browserIsSafari()) {
+                outputValue = textArr[5];
+                allMarked = allMarkedTrue;
+            }
+            if (browserIsSafari()) {
+                outputValue = textArr[1].trim();
+                allMarked = allMarkedTrueSF;
+            }
+            expect(outputValue).toEqual(allMarked, 'all options not marked');
         });
     });
 
     describe('checkbox with custom label examples', () => {
         it('should have a custom label', () => {
+            let checkboxLabelText;
             scrollIntoView(customLabelCheckbox);
             const textArr = getText(customLabelCheckbox).split('\n');
-            const checkboxLabelText = textArr[0];
+            if (!browserIsSafari()) {
+                checkboxLabelText = textArr[0];
+            }
+            if (browserIsSafari()) {
+                checkboxLabelText = textArr[0].slice(1, -14);
+            }
 
             expect([customLabel, altCustomLabel]).toContain(checkboxLabelText);
         });
 
         it('should check the checkbox and link are clickable', () => {
             expect(isElementClickable(customLabelCheckbox + checkboxLabel)).toBe(true, 'checkbox is not clickable');
-            expect(isElementClickable(customLabelCheckbox + link)).toBe(true, 'link is not clickable');
+            expect(isEnabled(customLabelCheckbox + link)).toBe(true);
         });
     });
 

@@ -153,6 +153,10 @@ $fd-upload-collection-drag-and-drop-active-color-var: var(--sapContent_DragAndDr
         cursor: pointer;
     }
 
+    &__item_extension {
+        white-space: nowrap;
+    }
+
     &__actions {
         display: flex;
         justify-content: space-between;

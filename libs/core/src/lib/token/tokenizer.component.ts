@@ -141,19 +141,19 @@ export class TokenizerComponent
     private _contentDensitySubscription = new Subscription();
 
     /** @hidden */
-    /*Variable which will keep the index of the first token pressed in the tokenizer*/
+    /* Variable which will keep the index of the first token pressed in the tokenizer*/
     private _firstElementInSelection: number;
 
     /** @hidden */
-    /*Variable which will keep the index of the last token pressed in the tokenizer*/
+    /* Variable which will keep the index of the last token pressed in the tokenizer*/
     private _lastElementInSelection: number;
 
     /** @hidden */
-    /*Flag which will say if the last keyboard and click operation they used was using control*/
+    /* Flag which will say if the last keyboard and click operation they used was using control*/
     private _ctrlPrevious: boolean;
 
     /** @hidden */
-    /*Flag which will say if they held shift and clicked highlighting elements before or*/
+    /* Flag which will say if they held shift and clicked highlighting elements before or*/
     private _directionShiftIsRight: boolean;
 
     /** An RxJS Subject that will kill the data stream upon destruction (for unsubscribing)  */
@@ -178,6 +178,8 @@ export class TokenizerComponent
         }
         this.tokenListChangesSubscription = this.tokenList.changes.subscribe(() => {
             this._cdRef.detectChanges();
+            this.moreTokensLeft = [];
+            this.moreTokensRight = [];
             this.previousTokenCount > this.tokenList.length ? this._expandTokens() : this._collapseTokens();
             this.previousTokenCount = this.tokenList.length;
             this.handleTokenClickSubscriptions();
@@ -249,7 +251,7 @@ export class TokenizerComponent
         return [this.class];
     }
 
-    elementRef(): ElementRef<any> {
+    elementRef(): ElementRef {
         return this._elementRef;
     }
 
@@ -292,7 +294,7 @@ export class TokenizerComponent
     /** @hidden */
     addKeyboardListener(element: HTMLElement, newIndex: number): void {
         // function needs to be defined in order to be referenced later by addEventListener/removeEventListener
-        const handleFunctionReference = (e) => {
+        const handleFunctionReference = (e): void => {
             if (newIndex || newIndex === 0) {
                 this.handleKeyDown(e, newIndex);
             }
@@ -456,7 +458,7 @@ export class TokenizerComponent
             let combinedTokenWidth = this.getCombinedTokenWidth(); // the combined width of all tokens, the "____ more" text, and the input
             let i = 0;
             /*
-             When resizing, we want to collapse the tokens on the left first. However when the user is navigating through a
+             When resizing, we want to collapse the tokens on the left first. However when the user is navigating through
              a group of overflowing tokens using the arrow left key, we may need to hide tokens on the right. So if this
              function has been called with the param 'right' it will collapse tokens from the right side of the list rather
              than the (default) left side.
@@ -468,6 +470,7 @@ export class TokenizerComponent
                 // loop through the tokens and hide them until the combinedTokenWidth fits in the elementWidth
                 const token = this.tokenList.find((item, index) => index === i);
                 const moreTokens = side === 'right' ? this.moreTokensRight : this.moreTokensLeft;
+
                 if (moreTokens.indexOf(token) === -1) {
                     moreTokens.push(token);
                 }
@@ -625,11 +628,8 @@ export class TokenizerComponent
         }
 
         this.tokenList.forEach((token, indexOfToken) => {
-            if (indexOfToken >= this._firstElementInSelection && indexOfToken <= this._lastElementInSelection) {
-                token.selected = true;
-            } else {
-                token.selected = false;
-            }
+            token.selected =
+                indexOfToken >= this._firstElementInSelection && indexOfToken <= this._lastElementInSelection;
         });
         this._ctrlPrevious = false;
     }

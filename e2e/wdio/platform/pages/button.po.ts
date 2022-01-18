@@ -1,5 +1,5 @@
 import { BaseComponentPo } from './base-component.po';
-import { waitForPresent } from '../../driver/wdio';
+import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class ButtonPo extends BaseComponentPo {
     private url = '/button';
@@ -12,10 +12,11 @@ export class ButtonPo extends BaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForPresent(this.title);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

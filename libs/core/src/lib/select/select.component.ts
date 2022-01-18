@@ -70,7 +70,7 @@ export class FdSelectChange {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '[class.fd-select-custom-class]': 'true',
+        '[class.fd-select-custom-class]': 'inline',
         '[class.fd-select-custom-class--mobile]': 'mobile'
     },
     providers: [
@@ -192,6 +192,10 @@ export class SelectComponent
     @Input()
     mobileConfig: MobileModeConfig = { hasCloseButton: true };
 
+    /** Should select be inlined. */
+    @Input()
+    inline = true;
+
     /** Event emitted when the popover open state changes. */
     @Output()
     readonly isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -224,7 +228,7 @@ export class SelectComponent
     @ViewChild(CdkConnectedOverlay)
     _overlayDir: CdkConnectedOverlay;
 
-    /**@hidden
+    /** @hidden
      * Referent to the option;s container
      */
     @ViewChild('optionPanel', { read: ElementRef })
@@ -348,7 +352,7 @@ export class SelectComponent
     }
 
     /** @hidden */
-    _compareWith = (o1: any, o2: any) => o1 === o2;
+    _compareWith = (o1: any, o2: any): boolean => o1 === o2;
 
     /** Function to compare the option values with the selected values. */
     get compareWith(): (o1: any, o2: any) => boolean {
@@ -437,10 +441,10 @@ export class SelectComponent
     }
 
     /** @hidden */
-    onChange: Function = () => {};
+    onChange: (value: any) => void = () => {};
 
     /** @hidden */
-    onTouched: Function = () => {};
+    onTouched = (): void => {};
 
     /** Toggles the open state of the select. */
     toggle(): void {
@@ -489,12 +493,12 @@ export class SelectComponent
     }
 
     /** @hidden */
-    registerOnChange(fn: Function): void {
+    registerOnChange(fn: (value: any) => void): void {
         this.onChange = fn;
     }
 
     /** @hidden */
-    registerOnTouched(fn: Function): void {
+    registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
 

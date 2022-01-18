@@ -12,6 +12,7 @@ import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
 import { PlatformSelectModule } from '../select.module';
 import { SelectComponent } from '../select/select.component';
 import { FdpSelectionChangeEvent } from '../commons/base-select';
+import { runValueAccessorTests } from 'ngx-cva-test-suite';
 
 @Component({
     selector: 'fdp-select-test',
@@ -150,7 +151,7 @@ describe('Select Component default values', () => {
         </fdp-form-group>
     `
 })
-class TestReactiveSelectComponnet {
+class TestReactiveSelectComponent {
     @ViewChild(SelectComponent)
     select: SelectComponent;
 
@@ -184,28 +185,23 @@ class TestReactiveSelectComponnet {
 }
 
 describe('Select component Reactive Form Test', () => {
-    let host: TestReactiveSelectComponnet;
-    let fixture: ComponentFixture<TestReactiveSelectComponnet>;
+    let host: TestReactiveSelectComponent;
+    let fixture: ComponentFixture<TestReactiveSelectComponent>;
     let select: SelectComponent;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [FdpFormGroupModule, FormModule, PlatformSelectModule, FormsModule, ReactiveFormsModule],
-            declarations: [TestReactiveSelectComponnet]
+            declarations: [TestReactiveSelectComponent]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TestReactiveSelectComponnet);
+        fixture = TestBed.createComponent(TestReactiveSelectComponent);
         host = fixture.componentInstance;
         fixture.detectChanges();
         select = host.select;
     });
-
-    async function wait(componentFixture: ComponentFixture<any>): Promise<void> {
-        componentFixture.detectChanges();
-        await componentFixture.whenStable();
-    }
 
     it('should create', () => {
         expect(host).toBeTruthy();
@@ -232,4 +228,23 @@ describe('Select component Reactive Form Test', () => {
         expect(items[7].secondaryText).toEqual('Vegetables');
         expect(items[7].value).toEqual('Spinach');
     });
+});
+
+const SELECT_IDENTIFIER = 'platform-select-unit-test';
+
+runValueAccessorTests({
+    component: SelectComponent,
+    testModuleMetadata: {
+        imports: [PlatformSelectModule]
+    },
+    additionalSetup: (fixture, done) => {
+        fixture.componentInstance.id = SELECT_IDENTIFIER;
+        fixture.componentInstance.name = SELECT_IDENTIFIER;
+        done();
+    },
+    supportsOnBlur: false,
+    internalValueChangeSetter: (fixture, value) => {
+        fixture.componentInstance.value = value;
+    },
+    getComponentValue: (fixture) => fixture.componentInstance.value
 });

@@ -115,7 +115,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     toolbarItems: QueryList<ToolbarItemDirective>;
 
     /** @hidden */
-    overflowVisibility: Observable<boolean>;
+    overflowVisibility: Observable<boolean> = of(false);
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -178,7 +178,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
                 debounceTime(50),
                 distinctUntilChanged()
             )
-            .subscribe((_) => this._onResize());
+            .subscribe(() => this._onResize());
     }
 
     /** @hidden */
@@ -301,7 +301,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
 
     /** @hidden */
     private _listenForItemChanges(): void {
-        this.toolbarItems.changes.pipe(filter((_) => this.shouldOverflow)).subscribe(() => this._onResize());
+        this.toolbarItems.changes.pipe(filter(() => this.shouldOverflow)).subscribe(() => this._onResize());
     }
 
     /** @hidden */
@@ -334,7 +334,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
             delete this._groupedCollectionPriority[itemGroup];
         }
 
-        // tslint:disable-next-line:no-unused-expression
+        // eslint-disable-next-line no-unused-expressions, @typescript-eslint/no-unused-expressions
         itemsToRemove &&
             itemsToRemove.forEach((item) => {
                 this._removeItemFromArray(this._normalElements, item);
@@ -361,7 +361,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
 
     /** @hidden Sort by group and priority and initial position */
     private _getSortedByPriorityAndGroupItems(): ToolbarItemDirective[] {
-        const notSorted = this.toolbarItems.toArray().map((element, index) => ({ element: element, index: index }));
+        const notSorted = this.toolbarItems.toArray().map((element, index) => ({ element, index }));
 
         const groups = notSorted.reduce((gr, item) => {
             let groupId = this._getElementGroup(item.element);
@@ -395,18 +395,16 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
                     );
                 }
 
-                return { group: groups[g].map(({ element }) => element), minIndex: minIndex, maxPriority: maxPriority };
+                return { group: groups[g].map(({ element }) => element), minIndex, maxPriority };
             })
             .concat(
                 !groups[0]
                     ? []
-                    : groups[0].map((item) => {
-                          return {
-                              group: [item.element],
-                              maxPriority: OVERFLOW_PRIORITY_SCORE.get(this._getElementPriority(item.element)),
-                              minIndex: item.index
-                          };
-                      })
+                    : groups[0].map((item) => ({
+                          group: [item.element],
+                          maxPriority: OVERFLOW_PRIORITY_SCORE.get(this._getElementPriority(item.element)),
+                          minIndex: item.index
+                      }))
             )
             .sort((a, b) => b.maxPriority - a.maxPriority || a.minIndex - b.minIndex)
             .reduce((arr, i) => arr.concat(i.group), []);
@@ -524,7 +522,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     }
 
     private _changeOverflowVisibleState(visible: boolean): void {
-        this.overflowVisibility = of(visible).pipe(delay(1));
+        this.overflowVisibility = of(visible).pipe(debounceTime(1));
     }
 
     private _changeItemVisibilityState(element: HTMLElement, visible: boolean): void {
@@ -555,9 +553,8 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
             return;
         }
 
-        const isSpacer = (element: ToolbarItemDirective): boolean => {
-            return element.elementRef.nativeElement.classList.contains('fd-toolbar__spacer');
-        };
+        const isSpacer = (element: ToolbarItemDirective): boolean =>
+            element.elementRef.nativeElement.classList.contains('fd-toolbar__spacer');
 
         let lastItem: ToolbarItemDirective = normalElements[normalElements.length - 1];
 
@@ -570,9 +567,8 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     /** @hidden */
     private _getOrderedItemsFollowingQuery(toolbarItems: ToolbarItemDirective[]): ToolbarItemDirective[] {
         const queryArray = this.toolbarItems.toArray();
-        const sortMethod = (a: ToolbarItemDirective, b: ToolbarItemDirective): number => {
-            return queryArray.findIndex((_item) => _item === a) > queryArray.findIndex((_item) => _item === b) ? 1 : -1;
-        };
+        const sortMethod = (a: ToolbarItemDirective, b: ToolbarItemDirective): number =>
+            queryArray.findIndex((_item) => _item === a) > queryArray.findIndex((_item) => _item === b) ? 1 : -1;
         return toolbarItems.sort(sortMethod);
     }
 }

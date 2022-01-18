@@ -3,19 +3,27 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class FeedListItemPo extends CoreBaseComponentPo {
     private url = '/feed-list-item';
-    root = '#page-content';
-    paragraphs = '.fd-feed-list__text';
-    linkMore = '.fd-link.fd-feed-list__link--more';
-    checkbox = 'input[id="toggle-text-righ1"]';
-    links = "a.fd-link[href*='example']";
-    actionSettingsButton = 'button[glyph="action-settings"]';
-    menuButton = 'button[glyph="menu"]';
-    menuOption = '.fd-menu__link';
-    overflowButton = '.fd-button--standard.fd-button--compact';
-    overflowOption = '.fd-button--transparent.fd-button--text-alignment-left';
-    optionCancel = '.fd-button--negative';
 
-    getScreenshotFolder(): object {
+    readonly simpleExample = 'fd-fli-simple-example ';
+    readonly avatarExample = 'fd-fli-avatar-example ';
+    readonly actionExample = 'fd-fli-action-example ';
+    readonly footerExample = 'fd-fli-footer-example ';
+    readonly mobileExample = 'fd-fli-mobile-example ';
+
+    readonly paragraphs = '.fd-feed-list__text';
+    readonly linkMore = '.fd-feed-list__link--more';
+    readonly links = '.fd-link:not(.fd-feed-list__link--more)';
+    readonly actionSettingsButton = 'button[glyph="action-settings"]';
+    readonly actionMenuButton = 'fd-fli-action-example button[glyph="overflow"]';
+    readonly actionMenuButtonOption = '.fd-action-sheet__item .fd-button';
+    readonly overflowButton = 'fd-fli-mobile-example button[glyph="overflow"]';
+    readonly overflowOption = '.fd-action-sheet__item .fd-button';
+    readonly mobileMenu = 'fd-action-sheet-body';
+    readonly optionCancel = '.fd-button--negative';
+    readonly avatar = 'fd-avatar';
+    readonly icon = ' fd-icon';
+
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 
@@ -29,7 +37,7 @@ export class FeedListItemPo extends CoreBaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForPresent(this.paragraphs);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 }

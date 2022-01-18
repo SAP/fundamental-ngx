@@ -8,6 +8,6 @@ export const placeholders_array = [
 
 export const send_button_tooltip = ['Send', 'Send', 'Send', 'Send', 'Send'];
 
-export const avatar_tooltip = ['John Doe', 'John Doe', 'John Doe', 'John Doe'];
+export const avatar_tooltip = ['John Doe', 'User', 'User', 'User'];
 
 export const default_avatar_class = 'fd-avatar--placeholder';

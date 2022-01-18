@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import * as datetimePickerBasicHtml from '!raw-loader!./platform-datetime-picker-examples/platform-datetime-picker-basic-example.component.html';
-import * as datetimePickerBasicTs from '!raw-loader!./platform-datetime-picker-examples/platform-datetime-picker-basic-example.component.ts';
-import * as datetimePickerDisableFunctionHtml from '!raw-loader!./platform-datetime-picker-examples/platform-datetime-picker-disable-function-example.component.html';
-import * as datetimePickerDisableFunctionTs from '!raw-loader!./platform-datetime-picker-examples/platform-datetime-picker-disable-function-example.component.ts';
-import * as datetimePickerReactiveHtml from '!raw-loader!./platform-datetime-picker-examples/platform-datetime-picker-reactive-example.component.html';
-import * as datetimePickerReactiveTs from '!raw-loader!./platform-datetime-picker-examples/platform-datetime-picker-reactive-example.component.ts';
-import * as datetimePickerTemplateHtml from '!raw-loader!./platform-datetime-picker-examples/platform-datetime-picker-template-example.component.html';
-import * as datetimePickerTemplateTs from '!raw-loader!./platform-datetime-picker-examples/platform-datetime-picker-template-example.component.ts';
+import datetimePickerBasicHtml from '!./platform-datetime-picker-examples/platform-datetime-picker-basic-example.component.html?raw';
+import datetimePickerBasicTs from '!./platform-datetime-picker-examples/platform-datetime-picker-basic-example.component.ts?raw';
+import datetimePickerDisableFunctionHtml from '!./platform-datetime-picker-examples/platform-datetime-picker-disable-function-example.component.html?raw';
+import datetimePickerDisableFunctionTs from '!./platform-datetime-picker-examples/platform-datetime-picker-disable-function-example.component.ts?raw';
+import datetimePickerReactiveHtml from '!./platform-datetime-picker-examples/platform-datetime-picker-reactive-example.component.html?raw';
+import datetimePickerReactiveTs from '!./platform-datetime-picker-examples/platform-datetime-picker-reactive-example.component.ts?raw';
+import datetimePickerTemplateHtml from '!./platform-datetime-picker-examples/platform-datetime-picker-template-example.component.html?raw';
+import datetimePickerTemplateTs from '!./platform-datetime-picker-examples/platform-datetime-picker-template-example.component.ts?raw';
 
 import { ExampleFile } from '../../../../documentation/core-helpers/code-example/example-file';
 

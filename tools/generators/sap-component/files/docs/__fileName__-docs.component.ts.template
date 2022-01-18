@@ -1,0 +1,26 @@
+import { Component } from '@angular/core';
+
+import <%= propertyName %>DefaultExampleHtml from '!./examples/default/<%= fileName %>-default-example.component.html?raw';
+import <%= propertyName %>DefaultExampleTs from '!./examples/default/<%= fileName %>-default-example.component.ts?raw';
+
+import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
+
+@Component({
+    selector: 'app-<%= fileName %>',
+    templateUrl: './<%= fileName %>-docs.component.html'
+})
+export class <%= className %>DocsComponent {
+    <%= propertyName %>DefaultExample: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: '<%= fileName %>-default-example',
+            code: <%= propertyName %>DefaultExampleHtml
+        },
+        {
+            language: 'typescript',
+            code: <%= propertyName %>DefaultExampleTs,
+            fileName: '<%= fileName %>-default-example',
+            component: '<%= className %>DefaultExampleComponent'
+        }
+    ];
+}

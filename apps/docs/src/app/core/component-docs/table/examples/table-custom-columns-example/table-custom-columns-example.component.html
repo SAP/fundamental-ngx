@@ -6,13 +6,13 @@
     </thead>
     <tbody fd-table-body>
         <tr *ngFor="let row of dataSource" fd-table-row>
-            <td fd-table-cell [key]="'column1'">
+            <td fd-table-cell key="column1">
                 <a href="#">{{ row.column1 }}</a>
             </td>
-            <td fd-table-cell [key]="'column2'">{{ row.column2 }}</td>
-            <td fd-table-cell [key]="'column3'">{{ row.column3 }}</td>
-            <td fd-table-cell [key]="'date'">{{ row.date }}</td>
-            <td fd-table-cell [key]="'type'"><fd-icon [glyph]="row.type"></fd-icon></td>
+            <td fd-table-cell key="column2">{{ row.column2 }}</td>
+            <td fd-table-cell key="column3">{{ row.column3 }}</td>
+            <td fd-table-cell key="date">{{ row.date }}</td>
+            <td fd-table-cell key="type"><fd-icon [glyph]="row.type"></fd-icon></td>
         </tr>
     </tbody>
 </table>

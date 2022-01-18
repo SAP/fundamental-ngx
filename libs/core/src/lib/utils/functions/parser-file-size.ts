@@ -10,7 +10,7 @@ export function parserFileSize(fileSize: string): number {
         return 0;
     }
 
-    const sizes = fileSize.match(/[\d\.]+|\D+/g);
+    const sizes = fileSize.match(/[\d.]+|\D+/g);
     if (sizes.length > 1) {
         const size = Number(sizes[0].replace(/ +/g, ''));
         const unit = sizes[1].replace(/ +/g, '').toUpperCase();

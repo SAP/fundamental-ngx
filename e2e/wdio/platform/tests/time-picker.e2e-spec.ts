@@ -13,7 +13,8 @@ import {
     setValue,
     waitForElDisplayed,
     waitForPresent,
-    getElementPlaceholder
+    getElementPlaceholder,
+    getText
 } from '../../driver/wdio';
 import { time, text, defaultValidTime, altValidTime } from '../fixtures/testData/time-picker';
 import { TimePickerPO } from '../pages/time-picker.po';
@@ -30,9 +31,13 @@ describe('Time picker suite', () => {
         disabledInput,
         disabledButton,
         navigationDownArrowButton,
-        timeItem,
+        timeColumn,
         setToNullButton,
-        setValidTimeButton
+        setValidTimeButton,
+        hoursColumn,
+        columnItem,
+        thirdColumn,
+        selectedTimeItem
     } = timePickerPage;
 
     beforeAll(() => {
@@ -41,7 +46,8 @@ describe('Time picker suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(timePickerInput);
+        waitForPresent(timePickerPage.root);
+        waitForElDisplayed(timePickerPage.title);
     }, 1);
 
     it('Verify on click on the time picker button', () => {
@@ -141,6 +147,30 @@ describe('Time picker suite', () => {
         expect(getValue(activeTimePickerInput, 16)).toBe(defaultValidTime);
     });
 
+    it('should check that basic time picker has 24 hours format', () => {
+        checkTimeFormat('24h', 0);
+    });
+
+    it('should check that basic time picker has 12 hours format', () => {
+        checkTimeFormat('12h', 1);
+    });
+
+    it('should check that time picker with reactive forms has 24 hours format', () => {
+        checkTimeFormat('24h', 6);
+    });
+
+    it('should check that time picker with reactive forms has 12 hours format', () => {
+        checkTimeFormat('12h', 7);
+    });
+
+    it('should check that time picker with template forms has 24 hours format', () => {
+        checkTimeFormat('24h', 12);
+    });
+
+    it('should check that time picker with template forms has 12 hours format', () => {
+        checkTimeFormat('12h', 13);
+    });
+
     it('Verify LTR / RTL switcher', () => {
         timePickerPage.checkRtlSwitch();
     });
@@ -176,16 +206,40 @@ describe('Time picker suite', () => {
     });
 
     function selectHoursAndMinutes(hour: number = 1, minute: number = 1, day_time: string = ' PM '): void {
-        while ($(selectedValue).getText() !== ` ${hour.toString()} `) {
+        while (getText(selectedValue).trim() !== ` ${hour.toString()} `) {
             click(navigationDownArrowButton);
         }
-        click(timeItem, 1);
-        while ($$(selectedValue)[1].getText() !== ` ${minute.toString()} `) {
+        click(timeColumn, 1);
+        while (getText(selectedValue, 1).trim() !== ` ${minute.toString()} `) {
             click(navigationDownArrowButton);
         }
-        click(timeItem, 2);
-        while ($$(selectedValue)[2].getText() !== day_time) {
+        click(timeColumn, 2);
+        while (getText(selectedValue, 2).trim() !== day_time) {
             click(navigationDownArrowButton);
+        }
+    }
+
+    function checkTimeFormat(format: '24h' | '12h', buttonIndex: number = 0): void {
+        click(activeTimePickerButton, buttonIndex);
+        const arr = [];
+        for (let i = 0; i < getElementArrayLength(hoursColumn + columnItem); i++) {
+            // eslint-disable-next-line
+            arr.push(parseInt(getText(hoursColumn + selectedTimeItem)));
+            click(navigationDownArrowButton);
+        }
+
+        const max = arr.reduce(function (a, b) {
+            return Math.max(a, b);
+        });
+
+        if (format === '12h') {
+            expect(max).not.toBeGreaterThan(12);
+            click(thirdColumn);
+            expect(getText(thirdColumn + columnItem).trim()).toBe('AM');
+            expect(getText(thirdColumn + columnItem, 1).trim()).toBe('PM');
+        }
+        if (format === '24h') {
+            expect(max).toBe(23);
         }
     }
 });

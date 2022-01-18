@@ -19,20 +19,19 @@ export class MultiInputPo extends BaseComponentPo {
     dropdownOptionTextValueHelp = '[role="option"]';
     validationPopover = '.fd-popover__popper .fd-form-message';
     compactExampleTokens = 'fdp-platform-multi-input-compact-example fd-token';
+    errorMessage = '.fd-form-message--error span';
+    declineButton = '.fd-button[glyph=decline]';
+    listitems = 'ul[role=list] [role="listitem"] li';
+    reactiveExample = 'fdp-platform-multi-input-reactive-example';
 
-    crossButton = (option: string) => {
-        return `//span[text() = '${option}']/../following-sibling::span`;
-    };
+    crossButton = (option: string) => `//span[text() = '${option}']/../following-sibling::span`;
 
-    selectedDropDownOption = (name: string) => {
-        return `//span[text()='${name}']`;
-    };
+    selectedDropDownOption = (name: string) => `//span[text()='${name}']`;
 
-    dropDownOption = (name: string) => {
-        return doesItExist('fdp-standard-list-item .fd-list__content')
+    dropDownOption = (name: string) =>
+        doesItExist('fdp-standard-list-item .fd-list__content')
             ? `//div[@title="${name}"]/../..`
             : `//span[@title="${name}"]/..`;
-    };
 
     expandDropdown(dropDownSelector: string, index: number = 0): void {
         sendKeys(['Escape']);
@@ -49,11 +48,11 @@ export class MultiInputPo extends BaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForPresent(this.title);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

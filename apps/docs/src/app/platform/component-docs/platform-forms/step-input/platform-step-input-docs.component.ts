@@ -2,15 +2,15 @@ import { Component, ViewEncapsulation } from '@angular/core';
 
 import { ExampleFile } from '../../../../documentation/core-helpers/code-example/example-file';
 
-import * as exampleScss from '!raw-loader!./platform-step-input-examples/platform-step-input-example.scss';
-import * as exampleHtml from '!raw-loader!./platform-step-input-examples/platform-number-step-input-example.component.html';
-import * as exampleTs from '!raw-loader!./platform-step-input-examples/platform-number-step-input-example.component';
-import * as reactiveFormExampleHtml from '!raw-loader!./platform-step-input-examples/platform-number-step-input-reactive-example.component.html';
-import * as reactiveFormExampleTs from '!raw-loader!./platform-step-input-examples/platform-number-step-input-reactive-example.component';
-import * as templateFormExampleHtml from '!raw-loader!./platform-step-input-examples/platform-number-step-input-template-example.component.html';
-import * as templateFormExampleTs from '!raw-loader!./platform-step-input-examples/platform-number-step-input-template-example.component';
-import * as statesExampleHtml from '!raw-loader!./platform-step-input-examples/platform-number-step-input-state-example.component.html';
-import * as statesExampleTs from '!raw-loader!./platform-step-input-examples/platform-number-step-input-state-example.component';
+import exampleScss from '!./platform-step-input-examples/platform-step-input-example.scss?raw';
+import exampleHtml from '!./platform-step-input-examples/platform-number-step-input-example.component.html?raw';
+import exampleTs from '!./platform-step-input-examples/platform-number-step-input-example.component?raw';
+import reactiveFormExampleHtml from '!./platform-step-input-examples/platform-number-step-input-reactive-example.component.html?raw';
+import reactiveFormExampleTs from '!./platform-step-input-examples/platform-number-step-input-reactive-example.component?raw';
+import templateFormExampleHtml from '!./platform-step-input-examples/platform-number-step-input-template-example.component.html?raw';
+import templateFormExampleTs from '!./platform-step-input-examples/platform-number-step-input-template-example.component?raw';
+import statesExampleHtml from '!./platform-step-input-examples/platform-number-step-input-state-example.component.html?raw';
+import statesExampleTs from '!./platform-step-input-examples/platform-number-step-input-state-example.component?raw';
 
 @Component({
     selector: 'app-step-input',

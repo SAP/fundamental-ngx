@@ -31,7 +31,7 @@ export interface FdDropEvent<T> {
 }
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-dnd-list]'
 })
 export class DndListDirective<T> implements AfterContentInit, OnDestroy {
@@ -175,9 +175,9 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
         }
 
         this.itemDropped.emit({
-            replacedItemIndex: replacedItemIndex,
-            draggedItemIndex: draggedItemIndex,
-            items: items
+            replacedItemIndex,
+            draggedItemIndex,
+            items
         });
 
         this._removeAllLines();

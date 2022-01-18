@@ -1,10 +1,12 @@
 import { TextareaPo } from '../pages/textarea.po';
 import {
     basic_text_area_label,
-    basic_text_area_placeholder,
     basic_text_area_popover,
+    basicTextareaPlaceholderArr,
     compact_text_area_label,
+    counterTextareaPlaceholderArr,
     disabled_text_area_label,
+    growingTextareaPlaceholderArr,
     no_platforms_form_text_area_label,
     readonly_text_area_label
 } from '../fixtures/appData/textarea-page-content';
@@ -16,16 +18,19 @@ import {
 } from '../fixtures/testData/textarea';
 import {
     addValue,
-    browserIsIEorSafari,
+    browserIsSafari,
     clearValue,
     click,
     currentPlatformName,
     executeScriptAfterTagAttr,
     executeScriptBeforeTagAttr,
-    getAttributeByName,
+    getElementArrayLength,
+    getElementClass,
+    getElementPlaceholder,
     getElementSize,
     getText,
     getValue,
+    isElementDisplayed,
     isEnabled,
     mouseHoverElement,
     pause,
@@ -59,23 +64,27 @@ describe('Verify Textarea component', () => {
         detailedTextArea,
         detailedTextAreaErrorMessage,
         detailedTextAreaCharacterCounter,
-        noPlatformsFormTextAreaLabel
+        noPlatformsFormTextAreaLabel,
+        textarea,
+        textareaBasicExample,
+        textareaAutogrowExample,
+        textareaCounterExample,
+        textareaCounterTemplateExample,
+        textareaI18nExample,
+        message
     } = textareaPage;
     const copyPasteBtn = currentPlatformName() === 'Mac OS X' ? 'Command' : 'Control';
 
     beforeAll(() => {
         textareaPage.open();
-        waitForPresent(readOnlyTextAreaLabel);
     }, 1);
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(readOnlyTextAreaLabel);
+        waitForPresent(textareaPage.root);
+        waitForElDisplayed(textareaPage.title);
     }, 1);
 
-    if (browserIsIEorSafari()) {
-        console.log('Skip for IE and Safari');
-    }
     describe('has Textarea and', () => {
         it('should allow the user to enter multiple lines of text', () => {
             setValue(basicTextArea, multiple_lines_text);
@@ -135,14 +144,14 @@ describe('Verify Textarea component', () => {
         // No example
         /*        xit('should not accept restricted characters (maybe postponed)', async () => {});*/
 
-        describe('placeholder should exhibit standard behaviour', () => {
-            // The standard behaviour of place holder is under browser control, and can't be checked by webDriver,
-            // Checking that placeholder is present.
-            it('should appear as hint text and remain as long as text area is empty', () => {
-                const textAriaPlaceholderBefore = getAttributeByName(basicTextArea, 'placeholder');
-
-                expect(textAriaPlaceholderBefore).toBe(basic_text_area_placeholder);
-            });
+        it('should check all placeholders', () => {
+            checkPlaceholder(textareaBasicExample, basicTextareaPlaceholderArr);
+            checkPlaceholder(textareaAutogrowExample, growingTextareaPlaceholderArr);
+            checkPlaceholder(textareaCounterExample, counterTextareaPlaceholderArr);
+            expect(getElementPlaceholder(textareaCounterTemplateExample + textarea)).toBe(
+                counterTextareaPlaceholderArr[0]
+            );
+            expect(getElementPlaceholder(textareaI18nExample + textarea)).toBe(counterTextareaPlaceholderArr[0]);
         });
 
         describe('if textarea is enabled', () => {
@@ -186,9 +195,8 @@ describe('Verify Textarea component', () => {
 
             expect(errorText.trim()).toBe('Value is required');
         });
-        // TODO: Need to be fixed for EdgeWin
-        xit('should display the counter of characters allowed to input ', () => {
-            // need to sendKeys because of the issue with characters counter
+
+        it('should display the counter of characters allowed to input ', () => {
             addValue(detailedTextArea, 'test');
             const charCounterText1 = getText(detailedTextAreaCharacterCounter);
 
@@ -240,6 +248,9 @@ describe('Verify Textarea component', () => {
         });
 
         it('should grow if growing option is enabled (growing up to 80px)', () => {
+            if (browserIsSafari()) {
+                return;
+            }
             clearValue(growingHeightTextarea);
             const textareaSize1 = getElementSize(growingHeightTextarea);
             setValue(growingHeightTextarea, multiple_lines_text_8_lines);
@@ -269,6 +280,37 @@ describe('Verify Textarea component', () => {
             expect(currentText.length).toBe(10);
         });
 
+        it('should check over limit message for i18n textarea', () => {
+            checkOverLimitMessage(textareaI18nExample, 10);
+        });
+
+        it('should check over limit message for basic textarea', () => {
+            checkOverLimitMessage(textareaBasicExample, 10, 2);
+        });
+
+        it('should check over limit message for aurogrow textarea', () => {
+            checkOverLimitMessage(textareaAutogrowExample, 6, 1);
+            checkOverLimitMessage(textareaAutogrowExample, 6, 3);
+        });
+
+        it('should check over limit message for counter textarea', () => {
+            checkOverLimitMessage(textareaCounterExample, 10);
+        });
+
+        it('should check over limit message for counter template textarea', () => {
+            checkOverLimitMessage(textareaCounterTemplateExample, 10);
+        });
+
+        // skipped due to https://github.com/SAP/fundamental-ngx/issues/7284
+        xit('should check that textarea has error styles when we force error', () => {
+            click(textareaI18nExample + textarea);
+            // force error
+            sendKeys(['A', 'Backspace']);
+
+            expect(getElementClass(textareaI18nExample + textarea)).toContain('is-error');
+            expect(isElementDisplayed(message)).toBe(true);
+        });
+
         // Disabled due to changes in inline help - now there is an icon instead of text
         xdescribe('have a visual cue ', () => {
             it('should have ? mark by default', () => {
@@ -291,4 +333,28 @@ describe('Verify Textarea component', () => {
             });
         });
     });
+
+    function checkPlaceholder(example: string, placeholderArr: string[]): void {
+        scrollIntoView(example);
+        const textareaLength = getElementArrayLength(example + textarea);
+        for (let i = 0; i < textareaLength; i++) {
+            expect(getElementPlaceholder(example + textarea, i)).toBe(placeholderArr[i]);
+        }
+    }
+
+    function checkOverLimitMessage(section: string, limit: number, i: number = 0): void {
+        scrollIntoView(section);
+        clearValue(section + textarea, i);
+        click(section + textarea, i);
+        for (let idx = 0; idx < limit + 1; idx++) {
+            sendKeys('A');
+        }
+        expect(isElementDisplayed(message)).toBe(true);
+        if (section === textareaBasicExample) {
+            expect(getText(message).trim()).toBe('This is an example warning when used without forms.');
+        }
+        if (section !== textareaBasicExample) {
+            expect(getText(message).trim()).toBe('Please get your character count under limit.');
+        }
+    }
 });

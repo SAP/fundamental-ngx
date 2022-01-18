@@ -30,7 +30,8 @@ import {
     FormField,
     FormFieldControl,
     MultiInputDataSource,
-    MultiInputOption
+    MultiInputOption,
+    isFunction
 } from '@fundamental-ngx/platform/shared';
 import { ListComponent, SelectionType } from '@fundamental-ngx/platform/list';
 
@@ -69,7 +70,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     @Input()
     type: InputType;
 
-    /**boolean type represents the focus set for the respective multi input */
+    /** boolean type represents the focus set for the respective multi input */
     @Input()
     autofocus = false;
 
@@ -135,6 +136,10 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     @Input()
     closeOnOutsideClick = true;
 
+    /** Callback function when add-on button clicked. */
+    @Input()
+    addOnButtonClickFn: () => void;
+
     /** @hidden */
     @ViewChild(TokenizerComponent)
     tokenizer: TokenizerComponent;
@@ -181,7 +186,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
      * An arrow function can be used to access the *this* keyword in the calling component.
      * See multi input examples for details. */
     @Input()
-    displayFn = (str: string) => str;
+    displayFn = (str: string): string => str;
 
     /** @hidden */
     ngOnInit(): void {
@@ -219,7 +224,9 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         const index = this.selected.findIndex((selectvalue) => selectvalue.label === value.label);
         if (index === -1) {
             this.selected.push(value);
-            this.close();
+            if (!this.mobile) {
+                this.close();
+            }
         }
         this._updateModel(this.selected);
         this.searchInputElement.nativeElement.focus();
@@ -229,16 +236,25 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
 
     /** @hidden */
     addOnButtonClick(): void {
-        this.searchTermChanged('');
-        this.selectionMode = 'none';
+        if (isFunction(this.addOnButtonClickFn)) {
+            this.addOnButtonClickFn();
+            return;
+        }
+
         this.showList(!this.isOpen);
+    }
+
+    /** @hidden */
+    onInputGroupClicked(): void {
+        if (this.mobile && !this.isOpen) {
+            this.open();
+        }
     }
 
     /** @hidden */
     moreClicked(): void {
         this.open();
         this._suggestions = this.selected;
-        this.selectionMode = 'delete';
         this._cd.markForCheck();
     }
 
@@ -254,9 +270,6 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         this._updateModel(this.selected);
         this.searchInputElement.nativeElement.focus();
         this.close();
-        if (this.selected.length < 10) {
-            this.selectionMode = 'none';
-        }
         this._cd.markForCheck();
     }
 
@@ -336,12 +349,8 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     }
 
     /** @hidden Handle dialog dismissing, closes popover and sets backup data. */
-    _dialogDismiss(term: string): void {
-        if (this.selectedValue && term !== this.selectedValue?.label) {
-            this.selectedValue = this._getSelectedOptionItem(term);
-        }
-        this._selected = [];
-        this.inputText = term;
+    _dialogDismiss(selected: any[]): void {
+        this._selected = selected;
         this.showList(false);
     }
 

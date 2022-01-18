@@ -2,12 +2,15 @@ import { Component } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
-import * as paginationSrc from '!raw-loader!./examples/pagination-example.component.ts';
+import paginationSrc from '!./examples/pagination-example.component.ts?raw';
 
-import * as paginationShowingSrc from '!raw-loader!./examples/pagination-showing-example.component.ts';
+import paginationShowingSrc from '!./examples/pagination-showing-example.component.ts?raw';
 
-import * as paginationPerPageHtml from '!raw-loader!./examples/pagination-per-page-example.component.html';
-import * as paginationPerPageTs from '!raw-loader!./examples/pagination-per-page-example.component.ts';
+import paginationPerPageHtml from '!./examples/pagination-per-page/pagination-per-page-example.component.html?raw';
+import paginationPerPageTs from '!./examples/pagination-per-page/pagination-per-page-example.component.ts?raw';
+
+import paginationMobileHtml from '!./examples/pagination-mobile/pagination-mobile-example.component.html?raw';
+import paginationMobileTs from '!./examples/pagination-mobile/pagination-mobile-example.component.ts?raw';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
@@ -30,8 +33,8 @@ export class PaginationDocsComponent {
                     currentPage: {
                         type: 'integer'
                     },
-                    displayText: {
-                        type: 'string'
+                    mobile: {
+                        type: 'boolean'
                     }
                 }
             }
@@ -46,7 +49,7 @@ export class PaginationDocsComponent {
             totalItems: 70,
             itemsPerPage: 2,
             currentPage: 5,
-            displayText: 'items'
+            mobile: false
         }
     };
 
@@ -67,6 +70,7 @@ export class PaginationDocsComponent {
             component: 'PaginationShowingExampleComponent'
         }
     ];
+
     paginationPerPageSrc: ExampleFile[] = [
         {
             language: 'html',
@@ -78,6 +82,20 @@ export class PaginationDocsComponent {
             code: paginationPerPageTs,
             fileName: 'pagination-per-page-example',
             component: 'PaginationPerPageExampleComponent'
+        }
+    ];
+
+    paginationMobile: ExampleFile[] = [
+        {
+            language: 'html',
+            code: paginationMobileHtml,
+            fileName: 'pagination-mobile-example'
+        },
+        {
+            language: 'typescript',
+            code: paginationMobileTs,
+            fileName: 'pagination-mobile-example',
+            component: 'PaginationMobileExampleComponent'
         }
     ];
 

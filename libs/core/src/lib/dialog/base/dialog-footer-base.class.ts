@@ -31,14 +31,14 @@ export abstract class DialogFooterBase implements AfterContentInit {
 
     /** @hidden */
     protected _listenForButtonChanges(className: string): void {
-        const addClassToButton = (button: ButtonComponent) => {
+        const addClassToButton = (button: ButtonComponent): void => {
             if (button && !button.class.includes(className)) {
                 button.class = button.class + className;
                 button.buildComponentCssClass();
             }
         };
 
-        this.buttons.changes.pipe(startWith(1)).subscribe((_) =>
+        this.buttons.changes.pipe(startWith(1)).subscribe(() =>
             this.buttons.forEach((button) => {
                 addClassToButton(button._buttonComponent);
             })

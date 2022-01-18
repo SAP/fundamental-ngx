@@ -1,9 +1,8 @@
 import { CoreBaseComponentPo } from './core-base-component.po';
-import { waitForElDisplayed } from '../../driver/wdio';
+import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class ButtonPo extends CoreBaseComponentPo {
     private url = '/button';
-    root = '#page-content';
 
     typeButtons = 'fd-button-types-example button';
     menuButtons = 'fd-button-menu-example button';
@@ -13,17 +12,24 @@ export class ButtonPo extends CoreBaseComponentPo {
     disableStateButtons = 'fd-button-state-example button.is-disabled';
     playgroundButton = 'playground button';
     playgroundButtonText = 'playground .fd-button__text';
+    playgroundButtonIcon = this.playgroundButton + ' fd-icon';
     inputLabel = '.fd-input.form-control';
     dropDownMenu = 'select.form-control.ng-valid';
-    checkboxCompact = 'label[for="playgroundcompact"]';
-    checkboxMenu = 'label[for="playgroundfdMenu"]';
+    checkboxCompact = '#playgroundcompact~label';
+    checkboxMenu = '#playgroundfdMenu~label';
+    menuOption = this.dropDownMenu + ' option';
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): object {
+    dropDownOptionByValue(option: string): any {
+        return `select.form-control.ng-valid option[value=${option}]`;
+    }
+
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

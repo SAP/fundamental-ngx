@@ -21,6 +21,8 @@
     (mouseenter)="onMouseEnter($event)"
     (mouseleave)="onMouseLeave($event)"
     (click)="clicked($event)"
+    i18n-aria-roledescription="@@platformLink.i11y.roledescription"
+    [attr.aria-roledescription]="media ? 'Media: ' + media : ''"
 >
     <ng-content></ng-content>
 </a>

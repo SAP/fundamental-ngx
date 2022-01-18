@@ -1,10 +1,6 @@
 import { Component, ChangeDetectionStrategy, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 
-import {
-    DynamicPageCollapseChangeEvent,
-    DynamicPageComponent,
-    DynamicPageTabChangeEvent
-} from '@fundamental-ngx/platform/dynamic-page';
+import { DynamicPageComponent, DynamicPageTabChangeEvent } from '@fundamental-ngx/platform/dynamic-page';
 import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-page-overflow.service';
 
 @Component({
@@ -24,13 +20,18 @@ export class PlatformDynamicPageTabbedExampleComponent implements OnDestroy {
 
     pageTitle = 'Balenciaga Tripple S Trainers';
 
+    background = 'list';
+
+    stackedTabs = false;
+
     constructor(private _overflowHandlingService: PlatformDynamicPagePageOverflowService) {}
 
-    onCollapseChange(event: DynamicPageCollapseChangeEvent): void {
+    onCollapseChange(): void {
         console.log('collapse changed');
     }
 
-    openPage(): void {
+    openPage(stacked: boolean): void {
+        this.stackedTabs = stacked;
         this.overlay.nativeElement.style.width = '100%';
         this.fullscreen = true;
         this._overflowHandlingService.isExampleOpened.next(true);

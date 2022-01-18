@@ -138,10 +138,10 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
     }
 
     /**
-     * Whether AddOn Button should be focusable, set to true by default
+     * Whether AddOn Button should be focusable, set to false by default
      */
     @Input()
-    buttonFocusable = true;
+    buttonFocusable = false;
 
     /**
      * Special days mark, it can be used by passing array of object with
@@ -207,6 +207,7 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
 
     /** Event emitted when popover closes. */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     readonly onClose: EventEmitter<void> = new EventEmitter<void>();
 
     @ViewChild(DatetimePickerComponent)
@@ -220,9 +221,12 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
      * @param fdDate FdDate
      */
     @Input()
-    disableFunction = (_: D): boolean => {
-        return false;
-    };
+    disableFunction: (value: D) => boolean = () => false;
+
+    /** @hidden */
+    get _isRequired(): boolean {
+        return !!this.formField?.required;
+    }
 
     constructor(
         protected _cd: ChangeDetectorRef,

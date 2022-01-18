@@ -1,0 +1,39 @@
+{
+    "extends": ["../../../../../.eslintrc.json"],
+    "ignorePatterns": ["!**/*"],
+    "overrides": [
+        {
+            "files": ["*.ts"],
+            "extends": [
+                "plugin:@nrwl/nx/angular",
+                "plugin:@angular-eslint/template/process-inline-templates",
+                "../../../../../.eslintrc-overrides.json"
+            ],
+            "rules": {
+                "@angular-eslint/no-host-metadata-property": "off",
+                "@angular-eslint/directive-selector": [
+                    "error",
+                    {
+                        "type": "attribute",
+                        "prefix": "fn",
+                        "style": "camelCase"
+                    }
+                ],
+                "@angular-eslint/component-selector": [
+                    "error",
+                    {
+                        "type": "element",
+                        "prefix": "fn",
+                        "style": "kebab-case"
+                    }
+                ]
+            },
+            "plugins": ["@angular-eslint/eslint-plugin", "@typescript-eslint"]
+        },
+        {
+            "files": ["*.html"],
+            "extends": ["plugin:@nrwl/nx/angular-template"],
+            "rules": {}
+        }
+    ]
+}

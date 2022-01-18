@@ -19,7 +19,7 @@ export class SchemaFactoryService {
 
     private _buildSchema(properties: Properties): Properties {
         for (const key in properties) {
-            if (properties.hasOwnProperty(key)) {
+            if (Object.prototype.hasOwnProperty.call(properties, key)) {
                 const type = properties[key].type;
                 if (this.SCHEMAS[type]) {
                     properties[key]['type'] = 'object';

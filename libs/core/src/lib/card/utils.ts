@@ -1,8 +1,6 @@
 import { CLASS_NAME, CardType } from './constants';
 
-const buildModifierClassName = (className: string): string => {
-    return `${CLASS_NAME.card}--${className}`;
-};
+const buildModifierClassName = (className: string): string => `${CLASS_NAME.card}--${className}`;
 
 export const getCardModifierClassNameByCardType = (cardType: CardType): string => {
     switch (cardType) {

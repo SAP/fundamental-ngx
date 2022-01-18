@@ -2,31 +2,31 @@ import { Component } from '@angular/core';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
-import * as cardExampleHtml from '!raw-loader!./examples/card-example.component.html';
-import * as cardCompactExampleHtml from '!raw-loader!./examples/card-compact-example.component.html';
-import * as cardLoaderExampleHtml from '!raw-loader!./examples/card-loader-example.component.html';
-import * as cardFooterExampleHtml from '!raw-loader!./examples/card-footer-example.component.html';
-import * as cardKpiExampleHtml from '!raw-loader!./examples/card-kpi-example.component.html';
-import * as cardKpiExampleScss from '!raw-loader!./examples/card-kpi-example.component.scss';
-import * as cardKpiExampleTs from '!raw-loader!./examples/card-kpi-example.component.ts';
-import * as googleChartServiceTs from '!raw-loader!./examples/card-kpi-google-charts.service.ts';
-import * as cardTableExampleHtml from '!raw-loader!./examples/card-table-example.component.html';
-import * as cardBarChartListExampleTs from '!raw-loader!./examples/bar-chart-list-card/bar-chart-list-card-example.component.ts';
-import * as cardBarChartListExampleHtml from '!raw-loader!./examples/bar-chart-list-card/bar-chart-list-card-example.component.html';
-import * as cardBarChartListExampleScss from '!raw-loader!./examples/bar-chart-list-card/bar-chart-list-card-example.component.scss';
-import * as cardBarTs from '!raw-loader!./examples/bar-chart-list-card/card-bar.component.ts';
-import * as cardBarHtml from '!raw-loader!./examples/bar-chart-list-card/card-bar.component.html';
-import * as cardBarScss from '!raw-loader!./examples/bar-chart-list-card/card-bar.component.scss';
-import * as cardObjectTs from '!raw-loader!./examples/object-card/card-object-example.component.ts';
-import * as cardObjectHtml from '!raw-loader!./examples/object-card/card-object-example.component.html';
-import * as cardCalendarTs from '!raw-loader!./examples/calendar-card/card-calendar-example.component.ts';
-import * as cardCalendarHtml from '!raw-loader!./examples/calendar-card/card-calendar-example.component.html';
-import * as cardQuickViewTs from '!raw-loader!./examples/quick-view-card/card-quick-view-example.component.ts';
-import * as cardQuickViewHtml from '!raw-loader!./examples/quick-view-card/card-quick-view-example.component.html';
-import * as cardListTs from '!raw-loader!./examples/list-card/card-list-example.component.ts';
-import * as cardListHtml from '!raw-loader!./examples/list-card/card-list-example.component.html';
-import * as cardLinkListTs from '!raw-loader!./examples/link-list-card/card-link-list-example.component.ts';
-import * as cardLinkListHtml from '!raw-loader!./examples/link-list-card/card-link-list-example.component.html';
+import cardExampleHtml from '!./examples/card-example.component.html?raw';
+import cardCompactExampleHtml from '!./examples/card-compact-example.component.html?raw';
+import cardLoaderExampleHtml from '!./examples/card-loader-example.component.html?raw';
+import cardFooterExampleHtml from '!./examples/card-footer-example.component.html?raw';
+import cardKpiExampleHtml from '!./examples/card-kpi-example.component.html?raw';
+import cardKpiExampleScss from '!./examples/card-kpi-example.component.scss?raw';
+import cardKpiExampleTs from '!./examples/card-kpi-example.component.ts?raw';
+import googleChartServiceTs from '!./examples/card-kpi-google-charts.service.ts?raw';
+import cardTableExampleHtml from '!./examples/card-table-example.component.html?raw';
+import cardBarChartListExampleTs from '!./examples/bar-chart-list-card/bar-chart-list-card-example.component.ts?raw';
+import cardBarChartListExampleHtml from '!./examples/bar-chart-list-card/bar-chart-list-card-example.component.html?raw';
+import cardBarChartListExampleScss from '!./examples/bar-chart-list-card/bar-chart-list-card-example.component.scss?raw';
+import cardBarTs from '!./examples/bar-chart-list-card/card-bar.component.ts?raw';
+import cardBarHtml from '!./examples/bar-chart-list-card/card-bar.component.html?raw';
+import cardBarScss from '!./examples/bar-chart-list-card/card-bar.component.scss?raw';
+import cardObjectTs from '!./examples/object-card/card-object-example.component.ts?raw';
+import cardObjectHtml from '!./examples/object-card/card-object-example.component.html?raw';
+import cardCalendarTs from '!./examples/calendar-card/card-calendar-example.component.ts?raw';
+import cardCalendarHtml from '!./examples/calendar-card/card-calendar-example.component.html?raw';
+import cardQuickViewTs from '!./examples/quick-view-card/card-quick-view-example.component.ts?raw';
+import cardQuickViewHtml from '!./examples/quick-view-card/card-quick-view-example.component.html?raw';
+import cardListTs from '!./examples/list-card/card-list-example.component.ts?raw';
+import cardListHtml from '!./examples/list-card/card-list-example.component.html?raw';
+import cardLinkListTs from '!./examples/link-list-card/card-link-list-example.component.ts?raw';
+import cardLinkListHtml from '!./examples/link-list-card/card-link-list-example.component.html?raw';
 
 @Component({
     templateUrl: './card-docs.component.html'

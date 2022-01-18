@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import * as iconSrc from '!raw-loader!./examples/icon-example.component.html';
-import * as iconTNTSrc from '!raw-loader!./examples/icon-tnt-example.component.html';
-import * as iconBusinessSuiteInAppSymbolsSrc from '!raw-loader!./examples/icon-businessSuiteInAppSymbols-example.component.html';
+import iconSrc from '!./examples/icon-example.component.html?raw';
+import iconTNTSrc from '!./examples/icon-tnt-example.component.html?raw';
+import iconBusinessSuiteInAppSymbolsSrc from '!./examples/icon-businessSuiteInAppSymbols-example.component.html?raw';
 
 @Component({
     selector: 'app-icon',

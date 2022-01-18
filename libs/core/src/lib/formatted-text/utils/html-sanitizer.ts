@@ -146,7 +146,7 @@ export class HtmlSanitizer {
 
     private _extendLinkTarget(node: HTMLElement): HTMLElement {
         if (node.tagName === 'A') {
-            if (!node.getAttribute('href') || /^\#/.test(node.getAttribute('href'))) {
+            if (!node.getAttribute('href') || /^#/.test(node.getAttribute('href'))) {
                 node.removeAttribute('target');
             } else {
                 const defTarget = this.attributeWhitelist['target'] || '_blank';
@@ -171,7 +171,7 @@ export class HtmlSanitizer {
             iframeDoc.write('<body></body>');
         }
 
-        return { iframe: iframe, iframeDoc: iframeDoc };
+        return { iframe, iframeDoc };
     }
 
     private _removeSafeWrapper(): void {

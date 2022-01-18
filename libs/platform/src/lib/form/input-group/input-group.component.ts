@@ -213,7 +213,7 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
         });
     }
 
-    /**@hidden */
+    /** @hidden */
     private _addClassNameToHostElement(className: string): void {
         this._renderer.addClass(this._hostElementRef.nativeElement, className);
     }

@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 
-import * as standardH from '!raw-loader!./examples/scroll-spy-example/scroll-spy-example.component.html';
-import * as standardT from '!raw-loader!./examples/scroll-spy-example/scroll-spy-example.component.ts';
-import * as standardSCSS from '!raw-loader!./examples/scroll-spy-example/scroll-spy-example.component.scss';
+import standardH from '!./examples/scroll-spy-example/scroll-spy-example.component.html?raw';
+import standardT from '!./examples/scroll-spy-example/scroll-spy-example.component.ts?raw';
+import standardSCSS from '!./examples/scroll-spy-example/scroll-spy-example.component.scss?raw';
 
-import * as customH from '!raw-loader!./examples/scroll-spy-custom-example/scroll-spy-custom-example.component.html';
-import * as customT from '!raw-loader!./examples/scroll-spy-custom-example/scroll-spy-custom-example.component.ts';
-import * as customSCSS from '!raw-loader!./examples/scroll-spy-custom-example/scroll-spy-custom-example.component.scss';
+import customH from '!./examples/scroll-spy-custom-example/scroll-spy-custom-example.component.html?raw';
+import customT from '!./examples/scroll-spy-custom-example/scroll-spy-custom-example.component.ts?raw';
+import customSCSS from '!./examples/scroll-spy-custom-example/scroll-spy-custom-example.component.scss?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

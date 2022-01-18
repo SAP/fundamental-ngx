@@ -49,14 +49,14 @@ export class ActionListItemComponent extends BaseListItem {
      *  @hidden
      *  Handles action click
      */
-    _onActionClick($event: MouseEvent | KeyboardEvent | TouchEvent): void {
+    _onActionClick(): void {
         const event = new ActionChangeEvent();
         event.source = this;
         this.actionClicked.emit(event);
     }
 
     /** @hidden */
-    /**on keydown append active styles on actionable item */
+    /** on keydown append active styles on actionable item */
     _onKeyDown(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE)) {
             this.button.nativeElement.classList.add(IS_ACTIVE_CLASS);
@@ -64,11 +64,11 @@ export class ActionListItemComponent extends BaseListItem {
     }
 
     /** @hidden */
-    /**on keyup remove active styles from actionable item*/
+    /** on keyup remove active styles from actionable item*/
     _onKeyUp(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE)) {
             this.button.nativeElement.classList.remove(IS_ACTIVE_CLASS);
-            this._onActionClick(event);
+            this._onActionClick();
         }
     }
 }

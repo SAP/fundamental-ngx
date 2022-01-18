@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MultiInputComponent } from './multi-input.component';
 import { TokenModule } from '@fundamental-ngx/core/token';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { PipeModule } from '@fundamental-ngx/core/utils';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
@@ -18,6 +18,7 @@ import { AutoCompleteModule } from '@fundamental-ngx/core/utils';
         CommonModule,
         TokenModule,
         FormsModule,
+        ReactiveFormsModule,
         ListModule,
         PopoverModule,
         PipeModule,

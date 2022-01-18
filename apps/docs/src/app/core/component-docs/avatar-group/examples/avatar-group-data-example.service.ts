@@ -52,9 +52,9 @@ export class AvatarGroupDataExampleService {
 
             people.push({
                 id: this._generateId(),
-                firstName: firstName,
-                lastName: lastName,
-                position: position,
+                firstName,
+                lastName,
+                position,
                 phone: this._generatePhone(),
                 mobile: this._generatePhone(),
                 email: this._generateEmail(firstName, lastName),

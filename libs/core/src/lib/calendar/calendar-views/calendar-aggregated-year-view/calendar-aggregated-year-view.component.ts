@@ -21,7 +21,7 @@ import { DateTimeFormats, DATE_TIME_FORMATS, DatetimeAdapter } from '@fundamenta
 import { CalendarService } from '../../calendar.service';
 import { AggregatedYear, CalendarAggregatedYear } from '../../models/aggregated-year';
 import { CalendarYearGrid } from '../../models/calendar-year-grid';
-import { DefaultCalendarActiveCellStrategy } from '../../models/common';
+import { DefaultCalendarActiveCellStrategy, FocusableCalendarView } from '../../models/common';
 import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
 
 @Component({
@@ -34,7 +34,7 @@ import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
         '[attr.id]': 'viewId'
     }
 })
-export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy, OnChanges {
+export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy, OnChanges, FocusableCalendarView {
     /** Parameter used in id of years used for help with focusing on the correct element during keyboard navigation. */
     @Input()
     id: string;
@@ -290,12 +290,12 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
             };
 
             calendarYearList.push({
-                years: years,
+                years,
                 label: this._getYearsName(years),
                 ariaLabel: this._getAriaYearsName(years),
                 selected: this._isBetween(years, this.yearSelected),
                 current: this._isBetween(years, this._currentYear),
-                index: index
+                index
             });
         }
 
@@ -411,7 +411,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
      * Returns transformed 1d array from 2d year grid.
      */
     private _getYearsList(): CalendarAggregatedYear[] {
-        return [].concat.apply([], this._calendarYearListGrid);
+        return [].concat(...this._calendarYearListGrid);
     }
 
     /**

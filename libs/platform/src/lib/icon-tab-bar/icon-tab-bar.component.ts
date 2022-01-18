@@ -17,6 +17,7 @@ import { ContentDensityService, RtlService } from '@fundamental-ngx/core/utils';
 import { IconFont } from '@fundamental-ngx/core/icon';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { TabColorAssociations } from './interfaces/tab-color-associations.interface';
 
 @Component({
     selector: 'fdp-icon-tab-bar',
@@ -79,6 +80,13 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
      */
     @Input()
     iconTabSize: IconTabBarSize;
+
+    /**
+     * @description Associations for colors of the tabs.
+     * If any of the color associations provided, they'll be read by screenreader instead of the actual color
+     */
+    @Input()
+    colorAssociations: TabColorAssociations;
 
     /**
      * @description Emits when some tab is selected.

@@ -1,9 +1,11 @@
+import { NO_ERRORS_SCHEMA, SimpleChanges } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { PopoverComponent } from '@fundamental-ngx/core/popover';
+
 import { TextTypePopoverComponent } from './text-type-popover.component';
-import { NO_ERRORS_SCHEMA, SimpleChanges } from '@angular/core';
 import { generateTabBarItems, generateTestConfig } from '../../../tests-helper';
-import { PopoverComponent } from '@fundamental-ngx/core';
+import { IconTabBarComponent } from '../../../icon-tab-bar.component';
 
 describe('TextTypePopoverComponent', () => {
     let component: TextTypePopoverComponent;
@@ -13,6 +15,7 @@ describe('TextTypePopoverComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [TextTypePopoverComponent],
+            providers: [{ provide: IconTabBarComponent, useValue: {} }],
             schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents();
     });
@@ -29,7 +32,7 @@ describe('TextTypePopoverComponent', () => {
         const extraTabs = generateTabBarItems(config);
         component.extraTabs = extraTabs;
         component.extraTabs[0].color = colorToTest;
-        component.ngOnChanges({ extraTabs: extraTabs } as unknown as SimpleChanges);
+        component.ngOnChanges({ extraTabs } as unknown as SimpleChanges);
 
         const appliedStyle = component.extraTabs[0].cssClasses.includes(`fd-icon-tab-bar__list-item--${colorToTest}`);
         expect(appliedStyle).toBeTruthy();
@@ -46,6 +49,46 @@ describe('TextTypePopoverComponent', () => {
             `fd-icon-tab-bar__list-item--${colorToTest}`
         );
         expect(appliedStyle).toBeTruthy();
+    });
+
+    it('should highlight parent tab if child is selected', () => {
+        component.parentTab = {
+            cssClasses: null,
+            index: 0,
+            uId: '0',
+            flatIndex: 0,
+            subItems: [
+                {
+                    cssClasses: null,
+                    index: 1,
+                    uId: '0.1',
+                    flatIndex: 1,
+                    subItems: [
+                        {
+                            cssClasses: null,
+                            index: 2,
+                            uId: '0.1.2',
+                            flatIndex: 2,
+                            subItems: [
+                                {
+                                    cssClasses: null,
+                                    index: 3,
+                                    uId: '0.1.2.3',
+                                    flatIndex: 3
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
+        component.ngOnChanges({ selectedSubItemUid: component.parentTab } as any);
+
+        expect(component._containsSelected).toBeFalse();
+
+        component.selectedSubItemUid = '0.1.2.3';
+        component.ngOnChanges({ selectedSubItemUid: component.selectedSubItemUid } as any);
+        expect(component._containsSelected).toBeTrue();
     });
 
     it('should emit selectedExtraItem event.', () => {

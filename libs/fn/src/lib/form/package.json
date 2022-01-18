@@ -2,8 +2,8 @@
     "name": "@fundamental-ngx/fn/form",
     "version": "VERSION_PLACEHOLDER",
     "peerDependencies": {
-        "@angular/common": "^11.2.14",
-        "@angular/core": "^11.2.14"
+        "@angular/common": "ANGULAR_VER_PLACEHOLDER",
+        "@angular/core": "ANGULAR_VER_PLACEHOLDER"
     },
     "dependencies": {
         "tslib": "^2.0.0"

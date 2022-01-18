@@ -2,16 +2,16 @@ import { Component } from '@angular/core';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
-import * as platformSearchFieldExampleScss from '!raw-loader!./platform-search-field-examples/platform-search-field-example.component.scss';
-import * as platformBasicSearchFieldSrc from '!raw-loader!./platform-search-field-examples/platform-search-field-basic-example.component.html';
-import * as platformBasicSearchFieldTsCode from '!raw-loader!./platform-search-field-examples/platform-search-field-basic-example.component';
-import * as platformCategoriesSearchFieldSrc from '!raw-loader!./platform-search-field-examples/platform-search-field-categories-example.component.html';
-import * as platformCategoriesSearchFieldTsCode from '!raw-loader!./platform-search-field-examples/platform-search-field-categories-example.component';
-import * as platformDataSourceSearchFieldSrc from '!raw-loader!./platform-search-field-examples/platform-search-field-data-source-example.component.html';
-import * as platformDataSourceSearchFieldTsCode from '!raw-loader!./platform-search-field-examples/platform-search-field-data-source-example.component';
-import * as platformDataSourceSearchFieldServiceTsCode from '!raw-loader!./platform-search-field-examples/platform-search-field-data-source-example.service';
-import * as platformSearchFieldMobileModeSrc from '!raw-loader!./platform-search-field-examples/platform-search-field-mobile/platform-search-field-mobile-example.component.html';
-import * as platformSearchFieldMobileModeTsCode from '!raw-loader!./platform-search-field-examples/platform-search-field-mobile/platform-search-field-mobile-example.component.ts';
+import platformSearchFieldExampleScss from '!./platform-search-field-examples/platform-search-field-example.component.scss?raw';
+import platformBasicSearchFieldSrc from '!./platform-search-field-examples/platform-search-field-basic-example.component.html?raw';
+import platformBasicSearchFieldTsCode from '!./platform-search-field-examples/platform-search-field-basic-example.component?raw';
+import platformCategoriesSearchFieldSrc from '!./platform-search-field-examples/platform-search-field-categories-example.component.html?raw';
+import platformCategoriesSearchFieldTsCode from '!./platform-search-field-examples/platform-search-field-categories-example.component?raw';
+import platformDataSourceSearchFieldSrc from '!./platform-search-field-examples/platform-search-field-data-source-example.component.html?raw';
+import platformDataSourceSearchFieldTsCode from '!./platform-search-field-examples/platform-search-field-data-source-example.component?raw';
+import platformDataSourceSearchFieldServiceTsCode from '!./platform-search-field-examples/platform-search-field-data-source-example.service?raw';
+import platformSearchFieldMobileModeSrc from '!./platform-search-field-examples/platform-search-field-mobile/platform-search-field-mobile-example.component.html?raw';
+import platformSearchFieldMobileModeTsCode from '!./platform-search-field-examples/platform-search-field-mobile/platform-search-field-mobile-example.component.ts?raw';
 
 @Component({
     selector: 'app-search-field',

@@ -8,5 +8,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 export class WizardNavigationComponent {
     /** Aria label for the wizard navigation component element. */
     @Input()
-    ariaLabel?: string = null;
+    ariaLabel = 'Wizard';
 }

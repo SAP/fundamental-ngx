@@ -10,7 +10,7 @@ export interface AutoCompleteEvent {
 }
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fdp-auto-complete]'
 })
 export class AutoCompleteDirective {
@@ -31,6 +31,7 @@ export class AutoCompleteDirective {
 
     /** Event thrown, when the auto ahead text is accepted */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     readonly onComplete: EventEmitter<AutoCompleteEvent> = new EventEmitter<AutoCompleteEvent>();
 
     /** @hidden */
@@ -122,7 +123,7 @@ export class AutoCompleteDirective {
     private _sendCompleteEvent(forceClose: boolean): void {
         this.onComplete.emit({
             term: this._element.value,
-            forceClose: forceClose
+            forceClose
         });
 
         if (this.inputText !== this._oldValue) {

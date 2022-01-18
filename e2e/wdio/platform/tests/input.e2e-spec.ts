@@ -1,6 +1,7 @@
 import {
     addValue,
-    browserIsIEorSafari,
+    browserIsSafari,
+    browserIsSafariorFF,
     clearValue,
     click,
     doesItExist,
@@ -39,9 +40,7 @@ describe('Input should ', () => {
         textInput,
         numberInput,
         compactInput,
-        readonlyInput,
         disabledInput,
-        inlineHelpInput,
         messagesComponentsInput,
         submitBtn,
         errorTextAttr,
@@ -52,7 +51,8 @@ describe('Input should ', () => {
         autocompleteInput,
         autocompleteInputLabel,
         autocompleteOptions,
-        disabledInputAttribute
+        disabledInputAttribute,
+        errorMessage
     } = inputPage;
 
     beforeAll(() => {
@@ -99,16 +99,31 @@ describe('Input should ', () => {
 
         expect(getValue(textInput)).toEqual(number + special_characters + text); // ???
     });
-    // TODO: it is not working the same for manual and automation.
-    xit('impose any filters on the kind of input values the component receives (number)', () => {
+
+    it('impose any filters on the kind of input values the component receives (number)', () => {
+        if (browserIsSafariorFF()) {
+            return;
+            // not working on FF and safari, needs investigation
+        }
         waitForElDisplayed(numberInput);
         click(numberInput);
 
-        sendKeys(number);
-        sendKeys(special_characters);
-        sendKeys(text);
+        addValue(numberInput, number);
+        addValue(numberInput, special_characters);
 
-        expect(getText(numberInput)).toEqual(number);
+        expect(getValue(numberInput)).toEqual(number);
+    });
+
+    it('should check increase/decriase value by arrows', () => {
+        waitForElDisplayed(numberInput);
+        click(numberInput);
+
+        sendKeys('ArrowUp');
+        expect(getValue(numberInput)).toEqual('1');
+
+        sendKeys('ArrowDown');
+        sendKeys('ArrowDown');
+        expect(getValue(numberInput)).toEqual('-1');
     });
 
     it('wrap the input characters to the next line', () => {
@@ -141,11 +156,6 @@ describe('Input should ', () => {
     });
 
     it('should have error border color', () => {
-        if (browserIsIEorSafari()) {
-            console.log('Skip for IE and Safari');
-            return;
-        }
-        waitForPresent(messagesComponentsInput);
         scrollIntoView(messagesComponentsInput);
         waitForElDisplayed(messagesComponentsInput);
         click(submitBtn);
@@ -156,14 +166,18 @@ describe('Input should ', () => {
     });
 
     it('should have visual cue for require input', () => {
-        waitForPresent(requiredInputLabel);
         scrollIntoView(requiredInputLabel);
         pause(2000);
         expect(executeScriptAfterTagAttr(requiredInputLabel, 'content')).toBe('"*"');
     });
 
     it('should have visual cue for information', () => {
-        expect(executeScriptBeforeTagAttr(questionMarkSpan, 'content')).toBe('""');
+        if (browserIsSafari()) {
+            expect(executeScriptBeforeTagAttr(questionMarkSpan, 'content')).toBe('');
+        }
+        if (!browserIsSafari()) {
+            expect(executeScriptBeforeTagAttr(questionMarkSpan, 'content')).toBe('""');
+        }
     });
 
     it('should implement autosuggestion', () => {
@@ -185,6 +199,12 @@ describe('Input should ', () => {
         const compactHeight = getElementSize(compactInput);
 
         expect(defaultHeight.height).toBeGreaterThan(compactHeight.height);
+    });
+
+    it('should check that validation does not work earlier than necessary', () => {
+        scrollIntoView(messagesComponentsInput);
+        click(messagesComponentsInput);
+        expect(doesItExist(errorMessage)).toBe(false);
     });
 
     it('should check RTL', () => {

@@ -36,6 +36,7 @@ export class PlatformDatetimePickerReactiveExampleComponent {
     requiredDateValidator: ValidatorFn[] = [Validators.required];
 
     onSubmit(): void {
+        this.datetimePickerForm.markAllAsTouched();
         if (this.datetimePickerForm.valid) {
             this.stringValue = JSON.stringify(this.datetimePickerForm.value);
         } else {

@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
 
-import * as datePickerRangeSrc from '!raw-loader!./examples/date-picker-range-example.component.ts';
-import * as datePickerSingleSrc from '!raw-loader!./examples/date-picker-single-example.component.ts';
-import * as datePickeri18nSrc from '!raw-loader!./examples/date-picker-i18n-example.component.ts';
-import * as datePickerFormatSrc from '!raw-loader!./examples/date-picker-format-example.component.ts';
-import * as datePickerAllowNullSrc from '!raw-loader!./examples/date-picker-allow-null-example.component.ts';
-import * as datePickerFormTsSrc from '!raw-loader!./examples/date-picker-form-example.component.ts';
-import * as datePickerRangeFormTsSrc from '!raw-loader!./examples/date-picker-form-range-example.component.ts';
-import * as datePickerPositionSrc from '!raw-loader!./examples/date-picker-position-example.component.ts';
-import * as datePickerComplexI18nSrcTs from '!raw-loader!./examples/date-picker-complex-i18n-example/date-picker-complex-i18n-example.component.ts';
-import * as datePickerComplexI18nSrcH from '!raw-loader!./examples/date-picker-complex-i18n-example/date-picker-complex-i18n-example.component.html';
-import * as datePickerRangeDisableTs from '!raw-loader!./examples/date-picker-range-disabled-example/date-picker-range-disabled-example.component.ts';
-import * as datePickerRangeDisableH from '!raw-loader!./examples/date-picker-range-disabled-example/date-picker-range-disabled-example.component.html';
-import * as datePickerSingleDisableTs from '!raw-loader!./examples/date-picker-disable-func-example/date-picker-disable-func-example.component.ts';
-import * as datePickerSingleDisableH from '!raw-loader!./examples/date-picker-disable-func-example/date-picker-disable-func-example.component.html';
+import datePickerRangeSrc from '!./examples/date-picker-range-example.component.ts?raw';
+import datePickerSingleSrc from '!./examples/date-picker-single-example.component.ts?raw';
+import datePickeri18nSrc from '!./examples/date-picker-i18n-example.component.ts?raw';
+import datePickerFormatSrc from '!./examples/date-picker-format-example.component.ts?raw';
+import datePickerAllowNullSrc from '!./examples/date-picker-allow-null-example.component.ts?raw';
+import datePickerFormTsSrc from '!./examples/date-picker-form-example.component.ts?raw';
+import datePickerRangeFormTsSrc from '!./examples/date-picker-form-range-example.component.ts?raw';
+import datePickerPositionSrc from '!./examples/date-picker-position-example.component.ts?raw';
+import datePickerComplexI18nSrcTs from '!./examples/date-picker-complex-i18n-example/date-picker-complex-i18n-example.component.ts?raw';
+import datePickerComplexI18nSrcH from '!./examples/date-picker-complex-i18n-example/date-picker-complex-i18n-example.component.html?raw';
+import datePickerRangeDisableTs from '!./examples/date-picker-range-disabled-example/date-picker-range-disabled-example.component.ts?raw';
+import datePickerRangeDisableH from '!./examples/date-picker-range-disabled-example/date-picker-range-disabled-example.component.html?raw';
+import datePickerSingleDisableTs from '!./examples/date-picker-disable-func-example/date-picker-disable-func-example.component.ts?raw';
+import datePickerSingleDisableH from '!./examples/date-picker-disable-func-example/date-picker-disable-func-example.component.html?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

@@ -5,8 +5,8 @@
     [class.is-readonly]="readonly"
     [class.fd-shellbar__input-group]="inShellbar"
     [class.fd-input-group--control]="isControl"
-    [class.is-focus]="isFocused"
-    [ngClass]="state ? 'is-' + state : ' '"
+    [class.is-focus]="isFocused && showFocus"
+    [class]="state ? 'is-' + state : ' '"
 >
     <ng-container *ngIf="placement !== 'before' && !inputElement">
         <ng-container *ngTemplateOutlet="input"></ng-container>

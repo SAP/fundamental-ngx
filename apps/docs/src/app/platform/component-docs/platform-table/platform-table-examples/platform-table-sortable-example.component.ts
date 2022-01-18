@@ -53,19 +53,19 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
     items: ExampleItem[] = [];
     totalItems = 0;
 
-    constructor(private dateTimeAdapter: DatetimeAdapter<FdDate>) {
+    constructor(public dateTimeAdapter: DatetimeAdapter<FdDate>) {
         super();
     }
 
-    fetch(tableState: TableState): Observable<ExampleItem[]> {
+    fetch(tableState?: TableState): Observable<ExampleItem[]> {
         this.items = [...ITEMS];
 
         // apply searching
-        if (tableState.searchInput) {
-            this.items = this.search(tableState);
+        if (tableState?.searchInput) {
+            this.items = this.search(this.items, tableState);
         }
         // apply sorting
-        if (tableState.sortBy) {
+        if (tableState?.sortBy) {
             this.items = this.sort(tableState);
         }
 
@@ -83,18 +83,17 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
             return items;
         }
 
-        return items.sort((a, b) => {
-            return sortBy
+        return items.sort((a, b) =>
+            sortBy
                 .map(({ field, direction }) => {
                     const ascModifier = direction === SortDirection.ASC ? 1 : -1;
                     return sort(a, b, field) * ascModifier;
                 })
-                .find((result, index, list) => result !== 0 || index === list.length - 1);
-        });
+                .find((result, index, list) => result !== 0 || index === list.length - 1)
+        );
     }
 
-    private search({ searchInput, columns }: TableState): ExampleItem[] {
-        const items = this.items;
+    search(items: ExampleItem[], { searchInput, columns }: TableState): ExampleItem[] {
         const searchText = searchInput?.text || '';
         const keysToSearchBy = columns;
 
@@ -114,7 +113,7 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
 
 /* UTILS */
 
-const sort = <T extends object>(a: T, b: T, key?: string) => {
+const sort = <T extends Record<string, any>>(a: T, b: T, key?: string): number => {
     if (key) {
         a = getNestedValue(key, a);
         b = getNestedValue(key, b);
@@ -122,7 +121,7 @@ const sort = <T extends object>(a: T, b: T, key?: string) => {
     return a > b ? 1 : a === b ? 0 : -1;
 };
 
-function getNestedValue<T extends {}>(key: string, object: T): any {
+function getNestedValue<T extends Record<string, any>>(key: string, object: T): any {
     return key.split('.').reduce((a, b) => a[b], object);
 }
 

@@ -10,7 +10,7 @@ if (environment.production) {
     enableProdMode();
 }
 
-const hmrBootstrap = (module: any, hBootstrap: () => Promise<NgModuleRef<any>>) => {
+const hmrBootstrap = (module: any, hBootstrap: () => Promise<NgModuleRef<any>>): void => {
     let ngModule: NgModuleRef<any>;
     module.hot.accept();
     hBootstrap().then((mod) => (ngModule = mod));
@@ -23,7 +23,7 @@ const hmrBootstrap = (module: any, hBootstrap: () => Promise<NgModuleRef<any>>) 
     });
 };
 
-const bootstrap = () => platformBrowserDynamic().bootstrapModule(AppModule);
+const bootstrap = (): Promise<NgModuleRef<AppModule>> => platformBrowserDynamic().bootstrapModule(AppModule);
 
 if (environment.hmr) {
     if (module['hot']) {

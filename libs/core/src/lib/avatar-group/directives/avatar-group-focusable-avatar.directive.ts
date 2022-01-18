@@ -1,7 +1,7 @@
 import { Directive, HostBinding, Input } from '@angular/core';
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-avatar-group-focusable-avatar]',
     host: { class: 'fd-avatar-group__focusable-avatar' }
 })

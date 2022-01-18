@@ -7,7 +7,7 @@ import { SelectHeaderComponent } from './select-header/select-header.component';
 import { SelectDocsComponent } from './select-docs.component';
 import { examples } from './examples';
 import { ExperimentalSelectModule } from '@fundamental-ngx/fn/select';
-import { FormModule } from '@fundamental-ngx/core';
+import { FormModule } from '@fundamental-ngx/core/form';
 
 const routes: Routes = [
     {

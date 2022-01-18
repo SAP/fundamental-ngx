@@ -3,18 +3,28 @@ import {
     getAlertText,
     getAttributeByName,
     getElementArrayLength,
+    getElementSize,
     getText,
     isElementClickable,
     refreshPage,
     scrollIntoView,
-    uploadFile
+    uploadFile,
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 
 import { placeholderTestTextArr, imagePath, titleValue } from '../fixtures/appData/file-uploader-contents';
 
 describe('File uploader component test', () => {
     const fileUploaderPage = new FileUploaderPo();
-    const { fileUploaderInput, browseButton, fileUploaderInputFile, fileSelectedText } = fileUploaderPage;
+    const {
+        fileUploaderInput,
+        browseButton,
+        fileUploaderInputFile,
+        fileSelectedText,
+        fileUploaderExample,
+        fileUploaderCompactExample
+    } = fileUploaderPage;
 
     beforeAll(() => {
         fileUploaderPage.open();
@@ -22,6 +32,8 @@ describe('File uploader component test', () => {
 
     afterEach(() => {
         refreshPage();
+        waitForPresent(fileUploaderPage.root);
+        waitForElDisplayed(fileUploaderPage.title);
     }, 2);
 
     it('verify placeholders', () => {
@@ -38,6 +50,13 @@ describe('File uploader component test', () => {
             scrollIntoView(browseButton, i);
             expect(isElementClickable(browseButton, i)).toBe(true, `browse button with index ${i} not clickable`);
         }
+    });
+
+    it('verify compact input smaller than basic', () => {
+        const basicInput = getElementSize(fileUploaderExample + fileUploaderInput);
+        const compactInput = getElementSize(fileUploaderCompactExample + fileUploaderInput);
+
+        expect(compactInput.width).toBeLessThan(basicInput.width);
     });
 
     // skipped due to issue with file uploader - browser is stuck after uploading file

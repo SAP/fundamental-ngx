@@ -11,10 +11,10 @@ class MockNestedItem {
     linkItem: MockNestedLink;
     keyboardTriggered = new Subject<KeyboardEvent>();
     hasChildren: boolean;
-    triggerOpen = () => {};
-    triggerClose = () => {};
-    focus = () => {};
-    click = () => {};
+    triggerOpen = (): void => {};
+    triggerClose = (): void => {};
+    focus = (): void => {};
+    click = (): void => {};
 
     constructor(readonly allChildrenItems: MockNestedItem[] = [], public expanded: boolean = true) {}
 }
@@ -28,7 +28,7 @@ describe('NestedListKeyboardSupportService', () => {
 
     let service: NestedListKeyboardService;
 
-    const toArray = () => [
+    const toArray = (): MockNestedItem[] => [
         new MockNestedItem([
             new MockNestedItem(),
             new MockNestedItem(),

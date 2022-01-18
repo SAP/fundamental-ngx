@@ -27,9 +27,8 @@ export class MultiInputConfig {
      * Create Provider factory function
      */
     static createProviderFactory(obj: Partial<MultiInputConfig>): (platformConfig: PlatformConfig) => MultiInputConfig {
-        const useFactory = (platformConfig: PlatformConfig): MultiInputConfig => {
-            return Object.assign(new MultiInputConfig(platformConfig), obj);
-        };
+        const useFactory = (platformConfig: PlatformConfig): MultiInputConfig =>
+            Object.assign(new MultiInputConfig(platformConfig), obj);
         return useFactory;
     }
 

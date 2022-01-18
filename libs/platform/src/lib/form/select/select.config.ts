@@ -17,9 +17,8 @@ export class SelectConfig {
      * Create Provider factory function
      */
     static createProviderFactory(obj: Partial<SelectConfig>): (platformConfig: PlatformConfig) => SelectConfig {
-        const useFactory = (platformConfig: PlatformConfig): SelectConfig => {
-            return Object.assign(new SelectConfig(platformConfig), obj);
-        };
+        const useFactory = (platformConfig: PlatformConfig): SelectConfig =>
+            Object.assign(new SelectConfig(platformConfig), obj);
         return useFactory;
     }
 

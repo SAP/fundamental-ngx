@@ -86,7 +86,7 @@ export class FdDate {
      * @param minute 0 - 59
      * @param second 0 - 59
      */
-    // tslint:disable-next-line: unified-signatures
+    // eslint-disable-next-line @typescript-eslint/unified-signatures
     constructor(year: number, month?: number, day?: number, hour?: number, minute?: number, second?: number);
 
     constructor(...args: any[]) {
@@ -104,12 +104,12 @@ export class FdDate {
         second = Number.parseInt(second, 10);
 
         this._isValid = isValidByParams({
-            year: year,
-            month: month,
-            day: day,
-            hour: hour,
-            minute: minute,
-            second: second
+            year,
+            month,
+            day,
+            hour,
+            minute,
+            second
         });
 
         this.year = this._isValid ? year : NaN;
@@ -133,9 +133,9 @@ export class FdDate {
             year: this.year,
             month: this.month,
             day: this.day,
-            hour: hour,
-            minute: minute,
-            second: second
+            hour,
+            minute,
+            second
         });
 
         this.hour = this._isValid ? hour : NaN;

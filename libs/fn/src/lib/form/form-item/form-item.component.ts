@@ -29,7 +29,7 @@ export enum STATE_ICON {
  */
 @Component({
     // TODO to be discussed
-    // tslint:disable-next-line: component-selector
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'fn-form-item',
     templateUrl: './form-item.component.html',
     encapsulation: ViewEncapsulation.None,

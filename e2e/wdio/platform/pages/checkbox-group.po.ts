@@ -1,4 +1,5 @@
 import { BaseComponentPo } from './base-component.po';
+import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class CheckboxGroupPO extends BaseComponentPo {
     url = '/checkbox-group';
@@ -32,9 +33,11 @@ export class CheckboxGroupPO extends BaseComponentPo {
 
     open(): void {
         super.open(this.url);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

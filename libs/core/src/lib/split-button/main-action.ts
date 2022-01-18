@@ -6,5 +6,5 @@ export interface MainAction {
     // Whether or not the mainAction text and click behavior will change to that of the newly selected option.
     keepMainAction?: boolean;
     // Function to be called when the main action button is clicked.
-    callback?: Function;
+    callback?: () => void;
 }

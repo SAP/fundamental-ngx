@@ -4,7 +4,7 @@ import { whenStable } from '@fundamental-ngx/core/tests';
 
 import { SplitterModule } from '../splitter.module';
 import { SplitterPaginationComponent } from './splitter-pagination.component';
-import { SplitterComponent } from '@fundamental-ngx/core';
+import { SplitterComponent } from './../splitter.component';
 
 describe('SplitterPaginationComponent', () => {
     let component: SplitterPaginationComponent;

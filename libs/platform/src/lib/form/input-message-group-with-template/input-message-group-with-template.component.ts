@@ -15,6 +15,7 @@ import { FormInputMessageGroupComponent } from '@fundamental-ngx/core/form';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class InputMessageGroupWithTemplate extends FormInputMessageGroupComponent {
     /**
      * Custom trigger element.

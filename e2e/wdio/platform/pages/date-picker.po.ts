@@ -24,25 +24,20 @@ export class DatePicker extends BaseComponentPo {
     buttonFirstYear = '(//td[contains(@id,"year")]/child::span)[1]';
     buttonFirstMonth = '(//td[contains(@id,"month")]/child::span)[1]';
 
-    filterCalendarValue = (name: string): string => {
-        return `//td[contains(@id,"-view-${name}")]`;
-    };
+    filterCalendarValue = (name: string): string => `//td[contains(@id,"-view-${name}")]`;
 
-    dayInCalendarButtonByValue = (index: string): string => {
-        return `//span[text()="${index}"]/ancestor::td[not (contains(@class, 'fd-calendar__item--other-month'))]`;
-    };
+    dayInCalendarButtonByValue = (index: string): string =>
+        `//span[text()="${index}"]/ancestor::td[not (contains(@class, 'fd-calendar__item--other-month'))]`;
 
-    yearInCalendarByValue = (year: number): string => {
-        return `[data-fd-calendar-year="${year}"]`;
-    };
+    yearInCalendarByValue = (year: number): string => `[data-fd-calendar-year="${year}"]`;
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForPresent(this.inputDatePicker);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

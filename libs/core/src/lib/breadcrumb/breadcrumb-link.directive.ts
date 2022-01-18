@@ -9,7 +9,7 @@ import { Directive, ElementRef, Input } from '@angular/core';
  */
 @Directive({
     // TODO to be discussed
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-breadcrumb-link]',
     host: {
         class: 'fd-breadcrumb__link'

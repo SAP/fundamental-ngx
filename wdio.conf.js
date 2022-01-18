@@ -29,6 +29,7 @@ exports.config = {
             './e2e/wdio/platform/**/action-bar.e2e-spec.ts',
             './e2e/wdio/platform/**/action-list-item.e2e-spec.ts',
             './e2e/wdio/platform/**/approval-flow.e2e-spec.ts',
+            './e2e/wdio/platform/**/button.e2e-spec.ts',
             './e2e/wdio/platform/**/checkbox.e2e-spec.ts',
             './e2e/wdio/platform/**/checkbox-group.e2e-spec.ts',
             './e2e/wdio/platform/**/combobox.e2e-spec.ts',
@@ -46,7 +47,6 @@ exports.config = {
             './e2e/wdio/platform/**/input-group.e2e-spec.ts',
             './e2e/wdio/platform/**/link.e2e-spec.ts',
             './e2e/wdio/platform/**/list.e2e-spec.ts',
-            './e2e/wdio/platform/**/button.e2e-spec.ts',
             './e2e/wdio/platform/**/page-footer.e2e-spec.ts'
         ],
         platformB: [
@@ -68,8 +68,11 @@ exports.config = {
             './e2e/wdio/platform/**/table.e2e-spec.ts',
             './e2e/wdio/platform/**/textarea.e2e-spec.ts',
             './e2e/wdio/platform/**/thumbnail.e2e-spec.ts',
+            './e2e/wdio/platform/**/table.e2e-spec.ts',
+            './e2e/wdio/platform/**/time-picker.e2e-spec.ts',
+            './e2e/wdio/platform/**/upload-collection.e2e-spec.ts',
             './e2e/wdio/platform/**/value-help-dialog.e2e-spec.ts',
-            './e2e/wdio/platform/**/time-picker.e2e-spec.ts'
+            './e2e/wdio/platform/**/wizard-generator.e2e-spec.ts'
         ],
         coreA: [
             './e2e/wdio/core/**/action-bar.e2e-spec.ts',
@@ -151,6 +154,7 @@ exports.config = {
             './e2e/wdio/core/**/title.e2e-spec.ts',
             './e2e/wdio/core/**/token.e2e-spec.ts',
             './e2e/wdio/core/**/toolbar.e2e-spec.ts',
+            './e2e/wdio/core/**/upload-collection.e2e-spec.ts',
             './e2e/wdio/core/**/vertical-navigation.e2e-spec.ts',
             './e2e/wdio/core/**/wizard.e2e-spec.ts'
         ]

@@ -9,13 +9,13 @@ export class UploadCollectionPo extends BaseComponentPo {
     readonlyExample = 'fdp-upload-collection-readonly-example';
     turnOffExample = 'fdp-upload-collection-turn-off-example';
 
-    tableItems = ' .fd-dnd-item';
+    tableItems = ' .fd-table__row--hoverable';
     buttons = ' .fd-button--ghost.fd-button--menu';
     menuItem = '.fd-menu__item';
     tablePages = ' .fd-pagination__link.ng-star-inserted';
     tableResult = ' .fdp-upload-collection__pagination--total';
-    linkNext = ' .fd-pagination__link--next';
-    linkPrevious = ' .fd-pagination__link--previous';
+    linkNext = ' [glyph="navigation-right-arrow"]';
+    linkPrevious = ' [glyph="navigation-left-arrow"]';
     inputFields = ' .fd-input--compact';
     columnHeaders = ' [role="columnheader"]';
     tableContent = ' fd-icon~span';
@@ -32,10 +32,11 @@ export class UploadCollectionPo extends BaseComponentPo {
     listItemTitle = '.fd-list__title';
     moveButton = '.fd-button--emphasized';
     ghostButton = ' .fd-button--ghost';
+    dialog = 'div.fd-dialog__content';
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForPresent(this.title);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 }

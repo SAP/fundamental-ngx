@@ -6,6 +6,7 @@ import { DynamicFormGeneratorSelectComponent } from '../dynamic-form-generator-s
 import { FormComponentDefinition } from '../interfaces/form-component-definition';
 import { DynamicFormGeneratorDatepickerComponent } from '../dynamic-form-generator-datepicker/dynamic-form-generator-datepicker.component';
 import { DynamicFormGeneratorSwitchComponent } from '../dynamic-form-generator-switch/dynamic-form-generator-switch.component';
+import { DynamicFormGeneratorMultiInputComponent } from '../dynamic-form-generator-multi-input/dynamic-form-generator-multi-input.component';
 
 export const DEFAULT_COMPONENTS_LIST: FormComponentDefinition[] = [
     {
@@ -35,5 +36,9 @@ export const DEFAULT_COMPONENTS_LIST: FormComponentDefinition[] = [
     {
         types: ['switch'],
         component: DynamicFormGeneratorSwitchComponent
+    },
+    {
+        types: ['multi-input'],
+        component: DynamicFormGeneratorMultiInputComponent
     }
 ];

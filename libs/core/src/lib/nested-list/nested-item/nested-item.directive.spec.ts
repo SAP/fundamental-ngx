@@ -88,7 +88,6 @@ describe('NestedItemDirective', () => {
     let nestedItemListDirective: NestedItemDirective;
     let subItemElement: NestedItemDirective;
     let popoverSubItemElement: NestedItemDirective;
-    let iconElement: NestedListExpandIconComponent;
     let emptyItemDirective: NestedItemDirective;
     let fixture: ComponentFixture<TestNestedContainerComponent>;
     let itemService: NestedItemService;
@@ -113,7 +112,6 @@ describe('NestedItemDirective', () => {
         nestedItemPopoverDirective = component.nestedItemPopoverDirective;
         subItemElement = component.subItemElement;
         popoverSubItemElement = component.popoverSubItemElement;
-        iconElement = component.iconElement;
         itemService = (<any>nestedItemPopoverDirective)._itemService;
         fixture.detectChanges();
     });
@@ -208,7 +206,7 @@ describe('NestedItemDirective', () => {
     it('Popover Should handle keyboard event from sub items', () => {
         spyOn(<any>nestedItemPopoverDirective, '_selectedChange');
         fixture.detectChanges();
-        popoverSubItemElement.linkItem.onClick(new MouseEvent('click'));
+        popoverSubItemElement.linkItem.onClick();
         fixture.detectChanges();
         expect((<any>nestedItemPopoverDirective)._selectedChange).toHaveBeenCalledWith(
             (<any>popoverSubItemElement)._elementId
@@ -218,7 +216,7 @@ describe('NestedItemDirective', () => {
     it('Should handle keyboard event from sub items', () => {
         spyOn(<any>nestedItemListDirective, '_selectedChange');
         fixture.detectChanges();
-        subItemElement.linkItem.onClick(new MouseEvent('click'));
+        subItemElement.linkItem.onClick();
         fixture.detectChanges();
         expect((<any>nestedItemListDirective)._selectedChange).toHaveBeenCalledWith((<any>subItemElement)._elementId);
     });

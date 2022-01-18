@@ -2,26 +2,26 @@ import { Component } from '@angular/core';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
-import * as microProcessFlowExampleHtml from '!raw-loader!./examples/micro-process-flow-example.component.html';
-import * as microProcessFlowExampleTs from '!raw-loader!./examples/micro-process-flow-example.component.ts';
+import microProcessFlowExampleHtml from '!./examples/micro-process-flow-example.component.html?raw';
+import microProcessFlowExampleTs from '!./examples/micro-process-flow-example.component.ts?raw';
 
-import * as independentMicroProcessFlowExampleHtml from '!raw-loader!./examples/micro-process-flow-independent-items-example.component.html';
-import * as independentMicroProcessFlowExampleTs from '!raw-loader!./examples/micro-process-flow-independent-items-example.component.ts';
+import independentMicroProcessFlowExampleHtml from '!./examples/micro-process-flow-independent-items-example.component.html?raw';
+import independentMicroProcessFlowExampleTs from '!./examples/micro-process-flow-independent-items-example.component.ts?raw';
 
-import * as microProcessFlowOtherControlsExampleHtml from '!raw-loader!./examples/micro-process-flow-other-controls-example.component.html';
-import * as microProcessFlowOtherControlsExampleTs from '!raw-loader!./examples/micro-process-flow-other-controls-example.component.ts';
+import microProcessFlowOtherControlsExampleHtml from '!./examples/micro-process-flow-other-controls-example.component.html?raw';
+import microProcessFlowOtherControlsExampleTs from '!./examples/micro-process-flow-other-controls-example.component.ts?raw';
 
-import * as microProcessFlowOverflowExampleHtml from '!raw-loader!./examples/micro-process-flow-overflow-example.component.html';
-import * as microProcessFlowOverflowExampleTs from '!raw-loader!./examples/micro-process-flow-overflow-example.component.ts';
+import microProcessFlowOverflowExampleHtml from '!./examples/micro-process-flow-overflow-example.component.html?raw';
+import microProcessFlowOverflowExampleTs from '!./examples/micro-process-flow-overflow-example.component.ts?raw';
 
-import * as microProcessFlowPopoverExampleHtml from '!raw-loader!./examples/micro-process-flow-popover-example.component.html';
-import * as microProcessFlowPopoverExampleTs from '!raw-loader!./examples/micro-process-flow-popover-example.component.ts';
+import microProcessFlowPopoverExampleHtml from '!./examples/micro-process-flow-popover-example.component.html?raw';
+import microProcessFlowPopoverExampleTs from '!./examples/micro-process-flow-popover-example.component.ts?raw';
 
-import * as microProcessFlowCustomWidthExampleHtml from '!raw-loader!./examples/micro-process-flow-custom-width-example.component.html';
-import * as microProcessFlowCustomWidthExampleTs from '!raw-loader!./examples/micro-process-flow-custom-width-example.component.ts';
+import microProcessFlowCustomWidthExampleHtml from '!./examples/micro-process-flow-custom-width-example.component.html?raw';
+import microProcessFlowCustomWidthExampleTs from '!./examples/micro-process-flow-custom-width-example.component.ts?raw';
 
-import * as microProcessFlowObjectBetweenNodesExampleHtml from '!raw-loader!./examples/micro-process-flow-object-between-nodes-example.component.html';
-import * as microProcessFlowObjectBetweenNodesExampleTs from '!raw-loader!./examples/micro-process-flow-object-between-nodes-example.component.ts';
+import microProcessFlowObjectBetweenNodesExampleHtml from '!./examples/micro-process-flow-object-between-nodes-example.component.html?raw';
+import microProcessFlowObjectBetweenNodesExampleTs from '!./examples/micro-process-flow-object-between-nodes-example.component.ts?raw';
 
 @Component({
     selector: 'app-micro-process-flow-docs',

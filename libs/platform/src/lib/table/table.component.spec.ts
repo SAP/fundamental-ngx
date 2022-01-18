@@ -47,7 +47,7 @@ class TableDataProviderMock extends TableDataProvider<SourceItem> {
     items = generateItems(50);
     totalItems = 50;
 
-    fetch(state: TableState): Observable<SourceItem[]> {
+    fetch(): Observable<SourceItem[]> {
         return of(this.items);
     }
 }
@@ -147,15 +147,15 @@ describe('TableComponent internal', () => {
 
         component._columnHeaderSortBy(field, direction);
 
-        expect(serviceSortSpy).toHaveBeenCalledWith([{ field: field, direction: direction }]);
+        expect(serviceSortSpy).toHaveBeenCalledWith([{ field, direction }]);
     });
 
     it('filter by cell header method should call TableService.addFilters with a proper params', () => {
         const field = 'status';
         const value = 'valid';
         const payload: CollectionStringFilter = {
-            field: field,
-            value: value,
+            field,
+            value,
             strategy: FILTER_STRING_STRATEGY.CONTAINS,
             exclude: false
         };
@@ -168,7 +168,7 @@ describe('TableComponent internal', () => {
 
     it('group by cell header method should call TableService.setGroups with a proper params', () => {
         const field = 'price.value';
-        const payload: CollectionGroup[] = [{ field: field, direction: SortDirection.NONE, showAsColumn: true }];
+        const payload: CollectionGroup[] = [{ field, direction: SortDirection.NONE, showAsColumn: true }];
         const serviceGroupSpy = spyOn(tableService, 'setGroups').and.stub();
 
         component._columnHeaderGroupBy(field);
@@ -184,7 +184,6 @@ describe('TableComponent internal', () => {
 
         expect(serviceFreezeToSpy).toHaveBeenCalledWith(columnKey);
         expect(component.freezeColumnsTo).toEqual(columnKey);
-        expect(component._tablePadding).toEqual(0);
     });
 });
 
@@ -260,7 +259,7 @@ describe('TableComponent internal', () => {
         let tableBodyRows: DebugElement[] = [];
         let tableRowCells2DArray: DebugElement[][] = [];
 
-        const calculateTableElementsMetaData = () => {
+        const calculateTableElementsMetaData = (): void => {
             tableHeaderCells = fixture.debugElement.queryAll(
                 By.css('.fdp-table__header .fd-table__row .fd-table__cell')
             );
@@ -438,8 +437,9 @@ describe('TableComponent internal', () => {
                     calculateTableElementsMetaData();
                 });
 
-                const getSelectionCheckbox = (selectionCell: DebugElement) => selectionCell.query(By.css('input'));
-                const getSelectAllCheckbox = () => getSelectionCheckbox(tableHeaderCells[0]);
+                const getSelectionCheckbox = (selectionCell: DebugElement): DebugElement =>
+                    selectionCell.query(By.css('input'));
+                const getSelectAllCheckbox = (): DebugElement => getSelectionCheckbox(tableHeaderCells[0]);
 
                 it('should select by clicking on unselected cell', () => {
                     tableComponent._tableRowsVisible[0].checked = false;
@@ -739,9 +739,9 @@ describe('TableComponent internal', () => {
                     fixture.detectChanges();
                     calculateTableElementsMetaData();
 
-                    const rowsClassesAssigned = tableBodyRows.every((row) => {
-                        return row.nativeElement.classList.contains(rowClass);
-                    });
+                    const rowsClassesAssigned = tableBodyRows.every((row) =>
+                        row.nativeElement.classList.contains(rowClass)
+                    );
 
                     expect(rowsClassesAssigned).toBeTrue();
                 });
@@ -752,9 +752,9 @@ describe('TableComponent internal', () => {
                     fixture.detectChanges();
                     calculateTableElementsMetaData();
 
-                    const rowsClassesAssigned = tableBodyRows.every((row, index) => {
-                        return row.nativeElement.classList.contains(hostComponent.table._tableRows[index].value.status);
-                    });
+                    const rowsClassesAssigned = tableBodyRows.every((row, index) =>
+                        row.nativeElement.classList.contains(hostComponent.table._tableRows[index].value.status)
+                    );
 
                     expect(rowsClassesAssigned).toBeTrue();
                 });
@@ -887,7 +887,6 @@ describe('TableComponent internal', () => {
         let hostComponent: TableHostComponent;
         let fixture: ComponentFixture<TableHostComponent>;
         let tableComponent: TableComponent<SourceItem>;
-        let dataSourceLastFetchState: TableState;
 
         beforeEach(
             waitForAsync(() => {
@@ -904,34 +903,27 @@ describe('TableComponent internal', () => {
             hostComponent = fixture.componentInstance;
 
             const originFetch = hostComponent.source.fetch;
-            spyOn(hostComponent.source, 'fetch').and.callFake((state: TableState) => {
-                dataSourceLastFetchState = state;
-                return originFetch.call(hostComponent.source, state);
-            });
+            spyOn(hostComponent.source, 'fetch').and.callFake((state: TableState) =>
+                originFetch.call(hostComponent.source, state)
+            );
 
             fixture.detectChanges();
 
             tableComponent = hostComponent.table;
         });
 
-        let tableHeaderCells: DebugElement[] = [];
         let tableBodyRows: DebugElement[] = [];
-        let tableRowCells2DArray: DebugElement[][] = [];
         let tableBodyContainer: DebugElement;
 
-        const calculateTableElementsMetaData = () => {
-            tableHeaderCells = fixture.debugElement.queryAll(
-                By.css('.fdp-table__header .fd-table__row .fd-table__cell')
-            );
+        const calculateTableElementsMetaData = (): void => {
             tableBodyRows = fixture.debugElement.queryAll(By.css('.fdp-table__body .fd-table__row'));
-            tableRowCells2DArray = tableBodyRows.map((row) => row.queryAll(By.css('.fd-table__cell')));
             tableBodyContainer = fixture.debugElement.query(By.css('.fdp-table__body'));
         };
 
-        const tableBodyScrollTop = async (scrollTop) => {
+        const tableBodyScrollTop = async (scrollTop): Promise<void> => {
             const container = tableBodyContainer.nativeElement as HTMLElement;
             container.scrollTop = scrollTop;
-            await new Promise((resolve) => setTimeout(() => resolve(null), 100));
+            await new Promise((resolve) => setTimeout(() => resolve(null), 200));
             fixture.detectChanges();
             calculateTableElementsMetaData();
         };
@@ -1022,7 +1014,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
     items = generateTreeItems(treeItemParentsCount);
     totalItems = totalTreeItems;
 
-    fetch(state: TableState): Observable<SourceTreeItem[]> {
+    fetch(): Observable<SourceTreeItem[]> {
         return of(this.items);
     }
 }
@@ -1058,7 +1050,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
         let tableBodyRows: DebugElement[] = [];
         let tableRowTogglerCellsArray: DebugElement[] = [];
 
-        const calculateTableElementsMetaData = () => {
+        const calculateTableElementsMetaData = (): void => {
             tableBodyRows = fixture.debugElement.queryAll(By.css('.fdp-table__body .fd-table__row'));
             tableRowTogglerCellsArray = fixture.debugElement.queryAll(
                 By.css('.fdp-table__body .fd-table__row .fd-table__cell--expand')

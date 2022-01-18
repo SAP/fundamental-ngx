@@ -24,6 +24,10 @@ import { DynamicFormGeneratorRadioComponent } from './dynamic-form-generator-rad
 import { DynamicFormGeneratorDatepickerComponent } from './dynamic-form-generator-datepicker/dynamic-form-generator-datepicker.component';
 import { DynamicFormGeneratorSwitchComponent } from './dynamic-form-generator-switch/dynamic-form-generator-switch.component';
 import { FormGeneratorService } from './form-generator.service';
+import { FormGeneratorFieldComponent } from './form-generator-field/form-generator-field.component';
+import { DynamicFormGeneratorMultiInputComponent } from './dynamic-form-generator-multi-input/dynamic-form-generator-multi-input.component';
+import { PlatformMultiComboboxModule } from '../multi-combobox/multi-combobox.module';
+import { PlatformMultiInputModule } from '../multi-input/multi-input.module';
 
 @NgModule({
     declarations: [
@@ -36,7 +40,9 @@ import { FormGeneratorService } from './form-generator.service';
         DynamicFormGeneratorSelectComponent,
         DynamicFormGeneratorRadioComponent,
         DynamicFormGeneratorDatepickerComponent,
-        DynamicFormGeneratorSwitchComponent
+        DynamicFormGeneratorSwitchComponent,
+        FormGeneratorFieldComponent,
+        DynamicFormGeneratorMultiInputComponent
     ],
     imports: [
         CommonModule,
@@ -53,9 +59,23 @@ import { FormGeneratorService } from './form-generator.service';
         PlatformDatePickerModule,
         PlatformSwitchModule,
         FormMessageModule,
-        BusyIndicatorModule
+        BusyIndicatorModule,
+        PlatformMultiComboboxModule,
+        PlatformMultiInputModule
     ],
     providers: [FormGeneratorService],
-    exports: [FormGeneratorComponent]
+    exports: [
+        FormGeneratorComponent,
+        DynamicFormControlFieldDirective,
+        DynamicFormControlDirective,
+        DynamicFormGeneratorCheckboxComponent,
+        DynamicFormGeneratorInputComponent,
+        DynamicFormGeneratorEditorComponent,
+        DynamicFormGeneratorSelectComponent,
+        DynamicFormGeneratorRadioComponent,
+        DynamicFormGeneratorDatepickerComponent,
+        DynamicFormGeneratorSwitchComponent,
+        FormGeneratorFieldComponent
+    ]
 })
 export class PlatformFormGeneratorModule {}

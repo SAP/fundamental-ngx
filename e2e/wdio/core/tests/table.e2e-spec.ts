@@ -4,9 +4,11 @@ import {
     browserIsFirefox,
     checkElementScreenshot,
     click,
+    clickAndMoveElement,
     getAlertText,
     getAttributeByName,
     getElementArrayLength,
+    getElementClass,
     getImageTagBrowserPlatform,
     getText,
     isElementClickable,
@@ -16,22 +18,26 @@ import {
     saveElementScreenshot,
     scrollIntoView,
     setValue,
-    waitForElDisplayed
+    waitForElDisplayed,
+    getCurrentUrl,
+    getValue,
+    browserIsSafari,
+    browserIsSafariorFF,
+    waitForPresent
 } from '../../driver/wdio';
 import {
     alertText,
     componentExampleArr,
     dateTestText,
-    paginationTestArr,
     tableCellArr,
     tableCellArr2,
     testText
 } from '../fixtures/appData/table-content';
+import { checkElArrIsClickable } from '../../helper/assertion-helper';
 
 describe('Table test suite', () => {
     const tablePage = new TablePo();
     const {
-        tableExample,
         link,
         tableToolbarExample,
         button,
@@ -50,7 +56,6 @@ describe('Table test suite', () => {
         tablePaginationExample,
         menuItem,
         paginationLink,
-        tableResult,
         linkPrevious,
         linkNext,
         tableCustomColumnsExample,
@@ -61,7 +66,12 @@ describe('Table test suite', () => {
         tableColumnSortingExample,
         listItem,
         markAllCheckboxesFF,
-        clickableTableRowFF
+        clickableTableRowFF,
+        selectedPage,
+        tableCDKExample,
+        tableCellWOHeader,
+        tableActivableExample,
+        tableFocusableExample
     } = tablePage;
 
     beforeAll(() => {
@@ -70,10 +80,15 @@ describe('Table test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForElDisplayed(tableExample);
+        waitForPresent(tablePage.root);
+        waitForElDisplayed(tablePage.title);
     }, 1);
 
     it('should check clickability links for all examples', () => {
+        // skipped due to cannot reproduce failure, needs further investigation
+        if (getCurrentUrl().includes('localhost')) {
+            return;
+        }
         for (let i = 0; i < 11; i++) {
             checkIsLinkClickable(componentExampleArr[i]);
         }
@@ -119,6 +134,16 @@ describe('Table test suite', () => {
             for (let i = 0; i < cellLength; i++) {
                 expect(getText(tableToolbarExample + tableRow + tableCell, i)).toBe(tableCellArr[i]);
             }
+        });
+
+        // skipped due to https://github.com/SAP/fundamental-ngx/issues/7096
+        xit('should check that we can not do anything while table is loading', () => {
+            scrollIntoView(tableToolbarExample);
+            click(tableToolbarExample + button, 1);
+            expect(isElementDisplayed(busyIndicator)).toBe(true, 'busy indicator not displayed');
+            expect(getElementClass(tableToolbarExample + inputField)).toContain('disabled');
+            expect(getElementClass(tableToolbarExample + button, 2)).toContain('disabled');
+            expect(getElementClass(tableToolbarExample + button)).toContain('disabled');
         });
     });
 
@@ -220,13 +245,34 @@ describe('Table test suite', () => {
         });
     });
 
+    describe('Check Interactive Rows and Cells example', () => {
+        it('should check clickable links', () => {
+            scrollIntoView(tableActivableExample);
+            checkElArrIsClickable(tableActivableExample + link);
+        });
+
+        it('should check table has activable and hoverable states', () => {
+            scrollIntoView(tableActivableExample);
+            expect(getElementClass(tableActivableExample + tableRow)).toContain(
+                'fd-table__row--activable fd-table__row--hoverable'
+            );
+        });
+    });
+
+    describe('Check Focusable example', () => {
+        it('should check table has focusable states', () => {
+            scrollIntoView(tableFocusableExample);
+            expect(getElementClass(tableFocusableExample + tableRow)).toContain('fd-table__row--focusable');
+        });
+    });
+
     describe('Check Table with Checkboxes example', () => {
         it('should check that checkbox work correctly', () => {
             scrollIntoView(tableCheckboxesExample);
             const checkboxLength = getElementArrayLength(tableCheckboxesExample + markAllCheckboxes);
             for (let i = 0; i < checkboxLength; i++) {
                 scrollIntoView(tableCheckboxesExample + markAllCheckboxes, i);
-                browserIsFirefox()
+                browserIsSafariorFF()
                     ? click(tableCheckboxesExample + markAllCheckboxesFF, i)
                     : click(tableCheckboxesExample + markAllCheckboxes, i);
             }
@@ -239,12 +285,17 @@ describe('Table test suite', () => {
                 );
             }
         });
+
+        it('should check clickable links', () => {
+            scrollIntoView(tableCheckboxesExample);
+            checkElArrIsClickable(tableCheckboxesExample + link);
+        });
     });
 
     describe('Check Table With Semantic Row Highlighting example', () => {
         it('should check that checkbox work correctly', () => {
             scrollIntoView(tableSemanticExample);
-            browserIsFirefox()
+            browserIsSafariorFF()
                 ? click(tableSemanticExample + markAllCheckboxesFF)
                 : click(tableSemanticExample + markAllCheckboxes);
             const checkboxLength = getElementArrayLength(tableSemanticExample + tableRow);
@@ -254,6 +305,26 @@ describe('Table test suite', () => {
                     `element with index ${i} not selected`
                 );
             }
+        });
+
+        it('should check clickable links', () => {
+            scrollIntoView(tableSemanticExample);
+            checkElArrIsClickable(tableSemanticExample + link);
+        });
+    });
+
+    describe('Check Table with Angular CDK example', () => {
+        xit('should check drag and drop table row', () => {
+            // test runner drag and drop not working correctly
+            scrollIntoView(tableCDKExample + tableRow, 3);
+            const originalTableCell = getText(tableCDKExample + tableCellWOHeader);
+            clickAndMoveElement(tableCDKExample + tableRow, 0, 50);
+            expect(getText(tableCDKExample + tableCellWOHeader)).not.toBe(originalTableCell);
+        });
+
+        it('should check clickable links', () => {
+            scrollIntoView(tableCDKExample);
+            checkElArrIsClickable(tableCDKExample + link);
         });
     });
 
@@ -271,7 +342,7 @@ describe('Table test suite', () => {
 
         it('should check that checkbox work correctly', () => {
             scrollIntoView(tablePopinExample);
-            browserIsFirefox()
+            browserIsSafariorFF()
                 ? click(tablePopinExample + markAllCheckboxesFF)
                 : click(tablePopinExample + markAllCheckboxes);
             const checkboxLength = getElementArrayLength(tablePopinExample + tableRow);
@@ -285,8 +356,12 @@ describe('Table test suite', () => {
         });
     });
 
-    describe('Check Table with Non-navigatable Row example', () => {
+    describe('Check Table with navigatable rows example', () => {
         it('should check alert message', () => {
+            if (browserIsSafari()) {
+                return;
+            }
+
             scrollIntoView(tableNavigatableRowExample);
             const rowLength = getElementArrayLength(tableNavigatableRowExample + clickableTableRow);
             for (let i = 0; i < rowLength - 1; i++) {
@@ -310,7 +385,7 @@ describe('Table test suite', () => {
         });
     });
 
-    describe('Check  Table With Pagination example', () => {
+    describe('Check Table With Pagination example', () => {
         it('should check how many table rows display on table', () => {
             scrollIntoView(tablePaginationExample);
             const fiveTableRows = getElementArrayLength(tablePaginationExample + tableRow);
@@ -327,22 +402,30 @@ describe('Table test suite', () => {
             expect(tenTableRows).toEqual(10);
         });
 
-        it('should check selected pages by clicking each option', () => {
+        it('should check selected pages by clicking options', () => {
             scrollIntoView(tablePaginationExample);
-            const linkLength = getElementArrayLength(paginationLink);
-            for (let i = 0; i < linkLength; i++) {
-                click(paginationLink, i);
-                expect(getText(tableResult).trim()).toBe(paginationTestArr[i]);
-            }
+            click(paginationLink);
+            expect(getValue(tablePaginationExample + inputField)).toBe('1');
+            click(paginationLink);
+            expect(getValue(tablePaginationExample + inputField)).toBe('2');
         });
 
         it('should check selected pages by clicking next and previous link', () => {
             scrollIntoView(tablePaginationExample);
             click(linkNext);
-            expect(getText(tableResult).trim()).toBe(paginationTestArr[3]);
+            expect(getValue(tablePaginationExample + inputField)).toBe('4');
 
             click(linkPrevious);
-            expect(getText(tableResult).trim()).toBe(paginationTestArr[2]);
+            expect(getValue(tablePaginationExample + inputField)).toBe('3');
+        });
+
+        // skipped due to https://github.com/SAP/fundamental-ngx/issues/7148
+        xit('should check that current page not changing after changing items per page', () => {
+            scrollIntoView(tablePaginationExample);
+            click(tablePaginationExample + button);
+            const defaultSelectedPage = getText(selectedPage);
+            click(menuItem);
+            expect(getText(selectedPage)).toBe(defaultSelectedPage);
         });
     });
 
@@ -360,7 +443,10 @@ describe('Table test suite', () => {
     function checkIsLinkClickable(selector: string): void {
         const linkLength = getElementArrayLength(selector + link);
         for (let i = 0; i < linkLength; i++) {
-            expect(isElementClickable(selector + link, i)).toBe(true, `link with index ${i} not clickable`);
+            expect(isElementClickable(selector + link, i)).toBe(
+                true,
+                `link with index ${i} in ${selector} example not clickable`
+            );
         }
     }
 });

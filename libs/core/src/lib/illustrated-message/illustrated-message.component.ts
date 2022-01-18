@@ -24,7 +24,7 @@ export interface SvgConfig {
 let illustratedMessageUniqueId = 0;
 
 @Component({
-    // tslint:disable-next-line:component-selector
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-illustrated-message]',
     template: `
         <svg class="fd-illustrated-message__illustration" *ngIf="!noSvg">

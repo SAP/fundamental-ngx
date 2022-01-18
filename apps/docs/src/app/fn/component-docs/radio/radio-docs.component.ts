@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
-import * as formHtml from '!raw-loader!./examples/radio-example.component.html';
-import * as formTs from '!raw-loader!./examples/radio-examples.component.ts';
-import * as formGroupInputHtml from '!raw-loader!./examples/radio-form-group-example.component.html';
-import * as formGroupInputTs from '!raw-loader!./examples/radio-form-group-example.component.ts';
+import formHtml from '!./examples/radio-example.component.html?raw';
+import formTs from '!./examples/radio-examples.component.ts?raw';
+import formGroupInputHtml from '!./examples/radio-form-group-example.component.html?raw';
+import formGroupInputTs from '!./examples/radio-form-group-example.component.ts?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

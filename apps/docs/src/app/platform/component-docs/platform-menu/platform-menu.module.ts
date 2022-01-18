@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
+
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
-
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
-import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 import { PlatformMenuHeaderComponent } from './platform-menu-header/platform-menu-header.component';
 import { PlatformMenuDocsComponent } from './platform-menu-docs.component';
 import { PlatformMenuBasicExampleComponent } from './platform-menu-examples/platform-menu-basic-example.component';
@@ -33,7 +33,7 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
         PlatformMenuModule,
-        PlatformButtonModule,
+        ButtonModule,
         AvatarModule,
         ScrollingModule
     ],

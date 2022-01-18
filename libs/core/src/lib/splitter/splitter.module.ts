@@ -5,11 +5,13 @@ import { NgModule } from '@angular/core';
 import { IconModule } from '@fundamental-ngx/core/icon';
 
 import { SplitterPaginationComponent } from './splitter-pagination/splitter-pagination.component';
-import { SplitterPaneContainerComponent } from './splitter-pane-container/splitter-pane-container.component';
+import {
+    SplitterPaneContainerComponent,
+    NoDefaultPanePipe
+} from './splitter-pane-container/splitter-pane-container.component';
 import { SplitterResizerComponent } from './splitter-resizer/splitter-resizer.component';
 import { SplitterSplitPaneComponent } from './splitter-split-pane/splitter-split-pane.component';
 import { SplitterComponent } from './splitter.component';
-import { NoDefaultPanePipe } from './pipes';
 
 @NgModule({
     declarations: [

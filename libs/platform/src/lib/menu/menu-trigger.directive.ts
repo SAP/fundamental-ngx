@@ -22,7 +22,7 @@ import { MenuItemComponent } from './menu-item.component';
 @Directive({
     selector: `[fdpMenuTriggerFor]`,
     host: {
-        'aria-haspopup': 'true',
+        'aria-haspopup': 'menu',
         '[attr.aria-expanded]': 'isMenuOpen || null',
         '[attr.aria-controls]': 'isMenuOpen ? menu.menuId : null'
     }
@@ -206,7 +206,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
                 }),
                 take(1)
             )
-            .subscribe((event) => {
+            .subscribe(() => {
                 this.closeMenu();
             });
 
@@ -227,7 +227,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
             if (this._parentMenuCloseSubscription) {
                 this._parentMenuCloseSubscription.unsubscribe();
             }
-            this._parentMenuCloseSubscription = this._parentMenu.close.subscribe((method: MenuCloseMethod) => {
+            this._parentMenuCloseSubscription = this._parentMenu.close.subscribe(() => {
                 this.closeMenu();
             });
         }
@@ -278,8 +278,8 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         const scrollStrategy = this._overlay.scrollStrategies.reposition();
 
         const overlayConfig = new OverlayConfig({
-            positionStrategy: positionStrategy,
-            scrollStrategy: scrollStrategy,
+            positionStrategy,
+            scrollStrategy,
             backdropClass: 'cdk-overlay-transparent-backdrop'
         });
         return overlayConfig;

@@ -5,7 +5,4 @@
     [displayFn]="displayFunc"
 ></fd-multi-input>
 
-Selected: [<span *ngFor="let item of selected; let i = index">{{
-    i === selected.length - 1 ? item.name : item.name + ','
-}}</span
->]
+Selected: {{ selected | json }}

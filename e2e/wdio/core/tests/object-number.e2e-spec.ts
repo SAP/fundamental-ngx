@@ -2,6 +2,7 @@ import { ObjectNumberPo } from '../pages/object-number.po';
 import {
     getAttributeByName,
     getElementArrayLength,
+    getElementClass,
     getText,
     scrollIntoView,
     waitForElDisplayed
@@ -26,7 +27,8 @@ describe('object number test suite', () => {
         boldObjExamples,
         unitObjExamples,
         decimalObjExamples,
-        truncationObjExample
+        truncationObjExample,
+        boldObjExampleText
     } = objectNumberPage;
 
     beforeAll(() => {
@@ -81,8 +83,7 @@ describe('object number test suite', () => {
             const objectCount = getElementArrayLength(boldObjExamples);
 
             for (let i = 0; i < objectCount; i++) {
-                // in prod mode missed attr: ng-reflect-emphasized
-                // expect(getAttributeByName(boldObjExamples, boldAttr, i)).toEqual('true');
+                expect(getElementClass(boldObjExampleText)).toContain('bold');
             }
         });
     });
@@ -124,8 +125,7 @@ function checkObjectValues(selector, dataArr): void {
 
     for (let i = 0; i < objectCount; i++) {
         const unitValue = getAttributeByName(selector, unitAttr, i);
-        const textValue = getText(selector, i);
-
-        expect(textValue).toEqual(dataArr[i] + ' ' + unitValue);
+        const textValue = getText(selector + ' .fd-object-number__text', i).trim();
+        expect(textValue + ' ' + unitValue).toEqual(dataArr[i] + ' ' + unitValue);
     }
 }

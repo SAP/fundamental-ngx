@@ -211,6 +211,25 @@ Run `ng test platform`. Append `--code-coverage` to generate code coverage docum
 
 For models prior to 0.11.1 use `fundamental-ngx`
 
+### Using Jest for running tests in the host application
+
+If you're using Jest for running tests in the host application some additional steps needed to be done due to the Jest issues with importing ES modules.
+
+1. Install `lodash` package as the development dependency.
+   `npm i -D lodash`
+   Using yarn?
+   `yarn add -D lodash`
+   Don't worry, as we're installing package as the development dependency it won't increase build size.
+
+2. Adjust Jest config (`jest.config.js`) by adding these lines:
+    ```
+    moduleNameMapper: {
+      "^lodash-es$": "lodash"
+    },
+    ```
+
+That's it, now your tests should be working fine. In case of any issues please raise the issue in the github repository.
+
 ## Versioning
 
 The `@fundamental-ngx/platform` library follows [Semantic Versioning](https://semver.org/). These components strictly adhere to the `[MAJOR].[MINOR].[PATCH]` numbering system (also known as `[BREAKING].[FEATURE].[FIX]`).

@@ -22,7 +22,6 @@ export * from './components/table-p13-dialog/filtering/filtering.component';
 export * from './components/table-p13-dialog/filtering/filtering.model';
 export * from './components/table-p13-dialog/grouping/grouping.component';
 export * from './components/table-p13-dialog/sorting/sorting.component';
-export * from './components/table-p13-dialog/sorting/get-available-sort-columns.pipe';
 export * from './components/table-toolbar/table-toolbar';
 export * from './components/table-toolbar/table-toolbar-actions.component';
 export * from './components/table-toolbar/table-toolbar.component';

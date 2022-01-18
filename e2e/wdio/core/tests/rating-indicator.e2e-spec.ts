@@ -11,7 +11,9 @@ import {
     getValue,
     sendKeys,
     waitForElDisplayed,
-    waitForPresent
+    waitForPresent,
+    currentPlatformName,
+    getText
 } from '../../driver/wdio';
 
 describe('Rating indicator test suite', () => {
@@ -20,13 +22,15 @@ describe('Rating indicator test suite', () => {
     const {
         starsRatingExamples,
         sizeRatingIndicator,
-        starsRatingDisplayMode,
+        starsRatingDisabledMode,
         starsRatingDynamicChanges,
         containerDynamicChanges,
         inputsDynamicChanges,
         touchedInputsDynamicChanges,
         inputsBasicExample,
-        touchedInputsBasicExample
+        touchedInputsBasicExample,
+        starsRatingDisplayMode,
+        textDisplayMode
     } = ratingIndicatorPage;
 
     beforeAll(() => {
@@ -44,17 +48,17 @@ describe('Rating indicator test suite', () => {
             for (let i = 0; i < length; i++) {
                 scrollIntoView(sizeRatingIndicator, i);
                 mouseHoverElement(sizeRatingIndicator, i);
-                expect(doesItExist(starsRatingDisplayMode)).toBe(true, `Size rating ${i} not have popover`);
+                expect(doesItExist(starsRatingDisabledMode)).toBe(true, `Size rating ${i} not have popover`);
                 refreshPage();
             }
         });
 
         it('verify that star is disabled', () => {
-            const lengthOfStars = getElementArrayLength(starsRatingDisplayMode);
+            const lengthOfStars = getElementArrayLength(starsRatingDisabledMode);
             for (let i = 1; i < lengthOfStars; i++) {
-                expect(isElementClickable(starsRatingDisplayMode, i)).toBe(
+                expect(isElementClickable(starsRatingDisabledMode, i)).toBe(
                     false,
-                    `${starsRatingDisplayMode} ${i} not clickable`
+                    `${starsRatingDisabledMode} ${i} not clickable`
                 );
             }
         });
@@ -100,20 +104,34 @@ describe('Rating indicator test suite', () => {
             click(inputsDynamicChanges);
             expect(getElementArrayLength(containerDynamicChanges)).toBe(
                 2,
-                `${starsRatingDisplayMode} stars are not in display mode`
+                `${starsRatingDisabledMode} stars are not in display mode`
             );
         });
 
         it('should check that minimal value in input is 1', () => {
+            if (currentPlatformName() !== 'windows') {
+                return;
+            }
             refreshPage();
             waitForPresent(ratingIndicatorPage.root);
             waitForElDisplayed(ratingIndicatorPage.title);
             click(inputsDynamicChanges);
+            // eslint-disable-next-line radix
             for (let i = parseInt(getValue(inputsDynamicChanges)); i !== 1; i--) {
                 sendKeys('ArrowDown');
             }
             sendKeys('ArrowDown');
             expect(getValue(touchedInputsDynamicChanges)).toBe('1');
+        });
+
+        // skipped due to https://github.com/SAP/fundamental-ngx/issues/7268
+        xit('should check selecting rating indicator stars and that text is correct in label', () => {
+            scrollIntoView(starsRatingDisplayMode);
+            const starsLength = getElementArrayLength(starsRatingDisplayMode);
+            for (let i = 0; i < starsLength; i++) {
+                click(starsRatingDisplayMode, i);
+                expect(getText(textDisplayMode)).toBe(`(${i + 1} of ${starsLength})`);
+            }
         });
     });
 

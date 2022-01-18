@@ -26,7 +26,9 @@ import {
     getCSSPropertyByName,
     getElementAriaLabel,
     getText,
-    waitForElDisplayed
+    refreshPage,
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 
 describe('Info Label component test suite', () => {
@@ -36,13 +38,18 @@ describe('Info Label component test suite', () => {
         labelsWithTextAndIconArr,
         labelsIconArr,
         labelsWithNumberOrIconArr,
-        accessibilityLabelsArr,
-        accessibilityAttrArr
+        accessibilityLabelsArr
     } = new InfoLabelPO();
     const infoLabelPage = new InfoLabelPO();
 
-    beforeEach(() => {
+    beforeAll(() => {
         infoLabelPage.open();
+    }, 1);
+
+    beforeEach(() => {
+        refreshPage();
+        waitForPresent(infoLabelPage.root);
+        waitForPresent(infoLabelPage.title);
     }, 1);
 
     it('should check default label info', () => {
@@ -122,8 +129,6 @@ describe('Info Label component test suite', () => {
     });
 
     it('should check info label with aria label for accessibility', () => {
-        const ariaAttrArr = elementArray(accessibilityAttrArr);
-
         if (browserIsSafari()) {
             expect(getElementAriaLabel(accessibilityLabelsArr)).not.toBe(null);
             expect(getAttributeByName(accessibilityLabelsArr, ariaLabelledByAttribute, 1)).not.toBe(null);

@@ -1,4 +1,5 @@
 import {
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -19,11 +20,21 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import { Platform } from '@angular/cdk/platform';
-import { coerceNumberProperty, _isNumberValue } from '@angular/cdk/coercion';
+import { coerceNumberProperty } from '@angular/cdk/coercion';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 
-import { fromEvent, Subject } from 'rxjs';
-import { debounceTime, takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, fromEvent, Observable, of, Subject } from 'rxjs';
+import {
+    debounceTime,
+    distinctUntilChanged,
+    map,
+    mapTo,
+    skip,
+    startWith,
+    switchMap,
+    take,
+    takeUntil
+} from 'rxjs/operators';
 
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import {
@@ -54,9 +65,15 @@ let sliderId = 0;
     styleUrls: ['./slider.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [SLIDER_VALUE_ACCESSOR]
+    providers: [SLIDER_VALUE_ACCESSOR],
+    host: {
+        '(mouseenter)': 'this._componentHovered$.next(true)',
+        '(mouseleave)': 'this._componentHovered$.next(false)'
+    }
 })
-export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlValueAccessor, CssClassBuilder {
+export class SliderComponent
+    implements OnInit, OnChanges, AfterViewInit, OnDestroy, ControlValueAccessor, CssClassBuilder
+{
     /** Slider id, it has some default value if not set,  */
     @Input()
     @HostBinding('attr.id')
@@ -215,20 +232,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
     /** Set control value */
     set value(value: SliderControlValue) {
-        if (!this._isValidControlValue(value, this.value)) {
-            return;
-        }
-
-        if (this._isRange) {
-            this._initRangeMode(value as number[] | SliderTickMark[]);
-        } else {
-            this._initSingeMode(value as number | SliderTickMark);
-        }
-
-        this._value = value;
-
-        this.onChange(value);
-        this.onTouched();
+        this._setValue(value);
     }
 
     /** @hidden */
@@ -255,6 +259,10 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     /** @hidden */
     @ViewChildren(PopoverComponent)
     _popovers: QueryList<PopoverComponent>;
+
+    /** @hidden */
+    @ViewChildren('sliderTooltipWrapper')
+    _sliderTooltipWrappers: QueryList<ElementRef<HTMLDivElement>>;
 
     /** @hidden */
     _value: number | SliderTickMark | SliderTickMark[] | number[] = 0;
@@ -325,14 +333,29 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     /** @hidden */
     private _valuesBySteps: number[] = [];
 
-    /** @hidden */
-    private _tooltipOpen = false;
-
     /**
      * @hidden
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
+
+    /** @hidden */
+    readonly _componentHovered$ = new BehaviorSubject(false);
+
+    /** @hidden */
+    readonly _handleFocused$ = new BehaviorSubject(false);
+
+    /** @hidden */
+    readonly _rangeHandle1Focused$ = new BehaviorSubject(false);
+
+    /** @hidden */
+    readonly _rangeHandle2Focused$ = new BehaviorSubject(false);
+
+    /** @hidden */
+    readonly _popoverInputFieldFocused$ = new BehaviorSubject(false);
+
+    /** @hidden */
+    readonly _popoverInputFieldHovered$ = new BehaviorSubject(false);
 
     /** @hidden */
     constructor(
@@ -367,6 +390,11 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
         this._constructTickMarks();
         this._constructValuesBySteps();
         this._recalcHandlePositions();
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this._listenToInteractionChanges();
     }
 
     /** @hidden */
@@ -420,18 +448,18 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     }
 
     /** @hidden */
-    onChange: Function = () => {};
+    onChange: (value: SliderControlValue) => void = () => {};
 
     /** @hidden */
-    onTouched: Function = () => {};
+    onTouched = (): void => {};
 
     /** @hidden */
-    registerOnChange(fn: Function): void {
+    registerOnChange(fn: (value: SliderControlValue) => void): void {
         this.onChange = fn;
     }
 
     /** @hidden */
-    registerOnTouched(fn: Function): void {
+    registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
 
@@ -442,7 +470,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
     /** @hidden */
     writeValue(value: SliderControlValue): void {
-        this.value = value;
+        this._setValue(value, false);
     }
 
     /** @hidden */
@@ -451,7 +479,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
             return;
         }
 
-        this.writeValue(this._calculateValueFromPointerPosition(event));
+        this._setValue(this._calculateValueFromPointerPosition(event));
         this._updatePopoversPosition();
     }
 
@@ -465,7 +493,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
             this._updatePopoversPosition();
 
             if (!this._isRange) {
-                this.writeValue(this._calculateValueFromPointerPosition(moveEvent));
+                this._setValue(this._calculateValueFromPointerPosition(moveEvent));
 
                 return;
             }
@@ -482,7 +510,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
             const value = this._calculateValueFromPointerPosition(moveEvent, false) as number;
             this._setRangeHandleValueAndPosition(handleIndex, value);
 
-            this.writeValue(this._constructRangeModelValue());
+            this._setValue(this._constructRangeModelValue());
         });
 
         const unsubscribeFromMouseup = this._renderer.listen('document', 'mouseup', () => {
@@ -502,8 +530,6 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
             return;
         }
         event.preventDefault();
-
-        this._closeOpenPopupOnClick();
 
         const diff = event.shiftKey ? this.jump : this.step;
         let newValue: number | SliderTickMark | null = null;
@@ -545,50 +571,20 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
         newValue = this._processNewValue(newValue as number, !this._isRange);
 
         if (!this._isRange) {
-            this.writeValue(newValue);
+            this._setValue(newValue);
         } else {
             this._setRangeHandleValueAndPosition(handleIndex, newValue as number);
-            this.writeValue(this._constructRangeModelValue());
+            this._setValue(this._constructRangeModelValue());
         }
 
         this._updatePopoversPosition();
     }
 
     /** @hidden */
-    _showPopovers(): void {
-        this._tooltipOpen = true;
-        this._popovers.forEach((popover) => popover.open());
-    }
-
-    /** @hidden */
-    _hidePopovers(): void {
-        this._tooltipOpen = false;
-        const elementsToCheck = [
-            this.handle?.nativeElement,
-            this.rangeHandle1?.nativeElement,
-            this.rangeHandle2?.nativeElement
-        ];
-        const handleFocused = elementsToCheck.some((el) => document.activeElement === el);
-        const popoverInputFocused = document.activeElement.classList.contains(this._popoverInputFieldClass);
-        if (handleFocused || popoverInputFocused) {
-            const unsubscribeFromBlur = this._renderer.listen(document.activeElement, 'focusout', () => {
-                setTimeout(() => {
-                    unsubscribeFromBlur();
-                    this._hidePopovers();
-                });
-            });
-
-            return;
-        }
-
-        this._popovers.forEach((popover) => popover.close());
-    }
-
-    /** @hidden */
     _updateValueFromInput(value: string, target: SliderValueTargets): void {
         const newValue = this._processNewValue(+value) as number;
         if (!this._isRange && target === SliderValueTargets.SINGLE_SLIDER) {
-            this.writeValue(newValue);
+            this._setValue(newValue);
             this.handle.nativeElement.focus();
             this._updatePopoversPosition();
 
@@ -605,31 +601,26 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
             this.rangeHandle2.nativeElement.focus();
         }
 
-        this.writeValue(this._constructRangeModelValue());
+        this._setValue(this._constructRangeModelValue());
 
         this._updatePopoversPosition();
     }
 
-    /** @hidden reset default prefix on leaving the slider */
-    onBlur(event: MouseEvent | KeyboardEvent): void {
-        // reset prefix string for slider current value that need to be announced
+    /** @hidden */
+    private _setValue(value: SliderControlValue, emitEvent = true): void {
         if (this._isRange) {
-            this._rangeSliderHandle1CurrentValuePrefix = this.rangeSliderHandle1CurrentValuePrefix;
-            this._rangeSliderHandle2CurrentValuePrefix = this.rangeSliderHandle2CurrentValuePrefix;
+            this._initRangeMode((value ?? [0.0]) as number[] | SliderTickMark[]);
         } else {
-            this._singleSliderCurrentValuePrefix = this.singleSliderCurrentValuePrefix;
+            this._initSingeMode((value ?? 0) as number | SliderTickMark);
+        }
+
+        this._value = value;
+
+        if (emitEvent) {
+            this.onChange(value);
+            this.onTouched();
         }
         this._cdr.markForCheck();
-    }
-
-    /** @hidden */
-    private _closeOpenPopupOnClick(): void {
-        if (this._tooltipOpen) {
-            this._popovers.forEach((popover) => popover.close());
-        } else {
-            this._popovers.forEach((popover) => popover.open());
-        }
-        this._tooltipOpen = !this._tooltipOpen;
     }
 
     /** @hidden */
@@ -780,7 +771,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
                     const value = Math.round(i * this.step * 100) / 100;
                     const position = (value / (this.max - this.min)) * 100;
 
-                    return { value: value, position: position, label: `${this.min + value}` };
+                    return { value, position, label: `${this.min + value}` };
                 });
             }
         }
@@ -852,19 +843,6 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     }
 
     /** @hidden */
-    private _isValidControlValue(currentValue: SliderControlValue, previousValue: SliderControlValue): boolean {
-        if (!currentValue && currentValue !== 0) {
-            return false;
-        }
-
-        if (_isNumberValue(currentValue)) {
-            currentValue = coerceNumberProperty(currentValue);
-        }
-
-        return previousValue !== currentValue;
-    }
-
-    /** @hidden */
     private _initSingeMode(value: number | SliderTickMark): void {
         if (this.customValues.length > 0) {
             this._initSingeModeWithCustomValue(value as SliderTickMark);
@@ -891,10 +869,6 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
     /** @hidden */
     private _initRangeMode(value: number[] | SliderTickMark[]): void {
-        if (!(this._handle1Value === 0 && this._handle2Value === 0)) {
-            return;
-        }
-
         if (this.customValues.length > 0) {
             this._initRangeModeWithCustomValues(value as SliderTickMark[]);
 
@@ -969,5 +943,67 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     /** @hidden */
     private _instanceOfCustomValue(object: any): object is SliderCustomValue {
         return !!object && 'value' in object && 'label' in object;
+    }
+
+    /** @hidden */
+    private _listenToInteractionChanges(): void {
+        combineLatest([
+            this._handleFocused$,
+            this._rangeHandle1Focused$,
+            this._rangeHandle2Focused$,
+            this._popoverInputFieldFocused$,
+            this._componentHovered$,
+            this._popoverInputFieldHovered$
+        ])
+            .pipe(
+                skip(1),
+                map((states) => states.some(Boolean)),
+                switchMap((focused) => {
+                    if (focused) {
+                        return of(true);
+                    }
+                    // If not focused, check for the edge case,
+                    // when hover is on the fd-popover-body, that is a parent for the tooltip.
+                    // This will return true, when hovering the gap between handle and the tooltip.
+                    return this._isPopoverHovered();
+                }),
+                debounceTime(10),
+                distinctUntilChanged(),
+                takeUntil(this._onDestroy$)
+            )
+            .subscribe((focused) => {
+                if (focused) {
+                    this._popovers.forEach((popover) => popover.open());
+                } else {
+                    this._resetPrefix();
+                    this._popovers.forEach((popover) => popover.close());
+                }
+            });
+    }
+
+    /** @hidden reset default prefix on leaving the slider */
+    private _resetPrefix(): void {
+        // reset prefix string for slider current value that need to be announced
+        if (this._isRange) {
+            this._rangeSliderHandle1CurrentValuePrefix = this.rangeSliderHandle1CurrentValuePrefix;
+            this._rangeSliderHandle2CurrentValuePrefix = this.rangeSliderHandle2CurrentValuePrefix;
+        } else {
+            this._singleSliderCurrentValuePrefix = this.singleSliderCurrentValuePrefix;
+        }
+        this._cdr.markForCheck();
+    }
+
+    /**
+     * @hidden
+     * Checks whether input popover element is hovered.
+     * Will also return true, when hovering the gap between handle and the tooltip.
+     * If yes, returns "true" instantly and "false" once it's not hovered anymore.
+     */
+    private _isPopoverHovered(): Observable<boolean> {
+        const popoverBody = this._sliderTooltipWrappers.first?.nativeElement.closest('fd-popover-body');
+        if (popoverBody?.matches(':hover')) {
+            return fromEvent(popoverBody, 'mouseleave').pipe(mapTo(false), take(1), startWith(true));
+        }
+        return of(false);
     }
 }

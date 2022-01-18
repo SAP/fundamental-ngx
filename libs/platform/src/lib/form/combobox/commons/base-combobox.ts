@@ -38,6 +38,7 @@ import { ListComponent } from '@fundamental-ngx/core/list';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import {
     ArrayComboBoxDataSource,
+    coerceArraySafe,
     CollectionBaseInput,
     ComboBoxDataSource,
     FormField,
@@ -143,11 +144,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     }
 
     set value(value: any) {
-        if (!value) {
-            return;
-        }
-
-        const selectedItems = Array.isArray(value) ? value : [value];
+        const selectedItems = coerceArraySafe(value);
         this.setAsSelected(this._convertToOptionItems(selectedItems));
         super.setValue(value);
     }
@@ -277,12 +274,10 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     ];
 
     /** @hidden */
-    private _displayFn = (value: any) => {
-        return this.displayValue(value);
-    };
+    private _displayFn = (value: any): string => this.displayValue(value);
 
     /** @hidden */
-    private _secondaryFn = (value: any) => {
+    private _secondaryFn = (value: any): string => {
         if (isOptionItem(value)) {
             return value.secondaryText;
         }
@@ -348,11 +343,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
     /** write value for ControlValueAccessor */
     writeValue(value: any): void {
-        if (!value) {
-            return;
-        }
-
-        const selectedItems = Array.isArray(value) ? value : [value];
+        const selectedItems = coerceArraySafe(value);
         this.setAsSelected(this._convertToOptionItems(selectedItems));
         super.writeValue(value);
     }
@@ -509,7 +500,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
     /** @hidden */
     protected get ds(): ComboBoxDataSource<any> {
-        return <ComboBoxDataSource<any>>this.dataSource;
+        return this.dataSource as ComboBoxDataSource<any>;
     }
 
     /** @hidden Map grouped values to array. */
@@ -728,7 +719,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
             selectItems.push({
                 label: this.displayValue(value),
                 secondaryText: this.objectGet(value, this.secondaryKey),
-                value: value
+                value
             });
         }
 
@@ -744,7 +735,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
         for (let i = 0; i < items.length; i++) {
             const value = items[i];
-            selectItems.push({ label: value, value: value });
+            selectItems.push({ label: value, value });
         }
 
         return selectItems;
@@ -761,7 +752,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
             const value = items[i];
             selectItems.push({
                 label: this.displayValue(value),
-                value: value
+                value
             });
         }
 

@@ -34,6 +34,7 @@ export class WizardPo extends CoreBaseComponentPo {
 
     contentSection = this.wizard + '.fd-wizard__content ';
     radioButton = this.contentSection + '.fd-radio';
+    radioButtonLabel = this.contentSection + '.fd-radio__label';
 
     containerFooter = 'fd-dialog-footer ';
     dialogContainer = 'fd-dialog-container ';
@@ -43,11 +44,11 @@ export class WizardPo extends CoreBaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForPresent(this.title);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

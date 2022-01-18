@@ -4,7 +4,7 @@
             <div class="fd-dynamic-page__breadcrumb-title-container" #breadcrumbTitleContainer>
                 <nav aria-label="Breadcrumbs">
                     <!-- Can not avoid "ng-content" since breadcrumb does not provide ng-template wrapper approach  -->
-                    <ng-content select="fd-breadcrumb"></ng-content>
+                    <ng-container [ngTemplateOutlet]="breadCrumbTemplate"></ng-container>
                 </nav>
                 <div class="fd-dynamic-page__title-container">
                     <div class="fd-dynamic-page__title" #titleRef>{{ title }}</div>
@@ -27,4 +27,8 @@
         </div>
         <div class="fd-dynamic-page__subtitle" *ngIf="subtitle">{{ subtitle }}</div>
     </fdp-dynamic-page-title-host>
+</ng-template>
+
+<ng-template #breadCrumbTemplate>
+    <ng-content select="fd-breadcrumb"></ng-content>
 </ng-template>

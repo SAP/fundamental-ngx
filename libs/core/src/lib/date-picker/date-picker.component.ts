@@ -19,18 +19,24 @@ import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { Placement } from '@fundamental-ngx/core/shared';
-import { FormStates } from '@fundamental-ngx/core/shared';
-import { SpecialDayRule } from '@fundamental-ngx/core/shared';
-import { CalendarComponent, CalendarType, DaysOfWeek, FdCalendarView } from '@fundamental-ngx/core/calendar';
-import { CalendarYearGrid } from '@fundamental-ngx/core/calendar';
-import { DateRange } from '@fundamental-ngx/core/calendar';
-import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
-import { DateTimeFormats, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
-import { createMissingDateImplementationError } from './errors';
+import { Placement, SpecialDayRule, FormStates } from '@fundamental-ngx/core/shared';
+import {
+    CalendarComponent,
+    CalendarType,
+    DaysOfWeek,
+    FdCalendarView,
+    DateRange,
+    CalendarYearGrid
+} from '@fundamental-ngx/core/calendar';
+import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
 import { PopoverFormMessageService } from '@fundamental-ngx/core/form';
 import { PopoverService } from '@fundamental-ngx/core/popover';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
+
+import { createMissingDateImplementationError } from './errors';
+
+let datePickerCounter = 0;
 
 /**
  * The datetime picker component is an opinionated composition of the fd-popover and
@@ -49,7 +55,7 @@ import { ContentDensityService } from '@fundamental-ngx/core/utils';
     host: {
         '(blur)': 'onTouched()',
         '[class.fd-date-picker]': 'true',
-        '[class.fd-date-picker-custom]': 'true'
+        '[class.fd-date-picker-custom]': 'inline'
     },
     providers: [
         {
@@ -106,7 +112,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
         this._popoverFormMessage.triggers = triggers;
     }
     /** @hidden */
-    _messageTriggers: string[] = ['mouseenter', 'mouseleave'];
+    _messageTriggers: string[] = ['focusin', 'focusout'];
 
     /** The currently selected CalendarDay model */
     @Input()
@@ -135,9 +141,37 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
     @Input()
     dateInputLabel = 'Date input';
 
+    /** Aria label for the datepicker input. */
+    @Input()
+    dateRangeInputLabel = 'Date range input';
+
     /** Aria label for the button to show/hide the calendar. */
     @Input()
-    displayCalendarToggleLabel = 'Display calendar toggle';
+    displayCalendarToggleLabel = 'Open picker';
+
+    /**
+     * Value state "success" aria message.
+     */
+    @Input()
+    valueStateSuccessMessage = 'Value state Success';
+
+    /**
+     * Value state "information" aria message.
+     */
+    @Input()
+    valueStateInformationMessage = 'Value state Information';
+
+    /**
+     * Value state "warning" aria message.
+     */
+    @Input()
+    valueStateWarningMessage = 'Value state Warning';
+
+    /**
+     * Value state "error" aria message.
+     */
+    @Input()
+    valueStateErrorMessage = 'Value state Error';
 
     /** Whether a null input is considered valid. */
     @Input()
@@ -178,6 +212,9 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
     }
     /** @hidden */
     get state(): FormStates {
+        if (this._state == null && this.useValidation && this._isInvalidDateInput) {
+            return 'error';
+        }
         return this._state;
     }
     /** @hidden */
@@ -187,7 +224,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
      * Whether AddOn Button should be focusable, set to true by default
      */
     @Input()
-    buttonFocusable = true;
+    buttonFocusable = false;
 
     /**
      * Special days mark, it can be used by passing array of object with
@@ -235,6 +272,10 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
     @Input()
     isOpen = false;
 
+    /** Should date picker be inlined. */
+    @Input()
+    inline = true;
+
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
     readonly isOpenChange = new EventEmitter<boolean>();
@@ -259,11 +300,18 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
     @ViewChild('inputGroupComponent', { read: ElementRef })
     _inputGroupElement: ElementRef;
 
+    /** @hidden */
+    @ViewChild(InputGroupInputDirective, { read: ElementRef })
+    _inputElement: ElementRef;
+
     /** @hidden The value of the input */
     _inputFieldDate: string = null;
 
     /** @hidden Whether the date input is invalid */
     _isInvalidDateInput = false;
+
+    /** @hidden */
+    readonly _formValueStateMessageId = `fd-date-picker-form-message-${datePickerCounter++}`;
 
     /** @hidden */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
@@ -276,37 +324,39 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
      * @param date date representation
      */
     @Input()
-    disableFunction = function (_: D): boolean {
-        return false;
-    };
+    disableFunction: (value: D) => boolean = () => false;
 
     /**
      * Function used to disable certain dates in the calendar for the range start selection.
      * @param date date representation
      */
     @Input()
-    disableRangeStartFunction = function (_: D): boolean {
-        return false;
-    };
+    disableRangeStartFunction: (value: D) => boolean = () => false;
 
     /**
      * Function used to disable certain dates in the calendar for the range end selection.
      * @param date date representation
      */
     @Input()
-    disableRangeEndFunction = function (_: D): boolean {
-        return false;
-    };
+    disableRangeEndFunction: (value: D) => boolean = () => false;
 
     /** @hidden */
-    onChange: any = (_: any) => {};
+    onChange: (value: any) => void = () => {};
 
     /** @hidden */
     onTouched: any = () => {};
 
     /** @hidden */
-    get rangeDelimiter(): string {
+    get _rangeDelimiter(): string {
         return this._dateTimeFormats.rangeDelimiter;
+    }
+
+    /**
+     * Date input aria label based on type
+     * @hidden
+     */
+    get _dateInputArialLabel(): string {
+        return this.type === 'range' ? this.dateRangeInputLabel : this.dateInputLabel;
     }
 
     /** @hidden */
@@ -502,14 +552,15 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
             } else {
                 this._inputFieldDate = '';
             }
-        } else {
+        }
+        if (this.type === 'range') {
             /**
              * For range mode, if the date is invalid, model is changed, but it does not refresh currently
              * displayed day view, or input field text
              */
             selected = selected as DateRange<D>;
 
-            if (selected.start) {
+            if (selected?.start) {
                 this.selectedRangeDate = { start: selected.start, end: selected.end };
 
                 if (this._isRangeModelValid(this.selectedRangeDate)) {
@@ -522,8 +573,8 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
                 this._inputFieldDate = '';
             }
         }
-        this._changeDetectionRef.detectChanges();
         this._isInvalidDateInput = !this.isModelValid();
+        this._changeDetectionRef.detectChanges();
     }
 
     /**
@@ -572,7 +623,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
                 this.selectedRangeDateChange.emit(this.selectedRangeDate);
                 return;
             }
-            const [startDateStr, endDateStr] = dateStr.split(this.rangeDelimiter);
+            const [startDateStr, endDateStr] = dateStr.split(this._rangeDelimiter);
             const startDate = this._dateTimeAdapter.parse(startDateStr, this._dateTimeFormats.parse.dateInput);
             const endDate = this._dateTimeAdapter.parse(endDateStr, this._dateTimeFormats.parse.dateInput);
 
@@ -631,16 +682,30 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
         }
     }
 
+    /** @hidden */
+    _onOpenStateChanged(isOpen: boolean): void {
+        this.isOpenChange.emit(isOpen);
+        this._changeMessageVisibility();
+        // focus input control every time popup is closed
+        if (!isOpen && this._inputElement) {
+            this._inputElement.nativeElement.focus();
+        }
+        // focus calendar cell on opening
+        if (isOpen && this._calendarComponent) {
+            this._calendarComponent.initialFocus();
+        }
+    }
+
     /** Method that returns info if single model given is valid */
     private _isSingleModelValid(date: D): boolean {
-        return (this._isDateValid(date) && !this.disableFunction(date)) || (!this._inputFieldDate && this.allowNull);
+        return (this._isDateValid(date) && !this.disableFunction(date)) || (!date && this.allowNull);
     }
 
     /** Method that returns info if range date model given is valid */
     private _isRangeModelValid(fdRangeDate: DateRange<D>): boolean {
         return (
             (fdRangeDate && this._isStartDateValid(fdRangeDate.start) && this._isEndDateValid(fdRangeDate.end)) ||
-            (!this._inputFieldDate && this.allowNull)
+            (!fdRangeDate.start && !fdRangeDate.end && this.allowNull)
         );
     }
 
@@ -675,7 +740,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
     private _formatDateRange(dateRange: DateRange<D>): string {
         const startDate = this._formatDate(dateRange.start);
         const endDate = this._formatDate(dateRange.end);
-        return startDate + this.rangeDelimiter + endDate;
+        return startDate + this._rangeDelimiter + endDate;
     }
 
     /** @hidden */

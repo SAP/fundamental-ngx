@@ -14,6 +14,8 @@ export * from './directives/auto-complete/auto-complete.module';
 export * from './directives/overflow-list/overflow-list-item.directive';
 export * from './directives/overflow-list/overflow-list.directive';
 export * from './directives/overflow-list/overflow-list.module';
+export * from './directives/truncate/truncate.directive';
+export * from './directives/truncate/truncate.module';
 
 export * from './pipes/pipe.module';
 export * from './pipes/list-group.pipe';

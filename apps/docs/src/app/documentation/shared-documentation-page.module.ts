@@ -22,6 +22,7 @@ import { HeaderTabsComponent } from './core-helpers/header-tabs/header-tabs.comp
 import { ApiComponent } from './core-helpers/api/api.component';
 import { sharedCoreModules } from './shared-core-modules';
 import { CodeSnippetComponent } from './core-helpers/code-snippet/code-snippet.component';
+import { DatetimeImportantComponent } from './common-components/datetime-important/datetime-important.component';
 
 /** THIS MODULE PROVIDES BASIC SET OF DEPENDENCIES NEEDED TO CREATE COMPONENT EXAMPLE PAGE */
 @NgModule({
@@ -38,7 +39,8 @@ import { CodeSnippetComponent } from './core-helpers/code-snippet/code-snippet.c
         DirectionalityComponent,
         DocsSectionTitleComponent,
         ComponentExampleComponent,
-        ExampleBackgroundComponent
+        ExampleBackgroundComponent,
+        DatetimeImportantComponent
     ],
     imports: [FormsModule, CommonModule, RouterModule, SchemaModule, sharedCoreModules, MarkdownModule.forChild()],
     providers: [CopyService, ApiDocsService],
@@ -60,7 +62,8 @@ import { CodeSnippetComponent } from './core-helpers/code-snippet/code-snippet.c
         DocsSectionTitleComponent,
         ComponentExampleComponent,
         ExampleBackgroundComponent,
-        sharedCoreModules
+        sharedCoreModules,
+        DatetimeImportantComponent
     ]
 })
 export class SharedDocumentationPageModule {}

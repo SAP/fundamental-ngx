@@ -22,6 +22,6 @@ export function resizeObservable(target: Element, options?: ResizeObserverOption
         });
     } else {
         // If current browser does not support resizeObserver, rely on window resize and return empty array of items.
-        return fromEvent(window, 'resize').pipe(map((_) => []));
+        return fromEvent(window, 'resize').pipe(map(() => []));
     }
 }

@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
  * ```
  */
 @Component({
-    // tslint:disable-next-line:component-selector
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-dialog-close-button]',
     host: {
         '[attr.aria-label]': '"close"',

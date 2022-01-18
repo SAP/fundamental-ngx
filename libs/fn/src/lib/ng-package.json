@@ -10,6 +10,8 @@
         "@sap-theming/theming-base-content",
         "focus-trap",
         "focus-visible",
-        "fundamental-styles"
+        "fundamental-styles",
+        "lodash-es",
+        "fast-deep-equal"
     ]
 }

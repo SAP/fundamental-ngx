@@ -11,11 +11,11 @@ export class FormattedTextPo extends CoreBaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForPresent(this.inputHtmlText);
-        waitForElDisplayed(this.inputHtmlText);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

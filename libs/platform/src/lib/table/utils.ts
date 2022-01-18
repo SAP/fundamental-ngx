@@ -1,8 +1,9 @@
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
-import { getNestedValue } from '@fundamental-ngx/platform/shared';
+import { get } from 'lodash-es';
 import {
     CollectionBooleanFilter,
     CollectionDateFilter,
+    CollectionFilter,
     CollectionNumberFilter,
     CollectionSelectFilter,
     CollectionStringFilter
@@ -16,30 +17,28 @@ export const filterByString = (rows: TableRow[], filter: CollectionStringFilter)
 
     switch (filter.strategy) {
         case FILTER_STRING_STRATEGY.EQ:
-            return rows.filter((r) => getNestedValue(filter.field, r.value).toLocaleLowerCase() === filterValue);
+            return rows.filter((r) => get(r.value, filter.field).toLocaleLowerCase() === filterValue);
         case FILTER_STRING_STRATEGY.GT:
-            return rows.filter((r) => getNestedValue(filter.field, r.value).toLocaleLowerCase() > filterValue);
+            return rows.filter((r) => get(r.value, filter.field).toLocaleLowerCase() > filterValue);
         case FILTER_STRING_STRATEGY.GTE:
-            return rows.filter((r) => getNestedValue(filter.field, r.value).toLocaleLowerCase() >= filterValue);
+            return rows.filter((r) => get(r.value, filter.field).toLocaleLowerCase() >= filterValue);
         case FILTER_STRING_STRATEGY.LT:
-            return rows.filter((r) => getNestedValue(filter.field, r.value).toLocaleLowerCase() < filterValue);
+            return rows.filter((r) => get(r.value, filter.field).toLocaleLowerCase() < filterValue);
         case FILTER_STRING_STRATEGY.LTE:
-            return rows.filter((r) => getNestedValue(filter.field, r.value).toLocaleLowerCase() <= filterValue);
+            return rows.filter((r) => get(r.value, filter.field).toLocaleLowerCase() <= filterValue);
         case FILTER_STRING_STRATEGY.BETWEEN:
             return rows.filter((r) => {
-                const rowValue = getNestedValue(filter.field, r.value).toLocaleLowerCase();
+                const rowValue = get(r.value, filter.field).toLocaleLowerCase();
                 return rowValue >= filterValue && rowValue <= filterValue2;
             });
         case FILTER_STRING_STRATEGY.BEGINS_WITH:
-            return rows.filter((r) =>
-                getNestedValue(filter.field, r.value).toLocaleLowerCase().startsWith(filterValue)
-            );
+            return rows.filter((r) => get(r.value, filter.field).toLocaleLowerCase().startsWith(filterValue));
         case FILTER_STRING_STRATEGY.ENDS_WITH:
-            return rows.filter((r) => getNestedValue(filter.field, r.value).toLocaleLowerCase().endsWith(filterValue));
+            return rows.filter((r) => get(r.value, filter.field).toLocaleLowerCase().endsWith(filterValue));
         case FILTER_STRING_STRATEGY.CONTAINS:
         default:
             return rows.filter((r) => {
-                let rowValue = getNestedValue(filter.field, r.value);
+                let rowValue = get(r.value, filter.field);
                 if (typeof rowValue === 'number') {
                     rowValue = rowValue.toString();
                 }
@@ -55,22 +54,22 @@ export const filterByNumber = (rows: TableRow[], filter: CollectionNumberFilter)
 
     switch (filter.strategy) {
         case FILTER_NUMBER_STRATEGY.EQ:
-            return rows.filter((r) => getNestedValue(filter.field, r.value) === filterValue);
+            return rows.filter((r) => get(r.value, filter.field) === filterValue);
         case FILTER_NUMBER_STRATEGY.GT:
-            return rows.filter((r) => getNestedValue(filter.field, r.value) > filterValue);
+            return rows.filter((r) => get(r.value, filter.field) > filterValue);
         case FILTER_NUMBER_STRATEGY.GTE:
-            return rows.filter((r) => getNestedValue(filter.field, r.value) >= filterValue);
+            return rows.filter((r) => get(r.value, filter.field) >= filterValue);
         case FILTER_NUMBER_STRATEGY.LT:
-            return rows.filter((r) => getNestedValue(filter.field, r.value) < filterValue);
+            return rows.filter((r) => get(r.value, filter.field) < filterValue);
         case FILTER_NUMBER_STRATEGY.LTE:
-            return rows.filter((r) => getNestedValue(filter.field, r.value) <= filterValue);
+            return rows.filter((r) => get(r.value, filter.field) <= filterValue);
         case FILTER_NUMBER_STRATEGY.BETWEEN:
             return rows.filter((r) => {
-                const rowValue = getNestedValue(filter.field, r.value);
+                const rowValue = get(r.value, filter.field);
                 return rowValue >= filterValue && rowValue <= filterValue2;
             });
         default:
-            return rows.filter((r) => getNestedValue(filter.field, r.value).toString().includes(filterValue));
+            return rows.filter((r) => get(r.value, filter.field).toString().includes(filterValue));
     }
 };
 
@@ -84,26 +83,23 @@ export const filterByDate = <D = any>(
 
     switch (filter.strategy) {
         case FILTER_DATE_STRATEGY.AFTER:
-            return rows.filter((r) => adapter.compareDate(getNestedValue(filter.field, r.value), filterValue) > 0);
+            return rows.filter((r) => adapter.compareDate(get(r.value, filter.field), filterValue) > 0);
         case FILTER_DATE_STRATEGY.ON_OR_AFTER:
-            return rows.filter((r) => adapter.compareDate(getNestedValue(filter.field, r.value), filterValue) >= 0);
+            return rows.filter((r) => adapter.compareDate(get(r.value, filter.field), filterValue) >= 0);
         case FILTER_DATE_STRATEGY.BEFORE:
-            return rows.filter((r) => adapter.compareDate(getNestedValue(filter.field, r.value), filterValue) < 0);
+            return rows.filter((r) => adapter.compareDate(get(r.value, filter.field), filterValue) < 0);
         case FILTER_DATE_STRATEGY.BEFORE_OR_ON:
-            return rows.filter((r) => adapter.compareDate(getNestedValue(filter.field, r.value), filterValue) <= 0);
+            return rows.filter((r) => adapter.compareDate(get(r.value, filter.field), filterValue) <= 0);
         case FILTER_DATE_STRATEGY.BETWEEN:
-            return rows.filter((r) => {
-                return adapter.isBetween(getNestedValue(filter.field, r.value), filterValue, filterValue2);
-            });
+            return rows.filter((r) => adapter.isBetween(get(r.value, filter.field), filterValue, filterValue2));
         case FILTER_DATE_STRATEGY.EQ:
         default:
-            return rows.filter((r) => adapter.dateTimesEqual(getNestedValue(filter.field, r.value), filterValue));
+            return rows.filter((r) => adapter.dateTimesEqual(get(r.value, filter.field), filterValue));
     }
 };
 
-export const filterByBoolean = (rows: TableRow[], filter: CollectionBooleanFilter): TableRow[] => {
-    return rows.filter((r) => getNestedValue(filter.field, r.value) === filter.value);
-};
+export const filterByBoolean = (rows: TableRow[], filter: CollectionBooleanFilter): TableRow[] =>
+    rows.filter((r) => get(r.value, filter.field) === filter.value);
 
 export const filterBySelect = (rows: TableRow[], filter: CollectionSelectFilter): TableRow[] => {
     // needs concat because of "error TS2345: Argument of type 'any' is not assignable to parameter of type 'never'".
@@ -112,11 +108,11 @@ export const filterBySelect = (rows: TableRow[], filter: CollectionSelectFilter)
         return rows;
     }
 
-    return rows.filter((r) => filterValues.includes(getNestedValue(filter.field, r.value)));
+    return rows.filter((r) => filterValues.includes(get(r.value, filter.field)));
 };
 
-export const getUniqueListValuesByKey = <T, K extends keyof T>(list: T[], key: K): T[] => {
-    return Array.from(
+export const getUniqueListValuesByKey = <T, K extends keyof T>(list: T[], key: K): T[] =>
+    Array.from(
         list
             .reduce((map, item) => {
                 map.delete(item[key]);
@@ -125,7 +121,6 @@ export const getUniqueListValuesByKey = <T, K extends keyof T>(list: T[], key: K
             }, new Map<T[K], T>())
             .values()
     );
-};
 
 export const getScrollBarWidth = (document: Document): number => {
     const div = document.createElement('div');
@@ -138,3 +133,7 @@ export const getScrollBarWidth = (document: Document): number => {
     document.body.removeChild(div);
     return scrollbarWidth;
 };
+
+export function isCollectionFilter(item: any): item is CollectionFilter {
+    return item.type !== undefined && item.strategy !== undefined && item.value !== undefined;
+}

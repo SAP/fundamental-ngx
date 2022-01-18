@@ -8,6 +8,7 @@ import {
     refreshPage,
     saveElementScreenshot,
     scrollIntoView,
+    waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 
@@ -22,7 +23,8 @@ describe('Bar test suite:', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(arrowButtons);
+        waitForPresent(barPage.root);
+        waitForElDisplayed(barPage.title);
     }, 1);
 
     it('Verify arrow buttons are clickable', () => {

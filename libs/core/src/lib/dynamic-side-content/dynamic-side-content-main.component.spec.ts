@@ -7,7 +7,6 @@ import { DYNAMIC_SIDE_CONTENT_CLASS_NAME } from './constants';
 
 describe('DynamicSideContentMainComponent', () => {
     let fixture: ComponentFixture<DynamicSideContentMainComponent>;
-    let component: DynamicSideContentMainComponent;
 
     beforeEach(
         waitForAsync(() => {
@@ -20,7 +19,6 @@ describe('DynamicSideContentMainComponent', () => {
 
     beforeEach(() => {
         fixture = TestBed.createComponent(DynamicSideContentMainComponent);
-        component = fixture.componentInstance;
         fixture.detectChanges();
     });
 

@@ -1,6 +1,20 @@
 import { StandardListItemPo } from '../pages/standard-list-item.po';
-import { click, getAttributeByName, getElementArrayLength, getText } from '../../driver/wdio';
-import { linkAttr, noBorderAttr, secondaryAttr, secondaryTypes } from '../fixtures/appData/standard-list-item-contents';
+import {
+    click,
+    getAttributeByName,
+    getElementArrayLength,
+    getText,
+    refreshPage,
+    waitForElDisplayed,
+    waitForPresent
+} from '../../driver/wdio';
+import {
+    linkAttr,
+    noBorderAttr,
+    secondaryAttr,
+    secondaryTypes,
+    toolbarTextValue
+} from '../fixtures/appData/standard-list-item-contents';
 import { checkElArrIsClickable, checkElementDisplayed, checkElementText } from '../../helper/assertion-helper';
 
 describe('Standard List Item test suite:', () => {
@@ -11,36 +25,37 @@ describe('Standard List Item test suite:', () => {
         sNoBorderByLineList,
         sNoBorderByLineAttr,
         sNoBorderAvatar,
-        sNoBorderByLineSection,
         sFooterByLineList,
         sFooterByLineAvatar,
         sFooter,
         sFooterList,
-        sFooterAttr,
         sGroupHeaderList,
-        sGroupHeaderAttr,
         sGroupHeaderAvatar,
-        sInteractiveAttr,
         sInteractiveList,
         sInteractiveLink,
         sInteractiveAvatar,
-        sSecTypeAttr,
         sSecTypeList,
         sSecTypeAvatar,
         sSecTypeListItem,
-        sMultiAttr,
         sMultiList,
         sMultiAvatar,
         sMultiToolbar,
         sMultiCheckbox,
-        sInvtAttr,
         sInvtList,
         sInvtAvatar,
-        sInvtListItem
+        sInvtListItem,
+        sNavList,
+        sNavCheckbox
     } = standardListPage;
 
     beforeAll(() => {
         standardListPage.open();
+    }, 1);
+
+    afterEach(() => {
+        refreshPage();
+        waitForPresent(standardListPage.root);
+        waitForElDisplayed(standardListPage.title);
     }, 1);
 
     describe('Standard List Item - Border Less examples:', () => {
@@ -85,7 +100,9 @@ describe('Standard List Item test suite:', () => {
     });
 
     describe('Standard List Item- Interactive state examples:', () => {
-        it('should check links', () => {
+        // missed attribute "href"
+        // https://github.com/SAP/fundamental-ngx/issues/7343
+        xit('should check links', () => {
             const linkCount = getElementArrayLength(sInteractiveLink);
             for (let i = 0; linkCount > i; i++) {
                 expect(getAttributeByName(sInteractiveLink, linkAttr, i)).not.toBe(null, '');
@@ -131,9 +148,28 @@ describe('Standard List Item test suite:', () => {
 
         it('should check selected item count is displayed in the toolbar', () => {
             expect(getText(sMultiToolbar)).toContain('0 : Items selected');
-            click(sMultiCheckbox, 0);
-            expect(getAttributeByName(sMultiCheckbox, 'aria-selected')).toBe('true');
-            expect(getText(sMultiToolbar)).toContain('1 : Items selected');
+            const checkboxLength = getElementArrayLength(sMultiCheckbox);
+            for (let i = 0; i < checkboxLength; i++) {
+                click(sMultiCheckbox, i);
+                expect(getAttributeByName(sMultiCheckbox, 'aria-selected', i)).toBe('true');
+                expect(getText(sMultiToolbar)).toContain(toolbarTextValue[i]);
+            }
+        });
+    });
+
+    describe('Standard List Item (ByLine)- Navigation Indicator with multiselect:', () => {
+        it('should check content and basic interactions', () => {
+            checkElementText(sNavList);
+            checkElArrIsClickable(sNavList);
+            checkElArrIsClickable(sNavCheckbox);
+        });
+
+        it('should check selected item ', () => {
+            const checkboxLength = getElementArrayLength(sNavCheckbox);
+            for (let i = 0; i < checkboxLength; i++) {
+                click(sNavCheckbox, i);
+                expect(getAttributeByName(sNavCheckbox, 'aria-selected', i)).toBe('true');
+            }
         });
     });
 

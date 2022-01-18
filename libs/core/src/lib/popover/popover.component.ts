@@ -119,12 +119,12 @@ export class PopoverComponent
     directiveRef: any;
 
     /** @hidden */
-    private _clickEventListener: Function;
+    private _clickEventListener: () => void;
 
     /** @hidden */
     private _mobileModeComponentRef: ComponentRef<PopoverMobileComponent>;
 
-    /**@hidden */
+    /** @hidden */
     constructor(
         private readonly _popoverService: PopoverService,
         private readonly _cdr: ChangeDetectorRef,
@@ -280,8 +280,6 @@ export class PopoverComponent
             this._viewContainerRef,
             injector
         );
-
-        console.log(111111, this._mobileModeComponentRef);
 
         this._listenOnTriggerRefClicks();
     }

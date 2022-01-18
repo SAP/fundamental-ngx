@@ -1,23 +1,23 @@
-<fdp-button [fdpMenuTriggerFor]="menuIcons" label="Menu with icons" title="Icon menu"></fdp-button>
+<button fd-button [fdpMenuTriggerFor]="menuIcons" label="Menu with icons"></button>
 
 <fdp-menu #menuIcons id="menu-icons">
-    <fdp-menu-item title="First Item" (itemSelect)="onItemSelect('First Item')">
+    <fdp-menu-item (itemSelect)="onItemSelect('First Item')">
         <div fd-menu-interactive>
-            <fd-menu-addon position="before" glyph="cart"></fd-menu-addon>
+            <fd-menu-addon position="before" glyph="cart" title="Cart icon"></fd-menu-addon>
             <span fd-menu-title>First Item</span>
         </div>
     </fdp-menu-item>
-    <fdp-menu-item title="Second Item" (itemSelect)="onItemSelect('Second Item')">
+    <fdp-menu-item (itemSelect)="onItemSelect('Second Item')">
         <div fd-menu-interactive>
-            <fd-menu-addon position="before" glyph="accept"></fd-menu-addon>
+            <fd-menu-addon position="before" glyph="accept" title="Accept icon"></fd-menu-addon>
             <span fd-menu-title>Second Item</span>
-            <fd-menu-addon glyph="decline"></fd-menu-addon>
+            <fd-menu-addon glyph="decline" title="Decline icon"></fd-menu-addon>
         </div>
     </fdp-menu-item>
-    <fdp-menu-item title="Third Item" (itemSelect)="onItemSelect('Third Item')">
+    <fdp-menu-item (itemSelect)="onItemSelect('Third Item')">
         <div fd-menu-interactive>
             <span fd-menu-title>Third Item</span>
-            <fd-menu-addon glyph="menu"></fd-menu-addon>
+            <fd-menu-addon glyph="menu" title="Menu icon"></fd-menu-addon>
         </div>
     </fdp-menu-item>
 </fdp-menu>

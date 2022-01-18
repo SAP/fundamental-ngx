@@ -37,8 +37,8 @@
         [disabled]="disabled"
         [compact]="contentDensity === 'compact'"
         (keydown)="removeSelectedTokens($event)"
-        (addOnButtonClicked)="!mobile && addOnButtonClick()"
-        (click)="mobile && onPrimaryButtonClick(false)"
+        (addOnButtonClicked)="addOnButtonClick()"
+        (click)="onInputGroupClicked()"
     >
         <span [attr.id]="tokenHiddenId" aria-hidden="true" class="fdp-multi-input__invisible-text"
             >Contains {{ selected.length || 'no' }} token</span
@@ -82,7 +82,7 @@
                 (ngModelChange)="searchTermChanged()"
                 [ngModelOptions]="{ standalone: true }"
                 [placeholder]="placeholder"
-                (focus)="onTouched()"
+                (blur)="onTouched()"
                 [attr.aria-expanded]="isOpen && _suggestions.length > 0"
                 [readonly]="readonly"
                 aria-haspopup="listbox"
@@ -116,7 +116,7 @@
                 (itemSelected)="addToArray(listItem)"
                 [contentDensity]="contentDensity"
                 (buttonClicked)="deleteToken(listItem)"
-                [role]="option"
+                role="option"
             >
             </fdp-standard-list-item>
         </ng-container>

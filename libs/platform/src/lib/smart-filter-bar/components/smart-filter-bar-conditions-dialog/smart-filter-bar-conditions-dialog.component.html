@@ -1,0 +1,75 @@
+<fd-dialog class="fdp-smart-filter-bar__conditions-dialog">
+    <fd-dialog-header>
+        <ng-template fdTemplate="header">
+            <div fd-bar-left>
+                <fd-bar-element>
+                    <h4 [headerSize]="4" fd-title>{{ config.header }}</h4>
+                </fd-bar-element>
+            </div>
+        </ng-template>
+    </fd-dialog-header>
+
+    <fd-dialog-body>
+        <form>
+            <fd-layout-grid *ngFor="let condition of _formItems; let i = index">
+                <div fdLayoutGridRow>
+                    <div colGrow fdLayoutGridCol>
+                        <fdp-form-generator
+                            (formSubmitted)="_onFormSubmitted($event)"
+                            [formItems]="condition"
+                            [unifiedLayout]="false"
+                            columnLayout="XL3-L3-M3-S3"
+                            [noAdditionalContent]="true"
+                        ></fdp-form-generator>
+                    </div>
+                    <div class="fdp-smart-filter-bar__actions-column" colGrow fdLayoutGridCol>
+                        <fdp-button
+                            (click)="removeCondition(i)"
+                            buttonType="transparent"
+                            contentDensity="compact"
+                            glyph="decline"
+                            i18n-label="@@PlatformSmartFilterBarDefineConditionsRemoveConditionButton"
+                            title="Remove condition"
+                            type="button"
+                        ></fdp-button>
+                    </div>
+                </div>
+            </fd-layout-grid>
+            <fd-layout-grid>
+                <div fdLayoutGridRow>
+                    <div colGrow fdLayoutGridCol>&nbsp;</div>
+                    <div class="fdp-smart-filter-bar__actions-column" fdLayoutGridCol>
+                        <fdp-button
+                            (click)="addCondition()"
+                            contentDensity="compact"
+                            i18n-label="@@PlatformSmartFilterBarDefineConditionsAddConditionButton"
+                            label="Add condition"
+                        ></fdp-button>
+                    </div>
+                </div>
+            </fd-layout-grid>
+        </form>
+    </fd-dialog-body>
+
+    <fd-dialog-footer>
+        <fd-dialog-footer-button>
+            <fdp-button
+                (click)="applyConditions()"
+                buttonType="emphasized"
+                contentDensity="compact"
+                i18n-label="@@PlatformSmartFilterBarDefineConditionsSubmitButton"
+                label="Go"
+            ></fdp-button>
+        </fd-dialog-footer-button>
+
+        <fd-dialog-footer-button>
+            <fdp-button
+                (click)="_cancel()"
+                buttonType="transparent"
+                contentDensity="compact"
+                i18n-label="@@PlatformSmartFilterBarDefineConditionsCancelButton"
+                label="Cancel"
+            ></fdp-button>
+        </fd-dialog-footer-button>
+    </fd-dialog-footer>
+</fd-dialog>

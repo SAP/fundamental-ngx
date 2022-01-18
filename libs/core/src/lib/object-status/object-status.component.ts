@@ -13,13 +13,13 @@ import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
 
 @Component({
-    // tslint:disable-next-line:component-selector
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-object-status]',
     template: `
         <i
             class="fd-object-status__icon"
             *ngIf="glyph"
-            [ngClass]="'sap-icon--' + glyph"
+            [class]="'sap-icon--' + glyph"
             [attr.role]="glyphAriaLabel ? 'presentation' : ''"
             [attr.aria-label]="glyphAriaLabel"
         ></i>
@@ -125,14 +125,12 @@ export const buildObjectStatusCssClasses = ({
     indicationColor: number;
     clickable: boolean;
     class: string;
-}>): string[] => {
-    return [
-        'fd-object-status',
-        inverted ? 'fd-object-status--inverted' : '',
-        large ? 'fd-object-status--large' : '',
-        status ? `fd-object-status--${status}` : '',
-        indicationColor ? `fd-object-status--indication-${indicationColor}` : '',
-        clickable ? 'fd-object-status--link' : '',
-        className
-    ];
-};
+}>): string[] => [
+    'fd-object-status',
+    inverted ? 'fd-object-status--inverted' : '',
+    large ? 'fd-object-status--large' : '',
+    status ? `fd-object-status--${status}` : '',
+    indicationColor ? `fd-object-status--indication-${indicationColor}` : '',
+    clickable ? 'fd-object-status--link' : '',
+    className
+];

@@ -9,5 +9,5 @@ export class TableColumnResizeServiceMock {
 
     startResize(): void {}
 
-    finishResize(event: any): void {}
+    finishResize(): void {}
 }

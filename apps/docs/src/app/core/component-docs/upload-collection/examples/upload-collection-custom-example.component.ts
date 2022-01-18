@@ -1,5 +1,5 @@
 import { Component, ContentChildren, QueryList } from '@angular/core';
-import { UploadCollectionItemDirective } from '@fundamental-ngx/core';
+import { UploadCollectionItemDirective } from '@fundamental-ngx/core/upload-collection';
 
 @Component({
     selector: 'fd-upload-collection-custom-example',

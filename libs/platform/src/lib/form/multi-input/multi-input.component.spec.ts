@@ -9,6 +9,7 @@ import { StandardListItemModule } from '@fundamental-ngx/platform/list';
 import { FdpFormGroupModule } from '../form-group/fdp-form.module';
 import { PlatformMultiInputComponent } from './multi-input.component';
 import { PlatformMultiInputModule } from './multi-input.module';
+import { runValueAccessorTests } from 'ngx-cva-test-suite';
 
 @Component({
     selector: 'fdp-mulit-input-test',
@@ -38,7 +39,7 @@ import { PlatformMultiInputModule } from './multi-input.module';
         </fdp-form-group>
     `
 })
-class PlatformMulitiInputTest {
+class PlatformMulitiInputTestComponent {
     @ViewChild(PlatformMultiInputComponent)
     platformMultiInputComponent: PlatformMultiInputComponent;
 
@@ -47,13 +48,12 @@ class PlatformMulitiInputTest {
 }
 
 describe('PlatformMultiInputComponent', () => {
-    let component: PlatformMulitiInputTest;
-    let fixture: ComponentFixture<PlatformMulitiInputTest>;
-    let multiInput: PlatformMultiInputComponent;
+    let component: PlatformMulitiInputTestComponent;
+    let fixture: ComponentFixture<PlatformMulitiInputTestComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [PlatformMulitiInputTest],
+            declarations: [PlatformMulitiInputTestComponent],
             imports: [
                 PlatformMultiInputModule,
                 ReactiveFormsModule,
@@ -66,16 +66,10 @@ describe('PlatformMultiInputComponent', () => {
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(PlatformMulitiInputTest);
+        fixture = TestBed.createComponent(PlatformMulitiInputTestComponent);
         component = fixture.componentInstance;
-        multiInput = component.platformMultiInputComponent;
         fixture.detectChanges();
     });
-
-    async function wait(componentFixture: ComponentFixture<any>): Promise<void> {
-        componentFixture.detectChanges();
-        await componentFixture.whenStable();
-    }
 
     it('should create', () => {
         expect(component).toBeTruthy();
@@ -93,4 +87,26 @@ describe('PlatformMultiInputComponent', () => {
         const toggleButton = fixture.nativeElement.querySelectorAll('.fd-token');
         expect(toggleButton.length).toBe(1);
     });
+});
+
+const MULTI_INPUT_IDENTIFIER = 'platform-multi-input-unit-test';
+
+runValueAccessorTests({
+    component: PlatformMultiInputComponent,
+    testModuleMetadata: {
+        imports: [PlatformMultiInputModule],
+        providers: [DynamicComponentService]
+    },
+    additionalSetup: (fixture, done) => {
+        fixture.componentInstance.id = MULTI_INPUT_IDENTIFIER;
+        fixture.componentInstance.name = MULTI_INPUT_IDENTIFIER;
+        done();
+    },
+    supportsOnBlur: true,
+    nativeControlSelector: `input[id="${MULTI_INPUT_IDENTIFIER}"]`,
+    internalValueChangeSetter: (fixture, value) => {
+        fixture.componentInstance.value = value;
+    },
+    getComponentValue: (fixture) => fixture.componentInstance.value,
+    getValues: () => [['a'], ['b'], ['c']]
 });

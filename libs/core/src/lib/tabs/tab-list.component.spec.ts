@@ -5,6 +5,7 @@ import { TabPanelComponent } from './tab-panel/tab-panel.component';
 import { TabListComponent } from './tab-list.component';
 import { TabsModule } from './tabs.module';
 import { whenStable } from '@fundamental-ngx/core/tests';
+import { TabInfo } from './tab-utils/tab-info.class';
 
 @Component({
     template: ` <fd-tab-list>
@@ -141,7 +142,10 @@ describe('TabListComponent', () => {
     let component: TabListComponent;
     let testComponent: TestCollapsibleTabsComponent;
     let fixture: ComponentFixture<TestCollapsibleTabsComponent>;
-    const groupedTabs = (tabList) => [tabList._visualOrder.visible, tabList._visualOrder.overflowing];
+    const groupedTabs = (tabList: TabListComponent): TabInfo[][] => [
+        tabList._visualOrder.visible,
+        tabList._visualOrder.overflowing
+    ];
 
     beforeEach(
         waitForAsync(() => {

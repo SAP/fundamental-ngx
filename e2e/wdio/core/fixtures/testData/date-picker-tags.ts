@@ -4,7 +4,7 @@ import { getElementArrayLength, getElementClass } from '../../../driver/wdio';
 
 const date = new Date();
 export const currentYear = date.getFullYear();
-export let currentDay = date.getDate();
+export const currentDay = date.getDate();
 export const currentMonth = date.getMonth() + 1;
 export const invalidDate = '99/99/9999';
 
@@ -26,20 +26,20 @@ export function getCurrentMonth(withZero: boolean): string {
 export function getNextDay(withZero: boolean): string {
     if (withZero) {
         // need to check that day number is less than 10 to return with 0, cz not needed to return 010 e.g.
-        if (date.getDate() < 10) {
-            return '0' + date.getDate().toString();
+        if (date.getDate() < 9) {
+            return '0' + (date.getDate() + 1).toString();
         }
-        if (date.getDate() >= 10) {
-            return date.getDate().toString();
+        if (date.getDate() >= 9) {
+            return (date.getDate() + 1).toString();
         }
     }
     if (!withZero) {
-        return date.getDate().toString();
+        return (date.getDate() + 1).toString();
     }
 }
 
 export function getCurrentItemIndex(): number {
-    for (let i = 0; i < getElementArrayLength(altCalendarItem) - 1; i++) {
+    for (let i = 0; i < getElementArrayLength(altCalendarItem); i++) {
         if (getElementClass(altCalendarItem, i).includes('is-active')) {
             return i;
         }

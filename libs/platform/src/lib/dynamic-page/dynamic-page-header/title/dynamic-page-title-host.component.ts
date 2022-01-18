@@ -276,17 +276,17 @@ export class DynamicPageTitleHostComponent implements OnInit, AfterViewInit {
         }
     }
 
-    /**@hidden */
+    /** @hidden */
     private _setAttributeToHostElement(attribute: string, value: any): void {
         this._renderer.setAttribute(this._elementRef.nativeElement, attribute, value);
     }
 
-    /**@hidden */
+    /** @hidden */
     private _addClassNameToHostElement(className: string): void {
         addClassNameToElement(this._renderer, this._elementRef.nativeElement, className);
     }
 
-    /**@hidden */
+    /** @hidden */
     private _addClassNameToCustomElement(element: Element, className: string): void {
         addClassNameToElement(this._renderer, element, className);
     }

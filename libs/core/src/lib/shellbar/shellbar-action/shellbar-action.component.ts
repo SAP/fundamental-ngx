@@ -25,7 +25,7 @@ export class ShellbarActionComponent {
 
     /** Callback that hanldles the response to clicks on any of the actions. */
     @Input()
-    callback: Function;
+    callback: (event: MouseEvent) => void;
 
     /** The action label. */
     @Input()

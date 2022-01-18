@@ -6,15 +6,14 @@ import {
     Component,
     EventEmitter,
     forwardRef,
-    Host,
     Inject,
     Input,
+    isDevMode,
     OnDestroy,
     OnInit,
     Optional,
     Output,
     Provider,
-    SkipSelf,
     TemplateRef,
     ViewChild
 } from '@angular/core';
@@ -36,7 +35,14 @@ import {
     ResponsiveBreakPointConfig,
     ResponsiveBreakpointsService
 } from '@fundamental-ngx/platform/shared';
-import { FORM_GROUP_CHILD_FIELD_TOKEN } from '../constants';
+import {
+    DefaultHorizontalFieldLayout,
+    DefaultHorizontalLabelLayout,
+    DefaultVerticalFieldLayout,
+    DefaultVerticalLabelLayout,
+    FORM_GROUP_CHILD_FIELD_TOKEN
+} from '../constants';
+import { normalizeColumnLayout, generateColumnClass } from '../helpers';
 
 const formFieldProvider: Provider = {
     provide: FormField,
@@ -84,10 +90,28 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     hint: string;
 
     /**
+     * @deprecated
+     * Use labelColumnLayout, fieldColumnLayout and gapColumnLayout properties.
      * Define form field label placement
      */
     @Input()
-    labelLayout: LabelLayout = 'vertical';
+    get labelLayout(): LabelLayout {
+        return this._labelLayout;
+    }
+
+    set labelLayout(value: LabelLayout) {
+        if (isDevMode()) {
+            console.warn(
+                'LabelLayout input property is deprecated. Please use labelColumnLayout, fieldColumnLayout and gapColumnLayout properties instead'
+            );
+        }
+        this._labelLayout = value;
+
+        this.labelColumnLayout =
+            this._labelLayout === 'horizontal' ? DefaultHorizontalLabelLayout : DefaultVerticalLabelLayout;
+        this.fieldColumnLayout =
+            this._labelLayout === 'horizontal' ? DefaultHorizontalFieldLayout : DefaultVerticalFieldLayout;
+    }
 
     /**
      * Indicates when form field label should not be displayed
@@ -128,6 +152,57 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         this._columnLayout = layout;
         this._isColumnLayoutEnabled = true;
         this._setLayout();
+    }
+
+    /**
+     * Defines label's column layout.
+     */
+    @Input()
+    get labelColumnLayout(): ColumnLayout {
+        return this._labelColumnLayout;
+    }
+
+    set labelColumnLayout(value: ColumnLayout) {
+        if (!value) {
+            return;
+        }
+
+        this._labelColumnLayout = normalizeColumnLayout(value);
+        this._labelColumnLayoutClass = generateColumnClass(this._labelColumnLayout);
+    }
+
+    /**
+     * Defines field's column layout.
+     */
+    @Input()
+    get fieldColumnLayout(): ColumnLayout {
+        return this._fieldColumnLayout;
+    }
+
+    set fieldColumnLayout(value: ColumnLayout) {
+        if (!value) {
+            return;
+        }
+
+        this._fieldColumnLayout = normalizeColumnLayout(value);
+        this._fieldColumnLayoutClass = generateColumnClass(this._fieldColumnLayout);
+    }
+
+    /**
+     * Defines gap column layout.
+     */
+    @Input()
+    get gapColumnLayout(): ColumnLayout {
+        return this._gapColumnLayout;
+    }
+
+    set gapColumnLayout(value: ColumnLayout) {
+        if (!value) {
+            return;
+        }
+
+        this._gapColumnLayout = normalizeColumnLayout(value);
+        this._gapColumnLayoutClass = generateColumnClass(this._gapColumnLayout);
     }
 
     /**
@@ -190,10 +265,12 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
     /** Emits whenever formFieldControl's state changes */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onChange: EventEmitter<string> = new EventEmitter<string>();
 
     /** Emits whenever column layout is changed */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onColumnChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /**
@@ -207,6 +284,15 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
      * Child FormFieldControl
      */
     control: FormFieldControl<any>;
+
+    /** @hidden */
+    _labelColumnLayoutClass: string;
+
+    /** @hidden */
+    _fieldColumnLayoutClass: string;
+
+    /** @hidden */
+    _gapColumnLayoutClass: string;
 
     /**
      * @hidden
@@ -251,10 +337,22 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     private _responsiveBreakPointConfig: ResponsiveBreakPointConfig;
 
     /** @hidden */
+    private _labelLayout: LabelLayout;
+
+    /** @hidden */
+    private _labelColumnLayout: ColumnLayout;
+
+    /** @hidden */
+    private _fieldColumnLayout: ColumnLayout;
+
+    /** @hidden */
+    private _gapColumnLayout: ColumnLayout;
+
+    /** @hidden */
     constructor(
         private _cd: ChangeDetectorRef,
         @Optional() formGroupContainer: FormGroupContainer,
-        @Optional() @SkipSelf() @Host() readonly formFieldGroup: FormFieldGroup,
+        @Optional() readonly formFieldGroup: FormFieldGroup,
         @Optional()
         @Inject(RESPONSIVE_BREAKPOINTS_CONFIG)
         readonly _defaultResponsiveBreakPointConfig: ResponsiveBreakPointConfig,
@@ -270,6 +368,22 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         // component input annotation
         this.formGroupContainer = formGroupContainer;
         this._responsiveBreakPointConfig = _defaultResponsiveBreakPointConfig || new ResponsiveBreakPointConfig();
+    }
+
+    /**
+     * Sets initial values for label, field and gap columns
+     */
+    setDefaultColumnLayout(): void {
+        // If layout already defined, no need to set default one.
+        if (this.labelColumnLayout) {
+            return;
+        }
+
+        const groupHost = this.formFieldGroup ? this.formFieldGroup : this.formGroupContainer;
+
+        this.labelColumnLayout = groupHost.labelColumnLayout;
+        this.fieldColumnLayout = groupHost.fieldColumnLayout;
+        this.gapColumnLayout = groupHost.gapColumnLayout;
     }
 
     /** @hidden */
@@ -322,7 +436,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
         this.control = formFieldControl;
 
-        formFieldControl.stateChanges.pipe(startWith(null), takeUntil(this._destroyed)).subscribe((s) => {
+        formFieldControl.stateChanges.pipe(startWith(null), takeUntil(this._destroyed)).subscribe(() => {
             this._updateControlProperties();
             // need to call explicitly detectChanges() instead of markForCheck before the
             // modified validation state of the control passes over checked phase
@@ -341,12 +455,15 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         if (formFieldControl?.ngControl?.control) {
             const control = formFieldControl.ngControl.control;
 
-            if (
-                this.required &&
-                !this.validators.includes(Validators.required) &&
-                !this.validators.includes(Validators.requiredTrue)
-            ) {
+            const hasRequiredValidator =
+                this.validators.includes(Validators.required) || this.validators.includes(Validators.requiredTrue);
+
+            if (this.required && !hasRequiredValidator) {
                 this.validators.push(Validators.required);
+            }
+
+            if (hasRequiredValidator) {
+                this.required = true;
             }
 
             // if form control is disabled, in reactive form approach
@@ -428,7 +545,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
      * Add FormControl from FormGroup
      */
     private _addControlToFormGroup(control: AbstractControl): void {
-        if (!this.formGroupContainer) {
+        if (!this.formGroupContainer || !!this.formFieldGroup?.formName) {
             return;
         }
         this.formGroupContainer.addFormControl(this.id, control);
@@ -466,10 +583,11 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     /** @hidden */
     private _setLayout(): void {
         try {
-            this._sColumnNumber = this.columnLayout['S'] || 1;
-            this._mdColumnNumber = this.columnLayout['M'] || this._sColumnNumber;
-            this._lgColumnNumber = this.columnLayout['L'] || this._mdColumnNumber;
-            this._xlColumnNumber = this.columnLayout['XL'] || this._lgColumnNumber;
+            this.columnLayout = normalizeColumnLayout(this.columnLayout, 1);
+            this._sColumnNumber = this.columnLayout['S'];
+            this._mdColumnNumber = this.columnLayout['M'];
+            this._lgColumnNumber = this.columnLayout['L'];
+            this._xlColumnNumber = this.columnLayout['XL'];
         } catch (error) {
             this._isColumnLayoutEnabled = false;
         }

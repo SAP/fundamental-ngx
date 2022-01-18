@@ -102,7 +102,7 @@ import { ResizableCardItemComponent } from './resizable-card-item/resizable-card
         </fd-resizable-card-layout>
     `
 })
-class TestResizableCardLayout {
+class TestResizableCardLayoutComponent {
     @ViewChild(ResizableCardLayoutComponent)
     resizableCardLayout: ResizableCardLayoutComponent;
 
@@ -111,20 +111,24 @@ class TestResizableCardLayout {
 }
 
 describe('ResizableCardLayoutComponent', () => {
-    let component: TestResizableCardLayout;
-    let fixture: ComponentFixture<TestResizableCardLayout>;
+    let component: TestResizableCardLayoutComponent;
+    let fixture: ComponentFixture<TestResizableCardLayoutComponent>;
 
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                declarations: [ResizableCardLayoutComponent, ResizableCardItemComponent, TestResizableCardLayout],
+                declarations: [
+                    ResizableCardLayoutComponent,
+                    ResizableCardItemComponent,
+                    TestResizableCardLayoutComponent
+                ],
                 imports: [CommonModule, CardModule, ListModule, IconModule]
             }).compileComponents();
         })
     );
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TestResizableCardLayout);
+        fixture = TestBed.createComponent(TestResizableCardLayoutComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
@@ -189,7 +193,7 @@ describe('ResizableCardLayoutComponent', () => {
         card.onMouseDown(mouseEvent1, 'horizontal');
         const mouseEvent2 = new MouseEvent('changeWidth', { clientX: 200, clientY: 20 });
         card.onMouseMove(mouseEvent2);
-        card.onMouseUp(mouseEvent2);
+        card.onMouseUp();
 
         fixture.detectChanges();
 
@@ -226,7 +230,7 @@ describe('ResizableCardLayoutComponent', () => {
         card.onMouseDown(mouseEvent1, 'horizontal');
         const mouseEvent2 = new MouseEvent('changeWidth', { clientX: 440, clientY: 20 });
         card.onMouseMove(mouseEvent2);
-        card.onMouseUp(mouseEvent2);
+        card.onMouseUp();
 
         fixture.detectChanges();
 
@@ -255,7 +259,7 @@ describe('ResizableCardLayoutComponent', () => {
         card2.onMouseDown(mouseEvent3, 'horizontal');
         const mouseEvent4 = new MouseEvent('changeWidth', { clientX: 5, clientY: 20 });
         card2.onMouseMove(mouseEvent4);
-        card2.onMouseUp(mouseEvent4);
+        card2.onMouseUp();
 
         fixture.detectChanges();
         expect(card.cardWidthColSpan).toEqual(2);
@@ -290,7 +294,7 @@ describe('ResizableCardLayoutComponent', () => {
         card.onMouseDown(mouseEvent1, 'vertical');
         const mouseEvent2 = new MouseEvent('changeWidth', { clientX: 7, clientY: 90 });
         card.onMouseMove(mouseEvent2);
-        card.onMouseUp(mouseEvent2);
+        card.onMouseUp();
 
         fixture.detectChanges();
 
@@ -328,7 +332,7 @@ describe('ResizableCardLayoutComponent', () => {
         card.onMouseDown(mouseEvent1, 'both');
         const mouseEvent2 = new MouseEvent('changeWidth', { clientX: 440, clientY: 90 });
         card.onMouseMove(mouseEvent2);
-        card.onMouseUp(mouseEvent2);
+        card.onMouseUp();
 
         fixture.detectChanges();
 
@@ -364,7 +368,7 @@ describe('ResizableCardLayoutComponent', () => {
         card.onMouseDown(mouseEvent1, 'both');
         const mouseEvent2 = new MouseEvent('changeWidth', { clientX: 440, clientY: 90 });
         card.onMouseMove(mouseEvent2);
-        card.onMouseUp(mouseEvent2);
+        card.onMouseUp();
 
         fixture.detectChanges();
 
@@ -391,7 +395,7 @@ describe('ResizableCardLayoutComponent', () => {
         card2.onMouseDown(mouseEvent3, 'both');
         const mouseEvent4 = new MouseEvent('changeWidth', { clientX: 440, clientY: 30 });
         card2.onMouseMove(mouseEvent4);
-        card2.onMouseUp(mouseEvent4);
+        card2.onMouseUp();
 
         fixture.detectChanges();
 
@@ -429,7 +433,7 @@ describe('ResizableCardLayoutComponent', () => {
         card.onMouseDown(mouseEvent1, 'horizontal');
         const mouseEvent2 = new MouseEvent('changeWidth', { clientX: 6, clientY: 20 });
         card.onMouseMove(mouseEvent2);
-        card.onMouseUp(mouseEvent2);
+        card.onMouseUp();
 
         fixture.detectChanges();
 
