@@ -1,6 +1,6 @@
 import { Component, ElementRef, QueryList, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { WizardStepComponent, WizardStepStatus } from '@fundamental-ngx/core/wizard';
-import { WizardService } from 'libs/core/src/lib/wizard/wizard.service';
+import { WizardService } from '@fundamental-ngx/core/wizard';
 
 @Component({
     selector: 'fd-wizard-example',
