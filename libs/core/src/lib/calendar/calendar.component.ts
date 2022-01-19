@@ -233,6 +233,18 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
     disableFunction: (date: D) => boolean = () => false;
 
     /**
+     * Function used to disable previous button in the calendar header.
+     */
+    @Input()
+    previousButtonDisableFunction: () => boolean = () => false;
+
+    /**
+     * Function used to disable next button in the calendar header.
+     */
+    @Input()
+    nextButtonDisableFunction: () => boolean = () => false;
+
+    /**
      * Function used to disable certain dates in the calendar for the range start selection.
      * @param date date
      */
