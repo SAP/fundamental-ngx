@@ -9,7 +9,7 @@
             </ng-container>
         </div>
         <div class="fd-dynamic-page__title-container">
-            <ng-container *ngIf="collapsed">
+            <ng-container *ngIf="_collapsed">
                 <ng-content select="fd-facet"></ng-content>
             </ng-container>
 
@@ -26,12 +26,12 @@
                         </ng-container>
                     </div>
                 </div>
-                <div class="fd-dynamic-page__subtitle" *ngIf="collapsed && subtitle">{{ subtitle }}</div>
+                <div class="fd-dynamic-page__subtitle" *ngIf="_collapsed && subtitle">{{ subtitle }}</div>
             </div>
         </div>
     </div>
 </div>
-<div class="fd-dynamic-page__subtitle" *ngIf="!collapsed && subtitle">{{ subtitle }}</div>
+<div class="fd-dynamic-page__subtitle" *ngIf="!_collapsed && subtitle">{{ subtitle }}</div>
 
 <ng-template #dynamicPageGlobalActionsRef>
     <ng-content select="fd-dynamic-page-global-actions"></ng-content>

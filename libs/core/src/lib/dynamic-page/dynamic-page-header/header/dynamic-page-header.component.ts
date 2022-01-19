@@ -37,7 +37,7 @@ export const ActionSquashBreakpointPx = 1280;
 })
 export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     /** @hidden */
-    collapsed = false;
+    _collapsed = false;
 
     /** Title property for dynamic page */
     @Input()
@@ -87,8 +87,8 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     ngAfterViewInit(): void {
         this._addCustomClassToBreadcrumb();
 
-        this._dynamicPageService.collapsed.pipe(takeUntil(this._onDestroy$)).subscribe((res) => {
-            this.collapsed = res;
+        this._dynamicPageService.collapsed.pipe(takeUntil(this._onDestroy$)).subscribe((collapsed) => {
+            this._collapsed = collapsed;
             this._changeDetRef.markForCheck();
         });
     }
