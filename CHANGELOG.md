@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.280 (2022-01-19)
+
+
+### Bug Fixes
+
+* **platform:** table columns width error ([#7540](https://github.com/SAP/fundamental-ngx/issues/7540)) ([d4a06a0](https://github.com/SAP/fundamental-ngx/commit/d4a06a059da4bd075c961915b7ad554f863d0622))
+
 ## 0.33.0-rc.279 (2022-01-19)
 
 
