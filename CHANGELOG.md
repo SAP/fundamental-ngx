@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.279 (2022-01-19)
+
+
+### Bug Fixes
+
+* **platform:** fill suggestions with selected state ([#7115](https://github.com/SAP/fundamental-ngx/issues/7115)) ([a967444](https://github.com/SAP/fundamental-ngx/commit/a967444ac7c515aa72195940370aced7584b1150))
+
 ## 0.33.0-rc.278 (2022-01-18)
 
 
