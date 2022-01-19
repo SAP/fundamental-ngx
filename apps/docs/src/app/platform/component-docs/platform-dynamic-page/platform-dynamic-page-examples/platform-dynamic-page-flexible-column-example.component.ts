@@ -1,12 +1,8 @@
-import { Component, ChangeDetectionStrategy, ViewChild, ElementRef, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 
 import { BreadcrumbComponent } from '@fundamental-ngx/core/breadcrumb';
 import { FlexibleColumnLayout } from '@fundamental-ngx/core/flexible-column-layout';
-import {
-    DynamicPageCollapseChangeEvent,
-    DynamicPageComponent,
-    DynamicPageTabChangeEvent
-} from '@fundamental-ngx/platform/dynamic-page';
+import { DynamicPageComponent, DynamicPageTabChangeEvent } from '@fundamental-ngx/platform/dynamic-page';
 import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-page-overflow.service';
 
 @Component({
@@ -50,12 +46,9 @@ export class PlatformDynamicPageFlexibleColumnExampleComponent implements OnDest
      */
     localLayout = 'OneColumnStartFullScreen';
 
-    constructor(
-        private _cd: ChangeDetectorRef,
-        private _overflowHandlingService: PlatformDynamicPagePageOverflowService
-    ) {}
+    constructor(private _overflowHandlingService: PlatformDynamicPagePageOverflowService) {}
 
-    onCollapseChange(event: DynamicPageCollapseChangeEvent): void {
+    onCollapseChange(): void {
         console.log('collapse changed');
     }
 

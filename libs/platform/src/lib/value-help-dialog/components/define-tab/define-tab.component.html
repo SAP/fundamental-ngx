@@ -11,10 +11,10 @@
 <ng-container *ngFor="let item of _conditions; trackBy: _trackByKeyAndType; index as i">
     <fd-layout-grid class="condition-row" [noGap]="true">
         <div fdLayoutGridCol="5">
-            <label id="CONDITIONPANEL_OPERATOR_LABEL" fd-form-label class="fdp-value-help-dialog__hidden_lable">
+            <label id="CONDITIONPANEL_OPERATOR_LABEL" fd-form-label class="fdp-value-help-dialog__hidden_label">
                 CONDITIONPANEL_OPERATOR_LABEL</label
             >
-            <label [id]="selectedId" fd-form-label class="fdp-value-help-dialog__hidden_lable">
+            <label [id]="selectedId" fd-form-label class="fdp-value-help-dialog__hidden_label">
                 selected value {{ item.strategy }}</label
             >
             <fd-select

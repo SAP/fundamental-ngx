@@ -60,7 +60,7 @@ export class NotificationService {
             content,
             NotificationComponent,
             notificationConfig,
-            { injector: injector }
+            { injector }
         );
 
         // Add To array
@@ -68,7 +68,7 @@ export class NotificationService {
             notificationComponent: notificationComponentRef
         });
 
-        const defaultBehaviourOnClose = () => {
+        const defaultBehaviourOnClose = (): void => {
             this.destroyNotificationComponent(notificationComponentRef);
             refSub.unsubscribe();
         };

@@ -855,6 +855,20 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this._cdr.markForCheck();
     }
 
+    /**
+     * Toggle row checked state.
+     * @param rowIndex Index of the row.
+     */
+    toggleSelectableRow(rowIndex: number): void {
+        const row = this._tableRows[rowIndex];
+
+        if (!row) {
+            return;
+        }
+
+        this._toggleSelectableRow(row);
+    }
+
     /** Remove the row navigation */
     removeRowNavigation(rowIndex: number): void {
         const row = this._tableRows[rowIndex];
@@ -872,7 +886,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** Manually triggers columns width recalculation */
     recalculateTableColumnWidth(): void {
-        const recalculateFn = () => {
+        const recalculateFn = (): void => {
             const columnNames = this._visibleColumns.map((column) => column.name);
 
             this._tableColumnResizeService.setColumnsWidth(columnNames);
@@ -916,6 +930,11 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         const scrollbarSizeInPx = 12;
 
         return this._tableWidthPx - this._fixedColumnsPadding - scrollbarSizeInPx - 1;
+    }
+
+    /** Get table data source */
+    getDataSource(): TableDataSource<T> {
+        return this._tableDataSource;
     }
 
     // Private API
@@ -1052,7 +1071,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      * Group By triggered from column header
      */
     _columnHeaderGroupBy(field: string): void {
-        this.group([{ field: field, direction: SortDirection.NONE, showAsColumn: true }]);
+        this.group([{ field, direction: SortDirection.NONE, showAsColumn: true }]);
         this._closePopoverForColumnByFieldName(field);
     }
 
@@ -1063,8 +1082,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     _columnHeaderFilterBy(field: string, value: string): void {
         if (value) {
             const collectionFilter: CollectionStringFilter = {
-                field: field,
-                value: value,
+                field,
+                value,
                 strategy: FILTER_STRING_STRATEGY.CONTAINS,
                 exclude: false
             };
@@ -1081,7 +1100,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      * Sort triggered from column header
      */
     _columnHeaderSortBy(field: string, direction: SortDirection): void {
-        this.sort([{ field: field, direction: direction }]);
+        this.sort([{ field, direction }]);
         this._closePopoverForColumnByFieldName(field);
     }
 
@@ -1233,6 +1252,11 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     _columnTrackBy(index: number, column: TableColumn): string {
         return column.name;
+    }
+
+    /** Fetch data source data. */
+    fetch(): void {
+        this._tableDataSource.fetch(this.getTableState());
     }
 
     /** @hidden */
@@ -1705,7 +1729,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                 TableRowType.GROUP,
                 false,
                 0,
-                { field: rule.field, value: value, count: 0 },
+                { field: rule.field, value, count: 0 },
                 parent,
                 level,
                 true /** expandable */,
@@ -1931,7 +1955,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this._dsSubscription = this._dsOpenedStream.subscribe((items) => {
             this._totalItems = dataSourceStream.dataProvider.totalItems;
             this._dataSourceItemsSubject.next(items);
-            this._cdr.detectChanges();
+            // calling "detectChanges" may result in content jumps
+            // using markForCheck in order to let "items" changes to get applied in the UI first
+            this._cdr.markForCheck();
         });
 
         this._subscriptions.add(this._dsSubscription);

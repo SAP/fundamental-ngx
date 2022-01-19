@@ -120,6 +120,35 @@ describe('StepInputComponent', () => {
         expect(valueChangeSpy).toHaveBeenCalledWith(desiredValue);
     });
 
+    it('should increment when button is clicked via keyboard', async () => {
+        const valueChangeSpy = spyOn(component.valueChange, 'emit').and.callThrough();
+        const desiredValue = initialValue + component.step;
+
+        expect(component.value).toEqual(initialValue);
+
+        component.incrementButton.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Space' }));
+
+        await whenStable(fixture);
+
+        expect(component.value).toEqual(desiredValue);
+        expect(valueChangeSpy).toHaveBeenCalledWith(desiredValue);
+    });
+
+    it('should decrement when button is clicked via keyboard', async () => {
+        const valueChangeSpy = spyOn(component.valueChange, 'emit').and.callThrough();
+        const desiredValue = initialValue - component.step - component.step;
+
+        expect(component.value).toEqual(initialValue);
+
+        component.decrementButton.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Space' }));
+        component.decrementButton.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
+
+        await whenStable(fixture);
+
+        expect(component.value).toEqual(desiredValue);
+        expect(valueChangeSpy).toHaveBeenCalledWith(desiredValue);
+    });
+
     it('should increment/decrement with custom step', async () => {
         const valueChangeSpy = spyOn(component.valueChange, 'emit').and.callThrough();
 

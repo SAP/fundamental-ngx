@@ -143,6 +143,7 @@
             "@fundamental-ngx/platform/search-field": ["libs/platform/src/lib/search-field/index.ts"],
             "@fundamental-ngx/platform/shared": ["libs/platform/src/lib/shared/index.ts"],
             "@fundamental-ngx/platform/slider": ["libs/platform/src/lib/slider/index.ts"],
+            "@fundamental-ngx/platform/smart-filter-bar": ["libs/platform/src/lib/smart-filter-bar/index.ts"],
             "@fundamental-ngx/platform/split-menu-button": ["libs/platform/src/lib/split-menu-button/index.ts"],
             "@fundamental-ngx/platform/table": ["libs/platform/src/lib/table/index.ts"],
             "@fundamental-ngx/platform/thumbnail": ["libs/platform/src/lib/thumbnail/index.ts"],

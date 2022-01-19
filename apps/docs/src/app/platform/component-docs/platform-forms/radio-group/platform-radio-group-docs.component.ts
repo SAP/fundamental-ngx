@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 
-import * as listItemsRadioGroupSrc from '!raw-loader!./platform-radio-group-examples/platform-radio-group-list-items-example.component.html';
-import * as listItemsRadioGroupSrcCode from '!raw-loader!./platform-radio-group-examples/platform-radio-group-list-items-examples.component.ts';
-import * as listRadioGroupSrc from '!raw-loader!./platform-radio-group-examples/platform-radio-group-list-example.component.html';
-import * as listRadioGroupSrcCode from '!raw-loader!./platform-radio-group-examples/platform-radio-group-list-examples.component.ts';
-import * as contentRadioGroupSrc from '!raw-loader!./platform-radio-group-examples/platform-radio-group-content-example.component.html';
-import * as contentRadioGroupSrcCode from '!raw-loader!./platform-radio-group-examples/platform-radio-group-content-examples.component.ts';
-import * as disabledRadioGroupSrc from '!raw-loader!./platform-radio-group-examples/platform-radio-group-disabled-example.component.html';
-import * as disabledRadioGroupSrcCode from '!raw-loader!./platform-radio-group-examples/platform-radio-group-disabled-examples.component.ts';
+import listItemsRadioGroupSrc from '!./platform-radio-group-examples/platform-radio-group-list-items-example.component.html?raw';
+import listItemsRadioGroupSrcCode from '!./platform-radio-group-examples/platform-radio-group-list-items-examples.component.ts?raw';
+import listRadioGroupSrc from '!./platform-radio-group-examples/platform-radio-group-list-example.component.html?raw';
+import listRadioGroupSrcCode from '!./platform-radio-group-examples/platform-radio-group-list-examples.component.ts?raw';
+import contentRadioGroupSrc from '!./platform-radio-group-examples/platform-radio-group-content-example.component.html?raw';
+import contentRadioGroupSrcCode from '!./platform-radio-group-examples/platform-radio-group-content-examples.component.ts?raw';
+import disabledRadioGroupSrc from '!./platform-radio-group-examples/platform-radio-group-disabled-example.component.html?raw';
+import disabledRadioGroupSrcCode from '!./platform-radio-group-examples/platform-radio-group-disabled-examples.component.ts?raw';
 
 import { ExampleFile } from '../../../../documentation/core-helpers/code-example/example-file';
 

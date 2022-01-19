@@ -175,9 +175,9 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
         }
 
         this.itemDropped.emit({
-            replacedItemIndex: replacedItemIndex,
-            draggedItemIndex: draggedItemIndex,
-            items: items
+            replacedItemIndex,
+            draggedItemIndex,
+            items
         });
 
         this._removeAllLines();

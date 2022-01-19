@@ -410,8 +410,9 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
         });
     }
 
-    /** @hidden */
-    /** Setting values from list to list items
+    /**
+     * @hidden
+     * Setting values from list to list items
      * example:
      * Does list item has navigation,
      * should show arrows,

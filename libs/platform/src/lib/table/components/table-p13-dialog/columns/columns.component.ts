@@ -95,7 +95,7 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
     constructor(private dialogRef: DialogRef, private cdr: ChangeDetectorRef) {
         const { availableColumns, visibleColumns }: ColumnsDialogData = this.dialogRef.data;
 
-        this.availableColumns = availableColumns?.map(({ label, key }) => ({ label: label, key: key })) || [];
+        this.availableColumns = availableColumns?.map(({ label, key }) => ({ label, key })) || [];
 
         this._initiateColumns(visibleColumns);
     }
@@ -124,7 +124,7 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
     /** Confirm changes and close dialog */
     confirm(): void {
         const visibleColumns = this._getVisibleColumnsFromSelectedColumns(this._selectableColumns);
-        const result: ColumnsDialogResultData = { visibleColumns: visibleColumns };
+        const result: ColumnsDialogResultData = { visibleColumns };
         this.dialogRef.close(result);
     }
 
@@ -229,7 +229,7 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
             })
             .map(
                 (column, index: number): SelectableColumn => ({
-                    column: column,
+                    column,
                     selected: visibleColumnKeys.includes(column.key),
                     active: index === 0
                 })
@@ -322,7 +322,7 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
 
         list.splice(toIndex, 0, movedItem);
 
-        return { movedItem: movedItem, replacedItem: replacedItem };
+        return { movedItem, replacedItem };
     }
 
     /** @hidden */

@@ -22,10 +22,7 @@ import {
     date12,
     date2,
     date3,
-    date4,
     date5,
-    date6,
-    date7,
     date8,
     date9,
     highlightedColor,
@@ -56,6 +53,8 @@ describe('Date picker suite', () => {
 
     beforeAll(() => {
         datePickerPage.open();
+        waitForPresent(datePickerPage.root);
+        waitForElDisplayed(datePickerPage.title);
     }, 1);
 
     beforeEach(() => {
@@ -203,39 +202,21 @@ describe('Date picker suite', () => {
     });
 
     it('verify date Picker Formatting range date picker custom format', () => {
-        const currentMonth = new Date().getMonth() + 1;
-
         click(buttonDatePicker, 12);
         click(dayInCalendarButtonByValue('1'));
         click(dayInCalendarButtonByValue('15'));
         click(buttonDatePicker, 12);
-        if (currentMonth < 10) {
-            expect(getValue(inputDatePicker, 12)).toEqual(date4);
-        }
-        if (currentMonth >= 10) {
-            expect(getValue(inputDatePicker, 12)).toEqual(date10);
-        }
+        expect(getValue(inputDatePicker, 12)).toEqual(date10);
     });
 
     it('verify internationalization of Date Picker', () => {
-        const currentMonth = new Date().getMonth() + 1;
-
         click(buttonDatePicker, 13);
         click(dayInCalendarButtonByValue('1'));
-        if (currentMonth < 10) {
-            expect(getValue(inputDatePicker, 13)).toEqual(date7);
-            click(buttonGerman);
-            expect(getValue(inputDatePicker, 13)).toEqual(date8);
-            click(buttonBulgarian);
-            expect(getValue(inputDatePicker, 13)).toEqual(date6);
-        }
-        if (currentMonth >= 10) {
-            expect(getValue(inputDatePicker, 13)).toEqual(date11);
-            click(buttonGerman);
-            expect(getValue(inputDatePicker, 13)).toEqual(date8);
-            click(buttonBulgarian);
-            expect(getValue(inputDatePicker, 13)).toEqual(date12);
-        }
+        expect(getValue(inputDatePicker, 13)).toEqual(date11);
+        click(buttonGerman);
+        expect(getValue(inputDatePicker, 13)).toEqual(date8);
+        click(buttonBulgarian);
+        expect(getValue(inputDatePicker, 13)).toEqual(date12);
     });
 
     it('verify with the date picker, the user can see a day view, month view, year view, or year ranges.', () => {

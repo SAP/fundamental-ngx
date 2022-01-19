@@ -187,8 +187,8 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
      */
     stepStatusChanged(id: string, status: WizardStepStatus): void {
         this.statusChange.emit({
-            id: id,
-            status: status
+            id,
+            status
         });
     }
 

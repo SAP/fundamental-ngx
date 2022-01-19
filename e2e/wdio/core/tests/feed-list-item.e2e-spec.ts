@@ -29,12 +29,13 @@ describe('Feed list item test suite:', () => {
         mobileExample,
         linkMore,
         avatar,
-        menuButton,
-        menuOption,
         overflowButton,
         overflowOption,
         mobileMenu,
-        optionCancel
+        optionCancel,
+        actionMenuButton,
+        icon,
+        actionMenuButtonOption
     } = feedListItemPage;
 
     beforeAll(() => {
@@ -77,11 +78,11 @@ describe('Feed list item test suite:', () => {
     });
 
     it('should check clickability popovers menu links', () => {
-        scrollIntoView(actionSettingsButton);
-        click(menuButton);
-        const optionLength = getElementArrayLength(menuOption);
+        scrollIntoView(actionMenuButton);
+        click(actionMenuButton);
+        const optionLength = getElementArrayLength(actionMenuButtonOption);
         for (let i = 0; i < optionLength; i++) {
-            expect(isElementClickable(menuOption, i)).toBe(true, `option with index ${i} not clickable`);
+            expect(isElementClickable(actionMenuButtonOption, i)).toBe(true, `option with index ${i} not clickable`);
         }
     });
 
@@ -101,6 +102,15 @@ describe('Feed list item test suite:', () => {
 
         click(optionCancel);
         expect(doesItExist(mobileMenu)).toBe(false, 'mobile menu still displayed');
+    });
+
+    it('should check that icons are present near menu items', () => {
+        scrollIntoView(actionExample);
+        click(actionMenuButton);
+        const menuItemsLength = getElementArrayLength(actionMenuButtonOption);
+        for (let i = 0; i < menuItemsLength; i++) {
+            expect(isElementDisplayed(actionMenuButtonOption + icon, i)).toBe(true);
+        }
     });
 
     it('should check RTL and LTR orientation', () => {

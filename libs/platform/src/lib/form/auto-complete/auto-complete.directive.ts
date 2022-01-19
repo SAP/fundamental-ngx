@@ -123,7 +123,7 @@ export class AutoCompleteDirective {
     private _sendCompleteEvent(forceClose: boolean): void {
         this.onComplete.emit({
             term: this._element.value,
-            forceClose: forceClose
+            forceClose
         });
 
         if (this.inputText !== this._oldValue) {

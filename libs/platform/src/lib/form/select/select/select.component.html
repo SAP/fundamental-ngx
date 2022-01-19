@@ -19,6 +19,7 @@
     [stateMessage]="stateMessage"
     [mobile]="mobile"
     [mobileConfig]="mobileConfig"
+    [inline]="inline"
     [(ngModel)]="value"
     (valueChange)="_onSelection($event)"
 >
@@ -29,7 +30,7 @@
     <fd-option
         *ngFor="let item of _optionItems; index as index"
         [disabled]="item.disabled ? true : false"
-        [value]="item.label"
+        [value]="item.value"
         [attr.aria-labelledby]="ariaLabel"
         [attr.aria-disabled]="disabled"
     >

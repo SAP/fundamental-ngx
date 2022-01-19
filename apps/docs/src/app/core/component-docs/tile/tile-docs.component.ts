@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import * as tileGenericSrc from '!raw-loader!./examples/tile-generic-example.component.html';
-import * as tileColumnsSrc from '!raw-loader!./examples/tile-columns-example.component.html';
-import * as launchSrc from '!raw-loader!./examples/launch-tile-example.component.html';
-import * as kpiSrc from '!raw-loader!./examples/kpi-tile-example.component.html';
-import * as slideSrc from '!raw-loader!./examples/slide-tile-example.component.html';
-import * as actionSrc from '!raw-loader!./examples/action-tile-example.component.html';
-import * as badgeSrc from '!raw-loader!./examples/badge-tile-example.component.html';
-import * as feedSrc from '!raw-loader!./examples/feed-tile-example.component.html';
-import * as lineSrc from '!raw-loader!./examples/line-tile-example.component.html';
+import tileGenericSrc from '!./examples/tile-generic-example.component.html?raw';
+import tileColumnsSrc from '!./examples/tile-columns-example.component.html?raw';
+import launchSrc from '!./examples/launch-tile-example.component.html?raw';
+import kpiSrc from '!./examples/kpi-tile-example.component.html?raw';
+import slideSrc from '!./examples/slide-tile-example.component.html?raw';
+import actionSrc from '!./examples/action-tile-example.component.html?raw';
+import badgeSrc from '!./examples/badge-tile-example.component.html?raw';
+import feedSrc from '!./examples/feed-tile-example.component.html?raw';
+import lineSrc from '!./examples/line-tile-example.component.html?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

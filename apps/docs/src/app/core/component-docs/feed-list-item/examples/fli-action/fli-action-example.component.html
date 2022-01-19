@@ -28,31 +28,36 @@
         ariaLabel="Feed list item example"
     >
         <fd-feed-list-action>
-            <button
-                aria-label="action"
-                fd-button
-                fdType="transparent"
-                [compact]="true"
-                [fdMenuTrigger]="menu"
-                glyph="menu"
-            ></button>
-            <fd-menu #menu>
-                <li fd-menu-item>
-                    <a href="#" fd-menu-interactive>
-                        <span fd-menu-title>Option 1</span>
-                    </a>
-                </li>
-                <li fd-menu-item>
-                    <a href="#" fd-menu-interactive>
-                        <span fd-menu-title>Option 2</span>
-                    </a>
-                </li>
-                <li fd-menu-item>
-                    <a href="#" fd-menu-interactive>
-                        <span fd-menu-title>Option 3</span>
-                    </a>
-                </li>
-            </fd-menu>
+            <fd-action-sheet [compact]="true" #actionSheet>
+                <fd-action-sheet-control>
+                    <button fd-button [compact]="true" glyph="overflow" fdType="transparent" title="Actions"></button>
+                </fd-action-sheet-control>
+
+                <fd-action-sheet-body>
+                    <li
+                        fd-action-sheet-item
+                        [compact]="true"
+                        label="Edit"
+                        glyph="edit"
+                        (click)="actionSheet.close()"
+                    ></li>
+                    <li
+                        fd-action-sheet-item
+                        [compact]="true"
+                        label="Share"
+                        glyph="share"
+                        (click)="actionSheet.close()"
+                    ></li>
+                    <li
+                        fd-action-sheet-item
+                        [compact]="true"
+                        label="Delete"
+                        glyph="delete"
+                        [negative]="true"
+                        (click)="actionSheet.close()"
+                    ></li>
+                </fd-action-sheet-body>
+            </fd-action-sheet>
         </fd-feed-list-action>
     </fd-feed-list-item>
 </fd-feed-list>

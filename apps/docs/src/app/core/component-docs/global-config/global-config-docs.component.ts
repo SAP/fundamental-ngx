@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import * as dialogGlobalConfigSrc from '!raw-loader!./examples/dialog-global-config-example/dialog-global-config-example.module.ts';
-import * as messageBoxGlobalConfigSrc from '!raw-loader!./examples/message-box-global-config-example/message-box-global-config-example.module.ts';
-import * as stepInputConfigurationSrc from '!raw-loader!./examples/mobile-mode-global-config-example/mobile-mode-global-config-example.module.ts';
-import * as popoverMobileGlobalConfigExampleSrc from '!raw-loader!./examples/popover-mobile-global-config-example/popover-mobile-global-config-example.module.ts';
+import dialogGlobalConfigSrc from '!./examples/dialog-global-config-example/dialog-global-config-example.module.ts?raw';
+import messageBoxGlobalConfigSrc from '!./examples/message-box-global-config-example/message-box-global-config-example.module.ts?raw';
+import stepInputConfigurationSrc from '!./examples/mobile-mode-global-config-example/mobile-mode-global-config-example.module.ts?raw';
+import popoverMobileGlobalConfigExampleSrc from '!./examples/popover-mobile-global-config-example/popover-mobile-global-config-example.module.ts?raw';
 
 @Component({
     selector: 'app-global-config-docs',

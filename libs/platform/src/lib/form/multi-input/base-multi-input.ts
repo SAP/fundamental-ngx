@@ -197,17 +197,8 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     /** @hidden */
     listTemplate: TemplateRef<any>;
 
-    /** Get the input text of the input. */
-    get inputText(): string {
-        return this._inputTextValue;
-    }
-
-    /** Set the input text of the input. */
-    set inputText(value: string) {
-        this._inputTextValue = value;
-
-        this.onTouched();
-    }
+    /** input text of the input. */
+    inputText: string;
 
     /** Whether the Multi Input is opened. */
     isOpen = false;
@@ -246,8 +237,6 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     protected _dataSource: FdpMultiInputDataSource<any>;
 
     /** @hidden */
-    private _inputTextValue: string;
-    /** @hidden */
     private _matchingStrategy: MatchingStrategy = this.multiInputConfig.matchingStrategy;
     /** @hidden */
     private _dsSubscription?: Subscription;
@@ -267,10 +256,10 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     ];
 
     /** @hidden */
-    private _displayFn = (value: any) => this.displayValue(value);
+    private _displayFn = (value: any): string => this.displayValue(value);
 
     /** @hidden */
-    private _secondaryFn = (value: any) => {
+    private _secondaryFn = (value: any): string => {
         if (isOptionItem(value)) {
             return value.secondaryText;
         } else if (isJsObject(value) && this.description) {
@@ -347,12 +336,14 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     open(): void {
         this.isOpen = true;
         this.isOpenChange.emit(this.isOpen);
+        this.openChange.next(this.isOpen);
         this._cd.markForCheck();
     }
     /** Closes the select popover body. */
     close(): void {
         this.isOpen = false;
         this.isOpenChange.emit(this.isOpen);
+        this.openChange.next(this.isOpen);
         this._cd.markForCheck();
     }
 
@@ -376,17 +367,13 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
 
     /** @hidden */
     showList(isOpen: boolean): void {
-        if (this.isOpen !== isOpen) {
-            this.isOpen = isOpen;
-            this.onTouched();
-            this.openChange.next(isOpen);
-        }
-
-        if (!this.isOpen) {
+        if (!isOpen) {
             this.searchTermChanged('');
         }
 
-        this.cd.detectChanges();
+        if (this.isOpen !== isOpen) {
+            isOpen ? this.open() : this.close();
+        }
     }
 
     /** @hidden */
@@ -403,18 +390,6 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         }
 
         this.handleOptionItem(value);
-    }
-
-    /**
-     * Handle Click on Button
-     * @hidden
-     */
-    onPrimaryButtonClick(isOpen: boolean): void {
-        if (!isOpen) {
-            this.searchTermChanged('');
-        }
-
-        this.showList(!isOpen);
     }
 
     /**
@@ -671,7 +646,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
                 label: this.displayValue(value),
                 avatarSrc: this.avatarsrc ? this.objectGet(value, this.avatarsrc) : null,
                 description: this.description ? this.objectGet(value, this.description) : null,
-                value: value
+                value
             });
         }
 
@@ -686,7 +661,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         const selectItems: MultiInputOption[] = [];
         for (let i = 0; i < items.length; i++) {
             const value = items[i];
-            selectItems.push({ label: value, value: value });
+            selectItems.push({ label: value, value });
         }
 
         return selectItems;
@@ -703,7 +678,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
             const value = items[i];
             selectItems.push({
                 label: this.displayValue(value),
-                value: value
+                value
             });
         }
 

@@ -1,25 +1,25 @@
 import { Component } from '@angular/core';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
-import * as platformBasicMenuSrc from '!raw-loader!./platform-menu-examples/platform-menu-basic-example.component.html';
-import * as platformBasicMenuTsCode from '!raw-loader!./platform-menu-examples/platform-menu-basic-example.component.ts';
-import * as platformBasicMenuScss from '!raw-loader!./platform-menu-examples/platform-menu-basic-example.component.scss';
+import platformBasicMenuSrc from '!./platform-menu-examples/platform-menu-basic-example.component.html?raw';
+import platformBasicMenuTsCode from '!./platform-menu-examples/platform-menu-basic-example.component.ts?raw';
+import platformBasicMenuScss from '!./platform-menu-examples/platform-menu-basic-example.component.scss?raw';
 
-import * as platformXPositionMenuSrc from '!raw-loader!./platform-menu-examples/platform-menu-x-position-example.component.html';
-import * as platformXPositionMenuTsCode from '!raw-loader!./platform-menu-examples/platform-menu-x-position-example.component.ts';
-import * as platformXPositionMenuScss from '!raw-loader!./platform-menu-examples/platform-menu-x-position-example.component.scss';
+import platformXPositionMenuSrc from '!./platform-menu-examples/platform-menu-x-position-example.component.html?raw';
+import platformXPositionMenuTsCode from '!./platform-menu-examples/platform-menu-x-position-example.component.ts?raw';
+import platformXPositionMenuScss from '!./platform-menu-examples/platform-menu-x-position-example.component.scss?raw';
 
-import * as platformCascadeMenuSrc from '!raw-loader!./platform-menu-examples/platform-menu-cascade-example.component.html';
-import * as platformCascadeMenuTsCode from '!raw-loader!./platform-menu-examples/platform-menu-cascade-example.component.ts';
-import * as platformCascadeMenuScss from '!raw-loader!./platform-menu-examples/platform-menu-cascade-example.component.scss';
+import platformCascadeMenuSrc from '!./platform-menu-examples/platform-menu-cascade-example.component.html?raw';
+import platformCascadeMenuTsCode from '!./platform-menu-examples/platform-menu-cascade-example.component.ts?raw';
+import platformCascadeMenuScss from '!./platform-menu-examples/platform-menu-cascade-example.component.scss?raw';
 
-import * as platformScrollingMenuSrc from '!raw-loader!./platform-menu-examples/platform-menu-scrolling-example.component.html';
-import * as platformScrollingMenuTsCode from '!raw-loader!./platform-menu-examples/platform-menu-scrolling-example.component.ts';
-import * as platformScrollingMenuScss from '!raw-loader!./platform-menu-examples/platform-menu-scrolling-example.component.scss';
+import platformScrollingMenuSrc from '!./platform-menu-examples/platform-menu-scrolling-example.component.html?raw';
+import platformScrollingMenuTsCode from '!./platform-menu-examples/platform-menu-scrolling-example.component.ts?raw';
+import platformScrollingMenuScss from '!./platform-menu-examples/platform-menu-scrolling-example.component.scss?raw';
 
-import * as platformWithIconsMenuSrc from '!raw-loader!./platform-menu-examples/platform-menu-with-icons-example.component.html';
-import * as platformWithIconsMenuTsCode from '!raw-loader!./platform-menu-examples/platform-menu-with-icons-example.component.ts';
-import * as platformWithIconsMenuScss from '!raw-loader!./platform-menu-examples/platform-menu-with-icons-example.component.scss';
+import platformWithIconsMenuSrc from '!./platform-menu-examples/platform-menu-with-icons-example.component.html?raw';
+import platformWithIconsMenuTsCode from '!./platform-menu-examples/platform-menu-with-icons-example.component.ts?raw';
+import platformWithIconsMenuScss from '!./platform-menu-examples/platform-menu-with-icons-example.component.scss?raw';
 
 @Component({
     selector: 'app-menu',

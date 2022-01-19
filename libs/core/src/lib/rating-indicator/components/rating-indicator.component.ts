@@ -194,7 +194,7 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
     onChange: (value: number) => void = () => {};
 
     /** @hidden */
-    onTouched = () => {};
+    onTouched = (): void => {};
 
     /** @hidden */
     ngOnInit(): void {
@@ -304,7 +304,7 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
                 const _rate = +rate;
                 return !isNaN(_rate) && !isNaN(+vote) && _rate > 0;
             })
-            .map(([rate, votes]) => ({ rate: +rate, votes: votes }));
+            .map(([rate, votes]) => ({ rate: +rate, votes }));
         if (ratings.length === 0) {
             return;
         }

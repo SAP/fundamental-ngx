@@ -14,7 +14,14 @@ interface ExampleTestModel {
     city: string;
 }
 
-const exampleDataSource = () => {
+interface FilterData {
+    key: string;
+    // name: string,
+    label: string;
+    advanced: boolean;
+}
+
+const exampleDataSource = (): { dataSource: ExampleTestModel[]; filters: FilterData[] } => {
     const dataSource = Array(100)
         .fill(null)
         .map((_value, index) => ({
@@ -24,7 +31,7 @@ const exampleDataSource = () => {
             city: `City ${Math.floor(Math.random() * index)}`
         }));
     return {
-        dataSource: dataSource,
+        dataSource,
         filters: Object.keys(dataSource[0]).map((value, index) => ({
             key: value,
             label: `Product ${value}`,
@@ -38,7 +45,7 @@ const exampleDataSource = () => {
     templateUrl: './platform-vhd-token-example.component.html'
 })
 export class PlatformVhdTokenExampleComponent implements OnInit {
-    filters: any;
+    filters: FilterData[];
     dataSource: ValueHelpDialogDataSource<ExampleTestModel>;
     hasAdvanced = false;
     selectedValue = [];
@@ -50,7 +57,7 @@ export class PlatformVhdTokenExampleComponent implements OnInit {
         this.dataSource = new ValueHelpDialogDataSource(new VhdDataProvider(data.dataSource));
     }
 
-    tokenizerFn = (row: ExampleTestModel) => `${row.name} (Id: ${row.id})`;
+    tokenizerFn = (row: ExampleTestModel): string => `${row.name} (Id: ${row.id})`;
 
     valueChange($event: VhdValueChangeEvent<ExampleTestModel[]>): void {
         console.log($event);

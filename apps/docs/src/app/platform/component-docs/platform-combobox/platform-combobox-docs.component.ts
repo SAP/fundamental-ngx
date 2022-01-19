@@ -2,29 +2,29 @@ import { Component } from '@angular/core';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
-import * as comboboxStandardHtml from '!raw-loader!./examples/combobox-standard/combobox-standard.component.html';
-import * as comboboxStandardTs from '!raw-loader!./examples/combobox-standard/combobox-standard.component';
+import comboboxStandardHtml from '!./examples/combobox-standard/combobox-standard.component.html?raw';
+import comboboxStandardTs from '!./examples/combobox-standard/combobox-standard.component?raw';
 
-import * as comboboxMobileHtml from '!raw-loader!./examples/combobox-mobile/combobox-mobile-example.component.html';
-import * as comboboxMobileTs from '!raw-loader!./examples/combobox-mobile/combobox-mobile-example.component';
+import comboboxMobileHtml from '!./examples/combobox-mobile/combobox-mobile-example.component.html?raw';
+import comboboxMobileTs from '!./examples/combobox-mobile/combobox-mobile-example.component?raw';
 
-import * as comboboxDatasourceHtml from '!raw-loader!./examples/combobox-datasource/combobox-datasource-example.component.html';
-import * as comboboxDatasourceTs from '!raw-loader!./examples/combobox-datasource/combobox-datasource-example.component';
+import comboboxDatasourceHtml from '!./examples/combobox-datasource/combobox-datasource-example.component.html?raw';
+import comboboxDatasourceTs from '!./examples/combobox-datasource/combobox-datasource-example.component?raw';
 
-import * as comboboxColumnsHtml from '!raw-loader!./examples/combobox-columns/combobox-columns-example.component.html';
-import * as comboboxColumnsTs from '!raw-loader!./examples/combobox-columns/combobox-columns-example.component';
+import comboboxColumnsHtml from '!./examples/combobox-columns/combobox-columns-example.component.html?raw';
+import comboboxColumnsTs from '!./examples/combobox-columns/combobox-columns-example.component?raw';
 
-import * as comboboxGroupHtml from '!raw-loader!./examples/combobox-group/combobox-group-example.component.html';
-import * as comboboxGroupTs from '!raw-loader!./examples/combobox-group/combobox-group-example.component';
+import comboboxGroupHtml from '!./examples/combobox-group/combobox-group-example.component.html?raw';
+import comboboxGroupTs from '!./examples/combobox-group/combobox-group-example.component?raw';
 
-import * as comboboxTemplatesHtml from '!raw-loader!./examples/combobox-templates/combobox-templates-example.component.html';
-import * as comboboxTemplatesTs from '!raw-loader!./examples/combobox-templates/combobox-templates-example.component';
+import comboboxTemplatesHtml from '!./examples/combobox-templates/combobox-templates-example.component.html?raw';
+import comboboxTemplatesTs from '!./examples/combobox-templates/combobox-templates-example.component?raw';
 
-import * as comboboxFormHtml from '!raw-loader!./examples/combobox-forms/combobox-forms-example.component.html';
-import * as comboboxFormTs from '!raw-loader!./examples/combobox-forms/combobox-forms-example.component';
+import comboboxFormHtml from '!./examples/combobox-forms/combobox-forms-example.component.html?raw';
+import comboboxFormTs from '!./examples/combobox-forms/combobox-forms-example.component?raw';
 
-import * as comboboxStatesHtml from '!raw-loader!./examples/combobox-states/combobox-states-example.component.html';
-import * as comboboxStatesTs from '!raw-loader!./examples/combobox-states/combobox-states-example.component';
+import comboboxStatesHtml from '!./examples/combobox-states/combobox-states-example.component.html?raw';
+import comboboxStatesTs from '!./examples/combobox-states/combobox-states-example.component?raw';
 
 @Component({
     selector: 'platform-combobox-docs',

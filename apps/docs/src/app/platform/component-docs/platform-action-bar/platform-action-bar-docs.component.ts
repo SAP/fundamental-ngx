@@ -1,26 +1,26 @@
 import { Component } from '@angular/core';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import * as simpleActionBarHtml from '!raw-loader!./platform-action-bar-examples/platform-action-bar-simple-example.component.html';
-import * as simpleActionBarTs from '!raw-loader!./platform-action-bar-examples/platform-action-bar-simple-example.component.ts';
-import * as actionBarBackButtonTS from '!raw-loader!./platform-action-bar-examples/platform-action-bar-with-back-button-example.component.ts';
-import * as actionBarDescriptionTs from '!raw-loader!./platform-action-bar-examples/platform-action-bar-with-description-example.component.ts';
-import * as backButtonExampleHtml from '!raw-loader!./platform-action-bar-examples/platform-action-bar-with-back-button-example.component.html';
-import * as backButtonExamplecss from '!raw-loader!./platform-action-bar-examples/platform-action-bar-with-back-button-example.component.scss';
-import * as descriptionExampleHtml from '!raw-loader!./platform-action-bar-examples/platform-action-bar-with-description-example.component.html';
-import * as descriptionExamplecss from '!raw-loader!./platform-action-bar-examples/platform-action-bar-with-description-example.component.scss';
-import * as longPageTitleExampleHtml from '!raw-loader!./platform-action-bar-examples/platform-action-bar-with-long-title-example.component.html';
-import * as longPageTitleExampleTs from '!raw-loader!./platform-action-bar-examples/platform-action-bar-with-long-title-example.component.ts';
-import * as longPageTitleExamplecss from '!raw-loader!./platform-action-bar-examples/platform-action-bar-with-long-title-example.component.scss';
-import * as contextualMenuExampleHtml from '!raw-loader!./platform-action-bar-examples/platform-action-bar-contextual-menu-example.component.html';
-import * as contextualMenuExampleTs from '!raw-loader!./platform-action-bar-examples/platform-action-bar-contextual-menu-example.component.ts';
-import * as contextualMenuExamplecss from '!raw-loader!./platform-action-bar-examples/platform-action-bar-contextual-menu-example.component.scss';
-import * as positiveNegativeExampleHtml from '!raw-loader!./platform-action-bar-examples/platform-action-bar-positive-and-negative-action-example.component.html';
-import * as positiveNegativeExampleTs from '!raw-loader!./platform-action-bar-examples/platform-action-bar-positive-and-negative-action-example.component.ts';
-import * as positiveNegativecss from '!raw-loader!./platform-action-bar-examples/platform-action-bar-positive-and-negative-action-example.component.scss';
-import * as simpleActionBarcss from '!raw-loader!./platform-action-bar-examples/platform-action-bar-simple-example.component.scss';
-import * as cozyModeExampleHtml from '!raw-loader!./platform-action-bar-examples/platform-action-bar-cozy-mode-example.component.html';
-import * as cozyModeExamplecss from '!raw-loader!./platform-action-bar-examples/platform-action-bar-cozy-mode-example.component.scss';
-import * as cozyModeExampleTs from '!raw-loader!./platform-action-bar-examples/platform-action-bar-cozy-mode-example.component.ts';
+import simpleActionBarHtml from '!./platform-action-bar-examples/platform-action-bar-simple-example.component.html?raw';
+import simpleActionBarTs from '!./platform-action-bar-examples/platform-action-bar-simple-example.component.ts?raw';
+import actionBarBackButtonTS from '!./platform-action-bar-examples/platform-action-bar-with-back-button-example.component.ts?raw';
+import actionBarDescriptionTs from '!./platform-action-bar-examples/platform-action-bar-with-description-example.component.ts?raw';
+import backButtonExampleHtml from '!./platform-action-bar-examples/platform-action-bar-with-back-button-example.component.html?raw';
+import backButtonExamplecss from '!./platform-action-bar-examples/platform-action-bar-with-back-button-example.component.scss?raw';
+import descriptionExampleHtml from '!./platform-action-bar-examples/platform-action-bar-with-description-example.component.html?raw';
+import descriptionExamplecss from '!./platform-action-bar-examples/platform-action-bar-with-description-example.component.scss?raw';
+import longPageTitleExampleHtml from '!./platform-action-bar-examples/platform-action-bar-with-long-title-example.component.html?raw';
+import longPageTitleExampleTs from '!./platform-action-bar-examples/platform-action-bar-with-long-title-example.component.ts?raw';
+import longPageTitleExamplecss from '!./platform-action-bar-examples/platform-action-bar-with-long-title-example.component.scss?raw';
+import contextualMenuExampleHtml from '!./platform-action-bar-examples/platform-action-bar-contextual-menu-example.component.html?raw';
+import contextualMenuExampleTs from '!./platform-action-bar-examples/platform-action-bar-contextual-menu-example.component.ts?raw';
+import contextualMenuExamplecss from '!./platform-action-bar-examples/platform-action-bar-contextual-menu-example.component.scss?raw';
+import positiveNegativeExampleHtml from '!./platform-action-bar-examples/platform-action-bar-positive-and-negative-action-example.component.html?raw';
+import positiveNegativeExampleTs from '!./platform-action-bar-examples/platform-action-bar-positive-and-negative-action-example.component.ts?raw';
+import positiveNegativecss from '!./platform-action-bar-examples/platform-action-bar-positive-and-negative-action-example.component.scss?raw';
+import simpleActionBarcss from '!./platform-action-bar-examples/platform-action-bar-simple-example.component.scss?raw';
+import cozyModeExampleHtml from '!./platform-action-bar-examples/platform-action-bar-cozy-mode-example.component.html?raw';
+import cozyModeExamplecss from '!./platform-action-bar-examples/platform-action-bar-cozy-mode-example.component.scss?raw';
+import cozyModeExampleTs from '!./platform-action-bar-examples/platform-action-bar-cozy-mode-example.component.ts?raw';
 @Component({
     selector: 'app-platform-action-bar',
     templateUrl: './platform-action-bar-docs.component.html',

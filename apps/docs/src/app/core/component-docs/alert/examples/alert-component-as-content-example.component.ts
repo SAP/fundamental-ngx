@@ -41,7 +41,7 @@ export class AlertComponentAsContentExampleComponent {
             }
         } as AlertConfig);
 
-        alertRef.afterDismissed.subscribe((data) => {
+        alertRef.afterDismissed.subscribe(() => {
             // Do something after closing, receive data
             // You can also manually close this alert using alertRef.dismiss()
         });

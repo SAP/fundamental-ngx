@@ -4,6 +4,7 @@ import { PlatformDocumentationComponent } from './documentation/platform-documen
 import { PlatformHomeComponent } from './component-docs/platform-home/platform-home.component';
 import { NewComponentComponent } from './component-docs/new-component/new-component.component';
 
+// BEING UPDATED WITH THE SAP-COMPONENT SCHEMATIC; DO NOT MODIFY THE STRUCTURE!
 export const ROUTES: Routes = [
     {
         path: '',
@@ -328,6 +329,13 @@ export const ROUTES: Routes = [
                 loadChildren: () =>
                     import('./component-docs/platform-icon-tab-bar/platform-icon-tab-bar-docs.module').then(
                         (m) => m.PlatformIconTabBarDocsModule
+                    )
+            },
+            {
+                path: 'smart-filter-bar',
+                loadChildren: () =>
+                    import('./component-docs/platform-smart-filter-bar/platform-smart-filter-bar.module').then(
+                        (m) => m.PlatformSmartFilterBarDocsModule
                     )
             }
         ]

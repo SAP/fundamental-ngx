@@ -4,7 +4,7 @@ import { fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { Observable, Subject } from 'rxjs';
 
 describe('MenuShortcutDirective', () => {
-    const buildMenuItem = (subject: Subject<boolean>) =>
+    const buildMenuItem = (subject: Subject<boolean>): MenuItemComponent =>
         ({
             menuService: {
                 get isMobileMode(): Observable<boolean> {

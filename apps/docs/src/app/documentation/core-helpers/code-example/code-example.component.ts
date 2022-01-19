@@ -59,7 +59,7 @@ export class CodeExampleComponent implements OnInit {
     }
 
     copyText(): void {
-        this.copyService.copyText(this.exampleFiles[this.activeIndex].code.default);
+        this.copyService.copyText(this.exampleFiles[this.activeIndex].code);
         this.alertService.open('Code copied!', { type: 'success', duration: 5000 } as AlertConfig);
     }
 

@@ -163,10 +163,10 @@ describe('Alert test suite', () => {
             click(option);
             expect(getElementArrayLength(playgroundAlert)).toBe(1, 'new alert appeared, but should not');
         });
+    });
 
-        it('should check RTL/LTR orientations', () => {
-            alertPage.checkRtlSwitch();
-        });
+    it('should check RTL/LTR orientations', () => {
+        alertPage.checkRtlSwitch();
     });
 
     xdescribe('visual regression', () => {

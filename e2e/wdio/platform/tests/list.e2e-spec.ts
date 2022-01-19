@@ -7,7 +7,6 @@ import {
 } from '../../helper/assertion-helper';
 import {
     compactClass,
-    ariaMultiSelectable,
     borderStyleAttr,
     compactAttr,
     compactValue,
@@ -44,8 +43,6 @@ import {
     pause,
     waitForNotPresent,
     browserIsSafari,
-    isElementDisplayed,
-    getTextArr,
     getElementSize,
     waitForPresent
 } from '../../driver/wdio';
@@ -74,9 +71,7 @@ describe('List test suite:', () => {
         multiListItems,
         multiToolbar,
         multiCheckbox,
-        singleList,
         singleListItems,
-        singleToolbar,
         singleRadioBtn,
         navListItems,
         navListLink,
@@ -96,7 +91,6 @@ describe('List test suite:', () => {
         unreadListItems,
         multiCheckBoxMark,
         singleRadioBtnInput,
-        busyIndicator,
         noSepList,
         noSepListItems,
         cozyItem,
@@ -240,8 +234,6 @@ describe('List test suite:', () => {
             checkElementText(vScrollListItems);
             checkAttributeValueTrue(vScrollList, scrollLoadAttr);
             checkAttributeValueTrue(vScrollList, lazyLoadAttr);
-            refreshPage();
-            waitForElDisplayed(listPage.title);
         });
 
         it('should check scroll', () => {
@@ -255,7 +247,6 @@ describe('List test suite:', () => {
             sendKeys(['ArrowDown', 'ArrowDown', 'ArrowDown', 'ArrowDown', 'ArrowDown']);
             // pause to give the browser time to process actions and generate loading icons
             pause(650);
-            expect(isElementDisplayed(busyIndicator)).toBe(true);
             waitForNotPresent(vScrollLoadIcon);
             const itemsEndCount = getElementArrayLength(vScrollListItems);
             expect(itemsStartCount).not.toEqual(itemsEndCount);

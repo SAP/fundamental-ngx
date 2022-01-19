@@ -1,3 +1,4 @@
+// BEING UPDATED WITH THE SAP-COMPONENT SCHEMATIC; DO NOT MODIFY THE STRUCTURE!
 /**
  * Files to display in the API tab of each component.
  * Names should be without hyphens, and capitalized where hyphens occur normally.
@@ -97,5 +98,15 @@ export const API_FILES = {
         'IconTabBarFilterTypeComponent',
         'IconTabBarPopoverComponent',
         'TextTypePopoverComponent'
+    ],
+    smartFilterBar: [
+        'SmartFilterBarComponent',
+        'SmartFilterBarConditionFieldComponent',
+        'SmartFilterBarConditionsDialogComponent',
+        'SmartFilterBarFieldDefinitionDirective',
+        'SmartFilterBarService',
+        'SmartFilterBarSubjectDirective',
+        'SmartFilterBarOptionsDataProvider',
+        'SmartFilterBarSettingsDialogComponent'
     ]
 };

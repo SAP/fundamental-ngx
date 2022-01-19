@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
-import * as tabSrc from '!raw-loader!./examples/search-example/search-example.component.html';
+import tabSrc from '!./examples/search-example/search-example.component.html?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

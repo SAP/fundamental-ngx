@@ -15,7 +15,6 @@ import { IconModule } from '@fundamental-ngx/core/icon';
 import { IllustratedMessageModule } from '@fundamental-ngx/core/illustrated-message';
 import { MenuModule } from '@fundamental-ngx/core/menu';
 import { MessageStripModule } from '@fundamental-ngx/core/message-strip';
-import { MessageToastModule } from '@fundamental-ngx/core/message-toast';
 import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
 import { RadioModule } from '@fundamental-ngx/core/radio';
 import { SelectModule } from '@fundamental-ngx/core/select';
@@ -66,7 +65,6 @@ import { ApprovalFlowToolbarActionsComponent } from './approval-flow-toolbar-act
         IconModule,
         GridListModule,
         DialogModule,
-        MessageToastModule,
         PlatformObjectStatusModule,
         PlatformListModule,
         StandardListItemModule,

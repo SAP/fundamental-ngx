@@ -2,7 +2,8 @@ import { Rule, SchematicContext, Tree, chain, noop } from '@angular-devkit/schem
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 
 import { Schema } from '../ng-add/schema';
-import { readTranslationFiles } from '../utils/translation-utils';
+import { hasDevPackage, hasPackage } from '../utils/package-utils';
+import { processTranslations } from '../utils/translation-utils';
 
 /**
  * ng update schematic that will overwrite existing lib translations or add new ones to the host app's translation files
@@ -11,7 +12,11 @@ import { readTranslationFiles } from '../utils/translation-utils';
  * @param options options passed for this schematic
  */
 export function ngUpdate(options: Schema): Rule {
-    return chain([options.translations ? readTranslationFiles(options) : noop(), endInstallTask()]);
+    return (tree: Tree) => {
+        const XML2JSinstalled = hasDevPackage(tree, 'xml2js') || hasPackage(tree, 'xml2js');
+
+        return chain([options.translations ? processTranslations(options, XML2JSinstalled) : noop(), endInstallTask()]);
+    };
 }
 
 /**

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, NgForm } from '@angular/forms';
-import { MessageToastService } from '@fundamental-ngx/core';
+import { MessageToastService } from '@fundamental-ngx/core/message-toast';
 
 @Component({
     selector: 'fdp-platform-radio-group-list-items-example',

@@ -18,6 +18,7 @@ export class SearchPo extends BaseComponentPo {
     mobileExampleSearch = 'fdp-platform-search-field-mobile-example .result-field span';
     okButton = '.fd-dialog__decisive-button';
     categoryOption = '.fd-menu__link';
+    synchronizeButton = '.fdp-search-field__loading';
 
     open(): void {
         super.open(this.url);

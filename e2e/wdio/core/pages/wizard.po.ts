@@ -34,6 +34,7 @@ export class WizardPo extends CoreBaseComponentPo {
 
     contentSection = this.wizard + '.fd-wizard__content ';
     radioButton = this.contentSection + '.fd-radio';
+    radioButtonLabel = this.contentSection + '.fd-radio__label';
 
     containerFooter = 'fd-dialog-footer ';
     dialogContainer = 'fd-dialog-container ';

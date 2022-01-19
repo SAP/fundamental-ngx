@@ -30,7 +30,7 @@ describe('TableColumnResizeService', () => {
         const widthInPixels = 100;
         const tableColumn = { name: columnNames[0], width: null } as TableColumn;
         const tableColumnCell = {
-            nativeElement: { getBoundingClientRect: () => ({ width: widthInPixels }) }
+            nativeElement: { getBoundingClientRect: () => ({ width: widthInPixels }), clientWidth: widthInPixels }
         } as ElementRef;
 
         expect(service.getColumnWidthStyle(tableColumn)).toEqual('auto');
@@ -43,14 +43,14 @@ describe('TableColumnResizeService', () => {
 
     it('should return column width based on column property', () => {
         const width = '100px';
-        const tableColumn = { name: 'name', width: width } as TableColumn;
+        const tableColumn = { name: 'name', width } as TableColumn;
 
         expect(service.getColumnWidthStyle(tableColumn)).toEqual(width);
     });
 
     it('if specified in percents, should return column width in px relatively to table width', () => {
         const width = '20%';
-        const tableColumn = { name: 'name', width: width } as TableColumn;
+        const tableColumn = { name: 'name', width } as TableColumn;
 
         expect(service.getColumnWidthStyle(tableColumn)).toEqual('280px');
     });
@@ -71,7 +71,10 @@ describe('TableColumnResizeService', () => {
         const tableColumnNames = ['name'];
         const tableColumn = { name: tableColumnNames[0], width: null } as TableColumn;
         const tableColumnCell = {
-            nativeElement: { getBoundingClientRect: () => ({ width: initialColumnWidth }) }
+            nativeElement: {
+                getBoundingClientRect: () => ({ width: initialColumnWidth }),
+                clientWidth: initialColumnWidth
+            }
         } as ElementRef;
 
         service.registerColumnCell(tableColumn.name, tableColumnCell);
@@ -91,7 +94,10 @@ describe('TableColumnResizeService', () => {
         const tableColumnNames = ['name'];
         const tableColumn = { name: tableColumnNames[0], width: null } as TableColumn;
         const tableColumnCell = {
-            nativeElement: { getBoundingClientRect: () => ({ width: initialColumnWidth }) }
+            nativeElement: {
+                getBoundingClientRect: () => ({ width: initialColumnWidth }),
+                clientWidth: initialColumnWidth
+            }
         } as ElementRef;
 
         service.registerColumnCell(tableColumn.name, tableColumnCell);

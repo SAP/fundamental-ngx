@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import * as tagSrc from '!raw-loader!./examples/tag-example/tag-example.component.html';
+import tagSrc from '!./examples/tag-example/tag-example.component.html?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

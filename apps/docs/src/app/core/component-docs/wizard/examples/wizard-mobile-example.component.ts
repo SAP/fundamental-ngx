@@ -102,13 +102,13 @@ export class WizardMobileExampleComponent {
 
     // Handle focus on key press first example
     /** @hidden */
-    handleFocus(event: KeyboardEvent, index: number) {
+    handleFocus(event: KeyboardEvent, index: number): void {
         this._wizardService.progressBarKeyHandler(event, this.steps, index);
     }
 
     // Handle focus on key press second example
     /** @hidden */
-    handleFocus1(event: KeyboardEvent, index: number) {
+    handleFocus1(event: KeyboardEvent, index: number): void {
         this._wizardService.progressBarKeyHandler(event, this.steps, index);
     }
 }

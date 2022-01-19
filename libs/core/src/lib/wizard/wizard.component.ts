@@ -40,7 +40,7 @@ export const BAR_FLOATING_FOOTER_CLASS = 'fd-bar--floating-footer';
 
 export let _fromScrollToCurrentStep;
 export let timer = null;
-export const handleTimeoutReference = () => {
+export const handleTimeoutReference = (): void => {
     if (timer !== null) {
         clearTimeout(timer);
     }

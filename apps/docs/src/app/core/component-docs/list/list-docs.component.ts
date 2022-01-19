@@ -1,26 +1,26 @@
 import { Component } from '@angular/core';
 
-import * as listSrc from '!raw-loader!./examples/list-example.component.html';
-import * as listSecondarySrc from '!raw-loader!./examples/list-secondary-example.component.html';
-import * as iconListSrc from '!raw-loader!./examples/list-icon-example.component.html';
-import * as complexList from '!raw-loader!./examples/list-complex-example.component.html';
-import * as actionListH from '!raw-loader!./examples/list-action-example/list-action-example.component.html';
-import * as actionListTs from '!raw-loader!./examples/list-action-example/list-action-example.component.ts';
-import * as borderLessListHtml from '!raw-loader!./examples/list-borderless-example/list-borderless-example.component.html';
-import * as dndListTs from '!raw-loader!./examples/list-dnd-example/list-dnd-example.component.ts';
-import * as dndListH from '!raw-loader!./examples/list-dnd-example/list-dnd-example.component.html';
-import * as keyboardListTs from '!raw-loader!./examples/list-keyboard-example/list-keyboard-example.component.ts';
-import * as keyboardListH from '!raw-loader!./examples/list-keyboard-example/list-keyboard-example.component.html';
-import * as listIndicatorH from '!raw-loader!./examples/list-nav-indicator-example/list-nav-indicator-example.component.html';
-import * as listNavH from '!raw-loader!./examples/list-navigation-example/list-navigation-example.component.html';
-import * as listSelectionH from '!raw-loader!./examples/list-selection-example/list-selection-example.component.html';
-import * as listSelectionTs from '!raw-loader!./examples/list-selection-example/list-selection-example.component.ts';
-import * as listFilterTs from '!raw-loader!./examples/list-data-example/list-data-example.component.ts';
-import * as listFilterH from '!raw-loader!./examples/list-data-example/list-data-example.component.html';
-import * as listSortPipe from '!raw-loader!../../../documentation/core-helpers/pipes/sort.pipe.ts';
-import * as infiniteScrollSrcHtml from '!raw-loader!./examples/list-infinite-scroll-example.component.html';
-import * as infiniteScrollSrcTs from '!raw-loader!./examples/list-infinite-scroll-example.component.ts';
-import * as listInteractiveHtml from '!raw-loader!./examples/list-interactive-example/list-interactive-example.component.html';
+import listSrc from '!./examples/list-example.component.html?raw';
+import listSecondarySrc from '!./examples/list-secondary-example.component.html?raw';
+import iconListSrc from '!./examples/list-icon-example.component.html?raw';
+import complexList from '!./examples/list-complex-example.component.html?raw';
+import actionListH from '!./examples/list-action-example/list-action-example.component.html?raw';
+import actionListTs from '!./examples/list-action-example/list-action-example.component.ts?raw';
+import borderLessListHtml from '!./examples/list-borderless-example/list-borderless-example.component.html?raw';
+import dndListTs from '!./examples/list-dnd-example/list-dnd-example.component.ts?raw';
+import dndListH from '!./examples/list-dnd-example/list-dnd-example.component.html?raw';
+import keyboardListTs from '!./examples/list-keyboard-example/list-keyboard-example.component.ts?raw';
+import keyboardListH from '!./examples/list-keyboard-example/list-keyboard-example.component.html?raw';
+import listIndicatorH from '!./examples/list-nav-indicator-example/list-nav-indicator-example.component.html?raw';
+import listNavH from '!./examples/list-navigation-example/list-navigation-example.component.html?raw';
+import listSelectionH from '!./examples/list-selection-example/list-selection-example.component.html?raw';
+import listSelectionTs from '!./examples/list-selection-example/list-selection-example.component.ts?raw';
+import listFilterTs from '!./examples/list-data-example/list-data-example.component.ts?raw';
+import listFilterH from '!./examples/list-data-example/list-data-example.component.html?raw';
+import listSortPipe from '!../../../documentation/core-helpers/pipes/sort.pipe.ts?raw';
+import infiniteScrollSrcHtml from '!./examples/list-infinite-scroll-example.component.html?raw';
+import infiniteScrollSrcTs from '!./examples/list-infinite-scroll-example.component.ts?raw';
+import listInteractiveHtml from '!./examples/list-interactive-example/list-interactive-example.component.html?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

@@ -23,7 +23,7 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
-import { checkLtrOrientation, checkRtlOrientation } from '../../helper/assertion-helper';
+import { checkElArrIsClickable, checkLtrOrientation, checkRtlOrientation } from '../../helper/assertion-helper';
 import {
     alertTestText1,
     alertTestText2,
@@ -51,7 +51,8 @@ import {
     testText7,
     pharetraTestText,
     nuncTestText,
-    massaTestText
+    massaTestText,
+    tableCellArr7
 } from '../fixtures/appData/table-contents';
 
 describe('Table component test suite', () => {
@@ -136,7 +137,12 @@ describe('Table component test suite', () => {
         expandedOption,
         tableRowInitialState,
         tableCellInitialState,
-        buttonFilter
+        buttonFilter,
+        synchronizeButton,
+        tableTreeExample,
+        arrowButton,
+        tableWrapExample,
+        tableNoOuterBordersExample
     } = tablePage;
 
     beforeAll(() => {
@@ -476,6 +482,29 @@ describe('Table component test suite', () => {
         });
     });
 
+    describe('Check Tree Table', () => {
+        it('should check table item single selection', () => {
+            scrollIntoView(tableTreeExample);
+            setValue(tableTreeExample + input, 'Laptops');
+            click(tableTreeExample + buttonSearch);
+            const rowLength = getElementArrayLength(tableTreeExample + tableRow);
+            expect(rowLength).toEqual(1);
+        });
+
+        it('should check checkboxes', () => {
+            checkAllCheckbox(tableTreeExample);
+        });
+
+        it('should check expanded table row', () => {
+            scrollIntoView(tableTreeExample);
+            const arrowButtonLength = getElementArrayLength(tableTreeExample + arrowButton);
+            for (let i = 0; i < arrowButtonLength; i++) {
+                click(tableTreeExample + arrowButton, i);
+            }
+            expect(getElementArrayLength(tableTreeExample + tableRow)).toEqual(20);
+        });
+    });
+
     describe('Check Table columns visibility and order', () => {
         it('should check table item single selection', () => {
             findElementInTable(tableP13ColumnsExample, tableCellArr4);
@@ -608,29 +637,36 @@ describe('Table component test suite', () => {
     });
 
     describe('Check  Navigatable rows', () => {
-        it('should check clickable elements', () => {
+        it('should check example', () => {
             scrollIntoView(tableNavigatableRowIndicatorExample);
             click(tableNavigatableRowIndicatorExample + button);
-            expect(isElementClickable(tableNavigatableRowIndicatorExample + button, 1)).toBe(
-                true,
-                'button isnt clickable'
-            );
+            checkElArrIsClickable(tableNavigatableRowIndicatorExample + tableRow);
 
-            const rowLength = getElementArrayLength(tableNavigatableRowIndicatorExample + tableRow);
-            for (let i = 0; i < rowLength; i++) {
-                expect(isElementClickable(tableNavigatableRowIndicatorExample + tableRow, i)).toBe(
-                    true,
-                    `table row with index ${i} not clickable`
-                );
-            }
+            click(tableNavigatableRowIndicatorExample + button, 1);
+            expect(getElementClass(tableNavigatableRowIndicatorExample + tableRow, 1)).toBe(
+                'fd-table__row ng-star-inserted'
+            );
         });
     });
 
-    describe('Check placeholders', () => {
+    describe('Checks for all examples', () => {
         it('should check placeholders in all input fields', () => {
             const inputLength = getElementArrayLength(inputFields);
             for (let i = 0; i < inputLength; i++) {
                 expect(getElementPlaceholder(inputFields, i)).toBe(placeholderTestText);
+            }
+        });
+
+        it('should check clickability synchronize button', () => {
+            const buttonLength = getElementArrayLength(synchronizeButton);
+            for (let i = 0; i < buttonLength; i++) {
+                if (i === 9) {
+                    click(tableLoadingExample + button);
+                }
+                expect(isElementClickable(synchronizeButton, i)).toBe(
+                    true,
+                    `synchronize button with index ${i} not clickable`
+                );
             }
         });
     });
@@ -653,7 +689,7 @@ describe('Table component test suite', () => {
             expect(isElementClickable(playgroundExample + button, 1)).toBe(true, ' action button not clickable');
         });
 
-        it('should check table selection mode', () => {
+        it('should check table content density', () => {
             scrollIntoView(playgroundExample);
             click(playgroundExample + dropdown);
             click(optionCompact);
@@ -668,7 +704,7 @@ describe('Table component test suite', () => {
             expect(getElementClass(playgroundExample + fdpTable)).toContain('fd-table--condensed');
         });
 
-        it('should should check table content density', () => {
+        it('should should check table selection mode', () => {
             scrollIntoView(playgroundExample);
             click(playgroundExample + dropdown, 1);
             click(optionSingle);
@@ -748,6 +784,30 @@ describe('Table component test suite', () => {
     describe('Check Row custom CSS class', () => {
         it('should check table item single selection', () => {
             findElementInTable(tableRowClassExample, tableCellArr);
+        });
+    });
+
+    describe('Check Wrapping text in columns', () => {
+        it('should check table item single selection', () => {
+            findElementInTable(tableWrapExample, tableCellArr7);
+        });
+
+        it('should check alert messages', () => {
+            checkAlertMessages(tableWrapExample);
+        });
+    });
+
+    describe('Check No outer borders', () => {
+        it('should check table item single selection', () => {
+            findElementInTable(tableNoOuterBordersExample, tableCellArr);
+        });
+
+        it('should check alert messages', () => {
+            checkAlertMessages(tableNoOuterBordersExample);
+        });
+
+        it('should check alert messages', () => {
+            checkAllCheckbox(tableNoOuterBordersExample);
         });
     });
 

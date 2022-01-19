@@ -179,7 +179,7 @@ export class FormGeneratorService implements OnDestroy {
 
         if (isFunction(formItem.onchange)) {
             formControl.valueChanges.pipe(debounceTime(50), takeUntil(this._onDestroy$)).subscribe(async (value) => {
-                const obj = formItem.onchange(value, this.forms);
+                const obj = formItem.onchange(value, this.forms, formControl);
 
                 await this._getFunctionValue(obj);
             });
@@ -217,6 +217,7 @@ export class FormGeneratorService implements OnDestroy {
 
             if (formItem.transformer) {
                 const obj = formItem.transformer(formValue[i], formValue, formItem);
+
                 formValue[i] = await this._getFunctionValue(obj);
             }
 
@@ -253,17 +254,14 @@ export class FormGeneratorService implements OnDestroy {
             c.types.filter((t) => types.includes(t))
         );
 
-        for (const existingComponent of existingComponents) {
+        existingComponents.forEach((existingComponent, index) => {
             existingComponent.types = existingComponent.types.filter((t) => !types.includes(t));
-
-            const index = this._formComponentDefinitions.findIndex((c) => c.component === existingComponent.component);
-
             this._formComponentDefinitions[index] = existingComponent;
-        }
+        });
 
         this._formComponentDefinitions.push({
-            types: types,
-            component: component
+            types,
+            component
         });
 
         return true;
@@ -450,6 +448,6 @@ export class FormGeneratorService implements OnDestroy {
 
     /** @hidden */
     private _formatPasswordValue(password: string): string {
-        return '*'.repeat(password.length);
+        return '*'.repeat(password?.length);
     }
 }

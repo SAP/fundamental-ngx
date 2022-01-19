@@ -6,7 +6,7 @@ import { takeUntil } from 'rxjs/operators';
 export const DEFAULT_TRANSITION_DURATION = '150ms';
 
 export interface CarouselItemInterface {
-    getElement(): any;
+    element: HTMLElement;
     getHeight(): number;
     getWidth(): number;
 }
@@ -35,10 +35,10 @@ export interface PanEndOutput {
 })
 export class CarouselService implements OnDestroy {
     /** Event thrown when element is dragged. Emits "true" when drag starts and "false" when drag ends. */
-    readonly dragStateChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+    readonly dragStateChange$: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** Event thrown, when active element is changed */
-    readonly activeChange: EventEmitter<PanEndOutput> = new EventEmitter<PanEndOutput>();
+    readonly activeChange$: EventEmitter<PanEndOutput> = new EventEmitter<PanEndOutput>();
 
     /** Configuration for carousel */
     config: CarouselConfig;
@@ -52,18 +52,6 @@ export class CarouselService implements OnDestroy {
     /** carousel items query list */
     items: QueryList<CarouselItemInterface>;
 
-    /** @hidden */
-    private _previousActiveItem: CarouselItemInterface;
-
-    /** @hidden */
-    private _lastDistance = 0;
-
-    /** @hidden */
-    private _prePanTransitionPx = 0;
-
-    /** @hidden */
-    private _currentTransitionPx = 0;
-
     /** return current transition value in px */
     get currentTransitionPx(): number {
         return this._currentTransitionPx;
@@ -75,12 +63,20 @@ export class CarouselService implements OnDestroy {
     }
 
     /** @hidden */
-    private _elementRef: ElementRef<HTMLElement>;
+    private _lastDistance = 0;
+
+    /** @hidden */
+    private _currentTransitionPx = 0;
+
+    /** @hidden */
+    private _element: HTMLElement;
 
     /** @hidden */
     private _initialDragPosition = 0;
+
     /** @hidden */
     private _lastDragPosition = 0;
+
     /** @hidden */
     private _listenToMouseMove = false;
     /** @hidden */
@@ -99,6 +95,9 @@ export class CarouselService implements OnDestroy {
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
+
+        this.activeChange$.complete();
+        this.dragStateChange$.complete();
     }
 
     /** set initial values for the service */
@@ -108,7 +107,7 @@ export class CarouselService implements OnDestroy {
         listElementReference: ElementRef
     ): void {
         this.config = config;
-        this.setElementRef(listElementReference);
+        this.setElement(listElementReference);
         this.setItems(items);
 
         if (this.config.gestureSupport) {
@@ -122,59 +121,57 @@ export class CarouselService implements OnDestroy {
     }
 
     /** set element ref */
-    setElementRef(elementRef: ElementRef): void {
-        this._elementRef = elementRef;
+    setElement(elementRef: ElementRef): void {
+        this._element = elementRef.nativeElement;
     }
 
     /** set items and assign active item, if not already there */
     setItems(items: QueryList<CarouselItemInterface>): void {
         this.items = items;
-        const carouselArray: CarouselItemInterface[] = this.items.toArray();
+
         if (!this.active) {
-            this.active = carouselArray[0];
+            this.active = this.items.first;
         }
     }
 
     /** Change active element */
     goToItem(item: CarouselItemInterface, smooth?: boolean): void {
-        let index: number = this.getIndexOfItem(item);
+        let index = this._getIndexOfItem(item);
         if (this.config.infinite) {
             this._centerActive(index);
 
-            index = this.getIndexOfItem(item);
+            index = this._getIndexOfItem(item);
         }
 
         this._transitionToIndex(index, smooth);
-
-        this._previousActiveItem = item;
     }
 
     /** pick next element and set it active */
     pickNext(): void {
-        const carouselArray: CarouselItemInterface[] = this.items.toArray();
         if (!this.active) {
-            this.active = carouselArray[0];
+            this.active = this.items.first;
         }
-        const activeItemIndex: number = carouselArray.findIndex((item) => item === this.active);
 
-        const itemToActivate = carouselArray[activeItemIndex + 1];
+        const activeItemIndex = this._getIndexOfItem(this.active);
+        const itemToActivate = this.items.get(activeItemIndex + 1);
+
         this.goToItem(itemToActivate, true);
         this.active = itemToActivate;
     }
 
     /** pick previous element and set it active */
     pickPrevious(): void {
-        const carouselArray: CarouselItemInterface[] = this.items.toArray();
         if (!this.active) {
-            this.active = carouselArray[2];
+            this.active = this.items.get(2);
         }
-        const activeItemIndex: number = carouselArray.findIndex((item) => item === this.active);
-        let itemToActivate = carouselArray[activeItemIndex - 1];
+
+        const activeItemIndex = this._getIndexOfItem(this.active);
+        let itemToActivate = this.items.get(activeItemIndex - 1);
 
         // case where slides can move infinitely in one direction
         // handle case where on-load activeItemIndex = 0 and activeItemIndex - 1 returns undefined item from item array.
         if (!itemToActivate) {
-            itemToActivate = carouselArray[this.items.toArray().length - 1];
+            itemToActivate = this.items.last;
         }
 
         this.goToItem(itemToActivate, true);
@@ -200,13 +197,13 @@ export class CarouselService implements OnDestroy {
 
         /** Changing order of elements in QueryList and Native HTML */
         this.items.reset(array);
-        this.items.forEach((item) => item.getElement().parentNode.appendChild(item.getElement()));
+        this.items.forEach((item) => item.element.parentNode.appendChild(item.element));
 
         /**
          * For proper animation it's needed to transform elements,
          * by changing transition by amount of elements placed at top/bottom
          */
-        this._elementRef.nativeElement.style.transitionDuration = '0s';
+        this._element.style.transitionDuration = '0s';
         this._transitionCarousel(this._currentTransitionPx + this._getSize(this.items.first) * missingItems);
     }
 
@@ -214,15 +211,12 @@ export class CarouselService implements OnDestroy {
     private _transitionToIndex(index: number, smooth?: boolean): void {
         let transitionPx: number = this._getSize(this.items.first) * index;
 
-        if (smooth) {
-            this._elementRef.nativeElement.style.transitionDuration = this._getTransition();
-        } else {
-            this._elementRef.nativeElement.style.transitionDuration = '0s';
-        }
+        this._element.style.transitionDuration = smooth ? this._getTransition() : '0s';
 
         if (!this.isRtl || (this.config.vertical && this.isRtl)) {
             transitionPx = -transitionPx;
         }
+
         this._transitionCarousel(transitionPx);
     }
 
@@ -238,7 +232,7 @@ export class CarouselService implements OnDestroy {
             return this.items.first;
         }
 
-        const size: number = this._getSize(this.items.first);
+        const size = this._getSize(this.items.first);
 
         /** When scroll is after half of element, then ext one should be active */
         const halfApproached: boolean = Math.abs(this._currentTransitionPx % size) > size / 2;
@@ -247,26 +241,24 @@ export class CarouselService implements OnDestroy {
          * every element should have same width, otherwise it should be looped through all elements,
          * which is not good for performance
          */
-        let index: number = Math.ceil(Math.abs(this._currentTransitionPx / size));
+        let index = Math.ceil(Math.abs(this._currentTransitionPx / size));
 
         // When elementsAtOnce > 1, swiping should stop at last index - elementsAtOnce
         if (!this.config.infinite && this.config.elementsAtOnce > 1) {
             if (index + this.config.elementsAtOnce >= this.items.length) {
-                return this.items.toArray()[this.items.length - this.config.elementsAtOnce];
+                return this.items.get(this.items.length - this.config.elementsAtOnce);
             }
         }
 
         index = index + (halfApproached ? 0 : -1);
+        const item = this.items.get(index);
+
         /** Checking if transition went out of scope of array */
-        if (this.items.toArray()[index]) {
-            return this.items.toArray()[index];
-        } else {
-            return this.items.last;
-        }
+        return item || this.items.last;
     }
 
     /** @hidden */
-    private getIndexOfItem(item: CarouselItemInterface): number {
+    private _getIndexOfItem(item: CarouselItemInterface): number {
         return this.items.toArray().findIndex((_item) => _item === item);
     }
 
@@ -274,14 +266,14 @@ export class CarouselService implements OnDestroy {
     private _getSize(item: CarouselItemInterface): number {
         if (this.config.vertical) {
             return item.getHeight();
-        } else {
-            return item.getWidth();
         }
+
+        return item.getWidth();
     }
 
     /** @hidden */
     private _handlePan(delta: number): void {
-        const distance: number = delta - this._lastDistance;
+        const distance = delta - this._lastDistance;
 
         this._lastDistance = delta;
 
@@ -298,19 +290,19 @@ export class CarouselService implements OnDestroy {
 
         if (!this.active) {
             this.active = closestItem;
-            this.activeChange.emit({
+            this.activeChange$.emit({
                 item: closestItem,
                 after: delta < 0
             });
         } else if (this.active !== closestItem) {
             this.active = closestItem;
-            this.activeChange.emit({
+            this.activeChange$.emit({
                 item: closestItem,
                 after: delta < 0
             });
         }
 
-        this.dragStateChange.emit(false);
+        this.dragStateChange$.emit(false);
         this._lastDistance = 0;
     }
 
@@ -319,19 +311,15 @@ export class CarouselService implements OnDestroy {
      */
     private _transitionCarousel(transitionPx: number): void {
         this._currentTransitionPx = transitionPx;
+        const axis = this.config.vertical ? 'Y' : 'X';
 
-        if (this.config.vertical) {
-            this._elementRef.nativeElement.style.transform = 'translateY(' + this._currentTransitionPx + 'px)';
-        } else {
-            this._elementRef.nativeElement.style.transform = 'translateX(' + this._currentTransitionPx + 'px)';
-        }
+        this._element.style.transform = `translate${axis}(${this._currentTransitionPx}px)`;
     }
 
     /** @hidden Pam Start handler, removes transition duration, */
     private _handlePanStart(): void {
-        this._elementRef.nativeElement.style.transitionDuration = '0s';
-        this._prePanTransitionPx = this._currentTransitionPx;
-        this.dragStateChange.emit(true);
+        this._element.style.transitionDuration = '0s';
+        this.dragStateChange$.emit(true);
     }
 
     /** @hidden */
@@ -360,7 +348,7 @@ export class CarouselService implements OnDestroy {
     private _setupDragStart(): void {
         const events = ['mousedown', 'touchstart'];
 
-        this._subscribeToEvents(events, this._elementRef.nativeElement, (event) => {
+        this._subscribeToEvents(events, this._element, (event) => {
             this._listenToMouseMove = true;
             this._lastDragPosition = this._initialDragPosition = this._getDragCoordinate(event);
             this._handlePanStart();
@@ -395,7 +383,7 @@ export class CarouselService implements OnDestroy {
             if (this._dragStarted) {
                 this._handlePanEnd(this._getDraggedDelta(this._getDragCoordinate(event)));
             } else {
-                this.dragStateChange.emit(false);
+                this.dragStateChange$.emit(false);
             }
 
             this._listenToMouseMove = false;
@@ -415,6 +403,7 @@ export class CarouselService implements OnDestroy {
     /** @hidden */
     private _getDraggedDelta(offset: number): number {
         this._lastDragPosition = offset;
+
         return offset - this._initialDragPosition;
     }
 
@@ -432,7 +421,7 @@ export class CarouselService implements OnDestroy {
     }
 
     /** @hidden */
-    private _isTouchEvent(event: any): event is TouchEvent {
-        return event.touches !== undefined;
+    private _isTouchEvent(event: MouseEvent | TouchEvent): event is TouchEvent {
+        return event instanceof TouchEvent;
     }
 }

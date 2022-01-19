@@ -17,8 +17,8 @@
             (click)="onSelect(rate.value)"
         />
         <label class="fd-rating-indicator__label" [for]="rate.id" aria-hidden="true">
-            <i *ngIf="ratedIcon" class="rated" [class]="unratedIcon"></i>
-            <i *ngIf="unratedIcon" class="unrated" [class]="ratedIcon"></i>
+            <i *ngIf="ratedIcon" class="fd-rating-indicator__label-rated" [class]="unratedIcon"></i>
+            <i *ngIf="unratedIcon" class="fd-rating-indicator__label-unrated" [class]="ratedIcon"></i>
         </label>
     </ng-container>
 </div>
@@ -38,16 +38,20 @@
     placement="top"
     additionalBodyClass="fd-rating-indicator__popover"
 >
-    <div class="rate-sum-row" [class]="sizeClass" *ngFor="let rating of _ratingItems; trackBy: trackByFn">
-        <div class="fd-rating-indicator__container rates">
+    <div
+        class="fd-rating-indicator__sum-row"
+        [class]="sizeClass"
+        *ngFor="let rating of _ratingItems; trackBy: trackByFn"
+    >
+        <div class="fd-rating-indicator__container">
             <ng-container *ngFor="let rate of _rates; trackBy: trackByFn">
                 <span
                     [class.fd-rating-indicator__input-checked]="rate.value === rating.rate"
                     class="fd-rating-indicator__input"
                 ></span>
                 <label class="fd-rating-indicator__label">
-                    <i *ngIf="ratedIcon" class="rated" [class]="unratedIcon"></i>
-                    <i *ngIf="unratedIcon" class="unrated" [class]="ratedIcon"></i>
+                    <i *ngIf="ratedIcon" class="fd-rating-indicator__label-rated" [class]="unratedIcon"></i>
+                    <i *ngIf="unratedIcon" class="fd-rating-indicator__label-unrated" [class]="ratedIcon"></i>
                 </label>
             </ng-container>
         </div>
@@ -66,11 +70,11 @@
         aria-label="Reset to zero"
         role="button"
         type="radio"
-        class="fd-rating-indicator__zero-rating fd-rating-indicator__input"
+        class="fd-rating-indicator__input fd-rating-indicator__input--zero-rating"
         (click)="onSelect(0)"
         [disabled]="disabled"
         name="rating-{{ viewRatingUID }}{{ halves ? '-halves' : '' }}"
         [checked]="viewValue === 0"
     />
-    <label class="fd-rating-indicator__zero-rating fd-rating-indicator__label" aria-hidden="true"></label>
+    <label class="fd-rating-indicator__label fd-rating-indicator__label--zero-rating" aria-hidden="true"></label>
 </ng-template>

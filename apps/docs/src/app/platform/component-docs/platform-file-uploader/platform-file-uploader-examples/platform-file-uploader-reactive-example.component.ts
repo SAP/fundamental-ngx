@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormGroup, NgForm, ValidatorFn, Validators } from '@angular/forms';
+import { FormGroup, ValidatorFn, Validators } from '@angular/forms';
 
 import { FileUploaderInvalidChangeEvent, FileUploaderSelectionChangeEvent } from '@fundamental-ngx/platform/form';
 
@@ -29,7 +29,7 @@ export class PlatformFileUploaderReactiveExampleComponent {
         }
     }
 
-    onSubmit(form: NgForm): void {
+    onSubmit(): void {
         if (this.customForm.valid) {
             alert('form file Uploaded successfully');
         }

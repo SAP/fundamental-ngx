@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 
-import * as bylineSrcHtml from '!raw-loader!./examples/list-byline-standard-example/list-byline-standard-example.component.html';
-import * as bylineNavigationSrcHtml from '!raw-loader!./examples/list-byline-navigation-example/list-byline-navigation-example.component.html';
-import * as bylineBorderlessSrcHtml from '!raw-loader!./examples/list-byline-borderless-example/list-byline-borderless-example.component.html';
-import * as bylineSelectionSrcHtml from '!raw-loader!./examples/list-byline-selection-example/list-byline-selection-example.component.html';
-import * as bylineSelectionSrcTs from '!raw-loader!./examples/list-byline-selection-example/list-byline-selection-example.component.ts';
-import * as bylineButtonsTs from '!raw-loader!./examples/list-byline-button-example/list-byline-button-example.component.ts';
-import * as bylineButtonsHtml from '!raw-loader!./examples/list-byline-button-example/list-byline-button-example.component.html';
-import * as bylineInteractiveTs from '!raw-loader!./examples/list-byline-interactive-example/list-byline-interactive-example.component.ts';
-import * as bylineInteractiveHtml from '!raw-loader!./examples/list-byline-interactive-example/list-byline-interactive-example.component.html';
-import * as bylineWrapTs from '!raw-loader!./examples/list-byline-wrap-example/list-byline-wrap-example.component.ts';
-import * as bylineWrapHtml from '!raw-loader!./examples/list-byline-wrap-example/list-byline-wrap-example.component.html';
+import bylineSrcHtml from '!./examples/list-byline-standard-example/list-byline-standard-example.component.html?raw';
+import bylineNavigationSrcHtml from '!./examples/list-byline-navigation-example/list-byline-navigation-example.component.html?raw';
+import bylineBorderlessSrcHtml from '!./examples/list-byline-borderless-example/list-byline-borderless-example.component.html?raw';
+import bylineSelectionSrcHtml from '!./examples/list-byline-selection-example/list-byline-selection-example.component.html?raw';
+import bylineSelectionSrcTs from '!./examples/list-byline-selection-example/list-byline-selection-example.component.ts?raw';
+import bylineButtonsTs from '!./examples/list-byline-button-example/list-byline-button-example.component.ts?raw';
+import bylineButtonsHtml from '!./examples/list-byline-button-example/list-byline-button-example.component.html?raw';
+import bylineInteractiveTs from '!./examples/list-byline-interactive-example/list-byline-interactive-example.component.ts?raw';
+import bylineInteractiveHtml from '!./examples/list-byline-interactive-example/list-byline-interactive-example.component.html?raw';
+import bylineWrapTs from '!./examples/list-byline-wrap-example/list-byline-wrap-example.component.ts?raw';
+import bylineWrapHtml from '!./examples/list-byline-wrap-example/list-byline-wrap-example.component.html?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

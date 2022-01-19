@@ -102,7 +102,7 @@ export class P13SortingDialogComponent implements Resettable, OnInit {
     /** Confirm changes and close dialog */
     confirm(): void {
         const collectionSort = this._getCollectionSortFromSortRules(this._getUniqueRules(this.rules));
-        const result: SortDialogResultData = { collectionSort: collectionSort };
+        const result: SortDialogResultData = { collectionSort };
         this.dialogRef.close(result);
     }
 
@@ -174,7 +174,7 @@ export class P13SortingDialogComponent implements Resettable, OnInit {
         return rules.filter(this._isRuleValid).map(
             ({ columnKey, direction }): CollectionSort => ({
                 field: columnKey,
-                direction: direction
+                direction
             })
         );
     }

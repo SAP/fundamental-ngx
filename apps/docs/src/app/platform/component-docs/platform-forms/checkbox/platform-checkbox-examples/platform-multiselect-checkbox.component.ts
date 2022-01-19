@@ -19,11 +19,11 @@ export class PlatformCozyChekboxExampleComponent {
     form3 = new FormGroup({});
     form3data = new Form3data(['faraday', 'edison']);
 
-    public checkedChangeFunction(event: any): void {}
+    public checkedChangeFunction(): void {}
 
-    public indeterminateChangeFunction(event: any): void {}
+    public indeterminateChangeFunction(): void {}
 
-    public changeFunction(event: any): void {}
+    public changeFunction(): void {}
 }
 class Form1data {
     constructor(public einstein: string[], public newton: string[]) {}

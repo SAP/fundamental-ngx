@@ -112,7 +112,7 @@ export class ExperimentalSwitchComponent implements ControlValueAccessor, OnInit
     onChange: (value: boolean) => void = () => {};
 
     /** @hidden */
-    onTouched = () => {};
+    onTouched = (): void => {};
 
     constructor(
         private readonly _changeDetectorRef: ChangeDetectorRef,

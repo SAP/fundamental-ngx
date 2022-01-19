@@ -112,7 +112,7 @@ export class WizardGeneratorStepComponent implements OnDestroy {
     async onFormCreated(form: DynamicFormGroup, key: string): Promise<void> {
         this._forms[key] = {
             title: this.item.formGroups.find((g) => g.id === key)?.title as string,
-            form: form
+            form
         };
 
         this._trackDependencyFieldsChanges(form, key);

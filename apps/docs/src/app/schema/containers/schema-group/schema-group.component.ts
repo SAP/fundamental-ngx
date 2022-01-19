@@ -35,7 +35,7 @@ export class SchemaGroupComponent implements OnInit {
         for (const key in controls) {
             if (Object.prototype.hasOwnProperty.call(controls, key)) {
                 this.controls.push({
-                    key: key,
+                    key,
                     control: controls[key],
                     type: this.properties[key].type,
                     enum: this.properties[key].enum

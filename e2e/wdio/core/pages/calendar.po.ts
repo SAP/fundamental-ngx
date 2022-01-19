@@ -34,7 +34,7 @@ export class CalendarPo extends CoreBaseComponentPo {
     weekendDays = '.fd-calendar__item--weekend';
     disabledDays = '.fd-calendar__item.is-disabled';
     disabledWeekendDays = this.weekendDays + '.is-disabled';
-    calendarItem = ' td.fd-calendar__item';
+    calendarItem = ' td.fd-calendar__item:not(.hidden-day)';
     selectionOutput = '> div';
     calendarOptions = 'fd-checkbox label';
     okBtn = 'fd-button-bar' + this.button;

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
-import * as panelEdgeBleedSrc from '!raw-loader!./examples/layout-panel-edge-bleed-example.component.html';
-import * as panelEdgeBleedSrcTs from '!raw-loader!./examples/layout-panel-edge-bleed-example.component.ts';
-import * as panelSrc from '!raw-loader!./examples/layout-panel-example.component.html';
+import panelEdgeBleedSrc from '!./examples/layout-panel-edge-bleed-example.component.html?raw';
+import panelEdgeBleedSrcTs from '!./examples/layout-panel-edge-bleed-example.component.ts?raw';
+import panelSrc from '!./examples/layout-panel-example.component.html?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

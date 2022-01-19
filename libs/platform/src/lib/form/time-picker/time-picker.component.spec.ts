@@ -111,8 +111,6 @@ describe('PlatformTimePickerComponent', () => {
 
         await wait(fixture);
 
-        console.log(component.result);
-
         expect(component.result).toEqual({ timePicker: time });
     });
 

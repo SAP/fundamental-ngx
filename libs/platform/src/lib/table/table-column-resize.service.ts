@@ -31,7 +31,7 @@ export class TableColumnResizeService implements OnDestroy {
     private _columnsWidthChangeSourceMap = new Map<string, ColumnWidthChangeSource>();
 
     /** @hidden */
-    private _columnsCellMap = new Map<string, ElementRef<HTMLTableDataCellElement>>();
+    private _columnsCellMap = new Map<string, ElementRef<HTMLTableDataCellElement>[]>();
 
     /** @hidden */
     private _visibleColumnNames: string[] = [];
@@ -220,7 +220,21 @@ export class TableColumnResizeService implements OnDestroy {
 
     /** Register column's cell to get its dimensions in further. */
     registerColumnCell(columnName: string, cellElRef: ElementRef): void {
-        this._columnsCellMap.set(columnName, cellElRef);
+        const columnCells = this._columnsCellMap.get(columnName) || [];
+        this._columnsCellMap.set(columnName, [cellElRef, ...columnCells]);
+    }
+
+    unregisterColumnCell(columnName: string, cellElRef: ElementRef): void {
+        const columnCells = this._columnsCellMap.get(columnName) || [];
+        const elmIndex = columnCells.findIndex((e) => e.nativeElement === cellElRef.nativeElement);
+
+        if (elmIndex === -1) {
+            return;
+        }
+
+        columnCells.splice(elmIndex, 1);
+
+        this._columnsCellMap.set(columnName, columnCells);
     }
 
     /** Register the fact column width input was changed */
@@ -286,8 +300,12 @@ export class TableColumnResizeService implements OnDestroy {
 
     /** @hidden */
     private _calculateColumnsWidth(): void {
-        this._columnsCellMap.forEach((cell, columnName) => {
-            const { width } = cell.nativeElement.getBoundingClientRect();
+        this._columnsCellMap.forEach((cells, columnName) => {
+            const cellsWithWidth = cells.filter((c) => c.nativeElement.clientWidth > 0);
+            if (cellsWithWidth.length === 0) {
+                return;
+            }
+            const { width } = cellsWithWidth[0].nativeElement.getBoundingClientRect();
             this._columnsWidthMap.set(columnName, width);
         });
     }

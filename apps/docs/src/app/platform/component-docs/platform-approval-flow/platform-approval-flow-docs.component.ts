@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
-import * as approvalFlowSrc from '!raw-loader!./platform-approval-flow-examples/platform-approval-flow-example.component.html';
-import * as approvalFlowTsSrc from '!raw-loader!./platform-approval-flow-examples/platform-approval-flow-example.component.ts';
+import approvalFlowSrc from '!./platform-approval-flow-examples/platform-approval-flow-example.component.html?raw';
+import approvalFlowTsSrc from '!./platform-approval-flow-examples/platform-approval-flow-example.component.ts?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

@@ -1,0 +1,107 @@
+<fd-docs-section-title id="basic" componentName="smart-filter-bar">Simple example</fd-docs-section-title>
+<description>
+    <p>The <b>Smart Filter Bar</b> component analyzes provided data source with the help of two directives:</p>
+    <ul>
+        <li>
+            <code>fdp-smart-filter-bar-subject</code> is used to define subject component which provides the data
+            source;
+        </li>
+        <li>
+            <code>fdp-smart-filter-bar-field-definition</code> is used to provide configuration metadata for the data
+            source fields.
+        </li>
+    </ul>
+    <p>
+        Default set of selected filters can be defined by using <code>[defaultSelected]="true"</code> input properties
+        for each <code>fdp-smart-filter-bar-field-definition</code> directive.
+    </p>
+    <p>
+        By default, conditions for one field are combined with <b>or</b> operator. This can be changed by providing
+        <code>conditionStrategy="and"</code> input property for
+        <code>fdp-smart-filter-bar-field-definition</code> directive
+    </p>
+</description>
+<component-example>
+    <fdp-platform-smart-filter-bar-basic-example></fdp-platform-smart-filter-bar-basic-example>
+</component-example>
+<code-example [exampleFiles]="sfbBasic"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="custom-datasource" componentName="smart-filter-bar"
+    >Custom data provider example</fd-docs-section-title
+>
+<description>
+    <p>
+        Smart Filter Bar supports custom data providers that are based on <code>TableDataProvider</code> or
+        <code>ObservableTableDataProvider</code>.
+    </p>
+    <p>
+        These base classes already implement filtering and searching, yet, developers can override those methods to
+        achieve desired behaviour.
+    </p>
+</description>
+<component-example>
+    <fdp-smart-filter-bar-observable-example></fdp-smart-filter-bar-observable-example>
+</component-example>
+<code-example [exampleFiles]="sfbCustomDataSource"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="custom-filter" componentName="smart-filter-bar">
+    Custom filters example
+</fd-docs-section-title>
+<description>
+    <p>Developers can extend Smart Filter Bar's set of filters by providing their custom components.</p>
+    <p>
+        Smart filter bar uses Form Generator component for rendering the forms, so the process of creating custom
+        filters will be similar to the creation of the custom controls for Form Generator.
+    </p>
+    <p>Developers can define following custom properties of the filter:</p>
+    <ul>
+        <li><code>conditionComponent</code>: Used in <code>Define Conditions</code> dialog.</li>
+        <li><code>conditionRenderer</code>: Used in <code>Smart filter bar</code> form.</li>
+        <li><code>filterStrategies</code>: Used in <code>Define Conditions</code> dialog.</li>
+        <li>
+            <code>valueTransformer</code>: Used for transforming raw control value into
+            <code>SmartFilterBarCondition</code> interface.
+        </li>
+        <li>
+            <code>valueRenderer</code>: Used for transforming raw control value into human-readable string which is
+            displayed in Smart Filter Bar.
+        </li>
+    </ul>
+</description>
+<component-example>
+    <fdp-platform-smart-filter-bar-custom-filter-example></fdp-platform-smart-filter-bar-custom-filter-example>
+</component-example>
+<code-example [exampleFiles]="sfbCustomFilters"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="custom-labels" componentName="smart-filter-bar">
+    Smart filter bar with custom labels
+</fd-docs-section-title>
+<description>
+    <p>
+        Developers can easily change Condition operator and Filter Visibility category labels by providing appropriate
+        input properties.
+    </p>
+</description>
+<component-example>
+    <fdp-platform-smart-filter-bar-custom-labels-example></fdp-platform-smart-filter-bar-custom-labels-example>
+</component-example>
+<code-example [exampleFiles]="sfbCustomLabels"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="dynamic-page" componentName="smart-filter-bar">
+    Smart filter bar in Dynamic Page
+</fd-docs-section-title>
+<description>
+    <p>This example shows how to embed Smart Filter Bar into Dynamic Page component.</p>
+</description>
+<component-example>
+    <fdp-platform-smart-filter-bar-dynamic-page-example></fdp-platform-smart-filter-bar-dynamic-page-example>
+</component-example>
+<code-example [exampleFiles]="sfbDynamicPage"></code-example>

@@ -147,15 +147,15 @@ describe('TableComponent internal', () => {
 
         component._columnHeaderSortBy(field, direction);
 
-        expect(serviceSortSpy).toHaveBeenCalledWith([{ field: field, direction: direction }]);
+        expect(serviceSortSpy).toHaveBeenCalledWith([{ field, direction }]);
     });
 
     it('filter by cell header method should call TableService.addFilters with a proper params', () => {
         const field = 'status';
         const value = 'valid';
         const payload: CollectionStringFilter = {
-            field: field,
-            value: value,
+            field,
+            value,
             strategy: FILTER_STRING_STRATEGY.CONTAINS,
             exclude: false
         };
@@ -168,7 +168,7 @@ describe('TableComponent internal', () => {
 
     it('group by cell header method should call TableService.setGroups with a proper params', () => {
         const field = 'price.value';
-        const payload: CollectionGroup[] = [{ field: field, direction: SortDirection.NONE, showAsColumn: true }];
+        const payload: CollectionGroup[] = [{ field, direction: SortDirection.NONE, showAsColumn: true }];
         const serviceGroupSpy = spyOn(tableService, 'setGroups').and.stub();
 
         component._columnHeaderGroupBy(field);
@@ -259,7 +259,7 @@ describe('TableComponent internal', () => {
         let tableBodyRows: DebugElement[] = [];
         let tableRowCells2DArray: DebugElement[][] = [];
 
-        const calculateTableElementsMetaData = () => {
+        const calculateTableElementsMetaData = (): void => {
             tableHeaderCells = fixture.debugElement.queryAll(
                 By.css('.fdp-table__header .fd-table__row .fd-table__cell')
             );
@@ -437,8 +437,9 @@ describe('TableComponent internal', () => {
                     calculateTableElementsMetaData();
                 });
 
-                const getSelectionCheckbox = (selectionCell: DebugElement) => selectionCell.query(By.css('input'));
-                const getSelectAllCheckbox = () => getSelectionCheckbox(tableHeaderCells[0]);
+                const getSelectionCheckbox = (selectionCell: DebugElement): DebugElement =>
+                    selectionCell.query(By.css('input'));
+                const getSelectAllCheckbox = (): DebugElement => getSelectionCheckbox(tableHeaderCells[0]);
 
                 it('should select by clicking on unselected cell', () => {
                     tableComponent._tableRowsVisible[0].checked = false;
@@ -914,12 +915,12 @@ describe('TableComponent internal', () => {
         let tableBodyRows: DebugElement[] = [];
         let tableBodyContainer: DebugElement;
 
-        const calculateTableElementsMetaData = () => {
+        const calculateTableElementsMetaData = (): void => {
             tableBodyRows = fixture.debugElement.queryAll(By.css('.fdp-table__body .fd-table__row'));
             tableBodyContainer = fixture.debugElement.query(By.css('.fdp-table__body'));
         };
 
-        const tableBodyScrollTop = async (scrollTop) => {
+        const tableBodyScrollTop = async (scrollTop): Promise<void> => {
             const container = tableBodyContainer.nativeElement as HTMLElement;
             container.scrollTop = scrollTop;
             await new Promise((resolve) => setTimeout(() => resolve(null), 200));
@@ -1049,7 +1050,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
         let tableBodyRows: DebugElement[] = [];
         let tableRowTogglerCellsArray: DebugElement[] = [];
 
-        const calculateTableElementsMetaData = () => {
+        const calculateTableElementsMetaData = (): void => {
             tableBodyRows = fixture.debugElement.queryAll(By.css('.fdp-table__body .fd-table__row'));
             tableRowTogglerCellsArray = fixture.debugElement.queryAll(
                 By.css('.fdp-table__body .fd-table__row .fd-table__cell--expand')

@@ -140,7 +140,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
     private _previousState: fdCheckboxTypes;
 
     /** @hidden Reference to callback provided by FormControl.*/
-    public onTouched = () => {};
+    public onTouched = (): void => {};
     /** @hidden Reference to callback provided by FormControl.*/
     public onValueChange: (value: any) => void = () => {};
 

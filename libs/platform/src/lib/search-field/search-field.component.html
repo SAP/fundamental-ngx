@@ -85,7 +85,7 @@
             <span
                 class="fd-input-group__addon fd-input-group__addon--button"
                 [class.fd-input-group__addon--compact]="contentDensity === 'compact'"
-                *ngIf="!isLoading && (_isRefresh || _isSearchDone)"
+                *ngIf="!disableRefresh && !isLoading && (_isRefresh || _isSearchDone)"
             >
                 <button
                     i18n-title="@@platformSearchFieldSynchronizeButtonTitle"

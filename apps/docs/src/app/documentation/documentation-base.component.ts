@@ -1,5 +1,8 @@
 import { Directive, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
-import { SectionInterface } from '../documentation/core-helpers/sections-toolbar/section.interface';
+import {
+    SectionInterface,
+    SectionInterfaceContent
+} from '../documentation/core-helpers/sections-toolbar/section.interface';
 import { SectionsToolbarComponent } from '../documentation/core-helpers/sections-toolbar/sections-toolbar.component';
 import { BehaviorSubject } from 'rxjs';
 
@@ -13,15 +16,15 @@ export class DocumentationBaseComponent implements OnInit {
 
     sideCollapsed = new BehaviorSubject(false);
 
-    guides = [];
+    guides: SectionInterfaceContent[] = [];
 
-    components = [];
+    components: SectionInterfaceContent[] = [];
 
-    layouts = [];
+    layouts: SectionInterfaceContent[] = [];
 
-    utilities = [];
+    utilities: SectionInterfaceContent[] = [];
 
-    adapters = [];
+    adapters: SectionInterfaceContent[] = [];
 
     sections: SectionInterface[] = [];
 

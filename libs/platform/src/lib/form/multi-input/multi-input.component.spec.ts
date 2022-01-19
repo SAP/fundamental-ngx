@@ -9,6 +9,7 @@ import { StandardListItemModule } from '@fundamental-ngx/platform/list';
 import { FdpFormGroupModule } from '../form-group/fdp-form.module';
 import { PlatformMultiInputComponent } from './multi-input.component';
 import { PlatformMultiInputModule } from './multi-input.module';
+import { runValueAccessorTests } from 'ngx-cva-test-suite';
 
 @Component({
     selector: 'fdp-mulit-input-test',
@@ -86,4 +87,26 @@ describe('PlatformMultiInputComponent', () => {
         const toggleButton = fixture.nativeElement.querySelectorAll('.fd-token');
         expect(toggleButton.length).toBe(1);
     });
+});
+
+const MULTI_INPUT_IDENTIFIER = 'platform-multi-input-unit-test';
+
+runValueAccessorTests({
+    component: PlatformMultiInputComponent,
+    testModuleMetadata: {
+        imports: [PlatformMultiInputModule],
+        providers: [DynamicComponentService]
+    },
+    additionalSetup: (fixture, done) => {
+        fixture.componentInstance.id = MULTI_INPUT_IDENTIFIER;
+        fixture.componentInstance.name = MULTI_INPUT_IDENTIFIER;
+        done();
+    },
+    supportsOnBlur: true,
+    nativeControlSelector: `input[id="${MULTI_INPUT_IDENTIFIER}"]`,
+    internalValueChangeSetter: (fixture, value) => {
+        fixture.componentInstance.value = value;
+    },
+    getComponentValue: (fixture) => fixture.componentInstance.value,
+    getValues: () => [['a'], ['b'], ['c']]
 });

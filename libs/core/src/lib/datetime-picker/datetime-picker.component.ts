@@ -16,7 +16,7 @@ import {
     OnChanges,
     AfterViewInit
 } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
+import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
@@ -127,7 +127,7 @@ export class DatetimePickerComponent<D>
         this._popoverFormMessage.triggers = triggers;
     }
     /** @hidden */
-    _messageTriggers: string[] = ['mouseenter', 'mouseleave'];
+    _messageTriggers: string[] = ['focusin', 'focusout'];
 
     /**
      * Whether the time component shows minutes.
@@ -289,7 +289,7 @@ export class DatetimePickerComponent<D>
 
     /** Indicates when datetime input is in invalid state. */
     get isInvalidDateInput(): boolean {
-        return this._isInvalidDateInput;
+        return this._isInvalidDateInput && this._touched;
     }
 
     /** @hidden Reference to the inner calendar component. */
@@ -339,10 +339,13 @@ export class DatetimePickerComponent<D>
     private _subscriptions = new Subscription();
 
     /** @hidden */
+    private _touched = false;
+
+    /** @hidden */
     onChange: (value: D) => void = () => {};
 
     /** @hidden */
-    onTouched = () => {};
+    onTouched = (): void => {};
 
     /**
      * Function used to disable certain dates in the calendar.
@@ -422,13 +425,18 @@ export class DatetimePickerComponent<D>
     /** @hidden */
     ngAfterViewInit(): void {
         this._InitialiseVariablesInMessageService();
+        // update bindings after rendering
+        // is needed to preperly reflect error state
+        setTimeout(() => {
+            this._changeDetRef.markForCheck();
+        });
     }
 
     /**
      * @hidden
      * Function that implements Validator Interface, adds validation support for forms
      */
-    validate(control: AbstractControl): {
+    validate(): {
         [key: string]: any;
     } {
         return this.isCurrentModelValid() && !this._isInvalidDateInput
@@ -459,6 +467,7 @@ export class DatetimePickerComponent<D>
 
     /** Method that handles blur events on datetime picker input */
     handleOnTouched(): void {
+        this._touched = true;
         this.onTouched();
         this.touched.next();
     }

@@ -37,15 +37,15 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
     items: ExampleItem[] = [...ITEMS];
     totalItems = ITEMS.length;
 
-    fetch(tableState: TableState): Observable<ExampleItem[]> {
+    fetch(tableState?: TableState): Observable<ExampleItem[]> {
         this.items = [...ITEMS];
 
         // apply searching
-        if (tableState.searchInput) {
-            this.items = this.search(tableState);
+        if (tableState?.searchInput) {
+            this.items = this.search(this.items, tableState);
         }
         // apply sorting
-        if (tableState.sortBy) {
+        if (tableState?.sortBy) {
             this.items = this.sort(tableState);
         }
 
@@ -54,8 +54,7 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
         return of(this.items);
     }
 
-    private search({ searchInput, columns }: TableState): ExampleItem[] {
-        const items = this.items;
+    search(items: ExampleItem[], { searchInput, columns }: TableState): ExampleItem[] {
         const searchText = searchInput?.text || '';
         const keysToSearchBy = columns;
 
@@ -94,7 +93,7 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
 
 /* UTILS */
 
-const sort = <T extends Record<string, any>>(a: T, b: T, key?: string) => {
+const sort = <T extends Record<string, any>>(a: T, b: T, key?: string): number => {
     if (key) {
         a = getNestedValue(key, a);
         b = getNestedValue(key, b);

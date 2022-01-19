@@ -48,7 +48,7 @@ export class VhdDataProvider<R> extends DataProvider<R> {
     fetch(params: Map<string, string>): Observable<R[]> {
         let data = this.values;
         const arrayParams = Array.from(params);
-        const filterFn = (row: R) => {
+        const filterFn = (row: R): boolean => {
             const rowEntries = Object.entries(row) as string[][];
             return arrayParams.every(([key, value]) => {
                 if (key === '*') {

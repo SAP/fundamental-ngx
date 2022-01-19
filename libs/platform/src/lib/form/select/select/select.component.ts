@@ -62,6 +62,10 @@ export class SelectComponent extends BaseSelect implements AfterViewInit, AfterV
         this.setValue(newValue);
     }
 
+    /** Should select be inlined. */
+    @Input()
+    inline = true;
+
     @ViewChild(CoreSelect, { static: true })
     select: CoreSelect;
 

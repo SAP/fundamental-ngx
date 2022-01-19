@@ -87,7 +87,7 @@ export class WizardCustomizableExampleComponent {
 
     // Handle focus on key press
     /** @hidden */
-    handleFocus(event: KeyboardEvent, index: number) {
+    handleFocus(event: KeyboardEvent, index: number): void {
         this._wizardService.progressBarKeyHandler(event, this.steps, index);
     }
 }

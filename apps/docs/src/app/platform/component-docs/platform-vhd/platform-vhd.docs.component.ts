@@ -1,23 +1,23 @@
 import { Component } from '@angular/core';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
-import * as basicVhdHtml from '!raw-loader!./platform-vhd-examples/platform-vhd-basic-example.component.html';
-import * as basicVhdTs from '!raw-loader!./platform-vhd-examples/platform-vhd-basic-example.component.ts';
+import basicVhdHtml from '!./platform-vhd-examples/platform-vhd-basic-example.component.html?raw';
+import basicVhdTs from '!./platform-vhd-examples/platform-vhd-basic-example.component.ts?raw';
 
-import * as strategyLabelsVhdHtml from '!raw-loader!./platform-vhd-examples/platform-vhd-strategy-labels-example.component.html';
-import * as strategyLabelsVhdTs from '!raw-loader!./platform-vhd-examples/platform-vhd-strategy-labels-example.component.ts';
+import strategyLabelsVhdHtml from '!./platform-vhd-examples/platform-vhd-strategy-labels-example.component.html?raw';
+import strategyLabelsVhdTs from '!./platform-vhd-examples/platform-vhd-strategy-labels-example.component.ts?raw';
 
-import * as tokenVhdHtml from '!raw-loader!./platform-vhd-examples/platform-vhd-token-example.component.html';
-import * as tokenVhdTs from '!raw-loader!./platform-vhd-examples/platform-vhd-token-example.component.ts';
+import tokenVhdHtml from '!./platform-vhd-examples/platform-vhd-token-example.component.html?raw';
+import tokenVhdTs from '!./platform-vhd-examples/platform-vhd-token-example.component.ts?raw';
 
-import * as inputVhdHtml from '!raw-loader!./platform-vhd-examples/platform-vhd-input-example.component.html';
-import * as inputVhdTs from '!raw-loader!./platform-vhd-examples/platform-vhd-input-example.component.ts';
+import inputVhdHtml from '!./platform-vhd-examples/platform-vhd-input-example.component.html?raw';
+import inputVhdTs from '!./platform-vhd-examples/platform-vhd-input-example.component.ts?raw';
 
-import * as multiInputVhdHtml from '!raw-loader!./platform-vhd-examples/platform-vhd-multi-input-example.component.html';
-import * as multiInputVhdTs from '!raw-loader!./platform-vhd-examples/platform-vhd-multi-input-example.component.ts';
+import multiInputVhdHtml from '!./platform-vhd-examples/platform-vhd-multi-input-example.component.html?raw';
+import multiInputVhdTs from '!./platform-vhd-examples/platform-vhd-multi-input-example.component.ts?raw';
 
-import * as mobileVhdHtml from '!raw-loader!./platform-vhd-examples/platform-vhd-mobile-example.component.html';
-import * as mobileVhdTs from '!raw-loader!./platform-vhd-examples/platform-vhd-mobile-example.component.ts';
+import mobileVhdHtml from '!./platform-vhd-examples/platform-vhd-mobile-example.component.html?raw';
+import mobileVhdTs from '!./platform-vhd-examples/platform-vhd-mobile-example.component.ts?raw';
 
 @Component({
     selector: 'app-platform-vhd',

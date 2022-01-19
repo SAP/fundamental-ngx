@@ -18,8 +18,6 @@
     "@angular/forms": "ANGULAR_VER_PLACEHOLDER",
     "@angular/animations": "ANGULAR_VER_PLACEHOLDER",
     "@angular/router": "ANGULAR_VER_PLACEHOLDER",
-    "fast-deep-equal": "FAST_DEEP_EQUAL_VER_PLACEHOLDER",
-    "lodash-es": "LODASH_ES_VER_PLACEHOLDER",
     "rxjs": "RXJS_VER_PLACEHOLDER"
   },
   "dependencies": {
@@ -29,6 +27,8 @@
     "focus-visible": "FOCUSVISIBLE_VER_PLACEHOLDER",
     "fundamental-styles": "FDSTYLES_VER_PLACEHOLDER",
     "@fundamental-styles/fn": "FDNSTYLES_VER_PLACEHOLDER",
+    "fast-deep-equal": "FAST_DEEP_EQUAL_VER_PLACEHOLDER",
+    "lodash-es": "LODASH_ES_VER_PLACEHOLDER",
     "tslib": "^2.0.0"
   }
 }

@@ -189,7 +189,7 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
             this.ngZone.runOutsideAngular(() => {
                 setTimeout(() => {
                     if (this.mousePersist) {
-                        const wait = () => {
+                        const wait = (): void => {
                             if (this.mouseInAlert === true) {
                                 setTimeout(wait, 500);
                             } else {

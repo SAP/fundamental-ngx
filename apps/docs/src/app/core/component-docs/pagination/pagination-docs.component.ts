@@ -2,15 +2,15 @@ import { Component } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
-import * as paginationSrc from '!raw-loader!./examples/pagination-example.component.ts';
+import paginationSrc from '!./examples/pagination-example.component.ts?raw';
 
-import * as paginationShowingSrc from '!raw-loader!./examples/pagination-showing-example.component.ts';
+import paginationShowingSrc from '!./examples/pagination-showing-example.component.ts?raw';
 
-import * as paginationPerPageHtml from '!raw-loader!./examples/pagination-per-page/pagination-per-page-example.component.html';
-import * as paginationPerPageTs from '!raw-loader!./examples/pagination-per-page/pagination-per-page-example.component.ts';
+import paginationPerPageHtml from '!./examples/pagination-per-page/pagination-per-page-example.component.html?raw';
+import paginationPerPageTs from '!./examples/pagination-per-page/pagination-per-page-example.component.ts?raw';
 
-import * as paginationMobileHtml from '!raw-loader!./examples/pagination-mobile/pagination-mobile-example.component.html';
-import * as paginationMobileTs from '!raw-loader!./examples/pagination-mobile/pagination-mobile-example.component.ts';
+import paginationMobileHtml from '!./examples/pagination-mobile/pagination-mobile-example.component.html?raw';
+import paginationMobileTs from '!./examples/pagination-mobile/pagination-mobile-example.component.ts?raw';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 

@@ -38,7 +38,8 @@ describe('Multi input test suite', () => {
         compactExampleTokens,
         errorMessage,
         declineButton,
-        listitems
+        listitems,
+        reactiveExample
     } = multiInputPage;
 
     beforeAll(() => {
@@ -219,6 +220,10 @@ describe('Multi input test suite', () => {
 
     it('should check validation on empty required field', () => {
         scrollIntoView(activeInputs, 7);
+        click(activeInputs, 7);
+
+        // should trigger blur first
+        click(reactiveExample);
         click(activeInputs, 7);
 
         expect(waitForElDisplayed(validationPopover)).toBe(true);
