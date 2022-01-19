@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.281 (2022-01-19)
+
+
+### Features
+
+* **core:** illustrated message derive styles from styles lib ([#7547](https://github.com/SAP/fundamental-ngx/issues/7547)) ([3b74ad8](https://github.com/SAP/fundamental-ngx/commit/3b74ad8fa57a4e3b8f2de2695dfabeed7957e775))
+
 ## 0.33.0-rc.280 (2022-01-19)
 
 
