@@ -326,6 +326,7 @@
                                             [compact]="contentDensity | isCompactDensity"
                                             labelClass="fd-table__checkbox-label"
                                             [ngModel]="row.checked"
+                                            [disabled]="row.state === 'new'"
                                             (ngModelChange)="_toggleSelectableRow(row)"
                                         ></fd-checkbox>
                                     </td>
@@ -348,7 +349,7 @@
                                 [attr.data-nesting-level]="colIdx === 0 ? row.level + 1 : null"
                                 [tabindex]="_isTreeRowFirstCell(colIdx, row) ? 0 : -1"
                                 [focusable]="_isTreeRowFirstCell(colIdx, row)"
-                                (click)="_isTreeRowFirstCell(colIdx, row) && _toggleGroupRow(row)"
+                                (click)="_onCellClick(colIdx, row)"
                                 (keyup.enter)="_isTreeRowFirstCell(colIdx, row) && _toggleGroupRow(row)"
                             >
                                 <div fd-table-text [noWrap]="column.noWrap">
@@ -359,18 +360,44 @@
                                         aria-hidden="true"
                                     ></span>
 
-                                    <ng-container *ngIf="column?.columnCellTemplate; else defaultTableCellTemplate">
-                                        <ng-container
-                                            *ngTemplateOutlet="
-                                                column.columnCellTemplate;
-                                                context: { $implicit: row.value }
-                                            "
-                                        ></ng-container>
+                                    <ng-container *ngIf="row.state === 'readonly'; else editModeCell">
+                                        <ng-container *ngIf="column?.columnCellTemplate; else defaultTableCellTemplate">
+                                            <ng-container
+                                                *ngTemplateOutlet="
+                                                    column.columnCellTemplate;
+                                                    context: { $implicit: row.value }
+                                                "
+                                            ></ng-container>
+                                        </ng-container>
+
+                                        <ng-template #defaultTableCellTemplate>{{
+                                            row?.value | valueByPath: column.key
+                                        }}</ng-template>
                                     </ng-container>
 
-                                    <ng-template #defaultTableCellTemplate>{{
-                                        row?.value | valueByPath: column.key
-                                    }}</ng-template>
+                                    <ng-template #editModeCell>
+                                        <ng-container
+                                            *ngIf="
+                                                column?.editableColumnCellTemplate;
+                                                else defaultEditableTableCellTemplate
+                                            "
+                                        >
+                                            <ng-container
+                                                *ngTemplateOutlet="
+                                                    column.editableColumnCellTemplate;
+                                                    context: { $implicit: row.value }
+                                                "
+                                            ></ng-container>
+                                        </ng-container>
+
+                                        <ng-template #defaultEditableTableCellTemplate>
+                                            <fdp-table-editable-cell
+                                                [row]="row"
+                                                [column]="column"
+                                                [columnValue]="row?.value | valueByPath: column.key"
+                                            ></fdp-table-editable-cell>
+                                        </ng-template>
+                                    </ng-template>
                                 </div>
                             </td>
 

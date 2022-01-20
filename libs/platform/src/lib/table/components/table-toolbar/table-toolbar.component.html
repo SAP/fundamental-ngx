@@ -26,6 +26,36 @@
             (cancelSearch)="submitSearch($event)"
         ></fdp-search-field>
 
+        <ng-container *ngIf="editMode !== 'none'">
+            <fdp-button
+                label="Create"
+                i18n-label="@@platformTableToolbarActionButtonCreate"
+                [contentDensity]="size"
+                (click)="_addRow()"
+            ></fdp-button>
+            <ng-container *ngIf="_showSaveButton">
+                <fdp-button
+                    label="Save"
+                    i18n-label="@@platformTableToolbarActionButtonSave"
+                    [contentDensity]="size"
+                    *ngIf="_showSaveButton"
+                    (click)="_saveRows()"
+                ></fdp-button>
+                <fd-toolbar-separator fd-toolbar-item></fd-toolbar-separator>
+                <fdp-button
+                    label="Cancel"
+                    i18n-label="@@platformTableToolbarActionButtonCancel"
+                    [contentDensity]="size"
+                    (click)="_cancelEditing()"
+                    buttonType="transparent"
+                ></fdp-button>
+            </ng-container>
+            <fd-toolbar-separator
+                fd-toolbar-item
+                *ngIf="tableToolbarActionsComponent || sortable || filterable || groupable || columns"
+            ></fd-toolbar-separator>
+        </ng-container>
+
         <ng-container *ngIf="tableToolbarActionsComponent">
             <ng-container *ngTemplateOutlet="tableToolbarActionsComponent.contentTemplateRef"></ng-container>
         </ng-container>

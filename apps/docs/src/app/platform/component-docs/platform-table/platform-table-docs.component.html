@@ -422,6 +422,43 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="basic-add-rows" componentName="table"
+    >Dynamically adding rows to the table</fd-docs-section-title
+>
+<description>
+    <p>
+        Table component supports of adding new rows to it by providing user with new row with form controls to define
+        row columns values.
+    </p>
+    <p>
+        To enable adding new rows "on the fly", provide <code>[editMode]="'inline'"</code> input property for
+        <code>fdp-table-toolbar</code> component.
+    </p>
+    <p>
+        WHen new row added, Table Component tries to generate empty object based on columns definitions. If this object
+        needs to be more sophisticated, developers can pass <code>[editableRowSkeleton]</code> property with configured
+        empty row object.
+    </p>
+    <p>By default, editable cell renders form control based on the column <code>[dataType]</code> input property:</p>
+    <ul>
+        <li><b>Default</b>: text input</li>
+        <li><b>Number</b>: number input</li>
+        <li><b>Boolean</b>: switch</li>
+        <li><b>Date</b>: date picker</li>
+    </ul>
+    <p>
+        If you want to render different form control for a specific column, you need to provide a custom template
+        with<code>*fdpEditableCellDef</code> directive.
+    </p>
+</description>
+<component-example>
+    <fdp-platform-table-editable-rows-example></fdp-platform-table-editable-rows-example>
+</component-example>
+
+<code-example [exampleFiles]="editableRowsFiles"></code-example>
+
+<separator></separator>
+
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
     <fdp-table
         [dataSource]="dataSource"

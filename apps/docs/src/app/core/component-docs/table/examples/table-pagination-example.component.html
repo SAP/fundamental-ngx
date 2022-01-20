@@ -27,6 +27,7 @@
                         [itemsPerPageOptions]="itemsPerPageOptions"
                         [currentPage]="currentPage"
                         (pageChangeStart)="newPageClicked($event)"
+                        (itemsPerPageChange)="itemsPerPageChange($event)"
                         ariaLabel="Table pagination"
                     ></fd-pagination>
                 </div>

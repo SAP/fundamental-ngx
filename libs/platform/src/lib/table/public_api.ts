@@ -38,6 +38,7 @@ export * from './components/table-view-settings-dialog/filtering/filters-list-st
 export * from './components/table-view-settings-dialog/filtering/filters.component';
 export * from './components/table-view-settings-dialog/grouping/grouping.component';
 export * from './components/table-view-settings-dialog/sorting/sorting.component';
+export * from './components/table-editable-cell/table-editable-cell.component';
 
 export * from './directives/table-cell.directive';
 export * from './directives/table-cell-resizable.directive';
@@ -67,5 +68,6 @@ export * from './interfaces/collection-state.interface';
 export * from './interfaces/search-field.interface';
 export * from './interfaces/selection-value.interface';
 export * from './interfaces/table-state.interface';
+export * from './interfaces/save-rows-event.interface';
 
 export * from './models';
