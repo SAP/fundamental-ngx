@@ -78,6 +78,10 @@ export class SideNavigationComponent implements AfterContentInit, AfterViewInit,
         /** Set up condensed state */
         this.nestedListState.condensed =
             this.condensed || (this.sideNavigationConfiguration && this.sideNavigationConfiguration.condensed);
+
+        if (this.collapseWidth) {
+            this.onResize();
+        }
     }
 
     /** @hidden */
