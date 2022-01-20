@@ -173,9 +173,9 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
         return filterByString(item, rule as CollectionStringFilter);
     }
 
-    search(items: ExampleItem[], { searchInput, columns }: TableState): ExampleItem[] {
+    search(items: ExampleItem[], { searchInput, columnKeys }: TableState): ExampleItem[] {
         const searchText = searchInput?.text || '';
-        const keysToSearchBy = columns;
+        const keysToSearchBy = columnKeys;
 
         if (searchText.trim() === '' || keysToSearchBy.length === 0) {
             return items;
