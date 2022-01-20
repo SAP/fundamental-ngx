@@ -14,13 +14,14 @@ import { getUniqueListValuesByKey } from '../../../utils';
 import { CollectionSort } from '../../../interfaces/collection-sort.interface';
 import { SortDirection } from '../../../enums/sort-direction.enum';
 import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
+import { TableDialogCommonData } from '../../../models/table-dialog-common-data.model';
 
 export interface SortDialogColumn {
     label: string;
     key: string;
 }
 
-export interface SortDialogData {
+export interface SortDialogData extends TableDialogCommonData {
     collectionSort: CollectionSort[];
     columns: SortDialogColumn[];
 }
@@ -72,8 +73,8 @@ export class P13SortingDialogComponent implements Resettable {
     rules: ValidatedSortRule[] = [];
 
     /** @hidden */
-    constructor(private dialogRef: DialogRef, private cdr: ChangeDetectorRef) {
-        const { columns, collectionSort }: SortDialogData = this.dialogRef.data;
+    constructor(public dialogRef: DialogRef<SortDialogData>, private cdr: ChangeDetectorRef) {
+        const { columns, collectionSort } = this.dialogRef.data;
 
         this.columns = columns || [];
 

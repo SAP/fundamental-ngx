@@ -54,6 +54,8 @@ import { FilterRuleComponent } from './components/table-p13-dialog/filtering/fil
 import { P13ColumnsDialogComponent } from './components/table-p13-dialog/columns/columns.component';
 
 import { ValueByPathPipe } from './pipes/value-by-path.pipe';
+import { CozyCompactSizePipe } from './pipes/cozy-compact-size.pipe';
+import { IsCompactSizePipe } from './pipes/is-compact.pipe';
 
 import { FdpCellDef, FdpTableCell } from './directives/table-cell.directive';
 import { FdpHeaderCellDef, FdpTableHeader } from './directives/table-header.directive';
@@ -129,7 +131,9 @@ import { NoDataWrapperComponent } from './components/no-data-wrapper/no-data-wra
         PlatformTableCellResizableDirective,
         PlatformTableColumnResizerComponent,
         NoDataWrapperComponent,
-        GetAvailableSortColumnsPipe
+        GetAvailableSortColumnsPipe,
+        CozyCompactSizePipe,
+        IsCompactSizePipe
     ],
     exports: [
         TableComponent,

@@ -8,14 +8,14 @@
             </div>
             <div fd-bar-right>
                 <fd-bar-element>
-                    <fdp-table-reset-button></fdp-table-reset-button>
+                    <fdp-table-reset-button [compact]="dialogRef.data.tableCompact"></fdp-table-reset-button>
                 </fd-bar-element>
             </div>
         </ng-template>
     </fd-dialog-header>
 
     <fd-dialog-body>
-        <ul fd-list [selection]="true" [compact]="true">
+        <ul fd-list [selection]="true" [compact]="dialogRef.data.tableCompact">
             <li fd-list-group-header>
                 <span fd-list-title i18n="@@platformTableSortDialogSortOrderHeader">Sort Order</span>
             </li>
@@ -25,7 +25,7 @@
                     name="sort-order"
                     value="asc"
                     state="default"
-                    [compact]="true"
+                    [compact]="dialogRef.data.tableCompact"
                     [ngModel]="direction"
                     (ngModelChange)="_sortDirectionChange($event)"
                 ></fd-radio-button>
@@ -36,7 +36,7 @@
                     name="sort-order"
                     value="desc"
                     state="default"
-                    [compact]="true"
+                    [compact]="dialogRef.data.tableCompact"
                     [ngModel]="direction"
                     (ngModelChange)="_sortDirectionChange($event)"
                 ></fd-radio-button>
@@ -44,7 +44,7 @@
             </li>
         </ul>
 
-        <ul fd-list [selection]="true" [compact]="true">
+        <ul fd-list [selection]="true" [compact]="dialogRef.data.tableCompact">
             <li fd-list-group-header>
                 <span fd-list-title i18n="@@platformTableSortDialogSortByHeader">Sorted By</span>
             </li>
@@ -54,7 +54,7 @@
                     name="sort-by"
                     [value]="NOT_SORTED_OPTION_VALUE"
                     state="default"
-                    [compact]="true"
+                    [compact]="dialogRef.data.tableCompact"
                     [ngModel]="field"
                     (ngModelChange)="_sortFieldChange($event)"
                 ></fd-radio-button>
@@ -65,7 +65,7 @@
                     name="sort-by"
                     [value]="column.key"
                     state="default"
-                    [compact]="true"
+                    [compact]="dialogRef.data.tableCompact"
                     [ngModel]="field"
                     (ngModelChange)="_sortFieldChange($event)"
                 ></fd-radio-button>
@@ -77,12 +77,14 @@
     <fd-dialog-footer>
         <fd-button-bar
             fdType="emphasized"
+            [compact]="dialogRef.data.tableCompact"
             i18n-label="@@platformTableSortDialogConfirmBtn"
             label="OK"
             (click)="confirm()"
         >
         </fd-button-bar>
         <fd-button-bar
+            [compact]="dialogRef.data.tableCompact"
             i18n-label="@@platformTableSortDialogCancelBtn"
             label="Cancel"
             fd-initial-focus
