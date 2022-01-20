@@ -9,22 +9,29 @@
             </ng-container>
         </div>
         <div class="fd-dynamic-page__title-container">
-            <span class="fd-dynamic-page__title">
-                {{ title }}
-            </span>
+            <ng-container *ngIf="_collapsed">
+                <ng-content select="fd-facet"></ng-content>
+            </ng-container>
 
-            <ng-content select="fd-dynamic-page-title-content"></ng-content>
-
-            <div class="fd-dynamic-page__toolbar-container" (click)="stopPropagation($event)">
-                <ng-container *ngTemplateOutlet="dynamicPageGlobalActionsRef"></ng-container>
-                <ng-container *ngIf="!_actionsSquashed">
-                    <ng-container *ngTemplateOutlet="dynamicPageLayoutActionsRef"></ng-container>
-                </ng-container>
+            <div class="fd-dynamic-page__title-subtitle-container">
+                <div class="fd-dynamic-page__title-container">
+                    <span class="fd-dynamic-page__title">
+                        {{ title }}
+                    </span>
+                    <ng-content select="fd-dynamic-page-title-content"></ng-content>
+                    <div class="fd-dynamic-page__toolbar-container" (click)="stopPropagation($event)">
+                        <ng-container *ngTemplateOutlet="dynamicPageGlobalActionsRef"></ng-container>
+                        <ng-container *ngIf="!_actionsSquashed">
+                            <ng-container *ngTemplateOutlet="dynamicPageLayoutActionsRef"></ng-container>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="fd-dynamic-page__subtitle" *ngIf="_collapsed && subtitle">{{ subtitle }}</div>
             </div>
         </div>
     </div>
 </div>
-<div class="fd-dynamic-page__subtitle" *ngIf="subtitle">{{ subtitle }}</div>
+<div class="fd-dynamic-page__subtitle" *ngIf="!_collapsed && subtitle">{{ subtitle }}</div>
 
 <ng-template #dynamicPageGlobalActionsRef>
     <ng-content select="fd-dynamic-page-global-actions"></ng-content>
