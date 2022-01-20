@@ -283,6 +283,11 @@ $fd-table-scrollbar-width-with-border: calc(#{$fd-table-scrollbar-width} + var(-
         .fd-table--fixed {
             @include fdp-table-hide-scrollbar();
         }
+
+        &--fixed-height {
+            background-color: #fff;
+            background-color: var(--sapList_Background, #fff);
+        }
     }
 
     // TODO: remove when fund-styles will be updated
@@ -297,7 +302,7 @@ $fd-table-scrollbar-width-with-border: calc(#{$fd-table-scrollbar-width} + var(-
             width: 100%;
         }
 
-        &:not(.fd-fixed-height) .fd-table__row:last-of-type {
+        &:not(.fdp-table__body--fixed-height) .fd-table__row:last-of-type {
             .fd-table__cell {
                 border-bottom: 0;
             }
@@ -311,11 +316,6 @@ $fd-table-scrollbar-width-with-border: calc(#{$fd-table-scrollbar-width} + var(-
                 border-left: $fd-table-border-var;
                 border-right: none;
             }
-        }
-
-        &.fd-fixed-height {
-            background-color: #fff;
-            background-color: var(--sapList_Background, #fff);
         }
     }
 

@@ -233,7 +233,7 @@
         noHorizontalScroll
         #verticalScrollable="tableScrollable"
         [style.height]="bodyHeight"
-        [class.fd-fixed-height]="!!bodyHeight"
+        [class.fdp-table__body--fixed-height]="!!bodyHeight"
     >
         <div
             *ngIf="_tableRowsVisible.length || loading; else emptyTableTemplate"
