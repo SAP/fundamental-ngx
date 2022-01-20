@@ -1,22 +1,22 @@
 import { Component } from '@angular/core';
 
-import * as sizeRatingHtml from '!raw-loader!./examples/rating-indicator-sizes.component.html';
-import * as sizesRatingTs from '!raw-loader!./examples/rating-indicator-sizes.component.ts';
+import sizeRatingHtml from '!./examples/rating-indicator-sizes.component.html?raw';
+import sizesRatingTs from '!./examples/rating-indicator-sizes.component.ts?raw';
 
-import * as ratingsObjectHtml from '!raw-loader!./examples/rating-indicator-ratings.component.html';
-import * as ratingsObjectTs from '!raw-loader!./examples/rating-indicator-ratings.component.ts';
+import ratingsObjectHtml from '!./examples/rating-indicator-ratings.component.html?raw';
+import ratingsObjectTs from '!./examples/rating-indicator-ratings.component.ts?raw';
 
-import * as baseHtml from '!raw-loader!./examples/rating-indicator-example.component.html';
-import * as baseTs from '!raw-loader!./examples/rating-indicator-examples.component.ts';
+import baseHtml from '!./examples/rating-indicator-example.component.html?raw';
+import baseTs from '!./examples/rating-indicator-examples.component.ts?raw';
 
-import * as dynamicHtml from '!raw-loader!./examples/ri-dynamic-example.component.html';
-import * as dynamicTs from '!raw-loader!./examples/ri-dynamic-example.component.ts';
+import dynamicHtml from '!./examples/ri-dynamic-example.component.html?raw';
+import dynamicTs from '!./examples/ri-dynamic-example.component.ts?raw';
 
-import * as customIconHtml from '!raw-loader!./examples/ri-custom-icon-example.component.html';
-import * as customIconTs from '!raw-loader!./examples/ri-custom-icon-example.component.ts';
+import customIconHtml from '!./examples/ri-custom-icon-example.component.html?raw';
+import customIconTs from '!./examples/ri-custom-icon-example.component.ts?raw';
 
-import * as displayModeHtml from '!raw-loader!./examples/ri-display-mode-example.component.html';
-import * as displayModeTs from '!raw-loader!./examples/ri-display-mode-example.component.ts';
+import displayModeHtml from '!./examples/ri-display-mode-example.component.html?raw';
+import displayModeTs from '!./examples/ri-display-mode-example.component.ts?raw';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 

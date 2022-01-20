@@ -11,11 +11,9 @@ export const buttonClassArr = ['standard', 'emphasized', 'negative', 'attention'
 
 export const sectionsArr = [
     'fd-object-based-message-box-example ',
-    'fd-message-box-open-template-example ',
     'fd-component-based-message-box-example ',
     'fd-semantic-types-example ',
     'fd-message-box-position-example ',
     'fd-message-box-mobile-example ',
-    'fd-complex-template-example ',
-    'fd-message-box-container '
+    'fd-complex-template-example '
 ];

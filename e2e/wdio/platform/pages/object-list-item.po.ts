@@ -45,11 +45,11 @@ export class ObjectListItemPo extends BaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForPresent(this.allObjsList);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
-import * as checkboxDefaultTsCode from '!raw-loader!./examples/checkbox-default-example.component.ts';
-import * as checkboxTristateTsCode from '!raw-loader!./examples/checkbox-tristate-example.component.ts';
-import * as checkboxCustomValuesTsCode from '!raw-loader!./examples/checkbox-custom-values-example.component.ts';
-import * as checkboxReactiveFormsTsCode from '!raw-loader!./examples/checkbox-reactive-forms-example.component.ts';
-import * as checkboxStatesTsCode from '!raw-loader!./examples/checkbox-states-example.component.ts';
-import * as checkboxCustomLabelTsCode from '!raw-loader!./examples/checkbox-custom-label-example.component.ts';
+import checkboxDefaultTsCode from '!./examples/checkbox-default-example.component.ts?raw';
+import checkboxTristateTsCode from '!./examples/checkbox-tristate-example.component.ts?raw';
+import checkboxCustomValuesTsCode from '!./examples/checkbox-custom-values-example.component.ts?raw';
+import checkboxReactiveFormsTsCode from '!./examples/checkbox-reactive-forms-example.component.ts?raw';
+import checkboxStatesTsCode from '!./examples/checkbox-states-example.component.ts?raw';
+import checkboxCustomLabelTsCode from '!./examples/checkbox-custom-label-example.component.ts?raw';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 

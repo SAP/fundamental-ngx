@@ -139,12 +139,9 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
                 filter((result) => result),
                 takeUntil(this._onDestroy$)
             )
-            .subscribe(
-                () => {
-                    this._dialogRef.dismiss();
-                },
-                () => {}
-            );
+            .subscribe(() => {
+                this._dialogRef.dismiss();
+            });
     }
 
     /**

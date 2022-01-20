@@ -3,16 +3,19 @@ import { checkAttributeValueTrue, checkElementTextValue } from '../../helper/ass
 import {
     acceptAlert,
     click,
+    getAlertText,
     getElementArrayLength,
     getElementClass,
+    getElementSize,
     refreshPage,
+    waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
-import { btnText } from '../fixtures/appData/action-list-item-contents';
+import { alertTextArr, btnText } from '../fixtures/appData/action-list-item-contents';
 
 describe('Action List Item Test Suite:', () => {
     const actionListPage = new ActionListItemPo();
-    const { actionBtns, actionLists, actionSections } = actionListPage;
+    const { actionBtns, actionLists, actionSections, cozyItem, compactItem } = actionListPage;
 
     beforeAll(() => {
         actionListPage.open();
@@ -20,7 +23,8 @@ describe('Action List Item Test Suite:', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(actionBtns);
+        waitForPresent(actionListPage.root);
+        waitForElDisplayed(actionListPage.title);
     }, 1);
 
     describe('Main checks:', () => {
@@ -28,6 +32,7 @@ describe('Action List Item Test Suite:', () => {
             const actionBtnCount = getElementArrayLength(actionBtns);
             for (let i = 0; actionBtnCount > i; i++) {
                 click(actionBtns, i);
+                expect(getAlertText()).toBe(alertTextArr[i]);
                 acceptAlert();
             }
         });
@@ -37,6 +42,13 @@ describe('Action List Item Test Suite:', () => {
             checkElementTextValue(actionBtns, btnText);
             expect(getElementClass(actionSections, 0)).not.toContain('compact');
             expect(getElementClass(actionSections, 1)).toContain('compact');
+        });
+
+        it('should check the sizes compact and cozy', () => {
+            const cozySize = getElementSize(cozyItem);
+            const compactSize = getElementSize(compactItem);
+
+            expect(cozySize.height).toBeGreaterThan(compactSize.height);
         });
     });
 

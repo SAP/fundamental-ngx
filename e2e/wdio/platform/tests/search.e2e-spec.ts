@@ -9,10 +9,12 @@ import {
     isEnabled,
     refreshPage,
     setValue,
-    waitForElDisplayed
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 import { SearchPo } from '../pages/search.po';
 import { expected_category, search_placeholder } from '../fixtures/appData/search-page-content';
+import { checkElArrIsClickable } from '../../helper/assertion-helper';
 
 describe('Search field', () => {
     const {
@@ -28,7 +30,8 @@ describe('Search field', () => {
         cozyWithDataSourceSearch,
         okButton,
         mobileExampleSearch,
-        categoryOption
+        categoryOption,
+        synchronizeButton
     } = new SearchPo();
     const searchPage = new SearchPo();
 
@@ -38,6 +41,8 @@ describe('Search field', () => {
 
     afterEach(() => {
         refreshPage();
+        waitForPresent(searchPage.root);
+        waitForElDisplayed(searchPage.title);
     });
 
     it('should be present and enabled', () => {
@@ -68,8 +73,10 @@ describe('Search field', () => {
     it('should submit term by click on search icon ', () => {
         const arrLength = getElementArrayLength(searchFields);
         for (let i = 0; arrLength > i; i++) {
-            setValue(searchFields, 'test', i);
-            click(searchIcons, 0);
+            if (i !== 6) {
+                setValue(searchFields, 'test', i);
+                click(searchIcons, 0);
+            }
             if (i === 6) {
                 click(searchFields, i);
                 setValue(searchFields, 'test', 7);
@@ -96,9 +103,18 @@ describe('Search field', () => {
         const arrLength = getElementArrayLength(searchFields);
         for (let i = 0; arrLength > i; i++) {
             // value without suggestion
-            setValue(searchFields, 'test', i);
-            waitForElDisplayed(clearSearchIcon);
-            click(clearSearchIcon);
+            if (i !== 6) {
+                setValue(searchFields, 'test', i);
+                waitForElDisplayed(clearSearchIcon);
+                click(clearSearchIcon);
+            }
+            if (i === 6) {
+                click(searchFields, i);
+                setValue(searchFields, 'test', 7);
+                waitForElDisplayed(clearSearchIcon, 1);
+                click(clearSearchIcon, 1);
+                click(okButton);
+            }
         }
         expect(getText(cozySearchResult)).not.toContain('test');
         expect(getText(compactSearchResult)).not.toContain('test');
@@ -116,7 +132,7 @@ describe('Search field', () => {
     it('should have autosuggestion after one latter', () => {
         const arrLength = getElementArrayLength(searchFields);
         for (let i = 0; arrLength > i; i++) {
-            if (i !== 2) {
+            if (i !== 2 && i !== 6) {
                 // value without suggestion
                 setValue(searchFields, 'ea', i);
                 waitForElDisplayed(autosuggestionItems);
@@ -166,6 +182,10 @@ describe('Search field', () => {
 
         expect(getText(cozyWithDataSourceSearch, 1)).toContain(expected_category);
         expect(getText(cozyWithDataSourceSearch, 3)).toContain(expected_category);
+    });
+
+    it('should check clickability synchronize button', () => {
+        checkElArrIsClickable(synchronizeButton);
     });
 
     it('should check rtl switch', () => {

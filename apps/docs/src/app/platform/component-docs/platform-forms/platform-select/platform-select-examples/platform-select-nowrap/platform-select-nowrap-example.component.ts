@@ -35,14 +35,12 @@ export class PlatformSelectNoWrapExampleComponent {
         new Fruit('D', 'itis fuga sequi eveniet perspiciatis? Velit officiis sunt, debitis eum perspiciatis', 11),
         new Fruit('E', 's. Similique vel ipsam debitis fuga sequi eveniet perspiciatis? Velit officiis sunt, d', 10)
     ];
-    option = this.userList.map<OptionItem>((item) => {
-        return {
-            label: item.name + item.id,
-            value: item,
-            triggerValue: `(${item.id})`,
-            icon: ''
-        };
-    });
+    option = this.userList.map<OptionItem>((item) => ({
+        label: item.name + item.id,
+        value: item,
+        triggerValue: `(${item.id})`,
+        icon: ''
+    }));
 
     onSelect(item: FdpSelectionChangeEvent): void {
         if (item) {

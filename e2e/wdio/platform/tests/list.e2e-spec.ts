@@ -21,12 +21,12 @@ import {
     noBorderAttr,
     noDataText,
     scrollLoadAttr,
-    selectionAttr
+    selectionAttr,
+    listTitleArr
 } from '../fixtures/appData/list-contents';
 import {
     acceptAlert,
     browserIsIE,
-    browserIsSafariorFF,
     click,
     getAlertText,
     getAttributeByName,
@@ -42,7 +42,12 @@ import {
     waitForElDisplayed,
     waitForInvisibilityOf,
     pause,
-    waitForNotPresent
+    waitForNotPresent,
+    browserIsSafari,
+    isElementDisplayed,
+    getTextArr,
+    getElementSize,
+    waitForPresent
 } from '../../driver/wdio';
 
 describe('List test suite:', () => {
@@ -73,13 +78,11 @@ describe('List test suite:', () => {
         singleListItems,
         singleToolbar,
         singleRadioBtn,
-        navList,
         navListItems,
         navListLink,
         vScrollList,
         vScrollListItems,
         vScrollLoadIcon,
-        loadList,
         loadListItems,
         loadShowMoreBtn,
         loadIcon,
@@ -89,15 +92,25 @@ describe('List test suite:', () => {
         btnEditBtn,
         noDataListItems,
         noDataCompactList,
-        noSepList,
-        noSepListItems,
         unreadListAttr,
         unreadListItems,
-        unreadListItemText
+        multiCheckBoxMark,
+        singleRadioBtnInput,
+        busyIndicator,
+        noSepList,
+        noSepListItems,
+        cozyItem,
+        compactItem
     } = listPage;
 
     beforeAll(() => {
         listPage.open();
+    }, 1);
+
+    afterEach(() => {
+        refreshPage();
+        waitForPresent(listPage.root);
+        waitForElDisplayed(listPage.title);
     }, 1);
 
     describe('Borderless examples:', () => {
@@ -171,8 +184,19 @@ describe('List test suite:', () => {
             expect(getText(multiToolbar)).toBe('0 : Items selected');
             click(multiCheckbox);
             expect(getText(multiToolbar)).toBe('1 : Items selected');
+            expect(getAttributeByName(multiCheckBoxMark, 'aria-selected')).toBe('true');
+
             click(multiCheckbox, 1);
             expect(getText(multiToolbar)).toBe('2 : Items selected');
+            expect(getAttributeByName(multiCheckBoxMark, 'aria-selected', 1)).toBe('true');
+
+            click(multiCheckbox, 2);
+            expect(getText(multiToolbar)).toBe('3 : Items selected');
+            expect(getAttributeByName(multiCheckBoxMark, 'aria-selected', 2)).toBe('true');
+
+            click(multiCheckbox, 3);
+            expect(getText(multiToolbar)).toBe('4 : Items selected');
+            expect(getAttributeByName(multiCheckBoxMark, 'aria-selected', 3)).toBe('true');
         });
     });
 
@@ -181,14 +205,13 @@ describe('List test suite:', () => {
             checkElementText(singleListItems);
             checkElArrIsClickable(singleListItems);
         });
-
-        it('should check selection', () => {
-            const listItemId = getAttributeByName(singleListItems, 'id');
-
-            expect(getAttributeByName(singleList, ariaMultiSelectable)).toBe('false');
-            expect(getText(singleToolbar)).toContain(': selected');
-            click(singleRadioBtn);
-            expect(getText(singleToolbar)).toContain(listItemId + ' : selected');
+        // skipped due to https://github.com/SAP/fundamental-ngx/issues/7245
+        xit('should check selection', () => {
+            const radioBtnLength = getElementArrayLength(singleRadioBtn);
+            for (let i = 0; i < radioBtnLength; i++) {
+                click(singleRadioBtnInput, i);
+                expect(getAttributeByName(singleRadioBtn, 'aria-selected')).toBe('true');
+            }
         });
     });
 
@@ -217,14 +240,11 @@ describe('List test suite:', () => {
             checkElementText(vScrollListItems);
             checkAttributeValueTrue(vScrollList, scrollLoadAttr);
             checkAttributeValueTrue(vScrollList, lazyLoadAttr);
-            refreshPage();
-            waitForElDisplayed(listPage.title);
         });
 
         it('should check scroll', () => {
-            // skip for FF due to issue https://github.com/SAP/fundamental-ngx/issues/4107
-            if (browserIsSafariorFF()) {
-                console.log('skip FF due to #4107, skip Safari');
+            if (browserIsSafari()) {
+                console.log('skip Safari');
                 return;
             }
             scrollIntoView(vScrollListItems);
@@ -296,12 +316,27 @@ describe('List test suite:', () => {
         });
     });
 
+    describe('With No Separator examples:', () => {
+        it('should do basic checks and check no data text', () => {
+            checkElArrIsClickable(noSepListItems);
+            checkElementTextValue(noSepListItems, listTitleArr);
+            expect(getElementClass(noSepList)).toContain('no-border');
+        });
+    });
+
     describe('With Unread Data examples:', () => {
         it('should do basic checks and check unread data', () => {
             checkElArrIsClickable(unreadListItems);
             checkElementText(unreadListItems);
             expect(getAttributeByName(unreadListAttr, itemUnreadStatus, 1)).toBe('true');
         });
+    });
+
+    it('should check the sizes compact and cozy', () => {
+        const cozySize = getElementSize(cozyItem);
+        const compactSize = getElementSize(compactItem);
+
+        expect(cozySize.height).toBeGreaterThan(compactSize.height);
     });
 
     describe('check orientation', () => {

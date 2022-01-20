@@ -7,9 +7,11 @@ import {
     getText,
     isElementDisplayed,
     refreshPage,
+    scrollIntoView,
+    sendKeys,
     waitForElDisplayed
 } from '../../driver/wdio';
-import { iconsArr, buttonClassArr, sectionsArr } from '../fixtures/appData/message-box';
+import { iconsArr, buttonClassArr } from '../fixtures/appData/message-box';
 
 describe('Message-box test suits', () => {
     const messageBoxPage = new MessageBoxPo();
@@ -17,7 +19,6 @@ describe('Message-box test suits', () => {
         resultTxt,
         mobileExample,
         positionExample,
-        messageBoxExample,
         basedObjectExample,
         openTemplateExample,
         sematicTypesExample,
@@ -34,34 +35,99 @@ describe('Message-box test suits', () => {
         messageBoxPage.open();
     }, 1);
 
-    it('Should check working of message-boxes', () => {
-        for (let i = 0; i < sectionsArr.length; i++) {
-            checkMessageBoxWorking(sectionsArr[i]);
-        }
+    describe('Object based example', () => {
+        it('Should check working of message-boxes', () => {
+            checkMessageBoxWorking(basedObjectExample);
+        });
+        it('Should check accepting message-box', () => {
+            checkAcceptingMessage(basedObjectExample);
+        });
+        it('Should check working of message-boxes', () => {
+            checkDismissingMessage(basedObjectExample);
+        });
+        it('should check losing message box by escape button', () => {
+            checkClosingMessageBoxByPressEscape(basedObjectExample);
+        });
     });
 
-    it('Should check status after closing message-box', () => {
-        checkAcceptingMessage(basedObjectExample);
-        checkDismissingMessage(basedObjectExample);
-        checkAcceptingMessage(openTemplateExample);
-        checkDismissingMessage(openTemplateExample);
-        checkAcceptingMessage(basedComponentExample);
-        checkDismissingMessage(basedComponentExample);
+    describe('Template message box example', () => {
+        it('Should check working of message-boxes', () => {
+            checkMessageBoxWorking(openTemplateExample);
+        });
+        it('Should check accepting message-box', () => {
+            checkAcceptingMessage(openTemplateExample);
+        });
+        it('Should check working of message-boxes', () => {
+            checkDismissingMessage(openTemplateExample);
+        });
+        it('should check losing message box by escape button', () => {
+            checkClosingMessageBoxByPressEscape(openTemplateExample);
+        });
     });
 
-    it('Should check message & button types', () => {
-        const buttonsLength = getElementArrayLength(sematicTypesExample + button);
-        for (let i = 0; i < buttonsLength; i++) {
-            expect(getElementClass(sematicTypesExample + button, i)).toContain(
-                buttonClassArr[i],
-                `Element type is not ${buttonClassArr[i]}`
-            );
-            click(sematicTypesExample + button, i);
-            i === buttonsLength - 1
-                ? expect(doesItExist(messageIcon)).toBe(false, 'Icon exists')
-                : expect(getElementClass(messageIcon)).toContain(iconsArr[i], `Icon is not ${iconsArr[i]}`);
-            click(okButton);
-        }
+    describe('Component based message box example', () => {
+        it('Should check working of message-boxes', () => {
+            checkMessageBoxWorking(basedComponentExample);
+        });
+        it('Should check accepting message-box', () => {
+            checkAcceptingMessage(basedComponentExample);
+        });
+        it('Should check working of message-boxes', () => {
+            checkDismissingMessage(basedComponentExample);
+        });
+        it('should check losing message box by escape button', () => {
+            checkClosingMessageBoxByPressEscape(basedComponentExample);
+        });
+    });
+
+    describe('Semantic types example', () => {
+        it('Should check working of message-boxes', () => {
+            checkMessageBoxWorking(sematicTypesExample);
+        });
+        it('should check losing message box by escape button', () => {
+            checkClosingMessageBoxByPressEscape(sematicTypesExample);
+        });
+        it('Should check message & button types', () => {
+            const buttonsLength = getElementArrayLength(sematicTypesExample + button);
+            for (let i = 0; i < buttonsLength; i++) {
+                expect(getElementClass(sematicTypesExample + button, i)).toContain(
+                    buttonClassArr[i],
+                    `Element type is not ${buttonClassArr[i]}`
+                );
+                click(sematicTypesExample + button, i);
+                i === buttonsLength - 1
+                    ? expect(doesItExist(messageIcon)).toBe(false, 'Icon exists')
+                    : expect(getElementClass(messageIcon)).toContain(iconsArr[i], `Icon is not ${iconsArr[i]}`);
+                click(okButton);
+            }
+        });
+    });
+
+    describe('Position example', () => {
+        it('Should check working of message-boxes', () => {
+            checkMessageBoxWorking(positionExample);
+        });
+        it('should check losing message box by escape button', () => {
+            checkClosingMessageBoxByPressEscape(positionExample);
+        });
+    });
+
+    describe('Mobile example', () => {
+        it('Should check working of message-boxes', () => {
+            checkMessageBoxWorking(mobileExample);
+        });
+        it('should check losing message box by escape button', () => {
+            checkClosingMessageBoxByPressEscape(mobileExample);
+        });
+    });
+
+    describe('Complex template example', () => {
+        it('Should check working of message-boxes', () => {
+            checkMessageBoxWorking(complexTemplateExample);
+        });
+        it('should check losing message box by escape button', () => {
+            checkClosingMessageBoxByPressEscape(complexTemplateExample);
+        });
     });
 
     it('should check orientation', () => {
@@ -76,6 +142,16 @@ describe('Message-box test suits', () => {
             expect(messageBoxPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
+
+    function checkClosingMessageBoxByPressEscape(section: string): void {
+        scrollIntoView(section);
+        click(section + button);
+        waitForElDisplayed(messageBox);
+        sendKeys('Escape');
+
+        expect(doesItExist(messageBox)).toBe(false);
+        refreshPage();
+    }
 
     function checkMessageBoxWorking(section: string): void {
         const elementLength = getElementArrayLength(section + button);

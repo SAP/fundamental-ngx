@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 
-import * as segmentedDefaultExample from '!raw-loader!./examples/segmented-button-default-example.component.html';
-import * as segmentedDefaultExampleTs from '!raw-loader!./examples/segmented-button-default-example.component.ts';
-import * as segmentedToggleExample from '!raw-loader!./examples/segmented-button-toggle-example.component.html';
-import * as segmentedToggleExampleTs from '!raw-loader!./examples/segmented-button-toggle-example.component.ts';
-import * as segmentedButtonFormTs from '!raw-loader!./examples/segmented-button-form-example/segmented-button-form-example.component.ts';
-import * as segmentedButtonFormHtml from '!raw-loader!./examples/segmented-button-form-example/segmented-button-form-example.component.html';
-import * as segmentedButtonCustomTs from '!raw-loader!./examples/segmented-button-complex-example/segmented-button-complex-example.component.ts';
-import * as segmentedButtonCustomHtml from '!raw-loader!./examples/segmented-button-complex-example/segmented-button-complex-example.component.html';
+import segmentedDefaultExample from '!./examples/segmented-button-default-example.component.html?raw';
+import segmentedDefaultExampleTs from '!./examples/segmented-button-default-example.component.ts?raw';
+import segmentedToggleExample from '!./examples/segmented-button-toggle-example.component.html?raw';
+import segmentedToggleExampleTs from '!./examples/segmented-button-toggle-example.component.ts?raw';
+import segmentedButtonFormTs from '!./examples/segmented-button-form-example/segmented-button-form-example.component.ts?raw';
+import segmentedButtonFormHtml from '!./examples/segmented-button-form-example/segmented-button-form-example.component.html?raw';
+import segmentedButtonCustomTs from '!./examples/segmented-button-complex-example/segmented-button-complex-example.component.ts?raw';
+import segmentedButtonCustomHtml from '!./examples/segmented-button-complex-example/segmented-button-complex-example.component.html?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

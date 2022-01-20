@@ -15,7 +15,7 @@ import {
  * Used to represent an option of the select component.
  */
 @Component({
-    // tslint:disable-next-line:component-selector
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fn-option]',
     templateUrl: './option.component.html',
     encapsulation: ViewEncapsulation.None,

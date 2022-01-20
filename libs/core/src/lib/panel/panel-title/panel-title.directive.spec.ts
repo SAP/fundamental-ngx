@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { PanelTitleDirective } from './panel-title.directive';
+
 import { PanelModule } from '../panel.module';
 
 @Component({

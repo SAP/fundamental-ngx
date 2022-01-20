@@ -4,31 +4,31 @@ import { Subscription } from 'rxjs';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-examples/platform-dynamic-page-page-overflow.service';
 
-import * as dynamicPageBasicExample from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-example.component.html';
-import * as dynamicPageBasicExampleScss from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-example.component.scss';
-import * as dynamicPageBasicExampleTsCode from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-example.component.ts';
+import dynamicPageBasicExample from '!./platform-dynamic-page-examples/platform-dynamic-page-example.component.html?raw';
+import dynamicPageBasicExampleScss from '!./platform-dynamic-page-examples/platform-dynamic-page-example.component.scss?raw';
+import dynamicPageBasicExampleTsCode from '!./platform-dynamic-page-examples/platform-dynamic-page-example.component.ts?raw';
 
-import * as dynamicPageTabbedExample from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-tabbed-example.component.html';
-import * as dynamicPageTabbedExampleScss from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-tabbed-example.component.scss';
-import * as dynamicPageTabbedExampleTsCode from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-tabbed-example.component.ts';
+import dynamicPageTabbedExample from '!./platform-dynamic-page-examples/platform-dynamic-page-tabbed-example.component.html?raw';
+import dynamicPageTabbedExampleScss from '!./platform-dynamic-page-examples/platform-dynamic-page-tabbed-example.component.scss?raw';
+import dynamicPageTabbedExampleTsCode from '!./platform-dynamic-page-examples/platform-dynamic-page-tabbed-example.component.ts?raw';
 
-import * as dynamicPageSnapScrollExample from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-snap-scroll-example.component.html';
-import * as dynamicPageSnapScrollExampleScss from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-snap-scroll-example.component.scss';
-import * as dynamicPageSnapScrollExampleTsCode from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-snap-scroll-example.component.ts';
+import dynamicPageSnapScrollExample from '!./platform-dynamic-page-examples/platform-dynamic-page-snap-scroll-example.component.html?raw';
+import dynamicPageSnapScrollExampleScss from '!./platform-dynamic-page-examples/platform-dynamic-page-snap-scroll-example.component.scss?raw';
+import dynamicPageSnapScrollExampleTsCode from '!./platform-dynamic-page-examples/platform-dynamic-page-snap-scroll-example.component.ts?raw';
 
-import * as dynamicPageResponsivePaddingExample from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-responsive-padding-example.component.html';
-import * as dynamicPageResponsivePaddingExampleScss from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-responsive-padding-example.component.scss';
-import * as dynamicPageResponsivePaddingExampleTsCode from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-responsive-padding-example.component.ts';
+import dynamicPageResponsivePaddingExample from '!./platform-dynamic-page-examples/platform-dynamic-page-responsive-padding-example.component.html?raw';
+import dynamicPageResponsivePaddingExampleScss from '!./platform-dynamic-page-examples/platform-dynamic-page-responsive-padding-example.component.scss?raw';
+import dynamicPageResponsivePaddingExampleTsCode from '!./platform-dynamic-page-examples/platform-dynamic-page-responsive-padding-example.component.ts?raw';
 
-import * as dynamicPageNonCollapsibleExample from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-non-collapsible-example.component.html';
-import * as dynamicPageNonCollapsibleExampleScss from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-non-collapsible-example.component.scss';
-import * as dynamicPageNonCollapsibleExampleTsCode from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-non-collapsible-example.component.ts';
+import dynamicPageNonCollapsibleExample from '!./platform-dynamic-page-examples/platform-dynamic-page-non-collapsible-example.component.html?raw';
+import dynamicPageNonCollapsibleExampleScss from '!./platform-dynamic-page-examples/platform-dynamic-page-non-collapsible-example.component.scss?raw';
+import dynamicPageNonCollapsibleExampleTsCode from '!./platform-dynamic-page-examples/platform-dynamic-page-non-collapsible-example.component.ts?raw';
 
-import * as dynamicPageFlexibleColumnExample from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-flexible-column-example.component.html';
-import * as dynamicPageFlexibleColumnExampleScss from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-flexible-column-example.component.scss';
-import * as dynamicPageFlexibleColumnExampleTsCode from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-flexible-column-example.component.ts';
+import dynamicPageFlexibleColumnExample from '!./platform-dynamic-page-examples/platform-dynamic-page-flexible-column-example.component.html?raw';
+import dynamicPageFlexibleColumnExampleScss from '!./platform-dynamic-page-examples/platform-dynamic-page-flexible-column-example.component.scss?raw';
+import dynamicPageFlexibleColumnExampleTsCode from '!./platform-dynamic-page-examples/platform-dynamic-page-flexible-column-example.component.ts?raw';
 
-import * as platformDynamicPagePageOverflowServiceTs from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-page-overflow.service.ts';
+import platformDynamicPagePageOverflowServiceTs from '!./platform-dynamic-page-examples/platform-dynamic-page-page-overflow.service.ts?raw';
 
 @Component({
     selector: 'app-dynamic-page',

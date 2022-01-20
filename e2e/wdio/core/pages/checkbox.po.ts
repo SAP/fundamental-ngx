@@ -15,14 +15,15 @@ export class CheckboxPo extends CoreBaseComponentPo {
     checkboxInput = this.checkbox + ' input';
     checkboxLabel = this.checkbox + ' label';
     link = this.checkbox + ' a';
+    tristateOutput = this.tristateCheckbox + 'div';
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForPresent(this.title);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

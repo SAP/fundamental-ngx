@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import * as VerticalNavigationDefaultExample from '!raw-loader!./examples/vertical-navigation-default-example.component.html';
-import * as VerticalNavigationGroupingExample from '!raw-loader!./examples/vertical-navigation-grouping-example.component.html';
-import * as VerticalNavigationCondensedExample from '!raw-loader!./examples/vertical-navigation-condensed-example.component.html';
-import * as VerticalNavigationNoIconsExample from '!raw-loader!./examples/vertical-navigation-no-icons-example.component.html';
+import VerticalNavigationDefaultExample from '!./examples/vertical-navigation-default-example.component.html?raw';
+import VerticalNavigationGroupingExample from '!./examples/vertical-navigation-grouping-example.component.html?raw';
+import VerticalNavigationCondensedExample from '!./examples/vertical-navigation-condensed-example.component.html?raw';
+import VerticalNavigationNoIconsExample from '!./examples/vertical-navigation-no-icons-example.component.html?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

@@ -1,7 +1,5 @@
 import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
 
-import { closestElement } from '@fundamental-ngx/core/utils';
-
 import { FilesValidatorService, FilesValidatorOutput } from '../services/files-validator.service';
 
 /**
@@ -66,6 +64,7 @@ export class UploadCollectionDragnDropDirective {
 
     /** Event emitted when the dragged file enters the dropzone. */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     readonly onDropzone = new EventEmitter<boolean>();
 
     /** @hidden */
@@ -95,7 +94,7 @@ export class UploadCollectionDragnDropDirective {
 
         this._muteEvent(event);
 
-        const isDragDropArea = !!closestElement(this.elementSelector, event.target);
+        const isDragDropArea = !!(event.target instanceof HTMLElement && event.target.closest(this.elementSelector));
         if (this.dropzonePreviousState !== isDragDropArea) {
             this.dropzonePreviousState = isDragDropArea;
             this.onDropzone.emit(isDragDropArea);
@@ -128,7 +127,7 @@ export class UploadCollectionDragnDropDirective {
         this.dropzonePreviousState = null;
         this.cancel.emit();
 
-        const isDragDropArea = !!closestElement(this.elementSelector, event.target);
+        const isDragDropArea = !!(event.target instanceof HTMLElement && event.target.closest(this.elementSelector));
         if (!isDragDropArea) {
             return;
         }

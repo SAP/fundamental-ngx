@@ -1,7 +1,9 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+// eslint-disable-next-line no-restricted-imports
 import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
+// eslint-disable-next-line no-restricted-imports
 import { FundamentalNgxPlatformModule } from '@fundamental-ngx/platform';
 
 // containers

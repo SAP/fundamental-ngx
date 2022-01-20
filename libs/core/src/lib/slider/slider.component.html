@@ -1,4 +1,4 @@
-<div class="fd-slider__inner" (mouseenter)="_showPopovers()" (mouseleave)="_hidePopovers()">
+<div class="fd-slider__inner">
     <div class="fd-slider__track" (click)="onTrackClick($event)" #track>
         <ng-container *ngIf="!_isRange">
             <ng-container *ngTemplateOutlet="singleMode"></ng-container>
@@ -69,7 +69,8 @@
         i18n-aria-valuenow="@@slider.single.valuenow.details|Slider valuenow attribute"
         i18n-aria-valuetext="@@slider.single.valuetext.details|Slider valuetext attribute"
         (mousedown)="onHandleClick($event); $event.stopPropagation()"
-        (blur)="onBlur($event)"
+        (focus)="_handleFocused$.next(true)"
+        (blur)="_handleFocused$.next(false)"
         (keydown)="onKeyDown($event)"
     ></div>
 
@@ -126,7 +127,8 @@
         i18n-aria-valuetext="@@slider.range.handle1.valuetext.details|range slider valuetext attribute"
         (mousedown)="onHandleClick($event); $event.stopPropagation()"
         (keydown)="onKeyDown($event)"
-        (blur)="onBlur($event)"
+        (focus)="_rangeHandle1Focused$.next(true)"
+        (blur)="_rangeHandle1Focused$.next(false)"
     ></div>
 
     <div
@@ -155,7 +157,8 @@
         i18n-aria-valuetext="@@slider.range.handle2.valuetext.details|range 2 slider valuetext attribute"
         (mousedown)="onHandleClick($event); $event.stopPropagation()"
         (keydown)="onKeyDown($event)"
-        (blur)="onBlur($event)"
+        (focus)="_rangeHandle2Focused$.next(true)"
+        (blur)="_rangeHandle2Focused$.next(false)"
     ></div>
 
     <fd-popover
@@ -194,7 +197,14 @@
 </ng-template>
 
 <ng-template #popoverInner let-target="target" let-position="position">
-    <div class="fd-slider--tooltip-wrapper" (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
+    <div
+        #sliderTooltipWrapper
+        class="fd-slider--tooltip-wrapper"
+        (click)="$event.stopPropagation()"
+        (keydown)="$event.stopPropagation()"
+        (mouseenter)="_popoverInputFieldHovered$.next(true)"
+        (mouseleave)="_popoverInputFieldHovered$.next(false)"
+    >
         <div
             *ngIf="customValues?.length > 0 || tooltipMode === 'readonly'"
             class="fd-slider--tooltip"
@@ -214,6 +224,8 @@
             [(ngModel)]="_popoverValueRef[target]"
             (blur)="_updateValueFromInput(popoverInputField.value, target)"
             (keydown.enter)="_updateValueFromInput(popoverInputField.value, target)"
+            (focus)="_popoverInputFieldFocused$.next(true)"
+            (blur)="_popoverInputFieldFocused$.next(false)"
         />
     </div>
 </ng-template>

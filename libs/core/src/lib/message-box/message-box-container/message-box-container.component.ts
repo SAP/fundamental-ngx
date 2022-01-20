@@ -82,7 +82,7 @@ export class MessageBoxContainerComponent
     }
 
     /** @hidden Returns context for embedded template*/
-    private _templateContext(): object {
+    private _templateContext(): { $implicit: MessageBoxRef; messageBoxConfig: MessageBoxConfig } {
         return { $implicit: this._messageBoxRef, messageBoxConfig: this.messageBoxConfig };
     }
 

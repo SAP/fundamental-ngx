@@ -295,7 +295,7 @@ export class PlatformMultiInputMobileExampleComponent {
 
     mobileConfig: MobileModeConfig = {
         title: 'Title',
-        approveButtonText: 'approve',
+        approveButtonText: 'Approve',
         cancelButtonText: 'Cancel',
         hasCloseButton: true
     };

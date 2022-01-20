@@ -1,22 +1,20 @@
 import { StandardListPo } from '../pages/standard-list.po';
 import {
     browserIsFirefox,
-    checkElementScreenshot,
     click,
     clickAndDragElement,
     doesItExist,
     executeScriptBeforeTagAttr,
     getElementArrayLength,
     getElementLocation,
-    getImageTagBrowserPlatform,
     getText,
     refreshPage,
-    saveElementScreenshot,
     scrollIntoView,
     sendKeys,
     waitForElDisplayed,
     waitForNotDisplayed,
-    getElementClass
+    getElementClass,
+    setValue
 } from '../../driver/wdio';
 
 describe('Standard List test suite', () => {
@@ -35,7 +33,9 @@ describe('Standard List test suite', () => {
         selectedItems,
         keyboardSupportList,
         dragAndDropList,
-        infiniteList
+        infiniteList,
+        deleteButton,
+        listItemText
     } = standardListPage;
 
     beforeAll(() => {
@@ -62,7 +62,7 @@ describe('Standard List test suite', () => {
         it('should check ability to search', () => {
             scrollIntoView(filterAndSortList);
             click(filterAndSortList + searchBar);
-            sendKeys('apple');
+            setValue(filterAndSortList + searchBar, 'apple');
             const resultCount = getElementArrayLength(filterAndSortList + listItems);
             for (let i = 0; i < resultCount; i++) {
                 expect(getText(filterAndSortList + listItems, i).toLowerCase()).toContain('apple');
@@ -74,7 +74,7 @@ describe('Standard List test suite', () => {
 
             scrollIntoView(filterAndSortList);
             click(filterAndSortList + searchBar);
-            sendKeys('apple');
+            setValue(filterAndSortList + searchBar, 'apple');
 
             expect(getElementArrayLength(filterAndSortList + listItems)).not.toEqual(startItemCount);
 
@@ -105,6 +105,15 @@ describe('Standard List test suite', () => {
             click(filterAndSortList + button, 4);
 
             expect(getElementArrayLength(filterAndSortList + listItems)).toEqual(startItemCount - 1);
+        });
+
+        it('should check deleting all items', () => {
+            const startItemCount = getElementArrayLength(filterAndSortList + listItems);
+            for (let i = 0; i < startItemCount; i++) {
+                click(filterAndSortList + deleteButton);
+            }
+            expect(getElementArrayLength(filterAndSortList + listItems)).toEqual(1);
+            expect(getText(filterAndSortList + listItemText).trim()).toBe('No results found!');
         });
     });
 
@@ -215,8 +224,6 @@ describe('Standard List test suite', () => {
 
     function checkSelections(exampleSelector: string, count: number, listExample: string): void {
         for (let i = 0; i < count; i++) {
-            const tag = `${listExample}-listItem-${i}-selected-state-${getImageTagBrowserPlatform()}-`;
-
             click(exampleSelector + listItems, i);
             expect(getElementClass(exampleSelector + listItems, i)).toContain('is-selected');
         }

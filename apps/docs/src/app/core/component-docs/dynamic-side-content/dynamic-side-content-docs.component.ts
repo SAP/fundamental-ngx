@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
-import * as exampleScssCode from '!raw-loader!./examples/dynamic-side-content.component.scss';
-import * as basicExampleHtmlCode from '!raw-loader!./examples/dynamic-side-content-basic-example.component.html';
-import * as basicExampleTsCode from '!raw-loader!./examples/dynamic-side-content-basic-example.component.ts';
-import * as positioningExampleHtmlCode from '!raw-loader!./examples/dynamic-side-content-positioning-example.component.html';
-import * as positioningExampleTsCode from '!raw-loader!./examples/dynamic-side-content-positioning-example.component.ts';
-import * as sizeExampleHtmlCode from '!raw-loader!./examples/dynamic-side-content-size-example.component.html';
-import * as sizeExampleTsCode from '!raw-loader!./examples/dynamic-side-content-size-example.component.ts';
+import exampleScssCode from '!./examples/dynamic-side-content.component.scss?raw';
+import basicExampleHtmlCode from '!./examples/dynamic-side-content-basic-example.component.html?raw';
+import basicExampleTsCode from '!./examples/dynamic-side-content-basic-example.component.ts?raw';
+import positioningExampleHtmlCode from '!./examples/dynamic-side-content-positioning-example.component.html?raw';
+import positioningExampleTsCode from '!./examples/dynamic-side-content-positioning-example.component.ts?raw';
+import sizeExampleHtmlCode from '!./examples/dynamic-side-content-size-example.component.html?raw';
+import sizeExampleTsCode from '!./examples/dynamic-side-content-size-example.component.ts?raw';
 
 @Component({
     templateUrl: './dynamic-side-content-docs.component.html'

@@ -1,0 +1,45 @@
+<div>
+    <fd-toolbar [hasTitle]="true" fdType="transparent">
+        <fdp-search-field
+            (inputChange)="_onSearchInputChange($event)"
+            (searchSubmit)="submitForm()"
+            [disableRefresh]="true"
+            contentDensity="compact"
+            i18n-placeholder="@@PlatformSmartFilterBarSearchPlaceholder"
+            placeholder="Search"
+        ></fdp-search-field>
+        <fd-toolbar-spacer></fd-toolbar-spacer>
+        <fdp-button
+            (click)="submitForm()"
+            buttonType="emphasized"
+            contentDensity="compact"
+            fd-toolbar-item
+            i18n-placeholder="@@PlatformSmartFilterBarSubmitButton"
+            label="Go"
+        ></fdp-button>
+        <fdp-button (click)="submitForm()" contentDensity="compact" fd-toolbar-item glyph="synchronize"></fdp-button>
+        <fdp-button
+            (click)="showFilteringSettings()"
+            [label]="filtersLabel + ' (' + _selectedFilters.length + ')'"
+            contentDensity="compact"
+            fd-toolbar-item
+        ></fdp-button>
+        <fdp-button
+            (click)="_toggleFilterBar()"
+            [label]="_showFilterBar ? hideFiltersLabel : showFiltersLabel"
+            buttonType="transparent"
+            contentDensity="compact"
+            fd-toolbar-item
+        ></fdp-button>
+    </fd-toolbar>
+</div>
+
+<div class="fdp-smart-filter-bar__filters" *ngIf="_showFilterBar">
+    <fdp-form-generator
+        (formCreated)="_onFormCreated()"
+        (formSubmitted)="_onFormSubmitted($event)"
+        [noAdditionalContent]="true"
+        [formItems]="_formItems"
+        [inlineColumnLayout]="filtersColumnLayout"
+    ></fdp-form-generator>
+</div>

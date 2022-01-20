@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-const sort = (a, b, key?: string) => {
+const sort = (a, b, key?: string): number => {
     if (key) {
         return a[key] > b[key] ? 1 : -1;
     } else {

@@ -79,7 +79,7 @@ export class P13GroupingDialogComponent implements Resettable {
     /** Confirm changes and close dialog */
     confirm(): void {
         const collectionGroup = this._getCollectionGroupFromGroupRules(this._getUniqueRules(this.rules));
-        const result: GroupDialogResultData = { collectionGroup: collectionGroup };
+        const result: GroupDialogResultData = { collectionGroup };
         this.dialogRef.close(result);
     }
 
@@ -140,7 +140,7 @@ export class P13GroupingDialogComponent implements Resettable {
         return rules.filter(this._isRuleValid).map(
             ({ columnKey, showAsColumn }): CollectionGroup => ({
                 field: columnKey,
-                showAsColumn: showAsColumn,
+                showAsColumn,
                 direction: SortDirection.NONE
             })
         );

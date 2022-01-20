@@ -2,27 +2,27 @@ import { Component } from '@angular/core';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
-import * as iconTabBarTextTypeHtml from '!raw-loader!./examples/platform-icon-tab-bar-text-type-example/platform-icon-tab-bar-text-type-example.component.html';
-import * as iconTabBarTextTypeTs from '!raw-loader!./examples/platform-icon-tab-bar-text-type-example/platform-icon-tab-bar-text-type-example.component.ts';
+import iconTabBarTextTypeHtml from '!./examples/platform-icon-tab-bar-text-type-example/platform-icon-tab-bar-text-type-example.component.html?raw';
+import iconTabBarTextTypeTs from '!./examples/platform-icon-tab-bar-text-type-example/platform-icon-tab-bar-text-type-example.component.ts?raw';
 
-import * as iconTabBarIconOnlyTypeHtml from '!raw-loader!./examples/platform-icon-tab-bar-icon-only-type-example/platform-icon-tab-bar-icon-only-type-example.component.html';
-import * as iconTabBarIconOnlyTypeTs from '!raw-loader!./examples/platform-icon-tab-bar-icon-only-type-example/platform-icon-tab-bar-icon-only-type-example.component.ts';
+import iconTabBarIconOnlyTypeHtml from '!./examples/platform-icon-tab-bar-icon-only-type-example/platform-icon-tab-bar-icon-only-type-example.component.html?raw';
+import iconTabBarIconOnlyTypeTs from '!./examples/platform-icon-tab-bar-icon-only-type-example/platform-icon-tab-bar-icon-only-type-example.component.ts?raw';
 
-import * as iconTabBarIconTypeHtml from '!raw-loader!./examples/platform-icon-tab-bar-icon-type-example/platform-icon-tab-bar-icon-type-example.component.html';
-import * as iconTabBarIconTypeTs from '!raw-loader!./examples/platform-icon-tab-bar-icon-type-example/platform-icon-tab-bar-icon-type-example.component.ts';
+import iconTabBarIconTypeHtml from '!./examples/platform-icon-tab-bar-icon-type-example/platform-icon-tab-bar-icon-type-example.component.html?raw';
+import iconTabBarIconTypeTs from '!./examples/platform-icon-tab-bar-icon-type-example/platform-icon-tab-bar-icon-type-example.component.ts?raw';
 
-import * as iconTabBarFilterTypeHtml from '!raw-loader!./examples/platform-icon-tab-bar-filter-type-example/platform-icon-tab-bar-filter-type-example.component.html';
-import * as iconTabBarFilterTypeTs from '!raw-loader!./examples/platform-icon-tab-bar-filter-type-example/platform-icon-tab-bar-filter-type-example.component.ts';
+import iconTabBarFilterTypeHtml from '!./examples/platform-icon-tab-bar-filter-type-example/platform-icon-tab-bar-filter-type-example.component.html?raw';
+import iconTabBarFilterTypeTs from '!./examples/platform-icon-tab-bar-filter-type-example/platform-icon-tab-bar-filter-type-example.component.ts?raw';
 
-import * as iconTabBarProcessTypeHtml from '!raw-loader!./examples/platform-icon-tab-bar-process-type-example/platform-icon-tab-bar-process-type-example.component.html';
-import * as iconTabBarProcessTypeTs from '!raw-loader!./examples/platform-icon-tab-bar-process-type-example/platform-icon-tab-bar-process-type-example.component.ts';
+import iconTabBarProcessTypeHtml from '!./examples/platform-icon-tab-bar-process-type-example/platform-icon-tab-bar-process-type-example.component.html?raw';
+import iconTabBarProcessTypeTs from '!./examples/platform-icon-tab-bar-process-type-example/platform-icon-tab-bar-process-type-example.component.ts?raw';
 
-import * as iconTabBarConfigurablePaddingsHtml from '!raw-loader!./examples/platform-icon-tab-bar-configurable-paddings-example/platform-icon-tab-bar-configurable-paddings-example.component.html';
-import * as iconTabBarConfigurablePaddingsTs from '!raw-loader!./examples/platform-icon-tab-bar-configurable-paddings-example/platform-icon-tab-bar-configurable-paddings-example.component.ts';
+import iconTabBarConfigurablePaddingsHtml from '!./examples/platform-icon-tab-bar-configurable-paddings-example/platform-icon-tab-bar-configurable-paddings-example.component.html?raw';
+import iconTabBarConfigurablePaddingsTs from '!./examples/platform-icon-tab-bar-configurable-paddings-example/platform-icon-tab-bar-configurable-paddings-example.component.ts?raw';
 
-import * as iconTypeConfigs from '!raw-loader!./examples/config-for-examples/icon-type-config';
+import iconTypeConfigs from '!./examples/config-for-examples/icon-type-config?raw';
 
-import * as textTypeConfigs from '!raw-loader!./examples/config-for-examples/text-type.config';
+import textTypeConfigs from '!./examples/config-for-examples/text-type.config?raw';
 
 // Duplicate types here, because import for pure files doesn't work for stackblitz  https://github.com/SAP/fundamental-ngx/issues/5351
 export type SemanticColor = 'negative' | 'critical' | 'positive' | 'informative';

@@ -5,6 +5,7 @@ import {
     getAttributeByName,
     getCSSPropertyByName,
     getText,
+    pause,
     refreshPage,
     scrollIntoView,
     waitForClickable,
@@ -44,9 +45,10 @@ describe('Dynamic Page Layout test suite:', () => {
         dynamicPageLayoutPage.open();
     }, 1);
 
-    afterEach(() => {
+    beforeEach(() => {
         refreshPage();
-        waitForPresent(dynamicPageLayoutPage.title);
+        waitForPresent(dynamicPageLayoutPage.root);
+        waitForElDisplayed(dynamicPageLayoutPage.title);
     }, 1);
 
     it('should check buttons titles', () => {
@@ -180,7 +182,9 @@ describe('Dynamic Page Layout test suite:', () => {
             waitForElDisplayed(openColumnButton);
             click(openColumnButton);
             waitForElDisplayed(columnSectionHeader);
+            pause(500);
             click(dynamicPageCollapseIcon);
+            pause(500);
             expect(waitForNotDisplayed(dynamicPageCollapsibleHeader)).toBe(true);
         });
 

@@ -113,7 +113,7 @@ export class TableP13DialogComponent implements OnDestroy {
         const columns = this._getTableColumns().filter(({ sortable }) => sortable);
         const sortBy = state.sortBy;
         const dialogData: SortDialogData = {
-            columns: columns.map(({ label, key }) => ({ label: label, key: key })),
+            columns: columns.map(({ label, key }) => ({ label, key })),
             collectionSort: sortBy
         };
 
@@ -137,7 +137,7 @@ export class TableP13DialogComponent implements OnDestroy {
         const columns = this._getTableColumns();
         const filterBy = state?.filterBy;
         const dialogData: FilterDialogData = {
-            columns: columns.map(({ label, key, dataType }) => ({ label: label, key: key, dataType: dataType })),
+            columns: columns.map(({ label, key, dataType }) => ({ label, key, dataType })),
             collectionFilter: filterBy
         };
 
@@ -167,7 +167,7 @@ export class TableP13DialogComponent implements OnDestroy {
                 // We can group by visible columns only
                 .filter(({ name }) => visibleColumns.includes(name))
                 .filter(({ groupable }) => groupable)
-                .map(({ label, key }) => ({ label: label, key: key })),
+                .map(({ label, key }) => ({ label, key })),
             collectionGroup: groupBy
         };
 
@@ -191,8 +191,8 @@ export class TableP13DialogComponent implements OnDestroy {
         const columns = this._getTableColumns();
         const visibleColumns = state.columns;
         const dialogData: ColumnsDialogData = {
-            availableColumns: columns.map(({ label, name }) => ({ label: label, key: name })),
-            visibleColumns: visibleColumns
+            availableColumns: columns.map(({ label, name }) => ({ label, key: name })),
+            visibleColumns
         };
 
         const dialogRef = this._dialogService.open(P13ColumnsDialogComponent, {

@@ -1,4 +1,4 @@
-<div [ngClass]="_cssClassForContainer" class="fd-icon-tab-bar">
+<div class="fd-icon-tab-bar" [class]="_cssClassForContainer">
     <ng-container *ngIf="iconTabType === 'text'">
         <ng-container *ngTemplateOutlet="textType"></ng-container>
     </ng-container>
@@ -21,6 +21,7 @@
         [tabsConfig]="tabsConfig"
         [isRtl]="_isRtl"
         [densityMode]="densityMode"
+        [colorAssociations]="colorAssociations"
         (selected)="_selectItem($event)"
     ></fdp-icon-tab-bar-process-type>
 </ng-template>
@@ -31,6 +32,7 @@
         [showTotalTab]="showTotalTab"
         [isRtl]="_isRtl"
         [densityMode]="densityMode"
+        [colorAssociations]="colorAssociations"
         (selected)="_selectItem($event)"
     ></fdp-icon-tab-bar-filter-type>
 </ng-template>
@@ -41,6 +43,7 @@
         [tabsConfig]="tabsConfig"
         [isRtl]="_isRtl"
         [densityMode]="densityMode"
+        [colorAssociations]="colorAssociations"
         (selected)="_selectItem($event)"
     ></fdp-icon-tab-bar-icon-type>
 </ng-template>
@@ -52,6 +55,7 @@
         [isRtl]="_isRtl"
         [densityMode]="densityMode"
         [enableTabReordering]="enableTabReordering"
+        [colorAssociations]="colorAssociations"
         (reordered)="_onReorder($event)"
         (selected)="_selectItem($event)"
     ></fdp-icon-tab-bar-text-type>

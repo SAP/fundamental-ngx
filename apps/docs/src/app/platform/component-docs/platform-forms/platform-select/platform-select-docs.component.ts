@@ -1,32 +1,32 @@
 import { Component } from '@angular/core';
 import { ExampleFile } from '../../../../documentation/core-helpers/code-example/example-file';
 
-import * as selectModeHtml from '!raw-loader!./platform-select-examples/platform-select-mode-example/platform-select-mode-example.component.html';
-import * as selectModeTs from '!raw-loader!./platform-select-examples/platform-select-mode-example/platform-select-mode-example.component.ts';
+import selectModeHtml from '!./platform-select-examples/platform-select-mode-example/platform-select-mode-example.component.html?raw';
+import selectModeTs from '!./platform-select-examples/platform-select-mode-example/platform-select-mode-example.component.ts?raw';
 
-import * as selectMobileHtml from '!raw-loader!./platform-select-examples/platform-select-mobile-example/platform-select-mobile-example.component.html';
-import * as selectMobileTs from '!raw-loader!./platform-select-examples/platform-select-mobile-example/platform-select-mobile-example.component.ts';
+import selectMobileHtml from '!./platform-select-examples/platform-select-mobile-example/platform-select-mobile-example.component.html?raw';
+import selectMobileTs from '!./platform-select-examples/platform-select-mobile-example/platform-select-mobile-example.component.ts?raw';
 
-import * as customTriggerHtml from '!raw-loader!./platform-select-examples/platform-select-custom-trigger/platform-select-custom-trigger.component.html';
-import * as customTriggerTs from '!raw-loader!./platform-select-examples/platform-select-custom-trigger/platform-select-custom-trigger.component.ts';
+import customTriggerHtml from '!./platform-select-examples/platform-select-custom-trigger/platform-select-custom-trigger.component.html?raw';
+import customTriggerTs from '!./platform-select-examples/platform-select-custom-trigger/platform-select-custom-trigger.component.ts?raw';
 
-import * as selectFormHtml from '!raw-loader!./platform-select-examples/platform-select-forms/platform-select-forms.component.html';
-import * as selectFormTs from '!raw-loader!./platform-select-examples/platform-select-forms/platform-select-forms.component.ts';
+import selectFormHtml from '!./platform-select-examples/platform-select-forms/platform-select-forms.component.html?raw';
+import selectFormTs from '!./platform-select-examples/platform-select-forms/platform-select-forms.component.ts?raw';
 
-import * as selectMaxHeightHtml from '!raw-loader!./platform-select-examples/platform-select-height/platform-select-max-height-example.component.html';
-import * as selectMaxHeightTs from '!raw-loader!./platform-select-examples/platform-select-height/platform-select-max-height-example.component.ts';
+import selectMaxHeightHtml from '!./platform-select-examples/platform-select-height/platform-select-max-height-example.component.html?raw';
+import selectMaxHeightTs from '!./platform-select-examples/platform-select-height/platform-select-max-height-example.component.ts?raw';
 
-import * as selectSemanticStateHtml from '!raw-loader!./platform-select-examples/platform-select-semantic-state-example/platform-select-semantic-state-example.component.html';
-import * as selectSemanticStateTs from '!raw-loader!./platform-select-examples/platform-select-semantic-state-example/platform-select-semantic-state-example.component.ts';
+import selectSemanticStateHtml from '!./platform-select-examples/platform-select-semantic-state-example/platform-select-semantic-state-example.component.html?raw';
+import selectSemanticStateTs from '!./platform-select-examples/platform-select-semantic-state-example/platform-select-semantic-state-example.component.ts?raw';
 
-import * as selectColumnsHtml from '!raw-loader!./platform-select-examples/platform-select-columns/platform-select-columns-example.component.html';
-import * as selectColumnsTs from '!raw-loader!./platform-select-examples/platform-select-columns/platform-select-columns-example.component';
+import selectColumnsHtml from '!./platform-select-examples/platform-select-columns/platform-select-columns-example.component.html?raw';
+import selectColumnsTs from '!./platform-select-examples/platform-select-columns/platform-select-columns-example.component?raw';
 
-import * as selectNoneHtml from '!raw-loader!./platform-select-examples/platform-select-none/platform-select-none-example.component.html';
-import * as selectNoneTs from '!raw-loader!./platform-select-examples/platform-select-none/platform-select-none-example.component';
+import selectNoneHtml from '!./platform-select-examples/platform-select-none/platform-select-none-example.component.html?raw';
+import selectNoneTs from '!./platform-select-examples/platform-select-none/platform-select-none-example.component?raw';
 
-import * as selectNoWrapHtml from '!raw-loader!./platform-select-examples/platform-select-nowrap/platform-select-nowrap-example.component.html';
-import * as selectNoWrapTs from '!raw-loader!./platform-select-examples/platform-select-nowrap/platform-select-nowrap-example.component';
+import selectNoWrapHtml from '!./platform-select-examples/platform-select-nowrap/platform-select-nowrap-example.component.html?raw';
+import selectNoWrapTs from '!./platform-select-examples/platform-select-nowrap/platform-select-nowrap-example.component?raw';
 
 @Component({
     selector: 'fdp-select-docs',

@@ -40,7 +40,7 @@ describe('MessageToastService', () => {
     });
 
     it('should open message toast container', () => {
-        const messageToastRef: MessageToastRef = service.open('Message Toast Test Content');
+        service.open('Message Toast Test Content');
         expect(service['_messageToastContainerRef']).toBeTruthy();
     });
 

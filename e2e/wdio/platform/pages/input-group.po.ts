@@ -52,7 +52,7 @@ export class InputGroupPo extends BaseComponentPo {
         waitForElDisplayed(this.root);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

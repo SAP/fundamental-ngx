@@ -14,26 +14,29 @@ interface ExampleTestModel {
     city: string;
 }
 
-const exampleDataSource = () => {
+interface FilterData {
+    key: string;
+    // name: string,
+    label: string;
+    advanced: boolean;
+}
+
+const exampleDataSource = (): { dataSource: ExampleTestModel[]; filters: FilterData[] } => {
     const dataSource = Array(100)
         .fill(null)
-        .map((_value, index) => {
-            return {
-                id: index + 1,
-                name: `Name ${index}`,
-                code: Math.floor(Math.random() * 99999),
-                city: `City ${Math.floor(Math.random() * index)}`
-            };
-        });
+        .map((_value, index) => ({
+            id: index + 1,
+            name: `Name ${index}`,
+            code: Math.floor(Math.random() * 99999),
+            city: `City ${Math.floor(Math.random() * index)}`
+        }));
     return {
-        dataSource: dataSource,
-        filters: Object.keys(dataSource[0]).map((value, index) => {
-            return {
-                key: value,
-                label: `Product ${value}`,
-                advanced: index > 0
-            };
-        })
+        dataSource,
+        filters: Object.keys(dataSource[0]).map((value, index) => ({
+            key: value,
+            label: `Product ${value}`,
+            advanced: index > 0
+        }))
     };
 };
 
@@ -42,7 +45,7 @@ const exampleDataSource = () => {
     templateUrl: './platform-vhd-token-example.component.html'
 })
 export class PlatformVhdTokenExampleComponent implements OnInit {
-    filters: any;
+    filters: FilterData[];
     dataSource: ValueHelpDialogDataSource<ExampleTestModel>;
     hasAdvanced = false;
     selectedValue = [];
@@ -54,9 +57,7 @@ export class PlatformVhdTokenExampleComponent implements OnInit {
         this.dataSource = new ValueHelpDialogDataSource(new VhdDataProvider(data.dataSource));
     }
 
-    tokenizerFn = (row: ExampleTestModel) => {
-        return `${row.name} (Id: ${row.id})`;
-    };
+    tokenizerFn = (row: ExampleTestModel): string => `${row.name} (Id: ${row.id})`;
 
     valueChange($event: VhdValueChangeEvent<ExampleTestModel[]>): void {
         console.log($event);

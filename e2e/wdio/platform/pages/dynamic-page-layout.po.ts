@@ -1,5 +1,5 @@
 import { BaseComponentPo } from './base-component.po';
-import { waitForElDisplayed } from '../../driver/wdio';
+import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class DynamicPageLayoutPo extends BaseComponentPo {
     private url = '/dynamic-page';
@@ -15,11 +15,10 @@ export class DynamicPageLayoutPo extends BaseComponentPo {
     dynamicPageContentStart = 'fdp-dynamic-page-content-host br';
     dynamicPageContentEnd = 'fdp-dynamic-page-content-host .footer-spacer';
     dynamicPageTitle = '.fd-dynamic-page__title-container';
-    dynamicPageToolBar = '.fd-dynamic-page__toolbar';
-    dynamicPageTabs = '.fd-dynamic-page__tabs--overflow .fd-tabs__item';
-    dynamicPageTabsContent = 'fdp-dynamic-page-content-host';
-    dynamicPageToolBarAccept = this.dynamicPageToolBar + ' .fd-button--positive';
-    dynamicPageToolBarReject = this.dynamicPageToolBar + ' .fd-button--negative';
+    dynamicPageTabs = '.fd-dynamic-page .fd-tabs__item';
+    dynamicPageTabsContent = '.fd-dynamic-page__content';
+    dynamicPageToolBarAccept = this.dynamicPage + ' .fd-button--positive';
+    dynamicPageToolBarReject = this.dynamicPage + ' .fd-button--negative';
     dynamicPageCollapsibleHeader = this.dynamicPage + ' .fd-dynamic-page__collapsible-header-container [role="region"]';
 
     columnSection = 'section';
@@ -29,10 +28,11 @@ export class DynamicPageLayoutPo extends BaseComponentPo {
 
     open(): void {
         super.open(this.url);
+        waitForPresent(this.root);
         waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

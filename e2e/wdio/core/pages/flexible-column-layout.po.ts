@@ -18,14 +18,15 @@ export class FlexibleColumnLayoutPo extends CoreBaseComponentPo {
     collapsButton = '.fd-dynamic-page__collapse-button';
     collapsibleHeader = '.fd-dynamic-page__collapsible-header';
     pinButton = '.fd-dynamic-page__pin-button';
+    columnButton2 = this.column + ' .fd-button:not(.fd-button--standard, .fd-button--transparent)';
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForPresent(this.title);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import * as basicThumbnailHtml from '!raw-loader!./platform-thumbnail-examples/platform-thumbnail-basic-example.component.html';
-import * as basicThumbnailTs from '!raw-loader!./platform-thumbnail-examples/platform-thumbnail-basic-example.component.ts';
-import * as horizontalThumbnailHtml from '!raw-loader!./platform-thumbnail-examples/platform-thumbnail-horizontal-example.component.html';
-import * as horizontalThumbnailTs from '!raw-loader!./platform-thumbnail-examples/platform-thumbnail-horizontal-example.component.ts';
-import * as videoThumbnailHtml from '!raw-loader!./platform-thumbnail-examples/platform-thumbnail-video-media-example.component.html';
-import * as videoThumbnailTs from '!raw-loader!./platform-thumbnail-examples/platform-thumbnail-video-media-example.component.ts';
+import basicThumbnailHtml from '!./platform-thumbnail-examples/platform-thumbnail-basic-example.component.html?raw';
+import basicThumbnailTs from '!./platform-thumbnail-examples/platform-thumbnail-basic-example.component.ts?raw';
+import horizontalThumbnailHtml from '!./platform-thumbnail-examples/platform-thumbnail-horizontal-example.component.html?raw';
+import horizontalThumbnailTs from '!./platform-thumbnail-examples/platform-thumbnail-horizontal-example.component.ts?raw';
+import videoThumbnailHtml from '!./platform-thumbnail-examples/platform-thumbnail-video-media-example.component.html?raw';
+import videoThumbnailTs from '!./platform-thumbnail-examples/platform-thumbnail-video-media-example.component.ts?raw';
 
 @Component({
     selector: 'app-platform-thumbnail',

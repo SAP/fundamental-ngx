@@ -1,4 +1,3 @@
-import { TableInnerDirective } from './table-inner.directive';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TableModule } from '../table.module';

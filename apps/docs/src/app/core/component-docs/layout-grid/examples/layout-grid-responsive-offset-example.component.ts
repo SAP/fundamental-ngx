@@ -4,4 +4,4 @@ import { Component } from '@angular/core';
     selector: 'fd-layout-grid-responsive-offset-example',
     templateUrl: './layout-grid-responsive-offset-example.component.html'
 })
-export class LayoutGridResponsiveOffsetExample {}
+export class LayoutGridResponsiveOffsetExampleComponent {}

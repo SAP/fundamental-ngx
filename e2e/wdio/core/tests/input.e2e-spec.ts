@@ -1,12 +1,16 @@
 import {
     addValue,
+    browserIsSafari,
     clearValue,
     click,
+    getAttributeByName,
     getElementArrayLength,
+    getElementClass,
     getElementSize,
     getPreviousElementText,
     getText,
     getValue,
+    isElementDisplayed,
     isEnabled,
     mouseHoverElement,
     refreshPage,
@@ -21,6 +25,8 @@ import {
     inputMessageText,
     invalidInputLabelText,
     labelsArray,
+    stateClassesArr,
+    testText,
     validInputLabelText,
     warningInputLabelText
 } from '../fixtures/appData/input-page-contents';
@@ -52,7 +58,12 @@ describe('Input should ', () => {
         warningInputLabel,
         informationInputLabel,
         addBtn,
-        reactivePrimaryInput2
+        reactivePrimaryInput2,
+        allInputFields,
+        popoverHelp,
+        questionMark,
+        inputStateExample,
+        input
     } = inputPage;
 
     const inputsArr = [
@@ -76,7 +87,8 @@ describe('Input should ', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(defaultInput);
+        waitForPresent(inputPage.root);
+        waitForElDisplayed(inputPage.title);
     }, 1);
 
     it('be able to type something with keyboard', () => {
@@ -88,12 +100,12 @@ describe('Input should ', () => {
 
     it('have associated label element to describe its purpose', () => {
         for (let i = 0; inputsArr.length > i; i++) {
-            expect(getPreviousElementText(inputsArr[i])).toBe(labelsArray[i]);
+            expect(getPreviousElementText(inputsArr[i]).trim()).toBe(labelsArray[i]);
         }
-        expect(getText(validInputLabel)).toBe(validInputLabelText);
-        expect(getText(invalidInputLabel)).toBe(invalidInputLabelText);
-        expect(getText(warningInputLabel)).toBe(warningInputLabelText);
-        expect(getText(informationInputLabel)).toBe(informationInputLabelText);
+        expect(getText(validInputLabel).trim()).toBe(validInputLabelText);
+        expect(getText(invalidInputLabel).trim()).toBe(invalidInputLabelText);
+        expect(getText(warningInputLabel).trim()).toBe(warningInputLabelText);
+        expect(getText(informationInputLabel).trim()).toBe(informationInputLabelText);
     });
 
     it('by default accept all kinds of input values – alphabet, numerical, special characters', () => {
@@ -141,22 +153,64 @@ describe('Input should ', () => {
 
     it('should have message attached to the input', () => {
         click(validInput);
-        expect(getText(formMessagePopover)).toBe(inputMessageText);
+        expect(getText(formMessagePopover).trim()).toBe(inputMessageText);
 
         scrollIntoView(invalidInput);
         mouseHoverElement(invalidInput);
-        expect(getText(formMessagePopover)).toBe(inputMessageText);
+        expect(getText(formMessagePopover).trim()).toBe(inputMessageText);
 
         click(warningInput);
-        expect(getText(formMessagePopover)).toBe(inputMessageText);
+        expect(getText(formMessagePopover).trim()).toBe(inputMessageText);
 
         click(informationInput);
-        expect(getText(formMessagePopover)).toBe(inputMessageText);
+        expect(getText(formMessagePopover).trim()).toBe(inputMessageText);
     });
 
     it('should add to more input fields by click Add btn', () => {
         click(addBtn);
         expect(getElementArrayLength(reactivePrimaryInput2)).toBe(2);
+    });
+
+    it('should check all input fields work correctly', () => {
+        const inputLength = getElementArrayLength(allInputFields);
+        for (let i = 0; i < inputLength; i++) {
+            scrollIntoView(allInputFields, i);
+            setValue(allInputFields, text + number + special_characters, i);
+            expect(getValue(allInputFields, i)).toBe(text + number + special_characters);
+        }
+    });
+
+    it('should check displayed popover by clicking and check text', () => {
+        scrollIntoView(questionMark);
+        click(questionMark);
+        expect(isElementDisplayed(popoverHelp)).toBe(true, 'popover not displayed');
+        expect(getText(popoverHelp).trim()).toBe(testText);
+
+        click(questionMark, 1);
+        expect(isElementDisplayed(popoverHelp)).toBe(true, 'popover not displayed');
+        expect(getText(popoverHelp).trim()).toBe(testText);
+    });
+
+    it('should check displayed popover by hover question mark', () => {
+        // skipped due to hoverElement does not work in Safari
+        if (browserIsSafari) {
+            return;
+        }
+        scrollIntoView(questionMark);
+        mouseHoverElement(questionMark);
+        expect(isElementDisplayed(popoverHelp)).toBe(true, 'popover not displayed');
+
+        mouseHoverElement(questionMark, 1);
+        expect(isElementDisplayed(popoverHelp)).toBe(true, 'popover not displayed');
+    });
+
+    it('should check states', () => {
+        scrollIntoView(inputStateExample);
+        const checkboxCount = getElementArrayLength(inputStateExample + input);
+
+        for (let i = 0; i < checkboxCount; i++) {
+            expect(getElementClass(inputStateExample + input, i)).toContain(stateClassesArr[i]);
+        }
     });
 
     it('should check RTL', () => {

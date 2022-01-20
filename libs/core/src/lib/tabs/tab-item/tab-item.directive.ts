@@ -17,7 +17,7 @@ export type TabItemState = 'success' | 'error' | 'warning' | 'information' | 'ne
  * ```
  */
 @Directive({
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-tab-item]'
 })
 export class TabItemDirective implements CssClassBuilder, OnChanges, OnInit {

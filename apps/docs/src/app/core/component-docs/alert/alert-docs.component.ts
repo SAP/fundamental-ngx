@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
-import * as alertExampleHtml from '!raw-loader!./examples/alert-example.component.html';
-import * as alertExampleScs from '!raw-loader!./examples/alert-example.component.scss';
-import * as alertContent from '!raw-loader!./examples/alert-content.component.ts';
-import * as alertComponentAsContentExample from '!raw-loader!./examples/alert-component-as-content-example.component.ts';
-import * as alertComponentAsContentExampleH from '!raw-loader!./examples/alert-component-as-content-example.component.html';
-import * as alertComponentAsContentExampleScss from '!raw-loader!./examples/alert-component-as-content-example.component.scss';
-import * as alertInlineExampleHtml from '!raw-loader!./examples/alert-inline-example.component.html';
-import * as alertInlineExampleScs from '!raw-loader!./examples/alert-inline-example.component.scss';
-import * as alertWidthExampleHtml from '!raw-loader!./examples/alert-width-example.component.html';
-import * as alertWidthExampleTs from '!raw-loader!./examples/alert-width-example.component.ts';
-import * as alertWidthExampleScss from '!raw-loader!./examples/alert-width-example.component.scss';
+import alertExampleHtml from '!./examples/alert-example.component.html?raw';
+import alertExampleScs from '!./examples/alert-example.component.scss?raw';
+import alertContent from '!./examples/alert-content.component.ts?raw';
+import alertComponentAsContentExample from '!./examples/alert-component-as-content-example.component.ts?raw';
+import alertComponentAsContentExampleH from '!./examples/alert-component-as-content-example.component.html?raw';
+import alertComponentAsContentExampleScss from '!./examples/alert-component-as-content-example.component.scss?raw';
+import alertInlineExampleHtml from '!./examples/alert-inline-example.component.html?raw';
+import alertInlineExampleScs from '!./examples/alert-inline-example.component.scss?raw';
+import alertWidthExampleHtml from '!./examples/alert-width-example.component.html?raw';
+import alertWidthExampleTs from '!./examples/alert-width-example.component.ts?raw';
+import alertWidthExampleScss from '!./examples/alert-width-example.component.scss?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

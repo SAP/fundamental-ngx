@@ -3,16 +3,18 @@ import {
     click,
     getElementAriaLabel,
     getElementArrayLength,
+    getElementClass,
     getElementTitle,
     refreshPage,
     scrollIntoView,
+    waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 import { iconStatusesList } from '../fixtures/appData/object-marker-content';
 
 describe('Object marker test suite', () => {
     const objectMarkerPage = new ObjectMarkerPo();
-    const { marker, iconOnlyMarkers } = objectMarkerPage;
+    const { marker, iconOnlyMarkers, objectMarkerClickableExample, icon, link } = objectMarkerPage;
 
     beforeAll(() => {
         objectMarkerPage.open();
@@ -20,7 +22,8 @@ describe('Object marker test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(marker);
+        waitForPresent(objectMarkerPage.root);
+        waitForElDisplayed(objectMarkerPage.title);
     }, 1);
 
     it('Verify each marker is clickable', () => {
@@ -37,6 +40,14 @@ describe('Object marker test suite', () => {
             expect(getElementTitle(iconOnlyMarkers, i)).toBe(iconStatusesList[i][0]);
             expect(getElementAriaLabel(iconOnlyMarkers, i)).toBe(iconStatusesList[i][1]);
         }
+    });
+
+    it('Verify changing marker', () => {
+        scrollIntoView(objectMarkerClickableExample);
+        expect(getElementClass(objectMarkerClickableExample + icon, 1)).toContain('sap-icon--private');
+
+        click(objectMarkerClickableExample + link, 1);
+        expect(getElementClass(objectMarkerClickableExample + icon, 1)).toContain('sap-icon--add-favorite');
     });
 
     describe('Check orientation', () => {

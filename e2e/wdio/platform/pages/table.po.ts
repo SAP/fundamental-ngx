@@ -25,9 +25,13 @@ export class TablePo extends BaseComponentPo {
     tableNoItemsTemplateExample = 'fdp-platform-table-no-items-template-example ';
     tableSemanticExample = 'fdp-platform-table-semantic-example ';
     tableRowClassExample = 'fdp-platform-table-row-class-example ';
+    tableTreeExample = 'fdp-platform-table-tree-example ';
+    tableWrapExample = 'fdp-platform-table-wrap-example ';
+    tableNoOuterBordersExample = 'fdp-platform-table-no-outer-borders-example ';
 
     button = 'button';
     buttonSearch = '.fdp-search-field__submit';
+    buttonFilter = 'button[title="filter"]';
     tableRow = 'tbody .fd-table__row.ng-star-inserted ';
     tableRowInitialState = 'tbody .fd-table__row.ng-star-inserted:not([aria-rowindex="0"], [aria-rowindex="3"])';
     input = 'input';
@@ -39,7 +43,7 @@ export class TablePo extends BaseComponentPo {
     tableCellDescription = '[headers*="description"]';
     tableCellPrice = '[headers*="price"]';
     tableCellName = '[headers*="name"]';
-    buttonSortedOrder = 'li.fd-list__item';
+    buttonSortedOrder = 'li.fd-list__item:not(.fd-list__group-header)';
     checkbox = '.fd-checkbox__label';
     busyIndicator = 'fd-busy-indicator .fd-busy-indicator';
     filterItem = '.fd-list__item--link';
@@ -73,25 +77,26 @@ export class TablePo extends BaseComponentPo {
     dropdownList = '.fd-select-options';
     dropdownOption = 'fd-option.fd-list__item ';
     dialogButton = 'fd-dialog-body .fd-button--compact';
-    dialogFilters = 'fd-dialog-body .fd-list__item';
+    dialogFilters = 'fd-dialog-body .fd-list__item:not(.fd-list__group-header)';
     filterInput = 'fdp-filter-custom input';
     filterButtonOk = 'fd-dialog-footer button';
     filterResetButton = 'fdp-table-reset-button button';
-    allInputFields = 'fdp-search-field input';
-    sortableIcon = '.fd-table__icon';
+    allInputFields = 'fd-toolbar .fdp-search-field__input-group';
+    sortableIcon = 'fdp-platform-table-sortable-example th';
     sortableOption = 'fd-popover-body .fd-list__item';
     sortablePopover = 'fd-popover-body';
     buttonActionOne = '[label="Action One"] button';
     buttonActionTwo = '[label="Action Two"] button';
     ellipsisButton = '.fd-ellipsis';
-
+    synchronizeButton = '.fdp-search-field__loading';
+    arrowButton = '.fd-table__cell--expand';
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForPresent(this.tableDefaultExample);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

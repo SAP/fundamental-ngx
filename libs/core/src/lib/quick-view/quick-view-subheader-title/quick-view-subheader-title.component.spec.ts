@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 import { QuickViewModule } from '../quick-view.module';
-import { QuickViewSubheaderTitleComponent } from './quick-view-subheader-title.component';
 
 @Component({
     template: `<fd-quick-view-subheader-title> Subheader Title </fd-quick-view-subheader-title>`

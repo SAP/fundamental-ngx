@@ -26,15 +26,16 @@ export class SchemaGroupComponent implements OnInit {
     /**
      * Emits when playground needs to be resetted.
      */
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     @Output() onReset: EventEmitter<void> = new EventEmitter<void>();
 
     ngOnInit(): void {
         const controls = this.schemaGroup.controls;
 
         for (const key in controls) {
-            if (controls.hasOwnProperty(key)) {
+            if (Object.prototype.hasOwnProperty.call(controls, key)) {
                 this.controls.push({
-                    key: key,
+                    key,
                     control: controls[key],
                     type: this.properties[key].type,
                     enum: this.properties[key].enum

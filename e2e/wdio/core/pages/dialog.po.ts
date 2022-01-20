@@ -18,6 +18,7 @@ export class DialogPo extends CoreBaseComponentPo {
     customDialog = 'fd-dialog-backdrop-container-example ';
     playgroundDialog = 'playground ';
     dialogExamples = 'component-example ';
+    formDialog = 'fd-form-dialog-example ';
 
     // main selectors
     dialog = 'fd-dialog.fd-dialog--active ';
@@ -28,20 +29,22 @@ export class DialogPo extends CoreBaseComponentPo {
     dialogContainer = this.dialog + '.cdk-drag';
     dialogContainer2 = this.dialog + '.cdk-drag-disabled';
     resizeHandle = this.dialog + '.fd-dialog__resize-handle';
-    dialogItems = this.dialog + 'li';
+    dialogItems = this.dialog + '.fd-list__item';
     searchBar = this.dialog + 'input';
     dialogCartOutput = this.dialog + 'footer .fd-bar__element';
     checkboxes = 'fd-checkbox label';
     inputFields = '.form-group input';
     dialogBody = this.dialog + 'fd-dialog-body';
+    dialogInput = this.dialog + 'input';
+    formExampleResult = this.formDialog + 'p';
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForPresent(this.title);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

@@ -7,8 +7,18 @@ import { CollectionFilter } from './interfaces/collection-filter.interface';
 import { CollectionGroup } from './interfaces/collection-group.interface';
 import { SearchInput } from './interfaces/search-field.interface';
 import { TableColumn } from './components/table-column/table-column';
+import { TableDataSource } from './domain';
 
 export abstract class Table {
+    /** Sum of widths of fixed columns (semantic highlighting, selection) */
+    abstract get _fixedColumnsPadding(): number;
+
+    /** Freezable column names and their respective indexes */
+    abstract get _freezableColumns(): ReadonlyMap<string, number>;
+
+    /** Width of the table element in px */
+    abstract get _tableWidthPx(): number;
+
     /** Table columns definition list */
     abstract readonly tableColumnsStream: Observable<TableColumn[]>;
 
@@ -54,6 +64,9 @@ export abstract class Table {
     /** Set table columns */
     abstract setColumns(columns: string[]): void;
 
+    /** Toggle row checked state. */
+    abstract toggleSelectableRow(rowIndex: number): void;
+
     /** Freeze table columns to including */
     abstract freezeToColumn(columnKey: string): void;
 
@@ -80,4 +93,16 @@ export abstract class Table {
 
     /** Set current page */
     abstract setCurrentPage(currentPage: number): void;
+
+    /** Gets the max allowed width for all freezable columns */
+    abstract getMaxAllowedFreezableColumnsWidth(): number;
+
+    /** Get table data source */
+    abstract getDataSource(): TableDataSource<any>;
+
+    /** Manually triggers columns width recalculation */
+    abstract recalculateTableColumnWidth(): void;
+
+    /** Fetch data source data. */
+    abstract fetch(): void;
 }

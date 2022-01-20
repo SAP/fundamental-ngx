@@ -4,9 +4,11 @@ import { ApiComponent } from '../../../documentation/core-helpers/api/api.compon
 import { API_FILES } from '../../api-files';
 import { PaginationHeaderComponent } from './pagination-header/pagination-header.component';
 import { PaginationDocsComponent } from './pagination-docs.component';
+
 import { PaginationExampleComponent } from './examples/pagination-example.component';
 import { PaginationShowingExampleComponent } from './examples/pagination-showing-example.component';
-import { PaginationPerPageExampleComponent } from './examples/pagination-per-page-example.component';
+import { PaginationPerPageExampleComponent } from './examples/pagination-per-page/pagination-per-page-example.component';
+import { PaginationMobileExampleComponent } from './examples/pagination-mobile/pagination-mobile-example.component';
 
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { PaginationModule } from '@fundamental-ngx/core/pagination';
@@ -40,7 +42,8 @@ const routes: Routes = [
         PaginationHeaderComponent,
         PaginationExampleComponent,
         PaginationShowingExampleComponent,
-        PaginationPerPageExampleComponent
+        PaginationPerPageExampleComponent,
+        PaginationMobileExampleComponent
     ]
 })
 export class PaginationDocsModule {}

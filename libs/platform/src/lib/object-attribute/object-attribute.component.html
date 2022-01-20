@@ -6,7 +6,7 @@
         [attr.tabindex]="disabled ? '-1' : '0'"
         [attr.aria-label]="linkText"
         [attr.title]="linkText"
-        [ngClass]="islink ? 'fd-object-attribute--link' : ''"
+        [class.fd-object-attribute--link]="islink"
         role="link"
         [attr.aria-disabled]="disabled"
         (keydown.enter)="onObjectAttributeClick($event)"

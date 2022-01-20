@@ -48,13 +48,14 @@ export class VhdDataProvider<R> extends DataProvider<R> {
     fetch(params: Map<string, string>): Observable<R[]> {
         let data = this.values;
         const arrayParams = Array.from(params);
-        const filterFn = (row: R) => {
+        const filterFn = (row: R): boolean => {
             const rowEntries = Object.entries(row) as string[][];
             return arrayParams.every(([key, value]) => {
                 if (key === '*') {
-                    return rowEntries.some(([_rowEntryKey, rowEntryValue]) => {
-                        return String(rowEntryValue).toLowerCase().includes(value.toLowerCase());
-                    });
+                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                    return rowEntries.some(([_rowEntryKey, rowEntryValue]) =>
+                        String(rowEntryValue).toLowerCase().includes(value.toLowerCase())
+                    );
                 } else {
                     return String(row[key]).toLowerCase().includes(value.toLowerCase());
                 }

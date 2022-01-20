@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
-import { isFunction, mergeDeep, selectStrategy } from '@fundamental-ngx/platform/shared';
+import { isFunction, selectStrategy } from '@fundamental-ngx/platform/shared';
 import { FormGeneratorService } from '@fundamental-ngx/platform/form';
 import {
     WizardGeneratorStepComponent,
@@ -13,6 +13,7 @@ import {
     WizardGeneratorItem,
     WizardVisibleSteps
 } from './interfaces/wizard-generator-item.interface';
+import { merge } from 'lodash-es';
 
 export type StepsComponents = Map<string, WizardGeneratorStepComponent>;
 
@@ -184,7 +185,7 @@ export class WizardGeneratorService {
         this.dependencySteps = newItems.reduce((steps, step) => {
             if (step.dependencyFields) {
                 for (const [id, forms] of Object.entries(step.dependencyFields)) {
-                    steps[id] = mergeDeep(steps[id] || {}, forms);
+                    steps[id] = merge(steps[id] || {}, forms);
                 }
             }
 
@@ -291,7 +292,7 @@ export class WizardGeneratorService {
             for (const form of item.formGroups) {
                 wizardFormValue[item.id][form.id] = formatted
                     ? await this._formGeneratorService.getFormValue(forms[form.id]?.form)
-                    : forms[form.id]?.form.value;
+                    : this._formGeneratorService._getFormValueWithoutUngrouped(forms[form.id]?.form.value);
             }
         }
 
@@ -312,6 +313,7 @@ export class WizardGeneratorService {
      * @returns {Boolean} if steps are untouched, will return true, if yes - false
      */
     isStepsUntouched(): boolean {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         return [...this.stepsComponents].every(([_, component]) =>
             component.forms.toArray().every((item) => !item.form.touched)
         );

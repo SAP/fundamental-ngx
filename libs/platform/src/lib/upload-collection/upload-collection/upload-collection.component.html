@@ -154,9 +154,10 @@
                 selectionMode="multiple"
                 emptyTableMessage=""
                 noHorizontalBorders="true"
+                [trackBy]="_trackByDocumentId"
                 (rowSelectionChange)="_onRowSelectionChange($event)"
             >
-                <fdp-column name="name" label="Name" width="5rem">
+                <fdp-column name="name" label="Name" width="8rem">
                     <fdp-table-cell *fdpCellDef="let item">
                         <div class="fdp-upload-collection__vertical-align-center">
                             <fd-icon
@@ -198,7 +199,9 @@
                                             compact="true"
                                             [state]="item.sameFilenameState"
                                         />
-                                        <span [innerText]="_getItemExtension(item)"></span>
+                                        <span class="fdp-upload-collection__item_extension">{{
+                                            _getItemExtension(item)
+                                        }}</span>
                                     </div>
 
                                     <fd-form-message

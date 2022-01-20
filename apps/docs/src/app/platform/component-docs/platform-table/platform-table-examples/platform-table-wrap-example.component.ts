@@ -46,12 +46,12 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
     items: ExampleItem[] = [...ITEMS];
     totalItems = ITEMS.length;
 
-    fetch(tableState: TableState): Observable<ExampleItem[]> {
+    fetch(tableState?: TableState): Observable<ExampleItem[]> {
         this.items = [...ITEMS];
 
         // apply searching
-        if (tableState.searchInput) {
-            this.items = this.search(tableState);
+        if (tableState?.searchInput) {
+            this.items = this.search(this.items, tableState);
         }
 
         this.totalItems = this.items.length;
@@ -59,8 +59,7 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
         return of(this.items);
     }
 
-    private search({ searchInput, columns }: TableState): ExampleItem[] {
-        const items = this.items;
+    search(items: ExampleItem[], { searchInput, columns }: TableState): ExampleItem[] {
         const searchText = searchInput?.text || '';
         const keysToSearchBy = columns;
 
@@ -78,7 +77,7 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
     }
 }
 
-function getNestedValue<T extends {}>(key: string, object: T): any {
+function getNestedValue<T extends Record<string, any>>(key: string, object: T): any {
     return key.split('.').reduce((a, b) => a[b], object);
 }
 
@@ -87,8 +86,12 @@ const ITEMS: ExampleItem[] = [
     {
         id: 1,
         name: '10 Portable DVD player',
-        description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id tincidunt elit, sit amet molestie mauris. Phasellus cursus scelerisque nulla at pulvinar. Nunc et odio eu est facilisis hendrerit vitae aliquet tellus. In vel lectus a ligula efficitur pretium a non quam. Pellentesque vitae justo eget orci dignissim sollicitudin. Morbi pretium diam quis iaculis rutrum. Suspendisse pulvinar dui sapien, nec blandit orci varius eget.',
+        description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id tincidunt elit,
+            sit amet molestie mauris. Phasellus cursus scelerisque nulla at pulvinar.
+            Nunc et odio eu est facilisis hendrerit vitae aliquet tellus.
+            In vel lectus a ligula efficitur pretium a non quam.
+            Pellentesque vitae justo eget orci dignissim sollicitudin.
+            Morbi pretium diam quis iaculis rutrum. Suspendisse pulvinar dui sapien, nec blandit orci varius eget.`,
         price: {
             value: 66.04,
             currency: 'CNY'

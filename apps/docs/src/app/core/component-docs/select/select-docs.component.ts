@@ -1,36 +1,36 @@
 import { Component } from '@angular/core';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
-import * as selectModeHtml from '!raw-loader!./examples/select-mode-example/select-mode-example.component.html';
-import * as selectModeTs from '!raw-loader!./examples/select-mode-example/select-mode-example.component.ts';
+import selectModeHtml from '!./examples/select-mode-example/select-mode-example.component.html?raw';
+import selectModeTs from '!./examples/select-mode-example/select-mode-example.component.ts?raw';
 
-import * as selectProgressiveHtml from '!raw-loader!./examples/select-programmatic-example/select-programmatic-example.component.html';
-import * as selectProgressiveScss from '!raw-loader!./examples/select-programmatic-example/select-programmatic-example.component.scss';
-import * as selectProgressiveTs from '!raw-loader!./examples/select-programmatic-example/select-programmatic-example.component.ts';
+import selectProgressiveHtml from '!./examples/select-programmatic-example/select-programmatic-example.component.html?raw';
+import selectProgressiveScss from '!./examples/select-programmatic-example/select-programmatic-example.component.scss?raw';
+import selectProgressiveTs from '!./examples/select-programmatic-example/select-programmatic-example.component.ts?raw';
 
-import * as selectMobileHtml from '!raw-loader!./examples/select-mobile-example/select-mobile-example.component.html';
-import * as selectMobileTs from '!raw-loader!./examples/select-mobile-example/select-mobile-example.component.ts';
+import selectMobileHtml from '!./examples/select-mobile-example/select-mobile-example.component.html?raw';
+import selectMobileTs from '!./examples/select-mobile-example/select-mobile-example.component.ts?raw';
 
-import * as selectNestedHtml from '!raw-loader!./examples/select-nested-options/select-nested-options.component.html';
-import * as selectNestedTs from '!raw-loader!./examples/select-nested-options/select-nested-options.component.ts';
-import * as selectNestedScss from '!raw-loader!./examples/select-nested-options/select-nested-options.component.scss';
+import selectNestedHtml from '!./examples/select-nested-options/select-nested-options.component.html?raw';
+import selectNestedTs from '!./examples/select-nested-options/select-nested-options.component.ts?raw';
+import selectNestedScss from '!./examples/select-nested-options/select-nested-options.component.scss?raw';
 
-import * as customTriggerHtml from '!raw-loader!./examples/select-custom-trigger/select-custom-trigger.component.html';
-import * as customTriggerTs from '!raw-loader!./examples/select-custom-trigger/select-custom-trigger.component.ts';
-import * as customTriggerScss from '!raw-loader!./examples/select-custom-trigger/select-custom-trigger.component.scss';
+import customTriggerHtml from '!./examples/select-custom-trigger/select-custom-trigger.component.html?raw';
+import customTriggerTs from '!./examples/select-custom-trigger/select-custom-trigger.component.ts?raw';
+import customTriggerScss from '!./examples/select-custom-trigger/select-custom-trigger.component.scss?raw';
 
-import * as selectAddingHtml from '!raw-loader!./examples/select-adding-example/select-adding-example.component.html';
-import * as selectAddingScss from '!raw-loader!./examples/select-adding-example/select-adding-example.component.scss';
-import * as selectAddingTs from '!raw-loader!./examples/select-adding-example/select-adding-example.component.ts';
+import selectAddingHtml from '!./examples/select-adding-example/select-adding-example.component.html?raw';
+import selectAddingScss from '!./examples/select-adding-example/select-adding-example.component.scss?raw';
+import selectAddingTs from '!./examples/select-adding-example/select-adding-example.component.ts?raw';
 
-import * as selectFormHtml from '!raw-loader!./examples/select-forms/select-forms.component.html';
-import * as selectFormTs from '!raw-loader!./examples/select-forms/select-forms.component.ts';
+import selectFormHtml from '!./examples/select-forms/select-forms.component.html?raw';
+import selectFormTs from '!./examples/select-forms/select-forms.component.ts?raw';
 
-import * as selectMaxHeightHtml from '!raw-loader!./examples/select-height/select-max-height-example.component.html';
-import * as selectMaxHeightTs from '!raw-loader!./examples/select-height/select-max-height-example.component.ts';
+import selectMaxHeightHtml from '!./examples/select-height/select-max-height-example.component.html?raw';
+import selectMaxHeightTs from '!./examples/select-height/select-max-height-example.component.ts?raw';
 
-import * as selectSemanticStateHtml from '!raw-loader!./examples/select-semantic-state-example/select-semantic-state-example.component.html';
-import * as selectSemanticStateTs from '!raw-loader!./examples/select-semantic-state-example/select-semantic-state-example.component.ts';
+import selectSemanticStateHtml from '!./examples/select-semantic-state-example/select-semantic-state-example.component.html?raw';
+import selectSemanticStateTs from '!./examples/select-semantic-state-example/select-semantic-state-example.component.ts?raw';
 
 @Component({
     selector: 'fd-select-docs',

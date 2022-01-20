@@ -13,8 +13,11 @@ export class TablePo extends CoreBaseComponentPo {
     tablePopinExample = 'fd-table-popin-example';
     tableNavigatableRowExample = 'fd-table-navigatable-row-example';
     tablePaginationExample = 'fd-table-pagination-example';
+    tableActivableExample = 'fd-table-activable-example';
+    tableFocusableExample = 'fd-table-focusable-example';
+    tableCDKExample = 'fd-table-cdk-example';
 
-    link = ' a';
+    link = ' a:not(.fd-button)';
     busyIndicator = '.fd-busy-indicator';
     inputField = ' input';
     button = ' button';
@@ -23,27 +26,29 @@ export class TablePo extends CoreBaseComponentPo {
     tableRow = ' .fd-table__body .fd-table__row';
     tableCell = ' .fd-table__cell';
     markAllCheckboxes = ' .fd-table__header fd-checkbox';
-    markAllCheckboxesFF = ' .fd-table__header fd-checkbox label';
+    markAllCheckboxesFF = ' .fd-table__header .fd-table__cell--checkbox';
     clickableTableRow = ' .fd-table__row--activable';
     clickableTableRowFF = ' .fd-table__row--activable .fd-table__cell:nth-of-type(2)';
     menuItem = '.fd-menu__item';
     paginationLink = '.fd-pagination__link.ng-star-inserted';
     tableResult = '.fd-pagination__total';
-    linkPrevious = '.fd-pagination__link--previous';
-    linkNext = '.fd-pagination__link--next';
+    linkPrevious = '[glyph="navigation-left-arrow"]';
+    linkNext = '[glyph="navigation-right-arrow"]';
     inputGroup = ' .fd-input-group__input';
     dialogValue = '.fd-list__item.ng-star-inserted .fd-list__title';
     tableInner = '.fd-table__inner';
     columnSortingInput = '.fd-popover__popper input';
     listItem = '.fd-list__item';
+    selectedPage = this.paginationLink + '.is-selected';
+    tableCellWOHeader = ' .fd-table__cell:not(.cdk-header-cell)';
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForPresent(this.title);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

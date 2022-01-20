@@ -1,10 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
 import { FormModule } from '@fundamental-ngx/core/form';
 import { RadioModule } from '@fundamental-ngx/core/radio';
+import { runValueAccessorTests } from 'ngx-cva-test-suite';
+import { PlatformRadioGroupModule } from '../radio-group.module';
 import { RadioButtonComponent } from './radio.component';
 
 @Component({
@@ -53,8 +55,8 @@ describe('RadioButtonComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [RadioModule, FormModule, FormsModule],
-                declarations: [RadioButtonComponent, TestRadioButtonComponent]
+                imports: [RadioModule, FormModule, FormsModule, PlatformRadioGroupModule],
+                declarations: [TestRadioButtonComponent]
             }).compileComponents();
         })
     );
@@ -75,28 +77,30 @@ describe('RadioButtonComponent', () => {
     });
 
     it('radio button with default property should be created', () => {
-        const inputElem = fixture.debugElement.query(By.css('input'));
+        const inputElem = <HTMLInputElement>fixture.debugElement.query(By.css('input')).nativeElement;
 
-        expect(inputElem.nativeElement.type).toEqual('radio');
-        expect(inputElem.nativeElement.getAttribute('id')).toBeTruthy();
-        expect(inputElem.nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('false');
-        expect(inputElem.nativeElement.getAttribute('ng-reflect-name')).toEqual('radio');
-        expect(inputElem.nativeElement.getAttribute('ng-reflect-value')).toEqual('1');
+        expect(inputElem.type).toEqual('radio');
+        expect(inputElem.getAttribute('id')).toBeTruthy();
+        expect(inputElem.getAttribute('ng-reflect-is-disabled')).toEqual('false');
+        expect(inputElem.getAttribute('ng-reflect-name')).toEqual('radio');
+        expect(inputElem.getAttribute('ng-reflect-value')).toEqual('1');
 
-        expect(inputElem.nativeElement.classList.contains('fd-radio')).toBeTruthy();
+        expect(inputElem.classList.contains('fd-radio')).toBeTruthy();
     });
 
     it('radio button should be compact, valid state and disable', () => {
         const inputElems = fixture.debugElement.queryAll(By.css('input'));
+        const inputElems1 = inputElems[1].nativeElement;
+        const inputElems2 = inputElems[2].nativeElement;
 
-        expect(inputElems[1].nativeElement.type).toEqual('radio');
-        expect(inputElems[1].nativeElement.getAttribute('id')).toBeTruthy();
-        expect(inputElems[2].nativeElement.getAttribute('ng-reflect-is-disabled')).toBeTruthy();
-        expect(inputElems[1].nativeElement.getAttribute('ng-reflect-name')).toEqual('radio');
-        expect(inputElems[1].nativeElement.getAttribute('ng-reflect-value')).toEqual('2');
+        expect(inputElems1.type).toEqual('radio');
+        expect(inputElems1.getAttribute('id')).toBeTruthy();
+        expect(inputElems2.getAttribute('ng-reflect-is-disabled')).toBeTruthy();
+        expect(inputElems1.getAttribute('ng-reflect-name')).toEqual('radio');
+        expect(inputElems1.getAttribute('ng-reflect-value')).toEqual('2');
 
-        expect(inputElems[1].nativeElement.classList.contains('fd-radio')).toBeTruthy();
-        expect(inputElems[1].nativeElement.classList.contains('fd-radio--compact')).toBeTruthy();
+        expect(inputElems1.classList.contains('fd-radio')).toBeTruthy();
+        expect(inputElems1.classList.contains('fd-radio--compact')).toBeTruthy();
     });
 
     it('radio click should should change control value', async () => {
@@ -104,11 +108,13 @@ describe('RadioButtonComponent', () => {
         fixture.detectChanges();
 
         const radioInputElems = fixture.debugElement.queryAll(By.css('input'));
+        const radioInputElems0 = radioInputElems[0].nativeElement;
+        const radioInputElems1 = radioInputElems[1].nativeElement;
 
         // first radio should be checked
         expect(component.selectedValue).toEqual(1);
-        expect(radioInputElems[0].nativeElement.getAttribute('aria-checked')).toEqual('true');
-        expect(radioInputElems[0].nativeElement.getAttribute('tabindex')).toEqual('0');
+        expect(radioInputElems0.getAttribute('aria-checked')).toEqual('true');
+        expect(radioInputElems0.getAttribute('tabindex')).toEqual('0');
 
         // click on second radio will check second radio and will change control value
         radioInputElems[1].nativeElement.click();
@@ -117,9 +123,28 @@ describe('RadioButtonComponent', () => {
         fixture.detectChanges();
         expect(component.selectedValue).toEqual(2);
 
-        expect(radioInputElems[0].nativeElement.getAttribute('aria-checked')).toEqual('false');
-        expect(radioInputElems[0].nativeElement.getAttribute('tabindex')).toEqual('-1');
-        expect(radioInputElems[1].nativeElement.getAttribute('aria-checked')).toEqual('true');
-        expect(radioInputElems[1].nativeElement.getAttribute('tabindex')).toEqual('0');
+        expect(radioInputElems0.getAttribute('aria-checked')).toEqual('false');
+        expect(radioInputElems0.getAttribute('tabindex')).toEqual('-1');
+        expect(radioInputElems1.getAttribute('aria-checked')).toEqual('true');
+        expect(radioInputElems1.getAttribute('tabindex')).toEqual('0');
     });
+});
+
+const RADIO_BUTTON_IDENTIFIER = 'platform-radio-button-unit-test';
+
+runValueAccessorTests({
+    component: RadioButtonComponent,
+    testModuleMetadata: {
+        imports: [FormModule, PlatformRadioGroupModule, FormsModule, ReactiveFormsModule]
+    },
+    additionalSetup: (fixture, done) => {
+        fixture.componentInstance.id = RADIO_BUTTON_IDENTIFIER;
+        fixture.componentInstance.name = RADIO_BUTTON_IDENTIFIER;
+        done();
+    },
+    supportsOnBlur: false,
+    internalValueChangeSetter: (fixture, value) => {
+        fixture.componentInstance._valueChange(value, true);
+    },
+    getComponentValue: (fixture) => fixture.componentInstance._currentValue
 });

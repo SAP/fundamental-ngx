@@ -149,8 +149,9 @@ export class WizardSummaryStepComponent {
                 title: form.title,
                 id: formId,
                 items: Object.keys(this._submittedForms[step.id][formId]).map((key) => {
+                    const formItem = this._formGeneratorService.getFormControl(form.form, key).formItem;
                     return {
-                        label: form.form.controls[key].formItem.message as string,
+                        label: formItem.message as string,
                         value: formattedFormValue[key]
                     };
                 })

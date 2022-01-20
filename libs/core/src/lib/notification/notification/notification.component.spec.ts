@@ -33,7 +33,6 @@ class TestModule {}
 describe('NotificationComponent', () => {
     let component: NotificationComponent;
     let fixture: ComponentFixture<NotificationComponent>;
-    let notificationService: NotificationService;
 
     beforeEach(
         waitForAsync(() => {
@@ -48,7 +47,6 @@ describe('NotificationComponent', () => {
         fixture = TestBed.createComponent(NotificationComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
-        notificationService = TestBed.get(NotificationService);
     });
 
     it('should generate component', () => {

@@ -9,8 +9,8 @@ import { FeedListAvatarComponent } from './components/feed-list-avatar/feed-list
 import { FeedListActionComponent } from './components/feed-list-action/feed-list-action.component';
 import { FeedListFooterComponent } from './components/feed-list-footer/feed-list-footer.component';
 import { FeedListFooterBylineDirective } from './directives/byline.directive';
-import { LineClampModule } from '@fundamental-ngx/core/utils';
 import { PipeModule } from '@fundamental-ngx/core/utils';
+import { TruncateModule } from '@fundamental-ngx/core/utils';
 
 @NgModule({
     declarations: [
@@ -21,7 +21,7 @@ import { PipeModule } from '@fundamental-ngx/core/utils';
         FeedListFooterComponent,
         FeedListFooterBylineDirective
     ],
-    imports: [CommonModule, PipeModule, FormattedTextModule, LinkModule, LineClampModule],
+    imports: [CommonModule, PipeModule, FormattedTextModule, LinkModule, TruncateModule],
     exports: [
         FeedListComponent,
         FeedListItemComponent,

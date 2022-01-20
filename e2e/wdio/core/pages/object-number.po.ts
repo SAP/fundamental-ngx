@@ -15,25 +15,22 @@ export class ObjectNumberPo extends CoreBaseComponentPo {
     objStatusExamples = 'fd-object-number-status-example ' + this.objectNumbers;
     largeObjExamples = 'fd-object-number-large-example ' + this.objectNumbers;
     boldObjExamples = 'fd-object-number-bold-example ' + this.objectNumbers;
+    boldObjExampleText = 'fd-object-number-bold-example ' + this.objText;
     unitObjExamples = 'fd-object-number-units-example ' + this.objectNumbers;
     decimalObjExamples = 'fd-object-number-decimal-example ' + this.objectNumbers;
     truncationObjExample = 'fd-object-number-truncation-example' + this.objectNumbers;
 
-    objectNumberText = (exampleBlock: string) => {
-        return exampleBlock + ' ' + this.objText;
-    };
+    objectNumberText = (exampleBlock: string) => exampleBlock + ' ' + this.objText;
 
-    objectNumberUnit = (exampleBlock: string) => {
-        return exampleBlock + ' ' + this.objUnit;
-    };
+    objectNumberUnit = (exampleBlock: string) => exampleBlock + ' ' + this.objUnit;
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForPresent(this.pageHeader);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

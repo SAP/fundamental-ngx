@@ -11,7 +11,6 @@ import {
 } from '../fixtures/appData/menu-button-contents';
 import {
     click,
-    doubleClick,
     getAttributeByName,
     getElementArrayLength,
     getElementClass,
@@ -35,17 +34,19 @@ describe('Menu button test suite', () => {
         compactBtnAttrArr,
         compactBtnArr,
         sectionTitle,
-        menuTypeBtnAttrArr,
         menuTypeBtnArr
     } = menuBtnPage;
 
     beforeAll(() => {
         menuBtnPage.open();
+        waitForPresent(menuBtnPage.root);
+        waitForElDisplayed(menuBtnPage.title);
     }, 1);
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(btnArrowIconsArr);
+        waitForPresent(menuBtnPage.root);
+        waitForElDisplayed(menuBtnPage.title);
     }, 1);
 
     describe('Check general menu button states', () => {

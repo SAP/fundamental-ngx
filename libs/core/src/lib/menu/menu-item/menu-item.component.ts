@@ -20,12 +20,13 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
+import { defer, fromEvent, Observable, Subscription, timer } from 'rxjs';
+import { filter, switchMap, takeUntil } from 'rxjs/operators';
+
 import { MenuTitleDirective } from '../directives/menu-title.directive';
 import { DefaultMenuItem } from '../default-menu-item.class';
 import { MenuInteractiveDirective } from '../directives/menu-interactive.directive';
 import { MenuService } from '../services/menu.service';
-import { defer, fromEvent, Observable, Subscription, timer } from 'rxjs';
-import { filter, sample, switchMap, takeUntil } from 'rxjs/operators';
 
 let menuUniqueId = 0;
 
@@ -40,7 +41,7 @@ export interface BaseSubmenu {
 export const SUBMENU = new InjectionToken<BaseSubmenu>('Submenu component dependency');
 
 @Component({
-    // tslint:disable-next-line:component-selector
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'li[fd-menu-item]',
     exportAs: 'fd-menu-item',
     templateUrl: './menu-item.component.html',
@@ -66,6 +67,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
 
     /** Emitted when the menu item is selected. */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onSelect: EventEmitter<void> = new EventEmitter<void>();
 
     /** @hidden Reference to the Menu Item title */
@@ -173,20 +175,27 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
         // Set focus on hover
         hoverSubscriptions.add(mouseEnter$.subscribe(() => this.menuService?.setFocused(this)));
 
-        const timerFactory$ = defer(() => {
-            return timer(this.menuService ? this.menuService.menu.openOnHoverTime : 0).pipe(takeUntil(mouseLeave$));
-        });
+        const timerFactory$ = defer(() =>
+            timer(this.menuService ? this.menuService.menu.openOnHoverTime : 0).pipe(takeUntil(mouseLeave$))
+        );
 
-        const timeTrigger$ = mouseEnter$.pipe(switchMap(() => timerFactory$));
-
-        // Set active on long hover
+        // Set active on hover
         hoverSubscriptions.add(
             mouseEnter$
                 .pipe(
-                    filter(() => !!this.submenu),
-                    sample(timeTrigger$)
+                    filter(() => !!this.menuService),
+                    switchMap(() => timerFactory$)
                 )
-                .subscribe(() => this.menuService?.setActive(true, this))
+                .subscribe(() => {
+                    if (this.submenu) {
+                        // Open submenu
+                        this.menuService.setActive(true, this);
+                    }
+                    if (!this.submenu) {
+                        // Close sibling submenu if opened
+                        this.menuService.setInactiveSiblingMenuItem(this);
+                    }
+                })
         );
 
         return hoverSubscriptions;

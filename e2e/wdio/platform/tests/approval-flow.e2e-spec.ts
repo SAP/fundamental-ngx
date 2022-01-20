@@ -16,7 +16,9 @@ import {
     waitForElDisplayed,
     waitForNotPresent,
     waitForPresent,
-    scrollIntoView
+    scrollIntoView,
+    browserIsSafari,
+    pause
 } from '../../driver/wdio';
 import { ApprovalFlowPo } from '../pages/approval-flow.po';
 import {
@@ -109,7 +111,8 @@ describe('Approval flow', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(approvalFlowPage.watchers);
+        waitForPresent(approvalFlowPage.root);
+        waitForElDisplayed(approvalFlowPage.title);
     }, 1);
 
     it('should have watchers section with watchers details displayed', () => {
@@ -228,6 +231,7 @@ describe('Approval flow', () => {
             waitForElDisplayed(addWhatchersInput);
             click(addWhatchersInput);
             sendKeys('Alvin');
+            pause(500);
             click(selectItem);
             click(bottomMenuItems);
             const watchersCountAfter = getElementArrayLength(watchersAvatar);
@@ -241,6 +245,9 @@ describe('Approval flow', () => {
             waitForElDisplayed(addWhatchersInput);
             click(addWhatchersInput);
             sendKeys('Julie');
+
+            pause(1000);
+
             click(selectItem);
             click(bottomMenuItems);
             const watchersCountAfter = getElementArrayLength(watchersAvatar);
@@ -257,6 +264,7 @@ describe('Approval flow', () => {
             click(detailsDialogParallelSerialSelect);
             click(detailsDialogParallelSerialSelectOption);
             click(detailsDialogUserTeamButton);
+            pause(500);
             waitForElDisplayed(detailsDialogTeamMemberCheckBox);
             click(detailsDialogTeamMemberCheckBox, 3);
             click(detailsDialogSendReminderBtn);
@@ -276,6 +284,7 @@ describe('Approval flow', () => {
             click(detailsDialogParallelSerialSelect);
             click(detailsDialogParallelSerialSelectOption, 1);
             click(detailsDialogUserTeamButton);
+            pause(500);
             waitForElDisplayed(detailsDialogTeamMemberCheckBox);
             click(detailsDialogTeamMemberCheckBox, 4);
             click(detailsDialogSendReminderBtn);
@@ -296,6 +305,7 @@ describe('Approval flow', () => {
             waitForElDisplayed(topActionButtons);
             click(topActionButtons);
             click(detailsDialogUserTeamButton);
+            pause(500);
             waitForElDisplayed(detailsDialogTeamMemberCheckBox);
             click(detailsDialogTeamMemberCheckBox, 4);
             click(detailsDialogSendReminderBtn);
@@ -314,6 +324,7 @@ describe('Approval flow', () => {
             waitForElDisplayed(approvalFlowNodeActionMenuItem);
             click(approvalFlowNodeActionMenuItem);
             click(detailsDialogUserTeamButton);
+            pause(500);
             waitForElDisplayed(detailsDialogTeamMemberCheckBox);
             click(detailsDialogTeamMemberCheckBox, 4);
             click(detailsDialogSendReminderBtn);
@@ -326,9 +337,10 @@ describe('Approval flow', () => {
 
         it('should add the whole team as reviewer', () => {
             enterEditMode();
-            click(addNode, 1);
+            browserIsFirefox() ? click(addNode, 2) : click(addNode, 1);
             waitForElDisplayed(detailsDialog);
             click(addApproverOptions, 1);
+            pause(500);
             waitForElDisplayed(approverOptionListItem);
             click(approverOptionListItem, 2);
             click(detailsDialogUserTeamButton);
@@ -336,14 +348,23 @@ describe('Approval flow', () => {
             click(footerButtons);
             click(footerButtons);
 
-            expect(getText(nodeCardInfo, 4)).toContain('4 members\n' + 'Accounting team');
+            if (browserIsFirefox()) {
+                expect(getText(nodeCardInfo, 5)).toContain('4 members\n' + 'Accounting team');
+            }
+            if (browserIsSafari()) {
+                expect(getText(nodeCardInfo, 4)).toContain('4 members  Accounting team');
+            }
+            if (!browserIsFirefox() && !browserIsSafari()) {
+                expect(getText(nodeCardInfo, 4)).toContain('4 members\n' + 'Accounting team');
+            }
         });
 
         it('should add anyone from team as reviewer', () => {
             enterEditMode();
-            click(addNode, 1);
+            browserIsFirefox() ? click(addNode, 2) : click(addNode, 1);
             waitForElDisplayed(detailsDialog);
             click(addApproverOptions, 1);
+            pause(500);
             waitForElDisplayed(approverOptionListItem);
             click(approverOptionListItem, 1);
             click(detailsDialogUserTeamButton);
@@ -351,7 +372,15 @@ describe('Approval flow', () => {
             click(footerButtons);
             click(footerButtons);
 
-            expect(getText(nodeCardInfo, 4)).toContain('4 members\n' + 'Accounting team');
+            if (browserIsFirefox()) {
+                expect(getText(nodeCardInfo, 5)).toContain('4 members\n' + 'Accounting team');
+            }
+            if (browserIsSafari()) {
+                expect(getText(nodeCardInfo, 4)).toContain('4 members  Accounting team');
+            }
+            if (!browserIsFirefox() && !browserIsSafari()) {
+                expect(getText(nodeCardInfo, 4)).toContain('4 members\n' + 'Accounting team');
+            }
         });
 
         it('should be able to remove node by button', () => {
@@ -389,11 +418,12 @@ describe('Approval flow', () => {
         it('should add node before', () => {
             const startingNodeCount = getElementArrayLength(nodeCardInfo);
             enterEditMode();
-            click(approvalFlowNodeActionMenu, 4);
+            browserIsFirefox() ? click(approvalFlowNodeActionMenu, 5) : click(approvalFlowNodeActionMenu, 4);
             waitForElDisplayed(approvalFlowNodeActionMenuItem);
             click(approvalFlowNodeActionMenuItem);
             waitForElDisplayed(detailsDialog);
             click(detailsDialogUserTeamButton);
+            pause(500);
             waitForElDisplayed(dialogCheckbox);
             click(dialogCheckbox);
             click(footerButtons);
@@ -405,11 +435,12 @@ describe('Approval flow', () => {
         it('should add node after', () => {
             const startingNodeCount = getElementArrayLength(nodeCardInfo);
             enterEditMode();
-            click(approvalFlowNodeActionMenu, 4);
+            browserIsFirefox() ? click(approvalFlowNodeActionMenu, 5) : click(approvalFlowNodeActionMenu, 4);
             waitForElDisplayed(approvalFlowNodeActionMenuItem);
             click(approvalFlowNodeActionMenuItem, 1);
             waitForElDisplayed(detailsDialog);
             click(detailsDialogUserTeamButton);
+            pause(500);
             waitForElDisplayed(dialogCheckbox);
             click(dialogCheckbox);
             click(footerButtons);
@@ -508,7 +539,8 @@ describe('Approval flow', () => {
             const nodeCardCount = getElementArrayLength(nodeCardInfo);
 
             for (let i = 0; i < nodeCardCount; i++) {
-                expect(getText(nodeCardInfo, i)).toContain('not started');
+                scrollIntoView(nodeCardInfo, i);
+                expect(getText(nodeCardInfo, i)).toContain('not started', `index ${i} failed`);
             }
         });
 
@@ -528,40 +560,63 @@ describe('Approval flow', () => {
             markOption(disableAddingBeforeOption);
             enterEditMode();
 
-            checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[0], 4);
-            checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[0], 4);
+            browserIsFirefox()
+                ? checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[0], 5)
+                : checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[0], 4);
+
+            browserIsFirefox()
+                ? checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[0], 5)
+                : checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[0], 4);
         });
 
         it('check disable adding after', () => {
             markOption(disableAddingAfterOption);
             enterEditMode();
-
-            checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[1], 4);
-            checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[1], 4);
+            browserIsFirefox()
+                ? checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[1], 5)
+                : checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[1], 4);
+            browserIsFirefox()
+                ? checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[1], 5)
+                : checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[1], 4);
         });
 
         it('check disable adding parallel', () => {
             markOption(disableAddingParallelOption);
             enterEditMode();
 
-            checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[2], 4);
-            checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[2], 4);
+            browserIsFirefox()
+                ? checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[2], 5)
+                : checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[2], 4);
+
+            browserIsFirefox()
+                ? checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[2], 4)
+                : checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[2], 4);
         });
 
         it('check disable editing', () => {
             markOption(disableEditingOption);
             enterEditMode();
 
-            checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[3], 4);
-            checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[3], 4);
+            browserIsFirefox()
+                ? checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[3], 5)
+                : checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[3], 4);
+
+            browserIsFirefox()
+                ? checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[3], 5)
+                : checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[3], 4);
         });
 
         it('check disable remove', () => {
             markOption(disableRemovingOption);
             enterEditMode();
 
-            checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[4], 4);
-            checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[4], 4);
+            browserIsFirefox()
+                ? checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[4], 5)
+                : checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[4], 4);
+
+            browserIsFirefox()
+                ? checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[4], 5)
+                : checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[4], 4);
         });
 
         it('check disabling edit mode', () => {
@@ -616,15 +671,15 @@ describe('Approval flow', () => {
     function checkApproveNodeDetailsDialogContent(): void {
         expect(isElementDisplayed(detailsDialog)).toBe(true);
         expect(isElementDisplayed(detailsDialogAvatar)).toBe(true);
-        expect(getText(detailsDialogCancelBtn)).toBe(details_dialog_cancel_btn);
-        expect(getText(detailsDialogSendReminderBtn)).toBe(details_dialog_send_reminder_btn);
+        expect(getText(detailsDialogCancelBtn)).toContain(details_dialog_cancel_btn);
+        expect(getText(detailsDialogSendReminderBtn).trim()).toBe(details_dialog_send_reminder_btn);
         expect(getText(detailsDialogHeader)).toBe(details_dialog_header);
     }
 
     function checkWatchersDetailsDialogContent(): void {
         expect(isElementDisplayed(detailsDialog)).toBe(true);
         expect(isElementDisplayed(detailsDialogAvatar)).toBe(true);
-        expect(getText(detailsDialogCancelBtn)).toBe(details_dialog_cancel_btn);
+        expect(getText(detailsDialogCancelBtn)).toContain(details_dialog_cancel_btn);
         expect(getText(detailsDialogHeader)).toBe(details_dialog_header);
     }
 

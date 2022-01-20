@@ -6,7 +6,7 @@
                 fd-dialog-close-button
                 *ngIf="mobileConfig?.hasCloseButton"
                 [mobile]="true"
-                (click)="handleDismiss()"
+                (click)="_handleDismiss()"
             ></button>
             <ng-template fdTemplate="subheader">
                 <div fd-bar-middle>

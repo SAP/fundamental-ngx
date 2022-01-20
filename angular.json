@@ -1,5 +1,4 @@
 {
-    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
     "version": 1,
     "newProjectRoot": "",
     "projects": {
@@ -32,13 +31,13 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": ["libs/core/src/lib/tsconfig.lib.json", "libs/core/src/lib/tsconfig.spec.json"],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/core/src/lib/**/*.ts", "libs/core/src/lib/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-action-bar": {
             "projectType": "library",
@@ -69,16 +68,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/action-bar/tsconfig.lib.json",
-                            "libs/core/src/lib/action-bar/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/action-bar/**/*.ts",
+                            "libs/core/src/lib/action-bar/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-action-sheet": {
             "projectType": "library",
@@ -109,16 +108,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/action-sheet/tsconfig.lib.json",
-                            "libs/core/src/lib/action-sheet/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/action-sheet/**/*.ts",
+                            "libs/core/src/lib/action-sheet/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-alert": {
             "projectType": "library",
@@ -149,16 +148,13 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/alert/tsconfig.lib.json",
-                            "libs/core/src/lib/alert/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/core/src/lib/alert/**/*.ts", "libs/core/src/lib/alert/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-avatar": {
             "projectType": "library",
@@ -189,16 +185,13 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/avatar/tsconfig.lib.json",
-                            "libs/core/src/lib/avatar/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/core/src/lib/avatar/**/*.ts", "libs/core/src/lib/avatar/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-avatar-group": {
             "projectType": "library",
@@ -229,16 +222,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/avatar-group/tsconfig.lib.json",
-                            "libs/core/src/lib/avatar-group/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/avatar-group/**/*.ts",
+                            "libs/core/src/lib/avatar-group/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-bar": {
             "projectType": "library",
@@ -269,16 +262,13 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/bar/tsconfig.lib.json",
-                            "libs/core/src/lib/bar/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/core/src/lib/bar/**/*.ts", "libs/core/src/lib/bar/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-breadcrumb": {
             "projectType": "library",
@@ -309,16 +299,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/breadcrumb/tsconfig.lib.json",
-                            "libs/core/src/lib/breadcrumb/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/breadcrumb/**/*.ts",
+                            "libs/core/src/lib/breadcrumb/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-busy-indicator": {
             "projectType": "library",
@@ -349,16 +339,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/busy-indicator/tsconfig.lib.json",
-                            "libs/core/src/lib/busy-indicator/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/busy-indicator/**/*.ts",
+                            "libs/core/src/lib/busy-indicator/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-button": {
             "projectType": "library",
@@ -389,16 +379,13 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/button/tsconfig.lib.json",
-                            "libs/core/src/lib/button/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/core/src/lib/button/**/*.ts", "libs/core/src/lib/button/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-calendar": {
             "projectType": "library",
@@ -429,16 +416,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/calendar/tsconfig.lib.json",
-                            "libs/core/src/lib/calendar/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/calendar/**/*.ts",
+                            "libs/core/src/lib/calendar/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-card": {
             "projectType": "library",
@@ -469,16 +456,13 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/card/tsconfig.lib.json",
-                            "libs/core/src/lib/card/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/core/src/lib/card/**/*.ts", "libs/core/src/lib/card/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-carousel": {
             "projectType": "library",
@@ -509,16 +493,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/carousel/tsconfig.lib.json",
-                            "libs/core/src/lib/carousel/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/carousel/**/*.ts",
+                            "libs/core/src/lib/carousel/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-checkbox": {
             "projectType": "library",
@@ -549,16 +533,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/checkbox/tsconfig.lib.json",
-                            "libs/core/src/lib/checkbox/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/checkbox/**/*.ts",
+                            "libs/core/src/lib/checkbox/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-combobox": {
             "projectType": "library",
@@ -589,16 +573,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/combobox/tsconfig.lib.json",
-                            "libs/core/src/lib/combobox/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/combobox/**/*.ts",
+                            "libs/core/src/lib/combobox/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-date-picker": {
             "projectType": "library",
@@ -629,16 +613,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/date-picker/tsconfig.lib.json",
-                            "libs/core/src/lib/date-picker/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/date-picker/**/*.ts",
+                            "libs/core/src/lib/date-picker/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-datetime": {
             "projectType": "library",
@@ -669,16 +653,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/datetime/tsconfig.lib.json",
-                            "libs/core/src/lib/datetime/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/datetime/**/*.ts",
+                            "libs/core/src/lib/datetime/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-datetime-picker": {
             "projectType": "library",
@@ -709,16 +693,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/datetime-picker/tsconfig.lib.json",
-                            "libs/core/src/lib/datetime-picker/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/datetime-picker/**/*.ts",
+                            "libs/core/src/lib/datetime-picker/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-dialog": {
             "projectType": "library",
@@ -749,16 +733,13 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/dialog/tsconfig.lib.json",
-                            "libs/core/src/lib/dialog/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/core/src/lib/dialog/**/*.ts", "libs/core/src/lib/dialog/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-dynamic-page": {
             "projectType": "library",
@@ -789,16 +770,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/dynamic-page/tsconfig.lib.json",
-                            "libs/core/src/lib/dynamic-page/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/dynamic-page/**/*.ts",
+                            "libs/core/src/lib/dynamic-page/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-dynamic-side-content": {
             "projectType": "library",
@@ -829,16 +810,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/dynamic-side-content/tsconfig.lib.json",
-                            "libs/core/src/lib/dynamic-side-content/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/dynamic-side-content/**/*.ts",
+                            "libs/core/src/lib/dynamic-side-content/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-facets": {
             "projectType": "library",
@@ -869,16 +850,13 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/facets/tsconfig.lib.json",
-                            "libs/core/src/lib/facets/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/core/src/lib/facets/**/*.ts", "libs/core/src/lib/facets/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-feed-input": {
             "projectType": "library",
@@ -909,16 +887,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/feed-input/tsconfig.lib.json",
-                            "libs/core/src/lib/feed-input/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/feed-input/**/*.ts",
+                            "libs/core/src/lib/feed-input/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-feed-list-item": {
             "projectType": "library",
@@ -949,16 +927,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/feed-list-item/tsconfig.lib.json",
-                            "libs/core/src/lib/feed-list-item/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/feed-list-item/**/*.ts",
+                            "libs/core/src/lib/feed-list-item/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-file-uploader": {
             "projectType": "library",
@@ -989,16 +967,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/file-uploader/tsconfig.lib.json",
-                            "libs/core/src/lib/file-uploader/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/file-uploader/**/*.ts",
+                            "libs/core/src/lib/file-uploader/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-fixed-card-layout": {
             "projectType": "library",
@@ -1029,16 +1007,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/fixed-card-layout/tsconfig.lib.json",
-                            "libs/core/src/lib/fixed-card-layout/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/fixed-card-layout/**/*.ts",
+                            "libs/core/src/lib/fixed-card-layout/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-flexible-column-layout": {
             "projectType": "library",
@@ -1069,16 +1047,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/flexible-column-layout/tsconfig.lib.json",
-                            "libs/core/src/lib/flexible-column-layout/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/flexible-column-layout/**/*.ts",
+                            "libs/core/src/lib/flexible-column-layout/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-form": {
             "projectType": "library",
@@ -1109,16 +1087,13 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/form/tsconfig.lib.json",
-                            "libs/core/src/lib/form/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/core/src/lib/form/**/*.ts", "libs/core/src/lib/form/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-formatted-text": {
             "projectType": "library",
@@ -1149,16 +1124,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/formatted-text/tsconfig.lib.json",
-                            "libs/core/src/lib/formatted-text/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/formatted-text/**/*.ts",
+                            "libs/core/src/lib/formatted-text/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-grid-list": {
             "projectType": "library",
@@ -1189,16 +1164,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/grid-list/tsconfig.lib.json",
-                            "libs/core/src/lib/grid-list/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/grid-list/**/*.ts",
+                            "libs/core/src/lib/grid-list/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-icon": {
             "projectType": "library",
@@ -1229,16 +1204,13 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/icon/tsconfig.lib.json",
-                            "libs/core/src/lib/icon/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/core/src/lib/icon/**/*.ts", "libs/core/src/lib/icon/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-illustrated-message": {
             "projectType": "library",
@@ -1269,16 +1241,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/illustrated-message/tsconfig.lib.json",
-                            "libs/core/src/lib/illustrated-message/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/illustrated-message/**/*.ts",
+                            "libs/core/src/lib/illustrated-message/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-infinite-scroll": {
             "projectType": "library",
@@ -1309,16 +1281,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/infinite-scroll/tsconfig.lib.json",
-                            "libs/core/src/lib/infinite-scroll/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/infinite-scroll/**/*.ts",
+                            "libs/core/src/lib/infinite-scroll/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-info-label": {
             "projectType": "library",
@@ -1349,16 +1321,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/info-label/tsconfig.lib.json",
-                            "libs/core/src/lib/info-label/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/info-label/**/*.ts",
+                            "libs/core/src/lib/info-label/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-inline-help": {
             "projectType": "library",
@@ -1389,16 +1361,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/inline-help/tsconfig.lib.json",
-                            "libs/core/src/lib/inline-help/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/inline-help/**/*.ts",
+                            "libs/core/src/lib/inline-help/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-input-group": {
             "projectType": "library",
@@ -1429,16 +1401,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/input-group/tsconfig.lib.json",
-                            "libs/core/src/lib/input-group/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/input-group/**/*.ts",
+                            "libs/core/src/lib/input-group/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-layout-grid": {
             "projectType": "library",
@@ -1469,16 +1441,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/layout-grid/tsconfig.lib.json",
-                            "libs/core/src/lib/layout-grid/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/layout-grid/**/*.ts",
+                            "libs/core/src/lib/layout-grid/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-layout-panel": {
             "projectType": "library",
@@ -1509,16 +1481,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/layout-panel/tsconfig.lib.json",
-                            "libs/core/src/lib/layout-panel/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/layout-panel/**/*.ts",
+                            "libs/core/src/lib/layout-panel/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-link": {
             "projectType": "library",
@@ -1549,16 +1521,13 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/link/tsconfig.lib.json",
-                            "libs/core/src/lib/link/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/core/src/lib/link/**/*.ts", "libs/core/src/lib/link/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-list": {
             "projectType": "library",
@@ -1589,16 +1558,13 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/list/tsconfig.lib.json",
-                            "libs/core/src/lib/list/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/core/src/lib/list/**/*.ts", "libs/core/src/lib/list/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-menu": {
             "projectType": "library",
@@ -1629,16 +1595,13 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/menu/tsconfig.lib.json",
-                            "libs/core/src/lib/menu/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/core/src/lib/menu/**/*.ts", "libs/core/src/lib/menu/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-message-box": {
             "projectType": "library",
@@ -1669,16 +1632,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/message-box/tsconfig.lib.json",
-                            "libs/core/src/lib/message-box/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/message-box/**/*.ts",
+                            "libs/core/src/lib/message-box/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-message-page": {
             "projectType": "library",
@@ -1709,16 +1672,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/message-page/tsconfig.lib.json",
-                            "libs/core/src/lib/message-page/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/message-page/**/*.ts",
+                            "libs/core/src/lib/message-page/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-message-strip": {
             "projectType": "library",
@@ -1749,16 +1712,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/message-strip/tsconfig.lib.json",
-                            "libs/core/src/lib/message-strip/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/message-strip/**/*.ts",
+                            "libs/core/src/lib/message-strip/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-message-toast": {
             "projectType": "library",
@@ -1789,16 +1752,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/message-toast/tsconfig.lib.json",
-                            "libs/core/src/lib/message-toast/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/message-toast/**/*.ts",
+                            "libs/core/src/lib/message-toast/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-micro-process-flow": {
             "projectType": "library",
@@ -1829,16 +1792,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/micro-process-flow/tsconfig.lib.json",
-                            "libs/core/src/lib/micro-process-flow/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/micro-process-flow/**/*.ts",
+                            "libs/core/src/lib/micro-process-flow/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-mobile-mode": {
             "projectType": "library",
@@ -1869,16 +1832,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/mobile-mode/tsconfig.lib.json",
-                            "libs/core/src/lib/mobile-mode/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/mobile-mode/**/*.ts",
+                            "libs/core/src/lib/mobile-mode/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-multi-input": {
             "projectType": "library",
@@ -1909,16 +1872,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/multi-input/tsconfig.lib.json",
-                            "libs/core/src/lib/multi-input/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/multi-input/**/*.ts",
+                            "libs/core/src/lib/multi-input/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-nested-list": {
             "projectType": "library",
@@ -1949,16 +1912,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/nested-list/tsconfig.lib.json",
-                            "libs/core/src/lib/nested-list/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/nested-list/**/*.ts",
+                            "libs/core/src/lib/nested-list/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-notification": {
             "projectType": "library",
@@ -1989,16 +1952,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/notification/tsconfig.lib.json",
-                            "libs/core/src/lib/notification/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/notification/**/*.ts",
+                            "libs/core/src/lib/notification/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-object-identifier": {
             "projectType": "library",
@@ -2029,16 +1992,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/object-identifier/tsconfig.lib.json",
-                            "libs/core/src/lib/object-identifier/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/object-identifier/**/*.ts",
+                            "libs/core/src/lib/object-identifier/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-object-marker": {
             "projectType": "library",
@@ -2069,16 +2032,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/object-marker/tsconfig.lib.json",
-                            "libs/core/src/lib/object-marker/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/object-marker/**/*.ts",
+                            "libs/core/src/lib/object-marker/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-object-number": {
             "projectType": "library",
@@ -2109,16 +2072,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/object-number/tsconfig.lib.json",
-                            "libs/core/src/lib/object-number/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/object-number/**/*.ts",
+                            "libs/core/src/lib/object-number/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-object-status": {
             "projectType": "library",
@@ -2149,16 +2112,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/object-status/tsconfig.lib.json",
-                            "libs/core/src/lib/object-status/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/object-status/**/*.ts",
+                            "libs/core/src/lib/object-status/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-pagination": {
             "projectType": "library",
@@ -2189,16 +2152,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/pagination/tsconfig.lib.json",
-                            "libs/core/src/lib/pagination/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/pagination/**/*.ts",
+                            "libs/core/src/lib/pagination/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-panel": {
             "projectType": "library",
@@ -2229,16 +2192,13 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/panel/tsconfig.lib.json",
-                            "libs/core/src/lib/panel/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/core/src/lib/panel/**/*.ts", "libs/core/src/lib/panel/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-popover": {
             "projectType": "library",
@@ -2269,16 +2229,13 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/popover/tsconfig.lib.json",
-                            "libs/core/src/lib/popover/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/core/src/lib/popover/**/*.ts", "libs/core/src/lib/popover/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-product-switch": {
             "projectType": "library",
@@ -2309,16 +2266,57 @@
                     }
                 },
                 "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/product-switch/**/*.ts",
+                            "libs/core/src/lib/product-switch/**/*.html"
+                        ]
+                    }
+                }
+            },
+            "tags": ["fd"]
+        },
+        "core-progress-indicator": {
+            "projectType": "library",
+            "root": "libs/core/src/lib/progress-indicator",
+            "sourceRoot": "libs/core/src/lib/progress-indicator",
+            "prefix": "fd",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/core/progress-indicator"],
+                    "options": {
+                        "tsConfig": "libs/core/src/lib/progress-indicator/tsconfig.lib.json",
+                        "project": "libs/core/src/lib/progress-indicator/ng-package.json",
+                        "updateBuildableProjectDepsInPackageJson": false
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/core/src/lib/progress-indicator/tsconfig.lib.prod.json"
+                        }
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/core/src/lib/progress-indicator/test.ts",
+                        "tsConfig": "libs/core/src/lib/progress-indicator/tsconfig.spec.json",
+                        "karmaConfig": "libs/core/src/lib/progress-indicator/karma.conf.js"
+                    }
+                },
+                "lint": {
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
                         "tsConfig": [
-                            "libs/core/src/lib/product-switch/tsconfig.lib.json",
-                            "libs/core/src/lib/product-switch/tsconfig.spec.json"
+                            "libs/core/src/lib/progress-indicator/tsconfig.lib.json",
+                            "libs/core/src/lib/progress-indicator/tsconfig.spec.json"
                         ],
                         "exclude": ["**/node_modules/**"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-quick-view": {
             "projectType": "library",
@@ -2349,16 +2347,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/quick-view/tsconfig.lib.json",
-                            "libs/core/src/lib/quick-view/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/quick-view/**/*.ts",
+                            "libs/core/src/lib/quick-view/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-radio": {
             "projectType": "library",
@@ -2389,16 +2387,13 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/radio/tsconfig.lib.json",
-                            "libs/core/src/lib/radio/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/core/src/lib/radio/**/*.ts", "libs/core/src/lib/radio/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-rating-indicator": {
             "projectType": "library",
@@ -2429,16 +2424,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/rating-indicator/tsconfig.lib.json",
-                            "libs/core/src/lib/rating-indicator/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/rating-indicator/**/*.ts",
+                            "libs/core/src/lib/rating-indicator/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-resizable-card-layout": {
             "projectType": "library",
@@ -2469,16 +2464,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/resizable-card-layout/tsconfig.lib.json",
-                            "libs/core/src/lib/resizable-card-layout/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/resizable-card-layout/**/*.ts",
+                            "libs/core/src/lib/resizable-card-layout/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-scroll-spy": {
             "projectType": "library",
@@ -2509,16 +2504,56 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/scroll-spy/tsconfig.lib.json",
-                            "libs/core/src/lib/scroll-spy/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/scroll-spy/**/*.ts",
+                            "libs/core/src/lib/scroll-spy/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
+        },
+        "core-scrollbar": {
+            "projectType": "library",
+            "root": "libs/core/src/lib/scrollbar",
+            "sourceRoot": "libs/core/src/lib/scrollbar",
+            "prefix": "fd",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/core/scrollbar"],
+                    "options": {
+                        "tsConfig": "libs/core/src/lib/scrollbar/tsconfig.lib.json",
+                        "project": "libs/core/src/lib/scrollbar/ng-package.json",
+                        "updateBuildableProjectDepsInPackageJson": false
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/core/src/lib/scrollbar/tsconfig.lib.prod.json"
+                        }
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/core/src/lib/scrollbar/test.ts",
+                        "tsConfig": "libs/core/src/lib/scrollbar/tsconfig.spec.json",
+                        "karmaConfig": "libs/core/src/lib/scrollbar/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/scrollbar/**/*.ts",
+                            "libs/core/src/lib/scrollbar/**/*.html"
+                        ]
+                    }
+                }
+            },
+            "tags": ["fd"]
         },
         "core-segmented-button": {
             "projectType": "library",
@@ -2549,16 +2584,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/segmented-button/tsconfig.lib.json",
-                            "libs/core/src/lib/segmented-button/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/segmented-button/**/*.ts",
+                            "libs/core/src/lib/segmented-button/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-select": {
             "projectType": "library",
@@ -2589,16 +2624,13 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/select/tsconfig.lib.json",
-                            "libs/core/src/lib/select/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/core/src/lib/select/**/*.ts", "libs/core/src/lib/select/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-shared": {
             "projectType": "library",
@@ -2629,16 +2661,13 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/shared/tsconfig.lib.json",
-                            "libs/core/src/lib/shared/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/core/src/lib/shared/**/*.ts", "libs/core/src/lib/shared/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-shellbar": {
             "projectType": "library",
@@ -2669,16 +2698,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/shellbar/tsconfig.lib.json",
-                            "libs/core/src/lib/shellbar/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/shellbar/**/*.ts",
+                            "libs/core/src/lib/shellbar/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-side-navigation": {
             "projectType": "library",
@@ -2709,16 +2738,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/side-navigation/tsconfig.lib.json",
-                            "libs/core/src/lib/side-navigation/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/side-navigation/**/*.ts",
+                            "libs/core/src/lib/side-navigation/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-slider": {
             "projectType": "library",
@@ -2749,16 +2778,13 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/slider/tsconfig.lib.json",
-                            "libs/core/src/lib/slider/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/core/src/lib/slider/**/*.ts", "libs/core/src/lib/slider/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-split-button": {
             "projectType": "library",
@@ -2789,16 +2815,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/split-button/tsconfig.lib.json",
-                            "libs/core/src/lib/split-button/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/split-button/**/*.ts",
+                            "libs/core/src/lib/split-button/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-splitter": {
             "projectType": "library",
@@ -2829,16 +2855,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/splitter/tsconfig.lib.json",
-                            "libs/core/src/lib/splitter/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/splitter/**/*.ts",
+                            "libs/core/src/lib/splitter/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-status-indicator": {
             "projectType": "library",
@@ -2869,16 +2895,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/status-indicator/tsconfig.lib.json",
-                            "libs/core/src/lib/status-indicator/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/status-indicator/**/*.ts",
+                            "libs/core/src/lib/status-indicator/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-step-input": {
             "projectType": "library",
@@ -2909,16 +2935,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/step-input/tsconfig.lib.json",
-                            "libs/core/src/lib/step-input/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/step-input/**/*.ts",
+                            "libs/core/src/lib/step-input/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-switch": {
             "projectType": "library",
@@ -2949,16 +2975,13 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/switch/tsconfig.lib.json",
-                            "libs/core/src/lib/switch/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/core/src/lib/switch/**/*.ts", "libs/core/src/lib/switch/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-table": {
             "projectType": "library",
@@ -2989,16 +3012,13 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/table/tsconfig.lib.json",
-                            "libs/core/src/lib/table/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/core/src/lib/table/**/*.ts", "libs/core/src/lib/table/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-tabs": {
             "projectType": "library",
@@ -3029,16 +3049,13 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/tabs/tsconfig.lib.json",
-                            "libs/core/src/lib/tabs/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/core/src/lib/tabs/**/*.ts", "libs/core/src/lib/tabs/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-tests": {
             "projectType": "library",
@@ -3069,16 +3086,13 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/tests/tsconfig.lib.json",
-                            "libs/core/src/lib/tests/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/core/src/lib/tests/**/*.ts", "libs/core/src/lib/tests/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-text": {
             "projectType": "library",
@@ -3109,16 +3123,13 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/text/tsconfig.lib.json",
-                            "libs/core/src/lib/text/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/core/src/lib/text/**/*.ts", "libs/core/src/lib/text/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-tile": {
             "projectType": "library",
@@ -3149,16 +3160,13 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/tile/tsconfig.lib.json",
-                            "libs/core/src/lib/tile/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/core/src/lib/tile/**/*.ts", "libs/core/src/lib/tile/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-time": {
             "projectType": "library",
@@ -3189,16 +3197,13 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/time/tsconfig.lib.json",
-                            "libs/core/src/lib/time/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/core/src/lib/time/**/*.ts", "libs/core/src/lib/time/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-time-picker": {
             "projectType": "library",
@@ -3229,16 +3234,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/time-picker/tsconfig.lib.json",
-                            "libs/core/src/lib/time-picker/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/time-picker/**/*.ts",
+                            "libs/core/src/lib/time-picker/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-timeline": {
             "projectType": "library",
@@ -3269,16 +3274,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/timeline/tsconfig.lib.json",
-                            "libs/core/src/lib/timeline/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/timeline/**/*.ts",
+                            "libs/core/src/lib/timeline/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-title": {
             "projectType": "library",
@@ -3309,16 +3314,13 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/title/tsconfig.lib.json",
-                            "libs/core/src/lib/title/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/core/src/lib/title/**/*.ts", "libs/core/src/lib/title/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-token": {
             "projectType": "library",
@@ -3349,16 +3351,13 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/token/tsconfig.lib.json",
-                            "libs/core/src/lib/token/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/core/src/lib/token/**/*.ts", "libs/core/src/lib/token/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-toolbar": {
             "projectType": "library",
@@ -3389,16 +3388,13 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/toolbar/tsconfig.lib.json",
-                            "libs/core/src/lib/toolbar/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/core/src/lib/toolbar/**/*.ts", "libs/core/src/lib/toolbar/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-tree": {
             "projectType": "library",
@@ -3429,16 +3425,13 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/tree/tsconfig.lib.json",
-                            "libs/core/src/lib/tree/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/core/src/lib/tree/**/*.ts", "libs/core/src/lib/tree/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-upload-collection": {
             "projectType": "library",
@@ -3469,16 +3462,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/upload-collection/tsconfig.lib.json",
-                            "libs/core/src/lib/upload-collection/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/upload-collection/**/*.ts",
+                            "libs/core/src/lib/upload-collection/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-utils": {
             "projectType": "library",
@@ -3509,16 +3502,13 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/utils/tsconfig.lib.json",
-                            "libs/core/src/lib/utils/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/core/src/lib/utils/**/*.ts", "libs/core/src/lib/utils/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-vertical-navigation": {
             "projectType": "library",
@@ -3549,16 +3539,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/vertical-navigation/tsconfig.lib.json",
-                            "libs/core/src/lib/vertical-navigation/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/vertical-navigation/**/*.ts",
+                            "libs/core/src/lib/vertical-navigation/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "core-wizard": {
             "projectType": "library",
@@ -3589,16 +3579,13 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/wizard/tsconfig.lib.json",
-                            "libs/core/src/lib/wizard/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/core/src/lib/wizard/**/*.ts", "libs/core/src/lib/wizard/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fd"]
         },
         "docs": {
             "root": "apps/docs/",
@@ -3612,7 +3599,7 @@
             },
             "architect": {
                 "build": {
-                    "builder": "@angular-devkit/build-angular:browser",
+                    "builder": "@angular-builders/custom-webpack:browser",
                     "options": {
                         "outputPath": "dist/apps/docs",
                         "index": "apps/docs/src/index.html",
@@ -3645,7 +3632,10 @@
                         "buildOptimizer": false,
                         "sourceMap": true,
                         "optimization": false,
-                        "namedChunks": true
+                        "namedChunks": true,
+                        "customWebpackConfig": {
+                            "path": "./webpack.config.js"
+                        }
                     },
                     "configurations": {
                         "production": {
@@ -3715,10 +3705,11 @@
                         }
                     },
                     "outputs": ["{options.outputPath}"],
-                    "defaultConfiguration": ""
+                    "defaultConfiguration": "",
+                    "dependsOn": []
                 },
                 "serve": {
-                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "builder": "@angular-builders/custom-webpack:dev-server",
                     "options": {
                         "browserTarget": "docs:build"
                     },
@@ -3744,10 +3735,9 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": ["apps/docs/tsconfig.app.json", "apps/docs/tsconfig.spec.json"],
-                        "exclude": ["!apps/docs/**"]
+                        "lintFilePatterns": ["apps/docs/**/*.ts", "apps/docs/**/*.html"]
                     }
                 },
                 "test": {
@@ -3778,7 +3768,8 @@
                         "baseHref": ""
                     }
                 }
-            }
+            },
+            "tags": ["docs"]
         },
         "docs-e2e": {
             "root": "apps/docs-e2e",
@@ -3798,13 +3789,14 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": "apps/docs-e2e/tsconfig.e2e.json",
-                        "exclude": ["!apps/docs-e2e/**"]
+                        "lintFilePatterns": ["apps/docs-e2e/**/*.ts", "apps/docs-e2e/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": [],
+            "implicitDependencies": ["docs"]
         },
         "fn": {
             "projectType": "library",
@@ -3835,13 +3827,14 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": ["libs/fn/src/lib/tsconfig.lib.json", "libs/fn/src/lib/tsconfig.spec.json"],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/fn/src/lib/**/*.ts", "libs/fn/src/lib/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fn"],
+            "implicitDependencies": ["core"]
         },
         "fn-button": {
             "projectType": "library",
@@ -3872,16 +3865,14 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/fn/src/lib/button/tsconfig.lib.json",
-                            "libs/fn/src/lib/button/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/fn/src/lib/button/**/*.ts", "libs/fn/src/lib/button/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fn"],
+            "implicitDependencies": ["core"]
         },
         "fn-checkbox": {
             "projectType": "library",
@@ -3912,16 +3903,14 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/fn/src/lib/checkbox/tsconfig.lib.json",
-                            "libs/fn/src/lib/checkbox/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/fn/src/lib/checkbox/**/*.ts", "libs/fn/src/lib/checkbox/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fn"],
+            "implicitDependencies": ["core"]
         },
         "fn-form": {
             "projectType": "library",
@@ -3952,16 +3941,14 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/fn/src/lib/form/tsconfig.lib.json",
-                            "libs/fn/src/lib/form/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/fn/src/lib/form/**/*.ts", "libs/fn/src/lib/form/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fn"],
+            "implicitDependencies": ["core"]
         },
         "fn-radio": {
             "projectType": "library",
@@ -3992,16 +3979,14 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/fn/src/lib/radio/tsconfig.lib.json",
-                            "libs/fn/src/lib/radio/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/fn/src/lib/radio/**/*.ts", "libs/fn/src/lib/radio/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fn"],
+            "implicitDependencies": ["core"]
         },
         "fn-search": {
             "projectType": "library",
@@ -4032,16 +4017,14 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/fn/src/lib/search/tsconfig.lib.json",
-                            "libs/fn/src/lib/search/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/fn/src/lib/search/**/*.ts", "libs/fn/src/lib/search/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fn"],
+            "implicitDependencies": ["core"]
         },
         "fn-select": {
             "projectType": "library",
@@ -4072,16 +4055,14 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/fn/src/lib/select/tsconfig.lib.json",
-                            "libs/fn/src/lib/select/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/fn/src/lib/select/**/*.ts", "libs/fn/src/lib/select/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fn"],
+            "implicitDependencies": ["core"]
         },
         "fn-slider": {
             "projectType": "library",
@@ -4112,16 +4093,14 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/fn/src/lib/slider/tsconfig.lib.json",
-                            "libs/fn/src/lib/slider/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/fn/src/lib/slider/**/*.ts", "libs/fn/src/lib/slider/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fn"],
+            "implicitDependencies": ["core"]
         },
         "fn-switch": {
             "projectType": "library",
@@ -4152,16 +4131,14 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/fn/src/lib/switch/tsconfig.lib.json",
-                            "libs/fn/src/lib/switch/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/fn/src/lib/switch/**/*.ts", "libs/fn/src/lib/switch/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fn"],
+            "implicitDependencies": ["core"]
         },
         "fn-tabs": {
             "projectType": "library",
@@ -4192,16 +4169,14 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/fn/src/lib/tabs/tsconfig.lib.json",
-                            "libs/fn/src/lib/tabs/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/fn/src/lib/tabs/**/*.ts", "libs/fn/src/lib/tabs/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fn"],
+            "implicitDependencies": ["core"]
         },
         "fn-tag": {
             "projectType": "library",
@@ -4232,13 +4207,14 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": ["libs/fn/src/lib/tag/tsconfig.lib.json", "libs/fn/src/lib/tag/tsconfig.spec.json"],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/fn/src/lib/tag/**/*.ts", "libs/fn/src/lib/tag/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fn"],
+            "implicitDependencies": ["core"]
         },
         "moment-adapter": {
             "root": "libs/moment-adapter",
@@ -4260,10 +4236,9 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": ["libs/moment-adapter/tsconfig.lib.json", "libs/moment-adapter/tsconfig.spec.json"],
-                        "exclude": ["!libs/moment-adapter/**"]
+                        "lintFilePatterns": ["libs/moment-adapter/**/*.ts", "libs/moment-adapter/**/*.html"]
                     }
                 },
                 "test": {
@@ -4280,7 +4255,9 @@
                 "@nrwl/schematics:component": {
                     "styleext": "scss"
                 }
-            }
+            },
+            "tags": ["fd"],
+            "implicitDependencies": ["core"]
         },
         "platform": {
             "projectType": "library",
@@ -4311,16 +4288,14 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/platform/src/lib/tsconfig.lib.json",
-                            "libs/platform/src/lib/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": ["libs/platform/src/lib/**/*.ts", "libs/platform/src/lib/**/*.html"]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-action-bar": {
             "projectType": "library",
@@ -4351,16 +4326,17 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/platform/src/lib/action-bar/tsconfig.lib.json",
-                            "libs/platform/src/lib/action-bar/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/platform/src/lib/action-bar/**/*.ts",
+                            "libs/platform/src/lib/action-bar/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-action-button-group": {
             "projectType": "library",
@@ -4391,16 +4367,17 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/platform/src/lib/action-button-group/tsconfig.lib.json",
-                            "libs/platform/src/lib/action-button-group/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/platform/src/lib/action-button-group/**/*.ts",
+                            "libs/platform/src/lib/action-button-group/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-approval-flow": {
             "projectType": "library",
@@ -4431,16 +4408,17 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/platform/src/lib/approval-flow/tsconfig.lib.json",
-                            "libs/platform/src/lib/approval-flow/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/platform/src/lib/approval-flow/**/*.ts",
+                            "libs/platform/src/lib/approval-flow/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-button": {
             "projectType": "library",
@@ -4471,16 +4449,17 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/platform/src/lib/button/tsconfig.lib.json",
-                            "libs/platform/src/lib/button/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/platform/src/lib/button/**/*.ts",
+                            "libs/platform/src/lib/button/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-dynamic-page": {
             "projectType": "library",
@@ -4511,16 +4490,17 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/platform/src/lib/dynamic-page/tsconfig.lib.json",
-                            "libs/platform/src/lib/dynamic-page/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/platform/src/lib/dynamic-page/**/*.ts",
+                            "libs/platform/src/lib/dynamic-page/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-feed-input": {
             "projectType": "library",
@@ -4551,16 +4531,17 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/platform/src/lib/feed-input/tsconfig.lib.json",
-                            "libs/platform/src/lib/feed-input/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/platform/src/lib/feed-input/**/*.ts",
+                            "libs/platform/src/lib/feed-input/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-form": {
             "projectType": "library",
@@ -4591,16 +4572,17 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/platform/src/lib/form/tsconfig.lib.json",
-                            "libs/platform/src/lib/form/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/platform/src/lib/form/**/*.ts",
+                            "libs/platform/src/lib/form/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-icon-tab-bar": {
             "projectType": "library",
@@ -4631,16 +4613,17 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/platform/src/lib/icon-tab-bar/tsconfig.lib.json",
-                            "libs/platform/src/lib/icon-tab-bar/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/platform/src/lib/icon-tab-bar/**/*.ts",
+                            "libs/platform/src/lib/icon-tab-bar/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-info-label": {
             "projectType": "library",
@@ -4671,16 +4654,17 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/platform/src/lib/info-label/tsconfig.lib.json",
-                            "libs/platform/src/lib/info-label/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/platform/src/lib/info-label/**/*.ts",
+                            "libs/platform/src/lib/info-label/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-link": {
             "projectType": "library",
@@ -4711,16 +4695,17 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/platform/src/lib/link/tsconfig.lib.json",
-                            "libs/platform/src/lib/link/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/platform/src/lib/link/**/*.ts",
+                            "libs/platform/src/lib/link/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-list": {
             "projectType": "library",
@@ -4751,16 +4736,17 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/platform/src/lib/list/tsconfig.lib.json",
-                            "libs/platform/src/lib/list/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/platform/src/lib/list/**/*.ts",
+                            "libs/platform/src/lib/list/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-menu": {
             "projectType": "library",
@@ -4791,16 +4777,17 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/platform/src/lib/menu/tsconfig.lib.json",
-                            "libs/platform/src/lib/menu/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/platform/src/lib/menu/**/*.ts",
+                            "libs/platform/src/lib/menu/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-menu-button": {
             "projectType": "library",
@@ -4831,16 +4818,17 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/platform/src/lib/menu-button/tsconfig.lib.json",
-                            "libs/platform/src/lib/menu-button/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/platform/src/lib/menu-button/**/*.ts",
+                            "libs/platform/src/lib/menu-button/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-object-attribute": {
             "projectType": "library",
@@ -4871,16 +4859,17 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/platform/src/lib/object-attribute/tsconfig.lib.json",
-                            "libs/platform/src/lib/object-attribute/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/platform/src/lib/object-attribute/**/*.ts",
+                            "libs/platform/src/lib/object-attribute/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-object-marker": {
             "projectType": "library",
@@ -4911,16 +4900,17 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/platform/src/lib/object-marker/tsconfig.lib.json",
-                            "libs/platform/src/lib/object-marker/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/platform/src/lib/object-marker/**/*.ts",
+                            "libs/platform/src/lib/object-marker/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-object-status": {
             "projectType": "library",
@@ -4951,16 +4941,17 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/platform/src/lib/object-status/tsconfig.lib.json",
-                            "libs/platform/src/lib/object-status/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/platform/src/lib/object-status/**/*.ts",
+                            "libs/platform/src/lib/object-status/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-page-footer": {
             "projectType": "library",
@@ -4991,16 +4982,17 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/platform/src/lib/page-footer/tsconfig.lib.json",
-                            "libs/platform/src/lib/page-footer/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/platform/src/lib/page-footer/**/*.ts",
+                            "libs/platform/src/lib/page-footer/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-panel": {
             "projectType": "library",
@@ -5031,16 +5023,17 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/platform/src/lib/panel/tsconfig.lib.json",
-                            "libs/platform/src/lib/panel/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/platform/src/lib/panel/**/*.ts",
+                            "libs/platform/src/lib/panel/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-search-field": {
             "projectType": "library",
@@ -5071,16 +5064,17 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/platform/src/lib/search-field/tsconfig.lib.json",
-                            "libs/platform/src/lib/search-field/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/platform/src/lib/search-field/**/*.ts",
+                            "libs/platform/src/lib/search-field/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-shared": {
             "projectType": "library",
@@ -5111,16 +5105,17 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/platform/src/lib/shared/tsconfig.lib.json",
-                            "libs/platform/src/lib/shared/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/platform/src/lib/shared/**/*.ts",
+                            "libs/platform/src/lib/shared/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependecies": ["core"]
         },
         "platform-slider": {
             "projectType": "library",
@@ -5151,16 +5146,58 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/platform/src/lib/slider/tsconfig.lib.json",
-                            "libs/platform/src/lib/slider/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/platform/src/lib/slider/**/*.ts",
+                            "libs/platform/src/lib/slider/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
+        },
+        "platform-smart-filter-bar": {
+            "projectType": "library",
+            "root": "libs/platform/src/lib/smart-filter-bar",
+            "sourceRoot": "libs/platform/src/lib/smart-filter-bar",
+            "prefix": "fdp",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/platform/smart-filter-bar"],
+                    "options": {
+                        "tsConfig": "libs/platform/src/lib/smart-filter-bar/tsconfig.lib.json",
+                        "project": "libs/platform/src/lib/smart-filter-bar/ng-package.json",
+                        "updateBuildableProjectDepsInPackageJson": false
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/platform/src/lib/smart-filter-bar/tsconfig.lib.prod.json"
+                        }
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/platform/src/lib/smart-filter-bar/test.ts",
+                        "tsConfig": "libs/platform/src/lib/smart-filter-bar/tsconfig.spec.json",
+                        "karmaConfig": "libs/platform/src/lib/smart-filter-bar/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/platform/src/lib/smart-filter-bar/**/*.ts",
+                            "libs/platform/src/lib/smart-filter-bar/**/*.html"
+                        ]
+                    }
+                }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-split-menu-button": {
             "projectType": "library",
@@ -5191,16 +5228,17 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/platform/src/lib/split-menu-button/tsconfig.lib.json",
-                            "libs/platform/src/lib/split-menu-button/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/platform/src/lib/split-menu-button/**/*.ts",
+                            "libs/platform/src/lib/split-menu-button/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-table": {
             "projectType": "library",
@@ -5231,16 +5269,17 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/platform/src/lib/table/tsconfig.lib.json",
-                            "libs/platform/src/lib/table/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/platform/src/lib/table/**/*.ts",
+                            "libs/platform/src/lib/table/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-thumbnail": {
             "projectType": "library",
@@ -5271,16 +5310,17 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/platform/src/lib/thumbnail/tsconfig.lib.json",
-                            "libs/platform/src/lib/thumbnail/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/platform/src/lib/thumbnail/**/*.ts",
+                            "libs/platform/src/lib/thumbnail/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-upload-collection": {
             "projectType": "library",
@@ -5311,16 +5351,17 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/platform/src/lib/upload-collection/tsconfig.lib.json",
-                            "libs/platform/src/lib/upload-collection/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/platform/src/lib/upload-collection/**/*.ts",
+                            "libs/platform/src/lib/upload-collection/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-value-help-dialog": {
             "projectType": "library",
@@ -5351,16 +5392,17 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/platform/src/lib/value-help-dialog/tsconfig.lib.json",
-                            "libs/platform/src/lib/value-help-dialog/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/platform/src/lib/value-help-dialog/**/*.ts",
+                            "libs/platform/src/lib/value-help-dialog/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         },
         "platform-wizard-generator": {
             "projectType": "library",
@@ -5391,39 +5433,17 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/platform/src/lib/wizard-generator/tsconfig.lib.json",
-                            "libs/platform/src/lib/wizard-generator/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/platform/src/lib/wizard-generator/**/*.ts",
+                            "libs/platform/src/lib/wizard-generator/**/*.html"
+                        ]
                     }
                 }
-            }
+            },
+            "tags": ["fdp"],
+            "implicitDependencies": ["core"]
         }
-    },
-    "defaultProject": "docs",
-    "schematics": {
-        "@schematics/angular:component": {
-            "prefix": "fd",
-            "style": "scss"
-        },
-        "@schematics/angular:directive": {
-            "prefix": "fd"
-        },
-        "@nrwl/angular:application": {
-            "unitTestRunner": "jest"
-        },
-        "@nrwl/angular:library": {
-            "unitTestRunner": "jest"
-        },
-        "@nrwl/angular:component": {
-            "style": "scss"
-        }
-    },
-    "cli": {
-        "defaultCollection": "@nrwl/angular",
-        "analytics": false
     }
 }

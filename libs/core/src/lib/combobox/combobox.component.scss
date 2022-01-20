@@ -17,3 +17,9 @@
 .fd-combobox-full-width {
     width: 100%;
 }
+
+.fd-combobox-count-list-results {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+}

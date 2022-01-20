@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 
-import * as textBasicHtml from '!raw-loader!./examples/text-basic.component.html';
-import * as textWhitespacesHtml from '!raw-loader!./examples/text-whitespaces.component.html';
-import * as textWhitespacesTs from '!raw-loader!./examples/text-whitespaces.component.ts';
-import * as textMaxLinesHtml from '!raw-loader!./examples/text-max-lines.component.html';
-import * as textMaxLinesTs from '!raw-loader!./examples/text-max-lines.component.ts';
-import * as textHyphenationHtml from '!raw-loader!./examples/text-hyphenation.component.html';
-import * as textHyphenationTs from '!raw-loader!./examples/text-hyphenation.component.ts';
-import * as textHyphenationScss from '!raw-loader!./examples/text-hyphenation.component.scss';
-import * as textExpandableHtml from '!raw-loader!./examples/text-expandable.component.html';
-import * as textExpandableTs from '!raw-loader!./examples/text-expandable.component.ts';
+import textBasicHtml from '!./examples/text-basic.component.html?raw';
+import textWhitespacesHtml from '!./examples/text-whitespaces.component.html?raw';
+import textWhitespacesTs from '!./examples/text-whitespaces.component.ts?raw';
+import textMaxLinesHtml from '!./examples/text-max-lines.component.html?raw';
+import textMaxLinesTs from '!./examples/text-max-lines.component.ts?raw';
+import textHyphenationHtml from '!./examples/text-hyphenation.component.html?raw';
+import textHyphenationTs from '!./examples/text-hyphenation.component.ts?raw';
+import textHyphenationScss from '!./examples/text-hyphenation.component.scss?raw';
+import textExpandableHtml from '!./examples/text-expandable.component.html?raw';
+import textExpandableTs from '!./examples/text-expandable.component.ts?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

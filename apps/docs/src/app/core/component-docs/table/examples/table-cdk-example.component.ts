@@ -23,7 +23,7 @@ const CELL_DATA: CellData[] = [
     styleUrls: ['table-cdk-example.component.scss']
 })
 export class TableCdkExampleComponent {
-    @ViewChild('table') table: CdkTable<{}[]>;
+    @ViewChild('table') table: CdkTable<Record<string, any>[]>;
 
     displayedColumns: string[] = ['column1', 'column2', 'column3', 'date', 'type'];
     dataSource = CELL_DATA;

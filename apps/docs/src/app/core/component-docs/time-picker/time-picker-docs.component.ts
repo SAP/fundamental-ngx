@@ -2,22 +2,22 @@ import { Component } from '@angular/core';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
-import * as timePickerSrc from '!raw-loader!./examples/time-picker-example.component.html';
-import * as timePickerFormatSrc from '!raw-loader!./examples/time-picker-format-example.component.html';
-import * as timePickerFormatSrcTs from '!raw-loader!./examples/time-picker-format-example.component.ts';
-import * as timePickerDisabledSrc from '!raw-loader!./examples/time-picker-disabled-example.component.html';
-import * as timePickerCompactSrc from '!raw-loader!./examples/time-picker-compact-example.component.html';
-import * as timePickerNullSrc from '!raw-loader!./examples/time-picker-allow-null-example.component.html';
-import * as timePickerSrcTs from '!raw-loader!./examples/time-picker-example.component.ts';
-import * as timePickerDisabledSrcTs from '!raw-loader!./examples/time-picker-disabled-example.component.ts';
-import * as timePickerCompactSrcTs from '!raw-loader!./examples/time-picker-compact-example.component.ts';
-import * as timePickerNullSrcTs from '!raw-loader!./examples/time-picker-allow-null-example.component.ts';
-import * as timePickerLocaleHtmlSrc from '!raw-loader!./examples/time-picker-locale-example/time-picker-locale-example.component.html';
-import * as timePickerLocaleCsssSrc from '!raw-loader!./examples/time-picker-locale-example/time-picker-locale-example.component.scss';
-import * as timePickerLocaleTsSrc from '!raw-loader!./examples/time-picker-locale-example/time-picker-locale-example.component.ts';
-import * as timePickerFormHtmlSrc from '!raw-loader!./examples/time-picker-form-example.component.html';
-import * as timePickerFormTsSrc from '!raw-loader!./examples/time-picker-form-example.component.ts';
-import * as timePickerFormScssSrc from '!raw-loader!./examples/time-picker-form-example.component.scss';
+import timePickerSrc from '!./examples/time-picker-example.component.html?raw';
+import timePickerFormatSrc from '!./examples/time-picker-format-example.component.html?raw';
+import timePickerFormatSrcTs from '!./examples/time-picker-format-example.component.ts?raw';
+import timePickerDisabledSrc from '!./examples/time-picker-disabled-example.component.html?raw';
+import timePickerCompactSrc from '!./examples/time-picker-compact-example.component.html?raw';
+import timePickerNullSrc from '!./examples/time-picker-allow-null-example.component.html?raw';
+import timePickerSrcTs from '!./examples/time-picker-example.component.ts?raw';
+import timePickerDisabledSrcTs from '!./examples/time-picker-disabled-example.component.ts?raw';
+import timePickerCompactSrcTs from '!./examples/time-picker-compact-example.component.ts?raw';
+import timePickerNullSrcTs from '!./examples/time-picker-allow-null-example.component.ts?raw';
+import timePickerLocaleHtmlSrc from '!./examples/time-picker-locale-example/time-picker-locale-example.component.html?raw';
+import timePickerLocaleCsssSrc from '!./examples/time-picker-locale-example/time-picker-locale-example.component.scss?raw';
+import timePickerLocaleTsSrc from '!./examples/time-picker-locale-example/time-picker-locale-example.component.ts?raw';
+import timePickerFormHtmlSrc from '!./examples/time-picker-form-example.component.html?raw';
+import timePickerFormTsSrc from '!./examples/time-picker-form-example.component.ts?raw';
+import timePickerFormScssSrc from '!./examples/time-picker-form-example.component.scss?raw';
 
 @Component({
     selector: 'app-time-picker',

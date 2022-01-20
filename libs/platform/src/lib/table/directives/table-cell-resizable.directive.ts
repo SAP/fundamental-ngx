@@ -1,10 +1,10 @@
-import { AfterViewInit, Directive, ElementRef, HostListener, Input, Optional } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, HostListener, Input, OnDestroy, Optional } from '@angular/core';
 
 import { RtlService } from '@fundamental-ngx/core/utils';
 
 import { TableColumnResizeService } from '../table-column-resize.service';
 
-export type TableColumnResizableSide = 'end' | 'both';
+export type TableColumnResizableSide = 'start' | 'end' | 'both';
 
 export const TABLE_CELL_RESIZABLE_THRESHOLD_PX = 4;
 
@@ -12,7 +12,7 @@ export const TABLE_CELL_RESIZABLE_THRESHOLD_PX = 4;
  * Tracks mouse movement over the cell if the mouse pointer near the side of the cell, informs resize service.
  */
 @Directive({ selector: '[fdpTableCellResizable]' })
-export class PlatformTableCellResizableDirective implements AfterViewInit {
+export class PlatformTableCellResizableDirective implements AfterViewInit, OnDestroy {
     /** First column can be resized only by its end */
     @Input('fdpTableCellResizable')
     set resizableSide(value: TableColumnResizableSide) {
@@ -51,6 +51,10 @@ export class PlatformTableCellResizableDirective implements AfterViewInit {
         this._tableColumnResizeService?.registerColumnCell(this.columnName, this._elRef);
     }
 
+    ngOnDestroy(): void {
+        this._tableColumnResizeService?.unregisterColumnCell(this.columnName, this._elRef);
+    }
+
     /** @hidden */
     @HostListener('mousemove', ['$event'])
     _onMouseMove(event: MouseEvent): void {
@@ -58,24 +62,24 @@ export class PlatformTableCellResizableDirective implements AfterViewInit {
             return;
         }
 
-        const el = this._elRef.nativeElement;
-        const [resizerPosition, resizedColumn] = this._getResizer(event, el);
+        const [resizerPosition, resizedColumn] = this._getResizer(event);
 
         this._tableColumnResizeService.setInitialResizerPosition(resizerPosition, resizedColumn);
     }
 
     /** @hidden */
-    private _getResizer(event: MouseEvent, el: HTMLElement): [number, string] {
+    private _getResizer(event: MouseEvent): [number, string] {
+        const el = this._elRef.nativeElement;
         const elPosition = el.getBoundingClientRect();
 
         let resizerPosition: number;
         let resizedColumn: string;
 
         const pointerOnLeft = this._isRtl
-            ? elPosition.right - event.clientX < TABLE_CELL_RESIZABLE_THRESHOLD_PX && this._resizableSide !== 'end'
-            : event.clientX - elPosition.left < TABLE_CELL_RESIZABLE_THRESHOLD_PX && this._resizableSide !== 'end';
+            ? elPosition.right - event.clientX < TABLE_CELL_RESIZABLE_THRESHOLD_PX
+            : event.clientX - elPosition.left < TABLE_CELL_RESIZABLE_THRESHOLD_PX;
 
-        if (pointerOnLeft) {
+        if (pointerOnLeft && this._resizableSide !== 'end') {
             resizerPosition = this._isRtl
                 ? el.parentElement.offsetWidth - (el.offsetLeft + el.offsetWidth)
                 : el.offsetLeft;
@@ -87,7 +91,7 @@ export class PlatformTableCellResizableDirective implements AfterViewInit {
             ? event.clientX - elPosition.left < TABLE_CELL_RESIZABLE_THRESHOLD_PX
             : elPosition.right - event.clientX < TABLE_CELL_RESIZABLE_THRESHOLD_PX;
 
-        if (pointerOnRight) {
+        if (pointerOnRight && this._resizableSide !== 'start') {
             resizerPosition = this._isRtl
                 ? el.parentElement.offsetWidth - el.offsetLeft
                 : el.offsetLeft + el.offsetWidth;

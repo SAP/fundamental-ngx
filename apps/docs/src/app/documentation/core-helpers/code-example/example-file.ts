@@ -1,10 +1,6 @@
 export interface ExampleFile {
-    code: {
-        default: string;
-    };
-    scssFileCode?: {
-        default: string;
-    };
+    code: string;
+    scssFileCode?: string;
     standalone?: boolean;
     language: string;
     fileName?: string;
@@ -12,9 +8,7 @@ export interface ExampleFile {
     component?: string;
     main?: boolean;
     name?: string;
-    typescriptFileCode?: {
-        default: string;
-    };
+    typescriptFileCode?: string;
     service?: boolean;
     pipe?: boolean;
     path?: string;

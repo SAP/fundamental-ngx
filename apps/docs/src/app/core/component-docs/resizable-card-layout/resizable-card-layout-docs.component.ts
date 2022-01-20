@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 
-import * as defaultResizeCardHtml from '!raw-loader!./examples/resizable-card-layout-example.component.html';
-import * as defaultResizeCardTs from '!raw-loader!./examples/resizable-card-layout-example.component.ts';
-import * as defaultResizeCardScss from '!raw-loader!./examples/resizable-card-layout-example.component.scss';
-import * as defaultResizeCardLayoutHtml from '!raw-loader!./examples/resizable-card-layout-example-layoutconfig.component.html';
-import * as defaultResizeCardLayoutTs from '!raw-loader!./examples/resizable-card-layout-example-layoutconfig.component.ts';
-import * as defaultResizeCardItemHtml from '!raw-loader!./examples/resizable-card-layout-example-itemconfig.component.html';
-import * as defaultResizeCardItemTs from '!raw-loader!./examples/resizable-card-layout-example-itemconfig.component.ts';
+import defaultResizeCardHtml from '!./examples/resizable-card-layout-example.component.html?raw';
+import defaultResizeCardTs from '!./examples/resizable-card-layout-example.component.ts?raw';
+import defaultResizeCardScss from '!./examples/resizable-card-layout-example.component.scss?raw';
+import defaultResizeCardLayoutHtml from '!./examples/resizable-card-layout-example-layoutconfig.component.html?raw';
+import defaultResizeCardLayoutTs from '!./examples/resizable-card-layout-example-layoutconfig.component.ts?raw';
+import defaultResizeCardItemHtml from '!./examples/resizable-card-layout-example-itemconfig.component.html?raw';
+import defaultResizeCardItemTs from '!./examples/resizable-card-layout-example-itemconfig.component.ts?raw';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 

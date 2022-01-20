@@ -37,7 +37,7 @@ import { ContentDensityService } from '@fundamental-ngx/core/utils';
  */
 @Component({
     // TODO to be discussed
-    // tslint:disable-next-line:directive-component
+    // eslint-disable-next-line
     selector: 'fd-breadcrumb',
     host: {
         class: 'fd-breadcrumb'

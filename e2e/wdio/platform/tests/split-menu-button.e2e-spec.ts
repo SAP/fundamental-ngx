@@ -48,7 +48,8 @@ describe('Split menu button test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(arrowBtnArr);
+        waitForPresent(spMenuBtnPage.root);
+        waitForElDisplayed(spMenuBtnPage.title);
     }, 1);
 
     // Wasn't debuged yet in IE and Safari
@@ -147,6 +148,17 @@ describe('Split menu button test suite', () => {
 
         expect(compactButtonHeight).toBeLessThan(cozyButtonHeight);
         expect(compactMenuItemHeight).toBeLessThan(cozyMenuItemHeight);
+    });
+
+    it('should check changing width of split-button after selecting item', () => {
+        const defaultMenuWidth = getElementSize(iconBtnAttrArr, 2, 'width');
+        click(iconExArrowBtnArr, 2);
+        click(menuItemArr, 1);
+        const menuWidthAfterSelection = getElementSize(iconBtnAttrArr, 2, 'width');
+        expect(menuWidthAfterSelection).toBeGreaterThan(defaultMenuWidth);
+        click(iconExArrowBtnArr, 2);
+        click(menuItemArr);
+        expect(getElementSize(iconBtnAttrArr, 2, 'width')).toBeLessThan(menuWidthAfterSelection);
     });
 
     xdescribe('Check visual regression', () => {

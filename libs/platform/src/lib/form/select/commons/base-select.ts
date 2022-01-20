@@ -19,6 +19,7 @@ import {
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 import { ENTER } from '@angular/cdk/keycodes';
+import { coerceNumberProperty } from '@angular/cdk/coercion';
 
 import { fromEvent, Observable, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -42,15 +43,17 @@ import {
     isString,
     OptionItem
 } from '@fundamental-ngx/platform/shared';
-import { SelectComponent } from '../select/select.component';
 import { SelectConfig } from '../select.config';
 import { TextAlignment } from '../../combobox';
 
 export type FdpSelectData<T> = OptionItem[] | Observable<T[]> | T[];
 
+/**
+ * @deprecated
+ * `FdpSelectionChangeEvent` will be removed in future versions in favour of plain value emission
+ */
 export class FdpSelectionChangeEvent {
     constructor(
-        public source: SelectComponent,
         public payload: any // Contains selected item
     ) {}
 }
@@ -90,7 +93,7 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
     appendTo: ElementRef;
 
     @Input()
-    triggerValue: String;
+    triggerValue: string;
 
     @Input()
     fillControlMode: PopoverFillMode = 'at-least';
@@ -155,11 +158,23 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
 
     /** First Column ratio */
     @Input()
-    firstColumnRatio: number;
+    set firstColumnRatio(value: number) {
+        this._firstColumnRatio = coerceNumberProperty(value);
+    }
+
+    get firstColumnRatio(): number {
+        return this._firstColumnRatio;
+    }
 
     /** Secoond Column ratio */
     @Input()
-    secondColumnRatio: number;
+    set secondColumnRatio(value: number) {
+        this._secondColumnRatio = coerceNumberProperty(value);
+    }
+
+    get secondColumnRatio(): number {
+        return this._secondColumnRatio;
+    }
 
     /**
      * Min width of list container
@@ -181,6 +196,10 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
     set contentDensity(contentDensity: ContentDensity) {
         this._contentDensity = contentDensity;
         this._isCompact = this.contentDensity !== 'cozy';
+    }
+
+    get contentDensity(): ContentDensity {
+        return this._contentDensity;
     }
 
     /** Data for suggestion list */
@@ -264,6 +283,12 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
     /** @hidden */
     private _element: HTMLElement = this.elementRef.nativeElement;
 
+    /** @hidden */
+    private _firstColumnRatio: number;
+
+    /** @hidden */
+    private _secondColumnRatio: number;
+
     constructor(
         readonly cd: ChangeDetectorRef,
         protected readonly elementRef: ElementRef,
@@ -308,40 +333,21 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
         }
     }
 
-    /**
-     * Method to emit change event
-     * @hidden
-     */
-    abstract _emitChangeEvent<K>(value: K): void;
-
-    /**
-     * Define is this item selected
-     * @hidden
-     */
-    abstract _isSelectedOptionItem(selectedItem: OptionItem): boolean;
-
-    /**
-     * Emit select OptionItem
-     * @hidden
-     * */
-    abstract _selectOptionItem(item: OptionItem): void;
-
-    /**
-     * Define value as selected
-     * @hidden
-     * */
-    abstract _setAsSelected(item: OptionItem[]): void;
-
     /** Is empty search field */
     get isEmptyValue(): boolean {
         return this.value.trim().length === 0;
     }
 
-    /** write value for ControlValueAccessor */
-    writeValue(value: any): void {
-        const selectedItems = Array.isArray(value) ? value : [value];
-        this._setAsSelected(this._convertToOptionItems(selectedItems));
-        super.writeValue(value);
+    protected setValue(newValue: any, emitOnChange = true): void {
+        if (newValue !== this._value) {
+            this.writeValue(newValue);
+            if (emitOnChange) {
+                this.onChange(this.value);
+                this.onTouched();
+                this.selectionChange.emit({ payload: this.value });
+            }
+            this.cd.markForCheck();
+        }
     }
 
     /** @hidden
@@ -374,19 +380,12 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
     }
 
     /** @hidden */
-    handleOptionItem(value: OptionItem): void {
-        if (value) {
-            this._selectOptionItem(value);
-        }
-    }
-
-    /** @hidden */
     handlePressEnter(event: KeyboardEvent, value: OptionItem): void {
         if (!KeyUtil.isKeyCode(event, ENTER)) {
             return;
         }
 
-        this.handleOptionItem(value);
+        this.setValue(value);
     }
 
     /** Method passed to list component */
@@ -467,7 +466,7 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
             selectItems.push({
                 label: this.displayValue(value),
                 secondaryText: this.objectGet(value, this.secondaryKey),
-                value: value
+                value
             });
         }
 
@@ -483,7 +482,7 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
 
         for (let i = 0; i < items.length; i++) {
             const value = items[i];
-            selectItems.push({ label: value, value: value });
+            selectItems.push({ label: value, value });
         }
 
         return selectItems;
@@ -500,7 +499,7 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
             const value = items[i];
             selectItems.push({
                 label: this.displayValue(value),
-                value: value
+                value
             });
         }
 

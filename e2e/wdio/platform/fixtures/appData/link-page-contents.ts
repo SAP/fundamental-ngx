@@ -1,5 +1,5 @@
 export const defaultLink_alt_text = 'Extra info as tooltip text';
-export const iconLinkAriaLabel = 'icon as link';
+export const iconLinkAriaLabel = 'This is an icon as a link example';
 export const truncatedLink_alt_text = 'this is a long text link. so getting truncated.';
 
 export const standardLinksAltTextArray: Array<string> = [

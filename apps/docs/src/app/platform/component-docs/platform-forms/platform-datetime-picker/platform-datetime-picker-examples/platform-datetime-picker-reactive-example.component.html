@@ -19,8 +19,9 @@
     </fdp-form-field>
 
     <fdp-form-field
-        #ffl3
+        #ffl2
         id="withAllowNull"
+        required="true"
         column="2"
         label="With allowNull not enabled to disallow input from taking null value:"
     >
@@ -28,13 +29,18 @@
             name="withAllowNull"
             [allowNull]="false"
             placeholder="Enter a date mandatorily"
-            [formControl]="ffl3.formControl"
+            [formControl]="ffl2.formControl"
         >
         </fdp-datetime-picker>
     </fdp-form-field>
 
-    <fdp-form-field #ffl6 id="storedDate" column="3" required="true" label="Passing datetime through form object:">
-        <fdp-datetime-picker name="storedDate" placeholder="Pre-filled datetime" [formControl]="ffl6.formControl">
+    <fdp-form-field #ffl3 id="storedDate" column="3" required="true" label="Passing datetime through form object:">
+        <fdp-datetime-picker
+            name="storedDate"
+            placeholder="Pre-filled datetime"
+            [formControl]="ffl3.formControl"
+            [allowNull]="false"
+        >
         </fdp-datetime-picker>
     </fdp-form-field>
 

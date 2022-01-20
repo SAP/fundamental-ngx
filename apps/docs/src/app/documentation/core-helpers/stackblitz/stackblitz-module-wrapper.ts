@@ -11,7 +11,7 @@ export class StackblitzModuleWrapper {
         { name: 'FormsModule', path: '@angular/forms' },
         { name: 'ReactiveFormsModule', path: '@angular/forms' },
         { name: 'BrowserAnimationsModule', path: '@angular/platform-browser/animations' },
-        { name: 'FundamentalNgxCoreModule, GridListModule, FdDatetimeModule', path: '@fundamental-ngx/core' },
+        { name: 'FundamentalNgxCoreModule, FdDatetimeModule', path: '@fundamental-ngx/core' },
         { name: 'FundamentalNgxPlatformModule', path: '@fundamental-ngx/platform' },
         { name: 'HttpClientModule', path: '@angular/common/http' },
         { name: 'CdkTableModule', path: '@angular/cdk/table' },
@@ -65,8 +65,7 @@ ${imports}
     ],
     imports: [
         ${moduleImports},
-        RouterModule.forRoot([{path: '#', component:${mainComponent}}],
-        { useHash: true }),
+        RouterModule.forRoot([{path: '#', component:${mainComponent}}], { useHash: true }),
     ],
     providers: [
         RtlService,

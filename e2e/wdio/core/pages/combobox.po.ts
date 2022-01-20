@@ -1,13 +1,12 @@
 import { CoreBaseComponentPo } from './core-base-component.po';
-import { waitForElDisplayed } from '../../driver/wdio';
+import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class ComboboxPo extends CoreBaseComponentPo {
     url = '/combobox';
-    root = '#page-content';
 
     standardButton = '#background-ex0 button';
     dropdownPopover = 'fd-popover-body';
-    dropdownOption = 'li.fd-list__item';
+    dropdownOption = 'li.fd-list__item:not(.fd-list__group-header)';
     smallText = 'div~small';
     smallText_2 = 'fd-combobox~small';
     allInputFields = this.root + ' .fd-input.fd-input-group__input';
@@ -16,13 +15,15 @@ export class ComboboxPo extends CoreBaseComponentPo {
     mobileTitle = 'h1.fd-title--h5';
     reactiveFormButton = '#background-ex13 button';
     reactiveFormText = '#background-ex13 small';
+    compactInput = '.fd-input--compact';
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

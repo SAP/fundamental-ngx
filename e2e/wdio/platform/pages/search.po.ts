@@ -1,5 +1,5 @@
 import { BaseComponentPo } from './base-component.po';
-import { waitForElDisplayed } from '../../driver/wdio';
+import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class SearchPo extends BaseComponentPo {
     url = '/search-field';
@@ -18,13 +18,15 @@ export class SearchPo extends BaseComponentPo {
     mobileExampleSearch = 'fdp-platform-search-field-mobile-example .result-field span';
     okButton = '.fd-dialog__decisive-button';
     categoryOption = '.fd-menu__link';
+    synchronizeButton = '.fdp-search-field__loading';
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.searchFields);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

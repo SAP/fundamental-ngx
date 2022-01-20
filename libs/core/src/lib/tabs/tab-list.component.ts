@@ -300,8 +300,8 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
     private _listenOnTabPanelsAndInitiallyExpandTabPanel(): void {
         this._tabPanelsChange$
             .pipe(
-                filter((_) => !this._tabArray.some((tab) => tab.active)),
-                map((_) => this._tabArray.find((tab) => !tab.disabled)),
+                filter(() => !this._tabArray.some((tab) => tab.active)),
+                map(() => this._tabArray.find((tab) => !tab.disabled)),
                 filter((tab) => !!tab),
                 delay(0),
                 takeUntil(this._onDestroy$)
@@ -330,7 +330,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
     private _listenOnResizeAndHideItems(): void {
         resizeObservable(this._elRef.nativeElement)
             .pipe(debounceTime(20), takeUntil(this._onDestroy$))
-            .subscribe((_) => {
+            .subscribe(() => {
                 this.refreshOverflow();
                 this._detectChanges();
             });

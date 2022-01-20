@@ -13,6 +13,7 @@ import { debounceTime, takeUntil } from 'rxjs/operators';
 @Component({
     selector: 'fd-carousel-multiple-active-item-example',
     templateUrl: './carousel-multiple-active-item-example.component.html',
+    styleUrls: ['./carousel-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CarouselMultipleActiveItemExampleComponent implements OnInit, AfterViewInit {

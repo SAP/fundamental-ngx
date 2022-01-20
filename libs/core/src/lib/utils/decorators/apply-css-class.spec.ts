@@ -8,7 +8,7 @@ import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 const TEST_DIRECTIVE_CLASS = 'fd-test-directive';
 
 @Directive({
-    // tslint:disable-next-line: directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-test-directive]'
 })
 export class TestDirective implements OnInit, OnChanges, CssClassBuilder {

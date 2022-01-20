@@ -2,15 +2,15 @@ import { Component } from '@angular/core';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
-import * as platformObjectMarkerExampleScss from '!raw-loader!./object-marker-example/object-marker-example.scss';
-import * as platformObjectMarkerDefaultExampleHtml from '!raw-loader!./object-marker-example/object-marker/object-marker-example.component.html';
-import * as platformObjectMarkerDefaultExampleTs from '!raw-loader!./object-marker-example/object-marker/object-marker-example.component';
-import * as platformObjectMarkerTextAndIconExampleHtml from '!raw-loader!./object-marker-example/object-marker-text-and-icon/object-marker-text-and-icon-example.component.html';
-import * as platformObjectMarkerTextAndIconExampleTs from '!raw-loader!./object-marker-example/object-marker-text-and-icon/object-marker-text-and-icon-example.component';
-import * as platformObjectMarkerTextAndIconClickableExampleHtml from '!raw-loader!./object-marker-example/object-marker-text-clickable/object-marker-text-clickable-example.component.html';
-import * as platformObjectMarkerTextAndIconClickableExampleTs from '!raw-loader!./object-marker-example/object-marker-text-clickable/object-marker-text-clickable-example.component';
-import * as platformObjectMarkerTextOnlyExampleHtml from '!raw-loader!./object-marker-example/object-marker-text-only-example/object-marker-text-only-example.component.html';
-import * as platformObjectMarkerTextOnlyExampleTs from '!raw-loader!./object-marker-example/object-marker-text-only-example/object-marker-text-only-example.component';
+import platformObjectMarkerExampleScss from '!./object-marker-example/object-marker-example.scss?raw';
+import platformObjectMarkerDefaultExampleHtml from '!./object-marker-example/object-marker/object-marker-example.component.html?raw';
+import platformObjectMarkerDefaultExampleTs from '!./object-marker-example/object-marker/object-marker-example.component?raw';
+import platformObjectMarkerTextAndIconExampleHtml from '!./object-marker-example/object-marker-text-and-icon/object-marker-text-and-icon-example.component.html?raw';
+import platformObjectMarkerTextAndIconExampleTs from '!./object-marker-example/object-marker-text-and-icon/object-marker-text-and-icon-example.component?raw';
+import platformObjectMarkerTextAndIconClickableExampleHtml from '!./object-marker-example/object-marker-text-clickable/object-marker-text-clickable-example.component.html?raw';
+import platformObjectMarkerTextAndIconClickableExampleTs from '!./object-marker-example/object-marker-text-clickable/object-marker-text-clickable-example.component?raw';
+import platformObjectMarkerTextOnlyExampleHtml from '!./object-marker-example/object-marker-text-only-example/object-marker-text-only-example.component.html?raw';
+import platformObjectMarkerTextOnlyExampleTs from '!./object-marker-example/object-marker-text-only-example/object-marker-text-only-example.component?raw';
 
 @Component({
     selector: 'fdp-platform-object-marker',

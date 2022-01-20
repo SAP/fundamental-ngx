@@ -30,6 +30,7 @@ describe('ApprovalFlowUserListComponent', () => {
         const approvalUsers: ApprovalUser[] = [
             {
                 id: 'id1',
+                teamId: 'teamId1',
                 name: 'name1'
             }
         ];

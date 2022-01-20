@@ -1,41 +1,41 @@
 import { Component } from '@angular/core';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
-import * as defaultHtmlExample from '!raw-loader!./examples/wizard-generator-default-example.component.html';
-import * as defaultTsExample from '!raw-loader!./examples/wizard-generator-default-example.component.ts';
+import defaultHtmlExample from '!./examples/wizard-generator-default-example.component.html?raw';
+import defaultTsExample from '!./examples/wizard-generator-default-example.component.ts?raw';
 
-import * as dialogHtmlExample from '!raw-loader!./examples/wizard-generator-dialog-example.component.html';
-import * as dialogTsExample from '!raw-loader!./examples/wizard-generator-dialog-example.component.ts';
+import dialogHtmlExample from '!./examples/wizard-generator-dialog-example.component.html?raw';
+import dialogTsExample from '!./examples/wizard-generator-dialog-example.component.ts?raw';
 
-import * as customizableHtmlExample from '!raw-loader!./examples/wizard-generator-customizable-example.component.html';
-import * as customizableTsExample from '!raw-loader!./examples/wizard-generator-customizable-example.component.ts';
+import customizableHtmlExample from '!./examples/wizard-generator-customizable-example.component.html?raw';
+import customizableTsExample from '!./examples/wizard-generator-customizable-example.component.ts?raw';
 
-import * as customizableEmbededHtmlExample from '!raw-loader!./examples/wizard-generator-customizable-embeded-example.component.html';
-import * as customizableEmbededTsExample from '!raw-loader!./examples/wizard-generator-customizable-embeded-example.component.ts';
+import customizableEmbededHtmlExample from '!./examples/wizard-generator-customizable-embeded-example.component.html?raw';
+import customizableEmbededTsExample from '!./examples/wizard-generator-customizable-embeded-example.component.ts?raw';
 
-import * as conditionHtmlExample from '!raw-loader!./examples/wizard-generator-condition-example.component.html';
-import * as conditionTsExample from '!raw-loader!./examples/wizard-generator-condition-example.component.ts';
+import conditionHtmlExample from '!./examples/wizard-generator-condition-example.component.html?raw';
+import conditionTsExample from '!./examples/wizard-generator-condition-example.component.ts?raw';
 
-import * as responsiveHtmlExample from '!raw-loader!./examples/wizard-generator-responsive-paddings-example.component.html';
-import * as responsiveTsExample from '!raw-loader!./examples/wizard-generator-responsive-paddings-example.component.ts';
+import responsiveHtmlExample from '!./examples/wizard-generator-responsive-paddings-example.component.html?raw';
+import responsiveTsExample from '!./examples/wizard-generator-responsive-paddings-example.component.ts?raw';
 
-import * as responsiveDialogHtmlExample from '!raw-loader!./examples/wizard-generator-responsive-dialog-example.component.html';
-import * as responsiveDialogTsExample from '!raw-loader!./examples/wizard-generator-responsive-dialog-example.component.ts';
+import responsiveDialogHtmlExample from '!./examples/wizard-generator-responsive-dialog-example.component.html?raw';
+import responsiveDialogTsExample from '!./examples/wizard-generator-responsive-dialog-example.component.ts?raw';
 
-import * as visibleSummaryHtmlExample from '!raw-loader!./examples/wizard-generator-visible-summary-example.component.html';
-import * as visibleSummaryTsExample from '!raw-loader!./examples/wizard-generator-visible-summary-example.component.ts';
+import visibleSummaryHtmlExample from '!./examples/wizard-generator-visible-summary-example.component.html?raw';
+import visibleSummaryTsExample from '!./examples/wizard-generator-visible-summary-example.component.ts?raw';
 
-import * as visibleBranchingSummaryHtmlExample from '!raw-loader!./examples/wizard-generator-visible-summary-branching-example.component.html';
-import * as visibleBranchingSummaryTsExample from '!raw-loader!./examples/wizard-generator-visible-summary-branching-example.component.ts';
+import visibleBranchingSummaryHtmlExample from '!./examples/wizard-generator-visible-summary-branching-example.component.html?raw';
+import visibleBranchingSummaryTsExample from '!./examples/wizard-generator-visible-summary-branching-example.component.ts?raw';
 
-import * as externalNavigationHtmlExample from '!raw-loader!./examples/wizard-generator-external-navigation-example.component.html';
-import * as externalNavigationTsExample from '!raw-loader!./examples/wizard-generator-external-navigation-example.component.ts';
+import externalNavigationHtmlExample from '!./examples/wizard-generator-external-navigation-example.component.html?raw';
+import externalNavigationTsExample from '!./examples/wizard-generator-external-navigation-example.component.ts?raw';
 
-import * as summaryObjectsHtmlExample from '!raw-loader!./examples/wizard-generator-summary-objects-example.component.html';
-import * as summaryObjectsTsExample from '!raw-loader!./examples/wizard-generator-summary-objects-example.component.ts';
+import summaryObjectsHtmlExample from '!./examples/wizard-generator-summary-objects-example.component.html?raw';
+import summaryObjectsTsExample from '!./examples/wizard-generator-summary-objects-example.component.ts?raw';
 
-import * as interactionHtmlExample from '!raw-loader!./examples/wizard-generator-onchange-example.component.html';
-import * as interactionTsExample from '!raw-loader!./examples/wizard-generator-onchange-example.component.ts';
+import interactionHtmlExample from '!./examples/wizard-generator-onchange-example.component.html?raw';
+import interactionTsExample from '!./examples/wizard-generator-onchange-example.component.ts?raw';
 @Component({
     selector: 'fdp-platform-wizard-generator-docs',
     templateUrl: './platform-wizard-generator-docs.component.html'

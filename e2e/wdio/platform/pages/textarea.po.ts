@@ -1,9 +1,14 @@
 import { BaseComponentPo } from './base-component.po';
-import { waitForElDisplayed } from '../../driver/wdio';
+import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class TextareaPo extends BaseComponentPo {
     url = '/textarea';
-    root = '#page-content';
+
+    textareaBasicExample = 'fdp-platform-textarea-basic-example ';
+    textareaAutogrowExample = 'fdp-platform-textarea-autogrow-example ';
+    textareaCounterExample = 'fdp-platform-textarea-counter-example ';
+    textareaCounterTemplateExample = 'fdp-platform-textarea-counter-template-example ';
+    textareaI18nExample = 'fdp-platform-textarea-i18n-example ';
 
     basicTextArea = '#basicTextarea';
     basicTextAreaLabel = '#fdp-form-label-basicTextarea';
@@ -27,15 +32,18 @@ export class TextareaPo extends BaseComponentPo {
     detailedTextAreaLabel = '#fdp-form-label-detailedDescription > span';
     detailedTextArea = '#detailedDescription';
     detailedTextAreaErrorMessage = '[type="error"]';
-    detailedTextAreaCharacterCounter = `//div[label[@id='fdp-form-label-detailedDescription']]//div[@role="alert"]//span`;
+    detailedTextAreaCharacterCounter = `fdp-platform-textarea-counter-example fd-popover span`;
     noPlatformsFormTextAreaLabel = '[for="textarea-1"]';
+    textarea = 'textarea:not(#readonlyDescription, #disabledDescription)';
+    message = '.fd-form-message';
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

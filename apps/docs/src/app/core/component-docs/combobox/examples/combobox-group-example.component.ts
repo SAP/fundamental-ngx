@@ -24,7 +24,7 @@ export class ComboboxGroupExampleComponent {
         }
     }
 
-    groupFunc(items: { name: string; type: string }[]): {} {
+    groupFunc(items: { name: string; type: string }[]): Record<string, any> {
         return {
             Fruits: items.filter((item) => item.type === 'Fruits'),
             Vegetables: items.filter((item) => item.type === 'Vegetables')

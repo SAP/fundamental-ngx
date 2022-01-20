@@ -1,11 +1,14 @@
-import * as polyfills from '!raw-loader!./code-example-stack/polyfills.ts';
-import * as maints from '!raw-loader!./code-example-stack/main.ts';
-import * as stylesScss from '!raw-loader!./code-example-stack/styles.scss';
+import polyfills from '!./code-example-stack/polyfills.ts?raw';
+import main from '!./code-example-stack/main.ts?raw';
+import styles from '!./code-example-stack/styles.scss?raw';
+import tsconfig from '!./code-example-stack/tsconfig.json?raw';
+import angular from '!./code-example-stack/angular.json?raw';
+
 import sdk from '@stackblitz/sdk';
+import { Inject, Injectable } from '@angular/core';
 import { StackblitzFile } from './interfaces/stackblitz-parameters';
 import { StackblitzDependencies } from './stackblitz-dependencies';
 import { StackblitzProject } from './interfaces/stackblitz-project';
-import { Inject, Injectable } from '@angular/core';
 import { Libraries } from '../../utilities/libraries';
 import { ExampleFile } from '../code-example/example-file';
 import { StackblitzModuleWrapper } from './stackblitz-module-wrapper';
@@ -28,10 +31,15 @@ export class StackblitzService {
     get defaultProjectInfo(): StackblitzProject {
         return {
             files: {
-                'src/main.ts': maints.default,
-                'src/polyfills.ts': polyfills.default,
-                'src/styles.scss': stylesScss.default,
-                'angular.json': StackblitzDependencies.getAngularJson()
+                'src/main.ts': main,
+                'src/polyfills.ts': polyfills,
+                'src/styles.scss': styles,
+                'angular.json': angular,
+                /**
+                 * We're providing custom tsconfig with "enableIvy": false due to the StackBlitz issue
+                 * https://github.com/stackblitz/core/issues/1364
+                 */
+                'tsconfig.json': tsconfig
             },
             title: 'Fundamental-NGX Example',
             description: 'Generated for you by fundamental-ngx team',
@@ -60,8 +68,7 @@ export class StackblitzService {
             } else if (example.language === 'scss') {
                 generatedFiles = this.handleScssFile(example);
             } else if (example.path !== undefined) {
-                defaultProjectInfo.files[`${example.path}/${example.fileName}.${example.language}`] =
-                    example.code.default;
+                defaultProjectInfo.files[`${example.path}/${example.fileName}.${example.language}`] = example.code;
                 return;
             }
 
@@ -94,8 +101,7 @@ export class StackblitzService {
         defaultProjectInfo.files['src/index.html'] = `
 <html>
     <head>
-        <link rel="stylesheet"
-        href="node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_fiori_3/css_variables.css" />
+        <link rel="stylesheet" href="node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_fiori_3/css_variables.css" />
         <link rel="stylesheet" href="node_modules/fundamental-styles/dist/fonts.css" />
         <link rel="stylesheet" href="node_modules/fundamental-styles/dist/icon.css" />
     </head>
@@ -113,12 +119,13 @@ export class StackblitzService {
 
         return `
 import { Component } from '@angular/core';
-    @Component({
-        selector: '${libraryPrefix}${fileName}',
-        templateUrl: './${fileName}.component.html',
-        styleUrls: ['./${fileName}.component.scss']
-    })
-    export class ${componentName} {}`;
+
+@Component({
+    selector: '${libraryPrefix}${fileName}',
+    templateUrl: './${fileName}.component.html',
+    styleUrls: ['./${fileName}.component.scss']
+})
+export class ${componentName} {}`;
     }
 
     private getLibraryPrefix(): string {
@@ -154,7 +161,7 @@ import { Component } from '@angular/core';
     /** this function transform that-word, or that_word to ThatWord */
     private transformSnakeCaseToPascalCase(snakeCase: string): string {
         if (snakeCase) {
-            const snakeToCamel = (str) => str.replace(/([-_]\w)/g, (g) => g[1].toUpperCase());
+            const snakeToCamel = (str): string => str.replace(/([-_]\w)/g, (g) => g[1].toUpperCase());
             const camelCase = snakeToCamel(snakeCase);
             return camelCase[0].toUpperCase() + camelCase.substr(1);
         } else {
@@ -167,8 +174,8 @@ import { Component } from '@angular/core';
         const componentName = example.component || this.transformSnakeCaseToPascalCase(example.fileName);
 
         return {
-            path: path,
-            componentName: componentName,
+            path,
+            componentName,
             basis: this.getFileBasis(example),
             selector: this.getLibraryPrefix() + example.fileName,
             entryComponent: example.entryComponent,
@@ -186,13 +193,13 @@ import { Component } from '@angular/core';
 
         generatedFile.html = {
             path: this.getFilePath(file, 'html'),
-            code: file.code.default
+            code: file.code
         };
 
         if (file.scssFileCode) {
             generatedFile.scss = {
                 path: this.getFilePath(file, 'scss'),
-                code: file.scssFileCode ? file.scssFileCode.default : ''
+                code: file.scssFileCode || ''
             };
         }
 
@@ -201,9 +208,7 @@ import { Component } from '@angular/core';
         if (this.isStandAlone(exampleFiles, file)) {
             generatedFile.ts = {
                 path: this.getFilePath(file, 'ts'),
-                code: file.typescriptFileCode
-                    ? file.typescriptFileCode.default
-                    : this.getDefaultTypescriptFile(file.fileName)
+                code: file.typescriptFileCode || this.getDefaultTypescriptFile(file.fileName)
             };
         }
         return generatedFile;
@@ -215,13 +220,13 @@ import { Component } from '@angular/core';
         if (file.scssFileCode) {
             generatedFile.scss = {
                 path: this.getFilePath(file, 'scss'),
-                code: file.scssFileCode ? file.scssFileCode.default : ''
+                code: file.scssFileCode || ''
             };
         }
 
         generatedFile.ts = {
             path: this.getFilePath(file, 'ts'),
-            code: file.code.default
+            code: file.code
         };
 
         return generatedFile;
@@ -232,7 +237,7 @@ import { Component } from '@angular/core';
 
         generatedFile.scss = {
             path: this.getFilePath(file, 'scss'),
-            code: file.code.default
+            code: file.code
         };
 
         return generatedFile;

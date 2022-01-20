@@ -1,8 +1,11 @@
 import {
+    browserIsSafari,
     click,
     doesItExist,
     getAttributeByName,
     getElementArrayLength,
+    getElementClass,
+    getElementSize,
     getText,
     isElementDisplayed,
     refreshPage,
@@ -50,7 +53,10 @@ describe('Multi input test suite', () => {
         listItem,
         popover,
         compactExampleTokens,
-        dialogCheckbox
+        dialogCheckbox,
+        selectAllItemsBtn,
+        dialogListItem,
+        compactInput
     } = multiInputPage;
 
     beforeAll(() => {
@@ -60,7 +66,8 @@ describe('Multi input test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(multiInputPage.title);
+        waitForPresent(multiInputPage.root);
+        waitForElDisplayed(multiInputPage.title);
     }, 1);
 
     it('Check RTL/LTR orientation', () => {
@@ -70,16 +77,18 @@ describe('Multi input test suite', () => {
     it('Verify inputs should have placeholder', () => {
         const activeInputsLength = getElementArrayLength(activeInputs);
         for (let i = 0; i < activeInputsLength; i++) {
-            if (i === 9 || i === 10) {
-                continue;
-            }
             scrollIntoView(activeInputs, i);
-            expect(getAttributeByName(activeInputs, 'placeholder', i)).toBe('Search here...');
+            if (i === 10 || i === 11) {
+                expect(getAttributeByName(activeInputs, 'placeholder', i)).toBe('Search Here...');
+            } else if (i === 12) {
+                // skip due to for some reason it returns 'true' in Safari
+                if (!browserIsSafari()) {
+                    expect(getAttributeByName(activeInputs, 'placeholder', i)).toBe('');
+                }
+            } else {
+                expect(getAttributeByName(activeInputs, 'placeholder', i)).toBe('Search here...');
+            }
         }
-        scrollIntoView(activeInputs, 9);
-        expect(getAttributeByName(activeInputs, 'placeholder', 9)).toBe('Search Here...');
-        scrollIntoView(activeInputs, 10);
-        expect(getAttributeByName(activeInputs, 'placeholder', 10)).toBe('');
     });
 
     it('verify disabled multi inputs', () => {
@@ -117,7 +126,7 @@ describe('Multi input test suite', () => {
 
     it('should be able to select all tokens and delete with delete key', () => {
         scrollIntoView(compactExampleTokens);
-        click(activeInputs, 3);
+        click(activeInputs, 4);
         sendKeys(['Control', 'a']);
         sendKeys(['Delete']);
         const newTokenCount = getElementArrayLength(compactExampleTokens);
@@ -147,34 +156,37 @@ describe('Multi input test suite', () => {
             scrollIntoView(buttonShowAll);
             click(buttonShowAll);
             expect(waitForElDisplayed(expandedDropdown, 1)).toBe(true);
+            expect(getText(hiddenAddonButtonInputOptions, 0)).toBe(testOptionsArray2[0]);
             const optionsLength = getElementArrayLength(checkboxInput);
             for (let i = 0; i < optionsLength; i++) {
+                // deselecting first, selecting other
                 scrollIntoView(checkboxInput, i);
                 click(checkboxInput, i);
             }
             const inputOptionsLength = getElementArrayLength(hiddenAddonButtonInputOptions);
             for (let i = 0; i < inputOptionsLength; i++) {
                 scrollIntoView(hiddenAddonButtonInputOptions, i);
-                expect(getText(hiddenAddonButtonInputOptions, i)).toBe(testOptionsArray2[i]);
+                // expecting first element to be not selected, others to be selected
+                expect(getText(hiddenAddonButtonInputOptions, i)).toBe(testOptionsArray2[i + 1]);
             }
         });
     });
 
     describe('Check Compact Multi Input', () => {
         it('verify Compact Multi Input by select each option', () => {
-            scrollIntoView(activeDropdownButtons, 1);
+            scrollIntoView(activeDropdownButtons, 2);
             const inputOptionsLength = getElementArrayLength(compactMultiInputOptions);
             for (let i = 0; i < inputOptionsLength; i++) {
                 scrollIntoView(compactMultiInputOptions, i);
                 expect(getText(compactMultiInputOptions, i)).toBe(testOptionsArray1[i]);
             }
-            click(activeDropdownButtons, 1);
+            click(activeDropdownButtons, 2);
             const optionsLength = getElementArrayLength(checkboxInput);
             for (let i = 0; i < optionsLength - 4; i++) {
                 scrollIntoView(checkboxInput, i);
                 click(checkboxInput, i);
             }
-            click(activeDropdownButtons, 1);
+            click(activeDropdownButtons, 2);
             for (let i = 0; i < inputOptionsLength - 4; i++) {
                 scrollIntoView(compactMultiInputOptions, i);
                 expect(getText(compactMultiInputOptions, i)).toBe(testOptionsArray3[i]);
@@ -184,8 +196,8 @@ describe('Multi input test suite', () => {
 
     describe('Check Mobile Mode Multi Input', () => {
         it('verify Mobile Mode Multi Input by multi select button', () => {
-            scrollIntoView(activeDropdownButtons, 2);
-            click(activeDropdownButtons, 2);
+            scrollIntoView(activeDropdownButtons, 3);
+            click(activeDropdownButtons, 3);
             click(multiSelectButton);
             click(approveButton);
             const inputOptionsLength = getElementArrayLength(mobileInputOptions);
@@ -196,8 +208,8 @@ describe('Multi input test suite', () => {
         });
 
         it('verify Mobile Mode Multi Input by select each option', () => {
-            scrollIntoView(activeDropdownButtons, 2);
-            click(activeDropdownButtons, 2);
+            scrollIntoView(activeDropdownButtons, 3);
+            click(activeDropdownButtons, 3);
             const optionsLength = getElementArrayLength(dialogCheckbox);
             for (let i = 0; i < optionsLength; i++) {
                 scrollIntoView(dialogCheckbox, i);
@@ -210,18 +222,40 @@ describe('Multi input test suite', () => {
                 expect(getText(mobileInputOptions, i)).toBe(testOptionsArray1[i]);
             }
         });
+
+        it('should check selecting all items by clicking Select All button', () => {
+            scrollIntoView(activeDropdownButtons, 3);
+            click(activeDropdownButtons, 3);
+            const optionsLength = getElementArrayLength(dialogCheckbox);
+            click(selectAllItemsBtn);
+            for (let i = 0; i < optionsLength; i++) {
+                expect(getElementClass(dialogListItem, i)).toContain('is-selected');
+            }
+        });
+
+        // skipped due to https://github.com/SAP/fundamental-ngx/issues/7203
+        xit('should check unselecting all items after selecting by Select All button', () => {
+            scrollIntoView(activeDropdownButtons, 3);
+            click(activeDropdownButtons, 3);
+            const optionsLength = getElementArrayLength(dialogCheckbox);
+            click(selectAllItemsBtn);
+            click(selectAllItemsBtn);
+            for (let i = 0; i < optionsLength; i++) {
+                expect(getElementClass(dialogListItem, i)).not.toContain('is-selected');
+            }
+        });
     });
 
     describe('Check Display Object Property', () => {
         it('verify Display Object Property by select each option', () => {
-            scrollIntoView(activeDropdownButtons, 4);
-            click(activeDropdownButtons, 4);
+            scrollIntoView(activeDropdownButtons, 5);
+            click(activeDropdownButtons, 5);
             const optionsLength = getElementArrayLength(checkboxInput);
             for (let i = 0; i < optionsLength; i++) {
                 scrollIntoView(checkboxInput, i);
                 click(checkboxInput, i);
             }
-            click(activeDropdownButtons, 4);
+            click(activeDropdownButtons, 5);
             const inputOptionsLength = getElementArrayLength(displayObjectOptions);
             for (let i = 0; i < inputOptionsLength; i++) {
                 scrollIntoView(displayObjectOptions, i);
@@ -232,14 +266,14 @@ describe('Multi input test suite', () => {
 
     describe('Check Return results including search term', () => {
         it('verify Return results including search term by clicking each option', () => {
-            scrollIntoView(activeDropdownButtons, 5);
-            click(activeDropdownButtons, 5);
+            scrollIntoView(activeDropdownButtons, 6);
+            click(activeDropdownButtons, 6);
             const optionsLength = getElementArrayLength(checkboxInput);
             for (let i = 0; i < optionsLength; i++) {
                 scrollIntoView(checkboxInput, i);
                 click(checkboxInput, i);
             }
-            click(activeDropdownButtons, 5);
+            click(activeDropdownButtons, 6);
             const inputOptionsLength = getElementArrayLength(searchTermOptions);
             for (let i = 0; i < inputOptionsLength; i++) {
                 scrollIntoView(searchTermOptions, i);
@@ -250,14 +284,14 @@ describe('Multi input test suite', () => {
 
     describe('Check Custom Filter', () => {
         it('verify Custom Filter by clicking each option', () => {
-            scrollIntoView(activeDropdownButtons, 6);
-            click(activeDropdownButtons, 6);
+            scrollIntoView(activeDropdownButtons, 7);
+            click(activeDropdownButtons, 7);
             const optionsLength = getElementArrayLength(checkboxInput);
             for (let i = 0; i < optionsLength; i++) {
                 scrollIntoView(checkboxInput, i);
                 click(checkboxInput, i);
             }
-            click(activeDropdownButtons, 6);
+            click(activeDropdownButtons, 7);
             const inputOptionsLength = getElementArrayLength(customFilterOptions);
             for (let i = 0; i < inputOptionsLength; i++) {
                 scrollIntoView(customFilterOptions, i);
@@ -268,14 +302,14 @@ describe('Multi input test suite', () => {
 
     describe('Check Observable Async Example', () => {
         it('verify Observable Async Example by clicking each option', () => {
-            scrollIntoView(activeDropdownButtons, 7);
-            click(activeDropdownButtons, 7);
+            scrollIntoView(activeDropdownButtons, 8);
+            click(activeDropdownButtons, 8);
             const optionsLength = getElementArrayLength(checkboxInput);
             for (let i = 0; i < optionsLength; i++) {
                 scrollIntoView(checkboxInput, i);
                 click(checkboxInput, i);
             }
-            click(activeDropdownButtons, 7);
+            click(activeDropdownButtons, 8);
             const inputOptionsLength = getElementArrayLength(asyncExampleOptions);
             for (let i = 0; i < inputOptionsLength; i++) {
                 scrollIntoView(asyncExampleOptions, i);
@@ -286,11 +320,11 @@ describe('Multi input test suite', () => {
 
     describe('Check Multi Input in Reactive Form', () => {
         it('verify Multi Input in Reactive Form by clicking each option', () => {
-            scrollIntoView(activeDropdownButtons, 8);
-            click(activeDropdownButtons, 8);
+            scrollIntoView(activeDropdownButtons, 9);
+            click(activeDropdownButtons, 9);
             click(checkboxInput, 2);
             click(checkboxInput, 3);
-            click(activeDropdownButtons, 8);
+            click(activeDropdownButtons, 9);
             const inputOptionsLength = getElementArrayLength(asyncExampleOptions);
             for (let i = 0; i < inputOptionsLength; i++) {
                 scrollIntoView(asyncExampleOptions, i);
@@ -301,14 +335,14 @@ describe('Multi input test suite', () => {
 
     describe('Check Adding New Tokens', () => {
         it('verify Adding New Tokens by clicking each option', () => {
-            scrollIntoView(activeDropdownButtons, 9);
-            click(activeDropdownButtons, 9);
+            scrollIntoView(activeDropdownButtons, 10);
+            click(activeDropdownButtons, 10);
             const optionsLength = getElementArrayLength(checkboxInput);
             for (let i = 0; i < optionsLength; i++) {
                 scrollIntoView(checkboxInput, i);
                 click(checkboxInput, i);
             }
-            click(activeDropdownButtons, 9);
+            click(activeDropdownButtons, 10);
             const inputOptionsLength = getElementArrayLength(tokenOptions);
             for (let i = 0; i < inputOptionsLength; i++) {
                 scrollIntoView(tokenOptions, i);
@@ -319,20 +353,27 @@ describe('Multi input test suite', () => {
 
     describe('Check Custom Item Template', () => {
         it('verify Custom Item Template by clicking each option', () => {
-            scrollIntoView(activeDropdownButtons, 10);
-            click(activeDropdownButtons, 10);
+            scrollIntoView(activeDropdownButtons, 11);
+            click(activeDropdownButtons, 11);
             const optionsLength = getElementArrayLength(checkboxInput);
             for (let i = 5; i < optionsLength; i++) {
                 scrollIntoView(checkboxInput, i);
                 click(checkboxInput, i);
             }
-            click(activeDropdownButtons, 10);
+            click(activeDropdownButtons, 11);
             const inputOptionsLength = getElementArrayLength(templateOptions);
             for (let i = 0; i < inputOptionsLength; i++) {
                 scrollIntoView(templateOptions, i);
                 expect(getText(templateOptions, i)).toBe(testOptionsArray6[i]);
             }
         });
+    });
+
+    it('should check compact input be smaller than basic input', () => {
+        const basicInputS = getElementSize(activeInputs);
+        const compactInputS = getElementSize(compactInput);
+
+        expect(basicInputS.height).toBeGreaterThan(compactInputS.height);
     });
 
     xdescribe('Check visual regression', () => {

@@ -1,3 +1,4 @@
+// BEING UPDATED WITH THE SAP-COMPONENT SCHEMATIC; DO NOT MODIFY THE STRUCTURE!
 /**
  * Files to display in the API tab of each component.
  * Names should be without hyphens, and capitalized where hyphens occur normally.
@@ -118,7 +119,7 @@ export const API_FILES = {
     illustratedMessage: ['IllustratedMessageComponent'],
     infoLabel: ['InfoLabelComponent'],
     infiniteScroll: ['InfiniteScrollDirective'],
-    inlineHelp: ['InlineHelpComponent'],
+    inlineHelp: ['InlineHelpDirective'],
     inputGroup: ['InputGroupComponent'],
     layoutGrid: ['LayoutGridComponent', 'LayoutGridColDirective', 'LayoutGridRowDirective'],
     layoutPanel: [
@@ -228,6 +229,7 @@ export const API_FILES = {
     ],
     objectNumber: ['ObjectNumberComponent'],
     productSwitch: ['ProductSwitchComponent', 'ProductSwitchItem'],
+    progressIndicator: ['ProgressIndicatorComponent'],
     quickView: [
         'QuickViewComponent',
         'QuickViewTitleComponent',
@@ -397,5 +399,6 @@ export const API_FILES = {
         'TimelineNodeHeaderInfoTextDirective',
         'TimelineNodeActionDirective',
         'TimelineHeaderInfoSubTitleDirective'
-    ]
+    ],
+    scrollbar: ['ScrollbarComponent']
 };

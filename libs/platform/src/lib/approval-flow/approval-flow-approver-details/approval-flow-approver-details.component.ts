@@ -10,14 +10,15 @@ import { Observable } from 'rxjs';
 
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 
-import { ApprovalDataSource, ApprovalNode, ApprovalUser } from '../public_api';
+import { ApprovalNode, ApprovalUser } from '../public_api';
 import { filterByName } from '../helpers';
+import { ApprovalFlowUserDataSource } from '@fundamental-ngx/platform/shared';
 
-interface DialogRefData {
+export interface ApprovalFlowApproverDetailsDialogRefData {
     node?: ApprovalNode;
     watcher?: ApprovalUser;
     allowSendReminder?: boolean;
-    approvalFlowDataSource: ApprovalDataSource;
+    userDataSource: ApprovalFlowUserDataSource<ApprovalUser>;
     userDetailsTemplate: TemplateRef<any>;
     rtl?: boolean;
 }
@@ -49,10 +50,13 @@ export class ApprovalFlowApproverDetailsComponent implements OnInit {
     _userToShowDetailsData$: Observable<any>;
 
     /** @hidden */
-    constructor(public dialogRef: DialogRef, private _cdr: ChangeDetectorRef) {}
+    constructor(
+        public dialogRef: DialogRef<ApprovalFlowApproverDetailsDialogRefData>,
+        private _cdr: ChangeDetectorRef
+    ) {}
 
     /** @hidden */
-    get _data(): DialogRefData {
+    get _data(): ApprovalFlowApproverDetailsDialogRefData {
         return this.dialogRef.data;
     }
 
@@ -82,7 +86,7 @@ export class ApprovalFlowApproverDetailsComponent implements OnInit {
     /** @hidden */
     _seeUserDetails(user: ApprovalUser): void {
         this._userToShowDetails = user;
-        this._userToShowDetailsData$ = this._data.approvalFlowDataSource.fetchUser(user.id);
+        this._userToShowDetailsData$ = this._data.userDataSource.dataProvider.getOne(new Map([['id', user.id]]));
         this._isListMode = false;
         this._selectedUsers = [];
         this._cdr.detectChanges();

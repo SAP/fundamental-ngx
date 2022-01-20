@@ -6,7 +6,10 @@ import {
     VhdDefineExcludeStrategy
 } from '../models';
 
-export const defaultConditionDisplayFn = (item: VhdIncludedEntity | VhdExcludedEntity, filters?: VhdFilter[]) => {
+export const defaultConditionDisplayFn = (
+    item: VhdIncludedEntity | VhdExcludedEntity,
+    filters?: VhdFilter[]
+): string => {
     const filter = (filters || []).find((f) => f.key === item.key);
     let value = (() => {
         switch (item.strategy) {

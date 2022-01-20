@@ -28,7 +28,7 @@ export function open(path: string = ''): void {
 export function pause(waitTime: number = defaultWaitTime()): void {
     browser.pause(waitTime);
 }
-// tslint:disable-next-line:no-shadowed-variable
+
 export function execute(source): void {
     browser.execute(source);
 }
@@ -50,7 +50,7 @@ export function browserIsIE(): boolean {
 }
 
 export function browserIsSafari(): boolean {
-    return isBrowser('Safari');
+    return isBrowser('Safari') || isBrowser('safari');
 }
 
 export function browserIsSafariorFF(): boolean {
@@ -63,6 +63,9 @@ export function goBack(): void {
 
 export function refreshPage(): void {
     browser.refresh();
+    if (browserIsSafari()) {
+        pause();
+    }
 }
 
 export function getAlertText(): string {
@@ -93,7 +96,7 @@ export function clickWithOption(
     selector: string,
     index: number = 0,
     waitTime: number = defaultWaitTime(),
-    options: object
+    options: Record<string, any>
 ): void {
     checkSelectorExists(selector, index);
     $$(selector)[index].waitForDisplayed({ timeout: waitTime });
@@ -160,7 +163,7 @@ export function getTextArr(selector: string, sliceStart?: number, sliceEnd?: num
     checkSelectorExists(selector);
     return $$(selector)
         .slice(sliceStart, sliceEnd)
-        .map((element) => element.getText());
+        .map((element) => element.getText().trim());
 }
 
 export function waitForElDisplayed(selector: string, index: number = 0, waitTime = defaultWaitTime()): boolean {
@@ -300,11 +303,10 @@ export function getElementSize(selector: string, index: number = 0, prop?: 'widt
 
 export function executeScriptBeforeTagAttr(selector: string, attrName: string, index: number = 0): string {
     return browser.execute(
-        (projectedSelector, projectedAttrName, projectedIndex) => {
-            return window.getComputedStyle(document.querySelectorAll(projectedSelector)[projectedIndex], ':before')[
+        (projectedSelector, projectedAttrName, projectedIndex) =>
+            window.getComputedStyle(document.querySelectorAll(projectedSelector)[projectedIndex], ':before')[
                 projectedAttrName
-            ];
-        },
+            ],
         selector,
         attrName,
         index
@@ -313,11 +315,10 @@ export function executeScriptBeforeTagAttr(selector: string, attrName: string, i
 
 export function executeScriptAfterTagAttr(selector: string, attrName: string, index: number = 0): string {
     return browser.execute(
-        (projectedSelector, projectedAttrName, projectedIndex) => {
-            return window.getComputedStyle(document.querySelectorAll(projectedSelector)[projectedIndex], ':after')[
+        (projectedSelector, projectedAttrName, projectedIndex) =>
+            window.getComputedStyle(document.querySelectorAll(projectedSelector)[projectedIndex], ':after')[
                 projectedAttrName
-            ];
-        },
+            ],
         selector,
         attrName,
         index
@@ -360,12 +361,7 @@ export function isDisplayedInViewport(selector: string, index: number = 0): bool
 }
 
 export function waitElementToBeClickable(selector: string, index: number = 0): void {
-    browser.waitUntil(
-        (): boolean => {
-            return $$(selector)[index].isClickable();
-        },
-        { timeout: defaultWaitTime() }
-    );
+    browser.waitUntil((): boolean => $$(selector)[index].isClickable(), { timeout: defaultWaitTime() });
 }
 
 export function doesItExist(selector: string): boolean {
@@ -403,7 +399,6 @@ export function isElementDisplayed(selector: string, index: number = 0): boolean
 export function focusElement(selector: string, index: number = 0): void {
     checkSelectorExists(selector, index);
     $$(selector)[index].scrollIntoView();
-    // @ts-ignore
     $$(selector)[index].focus();
 }
 
@@ -438,7 +433,6 @@ export function getParentElementCSSProperty(selector: string, prop: string, inde
 }
 
 export function addIsActiveClass(selector: string, index: number = 0): void {
-    // @ts-ignore
     $$(selector)[index].addIsActiveClass();
 }
 
@@ -480,11 +474,21 @@ export function selectOptionByValueAttribute(selector: string, attributeValue: s
     selectOptionByAttribute(selector, 'value', attributeValue, index);
 }
 
-export function saveElementScreenshot(selector: string, tag: string, options?: object, index: number = 0): void {
+export function saveElementScreenshot(
+    selector: string,
+    tag: string,
+    options?: Record<string, any>,
+    index: number = 0
+): void {
     browser.saveElement($$(selector)[index], tag, options);
 }
 
-export function checkElementScreenshot(selector: string, tag: string, options?: object, index: number = 0): any {
+export function checkElementScreenshot(
+    selector: string,
+    tag: string,
+    options?: Record<string, any>,
+    index: number = 0
+): any {
     return browser.checkElement($$(selector)[index], tag, options);
 }
 
@@ -505,12 +509,12 @@ export function applyState(state: 'hover' | 'active' | 'focus', selector: string
     }
 }
 
-export function getPreviousElement(selector: string, index: number = 0) {
+export function getPreviousElement(selector: string, index: number = 0): void {
     checkSelectorExists(selector, index);
     return $$(selector)[index].previousElement();
 }
 
-export function getNextElement(selector: string, index: number = 0) {
+export function getNextElement(selector: string, index: number = 0): void {
     checkSelectorExists(selector, index);
     return $$(selector)[index].nextElement();
 }

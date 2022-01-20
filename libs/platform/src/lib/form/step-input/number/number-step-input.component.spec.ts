@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 
@@ -9,6 +9,7 @@ import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
 import { FormFieldComponent } from '../../form-group/form-field/form-field.component';
 import { PlatformStepInputModule } from '../step-input.module';
 import { NumberStepInputChangeEvent, NumberStepInputComponent } from './number-step-input.component';
+import { runValueAccessorTests } from 'ngx-cva-test-suite';
 
 @Component({
     template: `<fdp-number-step-input name="number"></fdp-number-step-input>`
@@ -105,9 +106,7 @@ describe('NumberStepInputComponent main functionality', () => {
     let fixture: ComponentFixture<NumberStepInputMainFunctionalityHostComponent>;
     let stepInputComponent: NumberStepInputComponent;
 
-    const getInputDebugElement = () => {
-        return fixture.debugElement.query(By.css('.fd-step-input__input'));
-    };
+    const getInputDebugElement = (): DebugElement => fixture.debugElement.query(By.css('.fd-step-input__input'));
 
     beforeEach(
         waitForAsync(() => {
@@ -164,9 +163,7 @@ describe('NumberStepInputComponent main functionality', () => {
     });
 
     it('should use stepFn if provided to calculate increase step value', () => {
-        component.stepFn = (value: number, action: 'increase' | 'decrease'): number => {
-            return action === 'decrease' ? -1 : 1;
-        };
+        component.stepFn = (value: number, action: 'increase' | 'decrease'): number => (action === 'decrease' ? -1 : 1);
         const stepFnSpy = spyOn(component, 'stepFn').and.returnValue(10);
         component.value = 30;
         fixture.detectChanges();
@@ -180,9 +177,7 @@ describe('NumberStepInputComponent main functionality', () => {
     });
 
     it('should use stepFn if provided to calculate decrease step value', () => {
-        component.stepFn = (value: number, action: 'increase' | 'decrease'): number => {
-            return action === 'decrease' ? -1 : 1;
-        };
+        component.stepFn = (value: number, action: 'increase' | 'decrease'): number => (action === 'decrease' ? -1 : 1);
         const stepFnSpy = spyOn(component, 'stepFn').and.returnValue(10);
         component.value = 30;
         fixture.detectChanges();
@@ -369,7 +364,7 @@ describe('NumberStepInputComponent main functionality', () => {
         const wheelEventUp = new WheelEvent('wheel', { deltaY: -15 });
         const wheelEventDown = new WheelEvent('wheel', { deltaY: 15 });
 
-        inputEl.focus();
+        inputEl.dispatchEvent(new Event('focus'));
         fixture.detectChanges();
 
         inputEl.dispatchEvent(wheelEventUp);
@@ -552,4 +547,24 @@ describe('Basic number Step Input withing platforms form', () => {
 
         expect(host.result).toEqual({ qty: 100 });
     });
+});
+
+const STEP_INPUT_IDENTIFIER = 'platform-step-input-unit-test';
+
+runValueAccessorTests({
+    component: NumberStepInputComponent,
+    testModuleMetadata: {
+        imports: [PlatformStepInputModule]
+    },
+    additionalSetup: (fixture, done) => {
+        fixture.componentInstance.id = STEP_INPUT_IDENTIFIER;
+        fixture.componentInstance.name = STEP_INPUT_IDENTIFIER;
+        done();
+    },
+    supportsOnBlur: true,
+    nativeControlSelector: `input[id="${STEP_INPUT_IDENTIFIER}"]`,
+    internalValueChangeSetter: (fixture, value) => {
+        fixture.componentInstance.value = value;
+    },
+    getComponentValue: (fixture) => fixture.componentInstance.value
 });

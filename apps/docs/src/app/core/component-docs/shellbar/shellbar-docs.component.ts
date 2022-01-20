@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 
-import * as shellbarBasicHTMLSrc from '!raw-loader!./examples/shellbar-basic-example.component.html';
-import * as shellbarBasicTSSrc from '!raw-loader!./examples/shellbar-basic-example.component.ts';
-import * as shellbarCollapsibleHTMLSrc from '!raw-loader!./examples/shellbar-collapsible-example.component.html';
-import * as shellbarCollapsibleTSSrc from '!raw-loader!./examples/shellbar-collapsible-example.component.ts';
-import * as sideNavShellbarHtml from '!raw-loader!./examples/shellbar-side-nav/shellbar-side-nav-example.component.html';
-import * as sideNavShellbarTs from '!raw-loader!./examples/shellbar-side-nav/shellbar-side-nav-example.component.ts';
-import * as sideNavShellbarScss from '!raw-loader!./examples/shellbar-side-nav/shellbar-side-nav-example.component.scss';
+import shellbarBasicHTMLSrc from '!./examples/shellbar-basic-example.component.html?raw';
+import shellbarBasicTSSrc from '!./examples/shellbar-basic-example.component.ts?raw';
+import shellbarCollapsibleHTMLSrc from '!./examples/shellbar-collapsible-example.component.html?raw';
+import shellbarCollapsibleTSSrc from '!./examples/shellbar-collapsible-example.component.ts?raw';
+import sideNavShellbarHtml from '!./examples/shellbar-side-nav/shellbar-side-nav-example.component.html?raw';
+import sideNavShellbarTs from '!./examples/shellbar-side-nav/shellbar-side-nav-example.component.ts?raw';
+import sideNavShellbarScss from '!./examples/shellbar-side-nav/shellbar-side-nav-example.component.scss?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

@@ -1,21 +1,24 @@
 import { CoreBaseComponentPo } from './core-base-component.po';
-import { waitForElDisplayed } from '../../driver/wdio';
+import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class FileUploaderPo extends CoreBaseComponentPo {
     url = '/file-uploader';
-    root = '#page-content';
 
-    fileUploaderInput = 'fd-file-uploader input[type="text"]';
+    fileUploaderExample = 'fd-file-uploader-example ';
+    fileUploaderCompactExample = 'fd-file-uploader-compact-example ';
+
+    fileUploaderInput = '.fd-file-uploader__input';
     browseButton = 'fd-file-uploader button';
     fileUploaderInputFile = 'fd-file-uploader input[type="file"]';
     fileSelectedText = '[class="fd-doc-component"] span[class="green"]';
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

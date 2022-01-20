@@ -13,19 +13,21 @@ import {
     selector: 'fdp-form-generator-slider',
     template: `
         <ng-container [formGroup]="form">
-            <fdp-slider
-                [contentDensity]="formItem.guiOptions?.contentDensity"
-                [customValues]="formItem.choices"
-                [showTicks]="formItem.guiOptions?.additionalData?.showTicks"
-                [showTicksLabels]="formItem.guiOptions?.additionalData?.showTicksLabels"
-                [name]="name"
-                [formControlName]="name"
-            ></fdp-slider>
+            <ng-container [formGroupName]="formGroupName">
+                <fdp-slider
+                    [contentDensity]="formItem.guiOptions?.contentDensity"
+                    [customValues]="formItem.choices"
+                    [showTicks]="formItem.guiOptions?.additionalData?.showTicks"
+                    [showTicksLabels]="formItem.guiOptions?.additionalData?.showTicksLabels"
+                    [name]="name"
+                    [formControlName]="name"
+                ></fdp-slider>
+            </ng-container>
         </ng-container>
     `,
     viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider]
 })
-export class PlatformFormGeneratorCustomSliderElement extends BaseDynamicFormGeneratorControl {
+export class PlatformFormGeneratorCustomSliderElementComponent extends BaseDynamicFormGeneratorControl {
     constructor() {
         super();
     }
@@ -62,7 +64,7 @@ export class PlatformFormGeneratorCustomComponentExampleComponent {
     ];
 
     constructor(private readonly _formGeneratorService: FormGeneratorService) {
-        this._formGeneratorService.addComponent(PlatformFormGeneratorCustomSliderElement, ['slider']);
+        this._formGeneratorService.addComponent(PlatformFormGeneratorCustomSliderElementComponent, ['slider']);
     }
 
     onFormCreated(): void {

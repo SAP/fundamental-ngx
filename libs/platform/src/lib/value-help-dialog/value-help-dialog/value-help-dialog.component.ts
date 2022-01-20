@@ -109,7 +109,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
     /** Tokenizer function for custom token render, it has higher prio that `tokenViewField`.
      * Required field if tokenViewField is not exist. */
     @Input()
-    tokenizerFn: Function;
+    tokenizerFn: () => void;
 
     /** Whether the value help dialog should be view in mobile mode */
     @Input()
@@ -117,11 +117,11 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
 
     /** It should be able if you use multiple selection */
     @Input()
-    formatToken: Function;
+    formatToken: (value: VhdValueChangeEvent) => void;
 
     /** Tokenizer function for condition's token render */
     @Input()
-    conditionDisplayFn: Function = defaultConditionDisplayFn;
+    conditionDisplayFn = defaultConditionDisplayFn;
 
     /**
      * Select from list tab's and Search table settings
@@ -603,9 +603,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
             label: filter.label || filter.key
         }));
 
-        this._hasAdvanced = this._displayedFilters.some((filter: VhdFilter) => {
-            return !!filter.advanced;
-        });
+        this._hasAdvanced = this._displayedFilters.some((filter: VhdFilter) => !!filter.advanced);
     }
 
     /** @hidden */

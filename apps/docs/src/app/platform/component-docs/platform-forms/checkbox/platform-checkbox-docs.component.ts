@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
-import * as multiselectCheckboxhtml from '!raw-loader!./platform-checkbox-examples/platform-multiselect-checkbox.component.html';
-import * as multiselectCheckboxSrc from '!raw-loader!./platform-checkbox-examples/platform-multiselect-checkbox.component.ts';
-import * as binaryCheckboxhtml from '!raw-loader!./platform-checkbox-examples/platform-binary-checkbox.component.html';
-import * as binaryCheckboxSrc from '!raw-loader!./platform-checkbox-examples/platform-binary-checkbox.component.ts';
-import * as checkboxStylehtml from '!raw-loader!./platform-checkbox-examples/platform-checkbox-error-handling.component.html';
-import * as checkboxStyleSrc from '!raw-loader!./platform-checkbox-examples/platform-checkbox-error-handling.component.ts';
-import * as checkboxNoFormhtml from '!raw-loader!./platform-checkbox-examples/platform-binary-checkbox-no-form.component.html';
-import * as checkboxNoFormSrc from '!raw-loader!./platform-checkbox-examples/platform-binary-checkbox-no-form.component.ts';
-import * as triCheckboxhtml from '!raw-loader!./platform-checkbox-examples/platform-tristate-checkbox.component.html';
-import * as triCheckboxSrc from '!raw-loader!./platform-checkbox-examples/platform-tristate-checkbox.component.ts';
-import * as a11yCheckboxhtml from '!raw-loader!./platform-checkbox-examples/platform-checkbox-a11y.component.html';
-import * as a11yCheckboxSrc from '!raw-loader!./platform-checkbox-examples/platform-checkbox-a11y.component.ts';
+import multiselectCheckboxhtml from '!./platform-checkbox-examples/platform-multiselect-checkbox.component.html?raw';
+import multiselectCheckboxSrc from '!./platform-checkbox-examples/platform-multiselect-checkbox.component.ts?raw';
+import binaryCheckboxhtml from '!./platform-checkbox-examples/platform-binary-checkbox.component.html?raw';
+import binaryCheckboxSrc from '!./platform-checkbox-examples/platform-binary-checkbox.component.ts?raw';
+import checkboxStylehtml from '!./platform-checkbox-examples/platform-checkbox-error-handling.component.html?raw';
+import checkboxStyleSrc from '!./platform-checkbox-examples/platform-checkbox-error-handling.component.ts?raw';
+import checkboxNoFormhtml from '!./platform-checkbox-examples/platform-binary-checkbox-no-form.component.html?raw';
+import checkboxNoFormSrc from '!./platform-checkbox-examples/platform-binary-checkbox-no-form.component.ts?raw';
+import triCheckboxhtml from '!./platform-checkbox-examples/platform-tristate-checkbox.component.html?raw';
+import triCheckboxSrc from '!./platform-checkbox-examples/platform-tristate-checkbox.component.ts?raw';
+import a11yCheckboxhtml from '!./platform-checkbox-examples/platform-checkbox-a11y.component.html?raw';
+import a11yCheckboxSrc from '!./platform-checkbox-examples/platform-checkbox-a11y.component.ts?raw';
 import { ExampleFile } from '../../../../documentation/core-helpers/code-example/example-file';
 
 @Component({

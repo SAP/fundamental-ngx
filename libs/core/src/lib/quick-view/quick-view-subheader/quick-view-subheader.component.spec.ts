@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
-import { QuickViewModule, QuickViewSubheaderComponent } from '@fundamental-ngx/core/quick-view';
+import { QuickViewModule } from '..';
 
 @Component({
     template: `

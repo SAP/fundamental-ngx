@@ -1,5 +1,6 @@
 import {
     click,
+    doesItExist,
     getAttributeByNameArr,
     getElementArrayLength,
     getElementPlaceholder,
@@ -35,7 +36,10 @@ describe('Multi input test suite', () => {
         header,
         validationPopover,
         compactExampleTokens,
-        errorMessage
+        errorMessage,
+        declineButton,
+        listitems,
+        reactiveExample
     } = multiInputPage;
 
     beforeAll(() => {
@@ -45,7 +49,8 @@ describe('Multi input test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(multiInputPage.title);
+        waitForPresent(multiInputPage.root);
+        waitForElDisplayed(multiInputPage.title);
     }, 1);
 
     it('Verify multi input allows user to enter multiple values', () => {
@@ -67,8 +72,6 @@ describe('Multi input test suite', () => {
                 multiInputPage.selectOption(optionsArr[1]);
                 expect(getText(filledInput, i)).toContain(optionsArr[0]);
                 expect(getText(filledInput, i)).toContain(optionsArr[1]);
-                expect(getText(filledInput, i).split('\n')[0]).toBe(optionsArr[0]);
-                expect(getText(filledInput, i).split('\n')[1]).toBe(optionsArr[1]);
             }
             if (i === mobileExample) {
                 multiInputPage.expandDropdown(activeDropdownButtons, i);
@@ -78,8 +81,6 @@ describe('Multi input test suite', () => {
                 click(approveButton);
                 expect(getText(filledInput, i)).toContain(optionsArr[0]);
                 expect(getText(filledInput, i)).toContain(optionsArr[1]);
-                expect(getText(filledInput, i).split('\n')[0]).toBe(optionsArr[0]);
-                expect(getText(filledInput, i).split('\n')[1]).toBe(optionsArr[1]);
             }
         }
     });
@@ -221,6 +222,10 @@ describe('Multi input test suite', () => {
         scrollIntoView(activeInputs, 7);
         click(activeInputs, 7);
 
+        // should trigger blur first
+        click(reactiveExample);
+        click(activeInputs, 7);
+
         expect(waitForElDisplayed(validationPopover)).toBe(true);
         expect(getText(validationPopover).trim()).toBe('Value is required');
     });
@@ -259,14 +264,20 @@ describe('Multi input test suite', () => {
         expect(newTokenCount).toEqual(originalTokenCount + 1);
     });
 
-    // skipped due to https://github.com/SAP/fundamental-ngx/issues/6726
-    xit('should check error message after clear field in reactive example', () => {
+    it('should check error message after clear field in reactive example', () => {
         scrollIntoView(activeInputs, 7);
         multiInputPage.expandDropdown(activeDropdownButtons, 7);
         multiInputPage.selectOption('Alaska');
         click(crossButton('Alaska'));
         expect(isElementDisplayed(errorMessage)).toBe(true);
-        expect(getText(errorMessage)).toBe('Value is required');
+        expect(getText(errorMessage).trim()).toBe('Value is required');
+    });
+
+    it('should check no cross icons in menu list items', () => {
+        scrollIntoView(activeDropdownButtons, 4);
+        click(activeDropdownButtons, 4);
+
+        expect(doesItExist(listitems + declineButton)).toBe(false);
     });
 
     xdescribe('Check visual regression', () => {

@@ -32,13 +32,14 @@ export class ValueHelpDialogPo extends BaseComponentPo {
     productNicknameColumn = 'table td:nth-of-type(8)';
     productZipcodeColumn = 'table td:nth-of-type(6)';
     tableCheckboxes = 'table fd-checkbox';
-    tableCheckboxesFF = 'table input[type="checkbox"]';
+    tableCheckboxesFF = 'table .fd-checkbox__label';
     tableColumn = 'table thead th.fd-table__cell.ng-star-inserted';
-    tableRows = 'table tr';
+    tableRows = 'tbody tr';
     selectedItemID = 'tr[aria-selected="true"] td:nth-of-type(2)';
     selectedItemName = 'tr[aria-selected="true"] td:nth-of-type(3)';
     selectedTokens = '.fd-tokenizer fd-token';
     showAllBtn = '.fdp-value-help-dialog__toggle-filters button';
+    toolbarButtons = '.fd-toolbar button';
 
     // define conditions form selectors
     addBtn = 'button[label="Add"]';
@@ -46,10 +47,18 @@ export class ValueHelpDialogPo extends BaseComponentPo {
     conditionSelectors = 'fd-popover .fd-select__text-content';
     dropdownOptions = 'ul fd-option';
     xBtn = 'button[glyph="decline"]';
+    conditionsButton = 'fd-popover .fd-select__control .fd-button';
+    cancelButton = '.fd-dialog__decisive-button';
+    dialog = '.fd-dialog ';
+    dialogButton = this.dialog + '.fd-button';
+    dialogInput = '.fd-dialog .fd-input';
+    input = '.fd-input';
+    dropDownItem = '.fd-list__title';
+    openMobileExampleBtn = 'fdp-platform-vhd-mobile-example button';
+    token = '.fd-token';
+    tokenizerClearButton = '.fdp-value-help-dialog__tokens-clear';
 
-    formInputField = (id: string) => {
-        return this.inputFields + `[id="${id}"]`;
-    };
+    formInputField = (id: string) => this.inputFields + `[id="${id}"]`;
 
     open(): void {
         super.open(this.url);
@@ -57,7 +66,7 @@ export class ValueHelpDialogPo extends BaseComponentPo {
         waitForElDisplayed(this.pageHeader);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

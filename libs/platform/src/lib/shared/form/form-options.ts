@@ -17,3 +17,10 @@ export interface ColumnLayout {
     M?: number;
     S?: number;
 }
+
+export enum ColumnLayoutGridClass {
+    XL = 'xl',
+    L = 'lg',
+    M = 'md',
+    S = 'sm'
+}

@@ -118,7 +118,7 @@ export class MoveToComponent implements OnInit {
             this.dialogRef.close({
                 parentFolderId: this._currentFolder?.documentId,
                 selectedFolder: null,
-                folderName: folderName
+                folderName
             });
         });
     }

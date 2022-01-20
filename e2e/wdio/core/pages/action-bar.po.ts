@@ -5,6 +5,7 @@ export class ActionBarPo extends CoreBaseComponentPo {
     url = '/action-bar';
     root = '#page-content';
 
+    button = ' .fd-button';
     backButton = ' .fd-action-bar__back button';
     title = ' h2';
     description = ' .fd-action-bar__description';
@@ -38,11 +39,11 @@ export class ActionBarPo extends CoreBaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForPresent(this.actionBarBackButtonBackButton);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

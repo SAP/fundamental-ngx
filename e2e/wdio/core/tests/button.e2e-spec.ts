@@ -6,10 +6,14 @@ import {
     scrollIntoView,
     setValue,
     click,
-    sendKeys,
     checkElementScreenshot,
     saveElementScreenshot,
-    getText
+    getText,
+    getElementClass,
+    refreshPage,
+    waitForPresent,
+    getElementSize,
+    waitForElDisplayed
 } from '../../driver/wdio';
 import { testText, fdTypeOptions, iconOptions } from '../fixtures/appData/button-contents';
 import { buttonPlaygroundTag } from '../fixtures/testData/button-tags';
@@ -28,11 +32,20 @@ describe('Button test suite:', () => {
         checkboxMenu,
         checkboxCompact,
         dropDownMenu,
-        playgroundButtonText
+        playgroundButtonText,
+        playgroundButtonIcon,
+        menuOption,
+        dropDownOptionByValue
     } = buttonPage;
 
     beforeAll(() => {
         buttonPage.open();
+    }, 1);
+
+    afterEach(() => {
+        refreshPage();
+        waitForPresent(buttonPage.root);
+        waitForElDisplayed(buttonPage.title);
     }, 1);
 
     describe('Verify all buttons are clickable', () => {
@@ -58,6 +71,13 @@ describe('Button test suite:', () => {
                 scrollIntoView(sizeButtons, i);
                 expect(isElementClickable(sizeButtons, i)).toBe(true, `size button with index ${i} not clickable`);
             }
+        });
+
+        it('verify compact button', () => {
+            scrollIntoView(sizeButtons);
+            const cozySize = getElementSize(sizeButtons);
+            const compactSize = getElementSize(sizeButtons, 1);
+            expect(compactSize.height).toBeLessThan(cozySize.height);
         });
 
         it('verify buttons with icons', () => {
@@ -88,54 +108,39 @@ describe('Button test suite:', () => {
         it('verify changing text in label', () => {
             scrollIntoView(inputLabel);
             setValue(inputLabel, 'test');
-            expect(getText(playgroundButtonText)).toEqual(testText);
+            expect(getText(playgroundButtonText).trim()).toEqual(testText);
         });
 
-        // skipped due to https://github.com/webdriverio/webdriverio/issues/3605
-        xit('verify type of dropdown menu', () => {
+        it('verify type of dropdown menu', () => {
             scrollIntoView(dropDownMenu);
             click(dropDownMenu);
-            for (let i = 0; i < fdTypeOptions.length; i++) {
-                setValue(dropDownMenu, fdTypeOptions[i]);
-                sendKeys(['Enter']);
+            for (let i = 1; i < fdTypeOptions.length; i++) {
+                click(menuOption, i);
                 click(playgroundButton);
-                expect(getAttributeByName(playgroundButton, 'ng-reflect-fd-type')).toEqual(fdTypeOptions[i]);
-                saveElementScreenshot(
-                    playgroundButton,
-                    buttonPlaygroundTag + `${fdTypeOptions[i]}`,
-                    buttonPage.getScreenshotFolder()
-                );
-                expect(
-                    checkElementScreenshot(
-                        playgroundButton,
-                        buttonPlaygroundTag + `${fdTypeOptions[i]}`,
-                        buttonPage.getScreenshotFolder()
-                    )
-                ).toBeLessThan(5, `Playground button mismatch`);
+                expect(getElementClass(playgroundButton)).toContain(fdTypeOptions[i - 1]);
             }
         });
 
-        // skipped due to https://github.com/webdriverio/webdriverio/issues/3605
-        xit('verify icon of dropdown menu', () => {
+        it('verify checkbox fdMenu', () => {
+            scrollIntoView(checkboxMenu);
+            click(checkboxMenu);
+            expect(getElementClass(playgroundButton)).toContain('fd-button--menu');
+        });
+
+        it('verify checkbox compact', () => {
+            scrollIntoView(checkboxCompact);
+            click(checkboxCompact);
+            expect(getElementClass(playgroundButton)).toContain('fd-button--compact');
+        });
+
+        it('verify icon of dropdown menu', () => {
             scrollIntoView(dropDownMenu, 1);
             click(dropDownMenu, 1);
             for (let i = 0; i < iconOptions.length; i++) {
-                setValue(dropDownMenu, iconOptions[i], 1);
-                sendKeys(['Enter']);
+                click(dropDownOptionByValue(iconOptions[i]));
                 click(playgroundButton);
-                expect(getAttributeByName(playgroundButton, 'ng-reflect-glyph')).toEqual(iconOptions[i]);
-                saveElementScreenshot(
-                    playgroundButton,
-                    buttonPlaygroundTag + `${iconOptions[i]}`,
-                    buttonPage.getScreenshotFolder()
-                );
-                expect(
-                    checkElementScreenshot(
-                        playgroundButton,
-                        buttonPlaygroundTag + `${iconOptions[i]}`,
-                        buttonPage.getScreenshotFolder()
-                    )
-                ).toBeLessThan(5, `Playground button mismatch`);
+                expect(getElementClass(playgroundButtonIcon)).toContain(iconOptions[i]);
+                click(dropDownMenu, 1);
             }
         });
 

@@ -1,20 +1,27 @@
 <fd-popover
     [(isOpen)]="isOpen"
-    (isOpenChange)="isOpenChange.emit($event); _changeMessageVisibility()"
+    (isOpenChange)="_onOpenStateChanged($event)"
     [triggers]="[]"
     [placement]="placement"
     [disabled]="disabled"
     [focusTrapped]="true"
-    [focusAutoCapture]="true"
+    [focusAutoCapture]="false"
     [appendTo]="appendTo"
 >
     <fd-popover-control>
         <fd-input-group
+            #inputGroupComponent
             [compact]="compact"
             [state]="state"
             [disabled]="disabled"
-            #inputGroupComponent
             [isControl]="true"
+            [button]="true"
+            [buttonFocusable]="buttonFocusable"
+            glyph="appointment-2"
+            [isExpanded]="isOpen"
+            [glyphAriaLabel]="displayCalendarToggleLabel"
+            [iconTitle]="displayCalendarToggleLabel"
+            (addOnButtonClicked)="toggleCalendar()"
         >
             <input
                 type="text"
@@ -23,31 +30,20 @@
                 [compact]="compact"
                 [disabled]="disabled"
                 [placeholder]="placeholder"
-                [class.is-error]="_isInvalidDateInput && useValidation"
-                [attr.aria-label]="dateInputLabel"
                 [attr.id]="inputId"
+                aria-haspopup="grid"
+                aria-autocomplete="none"
+                [attr.aria-expanded]="isOpen"
+                [attr.aria-label]="_dateInputArialLabel"
                 [attr.aria-required]="required"
+                [attr.aria-describedby]="_formValueStateMessageId"
                 [(ngModel)]="_inputFieldDate"
                 (ngModelChange)="handleInputChange($event)"
                 (focus)="onTouched()"
             />
-            <span fd-input-group-addon [button]="true" [compact]="compact">
-                <button
-                    fd-button
-                    fdType="transparent"
-                    glyph="appointment-2"
-                    [compact]="compact"
-                    [disabled]="disabled"
-                    [attr.aria-label]="displayCalendarToggleLabel"
-                    [attr.tabindex]="buttonFocusable ? 0 : -1"
-                    [class.is-expanded]="isOpen"
-                    [attr.aria-expanded]="isOpen"
-                    (click)="toggleCalendar()"
-                ></button>
-            </span>
         </fd-input-group>
     </fd-popover-control>
-    <fd-popover-body [style.display]="'block'" [attr.aria-expanded]="isOpen" [attr.aria-hidden]="!isOpen">
+    <fd-popover-body [attr.aria-expanded]="isOpen" [attr.aria-hidden]="!isOpen">
         <fd-form-message [embedded]="true" *ngIf="_message" [type]="state">
             {{ _message }}
         </fd-form-message>
@@ -76,3 +72,15 @@
         ></fd-calendar>
     </fd-popover-body>
 </fd-popover>
+
+<div style="display: none" aria-hidden="true">
+    <div [attr.id]="_formValueStateMessageId" aria-atomic="true" aria-live="assertive">
+        <ng-container [ngSwitch]="state">
+            <ng-container *ngSwitchCase="'success'">{{ valueStateSuccessMessage }}</ng-container>
+            <ng-container *ngSwitchCase="'information'">{{ valueStateInformationMessage }}</ng-container>
+            <ng-container *ngSwitchCase="'warning'">{{ valueStateWarningMessage }}</ng-container>
+            <ng-container *ngSwitchCase="'error'">{{ valueStateErrorMessage }}</ng-container>
+        </ng-container>
+        {{ _message }}
+    </div>
+</div>

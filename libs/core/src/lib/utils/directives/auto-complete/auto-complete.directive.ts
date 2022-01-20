@@ -8,7 +8,7 @@ export interface AutoCompleteEvent {
 }
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-auto-complete]'
 })
 export class AutoCompleteDirective {
@@ -32,10 +32,11 @@ export class AutoCompleteDirective {
      * An arrow function can be used to access the *this* keyword in the calling component.
      * See search input examples for details. */
     @Input()
-    displayFn: Function = this._defaultDisplay;
+    displayFn = this._defaultDisplay;
 
     /** Event thrown, when the auto ahead text is accepted */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     readonly onComplete: EventEmitter<AutoCompleteEvent> = new EventEmitter<AutoCompleteEvent>();
 
     private readonly _completeKeys: number[] = [ENTER];
@@ -109,12 +110,13 @@ export class AutoCompleteDirective {
     private _sendCompleteEvent(forceClose: boolean): void {
         this.onComplete.emit({
             term: this._elementRef.nativeElement.value,
-            forceClose: forceClose
+            forceClose
         });
     }
 
     /** @hidden */
     private _moveIndicatorToLastCharacter(): void {
-        this._elementRef.nativeElement.setSelectionRange(this.inputText.length, this.inputText.length);
+        const inputTextLength = this.inputText?.length ?? 0;
+        this._elementRef.nativeElement.setSelectionRange(inputTextLength, inputTextLength);
     }
 }

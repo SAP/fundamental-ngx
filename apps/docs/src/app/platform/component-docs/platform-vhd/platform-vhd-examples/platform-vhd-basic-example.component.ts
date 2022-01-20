@@ -21,30 +21,33 @@ interface ExampleTestModel {
     nickname: string;
 }
 
-const exampleDataSource = () => {
+interface FilterData {
+    key: string;
+    name: string;
+    label: string;
+    advanced: boolean;
+}
+
+const exampleDataSource = (): { dataSource: ExampleTestModel[]; filters: FilterData[] } => {
     const dataSource = Array(137)
         .fill(null)
-        .map((_value, index) => {
-            return {
-                id: index + 1,
-                name: `Name ${index + 1}`,
-                code: `${Math.floor(Math.random() * 99999)}`,
-                city: `City ${Math.floor(Math.random() * index)}`,
-                zipcode: `zipcode ${Math.floor(Math.random() * index)}`,
-                address: `Address ${Math.floor(Math.random() * index)}`,
-                nickname: `Nickname ${Math.floor(Math.random() * index)}`
-            };
-        });
+        .map((_value, index) => ({
+            id: index + 1,
+            name: `Name ${index + 1}`,
+            code: `${Math.floor(Math.random() * 99999)}`,
+            city: `City ${Math.floor(Math.random() * index)}`,
+            zipcode: `zipcode ${Math.floor(Math.random() * index)}`,
+            address: `Address ${Math.floor(Math.random() * index)}`,
+            nickname: `Nickname ${Math.floor(Math.random() * index)}`
+        }));
     return {
-        dataSource: dataSource,
-        filters: Object.keys(dataSource[0]).map((value, index) => {
-            return {
-                key: value,
-                name: `${value}`,
-                label: `Product ${value}`,
-                advanced: index > 0
-            };
-        })
+        dataSource,
+        filters: Object.keys(dataSource[0]).map((value, index) => ({
+            key: value,
+            name: `${value}`,
+            label: `Product ${value}`,
+            advanced: index > 0
+        }))
     };
 };
 
@@ -67,7 +70,7 @@ export class PlatformVhdBasicExampleComponent {
             ...(value.conditions || []).map((item) => this.conditionDisplayFn(item))
         ];
     }).bind(this);
-    conditionDisplayFn = (item: VhdIncludedEntity | VhdExcludedEntity) => {
+    conditionDisplayFn = (item: VhdIncludedEntity | VhdExcludedEntity): string => {
         let value = (() => {
             switch (item.strategy) {
                 case VhdDefineIncludeStrategy.empty:

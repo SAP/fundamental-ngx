@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 
-import * as componentAsContentTs from '!raw-loader!./examples/component-as-content/notification-component-as-content-example.component.ts';
-import * as contentTs from '!raw-loader!./examples/component-as-content/notification-content.component.ts';
-import * as optionsTs from '!raw-loader!./examples/notification-options/notification-options-example.component.ts';
-import * as optionsH from '!raw-loader!./examples/notification-options/notification-options-example.component.html';
-import * as templateTs from '!raw-loader!./examples/template-as-content/notification-open-template-example.component.ts';
-import * as templateH from '!raw-loader!./examples/template-as-content/notification-open-template-example.component.html';
+import componentAsContentTs from '!./examples/component-as-content/notification-component-as-content-example.component.ts?raw';
+import contentTs from '!./examples/component-as-content/notification-content.component.ts?raw';
+import optionsTs from '!./examples/notification-options/notification-options-example.component.ts?raw';
+import optionsH from '!./examples/notification-options/notification-options-example.component.html?raw';
+import templateTs from '!./examples/template-as-content/notification-open-template-example.component.ts?raw';
+import templateH from '!./examples/template-as-content/notification-open-template-example.component.html?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import * as groupTs from '!raw-loader!./examples/notification-group/notification-group-example.component.ts';
-import * as groupH from '!raw-loader!./examples/notification-group/notification-group-example.component.html';
+import groupTs from '!./examples/notification-group/notification-group-example.component.ts?raw';
+import groupH from '!./examples/notification-group/notification-group-example.component.html?raw';
 
 @Component({
     selector: 'app-notification',

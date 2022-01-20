@@ -46,12 +46,12 @@ export class MessageBoxService extends DialogBaseService<MessageBoxContainerComp
             content,
             MessageBoxContainerComponent,
             config,
-            { injector: injector }
+            { injector }
         );
 
         this._dialogs.push(component);
 
-        const defaultBehaviourOnClose = () => {
+        const defaultBehaviourOnClose = (): void => {
             this._destroyDialog(component);
             refSub.unsubscribe();
         };

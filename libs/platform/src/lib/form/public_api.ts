@@ -39,12 +39,14 @@ export * from './form-generator/dynamic-form-generator-input/dynamic-form-genera
 export * from './form-generator/dynamic-form-generator-radio/dynamic-form-generator-radio.component';
 export * from './form-generator/dynamic-form-generator-select/dynamic-form-generator-select.component';
 export * from './form-generator/dynamic-form-generator-switch/dynamic-form-generator-switch.component';
+export * from './form-generator/dynamic-form-generator-multi-input/dynamic-form-generator-multi-input.component';
 export * from './form-generator/form-generator/form-generator.component';
 export * from './form-generator/interfaces/dynamic-abstract-control';
 export * from './form-generator/interfaces/dynamic-form-group';
 export * from './form-generator/interfaces/dynamic-form-item';
 export * from './form-generator/interfaces/form-component-definition';
 export * from './form-generator/providers/providers';
+export * from './form-generator/form-generator-field/form-generator-field.component';
 
 export * from './form-group/constants';
 export * from './form-group/fdp-form.module';

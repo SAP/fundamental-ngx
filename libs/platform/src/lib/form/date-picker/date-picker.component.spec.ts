@@ -181,7 +181,7 @@ describe('TestDatePickerComponent', () => {
         await wait(fixture);
 
         expect(datepicker.fdDatePickerComponent._inputFieldDate).toBe(
-            dateStrStart + datepicker.fdDatePickerComponent.rangeDelimiter + dateStrLast
+            dateStrStart + datepicker.fdDatePickerComponent._rangeDelimiter + dateStrLast
         );
 
         expect(datepicker.onChange).toHaveBeenCalledWith({ start: dateStart, end: dateLast });
@@ -232,7 +232,7 @@ describe('TestDatePickerComponent', () => {
         fixture.detectChanges();
         expect(datepicker.fdDatePickerComponent.selectedRangeDate).toEqual({ start: dateStart, end: dateEnd });
         expect(datepicker.fdDatePickerComponent._inputFieldDate).toBe(
-            dateStrStart + datepicker.fdDatePickerComponent.rangeDelimiter + dateStrEnd
+            dateStrStart + datepicker.fdDatePickerComponent._rangeDelimiter + dateStrEnd
         );
     });
 
@@ -279,7 +279,7 @@ describe('TestDatePickerComponent', () => {
         const start: FdDate = adapter.parse('start');
         const end: FdDate = adapter.parse('end');
         expect(fdDatePickerComponent._isInvalidDateInput).toBe(true);
-        expect(fdDatePickerComponent.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: start, end: end });
+        expect(fdDatePickerComponent.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start, end });
         expect(fdDatePickerComponent.isModelValid()).toBe(false);
     });
 
@@ -337,7 +337,7 @@ describe('TestDatePickerComponent', () => {
         const strDate1 = (<any>datepicker.fdDatePickerComponent)._formatDate(date1);
         const strDate2 = (<any>datepicker.fdDatePickerComponent)._formatDate(date2);
         datepicker.fdDatePickerComponent.dateStringUpdate(
-            strDate1 + datepicker.fdDatePickerComponent.rangeDelimiter + strDate2
+            strDate1 + datepicker.fdDatePickerComponent._rangeDelimiter + strDate2
         );
         expect(datepicker.fdDatePickerComponent._isInvalidDateInput).toBe(false);
         expect(datepicker.fdDatePickerComponent._calendarComponent._currentlyDisplayed.month).toBe(date1.month);
@@ -358,7 +358,7 @@ describe('TestDatePickerComponent', () => {
         const strDate2 = (<any>datepicker.fdDatePickerComponent)._formatDate(date2);
 
         datepicker.fdDatePickerComponent.dateStringUpdate(
-            strDate1 + datepicker.fdDatePickerComponent.rangeDelimiter + strDate2
+            strDate1 + datepicker.fdDatePickerComponent._rangeDelimiter + strDate2
         );
         expect(datepicker.fdDatePickerComponent._isInvalidDateInput).toBe(false);
         expect(datepicker.fdDatePickerComponent._calendarComponent._currentlyDisplayed.month).toBe(date2.month);
@@ -385,7 +385,6 @@ describe('TestDatePickerComponent', () => {
 
         // for single type date picker, set value using control.
         const d1 = new FdDate(2020, 12, 14);
-        const d2 = new FdDate(2020, 12, 15);
         datePickerFormGroup.controls.birthday.setValue(d1);
         fixture.detectChanges();
         expect(datePickerFormGroup.controls.birthday.valid).toBeTruthy();

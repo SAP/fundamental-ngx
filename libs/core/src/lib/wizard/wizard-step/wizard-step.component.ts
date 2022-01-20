@@ -27,14 +27,15 @@ import { CURRENT_STEP_STATUS, COMPLETED_STEP_STATUS } from '../constants';
 import { WIZARD, WizardComponentInterface } from '../wizard-injection-token';
 
 @Component({
-    // tslint:disable-next-line:component-selector
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-wizard-step]',
     host: {
         class: 'fd-wizard__step',
         '[class.fd-wizard__step--completed]': 'status === "completed" || completed',
         '[class.fd-wizard__step--current]': 'status === "current"',
         '[class.fd-wizard__step--upcoming]': 'status === "upcoming"',
-        '[class.fd-wizard__step--active]': 'status === "active"'
+        '[class.fd-wizard__step--active]': 'status === "active"',
+        '[attr.aria-label]': 'ariaLabel'
     },
     templateUrl: './wizard-step.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -45,6 +46,12 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
      */
     @Input()
     ariaLabel: string;
+
+    /**
+     * The aria-label for the step container.
+     */
+    @Input()
+    ariaRoleDecription = 'Navigation';
 
     /**
      * The type of step ('completed', 'current', 'upcoming', and 'active'.)
@@ -114,6 +121,9 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     /** The wizard label span element. */
     @ViewChild('wizardLabel', { read: ElementRef })
     wizardLabel: ElementRef;
+
+    @ViewChild('progressBarLink', { read: ElementRef })
+    progressBarLink: ElementRef;
 
     /** @hidden */
     visited = false;

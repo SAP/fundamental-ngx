@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 
-import * as basicHtml from '!raw-loader!./examples/object-number-basic-example.component.html';
-import * as boldHtml from '!raw-loader!./examples/object-number-bold-example.component.html';
-import * as largeHtml from '!raw-loader!./examples/object-number-large-example.component.html';
-import * as unitsHtml from '!raw-loader!./examples/object-number-units-example.component.html';
-import * as statusHtml from '!raw-loader!./examples/object-number-status-example.component.html';
-import * as decimalHtml from '!raw-loader!./examples/object-number-decimal-example.component.html';
-import * as truncationHtml from '!raw-loader!./examples/object-number-truncation-example.component.html';
+import basicHtml from '!./examples/object-number-basic-example.component.html?raw';
+import boldHtml from '!./examples/object-number-bold-example.component.html?raw';
+import largeHtml from '!./examples/object-number-large-example.component.html?raw';
+import unitsHtml from '!./examples/object-number-units-example.component.html?raw';
+import statusHtml from '!./examples/object-number-status-example.component.html?raw';
+import decimalHtml from '!./examples/object-number-decimal-example.component.html?raw';
+import truncationHtml from '!./examples/object-number-truncation-example.component.html?raw';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 

@@ -1,9 +1,8 @@
-import { waitForElDisplayed } from '../../driver/wdio';
+import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 import { CoreBaseComponentPo } from './core-base-component.po';
 
 export class MultiInputPo extends CoreBaseComponentPo {
     private url = '/multi-input';
-    root = '#page-content';
 
     activeDropdownButtons = 'button[title="value-help"]:not(:disabled)';
     activeInputs = '.fd-multi-input-field input:not(:disabled)';
@@ -29,14 +28,17 @@ export class MultiInputPo extends CoreBaseComponentPo {
     checkboxInput = this.popover + ' fd-checkbox';
     listItem = this.popover + ' .fd-list__item';
     dialogCheckbox = '.fd-dialog fd-checkbox';
+    selectAllItemsBtn = '.fd-button[glyph="multiselect-all"]';
+    dialogListItem = '.fd-dialog .fd-list__item';
+    compactInput = '.fd-input--compact';
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
+        waitForPresent(this.root);
         waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

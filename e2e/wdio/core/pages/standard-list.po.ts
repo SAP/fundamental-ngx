@@ -34,14 +34,16 @@ export class StandardListPo extends CoreBaseComponentPo {
     radioBtn = 'fd-radio-button';
     checkboxFocusElement = this.checkbox + ' input';
     radioBtnFocusElement = this.radioBtn + ' input';
+    deleteButton = 'button[glyph="delete"]';
+    listItemText = '.fd-list__title';
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForPresent(this.title);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

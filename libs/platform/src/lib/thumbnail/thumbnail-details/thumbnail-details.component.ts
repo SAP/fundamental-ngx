@@ -102,7 +102,7 @@ export class ThumbnailDetailsComponent implements OnInit, AfterViewInit {
         this._buttonVisibility();
     }
 
-    /**Close dialog */
+    /** Close dialog */
     closeDialog(): void {
         if (this.mediaList.length > this.maxImages) {
             this.dialogRef.data.mediaList[this.maxImages - 1].overlayRequired = true;

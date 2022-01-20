@@ -11,7 +11,6 @@
 /apps/docs/src/assets/CORE_README.md
 /apps/docs/src/assets/NEW_COMPONENT.md
 /apps/docs/src/assets/PLATFORM_README.md
-/apps/docs/src/assets/NEW_PLATFORM_COMPONENT.md
 /apps/docs/src/assets/*.css
 # dependencies
 **/node_modules
@@ -33,6 +32,7 @@
 !.vscode/extensions.json
 
 # misc
+/.angular/cache
 /.sass-cache
 /connect.lock
 /coverage

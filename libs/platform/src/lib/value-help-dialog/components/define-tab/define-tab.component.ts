@@ -39,7 +39,7 @@ let titleUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DefineTabComponent<T> extends VhdBaseTab implements OnChanges {
+export class DefineTabComponent extends VhdBaseTab implements OnChanges {
     protected defaultId = `fd-title-id-${titleUniqueId++}`;
     protected defaultSelectId = `fd-select-title-id-${titleUniqueId++}`;
 
@@ -160,11 +160,11 @@ export class DefineTabComponent<T> extends VhdBaseTab implements OnChanges {
     /** @hidden */
     private _refreshStrategies(): void {
         this._includeStrategy = Object.keys(VhdDefineIncludeStrategy).map((key) => ({
-            key: key,
+            key,
             type: VhdDefineType.include
         }));
         this._excludeStrategy = Object.keys(VhdDefineExcludeStrategy).map((key) => ({
-            key: key,
+            key,
             type: VhdDefineType.exclude
         }));
     }

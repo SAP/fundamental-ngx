@@ -2,14 +2,14 @@ import { Component } from '@angular/core';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
-import * as splitterDefaultHtml from '!raw-loader!./examples/default/splitter-default-example.component.html';
-import * as splitterDefaultTs from '!raw-loader!./examples/default/splitter-default-example.component.ts';
+import splitterDefaultHtml from '!./examples/default/splitter-default-example.component.html?raw';
+import splitterDefaultTs from '!./examples/default/splitter-default-example.component.ts?raw';
 
-import * as splitterRequiredParentWidthHtml from '!raw-loader!./examples/required-parent-width/splitter-required-parent-width-example.component.html';
-import * as splitterRequiredParentWidthTs from '!raw-loader!./examples/required-parent-width/splitter-required-parent-width-example.component.ts';
+import splitterRequiredParentWidthHtml from '!./examples/required-parent-width/splitter-required-parent-width-example.component.html?raw';
+import splitterRequiredParentWidthTs from '!./examples/required-parent-width/splitter-required-parent-width-example.component.ts?raw';
 
-import * as splitterApiHtml from '!raw-loader!./examples/api/splitter-api-example.component.html';
-import * as splitterApiTs from '!raw-loader!./examples/api/splitter-api-example.component.ts';
+import splitterApiHtml from '!./examples/api/splitter-api-example.component.html?raw';
+import splitterApiTs from '!./examples/api/splitter-api-example.component.ts?raw';
 
 @Component({
     selector: 'app-splitter',

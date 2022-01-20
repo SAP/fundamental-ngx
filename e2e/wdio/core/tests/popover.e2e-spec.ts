@@ -1,14 +1,22 @@
 import { PopoverPo } from '../pages/popover.po';
 import {
+    acceptAlert,
+    browserIsSafari,
     click,
+    doesItExist,
+    getAlertText,
     getElementArrayLength,
     getElementClass,
+    getElementPlaceholder,
     getText,
+    getValue,
     isElementClickable,
     isElementDisplayed,
+    mouseHoverElement,
     refreshPage,
     scrollIntoView,
-    waitForElDisplayed
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 
 import {
@@ -21,10 +29,14 @@ import {
     popoverExampleTestText,
     popoverParagraphTestText,
     buttonsPopoverTestText,
-    hoverTestText,
     containerTestText,
     triggerTestText,
-    messageTestText
+    messageTestText,
+    placeholderTestText,
+    popoverTestText2,
+    popoverTestText3,
+    alertText1,
+    alertText2
 } from '../fixtures/appData/popover-contents';
 
 describe('Popover test suite', () => {
@@ -53,7 +65,6 @@ describe('Popover test suite', () => {
         popoverDialogMessage,
         hoverElement,
         triggerButton2,
-        triggerButton,
         popoverContainer,
         scrollButton,
         scrollMessage,
@@ -63,12 +74,21 @@ describe('Popover test suite', () => {
         dropdownOption,
         dynamicSubOption,
         cdkButton,
-        segmentButton,
         topButton,
         endButton,
         centerButton,
         startButton,
-        bottomButton
+        bottomButton,
+        dialogInput,
+        popoverNoArrow,
+        paragraph,
+        triggerButtonContainer,
+        popoverMobileExample,
+        mobilePopoverButton,
+        button,
+        mobileInput,
+        mobileFooterButton,
+        scrollCheckbox
     } = popoverPage;
 
     beforeAll(() => {
@@ -77,6 +97,8 @@ describe('Popover test suite', () => {
 
     afterEach(() => {
         refreshPage();
+        waitForPresent(popoverPage.root);
+        waitForElDisplayed(popoverPage.title);
     }, 1);
 
     describe('Check Basic Popovers', () => {
@@ -130,8 +152,8 @@ describe('Popover test suite', () => {
         it('should check that button popover have header, subheader and buttons are clickable', () => {
             scrollIntoView(basicPopoverButton);
             click(basicPopoverButton);
-            expect(getText(barElement)).toBe(cozyHeaderTestText);
-            expect(getText(barElement, 1)).toBe(subheaderTestText);
+            expect(getText(barElement).trim()).toBe(cozyHeaderTestText);
+            expect(getText(barElement, 1).trim()).toBe(subheaderTestText);
 
             expect(isElementClickable(barElement, 2)).toBe(true, `save button not clickable`);
             expect(isElementClickable(barElement, 3)).toBe(true, `cancel button not clickable`);
@@ -246,23 +268,49 @@ describe('Popover test suite', () => {
             scrollIntoView(popoverDialogsButton);
             click(popoverDialogsButton);
             click(clickMeButton);
-            expect(waitForElDisplayed(popoverDialogMessage)).toBe(true, 'message not displayed');
+            expect(isElementDisplayed(popoverDialogMessage)).toBe(true, 'message not displayed');
             expect(getText(popoverDialogMessage)).toBe(buttonsPopoverTestText);
+            click(clickMeButton);
+            expect(doesItExist(popoverDialogMessage)).toBe(false, 'message still displayed');
+        });
+
+        it('should check dialog placeholder', () => {
+            scrollIntoView(popoverDialogsButton);
+            click(popoverDialogsButton);
+            expect(getElementPlaceholder(dialogInput)).toBe(placeholderTestText);
         });
     });
 
     describe('Check Fill Control Width', () => {
         it('should check fill control width example', () => {
+            // skipped due to hoverElement does not work in Safari
+            if (browserIsSafari()) {
+                return;
+            }
             scrollIntoView(hoverElement);
-            expect(getText(hoverElement)).toBe(hoverTestText);
+            mouseHoverElement(hoverElement);
+            expect(isElementDisplayed(popoverNoArrow)).toBe(true, 'popover not displayed');
+            expect(getText(popoverNoArrow + paragraph)).toBe(popoverTestText2);
+            expect(getText(popoverNoArrow + paragraph, 1)).toBe(popoverTestText3);
+
+            mouseHoverElement(popoverNoArrow);
+            expect(doesItExist(popoverNoArrow)).toBe(false, 'popover still displayed');
         });
     });
 
-    describe('Check Popover Focus Trap', () => {
+    describe('Check Different Popover Container', () => {
+        it('should check different popover container example', () => {
+            scrollIntoView(triggerButtonContainer);
+            click(triggerButtonContainer);
+            expect(isElementDisplayed(popoverNoArrow)).toBe(true, 'popover not displayed');
+
+            click(triggerButtonContainer);
+            expect(doesItExist(popoverNoArrow)).toBe(false, 'popover still displayed');
+        });
+
         it('should check that after clicking trigger button appears message with text and container have some text', () => {
-            scrollIntoView(triggerButton);
-            click(triggerButton);
-            expect(isElementDisplayed(popoverMessage)).toBe(true, `message not displayed`);
+            scrollIntoView(triggerButtonContainer);
+            click(triggerButtonContainer);
             expect(getText(popoverMessage)).toBe(triggerTestText);
             expect(getText(popoverContainer)).toBe(containerTestText);
         });
@@ -303,6 +351,40 @@ describe('Popover test suite', () => {
                 expect(getText(scrollMessage)).toBe(messageTestText);
                 click(scrollButton, i);
             }
+        });
+
+        it('should check that popover message still present after scrolling', () => {
+            click(scrollButton);
+            scrollIntoView(scrollButton, 1);
+            expect(isElementDisplayed(scrollMessage)).toBe(true, 'message not displayed');
+        });
+
+        it('should check that popover message disappears after scrolling', () => {
+            click(scrollButton, 2);
+            scrollIntoView(scrollButton, 3);
+            scrollIntoView(scrollButton, 2);
+            expect(doesItExist(scrollMessage)).toBe(false, 'message not displayed');
+        });
+
+        it('should check that popover message disappears when you scroll away from message', () => {
+            // enable mode when message disappear when you scroll away
+            click(scrollCheckbox);
+            click(scrollButton, 3);
+            // scroll to element near the message(in the visible zone)
+            scrollIntoView(scrollButton, 1);
+            scrollIntoView(scrollButton, 3);
+            expect(isElementDisplayed(scrollMessage)).toBe(true, 'message is not displayed');
+            // scroll away
+            scrollIntoView(avatar);
+            scrollIntoView(scrollButton, 3);
+            expect(doesItExist(scrollMessage)).toBe(false);
+
+            // enable mode when message still present anyway
+            click(scrollCheckbox);
+            click(scrollButton, 3);
+            scrollIntoView(avatar);
+            scrollIntoView(scrollButton, 3);
+            expect(isElementDisplayed(scrollMessage)).toBe(true, 'message is not displayed');
         });
     });
 
@@ -386,7 +468,7 @@ describe('Popover test suite', () => {
         });
     });
 
-    describe('Check Dropdown Popover', () => {
+    describe('Check Popover CDK Placement', () => {
         it('should check that arrow button is clickable and it has popover and clickable options', () => {
             scrollIntoView(cdkButton);
             click(cdkButton, 5);
@@ -430,6 +512,30 @@ describe('Popover test suite', () => {
             expect(getElementClass(centerButton, 3)).toContain('toggled');
             click(topButton, 1);
             expect(getElementClass(topButton, 1)).toContain('toggled');
+        });
+    });
+
+    describe('Check Responsive Popover in mobile mode Example', () => {
+        it('should check ability add and reset clicks', () => {
+            scrollIntoView(popoverMobileExample + button);
+            click(popoverMobileExample + button);
+            click(mobilePopoverButton);
+            expect(getValue(mobileInput)).toBe('1');
+
+            click(mobilePopoverButton, 1);
+            expect(getValue(mobileInput)).toBe('0');
+        });
+
+        it('should check alert messages appears', () => {
+            scrollIntoView(popoverMobileExample + button);
+            click(popoverMobileExample + button);
+            click(mobileFooterButton);
+            expect(getAlertText()).toBe(alertText1);
+            acceptAlert();
+
+            click(mobileFooterButton, 1);
+            expect(getAlertText()).toBe(alertText2);
+            acceptAlert();
         });
     });
 

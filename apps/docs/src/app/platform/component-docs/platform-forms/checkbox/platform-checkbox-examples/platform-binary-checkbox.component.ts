@@ -13,11 +13,11 @@ export class PlatformCompactChekboxExampleComponent {
     white = true;
     violet: boolean;
 
-    public checkedChangeFunction(event: any): void {}
+    public checkedChangeFunction(): void {}
 
-    public indeterminateChangeFunction(event: any): void {}
+    public indeterminateChangeFunction(): void {}
 
-    public changeFunction(event: any): void {}
+    public changeFunction(): void {}
 }
 
 class DataObject {

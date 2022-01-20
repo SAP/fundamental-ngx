@@ -13,7 +13,8 @@ import {
     waitForElDisplayed,
     waitForPresent,
     waitForUnclickable,
-    getElementArrayLength
+    getElementArrayLength,
+    browserIsSafari
 } from '../../driver/wdio';
 import {
     compactDate,
@@ -47,7 +48,7 @@ const {
     navigationUpArrowButton,
     period,
     navigationDownArrowButton,
-    timeItem,
+    timeColumn,
     topPage,
     bottomPage,
     firstYearButton,
@@ -55,7 +56,8 @@ const {
     selectMonthButton,
     disabledFunctionExample,
     calendarContainer,
-    buttonText
+    buttonText,
+    inputGroup
 } = new DateTimePicker();
 
 describe('Datetime picker suite', () => {
@@ -65,10 +67,11 @@ describe('Datetime picker suite', () => {
         dateTimePickerPage.open();
     }, 1);
 
-    afterEach(() => {
+    beforeEach(() => {
         refreshPage();
-        waitForPresent(datePickerInput);
-    }, 1);
+        waitForPresent(dateTimePickerPage.root);
+        waitForElDisplayed(dateTimePickerPage.title);
+    }, 2);
 
     it('Verify in all the form factor user is able to see the date picker button and input field ', () => {
         const buttons = elementArray(datePickerButton);
@@ -115,7 +118,7 @@ describe('Datetime picker suite', () => {
                     scrollIntoView(activeDateTimePickerButton, i);
                     click(activeDateTimePickerButton, i);
                     waitForElDisplayed(calendarExpanded);
-                    expect(getText(currentDay, 0)).toBe(new Date().getDate().toString());
+                    expect(getText(currentDay, 0)).toContain(new Date().getDate().toString());
                 }
             }
         }
@@ -146,6 +149,10 @@ describe('Datetime picker suite', () => {
         'Verify The user can then choose the desired date from the calendar, and the time from the rotating wheel, ' +
             'For the time, it’s possible to select hours, minutes, and even seconds.',
         () => {
+            if (browserIsSafari()) {
+                // infinite loop on safari
+                return;
+            }
             click(datePickerButton);
             click(dateTimePickerPage.dayInCalendarButtonByValue('1'));
             selectHoursAndMinutes();
@@ -165,6 +172,10 @@ describe('Datetime picker suite', () => {
     });
 
     it('Verify When the user selects cancel the action is aborted and the input field remains unchanged.', () => {
+        if (browserIsSafari()) {
+            // infinite loop on safari
+            return;
+        }
         click(activeDateTimePickerButton);
         click(dateTimePickerPage.dayInCalendarButtonByValue('1'));
         selectHoursAndMinutes();
@@ -206,6 +217,10 @@ describe('Datetime picker suite', () => {
     });
 
     it('verify after the user selects a year, the view changes to the day view. The time remains the same. ', () => {
+        if (browserIsSafari()) {
+            // infinite loop on safari
+            return;
+        }
         click(datePickerButton, 1);
         selectHoursAndMinutes();
         click(okButton);
@@ -223,6 +238,10 @@ describe('Datetime picker suite', () => {
     });
 
     it('Verify After the user clicks or taps a month, the view changes to the day view. The time remains the same.', () => {
+        if (browserIsSafari()) {
+            // infinite loop on safari
+            return;
+        }
         click(datePickerButton);
         click(dateTimePickerPage.dayInCalendarButtonByValue('1'));
         selectHoursAndMinutes();
@@ -237,28 +256,62 @@ describe('Datetime picker suite', () => {
         click(okButton);
         expect(getValue(datePickerInput)).toEqual(date);
     });
-});
 
-it('should check that OK buttons have correct text', () => {
-    const datepickerButtonsLength = getElementArrayLength(datePickerButton);
-    for (let i = 0; i < datepickerButtonsLength; i++) {
-        if (!getElementClass(datePickerButton, i).includes('disabled')) {
-            click(datePickerButton, i);
-            expect(getText(okButton + buttonText)).toEqual('OK');
-            click(okButton);
+    it('should check that OK buttons have correct text', () => {
+        const datepickerButtonsLength = getElementArrayLength(datePickerButton);
+        for (let i = 0; i < datepickerButtonsLength; i++) {
+            if (!getElementClass(datePickerButton, i).includes('disabled')) {
+                click(datePickerButton, i);
+                expect(getText(okButton + buttonText).trim()).toEqual('OK');
+                click(okButton);
+            }
         }
-    }
+    });
+
+    // skipped due to https://github.com/SAP/fundamental-ngx/issues/7112
+    xit('should check that date-time picker does not have error if it contains valid value', () => {
+        scrollIntoView(inputGroup, 8);
+        let validDate;
+        const currDate = new Date();
+        const currMonth = currDate.getMonth() + 1;
+        const currDay = currDate.getDate();
+        const currYear = currDate.getFullYear();
+        let currMinute = currDate.getMinutes().toString();
+        if (currMinute === '0') {
+            currMinute = '00';
+            // eslint-disable-next-line radix
+        } else if (parseInt(currMinute) < 10) {
+            currMinute = '0' + currMinute;
+        }
+        const currentHour = currDate.toLocaleString('en-US', { timeZone: 'UTC', hour: 'numeric', hour12: true });
+
+        if (currentHour[1] === ' ') {
+            validDate = `${currMonth}/${currDay}/${currYear}, ${currentHour[0]}:${currMinute} ${currentHour.slice(
+                2,
+                4
+            )}`;
+        }
+        if (currentHour[1] !== ' ') {
+            validDate = `${currMonth}/${currDay}/${currYear}, ${currentHour.slice(
+                0,
+                2
+            )}:${currMinute} ${currentHour.slice(3, 5)}`;
+        }
+
+        expect(getValue(datePickerInput, 8)).toBe(validDate);
+        expect(getElementClass(inputGroup, 8)).not.toContain('error');
+    });
 });
 
 function selectHoursAndMinutes(hour: number = 1, minute: number = 1): void {
-    while (getText(selectedHours) !== hour.toString()) {
+    while (getText(selectedHours).trim() !== hour.toString()) {
         scrollIntoView(activeDateTimePickerButton, 1);
         click(navigationUpArrowButton);
     }
-    click(timeItem, 1);
+    click(timeColumn, 1);
     while (getText(selectedMinutes) !== minute.toString()) {
         click(navigationDownArrowButton);
     }
-    click(timeItem, 2);
+    click(timeColumn, 2);
     click(period);
 }

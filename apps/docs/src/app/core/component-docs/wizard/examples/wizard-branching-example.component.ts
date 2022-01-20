@@ -1,7 +1,16 @@
-import { Component, ElementRef, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+    Component,
+    ElementRef,
+    QueryList,
+    TemplateRef,
+    ViewChild,
+    ViewChildren,
+    ViewEncapsulation
+} from '@angular/core';
 import { DialogService } from '@fundamental-ngx/core/dialog';
-import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
+import { WizardStepComponent, WizardStepStatus } from '@fundamental-ngx/core/wizard';
 import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
+import { WizardService } from '@fundamental-ngx/core/wizard';
 
 @Component({
     selector: 'fd-wizard-branching-example',
@@ -10,7 +19,8 @@ import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
     encapsulation: ViewEncapsulation.None,
     host: {
         class: 'fd-wizard-example'
-    }
+    },
+    providers: [WizardService]
 })
 export class WizardBranchingExampleComponent {
     /**
@@ -26,6 +36,10 @@ export class WizardBranchingExampleComponent {
     @ViewChild('creditButton')
     creditButton: RadioButtonComponent;
 
+    /** @hidden */
+    @ViewChildren(WizardStepComponent)
+    steps: QueryList<WizardStepComponent>;
+
     /**
      * documentation related property
      * specifies if the doc example is rendered in fullscreen or not
@@ -40,9 +54,9 @@ export class WizardBranchingExampleComponent {
 
     oldPayment = '';
 
-    init = true;
+    init = false;
 
-    constructor(private _dialogService: DialogService) {}
+    constructor(private _dialogService: DialogService, private _wizardService: WizardService) {}
 
     statusChanged(stepNumber: number, event: WizardStepStatus): void {
         if (event === 'current') {
@@ -51,9 +65,9 @@ export class WizardBranchingExampleComponent {
     }
 
     paymentSelectionChanged(dialog: TemplateRef<any>): void {
-        if (this.init && this.paymentSelection) {
+        if (!this.init) {
             this.oldPayment = this.paymentSelection;
-            this.init = false;
+            this.init = true;
         } else if (this.oldPayment !== this.paymentSelection) {
             const dialogRef = this._dialogService.open(dialog, { responsivePadding: true });
 
@@ -111,5 +125,11 @@ export class WizardBranchingExampleComponent {
         event.stopPropagation();
         this.fullscreen = false;
         this.overlay.nativeElement.style.width = '0%';
+    }
+
+    // Handle focus on key press
+    /** @hidden */
+    handleFocus(event: KeyboardEvent, index: number): void {
+        this._wizardService.progressBarKeyHandler(event, this.steps, index);
     }
 }

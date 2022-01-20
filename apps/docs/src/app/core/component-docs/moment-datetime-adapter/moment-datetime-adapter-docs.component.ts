@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
-import * as datePickerMomentAdapterSrcTs from '!raw-loader!./examples/date-picker-moment-adapter-example.component.ts';
-import * as datePickerMomentAdapterSrcHtml from '!raw-loader!./examples/date-picker-moment-adapter-example.component.html';
-import * as momentAdapterOptionsSrcTs from '!raw-loader!./examples/moment-adapter-options-example.component.ts';
-import * as momentAdapterOptionsSrcHtml from '!raw-loader!./examples/moment-adapter-options-example.component.html';
-import * as momentDatetimeFormatsSrcTs from '!raw-loader!./examples/moment-datetime-formats-example.component.ts';
-import * as momentDatetimeFormatsSrcHtml from '!raw-loader!./examples/moment-datetime-formats-example.component.html';
+import datePickerMomentAdapterSrcTs from '!./examples/date-picker-moment-adapter-example.component.ts?raw';
+import datePickerMomentAdapterSrcHtml from '!./examples/date-picker-moment-adapter-example.component.html?raw';
+import momentAdapterOptionsSrcTs from '!./examples/moment-adapter-options-example.component.ts?raw';
+import momentAdapterOptionsSrcHtml from '!./examples/moment-adapter-options-example.component.html?raw';
+import momentDatetimeFormatsSrcTs from '!./examples/moment-datetime-formats-example.component.ts?raw';
+import momentDatetimeFormatsSrcHtml from '!./examples/moment-datetime-formats-example.component.html?raw';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 

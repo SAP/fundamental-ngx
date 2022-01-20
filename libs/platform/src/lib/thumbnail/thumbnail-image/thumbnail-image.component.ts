@@ -13,10 +13,10 @@ import {
     ElementRef
 } from '@angular/core';
 
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { Media } from '../thumbnail.interfaces';
-import { ThumbnailDetailsComponent } from '../thumbnail-details/thumbnail-details.component';
+import { SPACE } from '@angular/cdk/keycodes';
 
 @Component({
     selector: 'fdp-thumbnail-image',
@@ -32,11 +32,11 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
     @Input()
     isHorizontal = false;
 
-    /**Maximum limit for the thumbnail images to display */
+    /** Maximum limit for the thumbnail images to display */
     @Input()
     maxImages = 5;
 
-    /**Role description for the thumbnail image  */
+    /** Role description for the thumbnail image  */
     @Input()
     roleDescription = 'Image';
 
@@ -46,6 +46,9 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
     /** Output event for thumbnail image click */
     @Output()
     thumbnailClicked: EventEmitter<Media> = new EventEmitter();
+
+    @Output()
+    openDetailsDialog = new EventEmitter<Media>();
 
     /** List of thumbnail images reference */
     @ViewChildren('thumbnailImage')
@@ -61,7 +64,6 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
     /** @hidden */
     ngOnInit(): void {
         this._setOverlay();
-        console.log('length', this.thumbnailImages.length);
     }
 
     /** @hidden */
@@ -76,26 +78,17 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
     }
 
     /** Opens the Dialog when the imgaes croses the maximum number of images to display */
-    openDialog(selectedMedia: Media, mediaList: Media[]): void {
+    openDialog(media: Media, _mediaList: Media[]): void {
         this.mediaList.forEach((item) => (item.selected = false));
-        this.mediaList.forEach((item) => (item.overlayRequired = false));
-        selectedMedia.selected = true;
-        const dialogRef = this._dialogService.open(ThumbnailDetailsComponent, {
-            backdropClickCloseable: false,
-            escKeyCloseable: false,
-            data: {
-                thumbnailId: this.thumbnailId,
-                selectedMedia: selectedMedia,
-                mediaList: mediaList,
-                rtl: this._isRtl(),
-                maxImages: this.maxImages
-            },
-            ariaLabelledBy: this.thumbnailId
-        });
+        media.selected = true;
+        this.openDetailsDialog.emit(media);
     }
 
     /** @hidden */
-    thumbnailClick(selectedMedia: Media): void {
+    thumbnailClick(selectedMedia: Media, event?: KeyboardEvent | MouseEvent): void {
+        if (event instanceof KeyboardEvent && KeyUtil.isKeyCode(event, SPACE)) {
+            event?.preventDefault();
+        }
         this.mediaList.forEach((item) => (item.selected = false));
         selectedMedia.selected = true;
         this.thumbnailClicked.emit(selectedMedia);
@@ -110,5 +103,9 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
         if (this.mediaList.length > this.maxImages) {
             this.mediaList[this.maxImages - 1].overlayRequired = true;
         }
+    }
+
+    openImage(image: Media, $event: KeyboardEvent | MouseEvent): void {
+        image.overlayRequired ? this.openDialog(image, this.mediaList) : this.thumbnailClick(image, $event);
     }
 }

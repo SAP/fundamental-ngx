@@ -35,7 +35,8 @@ import {
     Provider,
     QueryList,
     TemplateRef,
-    ViewEncapsulation
+    ViewEncapsulation,
+    isDevMode
 } from '@angular/core';
 import { AbstractControl, ControlContainer, FormGroup } from '@angular/forms';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
@@ -45,15 +46,33 @@ import { Subject, Subscription } from 'rxjs';
 
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
 import {
+    ColumnLayout,
     FormField,
     FormFieldGroup,
     FormGroupContainer,
     HintPlacement,
     LabelLayout
 } from '@fundamental-ngx/platform/shared';
-import { Field, FieldColumn, FieldGroup, getField, isFieldChild, isFieldGroupChild } from '../form-helpers';
+import {
+    Field,
+    FieldColumn,
+    FieldGroup,
+    getField,
+    getFormField,
+    isFieldChild,
+    isFieldGroupChild,
+    isFieldGroupWrapperChild
+} from '../form-helpers';
 import { FormFieldComponent } from './form-field/form-field.component';
-import { FORM_GROUP_CHILD_FIELD_TOKEN } from './constants';
+import {
+    DefaultGapLayout,
+    DefaultHorizontalFieldLayout,
+    DefaultHorizontalLabelLayout,
+    DefaultVerticalFieldLayout,
+    DefaultVerticalLabelLayout,
+    FORM_GROUP_CHILD_FIELD_TOKEN
+} from './constants';
+import { normalizeColumnLayout, generateColumnClass } from './helpers';
 
 export const formGroupProvider: Provider = {
     provide: FormGroupContainer,
@@ -168,9 +187,67 @@ export class FormGroupComponent
     @Input()
     class: string;
 
-    /** Defines form field label placement. */
+    /**
+     * @deprecated
+     * Use labelColumnLayout, fieldColumnLayout and gapColumnLayout properties.
+     *
+     * Defines form field label placement.
+     */
     @Input()
-    labelLayout: LabelLayout = 'horizontal';
+    get labelLayout(): LabelLayout {
+        return this._labelLayout;
+    }
+
+    set labelLayout(value: LabelLayout) {
+        if (isDevMode()) {
+            console.warn(
+                'LabelLayout input property is deprecated. Please use labelColumnLayout, fieldColumnLayout and gapColumnLayout properties instead'
+            );
+        }
+        this._labelLayout = value;
+
+        this.labelColumnLayout =
+            this._labelLayout === 'horizontal' ? DefaultHorizontalLabelLayout : DefaultVerticalLabelLayout;
+        this.fieldColumnLayout =
+            this._labelLayout === 'horizontal' ? DefaultHorizontalFieldLayout : DefaultVerticalFieldLayout;
+    }
+
+    /**
+     * Defines column layout for inline items.
+     */
+    @Input()
+    set inlineColumnLayout(value: ColumnLayout) {
+        this._inlineColumnLayout = normalizeColumnLayout(value);
+        this._updateInlineColumnLayout();
+    }
+
+    get inlineColumnLayout(): ColumnLayout {
+        return this._inlineColumnLayout;
+    }
+
+    /** @hidden */
+    _inlineColumnLayoutClass: string;
+
+    /** @hidden */
+    private _inlineColumnLayout = DefaultVerticalFieldLayout;
+
+    /**
+     * Defines label's column layout.
+     */
+    @Input()
+    labelColumnLayout: ColumnLayout = DefaultHorizontalLabelLayout;
+
+    /**
+     * Defines field's column layout.
+     */
+    @Input()
+    fieldColumnLayout: ColumnLayout = DefaultHorizontalFieldLayout;
+
+    /**
+     * Defines gap column layout.
+     */
+    @Input()
+    gapColumnLayout: ColumnLayout = DefaultGapLayout;
 
     /** Angular FormGroup where all underlying controls will be attached to. */
     @Input()
@@ -237,6 +314,7 @@ export class FormGroupComponent
      * onSubmit event
      */
     @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onSubmit: EventEmitter<any> = new EventEmitter<any>();
 
     /** @hidden */
@@ -301,6 +379,9 @@ export class FormGroupComponent
     private _hintPlacement: HintPlacement = 'right';
 
     /** @hidden */
+    private _labelLayout: LabelLayout;
+
+    /** @hidden */
     protected _destroyed = new Subject<void>();
 
     /** @hidden */
@@ -333,6 +414,7 @@ export class FormGroupComponent
             );
         }
         this.buildComponentCssClass();
+        this._updateInlineColumnLayout();
     }
 
     /** @hidden */
@@ -349,6 +431,15 @@ export class FormGroupComponent
 
     /** @hidden */
     ngAfterViewInit(): void {
+        this.i18Strings = this.i18Strings ? this.i18Strings : this.i18Template;
+
+        this._setUserLayout();
+        this._updateFieldByColumn();
+        this._updateFormFieldsProperties();
+        this._listenToFormGroupChildren();
+        this._listenFormFieldColumnChange();
+        this._cd.markForCheck();
+
         this._cd.detectChanges();
     }
 
@@ -429,7 +520,7 @@ export class FormGroupComponent
     /** @hidden */
     private _listenFormFieldColumnChange(): void {
         this.formGroupChildren.forEach((field: FormFieldComponent) =>
-            field.onColumnChange?.pipe(takeUntil(this._destroyed)).subscribe((_) => {
+            field.onColumnChange?.pipe(takeUntil(this._destroyed)).subscribe(() => {
                 this._updateFieldByColumn();
                 this._cd.markForCheck();
             })
@@ -510,7 +601,7 @@ export class FormGroupComponent
             }
 
             if (isFieldGroupChild(formField)) {
-                formField.fields.forEach((field) => this._updateFormFieldProperties(field));
+                formField.fields.forEach((field) => this._updateFormFieldProperties(getFormField(field)));
             }
         });
     }
@@ -525,9 +616,9 @@ export class FormGroupComponent
         if (this.unifiedLayout) {
             formField.hintPlacement = this._hintPlacement;
             formField.editable = this.editable;
-            formField.labelLayout = this.labelLayout;
             formField.noLabelLayout = this.noLabelLayout;
         }
+        formField.setDefaultColumnLayout();
         formField.i18Strings = formField.i18Strings ? formField.i18Strings : this.i18Strings;
     }
 
@@ -589,6 +680,16 @@ export class FormGroupComponent
         if (!this.formGroupChildren) {
             return [];
         }
-        return this.formGroupChildren.toArray().filter((child) => this._formGroupDirectChildren.includes(child));
+
+        const children = this.formGroupChildren
+            .toArray()
+            .map((child) => (isFieldGroupWrapperChild(child) ? child.fieldRenderer : child));
+
+        return children.filter((child) => this._formGroupDirectChildren.includes(child));
+    }
+
+    /** @hidden */
+    private _updateInlineColumnLayout(): void {
+        this._inlineColumnLayoutClass = generateColumnClass(this.inlineColumnLayout);
     }
 }

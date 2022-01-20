@@ -28,15 +28,13 @@ export class PlatformSelectModeExampleComponent {
         new Fruit('D', 'pineapple', 11),
         new Fruit('E', 'watermelon', 10)
     ];
-    option = this.userList.map<OptionItem>((item) => {
-        return {
-            label: item.name + item.id,
-            value: item,
-            triggerValue: `(${item.id})`,
-            disabled: item.id === 'B',
-            icon: ''
-        };
-    });
+    option = this.userList.map<OptionItem>((item) => ({
+        label: item.name + item.id,
+        value: item,
+        triggerValue: `(${item.id})`,
+        disabled: item.id === 'B',
+        icon: ''
+    }));
 
     selectedValue1 = null;
     selectedValue2 = null;

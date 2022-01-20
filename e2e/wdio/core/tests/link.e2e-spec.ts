@@ -1,9 +1,17 @@
 import { LinkPo } from '../pages/link.po';
-import { getElementArrayLength, isElementClickable, refreshPage } from '../../driver/wdio';
+import {
+    getElementAriaLabel,
+    getElementArrayLength,
+    isElementClickable,
+    isElementDisplayed,
+    refreshPage,
+    waitForElDisplayed,
+    waitForPresent
+} from '../../driver/wdio';
 
 describe('Link test suite', () => {
     const linkPage = new LinkPo();
-    const { links } = linkPage;
+    const { links, leftArrowIcon, rightArrowIcon } = linkPage;
 
     beforeAll(() => {
         linkPage.open();
@@ -11,6 +19,8 @@ describe('Link test suite', () => {
 
     afterEach(() => {
         refreshPage();
+        waitForPresent(linkPage.root);
+        waitForElDisplayed(linkPage.title);
     }, 1);
 
     describe('check links', () => {
@@ -25,6 +35,28 @@ describe('Link test suite', () => {
                 }
                 expect(isElementClickable(links, i)).toBe(true);
             }
+        });
+
+        it('should check that first link is standard type', () => {
+            expect(getElementAriaLabel(links)).toBe('Standard');
+        });
+
+        it('should check that second link is emphasized type', () => {
+            expect(getElementAriaLabel(links, 1)).toBe('Emphasized');
+        });
+
+        it('should check that the last link is inverted type', () => {
+            expect(getElementAriaLabel(links, 5)).toBe('Inverted');
+        });
+
+        it('should check link with right arrow', () => {
+            expect(getElementAriaLabel(links, 3)).toBe('Icon right');
+            expect(isElementDisplayed(rightArrowIcon)).toBe(true);
+        });
+
+        it('should check link with left arrow', () => {
+            expect(getElementAriaLabel(links, 4)).toBe('Icon left');
+            expect(isElementDisplayed(leftArrowIcon)).toBe(true);
         });
 
         it('should check orientation', () => {

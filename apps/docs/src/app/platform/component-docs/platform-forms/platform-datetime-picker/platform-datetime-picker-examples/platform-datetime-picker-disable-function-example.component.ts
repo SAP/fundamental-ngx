@@ -33,7 +33,5 @@ export class PlatformDatetimePickerDisableFunctionExampleComponent {
 
     date = FdDate.getNow();
 
-    disableFunction = (fdDate: FdDate): boolean => {
-        return FdDate.getToday().getTimeStamp() > fdDate.getTimeStamp();
-    };
+    disableFunction = (fdDate: FdDate): boolean => FdDate.getToday().getTimeStamp() > fdDate.getTimeStamp();
 }

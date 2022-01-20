@@ -18,7 +18,8 @@ describe('Breadcrumb test suite:', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(links);
+        waitForPresent(breadcrumbPage.root);
+        waitForElDisplayed(breadcrumbPage.title);
     }, 1);
 
     it('should check links', () => {

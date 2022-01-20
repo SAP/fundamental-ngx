@@ -1,19 +1,22 @@
 import {
+    browserIsSafari,
     click,
     clickNextElement,
     doesItExist,
+    focusElement,
     getAttributeByName,
     getElementArrayLength,
     getElementClass,
-    getNextElementText,
     getText,
     getValue,
     isElementClickable,
     isElementDisplayed,
-    mouseHoverElement,
+    pause,
     refreshPage,
     scrollIntoView,
+    sendKeys,
     setValue,
+    waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 import { DatePickerPo } from '../pages/date-picker.po';
@@ -46,10 +49,10 @@ describe('Datetime picker suite', () => {
         selectedTimeLine,
         currentItem,
         inputGroup,
+        inputGroupInputElement,
         frenchButton,
         germanButton,
         bulgarianButton,
-        previousMonthButton,
         nextMonthButton,
         calendarBody,
         calendarRow,
@@ -69,8 +72,14 @@ describe('Datetime picker suite', () => {
 
     beforeEach(() => {
         refreshPage();
-        waitForPresent(datePickerPage.title);
+        waitForPresent(datePickerPage.root);
+        waitForElDisplayed(datePickerPage.title);
     }, 1);
+
+    if (browserIsSafari()) {
+        // skip safari; runner gets stuck sometimes; flaky
+        return;
+    }
 
     it('should check calendar open close', () => {
         for (let i = 0; i < blockExamples.length; i++) {
@@ -83,12 +92,17 @@ describe('Datetime picker suite', () => {
     it('should check choosing date', () => {
         for (let i = 0; i < blockExamples.length; i++) {
             if (
-                blockExamples[i] !== internationalExample &&
-                blockExamples[i] !== disabledExample &&
-                blockExamples[i] !== formRangeExample
+                // skip internationalExample disabledExample rangeDisabledExample formRangeExample, disabledDatePicker
+                i !== 2 &&
+                i !== 6 &&
+                i !== 7 &&
+                i !== 8 &&
+                i !== 10
             ) {
                 checkChoosingDate(blockExamples[i]);
                 refreshPage();
+                waitForPresent(datePickerPage.root);
+                waitForElDisplayed(datePickerPage.title);
             }
         }
     });
@@ -147,8 +161,7 @@ describe('Datetime picker suite', () => {
     it('should check that available only 2 next weeks in range disabled example', () => {
         click(rangeDisabledExample + calendarIcon);
         const currentDayIndex = getCurrentItemIndex();
-        const itemsLength = getElementArrayLength(currentMonthCalendarItem);
-
+        const itemsLength = getElementArrayLength(altCalendarItem);
         for (let i = currentDayIndex - 1; i !== 0; i--) {
             expect(isElementClickable(calendarItem, i)).toBe(false, `previous day not disabled`);
         }
@@ -162,9 +175,9 @@ describe('Datetime picker suite', () => {
             }
         }
 
-        if (currentDayIndex + 15 > itemsLength) {
+        if (currentDayIndex + 14 > itemsLength) {
             const lengthDifference = itemsLength - currentDayIndex;
-            const availableLengthNextMonth = 15 - lengthDifference;
+            const availableLengthNextMonth = 14 - lengthDifference;
 
             for (let i = currentDayIndex; i < lengthDifference; i++) {
                 expect(isElementClickable(currentMonthCalendarItem, i)).toBe(true, `element ${i} is disabled`);
@@ -176,7 +189,7 @@ describe('Datetime picker suite', () => {
                 expect(isElementClickable(currentMonthCalendarItem, i)).toBe(true, `element ${i} is disabled`);
             }
 
-            for (let i = availableLengthNextMonth + 1; i < itemsLength; i++) {
+            for (let i = availableLengthNextMonth + 2; i < itemsLength; i++) {
                 if (i >= 31) {
                     break;
                 }
@@ -218,7 +231,7 @@ describe('Datetime picker suite', () => {
     });
 
     it('should check states of input groups', () => {
-        expect(getElementClass(allowNullExample + inputGroup)).toContain('is-success');
+        expect(getElementClass(allowNullExample + inputGroup)).not.toContain('is-error');
         expect(getElementClass(formExample + inputGroup, 1)).toContain('is-information');
         expect(getElementClass(disableFuncExample + inputGroup)).toContain('is-success');
         expect(getElementClass(rangeDisabledExample + inputGroup)).toContain('is-success');
@@ -231,49 +244,65 @@ describe('Datetime picker suite', () => {
         expect(getElementClass(calendar)).toContain('compact', `calendar is not compact`);
     });
 
-    it('should check hovering on the input group', () => {
-        checkHoverOnInputGroup(disableFuncExample, 'success');
-        checkHoverOnInputGroup(formExample, 'success');
-        checkHoverOnInputGroup(formExample, 'information', 1);
+    it('should check message when input group in focus state', () => {
+        if (browserIsSafari()) {
+            return;
+        }
+        focusElement(disableFuncExample + inputGroupInputElement);
+        expect(isElementDisplayed(message + 'success'))
+            .withContext(`message is not displayed`)
+            .toBeTrue();
+
+        focusElement(formExample + inputGroupInputElement);
+        expect(isElementDisplayed(message + 'success'))
+            .withContext(`message is not displayed`)
+            .toBeTrue();
+
+        // disabled input can not be focused so no message
+        focusElement(formExample + inputGroupInputElement, 1);
+        expect(() => isElementDisplayed(message + 'information')).toThrowError();
     });
 
     it('should check RTL and LTR orientation', () => {
         datePickerPage.checkRtlSwitch();
     });
 
-    function checkHoverOnInputGroup(section: string, messageType: string, index: number = 0): void {
-        scrollIntoView(section);
-        mouseHoverElement(section + inputGroup, index);
-        expect(isElementDisplayed(message + messageType)).toBe(true, `message did not displayed`);
-    }
-
     function checkChangingMonthByArrows(section: string): void {
         click(section + calendarIcon);
         click(selectMonthButton);
+        let previousMonthName = '',
+            nextMonthName = '';
+        // if current month is January - we do not have previous month in this year
+        if (getCurrentItemIndex() !== 0) {
+            previousMonthName = getAttributeByName(calendarItem, monthAttributeLabel, getCurrentItemIndex() - 1);
 
-        const previousMonthName = getAttributeByName(calendarItem, monthAttributeLabel, getCurrentItemIndex() - 1);
-        const nextMonthName = getAttributeByName(calendarItem, monthAttributeLabel, getCurrentItemIndex() + 1);
+            sendKeys(['ArrowLeft', 'Enter']);
+            expect(getAttributeByName(selectMonthButton, monthAttributeLabel)).toEqual(
+                previousMonthName,
+                `previous month is not chosen, ${section}`
+            );
+        }
+        refreshPage();
+        click(section + calendarIcon);
         click(selectMonthButton);
+        // if current month is December - we do not have next month in this year
+        if (getCurrentItemIndex() !== 11) {
+            nextMonthName = getAttributeByName(calendarItem, monthAttributeLabel, getCurrentItemIndex() + 1);
 
-        click(nextMonthButton);
-        expect(getAttributeByName(selectMonthButton, monthAttributeLabel)).toEqual(
-            nextMonthName,
-            `next month is not chosen`
-        );
-
-        click(previousMonthButton);
-        click(previousMonthButton);
-        expect(getAttributeByName(selectMonthButton, monthAttributeLabel)).toEqual(
-            previousMonthName,
-            `previous month is not chosen`
-        );
+            sendKeys(['ArrowRight', 'Enter']);
+            pause(3000);
+            expect(getAttributeByName(selectMonthButton, monthAttributeLabel)).toEqual(
+                nextMonthName,
+                `next month is not chosen, ${section}`
+            );
+        }
         click(section + calendarIcon);
     }
 
     function checkChoosingYear(section: string): void {
         click(section + calendarIcon);
         click(selectYearButton);
-        const nextYear = getNextElementText(currentItem);
+        const nextYear = getAttributeByName(calendarItem, 'data-fd-calendar-year', getCurrentDayIndex() + 1);
         clickNextElement(currentItem);
         expect(getText(selectYearButton)).toEqual(nextYear);
         click(section + calendarIcon);
@@ -316,7 +345,6 @@ describe('Datetime picker suite', () => {
         click(section + calendarIcon, calendarIndex);
         const itemsLength = getElementArrayLength(calendarItem) - 1;
         let firstDayIndex, lastDayIndex;
-        let firstChosenDayText, secChosenDayText;
 
         for (let i = 0; i < itemsLength; i++) {
             if (!getElementClass(calendarItem, i).includes('other-month')) {
@@ -324,7 +352,8 @@ describe('Datetime picker suite', () => {
                 break;
             }
         }
-        firstChosenDayText = '0' + getText(calendarItem, firstDayIndex);
+
+        const firstChosenDayText = '0' + getText(calendarItem + ' .fd-calendar__text', firstDayIndex);
 
         for (let i = itemsLength; i !== 0; i--) {
             if (
@@ -336,7 +365,7 @@ describe('Datetime picker suite', () => {
             }
         }
 
-        secChosenDayText = getText(calendarItem, lastDayIndex);
+        const secChosenDayText = getText(calendarItem + ' .fd-calendar__text', lastDayIndex);
 
         click(calendarItem, firstDayIndex);
         click(calendarItem, lastDayIndex);
@@ -377,14 +406,14 @@ describe('Datetime picker suite', () => {
         scrollIntoView(section + calendarIcon);
         click(section + calendarIcon);
         const currentDayIndex = getCurrentDayIndex();
-        const dayCount = getElementArrayLength(currentMonthCalendarItem);
+        const dayCount = getElementArrayLength(currentMonthCalendarItem) - 1;
 
-        if (currentDayIndex === dayCount) {
+        if (currentDayIndex === dayCount - 1) {
             click(altCalendarItem, currentDayIndex - 1);
             click(section + calendarIcon);
         }
-        if (currentDayIndex !== dayCount) {
-            click(altCalendarItem, currentDayIndex + 1);
+        if (currentDayIndex !== dayCount - 1) {
+            click(altCalendarItem + ':not(.fd-calendar__item--other-month)', currentDayIndex + 1);
 
             section === formattingExample
                 ? (chosenDate = `${getCurrentMonth(true)}/${getNextDay(true)}/${currentYear.toString().slice(2)}`)

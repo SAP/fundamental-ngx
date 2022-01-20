@@ -21,7 +21,6 @@ class ActionButtonGroupTestComponent {
 describe('ActionButtonGroupComponent', () => {
     let component: ActionButtonGroupTestComponent;
     let fixture: ComponentFixture<ActionButtonGroupTestComponent>;
-    let actionbuttongroup: ActionButtonGroupComponent;
 
     beforeEach(
         waitForAsync(() => {
@@ -35,7 +34,6 @@ describe('ActionButtonGroupComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(ActionButtonGroupTestComponent);
         component = fixture.componentInstance;
-        actionbuttongroup = component.actionbuttongroup;
         fixture.detectChanges();
     });
 

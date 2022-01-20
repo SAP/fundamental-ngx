@@ -22,9 +22,7 @@ export class ListConfig {
      * Create Provider factory function
      */
     static createProviderFactory(obj: Partial<ListConfig>): () => ListConfig {
-        const useFactory = (): ListConfig => {
-            return Object.assign(new ListConfig(), obj);
-        };
+        const useFactory = (): ListConfig => Object.assign(new ListConfig(), obj);
         return useFactory;
     }
 }

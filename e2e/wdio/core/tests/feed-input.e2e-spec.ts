@@ -28,15 +28,7 @@ import {
 
 describe('Verify Feed Input component', () => {
     const feedInputPage = new FeedInputPo();
-    const {
-        feedInputTextArea,
-        feedInputAvatar,
-        feedInputButton,
-        feedInputNoAvatar,
-        disableInputTextArea,
-        disableInputButton,
-        activeInputTextAreas
-    } = new FeedInputPo();
+    const { feedInputTextArea, feedInputAvatar, feedInputButton, feedInputNoAvatar } = new FeedInputPo();
 
     beforeAll(() => {
         feedInputPage.open();
@@ -44,7 +36,8 @@ describe('Verify Feed Input component', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForElDisplayed(feedInputAvatar);
+        waitForPresent(feedInputPage.root);
+        waitForElDisplayed(feedInputPage.title);
     }, 1);
 
     it('should have correct placeholder assigned', () => {

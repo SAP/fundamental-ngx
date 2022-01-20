@@ -1,5 +1,5 @@
 import { CoreBaseComponentPo } from './core-base-component.po';
-import { waitForElDisplayed } from '../../driver/wdio';
+import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class SelectPo extends CoreBaseComponentPo {
     url = '/select';
@@ -7,7 +7,7 @@ export class SelectPo extends CoreBaseComponentPo {
     selectModesExample = 'fd-select-mode-example';
     displayedText = ' .fd-select__text-content';
     buttons = ' button';
-    option = '[role="option"]';
+    option = ' [role="option"]';
     overlayContainer = '.cdk-overlay-container';
     selectSemanticStatesExample = 'fd-select-semantic-state-example';
     customControlExample = 'fd-select-custom-trigger';
@@ -21,10 +21,11 @@ export class SelectPo extends CoreBaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.selectModesExample);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

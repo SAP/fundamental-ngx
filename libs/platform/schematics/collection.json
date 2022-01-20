@@ -6,15 +6,20 @@
             "factory": "./ng-add/index#ngAdd",
             "schema": "./ng-add/schema.json"
         },
-        "addCoreSchematic": {
-            "description": "Calls dependency add schemas",
-            "private": true,
-            "factory": "./ng-add/index#addCoreSchematic"
+        "ng-update": {
+            "description": "Updates existing @fundamental-ngx/platform.",
+            "factory": "./ng-update/index#ngUpdate",
+            "schema": "./ng-update/schema.json"
         },
-        "addLocalizeSchematic": {
-            "description": "Calls ng add localize schematic",
-            "private": true,
-            "factory": "./utils/translation-utils#addLocalizeSchematic"
+        "read-translation-files": {
+            "description": "Read translation files. Runned as schematics to ensure the tasks order.",
+            "factory": "./utils/translation-utils#readTranslationFiles",
+            "schema": "./ng-add/schema.json"
+        },
+        "remove-xml-to-js": {
+            "description": "Remove xml2js package. Runned as schematics to ensure the tasks order.",
+            "factory": "./utils/translation-utils#removeXML2JSPackage",
+            "schema": "./ng-add/schema.json"
         }
     }
 }

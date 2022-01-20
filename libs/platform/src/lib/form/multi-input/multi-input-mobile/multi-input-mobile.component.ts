@@ -10,7 +10,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { takeUntil } from 'rxjs/operators';
+import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
 import {
     MOBILE_MODE_CONFIG,
@@ -46,7 +46,7 @@ export class PlatformMultiInputMobileComponent
     } = null;
 
     /** @hidden */
-    private _selectedBackup: string;
+    private _selectedBackup: any[];
 
     constructor(
         elementRef: ElementRef,
@@ -80,15 +80,18 @@ export class PlatformMultiInputMobileComponent
 
     /** @hidden */
     private _listenOnMultiInputOpenChange(): void {
-        this._component.openChange.pipe(takeUntil(this._onDestroy$)).subscribe((isOpen) => this._toggleDialog(isOpen));
+        this._component.openChange
+            .pipe(distinctUntilChanged(), takeUntil(this._onDestroy$))
+            .subscribe((isOpen) => this._toggleDialog(isOpen));
     }
 
     private _toggleDialog(open: boolean): void {
         if (!open) {
+            this._handleApprove();
             return;
         }
 
-        this._selectedBackup = this._component.inputText;
+        this._selectedBackup = [...this._component._selected];
         if (!this._dialogService.hasOpenDialogs()) {
             this._open();
         }

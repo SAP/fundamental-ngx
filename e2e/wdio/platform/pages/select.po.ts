@@ -3,10 +3,10 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class SelectPo extends BaseComponentPo {
     url = '/select';
-    root = '#page-content';
 
     selectModeExample = 'fdp-select-mode-example';
     displayText = ' .fd-select__control';
+    select = ' fd-select';
     buttons = ' button';
     selectedValue_1 = 'fdp-select~small';
     selectWithTwoColumnsExample = 'fdp-select-columns-example';
@@ -21,16 +21,17 @@ export class SelectPo extends BaseComponentPo {
     selectNoneExample = 'fdp-select-none-example';
     selectNowrapExample = 'fdp-select-nowrap-example';
     selectInReactiveForms = 'fdp-select-forms';
+    inputControl = ' .fd-select__control';
 
     options = (id) => `#fd-option-${id}`;
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForPresent(this.title);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

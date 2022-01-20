@@ -143,12 +143,9 @@ export class WizardGeneratorVisibleSummaryBranchingExampleComponent implements O
         {
             name: 'Discount',
             id: 'discountStep',
-            when: (_completedSteps, answers) => {
-                return (
-                    answers.paymentMethodStep?.paymentMethodForm?.paymentMethod === 'Bank Transfer' ||
-                    answers.paymentMethodStep?.paymentMethodForm?.paymentMethod === 'Credit Card'
-                );
-            },
+            when: (_completedSteps, answers) =>
+                answers.paymentMethodStep?.paymentMethodForm?.paymentMethod === 'Bank Transfer' ||
+                answers.paymentMethodStep?.paymentMethodForm?.paymentMethod === 'Credit Card',
             formGroups: [
                 {
                     title: '5. Discount details',
@@ -167,12 +164,9 @@ export class WizardGeneratorVisibleSummaryBranchingExampleComponent implements O
             name: 'Summary',
             id: 'summary',
             summary: true,
-            when: (_completedSteps, answers) => {
-                return (
-                    answers.paymentMethodStep?.paymentMethodForm?.paymentMethod === 'Bank Transfer' ||
-                    answers.paymentMethodStep?.paymentMethodForm?.paymentMethod === 'Credit Card'
-                );
-            }
+            when: (_completedSteps, answers) =>
+                answers.paymentMethodStep?.paymentMethodForm?.paymentMethod === 'Bank Transfer' ||
+                answers.paymentMethodStep?.paymentMethodForm?.paymentMethod === 'Credit Card'
         }
     ];
 
@@ -201,12 +195,9 @@ export class WizardGeneratorVisibleSummaryBranchingExampleComponent implements O
                 }
             })
             .afterClosed.pipe(takeUntil(this._onDestroy$))
-            .subscribe(
-                (wizardValue: WizardGeneratorFormsValue) => {
-                    this.wizardValue = wizardValue;
-                },
-                () => {}
-            );
+            .subscribe((wizardValue: WizardGeneratorFormsValue) => {
+                this.wizardValue = wizardValue;
+            });
     }
 
     wizardFinished(wizardValue: WizardGeneratorFormsValue): void {

@@ -1,19 +1,23 @@
 import { WizardGeneratorPO } from '../pages/wizard-generator.po';
 import {
     browserIsFirefox,
+    browserIsSafari,
     click,
     currentPlatformName,
+    getCurrentUrl,
     getElementArrayLength,
     getElementClass,
     getText,
     getValue,
     isElementClickable,
     isElementDisplayed,
+    pause,
     refreshPage,
     scrollIntoView,
     sendKeys,
     setValue,
-    waitForElDisplayed
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 import {
     firstAdress,
@@ -22,11 +26,13 @@ import {
     cardDetails,
     cardDetails2,
     textArr,
-    errorMessageText
+    errorMessageText,
+    password,
+    newPassword
 } from '../fixtures/testData/wizard-generator';
 
 describe('Wizard generator test suite', () => {
-    const WizardGeneratorPage = new WizardGeneratorPO();
+    const wizardGeneratorPage = new WizardGeneratorPO();
     const {
         defaultExample,
         customizableGeneratorExample,
@@ -56,21 +62,24 @@ describe('Wizard generator test suite', () => {
         dialogBarButton,
         selectControl,
         errorMessage
-    } = WizardGeneratorPage;
+    } = wizardGeneratorPage;
+
+    if (browserIsSafari()) {
+        // skip due to unknown error where browser closes halfway through the test
+        return;
+    }
 
     beforeAll(() => {
-        WizardGeneratorPage.open();
+        wizardGeneratorPage.open();
     }, 1);
 
-    afterEach(() => {
-        waitForElDisplayed(WizardGeneratorPage.title);
+    beforeEach(() => {
+        refreshPage();
+        waitForPresent(wizardGeneratorPage.root);
+        waitForElDisplayed(wizardGeneratorPage.title);
     }, 1);
 
     describe('Default example', () => {
-        beforeEach(() => {
-            refreshPage();
-            waitForElDisplayed(WizardGeneratorPage.title);
-        }, 1);
         describe('Basic way', () => {
             it('should check basic way', () => {
                 completeFirstStep(defaultExample);
@@ -91,7 +100,7 @@ describe('Wizard generator test suite', () => {
             it('should check third step and skip 4th step', () => {
                 completeFirstStep(defaultExample);
                 completeSecondStep(defaultExample);
-                completeThirdStep(defaultExample);
+                completeThirdStep(defaultExample, 4);
                 expect(getElementClass(defaultExample + step, 2)).toContain('completed', 'third step is not completed');
                 expect(getElementClass(defaultExample + step, 3)).toContain('completed', '4th step is not completed');
             });
@@ -99,15 +108,32 @@ describe('Wizard generator test suite', () => {
             it('should check results', () => {
                 completeFirstStep(defaultExample);
                 completeSecondStep(defaultExample);
-                completeThirdStep(defaultExample);
+                completeThirdStep(defaultExample, 4);
                 checkResults(defaultExample);
             });
+
             it('should check editing', () => {
                 completeFirstStep(defaultExample);
                 completeSecondStep(defaultExample);
-                completeThirdStep(defaultExample);
+                completeThirdStep(defaultExample, 4);
                 checkResults(defaultExample);
-                checkEditing(defaultExample);
+                checkEditing(defaultExample, 5);
+            });
+
+            it('should check editing password', () => {
+                completeFirstStep(defaultExample);
+                completeSecondStep(defaultExample);
+                completeThirdStep(defaultExample, 4);
+                checkResults(defaultExample);
+                click(defaultExample + editButton, 1);
+                setValue(defaultExample + input, newPassword, 3);
+                click(nextStepBtn);
+                const newPasswordLength = newPassword.length;
+                let stars = '';
+                for (let i = 0; i < newPasswordLength; i++) {
+                    stars += '*';
+                }
+                expect(getText(defaultExample + formLabel, 4).trim()).toEqual(stars);
             });
         });
 
@@ -121,7 +147,7 @@ describe('Wizard generator test suite', () => {
             });
 
             it('should check validation third required field', () => {
-                checkThirdStepRequiredValidation(defaultExample);
+                checkThirdStepRequiredValidation(defaultExample, 4);
             });
 
             it('should check navigation by steps', () => {
@@ -165,15 +191,11 @@ describe('Wizard generator test suite', () => {
                 );
 
                 checkResults(responsiveExample);
+                checkEditing(responsiveExample);
             });
         });
 
         describe('Other cases', () => {
-            beforeEach(() => {
-                refreshPage();
-                waitForElDisplayed(WizardGeneratorPage.title);
-            }, 1);
-
             it('should check validation first required field', () => {
                 checkFirstRequiredFieldValidation(responsiveExample);
             });
@@ -238,11 +260,6 @@ describe('Wizard generator test suite', () => {
             });
         });
         describe('Other cases', () => {
-            beforeEach(() => {
-                refreshPage();
-                waitForElDisplayed(WizardGeneratorPage.title);
-            }, 1);
-
             it('should check validation first required field', () => {
                 checkFirstRequiredFieldValidation(visibleSummaryExample);
             });
@@ -259,11 +276,9 @@ describe('Wizard generator test suite', () => {
                 checkNavigationBySteps(visibleSummaryExample);
             });
 
-            it('should check navigation by scrolling', () => {
-                // skipped for FF on Windows due to https://github.com/SAP/fundamental-ngx/issues/7046
-                if (!browserIsFirefox() && currentPlatformName() !== 'Windows') {
-                    checkNavigationByScrolling(visibleSummaryExample);
-                }
+            xit('should check navigation by scrolling', () => {
+                // skipped due to https://github.com/SAP/fundamental-ngx/issues/7046
+                checkNavigationByScrolling(visibleSummaryExample);
             });
         });
     });
@@ -305,10 +320,6 @@ describe('Wizard generator test suite', () => {
             });
         });
         describe('Other cases', () => {
-            beforeEach(() => {
-                refreshPage();
-                waitForElDisplayed(WizardGeneratorPage.title);
-            }, 1);
             it('should check validation first required field', () => {
                 checkFirstRequiredFieldValidation(externalNavigationExample);
             });
@@ -365,10 +376,6 @@ describe('Wizard generator test suite', () => {
         });
 
         describe('Other cases', () => {
-            beforeEach(() => {
-                refreshPage();
-                waitForElDisplayed(WizardGeneratorPage.title);
-            }, 1);
             it('should check validation first required field', () => {
                 checkFirstRequiredFieldValidation(customizableGeneratorExample);
             });
@@ -427,7 +434,7 @@ describe('Wizard generator test suite', () => {
         describe('Other cases', () => {
             beforeEach(() => {
                 refreshPage();
-                waitForElDisplayed(WizardGeneratorPage.title);
+                waitForElDisplayed(wizardGeneratorPage.title);
             }, 1);
 
             it('should check validation first required field', () => {
@@ -446,48 +453,55 @@ describe('Wizard generator test suite', () => {
                 checkNavigationBySteps(summaryObjectsExample);
             });
 
-            it('should check navigation by scrolling', () => {
-                // skipped for FF on Windows due to https://github.com/SAP/fundamental-ngx/issues/7046
-                if (!browserIsFirefox() && currentPlatformName() !== 'Windows') {
-                    checkNavigationByScrolling(summaryObjectsExample);
-                }
+            xit('should check navigation by scrolling', () => {
+                // skipped due to https://github.com/SAP/fundamental-ngx/issues/7046
+                checkNavigationByScrolling(summaryObjectsExample);
             });
         });
     });
 
     describe('On change example', () => {
-        beforeEach(() => {
-            refreshPage();
-            waitForElDisplayed(WizardGeneratorPage.title);
-        }, 1);
         it('should check basic way', () => {
             scrollIntoView(onChangeExample);
             setValue(onChangeExample + input, name);
             click(onChangeExample + nextStepBtn);
+            pause(getPauseTime());
             expect(getElementClass(onChangeExample + step, 1)).toContain('current', 'you not moved to second step');
             expect(getElementClass(onChangeExample + step, 0)).toContain('completed', 'first step not completed');
             const defaultValue = getValue(onChangeExample + input, 1);
             click(onChangeExample + nextStepBtn, 1);
-            expect(getText(onChangeExample + formLabel, 0)).toEqual(name, 'value is not equal entered value');
-            expect(getText(onChangeExample + formLabel, 1)).toEqual(defaultValue, 'value is not equal entered value');
+            pause(getPauseTime());
+            expect(getText(onChangeExample + formLabel, 0).trim()).toEqual(name, 'value is not equal entered value');
+            expect(getText(onChangeExample + formLabel, 1).trim()).toEqual(
+                defaultValue,
+                'value is not equal entered value'
+            );
             click(onChangeExample + editButton);
+            pause(getPauseTime());
             setValue(onChangeExample + input, cardDetails2);
             click(onChangeExample + nextStepBtn);
-            expect(getText(onChangeExample + formLabel, 0)).toEqual(cardDetails2, 'value is not equal changed value');
+            pause(getPauseTime());
+            expect(getText(onChangeExample + formLabel, 0).trim()).toEqual(
+                cardDetails2,
+                'value is not equal changed value'
+            );
         });
 
         it('should check required fields validation', () => {
             scrollIntoView(onChangeExample);
             click(onChangeExample + nextStepBtn);
+            pause(getPauseTime());
             expect(getElementClass(onChangeExample + input)).toContain('error', 'error is not appeared');
             setValue(onChangeExample + input, name);
             click(onChangeExample + nextStepBtn);
+            pause(getPauseTime());
             // clear default value
             const inputValue = getValue(onChangeExample + input, 1);
             click(onChangeExample + input, 1);
             for (let i = 0; i < inputValue.length; i++) {
                 sendKeys('Backspace');
             }
+            pause(getPauseTime());
             expect(getElementClass(onChangeExample + input, 1)).toContain('error', 'error is not appeared');
         });
 
@@ -511,20 +525,15 @@ describe('Wizard generator test suite', () => {
     });
 
     describe('dialog example', () => {
-        beforeEach(() => {
-            refreshPage();
-            waitForElDisplayed(WizardGeneratorPage.title);
-        }, 1);
-
         describe('Basic way', () => {
             it('should check basic way', () => {
-                click(dialogExample + button);
+                openDialog(dialogExample);
                 completeFirstStep(dialog);
                 expect(getElementClass(dialog + step, 0)).toContain('completed', 'first step is not completed');
                 expect(getElementClass(dialog + step, 1)).toContain('current', 'you not moved to second step');
             });
             it('should check second step', () => {
-                click(dialogExample + button);
+                openDialog(dialogExample);
                 completeFirstStep(dialog);
                 completeSecondStep(dialog);
                 expect(getElementClass(dialog + step, 1)).toContain('completed', 'first step is not completed');
@@ -532,7 +541,7 @@ describe('Wizard generator test suite', () => {
             });
 
             it('should check third step', () => {
-                click(dialogExample + button);
+                openDialog(dialogExample);
                 completeFirstStep(dialog);
                 completeSecondStep(dialog);
                 completeThirdStep(dialog);
@@ -541,7 +550,7 @@ describe('Wizard generator test suite', () => {
             });
 
             it('should check results', () => {
-                click(dialogExample + button);
+                openDialog(dialogExample);
                 completeFirstStep(dialog);
                 completeSecondStep(dialog);
                 completeThirdStep(dialog);
@@ -549,7 +558,7 @@ describe('Wizard generator test suite', () => {
             });
 
             it('should check editing', () => {
-                click(dialogExample + button);
+                openDialog(dialogExample);
                 completeFirstStep(dialog);
                 completeSecondStep(dialog);
                 completeThirdStep(dialog);
@@ -560,22 +569,22 @@ describe('Wizard generator test suite', () => {
 
         describe('Other cases', () => {
             it('should check validation first required field', () => {
-                click(dialogExample + button);
+                openDialog(dialogExample);
                 checkFirstRequiredFieldValidation(dialog);
             });
 
             it('should check validation second required field', () => {
-                click(dialogExample + button);
+                openDialog(dialogExample);
                 checkSecondStepRequiredValidation(dialog);
             });
 
             it('should check validation third required field', () => {
-                click(dialogExample + button);
+                openDialog(dialogExample);
                 checkThirdStepRequiredValidation(dialog);
             });
 
             it('should check navigation by steps', () => {
-                click(dialogExample + button);
+                openDialog(dialogExample);
                 checkNavigationBySteps(dialog);
             });
 
@@ -589,8 +598,8 @@ describe('Wizard generator test suite', () => {
         describe('Basic way', () => {
             it('should check basic way', () => {
                 refreshPage();
-                waitForElDisplayed(WizardGeneratorPage.title);
-                click(customizableDialogExample + button);
+                waitForElDisplayed(wizardGeneratorPage.title);
+                openDialog(customizableDialogExample);
                 completeFirstStep(dialog);
                 expect(getElementClass(dialog + step, 0)).toContain('completed', 'first step is not completed');
                 expect(getElementClass(dialog + step, 1)).toContain('current', 'you not moved to second step');
@@ -607,27 +616,23 @@ describe('Wizard generator test suite', () => {
             });
         });
         describe('Other cases', () => {
-            beforeEach(() => {
-                refreshPage();
-                waitForElDisplayed(WizardGeneratorPage.title);
-            }, 1);
             it('should check validation first required field', () => {
-                click(customizableDialogExample + button);
+                openDialog(customizableDialogExample);
                 checkFirstRequiredFieldValidation(dialog);
             });
 
             it('should check validation second required field', () => {
-                click(customizableDialogExample + button);
+                openDialog(customizableDialogExample);
                 checkSecondStepRequiredValidation(dialog);
             });
 
             it('should check validation third required field', () => {
-                click(customizableDialogExample + button);
+                openDialog(customizableDialogExample);
                 checkThirdStepRequiredValidation(dialog);
             });
 
             it('should check navigation by steps', () => {
-                click(customizableDialogExample + button);
+                openDialog(customizableDialogExample);
                 checkNavigationBySteps(dialog);
             });
 
@@ -642,32 +647,42 @@ describe('Wizard generator test suite', () => {
             it('should check basic way', () => {
                 refreshPage();
                 scrollIntoView(branchingExample);
-                click(branchingExample + button);
+                openDialog(branchingExample, 1500);
                 completeFirstStep(dialog);
+                pause(getPauseTime());
                 expect(getElementClass(dialog + step, 0)).toContain('completed', 'first step is not completed');
                 expect(getElementClass(dialog + step, 1)).toContain('current', 'you not moved to second step');
 
                 completeSecondStep(dialog);
+                pause(getPauseTime());
                 expect(getElementClass(dialog + step, 1)).toContain('completed', 'second step is not completed');
                 expect(getElementClass(dialog + step, 2)).toContain('current', 'you not moved to third step');
 
                 click(dialog + nextStepBtn2);
                 click(dialog + select);
+                pause(getPauseTime());
                 const paymentMethod = getText(listItemText);
                 textArr.splice(3, 0, paymentMethod);
 
                 click(listItem);
+                pause(getPauseTime());
                 click(dialog + nextStepBtn2);
+                pause(getPauseTime());
                 expect(getElementClass(dialog + step, 2)).toContain('completed', 'third step is not completed');
                 expect(getElementClass(dialog + step, 3)).toContain('current', 'you are not moved to 5th step');
 
                 setValue(dialog + input, cardDetails);
+                pause(getPauseTime());
                 click(dialog + nextStepBtn2);
                 click(dialog + nextStepBtn2);
+                pause(getPauseTime());
                 expect(getElementClass(dialog + step, 4)).toContain('completed', '5th step is not completed');
 
                 for (let i = 1; i < 6; i++) {
-                    expect(getText(dialog + formLabel, i)).toBe(textArr[i - 1], 'value is not equal entered value');
+                    expect(getText(dialog + formLabel, i).trim()).toBe(
+                        textArr[i - 1],
+                        'value is not equal entered value'
+                    );
                 }
                 // remove added value because it can force fail next result check
                 textArr.splice(3, 1);
@@ -679,33 +694,36 @@ describe('Wizard generator test suite', () => {
             });
         });
         describe('Other cases', () => {
-            beforeEach(() => {
-                refreshPage();
-                waitForElDisplayed(WizardGeneratorPage.title);
-            }, 1);
             it('should check required fields validation', () => {
-                click(branchingExample + button);
+                openDialog(branchingExample, 1500);
                 click(dialog + nextStepBtn2);
                 expect(getElementClass(dialog + selectControl)).toContain('error', 'error is not appeared');
                 click(dialog + select);
+                pause(getPauseTime());
                 click(listItem);
                 click(dialog + nextStepBtn2);
                 click(dialog + nextStepBtn2);
+                pause(getPauseTime());
                 expect(getElementClass(dialog + input)).toContain('error', 'error is not appeared');
+                pause(getPauseTime());
                 setValue(dialog + input, name);
                 setValue(dialog + input, firstAdress, 1);
                 click(dialog + nextStepBtn2);
                 click(dialog + nextStepBtn2);
+                pause(getPauseTime());
                 expect(getElementClass(dialog + selectControl)).toContain('error', 'error is not appeared');
                 click(dialog + select);
+                pause(getPauseTime());
                 click(listItem);
+                pause(getPauseTime());
                 click(dialog + nextStepBtn2);
                 click(dialog + nextStepBtn2);
+                pause(getPauseTime());
                 expect(getElementClass(dialog + input)).toContain('error', 'error is not appeared');
             });
 
             it('should check navigation by steps', () => {
-                click(branchingExample + button);
+                openDialog(branchingExample);
                 checkNavigationBySteps(dialog);
             });
 
@@ -718,48 +736,46 @@ describe('Wizard generator test suite', () => {
     describe('responsive dialog example', () => {
         describe('Basic way', () => {
             it('should check basic way', () => {
-                refreshPage();
-                waitForElDisplayed(WizardGeneratorPage.title);
                 scrollIntoView(responsiveDialogExample);
-                click(responsiveDialogExample + button);
+                openDialog(responsiveDialogExample, 1500);
+
                 completeFirstStep(dialog);
+                pause(getPauseTime());
                 expect(getElementClass(dialog + step, 0)).toContain('completed', 'first step is not completed');
                 expect(getElementClass(dialog + step, 1)).toContain('current', 'you not moved to second step');
 
                 completeSecondStep(dialog);
+                pause(getPauseTime());
                 expect(getElementClass(dialog + step, 1)).toContain('completed', 'second step is not completed');
                 expect(getElementClass(dialog + step, 2)).toContain('current', 'you not moved to third step');
 
                 completeThirdStep(dialog);
+                pause(getPauseTime());
                 expect(getElementClass(dialog + step, 2)).toContain('completed', 'first step is not completed');
                 expect(getElementClass(dialog + step, 3)).toContain('completed', '4th step is not completed');
-
+                pause(getPauseTime());
                 checkResults(dialog);
             });
         });
 
         describe('Other cases', () => {
-            beforeEach(() => {
-                refreshPage();
-                waitForElDisplayed(WizardGeneratorPage.title);
-            }, 1);
             it('should check validation first required field', () => {
                 click(responsiveDialogExample + button);
                 checkFirstRequiredFieldValidation(dialog);
             });
 
             it('should check validation second required field', () => {
-                click(responsiveDialogExample + button);
+                openDialog(responsiveDialogExample, 1500);
                 checkSecondStepRequiredValidation(dialog);
             });
 
             it('should check validation third required field', () => {
-                click(responsiveDialogExample + button);
+                openDialog(responsiveDialogExample, 1500);
                 checkThirdStepRequiredValidation(dialog);
             });
 
             it('should check navigation by steps', () => {
-                click(responsiveDialogExample + button);
+                openDialog(responsiveDialogExample, 1500);
                 checkNavigationBySteps(dialog);
             });
 
@@ -784,24 +800,28 @@ describe('Wizard generator test suite', () => {
         selector === externalNavigationExample || selector === customizableGeneratorExample
             ? click(selector + nextStepBtn2)
             : click(selector + nextStepBtn);
+        pause(getPauseTime());
         expect(getElementClass(selector + step, 1)).toContain('current', 'second step is not current');
         expect(getElementClass(selector + step, 0)).toContain('completed', 'first step is not completed');
         scrollIntoView(selector + stepContainer);
         scrollIntoView(selector + step);
+        pause(getPauseTime());
         expect(getElementClass(selector + step, 0)).toContain('current', 'step did not back to first');
         expect(getElementClass(selector + step, 1)).toContain('upcoming', 'step did not back to first');
     }
 
     function checkNavigationByButtonsInDialog(selector: string): void {
         scrollIntoView(selector);
-        click(selector + button);
+        openDialog(selector);
         click(dialog + select);
         click(listItem);
         click(dialog + nextStepBtn2);
+        pause(getPauseTime());
         expect(getElementArrayLength(dialogBarButton)).toBe(3, 'back button is appeared');
         expect(getElementClass(dialog + step, 1)).toContain('current', 'second step is not current');
         expect(getElementClass(dialog + step, 0)).toContain('completed', 'first step is not completed');
         click(dialogBarButton);
+        pause(getPauseTime());
         expect(getElementClass(dialog + step, 0)).toContain('current', 'step did not back to first');
         expect(getElementClass(dialog + step, 1)).toContain('upcoming', 'step did not back to first');
         expect(getElementArrayLength(dialogBarButton)).toBe(2, 'back button is not hidden');
@@ -826,9 +846,11 @@ describe('Wizard generator test suite', () => {
         selector === externalNavigationExample || selector === customizableGeneratorExample || selector === dialog
             ? click(selector + nextStepBtn2)
             : click(selector + nextStepBtn);
+        pause(getPauseTime());
         expect(getElementClass(selector + step, 1)).toContain('current', 'you not moved to second step');
         expect(getElementClass(selector + step, 0)).toContain('completed', 'first step is not completed');
         click(selector + '.fd-wizard__step-container');
+        pause(getPauseTime());
         expect(getElementClass(selector + step, 0)).toContain(
             'current',
             'you did not get back to first step by click on step tab'
@@ -866,15 +888,16 @@ describe('Wizard generator test suite', () => {
         ) {
             click(selector + nextStepBtn2);
         }
-
+        pause(getPauseTime());
         for (let i = 0; i < 2; i++) {
             click(selector + input, i);
+            pause(getPauseTime());
             expect(isElementDisplayed(errorMessage)).toBe(true);
-            expect(getText(errorMessage)).toBe(errorMessageText);
+            expect(getText(errorMessage).trim()).toBe(errorMessageText);
         }
     }
 
-    function checkThirdStepRequiredValidation(selector: string): void {
+    function checkThirdStepRequiredValidation(selector: string, i: number = 3): void {
         completeFirstStep(selector);
         completeSecondStep(selector);
         if (
@@ -883,7 +906,7 @@ describe('Wizard generator test suite', () => {
             selector !== dialog
         ) {
             click(selector + nextStepBtn, 2);
-            click(selector + input, 3);
+            click(selector + input, i);
         }
         if (
             selector === externalNavigationExample ||
@@ -894,7 +917,7 @@ describe('Wizard generator test suite', () => {
             click(selector + input);
         }
         expect(isElementDisplayed(errorMessage)).toBe(true);
-        expect(getText(errorMessage)).toBe(errorMessageText);
+        expect(getText(errorMessage).trim()).toBe(errorMessageText);
     }
 
     function completeFirstStep(selector: string): void {
@@ -920,12 +943,16 @@ describe('Wizard generator test suite', () => {
         ) {
             click(selector + nextStepBtn2);
         }
+        pause(getPauseTime());
     }
 
     function completeSecondStep(selector: string): void {
         setValue(selector + input, name);
         setValue(selector + input, firstAdress, 1);
         setValue(selector + input, secondAdress, 2);
+        if (selector === defaultExample) {
+            setValue(defaultExample + input, password, 3);
+        }
         if (
             selector !== externalNavigationExample &&
             selector !== customizableGeneratorExample &&
@@ -940,9 +967,10 @@ describe('Wizard generator test suite', () => {
         ) {
             click(selector + nextStepBtn2);
         }
+        pause(getPauseTime());
     }
 
-    function completeThirdStep(selector: string): void {
+    function completeThirdStep(selector: string, i: number = 3): void {
         if (
             selector === externalNavigationExample ||
             selector === customizableGeneratorExample ||
@@ -957,24 +985,52 @@ describe('Wizard generator test suite', () => {
             selector !== customizableGeneratorExample &&
             selector !== dialog
         ) {
-            setValue(selector + input, cardDetails, 3);
+            pause(getPauseTime());
+            setValue(selector + input, cardDetails, i);
             click(selector + nextStepBtn, 2);
+            pause(getPauseTime());
             click(selector + nextStepBtn, 3);
         }
+        pause(getPauseTime());
     }
 
     function checkResults(selector: string): void {
+        if (selector === defaultExample) {
+            const passwordLength = password.length;
+            let stars = '';
+            for (let i = 0; i < passwordLength; i++) {
+                stars += '*';
+            }
+            textArr.splice(3, 0, stars);
+        }
         for (let i = 1; i < 5; i++) {
-            expect(getText(selector + formLabel, i)).toBe(textArr[i - 1]);
+            expect(getText(selector + formLabel, i).trim()).toBe(textArr[i - 1]);
+        }
+        if (selector === defaultExample) {
+            textArr.splice(3, 1);
         }
     }
 
-    function checkEditing(selector: string): void {
+    function checkEditing(selector: string, i: number = 4): void {
         click(selector + editButton, 2);
         setValue(selector + input, cardDetails2);
         selector === externalNavigationExample || selector === customizableGeneratorExample || selector === dialog
             ? click(selector + nextStepBtn2)
             : click(selector + nextStepBtn);
-        expect(getText(selector + formLabel, 4)).toBe(cardDetails2, 'current value is not equal changed value');
+        pause(getPauseTime());
+        expect(getText(selector + formLabel, i).trim()).toBe(cardDetails2, 'current value is not equal changed value');
+    }
+
+    function getPauseTime(): number {
+        if (getCurrentUrl().includes('localhost') || getCurrentUrl().includes('web.app')) {
+            return 500;
+        } else {
+            return 0;
+        }
+    }
+
+    function openDialog(selector: string, pauseTime: number = getPauseTime()): void {
+        click(selector + button);
+        pause(pauseTime);
     }
 });

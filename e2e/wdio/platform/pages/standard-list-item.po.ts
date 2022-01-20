@@ -39,6 +39,9 @@ export class StandardListItemPo extends BaseComponentPo {
     sMultiAvatar = 'fdp-platform-standard-list-item-with-selection-example fd-avatar';
     sMultiToolbar = 'fdp-platform-standard-list-item-with-selection-example fd-toolbar';
     sMultiCheckbox = 'fdp-platform-standard-list-item-with-selection-example fd-checkbox';
+    // navigation indicator with multiselect examples
+    sNavList = 'fdp-platform-standard-list-item-with-navigation-example li';
+    sNavCheckbox = 'fdp-platform-standard-list-item-with-navigation-example fd-checkbox';
     // inverted secondary types examples
     sInvtAttr = 'fdp-standard-list-item-with-inverted-secondary-type-example fdp-list';
     sInvtList = 'fdp-standard-list-item-with-inverted-secondary-type-example li';
@@ -47,11 +50,11 @@ export class StandardListItemPo extends BaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
-        waitForPresent(this.sNoBorderList);
+        waitForPresent(this.root);
+        waitForElDisplayed(this.title);
     }
 
-    getScreenshotFolder(): object {
+    getScreenshotFolder(): Record<string, any> {
         return super.getScreenshotFolder(this.url);
     }
 

@@ -18,15 +18,16 @@ import { takeUntil } from 'rxjs/operators';
 
 import { DATE_TIME_FORMATS, DateTimeFormats, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import { SpecialDayRule } from '@fundamental-ngx/core/shared';
-import { compareObjects } from '@fundamental-ngx/core/utils';
+import equal from 'fast-deep-equal';
 
 import { DateRange } from '../../models/date-range';
 import { CalendarCurrent } from '../../models/calendar-current';
 import { ActiveCalendarDayCellStrategy as CalendarActiveDayCellStrategy, CalendarDay } from '../../models/calendar-day';
 
-import { CalendarType, DaysOfWeek } from '../../calendar.component';
+import { CalendarType, DaysOfWeek } from '../../types';
 import { CalendarService } from '../../calendar.service';
 import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
+import { FocusableCalendarView } from '../../models/common';
 
 /** Component representing the day view of the calendar. */
 @Component({
@@ -40,11 +41,11 @@ import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
     },
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy {
+export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy, FocusableCalendarView {
     /** Currently displayed month and year for days */
     @Input()
     set currentlyDisplayed(currentlyDisplayed: CalendarCurrent) {
-        if (!compareObjects(currentlyDisplayed, this._currentlyDisplayed)) {
+        if (!equal(currentlyDisplayed, this._currentlyDisplayed)) {
             this._currentlyDisplayed = currentlyDisplayed;
             this._buildDayViewGrid();
         }
@@ -200,27 +201,21 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
      * @param date date type
      */
     @Input()
-    disableFunction = function (date: D): boolean {
-        return false;
-    };
+    disableFunction: (date: D) => boolean = () => false;
 
     /**
      * Function used to disable certain dates in the calendar for the range start selection.
      * @param date date representation
      */
     @Input()
-    disableRangeStartFunction = function (date: D): boolean {
-        return false;
-    };
+    disableRangeStartFunction: (date: D) => boolean = () => false;
 
     /**
      * Function used to disable certain dates in the calendar for the range end selection.
      * @param date date representation
      */
     @Input()
-    disableRangeEndFunction = function (date: D): boolean {
-        return false;
-    };
+    disableRangeEndFunction: (date: D) => boolean = () => false;
 
     /** @hidden */
     constructor(
@@ -759,9 +754,9 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
         const dateNames = this._dateTimeAdapter.getDateNames();
         const isPast = this._dateTimeAdapter.compareDate(date, this._dateTimeAdapter.today()) < 0;
         const day: CalendarDay<D> = {
-            date: date,
+            date,
             label: dateNames[dayOfMonth - 1],
-            weekDay: weekDay,
+            weekDay,
             weekend: this._isWeekendDay(weekDay),
             ariaLabel: this._dateTimeAdapter.format(date, this._dateTimeFormats.display.dateA11yLabel),
             specialNumber: this._getSpecialDay(date),
