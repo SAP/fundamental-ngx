@@ -48,7 +48,7 @@ export class ShellbarCollapsibleExampleComponent {
     ];
 
     user: ShellbarUser = {
-        initials: 'WW',
+        fullName: 'William Willson',
         colorAccent: 1
     };
 
