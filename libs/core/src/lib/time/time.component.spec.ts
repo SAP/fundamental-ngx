@@ -1,3 +1,4 @@
+import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 
@@ -5,6 +6,7 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
 import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { TimeComponent, TimeModule } from '@fundamental-ngx/core/time';
 import { PipeModule } from '@fundamental-ngx/core/utils';
+import { runValueAccessorTests } from 'ngx-cva-test-suite';
 
 import { Meridian } from './models';
 
@@ -83,4 +85,35 @@ describe('TimeComponent', () => {
         component.handleMeridianChange(Meridian.PM);
         expect(component.time.hour).toBe(15);
     });
+});
+
+@Component({
+    template: `<fd-time></fd-time>`
+})
+class TimePickerHostComponent {
+    @ViewChild(TimeComponent) picker: TimeComponent<FdDate>;
+}
+runValueAccessorTests<TimeComponent<FdDate>, TimePickerHostComponent>({
+    component: TimeComponent,
+    testModuleMetadata: {
+        imports: [TimeModule, FdDatetimeModule],
+        declarations: [TimePickerHostComponent]
+    },
+    supportsOnBlur: true,
+    hostTemplate: {
+        getTestingComponent: (fixture) => fixture.componentInstance.picker,
+        hostComponent: TimePickerHostComponent
+    },
+    nativeControlSelector: 'fd-time',
+    internalValueChangeSetter: (fixture, value: FdDate) => {
+        // in this test values are being changed by minute
+        fixture.componentInstance.picker.handleMinuteChange(value.minute);
+    },
+    getComponentValue: (fixture) => fixture.componentInstance.picker.time,
+    resetCustomValue: { value: new FdDate().setTime(0, 0, 0) },
+    getValues: () => [
+        new FdDate(2021, 10, 10).setTime(8, 16, 0),
+        new FdDate(2021, 10, 10).setTime(8, 17, 0),
+        new FdDate(2021, 10, 10).setTime(8, 18, 0)
+    ]
 });

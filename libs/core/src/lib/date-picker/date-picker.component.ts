@@ -535,6 +535,9 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
         /** If written value is not defined, null, empty string */
         if (!selected) {
             this._inputFieldDate = '';
+            this._refreshCurrentlyDisplayedCalendarDate(this._dateTimeAdapter.today());
+            this.selectedRangeDate = { start: null, end: null };
+            this.selectedDate = null;
             this._changeDetectionRef.detectChanges();
             return;
         }

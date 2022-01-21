@@ -1,6 +1,6 @@
 import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule, FormGroup, ReactiveFormsModule, FormControl } from '@angular/forms';
-import { Component, ViewChildren, QueryList } from '@angular/core';
+import { Component, ViewChildren, QueryList, ViewChild } from '@angular/core';
 
 import { DatePickerModule } from '@fundamental-ngx/core/date-picker';
 import { ButtonModule } from '@fundamental-ngx/core/button';
@@ -13,6 +13,7 @@ import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { PlatformDatePickerModule } from './date-picker.module';
 import { PlatformDatePickerComponent } from './date-picker.component';
 import { FdpFormGroupModule } from './../form-group/fdp-form.module';
+import { runValueAccessorTests } from 'ngx-cva-test-suite';
 
 @Component({
     selector: 'fdp-test-date-picker',
@@ -246,8 +247,8 @@ describe('TestDatePickerComponent', () => {
 
         // previous input date
         expect(datepicker.fdDatePickerComponent.selectedRangeDate).toEqual({
-            start: new FdDate(2020, 5, 14),
-            end: new FdDate(2020, 5, 24)
+            start: null,
+            end: null
         });
         datepicker.writeValue({
             start: new FdDate(2020, 5, 10),
@@ -409,4 +410,33 @@ describe('TestDatePickerComponent', () => {
         expect(datePickerFormGroup.controls.journeydate.valid).toBeTruthy();
         expect(rangeDatepicker.value).toEqual(rangeDate);
     });
+});
+
+const DATE_PICKER_IDENTIFIER = 'platform-date-picker-unit-test';
+
+@Component({
+    template: `<fdp-date-picker id="${DATE_PICKER_IDENTIFIER}" name="${DATE_PICKER_IDENTIFIER}"></fdp-date-picker>`
+})
+class PlatformDatePickerHostComponent {
+    @ViewChild(PlatformDatePickerComponent) picker: PlatformDatePickerComponent<FdDate>;
+}
+
+runValueAccessorTests<PlatformDatePickerComponent<FdDate>, PlatformDatePickerHostComponent>({
+    component: PlatformDatePickerComponent,
+    testModuleMetadata: {
+        imports: [PlatformDatePickerModule, FdDatetimeModule],
+        declarations: [PlatformDatePickerHostComponent]
+    },
+    hostTemplate: {
+        getTestingComponent: (fixture) => fixture.componentInstance.picker,
+        hostComponent: PlatformDatePickerHostComponent
+    },
+    nativeControlSelector: `fdp-date-picker[id="${DATE_PICKER_IDENTIFIER}"]`,
+    supportsOnBlur: true,
+    internalValueChangeSetter: (fixture, value: FdDate) => {
+        fixture.componentInstance.picker.handleDateChange(value);
+    },
+    resetCustomValue: { value: null },
+    getValues: () => [new FdDate(2021, 9, 5), new FdDate(2021, 10, 5), new FdDate(2021, 11, 5)],
+    getComponentValue: (fixture) => fixture.componentInstance.picker.value
 });

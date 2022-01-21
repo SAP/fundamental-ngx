@@ -11,6 +11,7 @@ import { IconModule } from '@fundamental-ngx/core/icon';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '@fundamental-ngx/core/utils';
+import { runValueAccessorTests } from 'ngx-cva-test-suite';
 
 import { DatePickerModule, DatePickerComponent } from './public_api';
 
@@ -112,7 +113,7 @@ describe('DatePickerComponent', () => {
 
     it('should handle null write value for single mode', () => {
         component.writeValue(null);
-        expect(component.selectedDate).toBeUndefined();
+        expect(component.selectedDate).toBe(null);
         expect(component._inputFieldDate).toBe('');
     });
 
@@ -387,4 +388,31 @@ describe('DatePickerComponent Accessibility', () => {
         fixture.detectChanges();
         expect(document.getElementById(messageId).textContent).toContain('Value state Success');
     });
+});
+
+@Component({
+    template: `<fd-date-picker></fd-date-picker>`
+})
+class DateTimePickerHostComponent {
+    @ViewChild(DatePickerComponent) picker: DatePickerComponent<FdDate>;
+}
+
+runValueAccessorTests<DatePickerComponent<FdDate>, DateTimePickerHostComponent>({
+    component: DatePickerComponent,
+    testModuleMetadata: {
+        imports: [DatePickerModule, FdDatetimeModule],
+        declarations: [DateTimePickerHostComponent]
+    },
+    hostTemplate: {
+        getTestingComponent: (fixture) => fixture.componentInstance.picker,
+        hostComponent: DateTimePickerHostComponent
+    },
+    nativeControlSelector: 'fd-date-picker',
+    supportsOnBlur: true,
+    internalValueChangeSetter: (fixture, value) => {
+        fixture.componentInstance.picker.handleInputChange(value);
+    },
+    resetCustomValue: { value: null },
+    getValues: () => [new FdDate(2021, 9, 5), new FdDate(2021, 10, 5), new FdDate(2021, 11, 5)],
+    getComponentValue: (fixture) => fixture.componentInstance.picker.selectedDate
 });

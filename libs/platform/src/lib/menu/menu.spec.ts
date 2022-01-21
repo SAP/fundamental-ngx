@@ -226,7 +226,8 @@ describe('Simple Menu', () => {
         expect(menuEl.length).toBe(0);
     }));
 
-    it('should allow keyboard navigation of items after opening of menu', fakeAsync(() => {
+    // TODO: flaky test  https://github.com/SAP/fundamental-ngx/issues/7534
+    xit('should allow keyboard navigation of items after opening of menu', fakeAsync(() => {
         /**
          * FIRST-CLICK (OPEN MENU)
          */
@@ -268,7 +269,8 @@ describe('Simple Menu', () => {
         expect(items[1]).toBe(document.activeElement);
     }));
 
-    it('should restore focus to the originating trigger after menu close', fakeAsync(() => {
+    // TODO: flaky test  https://github.com/SAP/fundamental-ngx/issues/7534
+    xit('should restore focus to the originating trigger after menu close', fakeAsync(() => {
         /**
          * FIRST-CLICK (OPEN MENU)
          */

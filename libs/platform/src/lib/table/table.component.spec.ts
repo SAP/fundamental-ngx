@@ -975,7 +975,8 @@ describe('TableComponent internal', () => {
             expect(tableBodyRows.length).toBe(150);
         });
 
-        it('should stop fetching on scroll if currentPage is the last one', async () => {
+        // TODO: flaky test  https://github.com/SAP/fundamental-ngx/issues/7534
+        xit('should stop fetching on scroll if currentPage is the last one', async () => {
             await tableBodyScrollTop(999999); // 100
             await tableBodyScrollTop(999999); // 150
             await tableBodyScrollTop(999999); // 200
