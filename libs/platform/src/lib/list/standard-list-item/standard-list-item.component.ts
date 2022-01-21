@@ -19,7 +19,7 @@ export class StandardListItemComponent extends BaseListItem {
      * @hidden
      * Used to define if contentDensity value is 'compact' or not.
      */
-    isCompact = this._contentDensity === 'compact';
+    isCompact = this._contentDensity !== 'cozy';
 
     /** @hidden */
     constructor(

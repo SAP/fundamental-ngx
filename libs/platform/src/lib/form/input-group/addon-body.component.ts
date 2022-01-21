@@ -24,7 +24,7 @@ export class InputGroupAddonBodyComponent implements OnInit {
 
         this._contentDensity = contentDensity;
 
-        if (contentDensity === 'compact') {
+        if (contentDensity !== 'cozy') {
             this._addClassNameToHostElement(CSS_CLASS_NAME.addonCompact);
         } else {
             this._removeClassNameFromHostElement(CSS_CLASS_NAME.addonCompact);

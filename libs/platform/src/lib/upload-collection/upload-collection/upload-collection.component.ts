@@ -318,12 +318,14 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
         this._trackContentDensityChanges();
     }
 
+    /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.contentDensity) {
             this._contentDensityManuallySet = true;
         }
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();

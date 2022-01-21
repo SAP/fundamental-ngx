@@ -249,14 +249,14 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
      */
     set contentDensity(contentDensity: ContentDensity) {
         this._contentDensity = contentDensity;
-        this._isCompact = contentDensity === 'compact';
+        this._isCompact = contentDensity !== 'cozy';
     }
 
     /**
      * @hidden
      * Used to define if contentDensity value is 'compact' or not.
      */
-    _isCompact = this._contentDensity === 'compact';
+    _isCompact = this._contentDensity !== 'cozy';
 
     /** @hidden */
     protected _dataSource: FdpListDataSource<any>;

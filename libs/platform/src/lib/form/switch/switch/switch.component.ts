@@ -45,7 +45,7 @@ export class SwitchComponent extends BaseInput {
     @Input()
     set contentDensity(contentDensity: ContentDensity) {
         this._contentDensity = contentDensity;
-        this.isCompact = contentDensity === 'compact';
+        this.isCompact = contentDensity !== 'cozy';
     }
 
     /** Whether the switch is semantic */
@@ -75,7 +75,7 @@ export class SwitchComponent extends BaseInput {
      * @hidden
      * Used to define if contentDensity value is 'compact' or not.
      */
-    isCompact = this._contentDensity === 'compact';
+    isCompact = this._contentDensity !== 'cozy';
 
     /** @hidden
      * tracking switch current value

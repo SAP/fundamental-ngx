@@ -106,7 +106,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     @Input()
     set contentDensity(contentDensity: ContentDensity) {
         this._contentDensity = contentDensity;
-        this.isCompact = contentDensity === 'compact';
+        this.isCompact = contentDensity !== 'cozy';
     }
 
     /**
@@ -217,7 +217,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
      * @hidden
      * Whether "contentDensity" is "compact".
      */
-    isCompact: boolean = this._contentDensity === 'compact';
+    isCompact: boolean = this._contentDensity !== 'cozy';
 
     /** @hidden */
     controlTemplate: TemplateRef<any>;

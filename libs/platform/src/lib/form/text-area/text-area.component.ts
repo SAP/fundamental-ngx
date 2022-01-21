@@ -50,7 +50,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     @Input()
     set contentDensity(contentDensity: ContentDensity) {
         this._contentDensity = contentDensity;
-        this.isCompact = contentDensity === 'compact';
+        this.isCompact = contentDensity !== 'cozy';
     }
 
     /**
@@ -153,7 +153,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
      * @hidden
      * Whether "contentDensity" is "compact"
      */
-    isCompact: boolean = this._contentDensity === 'compact';
+    isCompact: boolean = this._contentDensity !== 'cozy';
 
     /** @hidden */
     hasTextExceeded = false;

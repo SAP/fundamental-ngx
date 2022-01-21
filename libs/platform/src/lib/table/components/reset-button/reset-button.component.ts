@@ -29,6 +29,7 @@ export const RESETTABLE_TOKEN = new InjectionToken<Resettable>('Resettable');
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ResetButtonComponent {
+    /** Whether should be displayed in compact mode **/
     @Input() compact: boolean;
 
     constructor(@Inject(RESETTABLE_TOKEN) public resettable: Resettable) {}
