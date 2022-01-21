@@ -14,7 +14,7 @@ import { TAB, DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk
 import { Subscription } from 'rxjs';
 
 import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
-import { AvatarGroupFocusableAvatarDirective } from '@fundamental-ngx/core/avatar-group';
+import { AvatarGroupFocusableAvatarDirective } from './avatar-group-focusable-avatar.directive';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector

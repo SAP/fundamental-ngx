@@ -1,7 +1,8 @@
-import { Directive, ElementRef, Host, Optional, HostBinding, HostListener, Input } from '@angular/core';
+import { Directive, ElementRef, Optional, HostBinding, HostListener, Input, Inject, forwardRef } from '@angular/core';
 import { FocusableOption } from '@angular/cdk/a11y';
 
 import { AvatarGroupOverflowBodyDirective } from './avatar-group-overflow-body.directive';
+import { AvatarGroupInterface } from '../avatar-group.interface';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
@@ -17,7 +18,9 @@ export class AvatarGroupFocusableAvatarDirective implements FocusableOption {
     /** @hidden */
     constructor(
         private readonly _elementRef: ElementRef<HTMLElement>,
-        @Host() @Optional() private readonly _component: AvatarGroupOverflowBodyDirective
+        @Optional()
+        @Inject(forwardRef(() => AvatarGroupOverflowBodyDirective))
+        private readonly _component: AvatarGroupInterface
     ) {}
 
     /** @hidden */

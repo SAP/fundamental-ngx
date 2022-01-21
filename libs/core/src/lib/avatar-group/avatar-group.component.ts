@@ -22,7 +22,8 @@ import { of, Subscription } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
 import { ColorAccent, KeyUtil, RtlService, Size } from '@fundamental-ngx/core/utils';
-import { AvatarGroupItemDirective } from '@fundamental-ngx/core/avatar-group';
+import { AvatarGroupItemDirective } from './directives/avatar-group-item.directive';
+import { AvatarGroupInterface } from './avatar-group.interface';
 
 export type AvatarGroupType = 'group' | 'individual';
 export type AvatarGroupOverflowButtonColor = 'neutral' | 'random' | ColorAccent;
@@ -36,7 +37,7 @@ let avatarGroupCount = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy {
+export class AvatarGroupComponent implements AvatarGroupInterface, OnChanges, OnInit, AfterViewInit, OnDestroy {
     /** Id of the Avatar Group. */
     @Input()
     id = `fd-avatar-group-${avatarGroupCount++}`;

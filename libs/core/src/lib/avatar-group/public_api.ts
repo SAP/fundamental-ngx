@@ -7,3 +7,4 @@ export * from './directives/avatar-group-overflow-body.directive';
 export * from './directives/avatar-group-overflow-item.directive';
 export * from './directives/avatar-group-overflow-button.directive';
 export * from './directives/avatar-group-overflow-button-text.directive';
+export * from './avatar-group.interface';
