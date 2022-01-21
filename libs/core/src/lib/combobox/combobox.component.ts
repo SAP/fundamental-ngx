@@ -240,9 +240,12 @@ export class ComboboxComponent
     @Input()
     displayFn = this._defaultDisplay;
 
-    /** Whether AddOn Button should be focusable, set to false by default */
+    /**
+     * Whether AddOn Button should be focusable
+     * @default true
+     */
     @Input()
-    buttonFocusable = false;
+    buttonFocusable = true;
 
     /** Whether the combobox is readonly. */
     @Input()

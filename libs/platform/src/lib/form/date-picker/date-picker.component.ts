@@ -154,10 +154,11 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     }
 
     /**
-     * Whether AddOn Button should be focusable, set to false by default
+     * Whether AddOn Button should be focusable
+     * @default true
      */
     @Input()
-    buttonFocusable = false;
+    buttonFocusable = true;
 
     /**
      * Special days mark, it can be used by passing array of object with
