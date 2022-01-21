@@ -2,12 +2,12 @@ import 'focus-visible';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ExperimentalFormControlModule } from './form-control/form-control.module';
-import { ExperimentalFormItemModule } from './form-item/form-item.module';
-import { ExperimentalFormLabelModule } from './form-label/form-label.module';
+import { FormControlModule } from './form-control/form-control.module';
+import { FormItemModule } from './form-item/form-item.module';
+import { FormLabelModule } from './form-label/form-label.module';
 
 @NgModule({
     imports: [CommonModule],
-    exports: [ExperimentalFormControlModule, ExperimentalFormItemModule, ExperimentalFormLabelModule]
+    exports: [FormControlModule, FormItemModule, FormLabelModule]
 })
-export class ExperimentalFormModule {}
+export class FormModule {}

@@ -33,4 +33,4 @@ import { DocsThemeService } from '../documentation/services/docs-theme.service';
         { provide: MOBILE_MODE_CONFIG, useValue: POPOVER_MOBILE_CONFIG, multi: true }
     ]
 })
-export class ExperimentalDocumentationModule {}
+export class FnDocumentationModule {}

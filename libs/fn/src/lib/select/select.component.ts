@@ -13,7 +13,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { ExperimentalOptionComponent } from './option/option.component';
+import { OptionComponent } from './option/option.component';
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs';
@@ -29,14 +29,14 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => ExperimentalSelectComponent),
+            useExisting: forwardRef(() => SelectComponent),
             multi: true
         }
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ExperimentalSelectComponent implements AfterContentInit, OnDestroy, ControlValueAccessor {
+export class SelectComponent implements AfterContentInit, OnDestroy, ControlValueAccessor {
     /** Whether or not the select is opened. */
     @Input()
     opened = false;
@@ -57,8 +57,8 @@ export class ExperimentalSelectComponent implements AfterContentInit, OnDestroy,
     editable = false;
 
     /** @hidden */
-    @ContentChildren(ExperimentalOptionComponent)
-    options: QueryList<ExperimentalOptionComponent>;
+    @ContentChildren(OptionComponent)
+    options: QueryList<OptionComponent>;
 
     /** @hidden */
     @ViewChild('selectInput', { read: ElementRef })
@@ -179,7 +179,7 @@ export class ExperimentalSelectComponent implements AfterContentInit, OnDestroy,
     }
 
     /** Function called when an option is clicked. */
-    optionClicked(clickedOption: ExperimentalOptionComponent): void {
+    optionClicked(clickedOption: OptionComponent): void {
         this.options.forEach((option) => {
             option === clickedOption ? (option.selected = true) : (option.selected = false);
         });
@@ -211,7 +211,7 @@ export class ExperimentalSelectComponent implements AfterContentInit, OnDestroy,
     }
 
     /** @hidden */
-    private _getFocusedOption(): ExperimentalOptionComponent {
+    private _getFocusedOption(): OptionComponent {
         let retVal = null;
         this.options.forEach((option) => {
             if (option.elementRef.nativeElement.classList.contains('focus-visible')) {

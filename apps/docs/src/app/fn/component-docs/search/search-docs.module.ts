@@ -6,9 +6,9 @@ import { API_FILES } from '../../api-files';
 import { SearchHeaderComponent } from './search-header/search-header.component';
 import { SearchDocsComponent } from './search-docs.component';
 import { examples } from './examples';
-import { ExperimentalFormModule } from '@fundamental-ngx/fn/form';
-import { ExperimentalSearchModule } from '@fundamental-ngx/fn/search';
-import { ExperimentalButtonModule } from '@fundamental-ngx/fn/button';
+import { FormModule } from '@fundamental-ngx/fn/form';
+import { SearchModule } from '@fundamental-ngx/fn/search';
+import { ButtonModule } from '@fundamental-ngx/fn/button';
 
 const routes: Routes = [
     {
@@ -25,13 +25,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(routes),
-        SharedDocumentationPageModule,
-        ExperimentalFormModule,
-        ExperimentalButtonModule,
-        ExperimentalSearchModule
-    ],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, FormModule, ButtonModule, SearchModule],
     exports: [RouterModule],
     declarations: [examples, SearchHeaderComponent, SearchDocsComponent]
 })

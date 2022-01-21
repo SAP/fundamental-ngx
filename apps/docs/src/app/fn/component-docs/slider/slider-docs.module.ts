@@ -10,8 +10,8 @@ import { SharedDocumentationModule } from '../../../documentation/shared-documen
 import { COMPONENTS } from './examples';
 import { SliderDocsComponent } from './slider-docs.component';
 import { SliderHeaderComponent } from './slider-header/slider-header.component';
-import { ExperimentalSliderModule } from '@fundamental-ngx/fn/slider';
-import { ExperimentalButtonModule } from '@fundamental-ngx/fn/button';
+import { SliderModule } from '@fundamental-ngx/fn/slider';
+import { ButtonModule } from '@fundamental-ngx/fn/button';
 
 const routes: Routes = [
     {
@@ -29,8 +29,8 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationModule,
         SharedDocumentationPageModule,
-        ExperimentalButtonModule,
-        ExperimentalSliderModule,
+        ButtonModule,
+        SliderModule,
         FormsModule
     ],
     exports: [RouterModule],
