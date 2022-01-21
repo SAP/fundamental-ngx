@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.285 (2022-01-21)
+
+
+### Bug Fixes
+
+* **core:** cva unit tests for date & time pickers ([#7536](https://github.com/SAP/fundamental-ngx/issues/7536)) ([73308af](https://github.com/SAP/fundamental-ngx/commit/73308affe1e619011d4b17b745a099a783ca6bd7))
+
 ## 0.33.0-rc.284 (2022-01-20)
 
 ## 0.33.0-rc.283 (2022-01-20)
