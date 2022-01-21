@@ -223,7 +223,7 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
      */
 
     @Input()
-    set previousButtonDisableFunction(disableFunc: () => boolean) {
+    set previousButtonDisableFunction(disableFunc: (date?: D) => boolean) {
         this.previousButtonDisabled = disableFunc();
     }
 
@@ -231,7 +231,7 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
      * Function used to disable next button in the calendar header.
      */
     @Input()
-    set nextButtonDisableFunction(disableFunc: () => boolean) {
+    set nextButtonDisableFunction(disableFunc: (date?: D) => boolean) {
         this.nextButtonDisabled = disableFunc();
     }
 
