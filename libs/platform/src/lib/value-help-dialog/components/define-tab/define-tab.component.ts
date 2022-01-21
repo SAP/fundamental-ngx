@@ -9,6 +9,8 @@ import {
     EventEmitter
 } from '@angular/core';
 
+import { ContentDensity } from '@fundamental-ngx/core/utils';
+
 import {
     VhdIncludedEntity,
     VhdExcludedEntity,
@@ -62,6 +64,10 @@ export class DefineTabComponent extends VhdBaseTab implements OnChanges {
     @Input()
     excluded: ExtendedExcludedEntity[] = [];
 
+    /** The content density for which to render value help dialog */
+    @Input()
+    contentDensity: ContentDensity;
+
     @Input()
     strategyLabels: { [key in keyof (typeof VhdDefineIncludeStrategy | typeof VhdDefineExcludeStrategy)]?: string } =
         {};
@@ -101,6 +107,11 @@ export class DefineTabComponent extends VhdBaseTab implements OnChanges {
 
     /** @hidden */
     _excludeStrategy = [];
+
+    /** @hidden */
+    get isCompact(): boolean {
+        return this.contentDensity !== 'cozy';
+    }
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {

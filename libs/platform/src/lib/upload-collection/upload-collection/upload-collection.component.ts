@@ -20,7 +20,7 @@ import { DialogService, DialogConfig } from '@fundamental-ngx/core/dialog';
 import { TableRowSelectionChangeEvent } from '@fundamental-ngx/platform/table';
 import { isDataSource } from '@fundamental-ngx/platform/shared';
 import { NewFolderComponent } from '../dialogs/new-folder/new-folder.component';
-import { MoveToComponent } from '../dialogs/move-to/move-to.component';
+import { MoveToComponent, MoveToComponentDialogData } from '../dialogs/move-to/move-to.component';
 import { FilesValidatorService, FilesValidatorOutput } from '../services/files-validator.service';
 import {
     UploadCollectionFile,
@@ -515,8 +515,9 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
                 items: this.dataSource.dataProvider.items,
                 currentFolder,
                 movableFolders: movableItems.filter((item) => item.type === 'folder'),
-                maxFilenameLength: this.maxFilenameLength
-            }
+                maxFilenameLength: this.maxFilenameLength,
+                contentDensity: this.contentDensity
+            } as MoveToComponentDialogData
         } as DialogConfig);
 
         dialogRef.afterClosed.pipe(take(1)).subscribe(
