@@ -79,6 +79,13 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     @Input()
     maxHeight = '250px';
 
+    /**
+     * Whether AddOn Button should be focusable
+     * @default true
+     */
+    @Input()
+    buttonFocusable = true;
+
     /** Datasource for suggestion list. */
     @Input()
     set dataSource(value: FdpMultiComboboxDataSource<any>) {

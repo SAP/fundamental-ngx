@@ -159,6 +159,13 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     fillControlMode: PopoverFillMode = 'at-least';
 
     /**
+     * Whether AddOn Button should be focusable
+     * @default true
+     */
+    @Input()
+    buttonFocusable = true;
+
+    /**
      * The trigger events that will open/close the options popover.
      * Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp).
      */
