@@ -71,6 +71,7 @@ apps/docs/src/app/core/component-docs/poster-editor/examples/
 
 ```typescript
 // add imports on top
+// note that raw imports require special path syntax
 import posterEditorComplexExampleHtml from '!./examples/complex/poster-editor-complex-example.component.html?raw';
 import posterEditorComplexExampleTs from '!./examples/complex/poster-editor-complex-example.component.ts?raw';
 
