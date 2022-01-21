@@ -140,7 +140,7 @@ function addDocsComponents(schema: SapComponentSchema): Rule {
     const template = apply(url('./files/docs'), [
         applyTemplates({
             ...names(schema.name),
-            moduleName: getModuleName(schema),
+            moduleName: strings.classify(schema.name),
             projectTag: getProjectTag(schema),
             projectDirName: getProjectDirName(schema),
             startCaseName: startCaseName(schema.name)
@@ -202,7 +202,7 @@ function updateLibraryData(schema: SapComponentSchema): Rule {
             ]);
             // renaming module class name
             const oldModuleName = strings.classify(oldName);
-            replaceContentInFile(tree, newModulePath, [[oldModuleName, getModuleName(schema)]]);
+            replaceContentInFile(tree, newModulePath, [[oldModuleName, strings.classify(schema.name)]]);
             // add component to exports of the created module
             addModuleOrComponentExportToModule(
                 tree,
@@ -218,7 +218,7 @@ function updateLibraryData(schema: SapComponentSchema): Rule {
             addModuleOrComponentExportToModule(
                 tree,
                 `${getLibraryDirectory(schema, false)}/${moduleName}`,
-                getModuleName(schema) + 'Module',
+                strings.classify(schema.name) + 'Module',
                 getImportPath(schema)
             );
 
@@ -253,10 +253,6 @@ function getProjectName(schema: SapComponentSchema): string {
 
 function getImportPath(schema: SapComponentSchema): string {
     return `@fundamental-ngx/${getProjectDirName(schema)}/${schema.name}`;
-}
-
-function getModuleName(schema: SapComponentSchema): string {
-    return strings.classify(`${schema.project}-${schema.name}`);
 }
 
 function getProjectDirName(schema: SapComponentSchema): string {
