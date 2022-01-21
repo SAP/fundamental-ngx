@@ -13,9 +13,8 @@ import { FocusKeyManager } from '@angular/cdk/a11y';
 import { TAB, DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs';
 
-import { KeyUtil, RtlService } from '../../public_api';
-
-import { AvatarGroupFocusableAvatarDirective } from './avatar-group-focusable-avatar.directive';
+import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { AvatarGroupFocusableAvatarDirective } from '@fundamental-ngx/core/avatar-group';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector

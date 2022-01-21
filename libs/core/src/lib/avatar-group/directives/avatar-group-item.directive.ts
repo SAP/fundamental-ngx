@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Host, HostListener } from '@angular/core';
+import { Directive, ElementRef, Host, HostListener, Optional } from '@angular/core';
 import { FocusableOption } from '@angular/cdk/a11y';
 
 import { AvatarGroupComponent } from '../avatar-group.component';
@@ -9,12 +9,13 @@ import { AvatarGroupComponent } from '../avatar-group.component';
     host: { class: 'fd-avatar-group__item' }
 })
 export class AvatarGroupItemDirective implements FocusableOption {
+    /** Item disable state */
     disabled = false;
 
     /** @hidden */
     constructor(
         private readonly _elementRef: ElementRef<HTMLElement>,
-        @Host() private readonly _component: AvatarGroupComponent
+        @Host() @Optional() private readonly _component: AvatarGroupComponent
     ) {}
 
     /** @hidden */
@@ -25,7 +26,9 @@ export class AvatarGroupItemDirective implements FocusableOption {
     /** Handler for mouse events */
     @HostListener('click')
     onClick(): void {
-        this._component._setActiveItem(this);
+        if (this._component) {
+            this._component._setActiveItem(this);
+        }
     }
 
     /** @hidden */

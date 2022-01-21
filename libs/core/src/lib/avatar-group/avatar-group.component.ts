@@ -22,7 +22,7 @@ import { of, Subscription } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
 import { ColorAccent, KeyUtil, RtlService, Size } from '@fundamental-ngx/core/utils';
-import { AvatarGroupItemDirective } from './directives/avatar-group-item.directive';
+import { AvatarGroupItemDirective } from '@fundamental-ngx/core/avatar-group';
 
 export type AvatarGroupType = 'group' | 'individual';
 export type AvatarGroupOverflowButtonColor = 'neutral' | 'random' | ColorAccent;

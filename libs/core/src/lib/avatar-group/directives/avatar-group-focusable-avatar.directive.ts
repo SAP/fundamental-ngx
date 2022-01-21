@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Host, HostBinding, HostListener, Input } from '@angular/core';
+import { Directive, ElementRef, Host, Optional, HostBinding, HostListener, Input } from '@angular/core';
 import { FocusableOption } from '@angular/cdk/a11y';
 
 import { AvatarGroupOverflowBodyDirective } from './avatar-group-overflow-body.directive';
@@ -17,7 +17,7 @@ export class AvatarGroupFocusableAvatarDirective implements FocusableOption {
     /** @hidden */
     constructor(
         private readonly _elementRef: ElementRef<HTMLElement>,
-        @Host() private readonly _component: AvatarGroupOverflowBodyDirective
+        @Host() @Optional() private readonly _component: AvatarGroupOverflowBodyDirective
     ) {}
 
     /** @hidden */
@@ -28,7 +28,9 @@ export class AvatarGroupFocusableAvatarDirective implements FocusableOption {
     /** Handler for mouse events */
     @HostListener('click')
     onClick(): void {
-        this._component._setActiveItem(this);
+        if (this._component) {
+            this._component._setActiveItem(this);
+        }
     }
 
     /** @hidden */

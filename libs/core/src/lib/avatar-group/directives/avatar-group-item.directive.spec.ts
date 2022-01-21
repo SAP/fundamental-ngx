@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 
-import { AvatarGroupModule } from '../avatar-group.module';
+import { AvatarGroupModule } from '@fundamental-ngx/core/avatar-group';
 
 @Component({
     template: `<div #directiveElement fd-avatar-group-item>Avatar Group Item</div>`
