@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.286 (2022-01-21)
+
+
+### Bug Fixes
+
+* component schematic import updates ([#7543](https://github.com/SAP/fundamental-ngx/issues/7543)) ([f29ef8c](https://github.com/SAP/fundamental-ngx/commit/f29ef8c365e9f2930e53fb7bc952842ab4a53717))
+
 ## 0.33.0-rc.285 (2022-01-21)
 
 
