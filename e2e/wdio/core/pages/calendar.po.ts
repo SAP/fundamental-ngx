@@ -18,6 +18,7 @@ export class CalendarPo extends CoreBaseComponentPo {
     mondayCalendar = 'fd-calendar-monday-start-example ';
     internationalCalendar = 'fd-calendar-i18n-example ';
     reactiveCalendarExamples = 'fd-calendar-form-example ';
+    disabledNavigationButtonsCalendar = 'fd-calendar-disabled-navigation-buttons-example';
     singleReactiveCalendar = 'fd-calendar-form-example [caltype="single"] ';
     rangeReactiveCalendar = 'fd-calendar-form-example [caltype="range"] ';
 

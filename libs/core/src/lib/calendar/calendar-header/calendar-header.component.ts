@@ -221,14 +221,19 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
     /**
      * Function used to disable previous button in the calendar header.
      */
+
     @Input()
-    previousButtonDisableFunction: () => boolean = () => false;
+    set previousButtonDisableFunction(disableFunc: () => boolean) {
+        this.previousButtonDisabled = disableFunc();
+    }
 
     /**
      * Function used to disable next button in the calendar header.
      */
     @Input()
-    nextButtonDisableFunction: () => boolean = () => false;
+    set nextButtonDisableFunction(disableFunc: () => boolean) {
+        this.nextButtonDisabled = disableFunc();
+    }
 
     constructor(
         private _calendarI18nLabels: CalendarI18nLabels,
@@ -257,10 +262,6 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
     /** @hidden */
     ngOnInit(): void {
         this._calendarService.leftArrowId = this._prevButtonId;
-
-        this.previousButtonDisabled = this.previousButtonDisableFunction();
-
-        this.nextButtonDisabled = this.nextButtonDisableFunction();
 
         this._calculateMonthNames();
 

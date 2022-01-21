@@ -8,6 +8,8 @@ import calendarMarkHoverHtml from '!./examples/calendar-mark-hover/calendar-mark
 import calendarSpecialSrc from '!./examples/calendar-special-day-example/calendar-special-day-example.component.ts?raw';
 import calendarSpecialHtml from '!./examples/calendar-special-day-example/calendar-special-day-example.component.html?raw';
 import calendarGridSrc from '!./examples/calendar-grid-example/calendar-grid-example.component.ts?raw';
+import calendarDisabledNavigationsSrc from '!./examples/calendar-disabled-navigation-buttons-example/calendar-disabled-navigation-buttons-example.component.ts?raw';
+import calendarDisabledNavigationsHtml from '!./examples/calendar-disabled-navigation-buttons-example/calendar-disabled-navigation-buttons-example.html?raw';
 import calendarGridHtml from '!./examples/calendar-grid-example/calendar-grid-example.component.html?raw';
 import calendarSingleSrc from '!./examples/calendar-single-example.component.ts?raw';
 import calendarMondayStartSrc from '!./examples/calendar-monday-start-example.component.ts?raw';
@@ -160,6 +162,21 @@ specialDay: SpecialDayRule[] = [
             component: 'CalendarGridExampleComponent',
             fileName: 'calendar-grid-example',
             code: calendarGridHtml
+        }
+    ];
+
+    calendarDisabledNavigationButtons: ExampleFile[] = [
+        {
+            language: 'typescript',
+            component: 'CalendarDisabledNavigationButtonsExampleComponent',
+            fileName: 'calendar-disabled-navigation-buttons-example',
+            code: calendarDisabledNavigationsSrc
+        },
+        {
+            language: 'html',
+            component: 'CalendarDisabledNavigationButtonsExampleComponent',
+            fileName: 'calendar-disabled-navigation-buttons-example',
+            code: calendarDisabledNavigationsHtml
         }
     ];
 

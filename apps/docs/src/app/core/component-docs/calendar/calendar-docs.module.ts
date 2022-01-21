@@ -24,6 +24,7 @@ import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { CalendarModule } from '@fundamental-ngx/core/calendar';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { CalendarDisabledNavigationButtonsExampleComponent } from './examples/calendar-disabled-navigation-buttons-example/calendar-disabled-navigation-buttons-example.component';
 
 const routes: Routes = [
     {
@@ -53,6 +54,7 @@ const routes: Routes = [
         CalendarHeaderComponent,
         CalendarRangeExampleComponent,
         CalendarFormExamplesComponent,
+        CalendarDisabledNavigationButtonsExampleComponent,
         CalendarSingleExampleComponent,
         CalendarMondayStartExampleComponent,
         CalendarI18nExampleComponent,
