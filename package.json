@@ -217,7 +217,7 @@
         "postcss-preset-env": "^6.7.0",
         "postcss-url": "^10.1.1",
         "prettier": "2.4.1",
-        "rollup": "2.60.2",
+        "rollup": "2.66.0",
         "standard-version": "9.3.2",
         "ts-node": "9.1.1",
         "typedoc": "0.21.9",
