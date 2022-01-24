@@ -46,6 +46,7 @@ import { MultiInputMobileModule } from './multi-input-mobile/multi-input-mobile.
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
 import { SelectionModel } from '@angular/cdk/collections';
 import { map, startWith } from 'rxjs/operators';
+import { uniqBy } from 'lodash-es';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -291,7 +292,7 @@ export class MultiInputComponent
     tokenizer: TokenizerComponent;
 
     /** @hidden */
-    readonly optionItems$ = new BehaviorSubject<Map<OptionItem['value'], OptionItem>>(new Map());
+    readonly optionItems$ = new BehaviorSubject<OptionItem[]>([]);
 
     /** @hidden */
     readonly _searchTermCtrl = new FormControl('');
@@ -364,7 +365,7 @@ export class MultiInputComponent
 
         if (changes.dropdownValues || changes.searchTerm || changes.valueFn || changes.displayFn) {
             const optionItems = (this.dropdownValues ?? []).map((item) => this._getOptionItem(item));
-            this.optionItems$.next(new Map(optionItems.map((o) => [o.value, o])));
+            this.optionItems$.next(optionItems);
             this._changeDetRef.markForCheck();
         }
 
@@ -478,7 +479,6 @@ export class MultiInputComponent
     /** Method that selects all possible options. */
     selectAllItems(): void {
         this.selected = [...this.dropdownValues];
-        this._removeValuesWithoutOptions();
 
         // On Mobile mode changes are propagated only on approve.
         this._propagateChange();
@@ -496,8 +496,6 @@ export class MultiInputComponent
         } else {
             this._selectionModel.deselect(value);
         }
-
-        this._removeValuesWithoutOptions();
 
         // Handle popover placement update
         if (this._shouldPopoverBeUpdated(previousLength, this._selectionModel.selected.length)) {
@@ -565,7 +563,6 @@ export class MultiInputComponent
             this._searchTermCtrl.setValue('');
             this.open = false;
         }
-        this._removeValuesWithoutOptions();
     }
 
     /**
@@ -584,7 +581,6 @@ export class MultiInputComponent
         this._propagateChange(true);
         this.openChangeHandle(false);
         this._resetSearchTerm();
-        this._removeValuesWithoutOptions();
     }
 
     /** @hidden */
@@ -679,18 +675,6 @@ export class MultiInputComponent
         );
     }
 
-    /**
-     * @hidden
-     * Removes values if corresponding option is not found
-     */
-    private _removeValuesWithoutOptions(): void {
-        this._selectionModel.selected.forEach((value) => {
-            if (!this.optionItems$.value.has(value)) {
-                this._selectionModel.deselect(value);
-            }
-        });
-    }
-
     /** @hidden */
     private _resetSearchTerm(): void {
         this._searchTermCtrl.setValue('');
@@ -708,9 +692,10 @@ export class MultiInputComponent
 
     /** @hidden */
     private _getViewModel(): Observable<ViewModel> {
+        let previouslySelected: OptionItem[] = [];
         return combineLatest([
             this._searchTermCtrl.valueChanges.pipe(startWith(this._searchTermCtrl.value)),
-            this.optionItems$.pipe(map((itemsMap) => [...itemsMap.values()])),
+            this.optionItems$,
             this._selectionModel.changed.pipe(startWith(undefined))
         ]).pipe(
             map(([, optionItems]) => {
@@ -725,9 +710,17 @@ export class MultiInputComponent
                 }
                 // selected options should be displayed in the same order as they're selected
                 const orderMap = new Map(this._selectionModel.selected.map((v, i) => [v, i]));
-                const selectedOptions = optionItems
-                    .filter((item) => this._selectionModel.isSelected(item.value))
-                    .sort((a, b) => orderMap.get(a.value) - orderMap.get(b.value));
+                // combining previously selected options with current selection
+                // in order to display selected items even if they're not present in the list of options
+                // (e.g. if only a subset of all options is provided to the control)
+                const selectedNotUnique = optionItems
+                    .concat(previouslySelected)
+                    .filter((item) => this._selectionModel.isSelected(item.value));
+                const selectedOptions = uniqBy(selectedNotUnique, 'value').sort(
+                    (a, b) => orderMap.get(a.value) - orderMap.get(b.value)
+                );
+
+                previouslySelected = selectedOptions;
                 return {
                     selectedOptions,
                     displayedOptions
