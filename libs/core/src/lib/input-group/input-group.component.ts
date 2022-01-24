@@ -147,7 +147,7 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
 
     /** Event emitted when the native clear button is clicked. or when native search is executed */
     @Output()
-    searchEventClicked: EventEmitter<any> = new EventEmitter<any>();
+    search: EventEmitter<any> = new EventEmitter<any>();
 
     /** @hidden Focus state */
     get isFocused(): boolean {
@@ -267,8 +267,8 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
     }
 
     /** @hidden */
-    onSearchEvent($event: MouseEvent) {
-        this.searchEventClicked.emit($event);
+    onSearchEvent($event: Event) {
+        this.search.emit($event);
      }
 
     /** @hidden */
