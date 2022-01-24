@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.287 (2022-01-24)
+
+
+### Bug Fixes
+
+* **core:** multi-input - keep selected options ([#7548](https://github.com/SAP/fundamental-ngx/issues/7548)) ([f3b9349](https://github.com/SAP/fundamental-ngx/commit/f3b934949ace4d7a37d00e52a19d743528668b45))
+
 ## 0.33.0-rc.286 (2022-01-21)
 
 
