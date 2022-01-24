@@ -15,9 +15,10 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
+import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 import { Placement, SpecialDayRule, FormStates } from '@fundamental-ngx/core/shared';
 import {
@@ -277,6 +278,22 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
     @Input()
     inline = true;
 
+    /**
+     * Whether to recalculate value from the input as user types or on blur.
+     * By default, updates the value as user types.
+     * @default false
+     */
+    @Input()
+    set processInputOnBlur(v: boolean) {
+        this._processInputOnBlur = coerceBooleanProperty(v);
+    }
+    get processInputOnBlur(): boolean {
+        return this._processInputOnBlur;
+    }
+
+    /** @hidden */
+    _processInputOnBlur = false;
+
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
     readonly isOpenChange = new EventEmitter<boolean>();
@@ -492,7 +509,12 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
      * @hidden
      * Method that is triggered when the text input is confirmed to ba changed, by clicking enter, or blur
      */
-    public handleInputChange(strDate: string): void {
+    public handleInputChange(strDate: string, isTypeEvent: boolean): void {
+        if ((isTypeEvent && this.processInputOnBlur) || (!isTypeEvent && !this.processInputOnBlur)) {
+            // if processInputOnBlur === true, ignore type event
+            // if processInputOnBlur === false, ignore blur/enter event
+            return;
+        }
         this.dateStringUpdate(strDate);
     }
 
@@ -500,9 +522,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
      * @hidden
      * Function that implements Validator Interface, adds validation support for forms
      */
-    validate(control: AbstractControl): {
-        [key: string]: any;
-    } {
+    validate(): { [key: string]: any } {
         return this.isModelValid()
             ? null
             : {

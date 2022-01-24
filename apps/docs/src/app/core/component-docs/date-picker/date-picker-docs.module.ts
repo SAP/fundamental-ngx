@@ -24,6 +24,7 @@ import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { DatePickerModule } from '@fundamental-ngx/core/date-picker';
 import { PipeModule } from '@fundamental-ngx/core/utils';
+import { DatePickerUpdateOnBlurExampleComponent } from './examples/date-picker-update-on-blur-example.component';
 
 const routes: Routes = [
     {
@@ -62,7 +63,8 @@ const routes: Routes = [
         DatePickerFormRangeExampleComponent,
         DatePickerComplexI18nExampleComponent,
         DatePickerDisableFuncExampleComponent,
-        DatePickerRangeDisabledExampleComponent
+        DatePickerRangeDisabledExampleComponent,
+        DatePickerUpdateOnBlurExampleComponent
     ]
 })
 export class DatePickerDocsModule {}

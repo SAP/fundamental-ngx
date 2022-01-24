@@ -1,4 +1,5 @@
 import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import { DATE_TIME_FORMATS, DateTimeFormats, FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { DatetimePickerComponent, DatetimePickerModule } from '@fundamental-ngx/core/datetime-picker';
@@ -61,7 +62,7 @@ describe('DatetimePickerComponent', () => {
         spyOn(component, 'onChange').and.callThrough();
 
         component.allowNull = true;
-        component.handleInputChange('');
+        component.handleInputChange('', true);
 
         const today = new FdDate();
 
@@ -72,7 +73,7 @@ describe('DatetimePickerComponent', () => {
 
     it('should not update input with invalid time', () => {
         component.allowNull = false;
-        component.handleInputChange('hello');
+        component.handleInputChange('hello', true);
         expect(component._isInvalidDateInput).toEqual(true);
     });
 
@@ -138,6 +139,42 @@ describe('DatetimePickerComponent', () => {
         component.closePopover();
         expect(showSpy).toHaveBeenCalled();
     });
+
+    it('should update value on blur, if "processInputOnBlur" is set to true', () => {
+        const nativeInput: HTMLInputElement = fixture.debugElement.query(By.css(`input.fd-input`)).nativeElement;
+
+        nativeInput.value = 'hello';
+        nativeInput.dispatchEvent(new Event('input'));
+        expect(component._inputFieldDate).toEqual('hello');
+        expect(component._isInvalidDateInput).toEqual(true);
+
+        // should ignore blur event at this point
+        nativeInput.value = '1/25/2022';
+        nativeInput.dispatchEvent(new FocusEvent('blur'));
+        expect(component._inputFieldDate).toEqual('hello');
+        expect(component._isInvalidDateInput).toEqual(true);
+
+        nativeInput.dispatchEvent(new Event('input'));
+        expect(component._inputFieldDate).toEqual('1/25/2022');
+        expect(component._isInvalidDateInput).toEqual(false);
+
+        component.processInputOnBlur = true;
+
+        nativeInput.value = 'hello';
+        // should ignore input event at this point
+        nativeInput.dispatchEvent(new Event('input'));
+        expect(component._inputFieldDate).toEqual('1/25/2022');
+        expect(component._isInvalidDateInput).toEqual(false);
+
+        nativeInput.dispatchEvent(new FocusEvent('blur'));
+        expect(component._inputFieldDate).toEqual('hello');
+        expect(component._isInvalidDateInput).toEqual(true);
+
+        nativeInput.value = '1/25/2022';
+        nativeInput.dispatchEvent(new Event('blur'));
+        expect(component._inputFieldDate).toEqual('1/25/2022');
+        expect(component._isInvalidDateInput).toEqual(false);
+    });
 });
 
 const DATE_TIME_PICKER_IDENTIFIER = 'core-date-time-picker-unit-test';
@@ -154,7 +191,7 @@ runValueAccessorTests({
     supportsOnBlur: true,
     nativeControlSelector: `input[id="${DATE_TIME_PICKER_IDENTIFIER}"]`,
     internalValueChangeSetter: (fixture, value) => {
-        fixture.componentInstance.handleInputChange(value);
+        fixture.componentInstance.handleInputChange(value, true);
     },
     getValues: () => [new FdDate(2021, 9, 5), new FdDate(2021, 10, 5), new FdDate(2021, 11, 5)],
     getComponentValue: (fixture) => fixture.componentInstance.date
