@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.288 (2022-01-24)
+
+
+### Bug Fixes
+
+* **core,platform:** tab navigation in controls with dropdowns  ([#7588](https://github.com/SAP/fundamental-ngx/issues/7588)) ([5416dfb](https://github.com/SAP/fundamental-ngx/commit/5416dfb0eac296f42a81630e9bdb6d85aa901a09))
+
 ## 0.33.0-rc.287 (2022-01-24)
 
 
