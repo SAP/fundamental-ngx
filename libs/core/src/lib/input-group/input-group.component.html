@@ -82,5 +82,6 @@
         *ngIf="!inputElement && !inputTemplate"
         [attr.placeholder]="placeholder"
         [attr.aria-required]="required"
+        (search)="onSearchEvent($event)"
     />
 </ng-template>
