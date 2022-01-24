@@ -51,7 +51,7 @@
         <ng-container *ngIf="readonly || selectedItems.length === 0">
             <fd-input-group
                 *ngIf="showSearch"
-                [compact]="contentDensity !== 'cozy'"
+                [compact]="contentDensity | isCompactDensity"
                 [(ngModel)]="_searchText"
                 (ngModelChange)="_searchInputChanged()"
                 glyph="search"
@@ -65,7 +65,7 @@
                     fd-toolbar-item
                     fd-button
                     (click)="_openUploadFiles()"
-                    [compact]="contentDensity !== 'cozy'"
+                    [compact]="contentDensity | isCompactDensity"
                     fdType="ghost"
                     [disabled]="disabled"
                     i18n-label="platformUploadCollection.Btn.Add"
@@ -78,7 +78,7 @@
                     fd-toolbar-item
                     fd-button
                     (click)="_openNewFolderDialog()"
-                    [compact]="contentDensity !== 'cozy'"
+                    [compact]="contentDensity | isCompactDensity"
                     *ngIf="hierarchy"
                     [disabled]="disabled"
                     fdType="transparent"
@@ -95,7 +95,7 @@
                 fd-toolbar-item
                 fd-button
                 (click)="_moveToClicked(true)"
-                [compact]="contentDensity !== 'cozy'"
+                [compact]="contentDensity | isCompactDensity"
                 fdType="ghost"
                 [disabled]="disabled"
                 i18n-label="platformUploadCollection.Btn.MoveTo"
@@ -108,7 +108,7 @@
                 fd-button
                 (click)="_downloadClicked(true)"
                 fdType="ghost"
-                [compact]="contentDensity !== 'cozy'"
+                [compact]="contentDensity | isCompactDensity"
                 [disabled]="disabled"
                 *ngIf="_showIfSelectedOnlyFiles()"
                 i18n-label="platformUploadCollection.Btn.Download"
@@ -120,7 +120,7 @@
                 fd-toolbar-item
                 fd-button
                 (click)="_remove(true)"
-                [compact]="contentDensity !== 'cozy'"
+                [compact]="contentDensity | isCompactDensity"
                 fdType="ghost"
                 [disabled]="disabled"
                 i18n-label="platformUploadCollection.Btn.Remove"
@@ -196,7 +196,7 @@
                                             type="text"
                                             i18n-placeholder="platformUploadCollection.Edit.Input|Placeholder attribute"
                                             placeholder="Enter a name"
-                                            [compact]="contentDensity !== 'cozy'"
+                                            [compact]="contentDensity | isCompactDensity"
                                             [state]="item.sameFilenameState"
                                         />
                                         <span class="fdp-upload-collection__item_extension">{{
@@ -275,7 +275,7 @@
                                     i18n-title="platformUploadCollection.Btn.Run|Title attribute"
                                     title="Run"
                                     (click)="_runUploadNewFileAfterFail(item)"
-                                    [compact]="contentDensity !== 'cozy'"
+                                    [compact]="contentDensity | isCompactDensity"
                                     fdType="ghost"
                                     [disabled]="disabled"
                                     *ngIf="item.status === _uploadCollectionItemStatus.UNSUCCESSFUL"
@@ -288,7 +288,7 @@
                                     i18n-title="platformUploadCollection.Btn.Cancel|Title attribute"
                                     title="Cancel"
                                     fdType="negative"
-                                    [compact]="contentDensity !== 'cozy'"
+                                    [compact]="contentDensity | isCompactDensity"
                                     fdType="ghost"
                                     [disabled]="disabled"
                                     (click)="_cancelUploadNewFile(item)"

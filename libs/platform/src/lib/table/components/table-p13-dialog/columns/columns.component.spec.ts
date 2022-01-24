@@ -13,7 +13,6 @@ describe('PlatformTableP13ColumnsDialogComponent', () => {
     const dialogData: ColumnsDialogData = {
         availableColumns: [],
         visibleColumns: [],
-        tableCompact: false,
         tableContentDensity: ContentDensityEnum.COZY
     };
     dialogRef.data = dialogData;

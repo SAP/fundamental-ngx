@@ -40,7 +40,6 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     @Input()
     set contentDensity(contentDensity: ContentDensity) {
         this._contentDensity = contentDensity;
-        this.isCompact = this._contentDensity !== 'cozy';
     }
 
     /** Sets input value */
@@ -154,9 +153,6 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
 
     /** @hidden */
     _contentDensity: ContentDensity = this.config.contentDensity;
-
-    /** @hidden */
-    isCompact: boolean = this._contentDensity !== 'cozy';
 
     /** @hidden */
     _align: StepInputAlign;

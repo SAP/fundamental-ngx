@@ -7,7 +7,7 @@
         [tristate]="tristate"
         [tristateSelectable]="tristateSelectable"
         [state]="state"
-        [compact]="contentDensity !== 'cozy'"
+        [compact]="contentDensity | isCompactDensity"
         [title]="title"
         [required]="required"
         [ariaLabel]="ariaLabel || null"

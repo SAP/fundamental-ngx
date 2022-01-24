@@ -69,7 +69,6 @@ export class PanelComponent extends BaseComponent implements OnInit, OnChanges {
     @Input()
     set contentDensity(contentDensity: ContentDensity) {
         this._contentDensity = contentDensity;
-        this._isCompact = contentDensity !== 'cozy';
     }
 
     /**
@@ -111,12 +110,6 @@ export class PanelComponent extends BaseComponent implements OnInit, OnChanges {
 
     /** @hidden id of the title element */
     _titleId: string = 'fdp-panel-title-' + platformPanelTitleUniqueId++;
-
-    /**
-     * @hidden
-     * Whether "contentDensity" is "compact"
-     */
-    _isCompact: boolean = this._contentDensity !== 'cozy';
 
     /** @hidden */
     constructor(protected _cd: ChangeDetectorRef, protected _panelConfig: PanelConfig) {

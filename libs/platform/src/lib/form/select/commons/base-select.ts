@@ -117,10 +117,6 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
     @Input()
     placeholder: string;
 
-    /** Whether the select is in compact mode. */
-    @Input()
-    compact = false;
-
     /** Whether close the popover on outside click. */
     @Input()
     closeOnOutsideClick = true;
@@ -195,7 +191,6 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
     @Input()
     set contentDensity(contentDensity: ContentDensity) {
         this._contentDensity = contentDensity;
-        this._isCompact = this.contentDensity !== 'cozy';
     }
 
     get contentDensity(): ContentDensity {
@@ -250,12 +245,6 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
     _contentDensityService: ContentDensityService;
 
     /**
-     * @hidden
-     * Whether "contentDensity" is "compact"
-     */
-    _isCompact: boolean;
-
-    /**
      * List of option items
      * @hidden
      * */
@@ -308,7 +297,7 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
         if (this.contentDensity === undefined && this._contentDensityService) {
             this._subscriptions.add(
                 this._contentDensityService._contentDensityListener.subscribe((density) => {
-                    this._isCompact = density !== 'cozy';
+                    this.contentDensity = density;
                     this.cd.markForCheck();
                 })
             );

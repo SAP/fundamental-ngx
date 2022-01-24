@@ -245,8 +245,7 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
     /** @hidden */
     private _getCommonDialogData(): TableDialogCommonData {
         return {
-            tableContentDensity: this._table.contentDensity,
-            tableCompact: this._table._compact
+            tableContentDensity: this._table.contentDensity
         };
     }
 }

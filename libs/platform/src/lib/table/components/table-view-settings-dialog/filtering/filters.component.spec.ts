@@ -14,7 +14,6 @@ describe('PlatformTableFiltersDialogComponent', () => {
         columns: [],
         filterBy: [],
         viewSettingsFilters: [],
-        tableCompact: false,
         tableContentDensity: ContentDensityEnum.COZY
     };
     dialogRef.data = dialogData;

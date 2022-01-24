@@ -14,7 +14,6 @@ describe('PlatformTableP13GroupDialogComponent', () => {
     const dialogData: GroupDialogData = {
         columns: [],
         collectionGroup: [],
-        tableCompact: false,
         tableContentDensity: ContentDensityEnum.COZY
     };
     dialogRef.data = dialogData;

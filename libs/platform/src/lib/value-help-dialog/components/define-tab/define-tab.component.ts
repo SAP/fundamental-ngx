@@ -109,11 +109,6 @@ export class DefineTabComponent extends VhdBaseTab implements OnChanges {
     _excludeStrategy = [];
 
     /** @hidden */
-    get isCompact(): boolean {
-        return this.contentDensity !== 'cozy';
-    }
-
-    /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if ('conditions' in changes) {
             this._conditions = (this.conditions as ExtendedIncludedEntity[]) || [];

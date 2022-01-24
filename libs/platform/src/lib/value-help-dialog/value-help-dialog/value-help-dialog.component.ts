@@ -333,11 +333,6 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
     }
 
     /** @hidden */
-    get isCompact(): boolean {
-        return this.contentDensity !== 'cozy';
-    }
-
-    /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if (this.isOpen) {
             if ('dataSource' in changes) {

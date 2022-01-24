@@ -8,7 +8,9 @@
             </div>
             <div fd-bar-right>
                 <fd-bar-element>
-                    <fdp-table-reset-button [compact]="dialogRef.data.tableCompact"></fdp-table-reset-button>
+                    <fdp-table-reset-button
+                        [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
+                    ></fdp-table-reset-button>
                 </fd-bar-element>
             </div>
         </ng-template>
@@ -31,7 +33,7 @@
             <button
                 fd-toolbar-item
                 fd-button
-                [compact]="dialogRef.data.tableCompact"
+                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 fdType="transparent"
                 (click)="_toggleShowAll()"
             >
@@ -50,7 +52,7 @@
                 fd-button
                 fdType="transparent"
                 glyph="collapse-group"
-                [compact]="dialogRef.data.tableCompact"
+                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 [disabled]="_moveUpDisabled"
                 aria-label="Move to Top"
                 i18n-aria-label="platformTableP13ColumnsDialogMoveToTopBtn|Button aria-label attribute"
@@ -64,7 +66,7 @@
                 fd-button
                 fdType="transparent"
                 glyph="slim-arrow-up"
-                [compact]="dialogRef.data.tableCompact"
+                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 [disabled]="_moveUpDisabled"
                 aria-label="Move Up"
                 i18n-aria-label="platformTableP13ColumnsDialogMoveUpBtn|Button title attribute"
@@ -78,7 +80,7 @@
                 fd-button
                 fdType="transparent"
                 glyph="slim-arrow-down"
-                [compact]="dialogRef.data.tableCompact"
+                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 [disabled]="_moveDownDisabled"
                 aria-label="Move Down"
                 i18n-aria-label="platformTableP13ColumnsDialogMoveDownBtn|Button aria-label attribute"
@@ -92,7 +94,7 @@
                 fd-button
                 fdType="transparent"
                 glyph="expand-group"
-                [compact]="dialogRef.data.tableCompact"
+                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 [disabled]="_moveDownDisabled"
                 aria-label="Move to Bottom"
                 i18n-aria-label="platformTableP13ColumnsDialogMoveToBottomBtn|Button aria-label attribute"
@@ -102,13 +104,13 @@
             ></button>
         </fd-toolbar>
 
-        <ul fd-list [compact]="dialogRef.data.tableCompact">
+        <ul fd-list [compact]="dialogRef.data.tableContentDensity | isCompactDensity">
             <li fd-list-item>
                 <fd-checkbox
                     [ngModel]="_selectedColumnsCount === _selectableColumns.length"
                     (ngModelChange)="_toggleSelectAll($event)"
                     [disabled]="_selectAllDisabled"
-                    [compact]="dialogRef.data.tableCompact"
+                    [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 ></fd-checkbox>
                 <span fd-list-title i18n="@@platformTableP13ColumnsDialogSelectAll|Select All checkbox">
                     Select All ({{ _selectedColumnsCount }}/{{ _selectableColumns.length }})
@@ -124,7 +126,7 @@
                 <fd-checkbox
                     [(ngModel)]="item.selected"
                     (ngModelChange)="_onToggleColumn()"
-                    [compact]="dialogRef.data.tableCompact"
+                    [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 ></fd-checkbox>
                 <span fd-list-title>
                     {{ item.column.label }}
@@ -141,7 +143,7 @@
                 fd-dialog-decisive-button
                 i18n-label="@@platformTableP13ColumnsDialogConfirmationBtn"
                 label="OK"
-                [compact]="dialogRef.data.tableCompact"
+                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 (click)="confirm()"
             ></button>
         </fd-dialog-footer-button>
@@ -154,7 +156,7 @@
                 fd-initial-focus
                 i18n-label="@@platformTableP13ColumnsDialogCancelBtn"
                 label="Cancel"
-                [compact]="dialogRef.data.tableCompact"
+                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 (click)="cancel()"
             ></button>
         </fd-dialog-footer-button>

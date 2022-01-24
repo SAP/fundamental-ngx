@@ -44,7 +44,7 @@ import { KeyValue } from '@angular/common';
 import { takeUntil } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
 
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { ContentDensityService, isCompactDensity } from '@fundamental-ngx/core/utils';
 import {
     ColumnLayout,
     FormField,
@@ -408,7 +408,7 @@ export class FormGroupComponent
         if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(
                 this._contentDensityService._contentDensityListener.subscribe((density) => {
-                    this.compact = density !== 'cozy';
+                    this.compact = isCompactDensity(density);
                     this.buildComponentCssClass();
                 })
             );

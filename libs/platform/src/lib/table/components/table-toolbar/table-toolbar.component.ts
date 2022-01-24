@@ -9,7 +9,6 @@ import {
     ViewChild
 } from '@angular/core';
 
-import { ContentDensity } from '@fundamental-ngx/core/utils';
 import { SearchInput, SuggestionItem } from '../../interfaces/search-field.interface';
 import { Table } from '../../table';
 import { TableToolbarActionsComponent } from './table-toolbar-actions.component';
@@ -102,10 +101,5 @@ export class TableToolbarComponent implements TableToolbarWithTemplate, AfterVie
     /** @hidden */
     openColumns(): void {
         this._table.openTableColumnSettings.emit();
-    }
-
-    /** @hidden */
-    _getCozyCompactSize(size: ContentDensity): ContentDensity {
-        return size !== 'cozy' ? 'compact' : 'cozy';
     }
 }

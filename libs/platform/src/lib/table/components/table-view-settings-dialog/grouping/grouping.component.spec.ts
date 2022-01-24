@@ -14,7 +14,6 @@ describe('PlatformTableGroupDialogComponent', () => {
         columns: [],
         direction: null,
         field: null,
-        tableCompact: false,
         tableContentDensity: ContentDensityEnum.COZY
     };
     dialogRef.data = dialogData;

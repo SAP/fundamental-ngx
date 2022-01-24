@@ -17,6 +17,7 @@ import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { RadioModule } from '@fundamental-ngx/core/radio';
 import { SelectModule } from '@fundamental-ngx/core/select';
 import { TableModule } from '@fundamental-ngx/core/table';
+import { PipeModule } from '@fundamental-ngx/core/utils';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { DragAndDropModule } from '@fundamental-ngx/core/utils';
 import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
@@ -53,10 +54,6 @@ import { P13FilteringDialogComponent } from './components/table-p13-dialog/filte
 import { FilterRuleComponent } from './components/table-p13-dialog/filtering/filter-rule.component';
 import { P13ColumnsDialogComponent } from './components/table-p13-dialog/columns/columns.component';
 
-import { ValueByPathPipe } from './pipes/value-by-path.pipe';
-import { CozyCompactSizePipe } from './pipes/cozy-compact-size.pipe';
-import { IsCompactSizePipe } from './pipes/is-compact.pipe';
-
 import { FdpCellDef, FdpTableCell } from './directives/table-cell.directive';
 import { FdpHeaderCellDef, FdpTableHeader } from './directives/table-header.directive';
 import { FdpViewSettingsFilterCustomDef } from './directives/table-view-settings-filter-custom.directive';
@@ -80,6 +77,7 @@ import { NoDataWrapperComponent } from './components/no-data-wrapper/no-data-wra
         PopoverModule,
         ListModule,
         PlatformButtonModule,
+        PipeModule,
         ButtonModule,
         PlatformInputModule,
         DialogModule,
@@ -106,49 +104,6 @@ import { NoDataWrapperComponent } from './components/no-data-wrapper/no-data-wra
         TableViewSettingsDialogComponent,
         TableViewSettingsFilterComponent,
         FdpViewSettingsFilterCustomDef,
-        ValueByPathPipe,
-        SortingComponent,
-        GroupingComponent,
-        FiltersComponent,
-        FiltersListStepComponent,
-        FilterStepComponent,
-        FilterSingleSelectComponent,
-        FilterMultiSelectComponent,
-        FilterCustomComponent,
-        ResetButtonComponent,
-        TableP13DialogComponent,
-        TableP13SortComponent,
-        TableP13FilterComponent,
-        TableP13GroupComponent,
-        TableP13ColumnsComponent,
-        P13SortingDialogComponent,
-        P13GroupingDialogComponent,
-        P13FilteringDialogComponent,
-        FilterRuleComponent,
-        P13ColumnsDialogComponent,
-        TableScrollableDirective,
-        TableScrollerDirective,
-        PlatformTableCellResizableDirective,
-        PlatformTableColumnResizerComponent,
-        NoDataWrapperComponent,
-        GetAvailableSortColumnsPipe,
-        CozyCompactSizePipe,
-        IsCompactSizePipe
-    ],
-    exports: [
-        TableComponent,
-        TableColumnComponent,
-        TableToolbarComponent,
-        TableToolbarActionsComponent,
-        FdpTableCell,
-        FdpCellDef,
-        FdpCellSelectableDirective,
-        FdpTableHeader,
-        FdpHeaderCellDef,
-        TableViewSettingsDialogComponent,
-        TableViewSettingsFilterComponent,
-        FdpViewSettingsFilterCustomDef,
-        ValueByPathPipe,
         SortingComponent,
         GroupingComponent,
         FiltersComponent,
@@ -175,14 +130,44 @@ import { NoDataWrapperComponent } from './components/no-data-wrapper/no-data-wra
         NoDataWrapperComponent,
         GetAvailableSortColumnsPipe
     ],
-    entryComponents: [
+    exports: [
+        TableComponent,
+        TableColumnComponent,
+        TableToolbarComponent,
+        TableToolbarActionsComponent,
+        FdpTableCell,
+        FdpCellDef,
+        FdpCellSelectableDirective,
+        FdpTableHeader,
+        FdpHeaderCellDef,
+        TableViewSettingsDialogComponent,
+        TableViewSettingsFilterComponent,
+        FdpViewSettingsFilterCustomDef,
         SortingComponent,
         GroupingComponent,
         FiltersComponent,
+        FiltersListStepComponent,
+        FilterStepComponent,
+        FilterSingleSelectComponent,
+        FilterMultiSelectComponent,
+        FilterCustomComponent,
+        ResetButtonComponent,
+        TableP13DialogComponent,
+        TableP13SortComponent,
+        TableP13FilterComponent,
+        TableP13GroupComponent,
+        TableP13ColumnsComponent,
         P13SortingDialogComponent,
         P13GroupingDialogComponent,
         P13FilteringDialogComponent,
-        P13ColumnsDialogComponent
+        FilterRuleComponent,
+        P13ColumnsDialogComponent,
+        TableScrollableDirective,
+        TableScrollerDirective,
+        PlatformTableCellResizableDirective,
+        PlatformTableColumnResizerComponent,
+        NoDataWrapperComponent,
+        GetAvailableSortColumnsPipe
     ]
 })
 export class PlatformTableModule {}

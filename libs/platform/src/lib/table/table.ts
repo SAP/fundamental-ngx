@@ -23,11 +23,6 @@ export abstract class Table {
     /** The content density for which to render table. 'cozy' | 'compact' | 'condensed' */
     abstract get contentDensity(): ContentDensityEnum;
 
-    /** @hidden getter to determine whether "compact" styling should be applied based on content density */
-    get _compact(): boolean {
-        return this.contentDensity !== ContentDensityEnum.COZY;
-    }
-
     /** Table columns definition list */
     abstract readonly tableColumnsStream: Observable<TableColumn[]>;
 

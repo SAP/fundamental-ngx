@@ -14,7 +14,6 @@ describe('PlatformTableP13SortDialogComponent', () => {
     const dialogData: SortDialogData = {
         columns: [],
         collectionSort: [],
-        tableCompact: false,
         tableContentDensity: ContentDensityEnum.COZY
     };
     dialogRef.data = dialogData;

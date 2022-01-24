@@ -14,7 +14,6 @@ describe('PlatformTableP13FilterDialogComponent', () => {
     const dialogData: FilterDialogData = {
         columns: [],
         collectionFilter: [],
-        tableCompact: false,
         tableContentDensity: ContentDensityEnum.COZY
     };
 

@@ -95,7 +95,6 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     @Input()
     set contentDensity(contentDensity: ContentDensity) {
         this._contentDensity = contentDensity;
-        this.isCompact = contentDensity !== 'cozy';
     }
 
     /**
@@ -205,9 +204,6 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
     /** @hidden */
     _contentDensity: ContentDensity = this.comboboxConfig.contentDensity;
-
-    /** @hidden Whether "contentDensity" is "compact" */
-    isCompact: boolean = this._contentDensity !== 'cozy';
 
     /** Get the input text of the input. */
     get inputText(): string {

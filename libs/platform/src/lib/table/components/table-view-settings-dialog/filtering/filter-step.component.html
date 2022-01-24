@@ -1,7 +1,7 @@
 <ng-template #titleTemplate>
     <button
         fd-button
-        [compact]="contentDensity | isCompactSize"
+        [compact]="contentDensity | isCompactDensity"
         fdType="transparent"
         glyph="navigation-left-arrow"
         (click)="back.emit()"

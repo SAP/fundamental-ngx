@@ -23,6 +23,8 @@ export * from './pipes/displayFn.pipe';
 export * from './pipes/two-digits.pipe';
 export * from './pipes/search-highlight.pipe';
 export * from './pipes/safe.pipe';
+export * from './pipes/is-compact.pipe';
+export * from './pipes/value-by-path.pipe';
 
 export * from './drag-and-drop/drag-and-drop.module';
 export * from './drag-and-drop/dnd-list/dnd-list.directive';
