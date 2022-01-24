@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { distinctUntilChanged, startWith } from 'rxjs/operators';
+import { distinctUntilChanged, map, startWith } from 'rxjs/operators';
+import { isCompactDensity } from '../functions/is-compact-density';
 
 export type ContentDensity = 'cozy' | 'condensed' | 'compact';
 export enum ContentDensityEnum {
@@ -15,15 +16,16 @@ export const DEFAULT_CONTENT_DENSITY: ContentDensity = 'cozy';
  */
 @Injectable()
 export class ContentDensityService {
-    private _contentDensity: BehaviorSubject<ContentDensity> = new BehaviorSubject(DEFAULT_CONTENT_DENSITY);
+    /** Content Density BehaviourSubject */
+    readonly contentDensity = new BehaviorSubject(DEFAULT_CONTENT_DENSITY);
 
     /** @hidden */
     get _contentDensityListener(): Observable<ContentDensity> {
         return this.contentDensity.pipe(distinctUntilChanged(), startWith(this.contentDensity.getValue()));
     }
 
-    /** Content Density BehaviourSubject */
-    get contentDensity(): BehaviorSubject<ContentDensity> {
-        return this._contentDensity;
+    /** @hidden */
+    get _isCompactDensity(): Observable<boolean> {
+        return this._contentDensityListener.pipe(map((density) => isCompactDensity(density)));
     }
 }
