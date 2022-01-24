@@ -203,10 +203,11 @@ export class DatetimePickerComponent<D>
     private _state: FormStates = null;
 
     /**
-     * Whether AddOn Button should be focusable, set to true by default
+     * Whether AddOn Button should be focusable
+     * @default true
      */
     @Input()
-    buttonFocusable = false;
+    buttonFocusable = true;
 
     /**
      * Special days mark, it can be used by passing array of object with

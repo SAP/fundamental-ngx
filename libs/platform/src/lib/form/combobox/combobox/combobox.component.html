@@ -34,7 +34,7 @@
             [button]="!readonly"
             [glyph]="!readonly ? 'navigation-down-arrow' : ' '"
             [state]="mobile && isOpen ? null : status === 'error' ? 'error' : state"
-            [buttonFocusable]="false"
+            [buttonFocusable]="buttonFocusable"
             [disabled]="disabled"
             [readonly]="readonly"
             [isControl]="true"

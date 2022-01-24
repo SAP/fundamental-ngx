@@ -199,9 +199,12 @@ export class MultiInputComponent
     @Input()
     state: FormStates;
 
-    /** Whether AddOn Button should be focusable, set to false by default */
+    /**
+     * Whether AddOn Button should be focusable
+     * @default true
+     */
     @Input()
-    buttonFocusable = false;
+    buttonFocusable = true;
 
     /** Whether the multi-input allows the creation of new tokens. */
     @Input()

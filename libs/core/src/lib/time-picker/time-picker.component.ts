@@ -17,7 +17,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
+import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -199,10 +199,11 @@ export class TimePickerComponent<D>
     private _state: FormStates = null;
 
     /**
-     * Whether AddOn Button should be focusable, set to false by default
+     * Whether AddOn Button should be focusable
+     * @default true
      */
     @Input()
-    buttonFocusable = false;
+    buttonFocusable = true;
 
     /**
      * When set to true, time inputs won't allow to have 1 digit
@@ -381,7 +382,7 @@ export class TimePickerComponent<D>
      * @hidden
      * Function that implements Validator Interface, adds validation support for forms
      */
-    validate(control: AbstractControl): {
+    validate(): {
         [key: string]: any;
     } {
         if (this._isInvalidTimeInput) {

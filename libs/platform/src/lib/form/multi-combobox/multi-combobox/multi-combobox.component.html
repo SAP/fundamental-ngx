@@ -27,7 +27,7 @@
         [id]="id + '-input-group-container'"
         class="fdp-multi-combobox-input-group-custom"
         [state]="status === 'error' ? 'error' : state"
-        [buttonFocusable]="false"
+        [buttonFocusable]="buttonFocusable"
         [button]="!readonly"
         [glyph]="!readonly ? 'navigation-down-arrow' : ' '"
         [compact]="isCompact"
