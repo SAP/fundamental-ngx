@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.289 (2022-01-24)
+
+
+### Features
+
+* **core:** add input for responsive side nav ([#7583](https://github.com/SAP/fundamental-ngx/issues/7583)) ([6b0ef74](https://github.com/SAP/fundamental-ngx/commit/6b0ef7414cd2333b3f83062223269ea02f2b2694))
+
 ## 0.33.0-rc.288 (2022-01-24)
 
 
