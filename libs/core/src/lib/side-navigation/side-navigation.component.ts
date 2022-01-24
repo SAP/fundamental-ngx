@@ -4,6 +4,7 @@ import {
     Component,
     ContentChild,
     HostBinding,
+    HostListener,
     Input,
     OnInit,
     QueryList,
@@ -41,6 +42,12 @@ export class SideNavigationComponent implements AfterContentInit, AfterViewInit,
     @HostBinding('class.fd-side-nav--condensed')
     condensed = false;
 
+    /**
+     * The screen width, in pixels, at which to automatically collapse the side navigation on window resize.
+     */
+    @Input()
+    collapseWidth: number;
+
     /** Whether clicking on elements should change selected state of items */
     @Input()
     set selectable(selectable: boolean) {
@@ -71,6 +78,10 @@ export class SideNavigationComponent implements AfterContentInit, AfterViewInit,
         /** Set up condensed state */
         this.nestedListState.condensed =
             this.condensed || (this.sideNavigationConfiguration && this.sideNavigationConfiguration.condensed);
+
+        if (this.collapseWidth) {
+            this.onResize();
+        }
     }
 
     /** @hidden */
@@ -84,6 +95,14 @@ export class SideNavigationComponent implements AfterContentInit, AfterViewInit,
     ngAfterViewInit(): void {
         if (this.sideNavigationConfiguration) {
             this.keyboardService.refreshItems(this.getLists());
+        }
+    }
+
+    /** @hidden */
+    @HostListener('window:resize')
+    onResize(): void {
+        if (this.collapseWidth) {
+            this.condensed = window.innerWidth <= this.collapseWidth;
         }
     }
 
