@@ -31,6 +31,10 @@ export class InputGroupAddonBodyComponent implements OnInit {
         }
     }
 
+    get contentDensity(): ContentDensity {
+        return this._contentDensity;
+    }
+
     /**
      * indicates if addon contains a button
      */

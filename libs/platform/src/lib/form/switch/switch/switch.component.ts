@@ -39,14 +39,6 @@ export class SwitchComponent extends BaseInput {
     @Input()
     ariaLabelledby: string | null = null;
 
-    /**
-     * content Density of element. 'cozy' | 'compact'
-     */
-    @Input()
-    set contentDensity(contentDensity: ContentDensity) {
-        this._contentDensity = contentDensity;
-    }
-
     /** Whether the switch is semantic */
     @Input()
     semantic = false;

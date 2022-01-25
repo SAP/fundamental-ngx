@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 
 import { ButtonComponent } from './button.component';
 
@@ -11,7 +11,7 @@ describe('ButtonComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [ButtonModule],
+                imports: [PlatformButtonModule],
                 declarations: [ButtonComponent]
             }).compileComponents();
         })

@@ -91,12 +91,6 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     @Input()
     autoComplete = true;
 
-    /** content Density of element. 'cozy' | 'compact' */
-    @Input()
-    set contentDensity(contentDensity: ContentDensity) {
-        this._contentDensity = contentDensity;
-    }
-
     /**
      * Todo: Name of the entity for which DataProvider will be loaded. You can either pass list of
      * items or use this entityClass and internally we should be able to do lookup to some registry

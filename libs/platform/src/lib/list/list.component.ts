@@ -244,13 +244,6 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     /** @hidden */
     _contentDensity: ContentDensity = this._listConfig.contentDensity;
 
-    /**
-     * content Density of element. 'cozy' | 'compact'
-     */
-    set contentDensity(contentDensity: ContentDensity) {
-        this._contentDensity = contentDensity;
-    }
-
     /** @hidden */
     protected _dataSource: FdpListDataSource<any>;
 

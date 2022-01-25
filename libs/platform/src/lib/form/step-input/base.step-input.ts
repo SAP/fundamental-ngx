@@ -36,12 +36,6 @@ const ALIGN_INPUT_OPTIONS_LIST = [StepInputAlign.Left, StepInputAlign.Center, St
  */
 @Directive()
 export abstract class StepInputComponent extends BaseInput implements OnInit {
-    /** content Density of element. cozy | compact */
-    @Input()
-    set contentDensity(contentDensity: ContentDensity) {
-        this._contentDensity = contentDensity;
-    }
-
     /** Sets input value */
     @Input()
     get value(): number {

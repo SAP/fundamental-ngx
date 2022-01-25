@@ -101,13 +101,6 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     @Input()
     autoComplete = true;
 
-    /** Content Density of element.
-     * Can be 'cozy', 'compact'. */
-    @Input()
-    set contentDensity(contentDensity: ContentDensity) {
-        this._contentDensity = contentDensity;
-    }
-
     /**
      * TODO: Name of the entity for which DataProvider will be loaded. You can either pass list of
      * items or use this entityClass and internally we should be able to do lookup to some registry

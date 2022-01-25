@@ -64,14 +64,6 @@ export class PanelComponent extends BaseComponent implements OnInit, OnChanges {
     expandable = true;
 
     /**
-     * content Density of element. 'cozy' | 'compact'
-     */
-    @Input()
-    set contentDensity(contentDensity: ContentDensity) {
-        this._contentDensity = contentDensity;
-    }
-
-    /**
      * ARIA label for button when the Panel is collapsed
      */
     @Input()

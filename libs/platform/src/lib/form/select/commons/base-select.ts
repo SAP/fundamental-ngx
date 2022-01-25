@@ -27,13 +27,7 @@ import { takeUntil } from 'rxjs/operators';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { ListComponent } from '@fundamental-ngx/core/list';
-import {
-    ContentDensity,
-    ContentDensityService,
-    FocusEscapeDirection,
-    KeyUtil,
-    TemplateDirective
-} from '@fundamental-ngx/core/utils';
+import { ContentDensityService, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/core/utils';
 import {
     CollectionBaseInput,
     FormField,
@@ -184,18 +178,6 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
      * */
     @Input()
     maxWidth?: number;
-
-    /**
-     * content Density of element. 'cozy' | 'compact'
-     */
-    @Input()
-    set contentDensity(contentDensity: ContentDensity) {
-        this._contentDensity = contentDensity;
-    }
-
-    get contentDensity(): ContentDensity {
-        return this._contentDensity;
-    }
 
     /** Data for suggestion list */
     get list(): any {

@@ -3,7 +3,7 @@ import { By } from '@angular/platform-browser';
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { ActionBarComponent } from './action-bar.component';
+import { PlatformActionBarModule } from './action-bar.module';
 import { ActionBarModule } from '@fundamental-ngx/core/action-bar';
 import { RtlService } from '@fundamental-ngx/core/utils';
 import { ButtonModule } from '@fundamental-ngx/core/button';
@@ -38,8 +38,8 @@ describe('ActionBarHeaderComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                declarations: [ActionBarComponent, TestComponent],
-                imports: [FormsModule, ActionBarModule, ButtonModule],
+                declarations: [TestComponent],
+                imports: [FormsModule, ActionBarModule, ButtonModule, PlatformActionBarModule],
                 providers: [RtlService]
             }).compileComponents();
         })
