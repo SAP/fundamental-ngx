@@ -749,7 +749,10 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      * @param columns table columns names
      */
     setColumns(columns: string[]): void {
-        this._tableService.setColumns(columns);
+        const columnKeys = this.getTableColumns()
+            .filter((c) => columns.includes(c.name))
+            .map((c) => c.key);
+        this._tableService.setColumns(columns, columnKeys);
         this._cdr.markForCheck();
     }
 
@@ -1321,6 +1324,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this.setTableState({
             ...prevState,
             columns: visibleColumns,
+            columnKeys: columns.filter((c) => visibleColumns.includes(c.name)).map((c) => c.key),
             sortBy: this.initialSortBy || prevState.sortBy,
             filterBy: this.initialFilterBy || prevState.filterBy,
             groupBy: this.initialGroupBy || prevState.groupBy,

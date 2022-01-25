@@ -19,6 +19,7 @@ export const DEFAULT_TABLE_STATE: Readonly<TableState> = {
     groupBy: [],
     page: DEFAULT_TABLE_PAGE,
     columns: [],
+    columnKeys: [],
     freezeToColumn: null,
     searchInput: DEFAULT_TABLE_SEARCH_INPUT
 };
