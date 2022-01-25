@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.291 (2022-01-25)
+
+
+### Bug Fixes
+
+* **platform:** ability to search through nested properties ([#7580](https://github.com/SAP/fundamental-ngx/issues/7580)) ([7a5c78a](https://github.com/SAP/fundamental-ngx/commit/7a5c78aa55414b237a6d7148060880e85f6a1cad))
+
 ## 0.33.0-rc.290 (2022-01-24)
 
 ## 0.33.0-rc.289 (2022-01-24)
