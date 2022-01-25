@@ -12,6 +12,7 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
 import { DynamicPageTitleContentComponent } from './dynamic-page-header/actions/dynamic-page-title-content.component';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { DynamicPageWrapperDirective } from './dynamic-page-wrapper.directive';
 
 @NgModule({
     declarations: [
@@ -22,7 +23,8 @@ import { PopoverModule } from '@fundamental-ngx/core/popover';
         DynamicPageSubheaderComponent,
         DynamicPageContentComponent,
         DynamicPageFooterComponent,
-        DynamicPageTitleContentComponent
+        DynamicPageTitleContentComponent,
+        DynamicPageWrapperDirective
     ],
     imports: [CommonModule, ButtonModule, ToolbarModule, PopoverModule],
     exports: [
@@ -33,7 +35,8 @@ import { PopoverModule } from '@fundamental-ngx/core/popover';
         DynamicPageSubheaderComponent,
         DynamicPageContentComponent,
         DynamicPageFooterComponent,
-        DynamicPageTitleContentComponent
+        DynamicPageTitleContentComponent,
+        DynamicPageWrapperDirective
     ]
 })
 export class DynamicPageModule {}
