@@ -6,13 +6,13 @@ import { API_FILES } from '../../api-files';
 import { TabsHeaderComponent } from './tabs-header/tabs-header.component';
 import { TabsDocsComponent } from './tabs-docs.component';
 import { examples } from './examples';
-import { ExperimentalTabsModule } from '@fundamental-ngx/fn/tabs';
-import { ExperimentalCheckboxModule } from '@fundamental-ngx/fn/checkbox';
-import { ExperimentalRadioModule } from '@fundamental-ngx/fn/radio';
-import { ExperimentalFormModule } from '@fundamental-ngx/fn/form';
-import { ExperimentalSwitchModule } from '@fundamental-ngx/fn/switch';
-import { ExperimentalButtonModule } from '@fundamental-ngx/fn/button';
-import { ExperimentalSearchModule } from '@fundamental-ngx/fn/search';
+import { TabsModule } from '@fundamental-ngx/fn/tabs';
+import { CheckboxModule } from '@fundamental-ngx/fn/checkbox';
+import { RadioButtonModule } from '@fundamental-ngx/fn/radio';
+import { FormModule } from '@fundamental-ngx/fn/form';
+import { SwitchModule } from '@fundamental-ngx/fn/switch';
+import { ButtonModule } from '@fundamental-ngx/fn/button';
+import { SearchModule } from '@fundamental-ngx/fn/search';
 
 const routes: Routes = [
     {
@@ -32,13 +32,13 @@ const routes: Routes = [
     imports: [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
-        ExperimentalTabsModule,
-        ExperimentalCheckboxModule,
-        ExperimentalRadioModule,
-        ExperimentalFormModule,
-        ExperimentalSwitchModule,
-        ExperimentalButtonModule,
-        ExperimentalSearchModule
+        TabsModule,
+        CheckboxModule,
+        RadioButtonModule,
+        FormModule,
+        SwitchModule,
+        ButtonModule,
+        SearchModule
     ],
     exports: [RouterModule],
     declarations: [examples, TabsHeaderComponent, TabsDocsComponent]

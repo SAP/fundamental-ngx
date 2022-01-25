@@ -8,9 +8,9 @@ import { SwitchDocsComponent } from './switch-docs.component';
 import { SwitchFormsExampleComponent } from './examples/switch-form-example/switch-forms-example.component';
 import { SwitchBindingExampleComponent } from './examples/switch-binding-example/switch-binding-example.component';
 import { DisabledSwitchExampleComponent } from './examples/disabled-switch-example/disabled-switch-example.component';
-import { ExperimentalFormModule } from '@fundamental-ngx/fn/form';
-import { ExperimentalSwitchModule } from '@fundamental-ngx/fn/switch';
-import { ExperimentalButtonModule } from '@fundamental-ngx/fn/button';
+import { FormModule } from '@fundamental-ngx/fn/form';
+import { SwitchModule } from '@fundamental-ngx/fn/switch';
+import { ButtonModule } from '@fundamental-ngx/fn/button';
 
 const routes: Routes = [
     {
@@ -24,13 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(routes),
-        SharedDocumentationPageModule,
-        ExperimentalFormModule,
-        ExperimentalButtonModule,
-        ExperimentalSwitchModule
-    ],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, FormModule, ButtonModule, SwitchModule],
     exports: [RouterModule],
     declarations: [
         SwitchDocsComponent,

@@ -21,7 +21,7 @@ import { Placement } from '@fundamental-ngx/core/shared';
         class: 'fn-text-field__label'
     }
 })
-export class ExperimentalFormLabelComponent implements OnChanges {
+export class FormLabelComponent implements OnChanges {
     /** Whether form is required */
     @Input()
     required = false;

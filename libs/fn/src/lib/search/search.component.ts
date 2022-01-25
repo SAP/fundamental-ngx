@@ -27,7 +27,7 @@ let searchUniqueId = 0;
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => ExperimentalSearchComponent),
+            useExisting: forwardRef(() => SearchComponent),
             multi: true
         }
     ],
@@ -38,7 +38,7 @@ let searchUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ExperimentalSearchComponent implements ControlValueAccessor, OnDestroy {
+export class SearchComponent implements ControlValueAccessor, OnDestroy {
     /** @hidden */
     @ViewChild('searchInput')
     inputElement: ElementRef<HTMLInputElement>;

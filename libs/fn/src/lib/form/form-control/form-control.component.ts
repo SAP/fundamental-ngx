@@ -15,7 +15,7 @@ import {
 import { FormStates } from '@fundamental-ngx/core/shared';
 import { Subscription } from 'rxjs';
 import { ContentDensityService, CssClassBuilder, applyCssClass } from '@fundamental-ngx/core/utils';
-import { ExperimentalFormItemComponent } from '../form-item/form-item.component';
+import { FormItemComponent } from '../form-item/form-item.component';
 
 /**
  * Directive intended for use on form controls.
@@ -32,7 +32,7 @@ import { ExperimentalFormItemComponent } from '../form-item/form-item.component'
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ExperimentalFormControlComponent implements CssClassBuilder, OnInit, OnChanges, OnDestroy {
+export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges, OnDestroy {
     /**
      *  The state of the form control - applies css classes.
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
@@ -124,7 +124,7 @@ export class ExperimentalFormControlComponent implements CssClassBuilder, OnInit
     constructor(
         private _elementRef: ElementRef,
         @Optional() private _contentDensityService: ContentDensityService,
-        @Optional() @SkipSelf() @Host() private _formItem: ExperimentalFormItemComponent
+        @Optional() @SkipSelf() @Host() private _formItem: FormItemComponent
     ) {}
 
     /** @hidden */

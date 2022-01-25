@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ExperimentalFormLabelComponent } from './form-label.component';
+import { FormLabelComponent } from './form-label.component';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
 
 @NgModule({
     imports: [CommonModule, IconModule, InlineHelpModule],
-    exports: [ExperimentalFormLabelComponent],
-    declarations: [ExperimentalFormLabelComponent]
+    exports: [FormLabelComponent],
+    declarations: [FormLabelComponent]
 })
-export class ExperimentalFormLabelModule {}
+export class FormLabelModule {}

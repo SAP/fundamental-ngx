@@ -1,4 +1,25 @@
 
+## 0.33.0-rc.293 (2022-01-25)
+
+
+### Bug Fixes
+
+* **core:** handle dynamic height of dynamic page wrapper ([#7572](https://github.com/SAP/fundamental-ngx/issues/7572)) ([c6f3ae0](https://github.com/SAP/fundamental-ngx/commit/c6f3ae04d35110c04cfa1995259cec55eb5a59a5))
+
+## 0.33.0-rc.292 (2022-01-25)
+
+
+### Bug Fixes
+
+* **fn:** rename experimental modules ([#7585](https://github.com/SAP/fundamental-ngx/issues/7585)) ([22d5f04](https://github.com/SAP/fundamental-ngx/commit/22d5f045582c5be837764054d90479002ca0a76a))
+
+## 0.33.0-rc.291 (2022-01-25)
+
+
+### Bug Fixes
+
+* **platform:** ability to search through nested properties ([#7580](https://github.com/SAP/fundamental-ngx/issues/7580)) ([7a5c78a](https://github.com/SAP/fundamental-ngx/commit/7a5c78aa55414b237a6d7148060880e85f6a1cad))
+
 ## 0.33.0-rc.290 (2022-01-24)
 
 ## 0.33.0-rc.289 (2022-01-24)
