@@ -1,10 +1,4 @@
-import {
-    getElementAriaLabel,
-    getElementArrayLength,
-    getElementClass,
-    isElementDisplayed,
-    scrollIntoView
-} from '../../driver/wdio';
+import { getElementArrayLength, getElementClass, isElementDisplayed } from '../../driver/wdio';
 import { InfoLabelPo } from '../pages/info-label.po';
 import { colorsArr } from '../fixtures/appData/info-label-contents';
 

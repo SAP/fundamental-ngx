@@ -58,7 +58,7 @@ export class ValueHelpDialogPo extends BaseComponentPo {
     token = '.fd-token';
     tokenizerClearButton = '.fdp-value-help-dialog__tokens-clear';
 
-    formInputField = (id: string) => this.inputFields + `[id="${id}"]`;
+    formInputField = (id: string): string => this.inputFields + `[id="${id}"]`;
 
     open(): void {
         super.open(this.url);

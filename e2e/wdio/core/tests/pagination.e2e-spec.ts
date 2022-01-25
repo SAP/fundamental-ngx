@@ -1,6 +1,5 @@
 import { PaginationPo } from '../pages/pagination.po';
 import {
-    browserIsSafari,
     click,
     doesItExist,
     getAttributeByName,

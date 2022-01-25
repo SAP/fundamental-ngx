@@ -64,8 +64,7 @@ describe('Form Container test suite', () => {
         isInlineExampleDropdownMenu,
         isInlineExampleCombobox,
         comboboxListItem,
-        isInlineExampleComboboxBtn,
-        dropdownOptionAlt
+        isInlineExampleComboboxBtn
     } = formContainerPage;
 
     beforeAll(() => {

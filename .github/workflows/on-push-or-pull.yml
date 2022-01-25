@@ -195,7 +195,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                lib: [core, platform, docs, moment-adapter, fn]
+                lib: [core, platform, docs, moment-adapter, fn, components-e2e]
         steps:
             - uses: actions/checkout@v2
             - uses: actions/cache@v2

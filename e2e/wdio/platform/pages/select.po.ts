@@ -23,7 +23,7 @@ export class SelectPo extends BaseComponentPo {
     selectInReactiveForms = 'fdp-select-forms';
     inputControl = ' .fd-select__control';
 
-    options = (id) => `#fd-option-${id}`;
+    options = (id): string => `#fd-option-${id}`;
 
     open(): void {
         super.open(this.url);
