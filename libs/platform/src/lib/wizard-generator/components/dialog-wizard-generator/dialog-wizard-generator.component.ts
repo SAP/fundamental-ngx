@@ -6,6 +6,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
+import { FormGeneratorService } from '@fundamental-ngx/platform/form';
 import { filter, takeUntil } from 'rxjs/operators';
 
 import { DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
@@ -19,7 +20,7 @@ import { WizardGeneratorService } from '../../wizard-generator.service';
     templateUrl: './dialog-wizard-generator.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [WizardGeneratorService]
+    providers: [WizardGeneratorService, FormGeneratorService]
 })
 export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
     @ViewChild('defaultConfirmationDialogTemplate') defaultConfirmationDialogTemplate: TemplateRef<HTMLElement>;

@@ -11,14 +11,19 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { FormGroup, NgForm } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
 import { ColumnLayout, LabelLayout } from '@fundamental-ngx/platform/shared';
 
 import { FormGeneratorService } from '../form-generator.service';
 import { DynamicFormItem, DynamicFormValue } from '../interfaces/dynamic-form-item';
-import { DynamicFormControl, DynamicFormControlGroup, DynamicFormGroupControls } from '../dynamic-form-control';
+import {
+    DynamicFormControl,
+    DynamicFormControlGroup,
+    DynamicFormGroupControl,
+    DynamicFormGroupControls
+} from '../dynamic-form-control';
 import { DynamicFormGroup } from '../interfaces/dynamic-form-group';
 import {
     DefaultGapLayout,
@@ -156,14 +161,14 @@ export class FormGeneratorComponent implements OnDestroy {
     noAdditionalContent = false;
 
     /**
-     * @description Event which notifies parent component that the form has been successfuly created
+     * @description Event which notifies parent component that the form has been successfully created
      * and all controls are in place.
      */
     @Output()
-    formCreated = new EventEmitter<FormGroup>();
+    formCreated = new EventEmitter<DynamicFormGroup>();
 
     /**
-     * @description Event which notifies parent component that the form has been successfuly validated
+     * @description Event which notifies parent component that the form has been successfully validated
      * and submitted. Contains form
      */
     @Output()
@@ -188,7 +193,7 @@ export class FormGeneratorComponent implements OnDestroy {
     /**
      * @description List of the form controls.
      */
-    formControlItems: (DynamicFormControl | DynamicFormControlGroup)[];
+    formControlItems: DynamicFormGroupControl[];
 
     /**
      * Set of flags representing if particular form item should be visible to the user.

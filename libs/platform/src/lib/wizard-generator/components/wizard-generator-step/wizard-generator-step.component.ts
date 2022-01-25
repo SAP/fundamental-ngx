@@ -3,23 +3,31 @@ import {
     Component,
     EventEmitter,
     Input,
+    OnChanges,
     OnDestroy,
     Output,
     QueryList,
+    SimpleChanges,
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { Subject } from 'rxjs';
-import { debounceTime, takeUntil } from 'rxjs/operators';
+import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
 
 import {
     DynamicFormGroup,
     DynamicFormValue,
     FormGeneratorComponent,
+    FormGeneratorService,
     SubmitFormEventResult
 } from '@fundamental-ngx/platform/form';
+import { Subject } from 'rxjs';
+import { debounceTime, takeUntil } from 'rxjs/operators';
 import { WizardGeneratorItem } from '../../interfaces/wizard-generator-item.interface';
-import { WizardGeneratorService } from '../../wizard-generator.service';
+import {
+    DependencySteps,
+    WizardGeneratorRefreshStrategy,
+    WizardGeneratorService
+} from '../../wizard-generator.service';
 
 export interface WizardStepSubmittedForms {
     [key: string]: SubmitFormEventResult;
@@ -38,11 +46,11 @@ export interface WizardStepForms {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WizardGeneratorStepComponent implements OnDestroy {
+export class WizardGeneratorStepComponent implements OnDestroy, OnChanges {
     /**
-     * @description Step forms components.
+     * @description Step Form Generator components.
      */
-    @ViewChildren(FormGeneratorComponent) forms: QueryList<FormGeneratorComponent>;
+    @ViewChildren(FormGeneratorComponent) formGenerators: QueryList<FormGeneratorComponent>;
 
     /**
      * @description Current step.
@@ -50,7 +58,13 @@ export class WizardGeneratorStepComponent implements OnDestroy {
     @Input()
     item: WizardGeneratorItem;
 
-    /** Whether or not all form items should have identical layout provided for form group. */
+    /**
+     * Wizard step status.
+     */
+    @Input()
+    stepStatus: WizardStepStatus;
+
+    /** Whether all form items should have identical layout provided for form group. */
     @Input()
     unifiedLayout = true;
 
@@ -84,7 +98,7 @@ export class WizardGeneratorStepComponent implements OnDestroy {
     /**
      * @hidden
      */
-    private _trackedFields: { [key: string]: string[] };
+    private _trackedFields: DependencySteps;
 
     /**
      * @hidden
@@ -93,7 +107,10 @@ export class WizardGeneratorStepComponent implements OnDestroy {
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    constructor(private _wizardGeneratorService: WizardGeneratorService) {}
+    constructor(
+        private _wizardGeneratorService: WizardGeneratorService,
+        private _formGeneratorService: FormGeneratorService
+    ) {}
 
     /**
      * @hidden
@@ -102,6 +119,13 @@ export class WizardGeneratorStepComponent implements OnDestroy {
         this._wizardGeneratorService.removeWizardStepComponent(this.item.id);
         this._onDestroy$.next();
         this._onDestroy$.complete();
+    }
+
+    /** @hidden */
+    async ngOnChanges(changes: SimpleChanges): Promise<void> {
+        if (changes.stepStatus && changes.stepStatus.currentValue === 'current' && this.formGenerators?.length > 0) {
+            await this.updateFormsState();
+        }
     }
 
     /**
@@ -115,14 +139,14 @@ export class WizardGeneratorStepComponent implements OnDestroy {
             form
         };
 
-        this._trackDependencyFieldsChanges(form, key);
-
         await this._wizardGeneratorService.refreshStepVisibility();
 
         if (Object.keys(this._forms).length === this.item.formGroups.length) {
             await this.addComponentToParent();
             this.formsCreated.emit(this._forms);
         }
+
+        this._trackDependencyFieldsChanges(form, key);
     }
 
     /**
@@ -140,7 +164,7 @@ export class WizardGeneratorStepComponent implements OnDestroy {
     onFormSubmitted(result: SubmitFormEventResult, index: string): void {
         this._submittedForms[index] = result;
 
-        if (Object.keys(this._submittedForms).length === this.forms.length) {
+        if (Object.keys(this._submittedForms).length === this.formGenerators.length) {
             // Last form submission. Send data back to the parent component.
             this._formSubmitted$.next(this._submittedForms);
         }
@@ -177,7 +201,7 @@ export class WizardGeneratorStepComponent implements OnDestroy {
         this._submittedForms = {};
 
         setTimeout(() => {
-            this.forms.forEach((formComponent) => {
+            this.formGenerators.forEach((formComponent) => {
                 formComponent.submit();
             });
         });
@@ -192,14 +216,31 @@ export class WizardGeneratorStepComponent implements OnDestroy {
      * @param key
      */
     private _trackDependencyFieldsChanges(form: DynamicFormGroup, key: string): void {
-        this._trackedFields = this._wizardGeneratorService.getDependencyFields(this.item.id);
+        this._trackedFields = this._wizardGeneratorService.getStepDependencyFields(this.item.id);
 
         if (this._trackedFields && this._trackedFields[key]) {
-            for (const control of Object.values(form.controls)) {
-                control.valueChanges.pipe(debounceTime(50), takeUntil(this._onDestroy$)).subscribe(async () => {
-                    await this._wizardGeneratorService.refreshStepVisibility();
+            Object.entries(this._trackedFields[key]).forEach(([fieldId, dependants]) => {
+                const control = this._formGeneratorService.getFormControl(form, fieldId);
+
+                control?.valueChanges.pipe(debounceTime(50), takeUntil(this._onDestroy$)).subscribe(async () => {
+                    if (dependants.strategy.includes(WizardGeneratorRefreshStrategy.REFRESH_STEP_VISIBILITY)) {
+                        await this._wizardGeneratorService.refreshStepVisibility();
+                    }
+
+                    if (dependants.dependentSteps?.length > 0) {
+                        this._wizardGeneratorService.notifyStepsToRevalidateForms(dependants.dependentSteps);
+                    }
                 });
-            }
+            });
+        }
+    }
+
+    /**
+     * Triggers form value revalidation and checks if field in form should be visible.
+     */
+    async updateFormsState(): Promise<void> {
+        for (const formGenerator of this.formGenerators?.toArray()) {
+            await formGenerator.refreshStepsVisibility();
         }
     }
 }

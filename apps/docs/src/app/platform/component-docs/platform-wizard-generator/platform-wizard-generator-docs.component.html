@@ -84,9 +84,13 @@
 
 <fd-docs-section-title id="branching" componentName="wizard-generator"> Branching Wizard </fd-docs-section-title>
 <description>
-    Developers can configure branching behaviour of the wizard by providing <code>when</code> property function to the
-    wizard generator step and by specifying <code>dependencyFields</code> property of the wizard generator step to
-    reflect which steps are creating branches.
+    <p>
+        Developers can configure branching behaviour of the wizard by providing <code>when</code> property function to
+        the wizard generator step and by specifying <code>dependencyFields</code> property of the wizard generator step
+        to reflect which steps are creating branches.
+    </p>
+    <p>Additionally, Developers can configure each field to be dependent on the other fields value across all steps.</p>
+    <p>More information could be found in <a [routerLink]="['/platform/form-generator']">Form Generator</a> docs.</p>
 </description>
 <component-example>
     <fdp-wizard-generator-condition-example></fdp-wizard-generator-condition-example>
@@ -234,3 +238,20 @@
     <fdp-wizard-generator-onchange-example></fdp-wizard-generator-onchange-example>
 </component-example>
 <code-example [exampleFiles]="fieldsInteractionExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="inter-steps-conditions" componentName="wizard-generator"
+    >Handling form items visibility across the steps</fd-docs-section-title
+>
+<description>
+    <p>
+        Additionally to branching functionality, developers can configure wizard form items visibility across all the
+        steps.
+    </p>
+    <p>More information could be found in <a [routerLink]="['/platform/form-generator']">Form Generator</a> docs.</p>
+</description>
+<component-example>
+    <fdp-wizard-generator-visibility-between-steps-example></fdp-wizard-generator-visibility-between-steps-example>
+</component-example>
+<code-example [exampleFiles]="fieldsVisibilityExample"></code-example>

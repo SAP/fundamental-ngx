@@ -56,7 +56,7 @@ export class DynamicFormControlFieldDirective implements OnInit {
     /**
      * @hidden
      */
-    private _shouldShowFormItem = false;
+    private _shouldShowFormItem: boolean;
 
     constructor(private readonly _templateRef: TemplateRef<any>, private readonly _viewContainer: ViewContainerRef) {}
 

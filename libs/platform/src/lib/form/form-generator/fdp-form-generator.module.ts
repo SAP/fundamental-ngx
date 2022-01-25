@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormMessageModule } from '@fundamental-ngx/core/form';
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { FormGeneratorComponentsAccessorService } from './form-generator-components-accessor.service';
 import { FormGeneratorComponent } from './form-generator/form-generator.component';
 import { DynamicFormControlFieldDirective } from './dynamic-form-control-field.directive';
 import { PlatformInputModule } from '../input/fdp-input.module';
@@ -63,7 +64,7 @@ import { PlatformMultiInputModule } from '../multi-input/multi-input.module';
         PlatformMultiComboboxModule,
         PlatformMultiInputModule
     ],
-    providers: [FormGeneratorService],
+    providers: [FormGeneratorService, FormGeneratorComponentsAccessorService],
     exports: [
         FormGeneratorComponent,
         DynamicFormControlFieldDirective,
