@@ -202,7 +202,7 @@ const sort = <T extends Record<string, any>>(a: T, b: T, key?: string): number =
 };
 
 function getNestedValue<T extends Record<string, any>>(key: string, object: T): any {
-    return key.split('.').reduce((a, b) => a[b], object);
+    return key.split('.').reduce((a, b) => (a ? a[b] : null), object);
 }
 
 const filterByString = (item: ExampleItem, filter: CollectionStringFilter): boolean => {
