@@ -30,7 +30,7 @@ let switchUniqueId = 0;
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => ExperimentalSwitchComponent),
+            useExisting: forwardRef(() => SwitchComponent),
             multi: true
         }
     ],
@@ -41,7 +41,7 @@ let switchUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ExperimentalSwitchComponent implements ControlValueAccessor, OnInit, OnDestroy {
+export class SwitchComponent implements ControlValueAccessor, OnInit, OnDestroy {
     /** @hidden */
     @ViewChild('switchInput')
     inputElement: ElementRef<HTMLInputElement>;

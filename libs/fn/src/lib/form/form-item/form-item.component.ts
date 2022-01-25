@@ -35,7 +35,7 @@ export enum STATE_ICON {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ExperimentalFormItemComponent implements CssClassBuilder, OnInit, OnChanges {
+export class FormItemComponent implements CssClassBuilder, OnInit, OnChanges {
     @HostBinding('class.is-disabled')
     disabled = false;
 
