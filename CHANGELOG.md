@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.292 (2022-01-25)
+
+
+### Bug Fixes
+
+* **fn:** rename experimental modules ([#7585](https://github.com/SAP/fundamental-ngx/issues/7585)) ([22d5f04](https://github.com/SAP/fundamental-ngx/commit/22d5f045582c5be837764054d90479002ca0a76a))
+
 ## 0.33.0-rc.291 (2022-01-25)
 
 
