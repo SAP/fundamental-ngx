@@ -47,6 +47,14 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
     @Input()
     currentlyDisplayed: CalendarCurrent;
 
+    /** whether previous navigation button should be disabled in the header. */
+    @Input()
+    previousButtonDisabled: boolean;
+
+    /** whether next navigation button should be disabled in the header. */
+    @Input()
+    nextButtonDisabled: boolean;
+
     /**
      * Object to customize year grid
      */
@@ -107,12 +115,6 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
 
     /** Button label to open aggregated years selection view. */
     selectAggregatedYearLabel: string;
-
-    /** Property to check if previous button is disabled */
-    previousButtonDisabled: boolean;
-
-    /** Property to check if next button is disabled */
-    nextButtonDisabled: boolean;
 
     /** Get information is calendar is on aggregated years view */
     get isOnAggregatedYearsView(): boolean {
@@ -217,23 +219,6 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
 
     /** Get information about amount of years displayed at once on year view  */
     private _amountOfYearsPerPeriod = 1;
-
-    /**
-     * Function used to disable previous button in the calendar header.
-     */
-
-    @Input()
-    set previousButtonDisableFunction(disableFunc: (date?: D) => boolean) {
-        this.previousButtonDisabled = disableFunc();
-    }
-
-    /**
-     * Function used to disable next button in the calendar header.
-     */
-    @Input()
-    set nextButtonDisableFunction(disableFunc: (date?: D) => boolean) {
-        this.nextButtonDisabled = disableFunc();
-    }
 
     constructor(
         private _calendarI18nLabels: CalendarI18nLabels,
