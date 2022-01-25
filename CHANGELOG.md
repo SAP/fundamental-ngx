@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.293 (2022-01-25)
+
+
+### Bug Fixes
+
+* **core:** handle dynamic height of dynamic page wrapper ([#7572](https://github.com/SAP/fundamental-ngx/issues/7572)) ([c6f3ae0](https://github.com/SAP/fundamental-ngx/commit/c6f3ae04d35110c04cfa1995259cec55eb5a59a5))
+
 ## 0.33.0-rc.292 (2022-01-25)
 
 
