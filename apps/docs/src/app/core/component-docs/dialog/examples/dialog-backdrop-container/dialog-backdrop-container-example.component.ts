@@ -7,6 +7,15 @@ import { DialogService } from '@fundamental-ngx/core/dialog';
     encapsulation: ViewEncapsulation.None,
     styles: [
         `
+            .fd-button {
+                margin-right: 1rem;
+            }
+            
+            :host-context([dir="rtl"]) .fd-button {
+                margin-left: 1rem;
+                margin-right: 0;
+            }
+
             .static-dialog.fd-dialog--active {
                 display: inline-block;
             }
