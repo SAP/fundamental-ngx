@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.297 (2022-01-26)
+
+
+### Features
+
+* **core:** pagination long & short modes, improvements, styles version bump ([#7428](https://github.com/SAP/fundamental-ngx/issues/7428)) ([2fd093f](https://github.com/SAP/fundamental-ngx/commit/2fd093fcb2ec0f42d9d5df33ba1a3d9f4395bb92))
+
 ## 0.33.0-rc.296 (2022-01-26)
 
 
