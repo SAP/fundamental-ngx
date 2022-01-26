@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    EventEmitter,
+    Input,
+    Output,
+    ViewEncapsulation
+} from '@angular/core';
 
 /** Type of hyphenation */
 export type HyphenationType = 'none' | 'manual' | 'auto' | null;
@@ -59,6 +67,12 @@ export class TextComponent {
     @Input()
     isCollapsed = true;
 
+    /**
+     * Event, notifying about collapse state changes
+     */
+    @Output()
+    isCollapsedChange = new EventEmitter<boolean>();
+
     /** @hidden */
     get _isCollapsed(): boolean {
         return this.isCollapsed && this.maxLines > 0;
@@ -78,6 +92,7 @@ export class TextComponent {
     /** @hidden */
     toggleTextView(): void {
         this.isCollapsed = !this.isCollapsed;
+        this.isCollapsedChange.emit(this.isCollapsed);
     }
 
     /** @hidden */
