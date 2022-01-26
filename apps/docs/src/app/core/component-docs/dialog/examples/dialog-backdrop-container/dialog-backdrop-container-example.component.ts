@@ -10,8 +10,8 @@ import { DialogService } from '@fundamental-ngx/core/dialog';
             .fd-button {
                 margin-right: 1rem;
             }
-            
-            :host-context([dir="rtl"]) .fd-button {
+
+            :host-context([dir='rtl']) .fd-button {
                 margin-left: 1rem;
                 margin-right: 0;
             }
