@@ -1,4 +1,5 @@
 import {
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -9,7 +10,9 @@ import {
     OnInit,
     Optional,
     Output,
+    TemplateRef,
     ViewChild,
+    ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -26,7 +29,7 @@ import { ContentDensityService } from '@fundamental-ngx/core/utils';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TokenComponent implements OnInit, OnDestroy {
+export class TokenComponent implements OnInit, AfterViewInit, OnDestroy {
     /** Whether the token is disabled. */
     @Input()
     disabled = false;
@@ -38,6 +41,14 @@ export class TokenComponent implements OnInit, OnDestroy {
     /** @hidden */
     @ViewChild('tokenWrapperElement')
     tokenWrapperElement: ElementRef;
+
+    /** @hidden */
+    @ViewChild('content')
+    readonly _content: TemplateRef<any>;
+
+    /** @hidden */
+    @ViewChild('viewContainer', { read: ViewContainerRef })
+    readonly _viewContainer: ViewContainerRef;
 
     private _selected = false;
 
@@ -100,6 +111,11 @@ export class TokenComponent implements OnInit, OnDestroy {
                 })
             );
         }
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this._viewContainer.createEmbeddedView(this._content);
     }
 
     /** @hidden */
