@@ -5,7 +5,7 @@
     [class.is-readonly]="readonly"
     [class.fd-shellbar__input-group]="inShellbar"
     [class.fd-input-group--control]="isControl"
-    [class.is-focus]="isFocused && showFocus"
+    [class.is-focus]="isFocused && showFocus && !_isButtonFocused"
     [class]="state ? 'is-' + state : ' '"
 >
     <ng-container *ngIf="placement !== 'before' && !inputElement">
@@ -24,6 +24,7 @@
             [class.fd-shellbar__input-group__addon]="inShellbar"
         >
             <button
+                #button
                 fd-button
                 class="fd-input-group__button"
                 type="button"
