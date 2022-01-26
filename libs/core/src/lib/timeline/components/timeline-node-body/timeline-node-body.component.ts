@@ -27,9 +27,7 @@ export class TimelineNodeBodyComponent {
 
     calculatePositions(): void {
         this._ngZone.onStable.pipe(first()).subscribe(() => {
-            this._ngZone.run(() => {
-                this._timelinePositionControlService.calculatePositions();
-            });
+            this._timelinePositionControlService.calculatePositions();
         });
     }
 }
