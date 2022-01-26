@@ -64,7 +64,7 @@ export class TileComponent implements CssClassBuilder, AfterViewInit, OnChanges 
     ref: ElementRef;
 
     /** @hidden */
-    private _clickable = true;
+    private _clickable = false;
 
     /** @hidden */
     ngOnChanges(): void {
