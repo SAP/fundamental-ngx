@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.296 (2022-01-26)
+
+
+### Bug Fixes
+
+* **core,platform:** defect hunting issues ([#7575](https://github.com/SAP/fundamental-ngx/issues/7575)) ([8827b25](https://github.com/SAP/fundamental-ngx/commit/8827b2544d8eea01cc16743a4f4195d139aed549))
+
 ## 0.33.0-rc.295 (2022-01-26)
 
 ## 0.33.0-rc.294 (2022-01-26)
