@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.294 (2022-01-26)
+
+
+### Bug Fixes
+
+* **core,platform,docs:** strictTemplates errors fixes ([#7566](https://github.com/SAP/fundamental-ngx/issues/7566)) ([021dfea](https://github.com/SAP/fundamental-ngx/commit/021dfea6f95fe18370661e894e6ce5ab4239cecd))
+
 ## 0.33.0-rc.293 (2022-01-25)
 
 
