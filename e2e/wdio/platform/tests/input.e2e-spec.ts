@@ -7,7 +7,6 @@ import {
     doesItExist,
     executeScriptAfterTagAttr,
     executeScriptBeforeTagAttr,
-    getAttributeByName,
     getAttributeByNameArr,
     getElementArrayLength,
     getElementSize,
@@ -51,7 +50,6 @@ describe('Input should ', () => {
         autocompleteInput,
         autocompleteInputLabel,
         autocompleteOptions,
-        disabledInputAttribute,
         errorMessage
     } = inputPage;
 
@@ -147,7 +145,6 @@ describe('Input should ', () => {
 
     it('check have disabled attr assigned', () => {
         waitForElDisplayed(disabledInput);
-        expect(getAttributeByName(disabledInputAttribute, 'ng-reflect-disabled')).toBe('true');
         expect(isEnabled(disabledInput)).toBe(false);
     });
 

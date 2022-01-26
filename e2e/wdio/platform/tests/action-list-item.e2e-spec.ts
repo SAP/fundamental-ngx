@@ -1,5 +1,5 @@
 import { ActionListItemPo } from '../pages/action-list-item.po';
-import { checkAttributeValueTrue, checkElementTextValue } from '../../helper/assertion-helper';
+import { checkElementTextValue } from '../../helper/assertion-helper';
 import {
     acceptAlert,
     click,
@@ -15,7 +15,7 @@ import { alertTextArr, btnText } from '../fixtures/appData/action-list-item-cont
 
 describe('Action List Item Test Suite:', () => {
     const actionListPage = new ActionListItemPo();
-    const { actionBtns, actionLists, actionSections, cozyItem, compactItem } = actionListPage;
+    const { actionBtns, actionSections, cozyItem, compactItem } = actionListPage;
 
     beforeAll(() => {
         actionListPage.open();
@@ -38,7 +38,6 @@ describe('Action List Item Test Suite:', () => {
         });
 
         it('should check styles', () => {
-            checkAttributeValueTrue(actionLists, 'ng-reflect-no-border');
             checkElementTextValue(actionBtns, btnText);
             expect(getElementClass(actionSections, 0)).not.toContain('compact');
             expect(getElementClass(actionSections, 1)).toContain('compact');
