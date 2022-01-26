@@ -10,7 +10,6 @@ import {
 } from '../../driver/wdio';
 import {
     linkAttr,
-    noBorderAttr,
     secondaryAttr,
     secondaryTypes,
     toolbarTextValue
@@ -21,7 +20,6 @@ describe('Standard List Item test suite:', () => {
     const standardListPage = new StandardListItemPo();
     const {
         sNoBorderList,
-        sNoBorderAttr,
         sNoBorderByLineList,
         sNoBorderByLineAttr,
         sNoBorderAvatar,
@@ -60,14 +58,12 @@ describe('Standard List Item test suite:', () => {
 
     describe('Standard List Item - Border Less examples:', () => {
         it('should check border and interactions', () => {
-            expect(getAttributeByName(sNoBorderAttr, noBorderAttr)).toBe('true');
             checkElArrIsClickable(sNoBorderList);
         });
     });
 
     describe('Standard List Item (ByLine)- Border Less examples:', () => {
         it('should check border and density', () => {
-            expect(getAttributeByName(sNoBorderByLineAttr, noBorderAttr)).toBe('true');
             expect(getAttributeByName(sNoBorderByLineAttr, 'contentdensity', 1)).toBe('compact');
         });
 

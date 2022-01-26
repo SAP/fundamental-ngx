@@ -50,7 +50,8 @@ let paginationUniqueId = 0;
     providers: [PaginationService],
     host: {
         class: 'fd-pagination',
-        '[class.fd-pagination--mobile]': 'mobile'
+        '[class.fd-pagination--mobile]': 'mobile',
+        '[class.fd-pagination--short]': '_lastPage <= 9'
     },
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['./pagination.component.scss'],
@@ -110,7 +111,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      * This property is mainly provided to support reading in the right language for screen reader.
      */
     @Input()
-    itemsPerPageLabel = 'Results per page';
+    itemsPerPageLabel = 'Results per Page';
 
     /** Represents the options for items per page. */
     @Input()
@@ -121,7 +122,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         this._itemsPerPageOptions = coerceArray<number>(value)
             .map((v) => coerceNumberProperty(v, 0))
             .map((v) => Math.floor(v))
-            .filter((v) => v > 0 && v < this.totalItems)
+            .filter((v) => v > 0)
             .sort((a, b) => a - b);
 
         if (this._itemsPerPageOptions.some((v) => v !== this.itemsPerPage)) {
@@ -169,39 +170,22 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     lastLabel = 'Last';
 
     /**
-     * Label for the 'Page' page button.
-     * This property is mainly provided to support reading in the right language for screen reader.
-     */
-    @Input()
-    pageLabel = 'Page';
-
-    /**
      * Aria label for the navigation element
      * This property is mainly provided to support reading in the right language for screen reader.
      */
     @Input()
     ariaLabel = 'Pagination';
 
-    /**
-     * The current page label that should be read when a page is selected.
-     * Please use ${currentPage} in the value for replacing with the current page number.
-     * Example: `Page ${currentPage} is selected`.
-     * This property is mainly provided to support reading in the right language for screen reader.
-     */
-    @Input()
-    currentPageAriaLabel = 'Page ${currentPage} is current page';
-
-    /** Event fired when the page is changed. */
+    /** Event emitted when the page is changed. */
     @Output()
     pageChangeStart = new EventEmitter<number>();
 
-    /** @hidden */
-    _pages: number[] = [];
+    /** Event emitted when items per page option is changed.*/
+    @Output()
+    itemsPerPageChange = new EventEmitter<number>();
 
     /** @hidden */
-    get _selectId(): string {
-        return this.id + '-select';
-    }
+    _pages: number[] = [];
 
     /**
      * Retrieves an object that represents
@@ -231,13 +215,13 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     }
 
     /** @hidden */
-    get _currentPageAriaLabel(): string {
-        return this.currentPageAriaLabel.replace(/\${currentPage}/, this.currentPage.toString());
+    get _totalPagesElementId(): string {
+        return this.id + '__total';
     }
 
     /** @hidden */
-    get _totalPagesElementId(): string {
-        return this.id + '__total';
+    get _moreElementValue(): number {
+        return this.paginationService.moreElementValue;
     }
 
     /** @hidden */
@@ -270,6 +254,48 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         return this._rtlService?.rtl.value;
     }
 
+    /**
+     * Label for the 'Page ' page button. Page number passed as function parameter.
+     * This property is mainly provided to support reading in the right language for screen reader.
+     */
+    @Input()
+    pageLabel: (page: number) => string = (page: number) => `Page ${page}`;
+
+    /**
+     * Function to create current page aria label, current page passed as a parameter of the function
+     * This property is mainly provided to support reading in the right language for screen reader.
+     */
+    @Input()
+    currentPageAriaLabel: (currentPage: number) => string = (currentPage: number) =>
+        `Page ${currentPage} is current page`;
+
+    /**
+     * Page label to be shown before current page input in mobile mode.
+     * In conjuction with @pageLabelAfterInputMobile generates the label for the input.
+     * Example: 'Page' + input + pageLabelAfterInputMobile
+     * This property is mainly provided to support i18n.
+     */
+    // eslint-disable-next-line @typescript-eslint/member-ordering
+    @Input()
+    labelBeforeInputMobile = 'Page';
+
+    /**
+     * Page label to be shown after current page input in mobile mode. Pages count passed as the function parameter.
+     * In conjuction with @pageLabelBeforeInputMobile generates the label for the input.
+     * Example: pageLabelBeforeInputMobile + input + 'of 500'.
+     * This property is mainly provided to support i18n.
+     */
+    @Input()
+    labelAfterInputMobile: (pagesCount: number) => string = (pagesCount: number) => `of ${pagesCount}`;
+
+    /**
+     * Current page input aria label, parameters passed to the function (currentPage: number, pagesCount: number).
+     * This property is mainly provided to support reading in the right language for screen reader.
+     */
+    @Input()
+    inputAriaLabel: (currentPage: number, pagesCount: number) => string = (currentPage: number, pagesCount: number) =>
+        `Page input, Current page, Page ${currentPage} of ${pagesCount}`;
+
     /** @hidden */
     constructor(
         private readonly paginationService: PaginationService,
@@ -281,15 +307,15 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        if (changes && changes.itemsPerPage) {
+        if (changes?.itemsPerPage) {
             this._initialItemsPerPage = changes.itemsPerPage.currentValue;
         }
 
-        if (changes && changes.totalItems && this._initialItemsPerPage) {
+        if (changes?.totalItems && this._initialItemsPerPage) {
             this.itemsPerPage = this._initialItemsPerPage;
         }
 
-        if (changes && changes.currentPage) {
+        if (changes?.currentPage) {
             this.currentPage = changes.currentPage.currentValue;
         }
 
@@ -328,12 +354,8 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      * @param page The number of the page to navigate to.
      * @param $event The mouse event (optional).
      */
-    goToPage(page: number, $event?: Event): void {
-        if ($event) {
-            $event.preventDefault();
-        }
-
-        if (page > this.paginationService.getTotalPages(this.paginationObject) || page < 1) {
+    goToPage(page: number): void {
+        if (page > this._lastPage || page < 1) {
             return;
         }
 
@@ -341,12 +363,12 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
 
         this.pageChangeStart.emit(page);
 
-        this._liveAnnouncer.announce(this._currentPageAriaLabel);
+        this._liveAnnouncer.announce(this.currentPageAriaLabel(this.currentPage));
     }
 
     /** Navigates to the first page */
     goToFirstPage(): void {
-        this.goToPage(this._pages[0]);
+        this.goToPage(1);
     }
 
     /**
@@ -376,6 +398,8 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     /** @hidden */
     _onChangePerPage = (event: number): void => {
         this.itemsPerPage = event;
+        this.itemsPerPageChange.emit(this.itemsPerPage);
+
         this._refreshPages();
 
         const maxPage = this._pages[this._pages.length - 1];

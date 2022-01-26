@@ -1,4 +1,3 @@
-export const noBorderAttr = 'ng-reflect-no-border';
 export const linkAttr = 'href';
 export const secondaryAttr = 'secondary';
 export const secondaryTypes = ['positive', 'negative', 'neutral', 'informative', 'critical'];
