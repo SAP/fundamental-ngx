@@ -16,7 +16,7 @@ import { Component } from '@angular/core';
         <div>
             <fd-checkbox
                 label="Banana is the best fruit"
-                tristate="true"
+                [tristate]="true"
                 [values]="{ trueValue: 'Yes', falseValue: 'No', thirdStateValue: 'I dont have an opinion' }"
                 [(ngModel)]="checkboxValue2"
             >

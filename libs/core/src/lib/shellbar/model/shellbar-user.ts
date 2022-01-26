@@ -1,3 +1,5 @@
+import { ColorAccent } from '@fundamental-ngx/core/utils';
+
 export interface ShellbarUser {
     /** Initials of user name */
     initials?: string;
@@ -12,5 +14,5 @@ export interface ShellbarUser {
      * Color Accent of user (optional), for more information about colors accent,
      * please visit: https://sap.github.io/fundamental-styles/components/identifier.html
      */
-    colorAccent?: number;
+    colorAccent?: ColorAccent;
 }

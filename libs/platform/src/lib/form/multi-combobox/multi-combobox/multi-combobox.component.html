@@ -187,7 +187,7 @@
                     *ngFor="let optionItem of group.children; let i = index"
                     fd-list-item
                     role="option"
-                    tabindex="0"
+                    [tabindex]="0"
                     (click)="!mobile && close()"
                     (keyDown)="onItemKeyDownHandler($event, optionItem, i)"
                     [selected]="optionItem.selected"
@@ -211,7 +211,7 @@
                 *ngFor="let optionItem of _suggestions; let i = index"
                 fd-list-item
                 role="option"
-                tabindex="0"
+                [tabindex]="0"
                 (click)="!mobile && close()"
                 (keyDown)="onItemKeyDownHandler($event, optionItem, i)"
                 [selected]="optionItem.selected"

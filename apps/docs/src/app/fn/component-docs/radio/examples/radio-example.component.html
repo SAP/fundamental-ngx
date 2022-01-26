@@ -13,7 +13,13 @@
 <fieldset>
     <legend>Radio buttons disabled</legend>
     <div fn-form-item>
-        <fn-radio-button value="val1" id="radio-4" name="radio-name-2" disabled="true" [(ngModel)]="optionTwoVariable">
+        <fn-radio-button
+            value="val1"
+            id="radio-4"
+            name="radio-name-2"
+            [disabled]="true"
+            [(ngModel)]="optionTwoVariable"
+        >
             Option One
         </fn-radio-button>
     </div>

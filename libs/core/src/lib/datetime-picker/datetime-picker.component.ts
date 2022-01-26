@@ -353,7 +353,7 @@ export class DatetimePickerComponent<D>
      * @param fdDate FdDate
      */
     @Input()
-    disableFunction: (value: D) => void = () => false;
+    disableFunction: (value: D) => boolean = () => false;
 
     /** @hidden */
     constructor(

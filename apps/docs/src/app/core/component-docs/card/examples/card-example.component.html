@@ -41,7 +41,7 @@
     <fd-card-header>
         <fd-avatar
             image="http://picsum.photos/id/1018/400"
-            circle="true"
+            [circle]="true"
             size="s"
             ariaLabel="avatar image"
             title="avatar image"
@@ -71,7 +71,7 @@
 <h3>Card header with icon avatar, subtitle, counter and badge</h3>
 <fd-card badge="New" cardType="list">
     <fd-card-header>
-        <fd-avatar glyph="cart" circle="true" size="s" ariaLabel="avatar image" title="avatar image"></fd-avatar>
+        <fd-avatar glyph="cart" [circle]="true" size="s" ariaLabel="avatar image" title="avatar image"></fd-avatar>
         <h2 fd-card-title>Card Title</h2>
         <h3 fd-card-subtitle>Card Subtitle</h3>
         <span fd-card-counter status="positive">3 of 10</span>

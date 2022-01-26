@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { GridListItemOutputEvent } from '@fundamental-ngx/core/grid-list';
+
+import { GridListItemOutputEvent, GridListItemType } from '@fundamental-ngx/core/grid-list';
 
 interface GridListItem {
     id: number;
     url: string;
-    type?: string;
+    type?: GridListItemType;
     toolbarText?: string;
     selected?: boolean;
     counter?: number;

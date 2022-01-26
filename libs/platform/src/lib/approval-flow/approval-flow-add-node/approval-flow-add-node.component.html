@@ -143,7 +143,7 @@
 
                 <fd-date-picker
                     type="single"
-                    compact="true"
+                    [compact]="true"
                     [state]="!this._dueDate ? 'error' : ''"
                     [(ngModel)]="_dueDate"
                 >

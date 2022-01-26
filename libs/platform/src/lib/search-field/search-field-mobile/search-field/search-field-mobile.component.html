@@ -3,14 +3,14 @@
         <fd-dialog-header>
             <ng-template fdTemplate="header">
                 <div fd-bar-middle>
-                    <fd-bar-element fullWidth="true">
+                    <fd-bar-element [fullWidth]="true">
                         <ng-container *ngTemplateOutlet="childContent?.inputFieldTemplate"></ng-container>
                     </fd-bar-element>
                     <button
                         fd-dialog-close-button
                         fd-initial-focus
                         *ngIf="mobileConfig?.hasCloseButton"
-                        mobile="true"
+                        [mobile]="true"
                         (click)="_handleDismiss()"
                     ></button>
                 </div>

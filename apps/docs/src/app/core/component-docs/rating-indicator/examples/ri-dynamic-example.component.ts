@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RatingIndicatorSize } from '@fundamental-ngx/core/rating-indicator';
 
 @Component({
     selector: 'fd-ri-dynamic-example',
@@ -10,7 +11,7 @@ export class RatingIndicatorDynamicExampleComponent {
         allowHalves: false,
         disabled: false,
         displayMode: false,
-        size: 'md'
+        size: 'md' as RatingIndicatorSize
     };
     sizes = ['xs', 'sm', 'md', 'lg', 'cozy', 'compact', 'condensed'];
     modelValue = 2.2;

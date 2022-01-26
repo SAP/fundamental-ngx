@@ -128,7 +128,7 @@
                     (click)="handleOptionItem(optionItem)"
                     fd-list-item
                     role="option"
-                    tabindex="0"
+                    [tabindex]="0"
                     (keyDown)="handlePressEnter($event, optionItem)"
                     [selected]="isSelectedOptionItem(optionItem)"
                 >
@@ -146,7 +146,7 @@
                 (click)="handleOptionItem(optionItem)"
                 fd-list-item
                 role="option"
-                tabindex="0"
+                [tabindex]="0"
                 (keyDown)="handlePressEnter($event, optionItem)"
                 [selected]="isSelectedOptionItem(optionItem)"
             >

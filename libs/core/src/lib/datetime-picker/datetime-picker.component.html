@@ -55,7 +55,7 @@
                     <fd-calendar
                         calType="single"
                         [activeView]="activeView"
-                        [disableFunction]="disableFunction ? disableFunction : null"
+                        [disableFunction]="disableFunction || null"
                         [selectedDate]="_tempDate"
                         [escapeFocusFunction]="null"
                         [compact]="compact"

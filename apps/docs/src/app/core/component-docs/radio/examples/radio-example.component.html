@@ -29,7 +29,7 @@
                 value="val1"
                 id="radio-4"
                 name="radio-name-2"
-                disabled="true"
+                [disabled]="true"
                 [(ngModel)]="optionTwoVariable"
             >
                 Option One
@@ -72,7 +72,7 @@
 <fieldset fd-fieldset>
     <legend fd-form-legend>Radio button States</legend>
     <fd-form-group>
-        <div fd-form-item isCheck="true">
+        <div fd-form-item>
             <fd-radio-button
                 name="radio-name-4"
                 id="radio-12"
@@ -83,7 +83,7 @@
                 Default Option
             </fd-radio-button>
         </div>
-        <div fd-form-item isCheck="true">
+        <div fd-form-item>
             <fd-radio-button
                 id="radio-13"
                 name="radio-name-4"
@@ -94,7 +94,7 @@
                 Valid(Success) Option
             </fd-radio-button>
         </div>
-        <div fd-form-item isCheck="true">
+        <div fd-form-item>
             <fd-radio-button
                 name="radio-name-4"
                 id="radio-14"
@@ -105,7 +105,7 @@
                 Warning Option
             </fd-radio-button>
         </div>
-        <div fd-form-item isCheck="true">
+        <div fd-form-item>
             <fd-radio-button
                 name="radio-name-4"
                 id="radio-15"
@@ -116,7 +116,7 @@
                 Invalid(Error) Option
             </fd-radio-button>
         </div>
-        <div fd-form-item isCheck="true">
+        <div fd-form-item>
             <fd-radio-button
                 name="radio-name-4"
                 id="radio-16"
@@ -133,56 +133,56 @@
 <fieldset fd-fieldset>
     <legend fd-form-legend>Radio button States compact mode</legend>
     <fd-form-group>
-        <div fd-form-item isCheck="true">
+        <div fd-form-item>
             <fd-radio-button
                 name="radio-name-5"
                 value="val0"
                 state="default"
-                compact="true"
+                [compact]="true"
                 [(ngModel)]="optionFiveVariable"
             >
                 Default Option
             </fd-radio-button>
         </div>
-        <div fd-form-item isCheck="true">
+        <div fd-form-item>
             <fd-radio-button
                 name="radio-name-5"
                 state="success"
                 value="val1"
-                compact="true"
+                [compact]="true"
                 [(ngModel)]="optionFiveVariable"
             >
                 Valid(Success) Option
             </fd-radio-button>
         </div>
-        <div fd-form-item isCheck="true">
+        <div fd-form-item>
             <fd-radio-button
                 name="radio-name-5"
                 value="val2"
                 state="warning"
-                compact="true"
+                [compact]="true"
                 [(ngModel)]="optionFiveVariable"
             >
                 Warning Option
             </fd-radio-button>
         </div>
-        <div fd-form-item isCheck="true">
+        <div fd-form-item>
             <fd-radio-button
                 name="radio-name-5"
                 value="val3"
                 state="error"
-                compact="true"
+                [compact]="true"
                 [(ngModel)]="optionFiveVariable"
             >
                 Invalid(Error) Option
             </fd-radio-button>
         </div>
-        <div fd-form-item isCheck="true">
+        <div fd-form-item>
             <fd-radio-button
                 name="radio-name-5"
                 value="val4"
                 state="information"
-                compact="true"
+                [compact]="true"
                 [(ngModel)]="optionFiveVariable"
             >
                 Information Option
@@ -194,61 +194,61 @@
 <fieldset fd-fieldset>
     <legend fd-form-legend>Radio button States disabled mode</legend>
     <fd-form-group>
-        <div fd-form-item isCheck="true">
+        <div fd-form-item>
             <fd-radio-button
                 name="radio-name-6"
                 value="val0"
                 state="default"
-                compact="true"
-                disabled="true"
+                [compact]="true"
+                [disabled]="true"
                 [(ngModel)]="optionSixVariable"
             >
                 Default Option
             </fd-radio-button>
         </div>
-        <div fd-form-item isCheck="true">
+        <div fd-form-item>
             <fd-radio-button
                 name="radio-name-6"
                 state="success"
                 value="val1"
-                compact="true"
-                disabled="true"
+                [compact]="true"
+                [disabled]="true"
                 [(ngModel)]="optionSixVariable"
             >
                 Valid(Success) Option
             </fd-radio-button>
         </div>
-        <div fd-form-item isCheck="true">
+        <div fd-form-item>
             <fd-radio-button
                 name="radio-name-6"
                 value="val2"
                 state="warning"
-                compact="true"
-                disabled="true"
+                [compact]="true"
+                [disabled]="true"
                 [(ngModel)]="optionSixVariable"
             >
                 Warning Option
             </fd-radio-button>
         </div>
-        <div fd-form-item isCheck="true">
+        <div fd-form-item>
             <fd-radio-button
                 name="radio-name-6"
                 value="val3"
                 state="error"
-                compact="true"
-                disabled="true"
+                [compact]="true"
+                [disabled]="true"
                 [(ngModel)]="optionSixVariable"
             >
                 Invalid(Error) Option
             </fd-radio-button>
         </div>
-        <div fd-form-item isCheck="true">
+        <div fd-form-item>
             <fd-radio-button
                 name="radio-name-6"
                 value="val4"
                 state="information"
-                compact="true"
-                disabled="true"
+                [compact]="true"
+                [disabled]="true"
                 [(ngModel)]="optionSixVariable"
             >
                 Information Option

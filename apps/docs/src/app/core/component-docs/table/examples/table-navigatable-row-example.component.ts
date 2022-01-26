@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { RtlService } from '@fundamental-ngx/core/utils';
+import { ObjectStatus } from '@fundamental-ngx/core/object-status';
 
 interface TableIem {
     column1: string;
@@ -12,7 +13,7 @@ interface TableIem {
 
 interface TableMobileItem {
     name: string;
-    status: string;
+    status: ObjectStatus;
     statusName: string;
     dateOfExpire: string;
     price: string;

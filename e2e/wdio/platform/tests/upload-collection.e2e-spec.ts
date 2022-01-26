@@ -206,11 +206,10 @@ describe('Upload collection test suite', () => {
 
     function checkSelectedPages(selector: string): void {
         scrollIntoView(selector + tablePages);
-        expect(getText(selector + tableResult).trim()).toBe(paginationTestArr[0]);
         const linksLength = getElementArrayLength(selector + tablePages);
         for (let i = 0; i < linksLength; i++) {
             click(selector + tablePages, i);
-            expect(getText(selector + tableResult).trim()).toBe(paginationTestArr[i + 1]);
+            expect(getText(selector + tableResult).trim()).toBe(paginationTestArr[i]);
         }
     }
 

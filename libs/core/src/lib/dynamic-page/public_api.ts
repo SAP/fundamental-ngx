@@ -1,5 +1,6 @@
 export * from './constants';
 export * from './dynamic-page.component';
+export * from './dynamic-page-wrapper.directive';
 export * from './dynamic-page-header/actions/dynamic-page-title-content.component';
 export * from './dynamic-page-header/actions/dynamic-page-base-actions';
 export * from './dynamic-page-header/actions/dynamic-page-global-actions.component';

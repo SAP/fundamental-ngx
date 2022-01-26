@@ -252,6 +252,7 @@ describe('Combobox component test suit', () => {
             scrollIntoView(allInputFields, 15);
             click(activeInputButton, 12);
             expect(isElementDisplayed(dropdownPopover)).toBe(true, 'popover not displayed');
+
             click(dropdownOption);
             expect(getText(smallText_2, 5)).toBe(searchTermAppleText);
 

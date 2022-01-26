@@ -20,6 +20,7 @@ import { NestedItemService } from '../nested-item/nested-item.service';
 import { NestedListPopoverInterface } from './nested-list-popover.interface';
 import { NestedListContentDirective } from '../nested-content/nested-list-content.directive';
 import { RtlService } from '@fundamental-ngx/core/utils';
+import { Placement } from '@fundamental-ngx/core/shared';
 
 @Component({
     selector: 'fd-nested-list-popover',
@@ -58,7 +59,7 @@ export class NestedListPopoverComponent implements NestedListPopoverInterface, A
     parentItemElement: NestedItemInterface;
 
     /** @hidden */
-    placement$: Observable<string>;
+    placement$: Observable<Placement>;
 
     /** @hidden */
     open = false;

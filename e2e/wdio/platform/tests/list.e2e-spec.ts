@@ -1,26 +1,16 @@
 import { ListPo } from '../pages/list.po';
-import {
-    checkAttributeValueTrue,
-    checkElArrIsClickable,
-    checkElementText,
-    checkElementTextValue
-} from '../../helper/assertion-helper';
+import { checkElArrIsClickable, checkElementText, checkElementTextValue } from '../../helper/assertion-helper';
 import {
     compactClass,
-    ariaMultiSelectable,
     borderStyleAttr,
     compactAttr,
     compactValue,
-    itemUnreadStatus,
-    lazyLoadAttr,
     listTypeAttr,
     loadMoreClass,
     multiSelect,
     navIndicator,
     navUrl,
-    noBorderAttr,
     noDataText,
-    scrollLoadAttr,
     selectionAttr,
     listTitleArr
 } from '../fixtures/appData/list-contents';
@@ -44,8 +34,6 @@ import {
     pause,
     waitForNotPresent,
     browserIsSafari,
-    isElementDisplayed,
-    getTextArr,
     getElementSize,
     waitForPresent
 } from '../../driver/wdio';
@@ -55,7 +43,6 @@ describe('List test suite:', () => {
     const {
         noBorderListItems,
         noBorderCompactList,
-        noBorderList,
         footerListItems,
         footerCompactList,
         footer,
@@ -74,13 +61,10 @@ describe('List test suite:', () => {
         multiListItems,
         multiToolbar,
         multiCheckbox,
-        singleList,
         singleListItems,
-        singleToolbar,
         singleRadioBtn,
         navListItems,
         navListLink,
-        vScrollList,
         vScrollListItems,
         vScrollLoadIcon,
         loadListItems,
@@ -92,11 +76,9 @@ describe('List test suite:', () => {
         btnEditBtn,
         noDataListItems,
         noDataCompactList,
-        unreadListAttr,
         unreadListItems,
         multiCheckBoxMark,
         singleRadioBtnInput,
-        busyIndicator,
         noSepList,
         noSepListItems,
         cozyItem,
@@ -121,7 +103,6 @@ describe('List test suite:', () => {
         });
 
         it('should check border', () => {
-            checkAttributeValueTrue(noBorderList, noBorderAttr);
             getCSSPropertyByName(noBorderListItems, borderStyleAttr);
         });
     });
@@ -238,8 +219,6 @@ describe('List test suite:', () => {
         it('should do basic checks', () => {
             isElementClickable(vScrollListItems);
             checkElementText(vScrollListItems);
-            checkAttributeValueTrue(vScrollList, scrollLoadAttr);
-            checkAttributeValueTrue(vScrollList, lazyLoadAttr);
         });
 
         it('should check scroll', () => {
@@ -328,7 +307,6 @@ describe('List test suite:', () => {
         it('should do basic checks and check unread data', () => {
             checkElArrIsClickable(unreadListItems);
             checkElementText(unreadListItems);
-            expect(getAttributeByName(unreadListAttr, itemUnreadStatus, 1)).toBe('true');
         });
     });
 

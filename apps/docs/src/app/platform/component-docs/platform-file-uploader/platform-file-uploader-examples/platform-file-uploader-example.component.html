@@ -5,9 +5,9 @@
         id="input1"
         name="defaultFileUploaderSample"
         zone="zLeft"
-        rank="1"
+        [rank]="1"
         placeholder="Choose file to upload"
-        required="true"
+        [required]="true"
     >
         <fdp-file-uploader
             ariaLabel="Choose file"
@@ -19,7 +19,7 @@
             buttonAriaLabel="browse file"
             accept=".png,.jpg"
             [(ngModel)]="files"
-            multiple="true"
+            [multiple]="true"
             (selectionChange)="handleFileSelection($event)"
             (invalidFileChange)="handleInvalidFileSelection($event)"
         ></fdp-file-uploader>

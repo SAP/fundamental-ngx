@@ -8,8 +8,6 @@ import { TimelineAxis, TimelineSidePosition } from '@fundamental-ngx/core/timeli
 })
 export class TimelineVerticalDoubleSideExampleComponent {
     data = TIMELINE_EXAMPLE_DATA;
-
     axis: TimelineAxis = 'vertical';
-
     layout: TimelineSidePosition = 'double';
 }

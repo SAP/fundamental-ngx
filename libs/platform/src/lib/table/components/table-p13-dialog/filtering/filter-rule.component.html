@@ -122,7 +122,7 @@
                             class="filter-row__input"
                             type="single"
                             [compact]="true"
-                            required
+                            [required]="true"
                             [name]="valueKey"
                             [(ngModel)]="rule[valueKey]"
                             (ngModelChange)="_onModelChange()"
@@ -135,7 +135,7 @@
                             [name]="valueKey"
                             [(ngModel)]="rule[valueKey]"
                             (ngModelChange)="_onModelChange()"
-                            required
+                            [required]="true"
                         >
                             <fd-option [value]="undefined" i18n="@@platformTableP13FilterBooleanOptionNotDefined">
                                 &nbsp;

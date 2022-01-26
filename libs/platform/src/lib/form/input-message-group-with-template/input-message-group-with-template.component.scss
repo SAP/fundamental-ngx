@@ -29,4 +29,8 @@ fdp-input-message-group {
 .fd-popover__popper.fd-popover__popper--input-message-group {
     margin-top: 0 !important;
     z-index: 999;
+
+    .fd-form-message {
+        display: block;
+    }
 }

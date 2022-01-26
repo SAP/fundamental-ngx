@@ -5,7 +5,7 @@
         </ng-container>
     </ng-container>
 </ng-template>
-<fd-busy-indicator [loading]="formLoading" block="true">
+<fd-busy-indicator [loading]="formLoading" [block]="true">
     <form (ngSubmit)="_onSubmit()" #generatorForm="ngForm">
         <fdp-form-group
             *ngIf="form"

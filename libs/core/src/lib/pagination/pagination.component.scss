@@ -1,1 +1,12 @@
 @import '~fundamental-styles/dist/pagination';
+
+$block: fd-pagination;
+
+.#{$block} {
+    &__label,
+    &__total-label {
+        .fd-form-label {
+            margin: 0;
+        }
+    }
+}

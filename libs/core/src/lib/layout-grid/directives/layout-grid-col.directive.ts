@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { BooleanInput, coerceBooleanProperty, coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
 import { CSS_CLASS_NAME, GRID_COLUMNS_NUMBER } from '../constants';
 import { applyCssClass } from '@fundamental-ngx/core/utils';
 import { CssClassBuilder } from '@fundamental-ngx/core/utils';
@@ -10,11 +10,11 @@ import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 export class LayoutGridColDirective implements CssClassBuilder, OnInit, OnChanges {
     /** Defines the width of the element on the layout grid. */
     @Input()
-    fdLayoutGridCol: number;
+    fdLayoutGridCol: NumberInput;
 
     /** Weather the column should take all available width */
     @Input()
-    set colGrow(value: boolean) {
+    set colGrow(value: BooleanInput) {
         this._colGrow = coerceBooleanProperty(value);
     }
 
@@ -95,7 +95,13 @@ export class LayoutGridColDirective implements CssClassBuilder, OnInit, OnChange
     }
 
     /** @hidden */
-    getCssClassWithColWidth(classPrefix: string, colWidth: number): string {
-        return colWidth <= GRID_COLUMNS_NUMBER && colWidth >= 1 ? classPrefix + colWidth : null;
+    getCssClassWithColWidth(classPrefix: string, colWidth: NumberInput): string {
+        if (!colWidth) {
+            return null;
+        }
+
+        const col = coerceNumberProperty(colWidth);
+
+        return col <= GRID_COLUMNS_NUMBER && col >= 1 ? classPrefix + col : null;
     }
 }

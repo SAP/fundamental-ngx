@@ -15,7 +15,7 @@
     </fd-dialog-header>
 
     <fd-dialog-body>
-        <ul fd-list selection="true" compact="true">
+        <ul fd-list [selection]="true" [compact]="true">
             <li fd-list-group-header>
                 <span fd-list-title i18n="@@platformTableSortDialogSortOrderHeader">Sort Order</span>
             </li>
@@ -25,7 +25,7 @@
                     name="sort-order"
                     value="asc"
                     state="default"
-                    compact="true"
+                    [compact]="true"
                     [ngModel]="direction"
                     (ngModelChange)="_sortDirectionChange($event)"
                 ></fd-radio-button>
@@ -36,7 +36,7 @@
                     name="sort-order"
                     value="desc"
                     state="default"
-                    compact="true"
+                    [compact]="true"
                     [ngModel]="direction"
                     (ngModelChange)="_sortDirectionChange($event)"
                 ></fd-radio-button>
@@ -44,7 +44,7 @@
             </li>
         </ul>
 
-        <ul fd-list selection="true" compact="true">
+        <ul fd-list [selection]="true" [compact]="true">
             <li fd-list-group-header>
                 <span fd-list-title i18n="@@platformTableSortDialogSortByHeader">Sorted By</span>
             </li>
@@ -54,7 +54,7 @@
                     name="sort-by"
                     [value]="NOT_SORTED_OPTION_VALUE"
                     state="default"
-                    compact="true"
+                    [compact]="true"
                     [ngModel]="field"
                     (ngModelChange)="_sortFieldChange($event)"
                 ></fd-radio-button>
@@ -65,7 +65,7 @@
                     name="sort-by"
                     [value]="column.key"
                     state="default"
-                    compact="true"
+                    [compact]="true"
                     [ngModel]="field"
                     (ngModelChange)="_sortFieldChange($event)"
                 ></fd-radio-button>

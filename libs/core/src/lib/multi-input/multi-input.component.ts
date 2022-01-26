@@ -625,12 +625,12 @@ export class MultiInputComponent
     }
 
     /** @hidden */
-    private _defaultDisplay(str: string): string {
+    private _defaultDisplay(str: any): string {
         return str;
     }
 
     /** @hidden */
-    private _defaultParse(str: string): string {
+    private _defaultParse(str: any): string {
         return str;
     }
 

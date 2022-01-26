@@ -20,7 +20,6 @@ import {
     setValue,
     waitForElDisplayed,
     getCurrentUrl,
-    getValue,
     browserIsSafari,
     browserIsSafariorFF,
     waitForPresent
@@ -56,6 +55,7 @@ describe('Table test suite', () => {
         tablePaginationExample,
         menuItem,
         paginationLink,
+        activePaginationLink,
         linkPrevious,
         linkNext,
         tableCustomColumnsExample,
@@ -402,21 +402,20 @@ describe('Table test suite', () => {
             expect(tenTableRows).toEqual(10);
         });
 
-        it('should check selected pages by clicking options', () => {
+        it('should check selected pages by clicking pages links', () => {
             scrollIntoView(tablePaginationExample);
             click(paginationLink);
-            expect(getValue(tablePaginationExample + inputField)).toBe('1');
-            click(paginationLink);
-            expect(getValue(tablePaginationExample + inputField)).toBe('2');
+            expect(getText(tablePaginationExample + activePaginationLink)).toBe('1');
+            click(paginationLink, 1);
+            expect(getText(tablePaginationExample + activePaginationLink)).toBe('2');
         });
 
         it('should check selected pages by clicking next and previous link', () => {
             scrollIntoView(tablePaginationExample);
             click(linkNext);
-            expect(getValue(tablePaginationExample + inputField)).toBe('4');
-
+            expect(getText(tablePaginationExample + activePaginationLink)).toBe('4');
             click(linkPrevious);
-            expect(getValue(tablePaginationExample + inputField)).toBe('3');
+            expect(getText(tablePaginationExample + activePaginationLink)).toBe('3');
         });
 
         // skipped due to https://github.com/SAP/fundamental-ngx/issues/7148

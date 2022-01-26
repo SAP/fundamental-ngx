@@ -1,4 +1,4 @@
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Directive, Input } from '@angular/core';
 import { CollectionFilterGroupStrategy, FilterableColumnDataType, FilterType } from '@fundamental-ngx/platform/table';
 
@@ -39,7 +39,7 @@ export class SmartFilterBarFieldDefinitionDirective {
 
     /** Whether this field can be filtered. */
     @Input()
-    set filterable(value: boolean) {
+    set filterable(value: BooleanInput) {
         this._filterable = coerceBooleanProperty(value);
     }
 
@@ -52,7 +52,7 @@ export class SmartFilterBarFieldDefinitionDirective {
 
     /** Whether this field filter is mandatory. */
     @Input()
-    set required(value: boolean) {
+    set required(value: BooleanInput) {
         this._required = coerceBooleanProperty(value);
     }
 
@@ -65,12 +65,12 @@ export class SmartFilterBarFieldDefinitionDirective {
 
     /** Whether this field filter is selected by default. */
     @Input()
-    set defaultSelected(value: boolean) {
+    set defaultSelected(value: BooleanInput) {
         this._defaultSelected = coerceBooleanProperty(value);
     }
     /** Whether this field has autocomplete options */
     @Input()
-    set hasOptions(value: boolean) {
+    set hasOptions(value: BooleanInput) {
         this._hasOptions = coerceBooleanProperty(value);
     }
 

@@ -1,6 +1,6 @@
 <h3>Checkbox group created from passed checkboxes and value is required</h3>
 <fdp-form-group [formGroup]="form1" [object]="favorites">
-    <fdp-form-field #fl1 id="fruitsEx" label="My favorite fruits:" [required]="true" rank="1">
+    <fdp-form-field #fl1 id="fruitsEx" label="My favorite fruits:" [required]="true" [rank]="1">
         <fdp-checkbox-group
             [isInline]="true"
             name="fruits"
@@ -23,7 +23,7 @@
 
 <h3>Checkbox group created from list of values and value is required</h3>
 <fdp-form-group [formGroup]="form2">
-    <fdp-form-field #fl2 id="fruits1" label="My favorite fruits:" [required]="true" rank="1">
+    <fdp-form-field #fl2 id="fruits1" label="My favorite fruits:" [required]="true" [rank]="1">
         <fdp-checkbox-group
             [isInline]="false"
             name="fruits"
@@ -107,7 +107,7 @@
 
 <h3>Checkbox group created from list of SelectItem Objects and value is required</h3>
 <fdp-form-group [formGroup]="form3">
-    <fdp-form-field #fl3 id="language" label="Languages Known:" [required]="true" rank="1">
+    <fdp-form-field #fl3 id="language" label="Languages Known:" [required]="true" [rank]="1">
         <fdp-checkbox-group
             [isInline]="true"
             name="language"
@@ -127,19 +127,19 @@
 
 <h3>Checkbox with same context</h3>
 <fdp-form-group #fg hintPlacement="left" [formGroup]="form4">
-    <fdp-form-field id="apple" hintPlacement="left" rank="1" [validators]="validators" [i18Strings]="apple">
+    <fdp-form-field id="apple" hintPlacement="left" [rank]="1" [validators]="validators" [i18Strings]="apple">
         <fdp-checkbox name="apple" [isBinary]="true" title="apple" value="apple" formControlName="apple"
             >Apple</fdp-checkbox
         >
     </fdp-form-field>
 
-    <fdp-form-field id="banana" hintPlacement="left" rank="2" [validators]="validators" [i18Strings]="banana">
+    <fdp-form-field id="banana" hintPlacement="left" [rank]="2" [validators]="validators" [i18Strings]="banana">
         <fdp-checkbox name="engineering" [isBinary]="true" title="banana" value="banana" formControlName="banana"
             >Banana</fdp-checkbox
         >
     </fdp-form-field>
 
-    <fdp-form-field id="grapes" [validators]="validators" hintPlacement="left" rank="3" [i18Strings]="grape">
+    <fdp-form-field id="grapes" [validators]="validators" hintPlacement="left" [rank]="3" [i18Strings]="grape">
         <fdp-checkbox name="grapes" [isBinary]="true" title="grapes" value="grapes" formControlName="grapes"
             >Grapes</fdp-checkbox
         >

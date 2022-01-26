@@ -6,7 +6,7 @@
                 id="detailedDescription"
                 label="When showExceededText is true and value set exceeds limit"
                 placeholder="Start entering detailed description"
-                rank="10"
+                [rank]="10"
                 [required]="true"
                 [validators]="textareaValidator"
             >
@@ -24,7 +24,7 @@
                 id="noCounterMessageInteraction"
                 label="When showExceededText is false and value set exceeds limit"
                 placeholder="Start entering. Counter message will not be shown, but if an initial value is set whose length > maxLength, excess text is removed on Backpress"
-                rank="10"
+                [rank]="10"
                 [required]="true"
                 [validators]="textareaNoCounterMessageValidator"
             >
@@ -38,7 +38,7 @@
                 </fdp-textarea>
             </fdp-form-field>
 
-            <fdp-form-field id="submit-button" rank="20">
+            <fdp-form-field id="submit-button" [rank]="20">
                 <fdp-button type="submit" (click)="onSubmit()" label="Submit"></fdp-button>
             </fdp-form-field>
 
