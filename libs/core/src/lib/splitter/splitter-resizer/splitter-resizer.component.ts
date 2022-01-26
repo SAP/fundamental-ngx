@@ -21,7 +21,10 @@ import { delay, take, takeUntil } from 'rxjs/operators';
 
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 
-import { SplitterPaneContainerOrientation } from '../splitter-pane-container/splitter-pane-orientation.enum';
+import {
+    SplitterPaneContainerOrientation,
+    SplitterPaneContainerOrientationType
+} from '../splitter-pane-container/splitter-pane-orientation.enum';
 
 /** @dynamic */
 @Component({
@@ -38,7 +41,7 @@ import { SplitterPaneContainerOrientation } from '../splitter-pane-container/spl
 export class SplitterResizerComponent implements OnDestroy {
     /** Orientation of the splitter's host pane container. */
     @Input()
-    orientation: SplitterPaneContainerOrientation = SplitterPaneContainerOrientation.vertical;
+    orientation: SplitterPaneContainerOrientationType = SplitterPaneContainerOrientation.vertical;
 
     /** Event emitted after resizing has started. */
     @Output()

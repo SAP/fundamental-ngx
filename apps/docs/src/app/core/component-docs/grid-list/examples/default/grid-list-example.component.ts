@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { GridListItemType } from '@fundamental-ngx/core/grid-list';
+
 interface GridListItem {
     id: number;
     title: string;
     description: string;
-    type?: string;
+    type?: GridListItemType;
     counter?: number;
 }
 

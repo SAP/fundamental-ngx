@@ -2,7 +2,6 @@ import { ObjectStatusPo } from '../pages/object-status.po';
 import {
     acceptAlert,
     click,
-    getAttributeByName,
     getElementArrayLength,
     getElementClass,
     getText,
@@ -10,13 +9,7 @@ import {
     scrollIntoView,
     waitForPresent
 } from '../../driver/wdio';
-import {
-    defaultStatusText,
-    indicationColorText,
-    largeStatusAttribute,
-    semanticStatusText,
-    invertedAttribute
-} from '../fixtures/appData/object-status-contents';
+import { defaultStatusText, indicationColorText, semanticStatusText } from '../fixtures/appData/object-status-contents';
 import { checkElementDisplayed, checkElementTextValue } from '../../helper/assertion-helper';
 
 describe('object status test suite', () => {
@@ -83,12 +76,12 @@ describe('object status test suite', () => {
     });
 
     describe('inverted object status example', () => {
-        it('should check status is inverted', () => {
+        // TODO: write appropriate e2e
+        xit('should check status is inverted', () => {
             const statusCount = getElementArrayLength(invertedExamples + status);
 
             for (let i = 0; i < statusCount; i++) {
                 scrollIntoView(invertedExamples + status);
-                expect(getAttributeByName(invertedExamples + status, invertedAttribute)).toBe('true');
             }
         });
     });
@@ -107,12 +100,12 @@ describe('object status test suite', () => {
     });
 
     describe('object status large design example', () => {
-        it('should check large status', () => {
+        // TODO: write appropriate e2e
+        xit('should check large status', () => {
             const statusCount = getElementArrayLength(largeExamples + status);
 
             for (let i = 0; i < statusCount; i++) {
                 scrollIntoView(largeExamples + status);
-                expect(getAttributeByName(largeExamples + status, largeStatusAttribute)).toBe('true');
             }
         });
     });

@@ -149,7 +149,7 @@
             (ngSubmit)="search()"
         >
             <fd-layout-grid *ngIf="!mobile || (mobile && !isOpenAdvanced)">
-                <div fdLayoutGridCol="12" colMd="12" [colLg]="mobile ? 12 : 6" [colXl]="mobile ? 12 : 6">
+                <div [fdLayoutGridCol]="12" [colMd]="12" [colLg]="mobile ? 12 : 6" [colXl]="mobile ? 12 : 6">
                     <div fd-form-item>
                         <fd-input-group>
                             <input
@@ -165,7 +165,7 @@
                                 [attr.aria-label]="searchField.placeholder"
                             />
 
-                            <span fd-input-group-addon [compact]="true" button="true">
+                            <span fd-input-group-addon [compact]="true" [button]="true">
                                 <button
                                     fd-button
                                     title="Search"
@@ -179,8 +179,8 @@
                 </div>
 
                 <div
-                    fdLayoutGridCol="12"
-                    colMd="12"
+                    [fdLayoutGridCol]="12"
+                    [colMd]="12"
                     [colLg]="mobile ? 12 : 6"
                     [colXl]="mobile ? 12 : 6"
                     *ngIf="_hasAdvanced"
@@ -241,7 +241,7 @@
                         "
                     >
                         <ng-container *ngIf="filter.advanced">
-                            <div fdLayoutGridCol="12" colMd="12" colLg="6" colXl="3">
+                            <div [fdLayoutGridCol]="12" [colMd]="12" [colLg]="6" [colXl]="3">
                                 <label class="fd-form-group__header" fd-form-label [for]="'input' + filter.key"
                                     >{{ filter.label }}:</label
                                 >
@@ -259,10 +259,10 @@
 
                     <div
                         colGrow
-                        fdLayoutGridCol="12"
-                        colMd="12"
-                        colLg="6"
-                        colXl="3"
+                        [fdLayoutGridCol]="12"
+                        [colMd]="12"
+                        [colLg]="6"
+                        [colXl]="3"
                         *ngIf="filters.length > maxShownInitialFilters"
                         class="fdp-value-help-dialog__toggle-filters"
                     >

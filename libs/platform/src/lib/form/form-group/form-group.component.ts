@@ -39,7 +39,7 @@ import {
     isDevMode
 } from '@angular/core';
 import { AbstractControl, ControlContainer, FormGroup } from '@angular/forms';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { KeyValue } from '@angular/common';
 import { takeUntil } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
@@ -295,7 +295,7 @@ export class FormGroupComponent
         return this._useForm;
     }
 
-    set useForm(value: boolean) {
+    set useForm(value: BooleanInput) {
         this._useForm = coerceBooleanProperty(value);
     }
 

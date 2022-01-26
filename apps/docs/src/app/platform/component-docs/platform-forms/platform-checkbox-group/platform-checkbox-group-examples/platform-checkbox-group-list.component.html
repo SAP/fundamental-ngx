@@ -2,7 +2,7 @@
 <h3>Checkboxes created from given list of values</h3>
 <p>Inline checkboxes</p>
 <fdp-form-group [formGroup]="form1">
-    <fdp-form-field #fl1 id="seasons" label="My favorite Seasons: " rank="1">
+    <fdp-form-field #fl1 id="seasons" label="My favorite Seasons: " [rank]="1">
         <fdp-checkbox-group
             [list]="seasons"
             name="fav-seasons"
@@ -18,7 +18,7 @@
 
 <p>Pre-selection based on value passed</p>
 <fdp-form-group [formGroup]="form2" [object]="selectedPhones">
-    <fdp-form-field #fl2 id="phones" label="Phones interested in:" rank="1">
+    <fdp-form-field #fl2 id="phones" label="Phones interested in:" [rank]="1">
         <fdp-checkbox-group
             [list]="phonesList"
             name="brands"
@@ -33,7 +33,7 @@
 
 <p>Pre-selection based on value passed from formGroup</p>
 <fdp-form-group [formGroup]="form3">
-    <fdp-form-field #fl4 id="sports1" label="Sports I Play:" rank="1">
+    <fdp-form-field #fl4 id="sports1" label="Sports I Play:" [rank]="1">
         <fdp-checkbox-group [list]="sports" name="sports" ariaLabel="Sports I Play" formControlName="sports">
         </fdp-checkbox-group>
     </fdp-form-field>
@@ -44,7 +44,7 @@
 
 <p>Disabled checkbox group</p>
 <fdp-form-group [formGroup]="form3">
-    <fdp-form-field #fl3 id="sportsDisabled" label="Disabled checkbox Group: " [disabled]="true" rank="1">
+    <fdp-form-field #fl3 id="sportsDisabled" label="Disabled checkbox Group: " [disabled]="true" [rank]="1">
         <fdp-checkbox-group [list]="sports" name="sports" ariaLabel="Disabled checkbox" [formControl]="fl3.formControl">
         </fdp-checkbox-group>
     </fdp-form-field>
@@ -54,7 +54,7 @@
 <h3>Checkbox value triggered by Action</h3>
 <form #actionForm="ngForm" [formGroup]="form4">
     <fdp-form-group [formGroup]="form4">
-        <fdp-form-field #fl4 id="frameworks" label="My favorite frameworks:" rank="1">
+        <fdp-form-field #fl4 id="frameworks" label="My favorite frameworks:" [rank]="1">
             <fdp-checkbox-group
                 [isInline]="false"
                 name="frameworks"
@@ -64,7 +64,7 @@
             ></fdp-checkbox-group>
         </fdp-form-field>
 
-        <fdp-form-field rank="2">
+        <fdp-form-field [rank]="2">
             <fdp-button contentDensity="compact" type="submit" label="Submit"></fdp-button>
         </fdp-form-field>
 
@@ -86,7 +86,7 @@
 <h3>Checkboxes created from given list of values</h3>
 <p>Inline checkboxes</p>
 <fdp-form-group>
-    <fdp-form-field id="weather" label="My favorite Weather:" rank="1">
+    <fdp-form-field id="weather" label="My favorite Weather:" [rank]="1">
         <fdp-checkbox-group
             [list]="seasons"
             name="seasons-fav"
@@ -102,7 +102,7 @@
 
 <p>Pre-selection based on value passed</p>
 <fdp-form-group>
-    <fdp-form-field id="sports" label="Sports interested in:" rank="1">
+    <fdp-form-field id="sports" label="Sports interested in:" [rank]="1">
         <fdp-checkbox-group [list]="sports" name="sports" ariaLabel="Sports interested in" [(ngModel)]="selectedSports">
         </fdp-checkbox-group>
     </fdp-form-field>
@@ -113,7 +113,7 @@
 
 <p>Disabled checkbox group</p>
 <fdp-form-group>
-    <fdp-form-field id="sportsDisabled" label="Disabled checkbox Group:" rank="1">
+    <fdp-form-field id="sportsDisabled" label="Disabled checkbox Group:" [rank]="1">
         <fdp-checkbox-group [list]="sports" name="sports" [disabled]="true" ariaLabel="Disabled checkbox">
         </fdp-checkbox-group>
     </fdp-form-field>

@@ -32,7 +32,7 @@ export type ButtonType = '' | 'secondary' | 'flat' | 'link' | 'outline' | 'naked
         '[attr.disabled]': '_disabled || null'
     }
 })
-export class ExperimentalButtonComponent extends BaseButton implements OnChanges, CssClassBuilder, OnInit, OnDestroy {
+export class ButtonComponent extends BaseButton implements OnChanges, CssClassBuilder, OnInit, OnDestroy {
     /** The property allows user to pass additional css classes. */
     @Input()
     class = '';

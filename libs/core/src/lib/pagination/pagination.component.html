@@ -42,18 +42,19 @@
         ></a>
 
         <ng-container *ngFor="let page of _pages">
-            <ng-container *ngIf="page !== currentPage; else currentPageInput">
+            <ng-container *ngIf="page !== currentPage; else currentPageTemplate">
                 <a
-                    *ngIf="page !== -1; else more"
+                    *ngIf="page !== _moreElementValue; else more"
                     fd-button
                     fdType="transparent"
                     [compact]="compact"
                     class="fd-pagination__link"
                     [title]="nextLabel"
-                    [attr.aria-label]="pageLabel + ' ' + page"
-                    (click)="goToPage(page, $event)"
-                    >{{ page }}</a
+                    [attr.aria-label]="pageLabel(page)"
+                    (click)="goToPage(page)"
                 >
+                    {{ page }}
+                </a>
             </ng-container>
         </ng-container>
 
@@ -93,7 +94,13 @@
 </ng-container>
 
 <ng-template #more>
-    <span class="fd-pagination__more" aria-hidden="true" aria-label="..." role="presentation"></span>
+    <span
+        class="fd-pagination__more"
+        [class.fd-pagination__more--compact]="compact"
+        aria-hidden="true"
+        aria-label="..."
+        role="presentation"
+    ></span>
 </ng-template>
 
 <ng-template #total let-showing="showing">
@@ -113,8 +120,19 @@
     </fd-select>
 </ng-template>
 
-<ng-template #currentPageInput>
-    <label fd-form-label class="fd-pagination__label" [attr.for]="_selectId"> {{ pageLabel }}: </label>
+<ng-template #currentPageTemplate>
+    <a
+        fd-button
+        fdType="transparent"
+        [compact]="compact"
+        class="fd-pagination__link is-active"
+        [attr.aria-current]="true"
+        [attr.aria-label]="pageLabel(currentPage)"
+    >
+        {{ currentPage }}
+    </a>
+
+    <label fd-form-label class="fd-pagination__label"> {{ labelBeforeInputMobile }}: </label>
 
     <input
         fd-form-control
@@ -124,15 +142,18 @@
         min="1"
         type="number"
         [max]="_lastPage"
-        [attr.name]="_selectId"
-        [attr.id]="_selectId"
         [state]="currentPageModel.invalid ? 'error' : null"
         [compact]="compact"
         class="fd-pagination__input"
         #currentPageModel="ngModel"
         [ngModel]="currentPage"
+        [attr.aria-label]="inputAriaLabel"
         (keydown.enter)="goToPage(currentPageModel.value)"
         (keydown.space)="goToPage(currentPageModel.value)"
         (blur)="_restoreInputValue(currentPageModel)"
     />
+
+    <label fd-form-label class="fd-pagination__label">
+        {{ labelAfterInputMobile(_lastPage) }}
+    </label>
 </ng-template>

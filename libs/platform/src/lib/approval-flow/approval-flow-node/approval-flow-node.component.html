@@ -69,7 +69,7 @@
                 <ng-template #variousTeams i18n="@@platformApprovalFlowNodeVariousTeams"> Various teams </ng-template>
             </div>
 
-            <fdp-object-status [status]="_objectStatus" inverted="true">
+            <fdp-object-status [status]="_objectStatus" [inverted]="true">
                 <ng-container *ngIf="!checkDueDate || !_showDueDateWarning">
                     {{ node.status }}
                 </ng-container>

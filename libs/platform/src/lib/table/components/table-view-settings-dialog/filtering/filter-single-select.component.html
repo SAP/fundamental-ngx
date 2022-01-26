@@ -1,10 +1,10 @@
-<ul fd-list compact="true" selection="true">
+<ul fd-list [compact]="true" [selection]="true">
     <li fd-list-item [selected]="_value === NOT_FILTERED_OPTION_VALUE">
         <fd-radio-button
             name="sort-by"
             [value]="NOT_FILTERED_OPTION_VALUE"
             state="default"
-            compact="true"
+            [compact]="true"
             [ngModel]="_value"
             (ngModelChange)="_onValueChange($event)"
         ></fd-radio-button>
@@ -15,7 +15,7 @@
             [ngModel]="_value"
             (ngModelChange)="_onValueChange($event)"
             [value]="option.value"
-            compact="true"
+            [compact]="true"
             name="filtering-settings-single-select"
         ></fd-radio-button>
         <span fd-list-title>{{ option.label }}</span>

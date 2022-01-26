@@ -7,7 +7,7 @@
                 label="Textarea with growing=false and growingMaxLines=7"
                 placeholder="Start entering something. Growing is not enabled, but growingMaxLines of 7 is given, so it is restricted to a height of 7 lines."
                 hint="This is tooltip help"
-                rank="10"
+                [rank]="10"
                 hintPlacement="left"
                 style="width: auto"
             >
@@ -26,7 +26,7 @@
                 label="Textarea with growing=false and height='80px'"
                 placeholder="Start entering something.  Growing is not enabled, but height is set, so it is restricted to a height of 80px"
                 hint="This is tooltip help"
-                rank="10"
+                [rank]="10"
                 hintPlacement="left"
                 [validators]="textareaValidator"
             >
@@ -51,7 +51,7 @@
                     'Start entering something. It will grow until growingMaxLines number of lines are visible.'
                 "
                 hint="This is tooltip help"
-                rank="10"
+                [rank]="10"
                 hintPlacement="left"
             >
                 <fdp-textarea
@@ -71,7 +71,7 @@
                 label="Textarea with growing=true and height='80px'"
                 placeholder="Start entering something. It will grow until height is reached."
                 hint="This is tooltip help"
-                rank="10"
+                [rank]="10"
                 hintPlacement="left"
                 [validators]="textareaValidator"
             >
@@ -95,7 +95,7 @@
                 label="Textarea with growingMaxLines and height both set"
                 placeholder="Start entering something. Preference will be given to grow by height."
                 hint="This is tooltip help"
-                rank="10"
+                [rank]="10"
                 hintPlacement="left"
             >
                 <fdp-textarea
@@ -116,7 +116,7 @@
                 label="Textarea with growing=true neither height nor growingMaxLines set"
                 placeholder="Start entering something. It will keep growing."
                 hint="This is tooltip help"
-                rank="10"
+                [rank]="10"
                 hintPlacement="left"
             >
                 <fdp-textarea

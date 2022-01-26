@@ -1,12 +1,12 @@
 import 'focus-visible';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ExperimentalSwitchComponent } from './switch.component';
+import { SwitchComponent } from './switch.component';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
-    declarations: [ExperimentalSwitchComponent],
+    declarations: [SwitchComponent],
     imports: [CommonModule, FormsModule],
-    exports: [ExperimentalSwitchComponent]
+    exports: [SwitchComponent]
 })
-export class ExperimentalSwitchModule {}
+export class SwitchModule {}

@@ -28,7 +28,7 @@ const routes: Routes = [
         data: {
             library: 'Experimental'
         },
-        loadChildren: () => import('./fn/fn-documentation.module').then((m) => m.ExperimentalDocumentationModule)
+        loadChildren: () => import('./fn/fn-documentation.module').then((m) => m.FnDocumentationModule)
     },
     { path: '', redirectTo: 'core', pathMatch: 'full' }
 ];

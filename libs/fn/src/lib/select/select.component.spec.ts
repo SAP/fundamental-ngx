@@ -1,24 +1,24 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { ExperimentalSelectComponent } from './select.component';
+import { SelectComponent } from './select.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 describe('SelectComponent', () => {
-    let component: ExperimentalSelectComponent;
-    let fixture: ComponentFixture<ExperimentalSelectComponent>;
+    let component: SelectComponent;
+    let fixture: ComponentFixture<SelectComponent>;
 
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 imports: [CommonModule, FormsModule],
-                declarations: [ExperimentalSelectComponent]
+                declarations: [SelectComponent]
             }).compileComponents();
         })
     );
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(ExperimentalSelectComponent);
+        fixture = TestBed.createComponent(SelectComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

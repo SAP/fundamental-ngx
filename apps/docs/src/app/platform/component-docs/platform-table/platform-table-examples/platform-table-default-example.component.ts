@@ -59,9 +59,9 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
         return of(this.items);
     }
 
-    search(items: ExampleItem[], { searchInput, columns }: TableState): ExampleItem[] {
+    search(items: ExampleItem[], { searchInput, columnKeys }: TableState): ExampleItem[] {
         const searchText = searchInput?.text || '';
-        const keysToSearchBy = columns;
+        const keysToSearchBy = columnKeys;
 
         if (searchText.trim() === '' || keysToSearchBy.length === 0) {
             return items;
@@ -78,7 +78,7 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
 }
 
 function getNestedValue<T extends Record<string, any>>(key: string, object: T): any {
-    return key.split('.').reduce((a, b) => a[b], object);
+    return key.split('.').reduce((a, b) => (a ? a[b] : null), object);
 }
 
 // Example items

@@ -6,8 +6,8 @@
             id="input1"
             name="reactiveFormInput"
             zone="zLeft"
-            rank="1"
-            required="true"
+            [rank]="1"
+            [required]="true"
             placeholder="Choose file to upload"
         >
             <fdp-file-uploader
@@ -21,7 +21,7 @@
                 buttonAriaLabel="browse file"
                 accept=".png,.jpg"
                 value="files"
-                multiple="true"
+                [multiple]="true"
                 minFileSize="200KB"
                 (selectionChange)="handleFileSelection($event)"
             ></fdp-file-uploader>

@@ -35,12 +35,12 @@ type fnCheckboxTypes = 'checked' | 'unchecked' | 'force-checked';
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => ExperimentalCheckboxComponent),
+            useExisting: forwardRef(() => CheckboxComponent),
             multi: true
         }
     ]
 })
-export class ExperimentalCheckboxComponent implements ControlValueAccessor, OnDestroy {
+export class CheckboxComponent implements ControlValueAccessor, OnDestroy {
     /** @hidden */
     @ViewChild('inputLabel')
     inputLabel: ElementRef;

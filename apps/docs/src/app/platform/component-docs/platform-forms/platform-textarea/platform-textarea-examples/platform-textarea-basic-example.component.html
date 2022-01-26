@@ -7,7 +7,7 @@
                 label="Basic Textarea with Platform Forms"
                 placeholder="Start entering detailed description"
                 hint="This is tooltip help"
-                rank="10"
+                [rank]="10"
                 hintPlacement="left"
             >
                 <fdp-textarea name="basicTextarea" [formControl]="ff1.formControl"></fdp-textarea>
@@ -19,7 +19,7 @@
                 label="Readonly Textarea"
                 placeholder="Start entering detailed description"
                 hint="This is tooltip help"
-                rank="10"
+                [rank]="10"
                 hintPlacement="left"
             >
                 <fdp-textarea name="readonlyDescription" [formControl]="ff2.formControl" [readonly]="true">
@@ -32,7 +32,7 @@
                 label="Disabled Textarea"
                 placeholder="Start entering detailed description"
                 hint="This is tooltip help"
-                rank="10"
+                [rank]="10"
                 hintPlacement="left"
             >
                 <fdp-textarea name="disabledDescription" [disabled]="true" value="this is a disabled textarea">
@@ -45,7 +45,7 @@
                 label="Compact Textarea"
                 placeholder="Start entering detailed description"
                 hint="This is tooltip help"
-                rank="10"
+                [rank]="10"
                 hintPlacement="left"
             >
                 <fdp-textarea name="compactTextarea" [formControl]="ff4.formControl" contentDensity="compact">

@@ -14,7 +14,7 @@
                     <ng-container *ngIf="_currentFolder">
                         <button
                             fd-button
-                            compact="true"
+                            [compact]="true"
                             fdType="transparent"
                             glyph="navigation-left-arrow"
                             (click)="_goToParentFolder()"
@@ -31,7 +31,7 @@
                     <button
                         fd-button
                         fdType="add-document"
-                        compact="true"
+                        [compact]="true"
                         label="New Folder"
                         (click)="_newFolder()"
                     ></button>
@@ -41,7 +41,7 @@
     </fd-dialog-header>
 
     <fd-dialog-body class="fd-dialog__body--no-horizontal-padding">
-        <ul fd-list compact="true">
+        <ul fd-list [compact]="true">
             <li *ngIf="!_currentFolder" fd-list-item class="fd-list__item--title-background">
                 <span fd-list-title i18n="@@platformUploadCollection.MoveTo.AllFile.Label">All files</span>
             </li>

@@ -96,13 +96,13 @@
             ></button>
         </fd-toolbar>
 
-        <ul fd-list compact="true">
+        <ul fd-list [compact]="true">
             <li fd-list-item>
                 <fd-checkbox
                     [ngModel]="_selectedColumnsCount === _selectableColumns.length"
                     (ngModelChange)="_toggleSelectAll($event)"
                     [disabled]="_selectAllDisabled"
-                    compact="true"
+                    [compact]="true"
                 ></fd-checkbox>
                 <span fd-list-title i18n="@@platformTableP13ColumnsDialogSelectAll|Select All checkbox">
                     Select All ({{ _selectedColumnsCount }}/{{ _selectableColumns.length }})
@@ -118,7 +118,7 @@
                 <fd-checkbox
                     [(ngModel)]="item.selected"
                     (ngModelChange)="_onToggleColumn()"
-                    compact="true"
+                    [compact]="true"
                 ></fd-checkbox>
                 <span fd-list-title>
                     {{ item.column.label }}

@@ -6,7 +6,7 @@ import { API_FILES } from '../../api-files';
 import { SelectHeaderComponent } from './select-header/select-header.component';
 import { SelectDocsComponent } from './select-docs.component';
 import { examples } from './examples';
-import { ExperimentalSelectModule } from '@fundamental-ngx/fn/select';
+import { SelectModule } from '@fundamental-ngx/fn/select';
 import { FormModule } from '@fundamental-ngx/core/form';
 
 const routes: Routes = [
@@ -24,7 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ExperimentalSelectModule, FormModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, SelectModule, FormModule],
     exports: [RouterModule],
     declarations: [examples, SelectHeaderComponent, SelectDocsComponent]
 })

@@ -7,8 +7,4 @@ import { TIMELINE_EXAMPLE_DATA } from './timeline-basic-example/timeline-example
 })
 export class TimelineVerticalDoubleSideExampleComponent {
     data = TIMELINE_EXAMPLE_DATA;
-
-    axis = 'vertical';
-
-    layout = 'double';
 }

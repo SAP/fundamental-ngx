@@ -27,12 +27,12 @@ let radioUniqueId = 0;
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => ExperimentalRadioButtonComponent),
+            useExisting: forwardRef(() => RadioButtonComponent),
             multi: true
         }
     ]
 })
-export class ExperimentalRadioButtonComponent implements OnChanges, AfterViewInit, ControlValueAccessor, OnDestroy {
+export class RadioButtonComponent implements OnChanges, AfterViewInit, ControlValueAccessor, OnDestroy {
     /** @hidden */
     @ViewChild('inputElement')
     inputElement: ElementRef;

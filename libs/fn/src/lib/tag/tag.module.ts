@@ -1,11 +1,11 @@
 import 'focus-visible';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ExperimentalTagComponent } from './tag.component';
+import { TagComponent } from './tag.component';
 
 @NgModule({
-    declarations: [ExperimentalTagComponent],
+    declarations: [TagComponent],
     imports: [CommonModule],
-    exports: [ExperimentalTagComponent]
+    exports: [TagComponent]
 })
-export class ExperimentalTagModule {}
+export class TagModule {}

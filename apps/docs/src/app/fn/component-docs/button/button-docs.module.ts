@@ -6,7 +6,7 @@ import { API_FILES } from '../../api-files';
 import { ButtonHeaderComponent } from './button-header/button-header.component';
 import { ButtonDocsComponent } from './button-docs.component';
 import { examples } from './examples';
-import { ExperimentalButtonModule } from '@fundamental-ngx/fn/button';
+import { ButtonModule } from '@fundamental-ngx/fn/button';
 
 const routes: Routes = [
     {
@@ -23,7 +23,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ExperimentalButtonModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ButtonModule],
     exports: [RouterModule],
     declarations: [examples, ButtonHeaderComponent, ButtonDocsComponent]
 })

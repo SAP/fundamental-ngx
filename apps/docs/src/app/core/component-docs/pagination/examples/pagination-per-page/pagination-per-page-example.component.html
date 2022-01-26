@@ -39,7 +39,7 @@
         >
             <button
                 fd-button
-                [label]="count"
+                [label]="count + ''"
                 [attr.aria-label]="'Show ' + count + ' items per page'"
                 [attr.value]="count"
                 *ngFor="let count of [2, 5, 100]"

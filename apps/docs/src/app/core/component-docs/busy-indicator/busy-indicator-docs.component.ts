@@ -2,6 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 
 import BusyIndicatorHtml from '!./examples/busy-indicator-basic-example.component.html?raw';
 import BusyIndicatorSizeHtml from '!./examples/busy-indicator-size-example.component.html?raw';
+import BusyIndicatorSizeTs from '!./examples/busy-indicator-size-example.component.ts?raw';
 import BusyIndicatorLabelHtml from '!./examples/busy-indicator-label-example.component.html?raw';
 import BusyIndicatorExtendedHtml from '!./examples/busy-indicator-extended-example.component.html?raw';
 import BusyIndicatorExtendedTs from '!./examples/busy-indicator-extended-example.component.ts?raw';
@@ -34,6 +35,12 @@ export class BusyIndicatorDocsComponent {
             language: 'html',
             code: BusyIndicatorSizeHtml,
             fileName: 'busy-indicator-size-example'
+        },
+        {
+            language: 'typescript',
+            code: BusyIndicatorSizeTs,
+            fileName: 'busy-indicator-size-example',
+            component: 'BusyIndicatorSizeExampleComponent'
         }
     ];
     busyIndicatorLabelExample: ExampleFile[] = [

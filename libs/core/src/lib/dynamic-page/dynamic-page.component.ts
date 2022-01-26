@@ -13,17 +13,19 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
+import { resizeObservable } from '@fundamental-ngx/core/utils';
 import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
 import { DynamicPageContentComponent } from './dynamic-page-content/dynamic-page-content.component';
 import { DynamicPageSubheaderComponent } from './dynamic-page-header/subheader/dynamic-page-subheader.component';
 import { DynamicPageHeaderComponent } from './dynamic-page-header/header/dynamic-page-header.component';
+import { DynamicPageWrapperDirective } from './dynamic-page-wrapper.directive';
 import { DynamicPageService } from './dynamic-page.service';
 import { addClassNameToElement, dynamicPageWidthToSize } from './utils';
 import { TabListComponent } from '@fundamental-ngx/core/tabs';
 import { FlexibleColumnLayoutComponent } from '@fundamental-ngx/core/flexible-column-layout';
 
-import { fromEvent, Subject } from 'rxjs';
-import { debounceTime, delay, takeUntil } from 'rxjs/operators';
+import { fromEvent, Observable, Subject } from 'rxjs';
+import { debounceTime, delay, map, takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-dynamic-page',
@@ -119,7 +121,8 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
         private _elementRef: ElementRef<HTMLElement>,
         private _renderer: Renderer2,
         private _dynamicPageService: DynamicPageService,
-        @Optional() private _columnLayout: FlexibleColumnLayoutComponent
+        @Optional() private _columnLayout: FlexibleColumnLayoutComponent,
+        @Optional() private _dynamicPageWrapper: DynamicPageWrapperDirective
     ) {}
 
     /** @hidden */
@@ -249,12 +252,22 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden Listen for window resize and adjust tab and content positions accordingly */
     private _listenOnResize(): void {
-        fromEvent(window, 'resize')
-            .pipe(debounceTime(100), takeUntil(this._onDestroy$))
-            .subscribe(() => {
-                this._setContainerPositions();
-                this._sizeChangeHandle();
-            });
+        const listener = this._dynamicPageWrapper ? this._listenToWrapperResize() : this._listenToWindowResize();
+
+        listener.pipe(debounceTime(100), takeUntil(this._onDestroy$)).subscribe(() => {
+            this._setContainerPositions();
+            this._sizeChangeHandle();
+        });
+    }
+
+    /** @hidden */
+    private _listenToWrapperResize(): Observable<ResizeObserverEntry[]> {
+        return resizeObservable(this._dynamicPageWrapper.elementRef.nativeElement);
+    }
+
+    /** @hidden */
+    private _listenToWindowResize(): Observable<ResizeObserverEntry[]> {
+        return fromEvent(window, 'resize').pipe(map(() => []));
     }
 
     /** @hidden

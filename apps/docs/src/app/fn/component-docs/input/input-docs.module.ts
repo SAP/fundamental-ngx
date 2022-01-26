@@ -7,7 +7,7 @@ import { InputDocsComponent } from './input-docs.component';
 import { InputFormGroupExampleComponent } from './examples/input-form-group-example.component';
 import { InputExampleComponent, InputStateExampleComponent } from './examples/input-examples.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
-import { ExperimentalFormModule } from '@fundamental-ngx/fn/form';
+import { FormModule } from '@fundamental-ngx/fn/form';
 
 const routes: Routes = [
     {
@@ -21,7 +21,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ExperimentalFormModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, FormModule],
     exports: [RouterModule],
     declarations: [
         InputDocsComponent,

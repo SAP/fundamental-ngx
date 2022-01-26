@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 
+import { GroupFunction } from '@fundamental-ngx/core/utils';
+
+export type ComboboxItem = { name: string; type: string };
+
 @Component({
     selector: 'fd-combobox-group-example',
     templateUrl: './combobox-group-example.component.html'
@@ -7,7 +11,7 @@ import { Component } from '@angular/core';
 export class ComboboxGroupExampleComponent {
     searchTerm = '';
 
-    dropdownValues = [
+    dropdownValues: ComboboxItem[] = [
         { name: 'Apple', type: 'Fruits' },
         { name: 'Banana', type: 'Fruits' },
         { name: 'Pineapple', type: 'Fruits' },
@@ -18,16 +22,14 @@ export class ComboboxGroupExampleComponent {
         { name: 'Spinach', type: 'Vegetables' }
     ];
 
-    displayFunc(obj: { name: string; price: string }): string | void {
+    displayFunc(obj: ComboboxItem): string {
         if (obj) {
             return obj.name;
         }
     }
 
-    groupFunc(items: { name: string; type: string }[]): Record<string, any> {
-        return {
-            Fruits: items.filter((item) => item.type === 'Fruits'),
-            Vegetables: items.filter((item) => item.type === 'Vegetables')
-        };
-    }
+    groupFunc: GroupFunction<ComboboxItem> = (items) => ({
+        Fruits: items.filter((item) => item.type === 'Fruits'),
+        Vegetables: items.filter((item) => item.type === 'Vegetables')
+    });
 }

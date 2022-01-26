@@ -17,10 +17,10 @@
         [(ngModel)]="uploaderFiles"
     >
     </fd-file-uploader>
-    <button fd-button compact="true" [disabled]="getFilesSelected() === 0" (click)="alert('Download button clicked')">
+    <button fd-button [compact]="true" [disabled]="getFilesSelected() === 0" (click)="alert('Download button clicked')">
         Download
     </button>
-    <button fd-button compact="true" [disabled]="getFilesSelected() < 2" (click)="deleteMultiple()">
+    <button fd-button [compact]="true" [disabled]="getFilesSelected() < 2" (click)="deleteMultiple()">
         Delete Multiple
     </button>
 </fd-toolbar>

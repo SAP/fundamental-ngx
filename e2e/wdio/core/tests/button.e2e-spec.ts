@@ -101,7 +101,7 @@ describe('Button test suite:', () => {
 
     it('verify disable state buttons', () => {
         expect(getAttributeByName(disableStateButtons, 'aria-disabled')).toEqual('true');
-        expect(getAttributeByName(disableStateButtons, 'disabled', 1)).toEqual('true');
+        expect(getAttributeByName(disableStateButtons, 'ng-reflect-disabled', 1)).toBeDefined();
     });
 
     describe('Verify playground', () => {

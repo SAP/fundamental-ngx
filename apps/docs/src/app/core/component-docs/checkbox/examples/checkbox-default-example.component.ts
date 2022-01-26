@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
         <fd-checkbox
             label="Option 1"
             [(ngModel)]="checkboxValue"
-            required="true"
+            [required]="true"
             inputId="defaultCheckbox"
         ></fd-checkbox>
         Value: {{ checkboxValue }}

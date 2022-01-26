@@ -1,5 +1,5 @@
 <h3>link with generic action</h3>
-<fdp-object-attribute islink="true" label="Check" linkText="Notify action" (objectAttributeclick)="linkClick()"
+<fdp-object-attribute [islink]="true" label="Check" linkText="Notify action" (objectAttributeclick)="linkClick()"
     >:
 </fdp-object-attribute>
 
@@ -7,7 +7,7 @@
 
 <h3>link with routing</h3>
 <fdp-object-attribute
-    islink="true"
+    [islink]="true"
     linkText="Navigate to home"
     label="Check"
     (objectAttributeclick)="navigationClick()"
@@ -17,4 +17,4 @@
 <br />
 
 <h3>Disabled link</h3>
-<fdp-object-attribute islink="true" linkText="Navigate to home" disabled="true"> </fdp-object-attribute>
+<fdp-object-attribute [islink]="true" linkText="Navigate to home" [disabled]="true"> </fdp-object-attribute>

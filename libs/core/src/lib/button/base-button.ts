@@ -1,5 +1,5 @@
 import { Directive, Input } from '@angular/core';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 
 export type GlyphPosition = 'before' | 'after';
 
@@ -70,7 +70,7 @@ export class BaseButton {
         return this._disabled;
     }
 
-    set disabled(value: boolean) {
+    set disabled(value: BooleanInput) {
         this._disabled = coerceBooleanProperty(value);
     }
 
@@ -82,7 +82,7 @@ export class BaseButton {
         return this._ariaDisabled;
     }
 
-    set ariaDisabled(value: boolean) {
+    set ariaDisabled(value: BooleanInput) {
         this._ariaDisabled = coerceBooleanProperty(value);
     }
 

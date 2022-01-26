@@ -170,17 +170,17 @@ export class AvatarDocsComponent {
         }
     ];
 
-    avatarBackgroundImageWithALterOptions: ExampleFile[] = [
+    avatarBackgroundImageWithAlterOptions: ExampleFile[] = [
         {
             language: 'html',
-            fileName: 'avatar-background-image-with-alter-options-example',
+            fileName: 'avatar-default-image-with-alternative-options-example',
             code: avatarBackgroundImageWithAlterOptionsHtml
         },
         {
             language: 'typescript',
             code: avatarBackgroundWithAlterOptionsImageTs,
-            fileName: 'avatar-background-image-with-alter-options-example',
-            component: 'AvatarBackgroundImageExampleComponent'
+            fileName: 'avatar-default-image-with-alternative-options-example',
+            component: 'AvatarDefaultImageWithAlternativeOptionsExampleComponent'
         }
     ];
 }
