@@ -42,7 +42,7 @@ import { get } from 'lodash-es';
 import { TableService } from './table.service';
 import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilter, TableState } from './interfaces';
 import { SearchInput } from './interfaces/search-field.interface';
-import { FILTER_STRING_STRATEGY, SelectionMode, SortDirection, TableRowType } from './enums';
+import { FILTER_STRING_STRATEGY, FilterableColumnDataType, SelectionMode, SortDirection, TableRowType } from './enums';
 import {
     DEFAULT_TABLE_STATE,
     ROW_HEIGHT,
@@ -1052,6 +1052,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             const collectionFilter: CollectionStringFilter = {
                 field,
                 value,
+                type: FilterableColumnDataType.STRING,
                 strategy: FILTER_STRING_STRATEGY.CONTAINS,
                 exclude: false
             };

@@ -3,7 +3,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 @Component({
     selector: 'fdp-platform-menu-cascade-example',
     templateUrl: './platform-menu-cascade-example.component.html',
-    styleUrls: ['./platform-menu-cascade-example.component.scss'],
+    styleUrls: ['./platform-menu-example-styles.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class PlatformMenuCascadeExampleComponent {
