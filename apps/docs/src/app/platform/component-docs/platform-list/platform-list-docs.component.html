@@ -1,6 +1,6 @@
 <fd-docs-section-title id="no-border" componentName="list"> List - Border Less </fd-docs-section-title>
 <description
-    >A list without border, setting <code>noBorder="true"</code> will help to do this, by default its value is false.
+    >A list without border, setting <code>[noBorder]="true"</code> will help to do this, by default its value is false.
     Below examples show both imperative and declarative way to bind the list items. Where we can pass list items
     individually where a number of items are less, and if the items are more we can pass the items in the array as
     well.</description
@@ -102,8 +102,8 @@
 
 <fd-docs-section-title id="virtual-scroll" componentName="list"> List - Virtual scroll </fd-docs-section-title>
 <description
-    >By setting <code>loadMore="true"</code> will start the loazy load of data and
-    <code>loadOnScroll="true"</code> helps to load data on scroll and <code>itemSize="5"</code> is for number items
+    >By setting <code>[loadMore]="true"</code> will start the loazy load of data and
+    <code>[loadOnScroll]="true"</code> helps to load data on scroll and <code>itemSize="5"</code> is for number items
     needs to be appended per event.Where as <code>delay="200"</code> sets the time period to load the data.
     <code>scrollOffsetPercentage="40"</code>scroll hit on viewport to start fecthing the next data.
 </description>
@@ -114,8 +114,8 @@
 <separator></separator>
 <fd-docs-section-title id="load-more" componentName="list"> List - Load data on button click </fd-docs-section-title>
 <description
-    >By setting <code>loadMore="true"</code> will start the loazy load of data and
-    <code>loadOnScroll="false"</code> helps to load data on button click and <code>itemSize="5"</code> is for number
+    >By setting <code>[loadMore]="true"</code> will start the loazy load of data and
+    <code>[loadOnScroll]="false"</code> helps to load data on button click and <code>itemSize="5"</code> is for number
     items needs to be appended per event.Where as <code>[delay]="200"</code> sets the time period to load the data.
     <code>loadTitle="More"</code>sets the title on button, on click of which data is loaded.
 </description>
@@ -149,7 +149,7 @@
 
 <fd-docs-section-title id="no-separator" componentName="list"> List - With No Separator </fd-docs-section-title>
 <description
-    >List with <code>noBorder="true"</code>
+    >List with <code>[noBorder]="true"</code>
     will help user to have bottom of list item with no border.
 </description>
 <component-example>
@@ -160,7 +160,7 @@
 
 <fd-docs-section-title id="unread" componentName="list"> List - With Unread data </fd-docs-section-title>
 <description
-    >List with <code>unRead="true"</code>
+    >List with <code>[unRead]="true"</code>
     helps to set the item as unread.
 </description>
 <component-example>

@@ -20,7 +20,7 @@ export const RESETTABLE_TOKEN = new InjectionToken<Resettable>('Resettable');
     template: `<button
         fd-button
         fdType="transparent"
-        compact="true"
+        [compact]="true"
         label="Reset"
         i18n-label="@@platformTableDialogResetChangesButton"
         (click)="resettable.reset()"

@@ -745,7 +745,7 @@ export class ListFooter extends BaseComponent {}
 
 @Component({
     selector: 'fdp-list-group-header',
-    template: ` <li #listItem fd-list-group-header [attr.id]="id" role="option" tabindex="0">
+    template: ` <li #listItem fd-list-group-header [attr.id]="id" role="option" [tabindex]="0">
         <span fd-list-title>{{ grpheaderTitle }}</span>
         <ng-content></ng-content>
     </li>`,

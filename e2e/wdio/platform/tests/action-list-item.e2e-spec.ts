@@ -38,7 +38,7 @@ describe('Action List Item Test Suite:', () => {
         });
 
         it('should check styles', () => {
-            checkAttributeValueTrue(actionLists, 'noBorder');
+            checkAttributeValueTrue(actionLists, 'ng-reflect-no-border');
             checkElementTextValue(actionBtns, btnText);
             expect(getElementClass(actionSections, 0)).not.toContain('compact');
             expect(getElementClass(actionSections, 1)).toContain('compact');

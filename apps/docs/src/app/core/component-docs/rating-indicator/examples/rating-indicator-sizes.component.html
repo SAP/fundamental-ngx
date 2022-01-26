@@ -4,7 +4,7 @@
         <fd-rating-indicator
             ariaLabel="Rating indicator"
             [size]="size"
-            totalRatings="111"
+            [totalRatings]="111"
             #sampleSize
         ></fd-rating-indicator>
         <span>Selected Rate: {{ sampleSize.viewValue }}</span>
@@ -15,7 +15,7 @@
             ariaLabel="Rating indicator"
             [size]="size"
             [allowHalves]="true"
-            totalRatings="555"
+            [totalRatings]="555"
             #sizeWithHalves
         ></fd-rating-indicator>
         <span>Selected Rate: {{ sizeWithHalves.viewValue }}</span>

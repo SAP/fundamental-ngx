@@ -2,6 +2,14 @@ import { Component, ElementRef, QueryList, ViewChild, ViewChildren, ViewEncapsul
 import { WizardStepComponent, WizardStepStatus } from '@fundamental-ngx/core/wizard';
 import { WizardService } from '@fundamental-ngx/core/wizard';
 
+export type WizardStep = {
+    status: WizardStepStatus;
+    label: string;
+    glyph: string;
+    messageStrip: string;
+    contentText: string;
+};
+
 @Component({
     selector: 'fd-wizard-ngfor-example',
     templateUrl: './wizard-ngfor-example.component.html',
@@ -28,7 +36,7 @@ export class WizardNgForExampleComponent {
 
     name = '';
 
-    steps = [
+    steps: WizardStep[] = [
         {
             status: 'current',
             label: 'Product Type',

@@ -44,7 +44,7 @@ export class PlatformDynamicPageFlexibleColumnExampleComponent implements OnDest
      * sets the initial layout of the component to 'OneColumnStartFullScreen'
      * sets a new layout for the component
      */
-    localLayout = 'OneColumnStartFullScreen';
+    localLayout: FlexibleColumnLayout = 'OneColumnStartFullScreen';
 
     constructor(private _overflowHandlingService: PlatformDynamicPagePageOverflowService) {}
 
@@ -61,7 +61,7 @@ export class PlatformDynamicPageFlexibleColumnExampleComponent implements OnDest
      * 'ThreeColumnsMidExpanded' | 'ThreeColumnsEndExpanded' | 'ThreeColumnsStartMinimized' |
      * 'ThreeColumnsEndMinimized';
      */
-    changeLayout(newValue: string): void {
+    changeLayout(newValue: FlexibleColumnLayout): void {
         this.localLayout = newValue;
         this.onViewportChanged();
     }

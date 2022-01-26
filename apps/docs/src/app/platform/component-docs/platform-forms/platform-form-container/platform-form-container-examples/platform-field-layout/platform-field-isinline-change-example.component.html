@@ -6,8 +6,8 @@
             label="Basic Textarea with Platform Forms"
             placeholder="Start entering detailed description"
             hint="This is tooltip help"
-            column="1"
-            rank="1"
+            [column]="1"
+            [rank]="1"
             hintPlacement="left"
         >
             <fdp-textarea name="basicTextarea-ex2" [formControl]="ff1.formControl"></fdp-textarea>
@@ -17,8 +17,8 @@
             id="seasons0-ex2"
             hint="XL: true, L: false, M: true, S: false"
             label="Checkbox group inline value: XL: true, L: false, M: true, S: false"
-            column="1"
-            rank="2"
+            [column]="1"
+            [rank]="2"
         >
             <fdp-checkbox-group
                 [list]="seasons"
@@ -34,8 +34,8 @@
             label="Select an option"
             placeholder="Select your choice"
             hint="This is tooltip help"
-            column="1"
-            rank="3"
+            [column]="1"
+            [rank]="3"
         >
             <fdp-select placeholder="Select an option" [list]="option"></fdp-select>
         </fdp-form-field>
@@ -45,8 +45,8 @@
             label="Basic Textarea with Platform Forms 2"
             placeholder="Start entering detailed description"
             hint="This is tooltip help"
-            column="1"
-            rank="5"
+            [column]="1"
+            [rank]="5"
         >
             <fdp-textarea name="basicTextarea3-ex2" [formControl]="ff5.formControl"></fdp-textarea>
         </fdp-form-field>
@@ -55,8 +55,8 @@
             id="basicRadioGroup-ex2"
             label="Radio group button: XL: false, L: true, M: false, S: true"
             hint="XL: false, L: true, M: false, S: true"
-            column="1"
-            rank="6"
+            [column]="1"
+            [rank]="6"
         >
             <fdp-radio-group
                 [inlineLayout]="{ XL: false, L: true, M: false, S: true }"
@@ -67,7 +67,7 @@
             ></fdp-radio-group>
         </fdp-form-field>
 
-        <fdp-form-field #ff7 id="combobox" label="Combobox" column="1" rank="7">
+        <fdp-form-field #ff7 id="combobox" label="Combobox" [column]="1" [rank]="7">
             <fdp-combobox
                 name="combobox"
                 placeholder="Type some text..."

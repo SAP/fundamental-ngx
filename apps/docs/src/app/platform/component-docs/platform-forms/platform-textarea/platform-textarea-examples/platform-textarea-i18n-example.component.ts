@@ -8,7 +8,7 @@ import { ValidatorFn, Validators, FormGroup } from '@angular/forms';
 })
 export class PlatformTextareaI18nExampleComponent {
     form: FormGroup;
-    private textareaValidator: ValidatorFn[];
+    textareaValidator: ValidatorFn[];
     // textareaValue = $localize`:@@textareaValue:This is long description just to see
     // if this gets translated to the right language. This is long description just to see if this gets translated
     // to the right language. This is long description just to see if this gets translated to the right language.

@@ -23,13 +23,13 @@
             <div fd-panel-content>
                 <fd-layout-grid *ngFor="let rule of _includeRules; let i = index">
                     <fdp-table-filter-rule
-                        fdLayoutGridCol="10"
+                        [fdLayoutGridCol]="10"
                         [rule]="rule"
                         (ruleChange)="_recalculateResetAvailability()"
                         (ruleStateChange)="_onRuleStateChange()"
                     ></fdp-table-filter-rule>
                     <!-- Actions buttons -->
-                    <div fdLayoutGridCol="2">
+                    <div [fdLayoutGridCol]="2">
                         <button
                             fd-button
                             fdType="transparent"
@@ -66,13 +66,13 @@
             <div fd-panel-content>
                 <fd-layout-grid *ngFor="let rule of _excludeRules; let i = index">
                     <fdp-table-filter-rule
-                        fdLayoutGridCol="10"
+                        [fdLayoutGridCol]="10"
                         [rule]="rule"
                         (ruleChange)="_recalculateResetAvailability()"
                         (ruleStateChange)="_onRuleStateChange()"
                     ></fdp-table-filter-rule>
                     <!-- Actions buttons -->
-                    <div fdLayoutGridCol="2">
+                    <div [fdLayoutGridCol]="2">
                         <button
                             fd-button
                             fdType="transparent"

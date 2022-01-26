@@ -153,7 +153,7 @@
                 contentDensity="compact"
                 selectionMode="multiple"
                 emptyTableMessage=""
-                noHorizontalBorders="true"
+                [noHorizontalBorders]="true"
                 [trackBy]="_trackByDocumentId"
                 (rowSelectionChange)="_onRowSelectionChange($event)"
             >
@@ -196,7 +196,7 @@
                                             type="text"
                                             i18n-placeholder="platformUploadCollection.Edit.Input|Placeholder attribute"
                                             placeholder="Enter a name"
-                                            compact="true"
+                                            [compact]="true"
                                             [state]="item.sameFilenameState"
                                         />
                                         <span class="fdp-upload-collection__item_extension">{{

@@ -2,7 +2,7 @@
 <h3>Checkboxes created from from list of selectItem Objects</h3>
 <p>Inline checkboxes</p>
 <fdp-form-group [formGroup]="form4">
-    <fdp-form-field #fl1 id="languages" label="Programming Languages Known: " rank="1">
+    <fdp-form-field #fl1 id="languages" label="Programming Languages Known: " [rank]="1">
         <fdp-checkbox-group
             [list]="languages"
             [isInline]="true"
@@ -19,7 +19,7 @@
 
 <p>Pre-selection based on control value passed</p>
 <fdp-form-group [formGroup]="form5" [object]="visited">
-    <fdp-form-field #fl2 id="visited" label="Country visited: " rank="1">
+    <fdp-form-field #fl2 id="visited" label="Country visited: " [rank]="1">
         <fdp-checkbox-group
             [list]="countryVisited"
             name="visited"
@@ -34,7 +34,7 @@
 
 <p>Pre-selection based on control value passed from formGroup</p>
 <fdp-form-group [formGroup]="form6">
-    <fdp-form-field #fl4 id="currencies" label="Currencies Exchanging: " rank="1">
+    <fdp-form-field #fl4 id="currencies" label="Currencies Exchanging: " [rank]="1">
         <fdp-checkbox-group
             [list]="countryCurrency"
             name="currency"
@@ -49,7 +49,7 @@
 <br />
 <p>Lookup key and Display key usages.</p>
 <fdp-form-group [formGroup]="form7">
-    <fdp-form-field #fl5 id="items" label="Purchased Items: " rank="1">
+    <fdp-form-field #fl5 id="items" label="Purchased Items: " [rank]="1">
         <fdp-checkbox-group
             [list]="invoiceItems"
             name="invoices"
@@ -66,7 +66,7 @@
 <br />
 <p>Disabled checkbox group</p>
 <fdp-form-group [formGroup]="form6">
-    <fdp-form-field #fl3 id="disabled currencies" label="Disabled checkbox Group: " [disabled]="true" rank="1">
+    <fdp-form-field #fl3 id="disabled currencies" label="Disabled checkbox Group: " [disabled]="true" [rank]="1">
         <fdp-checkbox-group
             [list]="countryCurrency"
             name="currencies"
@@ -82,7 +82,7 @@
 <h3>Checkboxes created from from list of selectItem Objects</h3>
 <p>Inline checkboxes</p>
 <fdp-form-group>
-    <fdp-form-field id="languages known" label="Programming Languages Known: " rank="1">
+    <fdp-form-field id="languages known" label="Programming Languages Known: " [rank]="1">
         <fdp-checkbox-group
             [list]="languages"
             [isInline]="true"
@@ -98,7 +98,7 @@
 
 <p>Pre-selection based on value passed</p>
 <fdp-form-group>
-    <fdp-form-field id="currency" label="Currencies in country: " rank="1">
+    <fdp-form-field id="currency" label="Currencies in country: " [rank]="1">
         <fdp-checkbox-group
             [list]="countryCurrency"
             name="currencies"
@@ -114,7 +114,7 @@
 <br />
 <p>Lookup key and Display key usages.</p>
 <fdp-form-group>
-    <fdp-form-field id="items1" label="Purchased Items: " rank="1">
+    <fdp-form-field id="items1" label="Purchased Items: " [rank]="1">
         <fdp-checkbox-group
             [list]="invoiceItems"
             name="items"
@@ -130,7 +130,7 @@
 <br />
 <p>Disabled checkbox group</p>
 <fdp-form-group>
-    <fdp-form-field id="disabled currency" label="Disabled checkbox Group: " rank="1">
+    <fdp-form-field id="disabled currency" label="Disabled checkbox Group: " [rank]="1">
         <fdp-checkbox-group [list]="countryCurrency" [disabled]="true" name="currencies" ariaLabel="Disabled checkbox">
         </fdp-checkbox-group>
     </fdp-form-field>

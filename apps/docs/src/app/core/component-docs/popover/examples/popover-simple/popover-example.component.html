@@ -32,7 +32,7 @@
 
     <fd-popover placement="bottom" [focusTrapped]="true" [focusAutoCapture]="true" title="money-bills">
         <fd-popover-control>
-            <fd-avatar size="m" glyph="money-bills" ariaLabel="money-bills" colorAccent="3"></fd-avatar>
+            <fd-avatar size="m" glyph="money-bills" ariaLabel="money-bills" [colorAccent]="3"></fd-avatar>
         </fd-popover-control>
         <fd-popover-body *ngIf="list1 && list1.length" style="min-width: 400px">
             <div fd-popover-body-header id="popover-bar-simple-header-1">

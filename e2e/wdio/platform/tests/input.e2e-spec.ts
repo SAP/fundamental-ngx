@@ -147,7 +147,7 @@ describe('Input should ', () => {
 
     it('check have disabled attr assigned', () => {
         waitForElDisplayed(disabledInput);
-        expect(getAttributeByName(disabledInputAttribute, 'disabled')).toBe('true');
+        expect(getAttributeByName(disabledInputAttribute, 'ng-reflect-disabled')).toBe('true');
         expect(isEnabled(disabledInput)).toBe(false);
     });
 

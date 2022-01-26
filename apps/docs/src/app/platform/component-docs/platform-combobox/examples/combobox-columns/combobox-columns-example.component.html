@@ -6,7 +6,7 @@
             [dataSource]="dataSource"
             displayKey="name"
             secondaryKey="type"
-            showSecondaryText="true"
+            [showSecondaryText]="true"
             (selectionChange)="onSelect($event)"
         ></fdp-combobox>
         <p>Selected Item: {{ selectedItem | json }}</p>

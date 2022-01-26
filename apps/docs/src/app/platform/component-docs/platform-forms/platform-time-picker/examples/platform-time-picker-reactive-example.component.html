@@ -2,10 +2,9 @@
     <fdp-form-field
         #ffl1
         id="24-hour"
-        rank="1"
-        required="true"
+        [rank]="1"
+        [required]="true"
         placeholder="hh:mm:ss"
-        required="true"
         [validators]="requiredTimeValidator"
         label="24-Hour Time Picker:"
     >
@@ -19,8 +18,8 @@
     <fdp-form-field
         #ffl2
         id="12-hour"
-        rank="1"
-        required="true"
+        [rank]="1"
+        [required]="true"
         placeholder="hh:mm:ss"
         [validators]="requiredTimeValidator"
         label="12-Hour Time Picker:"
@@ -31,8 +30,8 @@
     <fdp-form-field
         #ffl3
         id="without-seconds"
-        rank="1"
-        required="true"
+        [rank]="1"
+        [required]="true"
         placeholder="hh:mm"
         [validators]="requiredTimeValidator"
         label="Time Picker Without Seconds:"
@@ -47,8 +46,8 @@
     <fdp-form-field
         #ffl4
         id="compact"
-        rank="1"
-        required="true"
+        [rank]="1"
+        [required]="true"
         placeholder="hh:mm:ss"
         [validators]="requiredTimeValidator"
         label="Compact Time Picker:"
@@ -58,8 +57,8 @@
 
     <fdp-form-field
         id="nullValidity"
-        rank="1"
-        required="true"
+        [rank]="1"
+        [required]="true"
         placeholder="hh:mm:ss"
         [validators]="requiredTimeValidator"
         label="Null Validity:"
@@ -74,11 +73,11 @@
         </fd-segmented-button>
     </fdp-form-field>
 
-    <fdp-form-field id="disableExample" rank="1" placeholder="hh:mm:ss" label="Disabled Time Picker:">
+    <fdp-form-field id="disableExample" [rank]="1" placeholder="hh:mm:ss" label="Disabled Time Picker:">
         <fdp-time-picker name="disableExample" formControlName="disableExample"></fdp-time-picker>
     </fdp-form-field>
 
-    <fdp-form-field id="submitBtn" rank="8">
+    <fdp-form-field id="submitBtn" [rank]="8">
         <button fd-button name="submitBtn" (click)="onSubmit()">Submit</button>
     </fdp-form-field>
     <ng-template #i18n let-errors>

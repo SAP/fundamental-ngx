@@ -3,9 +3,9 @@
         <fdp-form-field
             label="Default Multi Input Field"
             id="fdp-id-reactive"
-            rank="1"
+            [rank]="1"
             placeholder="Field placeholder text"
-            required="true"
+            [required]="true"
         >
             <fdp-multi-input
                 formControlName="item"
@@ -15,7 +15,7 @@
                 name="input1"
                 [dataSource]="_datasource"
                 displayKey="state"
-                selectionMode="Multi"
+                selectionMode="multi"
             >
             </fdp-multi-input>
         </fdp-form-field>

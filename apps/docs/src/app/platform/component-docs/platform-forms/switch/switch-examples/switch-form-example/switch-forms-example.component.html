@@ -2,8 +2,8 @@
     <fdp-form-field
         id="switch1"
         label="Form Switch 1"
-        rank="4"
-        required="true"
+        [rank]="4"
+        [required]="true"
         [validators]="validators"
         [i18Strings]="switchOneErrors"
     >
@@ -18,7 +18,7 @@
         </fdp-switch>
     </fdp-form-field>
 
-    <fdp-form-field id="switch2" label="Form Switch 2" rank="4">
+    <fdp-form-field id="switch2" label="Form Switch 2" [rank]="4">
         <fdp-switch
             name="switch-2"
             ariaLabel="Switch"
@@ -30,7 +30,7 @@
         </fdp-switch>
     </fdp-form-field>
 
-    <fdp-form-field id="switch3" label="Form Switch 3" rank="4">
+    <fdp-form-field id="switch3" label="Form Switch 3" [rank]="4">
         <fdp-switch
             name="switch-3"
             ariaLabel="Switch"
