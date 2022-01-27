@@ -29,7 +29,7 @@ export class TablePo extends CoreBaseComponentPo {
     markAllCheckboxesFF = ' .fd-table__header .fd-table__cell--checkbox';
     clickableTableRow = ' .fd-table__row--activable';
     clickableTableRowFF = ' .fd-table__row--activable .fd-table__cell:nth-of-type(2)';
-    menuItem = '.fd-menu__item';
+    menuItem = '.fd-list__item';
     paginationLink = ' .fd-pagination__link';
     activePaginationLink = ' .fd-pagination__link.is-active';
     tableResult = '.fd-pagination__total';
