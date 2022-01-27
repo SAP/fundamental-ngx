@@ -20,6 +20,8 @@ import {
     QueryList,
     Renderer2,
     ViewChild,
+    ViewChildren,
+    ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
 import { A, BACKSPACE, DELETE, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
@@ -76,6 +78,15 @@ export class TokenizerComponent
     /** @hidden */
     @ViewChild('inputGroupAddOn') set content(content: ElementRef) {
         this.inputGroupAddonEl = content;
+    }
+
+    /** @hidden */
+    @ViewChildren('viewContainer', { read: ViewContainerRef })
+    readonly _viewContainer: QueryList<ViewContainerRef>;
+
+    /** @hidden */
+    get _hiddenTokens(): TokenComponent[] {
+        return this.tokenList.filter((token) => token.elementRef.nativeElement.style.display === 'none');
     }
 
     /** @hidden */
@@ -454,6 +465,10 @@ export class TokenizerComponent
     /** @hidden */
     private _collapseTokens(side?: string): void {
         if (this.compact || this.compactCollapse) {
+            this._cdRef.detectChanges();
+            this._viewContainer.forEach((viewContainer) => viewContainer.clear());
+            this.tokenList.forEach((token) => token._viewContainer.createEmbeddedView(token._content));
+
             let elementWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
             let combinedTokenWidth = this.getCombinedTokenWidth(); // the combined width of all tokens, the "____ more" text, and the input
             let i = 0;
@@ -479,8 +494,13 @@ export class TokenizerComponent
                 elementWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
                 combinedTokenWidth = this.getCombinedTokenWidth();
                 side === 'right' ? i-- : i++;
-                this._cdRef.markForCheck();
             }
+
+            this._cdRef.detectChanges();
+            this._hiddenTokens.forEach((hiddenToken, index) => {
+                hiddenToken._viewContainer.clear();
+                this._viewContainer.get(index).createEmbeddedView(hiddenToken._content);
+            });
         } else {
             this._getHiddenCozyTokenCount();
         }
@@ -513,6 +533,7 @@ export class TokenizerComponent
                 */
                 if (combinedTokenWidth < elementWidth) {
                     tokenToCheck.elementRef.nativeElement.style.visibility = 'visible';
+                    tokenToCheck._viewContainer.createEmbeddedView(tokenToCheck._content);
                     if (this.moreTokensLeft.length) {
                         this.moreTokensLeft.pop();
                     } else if (this.moreTokensRight.length) {
