@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.298 (2022-01-27)
+
+
+### Bug Fixes
+
+* **core:** avatar-group, add keyboard support ([#7502](https://github.com/SAP/fundamental-ngx/issues/7502)) ([d164566](https://github.com/SAP/fundamental-ngx/commit/d164566efd21a22024a56b4f46b80fbc8a5c60dc))
+
 ## 0.33.0-rc.297 (2022-01-26)
 
 
