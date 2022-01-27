@@ -1,5 +1,5 @@
 <div style="overflow: auto; height: 500px">
-    <fd-timeline [dataSource]="data" axis="horizontal" layout="top">
+    <fd-timeline [dataSource]="data" [axis]="axis" [layout]="layout">
         <fd-timeline-node *fdTimelineNodeDef="let node" [glyph]="node.glyph">
             <fd-timeline-node-header>
                 <fd-avatar [circle]="true" size="xs" [label]="node.user.name" [image]="node.user.avatar"></fd-avatar>
