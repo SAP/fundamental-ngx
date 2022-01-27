@@ -33,7 +33,7 @@
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
         <fd-dialog-header>
             <h3 fd-title>Pick a date</h3>
-            <button fd-dialog-close-button fd-calendar-close-button (click)="dialog.close()"></button>
+            <button fd-dialog-close-button fd-calendar-close-button [mobile]="true" (click)="dialog.close()"></button>
         </fd-dialog-header>
 
         <fd-dialog-body>
