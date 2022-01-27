@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.299 (2022-01-27)
+
+
+### Bug Fixes
+
+* **core:** timeline line size change ([#7625](https://github.com/SAP/fundamental-ngx/issues/7625)) ([9770d5b](https://github.com/SAP/fundamental-ngx/commit/9770d5b041be1780b1fa66f33f2f86d9f313c0aa))
+
 ## 0.33.0-rc.298 (2022-01-27)
 
 
