@@ -7,21 +7,20 @@
                         <div fd-form-item class="form-group">
                             <label fd-form-label [attr.for]="'playground' + control.key">{{ control.key }}</label>
 
-                            <select
-                                fd-form-control
+                            <fd-select
                                 class="form-control"
                                 [attr.id]="'playground' + control.key"
                                 [formControl]="control.control"
                             >
-                                <option
+                                <fd-option
                                     *ngFor="let value of control.enum; let i = index; let c = count"
                                     [value]="value"
                                     [attr.aria-label]="value + ', option ' + (i + 1) + ' of ' + c"
                                     i18n-aria-label="@@Docs.SchemaGroup.OptionLabel"
                                 >
                                     {{ value }}
-                                </option>
-                            </select>
+                                </fd-option>
+                            </fd-select>
                         </div>
                     </ng-container>
 
@@ -44,20 +43,20 @@
                         <div fd-form-item class="form-group">
                             <label fd-form-label [attr.for]="'playground' + control.key">{{ control.key }}</label>
 
-                            <select
+                            <fd-select
                                 class="form-control"
                                 [attr.id]="'playground' + control.key"
                                 [formControl]="control.control"
                             >
-                                <option
+                                <fd-option
                                     *ngFor="let value of control.enum; let i = index; let c = count"
                                     [value]="value"
                                     [attr.aria-label]="value + ', option ' + (i + 1) + ' of ' + c"
                                     i18n-aria-label="@@Docs.SchemaGroup.OptionLabel"
                                 >
                                     {{ value }}
-                                </option>
-                            </select>
+                                </fd-option>
+                            </fd-select>
                         </div>
                     </ng-container>
 
