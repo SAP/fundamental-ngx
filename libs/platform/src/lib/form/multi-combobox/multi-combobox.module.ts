@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
-import { DynamicComponentService, TemplateModule } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService, TemplateModule, PipeModule } from '@fundamental-ngx/core/utils';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { ListModule } from '@fundamental-ngx/core/list';
@@ -22,6 +22,7 @@ import { MultiComboboxHighlightPipe } from './pipes/highlight.pipe';
         FormsModule,
         CheckboxModule,
         InputGroupModule,
+        PipeModule,
         TokenModule,
         ListModule,
         ButtonModule,

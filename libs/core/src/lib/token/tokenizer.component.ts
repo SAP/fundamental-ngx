@@ -222,8 +222,8 @@ export class TokenizerComponent
     ngOnInit(): void {
         if (this.compact === undefined && this._contentDensityService) {
             this._contentDensitySubscription.add(
-                this._contentDensityService._contentDensityListener.subscribe((density) => {
-                    this.compact = density !== 'cozy';
+                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
+                    this.compact = isCompact;
                     this._cdRef.markForCheck();
                     this.buildComponentCssClass();
                 })

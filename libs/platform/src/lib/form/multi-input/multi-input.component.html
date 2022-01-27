@@ -35,7 +35,7 @@
         glyph="value-help"
         [state]="state"
         [disabled]="disabled"
-        [compact]="contentDensity === 'compact'"
+        [compact]="contentDensity | isCompactDensity"
         (keydown)="removeSelectedTokens($event)"
         (addOnButtonClicked)="addOnButtonClick()"
         (click)="onInputGroupClicked()"
@@ -45,17 +45,17 @@
         >
         <fd-tokenizer
             *ngIf="selected"
-            [compact]="contentDensity === 'compact'"
+            [compact]="contentDensity | isCompactDensity"
             [tokenizerFocusable]="false"
             class="fd-multi-input-tokenizer-custom"
-            [class]="contentDensity === 'compact' ? 'fd-multi-input-tokenizer-custom--compact' : ''"
+            [class]="(contentDensity | isCompactDensity) ? 'fd-multi-input-tokenizer-custom--compact' : ''"
             (moreClickedEvent)="moreClicked()"
             tabindex="-1"
             role="listbox"
         >
             <fd-token
                 [readOnly]="disabled"
-                [compact]="contentDensity === 'compact'"
+                [compact]="contentDensity | isCompactDensity"
                 (onCloseClick)="removeToken(token)"
                 *ngFor="let token of selected; let i = index"
                 [attr.aria-posinset]="i"
@@ -67,7 +67,7 @@
             <input
                 #searchInputElement
                 type="text"
-                [compact]="contentDensity === 'compact'"
+                [compact]="contentDensity | isCompactDensity"
                 class="fd-input fd-multi-input-tokenizer-input"
                 fdp-auto-complete
                 (onComplete)="_onAutoComplete($event)"

@@ -10,6 +10,7 @@ import { RtlService } from '@fundamental-ngx/core/utils';
 import { createKeyboardEvent } from '@fundamental-ngx/platform/shared';
 import { PlatformMenuModule, MenuItemComponent } from '@fundamental-ngx/platform/menu';
 import { MenuButtonComponent } from './menu-button.component';
+import { PlatformMenuButtonModule } from './menu-button.module';
 
 function mouseClickOnElement(el: Element): void {
     const event: MouseEvent = new MouseEvent('click', {
@@ -25,8 +26,7 @@ describe('MenuButtonComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [ButtonModule, PlatformMenuModule, IconModule],
-                declarations: [MenuButtonComponent]
+                imports: [ButtonModule, PlatformMenuModule, IconModule, PlatformMenuButtonModule]
             }).compileComponents();
         })
     );
@@ -77,8 +77,8 @@ describe('Menu Button Disabled test and Type, size test', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [ButtonModule, PlatformMenuModule, IconModule],
-                declarations: [DisabledMenuButtonComponent, MenuButtonComponent]
+                imports: [ButtonModule, PlatformMenuModule, IconModule, PlatformMenuButtonModule],
+                declarations: [DisabledMenuButtonComponent]
             }).compileComponents();
         })
     );
@@ -167,8 +167,8 @@ describe('Menu Button click on Item select', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [ButtonModule, PlatformMenuModule, IconModule],
-                declarations: [TestMenuButtonComponent, MenuButtonComponent],
+                imports: [ButtonModule, PlatformMenuModule, IconModule, PlatformMenuButtonModule],
+                declarations: [TestMenuButtonComponent],
                 providers: [RtlService]
             }).compileComponents();
 

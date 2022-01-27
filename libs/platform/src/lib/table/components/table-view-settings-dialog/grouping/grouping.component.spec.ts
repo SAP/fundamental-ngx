@@ -1,5 +1,6 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ContentDensityEnum } from '@fundamental-ngx/core/utils';
 
 import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 import { GroupingComponent, SettingsGroupDialogData } from './grouping.component';
@@ -9,7 +10,12 @@ describe('PlatformTableGroupDialogComponent', () => {
     let component: GroupingComponent;
     let fixture: ComponentFixture<GroupingComponent>;
     const dialogRef = new DialogRef();
-    const dialogData: SettingsGroupDialogData = { columns: [], direction: null, field: null };
+    const dialogData: SettingsGroupDialogData = {
+        columns: [],
+        direction: null,
+        field: null,
+        tableContentDensity: ContentDensityEnum.COZY
+    };
     dialogRef.data = dialogData;
 
     beforeEach(

@@ -64,15 +64,6 @@ export class PanelComponent extends BaseComponent implements OnInit, OnChanges {
     expandable = true;
 
     /**
-     * content Density of element. 'cozy' | 'compact'
-     */
-    @Input()
-    set contentDensity(contentDensity: ContentDensity) {
-        this._contentDensity = contentDensity;
-        this._isCompact = contentDensity === 'compact';
-    }
-
-    /**
      * ARIA label for button when the Panel is collapsed
      */
     @Input()
@@ -111,12 +102,6 @@ export class PanelComponent extends BaseComponent implements OnInit, OnChanges {
 
     /** @hidden id of the title element */
     _titleId: string = 'fdp-panel-title-' + platformPanelTitleUniqueId++;
-
-    /**
-     * @hidden
-     * Whether "contentDensity" is "compact"
-     */
-    _isCompact: boolean = this._contentDensity === 'compact';
 
     /** @hidden */
     constructor(protected _cd: ChangeDetectorRef, protected _panelConfig: PanelConfig) {

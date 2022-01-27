@@ -5,13 +5,14 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
 
 import { SortDirection } from '../../../enums/sort-direction.enum';
 import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
+import { TableDialogCommonData } from '../../../models/table-dialog-common-data.model';
 
 export interface SettingsGroupDialogColumn {
     label: string;
     key: string;
 }
 
-export interface SettingsGroupDialogData {
+export interface SettingsGroupDialogData extends TableDialogCommonData {
     direction: SortDirection;
     field: string;
     columns: SettingsGroupDialogColumn[];
@@ -53,8 +54,8 @@ export class GroupingComponent implements Resettable {
     readonly NOT_GROUPED_OPTION_VALUE = NOT_GROUPED_OPTION_VALUE;
 
     /** @hidden */
-    constructor(public dialogRef: DialogRef) {
-        const data: SettingsGroupDialogData = this.dialogRef.data;
+    constructor(public dialogRef: DialogRef<SettingsGroupDialogData>) {
+        const data = this.dialogRef.data;
 
         this.columns = data.columns || [];
 

@@ -14,10 +14,15 @@ import { FilterRule } from './filtering.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FilterRuleComponent implements OnDestroy {
+    /** Rule to be displayed **/
     @Input() rule: FilterRule;
+    /** Whether should be displayed in compact mode **/
+    @Input() compact: boolean;
 
+    /** Emits when rule is changed */
     @Output() ruleChange: EventEmitter<void> = new EventEmitter();
 
+    /** Emits when rule state is changed */
     @Output() ruleStateChange: EventEmitter<boolean> = new EventEmitter();
 
     readonly FILTER_STRATEGY = FILTER_STRATEGY;

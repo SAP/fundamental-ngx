@@ -6,7 +6,7 @@
     let-groupable="groupable"
     let-columns="columns"
 >
-    <fd-toolbar fdType="transparent" [clearBorder]="true" [hasTitle]="!!title" [size]="_getCozyCompactSize(size)">
+    <fd-toolbar fdType="transparent" [clearBorder]="true" [hasTitle]="!!title" [size]="size">
         <label fd-toolbar-label [id]="tableToolbarTitleId"
             >{{ title }} <span *ngIf="!hideItemCount">({{ counter }})</span></label
         >
@@ -19,7 +19,7 @@
             i18n-placeholder="@@platformTableToolbarSearchPlaceholder"
             placeholder="Search"
             [disabled]="tableLoading$ | async"
-            [contentDensity]="_getCozyCompactSize(size)"
+            [contentDensity]="size"
             [suggestions]="searchSuggestions"
             [ariaLabelledBy]="tableToolbarTitleId"
             (searchSubmit)="submitSearch($event)"
@@ -38,7 +38,7 @@
                 i18n-title="@@platformTableToolbarActionButtonSort"
                 title="sort"
                 buttonType="transparent"
-                [contentDensity]="_getCozyCompactSize(size)"
+                [contentDensity]="size"
                 aria-haspopup="modal"
                 (click)="openSorting()"
             ></fdp-button>
@@ -48,7 +48,7 @@
                 i18n-title="@@platformTableToolbarActionButtonFilter"
                 title="filter"
                 buttonType="transparent"
-                [contentDensity]="_getCozyCompactSize(size)"
+                [contentDensity]="size"
                 aria-haspopup="modal"
                 (click)="openFiltering()"
             ></fdp-button>
@@ -58,7 +58,7 @@
                 i18n-title="@@platformTableToolbarActionButtonGroup"
                 title="group"
                 buttonType="transparent"
-                [contentDensity]="_getCozyCompactSize(size)"
+                [contentDensity]="size"
                 aria-haspopup="modal"
                 (click)="openGrouping()"
             ></fdp-button>
@@ -68,7 +68,7 @@
                 i18n-title="@@platformTableToolbarActionButtonColumns"
                 title="columns"
                 buttonType="transparent"
-                [contentDensity]="_getCozyCompactSize(size)"
+                [contentDensity]="size"
                 aria-haspopup="modal"
                 (click)="openColumns()"
             ></fdp-button>

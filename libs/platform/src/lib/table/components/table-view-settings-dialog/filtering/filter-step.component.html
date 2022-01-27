@@ -1,7 +1,7 @@
 <ng-template #titleTemplate>
     <button
         fd-button
-        [compact]="true"
+        [compact]="contentDensity | isCompactDensity"
         fdType="transparent"
         glyph="navigation-left-arrow"
         (click)="back.emit()"
@@ -13,6 +13,7 @@
     <ng-container [ngSwitch]="filter.type">
         <ng-container *ngSwitchCase="FILTER_TYPE.SINGLE">
             <fdp-filter-single-select
+                [contentDensity]="contentDensity"
                 [options]="filter.values"
                 [filterBy]="_filterBy"
                 (valueChange)="_onFilterValueChange($event)"
@@ -21,6 +22,7 @@
 
         <ng-container *ngSwitchCase="FILTER_TYPE.MULTI">
             <fdp-filter-multi-select
+                [contentDensity]="contentDensity"
                 [options]="filter.values"
                 [filterBy]="_filterBy"
                 (valueChange)="_onFilterValueChange($event)"
@@ -29,6 +31,7 @@
 
         <ng-container *ngSwitchCase="FILTER_TYPE.CUSTOM">
             <fdp-filter-custom
+                [contentDensity]="contentDensity"
                 [filter]="filter"
                 [filterBy]="_filterBy"
                 (valueChange)="_onFilterValueChange($event)"

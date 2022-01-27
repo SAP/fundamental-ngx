@@ -1,5 +1,6 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ContentDensityEnum } from '@fundamental-ngx/core/utils';
 
 import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 import { FiltersComponent, FiltersDialogData } from './filters.component';
@@ -9,7 +10,12 @@ describe('PlatformTableFiltersDialogComponent', () => {
     let component: FiltersComponent;
     let fixture: ComponentFixture<FiltersComponent>;
     const dialogRef = new DialogRef();
-    const dialogData: FiltersDialogData = { columns: [], filterBy: [], viewSettingsFilters: [] };
+    const dialogData: FiltersDialogData = {
+        columns: [],
+        filterBy: [],
+        viewSettingsFilters: [],
+        tableContentDensity: ContentDensityEnum.COZY
+    };
     dialogRef.data = dialogData;
 
     beforeEach(

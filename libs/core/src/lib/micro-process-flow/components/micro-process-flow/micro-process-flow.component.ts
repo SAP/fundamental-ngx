@@ -153,8 +153,8 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
 
         if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(
-                this._contentDensityService._contentDensityListener.subscribe((density) => {
-                    this.compact = density !== 'cozy';
+                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
+                    this.compact = isCompact;
                     this._paginate(0);
                 })
             );

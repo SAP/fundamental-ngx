@@ -51,7 +51,7 @@
         <ng-container *ngIf="readonly || selectedItems.length === 0">
             <fd-input-group
                 *ngIf="showSearch"
-                [compact]="true"
+                [compact]="contentDensity | isCompactDensity"
                 [(ngModel)]="_searchText"
                 (ngModelChange)="_searchInputChanged()"
                 glyph="search"
@@ -65,7 +65,7 @@
                     fd-toolbar-item
                     fd-button
                     (click)="_openUploadFiles()"
-                    [compact]="true"
+                    [compact]="contentDensity | isCompactDensity"
                     fdType="ghost"
                     [disabled]="disabled"
                     i18n-label="platformUploadCollection.Btn.Add"
@@ -78,7 +78,7 @@
                     fd-toolbar-item
                     fd-button
                     (click)="_openNewFolderDialog()"
-                    [compact]="true"
+                    [compact]="contentDensity | isCompactDensity"
                     *ngIf="hierarchy"
                     [disabled]="disabled"
                     fdType="transparent"
@@ -95,7 +95,7 @@
                 fd-toolbar-item
                 fd-button
                 (click)="_moveToClicked(true)"
-                [compact]="true"
+                [compact]="contentDensity | isCompactDensity"
                 fdType="ghost"
                 [disabled]="disabled"
                 i18n-label="platformUploadCollection.Btn.MoveTo"
@@ -108,7 +108,7 @@
                 fd-button
                 (click)="_downloadClicked(true)"
                 fdType="ghost"
-                [compact]="true"
+                [compact]="contentDensity | isCompactDensity"
                 [disabled]="disabled"
                 *ngIf="_showIfSelectedOnlyFiles()"
                 i18n-label="platformUploadCollection.Btn.Download"
@@ -120,7 +120,7 @@
                 fd-toolbar-item
                 fd-button
                 (click)="_remove(true)"
-                [compact]="true"
+                [compact]="contentDensity | isCompactDensity"
                 fdType="ghost"
                 [disabled]="disabled"
                 i18n-label="platformUploadCollection.Btn.Remove"
@@ -150,7 +150,7 @@
             <fdp-table
                 [dataSource]="_visibleList"
                 *ngIf="_visibleList.length > 0"
-                contentDensity="compact"
+                [contentDensity]="contentDensity"
                 selectionMode="multiple"
                 emptyTableMessage=""
                 [noHorizontalBorders]="true"
@@ -196,7 +196,7 @@
                                             type="text"
                                             i18n-placeholder="platformUploadCollection.Edit.Input|Placeholder attribute"
                                             placeholder="Enter a name"
-                                            [compact]="true"
+                                            [compact]="contentDensity | isCompactDensity"
                                             [state]="item.sameFilenameState"
                                         />
                                         <span class="fdp-upload-collection__item_extension">{{
@@ -275,7 +275,7 @@
                                     i18n-title="platformUploadCollection.Btn.Run|Title attribute"
                                     title="Run"
                                     (click)="_runUploadNewFileAfterFail(item)"
-                                    [compact]="true"
+                                    [compact]="contentDensity | isCompactDensity"
                                     fdType="ghost"
                                     [disabled]="disabled"
                                     *ngIf="item.status === _uploadCollectionItemStatus.UNSUCCESSFUL"
@@ -288,7 +288,7 @@
                                     i18n-title="platformUploadCollection.Btn.Cancel|Title attribute"
                                     title="Cancel"
                                     fdType="negative"
-                                    [compact]="true"
+                                    [compact]="contentDensity | isCompactDensity"
                                     fdType="ghost"
                                     [disabled]="disabled"
                                     (click)="_cancelUploadNewFile(item)"
@@ -298,7 +298,7 @@
 
                             <fdp-menu-button
                                 icon="overflow"
-                                contentDensity="compact"
+                                [contentDensity]="contentDensity"
                                 [disabled]="disabled"
                                 type="transparent"
                                 i18n-title="platformUploadCollection.MenuBtn.More|Title attribute"
@@ -369,7 +369,7 @@
                     *ngIf="_itemsPerPageOptions.length > 0"
                     type="ghost"
                     [ariaLabelledBy]="id + '-results'"
-                    contentDensity="compact"
+                    [contentDensity]="contentDensity"
                     [fdpMenuTriggerFor]="itemsPerPageMenu"
                     [label]="itemsPerPage"
                 >
@@ -379,7 +379,7 @@
     </div>
 </div>
 
-<fdp-menu #itemsPerPageMenu xPosition="before" contentDensity="compact">
+<fdp-menu #itemsPerPageMenu xPosition="before" [contentDensity]="contentDensity">
     <fdp-menu-item
         *ngFor="let value of _itemsPerPageOptions"
         (itemSelect)="_itemsPerPageChange(value.label)"
@@ -389,7 +389,7 @@
     </fdp-menu-item>
 </fdp-menu>
 
-<fdp-menu #menuActions xPosition="before" contentDensity="compact">
+<fdp-menu #menuActions xPosition="before" [contentDensity]="contentDensity">
     <fdp-menu-item (itemSelect)="_moveToClicked()">
         <fd-icon
             class="fdp-upload-collection__fd-icon"

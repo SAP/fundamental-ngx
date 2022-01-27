@@ -1,5 +1,6 @@
 import { EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ContentDensityEnum } from '@fundamental-ngx/core/utils';
 
 import { TableState } from './interfaces/table-state.interface';
 import { CollectionSort } from './interfaces/collection-sort.interface';
@@ -18,6 +19,9 @@ export abstract class Table {
 
     /** Width of the table element in px */
     abstract get _tableWidthPx(): number;
+
+    /** The content density for which to render table. 'cozy' | 'compact' | 'condensed' */
+    abstract get contentDensity(): ContentDensityEnum;
 
     /** Table columns definition list */
     abstract readonly tableColumnsStream: Observable<TableColumn[]>;

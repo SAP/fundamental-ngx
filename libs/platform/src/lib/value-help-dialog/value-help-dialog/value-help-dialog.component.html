@@ -43,12 +43,12 @@
                     <div class="fdp-value-help-dialog__tokens-wrapper">
                         <div class="fdp-value-help-dialog__tokens">
                             <!-- Selected items -->
-                            <fd-tokenizer [tokenizerFocusable]="false" [compact]="true">
+                            <fd-tokenizer [tokenizerFocusable]="false" [compact]="contentDensity | isCompactDensity">
                                 <fd-token
                                     fd-toolbar-item
                                     fdOverflowPriority="high"
                                     class="fdp-value-help-dialog__selection-token"
-                                    [compact]="true"
+                                    [compact]="contentDensity | isCompactDensity"
                                     (onCloseClick)="removeSelected(selectedIndex)"
                                     *ngFor="
                                         let item of selectedItems;
@@ -61,7 +61,7 @@
                                     fd-toolbar-item
                                     fdOverflowPriority="high"
                                     class="fdp-value-help-dialog__selection-token"
-                                    [compact]="true"
+                                    [compact]="contentDensity | isCompactDensity"
                                     (onCloseClick)="removeCondition(conditionIndex)"
                                     *ngFor="
                                         let item of validConditions;
@@ -77,7 +77,7 @@
                                 <input
                                     fd-form-control
                                     fd-tokenizer-input
-                                    [compact]="true"
+                                    [compact]="contentDensity | isCompactDensity"
                                     [disabled]="!hasSelectedAndConditions"
                                 />
                             </fd-tokenizer>
@@ -85,7 +85,7 @@
                         <button
                             (click)="clearSelectedAndConditionItems()"
                             class="fdp-value-help-dialog__tokens-clear"
-                            [compact]="true"
+                            [compact]="contentDensity | isCompactDensity"
                             fd-button
                             [disabled]="!hasSelectedAndConditions"
                             fdType="transparent"
@@ -100,32 +100,35 @@
                 <div class="fdp-value-help-dialog__actions-row">
                     <button
                         fd-button
+                        [compact]="contentDensity | isCompactDensity"
                         data-go-advanced
                         i18n-label="@@platformI18nValueHelpDialog.SearchButton"
                         label="Go"
                         fdType="emphasized"
                         *ngIf="mobile && isOpenAdvanced"
-                        [compact]="true"
+                        [compact]="contentDensity | isCompactDensity"
                         (click)="searchAdvanced()"
                     ></button>
                     <button
                         fd-button
+                        [compact]="contentDensity | isCompactDensity"
                         data-succes
                         i18n-label="@@platformI18nValueHelpDialog.SuccessButton"
                         label="OK"
                         fdType="emphasized"
                         *ngIf="selectedTab !== _tabTypes.advancedSearch"
-                        [compact]="true"
+                        [compact]="contentDensity | isCompactDensity"
                         (click)="success()"
                     ></button>
                     <button
                         fd-button
+                        [compact]="contentDensity | isCompactDensity"
                         data-dismiss-dialog
                         fd-dialog-decisive-button
                         i18n-label="@@platformI18nValueHelpDialog.CancelButton"
                         label="Cancel"
                         fdType="transparent"
-                        [compact]="true"
+                        [compact]="contentDensity | isCompactDensity"
                         (click)="dismiss()"
                     ></button>
                 </div>
@@ -156,7 +159,7 @@
                                 #inputGroupField
                                 fd-input-group-input
                                 fd-form-control
-                                [compact]="true"
+                                [compact]="contentDensity | isCompactDensity"
                                 type="search"
                                 [(ngModel)]="_mainSearch"
                                 name="value-help-dialog-search"
@@ -165,9 +168,10 @@
                                 [attr.aria-label]="searchField.placeholder"
                             />
 
-                            <span fd-input-group-addon [compact]="true" [button]="true">
+                            <span fd-input-group-addon [compact]="contentDensity | isCompactDensity" [button]="true">
                                 <button
                                     fd-button
+                                    [compact]="contentDensity | isCompactDensity"
                                     title="Search"
                                     glyph="search"
                                     fdType="transparent"
@@ -200,7 +204,7 @@
                                     ? searchField.hideAdvancedSearchLabel
                                     : searchField.showAdvancedSearchLabel
                             "
-                            [compact]="true"
+                            [compact]="contentDensity | isCompactDensity"
                             (click)="toggleAdvancedSearch()"
                             [attr.aria-label]="
                                 mobile
@@ -218,7 +222,7 @@
                             i18n-label="@@platformI18nValueHelpDialog.Search.Button"
                             label="Go"
                             fdType="emphasized"
-                            [compact]="true"
+                            [compact]="contentDensity | isCompactDensity"
                             aria-label="Go"
                             i18n-aria-label="@@platformI18nValueHelpDialog.Search.Button"
                         ></button>
@@ -248,7 +252,7 @@
                                 <input
                                     [(ngModel)]="filter.value"
                                     fd-form-control
-                                    [compact]="true"
+                                    [compact]="contentDensity | isCompactDensity"
                                     type="text"
                                     [name]="'search-by-' + filter.label"
                                     [id]="'input' + filter.key"
@@ -269,7 +273,7 @@
                         <button
                             fd-button
                             fdType="transparent"
-                            [compact]="true"
+                            [compact]="contentDensity | isCompactDensity"
                             (click)="toggleShownFilters()"
                             i18n-label="@@platformI18nValueHelpDialog.ShowAllFilters.Button"
                             [label]="
@@ -297,7 +301,7 @@
         [uniqueKey]="uniqueKey"
         [pageSize]="searchTablePageSize"
         [defaultMobileHeaders]="searchTableMobileHeaders"
-        [contentTableDensity]="searchTableDensity"
+        [contentTableDensity]="contentDensity"
         [filters]="_displayedFilters"
         (select)="onSelect($event)"
     ></fdp-select-tab>
@@ -305,6 +309,7 @@
 
 <ng-template #defineConditionsContent>
     <fdp-define-tab
+        [contentDensity]="contentDensity"
         [strategyLabels]="defineStrategyLabels"
         [conditions]="conditionItems"
         [uid]="id"
@@ -322,6 +327,7 @@
     <ng-container *ngIf="selectedTab === type && showSelectionTab && showDefineTab">
         <button
             fd-button
+            [compact]="contentDensity | isCompactDensity"
             glyph="navigation-left-arrow"
             fdType="transparent"
             (click)="switchTab()"
@@ -344,7 +350,13 @@
 </ng-template>
 
 <ng-template #advancedHeader>
-    <button fd-button glyph="navigation-left-arrow" fdType="transparent" (click)="toggleAdvancedSearch()"></button>
+    <button
+        fd-button
+        [compact]="contentDensity | isCompactDensity"
+        glyph="navigation-left-arrow"
+        fdType="transparent"
+        (click)="toggleAdvancedSearch()"
+    ></button>
     <h5 fd-title>{{ searchField.advancedSearchLabel }}</h5>
 </ng-template>
 

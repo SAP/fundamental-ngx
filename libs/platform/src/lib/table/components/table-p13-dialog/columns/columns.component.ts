@@ -13,6 +13,7 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
 import { SearchInput } from '@fundamental-ngx/platform/search-field';
 
 import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
+import { TableDialogCommonData } from '../../../models/table-dialog-common-data.model';
 
 export interface DialogTableColumn {
     label: string;
@@ -21,7 +22,7 @@ export interface DialogTableColumn {
 
 type VisibleColumnType = string; // ColumnKey
 
-export interface ColumnsDialogData {
+export interface ColumnsDialogData extends TableDialogCommonData {
     availableColumns: DialogTableColumn[];
     visibleColumns: VisibleColumnType[];
 }
@@ -92,8 +93,8 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    constructor(private dialogRef: DialogRef, private cdr: ChangeDetectorRef) {
-        const { availableColumns, visibleColumns }: ColumnsDialogData = this.dialogRef.data;
+    constructor(public dialogRef: DialogRef<ColumnsDialogData>, private cdr: ChangeDetectorRef) {
+        const { availableColumns, visibleColumns } = this.dialogRef.data;
 
         this.availableColumns = availableColumns?.map(({ label, key }) => ({ label, key })) || [];
 

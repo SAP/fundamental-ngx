@@ -14,12 +14,12 @@
         <div #inputGroup class="fdp-search-field__input-group fd-input-group" [class.is-focus]="isFocused">
             <span
                 class="fd-input-group__addon fd-input-group__addon--button"
-                [class.fd-input-group__addon--compact]="contentDensity === 'compact'"
+                [class.fd-input-group__addon--compact]="contentDensity | isCompactDensity"
                 *ngIf="_showCategoryDropdown"
             >
                 <button
                     class="fdp-search-field__category-button fd-input-group__button fd-button fd-button--menu"
-                    [class.fd-button--compact]="contentDensity === 'compact'"
+                    [class.fd-button--compact]="contentDensity | isCompactDensity"
                     [fdpMenuTriggerFor]="categoryMenu"
                 >
                     <span class="fdp-search-field__category-label" *ngIf="!hideCategoryLabel">
@@ -39,7 +39,7 @@
                 [attr.aria-controls]="_menuId"
                 [attr.aria-expanded]="_showDropdown ? 'true' : 'false'"
                 aria-haspopup="true"
-                [class.fd-input--compact]="contentDensity === 'compact'"
+                [class.fd-input--compact]="contentDensity | isCompactDensity"
                 (keydown)="onKeydown($event)"
                 (keydown.enter)="onSearchSubmit()"
                 [(ngModel)]="inputText"
@@ -50,7 +50,7 @@
             />
             <span
                 class="fd-input-group__addon fd-input-group__addon--button"
-                [class.fd-input-group__addon--compact]="contentDensity === 'compact'"
+                [class.fd-input-group__addon--compact]="contentDensity | isCompactDensity"
                 *ngIf="inputText && inputText.length > 0"
             >
                 <button
@@ -58,7 +58,7 @@
                     title="Clear"
                     class="fdp-search-field__clear fd-input-group__button fd-button fd-button--transparent"
                     [attr.disabled]="disabled ? '' : null"
-                    [class.fd-button--compact]="contentDensity === 'compact'"
+                    [class.fd-button--compact]="contentDensity | isCompactDensity"
                     [attr.id]="_clearId"
                     (click)="clearTextInput()"
                 >
@@ -67,7 +67,7 @@
             </span>
             <span
                 class="fd-input-group__addon fd-input-group__addon--button"
-                [class.fd-input-group__addon--compact]="contentDensity === 'compact'"
+                [class.fd-input-group__addon--compact]="contentDensity | isCompactDensity"
                 *ngIf="isLoading || (!isLoading && !_isSearchDone)"
             >
                 <button
@@ -76,7 +76,7 @@
                     class="fdp-search-field__submit fd-input-group__button fd-button fd-button--transparent"
                     [attr.id]="_submitId"
                     [attr.disabled]="disabled ? '' : null"
-                    [class.fd-button--compact]="contentDensity === 'compact'"
+                    [class.fd-button--compact]="contentDensity | isCompactDensity"
                     (click)="onSearchSubmit()"
                 >
                     <fd-icon glyph="search"></fd-icon>
@@ -84,7 +84,7 @@
             </span>
             <span
                 class="fd-input-group__addon fd-input-group__addon--button"
-                [class.fd-input-group__addon--compact]="contentDensity === 'compact'"
+                [class.fd-input-group__addon--compact]="contentDensity | isCompactDensity"
                 *ngIf="!disableRefresh && !isLoading && (_isRefresh || _isSearchDone)"
             >
                 <button
@@ -92,7 +92,7 @@
                     title="Synchronize"
                     class="fdp-search-field__loading fd-input-group__button fd-button fd-button--transparent"
                     [attr.disabled]="disabled ? '' : null"
-                    [class.fd-button--compact]="contentDensity === 'compact'"
+                    [class.fd-button--compact]="contentDensity | isCompactDensity"
                     [attr.id]="_refreshId"
                     (click)="onSearchSubmit()"
                 >
@@ -112,7 +112,7 @@
         <nav
             class="fd-menu"
             tabindex="-1"
-            [class.fd-menu--compact]="contentDensity === 'compact'"
+            [class.fd-menu--compact]="contentDensity | isCompactDensity"
             [class.fd-menu--mobile]="mobile"
             [attr.id]="_menuId"
             (keydown)="onKeydown($event)"

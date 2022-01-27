@@ -63,8 +63,8 @@ export class P13FilteringDialogComponent implements Resettable {
     _excludePanelExpanded = false;
 
     /** @hidden */
-    constructor(private dialogRef: DialogRef) {
-        const { columns, collectionFilter }: FilterDialogData = this.dialogRef.data;
+    constructor(public dialogRef: DialogRef<FilterDialogData>) {
+        const { columns, collectionFilter } = this.dialogRef.data;
 
         this.columns = columns || [];
 

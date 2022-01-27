@@ -27,13 +27,7 @@ import { takeUntil } from 'rxjs/operators';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { ListComponent } from '@fundamental-ngx/core/list';
-import {
-    ContentDensity,
-    ContentDensityService,
-    FocusEscapeDirection,
-    KeyUtil,
-    TemplateDirective
-} from '@fundamental-ngx/core/utils';
+import { ContentDensityService, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/core/utils';
 import {
     CollectionBaseInput,
     FormField,
@@ -117,10 +111,6 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
     @Input()
     placeholder: string;
 
-    /** Whether the select is in compact mode. */
-    @Input()
-    compact = false;
-
     /** Whether close the popover on outside click. */
     @Input()
     closeOnOutsideClick = true;
@@ -189,19 +179,6 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
     @Input()
     maxWidth?: number;
 
-    /**
-     * content Density of element. 'cozy' | 'compact'
-     */
-    @Input()
-    set contentDensity(contentDensity: ContentDensity) {
-        this._contentDensity = contentDensity;
-        this._isCompact = this.contentDensity !== 'cozy';
-    }
-
-    get contentDensity(): ContentDensity {
-        return this._contentDensity;
-    }
-
     /** Data for suggestion list */
     get list(): any {
         return this._optionItems;
@@ -248,12 +225,6 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
 
     /** @hidden */
     _contentDensityService: ContentDensityService;
-
-    /**
-     * @hidden
-     * Whether "contentDensity" is "compact"
-     */
-    _isCompact: boolean;
 
     /**
      * List of option items
@@ -308,7 +279,7 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
         if (this.contentDensity === undefined && this._contentDensityService) {
             this._subscriptions.add(
                 this._contentDensityService._contentDensityListener.subscribe((density) => {
-                    this._isCompact = density !== 'cozy';
+                    this.contentDensity = density;
                     this.cd.markForCheck();
                 })
             );

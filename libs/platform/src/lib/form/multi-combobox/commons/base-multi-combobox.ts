@@ -101,14 +101,6 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     @Input()
     autoComplete = true;
 
-    /** Content Density of element.
-     * Can be 'cozy', 'compact'. */
-    @Input()
-    set contentDensity(contentDensity: ContentDensity) {
-        this._contentDensity = contentDensity;
-        this.isCompact = contentDensity === 'compact';
-    }
-
     /**
      * TODO: Name of the entity for which DataProvider will be loaded. You can either pass list of
      * items or use this entityClass and internally we should be able to do lookup to some registry
@@ -212,12 +204,6 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
 
     /** @hidden */
     _contentDensity: ContentDensity = this.multiComboboxConfig.contentDensity;
-
-    /**
-     * @hidden
-     * Whether "contentDensity" is "compact".
-     */
-    isCompact: boolean = this._contentDensity === 'compact';
 
     /** @hidden */
     controlTemplate: TemplateRef<any>;

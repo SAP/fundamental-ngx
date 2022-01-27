@@ -10,6 +10,7 @@ import { IconModule } from '@fundamental-ngx/core/icon';
 import { RtlService } from '@fundamental-ngx/core/utils';
 import { PlatformMenuModule } from '../menu/menu.module';
 import { SplitMenuButtonComponent } from './split-menu-button.component';
+import { PlatformSplitMenuButtonModule } from './split-menu-button.module';
 
 function mouseClickOnElement(el: Element): void {
     const event: MouseEvent = new MouseEvent('click', {
@@ -68,8 +69,8 @@ describe('SplitMenuButtonComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [ButtonModule, PlatformMenuModule, IconModule],
-                declarations: [TestWrapperComponent, SplitMenuButtonComponent],
+                imports: [ButtonModule, PlatformMenuModule, IconModule, PlatformSplitMenuButtonModule],
+                declarations: [TestWrapperComponent],
                 providers: [RtlService]
             }).compileComponents();
 

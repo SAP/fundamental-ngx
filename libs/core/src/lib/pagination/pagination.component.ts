@@ -337,8 +337,8 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         this._subscriptions.add(this._rtlService?.rtl.subscribe(() => this._refreshPages()));
 
         this._subscriptions.add(
-            this._contentDensityService?._contentDensityListener.subscribe((density) => {
-                this.compact = density !== 'cozy';
+            this._contentDensityService?._isCompactDensity.subscribe((isCompact) => {
+                this.compact = isCompact;
                 this._cdr.markForCheck();
             })
         );

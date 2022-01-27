@@ -19,7 +19,7 @@
         [fdType]="type"
         [glyph]="icon"
         [attr.tabindex]="tabindex"
-        [compact]="contentDensity === 'compact'"
+        [compact]="contentDensity | isCompactDensity"
         (click)="primaryButtonClicked($event)"
     ></button>
     <button
@@ -32,7 +32,7 @@
         [disabled]="disabled"
         [fdType]="type"
         [attr.tabindex]="tabindex"
-        [compact]="contentDensity === 'compact'"
+        [compact]="contentDensity | isCompactDensity"
         [attr.aria-haspopup]="true"
         [fdpMenuTriggerFor]="menu"
     ></button>

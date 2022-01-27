@@ -60,7 +60,7 @@
             <fd-checkbox
                 *ngIf="selectionMode === SELECTION_MODE.MULTIPLE"
                 labelClass="fd-table__checkbox-label"
-                [compact]="contentDensity !== CONTENT_DENSITY.COZY"
+                [compact]="contentDensity | isCompactDensity"
                 [tristate]="true"
                 [tristateSelectable]="false"
                 [ngModel]="checkedState"
@@ -116,7 +116,7 @@
                     [noArrow]="true"
                     fd-table-popover
                 >
-                    <ul fd-list [noBorder]="true" [compact]="true">
+                    <ul fd-list [noBorder]="true" [compact]="contentDensity | isCompactDensity">
                         <!-- Sorting -->
                         <ng-container *ngIf="column.sortable">
                             <li
@@ -190,7 +190,7 @@
                                     >
                                     <input
                                         fd-form-control
-                                        [compact]="true"
+                                        [compact]="contentDensity | isCompactDensity"
                                         [id]="'fdp-table-column-filtering-' + column.name"
                                         (keyup.enter)="_columnHeaderFilterBy(column.key, $event.target.value)"
                                     />
@@ -323,7 +323,7 @@
                                         [style]="_getSelectionCellStyles(tableRow)"
                                     >
                                         <fd-checkbox
-                                            [compact]="contentDensity !== CONTENT_DENSITY.COZY"
+                                            [compact]="contentDensity | isCompactDensity"
                                             labelClass="fd-table__checkbox-label"
                                             [ngModel]="row.checked"
                                             (ngModelChange)="_toggleSelectableRow(row)"
