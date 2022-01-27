@@ -17,25 +17,20 @@
     </tbody>
     <br />
     <tfoot fd-table-footer>
-        <button
-            label="Items Per Page"
-            fd-button
-            [fdMenu]="true"
-            [fdMenuTrigger]="itemsPerPageMenu"
-            [style.margin-left]="(rtl$ | async) === true ? '20px' : '0'"
-            [style.margin-right]="(rtl$ | async) === true ? '0' : '20px'"
-        ></button>
-        <fd-pagination
-            [totalItems]="totalItems"
-            (pageChangeStart)="newPageClicked($event)"
-            [itemsPerPage]="itemsPerPage"
-            [currentPage]="currentPage"
-        ></fd-pagination>
+        <tr>
+            <td colspan="3">
+                <div>
+                    <fd-pagination
+                        fd-toolbar-item
+                        [totalItems]="totalItems"
+                        [itemsPerPage]="itemsPerPage"
+                        [itemsPerPageOptions]="itemsPerPageOptions"
+                        [currentPage]="currentPage"
+                        (pageChangeStart)="newPageClicked($event)"
+                        ariaLabel="Table pagination"
+                    ></fd-pagination>
+                </div>
+            </td>
+        </tr>
     </tfoot>
 </table>
-
-<fd-menu #itemsPerPageMenu>
-    <li fd-menu-item *ngFor="let value of itemsPerPageOptions" (click)="itemsPerPageChange(value)">
-        <span fd-menu-interactive>{{ value }}</span>
-    </li>
-</fd-menu>
