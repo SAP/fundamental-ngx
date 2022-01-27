@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.300 (2022-01-27)
+
+
+### Bug Fixes
+
+* **core:** tokenizer overflow ([#7619](https://github.com/SAP/fundamental-ngx/issues/7619)) ([2ef1185](https://github.com/SAP/fundamental-ngx/commit/2ef1185b9952a6ae297b76942e87c5d21e287ed8))
+
 ## 0.33.0-rc.299 (2022-01-27)
 
 
