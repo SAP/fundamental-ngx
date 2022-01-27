@@ -5,26 +5,30 @@ import {
     ContentChildren,
     ElementRef,
     forwardRef,
+    HostListener,
     Input,
     OnChanges,
     OnDestroy,
     OnInit,
+    Optional,
     QueryList,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { ViewportRuler } from '@angular/cdk/overlay';
-
+import { FocusKeyManager } from '@angular/cdk/a11y';
+import { DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB } from '@angular/cdk/keycodes';
 import { of, Subscription } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
-import { ColorAccent, Size } from '@fundamental-ngx/core/utils';
+import { ColorAccent, KeyUtil, RtlService, Size } from '@fundamental-ngx/core/utils';
 import { AvatarGroupItemDirective } from './directives/avatar-group-item.directive';
+import { AvatarGroupInterface } from './avatar-group.interface';
 
 export type AvatarGroupType = 'group' | 'individual';
 export type AvatarGroupOverflowButtonColor = 'neutral' | 'random' | ColorAccent;
 
-let avatarGroupUniqueId = 0;
+let avatarGroupCount = 0;
 
 @Component({
     selector: 'fd-avatar-group',
@@ -33,10 +37,10 @@ let avatarGroupUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy {
+export class AvatarGroupComponent implements AvatarGroupInterface, OnChanges, OnInit, AfterViewInit, OnDestroy {
     /** Id of the Avatar Group. */
     @Input()
-    id = `fd-avatar-group-${avatarGroupUniqueId++}`;
+    id = `fd-avatar-group-${avatarGroupCount++}`;
 
     /** Apply user custom class. */
     @Input()
@@ -66,7 +70,7 @@ export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, O
 
     /** @hidden */
     @ViewChild('avatarGroupContainer')
-    avatarGroupContainer: ElementRef;
+    avatarGroupContainer: ElementRef<HTMLDivElement>;
 
     /** @hidden */
     rootClassNames: Record<string, boolean | undefined | null>;
@@ -78,17 +82,22 @@ export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, O
 
     /** @hidden */
     private get _avatarGroupWidth(): number {
-        return (this.avatarGroupContainer?.nativeElement as HTMLElement)?.offsetWidth;
+        return this.avatarGroupContainer?.nativeElement?.offsetWidth;
     }
 
     /** @hidden */
     private get _avatarGroupItemWidth(): number {
-        return (this.mainItems?.first?.elementRef?.nativeElement as HTMLElement)?.offsetWidth;
+        return this.mainItems.first?._element.offsetWidth ?? 0;
     }
 
     /** @hidden */
     private get _avatarGroupItemWithMarginsWidth(): number {
-        const elementStyles = getComputedStyle(this.mainItems?.first?.elementRef?.nativeElement);
+        if (!this.mainItems.first) {
+            return this._avatarGroupItemWidth;
+        }
+
+        const elementStyles = getComputedStyle(this.mainItems.first._element);
+
         return (
             this._avatarGroupItemWidth +
             parseInt(elementStyles.marginLeft, 10) +
@@ -96,11 +105,17 @@ export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, O
         );
     }
 
-    /** @hidden */
-    private _subscription = new Subscription();
+    /** @hidden FocusKeyManager instance */
+    private _keyboardEventsManager: FocusKeyManager<AvatarGroupItemDirective>;
 
     /** @hidden */
-    constructor(private _viewportRuler: ViewportRuler) {}
+    private readonly _subscription = new Subscription();
+
+    /** @hidden handles rtl service */
+    private _dir: 'ltr' | 'rtl' | null = 'ltr';
+
+    /** @hidden */
+    constructor(private readonly _viewportRuler: ViewportRuler, @Optional() private _rtlService: RtlService) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -114,17 +129,45 @@ export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, O
 
     /** @hidden */
     ngAfterViewInit(): void {
+        this._reset();
+
         this._subscription.add(
             of(true)
                 .pipe(delay(5))
                 .subscribe(() => this._collapseItems())
         );
+
         this._listenForItemChanges();
+        this._setKeyboardEventsManager();
+        this._subscribeToRtl();
     }
 
     /** @hidden */
     ngOnDestroy(): void {
         this._subscription.unsubscribe();
+    }
+
+    /** @hidden */
+    @HostListener('keyup', ['$event'])
+    keyUpHandler(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, TAB)) {
+            const index = this.mainItems.toArray().findIndex((item) => item._element === event.target);
+            if (index !== -1) {
+                this._keyboardEventsManager.setActiveItem(index);
+            }
+        }
+
+        if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW])) {
+            event.preventDefault();
+
+            // passing the event to key manager so we get a change fired
+            this._keyboardEventsManager.onKeydown(event);
+        }
+    }
+
+    /** @hidden */
+    _setActiveItem(item: AvatarGroupItemDirective): void {
+        this._keyboardEventsManager.setActiveItem(item);
     }
 
     /** @hidden */
@@ -138,7 +181,10 @@ export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, O
         this.allItemsCount = this.mainItems.length;
         this.overflowItemsCount = 0;
 
-        this.mainItems.forEach((it) => (it.elementRef.nativeElement.style.display = 'inline-block'));
+        this.mainItems.forEach((it) => {
+            it._element.style.display = 'inline-block';
+            it.disabled = false;
+        });
     }
 
     /** @hidden */
@@ -160,7 +206,10 @@ export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, O
                 const newIdx = idx - 1;
                 this.overflowItemsCount = allItemsCounter - newIdx;
                 const mainItemsToHide = this.mainItems.toArray().slice(newIdx);
-                mainItemsToHide.forEach((it) => (it.elementRef.nativeElement.style.display = 'none'));
+                mainItemsToHide.forEach((it) => {
+                    it._element.style.display = 'none';
+                    it.disabled = true;
+                });
 
                 break;
             }
@@ -179,9 +228,31 @@ export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, O
     private _assignCssClasses(): void {
         this.rootClassNames = {
             'fd-avatar-group': true,
-            [`fd-avatar-group--${this.type}-type`]: true,
-            [`fd-avatar-group--${this.size}`]: true,
-            [this.class]: true
+            [`fd-avatar-group--${this.type}-type`]: !!this.type,
+            [`fd-avatar-group--${this.size}`]: !!this.size,
+            [this.class]: !!this.class
         };
+    }
+
+    /** @hidden */
+    private _setKeyboardEventsManager(): void {
+        this._keyboardEventsManager = new FocusKeyManager(this.mainItems)
+            .withWrap()
+            .withHorizontalOrientation(this._dir);
+    }
+
+    /** @hidden Rtl change subscription */
+    private _subscribeToRtl(): void {
+        if (!this._rtlService) {
+            return;
+        }
+
+        const rtlSub = this._rtlService.rtl.subscribe((isRtl) => {
+            this._dir = isRtl ? 'rtl' : 'ltr';
+
+            this._keyboardEventsManager = this._keyboardEventsManager.withHorizontalOrientation(this._dir);
+        });
+
+        this._subscription.add(rtlSub);
     }
 }
