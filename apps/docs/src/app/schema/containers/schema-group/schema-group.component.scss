@@ -20,7 +20,9 @@ $sub-header--margin-left: 20px;
         margin: 8px 0 4px;
     }
     .form-control {
-        width: 100%;
+        fd-popover {
+            width: 100%;
+        }
 
         &:not(:last-child) {
             margin-bottom: 15px;
