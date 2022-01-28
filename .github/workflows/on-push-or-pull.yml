@@ -195,7 +195,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                lib: [core, platform, docs, moment-adapter, fn]
+                lib: [core, platform, docs, moment-adapter, fn, components-e2e]
         steps:
             - uses: actions/checkout@v2
             - uses: actions/cache@v2
@@ -203,6 +203,20 @@ jobs:
                   path: ${{ env.CACHE_NODE_MODULES_PATH }}
                   key: node_modules-${{ hashFiles('**/package-lock.json') }}
             - run: npx nx lint ${{ matrix.lib }} --runner cloud
+
+    # run workspace checks
+    check-workspace-config:
+        runs-on: ubuntu-latest
+        needs: install
+        strategy:
+            fail-fast: false
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/cache@v2
+              with:
+                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
+                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
+            - run: npx nx run workspace-tools:test --runner cloud
 
     # check formatting
     check-format:

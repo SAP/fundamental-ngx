@@ -27,7 +27,7 @@ describe('Accessibility test', () => {
                         }, options);
 
                         createHtmlReport({
-                            results: results,
+                            results,
                             options: { outputDir: `axe-reports/${pageUrl}`, reportFileName: `index-${urls}.html` }
                         });
                         console.log(`index-${urls}.html report created`);

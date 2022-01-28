@@ -24,11 +24,11 @@ export class MultiInputPo extends BaseComponentPo {
     listitems = 'ul[role=list] [role="listitem"] li';
     reactiveExample = 'fdp-platform-multi-input-reactive-example';
 
-    crossButton = (option: string) => `//span[text() = '${option}']/../following-sibling::span`;
+    crossButton = (option: string): string => `//span[text() = '${option}']/../following-sibling::span`;
 
-    selectedDropDownOption = (name: string) => `//span[text()='${name}']`;
+    selectedDropDownOption = (name: string): string => `//span[text()='${name}']`;
 
-    dropDownOption = (name: string) =>
+    dropDownOption = (name: string): string =>
         doesItExist('fdp-standard-list-item .fd-list__content')
             ? `//div[@title="${name}"]/../..`
             : `//span[@title="${name}"]/..`;

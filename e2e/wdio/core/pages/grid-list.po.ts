@@ -43,7 +43,7 @@ export class GridListPo extends CoreBaseComponentPo {
     gridListCheckbox = '.fd-grid-list__checkbox-label';
     button = '.fd-button';
 
-    gridListItemsByMode = (name: string) => ` [selectionmode="${name}"] fd-grid-list-item`;
+    gridListItemsByMode = (name: string): string => ` [selectionmode="${name}"] fd-grid-list-item`;
 
     open(): void {
         super.open(this.url);

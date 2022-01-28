@@ -49,6 +49,7 @@ export const nuncTestText = 'nunc nisl duis bibendum';
 export const massaTestText = 'massa quis augue luctus tincidunt';
 export const tableCellArr7 = [
     '10 Portable DVD player',
+    // eslint-disable-next-line max-len
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id tincidunt elit, sit amet molestie mauris. Phasellus cursus scelerisque nulla at pulvinar. Nunc et odio eu est facilisis hendrerit vitae aliquet tellus. In vel lectus a ligula efficitur pretium a non quam. Pellentesque vitae justo eget orci dignissim sollicitudin. Morbi pretium diam quis iaculis rutrum. Suspendisse pulvinar dui sapien, nec blandit orci varius eget.',
     '66.04',
     'Stocked on demand'

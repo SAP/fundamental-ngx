@@ -64,9 +64,15 @@ describe('Avatar test suite', () => {
     xit('should check that avatar with 1 char as initial is present', () => {
         let j, k, n;
         for (let i = 0; i < getElementArrayLength(avatarInitials); i++) {
-            getText(avatarInitials, i).length === 1 ? (j = 1) : '';
-            getText(avatarInitials, i).length === 2 ? (k = 2) : '';
-            getText(avatarInitials, i).length === 3 ? (n = 3) : '';
+            if (getText(avatarInitials, i).length === 1) {
+                j = 1;
+            }
+            if (getText(avatarInitials, i).length === 2) {
+                k = 2;
+            }
+            if (getText(avatarInitials, i).length === 3) {
+                n = 3;
+            }
         }
         expect(j).toBe(1);
         expect(k).toBe(2);
