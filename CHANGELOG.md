@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.307 (2022-01-28)
+
+
+### Features
+
+* **core:** emit event for native search ([#7601](https://github.com/SAP/fundamental-ngx/issues/7601)) ([af4700c](https://github.com/SAP/fundamental-ngx/commit/af4700cd4fc0a4d8a797205dac50b528cf41f630))
+
 ## 0.33.0-rc.306 (2022-01-28)
 
 ## 0.33.0-rc.305 (2022-01-28)
