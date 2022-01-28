@@ -1,10 +1,10 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 
 @Component({
     selector: 'fd-dialog-backdrop-container-example',
     templateUrl: './dialog-backdrop-container-example.component.html',
-    encapsulation: ViewEncapsulation.None,
+    styleUrls: ['../dialog-examples.component.scss'],
     styles: [
         `
             .static-dialog.fd-dialog--active {
