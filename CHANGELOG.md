@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.302 (2022-01-28)
+
+
+### Features
+
+* **platform:** when function for global wizard generator scope ([#7605](https://github.com/SAP/fundamental-ngx/issues/7605)) ([586d244](https://github.com/SAP/fundamental-ngx/commit/586d2441775d76ff09e020114f1d2d9fd43c4a23))
+
 ## 0.33.0-rc.301 (2022-01-28)
 
 
