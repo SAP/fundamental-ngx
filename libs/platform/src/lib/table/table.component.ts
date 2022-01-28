@@ -23,6 +23,8 @@ import {
     ViewEncapsulation,
     ViewRef
 } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import set from 'lodash-es/set';
 import { BehaviorSubject, fromEvent, isObservable, merge, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
 
@@ -37,14 +39,18 @@ import {
 import { TableRowDirective } from '@fundamental-ngx/core/table';
 import { isDataSource, isFunction, isString } from '@fundamental-ngx/platform/shared';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
-import { get } from 'lodash-es';
+import { cloneDeep, get } from 'lodash-es';
+import { SaveRowsEvent } from './interfaces/save-rows-event.interface';
+import { EditableTableCell } from './table-cell.class';
 
 import { TableService } from './table.service';
 import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilter, TableState } from './interfaces';
 import { SearchInput } from './interfaces/search-field.interface';
 import { FILTER_STRING_STRATEGY, FilterableColumnDataType, SelectionMode, SortDirection, TableRowType } from './enums';
 import {
+    DEFAULT_HIGHLIGHTING_KEY,
     DEFAULT_TABLE_STATE,
+    EDITABLE_ROW_SEMANTIC_STATE,
     ROW_HEIGHT,
     SELECTION_COLUMN_WIDTH,
     SEMANTIC_HIGHLIGHTING_COLUMN_WIDTH
@@ -146,7 +152,7 @@ let tableUniqueId = 0;
         '[class.fdp-table--no-outer-border]': 'noOuterBorders'
     }
 })
-export class TableComponent<T = any> extends Table implements AfterViewInit, OnDestroy, OnChanges, OnInit {
+export class TableComponent<T = any> extends Table<T> implements AfterViewInit, OnDestroy, OnChanges, OnInit {
     /** Id for the Table. */
     @Input()
     @HostBinding('attr.id')
@@ -275,7 +281,23 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** Value with the key of the row item's field to compute semantic state of the row.  */
     @Input()
-    semanticHighlighting: string;
+    set semanticHighlighting(value: string) {
+        this._semanticHighlightingKey = value;
+    }
+
+    get semanticHighlighting(): string {
+        if (!this._semanticHighlightingKey && this._forceSemanticHighlighting) {
+            return DEFAULT_HIGHLIGHTING_KEY;
+        }
+
+        return this._semanticHighlightingKey;
+    }
+
+    /** @hidden */
+    private _semanticHighlightingKey: string;
+
+    /** @hidden */
+    private _forceSemanticHighlighting = false;
 
     /**
      * Tracking function that will be used to check the differences in data changes.
@@ -295,6 +317,10 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** String or function to calculate additional rows' CSS classes. */
     @Input()
     rowsClass: TableRowClass<T>;
+
+    /** Used to construct empty row object for editing. */
+    @Input()
+    editableRowSkeleton: T;
 
     /** Event fired when table selection has changed. */
     @Output()
@@ -338,6 +364,18 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     @Output()
     readonly rowNavigate = new EventEmitter<TableRowActivateEvent<T>>();
 
+    /** Event fired when empty row added. */
+    @Output()
+    readonly emptyRowAdded = new EventEmitter<void>();
+
+    /** Event fired when save button pressed. */
+    @Output()
+    readonly save = new EventEmitter<SaveRowsEvent<T>>();
+
+    /** Event fired when cancel button pressed. */
+    @Output()
+    readonly cancel = new EventEmitter<void>();
+
     /** @hidden */
     @ViewChild('verticalScrollable')
     readonly verticalScrollable: TableScrollable;
@@ -354,9 +392,18 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     @ContentChildren(TableColumn)
     readonly columns: QueryList<TableColumn>;
 
+    @ContentChildren(EditableTableCell, { descendants: true })
+    readonly customEditableCells: QueryList<EditableTableCell>;
+
+    @ViewChildren(EditableTableCell)
+    readonly editableCells: QueryList<EditableTableCell>;
+
     /** @hidden */
     @ViewChildren(TableRowDirective)
     tableRows: QueryList<TableRowDirective>;
+
+    @ViewChildren(NgForm)
+    editableCellForms: QueryList<NgForm>;
 
     /** @hidden */
     _tableColumnsSubject: BehaviorSubject<TableColumn[]> = new BehaviorSubject([]);
@@ -384,10 +431,23 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /**
      * @hidden
-     * Representation of table rows.
-     * Contains all rows including group rows
+     * Representation of combined table rows.
+     * Contains all rows including group rows.
      */
     _tableRows: TableRow<T>[] = [];
+
+    /**
+     * @hidden
+     * Representation of table rows that came from dataSource.
+     * Contains all rows including group rows.
+     */
+    _dataSourceTableRows: TableRow<T>[] = [];
+
+    /**
+     * @hidden
+     * Representation of added table rows.
+     */
+    _newTableRows: TableRow<T>[] = [];
 
     /**
      * @hidden
@@ -581,9 +641,16 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         return this._semanticHighlightingColumnWidth + this._selectionColumnWidth;
     }
 
+    /** @hidden */
     get _tableWidthPx(): number {
         return this.tableContainer.nativeElement.getBoundingClientRect().width;
     }
+
+    /** @hidden */
+    private _addedItems: T[] = [];
+
+    /** @hidden */
+    private _columnsWidthSet = false;
 
     /** @hidden */
     constructor(
@@ -913,6 +980,52 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         return this._tableDataSource;
     }
 
+    /**
+     * Adds empty row for editing at the beginning of the rows array.
+     */
+    addRow(): void {
+        const newRow = this._buildNewRowSkeleton();
+        this._forceSemanticHighlighting = true;
+        newRow[this.semanticHighlighting] = EDITABLE_ROW_SEMANTIC_STATE;
+
+        this._addedItems.unshift(newRow);
+
+        const newRows = this._createTableRowsByDataSourceItems([newRow]);
+        this._newTableRows = [...newRows, ...this._newTableRows];
+
+        this._setTableRows(this._dataSourceTableRows);
+        this.emptyRowAdded.emit();
+    }
+
+    /** Cancels editing and discards newly added rows */
+    cancelEditing(): void {
+        this._resetEditState();
+        this.cancel.emit();
+    }
+
+    /**
+     * Emits save event and resets editable rows array.
+     */
+    saveRows(): void {
+        const event: SaveRowsEvent<T> = {
+            items: [...this._addedItems],
+            done: () => {
+                this._tableDataSource.fetch(this.getTableState());
+            }
+        };
+
+        const forms = [...this.customEditableCells.toArray(), ...this.editableCells.toArray()].map((t) => t.form);
+
+        // Trigger form revalidation
+        forms.forEach((form) => form.onSubmit(undefined));
+        if (forms.some((form) => form.invalid)) {
+            return;
+        }
+
+        this._resetEditState();
+        this.save.emit(event);
+    }
+
     // Private API
 
     /** @hidden */
@@ -1091,6 +1204,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         };
     }
 
+    /** @hidden */
     _getRowClasses(row: TableRow<T>): string {
         const treeRowClass = this._isTreeRow(row) ? 'fdp-table__row--tree' : '';
         const rowClasses = this._getRowCustomCssClasses(row);
@@ -1129,7 +1243,18 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** @hidden */
+    _onCellClick(colIdx: number, row: TableRow<T>): void {
+        if (row.state === 'readonly' && this._isTreeRowFirstCell(colIdx, row)) {
+            this._toggleGroupRow(row);
+        }
+    }
+
+    /** @hidden */
     _onRowClick(row: TableRow<T>, event?: KeyboardEvent): void {
+        if (row.state !== 'readonly') {
+            return;
+        }
+
         event?.preventDefault();
 
         if (row.navigatable) {
@@ -1339,8 +1464,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     private _listenToTableRowsPipe(): void {
-        let columnsWidthSet = false;
-
         this._subscriptions.add(
             this._dataSourceItemsSubject
                 .pipe(
@@ -1357,20 +1480,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                 )
                 .subscribe((rows) => {
                     this._setTableRows(rows);
-                    this._calculateIsShownNavigationColumn();
-
-                    if (rows.length && !columnsWidthSet) {
-                        this.recalculateTableColumnWidth();
-                        columnsWidthSet = true;
-                        return;
-                    }
-
-                    /** Seems to be the only way to avoid ViewDestroyedError: Attempt to use a destroyed view: detectChange */
-                    setTimeout(() => {
-                        if (!(this._cdr as ViewRef).destroyed) {
-                            this._cdr.detectChanges();
-                        }
-                    });
                 })
         );
     }
@@ -1458,9 +1567,10 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         const selectedRowsMap = this._getSelectionStatusByRowValue(source);
 
         return source.map((item: T, index: number) => {
+            const isNewItem = this._addedItems.includes(item);
             const row = new TableRow(TableRowType.ITEM, !!selectedRowsMap.get(item), index, item);
             row.navigatable = this._isRowNavigatable(item, this.rowNavigatable);
-
+            row.state = isNewItem ? 'editable' : 'readonly';
             return row;
         });
     }
@@ -1529,8 +1639,24 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     private _setTableRows(rows: TableRow[]): void {
-        this._tableRows = rows;
+        this._dataSourceTableRows = rows;
+        this._tableRows = [...this._newTableRows, ...this._dataSourceTableRows];
         this._onTableRowsChanged();
+
+        this._calculateIsShownNavigationColumn();
+
+        if (rows.length && !this._columnsWidthSet) {
+            this.recalculateTableColumnWidth();
+            this._columnsWidthSet = true;
+            return;
+        }
+
+        /** Seems to be the only way to avoid ViewDestroyedError: Attempt to use a destroyed view: detectChange */
+        setTimeout(() => {
+            if (!(this._cdr as ViewRef).destroyed) {
+                this._cdr.detectChanges();
+            }
+        });
     }
 
     /** @hidden */
@@ -1682,20 +1808,34 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         const rule = rules.shift();
 
         // Build map of unique values for a given group rule
-        const valuesHash = rows.reduce((hash, row) => {
-            const modelValue = get(row.value, rule.field);
+        const valuesHash = rows
+            .filter((r) => r.state !== 'editable')
+            .reduce((hash, row) => {
+                const modelValue = get(row.value, rule.field);
 
-            if (!hash.has(modelValue)) {
-                hash.set(modelValue, []);
-            }
+                if (!hash.has(modelValue)) {
+                    hash.set(modelValue, []);
+                }
 
-            hash.get(modelValue).push(row);
+                hash.get(modelValue).push(row);
 
-            return hash;
-        }, new Map<unknown, TableRow[]>());
+                return hash;
+            }, new Map<unknown, TableRow[]>());
 
         // Build table rows tree
-        const groupedTableRows: TreeLike<TableRow>[] = [];
+        let groupedTableRows: TreeLike<TableRow>[] = [];
+
+        if (rows.some((r) => r.state === 'editable')) {
+            groupedTableRows = rows
+                .filter((r) => r.state === 'editable')
+                .map((row) => {
+                    row.parent = parent;
+                    row.level = -1;
+                    row.hidden = parent && !parent.expanded;
+                    return row;
+                });
+        }
+
         for (const [value, values] of Array.from(valuesHash)) {
             const filteredRows = rows.filter((_item) => values.includes(_item));
 
@@ -2077,5 +2217,35 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         }
 
         return rowClasses.trim();
+    }
+
+    /**
+     * @hidden
+     * @private
+     * Creates empty column skeleton object.
+     * @returns Column model.
+     */
+    private _buildNewRowSkeleton(): T {
+        if (this.editableRowSkeleton) {
+            return cloneDeep(this.editableRowSkeleton);
+        }
+
+        let newRow = {};
+        this.columns.forEach((column) => {
+            newRow = set(newRow, column.key, undefined);
+        });
+
+        return newRow as T;
+    }
+
+    /**
+     * @hidden
+     * Resets editable rows discarding the editable rows array.
+     */
+    private _resetEditState(): void {
+        this._newTableRows = [];
+        this._addedItems = [];
+        this._forceSemanticHighlighting = false;
+        this._setTableRows(this._dataSourceTableRows);
     }
 }

@@ -2,6 +2,7 @@ import { EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ContentDensityEnum } from '@fundamental-ngx/core/utils';
 
+import { SaveRowsEvent } from './interfaces/save-rows-event.interface';
 import { TableState } from './interfaces/table-state.interface';
 import { CollectionSort } from './interfaces/collection-sort.interface';
 import { CollectionFilter } from './interfaces/collection-filter.interface';
@@ -10,7 +11,7 @@ import { SearchInput } from './interfaces/search-field.interface';
 import { TableColumn } from './components/table-column/table-column';
 import { TableDataSource } from './domain';
 
-export abstract class Table {
+export abstract class Table<T = any> {
     /** Sum of widths of fixed columns (semantic highlighting, selection) */
     abstract get _fixedColumnsPadding(): number;
 
@@ -37,6 +38,15 @@ export abstract class Table {
 
     /** Toolbar Column Settings button click event */
     readonly openTableColumnSettings: EventEmitter<void> = new EventEmitter<void>();
+
+    /** Event fired when empty row added. */
+    readonly emptyRowAdded: EventEmitter<void>;
+
+    /** Event fired when save button pressed. */
+    readonly save: EventEmitter<SaveRowsEvent<T>>;
+
+    /** Event fired when cancel button pressed. */
+    readonly cancel: EventEmitter<void>;
 
     /** Get table state */
     abstract getTableState(): TableState;
@@ -109,4 +119,13 @@ export abstract class Table {
 
     /** Fetch data source data. */
     abstract fetch(): void;
+
+    /** Adds empty row for editing at the beginning of the rows array. */
+    abstract addRow(): void;
+
+    /** Emits save event and resets editable rows array. */
+    abstract saveRows(): void;
+
+    /** Cancels editing and discards newly added rows */
+    abstract cancelEditing(): void;
 }

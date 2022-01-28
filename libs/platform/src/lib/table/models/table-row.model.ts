@@ -1,5 +1,7 @@
 import { TableRowType } from '../enums';
 
+export type TableRowState = 'editable' | 'readonly';
+
 /**
  * Table row entity
  * Used to represent table row in the template
@@ -45,6 +47,10 @@ export class TableRow<T = any> {
         /**
          * If the row is navigatable
          */
-        public navigatable = false
+        public navigatable = false,
+        /**
+         * Row state: readonly or editable.
+         */
+        public state: TableRowState = 'readonly'
     ) {}
 }

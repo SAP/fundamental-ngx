@@ -19,7 +19,7 @@ import { RtlService } from '@fundamental-ngx/core/utils';
 
 import { ColumnAlign } from '../../enums/column-align.enum';
 import { FilterableColumnDataType } from '../../enums/filter-type.enum';
-import { FdpCellDef } from '../../directives/table-cell.directive';
+import { FdpCellDef, FdpEditableCellDef } from '../../directives/table-cell.directive';
 import { FdpHeaderCellDef } from '../../directives/table-header.directive';
 
 import { TableColumn } from './table-column';
@@ -131,12 +131,15 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
         this._tableService?.recalculateColumnsWidth();
     }
 
-    /** Whether or not  the text should wrap, when text is too long for 1 line */
+    /** Whether the text should wrap, when text is too long for 1 line */
     @Input()
     noWrap = false;
 
     /** Column cell template */
     columnCellTemplate: TemplateRef<any>;
+
+    /** Editable column cell template. */
+    editableColumnCellTemplate: TemplateRef<any>;
 
     /** Column header template */
     headerCellTemplate: TemplateRef<any>;
@@ -144,6 +147,12 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
     @ContentChild(FdpCellDef)
     set fdpCellDef(fdpCellDef: FdpCellDef) {
         this.columnCellTemplate = fdpCellDef?.templateRef;
+    }
+
+    /** Editable column cell template definition. */
+    @ContentChild(FdpEditableCellDef)
+    set fdpEditableCellDef(fdpEditableCellDef: FdpEditableCellDef) {
+        this.editableColumnCellTemplate = fdpEditableCellDef?.templateRef;
     }
 
     @ContentChild(FdpHeaderCellDef)

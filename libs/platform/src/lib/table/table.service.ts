@@ -223,7 +223,7 @@ export class TableService {
         this.pageChange.emit({ current: state.page, previous: prevPageState });
     }
 
-    /** Trigger columns width recalculation */
+    /** Trigger table columns width recalculation */
     recalculateColumnsWidth(): void {
         this._tableColumnsWidth$.next();
     }
