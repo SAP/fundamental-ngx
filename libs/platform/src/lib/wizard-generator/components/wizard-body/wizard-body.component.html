@@ -13,7 +13,7 @@
                     [label]="step.name"
                     [status]="step.status"
                     [branching]="step.branching"
-                    [stepClickValidator]="stepClickValidatorFn(i, step)"
+                    [stepClickValidator]="stepClickValidatorFn(i)"
                     [isSummary]="step.summary"
                     (statusChange)="stepStatusChanged(step.id, $event)"
                     (stepClicked)="stepClicked(step.id)"
@@ -26,6 +26,7 @@
                             *ngIf="!step.summary"
                             [unifiedLayout]="unifiedLayout"
                             [item]="step"
+                            [stepStatus]="step.status"
                         ></fdp-wizard-generator-step>
                         <fdp-wizard-summary-step
                             *ngIf="step.summary"
