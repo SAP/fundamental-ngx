@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.305 (2022-01-28)
+
+
+### Features
+
+* **platform:** ability to add new rows to table ([#7579](https://github.com/SAP/fundamental-ngx/issues/7579)) ([c029a78](https://github.com/SAP/fundamental-ngx/commit/c029a780d64008093895644a67f5fa54120fb483))
+
 ## 0.33.0-rc.304 (2022-01-28)
 
 ## 0.33.0-rc.303 (2022-01-28)
