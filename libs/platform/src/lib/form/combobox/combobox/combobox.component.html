@@ -11,6 +11,7 @@
         [disabled]="disabled || readonly"
         [maxWidth]="!autoResize && minWidth"
         [closeOnOutsideClick]="closeOnOutsideClick"
+        additionalBodyClass="fdp-combobox__popover"
     >
         <fd-popover-control>
             <ng-container *ngTemplateOutlet="controlTemplate"></ng-container>
@@ -86,7 +87,7 @@
             {{ _flatSuggestions?.length || 0 }} result list items
         </div>
         <fd-form-message
-            *ngIf="mobile && isOpen ? null : !!stateMessage"
+            *ngIf="mobile || isOpen ? null : !!stateMessage"
             [type]="state"
             [innerHtml]="stateMessage"
         ></fd-form-message>
@@ -94,11 +95,18 @@
 </ng-template>
 
 <ng-template #listTemplate>
+    <fd-form-message
+        *ngIf="!!stateMessage"
+        [type]="state"
+        [innerHtml]="stateMessage"
+        class="fdp-combobox__message {{ !mobile && 'fdp-combobox__message--popover' }}"
+    ></fd-form-message>
+
     <ul
         fd-list
         (focusEscapeList)="handleListFocusEscape($event)"
         [dropdownMode]="true"
-        class="fdp-combobox__list"
+        class="fdp-combobox__list {{ !!stateMessage && 'fdp-combobox__list--message' }}"
         [id]="id + '-result'"
         role="listbox"
         [compact]="contentDensity | isCompactDensity"
@@ -106,7 +114,6 @@
         [style.maxHeight]="!mobile && maxHeight"
         [style.maxWidth]="autoResize && maxWidth + 'px'"
     >
-        <fd-form-message *ngIf="!!stateMessage" [type]="state" [innerHtml]="stateMessage"></fd-form-message>
         <ng-content></ng-content>
         <ng-container *ngIf="isGroup">
             <ng-container *ngFor="let group of _suggestions">
