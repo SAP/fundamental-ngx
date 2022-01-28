@@ -78,7 +78,7 @@ export class FocusKeyManagerListDirective implements OnChanges, AfterContentInit
 
         this._rtlService?.rtl
             .pipe(
-                filter(() => this.orientation !== 'horizontal'),
+                filter(() => this.orientation === 'horizontal'),
                 takeUntil(this._onDestroy$)
             )
             .subscribe(() => this._applyOrientation());

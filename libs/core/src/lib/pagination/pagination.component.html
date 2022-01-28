@@ -54,6 +54,7 @@
             (keyup.space)="previousPage($event)"
         ></a>
 
+        <!-- Duplicated to preserve the items order for keyboard navigation -->
         <ng-container *ngFor="let page of _pagesBeforeCurrent">
             <a
                 *ngIf="page !== _moreElementValue; else more"
@@ -116,6 +117,7 @@
             {{ labelAfterInputMobile(_lastPage) }}
         </label>
 
+        <!-- Duplicated to preserve the items order for keyboard navigation -->
         <ng-container *ngFor="let page of _pagesAfterCurrent">
             <a
                 *ngIf="page !== _moreElementValue; else more"
