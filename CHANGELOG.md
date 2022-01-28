@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.301 (2022-01-28)
+
+
+### Bug Fixes
+
+* **platform:** remove hardcoded content densities ([#7586](https://github.com/SAP/fundamental-ngx/issues/7586)) ([b20c6fd](https://github.com/SAP/fundamental-ngx/commit/b20c6fddda959b387fa8622a2cf12661f0aaff96))
+
 ## 0.33.0-rc.300 (2022-01-27)
 
 
