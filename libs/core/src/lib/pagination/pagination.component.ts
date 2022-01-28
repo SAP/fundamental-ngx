@@ -4,6 +4,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ElementRef,
     EventEmitter,
     Input,
     OnChanges,
@@ -11,14 +12,22 @@ import {
     OnInit,
     Optional,
     Output,
+    QueryList,
     SimpleChanges,
     TemplateRef,
+    ViewChild,
+    ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NgModel } from '@angular/forms';
 
-import { ContentDensityService, RtlService } from '@fundamental-ngx/core/utils';
+import {
+    FocusKeyManagerItemDirective,
+    FocusKeyManagerListDirective,
+    ContentDensityService,
+    RtlService
+} from '@fundamental-ngx/core/utils';
 
 import { Pagination } from './pagination.model';
 import { PaginationService } from './pagination.service';
@@ -187,6 +196,28 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     /** @hidden */
     _pages: number[] = [];
 
+    /** @hidden */
+    _pagesBeforeCurrent: number[];
+
+    /** @hidden */
+    _pagesAfterCurrent: number[];
+
+    /** @hidden */
+    @ViewChild(FocusKeyManagerListDirective)
+    readonly _focusKeyManagerList: FocusKeyManagerListDirective;
+
+    /** @hidden */
+    @ViewChildren(FocusKeyManagerItemDirective)
+    readonly _focusKeyManagerItems: QueryList<FocusKeyManagerItemDirective>;
+
+    /** @hidden */
+    @ViewChild('pageInputElement', { read: ElementRef })
+    readonly _pageInputElement: ElementRef;
+
+    /** @hidden */
+    @ViewChild('currentPageElement', { read: ElementRef })
+    readonly _currentPageElement: ElementRef;
+
     /**
      * Retrieves an object that represents
      * the total number of items, the current page, and the number of items per page.
@@ -349,17 +380,29 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         this._subscriptions.unsubscribe();
     }
 
+    /** @hidden */
+    skipItemPredicate(item: FocusKeyManagerItemDirective): boolean {
+        return (
+            getComputedStyle(item.nativeElement).display === 'none' ||
+            item.nativeElement.getAttribute('disabled') === 'true'
+        );
+    }
+
     /**
      * Navigates to a specific page.
      * @param page The number of the page to navigate to.
      * @param $event The mouse event (optional).
      */
-    goToPage(page: number): void {
+    goToPage(page: number, event?: KeyboardEvent): void {
         if (page > this._lastPage || page < 1) {
             return;
         }
 
         this._refreshPages();
+
+        if (event) {
+            this._focusCurrentPage();
+        }
 
         this.pageChangeStart.emit(page);
 
@@ -420,6 +463,12 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         const pages = this.paginationService.getPages(pagination);
 
         this._pages = this._isRtl ? pages.slice().reverse() : pages;
+
+        const currentPageIndex = this._pages.findIndex((page) => page === this.currentPage);
+
+        this._pagesBeforeCurrent = this._pages.slice(0, currentPageIndex);
+        this._pagesAfterCurrent = this._pages.slice(currentPageIndex + 1);
+
         this._currentShowing = {
             from: this.currentPage - 1 === 0 ? 1 : (this.currentPage - 1) * pagination.itemsPerPage + 1,
             to: Math.min((this.currentPage - 1) * pagination.itemsPerPage + pagination.itemsPerPage, this.totalItems),
@@ -427,5 +476,21 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         };
 
         this._cdr.markForCheck();
+    }
+
+    /** Focus current page link/input using FocusKeyManager
+     * @hidden
+     */
+    private _focusCurrentPage(): void {
+        const currentPageNativeElement =
+            getComputedStyle(this._currentPageElement.nativeElement).display === 'none'
+                ? this._pageInputElement.nativeElement
+                : this._currentPageElement.nativeElement;
+
+        const index = this._focusKeyManagerItems
+            .toArray()
+            .findIndex((elem) => elem.nativeElement === currentPageNativeElement);
+
+        this._focusKeyManagerList.focusItem(index);
     }
 }
