@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.308 (2022-01-29)
+
+
+### Bug Fixes
+
+* **platform:** revert table column's width PR [#7540](https://github.com/SAP/fundamental-ngx/issues/7540), split platform CI suites ([#7637](https://github.com/SAP/fundamental-ngx/issues/7637)) ([4a43464](https://github.com/SAP/fundamental-ngx/commit/4a43464dcabd59826af1810fe85d2a9578923552))
+
 ## 0.33.0-rc.307 (2022-01-28)
 
 
