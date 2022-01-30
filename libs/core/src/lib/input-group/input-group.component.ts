@@ -12,9 +12,12 @@ import {
     ElementRef,
     OnDestroy,
     OnInit,
-    Optional
+    Optional,
+    Inject,
+    ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { DOCUMENT } from '@angular/common';
 import { fromEvent, Subject, Subscription } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 
@@ -106,6 +109,7 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
     /** Whether the input group is readonly. */
     @Input()
     readonly: boolean;
+
     /**
      *  The state of the form control - applies css classes.
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
@@ -123,7 +127,7 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
      * Whether should show focus outline
      */
     @Input()
-    showFocus = false;
+    showFocus = true;
 
     /** @hidden */
     @Input()
@@ -158,6 +162,11 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
     }
 
     /** @hidden */
+    get _isButtonFocused(): boolean {
+        return this._document?.activeElement === this._button?.nativeElement;
+    }
+
+    /** @hidden */
     private _isFocused = false;
 
     /** An RxJS Subject that will kill the stream upon component’s destruction (for unsubscribing)  */
@@ -171,10 +180,15 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
     addOnElement: InputGroupAddOnDirective;
 
     /** @hidden */
+    @ViewChild('button', { read: ElementRef })
+    readonly _button: ElementRef<any>;
+
+    /** @hidden */
     constructor(
         private readonly elementRef: ElementRef,
         private readonly changeDetectorRef: ChangeDetectorRef,
-        @Optional() private _contentDensityService: ContentDensityService
+        @Optional() private readonly _contentDensityService: ContentDensityService,
+        @Inject(DOCUMENT) private readonly _document: Document
     ) {}
 
     /** @hidden */
@@ -304,6 +318,7 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
                 takeUntil(this._onDestroy$)
             )
             .subscribe();
+
         fromEvent(this.elementRef.nativeElement, 'blur', { capture: true })
             .pipe(
                 tap(() => {
