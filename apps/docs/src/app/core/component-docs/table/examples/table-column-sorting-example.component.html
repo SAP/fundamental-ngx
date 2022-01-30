@@ -6,32 +6,44 @@
                     <fd-popover-control>
                         <div fd-table-inner>
                             Column 1
-                            <fd-icon fd-table-icon [glyph]="ascending ? 'sort-ascending' : 'sort-descending'"></fd-icon>
+                            <div class="fd-table__column-header-icons">
+                                <fd-icon
+                                    fd-table-icon
+                                    [glyph]="ascending ? 'sort-ascending' : 'sort-descending'"
+                                ></fd-icon>
+                                <fd-icon *ngIf="filterVal" fd-table-icon glyph="filter"></fd-icon>
+                            </div>
                         </div>
                     </fd-popover-control>
                     <fd-popover-body>
                         <ul fd-list [compact]="true">
                             <li fd-list-item (click)="sortColumn1(true)">
-                                <i fd-list-icon glyph="sort-ascending"></i>
-                                <span fd-list-title>Sort Ascending</span>
+                                <a fd-list-link>
+                                    <i fd-list-icon glyph="sort-ascending"></i>
+                                    <span fd-list-title>Sort Ascending</span>
+                                </a>
                             </li>
                             <li fd-list-item (click)="sortColumn1(false)">
-                                <i fd-list-icon glyph="sort-descending"></i>
-                                <span fd-list-title>Sort Descending</span>
+                                <a fd-list-link>
+                                    <i fd-list-icon glyph="sort-descending"></i>
+                                    <span fd-list-title>Sort Descending</span>
+                                </a>
                             </li>
                             <li fd-list-item>
-                                <i fd-list-icon glyph="filter"></i>
-                                <div fd-form-item [horizontal]="true" (click)="$event.stopPropagation()">
-                                    <label fd-form-label for="input-1">Filter</label>
-                                    <input
-                                        fd-form-control
-                                        [compact]="true"
-                                        id="input-1"
-                                        (keyup)="inputKeyup($event)"
-                                        [(ngModel)]="filterVal"
-                                        style="min-width: 164px"
-                                    />
-                                </div>
+                                <a fd-list-link>
+                                    <i fd-list-icon glyph="filter"></i>
+                                    <div fd-form-item [horizontal]="true" (click)="$event.stopPropagation()">
+                                        <label fd-form-label for="input-1">Filter</label>
+                                        <input
+                                            fd-form-control
+                                            [compact]="true"
+                                            id="input-1"
+                                            (keyup)="inputKeyup($event)"
+                                            [(ngModel)]="filterVal"
+                                            style="min-width: 164px"
+                                        />
+                                    </div>
+                                </a>
                             </li>
                         </ul>
                     </fd-popover-body>
