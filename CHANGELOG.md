@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.309 (2022-01-30)
+
+
+### Bug Fixes
+
+* **core:** input group focus ([#7620](https://github.com/SAP/fundamental-ngx/issues/7620)) ([0de8ade](https://github.com/SAP/fundamental-ngx/commit/0de8ade7247bcf8c9bf16592e9f71353d7bf845f))
+
 ## 0.33.0-rc.308 (2022-01-29)
 
 
