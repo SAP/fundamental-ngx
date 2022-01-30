@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.311 (2022-01-30)
+
+
+### Bug Fixes
+
+* **docs:** table header cell icons ([#7632](https://github.com/SAP/fundamental-ngx/issues/7632)) ([e8df2ba](https://github.com/SAP/fundamental-ngx/commit/e8df2ba0d0b9a08a2d8b7aac21089a0d8c6b16e4))
+
 ## 0.33.0-rc.310 (2022-01-30)
 
 
