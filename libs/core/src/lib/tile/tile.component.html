@@ -1,12 +1,29 @@
-<div class="fd-tile" #container tabindex="0">
+<div
+    class="fd-tile"
+    #container
+    [attr.tabindex]="clickable ? 0 : -1"
+    (click)="clickable && tileClick.emit()"
+    (keyup.enter)="clickable && tileClick.emit()"
+    (keydown.space)="clickable && $event.preventDefault()"
+    (keyup.space)="clickable && tileClick.emit()"
+>
     <div *ngIf="action && type !== 'line'" class="fd-tile__overlay"></div>
+
     <ng-content select="[fd-tile-action-close]"></ng-content>
+
     <ng-content select="[fd-tile-action-indicator]"></ng-content>
+
     <ng-content select="[fd-badge]"></ng-content>
+
     <ng-content select="[fd-tile-header]"></ng-content>
+
     <ng-content select="[fd-tile-header-content]"></ng-content>
+
     <ng-content select="[fd-tile-content]"></ng-content>
+
     <ng-content select="[fd-tile-footer]"></ng-content>
+
     <ng-content select="[fd-tile-action-container]"></ng-content>
+
     <ng-content></ng-content>
 </div>

@@ -83,3 +83,13 @@ export class BadgeTileExampleComponent {}
     templateUrl: './feed-tile-example.component.html'
 })
 export class FeedTileExampleComponent {}
+
+@Component({
+    selector: 'fd-clickable-tile-example',
+    templateUrl: './clickable-tile-example.component.html'
+})
+export class ClickableTileExampleComponent {
+    onTileClick(): void {
+        console.log('tile clicked!');
+    }
+}
