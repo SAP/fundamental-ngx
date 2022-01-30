@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.310 (2022-01-30)
+
+
+### Features
+
+* **core:** tile clickable flag & event emit on click ([#7624](https://github.com/SAP/fundamental-ngx/issues/7624)) ([ee83e4e](https://github.com/SAP/fundamental-ngx/commit/ee83e4e2d6e93251d55b910b3b546bb836d4febc))
+
 ## 0.33.0-rc.309 (2022-01-30)
 
 
