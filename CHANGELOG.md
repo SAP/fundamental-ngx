@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.315 (2022-01-31)
+
+
+### Features
+
+* **core:** pagination keyboard navigation ([#7630](https://github.com/SAP/fundamental-ngx/issues/7630)) ([a060d06](https://github.com/SAP/fundamental-ngx/commit/a060d064790d823eec2a43386ae23ae422d323bc))
+
 ## 0.33.0-rc.314 (2022-01-31)
 
 
