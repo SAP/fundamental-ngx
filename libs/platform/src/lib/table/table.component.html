@@ -352,6 +352,7 @@
                                     >
                                         <fd-checkbox
                                             attr.aria-label="Select row number {{ rowIdx + 1 }} of {{ _totalItems }}"
+                                            i18n-ariaLabel="@@platformTableCellCheckboxAriaLabelWithColAndRowIndex"
                                             [compact]="contentDensity !== CONTENT_DENSITY.COZY"
                                             labelClass="fd-table__checkbox-label"
                                             [ngModel]="row.checked"

@@ -371,6 +371,6 @@ function setCurrentPageToState(state: TableState, currentPage: number): TableSta
 /** Get all focusable child elements */
 function getFocusableElements(rootElement: any): any[] {
     return [
-        ...rootElement.querySelectorAll('a, button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])')
+        ...rootElement.querySelector('a, button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])')
     ].filter((el) => !el.hasAttribute('disabled') && el.getAttribute('tabindex') !== '-1');
 }
