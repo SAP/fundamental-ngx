@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.314 (2022-01-31)
+
+
+### Features
+
+* **platform:** search field predefined category ([#7539](https://github.com/SAP/fundamental-ngx/issues/7539)) ([90feda0](https://github.com/SAP/fundamental-ngx/commit/90feda07330b20b25e027dc5c493c11ef3a0912c))
+
 ## 0.33.0-rc.313 (2022-01-31)
 
 ## 0.33.0-rc.312 (2022-01-30)
