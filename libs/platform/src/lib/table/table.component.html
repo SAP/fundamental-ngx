@@ -377,9 +377,9 @@
                                 [class.fd-table__cell--expand]="_isTreeRowFirstCell(colIdx, row)"
                                 [ngStyle]="_getCellStyles(column)"
                                 [attr.aria-expanded]="_isTreeRow(row) ? row.expanded : null"
-                                attr.aria-label="Row {{ rowIdx }} of {{ _totalItems }}, Column {{ colIdx }} of {{
-                                    _tableColumnsLength
-                                }}. "
+                                attr.aria-label="Row {{ rowIdx + 1 }} of {{ _totalItems }}, Column {{
+                                    colIdx + 1
+                                }} of {{ _tableColumnsLength }}. "
                                 i18n-ariaLabel="@@platformTableCellAriaLabelWithColAndRowIndex"
                                 [attr.data-nesting-level]="colIdx === 0 ? row.level + 1 : null"
                                 [tabindex]="_isTreeRowFirstCell(colIdx, row) ? 0 : -1"
