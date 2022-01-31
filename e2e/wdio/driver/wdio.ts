@@ -61,10 +61,15 @@ export function goBack(): void {
     browser.back();
 }
 
-export function refreshPage(): void {
-    browser.refresh();
-    if (browserIsSafari()) {
-        pause();
+export function refreshPage(isFullRefresh = false): void {
+    if (isFullRefresh) {
+        browser.refresh();
+        if (browserIsSafari()) {
+            pause();
+        }
+    } else {
+        click('a[href="#/platform/home"]');
+        goBack();
     }
 }
 
