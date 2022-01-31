@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IconModule } from '@fundamental-ngx/core/icon';
 
 import { ObjectStatusComponent } from './object-status.component';
 import { Component, ElementRef, ViewChild } from '@angular/core';
@@ -40,7 +41,8 @@ describe('ObjectStatusComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                declarations: [ObjectStatusComponent, TestObjectStatusComponent]
+                declarations: [ObjectStatusComponent, TestObjectStatusComponent],
+                imports: [IconModule]
             }).compileComponents();
         })
     );
@@ -72,7 +74,7 @@ describe('ObjectStatusComponent', () => {
     it('Should add icon', () => {
         testComponent.glyph = 'future';
         fixture.detectChanges();
-        const iconElement = fixture.nativeElement.querySelector('i');
+        const iconElement = fixture.nativeElement.querySelector('fd-icon');
 
         expect(iconElement).toBeTruthy();
         expect(iconElement.classList.contains('sap-icon--future')).toBeTrue();

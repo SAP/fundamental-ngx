@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
+import { ContentDensity } from '@fundamental-ngx/core/utils';
+
 import { CollectionSelectFilter } from '../../../interfaces/collection-filter.interface';
 import { TableFilterSelectOption } from '../../../interfaces/selection-value.interface';
 
@@ -32,6 +34,10 @@ export class FilterMultiSelectComponent {
         );
         this._updateValueBasedOnOptions();
     }
+
+    /** Table's content density to be used */
+    @Input()
+    contentDensity: ContentDensity;
 
     /** Filter model change event */
     @Output()

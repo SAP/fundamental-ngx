@@ -3,7 +3,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 @Component({
     selector: 'fdp-platform-menu-with-icons-example',
     templateUrl: './platform-menu-with-icons-example.component.html',
-    styleUrls: ['./platform-menu-with-icons-example.component.scss'],
+    styleUrls: ['./platform-menu-example-styles.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class PlatformMenuWithIconsExampleComponent {

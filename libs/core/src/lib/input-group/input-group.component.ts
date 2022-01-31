@@ -12,9 +12,12 @@ import {
     ElementRef,
     OnDestroy,
     OnInit,
-    Optional
+    Optional,
+    Inject,
+    ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { DOCUMENT } from '@angular/common';
 import { fromEvent, Subject, Subscription } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 
@@ -106,6 +109,7 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
     /** Whether the input group is readonly. */
     @Input()
     readonly: boolean;
+
     /**
      *  The state of the form control - applies css classes.
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
@@ -123,7 +127,7 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
      * Whether should show focus outline
      */
     @Input()
-    showFocus = false;
+    showFocus = true;
 
     /** @hidden */
     @Input()
@@ -143,11 +147,23 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
 
     /** Event emitted when the add-on button is clicked. */
     @Output()
-    addOnButtonClicked: EventEmitter<any> = new EventEmitter<any>();
+    addOnButtonClicked: EventEmitter<Event> = new EventEmitter<Event>();
+
+    /**
+     * Event emitted when the native clear button is clicked, or when native search is executed.
+     * Works only for native search for input[type="search"]
+     */
+    @Output()
+    search: EventEmitter<Event> = new EventEmitter<Event>();
 
     /** @hidden Focus state */
     get isFocused(): boolean {
         return this._isFocused;
+    }
+
+    /** @hidden */
+    get _isButtonFocused(): boolean {
+        return this._document?.activeElement === this._button?.nativeElement;
     }
 
     /** @hidden */
@@ -164,10 +180,15 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
     addOnElement: InputGroupAddOnDirective;
 
     /** @hidden */
+    @ViewChild('button', { read: ElementRef })
+    readonly _button: ElementRef<any>;
+
+    /** @hidden */
     constructor(
         private readonly elementRef: ElementRef,
         private readonly changeDetectorRef: ChangeDetectorRef,
-        @Optional() private _contentDensityService: ContentDensityService
+        @Optional() private readonly _contentDensityService: ContentDensityService,
+        @Inject(DOCUMENT) private readonly _document: Document
     ) {}
 
     /** @hidden */
@@ -214,8 +235,8 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
         this._listenElementEvents();
         if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(
-                this._contentDensityService._contentDensityListener.subscribe((density) => {
-                    this.compact = density !== 'cozy';
+                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
+                    this.compact = isCompact;
                     this.changeDetectorRef.markForCheck();
                 })
             );
@@ -263,6 +284,11 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
     }
 
     /** @hidden */
+    onSearchEvent(event: Event): void {
+        this.search.emit(event);
+    }
+
+    /** @hidden */
     preventFocus(event: MouseEvent): void {
         if (!this.buttonFocusable) {
             event.preventDefault();
@@ -292,6 +318,7 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
                 takeUntil(this._onDestroy$)
             )
             .subscribe();
+
         fromEvent(this.elementRef.nativeElement, 'blur', { capture: true })
             .pipe(
                 tap(() => {

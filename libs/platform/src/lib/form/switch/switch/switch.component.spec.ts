@@ -111,7 +111,7 @@ describe('SwitchComponent', () => {
         await wait(fixture);
         fixture.detectChanges();
 
-        const fdpElem = fixture.debugElement.query(By.css('#switch-1 .fd-switch--compact'));
+        const fdpElem = fixture.debugElement.query(By.css('#switch-1'));
         const switches = component.fdpSwitch.toArray();
         expect(switches[1]._contentDensity).toEqual('compact');
         expect(fdpElem).toBeTruthy();

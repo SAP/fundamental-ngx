@@ -79,8 +79,8 @@ export class NotificationGroupHeaderComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         if (this.expandCompact === undefined && this._contentDensityService) {
             this._subscriptions.add(
-                this._contentDensityService._contentDensityListener.subscribe((density) => {
-                    this.expandCompact = density !== 'cozy';
+                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
+                    this.expandCompact = isCompact;
                     this._cdRef.markForCheck();
                 })
             );

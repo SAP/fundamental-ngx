@@ -126,7 +126,7 @@ describe('Standard List test suite', () => {
         it('check cozy multi-selection functionality', () => {
             const itemCount = getElementArrayLength(cozyMultiSelectList + listItems);
 
-            checkSelections(cozyMultiSelectList, itemCount, 'cozy multiSelect');
+            checkSelections(cozyMultiSelectList, itemCount);
 
             expect(getElementArrayLength(cozyMultiSelectList + selectedItems)).toEqual(itemCount);
         });
@@ -134,7 +134,7 @@ describe('Standard List test suite', () => {
         it('check compact multi-selection functionality', () => {
             const itemCount = getElementArrayLength(compactMultiSelectList + listItems);
 
-            checkSelections(compactMultiSelectList, itemCount, 'compact multiSelect');
+            checkSelections(compactMultiSelectList, itemCount);
 
             expect(getElementArrayLength(compactMultiSelectList + selectedItems)).toEqual(itemCount);
         });
@@ -142,7 +142,7 @@ describe('Standard List test suite', () => {
         it('check cozy single-selection functionality', () => {
             const itemCount = getElementArrayLength(cozySingleSelectList + listItems);
 
-            checkSelections(cozySingleSelectList, itemCount, 'cozy singleSelect');
+            checkSelections(cozySingleSelectList, itemCount);
 
             expect(getElementArrayLength(cozySingleSelectList + selectedItems)).toEqual(1);
         });
@@ -150,7 +150,7 @@ describe('Standard List test suite', () => {
         it('check compact single-selection functionality', () => {
             const itemCount = getElementArrayLength(compactSingleSelectList + listItems);
 
-            checkSelections(compactSingleSelectList, itemCount, 'compact singleSelect');
+            checkSelections(compactSingleSelectList, itemCount);
 
             expect(getElementArrayLength(compactSingleSelectList + selectedItems)).toEqual(1);
         });
@@ -222,7 +222,7 @@ describe('Standard List test suite', () => {
         });
     });
 
-    function checkSelections(exampleSelector: string, count: number, listExample: string): void {
+    function checkSelections(exampleSelector: string, count: number): void {
         for (let i = 0; i < count; i++) {
             click(exampleSelector + listItems, i);
             expect(getElementClass(exampleSelector + listItems, i)).toContain('is-selected');

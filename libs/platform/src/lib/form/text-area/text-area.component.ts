@@ -45,15 +45,6 @@ export type WrapType = 'hard' | 'soft' | 'off';
 })
 export class TextAreaComponent extends BaseInput implements AfterViewChecked, OnInit, AfterViewInit {
     /**
-     * content Density of element. 'cozy' | 'compact'
-     */
-    @Input()
-    set contentDensity(contentDensity: ContentDensity) {
-        this._contentDensity = contentDensity;
-        this.isCompact = contentDensity === 'compact';
-    }
-
-    /**
      * The height to which the textarea will grow when `growing` is set.
      */
     @Input()
@@ -148,12 +139,6 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
 
     /** @hidden */
     _contentDensity: ContentDensity = this._textAreaConfig.contentDensity;
-
-    /**
-     * @hidden
-     * Whether "contentDensity" is "compact"
-     */
-    isCompact: boolean = this._contentDensity === 'compact';
 
     /** @hidden */
     hasTextExceeded = false;

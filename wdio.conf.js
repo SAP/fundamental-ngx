@@ -61,14 +61,15 @@ exports.config = {
             './e2e/wdio/platform/**/radio-button-group.e2e-spec.ts',
             './e2e/wdio/platform/**/search.e2e-spec.ts',
             './e2e/wdio/platform/**/slider.e2e-spec.ts',
+            './e2e/wdio/platform/**/table.e2e-spec.ts'
+        ],
+        platformC: [
             './e2e/wdio/platform/**/split-menu-button.e2e-spec.ts',
             './e2e/wdio/platform/**/standard-list-item.e2e-spec.ts',
             './e2e/wdio/platform/**/step-input.e2e-spec.ts',
             './e2e/wdio/platform/**/switch.e2e-spec.ts',
-            './e2e/wdio/platform/**/table.e2e-spec.ts',
             './e2e/wdio/platform/**/textarea.e2e-spec.ts',
             './e2e/wdio/platform/**/thumbnail.e2e-spec.ts',
-            './e2e/wdio/platform/**/table.e2e-spec.ts',
             './e2e/wdio/platform/**/time-picker.e2e-spec.ts',
             './e2e/wdio/platform/**/upload-collection.e2e-spec.ts',
             './e2e/wdio/platform/**/value-help-dialog.e2e-spec.ts',

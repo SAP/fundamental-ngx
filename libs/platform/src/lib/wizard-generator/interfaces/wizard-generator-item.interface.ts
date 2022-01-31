@@ -17,6 +17,12 @@ export interface WizardVisibleSteps {
     [key: string]: boolean;
 }
 
+export interface WizardGeneratorDependencyFields {
+    [key: string]: {
+        [key: string]: string[];
+    };
+}
+
 export interface WizardGeneratorItem {
     /**
      * @description Name of the wizard step. Will be used in navigation bar.
@@ -45,7 +51,7 @@ export interface WizardGeneratorItem {
      */
     icon?: string;
     /**
-     * @description Should return true or false depending on whether or not this step should be visible.
+     * @description Should return true or false depending on whether this step should be visible.
      * @returns Boolean
      */
     when?: (
@@ -56,11 +62,7 @@ export interface WizardGeneratorItem {
     /**
      * @description Object of dependency fields that are used with `when` function
      */
-    dependencyFields?: {
-        [key: string]: {
-            [key: string]: string[];
-        };
-    };
+    dependencyFields?: WizardGeneratorDependencyFields;
 
     /**
      * @description Whether or not this step is going to create a branch.

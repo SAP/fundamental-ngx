@@ -194,11 +194,6 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     _contentDensity: ContentDensity = this._listConfig.contentDensity;
     /**
      * @hidden
-     * Used to define if contentDensity value is 'compact' or not.
-     */
-    _isCompact = this._contentDensity === 'compact';
-    /**
-     * @hidden
      * Whether listitem has row level selection enabled */
     selectRow: boolean;
     /**

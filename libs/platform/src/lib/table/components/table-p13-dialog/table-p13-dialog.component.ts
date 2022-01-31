@@ -10,6 +10,7 @@ import { CollectionSort } from '../../interfaces/collection-sort.interface';
 import { TableState } from '../../interfaces/table-state.interface';
 import { Table } from '../../table';
 import { TableColumn } from '../table-column/table-column';
+import { TableDialogCommonData } from '../../models/table-dialog-common-data.model';
 
 import { TableP13SortComponent } from './table-p13-sort.component';
 import { TableP13GroupComponent } from './table-p13-group.component';
@@ -113,6 +114,7 @@ export class TableP13DialogComponent implements OnDestroy {
         const columns = this._getTableColumns().filter(({ sortable }) => sortable);
         const sortBy = state.sortBy;
         const dialogData: SortDialogData = {
+            ...this._getCommonDialogData(),
             columns: columns.map(({ label, key }) => ({ label, key })),
             collectionSort: sortBy
         };
@@ -137,6 +139,7 @@ export class TableP13DialogComponent implements OnDestroy {
         const columns = this._getTableColumns();
         const filterBy = state?.filterBy;
         const dialogData: FilterDialogData = {
+            ...this._getCommonDialogData(),
             columns: columns.map(({ label, key, dataType }) => ({ label, key, dataType })),
             collectionFilter: filterBy
         };
@@ -163,6 +166,7 @@ export class TableP13DialogComponent implements OnDestroy {
         const visibleColumns = state.columns;
         const groupBy = state.groupBy;
         const dialogData: GroupDialogData = {
+            ...this._getCommonDialogData(),
             columns: columns
                 // We can group by visible columns only
                 .filter(({ name }) => visibleColumns.includes(name))
@@ -191,6 +195,7 @@ export class TableP13DialogComponent implements OnDestroy {
         const columns = this._getTableColumns();
         const visibleColumns = state.columns;
         const dialogData: ColumnsDialogData = {
+            ...this._getCommonDialogData(),
             availableColumns: columns.map(({ label, name }) => ({ label, key: name })),
             visibleColumns
         };
@@ -288,5 +293,12 @@ export class TableP13DialogComponent implements OnDestroy {
     private _unsubscribeFromTable(): void {
         this._tableSubscriptions.unsubscribe();
         this._tableSubscriptions = new Subscription();
+    }
+
+    /** @hidden */
+    private _getCommonDialogData(): TableDialogCommonData {
+        return {
+            tableContentDensity: this._table.contentDensity
+        };
     }
 }

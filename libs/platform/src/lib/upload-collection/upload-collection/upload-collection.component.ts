@@ -1,13 +1,26 @@
-import { Component, ViewChild, ElementRef, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { take, tap } from 'rxjs/operators';
+import {
+    Component,
+    ViewChild,
+    ElementRef,
+    Input,
+    Output,
+    EventEmitter,
+    ViewEncapsulation,
+    Optional,
+    SimpleChanges,
+    OnChanges,
+    OnDestroy,
+    ChangeDetectorRef
+} from '@angular/core';
+import { Subject, Subscription } from 'rxjs';
+import { filter, take, takeUntil, tap } from 'rxjs/operators';
 
-import { uuidv4 } from '@fundamental-ngx/core/utils';
+import { uuidv4, ContentDensityEnum, ContentDensityService } from '@fundamental-ngx/core/utils';
 import { DialogService, DialogConfig } from '@fundamental-ngx/core/dialog';
 import { TableRowSelectionChangeEvent } from '@fundamental-ngx/platform/table';
 import { isDataSource } from '@fundamental-ngx/platform/shared';
 import { NewFolderComponent } from '../dialogs/new-folder/new-folder.component';
-import { MoveToComponent } from '../dialogs/move-to/move-to.component';
+import { MoveToComponent, MoveToComponentDialogData } from '../dialogs/move-to/move-to.component';
 import { FilesValidatorService, FilesValidatorOutput } from '../services/files-validator.service';
 import {
     UploadCollectionFile,
@@ -39,7 +52,7 @@ let randomId = 0;
     styleUrls: ['./upload-collection.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class UploadCollectionComponent {
+export class UploadCollectionComponent implements OnChanges, OnDestroy {
     @Input()
     id = `fdp-upload-collection-id-${randomId++}`;
 
@@ -92,6 +105,10 @@ export class UploadCollectionComponent {
      */
     @Input()
     fileTypes: string[] = [];
+
+    /** The content density for which to render upload collection */
+    @Input()
+    contentDensity: ContentDensityEnum = ContentDensityEnum.COZY;
 
     /**
      * Specifies a file size limit in megabytes that prevents the upload
@@ -244,6 +261,9 @@ export class UploadCollectionComponent {
     private _dataSource: UploadCollectionDataSource;
 
     /** @hidden */
+    private _contentDensityManuallySet = false;
+
+    /** @hidden */
     @ViewChild('fileInput')
     private readonly _uploadFilesRef: ElementRef;
 
@@ -286,10 +306,32 @@ export class UploadCollectionComponent {
     /** @hidden for data source handling */
     private _dsSubscription?: Subscription;
 
+    /** @hidden */
+    private readonly _onDestroy$ = new Subject<void>();
+
     constructor(
         private readonly _dialogService: DialogService,
-        private readonly _filesValidatorService: FilesValidatorService
-    ) {}
+        private readonly _filesValidatorService: FilesValidatorService,
+        private readonly _cdr: ChangeDetectorRef,
+        @Optional() private readonly _contentDensityService: ContentDensityService
+    ) {
+        this._trackContentDensityChanges();
+    }
+
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes.contentDensity) {
+            this._contentDensityManuallySet = true;
+        }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
+        this._dsSubscription.unsubscribe();
+        this.dataSource.close();
+    }
 
     /** Show meessage for types NEW FOLDER CREATE, REMOVE, MOVE TO, UPDATE_VERSION, FILE_RENAMED */
     showMessage(type: MessageType, options: MessageOptions): void {
@@ -475,8 +517,9 @@ export class UploadCollectionComponent {
                 items: this.dataSource.dataProvider.items,
                 currentFolder,
                 movableFolders: movableItems.filter((item) => item.type === 'folder'),
-                maxFilenameLength: this.maxFilenameLength
-            }
+                maxFilenameLength: this.maxFilenameLength,
+                contentDensity: this.contentDensity
+            } as MoveToComponentDialogData
         } as DialogConfig);
 
         dialogRef.afterClosed.pipe(take(1)).subscribe(
@@ -1048,5 +1091,20 @@ export class UploadCollectionComponent {
                 item.sameFilenameState = null;
             }
         });
+    }
+
+    /** @hidden */
+    private _trackContentDensityChanges(): void {
+        if (this._contentDensityService) {
+            this._contentDensityService._contentDensityListener
+                .pipe(
+                    filter(() => !this._contentDensityManuallySet),
+                    takeUntil(this._onDestroy$)
+                )
+                .subscribe((density) => {
+                    this.contentDensity = density as ContentDensityEnum;
+                    this._cdr.markForCheck();
+                });
+        }
     }
 }

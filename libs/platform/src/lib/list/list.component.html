@@ -3,7 +3,7 @@
     fd-list
     #fdlist
     [attr.id]="id"
-    [compact]="_isCompact"
+    [compact]="contentDensity | isCompactDensity"
     [noBorder]="noBorder"
     [selection]="selection"
     [byline]="hasByLine"

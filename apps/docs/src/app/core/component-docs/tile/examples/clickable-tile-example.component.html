@@ -1,0 +1,13 @@
+<fd-tile [clickable]="false">
+    <div fd-tile-header></div>
+    <div fd-tile-content>I'm not clickable!</div>
+    <div fd-tile-footer></div>
+</fd-tile>
+
+<br />
+
+<fd-tile [clickable]="true" (tileClick)="onTileClick()">
+    <div fd-tile-header></div>
+    <div fd-tile-content>I'm clickable, look for the event in the console</div>
+    <div fd-tile-footer></div>
+</fd-tile>

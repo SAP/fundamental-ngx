@@ -6,6 +6,7 @@ import {
     TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
+import { FormGeneratorService } from '@fundamental-ngx/platform/form';
 
 import { WizardGeneratorService } from '../../wizard-generator.service';
 import { BaseWizardGenerator } from '../../base-wizard-generator';
@@ -19,7 +20,7 @@ import { WizardGeneratorReviewButtonDirective } from '../../directives/wizard-ge
     templateUrl: './wizard-generator.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [WizardGeneratorService]
+    providers: [WizardGeneratorService, FormGeneratorService]
 })
 export class WizardGeneratorComponent extends BaseWizardGenerator {
     /**

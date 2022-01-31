@@ -23,7 +23,7 @@
                 colGrow
                 [class.fd-select-custom-class]="false"
                 #sttr
-                [compact]="true"
+                [compact]="contentDensity | isCompactDensity"
                 [controlTemplate]="customSelectTemplate"
                 [name]="uid + '-' + type + '-strategy-' + item.id"
                 [(ngModel)]="item.strategy"
@@ -70,7 +70,7 @@
                                 i18n-placeholder="@@platformI18nValueHelpDialog.Define.Condition.FromPlaceholder"
                                 placeholder="from"
                                 required
-                                [compact]="true"
+                                [compact]="contentDensity | isCompactDensity"
                                 [state]="fromModel.invalid ? 'error' : ''"
                                 [name]="uid + '-' + type + '-from-' + item.id"
                                 (blur)="_validateConditionValue(item, [fromModel.valid, toModel.valid])"
@@ -93,7 +93,7 @@
                                 i18n-placeholder="@@platformI18nValueHelpDialog.Define.Condition.ToPlaceholder"
                                 placeholder="to"
                                 required
-                                [compact]="true"
+                                [compact]="contentDensity | isCompactDensity"
                                 [state]="toModel.invalid ? 'error' : ''"
                                 [name]="uid + '-' + type + '-to-' + item.id"
                                 (blur)="_validateConditionValue(item, [fromModel.valid, toModel.valid])"
@@ -117,7 +117,7 @@
                                 type="text"
                                 i18n-placeholder="@@platformI18nValueHelpDialog.Define.Condition.ValuePlaceholder"
                                 placeholder="value"
-                                [compact]="true"
+                                [compact]="contentDensity | isCompactDensity"
                                 [state]="valueModel.invalid ? 'error' : ''"
                                 [name]="uid + '-' + type + '-value-' + item.id"
                                 (blur)="_validateConditionValue(item, valueModel.valid)"
@@ -142,7 +142,7 @@
                 ariaLabel="Remove Define Condition"
                 fdType="transparent"
                 glyph="decline"
-                [compact]="true"
+                [compact]="contentDensity | isCompactDensity"
                 title="Remove Define Condition"
                 i18n-title="@@platformI18nValueHelpDialog.defineTab.removeButton"
                 (click)="removeCondition(i)"
@@ -161,7 +161,7 @@
                 i18n-aria-label="@@platformI18nValueHelpDialog.AddAriaLabelDefineCondition"
                 aria-label="Add New Define Condition"
                 label="Add"
-                [compact]="true"
+                [compact]="contentDensity | isCompactDensity"
                 title="Add New Define Condition"
                 (click)="addEmptyCondition()"
             ></button>

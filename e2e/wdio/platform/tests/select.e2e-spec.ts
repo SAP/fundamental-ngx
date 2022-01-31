@@ -189,7 +189,7 @@ describe('Select test suite', () => {
         });
     });
 
-    function checkOptions(selector: string, id: number, index: number = 0): void {
+    function checkOptions(selector: string, id: number): void {
         const textBefore = getText(selector + displayText);
         click(selector + buttons);
         click(options(id));

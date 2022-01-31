@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, DoCheck } from '@angular/core';
 
+import { ContentDensity } from '@fundamental-ngx/core/utils';
+
 import { CollectionSelectFilter } from '../../../interfaces/collection-filter.interface';
 import { TableViewSettingsFilterComponent } from '../../table-view-settings-dialog/table-view-settings-filter.component';
 
@@ -20,6 +22,10 @@ export class FilterCustomComponent implements DoCheck {
     /** ViewSettingsFilter options the filter is created from */
     @Input()
     filter: TableViewSettingsFilterComponent;
+
+    /** Table's content density to be used */
+    @Input()
+    contentDensity: ContentDensity;
 
     /** The filter model */
     @Input()

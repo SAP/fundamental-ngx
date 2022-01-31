@@ -170,7 +170,7 @@
             #checkbox
             *ngIf="selectionMode === 'multi'"
             role="checkbox"
-            [compact]="_isCompact"
+            [compact]="contentDensity | isCompactDensity"
             [(ngModel)]="_selected"
             [attr.aria-selected]="_selected"
         >
@@ -181,7 +181,7 @@
             [value]="value"
             [name]="name"
             role="radio"
-            [compact]="_isCompact"
+            [compact]="contentDensity | isCompactDensity"
             [(ngModel)]="selectionValue"
             [attr.aria-selected]="_selected"
         >
@@ -197,7 +197,7 @@
         *ngIf="listType === 'detail'"
         role="button"
         title="detail"
-        [compact]="_isCompact"
+        [compact]="contentDensity | isCompactDensity"
         fdType="transparent"
         glyph="edit"
         (click)="_onActionButtonClick('edit')"
@@ -212,7 +212,7 @@
         *ngIf="selectionMode === 'delete'"
         role="button"
         title="delete"
-        [compact]="_isCompact"
+        [compact]="contentDensity | isCompactDensity"
         i18n-aria-label="@@standardList.Item.delete"
         aria-label="delete"
         fdType="transparent"

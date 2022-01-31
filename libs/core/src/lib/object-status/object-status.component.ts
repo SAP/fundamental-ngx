@@ -16,13 +16,14 @@ export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-object-status]',
     template: `
-        <i
-            class="fd-object-status__icon"
+        <fd-icon
             *ngIf="glyph"
-            [class]="'sap-icon--' + glyph"
+            class="fd-object-status__icon"
+            [glyph]="glyph"
             [attr.role]="glyphAriaLabel ? 'presentation' : ''"
-            [attr.aria-label]="glyphAriaLabel"
-        ></i>
+            [ariaLabel]="glyphAriaLabel"
+        >
+        </fd-icon>
         <span *ngIf="label" class="fd-object-status__text">{{ label }}</span>
 
         <!-- DEPRECATED - Remove in v0.23.0 -->
@@ -59,7 +60,7 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
     label: string;
 
     /**
-     * Label applied to glyph element, should be used when there is not text included
+     * Label applied to glyph element, should be used when there is no text included
      */
     @Input()
     glyphAriaLabel: string;

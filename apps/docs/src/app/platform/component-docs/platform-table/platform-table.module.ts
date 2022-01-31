@@ -1,6 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CdkTableModule } from '@angular/cdk/table';
+import { SelectModule } from '@fundamental-ngx/core/select';
 
 import { TableModule } from '@fundamental-ngx/core/table';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
@@ -44,6 +45,7 @@ import { PlatformTableSemanticExampleComponent } from './platform-table-examples
 import { PlatformTableRowClassExampleComponent } from './platform-table-examples/platform-table-row-class-example.component';
 import { PlatformTableNoOuterBordersExampleComponent } from './platform-table-examples/platform-table-no-outer-borders-example.component';
 import { PlatformTableWrapExampleComponent } from './platform-table-examples/platform-table-wrap-example.component';
+import { PlatformTableEditableRowsExampleComponent } from './platform-table-examples/editable-rows/platform-table-editable-rows-example.component';
 
 const routes: Routes = [
     {
@@ -70,7 +72,8 @@ const routes: Routes = [
         PlatformInputModule,
         PlatformSearchFieldModule,
         IllustratedMessageModule,
-        FdpFormGroupModule
+        FdpFormGroupModule,
+        SelectModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -99,7 +102,8 @@ const routes: Routes = [
         PlatformTableSemanticExampleComponent,
         PlatformTableRowClassExampleComponent,
         PlatformTableNoOuterBordersExampleComponent,
-        PlatformTableWrapExampleComponent
+        PlatformTableWrapExampleComponent,
+        PlatformTableEditableRowsExampleComponent
     ],
     providers: [RtlService],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

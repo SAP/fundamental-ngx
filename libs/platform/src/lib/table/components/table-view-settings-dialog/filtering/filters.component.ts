@@ -16,8 +16,9 @@ import { TableColumn } from '../../table-column/table-column';
 import { TableViewSettingsFilterComponent } from '../../table-view-settings-dialog/table-view-settings-filter.component';
 import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
 import { FILTERS_VIEW_STEP_TOKEN, FiltersViewStep } from './filters-active-step';
+import { TableDialogCommonData } from '../../../models/table-dialog-common-data.model';
 
-export interface FiltersDialogData {
+export interface FiltersDialogData extends TableDialogCommonData {
     filterBy: CollectionFilter[];
     columns: TableColumn[];
     viewSettingsFilters: TableViewSettingsFilterComponent[];
@@ -82,8 +83,8 @@ export class FiltersComponent implements Resettable, AfterViewInit {
     activeFilterStepView: FiltersViewStep;
 
     /** @hidden */
-    constructor(public dialogRef: DialogRef, private _cd: ChangeDetectorRef) {
-        const dialogData: FiltersDialogData = this.dialogRef.data;
+    constructor(public dialogRef: DialogRef<FiltersDialogData>, private _cd: ChangeDetectorRef) {
+        const dialogData = this.dialogRef.data;
         this.filterBy = [...dialogData.filterBy];
         this.viewSettingsFilters = dialogData.viewSettingsFilters;
         this.columns = dialogData.columns;

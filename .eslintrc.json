@@ -10,20 +10,29 @@
                         "allow": [],
                         "depConstraints": [
                             {
-                                "sourceTag": "fd",
-                                "onlyDependOnLibsWithTags": ["fd"]
+                                "sourceTag": "scope:fd",
+                                "onlyDependOnLibsWithTags": ["scope:fd"]
                             },
                             {
-                                "sourceTag": "fdp",
-                                "onlyDependOnLibsWithTags": ["fd", "fdp"]
+                                "sourceTag": "scope:fdp",
+                                "onlyDependOnLibsWithTags": ["scope:fd", "scope:fdp"]
                             },
                             {
-                                "sourceTag": "fn",
-                                "onlyDependOnLibsWithTags": ["fd", "fn"]
+                                "sourceTag": "scope:fn",
+                                "onlyDependOnLibsWithTags": ["scope:fd", "scope:fn"]
                             },
                             {
-                                "sourceTag": "docs",
-                                "onlyDependOnLibsWithTags": ["fd", "fdp", "fn"]
+                                "sourceTag": "scope:moment-adapter",
+                                "onlyDependOnLibsWithTags": ["scope:fd"]
+                            },
+                            {
+                                "sourceTag": "scope:docs",
+                                "onlyDependOnLibsWithTags": [
+                                    "scope:fd",
+                                    "scope:fdp",
+                                    "scope:fn",
+                                    "scope:moment-adapter"
+                                ]
                             }
                         ],
                         "enforceBuildableLibDependency": true

@@ -31,7 +31,7 @@ export default function (schema: SapComponentSchema): Rule {
             name: schema.name,
             style: 'scss',
             directory: `${getProjectDirName(schema)}/src/lib`,
-            tags: [getProjectTag(schema)].join(','),
+            tags: [`scope:${getProjectTag(schema)}`, 'type:lib'].join(','),
             unitTestRunner: 'karma',
             prefix: getProjectTag(schema),
             publishable: true,

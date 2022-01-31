@@ -1,4 +1,85 @@
 
+## 0.33.0-rc.311 (2022-01-30)
+
+
+### Bug Fixes
+
+* **docs:** table header cell icons ([#7632](https://github.com/SAP/fundamental-ngx/issues/7632)) ([e8df2ba](https://github.com/SAP/fundamental-ngx/commit/e8df2ba0d0b9a08a2d8b7aac21089a0d8c6b16e4))
+
+## 0.33.0-rc.310 (2022-01-30)
+
+
+### Features
+
+* **core:** tile clickable flag & event emit on click ([#7624](https://github.com/SAP/fundamental-ngx/issues/7624)) ([ee83e4e](https://github.com/SAP/fundamental-ngx/commit/ee83e4e2d6e93251d55b910b3b546bb836d4febc))
+
+## 0.33.0-rc.309 (2022-01-30)
+
+
+### Bug Fixes
+
+* **core:** input group focus ([#7620](https://github.com/SAP/fundamental-ngx/issues/7620)) ([0de8ade](https://github.com/SAP/fundamental-ngx/commit/0de8ade7247bcf8c9bf16592e9f71353d7bf845f))
+
+## 0.33.0-rc.308 (2022-01-29)
+
+
+### Bug Fixes
+
+* **platform:** revert table column's width PR [#7540](https://github.com/SAP/fundamental-ngx/issues/7540), split platform CI suites ([#7637](https://github.com/SAP/fundamental-ngx/issues/7637)) ([4a43464](https://github.com/SAP/fundamental-ngx/commit/4a43464dcabd59826af1810fe85d2a9578923552))
+
+## 0.33.0-rc.307 (2022-01-28)
+
+
+### Features
+
+* **core:** emit event for native search ([#7601](https://github.com/SAP/fundamental-ngx/issues/7601)) ([af4700c](https://github.com/SAP/fundamental-ngx/commit/af4700cd4fc0a4d8a797205dac50b528cf41f630))
+
+## 0.33.0-rc.306 (2022-01-28)
+
+## 0.33.0-rc.305 (2022-01-28)
+
+
+### Features
+
+* **platform:** ability to add new rows to table ([#7579](https://github.com/SAP/fundamental-ngx/issues/7579)) ([c029a78](https://github.com/SAP/fundamental-ngx/commit/c029a780d64008093895644a67f5fa54120fb483))
+
+## 0.33.0-rc.304 (2022-01-28)
+
+## 0.33.0-rc.303 (2022-01-28)
+
+
+### Bug Fixes
+
+* **core/platform:** defect hunting issues ([#7621](https://github.com/SAP/fundamental-ngx/issues/7621)) ([7c160a6](https://github.com/SAP/fundamental-ngx/commit/7c160a6688d3e3e869c5a7c88b127b427c74059d))
+
+## 0.33.0-rc.302 (2022-01-28)
+
+
+### Features
+
+* **platform:** when function for global wizard generator scope ([#7605](https://github.com/SAP/fundamental-ngx/issues/7605)) ([586d244](https://github.com/SAP/fundamental-ngx/commit/586d2441775d76ff09e020114f1d2d9fd43c4a23))
+
+## 0.33.0-rc.301 (2022-01-28)
+
+
+### Bug Fixes
+
+* **platform:** remove hardcoded content densities ([#7586](https://github.com/SAP/fundamental-ngx/issues/7586)) ([b20c6fd](https://github.com/SAP/fundamental-ngx/commit/b20c6fddda959b387fa8622a2cf12661f0aaff96))
+
+## 0.33.0-rc.300 (2022-01-27)
+
+
+### Bug Fixes
+
+* **core:** tokenizer overflow ([#7619](https://github.com/SAP/fundamental-ngx/issues/7619)) ([2ef1185](https://github.com/SAP/fundamental-ngx/commit/2ef1185b9952a6ae297b76942e87c5d21e287ed8))
+
+## 0.33.0-rc.299 (2022-01-27)
+
+
+### Bug Fixes
+
+* **core:** timeline line size change ([#7625](https://github.com/SAP/fundamental-ngx/issues/7625)) ([9770d5b](https://github.com/SAP/fundamental-ngx/commit/9770d5b041be1780b1fa66f33f2f86d9f313c0aa))
+
 ## 0.33.0-rc.298 (2022-01-27)
 
 

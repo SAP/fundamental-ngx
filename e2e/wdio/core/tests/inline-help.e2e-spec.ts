@@ -40,7 +40,7 @@ describe('Inline help test suite', () => {
     it('Verify icons hover tooltip', () => {
         const arr = getElementArrayLength(inlineHelpIcons);
         scrollIntoView(exampleAreaContainersArr);
-        for (let i = 0, diff = 0; i < arr; i++, diff = 0) {
+        for (let i = 0; i < arr; i++) {
             mouseHoverElement(inlineHelpIcons, i);
             expect(getAttributeByName(inlineHelpIcons, 'fd-inline-help', i)).toContain('Inline Help Tooltip');
         }

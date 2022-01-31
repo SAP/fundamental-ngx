@@ -7,6 +7,7 @@ import {
     ElementRef,
     EventEmitter,
     Input,
+    isDevMode,
     OnChanges,
     OnDestroy,
     Optional,
@@ -18,10 +19,10 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { isObservable, Observable, Subject, Subscription } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
 
 import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
-import { ContentDensity, ContentDensityEnum, RtlService } from '@fundamental-ngx/core/utils';
+import { ContentDensity, ContentDensityEnum, RtlService, ContentDensityService } from '@fundamental-ngx/core/utils';
 import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
 import { isDataSource } from '@fundamental-ngx/platform/shared';
 import {
@@ -149,9 +150,14 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
     @Input()
     maxShownInitialFilters = 4;
 
+    /** @deprecated use `contentDensity` instead */
     /** The content density for which to render table. 'cozy' | 'compact' | 'condensed' */
     @Input()
     searchTableDensity: ContentDensity = ContentDensityEnum.COMPACT;
+
+    /** The content density for which to render value help dialog */
+    @Input()
+    contentDensity: ContentDensity = ContentDensityEnum.COMPACT;
 
     /** Define conditions tab's settings */
     @Input()
@@ -229,6 +235,9 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
     /** @hidden for data source handling */
     private _dsSubscription: Subscription;
 
+    /** @hidden */
+    private _contentDensityManuallySet = false;
+
     /** @hidden Previous state */
     private _prevState: VhdValue<T[]> = {
         selected: [],
@@ -245,16 +254,21 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
     shownFilterCount = Infinity;
 
     /** @hidden */
+    private readonly _onDestroy$ = new Subject<void>();
+
+    /** @hidden */
     constructor(
         private readonly _elementRef: ElementRef,
         private readonly _changeDetectorRef: ChangeDetectorRef,
         private readonly _dialogService: DialogService,
-        @Optional() private readonly _rtlService: RtlService
+        @Optional() private readonly _rtlService: RtlService,
+        @Optional() private readonly _contentDensityService: ContentDensityService
     ) {
         /** Default display function for define conditions */
         if (!this.conditionDisplayFn || typeof this.conditionDisplayFn !== 'function') {
             this.conditionDisplayFn = defaultConditionDisplayFn;
         }
+        this._trackContentDensityChanges();
     }
 
     /** @hidden */
@@ -325,11 +339,23 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
                 this._initializeDS();
             }
         }
+
+        if (changes.searchTableDensity || changes.contentDensity) {
+            this._contentDensityManuallySet = true;
+
+            if (changes.searchTableDensity) {
+                this.contentDensity = this.searchTableDensity;
+                if (isDevMode()) {
+                    console.warn('"searchTableDensity" is deprecated. Use "contentDensity" instead');
+                }
+            }
+        }
     }
 
     /** @hidden */
     ngOnDestroy(): void {
         this._resetState();
+        this._onDestroy$.next();
     }
 
     /** Open dialog */
@@ -391,8 +417,8 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
         const nonEmptyFilters = new Map();
         this._displayedFilters
             .filter(({ value }) => !!value && value.trim().length)
-            .forEach((filter) => {
-                nonEmptyFilters.set(filter.key, filter.value);
+            .forEach((e) => {
+                nonEmptyFilters.set(e.key, e.value);
             });
 
         if (this._mainSearch.length) {
@@ -598,12 +624,12 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
 
     /** @hidden */
     private _updateFilters(): void {
-        this._displayedFilters = this.filters.map((filter) => ({
-            ...filter,
-            label: filter.label || filter.key
+        this._displayedFilters = this.filters.map((e) => ({
+            ...e,
+            label: e.label || e.key
         }));
 
-        this._hasAdvanced = this._displayedFilters.some((filter: VhdFilter) => !!filter.advanced);
+        this._hasAdvanced = this._displayedFilters.some((e: VhdFilter) => !!e.advanced);
     }
 
     /** @hidden */
@@ -650,5 +676,20 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
             );
         }
         return true;
+    }
+
+    /** @hidden */
+    private _trackContentDensityChanges(): void {
+        if (this._contentDensityService) {
+            this._contentDensityService._contentDensityListener
+                .pipe(
+                    filter(() => !this._contentDensityManuallySet),
+                    takeUntil(this._onDestroy$)
+                )
+                .subscribe((density) => {
+                    this.contentDensity = density as ContentDensityEnum;
+                    this._changeDetectorRef.markForCheck();
+                });
+        }
     }
 }

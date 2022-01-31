@@ -8,6 +8,7 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { FormModule } from '@fundamental-ngx/core/form';
+import { PipeModule } from '@fundamental-ngx/core/utils';
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { MessageStripModule } from '@fundamental-ngx/core/message-strip';
 import { ListModule } from '@fundamental-ngx/core/list';
@@ -40,6 +41,7 @@ import { MoveToComponent } from './dialogs/move-to/move-to.component';
         FormsModule,
         ReactiveFormsModule,
         DialogModule,
+        PipeModule,
         IconModule,
         BreadcrumbModule,
         PaginationModule,

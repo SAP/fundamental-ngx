@@ -192,12 +192,6 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     /** @hidden */
     _contentDensity: ContentDensity = this.multiInputConfig.contentDensity;
 
-    /**
-     * @hidden
-     * Whether "contentDensity" is "compact"
-     */
-    isCompact: boolean = this._contentDensity === 'compact';
-
     /** @hidden */
     controlTemplate: TemplateRef<any>;
 

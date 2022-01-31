@@ -1,7 +1,7 @@
 <fd-select
     [placeholder]="placeholder"
     [glyph]="glyph"
-    [compact]="_isCompact"
+    [compact]="contentDensity | isCompactDensity"
     [disabled]="disabled"
     [readonly]="readonly"
     [closeOnOutsideClick]="closeOnOutsideClick"

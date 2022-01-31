@@ -7,13 +7,14 @@ import { getUniqueListValuesByKey } from '../../../utils';
 import { CollectionGroup } from '../../../interfaces/collection-group.interface';
 import { SortDirection } from '../../../enums/sort-direction.enum';
 import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
+import { TableDialogCommonData } from '../../../models/table-dialog-common-data.model';
 
 export interface GroupDialogColumn {
     label: string;
     key: string;
 }
 
-export interface GroupDialogData {
+export interface GroupDialogData extends TableDialogCommonData {
     collectionGroup: CollectionGroup[];
     columns: GroupDialogColumn[];
 }
@@ -57,8 +58,8 @@ export class P13GroupingDialogComponent implements Resettable {
     rules: GroupRule[] = [];
 
     /** @hidden */
-    constructor(private dialogRef: DialogRef) {
-        const { columns, collectionGroup }: GroupDialogData = this.dialogRef.data;
+    constructor(public dialogRef: DialogRef<GroupDialogData>) {
+        const { columns, collectionGroup } = this.dialogRef.data;
 
         this.columns = columns || [];
 

@@ -62,6 +62,9 @@ import platformTableCustomNoDataMessageTsSrc from '!./platform-table-examples/pl
 import platformTableWrappedTextSrc from '!./platform-table-examples/platform-table-wrap-example.component.html?raw';
 import platformTableWrappedTextTsSrc from '!./platform-table-examples/platform-table-wrap-example.component.ts?raw';
 
+import platformTableEditableRowsSrc from '!./platform-table-examples/editable-rows/platform-table-editable-rows-example.component.html?raw';
+import platformTableEditableRowsTsSrc from '!./platform-table-examples/editable-rows/platform-table-editable-rows-example.component.ts?raw';
+
 import illustrationDialogNoMail from '!../../../../assets/images/sapIllus-Dialog-NoMail.svg?raw';
 
 import { TableDataProviderExample } from './platform-table-examples/platform-table-data-provider-example';
@@ -549,6 +552,22 @@ export class PlatformTableDocsComponent {
             fileName: 'platform-table-wrap-example',
             component: 'PlatformTableWrapExampleComponent',
             name: 'platform-table-wrap-example.component.ts'
+        }
+    ];
+
+    editableRowsFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformTableEditableRowsSrc,
+            fileName: 'platform-table-editable-rows-example',
+            name: 'platform-table-editable-rows-example.component.html'
+        },
+        {
+            language: 'typescript',
+            code: platformTableEditableRowsTsSrc,
+            fileName: 'platform-table-editable-rows-example',
+            component: 'PlatformTableEditableRowsExampleComponent',
+            name: 'platform-table-editable-rows-example.component.ts'
         }
     ];
 

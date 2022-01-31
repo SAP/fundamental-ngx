@@ -24,6 +24,10 @@ export const DEFAULT_TABLE_STATE: Readonly<TableState> = {
     searchInput: DEFAULT_TABLE_SEARCH_INPUT
 };
 
+export const DEFAULT_HIGHLIGHTING_KEY = 'semantic';
+
+export const EDITABLE_ROW_SEMANTIC_STATE = 'information';
+
 export const SEMANTIC_HIGHLIGHTING_COLUMN_WIDTH = 6;
 
 export const SELECTION_COLUMN_WIDTH: ReadonlyMap<ContentDensity, number> = new Map<ContentDensity, number>([

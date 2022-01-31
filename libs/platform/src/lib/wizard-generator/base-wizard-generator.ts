@@ -83,7 +83,7 @@ export class BaseWizardGenerator implements OnDestroy {
     }
 
     /**
-     * Whether or not to append the step to the wizard. If false, each step will be displayed on a different page.
+     * Whether to append the step to the wizard. If false, each step will be displayed on a different page.
      * Default is true.
      */
     @Input()
@@ -107,12 +107,12 @@ export class BaseWizardGenerator implements OnDestroy {
     contentHeight: string;
 
     /**
-     * @description Boolean flag indicating whether or not to display Summary step in Wizard progress bar.
+     * @description Boolean flag indicating whether to display Summary step in Wizard progress bar.
      */
     @Input()
     displaySummaryStep = false;
 
-    /** Whether or not all form items should have identical layout provided for form group. */
+    /** Whether all form items should have identical layout provided for form group. */
     @Input()
     unifiedLayout = true;
 
@@ -163,7 +163,7 @@ export class BaseWizardGenerator implements OnDestroy {
     }
 
     /**
-     * Whether or not current step is a branching step.
+     * Whether current step is a branching step.
      */
     get isBranchingStep(): boolean {
         const currentIndex = this._wizardGeneratorService.getCurrentStepIndex();
@@ -172,7 +172,7 @@ export class BaseWizardGenerator implements OnDestroy {
     }
 
     /**
-     * Whether or not the next step is a Summary step.
+     * Whether the next step is a Summary step.
      */
     get isNextStepSummary(): boolean {
         const nextStep = this.visibleItems[this._nextStepIndex];
@@ -254,7 +254,7 @@ export class BaseWizardGenerator implements OnDestroy {
             });
 
         this._wizardGeneratorService
-            .trackNextStepindex()
+            .trackNextStepIndex()
             .pipe(takeUntil(this._onDestroy$))
             .subscribe((index) => {
                 this._nextStepIndex = index;

@@ -8,6 +8,7 @@ import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { ListModule } from '@fundamental-ngx/core/list';
+import { PipeModule } from '@fundamental-ngx/core/utils';
 import { ObjectIdentifierModule } from '@fundamental-ngx/core/object-identifier';
 import { ObjectMarkerModule } from '@fundamental-ngx/core/object-marker';
 import { ObjectNumberModule } from '@fundamental-ngx/core/object-number';
@@ -26,6 +27,7 @@ import { ObjectListItemRowComponent } from './object-list-item-row.component';
         FormsModule,
         FormModule,
         ListModule,
+        PipeModule,
         PlatformLinkModule,
         RouterModule,
         AvatarModule,

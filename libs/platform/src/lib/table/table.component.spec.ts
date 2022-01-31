@@ -9,7 +9,7 @@ import { RtlService } from '@fundamental-ngx/core/utils';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 
 import { TableDataProvider, TableDataSource } from './domain';
-import { FILTER_STRING_STRATEGY, SelectionMode, SortDirection, TableRowType } from './enums';
+import { FILTER_STRING_STRATEGY, FilterableColumnDataType, SelectionMode, SortDirection, TableRowType } from './enums';
 import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilter, TableState } from './interfaces';
 import { TableRowSelectionChangeEvent, TableRowToggleOpenStateEvent } from './models';
 import { TableRowClass, TableComponent } from './table.component';
@@ -156,6 +156,7 @@ describe('TableComponent internal', () => {
         const payload: CollectionStringFilter = {
             field,
             value,
+            type: FilterableColumnDataType.STRING,
             strategy: FILTER_STRING_STRATEGY.CONTAINS,
             exclude: false
         };

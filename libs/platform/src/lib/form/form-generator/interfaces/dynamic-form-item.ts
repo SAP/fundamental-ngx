@@ -5,7 +5,7 @@ import { ContentDensity } from '@fundamental-ngx/core/utils';
 import { InlineLayout, ColumnLayout, HintPlacement, LabelLayout, SelectItem } from '@fundamental-ngx/platform/shared';
 import { InputType } from '../../input/input.component';
 import { DynamicFormGroup } from './dynamic-form-group';
-import { DynamicFormControl } from '../dynamic-form-control';
+import { DynamicFormControl, DynamicFormGroupControl } from '../dynamic-form-control';
 
 export type DynamicFormItemChoices = number | string | SelectItem;
 export type DynamicFormItemValidationResult = null | boolean | string;
@@ -166,16 +166,23 @@ export interface DynamicFormFieldItem {
     ) => any | Promise<any>;
 
     /**
-     * @description Should return true or false depending on whether or not this form item should be asked.
+     * @description Should return true or false depending on whether this form item should be asked.
      * @param formValue the form value hash.
+     * @param forms All available forms stored in form generator service.
+     * @param control Dynamic form control.
      * @returns Boolean
      */
-    when?: (formValue: DynamicFormValue) => boolean | Promise<boolean> | Observable<boolean>;
+    when?: (
+        formValue: DynamicFormValue,
+        forms: Map<string, DynamicFormGroup>,
+        control: DynamicFormGroupControl
+    ) => boolean | Promise<boolean> | Observable<boolean>;
 
     /**
      * @description Callback function that is triggered after field value has been changed.
      * @param fieldValue Field value.
-     * @param formGeneratorService Form generator service instance.
+     * @param forms All available forms stored in form generator service.
+     * @param control Dynamic form control.
      */
     onchange?: (
         fieldValue: any,

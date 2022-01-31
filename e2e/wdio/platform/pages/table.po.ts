@@ -50,7 +50,7 @@ export class TablePo extends BaseComponentPo {
     filterByColorItem = '.fd-list__item';
     tableCellStatusColor = '[headers*="statusColor"]';
     tableCellStatus = ' [headers*="8__status"]:not([headers="fdp-table-8__statusColor"])';
-    dialogCompactInput = 'fd-dialog-body .fd-input--compact';
+    dialogCompactInput = 'fd-dialog-body .fd-input';
     dialogItem = '.fd-list__item.ng-star-inserted';
     dialogItemText = '.fd-select-item--active  .fd-list__title';
     dialogMoveToBottom = '[title="Move to Bottom"]';

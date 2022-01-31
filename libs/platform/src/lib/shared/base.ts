@@ -47,7 +47,7 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
         return this._contentDensity;
     }
     /** @hidden - Avoiding private property name collision */
-    _contentDensity: ContentDensity;
+    _contentDensity: ContentDensity = 'cozy';
     protected _contentDensityService: ContentDensityService;
 
     /** @hidden */
