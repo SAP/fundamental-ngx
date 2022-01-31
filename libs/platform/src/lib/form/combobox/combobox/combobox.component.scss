@@ -1,12 +1,11 @@
+/** TODO: https://github.com/SAP/fundamental-styles/issues/3134 */
 .fdp-combobox {
     &__count-list-results {
         position: absolute;
         opacity: 0;
         z-index: -1;
     }
-}
 
-.fdp-combobox {
     &__message {
         &.fd-form-message {
             display: flex;
