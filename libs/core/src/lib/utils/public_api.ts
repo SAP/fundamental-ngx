@@ -48,6 +48,8 @@ export * from './dynamic-component/dynamic-component-injector';
 export * from './dynamic-component/dynamic-component.service';
 export * from './dynamic-component/dynamic-component-container';
 
+export * from './helpers/range-selector';
+
 export * from './utils.module';
 
 export * from './datatypes/hash.datatype';

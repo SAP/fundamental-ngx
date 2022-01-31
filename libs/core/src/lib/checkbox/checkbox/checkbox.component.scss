@@ -3,3 +3,7 @@
 .fd-checkbox__text:empty {
     margin: 0;
 }
+
+.fd-checkbox__label {
+    user-select: none;
+}

@@ -5,6 +5,7 @@ import { Component, ViewChild } from '@angular/core';
 import { CheckboxComponent } from './checkbox.component';
 import { whenStable } from '@fundamental-ngx/core/tests';
 import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '@fundamental-ngx/core/utils';
+import { CheckboxModule } from '../checkbox.module';
 
 function getCheckboxInput(fixture: ComponentFixture<any>): any {
     return fixture.nativeElement.querySelector('input');
@@ -21,28 +22,28 @@ function checkboxDetectChanges(checkbox: CheckboxComponent): void {
 @Component({
     template: ` <fd-checkbox [(ngModel)]="value"></fd-checkbox> `
 })
-class TestCheckboxComponent {
+class TestCheckboxWrapperComponent {
     @ViewChild(CheckboxComponent) checkboxRef: CheckboxComponent;
     value: any = false;
 }
 
 describe('CheckboxComponent', () => {
     let checkbox: CheckboxComponent;
-    let hostComponent: TestCheckboxComponent;
-    let fixture: ComponentFixture<TestCheckboxComponent>;
+    let hostComponent: TestCheckboxWrapperComponent;
+    let fixture: ComponentFixture<TestCheckboxWrapperComponent>;
 
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [FormsModule],
-                declarations: [CheckboxComponent, TestCheckboxComponent],
+                imports: [FormsModule, CheckboxModule],
+                declarations: [TestCheckboxWrapperComponent],
                 providers: [ContentDensityService]
             }).compileComponents();
         })
     );
 
     beforeEach(async () => {
-        fixture = TestBed.createComponent(TestCheckboxComponent);
+        fixture = TestBed.createComponent(TestCheckboxWrapperComponent);
         await whenStable(fixture);
 
         hostComponent = fixture.componentInstance;
@@ -173,6 +174,7 @@ describe('CheckboxComponent', () => {
 
     it('should use third state', fakeAsync(() => {
         checkbox.tristate = true;
+        checkbox.tristateSelectable = true;
         fixture.detectChanges();
 
         expect(hostComponent.value).toBe(false);
@@ -190,7 +192,7 @@ describe('CheckboxComponent', () => {
     it('should not use third state', async () => {
         hostComponent.value = null;
         checkbox.tristate = true;
-        checkbox.tristateSelectable = false;
+        checkbox.tristateSelectable = false; // "false" value is default
         fixture.detectChanges();
 
         await fixture.whenStable();
@@ -205,6 +207,7 @@ describe('CheckboxComponent', () => {
 
     it('should use custom values for third state', async () => {
         checkbox.tristate = true;
+        checkbox.tristateSelectable = true;
         checkbox.values = { trueValue: 'Yes', falseValue: 'No', thirdStateValue: 'Maby' };
         hostComponent.value = 'Yes';
         fixture.detectChanges();
@@ -217,5 +220,50 @@ describe('CheckboxComponent', () => {
         expect(hostComponent.value).toBe('Maby');
         checkbox.nextValue();
         expect(hostComponent.value).toBe('Yes');
+    });
+});
+
+@Component({
+    template: ` <fd-checkbox [value]="value" (click)="onClicked()"></fd-checkbox> `
+})
+class TestCheckboxWrapper2Component {
+    @ViewChild(CheckboxComponent) checkboxRef: CheckboxComponent;
+    checked = false;
+
+    onClicked(): void {
+        this.checked = !this.checked;
+    }
+}
+
+describe('CheckboxComponent with external listeners', () => {
+    let hostComponent: TestCheckboxWrapper2Component;
+    let fixture: ComponentFixture<TestCheckboxWrapper2Component>;
+    let labelElement: HTMLLabelElement;
+
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [FormsModule, CheckboxModule],
+                declarations: [TestCheckboxWrapper2Component],
+                providers: [ContentDensityService]
+            }).compileComponents();
+        })
+    );
+
+    beforeEach(async () => {
+        fixture = TestBed.createComponent(TestCheckboxWrapper2Component);
+        await whenStable(fixture);
+
+        hostComponent = fixture.componentInstance;
+        labelElement = <HTMLLabelElement>fixture.nativeElement.querySelector('label');
+    });
+
+    it('should propagate the click event to the host component and reflect value properly', () => {
+        const spy = spyOn(hostComponent, 'onClicked');
+
+        labelElement.click();
+        fixture.detectChanges();
+
+        expect(spy).toHaveBeenCalledTimes(1);
     });
 });
