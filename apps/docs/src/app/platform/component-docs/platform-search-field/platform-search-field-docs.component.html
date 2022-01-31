@@ -37,11 +37,12 @@
 <fd-docs-section-title id="categories" componentName="search-field"
     >Search Field with Categories
 </fd-docs-section-title>
-<description
-    >Categories can be added to the search field by assigning an array of strings to the
-    <code>categories</code> property. The selected category is included in the event data emitted in both the
-    <code>inputChange</code> and <code>searchSubmit</code> events.</description
->
+<description>
+    Categories can be added to the search field by assigning an array of objects to the
+    <code>categories</code> property. Category object consists of <code>value</code> & <code>label</code> strings.
+    Category can be predefined by setting <code>currentCategory</code> input property. The selected category is included
+    in the event data emitted in both the <code>inputChange</code> and <code>searchSubmit</code> events.
+</description>
 
 <component-example>
     <fdp-platform-search-field-categories-example></fdp-platform-search-field-categories-example>

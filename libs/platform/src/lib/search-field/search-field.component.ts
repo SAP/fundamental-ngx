@@ -9,6 +9,7 @@ import {
     Injector,
     Inject,
     Input,
+    OnChanges,
     OnDestroy,
     OnInit,
     Optional,
@@ -16,6 +17,7 @@ import {
     Pipe,
     PipeTransform,
     QueryList,
+    SimpleChanges,
     TemplateRef,
     ViewChild,
     ViewChildren,
@@ -83,7 +85,10 @@ let searchFieldIdCount = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class SearchFieldComponent extends BaseComponent implements OnInit, OnDestroy, SearchFieldMobileInterface {
+export class SearchFieldComponent
+    extends BaseComponent
+    implements OnInit, OnChanges, OnDestroy, SearchFieldMobileInterface
+{
     /** Place holder text for search input field. */
     @Input()
     placeholder: string;
@@ -147,6 +152,10 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         this._categories = value;
         this._showCategoryDropdown = Array.isArray(value) && value.length > 0;
     }
+
+    /** Current category, value should be present in categories array */
+    @Input()
+    currentCategory: ValueLabelItem;
 
     /** Set label for category dropdown button. */
     @Input()
@@ -298,7 +307,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     get searchFieldValue(): SearchInput {
         return {
             text: this.inputText,
-            category: this._currentCategory?.value ? this._currentCategory.value : null
+            category: this._currentCategory?.value || null
         };
     }
 
@@ -333,6 +342,13 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
 
         if (this.mobile) {
             this._setUpMobileMode();
+        }
+    }
+
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        if ('categories' in changes || 'currentCategory' in changes) {
+            this.setCurrentCategory(this.currentCategory);
         }
     }
 
@@ -397,12 +413,11 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         if (this.dataSource) {
             const match = new Map();
             match.set('keyword', inputStr);
-            match.set(
-                'category',
-                this._currentCategory && this._currentCategory.value ? this._currentCategory.value : null
-            );
+            match.set('category', this._currentCategory?.value || null);
+
             this.dataSource.match(match);
         }
+
         this._updateSearchAnnoucementText();
     }
 
@@ -448,8 +463,13 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
      * Sets current category.
      * @hidden
      */
-    setCurrentCategory(category: ValueLabelItem): void {
-        this._currentCategory = category;
+    setCurrentCategory(currentCategory: ValueLabelItem): void {
+        this._currentCategory =
+            currentCategory &&
+            this.categories?.find(
+                (category) => category.label === currentCategory.label && category.value === currentCategory.value
+            );
+
         this.inputChange.emit(this.searchFieldValue);
     }
 
