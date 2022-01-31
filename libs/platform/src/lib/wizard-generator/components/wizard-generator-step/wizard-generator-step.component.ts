@@ -5,6 +5,7 @@ import {
     Input,
     OnChanges,
     OnDestroy,
+    OnInit,
     Output,
     QueryList,
     SimpleChanges,
@@ -20,6 +21,7 @@ import {
     FormGeneratorService,
     SubmitFormEventResult
 } from '@fundamental-ngx/platform/form';
+import { isFunction } from '@fundamental-ngx/platform/shared';
 import { Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { WizardGeneratorItem } from '../../interfaces/wizard-generator-item.interface';
@@ -46,7 +48,7 @@ export interface WizardStepForms {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WizardGeneratorStepComponent implements OnDestroy, OnChanges {
+export class WizardGeneratorStepComponent implements OnInit, OnDestroy, OnChanges {
     /**
      * @description Step Form Generator components.
      */
@@ -102,6 +104,20 @@ export class WizardGeneratorStepComponent implements OnDestroy, OnChanges {
 
     /**
      * @hidden
+     * @private
+     */
+    private _visibleFormGroupIds: Record<string, boolean>;
+
+    /**
+     * @hidden
+     * @private
+     */
+    private _hiddenFormGroupValues: {
+        [key: string]: any;
+    } = {};
+
+    /**
+     * @hidden
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
@@ -111,6 +127,13 @@ export class WizardGeneratorStepComponent implements OnDestroy, OnChanges {
         private _wizardGeneratorService: WizardGeneratorService,
         private _formGeneratorService: FormGeneratorService
     ) {}
+
+    /**
+     * @hidden
+     */
+    ngOnInit(): void {
+        this.refreshFormsVisibility();
+    }
 
     /**
      * @hidden
@@ -144,6 +167,10 @@ export class WizardGeneratorStepComponent implements OnDestroy, OnChanges {
         if (Object.keys(this._forms).length === this.item.formGroups.length) {
             await this.addComponentToParent();
             this.formsCreated.emit(this._forms);
+        }
+
+        if (this._hiddenFormGroupValues[key]) {
+            form?.patchValue(this._hiddenFormGroupValues[key]);
         }
 
         this._trackDependencyFieldsChanges(form, key);
@@ -219,16 +246,24 @@ export class WizardGeneratorStepComponent implements OnDestroy, OnChanges {
         this._trackedFields = this._wizardGeneratorService.getStepDependencyFields(this.item.id);
 
         if (this._trackedFields && this._trackedFields[key]) {
-            Object.entries(this._trackedFields[key]).forEach(([fieldId, dependants]) => {
+            Object.entries(this._trackedFields[key]).forEach(([fieldId, strategies]) => {
                 const control = this._formGeneratorService.getFormControl(form, fieldId);
 
+                const refreshSteps = strategies[WizardGeneratorRefreshStrategy.REFRESH_STEP_VISIBILITY] !== undefined;
+                const revalidateForms = strategies[WizardGeneratorRefreshStrategy.REVALIDATE_STEP_FORMS];
+                const refreshFormVisibility = strategies[WizardGeneratorRefreshStrategy.REFRESH_FORM_VISIBILITY];
+
                 control?.valueChanges.pipe(debounceTime(50), takeUntil(this._onDestroy$)).subscribe(async () => {
-                    if (dependants.strategy.includes(WizardGeneratorRefreshStrategy.REFRESH_STEP_VISIBILITY)) {
+                    if (refreshSteps) {
                         await this._wizardGeneratorService.refreshStepVisibility();
                     }
 
-                    if (dependants.dependentSteps?.length > 0) {
-                        this._wizardGeneratorService.notifyStepsToRevalidateForms(dependants.dependentSteps);
+                    if (revalidateForms?.length > 0) {
+                        this._wizardGeneratorService.notifyStepsToRevalidateForms(revalidateForms);
+                    }
+
+                    if (refreshFormVisibility?.length > 0) {
+                        await this._wizardGeneratorService.refreshFormsVisibility(refreshFormVisibility);
                     }
                 });
             });
@@ -241,6 +276,30 @@ export class WizardGeneratorStepComponent implements OnDestroy, OnChanges {
     async updateFormsState(): Promise<void> {
         for (const formGenerator of this.formGenerators?.toArray()) {
             await formGenerator.refreshStepsVisibility();
+        }
+    }
+
+    /**
+     * Refreshes step form group visibility.
+     */
+    async refreshFormsVisibility(): Promise<void> {
+        this._visibleFormGroupIds = {};
+
+        for (const formGroup of this.item.formGroups.filter((fg) => isFunction(fg.when))) {
+            const result = await this._wizardGeneratorService.refreshFormVisibility(formGroup);
+
+            if (result === this._visibleFormGroupIds[formGroup.id]) {
+                return;
+            }
+
+            const form = this._forms[formGroup.id]?.form;
+
+            // Store form value so it could be restored later.
+            if (!result) {
+                this._hiddenFormGroupValues[formGroup.id] = form?.value;
+            }
+
+            this._visibleFormGroupIds[formGroup.id] = result;
         }
     }
 }
