@@ -516,8 +516,8 @@ export class MultiInputComponent
         this._handleSelect(false, value, resetSearch);
     }
 
-     /** @hidden */
-     _handleSelect(checked: any, value: any, resetSearch = true): void {
+    /** @hidden */
+    _handleSelect(checked: any, value: any, resetSearch = true): void {
         const previousLength = this._selectionModel.selected.length;
         if (checked) {
             this._selectionModel.select(value);

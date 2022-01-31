@@ -98,7 +98,7 @@ export class TableCheckboxesExampleComponent {
         this._setValue(size);
     }
 
-    selectMaster(checked: boolean, size: string): void {
+    selectAll(checked: boolean, size: string): void {
         if (size === 'cozy') {
             this.checkboxValue = checked;
         } else if (size === 'compact') {
@@ -121,7 +121,7 @@ export class TableCheckboxesExampleComponent {
         this._getTable(size).forEach((row) => (row.checked = false));
     }
 
-    private _getMasterSelectValue(size: string): boolean | null {
+    private _getSelectAllValue(size: string): boolean | null {
         const table = this._getTable(size);
         const checked = table.filter((row) => row.checked);
         if (checked.length === table.length) {
@@ -145,11 +145,11 @@ export class TableCheckboxesExampleComponent {
 
     private _setValue(size: string): void {
         if (size === 'cozy') {
-            this.checkboxValue = this._getMasterSelectValue(size);
+            this.checkboxValue = this._getSelectAllValue(size);
         } else if (size === 'compact') {
-            this.checkboxValueCompact = this._getMasterSelectValue(size);
+            this.checkboxValueCompact = this._getSelectAllValue(size);
         } else if (size === 'condensed') {
-            this.checkboxValueCondensed = this._getMasterSelectValue(size);
+            this.checkboxValueCondensed = this._getSelectAllValue(size);
         }
     }
 }

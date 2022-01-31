@@ -56,6 +56,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
     @Input()
     ariaLabel = '';
 
+    /** Current selection state of the checkbox component */
     @Input()
     set value(value: any) {
         this.writeValue(value);
@@ -188,10 +189,11 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
         this._subscriptions.unsubscribe();
     }
 
-    /** @hidden ControlValueAccessor interface
+    /**
+     * @hidden ControlValueAccessor interface
      * - sets new control value
      * - updates control state
-     * */
+     */
     writeValue(value: any): void {
         this.checkboxValue = value;
         this._setState();

@@ -6,7 +6,7 @@
                 <fd-checkbox
                     [tristate]="true"
                     [ngModel]="checkboxValue"
-                    (ngModelChange)="selectMaster($event, 'cozy')"
+                    (ngModelChange)="selectAll($event, 'cozy')"
                 ></fd-checkbox>
             </th>
             <th fd-table-cell>Column 1</th>
@@ -41,7 +41,7 @@
                     [tristate]="true"
                     [compact]="true"
                     [ngModel]="checkboxValueCompact"
-                    (ngModelChange)="selectMaster($event, 'compact')"
+                    (ngModelChange)="selectAll($event, 'compact')"
                 ></fd-checkbox>
             </th>
             <th fd-table-cell>Column 1</th>
@@ -86,7 +86,7 @@
                     [tristate]="true"
                     [compact]="true"
                     [ngModel]="checkboxValueCondensed"
-                    (ngModelChange)="selectMaster($event, 'condensed')"
+                    (ngModelChange)="selectAll($event, 'condensed')"
                 ></fd-checkbox>
             </th>
             <th fd-table-cell>Column 1</th>
