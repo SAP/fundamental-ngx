@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.316 (2022-02-01)
+
+
+### Bug Fixes
+
+* **platform:** combobox states ([#7636](https://github.com/SAP/fundamental-ngx/issues/7636)) ([e4f45ba](https://github.com/SAP/fundamental-ngx/commit/e4f45ba30ed10ee54ffa9dc4c09d634270b8e054))
+
 ## 0.33.0-rc.315 (2022-01-31)
 
 
