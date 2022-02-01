@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.318 (2022-02-01)
+
+
+### Bug Fixes
+
+* **core:** pagination tab order ([#7656](https://github.com/SAP/fundamental-ngx/issues/7656)) ([0b92052](https://github.com/SAP/fundamental-ngx/commit/0b9205255cabdd978097a4db63cbdc66a4208a3d))
+
 ## 0.33.0-rc.317 (2022-02-01)
 
 
