@@ -92,7 +92,7 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
     constructor(public elementRef: ElementRef, private _dragDrop: DragDrop) {}
 
     /** @hidden */
-    getElementCoordinates(isBefore: boolean, gridMode: boolean): ElementChord {
+    getElementCoordinates(isBefore: boolean): ElementChord {
         /** Takes distance from the beginning of window page */
         const rect: DOMRect = this.elementRef.nativeElement.getBoundingClientRect();
 

@@ -147,7 +147,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
         const draggedItemElement = this._dndItemReference[index].elementRef;
         /** Counting all of the elements's chords */
         this._elementsCoordinates = this._dndItemReference.map((item: DndItemDirective) =>
-            item.getElementCoordinates(this._isBefore(draggedItemElement, item.elementRef), this.gridMode)
+            item.getElementCoordinates(this._isBefore(draggedItemElement, item.elementRef))
         );
     }
 

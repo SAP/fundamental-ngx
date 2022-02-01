@@ -14,7 +14,6 @@ import {
     F2,
     HOME,
     LEFT_ARROW,
-    MAC_ENTER,
     META,
     NUMPAD_MINUS,
     PAGE_DOWN,
