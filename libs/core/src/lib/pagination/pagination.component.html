@@ -28,7 +28,6 @@
             [ariaLabel]="firstLabel"
             [title]="firstLabel"
             class="fd-pagination__button fd-pagination__button--mobile"
-            tabindex="-1"
             [attr.aria-disabled]="isFirstPage"
             (click)="goToFirstPage()"
             (keyup.enter)="goToFirstPage()"
@@ -46,7 +45,6 @@
             [ariaLabel]="previousLabel"
             [title]="previousLabel"
             class="fd-pagination__button"
-            tabindex="-1"
             [attr.aria-disabled]="isFirstPage"
             (click)="previousPage()"
             (keyup.enter)="previousPage()"
@@ -65,7 +63,6 @@
                 [ariaLabel]="pageLabel(page)"
                 [title]="nextLabel"
                 class="fd-pagination__link"
-                tabindex="-1"
                 (click)="goToPage(page)"
                 (keyup.enter)="goToPage(page, $event)"
                 (keydown.space)="$event.preventDefault()"
@@ -78,7 +75,6 @@
         <button
             #currentPageElement
             fd-focus-key-manager-item
-            initialFocus
             fd-button
             fdType="transparent"
             [compact]="compact"
@@ -94,7 +90,6 @@
         <input
             #pageInputElement
             fd-focus-key-manager-item
-            initialFocus
             fd-form-control
             fd-only-digits
             required
@@ -128,7 +123,6 @@
                 [ariaLabel]="pageLabel(page)"
                 [title]="nextLabel"
                 class="fd-pagination__link"
-                tabindex="-1"
                 (click)="goToPage(page)"
                 (keyup.enter)="goToPage(page, $event)"
                 (keydown.space)="$event.preventDefault()"
@@ -148,7 +142,6 @@
             [ariaLabel]="nextLabel"
             [title]="nextLabel"
             class="fd-pagination__button"
-            tabindex="-1"
             [attr.aria-disabled]="isLastPage"
             (click)="nextPage()"
             (keyup.enter)="nextPage()"
@@ -166,7 +159,6 @@
             [ariaLabel]="lastLabel"
             [title]="lastLabel"
             class="fd-pagination__button fd-pagination__button--mobile"
-            tabindex="-1"
             [attr.aria-disabled]="isLastPage"
             (click)="goToLastPage()"
             (keyup.enter)="goToLastPage()"
