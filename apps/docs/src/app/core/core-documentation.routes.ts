@@ -214,6 +214,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'initial-focus',
+                loadChildren: () =>
+                    import('./component-docs/initial-focus/initial-focus-docs.module').then(
+                        (m) => m.InitialFocusDocsModule
+                    )
+            },
+            {
                 path: 'inline-help',
                 loadChildren: () =>
                     import('./component-docs/inline-help/inline-help-docs.module').then((m) => m.InlineHelpDocsModule)
