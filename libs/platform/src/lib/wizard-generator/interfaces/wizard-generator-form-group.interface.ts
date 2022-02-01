@@ -1,5 +1,6 @@
-import { DynamicFormFieldGroup, DynamicFormFieldItem } from '@fundamental-ngx/platform/form';
-import { WizardGeneratorDependencyFields } from './wizard-generator-item.interface';
+import { DynamicFormFieldGroup, DynamicFormFieldItem, DynamicFormGroup } from '@fundamental-ngx/platform/form';
+import { Observable } from 'rxjs';
+import { WizardGeneratorDependencyFields, WizardGeneratorFormsValue } from './wizard-generator-item.interface';
 
 export interface WizardGeneratorFormGroup {
     /**
@@ -18,11 +19,23 @@ export interface WizardGeneratorFormGroup {
      * to be rendered in the form.
      */
     formItems: WizardGeneratorFormItem[];
-
     /**
      * @description Unique form ID.
      */
     id: string;
+    /**
+     * @description Should return true or false depending on whether this form group should be visible.
+     * @returns Boolean
+     */
+    when?: (
+        completedSteps: string[],
+        answers: WizardGeneratorFormsValue,
+        forms: Map<string, DynamicFormGroup>
+    ) => boolean | Promise<boolean> | Observable<boolean>;
+    /**
+     * @description Object of dependency fields that are used with `when` function
+     */
+    dependencyFields?: WizardGeneratorDependencyFields;
 }
 
 export type WizardGeneratorFormItem = WizardGeneratorFormGroupItem | WizardGeneratorFormFieldItem;

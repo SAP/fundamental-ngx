@@ -16,7 +16,7 @@ export class UploadCollectionPo extends BaseComponentPo {
     tableResult = ' .fdp-upload-collection__pagination--total';
     linkNext = ' [glyph="navigation-right-arrow"]';
     linkPrevious = ' [glyph="navigation-left-arrow"]';
-    inputFields = ' .fd-input--compact';
+    inputFields = ' .fdp-upload-collection__toolbar .fd-input';
     columnHeaders = ' [role="columnheader"]';
     tableContent = ' fd-icon~span';
     transparentButton = ' .fd-button--transparent';

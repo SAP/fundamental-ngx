@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { concat, mergeWith, uniq } from 'lodash-es';
+import { cloneDeep, concat, mergeWith, uniq } from 'lodash-es';
 
 import { isFunction, selectStrategy } from '@fundamental-ngx/platform/shared';
 import { FormGeneratorService } from '@fundamental-ngx/platform/form';
@@ -9,7 +9,7 @@ import {
     WizardGeneratorStepComponent,
     WizardStepSubmittedForms
 } from './components/wizard-generator-step/wizard-generator-step.component';
-import { WizardGeneratorFormItem } from './interfaces/wizard-generator-form-group.interface';
+import { WizardGeneratorFormGroup, WizardGeneratorFormItem } from './interfaces/wizard-generator-form-group.interface';
 import {
     WizardGeneratorDependencyFields,
     WizardGeneratorFormsValue,
@@ -21,7 +21,8 @@ export type StepsComponents = Map<string, WizardGeneratorStepComponent>;
 
 export enum WizardGeneratorRefreshStrategy {
     REFRESH_STEP_VISIBILITY = 'refreshStepVisibility',
-    REVALIDATE_STEP_FORMS = 'revalidateStepForms'
+    REVALIDATE_STEP_FORMS = 'revalidateStepForms',
+    REFRESH_FORM_VISIBILITY = 'refreshFormVisibility'
 }
 
 export interface DependencySteps {
@@ -29,8 +30,7 @@ export interface DependencySteps {
     [key: string]: {
         /** Form ID with array of form control id's */
         [key: string]: {
-            strategy: WizardGeneratorRefreshStrategy[];
-            dependentSteps: string[];
+            [key in WizardGeneratorRefreshStrategy]?: string[];
         };
     };
 }
@@ -221,20 +221,30 @@ export class WizardGeneratorService {
 
         const visibleStepIds: WizardVisibleSteps = {};
 
-        const completedStepIds = this.items.filter((i) => i.status === 'completed').map((i) => i.id);
-
         for (const item of this.items) {
             if (!isFunction(item.when)) {
                 visibleStepIds[item.id] = true;
                 continue;
             }
 
-            const obj = item.when(completedStepIds, formValue);
+            const obj = item.when(this._getCompletedStepIds(), formValue, this._formGeneratorService.forms);
 
             visibleStepIds[item.id] = await this._getFunctionValue(obj);
         }
 
         this.setVisibleSteps(this.items.filter((item) => visibleStepIds[item.id] === true));
+    }
+
+    /**
+     * Checks whether current form group should be visible.
+     * @param formGroup Form Group.
+     */
+    async refreshFormVisibility(formGroup: WizardGeneratorFormGroup): Promise<boolean> {
+        const formValue = await this.getWizardFormValue();
+
+        const obj = formGroup.when(this._getCompletedStepIds(), formValue, this._formGeneratorService.forms);
+
+        return await this._getFunctionValue(obj);
     }
 
     /**
@@ -289,6 +299,16 @@ export class WizardGeneratorService {
     }
 
     /**
+     * Notifies step components to refresh form groups visibility.
+     * @param stepIds Step ID's which needs to be checked.
+     */
+    async refreshFormsVisibility(stepIds: string[]): Promise<void> {
+        for (const stepId of stepIds) {
+            await this.stepsComponents.get(stepId)?.refreshFormsVisibility();
+        }
+    }
+
+    /**
      * @param formatted Flag defining whether form value should be formatted by form control
      * transformers, or return raw value
      * @returns {WizardGeneratorFormsValue} Wizard form value
@@ -314,7 +334,7 @@ export class WizardGeneratorService {
             for (const form of item.formGroups) {
                 wizardFormValue[item.id][form.id] = formatted
                     ? await this._formGeneratorService.getFormValue(forms[form.id]?.form)
-                    : this._formGeneratorService._getFormValueWithoutUngrouped(forms[form.id]?.form.value);
+                    : this._formGeneratorService._getFormValueWithoutUngrouped(cloneDeep(forms[form.id]?.form.value));
             }
         }
 
@@ -497,20 +517,19 @@ export class WizardGeneratorService {
     }
 
     /** @hidden */
-    private _normalizeDependencyStep(dependency: { [p: string]: string[] }, dependentStep?: string): DependencySteps {
-        const newDependency = {};
-
-        const strategy = dependentStep
-            ? WizardGeneratorRefreshStrategy.REVALIDATE_STEP_FORMS
-            : WizardGeneratorRefreshStrategy.REFRESH_STEP_VISIBILITY;
+    private _normalizeDependencyStep(
+        dependency: { [p: string]: string[] },
+        strategy: WizardGeneratorRefreshStrategy,
+        dependentStep?: string
+    ): DependencySteps {
+        const newDependency: DependencySteps = {};
 
         Object.entries(dependency).forEach(([key, value]) => {
             newDependency[key] = {};
 
             value.forEach((v) => {
                 newDependency[key][v] = {
-                    strategy: [strategy],
-                    dependentSteps: dependentStep ? [dependentStep] : []
+                    [strategy]: dependentStep ? [dependentStep] : []
                 };
             });
         });
@@ -527,11 +546,15 @@ export class WizardGeneratorService {
             }
         };
 
-        const buildDependencySteps = (dependencyFields: WizardGeneratorDependencyFields, stepId?: string): void => {
+        const buildDependencySteps = (
+            dependencyFields: WizardGeneratorDependencyFields,
+            strategy: WizardGeneratorRefreshStrategy,
+            stepId?: string
+        ): void => {
             for (const [id, forms] of Object.entries(dependencyFields)) {
                 this.dependencySteps[id] = mergeWith(
                     this.dependencySteps[id] || {},
-                    this._normalizeDependencyStep(forms, stepId),
+                    this._normalizeDependencyStep(forms, strategy, stepId),
                     mergeArrays
                 );
             }
@@ -541,16 +564,35 @@ export class WizardGeneratorService {
             .filter((s) => s.formGroups?.length > 0)
             .forEach((step) => {
                 if (step.dependencyFields) {
-                    buildDependencySteps(step.dependencyFields);
+                    buildDependencySteps(step.dependencyFields, WizardGeneratorRefreshStrategy.REFRESH_STEP_VISIBILITY);
                 }
+
+                const dependentForms = step.formGroups.filter((form) => form.dependencyFields);
+
+                dependentForms.forEach((form) => {
+                    buildDependencySteps(
+                        form.dependencyFields,
+                        WizardGeneratorRefreshStrategy.REFRESH_FORM_VISIBILITY,
+                        step.id
+                    );
+                });
 
                 const stepFields: WizardGeneratorFormItem[] = concat(
                     ...[...step.formGroups].map((item) => item.formItems.filter((f) => f.dependencyFields))
                 );
 
                 stepFields.forEach((formItem) => {
-                    buildDependencySteps(formItem.dependencyFields, step.id);
+                    buildDependencySteps(
+                        formItem.dependencyFields,
+                        WizardGeneratorRefreshStrategy.REVALIDATE_STEP_FORMS,
+                        step.id
+                    );
                 });
             });
+    }
+
+    /** @hidden */
+    private _getCompletedStepIds(): string[] {
+        return this.items.filter((i) => i.status === 'completed').map((i) => i.id);
     }
 }

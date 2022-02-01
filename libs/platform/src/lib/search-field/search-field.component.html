@@ -23,7 +23,7 @@
                     [fdpMenuTriggerFor]="categoryMenu"
                 >
                     <span class="fdp-search-field__category-label" *ngIf="!hideCategoryLabel">
-                        {{ _currentCategory ? _currentCategory.label : categoryLabel }}
+                        {{ _currentCategory?.label || categoryLabel }}
                     </span>
                 </button>
             </span>

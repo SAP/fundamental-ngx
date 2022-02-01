@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -14,7 +14,7 @@ import {
     selector: 'fdp-wizard-generator-visibility-between-steps-example',
     templateUrl: './wizard-generator-visibility-between-steps-example.component.html'
 })
-export class WizardGeneratorVisibilityBetweenStepsExampleComponent {
+export class WizardGeneratorVisibilityBetweenStepsExampleComponent implements OnDestroy {
     wizardTitle: WizardTitle = {
         size: 2,
         text: 'Checkout'
@@ -45,6 +45,35 @@ export class WizardGeneratorVisibilityBetweenStepsExampleComponent {
                             choices: ['Intel', 'AMD', 'Apple'],
                             validators: [Validators.required],
                             when: (formValue: DynamicFormValue): boolean => formValue.product === 'Desktop'
+                        }
+                    ]
+                },
+                {
+                    title: '1.1. Protective case',
+                    id: 'protectiveCase',
+                    dependencyFields: {
+                        productTypeStep: {
+                            productType: ['product']
+                        }
+                    },
+                    when: (completedSteps: string[], answers: WizardGeneratorFormsValue) => {
+                        const value = answers.productTypeStep?.productType?.product;
+                        return value !== undefined && value !== 'Desktop';
+                    },
+                    formItems: [
+                        {
+                            name: 'protectiveCaseNeeded',
+                            message: 'Would you like to include a protective case?',
+                            type: 'switch',
+                            default: false
+                        },
+                        {
+                            name: 'protectiveCaseMaterial',
+                            message: 'Select protective case material',
+                            type: 'select',
+                            choices: ['Leather', 'Silicone'],
+                            validators: [Validators.required],
+                            when: (formValue: DynamicFormValue): boolean => formValue.protectiveCaseNeeded
                         }
                     ]
                 }

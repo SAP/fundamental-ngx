@@ -1,4 +1,34 @@
 
+## 0.33.0-rc.317 (2022-02-01)
+
+
+### Features
+
+* **platform:** when property of form groups ([#7654](https://github.com/SAP/fundamental-ngx/issues/7654)) ([1687627](https://github.com/SAP/fundamental-ngx/commit/1687627076bb1730756fd2eee3c070d075c024cc))
+
+## 0.33.0-rc.316 (2022-02-01)
+
+
+### Bug Fixes
+
+* **platform:** combobox states ([#7636](https://github.com/SAP/fundamental-ngx/issues/7636)) ([e4f45ba](https://github.com/SAP/fundamental-ngx/commit/e4f45ba30ed10ee54ffa9dc4c09d634270b8e054))
+
+## 0.33.0-rc.315 (2022-01-31)
+
+
+### Features
+
+* **core:** pagination keyboard navigation ([#7630](https://github.com/SAP/fundamental-ngx/issues/7630)) ([a060d06](https://github.com/SAP/fundamental-ngx/commit/a060d064790d823eec2a43386ae23ae422d323bc))
+
+## 0.33.0-rc.314 (2022-01-31)
+
+
+### Features
+
+* **platform:** search field predefined category ([#7539](https://github.com/SAP/fundamental-ngx/issues/7539)) ([90feda0](https://github.com/SAP/fundamental-ngx/commit/90feda07330b20b25e027dc5c493c11ef3a0912c))
+
+## 0.33.0-rc.313 (2022-01-31)
+
 ## 0.33.0-rc.312 (2022-01-30)
 
 ## 0.33.0-rc.311 (2022-01-30)
