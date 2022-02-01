@@ -1,5 +1,6 @@
 import { Injectable, OnDestroy, Type } from '@angular/core';
 import { AsyncValidatorFn, FormBuilder, Validators } from '@angular/forms';
+import { cloneDeep } from 'lodash-es';
 
 import { Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
@@ -196,7 +197,7 @@ export class FormGeneratorService implements OnDestroy {
         form: DynamicFormGroup | DynamicFormControlGroup,
         renderValue = false
     ): Promise<DynamicFormValue> {
-        const formValue = Object.assign({}, form.value);
+        const formValue = cloneDeep(form.value);
 
         for (const [i, control] of Object.entries(form.controls)) {
             const formItem = control.formItem;
@@ -272,7 +273,7 @@ export class FormGeneratorService implements OnDestroy {
      * @returns `Set` where key is item name, and boolean value if field needs to be shown.
      */
     async checkVisibleFormItems(form: DynamicFormGroup): Promise<{ [key: string]: boolean }> {
-        const formValue = this._getFormValueWithoutUngrouped(form.value);
+        const formValue = this._getFormValueWithoutUngrouped(cloneDeep(form.value));
         return await this._checkFormControlsVisibility(form, formValue);
     }
 

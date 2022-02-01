@@ -1,5 +1,6 @@
 import { Observable } from 'rxjs';
 
+import { DynamicFormGroup } from '@fundamental-ngx/platform/form';
 import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
 import { WizardGeneratorFormGroup } from './wizard-generator-form-group.interface';
 
@@ -56,7 +57,8 @@ export interface WizardGeneratorItem {
      */
     when?: (
         completedSteps: string[],
-        answers: WizardGeneratorFormsValue
+        answers: WizardGeneratorFormsValue,
+        forms: Map<string, DynamicFormGroup>
     ) => boolean | Promise<boolean> | Observable<boolean>;
 
     /**
