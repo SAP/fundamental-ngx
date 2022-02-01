@@ -3,7 +3,8 @@ import { DialogService } from '@fundamental-ngx/core/dialog';
 
 @Component({
     selector: 'fd-dialog-state-example',
-    templateUrl: './dialog-state-example.component.html'
+    templateUrl: './dialog-state-example.component.html',
+    styleUrls: ['../dialog-examples.component.scss']
 })
 export class DialogStateExampleComponent {
     constructor(public dialogService: DialogService) {}

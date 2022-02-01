@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { OnlyDigitsModule } from '@fundamental-ngx/core/utils';
+import { OnlyDigitsModule, PipeModule } from '@fundamental-ngx/core/utils';
 import { StepInputDecrementDirective } from './step-input-decrement.directive';
 import { StepInputIncrementDirective } from './step-input-increment.directive';
 import { StepInputControlDirective } from './step-input-control.directive';
@@ -14,6 +14,7 @@ import { FormInputMessageGroupModule, FormMessageModule } from '@fundamental-ngx
     imports: [
         CommonModule,
         FormsModule,
+        PipeModule,
         ButtonModule,
         OnlyDigitsModule,
         FormInputMessageGroupModule,

@@ -16,7 +16,7 @@ import { CssClassBuilder } from '@fundamental-ngx/core/utils';
  *
  * ```html
  * <fd-form-group>
- *     <div fd-form-item [isCheck]="true">
+ *     <div fd-form-item>
  *         <input fd-form-control type="radio" checked>
  *         <fd-form-label>Option One</fd-form-label>
  *     </div>

@@ -28,7 +28,7 @@ import { debounceTime, takeUntil } from 'rxjs/operators';
 
 import { RtlService } from '@fundamental-ngx/core/utils';
 import { FixedCardLayoutItemComponent } from './fixed-card-layout-item/fixed-card-layout-item.component';
-import { coerceNumberProperty } from '@angular/cdk/coercion';
+import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
 
 const CARD_MINIMUM_WIDTH = 320; // in px; 20rem max card size
 const CARD_GAP_WIDTH = 16; // gap=1rem==16px
@@ -42,8 +42,21 @@ export class CardDefinitionDirective {
      * Useful in creating layout again after drag and drop.
      */
     @Input()
-    fdCardDef: number = cardRank++;
+    set fdCardDef(value: NumberInput) {
+        if (!value) {
+            return;
+        }
 
+        this._fdCardDef = coerceNumberProperty(value);
+    }
+    get fdCardDef(): number {
+        return this._fdCardDef;
+    }
+
+    /** @hidden */
+    private _fdCardDef: number = cardRank++;
+
+    /** @hidden */
     constructor(public template: TemplateRef<any>) {}
 }
 

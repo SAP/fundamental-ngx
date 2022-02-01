@@ -1,24 +1,24 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { ExperimentalButtonComponent } from './button.component';
+import { ButtonComponent } from './button.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 describe('ButtonComponent', () => {
-    let component: ExperimentalButtonComponent;
-    let fixture: ComponentFixture<ExperimentalButtonComponent>;
+    let component: ButtonComponent;
+    let fixture: ComponentFixture<ButtonComponent>;
 
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 imports: [CommonModule, FormsModule],
-                declarations: [ExperimentalButtonComponent]
+                declarations: [ButtonComponent]
             }).compileComponents();
         })
     );
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(ExperimentalButtonComponent);
+        fixture = TestBed.createComponent(ButtonComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

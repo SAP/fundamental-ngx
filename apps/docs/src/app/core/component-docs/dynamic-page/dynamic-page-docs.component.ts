@@ -10,6 +10,8 @@ import dynamicPageColumnExampleTsCode from '!./dynamic-page-examples/dynamic-pag
 import dynamicPageColumnExampleHtmlCode from '!./dynamic-page-examples/dynamic-page-column-layout-example/dynamic-page-column-layout-example.component.html?raw';
 import dynamicPageResponsiveExampleTsCode from '!./dynamic-page-examples/dynamic-page-responsive-example/dynamic-page-responsive-example.component.ts?raw';
 import dynamicPageResponsiveExampleHtmlCode from '!./dynamic-page-examples/dynamic-page-responsive-example/dynamic-page-responsive-example.component.html?raw';
+import dynamicPageFacetsExampleHtmlCode from '!./dynamic-page-examples/dynamic-page-facets-example/dynamic-page-facets-example.component.html?raw';
+import dynamicPageFacetsExampleTsCode from '!./dynamic-page-examples/dynamic-page-facets-example/dynamic-page-facets-example.component.ts?raw';
 
 @Component({
     selector: 'app-dynamic-page',
@@ -69,6 +71,20 @@ export class DynamicPageDocsComponent {
             code: dynamicPageResponsiveExampleTsCode,
             fileName: 'dynamic-page-responsive-example',
             component: 'DynamicPageResponsiveExampleComponent'
+        }
+    ];
+
+    dynamicPageFacets: ExampleFile[] = [
+        {
+            language: 'html',
+            code: dynamicPageFacetsExampleHtmlCode,
+            fileName: 'dynamic-page-responsive-example'
+        },
+        {
+            language: 'typescript',
+            code: dynamicPageFacetsExampleTsCode,
+            fileName: 'dynamic-page-facets-example',
+            component: 'DynamicPageFacetsExampleComponent'
         }
     ];
 }

@@ -13,7 +13,7 @@ import { PlatformIconTabBarIconTypeExampleComponent } from './examples/platform-
 import { PlatformIconTabBarIconOnlyTypeExampleComponent } from './examples/platform-icon-tab-bar-icon-only-type-example/platform-icon-tab-bar-icon-only-type-example.component';
 import { PlatformIconTabBarConfigurablePaddingsExampleComponent } from './examples/platform-icon-tab-bar-configurable-paddings-example/platform-icon-tab-bar-configurable-paddings-example.component';
 import { API_FILES } from '../../api-files';
-import { PlatformIconTabBarModule } from '../../../../../../../libs/platform/src/lib/icon-tab-bar/icon-tab-bar.module';
+import { PlatformIconTabBarModule } from '@fundamental-ngx/platform/icon-tab-bar';
 
 const routes: Routes = [
     {

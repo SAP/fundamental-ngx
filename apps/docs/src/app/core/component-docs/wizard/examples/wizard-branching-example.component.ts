@@ -10,7 +10,7 @@ import {
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { WizardStepComponent, WizardStepStatus } from '@fundamental-ngx/core/wizard';
 import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
-import { WizardService } from 'libs/core/src/lib/wizard/wizard.service';
+import { WizardService } from '@fundamental-ngx/core/wizard';
 
 @Component({
     selector: 'fd-wizard-branching-example',

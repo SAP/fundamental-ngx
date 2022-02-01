@@ -1,18 +1,8 @@
 <button fd-button label="Custom Backdrop" (click)="openCustomBackdrop(dialogTemplate)"></button>
 
-<button
-    fd-button
-    (click)="openInCustomContainer(dialogTemplate, customContainer)"
-    style="margin-left: 1rem"
-    label="Custom Container"
-></button>
+<button fd-button (click)="openInCustomContainer(dialogTemplate, customContainer)" label="Custom Container"></button>
 
-<button
-    fd-button
-    (click)="openStaticDialog(dialogTemplate, customContainer)"
-    style="margin-left: 1rem"
-    label="Static Dialog"
-></button>
+<button fd-button (click)="openStaticDialog(dialogTemplate, customContainer)" label="Static Dialog"></button>
 
 <div #customContainer style="margin-top: 0.5rem"></div>
 

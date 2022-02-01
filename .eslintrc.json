@@ -5,13 +5,34 @@
             "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
             "rules": {
                 "@nrwl/nx/enforce-module-boundaries": [
-                    "off",
+                    "error",
                     {
                         "allow": [],
                         "depConstraints": [
                             {
-                                "onlyDependOnLibsWithTags": ["*"],
-                                "sourceTag": "*"
+                                "sourceTag": "scope:fd",
+                                "onlyDependOnLibsWithTags": ["scope:fd"]
+                            },
+                            {
+                                "sourceTag": "scope:fdp",
+                                "onlyDependOnLibsWithTags": ["scope:fd", "scope:fdp"]
+                            },
+                            {
+                                "sourceTag": "scope:fn",
+                                "onlyDependOnLibsWithTags": ["scope:fd", "scope:fn"]
+                            },
+                            {
+                                "sourceTag": "scope:moment-adapter",
+                                "onlyDependOnLibsWithTags": ["scope:fd"]
+                            },
+                            {
+                                "sourceTag": "scope:docs",
+                                "onlyDependOnLibsWithTags": [
+                                    "scope:fd",
+                                    "scope:fdp",
+                                    "scope:fn",
+                                    "scope:moment-adapter"
+                                ]
                             }
                         ],
                         "enforceBuildableLibDependency": true

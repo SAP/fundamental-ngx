@@ -1,6 +1,7 @@
 import { CollectionFilter } from '../../../interfaces/collection-filter.interface';
 import { FilterStrategy, getFilterStrategiesBasedOnDataType } from '../../../enums/collection-filter.enum';
 import { FilterableColumnDataType } from '../../../enums/filter-type.enum';
+import { TableDialogCommonData } from '../../../models/table-dialog-common-data.model';
 
 export interface FilterableColumn {
     label: string;
@@ -8,7 +9,7 @@ export interface FilterableColumn {
     dataType: FilterableColumnDataType;
 }
 
-export interface FilterDialogData {
+export interface FilterDialogData extends TableDialogCommonData {
     collectionFilter: CollectionFilter[];
     columns: FilterableColumn[];
 }

@@ -9,6 +9,5 @@ export const indicationColorText = [
     'Indication Color7',
     'Indication Color8'
 ];
-export const invertedAttribute = 'inverted';
-export const largeStatusAttribute = 'large';
+
 export const defaultStatusText = 'Object Status';

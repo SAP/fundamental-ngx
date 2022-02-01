@@ -117,7 +117,7 @@ describe('AvatarGroupComponent', () => {
 
         expect(resetSpy).toHaveBeenCalled();
         expect(collapseSpy).toHaveBeenCalled();
-        expect(component.avatarGroup.mainItems.first.elementRef.nativeElement.offsetWidth).toBeGreaterThan(0);
+        expect(component.avatarGroup.mainItems.first._element.offsetWidth).toBeGreaterThan(0);
         expect(component.avatarGroup.allItemsCount).toEqual(NUMBER_OF_ITEMS);
         expect(component.avatarGroup.overflowItemsCount).toBeGreaterThan(0);
         expect(component.avatarGroup.overflowItemsCount).toBeLessThan(NUMBER_OF_ITEMS);

@@ -7,7 +7,8 @@ import {
     WizardDialogGeneratorService,
     WizardGeneratorFormsValue,
     WizardGeneratorItem,
-    WizardTitle
+    WizardTitle,
+    FormattedFormStep
 } from '@fundamental-ngx/platform/wizard-generator';
 
 @Component({
@@ -165,5 +166,9 @@ export class WizardGeneratorCustomizableExampleComponent implements OnDestroy {
     _editStep(event: MouseEvent, stepId: string, callback: (stepId: string) => void): void {
         event.preventDefault();
         callback(stepId);
+    }
+
+    trackFn(_: number, formattedStep: FormattedFormStep): string {
+        return formattedStep.id;
     }
 }

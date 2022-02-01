@@ -26,8 +26,7 @@ describe('Fixed card layout test suite', () => {
         navigationMenuBtn,
         pageSidebar,
         disabledCardContent,
-        disabledCardDiv,
-        pageHeader
+        disabledCardDiv
     } = fxdCardLayoutPage;
 
     beforeAll(() => {

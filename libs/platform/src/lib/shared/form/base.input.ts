@@ -15,7 +15,7 @@ import {
     ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NgControl, NgForm } from '@angular/forms';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subject } from 'rxjs';
 
 import { BaseComponent } from '../base';
@@ -123,7 +123,7 @@ export abstract class BaseInput
      * Firing CD, as we can keep switching between editable and non-editable mode
      *
      */
-    set editable(value: boolean) {
+    set editable(value: BooleanInput) {
         const newVal = coerceBooleanProperty(value);
         if (this._editable !== newVal) {
             this._editable = newVal;
@@ -259,11 +259,11 @@ export abstract class BaseInput
         }
     }
 
-    setDisabledState(isDisabled: boolean): void {
+    setDisabledState(isDisabled: BooleanInput): void {
         const newState = coerceBooleanProperty(isDisabled);
         this._cd.markForCheck();
         if (newState !== this._disabled) {
-            this._disabled = isDisabled;
+            this._disabled = newState;
             this.stateChanges.next('setDisabledState');
         }
     }

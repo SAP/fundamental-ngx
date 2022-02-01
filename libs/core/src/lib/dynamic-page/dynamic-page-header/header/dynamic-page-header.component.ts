@@ -36,6 +36,9 @@ export const ActionSquashBreakpointPx = 1280;
     }
 })
 export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
+    /** @hidden */
+    _collapsed = false;
+
     /** Title property for dynamic page */
     @Input()
     title: string;
@@ -83,6 +86,11 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     /** @hidden */
     ngAfterViewInit(): void {
         this._addCustomClassToBreadcrumb();
+
+        this._dynamicPageService.collapsed.pipe(takeUntil(this._onDestroy$)).subscribe((collapsed) => {
+            this._collapsed = collapsed;
+            this._changeDetRef.markForCheck();
+        });
     }
 
     /** @hidden */

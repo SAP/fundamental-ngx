@@ -25,7 +25,7 @@ export abstract class TableColumn {
     /** Data type the column represents. */
     abstract dataType: FilterableColumnDataType;
 
-    /** Width of the column cells */
+    /** Width of the column cells. */
     abstract width: string;
 
     /** Toggles grouping feature in the column header. */
@@ -34,10 +34,13 @@ export abstract class TableColumn {
     /** Toggles freeze/unfreeze feature in the column header. */
     abstract freezable: boolean;
 
-    /** Column cell template */
+    /** Column cell template for readonly mode. */
     abstract columnCellTemplate: TemplateRef<any>;
 
-    /** Column header template */
+    /** Column cell template for editing mode. */
+    abstract editableColumnCellTemplate: TemplateRef<any>;
+
+    /** Column header template. */
     abstract headerCellTemplate: TemplateRef<any>;
 
     /** Column cell ARIA label */
@@ -46,5 +49,6 @@ export abstract class TableColumn {
     /** Whether cell inner is focusable, may be used only if the custom template defined, needed for the screen readers */
     abstract cellFocusable: boolean;
     /** Whether or not  the text should wrap, when text is too long for 1 line */
+    /** Whether the text should wrap, when text is too long for 1 line. */
     abstract noWrap: boolean;
 }

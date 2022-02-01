@@ -5,7 +5,7 @@
         id="input1-types"
         name="fileUploader-types"
         zone="zLeft"
-        rank="1"
+        [rank]="1"
         placeholder="Field placeholder text"
     >
         <fdp-file-uploader
@@ -18,7 +18,7 @@
             buttonAriaLabel="Drag a .png file on me!"
             accept=".png"
             [(ngModel)]="files"
-            multiple="true"
+            [multiple]="true"
             (selectionChange)="handleFileSelection($event)"
             (invalidFileChange)="handleInvalidFileSelection($event)"
         ></fdp-file-uploader>

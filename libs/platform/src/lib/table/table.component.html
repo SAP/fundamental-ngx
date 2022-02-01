@@ -5,7 +5,7 @@
     [ngTemplateOutletContext]="_toolbarContext"
 ></ng-container>
 
-<fd-busy-indicator [loading]="loading" block="true">
+<fd-busy-indicator [loading]="loading" [block]="true">
     <!-- Table Container -->
     <div #tableContainer role="grid" class="fdp-table__container" [attr.aria-labelledby]="_tableToolbarTitleId">
         <!-- Table header outlet -->
@@ -74,9 +74,9 @@
             <fd-checkbox
                 *ngIf="selectionMode === SELECTION_MODE.MULTIPLE"
                 labelClass="fd-table__checkbox-label"
-                [compact]="contentDensity !== CONTENT_DENSITY.COZY"
                 attr.aria-label="Toggle selection for {{ _totalItems }} rows"
                 i18n-aria-label="@@platformTableSelectAllRows"
+                [compact]="contentDensity | isCompactDensity"
                 [tristate]="true"
                 [tristateSelectable]="false"
                 [ngModel]="checkedState"
@@ -135,7 +135,7 @@
                     [noArrow]="true"
                     fd-table-popover
                 >
-                    <ul fd-list [noBorder]="true" [compact]="true">
+                    <ul fd-list [noBorder]="true" [compact]="contentDensity | isCompactDensity">
                         <!-- Sorting -->
                         <ng-container *ngIf="column.sortable">
                             <li
@@ -209,7 +209,7 @@
                                     >
                                     <input
                                         fd-form-control
-                                        [compact]="true"
+                                        [compact]="contentDensity | isCompactDensity"
                                         [id]="'fdp-table-column-filtering-' + column.name"
                                         (keyup.enter)="_columnHeaderFilterBy(column.key, $event.target.value)"
                                     />
@@ -353,9 +353,10 @@
                                         <fd-checkbox
                                             attr.aria-label="Select row number {{ rowIdx + 1 }} of {{ _totalItems }}"
                                             i18n-ariaLabel="@@platformTableCellCheckboxAriaLabelWithColAndRowIndex"
-                                            [compact]="contentDensity !== CONTENT_DENSITY.COZY"
+                                            [compact]="contentDensity | isCompactDensity"
                                             labelClass="fd-table__checkbox-label"
                                             [ngModel]="row.checked"
+                                            [disabled]="row.state === 'new'"
                                             (ngModelChange)="_toggleSelectableRow(row)"
                                         ></fd-checkbox>
                                     </td>
@@ -384,8 +385,8 @@
                                 [attr.data-nesting-level]="colIdx === 0 ? row.level + 1 : null"
                                 [tabindex]="_isTreeRowFirstCell(colIdx, row) ? 0 : -1"
                                 [focusable]="_isTreeRowFirstCell(colIdx, row)"
-                                (click)="_isTreeRowFirstCell(colIdx, row) && _toggleGroupRow(row)"
-                                (keydown.enter)="_isTreeRowFirstCell(colIdx, row) && _toggleGroupRow(row)"
+                                (click)="_onCellClick(colIdx, row)"
+                                (keyup.enter)="_isTreeRowFirstCell(colIdx, row) && _toggleGroupRow(row)"
                                 (keydown.space)="_isTreeRowFirstCell(colIdx, row) && _toggleGroupRow(row, $event)"
                             >
                                 <div fd-table-text [noWrap]="column.noWrap">
@@ -396,18 +397,44 @@
                                         aria-hidden="true"
                                     ></span>
 
-                                    <ng-container *ngIf="column?.columnCellTemplate; else defaultTableCellTemplate">
-                                        <ng-container
-                                            *ngTemplateOutlet="
-                                                column.columnCellTemplate;
-                                                context: { $implicit: row.value }
-                                            "
-                                        ></ng-container>
+                                    <ng-container *ngIf="row.state === 'readonly'; else editModeCell">
+                                        <ng-container *ngIf="column?.columnCellTemplate; else defaultTableCellTemplate">
+                                            <ng-container
+                                                *ngTemplateOutlet="
+                                                    column.columnCellTemplate;
+                                                    context: { $implicit: row.value }
+                                                "
+                                            ></ng-container>
+                                        </ng-container>
+
+                                        <ng-template #defaultTableCellTemplate>{{
+                                            row?.value | valueByPath: column.key
+                                        }}</ng-template>
                                     </ng-container>
 
-                                    <ng-template #defaultTableCellTemplate>{{
-                                        row?.value | valueByPath: column.key
-                                    }}</ng-template>
+                                    <ng-template #editModeCell>
+                                        <ng-container
+                                            *ngIf="
+                                                column?.editableColumnCellTemplate;
+                                                else defaultEditableTableCellTemplate
+                                            "
+                                        >
+                                            <ng-container
+                                                *ngTemplateOutlet="
+                                                    column.editableColumnCellTemplate;
+                                                    context: { $implicit: row.value }
+                                                "
+                                            ></ng-container>
+                                        </ng-container>
+
+                                        <ng-template #defaultEditableTableCellTemplate>
+                                            <fdp-table-editable-cell
+                                                [row]="row"
+                                                [column]="column"
+                                                [columnValue]="row?.value | valueByPath: column.key"
+                                            ></fdp-table-editable-cell>
+                                        </ng-template>
+                                    </ng-template>
                                 </div>
                             </td>
 

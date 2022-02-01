@@ -43,7 +43,7 @@ import { SmartFilterBar } from './smart-filter-bar.class';
 import { SmartFilterBarConditionFieldComponent } from './components/smart-filter-bar-condition-field/smart-filter-bar-condition-field.component';
 import { getSelectItemValue } from './helpers';
 import { SmartFilterBarStrategyLabels } from './interfaces/strategy-labels.type';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 
 const defaultColumnsLayout = { S: 12, M: 6, L: 4, XL: 3 };
 
@@ -109,7 +109,7 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
      * Whether smart filter bar background should be transparent.
      */
     @Input()
-    set transparent(value: boolean) {
+    set transparent(value: BooleanInput) {
         this._transparent = coerceBooleanProperty(value);
     }
 

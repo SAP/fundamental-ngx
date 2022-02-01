@@ -1,5 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 
+import { FlexibleColumnLayout } from '@fundamental-ngx/core/flexible-column-layout';
+
 @Component({
     selector: 'fd-flexible-column-layout-dynamic-page-example',
     templateUrl: './flexible-column-layout-dynamic-page-example.component.html',
@@ -11,7 +13,7 @@ export class FlexibleColumnLayoutDynamicPageExampleComponent {
      * sets the initial layout of the component to 'OneColumnStartFullScreen'
      * sets a new layout for the component
      */
-    localLayout = 'OneColumnStartFullScreen';
+    localLayout: FlexibleColumnLayout = 'OneColumnStartFullScreen';
 
     /**
      * property set by the consuming application
@@ -49,7 +51,7 @@ export class FlexibleColumnLayoutDynamicPageExampleComponent {
      * 'ThreeColumnsMidExpanded' | 'ThreeColumnsEndExpanded' | 'ThreeColumnsStartMinimized' |
      * 'ThreeColumnsEndMinimized';
      */
-    changeLayout(newValue: string): void {
+    changeLayout(newValue: FlexibleColumnLayout): void {
         this.localLayout = newValue;
         this.showMidColumnControls = this.localLayout.startsWith('Two') || this.localLayout.includes('FullScreen');
         this.isFullScreen = this.localLayout.includes('FullScreen');

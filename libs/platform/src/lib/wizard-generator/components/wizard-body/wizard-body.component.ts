@@ -51,7 +51,7 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
 
     /**
      * @description Custom height to use for the wizard's content pane. By default, this value is calc(100vh - 144px), where 144px
-     * is the combined height of the shellbar, wizard header and wizard footer.
+     * is the combined height of the Shellbar, wizard header and wizard footer.
      */
     @Input()
     contentHeight: string;
@@ -63,19 +63,19 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
     isFirstStep = false;
 
     /**
-     * @description Whether or not Wizard is currently on the last step.
+     * @description Whether Wizard is currently on the last step.
      */
     @Input()
     isLastStep = false;
 
     /**
-     * Whether or not next step is a Summary step.
+     * Whether next step is a Summary step.
      */
     @Input()
     isNextStepSummary = false;
 
     /**
-     * @description Boolean flag indicating whether or not to display Summary step in Wizard progress bar.
+     * @description Boolean flag indicating whether to display Summary step in Wizard progress bar.
      */
     @Input()
     displaySummaryStep = false;

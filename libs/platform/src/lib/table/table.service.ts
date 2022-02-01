@@ -229,12 +229,13 @@ export class TableService {
     }
 
     /** Set table columns */
-    setColumns(columns: string[]): void {
+    setColumns(columns: string[], keys: string[]): void {
         const prevState = this.getTableState();
         const prevColumns = (prevState && prevState.columns) || [];
 
         const newColumns = [...columns];
-        const state: TableState = { ...prevState, columns: newColumns };
+        const newColumnKeys = [...keys];
+        const state: TableState = { ...prevState, columns: newColumns, columnKeys: newColumnKeys };
 
         if (!equal(prevColumns, state.columns)) {
             this.setTableState(state);
@@ -259,7 +260,7 @@ export class TableService {
         this.pageChange.emit({ current: state.page, previous: prevPageState });
     }
 
-    /** Trigger columns width recalculation */
+    /** Trigger table columns width recalculation */
     recalculateColumnsWidth(): void {
         this._tableColumnsWidth$.next();
     }

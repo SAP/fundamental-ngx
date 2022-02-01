@@ -9,7 +9,7 @@ export type TagColorType = 'grey' | 'blue' | 'teal' | 'green' | 'mango' | 'red' 
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class ExperimentalTagComponent {
+export class TagComponent {
     /**
      * The color of the tag.
      * Options include grey, blue, teal, green, mango, red, pink, indigo

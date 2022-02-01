@@ -162,16 +162,18 @@ describe('Datetime picker suite', () => {
         click(rangeDisabledExample + calendarIcon);
         const currentDayIndex = getCurrentItemIndex();
         const itemsLength = getElementArrayLength(altCalendarItem);
+
         for (let i = currentDayIndex - 1; i !== 0; i--) {
             expect(isElementClickable(calendarItem, i)).toBe(false, `previous day not disabled`);
         }
+
         if (currentDayIndex + 15 <= itemsLength) {
             for (let i = currentDayIndex; i < currentDayIndex + 15; i++) {
-                expect(isElementClickable(calendarItem, i)).toBe(true, `element is disabled`);
+                expect(isElementClickable(calendarItem, i)).toBe(true, `element is not disabled`);
             }
 
             for (let i = currentDayIndex + 15; i < itemsLength; i++) {
-                expect(isElementClickable(calendarItem, i)).toBe(false, `element is not disabled`);
+                expect(isElementClickable(calendarItem, i)).toBe(false, `element is disabled`);
             }
         }
 

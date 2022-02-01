@@ -1,6 +1,10 @@
 import { Component, ChangeDetectionStrategy, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 
-import { DynamicPageComponent, DynamicPageTabChangeEvent } from '@fundamental-ngx/platform/dynamic-page';
+import {
+    DynamicPageComponent,
+    DynamicPageTabChangeEvent,
+    DynamicPageBackgroundType
+} from '@fundamental-ngx/platform/dynamic-page';
 import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-page-overflow.service';
 
 @Component({
@@ -20,7 +24,7 @@ export class PlatformDynamicPageTabbedExampleComponent implements OnDestroy {
 
     pageTitle = 'Balenciaga Tripple S Trainers';
 
-    background = 'list';
+    background: DynamicPageBackgroundType = 'list';
 
     stackedTabs = false;
 

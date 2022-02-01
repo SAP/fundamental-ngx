@@ -30,11 +30,11 @@
     <fd-form-input-message-group>
         <fd-input-group
             [id]="id + '-input-group-container'"
-            [compact]="isCompact"
+            [compact]="contentDensity | isCompactDensity"
             [button]="!readonly"
             [glyph]="!readonly ? 'navigation-down-arrow' : ' '"
             [state]="mobile && isOpen ? null : status === 'error' ? 'error' : state"
-            [buttonFocusable]="false"
+            [buttonFocusable]="buttonFocusable"
             [disabled]="disabled"
             [readonly]="readonly"
             [isControl]="true"
@@ -64,7 +64,7 @@
                 tabindex="0"
                 [id]="id"
                 [name]="name"
-                [compact]="isCompact"
+                [compact]="contentDensity | isCompactDensity"
                 (keydown)="onInputKeydownHandler($event)"
                 [disabled]="disabled"
                 [(ngModel)]="inputText"
@@ -101,7 +101,7 @@
         class="fdp-combobox__list"
         [id]="id + '-result'"
         role="listbox"
-        [compact]="isCompact"
+        [compact]="contentDensity | isCompactDensity"
         [attr.aria-labelledby]="id + '-search'"
         [style.maxHeight]="!mobile && maxHeight"
         [style.maxWidth]="autoResize && maxWidth + 'px'"
@@ -128,7 +128,7 @@
                     (click)="handleOptionItem(optionItem)"
                     fd-list-item
                     role="option"
-                    tabindex="0"
+                    [tabindex]="0"
                     (keyDown)="handlePressEnter($event, optionItem)"
                     [selected]="isSelectedOptionItem(optionItem)"
                 >
@@ -146,7 +146,7 @@
                 (click)="handleOptionItem(optionItem)"
                 fd-list-item
                 role="option"
-                tabindex="0"
+                [tabindex]="0"
                 (keyDown)="handlePressEnter($event, optionItem)"
                 [selected]="isSelectedOptionItem(optionItem)"
             >

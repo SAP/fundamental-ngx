@@ -1,9 +1,8 @@
 @import '~fundamental-styles/dist/form-message';
 
 .fd-form-message {
-    display: block;
-
     &--embedded {
+        display: block;
         box-shadow: none;
         max-width: 100%;
     }

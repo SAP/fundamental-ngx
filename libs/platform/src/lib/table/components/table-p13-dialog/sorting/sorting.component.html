@@ -21,7 +21,7 @@
                 class="sort-row__select"
                 [value]="rule.columnKey"
                 (valueChange)="_onRuleColumnKeyChange(rule, $event)"
-                [compact]="true"
+                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 placeholder="(none)"
                 [ariaLabel]="'Sort by ' + _getColumnLabel(rule)"
                 i18n-ariaLabel="@@platformTableP13SortDialogRuleSortBy"
@@ -39,9 +39,10 @@
                 class="sort-row__select"
                 [value]="rule.direction"
                 (valueChange)="_onRuleDirectionChange(rule, $event)"
-                [compact]="true"
                 ariaLabel="Sort direction"
-                i18n-ariaLabel="@@platformTableP13SortDialogRuleSortDirection"
+                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
+                placeholder="(none)"
+                i18n-placeholder="@@platformTableP13SortDialogNoneSelectedSorting|Sorting select placeholder"
             >
                 <fd-option [value]="SORT_DIRECTION.ASC" i18n="@@platformTableP13SortDialogSortOrderAsc">
                     Ascending
@@ -56,7 +57,7 @@
                     fd-button
                     fdType="transparent"
                     glyph="sys-cancel"
-                    [compact]="true"
+                    [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                     i18n-aria-label="platformTableP13SortDialogRemoveSort|Remove btn aria-label attribute"
                     aria-label="Remove"
                     i18n-title="platformTableP13SortDialogRemoveSort|Remove btn title attribute"
@@ -68,7 +69,7 @@
                     fd-button
                     fdType="transparent"
                     glyph="add"
-                    [compact]="true"
+                    [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                     i18n-aria-label="platformTableP13SortDialogAddNewSort|Add New btn aria-label attribute"
                     aria-label="Add new"
                     i18n-title="platformTableP13SortDialogAddNewSort|Add New btn title attribute"
@@ -87,7 +88,7 @@
                 fd-dialog-decisive-button
                 i18n-label="@@platformTableP13SortDialogConfirmationBtn"
                 label="OK"
-                [compact]="true"
+                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 (click)="confirm()"
             ></button>
         </fd-dialog-footer-button>
@@ -99,7 +100,7 @@
                 fd-dialog-decisive-button
                 i18n-label="@@platformTableP13SortDialogCancelBtn"
                 label="Cancel"
-                [compact]="true"
+                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 (click)="cancel()"
             ></button>
         </fd-dialog-footer-button>

@@ -6,4 +6,4 @@ export const itemPaginationTestArr = [
 ];
 export const playgroundLabelArr = ['totalItems', 'itemsPerPage', 'currentPage', 'displayText'];
 export const resultsArr = ['4', '8', '16'];
-export const ResultsArr2 = ['25', '10', '1'];
+export const ResultsArr2 = ['75', '30', '2'];

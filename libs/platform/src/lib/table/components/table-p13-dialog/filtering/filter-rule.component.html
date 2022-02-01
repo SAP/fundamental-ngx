@@ -6,7 +6,7 @@
                 class="filter-row__select"
                 fdLayoutGridCol
                 colGrow
-                [compact]="true"
+                [compact]="compact"
                 [ngModel]="rule.columnKey"
                 (ngModelChange)="rule.setColumnKey($event)"
                 (ngModelChange)="_onModelChange()"
@@ -18,7 +18,7 @@
                 class="filter-row__select"
                 fdLayoutGridCol
                 colGrow
-                [compact]="true"
+                [compact]="compact"
                 [ngModel]="rule.strategy"
                 (ngModelChange)="rule.setStrategy($event)"
                 (ngModelChange)="_onModelChange()"
@@ -121,8 +121,8 @@
                         <fd-date-picker
                             class="filter-row__input"
                             type="single"
-                            [compact]="true"
-                            required
+                            [compact]="compact"
+                            [required]="true"
                             [name]="valueKey"
                             [(ngModel)]="rule[valueKey]"
                             (ngModelChange)="_onModelChange()"
@@ -131,11 +131,11 @@
                     <ng-container *ngSwitchCase="DATA_TYPE.BOOLEAN">
                         <fd-select
                             class="filter-row__select"
-                            [compact]="true"
+                            [compact]="compact"
                             [name]="valueKey"
                             [(ngModel)]="rule[valueKey]"
                             (ngModelChange)="_onModelChange()"
-                            required
+                            [required]="true"
                         >
                             <fd-option [value]="undefined" i18n="@@platformTableP13FilterBooleanOptionNotDefined">
                                 &nbsp;
@@ -151,7 +151,7 @@
                             type="text"
                             class="filter-row__input"
                             fd-form-control
-                            [compact]="true"
+                            [compact]="compact"
                             required
                             [name]="valueKey"
                             [(ngModel)]="rule[valueKey]"

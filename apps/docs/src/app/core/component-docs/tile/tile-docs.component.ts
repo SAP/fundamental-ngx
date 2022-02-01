@@ -8,6 +8,7 @@ import actionSrc from '!./examples/action-tile-example.component.html?raw';
 import badgeSrc from '!./examples/badge-tile-example.component.html?raw';
 import feedSrc from '!./examples/feed-tile-example.component.html?raw';
 import lineSrc from '!./examples/line-tile-example.component.html?raw';
+import clickableSrc from '!./examples/clickable-tile-example.component.html?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -84,6 +85,14 @@ export class TileDocsComponent {
             language: 'html',
             code: lineSrc,
             fileName: 'line-example'
+        }
+    ];
+
+    clickable: ExampleFile[] = [
+        {
+            language: 'html',
+            code: clickableSrc,
+            fileName: 'clickable-example'
         }
     ];
 }

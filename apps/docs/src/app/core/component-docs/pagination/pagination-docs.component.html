@@ -44,8 +44,19 @@
 
 <fd-docs-section-title id="mobile" componentName="pagination"> Mobile </fd-docs-section-title>
 <description>
-    Pagination component switches to mobile mode automatically when screen's size is smaller than 600px in width but can
-    set <code>mobile</code> or <code>[mobile]="true"</code> to show it always in mobile mode.
+    Pagination component switches to mobile mode automatically when screen's size is smaller than 1024px in width but
+    can set <code>mobile</code> or <code>[mobile]="true"</code> to show it always in mobile mode.
+
+    <br /><br />
+
+    Labels shown before and after current page input and can be changed using next input values:
+    <ul>
+        <li><code>pageLabelBeforeInputMobile</code> (string) - label shown before input.</li>
+        <li>
+            <code>pageLabelAfterInputMobile</code> (function) - label with total pages count, shown after input, total
+            pages count passed as a parameter.
+        </li>
+    </ul>
 </description>
 <component-example>
     <fd-pagination-mobile-example></fd-pagination-mobile-example>

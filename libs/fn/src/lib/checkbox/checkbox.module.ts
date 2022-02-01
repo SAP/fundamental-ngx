@@ -2,11 +2,11 @@ import 'focus-visible';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ExperimentalCheckboxComponent } from './checkbox/checkbox.component';
+import { CheckboxComponent } from './checkbox/checkbox.component';
 
 @NgModule({
-    declarations: [ExperimentalCheckboxComponent],
+    declarations: [CheckboxComponent],
     imports: [CommonModule, FormsModule],
-    exports: [ExperimentalCheckboxComponent]
+    exports: [CheckboxComponent]
 })
-export class ExperimentalCheckboxModule {}
+export class CheckboxModule {}

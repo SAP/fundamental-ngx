@@ -20,9 +20,9 @@ export class ObjectNumberPo extends CoreBaseComponentPo {
     decimalObjExamples = 'fd-object-number-decimal-example ' + this.objectNumbers;
     truncationObjExample = 'fd-object-number-truncation-example' + this.objectNumbers;
 
-    objectNumberText = (exampleBlock: string) => exampleBlock + ' ' + this.objText;
+    objectNumberText = (exampleBlock: string): string => exampleBlock + ' ' + this.objText;
 
-    objectNumberUnit = (exampleBlock: string) => exampleBlock + ' ' + this.objUnit;
+    objectNumberUnit = (exampleBlock: string): string => exampleBlock + ' ' + this.objUnit;
 
     open(): void {
         super.open(this.url);

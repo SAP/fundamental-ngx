@@ -3,7 +3,7 @@
         #ffl1
         id="mobile"
         label="Mobile Mode Multi Value Input"
-        rank="1"
+        [rank]="1"
         placeholder="Field placeholder text"
     >
         <fdp-multi-input
@@ -15,11 +15,11 @@
             [dataSource]="_dataSource"
             displayKey="state"
             description="description"
-            showSecondaryText="true"
+            [showSecondaryText]="true"
             avatarsrc="image"
-            mobile="true"
+            [mobile]="true"
             [mobileConfig]="mobileConfig"
-            hasByLine="true"
+            [hasByLine]="true"
         >
         </fdp-multi-input>
     </fdp-form-field>

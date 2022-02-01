@@ -240,9 +240,12 @@ export class ComboboxComponent
     @Input()
     displayFn = this._defaultDisplay;
 
-    /** Whether AddOn Button should be focusable, set to false by default */
+    /**
+     * Whether AddOn Button should be focusable
+     * @default true
+     */
     @Input()
-    buttonFocusable = false;
+    buttonFocusable = true;
 
     /** Whether the combobox is readonly. */
     @Input()
@@ -373,8 +376,8 @@ export class ComboboxComponent
         this._refreshDisplayedValues();
         if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(
-                this._contentDensityService._contentDensityListener.subscribe((density) => {
-                    this.compact = density !== 'cozy';
+                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
+                    this.compact = isCompact;
                     this._cdRef.markForCheck();
                 })
             );

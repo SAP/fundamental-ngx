@@ -39,12 +39,12 @@ import {
     isDevMode
 } from '@angular/core';
 import { AbstractControl, ControlContainer, FormGroup } from '@angular/forms';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { KeyValue } from '@angular/common';
 import { takeUntil } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
 
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { ContentDensityService, isCompactDensity } from '@fundamental-ngx/core/utils';
 import {
     ColumnLayout,
     FormField,
@@ -295,7 +295,7 @@ export class FormGroupComponent
         return this._useForm;
     }
 
-    set useForm(value: boolean) {
+    set useForm(value: BooleanInput) {
         this._useForm = coerceBooleanProperty(value);
     }
 
@@ -408,7 +408,7 @@ export class FormGroupComponent
         if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(
                 this._contentDensityService._contentDensityListener.subscribe((density) => {
-                    this.compact = density !== 'cozy';
+                    this.compact = isCompactDensity(density);
                     this.buildComponentCssClass();
                 })
             );

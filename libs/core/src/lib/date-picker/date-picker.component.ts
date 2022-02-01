@@ -221,10 +221,11 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
     private _state: FormStates = null;
 
     /**
-     * Whether AddOn Button should be focusable, set to true by default
+     * Whether AddOn Button should be focusable
+     * @default true
      */
     @Input()
-    buttonFocusable = false;
+    buttonFocusable = true;
 
     /**
      * Special days mark, it can be used by passing array of object with
@@ -384,8 +385,8 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
         });
         if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(
-                this._contentDensityService._contentDensityListener.subscribe((density) => {
-                    this.compact = density !== 'cozy';
+                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
+                    this.compact = isCompact;
                     this._changeDetectionRef.markForCheck();
                 })
             );
@@ -535,6 +536,9 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
         /** If written value is not defined, null, empty string */
         if (!selected) {
             this._inputFieldDate = '';
+            this._refreshCurrentlyDisplayedCalendarDate(this._dateTimeAdapter.today());
+            this.selectedRangeDate = { start: null, end: null };
+            this.selectedDate = null;
             this._changeDetectionRef.detectChanges();
             return;
         }

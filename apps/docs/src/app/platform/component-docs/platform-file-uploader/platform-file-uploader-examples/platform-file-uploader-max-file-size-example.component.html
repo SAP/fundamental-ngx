@@ -5,7 +5,7 @@
         id="input1-max-file"
         name="fileUploader-max"
         zone="zLeft"
-        rank="1"
+        [rank]="1"
         placeholder="Field placeholder text"
     >
         <fdp-file-uploader
@@ -17,7 +17,7 @@
             buttonLabel="Browse"
             buttonAriaLabel="browse file"
             maxFileSize="1MB"
-            multiple="true"
+            [multiple]="true"
             [(ngModel)]="files"
             (selectionChange)="handleFileSelection($event)"
             (invalidFileChange)="handleInvalidFileSelection($event)"

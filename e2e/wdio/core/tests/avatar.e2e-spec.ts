@@ -67,7 +67,6 @@ describe('Avatar test suite', () => {
             if (getText(avatarInitials, i).length === 1) {
                 j = 1;
             }
-
             if (getText(avatarInitials, i).length === 2) {
                 k = 2;
             }

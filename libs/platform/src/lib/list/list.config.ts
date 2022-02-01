@@ -11,7 +11,7 @@ export class ListConfig {
     /**
      * Content Density of element. 'cozy' | 'compact'
      */
-    contentDensity: ContentDensity;
+    contentDensity: ContentDensity = 'cozy';
 
     /**
      * Maps data providers

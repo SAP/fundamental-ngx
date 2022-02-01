@@ -203,10 +203,11 @@ export class DatetimePickerComponent<D>
     private _state: FormStates = null;
 
     /**
-     * Whether AddOn Button should be focusable, set to true by default
+     * Whether AddOn Button should be focusable
+     * @default true
      */
     @Input()
-    buttonFocusable = false;
+    buttonFocusable = true;
 
     /**
      * Special days mark, it can be used by passing array of object with
@@ -352,7 +353,7 @@ export class DatetimePickerComponent<D>
      * @param fdDate FdDate
      */
     @Input()
-    disableFunction: (value: D) => void = () => false;
+    disableFunction: (value: D) => boolean = () => false;
 
     /** @hidden */
     constructor(
@@ -407,8 +408,8 @@ export class DatetimePickerComponent<D>
 
         if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(
-                this._contentDensityService._contentDensityListener.subscribe((density) => {
-                    this.compact = density !== 'cozy';
+                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
+                    this.compact = isCompact;
                     this._changeDetRef.markForCheck();
                 })
             );

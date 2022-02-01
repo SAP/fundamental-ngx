@@ -199,10 +199,11 @@ export class TimePickerComponent<D>
     private _state: FormStates = null;
 
     /**
-     * Whether AddOn Button should be focusable, set to false by default
+     * Whether AddOn Button should be focusable
+     * @default true
      */
     @Input()
-    buttonFocusable = false;
+    buttonFocusable = true;
 
     /**
      * When set to true, time inputs won't allow to have 1 digit
@@ -338,8 +339,8 @@ export class TimePickerComponent<D>
 
         if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(
-                this._contentDensityService._contentDensityListener.subscribe((density) => {
-                    this.compact = density !== 'cozy';
+                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
+                    this.compact = isCompact;
                     this._changeDetectorRef.markForCheck();
                 })
             );

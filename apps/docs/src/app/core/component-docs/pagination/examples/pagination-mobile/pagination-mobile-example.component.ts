@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
 })
 export class PaginationMobileExampleComponent {
     totalItems = 50;
-    currentPage = 1;
+    currentPage = 2;
 
     onPageChange(page: number): void {
         this.currentPage = page;

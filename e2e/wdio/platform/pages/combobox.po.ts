@@ -23,22 +23,24 @@ export class ComboBoxPo extends BaseComponentPo {
     comboBoxInput = 'fdp-combobox input:not([id*="mobile"])';
     mobileComboBoxInput = 'fdp-combobox input[id*=mobile]';
 
-    selectedDropDownOption = (name: string) =>
+    selectedDropDownOption = (name: string): string =>
         `//span[contains(.,'${name}')]//ancestor::li[contains(@class, "is-selected")]`;
 
-    dropDownOption = (name: string) => `//span[contains(.,'${name}')]//ancestor::li`;
+    dropDownOption = (name: string): string => `//span[contains(.,'${name}')]//ancestor::li`;
 
-    comboBoxOptionHint = (typedCharacters: string, restCharacters: string) =>
+    comboBoxOptionHint = (typedCharacters: string, restCharacters: string): string =>
         `//span[text()='${restCharacters}']//strong[text() = '${typedCharacters}']`;
 
-    comboBoxButtons = (name: string) => `//label[@id='fdp-form-label-${name}']/../../fdp-input-message-group//button`;
+    comboBoxButtons = (name: string): string =>
+        `//label[@id='fdp-form-label-${name}']/../../fdp-input-message-group//button`;
 
-    comboBoxExpandedButtons = (name: string) =>
+    comboBoxExpandedButtons = (name: string): string =>
         `//label[@id='fdp-form-label-${name}']/../../fdp-input-message-group//button[contains (@class,"is-expanded")]`;
 
-    comboBoxInputs = (name: string) => `//label[@id='fdp-form-label-${name}']/../../fdp-input-message-group//input`;
+    comboBoxInputs = (name: string): string =>
+        `//label[@id='fdp-form-label-${name}']/../../fdp-input-message-group//input`;
 
-    filledComboBoxInputs = (name: string) =>
+    filledComboBoxInputs = (name: string): string =>
         `//label[@id='fdp-form-label-${name}']/../../fdp-input-message-group//input`;
 
     expandDropdown(type: string): void {

@@ -1,11 +1,11 @@
 <form [formGroup]="customForm" class="flex-form">
     <div fd-form-item>
-        <label fd-form-label required="true" for="timePickerFormExample1">Time</label>
+        <label fd-form-label [required]="true" for="timePickerFormExample1">Time</label>
         <fd-time-picker
             inputId="timePickerFormExample1"
             formControlName="time"
             [state]="customForm.get('time').valid ? 'success' : 'error'"
-            required="true"
+            [required]="true"
             [message]="customForm.get('time').valid ? 'Valid Time' : 'Invalid Time'"
         >
         </fd-time-picker>

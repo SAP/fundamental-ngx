@@ -59,6 +59,8 @@ export class ShellbarComponent implements AfterContentInit {
             this.comboboxComponent.inShellbar = true;
         }
     }
+
+    /** @hidden */
     applyShellbarModeToButtons(): void {
         if (this.buttons && this.buttons.length) {
             this.buttons.forEach((button) => {

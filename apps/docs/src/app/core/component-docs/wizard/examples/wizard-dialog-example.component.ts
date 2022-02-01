@@ -1,7 +1,7 @@
 import { Component, QueryList, TemplateRef, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { WizardStepComponent, WizardStepStatus } from '@fundamental-ngx/core/wizard';
-import { WizardService } from 'libs/core/src/lib/wizard/wizard.service';
+import { WizardService } from '@fundamental-ngx/core/wizard';
 
 @Component({
     selector: 'fd-wizard-dialog-example',
@@ -23,7 +23,6 @@ export class WizardDialogExampleComponent {
 
     currentStep = 1;
 
-    /** @hidden */
     @ViewChildren(WizardStepComponent)
     steps: QueryList<WizardStepComponent>;
 
@@ -40,6 +39,10 @@ export class WizardDialogExampleComponent {
             width: '100%',
             height: '100%'
         });
+    }
+
+    handleFocus(event: KeyboardEvent, index: number): void {
+        this._wizardService.progressBarKeyHandler(event, this.steps, index);
     }
 
     goToStep(step: number): void {

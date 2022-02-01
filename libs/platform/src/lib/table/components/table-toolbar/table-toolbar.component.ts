@@ -5,17 +5,22 @@ import {
     Component,
     ContentChild,
     Input,
+    OnDestroy,
     TemplateRef,
     ViewChild
 } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 
-import { ContentDensity } from '@fundamental-ngx/core/utils';
+import { takeUntil } from 'rxjs/operators';
 import { SearchInput, SuggestionItem } from '../../interfaces/search-field.interface';
 import { Table } from '../../table';
 import { TableToolbarActionsComponent } from './table-toolbar-actions.component';
 import { TableToolbarWithTemplate, TABLE_TOOLBAR } from './table-toolbar';
 import { TableService } from '../../table.service';
-import { Observable } from 'rxjs';
+
+export type EditMode = 'none' | 'inline';
+
+let tableToolbarTitleUniqueId = 0;
 
 /**
  * The component that represents a table toolbar.
@@ -34,7 +39,7 @@ import { Observable } from 'rxjs';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: TABLE_TOOLBAR, useExisting: TableToolbarComponent }]
 })
-export class TableToolbarComponent implements TableToolbarWithTemplate, AfterViewInit {
+export class TableToolbarComponent implements TableToolbarWithTemplate, AfterViewInit, OnDestroy {
     /** Table title. */
     @Input()
     title: string;
@@ -51,6 +56,10 @@ export class TableToolbarComponent implements TableToolbarWithTemplate, AfterVie
     @Input()
     searchSuggestions: SuggestionItem[] = [];
 
+    /** Table rows edit/add mode. */
+    @Input()
+    editMode: EditMode = 'none';
+
     /** @hidden */
     @ContentChild(TableToolbarActionsComponent)
     tableToolbarActionsComponent: TableToolbarActionsComponent;
@@ -60,18 +69,35 @@ export class TableToolbarComponent implements TableToolbarWithTemplate, AfterVie
     contentTemplateRef: TemplateRef<any>;
 
     /** @hidden */
-    readonly tableLoading$: Observable<boolean> = this.tableService.tableLoading$;
+    tableToolbarTitleId: string = 'fd-table-toolbar-title-' + tableToolbarTitleUniqueId++;
+
+    /** @hidden */
+    _showSaveButton = false;
+
+    /** @hidden */
+    readonly tableLoading$: Observable<boolean> = this._tableService.tableLoading$;
+
+    /** @hidden */
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
     constructor(
         private readonly _cd: ChangeDetectorRef,
         private readonly _table: Table,
-        private readonly tableService: TableService
-    ) {}
+        private readonly _tableService: TableService
+    ) {
+        this._listenToTableEvents();
+    }
 
     /** @hidden */
     ngAfterViewInit(): void {
         this._cd.detectChanges();
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
     }
 
     /** @hidden */
@@ -100,7 +126,32 @@ export class TableToolbarComponent implements TableToolbarWithTemplate, AfterVie
     }
 
     /** @hidden */
-    _getCozyCompactSize(size: ContentDensity): ContentDensity {
-        return size !== 'cozy' ? 'compact' : 'cozy';
+    _addRow(): void {
+        this._table.addRow();
+    }
+
+    /** @hidden */
+    _saveRows(): void {
+        this._table.saveRows();
+    }
+
+    /** @hidden */
+    _cancelEditing(): void {
+        this._table.cancelEditing();
+    }
+
+    /** @hidden */
+    private _listenToTableEvents(): void {
+        this._table.emptyRowAdded.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+            this._showSaveButton = true;
+        });
+
+        this._table.save.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+            this._showSaveButton = false;
+        });
+
+        this._table.cancel.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+            this._showSaveButton = false;
+        });
     }
 }

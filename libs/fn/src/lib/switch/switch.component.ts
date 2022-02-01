@@ -30,7 +30,7 @@ let switchUniqueId = 0;
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => ExperimentalSwitchComponent),
+            useExisting: forwardRef(() => SwitchComponent),
             multi: true
         }
     ],
@@ -41,7 +41,7 @@ let switchUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ExperimentalSwitchComponent implements ControlValueAccessor, OnInit, OnDestroy {
+export class SwitchComponent implements ControlValueAccessor, OnInit, OnDestroy {
     /** @hidden */
     @ViewChild('switchInput')
     inputElement: ElementRef<HTMLInputElement>;
@@ -123,8 +123,8 @@ export class ExperimentalSwitchComponent implements ControlValueAccessor, OnInit
     ngOnInit(): void {
         if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(
-                this._contentDensityService._contentDensityListener.subscribe((density) => {
-                    this.compact = density !== 'cozy';
+                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
+                    this.compact = isCompact;
                     this._changeDetectorRef.markForCheck();
                 })
             );

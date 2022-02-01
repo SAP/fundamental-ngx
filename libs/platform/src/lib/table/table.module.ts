@@ -19,9 +19,10 @@ import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { RadioModule } from '@fundamental-ngx/core/radio';
 import { SelectModule } from '@fundamental-ngx/core/select';
 import { TableModule } from '@fundamental-ngx/core/table';
+import { PipeModule } from '@fundamental-ngx/core/utils';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
-import { PlatformInputModule } from '@fundamental-ngx/platform/form';
+import { PlatformDatePickerModule, PlatformInputModule, PlatformSwitchModule } from '@fundamental-ngx/platform/form';
 import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 
@@ -54,9 +55,12 @@ import { P13FilteringDialogComponent } from './components/table-p13-dialog/filte
 import { FilterRuleComponent } from './components/table-p13-dialog/filtering/filter-rule.component';
 import { P13ColumnsDialogComponent } from './components/table-p13-dialog/columns/columns.component';
 
-import { ValueByPathPipe } from './pipes/value-by-path.pipe';
-
-import { FdpCellDef, FdpTableCell } from './directives/table-cell.directive';
+import {
+    FdpCellDef,
+    FdpTableCell,
+    FdpEditableCellDef,
+    FdpEditableCellFormDirective
+} from './directives/table-cell.directive';
 import { FdpHeaderCellDef, FdpTableHeader } from './directives/table-header.directive';
 import { FdpViewSettingsFilterCustomDef } from './directives/table-view-settings-filter-custom.directive';
 import { TableScrollableDirective } from './directives/table-scrollable.directive';
@@ -65,6 +69,7 @@ import { FdpCellSelectableDirective } from './directives/table-cell-selectable.d
 import { PlatformTableCellResizableDirective } from './directives/table-cell-resizable.directive';
 import { PlatformTableColumnResizerComponent } from './components/table-column-resizer/table-column-resizer.component';
 import { NoDataWrapperComponent } from './components/no-data-wrapper/no-data-wrapper.component';
+import { TableEditableCellComponent } from './components/table-editable-cell/table-editable-cell.component';
 
 @NgModule({
     imports: [
@@ -79,6 +84,7 @@ import { NoDataWrapperComponent } from './components/no-data-wrapper/no-data-wra
         PopoverModule,
         ListModule,
         PlatformButtonModule,
+        PipeModule,
         ButtonModule,
         PlatformInputModule,
         DialogModule,
@@ -91,7 +97,9 @@ import { NoDataWrapperComponent } from './components/no-data-wrapper/no-data-wra
         BusyIndicatorModule,
         DragAndDropModule,
         A11yModule,
-        ScrollbarModule
+        ScrollbarModule,
+        PlatformDatePickerModule,
+        PlatformSwitchModule
     ],
     declarations: [
         TableComponent,
@@ -100,13 +108,13 @@ import { NoDataWrapperComponent } from './components/no-data-wrapper/no-data-wra
         TableToolbarActionsComponent,
         FdpTableCell,
         FdpCellDef,
+        FdpEditableCellDef,
         FdpCellSelectableDirective,
         FdpTableHeader,
         FdpHeaderCellDef,
         TableViewSettingsDialogComponent,
         TableViewSettingsFilterComponent,
         FdpViewSettingsFilterCustomDef,
-        ValueByPathPipe,
         SortingComponent,
         GroupingComponent,
         FiltersComponent,
@@ -131,7 +139,9 @@ import { NoDataWrapperComponent } from './components/no-data-wrapper/no-data-wra
         PlatformTableCellResizableDirective,
         PlatformTableColumnResizerComponent,
         NoDataWrapperComponent,
-        GetAvailableSortColumnsPipe
+        GetAvailableSortColumnsPipe,
+        TableEditableCellComponent,
+        FdpEditableCellFormDirective
     ],
     exports: [
         TableComponent,
@@ -140,13 +150,13 @@ import { NoDataWrapperComponent } from './components/no-data-wrapper/no-data-wra
         TableToolbarActionsComponent,
         FdpTableCell,
         FdpCellDef,
+        FdpEditableCellDef,
         FdpCellSelectableDirective,
         FdpTableHeader,
         FdpHeaderCellDef,
         TableViewSettingsDialogComponent,
         TableViewSettingsFilterComponent,
         FdpViewSettingsFilterCustomDef,
-        ValueByPathPipe,
         SortingComponent,
         GroupingComponent,
         FiltersComponent,
@@ -171,16 +181,8 @@ import { NoDataWrapperComponent } from './components/no-data-wrapper/no-data-wra
         PlatformTableCellResizableDirective,
         PlatformTableColumnResizerComponent,
         NoDataWrapperComponent,
-        GetAvailableSortColumnsPipe
-    ],
-    entryComponents: [
-        SortingComponent,
-        GroupingComponent,
-        FiltersComponent,
-        P13SortingDialogComponent,
-        P13GroupingDialogComponent,
-        P13FilteringDialogComponent,
-        P13ColumnsDialogComponent
+        GetAvailableSortColumnsPipe,
+        FdpEditableCellFormDirective
     ]
 })
 export class PlatformTableModule {}
