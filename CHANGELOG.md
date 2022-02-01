@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.317 (2022-02-01)
+
+
+### Features
+
+* **platform:** when property of form groups ([#7654](https://github.com/SAP/fundamental-ngx/issues/7654)) ([1687627](https://github.com/SAP/fundamental-ngx/commit/1687627076bb1730756fd2eee3c070d075c024cc))
+
 ## 0.33.0-rc.316 (2022-02-01)
 
 
