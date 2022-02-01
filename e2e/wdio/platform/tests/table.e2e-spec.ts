@@ -671,7 +671,7 @@ describe('Table component test suite', () => {
         });
     });
 
-    describe('Check playground', () => {
+    xdescribe('Check playground', () => {
         it('should check table item single selection', () => {
             scrollIntoView(playgroundExample);
             setValue(playgroundExample + inputFields, tableCellArr[1]);

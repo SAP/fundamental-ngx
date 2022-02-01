@@ -187,7 +187,7 @@ describe('slider test suite', () => {
         });
     });
 
-    describe('playground examples', () => {
+    xdescribe('playground examples', () => {
         it('should check slider single and range sliders available', () => {
             scrollIntoView(playgroundExamples);
             expect(getElementArrayLength(playgroundExamples + sliderHandles)).toBe(1);

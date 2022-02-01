@@ -64,7 +64,7 @@ export class TablePo extends BaseComponentPo {
     expandedOption = 'fd-popover-control .fd-select__control';
     inputFields = '.fdp-search-field__input';
     playgroundExample = 'playground ';
-    dropdown = 'select';
+    dropdown = '.fd-select__control';
     optionCompact = '[value="compact"]';
     optionCozy = '[value="cozy"]';
     optionCondensed = '[value="condensed"]';
