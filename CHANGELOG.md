@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.319 (2022-02-01)
+
+
+### Bug Fixes
+
+* **core:** defect hunting 80 fixes - breadcrumb, playground, mobile calendar ([#7627](https://github.com/SAP/fundamental-ngx/issues/7627)) ([04cc298](https://github.com/SAP/fundamental-ngx/commit/04cc298b16ba1e7978f06ddb4d7098cdc02ef9f0))
+
 ## 0.33.0-rc.318 (2022-02-01)
 
 
