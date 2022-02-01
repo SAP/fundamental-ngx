@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.320 (2022-02-01)
+
+
+### Bug Fixes
+
+* **core:** skip playground tests ([#7662](https://github.com/SAP/fundamental-ngx/issues/7662)) ([70a43db](https://github.com/SAP/fundamental-ngx/commit/70a43db8338c28bca13d289ee3ebfe13fa9248ca))
+
 ## 0.33.0-rc.319 (2022-02-01)
 
 
