@@ -21,7 +21,10 @@ import { TabPanelComponent } from '@fundamental-ngx/core/tabs';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 import { DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
 import { DynamicPageContentHostComponent } from './dynamic-page-content/dynamic-page-content-host.component';
-import { DynamicPageContentComponent } from './dynamic-page-content/dynamic-page-content.component';
+import {
+    DynamicPageContentComponent,
+    DynamicPageTabChangeEvent
+} from './dynamic-page-content/dynamic-page-content.component';
 import { DynamicPageFooterComponent } from './dynamic-page-footer/dynamic-page-footer.component';
 import { DynamicPageHeaderComponent } from './dynamic-page-header/header/dynamic-page-header.component';
 import { DynamicPageTitleComponent } from './dynamic-page-header/title/dynamic-page-title.component';
@@ -168,6 +171,15 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
      */
     elementRef(): ElementRef<HTMLElement> {
         return this._elementRef;
+    }
+
+    /**
+     * @hidden
+     * handle tab changes and emit event
+     */
+    _handleTabChange(tabPanel: TabPanelComponent): void {
+        const event = new DynamicPageTabChangeEvent(this.contentComponent, tabPanel);
+        this.contentComponent.tabChange.emit(event);
     }
 
     /** @hidden */
