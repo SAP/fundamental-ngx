@@ -110,6 +110,7 @@
         [id]="id + '-result'"
         role="listbox"
         [compact]="contentDensity | isCompactDensity"
+        [byline]="byline"
         [attr.aria-labelledby]="id + '-search'"
         [style.maxHeight]="!mobile && maxHeight"
         [style.maxWidth]="autoResize && maxWidth + 'px'"

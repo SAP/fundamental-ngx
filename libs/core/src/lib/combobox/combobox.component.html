@@ -128,6 +128,7 @@
         [attr.aria-labelledby]="comboboxId + '-search'"
         [style.maxHeight]="!mobile && maxHeight"
         [hasMessage]="listMessages?.length > 0"
+        [byline]="byline"
         (focusEscapeList)="handleListFocusEscape($event)"
     >
         <ng-content></ng-content>

@@ -169,6 +169,10 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     @Input()
     closeOnOutsideClick = true;
 
+    /** Whether list item options should be rendered as byline. */
+    @Input()
+    byline = false;
+
     /** Event emitted when item is selected. */
     @Output()
     selectionChange = new EventEmitter<ComboboxSelectionChangeEvent>();
