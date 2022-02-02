@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.323 (2022-02-02)
+
+
+### Features
+
+* **core,platform:** byline combobox list ([#7663](https://github.com/SAP/fundamental-ngx/issues/7663)) ([7e94619](https://github.com/SAP/fundamental-ngx/commit/7e946190bcb67eb93b9b3a51aa207d4f2a51afe1))
+
 ## 0.33.0-rc.322 (2022-02-02)
 
 
