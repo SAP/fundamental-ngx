@@ -6,8 +6,11 @@ import {
     FilenameLengthExceedEvent,
     FileSizeExceedEvent,
     TypeMismatchEvent,
-    UploadCollectionDataSource
+    UploadCollectionDataSource,
+    UploadCollectionItem
 } from '@fundamental-ngx/platform/upload-collection';
+import { Observable } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 import { PlatformUploadCollectionDataProviderExample } from './platform-upload-collection-base-data-provider';
 
@@ -40,7 +43,7 @@ export class PlatformUploadCollectionExampleComponent {
     fileTypes: string[] = ['jpg', 'png', 'bmp'];
 
     constructor(private readonly _http: HttpClient) {
-        this.dataSource = new UploadCollectionDataSource(new PlatformUploadCollectionDataProviderExample(_http));
+        this.dataSource = new UploadCollectionDataSource(new DelayedPlatformUploadCollectionDataProviderExample(_http));
     }
 
     typeMismatch({ source, payload }: TypeMismatchEvent): void {
@@ -53,5 +56,13 @@ export class PlatformUploadCollectionExampleComponent {
 
     fileSizeExceed({ source, payload }: FileSizeExceedEvent): void {
         console.log('fileSizeExceed', source, payload);
+    }
+}
+
+// Simulating real http request by adding 300ms delay to the DataProvider's "fetch" method
+// this is needed to demonstrate loading behavior
+class DelayedPlatformUploadCollectionDataProviderExample extends PlatformUploadCollectionDataProviderExample {
+    fetch(params: Map<string, any>): Observable<UploadCollectionItem[]> {
+        return super.fetch(params).pipe(delay(300));
     }
 }

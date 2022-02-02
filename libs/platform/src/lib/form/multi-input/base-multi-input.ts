@@ -157,6 +157,14 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     @Output()
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+    /** Event emitted when data loading is started. */
+    @Output()
+    onDataRequested = new EventEmitter<void>();
+
+    /** Event emitted when data loading is finished. */
+    @Output()
+    onDataReceived = new EventEmitter<void>();
+
     /** @hidden */
     @ViewChild(ListComponent)
     listComponent: ListComponent;
@@ -483,7 +491,8 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
          * places. If any new data comes in either you do a search and you want to pass initial data
          * its here.
          */
-        this._dsSubscription = initDataSource
+        this._dsSubscription = new Subscription();
+        const dsSub = initDataSource
             .open()
             .pipe(takeUntil(this._destroyed))
             .subscribe((data) => {
@@ -493,6 +502,10 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
 
                 this.cd.markForCheck();
             });
+        this._dsSubscription.add(dsSub);
+
+        this._dsSubscription.add(initDataSource.onDataRequested().subscribe(this.onDataRequested));
+        this._dsSubscription.add(initDataSource.onDataReceived().subscribe(this.onDataReceived));
 
         initDataSource.dataProvider.setLookupKey(this.lookupKey);
         const matchingBy: MatchingBy = {

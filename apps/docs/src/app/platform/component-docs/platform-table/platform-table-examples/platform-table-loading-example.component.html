@@ -1,8 +1,10 @@
-<div class="example-btn-holder">
-    <button fd-button label="Change Loading State" (click)="loading = !loading"></button>
-</div>
-
-<fdp-table [dataSource]="source" [loading]="loading" emptyTableMessage="No data found">
+Loading state: {{ loading }}
+<fdp-table
+    [dataSource]="source"
+    emptyTableMessage="No data found"
+    (onDataRequested)="onDataRequested()"
+    (onDataReceived)="onDataReceived()"
+>
     <fdp-table-toolbar title="Order Line Items" [hideItemCount]="false">
         <fdp-table-toolbar-actions>
             <fdp-button label="Action One" (click)="alert('Action One')"></fdp-button>

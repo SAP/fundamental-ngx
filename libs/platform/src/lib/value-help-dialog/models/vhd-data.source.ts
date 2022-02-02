@@ -1,12 +1,24 @@
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import { BaseDataProvider, DataProvider, DataSource } from '@fundamental-ngx/platform/shared';
 
 export class ValueHelpDialogDataSource<T> implements DataSource<T> {
-    dataChanges: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
+    protected _dataChanges: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
+    protected _onDataRequested$ = new Subject<void>();
+    protected _onDataReceived$ = new Subject<void>();
+
+    protected _dataLoading = false;
+
+    get isDataLoading(): boolean {
+        return this._dataLoading;
+    }
+
     constructor(public dataProvider: DataProvider<T>) {}
     match(predicate?: string | Map<string, string>): void {
+        this._onDataRequested$.next();
+        this._dataLoading = true;
+
         let searchParam = new Map<string, any>();
         if (typeof predicate === 'string') {
             searchParam.set('query', predicate);
@@ -17,13 +29,29 @@ export class ValueHelpDialogDataSource<T> implements DataSource<T> {
         this.dataProvider
             .fetch(searchParam)
             .pipe(take(1))
-            .subscribe((result: T[]) => {
-                this.dataChanges.next(result);
-            });
+            .subscribe(
+                (result: T[]) => {
+                    this._onDataReceived$.next();
+                    this._dataLoading = false;
+                    this._dataChanges.next(result);
+                },
+                () => {
+                    this._onDataReceived$.next();
+                    this._dataLoading = false;
+                }
+            );
     }
 
     open(): Observable<T[]> {
-        return this.dataChanges.asObservable();
+        return this._dataChanges.asObservable();
+    }
+
+    onDataRequested(): Observable<void> {
+        return this._onDataRequested$.asObservable();
+    }
+
+    onDataReceived(): Observable<void> {
+        return this._onDataReceived$.asObservable();
     }
 
     close(): void {}

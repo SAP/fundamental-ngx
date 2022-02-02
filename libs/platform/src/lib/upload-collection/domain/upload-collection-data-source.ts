@@ -1,4 +1,4 @@
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import { DataSource } from '@fundamental-ngx/platform/shared';
@@ -19,12 +19,22 @@ export class UploadCollectionDataSource implements DataSource<UploadCollectionIt
     /** Max items for response */
     static readonly MaxLimit = Number.MAX_SAFE_INTEGER;
 
-    protected dataChanges = new BehaviorSubject<UploadCollectionItem[]>([]);
+    protected _dataChanges = new BehaviorSubject<UploadCollectionItem[]>([]);
+    protected _onDataRequested$ = new Subject<void>();
+    protected _onDataReceived$ = new Subject<void>();
+
+    protected _dataLoading = false;
+
+    get isDataLoading(): boolean {
+        return this._dataLoading;
+    }
 
     constructor(public readonly dataProvider: UploadCollectionDataProvider) {}
 
     /** Filtering data */
     match(searchParam: Map<string, string | number>): void {
+        this._onDataRequested$.next();
+        this._dataLoading = true;
         if (!(searchParam instanceof Map)) {
             throw new Error('DataSource.match() predicate can only accepts string and Map');
         }
@@ -36,9 +46,17 @@ export class UploadCollectionDataSource implements DataSource<UploadCollectionIt
         this.dataProvider
             .fetch(searchParam)
             .pipe(take(1))
-            .subscribe((result: UploadCollectionItem[]) => {
-                this.dataChanges.next(result);
-            });
+            .subscribe(
+                (result: UploadCollectionItem[]) => {
+                    this._onDataReceived$.next();
+                    this._dataLoading = false;
+                    this._dataChanges.next(result);
+                },
+                () => {
+                    this._onDataReceived$.next();
+                    this._dataLoading = false;
+                }
+            );
     }
 
     /** The method is triggered when valid files are selected in the file uploader dialog. */
@@ -87,8 +105,16 @@ export class UploadCollectionDataSource implements DataSource<UploadCollectionIt
     }
 
     open(): Observable<UploadCollectionItem[]> {
-        return this.dataChanges.asObservable();
+        return this._dataChanges.asObservable();
     }
 
     close(): void {}
+
+    onDataRequested(): Observable<void> {
+        return this._onDataRequested$.asObservable();
+    }
+
+    onDataReceived(): Observable<void> {
+        return this._onDataReceived$.asObservable();
+    }
 }

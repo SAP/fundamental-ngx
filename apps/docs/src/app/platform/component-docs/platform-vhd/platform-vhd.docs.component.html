@@ -170,9 +170,27 @@
     <ul>
         <li>Set <code>[mobile]</code> property to <strong>true</strong> on <strong>fdp-value-help-dialog</strong></li>
     </ul>
-    <p></p>
 </description>
 <component-example>
     <fdp-platform-vhd-mobile-example></fdp-platform-vhd-mobile-example>
 </component-example>
 <code-example [exampleFiles]="multiInputValueHelpDialog"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="loading" componentName="value-help-dialog"> Loading </fd-docs-section-title>
+<description>
+    <p>
+        Value Help Dialog exposes <code>onDataRequested</code> and <code>onDataReceived</code> outputs, that can be used
+        to implement external loading logic. These events are tied to the querying process through dataSource.
+    </p>
+    <p>
+        By default, Value Help Dialog tracks these loading events and apply loading state to the table internally.
+        However, you can modify this logic by using <code>onDataRequested</code> and <code>onDataReceived</code> methods
+        and <code>loading</code> input on the component
+    </p>
+</description>
+<component-example>
+    <fdp-platform-vhd-loading-example></fdp-platform-vhd-loading-example>
+</component-example>
+<code-example [exampleFiles]="loadingValueHelpDialog"></code-example>

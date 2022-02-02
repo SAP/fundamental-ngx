@@ -218,7 +218,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
     /** Loading state */
     @Input()
-    loading = false;
+    loading: boolean | undefined;
 
     /** Text displayed when table has no items. */
     @Input()
@@ -375,6 +375,14 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     /** Event fired when cancel button pressed. */
     @Output()
     readonly cancel = new EventEmitter<void>();
+
+    /** Event emitted when data loading is started. */
+    @Output()
+    onDataRequested = new EventEmitter<void>();
+
+    /** Event emitted when data loading is finished. */
+    @Output()
+    onDataReceived = new EventEmitter<void>();
 
     /** @hidden */
     @ViewChild('verticalScrollable')
@@ -647,10 +655,18 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     }
 
     /** @hidden */
+    get loadingState(): boolean {
+        return this.loading ?? this._internalLoadingState;
+    }
+
+    /** @hidden */
     private _addedItems: T[] = [];
 
     /** @hidden */
     private _columnsWidthSet = false;
+
+    /** @hidden */
+    private _internalLoadingState = false;
 
     /** @hidden */
     constructor(
@@ -2076,13 +2092,29 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
          */
         this._dsOpenedStream = dataSourceStream.open();
 
-        this._dsSubscription = this._dsOpenedStream.subscribe((items) => {
+        this._dsSubscription = new Subscription();
+
+        const dsSub = this._dsOpenedStream.subscribe((items) => {
             this._totalItems = dataSourceStream.dataProvider.totalItems;
             this._dataSourceItemsSubject.next(items);
             // calling "detectChanges" may result in content jumps
             // using markForCheck in order to let "items" changes to get applied in the UI first
             this._cdr.markForCheck();
         });
+        this._dsSubscription.add(dsSub);
+
+        this._dsSubscription.add(
+            dataSourceStream.onDataRequested().subscribe(() => {
+                this.onDataRequested.emit();
+                this._internalLoadingState = true;
+            })
+        );
+        this._dsSubscription.add(
+            dataSourceStream.onDataReceived().subscribe(() => {
+                this.onDataReceived.emit();
+                this._internalLoadingState = false;
+            })
+        );
 
         this._subscriptions.add(this._dsSubscription);
 
