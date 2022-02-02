@@ -30,6 +30,14 @@
     }
 
     fd-form-message {
+        display: block;
+        max-width: 100%;
+    }
+}
+
+.fd-dialog__body {
+    fd-form-message {
+        display: block;
         max-width: 100%;
     }
 }

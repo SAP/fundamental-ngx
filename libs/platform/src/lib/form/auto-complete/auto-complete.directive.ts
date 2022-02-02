@@ -82,6 +82,12 @@ export class AutoCompleteDirective {
 
             this._oldValue = this.inputText;
             const item = this._searchByStrategy();
+
+            if (!item) {
+                // prevent fast typing chars that breaks valid value entering
+                this._element.value = this._oldValue.slice(0, -1);
+            }
+
             if (item) {
                 this._typeahead(item.label);
             }

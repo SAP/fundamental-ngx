@@ -17,7 +17,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
-import { A, CONTROL, DOWN_ARROW, ENTER, ESCAPE, META, SHIFT, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
+import { A, DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import { of } from 'rxjs';
 import { delay, takeUntil } from 'rxjs/operators';
 import equal from 'fast-deep-equal';
@@ -227,15 +227,10 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         } else if (KeyUtil.isKeyCode(event, TAB)) {
             event.preventDefault();
             this.listComponent?.setItemActive(index + 1);
-        } else if (
-            KeyUtil.isKeyCode(event, [CONTROL, META]) &&
-            KeyUtil.isKeyCode(event, SHIFT) &&
-            KeyUtil.isKeyCode(event, A)
-        ) {
-            // unselect all
+        } else if ((event.ctrlKey || event.metaKey) && event.shiftKey && KeyUtil.isKeyCode(event, A)) {
             event.preventDefault();
             this.handleSelectAllItems(false);
-        } else if (KeyUtil.isKeyCode(event, [CONTROL, META]) && KeyUtil.isKeyCode(event, A)) {
+        } else if ((event.ctrlKey || event.metaKey) && KeyUtil.isKeyCode(event, A)) {
             event.preventDefault();
             this.handleSelectAllItems(true);
         } else if (!KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
