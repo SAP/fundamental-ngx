@@ -316,7 +316,11 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     @HostListener('click', ['$event'])
     _onClick(event: MouseEvent): void {
         if (this.checkboxComponent && !this.anchor) {
-            this.checkboxComponent.nextValue();
+            if (!this.checkboxComponent.elementRef.nativeElement.contains(event.target as Node)) {
+                // clicking on the checkbox is not suppressed
+                // so we should only process clicks if clicked on the list-item, not checkbox itself
+                this.checkboxComponent.nextValue();
+            }
         }
         if (this.radioButtonComponent && !this.anchor) {
             this.radioButtonComponent.valueChange(event);

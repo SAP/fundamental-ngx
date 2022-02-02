@@ -162,7 +162,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
 
     /** @hidden */
     constructor(
-        public elementRef: ElementRef,
+        public elementRef: ElementRef<Element>,
         @Attribute('tabIndexValue') public tabIndexValue: number = 0,
         private _changeDetectorRef: ChangeDetectorRef,
         private renderer: Renderer2,

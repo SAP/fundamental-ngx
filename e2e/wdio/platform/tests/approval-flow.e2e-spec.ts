@@ -637,7 +637,6 @@ describe('Approval flow', () => {
             for (let i = 0; i < listItemCount; i++) {
                 scrollIntoView(reminderOptionsList);
                 click(selectedOptions);
-                click(reminderOptionsButton);
                 waitForElDisplayed(reminderOptionsList);
             }
 

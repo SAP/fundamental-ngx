@@ -116,12 +116,12 @@ describe('Multi input test suite', () => {
         expect(isElementDisplayed(popover)).toBe(true, 'popover not displayed');
     });
 
-    it('should check multiInput options close when clicking on list item', () => {
+    it('should check multiInput options does not close when clicking on list item', () => {
         click(activeDropdownButtons);
         waitForElDisplayed(popover);
         click(listItem);
 
-        expect(doesItExist(popover)).toBe(false, 'popover still displayed');
+        expect(doesItExist(popover)).toBe(true, 'popover is hidden');
     });
 
     it('should be able to select all tokens and delete with delete key', () => {

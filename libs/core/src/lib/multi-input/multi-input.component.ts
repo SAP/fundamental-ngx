@@ -508,6 +508,7 @@ export class MultiInputComponent
         this._rangeSelector.applyValueToEachInRange((idx) =>
             this._handleSelect(toggledSelection, vm.displayedOptions[idx].value, false)
         );
+        this._resetSearchTerm();
     }
 
     /** @hidden */
