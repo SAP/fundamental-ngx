@@ -259,12 +259,12 @@ export class ComboboxComponent
     @Input()
     mobileConfig: MobileModeConfig;
 
-    /** Whether or not to display the addon button. */
+    /** Whether to display the addon button. */
     @Input()
     showDropdownButton = true;
 
     /**
-     * Whether or not to return results where the input matches the entire string. By default, only results that start
+     * Whether to return results where the input matches the entire string. By default, only results that start
      * with the input search term will be returned.
      */
     @Input()
@@ -275,6 +275,10 @@ export class ComboboxComponent
      */
     @Input()
     title: string;
+
+    /** Whether list item options should be rendered as byline. */
+    @Input()
+    byline = false;
 
     /** Event emitted when an item is clicked. Use *$event* to retrieve it. */
     @Output()
