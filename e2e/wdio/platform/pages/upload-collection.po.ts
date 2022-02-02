@@ -12,7 +12,7 @@ export class UploadCollectionPo extends BaseComponentPo {
     tableItems = ' .fd-table__row--hoverable';
     buttons = ' .fd-button--ghost.fd-button--menu';
     menuItem = '.fd-menu__item';
-    tablePages = ' .fd-pagination__link.ng-star-inserted';
+    tablePages = ' .fd-pagination__link';
     tableResult = ' .fdp-upload-collection__pagination--total';
     linkNext = ' [glyph="navigation-right-arrow"]';
     linkPrevious = ' [glyph="navigation-left-arrow"]';

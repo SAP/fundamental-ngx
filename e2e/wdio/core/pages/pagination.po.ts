@@ -25,7 +25,7 @@ export class PaginationPo extends CoreBaseComponentPo {
     mobileButton = '.fd-pagination__button--mobile';
     playgroundInputFields = '.form-control';
     playground = '.fd-playground__content ';
-    playgroundPages = '.fd-playground__content .fd-pagination__link.ng-star-inserted';
+    playgroundPages = '.fd-playground__content .fd-pagination__link';
     playgroundLabel = '.fd-playground__schema .fd-form-label';
 
     itemsPerPageProperty = '[arialabel="Pagination with itemsPerPage property"] ';

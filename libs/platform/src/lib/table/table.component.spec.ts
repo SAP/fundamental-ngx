@@ -966,7 +966,8 @@ describe('TableComponent internal', () => {
             expect(hostComponent.source.fetch).toHaveBeenCalledTimes(2);
         });
 
-        it('should get new 50 items per each request', async () => {
+        // TODO: flaky test  https://github.com/SAP/fundamental-ngx/issues/7534
+        xit('should get new 50 items per each request', async () => {
             await tableBodyScrollTop(999999);
 
             expect(tableBodyRows.length).toBe(100);
