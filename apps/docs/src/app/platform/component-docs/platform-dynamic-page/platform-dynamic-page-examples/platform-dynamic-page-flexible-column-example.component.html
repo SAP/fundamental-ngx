@@ -8,7 +8,11 @@
             </div>
 
             <!-- Flexible Column Layout -->
-            <fd-flexible-column-layout [(layout)]="localLayout" (layoutChange)="onLayoutChanged($event)">
+            <fd-flexible-column-layout
+                [(layout)]="localLayout"
+                (layoutChange)="onLayoutChanged($event)"
+                (tabChange)="onTabChanged($event)"
+            >
                 <ng-template #startColumn>
                     <div class="docs-fcl-example-section">
                         <h2>Start Column</h2>
@@ -108,7 +112,7 @@
                                 numquam asperiores tenetur iure. Cum consequuntur impedit repellendus esse, facere autem
                                 optio consequatur nobis?
                             </fdp-dynamic-page-header>
-                            <fdp-dynamic-page-content tabLabel="Tab 1" id="tab_1" (tabChange)="onTabChanged($event)">
+                            <fdp-dynamic-page-content tabLabel="Tab 1" id="tab_1">
                                 tab1 dsfsdf dfg Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit
                                 sunt laboriosam totam maiores. Unde quas quis soluta adipisci mollitia distinctio. Natus
                                 nam repellat, aut ad et tempore cum. Corporis, nobis. Lorem ipsum dolor sit amet
@@ -240,7 +244,7 @@
                                 explicabo sed odit? Recusandae praesentium voluptatum cum omnis, placeat beatae quasi
                                 eum odio doloribus inventore, eos iusto sed. kav
                             </fdp-dynamic-page-content>
-                            <fdp-dynamic-page-content tabLabel="Tab 2" id="tab_2" (tabChange)="onTabChanged($event)">
+                            <fdp-dynamic-page-content tabLabel="Tab 2" id="tab_2">
                                 <!-- page content goes here -->
                                 tabs 2 Lorem ipsum dolor sasdasit amet consectetur adipisicing elit. Reprehenderit sunt
                                 laboriosam totam maiores. Unde quas quis soluta adipisci mollitia distinctio. Natus nam

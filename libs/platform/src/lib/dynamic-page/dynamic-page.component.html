@@ -40,7 +40,7 @@
         *ngIf="_isTabbed"
         [stackContent]="stackContent"
         maxContentHeight="auto"
-        (selectedTabChange)="_handleTabChange($event)"
+        (selectedTabChange)="_onSelectedTabChange($event)"
     >
         <ng-container *ngFor="let tab of _tabs">
             <fd-tab [title]="tab.tabLabel" [id]="tab.id">
