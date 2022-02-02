@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.322 (2022-02-02)
+
+
+### Features
+
+* **core:** initial focus directive improvements ([#7658](https://github.com/SAP/fundamental-ngx/issues/7658)) ([bd69a1f](https://github.com/SAP/fundamental-ngx/commit/bd69a1fb5faa45a3420c47a3f68841d6e7489029))
+
 ## 0.33.0-rc.321 (2022-02-02)
 
 ## 0.33.0-rc.320 (2022-02-01)
