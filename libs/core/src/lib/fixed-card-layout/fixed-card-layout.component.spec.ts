@@ -51,72 +51,72 @@ describe('FixedCardLayoutComponent', () => {
     it('should have 5 cards on screen', async () => {
         await whenStable(fixture);
 
-        expect(component.fixedCardLayout.cards.length).toEqual(5);
+        expect(component.fixedCardLayout._cards.length).toEqual(5);
     });
 
     it('should have 4 columns on Laptop width size value of 1600px', async () => {
         await whenStable(fixture);
 
-        spyOn(component.fixedCardLayout, 'getWidthAvailable').and.returnValue(1600);
+        spyOnProperty(component.fixedCardLayout, '_availableWidth', 'get').and.returnValue(1600);
 
         component.fixedCardLayout.updateLayout();
         await whenStable(fixture);
 
-        expect(component.fixedCardLayout._columns.length).toEqual(4);
+        expect(component.fixedCardLayout._cardWrapperColumns.length).toEqual(4);
     });
 
     it('should have 1 columns on 500px width size value', async () => {
         await whenStable(fixture);
 
-        spyOn(component.fixedCardLayout, 'getWidthAvailable').and.returnValue(500);
+        spyOnProperty(component.fixedCardLayout, '_availableWidth', 'get').and.returnValue(500);
 
         component.fixedCardLayout.updateLayout();
         await whenStable(fixture);
 
-        expect(component.fixedCardLayout._columns.length).toEqual(1);
+        expect(component.fixedCardLayout._cardWrapperColumns.length).toEqual(1);
     });
 
     it('should have 2 columns on 656px width size value', async () => {
         await whenStable(fixture);
 
-        spyOn(component.fixedCardLayout, 'getWidthAvailable').and.returnValue(656);
+        spyOnProperty(component.fixedCardLayout, '_availableWidth', 'get').and.returnValue(656);
 
         component.fixedCardLayout.updateLayout();
         await whenStable(fixture);
 
-        expect(component.fixedCardLayout._columns.length).toEqual(2);
+        expect(component.fixedCardLayout._cardWrapperColumns.length).toEqual(2);
     });
 
     it('should have 3 columns on 992px width size value', async () => {
         await whenStable(fixture);
 
-        spyOn(component.fixedCardLayout, 'getWidthAvailable').and.returnValue(992);
+        spyOnProperty(component.fixedCardLayout, '_availableWidth', 'get').and.returnValue(992);
 
         component.fixedCardLayout.updateLayout();
         await whenStable(fixture);
 
-        expect(component.fixedCardLayout._columns.length).toEqual(3);
+        expect(component.fixedCardLayout._cardWrapperColumns.length).toEqual(3);
     });
 
     it('should have 5 columns on 1664px width size value', async () => {
         await whenStable(fixture);
 
-        spyOn(component.fixedCardLayout, 'getWidthAvailable').and.returnValue(1664);
+        spyOnProperty(component.fixedCardLayout, '_availableWidth', 'get').and.returnValue(1664);
 
         component.fixedCardLayout.updateLayout();
         await whenStable(fixture);
 
-        expect(component.fixedCardLayout._columns.length).toEqual(5);
+        expect(component.fixedCardLayout._cardWrapperColumns.length).toEqual(5);
     });
 
     it('should have 1 columns on 300px width size value', async () => {
         await whenStable(fixture);
 
-        spyOn(component.fixedCardLayout, 'getWidthAvailable').and.returnValue(300);
+        spyOnProperty(component.fixedCardLayout, '_availableWidth', 'get').and.returnValue(300);
 
         component.fixedCardLayout.updateLayout();
         await whenStable(fixture);
 
-        expect(component.fixedCardLayout._columns.length).toEqual(1);
+        expect(component.fixedCardLayout._cardWrapperColumns.length).toEqual(1);
     });
 });

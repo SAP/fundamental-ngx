@@ -85,18 +85,6 @@ type CardColumn = CardDefinitionDirective[];
     encapsulation: ViewEncapsulation.None
 })
 export class FixedCardLayoutComponent implements OnInit, AfterContentInit, AfterViewInit, AfterViewChecked, OnDestroy {
-    /** @hidden */
-    @ContentChildren(CardDefinitionDirective)
-    cards: QueryList<CardDefinitionDirective>;
-
-    /** @hidden */
-    @ViewChildren(FixedCardLayoutItemComponent)
-    cardContainers: QueryList<FixedCardLayoutItemComponent>;
-
-    /** @hidden */
-    @ViewChild('layout')
-    layout: ElementRef;
-
     /** Drag drop behavior can be disabled */
     @Input()
     disableDragDrop: boolean;
@@ -110,12 +98,11 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     set cardMinimumWidth(value: number) {
         this._cardMinimumWidth = coerceNumberProperty(value);
 
-        // // If component is ready, do the recalculation.
-        if (this.layout) {
+        // If component is ready, do the recalculation.
+        if (this._layout) {
             this.updateLayout();
         }
     }
-
     get cardMinimumWidth(): number {
         return this._cardMinimumWidth;
     }
@@ -128,11 +115,41 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     @Output()
     cardDraggedDropped: EventEmitter<CardDropped> = new EventEmitter<CardDropped>();
 
-    /** @hidden Array of CardDefinitionDirective Array.To make Table kind of layout.*/
+    /** @hidden */
+    @ContentChildren(CardDefinitionDirective)
+    _cards: QueryList<CardDefinitionDirective>;
+
+    /** @hidden */
+    @ViewChildren(FixedCardLayoutItemComponent)
+    _cardContainers: QueryList<FixedCardLayoutItemComponent>;
+
+    /** @hidden */
+    @ViewChildren('cardWrapper', { read: ElementRef })
+    _cardWrappers: QueryList<ElementRef>;
+
+    /** @hidden */
+    @ViewChild('layout')
+    _layout: ElementRef;
+
+    /** @hidden */
+    _cardsArray: Array<CardDefinitionDirective>;
+
+    /** @hidden */
     _columns: CardColumn[];
 
-    /** handles rtl service */
-    dir: string;
+    /** @hidden */
+    _cardWrapperColumns: ElementRef[][];
+
+    /** @hidden*/
+    _containerHeight: number;
+
+    /** @hidden handles rtl service */
+    _dir = 'ltr';
+
+    /** @hidden Return available width for fixed card layout */
+    get _availableWidth(): number {
+        return this._layout.nativeElement.getBoundingClientRect().width;
+    }
 
     /** @hidden Number of Columns in layout */
     private _numberOfColumns: number;
@@ -140,18 +157,16 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     /** @hidden */
     private _previousNumberOfColumns: number;
 
-    /** @hidden */
-    private _cardsArray: Array<CardDefinitionDirective>;
-
-    /** @hidden An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
-
     /** @hidden FocusKeyManager instance */
     private _keyboardEventsManager: FocusKeyManager<FixedCardLayoutItemComponent>;
 
     /** @hidden */
     private _cardMinimumWidth = CARD_MINIMUM_WIDTH;
 
+    /** @hidden An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+
+    /** @hidden */
     constructor(
         private readonly _changeDetector: ChangeDetectorRef,
         @Optional() private readonly _rtlService: RtlService
@@ -194,33 +209,29 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     @HostListener('keydown', ['$event'])
     handleKeydown(event: KeyboardEvent): void {
         event.stopImmediatePropagation();
+
         if (this._keyboardEventsManager) {
             this._keyboardEventsManager.onKeydown(event);
         }
     }
 
     /** Arranges cards on drop of dragged card */
-    dragDrop(event: CdkDragDrop<CardDefinitionDirective[]>): void {
-        if (event.previousContainer === event.container) {
-            moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-        } else {
-            const targetData = event.container.data[event.currentIndex];
-            event.container.data[event.currentIndex] = event.previousContainer.data[event.previousIndex];
-            event.previousContainer.data[event.previousIndex] = targetData;
-        }
+    _onDragDrop(event: CdkDragDrop<number, number>): void {
+        moveItemInArray(this._cardsArray, event.previousContainer.data, event.container.data);
 
         // Need to adjust rank after drag and drop
         this._adjustCardRank(
-            event.container.data[event.currentIndex],
-            event.previousContainer.data[event.previousIndex]
+            event.item.data,
+            // each container always has only 1 item
+            event.container.getSortedItems()[0].data
         );
 
         this.cardDraggedDropped.emit(
             new CardDropped(
                 event.container,
                 event.previousContainer,
-                event.previousIndex,
-                event.currentIndex,
+                event.previousContainer.data,
+                event.container.data,
                 this._numberOfColumns,
                 this._cardsArray
             )
@@ -230,20 +241,17 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     /** Distribute cards on window resize */
     updateLayout(): void {
         this._numberOfColumns = this._getNumberOfColumns();
+
         if (this._previousNumberOfColumns !== this._numberOfColumns) {
             this._previousNumberOfColumns = this._numberOfColumns;
+
             this._renderLayout();
         }
     }
 
-    /** Return available width for fd-card-layout */
-    getWidthAvailable(): number {
-        return this.layout.nativeElement.getBoundingClientRect().width;
-    }
-
     /** @hidden */
     private _accessibilitySetup(): void {
-        this._keyboardEventsManager = new FocusKeyManager(this.cardContainers).withWrap();
+        this._keyboardEventsManager = new FocusKeyManager(this._cardContainers).withWrap();
     }
 
     /** @hidden Method to update rank after cards are dragged */
@@ -255,11 +263,8 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
 
     /** @hidden Rtl change subscription */
     private _subscribeToRtl(): void {
-        if (!this._rtlService) {
-            this.dir = 'ltr';
-        }
-        this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl: boolean) => {
-            this.dir = isRtl ? 'rtl' : 'ltr';
+        this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl) => {
+            this._dir = isRtl ? 'rtl' : 'ltr';
             this._changeDetector.detectChanges();
         });
     }
@@ -273,66 +278,77 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
 
     /** @hidden Listen card change and distribute cards on column change */
     private _listenOnCardsChange(): void {
-        this.cards.changes.subscribe(() => this._renderLayout());
+        this._cards.changes.subscribe(() => this._renderLayout());
     }
 
     /** @hidden Returns number of columns that can fit in current available width for fd-card-layout */
     private _getNumberOfColumns(): number {
-        let columnCount: number;
-
-        // get fd-card-layout width and calculate how many cards can fit into it
-        const availableLayoutWidth = this.getWidthAvailable();
-        const numberOfCardsWithNoGap = Math.floor(availableLayoutWidth / this.cardMinimumWidth);
+        const availableLayoutWidth = this._availableWidth;
+        const numberOfCardsWithNoGap = Math.floor(availableLayoutWidth / this.cardMinimumWidth); // 960 / 320 = 3
         const requiredWidthWithGap =
             numberOfCardsWithNoGap * this.cardMinimumWidth + (numberOfCardsWithNoGap - 1) * CARD_GAP_WIDTH;
 
-        if (requiredWidthWithGap > availableLayoutWidth) {
-            columnCount = numberOfCardsWithNoGap - 1;
-        } else {
-            columnCount = numberOfCardsWithNoGap;
-        }
+        let columnCount =
+            requiredWidthWithGap > availableLayoutWidth ? numberOfCardsWithNoGap - 1 : numberOfCardsWithNoGap;
+        columnCount = columnCount || 1;
 
-        // minimum number of column to 1
-        columnCount = columnCount ? columnCount : 1;
         this.layoutChange.emit(new Layout(columnCount, availableLayoutWidth));
+
         return columnCount;
     }
 
-    /**
-     * @hidden Renders layout on column changes.
-     */
+    /** @hidden Renders layout on column changes */
     private _renderLayout(): void {
-        // convert latest cards queryList to Array of cards
-        this._cardsArray = this.cards.toArray();
-        this._initializeColumns(this._numberOfColumns);
-        this._distributeCards(this._columns);
+        const cardColumns = this._getCardColumns();
+
+        this._cardsArray = [].concat(...cardColumns);
+
+        // to render cards & be able to limit container height
+        this._changeDetector.detectChanges();
+
+        this._setCardWrapperColumns(cardColumns);
+        this._calculateContainerHeight();
+
+        // to update layout after setting container height
         this._changeDetector.detectChanges();
     }
 
-    /**
-     * @hidden Initialize columns with empty arrays
-     */
-    private _initializeColumns(numberOfColumns: number): void {
-        this._columns = [];
-        for (let i = 0; i < numberOfColumns; i++) {
-            this._columns.push([]);
-        }
+    /** @hidden Distribute cards among columns to arrange them in "Z" flow */
+    private _getCardColumns(): CardColumn[] {
+        const cardsArray = this._cards
+            .toArray()
+            .sort((firstCard, secondCard) => firstCard.fdCardDef - secondCard.fdCardDef);
+        const numberOfColumns = this._getNumberOfColumns();
+        const columns: CardColumn[] = new Array(numberOfColumns).fill(0).map(() => new Array(0));
+
+        cardsArray.forEach((card, i) => columns[i % numberOfColumns].push(card));
+
+        return columns;
     }
 
-    /**
-     * @hidden Redistribute cards among columns
-     */
-    private _distributeCards(columns: CardColumn[]): void {
-        const numberOfColumns = columns.length;
-        // sort cards based on rank then create layout
-        this._cardsArray?.sort(comparator);
-        this._cardsArray?.forEach((card, i) => {
-            const index = i % numberOfColumns;
-            columns[index].push(card);
+    /** @hidden Set card wrapper columns accordingly to card columns, needed to limit container height basing on card wrapper columns */
+    private _setCardWrapperColumns(cardColumns: CardColumn[]): void {
+        const wrapperColumns: ElementRef[][] = new Array(cardColumns.length).fill(0).map(() => new Array(0));
+
+        let currColumnIndex = 0;
+
+        this._cardsArray.forEach((card, index) => {
+            if (!cardColumns[currColumnIndex].find((_card) => _card === card)) {
+                currColumnIndex++;
+            }
+
+            wrapperColumns[currColumnIndex].push(this._cardWrappers.get(index));
         });
 
-        function comparator(firstCard: CardDefinitionDirective, secondCard: CardDefinitionDirective): number {
-            return firstCard.fdCardDef - secondCard.fdCardDef;
-        }
+        this._cardWrapperColumns = wrapperColumns;
+    }
+
+    /** @hidden Calculate container height basing on the card wrapper columns */
+    _calculateContainerHeight(): void {
+        const columnsHeights = this._cardWrapperColumns
+            .map((column) => column.map((card) => card.nativeElement.getBoundingClientRect().height))
+            .map((column) => column.reduce((height, cardHeight) => (height += cardHeight)));
+
+        this._containerHeight = Math.max(...columnsHeights);
     }
 }

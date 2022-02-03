@@ -1,1 +1,28 @@
 @import '~fundamental-styles/dist/fixed-card-layout';
+
+/** TODO: Move to styles */
+.fd-fixed-card-layout__card {
+    &,
+    &-placeholder {
+        margin: 1rem 0 0 1rem !important;
+    }
+
+    &-layout {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+
+        margin-left: -1rem;
+        margin-top: -1rem;
+
+        &[dir='rtl'] {
+            margin-left: 0;
+            margin-right: -1rem;
+
+            .fd-fixed-card-layout__card,
+            .fd-fixed-card-layout__card-placeholder {
+                margin: 1rem 1rem 0 0 !important;
+            }
+        }
+    }
+}
