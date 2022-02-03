@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.324 (2022-02-03)
+
+
+### Bug Fixes
+
+* **platform:** dynamic tab page event on tab change ([#7669](https://github.com/SAP/fundamental-ngx/issues/7669)) ([0bc0100](https://github.com/SAP/fundamental-ngx/commit/0bc0100c24046114d944b368faaa4aabcfde7011))
+
 ## 0.33.0-rc.323 (2022-02-02)
 
 
