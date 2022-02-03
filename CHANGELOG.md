@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.327 (2022-02-03)
+
+
+### Bug Fixes
+
+* **ci:** fixing unknown refspec main ([#7674](https://github.com/SAP/fundamental-ngx/issues/7674)) ([d9c3b7c](https://github.com/SAP/fundamental-ngx/commit/d9c3b7c8170c9b9fdfde698f8fcebcfd5e0eca18))
+
 ## 0.33.0-rc.326 (2022-02-03)
 
 
