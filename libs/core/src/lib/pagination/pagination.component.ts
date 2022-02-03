@@ -105,7 +105,8 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     }
     set itemsPerPage(value: number) {
         value = Math.floor(coerceNumberProperty(value, DEFAULT_ITEMS_PER_PAGE));
-        this._itemsPerPage = Math.min(value, this.totalItems);
+
+        this._itemsPerPage = Math.max(value, 1);
     }
 
     /**
@@ -275,9 +276,6 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     private _currentPage = 1;
 
     /** @hidden */
-    private _initialItemsPerPage: number;
-
-    /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
@@ -338,14 +336,6 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        if (changes?.itemsPerPage) {
-            this._initialItemsPerPage = changes.itemsPerPage.currentValue;
-        }
-
-        if (changes?.totalItems && this._initialItemsPerPage) {
-            this.itemsPerPage = this._initialItemsPerPage;
-        }
-
         if (changes?.currentPage) {
             this.currentPage = changes.currentPage.currentValue;
         }
