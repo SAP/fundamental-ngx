@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.328 (2022-02-03)
+
+
+### Bug Fixes
+
+* **ci:** fixing ci publish issue ([#7675](https://github.com/SAP/fundamental-ngx/issues/7675)) ([a4c1c53](https://github.com/SAP/fundamental-ngx/commit/a4c1c535f38fb06d6c2e41862acb035e194bb84b))
+
 ## 0.33.0-rc.327 (2022-02-03)
 
 
