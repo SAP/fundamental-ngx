@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.326 (2022-02-03)
+
+
+### Bug Fixes
+
+* **core:** disable max items per page ([#7668](https://github.com/SAP/fundamental-ngx/issues/7668)) ([e72d5ed](https://github.com/SAP/fundamental-ngx/commit/e72d5ed63c16b65e5e5953c5bb781148973ac55e))
+
 ## 0.33.0-rc.325 (2022-02-03)
 
 
