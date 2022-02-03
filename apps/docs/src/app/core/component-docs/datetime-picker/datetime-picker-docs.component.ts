@@ -14,6 +14,8 @@ import dateTimeFormatTs from '!./examples/datetime-format-example/datetime-forma
 import datetimeI18nComplexTs from '!./examples/datetime-picker-complex-i18n-example/datetime-picker-complex-i18n-example.component.ts?raw';
 import datetimeI18nComplexH from '!./examples/datetime-picker-complex-i18n-example/datetime-picker-complex-i18n-example.component.html?raw';
 
+import datetimeUpdateOnBlurSrcTs from '!./examples/datetime-picker-update-on-blur-example/datetime-picker-update-on-blur-example.component?raw';
+
 import dateTimeDisabledHtml from '!./examples/datetime-disabled-example/datetime-disabled-example.component.html?raw';
 import dateTimeDisabledTs from '!./examples/datetime-disabled-example/datetime-disabled-example.component.ts?raw';
 import dateTimeFormHtml from '!./examples/datetime-form-example/datetime-form-example.component.html?raw';
@@ -117,6 +119,15 @@ export class DatetimePickerDocsComponent {
             code: datetimeI18nComplexH,
             fileName: 'datetime-picker-complex-i18n-example',
             component: 'DatetimePickerComplexI18nExampleComponent'
+        }
+    ];
+
+    dateTimePickerUpdateOnBlur: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: datetimeUpdateOnBlurSrcTs,
+            fileName: 'datetime-picker-update-on-blur-example',
+            component: 'DateTimePickerUpdateOnBlurExampleComponent'
         }
     ];
 }

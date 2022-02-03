@@ -15,6 +15,7 @@ import { PlatformDatePickerExampleComponent } from './platform-date-picker-examp
 import { PlatformDatePickeri18nExampleComponent } from './platform-date-picker-examples/platform-date-picker-i18n-example.component';
 import { PlatformDatePickerDisableFuncExampleComponent } from './platform-date-picker-examples/platform-date-picker-disable-func-example.component';
 import { PlatformDatePickerFormatExampleComponent } from './platform-date-picker-examples/platform-date-picker-format-example.component';
+import { PlatformDatePickerUpdateOnBlurExampleComponent } from './platform-date-picker-examples/platform-date-picker-update-on-blur-example.component';
 
 const routes: Routes = [
     {
@@ -34,7 +35,8 @@ const routes: Routes = [
         PlatformDatePickerDisableFuncExampleComponent,
         PlatformDatePickerHeaderComponent,
         PlatformDatePickeri18nExampleComponent,
-        PlatformDatePickerFormatExampleComponent
+        PlatformDatePickerFormatExampleComponent,
+        PlatformDatePickerUpdateOnBlurExampleComponent
     ],
     imports: [
         RouterModule.forChild(routes),

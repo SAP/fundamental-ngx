@@ -12,6 +12,7 @@ import { PlatformDatetimePickerBasicExampleComponent } from './platform-datetime
 import { PlatformDatetimePickerDisableFunctionExampleComponent } from './platform-datetime-picker-examples/platform-datetime-picker-disable-function-example.component';
 import { PlatformDatetimePickerReactiveExampleComponent } from './platform-datetime-picker-examples/platform-datetime-picker-reactive-example.component';
 import { PlatformDatetimePickerTemplateExampleComponent } from './platform-datetime-picker-examples/platform-datetime-picker-template-example.component';
+import { PlatformDatetimePickerUpdateOnBlurExampleComponent } from './platform-datetime-picker-examples/platform-datetime-picker-update-on-blur-example.component';
 import { PlatformDatetimePickerHeaderComponent } from './platform-datetime-picker-header/platform-datetime-picker-header.component';
 
 const routes: Routes = [
@@ -40,7 +41,8 @@ const routes: Routes = [
         PlatformDatetimePickerBasicExampleComponent,
         PlatformDatetimePickerReactiveExampleComponent,
         PlatformDatetimePickerTemplateExampleComponent,
-        PlatformDatetimePickerDisableFunctionExampleComponent
+        PlatformDatetimePickerDisableFunctionExampleComponent,
+        PlatformDatetimePickerUpdateOnBlurExampleComponent
     ]
 })
 export class PlatformDatetimePickerDocsModule {}

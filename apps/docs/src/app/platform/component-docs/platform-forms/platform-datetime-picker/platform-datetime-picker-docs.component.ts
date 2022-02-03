@@ -7,6 +7,7 @@ import datetimePickerReactiveHtml from '!./platform-datetime-picker-examples/pla
 import datetimePickerReactiveTs from '!./platform-datetime-picker-examples/platform-datetime-picker-reactive-example.component.ts?raw';
 import datetimePickerTemplateHtml from '!./platform-datetime-picker-examples/platform-datetime-picker-template-example.component.html?raw';
 import datetimePickerTemplateTs from '!./platform-datetime-picker-examples/platform-datetime-picker-template-example.component.ts?raw';
+import datetimePickerUpdateOnBlurTs from '!./platform-datetime-picker-examples/platform-datetime-picker-update-on-blur-example.component.ts?raw';
 
 import { ExampleFile } from '../../../../documentation/core-helpers/code-example/example-file';
 
@@ -68,6 +69,15 @@ export class PlatformDatetimePickerDocsComponent {
             code: datetimePickerDisableFunctionTs,
             fileName: 'platform-datetime-picker-disable-function-example',
             component: 'PlatformDatetimePickerDisableFunctionExampleComponent'
+        }
+    ];
+
+    dateTimePickerUpdateOnBlur: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: datetimePickerUpdateOnBlurTs,
+            fileName: 'platform-datetime-picker-update-on-blur-example',
+            component: 'PlatformDatetimePickerUpdateOnBlurExampleComponent'
         }
     ];
 }

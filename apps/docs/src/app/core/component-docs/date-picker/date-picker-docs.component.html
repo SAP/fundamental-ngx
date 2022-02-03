@@ -10,7 +10,6 @@
     The default format for the input is provided via DateTimeFormats. See the 'Formatting' section for details on how to
     change this.
 </description>
-<description> The value for the input only changes the model on blur or an enter/return keystroke. </description>
 <component-example>
     <fd-date-picker-single-example></fd-date-picker-single-example>
 </component-example>
@@ -103,6 +102,20 @@
     <fd-date-picker-disable-func-example></fd-date-picker-disable-func-example>
 </component-example>
 <code-example [exampleFiles]="datePickerSingleDisable"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="update-on-blur" componentName="date-picker">
+    Date picker that updates it's value on blur.
+</fd-docs-section-title>
+<description>
+    Set <code>[processInputOnBlur]="true"</code> in order to move the processing of input value to whenever component
+    loses focus. You may also hit "enter" to apply the value
+</description>
+<component-example>
+    <fd-date-picker-update-on-blur-example></fd-date-picker-update-on-blur-example>
+</component-example>
+<code-example [exampleFiles]="datePickerUpdateOnBlur"></code-example>
 
 <separator></separator>
 

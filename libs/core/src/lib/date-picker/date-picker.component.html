@@ -37,9 +37,10 @@
                 [attr.aria-label]="_dateInputArialLabel"
                 [attr.aria-required]="required"
                 [attr.aria-describedby]="_formValueStateMessageId"
-                [(ngModel)]="_inputFieldDate"
-                (ngModelChange)="handleInputChange($event)"
-                (focus)="onTouched()"
+                [ngModel]="_inputFieldDate"
+                (keyup.enter)="handleInputChange($event.target.value, false)"
+                (ngModelChange)="handleInputChange($event, true)"
+                (blur)="handleInputChange($event.target.value, false)"
             />
         </fd-input-group>
     </fd-popover-control>

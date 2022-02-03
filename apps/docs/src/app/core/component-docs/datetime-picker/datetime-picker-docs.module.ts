@@ -10,6 +10,7 @@ import { DatetimeExampleComponent } from './examples/datetime-example/datetime-e
 import { DatetimeProgramExampleComponent } from './examples/datetime-program-example/datetime-program-example.component';
 import { DatetimeFormatExampleComponent } from './examples/datetime-format-example/datetime-format-example.component';
 import { DatetimeFormExampleComponent } from './examples/datetime-form-example/datetime-form-example.component';
+import { DateTimePickerUpdateOnBlurExampleComponent } from './examples/datetime-picker-update-on-blur-example/datetime-picker-update-on-blur-example.component';
 import { DatetimePickerAllowNullExampleComponent } from './examples/datetime-allow-null-example/datetime-allow-null-example.component';
 import { DatetimeDisabledExampleComponent } from './examples/datetime-disabled-example/datetime-disabled-example.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
@@ -49,6 +50,7 @@ const routes: Routes = [
         DatetimeExampleComponent,
         DatetimePickerDocsComponent,
         DatetimeFormExampleComponent,
+        DateTimePickerUpdateOnBlurExampleComponent,
         DatetimePickerHeaderComponent,
         DatetimeFormatExampleComponent,
         DatetimeProgramExampleComponent,
