@@ -36,7 +36,12 @@
         <ng-container [ngTemplateOutlet]="headerComponent.contentTemplateRef"></ng-container>
     </fd-dynamic-page-subheader>
 
-    <fd-tab-list *ngIf="_isTabbed" [stackContent]="stackContent" maxContentHeight="auto">
+    <fd-tab-list
+        *ngIf="_isTabbed"
+        [stackContent]="stackContent"
+        maxContentHeight="auto"
+        (selectedTabChange)="_onSelectedTabChange($event)"
+    >
         <ng-container *ngFor="let tab of _tabs">
             <fd-tab [title]="tab.tabLabel" [id]="tab.id">
                 <fd-dynamic-page-content>
