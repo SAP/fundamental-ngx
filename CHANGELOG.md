@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.325 (2022-02-03)
+
+
+### Features
+
+* **core,platform:** date & datetime picker - ability to process input value on blur ([#7599](https://github.com/SAP/fundamental-ngx/issues/7599)) ([a11523a](https://github.com/SAP/fundamental-ngx/commit/a11523a991823b5c5d5be82ebb5a9ee6b6a68392))
+
 ## 0.33.0-rc.324 (2022-02-03)
 
 
