@@ -1,11 +1,10 @@
 <ng-container *ngIf="totalItems">
-    <div
-        class="fd-pagination__per-page"
-        *ngIf="itemsPerPageTemplate || (itemsPerPageOptions && itemsPerPageOptions.length)"
-    >
+    <div class="fd-pagination__per-page" *ngIf="itemsPerPageTemplate || itemsPerPageOptions?.length">
+        <!-- note, that we're checking for the length of "itemsPerPageOptions", but using "_displayedPageSizeOptions" as "pageOptions" -->
+        <!-- these 2 can be different, as "_displayedPageSizeOptions" may also include "itemsPerPage" if it's not included in options -->
         <ng-container
             [ngTemplateOutlet]="itemsPerPageTemplate || perPage"
-            [ngTemplateOutletContext]="{ onSelect: _onChangePerPage }"
+            [ngTemplateOutletContext]="{ onSelect: _onChangePerPage, pageOptions: _displayedPageSizeOptions }"
         ></ng-container>
     </div>
 
@@ -189,7 +188,7 @@
     <span fd-form-label class="fd-pagination__total-label"> {{ showing.of }} Results </span>
 </ng-template>
 
-<ng-template #perPage>
+<ng-template #perPage let-pageOptions="pageOptions">
     <label fd-form-label class="fd-pagination__per-page-label">{{ itemsPerPageLabel }}:</label>
 
     <fd-select
@@ -198,6 +197,6 @@
         [value]="itemsPerPage"
         (valueChange)="_onChangePerPage($event)"
     >
-        <fd-option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</fd-option>
+        <fd-option *ngFor="let option of pageOptions" [value]="option">{{ option }}</fd-option>
     </fd-select>
 </ng-template>

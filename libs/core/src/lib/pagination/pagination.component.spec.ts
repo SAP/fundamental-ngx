@@ -100,40 +100,16 @@ describe('Pagination Component', () => {
             expect(component.itemsPerPage).toBe(10);
         });
 
-        it('should be no more than totalItems', async () => {
-            component.totalItems = 5;
-            component.itemsPerPage = 6;
+        it('should not accept values less than 1', async () => {
+            component.itemsPerPage = 0;
             fixture.detectChanges();
-
+            expect(component.itemsPerPage).toBe(1);
+            component.itemsPerPage = 5;
+            fixture.detectChanges();
             expect(component.itemsPerPage).toBe(5);
-        });
-
-        it('should correctly update itemsPerPage after the total has changed', async () => {
-            component.totalItems = 3000;
-            component.itemsPerPage = 25;
-            component.currentPage = 1;
-
-            // NgOnChanges won't be executed when changing inputs from code
-            component.ngOnChanges({ itemsPerPage: { currentValue: 25 } } as any);
-            component['_cdr'].detectChanges();
-
-            expect(component.itemsPerPage).toBe(25);
-
-            component.totalItems = 10;
-
-            // NgOnChanges won't be executed when changing inputs from code
-            component.ngOnChanges({ totalItems: 10 } as any);
-            component['_cdr'].detectChanges();
-
-            expect(component.itemsPerPage).toBe(10);
-
-            component.totalItems = 500;
-
-            // NgOnChanges won't be executed when changing inputs from code
-            component.ngOnChanges({ totalItems: 500 } as any);
-            component['_cdr'].detectChanges();
-
-            expect(component.itemsPerPage).toBe(25);
+            component.itemsPerPage = -1;
+            fixture.detectChanges();
+            expect(component.itemsPerPage).toBe(1);
         });
     });
 
@@ -182,13 +158,18 @@ describe('Pagination Component', () => {
             expect(component.itemsPerPageOptions).toEqual([10, 20, 30]);
         });
 
-        it('should set itemsPerPage to the first collection item', async () => {
+        it("should add itemsPerPage to the list of displayed options if it's not present there", async () => {
             component.totalItems = 100;
             component.itemsPerPage = 10;
             component.itemsPerPageOptions = [5, 15, 30];
             fixture.detectChanges();
 
+            expect(component.itemsPerPage).toEqual(10);
+            expect(component._displayedPageSizeOptions).toEqual([5, 10, 15, 30]);
+
+            component.itemsPerPage = 5;
             expect(component.itemsPerPage).toEqual(5);
+            expect(component._displayedPageSizeOptions).toEqual([5, 15, 30]);
         });
 
         it('should sort values ascending', async () => {

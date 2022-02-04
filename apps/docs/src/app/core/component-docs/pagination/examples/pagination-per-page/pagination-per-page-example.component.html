@@ -14,6 +14,7 @@
     <fd-pagination
         fd-toolbar-item
         [totalItems]="totalItems"
+        [itemsPerPage]="4"
         [itemsPerPageOptions]="[4, 8, 16]"
         [currentPage]="currentPage2"
         (pageChangeStart)="pageChanged2($event)"
@@ -22,17 +23,21 @@
 </div>
 <div>
     <h3>Custom items per page - list of buttons</h3>
+    <p>Use <code>let-pageOptions="pageOptions"</code> on the template to get the list of options from component</p>
+    <p>Use <code>let-onSelect="onSelect"</code> to pass the selection callback to the pagination component</p>
     <fd-pagination
         fd-toolbar-item
         [totalItems]="totalItems"
         [currentPage]="currentPage3"
+        [itemsPerPage]="5"
+        [itemsPerPageOptions]="[2, 5, 100]"
         [itemsPerPageTemplate]="itemsPerPageCustom"
         (pageChangeStart)="pageChanged3($event)"
         ariaLabel="Pagination with custom items"
         #pagination
     ></fd-pagination>
 
-    <ng-template #itemsPerPageCustom let-onSelect="onSelect">
+    <ng-template #itemsPerPageCustom let-onSelect="onSelect" let-pageOptions="pageOptions">
         <fd-segmented-button
             [ngModel]="customItemsPerPage"
             (ngModelChange)="onSelect($event); customItemsPerPage = $event"
@@ -42,7 +47,7 @@
                 [label]="count + ''"
                 [attr.aria-label]="'Show ' + count + ' items per page'"
                 [attr.value]="count"
-                *ngFor="let count of [2, 5, 100]"
+                *ngFor="let count of pageOptions"
             ></button>
         </fd-segmented-button>
     </ng-template>
