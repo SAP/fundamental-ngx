@@ -7,6 +7,7 @@ import buttonpositiverc from '!./examples/button-example/button-positive-example
 import buttonlayoutrc from '!./examples/button-example/button-layout-example.component.html?raw';
 import buttonnegativerc from '!./examples/button-example/button-negative-example.component.html?raw';
 import buttoncriticalrc from '!./examples/button-example/button-negative-example.component.html?raw';
+import buttonstaterc from '!./examples/button-example/button-state-example.component.html?raw';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
@@ -70,6 +71,14 @@ export class ButtonDocsComponent {
             language: 'html',
             code: buttoncriticalrc,
             fileName: 'button-critical-example'
+        }
+    ];
+
+    buttonStatesExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: buttonstaterc,
+            fileName: 'button-state-example'
         }
     ];
 }

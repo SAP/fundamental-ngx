@@ -41,3 +41,9 @@ export class ButtonNegativeExampleComponent {}
     templateUrl: './button-critical-example.component.html'
 })
 export class ButtonCriticalExampleComponent {}
+
+@Component({
+    selector: 'fd-button-state-example',
+    templateUrl: './button-state-example.component.html'
+})
+export class ButtonStateExampleComponent {}

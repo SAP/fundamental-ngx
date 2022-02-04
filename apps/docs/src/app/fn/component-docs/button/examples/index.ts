@@ -5,7 +5,8 @@ import {
     ButtonNegativeExampleComponent,
     ButtonPositiveExampleComponent,
     ButtonSecondaryExampleComponent,
-    ButtonCriticalExampleComponent
+    ButtonCriticalExampleComponent,
+    ButtonStateExampleComponent
 } from './button-example/button-example-component';
 
 export * from './button-example/button-example-component';
@@ -17,5 +18,6 @@ export const examples = [
     ButtonNegativeExampleComponent,
     ButtonPositiveExampleComponent,
     ButtonSecondaryExampleComponent,
-    ButtonCriticalExampleComponent
+    ButtonCriticalExampleComponent,
+    ButtonStateExampleComponent
 ];

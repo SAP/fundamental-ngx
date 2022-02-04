@@ -30,7 +30,9 @@ export type ButtonType = '' | 'secondary' | 'layout' | 'positive' | 'critical' |
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[attr.type]': 'type',
-        '[attr.disabled]': '_disabled || null'
+        '[attr.disabled]': '_disabled || null',
+        '[attr.aria-disabled]': '_disabled || null',
+        '[attr.aria-selected]': '_selected'
     }
 })
 export class ButtonComponent extends BaseButton implements OnChanges, CssClassBuilder, OnInit, OnDestroy {
@@ -50,6 +52,14 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
     set emphasized(value: BooleanInput) {
         this._emphasized = coerceBooleanProperty(value);
     }
+
+    @Input()
+    set selected(value: BooleanInput) {
+        this._selected = coerceBooleanProperty(value);
+    }
+
+    /** @hidden */
+    _selected: boolean;
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -91,6 +101,7 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
             this._disabled || this._ariaDisabled ? 'is-disabled' : '',
             this.glyph && !this.label ? 'fn-button--icon-only' : '',
             this._emphasized ? `fn-button--emphasized` : '',
+            this._selected ? `fn-button--selected` : '',
             this.class
         ];
     }
