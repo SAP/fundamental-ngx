@@ -26,7 +26,7 @@ const routes: Routes = [
     {
         path: 'fn',
         data: {
-            library: 'Experimental'
+            library: 'Fiori Next'
         },
         loadChildren: () => import('./fn/fn-documentation.module').then((m) => m.FnDocumentationModule)
     },

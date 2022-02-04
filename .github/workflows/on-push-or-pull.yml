@@ -331,7 +331,10 @@ jobs:
               if: ${{ github.ref == 'refs/heads/main' }}
             - run: echo "STAGE_NAME=Hotfix-release" >> $GITHUB_ENV
               if: ${{ github.ref == 'refs/heads/hotfix_tmp_branch_for_automated_release_do_not_use' }}
-
+            - run: |
+                  git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
+                  git fetch
+                  git checkout main
             - run: bash ./ci-scripts/publish.sh
               env:
                   GH_TOKEN: ${{ secrets.GHACTIONS }}
