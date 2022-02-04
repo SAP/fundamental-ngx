@@ -22,7 +22,7 @@
 
 ## <a name="1"></a>1. Description
 
-The `@fundamental-ngx/fn` library is an experimental set of [Angular](https://angular.io/) components built using [Fundamental Library Styles - Experimental](https://sap.github.io/@fundamental-styles/fn).
+The `@fundamental-ngx/fn` library is an Fiori Next set of [Angular](https://angular.io/) components built using [Fundamental Library Styles - FN](https://sap.github.io/@fundamental-styles/fn).
 
 The Fundamental Library Styles is a design system and HTML/CSS component library used to build modern product user experiences with the SAP look and feel.
 

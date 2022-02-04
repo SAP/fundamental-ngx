@@ -335,6 +335,7 @@ jobs:
             - run: bash ./ci-scripts/publish.sh
               env:
                   GH_TOKEN: ${{ secrets.GHACTIONS }}
+                  GHACTIONS: ${{ secrets.GHACTIONS }}
                   TRAVIS_BUILD_STAGE_NAME: ${{ env.STAGE_NAME }}
               if: ${{ github.ref == 'refs/heads/main'
                   || github.ref == 'refs/heads/tmp_branch_for_automated_release_do_not_use'
