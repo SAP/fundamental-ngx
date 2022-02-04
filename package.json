@@ -59,7 +59,7 @@
         "test:platform": "nx test platform --watch false --code-coverage true --browsers=ChromeHeadless",
         "active-test": "nx test core --watch true --browsers=ChromeHeadless",
         "test:coveralls": "cat ./coverage/libs/core/lcov.info  | ./node_modules/coveralls/bin/coveralls.js || echo -e \"Coveralls failed.\"",
-        "compile-typedoc-all": "npm run compile-typedoc-core && npm run compile-typedoc-platform && npm run compile-typedoc-moment-adapter",
+        "compile-typedoc-all": "npm run compile-typedoc-core && npm run compile-typedoc-platform && npm run compile-typedoc-moment-adapter && npm run transform-typedocs",
         "compile-typedoc-core": "rm -rf apps/docs/src/assets/typedoc/core && typedoc --out apps/docs/src/assets/typedoc/core libs/core/src/lib --tsconfig libs/core/src/lib/tsconfig.lib.json --hideGenerator --theme apps/docs/src/fd-typedoc",
         "compile-typedoc-moment-adapter": "rm -rf apps/docs/src/assets/typedoc/moment-adapter && typedoc --out apps/docs/src/assets/typedoc/moment-adapter libs/moment-adapter/src/lib --tsconfig libs/moment-adapter/tsconfig.lib.json --hideGenerator --theme apps/docs/src/fd-typedoc",
         "compile-typedoc-platform": "rm -rf apps/docs/src/assets/typedoc/platform && typedoc --out apps/docs/src/assets/typedoc/platform libs/platform/src/lib --tsconfig libs/platform/src/lib/tsconfig.lib.json --hideGenerator --theme apps/docs/src/fd-typedoc",
@@ -100,7 +100,8 @@
         "e2e-generate-report": "allure generate allure-results --clean -o allure-report",
         "prepare": "husky install",
         "pre-commit": "lint-staged",
-        "std-version": "standard-version --infile ./CHANGELOG.md --releaseCommitMessageFormat \"chore(release): version {{currentTag}} build ${GITHUB_RUN_NUMBER} [ci skip]\" --header \"\""
+        "std-version": "standard-version --infile ./CHANGELOG.md --releaseCommitMessageFormat \"chore(release): version {{currentTag}} build ${GITHUB_RUN_NUMBER} [ci skip]\" --header \"\"",
+        "transform-typedocs": "node ./transform-typedoc-files.js"
     },
     "publishConfig": {
         "registry": "https://repository.hybris.com/api/npm/npm-repository/"
