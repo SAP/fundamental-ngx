@@ -1214,6 +1214,10 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
     /** @hidden */
     _getCellStyles(column: TableColumn): { [styleProp: string]: number | string } {
+        if (!this._tableWidthPx) {
+            return {};
+        }
+
         const styles: { [property: string]: number | string } = {};
 
         if (this._freezableColumns.has(column.name)) {
