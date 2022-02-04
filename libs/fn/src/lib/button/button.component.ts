@@ -12,8 +12,9 @@ import {
 import { BaseButton } from '@fundamental-ngx/core/button';
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { Subscription } from 'rxjs';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 
-export type ButtonType = '' | 'emphasized' | 'secondary' | 'layout' | 'positive' | 'critical' | 'negative';
+export type ButtonType = '' | 'secondary' | 'layout' | 'positive' | 'critical' | 'negative';
 
 /**
  * The Button component is used to activate or deactivate an element.
@@ -38,15 +39,23 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
     class = '';
 
     /** The type of the button. Types include:
-     * '' | 'secondary' | 'flat' | 'link' | 'outline' | 'naked'.
+     * '' | 'secondary' | 'layout' | 'positive' | 'critical' | 'negative'.
      * Leave empty for default (Standard button).'
      * Default value is set to ''
      */
     @Input()
     fnType: ButtonType = '';
 
+    @Input()
+    set emphasized(value: BooleanInput) {
+        this._emphasized = coerceBooleanProperty(value);
+    }
+
     /** @hidden */
     private _subscriptions = new Subscription();
+
+    /** @hidden */
+    private _emphasized: boolean;
 
     /** @hidden */
     constructor(private _elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) {
@@ -81,6 +90,7 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
             this.fnType ? `fn-button--${this.fnType}` : '',
             this._disabled || this._ariaDisabled ? 'is-disabled' : '',
             this.glyph && !this.label ? 'fn-button--icon-only' : '',
+            this._emphasized ? `fn-button--emphasized` : '',
             this.class
         ];
     }
