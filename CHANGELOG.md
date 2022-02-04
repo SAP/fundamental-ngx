@@ -1,4 +1,11 @@
 
+### 0.33.1-rc.0 (2022-02-04)
+
+
+### Bug Fixes
+
+* **core,platform:** update e2e and unit tests ([#7676](https://github.com/SAP/fundamental-ngx/issues/7676)) ([1c96e74](https://github.com/SAP/fundamental-ngx/commit/1c96e7436ca8e6d4ae99528776eb6b7cd4c0796d))
+
 ## [0.33.0](https://github.com/SAP/fundamental-ngx/compare/v0.33.0-rc.328...v0.33.0) (2022-02-04)
 
 ## 0.33.0-rc.328 (2022-02-03)
