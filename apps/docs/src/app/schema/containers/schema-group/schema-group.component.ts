@@ -1,12 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
 import { Property } from '../../models/schema.model';
 
 @Component({
     selector: 'schema-group',
     templateUrl: 'schema-group.component.html',
-    styleUrls: ['schema-group.component.scss'],
-    encapsulation: ViewEncapsulation.ShadowDom
+    styleUrls: ['schema-group.component.scss']
 })
 export class SchemaGroupComponent implements OnInit {
     @Input() schemaGroup: FormGroup;
