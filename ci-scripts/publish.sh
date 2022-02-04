@@ -38,7 +38,7 @@ else
    exit 1
 fi
 
-git push --follow-tags "https://$GHACTIONS@github.com/$TRAVIS_REPO_SLUG.git" $CURRENT_BRANCH > /dev/null;
+git push --follow-tags "https://$GHACTIONS@github.com/$TRAVIS_REPO_SLUG.git" main > /dev/null;
 # git remote -v
 # git status
 # git push --follow-tags origin main -v --no-verify
