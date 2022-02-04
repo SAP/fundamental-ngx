@@ -3,7 +3,7 @@
 set -u -e
 
 #PACKAGES=(core platform moment-adapter fn)
-CURRENT_BRANCH=refs/heads/main
+# CURRENT_BRANCH=refs/heads/main
 
 git config --global user.email $GH_EMAIL
 git config --global user.name $GH_NAME
@@ -17,7 +17,7 @@ if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Pre-release" ]]; then
 
 elif [[ $TRAVIS_BUILD_STAGE_NAME =~ "Release" ]]; then
    echo "################ Running Master deploy tasks ################"
-   CURRENT_BRANCH=refs/heads/main
+  #  CURRENT_BRANCH=${TRAVIS_BRANCH}
 
   # delete temp branch
   git push "https://$GHACTIONS@github.com/$TRAVIS_REPO_SLUG.git" ":$TRAVIS_BRANCH" -v
