@@ -20,7 +20,7 @@ elif [[ $TRAVIS_BUILD_STAGE_NAME =~ "Release" ]]; then
    CURRENT_BRANCH=refs/heads/main
 
   # delete temp branch
-  git push "https://$GHACTIONS@github.com/$TRAVIS_REPO_SLUG.git" ":$TRAVIS_BRANCH" > /dev/null 2>&1;
+  git push "https://$GHACTIONS@github.com/$TRAVIS_REPO_SLUG.git" ":$TRAVIS_BRANCH" > /dev/null;
   std_ver=$(npm run std-version)
   release_tag=$(echo "$std_ver" | grep "tagging release" | awk '{print $4}')
 
@@ -37,6 +37,8 @@ else
    echo "Missing required stage name"
    exit 1
 fi
+
+echo "current branch " ${CURRENT_BRANCH}
 
 git push --follow-tags "https://$GHACTIONS@github.com/$TRAVIS_REPO_SLUG.git" main > /dev/null;
 # git remote -v
