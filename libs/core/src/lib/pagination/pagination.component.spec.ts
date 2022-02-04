@@ -158,7 +158,7 @@ describe('Pagination Component', () => {
             expect(component.itemsPerPageOptions).toEqual([10, 20, 30]);
         });
 
-        it('should add itemsPerPage to the list of displayed options if it\'s not present there', async () => {
+        it("should add itemsPerPage to the list of displayed options if it's not present there", async () => {
             component.totalItems = 100;
             component.itemsPerPage = 10;
             component.itemsPerPageOptions = [5, 15, 30];
@@ -166,6 +166,10 @@ describe('Pagination Component', () => {
 
             expect(component.itemsPerPage).toEqual(10);
             expect(component._displayedPageSizeOptions).toEqual([5, 10, 15, 30]);
+
+            component.itemsPerPage = 5;
+            expect(component.itemsPerPage).toEqual(5);
+            expect(component._displayedPageSizeOptions).toEqual([5, 15, 30]);
         });
 
         it('should sort values ascending', async () => {

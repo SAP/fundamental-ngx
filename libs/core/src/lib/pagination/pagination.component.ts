@@ -494,9 +494,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     private _updateDisplayedPageSizeOptions(): void {
         // If no page size is provided, use the first page size option or the default page size.
         if (!this.itemsPerPage) {
-            this._itemsPerPage = this.itemsPerPageOptions.length ?
-                this.itemsPerPageOptions[0] :
-                DEFAULT_ITEMS_PER_PAGE;
+            this._itemsPerPage = this.itemsPerPageOptions.length ? this.itemsPerPageOptions[0] : DEFAULT_ITEMS_PER_PAGE;
         }
 
         this._displayedPageSizeOptions = this.itemsPerPageOptions?.slice() ?? [];

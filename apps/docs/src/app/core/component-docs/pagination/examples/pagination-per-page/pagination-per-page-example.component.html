@@ -14,6 +14,7 @@
     <fd-pagination
         fd-toolbar-item
         [totalItems]="totalItems"
+        [itemsPerPage]="4"
         [itemsPerPageOptions]="[4, 8, 16]"
         [currentPage]="currentPage2"
         (pageChangeStart)="pageChanged2($event)"
@@ -28,7 +29,8 @@
         fd-toolbar-item
         [totalItems]="totalItems"
         [currentPage]="currentPage3"
-        [itemsPerPageOptions]="[2 ,5, 100]"
+        [itemsPerPage]="5"
+        [itemsPerPageOptions]="[2, 5, 100]"
         [itemsPerPageTemplate]="itemsPerPageCustom"
         (pageChangeStart)="pageChanged3($event)"
         ariaLabel="Pagination with custom items"

@@ -1,8 +1,5 @@
 <ng-container *ngIf="totalItems">
-    <div
-        class="fd-pagination__per-page"
-        *ngIf="itemsPerPageTemplate || itemsPerPageOptions?.length"
-    >
+    <div class="fd-pagination__per-page" *ngIf="itemsPerPageTemplate || itemsPerPageOptions?.length">
         <!-- note, that we're checking for the length of "itemsPerPageOptions", but using "_displayedPageSizeOptions" as "pageOptions" -->
         <!-- these 2 can be different, as "_displayedPageSizeOptions" may also include "itemsPerPage" if it's not included in options -->
         <ng-container

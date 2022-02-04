@@ -29,8 +29,8 @@ export class SliderPo extends BaseComponentPo {
     sliderLabel = '.fd-slider__label';
 
     // playground selectors
-    sliderTypeMenu = this.playgroundExamples + '.fd-select__control';
-    sliderTypeOptions = this.playgroundExamples + 'fd-option';
+    sliderTypeMenu = this.playgroundExamples + '#playgroundmode';
+    sliderTypeOptions = this.playgroundExamples + 'option';
     sliderInput = this.playgroundExamples + 'input';
     firstSliderLabel = this.playgroundExamples + this.sliderLabel + ':first-of-type';
     lastSliderLabel = this.playgroundExamples + this.sliderLabel + ':last-of-type';

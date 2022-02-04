@@ -109,7 +109,8 @@ describe('Table component test suite', () => {
         optionCondensed,
         optionCozy,
         optionCompact,
-        dropdown,
+        playgroundContentDensityDropdown,
+        playgroundSelectionModeDropdown,
         optionSingle,
         optionMultiple,
         tableCellFixed,
@@ -671,7 +672,7 @@ describe('Table component test suite', () => {
         });
     });
 
-    xdescribe('Check playground', () => {
+    describe('Check playground', () => {
         it('should check table item single selection', () => {
             scrollIntoView(playgroundExample);
             setValue(playgroundExample + inputFields, tableCellArr[1]);
@@ -691,43 +692,43 @@ describe('Table component test suite', () => {
 
         it('should check table content density', () => {
             scrollIntoView(playgroundExample);
-            click(playgroundExample + dropdown);
+            click(playgroundContentDensityDropdown);
             click(optionCompact);
             expect(getElementClass(playgroundExample + fdpTable)).toContain('fd-table--compact');
 
-            click(playgroundExample + dropdown);
+            click(playgroundContentDensityDropdown);
             click(optionCozy);
             expect(getElementClass(playgroundExample + fdpTable)).toContain('fdp-table');
 
-            click(playgroundExample + dropdown);
+            click(playgroundContentDensityDropdown);
             click(optionCondensed);
             expect(getElementClass(playgroundExample + fdpTable)).toContain('fd-table--condensed');
         });
 
-        it('should should check table selection mode', () => {
+        it('should check table selection mode', () => {
             scrollIntoView(playgroundExample);
-            click(playgroundExample + dropdown, 1);
+            click(playgroundSelectionModeDropdown);
             click(optionSingle);
             expect(getElementClass(playgroundExample + tableCellFixed)).toContain('fd-table__cell--fixed');
 
-            click(playgroundExample + dropdown, 1);
+            click(playgroundSelectionModeDropdown);
             click(optionMultiple);
             expect(getElementClass(playgroundExample + tableCellFixed)).toContain('fd-table__cell--checkbox');
         });
 
-        it('should should check table without horizontal borders', () => {
+        it('should check table without horizontal borders', () => {
             scrollIntoView(playgroundExample);
             click(playgroundExample + checkbox);
             expect(getElementClass(playgroundExample + fdpTable)).toContain('fd-table--no-horizontal-borders');
         });
 
-        it('should should check table without vertical borders', () => {
+        it('should check table without vertical borders', () => {
             scrollIntoView(playgroundExample);
             click(playgroundExample + checkbox, 1);
             expect(getElementClass(playgroundExample + fdpTable)).toContain('fd-table--no-vertical-borders');
         });
 
-        it('should should check table without all borders', () => {
+        it('should check table without all borders', () => {
             scrollIntoView(playgroundExample);
             click(playgroundExample + checkbox, 2);
             expect(getElementClass(playgroundExample + fdpTable)).toContain(
