@@ -1,4 +1,11 @@
 
+### 0.33.1-rc.1 (2022-02-04)
+
+
+### Bug Fixes
+
+* **docs:** lowercase typedoc files ([#7678](https://github.com/SAP/fundamental-ngx/issues/7678)) ([691e48b](https://github.com/SAP/fundamental-ngx/commit/691e48bb32143eaeb1894f8e0c40c22d8bb1c9d9))
+
 ### 0.33.1-rc.0 (2022-02-04)
 
 
