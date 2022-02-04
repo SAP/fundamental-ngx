@@ -34,13 +34,13 @@ import {
     FormFieldControl,
     isJsObject,
     isOptionItem,
-    isString,
-    OptionItem
+    isString
 } from '@fundamental-ngx/platform/shared';
 import { SelectConfig } from '../select.config';
 import { TextAlignment } from '../../combobox';
+import { SelectOptionItem } from './../models/select.models';
 
-export type FdpSelectData<T> = OptionItem[] | Observable<T[]> | T[];
+export type FdpSelectData<T> = SelectOptionItem[] | Observable<T[]> | T[];
 
 /**
  * @deprecated
@@ -180,6 +180,7 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
     maxWidth?: number;
 
     /** Data for suggestion list */
+    @Input()
     get list(): any {
         return this._optionItems;
     }
@@ -230,7 +231,7 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
      * List of option items
      * @hidden
      * */
-    _optionItems: OptionItem[];
+    _optionItems: SelectOptionItem[];
 
     /** @hidden */
     _subscriptions = new Subscription();
@@ -351,7 +352,7 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
     }
 
     /** @hidden */
-    handlePressEnter(event: KeyboardEvent, value: OptionItem): void {
+    handlePressEnter(event: KeyboardEvent, value: SelectOptionItem): void {
         if (!KeyUtil.isKeyCode(event, ENTER)) {
             return;
         }
@@ -392,12 +393,12 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
      * Convert original data to OptionItems Interface
      * @hidden
      */
-    private _convertToOptionItems(items: any[]): OptionItem[] {
+    private _convertToOptionItems(items: any[]): SelectOptionItem[] {
         const item = items[0];
 
         const elementTypeIsOptionItem = isOptionItem(item);
         if (elementTypeIsOptionItem) {
-            return items as OptionItem[];
+            return items as SelectOptionItem[];
         }
 
         const elementTypeIsObject = isJsObject(item);
@@ -417,7 +418,7 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
      * Convert data to OptionItems Interface
      * @hidden
      */
-    private _convertObjectsToOptionItems(items: any[]): OptionItem[] {
+    private _convertObjectsToOptionItems(items: any[]): SelectOptionItem[] {
         if (this.showSecondaryText && this.secondaryKey) {
             return this._convertObjectsToSecondaryOptionItems(items);
         } else {
@@ -429,15 +430,15 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
      * Convert object[] data to Secondary OptionItems Interface
      * @hidden
      */
-    private _convertObjectsToSecondaryOptionItems<K>(items: K[]): OptionItem[] {
-        const selectItems: OptionItem[] = [];
+    private _convertObjectsToSecondaryOptionItems<K>(items: K[]): SelectOptionItem[] {
+        const selectItems: SelectOptionItem[] = [];
 
         for (let i = 0; i < items.length; i++) {
             const value = items[i];
             selectItems.push({
                 label: this.displayValue(value),
                 secondaryText: this.objectGet(value, this.secondaryKey),
-                value
+                value: this.lookupValue(value)
             });
         }
 
@@ -448,8 +449,8 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
      * Convert Primitive data(Boolean, String, Number) to OptionItems Interface
      * @hidden
      */
-    private _convertPrimitiveToOptionItems(items: any[]): OptionItem[] {
-        const selectItems: OptionItem[] = [];
+    private _convertPrimitiveToOptionItems(items: string[]): SelectOptionItem[] {
+        const selectItems: SelectOptionItem[] = [];
 
         for (let i = 0; i < items.length; i++) {
             const value = items[i];
@@ -463,8 +464,8 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
      * Convert object[] to OptionItems Interface (Default)
      * @hidden
      */
-    private _convertObjectsToDefaultOptionItems(items: any[]): OptionItem[] {
-        const selectItems: OptionItem[] = [];
+    private _convertObjectsToDefaultOptionItems(items: any[]): SelectOptionItem[] {
+        const selectItems: SelectOptionItem[] = [];
 
         for (let i = 0; i < items.length; i++) {
             const value = items[i];

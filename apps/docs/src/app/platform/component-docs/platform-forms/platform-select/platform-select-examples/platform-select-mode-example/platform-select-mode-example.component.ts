@@ -1,7 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-import { OptionItem } from '@fundamental-ngx/platform/shared';
-import { FdpSelectionChangeEvent } from '@fundamental-ngx/platform/form';
+import { FdpSelectionChangeEvent, SelectOptionItem } from '@fundamental-ngx/platform/form';
 
 export class Fruit {
     id: string;
@@ -28,10 +27,9 @@ export class PlatformSelectModeExampleComponent {
         new Fruit('D', 'pineapple', 11),
         new Fruit('E', 'watermelon', 10)
     ];
-    option = this.userList.map<OptionItem>((item) => ({
+    option = this.userList.map<SelectOptionItem>((item) => ({
         label: item.name + item.id,
-        value: item,
-        triggerValue: `(${item.id})`,
+        value: item.name,
         disabled: item.id === 'B',
         icon: ''
     }));

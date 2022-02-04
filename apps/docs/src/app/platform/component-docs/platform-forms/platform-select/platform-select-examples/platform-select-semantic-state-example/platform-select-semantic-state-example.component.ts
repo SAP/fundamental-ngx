@@ -29,7 +29,7 @@ export class PlatformSelectSemanticStateExampleComponent {
     ];
     option = this.userList.map<OptionItem>((item) => ({
         label: item.name + item.id,
-        value: item,
+        value: item.name,
         triggerValue: `(${item.id})`,
         disabled: item.id === 'B',
         icon: ''
