@@ -40,7 +40,7 @@ fi
 
 git status
 
-git push --follow-tags "https://$GHACTIONS@github.com/$TRAVIS_REPO_SLUG.git" origin main -v
+git push --follow-tags "https://$GHACTIONS@github.com/$TRAVIS_REPO_SLUG.git" -v
 # git remote -v
 # git status
 # git push --follow-tags origin main -v --no-verify
