@@ -39,7 +39,6 @@ else
 fi
 
 git status
-echo "current branch " ${CURRENT_BRANCH}
 
 git push --follow-tags "https://$GHACTIONS@github.com/$TRAVIS_REPO_SLUG.git" origin main -v
 # git remote -v
