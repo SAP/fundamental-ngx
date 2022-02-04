@@ -1,4 +1,11 @@
 
+### 0.33.1-rc.2 (2022-02-04)
+
+
+### Bug Fixes
+
+* **platform:** select - display proper value ([#7680](https://github.com/SAP/fundamental-ngx/issues/7680)) ([9bc907f](https://github.com/SAP/fundamental-ngx/commit/9bc907f1e94e441b49441c7ae224a571561bd425))
+
 ### 0.33.1-rc.1 (2022-02-04)
 
 
