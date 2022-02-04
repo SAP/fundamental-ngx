@@ -13,7 +13,7 @@ import { BaseButton } from '@fundamental-ngx/core/button';
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { Subscription } from 'rxjs';
 
-export type ButtonType = '' | 'secondary' | 'flat' | 'link' | 'outline' | 'naked';
+export type ButtonType = '' | 'emphasized' | 'secondary' | 'layout' | 'positive' | 'critical' | 'negative';
 
 /**
  * The Button component is used to activate or deactivate an element.
