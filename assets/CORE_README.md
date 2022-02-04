@@ -38,18 +38,6 @@ Prior knowledge of Angular is recommended, to use the fundamental-ngx library.
 
 ## <a name="3"></a>3. Versioning
 
-npm package [fundamental-ngx](https://npmjs.com/package/fundamental-ngx) version `0.10.0` is compiled with Angular 7. It supports Angular 6 and 7 versions.
-This version is not supported by bug fixes.
-
-npm package [@fundamental-ngx/core](https://www.npmjs.com/package/@fundamental-ngx/core) version `0.11.x` is compiled with Angular 8.
-It supports Angular 8 version and newer. This version will have merged some bug-fixes.
-
-npm package [@fundamental-ngx/core](https://www.npmjs.com/package/@fundamental-ngx/core) versions `0.12.y - 0.15.z` are compiled with Angular 8.
-It supports the current Angular 8 version and newer. This version also can be used along with enabled IVY.
-
-npm package [@fundamental-ngx/core](https://www.npmjs.com/package/@fundamental-ngx/core) versions `0.16.y - 0.18.z` are compiled with Angular 8.
-It supports the current Angular 9 version and newer. This version also can be used along with enabled IVY.
-
 Check the [Breaking Changes](https://github.com/SAP/fundamental-ngx/wiki#breaking-changes) for the latest patches changes.
 
 ## <a name="4"></a>4. Getting Started
@@ -67,7 +55,6 @@ For an existing Angular CLI application,
 
 1. **Edit your tsconfig.**
    Edit the `target` in your `tsconfig.json` to `es5`. The library is incompatible with later versions.
-   
 1. **Import the modules you want to use.**
 
     To add the entire library, add the following import to your main application module.
@@ -107,11 +94,10 @@ For an existing Angular CLI application,
     })
     export class DemoModule { }
     ```
-   
+
 1. **Provide the RtlService.**
    In your main application module, add `RtlService` to the list of providers. This service is needed to ensure proper right-to-left functionality for
    users with their browser set to an RTL language.
-   
 1. **Provide the ContentDensityService.**
    In your main application module, you will also need to add `ContentDensityService` to the list of providers if you wish to manage the content density of
    you application from a single point.

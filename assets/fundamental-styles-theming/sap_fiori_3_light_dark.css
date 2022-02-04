@@ -214,4 +214,36 @@
   --fdTool_Header_Object_Status_Background_Color_Inverted_Informative: var(--sapShell_InformativeColor);
   /* Micro Process Flow */
   --fdMicro_Process_Flow_Icon_Color: var(--sapContent_ContrastIconColor);
+  /* Scrollbar */
+  --fdScrollbar_Track_Color: var(--sapScrollBar_TrackColor);
+  --fdScrollbar_Thumb_Color: var(--sapScrollBar_FaceColor);
+  --fdScrollbar_Thumb_Hover_Color: var(--sapScrollBar_Hover_FaceColor);
+  --fdScrollbar_Dimension: var(--sapScrollBar_Dimension);
+  /* Progress Indicator */
+  --fdProgress_Indicator_Background_Color_Neutral: var(--sapHighlightColor);
+  --fdProgress_Indicator_Background_Color_Informative: var(--sapHighlightColor);
+  --fdProgress_Indicator_Background_Color_Positive: var(--sapHighlightColor);
+  --fdProgress_Indicator_Background_Color_Negative: var(--sapHighlightColor);
+  --fdProgress_Indicator_Background_Color_Critical: var(--sapHighlightColor);
+  --fdProgress_Indicator_Border_Right: none;
+  --fdProgress_Icon_Offset_Right: 0;
+  --fdProgress_Icon_Offset_Left: 0;
+  --fdProgress_Icon_Informative: "";
+  --fdProgress_Icon_Positive: "";
+  --fdProgress_Icon_Negative: "";
+  --fdProgress_Icon_Critical: "";
+  /** Illustrated Message */
+  --sapIllus_BrandColorPrimary: var(--sapContent_Illustrative_Color1);
+  --sapIllus_BrandColorSecondary: var(--sapContent_Illustrative_Color2);
+  --sapIllus_AccentColor: var(--sapContent_Illustrative_Color3);
+  --sapIllus_StrokeDetailColor: var(--sapContent_Illustrative_Color4);
+  --sapIllus_Layering1: var(--sapContent_Illustrative_Color5);
+  --sapIllus_Layering2: var(--sapContent_Illustrative_Color6);
+  --sapIllus_BackgroundColor: var(--sapContent_Illustrative_Color7);
+  --sapIllus_ObjectFillColor: var(--sapContent_Illustrative_Color8);
+  --sapIllus_NoColor: none;
+  --sapIllus_PatternShadow: url(#sapIllus_PatternShadow);
+  --sapIllus_PatternHighlight: url(#sapIllus_PatternHighlight);
 }
+
+/*# sourceMappingURL=sap_fiori_3_light_dark.css.map */
