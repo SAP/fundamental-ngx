@@ -14,7 +14,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
+import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
@@ -28,7 +28,7 @@ import { AggregatedYear } from './models/aggregated-year';
 import { CalendarDayViewComponent } from './calendar-views/calendar-day-view/calendar-day-view.component';
 import { CalendarYearViewComponent } from './calendar-views/calendar-year-view/calendar-year-view.component';
 import { CalendarMonthViewComponent } from './calendar-views/calendar-month-view/calendar-month-view.component';
-import { CalendarHeaderComponent } from './calendar-header/calendar-header.component';
+import { CalendarHeaderComponent, NavigationButtonDisableFunction } from './calendar-header/calendar-header.component';
 import { CalendarService } from './calendar.service';
 import { createMissingDateImplementationError } from './calendar-errors';
 import { CalendarAggregatedYearViewComponent } from './calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
@@ -212,11 +212,35 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
      */
     _currentlyDisplayed: CalendarCurrent;
 
+    /**
+     * @hidden
+     */
+    get currentlyDisplayed(): CalendarCurrent {
+        return this._currentlyDisplayed;
+    }
+
+    set currentlyDisplayed(currentlyDisplayed: CalendarCurrent) {
+        this._currentlyDisplayed = currentlyDisplayed;
+        if (this.previousButtonDisableFunction && this.nextButtonDisableFunction) {
+            this._setNavigationButtonsStates();
+        }
+    }
+
     /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
     private _adapterStartingDayOfWeek: DaysOfWeek;
+
+    /** @hidden */
+    private _previousButtonDisableFunction: NavigationButtonDisableFunction<D>;
+
+    /** @hidden */
+    private _nextButtonDisableFunction: NavigationButtonDisableFunction<D>;
+
+    public previousButtonDisabled: boolean;
+
+    public nextButtonDisabled: boolean;
 
     /** That allows to define function that should happen, when focus should normally escape of component */
     @Input()
@@ -234,15 +258,55 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
 
     /**
      * Function used to disable previous button in the calendar header.
+     * @param date selected date
+     * @param currentlyDisplayedDate currently displayed date
+     * @param activeView current view of calendar
      */
     @Input()
-    previousButtonDisableFunction: (date: D) => boolean = () => false;
+    get previousButtonDisableFunction(): NavigationButtonDisableFunction<D> {
+        return this._previousButtonDisableFunction;
+    }
+
+    set previousButtonDisableFunction(disableFunc: NavigationButtonDisableFunction<D>) {
+        if (typeof disableFunc === 'function') {
+            this._previousButtonDisableFunction = disableFunc;
+            if (this.currentlyDisplayed) {
+                this.previousButtonDisabled = this.previousButtonDisableFunction(
+                    this.selectedDate,
+                    this.currentlyDisplayed,
+                    this.activeView
+                );
+            }
+        } else {
+            throw new Error('previousButtonDisableFunction must be a function');
+        }
+    }
 
     /**
      * Function used to disable next button in the calendar header.
+     * @param date selected date
+     * @param currentlyDisplayedDate currently displayed date
+     * @param activeView current view of calendar
      */
     @Input()
-    nextButtonDisableFunction: (date: D) => boolean = () => false;
+    get nextButtonDisableFunction(): NavigationButtonDisableFunction<D> {
+        return this._nextButtonDisableFunction;
+    }
+
+    set nextButtonDisableFunction(disableFunc: NavigationButtonDisableFunction<D>) {
+        if (typeof disableFunc === 'function') {
+            this._nextButtonDisableFunction = disableFunc;
+            if (this.currentlyDisplayed) {
+                this.nextButtonDisabled = this.nextButtonDisableFunction(
+                    this.selectedDate,
+                    this.currentlyDisplayed,
+                    this.activeView
+                );
+            }
+        } else {
+            throw new Error('nextButtonDisableFunction must be a function');
+        }
+    }
 
     /**
      * Function used to disable certain dates in the calendar for the range start selection.
@@ -348,7 +412,7 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
      * @hidden
      * Function that implements Validator Interface, adds validation support for forms
      */
-    validate(control: AbstractControl): {
+    validate(): {
         [key: string]: any;
     } {
         return this.isModelValid()
@@ -371,7 +435,7 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
     }
 
     /** @hidden */
-    setDisabledState?(isDisabled: boolean): void {
+    setDisabledState?(): void {
         // Not needed
     }
 
@@ -398,6 +462,8 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
         if (activeView === 'aggregatedYear') {
             this.onYearsRangeViewSelected();
         }
+
+        this._setNavigationButtonsStates();
     }
 
     /**
@@ -406,6 +472,7 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
      */
     selectedDateChanged(date: D): void {
         this.selectedDate = date;
+        this._setNavigationButtonsStates();
         this.onChange(date);
         this.onTouched();
         this.selectedDateChange.emit(date);
@@ -443,6 +510,7 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
                 break;
         }
         this.onTouched();
+        this._setNavigationButtonsStates();
     }
 
     /** Function that handles previous arrow icon click, depending on current view it changes month, year or list of years */
@@ -462,40 +530,41 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
                 break;
         }
         this.onTouched();
+        this._setNavigationButtonsStates();
     }
 
     /** Function that allows to switch actual view to next month */
     displayNextMonth(): void {
-        if (this._currentlyDisplayed.month === 12) {
-            this._currentlyDisplayed = { year: this._currentlyDisplayed.year + 1, month: 1 };
+        if (this.currentlyDisplayed.month === 12) {
+            this.currentlyDisplayed = { year: this.currentlyDisplayed.year + 1, month: 1 };
         } else {
-            this._currentlyDisplayed = {
-                year: this._currentlyDisplayed.year,
-                month: this._currentlyDisplayed.month + 1
+            this.currentlyDisplayed = {
+                year: this.currentlyDisplayed.year,
+                month: this.currentlyDisplayed.month + 1
             };
         }
     }
 
     /** Function that allows to switch actual view to previous month */
     displayPreviousMonth(): void {
-        if (this._currentlyDisplayed.month <= 1) {
-            this._currentlyDisplayed = { year: this._currentlyDisplayed.year - 1, month: 12 };
+        if (this.currentlyDisplayed.month <= 1) {
+            this.currentlyDisplayed = { year: this.currentlyDisplayed.year - 1, month: 12 };
         } else {
-            this._currentlyDisplayed = {
-                year: this._currentlyDisplayed.year,
-                month: this._currentlyDisplayed.month - 1
+            this.currentlyDisplayed = {
+                year: this.currentlyDisplayed.year,
+                month: this.currentlyDisplayed.month - 1
             };
         }
     }
 
     /** Function that allows to switch actual view to next year */
     displayNextYear(): void {
-        this._currentlyDisplayed = { month: this._currentlyDisplayed.month, year: this._currentlyDisplayed.year + 1 };
+        this.currentlyDisplayed = { month: this.currentlyDisplayed.month, year: this.currentlyDisplayed.year + 1 };
     }
 
     /** Function that allows to switch actual view to previous year */
     displayPreviousYear(): void {
-        this._currentlyDisplayed = { month: this._currentlyDisplayed.month, year: this._currentlyDisplayed.year - 1 };
+        this.currentlyDisplayed = { month: this.currentlyDisplayed.month, year: this.currentlyDisplayed.year - 1 };
     }
 
     /** Function that allows to switch actually displayed list of year to next year list*/
@@ -524,7 +593,7 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
      */
     setCurrentlyDisplayed(date: D): void {
         if (this._dateTimeAdapter.isValid(date)) {
-            this._currentlyDisplayed = {
+            this.currentlyDisplayed = {
                 month: this._dateTimeAdapter.getMonth(date),
                 year: this._dateTimeAdapter.getYear(date)
             };
@@ -543,7 +612,7 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
      * Function that handles changes from month view child component, changes actual view and changes currently displayed month
      */
     handleMonthViewChange(month: number): void {
-        this._currentlyDisplayed = { month, year: this._currentlyDisplayed.year };
+        this.currentlyDisplayed = { month, year: this.currentlyDisplayed.year };
         this.activeView = 'day';
         this.onDaysViewSelected();
         this.activeViewChange.emit(this.activeView);
@@ -551,13 +620,16 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
 
     selectedYear(yearSelected: number): void {
         this.activeView = 'day';
-        this._currentlyDisplayed.year = yearSelected;
+        this.currentlyDisplayed.year = yearSelected;
         this.onDaysViewSelected();
     }
 
     selectedYears(yearsSelected: AggregatedYear): void {
         this.activeView = 'year';
-        this._currentlyDisplayed.year = yearsSelected.startYear;
+        this.currentlyDisplayed = {
+            ...this.currentlyDisplayed,
+            year: yearsSelected.startYear
+        };
         this.onYearViewSelected();
     }
 
@@ -617,23 +689,23 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
      */
     private _prepareDisplayedView(): void {
         if (this.calType === 'single' && this._dateTimeAdapter.isValid(this.selectedDate)) {
-            this._currentlyDisplayed = {
+            this.currentlyDisplayed = {
                 year: this._dateTimeAdapter.getYear(this.selectedDate),
                 month: this._dateTimeAdapter.getMonth(this.selectedDate)
             };
         } else if (this.selectedRangeDate && this.selectedRangeDate.start) {
-            this._currentlyDisplayed = {
+            this.currentlyDisplayed = {
                 year: this._dateTimeAdapter.getYear(this.selectedRangeDate.start),
                 month: this._dateTimeAdapter.getMonth(this.selectedRangeDate.start)
             };
         } else if (this.selectedRangeDate && this.selectedRangeDate.end) {
-            this._currentlyDisplayed = {
+            this.currentlyDisplayed = {
                 year: this._dateTimeAdapter.getYear(this.selectedRangeDate.end),
                 month: this._dateTimeAdapter.getMonth(this.selectedRangeDate.end)
             };
         } else {
             const today = this._dateTimeAdapter.today();
-            this._currentlyDisplayed = {
+            this.currentlyDisplayed = {
                 year: this._dateTimeAdapter.getYear(today),
                 month: this._dateTimeAdapter.getMonth(today)
             };
@@ -654,5 +726,20 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
             default:
                 return null;
         }
+    }
+
+    /** @hidden */
+    private _setNavigationButtonsStates(): void {
+        this.previousButtonDisabled = this.previousButtonDisableFunction(
+            this.selectedDate,
+            this.currentlyDisplayed,
+            this.activeView
+        );
+        this.nextButtonDisabled = this.nextButtonDisableFunction(
+            this.selectedDate,
+            this.currentlyDisplayed,
+            this.activeView
+        );
+        this._changeDetectorRef.markForCheck();
     }
 }

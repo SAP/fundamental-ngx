@@ -24,6 +24,12 @@ import { CalendarCurrent } from '../models/calendar-current';
 import { CalendarYearGrid } from '../models/calendar-year-grid';
 import { CalendarService } from '../calendar.service';
 
+export type NavigationButtonDisableFunction<D> = (
+    date: D,
+    currentlyDisplayedDate: CalendarCurrent,
+    activeView: FdCalendarView
+) => boolean;
+
 /**
  * Internal use only.
  * Header of the calendar component.

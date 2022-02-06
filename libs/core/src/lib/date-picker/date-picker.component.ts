@@ -15,7 +15,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
+import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -26,7 +26,8 @@ import {
     DaysOfWeek,
     FdCalendarView,
     DateRange,
-    CalendarYearGrid
+    CalendarYearGrid,
+    NavigationButtonDisableFunction
 } from '@fundamental-ngx/core/calendar';
 import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
 import { PopoverFormMessageService } from '@fundamental-ngx/core/form';
@@ -199,6 +200,18 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
     /** Defines if date picker should be closed after date choose */
     @Input()
     closeOnDateChoose = true;
+
+    /**
+     * Function used to disable previous button in the calendar header.
+     */
+    @Input()
+    previousButtonDisableFunction: NavigationButtonDisableFunction<D>;
+
+    /**
+     * Function used to disable next button in the calendar header.
+     */
+    @Input()
+    nextButtonDisableFunction: NavigationButtonDisableFunction<D>;
 
     /**
      *  The state of the form control - applies css classes.
@@ -499,7 +512,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
      * @hidden
      * Function that implements Validator Interface, adds validation support for forms
      */
-    validate(control: AbstractControl): {
+    validate(): {
         [key: string]: any;
     } {
         return this.isModelValid()
