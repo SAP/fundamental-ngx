@@ -16,6 +16,8 @@ import platformMultiInputReactiveExample from '!./platform-multi-input-example/p
 import platformMultiInputReactiveExampleTs from '!./platform-multi-input-example/platform-multi-input-reactive-example.component.ts?raw';
 import PlatformMultiInputCompactExampleComponent from '!./platform-multi-input-example/platform-multi-input-compact-example.component.html?raw';
 import PlatformMultiInputCompactExampleComponentTs from '!./platform-multi-input-example/platform-multi-input-compact-example.component.ts?raw';
+import PlatformMultiInputLoadingExampleComponent from '!./platform-multi-input-example/platform-multi-input-loading-example.component.html?raw';
+import PlatformMultiInputLoadingExampleComponentTs from '!./platform-multi-input-example/platform-multi-input-loading-example.component.ts?raw';
 
 import { ExampleFile } from '../../../../documentation/core-helpers/code-example/example-file';
 
@@ -126,6 +128,19 @@ export class PlatformMultiInputDocsComponent {
             code: platformMultiInputReactiveExampleTs,
             fileName: 'platform-multi-input-reactive-example',
             component: 'PlatformMultiInputReactiveExampleComponent'
+        }
+    ];
+    multiInputLoading: ExampleFile[] = [
+        {
+            language: 'html',
+            code: PlatformMultiInputLoadingExampleComponent,
+            fileName: 'platform-multi-input-loading-example'
+        },
+        {
+            language: 'typescript',
+            code: PlatformMultiInputLoadingExampleComponentTs,
+            fileName: 'platform-multi-input-loading-example',
+            component: 'PlatformMultiInputLoadingExampleComponent'
         }
     ];
 }

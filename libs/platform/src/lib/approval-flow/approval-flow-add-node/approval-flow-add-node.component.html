@@ -152,23 +152,27 @@
         </ng-container>
 
         <ng-container *ngIf="_selectMode">
-            <fdp-approval-flow-team-list
-                *ngIf="viewService.isSelectTeamMode"
-                [isRtl]="_data.rtl"
-                [teams]="_teams"
-                [selectedTeamId]="_selectedTeam?.id"
-                (onTeamClick)="_viewTeamMembers($event)"
-                (onTeamRadioClick)="_setSelectedTeam($event)"
-            ></fdp-approval-flow-team-list>
+            <ng-container *ngIf="viewService.isSelectTeamMode">
+                <fdp-approval-flow-team-list
+                    *ngIf="!_data.teamDataSource.isDataLoading; else loadingTpl"
+                    [isRtl]="_data.rtl"
+                    [teams]="_teams"
+                    [selectedTeamId]="_selectedTeam?.id"
+                    (onTeamClick)="_viewTeamMembers($event)"
+                    (onTeamRadioClick)="_setSelectedTeam($event)"
+                ></fdp-approval-flow-team-list>
+            </ng-container>
 
-            <fdp-approval-flow-user-list
-                *ngIf="viewService.isSelectUserMode || viewService.isTeamMembersMode"
-                [users]="viewService.isSelectUserMode ? _approvers : _filteredTeamMembers"
-                [isSelectable]="viewService.isSelectUserMode"
-                [selectedUsers]="_selectedApprovers"
-                (onUserClick)="_seeUserDetails($event)"
-                (onSelectionChange)="_selectedApprovers = $event"
-            ></fdp-approval-flow-user-list>
+            <ng-container *ngIf="viewService.isSelectUserMode || viewService.isTeamMembersMode">
+                <fdp-approval-flow-user-list
+                    *ngIf="viewService.isSelectUserMode || !_data.userDataSource.isDataLoading; else loadingTpl"
+                    [users]="viewService.isSelectUserMode ? _approvers : _filteredTeamMembers"
+                    [isSelectable]="viewService.isSelectUserMode"
+                    [selectedUsers]="_selectedApprovers"
+                    (onUserClick)="_seeUserDetails($event)"
+                    (onSelectionChange)="_selectedApprovers = $event"
+                ></fdp-approval-flow-user-list>
+            </ng-container>
 
             <fdp-approval-flow-user-details
                 *ngIf="viewService.isUserDetailsMode && _userToShowDetails"
@@ -291,3 +295,7 @@
         </ng-container>
     </fd-dialog-footer>
 </fd-dialog>
+
+<ng-template #loadingTpl>
+    <fd-busy-indicator [loading]="true" [block]="true"> </fd-busy-indicator>
+</ng-template>

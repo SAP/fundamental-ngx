@@ -10,6 +10,7 @@ import { DataProvider, DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { FdpFormGroupModule, PlatformMultiInputModule } from '@fundamental-ngx/platform/form';
 import { PlatformListModule, StandardListItemModule } from '@fundamental-ngx/platform/list';
+import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 
 import { PlatformMultiInputDocsComponent } from './platform-multi-input-docs.component';
 import { PlatformMultiInputExampleComponent } from './platform-multi-input-example/platform-multi-input-example.component';
@@ -26,6 +27,7 @@ import { SharedDocumentationModule } from '../../../../documentation/shared-docu
 import { MULTI_INPUT_MOBILE_CONFIG } from '../../../../documentation/utilities/consts/mobile-mode-configuration-tokens';
 import { PlatformMultiInputReactiveExampleComponent } from './platform-multi-input-example/platform-multi-input-reactive-example.component';
 import { PlatformMultiInputCompactExampleComponent } from './platform-multi-input-example/platform-multi-input-compact-example.component';
+import { PlatformMultiInputLoadingExampleComponent } from './platform-multi-input-example/platform-multi-input-loading-example.component';
 
 const routes: Routes = [
     {
@@ -50,7 +52,8 @@ const routes: Routes = [
         PlatformMultiInputDisabledExampleComponent,
         PlatformMultiInputMobileExampleComponent,
         PlatformMultiInputReactiveExampleComponent,
-        PlatformMultiInputCompactExampleComponent
+        PlatformMultiInputCompactExampleComponent,
+        PlatformMultiInputLoadingExampleComponent
     ],
     imports: [
         CommonModule,
@@ -59,6 +62,7 @@ const routes: Routes = [
         SharedDocumentationPageModule,
         PlatformMultiInputModule,
         FdpFormGroupModule,
+        BusyIndicatorModule,
         PlatformListModule,
         StandardListItemModule,
         DialogModule,

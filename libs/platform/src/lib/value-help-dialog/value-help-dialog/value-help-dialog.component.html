@@ -290,21 +290,23 @@
 </ng-template>
 
 <ng-template #selectionContent>
-    <fdp-select-tab
-        [selected]="selectedItems"
-        [uid]="id"
-        [displayedData]="_displayedData"
-        [tabTitle]="selectTabTitle"
-        [mobile]="mobile"
-        [selection]="searchSelection"
-        [emptyTableMessage]="searchTableEmptyMessage"
-        [uniqueKey]="uniqueKey"
-        [pageSize]="searchTablePageSize"
-        [defaultMobileHeaders]="searchTableMobileHeaders"
-        [contentTableDensity]="contentDensity"
-        [filters]="_displayedFilters"
-        (select)="onSelect($event)"
-    ></fdp-select-tab>
+    <fd-busy-indicator [loading]="loadingState" [block]="true" class="fdp-value-help-dialog__table-busy-indicator">
+        <fdp-select-tab
+            [selected]="selectedItems"
+            [uid]="id"
+            [displayedData]="_displayedData"
+            [tabTitle]="selectTabTitle"
+            [mobile]="mobile"
+            [selection]="searchSelection"
+            [emptyTableMessage]="searchTableEmptyMessage"
+            [uniqueKey]="uniqueKey"
+            [pageSize]="searchTablePageSize"
+            [defaultMobileHeaders]="searchTableMobileHeaders"
+            [contentTableDensity]="contentDensity"
+            [filters]="_displayedFilters"
+            (select)="onSelect($event)"
+        ></fdp-select-tab>
+    </fd-busy-indicator>
 </ng-template>
 
 <ng-template #defineConditionsContent>

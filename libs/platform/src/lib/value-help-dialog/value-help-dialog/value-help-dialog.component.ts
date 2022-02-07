@@ -41,6 +41,7 @@ import {
 import { VhdFilterComponent } from '../components/value-help-dialog-filter/value-help-dialog-filter.component';
 import { VhdSearchComponent } from '../components/value-help-dialog-search/value-help-dialog-search.component';
 import { defaultConditionDisplayFn } from '../constans/condition-display.function';
+import { cloneDeep } from 'lodash-es';
 
 export type FdpValueHelpDialogDataSource<T> =
     | ValueHelpDialogDataSource<T>
@@ -150,6 +151,10 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
     @Input()
     maxShownInitialFilters = 4;
 
+    /** Loading state */
+    @Input()
+    loading: boolean | undefined;
+
     /** @deprecated use `contentDensity` instead */
     /** The content density for which to render table. 'cozy' | 'compact' | 'condensed' */
     @Input()
@@ -188,6 +193,14 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
     /** Event emitted when filters/tokens were changed. */
     @Output()
     valueChange = new EventEmitter<VhdValueChangeEvent>();
+
+    /** Event emitted when data loading is started. */
+    @Output()
+    onDataRequested = new EventEmitter<void>();
+
+    /** Event emitted when data loading is finished. */
+    @Output()
+    onDataReceived = new EventEmitter<void>();
 
     /** @hidden Search control component  */
     @ContentChild(VhdSearchComponent)
@@ -249,9 +262,19 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
         conditions: []
     };
 
+    /** @hidden */
     selectedTab: VhdTab = null;
 
+    /** @hidden */
     shownFilterCount = Infinity;
+
+    /** @hidden */
+    get loadingState(): boolean {
+        return this.loading ?? this._internalLoadingState;
+    }
+
+    /** @hidden */
+    private _internalLoadingState = false;
 
     /** @hidden */
     private readonly _onDestroy$ = new Subject<void>();
@@ -558,18 +581,34 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
     private _initializeDS(ds: FdpValueHelpDialogDataSource<any> = this.dataSource): void {
         this._resetSourceStream();
         if (this.showSelectionTab) {
-            this._dsSubscription = this.openDataStream(ds)
+            this._dsSubscription = new Subscription();
+
+            const dsSub = this.openDataStream(ds)
                 .pipe(takeUntil(this._destroyed))
                 .subscribe((data) => {
                     this._displayedData = data.slice();
                     this._changeDetectorRef.markForCheck();
                 });
+
+            this._dsSubscription.add(dsSub);
+            this._dsSubscription.add(
+                ds.onDataRequested().subscribe(() => {
+                    this._internalLoadingState = true;
+                    this.onDataRequested.emit();
+                })
+            );
+            this._dsSubscription.add(
+                ds.onDataReceived().subscribe(() => {
+                    this._internalLoadingState = false;
+                    this.onDataReceived.emit();
+                })
+            );
         }
     }
 
     /** @hidden Save previous state */
     private _savePreviousState(): void {
-        const value = JSON.parse(JSON.stringify(this.value));
+        const value = cloneDeep(this.value);
         this._currentValue = value;
         this._prevState = value;
     }
@@ -649,7 +688,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
         } else if (Array.isArray(ds)) {
             return new ArrayValueHelpDialogDataSource<T>(ds);
         } else if (isObservable(ds)) {
-            return new ObservableValueHelpDialogDataSource<T>(ds);
+            return new ObservableValueHelpDialogDataSource<T>(ds as Observable<T[]>);
         }
 
         return undefined;

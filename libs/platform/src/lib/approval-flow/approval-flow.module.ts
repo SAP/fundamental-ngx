@@ -18,6 +18,7 @@ import { MessageStripModule } from '@fundamental-ngx/core/message-strip';
 import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
 import { RadioModule } from '@fundamental-ngx/core/radio';
 import { SelectModule } from '@fundamental-ngx/core/select';
+import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 
 import { PlatformObjectStatusModule } from '@fundamental-ngx/platform/object-status';
 import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
@@ -75,6 +76,7 @@ import { ApprovalFlowToolbarActionsComponent } from './approval-flow-toolbar-act
         MenuModule,
         SelectModule,
         DatePickerModule,
+        BusyIndicatorModule,
         FormModule,
         DragDropModule,
         RadioModule,

@@ -5,6 +5,7 @@ import { IconModule } from '@fundamental-ngx/core/icon';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { MOBILE_MODE_CONFIG } from '@fundamental-ngx/core/mobile-mode';
 import { PlatformComboboxModule, FdpFormGroupModule } from '@fundamental-ngx/platform/form';
+import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
@@ -21,6 +22,7 @@ import { ComboboxFormsExampleComponent } from './examples/combobox-forms/combobo
 import { ComboboxStateComponent } from './examples/combobox-states/combobox-states-example.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { ComboboxBylineExampleComponent } from './examples/combobox-byline/combobox-byline-example.component';
+import { ComboboxLoadingExampleComponent } from './examples/combobox-loading/combobox-loading-example.component';
 
 const routes: Routes = [
     {
@@ -39,8 +41,9 @@ const routes: Routes = [
         SharedDocumentationPageModule,
         PlatformComboboxModule,
         FdpFormGroupModule,
-        IconModule,
-        ListModule
+        ListModule,
+        BusyIndicatorModule,
+        IconModule
     ],
     exports: [RouterModule],
     providers: [{ provide: MOBILE_MODE_CONFIG, useValue: COMBOBOX_MOBILE_CONFIG, multi: true }],
@@ -55,7 +58,8 @@ const routes: Routes = [
         ComboboxGroupExampleComponent,
         ComboboxFormsExampleComponent,
         ComboboxStateComponent,
-        ComboboxBylineExampleComponent
+        ComboboxBylineExampleComponent,
+        ComboboxLoadingExampleComponent
     ]
 })
 export class PlatformComboboxDocsModule {}
