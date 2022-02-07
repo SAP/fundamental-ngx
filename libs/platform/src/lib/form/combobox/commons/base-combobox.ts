@@ -535,7 +535,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     }
 
     /** @hidden */
-    private _initializeDataSource(ds: FdpComboBoxDataSource<any>): void {
+    private async _initializeDataSource(ds: FdpComboBoxDataSource<any>): Promise<void> {
         this._suggestions = [];
 
         if (isDataSource(this.dataSource)) {
@@ -547,6 +547,9 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
             }
         }
 
+        // initializing data source in the seperate microtask to let all config options to be set before it
+        // for example, "isGroup" input is needed for initialization logic and it might not be set at this point
+        await Promise.resolve();
         // Convert whatever comes in as DataSource so we can work with it identically
         this._dataSource = this._openDataStream(ds);
     }

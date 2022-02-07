@@ -3,7 +3,7 @@ import { By } from '@angular/platform-browser';
 import { Component, ViewChild } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, flushMicrotasks, inject, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { FormModule } from '@fundamental-ngx/core/form';
@@ -96,12 +96,13 @@ describe('ComboboxComponent default values', () => {
         })
     );
 
-    beforeEach(() => {
+    beforeEach(fakeAsync(() => {
         fixture = TestBed.createComponent(ComboboxStandardComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
         combobox = component.combobox;
-    });
+        flushMicrotasks();
+    }));
 
     it('dataSource items should be converted to OptionItem', () => {
         const item = combobox._suggestions[0];
@@ -164,18 +165,20 @@ describe('ComboboxComponent default values', () => {
         expect(component.selectedItem.payload).toEqual(component.dataSource[2]);
     });
 
-    it('should be able to see Group', () => {
+    it('should be able to see Group', fakeAsync(() => {
         component.group = true;
 
         component.dataSource = [...component.dataSource];
         fixture.detectChanges();
+        flushMicrotasks();
 
         combobox.onPrimaryButtonClick();
         fixture.detectChanges();
+        flushMicrotasks();
 
         const group = overlayContainerEl.querySelectorAll('.fd-list__group-header');
         expect(group.length).toBe(2);
-    });
+    }));
 
     it('should be able to see Secondary Columns', () => {
         component.showSecondaryText = true;

@@ -216,9 +216,10 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     @Input()
     bodyHeight: string;
 
+    // keeping "loading" field private to make sure "loadingState" is used instead
     /** Loading state */
     @Input()
-    loading: boolean | undefined;
+    private loading: boolean | undefined;
 
     /** Text displayed when table has no items. */
     @Input()
@@ -686,7 +687,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if ('loading' in changes) {
-            this._tableService.setTableLoading(this.loading);
+            this._tableService.setTableLoading(this.loadingState);
         }
 
         if ('trackBy' in changes) {
@@ -2107,12 +2108,14 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             dataSourceStream.onDataRequested().subscribe(() => {
                 this.onDataRequested.emit();
                 this._internalLoadingState = true;
+                this._tableService.setTableLoading(this.loadingState);
             })
         );
         this._dsSubscription.add(
             dataSourceStream.onDataReceived().subscribe(() => {
                 this.onDataReceived.emit();
                 this._internalLoadingState = false;
+                this._tableService.setTableLoading(this.loadingState);
             })
         );
 
