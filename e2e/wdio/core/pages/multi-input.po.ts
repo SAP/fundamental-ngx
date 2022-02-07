@@ -7,7 +7,7 @@ export class MultiInputPo extends CoreBaseComponentPo {
     activeDropdownButtons = 'button[title="value-help"]:not(:disabled)';
     activeInputs = '.fd-multi-input-field input:not(:disabled)';
     disableInputs = 'div.is-disabled';
-    options = 'fd-checkbox.ng-untouched';
+    simpleMultiInputOptions = '.fd-popover-custom-list [fd-list-item] fd-checkbox';
     expandedDropdown = '.fd-list';
     multiInputOptions = 'fd-multi-input[inputid="multiInput"] .fd-token__text span';
     buttonShowAll = 'a.fd-link';

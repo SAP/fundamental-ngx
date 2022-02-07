@@ -246,10 +246,6 @@ describe('Popover test suite', () => {
             const optionLength = getElementArrayLength(multiInputOption);
             for (let i = 3; i < optionLength; i++) {
                 click(multiInputOption, i);
-
-                if (i !== optionLength - 1) {
-                    click(multiInputButton);
-                }
             }
             const spanLength = getElementArrayLength(multiInputSpan);
             for (let i = 0; i < spanLength; i++) {

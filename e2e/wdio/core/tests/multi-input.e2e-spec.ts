@@ -33,7 +33,7 @@ describe('Multi input test suite', () => {
         activeDropdownButtons,
         activeInputs,
         disableInputs,
-        options,
+        simpleMultiInputOptions,
         multiInputOptions,
         buttonShowAll,
         expandedDropdown,
@@ -138,8 +138,8 @@ describe('Multi input test suite', () => {
         it('verify Simple Multi Input by select each option', () => {
             scrollIntoView(activeDropdownButtons);
             click(activeDropdownButtons);
-            scrollIntoView(options, 15);
-            click(options, 15);
+            scrollIntoView(simpleMultiInputOptions, 7);
+            click(simpleMultiInputOptions, 7);
             click(activeDropdownButtons);
             const inputOptionsLength = getElementArrayLength(multiInputOptions);
             for (let i = 0; i < inputOptionsLength; i++) {
