@@ -1,4 +1,11 @@
 
+### 0.33.2-rc.0 (2022-02-07)
+
+
+### Bug Fixes
+
+* **core:** schematics sass support ([#7693](https://github.com/SAP/fundamental-ngx/issues/7693)) ([508aaad](https://github.com/SAP/fundamental-ngx/commit/508aaad07e8e6a1185ea5dde77f51aa7d5d01be2))
+
 ### [0.33.1](https://github.com/SAP/fundamental-ngx/compare/v0.33.1-rc.3...v0.33.1) (2022-02-04)
 
 ### 0.33.1-rc.3 (2022-02-04)
