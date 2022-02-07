@@ -1,5 +1,5 @@
 <ng-template #renderer>
-    <div [horizontal]="true" fd-form-item class="fd-row">
+    <div [horizontal]="true" fd-form-item class="fd-row" [style.margin-bottom.px]="_extraContentHeightPx">
         <div class="fd-col" [class]="_labelColumnLayoutClass" *ngIf="!noLabelLayout">
             <label
                 [id]="'fdp-form-label-' + id"
@@ -18,7 +18,11 @@
 </ng-template>
 
 <ng-template #withFormMessage>
-    <fdp-input-message-group class="fd-col" [class]="_fieldColumnLayoutClass">
+    <fdp-input-message-group
+        class="fd-col"
+        [class]="_fieldColumnLayoutClass"
+        [style.margin-bottom.px]="_extraContentHeightPx ? _extraContentHeightPx * -1 : null"
+    >
         <!--
          Todo: we should extend this on FormGroup Level and have error trigger strategy that will be applied to
          all the field e.g.: [triggers]="['mouseenter', 'mouseleave']"
