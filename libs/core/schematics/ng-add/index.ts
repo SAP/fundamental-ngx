@@ -218,7 +218,7 @@ function addFontsToStyles(options: any): Rule {
 
 function resolveStyles(tree: Tree): [string, Buffer] {
     const basePath = '/src/styles';
-    const extensions = ['.css', '.scss', '.less'];
+    const extensions = ['.css', '.scss', '.less', '.sass'];
 
     let path: string;
     let content: Buffer;
