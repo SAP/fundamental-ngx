@@ -1,4 +1,11 @@
 
+### 0.33.2-rc.1 (2022-02-07)
+
+
+### Features
+
+* **platform:** add datasource loading events ([#7671](https://github.com/SAP/fundamental-ngx/issues/7671)) ([7a19de2](https://github.com/SAP/fundamental-ngx/commit/7a19de2cac920abf08e32f070a2dc241a1b8870a))
+
 ### 0.33.2-rc.0 (2022-02-07)
 
 
