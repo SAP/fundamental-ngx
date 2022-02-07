@@ -7,7 +7,7 @@
 
 <fd-busy-indicator [loading]="loading" [block]="true">
     <!-- Table Container -->
-    <div class="fdp-table__container" role="table" #tableContainer>
+    <div *ngIf="_isVisible" class="fdp-table__container" role="table" #tableContainer>
         <!-- Table header outlet -->
         <ng-container [ngTemplateOutlet]="tableHeaderTemplate"></ng-container>
 

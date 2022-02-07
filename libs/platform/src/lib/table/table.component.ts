@@ -575,6 +575,9 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     _isGroupTable = false;
 
     /** @hidden */
+    _isVisible = false;
+
+    /** @hidden */
     get _isShownSelectionColumn(): boolean {
         return this.selectionMode === SelectionMode.SINGLE || this.selectionMode === SelectionMode.MULTIPLE;
     }
@@ -643,7 +646,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
     /** @hidden */
     get _tableWidthPx(): number {
-        return this.tableContainer.nativeElement.getBoundingClientRect().width;
+        return this.tableContainer?.nativeElement.getBoundingClientRect().width;
     }
 
     /** @hidden */
@@ -740,11 +743,16 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
         this._listenToColumnsWidthChange();
 
-        this._listenToTableWidthChanges();
-
-        this._listenToTableContainerMouseLeave();
-
         this._cdr.detectChanges();
+
+        const subscribeAfterElVisible = (): void => {
+            this._cdr.detectChanges();
+
+            this._listenToTableWidthChanges();
+            this._listenToTableContainerMouseLeave();
+        };
+
+        this._defferTableRendering(subscribeAfterElVisible);
     }
 
     /** @hidden */
@@ -941,8 +949,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         this._tableColumnResizeService.resetColumnsWidth();
         this._cdr.detectChanges();
 
-        let elRect = this._elRef.nativeElement.getBoundingClientRect();
-        let elVisible = elRect.width && elRect.height;
+        const elRect = this._elRef.nativeElement.getBoundingClientRect();
+        const elVisible = elRect.width && elRect.height;
 
         if (elVisible) {
             recalculateFn();
@@ -951,10 +959,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
         /** Element may not be visible due to any reason so process recalculation when it becomes visible */
         const intersectionSubscription = intersectionObservable(this._elRef.nativeElement).subscribe((entries) => {
-            elRect = entries[0]?.boundingClientRect;
-            elVisible = elRect?.width && elRect?.height;
-
-            if (elVisible) {
+            if (entries[0].isIntersecting) {
                 recalculateFn();
                 intersectionSubscription.unsubscribe();
             }
@@ -2251,5 +2256,30 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         this._addedItems = [];
         this._forceSemanticHighlighting = false;
         this._setTableRows(this._dataSourceTableRows);
+    }
+
+    /** @hidden Deffer table rendering using intersectionObservable then when element will become visible run any code */
+    private _defferTableRendering(fnToCallAfterVisible: () => void): void {
+        const elTop = this._elRef.nativeElement.getBoundingClientRect().top;
+        const docScrollTop = document.documentElement.scrollTop;
+        const docHeight = document.documentElement.clientHeight;
+
+        this._isVisible = elTop >= docScrollTop && elTop <= docScrollTop + docHeight;
+
+        if (!this._isVisible) {
+            const sub = intersectionObservable(this._elRef.nativeElement, { root: null }).subscribe((entries) => {
+                if (entries[0].isIntersecting) {
+                    this._isVisible = true;
+
+                    fnToCallAfterVisible();
+
+                    sub.unsubscribe();
+                }
+            });
+
+            this._subscriptions.add(sub);
+        } else {
+            fnToCallAfterVisible();
+        }
     }
 }
