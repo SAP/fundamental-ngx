@@ -349,6 +349,11 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     private _gapColumnLayout: ColumnLayout;
 
     /** @hidden */
+    get _extraContentHeightPx(): number | null {
+        return this.control?.extraContentHeightPx ?? null;
+    }
+
+    /** @hidden */
     constructor(
         private _cd: ChangeDetectorRef,
         @Optional() formGroupContainer: FormGroupContainer,
