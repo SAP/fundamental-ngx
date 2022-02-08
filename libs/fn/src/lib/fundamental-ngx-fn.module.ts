@@ -10,6 +10,7 @@ import { ButtonModule } from '@fundamental-ngx/fn/button';
 import { SearchModule } from '@fundamental-ngx/fn/search';
 import { SliderModule } from '@fundamental-ngx/fn/slider';
 import { TagModule } from '@fundamental-ngx/fn/tag';
+import { ProgressBarModule } from '@fundamental-ngx/fn/progress-bar';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -22,7 +23,8 @@ import { TagModule } from '@fundamental-ngx/fn/tag';
         ButtonModule,
         SearchModule,
         SliderModule,
-        TagModule
+        TagModule,
+        ProgressBarModule
     ],
     providers: []
 })

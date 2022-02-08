@@ -9,3 +9,4 @@ export * from '@fundamental-ngx/fn/search';
 export * from '@fundamental-ngx/fn/tag';
 export * from '@fundamental-ngx/fn/form';
 export * from '@fundamental-ngx/fn/switch';
+export * from '@fundamental-ngx/fn/progress-bar';

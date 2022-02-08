@@ -14,5 +14,6 @@ export const API_FILES = {
     input: [],
     search: [],
     select: [],
-    slider: []
+    slider: [],
+    progressBar: ['ProgressBarComponent']
 };
