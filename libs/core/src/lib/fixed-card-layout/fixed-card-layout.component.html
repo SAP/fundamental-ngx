@@ -32,7 +32,6 @@
             [cdkDragStartDelay]="dragStartDelay"
             [itemIndex]="_getItemIndex(card)"
             [groupIndex]="_getGroupIndex(card)"
-            (cdkDragStarted)="onDrag()"
             (cdkDragDropped)="_onDragDrop($event)"
         >
             <fd-fixed-card-layout-item>

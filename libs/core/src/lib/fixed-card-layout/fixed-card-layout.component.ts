@@ -228,7 +228,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
         if (this._previousNumberOfColumns !== this._numberOfColumns) {
             this._previousNumberOfColumns = this._numberOfColumns;
 
-            this._renderLayout();
+            this._updateColumns();
         }
     }
 
@@ -250,14 +250,12 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
         this._changeDetector.detectChanges();
     }
 
-    onDrag(): void {
-        // setTimeout(() => {
-        //     debugger;
-        // },1000);
-    }
-
     /** @hidden */
     _onDragDrop(event: CdkDragDrop<number, number>): void {
+        if (event.container.data === event.previousContainer.data) {
+            return;
+        }
+
         const movedCard = event.previousContainer.getSortedItems()[0].data;
         const replacedCard = event.container.getSortedItems()[0].data;
 
@@ -306,30 +304,6 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
         this._processDragDrop(indexFromArray, indexToArray, movedCard, replacedCard);
     };
 
-    /** @hidden Arranges cards on drop of dragged card */
-    _processDragDrop(
-        prevIndex: number,
-        newIndex: number,
-        prevCard: CardDefinitionDirective,
-        newCard: CardDefinitionDirective
-    ): void {
-        // moveItemInArray from CDK won't work as it changes order of other cards
-        const replacedCard = this._cardsArray[newIndex];
-        this._cardsArray[newIndex] = this._cardsArray[prevIndex];
-        this._cardsArray[prevIndex] = replacedCard;
-
-        adjustCardRank(prevCard, newCard);
-
-        this.cardDraggedDropped.emit({
-            previousIndex: prevIndex,
-            currentIndex: newIndex,
-            layoutColumns: this._numberOfColumns,
-            items: this._cards.toArray()
-        });
-
-        this._renderLayout();
-    }
-
     /** @hidden */
     _getGroupIndex(card: CardDefinitionDirective): number {
         if (!this._cardColumns) {
@@ -353,6 +327,30 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
         return (
             this._cardColumns?.find((column) => column.find((_card) => _card.fdCardDef === card.fdCardDef)).length < 2
         );
+    }
+
+    /** @hidden Arranges cards on drop of dragged card */
+    private _processDragDrop(
+        prevIndex: number,
+        newIndex: number,
+        prevCard: CardDefinitionDirective,
+        newCard: CardDefinitionDirective
+    ): void {
+        // moveItemInArray from CDK won't work as it changes order of other cards
+        const replacedCard = this._cardsArray[newIndex];
+        this._cardsArray[newIndex] = this._cardsArray[prevIndex];
+        this._cardsArray[prevIndex] = replacedCard;
+
+        adjustCardRank(prevCard, newCard);
+
+        this.cardDraggedDropped.emit({
+            previousIndex: prevIndex,
+            currentIndex: newIndex,
+            layoutColumns: this._numberOfColumns,
+            items: this._cards.toArray()
+        });
+
+        this._updateColumns();
     }
 
     /** @hidden */
@@ -379,14 +377,13 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     private _listenOnCardsChange(): void {
         this._cards.changes.subscribe(() => {
             this._processCards();
-            this._renderLayout();
+            this._updateColumns();
         });
     }
 
     /** @hidden Renders layout on column changes */
-    private _renderLayout(): void {
+    private _updateColumns(): void {
         this._setCardColumns();
-
         this._calculateContainerHeight();
     }
 
