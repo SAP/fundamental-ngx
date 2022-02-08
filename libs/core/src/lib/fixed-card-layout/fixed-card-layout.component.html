@@ -9,6 +9,7 @@
     [customMoveFn]="_customMoveFn"
     [customTransferFn]="_customTransferFn"
     [disableKeyboardDragDrop]="disableDragDrop"
+    [cdkDropListGroupDisabled]="disableDragDrop"
     [attr.dir]="_dir"
 >
     <div
@@ -18,9 +19,9 @@
         class="fd-fixed-card-layout__wrapper"
         [class.fd-fixed-card-layout__wrapper--last]="_isSingleInColumn(card)"
         [style.width.%]="100 / _numberOfColumns"
-        [cdkDropListDisabled]="disableDragDrop"
         [cdkDropListData]="cardIndex"
-        (cdkDropListEntered)="_calculateContainerHeight()"
+        [cdkDropListEnterPredicate]="_enterPredicate"
+        (cdkDropListExited)="_onDropListExited()"
     >
         <div
             cdkDrag
@@ -32,7 +33,7 @@
             [cdkDragStartDelay]="dragStartDelay"
             [itemIndex]="_getItemIndex(card)"
             [groupIndex]="_getGroupIndex(card)"
-            (cdkDragDropped)="_onDragDrop($event)"
+            (cdkDragDropped)="_onDragDropped($event)"
         >
             <fd-fixed-card-layout-item>
                 <ng-container *ngTemplateOutlet="card?.template"> </ng-container>

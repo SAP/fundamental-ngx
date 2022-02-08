@@ -87,7 +87,7 @@ describe('FixedCardLayoutComponent', () => {
                 }
             } as any;
 
-            component.fixedCardLayout._onDragDrop(event);
+            component.fixedCardLayout._onDragDropped(event);
             fixture.detectChanges();
 
             expect(spy).toHaveBeenCalledWith({

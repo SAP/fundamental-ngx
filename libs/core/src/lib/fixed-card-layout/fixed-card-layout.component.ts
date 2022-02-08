@@ -161,6 +161,9 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     /** @hidden */
     private _cardMinimumWidth = CARD_MINIMUM_WIDTH;
 
+    /** @hidden */
+    private _shouldCalculateContainerHeight = false;
+
     /** @hidden An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
@@ -184,9 +187,6 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     /** @hidden */
     ngAfterViewInit(): void {
         this._processCards();
-
-        /** Create column layout when view is initialized */
-        this.updateLayout();
 
         this._accessibilitySetup();
     }
@@ -251,7 +251,24 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     }
 
     /** @hidden */
-    _onDragDrop(event: CdkDragDrop<number, number>): void {
+    _enterPredicate = (): boolean => {
+        // We should update container's height & its children rects (to react when drag moves into the list) before we entered any drop list.
+        // That's why it's done here instead of cdkDropListEntered. As this predicate being called many times here is the optimization.
+        if (this._shouldCalculateContainerHeight) {
+            this._calculateContainerHeight();
+            this._shouldCalculateContainerHeight = false;
+        }
+
+        return true;
+    };
+
+    /** @hidden */
+    _onDropListExited(): void {
+        this._shouldCalculateContainerHeight = true;
+    }
+
+    /** @hidden */
+    _onDragDropped(event: CdkDragDrop<number, number>): void {
         if (event.container.data === event.previousContainer.data) {
             return;
         }
@@ -394,6 +411,8 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
             .sort((firstCard, secondCard) => firstCard.fdCardDef - secondCard.fdCardDef);
 
         this._changeDetector.detectChanges();
+
+        this.updateLayout();
     }
 
     /** @hidden Distribute cards among columns to arrange them in "Z" flow */
