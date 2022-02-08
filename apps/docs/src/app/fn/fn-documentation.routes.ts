@@ -41,6 +41,13 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/switch/switch-docs.module').then((m) => m.SwitchDocsModule)
             },
             {
+                path: 'progress-bar',
+                loadChildren: () =>
+                    import('./component-docs/progress-bar/progress-bar-docs.module').then(
+                        (m) => m.ProgressBarDocsModule
+                    )
+            },
+            {
                 path: 'radio',
                 loadChildren: () => import('./component-docs/radio/radio-docs.module').then((m) => m.RadioDocsModule)
             },
