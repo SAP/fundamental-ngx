@@ -9,7 +9,7 @@ export abstract class ListFocusItem implements KeyboardSupportItemInterface {
     @Input()
     @HostBinding('attr.tabindex')
     get tabindex(): number {
-        if (this._isFirstItem && isNaN(this._tabIndex)) {
+        if (this._isFirstItem && isNaN(this._tabIndex as number)) {
             return 0;
         }
         return this._tabIndex ?? -1;

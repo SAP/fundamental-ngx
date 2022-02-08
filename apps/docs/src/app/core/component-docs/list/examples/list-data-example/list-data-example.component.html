@@ -15,6 +15,7 @@
     </fd-input-group>
     <button
         ariaLabel="Sort ascending"
+        title="Sort ascending"
         fd-button
         [compact]="true"
         glyph="sort-ascending"
@@ -22,6 +23,7 @@
     ></button>
     <button
         ariaLabel="Sort descending"
+        title="Sort descending"
         fd-button
         [compact]="true"
         glyph="sort-descending"
@@ -34,7 +36,14 @@
             {{ item }}
         </span>
         <span fd-list-secondary>
-            <button ariaLabel="Remove" fd-button [compact]="true" glyph="delete" (click)="removeItem(ind)"></button>
+            <button
+                ariaLabel="Remove"
+                title="Remove"
+                fd-button
+                [compact]="true"
+                glyph="delete"
+                (click)="removeItem(ind)"
+            ></button>
         </span>
     </li>
     <li fd-list-item [noData]="true" *ngIf="!displayedItems || displayedItems.length === 0">

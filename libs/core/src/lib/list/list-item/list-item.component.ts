@@ -150,7 +150,7 @@ export class ListItemComponent
     screenReaderContent = '';
 
     /** @hidden group header id, that is being set by parent list component */
-    _relatedGroupHeaderId: string;
+    _relatedGroupHeaderId: string | null;
 
     /** @hidden */
     @HostBinding('attr.aria-describedBy')
@@ -202,10 +202,13 @@ export class ListItemComponent
             if (this.checkbox) {
                 this.checkbox.nextValue();
                 this._muteEvent(event);
-            }
-            if (this.radio) {
+            } else if (this.radio) {
                 this.radio.labelClicked(event);
                 this._muteEvent(event);
+            } else if (this.interactive) {
+                this.selected = !this.selected;
+                this._muteEvent(event);
+                return;
             }
         }
         this.keyDown.emit(event);

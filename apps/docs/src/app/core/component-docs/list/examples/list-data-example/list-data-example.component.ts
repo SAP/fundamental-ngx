@@ -1,3 +1,4 @@
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -13,6 +14,8 @@ export class ListDataExampleComponent implements OnInit {
     displayedItems: string[] = [];
 
     searchTerm = '';
+
+    constructor(private liveAnnouncer: LiveAnnouncer) {}
 
     ngOnInit(): void {
         this.handleSearchTermChange('');
@@ -33,5 +36,7 @@ export class ListDataExampleComponent implements OnInit {
 
     changeSort(ascending: boolean): void {
         this.ascendingSort = ascending;
+        this.liveAnnouncer.clear();
+        this.liveAnnouncer.announce(ascending ? 'ascending' : 'descending', 'assertive');
     }
 }

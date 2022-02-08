@@ -186,7 +186,7 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
         /** Finish all of the streams, from before */
         this._onRefresh$.next();
         /** Merge refresh/destroy observables */
-        const refreshObs = merge(this._onRefresh$, this._onDestroy$);
+        const completion$ = merge(this._onRefresh$, this._onDestroy$);
         const interactionChangesIndexes: Observable<{ index: number; updateOnly: boolean }>[] = this._focusItems.map(
             (item, index) =>
                 merge(
@@ -195,7 +195,7 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
                 )
         );
         merge(...interactionChangesIndexes)
-            .pipe(takeUntil(refreshObs))
+            .pipe(takeUntil(completion$))
             .subscribe(({ index, updateOnly }) => this.setItemActive(index, updateOnly));
     }
 
