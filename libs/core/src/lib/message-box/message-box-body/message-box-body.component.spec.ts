@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MessageBoxBodyComponent } from './message-box-body.component';
-import { MessageBoxConfig } from '../utils/message-box-config.class';
 import { whenStable } from '@fundamental-ngx/core/tests';
+import { MessageBoxHost, MessageBoxConfig } from './../utils/message-box-config.class';
 
 describe('MessageBoxBodyComponent', () => {
     let component: MessageBoxBodyComponent;
@@ -11,7 +11,12 @@ describe('MessageBoxBodyComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [MessageBoxBodyComponent],
-            providers: [{ provide: MessageBoxConfig, useValue: { verticalPadding: false } }]
+            providers: [
+                {
+                    provide: MessageBoxHost,
+                    useValue: { _messageBoxConfig: { ...new MessageBoxConfig(), verticalPadding: false } }
+                }
+            ]
         }).compileComponents();
     });
 

@@ -1,8 +1,13 @@
 import { Component, Type, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, flushMicrotasks, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { MessageBoxConfig, MessageBoxHeaderComponent, MessageBoxModule } from '@fundamental-ngx/core/message-box';
+import {
+    MessageBoxConfig,
+    MessageBoxHeaderComponent,
+    MessageBoxHost,
+    MessageBoxModule
+} from '@fundamental-ngx/core/message-box';
 import { whenStable } from '@fundamental-ngx/core/tests';
 
 @Component({
@@ -32,6 +37,19 @@ class CustomHeaderTestComponent {
 @Component({
     template: `
         <fd-message-box-header>
+            <fd-message-box-semantic-icon *ngIf="showProjectedIcon" glyph="account"></fd-message-box-semantic-icon>
+            <h1 fd-title>Default Title</h1>
+        </fd-message-box-header>
+    `
+})
+class HeaderWithProjectedIconTestComponent {
+    @ViewChild(MessageBoxHeaderComponent) messageBoxHeader: MessageBoxHeaderComponent;
+    showProjectedIcon = false;
+}
+
+@Component({
+    template: `
+        <fd-message-box-header>
             <h1 fd-title>Default Title</h1>
         </fd-message-box-header>
     `
@@ -45,8 +63,24 @@ describe('MessageBoxHeaderComponent', () => {
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 imports: [BarModule, MessageBoxModule],
-                declarations: [CustomHeaderTestComponent, DefaultHeaderTestComponent],
-                providers: [{ provide: MessageBoxConfig, useValue: { ...new MessageBoxConfig(), mobile: true } }]
+                declarations: [
+                    CustomHeaderTestComponent,
+                    DefaultHeaderTestComponent,
+                    HeaderWithProjectedIconTestComponent
+                ],
+                providers: [
+                    {
+                        provide: MessageBoxHost,
+                        useValue: {
+                            _messageBoxConfig: {
+                                ...new MessageBoxConfig(),
+                                mobile: true,
+                                type: 'error',
+                                showSemanticIcon: true
+                            }
+                        }
+                    }
+                ]
             }).compileComponents();
         })
     );
@@ -104,4 +138,26 @@ describe('MessageBoxHeaderComponent', () => {
         const input = subheaderEl.querySelector('input');
         expect(input.id).toContain('customInput');
     });
+
+    it('should display semantic error icon, if type === "error" and showSemanticIcon === true', fakeAsync(() => {
+        const { fixture, component } = setup<HeaderWithProjectedIconTestComponent>(
+            HeaderWithProjectedIconTestComponent
+        );
+        component.showProjectedIcon = false;
+        whenStable(fixture);
+        flushMicrotasks();
+
+        expect(component.messageBoxHeader._showSemanticIcon).toBe(true);
+    }));
+
+    it('should display only projected semantic icon, if it is provided', fakeAsync(() => {
+        const { fixture, component } = setup<HeaderWithProjectedIconTestComponent>(
+            HeaderWithProjectedIconTestComponent
+        );
+        component.showProjectedIcon = true;
+        whenStable(fixture);
+        flushMicrotasks();
+
+        expect(component.messageBoxHeader._showSemanticIcon).toBe(false);
+    }));
 });
