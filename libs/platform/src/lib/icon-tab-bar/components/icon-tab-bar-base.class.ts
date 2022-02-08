@@ -104,7 +104,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     private _densityMode: TabDestinyMode;
 
     /** @hidden */
-    private _onDestroy$ = new Subject();
+    private _onDestroy$ = new Subject<void>();
 
     /** @hidden */
     private _destroyed = false;

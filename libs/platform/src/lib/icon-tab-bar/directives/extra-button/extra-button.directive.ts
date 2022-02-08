@@ -28,7 +28,7 @@ export class ExtraButtonDirective implements AfterViewInit, OnDestroy {
     addButtonOffset = false;
 
     /** @hidden */
-    private _onDestroy$ = new Subject();
+    private _onDestroy$ = new Subject<void>();
 
     /** @hidden */
     constructor(private _el: ElementRef, private _viewportRuler: ViewportRuler, private _ngZone: NgZone) {}
