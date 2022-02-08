@@ -1,13 +1,11 @@
-import { Directive, ElementRef, HostListener, Input, OnInit } from '@angular/core';
-import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { Directive, ElementRef, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { CONTROL, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+
 import { DndKeyboardGroupDirective } from '../dnd-keyboard-group/dnd-keyboard-group.directive';
-import { KeyUtil } from '../../functions/key-util';
 
 /**
  * This directive is used to provide drag & drop with keyboard support.
- * It should be used togather with directive fdDndKeyboardGroup.
+ * It should be used together with directive fdDndKeyboardGroup.
  * We are using _groups from fdDndKeyboardGroup and adding a possibility to move cards.
  * Please see example below:
  * @Component({
@@ -44,11 +42,7 @@ import { KeyUtil } from '../../functions/key-util';
  *   }
  */
 @Directive({ selector: '[fdDndKeyboardItem]' })
-export class DndKeyboardItemDirective implements OnInit {
-    /** we can disable keyboard navigation if needed */
-    @Input()
-    dndKeyboardDisabled = false;
-
+export class DndKeyboardItemDirective implements OnInit, OnDestroy {
     /** item index in group(column) */
     @Input()
     itemIndex: number;
@@ -57,7 +51,11 @@ export class DndKeyboardItemDirective implements OnInit {
     @Input()
     groupIndex: number;
 
-    constructor(private _dndGroup: DndKeyboardGroupDirective, private _elementRef: ElementRef) {}
+    /** @hidden */
+    private readonly _onDestroy$ = new Subject<void>();
+
+    /** @hidden */
+    constructor(private readonly _dndGroup: DndKeyboardGroupDirective, private readonly _elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -68,50 +66,15 @@ export class DndKeyboardItemDirective implements OnInit {
         });
     }
 
-    /** @hidden disabled possibility to move card */
-    @HostListener('keyup', ['$event'])
-    _onKeyUp(event: KeyboardEvent): void {
-        if (KeyUtil.isKeyCode(event, CONTROL)) {
-            this._dndGroup._enableKeyboard = false;
-            this._dndGroup._onDndItemFocus$.unsubscribe();
-            this._dndGroup._onDndItemFocus$ = new Subject<[number, number]>();
-        }
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
     }
 
-    /** @hidden allow card movement using keyboard */
+    /** @hidden */
     @HostListener('keydown', ['$event'])
     _onKeyDown(event: KeyboardEvent): void {
-        const group = this._dndGroup.groups[this.groupIndex];
-        if (KeyUtil.isKeyCode(event, CONTROL) && !this.dndKeyboardDisabled) {
-            this._dndGroup._enableKeyboard = true;
-        }
-        if (
-            KeyUtil.isKeyCode(event, RIGHT_ARROW) &&
-            this._dndGroup._enableKeyboard &&
-            this._dndGroup.groups.length !== this.groupIndex + 1
-        ) {
-            event.preventDefault();
-            const nextGroup = this._dndGroup.groups[this.groupIndex + 1];
-            const nextGroupIndex = this.groupIndex + 1;
-            transferArrayItem(group, nextGroup, this.itemIndex, 0);
-            this._dndGroup.focusDndItem(nextGroupIndex, 0);
-        }
-        if (KeyUtil.isKeyCode(event, DOWN_ARROW) && this._dndGroup._enableKeyboard) {
-            event.preventDefault();
-            moveItemInArray(group, this.itemIndex, this.itemIndex + 1);
-            this._dndGroup.focusDndItem(this.groupIndex, this.itemIndex + 1);
-        }
-        if (KeyUtil.isKeyCode(event, UP_ARROW) && this._dndGroup._enableKeyboard) {
-            event.preventDefault();
-            moveItemInArray(group, this.itemIndex, this.itemIndex - 1);
-            this._dndGroup.focusDndItem(this.groupIndex, this.itemIndex - 1);
-        }
-        if (KeyUtil.isKeyCode(event, LEFT_ARROW) && this._dndGroup._enableKeyboard && this.groupIndex) {
-            event.preventDefault();
-            const nextGroup = this._dndGroup.groups[this.groupIndex - 1];
-            const nextGroupIndex = this.groupIndex - 1;
-            transferArrayItem(group, nextGroup, this.itemIndex, 0);
-            this._dndGroup.focusDndItem(nextGroupIndex, 0);
-        }
+        this._dndGroup.processDragDrop(event, this.itemIndex, this.groupIndex);
     }
 }

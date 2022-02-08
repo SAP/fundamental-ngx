@@ -2,19 +2,25 @@
     #layout
     cdkDropListGroup
     fdDndKeyboardGroup
-    class="fd-fixed-card-layout__card-layout"
-    [style.max-height]="_containerHeight + 'px'"
-    [groups]="_columns"
+    class="fd-fixed-card-layout__card-layout fd-fixed-card-layout__card-layout--columns-{{ this._numberOfColumns }}"
+    [style.height]="_containerHeight + 'px'"
+    [groups]="_cardColumns"
+    orientation="horizontal"
+    [customMoveFn]="_customMoveFn"
+    [customTransferFn]="_customTransferFn"
+    [disableKeyboardDragDrop]="disableDragDrop"
     [attr.dir]="_dir"
 >
     <div
-        #cardWrapper
+        #dropList
         *ngFor="let card of _cardsArray; let cardIndex = index"
         cdkDropList
+        class="fd-fixed-card-layout__wrapper"
+        [class.fd-fixed-card-layout__wrapper--last]="_isSingleInColumn(card)"
+        [style.width.%]="100 / _numberOfColumns"
         [cdkDropListDisabled]="disableDragDrop"
         [cdkDropListData]="cardIndex"
         (cdkDropListEntered)="_calculateContainerHeight()"
-        (cdkDropListExited)="_calculateContainerHeight()"
     >
         <div
             cdkDrag
@@ -24,9 +30,9 @@
             cdkDragPreviewClass="fd-fixed-card-layout__card-preview"
             [cdkDragData]="card"
             [cdkDragStartDelay]="dragStartDelay"
-            [dndKeyboardDisabled]="disableDragDrop"
-            [itemIndex]="cardIndex"
-            [groupIndex]="cardIndex"
+            [itemIndex]="_getItemIndex(card)"
+            [groupIndex]="_getGroupIndex(card)"
+            (cdkDragStarted)="onDrag()"
             (cdkDragDropped)="_onDragDrop($event)"
         >
             <fd-fixed-card-layout-item>
@@ -38,4 +44,8 @@
             </div>
         </div>
     </div>
+
+    <ng-container *ngFor="let column of _cardColumns; let last = last; let index = index">
+        <div *ngIf="!last" class="fd-fixed-card-layout__clearfix" [style.order]="index + 1"></div>
+    </ng-container>
 </div>

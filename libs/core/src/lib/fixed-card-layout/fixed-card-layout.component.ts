@@ -22,7 +22,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { FocusKeyManager } from '@angular/cdk/a11y';
-import { CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, CdkDropList } from '@angular/cdk/drag-drop';
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
@@ -30,9 +30,10 @@ import { RtlService } from '@fundamental-ngx/core/utils';
 import { FixedCardLayoutItemComponent } from './fixed-card-layout-item/fixed-card-layout-item.component';
 import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
 
-const CARD_MINIMUM_WIDTH = 320; // in px; 20rem max card size
-const CARD_GAP_WIDTH = 16; // gap=1rem==16px
-const DRAG_START_DELAY = 200;
+const CARD_MINIMUM_WIDTH = 320; // 320px = 20rem, max card width
+const CARD_GAP_WIDTH = 16; // 16px = 1rem
+const DRAG_START_DELAY = 200; // in ms
+
 let cardRank = 1;
 
 @Directive({ selector: '[fdCardDef]' })
@@ -60,19 +61,16 @@ export class CardDefinitionDirective {
     constructor(public template: TemplateRef<any>) {}
 }
 
-class Layout {
-    constructor(public numberOfColumns: number, public screenSize: number) {}
+export interface Layout {
+    numberOfColumns?: number;
+    screenSize: number;
 }
 
-class CardDropped {
-    constructor(
-        public container: CdkDropList,
-        public prevContainer: CdkDropList,
-        public previousIndex: number,
-        public currentIndex: number,
-        public layoutColumns: number,
-        public items: CardDefinitionDirective[]
-    ) {}
+export interface CardDropped {
+    previousIndex: number;
+    currentIndex: number;
+    layoutColumns: number;
+    items: CardDefinitionDirective[];
 }
 
 type CardColumn = CardDefinitionDirective[];
@@ -82,7 +80,10 @@ type CardColumn = CardDefinitionDirective[];
     templateUrl: './fixed-card-layout.component.html',
     styleUrls: ['./fixed-card-layout.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    host: {
+        class: 'fd-fixed-card-layout'
+    }
 })
 export class FixedCardLayoutComponent implements OnInit, AfterContentInit, AfterViewInit, AfterViewChecked, OnDestroy {
     /** Drag drop behavior can be disabled */
@@ -124,8 +125,8 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     _cardContainers: QueryList<FixedCardLayoutItemComponent>;
 
     /** @hidden */
-    @ViewChildren('cardWrapper', { read: ElementRef })
-    _cardWrappers: QueryList<ElementRef>;
+    @ViewChildren('dropList', { read: CdkDropList })
+    _cardWrappers: QueryList<CdkDropList>;
 
     /** @hidden */
     @ViewChild('layout')
@@ -134,11 +135,11 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     /** @hidden */
     _cardsArray: Array<CardDefinitionDirective>;
 
-    /** @hidden */
-    _columns: CardColumn[];
+    /** @hidden Number of Columns in layout */
+    _numberOfColumns: number;
 
     /** @hidden */
-    _cardWrapperColumns: ElementRef[][];
+    _cardColumns: CardColumn[];
 
     /** @hidden*/
     _containerHeight: number;
@@ -150,9 +151,6 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     get _availableWidth(): number {
         return this._layout.nativeElement.getBoundingClientRect().width;
     }
-
-    /** @hidden Number of Columns in layout */
-    private _numberOfColumns: number;
 
     /** @hidden */
     private _previousNumberOfColumns: number;
@@ -185,8 +183,11 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
 
     /** @hidden */
     ngAfterViewInit(): void {
+        this._processCards();
+
         /** Create column layout when view is initialized */
         this.updateLayout();
+
         this._accessibilitySetup();
     }
 
@@ -215,32 +216,14 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
         }
     }
 
-    /** Arranges cards on drop of dragged card */
-    _onDragDrop(event: CdkDragDrop<number, number>): void {
-        moveItemInArray(this._cardsArray, event.previousContainer.data, event.container.data);
-
-        // Need to adjust rank after drag and drop
-        this._adjustCardRank(
-            event.item.data,
-            // each container always has only 1 item
-            event.container.getSortedItems()[0].data
-        );
-
-        this.cardDraggedDropped.emit(
-            new CardDropped(
-                event.container,
-                event.previousContainer,
-                event.previousContainer.data,
-                event.container.data,
-                this._numberOfColumns,
-                this._cardsArray
-            )
-        );
-    }
-
     /** Distribute cards on window resize */
     updateLayout(): void {
-        this._numberOfColumns = this._getNumberOfColumns();
+        this._numberOfColumns = getNumberOfColumns(this._availableWidth, this.cardMinimumWidth);
+
+        this.layoutChange.emit({
+            numberOfColumns: this._numberOfColumns,
+            screenSize: this._availableWidth
+        });
 
         if (this._previousNumberOfColumns !== this._numberOfColumns) {
             this._previousNumberOfColumns = this._numberOfColumns;
@@ -249,16 +232,132 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
         }
     }
 
+    /** @hidden Calculate container height basing on the card wrapper columns */
+    _calculateContainerHeight(): void {
+        const wrapperColumns = this._cardColumns.map((column) =>
+            column.map(
+                (card) => this._cardWrappers.find((wrapper) => wrapper.getSortedItems()[0].data === card).element
+            )
+        );
+
+        const columnsHeights = wrapperColumns
+            .map((column) => column.map((card) => card.nativeElement.getBoundingClientRect().height))
+            .map((column) => column.reduce((height, cardHeight) => (height += cardHeight)));
+
+        // +4 because it's the top & bottom borders of card placeholder (0,125rem * 2)
+        this._containerHeight = Math.max(...columnsHeights) + 4;
+
+        this._changeDetector.detectChanges();
+    }
+
+    onDrag(): void {
+        // setTimeout(() => {
+        //     debugger;
+        // },1000);
+    }
+
+    /** @hidden */
+    _onDragDrop(event: CdkDragDrop<number, number>): void {
+        const movedCard = event.previousContainer.getSortedItems()[0].data;
+        const replacedCard = event.container.getSortedItems()[0].data;
+
+        const movedCardColumn = this._cardColumns.find((column) =>
+            column.find((card) => card.fdCardDef === movedCard.fdCardDef)
+        );
+        const replacedCardColumn = this._cardColumns.find((column) =>
+            column.find((card) => card.fdCardDef === replacedCard.fdCardDef)
+        );
+
+        // If we dragged the card from the same column as the column we're dropping into
+        // There may be a situation where the order shouldn't change but since there are a different drop lists it will change
+        // We should prevent this
+        if (movedCardColumn === replacedCardColumn && movedCardColumn.length === 2) {
+            if (movedCard.fdCardDef < replacedCard.fdCardDef && event.previousContainer.data < event.container.data) {
+                return;
+            }
+
+            if (movedCard.fdCardDef > replacedCard.fdCardDef && event.previousContainer.data > event.container.data) {
+                return;
+            }
+        }
+
+        this._processDragDrop(event.previousContainer.data, event.container.data, movedCard, replacedCard);
+    }
+
+    /** @hidden For the keyboard drag&drop directive */
+    _customMoveFn = (group: CardColumn, indexFrom: number, indexTo: number): void => {
+        const movedCard = group[indexFrom];
+        const replacedCard = group[indexTo];
+
+        const indexFromArray = this._cardsArray.findIndex((card) => card.fdCardDef === movedCard.fdCardDef);
+        const indexToArray = this._cardsArray.findIndex((card) => card.fdCardDef === replacedCard.fdCardDef);
+
+        this._processDragDrop(indexFromArray, indexToArray, movedCard, replacedCard);
+    };
+
+    /** @hidden For the keyboard drag&drop directive */
+    _customTransferFn = (prevGroup: CardColumn, nextGroup: CardColumn, indexFrom: number, indexTo: number): void => {
+        const movedCard = prevGroup[indexFrom];
+        const replacedCard = nextGroup[indexTo];
+
+        const indexFromArray = this._cardsArray.findIndex((card) => card.fdCardDef === movedCard.fdCardDef);
+        const indexToArray = this._cardsArray.findIndex((card) => card.fdCardDef === replacedCard.fdCardDef);
+
+        this._processDragDrop(indexFromArray, indexToArray, movedCard, replacedCard);
+    };
+
+    /** @hidden Arranges cards on drop of dragged card */
+    _processDragDrop(
+        prevIndex: number,
+        newIndex: number,
+        prevCard: CardDefinitionDirective,
+        newCard: CardDefinitionDirective
+    ): void {
+        // moveItemInArray from CDK won't work as it changes order of other cards
+        const replacedCard = this._cardsArray[newIndex];
+        this._cardsArray[newIndex] = this._cardsArray[prevIndex];
+        this._cardsArray[prevIndex] = replacedCard;
+
+        adjustCardRank(prevCard, newCard);
+
+        this.cardDraggedDropped.emit({
+            previousIndex: prevIndex,
+            currentIndex: newIndex,
+            layoutColumns: this._numberOfColumns,
+            items: this._cards.toArray()
+        });
+
+        this._renderLayout();
+    }
+
+    /** @hidden */
+    _getGroupIndex(card: CardDefinitionDirective): number {
+        if (!this._cardColumns) {
+            return 0;
+        }
+
+        return this._cardColumns.findIndex((column) => column.find((_card) => _card.fdCardDef === card.fdCardDef));
+    }
+
+    /** @hidden */
+    _getItemIndex(card: CardDefinitionDirective): number {
+        if (!this._cardColumns) {
+            return 0;
+        }
+
+        return this._cardColumns[this._getGroupIndex(card)].findIndex((_card) => _card.fdCardDef === card.fdCardDef);
+    }
+
+    /** @hidden */
+    _isSingleInColumn(card: CardDefinitionDirective): boolean {
+        return (
+            this._cardColumns?.find((column) => column.find((_card) => _card.fdCardDef === card.fdCardDef)).length < 2
+        );
+    }
+
     /** @hidden */
     private _accessibilitySetup(): void {
         this._keyboardEventsManager = new FocusKeyManager(this._cardContainers).withWrap();
-    }
-
-    /** @hidden Method to update rank after cards are dragged */
-    private _adjustCardRank(draggedCard: CardDefinitionDirective, replacedCard: CardDefinitionDirective): void {
-        const draggedCardRank = draggedCard.fdCardDef;
-        draggedCard.fdCardDef = replacedCard.fdCardDef;
-        replacedCard.fdCardDef = draggedCardRank;
     }
 
     /** @hidden Rtl change subscription */
@@ -278,77 +377,50 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
 
     /** @hidden Listen card change and distribute cards on column change */
     private _listenOnCardsChange(): void {
-        this._cards.changes.subscribe(() => this._renderLayout());
-    }
-
-    /** @hidden Returns number of columns that can fit in current available width for fd-card-layout */
-    private _getNumberOfColumns(): number {
-        const availableLayoutWidth = this._availableWidth;
-        const numberOfCardsWithNoGap = Math.floor(availableLayoutWidth / this.cardMinimumWidth); // 960 / 320 = 3
-        const requiredWidthWithGap =
-            numberOfCardsWithNoGap * this.cardMinimumWidth + (numberOfCardsWithNoGap - 1) * CARD_GAP_WIDTH;
-
-        let columnCount =
-            requiredWidthWithGap > availableLayoutWidth ? numberOfCardsWithNoGap - 1 : numberOfCardsWithNoGap;
-        columnCount = columnCount || 1;
-
-        this.layoutChange.emit(new Layout(columnCount, availableLayoutWidth));
-
-        return columnCount;
+        this._cards.changes.subscribe(() => {
+            this._processCards();
+            this._renderLayout();
+        });
     }
 
     /** @hidden Renders layout on column changes */
     private _renderLayout(): void {
-        const cardColumns = this._getCardColumns();
+        this._setCardColumns();
 
-        this._cardsArray = [].concat(...cardColumns);
-
-        // to render cards & be able to limit container height
-        this._changeDetector.detectChanges();
-
-        this._setCardWrapperColumns(cardColumns);
         this._calculateContainerHeight();
+    }
 
-        // to update layout after setting container height
+    /** @hidden */
+    private _processCards(): void {
+        this._cardsArray = this._cards
+            .toArray()
+            .sort((firstCard, secondCard) => firstCard.fdCardDef - secondCard.fdCardDef);
+
         this._changeDetector.detectChanges();
     }
 
     /** @hidden Distribute cards among columns to arrange them in "Z" flow */
-    private _getCardColumns(): CardColumn[] {
-        const cardsArray = this._cards
-            .toArray()
-            .sort((firstCard, secondCard) => firstCard.fdCardDef - secondCard.fdCardDef);
-        const numberOfColumns = this._getNumberOfColumns();
-        const columns: CardColumn[] = new Array(numberOfColumns).fill(0).map(() => new Array(0));
+    private _setCardColumns(): void {
+        const columns: CardColumn[] = new Array(this._numberOfColumns).fill(0).map(() => new Array(0));
 
-        cardsArray.forEach((card, i) => columns[i % numberOfColumns].push(card));
+        this._cardsArray.forEach((card, i) => columns[i % this._numberOfColumns].push(card));
 
-        return columns;
+        this._cardColumns = columns;
     }
+}
 
-    /** @hidden Set card wrapper columns accordingly to card columns, needed to limit container height basing on card wrapper columns */
-    private _setCardWrapperColumns(cardColumns: CardColumn[]): void {
-        const wrapperColumns: ElementRef[][] = new Array(cardColumns.length).fill(0).map(() => new Array(0));
+/** @hidden Returns number of columns that can fit in current available width for fd-card-layout */
+function getNumberOfColumns(containerWidth: number, cardWidth: number): number {
+    const numberOfCardsWithNoGap = Math.floor(containerWidth / cardWidth); // 960 / 320 = 3
+    const requiredWidthWithGap = numberOfCardsWithNoGap * cardWidth + (numberOfCardsWithNoGap - 1) * CARD_GAP_WIDTH;
+    const columnCount = requiredWidthWithGap > containerWidth ? numberOfCardsWithNoGap - 1 : numberOfCardsWithNoGap;
 
-        let currColumnIndex = 0;
+    return columnCount || 1;
+}
 
-        this._cardsArray.forEach((card, index) => {
-            if (!cardColumns[currColumnIndex].find((_card) => _card === card)) {
-                currColumnIndex++;
-            }
-
-            wrapperColumns[currColumnIndex].push(this._cardWrappers.get(index));
-        });
-
-        this._cardWrapperColumns = wrapperColumns;
-    }
-
-    /** @hidden Calculate container height basing on the card wrapper columns */
-    _calculateContainerHeight(): void {
-        const columnsHeights = this._cardWrapperColumns
-            .map((column) => column.map((card) => card.nativeElement.getBoundingClientRect().height))
-            .map((column) => column.reduce((height, cardHeight) => (height += cardHeight)));
-
-        this._containerHeight = Math.max(...columnsHeights);
-    }
+/** @hidden Method to update rank after cards are dragged */
+function adjustCardRank(draggedCard: CardDefinitionDirective, replacedCard: CardDefinitionDirective): void {
+    const draggedCardRank = draggedCard.fdCardDef;
+    draggedCard.fdCardDef = replacedCard.fdCardDef;
+    replacedCard.fdCardDef = draggedCardRank;
 }
