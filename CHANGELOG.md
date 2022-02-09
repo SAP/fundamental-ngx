@@ -1,4 +1,11 @@
 
+### 0.33.2-rc.5 (2022-02-09)
+
+
+### Bug Fixes
+
+* **core,platform,fn:** stackblitz inject issue ([#7715](https://github.com/SAP/fundamental-ngx/issues/7715)) ([f389e1a](https://github.com/SAP/fundamental-ngx/commit/f389e1a724f7db1aca80ba1a5fd06107a8870459))
+
 ### 0.33.2-rc.4 (2022-02-09)
 
 ### 0.33.2-rc.3 (2022-02-09)
