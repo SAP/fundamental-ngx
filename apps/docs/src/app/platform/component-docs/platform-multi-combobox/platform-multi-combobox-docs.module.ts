@@ -7,7 +7,6 @@ import {
     PlatformMultiComboboxModule,
     PlatformComboboxModule
 } from '@fundamental-ngx/platform/form';
-import { FdpFormGroupModule, PlatformMultiComboboxModule } from '@fundamental-ngx/platform/form';
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
@@ -41,7 +40,7 @@ const routes: Routes = [
         SharedDocumentationPageModule,
         FdpFormGroupModule,
         PlatformMultiComboboxModule,
-        PlatformComboboxModule
+        PlatformComboboxModule,
         PlatformMultiComboboxModule,
         BusyIndicatorModule
     ],
@@ -55,7 +54,7 @@ const routes: Routes = [
         MultiComboboxGroupExampleComponent,
         MultiComboboxColumnsExampleComponent,
         MultiComboboxFormsExampleComponent,
-        MultiComboboxStatesExampleComponent
+        MultiComboboxStatesExampleComponent,
         MultiComboboxLoadingExampleComponent
     ]
 })
