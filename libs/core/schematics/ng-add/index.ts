@@ -27,6 +27,7 @@ export function ngAdd(options: any): Rule {
 function addDependencies(options: Schema): Rule {
     return (tree: Tree, context: SchematicContext) => {
         const ngCoreVersionTag = getPackageVersionFromPackageJson(tree, '@angular/core');
+        const ngCdkVersionTag = getPackageVersionFromPackageJson(tree, '@angular/cdk');
         const dependencies: NodeDependency[] = [];
 
         if (!hasPackage(tree, '@angular/forms')) {
@@ -42,6 +43,14 @@ function addDependencies(options: Schema): Rule {
                 type: NodeDependencyType.Default,
                 version: `${ngCoreVersionTag}`,
                 name: '@angular/animations'
+            });
+        }
+
+        if (!hasPackage(tree, '@angular/cdk')) {
+            dependencies.push({
+                type: NodeDependencyType.Default,
+                version: `${ngCdkVersionTag}`,
+                name: '@angular/cdk'
             });
         }
 
