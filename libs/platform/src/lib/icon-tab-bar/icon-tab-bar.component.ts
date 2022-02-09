@@ -107,7 +107,7 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
     _isRtl = false;
 
     /** @hidden */
-    private _onDestroy$ = new Subject();
+    private _onDestroy$ = new Subject<void>();
 
     /** @hidden */
     constructor(

@@ -117,7 +117,7 @@ export class SearchFieldComponent
             // convert suggestions to an array of string for "dropdown values"
             const dropdownValues = value.map((suggestion: SuggestionItem) => suggestion.value);
             this._dropdownValues$ = of(dropdownValues);
-        } else if (isObservable<SuggestionItem[]>(value)) {
+        } else if (isObservable(value)) {
             this._dropdownValues$ = value.pipe(
                 map((suggestions: SuggestionItem[]) => suggestions.map((suggestion) => suggestion.value))
             );

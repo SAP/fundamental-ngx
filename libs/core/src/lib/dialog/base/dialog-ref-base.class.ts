@@ -5,7 +5,7 @@ export class DialogRefBase<T, P = any> {
     protected readonly _afterClosed = new Subject<P>();
 
     /** @hidden */
-    protected readonly _afterLoaded = new Subject<any>();
+    protected readonly _afterLoaded = new Subject<boolean>();
 
     /**
      * Observable that is triggered when the dialog is closed.
@@ -38,6 +38,6 @@ export class DialogRefBase<T, P = any> {
 
     /** Function that is called after the view of modal is initialised. */
     loaded(): void {
-        this._afterLoaded.next();
+        this._afterLoaded.next(true);
     }
 }
