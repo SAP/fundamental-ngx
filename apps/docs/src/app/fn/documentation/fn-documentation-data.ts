@@ -10,6 +10,7 @@ export const guides: SectionInterfaceContent[] = [
 ];
 
 export const components: SectionInterfaceContent[] = [
+    { url: 'fn/avatar', name: 'Avatar' },
     { url: 'fn/button', name: 'Button' },
     { url: 'fn/checkbox', name: 'Checkbox' },
     { url: 'fn/generic-tag', name: 'Generic Tag' },

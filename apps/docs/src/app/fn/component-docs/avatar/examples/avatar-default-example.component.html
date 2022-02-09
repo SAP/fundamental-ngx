@@ -1,0 +1,7 @@
+<div *ngFor="let color of colors">
+    <p>{{ color }}:</p>
+
+    <div class="fn-avatar__example">
+        <fn-avatar [color]="color" [label]="getLabel(size)" [size]="size" *ngFor="let size of sizes"></fn-avatar>
+    </div>
+</div>
