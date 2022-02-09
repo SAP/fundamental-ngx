@@ -18,7 +18,7 @@ export class UploadCollectionPo extends BaseComponentPo {
     linkPrevious = ' [glyph="navigation-left-arrow"]';
     inputFields = ' .fdp-upload-collection__toolbar .fd-input';
     columnHeaders = ' [role="columnheader"]';
-    tableContent = ' fd-icon~span';
+    tableContent = ' .fdp-upload-collection__cursor';
     transparentButton = ' .fd-button--transparent';
     dialogInputField = 'fd-dialog-body .fd-input';
     dialogCreateButton = 'button.fd-dialog__decisive-button';
