@@ -46,7 +46,7 @@ import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobi
 import { MultiInputMobileModule } from './multi-input-mobile/multi-input-mobile.module';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
 import { SelectionModel } from '@angular/cdk/collections';
-import { first, map, shareReplay, startWith } from 'rxjs/operators';
+import { distinctUntilChanged, first, map, shareReplay, startWith } from 'rxjs/operators';
 import { uniqBy } from 'lodash-es';
 
 /**
@@ -360,7 +360,7 @@ export class MultiInputComponent
         }
 
         this._subscriptions.add(
-            this._searchTermCtrl.valueChanges.subscribe((searchTerm) => {
+            this._searchTermCtrl.valueChanges.pipe(distinctUntilChanged()).subscribe((searchTerm) => {
                 this.searchTermChange.emit(searchTerm);
                 // resetting existing selection state, if any
                 this._rangeSelector.reset();
@@ -501,14 +501,26 @@ export class MultiInputComponent
     }
 
     /** @hidden */
-    async _onCheckboxClick(value: any, event: PointerEvent | KeyboardEvent, index: number): Promise<void> {
+    async _onCheckboxClick(
+        value: any,
+        event: PointerEvent | KeyboardEvent,
+        index: number,
+        isListItem = false
+    ): Promise<void> {
+        if (isListItem) {
+            this.openChangeHandle(false);
+        } else {
+            // stop propagation on the checkbox so event doesn't reach the list item
+            event.stopPropagation();
+        }
         const toggledSelection = !this._selectionModel.isSelected(value);
         this._rangeSelector.onRangeElementToggled(index, event);
-        const vm = await this.viewModel$.pipe(first()).toPromise();
-        this._rangeSelector.applyValueToEachInRange((idx) =>
-            this._handleSelect(toggledSelection, vm.displayedOptions[idx].value, false)
-        );
-        this._resetSearchTerm();
+        const sub = this.viewModel$.pipe(first()).subscribe((vm) => {
+            this._rangeSelector.applyValueToEachInRange((idx) =>
+                this._handleSelect(toggledSelection, vm.displayedOptions[idx].value, false)
+            );
+        });
+        this._subscriptions.add(sub);
     }
 
     /** @hidden */
