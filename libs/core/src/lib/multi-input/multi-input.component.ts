@@ -560,6 +560,9 @@ export class MultiInputComponent
     /** @hidden */
     _onSubmit(): void {
         const searchTerm = this.searchTerm;
+        if (searchTerm === '') {
+            return;
+        }
         const isExist = this._selectFirstFiltered(searchTerm);
         if (!isExist && this.allowNewTokens && this.newTokenValidateFn(this._searchTermCtrl.value)) {
             const newToken = this.newTokenParseFn(this._searchTermCtrl.value);
