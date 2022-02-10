@@ -1,5 +1,6 @@
 import {
     AfterContentInit,
+    AfterViewInit,
     ChangeDetectorRef,
     ContentChild,
     Directive,
@@ -23,7 +24,7 @@ import {
     selector: '[fd-upload-collection-item]',
     host: { class: 'fd-upload-collection__item' }
 })
-export class UploadCollectionItemDirective implements AfterContentInit, OnDestroy {
+export class UploadCollectionItemDirective implements AfterContentInit, OnDestroy, AfterViewInit {
     /** The name of the file, not including the type extension. */
     @Input()
     fileName: string;
@@ -75,11 +76,14 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
     ngAfterContentInit(): void {
         this.fileNameFull = this.fileName + '.' + this.extension;
         this._titleDirective.elRef.nativeElement.innerHTML = this.fileNameFull;
-        this.resizeFileTitle(this.fileNameFull);
         this._handleDeleteClickedSubscription();
         this._handleOkClickedSubscription();
         this._handleEditClickedSubscription();
         this._handleFormItemInputChangedSubscription();
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
         this.onResize();
     }
 
@@ -102,7 +106,7 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
         // if first load and no previous container width, or if container boundary is resized to smaller than before
         if (!this.previousContainerWidth || this.containerWidth < this.previousContainerWidth) {
             // and the title extends past the container
-            if (this.titleWidth >= this.containerWidth) {
+            if (this.titleWidth * 1.05 >= this.containerWidth) {
                 this.resizeFileTitle(this._titleDirective.elRef.nativeElement.innerHTML);
             }
         } else if (this.previousContainerWidth && this.containerWidth > this.previousContainerWidth) {
@@ -196,7 +200,6 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
         const cutLength = Math.floor(str.length * 0.8);
 
         if (str.length > cutLength) {
-            // console.log('truncating length: ' + str.length);
             const stringLeftIndex = Math.floor(cutLength / 2);
             const stringRightIndex = str.length - stringLeftIndex + 3;
             return str.substring(0, stringLeftIndex) + '... ' + str.substring(stringRightIndex, str.length);
@@ -215,11 +218,12 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
         this.titleWidth = this.getTitleWidth();
 
         // repeatedly truncate the title until it fits inside container
-        while (this.titleWidth >= this.containerWidth && curTitle.length > 12) {
+        while (this.titleWidth * 1.05 >= this.containerWidth && curTitle.length > 12) {
             const truncatedTitleStr = this.truncateTitle(curTitle);
             this._titleDirective.elRef.nativeElement.innerHTML = truncatedTitleStr;
             curTitle = truncatedTitleStr;
             this.titleWidth = this.getTitleWidth();
+            this.containerWidth = this.getContainerWidth();
         }
     }
 }
