@@ -6,12 +6,10 @@ import {
     HostBinding,
     Inject,
     Input,
-    OnDestroy,
     Optional,
     ViewEncapsulation
 } from '@angular/core';
 import { BaseButton } from '@fundamental-ngx/core/button';
-import { Subscription } from 'rxjs';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SelectableItemToken, SelectComponentRootToken } from '@fundamental-ngx/fn/cdk';
 import { coerceBoolean } from '@fundamental-ngx/fn/utils';
@@ -44,7 +42,7 @@ export type ButtonType = '' | 'secondary' | 'layout' | 'positive' | 'critical' |
     },
     providers: [{ provide: SelectableItemToken, useExisting: ButtonComponent }]
 })
-export class ButtonComponent extends BaseButton implements SelectableItemToken<string>, OnDestroy {
+export class ButtonComponent extends BaseButton implements SelectableItemToken<string> {
     /** The type of the button. Types include:
      * '' | 'secondary' | 'layout' | 'positive' | 'critical' | 'negative'.
      * Leave empty for default (Standard button).'
@@ -112,20 +110,12 @@ export class ButtonComponent extends BaseButton implements SelectableItemToken<s
     _selected: boolean;
 
     /** @hidden */
-    private _subscriptions = new Subscription();
-
-    /** @hidden */
     constructor(
         @Optional() @Inject(SelectComponentRootToken) private selectComponent: SelectComponentRootToken,
         private _elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef
     ) {
         super();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
     }
 
     /** HasElementRef interface implementation
