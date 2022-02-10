@@ -9,9 +9,9 @@ set -u -e
 NEW_VERSION=$(node -p "require('./package.json').version")
 echo "Updating packages.json under dist/libs with version ${NEW_VERSION}"
 
-ANGULAR_VERSION=$(node -p "require('./package.json').dependencies['@angular/core']")
+# As Angular version listed as peerDependency it should be ^X.0.0 to support any minor version
+ANGULAR_VERSION=$(node -p "'^' + require('./package.json').dependencies['@angular/core'].match(/\d+/).concat('.0.0')" )
 RXJS_VERSION=$(node -p "require('./package.json').dependencies['rxjs']")
-CDK_VERSION=$(node -p "require('./package.json').dependencies['@angular/cdk']")
 FAST_DEEP_EQUAL_VERSION=$(node -p "require('./package.json').dependencies['fast-deep-equal']")
 FDSTYLES_VERSION=$(node -p "require('./package.json').dependencies['fundamental-styles']")
 FDNSTYLES_VERSION=$(node -p "require('./package.json').dependencies['@fundamental-styles/fn']")
@@ -25,7 +25,6 @@ cd ./dist
 grep -rl 'VERSION_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/VERSION_PLACEHOLDER/${NEW_VERSION}/g"
 grep -rl 'ANGULAR_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/ANGULAR_VER_PLACEHOLDER/${ANGULAR_VERSION}/g"
 grep -rl 'RXJS_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/RXJS_VER_PLACEHOLDER/${RXJS_VERSION}/g"
-grep -rl 'CDK_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/CDK_VER_PLACEHOLDER/${CDK_VERSION}/g"
 grep -rl 'FAST_DEEP_EQUAL_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/FAST_DEEP_EQUAL_VER_PLACEHOLDER/${FAST_DEEP_EQUAL_VERSION}/g"
 grep -rl 'FDSTYLES_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/FDSTYLES_VER_PLACEHOLDER/${FDSTYLES_VERSION}/g"
 grep -rl 'FDNSTYLES_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/FDNSTYLES_VER_PLACEHOLDER/${FDNSTYLES_VERSION}/g"
