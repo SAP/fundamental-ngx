@@ -1,4 +1,11 @@
 
+### 0.33.3-rc.2 (2022-02-10)
+
+
+### Bug Fixes
+
+* **core,platform,fn:** support any minor version of angular ([#7720](https://github.com/SAP/fundamental-ngx/issues/7720)) ([cc682d8](https://github.com/SAP/fundamental-ngx/commit/cc682d88917c1c16f7a18d93215e419b2c7d6a24))
+
 ### 0.33.3-rc.1 (2022-02-10)
 
 ### 0.33.3-rc.0 (2022-02-10)
