@@ -55,6 +55,17 @@ export const ROUTES: Routes = [
             {
                 path: 'slider',
                 loadChildren: () => import('./component-docs/slider/slider-docs.module').then((m) => m.SliderDocsModule)
+            },
+            {
+                path: 'segmented-button',
+                loadChildren: () =>
+                    import('./component-docs/segmented-button/segmented-button-docs.module').then(
+                        (m) => m.SegmentedButtonDocsModule
+                    )
+            },
+            {
+                path: 'cdk',
+                loadChildren: () => import('./component-docs/cdk/cdk-docs.module').then((m) => m.CdkDocsModule)
             }
         ]
     }

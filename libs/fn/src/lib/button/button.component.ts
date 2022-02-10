@@ -13,6 +13,7 @@ import { BaseButton } from '@fundamental-ngx/core/button';
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { Subscription } from 'rxjs';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { SelectableItemToken } from '@fundamental-ngx/fn/cdk';
 
 export type ButtonType = '' | 'secondary' | 'layout' | 'positive' | 'critical' | 'negative';
 
@@ -29,13 +30,14 @@ export type ButtonType = '' | 'secondary' | 'layout' | 'positive' | 'critical' |
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '[attr.type]': 'type',
-        '[attr.disabled]': '_disabled || null',
-        '[attr.aria-disabled]': '_disabled || null',
-        '[attr.aria-selected]': '_selected'
-    }
+        '[attr.type]': 'type'
+    },
+    providers: [{ provide: SelectableItemToken, useExisting: ButtonComponent }]
 })
-export class ButtonComponent extends BaseButton implements OnChanges, CssClassBuilder, OnInit, OnDestroy {
+export class ButtonComponent
+    extends BaseButton
+    implements OnChanges, SelectableItemToken<string>, CssClassBuilder, OnInit, OnDestroy
+{
     /** The property allows user to pass additional css classes. */
     @Input()
     class = '';
@@ -55,8 +57,23 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
 
     @Input()
     set selected(value: BooleanInput) {
-        this._selected = coerceBooleanProperty(value);
+        this.setSelected(coerceBooleanProperty(value));
     }
+
+    /**
+     * Native disabled attribute of button element
+     */
+    @Input()
+    get disabled(): boolean {
+        return this._disabled;
+    }
+
+    set disabled(value: BooleanInput) {
+        this.setDisabled(coerceBooleanProperty(value));
+    }
+
+    @Input()
+    value: string;
 
     /** @hidden */
     _selected: boolean;
@@ -98,10 +115,9 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
         return [
             'fn-button',
             this.fnType ? `fn-button--${this.fnType}` : '',
-            this._disabled || this._ariaDisabled ? 'is-disabled' : '',
+            // this._disabled || this._ariaDisabled ? 'is-disabled' : '',
             this.glyph && !this.label ? 'fn-button--icon-only' : '',
             this._emphasized ? `fn-button--emphasized` : '',
-            this._selected ? `fn-button--selected` : '',
             this.class
         ];
     }
@@ -109,8 +125,37 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
     /** HasElementRef interface implementation
      * function used by applyCssClass and applyCssStyle decorators
      */
-    public elementRef(): ElementRef<any> {
+    public elementRef(): ElementRef<HTMLButtonElement | HTMLAnchorElement> {
         return this._elementRef;
+    }
+
+    setSelected(selected: boolean): void {
+        const selectedClass = 'fn-button--selected';
+        this._selected = selected;
+        const classList = this.elementRef().nativeElement.classList;
+        selected ? classList.add(selectedClass) : classList.remove(selectedClass);
+        this.elementRef().nativeElement.setAttribute('aria-selected', `${selected}`);
+    }
+
+    getSelected(): boolean {
+        return this._selected;
+    }
+
+    setDisabled(disabled: boolean): void {
+        this._disabled = disabled;
+        if (disabled) {
+            this.elementRef().nativeElement.classList.add('is-disabled');
+            this.elementRef().nativeElement.setAttribute('disabled', `${disabled}`);
+            this.elementRef().nativeElement.setAttribute('aria-disabled', `${disabled}`);
+        } else {
+            this.elementRef().nativeElement.classList.remove('is-disabled');
+            this.elementRef().nativeElement.removeAttribute('disabled');
+            this.elementRef().nativeElement.removeAttribute('aria-disabled');
+        }
+    }
+
+    getDisabled(): boolean {
+        return this._disabled;
     }
 
     detectChanges(): void {
