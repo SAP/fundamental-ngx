@@ -31,7 +31,7 @@ import {
     UP_ARROW
 } from '@angular/cdk/keycodes';
 
-import { BehaviorSubject, fromEvent, isObservable, Observable, Subject, Subscription, timer } from 'rxjs';
+import { BehaviorSubject, fromEvent, isObservable, skip, Observable, Subject, Subscription, timer } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import equal from 'fast-deep-equal';
 
@@ -663,8 +663,9 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
         this._dsSubscription = new Subscription();
         const dsSub = initDataSource
             .open()
-            .pipe(takeUntil(this._destroyed))
+            .pipe(skip(1), takeUntil(this._destroyed))
             .subscribe((data) => {
+                console.log('data', data);
                 if (data.length === 0) {
                     this._processingEmptyData();
 

@@ -66,7 +66,7 @@ export class AutoCompleteDirective {
     }
 
     /** @hidden */
-    @HostListener('keyup', ['$event'])
+    @HostListener('keydown', ['$event'])
     handleKeyboardEvent(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, this._stopKeys)) {
             this._element.value = this.inputText;
@@ -85,7 +85,7 @@ export class AutoCompleteDirective {
 
             if (!item) {
                 // prevent fast typing chars that breaks valid value entering
-                this._element.value = this._oldValue.slice(0, -1);
+                this._element.value = this._oldValue;
             }
 
             if (item) {
