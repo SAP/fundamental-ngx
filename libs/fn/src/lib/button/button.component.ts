@@ -29,7 +29,7 @@ export type ButtonType = '' | 'secondary' | 'layout' | 'positive' | 'critical' |
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '[class]': `'fn-button ' + class`,
+        '[class]': `'fn-button ' + (class || '')`,
         '[attr.type]': 'type',
         '[class.is-disabled]': 'disabled',
         '[class.fn-button--emphasized]': 'emphasized',
