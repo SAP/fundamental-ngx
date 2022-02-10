@@ -38,6 +38,8 @@ export type ButtonType = '' | 'secondary' | 'layout' | 'positive' | 'critical' |
         '[class.fn-button--icon-only]': 'glyph && !label',
         '[attr.aria-disabled]': 'disabled',
         '[disabled]': 'disabled',
+        '[class.fn-button--selected]': 'selected',
+        '[attr.aria-selected]': 'selected',
         '[value]': 'value'
     },
     providers: [{ provide: SelectableItemToken, useExisting: ButtonComponent }]
@@ -64,6 +66,10 @@ export class ButtonComponent extends BaseButton implements SelectableItemToken<s
     @Input()
     set selected(value: BooleanInput) {
         this.setSelected(coerceBooleanProperty(value));
+    }
+
+    get selected(): boolean {
+        return this._selected;
     }
 
     /**
@@ -129,18 +135,20 @@ export class ButtonComponent extends BaseButton implements SelectableItemToken<s
         return this._elementRef;
     }
 
+    /** @hidden */
     setSelected(selected: boolean): void {
-        const selectedClass = 'fn-button--selected';
-        this._selected = selected;
-        const classList = this.elementRef().nativeElement.classList;
-        selected ? classList.add(selectedClass) : classList.remove(selectedClass);
-        this.elementRef().nativeElement.setAttribute('aria-selected', `${selected}`);
+        if (selected !== this._selected) {
+            this._selected = selected;
+            this._changeDetectorRef.markForCheck();
+        }
     }
 
+    /** @hidden */
     getSelected(): boolean {
         return this._selected;
     }
 
+    /** @hidden */
     detectChanges(): void {
         this._changeDetectorRef.detectChanges();
     }

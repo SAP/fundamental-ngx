@@ -8,4 +8,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 export class SegmentedButtonDefaultExampleComponent {
     segmentModel = 'value2';
     disabled = false;
+    toggle = false;
 }

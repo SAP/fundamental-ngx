@@ -6,10 +6,13 @@ import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { SelectComponentRootToken } from './SelectComponentRootToken';
 import { coerceArray } from '@angular/cdk/coercion';
+import equal from 'fast-deep-equal';
 
 @Injectable()
 export class SelectionService<ValueType = any> implements OnDestroy {
+    /** @hidden */
     items!: QueryList<SelectableItemToken>;
+    /** @hidden */
     destroy$ = new Subject();
 
     private refresh$ = new Subject();
@@ -17,9 +20,10 @@ export class SelectionService<ValueType = any> implements OnDestroy {
     private normalizedValue$: Observable<ValueType[]>;
     private rootComponent!: SelectComponentRootToken;
 
+    /** @hidden */
     constructor() {
         this.normalizedValue$ = this.value$.pipe(
-            distinctUntilChanged(),
+            distinctUntilChanged(equal),
             map((value) => {
                 const coerced = coerceArray(value);
                 return coerced.filter(Boolean);
@@ -27,10 +31,16 @@ export class SelectionService<ValueType = any> implements OnDestroy {
         );
     }
 
+    /**
+     * Register main select component, which holds config
+     * */
     registerRootComponent(rootComponent: SelectComponentRootToken<ValueType | Array<ValueType>>): void {
         this.rootComponent = rootComponent;
     }
 
+    /**
+     * Initialize watcher for selection changes and user interactions
+     * */
     initialize(queryList: QueryList<SelectableItemToken>): void {
         const items$ = queryList.changes.pipe(
             startWith(queryList),
@@ -45,8 +55,9 @@ export class SelectionService<ValueType = any> implements OnDestroy {
             .subscribe();
         combineLatest([this.normalizedValue$, items$])
             .pipe(
+                tap(([value, items]) => console.log({ value, items })),
                 tap(([value, items]) => {
-                    if (value.length === 0 && items.some((itm) => itm.getSelected())) {
+                    if (value.length === 0 && items.some((itm) => itm.getSelected()) && !this.rootComponent.toggle) {
                         const selectedValues = this.getSelectedValues(items);
                         this.rootComponent.onChange(selectedValues);
                         return this.value$.next(selectedValues);
@@ -60,10 +71,14 @@ export class SelectionService<ValueType = any> implements OnDestroy {
             .subscribe();
     }
 
+    /**
+     * Sets Value, on which service looks at and updates UI accordingly
+     * */
     setValue(v: ValueType | ValueType[]): void {
         this.value$.next(v);
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         this.destroy$.next();
     }
@@ -89,7 +104,6 @@ export class SelectionService<ValueType = any> implements OnDestroy {
     }
 
     private itemClicked(item: SelectableItemToken): void {
-        console.log({ item });
         this.value$
             .pipe(
                 first(),
