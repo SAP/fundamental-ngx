@@ -21,18 +21,7 @@ export const components: SectionInterfaceContent[] = [
     { url: 'fn/slider', name: 'Slider' },
     { url: 'fn/switch', name: 'Switch' },
     { url: 'fn/radio', name: 'Radio button' },
-    {
-        url: 'fn/segmented-button',
-        name: 'Segmented Button'
-    },
-    {
-        url: 'fn/utils',
-        name: 'Utils'
-    },
-    {
-        url: 'fn/cdk',
-        name: 'Cdk'
-    }
+    { url: 'fn/segmented-button', name: 'Segmented Button' }
 ];
 
 export const sections: SectionInterface[] = [
