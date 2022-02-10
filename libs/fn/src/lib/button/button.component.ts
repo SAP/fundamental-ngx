@@ -3,17 +3,18 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
+    HostBinding,
+    Inject,
     Input,
-    OnChanges,
     OnDestroy,
-    OnInit,
+    Optional,
     ViewEncapsulation
 } from '@angular/core';
 import { BaseButton } from '@fundamental-ngx/core/button';
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { Subscription } from 'rxjs';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { SelectableItemToken } from '@fundamental-ngx/fn/cdk';
+import { SelectableItemToken, SelectComponentRootToken } from '@fundamental-ngx/fn/cdk';
+import { coerceBoolean } from '@fundamental-ngx/fn/utils';
 
 export type ButtonType = '' | 'secondary' | 'layout' | 'positive' | 'critical' | 'negative';
 
@@ -30,18 +31,18 @@ export type ButtonType = '' | 'secondary' | 'layout' | 'positive' | 'critical' |
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '[attr.type]': 'type'
+        '[class]': `'fn-button ' + class`,
+        '[attr.type]': 'type',
+        '[class.is-disabled]': 'disabled',
+        '[class.fn-button--emphasized]': 'emphasized',
+        '[class.fn-button--icon-only]': 'glyph && !label',
+        '[attr.aria-disabled]': 'disabled',
+        '[disabled]': 'disabled',
+        '[value]': 'value'
     },
     providers: [{ provide: SelectableItemToken, useExisting: ButtonComponent }]
 })
-export class ButtonComponent
-    extends BaseButton
-    implements OnChanges, SelectableItemToken<string>, CssClassBuilder, OnInit, OnDestroy
-{
-    /** The property allows user to pass additional css classes. */
-    @Input()
-    class = '';
-
+export class ButtonComponent extends BaseButton implements SelectableItemToken<string>, OnDestroy {
     /** The type of the button. Types include:
      * '' | 'secondary' | 'layout' | 'positive' | 'critical' | 'negative'.
      * Leave empty for default (Standard button).'
@@ -50,11 +51,16 @@ export class ButtonComponent
     @Input()
     fnType: ButtonType = '';
 
+    /**
+     * Set emphasized state of the button
+     */
     @Input()
-    set emphasized(value: BooleanInput) {
-        this._emphasized = coerceBooleanProperty(value);
-    }
+    @coerceBoolean
+    emphasized: boolean;
 
+    /**
+     * Set selected state of the button
+     */
     @Input()
     set selected(value: BooleanInput) {
         this.setSelected(coerceBooleanProperty(value));
@@ -65,15 +71,36 @@ export class ButtonComponent
      */
     @Input()
     get disabled(): boolean {
-        return this._disabled;
+        return this._disabled || (this.selectComponent !== null && this.selectComponent.disabled);
     }
 
     set disabled(value: BooleanInput) {
-        this.setDisabled(coerceBooleanProperty(value));
+        const newDisabledState = coerceBooleanProperty(value);
+        if (this._disabled !== newDisabledState) {
+            this._disabled = newDisabledState;
+            this._changeDetectorRef.markForCheck();
+        }
     }
 
+    /**
+     * Value of the button
+     */
     @Input()
     value: string;
+
+    /**
+     * Additional HTML classes
+     */
+    @Input()
+    class: string;
+
+    /**
+     * Fiori Next button type class getter
+     */
+    @HostBinding('attr.class')
+    get fnTypeClass(): string {
+        return this.fnType ? `fn-button--${this.fnType}` : '';
+    }
 
     /** @hidden */
     _selected: boolean;
@@ -82,23 +109,12 @@ export class ButtonComponent
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    private _emphasized: boolean;
-
-    /** @hidden */
-    constructor(private _elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) {
+    constructor(
+        @Optional() @Inject(SelectComponentRootToken) private selectComponent: SelectComponentRootToken,
+        private _elementRef: ElementRef,
+        private _changeDetectorRef: ChangeDetectorRef
+    ) {
         super();
-    }
-
-    /** Function runs when component is initialized
-     * function should build component css class
-     * function should build css style
-     */
-    public ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
-
-    public ngOnInit(): void {
-        this.buildComponentCssClass();
     }
 
     /** @hidden */
@@ -106,26 +122,10 @@ export class ButtonComponent
         this._subscriptions.unsubscribe();
     }
 
-    @applyCssClass
-    /** CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    buildComponentCssClass(): string[] {
-        return [
-            'fn-button',
-            this.fnType ? `fn-button--${this.fnType}` : '',
-            // this._disabled || this._ariaDisabled ? 'is-disabled' : '',
-            this.glyph && !this.label ? 'fn-button--icon-only' : '',
-            this._emphasized ? `fn-button--emphasized` : '',
-            this.class
-        ];
-    }
-
     /** HasElementRef interface implementation
      * function used by applyCssClass and applyCssStyle decorators
      */
-    public elementRef(): ElementRef<HTMLButtonElement | HTMLAnchorElement> {
+    elementRef(): ElementRef<HTMLButtonElement | HTMLAnchorElement> {
         return this._elementRef;
     }
 
@@ -139,23 +139,6 @@ export class ButtonComponent
 
     getSelected(): boolean {
         return this._selected;
-    }
-
-    setDisabled(disabled: boolean): void {
-        this._disabled = disabled;
-        if (disabled) {
-            this.elementRef().nativeElement.classList.add('is-disabled');
-            this.elementRef().nativeElement.setAttribute('disabled', `${disabled}`);
-            this.elementRef().nativeElement.setAttribute('aria-disabled', `${disabled}`);
-        } else {
-            this.elementRef().nativeElement.classList.remove('is-disabled');
-            this.elementRef().nativeElement.removeAttribute('disabled');
-            this.elementRef().nativeElement.removeAttribute('aria-disabled');
-        }
-    }
-
-    getDisabled(): boolean {
-        return this._disabled;
     }
 
     detectChanges(): void {

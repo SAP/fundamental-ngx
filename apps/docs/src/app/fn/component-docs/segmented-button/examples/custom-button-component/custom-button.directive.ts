@@ -27,16 +27,8 @@ export class CustomButtonDirective implements SelectableItemToken<string> {
         return this.buttonComponent.elementRef();
     }
 
-    getDisabled(): boolean {
-        return this.buttonComponent.getDisabled();
-    }
-
     getSelected(): boolean {
         return this.buttonComponent.getSelected();
-    }
-
-    setDisabled(disabled: boolean): void {
-        this.buttonComponent.setDisabled(disabled);
     }
 
     setSelected(selected: boolean): void {

@@ -1,8 +1,10 @@
-<fn-segmented-button [(selected)]="segmentModel">
+<fn-segmented-button [(selected)]="segmentModel" multiple [disabled]="disabled">
     <button fn-button label="Button" fnType="layout" value="value1"></button>
     <button fn-button label="Button" fnType="layout" value="value2"></button>
     <a fn-button label="Button" fnType="layout" value="value3"></a>
     <button fn-button label="Button" fnType="layout" value="value4" disabled></button>
 </fn-segmented-button>
 
-<small style="display: block; margin-top: 15px">Selected item: {{ segmentModel | json }}</small>
+<small style="display: block; margin: 15px 0">Selected item: {{ segmentModel | json }}</small>
+
+<button fn-button fnType="secondary" emphasized label="Toggle disabled state" (click)="disabled = !disabled"></button>

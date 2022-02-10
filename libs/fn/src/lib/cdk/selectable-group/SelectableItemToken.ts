@@ -1,15 +1,9 @@
-import { ElementRef } from '@angular/core';
+import { HasElementRef } from '../HasElementRef';
 
-export abstract class SelectableItemToken<ValueType = any> {
+export abstract class SelectableItemToken<ValueType = any> extends HasElementRef {
     abstract value: ValueType;
 
     abstract setSelected(isSelected: boolean): void;
 
     abstract getSelected(): boolean;
-
-    abstract setDisabled(isDisabled: boolean): void;
-
-    abstract getDisabled(): boolean;
-
-    abstract elementRef(): ElementRef<HTMLElement>;
 }
