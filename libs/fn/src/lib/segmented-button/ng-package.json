@@ -1,6 +1,6 @@
 {
     "$schema": "../../../../../node_modules/ng-packagr/ng-package.schema.json",
-    "dest": "../../../../../dist/libs/fn/src/lib/segmented-button",
+    "dest": "../../../../../dist/libs/fn/segmented-button",
     "lib": {
         "entryFile": "./index.ts"
     }
