@@ -9,6 +9,8 @@ import {
     ViewChild
 } from '@angular/core';
 
+import { ContentDensity } from '@fundamental-ngx/core/utils';
+
 import { FilterType } from '../../../enums/filter-type.enum';
 import { FILTER_STRATEGY } from '../../../enums/collection-filter.enum';
 import { CollectionFilter } from '../../../interfaces/collection-filter.interface';
@@ -37,6 +39,10 @@ export class FilterStepComponent implements FiltersViewStep {
     /** Column key to apply this filter to */
     @Input()
     columnKey: string;
+
+    /** Table's content density to be used */
+    @Input()
+    contentDensity: ContentDensity;
 
     /** The current filter model */
     @Input()

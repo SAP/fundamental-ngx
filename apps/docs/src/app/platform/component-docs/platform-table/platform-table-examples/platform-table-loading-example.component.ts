@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 
 import { FdDate } from '@fundamental-ngx/core/datetime';
 import { TableDataSource, TableDataProvider, TableState } from '@fundamental-ngx/platform/table';
+import { delay } from 'rxjs/operators';
 
 @Component({
     selector: 'fdp-platform-table-loading-example',
@@ -25,6 +26,15 @@ export class PlatformTableLoadingExampleComponent {
 
     alert(message: string): void {
         alert(message);
+    }
+
+    onDataRequested(): void {
+        // you may apply any custom logic with external loading
+        this.loading = true;
+    }
+
+    onDataReceived(): void {
+        this.loading = false;
     }
 }
 
@@ -59,12 +69,13 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
 
         this.totalItems = this.items.length;
 
-        return of(this.items);
+        // using delay to simulate longer loading time
+        return of(this.items).pipe(delay(300));
     }
 
-    search(items: ExampleItem[], { searchInput, columns }: TableState): ExampleItem[] {
+    search(items: ExampleItem[], { searchInput, columnKeys }: TableState): ExampleItem[] {
         const searchText = searchInput?.text || '';
-        const keysToSearchBy = columns;
+        const keysToSearchBy = columnKeys;
 
         if (searchText.trim() === '' || keysToSearchBy.length === 0) {
             return items;
@@ -81,7 +92,7 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
 }
 
 function getNestedValue<T extends Record<string, any>>(key: string, object: T): any {
-    return key.split('.').reduce((a, b) => a[b], object);
+    return key.split('.').reduce((a, b) => (a ? a[b] : null), object);
 }
 
 // Example items

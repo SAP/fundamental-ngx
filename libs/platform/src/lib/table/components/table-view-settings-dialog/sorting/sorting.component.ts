@@ -5,13 +5,14 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
 
 import { SortDirection } from '../../../enums/sort-direction.enum';
 import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
+import { TableDialogCommonData } from '../../../models/table-dialog-common-data.model';
 
 export interface SettingsSortDialogColumn {
     label: string;
     key: string;
 }
 
-export interface SettingsSortDialogData {
+export interface SettingsSortDialogData extends TableDialogCommonData {
     direction: SortDirection;
     field: string;
     columns: SettingsSortDialogColumn[];
@@ -52,8 +53,8 @@ export class SortingComponent implements Resettable {
     readonly NOT_SORTED_OPTION_VALUE = NOT_SORTED_OPTION_VALUE;
 
     /** @hidden */
-    constructor(public dialogRef: DialogRef) {
-        const data: SettingsSortDialogData = this.dialogRef.data;
+    constructor(public dialogRef: DialogRef<SettingsSortDialogData>) {
+        const data = this.dialogRef.data;
 
         this.columns = data.columns || [];
 

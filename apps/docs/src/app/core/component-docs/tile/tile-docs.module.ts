@@ -8,6 +8,7 @@ import { TileDocsComponent } from './tile-docs.component';
 import {
     ActionTileExampleComponent,
     BadgeTileExampleComponent,
+    ClickableTileExampleComponent,
     FeedTileExampleComponent,
     KpiTileExampleComponent,
     LaunchTileExampleComponent,
@@ -44,7 +45,8 @@ const routes: Routes = [
         BadgeTileExampleComponent,
         FeedTileExampleComponent,
         LineTileExampleComponent,
-        TileDocsHeaderComponent
+        TileDocsHeaderComponent,
+        ClickableTileExampleComponent
     ]
 })
 export class TileDocsModule {}

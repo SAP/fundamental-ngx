@@ -1,5 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 
+import { FlexibleColumnLayout } from '@fundamental-ngx/core/flexible-column-layout';
+
 @Component({
     selector: 'fd-flexible-column-layout-example',
     templateUrl: './flexible-column-layout-example.component.html',
@@ -24,7 +26,7 @@ export class FlexibleColumnLayoutExampleComponent {
      * sets the initial layout of the component to 'OneColumnStartFullScreen'
      * sets a new layout for the component
      */
-    localLayout = 'OneColumnStartFullScreen';
+    localLayout: FlexibleColumnLayout = 'OneColumnStartFullScreen';
 
     /**
      * this function is reacting to events (button clicks) and
@@ -35,7 +37,7 @@ export class FlexibleColumnLayoutExampleComponent {
      * 'ThreeColumnsMidExpanded' | 'ThreeColumnsEndExpanded' | 'ThreeColumnsStartMinimized' |
      * 'ThreeColumnsEndMinimized';
      */
-    changeLayout(newValue: string): void {
+    changeLayout(newValue: FlexibleColumnLayout): void {
         this.localLayout = newValue;
     }
 

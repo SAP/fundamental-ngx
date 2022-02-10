@@ -1,9 +1,10 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { coerceArray, coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
+import { BooleanInput, coerceArray, coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ElementRef,
     EventEmitter,
     Input,
     OnChanges,
@@ -11,14 +12,22 @@ import {
     OnInit,
     Optional,
     Output,
+    QueryList,
     SimpleChanges,
     TemplateRef,
+    ViewChild,
+    ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NgModel } from '@angular/forms';
 
-import { ContentDensityService, RtlService } from '@fundamental-ngx/core/utils';
+import {
+    FocusKeyManagerItemDirective,
+    FocusKeyManagerListDirective,
+    ContentDensityService,
+    RtlService
+} from '@fundamental-ngx/core/utils';
 
 import { Pagination } from './pagination.model';
 import { PaginationService } from './pagination.service';
@@ -50,7 +59,8 @@ let paginationUniqueId = 0;
     providers: [PaginationService],
     host: {
         class: 'fd-pagination',
-        '[class.fd-pagination--mobile]': 'mobile'
+        '[class.fd-pagination--mobile]': 'mobile',
+        '[class.fd-pagination--short]': '_lastPage <= 9'
     },
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['./pagination.component.scss'],
@@ -68,7 +78,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
 
     /** Whether component should be shown in the mobile mode. */
     @Input()
-    set mobile(value: boolean) {
+    set mobile(value: BooleanInput) {
         this._mobile = coerceBooleanProperty(value);
     }
     get mobile(): boolean {
@@ -95,7 +105,10 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     }
     set itemsPerPage(value: number) {
         value = Math.floor(coerceNumberProperty(value, DEFAULT_ITEMS_PER_PAGE));
-        this._itemsPerPage = Math.min(value, this.totalItems);
+
+        this._itemsPerPage = Math.max(value, 1);
+
+        this._updateDisplayedPageSizeOptions();
     }
 
     /**
@@ -110,7 +123,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      * This property is mainly provided to support reading in the right language for screen reader.
      */
     @Input()
-    itemsPerPageLabel = 'Results per page';
+    itemsPerPageLabel = 'Results per Page';
 
     /** Represents the options for items per page. */
     @Input()
@@ -121,12 +134,10 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         this._itemsPerPageOptions = coerceArray<number>(value)
             .map((v) => coerceNumberProperty(v, 0))
             .map((v) => Math.floor(v))
-            .filter((v) => v > 0 && v < this.totalItems)
+            .filter((v) => v > 0)
             .sort((a, b) => a - b);
 
-        if (this._itemsPerPageOptions.some((v) => v !== this.itemsPerPage)) {
-            this.itemsPerPage = this._itemsPerPageOptions[0];
-        }
+        this._updateDisplayedPageSizeOptions();
     }
 
     /** Whether to display the total number of items. */
@@ -169,39 +180,44 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     lastLabel = 'Last';
 
     /**
-     * Label for the 'Page' page button.
-     * This property is mainly provided to support reading in the right language for screen reader.
-     */
-    @Input()
-    pageLabel = 'Page';
-
-    /**
      * Aria label for the navigation element
      * This property is mainly provided to support reading in the right language for screen reader.
      */
     @Input()
     ariaLabel = 'Pagination';
 
-    /**
-     * The current page label that should be read when a page is selected.
-     * Please use ${currentPage} in the value for replacing with the current page number.
-     * Example: `Page ${currentPage} is selected`.
-     * This property is mainly provided to support reading in the right language for screen reader.
-     */
-    @Input()
-    currentPageAriaLabel = 'Page ${currentPage} is current page';
-
-    /** Event fired when the page is changed. */
+    /** Event emitted when the page is changed. */
     @Output()
     pageChangeStart = new EventEmitter<number>();
+
+    /** Event emitted when items per page option is changed.*/
+    @Output()
+    itemsPerPageChange = new EventEmitter<number>();
 
     /** @hidden */
     _pages: number[] = [];
 
     /** @hidden */
-    get _selectId(): string {
-        return this.id + '-select';
-    }
+    _pagesBeforeCurrent: number[];
+
+    /** @hidden */
+    _pagesAfterCurrent: number[];
+
+    /** @hidden */
+    @ViewChild(FocusKeyManagerListDirective)
+    readonly _focusKeyManagerList: FocusKeyManagerListDirective;
+
+    /** @hidden */
+    @ViewChildren(FocusKeyManagerItemDirective)
+    readonly _focusKeyManagerItems: QueryList<FocusKeyManagerItemDirective>;
+
+    /** @hidden */
+    @ViewChild('pageInputElement', { read: ElementRef })
+    readonly _pageInputElement: ElementRef;
+
+    /** @hidden */
+    @ViewChild('currentPageElement', { read: ElementRef })
+    readonly _currentPageElement: ElementRef;
 
     /**
      * Retrieves an object that represents
@@ -231,13 +247,13 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     }
 
     /** @hidden */
-    get _currentPageAriaLabel(): string {
-        return this.currentPageAriaLabel.replace(/\${currentPage}/, this.currentPage.toString());
+    get _totalPagesElementId(): string {
+        return this.id + '__total';
     }
 
     /** @hidden */
-    get _totalPagesElementId(): string {
-        return this.id + '__total';
+    get _moreElementValue(): number {
+        return this.paginationService.moreElementValue;
     }
 
     /** @hidden */
@@ -246,6 +262,9 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         to: 0,
         of: 0
     };
+
+    /** @hidden */
+    _displayedPageSizeOptions: number[] = [];
 
     /** @hidden */
     private _itemsPerPage: number = DEFAULT_ITEMS_PER_PAGE;
@@ -260,15 +279,54 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     private _currentPage = 1;
 
     /** @hidden */
-    private _initialItemsPerPage: number;
-
-    /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
     private get _isRtl(): boolean {
         return this._rtlService?.rtl.value;
     }
+
+    /**
+     * Label for the 'Page ' page button. Page number passed as function parameter.
+     * This property is mainly provided to support reading in the right language for screen reader.
+     */
+    @Input()
+    pageLabel: (page: number) => string = (page: number) => `Page ${page}`;
+
+    /**
+     * Function to create current page aria label, current page passed as a parameter of the function
+     * This property is mainly provided to support reading in the right language for screen reader.
+     */
+    @Input()
+    currentPageAriaLabel: (currentPage: number) => string = (currentPage: number) =>
+        `Page ${currentPage} is current page`;
+
+    /**
+     * Page label to be shown before current page input in mobile mode.
+     * In conjuction with @pageLabelAfterInputMobile generates the label for the input.
+     * Example: 'Page' + input + pageLabelAfterInputMobile
+     * This property is mainly provided to support i18n.
+     */
+    // eslint-disable-next-line @typescript-eslint/member-ordering
+    @Input()
+    labelBeforeInputMobile = 'Page';
+
+    /**
+     * Page label to be shown after current page input in mobile mode. Pages count passed as the function parameter.
+     * In conjuction with @pageLabelBeforeInputMobile generates the label for the input.
+     * Example: pageLabelBeforeInputMobile + input + 'of 500'.
+     * This property is mainly provided to support i18n.
+     */
+    @Input()
+    labelAfterInputMobile: (pagesCount: number) => string = (pagesCount: number) => `of ${pagesCount}`;
+
+    /**
+     * Current page input aria label, parameters passed to the function (currentPage: number, pagesCount: number).
+     * This property is mainly provided to support reading in the right language for screen reader.
+     */
+    @Input()
+    inputAriaLabel: (currentPage: number, pagesCount: number) => string = (currentPage: number, pagesCount: number) =>
+        `Page input, Current page, Page ${currentPage} of ${pagesCount}`;
 
     /** @hidden */
     constructor(
@@ -281,15 +339,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        if (changes && changes.itemsPerPage) {
-            this._initialItemsPerPage = changes.itemsPerPage.currentValue;
-        }
-
-        if (changes && changes.totalItems && this._initialItemsPerPage) {
-            this.itemsPerPage = this._initialItemsPerPage;
-        }
-
-        if (changes && changes.currentPage) {
+        if (changes?.currentPage) {
             this.currentPage = changes.currentPage.currentValue;
         }
 
@@ -311,8 +361,8 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         this._subscriptions.add(this._rtlService?.rtl.subscribe(() => this._refreshPages()));
 
         this._subscriptions.add(
-            this._contentDensityService?._contentDensityListener.subscribe((density) => {
-                this.compact = density !== 'cozy';
+            this._contentDensityService?._isCompactDensity.subscribe((isCompact) => {
+                this.compact = isCompact;
                 this._cdr.markForCheck();
             })
         );
@@ -323,30 +373,38 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         this._subscriptions.unsubscribe();
     }
 
+    /** @hidden */
+    skipItemPredicate(item: FocusKeyManagerItemDirective): boolean {
+        return (
+            getComputedStyle(item.nativeElement).display === 'none' ||
+            item.nativeElement.getAttribute('disabled') === 'true'
+        );
+    }
+
     /**
      * Navigates to a specific page.
      * @param page The number of the page to navigate to.
      * @param $event The mouse event (optional).
      */
-    goToPage(page: number, $event?: Event): void {
-        if ($event) {
-            $event.preventDefault();
-        }
-
-        if (page > this.paginationService.getTotalPages(this.paginationObject) || page < 1) {
+    goToPage(page: number, event?: KeyboardEvent): void {
+        if (page > this._lastPage || page < 1) {
             return;
         }
 
         this._refreshPages();
 
+        if (event) {
+            this._focusCurrentPage();
+        }
+
         this.pageChangeStart.emit(page);
 
-        this._liveAnnouncer.announce(this._currentPageAriaLabel);
+        this._liveAnnouncer.announce(this.currentPageAriaLabel(this.currentPage));
     }
 
     /** Navigates to the first page */
     goToFirstPage(): void {
-        this.goToPage(this._pages[0]);
+        this.goToPage(1);
     }
 
     /**
@@ -376,6 +434,8 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     /** @hidden */
     _onChangePerPage = (event: number): void => {
         this.itemsPerPage = event;
+        this.itemsPerPageChange.emit(this.itemsPerPage);
+
         this._refreshPages();
 
         const maxPage = this._pages[this._pages.length - 1];
@@ -396,12 +456,54 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         const pages = this.paginationService.getPages(pagination);
 
         this._pages = this._isRtl ? pages.slice().reverse() : pages;
+
+        const currentPageIndex = this._pages.findIndex((page) => page === this.currentPage);
+
+        this._pagesBeforeCurrent = this._pages.slice(0, currentPageIndex);
+        this._pagesAfterCurrent = this._pages.slice(currentPageIndex + 1);
+
         this._currentShowing = {
             from: this.currentPage - 1 === 0 ? 1 : (this.currentPage - 1) * pagination.itemsPerPage + 1,
             to: Math.min((this.currentPage - 1) * pagination.itemsPerPage + pagination.itemsPerPage, this.totalItems),
             of: this.totalItems
         };
 
+        this._cdr.markForCheck();
+    }
+
+    /** Focus current page link/input using FocusKeyManager
+     * @hidden
+     */
+    private _focusCurrentPage(): void {
+        const currentPageNativeElement =
+            getComputedStyle(this._currentPageElement.nativeElement).display === 'none'
+                ? this._pageInputElement.nativeElement
+                : this._currentPageElement.nativeElement;
+
+        const index = this._focusKeyManagerItems
+            .toArray()
+            .findIndex((elem) => elem.nativeElement === currentPageNativeElement);
+
+        this._focusKeyManagerList.focusItem(index);
+    }
+
+    /**
+     * Updates the list of page size options to display to the user. Includes making sure that
+     * the page size is an option and that the list is sorted.
+     */
+    private _updateDisplayedPageSizeOptions(): void {
+        // If no page size is provided, use the first page size option or the default page size.
+        if (!this.itemsPerPage) {
+            this._itemsPerPage = this.itemsPerPageOptions.length ? this.itemsPerPageOptions[0] : DEFAULT_ITEMS_PER_PAGE;
+        }
+
+        this._displayedPageSizeOptions = this.itemsPerPageOptions?.slice() ?? [];
+
+        if (!this._displayedPageSizeOptions.includes(this.itemsPerPage)) {
+            this._displayedPageSizeOptions.push(this.itemsPerPage);
+        }
+
+        this._displayedPageSizeOptions.sort((a, b) => a - b);
         this._cdr.markForCheck();
     }
 }

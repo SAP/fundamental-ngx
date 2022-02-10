@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, OnInit, ElementRef, Renderer2, Input } from '@angular/core';
 
-import { ContentDensity } from '@fundamental-ngx/core/utils';
+import { ContentDensity, isCompactDensity } from '@fundamental-ngx/core/utils';
 import { CSS_CLASS_NAME } from './constants';
 
 /**
@@ -24,11 +24,15 @@ export class InputGroupAddonBodyComponent implements OnInit {
 
         this._contentDensity = contentDensity;
 
-        if (contentDensity === 'compact') {
+        if (isCompactDensity(contentDensity)) {
             this._addClassNameToHostElement(CSS_CLASS_NAME.addonCompact);
         } else {
             this._removeClassNameFromHostElement(CSS_CLASS_NAME.addonCompact);
         }
+    }
+
+    get contentDensity(): ContentDensity {
+        return this._contentDensity;
     }
 
     /**

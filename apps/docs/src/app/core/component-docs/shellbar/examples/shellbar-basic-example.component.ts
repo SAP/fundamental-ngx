@@ -7,8 +7,8 @@ import { ShellbarUser, ShellbarUserMenu } from '@fundamental-ngx/core/shellbar';
 })
 export class ShellbarBasicExampleComponent {
     user: ShellbarUser = {
-        initials: 'WW',
-        colorAccent: 11
+        fullName: 'William Willson',
+        colorAccent: 6
     };
 
     userMenu: ShellbarUserMenu[] = [

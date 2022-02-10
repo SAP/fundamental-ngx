@@ -168,4 +168,8 @@ $block: fdp-value-help-dialog;
     &__hidden_label {
         display: none;
     }
+
+    &__table-busy-indicator {
+        height: 100%;
+    }
 }

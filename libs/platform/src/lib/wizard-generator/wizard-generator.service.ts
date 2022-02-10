@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map, take } from 'rxjs/operators';
+import { cloneDeep, concat, mergeWith, uniq } from 'lodash-es';
 
 import { isFunction, selectStrategy } from '@fundamental-ngx/platform/shared';
 import { FormGeneratorService } from '@fundamental-ngx/platform/form';
@@ -8,14 +9,36 @@ import {
     WizardGeneratorStepComponent,
     WizardStepSubmittedForms
 } from './components/wizard-generator-step/wizard-generator-step.component';
+import { WizardGeneratorFormGroup, WizardGeneratorFormItem } from './interfaces/wizard-generator-form-group.interface';
 import {
+    WizardGeneratorDependencyFields,
     WizardGeneratorFormsValue,
     WizardGeneratorItem,
     WizardVisibleSteps
 } from './interfaces/wizard-generator-item.interface';
-import { merge } from 'lodash-es';
 
 export type StepsComponents = Map<string, WizardGeneratorStepComponent>;
+
+export enum WizardGeneratorRefreshStrategy {
+    REFRESH_STEP_VISIBILITY = 'refreshStepVisibility',
+    REVALIDATE_STEP_FORMS = 'revalidateStepForms',
+    REFRESH_FORM_VISIBILITY = 'refreshFormVisibility'
+}
+
+export interface DependencySteps {
+    /** Step ID */
+    [key: string]: {
+        /** Form ID with array of form control id's */
+        [key: string]: {
+            [key in WizardGeneratorRefreshStrategy]?: string[];
+        };
+    };
+}
+
+export interface StepDependencyFields {
+    /** Dependent step */
+    [key: string]: DependencySteps;
+}
 
 /**
  * @description Helper service to keep all transformations and data in one place.
@@ -32,10 +55,10 @@ export class WizardGeneratorService {
     /**
      * @description Object with steps that are dependencies for another steps.
      */
-    dependencySteps: any = {};
+    dependencySteps: StepDependencyFields = {};
 
     /**
-     * @description Whether or not to append the step to the wizard. If false, each step will be displayed on a different page.
+     * @description Whether to append the step to the wizard. If false, each step will be displayed on a different page.
      * Default is true.
      */
     appendToWizard = true;
@@ -102,7 +125,7 @@ export class WizardGeneratorService {
 
     /**
      * @description Sends command to submit all forms inside the step.
-     * @param stepId Step ID for which forms needs to be submitted.
+     * @param stepId Step ID for which forms need's to be submitted.
      * @param skipIfUntouched Skip validation if form haven't been touched.
      * @returns {Observable<WizardStepSubmittedForms>} Observable, which will emit
      * when all visible forms in step are submitted.
@@ -158,7 +181,7 @@ export class WizardGeneratorService {
      * @returns {Promise<WizardGeneratorItem[]>} Array of transformed Wizard steps.
      */
     async prepareWizardItems(items: WizardGeneratorItem[]): Promise<WizardGeneratorItem[]> {
-        let newItems = await Promise.all(
+        let newItems: WizardGeneratorItem[] = await Promise.all(
             items.map(async (i, index) => {
                 const item = { ...i };
                 item.status = item.status || 'upcoming';
@@ -182,15 +205,7 @@ export class WizardGeneratorService {
 
         newItems = this._setBranchingSteps(newItems);
 
-        this.dependencySteps = newItems.reduce((steps, step) => {
-            if (step.dependencyFields) {
-                for (const [id, forms] of Object.entries(step.dependencyFields)) {
-                    steps[id] = merge(steps[id] || {}, forms);
-                }
-            }
-
-            return steps;
-        }, {});
+        this._buildDependencyMap(newItems);
 
         this.items = newItems;
         await this.refreshStepVisibility();
@@ -206,20 +221,30 @@ export class WizardGeneratorService {
 
         const visibleStepIds: WizardVisibleSteps = {};
 
-        const completedStepIds = this.items.filter((i) => i.status === 'completed').map((i) => i.id);
-
         for (const item of this.items) {
             if (!isFunction(item.when)) {
                 visibleStepIds[item.id] = true;
                 continue;
             }
 
-            const obj = item.when(completedStepIds, formValue);
+            const obj = item.when(this._getCompletedStepIds(), formValue, this._formGeneratorService.forms);
 
             visibleStepIds[item.id] = await this._getFunctionValue(obj);
         }
 
         this.setVisibleSteps(this.items.filter((item) => visibleStepIds[item.id] === true));
+    }
+
+    /**
+     * Checks whether current form group should be visible.
+     * @param formGroup Form Group.
+     */
+    async refreshFormVisibility(formGroup: WizardGeneratorFormGroup): Promise<boolean> {
+        const formValue = await this.getWizardFormValue();
+
+        const obj = formGroup.when(this._getCompletedStepIds(), formValue, this._formGeneratorService.forms);
+
+        return await this._getFunctionValue(obj);
     }
 
     /**
@@ -258,12 +283,29 @@ export class WizardGeneratorService {
     }
 
     /**
-     *
      * @param step Step ID which includes dependency fields.
      * @returns Object with forms and their fields that are dependencies for other steps.
      */
-    getDependencyFields(step: string): any {
+    getStepDependencyFields(step: string): DependencySteps {
         return this.dependencySteps[step];
+    }
+
+    /**
+     * Notifies step components to revalidate inner forms.
+     * @param stepIds Step ID's which needs to be revalidated.
+     */
+    notifyStepsToRevalidateForms(stepIds: string[]): void {
+        stepIds.forEach((stepId) => this.stepsComponents.get(stepId)?.updateFormsState());
+    }
+
+    /**
+     * Notifies step components to refresh form groups visibility.
+     * @param stepIds Step ID's which needs to be checked.
+     */
+    async refreshFormsVisibility(stepIds: string[]): Promise<void> {
+        for (const stepId of stepIds) {
+            await this.stepsComponents.get(stepId)?.refreshFormsVisibility();
+        }
     }
 
     /**
@@ -292,7 +334,7 @@ export class WizardGeneratorService {
             for (const form of item.formGroups) {
                 wizardFormValue[item.id][form.id] = formatted
                     ? await this._formGeneratorService.getFormValue(forms[form.id]?.form)
-                    : this._formGeneratorService._getFormValueWithoutUngrouped(forms[form.id]?.form.value);
+                    : this._formGeneratorService._getFormValueWithoutUngrouped(cloneDeep(forms[form.id]?.form.value));
             }
         }
 
@@ -315,7 +357,7 @@ export class WizardGeneratorService {
     isStepsUntouched(): boolean {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         return [...this.stepsComponents].every(([_, component]) =>
-            component.forms.toArray().every((item) => !item.form.touched)
+            component.formGenerators.toArray().every((item) => !item.form.touched)
         );
     }
 
@@ -359,27 +401,47 @@ export class WizardGeneratorService {
         this._wizardStepIds = ids;
     }
 
+    /**
+     * Set next step index.
+     * @param index Next step index.
+     */
     setNextStepIndex(index: number): void {
         this._nextStepIndex$.next(index);
     }
 
-    trackNextStepindex(): Observable<number> {
+    /**
+     * Returns observable of next step index which emits when index is changed.
+     */
+    trackNextStepIndex(): Observable<number> {
         return this._nextStepIndex$.asObservable();
     }
 
+    /**
+     * Returns observable which emits when steps order has been changed.
+     */
     trackStepsOrder(): Observable<number> {
         return this._stepsOrderChanged$.asObservable();
     }
 
+    /**
+     * Stores original 'appendToWizard' input property.
+     * @param value
+     */
     setOriginalAppendToWizardState(value: boolean): void {
         this.appendToWizard = value;
         this._appendToWizard$.next(this.appendToWizard);
     }
 
+    /**
+     * Resets modified 'appendToWizard' property to original one.
+     */
     restoreAppendToWizardState(): void {
         this._appendToWizard$.next(this.appendToWizard);
     }
 
+    /**
+     * Returns observable which emits when 'appendToWizard' property has been changed.
+     */
     trackAppendToWizardState(): Observable<boolean> {
         return this._appendToWizard$.asObservable();
     }
@@ -452,5 +514,85 @@ export class WizardGeneratorService {
         }
 
         return items;
+    }
+
+    /** @hidden */
+    private _normalizeDependencyStep(
+        dependency: { [p: string]: string[] },
+        strategy: WizardGeneratorRefreshStrategy,
+        dependentStep?: string
+    ): DependencySteps {
+        const newDependency: DependencySteps = {};
+
+        Object.entries(dependency).forEach(([key, value]) => {
+            newDependency[key] = {};
+
+            value.forEach((v) => {
+                newDependency[key][v] = {
+                    [strategy]: dependentStep ? [dependentStep] : []
+                };
+            });
+        });
+        return newDependency;
+    }
+
+    /** @hidden */
+    private _buildDependencyMap(items: WizardGeneratorItem[]): void {
+        this.dependencySteps = {};
+
+        const mergeArrays = (objValue: any, srcValue: any): any[] => {
+            if (Array.isArray(objValue) && !objValue.includes(srcValue)) {
+                return uniq(objValue.concat(srcValue));
+            }
+        };
+
+        const buildDependencySteps = (
+            dependencyFields: WizardGeneratorDependencyFields,
+            strategy: WizardGeneratorRefreshStrategy,
+            stepId?: string
+        ): void => {
+            for (const [id, forms] of Object.entries(dependencyFields)) {
+                this.dependencySteps[id] = mergeWith(
+                    this.dependencySteps[id] || {},
+                    this._normalizeDependencyStep(forms, strategy, stepId),
+                    mergeArrays
+                );
+            }
+        };
+
+        items
+            .filter((s) => s.formGroups?.length > 0)
+            .forEach((step) => {
+                if (step.dependencyFields) {
+                    buildDependencySteps(step.dependencyFields, WizardGeneratorRefreshStrategy.REFRESH_STEP_VISIBILITY);
+                }
+
+                const dependentForms = step.formGroups.filter((form) => form.dependencyFields);
+
+                dependentForms.forEach((form) => {
+                    buildDependencySteps(
+                        form.dependencyFields,
+                        WizardGeneratorRefreshStrategy.REFRESH_FORM_VISIBILITY,
+                        step.id
+                    );
+                });
+
+                const stepFields: WizardGeneratorFormItem[] = concat(
+                    ...[...step.formGroups].map((item) => item.formItems.filter((f) => f.dependencyFields))
+                );
+
+                stepFields.forEach((formItem) => {
+                    buildDependencySteps(
+                        formItem.dependencyFields,
+                        WizardGeneratorRefreshStrategy.REVALIDATE_STEP_FORMS,
+                        step.id
+                    );
+                });
+            });
+    }
+
+    /** @hidden */
+    private _getCompletedStepIds(): string[] {
+        return this.items.filter((i) => i.status === 'completed').map((i) => i.id);
     }
 }

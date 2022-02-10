@@ -11,6 +11,7 @@ import { API_FILES } from '../../api-files';
 import { ComboboxHeaderComponent } from './combobox-header/combobox-header.component';
 import { ComboboxDocsComponent } from './combobox-docs.component';
 import { examples } from './examples';
+import { ComboboxBylineExampleComponent } from './examples/combobox-byline-example.component';
 
 const routes: Routes = [
     {
@@ -26,6 +27,6 @@ const routes: Routes = [
 @NgModule({
     imports: [ListModule, FormModule, ComboboxModule, RouterModule.forChild(routes), SharedDocumentationPageModule],
     exports: [RouterModule],
-    declarations: [examples, ComboboxDocsComponent, ComboboxHeaderComponent]
+    declarations: [examples, ComboboxDocsComponent, ComboboxHeaderComponent, ComboboxBylineExampleComponent]
 })
 export class ComboboxDocsModule {}

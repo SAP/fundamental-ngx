@@ -2,7 +2,7 @@ import { cloneDeep } from 'lodash-es';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { ApprovalTeam, ApprovalUser } from '../interfaces';
-import { DataProvider, ProviderParams } from '../../shared';
+import { DataProvider, ProviderParams } from '@fundamental-ngx/platform/shared';
 import { users, teams } from './data';
 
 export class UserDataProvider extends DataProvider<ApprovalUser> {

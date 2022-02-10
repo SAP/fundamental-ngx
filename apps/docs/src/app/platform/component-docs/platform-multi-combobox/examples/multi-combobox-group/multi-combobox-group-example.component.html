@@ -5,7 +5,7 @@
             placeholder="Type some text..."
             [dataSource]="dataSource"
             displayKey="name"
-            group="true"
+            [group]="true"
             groupKey="type"
             (selectionChange)="onSelect($event)"
             [selectedItems]="selectedItems"
@@ -19,7 +19,7 @@
             placeholder="Type some text..."
             [dataSource]="dataSource"
             displayKey="name"
-            group="true"
+            [group]="true"
             (selectionChange)="onSelect1($event)"
             [selectedItems]="selectedItems1"
         ></fdp-multi-combobox>

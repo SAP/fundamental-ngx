@@ -26,6 +26,7 @@ import { WizardGeneratorSummaryObjectsExampleComponent } from './examples/wizard
 import { WizardGeneratorExternalNavigationExampleComponent } from './examples/wizard-generator-external-navigation-example.component';
 import { WizardGeneratorOnchangeExampleComponent } from './examples/wizard-generator-onchange-example.component';
 import { IconModule } from '@fundamental-ngx/core/icon';
+import { WizardGeneratorVisibilityBetweenStepsExampleComponent } from './examples/wizard-generator-visibility-between-steps-example.component';
 
 const routes: Routes = [
     {
@@ -53,7 +54,8 @@ const routes: Routes = [
         WizardGeneratorCustomizableEmbededExampleComponent,
         WizardGeneratorSummaryObjectsExampleComponent,
         WizardGeneratorExternalNavigationExampleComponent,
-        WizardGeneratorOnchangeExampleComponent
+        WizardGeneratorOnchangeExampleComponent,
+        WizardGeneratorVisibilityBetweenStepsExampleComponent
     ],
     imports: [
         RouterModule.forChild(routes),

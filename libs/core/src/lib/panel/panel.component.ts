@@ -98,8 +98,8 @@ export class PanelComponent implements CssClassBuilder, OnChanges, OnInit, OnDes
     ngOnInit(): void {
         if (this.compact === undefined && this._contentDensityService) {
             this._subscription.add(
-                this._contentDensityService._contentDensityListener.subscribe((density) => {
-                    this.compact = density !== 'cozy';
+                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
+                    this.compact = isCompact;
                     this.buildComponentCssClass();
                 })
             );

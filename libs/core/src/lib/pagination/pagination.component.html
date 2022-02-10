@@ -1,87 +1,169 @@
 <ng-container *ngIf="totalItems">
-    <div
-        class="fd-pagination__per-page"
-        *ngIf="itemsPerPageTemplate || (itemsPerPageOptions && itemsPerPageOptions.length)"
-    >
+    <div class="fd-pagination__per-page" *ngIf="itemsPerPageTemplate || itemsPerPageOptions?.length">
+        <!-- note, that we're checking for the length of "itemsPerPageOptions", but using "_displayedPageSizeOptions" as "pageOptions" -->
+        <!-- these 2 can be different, as "_displayedPageSizeOptions" may also include "itemsPerPage" if it's not included in options -->
         <ng-container
             [ngTemplateOutlet]="itemsPerPageTemplate || perPage"
-            [ngTemplateOutletContext]="{ onSelect: _onChangePerPage }"
+            [ngTemplateOutletContext]="{ onSelect: _onChangePerPage, pageOptions: _displayedPageSizeOptions }"
         ></ng-container>
     </div>
 
     <nav
+        fd-focus-key-manager-list
+        orientation="horizontal"
+        [skipPredicate]="skipItemPredicate"
         class="fd-pagination__nav"
         [attr.aria-label]="ariaLabel"
         [attr.aria-labelledby]="displayTotalItems ? _totalPagesElementId : null"
         *ngIf="totalItems >= itemsPerPage"
     >
-        <a
+        <button
+            fd-focus-key-manager-item
             fd-button
             fdType="transparent"
             glyph="media-rewind"
             [disabled]="isFirstPage"
             [compact]="compact"
-            class="fd-pagination__button fd-pagination__button--mobile"
+            [ariaLabel]="firstLabel"
             [title]="firstLabel"
-            [attr.aria-label]="firstLabel"
+            class="fd-pagination__button fd-pagination__button--mobile"
             [attr.aria-disabled]="isFirstPage"
             (click)="goToFirstPage()"
-        ></a>
+            (keyup.enter)="goToFirstPage()"
+            (keydown.space)="$event.preventDefault()"
+            (keyup.space)="goToFirstPage($event)"
+        ></button>
 
-        <a
+        <button
+            fd-focus-key-manager-item
             fd-button
             fdType="transparent"
             glyph="navigation-left-arrow"
             [disabled]="isFirstPage"
             [compact]="compact"
-            class="fd-pagination__button"
+            [ariaLabel]="previousLabel"
             [title]="previousLabel"
-            [attr.aria-label]="previousLabel"
+            class="fd-pagination__button"
             [attr.aria-disabled]="isFirstPage"
             (click)="previousPage()"
-        ></a>
+            (keyup.enter)="previousPage()"
+            (keydown.space)="$event.preventDefault()"
+            (keyup.space)="previousPage($event)"
+        ></button>
 
-        <ng-container *ngFor="let page of _pages">
-            <ng-container *ngIf="page !== currentPage; else currentPageInput">
-                <a
-                    *ngIf="page !== -1; else more"
-                    fd-button
-                    fdType="transparent"
-                    [compact]="compact"
-                    class="fd-pagination__link"
-                    [title]="nextLabel"
-                    [attr.aria-label]="pageLabel + ' ' + page"
-                    (click)="goToPage(page, $event)"
-                    >{{ page }}</a
-                >
-            </ng-container>
+        <!-- Duplicated to preserve the items order for keyboard navigation -->
+        <ng-container *ngFor="let page of _pagesBeforeCurrent">
+            <button
+                *ngIf="page !== _moreElementValue; else more"
+                fd-focus-key-manager-item
+                fd-button
+                fdType="transparent"
+                [compact]="compact"
+                [ariaLabel]="pageLabel(page)"
+                [title]="nextLabel"
+                class="fd-pagination__link"
+                (click)="goToPage(page)"
+                (keyup.enter)="goToPage(page, $event)"
+                (keydown.space)="$event.preventDefault()"
+                (keyup.space)="goToPage(page, $event)"
+            >
+                {{ page }}
+            </button>
         </ng-container>
 
-        <a
+        <button
+            #currentPageElement
+            fd-focus-key-manager-item
+            fd-button
+            fdType="transparent"
+            [compact]="compact"
+            [ariaLabel]="pageLabel(currentPage)"
+            class="fd-pagination__link is-active"
+            [attr.aria-current]="true"
+        >
+            {{ currentPage }}
+        </button>
+
+        <label fd-form-label class="fd-pagination__label"> {{ labelBeforeInputMobile }}: </label>
+
+        <input
+            #pageInputElement
+            fd-focus-key-manager-item
+            fd-form-control
+            fd-only-digits
+            required
+            size="1"
+            min="1"
+            type="number"
+            [max]="_lastPage"
+            [state]="currentPageModel.invalid ? 'error' : null"
+            [compact]="compact"
+            class="fd-pagination__input"
+            #currentPageModel="ngModel"
+            [ngModel]="currentPage"
+            [attr.aria-label]="inputAriaLabel(currentPage, _lastPage)"
+            (keydown.enter)="goToPage(currentPageModel.value)"
+            (keydown.space)="goToPage(currentPageModel.value)"
+            (blur)="_restoreInputValue(currentPageModel)"
+        />
+
+        <label fd-form-label class="fd-pagination__label">
+            {{ labelAfterInputMobile(_lastPage) }}
+        </label>
+
+        <!-- Duplicated to preserve the items order for keyboard navigation -->
+        <ng-container *ngFor="let page of _pagesAfterCurrent">
+            <button
+                *ngIf="page !== _moreElementValue; else more"
+                fd-focus-key-manager-item
+                fd-button
+                fdType="transparent"
+                [compact]="compact"
+                [ariaLabel]="pageLabel(page)"
+                [title]="nextLabel"
+                class="fd-pagination__link"
+                (click)="goToPage(page)"
+                (keyup.enter)="goToPage(page, $event)"
+                (keydown.space)="$event.preventDefault()"
+                (keyup.space)="goToPage(page, $event)"
+            >
+                {{ page }}
+            </button>
+        </ng-container>
+
+        <button
+            fd-focus-key-manager-item
             fd-button
             fdType="transparent"
             glyph="navigation-right-arrow"
             [disabled]="isLastPage"
             [compact]="compact"
-            class="fd-pagination__button"
+            [ariaLabel]="nextLabel"
             [title]="nextLabel"
-            [attr.aria-label]="nextLabel"
+            class="fd-pagination__button"
             [attr.aria-disabled]="isLastPage"
             (click)="nextPage()"
-        ></a>
+            (keyup.enter)="nextPage()"
+            (keydown.space)="$event.preventDefault()"
+            (keyup.space)="nextPage()"
+        ></button>
 
-        <a
+        <button
+            fd-focus-key-manager-item
             fd-button
             fdType="transparent"
             glyph="media-forward"
             [disabled]="isLastPage"
             [compact]="compact"
-            class="fd-pagination__button fd-pagination__button--mobile"
+            [ariaLabel]="lastLabel"
             [title]="lastLabel"
-            [attr.aria-label]="lastLabel"
+            class="fd-pagination__button fd-pagination__button--mobile"
             [attr.aria-disabled]="isLastPage"
             (click)="goToLastPage()"
-        ></a>
+            (keyup.enter)="goToLastPage()"
+            (keydown.space)="$event.preventDefault()"
+            (keyup.space)="goToLastPage()"
+        ></button>
     </nav>
 
     <span *ngIf="displayTotalItems" class="fd-pagination__total" [attr.id]="_totalPagesElementId">
@@ -93,14 +175,20 @@
 </ng-container>
 
 <ng-template #more>
-    <span class="fd-pagination__more" aria-hidden="true" aria-label="..." role="presentation"></span>
+    <span
+        class="fd-pagination__more"
+        [class.fd-pagination__more--compact]="compact"
+        aria-hidden="true"
+        aria-label="..."
+        role="presentation"
+    ></span>
 </ng-template>
 
 <ng-template #total let-showing="showing">
     <span fd-form-label class="fd-pagination__total-label"> {{ showing.of }} Results </span>
 </ng-template>
 
-<ng-template #perPage>
+<ng-template #perPage let-pageOptions="pageOptions">
     <label fd-form-label class="fd-pagination__per-page-label">{{ itemsPerPageLabel }}:</label>
 
     <fd-select
@@ -109,30 +197,6 @@
         [value]="itemsPerPage"
         (valueChange)="_onChangePerPage($event)"
     >
-        <fd-option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</fd-option>
+        <fd-option *ngFor="let option of pageOptions" [value]="option">{{ option }}</fd-option>
     </fd-select>
-</ng-template>
-
-<ng-template #currentPageInput>
-    <label fd-form-label class="fd-pagination__label" [attr.for]="_selectId"> {{ pageLabel }}: </label>
-
-    <input
-        fd-form-control
-        fd-only-digits
-        required
-        size="1"
-        min="1"
-        type="number"
-        [max]="_lastPage"
-        [attr.name]="_selectId"
-        [attr.id]="_selectId"
-        [state]="currentPageModel.invalid ? 'error' : null"
-        [compact]="compact"
-        class="fd-pagination__input"
-        #currentPageModel="ngModel"
-        [ngModel]="currentPage"
-        (keydown.enter)="goToPage(currentPageModel.value)"
-        (keydown.space)="goToPage(currentPageModel.value)"
-        (blur)="_restoreInputValue(currentPageModel)"
-    />
 </ng-template>

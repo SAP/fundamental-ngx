@@ -10,4 +10,4 @@ import { TabItemDirective } from './tab-item.directive';
     imports: [CommonModule],
     exports: [TabsComponent, TabComponent, TabItemDirective]
 })
-export class ExperimentalTabsModule {}
+export class TabsModule {}

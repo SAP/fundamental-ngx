@@ -26,7 +26,7 @@ import {
         '[attr.tabindex]': 'tabindex'
     }
 })
-export class ExperimentalOptionComponent {
+export class OptionComponent {
     /** Value of the option. Similar to how a native select operates. */
     @Input()
     value: string | any;
@@ -40,9 +40,9 @@ export class ExperimentalOptionComponent {
     @Input()
     tabindex = '0';
 
-    /** Event emitted when an option is clicked. Emits an ExperimentalOptionComponent */
+    /** Event emitted when an option is clicked. Emits an OptionComponent */
     @Output()
-    optionClicked: EventEmitter<ExperimentalOptionComponent> = new EventEmitter<ExperimentalOptionComponent>();
+    optionClicked: EventEmitter<OptionComponent> = new EventEmitter<OptionComponent>();
 
     /** @hidden */
     @HostListener('focusout')

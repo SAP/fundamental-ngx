@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, NgZone, ViewEncapsulation } from '@angular/core';
+import { TimelinePositionControlService } from '../../services/timeline-position-control.service';
+import { first } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-timeline-node-body',
@@ -20,4 +22,12 @@ export class TimelineNodeBodyComponent {
     */
     @Input()
     maxLines: number;
+
+    constructor(private _ngZone: NgZone, private _timelinePositionControlService: TimelinePositionControlService) {}
+
+    calculatePositions(): void {
+        this._ngZone.onStable.pipe(first()).subscribe(() => {
+            this._timelinePositionControlService.calculatePositions();
+        });
+    }
 }

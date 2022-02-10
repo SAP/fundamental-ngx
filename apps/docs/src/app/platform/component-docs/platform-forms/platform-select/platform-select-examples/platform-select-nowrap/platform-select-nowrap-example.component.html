@@ -2,7 +2,7 @@
     placeholder="Select an option"
     (selectionChange)="onSelect($event)"
     width="7rem"
-    noWrapText="true"
+    [noWrapText]="true"
     [list]="option"
 >
 </fdp-select>

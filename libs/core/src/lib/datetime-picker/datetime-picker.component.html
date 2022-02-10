@@ -28,15 +28,16 @@
                     type="text"
                     class="fd-input"
                     fd-input-group-input
-                    [(ngModel)]="_inputFieldDate"
                     [attr.aria-label]="datetimeInputLabel"
                     [attr.id]="inputId"
                     [attr.aria-required]="required"
                     [placeholder]="placeholder"
                     [compact]="compact"
                     [disabled]="disabled"
-                    (ngModelChange)="handleInputChange($event)"
-                    (blur)="handleOnTouched()"
+                    [ngModel]="_inputFieldDate"
+                    (keyup.enter)="handleInputChange($event.target.value, false)"
+                    (ngModelChange)="handleInputChange($event, true)"
+                    (blur)="handleOnTouched($event)"
                 />
             </fd-input-group>
         </fd-popover-control>
@@ -55,7 +56,7 @@
                     <fd-calendar
                         calType="single"
                         [activeView]="activeView"
-                        [disableFunction]="disableFunction ? disableFunction : null"
+                        [disableFunction]="disableFunction || null"
                         [selectedDate]="_tempDate"
                         [escapeFocusFunction]="null"
                         [compact]="compact"

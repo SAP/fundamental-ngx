@@ -41,10 +41,6 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
         super.setValue(value);
     }
 
-    /** Whether the component should be in compact mode. */
-    @Input()
-    compact = false;
-
     /**
      *  The placement of the popover. It can be one of: top, top-start, top-end, bottom,
      *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end.
@@ -138,10 +134,11 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
     }
 
     /**
-     * Whether AddOn Button should be focusable, set to false by default
+     * Whether AddOn Button should be focusable
+     * @default true
      */
     @Input()
-    buttonFocusable = false;
+    buttonFocusable = true;
 
     /**
      * Special days mark, it can be used by passing array of object with
@@ -192,6 +189,14 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
     /** Whether or not to show the datetime picker footer with submit/cancel buttons. */
     @Input()
     showFooter = true;
+
+    /**
+     * Whether to recalculate value from the input as user types or on blur.
+     * By default, updates the value as user types.
+     * @default false
+     */
+    @Input()
+    processInputOnBlur = false;
 
     /** Event emitted when the state of the isOpen property changes. */
     @Output()

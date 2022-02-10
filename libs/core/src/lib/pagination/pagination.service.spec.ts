@@ -17,23 +17,28 @@ describe('PaginationService', () => {
     });
 
     describe('getPages', () => {
-        it('should not truncate pages', () => {
-            const pages = service.getPages({ totalItems: 140, itemsPerPage: 20, currentPage: 1 });
-            expect(pages).toEqual([1, 2, 3, 4, 5, 6, 7]);
+        it('should not truncate pages if <= 9pages', () => {
+            const pages = service.getPages({ totalItems: 180, itemsPerPage: 20, currentPage: 5 });
+
+            expect(pages).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
         });
+
         it('should truncate and has a buffer as the penultimate value', () => {
-            const pages = service.getPages({ totalItems: 160, itemsPerPage: 20, currentPage: 1 });
-            expect(pages).toEqual([1, 2, 3, -1, 8]);
+            const pages = service.getPages({ totalItems: 200, itemsPerPage: 20, currentPage: 4 });
+
+            expect(pages).toEqual([1, 2, 3, 4, 5, 6, 7, -1, 10]);
         });
 
         it('should truncate and has a buffer as the second value', () => {
-            const pages = service.getPages({ totalItems: 160, itemsPerPage: 20, currentPage: 8 });
-            expect(pages).toEqual([1, -1, 6, 7, 8]);
+            const pages = service.getPages({ totalItems: 200, itemsPerPage: 20, currentPage: 8 });
+
+            expect(pages).toEqual([1, -1, 4, 5, 6, 7, 8, 9, 10]);
         });
 
         it('should truncate and has a buffers as the second and penultimate values', () => {
-            const pages = service.getPages({ totalItems: 160, itemsPerPage: 20, currentPage: 5 });
-            expect(pages).toEqual([1, -1, 4, 5, 6, -1, 8]);
+            const pages = service.getPages({ totalItems: 220, itemsPerPage: 20, currentPage: 6 });
+
+            expect(pages).toEqual([1, -1, 4, 5, 6, 7, 8, -1, 11]);
         });
     });
 
@@ -71,19 +76,29 @@ describe('PaginationService', () => {
             totalItems: 100,
             itemsPerPage: 10
         };
+
+        // pages:   1 2 3 4 5 6 7 ... 100
+        // indexes: 0 1 2 3 4 5 6 7   8
+
         const pages = service.getPages(pagination);
-        expect(pages[3]).toEqual(service.buffer);
+
+        expect(pages[7]).toEqual(service.moreElementValue);
     });
 
     it('should have two dots sections', () => {
         const pagination: Pagination = {
-            totalItems: 100,
+            totalItems: 110,
             itemsPerPage: 10,
-            currentPage: 4
+            currentPage: 6
         };
+
+        // pages:   1 .. 4 5 6 7 8 ... 100
+        // indexes: 0 1  2 3 4 5 6 7   8
+
         const pages = service.getPages(pagination);
-        expect(pages[1]).toEqual(service.buffer);
-        expect(pages[5]).toEqual(service.buffer);
+
+        expect(pages[1]).toEqual(service.moreElementValue);
+        expect(pages[7]).toEqual(service.moreElementValue);
     });
 
     it('should not have two dots sections if second to last page is currentPage', () => {
@@ -92,9 +107,13 @@ describe('PaginationService', () => {
             itemsPerPage: 2,
             currentPage: 73
         };
+
+        // pages:   1 .. 69 70 71 72 73 74 75
+        // indexes: 0 1  2  3  4  5  6  7  8
+
         const pages = service.getPages(pagination);
-        expect(pages[1]).toEqual(service.buffer);
-        expect(pages[5]).not.toEqual(service.buffer);
-        expect(pages[5]).toEqual(75);
+
+        expect(pages[1]).toEqual(service.moreElementValue);
+        expect(pages.filter((value) => value === service.moreElementValue).length).toEqual(1);
     });
 });

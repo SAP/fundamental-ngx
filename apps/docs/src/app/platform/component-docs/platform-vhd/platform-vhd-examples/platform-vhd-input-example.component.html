@@ -2,7 +2,7 @@
     <label fd-form-label for="test-selection-type-single">Selection type: single</label>
     <fd-input-group>
         <input fd-input-group-input fd-form-control id="test-selection-type-single" [value]="values.single?.name" />
-        <span fd-input-group-addon button="true">
+        <span fd-input-group-addon [button]="true">
             <button
                 fd-button
                 aria-label="Open value help dialog"
@@ -80,7 +80,7 @@
     <label fd-form-label for="test-selection-type-once">Selection type: once</label>
     <fd-input-group>
         <input fd-input-group-input fd-form-control id="test-selection-type-once" [value]="values.once?.name" />
-        <span fd-input-group-addon button="true">
+        <span fd-input-group-addon [button]="true">
             <button
                 fd-button
                 fd-button

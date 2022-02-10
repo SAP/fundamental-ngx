@@ -18,6 +18,7 @@ import {
 import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 import { Placement, SpecialDayRule, FormStates } from '@fundamental-ngx/core/shared';
 import {
@@ -234,10 +235,11 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
     private _state: FormStates = null;
 
     /**
-     * Whether AddOn Button should be focusable, set to true by default
+     * Whether AddOn Button should be focusable
+     * @default true
      */
     @Input()
-    buttonFocusable = false;
+    buttonFocusable = true;
 
     /**
      * Special days mark, it can be used by passing array of object with
@@ -288,6 +290,22 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
     /** Should date picker be inlined. */
     @Input()
     inline = true;
+
+    /**
+     * Whether to recalculate value from the input as user types or on blur.
+     * By default, updates the value as user types.
+     * @default false
+     */
+    @Input()
+    set processInputOnBlur(v: boolean) {
+        this._processInputOnBlur = coerceBooleanProperty(v);
+    }
+    get processInputOnBlur(): boolean {
+        return this._processInputOnBlur;
+    }
+
+    /** @hidden */
+    _processInputOnBlur = false;
 
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
@@ -397,8 +415,8 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
         });
         if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(
-                this._contentDensityService._contentDensityListener.subscribe((density) => {
-                    this.compact = density !== 'cozy';
+                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
+                    this.compact = isCompact;
                     this._changeDetectionRef.markForCheck();
                 })
             );
@@ -504,7 +522,12 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
      * @hidden
      * Method that is triggered when the text input is confirmed to ba changed, by clicking enter, or blur
      */
-    public handleInputChange(strDate: string): void {
+    public handleInputChange(strDate: string, isTypeEvent: boolean): void {
+        if ((isTypeEvent && this.processInputOnBlur) || (!isTypeEvent && !this.processInputOnBlur)) {
+            // if processInputOnBlur === true, ignore type event
+            // if processInputOnBlur === false, ignore blur/enter event
+            return;
+        }
         this.dateStringUpdate(strDate);
     }
 
@@ -512,9 +535,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
      * @hidden
      * Function that implements Validator Interface, adds validation support for forms
      */
-    validate(): {
-        [key: string]: any;
-    } {
+    validate(): { [key: string]: any } {
         return this.isModelValid()
             ? null
             : {
@@ -548,6 +569,9 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
         /** If written value is not defined, null, empty string */
         if (!selected) {
             this._inputFieldDate = '';
+            this._refreshCurrentlyDisplayedCalendarDate(this._dateTimeAdapter.today());
+            this.selectedRangeDate = { start: null, end: null };
+            this.selectedDate = null;
             this._changeDetectionRef.detectChanges();
             return;
         }

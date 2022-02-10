@@ -3,6 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { PlatformSliderModule } from '../../slider/slider.module';
+import { FormGeneratorComponentsAccessorService } from './form-generator-components-accessor.service';
 import { FormGeneratorService } from './form-generator.service';
 import { DynamicFormFieldItem } from './interfaces/dynamic-form-item';
 import { BaseDynamicFormGeneratorControl, dynamicFormFieldProvider, dynamicFormGroupChildProvider } from './public_api';
@@ -75,7 +76,7 @@ describe('FormGeneratorService', () => {
         TestBed.configureTestingModule({
             declarations: [TestCustomComponent],
             imports: [FormsModule, ReactiveFormsModule, PlatformSliderModule],
-            providers: [FormGeneratorService]
+            providers: [FormGeneratorService, FormGeneratorComponentsAccessorService]
         });
         service = TestBed.inject(FormGeneratorService);
     });

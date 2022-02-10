@@ -18,7 +18,7 @@
     <pre>Rating Data: {{ testRatingData2 | json }}</pre>
     <fd-rating-indicator
         ariaLabel="Rating indicator"
-        indicatorCapacity="7"
+        [indicatorCapacity]="7"
         size="compact"
         [displayAllRatings]="true"
         [ratings]="testRatingData2"

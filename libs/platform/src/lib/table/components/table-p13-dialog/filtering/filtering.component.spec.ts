@@ -1,6 +1,7 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { ContentDensityEnum } from '@fundamental-ngx/core/utils';
 import { DialogConfig, DialogRef } from '@fundamental-ngx/core/dialog';
 import { PlatformTableModule } from '../../../table.module';
 import { P13FilteringDialogComponent, FilterDialogData } from './filtering.component';
@@ -10,7 +11,11 @@ describe('PlatformTableP13FilterDialogComponent', () => {
     let fixture: ComponentFixture<P13FilteringDialogComponent>;
 
     const dialogRef = new DialogRef();
-    const dialogData: FilterDialogData = { columns: [], collectionFilter: [] };
+    const dialogData: FilterDialogData = {
+        columns: [],
+        collectionFilter: [],
+        tableContentDensity: ContentDensityEnum.COZY
+    };
 
     dialogRef.data = dialogData;
 

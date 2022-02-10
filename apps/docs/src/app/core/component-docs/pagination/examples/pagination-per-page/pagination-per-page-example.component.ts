@@ -5,10 +5,10 @@ import { Component } from '@angular/core';
     templateUrl: './pagination-per-page-example.component.html'
 })
 export class PaginationPerPageExampleComponent {
-    totalItems = 50;
-    currentPage1 = 1;
-    currentPage2 = 1;
-    currentPage3 = 1;
+    totalItems = 150;
+    currentPage1 = 2;
+    currentPage2 = 2;
+    currentPage3 = 2;
 
     customItemsPerPage = 5;
 

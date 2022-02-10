@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
+import { ContentDensity } from '@fundamental-ngx/core/utils';
+
 import { CollectionSelectFilter } from '../../../interfaces/collection-filter.interface';
 import { TableFilterSelectOption } from '../../../interfaces/selection-value.interface';
 import { NOT_FILTERED_OPTION_VALUE } from './constants';
@@ -25,6 +27,10 @@ export class FilterSingleSelectComponent {
         const value = filterBy?.value?.[0];
         this._value = value === undefined ? NOT_FILTERED_OPTION_VALUE : value;
     }
+
+    /** Table's content density to be used */
+    @Input()
+    contentDensity: ContentDensity;
 
     /** Filter model change event */
     @Output()

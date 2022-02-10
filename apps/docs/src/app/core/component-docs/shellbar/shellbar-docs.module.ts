@@ -15,6 +15,7 @@ import { ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
 import { TileModule } from '@fundamental-ngx/core/tile';
 import { LayoutPanelModule } from '@fundamental-ngx/core/layout-panel';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { ShellbarSideNavResponsiveExampleComponent } from './examples/shellbar-side-nav-responsive/shellbar-side-nav-responsive-example.component';
 
 const routes: Routes = [
     {
@@ -45,7 +46,8 @@ const routes: Routes = [
         ShellbarDocsHeaderComponent,
         ShellbarBasicExampleComponent,
         ShellbarSideNavExampleComponent,
-        ShellbarCollapsibleExampleComponent
+        ShellbarCollapsibleExampleComponent,
+        ShellbarSideNavResponsiveExampleComponent
     ]
 })
 export class ShellbarDocsModule {}

@@ -60,7 +60,7 @@ describe('ObjectStatusComponent', () => {
         fixture.detectChanges();
         let linkElement = fixture.debugElement.query(By.css('span'));
         expect(linkElement.nativeElement.classList.contains('fd-object-status--negative')).toBe(true);
-        const iconEl = fixture.debugElement.query(By.css('i.fd-object-status__icon'));
+        const iconEl = fixture.debugElement.query(By.css('fd-icon.fd-object-status__icon'));
         expect(iconEl.nativeElement.classList.contains('sap-icon--status-negative')).toBe(true);
         host.status = 'positive';
         host.glyph = 'status-positive';

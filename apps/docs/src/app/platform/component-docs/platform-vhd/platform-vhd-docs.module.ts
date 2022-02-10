@@ -10,6 +10,7 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
 import { TokenModule } from '@fundamental-ngx/core/token';
+import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { PlatformValueHelpDialogModule } from '@fundamental-ngx/platform/value-help-dialog';
 import { PlatformVhdDocsComponent } from './platform-vhd.docs.component';
@@ -22,6 +23,7 @@ import {
     PlatformVhdMobileExampleComponent,
     PlatformVhdStrategyLabelExampleComponent
 } from './platform-vhd-examples';
+import { PlatformVhdLoadingExampleComponent } from './platform-vhd-examples/platform-vhd-loading-example.component';
 
 const routes: Routes = [
     {
@@ -44,7 +46,8 @@ const routes: Routes = [
         MultiInputModule,
         TokenModule,
         ToolbarModule,
-        PlatformValueHelpDialogModule
+        PlatformValueHelpDialogModule,
+        CheckboxModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -53,6 +56,7 @@ const routes: Routes = [
 
         PlatformVhdBasicExampleComponent,
         PlatformVhdTokenExampleComponent,
+        PlatformVhdLoadingExampleComponent,
         PlatformVhdMultiInputExampleComponent,
         PlatformVhdInputExampleComponent,
         PlatformVhdMobileExampleComponent,

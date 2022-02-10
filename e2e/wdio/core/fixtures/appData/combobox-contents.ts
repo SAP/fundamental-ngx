@@ -19,7 +19,9 @@ export const placeholderTestText = [
     'Type some text...',
     'Type some text...',
     'Type some text...',
-    'undefined'
+    'undefined',
+    'Type some text...',
+    'Search here...'
 ];
 export const searchTermAppleText = 'Search Term: Apple';
 export const searchPineappleText = 'Search Term: Pineapple';

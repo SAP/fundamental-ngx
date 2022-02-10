@@ -17,7 +17,7 @@ export class SelectPo extends CoreBaseComponentPo {
     addRemoveOptionExample = 'fd-select-adding-example';
     programmaticControlExample = 'fd-select-programmatic-example';
 
-    options = (id) => `#fd-option-${id}`;
+    options = (id: string): string => `#fd-option-${id}`;
 
     open(): void {
         super.open(this.url);

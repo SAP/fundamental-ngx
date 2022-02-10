@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { BarModule } from '@fundamental-ngx/core/bar';
 
-import { SplitterModule } from '../../../../../../../libs/core/src/lib/splitter';
+import { SplitterModule } from '@fundamental-ngx/core/splitter';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';

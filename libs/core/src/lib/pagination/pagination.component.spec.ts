@@ -60,11 +60,9 @@ describe('Pagination Component', () => {
     });
 
     it('should handle mouseevent', () => {
-        const mouseEvent = new MouseEvent('click');
-        spyOn(mouseEvent, 'preventDefault');
         spyOn(component.pageChangeStart, 'emit');
 
-        component.goToPage(1, mouseEvent);
+        component.goToPage(1);
 
         expect(component.pageChangeStart.emit).toHaveBeenCalledWith(1);
     });
@@ -102,27 +100,16 @@ describe('Pagination Component', () => {
             expect(component.itemsPerPage).toBe(10);
         });
 
-        it('should be no more than totalItems', async () => {
-            component.totalItems = 5;
-            component.itemsPerPage = 6;
+        it('should not accept values less than 1', async () => {
+            component.itemsPerPage = 0;
             fixture.detectChanges();
-
+            expect(component.itemsPerPage).toBe(1);
+            component.itemsPerPage = 5;
+            fixture.detectChanges();
             expect(component.itemsPerPage).toBe(5);
-        });
-
-        it('should correctly update itemsPerPage after the total has changed', async () => {
-            component.totalItems = 3000;
-            component.itemsPerPage = 25;
-            component.currentPage = 1;
+            component.itemsPerPage = -1;
             fixture.detectChanges();
-
-            component.totalItems = 10;
-            fixture.detectChanges();
-
-            component.totalItems = 500;
-            fixture.detectChanges();
-
-            expect(component.itemsPerPage).toBe(25);
+            expect(component.itemsPerPage).toBe(1);
         });
     });
 
@@ -171,13 +158,18 @@ describe('Pagination Component', () => {
             expect(component.itemsPerPageOptions).toEqual([10, 20, 30]);
         });
 
-        it('should set itemsPerPage to the first collection item', async () => {
+        it("should add itemsPerPage to the list of displayed options if it's not present there", async () => {
             component.totalItems = 100;
             component.itemsPerPage = 10;
             component.itemsPerPageOptions = [5, 15, 30];
             fixture.detectChanges();
 
+            expect(component.itemsPerPage).toEqual(10);
+            expect(component._displayedPageSizeOptions).toEqual([5, 10, 15, 30]);
+
+            component.itemsPerPage = 5;
             expect(component.itemsPerPage).toEqual(5);
+            expect(component._displayedPageSizeOptions).toEqual([5, 15, 30]);
         });
 
         it('should sort values ascending', async () => {
@@ -188,12 +180,12 @@ describe('Pagination Component', () => {
             expect(component.itemsPerPageOptions).toEqual([10, 20, 30, 40, 50]);
         });
 
-        it('should filter values and keep only > 0 AND < totalItems', async () => {
+        it('should filter values and keep only > 0', async () => {
             component.totalItems = 100;
             component.itemsPerPageOptions = [-10, 0, 10, 50, 100, 150];
             fixture.detectChanges();
 
-            expect(component.itemsPerPageOptions).toEqual([10, 50]);
+            expect(component.itemsPerPageOptions).toEqual([10, 50, 100, 150]);
         });
     });
 });

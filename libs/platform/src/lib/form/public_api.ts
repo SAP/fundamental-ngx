@@ -96,6 +96,7 @@ export * from './select/select.module';
 export * from './select/commons/base-select';
 export * from './select/option/option.component';
 export * from './select/select/select.component';
+export * from './select/models/select.models';
 
 export * from './step-input/base.step-input';
 export * from './step-input/step-input.config';

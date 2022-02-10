@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
+import { MicroProcessFlowItemType } from '@fundamental-ngx/core/micro-process-flow';
+
 interface ExampleItem {
-    state: string;
+    state: MicroProcessFlowItemType;
     icon: string;
 }
 
@@ -14,7 +16,7 @@ export class MicroProcessFlowOverflowExampleComponent {
     items: ExampleItem[] = [];
 
     constructor() {
-        const states = ['positive', 'information', 'negative', 'critical'];
+        const states: MicroProcessFlowItemType[] = ['positive', 'information', 'negative', 'critical'];
 
         const icons = ['product', 'phone', 'map', 'log'];
 

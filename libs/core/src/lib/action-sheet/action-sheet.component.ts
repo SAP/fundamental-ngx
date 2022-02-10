@@ -151,11 +151,11 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
 
         if (this._compact === undefined && this._contentDensityService) {
             this._subscriptions.add(
-                this._contentDensityService._contentDensityListener.subscribe((density) => {
-                    this._compact = density !== 'cozy';
-                    this.actionSheetBody.compact = density !== 'cozy';
+                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
+                    this._compact = isCompact;
+                    this.actionSheetBody.compact = isCompact;
                     this.actionSheetItems.forEach((item) => {
-                        item.compact = density !== 'cozy';
+                        item.compact = isCompact;
                         this._changeDetectionRef.markForCheck();
                     });
                 })

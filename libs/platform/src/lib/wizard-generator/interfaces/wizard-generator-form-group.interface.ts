@@ -1,4 +1,6 @@
-import { DynamicFormItem } from '@fundamental-ngx/platform/form';
+import { DynamicFormFieldGroup, DynamicFormFieldItem, DynamicFormGroup } from '@fundamental-ngx/platform/form';
+import { Observable } from 'rxjs';
+import { WizardGeneratorDependencyFields, WizardGeneratorFormsValue } from './wizard-generator-item.interface';
 
 export interface WizardGeneratorFormGroup {
     /**
@@ -16,10 +18,38 @@ export interface WizardGeneratorFormGroup {
      * @description List of @see DynamicFormItem representing the list of items
      * to be rendered in the form.
      */
-    formItems: DynamicFormItem[];
-
+    formItems: WizardGeneratorFormItem[];
     /**
      * @description Unique form ID.
      */
     id: string;
+    /**
+     * @description Should return true or false depending on whether this form group should be visible.
+     * @returns Boolean
+     */
+    when?: (
+        completedSteps: string[],
+        answers: WizardGeneratorFormsValue,
+        forms: Map<string, DynamicFormGroup>
+    ) => boolean | Promise<boolean> | Observable<boolean>;
+    /**
+     * @description Object of dependency fields that are used with `when` function
+     */
+    dependencyFields?: WizardGeneratorDependencyFields;
+}
+
+export type WizardGeneratorFormItem = WizardGeneratorFormGroupItem | WizardGeneratorFormFieldItem;
+
+export interface WizardGeneratorFormGroupItem extends DynamicFormFieldGroup {
+    /**
+     * @description Object of dependency fields that are used with `when` function
+     */
+    dependencyFields?: WizardGeneratorDependencyFields;
+}
+
+export interface WizardGeneratorFormFieldItem extends DynamicFormFieldItem {
+    /**
+     * @description Object of dependency fields that are used with `when` function
+     */
+    dependencyFields?: WizardGeneratorDependencyFields;
 }

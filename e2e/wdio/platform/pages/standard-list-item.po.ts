@@ -7,7 +7,6 @@ export class StandardListItemPo extends BaseComponentPo {
 
     // noBorder examples
     sNoBorderList = 'fdp-non-byline-standard-list-item-example li';
-    sNoBorderAttr = 'fdp-non-byline-standard-list-item-example fdp-list';
     // noBorder ByLine examples
     sNoBorderByLineList = 'fdp-platform-standard-list-item-border-less-example li';
     sNoBorderByLineAttr = 'fdp-platform-standard-list-item-border-less-example fdp-list';

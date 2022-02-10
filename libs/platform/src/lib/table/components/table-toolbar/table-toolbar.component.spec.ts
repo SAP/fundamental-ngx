@@ -17,12 +17,18 @@ class TableComponentMock
             | 'openTableFilterSettings'
             | 'openTableGroupSettings'
             | 'openTableColumnSettings'
+            | 'emptyRowAdded'
+            | 'save'
+            | 'cancel'
         >
 {
     openTableSortSettings = new EventEmitter();
     openTableFilterSettings = new EventEmitter();
     openTableGroupSettings = new EventEmitter();
     openTableColumnSettings = new EventEmitter();
+    emptyRowAdded = new EventEmitter();
+    save = new EventEmitter();
+    cancel = new EventEmitter();
 
     search(): void {}
 }

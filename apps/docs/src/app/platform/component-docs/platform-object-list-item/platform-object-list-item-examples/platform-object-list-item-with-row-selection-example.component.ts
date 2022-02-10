@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Renderer2 } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
+import { ObjectStatus } from '@fundamental-ngx/core/object-status';
 import { DataProvider, ListDataSource } from '@fundamental-ngx/platform/shared';
 import { BaseListItem, SelectionChangeEvent } from '@fundamental-ngx/platform/list';
 
@@ -41,11 +42,11 @@ const LIST_ELEMENTS: Product[] = [
         attribute1: '155 x 240 x 160 cm',
         attribute2: '125.50 kg',
         attribute3: '145 x 140 x 360 cm',
-        status1: '',
+        status1: undefined,
         statusgyph1: 'to-be-reviewed',
         statuslabel1: 'Default',
         inverted1: true,
-        status2: '',
+        status2: undefined,
         statusgyph2: '',
         statuslabel2: '',
         inverted2: false,
@@ -110,17 +111,18 @@ export interface Product {
     attribute1: string;
     attribute2: string;
     attribute3: string;
-    status1: string;
+    status1: ObjectStatus;
     statusgyph1: string;
     statuslabel1: string;
     inverted1: boolean;
-    status2: string;
+    status2: ObjectStatus;
     statusgyph2: string;
     statuslabel2: string;
     inverted2: boolean;
     decimal: number;
     tip1: string;
     tip2: string;
+    link?: string;
 }
 
 export class ListDataProvider extends DataProvider<Product> {

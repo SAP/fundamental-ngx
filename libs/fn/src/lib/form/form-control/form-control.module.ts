@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ExperimentalFormControlComponent } from './form-control.component';
+import { FormControlComponent } from './form-control.component';
 
 @NgModule({
     imports: [CommonModule],
-    exports: [ExperimentalFormControlComponent],
-    declarations: [ExperimentalFormControlComponent]
+    exports: [FormControlComponent],
+    declarations: [FormControlComponent]
 })
-export class ExperimentalFormControlModule {}
+export class FormControlModule {}

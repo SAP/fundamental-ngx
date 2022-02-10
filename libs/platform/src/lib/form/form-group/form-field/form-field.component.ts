@@ -18,7 +18,7 @@ import {
     ViewChild
 } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
+import { BooleanInput, coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 import { Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 
@@ -218,7 +218,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         return this._required;
     }
 
-    set required(value: boolean) {
+    set required(value: BooleanInput) {
         this._required = coerceBooleanProperty(value);
     }
 
@@ -230,10 +230,10 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         return this._editable;
     }
 
-    set editable(value: boolean) {
+    set editable(value: BooleanInput) {
         const newVal = coerceBooleanProperty(value);
         if (this._editable !== newVal) {
-            this._editable = value;
+            this._editable = newVal;
             this._updateControlProperties();
         }
     }

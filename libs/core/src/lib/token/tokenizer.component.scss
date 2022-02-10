@@ -32,3 +32,8 @@ input {
         height: 1.625rem;
     }
 }
+
+.fd-tokenizer__overflow-list-item {
+    display: flex;
+    justify-content: space-between;
+}

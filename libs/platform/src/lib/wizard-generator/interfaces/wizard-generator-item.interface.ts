@@ -1,5 +1,6 @@
 import { Observable } from 'rxjs';
 
+import { DynamicFormGroup } from '@fundamental-ngx/platform/form';
 import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
 import { WizardGeneratorFormGroup } from './wizard-generator-form-group.interface';
 
@@ -15,6 +16,12 @@ export interface WizardStepFormsValue {
 
 export interface WizardVisibleSteps {
     [key: string]: boolean;
+}
+
+export interface WizardGeneratorDependencyFields {
+    [key: string]: {
+        [key: string]: string[];
+    };
 }
 
 export interface WizardGeneratorItem {
@@ -45,22 +52,19 @@ export interface WizardGeneratorItem {
      */
     icon?: string;
     /**
-     * @description Should return true or false depending on whether or not this step should be visible.
+     * @description Should return true or false depending on whether this step should be visible.
      * @returns Boolean
      */
     when?: (
         completedSteps: string[],
-        answers: WizardGeneratorFormsValue
+        answers: WizardGeneratorFormsValue,
+        forms: Map<string, DynamicFormGroup>
     ) => boolean | Promise<boolean> | Observable<boolean>;
 
     /**
      * @description Object of dependency fields that are used with `when` function
      */
-    dependencyFields?: {
-        [key: string]: {
-            [key: string]: string[];
-        };
-    };
+    dependencyFields?: WizardGeneratorDependencyFields;
 
     /**
      * @description Whether or not this step is going to create a branch.

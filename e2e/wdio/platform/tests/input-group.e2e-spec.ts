@@ -91,7 +91,7 @@ describe('Input Group should', () => {
         waitForElDisplayed(rightAlignedTextInputTextAddon);
         setValue(rightAlignedTextInput, numeric_value);
 
-        expect(getText(rightAlignedTextInputTextAddon)).toContain('0.00');
+        expect(getText(rightAlignedTextInputTextAddon)).toContain('USD');
         expect(getValue(rightAlignedTextInput)).toBe(numeric_value);
     });
 
@@ -100,7 +100,7 @@ describe('Input Group should', () => {
         setValue(leftAndRightAlignedTextInput, numeric_value);
 
         expect(getText(rightLeftAlignedTextInputTextAddon)).toContain('$');
-        expect(getText(rightLeftAlignedTextInputTextAddon, 1)).toContain('0.00');
+        expect(getText(rightLeftAlignedTextInputTextAddon, 1)).toContain('USD');
         expect(getValue(leftAndRightAlignedTextInput)).toBe(numeric_value);
     });
 
@@ -110,7 +110,7 @@ describe('Input Group should', () => {
 
         // Check if clickable. No logic behind the click
         expect(getText(buttonInputLeftAndRightTextAddon)).toContain('$');
-        expect(getText(buttonInputLeftAndRightTextAddon, 1)).toContain('0.00');
+        expect(getText(buttonInputLeftAndRightTextAddon, 1)).toContain('USD');
         expect(isElementClickable(buttonInputSubmitButton)).toBe(true);
         expect(getValue(buttonInput)).toBe(numeric_value);
     });
@@ -156,7 +156,7 @@ describe('Input Group should', () => {
         setValue(withFormInput, numeric_value);
 
         expect(getText(withFormInputTextAddon)).toContain('$');
-        expect(getText(withFormInputTextAddon, 1)).toContain('0.00');
+        expect(getText(withFormInputTextAddon, 1)).toContain('USD');
         expect(getText(withFormInputButtonAddon)).toContain('Submit');
         expect(getValue(withFormInput)).toBe(numeric_value);
     });

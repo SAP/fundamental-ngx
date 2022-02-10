@@ -14,6 +14,7 @@ import datePickerRangeDisableTs from '!./examples/date-picker-range-disabled-exa
 import datePickerRangeDisableH from '!./examples/date-picker-range-disabled-example/date-picker-range-disabled-example.component.html?raw';
 import datePickerSingleDisableTs from '!./examples/date-picker-disable-func-example/date-picker-disable-func-example.component.ts?raw';
 import datePickerSingleDisableH from '!./examples/date-picker-disable-func-example/date-picker-disable-func-example.component.html?raw';
+import datePickerUpdateOnBlurSrcTs from '!./examples/date-picker-update-on-blur-example.component.ts?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -135,6 +136,15 @@ export class DatePickerDocsComponent {
             component: 'DatePickerComplexI18nExampleComponent',
             code: datePickerComplexI18nSrcH,
             fileName: 'date-picker-complex-i18n-example'
+        }
+    ];
+
+    datePickerUpdateOnBlur: ExampleFile[] = [
+        {
+            language: 'typescript',
+            component: 'DatePickerUpdateOnBlurExampleComponent',
+            code: datePickerUpdateOnBlurSrcTs,
+            fileName: 'date-picker-update-on-blur-example'
         }
     ];
 }

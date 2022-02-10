@@ -26,7 +26,7 @@ import { RtlService, applyCssClass, CssClassBuilder, KeyUtil } from '@fundamenta
 
 export const SLIDER_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => ExperimentalSliderComponent),
+    useExisting: forwardRef(() => SliderComponent),
     multi: true
 };
 
@@ -43,15 +43,13 @@ let sliderId = 0;
         class: 'fn-slider'
     }
 })
-export class ExperimentalSliderComponent
-    implements OnInit, OnChanges, OnDestroy, ControlValueAccessor, CssClassBuilder
-{
+export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlValueAccessor, CssClassBuilder {
     /** Slider id, it has some default value if not set.  */
     @Input()
     @HostBinding('attr.id')
     id = 'fn-slider-id-' + sliderId++;
 
-    /** Whether or not slider should be rendered as vertical. */
+    /** Whether slider should be rendered as vertical. */
     @Input()
     @HostBinding('class.fn-slider--vertical')
     vertical = false;
@@ -296,7 +294,7 @@ export class ExperimentalSliderComponent
     }
 
     /** @hidden */
-    elementRef(): ElementRef<any> {
+    elementRef(): ElementRef {
         return this._elementRef;
     }
 

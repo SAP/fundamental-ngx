@@ -3,7 +3,6 @@ import {
     browserIsSafari,
     clearValue,
     click,
-    getAttributeByName,
     getElementArrayLength,
     getElementClass,
     getElementSize,

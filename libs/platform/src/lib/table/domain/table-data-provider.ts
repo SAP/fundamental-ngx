@@ -178,9 +178,9 @@ export class TableDataProvider<T> {
      * @param tableState @see TableState Set of table parameters.
      * @returns filtered data source items array.
      */
-    search(items: T[], { searchInput, columns }: TableState): T[] {
+    search(items: T[], { searchInput, columnKeys }: TableState): T[] {
         const searchText = searchInput?.text || '';
-        const keysToSearchBy = columns;
+        const keysToSearchBy = columnKeys;
 
         if (searchText.trim() === '' || keysToSearchBy.length === 0) {
             return items;

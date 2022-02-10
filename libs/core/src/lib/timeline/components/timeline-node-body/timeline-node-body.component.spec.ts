@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 import { TimelineNodeBodyComponent } from './timeline-node-body.component';
+import { TimelinePositionControlService } from '../../services/timeline-position-control.service';
 
 describe('TimelineNodeBodyComponent', () => {
     let component: TimeLineNodeBodyTestComponent;
@@ -9,7 +10,15 @@ describe('TimelineNodeBodyComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [TimelineNodeBodyComponent, TimeLineNodeBodyTestComponent]
+            declarations: [TimelineNodeBodyComponent, MockedTextComponent, TimeLineNodeBodyTestComponent],
+            providers: [
+                {
+                    provide: TimelinePositionControlService,
+                    useValue: {
+                        calculatePositions: () => void 0
+                    }
+                }
+            ]
         }).compileComponents();
     });
 
@@ -28,6 +37,17 @@ describe('TimelineNodeBodyComponent', () => {
         const moreBtn = hostEl.querySelectorAll('.fd-text__link--more');
         expect(moreBtn).toBeTruthy();
     });
+
+    it('should call calculate positions when expanded or collapsed occurs', () => {
+        const hostEl: HTMLElement = fixture.debugElement.nativeElement;
+        const moreBtn = hostEl.querySelector<HTMLAnchorElement>('.fd-text__link--more');
+        const calculatePositionsSpy = spyOn(
+            fixture.componentInstance.timelinePositionControlService,
+            'calculatePositions'
+        );
+        moreBtn.click();
+        expect(calculatePositionsSpy).toHaveBeenCalledTimes(1);
+    });
 });
 
 @Component({
@@ -45,4 +65,14 @@ class TimeLineNodeBodyTestComponent {
         in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
         cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     `;
+
+    constructor(readonly timelinePositionControlService: TimelinePositionControlService) {}
+}
+
+@Component({
+    selector: 'fd-text',
+    template: '<a class="fd-text__link--more" (click)="isCollapsedChange.emit(true)"></a>'
+})
+class MockedTextComponent {
+    @Output() isCollapsedChange = new EventEmitter<boolean>();
 }

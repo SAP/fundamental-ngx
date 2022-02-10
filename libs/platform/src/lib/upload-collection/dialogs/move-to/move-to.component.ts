@@ -3,9 +3,18 @@ import { take } from 'rxjs/operators';
 
 import { DialogRef, DialogService, DialogConfig } from '@fundamental-ngx/core/dialog';
 import { isObject } from '@fundamental-ngx/platform/shared';
+import { ContentDensityEnum } from '@fundamental-ngx/core/utils';
 
 import { UploadCollectionItem, UploadCollectionFolder } from '../../models/upload-collection.models';
 import { NewFolderComponent } from '../new-folder/new-folder.component';
+
+export interface MoveToComponentDialogData {
+    items: UploadCollectionItem[];
+    contentDensity: ContentDensityEnum;
+    currentFolder?: UploadCollectionFolder;
+    movableFolders?: UploadCollectionFolder[];
+    maxFilenameLength: number;
+}
 
 @Component({
     templateUrl: './move-to.component.html',
@@ -52,7 +61,7 @@ export class MoveToComponent implements OnInit {
     _foldersList: UploadCollectionFolder[] = [];
 
     constructor(
-        private readonly dialogRef: DialogRef,
+        public readonly dialogRef: DialogRef<MoveToComponentDialogData>,
         private readonly _dialogService: DialogService,
         private readonly _cd: ChangeDetectorRef
     ) {}

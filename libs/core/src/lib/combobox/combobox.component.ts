@@ -240,9 +240,12 @@ export class ComboboxComponent
     @Input()
     displayFn = this._defaultDisplay;
 
-    /** Whether AddOn Button should be focusable, set to false by default */
+    /**
+     * Whether AddOn Button should be focusable
+     * @default true
+     */
     @Input()
-    buttonFocusable = false;
+    buttonFocusable = true;
 
     /** Whether the combobox is readonly. */
     @Input()
@@ -256,12 +259,12 @@ export class ComboboxComponent
     @Input()
     mobileConfig: MobileModeConfig;
 
-    /** Whether or not to display the addon button. */
+    /** Whether to display the addon button. */
     @Input()
     showDropdownButton = true;
 
     /**
-     * Whether or not to return results where the input matches the entire string. By default, only results that start
+     * Whether to return results where the input matches the entire string. By default, only results that start
      * with the input search term will be returned.
      */
     @Input()
@@ -272,6 +275,10 @@ export class ComboboxComponent
      */
     @Input()
     title: string;
+
+    /** Whether list item options should be rendered as byline. */
+    @Input()
+    byline = false;
 
     /** Event emitted when an item is clicked. Use *$event* to retrieve it. */
     @Output()
@@ -373,8 +380,8 @@ export class ComboboxComponent
         this._refreshDisplayedValues();
         if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(
-                this._contentDensityService._contentDensityListener.subscribe((density) => {
-                    this.compact = density !== 'cozy';
+                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
+                    this.compact = isCompact;
                     this._cdRef.markForCheck();
                 })
             );

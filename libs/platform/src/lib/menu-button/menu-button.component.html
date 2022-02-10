@@ -4,7 +4,7 @@
     [attr.name]="name"
     [fdMenu]="true"
     [label]="label"
-    [compact]="contentDensity === 'compact'"
+    [compact]="contentDensity | isCompactDensity"
     [glyph]="icon"
     [disabled]="disabled"
     [attr.aria-disabled]="disabled"

@@ -3,23 +3,19 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
 
 import platformBasicMenuSrc from '!./platform-menu-examples/platform-menu-basic-example.component.html?raw';
 import platformBasicMenuTsCode from '!./platform-menu-examples/platform-menu-basic-example.component.ts?raw';
-import platformBasicMenuScss from '!./platform-menu-examples/platform-menu-basic-example.component.scss?raw';
+import platformBaseMenuScss from '!./platform-menu-examples/platform-menu-example-styles.scss?raw';
 
 import platformXPositionMenuSrc from '!./platform-menu-examples/platform-menu-x-position-example.component.html?raw';
 import platformXPositionMenuTsCode from '!./platform-menu-examples/platform-menu-x-position-example.component.ts?raw';
-import platformXPositionMenuScss from '!./platform-menu-examples/platform-menu-x-position-example.component.scss?raw';
 
 import platformCascadeMenuSrc from '!./platform-menu-examples/platform-menu-cascade-example.component.html?raw';
 import platformCascadeMenuTsCode from '!./platform-menu-examples/platform-menu-cascade-example.component.ts?raw';
-import platformCascadeMenuScss from '!./platform-menu-examples/platform-menu-cascade-example.component.scss?raw';
 
 import platformScrollingMenuSrc from '!./platform-menu-examples/platform-menu-scrolling-example.component.html?raw';
 import platformScrollingMenuTsCode from '!./platform-menu-examples/platform-menu-scrolling-example.component.ts?raw';
-import platformScrollingMenuScss from '!./platform-menu-examples/platform-menu-scrolling-example.component.scss?raw';
 
 import platformWithIconsMenuSrc from '!./platform-menu-examples/platform-menu-with-icons-example.component.html?raw';
 import platformWithIconsMenuTsCode from '!./platform-menu-examples/platform-menu-with-icons-example.component.ts?raw';
-import platformWithIconsMenuScss from '!./platform-menu-examples/platform-menu-with-icons-example.component.scss?raw';
 
 @Component({
     selector: 'app-menu',
@@ -31,7 +27,7 @@ export class PlatformMenuDocsComponent {
             language: 'html',
             code: platformBasicMenuSrc,
             fileName: 'platform-menu-basic-example',
-            scssFileCode: platformBasicMenuScss
+            scssFileCode: platformBaseMenuScss
         },
         {
             language: 'typescript',
@@ -46,7 +42,7 @@ export class PlatformMenuDocsComponent {
             language: 'html',
             code: platformXPositionMenuSrc,
             fileName: 'platform-menu-x-position-example',
-            scssFileCode: platformXPositionMenuScss
+            scssFileCode: platformBaseMenuScss
         },
         {
             language: 'typescript',
@@ -61,7 +57,7 @@ export class PlatformMenuDocsComponent {
             language: 'html',
             code: platformCascadeMenuSrc,
             fileName: 'platform-menu-cascade-example',
-            scssFileCode: platformCascadeMenuScss
+            scssFileCode: platformBaseMenuScss
         },
         {
             language: 'typescript',
@@ -76,7 +72,7 @@ export class PlatformMenuDocsComponent {
             language: 'html',
             code: platformScrollingMenuSrc,
             fileName: 'platform-menu-scrolling-example',
-            scssFileCode: platformScrollingMenuScss
+            scssFileCode: platformBaseMenuScss
         },
         {
             language: 'typescript',
@@ -91,7 +87,7 @@ export class PlatformMenuDocsComponent {
             language: 'html',
             code: platformWithIconsMenuSrc,
             fileName: 'platform-menu-with-icons-example',
-            scssFileCode: platformWithIconsMenuScss
+            scssFileCode: platformBaseMenuScss
         },
         {
             language: 'typescript',

@@ -12,13 +12,13 @@ export class UploadCollectionPo extends BaseComponentPo {
     tableItems = ' .fd-table__row--hoverable';
     buttons = ' .fd-button--ghost.fd-button--menu';
     menuItem = '.fd-menu__item';
-    tablePages = ' .fd-pagination__link.ng-star-inserted';
+    tablePages = ' .fd-pagination__link';
     tableResult = ' .fdp-upload-collection__pagination--total';
     linkNext = ' [glyph="navigation-right-arrow"]';
     linkPrevious = ' [glyph="navigation-left-arrow"]';
-    inputFields = ' .fd-input--compact';
+    inputFields = ' .fdp-upload-collection__toolbar .fd-input';
     columnHeaders = ' [role="columnheader"]';
-    tableContent = ' fd-icon~span';
+    tableContent = ' .fdp-upload-collection__cursor';
     transparentButton = ' .fd-button--transparent';
     dialogInputField = 'fd-dialog-body .fd-input';
     dialogCreateButton = 'button.fd-dialog__decisive-button';

@@ -4,7 +4,7 @@
 <button fd-button (click)="openPage(true)">Click to open full screen</button>
 <div class="overlay" #overlay>
     <ng-container *ngIf="fullscreen">
-        <fdp-dynamic-page [stackContent]="stackedTabs" [background]="background">
+        <fdp-dynamic-page [stackContent]="stackedTabs" [background]="background" (tabChange)="onTabChanged($event)">
             <fdp-dynamic-page-title [title]="pageTitle" subtitle="Oversized multimaterial sneakers with quilted effect">
                 <!-- breadcrumb content -->
                 <fd-breadcrumb>
@@ -94,7 +94,7 @@
                 corrupti architecto perspiciatis, delectus necessitatibus incidunt numquam asperiores tenetur iure. Cum
                 consequuntur impedit repellendus esse, facere autem optio consequatur nobis?
             </fdp-dynamic-page-header>
-            <fdp-dynamic-page-content tabLabel="Tab 1" id="tab_1" (tabChange)="onTabChanged($event)">
+            <fdp-dynamic-page-content tabLabel="Tab 1" id="tab_1">
                 <!-- page content goes here -->
                 tab1 Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit sunt laboriosam totam
                 maiores. Unde quas quis soluta adipisci mollitia distinctio. Natus nam repellat, aut ad et tempore cum.
@@ -211,7 +211,7 @@
                 odit? Recusandae praesentium voluptatum cum omnis, placeat beatae quasi eum odio doloribus inventore,
                 eos iusto sed.
             </fdp-dynamic-page-content>
-            <fdp-dynamic-page-content tabLabel="Tab 2" id="tab_2" (tabChange)="onTabChanged($event)">
+            <fdp-dynamic-page-content tabLabel="Tab 2" id="tab_2">
                 <!-- page content goes here -->
                 tabs 2 Lorem ipsum dolor sasdasit amet consectetur adipisicing elit. Reprehenderit sunt laboriosam totam
                 maiores. Unde quas quis soluta adipisci mollitia distinctio. Natus nam repellat, aut ad et tempore cum.

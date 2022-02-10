@@ -19,6 +19,9 @@ import multiInputVhdTs from '!./platform-vhd-examples/platform-vhd-multi-input-e
 import mobileVhdHtml from '!./platform-vhd-examples/platform-vhd-mobile-example.component.html?raw';
 import mobileVhdTs from '!./platform-vhd-examples/platform-vhd-mobile-example.component.ts?raw';
 
+import loadingVhdHtml from '!./platform-vhd-examples/platform-vhd-loading-example.component.html?raw';
+import loadingVhdTs from '!./platform-vhd-examples/platform-vhd-loading-example.component.ts?raw';
+
 @Component({
     selector: 'app-platform-vhd',
     templateUrl: './platform-vhd.docs.component.html'
@@ -105,6 +108,20 @@ export class PlatformVhdDocsComponent {
             component: 'PlatformVhdMobileExampleComponent',
             code: mobileVhdTs,
             fileName: 'platform-vhd-mobile-example'
+        }
+    ];
+
+    loadingValueHelpDialog: ExampleFile[] = [
+        {
+            language: 'html',
+            code: loadingVhdHtml,
+            fileName: 'platform-vhd-loading-example'
+        },
+        {
+            language: 'typescript',
+            component: 'PlatformVhdLoadingExampleComponent',
+            code: loadingVhdTs,
+            fileName: 'platform-vhd-loading-example'
         }
     ];
 }

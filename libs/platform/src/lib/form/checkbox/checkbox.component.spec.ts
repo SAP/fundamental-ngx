@@ -3,11 +3,11 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
-import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { CheckboxComponent } from './checkbox.component';
 import { FdpFormGroupModule } from './../form-group/fdp-form.module';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
+import { PlatformCheckboxModule } from './checkbox.module';
 
 @Component({
     selector: 'fdp-test-checkbox',
@@ -114,8 +114,8 @@ describe('Checkbox test Component', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [FdpFormGroupModule, FormModule, CheckboxModule, FormsModule, ReactiveFormsModule],
-                declarations: [TestCheckboxComponent, CheckboxComponent]
+                imports: [FdpFormGroupModule, FormModule, FormsModule, ReactiveFormsModule, PlatformCheckboxModule],
+                declarations: [TestCheckboxComponent]
             }).compileComponents();
         })
     );
@@ -408,8 +408,8 @@ describe('Checkbox test Component with Template driven form', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [FdpFormGroupModule, FormModule, CheckboxModule, FormsModule, ReactiveFormsModule],
-                declarations: [TestCheckboxComponentTemplateDrivenComponent, CheckboxComponent]
+                imports: [FdpFormGroupModule, FormModule, PlatformCheckboxModule, FormsModule, ReactiveFormsModule],
+                declarations: [TestCheckboxComponentTemplateDrivenComponent]
             }).compileComponents();
         })
     );
@@ -575,7 +575,7 @@ const CHECKBOX_IDENTIFIER = 'platform-checkbox-unit-test';
 runValueAccessorTests({
     component: CheckboxComponent,
     testModuleMetadata: {
-        imports: [CheckboxModule]
+        imports: [PlatformCheckboxModule]
     },
     additionalSetup: (fixture, done) => {
         fixture.componentInstance.id = CHECKBOX_IDENTIFIER;

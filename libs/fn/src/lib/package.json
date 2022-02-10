@@ -2,7 +2,7 @@
   "name": "@fundamental-ngx/fn",
   "version": "VERSION_PLACEHOLDER",
   "schematics": "./schematics/collection.json",
-  "description": "Fundamental Library for Angular - experimental",
+  "description": "Fundamental Library for Angular - FN",
   "license": "Apache-2.0",
   "homepage": "https://sap.github.io/fundamental-ngx/home",
   "repository": {
@@ -18,10 +18,10 @@
     "@angular/forms": "ANGULAR_VER_PLACEHOLDER",
     "@angular/animations": "ANGULAR_VER_PLACEHOLDER",
     "@angular/router": "ANGULAR_VER_PLACEHOLDER",
+    "@angular/cdk": "CDK_VER_PLACEHOLDER",
     "rxjs": "RXJS_VER_PLACEHOLDER"
   },
   "dependencies": {
-    "@angular/cdk": "CDK_VER_PLACEHOLDER",
     "@sap-theming/theming-base-content": "THEMING_VER_PLACEHOLDER",
     "focus-trap": "FOCUSTRAP_VER_PLACEHOLDER",
     "focus-visible": "FOCUSVISIBLE_VER_PLACEHOLDER",

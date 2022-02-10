@@ -14,11 +14,11 @@ import { Component } from '@angular/core';
         </div>
         <div>
             <p>Disabled:</p>
-            <fd-checkbox [(ngModel)]="checkboxValue6" disabled="true" label="Disabled label"></fd-checkbox>
+            <fd-checkbox [(ngModel)]="checkboxValue6" [disabled]="true" label="Disabled label"></fd-checkbox>
         </div>
         <div>
             <p>Compact:</p>
-            <fd-checkbox [(ngModel)]="checkboxValue7" compact="true" label="Compact label"></fd-checkbox>
+            <fd-checkbox [(ngModel)]="checkboxValue7" [compact]="true" label="Compact label"></fd-checkbox>
         </div>
     `
 })

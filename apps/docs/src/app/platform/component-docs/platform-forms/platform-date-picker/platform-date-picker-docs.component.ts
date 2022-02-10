@@ -8,6 +8,7 @@ import datepickerDisabledFnCodeTs from '!./platform-date-picker-examples/platfor
 import datepickerDisabledFnHtml from '!./platform-date-picker-examples/platform-date-picker-disable-func-example.component.html?raw';
 import datepickerFormatTs from '!./platform-date-picker-examples/platform-date-picker-format-example.component?raw';
 import datepickerFormatHtml from '!./platform-date-picker-examples/platform-date-picker-format-example.component.html?raw';
+import datePickerUpdateOnBlurSrcTs from '!./platform-date-picker-examples/platform-date-picker-update-on-blur-example.component.ts?raw';
 
 import { ExampleFile } from '../../../../documentation/core-helpers/code-example/example-file';
 
@@ -70,6 +71,15 @@ export class PlatformDatePickerDocsComponent {
             code: datepickerFormatHtml,
             fileName: 'platform-date-picker-format-example',
             component: 'PlatformDatePickerFormatExampleComponent'
+        }
+    ];
+
+    datePickerUpdateOnBlur: ExampleFile[] = [
+        {
+            language: 'typescript',
+            component: 'DatePickerUpdateOnBlurExampleComponent',
+            code: datePickerUpdateOnBlurSrcTs,
+            fileName: 'date-picker-update-on-blur-example'
         }
     ];
 }

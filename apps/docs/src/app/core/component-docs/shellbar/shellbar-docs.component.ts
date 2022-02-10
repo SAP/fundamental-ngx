@@ -7,6 +7,9 @@ import shellbarCollapsibleTSSrc from '!./examples/shellbar-collapsible-example.c
 import sideNavShellbarHtml from '!./examples/shellbar-side-nav/shellbar-side-nav-example.component.html?raw';
 import sideNavShellbarTs from '!./examples/shellbar-side-nav/shellbar-side-nav-example.component.ts?raw';
 import sideNavShellbarScss from '!./examples/shellbar-side-nav/shellbar-side-nav-example.component.scss?raw';
+import sideNavResponsiveShellbarTs from '!./examples/shellbar-side-nav-responsive/shellbar-side-nav-responsive-example.component.ts?raw';
+import sideNavResponsiveShellbarScss from '!./examples/shellbar-side-nav-responsive/shellbar-side-nav-responsive-example.component.scss?raw';
+import sideNavResponsiveShellbarHtml from '!./examples/shellbar-side-nav-responsive/shellbar-side-nav-responsive-example.component.html?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -61,6 +64,28 @@ export class ShellbarDocsComponent {
             fileName: 'shellbar-side-nav-example',
             component: 'ShellbarSideNavExampleComponent',
             scssFileCode: sideNavShellbarScss
+        }
+    ];
+
+    shellbarSideNavResponsive: ExampleFile[] = [
+        {
+            language: 'html',
+            code: sideNavResponsiveShellbarHtml,
+            fileName: 'shellbar-side-nav-responsive-example'
+        },
+        {
+            language: 'typescript',
+            component: 'ShellbarSideNavResponsiveExampleComponent',
+            code: sideNavResponsiveShellbarTs,
+            fileName: 'shellbar-side-nav-responsive-example',
+            scssFileCode: sideNavResponsiveShellbarScss
+        },
+        {
+            language: 'scss',
+            code: sideNavResponsiveShellbarScss,
+            fileName: 'shellbar-side-nav-responsive-example',
+            component: 'ShellbarSideNavResponsiveExampleComponent',
+            scssFileCode: sideNavResponsiveShellbarScss
         }
     ];
 }

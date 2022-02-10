@@ -40,7 +40,10 @@ import { FormFieldControl, BaseInput, FormField, ControlState } from '@fundament
     templateUrl: './date-picker.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: FormFieldControl, useExisting: PlatformDatePickerComponent, multi: true }]
+    providers: [{ provide: FormFieldControl, useExisting: PlatformDatePickerComponent, multi: true }],
+    host: {
+        '(blur)': 'onTouched()'
+    }
 })
 export class PlatformDatePickerComponent<D> extends BaseInput {
     /**
@@ -151,10 +154,11 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     }
 
     /**
-     * Whether AddOn Button should be focusable, set to false by default
+     * Whether AddOn Button should be focusable
+     * @default true
      */
     @Input()
-    buttonFocusable = false;
+    buttonFocusable = true;
 
     /**
      * Special days mark, it can be used by passing array of object with
@@ -207,6 +211,14 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     /** Should date picker be inlined. */
     @Input()
     inline = true;
+
+    /**
+     * Whether to recalculate value from the input as user types or on blur.
+     * By default, updates the value as user types.
+     * @default false
+     */
+    @Input()
+    processInputOnBlur = false;
 
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
@@ -286,7 +298,6 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
      */
     handleDateChange(value: D | DateRange<D>): void {
         this.value = value;
-        this.onTouched();
 
         if (this.type === 'single' && !this.value && !this.allowNull) {
             this._datePickerValid = false;

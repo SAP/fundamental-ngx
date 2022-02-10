@@ -1,8 +1,21 @@
 {
-    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
     "version": 1,
     "newProjectRoot": "",
     "projects": {
+        "components-e2e": {
+            "root": "e2e",
+            "sourceRoot": "e2e",
+            "projectType": "application",
+            "architect": {
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["e2e/**/*.ts"]
+                    }
+                }
+            },
+            "tags": ["type:e2e", "scope:components-e2e"]
+        },
         "core": {
             "projectType": "library",
             "root": "libs/core/src/lib",
@@ -38,7 +51,7 @@
                     }
                 }
             },
-            "tags": []
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-action-bar": {
             "projectType": "library",
@@ -78,7 +91,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-action-sheet": {
             "projectType": "library",
@@ -118,7 +131,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-alert": {
             "projectType": "library",
@@ -155,7 +168,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-avatar": {
             "projectType": "library",
@@ -192,7 +205,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-avatar-group": {
             "projectType": "library",
@@ -232,7 +245,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-bar": {
             "projectType": "library",
@@ -269,7 +282,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-breadcrumb": {
             "projectType": "library",
@@ -309,7 +322,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-busy-indicator": {
             "projectType": "library",
@@ -349,7 +362,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-button": {
             "projectType": "library",
@@ -386,7 +399,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-calendar": {
             "projectType": "library",
@@ -426,7 +439,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-card": {
             "projectType": "library",
@@ -463,7 +476,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-carousel": {
             "projectType": "library",
@@ -503,7 +516,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-checkbox": {
             "projectType": "library",
@@ -543,7 +556,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-combobox": {
             "projectType": "library",
@@ -583,7 +596,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-date-picker": {
             "projectType": "library",
@@ -623,7 +636,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-datetime": {
             "projectType": "library",
@@ -663,7 +676,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-datetime-picker": {
             "projectType": "library",
@@ -703,7 +716,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-dialog": {
             "projectType": "library",
@@ -740,7 +753,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-dynamic-page": {
             "projectType": "library",
@@ -780,7 +793,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-dynamic-side-content": {
             "projectType": "library",
@@ -820,7 +833,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-facets": {
             "projectType": "library",
@@ -857,7 +870,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-feed-input": {
             "projectType": "library",
@@ -897,7 +910,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-feed-list-item": {
             "projectType": "library",
@@ -937,7 +950,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-file-uploader": {
             "projectType": "library",
@@ -977,7 +990,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-fixed-card-layout": {
             "projectType": "library",
@@ -1017,7 +1030,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-flexible-column-layout": {
             "projectType": "library",
@@ -1057,7 +1070,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-form": {
             "projectType": "library",
@@ -1094,7 +1107,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-formatted-text": {
             "projectType": "library",
@@ -1134,7 +1147,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-grid-list": {
             "projectType": "library",
@@ -1174,7 +1187,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-icon": {
             "projectType": "library",
@@ -1211,7 +1224,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-illustrated-message": {
             "projectType": "library",
@@ -1251,7 +1264,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-infinite-scroll": {
             "projectType": "library",
@@ -1291,7 +1304,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-info-label": {
             "projectType": "library",
@@ -1331,7 +1344,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-inline-help": {
             "projectType": "library",
@@ -1371,7 +1384,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-input-group": {
             "projectType": "library",
@@ -1411,7 +1424,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-layout-grid": {
             "projectType": "library",
@@ -1451,7 +1464,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-layout-panel": {
             "projectType": "library",
@@ -1491,7 +1504,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-link": {
             "projectType": "library",
@@ -1528,7 +1541,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-list": {
             "projectType": "library",
@@ -1565,7 +1578,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-menu": {
             "projectType": "library",
@@ -1602,7 +1615,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-message-box": {
             "projectType": "library",
@@ -1642,7 +1655,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-message-page": {
             "projectType": "library",
@@ -1682,7 +1695,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-message-strip": {
             "projectType": "library",
@@ -1722,7 +1735,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-message-toast": {
             "projectType": "library",
@@ -1762,7 +1775,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-micro-process-flow": {
             "projectType": "library",
@@ -1802,7 +1815,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-mobile-mode": {
             "projectType": "library",
@@ -1842,7 +1855,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-multi-input": {
             "projectType": "library",
@@ -1882,7 +1895,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-nested-list": {
             "projectType": "library",
@@ -1922,7 +1935,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-notification": {
             "projectType": "library",
@@ -1962,7 +1975,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-object-identifier": {
             "projectType": "library",
@@ -2002,7 +2015,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-object-marker": {
             "projectType": "library",
@@ -2042,7 +2055,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-object-number": {
             "projectType": "library",
@@ -2082,7 +2095,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-object-status": {
             "projectType": "library",
@@ -2122,7 +2135,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-pagination": {
             "projectType": "library",
@@ -2162,7 +2175,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-panel": {
             "projectType": "library",
@@ -2199,7 +2212,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-popover": {
             "projectType": "library",
@@ -2236,7 +2249,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-product-switch": {
             "projectType": "library",
@@ -2276,7 +2289,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-progress-indicator": {
             "projectType": "library",
@@ -2307,17 +2320,16 @@
                     }
                 },
                 "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                    "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/src/lib/progress-indicator/tsconfig.lib.json",
-                            "libs/core/src/lib/progress-indicator/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/progress-indicator/**/*.ts",
+                            "libs/core/src/lib/progress-indicator/**/*.html"
+                        ]
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-quick-view": {
             "projectType": "library",
@@ -2357,7 +2369,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-radio": {
             "projectType": "library",
@@ -2394,7 +2406,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-rating-indicator": {
             "projectType": "library",
@@ -2434,7 +2446,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-resizable-card-layout": {
             "projectType": "library",
@@ -2474,7 +2486,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-scroll-spy": {
             "projectType": "library",
@@ -2514,7 +2526,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-scrollbar": {
             "projectType": "library",
@@ -2554,7 +2566,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-segmented-button": {
             "projectType": "library",
@@ -2594,7 +2606,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-select": {
             "projectType": "library",
@@ -2631,7 +2643,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-shared": {
             "projectType": "library",
@@ -2668,7 +2680,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-shellbar": {
             "projectType": "library",
@@ -2708,7 +2720,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-side-navigation": {
             "projectType": "library",
@@ -2748,7 +2760,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-slider": {
             "projectType": "library",
@@ -2785,7 +2797,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-split-button": {
             "projectType": "library",
@@ -2825,7 +2837,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-splitter": {
             "projectType": "library",
@@ -2865,7 +2877,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-status-indicator": {
             "projectType": "library",
@@ -2905,7 +2917,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-step-input": {
             "projectType": "library",
@@ -2945,7 +2957,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-switch": {
             "projectType": "library",
@@ -2982,7 +2994,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-table": {
             "projectType": "library",
@@ -3019,7 +3031,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-tabs": {
             "projectType": "library",
@@ -3056,7 +3068,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-tests": {
             "projectType": "library",
@@ -3093,7 +3105,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-text": {
             "projectType": "library",
@@ -3130,7 +3142,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-tile": {
             "projectType": "library",
@@ -3167,7 +3179,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-time": {
             "projectType": "library",
@@ -3204,7 +3216,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-time-picker": {
             "projectType": "library",
@@ -3244,7 +3256,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-timeline": {
             "projectType": "library",
@@ -3284,7 +3296,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-title": {
             "projectType": "library",
@@ -3321,7 +3333,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-token": {
             "projectType": "library",
@@ -3358,7 +3370,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-toolbar": {
             "projectType": "library",
@@ -3395,7 +3407,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-tree": {
             "projectType": "library",
@@ -3432,7 +3444,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-upload-collection": {
             "projectType": "library",
@@ -3472,7 +3484,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-utils": {
             "projectType": "library",
@@ -3509,7 +3521,7 @@
                     }
                 }
             },
-            "tags": []
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-vertical-navigation": {
             "projectType": "library",
@@ -3549,7 +3561,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "core-wizard": {
             "projectType": "library",
@@ -3586,7 +3598,7 @@
                     }
                 }
             },
-            "tags": ["fd"]
+            "tags": ["type:lib", "scope:fd"]
         },
         "docs": {
             "root": "apps/docs/",
@@ -3770,7 +3782,7 @@
                     }
                 }
             },
-            "tags": []
+            "tags": ["scope:docs", "type:app"]
         },
         "docs-e2e": {
             "root": "apps/docs-e2e",
@@ -3796,7 +3808,7 @@
                     }
                 }
             },
-            "tags": [],
+            "tags": ["scope:docs", "type:e2e"],
             "implicitDependencies": ["docs"]
         },
         "fn": {
@@ -3834,7 +3846,7 @@
                     }
                 }
             },
-            "tags": [],
+            "tags": ["type:lib", "scope:fn"],
             "implicitDependencies": ["core"]
         },
         "fn-button": {
@@ -3872,7 +3884,7 @@
                     }
                 }
             },
-            "tags": ["fn"],
+            "tags": ["type:lib", "scope:fn"],
             "implicitDependencies": ["core"]
         },
         "fn-checkbox": {
@@ -3910,7 +3922,7 @@
                     }
                 }
             },
-            "tags": ["fn"],
+            "tags": ["type:lib", "scope:fn"],
             "implicitDependencies": ["core"]
         },
         "fn-form": {
@@ -3948,7 +3960,7 @@
                     }
                 }
             },
-            "tags": ["fn"],
+            "tags": ["type:lib", "scope:fn"],
             "implicitDependencies": ["core"]
         },
         "fn-radio": {
@@ -3986,7 +3998,7 @@
                     }
                 }
             },
-            "tags": ["fn"],
+            "tags": ["type:lib", "scope:fn"],
             "implicitDependencies": ["core"]
         },
         "fn-search": {
@@ -4024,7 +4036,7 @@
                     }
                 }
             },
-            "tags": ["fn"],
+            "tags": ["type:lib", "scope:fn"],
             "implicitDependencies": ["core"]
         },
         "fn-select": {
@@ -4062,7 +4074,7 @@
                     }
                 }
             },
-            "tags": ["fn"],
+            "tags": ["type:lib", "scope:fn"],
             "implicitDependencies": ["core"]
         },
         "fn-slider": {
@@ -4100,7 +4112,7 @@
                     }
                 }
             },
-            "tags": ["fn"],
+            "tags": ["type:lib", "scope:fn"],
             "implicitDependencies": ["core"]
         },
         "fn-switch": {
@@ -4138,7 +4150,7 @@
                     }
                 }
             },
-            "tags": ["fn"],
+            "tags": ["type:lib", "scope:fn"],
             "implicitDependencies": ["core"]
         },
         "fn-tabs": {
@@ -4176,7 +4188,7 @@
                     }
                 }
             },
-            "tags": ["fn"],
+            "tags": ["type:lib", "scope:fn"],
             "implicitDependencies": ["core"]
         },
         "fn-tag": {
@@ -4214,7 +4226,7 @@
                     }
                 }
             },
-            "tags": ["fn"],
+            "tags": ["type:lib", "scope:fn"],
             "implicitDependencies": ["core"]
         },
         "moment-adapter": {
@@ -4257,8 +4269,7 @@
                     "styleext": "scss"
                 }
             },
-            "tags": ["fd"],
-            "implicitDependencies": ["core"]
+            "tags": ["type:lib", "scope:moment-adapter"]
         },
         "platform": {
             "projectType": "library",
@@ -4295,7 +4306,7 @@
                     }
                 }
             },
-            "tags": [],
+            "tags": ["type:lib", "scope:fdp"],
             "implicitDependencies": ["core"]
         },
         "platform-action-bar": {
@@ -4336,7 +4347,7 @@
                     }
                 }
             },
-            "tags": ["fdp"],
+            "tags": ["type:lib", "scope:fdp"],
             "implicitDependencies": ["core"]
         },
         "platform-action-button-group": {
@@ -4377,7 +4388,7 @@
                     }
                 }
             },
-            "tags": ["fdp"],
+            "tags": ["type:lib", "scope:fdp"],
             "implicitDependencies": ["core"]
         },
         "platform-approval-flow": {
@@ -4418,7 +4429,7 @@
                     }
                 }
             },
-            "tags": ["fdp"],
+            "tags": ["type:lib", "scope:fdp"],
             "implicitDependencies": ["core"]
         },
         "platform-button": {
@@ -4459,7 +4470,7 @@
                     }
                 }
             },
-            "tags": ["fdp"],
+            "tags": ["type:lib", "scope:fdp"],
             "implicitDependencies": ["core"]
         },
         "platform-dynamic-page": {
@@ -4500,7 +4511,7 @@
                     }
                 }
             },
-            "tags": ["fdp"],
+            "tags": ["type:lib", "scope:fdp"],
             "implicitDependencies": ["core"]
         },
         "platform-feed-input": {
@@ -4541,7 +4552,7 @@
                     }
                 }
             },
-            "tags": ["fdp"],
+            "tags": ["type:lib", "scope:fdp"],
             "implicitDependencies": ["core"]
         },
         "platform-form": {
@@ -4582,7 +4593,7 @@
                     }
                 }
             },
-            "tags": ["fdp"],
+            "tags": ["type:lib", "scope:fdp"],
             "implicitDependencies": ["core"]
         },
         "platform-icon-tab-bar": {
@@ -4623,7 +4634,7 @@
                     }
                 }
             },
-            "tags": ["fdp"],
+            "tags": ["type:lib", "scope:fdp"],
             "implicitDependencies": ["core"]
         },
         "platform-info-label": {
@@ -4664,7 +4675,7 @@
                     }
                 }
             },
-            "tags": ["fdp"],
+            "tags": ["type:lib", "scope:fdp"],
             "implicitDependencies": ["core"]
         },
         "platform-link": {
@@ -4705,7 +4716,7 @@
                     }
                 }
             },
-            "tags": ["fdp"],
+            "tags": ["type:lib", "scope:fdp"],
             "implicitDependencies": ["core"]
         },
         "platform-list": {
@@ -4746,7 +4757,7 @@
                     }
                 }
             },
-            "tags": ["fdp"],
+            "tags": ["type:lib", "scope:fdp"],
             "implicitDependencies": ["core"]
         },
         "platform-menu": {
@@ -4787,7 +4798,7 @@
                     }
                 }
             },
-            "tags": ["fdp"],
+            "tags": ["type:lib", "scope:fdp"],
             "implicitDependencies": ["core"]
         },
         "platform-menu-button": {
@@ -4828,7 +4839,7 @@
                     }
                 }
             },
-            "tags": ["fdp"],
+            "tags": ["type:lib", "scope:fdp"],
             "implicitDependencies": ["core"]
         },
         "platform-object-attribute": {
@@ -4869,7 +4880,7 @@
                     }
                 }
             },
-            "tags": ["fdp"],
+            "tags": ["type:lib", "scope:fdp"],
             "implicitDependencies": ["core"]
         },
         "platform-object-marker": {
@@ -4910,7 +4921,7 @@
                     }
                 }
             },
-            "tags": ["fdp"],
+            "tags": ["type:lib", "scope:fdp"],
             "implicitDependencies": ["core"]
         },
         "platform-object-status": {
@@ -4951,7 +4962,7 @@
                     }
                 }
             },
-            "tags": ["fdp"],
+            "tags": ["type:lib", "scope:fdp"],
             "implicitDependencies": ["core"]
         },
         "platform-page-footer": {
@@ -4992,7 +5003,7 @@
                     }
                 }
             },
-            "tags": ["fdp"],
+            "tags": ["type:lib", "scope:fdp"],
             "implicitDependencies": ["core"]
         },
         "platform-panel": {
@@ -5033,7 +5044,7 @@
                     }
                 }
             },
-            "tags": ["fdp"],
+            "tags": ["type:lib", "scope:fdp"],
             "implicitDependencies": ["core"]
         },
         "platform-search-field": {
@@ -5074,7 +5085,7 @@
                     }
                 }
             },
-            "tags": ["fdp"],
+            "tags": ["type:lib", "scope:fdp"],
             "implicitDependencies": ["core"]
         },
         "platform-shared": {
@@ -5115,7 +5126,7 @@
                     }
                 }
             },
-            "tags": ["fdp"],
+            "tags": ["type:lib", "scope:fdp"],
             "implicitDependecies": ["core"]
         },
         "platform-slider": {
@@ -5156,7 +5167,7 @@
                     }
                 }
             },
-            "tags": ["fdp"],
+            "tags": ["type:lib", "scope:fdp"],
             "implicitDependencies": ["core"]
         },
         "platform-smart-filter-bar": {
@@ -5197,7 +5208,7 @@
                     }
                 }
             },
-            "tags": ["fdp"],
+            "tags": ["type:lib", "scope:fdp"],
             "implicitDependencies": ["core"]
         },
         "platform-split-menu-button": {
@@ -5238,7 +5249,7 @@
                     }
                 }
             },
-            "tags": ["fdp"],
+            "tags": ["type:lib", "scope:fdp"],
             "implicitDependencies": ["core"]
         },
         "platform-table": {
@@ -5279,7 +5290,7 @@
                     }
                 }
             },
-            "tags": ["fdp"],
+            "tags": ["type:lib", "scope:fdp"],
             "implicitDependencies": ["core"]
         },
         "platform-thumbnail": {
@@ -5320,7 +5331,7 @@
                     }
                 }
             },
-            "tags": ["fdp"],
+            "tags": ["type:lib", "scope:fdp"],
             "implicitDependencies": ["core"]
         },
         "platform-upload-collection": {
@@ -5361,7 +5372,7 @@
                     }
                 }
             },
-            "tags": ["fdp"],
+            "tags": ["type:lib", "scope:fdp"],
             "implicitDependencies": ["core"]
         },
         "platform-value-help-dialog": {
@@ -5402,7 +5413,7 @@
                     }
                 }
             },
-            "tags": ["fdp"],
+            "tags": ["type:lib", "scope:fdp"],
             "implicitDependencies": ["core"]
         },
         "platform-wizard-generator": {
@@ -5443,8 +5454,30 @@
                     }
                 }
             },
-            "tags": ["fdp"],
+            "tags": ["type:lib", "scope:fdp"],
             "implicitDependencies": ["core"]
+        },
+        "workspace-tools": {
+            "root": "tools",
+            "sourceRoot": "tools",
+            "projectType": "application",
+            "architect": {
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["tools/**/*.ts"]
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "tools/test.ts",
+                        "tsConfig": "tools/tsconfig.spec.json",
+                        "karmaConfig": "tools/karma.conf.js"
+                    }
+                }
+            },
+            "tags": ["type:tools", "scope:tools"]
         }
     }
 }

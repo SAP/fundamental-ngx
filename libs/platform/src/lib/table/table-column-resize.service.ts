@@ -151,10 +151,6 @@ export class TableColumnResizeService implements OnDestroy {
      *  corresponding value will be treated as higher priority
      */
     getColumnWidthStyle(column: TableColumn): string {
-        if (!this._tableRef._tableWidthPx) {
-            return 'auto';
-        }
-
         const calculatedWidth = this._columnsWidthMap.get(column.name);
         const changeSource = this._columnsWidthChangeSourceMap.get(column.name);
 
@@ -164,11 +160,13 @@ export class TableColumnResizeService implements OnDestroy {
                     if (calculatedWidth) {
                         return calculatedWidth + 'px';
                     }
+
                     break;
                 case ColumnWidthChangeSource.WidthInput:
                     if (column.width) {
                         return this.getColumnWidth(column.width);
                     }
+
                     break;
             }
         }
@@ -191,6 +189,7 @@ export class TableColumnResizeService implements OnDestroy {
         }
 
         const percent = parseFloat(width);
+
         return (this._tableRef._tableWidthPx * percent) / 100 + 'px';
     }
 

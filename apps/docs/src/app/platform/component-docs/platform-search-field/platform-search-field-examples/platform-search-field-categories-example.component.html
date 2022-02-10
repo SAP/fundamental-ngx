@@ -3,6 +3,7 @@
     placeholder="Search"
     [suggestions]="suggestions"
     [categories]="categories"
+    [currentCategory]="categories[0]"
     (searchSubmit)="onSearchSubmit($event)"
     (inputChange)="onInputChange($event)"
 ></fdp-search-field>

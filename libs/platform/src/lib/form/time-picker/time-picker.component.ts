@@ -122,10 +122,11 @@ export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit,
     }
 
     /**
-     * Whether AddOn Button should be focusable, set to false by default
+     * Whether AddOn Button should be focusable
+     * @default true
      */
     @Input()
-    buttonFocusable = false;
+    buttonFocusable = true;
 
     /** Whether to validate the time picker input. */
     @Input()

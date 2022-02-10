@@ -16,7 +16,7 @@ import {
     OnChanges,
     AfterViewInit
 } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
+import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
@@ -29,6 +29,7 @@ import { ContentDensityService } from '@fundamental-ngx/core/utils';
 import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
 
 import { createMissingDateImplementationError } from './errors';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 /**
  * The datetime picker component is an opinionated composition of the fd-popover,
@@ -203,10 +204,11 @@ export class DatetimePickerComponent<D>
     private _state: FormStates = null;
 
     /**
-     * Whether AddOn Button should be focusable, set to true by default
+     * Whether AddOn Button should be focusable
+     * @default true
      */
     @Input()
-    buttonFocusable = false;
+    buttonFocusable = true;
 
     /**
      * Special days mark, it can be used by passing array of object with
@@ -257,6 +259,22 @@ export class DatetimePickerComponent<D>
     /** Whether or not to show the datetime picker footer with OK/cancel buttons. */
     @Input()
     showFooter = true;
+
+    /**
+     * Whether to recalculate value from the input as user types or on blur.
+     * By default, updates the value as user types.
+     * @default false
+     */
+    @Input()
+    set processInputOnBlur(v: boolean) {
+        this._processInputOnBlur = coerceBooleanProperty(v);
+    }
+    get processInputOnBlur(): boolean {
+        return this._processInputOnBlur;
+    }
+
+    /** @hidden */
+    _processInputOnBlur = false;
 
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
@@ -352,7 +370,7 @@ export class DatetimePickerComponent<D>
      * @param fdDate FdDate
      */
     @Input()
-    disableFunction: (value: D) => void = () => false;
+    disableFunction: (value: D) => boolean = () => false;
 
     /** @hidden */
     constructor(
@@ -407,8 +425,8 @@ export class DatetimePickerComponent<D>
 
         if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(
-                this._contentDensityService._contentDensityListener.subscribe((density) => {
-                    this.compact = density !== 'cozy';
+                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
+                    this.compact = isCompact;
                     this._changeDetRef.markForCheck();
                 })
             );
@@ -436,9 +454,7 @@ export class DatetimePickerComponent<D>
      * @hidden
      * Function that implements Validator Interface, adds validation support for forms
      */
-    validate(control: AbstractControl): {
-        [key: string]: any;
-    } {
+    validate(): { [key: string]: any } {
         return this.isCurrentModelValid() && !this._isInvalidDateInput
             ? null
             : {
@@ -466,10 +482,13 @@ export class DatetimePickerComponent<D>
     }
 
     /** Method that handles blur events on datetime picker input */
-    handleOnTouched(): void {
+    handleOnTouched(event?: FocusEvent): void {
         this._touched = true;
         this.onTouched();
         this.touched.next();
+        if (event) {
+            this.handleInputChange((<HTMLInputElement>event.target).value, false);
+        }
     }
 
     /** Opens the popover. */
@@ -600,7 +619,13 @@ export class DatetimePickerComponent<D>
      * Method, which is responsible for transforming string to datetime, depending on type or
      * validation the results are different. It also changes to state of _isInvalidDateInput.
      */
-    handleInputChange(inputStr: string): void {
+    handleInputChange(inputStr: string, isTypeEvent: boolean): void {
+        if ((isTypeEvent && this.processInputOnBlur) || (!isTypeEvent && !this.processInputOnBlur)) {
+            // if processInputOnBlur === true, ignore type event
+            // if processInputOnBlur === false, ignore blur/enter event
+            return;
+        }
+        this._inputFieldDate = inputStr ?? '';
         if (!inputStr) {
             this._isInvalidDateInput = !this.allowNull;
             this.onChange(null);

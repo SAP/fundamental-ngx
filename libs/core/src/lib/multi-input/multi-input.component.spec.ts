@@ -238,7 +238,7 @@ describe('MultiInputComponent', () => {
         expect(component.selected).toEqual(['foo']);
     });
 
-    it('on selection should remove values, that are not represented as options', async () => {
+    it('should keep selected options when list of options is changed', async () => {
         updateComponentInput('dropdownValues', ['foo', 'baz', 'bar']);
         updateComponentInput('selected', ['foo1']);
 
@@ -251,7 +251,17 @@ describe('MultiInputComponent', () => {
 
         const vm2 = await component.viewModel$.pipe(first()).toPromise();
         expect(vm2.displayedOptions.length).toEqual(3);
-        expect(vm2.selectedOptions.length).toEqual(1);
-        expect(component.selected).toEqual(['baz']);
+        // displaying only those options that were "seen" as values
+        expect(vm2.selectedOptions.map((o) => o.value)).toEqual(['baz']);
+        // expecting options to be present as values even if they doesn't match any provided options
+        expect(component.selected).toEqual(['foo1', 'baz']);
+
+        updateComponentInput('dropdownValues', ['foo1']);
+
+        const vm3 = await component.viewModel$.pipe(first()).toPromise();
+        expect(vm3.displayedOptions.length).toEqual(1);
+        expect(vm3.selectedOptions.map((o) => o.value)).toEqual(['foo1', 'baz']);
+        // displaying only those options that were "seen" as values
+        expect(component.selected).toEqual(['foo1', 'baz']);
     });
 });

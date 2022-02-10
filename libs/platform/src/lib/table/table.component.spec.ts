@@ -9,7 +9,7 @@ import { RtlService } from '@fundamental-ngx/core/utils';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 
 import { TableDataProvider, TableDataSource } from './domain';
-import { FILTER_STRING_STRATEGY, SelectionMode, SortDirection, TableRowType } from './enums';
+import { FILTER_STRING_STRATEGY, FilterableColumnDataType, SelectionMode, SortDirection, TableRowType } from './enums';
 import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilter, TableState } from './interfaces';
 import { TableRowSelectionChangeEvent, TableRowToggleOpenStateEvent } from './models';
 import { TableRowClass, TableComponent } from './table.component';
@@ -156,6 +156,7 @@ describe('TableComponent internal', () => {
         const payload: CollectionStringFilter = {
             field,
             value,
+            type: FilterableColumnDataType.STRING,
             strategy: FILTER_STRING_STRATEGY.CONTAINS,
             exclude: false
         };
@@ -965,7 +966,8 @@ describe('TableComponent internal', () => {
             expect(hostComponent.source.fetch).toHaveBeenCalledTimes(2);
         });
 
-        it('should get new 50 items per each request', async () => {
+        // TODO: flaky test  https://github.com/SAP/fundamental-ngx/issues/7534
+        xit('should get new 50 items per each request', async () => {
             await tableBodyScrollTop(999999);
 
             expect(tableBodyRows.length).toBe(100);
@@ -975,7 +977,8 @@ describe('TableComponent internal', () => {
             expect(tableBodyRows.length).toBe(150);
         });
 
-        it('should stop fetching on scroll if currentPage is the last one', async () => {
+        // TODO: flaky test  https://github.com/SAP/fundamental-ngx/issues/7534
+        xit('should stop fetching on scroll if currentPage is the last one', async () => {
             await tableBodyScrollTop(999999); // 100
             await tableBodyScrollTop(999999); // 150
             await tableBodyScrollTop(999999); // 200

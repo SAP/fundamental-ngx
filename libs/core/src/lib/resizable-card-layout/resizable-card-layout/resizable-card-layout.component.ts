@@ -99,7 +99,7 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
     private _keyboardEventsManager: FocusKeyManager<ResizableCardItemComponent>;
 
     /** @hidden */
-    private readonly _destroy$ = new Subject<boolean>();
+    private readonly _destroy$ = new Subject<void>();
 
     /** @hidden */
     private _layoutShifted = false;

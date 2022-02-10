@@ -44,6 +44,8 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 import { Schema } from '../../../schema/models/schema.model';
 
+import dialogExamplesScss from '!./examples/dialog-examples.component.scss?raw';
+
 @Component({
     selector: 'app-dialog',
     templateUrl: './dialog-docs.component.html'
@@ -176,6 +178,13 @@ export class DialogDocsComponent {
             code: stateDialogTs,
             fileName: 'dialog-state-example',
             component: 'DialogStateExample'
+        },
+        {
+            language: 'scss',
+            code: dialogExamplesScss,
+            fileName: 'dialog-state-example',
+            component: 'DialogStateExample',
+            scssFileCode: dialogExamplesScss
         }
     ];
 
@@ -237,6 +246,13 @@ export class DialogDocsComponent {
             code: customConfigurationDialogTs,
             fileName: 'dialog-configuration-example',
             component: 'DialogConfigurationExample'
+        },
+        {
+            language: 'scss',
+            code: dialogExamplesScss,
+            fileName: 'dialog-configuration-example',
+            component: 'DialogConfigurationExample',
+            scssFileCode: dialogExamplesScss
         }
     ];
 
@@ -291,6 +307,13 @@ export class DialogDocsComponent {
             code: backdropContainerTs,
             fileName: 'dialog-backdrop-container-example',
             component: 'DialogBackdropContainerExampleComponent'
+        },
+        {
+            language: 'scss',
+            code: dialogExamplesScss,
+            fileName: 'dialog-backdrop-container-example',
+            component: 'DialogBackdropContainerExample',
+            scssFileCode: dialogExamplesScss
         }
     ];
 

@@ -16,6 +16,9 @@ export * from './directives/overflow-list/overflow-list.directive';
 export * from './directives/overflow-list/overflow-list.module';
 export * from './directives/truncate/truncate.directive';
 export * from './directives/truncate/truncate.module';
+export * from './directives/focus-key-manager/focus-key-manager-item.directive';
+export * from './directives/focus-key-manager/focus-key-manager-list.directive';
+export * from './directives/focus-key-manager/focus-key-manager-helpers.module';
 
 export * from './pipes/pipe.module';
 export * from './pipes/list-group.pipe';
@@ -23,6 +26,8 @@ export * from './pipes/displayFn.pipe';
 export * from './pipes/two-digits.pipe';
 export * from './pipes/search-highlight.pipe';
 export * from './pipes/safe.pipe';
+export * from './pipes/is-compact.pipe';
+export * from './pipes/value-by-path.pipe';
 
 export * from './drag-and-drop/drag-and-drop.module';
 export * from './drag-and-drop/dnd-list/dnd-list.directive';
