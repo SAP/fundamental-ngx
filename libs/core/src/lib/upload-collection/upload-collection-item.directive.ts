@@ -1,7 +1,6 @@
 import {
     AfterContentInit,
     AfterViewInit,
-    ChangeDetectorRef,
     ContentChild,
     Directive,
     ElementRef,
@@ -92,7 +91,7 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
         this._subscriptions.unsubscribe();
     }
 
-    constructor(public elementRef: ElementRef, private _cdRef: ChangeDetectorRef) {}
+    constructor(public elementRef: ElementRef) {}
 
     /** @hidden */
     @HostListener('window:resize', [])
@@ -105,7 +104,7 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
 
         // if first load and no previous container width, or if container boundary is resized to smaller than before
         if (!this.previousContainerWidth || this.containerWidth < this.previousContainerWidth) {
-            // and the title extends past the container
+            // and the title extends past the container, 1.05x padding to prevent jaggy resizing.
             if (this.titleWidth * 1.05 >= this.containerWidth) {
                 this.resizeFileTitle(this._titleDirective.elRef.nativeElement.innerHTML);
             }
@@ -117,7 +116,6 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
         }
 
         this.previousContainerWidth = this.containerWidth;
-        this._cdRef.detectChanges();
     }
 
     /** @hidden */
@@ -218,7 +216,7 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
         this.titleWidth = this.getTitleWidth();
 
         // repeatedly truncate the title until it fits inside container
-        while (this.titleWidth * 1.05 >= this.containerWidth && curTitle.length > 12) {
+        while (this.titleWidth * 1.05 >= this.containerWidth) {
             const truncatedTitleStr = this.truncateTitle(curTitle);
             this._titleDirective.elRef.nativeElement.innerHTML = truncatedTitleStr;
             curTitle = truncatedTitleStr;
