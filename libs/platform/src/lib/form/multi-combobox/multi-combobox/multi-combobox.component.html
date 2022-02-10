@@ -31,7 +31,7 @@
             [buttonFocusable]="buttonFocusable"
             [button]="!readonly"
             [glyph]="!readonly ? 'navigation-down-arrow' : ' '"
-        [compact]="contentDensity | isCompactDensity"
+            [compact]="contentDensity | isCompactDensity"
             [isControl]="true"
             [disabled]="disabled || readonly"
             [isExpanded]="!mobile && isOpen && _suggestions.length > 0"
@@ -47,7 +47,7 @@
         >
             <fd-tokenizer
                 *ngIf="_selectedSuggestions"
-        [compact]="contentDensity | isCompactDensity"
+                [compact]="contentDensity | isCompactDensity"
                 [tokenizerFocusable]="false"
                 class="fdp-multi-combobox-tokenizer-custom"
                 [class]="isCompact ? 'fdp-multi-combobox-tokenizer-custom--compact' : ''"

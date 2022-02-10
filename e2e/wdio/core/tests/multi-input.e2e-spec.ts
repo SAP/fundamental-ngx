@@ -51,6 +51,7 @@ describe('Multi input test suite', () => {
         simpleExampleTokens,
         checkboxInput,
         listItem,
+        simpleHiddenAddonExampleTokens,
         popover,
         compactExampleTokens,
         dialogCheckbox,
@@ -122,6 +123,17 @@ describe('Multi input test suite', () => {
         click(listItem);
 
         expect(doesItExist(popover)).toBe(false, 'popover still displayed');
+    });
+
+    it('should narrow down the selection to a single item and select it', () => {
+        scrollIntoView(activeInputs, 1);
+        click(activeInputs, 1);
+        sendKeys('apple');
+        waitForElDisplayed(listItem);
+        click(listItem);
+        expect(getElementArrayLength(simpleHiddenAddonExampleTokens)).toBe(2);
+        expect(getText(simpleHiddenAddonExampleTokens, 0)).toBe('Kiwi');
+        expect(getText(simpleHiddenAddonExampleTokens, 1)).toBe('Apple');
     });
 
     it('should be able to select all tokens and delete with delete key', () => {

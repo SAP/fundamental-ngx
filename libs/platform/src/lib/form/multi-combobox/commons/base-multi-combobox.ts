@@ -31,8 +31,8 @@ import {
     UP_ARROW
 } from '@angular/cdk/keycodes';
 
-import { BehaviorSubject, fromEvent, isObservable, skip, Observable, Subject, Subscription, timer } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, fromEvent, isObservable, Observable, Subject, Subscription, timer } from 'rxjs';
+import { takeUntil, skip } from 'rxjs/operators';
 import equal from 'fast-deep-equal';
 
 import { DialogConfig } from '@fundamental-ngx/core/dialog';

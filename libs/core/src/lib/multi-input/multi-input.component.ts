@@ -507,12 +507,6 @@ export class MultiInputComponent
         index: number,
         isListItem = false
     ): Promise<void> {
-        if (isListItem) {
-            this.openChangeHandle(false);
-        } else {
-            // stop propagation on the checkbox so event doesn't reach the list item
-            event.stopPropagation();
-        }
         const toggledSelection = !this._selectionModel.isSelected(value);
         this._rangeSelector.onRangeElementToggled(index, event);
         const sub = this.viewModel$.pipe(first()).subscribe((vm) => {
@@ -521,6 +515,12 @@ export class MultiInputComponent
             );
         });
         this._subscriptions.add(sub);
+        if (isListItem) {
+            this.openChangeHandle(false);
+        } else {
+            // stop propagation on the checkbox so event doesn't reach the list item
+            event.stopPropagation();
+        }
     }
 
     /** @hidden */
