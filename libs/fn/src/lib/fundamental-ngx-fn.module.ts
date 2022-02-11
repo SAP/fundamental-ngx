@@ -15,6 +15,7 @@ import { SegmentedButtonModule } from '@fundamental-ngx/fn/segmented-button';
 import { UtilsModule } from '@fundamental-ngx/fn/utils';
 import { CdkModule } from '@fundamental-ngx/fn/cdk';
 import { GenericTagModule } from '@fundamental-ngx/fn/generic-tag';
+import { ListModule } from '@fundamental-ngx/fn/list';
 import { ObjectStatusModule } from '@fundamental-ngx/fn/object-status';
 import { AvatarModule } from '@fundamental-ngx/fn/avatar';
 import { InfoLabelModule } from '@fundamental-ngx/fn/info-label';
@@ -40,7 +41,8 @@ import { MessageStripModule } from '@fundamental-ngx/fn/message-strip';
         CdkModule,
         MessageStripModule,
         ObjectStatusModule,
-        InfoLabelModule
+        InfoLabelModule,
+        ListModule
     ],
     providers: []
 })
