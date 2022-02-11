@@ -2,7 +2,6 @@ import { Injectable, OnDestroy, QueryList } from '@angular/core';
 import { SelectableItemToken } from './SelectableItemToken';
 import { combineLatest, fromEvent, merge, Observable, ReplaySubject, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, first, map, startWith, takeUntil, tap } from 'rxjs/operators';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { SelectComponentRootToken } from './SelectComponentRootToken';
 import { coerceArray } from '@angular/cdk/coercion';
@@ -24,10 +23,9 @@ export class SelectionService<ValueType = any> implements OnDestroy {
     constructor() {
         this.normalizedValue$ = this.value$.pipe(
             distinctUntilChanged(equal),
-            map((value) => {
-                const coerced = coerceArray(value);
-                return coerced.filter(Boolean);
-            })
+            map((v) => coerceArray<ValueType>(v)),
+            map((value) => (this.rootComponent.multiple ? value : [value[0]])),
+            map((coerced: ValueType[]) => coerced.filter(Boolean))
         );
     }
 
@@ -55,8 +53,8 @@ export class SelectionService<ValueType = any> implements OnDestroy {
             .subscribe();
         combineLatest([this.normalizedValue$, items$])
             .pipe(
-                tap(([value, items]) => console.log({ value, items })),
                 tap(([value, items]) => {
+                    console.log({ value });
                     if (value.length === 0 && items.some((itm) => itm.getSelected()) && !this.rootComponent.toggle) {
                         const selectedValues = this.getSelectedValues(items);
                         this.rootComponent.onChange(selectedValues);
@@ -90,7 +88,7 @@ export class SelectionService<ValueType = any> implements OnDestroy {
             const events = merge(
                 fromEvent(htmlElement, 'click'),
                 fromEvent<KeyboardEvent>(htmlElement, 'keydown').pipe(
-                    filter((event) => KeyUtil.isKeyCode(event, [ENTER, SPACE])),
+                    filter((event) => [ENTER, SPACE].includes(event.keyCode)),
                     tap((event) => event.preventDefault())
                 )
             );
