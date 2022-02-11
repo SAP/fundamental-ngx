@@ -1,4 +1,11 @@
 
+### 0.33.4-rc.0 (2022-02-11)
+
+
+### Features
+
+* **core:** upload collection, truncate long file name with ellipsis in middle ([#7696](https://github.com/SAP/fundamental-ngx/issues/7696)) ([2f59c33](https://github.com/SAP/fundamental-ngx/commit/2f59c3324054775cdd9dfc7ea3c488a5bb115c93))
+
 ### [0.33.3](https://github.com/SAP/fundamental-ngx/compare/v0.33.3-rc.7...v0.33.3) (2022-02-11)
 
 ### 0.33.3-rc.7 (2022-02-11)
