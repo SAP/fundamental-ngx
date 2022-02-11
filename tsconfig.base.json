@@ -127,6 +127,7 @@
             "@fundamental-ngx/fn/button": ["libs/fn/src/lib/button/index.ts"],
             "@fundamental-ngx/fn/checkbox": ["libs/fn/src/lib/checkbox/index.ts"],
             "@fundamental-ngx/fn/form": ["libs/fn/src/lib/form/index.ts"],
+            "@fundamental-ngx/fn/generic-tag": ["libs/fn/src/lib/generic-tag/index.ts"],
             "@fundamental-ngx/fn/radio": ["libs/fn/src/lib/radio/index.ts"],
             "@fundamental-ngx/fn/search": ["libs/fn/src/lib/search/index.ts"],
             "@fundamental-ngx/fn/select": ["libs/fn/src/lib/select/index.ts"],

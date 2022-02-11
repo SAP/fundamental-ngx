@@ -20,6 +20,11 @@ export const ROUTES: Routes = [
                     import('./component-docs/checkbox/checkbox-docs.module').then((m) => m.CheckboxDocsModule)
             },
             {
+                path: 'generic-tag',
+                loadChildren: () =>
+                    import('./component-docs/generic-tag/generic-tag-docs.module').then((m) => m.GenericTagDocsModule)
+            },
+            {
                 path: 'select',
                 loadChildren: () => import('./component-docs/select/select-docs.module').then((m) => m.SelectDocsModule)
             },
