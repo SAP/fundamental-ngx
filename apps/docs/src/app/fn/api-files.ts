@@ -19,5 +19,6 @@ export const API_FILES = {
     segmentedButton: [],
     utils: [],
     cdk: [],
-    progressBar: ['ProgressBarComponent']
+    progressBar: ['ProgressBarComponent'],
+    objectStatus: ['ObjectStatusComponent']
 };

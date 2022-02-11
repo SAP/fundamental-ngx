@@ -15,6 +15,7 @@ import { SegmentedButtonModule } from '@fundamental-ngx/fn/segmented-button';
 import { UtilsModule } from '@fundamental-ngx/fn/utils';
 import { CdkModule } from '@fundamental-ngx/fn/cdk';
 import { GenericTagModule } from '@fundamental-ngx/fn/generic-tag';
+import { ObjectStatusModule } from '@fundamental-ngx/fn/object-status';
 import { AvatarModule } from '@fundamental-ngx/fn/avatar';
 
 @NgModule({
@@ -34,7 +35,8 @@ import { AvatarModule } from '@fundamental-ngx/fn/avatar';
         GenericTagModule,
         SegmentedButtonModule,
         UtilsModule,
-        CdkModule
+        CdkModule,
+        ObjectStatusModule
     ],
     providers: []
 })

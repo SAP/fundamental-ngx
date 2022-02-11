@@ -14,7 +14,6 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
 @Component({
     selector: 'app-button',
     templateUrl: './button-docs.component.html',
-    styleUrls: ['button-docs.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class ButtonDocsComponent {
