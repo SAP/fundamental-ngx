@@ -1,4 +1,4 @@
-<span class="sap-icon sap-icon--search fn-search__icon"></span>
+<span class="sap-icon sap-icon--search"></span>
 <input
     [attr.disabled]="disabled || null"
     type="search"
@@ -7,9 +7,4 @@
     [(ngModel)]="value"
     #searchInput
 />
-<button class="fn-search__clear" tabindex="0" *ngIf="value" (click)="resetValue()" aria-label="clear button">
-    <span class="sap-icon sap-icon--decline"></span>
-</button>
-<button class="fn-search__button" tabindex="0" (click)="emitSearch()" aria-label="navigation right arrow button">
-    <span class="sap-icon sap-icon--navigation-right-arrow"></span>
-</button>
+<span class="sap-icon sap-icon--navigation-right-arrow"></span>
