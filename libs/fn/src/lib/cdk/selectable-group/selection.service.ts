@@ -1,11 +1,11 @@
 import { Injectable, OnDestroy, QueryList } from '@angular/core';
-import { SelectableItemToken } from './SelectableItemToken';
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
+import { coerceArray } from '@angular/cdk/coercion';
 import { combineLatest, fromEvent, merge, Observable, ReplaySubject, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, first, map, startWith, takeUntil, tap } from 'rxjs/operators';
-import { ENTER, SPACE } from '@angular/cdk/keycodes';
-import { SelectComponentRootToken } from './SelectComponentRootToken';
-import { coerceArray } from '@angular/cdk/coercion';
 import equal from 'fast-deep-equal';
+import { SelectableItemToken } from './SelectableItemToken';
+import { SelectComponentRootToken } from './SelectComponentRootToken';
 
 @Injectable()
 export class SelectionService<ValueType = any> implements OnDestroy {
