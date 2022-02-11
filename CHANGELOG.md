@@ -1,4 +1,11 @@
 
+### 0.33.3-rc.6 (2022-02-11)
+
+
+### Bug Fixes
+
+* **platform:** vhd - misc issues ([#7713](https://github.com/SAP/fundamental-ngx/issues/7713)) ([b0def36](https://github.com/SAP/fundamental-ngx/commit/b0def360bd5cc9ec115653f7ac942042258359a4))
+
 ### 0.33.3-rc.5 (2022-02-11)
 
 
