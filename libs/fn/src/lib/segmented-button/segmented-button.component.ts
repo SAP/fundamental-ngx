@@ -21,14 +21,14 @@ import { SelectableItemToken, SelectComponentRootToken, SelectionService } from 
 @Component({
     selector: 'fn-segmented-button',
     exportAs: 'fn-segmented-button',
-    template: `<ng-content></ng-content>`,
+    template: ` <ng-content></ng-content>`,
     styleUrls: ['./segmented-button.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        ['class']: 'fn-segmented-button',
-        'attr.role': 'group',
-        'attr.aria-label': 'label'
+        class: 'fn-segmented-button',
+        role: 'group',
+        '[attr.aria-label]': 'label'
     },
     providers: [
         {
@@ -59,6 +59,12 @@ export class SegmentedButtonComponent
     @Input()
     @coerceBoolean
     toggle!: boolean;
+
+    /**
+     * Aria label for element
+     */
+    @Input()
+    label!: string;
 
     /**
      * Describe initially selected elements
