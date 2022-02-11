@@ -28,6 +28,10 @@ export const components: SectionInterfaceContent[] = [
         url: 'fn/info-label',
         name: 'Info Label'
     },
+    {
+        url: 'fn/message-strip',
+        name: 'Message Strip'
+    },
     { url: 'fn/tag', name: 'Tag' },
     {
         url: 'fn/object-status',

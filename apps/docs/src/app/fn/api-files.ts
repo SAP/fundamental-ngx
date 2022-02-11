@@ -21,5 +21,6 @@ export const API_FILES = {
     cdk: [],
     progressBar: ['ProgressBarComponent'],
     infoLabel: ['InfoLabelComponent'],
+    messageStrip: ['MessageStripComponent'],
     objectStatus: ['ObjectStatusComponent']
 };
