@@ -71,6 +71,7 @@
                     fd-form-control
                     fd-input-group-input
                     fd-auto-complete
+                    (onComplete)="_handleComplete($event)"
                     #searchInputElement
                     [displayFn]="displayFn"
                     [inputText]="_searchTermCtrl.value"
