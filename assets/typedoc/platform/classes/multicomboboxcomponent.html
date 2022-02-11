@@ -25,7 +25,7 @@
 		<a name="addonIconTitle" class="tsd-anchor"></a>
 		<h3>addon<wbr>Icon<wbr>Title</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">addon<wbr>Icon<wbr>Title<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = null</span></div>
+		<div class="tsd-signature tsd-kind-icon">addon<wbr>Icon<wbr>Title<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;Select Options&#x27;</span></div>
 		<aside class="tsd-sources">
 			<p>Inherited from <span>BaseMultiCombobox</span>.<span>addonIconTitle</span></p>
 			<ul>
@@ -217,7 +217,7 @@
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 		<a name="groupKey" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagOptional">Optional</span> group<wbr>Key</h3>
+		<h3>group<wbr>Key</h3>
 		<!-- {log decorators} -->
 		<div class="tsd-signature tsd-kind-icon">group<wbr>Key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
@@ -244,6 +244,22 @@
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
 				<p>id for the Element</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="invalidEntryMessage" class="tsd-anchor"></a>
+		<h3>invalid<wbr>Entry<wbr>Message</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">invalid<wbr>Entry<wbr>Message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;Invalid entry&#x27;</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from <span>BaseMultiCombobox</span>.<span>invalidEntryMessage</span></p>
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Sets invalid entry message.</p>
 			</div>
 		</div>
 	</section>
@@ -357,7 +373,7 @@
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 		<a name="secondaryKey" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagOptional">Optional</span> secondary<wbr>Key</h3>
+		<h3>secondary<wbr>Key</h3>
 		<!-- {log decorators} -->
 		<div class="tsd-signature tsd-kind-icon">secondary<wbr>Key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
@@ -451,12 +467,11 @@
 			</div>
 		</div>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
+	<section class="tsd-panel tsd-member tsd-kind-set-signature tsd-parent-kind-class tsd-is-inherited">
 		<a name="contentDensity" class="tsd-anchor"></a>
 		<h3>content<wbr>Density</h3>
 		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> contentDensity<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ContentDensity</span></li>
+		<ul class="tsd-signatures tsd-kind-set-signature tsd-parent-kind-class tsd-is-inherited">
 			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> contentDensity<span class="tsd-signature-symbol">(</span>contentDensity<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ContentDensity</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
@@ -467,19 +482,8 @@
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>content Density of element. cozy | compact | condensed</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ContentDensity</span></h4>
-			</li>
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>content Density of element. cozy | compact | condensed</p>
+						<p>Content Density of element.
+						Can be &#39;cozy&#39;, &#39;compact&#39;.</p>
 					</div>
 				</div>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -784,7 +788,7 @@
 		<h3>constructor</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-			<li class="tsd-signature tsd-kind-icon">new <wbr>Multi<wbr>Combobox<wbr>Component<span class="tsd-signature-symbol">(</span>cd<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ChangeDetectorRef</span>, elementRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span>, ngControl<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">NgControl</span>, ngForm<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">NgForm</span>, dialogConfig<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DialogConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span>, _dynamicComponentService<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DynamicComponentService</span>, providers<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DataProvider</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, _multiComboboxConfig<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MultiComboboxConfig</span>, _viewContainerRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ViewContainerRef</span>, _injector<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Injector</span>, formField<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FormField</span>, formControl<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FormFieldControl</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MultiComboboxComponent</span></li>
+			<li class="tsd-signature tsd-kind-icon">new <wbr>Multi<wbr>Combobox<wbr>Component<span class="tsd-signature-symbol">(</span>cd<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ChangeDetectorRef</span>, elementRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span>, ngControl<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">NgControl</span>, ngForm<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">NgForm</span>, dialogConfig<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DialogConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span>, _dynamicComponentService<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DynamicComponentService</span>, _providers<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DataProvider</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, _multiComboboxConfig<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MultiComboboxConfig</span>, _viewContainerRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ViewContainerRef</span>, _injector<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Injector</span>, formField<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FormField</span>, formControl<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FormFieldControl</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MultiComboboxComponent</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -814,7 +818,7 @@
 						<h5>_dynamicComponentService: <span class="tsd-signature-type">DynamicComponentService</span></h5>
 					</li>
 					<li>
-						<h5>providers: <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DataProvider</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+						<h5>_providers: <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DataProvider</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
 					</li>
 					<li>
 						<h5>_multiComboboxConfig: <span class="tsd-signature-type">MultiComboboxConfig</span></h5>
@@ -917,14 +921,6 @@
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="_injector" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> _injector</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">_injector<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Injector</span></div>
-		<aside class="tsd-sources">
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="_multiComboboxConfig" class="tsd-anchor"></a>
 		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> _multi<wbr>Combobox<wbr>Config</h3>
 		<!-- {log decorators} -->
@@ -941,14 +937,6 @@
 			<p>Inherited from <span>BaseMultiCombobox</span>.<span>_value</span></p>
 			<ul>
 			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="_viewContainerRef" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> _view<wbr>Container<wbr>Ref</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">_view<wbr>Container<wbr>Ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ViewContainerRef</span></div>
-		<aside class="tsd-sources">
 		</aside>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
