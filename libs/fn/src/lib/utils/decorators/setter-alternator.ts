@@ -1,3 +1,6 @@
+/**
+ * Function, which generates decorator. Passed mutator will be called during value set
+ */
 export function alternateSetter(mutator: (value: any, self: Record<string | symbol, any>) => any): PropertyDecorator {
     return function (targetObj: Record<string | symbol, any>, propertyKey: string | symbol) {
         const _key = Symbol();
