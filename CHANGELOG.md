@@ -1,4 +1,11 @@
 
+### 0.33.3-rc.5 (2022-02-11)
+
+
+### Bug Fixes
+
+* **platform:** multi-combobox, fix selection in mobile mode ([#7483](https://github.com/SAP/fundamental-ngx/issues/7483)) ([f88bd6f](https://github.com/SAP/fundamental-ngx/commit/f88bd6f741c3c4777817d4f7b5a50c6997e4697d))
+
 ### 0.33.3-rc.4 (2022-02-11)
 
 
