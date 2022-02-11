@@ -54,7 +54,6 @@ export class SelectionService<ValueType = any> implements OnDestroy {
         combineLatest([this.normalizedValue$, items$])
             .pipe(
                 tap(([value, items]) => {
-                    console.log({ value });
                     if (value.length === 0 && items.some((itm) => itm.getSelected()) && !this.rootComponent.toggle) {
                         const selectedValues = this.getSelectedValues(items);
                         this.rootComponent.onChange(selectedValues);
