@@ -10,21 +10,22 @@ import { SelectComponentRootToken } from './SelectComponentRootToken';
 @Injectable()
 export class SelectionService<ValueType = any> implements OnDestroy {
     /** @hidden */
-    items!: QueryList<SelectableItemToken>;
+    private _refresh$ = new Subject();
     /** @hidden */
-    destroy$ = new Subject();
-
-    private refresh$ = new Subject();
-    private value$ = new ReplaySubject<ValueType | ValueType[]>(1);
-    private normalizedValue$: Observable<ValueType[]>;
-    private rootComponent!: SelectComponentRootToken;
+    private _value$ = new ReplaySubject<ValueType | ValueType[]>(1);
+    /** @hidden */
+    private _normalizedValue$: Observable<ValueType[]>;
+    /** @hidden */
+    private _rootComponent!: SelectComponentRootToken;
+    /** @hidden */
+    private _destroy$ = new Subject();
 
     /** @hidden */
     constructor() {
-        this.normalizedValue$ = this.value$.pipe(
+        this._normalizedValue$ = this._value$.pipe(
             distinctUntilChanged(equal),
             map((v) => coerceArray<ValueType>(v)),
-            map((value) => (this.rootComponent.multiple ? value : [value[0]])),
+            map((value) => (this._rootComponent.multiple ? value : [value[0]])),
             map((coerced: ValueType[]) => coerced.filter(Boolean))
         );
     }
@@ -33,7 +34,7 @@ export class SelectionService<ValueType = any> implements OnDestroy {
      * Register main select component, which holds config
      * */
     registerRootComponent(rootComponent: SelectComponentRootToken<ValueType | Array<ValueType>>): void {
-        this.rootComponent = rootComponent;
+        this._rootComponent = rootComponent;
     }
 
     /**
@@ -46,24 +47,24 @@ export class SelectionService<ValueType = any> implements OnDestroy {
         );
         items$
             .pipe(
-                tap(() => this.refresh$.next()),
-                tap((items) => this.listenToItemsInteractions(items)),
-                takeUntil(this.destroy$)
+                tap(() => this._refresh$.next()),
+                tap((items) => this._listenToItemsInteractions(items)),
+                takeUntil(this._destroy$)
             )
             .subscribe();
-        combineLatest([this.normalizedValue$, items$])
+        combineLatest([this._normalizedValue$, items$])
             .pipe(
                 tap(([value, items]) => {
-                    if (value.length === 0 && items.some((itm) => itm.getSelected()) && !this.rootComponent.toggle) {
-                        const selectedValues = this.getSelectedValues(items);
-                        this.rootComponent.onChange(selectedValues);
-                        return this.value$.next(selectedValues);
+                    if (value.length === 0 && items.some((itm) => itm.getSelected()) && !this._rootComponent.toggle) {
+                        const selectedValues = this._getSelectedValues(items);
+                        this._rootComponent.onChange(selectedValues);
+                        return this._value$.next(selectedValues);
                     }
                     items.forEach((button) => {
                         button.setSelected(value.includes(button.value));
                     });
                 }),
-                takeUntil(this.destroy$)
+                takeUntil(this._destroy$)
             )
             .subscribe();
     }
@@ -72,16 +73,17 @@ export class SelectionService<ValueType = any> implements OnDestroy {
      * Sets Value, on which service looks at and updates UI accordingly
      * */
     setValue(v: ValueType | ValueType[]): void {
-        this.value$.next(v);
+        this._value$.next(v);
     }
 
     /** @hidden */
     ngOnDestroy(): void {
-        this.destroy$.next();
+        this._destroy$.next();
     }
 
-    private listenToItemsInteractions(items: SelectableItemToken[]): void {
-        const unsubscribe$ = merge(this.refresh$, this.destroy$);
+    /** @hidden */
+    private _listenToItemsInteractions(items: SelectableItemToken[]): void {
+        const unsubscribe$ = merge(this._refresh$, this._destroy$);
         for (const item of items) {
             const htmlElement = item.elementRef().nativeElement;
             const events = merge(
@@ -93,15 +95,16 @@ export class SelectionService<ValueType = any> implements OnDestroy {
             );
             events
                 .pipe(
-                    tap(() => this.itemClicked(item)),
+                    tap(() => this._itemClicked(item)),
                     takeUntil(unsubscribe$)
                 )
                 .subscribe();
         }
     }
 
-    private itemClicked(item: SelectableItemToken): void {
-        this.value$
+    /** @hidden */
+    private _itemClicked(item: SelectableItemToken): void {
+        this._value$
             .pipe(
                 first(),
                 map((val) => coerceArray(val).filter(Boolean)),
@@ -113,21 +116,23 @@ export class SelectionService<ValueType = any> implements OnDestroy {
                     } else {
                         val = [item.value, ...currentValue];
                     }
-                    const properValues = this.getProperValues(val);
-                    this.value$.next(properValues);
-                    this.rootComponent.onChange(properValues);
+                    const properValues = this._getProperValues(val);
+                    this._value$.next(properValues);
+                    this._rootComponent.onChange(properValues);
                 })
             )
             .subscribe();
     }
 
-    private getSelectedValues(items: SelectableItemToken[]): ValueType | ValueType[] {
+    /** @hidden */
+    private _getSelectedValues(items: SelectableItemToken[]): ValueType | ValueType[] {
         const selectedValues = items.filter((itm) => itm.getSelected()).map((itm) => itm.value);
-        return this.getProperValues(selectedValues);
+        return this._getProperValues(selectedValues);
     }
 
-    private getProperValues(values: ValueType[]): ValueType | ValueType[] {
-        if (this.rootComponent.multiple) {
+    /** @hidden */
+    private _getProperValues(values: ValueType[]): ValueType | ValueType[] {
+        if (this._rootComponent.multiple) {
             return values;
         }
         return values[0];
