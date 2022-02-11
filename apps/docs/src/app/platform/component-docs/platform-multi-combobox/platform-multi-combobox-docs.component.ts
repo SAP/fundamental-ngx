@@ -12,6 +12,8 @@ import multiComboboxGroupHtml from '!./examples/multi-combobox-group/multi-combo
 import multiComboboxGroupTs from '!./examples/multi-combobox-group/multi-combobox-group-example.component?raw';
 import multiComboboxColumnsHtml from '!./examples/multi-combobox-columns/multi-combobox-columns-example.component.html?raw';
 import multiComboboxColumnsTs from '!./examples/multi-combobox-columns/multi-combobox-columns-example.component?raw';
+import multiComboboxStatesHtml from '!./examples/multi-combobox-states/multi-combobox-states-example.component.html?raw';
+import multiComboboxStatesTs from '!./examples/multi-combobox-states/multi-combobox-states-example.component?raw';
 import multiComboboxLoadingHtml from '!./examples/multi-combobox-loading/multi-combobox-loading-example.component.html?raw';
 import multiComboboxLoadingTs from '!./examples/multi-combobox-loading/multi-combobox-loading-example.component?raw';
 
@@ -87,6 +89,20 @@ export class PlatformMultiComboboxDocsComponent {
             fileName: 'multi-combobox-forms-example',
             code: multiComboboxFormsTs,
             component: 'MultiComboboxFormsExampleComponent'
+        }
+    ];
+
+    multiComboboxStatesExample: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'multi-combobox-states-example',
+            code: multiComboboxStatesHtml
+        },
+        {
+            language: 'typescript',
+            fileName: 'multi-combobox-states-example',
+            code: multiComboboxStatesTs,
+            component: 'MultiComboboxStatesExampleComponent'
         }
     ];
 
