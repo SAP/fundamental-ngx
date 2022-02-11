@@ -15,7 +15,7 @@ export const API_FILES = {
     search: [],
     select: [],
     slider: [],
-    segmentedButton: ['SegmentedButtonComponent'],
-    utils: ['UtilsComponent'],
-    cdk: ['CdkComponent']
+    segmentedButton: [],
+    utils: [],
+    cdk: []
 };
