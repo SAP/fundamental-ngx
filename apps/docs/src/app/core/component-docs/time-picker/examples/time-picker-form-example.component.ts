@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
     DatetimeAdapter,
     DATE_TIME_FORMATS,
@@ -25,7 +25,7 @@ import {
 })
 export class TimePickerFormExampleComponent {
     customForm = new FormGroup({
-        time: new FormControl(),
+        time: new FormControl(null, Validators.required),
         disabledTime: new FormControl({ value: new FdDate().setTime(12, 34, 10), disabled: true })
     });
 }
