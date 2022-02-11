@@ -3,6 +3,11 @@
 @import '~fundamental-styles/dist/form-group';
 @import '~fundamental-styles/dist/form-header';
 
+fdp-form-group {
+    // resize observer won't work with inline elements
+    display: inline-block;
+}
+
 .fd-form-layout-grid-container {
     padding: 1rem;
 }

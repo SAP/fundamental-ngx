@@ -36,15 +36,16 @@ import {
     QueryList,
     TemplateRef,
     ViewEncapsulation,
-    isDevMode
+    isDevMode,
+    ElementRef
 } from '@angular/core';
 import { AbstractControl, ControlContainer, FormGroup } from '@angular/forms';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { KeyValue } from '@angular/common';
-import { takeUntil } from 'rxjs/operators';
+import { debounceTime, takeUntil } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
 
-import { ContentDensityService, isCompactDensity } from '@fundamental-ngx/core/utils';
+import { ContentDensityService, isCompactDensity, resizeObservable } from '@fundamental-ngx/core/utils';
 import {
     ColumnLayout,
     FormField,
@@ -389,6 +390,7 @@ export class FormGroupComponent
 
     constructor(
         private _cd: ChangeDetectorRef,
+        private elementRef: ElementRef,
         @Optional() private formContainer: ControlContainer,
         @Optional() private _contentDensityService: ContentDensityService
     ) {
@@ -438,6 +440,7 @@ export class FormGroupComponent
         this._updateFormFieldsProperties();
         this._listenToFormGroupChildren();
         this._listenFormFieldColumnChange();
+        this._trackFormGroupResize();
         this._cd.markForCheck();
 
         this._cd.detectChanges();
@@ -691,5 +694,18 @@ export class FormGroupComponent
     /** @hidden */
     private _updateInlineColumnLayout(): void {
         this._inlineColumnLayoutClass = generateColumnClass(this.inlineColumnLayout);
+    }
+
+    /**
+     * @hidden
+     * have to trigger change detection here in order to re-check contents
+     * inside "FormField.renderer" template every time component's dimensions changed
+     */
+    private _trackFormGroupResize(): void {
+        this._subscriptions.add(
+            resizeObservable(this.elementRef.nativeElement)
+                .pipe(debounceTime(20))
+                .subscribe(() => this._cd.markForCheck())
+        );
     }
 }

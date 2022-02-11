@@ -8,8 +8,11 @@
             (selectionChange)="onSelect($event)"
             formControlName="field"
         ></fdp-combobox>
-        <p>Selected Item: {{ selectedItem | json }}</p>
-        <p>Form Selected Item: {{ customForm.getRawValue() | json }}</p>
+        <fdp-form-field-extras>
+            Selected Item: {{ selectedItem | json }}
+            <br />
+            Form Selected Item: {{ customForm.getRawValue() | json }}
+        </fdp-form-field-extras>
     </fdp-form-field>
     <ng-template #i18n let-errors>
         <span *ngIf="errors.required">Field is required</span>

@@ -99,3 +99,46 @@
         <fdp-textarea name="basicTextarea7" [formControl]="f7.formControl"></fdp-textarea>
     </fdp-form-field>
 </fdp-form-group>
+
+<fdp-form-group mainTitle="Fields with field extras" columnLayout="XL2-L2-M1-S1">
+    <fdp-form-field
+        #f8
+        id="basicTextarea5"
+        label="Basic Textarea 8"
+        placeholder="Start entering detailed description"
+        [column]="1"
+        [rank]="1"
+        [fieldColumnLayout]="{ S: 10 }"
+        [gapColumnLayout]="{ S: 2 }"
+    >
+        <fdp-textarea name="basicTextarea5" [formControl]="f8.formControl"></fdp-textarea>
+        <fdp-form-field-extras> Some extra information that doesn't affect the layout </fdp-form-field-extras>
+    </fdp-form-field>
+
+    <fdp-form-field
+        #f9
+        id="basicTextarea6"
+        label="Basic Textarea 9"
+        placeholder="Start entering detailed description"
+        [column]="2"
+        [rank]="2"
+        [fieldColumnLayout]="{ S: 10 }"
+        [gapColumnLayout]="{ S: 2 }"
+    >
+        <fdp-textarea name="basicTextarea6" [formControl]="f9.formControl"></fdp-textarea>
+        <fdp-form-field-extras> Some extra information that doesn't affect the layout </fdp-form-field-extras>
+    </fdp-form-field>
+    <fdp-form-field
+        #f10
+        id="basicTextarea7"
+        label="Basic Textarea 10"
+        placeholder="Start entering detailed description"
+        [column]="2"
+        [rank]="2"
+        [fieldColumnLayout]="{ S: 10 }"
+        [gapColumnLayout]="{ S: 2 }"
+    >
+        <fdp-textarea name="basicTextarea7" [formControl]="f10.formControl"></fdp-textarea>
+        <fdp-form-field-extras> Some extra information that doesn't affect the layout </fdp-form-field-extras>
+    </fdp-form-field>
+</fdp-form-group>

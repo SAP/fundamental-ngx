@@ -9,6 +9,6 @@
             [showSecondaryText]="true"
             (selectionChange)="onSelect($event)"
         ></fdp-combobox>
-        <p>Selected Item: {{ selectedItem | json }}</p>
+        <fdp-form-field-extras> Selected Item: {{ selectedItem | json }} </fdp-form-field-extras>
     </fdp-form-field>
 </fdp-form-group>
