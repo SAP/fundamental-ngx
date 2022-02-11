@@ -1,4 +1,11 @@
 
+### 0.33.3-rc.4 (2022-02-11)
+
+
+### Bug Fixes
+
+* **core:** solve multi input add new token ([#7714](https://github.com/SAP/fundamental-ngx/issues/7714)) ([66b49f0](https://github.com/SAP/fundamental-ngx/commit/66b49f0d00a9c8744ecdb166a3bb139c69b90c7b)), closes [#7611](https://github.com/SAP/fundamental-ngx/issues/7611)
+
 ### 0.33.3-rc.3 (2022-02-11)
 
 
