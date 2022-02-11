@@ -1,6 +1,5 @@
-<fdp-form-group #fg>
+<fdp-form-group>
     <fdp-form-field
-        #ffl1
         label="Default Multi Input Field"
         id="multi-input-simple"
         name="reactiveFormInput"
@@ -8,7 +7,6 @@
         placeholder="Field placeholder text"
     >
         <fdp-multi-input
-            [formControl]="ffl1.formControl"
             placeholder="Field placeholder text"
             type="text"
             id="fdp-id-default"
@@ -17,7 +15,6 @@
             (selectionChange)="showValues($event)"
             displayKey="state"
             [autofocus]="true"
-            [selected]="selected"
             [(ngModel)]="selected"
         >
         </fdp-multi-input>

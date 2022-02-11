@@ -139,7 +139,7 @@ export class PlatformUploadCollectionDataProviderExample extends UploadCollectio
         console.log('newFolder', folder, parentFolderId);
 
         this._activeRequest = CancelActiveRequest.NEW_FOLDER;
-        const complete = new Subject();
+        const complete = new Subject<void>();
 
         return of(this.items).pipe(
             delay(5000),

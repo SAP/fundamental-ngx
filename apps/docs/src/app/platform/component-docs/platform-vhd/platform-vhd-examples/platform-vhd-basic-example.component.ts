@@ -10,6 +10,8 @@ import {
     VhdDefineIncludeStrategy,
     VhdDefineExcludeStrategy
 } from '@fundamental-ngx/platform/value-help-dialog';
+import { Observable } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 interface ExampleTestModel {
     id: number;
@@ -59,7 +61,7 @@ const data = exampleDataSource();
 })
 export class PlatformVhdBasicExampleComponent {
     filters = data.filters;
-    dataSource = new ValueHelpDialogDataSource(new VhdDataProvider(data.dataSource));
+    dataSource = new ValueHelpDialogDataSource(new DelayedVhdDataProvider(data.dataSource));
 
     actualValue: Partial<VhdValue<ExampleTestModel[]>> = {};
 
@@ -107,5 +109,12 @@ export class PlatformVhdBasicExampleComponent {
 
     valueChange($event: VhdValueChangeEvent<ExampleTestModel[]>): void {
         this.actualValue = { ...$event };
+    }
+}
+
+// Simulating real http request by adding 300ms delay to the DataProvider's "fetch" method
+class DelayedVhdDataProvider<T> extends VhdDataProvider<T> {
+    fetch(params: Map<string, string>): Observable<T[]> {
+        return super.fetch(params).pipe(delay(300));
     }
 }

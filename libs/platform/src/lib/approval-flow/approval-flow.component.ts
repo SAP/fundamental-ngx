@@ -20,8 +20,8 @@ import {
 } from '@angular/core';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import { CdkDrag } from '@angular/cdk/drag-drop';
-import { fromEvent, Subscription } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { combineLatest, fromEvent, merge, Subject, Subscription } from 'rxjs';
+import { debounceTime, switchMap, mapTo, map, startWith, distinctUntilChanged } from 'rxjs/operators';
 
 import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { GridListComponent, GridListSelectionEvent } from '@fundamental-ngx/core/grid-list';
@@ -165,6 +165,14 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
     /** Event emitted whenever reminders should be sent */
     @Output() sendReminders = new EventEmitter<SendRemindersData>();
 
+    /** Event emitted when data loading is started. */
+    @Output()
+    onDataRequested = new EventEmitter<void>();
+
+    /** Event emitted when data loading is finished. */
+    @Output()
+    onDataReceived = new EventEmitter<void>();
+
     /** @hidden */
     @ViewChild('graphContainerEl') _graphContainerEl: ElementRef;
 
@@ -249,6 +257,9 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
     private _subscriptions = new Subscription();
 
     /** @hidden */
+    private _dataSourceChanged$ = new Subject<void>();
+
+    /** @hidden */
     constructor(
         private readonly _dialogService: DialogService,
         private readonly _cdr: ChangeDetectorRef,
@@ -300,6 +311,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         }
 
         this._listenOnResize();
+        this._setupDataSourceSubscription();
     }
 
     ngOnChanges(changes: SimpleChanges): void {
@@ -307,6 +319,10 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
             const process = this.value ?? { watchers: [], nodes: [] };
             this._initialApprovalProcess = cloneDeep(process);
             this._buildView(process);
+        }
+
+        if (changes.userDataSource || changes.watcherDataSource || changes.teamDataSource) {
+            this._dataSourceChanged$.next();
         }
     }
 
@@ -1065,6 +1081,34 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
 
             addedNode.targets = this._findSerialNode(yIndex, targets);
         }
+    }
+
+    /** @hidden */
+    private _setupDataSourceSubscription(): void {
+        const sub = this._dataSourceChanged$
+            .pipe(
+                startWith(null),
+                switchMap(() => {
+                    const loadingStates = [this.teamDataSource, this.userDataSource, this.watcherDataSource]
+                        .filter(Boolean)
+                        .map((ds) =>
+                            merge(ds.onDataRequested().pipe(mapTo(true)), ds.onDataReceived().pipe(mapTo(false))).pipe(
+                                startWith(ds.isDataLoading)
+                            )
+                        );
+                    return combineLatest(loadingStates);
+                }),
+                map((loadingStates) => loadingStates.some(Boolean)),
+                distinctUntilChanged()
+            )
+            .subscribe((someLoading) => {
+                if (someLoading) {
+                    this.onDataRequested.emit();
+                } else {
+                    this.onDataReceived.emit();
+                }
+            });
+        this._subscriptions.add(sub);
     }
 }
 

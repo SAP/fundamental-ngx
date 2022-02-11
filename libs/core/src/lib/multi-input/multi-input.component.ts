@@ -559,13 +559,23 @@ export class MultiInputComponent
 
     /** @hidden */
     _onSubmit(): void {
-        if (this.allowNewTokens && this.newTokenValidateFn(this._searchTermCtrl.value)) {
+        const searchTerm = this.searchTerm;
+        if (searchTerm === '') {
+            return;
+        }
+        const isExist = this._selectFirstFiltered(searchTerm);
+        if (!isExist && this.allowNewTokens && this.newTokenValidateFn(this._searchTermCtrl.value)) {
             const newToken = this.newTokenParseFn(this._searchTermCtrl.value);
-            this.dropdownValues.push(newToken);
+            this._addNewTokenToDropDownValues(newToken);
             this._handleSelect(true, newToken);
             this._searchTermCtrl.setValue('');
             this.open = false;
         }
+    }
+
+    /** @hidden */
+    _handleComplete({ term }): void {
+        this.searchTerm = term;
     }
 
     /**
@@ -604,6 +614,25 @@ export class MultiInputComponent
     /** @hidden */
     enableParentFocusTrap(): void {
         this._focusTrapService?.unpauseCurrentFocusTrap();
+    }
+
+    /** @hidden */
+    private _addNewTokenToDropDownValues(newToken): void {
+        this.dropdownValues.push(newToken);
+        const newOption = this._getOptionItem(newToken);
+        this.optionItems$.next([...this.optionItems$.value, newOption]);
+    }
+
+    /** @hidden */
+    private _selectFirstFiltered(searchTerm: string): boolean {
+        const filtered = this.filterFn(this.dropdownValues, searchTerm);
+        if (Array.isArray(filtered) && filtered.length > 0 && !this.includes && this.autoComplete) {
+            this._handleSelect(true, filtered[0]);
+            this._searchTermCtrl.setValue('');
+            this.open = false;
+            return true;
+        }
+        return false;
     }
 
     /** @hidden */

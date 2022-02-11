@@ -1,4 +1,69 @@
 
+### [0.33.3](https://github.com/SAP/fundamental-ngx/compare/v0.33.3-rc.7...v0.33.3) (2022-02-11)
+
+### 0.33.3-rc.7 (2022-02-11)
+
+### 0.33.3-rc.6 (2022-02-11)
+
+
+### Bug Fixes
+
+* **platform:** vhd - misc issues ([#7713](https://github.com/SAP/fundamental-ngx/issues/7713)) ([b0def36](https://github.com/SAP/fundamental-ngx/commit/b0def360bd5cc9ec115653f7ac942042258359a4))
+
+### 0.33.3-rc.5 (2022-02-11)
+
+
+### Bug Fixes
+
+* **platform:** multi-combobox, fix selection in mobile mode ([#7483](https://github.com/SAP/fundamental-ngx/issues/7483)) ([f88bd6f](https://github.com/SAP/fundamental-ngx/commit/f88bd6f741c3c4777817d4f7b5a50c6997e4697d))
+
+### 0.33.3-rc.4 (2022-02-11)
+
+
+### Bug Fixes
+
+* **core:** solve multi input add new token ([#7714](https://github.com/SAP/fundamental-ngx/issues/7714)) ([66b49f0](https://github.com/SAP/fundamental-ngx/commit/66b49f0d00a9c8744ecdb166a3bb139c69b90c7b)), closes [#7611](https://github.com/SAP/fundamental-ngx/issues/7611)
+
+### 0.33.3-rc.3 (2022-02-11)
+
+
+### Bug Fixes
+
+* **core:** time-picker - fix e2e and console errors ([#7721](https://github.com/SAP/fundamental-ngx/issues/7721)) ([1bbf94b](https://github.com/SAP/fundamental-ngx/commit/1bbf94bf9b00ddd54351988fd751d0735152f19c))
+
+### 0.33.3-rc.2 (2022-02-10)
+
+
+### Bug Fixes
+
+* **core,platform,fn:** support any minor version of angular ([#7720](https://github.com/SAP/fundamental-ngx/issues/7720)) ([cc682d8](https://github.com/SAP/fundamental-ngx/commit/cc682d88917c1c16f7a18d93215e419b2c7d6a24))
+
+### 0.33.3-rc.1 (2022-02-10)
+
+### 0.33.3-rc.0 (2022-02-10)
+
+### [0.33.2](https://github.com/SAP/fundamental-ngx/compare/v0.33.2-rc.5...v0.33.2) (2022-02-09)
+
+### 0.33.2-rc.5 (2022-02-09)
+
+
+### Bug Fixes
+
+* **core,platform,fn:** stackblitz inject issue ([#7715](https://github.com/SAP/fundamental-ngx/issues/7715)) ([f389e1a](https://github.com/SAP/fundamental-ngx/commit/f389e1a724f7db1aca80ba1a5fd06107a8870459))
+
+### 0.33.2-rc.4 (2022-02-09)
+
+### 0.33.2-rc.3 (2022-02-09)
+
+### 0.33.2-rc.2 (2022-02-09)
+
+### 0.33.2-rc.1 (2022-02-07)
+
+
+### Features
+
+* **platform:** add datasource loading events ([#7671](https://github.com/SAP/fundamental-ngx/issues/7671)) ([7a19de2](https://github.com/SAP/fundamental-ngx/commit/7a19de2cac920abf08e32f070a2dc241a1b8870a))
+
 ### 0.33.2-rc.0 (2022-02-07)
 
 

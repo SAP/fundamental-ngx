@@ -5,7 +5,7 @@
     [ngTemplateOutletContext]="_toolbarContext"
 ></ng-container>
 
-<fd-busy-indicator [loading]="loading" [block]="true">
+<fd-busy-indicator [loading]="loadingState" [block]="true">
     <!-- Table Container -->
     <div class="fdp-table__container" role="table" #tableContainer>
         <!-- Table header outlet -->
@@ -236,7 +236,7 @@
         [class.fixed-height]="!!bodyHeight"
     >
         <div
-            *ngIf="_tableRowsVisible.length || loading; else emptyTableTemplate"
+            *ngIf="_tableRowsVisible.length || loadingState; else emptyTableTemplate"
             class="fd-table--fixed"
             fdpTableScrollable
             fdpTableScroller="horizontal"

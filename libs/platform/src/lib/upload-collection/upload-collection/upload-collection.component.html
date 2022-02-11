@@ -148,8 +148,9 @@
         >
             <!-- Table -->
             <fdp-table
-                [dataSource]="_visibleList"
                 *ngIf="_visibleList.length > 0"
+                [dataSource]="_visibleList"
+                [loading]="dataSource?.isDataLoading"
                 [contentDensity]="contentDensity"
                 selectionMode="multiple"
                 emptyTableMessage=""

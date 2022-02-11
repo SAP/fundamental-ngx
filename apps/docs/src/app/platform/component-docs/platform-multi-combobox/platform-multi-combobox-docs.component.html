@@ -61,9 +61,35 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="states" componentName="multi-combobox"> Multi Combobox states. </fd-docs-section-title>
+<description>
+    The Multi Combobox component with states.
+    <ul>
+        <li>Set <code>[state]</code>property to: <code>'success' | 'error' | 'warning' | 'information'</code></li>
+    </ul>
+</description>
+<component-example>
+    <fdp-multi-combobox-states-example></fdp-multi-combobox-states-example>
+</component-example>
+<code-example [exampleFiles]="multiComboboxStatesExample"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title id="reactive-form" componentName="multi-combobox"> Reactive Form </fd-docs-section-title>
 <description> The Multi-Combobox component may also be used within Angular Reactive Forms. </description>
 <component-example>
     <fdp-multi-combobox-forms-example></fdp-multi-combobox-forms-example>
 </component-example>
 <code-example [exampleFiles]="multiComboboxFormExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="loading" componentName="multi-combobox"> Loading </fd-docs-section-title>
+<description>
+    Combobox exposes <code>onDataRequested</code> and <code>onDataReceived</code> outputs, that can be used to implement
+    external loading logic. These events are tied to the querying process through dataSource.
+</description>
+<component-example>
+    <fdp-multi-combobox-loading-example></fdp-multi-combobox-loading-example>
+</component-example>
+<code-example [exampleFiles]="multiComboboxLoadingExample"></code-example>

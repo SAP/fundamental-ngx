@@ -344,6 +344,7 @@ describe('Approval flow', () => {
             waitForElDisplayed(approverOptionListItem);
             click(approverOptionListItem, 2);
             click(detailsDialogUserTeamButton);
+            pause(500);
             click(radioButton);
             click(footerButtons);
             click(footerButtons);
@@ -368,6 +369,7 @@ describe('Approval flow', () => {
             waitForElDisplayed(approverOptionListItem);
             click(approverOptionListItem, 1);
             click(detailsDialogUserTeamButton);
+            pause(500);
             click(radioButton);
             click(footerButtons);
             click(footerButtons);

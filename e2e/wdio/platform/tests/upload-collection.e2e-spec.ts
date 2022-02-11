@@ -186,12 +186,14 @@ describe('Upload collection test suite', () => {
 
         click(selector + buttons);
         click(menuItem);
+        pause(300);
 
         const fiveItems = getElementArrayLength(selector + tableItems);
         expect(fiveItems).toEqual(5);
 
         click(selector + buttons);
         click(menuItem, 2);
+        pause(300);
 
         const fifteenItems = getElementArrayLength(selector + tableItems);
         expect(fifteenItems).toEqual(15);
@@ -199,6 +201,7 @@ describe('Upload collection test suite', () => {
         scrollIntoView(selector + buttons);
         click(selector + buttons);
         click(menuItem, 3);
+        pause(300);
 
         const twentyItems = getElementArrayLength(selector + tableItems);
         expect(twentyItems).toEqual(20);
@@ -209,6 +212,7 @@ describe('Upload collection test suite', () => {
         const linksLength = getElementArrayLength(selector + tablePages);
         for (let i = 0; i < linksLength; i++) {
             click(selector + tablePages, i);
+            pause(300);
             expect(getText(selector + tableResult).trim()).toBe(paginationTestArr[i]);
         }
     }
@@ -216,9 +220,11 @@ describe('Upload collection test suite', () => {
     function checkSelectedPagesByNextPrevious(selector: string): void {
         scrollIntoView(selector + linkNext);
         click(selector + linkNext);
+        pause(300);
         expect(getText(selector + tableResult).trim()).toBe(paginationTestArr[1]);
 
         click(selector + linkPrevious);
+        pause(300);
         expect(getText(selector + tableResult).trim()).toBe(paginationTestArr[0]);
     }
 
@@ -248,6 +254,7 @@ describe('Upload collection test suite', () => {
         click(selector + transparentButton);
         setValue(dialogInputField, testFolder1);
         click(dialogCreateButton);
+        pause(300);
         expect(getText(selector + tableItemCount).trim()).toBe('55');
         const countAfterAdd = getText(selector + tableItemCount).trim();
         const countAfterAddNum = Number(countAfterAdd);
@@ -262,6 +269,7 @@ describe('Upload collection test suite', () => {
         expect(countBeforeRemoveNum).toEqual(54);
         click(selector + transparentButton, 5);
         click(menuButton, 3);
+        pause(300);
         const countAfterRemove = getText(selector + tableItemCount).trim();
         const countAfterRemoveNum = Number(countAfterRemove);
         expect(countAfterRemoveNum).toEqual(53);

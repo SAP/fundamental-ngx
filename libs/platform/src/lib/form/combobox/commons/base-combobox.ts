@@ -177,6 +177,14 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     @Output()
     selectionChange = new EventEmitter<ComboboxSelectionChangeEvent>();
 
+    /** Event emitted when data loading is started. */
+    @Output()
+    onDataRequested = new EventEmitter<void>();
+
+    /** Event emitted when data loading is finished. */
+    @Output()
+    onDataReceived = new EventEmitter<void>();
+
     /** @hidden */
     @ViewChild(ListComponent)
     listComponent: ListComponent;
@@ -350,7 +358,12 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     }
 
     /** @hidden */
-    searchTermChanged(text: string = this.inputText): void {
+    searchTermChanged(text: string): void {
+        if (this.inputText === text) {
+            return;
+        }
+        this.inputText = text;
+
         const map = new Map();
         map.set('query', text);
         map.set('limit', 12);
@@ -360,15 +373,13 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
     /** @hidden */
     isOpenChangeHandle(isOpen: boolean): void {
-        if (this.isOpen !== isOpen) {
-            this.isOpen = isOpen;
-            this.onTouched();
-            this.openChange.next(isOpen);
+        if (this.isOpen === isOpen) {
+            return;
         }
 
-        if (!this.isOpen) {
-            this.searchTermChanged('');
-        }
+        this.isOpen = isOpen;
+        this.onTouched();
+        this.openChange.next(isOpen);
 
         this.cd.detectChanges();
     }
@@ -397,10 +408,6 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         // if it's mobile mode ignore this click
         if (this.mobile) {
             return;
-        }
-
-        if (!this.isOpen) {
-            this.searchTermChanged('');
         }
 
         this.isOpenChangeHandle(!this.isOpen);
@@ -528,7 +535,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     }
 
     /** @hidden */
-    private _initializeDataSource(ds: FdpComboBoxDataSource<any>): void {
+    private async _initializeDataSource(ds: FdpComboBoxDataSource<any>): Promise<void> {
         this._suggestions = [];
 
         if (isDataSource(this.dataSource)) {
@@ -540,6 +547,9 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
             }
         }
 
+        // initializing data source in the seperate microtask to let all config options to be set before it
+        // for example, "isGroup" input is needed for initialization logic and it might not be set at this point
+        await Promise.resolve();
         // Convert whatever comes in as DataSource so we can work with it identically
         this._dataSource = this._openDataStream(ds);
     }
@@ -551,12 +561,13 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         if (initDataSource === undefined) {
             throw new Error(`[dataSource] source did not match an array, Observable, or DataSource`);
         }
+        this._dsSubscription = new Subscription();
         /**
          * This is single point of data entry to the component. We dont want to set data on different
          * places. If any new data comes in either you do a search and you want to pass initial data
          * its here.
          */
-        this._dsSubscription = initDataSource
+        const dsSub = initDataSource
             .open()
             .pipe(takeUntil(this._destroyed))
             .subscribe((data) => {
@@ -567,6 +578,10 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
                 this.cd.markForCheck();
             });
+        this._dsSubscription.add(dsSub);
+
+        this._dsSubscription.add(initDataSource.onDataRequested().subscribe(this.onDataRequested));
+        this._dsSubscription.add(initDataSource.onDataReceived().subscribe(this.onDataReceived));
 
         initDataSource.dataProvider.setLookupKey(this.lookupKey);
         const matchingBy: MatchingBy = {

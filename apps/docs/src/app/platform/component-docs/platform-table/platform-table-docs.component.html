@@ -161,7 +161,18 @@
 <separator></separator>
 
 <fd-docs-section-title id="loading" componentName="table"> Loading/Busy State </fd-docs-section-title>
-<description> Use <code>[loading]="true|false"</code> to set busy state. </description>
+<description>
+    <p>
+        Use <code>[loading]="true|false"</code> to set busy state. Table component also exposes
+        <code>onDataRequested</code> and <code>onDataReceived</code> outputs, that can be used to implement any external
+        loading logic. These events are tied to the querying process through dataSource.
+    </p>
+    <p>
+        By default, Table tracks these loading events and apply loading state internally. However, you can modify this
+        logic by using <code>onDataRequested</code> and <code>onDataReceived</code> methods and
+        <code>loading</code> input on the component
+    </p>
+</description>
 <component-example>
     <fdp-platform-table-loading-example></fdp-platform-table-loading-example>
 </component-example>
