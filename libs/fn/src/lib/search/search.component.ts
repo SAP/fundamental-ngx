@@ -5,6 +5,7 @@ import {
     ElementRef,
     EventEmitter,
     forwardRef,
+    HostBinding,
     Input,
     OnDestroy,
     Output,
@@ -59,6 +60,7 @@ export class SearchComponent implements ControlValueAccessor, OnDestroy {
 
     /** Whether the search is disabled. */
     @Input()
+    @HostBinding('class.is-disabled')
     disabled = false;
 
     /** Id for the search component. If omitted, a unique one is generated. */
@@ -104,11 +106,6 @@ export class SearchComponent implements ControlValueAccessor, OnDestroy {
         this._subscriptions.unsubscribe();
     }
 
-    /** Set focus on the input element. */
-    focus(): void {
-        this.inputElement.nativeElement.focus();
-    }
-
     /** Get the id of the inner input element of the search. */
     get innerInputId(): string {
         return `${this.id}-input`;
@@ -138,27 +135,6 @@ export class SearchComponent implements ControlValueAccessor, OnDestroy {
      */
     registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
-    }
-
-    /** Reset the value in the input. */
-    resetValue(): void {
-        this._setValue('');
-        this.inputElement.nativeElement.focus();
-        this.emitSearch();
-    }
-
-    /**
-     * @hidden
-     * @param isDisabled Sets the value of the *disabled* property of the search.
-     */
-    setDisabledState(isDisabled: boolean): void {
-        this.disabled = isDisabled;
-        this._changeDetectorRef.detectChanges();
-    }
-
-    /** Emit search term */
-    emitSearch(): void {
-        this.search.emit(this.value);
     }
 
     /** @hidden */

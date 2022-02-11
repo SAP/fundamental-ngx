@@ -39,11 +39,21 @@
 <br /><br /><br />
 
 <div class="base-row">
-    <h4>Vertical slider:</h4>
-    <div style="height: 500px; width: 50px">
-        <fn-slider [(ngModel)]="verticalValue" [vertical]="true"> </fn-slider>
+    <h4>Slider with <code>[disabled]="true"</code>.</h4>
+    <fn-slider [(ngModel)]="value" [disabled]="true"> </fn-slider>
+    <p>
+        <i>Value: {{ value4 }}</i>
+    </p>
+</div>
+
+<br /><br /><br />
+
+<div class="base-row">
+    <h4>Range slider with <code>[value]="[25, 75]"</code></h4>
+    <div>
+        <fn-slider [(ngModel)]="rangeValue" [range]="true"> </fn-slider>
     </div>
     <p>
-        <i>Value: {{ verticalValue }}</i>
+        <i>Value: {{ rangeValue }}</i>
     </p>
 </div>

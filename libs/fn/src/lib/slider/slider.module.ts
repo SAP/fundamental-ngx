@@ -7,10 +7,10 @@ import { OnlyDigitsModule } from '@fundamental-ngx/core/utils';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 
 import { SliderComponent } from './slider.component';
-import { SliderPositionDirective } from './slider-position.directive';
+import { SliderHandleComponent } from './components/slider-handle/slider-handle.component';
 
 @NgModule({
-    declarations: [SliderComponent, SliderPositionDirective],
+    declarations: [SliderComponent, SliderHandleComponent],
     imports: [CommonModule, PopoverModule, FormsModule, OnlyDigitsModule],
     exports: [SliderComponent]
 })
