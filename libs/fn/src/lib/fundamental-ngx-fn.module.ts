@@ -10,6 +10,9 @@ import { ButtonModule } from '@fundamental-ngx/fn/button';
 import { SearchModule } from '@fundamental-ngx/fn/search';
 import { SliderModule } from '@fundamental-ngx/fn/slider';
 import { TagModule } from '@fundamental-ngx/fn/tag';
+import { SegmentedButtonModule } from '@fundamental-ngx/fn/segmented-button';
+import { UtilsModule } from '@fundamental-ngx/fn/utils';
+import { CdkModule } from '@fundamental-ngx/fn/cdk';
 import { GenericTagModule } from '@fundamental-ngx/fn/generic-tag';
 
 @NgModule({
@@ -24,7 +27,10 @@ import { GenericTagModule } from '@fundamental-ngx/fn/generic-tag';
         SearchModule,
         SliderModule,
         TagModule,
-        GenericTagModule
+        GenericTagModule,
+        SegmentedButtonModule,
+        UtilsModule,
+        CdkModule
     ],
     providers: []
 })

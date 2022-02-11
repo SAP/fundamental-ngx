@@ -24,6 +24,10 @@
                             {
                                 "name": "@fundamental-ngx/core",
                                 "message": "Use imports from nested packages instead"
+                            },
+                            {
+                                "name": "@fundamental-ngx/fn",
+                                "message": "Use imports from nested packages instead"
                             }
                         ]
                     }
