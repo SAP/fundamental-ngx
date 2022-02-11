@@ -21,7 +21,7 @@ import { SelectableItemToken, SelectComponentRootToken, SelectionService } from 
 @Component({
     selector: 'fn-segmented-button',
     exportAs: 'fn-segmented-button',
-    templateUrl: './segmented-button.component.html',
+    template: `<ng-content></ng-content>`,
     styleUrls: ['./segmented-button.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
