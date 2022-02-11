@@ -1,0 +1,8 @@
+<fn-segmented-button [formControl]="segmentControl">
+    <button fn-button label="Button" fnType="layout" value="value1"></button>
+    <button fn-button label="Button" fnType="layout" value="value2"></button>
+    <a fn-button label="Button" fnType="layout" value="value3"></a>
+    <button fn-button label="Button" fnType="layout" value="value4" disabled></button>
+</fn-segmented-button>
+
+<small style="display: block; margin-top: 15px">Selected item: {{ value$ | async | json }}</small>
