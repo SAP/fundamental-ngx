@@ -1,4 +1,11 @@
 
+### 0.33.3-rc.3 (2022-02-11)
+
+
+### Bug Fixes
+
+* **core:** time-picker - fix e2e and console errors ([#7721](https://github.com/SAP/fundamental-ngx/issues/7721)) ([1bbf94b](https://github.com/SAP/fundamental-ngx/commit/1bbf94bf9b00ddd54351988fd751d0735152f19c))
+
 ### 0.33.3-rc.2 (2022-02-10)
 
 
