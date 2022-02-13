@@ -156,7 +156,7 @@
         "@babel/core": "7.13.14",
         "@commitlint/cli": "16.1.0",
         "@commitlint/config-conventional": "14.1.0",
-        "@commitlint/travis-cli": "13.2.1",
+        "@commitlint/travis-cli": "16.2.1",
         "@nrwl/cli": "13.2.3",
         "@nrwl/devkit": "13.4.1",
         "@nrwl/eslint-plugin-nx": "13.2.3",
