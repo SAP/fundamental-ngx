@@ -10,6 +10,7 @@
                 "../../../../../.eslintrc-overrides.json"
             ],
             "rules": {
+                "@angular-eslint/no-host-metadata-property": "off",
                 "@angular-eslint/directive-selector": [
                     "error",
                     {
@@ -25,13 +26,27 @@
                         "prefix": "fn",
                         "style": "kebab-case"
                     }
-                ]
+                ],
+                "@angular-eslint/no-lifecycle-call": ["warn"],
+                "@angular-eslint/prefer-on-push-component-change-detection": ["error"],
+                "@angular-eslint/component-max-inline-declarations": [
+                    "error",
+                    {
+                        "animations": 5,
+                        "styles": 3,
+                        "template": 3
+                    }
+                ],
+                "@angular-eslint/prefer-output-readonly": ["warn"],
+                "@angular-eslint/use-component-selector": ["error"]
             }
         },
         {
             "files": ["*.html"],
             "extends": ["plugin:@nrwl/nx/angular-template"],
-            "rules": {}
+            "rules": {
+                "@angular-eslint/template/banana-in-box": ["error"]
+            }
         }
     ]
 }
