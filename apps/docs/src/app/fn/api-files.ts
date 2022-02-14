@@ -17,5 +17,6 @@ export const API_FILES = {
     slider: [],
     segmentedButton: [],
     utils: [],
-    cdk: []
+    cdk: [],
+    progressBar: ['ProgressBarComponent']
 };
