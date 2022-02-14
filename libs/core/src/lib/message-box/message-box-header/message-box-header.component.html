@@ -8,8 +8,12 @@
 
     <ng-template #defaultTemplate>
         <div fd-bar-left>
-            <fd-bar-element>
-                <fd-message-box-semantic-icon *ngIf="_showSemanticIcon"></fd-message-box-semantic-icon>
+            <fd-bar-element #defaultTemplateHeaderBar>
+                <fd-message-box-semantic-icon
+                    class="fd-message-box__internal-semantic-icon"
+                    *ngIf="_showSemanticIcon"
+                ></fd-message-box-semantic-icon>
+                <ng-content select="fd-message-box-semantic-icon"></ng-content>
                 <ng-content select="[fd-title]"></ng-content>
             </fd-bar-element>
         </div>

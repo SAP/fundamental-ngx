@@ -1,7 +1,8 @@
 <ng-template let-messageBox let-messageBoxConfig="messageBoxConfig" #messageBoxTemplate>
     <fd-message-box [messageBoxConfig]="messageBoxConfig" [messageBoxRef]="messageBox">
         <fd-message-box-header>
-            <h1 fd-title>Fruit facts</h1>
+            <fd-message-box-semantic-icon glyph="favorite"></fd-message-box-semantic-icon>
+            <h1 id="fd-message-box-template-base-header" fd-title>Fruit facts</h1>
         </fd-message-box-header>
         <fd-message-box-body>
             The World's Most Popular Fruit is the tomato.

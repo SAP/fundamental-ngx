@@ -3,7 +3,7 @@ import { Component, Type, ViewChild } from '@angular/core';
 
 import { TemplateModule } from '../../utils/directives/template/template.module';
 import { MessageBoxFooterComponent, MessageBoxButtonClass } from './message-box-footer.component';
-import { MessageBoxConfig } from '../utils/message-box-config.class';
+import { MessageBoxConfig, MessageBoxHost } from '../utils/message-box-config.class';
 import { BarModule } from '../../bar/bar.module';
 import { whenStable } from '@fundamental-ngx/core/tests';
 
@@ -35,13 +35,15 @@ class DefaultFooterTestComponent {
 }
 
 describe('MessageBoxFooterComponent', () => {
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [MessageBoxFooterComponent, CustomFooterTestComponent, DefaultFooterTestComponent],
-            imports: [BarModule, TemplateModule],
-            providers: [MessageBoxConfig]
-        });
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [MessageBoxFooterComponent, CustomFooterTestComponent, DefaultFooterTestComponent],
+                imports: [BarModule, TemplateModule],
+                providers: [{ provide: MessageBoxHost, useValue: { _messageBoxConfig: new MessageBoxConfig() } }]
+            });
+        })
+    );
 
     function setup<V>(testComponent): { fixture: ComponentFixture<V>; component: V } {
         const fixture = TestBed.createComponent((testComponent as any) as Type<V>);

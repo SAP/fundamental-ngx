@@ -2,31 +2,23 @@ import {
     AfterViewInit,
     ChangeDetectorRef,
     Component,
-    ContentChildren,
     ElementRef,
     Input,
     OnChanges,
     OnDestroy,
     OnInit,
     Optional,
-    QueryList,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { applyCssClass, FocusTrapService, RtlService } from '@fundamental-ngx/core/utils';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
-import {
-    MESSAGE_BOX_CONFIGURABLE_ELEMENT,
-    MessageBoxConfig,
-    MessageBoxConfigurableElement
-} from './utils/message-box-config.class';
+import { applyCssClass, CssClassBuilder, FocusTrapService, RtlService } from '@fundamental-ngx/core/utils';
+import { DialogBase, dialogFadeNgIf } from '@fundamental-ngx/core/dialog';
 
+import { MessageBoxHost, MessageBoxConfig } from './utils/message-box-config.class';
 import { MessageBoxRef } from './utils/message-box-ref.class';
 
-import { DialogBase } from '@fundamental-ngx/core/dialog';
-import { dialogFadeNgIf } from '@fundamental-ngx/core/dialog';
 import { CSS_CLASS_NAME } from './utils/const';
 
 /**
@@ -46,9 +38,12 @@ import { CSS_CLASS_NAME } from './utils/const';
     styleUrls: ['./message-box.component.scss'],
     host: { tabindex: '-1' },
     encapsulation: ViewEncapsulation.None,
+    providers: [{ provide: MessageBoxHost, useExisting: MessageBoxComponent }],
     animations: [dialogFadeNgIf]
 })
-export class MessageBoxComponent extends DialogBase implements OnInit, OnChanges, AfterViewInit, OnDestroy, CssClassBuilder {
+export class MessageBoxComponent
+    extends DialogBase
+    implements OnInit, OnChanges, AfterViewInit, OnDestroy, CssClassBuilder, MessageBoxHost {
     /** Custom classes */
     @Input()
     set class(userClass: string) {
@@ -70,15 +65,6 @@ export class MessageBoxComponent extends DialogBase implements OnInit, OnChanges
     /** @hidden */
     @ViewChild('dialogWindow')
     dialogWindow: ElementRef;
-
-    /** @hidden If message box sub-components didn't receive MessageBoxConfig from Injector, MessageBoxConfig is passed
-     * from parent. This is necessary when message box has been passed as TemplateRef and created as EmbeddedView.
-     * In such case parent injector of MessageBoxComponent is the component that DECLARED the TemplateRef.
-     **/
-    @ContentChildren(MESSAGE_BOX_CONFIGURABLE_ELEMENT)
-    set messageBox(elements: QueryList<MessageBoxConfigurableElement>) {
-        elements.forEach(element => element.messageBoxConfig = this._messageBoxConfig);
-    }
 
     /** @hidden */
     private _class = '';
