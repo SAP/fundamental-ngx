@@ -1,4 +1,11 @@
 
+### [0.32.11](https://github.com/SAP/fundamental-ngx/compare/v0.32.10...v0.32.11) (2022-02-14)
+
+
+### Bug Fixes
+
+* **core:** message-box - be able to display custom icons in header ([#7700](https://github.com/SAP/fundamental-ngx/issues/7700)) ([010ccae](https://github.com/SAP/fundamental-ngx/commit/010ccaecd8f8dd4543c3d676b6d6dd9814ba72ba))
+
 ### [0.32.10](https://github.com/SAP/fundamental-ngx/compare/v0.32.9...v0.32.10) (2022-01-13)
 
 
