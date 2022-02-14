@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, ElementRef, ViewEncapsulation } from '@angular/core';
 import { canAssignAdditionalClasses, hasTabIndex } from '@fundamental-ngx/fn/cdk';
+import { ListItemTitleDirective } from '../list-item-title/list-item-title.directive';
 
 const mixinBaseListItem = hasTabIndex(canAssignAdditionalClasses(Object));
 
@@ -14,6 +15,9 @@ const mixinBaseListItem = hasTabIndex(canAssignAdditionalClasses(Object));
     }
 })
 export class ListItemComponent extends mixinBaseListItem {
+    @ContentChild(ListItemTitleDirective)
+    titleDirective?: ListItemTitleDirective;
+
     constructor(private _elementRef: ElementRef) {
         super();
     }

@@ -1,1 +1,5 @@
+<span class="fn-list__text" *ngIf="titleDirective">
+    <ng-container *ngTemplateOutlet="titleDirective.templateRef"></ng-container>
+</span>
+
 <ng-content></ng-content>
