@@ -166,19 +166,21 @@ describe('Wizard component test', () => {
         waitForElDisplayed(wizard + nextStep);
         click(wizard + nextStep);
         click(radioButtonLabel);
-        expect(getAttributeByName(radioButton, 'aria-checked')).toBe('true', 'radio button is not selected');
         pause(500);
+        expect(getAttributeByName(radioButton, 'aria-checked')).toBe('true', 'radio button is not selected');
         click(radioButtonLabel, 1);
         // pause for dialog element to be created
         pause(500);
         expect(waitForElDisplayed(dialogContainer)).toBe(true, 'dialog container did not open');
         click(cancelButton);
+        pause(500);
         expect(getAttributeByName(radioButton, 'aria-checked')).toBe('true', 'focus dissapeared');
         click(radioButtonLabel, 1);
         // pause for dialog element to be created
         pause(500);
         waitForElDisplayed(dialogContainer);
         click(continueButton);
+        pause(500);
         expect(getAttributeByName(radioButton, 'aria-checked', 1)).toBe('true', 'focus did not change');
     }, 1);
 

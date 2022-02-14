@@ -59,8 +59,8 @@
                     *ngFor="let option of vm.selectedOptions"
                     [compact]="compact"
                     [disabled]="disabled"
-                    (onCloseClick)="_handleSelect(false, option.value, true, $event)"
-                    (onRemove)="_handleSelect(false, option.value, false)"
+                    (onCloseClick)="_onTokenClick(option.value, true, $event)"
+                    (onRemove)="_onTokenClick(option.value, false)"
                 >
                     <span [innerHtml]="option.label"></span>
                 </fd-token>
@@ -102,15 +102,16 @@
             [style.minWidth]="'100%'"
         >
             <li
-                *ngFor="let option of vm.displayedOptions"
+                *ngFor="let option of vm.displayedOptions; let idx = index"
                 fd-list-item
-                (click)="dialogApprove()"
+                (click)="_onCheckboxClick(option.value, $event, idx, true)"
+                (keyup)="_onCheckboxKeyup(option.value, $event, idx)"
                 [selected]="_selectionModel.isSelected(option.value)"
             >
                 <fd-checkbox
                     [compact]="compact"
-                    (ngModelChange)="_handleSelect($event, option.value, false)"
-                    [ngModel]="_selectionModel.isSelected(option.value)"
+                    [value]="_selectionModel.isSelected(option.value)"
+                    (click)="_onCheckboxClick(option.value, $event, idx)"
                 >
                     <!-- TODO -->
                 </fd-checkbox>

@@ -117,9 +117,6 @@ describe('MultiInputComponent', () => {
 
     it('should select values', async () => {
         await fixture.whenStable();
-        spyOn(component.selectedChange, 'emit');
-        spyOn(component, 'onChange');
-        spyOn(component, '_handleSelect').and.callThrough();
         updateComponentInput('dropdownValues', ['test1', 'test2', 'foobar']);
         fixture.detectChanges();
         component.open = true;
@@ -133,9 +130,6 @@ describe('MultiInputComponent', () => {
 
     it('should de-select values', async () => {
         await fixture.whenStable();
-        spyOn(component.selectedChange, 'emit');
-        spyOn(component, 'onChange');
-        spyOn(component, '_handleSelect').and.callThrough();
         updateComponentInput('dropdownValues', ['test1', 'test2', 'foobar']);
         component.open = true;
         fixture.detectChanges();

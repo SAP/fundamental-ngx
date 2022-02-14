@@ -7,7 +7,7 @@ export class MultiInputPo extends CoreBaseComponentPo {
     activeDropdownButtons = 'button[title="value-help"]:not(:disabled)';
     activeInputs = '.fd-multi-input-field input:not(:disabled)';
     disableInputs = 'div.is-disabled';
-    options = 'fd-checkbox.ng-untouched';
+    simpleMultiInputOptions = '.fd-popover-custom-list [fd-list-item] fd-checkbox';
     expandedDropdown = '.fd-list';
     multiInputOptions = 'fd-multi-input[inputid="multiInput"] .fd-token__text span';
     buttonShowAll = 'a.fd-link';
@@ -23,6 +23,7 @@ export class MultiInputPo extends CoreBaseComponentPo {
     tokenOptions = 'div#background-ex8 .fd-token__text span';
     templateOptions = 'div#background-ex9 .fd-token__text span';
     simpleExampleTokens = 'fd-multi-input-example fd-tokenizer fd-token';
+    simpleHiddenAddonExampleTokens = 'fd-multi-input-example fd-multi-input:nth-of-type(3) fd-tokenizer fd-token';
     compactExampleTokens = 'fd-multi-input-compact-example fd-tokenizer fd-token';
     popover = '.fd-popover__popper';
     checkboxInput = this.popover + ' fd-checkbox';

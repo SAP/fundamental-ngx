@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
+import { RangeSelector } from '@fundamental-ngx/core/utils';
 
 @Component({
     selector: 'fd-table-checkboxes-example',
     templateUrl: './table-checkboxes-example.component.html'
 })
 export class TableCheckboxesExampleComponent {
+    private readonly _rangeSelector = new RangeSelector();
+
     checkboxValue = false;
     checkboxValueCompact = false;
     checkboxValueCondensed = false;
@@ -87,12 +90,15 @@ export class TableCheckboxesExampleComponent {
         }
     ];
 
-    select(index: number, checked: boolean, size: string): void {
-        this._getTable(size)[index].checked = checked;
+    select(index: number, event: PointerEvent, size: string): void {
+        // using rangeSelector utility to be able to select multiple rows while "shift" is pressed
+        const checkedToggled = !this._getTable(size)[index].checked;
+        this._rangeSelector.onRangeElementToggled(index, event);
+        this._rangeSelector.applyValueToEachInRange((idx) => (this._getTable(size)[idx].checked = checkedToggled));
         this._setValue(size);
     }
 
-    selectMaster(checked: boolean, size: string): void {
+    selectAll(checked: boolean, size: string): void {
         if (size === 'cozy') {
             this.checkboxValue = checked;
         } else if (size === 'compact') {
@@ -115,8 +121,16 @@ export class TableCheckboxesExampleComponent {
         this._getTable(size).forEach((row) => (row.checked = false));
     }
 
-    private _allSelected(size: string): boolean {
-        return !this._getTable(size).find((_row) => !_row.checked);
+    private _getSelectAllValue(size: string): boolean | null {
+        const table = this._getTable(size);
+        const checked = table.filter((row) => row.checked);
+        if (checked.length === table.length) {
+            return true;
+        } else if (!checked.length) {
+            return false;
+        }
+        // returning null to set selection state to "indeterminate"
+        return null;
     }
 
     private _getTable(size: string): any[] {
@@ -131,11 +145,11 @@ export class TableCheckboxesExampleComponent {
 
     private _setValue(size: string): void {
         if (size === 'cozy') {
-            this.checkboxValue = this._allSelected(size);
+            this.checkboxValue = this._getSelectAllValue(size);
         } else if (size === 'compact') {
-            this.checkboxValueCompact = this._allSelected(size);
+            this.checkboxValueCompact = this._getSelectAllValue(size);
         } else if (size === 'condensed') {
-            this.checkboxValueCondensed = this._allSelected(size);
+            this.checkboxValueCondensed = this._getSelectAllValue(size);
         }
     }
 }

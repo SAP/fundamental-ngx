@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
+import { RangeSelector } from '@fundamental-ngx/core/utils';
 
 @Component({
     selector: 'fd-table-semantic-example',
     templateUrl: './table-semantic-example.component.html'
 })
 export class TableSemanticExampleComponent {
-    selectMasterModel = false;
+    private readonly _rangeSelector = new RangeSelector();
+    isAllSelected = false;
 
     tableRows: any[] = [
         {
@@ -74,13 +76,16 @@ export class TableSemanticExampleComponent {
         }
     ];
 
-    select(index: number, checked: boolean): void {
-        this.tableRows[index].checked = checked;
-        this.selectMasterModel = this._allSelected();
+    select(index: number, event: PointerEvent): void {
+        // using rangeSelector utility to be able to select multiple rows while "shift" is pressed
+        const checkedToggled = !this.tableRows[index].checked;
+        this._rangeSelector.onRangeElementToggled(index, event);
+        this._rangeSelector.applyValueToEachInRange((idx) => (this.tableRows[idx].checked = checkedToggled));
+        this.isAllSelected = this._getSelectAllValue();
     }
 
-    selectMaster(checked: boolean): void {
-        this.selectMasterModel = checked;
+    selectAll(checked: boolean): void {
+        this.isAllSelected = checked;
         if (checked) {
             this._selectAll();
         } else {
@@ -96,7 +101,14 @@ export class TableSemanticExampleComponent {
         this.tableRows.forEach((row) => (row.checked = false));
     }
 
-    private _allSelected(): boolean {
-        return !this.tableRows.find((_row) => !_row.checked);
+    private _getSelectAllValue(): boolean | null {
+        const checked = this.tableRows.filter((row) => row.checked);
+        if (checked.length === this.tableRows.length) {
+            return true;
+        } else if (!checked.length) {
+            return false;
+        }
+        // returning null to set selection state to "indeterminate"
+        return null;
     }
 }

@@ -119,6 +119,11 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     }
 
     /** @hidden */
+    onOptionCheckboxClicked(event: Event): void {
+        event.stopPropagation();
+    }
+
+    /** @hidden */
     onCompleteTerm(event: AutoCompleteEvent): void {
         if (event.forceClose) {
             this.toggleSelectionByInputText(event.term);

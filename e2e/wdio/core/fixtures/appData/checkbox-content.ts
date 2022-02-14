@@ -11,11 +11,11 @@ export const acceptAllTrue = '"acceptAll": true';
 export const customLabel = 'I accept Terms and conditions';
 export const altCustomLabel = 'I accept Terms and conditions';
 export const stateClassesArr = [
-    'fd-checkbox ng-untouched',
+    'fd-checkbox',
     'fd-checkbox is-information',
     'fd-checkbox is-success',
     'fd-checkbox is-warning',
     'fd-checkbox is-error',
-    'fd-checkbox ng-untouched',
+    'fd-checkbox',
     'fd-checkbox--compact'
 ];
