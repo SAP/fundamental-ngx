@@ -3,7 +3,7 @@ import { coerceBoolean } from '@fundamental-ngx/fn/utils';
 
 @Component({
     selector: 'fn-list, [fn-list]',
-    templateUrl: './list.component.html',
+    template: '<ng-content></ng-content>',
     styleUrls: ['./list.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,

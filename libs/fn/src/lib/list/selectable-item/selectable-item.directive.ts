@@ -8,11 +8,11 @@ import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
     providers: [
         {
             provide: SelectableItemToken,
-            useExisting: SelectableDirective
+            useExisting: SelectableItemDirective
         }
     ]
 })
-export class SelectableDirective<ValueType> implements SelectableItemToken<ValueType> {
+export class SelectableItemDirective<ValueType> implements SelectableItemToken<ValueType> {
     @Input()
     @HostBinding('class.is-selected')
     set selected(value: BooleanInput) {
