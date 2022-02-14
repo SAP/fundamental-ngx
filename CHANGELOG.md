@@ -1,4 +1,11 @@
 
+### 0.33.4-rc.8 (2022-02-14)
+
+
+### Features
+
+* **core:** shift selection ([#7652](https://github.com/SAP/fundamental-ngx/issues/7652)) ([58ad230](https://github.com/SAP/fundamental-ngx/commit/58ad230d4f944612d8459016c50d202a05045b14))
+
 ### 0.33.4-rc.7 (2022-02-14)
 
 ### 0.33.4-rc.6 (2022-02-14)
