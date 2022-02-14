@@ -10,7 +10,7 @@ const mixinBaseListItem = hasTabIndex(canAssignAdditionalClasses(Object));
     changeDetection: ChangeDetectionStrategy.OnPush,
     // eslint-disable-next-line @angular-eslint/no-host-metadata-property
     host: {
-        class: `fn-list__item`
+        '[class.fn-list__item]': 'true'
     }
 })
 export class ListItemComponent extends mixinBaseListItem {

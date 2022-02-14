@@ -1,17 +1,7 @@
-<ul fn-list selectable>
+<ul fn-list selectable [selected]="selectedItems" (selectedChange)="selectedChange($event)">
     <li fn-list-group-header>group header</li>
-    <li fn-list-item selectable #listItemComponent="selectableListItem" value="1">
-        test {{ listItemComponent.getSelected() }}
-    </li>
-    <li fn-list-item>test 2</li>
-    <li fn-list-item selectable value="3">test 3</li>
-    <li fn-list-item selectable value="4">test 4</li>
+    <li fn-list-item selectable value="1">test</li>
+    <li fn-list-item selectable value="2">test 2</li>
 </ul>
 
-<fn-list selectable>
-    <fn-list-group-header> group header 2 </fn-list-group-header>
-    <fn-list-item selectable #listItem="selectableListItem" value="1"> test {{ listItem.getSelected() }} </fn-list-item>
-    <fn-list-item> test 2 </fn-list-item>
-    <fn-list-item selectable value="3"> test 3 </fn-list-item>
-    <fn-list-item selectable value="4"> test 4 </fn-list-item>
-</fn-list>
+<button (click)="item4Selectable = !item4Selectable">changeSelectable</button>

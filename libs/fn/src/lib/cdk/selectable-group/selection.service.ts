@@ -1,8 +1,8 @@
-import { Injectable, OnDestroy, QueryList } from '@angular/core';
+import { ChangeDetectorRef, Injectable, OnDestroy, QueryList } from '@angular/core';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { coerceArray } from '@angular/cdk/coercion';
 import { combineLatest, fromEvent, merge, Observable, ReplaySubject, Subject } from 'rxjs';
-import { distinctUntilChanged, filter, first, map, startWith, takeUntil, tap } from 'rxjs/operators';
+import { distinctUntilChanged, filter, first, map, shareReplay, startWith, takeUntil, tap } from 'rxjs/operators';
 import equal from 'fast-deep-equal';
 import { SelectableItemToken } from './SelectableItemToken';
 import { SelectComponentRootToken } from './SelectComponentRootToken';
@@ -10,7 +10,9 @@ import { SelectComponentRootToken } from './SelectComponentRootToken';
 @Injectable()
 export class SelectionService<ValueType = any> implements OnDestroy {
     /** @hidden */
-    private _refresh$ = new Subject<boolean>();
+    private _refresh$ = new Subject();
+    /** @hidden */
+    private _items$!: Observable<SelectableItemToken[]>;
     /** @hidden */
     private _value$ = new ReplaySubject<ValueType | ValueType[]>(1);
     /** @hidden */
@@ -18,10 +20,10 @@ export class SelectionService<ValueType = any> implements OnDestroy {
     /** @hidden */
     private _rootComponent!: SelectComponentRootToken;
     /** @hidden */
-    private _destroy$ = new Subject<boolean>();
+    private _destroy$ = new Subject();
 
     /** @hidden */
-    constructor() {
+    constructor(private changeDetectorRef: ChangeDetectorRef) {
         this._normalizedValue$ = this._value$.pipe(
             distinctUntilChanged(equal),
             map((v) => coerceArray<ValueType>(v)),
@@ -38,35 +40,22 @@ export class SelectionService<ValueType = any> implements OnDestroy {
     }
 
     /**
+     * Destroy listeners
+     */
+    destroy(): void {
+        this._destroy$.next();
+    }
+
+    /**
      * Initialize watcher for selection changes and user interactions
      * */
     initialize(queryList: QueryList<SelectableItemToken>): void {
-        const items$ = queryList.changes.pipe(
+        this._items$ = queryList.changes.pipe(
             startWith(queryList),
-            map((items: QueryList<SelectableItemToken>) => items.toArray())
+            map((items: QueryList<SelectableItemToken>) => items.toArray()),
+            shareReplay(1)
         );
-        items$
-            .pipe(
-                tap(() => this._refresh$.next(true)),
-                tap((items) => this._listenToItemsInteractions(items)),
-                takeUntil(this._destroy$)
-            )
-            .subscribe();
-        combineLatest([this._normalizedValue$, items$])
-            .pipe(
-                tap(([value, items]) => {
-                    if (value.length === 0 && items.some((itm) => itm.getSelected()) && !this._rootComponent.toggle) {
-                        const selectedValues = this._getSelectedValues(items);
-                        this._rootComponent.onChange(selectedValues);
-                        return this._value$.next(selectedValues);
-                    }
-                    items.forEach((button) => {
-                        button.setSelected(value.includes(button.value));
-                    });
-                }),
-                takeUntil(this._destroy$)
-            )
-            .subscribe();
+        this.listenToItemInteractions();
     }
 
     /**
@@ -76,10 +65,47 @@ export class SelectionService<ValueType = any> implements OnDestroy {
         this._value$.next(v);
     }
 
+    /**
+     * Start listening for item interactions. Will destroy() first.
+     * Will silently continue if service was not initialized first.
+     * */
+    listenToItemInteractions(): void {
+        this.destroy();
+        if (this._items$) {
+            this._items$
+                .pipe(
+                    map((items) => items.filter((itm) => itm.selectable !== false)),
+                    tap(() => this._refresh$.next()),
+                    tap((items) => this._listenToItemsInteractions(items)),
+                    takeUntil(this._destroy$)
+                )
+                .subscribe();
+            combineLatest([this._normalizedValue$, this._items$])
+                .pipe(
+                    tap(([value, items]) => {
+                        if (
+                            value.length === 0 &&
+                            items.some((itm) => itm.getSelected()) &&
+                            !this._rootComponent.toggle
+                        ) {
+                            const selectedValues = this._getSelectedValues(items);
+                            this._rootComponent.onChange(selectedValues);
+                            return this._value$.next(selectedValues);
+                        }
+                        items.forEach((item) => {
+                            item.setSelected(value.includes(item.value));
+                        });
+                        this.changeDetectorRef.detectChanges();
+                    }),
+                    takeUntil(this._destroy$)
+                )
+                .subscribe();
+        }
+    }
+
     /** @hidden */
     ngOnDestroy(): void {
-        this._destroy$.next(true);
-        this._destroy$.complete();
+        this._destroy$.next();
     }
 
     /** @hidden */
