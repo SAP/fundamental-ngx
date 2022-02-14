@@ -69,6 +69,10 @@ export const ROUTES: Routes = [
                     import('./component-docs/segmented-button/segmented-button-docs.module').then(
                         (m) => m.SegmentedButtonDocsModule
                     )
+            },
+            {
+                path: 'avatar',
+                loadChildren: () => import('./component-docs/avatar/avatar-docs.module').then((m) => m.AvatarDocsModule)
             }
         ]
     }

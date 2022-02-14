@@ -15,6 +15,7 @@ import { SegmentedButtonModule } from '@fundamental-ngx/fn/segmented-button';
 import { UtilsModule } from '@fundamental-ngx/fn/utils';
 import { CdkModule } from '@fundamental-ngx/fn/cdk';
 import { GenericTagModule } from '@fundamental-ngx/fn/generic-tag';
+import { AvatarModule } from '@fundamental-ngx/fn/avatar';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -28,6 +29,7 @@ import { GenericTagModule } from '@fundamental-ngx/fn/generic-tag';
         SearchModule,
         SliderModule,
         TagModule,
+        AvatarModule,
         ProgressBarModule,
         GenericTagModule,
         SegmentedButtonModule,

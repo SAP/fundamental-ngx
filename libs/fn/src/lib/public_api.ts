@@ -13,3 +13,4 @@ export * from '@fundamental-ngx/fn/progress-bar';
 export * from '@fundamental-ngx/fn/segmented-button';
 export * from '@fundamental-ngx/fn/utils';
 export * from '@fundamental-ngx/fn/cdk';
+export * from '@fundamental-ngx/fn/avatar';

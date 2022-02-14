@@ -124,6 +124,7 @@
             "@fundamental-ngx/core/wizard": ["libs/core/src/lib/wizard/index.ts"],
             "@fundamental-ngx/datetime-adapter": ["libs/datetime-adapter/src/index.ts"],
             "@fundamental-ngx/fn": ["libs/fn/src/lib/index.ts"],
+            "@fundamental-ngx/fn/avatar": ["libs/fn/src/lib/avatar/index.ts"],
             "@fundamental-ngx/fn/button": ["libs/fn/src/lib/button/index.ts"],
             "@fundamental-ngx/fn/cdk": ["libs/fn/src/lib/cdk/index.ts"],
             "@fundamental-ngx/fn/checkbox": ["libs/fn/src/lib/checkbox/index.ts"],
