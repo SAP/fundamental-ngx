@@ -6,6 +6,8 @@ import { ListGroupHeaderComponent } from './list-group-header/list-group-header.
 import { SelectableItemDirective } from './selectable-item/selectable-item.directive';
 import { SelectableListDirective } from './selectable-list/selectable-list.directive';
 import { ListItemTitleDirective } from './list-item-title/list-item-title.directive';
+import { ListItemActionsDirective } from './list-item-actions/list-item-actions.directive';
+import { ListItemEndDirective } from './list-item-end/list-item-end.directive';
 
 @NgModule({
     imports: [CommonModule],
@@ -15,7 +17,9 @@ import { ListItemTitleDirective } from './list-item-title/list-item-title.direct
         ListGroupHeaderComponent,
         SelectableListDirective,
         SelectableItemDirective,
-        ListItemTitleDirective
+        ListItemTitleDirective,
+        ListItemActionsDirective,
+        ListItemEndDirective
     ],
     declarations: [
         ListComponent,
@@ -23,7 +27,9 @@ import { ListItemTitleDirective } from './list-item-title/list-item-title.direct
         ListGroupHeaderComponent,
         SelectableListDirective,
         SelectableItemDirective,
-        ListItemTitleDirective
+        ListItemTitleDirective,
+        ListItemActionsDirective,
+        ListItemEndDirective
     ]
 })
 export class ListModule {}

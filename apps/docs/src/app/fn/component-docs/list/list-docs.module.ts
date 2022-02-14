@@ -7,6 +7,7 @@ import { ListHeaderComponent } from './list-header/list-header.component';
 import { ListDocsComponent } from './list-docs.component';
 import { examples } from './examples';
 import { ListModule } from '@fundamental-ngx/fn/list';
+import { ButtonModule } from '@fundamental-ngx/fn/button';
 
 const routes: Routes = [
     {
@@ -20,7 +21,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ListModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ListModule, ButtonModule],
     exports: [RouterModule],
     declarations: [examples, ListDocsComponent, ListHeaderComponent]
 })

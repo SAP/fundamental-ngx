@@ -1,8 +1,8 @@
 import { Directive, TemplateRef } from '@angular/core';
 
 @Directive({
-    selector: '[fnListItemTitle]'
+    selector: '[fnListItemEnd]'
 })
-export class ListItemTitleDirective {
+export class ListItemEndDirective {
     constructor(readonly templateRef: TemplateRef<any>) {}
 }

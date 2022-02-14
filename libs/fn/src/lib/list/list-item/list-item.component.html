@@ -3,3 +3,8 @@
 </span>
 
 <ng-content></ng-content>
+
+<div class="fn-list__end-container" *ngIf="actionsDirective || endDirective">
+    <ng-container *ngTemplateOutlet="endDirective?.templateRef"></ng-container>
+    <ng-container *ngTemplateOutlet="actionsDirective?.templateRef"></ng-container>
+</div>

@@ -13,9 +13,9 @@ import {
 import { SelectableItemToken, SelectComponentRootToken, SelectionService } from '@fundamental-ngx/fn/cdk';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
 import { coerceBoolean } from '@fundamental-ngx/fn/utils';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { takeUntil, tap } from 'rxjs/operators';
 
 @Directive({
     selector: 'fn-list[selectable], [fn-list][selectable]',
@@ -33,8 +33,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     ]
 })
 export class SelectableListDirective<ValueType>
-    implements SelectComponentRootToken<ValueType>, ControlValueAccessor, OnInit, AfterViewInit, OnDestroy
-{
+    implements SelectComponentRootToken<ValueType>, ControlValueAccessor, OnInit, AfterViewInit, OnDestroy {
     @Input()
     set selectable(isSelectable: BooleanInput) {
         this.selectable$.next(coerceBooleanProperty(isSelectable));
