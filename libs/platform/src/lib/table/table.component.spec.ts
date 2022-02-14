@@ -262,10 +262,12 @@ describe('TableComponent internal', () => {
 
         const calculateTableElementsMetaData = (): void => {
             tableHeaderCells = fixture.debugElement.queryAll(
-                By.css('.fdp-table__header .fd-table__row .fd-table__cell')
+                By.css('.fdp-table__header .fd-table__row .fd-table__cell:not(.fd-table__cell--mock)')
             );
             tableBodyRows = fixture.debugElement.queryAll(By.css('.fdp-table__body .fd-table__row'));
-            tableRowCells2DArray = tableBodyRows.map((row) => row.queryAll(By.css('.fd-table__cell')));
+            tableRowCells2DArray = tableBodyRows.map((row) =>
+                row.queryAll(By.css('.fd-table__cell:not(.fd-table__cell--mock)'))
+            );
         };
 
         it('should create host element', () => {
