@@ -10,7 +10,7 @@ import { SelectComponentRootToken } from './SelectComponentRootToken';
 @Injectable()
 export class SelectionService<ValueType = any> implements OnDestroy {
     /** @hidden */
-    private _refresh$ = new Subject();
+    private _refresh$ = new Subject<boolean>();
     /** @hidden */
     private _value$ = new ReplaySubject<ValueType | ValueType[]>(1);
     /** @hidden */
@@ -18,7 +18,7 @@ export class SelectionService<ValueType = any> implements OnDestroy {
     /** @hidden */
     private _rootComponent!: SelectComponentRootToken;
     /** @hidden */
-    private _destroy$ = new Subject();
+    private _destroy$ = new Subject<boolean>();
 
     /** @hidden */
     constructor() {
@@ -47,7 +47,7 @@ export class SelectionService<ValueType = any> implements OnDestroy {
         );
         items$
             .pipe(
-                tap(() => this._refresh$.next()),
+                tap(() => this._refresh$.next(true)),
                 tap((items) => this._listenToItemsInteractions(items)),
                 takeUntil(this._destroy$)
             )
@@ -78,7 +78,8 @@ export class SelectionService<ValueType = any> implements OnDestroy {
 
     /** @hidden */
     ngOnDestroy(): void {
-        this._destroy$.next();
+        this._destroy$.next(true);
+        this._destroy$.complete();
     }
 
     /** @hidden */
