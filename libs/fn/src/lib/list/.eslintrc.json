@@ -33,11 +33,11 @@
                     "error",
                     {
                         "animations": 5,
-                        "styles": 3,
+                        "styles": 15,
                         "template": 3
                     }
                 ],
-                "@angular-eslint/prefer-output-readonly": ["warn"],
+                "@angular-eslint/prefer-output-readonly": ["error"],
                 "@angular-eslint/use-component-selector": ["error"]
             }
         },
