@@ -201,7 +201,7 @@
 		<a name="tristate" class="tsd-anchor"></a>
 		<h3>tristate</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">tristate<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+		<div class="tsd-signature tsd-kind-icon">tristate<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
 			</ul>
@@ -216,7 +216,7 @@
 		<a name="tristateSelectable" class="tsd-anchor"></a>
 		<h3>tristate<wbr>Selectable</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">tristate<wbr>Selectable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
+		<div class="tsd-signature tsd-kind-icon">tristate<wbr>Selectable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
 			</ul>
@@ -255,6 +255,47 @@
 			</li>
 		</ul>
 	</section>
+	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+		<a name="value" class="tsd-anchor"></a>
+		<h3>value</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> value<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> value<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Current selection state of the checkbox component</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+			</li>
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Current selection state of the checkbox component</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>value: <span class="tsd-signature-type">any</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Outputs</h2>
@@ -280,7 +321,7 @@
 		<a name="checkboxState" class="tsd-anchor"></a>
 		<h3>checkbox<wbr>State</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">checkbox<wbr>State<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">fdCheckboxTypes</span></div>
+		<div class="tsd-signature tsd-kind-icon">checkbox<wbr>State<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FdCheckboxTypes</span></div>
 		<aside class="tsd-sources">
 			<ul>
 			</ul>
@@ -310,7 +351,7 @@
 		<a name="elementRef" class="tsd-anchor"></a>
 		<h3>element<wbr>Ref</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">element<wbr>Ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<div class="tsd-signature tsd-kind-icon">element<wbr>Ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 		</aside>
 	</section>
@@ -338,7 +379,7 @@
 		</div>
 	</section>
 </section>
-<section class="tsd-panel-group tsd-member-group ">
+<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
 	<h2>Methods</h2>
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
 		<a name="_detectChanges" class="tsd-anchor"></a>
@@ -356,78 +397,6 @@
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
 						<p>Method to trigger change detection in component</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="handleInputKeyUp" class="tsd-anchor"></a>
-		<h3>handle<wbr>Input<wbr>Key<wbr>Up</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">handle<wbr>Input<wbr>Key<wbr>Up<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">KeyboardEvent</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Space event should be handled separately, when used inside list component and in firefox browser</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>event: <span class="tsd-signature-type">KeyboardEvent</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="onBlur" class="tsd-anchor"></a>
-		<h3>on<wbr>Blur</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">on<wbr>Blur<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Handles blur event</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="onFocus" class="tsd-anchor"></a>
-		<h3>on<wbr>Focus</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">on<wbr>Focus<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Handles focus event</p>
 					</div>
 				</div>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
