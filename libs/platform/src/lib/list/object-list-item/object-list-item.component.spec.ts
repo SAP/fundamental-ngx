@@ -83,11 +83,11 @@ describe('ObjectListItemComponent', () => {
         });
     });
 
-    it('Object list item has role as list item', () => {
-        const listItems = fixture.debugElement.queryAll(By.css('fdp-object-list-item'));
+    it('Object list item has role as listbox item', () => {
+        const listItems = fixture.debugElement.queryAll(By.css('fdp-object-list-item .fd-object-list'));
         fixture.detectChanges();
         listItems.forEach((listElem) => {
-            expect(listElem.nativeElement.getAttribute('role')).toEqual('listitem');
+            expect(listElem.nativeElement.getAttribute('role')).toEqual('listbox');
         });
     });
 
@@ -388,10 +388,10 @@ describe('Object  List Item Component with DataSource', () => {
         expect(component).toBeTruthy();
     });
 
-    it('Should Object list container with role as list', () => {
+    it('Should Object list container with role as listbox', () => {
         const listContainer = fixture.debugElement.query(By.css('ul'));
         fixture.detectChanges();
-        expect(listContainer.nativeElement.getAttribute('role')).toEqual('list');
+        expect(listContainer.nativeElement.getAttribute('role')).toEqual('listbox');
     });
 
     it('Should contain fd-list and fd-object-list class in list', () => {
