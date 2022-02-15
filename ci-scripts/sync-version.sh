@@ -10,7 +10,7 @@ NEW_VERSION=$(node -p "require('./package.json').version")
 echo "Updating packages.json under dist/libs with version ${NEW_VERSION}"
 
 # As Angular version listed as peerDependency it should be ^X.0.0 to support any minor version
-ANGULAR_VERSION=$(node -p "'^' + require('./package.json').dependencies['@angular/core'].match(/\d+/).concat('.0.0')" )
+ANGULAR_VERSION=$(node -p "'^' + require('./package.json').dependencies['@angular/core'].match(/\d+/)[0].concat('.0.0')" )
 RXJS_VERSION=$(node -p "require('./package.json').dependencies['rxjs']")
 FAST_DEEP_EQUAL_VERSION=$(node -p "require('./package.json').dependencies['fast-deep-equal']")
 FDSTYLES_VERSION=$(node -p "require('./package.json').dependencies['fundamental-styles']")
