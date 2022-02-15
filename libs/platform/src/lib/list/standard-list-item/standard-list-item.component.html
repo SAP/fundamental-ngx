@@ -170,7 +170,6 @@
     >
         <fd-checkbox
             *ngIf="selectionMode === 'multi'"
-            role="checkbox"
             (click)="$event.stopPropagation()"
             [compact]="contentDensity | isCompactDensity"
             [(ngModel)]="_selected"
