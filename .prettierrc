@@ -5,9 +5,5 @@
     "tabWidth": 4,
     "semi": true,
     "bracketSpacing": true,
-    "trailingComma": "none",
-    "importOrder": ["<THIRD_PARTY_MODULES>", "^@fundamental-ngx/(.*)$", "^[./]"],
-    "importOrderSeparation": true,
-    "importOrderSortSpecifiers": true,
-    "importOrderParserPlugins": ["[\"decorators\", { \"decoratorsBeforeExport\": true }]", "classProperties", "@babel/plugin-transform-typescript"]
+    "trailingComma": "none"
 }

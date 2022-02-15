@@ -1,8 +1,6 @@
 import { ChangeDetectionStrategy, Component, ContentChild, ElementRef, ViewEncapsulation } from '@angular/core';
 import { canAssignAdditionalClasses, hasTabIndex } from '@fundamental-ngx/fn/cdk';
-import { ListItemTitleDirective } from '../list-item-title/list-item-title.directive';
-import { ListItemActionsDirective } from '../list-item-actions/list-item-actions.directive';
-import { ListItemEndDirective } from '../list-item-end/list-item-end.directive';
+import { ListItemTitleDirective, ListItemActionsDirective, ListItemEndDirective } from '../structural-directives';
 
 const mixinBaseListItem = hasTabIndex(canAssignAdditionalClasses(Object));
 
