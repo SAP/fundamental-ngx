@@ -1,10 +1,10 @@
-<span class="fn-list__text" *ngIf="titleDirective">
-    <ng-container *ngTemplateOutlet="titleDirective.templateRef"></ng-container>
+<span class="fn-list__text" *ngIf="titleProvider">
+    <ng-container *ngTemplateOutlet="titleProvider.templateRef"></ng-container>
 </span>
 
 <ng-content></ng-content>
 
-<div class="fn-list__end-container" *ngIf="actionsDirective || endDirective" (click)="$event.stopPropagation()">
-    <ng-container *ngTemplateOutlet="endDirective?.templateRef"></ng-container>
-    <ng-container *ngTemplateOutlet="actionsDirective?.templateRef"></ng-container>
+<div class="fn-list__end-container" *ngIf="actionsProvider || endProvider" (click)="$event.stopPropagation()">
+    <ng-container *ngTemplateOutlet="endProvider?.templateRef"></ng-container>
+    <ng-container *ngTemplateOutlet="actionsProvider?.templateRef"></ng-container>
 </div>

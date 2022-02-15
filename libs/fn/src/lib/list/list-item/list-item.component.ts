@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, ContentChild, ElementRef, ViewEncapsulation } from '@angular/core';
 import { canAssignAdditionalClasses, hasTabIndex } from '@fundamental-ngx/fn/cdk';
-import { ListItemTitleDirective, ListItemActionsDirective, ListItemEndDirective } from '../structural-directives';
+import { FN_LIST_ACTIONS, FN_LIST_END, FN_LIST_TITLE } from '../list.tokens';
+import { TemplateRefProviderToken } from '@fundamental-ngx/fn/utils';
 
 const mixinBaseListItem = hasTabIndex(canAssignAdditionalClasses(Object));
 
@@ -14,12 +15,12 @@ const mixinBaseListItem = hasTabIndex(canAssignAdditionalClasses(Object));
     }
 })
 export class ListItemComponent extends mixinBaseListItem {
-    @ContentChild(ListItemTitleDirective)
-    titleDirective?: ListItemTitleDirective;
-    @ContentChild(ListItemActionsDirective)
-    actionsDirective?: ListItemActionsDirective;
-    @ContentChild(ListItemEndDirective)
-    endDirective?: ListItemEndDirective;
+    @ContentChild(FN_LIST_TITLE)
+    titleProvider?: TemplateRefProviderToken<void>;
+    @ContentChild(FN_LIST_ACTIONS)
+    actionsProvider?: TemplateRefProviderToken<void>;
+    @ContentChild(FN_LIST_END)
+    endProvider?: TemplateRefProviderToken<void>;
 
     constructor(private _elementRef: ElementRef) {
         super();
