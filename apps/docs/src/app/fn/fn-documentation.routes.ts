@@ -73,6 +73,13 @@ export const ROUTES: Routes = [
             {
                 path: 'avatar',
                 loadChildren: () => import('./component-docs/avatar/avatar-docs.module').then((m) => m.AvatarDocsModule)
+            },
+            {
+                path: 'object-status',
+                loadChildren: () =>
+                    import('./component-docs/object-status/object-status-docs.module').then(
+                        (m) => m.ObjectStatusDocsModule
+                    )
             }
         ]
     }
