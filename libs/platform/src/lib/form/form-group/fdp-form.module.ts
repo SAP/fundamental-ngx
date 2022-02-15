@@ -10,9 +10,18 @@ import { FormGroupComponent } from './form-group.component';
 import { FormFieldComponent } from './form-field/form-field.component';
 import { InputMessageGroupWithTemplate } from '../input-message-group-with-template/input-message-group-with-template.component';
 import { FormFieldGroupComponent } from './form-field-group/form-field-group.component';
+import { FormFieldControlExtrasComponent } from './form-field-extras/form-field-extras.component';
+
+const EXPORTABLE_DECLARATIONS = [
+    FormGroupComponent,
+    FormFieldComponent,
+    InputMessageGroupWithTemplate,
+    FormFieldGroupComponent,
+    FormFieldControlExtrasComponent
+];
 
 @NgModule({
-    declarations: [FormGroupComponent, FormFieldComponent, InputMessageGroupWithTemplate, FormFieldGroupComponent],
+    declarations: [...EXPORTABLE_DECLARATIONS],
     imports: [
         CommonModule,
         FormsModule,
@@ -22,6 +31,6 @@ import { FormFieldGroupComponent } from './form-field-group/form-field-group.com
         PopoverModule,
         IconModule
     ],
-    exports: [FormGroupComponent, FormFieldComponent, InputMessageGroupWithTemplate, FormFieldGroupComponent]
+    exports: [...EXPORTABLE_DECLARATIONS]
 })
 export class FdpFormGroupModule {}

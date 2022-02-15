@@ -239,7 +239,7 @@ describe('Advanced Textarea', () => {
         textareaComponent.growing = false;
         const keyboardEvent = createKeyboardEvent('keydown', DELETE, 'Delete');
         textareaComponent.handleBackPress(keyboardEvent);
-        await wait(fixture);
+        await fixture.whenStable();
 
         expect(host.form.get('basicTextarea').value).toBe('abcde');
     });
