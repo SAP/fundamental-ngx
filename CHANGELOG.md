@@ -1,4 +1,11 @@
 
+### 0.33.4-rc.12 (2022-02-15)
+
+
+### Bug Fixes
+
+* **platform:** compensate label offset when additional form-field content is added ([#7723](https://github.com/SAP/fundamental-ngx/issues/7723)) ([bf00077](https://github.com/SAP/fundamental-ngx/commit/bf0007781168fd875e6347c341e86bfe3fc02be6))
+
 ### 0.33.4-rc.11 (2022-02-15)
 
 ### 0.33.4-rc.10 (2022-02-15)
