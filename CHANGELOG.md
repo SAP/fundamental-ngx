@@ -1,4 +1,11 @@
 
+### 0.33.4-rc.13 (2022-02-15)
+
+
+### Bug Fixes
+
+* **core,platform,fn:** dist version ([#7757](https://github.com/SAP/fundamental-ngx/issues/7757)) ([17fb551](https://github.com/SAP/fundamental-ngx/commit/17fb55147421745e3e0874dfb99c469ed252a3fd))
+
 ### 0.33.4-rc.12 (2022-02-15)
 
 
