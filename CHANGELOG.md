@@ -1,4 +1,11 @@
 
+### 0.33.4-rc.14 (2022-02-15)
+
+
+### Features
+
+* **core:** generate avatar initials from alttext ([#7726](https://github.com/SAP/fundamental-ngx/issues/7726)) ([c8ab0df](https://github.com/SAP/fundamental-ngx/commit/c8ab0dfeee88fa095506fea8945dd9ae95b41ac8))
+
 ### 0.33.4-rc.13 (2022-02-15)
 
 
