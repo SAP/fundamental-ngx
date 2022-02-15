@@ -1,7 +1,7 @@
 import { Inject, Injectable, InjectionToken, isDevMode, LOCALE_ID, Optional } from '@angular/core';
 import moment, { Locale, LongDateFormatSpec, Moment, MomentFormatSpecification, MomentInput } from 'moment';
 
-import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
 import { Nullable } from '@fundamental-ngx/core/shared';
 
 function range<T>(length: number, mapFn: (index: number) => T): T[] {
@@ -200,6 +200,9 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
     parse(value: any, parseFormat: MomentFormatSpecification = ''): Moment | null {
         if (value && typeof value === 'string') {
             return this._createMomentDate(value, parseFormat, this.locale);
+        } else if (value instanceof FdDate) {
+            // FdDate instance may be incorrectly parsed by Moment.js
+            value = value.toString();
         }
 
         return value ? this._createMomentDate(value).locale(this.locale) : null;

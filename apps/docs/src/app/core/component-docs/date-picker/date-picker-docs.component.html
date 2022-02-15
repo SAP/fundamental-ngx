@@ -34,6 +34,13 @@
 <description>
     To use another locale it is needed to provide translated aria labels and additional locale data if it's required by
     used DatetimeAdapter.
+    <br />
+    Since FdDatetimeAdapter implementation relies on native date api for parsing and formatting dates, it might not work
+    correctly with some of the locales out of the box. We recommend switching to the DayjsDatetimeAdapter for more
+    flexibility.
+    <br />
+    Please check examples and documentation on:
+    <b> <a routerLink="/core/dayjs-datetime-adapter" target="_blank"> DayJS date time adapter </a> </b>.
 </description>
 <component-example>
     <fd-datepicker-i18n-example></fd-datepicker-i18n-example>

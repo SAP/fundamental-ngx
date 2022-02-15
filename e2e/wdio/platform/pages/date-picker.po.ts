@@ -29,6 +29,7 @@ export class DatePicker extends BaseComponentPo {
         `//span[text()="${index}"]/ancestor::td[not (contains(@class, 'fd-calendar__item--other-month'))]`;
 
     yearInCalendarByValue = (year: number): string => `[data-fd-calendar-year="${year}"]`;
+    monthInCalendarByValue = (month: number): string => `[data-fd-calendar-month="${month}"]`;
 
     open(): void {
         super.open(this.url);

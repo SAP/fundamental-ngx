@@ -8,7 +8,7 @@ import objectSupport from 'dayjs/plugin/objectSupport';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 
-import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
 import { Nullable } from '@fundamental-ngx/core/shared';
 
 function range<T>(length: number, mapFn: (index: number) => T): T[] {
@@ -219,6 +219,9 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
     parse(value: any, parseFormat: string = ''): Dayjs | null {
         if (value && typeof value === 'string') {
             return this._createDayjsDate(value, parseFormat);
+        } else if (value instanceof FdDate) {
+            // FdDate instance may be incorrectly parsed by DayJS
+            value = value.toString();
         }
 
         return value ? this._createDayjsDate(value).locale(this.locale) : null;

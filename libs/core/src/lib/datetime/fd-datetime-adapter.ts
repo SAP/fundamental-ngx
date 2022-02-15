@@ -194,6 +194,10 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     }
 
     parse(value: any, parseFormat: Intl.DateTimeFormatOptions = {}): FdDate | null {
+        if (!value && value !== 0) {
+            return null;
+        }
+
         if (value instanceof FdDate) {
             return this.clone(value);
         }

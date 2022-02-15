@@ -323,6 +323,11 @@ describe('FdDatetimeAdapter', () => {
         expect(d).toBeDefined();
         expect(d?.isDateValid()).toBeFalse();
     });
+    it('should parse empty value to null', () => {
+        expect(adapter.parse('')).toBe(null);
+        expect(adapter.parse(null)).toBe(null);
+        expect(adapter.parse(undefined)).toBe(null);
+    });
 
     it('should format', () => {
         expect(adapter.format(new FdDate(2017, 1, 1), {})).toEqual('1/1/2017');
