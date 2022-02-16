@@ -9,6 +9,8 @@ import { API_FILES } from '../../api-files';
 import { ListBylineHeaderComponent } from './list-byline-header/list-byline-header.component';
 import { ListBylineDocsComponent } from './list-byline-docs.component';
 import { examples } from './examples';
+import { AvatarModule } from '@fundamental-ngx/fn/avatar';
+import { ObjectStatusModule } from '@fundamental-ngx/fn/object-status';
 
 const routes: Routes = [
     {
@@ -22,7 +24,15 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ListModule, ButtonModule, CheckboxModule],
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        ListModule,
+        ButtonModule,
+        CheckboxModule,
+        AvatarModule,
+        ObjectStatusModule
+    ],
     exports: [RouterModule],
     declarations: [examples, ListBylineDocsComponent, ListBylineHeaderComponent]
 })

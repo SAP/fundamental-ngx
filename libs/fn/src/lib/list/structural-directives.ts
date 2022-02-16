@@ -1,6 +1,13 @@
 import { Directive } from '@angular/core';
 import { TemplateRefDirective } from '@fundamental-ngx/fn/utils';
-import { FN_LIST_ACTIONS, FN_LIST_POSTFIX, FN_LIST_ICON, FN_LIST_PREFIX, FN_LIST_TITLE } from './list.tokens';
+import {
+    FN_LIST_ACTIONS,
+    FN_LIST_POSTFIX,
+    FN_LIST_ICON,
+    FN_LIST_PREFIX,
+    FN_LIST_TITLE,
+    FN_LIST_BYLINE
+} from './list.tokens';
 
 @Directive({
     selector: '[fnListItemPrefix]',
@@ -45,6 +52,17 @@ export class ListItemActionsDirective extends TemplateRefDirective<void> {}
     ]
 })
 export class ListItemTitleDirective extends TemplateRefDirective<void> {}
+
+@Directive({
+    selector: '[fnListItemByline]',
+    providers: [
+        {
+            provide: FN_LIST_BYLINE,
+            useExisting: ListItemBylineDirective
+        }
+    ]
+})
+export class ListItemBylineDirective extends TemplateRefDirective<void> {}
 
 @Directive({
     selector: '[fnListItemPostfix]',

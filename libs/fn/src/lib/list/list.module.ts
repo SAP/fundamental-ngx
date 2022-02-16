@@ -10,7 +10,8 @@ import {
     ListItemPostfixDirective,
     ListItemIconDirective,
     ListItemPrefixDirective,
-    ListItemTitleDirective
+    ListItemTitleDirective,
+    ListItemBylineDirective
 } from './structural-directives';
 import { ListItemCheckboxDirective } from './list-item-checkbox.directive';
 
@@ -27,7 +28,8 @@ import { ListItemCheckboxDirective } from './list-item-checkbox.directive';
         ListItemPostfixDirective,
         ListItemIconDirective,
         ListItemCheckboxDirective,
-        ListItemPrefixDirective
+        ListItemPrefixDirective,
+        ListItemBylineDirective
     ],
     declarations: [
         ListComponent,
@@ -40,7 +42,8 @@ import { ListItemCheckboxDirective } from './list-item-checkbox.directive';
         ListItemPostfixDirective,
         ListItemIconDirective,
         ListItemCheckboxDirective,
-        ListItemPrefixDirective
+        ListItemPrefixDirective,
+        ListItemBylineDirective
     ]
 })
 export class ListModule {}
