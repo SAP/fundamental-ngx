@@ -136,27 +136,10 @@ describe('Checkbox test Component', () => {
     });
 
     it('should have classes applied', () => {
-        const fdpElem = fixture.debugElement.query(By.css('fdp-checkbox'));
-        const fdElem = fixture.debugElement.query(By.css('fd-checkbox'));
         const checkboxInput = fixture.debugElement.query(By.css('input'));
         const checkboxLable = fixture.debugElement.query(By.css('.fd-checkbox__label'));
 
-        // fdp-checkbox
-        expect(fdpElem.nativeElement.getAttribute('ng-reflect-name')).toEqual('checkbox-0');
-        expect(fdpElem.nativeElement.getAttribute('ng-reflect-label')).toEqual('checkbox0');
-        expect(fdpElem.nativeElement.getAttribute('ng-reflect-content-density')).toEqual('compact');
-        expect(fdpElem.nativeElement.getAttribute('ng-reflect-id')).toEqual('checkbox-0');
-        expect(fdpElem.nativeElement.getAttribute('ng-reflect-tristate')).toBeTruthy();
-
-        // fd-checkbox.
-        expect(fdElem.nativeElement.getAttribute('ng-reflect-name')).toEqual('checkbox-0');
-        expect(fdElem.nativeElement.getAttribute('ng-reflect-label')).toEqual('checkbox0');
-        expect(fdElem.nativeElement.getAttribute('ng-reflect-input-id')).toEqual('checkbox-0');
-        expect(fdElem.nativeElement.getAttribute('ng-reflect-compact')).toBeTruthy();
-        expect(fdElem.nativeElement.getAttribute('ng-reflect-tristate')).toBeTruthy();
-
         // Input Element
-        expect(checkboxInput.nativeElement.getAttribute('ng-reflect-name')).toEqual('checkbox-0');
         expect(checkboxInput.nativeElement.getAttribute('type')).toEqual('checkbox');
         expect(checkboxInput.nativeElement.getAttribute('id')).toEqual('checkbox-0');
         expect(checkboxLable.nativeElement.classList.contains('fd-checkbox__label--compact')).toBeTruthy();
@@ -431,23 +414,9 @@ describe('Checkbox test Component with Template driven form', () => {
     });
 
     it('should have classes applied', () => {
-        const fdpElem = fixture.debugElement.query(By.css('fdp-checkbox'));
-        const fdElem = fixture.debugElement.query(By.css('fd-checkbox'));
         const checkboxInput = fixture.debugElement.query(By.css('input'));
         const checkboxLable = fixture.debugElement.query(By.css('.fd-checkbox__label'));
 
-        // fdp-checkbox
-        expect(fdpElem.nativeElement.getAttribute('ng-reflect-name')).toEqual('checkbox-0');
-        expect(fdpElem.nativeElement.getAttribute('ng-reflect-label')).toEqual('checkbox0');
-        expect(fdpElem.nativeElement.getAttribute('ng-reflect-content-density')).toEqual('compact');
-
-        // fd-checkbox.
-        expect(fdElem.nativeElement.getAttribute('ng-reflect-name')).toEqual('checkbox-0');
-        expect(fdElem.nativeElement.getAttribute('ng-reflect-label')).toEqual('checkbox0');
-        expect(fdElem.nativeElement.getAttribute('ng-reflect-compact')).toBeTruthy();
-
-        // Input Element
-        expect(checkboxInput.nativeElement.getAttribute('ng-reflect-name')).toEqual('checkbox-0');
         expect(checkboxInput.nativeElement.getAttribute('type')).toEqual('checkbox');
         expect(checkboxLable.nativeElement.classList.contains('fd-checkbox__label--compact')).toBeTruthy();
         expect(checkboxInput.nativeElement.classList.contains('fd-checkbox--compact')).toBeTruthy();

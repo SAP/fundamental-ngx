@@ -7,7 +7,7 @@
                 [dataSource]="dataSource"
                 (selectionChange)="onSelect1($event)"
             ></fdp-combobox>
-            <p>Selected: {{ selectedItem1 }}</p>
+            <fdp-form-field-extras> Selected: {{ selectedItem1 }} </fdp-form-field-extras>
         </fdp-form-field>
 
         <fdp-form-field id="compact" label="Compact" [column]="1">
@@ -18,7 +18,7 @@
                 [dataSource]="dataSource"
                 (selectionChange)="onSelect2($event)"
             ></fdp-combobox>
-            <p>Selected: {{ selectedItem2 }}</p>
+            <fdp-form-field-extras> Selected: {{ selectedItem2 }} </fdp-form-field-extras>
         </fdp-form-field>
 
         <fdp-form-field id="readonly" label="ReadOnly" [column]="3">
@@ -30,7 +30,7 @@
                 [readonly]="true"
                 (selectionChange)="onSelect3($event)"
             ></fdp-combobox>
-            <p>Selected: {{ selectedItem3 }}</p>
+            <fdp-form-field-extras> Selected: {{ selectedItem3 }} </fdp-form-field-extras>
         </fdp-form-field>
 
         <fdp-form-field id="disabled" label="Disabled" [column]="3">
@@ -42,7 +42,7 @@
                 [disabled]="true"
                 (selectionChange)="onSelect4($event)"
             ></fdp-combobox>
-            <p>Selected: {{ selectedItem4 }}</p>
+            <fdp-form-field-extras> Selected: {{ selectedItem4 }} </fdp-form-field-extras>
         </fdp-form-field>
 
         <fdp-form-field id="max-height" label="Max Height" [column]="2">
@@ -53,7 +53,7 @@
                 maxHeight="400px"
                 (selectionChange)="onSelect5($event)"
             ></fdp-combobox>
-            <p>Selected: {{ selectedItem5 }}</p>
+            <fdp-form-field-extras> Selected: {{ selectedItem5 }} </fdp-form-field-extras>
         </fdp-form-field>
 
         <fdp-form-field
@@ -69,7 +69,7 @@
                 [autoResize]="true"
                 (selectionChange)="onSelect6($event)"
             ></fdp-combobox>
-            <p>Selected: {{ selectedItem6 }}</p>
+            <fdp-form-field-extras> Selected: {{ selectedItem6 }} </fdp-form-field-extras>
         </fdp-form-field>
     </fdp-form-group>
 </div>

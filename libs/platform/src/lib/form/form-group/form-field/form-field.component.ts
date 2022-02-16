@@ -4,6 +4,8 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ContentChild,
+    ElementRef,
     EventEmitter,
     forwardRef,
     Inject,
@@ -43,6 +45,8 @@ import {
     FORM_GROUP_CHILD_FIELD_TOKEN
 } from '../constants';
 import { normalizeColumnLayout, generateColumnClass } from '../helpers';
+import { FormFieldControlExtrasComponent } from './../form-field-extras/form-field-extras.component';
+import { InputMessageGroupWithTemplate } from '../../input-message-group-with-template/input-message-group-with-template.component';
 
 const formFieldProvider: Provider = {
     provide: FormField,
@@ -280,6 +284,17 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     @ViewChild('renderer', { static: true })
     renderer: TemplateRef<any>;
 
+    /** @hidden */
+    @ContentChild(FormFieldControlExtrasComponent, { read: ElementRef })
+    formFieldExtras?: ElementRef<HTMLElement>;
+
+    /** @hidden */
+    @ViewChild('labelCol') labelCol?: ElementRef<HTMLDivElement>;
+
+    /** @hidden */
+    @ViewChild(InputMessageGroupWithTemplate, { read: ElementRef })
+    inputMessageGroup: ElementRef<HTMLElement>;
+
     /**
      * Child FormFieldControl
      */
@@ -313,7 +328,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     protected _required = false;
 
     /** @hidden */
-    protected _destroyed = new Subject<void>();
+    protected _destroyed$ = new Subject<void>();
 
     /** @hidden */
     private _isColumnLayoutEnabled = false;
@@ -347,6 +362,32 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
     /** @hidden */
     private _gapColumnLayout: ColumnLayout;
+
+    /** @hidden whether label and control are vertically aligned */
+    private get _isHorizontalAlignment(): boolean {
+        if (!this.inputMessageGroup || !this.labelCol) {
+            return false;
+        }
+        const inputMessageGroupY = this.inputMessageGroup.nativeElement.getBoundingClientRect().y;
+        const labelColRect = this.labelCol.nativeElement.getBoundingClientRect();
+        const labelColBottomY = labelColRect.y + labelColRect.height;
+        return labelColBottomY > inputMessageGroupY;
+    }
+
+    /**
+     * @hidden
+     * Sum of extra heights inside form control and formFieldExtras.
+     * Label will be shifted by this number in order to be properly aligned with the control
+     */
+    get _controlExtrasHeightPx(): number | null {
+        if (this.noLabelLayout || !this._isHorizontalAlignment) {
+            // proceed only if 1. there's a label; 2. control has vertical alignment
+            return null;
+        }
+        return (
+            (this.formFieldExtras?.nativeElement.offsetHeight ?? 0 + this.control?.extraContentHeightPx ?? 0) || null
+        );
+    }
 
     /** @hidden */
     constructor(
@@ -395,6 +436,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         if (this._isColumnLayoutEnabled) {
             this._responsiveBreakpointsService
                 .observeBreakpointByConfig(this._responsiveBreakPointConfig)
+                .pipe(takeUntil(this._destroyed$))
                 .subscribe((breakPointName) => this._updateLayout(breakPointName));
         }
 
@@ -416,8 +458,8 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     /** @hidden */
     ngOnDestroy(): void {
         this._removeFromFormGroup();
-        this._destroyed.next();
-        this._destroyed.complete();
+        this._destroyed$.next();
+        this._destroyed$.complete();
     }
 
     /** @hidden */
@@ -436,7 +478,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
         this.control = formFieldControl;
 
-        formFieldControl.stateChanges.pipe(startWith(null), takeUntil(this._destroyed)).subscribe(() => {
+        formFieldControl.stateChanges.pipe(startWith(null), takeUntil(this._destroyed$)).subscribe(() => {
             this._updateControlProperties();
             // need to call explicitly detectChanges() instead of markForCheck before the
             // modified validation state of the control passes over checked phase
@@ -446,7 +488,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
         // Refresh UI when value changes
         if (formFieldControl?.ngControl) {
-            formFieldControl.ngControl.valueChanges.pipe(takeUntil(this._destroyed)).subscribe(() => {
+            formFieldControl.ngControl.valueChanges.pipe(takeUntil(this._destroyed$)).subscribe(() => {
                 // this.onChange.emit('valueChanges');
                 this._cd.markForCheck();
             });

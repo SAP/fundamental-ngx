@@ -23,7 +23,7 @@ import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/f
 import { DOWN_ARROW, TAB, SPACE, ENTER, UP_ARROW, ESCAPE } from '@angular/cdk/keycodes';
 import { SelectionModel } from '@angular/cdk/collections';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { map, startWith, distinctUntilChanged, first } from 'rxjs/operators';
 
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
@@ -40,7 +40,8 @@ import {
     FocusEscapeDirection,
     KeyUtil,
     FocusTrapService,
-    uuidv4
+    uuidv4,
+    RangeSelector
 } from '@fundamental-ngx/core/utils';
 
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
@@ -316,6 +317,9 @@ export class MultiInputComponent
     private _subscriptions = new Subscription();
 
     /** @hidden */
+    private readonly _rangeSelector = new RangeSelector();
+
+    /** @hidden */
     onChange: (value: any) => void = () => {};
 
     /** @hidden */
@@ -359,8 +363,10 @@ export class MultiInputComponent
         }
 
         this._subscriptions.add(
-            this._searchTermCtrl.valueChanges.subscribe((searchTerm) => {
+            this._searchTermCtrl.valueChanges.pipe(distinctUntilChanged()).subscribe((searchTerm) => {
                 this.searchTermChange.emit(searchTerm);
+                // resetting existing selection state, if any
+                this._rangeSelector.reset();
             })
         );
         this._subscriptions.add(
@@ -499,13 +505,44 @@ export class MultiInputComponent
     }
 
     /** @hidden */
-    _handleSelect(checked: any, value: any, resetSearch = true, event?: MouseEvent): void {
-        if (event) {
-            event.preventDefault(); // prevent this function from being called twice when checkbox updates
+    _onCheckboxKeyup(value: any, event: KeyboardEvent, index: number): void {
+        if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
+            this._onCheckboxClick(value, event, index);
         }
+    }
 
-        const previousLength = this.selected.length;
+    /** @hidden */
+    async _onCheckboxClick(
+        value: any,
+        event: PointerEvent | KeyboardEvent,
+        index: number,
+        isListItem = false
+    ): Promise<void> {
+        const toggledSelection = !this._selectionModel.isSelected(value);
+        this._rangeSelector.onRangeElementToggled(index, event);
+        const sub = this.viewModel$.pipe(first()).subscribe((vm) => {
+            this._rangeSelector.applyValueToEachInRange((idx) =>
+                this._handleSelect(toggledSelection, vm.displayedOptions[idx].value, false)
+            );
+        });
+        this._subscriptions.add(sub);
+        if (isListItem) {
+            this.openChangeHandle(false);
+        } else {
+            // stop propagation on the checkbox so event doesn't reach the list item
+            event.stopPropagation();
+        }
+    }
 
+    /** @hidden */
+    _onTokenClick(value: any, resetSearch: boolean, event?: PointerEvent): void {
+        event?.preventDefault(); // prevent this function from being called twice when checkbox updates
+        this._handleSelect(false, value, resetSearch);
+    }
+
+    /** @hidden */
+    _handleSelect(checked: any, value: any, resetSearch = true): void {
+        const previousLength = this._selectionModel.selected.length;
         if (checked) {
             this._selectionModel.select(value);
         } else {
@@ -525,7 +562,6 @@ export class MultiInputComponent
         this._propagateChange();
     }
 
-    /** @hidden */
     _handleInputKeydown(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, DOWN_ARROW) && !this.mobile) {
             if (event.altKey) {

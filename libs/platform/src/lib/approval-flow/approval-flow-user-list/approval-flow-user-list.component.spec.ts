@@ -5,6 +5,7 @@ import { ApprovalUser } from '../interfaces';
 import { PlatformApprovalFlowModule } from '../approval-flow.module';
 import { ApprovalFlowUserListComponent } from './approval-flow-user-list.component';
 import { SimpleChanges } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ApprovalFlowUserListComponent', () => {
     let component: ApprovalFlowUserListComponent;
@@ -12,7 +13,7 @@ describe('ApprovalFlowUserListComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [PlatformApprovalFlowModule]
+            imports: [PlatformApprovalFlowModule, RouterTestingModule]
         }).compileComponents();
     });
 

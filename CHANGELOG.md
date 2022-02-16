@@ -1,4 +1,61 @@
 
+### [0.33.4](https://github.com/SAP/fundamental-ngx/compare/v0.33.4-rc.15...v0.33.4) (2022-02-15)
+
+### 0.33.4-rc.15 (2022-02-15)
+
+### 0.33.4-rc.14 (2022-02-15)
+
+
+### Features
+
+* **core:** generate avatar initials from alttext ([#7726](https://github.com/SAP/fundamental-ngx/issues/7726)) ([c8ab0df](https://github.com/SAP/fundamental-ngx/commit/c8ab0dfeee88fa095506fea8945dd9ae95b41ac8))
+
+### 0.33.4-rc.13 (2022-02-15)
+
+
+### Bug Fixes
+
+* **core,platform,fn:** dist version ([#7757](https://github.com/SAP/fundamental-ngx/issues/7757)) ([17fb551](https://github.com/SAP/fundamental-ngx/commit/17fb55147421745e3e0874dfb99c469ed252a3fd))
+
+### 0.33.4-rc.12 (2022-02-15)
+
+
+### Bug Fixes
+
+* **platform:** compensate label offset when additional form-field content is added ([#7723](https://github.com/SAP/fundamental-ngx/issues/7723)) ([bf00077](https://github.com/SAP/fundamental-ngx/commit/bf0007781168fd875e6347c341e86bfe3fc02be6))
+
+### 0.33.4-rc.11 (2022-02-15)
+
+### 0.33.4-rc.10 (2022-02-15)
+
+### 0.33.4-rc.9 (2022-02-14)
+
+### 0.33.4-rc.8 (2022-02-14)
+
+
+### Features
+
+* **core:** shift selection ([#7652](https://github.com/SAP/fundamental-ngx/issues/7652)) ([58ad230](https://github.com/SAP/fundamental-ngx/commit/58ad230d4f944612d8459016c50d202a05045b14))
+
+### 0.33.4-rc.7 (2022-02-14)
+
+### 0.33.4-rc.6 (2022-02-14)
+
+
+### Bug Fixes
+
+* **core:** message-box - be able to display custom icons in header ([#7700](https://github.com/SAP/fundamental-ngx/issues/7700)) ([15ed431](https://github.com/SAP/fundamental-ngx/commit/15ed431df9a68586fb39acf21f0c5c8526582c83))
+
+### 0.33.4-rc.5 (2022-02-14)
+
+### 0.33.4-rc.4 (2022-02-13)
+
+### 0.33.4-rc.3 (2022-02-13)
+
+### 0.33.4-rc.2 (2022-02-13)
+
+### 0.33.4-rc.1 (2022-02-13)
+
 ### 0.33.4-rc.0 (2022-02-11)
 
 

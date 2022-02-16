@@ -3,7 +3,11 @@
     <thead fd-table-header>
         <tr fd-table-row>
             <th fd-table-cell>
-                <fd-checkbox [ngModel]="checkboxValue" (ngModelChange)="selectMaster($event, 'cozy')"></fd-checkbox>
+                <fd-checkbox
+                    [tristate]="true"
+                    [ngModel]="checkboxValue"
+                    (ngModelChange)="selectAll($event, 'cozy')"
+                ></fd-checkbox>
             </th>
             <th fd-table-cell>Column 1</th>
             <th fd-table-cell>Column 2</th>
@@ -14,7 +18,7 @@
     <tbody fd-table-body>
         <tr *ngFor="let row of tableRows; let i = index" fd-table-row [attr.aria-selected]="row.checked">
             <td fd-table-cell>
-                <fd-checkbox [ngModel]="row.checked" (ngModelChange)="select(i, $event, 'cozy')"></fd-checkbox>
+                <fd-checkbox [value]="row.checked" (click)="select(i, $event, 'cozy')"></fd-checkbox>
             </td>
             <td fd-table-cell>
                 <a fd-link href="#">{{ row.column1 }}</a>
@@ -34,9 +38,10 @@
         <tr fd-table-row>
             <th fd-table-cell>
                 <fd-checkbox
+                    [tristate]="true"
                     [compact]="true"
                     [ngModel]="checkboxValueCompact"
-                    (ngModelChange)="selectMaster($event, 'compact')"
+                    (ngModelChange)="selectAll($event, 'compact')"
                 ></fd-checkbox>
             </th>
             <th fd-table-cell>Column 1</th>
@@ -55,8 +60,8 @@
             <td fd-table-cell>
                 <fd-checkbox
                     [compact]="true"
-                    [ngModel]="tableRowsCompact[i].checked"
-                    (ngModelChange)="select(i, $event, 'compact')"
+                    [value]="tableRowsCompact[i].checked"
+                    (click)="select(i, $event, 'compact')"
                 ></fd-checkbox>
             </td>
             <td fd-table-cell>
@@ -78,9 +83,10 @@
         <tr fd-table-row>
             <th fd-table-cell>
                 <fd-checkbox
+                    [tristate]="true"
                     [compact]="true"
                     [ngModel]="checkboxValueCondensed"
-                    (ngModelChange)="selectMaster($event, 'condensed')"
+                    (ngModelChange)="selectAll($event, 'condensed')"
                 ></fd-checkbox>
             </th>
             <th fd-table-cell>Column 1</th>
@@ -99,8 +105,8 @@
             <td fd-table-cell>
                 <fd-checkbox
                     [compact]="true"
-                    [ngModel]="tableRowsCondensed[i].checked"
-                    (ngModelChange)="select(i, $event, 'condensed')"
+                    [value]="tableRowsCondensed[i].checked"
+                    (click)="select(i, $event, 'condensed')"
                 ></fd-checkbox>
             </td>
             <td fd-table-cell>

@@ -3,7 +3,11 @@
         <tr fd-table-row>
             <th fd-table-cell fd-table-status-indicator></th>
             <th fd-table-cell>
-                <fd-checkbox [ngModel]="selectMasterModel" (ngModelChange)="selectMaster($event)"></fd-checkbox>
+                <fd-checkbox
+                    [tristate]="true"
+                    [ngModel]="isAllSelected"
+                    (ngModelChange)="selectAll($event)"
+                ></fd-checkbox>
             </th>
             <th fd-table-cell>Column 1</th>
             <th fd-table-cell>Column 2</th>
@@ -15,7 +19,7 @@
         <tr *ngFor="let row of tableRows; let i = index" fd-table-row [attr.aria-selected]="tableRows[i].checked">
             <td fd-table-cell fd-table-status-indicator [status]="row.status"></td>
             <td fd-table-cell>
-                <fd-checkbox [ngModel]="tableRows[i].checked" (ngModelChange)="select(i, $event)"></fd-checkbox>
+                <fd-checkbox [value]="row.checked" (click)="select(i, $event)"></fd-checkbox>
             </td>
             <td fd-table-cell>
                 <a fd-link href="#">{{ row.column1 }}</a>
