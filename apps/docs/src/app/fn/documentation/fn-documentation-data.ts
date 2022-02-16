@@ -21,7 +21,6 @@ export const components: SectionInterfaceContent[] = [
     { url: 'fn/select', name: 'Select' },
     { url: 'fn/slider', name: 'Slider' },
     { url: 'fn/switch', name: 'Switch' },
-    { url: 'fn/radio', name: 'Radio button' },
     { url: 'fn/segmented-button', name: 'Segmented Button' },
     {
         name: 'List',
