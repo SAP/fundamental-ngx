@@ -264,4 +264,21 @@ describe('MultiInputComponent', () => {
         // displaying only those options that were "seen" as values
         expect(component.selected).toEqual(['foo1', 'baz']);
     });
+    it('should selectAll values  selectAllItems call with true and deselect all items it call with false', async () => {
+        await fixture.whenStable();
+        spyOn(component.allItemSelectedChange, 'emit');
+
+        updateComponentInput('dropdownValues', ['test1', 'test2', 'test3']);
+        component.selectAllItems(true);
+        fixture.detectChanges();
+
+        expect(component.selected).toEqual(['test1', 'test2', 'test3']);
+        expect(component.allItemSelectedChange).toHaveBeenCalled();
+
+        component.selectAllItems(false);
+        fixture.detectChanges();
+
+        expect(component.selected).toEqual([]);
+        expect(component.allItemSelectedChange).toHaveBeenCalled();
+    });
 });
