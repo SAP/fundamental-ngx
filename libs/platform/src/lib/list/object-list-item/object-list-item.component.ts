@@ -2,7 +2,6 @@ import {
     ChangeDetectionStrategy,
     Component,
     ContentChildren,
-    ElementRef,
     forwardRef,
     Input,
     QueryList,
@@ -12,7 +11,6 @@ import { ColorAccent } from '@fundamental-ngx/core/utils';
 
 import { BaseListItem, StatusType } from '../base-list-item';
 import { ObjectListItemRowComponent } from './object-list-item-row.component';
-import { ListConfig } from '../list.config';
 
 @Component({
     selector: 'fdp-object-list-item',
