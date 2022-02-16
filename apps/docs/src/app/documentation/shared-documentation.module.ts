@@ -6,7 +6,6 @@ import { SchemaModule } from '../schema/schema.module';
 import { COMPONENT_SCHEMAS } from '../core/component-docs/schemas';
 import { SectionsToolbarComponent } from './core-helpers/sections-toolbar/sections-toolbar.component';
 import { ToolbarDocsComponent } from './core-helpers/toolbar/toolbar.component';
-import { SearchPipe } from './core-helpers/pipes/search.pipe';
 
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -21,7 +20,7 @@ import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
 /** PROVIDES DEPENDENCIES REQUIRED TO BUILD DOCUMENTATION SHELL */
 
 @NgModule({
-    declarations: [SearchPipe, ToolbarDocsComponent, SectionsToolbarComponent, SortByPipe, FilterPipe],
+    declarations: [ToolbarDocsComponent, SectionsToolbarComponent, SortByPipe, FilterPipe],
     imports: [
         MenuModule,
         FormsModule,
@@ -34,14 +33,6 @@ import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
         MarkdownModule.forChild(),
         SchemaModule.forRoot(COMPONENT_SCHEMAS)
     ],
-    exports: [
-        SearchPipe,
-        CommonModule,
-        SchemaModule,
-        ToolbarDocsComponent,
-        SectionsToolbarComponent,
-        SortByPipe,
-        FilterPipe
-    ]
+    exports: [CommonModule, SchemaModule, ToolbarDocsComponent, SectionsToolbarComponent, SortByPipe, FilterPipe]
 })
 export class SharedDocumentationModule {}

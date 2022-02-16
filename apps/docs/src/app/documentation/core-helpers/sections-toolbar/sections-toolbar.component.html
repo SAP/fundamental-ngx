@@ -7,7 +7,8 @@
             buttonType="transparent"
             [button]="true"
             [disabled]="false"
-            [(ngModel)]="search"
+            [ngModel]="search"
+            (ngModelChange)="onSearchChange($event)"
             (addOnButtonClicked)="search = ''"
         >
         </fd-input-group>
@@ -16,7 +17,11 @@
         <fd-side-nav>
             <div fd-side-nav-main>
                 <ul fd-nested-list [textOnly]="true">
-                    <li fd-nested-list-item *ngFor="let section of sections" [expanded]="true">
+                    <li
+                        fd-nested-list-item
+                        *ngFor="let section of displayedSections; trackBy: trackBySection"
+                        [expanded]="true"
+                    >
                         <div fd-nested-list-content>
                             <a fd-nested-list-link>
                                 <span fd-nested-list-title>{{ section.header }}</span>
@@ -24,9 +29,8 @@
                             <button fd-nested-list-expand-icon></button>
                         </div>
                         <ul fd-nested-list>
-                            <ng-container *ngFor="let item of section.content">
-                                <ng-container *ngIf="item.subItems; then trueBlock; else elseBlock"></ng-container>
-                                <ng-template #trueBlock>
+                            <ng-container *ngFor="let item of section.content; trackBy: trackBySectionContent">
+                                <ng-container *ngIf="item.subItems; else listItemTpl">
                                     <li fd-nested-list-item [expanded]="true">
                                         <div fd-nested-list-content>
                                             <a fd-nested-list-link>
@@ -35,28 +39,16 @@
                                             <button fd-nested-list-expand-icon></button>
                                         </div>
                                         <ul fd-nested-list>
-                                            <ng-container *ngFor="let subItem of item.subItems">
-                                                <li
-                                                    fd-nested-list-item
-                                                    *ngIf="subItem.url === 'home' || (subItem | docsSearch: search)"
-                                                >
-                                                    <a
-                                                        tabindex="0"
-                                                        role="button"
-                                                        fd-nested-list-link
-                                                        routerLinkActive="is-selected"
-                                                        [routerLink]="'/' + subItem.url"
-                                                        (keypress)="onKeypressHandler($event)"
-                                                    >
-                                                        <span fd-nested-list-title>{{ subItem.name }}</span>
-                                                    </a>
-                                                </li>
+                                            <ng-container
+                                                *ngFor="let subItem of item.subItems; trackBy: trackBySectionContent"
+                                                [ngTemplateOutlet]="listItemTpl"
+                                            >
                                             </ng-container>
                                         </ul>
                                     </li>
-                                </ng-template>
-                                <ng-template #elseBlock>
-                                    <li fd-nested-list-item *ngIf="item.url === 'home' || (item | docsSearch: search)">
+                                </ng-container>
+                                <ng-template #listItemTpl>
+                                    <li fd-nested-list-item>
                                         <a
                                             fd-nested-list-link
                                             [routerLink]="'/' + item.url"
