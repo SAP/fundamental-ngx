@@ -1,6 +1,17 @@
 import { Directive } from '@angular/core';
 import { TemplateRefDirective } from '@fundamental-ngx/fn/utils';
-import { FN_LIST_ACTIONS, FN_LIST_END, FN_LIST_ICON, FN_LIST_TITLE } from './list.tokens';
+import { FN_LIST_ACTIONS, FN_LIST_END, FN_LIST_ICON, FN_LIST_PREFIX, FN_LIST_TITLE } from './list.tokens';
+
+@Directive({
+    selector: '[fnListItemPrefix]',
+    providers: [
+        {
+            provide: FN_LIST_PREFIX,
+            useExisting: ListItemPrefixDirective
+        }
+    ]
+})
+export class ListItemPrefixDirective extends TemplateRefDirective<void> {}
 
 @Directive({
     selector: '[fnListItemIcon]',

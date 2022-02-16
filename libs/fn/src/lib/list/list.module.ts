@@ -9,6 +9,7 @@ import {
     ListItemActionsDirective,
     ListItemEndDirective,
     ListItemIconDirective,
+    ListItemPrefixDirective,
     ListItemTitleDirective
 } from './structural-directives';
 import { ListItemCheckboxDirective } from './list-item-checkbox.directive';
@@ -25,7 +26,8 @@ import { ListItemCheckboxDirective } from './list-item-checkbox.directive';
         ListItemActionsDirective,
         ListItemEndDirective,
         ListItemIconDirective,
-        ListItemCheckboxDirective
+        ListItemCheckboxDirective,
+        ListItemPrefixDirective
     ],
     declarations: [
         ListComponent,
@@ -37,7 +39,8 @@ import { ListItemCheckboxDirective } from './list-item-checkbox.directive';
         ListItemActionsDirective,
         ListItemEndDirective,
         ListItemIconDirective,
-        ListItemCheckboxDirective
+        ListItemCheckboxDirective,
+        ListItemPrefixDirective
     ]
 })
 export class ListModule {}

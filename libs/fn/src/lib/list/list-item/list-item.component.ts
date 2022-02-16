@@ -15,10 +15,18 @@ import {
     SelectableItemToken,
     SelectionService
 } from '@fundamental-ngx/fn/cdk';
-import { FN_LIST_ACTIONS, FN_LIST_CHECKBOX, FN_LIST_END, FN_LIST_ICON, FN_LIST_TITLE } from '../list.tokens';
+import {
+    FN_LIST_ACTIONS,
+    FN_LIST_CHECKBOX,
+    FN_LIST_END,
+    FN_LIST_ICON,
+    FN_LIST_PREFIX,
+    FN_LIST_TITLE
+} from '../list.tokens';
 import { coerceBoolean, TemplateRefProviderToken } from '@fundamental-ngx/fn/utils';
 import { CheckboxContext } from '../list-item-checkbox.directive';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { ListComponent } from '../list/list.component';
 
 const mixinBaseListItem = hasTabIndex(canAssignAdditionalClasses(Object));
 
@@ -64,6 +72,8 @@ export class ListItemComponent extends mixinBaseListItem {
 
     @ContentChild(FN_LIST_CHECKBOX)
     checkboxProvider?: TemplateRefProviderToken<CheckboxContext>;
+    @ContentChild(FN_LIST_PREFIX)
+    prefixProvider?: TemplateRefProviderToken<void>;
     @ContentChild(FN_LIST_ICON)
     iconProvider?: TemplateRefProviderToken<void>;
     @ContentChild(FN_LIST_TITLE)
@@ -79,9 +89,14 @@ export class ListItemComponent extends mixinBaseListItem {
     constructor(
         @Optional() private selectionService: SelectionService,
         @Optional() @Inject(SelectableItemToken) private selectableItem: SelectableItemToken,
+        @Inject(ListComponent) private listComponent: ListComponent,
         private _elementRef: ElementRef<HTMLElement>
     ) {
         super();
+    }
+
+    get byline(): boolean {
+        return this.listComponent.byline;
     }
 
     get checkboxContext(): CheckboxContext {
