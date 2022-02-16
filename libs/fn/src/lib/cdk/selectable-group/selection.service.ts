@@ -1,8 +1,8 @@
-import { ChangeDetectorRef, Injectable, OnDestroy, QueryList } from '@angular/core';
+import { Injectable, OnDestroy, QueryList } from '@angular/core';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { coerceArray } from '@angular/cdk/coercion';
 import { combineLatest, fromEvent, merge, Observable, ReplaySubject, Subject } from 'rxjs';
-import { distinctUntilChanged, filter, first, map, shareReplay, startWith, takeUntil, tap } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, shareReplay, startWith, takeUntil, tap } from 'rxjs/operators';
 import equal from 'fast-deep-equal';
 import { SelectableItemToken } from './SelectableItemToken';
 import { SelectComponentRootToken } from './SelectComponentRootToken';
@@ -21,15 +21,20 @@ export class SelectionService<ValueType = any> implements OnDestroy {
     private _rootComponent!: SelectComponentRootToken;
     /** @hidden */
     private _destroy$ = new Subject();
+    /** @hidden */
+    private _clear$ = new Subject();
+    /** @hidden */
+    private _value: ValueType[] = [];
 
     /** @hidden */
-    constructor(private changeDetectorRef: ChangeDetectorRef) {
+    constructor() {
         this._normalizedValue$ = this._value$.pipe(
             distinctUntilChanged(equal),
             map((v) => coerceArray<ValueType>(v)),
             map((value) => (this._rootComponent.multiple ? value : [value[0]])),
             map((coerced: ValueType[]) => coerced.filter(Boolean))
         );
+        this._normalizedValue$.pipe(takeUntil(this._destroy$)).subscribe((val) => (this._value = val));
     }
 
     /**
@@ -40,10 +45,10 @@ export class SelectionService<ValueType = any> implements OnDestroy {
     }
 
     /**
-     * Destroy listeners
+     * Clear listeners
      */
-    destroy(): void {
-        this._destroy$.next();
+    clear(): void {
+        this._clear$.next();
     }
 
     /**
@@ -70,14 +75,15 @@ export class SelectionService<ValueType = any> implements OnDestroy {
      * Will silently continue if service was not initialized first.
      * */
     listenToItemInteractions(): void {
-        this.destroy();
+        this.clear();
+        const unsubscribe$ = merge(this._destroy$, this._clear$);
         if (this._items$) {
             this._items$
                 .pipe(
                     map((items) => items.filter((itm) => itm.selectable !== false)),
                     tap(() => this._refresh$.next()),
                     tap((items) => this._listenToItemsInteractions(items)),
-                    takeUntil(this._destroy$)
+                    takeUntil(unsubscribe$)
                 )
                 .subscribe();
             combineLatest([this._normalizedValue$, this._items$])
@@ -95,9 +101,8 @@ export class SelectionService<ValueType = any> implements OnDestroy {
                         items.forEach((item) => {
                             item.setSelected(value.includes(item.value));
                         });
-                        this.changeDetectorRef.detectChanges();
                     }),
-                    takeUntil(this._destroy$)
+                    takeUntil(unsubscribe$)
                 )
                 .subscribe();
         }
@@ -106,6 +111,20 @@ export class SelectionService<ValueType = any> implements OnDestroy {
     /** @hidden */
     ngOnDestroy(): void {
         this._destroy$.next();
+    }
+
+    selectItem(item: SelectableItemToken<ValueType>): void {
+        const val: ValueType[] = [item.value, ...this._value];
+        const properValues = this._getProperValues(val);
+        this._value$.next(properValues);
+        this._rootComponent.onChange(properValues);
+    }
+
+    deselectItem(item: SelectableItemToken<ValueType>): void {
+        const val: ValueType[] = this._value.filter((v) => v !== item.value);
+        const properValues = this._getProperValues(val);
+        this._value$.next(properValues);
+        this._rootComponent.onChange(properValues);
     }
 
     /** @hidden */
@@ -131,24 +150,12 @@ export class SelectionService<ValueType = any> implements OnDestroy {
 
     /** @hidden */
     private _itemClicked(item: SelectableItemToken): void {
-        this._value$
-            .pipe(
-                first(),
-                map((val) => coerceArray(val).filter(Boolean)),
-                tap((currentValue) => {
-                    const wasSelected = currentValue.includes(item.value);
-                    let val: ValueType[];
-                    if (wasSelected) {
-                        val = currentValue.filter((v) => v !== item.value);
-                    } else {
-                        val = [item.value, ...currentValue];
-                    }
-                    const properValues = this._getProperValues(val);
-                    this._value$.next(properValues);
-                    this._rootComponent.onChange(properValues);
-                })
-            )
-            .subscribe();
+        const wasSelected = this._value.includes(item.value);
+        if (wasSelected) {
+            this.deselectItem(item);
+        } else {
+            this.selectItem(item);
+        }
     }
 
     /** @hidden */
