@@ -10,7 +10,7 @@ export const MULTI_INPUT_COMPONENT = new InjectionToken<string[]>('MultiInputCom
 export interface MultiInputInterface extends MobileMode {
     selected: any[];
     openChange: EventEmitter<boolean>;
-    allItemSelectedChange: EventEmitter<boolean>;
+    allItemsSelectedChange: EventEmitter<boolean>;
 
     dialogApprove(): void;
 

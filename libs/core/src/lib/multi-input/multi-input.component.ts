@@ -272,7 +272,7 @@ export class MultiInputComponent
 
     /** Event emitted, when the multi input's all item checked or not */
     @Output()
-    readonly allItemSelectedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+    readonly allItemsSelectedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** @hidden */
     @ViewChild(PopoverComponent)
@@ -372,7 +372,7 @@ export class MultiInputComponent
         this._subscriptions.add(
             this._getViewModel()
                 .pipe(map((viewModel) => !viewModel.displayedOptions.some((c) => !c.isSelected)))
-                .subscribe((allItemSelected) => this.allItemSelectedChange.emit(allItemSelected))
+                .subscribe((allItemsSelected) => this.allItemsSelectedChange.emit(allItemsSelected))
         );
     }
 
