@@ -796,17 +796,13 @@ export class MultiInputComponent
                 const selected = this.selected.map((c) => this._getValueAndLabel(c, optionItems));
                 // not using "searchTerm" value from combineLatest as it will be wrong for late subscribers, if any
                 const searchTerm = this._searchTermCtrl.value;
-                let displayedOptions = optionItems;
-                // if (displayedOptions.length > 0)
-                {
-                    const filtered = this.filterFn(
-                        optionItems.map((c) => c.item),
-                        searchTerm
-                    );
-                    displayedOptions = (Array.isArray(filtered) ? filtered : []).map((item) =>
-                        this._getOptionItem(item)
-                    );
-                }
+                const filtered = this.filterFn(
+                    optionItems.map((c) => c.item),
+                    searchTerm
+                );
+                const displayedOptions = (Array.isArray(filtered) ? filtered : []).map((item) =>
+                    this._getOptionItem(item)
+                );
                 displayedOptions.forEach((c) => (c.isSelected = selected.findIndex((d) => d.value === c.value) > -1));
                 return { selectedOptions: selected, displayedOptions };
             })
