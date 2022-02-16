@@ -10,7 +10,7 @@ import { SelectComponentRootToken } from './SelectComponentRootToken';
 @Injectable()
 export class SelectionService<ValueType = any> implements OnDestroy {
     /** @hidden */
-    private _refresh$ = new Subject();
+    private _refresh$ = new Subject<void>();
     /** @hidden */
     private _items$!: Observable<SelectableItemToken[]>;
     /** @hidden */
@@ -20,9 +20,9 @@ export class SelectionService<ValueType = any> implements OnDestroy {
     /** @hidden */
     private _rootComponent!: SelectComponentRootToken;
     /** @hidden */
-    private _destroy$ = new Subject();
+    private _destroy$ = new Subject<void>();
     /** @hidden */
-    private _clear$ = new Subject();
+    private _clear$ = new Subject<void>();
     /** @hidden */
     private _value: ValueType[] = [];
 
