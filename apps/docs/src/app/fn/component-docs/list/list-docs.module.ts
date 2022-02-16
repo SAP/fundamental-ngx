@@ -8,6 +8,7 @@ import { ListDocsComponent } from './list-docs.component';
 import { examples } from './examples';
 import { ListModule } from '@fundamental-ngx/fn/list';
 import { ButtonModule } from '@fundamental-ngx/fn/button';
+import { CheckboxModule } from '@fundamental-ngx/fn/checkbox';
 
 const routes: Routes = [
     {
@@ -21,7 +22,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ListModule, ButtonModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ListModule, ButtonModule, CheckboxModule],
     exports: [RouterModule],
     declarations: [examples, ListDocsComponent, ListHeaderComponent]
 })

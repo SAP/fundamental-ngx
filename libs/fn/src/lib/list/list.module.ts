@@ -5,7 +5,13 @@ import { ListItemComponent } from './list-item/list-item.component';
 import { ListGroupHeaderComponent } from './list-group-header/list-group-header.component';
 import { SelectableItemDirective } from './selectable-item/selectable-item.directive';
 import { SelectableListDirective } from './selectable-list/selectable-list.directive';
-import { ListItemTitleDirective, ListItemActionsDirective, ListItemEndDirective } from './structural-directives';
+import {
+    ListItemActionsDirective,
+    ListItemEndDirective,
+    ListItemIconDirective,
+    ListItemTitleDirective
+} from './structural-directives';
+import { ListItemCheckboxDirective } from './list-item-checkbox.directive';
 
 @NgModule({
     imports: [CommonModule],
@@ -17,7 +23,9 @@ import { ListItemTitleDirective, ListItemActionsDirective, ListItemEndDirective 
         SelectableItemDirective,
         ListItemTitleDirective,
         ListItemActionsDirective,
-        ListItemEndDirective
+        ListItemEndDirective,
+        ListItemIconDirective,
+        ListItemCheckboxDirective
     ],
     declarations: [
         ListComponent,
@@ -27,7 +35,9 @@ import { ListItemTitleDirective, ListItemActionsDirective, ListItemEndDirective 
         SelectableItemDirective,
         ListItemTitleDirective,
         ListItemActionsDirective,
-        ListItemEndDirective
+        ListItemEndDirective,
+        ListItemIconDirective,
+        ListItemCheckboxDirective
     ]
 })
 export class ListModule {}

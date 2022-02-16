@@ -33,7 +33,8 @@ import { takeUntil, tap } from 'rxjs/operators';
     ]
 })
 export class SelectableListDirective<ValueType>
-    implements SelectComponentRootToken<ValueType>, ControlValueAccessor, OnInit, AfterViewInit, OnDestroy {
+    implements SelectComponentRootToken<ValueType>, ControlValueAccessor, OnInit, AfterViewInit, OnDestroy
+{
     @Input()
     set selectable(isSelectable: BooleanInput) {
         this.selectable$.next(coerceBooleanProperty(isSelectable));
@@ -70,7 +71,7 @@ export class SelectableListDirective<ValueType>
                     if (selectable && viewInit) {
                         this.selectionService.initialize(this.items);
                     } else {
-                        this.selectionService.destroy();
+                        this.selectionService.clear();
                     }
                 }),
                 takeUntil(this._destroy$)

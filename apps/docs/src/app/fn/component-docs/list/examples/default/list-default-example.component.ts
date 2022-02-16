@@ -6,8 +6,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListDefaultExampleComponent {
-    item4Selectable = false;
-    selectedItems = ['1', '2'];
+    selectedItems = ['1'];
     isSelected = false;
 
     selectedChange($event: string[] | string): void {
