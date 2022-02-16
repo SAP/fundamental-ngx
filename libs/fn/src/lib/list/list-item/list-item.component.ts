@@ -18,7 +18,7 @@ import {
 import {
     FN_LIST_ACTIONS,
     FN_LIST_CHECKBOX,
-    FN_LIST_END,
+    FN_LIST_POSTFIX,
     FN_LIST_ICON,
     FN_LIST_PREFIX,
     FN_LIST_TITLE
@@ -80,7 +80,7 @@ export class ListItemComponent extends mixinBaseListItem {
     titleProvider?: TemplateRefProviderToken<void>;
     @ContentChild(FN_LIST_ACTIONS)
     actionsProvider?: TemplateRefProviderToken<void>;
-    @ContentChild(FN_LIST_END)
+    @ContentChild(FN_LIST_POSTFIX)
     endProvider?: TemplateRefProviderToken<void>;
 
     private _disabled = false;

@@ -7,7 +7,7 @@ import { SelectableItemDirective } from './selectable-item/selectable-item.direc
 import { SelectableListDirective } from './selectable-list/selectable-list.directive';
 import {
     ListItemActionsDirective,
-    ListItemEndDirective,
+    ListItemPostfixDirective,
     ListItemIconDirective,
     ListItemPrefixDirective,
     ListItemTitleDirective
@@ -24,7 +24,7 @@ import { ListItemCheckboxDirective } from './list-item-checkbox.directive';
         SelectableItemDirective,
         ListItemTitleDirective,
         ListItemActionsDirective,
-        ListItemEndDirective,
+        ListItemPostfixDirective,
         ListItemIconDirective,
         ListItemCheckboxDirective,
         ListItemPrefixDirective
@@ -37,7 +37,7 @@ import { ListItemCheckboxDirective } from './list-item-checkbox.directive';
         SelectableItemDirective,
         ListItemTitleDirective,
         ListItemActionsDirective,
-        ListItemEndDirective,
+        ListItemPostfixDirective,
         ListItemIconDirective,
         ListItemCheckboxDirective,
         ListItemPrefixDirective
