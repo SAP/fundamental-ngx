@@ -29,14 +29,14 @@
     <li
         fd-list-item
         fd-upload-collection-item
-        *ngFor="let file of files"
+        *ngFor="let file of files; let idx = index"
         [fileName]="file.fileName"
         [extension]="file.extension"
         (deleteClicked)="openDeleteDialog($event, file, deleteDialog)"
         (fileNameChanged)="fileNameChanged($event)"
         [selected]="file.selected"
     >
-        <fd-checkbox [(ngModel)]="file.selected"></fd-checkbox>
+        <fd-checkbox [(ngModel)]="file.selected" (click)="onCheckboxClick(file, idx, $event)"></fd-checkbox>
         <span fd-list-thumbnail fd-upload-collection-thumbnail><fd-icon [glyph]="file.icon"></fd-icon></span>
         <div fd-list-content>
             <div fd-upload-collection-title-container>
