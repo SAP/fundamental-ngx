@@ -46,7 +46,11 @@ export class SelectableItemDirective<ValueType> implements SelectableItemToken<V
         private _elementRef: ElementRef<HTMLElement>,
         private _changeDetectorRef: ChangeDetectorRef,
         private selectionService: SelectionService
-    ) {}
+    ) {
+        if (!rootComponent) {
+            throw new Error('Usage of selectable list item without [selectable] list is not supported');
+        }
+    }
 
     elementRef(): ElementRef<HTMLElement> {
         return this._elementRef;
