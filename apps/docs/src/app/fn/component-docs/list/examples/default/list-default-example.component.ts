@@ -5,11 +5,4 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
     templateUrl: './list-default-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ListDefaultExampleComponent {
-    selectedItems = ['1'];
-    isSelected = false;
-
-    selectedChange($event: string[] | string): void {
-        console.log($event);
-    }
-}
+export class ListDefaultExampleComponent {}

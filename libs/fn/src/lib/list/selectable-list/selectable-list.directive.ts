@@ -19,6 +19,7 @@ import { takeUntil, tap } from 'rxjs/operators';
 
 @Directive({
     selector: 'fn-list[selectable], [fn-list][selectable]',
+    exportAs: 'fnListSelectable',
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -77,6 +78,14 @@ export class SelectableListDirective<ValueType>
                 takeUntil(this._destroy$)
             )
             .subscribe();
+    }
+
+    toggleSelection(item: SelectableItemToken): void {
+        if (item.getSelected()) {
+            this.selectionService.deselectItem(item);
+        } else {
+            this.selectionService.selectItem(item);
+        }
     }
 
     writeValue(val: ValueType | ValueType[]): void {

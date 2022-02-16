@@ -4,7 +4,7 @@ import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 
 @Directive({
     selector: 'fn-list-item[selectable], [fn-list-item][selectable]',
-    exportAs: 'selectableListItem',
+    exportAs: 'fnListItemSelectable',
     providers: [
         {
             provide: SelectableItemToken,
