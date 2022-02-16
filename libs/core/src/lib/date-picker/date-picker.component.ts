@@ -27,8 +27,7 @@ import {
     DaysOfWeek,
     FdCalendarView,
     DateRange,
-    CalendarYearGrid,
-    NavigationButtonDisableFunction
+    CalendarYearGrid
 } from '@fundamental-ngx/core/calendar';
 import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
 import { PopoverFormMessageService } from '@fundamental-ngx/core/form';
@@ -37,6 +36,7 @@ import { ContentDensityService } from '@fundamental-ngx/core/utils';
 import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
 
 import { createMissingDateImplementationError } from './errors';
+import { NavigationButtonDisableFunction } from '@fundamental-ngx/core/calendar';
 
 let datePickerCounter = 0;
 

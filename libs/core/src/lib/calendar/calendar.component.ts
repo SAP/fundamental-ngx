@@ -27,7 +27,6 @@ import { DateRange } from './models/date-range';
 import { CalendarCurrent } from './models/calendar-current';
 import { CalendarYearGrid } from './models/calendar-year-grid';
 import { AggregatedYear } from './models/aggregated-year';
-import { NavigationButtonDisableFunction } from './models/disabled-navigation-buttons';
 import { CalendarDayViewComponent } from './calendar-views/calendar-day-view/calendar-day-view.component';
 import { CalendarYearViewComponent } from './calendar-views/calendar-year-view/calendar-year-view.component';
 import { CalendarMonthViewComponent } from './calendar-views/calendar-month-view/calendar-month-view.component';
@@ -36,7 +35,7 @@ import { CalendarService } from './calendar.service';
 import { createMissingDateImplementationError } from './calendar-errors';
 import { CalendarAggregatedYearViewComponent } from './calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
 import { FocusableCalendarView } from './models/common';
-import { FdCalendarView, DaysOfWeek, CalendarType } from './types';
+import { FdCalendarView, DaysOfWeek, CalendarType, NavigationButtonDisableFunction } from './types';
 
 let calendarUniqueId = 0;
 
