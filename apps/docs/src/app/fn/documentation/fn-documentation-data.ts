@@ -27,7 +27,7 @@ export const components: SectionInterfaceContent[] = [
         name: 'List',
         subItems: [
             { url: 'fn/list', name: 'Standard List' },
-            { url: 'fn/list', name: 'List with Byline' }
+            { url: 'fn/list-byline', name: 'List with Byline' }
         ]
     },
     { url: 'fn/tabs', name: 'Tabs' },

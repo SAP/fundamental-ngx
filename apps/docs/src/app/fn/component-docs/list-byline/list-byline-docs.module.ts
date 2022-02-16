@@ -6,16 +6,16 @@ import { CheckboxModule } from '@fundamental-ngx/fn/checkbox';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { API_FILES } from '../../api-files';
-import { ListHeaderComponent } from './list-header/list-header.component';
-import { ListDocsComponent } from './list-docs.component';
+import { ListBylineHeaderComponent } from './list-byline-header/list-byline-header.component';
+import { ListBylineDocsComponent } from './list-byline-docs.component';
 import { examples } from './examples';
 
 const routes: Routes = [
     {
         path: '',
-        component: ListHeaderComponent,
+        component: ListBylineHeaderComponent,
         children: [
-            { path: '', component: ListDocsComponent },
+            { path: '', component: ListBylineDocsComponent },
             { path: 'api', component: ApiComponent, data: { content: API_FILES.list } }
         ]
     }
@@ -24,6 +24,6 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ListModule, ButtonModule, CheckboxModule],
     exports: [RouterModule],
-    declarations: [examples, ListDocsComponent, ListHeaderComponent]
+    declarations: [examples, ListBylineDocsComponent, ListBylineHeaderComponent]
 })
-export class ListDocsModule {}
+export class ListBylineDocsModule {}

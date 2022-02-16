@@ -1,0 +1,29 @@
+<ul fn-list selectable [selected]="selectedItems" (selectedChange)="selectedChange($event)" multiple>
+    <li fn-list-group-header>group header</li>
+    <li fn-list-item selectable value="1">
+        <span *fnListItemTitle>Selected List Item</span>
+    </li>
+    <li fn-list-item>
+        <span *fnListItemTitle>List Item with Text at the End</span>
+        <span *fnListItemEnd>42</span>
+    </li>
+    <li fn-list-item infoBar>
+        <span *fnListItemTitle>Info text</span>
+        <div *fnListItemActions>
+            <button fn-button fnType="layout" glyph="decline"></button>
+        </div>
+    </li>
+    <li fn-list-item>
+        <fd-icon glyph="person-placeholder" *fnListItemIcon></fd-icon>
+        <span *fnListItemTitle> List Item with Icon </span>
+    </li>
+    <li fn-list-item selectable value="2">
+        <fn-checkbox
+            *fnListItemCheckbox="let checked; let setChecked = update"
+            [ngModel]="checked"
+            (ngModelChange)="setChecked($event)"
+        >
+        </fn-checkbox>
+        <span *fnListItemTitle> List Item with checkbox </span>
+    </li>
+</ul>
