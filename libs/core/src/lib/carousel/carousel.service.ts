@@ -245,6 +245,11 @@ export class CarouselService implements OnDestroy {
 
         // When elementsAtOnce > 1, swiping should stop at last index - elementsAtOnce
         if (!this.config.infinite && this.config.elementsAtOnce > 1) {
+            // When there're less items in the carousel than the area might display, it should stop to first
+            if (this.items.length < this.config.elementsAtOnce) {
+                return this.items.first;
+            }
+
             if (index + this.config.elementsAtOnce >= this.items.length) {
                 return this.items.get(this.items.length - this.config.elementsAtOnce);
             }
@@ -312,7 +317,6 @@ export class CarouselService implements OnDestroy {
     private _transitionCarousel(transitionPx: number): void {
         this._currentTransitionPx = transitionPx;
         const axis = this.config.vertical ? 'Y' : 'X';
-
         this._element.style.transform = `translate${axis}(${this._currentTransitionPx}px)`;
     }
 
@@ -382,6 +386,7 @@ export class CarouselService implements OnDestroy {
             }
 
             if (this._dragStarted) {
+                // debugger;
                 this._handlePanEnd(this._getDraggedDelta(this._getDragCoordinate(event)));
             } else {
                 this.dragStateChange$.emit(false);
