@@ -19,7 +19,7 @@ import {
     SelectionService
 } from '@fundamental-ngx/fn/cdk';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { tap } from 'rxjs/operators';
+import { merge } from 'rxjs';
 
 @Directive({
     selector: 'fn-list-item[selectable], [fn-list-item][selectable]',
@@ -62,9 +62,12 @@ export class SelectableItemDirective<ValueType> implements SelectableItemToken<V
         }
     }
 
+    /** @hidden */
     private _selected = false;
+    /** @hidden */
     private _selectable = true;
 
+    /** @hidden */
     constructor(
         private _destroy$: DestroyedBehavior,
         @Inject(SelectComponentRootToken) private rootComponent: SelectComponentRootToken<ValueType>,
@@ -95,24 +98,37 @@ export class SelectableItemDirective<ValueType> implements SelectableItemToken<V
         }
     }
 
+    /** @hidden */
     ngAfterViewInit(): void {
-        this.disabled$?.subscribe(() => this._updateSelectionAndSelectableWatcher());
-        this.readonly$
-            ?.pipe(tap((readonly) => console.log({ readonly })))
-            .subscribe(() => this._updateSelectionAndSelectableWatcher());
+        this._listenToDisablingEvents();
     }
 
+    /** @hidden */
+    private _listenToDisablingEvents(): void {
+        const disablingEvents$ = [];
+        if (this.disabled$) {
+            disablingEvents$.push(this.disabled$);
+        }
+        if (this.readonly$) {
+            disablingEvents$.push(this.readonly$);
+        }
+        merge(...disablingEvents$).subscribe(() => this._updateSelectionAndSelectableWatcher());
+    }
+
+    /** @hidden */
     private _updateSelectionAndSelectableWatcher(): void {
         if (this.disabled$?.fnDisabled) {
             this.selectionService.deselectItem(this);
         }
-        this.selectionService.listenToItemInteractions();
+        this._updateSelectableWatcher();
     }
 
+    /** @hidden */
     private _updateSelectableWatcher(): void {
         this.selectionService.listenToItemInteractions();
     }
 
+    /** @hidden */
     private _forceUpdateSelectedClass(): void {
         const { classList } = this.elementRef().nativeElement;
         const className = 'is-selected';
