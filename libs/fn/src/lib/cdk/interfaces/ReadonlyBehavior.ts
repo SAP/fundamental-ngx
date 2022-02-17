@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
 
-export interface ReadonlyBehavior extends Observable<boolean> {
+export type ReadonlyBehavior = {
     fnReadonly: boolean;
-}
+} & Observable<boolean>;

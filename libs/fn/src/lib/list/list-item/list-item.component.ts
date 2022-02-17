@@ -9,7 +9,17 @@ import {
     Optional,
     ViewEncapsulation
 } from '@angular/core';
-import { canAssignAdditionalClasses, SelectableItemToken, SelectionService } from '@fundamental-ngx/fn/cdk';
+import {
+    BaseFocusableBehavior,
+    canAssignAdditionalClasses,
+    DestroyedBehavior,
+    DisabledBehavior,
+    FN_DISABLED,
+    FN_READONLY,
+    ReadonlyBehavior,
+    SelectableItemToken,
+    SelectionService
+} from '@fundamental-ngx/fn/cdk';
 import {
     FN_LIST_ACTIONS,
     FN_LIST_BYLINE,
@@ -22,8 +32,9 @@ import {
 import { coerceBoolean, TemplateRefProviderToken } from '@fundamental-ngx/fn/utils';
 import { CheckboxContext } from '../list-item-checkbox.directive';
 import { ListComponent } from '../list/list.component';
+import { takeUntil } from 'rxjs/operators';
 
-const mixinBaseListItem = canAssignAdditionalClasses(Object);
+const mixinBaseListItem = canAssignAdditionalClasses(BaseFocusableBehavior);
 
 @Component({
     selector: 'fn-list-item, [fn-list-item]',
@@ -32,13 +43,17 @@ const mixinBaseListItem = canAssignAdditionalClasses(Object);
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[class.fn-list__item]': 'true'
-    }
+    },
+    providers: [DestroyedBehavior]
 })
 export class ListItemComponent extends mixinBaseListItem {
     @Input()
     @HostBinding('class.fn-list__item--info-bar')
     @coerceBoolean
     infoBar!: boolean;
+
+    @HostBinding('attr.tabindex')
+    tabIndex = 0;
 
     @ContentChild(FN_LIST_CHECKBOX)
     checkboxProvider?: TemplateRefProviderToken<CheckboxContext>;
@@ -59,12 +74,18 @@ export class ListItemComponent extends mixinBaseListItem {
     disabled!: boolean;
 
     constructor(
+        private _destroy$: DestroyedBehavior,
         @Optional() private selectionService: SelectionService,
         @Optional() @Inject(SelectableItemToken) private selectableItem: SelectableItemToken,
         @Inject(ListComponent) private listComponent: ListComponent,
-        private _elementRef: ElementRef<HTMLElement>
+        private _elementRef: ElementRef<HTMLElement>,
+        @Optional() @Inject(FN_DISABLED) disabled$: DisabledBehavior,
+        @Optional() @Inject(FN_READONLY) readonly$: ReadonlyBehavior
     ) {
-        super();
+        super(disabled$, readonly$);
+        this.focusable$
+            .pipe(takeUntil(this._destroy$))
+            .subscribe((isFocusable) => (this.tabIndex = isFocusable ? 0 : -1));
     }
 
     get byline(): boolean {

@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
 
-export interface DisabledBehavior extends Observable<boolean> {
+export type DisabledBehavior = {
     fnDisabled: boolean;
-}
+} & Observable<boolean>;

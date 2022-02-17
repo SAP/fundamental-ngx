@@ -1,12 +1,13 @@
 import { Directive, HostBinding, Inject, Input, NgModule, Optional } from '@angular/core';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { ReplaySubject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { FN_FOCUSABLE } from '../../tokens/focusable';
 import { FN_DISABLED } from '../../tokens/disabled';
 import { FN_READONLY } from '../../tokens/readonly';
 import { BaseFocusableBehavior } from '../../common-behaviors/base-focusable-behavior';
 import { DisabledBehavior } from '../../interfaces/DisabledBehavior';
 import { ReadonlyBehavior } from '../../interfaces/ReadonlyBehavior';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { first, ReplaySubject } from 'rxjs';
 import { DestroyedBehavior } from '../../common-behaviors/destroyed-behavior';
 
 @Directive({
@@ -34,20 +35,21 @@ export class FocusableDirective extends ReplaySubject<boolean> {
     }
 
     @HostBinding('attr.tabindex')
-    get tabIndex(): number {
-        return this.baseFocusableInstance.tabIndex;
-    }
+    tabIndex = 0;
 
     private baseFocusableInstance: BaseFocusableBehavior;
 
     constructor(
         destroy$: DestroyedBehavior,
-        @Optional() @Inject(FN_DISABLED) disabled: DisabledBehavior,
-        @Optional() @Inject(FN_READONLY) readonly: ReadonlyBehavior
+        @Optional() @Inject(FN_DISABLED) disabled$: DisabledBehavior,
+        @Optional() @Inject(FN_READONLY) readonly$: ReadonlyBehavior
     ) {
         super(1);
-        this.baseFocusableInstance = new BaseFocusableBehavior(destroy$, disabled, readonly);
-        destroy$.pipe(first()).subscribe(() => this.complete());
+        this.baseFocusableInstance = new BaseFocusableBehavior(disabled$, readonly$);
+        this.baseFocusableInstance.focusable$.pipe(takeUntil(destroy$)).subscribe((isFocusable) => {
+            this.tabIndex = isFocusable ? 0 : -1;
+        });
+        destroy$.subscribe(() => this.complete());
     }
 }
 

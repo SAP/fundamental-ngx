@@ -9,7 +9,6 @@ import {
     Optional
 } from '@angular/core';
 import {
-    BaseFocusableBehavior,
     DestroyedBehavior,
     DisabledBehavior,
     FN_DISABLED,
@@ -20,6 +19,7 @@ import {
     SelectionService
 } from '@fundamental-ngx/fn/cdk';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { tap } from 'rxjs/operators';
 
 @Directive({
     selector: 'fn-list-item[selectable], [fn-list-item][selectable]',
@@ -28,17 +28,10 @@ import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
         {
             provide: SelectableItemToken,
             useExisting: SelectableItemDirective
-        },
-        DestroyedBehavior
-    ],
-    host: {
-        '[attr.tabindex]': 'tabIndex'
-    }
+        }
+    ]
 })
-export class SelectableItemDirective<ValueType>
-    extends BaseFocusableBehavior
-    implements SelectableItemToken<ValueType>, AfterViewInit
-{
+export class SelectableItemDirective<ValueType> implements SelectableItemToken<ValueType>, AfterViewInit {
     @Input()
     @HostBinding('class.is-selected')
     set selected(value: BooleanInput) {
@@ -61,9 +54,10 @@ export class SelectableItemDirective<ValueType>
         );
     }
 
-    set selectable(value: boolean) {
-        if (this._selectable !== value) {
-            this._selectable = value;
+    set selectable(value: BooleanInput) {
+        const selectable = coerceBooleanProperty(value);
+        if (this._selectable !== selectable) {
+            this._selectable = selectable;
             this._updateSelectableWatcher();
         }
     }
@@ -77,10 +71,9 @@ export class SelectableItemDirective<ValueType>
         private _elementRef: ElementRef<HTMLElement>,
         private _changeDetectorRef: ChangeDetectorRef,
         private selectionService: SelectionService,
-        @Optional() @Inject(FN_DISABLED) disabled$: DisabledBehavior,
-        @Optional() @Inject(FN_READONLY) readonly$: ReadonlyBehavior
+        @Optional() @Inject(FN_DISABLED) private disabled$: DisabledBehavior,
+        @Optional() @Inject(FN_READONLY) private readonly$: ReadonlyBehavior
     ) {
-        super(_destroy$, disabled$, readonly$);
         if (!rootComponent) {
             throw new Error('Usage of selectable list item without [selectable] list is not supported');
         }
@@ -104,7 +97,9 @@ export class SelectableItemDirective<ValueType>
 
     ngAfterViewInit(): void {
         this.disabled$?.subscribe(() => this._updateSelectionAndSelectableWatcher());
-        this.readonly$?.subscribe(() => this._updateSelectionAndSelectableWatcher());
+        this.readonly$
+            ?.pipe(tap((readonly) => console.log({ readonly })))
+            .subscribe(() => this._updateSelectionAndSelectableWatcher());
     }
 
     private _updateSelectionAndSelectableWatcher(): void {
