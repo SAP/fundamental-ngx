@@ -114,10 +114,12 @@ export class SelectionService<ValueType = any> implements OnDestroy {
     }
 
     selectItem(item: SelectableItemToken<ValueType>): void {
-        const val: ValueType[] = [item.value, ...this._value];
-        const properValues = this._getProperValues(val);
-        this._value$.next(properValues);
-        this._rootComponent.onChange(properValues);
+        if (item.selectable) {
+            const val: ValueType[] = [item.value, ...this._value];
+            const properValues = this._getProperValues(val);
+            this._value$.next(properValues);
+            this._rootComponent.onChange(properValues);
+        }
     }
 
     deselectItem(item: SelectableItemToken<ValueType>): void {
