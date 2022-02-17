@@ -2,6 +2,7 @@ import { Component, Renderer2, ElementRef, AfterViewInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { ListDataSource, DataProvider } from '@fundamental-ngx/platform/shared';
+import { SelectionType } from '@fundamental-ngx/platform/list';
 
 const LIST_ELEMENTS: Address[] = [
     {
@@ -63,7 +64,10 @@ export class PlatformStandardListItemWithSelectionExampleComponent implements Af
     _dataSource = new ListDataSource<Address>(new ListDataProvider());
     _selectedItems: any[] = [];
 
-    ariaLabel = '0 Items selected';
+    selectionMode: SelectionType = 'multi';
+    selectionModeLabel = `${this.selectionMode} selectable`;
+
+    ariaLabel = `0 Items selected ${this.selectionModeLabel}`;
 
     constructor(private _render: Renderer2, private _elementRef: ElementRef) {}
 
@@ -76,6 +80,9 @@ export class PlatformStandardListItemWithSelectionExampleComponent implements Af
     _showItemInfo(event: any): void {
         this._selectedItems = event.selectedItems;
         const selectedItemsLength = this._selectedItems.length;
-        this.ariaLabel = selectedItemsLength > 1 ? `${selectedItemsLength} Items selected` : '1 Item selected';
+        this.ariaLabel =
+            selectedItemsLength > 1
+                ? `${selectedItemsLength} Items selected ${this.selectionModeLabel}`
+                : `1 Item selected ${this.selectionModeLabel}`;
     }
 }

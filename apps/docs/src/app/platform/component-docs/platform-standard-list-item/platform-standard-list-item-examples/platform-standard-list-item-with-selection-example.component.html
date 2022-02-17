@@ -4,7 +4,7 @@
 <fdp-list
     [selection]="true"
     [dataSource]="_dataSource"
-    selectionMode="multi"
+    [selectionMode]="selectionMode"
     [(ngModel)]="_selectedItems"
     (selectedItemChange)="_showItemInfo($event)"
     [hasByLine]="true"
