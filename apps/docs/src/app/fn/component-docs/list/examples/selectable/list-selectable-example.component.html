@@ -25,10 +25,10 @@
             [glyph]="fnListItemSelectable.getSelected() ? 'decline' : 'accept'"
         ></button>
     </li>
-    <li fn-list-item selectable value="5" disabled>
+    <li fn-list-item selectable value="5" fnDisabled>
         <ng-template fnListItemTitle> Selectable item, but is disabled</ng-template>
     </li>
-    <li fn-list-item selectable value="6" [readonly]="true">
+    <li fn-list-item selectable value="6" fnReadonly>
         <ng-template fnListItemTitle> Selectable item, but is readonly</ng-template>
     </li>
 </ul>

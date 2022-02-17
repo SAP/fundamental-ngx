@@ -1,5 +1,6 @@
 import { Constructor } from '../interfaces/Constructor';
 import { Directive, HostBinding, Input } from '@angular/core';
+import { CanBeDisabledConstructor } from './canBeDisabled';
 
 export interface HasTabIndex {
     tabindex: string | number;
@@ -7,7 +8,10 @@ export interface HasTabIndex {
 
 type HasTabIndexConstructor = Constructor<HasTabIndex>;
 
-export function hasTabIndex<T extends Constructor<any>>(baseClass: T, defaultTabIndex = 0): T & HasTabIndexConstructor {
+export function hasTabIndex<T extends CanBeDisabledConstructor>(
+    baseClass: T,
+    defaultTabIndex = 0
+): T & HasTabIndexConstructor {
     @Directive()
     class HasTabIndexClass extends baseClass implements HasTabIndex {
         private _tabIndex: string | number = defaultTabIndex;
@@ -15,7 +19,7 @@ export function hasTabIndex<T extends Constructor<any>>(baseClass: T, defaultTab
         @Input()
         @HostBinding('attr.tabindex')
         get tabindex(): string | number {
-            return this._tabIndex;
+            return this.disabled ? -1 : this._tabIndex;
         }
 
         set tabindex(value: string | number) {

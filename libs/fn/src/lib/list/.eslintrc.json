@@ -11,6 +11,7 @@
             ],
             "rules": {
                 "@angular-eslint/no-host-metadata-property": "off",
+                "@angular-eslint/no-inputs-metadata-property": "off",
                 "@angular-eslint/directive-selector": [
                     "error",
                     {

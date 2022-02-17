@@ -1,5 +1,23 @@
-import { ChangeDetectorRef, Directive, ElementRef, HostBinding, Inject, Input } from '@angular/core';
-import { SelectableItemToken, SelectComponentRootToken, SelectionService } from '@fundamental-ngx/fn/cdk';
+import {
+    AfterViewInit,
+    ChangeDetectorRef,
+    Directive,
+    ElementRef,
+    HostBinding,
+    Inject,
+    Input,
+    Optional
+} from '@angular/core';
+import {
+    FN_DISABLED,
+    FN_READONLY,
+    DisabledBehavior,
+    ReadonlyBehavior,
+    SelectableItemToken,
+    SelectComponentRootToken,
+    SelectionService,
+    FocusableBehavior
+} from '@fundamental-ngx/fn/cdk';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 
 @Directive({
@@ -12,7 +30,10 @@ import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
         }
     ]
 })
-export class SelectableItemDirective<ValueType> implements SelectableItemToken<ValueType> {
+export class SelectableItemDirective<ValueType>
+    extends FocusableBehavior
+    implements SelectableItemToken<ValueType>, AfterViewInit
+{
     @Input()
     @HostBinding('class.is-selected')
     set selected(value: BooleanInput) {
@@ -28,13 +49,17 @@ export class SelectableItemDirective<ValueType> implements SelectableItemToken<V
 
     @Input()
     get selectable(): boolean {
-        return this._selectable;
+        return (
+            this._selectable &&
+            (!this.disabled$ || !this.disabled$?.fnDisabled) &&
+            (!this.readonly$ || !this.readonly$?.fnReadonly)
+        );
     }
 
     set selectable(value: boolean) {
         if (this._selectable !== value) {
             this._selectable = value;
-            this.selectionService.listenToItemInteractions();
+            this._updateSelectableWatcher();
         }
     }
 
@@ -45,8 +70,11 @@ export class SelectableItemDirective<ValueType> implements SelectableItemToken<V
         @Inject(SelectComponentRootToken) private rootComponent: SelectComponentRootToken<ValueType>,
         private _elementRef: ElementRef<HTMLElement>,
         private _changeDetectorRef: ChangeDetectorRef,
-        private selectionService: SelectionService
+        private selectionService: SelectionService,
+        @Optional() @Inject(FN_DISABLED) disabled$: DisabledBehavior,
+        @Optional() @Inject(FN_READONLY) readonly$: ReadonlyBehavior
     ) {
+        super(disabled$, readonly$);
         if (!rootComponent) {
             throw new Error('Usage of selectable list item without [selectable] list is not supported');
         }
@@ -66,6 +94,23 @@ export class SelectableItemDirective<ValueType> implements SelectableItemToken<V
             this._changeDetectorRef.markForCheck();
             this._forceUpdateSelectedClass();
         }
+    }
+
+    ngAfterViewInit(): void {
+        this.disabled$?.subscribe(() => this._updateSelectionAndSelectableWatcher());
+        this.readonly$?.subscribe(() => this._updateSelectionAndSelectableWatcher());
+    }
+
+    private _updateSelectionAndSelectableWatcher(): void {
+        if (this.disabled$?.fnDisabled) {
+            this.selectionService.deselectItem(this);
+        }
+        console.log(this.selectable);
+        this.selectionService.listenToItemInteractions();
+    }
+
+    private _updateSelectableWatcher(): void {
+        this.selectionService.listenToItemInteractions();
     }
 
     private _forceUpdateSelectedClass(): void {
