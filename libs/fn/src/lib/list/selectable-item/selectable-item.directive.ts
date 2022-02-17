@@ -9,14 +9,15 @@ import {
     Optional
 } from '@angular/core';
 import {
+    BaseFocusableBehavior,
+    DestroyedBehavior,
+    DisabledBehavior,
     FN_DISABLED,
     FN_READONLY,
-    DisabledBehavior,
     ReadonlyBehavior,
     SelectableItemToken,
     SelectComponentRootToken,
-    SelectionService,
-    FocusableBehavior
+    SelectionService
 } from '@fundamental-ngx/fn/cdk';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 
@@ -27,11 +28,15 @@ import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
         {
             provide: SelectableItemToken,
             useExisting: SelectableItemDirective
-        }
-    ]
+        },
+        DestroyedBehavior
+    ],
+    host: {
+        '[attr.tabindex]': 'tabIndex'
+    }
 })
 export class SelectableItemDirective<ValueType>
-    extends FocusableBehavior
+    extends BaseFocusableBehavior
     implements SelectableItemToken<ValueType>, AfterViewInit
 {
     @Input()
@@ -67,6 +72,7 @@ export class SelectableItemDirective<ValueType>
     private _selectable = true;
 
     constructor(
+        private _destroy$: DestroyedBehavior,
         @Inject(SelectComponentRootToken) private rootComponent: SelectComponentRootToken<ValueType>,
         private _elementRef: ElementRef<HTMLElement>,
         private _changeDetectorRef: ChangeDetectorRef,
@@ -74,7 +80,7 @@ export class SelectableItemDirective<ValueType>
         @Optional() @Inject(FN_DISABLED) disabled$: DisabledBehavior,
         @Optional() @Inject(FN_READONLY) readonly$: ReadonlyBehavior
     ) {
-        super(disabled$, readonly$);
+        super(_destroy$, disabled$, readonly$);
         if (!rootComponent) {
             throw new Error('Usage of selectable list item without [selectable] list is not supported');
         }
@@ -105,7 +111,6 @@ export class SelectableItemDirective<ValueType>
         if (this.disabled$?.fnDisabled) {
             this.selectionService.deselectItem(this);
         }
-        console.log(this.selectable);
         this.selectionService.listenToItemInteractions();
     }
 

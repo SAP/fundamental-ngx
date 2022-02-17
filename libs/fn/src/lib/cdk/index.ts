@@ -12,7 +12,8 @@ export * from './mixins/canAssignAdditionalClasses';
 export * from './mixins/hasTabIndex';
 export * from './mixins/canBeDisabled';
 
-export * from './common-behaviors/focusable.behavior';
+export * from './common-behaviors/base-focusable-behavior';
+export * from './common-behaviors/destroyed-behavior';
 
 export * from './interfaces/ReadonlyBehavior';
 export * from './interfaces/DisabledBehavior';
