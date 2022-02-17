@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
+type ListGroupHeaderTextPosition = 'start' | 'end';
+
 @Component({
     selector: 'fn-list-group-header, [fn-list-group-header]',
     templateUrl: './list-group-header.component.html',
@@ -14,6 +16,9 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
 export class ListGroupHeaderComponent {
     @Input()
     class!: string;
+
+    @Input()
+    position: ListGroupHeaderTextPosition = 'start';
 
     constructor() {}
 }
