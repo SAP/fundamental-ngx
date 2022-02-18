@@ -107,7 +107,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
      * In case of having more items in carousel than 1, middle element should be active
      */
     @Input()
-    offset = 3;
+    offset = 2;
 
     /** Event emitted, when active item is changed, by carousel */
     @Output()
@@ -128,6 +128,8 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     /** @hidden */
     @ViewChild('indicator', { read: ElementRef })
     indicator: ElementRef;
+
+    wrapperHeight: string;
 
     /**
      * Time to wait in milliseconds after the last keydown before
@@ -182,6 +184,14 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     /** @hidden */
     ngAfterViewInit(): void {
         this._initialized = true;
+        const averageHeight =
+            this.items.toArray().reduce((acc, next) => (acc += next.getHeight()), 0) / this.items.length;
+        this.wrapperHeight = `${averageHeight * this.config.elementsAtOnce}px`;
+        const visibleButNotSelectedElements = Math.floor(this.config.elementsAtOnce / 2);
+        if (this.offset === 0) {
+            this.items.first.element.style.marginTop = `${visibleButNotSelectedElements * averageHeight}px`;
+            this.items.last.element.style.marginBottom = `${visibleButNotSelectedElements * averageHeight}px`;
+        }
     }
 
     /** @hidden */
@@ -406,12 +416,12 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
             this.config = {
                 gestureSupport: true,
                 vertical: true,
-                elementsAtOnce: 7,
+                elementsAtOnce: 5,
                 transition: '150ms',
                 infinite: true
             };
         } else {
-            this.config = { gestureSupport: true, vertical: true, elementsAtOnce: 7, transition: '150ms' };
+            this.config = { gestureSupport: true, vertical: true, elementsAtOnce: 5, transition: '150ms' };
         }
     }
 
