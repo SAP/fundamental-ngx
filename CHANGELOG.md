@@ -1,4 +1,11 @@
 
+### 0.33.5-rc.0 (2022-02-19)
+
+
+### Bug Fixes
+
+* **docs:** section toolbar search behavior ([#7762](https://github.com/SAP/fundamental-ngx/issues/7762)) ([fd6b2c5](https://github.com/SAP/fundamental-ngx/commit/fd6b2c53e5e6326c4260f77342bcf2b060b549d9))
+
 ### [0.33.4](https://github.com/SAP/fundamental-ngx/compare/v0.33.4-rc.15...v0.33.4) (2022-02-15)
 
 ### 0.33.4-rc.15 (2022-02-15)
