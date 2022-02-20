@@ -108,11 +108,10 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
      */
     @Input()
     get offset(): number {
-        return this._offset;
+        return this._offset$.value;
     }
 
     set offset(value: number) {
-        this._offset = value;
         this._offset$.next(value);
     }
 
@@ -121,7 +120,6 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
      */
     @Input()
     set elementsAtOnce(value: number) {
-        this._elementsAtOnce = value;
         this._elementsAtOnce$.next(value);
     }
 
@@ -168,14 +166,10 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     }
 
     /** @hidden */
-    private _elementsAtOnce = 7;
-    /** @hidden */
-    private _elementsAtOnce$ = new BehaviorSubject(this._elementsAtOnce);
+    private _elementsAtOnce$ = new BehaviorSubject(7);
 
     /** @hidden */
-    private _offset = 3;
-    /** @hidden */
-    private _offset$ = new BehaviorSubject(this._offset);
+    private _offset$ = new BehaviorSubject(3);
 
     /** @hidden */
     private _active = false;
@@ -288,7 +282,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     /** Method that handles active item change */
     activeChangedHandle(output: PanEndOutput): void {
         const array = this.items.toArray();
-        let index: number = array.findIndex((__item) => __item === output.item) + this._offset;
+        let index: number = array.findIndex((__item) => __item === output.item) + this.offset;
 
         if (index > array.length) {
             index = index - array.length;
@@ -406,7 +400,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     /** @hidden */
     private _triggerCarousel(item: CarouselItemDirective, smooth?: boolean): void {
         const array = this.items.toArray();
-        let index: number = array.findIndex((_item) => _item === item) - this._offset;
+        let index: number = array.findIndex((_item) => _item === item) - this.offset;
 
         if (index < 0) {
             index = array.length + index;
