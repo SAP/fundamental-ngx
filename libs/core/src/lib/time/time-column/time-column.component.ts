@@ -225,7 +225,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
 
     /** @hidden */
     ngOnInit(): void {
-        this._setUpCarouselConfiguration();
+        this._subscriptions.add(this._elementsAtOnce$.pipe(tap(() => this._setUpCarouselConfiguration())).subscribe());
         this._setUpQuerySubscription();
     }
 
@@ -455,7 +455,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
         const config: CarouselConfig = {
             gestureSupport: true,
             vertical: true,
-            elementsAtOnce: this._elementsAtOnce,
+            elementsAtOnce: this._elementsAtOnce$.value,
             transition: '150ms'
         };
         if (!this.meridian) {
