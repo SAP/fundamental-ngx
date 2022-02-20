@@ -59,7 +59,7 @@
                     *ngFor="let option of vm.selectedOptions; trackBy: valueFn"
                     [compact]="compact"
                     [disabled]="disabled"
-                    (onCloseClick)="_onTokenClick(option.value, true, $event)"
+                    (onCloseClick)="_onTokenClick(option.value, false, $event)"
                     (onRemove)="_onTokenClick(option.value, false)"
                 >
                     <span [innerHtml]="option.label"></span>
