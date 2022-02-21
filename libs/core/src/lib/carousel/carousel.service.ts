@@ -317,6 +317,7 @@ export class CarouselService implements OnDestroy {
     private _transitionCarousel(transitionPx: number): void {
         this._currentTransitionPx = transitionPx;
         const axis = this.config.vertical ? 'Y' : 'X';
+
         this._element.style.transform = `translate${axis}(${this._currentTransitionPx}px)`;
     }
 
