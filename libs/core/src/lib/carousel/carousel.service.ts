@@ -386,7 +386,6 @@ export class CarouselService implements OnDestroy {
             }
 
             if (this._dragStarted) {
-                // debugger;
                 this._handlePanEnd(this._getDraggedDelta(this._getDragCoordinate(event)));
             } else {
                 this.dragStateChange$.emit(false);
