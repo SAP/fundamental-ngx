@@ -19,6 +19,7 @@ export const API_FILES = {
     segmentedButton: [],
     utils: [],
     cdk: [],
+    list: [],
     progressBar: ['ProgressBarComponent'],
     infoLabel: ['InfoLabelComponent'],
     messageStrip: ['MessageStripComponent'],

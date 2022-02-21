@@ -16,4 +16,5 @@ export * from '@fundamental-ngx/fn/utils';
 export * from '@fundamental-ngx/fn/cdk';
 export * from '@fundamental-ngx/fn/avatar';
 export * from '@fundamental-ngx/fn/object-status';
+export * from '@fundamental-ngx/fn/list';
 export * from '@fundamental-ngx/fn/info-label';

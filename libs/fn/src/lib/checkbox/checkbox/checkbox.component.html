@@ -22,13 +22,11 @@
         (ngModelChange)="nextValue()"
     />
     <span class="fn-checkbox__checkmark"></span>
-    <span class="fn-checkbox__label">
-        <ng-container *ngIf="label">
-            {{ label }}
-        </ng-container>
-
-        <ng-container *ngIf="!label">
-            <ng-content></ng-content>
-        </ng-container>
+    <span class="fn-checkbox__label" *ngIf="label || labelTemplateProvider">
+        <ng-container *ngTemplateOutlet="labelTemplateProvider?.templateRef || defaultLabelTemplate"> </ng-container>
     </span>
 </label>
+
+<ng-template #defaultLabelTemplate>
+    {{ label }}
+</ng-template>
