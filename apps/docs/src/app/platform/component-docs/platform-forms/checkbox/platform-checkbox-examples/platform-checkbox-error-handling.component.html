@@ -11,12 +11,7 @@
         [column]="1"
         [required]="true"
     >
-        <fdp-checkbox
-            name="presence-cb"
-            [isBinary]="true"
-            title="title text"
-            [formControl]="ffr1.formControl"
-        ></fdp-checkbox>
+        <fdp-checkbox name="presence-cb" title="title text" [formControl]="ffr1.formControl"></fdp-checkbox>
     </fdp-form-field>
 
     <fdp-form-field
@@ -31,7 +26,6 @@
     >
         <fdp-checkbox
             name="aggrement-cb"
-            [isBinary]="true"
             title="Do you Agree with Terms and Conditions"
             [formControl]="ffr2.formControl"
         >
