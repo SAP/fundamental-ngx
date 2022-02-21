@@ -18,6 +18,7 @@ import { GenericTagModule } from '@fundamental-ngx/fn/generic-tag';
 import { ObjectStatusModule } from '@fundamental-ngx/fn/object-status';
 import { AvatarModule } from '@fundamental-ngx/fn/avatar';
 import { InfoLabelModule } from '@fundamental-ngx/fn/info-label';
+import { MessageStripModule } from '@fundamental-ngx/fn/message-strip';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -37,6 +38,7 @@ import { InfoLabelModule } from '@fundamental-ngx/fn/info-label';
         SegmentedButtonModule,
         UtilsModule,
         CdkModule,
+        MessageStripModule,
         ObjectStatusModule,
         InfoLabelModule
     ],

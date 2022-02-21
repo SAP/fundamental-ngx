@@ -80,6 +80,13 @@ export const ROUTES: Routes = [
                     import('./component-docs/info-label/info-label-docs.module').then((m) => m.InfoLabelDocsModule)
             },
             {
+                path: 'message-strip',
+                loadChildren: () =>
+                    import('./component-docs/message-strip/message-strip-docs.module').then(
+                        (m) => m.MessageStripDocsModule
+                    )
+            },
+            {
                 path: 'object-status',
                 loadChildren: () =>
                     import('./component-docs/object-status/object-status-docs.module').then(

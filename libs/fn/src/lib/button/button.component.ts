@@ -29,12 +29,12 @@ export type ButtonType = '' | 'secondary' | 'layout' | 'positive' | 'critical' |
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '[class]': `'fn-button ' + (class || '')`,
         '[attr.type]': 'type',
         '[class.is-disabled]': 'disabled',
         '[class.fn-button--emphasized]': 'emphasized',
         '[class.fn-button--icon-only]': 'glyph && !label',
         '[attr.aria-disabled]': 'disabled',
+        '[attr.aria-label]': 'ariaLabel',
         '[disabled]': 'disabled',
         '[class.fn-button--selected]': 'selected',
         '[attr.aria-selected]': 'selected',
@@ -103,7 +103,7 @@ export class ButtonComponent extends BaseButton implements SelectableItemToken<s
      */
     @HostBinding('attr.class')
     get fnTypeClass(): string {
-        return this.fnType ? `fn-button--${this.fnType}` : '';
+        return ['fn-button', this.fnType ? `fn-button--${this.fnType}` : '', this.class].filter((c) => !!c).join(' ');
     }
 
     /** @hidden */
