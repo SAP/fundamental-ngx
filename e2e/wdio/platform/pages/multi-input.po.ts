@@ -1,5 +1,13 @@
 import { BaseComponentPo } from './base-component.po';
-import { click, doesItExist, scrollIntoView, sendKeys, waitForElDisplayed, waitForPresent } from '../../driver/wdio';
+import {
+    click,
+    doesItExist,
+    pause,
+    scrollIntoView,
+    sendKeys,
+    waitForElDisplayed,
+    waitForPresent
+} from '../../driver/wdio';
 export class MultiInputPo extends BaseComponentPo {
     private url = '/multi-input';
     root = '#page-content';
@@ -33,8 +41,9 @@ export class MultiInputPo extends BaseComponentPo {
             ? `//div[@title="${name}"]/../..`
             : `//span[@title="${name}"]/..`;
 
-    expandDropdown(dropDownSelector: string, index: number = 0): void {
+    expandDropdown(dropDownSelector: string, index: number = 0, usePause = false): void {
         sendKeys(['Escape']);
+        usePause && pause(300);
         scrollIntoView(dropDownSelector, index);
         click(dropDownSelector, index);
         waitForElDisplayed(this.expandedDropdown);
