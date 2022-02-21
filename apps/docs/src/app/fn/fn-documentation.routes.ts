@@ -71,6 +71,15 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'list',
+                loadChildren: () => import('./component-docs/list/list-docs.module').then((m) => m.ListDocsModule)
+            },
+            {
+                path: 'list-byline',
+                loadChildren: () =>
+                    import('./component-docs/list-byline/list-byline-docs.module').then((m) => m.ListBylineDocsModule)
+            },
+            {
                 path: 'avatar',
                 loadChildren: () => import('./component-docs/avatar/avatar-docs.module').then((m) => m.AvatarDocsModule)
             },

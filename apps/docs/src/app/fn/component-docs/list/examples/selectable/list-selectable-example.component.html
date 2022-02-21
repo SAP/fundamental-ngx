@@ -1,0 +1,37 @@
+<ul fn-list selectable [(selected)]="selectedItems" #fnListSelectable="fnListSelectable">
+    <li fn-list-group-header position="end">Selected items: {{ selectedItems.length }}</li>
+    <li fn-list-item selectable value="1">
+        <ng-template fnListItemTitle> Selectable item with everything default</ng-template>
+    </li>
+    <li fn-list-item [selectable]="false" value="2">
+        <ng-template fnListItemTitle> Selectable item, but is excluded from selection</ng-template>
+    </li>
+    <li fn-list-item selectable value="3">
+        <fn-checkbox
+            *fnListItemCheckbox="let selected; let updateSelection = update"
+            [ngModel]="selected"
+            (ngModelChange)="updateSelection($event)"
+        >
+        </fn-checkbox>
+        <ng-template fnListItemTitle> Selectable item and has checkbox</ng-template>
+    </li>
+    <li fn-list-item selectable value="4" #fnListItemSelectable="fnListItemSelectable">
+        <ng-template fnListItemTitle> Selectable item and has button for toggle</ng-template>
+        <button
+            *fnListItemActions
+            fn-button
+            fnType="layout"
+            (click)="fnListSelectable.toggleSelection(fnListItemSelectable)"
+            [glyph]="fnListItemSelectable.getSelected() ? 'decline' : 'accept'"
+        ></button>
+    </li>
+    <li fn-list-item selectable value="5" fnDisabled>
+        <ng-template fnListItemTitle> Selectable item, but is disabled</ng-template>
+    </li>
+    <li fn-list-item selectable value="6" infoBar fnReadonly>
+        <ng-template fnListItemTitle> Selectable info bar item, but is readonly</ng-template>
+    </li>
+</ul>
+
+<br />
+<small>selectedItems: {{ selectedItems | json }}</small>
