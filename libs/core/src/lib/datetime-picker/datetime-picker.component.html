@@ -74,6 +74,7 @@
                     <fd-time
                         *ngIf="isOpen"
                         [disabled]="disabled"
+                        [elementsAtOnce]="5"
                         [keepTwoDigits]="keepTwoDigitsTime"
                         [ngModel]="_tempTime"
                         [compact]="compact"
