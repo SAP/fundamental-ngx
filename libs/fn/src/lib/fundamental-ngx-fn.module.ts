@@ -17,6 +17,7 @@ import { CdkModule } from '@fundamental-ngx/fn/cdk';
 import { GenericTagModule } from '@fundamental-ngx/fn/generic-tag';
 import { ObjectStatusModule } from '@fundamental-ngx/fn/object-status';
 import { AvatarModule } from '@fundamental-ngx/fn/avatar';
+import { InfoLabelModule } from '@fundamental-ngx/fn/info-label';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -36,7 +37,8 @@ import { AvatarModule } from '@fundamental-ngx/fn/avatar';
         SegmentedButtonModule,
         UtilsModule,
         CdkModule,
-        ObjectStatusModule
+        ObjectStatusModule,
+        InfoLabelModule
     ],
     providers: []
 })

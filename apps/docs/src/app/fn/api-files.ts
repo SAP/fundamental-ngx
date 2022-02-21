@@ -20,5 +20,6 @@ export const API_FILES = {
     utils: [],
     cdk: [],
     progressBar: ['ProgressBarComponent'],
+    infoLabel: ['InfoLabelComponent'],
     objectStatus: ['ObjectStatusComponent']
 };

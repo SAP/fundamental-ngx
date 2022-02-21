@@ -130,6 +130,7 @@
             "@fundamental-ngx/fn/checkbox": ["libs/fn/src/lib/checkbox/index.ts"],
             "@fundamental-ngx/fn/form": ["libs/fn/src/lib/form/index.ts"],
             "@fundamental-ngx/fn/generic-tag": ["libs/fn/src/lib/generic-tag/index.ts"],
+            "@fundamental-ngx/fn/info-label": ["libs/fn/src/lib/info-label/index.ts"],
             "@fundamental-ngx/fn/object-status": ["libs/fn/src/lib/object-status/index.ts"],
             "@fundamental-ngx/fn/progress-bar": ["libs/fn/src/lib/progress-bar/index.ts"],
             "@fundamental-ngx/fn/radio": ["libs/fn/src/lib/radio/index.ts"],

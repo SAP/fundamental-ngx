@@ -25,6 +25,11 @@ export const components: SectionInterfaceContent[] = [
     { url: 'fn/tabs', name: 'Tabs' },
     { url: 'fn/tag', name: 'Tag' },
     {
+        url: 'fn/info-label',
+        name: 'Info Label'
+    },
+    { url: 'fn/tag', name: 'Tag' },
+    {
         url: 'fn/object-status',
         name: 'Object Status'
     }
