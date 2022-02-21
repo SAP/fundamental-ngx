@@ -1,4 +1,11 @@
 
+### 0.33.5-rc.8 (2022-02-21)
+
+
+### Features
+
+* **core:** date-time picker compliance with fiori guidline ([#7773](https://github.com/SAP/fundamental-ngx/issues/7773)) ([34cb24a](https://github.com/SAP/fundamental-ngx/commit/34cb24af68499643b233770a7e46373e01e76b91))
+
 ### 0.33.5-rc.7 (2022-02-20)
 
 ### 0.33.5-rc.6 (2022-02-20)
