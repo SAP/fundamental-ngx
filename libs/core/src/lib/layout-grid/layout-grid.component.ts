@@ -16,7 +16,7 @@ import { CSS_CLASS_NAME } from './constants';
  */
 @Component({
     selector: 'fd-layout-grid, [fdLayoutGrid]',
-    template: `<ng-content></ng-content>`,
+    template: `<div class="fd-row"><ng-content></ng-content></div>`,
     styleUrls: ['./layout-grid.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush

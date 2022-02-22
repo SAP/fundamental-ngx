@@ -16,8 +16,8 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { Subject, Subscription } from 'rxjs';
-import { buffer, debounceTime, map } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Subject, Subscription } from 'rxjs';
+import { buffer, debounceTime, filter, map, tap } from 'rxjs/operators';
 import { DOWN_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 
 import { KeyUtil } from '@fundamental-ngx/core/utils';
@@ -64,7 +64,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     /** Currently chosen, centered time column item */
     @Input()
     set activeValue(activeItem: T) {
-        if (this._initialized && this._activeValue !== activeItem) {
+        if (this._viewInit$.value && this._activeValue !== activeItem) {
             this._pickTime(this._getItem(activeItem), false);
         }
         this._activeValue = activeItem;
@@ -78,7 +78,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     @Input()
     set active(value: boolean) {
         this._active = value;
-        if (value && this._initialized) {
+        if (value && this._viewInit$.value) {
             this._changeDetRef.detectChanges();
             this._pickTime(this._getItem(this.activeValue), false);
             this._focusIndicator();
@@ -107,7 +107,21 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
      * In case of having more items in carousel than 1, middle element should be active
      */
     @Input()
-    offset = 3;
+    get offset(): number {
+        return this._offset$.value;
+    }
+
+    set offset(value: number) {
+        this._offset$.next(value);
+    }
+
+    /**
+     * Quantity of the elements to be shown at the same time in column
+     */
+    @Input()
+    set elementsAtOnce(value: number) {
+        this._elementsAtOnce$.next(value);
+    }
 
     /** Event emitted, when active item is changed, by carousel */
     @Output()
@@ -128,6 +142,8 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     /** @hidden */
     @ViewChild('indicator', { read: ElementRef })
     indicator: ElementRef;
+
+    wrapperHeight: string;
 
     /**
      * Time to wait in milliseconds after the last keydown before
@@ -150,6 +166,12 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     }
 
     /** @hidden */
+    private _elementsAtOnce$ = new BehaviorSubject(7);
+
+    /** @hidden */
+    private _offset$ = new BehaviorSubject(3);
+
+    /** @hidden */
     private _active = false;
 
     /** @hidden */
@@ -165,23 +187,45 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     private _isDragging = false;
 
     /** @hidden */
-    private _initialized = false;
+    private _viewInit$ = new BehaviorSubject<boolean>(false);
 
     /** @hidden */
     private _subscriptions: Subscription = new Subscription();
 
     /** @hidden */
-    constructor(private _changeDetRef: ChangeDetectorRef) {}
+    constructor(private _changeDetRef: ChangeDetectorRef) {
+        this._subscriptions.add(
+            combineLatest([this._viewInit$, this._elementsAtOnce$, this._offset$])
+                .pipe(
+                    filter(([viewInit]) => viewInit),
+                    tap(([, elementsAtOnce, offset]) => {
+                        const averageHeight =
+                            this.items.toArray().reduce((acc, next) => acc + next.getHeight(), 0) / this.items.length;
+                        this.wrapperHeight = `${averageHeight * elementsAtOnce}px`;
+                        const visibleButNotSelectedElements = Math.floor(elementsAtOnce / 2);
+                        if (offset === 0) {
+                            this.items.first.element.style.marginTop = `${
+                                visibleButNotSelectedElements * averageHeight
+                            }px`;
+                            this.items.last.element.style.marginBottom = `${
+                                visibleButNotSelectedElements * averageHeight
+                            }px`;
+                        }
+                    })
+                )
+                .subscribe()
+        );
+    }
 
     /** @hidden */
     ngOnInit(): void {
-        this._setUpCarouselConfiguration();
+        this._subscriptions.add(this._elementsAtOnce$.pipe(tap(() => this._setUpCarouselConfiguration())).subscribe());
         this._setUpQuerySubscription();
     }
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._initialized = true;
+        this._viewInit$.next(true);
     }
 
     /** @hidden */
@@ -402,17 +446,16 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
 
     /** @hidden */
     private _setUpCarouselConfiguration(): void {
+        const config: CarouselConfig = {
+            gestureSupport: true,
+            vertical: true,
+            elementsAtOnce: this._elementsAtOnce$.value,
+            transition: '150ms'
+        };
         if (!this.meridian) {
-            this.config = {
-                gestureSupport: true,
-                vertical: true,
-                elementsAtOnce: 7,
-                transition: '150ms',
-                infinite: true
-            };
-        } else {
-            this.config = { gestureSupport: true, vertical: true, elementsAtOnce: 7, transition: '150ms' };
+            config.infinite = true;
         }
+        this.config = config;
     }
 
     /** @hidden */

@@ -12,12 +12,6 @@ export class PlatformCompactChekboxExampleComponent {
     yellow = false;
     white = true;
     violet: boolean;
-
-    public checkedChangeFunction(): void {}
-
-    public indeterminateChangeFunction(): void {}
-
-    public changeFunction(): void {}
 }
 
 class DataObject {

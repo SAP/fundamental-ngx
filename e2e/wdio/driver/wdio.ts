@@ -509,12 +509,12 @@ export function applyState(state: 'hover' | 'active' | 'focus', selector: string
     }
 }
 
-export function getPreviousElement(selector: string, index: number = 0): void {
+export function getPreviousElement(selector: string, index: number = 0): any {
     checkSelectorExists(selector, index);
     return $$(selector)[index].previousElement();
 }
 
-export function getNextElement(selector: string, index: number = 0): void {
+export function getNextElement(selector: string, index: number = 0): any {
     checkSelectorExists(selector, index);
     return $$(selector)[index].nextElement();
 }

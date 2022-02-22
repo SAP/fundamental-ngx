@@ -1,4 +1,166 @@
 
+### 0.33.5-rc.38 (2022-03-07)
+
+
+### Bug Fixes
+
+* **platform:** dynamic page onCollapsedChange, header-internal removing ([#7812](https://github.com/SAP/fundamental-ngx/issues/7812)) ([f3a743d](https://github.com/SAP/fundamental-ngx/commit/f3a743dccf36b5b78f6c4b00c183be26ff1c8f65))
+
+### 0.33.5-rc.37 (2022-03-06)
+
+### 0.33.5-rc.36 (2022-03-06)
+
+### 0.33.5-rc.35 (2022-03-06)
+
+### 0.33.5-rc.34 (2022-03-06)
+
+### 0.33.5-rc.33 (2022-03-05)
+
+
+### Features
+
+* **core:** avatar clickable & event, zoomGlyph event on click ([#7833](https://github.com/SAP/fundamental-ngx/issues/7833)) ([7d8c7f3](https://github.com/SAP/fundamental-ngx/commit/7d8c7f3f152351764a1d55e8bbc7482766fefd9a))
+
+### 0.33.5-rc.32 (2022-03-04)
+
+
+### Bug Fixes
+
+* **core:** grid list filter-bar & group-header tabindexes ([#7836](https://github.com/SAP/fundamental-ngx/issues/7836)) ([c18547f](https://github.com/SAP/fundamental-ngx/commit/c18547fb6821a3384f6ea33b33a9dcb0cbb0a053))
+
+### 0.33.5-rc.31 (2022-03-04)
+
+
+### Bug Fixes
+
+* **docs:** fixed incorrect rendering of subItems ([#7829](https://github.com/SAP/fundamental-ngx/issues/7829)) ([f762009](https://github.com/SAP/fundamental-ngx/commit/f7620093a9fd0cdadd82547d177ff2029a5225e6))
+
+### 0.33.5-rc.30 (2022-03-04)
+
+
+### Bug Fixes
+
+* **core:** action-sheet, fix a11y issues ([#7390](https://github.com/SAP/fundamental-ngx/issues/7390)) ([ca49728](https://github.com/SAP/fundamental-ngx/commit/ca49728dda752ae4b1fb03255223dd3d3b0c4724))
+
+### 0.33.5-rc.29 (2022-03-03)
+
+
+### Features
+
+* **platform:** checkbox,checkbox-group - range selection & code enhancements ([#7785](https://github.com/SAP/fundamental-ngx/issues/7785)) ([28aa305](https://github.com/SAP/fundamental-ngx/commit/28aa305fee0bf5d37004f4d99c07b62c84503a17))
+
+### 0.33.5-rc.28 (2022-03-03)
+
+### 0.33.5-rc.27 (2022-03-02)
+
+
+### Features
+
+* **core,platform:** bring horizon themes ([#7819](https://github.com/SAP/fundamental-ngx/issues/7819)) ([ea660aa](https://github.com/SAP/fundamental-ngx/commit/ea660aa9db1de530ba37a0a27e96624c966086f5))
+
+### 0.33.5-rc.26 (2022-03-01)
+
+### 0.33.5-rc.25 (2022-03-01)
+
+
+### Bug Fixes
+
+* **core:** notification a11y ([#7330](https://github.com/SAP/fundamental-ngx/issues/7330)) ([a4c352a](https://github.com/SAP/fundamental-ngx/commit/a4c352ae77351548c21940dd3668a7cf2051ff6d))
+
+### 0.33.5-rc.24 (2022-03-01)
+
+
+### Bug Fixes
+
+* **core:** @angular/cdk schematics issue ([#7820](https://github.com/SAP/fundamental-ngx/issues/7820)) ([66b6228](https://github.com/SAP/fundamental-ngx/commit/66b622831bcf39d50653f3504f4c0ad46ac44a70))
+
+### 0.33.5-rc.23 (2022-03-01)
+
+
+### Bug Fixes
+
+* **core:** layout grid vertical gutter ([#7813](https://github.com/SAP/fundamental-ngx/issues/7813)) ([4bfb410](https://github.com/SAP/fundamental-ngx/commit/4bfb4108aef6577e408044c8a9eb124d3d8aa4c3))
+
+### 0.33.5-rc.22 (2022-02-28)
+
+### 0.33.5-rc.21 (2022-02-28)
+
+### 0.33.5-rc.20 (2022-02-28)
+
+### 0.33.5-rc.19 (2022-02-28)
+
+
+### Bug Fixes
+
+* **core:** added disable functions for previous/next buttons in the calendar ([#7574](https://github.com/SAP/fundamental-ngx/issues/7574)) ([d19463b](https://github.com/SAP/fundamental-ngx/commit/d19463b979406ec98c9cde23ed237c9572601542))
+
+### 0.33.5-rc.18 (2022-02-27)
+
+### 0.33.5-rc.17 (2022-02-27)
+
+
+### Bug Fixes
+
+* **core:** menu item should not receive focus on mouse hover and remove extra box shadow [ci visual] ([#7774](https://github.com/SAP/fundamental-ngx/issues/7774)) ([94d0b1c](https://github.com/SAP/fundamental-ngx/commit/94d0b1c5d2af65287b361f112b0d8e36186757de))
+
+### 0.33.5-rc.16 (2022-02-26)
+
+
+### Bug Fixes
+
+* **core:** schematics angular cdk version issue ([#7800](https://github.com/SAP/fundamental-ngx/issues/7800)) ([ba3a8a2](https://github.com/SAP/fundamental-ngx/commit/ba3a8a2d16e04d2c1aea0ef5c36c887469bb15ba))
+
+### 0.33.5-rc.15 (2022-02-23)
+
+
+### Bug Fixes
+
+* **platform:** upload collections enhancements ([#7742](https://github.com/SAP/fundamental-ngx/issues/7742)) ([8b9669b](https://github.com/SAP/fundamental-ngx/commit/8b9669bd7c157c9b267f343b68c0fdd2b2260de1))
+
+### 0.33.5-rc.14 (2022-02-23)
+
+
+### Features
+
+* **core:** grid-list - range selection using "shift" ([#7758](https://github.com/SAP/fundamental-ngx/issues/7758)) ([6a9e3ba](https://github.com/SAP/fundamental-ngx/commit/6a9e3babcdd8e04c3f232e6d56d08c0c36e7cbe0))
+
+### 0.33.5-rc.13 (2022-02-23)
+
+
+### Features
+
+* **platform:** emit event when smart filters have been updated ([#7771](https://github.com/SAP/fundamental-ngx/issues/7771)) ([d78f6f1](https://github.com/SAP/fundamental-ngx/commit/d78f6f1d732f71df3bca14a1493676c7d507b7d1))
+
+### 0.33.5-rc.12 (2022-02-23)
+
+
+### Features
+
+* **platform:** table - range selection & bug fixes ([#7768](https://github.com/SAP/fundamental-ngx/issues/7768)) ([7f5dcad](https://github.com/SAP/fundamental-ngx/commit/7f5dcad1cb69d677f2df13f73f82b2f258e12053))
+
+### 0.33.5-rc.11 (2022-02-22)
+
+
+### Bug Fixes
+
+* **platform:** multi-input - omit extra dataSource triggering ([#7788](https://github.com/SAP/fundamental-ngx/issues/7788)) ([f14e5ec](https://github.com/SAP/fundamental-ngx/commit/f14e5ec5c434d40dc07c496de90d2dff76d50368))
+
+### 0.33.5-rc.10 (2022-02-22)
+
+### 0.33.5-rc.9 (2022-02-21)
+
+
+### Bug Fixes
+
+* **core:** fix few issues in multi input ([#7760](https://github.com/SAP/fundamental-ngx/issues/7760)) ([483ef0b](https://github.com/SAP/fundamental-ngx/commit/483ef0bb7d4d28293eaf0f39a3cfe7fd27ceaebd)), closes [#7759](https://github.com/SAP/fundamental-ngx/issues/7759)
+
+### 0.33.5-rc.8 (2022-02-21)
+
+
+### Features
+
+* **core:** date-time picker compliance with fiori guidline ([#7773](https://github.com/SAP/fundamental-ngx/issues/7773)) ([34cb24a](https://github.com/SAP/fundamental-ngx/commit/34cb24af68499643b233770a7e46373e01e76b91))
+
 ### 0.33.5-rc.7 (2022-02-20)
 
 ### 0.33.5-rc.6 (2022-02-20)

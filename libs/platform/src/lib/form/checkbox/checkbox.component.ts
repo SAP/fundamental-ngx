@@ -9,7 +9,6 @@ import {
     Host,
     Input,
     isDevMode,
-    NgZone,
     Optional,
     Output,
     Self,
@@ -19,8 +18,8 @@ import {
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 
-import { CheckboxComponent as CoreCheckboxComponent } from '@fundamental-ngx/core/checkbox';
-import { BaseInput, FormField, FormFieldControl, ControlState } from '@fundamental-ngx/platform/shared';
+import { FdCheckboxValues, CheckboxComponent as FdCheckboxComponent } from '@fundamental-ngx/core/checkbox';
+import { BaseInput, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
 
 /** Change event object emitted by Platform Checkbox. */
 export class PlatformCheckboxChange {
@@ -33,15 +32,6 @@ export class PlatformCheckboxChange {
     checked: any;
 }
 
-/**
- * This implementation behaves like implementation in PrimeNg and Material checkbox implementation.
- * Some part of code/idea has been taken from above mentioned and has been implemented to work with platform form.
- * primeng: https://primefaces.org/primeng/showcase/#/checkbox
- *
- * Checkbox group implementation based on the
- * https://github.com/SAP/fundamental-ngx/wiki/Platform:-Checkbox-Component-Technical-Design
- * documents.
- */
 let nextUniqueId = 0;
 
 @Component({
@@ -58,10 +48,6 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
     @Input()
     title: string;
 
-    /** set to true if binary checkbox */
-    @Input()
-    isBinary = false;
-
     /** Sets label for checkbox. */
     @Input()
     label: string;
@@ -70,11 +56,24 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
     @Input()
     tristate = false;
 
-    /** when true indeterminate state can be selected */
+    /** @deprecated */
     @Input()
-    tristateSelectable = true;
+    set isBinary(value: boolean) {
+        if (isDevMode()) {
+            console.warn(
+                '"isBinary" is deprecated and has no effect anymore \n' +
+                    'Checkbox is binary by default. Use "tristate" input if you need to have indeterminate checkbox.'
+            );
+        }
+    }
 
-    /** value for checkbox control */
+    // this is undesired to have "checked" input instead of "value"
+    // but it was done this way initially and we have to keep this in order to not break anything
+    /**
+     * value for checkbox control
+     */
+    // eslint-disable-next-line @angular-eslint/no-input-rename
+    @Input('checked')
     get value(): any {
         return this.getValue();
     }
@@ -82,82 +81,51 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
         this.setValue(selectValue);
     }
 
-    /** value for checkbox when selected */
+    /** when true indeterminate state can be selected */
+    @Input()
+    tristateSelectable = false;
+
+    /** value for checkbox control */
+    // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('value')
-    get checkboxValue(): any {
-        return this._checkboxValue;
-    }
-    set checkboxValue(selectValue: any) {
-        this._checkboxValue = selectValue;
+    set checkboxTrueValue(trueValue: any) {
+        if (isDevMode()) {
+            console.warn('"value" input is deprecated. Use "values" instead');
+        }
+        this.values = this.values ? { ...this.values, trueValue } : { trueValue };
     }
 
+    /** Values returned by control. */
+    @Input()
+    values: FdCheckboxValues;
+
     /**
-     * true when checkbox is checked. used when checkbox created outside form
+     * Emitting checked event for non-form checkbox
      */
-    @Input()
-    get checked(): boolean {
-        return this._checked;
-    }
-    set checked(value: boolean) {
-        if (value !== this.checked) {
-            this._checked = value;
-        }
-    }
-
-    /**
-     * @deprecated
-     * set state of individual checkbox. Used by CBG to set checkbox states */
-    @Input()
-    get stateType(): ControlState {
-        if (isDevMode()) {
-            console.warn('"stateType" is deprecated. Use "state" instead');
-        }
-        return super.state;
-    }
-
-    set stateType(state: ControlState) {
-        if (isDevMode()) {
-            console.warn('"stateType" is deprecated. Use "state" instead');
-        }
-        super.state = state;
-    }
-
-    /** Emitting checked event for non-form checkbox  */
     @Output()
     readonly checkedChange: EventEmitter<PlatformCheckboxChange> = new EventEmitter<PlatformCheckboxChange>();
 
-    /** Emitting checkbox change event */
+    /**
+     * @deprecated use "checkedChange" instead
+     * Emitting checkbox change event
+     */
     @Output()
     // eslint-disable-next-line @angular-eslint/no-output-native
     readonly change: EventEmitter<PlatformCheckboxChange> = new EventEmitter<PlatformCheckboxChange>();
 
-    /** Event emitted when the checkbox's `indeterminate` value changes. */
+    /**
+     * @deprecated rely on checkbox state directly instead
+     * Event emitted when the checkbox's `indeterminate` value changes.
+     */
     @Output()
     readonly indeterminateChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    /** @hidden
-     * tracking checkbox current value
-     */
-    public checkboxCurrentValue: any;
-
-    /* @hidden
-     * reference of child checkbox implementation
-     */
-    @ViewChild(CoreCheckboxComponent)
-    private corecheckbox: CoreCheckboxComponent;
-
-    /* @hidden
-     * stores  formControl values
-     */
-    private model: any;
-
     /**
-     * @hidden checkbox state, used when checkbox is used without form.
+     * @hidden
+     * is needed for the checkbox group to access component values
      */
-    private _checked = false;
-
-    /** @hidden value of checkbox */
-    private _checkboxValue: any;
+    @ViewChild(FdCheckboxComponent)
+    coreCheckbox: FdCheckboxComponent;
 
     constructor(
         @Optional() @Self() ngControl: NgControl,
@@ -165,7 +133,6 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
         protected _changeDetector: ChangeDetectorRef,
-        private _ngZone: NgZone,
         @Attribute('tabIndexValue') public tabIndexValue: number = 0
     ) {
         super(_changeDetector, ngControl, ngForm, formField, formControl);
@@ -175,160 +142,22 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
         this.tabIndexValue = tabIndexValue;
     }
 
-    /** ControlValueAccessor */
-    writeValue(value: any): void {
-        this._initialiseCheckboxWithControl(value);
-        super.writeValue(value);
-    }
-
-    /** child checkbox is initialized here */
-    ngAfterViewInit(): void {
-        if (this.tristate) {
-            // handling tristate checkbox without value as well
-            if (this.checkboxValue) {
-                this.corecheckbox.values.trueValue = this.checkboxValue;
-            }
-        } else if (this.isBinary) {
-            if (!this.checkboxCurrentValue) {
-                this.checkboxCurrentValue = this.checked;
-
-                if (this.checked && this.checkboxValue) {
-                    // have to set checkbox value here.
-                    this.checkboxCurrentValue = this.checkboxValue;
-                    this.corecheckbox.values.trueValue = this.checkboxValue;
-
-                    // in case of checkbox outside form.
-                    // have to update checked value, as checkbox is checked.
-                    // Doing inside ngAfterViewInit, so have to run outside angular
-                    this._emitvalueInViewInit();
-                }
-            }
-        } else {
-            // updating checkbox values property for this custom checkbox
-            this.corecheckbox.values.trueValue = this.checkboxValue;
-            this.corecheckbox.values.falseValue = undefined;
-
-            // set core checkbox control value based on platform checkbox control value
-            if (this.checkboxValue && this.model && this.model.includes(this.checkboxValue)) {
-                this.checkboxCurrentValue = this.checkboxValue;
-            } else {
-                this.checkboxCurrentValue = undefined;
-            }
-        }
-        super.ngAfterViewInit();
-    }
-
     /** update controller on checkbox state change */
-    public onModelChange(): void {
-        this.checkboxCurrentValue = this.corecheckbox.checkboxValue;
-        this._updateModel();
-        this.onTouched();
+    public onModelChange(value: any): void {
+        this.value = value;
+        this._emitChangeEvent();
         this.stateChanges.next('checkbox: onModelChange');
-    }
-
-    /** @hidden running outside angular zone */
-    private _emitvalueInViewInit(): void {
-        this._ngZone.runOutsideAngular(() => {
-            setTimeout(() => {
-                // handles value of binary checkbox with value, outside form
-                this.checkedChange.emit(this.checkboxValue);
-            });
-        });
-    }
-
-    /** @hidden
-     * Adds checkbox or removes checkbox from model
-     */
-    private _updateModel(): void {
-        if (this.tristate) {
-            if (!this.corecheckbox.isChecked) {
-                if (this.corecheckbox.checkboxState === 'indeterminate') {
-                    this.checkboxCurrentValue = this.corecheckbox.values.thirdStateValue;
-                    this.indeterminateChange.emit(this.checkboxCurrentValue);
-                } else {
-                    this.checkboxCurrentValue = this.corecheckbox.values.falseValue;
-                }
-            } else {
-                this.checkboxCurrentValue = this.corecheckbox.values.trueValue;
-            }
-            this._emitChangeEvent(this.checkboxCurrentValue);
-        } else if (this.isBinary) {
-            if (this.checkboxCurrentValue && this.checkboxValue) {
-                // handles value of binary checkbox with value, outside form
-                this.checkedChange.emit(this.checkboxValue);
-            } else {
-                this.checkedChange.emit(this.checkboxCurrentValue);
-            }
-            this._emitChangeEvent(this.checkboxCurrentValue);
-        } else {
-            // checkbox has been selected
-            if (this.corecheckbox.isChecked) {
-                this._addValue();
-            } else {
-                this._removeValue();
-            }
-
-            // for multiSelect checkbox, all checkbox should have same copy of model.
-            if (this.ngControl) {
-                this.ngControl.control.setValue(this.model);
-            }
-            this._emitChangeEvent(this.model);
-        }
     }
 
     /**
      * Method to emit change event
      */
-    private _emitChangeEvent(modelValue: any): void {
+    private _emitChangeEvent(): void {
         const event = new PlatformCheckboxChange();
         event.source = this;
-        event.checked = modelValue;
-
-        // setting value, it will call setValue()
-        this.value = modelValue;
+        event.checked = this.value;
+        this.checkedChange.emit(event);
         this.change.emit(event);
-    }
-
-    /** @hidden
-     * triggered when checkbox is unchecked, value removed from model
-     */
-    private _removeValue(): void {
-        if (this.model) {
-            this.model = this.model.filter((val: string) => val !== this.checkboxValue);
-        }
-    }
-
-    /** @hidden
-     * triggered when checkbox is checked, value added to model
-     */
-    private _addValue(): void {
-        if (this.corecheckbox.checkboxState === 'indeterminate') {
-            this.model = [...this.model, this.checkboxCurrentValue];
-        } else if (this.model) {
-            this.model = [...this.model, this.checkboxCurrentValue];
-        } else {
-            this.model = [this.checkboxCurrentValue];
-        }
-    }
-
-    /**
-     * @hidden
-     * @param value , Array or boolean and string/null for tristate
-     * setting core checkbox control value using passed control value for initial state of checkbox
-     */
-    private _initialiseCheckboxWithControl(value: any): void {
-        // Expecting Formcontrol values as Array [] or boolean
-        if (Array.isArray(value)) {
-            // handling ngmodel/formcontrol as Array.
-            if (this.checkboxValue && value.includes(this.checkboxValue)) {
-                this.checkboxCurrentValue = this.checkboxValue;
-            } else {
-                this.checkboxCurrentValue = undefined;
-            }
-            this.model = value;
-        } else {
-            this.checkboxCurrentValue = value;
-        }
-        this._changeDetector.detectChanges();
+        this.indeterminateChange.emit(this.value === this.coreCheckbox?.values.thirdStateValue);
     }
 }

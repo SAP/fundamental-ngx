@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, ViewChild, ElementRef, OnDestroy } 
 
 import { BreadcrumbComponent } from '@fundamental-ngx/core/breadcrumb';
 import { FlexibleColumnLayout } from '@fundamental-ngx/core/flexible-column-layout';
-import { DynamicPageComponent, DynamicPageTabChangeEvent } from '@fundamental-ngx/platform/dynamic-page';
+import { DynamicPageComponent } from '@fundamental-ngx/platform/dynamic-page';
 import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-page-overflow.service';
 
 @Component({
@@ -89,10 +89,6 @@ export class PlatformDynamicPageFlexibleColumnExampleComponent implements OnDest
         this.fullscreen = false;
         this.overlay.nativeElement.style.width = '0%';
         this._overflowHandlingService.isExampleOpened.next(false);
-    }
-
-    onTabChanged(event: DynamicPageTabChangeEvent): void {
-        console.log('tab changed to ' + event.payload.id);
     }
 
     onLayoutChanged(layout: FlexibleColumnLayout): void {

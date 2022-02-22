@@ -1,6 +1,10 @@
 import { ChangeDetectionStrategy, Component, HostListener, Input, ViewEncapsulation } from '@angular/core';
-import { ActionSheetItemComponent } from '../action-sheet-item/action-sheet-item.component';
+
 import { KeyboardSupportService } from '@fundamental-ngx/core/utils';
+
+import { ActionSheetItemComponent } from '../action-sheet-item/action-sheet-item.component';
+
+let actionSheetBodyUniqueIdCounter = 0;
 
 /**
  * A component used to enforce a certain layout for the action sheet.
@@ -22,15 +26,28 @@ import { KeyboardSupportService } from '@fundamental-ngx/core/utils';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActionSheetBodyComponent {
-    /** Indicate if items should be in compact or compare mode. **/
+    /** Id of the Action Sheet Body. */
+    @Input()
+    actionSheetBodyId = `fd-action-sheet-body-${actionSheetBodyUniqueIdCounter++}`;
+
+    /** Indicate if items should be in compact or compare mode. */
     @Input()
     compact = false;
 
-    /** Display in mobile view. **/
+    /** Display in mobile view. */
     @Input()
     mobile = false;
 
-    constructor(private _keyboardSupportService: KeyboardSupportService<ActionSheetItemComponent>) {}
+    /** Aria-label for Action Sheet Body. */
+    @Input()
+    ariaLabel: string;
+
+    /** Aria-Labelledby for element describing Action Sheet Body. */
+    @Input()
+    ariaLabelledby: string;
+
+    /** @hidden */
+    constructor(private readonly _keyboardSupportService: KeyboardSupportService<ActionSheetItemComponent>) {}
 
     /** Handler for mouse events */
     @HostListener('click', ['$event'])

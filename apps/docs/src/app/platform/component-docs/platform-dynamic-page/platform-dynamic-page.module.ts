@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { RouterModule, Routes } from '@angular/router';
 
 import { BarModule } from '@fundamental-ngx/core/bar';
@@ -34,6 +35,7 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
+        ScrollingModule,
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
         PlatformDynamicPageModule,

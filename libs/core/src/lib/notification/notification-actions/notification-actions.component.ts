@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ContentChildren,
+    HostBinding,
+    QueryList,
+    ViewEncapsulation
+} from '@angular/core';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 
 @Component({
     selector: 'fd-notification-actions',
@@ -10,4 +18,8 @@ export class NotificationActionsComponent {
     /** @hidden */
     @HostBinding('class.fd-notification__actions')
     fdNotificationActionsClass = true;
+
+    /** @hidden */
+    @ContentChildren(ButtonComponent)
+    buttons: QueryList<ButtonComponent>;
 }

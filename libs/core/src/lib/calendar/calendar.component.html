@@ -8,6 +8,8 @@
     (closeClicked)="closeClicked.emit()"
     (nextClicked)="handleNextArrowClick()"
     (previousClicked)="handlePreviousArrowClick()"
+    [previousButtonDisabled]="previousButtonDisabled"
+    [nextButtonDisabled]="nextButtonDisabled"
     (activeViewChange)="handleActiveViewChange($event)"
 ></fd-calendar-header>
 <ng-container [ngSwitch]="activeView">

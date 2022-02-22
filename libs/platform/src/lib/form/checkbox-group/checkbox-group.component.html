@@ -12,8 +12,10 @@
                     checkboxtmpt;
                     context: {
                         id: id + i,
+                        idx: i,
+                        source: 'contentChildren',
                         name: name,
-                        checkboxValue: checkbox.checkboxValue,
+                        checkboxValue: checkbox.coreCheckbox?.values?.trueValue,
                         contentDensity: contentDensity,
                         labeltext: checkbox.label,
                         disabled: disabled || checkbox.disabled,
@@ -39,6 +41,8 @@
                 checkboxtmpt;
                 context: {
                     id: id + i,
+                    idx: i,
+                    source: 'list',
                     name: name,
                     checkboxValue: getLookupValue(item),
                     contentDensity: contentDensity,
@@ -54,6 +58,8 @@
 <ng-template
     #checkboxtmpt
     let-id="id"
+    let-idx="idx"
+    let-source="source"
     let-name="name"
     let-checkboxValue="checkboxValue"
     let-contentDensity="contentDensity"
@@ -67,7 +73,7 @@
     <fdp-checkbox
         [id]="id"
         [name]="name"
-        [value]="checkboxValue"
+        [values]="{ trueValue: checkboxValue }"
         [label]="labeltext"
         [ariaLabel]="ariaLabel"
         [ariaLabelledBy]="ariaLabelledBy"
@@ -76,8 +82,9 @@
         [contentDensity]="contentDensity"
         [disabled]="checkboxDisabled"
         [state]="state"
-        [(ngModel)]="value"
-        (change)="groupValueChanges($event)"
+        [ngModel]="_selectionModel.isSelected(checkboxValue) ? checkboxValue : false"
+        (ngModelChange)="onModelChanged($event, checkboxValue)"
+        (click)="onCheckboxClick(idx, source, $event)"
     >
     </fdp-checkbox>
 </ng-template>

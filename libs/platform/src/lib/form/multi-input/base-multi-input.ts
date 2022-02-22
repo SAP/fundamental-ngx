@@ -158,12 +158,12 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** Event emitted when data loading is started. */
-    @Output()
-    onDataRequested = new EventEmitter<void>();
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+    @Output() onDataRequested = new EventEmitter<void>();
 
     /** Event emitted when data loading is finished. */
-    @Output()
-    onDataReceived = new EventEmitter<void>();
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+    @Output() onDataReceived = new EventEmitter<void>();
 
     /** @hidden */
     @ViewChild(ListComponent)
@@ -376,12 +376,13 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
 
     /** @hidden */
     showList(isOpen: boolean): void {
-        if (!isOpen) {
-            this.searchTermChanged('');
-        }
-
         if (this.isOpen !== isOpen) {
-            isOpen ? this.open() : this.close();
+            if (isOpen) {
+                this.open();
+            } else {
+                this.searchTermChanged('');
+                this.close();
+            }
         }
     }
 

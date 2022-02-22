@@ -13,12 +13,16 @@ import {
     OnDestroy,
     ChangeDetectionStrategy
 } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
-import { parseLayoutPattern } from '../../helpers';
-import { GridListSelectionEvent, GridListSelectionService } from '../../services/grid-list-selection.service';
+import { BehaviorSubject, filter, Subscription } from 'rxjs';
+import { parseLayoutPattern } from '../../helpers/parse-layout-pattern';
 import { GridListItemComponent } from '../grid-list-item/grid-list-item.component';
-import { GridListSelectionMode } from './grid-list-selection-mode';
+import {
+    GridListSelectionMode,
+    GridListSelectionActions,
+    GridListSelectionEvent
+} from './../../models/grid-list-selection.models';
+import { RangeSelector } from '@fundamental-ngx/core/utils';
+import { GridList } from './grid-list-base.component';
 
 let gridListUniqueId = 0;
 
@@ -27,10 +31,10 @@ let gridListUniqueId = 0;
     templateUrl: './grid-list.component.html',
     styleUrls: ['./grid-list.component.scss', '../../../utils/drag-and-drop/drag-and-drop.scss'],
     encapsulation: ViewEncapsulation.None,
-    providers: [GridListSelectionService],
+    providers: [{ provide: GridList, useExisting: GridListComponent }],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GridListComponent<T> implements OnChanges, AfterContentInit, OnDestroy {
+export class GridListComponent<T> extends GridList<T> implements OnChanges, AfterContentInit, OnDestroy {
     /** id for the Element */
     @Input()
     id = `fd-grid-list-${gridListUniqueId++}`;
@@ -74,20 +78,38 @@ export class GridListComponent<T> implements OnChanges, AfterContentInit, OnDest
         this._updateGridListItemsProperties(components);
     }
 
+    get gridListItems(): QueryList<GridListItemComponent<T>> {
+        return this._gridListItems;
+    }
+
     /** @hidden */
     private _gridListItems: QueryList<GridListItemComponent<T>>;
+
+    /** @hidden */
+    private readonly _rangeSelector = new RangeSelector();
+
+    /** @hidden */
+    private readonly _selectedItems: GridListSelectionEvent<T> = {
+        added: [],
+        index: [],
+        removed: [],
+        selection: []
+    };
+
+    /** @hidden */
+    private readonly _selectedItemsSubject$ = new BehaviorSubject<GridListSelectionEvent<T>>(this._selectedItems);
+
+    readonly _selectedItems$ = this._selectedItemsSubject$.asObservable();
 
     /** @hidden */
     private readonly subscription = new Subscription();
 
     /** @hidden */
-    constructor(
-        private readonly _cd: ChangeDetectorRef,
-        private readonly _gridListSelectionService: GridListSelectionService<T>
-    ) {
-        const selectedItemsSub = this._gridListSelectionService.selectedItemsObs
+    constructor(private readonly _cd: ChangeDetectorRef) {
+        super();
+        const selectedItemsSub = this._selectedItems$
             .pipe(filter(() => !!this._gridListItems))
-            .subscribe((selectedItems) => this.selectionChange.emit(selectedItems));
+            .subscribe(this.selectionChange);
 
         this.subscription.add(selectedItemsSub);
     }
@@ -126,7 +148,59 @@ export class GridListComponent<T> implements OnChanges, AfterContentInit, OnDest
      * Clears previous selection of the items.
      */
     clearSelection(): void {
-        this._gridListSelectionService.clearSelection();
+        this._selectedItems.added = [];
+        this._selectedItems.index = [];
+        this._selectedItems.removed = this._selectedItems.selection;
+        this._selectedItems.selection = [];
+
+        this._selectedItemsSubject$.next(this._selectedItems);
+    }
+
+    /** @hidden */
+    setSelectedItem(item: T, componentIndex: number, action?: GridListSelectionActions, event?: PointerEvent): void {
+        if (!action) {
+            this._selectedItems.added = [item];
+            const selectedItem = this._selectedItems.selection[0];
+            if (selectedItem) {
+                this._selectedItems.removed = [selectedItem];
+            }
+
+            this._selectedItems.selection = [item];
+            this._selectedItems.index = [componentIndex];
+
+            this._selectedItemsSubject$.next(this._selectedItems);
+
+            return;
+        }
+
+        this._rangeSelector.onRangeElementToggled(componentIndex, event);
+        const { from, to } = this._rangeSelector.lastRangeSelectionState;
+        const itemIndexes = new Array(to - from + 1).fill(null).map((e, i) => from + i);
+        const selectedItems = itemIndexes.map((idx) => this.gridListItems.get(idx).value);
+        const itemsSet = new Set(selectedItems);
+
+        if (action === GridListSelectionActions.ADD) {
+            this._selectedItems.added = [...itemsSet.values()];
+            this._selectedItems.index = [...itemIndexes];
+            this._selectedItems.removed = [];
+
+            // remove "itemsSet" values from selection and add them back from "itemsSet"
+            // this is needed to avoid duplicates as some of the items can be already selected
+            this._selectedItems.selection = this._selectedItems.selection.filter((e) => !itemsSet.has(e));
+            this._selectedItems.selection.push(...itemsSet.values());
+        }
+
+        if (action === GridListSelectionActions.REMOVE) {
+            this._selectedItems.added = [];
+            this._selectedItems.index = [...itemIndexes];
+            this._selectedItems.removed = [...itemsSet.values()];
+
+            this._selectedItems.selection = this._selectedItems.selection.filter(
+                (selectedItem) => !itemsSet.has(selectedItem)
+            );
+        }
+
+        this._selectedItemsSubject$.next(this._selectedItems);
     }
 
     /** @hidden */

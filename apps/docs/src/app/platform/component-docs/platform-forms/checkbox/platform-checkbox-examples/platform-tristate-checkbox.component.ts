@@ -31,12 +31,6 @@ export class PlatformChekboxTristateComponent implements AfterViewInit {
         this.setControlOnAgreementsChange();
     }
 
-    public checkedChangeFunction(): void {}
-
-    public indeterminateChangeFunction(): void {}
-
-    public changeFunction(): void {}
-
     private setAgreementsOnAcceptAllChange(): void {
         this.registrationForm.get('acceptAll').valueChanges.subscribe((value) => this.acceptAll(value));
     }

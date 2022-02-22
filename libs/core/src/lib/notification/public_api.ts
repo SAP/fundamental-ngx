@@ -4,6 +4,7 @@ export * from './notification/notification.component';
 export * from './notification-utils/notification-config';
 export * from './notification-utils/notification-ref';
 export * from './notification-utils/notification-container';
+export * from './notification-utils/notification-group-base';
 export * from './notification-body/notification-body.component';
 export * from './notification-footer/notification-footer.component';
 export * from './notification-header/notification-header.component';
