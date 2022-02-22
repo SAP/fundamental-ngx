@@ -1,4 +1,11 @@
 
+### 0.33.5-rc.11 (2022-02-22)
+
+
+### Bug Fixes
+
+* **platform:** multi-input - omit extra dataSource triggering ([#7788](https://github.com/SAP/fundamental-ngx/issues/7788)) ([f14e5ec](https://github.com/SAP/fundamental-ngx/commit/f14e5ec5c434d40dc07c496de90d2dff76d50368))
+
 ### 0.33.5-rc.10 (2022-02-22)
 
 ### 0.33.5-rc.9 (2022-02-21)
