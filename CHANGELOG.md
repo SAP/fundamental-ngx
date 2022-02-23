@@ -1,4 +1,11 @@
 
+### 0.33.5-rc.15 (2022-02-23)
+
+
+### Bug Fixes
+
+* **platform:** upload collections enhancements ([#7742](https://github.com/SAP/fundamental-ngx/issues/7742)) ([8b9669b](https://github.com/SAP/fundamental-ngx/commit/8b9669bd7c157c9b267f343b68c0fdd2b2260de1))
+
 ### 0.33.5-rc.14 (2022-02-23)
 
 
