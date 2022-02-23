@@ -1,4 +1,11 @@
 
+### 0.33.5-rc.12 (2022-02-23)
+
+
+### Features
+
+* **platform:** table - range selection & bug fixes ([#7768](https://github.com/SAP/fundamental-ngx/issues/7768)) ([7f5dcad](https://github.com/SAP/fundamental-ngx/commit/7f5dcad1cb69d677f2df13f73f82b2f258e12053))
+
 ### 0.33.5-rc.11 (2022-02-22)
 
 
