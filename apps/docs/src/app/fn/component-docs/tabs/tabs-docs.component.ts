@@ -3,6 +3,10 @@ import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
 import tabSrc from '!./examples/tabs-example/tabs-example.component.html?raw';
+import tabIconSrc from '!./examples/tabs-example/tabs-icon-example.component.html?raw';
+import tabNestedButtonSrc from '!./examples/tabs-example/tabs-nested-button-example.component.html?raw';
+import tabOverflowSrc from '!./examples/tabs-example/tabs-overflow-example.component.html?raw';
+import tabMultiInstanceSrc from '!./examples/tabs-example/tabs-multi-instance-example.component.html?raw';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { Icons } from '../../../documentation/utilities/icons';
@@ -125,6 +129,38 @@ export class TabsDocsComponent {
             language: 'html',
             code: tabSrc,
             fileName: 'tabs-example'
+        }
+    ];
+
+    tabIconExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: tabIconSrc,
+            fileName: 'tabs-icon-example'
+        }
+    ];
+
+    tabNestedButtonExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: tabNestedButtonSrc,
+            fileName: 'tabs-nested-button-example'
+        }
+    ];
+
+    tabOverflowExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: tabOverflowSrc,
+            fileName: 'tabs-overflow-example'
+        }
+    ];
+
+    tabMultiInstanceExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: tabMultiInstanceSrc,
+            fileName: 'tabs-multi-instance-example'
         }
     ];
 

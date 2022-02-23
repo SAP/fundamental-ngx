@@ -18,6 +18,12 @@ export class TabComponent {
     @Input()
     title: string;
 
+    @Input()
+    glyph: string;
+
+    @Input()
+    button: string;
+
     /** Whether the tab is active or not. */
     @Input()
     active = false;

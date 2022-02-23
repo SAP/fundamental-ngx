@@ -1,5 +1,5 @@
-<div class="fn-tabs" [class]="mode ? 'fn-tabs--' + mode : ''" role="tablist">
-    <a
+<ul class="fn-tabs" [class]="mode ? 'fn-tabs--' + mode : ''" role="tablist">
+    <li
         *ngFor="let tab of _tabsList; let i = index"
         fn-tab-item
         [active]="tab.active"
@@ -7,7 +7,32 @@
         (click)="setActiveTab(i)"
         (keydown)="_tabHeaderKeyHandler(i, $event)"
     >
-        {{ tab.title }}
-    </a>
-</div>
+        <ng-container *ngIf="tab.glyph">
+            <span class="sap-icon fn-tabs__icon" [class]="'sap-icon--' + tab.glyph"></span>
+        </ng-container>
+
+        <span class="fn-tabs__text">
+            {{ tab.title }}
+        </span>
+
+        <button *ngIf="tab.button" class="fn-nested-button fn-tabs__button" aria-label="show children elements">
+            <span class="sap-icon sap-icon--megamenu"></span>
+        </button>
+        <button *ngIf="mode === 'multi-instance'" class="fn-nested-button fn-tabs__button" aria-label="close">
+            <span class="sap-icon sap-icon--decline"></span>
+        </button>
+    </li>
+
+    <div role="tab" class="fn-tabs__right-container">
+        <!-- <fn-button class="fn-button--layout fn-button--icon-only">
+            <span class="sap-icon sap-icon--overflow"></span>
+        </fn-button> -->
+        <button class="fn-button fn-button--layout fn-button--icon-only" aria-label="More">
+            <span class="sap-icon sap-icon--overflow"></span>
+        </button>
+        <button class="fn-button fn-button--layout fn-button--icon-only" aria-label="Add">
+            <span class="sap-icon sap-icon--add"></span>
+        </button>
+    </div>
+</ul>
 <ng-content></ng-content>
