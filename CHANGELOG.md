@@ -1,4 +1,11 @@
 
+### 0.33.5-rc.14 (2022-02-23)
+
+
+### Features
+
+* **core:** grid-list - range selection using "shift" ([#7758](https://github.com/SAP/fundamental-ngx/issues/7758)) ([6a9e3ba](https://github.com/SAP/fundamental-ngx/commit/6a9e3babcdd8e04c3f232e6d56d08c0c36e7cbe0))
+
 ### 0.33.5-rc.13 (2022-02-23)
 
 
