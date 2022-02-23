@@ -163,7 +163,7 @@
         [id]="id + '-checkbox'"
         [attr.aria-label]="ariaLabel"
         [ngModel]="_selectedItem"
-        (ngModelChange)="_selectionItem($event)"
+        (click)="_checkboxClick($event)"
     />
     <label
         class="fd-checkbox__label fd-checkbox__label--compact fd-grid-list__checkbox-label"

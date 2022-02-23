@@ -21,11 +21,11 @@ import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 
-import { parseLayoutPattern } from '../../helpers';
-import { GridListSelectionActions, GridListSelectionService } from '../../services/grid-list-selection.service';
+import { parseLayoutPattern } from '../../helpers/parse-layout-pattern';
 import { GridListItemToolbarComponent } from '../grid-list-item-toolbar/grid-list-item-toolbar.component';
-import { GridListSelectionMode } from '../grid-list/grid-list-selection-mode';
+import { GridListSelectionMode, GridListSelectionActions } from '../../models/grid-list-selection.models';
 import { GridListItemFooterBarComponent } from '../grid-list-item-footer-bar/grid-list-item-footer-bar.component';
+import { GridList } from './../grid-list/grid-list-base.component';
 
 let gridListItemUniqueId = 0;
 
@@ -223,7 +223,7 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
             const action = this.selectionMode !== 'multiSelect' ? null : GridListSelectionActions.ADD;
             const value = this.value;
 
-            this._gridListSelectionService.setSelectedItem(value, this._index, action);
+            this._gridList.setSelectedItem(value, this._index, action);
         }
 
         this._cd.detectChanges();
@@ -245,9 +245,9 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
         private readonly _cd: ChangeDetectorRef,
         private readonly _elementRef: ElementRef,
         private readonly _render: Renderer2,
-        private readonly _gridListSelectionService: GridListSelectionService<T>
+        private readonly _gridList: GridList<T>
     ) {
-        const selectedItemsSub = this._gridListSelectionService.selectedItemsObs.subscribe((items) => {
+        const selectedItemsSub = this._gridList._selectedItems$.subscribe((items) => {
             this._selectedItem = items.selection.find((item) => item === this.value);
             this._cd.markForCheck();
         });
@@ -295,11 +295,17 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
         if (typeof this._selectedItem !== 'undefined') {
             return;
         }
-        this._gridListSelectionService.setSelectedItem(this.value, this._index);
+        this._gridList.setSelectedItem(this.value, this._index);
     }
 
     /** @hidden */
-    _selectionItem(value: boolean | number | T): void {
+    _checkboxClick(event: PointerEvent): void {
+        const checked = (<HTMLInputElement>event.target).checked;
+        this._selectionItem(checked, event);
+    }
+
+    /** @hidden */
+    _selectionItem(value: boolean | number | T, event?: PointerEvent): void {
         const action =
             this.selectionMode !== 'multiSelect'
                 ? null
@@ -307,7 +313,7 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
                 ? GridListSelectionActions.ADD
                 : GridListSelectionActions.REMOVE;
 
-        this._gridListSelectionService.setSelectedItem(this.value, this._index, action);
+        this._gridList.setSelectedItem(this.value, this._index, action, event);
     }
 
     /** @hidden */
