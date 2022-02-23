@@ -133,6 +133,11 @@ $fd-upload-collection-drag-and-drop-active-color-var: var(--sapContent_DragAndDr
             }
         }
 
+        .fdp-upload-collection__pagination--total {
+            width: 100%;
+            align-self: center;
+        }
+
         .fdp-upload-collection__pagination {
             @include fd-reset();
 

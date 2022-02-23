@@ -76,6 +76,7 @@
                 [columnName]="column.name"
                 [id]="id + '__' + column.name"
                 [attr.aria-colindex]="colIdx"
+                [ngClass]="'fdp-table__col--' + column.name"
                 [class.fd-table__cell--fixed]="_freezableColumns?.has(column.name)"
                 [class.fd-table__cell--fixed-last]="column.name === freezeColumnsTo"
                 [ngStyle]="_getCellStyles(column)"
@@ -204,7 +205,7 @@
 
         <th *ngIf="_isShownNavigationColumn" fd-table-cell class="fdp-table__cell--navigation" role="columnheader"></th>
 
-        <th class="fd-table__cell--mock"></th>
+        <th class="fd-table__cell fd-table__cell--mock"></th>
     </tr>
 </ng-template>
 
@@ -343,6 +344,7 @@
                                 role="cell"
                                 [headers]="id + '__' + column.name"
                                 [style.textAlign]="column.align"
+                                [ngClass]="'fdp-table__col--' + column.name"
                                 [class.fd-table__cell--fixed]="_freezableColumns?.has(column.name)"
                                 [class.fd-table__cell--fixed-last]="column.name === freezeColumnsTo"
                                 [class.fd-table__cell--expand]="_isTreeRowFirstCell(colIdx, row)"
@@ -413,7 +415,7 @@
                                 ></i>
                             </td>
 
-                            <td class="fd-table__cell--mock"></td>
+                            <td class="fd-table__cell fd-table__cell--mock"></td>
                         </tr>
                     </ng-container>
                 </tbody>
