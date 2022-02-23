@@ -309,9 +309,9 @@
                                         [style]="_getSelectionCellStyles(tableRow)"
                                         [focusable]="true"
                                         [attr.aria-selected]="row.checked"
-                                        (click)="_toggleSelectableRow(row)"
-                                        (keydown.enter)="_toggleSelectableRow(row)"
-                                        (keydown.space)="_toggleSelectableRow(row)"
+                                        (click)="_toggleSingleSelectableRow(row)"
+                                        (keydown.enter)="_toggleSingleSelectableRow(row)"
+                                        (keydown.space)="_toggleSingleSelectableRow(row)"
                                     ></td>
                                 </ng-container>
 
@@ -327,7 +327,9 @@
                                             labelClass="fd-table__checkbox-label"
                                             [ngModel]="row.checked"
                                             [disabled]="row.state === 'new'"
-                                            (ngModelChange)="_toggleSelectableRow(row)"
+                                            (click)="_toggleMultiSelectRow(row, rowIdx, $event)"
+                                            (keydown.enter)="_toggleMultiSelectRow(row, rowIdx, $event)"
+                                            (keydown.space)="_toggleMultiSelectRow(row, rowIdx, $event)"
                                         ></fd-checkbox>
                                     </td>
                                 </ng-container>
