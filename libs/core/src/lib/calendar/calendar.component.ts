@@ -232,17 +232,6 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      */
     _currentlyDisplayed: CalendarCurrent;
 
-    /**
-     * @hidden
-     */
-    get currentlyDisplayed(): CalendarCurrent {
-        return this._currentlyDisplayed;
-    }
-
-    set currentlyDisplayed(currentlyDisplayed: CalendarCurrent) {
-        this._currentlyDisplayed = currentlyDisplayed;
-    }
-
     /** @hidden */
     private _subscriptions = new Subscription();
 
@@ -321,11 +310,12 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
         }
     }
 
+    /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if (
             'nextButtonDisableFunction' in changes ||
             'previousButtonDisableFunction' in changes ||
-            'currentlyDisplayed' in changes
+            '_currentlyDisplayed' in changes
         ) {
             this._setNavigationButtonsStates();
         }
@@ -504,36 +494,36 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
 
     /** Function that allows to switch actual view to next month */
     displayNextMonth(): void {
-        if (this.currentlyDisplayed.month === 12) {
-            this.currentlyDisplayed = { year: this.currentlyDisplayed.year + 1, month: 1 };
+        if (this._currentlyDisplayed.month === 12) {
+            this._currentlyDisplayed = { year: this._currentlyDisplayed.year + 1, month: 1 };
         } else {
-            this.currentlyDisplayed = {
-                year: this.currentlyDisplayed.year,
-                month: this.currentlyDisplayed.month + 1
+            this._currentlyDisplayed = {
+                year: this._currentlyDisplayed.year,
+                month: this._currentlyDisplayed.month + 1
             };
         }
     }
 
     /** Function that allows to switch actual view to previous month */
     displayPreviousMonth(): void {
-        if (this.currentlyDisplayed.month <= 1) {
-            this.currentlyDisplayed = { year: this.currentlyDisplayed.year - 1, month: 12 };
+        if (this._currentlyDisplayed.month <= 1) {
+            this._currentlyDisplayed = { year: this._currentlyDisplayed.year - 1, month: 12 };
         } else {
-            this.currentlyDisplayed = {
-                year: this.currentlyDisplayed.year,
-                month: this.currentlyDisplayed.month - 1
+            this._currentlyDisplayed = {
+                year: this._currentlyDisplayed.year,
+                month: this._currentlyDisplayed.month - 1
             };
         }
     }
 
     /** Function that allows to switch actual view to next year */
     displayNextYear(): void {
-        this.currentlyDisplayed = { month: this.currentlyDisplayed.month, year: this.currentlyDisplayed.year + 1 };
+        this._currentlyDisplayed = { month: this._currentlyDisplayed.month, year: this._currentlyDisplayed.year + 1 };
     }
 
     /** Function that allows to switch actual view to previous year */
     displayPreviousYear(): void {
-        this.currentlyDisplayed = { month: this.currentlyDisplayed.month, year: this.currentlyDisplayed.year - 1 };
+        this._currentlyDisplayed = { month: this._currentlyDisplayed.month, year: this._currentlyDisplayed.year - 1 };
     }
 
     /** Function that allows to switch actually displayed list of year to next year list*/
@@ -562,7 +552,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      */
     setCurrentlyDisplayed(date: D): void {
         if (this._dateTimeAdapter.isValid(date)) {
-            this.currentlyDisplayed = {
+            this._currentlyDisplayed = {
                 month: this._dateTimeAdapter.getMonth(date),
                 year: this._dateTimeAdapter.getYear(date)
             };
@@ -581,7 +571,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      * Function that handles changes from month view child component, changes actual view and changes currently displayed month
      */
     handleMonthViewChange(month: number): void {
-        this.currentlyDisplayed = { month, year: this.currentlyDisplayed.year };
+        this._currentlyDisplayed = { month, year: this._currentlyDisplayed.year };
         this.activeView = 'day';
         this.onDaysViewSelected();
         this.activeViewChange.emit(this.activeView);
@@ -589,14 +579,14 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
 
     selectedYear(yearSelected: number): void {
         this.activeView = 'day';
-        this.currentlyDisplayed.year = yearSelected;
+        this._currentlyDisplayed.year = yearSelected;
         this.onDaysViewSelected();
     }
 
     selectedYears(yearsSelected: AggregatedYear): void {
         this.activeView = 'year';
-        this.currentlyDisplayed = {
-            ...this.currentlyDisplayed,
+        this._currentlyDisplayed = {
+            ...this._currentlyDisplayed,
             year: yearsSelected.startYear
         };
         this.onYearViewSelected();
@@ -658,23 +648,23 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      */
     private _prepareDisplayedView(): void {
         if (this.calType === 'single' && this._dateTimeAdapter.isValid(this.selectedDate)) {
-            this.currentlyDisplayed = {
+            this._currentlyDisplayed = {
                 year: this._dateTimeAdapter.getYear(this.selectedDate),
                 month: this._dateTimeAdapter.getMonth(this.selectedDate)
             };
         } else if (this.selectedRangeDate && this.selectedRangeDate.start) {
-            this.currentlyDisplayed = {
+            this._currentlyDisplayed = {
                 year: this._dateTimeAdapter.getYear(this.selectedRangeDate.start),
                 month: this._dateTimeAdapter.getMonth(this.selectedRangeDate.start)
             };
         } else if (this.selectedRangeDate && this.selectedRangeDate.end) {
-            this.currentlyDisplayed = {
+            this._currentlyDisplayed = {
                 year: this._dateTimeAdapter.getYear(this.selectedRangeDate.end),
                 month: this._dateTimeAdapter.getMonth(this.selectedRangeDate.end)
             };
         } else {
             const today = this._dateTimeAdapter.today();
-            this.currentlyDisplayed = {
+            this._currentlyDisplayed = {
                 year: this._dateTimeAdapter.getYear(today),
                 month: this._dateTimeAdapter.getMonth(today)
             };
@@ -701,10 +691,10 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     private _setNavigationButtonsStates(): void {
         this.previousButtonDisabled =
             typeof this.previousButtonDisableFunction === 'function' &&
-            this.previousButtonDisableFunction(this.selectedDate, this.currentlyDisplayed, this.activeView);
+            this.previousButtonDisableFunction(this.selectedDate, this._currentlyDisplayed, this.activeView);
         this.nextButtonDisabled =
             typeof this.nextButtonDisableFunction === 'function' &&
-            this.nextButtonDisableFunction(this.selectedDate, this.currentlyDisplayed, this.activeView);
+            this.nextButtonDisableFunction(this.selectedDate, this._currentlyDisplayed, this.activeView);
         this._changeDetectorRef.markForCheck();
     }
 }
