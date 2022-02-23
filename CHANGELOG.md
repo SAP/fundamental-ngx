@@ -1,4 +1,11 @@
 
+### 0.33.5-rc.13 (2022-02-23)
+
+
+### Features
+
+* **platform:** emit event when smart filters have been updated ([#7771](https://github.com/SAP/fundamental-ngx/issues/7771)) ([d78f6f1](https://github.com/SAP/fundamental-ngx/commit/d78f6f1d732f71df3bca14a1493676c7d507b7d1))
+
 ### 0.33.5-rc.12 (2022-02-23)
 
 
