@@ -6,7 +6,7 @@ source .ci-env/flags.sh
 
 #PACKAGES=(core platform moment-adapter)
 HOTFIX_BRANCH=hotfix_tmp_branch_for_automated_release_do_not_use
-MASTER_BRANCH=refs/heads/main
+MAIN_BRANCH=refs/heads/main
 OLD_TAG=$(git describe --tags --abbrev=0)
 
 git config --global user.email $GH_EMAIL
@@ -71,7 +71,7 @@ fi
 # Increment version on main
 if [[ $latest == "true" ]]; then
   git stash
-  git checkout $MASTER_BRANCH
+  git checkout $MAIN_BRANCH
   npm run std-version
-  git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG.git" $MASTER_BRANCH > /dev/null;
+  git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG.git" $MAIN_BRANCH > /dev/null;
 fi

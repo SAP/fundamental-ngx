@@ -19,6 +19,10 @@ $block: fdp-value-help-dialog;
         min-height: 1.625rem;
     }
 
+    &__row.#{$block}__advanced-search {
+        padding-top: 1rem;
+    }
+
     &__advanced-search,
     .fd-dialog__body {
         background-color: #f7f7f7;

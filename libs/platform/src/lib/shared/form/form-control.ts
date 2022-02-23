@@ -34,6 +34,13 @@ export abstract class FormFieldControl<T> {
      *  Components works in two sizes compact or cozy
      */
     contentDensity: ContentDensity;
+
+    /**
+     * The height of the extra content at the bottom of the form control,
+     * which should not affect the alignment of form control and it's label
+     */
+    extraContentHeightPx?: number;
+
     /**
      *
      * Form Field listen for all the changes happening inside the input

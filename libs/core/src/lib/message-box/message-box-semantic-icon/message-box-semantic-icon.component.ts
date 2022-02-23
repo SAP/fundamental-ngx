@@ -1,9 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, Optional } from '@angular/core';
-import {
-    MESSAGE_BOX_CONFIGURABLE_ELEMENT,
-    MessageBoxConfig,
-    MessageBoxConfigurableElement
-} from '../utils/message-box-config.class';
+import { MessageBoxConfig, MessageBoxHost } from '../utils/message-box-config.class';
 
 /**
  * Message box element representing the semantic icon in the message box header.
@@ -15,20 +11,20 @@ import {
 @Component({
     selector: 'fd-message-box-semantic-icon',
     template: `<i [class]="'sap-icon--' + _getIcon" role="presentation"></i>`,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        { provide: MESSAGE_BOX_CONFIGURABLE_ELEMENT, useExisting: MessageBoxSemanticIconComponent, multi: true }
-    ]
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MessageBoxSemanticIconComponent implements MessageBoxConfigurableElement {
+export class MessageBoxSemanticIconComponent {
     /** Custom semantic icon */
     @Input()
     glyph: string;
 
     /** @hidden */
-    constructor(@Optional() public messageBoxConfig: MessageBoxConfig) {
-        this.messageBoxConfig = this.messageBoxConfig || {};
+    get messageBoxConfig(): MessageBoxConfig {
+        return this.messageBox?._messageBoxConfig || {};
     }
+
+    /** @hidden */
+    constructor(@Optional() private messageBox?: MessageBoxHost) {}
 
     /** @hidden */
     get _showSemanticIcon(): boolean {

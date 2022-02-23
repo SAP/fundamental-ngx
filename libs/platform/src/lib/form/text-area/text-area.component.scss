@@ -1,8 +1,4 @@
 .fd-textarea-counter {
-    display: inline;
-    float: right;
-
-    [dir='rtl'] & {
-        float: left;
-    }
+    display: inline-block;
+    width: 100%;
 }

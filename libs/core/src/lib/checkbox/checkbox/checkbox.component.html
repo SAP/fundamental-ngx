@@ -1,11 +1,12 @@
 <input
-    #inputLabel
+    #inputElement
     type="checkbox"
     class="fd-checkbox"
     [id]="inputId"
     [name]="name"
     [disabled]="disabled"
     [indeterminate]="isIndeterminate"
+    [checked]="isChecked"
     [attr.tabindex]="tabIndexValue"
     [attr.aria-label]="ariaLabel"
     [attr.aria-labelledby]="ariaLabelledBy"
@@ -14,13 +15,9 @@
     [attr.aria-required]="required"
     [class.fd-checkbox--compact]="compact"
     [class]="state ? 'is-' + state : ''"
-    [ngModel]="isChecked"
-    (ngModelChange)="nextValue()"
-    (keydown)="checkByKey($event)"
-    (keyup)="handleInputKeyUp($event)"
-    (click)="$event.stopPropagation()"
-    (blur)="onBlur()"
-    (focus)="onFocus()"
+    (click)="_onInputClick($event)"
+    (blur)="_onBlur()"
+    (focus)="_onFocus()"
 />
 
 <label
@@ -31,7 +28,7 @@
     [attr.title]="title"
     [class.fd-checkbox__label--compact]="compact"
     [class.fd-checkbox__label--required]="required"
-    (click)="checkByClick($event)"
+    (click)="_onLabelClick($event)"
 >
     <div class="fd-checkbox__label-container">
         <ng-container *ngIf="label">

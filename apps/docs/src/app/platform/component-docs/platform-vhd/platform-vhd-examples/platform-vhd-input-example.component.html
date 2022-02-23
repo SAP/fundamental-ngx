@@ -39,20 +39,17 @@
 <br />
 <div fd-form-item>
     <label fd-form-label for="test-selection-type-single">Selection type: multi</label>
-    <div style="overflow: auto">
-        <ng-container *ngIf="values.multi">
-            <fd-token fd-toolbar-item *ngFor="let item of values.multi" [compact]="true" [readOnly]="true">{{
-                item.name
-            }}</fd-token>
-        </ng-container>
-        <button
-            fd-button
-            [compact]="true"
-            (click)="vhd2.open()"
-            aria-label="Open value help dialog"
-            label="Open and select"
-        ></button>
-    </div>
+    <fd-token fd-toolbar-item *ngFor="let item of values.multi" [compact]="true" [readOnly]="true">
+        {{ item.name }}
+    </fd-token>
+    <br *ngIf="values.multi?.length" />
+    <button
+        fd-button
+        [compact]="true"
+        (click)="vhd2.open()"
+        aria-label="Open value help dialog"
+        label="Open and select"
+    ></button>
 </div>
 <fdp-value-help-dialog
     #vhd2

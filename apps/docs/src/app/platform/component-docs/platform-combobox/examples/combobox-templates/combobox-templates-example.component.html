@@ -1,6 +1,5 @@
 <fdp-form-group [noLabelLayout]="false" columnLayout="XL2-L2-M1-S1">
-    <fdp-form-field id="optionItemTemplate" label="Option Item Template" [column]="1">
-        <span>Allows to customize display item template</span>
+    <fdp-form-field id="optionItemTemplate" label="Custom Item Template" [column]="1">
         <fdp-combobox
             name="optionItemTemplate"
             placeholder="Type some text..."
@@ -15,11 +14,10 @@
                 </div>
             </ng-template>
         </fdp-combobox>
-        <p>Selected: {{ selectedItem | json }}</p>
+        <fdp-form-field-extras> Selected: {{ selectedItem | json }} </fdp-form-field-extras>
     </fdp-form-field>
 
-    <fdp-form-field id="groupItemTemplate" label="Group Item Template" [column]="2">
-        <span>Allows to customize group header item template</span>
+    <fdp-form-field id="groupItemTemplate" label="Custom Group Item Template" [column]="2">
         <fdp-combobox
             name="groupItemTemplate"
             placeholder="Type some text..."
@@ -33,11 +31,10 @@
                 <li class="fd-list__group-header" [innerText]="'Type: ' + item.label"></li>
             </ng-template>
         </fdp-combobox>
-        <p>Selected: {{ selectedItem1 | json }}</p>
+        <fdp-form-field-extras> Selected: {{ selectedItem1 | json }} </fdp-form-field-extras>
     </fdp-form-field>
 
-    <fdp-form-field id="secondaryItemTemplate" label="Secondary Item Template" [column]="1">
-        <span>Allows to customize secondary item template</span>
+    <fdp-form-field id="secondaryItemTemplate" label="Custom Secondary Item Template" [column]="1">
         <fdp-combobox
             name="secondaryItemTemplate"
             placeholder="Type some text..."
@@ -50,11 +47,10 @@
                 <span class="fd-list__secondary" [innerText]="item.type"></span>
             </ng-template>
         </fdp-combobox>
-        <p>Selected: {{ selectedItem2 | json }}</p>
+        <fdp-form-field-extras> Selected: {{ selectedItem2 | json }} </fdp-form-field-extras>
     </fdp-form-field>
 
-    <fdp-form-field id="selectedItemTemplate" label="Selected Item Template" [column]="2">
-        <span>Allows to customize selected item template</span>
+    <fdp-form-field id="selectedItemTemplate" label=" Custom Selected Item Template" [column]="2">
         <fdp-combobox
             name="secondaryItemTemplate"
             placeholder="Type some text..."
@@ -69,6 +65,6 @@
                 </div>
             </ng-template>
         </fdp-combobox>
-        <p>Selected: {{ selectedItem3 | json }}</p>
+        <fdp-form-field-extras> Selected: {{ selectedItem3 | json }} </fdp-form-field-extras>
     </fdp-form-field>
 </fdp-form-group>

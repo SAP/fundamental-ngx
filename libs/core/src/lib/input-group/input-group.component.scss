@@ -2,6 +2,10 @@
 @import '~fundamental-styles/dist/input-group';
 
 fd-input-group {
+    .fd-input-group {
+        margin: 0.25rem 0;
+    }
+
     .fd-input-group__addon--button.fd-input-group__addon--textarea > * {
         max-height: 100%;
         height: 100%;

@@ -33,7 +33,7 @@ describe('Multi input test suite', () => {
         activeDropdownButtons,
         activeInputs,
         disableInputs,
-        options,
+        simpleMultiInputOptions,
         multiInputOptions,
         buttonShowAll,
         expandedDropdown,
@@ -51,6 +51,7 @@ describe('Multi input test suite', () => {
         simpleExampleTokens,
         checkboxInput,
         listItem,
+        simpleHiddenAddonExampleTokens,
         popover,
         compactExampleTokens,
         dialogCheckbox,
@@ -124,6 +125,17 @@ describe('Multi input test suite', () => {
         expect(doesItExist(popover)).toBe(false, 'popover still displayed');
     });
 
+    it('should narrow down the selection to a single item and select it', () => {
+        scrollIntoView(activeInputs, 1);
+        click(activeInputs, 1);
+        sendKeys('apple');
+        waitForElDisplayed(listItem);
+        click(listItem);
+        expect(getElementArrayLength(simpleHiddenAddonExampleTokens)).toBe(2);
+        expect(getText(simpleHiddenAddonExampleTokens, 0)).toBe('Kiwi');
+        expect(getText(simpleHiddenAddonExampleTokens, 1)).toBe('Apple');
+    });
+
     it('should be able to select all tokens and delete with delete key', () => {
         scrollIntoView(compactExampleTokens);
         click(activeInputs, 4);
@@ -138,8 +150,8 @@ describe('Multi input test suite', () => {
         it('verify Simple Multi Input by select each option', () => {
             scrollIntoView(activeDropdownButtons);
             click(activeDropdownButtons);
-            scrollIntoView(options, 15);
-            click(options, 15);
+            scrollIntoView(simpleMultiInputOptions, 7);
+            click(simpleMultiInputOptions, 7);
             click(activeDropdownButtons);
             const inputOptionsLength = getElementArrayLength(multiInputOptions);
             for (let i = 0; i < inputOptionsLength; i++) {

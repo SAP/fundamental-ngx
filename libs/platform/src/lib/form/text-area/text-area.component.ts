@@ -4,6 +4,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ElementRef,
     Host,
     HostListener,
     Input,
@@ -12,6 +13,7 @@ import {
     Optional,
     Self,
     SkipSelf,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
@@ -138,6 +140,10 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     }
 
     /** @hidden */
+    @ViewChild('counter')
+    _textareaCounter?: ElementRef<HTMLDivElement>;
+
+    /** @hidden */
     _contentDensity: ContentDensity = this._textAreaConfig.contentDensity;
 
     /** @hidden */
@@ -162,6 +168,14 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     /** for i18n counter message translation */
     private readonly remainingText = 'remaining';
     private readonly excessText = 'excess';
+
+    /**
+     * @hidden
+     * @see FormFieldControl.extraContentHeightPx
+     */
+    get extraContentHeightPx(): number {
+        return this._textareaCounter?.nativeElement.offsetHeight;
+    }
 
     /** @hidden */
     private get _shouldTrackTextLimit(): boolean {

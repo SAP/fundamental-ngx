@@ -158,14 +158,14 @@ describe('Form generator test suite', () => {
         expect(doesItExist(formValue)).toBe(false, 'form value row exists');
         click(customExample + submitButton);
         if (!browserIsSafari()) {
-            expect(getText(formValue)).toEqual('Form value: { "some_slider": { "value": 20, "label": "Twenty" } }');
+            expect(getText(formValue)).toEqual('Form value: { "some_slider": { "value": 10, "label": "Ten" } }');
         }
         if (browserIsSafari()) {
             expect(getText(formValue)).toEqual(
                 'Form value: {\n' +
                     '  "some_slider": {\n' +
-                    '    "value": 20,\n' +
-                    '    "label": "Twenty"\n' +
+                    '    "value": 10,\n' +
+                    '    "label": "Ten"\n' +
                     '  }\n' +
                     '}'
             );
