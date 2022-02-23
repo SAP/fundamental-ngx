@@ -327,14 +327,20 @@ jobs:
 
             - run: echo "STAGE_NAME=Release" >> $GITHUB_ENV
               if: ${{ github.ref == 'refs/heads/tmp_branch_for_automated_release_do_not_use' }}
-            - run: echo "STAGE_NAME=Pre-release" >> $GITHUB_ENV
+            - run: |
+                  echo "STAGE_NAME=Pre-release" >> $GITHUB_ENV 
+                  echo "releaseTag=prerelease" >> $GITHUB_ENV
               if: ${{ github.ref == 'refs/heads/main' }}
             - run: echo "STAGE_NAME=Hotfix-release" >> $GITHUB_ENV
               if: ${{ github.ref == 'refs/heads/hotfix_tmp_branch_for_automated_release_do_not_use' }}
-
+            - run: |
+                  git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
+                  git fetch
+                  git checkout main
             - run: bash ./ci-scripts/publish.sh
               env:
                   GH_TOKEN: ${{ secrets.GHACTIONS }}
+                  GHACTIONS: ${{ secrets.GHACTIONS }}
                   TRAVIS_BUILD_STAGE_NAME: ${{ env.STAGE_NAME }}
               if: ${{ github.ref == 'refs/heads/main'
                   || github.ref == 'refs/heads/tmp_branch_for_automated_release_do_not_use'
@@ -350,15 +356,19 @@ jobs:
               with:
                   package: 'dist/libs/core/package.json'
                   token: ${{ secrets.NPM_TOKEN }}
+                  tag: ${{ env.releaseTag }}
             - uses: JS-DevTools/npm-publish@v1
               with:
                   package: 'dist/libs/platform/package.json'
                   token: ${{ secrets.NPM_TOKEN }}
+                  tag: ${{ env.releaseTag }}
             - uses: JS-DevTools/npm-publish@v1
               with:
                   package: 'dist/libs/moment-adapter/package.json'
                   token: ${{ secrets.NPM_TOKEN }}
+                  tag: ${{ env.releaseTag }}
             - uses: JS-DevTools/npm-publish@v1
               with:
                   package: 'dist/libs/fn/package.json'
                   token: ${{ secrets.NPM_TOKEN }}
+                  tag: ${{ env.releaseTag }}

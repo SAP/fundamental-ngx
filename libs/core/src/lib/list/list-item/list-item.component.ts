@@ -170,7 +170,11 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
     onClick(event: MouseEvent): void {
         this.clicked.emit(event);
         if (this.checkbox && !this.link) {
-            this.checkbox.nextValue();
+            if (!this.checkbox.elementRef.nativeElement.contains(event.target as Node)) {
+                // clicking on the checkbox is not suppressed
+                // so we should only process clicks if clicked on the list-item, not checkbox itself
+                this.checkbox.nextValue();
+            }
         }
         if (this.radio && !this.link) {
             this.radio.labelClicked(event);

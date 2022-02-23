@@ -21,7 +21,9 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DOWN_ARROW, TAB, SPACE, ENTER, UP_ARROW, ESCAPE } from '@angular/cdk/keycodes';
+import { SelectionModel } from '@angular/cdk/collections';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
+import { map, startWith, distinctUntilChanged, first } from 'rxjs/operators';
 
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
@@ -38,15 +40,13 @@ import {
     FocusEscapeDirection,
     KeyUtil,
     FocusTrapService,
-    uuidv4
+    uuidv4,
+    RangeSelector
 } from '@fundamental-ngx/core/utils';
 
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MultiInputMobileModule } from './multi-input-mobile/multi-input-mobile.module';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
-import { SelectionModel } from '@angular/cdk/collections';
-import { map, startWith } from 'rxjs/operators';
-import { uniqBy } from 'lodash-es';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -270,6 +270,10 @@ export class MultiInputComponent
     @Output()
     readonly openChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+    /** Event emitted, when the multi input's all item checked or not */
+    @Output()
+    readonly allItemsSelectedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
     /** @hidden */
     @ViewChild(PopoverComponent)
     popoverRef: PopoverComponent;
@@ -311,6 +315,9 @@ export class MultiInputComponent
 
     /** @hidden */
     private _subscriptions = new Subscription();
+
+    /** @hidden */
+    private readonly _rangeSelector = new RangeSelector();
 
     /** @hidden */
     onChange: (value: any) => void = () => {};
@@ -356,9 +363,16 @@ export class MultiInputComponent
         }
 
         this._subscriptions.add(
-            this._searchTermCtrl.valueChanges.subscribe((searchTerm) => {
+            this._searchTermCtrl.valueChanges.pipe(distinctUntilChanged()).subscribe((searchTerm) => {
                 this.searchTermChange.emit(searchTerm);
+                // resetting existing selection state, if any
+                this._rangeSelector.reset();
             })
+        );
+        this._subscriptions.add(
+            this._getViewModel()
+                .pipe(map((viewModel) => !viewModel.displayedOptions.some((c) => !c.isSelected)))
+                .subscribe((allItemsSelected) => this.allItemsSelectedChange.emit(allItemsSelected))
         );
     }
 
@@ -480,19 +494,54 @@ export class MultiInputComponent
     }
 
     /** Method that selects all possible options. */
-    selectAllItems(): void {
-        this.selected = [...this.dropdownValues];
-
+    selectAllItems(selectAll: boolean): void {
+        if (selectAll) {
+            this.selected = this.optionItems$.getValue().map((c) => c.value);
+        } else {
+            this.selected = [];
+        }
         // On Mobile mode changes are propagated only on approve.
         this._propagateChange();
     }
 
     /** @hidden */
-    _handleSelect(checked: any, value: any, resetSearch = true, event?: MouseEvent): void {
-        if (event) {
-            event.preventDefault(); // prevent this function from being called twice when checkbox updates
+    _onCheckboxKeyup(value: any, event: KeyboardEvent, index: number): void {
+        if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
+            this._onCheckboxClick(value, event, index);
         }
+    }
 
+    /** @hidden */
+    async _onCheckboxClick(
+        value: any,
+        event: PointerEvent | KeyboardEvent,
+        index: number,
+        isListItem = false
+    ): Promise<void> {
+        const toggledSelection = !this._selectionModel.isSelected(value);
+        this._rangeSelector.onRangeElementToggled(index, event);
+        const sub = this.viewModel$.pipe(first()).subscribe((vm) => {
+            this._rangeSelector.applyValueToEachInRange((idx) =>
+                this._handleSelect(toggledSelection, vm.displayedOptions[idx].value, false)
+            );
+        });
+        this._subscriptions.add(sub);
+        if (isListItem) {
+            this.openChangeHandle(false);
+        } else {
+            // stop propagation on the checkbox so event doesn't reach the list item
+            event.stopPropagation();
+        }
+    }
+
+    /** @hidden */
+    _onTokenClick(value: any, resetSearch: boolean, event?: PointerEvent): void {
+        event?.preventDefault(); // prevent this function from being called twice when checkbox updates
+        this._handleSelect(false, value, resetSearch);
+    }
+
+    /** @hidden */
+    _handleSelect(checked: any, value: any, resetSearch = true): void {
         const previousLength = this._selectionModel.selected.length;
         if (checked) {
             this._selectionModel.select(value);
@@ -504,18 +553,15 @@ export class MultiInputComponent
         if (this._shouldPopoverBeUpdated(previousLength, this._selectionModel.selected.length)) {
             this.popoverRef.refreshPosition();
         }
-
         if (resetSearch) {
             this._resetSearchTerm();
+            this.searchInputElement.nativeElement.focus();
         }
-
-        this.searchInputElement.nativeElement.focus();
 
         // On Mobile mode changes are propagated only on approve.
         this._propagateChange();
     }
 
-    /** @hidden */
     _handleInputKeydown(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, DOWN_ARROW) && !this.mobile) {
             if (event.altKey) {
@@ -559,22 +605,32 @@ export class MultiInputComponent
 
     /** @hidden */
     _onSubmit(): void {
-        if (this.allowNewTokens && this.newTokenValidateFn(this._searchTermCtrl.value)) {
+        const searchTerm = this.searchTerm;
+        if (searchTerm === '') {
+            return;
+        }
+        const isExist = this._selectFirstFiltered(searchTerm);
+        if (!isExist && this.allowNewTokens && this.newTokenValidateFn(this._searchTermCtrl.value)) {
             const newToken = this.newTokenParseFn(this._searchTermCtrl.value);
-            this.dropdownValues.push(newToken);
+            this._addNewTokenToDropDownValues(newToken);
             this._handleSelect(true, newToken);
             this._searchTermCtrl.setValue('');
             this.open = false;
         }
     }
 
+    /** @hidden */
+    _handleComplete({ term }): void {
+        this.searchTerm = term;
+    }
+
     /**
      * Handle dialog dismissing, closes popover and sets backup data.
      */
     dialogDismiss(selectedBackup: any[]): void {
-        this.selected = selectedBackup;
         this.openChangeHandle(false);
         this._resetSearchTerm();
+        this.selected = selectedBackup;
     }
 
     /**
@@ -604,6 +660,26 @@ export class MultiInputComponent
     /** @hidden */
     enableParentFocusTrap(): void {
         this._focusTrapService?.unpauseCurrentFocusTrap();
+    }
+
+    /** @hidden */
+    private _addNewTokenToDropDownValues(newToken): void {
+        this.dropdownValues.push(newToken);
+        const newOption = this._getOptionItem(newToken);
+        this.optionItems$.next([...this.optionItems$.value, newOption]);
+    }
+
+    /** @hidden */
+    private _selectFirstFiltered(searchTerm: string): boolean {
+        const filtered = this.filterFn(this.dropdownValues, searchTerm);
+        if (Array.isArray(filtered) && filtered.length > 0 && this.autoComplete) {
+            const optionItem = this._getOptionItem(filtered[0]);
+            this._handleSelect(true, optionItem.value);
+            this._searchTermCtrl.setValue('');
+            this.open = false;
+            return true;
+        }
+        return false;
     }
 
     /** @hidden */
@@ -670,7 +746,10 @@ export class MultiInputComponent
         });
 
         await this._dynamicComponentService.createDynamicModule(
-            { listTemplate: this.listTemplate, controlTemplate: this.controlTemplate },
+            {
+                listTemplate: this.listTemplate,
+                controlTemplate: this.controlTemplate
+            },
             MultiInputMobileModule,
             MultiInputMobileComponent,
             this._viewContainerRef,
@@ -686,60 +765,61 @@ export class MultiInputComponent
 
     /** @hidden */
     private _getOptionItem(item: any): OptionItem {
+        const { label, value } = this._getValueAndLabel(item);
         return {
             item,
-            label: this.displayFn(item),
-            value: this.valueFn(item)
+            label,
+            value,
+            isSelected: false
         };
     }
 
     /** @hidden */
+    private _getValueAndLabel(itemOrValue: any, optionItems: OptionItem[] = []): OptionItemBase {
+        if (optionItems.length > 0) {
+            itemOrValue = optionItems.find((c) => c.value === itemOrValue)?.item ?? itemOrValue;
+        }
+        const defaultDisplay = typeof itemOrValue === 'object' ? itemOrValue[Object.keys(itemOrValue)[0]] : itemOrValue;
+        const value = this.valueFn(itemOrValue) ?? defaultDisplay;
+        const label = this.displayFn(itemOrValue) ?? defaultDisplay;
+        return { label, value };
+    }
+
+    /** @hidden */
     private _getViewModel(): Observable<ViewModel> {
-        let previouslySelected: OptionItem[] = [];
         return combineLatest([
             this._searchTermCtrl.valueChanges.pipe(startWith(this._searchTermCtrl.value)),
-            this.optionItems$,
-            this._selectionModel.changed.pipe(startWith(undefined))
+            this._selectionModel.changed.pipe(startWith(null)),
+            this.optionItems$
         ]).pipe(
-            map(([, optionItems]) => {
+            map(([, , optionItems]) => {
+                const selected = this.selected.map((c) => this._getValueAndLabel(c, optionItems));
                 // not using "searchTerm" value from combineLatest as it will be wrong for late subscribers, if any
                 const searchTerm = this._searchTermCtrl.value;
-                let displayedOptions = optionItems;
-                if (searchTerm) {
-                    const filtered = this.filterFn(this.dropdownValues, searchTerm);
-                    displayedOptions = (Array.isArray(filtered) ? filtered : []).map((item) =>
-                        this._getOptionItem(item)
-                    );
-                }
-                // selected options should be displayed in the same order as they're selected
-                const orderMap = new Map(this._selectionModel.selected.map((v, i) => [v, i]));
-                // combining previously selected options with current selection
-                // in order to display selected items even if they're not present in the list of options
-                // (e.g. if only a subset of all options is provided to the control)
-                const selectedNotUnique = optionItems
-                    .concat(previouslySelected)
-                    .filter((item) => this._selectionModel.isSelected(item.value));
-                const selectedOptions = uniqBy(selectedNotUnique, 'value').sort(
-                    (a, b) => orderMap.get(a.value) - orderMap.get(b.value)
+                const filtered = this.filterFn(
+                    optionItems.map((c) => c.item),
+                    searchTerm
                 );
-
-                previouslySelected = selectedOptions;
-                return {
-                    selectedOptions,
-                    displayedOptions
-                };
+                const displayedOptions = (Array.isArray(filtered) ? filtered : []).map((item) =>
+                    this._getOptionItem(item)
+                );
+                displayedOptions.forEach((c) => (c.isSelected = selected.findIndex((d) => d.value === c.value) > -1));
+                return { selectedOptions: selected, displayedOptions };
             })
         );
     }
 }
 
-interface OptionItem<T = any> {
+interface OptionItem<T = any> extends OptionItemBase {
+    item: T;
+    isSelected: boolean;
+}
+interface OptionItemBase {
     label: string;
     value: any;
-    item: T;
 }
 
 interface ViewModel {
-    selectedOptions: OptionItem[];
+    selectedOptions: OptionItemBase[];
     displayedOptions: OptionItem[];
 }

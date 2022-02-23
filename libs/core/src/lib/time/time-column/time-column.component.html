@@ -11,7 +11,12 @@
     (keyup)="spinnerButtonKeyupHandle($event, true)"
     (click)="scrollUp($event)"
 ></button>
-<div class="fd-time__wrapper" [class.fd-time__wrapper--active]="active" [class.fd-time__wrapper--meridian]="meridian">
+<div
+    class="fd-time__wrapper"
+    [class.fd-time__wrapper--active]="active"
+    [class.fd-time__wrapper--meridian]="meridian"
+    [style.maxHeight]="active ? wrapperHeight : ''"
+>
     <ul
         class="fd-time__list"
         [class.fd-time-column-custom-hidden]="!active"

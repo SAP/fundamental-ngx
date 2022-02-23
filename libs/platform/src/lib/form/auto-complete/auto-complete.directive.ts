@@ -82,6 +82,7 @@ export class AutoCompleteDirective {
 
             this._oldValue = this.inputText;
             const item = this._searchByStrategy();
+
             if (item) {
                 this._typeahead(item.label);
             }

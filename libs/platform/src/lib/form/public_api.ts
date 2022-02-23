@@ -53,6 +53,7 @@ export * from './form-group/fdp-form.module';
 export * from './form-group/form-group.component';
 export * from './form-group/form-field/form-field.component';
 export * from './form-group/form-field-group/form-field-group.component';
+export * from './form-group/form-field-extras/form-field-extras.component';
 
 export * from './input/fdp-input.module';
 export * from './input/input.component';
@@ -96,6 +97,7 @@ export * from './select/select.module';
 export * from './select/commons/base-select';
 export * from './select/option/option.component';
 export * from './select/select/select.component';
+export * from './select/models/select.models';
 
 export * from './step-input/base.step-input';
 export * from './step-input/step-input.config';

@@ -105,7 +105,10 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     }
     set itemsPerPage(value: number) {
         value = Math.floor(coerceNumberProperty(value, DEFAULT_ITEMS_PER_PAGE));
-        this._itemsPerPage = Math.min(value, this.totalItems);
+
+        this._itemsPerPage = Math.max(value, 1);
+
+        this._updateDisplayedPageSizeOptions();
     }
 
     /**
@@ -134,9 +137,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
             .filter((v) => v > 0)
             .sort((a, b) => a - b);
 
-        if (this._itemsPerPageOptions.some((v) => v !== this.itemsPerPage)) {
-            this.itemsPerPage = this._itemsPerPageOptions[0];
-        }
+        this._updateDisplayedPageSizeOptions();
     }
 
     /** Whether to display the total number of items. */
@@ -263,6 +264,9 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     };
 
     /** @hidden */
+    _displayedPageSizeOptions: number[] = [];
+
+    /** @hidden */
     private _itemsPerPage: number = DEFAULT_ITEMS_PER_PAGE;
 
     /** @hidden */
@@ -273,9 +277,6 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
 
     /** @hidden */
     private _currentPage = 1;
-
-    /** @hidden */
-    private _initialItemsPerPage: number;
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -338,14 +339,6 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        if (changes?.itemsPerPage) {
-            this._initialItemsPerPage = changes.itemsPerPage.currentValue;
-        }
-
-        if (changes?.totalItems && this._initialItemsPerPage) {
-            this.itemsPerPage = this._initialItemsPerPage;
-        }
-
         if (changes?.currentPage) {
             this.currentPage = changes.currentPage.currentValue;
         }
@@ -492,5 +485,25 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
             .findIndex((elem) => elem.nativeElement === currentPageNativeElement);
 
         this._focusKeyManagerList.focusItem(index);
+    }
+
+    /**
+     * Updates the list of page size options to display to the user. Includes making sure that
+     * the page size is an option and that the list is sorted.
+     */
+    private _updateDisplayedPageSizeOptions(): void {
+        // If no page size is provided, use the first page size option or the default page size.
+        if (!this.itemsPerPage) {
+            this._itemsPerPage = this.itemsPerPageOptions.length ? this.itemsPerPageOptions[0] : DEFAULT_ITEMS_PER_PAGE;
+        }
+
+        this._displayedPageSizeOptions = this.itemsPerPageOptions?.slice() ?? [];
+
+        if (!this._displayedPageSizeOptions.includes(this.itemsPerPage)) {
+            this._displayedPageSizeOptions.push(this.itemsPerPage);
+        }
+
+        this._displayedPageSizeOptions.sort((a, b) => a - b);
+        this._cdr.markForCheck();
     }
 }

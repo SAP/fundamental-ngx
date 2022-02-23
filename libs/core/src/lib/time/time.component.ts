@@ -104,6 +104,10 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
     @Input()
     tablet = false;
 
+    /** @Input Defines quantity of the elements, that are visible at the same time. Should be odd number */
+    @Input()
+    elementsAtOnce = 7;
+
     /**
      * @Input An object that contains datetime representation
      */
@@ -120,6 +124,11 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
 
     /** Active column view to iterate with */
     activeView: FdTimeActiveView = 'hour';
+
+    /** Offset */
+    get offset(): number {
+        return Math.floor(this.elementsAtOnce / 2);
+    }
 
     /**
      * @hidden
@@ -217,6 +226,9 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.meridian || changes.time) {
             this._setUpViewGrid();
+        }
+        if (changes.elementsAtOnce && changes.elementsAtOnce.currentValue % 2 === 0) {
+            throw new Error('[elementsAtOnce] should be odd number');
         }
     }
 

@@ -111,7 +111,7 @@ describe('Datetime picker suite', () => {
     it('Verify by default today date is focused', () => {
         const activeButtons = elementArray(activeDateTimePickerButton);
         for (let i = 0; i < activeButtons.length; i++) {
-            if (i !== 2 && i !== 7) {
+            if (i !== 2 && i !== 7 && i !== 11) {
                 // other default days in these calendars
                 if (!getElementClass(activeDateTimePickerButton, i).includes('is-disabled')) {
                     sendKeys(['Escape']);

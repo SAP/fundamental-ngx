@@ -19,7 +19,7 @@ export class ComboBoxPo extends BaseComponentPo {
     groupHeader = '.fd-list__group-header';
     comboboxWithGroup = 'input[ng-reflect-name="group"]';
     comboboxTwoColumns = '[name="columns"] input';
-    optionsArray = '.fd-list__item';
+    optionsArray = '.fdp-combobox__popover .fd-list__item';
     comboBoxInput = 'fdp-combobox input:not([id*="mobile"])';
     mobileComboBoxInput = 'fdp-combobox input[id*=mobile]';
 

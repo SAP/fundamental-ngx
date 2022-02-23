@@ -101,7 +101,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     @Input()
     disableDragDrop: boolean;
 
-    /** Drag start delay in milliseconds */
+    /** Drag start delay in milliseconds, default to 200ms for safe scrolling on mobile with touchscreen */
     @Input()
     dragStartDelay = DRAG_START_DELAY;
 

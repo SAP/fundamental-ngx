@@ -403,14 +403,8 @@ describe('Checkbox Group Component Template driven Form Tests', () => {
         const fdpCheckboxElem = fixture.debugElement.queryAll(By.css('.fd-checkbox__label'));
 
         // pre-select test
-        const inputElem = fixture.debugElement.queryAll(By.css('.fd-checkbox'));
         await wait(fixture);
         fixture.detectChanges();
-
-        expect(inputElem[0].nativeElement.getAttribute('ng-reflect-model')).toEqual('true');
-        expect(inputElem[1].nativeElement.getAttribute('ng-reflect-model')).toEqual('false');
-        expect(inputElem[2].nativeElement.getAttribute('ng-reflect-model')).toEqual('true');
-        expect(inputElem[3].nativeElement.getAttribute('ng-reflect-model')).toEqual('false');
 
         expect(host.phones).toEqual(['Samsung', 'OnePlus']);
 

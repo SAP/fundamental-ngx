@@ -1,21 +1,6 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    ElementRef,
-    EventEmitter,
-    Input,
-    Output,
-    TemplateRef,
-    ViewChild
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, TemplateRef, ViewChild } from '@angular/core';
 
-import { TabPanelComponent } from '@fundamental-ngx/core/tabs';
 import { DynamicPageBackgroundType, DynamicPageResponsiveSize } from '../constants';
-
-/** Dynamic Page tab change event */
-export class DynamicPageTabChangeEvent {
-    constructor(public source: DynamicPageContentComponent, public payload: TabPanelComponent) {}
-}
 
 /**
  * Dynamic Page Content Component.
@@ -56,12 +41,6 @@ export class DynamicPageContentComponent {
      */
     @Input()
     size: DynamicPageResponsiveSize;
-
-    /**
-     * Tab Change event
-     */
-    @Output()
-    tabChange: EventEmitter<DynamicPageTabChangeEvent> = new EventEmitter<DynamicPageTabChangeEvent>();
 
     /**
      * @hidden

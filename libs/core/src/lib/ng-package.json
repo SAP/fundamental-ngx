@@ -6,7 +6,6 @@
         "entryFile": "./public_api.ts"
     },
     "allowedNonPeerDependencies": [
-        "@angular/cdk",
         "@sap-theming/theming-base-content",
         "focus-trap",
         "fundamental-styles",

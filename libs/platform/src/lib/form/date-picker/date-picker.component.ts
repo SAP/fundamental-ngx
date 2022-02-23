@@ -212,6 +212,14 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     @Input()
     inline = true;
 
+    /**
+     * Whether to recalculate value from the input as user types or on blur.
+     * By default, updates the value as user types.
+     * @default false
+     */
+    @Input()
+    processInputOnBlur = false;
+
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
     readonly isOpenChange = new EventEmitter<boolean>();

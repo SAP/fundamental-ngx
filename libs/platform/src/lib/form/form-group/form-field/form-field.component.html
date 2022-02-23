@@ -1,6 +1,12 @@
 <ng-template #renderer>
     <div [horizontal]="true" fd-form-item class="fd-row">
-        <div class="fd-col" [class]="_labelColumnLayoutClass" *ngIf="!noLabelLayout">
+        <div
+            class="fd-col"
+            #labelCol
+            [class]="_labelColumnLayoutClass"
+            *ngIf="!noLabelLayout"
+            [style.margin-bottom.px]="_controlExtrasHeightPx"
+        >
             <label
                 [id]="'fdp-form-label-' + id"
                 [required]="editable && required"
@@ -8,7 +14,7 @@
                 [inlineHelpTitle]="hint"
                 [inlineHelpBodyPlacement]="hintPlacement"
             >
-                <span *ngIf="!noLabelLayout" [id]="'fdp-form-label-content-' + id">{{ label }}</span>
+                <span [id]="'fdp-form-label-content-' + id">{{ label }}</span>
             </label>
         </div>
         <ng-container *ngTemplateOutlet="withFormMessage"></ng-container>

@@ -27,7 +27,7 @@ import {
     bananaOption,
     notActiveTypeNames
 } from '../fixtures/appData/combobox.page-content';
-import { checkNotFocused, checkTextValueContain } from '../../helper/assertion-helper';
+import { checkTextValueContain } from '../../helper/assertion-helper';
 
 describe('Combobox test suite', () => {
     const comboBoxPage: ComboBoxPo = new ComboBoxPo();
@@ -95,18 +95,6 @@ describe('Combobox test suite', () => {
             setValue(comboBoxInputs(activeTypeNames[i]), appleOption.substring(0, 2));
             comboBoxPage.selectOption(activeTypeNames[i], appleOption);
             expect(getValue(comboBoxInputs(activeTypeNames[i]))).toEqual(appleOption);
-        }
-    });
-
-    it('Verify dropdown collapsed after selecting an option', () => {
-        if (browserIsIE()) {
-            console.log('Skip for IE');
-            return;
-        }
-        for (let i = 0; i < activeTypeNames.length; i++) {
-            comboBoxPage.expandDropdown(activeTypeNames[i]);
-            comboBoxPage.selectOption(activeTypeNames[i], appleOption);
-            checkNotFocused(comboBoxInput, i);
         }
     });
 

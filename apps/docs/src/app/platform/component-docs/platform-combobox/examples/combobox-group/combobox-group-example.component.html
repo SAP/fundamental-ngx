@@ -9,7 +9,7 @@
             groupKey="type"
             (selectionChange)="onSelect($event)"
         ></fdp-combobox>
-        <p>Selected: {{ selectedItem | json }}</p>
+        <fdp-form-field-extras> Selected: {{ selectedItem | json }} </fdp-form-field-extras>
     </fdp-form-field>
 
     <fdp-form-field id="group-without-key" label="Group without Key" [column]="2">
@@ -21,6 +21,6 @@
             [group]="true"
             (selectionChange)="onSelect1($event)"
         ></fdp-combobox>
-        <p>Selected: {{ selectedItem1 | json }}</p>
+        <fdp-form-field-extras> Selected: {{ selectedItem1 | json }} </fdp-form-field-extras>
     </fdp-form-field>
 </fdp-form-group>

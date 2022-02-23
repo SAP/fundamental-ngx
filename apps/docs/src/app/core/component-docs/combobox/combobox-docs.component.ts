@@ -33,6 +33,9 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
 import comboboxSearchFieldHTMLSrc from '!./examples/combobox-search-field-example.component.html?raw';
 import comboboxSearchFieldTSSrc from '!./examples/combobox-search-field-example.component.ts?raw';
 
+import comboboxBylineHtml from '!./examples/combobox-byline-example.component.html?raw';
+import comboboxBylineTs from '!./examples/combobox-byline-example.component.ts?raw';
+
 @Component({
     selector: 'fd-combobox-docs',
     templateUrl: './combobox-docs.component.html'
@@ -246,6 +249,20 @@ export class ComboboxDocsComponent {
             component: 'ComboboxSearchFieldExampleComponent',
             code: comboboxSearchFieldTSSrc,
             fileName: 'combobox-search-field-example'
+        }
+    ];
+
+    comboboxBylineExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: comboboxBylineHtml,
+            fileName: 'combobox-byline-example'
+        },
+        {
+            language: 'typescript',
+            component: 'ComboboxBylineExampleComponent',
+            code: comboboxBylineTs,
+            fileName: 'combobox-byline-example'
         }
     ];
 }

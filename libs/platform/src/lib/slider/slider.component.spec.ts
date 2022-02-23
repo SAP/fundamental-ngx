@@ -160,7 +160,7 @@ describe('PlatformSliderComponent', () => {
 
         fixture.detectChanges();
 
-        expect(component.value1).toEqual(-0.8);
+        expect(component.value1).toEqual(-0.2);
     });
 
     it('should emit value "-1" if cursor outside left side of slider', () => {

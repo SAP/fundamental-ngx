@@ -33,6 +33,7 @@ export const API_FILES = {
         'AvatarGroupOverflowButtonDirective',
         'AvatarGroupOverflowButtonTextDirective'
     ],
+    initialFocus: ['InitialFocusDirective'],
     bar: ['BarComponent', 'BarElementDirective', 'BarLeftDirective', 'BarMiddleDirective', 'BarRightDirective'],
     card: [
         'CardComponent',

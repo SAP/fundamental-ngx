@@ -14,6 +14,7 @@ import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '@fundamental-ngx
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
 
 import { DatePickerModule, DatePickerComponent } from './public_api';
+import { By } from '@angular/platform-browser';
 
 describe('DatePickerComponent', () => {
     let component: DatePickerComponent<FdDate>;
@@ -272,6 +273,42 @@ describe('DatePickerComponent', () => {
         fixture.detectChanges();
         expect(showSpy).toHaveBeenCalled();
     });
+
+    it('should update value on blur, if "processInputOnBlur" is set to true', () => {
+        const nativeInput: HTMLInputElement = fixture.debugElement.query(By.css(`input.fd-input`)).nativeElement;
+
+        nativeInput.value = 'hello';
+        nativeInput.dispatchEvent(new Event('input'));
+        expect(component._inputFieldDate).toEqual('hello');
+        expect(component._isInvalidDateInput).toEqual(true);
+
+        // should ignore blur event at this point
+        nativeInput.value = '1/25/2022';
+        nativeInput.dispatchEvent(new FocusEvent('blur'));
+        expect(component._inputFieldDate).toEqual('hello');
+        expect(component._isInvalidDateInput).toEqual(true);
+
+        nativeInput.dispatchEvent(new Event('input'));
+        expect(component._inputFieldDate).toEqual('1/25/2022');
+        expect(component._isInvalidDateInput).toEqual(false);
+
+        component.processInputOnBlur = true;
+
+        nativeInput.value = 'hello';
+        // should ignore input event at this point
+        nativeInput.dispatchEvent(new Event('input'));
+        expect(component._inputFieldDate).toEqual('1/25/2022');
+        expect(component._isInvalidDateInput).toEqual(false);
+
+        nativeInput.dispatchEvent(new FocusEvent('blur'));
+        expect(component._inputFieldDate).toEqual('hello');
+        expect(component._isInvalidDateInput).toEqual(true);
+
+        nativeInput.value = '1/25/2022';
+        nativeInput.dispatchEvent(new Event('blur'));
+        expect(component._inputFieldDate).toEqual('1/25/2022');
+        expect(component._isInvalidDateInput).toEqual(false);
+    });
 });
 
 describe('DatePickerComponent Accessibility', () => {
@@ -410,7 +447,7 @@ runValueAccessorTests<DatePickerComponent<FdDate>, DateTimePickerHostComponent>(
     nativeControlSelector: 'fd-date-picker',
     supportsOnBlur: true,
     internalValueChangeSetter: (fixture, value) => {
-        fixture.componentInstance.picker.handleInputChange(value);
+        fixture.componentInstance.picker.handleInputChange(value, true);
     },
     resetCustomValue: { value: null },
     getValues: () => [new FdDate(2021, 9, 5), new FdDate(2021, 10, 5), new FdDate(2021, 11, 5)],

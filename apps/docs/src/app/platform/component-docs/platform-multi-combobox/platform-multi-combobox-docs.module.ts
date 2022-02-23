@@ -2,7 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { MOBILE_MODE_CONFIG } from '@fundamental-ngx/core/mobile-mode';
-import { FdpFormGroupModule, PlatformMultiComboboxModule } from '@fundamental-ngx/platform/form';
+import {
+    FdpFormGroupModule,
+    PlatformMultiComboboxModule,
+    PlatformComboboxModule
+} from '@fundamental-ngx/platform/form';
+import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
@@ -15,6 +20,8 @@ import { MultiComboboxMobileExampleComponent } from './examples/multi-combobox-m
 import { MultiComboboxGroupExampleComponent } from './examples/multi-combobox-group/multi-combobox-group-example.component';
 import { MultiComboboxColumnsExampleComponent } from './examples/multi-combobox-columns/multi-combobox-columns-example.component';
 import { MultiComboboxFormsExampleComponent } from './examples/multi-combobox-forms/multi-combobox-forms-example.component';
+import { MultiComboboxStatesExampleComponent } from './examples/multi-combobox-states/multi-combobox-states-example.component';
+import { MultiComboboxLoadingExampleComponent } from './examples/multi-combobox-loading/multi-combobox-loading-example.component';
 
 const routes: Routes = [
     {
@@ -32,7 +39,10 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
         FdpFormGroupModule,
-        PlatformMultiComboboxModule
+        PlatformMultiComboboxModule,
+        PlatformComboboxModule,
+        PlatformMultiComboboxModule,
+        BusyIndicatorModule
     ],
     exports: [RouterModule],
     providers: [{ provide: MOBILE_MODE_CONFIG, useValue: MULTI_COMBOBOX_MOBILE_CONFIG, multi: true }],
@@ -43,7 +53,9 @@ const routes: Routes = [
         MultiComboboxMobileExampleComponent,
         MultiComboboxGroupExampleComponent,
         MultiComboboxColumnsExampleComponent,
-        MultiComboboxFormsExampleComponent
+        MultiComboboxFormsExampleComponent,
+        MultiComboboxStatesExampleComponent,
+        MultiComboboxLoadingExampleComponent
     ]
 })
 export class PlatformMultiComboboxDocsModule {}

@@ -26,6 +26,12 @@ import comboboxFormTs from '!./examples/combobox-forms/combobox-forms-example.co
 import comboboxStatesHtml from '!./examples/combobox-states/combobox-states-example.component.html?raw';
 import comboboxStatesTs from '!./examples/combobox-states/combobox-states-example.component?raw';
 
+import comboboxBylineHtml from '!./examples/combobox-byline/combobox-byline-example.component.html?raw';
+import comboboxBylineTs from '!./examples/combobox-byline/combobox-byline-example.component?raw';
+
+import comboboxLoadingHtml from '!./examples/combobox-loading/combobox-loading-example.component.html?raw';
+import comboboxLoadingTs from '!./examples/combobox-loading/combobox-loading-example.component?raw';
+
 @Component({
     selector: 'platform-combobox-docs',
     templateUrl: './platform-combobox-docs.component.html'
@@ -140,6 +146,34 @@ export class PlatformComboboxDocsComponent {
             fileName: 'combobox-states-example',
             code: comboboxStatesTs,
             component: 'ComboboxStateComponent'
+        }
+    ];
+
+    comboboxBylineExample: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'combobox-byline-example',
+            code: comboboxBylineHtml
+        },
+        {
+            language: 'typescript',
+            fileName: 'combobox-byline-example',
+            code: comboboxBylineTs,
+            component: 'ComboboxBylineExampleComponent'
+        }
+    ];
+
+    comboboxLoadingExample: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'combobox-loading-example',
+            code: comboboxLoadingHtml
+        },
+        {
+            language: 'typescript',
+            fileName: 'combobox-loading-example',
+            code: comboboxLoadingTs,
+            component: 'ComboboxLoadingExampleComponent'
         }
     ];
 }

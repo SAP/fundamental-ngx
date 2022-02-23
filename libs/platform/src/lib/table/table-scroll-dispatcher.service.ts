@@ -41,17 +41,12 @@ export class TableScrollDispatcherService implements OnDestroy {
             return;
         }
 
-        this._scrollableSubscriptionsMap.set(
-            scrollable,
-            new Subscription()
-                .add(scrollable.getScrollStream().subscribe(() => this._scrollSubject.next(scrollable)))
-                .add(
-                    scrollable
-                        .getHorizontalScrollStream()
-                        .subscribe(() => this._horizontalScrollSubject.next(scrollable))
-                )
-                .add(scrollable.getVerticalScrollStream().subscribe(() => this._verticalScrollSubject.next(scrollable)))
-        );
+        const sub = new Subscription();
+        sub.add(scrollable.getScrollStream().subscribe(() => this._scrollSubject.next(scrollable)));
+        sub.add(scrollable.getHorizontalScrollStream().subscribe(() => this._horizontalScrollSubject.next(scrollable)));
+        sub.add(scrollable.getVerticalScrollStream().subscribe(() => this._verticalScrollSubject.next(scrollable)));
+
+        this._scrollableSubscriptionsMap.set(scrollable, sub);
     }
 
     deregister(scrollable: TableScrollable): void {

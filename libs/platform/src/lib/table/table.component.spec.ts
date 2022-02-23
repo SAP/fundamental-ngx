@@ -85,11 +85,11 @@ describe('TableComponent internal', () => {
 
         const emitChangeSpy = spyOn(component.rowSelectionChange, 'emit').and.stub();
 
-        component._toggleSelectableRow(component._tableRows[0]);
+        component._toggleMultiSelectRow(component._tableRows[0], 0);
 
         expect(emitChangeSpy).toHaveBeenCalled();
 
-        component._toggleSelectableRow(component._tableRows[1]);
+        component._toggleMultiSelectRow(component._tableRows[1], 1);
 
         expect(emitChangeSpy).toHaveBeenCalled();
         expect(component._tableRows.filter((r) => r.checked).length).toEqual(2);
@@ -101,12 +101,12 @@ describe('TableComponent internal', () => {
 
         const emitChangeSpy = spyOn(component.rowSelectionChange, 'emit').and.stub();
 
-        component._toggleSelectableRow(component._tableRows[0]);
+        component._toggleSingleSelectableRow(component._tableRows[0]);
 
         expect(emitChangeSpy).toHaveBeenCalled();
         expect(component._tableRows.filter((r) => r.checked).length).toEqual(1);
 
-        component._toggleSelectableRow(component._tableRows[1]);
+        component._toggleSingleSelectableRow(component._tableRows[1]);
 
         expect(emitChangeSpy).toHaveBeenCalled();
         expect(component._tableRows.filter((r) => r.checked).length).toEqual(1);
@@ -116,11 +116,11 @@ describe('TableComponent internal', () => {
         component.selectionMode = SelectionMode.SINGLE;
         component.ngAfterViewInit();
 
-        component._toggleSelectableRow(component._tableRows[0]);
+        component._toggleSingleSelectableRow(component._tableRows[0]);
 
         expect(component._tableRows.filter((r) => r.checked).length).toEqual(1);
 
-        component._toggleSelectableRow(component._tableRows[0]);
+        component._toggleSingleSelectableRow(component._tableRows[0]);
 
         expect(component._tableRows.filter((r) => r.checked).length).toEqual(0);
     });
@@ -966,7 +966,8 @@ describe('TableComponent internal', () => {
             expect(hostComponent.source.fetch).toHaveBeenCalledTimes(2);
         });
 
-        it('should get new 50 items per each request', async () => {
+        // TODO: flaky test  https://github.com/SAP/fundamental-ngx/issues/7534
+        xit('should get new 50 items per each request', async () => {
             await tableBodyScrollTop(999999);
 
             expect(tableBodyRows.length).toBe(100);

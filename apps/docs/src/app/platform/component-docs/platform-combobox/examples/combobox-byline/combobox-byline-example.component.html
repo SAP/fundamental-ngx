@@ -1,0 +1,42 @@
+<fdp-form-group [noLabelLayout]="false" columnLayout="XL2-L2-M1-S1">
+    <fdp-form-field id="optionItemTemplate" label="Byline Combobox" [column]="1">
+        <fdp-combobox
+            name="optionItemTemplate"
+            placeholder="Type some text..."
+            [dataSource]="dataSource"
+            displayKey="name"
+            [byline]="true"
+            (selectionChange)="onSelect($event)"
+        >
+            <ng-template fdTemplate="optionItemTemplate" let-item let-index="index">
+                <span fd-list-thumbnail><fd-icon [glyph]="item.icon"></fd-icon></span>
+                <div fd-list-content>
+                    <div fd-list-titie>{{ item.name }}</div>
+                    <div fd-list-byline>Byline Text for {{ item.name }}</div>
+                </div>
+            </ng-template>
+        </fdp-combobox>
+    </fdp-form-field>
+    <fdp-form-field id="mobileOptionItemTemplate" label="Mobile Byline Combobox" [column]="2">
+        <fdp-combobox
+            name="mobileOptionItemTemplate"
+            placeholder="Type some text..."
+            [dataSource]="dataSource"
+            displayKey="name"
+            [byline]="true"
+            [mobile]="true"
+            [mobileConfig]="mobileConfig"
+            (selectionChange)="onSelect2($event)"
+        >
+            <ng-template fdTemplate="optionItemTemplate" let-item let-index="index">
+                <span fd-list-thumbnail><fd-icon [glyph]="item.icon"></fd-icon></span>
+                <div fd-list-content>
+                    <div fd-list-titie>{{ item.name }}</div>
+                    <div fd-list-byline>Byline Text for {{ item.name }}</div>
+                </div>
+            </ng-template>
+        </fdp-combobox>
+    </fdp-form-field>
+</fdp-form-group>
+<p>Selected: {{ selectedItem | json }}</p>
+<p>Mobile Selected: {{ selectedItem2 | json }}</p>

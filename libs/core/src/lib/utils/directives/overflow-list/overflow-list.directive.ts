@@ -50,7 +50,7 @@ export class OverflowListDirective implements AfterViewInit, OnDestroy {
     overflowItems: QueryList<OverflowListItemDirective>;
 
     /** @hidden */
-    private _onDestroy$ = new Subject();
+    private _onDestroy$ = new Subject<void>();
 
     /** @hidden */
     constructor(private _el: ElementRef, private _viewportRuler: ViewportRuler, private _ngZone: NgZone) {}

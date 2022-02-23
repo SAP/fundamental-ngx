@@ -1,11 +1,10 @@
 <ng-container *ngIf="totalItems">
-    <div
-        class="fd-pagination__per-page"
-        *ngIf="itemsPerPageTemplate || (itemsPerPageOptions && itemsPerPageOptions.length)"
-    >
+    <div class="fd-pagination__per-page" *ngIf="itemsPerPageTemplate || itemsPerPageOptions?.length">
+        <!-- note, that we're checking for the length of "itemsPerPageOptions", but using "_displayedPageSizeOptions" as "pageOptions" -->
+        <!-- these 2 can be different, as "_displayedPageSizeOptions" may also include "itemsPerPage" if it's not included in options -->
         <ng-container
             [ngTemplateOutlet]="itemsPerPageTemplate || perPage"
-            [ngTemplateOutletContext]="{ onSelect: _onChangePerPage }"
+            [ngTemplateOutletContext]="{ onSelect: _onChangePerPage, pageOptions: _displayedPageSizeOptions }"
         ></ng-container>
     </div>
 
@@ -28,7 +27,6 @@
             [ariaLabel]="firstLabel"
             [title]="firstLabel"
             class="fd-pagination__button fd-pagination__button--mobile"
-            tabindex="-1"
             [attr.aria-disabled]="isFirstPage"
             (click)="goToFirstPage()"
             (keyup.enter)="goToFirstPage()"
@@ -46,7 +44,6 @@
             [ariaLabel]="previousLabel"
             [title]="previousLabel"
             class="fd-pagination__button"
-            tabindex="-1"
             [attr.aria-disabled]="isFirstPage"
             (click)="previousPage()"
             (keyup.enter)="previousPage()"
@@ -65,7 +62,6 @@
                 [ariaLabel]="pageLabel(page)"
                 [title]="nextLabel"
                 class="fd-pagination__link"
-                tabindex="-1"
                 (click)="goToPage(page)"
                 (keyup.enter)="goToPage(page, $event)"
                 (keydown.space)="$event.preventDefault()"
@@ -78,7 +74,6 @@
         <button
             #currentPageElement
             fd-focus-key-manager-item
-            initialFocus
             fd-button
             fdType="transparent"
             [compact]="compact"
@@ -94,7 +89,6 @@
         <input
             #pageInputElement
             fd-focus-key-manager-item
-            initialFocus
             fd-form-control
             fd-only-digits
             required
@@ -128,7 +122,6 @@
                 [ariaLabel]="pageLabel(page)"
                 [title]="nextLabel"
                 class="fd-pagination__link"
-                tabindex="-1"
                 (click)="goToPage(page)"
                 (keyup.enter)="goToPage(page, $event)"
                 (keydown.space)="$event.preventDefault()"
@@ -148,7 +141,6 @@
             [ariaLabel]="nextLabel"
             [title]="nextLabel"
             class="fd-pagination__button"
-            tabindex="-1"
             [attr.aria-disabled]="isLastPage"
             (click)="nextPage()"
             (keyup.enter)="nextPage()"
@@ -166,7 +158,6 @@
             [ariaLabel]="lastLabel"
             [title]="lastLabel"
             class="fd-pagination__button fd-pagination__button--mobile"
-            tabindex="-1"
             [attr.aria-disabled]="isLastPage"
             (click)="goToLastPage()"
             (keyup.enter)="goToLastPage()"
@@ -197,7 +188,7 @@
     <span fd-form-label class="fd-pagination__total-label"> {{ showing.of }} Results </span>
 </ng-template>
 
-<ng-template #perPage>
+<ng-template #perPage let-pageOptions="pageOptions">
     <label fd-form-label class="fd-pagination__per-page-label">{{ itemsPerPageLabel }}:</label>
 
     <fd-select
@@ -206,6 +197,6 @@
         [value]="itemsPerPage"
         (valueChange)="_onChangePerPage($event)"
     >
-        <fd-option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</fd-option>
+        <fd-option *ngFor="let option of pageOptions" [value]="option">{{ option }}</fd-option>
     </fd-select>
 </ng-template>

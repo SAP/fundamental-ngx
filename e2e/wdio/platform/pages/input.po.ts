@@ -19,7 +19,7 @@ export class InputPo extends BaseComponentPo {
     errorTextAttr = 'fd-form-message span';
     requiredInputLabel = 'fdp-platform-input-reactive-validation-example .fd-form-label--required';
     questionMarkSpan = '.sap-icon--question-mark';
-    inputsLabels = '.fd-container label span.ng-star-inserted';
+    inputsLabels = '.fd-container label .fd-form-label';
     inputsArray = 'input.fd-input';
     autocompleteInput = 'input#form-input-10';
     autocompleteInputLabel = 'fdp-platform-input-auto-complete-validation-example label';

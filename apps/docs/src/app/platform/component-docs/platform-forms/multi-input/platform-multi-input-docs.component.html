@@ -59,6 +59,7 @@
     <fdp-platform-multi-input-mobile-example></fdp-platform-multi-input-mobile-example>
 </component-example>
 <code-example [exampleFiles]="multiInputMobile"></code-example>
+
 <separator></separator>
 
 <fd-docs-section-title id="reactive" componentName="multi-input"> Multi Input reactive </fd-docs-section-title>
@@ -69,4 +70,15 @@
     <fdp-platform-multi-input-reactive-example></fdp-platform-multi-input-reactive-example>
 </component-example>
 <code-example [exampleFiles]="multiInputReactive"></code-example>
+
 <separator></separator>
+
+<fd-docs-section-title id="loading" componentName="multi-input"> Loading </fd-docs-section-title>
+<description>
+    Multi input exposes <code>onDataRequested</code> and <code>onDataReceived</code> outputs, that can be used to
+    implement external loading logic. These events are tied to the querying process through dataSource.
+</description>
+<component-example>
+    <fdp-platform-multi-input-loading-example></fdp-platform-multi-input-loading-example>
+</component-example>
+<code-example [exampleFiles]="multiInputLoading"></code-example>

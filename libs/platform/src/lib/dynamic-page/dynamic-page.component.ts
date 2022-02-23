@@ -8,9 +8,11 @@ import {
     ContentChildren,
     DoCheck,
     ElementRef,
+    EventEmitter,
     HostBinding,
     Input,
     OnDestroy,
+    Output,
     QueryList,
     ViewChildren,
     ViewEncapsulation
@@ -26,6 +28,11 @@ import { DynamicPageFooterComponent } from './dynamic-page-footer/dynamic-page-f
 import { DynamicPageHeaderComponent } from './dynamic-page-header/header/dynamic-page-header.component';
 import { DynamicPageTitleComponent } from './dynamic-page-header/title/dynamic-page-title.component';
 import { DynamicPageService } from './dynamic-page.service';
+
+/** Dynamic Page tab change event */
+export class DynamicPageTabChangeEvent {
+    constructor(public source: DynamicPageContentComponent, public payload: TabPanelComponent) {}
+}
 
 @Component({
     selector: 'fdp-dynamic-page',
@@ -84,6 +91,12 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
      */
     @Input()
     expandContent = true;
+
+    /**
+     * Tab Change event
+     */
+    @Output()
+    tabChange = new EventEmitter<DynamicPageTabChangeEvent>();
 
     /** reference to title component  */
     @ContentChild(DynamicPageTitleComponent)
@@ -170,6 +183,12 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
         return this._elementRef;
     }
 
+    _onSelectedTabChange(event: TabPanelComponent): void {
+        const content = this.contentComponents.find((contentComponent) => contentComponent.id === event.id);
+
+        this.tabChange.emit(new DynamicPageTabChangeEvent(content, event));
+    }
+
     /** @hidden */
     private _listenToContentComponentsListChanges(): void {
         this.contentComponents.changes.pipe(startWith(this.contentComponents)).subscribe(() => {
@@ -179,20 +198,23 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
 
     /** @hidden */
     private _createContentTabs(): void {
-        const content = this.contentComponents.toArray();
+        const contentComponents = this.contentComponents.toArray();
+
         // reset array
         this._tabs = [];
-        if (!this._isTabContentPresent(content)) {
-            if (content.length > 1) {
+
+        if (!this._isTabContentPresent(contentComponents)) {
+            if (contentComponents.length > 1) {
                 throw new Error(
                     'Cannot have more than one content section. Use `tabLabel` to have a tabbed navigation.'
                 );
             }
+
             return;
         }
 
-        if (content) {
-            content.forEach((contentItem) => {
+        if (contentComponents) {
+            contentComponents.forEach((contentItem) => {
                 if (!contentItem.tabLabel && this._isTabbed) {
                     throw new Error('At least one element is already tabbed, please provide a `tabLabel`.');
                 } else {
@@ -203,13 +225,14 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     }
 
     /** @hidden */
-    private _isTabContentPresent(content: DynamicPageContentComponent[]): boolean {
-        content.forEach((contentItem) => {
-            if (contentItem.tabLabel) {
+    private _isTabContentPresent(contentComponents: DynamicPageContentComponent[]): boolean {
+        contentComponents.forEach((contentComponent) => {
+            if (contentComponent.tabLabel) {
                 this._isTabbed = true;
                 return;
             }
         });
+
         return this._isTabbed;
     }
 }

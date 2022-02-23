@@ -10,6 +10,7 @@ import {
     getElementClass,
     getText,
     isElementDisplayed,
+    pause,
     refreshPage,
     scrollIntoView,
     sendKeys,
@@ -104,6 +105,7 @@ describe('Value help dialog test suite', () => {
             click(formInputField(basicSearchId));
             setValue(formInputField(basicSearchId), searchValues[0]);
             click(goBtn);
+            pause(300);
             checkResults(tableRows, searchValues[0]);
         });
 
@@ -125,6 +127,7 @@ describe('Value help dialog test suite', () => {
                 click(formInputField(inputIDs[i]));
                 setValue(formInputField(inputIDs[i]), searchValues[i]);
                 click(goBtn);
+                pause(300);
                 checkResults(searchResultsColumnsArr[i], searchValues[i]);
                 click(formInputField(inputIDs[i]));
                 clearValue(formInputField(inputIDs[i]));
@@ -133,6 +136,7 @@ describe('Value help dialog test suite', () => {
 
         it('should check the selection appears as a token', () => {
             click(openDialogBtn);
+            pause(300);
             clickTableCheckbox(1);
             const selectedItem = getText(selectedItemName);
             expect(getText(selectedTokens).trim()).toEqual(selectedItem);

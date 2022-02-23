@@ -79,8 +79,10 @@ export const DATA_PROVIDERS = new InjectionToken<Map<string, DataProvider<any>>>
 
 export interface DataSource<T> {
     open(): Observable<T[]>;
-
     close(): void;
+    isDataLoading: boolean;
+    onDataRequested(): Observable<void>;
+    onDataReceived(): Observable<void>;
 }
 
 export type MatchBy = (item: any) => any;
@@ -153,13 +155,22 @@ export abstract class DataProvider<T> {
 
 export class ComboBoxDataSource<T> implements DataSource<T> {
     static readonly MaxLimit = 5;
-    protected dataChanges: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
+    protected readonly _dataChanges: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
+    protected readonly _onDataRequested$ = new Subject<void>();
+    protected readonly _onDataReceived$ = new Subject<void>();
+    protected readonly _onDestroy$ = new Subject<void>();
 
-    protected _onDestroy$ = new Subject<void>();
+    protected _dataLoading = false;
+
+    get isDataLoading(): boolean {
+        return this._dataLoading;
+    }
 
     constructor(public dataProvider: DataProvider<any>) {}
 
     match(predicate: string | Map<string, string> = new Map<string, string>()): void {
+        this._onDataRequested$.next();
+        this._dataLoading = true;
         const searchParam = new Map();
 
         if (typeof predicate === 'string') {
@@ -174,17 +185,35 @@ export class ComboBoxDataSource<T> implements DataSource<T> {
             searchParam.set('limit', ComboBoxDataSource.MaxLimit);
         }
 
-        this.dataProvider.fetch(searchParam).subscribe((result: T[]) => {
-            this.dataChanges.next(result);
-        });
+        this.dataProvider
+            .fetch(searchParam)
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe(
+                (result: T[]) => {
+                    this._onDataReceived$.next();
+                    this._dataLoading = false;
+                    this._dataChanges.next(result);
+                },
+                () => {
+                    this._onDataReceived$.next();
+                    this._dataLoading = false;
+                }
+            );
     }
 
     open(): Observable<T[]> {
-        return this.dataChanges.pipe(takeUntil(this._onDestroy$));
+        return this._dataChanges.pipe(takeUntil(this._onDestroy$));
     }
 
     close(): void {
         this._onDestroy$.next();
+    }
+
+    onDataRequested(): Observable<void> {
+        return this._onDataRequested$.asObservable();
+    }
+    onDataReceived(): Observable<void> {
+        return this._onDataReceived$.asObservable();
     }
 }
 

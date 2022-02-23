@@ -109,7 +109,8 @@ describe('Table component test suite', () => {
         optionCondensed,
         optionCozy,
         optionCompact,
-        dropdown,
+        playgroundContentDensityDropdown,
+        playgroundSelectionModeDropdown,
         optionSingle,
         optionMultiple,
         tableCellFixed,
@@ -402,28 +403,24 @@ describe('Table component test suite', () => {
             checkAlertMessages(tableLoadingExample);
         });
 
-        it('should check table item single selection', () => {
-            scrollIntoView(tableLoadingExample);
-            click(tableLoadingExample + button);
-            findElementInTable(tableLoadingExample, tableCellArr);
-        });
-
         it('should check busy indicator', () => {
             scrollIntoView(tableLoadingExample);
-            expect(isElementDisplayed(busyIndicator)).toBe(true, 'busy indicator isnt displayed');
-            click(tableLoadingExample + button);
-            expect(doesItExist(busyIndicator)).toBe(false, 'busy indicator still displayed');
-        });
+            pause(300);
+            expect(doesItExist(busyIndicator)).toBe(false, 'busy indicator should not be displayed');
 
-        it('should check ', () => {
-            scrollIntoView(tableLoadingExample);
-            click(tableLoadingExample + button);
             setValue(tableLoadingExample + input, 'Astro');
             click(tableLoadingExample + buttonSearch);
-            click(tableLoadingExample + button);
+            expect(doesItExist(busyIndicator)).toBe(true, 'busy indicator should be displayed');
 
-            expect(isElementClickable(tableLoadingExample + button, 1)).toBe(false, 'x button is clickable');
-            expect(isElementClickable(tableLoadingExample + button, 2)).toBe(false, 'x button search is clickable');
+            pause(300);
+            expect(doesItExist(busyIndicator)).toBe(false, 'busy indicator should not be displayed');
+        });
+
+        it('should check table content is not interactive while table is loading', () => {
+            scrollIntoView(tableLoadingExample);
+            setValue(tableLoadingExample + input, 'Astro');
+            click(tableLoadingExample + buttonSearch);
+
             expect(isEnabled(tableLoadingExample + input)).toBe(false, 'input is enable');
         });
     });
@@ -433,8 +430,9 @@ describe('Table component test suite', () => {
             scrollIntoView(tablePageScrollingExample);
             setValue(tablePageScrollingExample + input, testText2);
             click(tablePageScrollingExample + buttonSearch);
+            expect(doesItExist(busyIndicator)).toBe(true, "busy indicator isn't displayed");
             pause(500);
-            expect(isElementDisplayed(busyIndicator)).toBe(true, 'busy indicator isnt displayed');
+            expect(doesItExist(busyIndicator)).toBe(false, 'busy indicator is displayed');
             const rowLength = getElementArrayLength(tablePageScrollingExample + tableRow);
             expect(rowLength).toEqual(1);
             const cellLength = getElementArrayLength(tablePageScrollingExample + tableRow + tableCellText);
@@ -660,9 +658,6 @@ describe('Table component test suite', () => {
         it('should check clickability synchronize button', () => {
             const buttonLength = getElementArrayLength(synchronizeButton);
             for (let i = 0; i < buttonLength; i++) {
-                if (i === 9) {
-                    click(tableLoadingExample + button);
-                }
                 expect(isElementClickable(synchronizeButton, i)).toBe(
                     true,
                     `synchronize button with index ${i} not clickable`
@@ -691,43 +686,43 @@ describe('Table component test suite', () => {
 
         it('should check table content density', () => {
             scrollIntoView(playgroundExample);
-            click(playgroundExample + dropdown);
+            click(playgroundContentDensityDropdown);
             click(optionCompact);
             expect(getElementClass(playgroundExample + fdpTable)).toContain('fd-table--compact');
 
-            click(playgroundExample + dropdown);
+            click(playgroundContentDensityDropdown);
             click(optionCozy);
             expect(getElementClass(playgroundExample + fdpTable)).toContain('fdp-table');
 
-            click(playgroundExample + dropdown);
+            click(playgroundContentDensityDropdown);
             click(optionCondensed);
             expect(getElementClass(playgroundExample + fdpTable)).toContain('fd-table--condensed');
         });
 
-        it('should should check table selection mode', () => {
+        it('should check table selection mode', () => {
             scrollIntoView(playgroundExample);
-            click(playgroundExample + dropdown, 1);
+            click(playgroundSelectionModeDropdown);
             click(optionSingle);
             expect(getElementClass(playgroundExample + tableCellFixed)).toContain('fd-table__cell--fixed');
 
-            click(playgroundExample + dropdown, 1);
+            click(playgroundSelectionModeDropdown);
             click(optionMultiple);
             expect(getElementClass(playgroundExample + tableCellFixed)).toContain('fd-table__cell--checkbox');
         });
 
-        it('should should check table without horizontal borders', () => {
+        it('should check table without horizontal borders', () => {
             scrollIntoView(playgroundExample);
             click(playgroundExample + checkbox);
             expect(getElementClass(playgroundExample + fdpTable)).toContain('fd-table--no-horizontal-borders');
         });
 
-        it('should should check table without vertical borders', () => {
+        it('should check table without vertical borders', () => {
             scrollIntoView(playgroundExample);
             click(playgroundExample + checkbox, 1);
             expect(getElementClass(playgroundExample + fdpTable)).toContain('fd-table--no-vertical-borders');
         });
 
-        it('should should check table without all borders', () => {
+        it('should check table without all borders', () => {
             scrollIntoView(playgroundExample);
             click(playgroundExample + checkbox, 2);
             expect(getElementClass(playgroundExample + fdpTable)).toContain(
