@@ -142,7 +142,6 @@
             "@fundamental-ngx/fn/slider": ["libs/fn/src/lib/slider/index.ts"],
             "@fundamental-ngx/fn/switch": ["libs/fn/src/lib/switch/index.ts"],
             "@fundamental-ngx/fn/tabs": ["libs/fn/src/lib/tabs/index.ts"],
-            "@fundamental-ngx/fn/tag": ["libs/fn/src/lib/tag/index.ts"],
             "@fundamental-ngx/fn/utils": ["libs/fn/src/lib/utils/index.ts"],
             "@fundamental-ngx/moment-adapter": ["libs/moment-adapter/src/index.ts"],
             "@fundamental-ngx/platform": ["libs/platform/src/lib/index.ts"],

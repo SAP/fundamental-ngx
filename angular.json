@@ -4736,44 +4736,6 @@
             "tags": ["type:lib", "scope:fn"],
             "implicitDependencies": ["core"]
         },
-        "fn-tag": {
-            "projectType": "library",
-            "root": "libs/fn/src/lib/tag",
-            "sourceRoot": "libs/fn/src/lib/tag",
-            "prefix": "fn",
-            "architect": {
-                "build": {
-                    "builder": "@nrwl/angular:package",
-                    "outputs": ["dist/libs/fn/tag"],
-                    "options": {
-                        "tsConfig": "libs/fn/src/lib/tag/tsconfig.lib.json",
-                        "project": "libs/fn/src/lib/tag/ng-package.json",
-                        "updateBuildableProjectDepsInPackageJson": false
-                    },
-                    "configurations": {
-                        "production": {
-                            "tsConfig": "libs/fn/src/lib/tag/tsconfig.lib.prod.json"
-                        }
-                    }
-                },
-                "test": {
-                    "builder": "@angular-devkit/build-angular:karma",
-                    "options": {
-                        "main": "libs/fn/src/lib/tag/test.ts",
-                        "tsConfig": "libs/fn/src/lib/tag/tsconfig.spec.json",
-                        "karmaConfig": "libs/fn/src/lib/tag/karma.conf.js"
-                    }
-                },
-                "lint": {
-                    "builder": "@nrwl/linter:eslint",
-                    "options": {
-                        "lintFilePatterns": ["libs/fn/src/lib/tag/**/*.ts", "libs/fn/src/lib/tag/**/*.html"]
-                    }
-                }
-            },
-            "tags": ["type:lib", "scope:fn"],
-            "implicitDependencies": ["core"]
-        },
         "fn-utils": {
             "projectType": "library",
             "root": "libs/fn/src/lib/utils",
