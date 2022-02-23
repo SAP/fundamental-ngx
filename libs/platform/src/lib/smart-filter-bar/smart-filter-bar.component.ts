@@ -2,9 +2,11 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    EventEmitter,
     forwardRef,
     Input,
     OnDestroy,
+    Output,
     Provider,
     ViewChild,
     ViewEncapsulation
@@ -62,6 +64,12 @@ const smartFilterBarProvider: Provider = {
     provide: SmartFilterBar,
     useExisting: forwardRef(() => SmartFilterBarComponent)
 };
+
+export interface SmartFilterChangeObject {
+    search: SearchInput | undefined;
+    filterBy: CollectionFilter[] | CollectionFilterGroup[];
+    subject: SmartFilterBarSubjectDirective;
+}
 
 @Component({
     selector: 'fdp-smart-filter-bar',
@@ -154,6 +162,13 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
      */
     @Input()
     filtersColumnLayout: ColumnLayout = defaultColumnsLayout;
+
+    /**
+     * Event emitted when the selected filters have been changed.
+     */
+    @Output()
+    smartFiltersChanged: EventEmitter<SmartFilterChangeObject> = new EventEmitter<SmartFilterChangeObject>();
+
     /**
      * Calculated array of filters to apply for the subject's data source.
      */
@@ -516,6 +531,7 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
         this.filterBy = filters;
         source.dataProvider.setFilters(filters, this.search);
         this.subject.getSubject().fetch();
+        this.smartFiltersChanged.emit({ search: this.search, filterBy: this.filterBy, subject: this._subject });
     }
 
     /** @hidden */
