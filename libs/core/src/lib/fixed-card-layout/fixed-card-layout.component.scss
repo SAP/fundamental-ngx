@@ -33,7 +33,7 @@
         order: 1;
         min-height: 1px;
 
-        &--last:empty {
+        &--single:empty {
             flex-basis: 100%;
         }
     }

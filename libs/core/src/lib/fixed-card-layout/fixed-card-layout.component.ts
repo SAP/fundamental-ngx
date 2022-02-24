@@ -23,10 +23,10 @@ import {
 } from '@angular/core';
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { CdkDragDrop, CdkDropList } from '@angular/cdk/drag-drop';
-import { fromEvent, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { resizeObservable, RtlService } from '@fundamental-ngx/core/utils';
 import { FixedCardLayoutItemComponent } from './fixed-card-layout-item/fixed-card-layout-item.component';
 import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
 
@@ -147,6 +147,15 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     /** @hidden handles rtl service */
     _dir = 'ltr';
 
+    /** @hidden first number is the CardDefinition rank, i.e. id */
+    _groupIndexes = new Map<number, number>();
+
+    /** @hidden first number is the CardDefinition rank, i.e. id */
+    _itemIndexes = new Map<number, number>();
+
+    /** @hidden first number is the CardDefinition rank, i.e. id */
+    _singleItemColumns = new Set<number>();
+
     /** @hidden Return available width for fixed card layout */
     get _availableWidth(): number {
         return this._layout.nativeElement.getBoundingClientRect().width;
@@ -175,7 +184,6 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
 
     /** @hidden */
     ngOnInit(): void {
-        this._listenOnResize();
         this._subscribeToRtl();
     }
 
@@ -187,7 +195,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     /** @hidden */
     ngAfterViewInit(): void {
         this._processCards();
-
+        this._listenOnResize();
         this._accessibilitySetup();
     }
 
@@ -321,31 +329,6 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
         this._processDragDrop(indexFromArray, indexToArray, movedCard, replacedCard);
     };
 
-    /** @hidden */
-    _getGroupIndex(card: CardDefinitionDirective): number {
-        if (!this._cardColumns) {
-            return 0;
-        }
-
-        return this._cardColumns.findIndex((column) => column.find((_card) => _card.fdCardDef === card.fdCardDef));
-    }
-
-    /** @hidden */
-    _getItemIndex(card: CardDefinitionDirective): number {
-        if (!this._cardColumns) {
-            return 0;
-        }
-
-        return this._cardColumns[this._getGroupIndex(card)].findIndex((_card) => _card.fdCardDef === card.fdCardDef);
-    }
-
-    /** @hidden */
-    _isSingleInColumn(card: CardDefinitionDirective): boolean {
-        return (
-            this._cardColumns?.find((column) => column.find((_card) => _card.fdCardDef === card.fdCardDef)).length < 2
-        );
-    }
-
     /** @hidden Arranges cards on drop of dragged card */
     private _processDragDrop(
         prevIndex: number,
@@ -385,7 +368,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
 
     /** @hidden Listen window resize and distribute cards on column change */
     private _listenOnResize(): void {
-        fromEvent(window, 'resize')
+        resizeObservable(this._layout.nativeElement)
             .pipe(debounceTime(60), takeUntil(this._onDestroy$))
             .subscribe(() => this.updateLayout());
     }
@@ -417,21 +400,42 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
 
     /** @hidden Distribute cards among columns to arrange them in "Z" flow */
     private _setCardColumns(): void {
+        this._groupIndexes = new Map<number, number>();
+        this._itemIndexes = new Map<number, number>();
+        this._singleItemColumns = new Set<number>();
+
         const columns: CardColumn[] = new Array(this._numberOfColumns).fill(0).map(() => new Array(0));
 
-        this._cardsArray.forEach((card, i) => columns[i % this._numberOfColumns].push(card));
+        this._cardsArray.forEach((card, i) => {
+            const currColumnIndex = i % this._numberOfColumns;
+            const itemIndex = columns[currColumnIndex].length;
+
+            columns[currColumnIndex].push(card);
+
+            this._groupIndexes.set(card.fdCardDef, currColumnIndex);
+            this._itemIndexes.set(card.fdCardDef, itemIndex);
+        });
 
         this._cardColumns = columns;
+
+        this._cardColumns.forEach((column) => {
+            if (column.length > 0 && column.length < 2) {
+                this._singleItemColumns.add(column[0].fdCardDef);
+            }
+        });
     }
 }
 
 /** @hidden Returns number of columns that can fit in current available width for fd-card-layout */
 function getNumberOfColumns(containerWidth: number, cardWidth: number): number {
-    const numberOfCardsWithNoGap = Math.floor(containerWidth / cardWidth); // 960 / 320 = 3
+    containerWidth = containerWidth || 1;
+    cardWidth = cardWidth || 1;
+
+    const numberOfCardsWithNoGap = Math.max(Math.floor(containerWidth / cardWidth), 1); // Example: 960 / 320 = 3
     const requiredWidthWithGap = numberOfCardsWithNoGap * cardWidth + (numberOfCardsWithNoGap - 1) * CARD_GAP_WIDTH;
     const columnCount = requiredWidthWithGap > containerWidth ? numberOfCardsWithNoGap - 1 : numberOfCardsWithNoGap;
 
-    return columnCount || 1;
+    return Math.max(columnCount, 1);
 }
 
 /** @hidden Method to update rank after cards are dragged */

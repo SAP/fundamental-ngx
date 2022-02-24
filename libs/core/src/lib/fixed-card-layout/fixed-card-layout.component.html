@@ -17,7 +17,7 @@
         *ngFor="let card of _cardsArray; let cardIndex = index"
         cdkDropList
         class="fd-fixed-card-layout__wrapper"
-        [class.fd-fixed-card-layout__wrapper--last]="_isSingleInColumn(card)"
+        [class.fd-fixed-card-layout__wrapper--single]="_singleItemColumns.has(card.fdCardDef)"
         [style.width.%]="100 / _numberOfColumns"
         [cdkDropListData]="cardIndex"
         [cdkDropListEnterPredicate]="_enterPredicate"
@@ -31,8 +31,8 @@
             cdkDragPreviewClass="fd-fixed-card-layout__card-preview"
             [cdkDragData]="card"
             [cdkDragStartDelay]="dragStartDelay"
-            [itemIndex]="_getItemIndex(card)"
-            [groupIndex]="_getGroupIndex(card)"
+            [itemIndex]="_itemIndexes.get(card.fdCardDef)"
+            [groupIndex]="_groupIndexes.get(card.fdCardDef)"
             (cdkDragDropped)="_onDragDropped($event)"
         >
             <fd-fixed-card-layout-item>

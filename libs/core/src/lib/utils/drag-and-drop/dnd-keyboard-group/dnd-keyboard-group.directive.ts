@@ -61,9 +61,7 @@ export class DndKeyboardGroupDirective {
 
             this.customTransferFn(group, nextGroup, itemIndex, indexInNextGroup);
             this._focusDndItem(nextGroupIndex, indexInNextGroup);
-        }
-
-        if (KeyUtil.isKeyCode(event, LEFT_ARROW) && (isRtl ? nextGroupExists : prevGroupExists)) {
+        } else if (KeyUtil.isKeyCode(event, LEFT_ARROW) && (isRtl ? nextGroupExists : prevGroupExists)) {
             event.preventDefault();
 
             const nextGroupIndex = groupIndex + (isRtl ? 1 : -1);
@@ -71,16 +69,12 @@ export class DndKeyboardGroupDirective {
 
             this.customTransferFn(group, nextGroup, itemIndex, indexInNextGroup);
             this._focusDndItem(nextGroupIndex, indexInNextGroup);
-        }
-
-        if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
+        } else if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
             event.preventDefault();
 
             this.customMoveFn(group, itemIndex, itemIndex + 1);
             this._focusDndItem(groupIndex, itemIndex + 1);
-        }
-
-        if (KeyUtil.isKeyCode(event, UP_ARROW)) {
+        } else if (KeyUtil.isKeyCode(event, UP_ARROW)) {
             event.preventDefault();
 
             this.customMoveFn(group, itemIndex, itemIndex - 1);
