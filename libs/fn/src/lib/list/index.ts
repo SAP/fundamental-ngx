@@ -1,2 +1,1 @@
-export * from './list.module';
-export * from './list/list.component';
+export * from './public_api';
