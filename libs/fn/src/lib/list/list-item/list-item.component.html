@@ -10,16 +10,16 @@
     [class.fn-list__avatar]="!!prefixProvider"
     *ngIf="iconProvider || prefixProvider"
 >
-    <ng-template [ngTemplateOutlet]="iconProvider?.templateRef || prefixProvider?.templateRef"></ng-template>
+    <ng-template [ngTemplateOutlet]="iconProvider?.templateRef || prefixProvider?.templateRef || null"></ng-template>
 </span>
 
 <ng-container *ngIf="byline; else normal">
     <div class="fn-list__start-container" *ngIf="titleProvider || bylineProvider">
         <span class="fn-list__title">
-            <ng-container *ngTemplateOutlet="titleProvider?.templateRef"></ng-container>
+            <ng-container *ngTemplateOutlet="titleProvider?.templateRef || null"></ng-container>
         </span>
         <span class="fn-list__byline">
-            <ng-container *ngTemplateOutlet="bylineProvider?.templateRef"></ng-container>
+            <ng-container *ngTemplateOutlet="bylineProvider?.templateRef || null"></ng-container>
         </span>
     </div>
 </ng-container>
@@ -31,6 +31,6 @@
 </ng-template>
 
 <div class="fn-list__end-container" *ngIf="actionsProvider || postfixProvider" (click)="$event.stopPropagation()">
-    <ng-container *ngTemplateOutlet="postfixProvider?.templateRef"></ng-container>
-    <ng-container *ngTemplateOutlet="actionsProvider?.templateRef"></ng-container>
+    <ng-container *ngTemplateOutlet="postfixProvider?.templateRef || null"></ng-container>
+    <ng-container *ngTemplateOutlet="actionsProvider?.templateRef || null"></ng-container>
 </div>
