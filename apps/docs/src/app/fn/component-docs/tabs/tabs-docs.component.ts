@@ -5,7 +5,6 @@ import { SchemaFactoryService } from '../../../schema/services/schema-factory/sc
 import tabSrc from '!./examples/tabs-example/tabs-example.component.html?raw';
 import tabIconSrc from '!./examples/tabs-example/tabs-icon-example.component.html?raw';
 import tabNestedButtonSrc from '!./examples/tabs-example/tabs-nested-button-example.component.html?raw';
-import tabOverflowSrc from '!./examples/tabs-example/tabs-overflow-example.component.html?raw';
 import tabMultiInstanceSrc from '!./examples/tabs-example/tabs-multi-instance-example.component.html?raw';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
@@ -145,14 +144,6 @@ export class TabsDocsComponent {
             language: 'html',
             code: tabNestedButtonSrc,
             fileName: 'tabs-nested-button-example'
-        }
-    ];
-
-    tabOverflowExample: ExampleFile[] = [
-        {
-            language: 'html',
-            code: tabOverflowSrc,
-            fileName: 'tabs-overflow-example'
         }
     ];
 

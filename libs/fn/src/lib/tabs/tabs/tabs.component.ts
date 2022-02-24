@@ -15,7 +15,7 @@ import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
 import { TabItemDirective } from '../tab-item.directive';
 
-export type TabMode = 'group' | 'individual' | 'line';
+export type TabMode = 'default' | 'positive' | 'critical' | 'negative' | 'multi-instance';
 
 @Component({
     selector: 'fn-tabs',
@@ -27,10 +27,10 @@ export type TabMode = 'group' | 'individual' | 'line';
 export class TabsComponent implements AfterViewInit {
     /**
      * The mode of the tabs.
-     * Options include group(default), individual and line
+     * Options include default, semantic tabs(positive, critical, negative), and multi-instance
      */
     @Input()
-    mode: TabMode = 'group';
+    mode: TabMode = 'default';
 
     /** @hidden */
     @ContentChildren(TabComponent)
@@ -42,6 +42,9 @@ export class TabsComponent implements AfterViewInit {
 
     /** @hidden */
     _tabsList: TabComponent[] = [];
+
+    /** @hidden */
+    _isCollapsed = true;
 
     /** @hidden */
     private _currentActiveIndex = 0;

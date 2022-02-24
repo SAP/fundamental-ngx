@@ -19,12 +19,6 @@ export class TabsIconExampleComponent {}
 export class TabsNestedButtonExampleComponent {}
 
 @Component({
-    selector: 'fd-tabs-overflow-example',
-    templateUrl: './tabs-overflow-example.component.html'
-})
-export class TabsOverflowExampleComponent {}
-
-@Component({
     selector: 'fd-tabs-multi-instance-example',
     templateUrl: './tabs-multi-instance-example.component.html'
 })
