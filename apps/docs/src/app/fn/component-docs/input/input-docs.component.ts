@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import formHtml from '!./examples/input-example.component.html?raw';
 import formStateHtml from '!./examples/input-state-example.component.html?raw';
-import formGroupInputHtml from '!./examples/input-form-group-example.component.html?raw';
-import formGroupInputTs from '!./examples/input-form-group-example.component.ts?raw';
-import formGroupInputScss from '!./examples/input-form-group-example.component.scss?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -24,21 +21,6 @@ export class InputDocsComponent {
             language: 'html',
             code: formStateHtml,
             fileName: 'input-state-example'
-        }
-    ];
-
-    formGroupInput: ExampleFile[] = [
-        {
-            language: 'html',
-            code: formGroupInputHtml,
-            fileName: 'input-form-group-example',
-            scssFileCode: formGroupInputScss
-        },
-        {
-            language: 'typescript',
-            code: formGroupInputTs,
-            fileName: 'input-form-group-example',
-            component: 'InputFormGroupExampleComponent'
         }
     ];
 }
