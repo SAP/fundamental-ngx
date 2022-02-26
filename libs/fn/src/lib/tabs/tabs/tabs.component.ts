@@ -44,9 +44,6 @@ export class TabsComponent implements AfterViewInit {
     _tabsList: TabComponent[] = [];
 
     /** @hidden */
-    _isCollapsed = true;
-
-    /** @hidden */
     private _currentActiveIndex = 0;
 
     /** @hidden */

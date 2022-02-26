@@ -18,11 +18,13 @@ export class TabComponent {
     @Input()
     title: string;
 
+    /** The glyph name. */
     @Input()
     glyph: string;
 
+    /** Whether the tab has a nested button */
     @Input()
-    button: string;
+    button = false;
 
     /** Whether the tab is active or not. */
     @Input()

@@ -15,10 +15,20 @@
             {{ tab.title }}
         </span>
 
-        <button *ngIf="tab.button" class="fn-nested-button fn-tabs__button" aria-label="show children elements">
+        <button
+            *ngIf="tab.button"
+            class="fn-nested-button fn-tabs__button"
+            i18n-aria-label="@@fnTabs.Expand.Button"
+            aria-label="Show children elements"
+        >
             <span class="sap-icon sap-icon--megamenu"></span>
         </button>
-        <button *ngIf="mode === 'multi-instance'" class="fn-nested-button fn-tabs__button" aria-label="close">
+        <button
+            *ngIf="mode === 'multi-instance'"
+            class="fn-nested-button fn-tabs__button"
+            i18n-aria-label="@@fnTabs.Close.Button"
+            aria-label="Close"
+        >
             <span class="sap-icon sap-icon--decline"></span>
         </button>
     </li>
@@ -28,6 +38,7 @@
             fn-button
             *ngIf="mode === 'multi-instance'"
             class="fn-button--layout fn-button--icon-only"
+            i18n-aria-label="@@fnTabs.Add.Button"
             aria-label="Add"
         >
             <span class="sap-icon sap-icon--add"></span>
