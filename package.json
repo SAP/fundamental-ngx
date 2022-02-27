@@ -160,7 +160,7 @@
         "@nrwl/cli": "13.2.3",
         "@nrwl/devkit": "13.4.1",
         "@nrwl/eslint-plugin-nx": "13.2.3",
-        "@nrwl/linter": "13.2.3",
+        "@nrwl/linter": "13.8.3",
         "@nrwl/nx-cloud": "13.0.2",
         "@nrwl/schematics": "8.12.11",
         "@nrwl/tao": "13.2.3",
