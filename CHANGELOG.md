@@ -1,4 +1,11 @@
 
+### 0.33.5-rc.17 (2022-02-27)
+
+
+### Bug Fixes
+
+* **core:** menu item should not receive focus on mouse hover and remove extra box shadow [ci visual] ([#7774](https://github.com/SAP/fundamental-ngx/issues/7774)) ([94d0b1c](https://github.com/SAP/fundamental-ngx/commit/94d0b1c5d2af65287b361f112b0d8e36186757de))
+
 ### 0.33.5-rc.16 (2022-02-26)
 
 
