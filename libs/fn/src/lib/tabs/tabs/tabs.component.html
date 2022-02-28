@@ -1,4 +1,4 @@
-<ul class="fn-tabs" [class]="mode ? 'fn-tabs--' + mode : ''" role="tablist">
+<ul class="fn-tabs" [class]="[mode ? 'fn-tabs--' + mode : '', fnType ? 'fn-tabs--' + fnType : '']" role="tablist">
     <li
         *ngFor="let tab of _tabsList; let i = index"
         fn-tab-item
