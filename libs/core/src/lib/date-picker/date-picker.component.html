@@ -70,6 +70,8 @@
             (selectedRangeDateChange)="handleRangeDateChange($event)"
             (selectedDateChange)="handleSingleDateChange($event)"
             [startingDayOfWeek]="startingDayOfWeek"
+            [previousButtonDisableFunction]="previousButtonDisableFunction"
+            [nextButtonDisableFunction]="nextButtonDisableFunction"
         ></fd-calendar>
     </fd-popover-body>
 </fd-popover>

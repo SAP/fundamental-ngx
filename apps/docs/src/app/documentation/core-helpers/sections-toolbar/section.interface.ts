@@ -5,14 +5,11 @@ export interface SectionInterface {
 
 export type SectionInterfaceContent = SectionInterfaceContentLinear | SectionInterfaceContentNested;
 
-interface SectionInterfaceContentLinear {
+export interface SectionInterfaceContentLinear {
     name: string;
     url: string;
 }
-interface SectionInterfaceContentNested {
+export interface SectionInterfaceContentNested {
     name: string;
-    subItems: {
-        url: string;
-        name: string;
-    }[];
+    subItems: SectionInterfaceContentLinear[];
 }

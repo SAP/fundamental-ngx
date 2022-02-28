@@ -1,4 +1,121 @@
 
+### 0.33.5-rc.21 (2022-02-28)
+
+### 0.33.5-rc.20 (2022-02-28)
+
+### 0.33.5-rc.19 (2022-02-28)
+
+
+### Bug Fixes
+
+* **core:** added disable functions for previous/next buttons in the calendar ([#7574](https://github.com/SAP/fundamental-ngx/issues/7574)) ([d19463b](https://github.com/SAP/fundamental-ngx/commit/d19463b979406ec98c9cde23ed237c9572601542))
+
+### 0.33.5-rc.18 (2022-02-27)
+
+### 0.33.5-rc.17 (2022-02-27)
+
+
+### Bug Fixes
+
+* **core:** menu item should not receive focus on mouse hover and remove extra box shadow [ci visual] ([#7774](https://github.com/SAP/fundamental-ngx/issues/7774)) ([94d0b1c](https://github.com/SAP/fundamental-ngx/commit/94d0b1c5d2af65287b361f112b0d8e36186757de))
+
+### 0.33.5-rc.16 (2022-02-26)
+
+
+### Bug Fixes
+
+* **core:** schematics angular cdk version issue ([#7800](https://github.com/SAP/fundamental-ngx/issues/7800)) ([ba3a8a2](https://github.com/SAP/fundamental-ngx/commit/ba3a8a2d16e04d2c1aea0ef5c36c887469bb15ba))
+
+### 0.33.5-rc.15 (2022-02-23)
+
+
+### Bug Fixes
+
+* **platform:** upload collections enhancements ([#7742](https://github.com/SAP/fundamental-ngx/issues/7742)) ([8b9669b](https://github.com/SAP/fundamental-ngx/commit/8b9669bd7c157c9b267f343b68c0fdd2b2260de1))
+
+### 0.33.5-rc.14 (2022-02-23)
+
+
+### Features
+
+* **core:** grid-list - range selection using "shift" ([#7758](https://github.com/SAP/fundamental-ngx/issues/7758)) ([6a9e3ba](https://github.com/SAP/fundamental-ngx/commit/6a9e3babcdd8e04c3f232e6d56d08c0c36e7cbe0))
+
+### 0.33.5-rc.13 (2022-02-23)
+
+
+### Features
+
+* **platform:** emit event when smart filters have been updated ([#7771](https://github.com/SAP/fundamental-ngx/issues/7771)) ([d78f6f1](https://github.com/SAP/fundamental-ngx/commit/d78f6f1d732f71df3bca14a1493676c7d507b7d1))
+
+### 0.33.5-rc.12 (2022-02-23)
+
+
+### Features
+
+* **platform:** table - range selection & bug fixes ([#7768](https://github.com/SAP/fundamental-ngx/issues/7768)) ([7f5dcad](https://github.com/SAP/fundamental-ngx/commit/7f5dcad1cb69d677f2df13f73f82b2f258e12053))
+
+### 0.33.5-rc.11 (2022-02-22)
+
+
+### Bug Fixes
+
+* **platform:** multi-input - omit extra dataSource triggering ([#7788](https://github.com/SAP/fundamental-ngx/issues/7788)) ([f14e5ec](https://github.com/SAP/fundamental-ngx/commit/f14e5ec5c434d40dc07c496de90d2dff76d50368))
+
+### 0.33.5-rc.10 (2022-02-22)
+
+### 0.33.5-rc.9 (2022-02-21)
+
+
+### Bug Fixes
+
+* **core:** fix few issues in multi input ([#7760](https://github.com/SAP/fundamental-ngx/issues/7760)) ([483ef0b](https://github.com/SAP/fundamental-ngx/commit/483ef0bb7d4d28293eaf0f39a3cfe7fd27ceaebd)), closes [#7759](https://github.com/SAP/fundamental-ngx/issues/7759)
+
+### 0.33.5-rc.8 (2022-02-21)
+
+
+### Features
+
+* **core:** date-time picker compliance with fiori guidline ([#7773](https://github.com/SAP/fundamental-ngx/issues/7773)) ([34cb24a](https://github.com/SAP/fundamental-ngx/commit/34cb24af68499643b233770a7e46373e01e76b91))
+
+### 0.33.5-rc.7 (2022-02-20)
+
+### 0.33.5-rc.6 (2022-02-20)
+
+### 0.33.5-rc.5 (2022-02-20)
+
+### 0.33.5-rc.4 (2022-02-20)
+
+### 0.33.5-rc.3 (2022-02-20)
+
+### 0.33.5-rc.2 (2022-02-20)
+
+### 0.33.5-rc.1 (2022-02-19)
+
+### 0.33.5-rc.0 (2022-02-19)
+
+
+### Bug Fixes
+
+* **docs:** section toolbar search behavior ([#7762](https://github.com/SAP/fundamental-ngx/issues/7762)) ([fd6b2c5](https://github.com/SAP/fundamental-ngx/commit/fd6b2c53e5e6326c4260f77342bcf2b060b549d9))
+
+### [0.33.4](https://github.com/SAP/fundamental-ngx/compare/v0.33.4-rc.15...v0.33.4) (2022-02-15)
+
+### 0.33.4-rc.15 (2022-02-15)
+
+### 0.33.4-rc.14 (2022-02-15)
+
+
+### Features
+
+* **core:** generate avatar initials from alttext ([#7726](https://github.com/SAP/fundamental-ngx/issues/7726)) ([c8ab0df](https://github.com/SAP/fundamental-ngx/commit/c8ab0dfeee88fa095506fea8945dd9ae95b41ac8))
+
+### 0.33.4-rc.13 (2022-02-15)
+
+
+### Bug Fixes
+
+* **core,platform,fn:** dist version ([#7757](https://github.com/SAP/fundamental-ngx/issues/7757)) ([17fb551](https://github.com/SAP/fundamental-ngx/commit/17fb55147421745e3e0874dfb99c469ed252a3fd))
+
 ### 0.33.4-rc.12 (2022-02-15)
 
 

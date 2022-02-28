@@ -14,7 +14,12 @@
                         <ng-container *ngTemplateOutlet="childContent?.controlTemplate"></ng-container>
                     </fd-bar-element>
                     <fd-bar-element class="custom-multi-input-select-all-bar-element">
-                        <button fd-button glyph="multiselect-all" fdType="transparent" (click)="selectAll()"></button>
+                        <button
+                            fd-button
+                            glyph="multiselect-all"
+                            [fdType]="allItemsSelected ? 'emphasized' : 'transparent'"
+                            (click)="selectAll(allItemsSelected)"
+                        ></button>
                     </fd-bar-element>
                 </div>
             </ng-template>

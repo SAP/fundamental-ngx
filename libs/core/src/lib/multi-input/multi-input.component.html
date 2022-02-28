@@ -56,10 +56,10 @@
                 tabindex="-1"
             >
                 <fd-token
-                    *ngFor="let option of vm.selectedOptions"
+                    *ngFor="let option of vm.selectedOptions; trackBy: valueFn"
                     [compact]="compact"
                     [disabled]="disabled"
-                    (onCloseClick)="_onTokenClick(option.value, true, $event)"
+                    (onCloseClick)="_onTokenClick(option.value, false, $event)"
                     (onRemove)="_onTokenClick(option.value, false)"
                 >
                     <span [innerHtml]="option.label"></span>
@@ -102,16 +102,16 @@
             [style.minWidth]="'100%'"
         >
             <li
-                *ngFor="let option of vm.displayedOptions; let idx = index"
+                *ngFor="let option of vm.displayedOptions; index as idx; trackBy: valueFn"
                 fd-list-item
                 (click)="_onCheckboxClick(option.value, $event, idx, true)"
                 (keyup)="_onCheckboxKeyup(option.value, $event, idx)"
-                [selected]="_selectionModel.isSelected(option.value)"
+                [selected]="option.isSelected"
             >
                 <fd-checkbox
                     [compact]="compact"
-                    [value]="_selectionModel.isSelected(option.value)"
                     (click)="_onCheckboxClick(option.value, $event, idx)"
+                    [value]="option.isSelected"
                 >
                     <!-- TODO -->
                 </fd-checkbox>

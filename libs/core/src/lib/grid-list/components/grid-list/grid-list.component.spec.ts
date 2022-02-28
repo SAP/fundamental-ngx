@@ -4,9 +4,7 @@ import { By } from '@angular/platform-browser';
 
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { GridListComponent, GridListModule } from '@fundamental-ngx/core/grid-list';
-
-import { GridListSelectionMode } from './grid-list-selection-mode';
+import { GridListComponent, GridListModule, GridListSelectionMode } from '@fundamental-ngx/core/grid-list';
 
 @Component({
     selector: 'fd-test-grid-list',

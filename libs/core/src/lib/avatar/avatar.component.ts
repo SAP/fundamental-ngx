@@ -218,6 +218,11 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
             return null;
         }
 
+        return this._generateAbbreviation(label);
+    }
+
+    /** @hidden Get the abbrevation string */
+    private _generateAbbreviation(label: string): string | null {
         const maxLettersCount = 3;
         const firstLetters = label.split(' ').map((word) => word.charAt(0));
         const abbreviate = firstLetters.join('');
@@ -264,10 +269,9 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
                 const option = options[i];
 
                 if (option === ALTER_ICON_OPTIONS.CONTENT) {
-                    const contentEl = this._content.nativeElement;
-                    const contentValue = contentEl.innerText.trim()[0];
+                    const contentValue = this._content.nativeElement.innerText;
                     if (contentValue && contentValue !== '') {
-                        this.abbreviate = contentEl.innerText.trim()[0];
+                        this.abbreviate = this._generateAbbreviation(contentValue);
                         break;
                     }
 
@@ -277,7 +281,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
                 if (option === ALTER_ICON_OPTIONS.ALT) {
                     const altValue = this.elementRef().nativeElement.getAttribute('alt');
                     if (altValue && altValue !== '') {
-                        this.abbreviate = altValue.trim()[0];
+                        this.abbreviate = this._generateAbbreviation(altValue);
                         break;
                     }
 

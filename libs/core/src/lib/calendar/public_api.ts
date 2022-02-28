@@ -12,3 +12,4 @@ export * from './calendar-views/calendar-aggregated-year-view/calendar-aggregate
 export * from './calendar-directives';
 export * from './calendar.service';
 export * from './types';
+export * from './models/calendar-current';

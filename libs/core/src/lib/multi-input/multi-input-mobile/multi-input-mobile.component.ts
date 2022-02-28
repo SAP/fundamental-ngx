@@ -33,6 +33,9 @@ export class MultiInputMobileComponent
     implements OnInit, AfterViewInit, OnDestroy
 {
     /** @hidden */
+    allItemsSelected: boolean;
+
+    /** @hidden */
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
     /** @hidden
@@ -74,8 +77,8 @@ export class MultiInputMobileComponent
     }
 
     /** Throw select all event, it's handled by multi input component */
-    selectAll(): void {
-        this._component.selectAllItems();
+    selectAll(selectAll: boolean): void {
+        this._component.selectAllItems(!selectAll);
     }
 
     /** @hidden */
@@ -104,6 +107,9 @@ export class MultiInputMobileComponent
     /** @hidden */
     private _listenOnMultiInputOpenChange(): void {
         this._component.openChange.pipe(takeUntil(this._onDestroy$)).subscribe((isOpen) => this._toggleDialog(isOpen));
+        this._component.allItemsSelectedChange
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe((allItemsSelected) => (this.allItemsSelected = allItemsSelected));
     }
 
     /** @hidden */

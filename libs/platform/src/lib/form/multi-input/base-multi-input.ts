@@ -376,12 +376,13 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
 
     /** @hidden */
     showList(isOpen: boolean): void {
-        if (!isOpen) {
-            this.searchTermChanged('');
-        }
-
         if (this.isOpen !== isOpen) {
-            isOpen ? this.open() : this.close();
+            if (isOpen) {
+                this.open();
+            } else {
+                this.searchTermChanged('');
+                this.close();
+            }
         }
     }
 

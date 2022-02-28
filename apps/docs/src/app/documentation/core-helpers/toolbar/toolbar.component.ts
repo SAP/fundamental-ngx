@@ -82,8 +82,11 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.versions = [
+            { id: '0.33.2', url: 'https://620423a8f2458b000724fd5f--fundamental-ngx.netlify.app/' },
+            { id: '0.32.0', url: 'https://6130e294b2dc5c00086828de--fundamental-ngx.netlify.app/' },
+            { id: '0.31.0', url: 'https://6116c4d420b1d40007ce5fd9--fundamental-ngx.netlify.app/' },
             { id: '0.30.0', url: 'https://6099b79d6eba2400084bb441--fundamental-ngx.netlify.app/' },
-            { id: '0.29.1', url: 'https://60d4a57fa0ac322070e9bc6e--fundamental-ngx.netlify.app/' },
+            { id: '0.29.0', url: 'https://6040dbed0b78130008f102b5--fundamental-ngx.netlify.app/' },
             { id: '0.28.0', url: 'https://60386a93e4a7010007247f23--fundamental-ngx.netlify.app/' },
             { id: '0.27.0', url: 'https://602a61e08b3cf200074fa0b5--fundamental-ngx.netlify.app/' },
             { id: '0.26.0', url: 'https://600860290fee570007d7f660--fundamental-ngx.netlify.app/' },

@@ -238,7 +238,7 @@ describe('MultiInputComponent', () => {
 
         const vm1 = await component.viewModel$.pipe(first()).toPromise();
         expect(vm1.displayedOptions.length).toEqual(3);
-        expect(vm1.selectedOptions.length).toEqual(0);
+        expect(vm1.selectedOptions.length).toEqual(1);
         expect(component.selected).toEqual(['foo1']);
 
         component._handleSelect(true, component.dropdownValues[1]);
@@ -246,7 +246,7 @@ describe('MultiInputComponent', () => {
         const vm2 = await component.viewModel$.pipe(first()).toPromise();
         expect(vm2.displayedOptions.length).toEqual(3);
         // displaying only those options that were "seen" as values
-        expect(vm2.selectedOptions.map((o) => o.value)).toEqual(['baz']);
+        expect(vm2.selectedOptions.map((o) => o.value)).toEqual(['foo1', 'baz']);
         // expecting options to be present as values even if they doesn't match any provided options
         expect(component.selected).toEqual(['foo1', 'baz']);
 
@@ -257,5 +257,19 @@ describe('MultiInputComponent', () => {
         expect(vm3.selectedOptions.map((o) => o.value)).toEqual(['foo1', 'baz']);
         // displaying only those options that were "seen" as values
         expect(component.selected).toEqual(['foo1', 'baz']);
+    });
+    it('should selectAll values  selectAllItems call with true and deselect all items it call with false', async () => {
+        await fixture.whenStable();
+
+        updateComponentInput('dropdownValues', ['test1', 'test2', 'test3']);
+        component.selectAllItems(true);
+        fixture.detectChanges();
+
+        expect(component.selected).toEqual(['test1', 'test2', 'test3']);
+
+        component.selectAllItems(false);
+        fixture.detectChanges();
+
+        expect(component.selected).toEqual([]);
     });
 });

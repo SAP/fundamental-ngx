@@ -7,14 +7,16 @@ import {
     HostBinding,
     Inject,
     Input,
+    OnChanges,
     OnDestroy,
     OnInit,
     Optional,
     Output,
+    SimpleChanges,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
+import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
@@ -33,7 +35,7 @@ import { CalendarService } from './calendar.service';
 import { createMissingDateImplementationError } from './calendar-errors';
 import { CalendarAggregatedYearViewComponent } from './calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
 import { FocusableCalendarView } from './models/common';
-import { FdCalendarView, DaysOfWeek, CalendarType } from './types';
+import { FdCalendarView, DaysOfWeek, CalendarType, NavigationButtonDisableFunction } from './types';
 
 let calendarUniqueId = 0;
 
@@ -73,7 +75,7 @@ let calendarUniqueId = 0;
     },
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Validator, OnDestroy {
+export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAccessor, Validator, OnDestroy {
     /** The currently selected date model in single mode. */
     @Input()
     selectedDate: D;
@@ -207,6 +209,24 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
     _calendarHeaderComponent: CalendarHeaderComponent<D>;
 
     /**
+     * Function used to disable previous button in the calendar header.
+     * @param date selected date
+     * @param currentlyDisplayedDate currently displayed date
+     * @param activeView current view of calendar
+     */
+    @Input()
+    previousButtonDisableFunction: NavigationButtonDisableFunction<D>;
+
+    /**
+     * Function used to disable next button in the calendar header.
+     * @param date selected date
+     * @param currentlyDisplayedDate currently displayed date
+     * @param activeView current view of calendar
+     */
+    @Input()
+    nextButtonDisableFunction: NavigationButtonDisableFunction<D>;
+
+    /**
      * @hidden
      * Currently displayed days depending on month and year
      */
@@ -217,6 +237,12 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
 
     /** @hidden */
     private _adapterStartingDayOfWeek: DaysOfWeek;
+
+    /** @hidden */
+    previousButtonDisabled: boolean;
+
+    /** @hidden */
+    nextButtonDisabled: boolean;
 
     /** That allows to define function that should happen, when focus should normally escape of component */
     @Input()
@@ -286,6 +312,17 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
         }
     }
 
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        if (
+            'nextButtonDisableFunction' in changes ||
+            'previousButtonDisableFunction' in changes ||
+            '_currentlyDisplayed' in changes
+        ) {
+            this._setNavigationButtonsStates();
+        }
+    }
+
     getWeekStartDay(): DaysOfWeek {
         return this.startingDayOfWeek === undefined ? this._adapterStartingDayOfWeek : this.startingDayOfWeek;
     }
@@ -336,7 +373,7 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
      * @hidden
      * Function that implements Validator Interface, adds validation support for forms
      */
-    validate(control: AbstractControl): {
+    validate(): {
         [key: string]: any;
     } {
         return this.isModelValid()
@@ -356,11 +393,6 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
     /** @hidden */
     registerOnTouched(fn: any): void {
         this.onTouched = fn;
-    }
-
-    /** @hidden */
-    setDisabledState?(isDisabled: boolean): void {
-        // Not needed
     }
 
     /**
@@ -386,6 +418,8 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
         if (activeView === 'aggregatedYear') {
             this.onYearsRangeViewSelected();
         }
+
+        this._setNavigationButtonsStates();
     }
 
     /**
@@ -394,6 +428,7 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
      */
     selectedDateChanged(date: D): void {
         this.selectedDate = date;
+        this._setNavigationButtonsStates();
         this.onChange(date);
         this.onTouched();
         this.selectedDateChange.emit(date);
@@ -431,6 +466,7 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
                 break;
         }
         this.onTouched();
+        this._setNavigationButtonsStates();
     }
 
     /** Function that handles previous arrow icon click, depending on current view it changes month, year or list of years */
@@ -450,6 +486,7 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
                 break;
         }
         this.onTouched();
+        this._setNavigationButtonsStates();
     }
 
     /** Function that allows to switch actual view to next month */
@@ -545,7 +582,10 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
 
     selectedYears(yearsSelected: AggregatedYear): void {
         this.activeView = 'year';
-        this._currentlyDisplayed.year = yearsSelected.startYear;
+        this._currentlyDisplayed = {
+            ...this._currentlyDisplayed,
+            year: yearsSelected.startYear
+        };
         this.onYearViewSelected();
     }
 
@@ -642,5 +682,16 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
             default:
                 return null;
         }
+    }
+
+    /** @hidden */
+    private _setNavigationButtonsStates(): void {
+        this.previousButtonDisabled =
+            typeof this.previousButtonDisableFunction === 'function' &&
+            this.previousButtonDisableFunction(this.selectedDate, this._currentlyDisplayed, this.activeView);
+        this.nextButtonDisabled =
+            typeof this.nextButtonDisableFunction === 'function' &&
+            this.nextButtonDisableFunction(this.selectedDate, this._currentlyDisplayed, this.activeView);
+        this._changeDetectorRef.markForCheck();
     }
 }
