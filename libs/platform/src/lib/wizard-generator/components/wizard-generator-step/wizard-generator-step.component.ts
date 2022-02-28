@@ -274,8 +274,10 @@ export class WizardGeneratorStepComponent implements OnInit, OnDestroy, OnChange
      * Triggers form value revalidation and checks if field in form should be visible.
      */
     async updateFormsState(): Promise<void> {
-        for (const formGenerator of this.formGenerators?.toArray()) {
-            await formGenerator.refreshStepsVisibility();
+        if (this.formGenerators) {
+            for (const formGenerator of this.formGenerators.toArray()) {
+                await formGenerator.refreshStepsVisibility();
+            }
         }
     }
 
