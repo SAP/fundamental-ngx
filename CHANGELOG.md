@@ -1,4 +1,11 @@
 
+### 0.33.5-rc.19 (2022-02-28)
+
+
+### Bug Fixes
+
+* **core:** added disable functions for previous/next buttons in the calendar ([#7574](https://github.com/SAP/fundamental-ngx/issues/7574)) ([d19463b](https://github.com/SAP/fundamental-ngx/commit/d19463b979406ec98c9cde23ed237c9572601542))
+
 ### 0.33.5-rc.18 (2022-02-27)
 
 ### 0.33.5-rc.17 (2022-02-27)
