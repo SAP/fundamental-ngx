@@ -238,9 +238,11 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     /** @hidden */
     private _adapterStartingDayOfWeek: DaysOfWeek;
 
-    public previousButtonDisabled: boolean;
+    /** @hidden */
+    previousButtonDisabled: boolean;
 
-    public nextButtonDisabled: boolean;
+    /** @hidden */
+    nextButtonDisabled: boolean;
 
     /** That allows to define function that should happen, when focus should normally escape of component */
     @Input()
@@ -391,11 +393,6 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     /** @hidden */
     registerOnTouched(fn: any): void {
         this.onTouched = fn;
-    }
-
-    /** @hidden */
-    setDisabledState?(): void {
-        // Not needed
     }
 
     /**
