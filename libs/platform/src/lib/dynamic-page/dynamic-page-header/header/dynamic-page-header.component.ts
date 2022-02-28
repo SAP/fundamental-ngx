@@ -104,7 +104,11 @@ export class DynamicPageHeaderComponent {
 
     /** Collapse/Expand change event raised */
     @Output()
-    collapseChange: EventEmitter<DynamicPageCollapseChangeEvent> = new EventEmitter<DynamicPageCollapseChangeEvent>();
+    collapsedChange: EventEmitter<DynamicPageCollapseChangeEvent> = new EventEmitter<DynamicPageCollapseChangeEvent>();
+
+    /** @deprecated - use `collapsedChange` instead */
+    @Output()
+    collapseChange = this.collapsedChange;
 
     /**
      * @hidden
@@ -127,6 +131,6 @@ export class DynamicPageHeaderComponent {
     _onCollapseChange(collapsed: boolean): void {
         this.collapsed = collapsed;
         const event = new DynamicPageCollapseChangeEvent(this, collapsed);
-        this.collapseChange.emit(event);
+        this.collapsedChange.emit(event);
     }
 }

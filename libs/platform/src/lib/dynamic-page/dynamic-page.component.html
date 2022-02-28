@@ -32,6 +32,7 @@
         [headerAriaLabel]="headerComponent.headerAriaLabel"
         [pinAriaLabel]="headerComponent.pinAriaLabel"
         [unpinAriaLabel]="headerComponent.unpinAriaLabel"
+        (collapsedChange)="headerComponent._onCollapseChange($event)"
     >
         <ng-container [ngTemplateOutlet]="headerComponent.contentTemplateRef"></ng-container>
     </fd-dynamic-page-subheader>
