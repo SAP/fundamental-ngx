@@ -25,8 +25,9 @@ import { AbstractFdNgxClass, RtlService } from '@fundamental-ngx/core/utils';
 import { NotificationConfig } from '../notification-utils/notification-config';
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { ESCAPE } from '@angular/cdk/keycodes';
-import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { filter, take, takeUntil } from 'rxjs/operators';
+import { FocusTrap, ConfigurableFocusTrapFactory } from '@angular/cdk/a11y';
 
 @Component({
     selector: 'fd-notification',
@@ -88,13 +89,20 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     public componentRef: ComponentRef<any> | EmbeddedViewRef<any>;
 
     /** @hidden */
-    private _subscriptions = new Subscription();
+    private readonly _onDestroy$ = new Subject<void>();
+
+    /** @hidden */
+    private readonly _afterViewInit$ = new BehaviorSubject(false);
+
+    /** @hidden The class that traps and manages focus within the notification. */
+    private _focusTrap: FocusTrap;
 
     constructor(
         private _elRef: ElementRef,
         private _componentFactoryResolver: ComponentFactoryResolver,
         private _cdRef: ChangeDetectorRef,
         private _router: Router,
+        private _focusTrapFactory: ConfigurableFocusTrapFactory,
         @Optional() private _notificationConfig: NotificationConfig,
         @Optional() private _notificationRef: NotificationRef,
         @Optional() private _rtlService: RtlService
@@ -105,12 +113,10 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
 
     /** @hidden */
     ngOnInit(): void {
-        this._subscriptions.add(
-            this._rtlService?.rtl.subscribe((isRtl) => {
-                this._dir = isRtl ? 'rtl' : 'ltr';
-                this._cdRef.markForCheck();
-            })
-        );
+        this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl) => {
+            this._dir = isRtl ? 'rtl' : 'ltr';
+            this._cdRef.markForCheck();
+        });
 
         this._listenAndCloseOnNavigation();
         this._setProperties();
@@ -127,12 +133,27 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
                 this._loadFromTemplate(this.childContent);
             }
         }
+        this._afterViewInit$.next(true);
         this._cdRef.detectChanges();
+    }
+
+    /**
+     * Moves the focus inside the focus trap.
+     * @returns
+     * Returns a promise that resolves with a boolean, depending on whether focus was moved successfully.
+     */
+    async trapFocus(): Promise<boolean> {
+        // waiting for afterViewInit hook to fire
+        await this._afterViewInit$.pipe(filter(Boolean), take(1), takeUntil(this._onDestroy$)).toPromise();
+        if (!this._focusTrap) {
+            this._focusTrap = this._focusTrapFactory.create(this._elRef.nativeElement);
+        }
+        return this._focusTrap.focusFirstTabbableElementWhenReady();
     }
 
     /** @hidden */
     ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
+        this._onDestroy$.next();
     }
 
     /** @hidden Listen and close notification on Escape key */
@@ -146,11 +167,12 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     /** @hidden Listen on NavigationStart event and dismiss the dialog */
     private _listenAndCloseOnNavigation(): void {
         if (this._router && this._notificationRef) {
-            this._subscriptions.add(
-                this._router.events
-                    .pipe(filter((event) => event instanceof NavigationStart && this.closeOnNavigation))
-                    .subscribe(() => this._notificationRef.dismiss())
-            );
+            this._router.events
+                .pipe(
+                    filter((event) => event instanceof NavigationStart && this.closeOnNavigation),
+                    takeUntil(this._onDestroy$)
+                )
+                .subscribe(() => this._notificationRef.dismiss());
         }
     }
 

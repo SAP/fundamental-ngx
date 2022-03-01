@@ -10,7 +10,7 @@ import { NotificationOptionsExampleComponent } from './examples/notification-opt
 import { NotificationOpenTemplateExampleComponent } from './examples/template-as-content/notification-open-template-example.component';
 import { NotificationGroupExampleComponent } from './examples/notification-group/notification-group-example.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
-import { NotificationModule, NotificationService } from '@fundamental-ngx/core/notification';
+import { NotificationModule } from '@fundamental-ngx/core/notification';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { MessageStripModule } from '@fundamental-ngx/core/message-strip';
 import { TabsModule } from '@fundamental-ngx/core/tabs';
@@ -56,8 +56,6 @@ const routes: Routes = [
         NotificationOpenTemplateExampleComponent,
         NotificationComponentAsContentExampleComponent,
         NotificationGroupExampleComponent
-    ],
-    entryComponents: [NotificationExampleContentComponent],
-    providers: [NotificationService]
+    ]
 })
 export class NotificationDocsModule {}

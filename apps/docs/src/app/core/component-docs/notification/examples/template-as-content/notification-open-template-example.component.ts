@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { NotificationService } from '@fundamental-ngx/core/notification';
 
 @Component({
@@ -7,12 +7,13 @@ import { NotificationService } from '@fundamental-ngx/core/notification';
     styles: ['.action-button {margin-left: 12px;}']
 })
 export class NotificationOpenTemplateExampleComponent {
+    @ViewChild('notificationTemplate') notificationTemplate: TemplateRef<unknown>;
     public closeReason: string;
 
     constructor(private notificationService: NotificationService) {}
 
-    open(notificationComponent): void {
-        const notificationRef = this.notificationService.open(notificationComponent);
+    open(): void {
+        const notificationRef = this.notificationService.open(this.notificationTemplate);
         setTimeout(() => notificationRef.dismiss('dismissed'), 4000);
         notificationRef.afterClosed.subscribe(
             (result) => {

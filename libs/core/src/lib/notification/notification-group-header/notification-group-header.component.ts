@@ -9,11 +9,13 @@ import {
     OnDestroy,
     Optional,
     Output,
-    ViewEncapsulation
+    ViewEncapsulation,
+    Renderer2
 } from '@angular/core';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
 import { Subscription } from 'rxjs';
 import { RtlService } from '@fundamental-ngx/core/utils';
+import { NotificationGroupBaseDirective } from '../notification-utils/notification-group-base';
 @Component({
     selector: 'fd-notification-group-header',
     template: `
@@ -23,6 +25,7 @@ import { RtlService } from '@fundamental-ngx/core/utils';
             role="button"
             [compact]="expandCompact"
             [attr.aria-expanded]="expanded"
+            [attr.aria-describedby]="expandDescribedBy"
             [attr.aria-label]="expandAriaLabel"
             [attr.aria-labelledby]="expandAriaLabelledBy"
             (click)="toggleExpand()"
@@ -38,10 +41,15 @@ import { RtlService } from '@fundamental-ngx/core/utils';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NotificationGroupHeaderComponent implements OnInit, OnDestroy {
+export class NotificationGroupHeaderComponent extends NotificationGroupBaseDirective implements OnInit, OnDestroy {
     /** @hidden */
     @HostBinding('class.fd-notification__group-header')
     fdNotificationGroupHeaderClass = true;
+
+    /** @hidden */
+    get expandDescribedBy(): string {
+        return this.notificationHeader?.first?.uniqueId;
+    }
 
     /** @hidden */
     _rtl = false;
@@ -72,8 +80,11 @@ export class NotificationGroupHeaderComponent implements OnInit, OnDestroy {
     constructor(
         private _cdRef: ChangeDetectorRef,
         @Optional() private _rtlService: RtlService,
-        @Optional() private _contentDensityService: ContentDensityService
-    ) {}
+        @Optional() private _contentDensityService: ContentDensityService,
+        renderer: Renderer2
+    ) {
+        super(renderer);
+    }
 
     /** @hidden */
     ngOnInit(): void {

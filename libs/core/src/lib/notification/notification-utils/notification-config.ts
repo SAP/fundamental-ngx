@@ -25,4 +25,10 @@ export class NotificationConfig {
 
     /** Whether the notification is in mobile mode. */
     mobile?: boolean;
+
+    /**
+     * Whether the notification should trap focus within itself.
+     * @default true
+     */
+    shouldTrapFocus?: boolean = true;
 }

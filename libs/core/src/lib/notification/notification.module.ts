@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { A11yModule } from '@angular/cdk/a11y';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { DynamicComponentService } from '@fundamental-ngx/core/utils';
 import { NotificationContainer } from './notification-utils/notification-container';
@@ -23,7 +24,7 @@ import { NotificationLimitTitleDirective } from './directives/notification-limit
 import { NotificationLimitDescriptionDirective } from './directives/notification-limit-description.directive';
 
 @NgModule({
-    imports: [CommonModule, ButtonModule],
+    imports: [CommonModule, ButtonModule, A11yModule],
     declarations: [
         NotificationComponent,
         NotificationHeaderComponent,
@@ -64,7 +65,6 @@ import { NotificationLimitDescriptionDirective } from './directives/notification
         NotificationLimitTitleDirective,
         NotificationLimitDescriptionDirective
     ],
-    providers: [DynamicComponentService, NotificationService],
-    entryComponents: [NotificationContainer, NotificationComponent]
+    providers: [DynamicComponentService, NotificationService]
 })
 export class NotificationModule {}
