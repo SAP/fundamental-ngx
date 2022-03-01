@@ -1,7 +1,7 @@
 import { AfterViewInit, ContentChildren, Directive, Input, QueryList } from '@angular/core';
 import { map, startWith, takeUntil, tap } from 'rxjs/operators';
 import { FocusableItem, FocusableListService } from './focusable-list.service';
-import { FocusableDirective } from './focusable.directive';
+import { FocusableItemDirective } from './focusable-item.directive';
 import { DestroyedBehavior } from '../common-behaviors/destroyed-behavior';
 
 @Directive({
@@ -16,7 +16,7 @@ export class FocusableListDirective implements AfterViewInit {
     @Input()
     contentDirection: 'ltr' | 'rtl' | null = 'ltr';
 
-    @ContentChildren(FocusableDirective) focusableItems!: QueryList<FocusableDirective>;
+    @ContentChildren(FocusableItemDirective) focusableItems!: QueryList<FocusableItemDirective>;
 
     constructor(private _focusableListService: FocusableListService, private _destroy$: DestroyedBehavior) {}
 
@@ -25,7 +25,7 @@ export class FocusableListDirective implements AfterViewInit {
             .pipe(
                 startWith(this.focusableItems),
                 map((queryList) => queryList.toArray()),
-                tap((items: FocusableDirective[]): void => {
+                tap((items: FocusableItemDirective[]): void => {
                     const focusableItems: FocusableItem[] = items.map((item) => ({
                         focusable: () => item.fnFocusable,
                         elementRef: () => item.elementRef(),

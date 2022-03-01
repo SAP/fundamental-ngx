@@ -12,16 +12,16 @@ import { DestroyedBehavior } from '../common-behaviors/destroyed-behavior';
 import { HasElementRef } from '../HasElementRef';
 
 @Directive({
-    selector: '[fnFocusable]',
+    selector: '[fnFocusableItem]',
     providers: [
         {
             provide: FN_FOCUSABLE,
-            useExisting: FocusableDirective
+            useExisting: FocusableItemDirective
         },
         DestroyedBehavior
     ]
 })
-export class FocusableDirective extends ReplaySubject<boolean> implements HasElementRef {
+export class FocusableItemDirective extends ReplaySubject<boolean> implements HasElementRef {
     @Input()
     set fnFocusable(val: BooleanInput) {
         const isFocusable = coerceBooleanProperty(val);
