@@ -4,3 +4,5 @@ export * from './template-ref.directive';
 export * from './template-ref-provider.token';
 export * from './utils.tokens';
 export * from './utils.types';
+export * from './helpers/get-native-element';
+export * from './helpers/pxToNum';

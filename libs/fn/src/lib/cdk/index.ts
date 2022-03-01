@@ -1,6 +1,9 @@
 export * from './cdk.module';
 
-export * from './directives/disabled/disabled.directive';
+export * from './disabled/disabled-behavior.directive';
+export * from './disabled/disabled-behavior.module';
+export * from './disabled/set-disabled-state';
+
 export * from './interfaces/disabled-behavior.interface';
 
 export * from './directives/readonly/readonly.directive';

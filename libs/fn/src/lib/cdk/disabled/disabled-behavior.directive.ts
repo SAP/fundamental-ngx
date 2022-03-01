@@ -1,29 +1,28 @@
-import { Directive, HostBinding, Inject, Input, NgModule, OnDestroy, Optional, Self } from '@angular/core';
+import { Directive, ElementRef, Inject, Input, OnDestroy, Optional, Self } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ReplaySubject } from 'rxjs';
-import { FN_DISABLED } from '../../tokens/disabled';
-import { DisabledBehavior } from '../../interfaces/disabled-behavior.interface';
+import { FN_DISABLED } from '../tokens/disabled';
+import { DisabledBehavior } from '../interfaces/disabled-behavior.interface';
+import { setDisabledState } from './set-disabled-state';
 
 @Directive({
     selector: '[fnDisabled]',
     providers: [
         {
             provide: FN_DISABLED,
-            useExisting: DisabledDirective
+            useExisting: DisabledBehaviorDirective
         }
     ]
 })
-export class DisabledDirective extends ReplaySubject<boolean> implements OnDestroy, DisabledBehavior {
+export class DisabledBehaviorDirective extends ReplaySubject<boolean> implements OnDestroy, DisabledBehavior {
     @Input()
-    @HostBinding('class.is-disabled')
-    @HostBinding('attr.aria-disabled')
-    @HostBinding('disabled')
     set fnDisabled(value: BooleanInput) {
         const isDisabled = coerceBooleanProperty(value);
         if (isDisabled !== this._disabled) {
             this._disabled = isDisabled;
             this.next(isDisabled);
+            setDisabledState(this._elementRef, isDisabled);
         }
     }
 
@@ -33,7 +32,10 @@ export class DisabledDirective extends ReplaySubject<boolean> implements OnDestr
 
     _disabled = false;
 
-    constructor(@Optional() @Self() @Inject(NG_VALUE_ACCESSOR) private valueAccessors: ControlValueAccessor[]) {
+    constructor(
+        @Optional() @Self() @Inject(NG_VALUE_ACCESSOR) private valueAccessors: ControlValueAccessor[],
+        private _elementRef: ElementRef<HTMLElement>
+    ) {
         super(1);
         if (valueAccessors?.length > 0) {
             for (const valueAccessor of valueAccessors) {
@@ -52,9 +54,3 @@ export class DisabledDirective extends ReplaySubject<boolean> implements OnDestr
         this.complete();
     }
 }
-
-@NgModule({
-    declarations: [DisabledDirective],
-    exports: [DisabledDirective]
-})
-export class DisabledBehaviorModule {}
