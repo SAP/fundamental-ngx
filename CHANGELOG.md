@@ -1,4 +1,11 @@
 
+### 0.33.5-rc.24 (2022-03-01)
+
+
+### Bug Fixes
+
+* **core:** @angular/cdk schematics issue ([#7820](https://github.com/SAP/fundamental-ngx/issues/7820)) ([66b6228](https://github.com/SAP/fundamental-ngx/commit/66b622831bcf39d50653f3504f4c0ad46ac44a70))
+
 ### 0.33.5-rc.23 (2022-03-01)
 
 
