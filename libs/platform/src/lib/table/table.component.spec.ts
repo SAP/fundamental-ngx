@@ -85,11 +85,11 @@ describe('TableComponent internal', () => {
 
         const emitChangeSpy = spyOn(component.rowSelectionChange, 'emit').and.stub();
 
-        component._toggleSelectableRow(component._tableRows[0]);
+        component._toggleMultiSelectRow(component._tableRows[0], 0);
 
         expect(emitChangeSpy).toHaveBeenCalled();
 
-        component._toggleSelectableRow(component._tableRows[1]);
+        component._toggleMultiSelectRow(component._tableRows[1], 1);
 
         expect(emitChangeSpy).toHaveBeenCalled();
         expect(component._tableRows.filter((r) => r.checked).length).toEqual(2);
@@ -101,12 +101,12 @@ describe('TableComponent internal', () => {
 
         const emitChangeSpy = spyOn(component.rowSelectionChange, 'emit').and.stub();
 
-        component._toggleSelectableRow(component._tableRows[0]);
+        component._toggleSingleSelectableRow(component._tableRows[0]);
 
         expect(emitChangeSpy).toHaveBeenCalled();
         expect(component._tableRows.filter((r) => r.checked).length).toEqual(1);
 
-        component._toggleSelectableRow(component._tableRows[1]);
+        component._toggleSingleSelectableRow(component._tableRows[1]);
 
         expect(emitChangeSpy).toHaveBeenCalled();
         expect(component._tableRows.filter((r) => r.checked).length).toEqual(1);
@@ -116,11 +116,11 @@ describe('TableComponent internal', () => {
         component.selectionMode = SelectionMode.SINGLE;
         component.ngAfterViewInit();
 
-        component._toggleSelectableRow(component._tableRows[0]);
+        component._toggleSingleSelectableRow(component._tableRows[0]);
 
         expect(component._tableRows.filter((r) => r.checked).length).toEqual(1);
 
-        component._toggleSelectableRow(component._tableRows[0]);
+        component._toggleSingleSelectableRow(component._tableRows[0]);
 
         expect(component._tableRows.filter((r) => r.checked).length).toEqual(0);
     });
@@ -262,10 +262,12 @@ describe('TableComponent internal', () => {
 
         const calculateTableElementsMetaData = (): void => {
             tableHeaderCells = fixture.debugElement.queryAll(
-                By.css('.fdp-table__header .fd-table__row .fd-table__cell')
+                By.css('.fdp-table__header .fd-table__row .fd-table__cell:not(.fd-table__cell--mock)')
             );
             tableBodyRows = fixture.debugElement.queryAll(By.css('.fdp-table__body .fd-table__row'));
-            tableRowCells2DArray = tableBodyRows.map((row) => row.queryAll(By.css('.fd-table__cell')));
+            tableRowCells2DArray = tableBodyRows.map((row) =>
+                row.queryAll(By.css('.fd-table__cell:not(.fd-table__cell--mock)'))
+            );
         };
 
         it('should create host element', () => {

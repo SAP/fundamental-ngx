@@ -2,6 +2,16 @@ import { Component, ContentChildren, Input, QueryList, TemplateRef, ViewChild } 
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { FileUploaderComponent } from '@fundamental-ngx/core/file-uploader';
 import { UploadCollectionItemDirective } from '@fundamental-ngx/core/upload-collection';
+import { RangeSelector } from '@fundamental-ngx/core/utils';
+
+interface FileItem {
+    fileName: string;
+    extension: string;
+    icon: string;
+    selected: boolean;
+    marker1?: string;
+    marker2?: string;
+}
 
 @Component({
     selector: 'fd-upload-collection-complex-example',
@@ -13,7 +23,7 @@ export class UploadCollectionComplexExampleComponent {
 
     searchTerm: string;
 
-    files = [
+    files: FileItem[] = [
         { fileName: 'File_Name_1', extension: 'txt', icon: 'activate', selected: false },
         {
             fileName: 'File_Name_2',
@@ -31,6 +41,8 @@ export class UploadCollectionComplexExampleComponent {
 
     @ViewChild('fileUploader')
     fileUploader: FileUploaderComponent;
+
+    private readonly _rangeSelector = new RangeSelector();
 
     constructor(private _dialogService: DialogService) {}
 
@@ -51,6 +63,13 @@ export class UploadCollectionComplexExampleComponent {
             this.uploaderFiles = [];
             this.fileUploader.selectHandler([]);
         }
+    }
+
+    onCheckboxClick(file: FileItem, index: number, event: PointerEvent): void {
+        // additionally to ngModel tracking clicks on checkboxes in order to be able to select ranges
+        // this function will be invoked after ngModel's value is updated, so we can use "file.selected" as current value
+        this._rangeSelector.onRangeElementToggled(index, event);
+        this._rangeSelector.applyValueToEachInRange((idx) => (this.files[idx].selected = file.selected));
     }
 
     openDeleteDialog(event: UploadCollectionItemDirective, file: any, dialog: TemplateRef<any>): void {

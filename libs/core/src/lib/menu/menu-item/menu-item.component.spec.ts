@@ -114,23 +114,6 @@ describe('MenuItemComponent', () => {
         expect(setDisabledSpy).toHaveBeenCalledWith(true);
         expect(menuInteractive.disabled).toBeTrue();
     }));
-
-    it('should set hover', fakeAsync(() => {
-        const setFocusListenerSpy = spyOn(menuItem.menuService, 'setFocused').and.callThrough();
-        const setFocusSpy = spyOn(menuItem, 'focus').and.callThrough();
-
-        menu.open();
-        fixture.detectChanges();
-
-        tick();
-
-        menuInteractive.elementRef.nativeElement.dispatchEvent(new MouseEvent('mouseenter'));
-
-        tick();
-
-        expect(setFocusListenerSpy).toHaveBeenCalled();
-        expect(setFocusSpy).toHaveBeenCalled();
-    }));
 });
 
 @Component({

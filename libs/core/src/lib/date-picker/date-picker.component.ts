@@ -36,6 +36,7 @@ import { ContentDensityService } from '@fundamental-ngx/core/utils';
 import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
 
 import { createMissingDateImplementationError } from './errors';
+import { NavigationButtonDisableFunction } from '@fundamental-ngx/core/calendar';
 
 let datePickerCounter = 0;
 
@@ -200,6 +201,18 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
     /** Defines if date picker should be closed after date choose */
     @Input()
     closeOnDateChoose = true;
+
+    /**
+     * Function used to disable previous button in the calendar header.
+     */
+    @Input()
+    previousButtonDisableFunction: NavigationButtonDisableFunction<D>;
+
+    /**
+     * Function used to disable next button in the calendar header.
+     */
+    @Input()
+    nextButtonDisableFunction: NavigationButtonDisableFunction<D>;
 
     /**
      *  The state of the form control - applies css classes.

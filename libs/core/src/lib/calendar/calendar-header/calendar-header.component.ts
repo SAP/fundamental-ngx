@@ -47,6 +47,14 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
     @Input()
     currentlyDisplayed: CalendarCurrent;
 
+    /** whether previous navigation button should be disabled in the header. */
+    @Input()
+    previousButtonDisabled: boolean;
+
+    /** whether next navigation button should be disabled in the header. */
+    @Input()
+    nextButtonDisabled: boolean;
+
     /**
      * Object to customize year grid
      */

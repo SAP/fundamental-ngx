@@ -34,7 +34,8 @@ import {
     FdDropEvent,
     intersectionObservable,
     resizeObservable,
-    RtlService
+    RtlService,
+    RangeSelector
 } from '@fundamental-ngx/core/utils';
 import { TableRowDirective } from '@fundamental-ngx/core/table';
 import { isDataSource, isFunction, isString } from '@fundamental-ngx/platform/shared';
@@ -670,6 +671,9 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     private _internalLoadingState = false;
 
     /** @hidden */
+    private readonly _rangeSelector = new RangeSelector();
+
+    /** @hidden */
     constructor(
         private readonly _ngZone: NgZone,
         private readonly _cdr: ChangeDetectorRef,
@@ -702,6 +706,10 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         // changes below should be checked only after view is initialized
         if (!this._viewInitiated) {
             return;
+        }
+
+        if ('selectionMode' in changes) {
+            this._rangeSelector.reset();
         }
 
         if (
@@ -926,7 +934,11 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             return;
         }
 
-        this._toggleSelectableRow(row);
+        if (this.selectionMode === SelectionMode.SINGLE) {
+            this._toggleSingleSelectableRow(row);
+        } else if (this.selectionMode === this.SELECTION_MODE.MULTIPLE) {
+            this._toggleMultiSelectRow(row, rowIndex);
+        }
     }
 
     /** Remove the row navigation */
@@ -1087,27 +1099,55 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
     /**
      * @hidden
-     * Toggle selectable row
+     * Toggle selectable row in SelectionMode.MULTIPLE
      */
-    _toggleSelectableRow(rowToToggle: TableRow): void {
+    _toggleMultiSelectRow(rowToToggle: TableRow, index: number, event?: PointerEvent | KeyboardEvent): void {
+        if (this.selectionMode !== SelectionMode.MULTIPLE) {
+            throw new Error('Unexpected selection mode');
+        }
+        const checked = (rowToToggle.checked = !rowToToggle.checked);
+        const rows = this._tableRows;
+        const removed = [];
+        const added = [];
+        this._rangeSelector.onRangeElementToggled(index, event);
+
+        this._rangeSelector.applyValueToEachInRange((idx) => {
+            const row = rows[idx];
+            if (this._isItemRow(row) || this._isTreeRow(row)) {
+                row.checked = checked;
+                checked ? added.push(row) : removed.push(row);
+            }
+        });
+
+        this._emitRowSelectionChangeEvent(added, removed);
+
+        this._calculateCheckedAll();
+    }
+
+    /**
+     * @hidden
+     * Toggle selectable row in SelectionMode.SINGLE
+     */
+    _toggleSingleSelectableRow(rowToToggle: TableRow): void {
+        if (this.selectionMode !== SelectionMode.SINGLE) {
+            throw new Error('Unexpected selection mode');
+        }
+
         const checked = (rowToToggle.checked = !rowToToggle.checked);
         const removed = [];
         const added = [];
 
-        if (this.selectionMode === SelectionMode.SINGLE) {
-            // uncheck previously checked
-            this._getSelectableRows().forEach((row) => {
-                if (row === rowToToggle) {
-                    return;
-                }
+        // uncheck previously checked
+        this._getSelectableRows().forEach((row) => {
+            if (row === rowToToggle) {
+                return;
+            }
 
-                if (row.checked) {
-                    row.checked = false;
-                    removed.push(row);
-                }
-            });
-        }
-
+            if (row.checked) {
+                row.checked = false;
+                removed.push(row);
+            }
+        });
         checked ? added.push(rowToToggle) : removed.push(rowToToggle);
 
         this._emitRowSelectionChangeEvent(added, removed);
@@ -1130,6 +1170,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             row.checked = selectAll;
             selectAll ? added.push(row) : removed.push(row);
         });
+
+        this._rangeSelector.reset();
 
         this._emitRowSelectionChangeEvent(added, removed);
 
@@ -1169,7 +1211,12 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
      * Group By triggered from column header
      */
     _columnHeaderGroupBy(field: string): void {
-        this.group([{ field, direction: SortDirection.NONE, showAsColumn: true }]);
+        if (this.state.groupBy?.length === 1 && this.state.groupBy[0].field === field) {
+            // reset grouping, if already grouped by this field
+            this.group([]);
+        } else {
+            this.group([{ field, direction: SortDirection.NONE, showAsColumn: true }]);
+        }
         this._closePopoverForColumnByFieldName(field);
     }
 
@@ -1665,6 +1712,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         this._onTableRowsChanged();
 
         this._calculateIsShownNavigationColumn();
+        this._rangeSelector.reset();
 
         if (rows.length && !this._columnsWidthSet) {
             this.recalculateTableColumnWidth();
@@ -2037,10 +2085,19 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     }
 
     /** @hidden */
-    private _resetAllSelectedRows(): void {
+    private _resetAllSelectedRows(emitEvent = false): void {
         this._checkedAll = false;
         this._checkedAny = false;
-        this._getSelectableRows().forEach((r) => (r.checked = false));
+        const removed = [];
+        this._getSelectableRows().forEach((r) => {
+            if (emitEvent && r.checked) {
+                removed.push(r);
+            }
+            r.checked = false;
+        });
+        if (emitEvent) {
+            this._emitRowSelectionChangeEvent([], removed);
+        }
     }
 
     /** @hidden */
@@ -2053,7 +2110,12 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
     /** @hidden */
     private _getSelectableRows(): TableRow[] {
-        return this._tableRows.filter((row) => this._isItemRow(row) || this._isTreeRow(row));
+        return this._tableRows.filter((row) => this._isSelectableRow(row));
+    }
+
+    /** @hidden */
+    private _isSelectableRow(row: TableRow): boolean {
+        return this._isItemRow(row) || this._isTreeRow(row);
     }
 
     /** @hidden */

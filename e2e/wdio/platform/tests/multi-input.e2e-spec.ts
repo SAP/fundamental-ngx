@@ -57,17 +57,18 @@ describe('Multi input test suite', () => {
         const activeButtonsQuantity = getElementArrayLength(activeDropdownButtons);
         const mobileExample = 6;
         const disabledExample = 5;
+        const loadingExample = 8;
 
         for (let i = 0; i < activeButtonsQuantity; i++) {
             if (i === disabledExample) {
                 continue;
             }
             if (i !== mobileExample) {
-                multiInputPage.expandDropdown(activeDropdownButtons, i);
+                multiInputPage.expandDropdown(activeDropdownButtons, i, i === loadingExample);
                 const optionsArr = getAttributeByNameArr(options, 'title');
                 scrollIntoView(header, i);
                 multiInputPage.selectOption(optionsArr[0]);
-                multiInputPage.expandDropdown(activeDropdownButtons, i);
+                multiInputPage.expandDropdown(activeDropdownButtons, i, i === loadingExample);
                 scrollIntoView(header, i);
                 multiInputPage.selectOption(optionsArr[1]);
                 expect(getText(filledInput, i)).toContain(optionsArr[0]);

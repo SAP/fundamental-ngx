@@ -172,9 +172,6 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
             'mouseleave'
         );
 
-        // Set focus on hover
-        hoverSubscriptions.add(mouseEnter$.subscribe(() => this.menuService?.setFocused(this)));
-
         const timerFactory$ = defer(() =>
             timer(this.menuService ? this.menuService.menu.openOnHoverTime : 0).pipe(takeUntil(mouseLeave$))
         );

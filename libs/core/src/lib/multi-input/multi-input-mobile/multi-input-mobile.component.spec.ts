@@ -29,7 +29,8 @@ describe('MultiInputMobileComponent', () => {
         dialogDismiss: () => {},
         selectAllItems: () => {},
         dialogApprove: () => {},
-        openChange: new EventEmitter<boolean>()
+        openChange: new EventEmitter<boolean>(),
+        allItemsSelectedChange: new EventEmitter<boolean>()
     };
 
     beforeEach(
@@ -57,7 +58,8 @@ describe('MultiInputMobileComponent', () => {
             dialogDismiss: () => {},
             selectAllItems: () => {},
             dialogApprove: () => {},
-            openChange: new EventEmitter<boolean>()
+            openChange: new EventEmitter<boolean>(),
+            allItemsSelectedChange: new EventEmitter<boolean>()
         };
         fixture = TestBed.createComponent(MultiInputMobileComponent);
         component = fixture.componentInstance;
