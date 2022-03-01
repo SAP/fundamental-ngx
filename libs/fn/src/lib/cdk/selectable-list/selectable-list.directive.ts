@@ -1,8 +1,8 @@
 import { AfterViewInit, ContentChildren, Directive, EventEmitter, Input, Output, QueryList } from '@angular/core';
 import { coerceBoolean } from '@fundamental-ngx/fn/utils';
 import { SelectionService } from './selection.service';
-import { SelectComponentRootToken } from './SelectComponentRootToken';
-import { SelectableItemToken } from './SelectableItemToken';
+import { SelectComponentRootToken } from './select-component-root.token';
+import { SelectableItemToken } from './selectable-item.token';
 
 @Directive({
     selector: '[fnSelectableList]',

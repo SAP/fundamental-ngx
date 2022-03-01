@@ -1,6 +1,6 @@
 import { Directive, ElementRef, EventEmitter, HostListener, Inject, Input, Optional, Output } from '@angular/core';
 import { merge, Observable } from 'rxjs';
-import { SelectableItemToken } from './SelectableItemToken';
+import { SelectableItemToken } from './selectable-item.token';
 import { FN_SELECTABLE_ITEM_PROVIDER } from './selectable-list.tokens';
 import { FN_DISABLED } from '../tokens/disabled';
 import { DisabledBehavior } from '../interfaces/DisabledBehavior';

@@ -3,8 +3,8 @@ import { coerceArray } from '@angular/cdk/coercion';
 import { combineLatest, merge, Observable, ReplaySubject, Subject, switchMap } from 'rxjs';
 import { distinctUntilChanged, map, shareReplay, startWith, takeUntil, tap } from 'rxjs/operators';
 import equal from 'fast-deep-equal';
-import { SelectableItemToken } from './SelectableItemToken';
-import { SelectComponentRootToken } from './SelectComponentRootToken';
+import { SelectableItemToken } from './selectable-item.token';
+import { SelectComponentRootToken } from './select-component-root.token';
 
 @Injectable()
 export class SelectionService<ValueType = any> implements OnDestroy {

@@ -11,8 +11,8 @@ export * from './directives/clicked/clicked.directive';
 export * from './selectable-list/selection.service';
 export * from './selectable-list/selectable-list.module';
 export * from './selectable-list/selectable-list.tokens';
-export * from './selectable-list/SelectableItemToken';
-export * from './selectable-list/SelectComponentRootToken';
+export * from './selectable-list/selectable-item.token';
+export * from './selectable-list/select-component-root.token';
 
 export * from './resize/resize.module';
 

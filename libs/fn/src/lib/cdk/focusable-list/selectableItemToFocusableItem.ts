@@ -1,4 +1,4 @@
-import { SelectableItemToken } from '../selectable-list/SelectableItemToken';
+import { SelectableItemToken } from '../selectable-list/selectable-item.token';
 import { FocusableItem } from './focusable-list.service';
 
 export function selectableItemToFocusableItem(selectableItem: SelectableItemToken): FocusableItem {
