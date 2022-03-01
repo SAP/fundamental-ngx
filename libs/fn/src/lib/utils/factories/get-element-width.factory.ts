@@ -1,5 +1,5 @@
 import { coerceElement } from '@angular/cdk/coercion';
-import { pxToNum } from '../helpers/pxToNum';
+import { pxToNum } from '../helpers/px-to-num';
 import { GetComputedStyleFn, GetElementWidthFn } from '../utils.types';
 
 export function getElementWidthFactory(getComputedStyle: GetComputedStyleFn): GetElementWidthFn {

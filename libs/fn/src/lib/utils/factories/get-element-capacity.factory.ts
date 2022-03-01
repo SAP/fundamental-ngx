@@ -1,6 +1,6 @@
 import { coerceElement } from '@angular/cdk/coercion';
 import { GetComputedStyleFn, GetElementCapacityFn } from '../utils.types';
-import { pxToNum } from '../helpers/pxToNum';
+import { pxToNum } from '../helpers/px-to-num';
 
 export function getElementCapacityFactory(computedStyle: GetComputedStyleFn): GetElementCapacityFn {
     return (element) => {
