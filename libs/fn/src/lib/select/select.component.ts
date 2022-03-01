@@ -22,6 +22,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
  * Select component intended to mimic
  * the behaviour of the native select element.
  */
+export type InputState = 'positive' | 'critical' | 'negative' | 'info';
+
 @Component({
     selector: 'fn-select',
     templateUrl: './select.component.html',
@@ -33,7 +35,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
             multi: true
         }
     ],
-    encapsulation: ViewEncapsulation.None,
+    encapsulation: ViewEncapsulation.Emulated,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectComponent implements AfterContentInit, OnDestroy, ControlValueAccessor {
@@ -48,6 +50,10 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
     /** The select placeholder. */
     @Input()
     placeholder: string;
+
+    /** The state of the input. */
+    @Input()
+    state?: InputState;
 
     /** @hidden The select value. */
     private _internalValue: string;

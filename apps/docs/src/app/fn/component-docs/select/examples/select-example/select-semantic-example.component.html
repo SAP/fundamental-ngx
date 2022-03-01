@@ -1,0 +1,43 @@
+<div style="width: 200px">
+    <fn-select placeholder="Select an option" label="Standard Selector" state="positive" #selectSemanticPositive>
+        <li fn-option *ngFor="let option of options" [value]="option">{{ option }}</li>
+    </fn-select>
+</div>
+<br />
+
+<p>
+    <i>Example 1 selection: {{ selectSemanticPositive.value }}</i>
+</p>
+
+<div style="width: 200px">
+    <fn-select placeholder="Select an option" label="Standard Selector" state="critical" #selectSemanticCritical>
+        <li fn-option *ngFor="let option of options" [value]="option">{{ option }}</li>
+    </fn-select>
+</div>
+<br />
+
+<p>
+    <i>Example 1 selection: {{ selectSemanticCritical.value }}</i>
+</p>
+
+<div style="width: 200px">
+    <fn-select placeholder="Select an option" label="Standard Selector" state="negative" #selectSemanticNegative>
+        <li fn-option *ngFor="let option of options" [value]="option">{{ option }}</li>
+    </fn-select>
+</div>
+<br />
+
+<p>
+    <i>Example 1 selection: {{ selectSemanticNegative.value }}</i>
+</p>
+
+<div style="width: 200px">
+    <fn-select placeholder="Select an option" label="Standard Selector" state="info" #selectSemanticInfo>
+        <li fn-option *ngFor="let option of options" [value]="option">{{ option }}</li>
+    </fn-select>
+</div>
+<br />
+
+<p>
+    <i>Example 1 selection: {{ selectSemanticInfo.value }}</i>
+</p>
