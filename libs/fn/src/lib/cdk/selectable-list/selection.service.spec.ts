@@ -1,7 +1,18 @@
 import { SelectableItemToken, SelectComponentRootToken, SelectionService } from '@fundamental-ngx/fn/cdk';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AfterViewInit, Component, Directive, ElementRef, Input, QueryList, ViewChildren } from '@angular/core';
-import { SPACE, ENTER } from '@angular/cdk/keycodes';
+import {
+    AfterViewInit,
+    Component,
+    Directive,
+    ElementRef,
+    EventEmitter,
+    HostListener,
+    Input,
+    QueryList,
+    ViewChildren
+} from '@angular/core';
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
+import { Subject } from 'rxjs';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
@@ -11,7 +22,16 @@ class TestDirective implements SelectableItemToken<string> {
     @Input('testDirective') value!: string;
     selected!: boolean;
 
+    clicked = new EventEmitter();
+
     constructor(private _elementRef: ElementRef<HTMLElement>) {}
+
+    @HostListener('click')
+    @HostListener('keydown.enter')
+    @HostListener('keydown.space')
+    onClick(): void {
+        this.clicked.emit();
+    }
 
     elementRef(): ElementRef<HTMLElement> {
         return this._elementRef;
@@ -35,18 +55,19 @@ class TestDirective implements SelectableItemToken<string> {
     providers: [SelectionService]
 })
 class HostComponent implements SelectComponentRootToken<string>, AfterViewInit {
-    value = '3';
+    value: string | string[] = '3';
     disabled!: boolean;
     multiple = true;
     toggle = false;
+    selectedChange = new Subject<string | string[]>();
     @ViewChildren(TestDirective) items!: QueryList<TestDirective>;
 
-    constructor(public readonly selectionService: SelectionService) {
+    constructor(public readonly selectionService: SelectionService<string>) {
         selectionService.registerRootComponent(this);
         selectionService.setValue(this.value);
     }
 
-    onChange(value: string): void {
+    onChange(value: string | string[]): void {
         this.value = value;
     }
 

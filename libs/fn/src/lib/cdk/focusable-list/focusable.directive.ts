@@ -1,14 +1,15 @@
-import { Directive, HostBinding, Inject, Input, NgModule, Optional } from '@angular/core';
+import { Directive, ElementRef, HostBinding, Inject, Input, Optional } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ReplaySubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { FN_FOCUSABLE } from '../../tokens/focusable';
-import { FN_DISABLED } from '../../tokens/disabled';
-import { FN_READONLY } from '../../tokens/readonly';
-import { BaseFocusableBehavior } from '../../common-behaviors/base-focusable-behavior';
-import { DisabledBehavior } from '../../interfaces/DisabledBehavior';
-import { ReadonlyBehavior } from '../../interfaces/ReadonlyBehavior';
-import { DestroyedBehavior } from '../../common-behaviors/destroyed-behavior';
+import { FN_FOCUSABLE } from './focusable.tokens';
+import { FN_DISABLED } from '../tokens/disabled';
+import { FN_READONLY } from '../tokens/readonly';
+import { BaseFocusableBehavior } from '../common-behaviors/base-focusable-behavior';
+import { DisabledBehavior } from '../interfaces/DisabledBehavior';
+import { ReadonlyBehavior } from '../interfaces/ReadonlyBehavior';
+import { DestroyedBehavior } from '../common-behaviors/destroyed-behavior';
+import { HasElementRef } from '../HasElementRef';
 
 @Directive({
     selector: '[fnFocusable]',
@@ -20,7 +21,7 @@ import { DestroyedBehavior } from '../../common-behaviors/destroyed-behavior';
         DestroyedBehavior
     ]
 })
-export class FocusableDirective extends ReplaySubject<boolean> {
+export class FocusableDirective extends ReplaySubject<boolean> implements HasElementRef {
     @Input()
     set fnFocusable(val: BooleanInput) {
         const isFocusable = coerceBooleanProperty(val);
@@ -42,7 +43,8 @@ export class FocusableDirective extends ReplaySubject<boolean> {
     constructor(
         destroy$: DestroyedBehavior,
         @Optional() @Inject(FN_DISABLED) disabled$: DisabledBehavior,
-        @Optional() @Inject(FN_READONLY) readonly$: ReadonlyBehavior
+        @Optional() @Inject(FN_READONLY) readonly$: ReadonlyBehavior,
+        private _elementRef: ElementRef<HTMLElement>
     ) {
         super(1);
         this.baseFocusableInstance = new BaseFocusableBehavior(disabled$, readonly$);
@@ -51,10 +53,8 @@ export class FocusableDirective extends ReplaySubject<boolean> {
         });
         destroy$.subscribe(() => this.complete());
     }
-}
 
-@NgModule({
-    declarations: [FocusableDirective],
-    exports: [FocusableDirective]
-})
-export class FocusableBehaviorModule {}
+    elementRef(): ElementRef<HTMLElement> {
+        return this._elementRef;
+    }
+}

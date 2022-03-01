@@ -1,7 +1,8 @@
-import { Directive, HostBinding, Input, NgModule, OnDestroy } from '@angular/core';
-import { FN_DISABLED } from '../../tokens/disabled';
+import { Directive, HostBinding, Inject, Input, NgModule, OnDestroy, Optional, Self } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ReplaySubject } from 'rxjs';
+import { FN_DISABLED } from '../../tokens/disabled';
 import { DisabledBehavior } from '../../interfaces/DisabledBehavior';
 
 @Directive({
@@ -19,10 +20,10 @@ export class DisabledDirective extends ReplaySubject<boolean> implements OnDestr
     @HostBinding('attr.aria-disabled')
     @HostBinding('disabled')
     set fnDisabled(value: BooleanInput) {
-        const isReadonly = coerceBooleanProperty(value);
-        if (isReadonly !== this._disabled) {
-            this._disabled = isReadonly;
-            this.next(isReadonly);
+        const isDisabled = coerceBooleanProperty(value);
+        if (isDisabled !== this._disabled) {
+            this._disabled = isDisabled;
+            this.next(isDisabled);
         }
     }
 
@@ -32,8 +33,19 @@ export class DisabledDirective extends ReplaySubject<boolean> implements OnDestr
 
     _disabled = false;
 
-    constructor() {
+    constructor(@Optional() @Self() @Inject(NG_VALUE_ACCESSOR) private valueAccessors: ControlValueAccessor[]) {
         super(1);
+        if (valueAccessors?.length > 0) {
+            for (const valueAccessor of valueAccessors) {
+                const originalSetDisabledState = valueAccessor.setDisabledState;
+                valueAccessor.setDisabledState = (isDisabled: boolean) => {
+                    if (originalSetDisabledState) {
+                        originalSetDisabledState.call(valueAccessor, isDisabled);
+                    }
+                    this.fnDisabled = isDisabled;
+                };
+            }
+        }
     }
 
     ngOnDestroy(): void {

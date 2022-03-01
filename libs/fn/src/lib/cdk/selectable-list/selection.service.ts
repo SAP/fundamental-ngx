@@ -1,16 +1,15 @@
 import { Injectable, OnDestroy, QueryList } from '@angular/core';
-import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { coerceArray } from '@angular/cdk/coercion';
-import { combineLatest, fromEvent, merge, Observable, ReplaySubject, Subject } from 'rxjs';
-import { distinctUntilChanged, filter, map, shareReplay, startWith, takeUntil, tap } from 'rxjs/operators';
+import { combineLatest, merge, Observable, ReplaySubject, Subject, switchMap } from 'rxjs';
+import { distinctUntilChanged, map, shareReplay, startWith, takeUntil, tap } from 'rxjs/operators';
 import equal from 'fast-deep-equal';
 import { SelectableItemToken } from './SelectableItemToken';
 import { SelectComponentRootToken } from './SelectComponentRootToken';
 
 @Injectable()
 export class SelectionService<ValueType = any> implements OnDestroy {
-    /** @hidden */
-    private _refresh$ = new Subject<void>();
+    value$?: Observable<ValueType | ValueType[]>;
+
     /** @hidden */
     private _items$!: Observable<SelectableItemToken[]>;
     /** @hidden */
@@ -18,7 +17,7 @@ export class SelectionService<ValueType = any> implements OnDestroy {
     /** @hidden */
     private _normalizedValue$: Observable<ValueType[]>;
     /** @hidden */
-    private _rootComponent!: SelectComponentRootToken;
+    private _rootComponent!: SelectComponentRootToken<ValueType>;
     /** @hidden */
     private _destroy$ = new Subject<void>();
     /** @hidden */
@@ -31,16 +30,20 @@ export class SelectionService<ValueType = any> implements OnDestroy {
         this._normalizedValue$ = this._value$.pipe(
             distinctUntilChanged(equal),
             map((v) => coerceArray<ValueType>(v)),
-            map((value) => (this._rootComponent.multiple ? value : [value[0]])),
+            map((value) => (this._isMultipleMode() ? value : [value[0]])),
             map((coerced: ValueType[]) => coerced.filter(Boolean))
         );
         this._normalizedValue$.pipe(takeUntil(this._destroy$)).subscribe((val) => (this._value = val));
+        this.value$ = this._normalizedValue$.pipe(
+            map((v) => this._getProperValues(v)),
+            shareReplay(1)
+        );
     }
 
     /**
      * Register main select component, which holds config
      * */
-    registerRootComponent(rootComponent: SelectComponentRootToken<ValueType | Array<ValueType>>): void {
+    registerRootComponent(rootComponent: SelectComponentRootToken<ValueType>): void {
         this._rootComponent = rootComponent;
     }
 
@@ -70,6 +73,10 @@ export class SelectionService<ValueType = any> implements OnDestroy {
         this._value$.next(v);
     }
 
+    getValue(): ValueType | ValueType[] {
+        return this._getProperValues(this._value);
+    }
+
     /**
      * Start listening for item interactions. Will destroy() first.
      * Will silently continue if service was not initialized first.
@@ -81,8 +88,11 @@ export class SelectionService<ValueType = any> implements OnDestroy {
             this._items$
                 .pipe(
                     map((items) => items.filter((itm) => itm.selectable !== false)),
-                    tap(() => this._refresh$.next()),
-                    tap((items) => this._listenToItemsInteractions(items)),
+                    switchMap((items: SelectableItemToken[]) => {
+                        const clickedEvents$ = items.map((item) => item.clicked.pipe(map(() => item)));
+                        return merge(...clickedEvents$);
+                    }),
+                    tap((clickedItem) => this._itemClicked(clickedItem)),
                     takeUntil(unsubscribe$)
                 )
                 .subscribe();
@@ -114,7 +124,7 @@ export class SelectionService<ValueType = any> implements OnDestroy {
     }
 
     selectItem(item: SelectableItemToken<ValueType>): void {
-        if (item.selectable) {
+        if (item.selectable !== false) {
             const val: ValueType[] = [item.value, ...this._value];
             const properValues = this._getProperValues(val);
             this._value$.next(properValues);
@@ -123,31 +133,17 @@ export class SelectionService<ValueType = any> implements OnDestroy {
     }
 
     deselectItem(item: SelectableItemToken<ValueType>): void {
-        const val: ValueType[] = this._value.filter((v) => v !== item.value);
-        const properValues = this._getProperValues(val);
-        this._value$.next(properValues);
-        this._rootComponent.onChange(properValues);
+        const canBeDeselected = this._rootComponent.toggle || (this._isMultipleMode() && this._value.length > 1);
+        if (canBeDeselected) {
+            const val: ValueType[] = this._value.filter((v) => v !== item.value);
+            const properValues = this._getProperValues(val);
+            this._value$.next(properValues);
+            this._rootComponent.onChange(properValues);
+        }
     }
 
-    /** @hidden */
-    private _listenToItemsInteractions(items: SelectableItemToken[]): void {
-        const unsubscribe$ = merge(this._refresh$, this._destroy$);
-        for (const item of items) {
-            const htmlElement = item.elementRef().nativeElement;
-            const events = merge(
-                fromEvent(htmlElement, 'click'),
-                fromEvent<KeyboardEvent>(htmlElement, 'keydown').pipe(
-                    filter((event) => [ENTER, SPACE].includes(event.keyCode)),
-                    tap((event) => event.preventDefault())
-                )
-            );
-            events
-                .pipe(
-                    tap(() => this._itemClicked(item)),
-                    takeUntil(unsubscribe$)
-                )
-                .subscribe();
-        }
+    private _isMultipleMode(): boolean {
+        return this._rootComponent.multiple === true;
     }
 
     /** @hidden */
@@ -168,7 +164,7 @@ export class SelectionService<ValueType = any> implements OnDestroy {
 
     /** @hidden */
     private _getProperValues(values: ValueType[]): ValueType | ValueType[] {
-        if (this._rootComponent.multiple) {
+        if (this._isMultipleMode()) {
             return values;
         }
         return values[0];
