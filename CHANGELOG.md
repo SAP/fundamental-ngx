@@ -1,4 +1,11 @@
 
+### 0.33.5-rc.23 (2022-03-01)
+
+
+### Bug Fixes
+
+* **core:** layout grid vertical gutter ([#7813](https://github.com/SAP/fundamental-ngx/issues/7813)) ([4bfb410](https://github.com/SAP/fundamental-ngx/commit/4bfb4108aef6577e408044c8a9eb124d3d8aa4c3))
+
 ### 0.33.5-rc.22 (2022-02-28)
 
 ### 0.33.5-rc.21 (2022-02-28)
