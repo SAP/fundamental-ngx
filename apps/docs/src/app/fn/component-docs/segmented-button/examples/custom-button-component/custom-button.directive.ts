@@ -1,6 +1,6 @@
 import { Directive, ElementRef, Self } from '@angular/core';
-import { ButtonComponent } from '@fundamental-ngx/fn/button';
 import { SelectableItemToken } from '@fundamental-ngx/fn/cdk';
+import { SelectableButtonDirective } from '@fundamental-ngx/fn/segmented-button';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
@@ -13,7 +13,11 @@ import { SelectableItemToken } from '@fundamental-ngx/fn/cdk';
     ]
 })
 export class CustomButtonDirective implements SelectableItemToken<string> {
-    constructor(@Self() private buttonComponent: ButtonComponent) {}
+    clicked;
+
+    constructor(@Self() private buttonComponent: SelectableButtonDirective, private _elementRef: ElementRef) {
+        this.clicked = buttonComponent.clicked;
+    }
 
     set value(val: string) {
         this.buttonComponent.value = val;
@@ -24,7 +28,7 @@ export class CustomButtonDirective implements SelectableItemToken<string> {
     }
 
     elementRef(): ElementRef<HTMLElement> {
-        return this.buttonComponent.elementRef();
+        return this._elementRef;
     }
 
     getSelected(): boolean {

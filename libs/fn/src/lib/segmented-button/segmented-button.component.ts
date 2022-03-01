@@ -5,6 +5,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChildren,
+    ElementRef,
     EventEmitter,
     forwardRef,
     Input,
@@ -14,9 +15,17 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { map, startWith, Subject } from 'rxjs';
 import { coerceBoolean } from '@fundamental-ngx/fn/utils';
-import { SelectableItemToken, SelectComponentRootToken, SelectionService } from '@fundamental-ngx/fn/cdk';
+import {
+    DestroyedBehavior,
+    FocusableListService,
+    selectableItemToFocusableItem,
+    SelectableItemToken,
+    SelectComponentRootToken,
+    SelectionService
+} from '@fundamental-ngx/fn/cdk';
+import { takeUntil, tap } from 'rxjs/operators';
 
 @Component({
     selector: 'fn-segmented-button',
@@ -26,7 +35,7 @@ import { SelectableItemToken, SelectComponentRootToken, SelectionService } from 
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        class: 'fn-segmented-button',
+        '[class.fn-segmented-button]': 'true',
         role: 'group',
         '[attr.aria-label]': 'label'
     },
@@ -40,11 +49,13 @@ import { SelectableItemToken, SelectComponentRootToken, SelectionService } from 
             provide: SelectComponentRootToken,
             useExisting: forwardRef(() => SegmentedButtonComponent)
         },
-        SelectionService
+        SelectionService,
+        FocusableListService,
+        DestroyedBehavior
     ]
 })
 export class SegmentedButtonComponent
-    implements SelectComponentRootToken<string | string[]>, ControlValueAccessor, AfterContentInit, OnDestroy
+    implements SelectComponentRootToken<string>, ControlValueAccessor, AfterContentInit, OnDestroy
 {
     /**
      * Allow multiple item selection
@@ -103,7 +114,13 @@ export class SegmentedButtonComponent
     };
 
     /** @hidden */
-    constructor(private selectionService: SelectionService, private changeDetectorRef: ChangeDetectorRef) {
+    constructor(
+        private _elementRef: ElementRef<HTMLElement>,
+        private selectionService: SelectionService,
+        private changeDetectorRef: ChangeDetectorRef,
+        private focusableListService: FocusableListService,
+        private _destroy$: DestroyedBehavior
+    ) {
         this.selectionService.registerRootComponent(this);
     }
 
@@ -134,10 +151,23 @@ export class SegmentedButtonComponent
     /** @hidden */
     ngAfterContentInit(): void {
         this.selectionService.initialize(this.buttons);
+        this.buttons.changes
+            .pipe(
+                startWith(this.buttons),
+                map((itemsQuery) => itemsQuery.toArray()),
+                map((items: SelectableItemToken[]) => items.map(selectableItemToFocusableItem)),
+                tap((items) => this.focusableListService.initialize(items, { direction: 'horizontal' })),
+                takeUntil(this._destroy$)
+            )
+            .subscribe();
     }
 
     /** @hidden */
     ngOnDestroy(): void {
         this.destroy$.next();
+    }
+
+    elementRef(): ElementRef<HTMLElement> {
+        return this._elementRef;
     }
 }
