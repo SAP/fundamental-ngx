@@ -82,7 +82,7 @@ export class NotificationService {
         // Add To array
         this.notifications.push({
             notificationComponent: notificationComponentRef,
-            notificationConfig: notificationConfig
+            notificationConfig
         });
 
         const defaultBehaviourOnClose = (): void => {
@@ -129,7 +129,7 @@ export class NotificationService {
     }
 
     /** @hidden attempts to focus previously selected element */
-    private _restoreFocus() {
+    private _restoreFocus(): void {
         if (typeof this._elementFocusedBeforeNotificationWasOpened?.focus === 'function') {
             this._elementFocusedBeforeNotificationWasOpened.focus();
         }

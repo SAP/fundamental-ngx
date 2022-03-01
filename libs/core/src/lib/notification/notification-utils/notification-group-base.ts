@@ -20,7 +20,7 @@ export abstract class NotificationGroupBaseDirective implements AfterViewInit, O
     constructor(private renderer: Renderer2) {}
 
     /** @hidden */
-    ngAfterViewInit() {
+    ngAfterViewInit(): void {
         // TODO: update startWith args to be "undefined" after migration to rxjs 7.
         // Now it throws irrelevant warning about deprecation
         const headersChanges$ = this.notificationHeader.changes.pipe(startWith(0));
@@ -58,7 +58,7 @@ export abstract class NotificationGroupBaseDirective implements AfterViewInit, O
     }
 
     /** @hidden */
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this.onDestroy$.next();
     }
 }
