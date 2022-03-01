@@ -1,6 +1,6 @@
 import { Constructor } from '../interfaces/Constructor';
 import { Directive, HostBinding, Input } from '@angular/core';
-import { CanBeDisabledConstructor } from './canBeDisabled';
+import { CanBeDisabledConstructor } from './can-be-disabled';
 
 export interface HasTabIndex {
     tabindex: string | number;

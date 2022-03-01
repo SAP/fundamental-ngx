@@ -18,12 +18,12 @@ export * from './resize/resize.module';
 
 export * from './focusable-list/focusable-list.service';
 export * from './focusable-list/focusable-behavior.module';
-export * from './focusable-list/selectableItemToFocusableItem';
+export * from './focusable-list/selectable-to-focusable-item';
 export * from './focusable-list/focusable.tokens';
 
-export * from './mixins/canAssignAdditionalClasses';
-export * from './mixins/hasTabIndex';
-export * from './mixins/canBeDisabled';
+export * from './mixins/can-assign-additional-classes';
+export * from './mixins/has-tab-index';
+export * from './mixins/can-be-disabled';
 
 export * from './common-behaviors/base-focusable-behavior';
 export * from './common-behaviors/destroyed-behavior';
