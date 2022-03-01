@@ -6,10 +6,13 @@ import {
     ChangeDetectorRef,
     OnInit,
     OnChanges,
-    Input
+    Input,
+    Optional,
+    Inject
 } from '@angular/core';
 import { InputBase } from './input-base';
 import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { DisabledBehavior, FN_DISABLED, FN_READONLY, ReadonlyBehavior } from '@fundamental-ngx/fn/cdk';
 
 @Component({
     selector: 'fn-input',
@@ -24,8 +27,13 @@ export class InputComponent extends InputBase implements OnInit, OnChanges {
     class = '';
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef, private _cdr: ChangeDetectorRef) {
-        super();
+    constructor(
+        private _elementRef: ElementRef,
+        private _cdr: ChangeDetectorRef,
+        @Optional() @Inject(FN_DISABLED) disabled$: DisabledBehavior,
+        @Optional() @Inject(FN_READONLY) readonly$: ReadonlyBehavior
+    ) {
+        super(_cdr, disabled$, readonly$);
     }
 
     /** @hidden */

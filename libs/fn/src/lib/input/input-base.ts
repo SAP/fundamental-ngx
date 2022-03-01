@@ -3,29 +3,69 @@
  * select, multi-input etc.
  */
 
-import { Directive, Input } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Directive, Input, OnDestroy } from '@angular/core';
+import { DisabledBehavior, ReadonlyBehavior } from '@fundamental-ngx/fn/cdk';
+import { Subscription, merge } from 'rxjs';
 
 export type InputState = 'positive' | 'critical' | 'negative' | 'info';
 
 @Directive()
-export abstract class InputBase {
+export abstract class InputBase implements AfterViewInit, OnDestroy {
     /** Placeholder for the input. */
     @Input()
     placeholder: string;
 
     /** Whether or not this input is the 'display' type. */
     @Input()
-    display = false;
-
-    /** Whether or not this input is disabled. */
-    @Input()
-    fnDisabled = false;
-
-    /** Whether or not this input is readonly. */
-    @Input()
-    fnReadonly = false;
+    display: boolean;
 
     /** The state of the input. */
     @Input()
     state: InputState;
+
+    /** Whether or not this input is disabled. */
+    disabled: boolean;
+
+    /** Whether or not this input is readonly. */
+    readonly: boolean;
+
+    /** @hidden */
+    private _subscriptions = new Subscription();
+
+    /** @hidden */
+    protected constructor(
+        protected _cdRef: ChangeDetectorRef,
+        protected disabled$?: DisabledBehavior,
+        protected readonly$?: ReadonlyBehavior
+    ) {}
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this._setDisableReadonlyProperties();
+        this._listenToDisablingEvents();
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
+    }
+
+    /** @hidden */
+    private _listenToDisablingEvents(): void {
+        const disablingEvents$ = [];
+        if (this.disabled$) {
+            disablingEvents$.push(this.disabled$);
+        }
+        if (this.readonly$) {
+            disablingEvents$.push(this.readonly$);
+        }
+        this._subscriptions.add(merge(...disablingEvents$).subscribe(() => this._setDisableReadonlyProperties()));
+    }
+
+    /** @hidden */
+    private _setDisableReadonlyProperties(): void {
+        this.disabled = this.disabled$?.fnDisabled;
+        this.readonly = this.readonly$?.fnReadonly;
+        this._cdRef.detectChanges();
+    }
 }
