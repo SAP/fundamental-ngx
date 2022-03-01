@@ -1,4 +1,11 @@
 
+### 0.33.5-rc.25 (2022-03-01)
+
+
+### Bug Fixes
+
+* **core:** notification a11y ([#7330](https://github.com/SAP/fundamental-ngx/issues/7330)) ([a4c352a](https://github.com/SAP/fundamental-ngx/commit/a4c352ae77351548c21940dd3668a7cf2051ff6d))
+
 ### 0.33.5-rc.24 (2022-03-01)
 
 
