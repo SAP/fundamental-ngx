@@ -5,6 +5,10 @@
             "description": "Adds @fundamental-ngx/core to the project.",
             "factory": "./ng-add/index#ngAdd",
             "schema": "./ng-add/schema.json"
+        },
+        "add-animations": {
+            "description": "Adds animations module imports using @angular/cdk tools.",
+            "factory": "./add-animations/index#addAnimations"
         }
     }
 }
