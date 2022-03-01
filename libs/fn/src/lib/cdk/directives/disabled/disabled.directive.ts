@@ -3,7 +3,7 @@ import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ReplaySubject } from 'rxjs';
 import { FN_DISABLED } from '../../tokens/disabled';
-import { DisabledBehavior } from '../../interfaces/DisabledBehavior';
+import { DisabledBehavior } from '../../interfaces/disabled-behavior.interface';
 
 @Directive({
     selector: '[fnDisabled]',

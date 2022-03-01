@@ -2,7 +2,7 @@ import { Directive, HostBinding, Input, NgModule, OnDestroy } from '@angular/cor
 import { FN_READONLY } from '../../tokens/readonly';
 import { ReplaySubject } from 'rxjs';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { ReadonlyBehavior } from '../../interfaces/ReadonlyBehavior';
+import { ReadonlyBehavior } from '../../interfaces/readonly-behavior.interface';
 
 @Directive({
     selector: '[fnReadonly]',

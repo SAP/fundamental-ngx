@@ -1,10 +1,10 @@
 export * from './cdk.module';
 
 export * from './directives/disabled/disabled.directive';
-export * from './interfaces/DisabledBehavior';
+export * from './interfaces/disabled-behavior.interface';
 
 export * from './directives/readonly/readonly.directive';
-export * from './interfaces/ReadonlyBehavior';
+export * from './interfaces/readonly-behavior.interface';
 
 export * from './directives/clicked/clicked.directive';
 

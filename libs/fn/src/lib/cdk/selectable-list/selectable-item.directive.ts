@@ -3,8 +3,8 @@ import { merge, Observable } from 'rxjs';
 import { SelectableItemToken } from './selectable-item.token';
 import { FN_SELECTABLE_ITEM_PROVIDER } from './selectable-list.tokens';
 import { FN_DISABLED } from '../tokens/disabled';
-import { DisabledBehavior } from '../interfaces/DisabledBehavior';
-import { ReadonlyBehavior } from '../interfaces/ReadonlyBehavior';
+import { DisabledBehavior } from '../interfaces/disabled-behavior.interface';
+import { ReadonlyBehavior } from '../interfaces/readonly-behavior.interface';
 import { FN_READONLY } from '../tokens/readonly';
 import { SelectionService } from './selection.service';
 

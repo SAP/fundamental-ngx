@@ -1,7 +1,7 @@
 import { merge, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { DisabledBehavior } from '../interfaces/DisabledBehavior';
-import { ReadonlyBehavior } from '../interfaces/ReadonlyBehavior';
+import { DisabledBehavior } from '../interfaces/disabled-behavior.interface';
+import { ReadonlyBehavior } from '../interfaces/readonly-behavior.interface';
 
 export class BaseFocusableBehavior {
     set focusable(isFocusable: boolean) {

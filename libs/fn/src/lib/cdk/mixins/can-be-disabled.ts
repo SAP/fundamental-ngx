@@ -1,4 +1,4 @@
-import { Constructor } from '../interfaces/Constructor';
+import { Constructor } from '../interfaces/constructor.type';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Directive, HostBinding } from '@angular/core';
 

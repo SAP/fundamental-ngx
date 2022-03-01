@@ -6,8 +6,8 @@ import { FN_FOCUSABLE } from './focusable.tokens';
 import { FN_DISABLED } from '../tokens/disabled';
 import { FN_READONLY } from '../tokens/readonly';
 import { BaseFocusableBehavior } from '../common-behaviors/base-focusable-behavior';
-import { DisabledBehavior } from '../interfaces/DisabledBehavior';
-import { ReadonlyBehavior } from '../interfaces/ReadonlyBehavior';
+import { DisabledBehavior } from '../interfaces/disabled-behavior.interface';
+import { ReadonlyBehavior } from '../interfaces/readonly-behavior.interface';
 import { DestroyedBehavior } from '../common-behaviors/destroyed-behavior';
 import { HasElementRef } from '../HasElementRef';
 

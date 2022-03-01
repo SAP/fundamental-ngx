@@ -1,4 +1,4 @@
-import { Constructor } from '../interfaces/Constructor';
+import { Constructor } from '../interfaces/constructor.type';
 import { Directive, HostBinding, Input } from '@angular/core';
 import { CanBeDisabledConstructor } from './can-be-disabled';
 
