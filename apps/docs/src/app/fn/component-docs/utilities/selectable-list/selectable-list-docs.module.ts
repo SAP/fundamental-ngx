@@ -7,6 +7,8 @@ import { SelectableListDocsComponent } from './selectable-list-docs.component';
 import { SelectableListHeaderComponent } from './selectable-list-header/selectable-list-header.component';
 import { DefaultExampleComponent } from './examples/default-example/default-example.component';
 import { SelectableListModule } from '@fundamental-ngx/fn/cdk';
+import { AdvancedUsageComponent } from './examples/advanced-usage/advanced-usage.component';
+import { CustomSelectableItemDirective } from './examples/advanced-usage/custom-selectable-item.directive';
 
 const routes: Routes = [
     {
@@ -25,6 +27,12 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, SelectableListModule],
     exports: [RouterModule],
-    declarations: [SelectableListHeaderComponent, SelectableListDocsComponent, DefaultExampleComponent]
+    declarations: [
+        SelectableListHeaderComponent,
+        SelectableListDocsComponent,
+        DefaultExampleComponent,
+        CustomSelectableItemDirective,
+        AdvancedUsageComponent
+    ]
 })
 export class SelectableListDocsModule {}

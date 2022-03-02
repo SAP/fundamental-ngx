@@ -3,6 +3,10 @@ import { ExampleFile } from '../../../../documentation/core-helpers/code-example
 import defaultExampleHtml from '!./examples/default-example/default-example.component.html?raw';
 import defaultExampleTs from '!./examples/default-example/default-example.component.ts?raw';
 
+import advancedExampleHtml from '!./examples/advanced-example/advanced-example.component.html?raw';
+import advancedExampleTs from '!./examples/advanced-example/advanced-example.component.ts?raw';
+import advancedExampleCustomDirTs from '!./examples/advanced-example/custom-selectable-item.directive.ts?raw';
+
 @Component({
     selector: 'app-tabs',
     templateUrl: './selectable-list-docs.component.html',
@@ -22,6 +26,27 @@ export class SelectableListDocsComponent {
             language: 'ts',
             fileName: 'selectable-list-default-example',
             component: 'SelectableListDefaultExample'
+        }
+    ];
+
+    advancedExample: ExampleFile[] = [
+        {
+            code: advancedExampleHtml,
+            language: 'html',
+            fileName: 'selectable-list-advanced-example',
+            component: 'SelectableListAdvancedExample'
+        },
+        {
+            code: advancedExampleTs,
+            language: 'ts',
+            fileName: 'selectable-list-advanced-example',
+            component: 'SelectableListAdvancedExample'
+        },
+        {
+            code: advancedExampleCustomDirTs,
+            language: 'ts',
+            fileName: 'selectable-list-advanced-example-custom-item',
+            component: 'SelectableListAdvancedExampleCustomItem'
         }
     ];
 
