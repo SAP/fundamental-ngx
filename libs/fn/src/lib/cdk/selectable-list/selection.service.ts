@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy, QueryList } from '@angular/core';
+import { ChangeDetectorRef, Injectable, OnDestroy, QueryList } from '@angular/core';
 import { coerceArray } from '@angular/cdk/coercion';
 import { combineLatest, merge, Observable, ReplaySubject, Subject, switchMap } from 'rxjs';
 import { distinctUntilChanged, map, shareReplay, startWith, takeUntil, tap } from 'rxjs/operators';
@@ -26,7 +26,7 @@ export class SelectionService<ValueType = any> implements OnDestroy {
     private _value: ValueType[] = [];
 
     /** @hidden */
-    constructor() {
+    constructor(private _cd: ChangeDetectorRef) {
         this._normalizedValue$ = this._value$.pipe(
             distinctUntilChanged(equal),
             map((v) => coerceArray<ValueType>(v)),
@@ -111,6 +111,7 @@ export class SelectionService<ValueType = any> implements OnDestroy {
                         items.forEach((item) => {
                             item.setSelected(value.includes(item.value));
                         });
+                        this._cd.detectChanges();
                     }),
                     takeUntil(unsubscribe$)
                 )

@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Inject, Input, Optional, Output } from '@angular/core';
+import { ChangeDetectorRef, Directive, ElementRef, Inject, Input, Optional, Output } from '@angular/core';
 import { merge, Observable } from 'rxjs';
 import { SelectableItemToken } from './selectable-item.token';
 import { FN_SELECTABLE_ITEM_PROVIDER } from './selectable-list.tokens';
@@ -9,6 +9,7 @@ import { ClickedObservable } from '../clicked';
 
 @Directive({
     selector: '[fnSelectableItem]',
+    exportAs: 'fnSelectableItem',
     providers: [
         {
             provide: SelectableItemToken,
@@ -50,7 +51,8 @@ export class SelectableItemDirective<ValueType = any> implements SelectableItemT
         @Inject(FN_DISABLED) private disabled$: DisabledBehavior,
         @Inject(FN_READONLY) private readonly$: ReadonlyBehavior,
         private selectionService: SelectionService,
-        private _elementRef: ElementRef<HTMLElement>
+        private _elementRef: ElementRef<HTMLElement>,
+        private _cd: ChangeDetectorRef
     ) {
         this.clicked = this.provider?.clicked || this.clicked;
         this._listenToDisablingEvents();
@@ -71,9 +73,9 @@ export class SelectableItemDirective<ValueType = any> implements SelectableItemT
             const htmlElement = this._elementRef.nativeElement;
             const { classList } = htmlElement;
             if (isSelected) {
-                classList.add('fn-tabs__item--selected');
+                classList.add('is-selected');
             } else {
-                classList.remove('fn-tabs__item--selected');
+                classList.remove('is-selected');
             }
             htmlElement.setAttribute('aria-selected', `${isSelected}`);
         }
