@@ -45,7 +45,6 @@ export class DisabledBehaviorDirective
             .pipe(
                 tap((isDisabled) => {
                     if (isDisabled !== this._disabled) {
-                        console.log({ isDisabled });
                         this._disabled = isDisabled;
                         this.next(isDisabled);
                     }
