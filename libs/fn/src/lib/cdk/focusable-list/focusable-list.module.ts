@@ -6,4 +6,4 @@ import { FocusableListDirective } from './focusable-list.directive';
     declarations: [FocusableItemDirective, FocusableListDirective],
     exports: [FocusableItemDirective, FocusableListDirective]
 })
-export class FocusableBehaviorModule {}
+export class FocusableListModule {}
