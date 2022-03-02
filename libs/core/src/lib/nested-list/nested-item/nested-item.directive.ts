@@ -37,6 +37,10 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
         return this._expanded;
     }
 
+    /** Aria defines aria label for the selected item when the list with disabled selection. */
+    @Input()
+    private ariaLabelSelected = 'Selected';
+
     /** Event thrown, when expanded state is changed */
     @Output()
     readonly expandedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -69,6 +73,10 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
     _ariaLevel = null;
 
     /** @hidden */
+    @HostBinding('attr.title')
+    _title = '';
+
+    /** @hidden */
     @HostBinding('attr.role')
     private _role = 'treeitem';
 
@@ -82,6 +90,18 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
     /** @hidden */
     @HostBinding('attr.aria-selected')
     private _ariaSelected = null;
+
+    /** @hidden */
+    @HostBinding('attr.aria-disabled')
+    private _ariaDisabled = false;
+
+    /** @hidden */
+    @HostBinding('attr.tabindex')
+    private _tabindex = -1;
+
+    /** @hidden */
+    @HostBinding('attr.aria-label')
+    private _ariaLabel: string;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
@@ -106,7 +126,14 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
 
         if (this.linkItem) {
             this._ariaSelected = this.linkItem.selected;
+            this._ariaDisabled = !this._stateService.selectable && !this.linkItem.selected;
+
+            if (!this._stateService.selectable && this.linkItem.selected) {
+                this._ariaLabel = this.ariaLabelSelected;
+            }
         }
+
+        this._title = this.linkItem.getTitle();
     }
 
     /** @hidden */
@@ -148,6 +175,7 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
     /** Method that toggle the item and propagate it to children */
     toggle(): void {
         /** Propagate initial open state to children */
+        console.log(this.expanded);
         this.propagateOpenChange(!this._expanded);
     }
 

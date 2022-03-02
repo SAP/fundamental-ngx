@@ -1,6 +1,7 @@
 import {
     AfterContentInit,
     ChangeDetectorRef,
+    ContentChild,
     ContentChildren,
     Directive,
     ElementRef,
@@ -21,6 +22,7 @@ import { NestedItemDirective } from '../nested-item/nested-item.directive';
 import { NestedItemService } from '../nested-item/nested-item.service';
 import { NestedListKeyboardService } from '../nested-list-keyboard.service';
 import { NestedListInterface } from './nested-list.interface';
+import { NestedListHeaderDirective } from '../nested-list-directives';
 import { Nullable } from '@fundamental-ngx/core/shared';
 
 @Directive({
@@ -61,6 +63,9 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
     @ContentChildren(forwardRef(() => NestedItemDirective))
     nestedItems: QueryList<NestedItemDirective>;
 
+    @ContentChild(NestedListHeaderDirective)
+    private _nestedListHeader: NestedListHeaderDirective;
+
     /** @hidden */
     private _subscriptions = new Subscription();
 
@@ -75,6 +80,10 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
     /** @hidden */
     @HostBinding('attr.aria-haspopup')
     private _ariaHaspopup = null;
+
+    /** @hidden */
+    @HostBinding('attr.tabindex')
+    private _tabindex = '-1';
 
     /** @hidden */
     constructor(
@@ -118,10 +127,10 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
 
         this.nestedItems.changes.subscribe(() => {
             this._nestedListKeyboardService.refresh$.next();
-            this._setAriaLevel(nestedLevel);
+            this._setAriaAttributes(nestedLevel);
         });
 
-        this._setAriaLevel(nestedLevel);
+        this._setAriaAttributes(nestedLevel);
         this._handleNestedLevel(nestedLevel);
     }
 
@@ -156,8 +165,15 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
     }
 
     /** @hidden */
-    private _setAriaLevel(level: number): void {
-        this.nestedItems.forEach((item) => (item._ariaLevel = level));
+    private _setAriaAttributes(level: number): void {
+        this.nestedItems.forEach((item, i) => {
+            item._ariaLevel = level;
+            item.linkItem._ariaLabel = `${this._nestedListHeader ? this._nestedListHeader?.title : ''}
+                 Tree Item ${item._title} ${i + 1} of ${this.nestedItems.length}
+                 ${!this._nestedListStateService.selectable && item.linkItem.selected ? 'selected' : ''}`;
+        });
+
+        this._changeDetectionRef.detectChanges();
     }
 
     /** @hidden */

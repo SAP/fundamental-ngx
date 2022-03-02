@@ -26,6 +26,13 @@ export class NestedListHeaderDirective {
     /** @hidden */
     @HostBinding('class.fd-nested-list__group-header')
     fdNestedListHeaderClass = true;
+
+    constructor(private _elementRef: ElementRef) {}
+
+    /** Get the header title */
+    get title(): string {
+        return this._elementRef.nativeElement.textContent;
+    }
 }
 
 @Directive({
