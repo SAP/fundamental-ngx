@@ -35,6 +35,7 @@ export const FnReadonlyProvider: Provider = {
             }
 
             ngOnDestroy(): void {
+                this.complete();
                 this._destroy$.next();
             }
         }
