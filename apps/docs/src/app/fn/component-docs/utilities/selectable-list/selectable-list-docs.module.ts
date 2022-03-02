@@ -5,6 +5,8 @@ import { SharedDocumentationPageModule } from '../../../../documentation/shared-
 import { API_FILES } from '../../../api-files';
 import { SelectableListDocsComponent } from './selectable-list-docs.component';
 import { SelectableListHeaderComponent } from './selectable-list-header/selectable-list-header.component';
+import { DefaultExampleComponent } from './examples/default-example/default-example.component';
+import { SelectableListModule } from '@fundamental-ngx/fn/cdk';
 
 const routes: Routes = [
     {
@@ -21,8 +23,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, SelectableListModule],
     exports: [RouterModule],
-    declarations: [SelectableListHeaderComponent, SelectableListDocsComponent]
+    declarations: [SelectableListHeaderComponent, SelectableListDocsComponent, DefaultExampleComponent]
 })
 export class SelectableListDocsModule {}
