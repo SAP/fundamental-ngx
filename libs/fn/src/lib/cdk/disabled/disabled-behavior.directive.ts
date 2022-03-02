@@ -3,7 +3,6 @@ import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { takeUntil, tap } from 'rxjs/operators';
 import { ReplaySubject } from 'rxjs';
 import { DestroyedBehavior } from '../common-behaviors/destroyed-behavior';
-import { FN_DISABLED } from './fn-disabled.token';
 import { DisabledBehavior } from './disabled-behavior.interface';
 import { setDisabledState } from './set-disabled-state';
 import { DisabledObserver } from './disabled.observer';
@@ -12,7 +11,7 @@ import { DisabledObserver } from './disabled.observer';
     selector: '[fnDisabled]',
     providers: [
         {
-            provide: FN_DISABLED,
+            provide: '[fnDisabled]',
             useExisting: DisabledBehaviorDirective
         },
         DestroyedBehavior
