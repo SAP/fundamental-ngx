@@ -8,6 +8,7 @@ import { InputExampleComponent, InputStateExampleComponent } from './examples/in
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { InputModule } from '@fundamental-ngx/fn/input';
 import { DisabledBehaviorModule, ReadonlyBehaviorModule } from '@fundamental-ngx/fn/cdk';
+import { InputFormExampleComponent } from './examples/input-form-example.component';
 
 const routes: Routes = [
     {
@@ -29,6 +30,12 @@ const routes: Routes = [
         DisabledBehaviorModule
     ],
     exports: [RouterModule],
-    declarations: [InputDocsComponent, InputHeaderComponent, InputExampleComponent, InputStateExampleComponent]
+    declarations: [
+        InputDocsComponent,
+        InputHeaderComponent,
+        InputExampleComponent,
+        InputStateExampleComponent,
+        InputFormExampleComponent
+    ]
 })
 export class InputDocsModule {}

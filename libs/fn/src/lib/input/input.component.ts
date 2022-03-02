@@ -8,23 +8,53 @@ import {
     OnChanges,
     Input,
     Optional,
-    Inject
+    Inject,
+    forwardRef
 } from '@angular/core';
 import { InputBase } from './input-base';
 import { applyCssClass } from '@fundamental-ngx/core/utils';
 import { DisabledBehavior, FN_DISABLED, FN_READONLY, ReadonlyBehavior } from '@fundamental-ngx/fn/cdk';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
     selector: 'fn-input',
     templateUrl: './input.component.html',
     styleUrls: ['./input.component.scss'],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => InputComponent),
+            multi: true
+        }
+    ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InputComponent extends InputBase implements OnInit, OnChanges {
+export class InputComponent extends InputBase implements OnInit, OnChanges, ControlValueAccessor {
     /** User's custom classes */
     @Input()
     class = '';
+
+    /** @hidden */
+    inputTextValue: string;
+
+    /** @hidden */
+    onChange: any = () => {};
+
+    /** @hidden */
+    onTouched: any = () => {};
+
+    /** Get the value of the text input. */
+    get inputText(): string {
+        return this.inputTextValue;
+    }
+
+    /** Set the value of the text input. */
+    set inputText(value) {
+        this.inputTextValue = value;
+        this.onChange(value);
+        this.onTouched();
+    }
 
     /** @hidden */
     constructor(
@@ -58,5 +88,27 @@ export class InputComponent extends InputBase implements OnInit, OnChanges {
     /** @hidden */
     elementRef(): ElementRef {
         return this._elementRef;
+    }
+
+    /** @hidden */
+    writeValue(value: any): void {
+        this.inputTextValue = value;
+        this._cdr.markForCheck();
+    }
+
+    /** @hidden */
+    registerOnChange(fn): void {
+        this.onChange = fn;
+    }
+
+    /** @hidden */
+    registerOnTouched(fn): void {
+        this.onTouched = fn;
+    }
+
+    /** @hidden */
+    setDisabledState(isDisabled: boolean): void {
+        this.disabledByForm = isDisabled;
+        this._setDisableReadonlyProperties();
     }
 }

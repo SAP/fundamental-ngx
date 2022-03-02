@@ -26,6 +26,9 @@ export abstract class InputBase implements AfterViewInit, OnDestroy {
     /** Whether or not this input is disabled. */
     disabled: boolean;
 
+    /** Whether or not this input has been disabled via Angular Forms. */
+    disabledByForm: boolean;
+
     /** Whether or not this input is readonly. */
     readonly: boolean;
 
@@ -63,8 +66,12 @@ export abstract class InputBase implements AfterViewInit, OnDestroy {
     }
 
     /** @hidden */
-    private _setDisableReadonlyProperties(): void {
-        this.disabled = this.disabled$?.fnDisabled;
+    protected _setDisableReadonlyProperties(): void {
+        if (this.disabledByForm) {
+            this.disabled = true;
+        } else {
+            this.disabled = this.disabled$?.fnDisabled;
+        }
         this.readonly = this.readonly$?.fnReadonly;
         this._cdRef.detectChanges();
     }

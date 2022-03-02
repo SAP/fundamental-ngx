@@ -7,6 +7,7 @@
         [class.is-display]="display"
         [attr.placeholder]="placeholder"
         [attr.tabIndex]="display ? -1 : 0"
+        [(ngModel)]="inputText"
     />
     <div class="fn-input__border"></div>
     <span *ngIf="state === 'positive'" class="sap-icon sap-icon--sys-enter-2"></span>

@@ -33,4 +33,18 @@ describe('InputComponent', () => {
             expect(fixture.nativeElement.classList).toContain(`fn-input--${state}`);
         });
     });
+
+    it('should writeValue', () => {
+        component.writeValue('test');
+        spyOn(component, 'onTouched');
+        spyOn(component, 'onChange');
+        expect(component.inputText).toBe('test');
+        expect(component.onTouched).toHaveBeenCalled();
+        expect(component.onChange).toHaveBeenCalled();
+    });
+
+    it('should setDisabledState', () => {
+        component.setDisabledState(true);
+        expect(component.disabledByForm).toBeTruthy();
+    });
 });
