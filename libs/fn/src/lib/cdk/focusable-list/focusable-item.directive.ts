@@ -2,12 +2,10 @@ import { Directive, ElementRef, HostBinding, Inject, Input, Optional } from '@an
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ReplaySubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { DisabledBehavior, FN_DISABLED } from '../disabled';
+import { FN_READONLY, ReadonlyBehavior } from '../readonly';
 import { FN_FOCUSABLE } from './focusable.tokens';
-import { FN_DISABLED } from '../disabled/fn-disabled.token';
-import { FN_READONLY } from '../readonly/fn-readonly.token';
 import { BaseFocusableBehavior } from '../common-behaviors/base-focusable-behavior';
-import { DisabledBehavior } from '../disabled/disabled-behavior.interface';
-import { ReadonlyBehavior } from '../readonly/readonly-behavior.interface';
 import { DestroyedBehavior } from '../common-behaviors/destroyed-behavior';
 import { HasElementRef } from '../HasElementRef';
 

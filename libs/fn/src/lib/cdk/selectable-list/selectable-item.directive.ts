@@ -2,10 +2,8 @@ import { Directive, ElementRef, EventEmitter, HostListener, Inject, Input, Optio
 import { merge, Observable } from 'rxjs';
 import { SelectableItemToken } from './selectable-item.token';
 import { FN_SELECTABLE_ITEM_PROVIDER } from './selectable-list.tokens';
-import { FN_DISABLED } from '../disabled/fn-disabled.token';
-import { DisabledBehavior } from '../disabled/disabled-behavior.interface';
-import { ReadonlyBehavior } from '../readonly/readonly-behavior.interface';
-import { FN_READONLY } from '../readonly/fn-readonly.token';
+import { DisabledBehavior, FN_DISABLED } from '../disabled';
+import { FN_READONLY, ReadonlyBehavior } from '../readonly';
 import { SelectionService } from './selection.service';
 
 @Directive({
