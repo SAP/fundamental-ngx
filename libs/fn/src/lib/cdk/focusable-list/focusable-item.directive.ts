@@ -1,9 +1,9 @@
-import { Directive, ElementRef, HostBinding, Inject, Input, Optional } from '@angular/core';
+import { Directive, ElementRef, HostBinding, Inject, Input } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ReplaySubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { DisabledBehavior, FN_DISABLED } from '../disabled';
-import { FN_READONLY, ReadonlyBehavior } from '../readonly';
+import { DisabledBehavior, FN_DISABLED, FnDisabledProvider } from '../disabled';
+import { FN_READONLY, ReadonlyBehavior, FnReadonlyProvider } from '../readonly';
 import { FN_FOCUSABLE } from './focusable.tokens';
 import { BaseFocusableBehavior } from '../common-behaviors/base-focusable-behavior';
 import { DestroyedBehavior } from '../common-behaviors/destroyed-behavior';
@@ -16,7 +16,9 @@ import { HasElementRef } from '../HasElementRef';
             provide: FN_FOCUSABLE,
             useExisting: FocusableItemDirective
         },
-        DestroyedBehavior
+        DestroyedBehavior,
+        FnDisabledProvider,
+        FnReadonlyProvider
     ]
 })
 export class FocusableItemDirective extends ReplaySubject<boolean> implements HasElementRef {
@@ -40,8 +42,8 @@ export class FocusableItemDirective extends ReplaySubject<boolean> implements Ha
 
     constructor(
         destroy$: DestroyedBehavior,
-        @Optional() @Inject(FN_DISABLED) disabled$: DisabledBehavior,
-        @Optional() @Inject(FN_READONLY) readonly$: ReadonlyBehavior,
+        @Inject(FN_DISABLED) disabled$: DisabledBehavior,
+        @Inject(FN_READONLY) readonly$: ReadonlyBehavior,
         private _elementRef: ElementRef<HTMLElement>
     ) {
         super(1);

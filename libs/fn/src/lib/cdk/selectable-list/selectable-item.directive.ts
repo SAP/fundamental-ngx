@@ -2,8 +2,8 @@ import { Directive, ElementRef, EventEmitter, HostListener, Inject, Input, Optio
 import { merge, Observable } from 'rxjs';
 import { SelectableItemToken } from './selectable-item.token';
 import { FN_SELECTABLE_ITEM_PROVIDER } from './selectable-list.tokens';
-import { DisabledBehavior, FN_DISABLED } from '../disabled';
-import { FN_READONLY, ReadonlyBehavior } from '../readonly';
+import { DisabledBehavior, FN_DISABLED, FnDisabledProvider } from '../disabled';
+import { FN_READONLY, FnReadonlyProvider, ReadonlyBehavior } from '../readonly';
 import { SelectionService } from './selection.service';
 
 @Directive({
@@ -12,7 +12,9 @@ import { SelectionService } from './selection.service';
         {
             provide: SelectableItemToken,
             useExisting: SelectableItemDirective
-        }
+        },
+        FnReadonlyProvider,
+        FnDisabledProvider
     ]
 })
 export class SelectableItemDirective<ValueType = any> implements SelectableItemToken<ValueType> {
@@ -44,8 +46,8 @@ export class SelectableItemDirective<ValueType = any> implements SelectableItemT
 
     constructor(
         @Optional() @Inject(FN_SELECTABLE_ITEM_PROVIDER) private provider: Partial<SelectableItemToken<ValueType>>,
-        @Optional() @Inject(FN_DISABLED) private disabled$: DisabledBehavior,
-        @Optional() @Inject(FN_READONLY) private readonly$: ReadonlyBehavior,
+        @Inject(FN_DISABLED) private disabled$: DisabledBehavior,
+        @Inject(FN_READONLY) private readonly$: ReadonlyBehavior,
         private selectionService: SelectionService,
         private _elementRef: ElementRef<HTMLElement>
     ) {
