@@ -1,4 +1,11 @@
 
+### 0.33.5-rc.27 (2022-03-02)
+
+
+### Features
+
+* **core,platform:** bring horizon themes ([#7819](https://github.com/SAP/fundamental-ngx/issues/7819)) ([ea660aa](https://github.com/SAP/fundamental-ngx/commit/ea660aa9db1de530ba37a0a27e96624c966086f5))
+
 ### 0.33.5-rc.26 (2022-03-01)
 
 ### 0.33.5-rc.25 (2022-03-01)
