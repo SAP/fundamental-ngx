@@ -11,7 +11,13 @@ import {
 } from '@angular/core';
 import { BaseButton } from '@fundamental-ngx/core/button';
 import { coerceBoolean } from '@fundamental-ngx/fn/utils';
-import { DisabledBehavior, FN_DISABLED, FN_READONLY, ReadonlyBehavior } from '@fundamental-ngx/fn/cdk';
+import {
+    DisabledBehavior,
+    FN_DISABLED,
+    FN_READONLY,
+    FnDisabledProvider,
+    ReadonlyBehavior
+} from '@fundamental-ngx/fn/cdk';
 import { merge } from 'rxjs';
 
 export type ButtonType = '' | 'secondary' | 'layout' | 'positive' | 'critical' | 'negative';
@@ -34,7 +40,8 @@ export type ButtonType = '' | 'secondary' | 'layout' | 'positive' | 'critical' |
         '[class.fn-button--icon-only]': 'glyph && !label',
         '[attr.aria-label]': 'ariaLabel',
         '[value]': 'value'
-    }
+    },
+    providers: [FnDisabledProvider]
 })
 export class ButtonComponent extends BaseButton {
     @Input()
@@ -75,7 +82,7 @@ export class ButtonComponent extends BaseButton {
     constructor(
         private _elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
-        @Optional() @Inject(FN_DISABLED) private _disabled$: DisabledBehavior,
+        @Inject(FN_DISABLED) private _disabled$: DisabledBehavior,
         @Optional() @Inject(FN_READONLY) private _readonly$: ReadonlyBehavior
     ) {
         super();

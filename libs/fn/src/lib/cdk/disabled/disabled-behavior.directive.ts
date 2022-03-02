@@ -6,12 +6,13 @@ import { DestroyedBehavior } from '../common-behaviors/destroyed-behavior';
 import { DisabledBehavior } from './disabled-behavior.interface';
 import { setDisabledState } from './set-disabled-state';
 import { DisabledObserver } from './disabled.observer';
+import { fnDisabled } from './fn-disabled.token';
 
 @Directive({
     selector: '[fnDisabled]',
     providers: [
         {
-            provide: '[fnDisabled]',
+            provide: fnDisabled,
             useExisting: DisabledBehaviorDirective
         },
         DestroyedBehavior

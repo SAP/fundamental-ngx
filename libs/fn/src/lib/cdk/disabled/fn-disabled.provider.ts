@@ -1,7 +1,7 @@
 import { Directive, ElementRef, OnDestroy, Optional, Provider } from '@angular/core';
-import { FN_DISABLED } from './fn-disabled.token';
 import { filter, ReplaySubject, Subject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
+import { FN_DISABLED, fnDisabled } from './fn-disabled.token';
 import { DisabledObserver } from './disabled.observer';
 import { DisabledBehavior } from './disabled-behavior.interface';
 
@@ -41,5 +41,5 @@ export const FnDisabledProvider: Provider = {
 
         return new LocalDisabledObserver();
     },
-    deps: [ElementRef, DisabledObserver, [new Optional(), '[fnDisabled]']]
+    deps: [ElementRef, DisabledObserver, [new Optional(), fnDisabled]]
 };
