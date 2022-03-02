@@ -4,7 +4,7 @@ export * from './disabled';
 
 export * from './readonly';
 
-export * from './directives/clicked/clicked.directive';
+export * from './clicked';
 
 export * from './selectable-list';
 

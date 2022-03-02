@@ -1,10 +1,11 @@
-import { Directive, ElementRef, EventEmitter, HostListener, Inject, Input, Optional, Output } from '@angular/core';
+import { Directive, ElementRef, Inject, Input, Optional, Output } from '@angular/core';
 import { merge, Observable } from 'rxjs';
 import { SelectableItemToken } from './selectable-item.token';
 import { FN_SELECTABLE_ITEM_PROVIDER } from './selectable-list.tokens';
 import { DisabledBehavior, FN_DISABLED, FnDisabledProvider } from '../disabled';
 import { FN_READONLY, FnReadonlyProvider, ReadonlyBehavior } from '../readonly';
 import { SelectionService } from './selection.service';
+import { ClickedObservable } from '../clicked';
 
 @Directive({
     selector: '[fnSelectableItem]',
@@ -31,7 +32,7 @@ export class SelectableItemDirective<ValueType = any> implements SelectableItemT
     }
 
     @Output()
-    clicked: Observable<void> = new EventEmitter();
+    clicked: Observable<MouseEvent | KeyboardEvent> = new ClickedObservable(this);
 
     get selectable(): boolean {
         // eslint-disable-next-line no-prototype-builtins
@@ -53,14 +54,6 @@ export class SelectableItemDirective<ValueType = any> implements SelectableItemT
     ) {
         this.clicked = this.provider?.clicked || this.clicked;
         this._listenToDisablingEvents();
-    }
-
-    @HostListener('click', ['$event'])
-    @HostListener('keydown.enter', ['$event'])
-    @HostListener('keydown.space', ['$event'])
-    onClick($event: Event): void {
-        $event.preventDefault();
-        (this.clicked as EventEmitter<void>).emit();
     }
 
     getSelected(): boolean {

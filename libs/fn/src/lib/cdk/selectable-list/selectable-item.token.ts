@@ -1,6 +1,5 @@
 import { Observable } from 'rxjs';
 import { HasElementRef } from '../HasElementRef';
-import { EventEmitter } from '@angular/core';
 
 export abstract class SelectableItemToken<ValueType = any> extends HasElementRef {
     abstract value: ValueType;
@@ -10,5 +9,5 @@ export abstract class SelectableItemToken<ValueType = any> extends HasElementRef
 
     abstract getSelected(): boolean;
 
-    abstract clicked: Observable<void> | EventEmitter<void>;
+    abstract clicked: Observable<MouseEvent | KeyboardEvent>;
 }

@@ -1,18 +1,12 @@
+import { AfterViewInit, ChangeDetectorRef, Directive, ElementRef, HostBinding, Inject, Input } from '@angular/core';
 import {
-    AfterViewInit,
-    ChangeDetectorRef,
-    Directive,
-    ElementRef,
-    HostBinding,
-    Inject,
-    Input,
-    Optional
-} from '@angular/core';
-import {
+    ClickedObservable,
     DestroyedBehavior,
     DisabledBehavior,
     FN_DISABLED,
     FN_READONLY,
+    FnDisabledProvider,
+    FnReadonlyProvider,
     ReadonlyBehavior,
     SelectableItemToken,
     SelectComponentRootToken,
@@ -28,7 +22,9 @@ import { merge } from 'rxjs';
         {
             provide: SelectableItemToken,
             useExisting: SelectableItemDirective
-        }
+        },
+        FnDisabledProvider,
+        FnReadonlyProvider
     ]
 })
 export class SelectableItemDirective<ValueType> implements SelectableItemToken<ValueType>, AfterViewInit {
@@ -62,6 +58,8 @@ export class SelectableItemDirective<ValueType> implements SelectableItemToken<V
         }
     }
 
+    clicked = new ClickedObservable(this);
+
     /** @hidden */
     private _selected = false;
     /** @hidden */
@@ -74,8 +72,8 @@ export class SelectableItemDirective<ValueType> implements SelectableItemToken<V
         private _elementRef: ElementRef<HTMLElement>,
         private _changeDetectorRef: ChangeDetectorRef,
         private selectionService: SelectionService,
-        @Optional() @Inject(FN_DISABLED) private disabled$: DisabledBehavior,
-        @Optional() @Inject(FN_READONLY) private readonly$: ReadonlyBehavior
+        @Inject(FN_DISABLED) private disabled$: DisabledBehavior,
+        @Inject(FN_READONLY) private readonly$: ReadonlyBehavior
     ) {
         if (!rootComponent) {
             throw new Error('Usage of selectable list item without [selectable] list is not supported');

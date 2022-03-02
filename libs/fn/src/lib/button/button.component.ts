@@ -7,11 +7,12 @@ import {
     Inject,
     Input,
     Optional,
+    Output,
     ViewEncapsulation
 } from '@angular/core';
 import { BaseButton } from '@fundamental-ngx/core/button';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { SelectableItemToken, SelectComponentRootToken } from '@fundamental-ngx/fn/cdk';
+import { ClickedObservable, SelectableItemToken, SelectComponentRootToken } from '@fundamental-ngx/fn/cdk';
 import { coerceBoolean } from '@fundamental-ngx/fn/utils';
 
 export type ButtonType = '' | 'secondary' | 'layout' | 'positive' | 'critical' | 'negative';
@@ -71,22 +72,6 @@ export class ButtonComponent extends BaseButton implements SelectableItemToken<s
     }
 
     /**
-     * Native disabled attribute of button element
-     */
-    @Input()
-    get disabled(): boolean {
-        return this._disabled || (this.selectComponent !== null && this.selectComponent.disabled);
-    }
-
-    set disabled(value: BooleanInput) {
-        const newDisabledState = coerceBooleanProperty(value);
-        if (this._disabled !== newDisabledState) {
-            this._disabled = newDisabledState;
-            this._changeDetectorRef.markForCheck();
-        }
-    }
-
-    /**
      * Value of the button
      */
     @Input()
@@ -97,6 +82,8 @@ export class ButtonComponent extends BaseButton implements SelectableItemToken<s
      */
     @Input()
     class: string;
+
+    @Output() clicked = new ClickedObservable(this._elementRef);
 
     /**
      * Fiori Next button type class getter
