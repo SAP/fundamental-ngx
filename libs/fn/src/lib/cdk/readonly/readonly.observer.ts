@@ -1,6 +1,6 @@
 import { ElementRef, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 import { getNativeElement } from '@fundamental-ngx/fn/utils';
 import { AttributeObserver } from '../observers/attribute.observer';
 import { HasElementRef } from '../HasElementRef';
@@ -16,8 +16,9 @@ export class ReadonlyObserver {
     }
 
     observe(element: HasElementRef<Element> | Element | ElementRef<Element>): Observable<boolean> {
-        return this._attributeObserver
-            .observe(element)
-            .pipe(map(() => ReadonlyObserver.isReadonly(getNativeElement(element))));
+        return this._attributeObserver.observe(element).pipe(
+            map(() => ReadonlyObserver.isReadonly(getNativeElement(element))),
+            distinctUntilChanged()
+        );
     }
 }

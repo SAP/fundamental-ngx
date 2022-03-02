@@ -16,5 +16,4 @@ export function setDisabledState(
         htmlElement.removeAttribute('disabled');
         htmlElement.removeAttribute('aria-disabled');
     }
-    console.log({ htmlElement });
 }
