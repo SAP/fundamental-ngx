@@ -97,6 +97,13 @@ export const ROUTES: Routes = [
                     import('./component-docs/object-status/object-status-docs.module').then(
                         (m) => m.ObjectStatusDocsModule
                     )
+            },
+            {
+                path: 'selectable-list',
+                loadChildren: () =>
+                    import('./component-docs/utilities/selectable-list/selectable-list-docs.module').then(
+                        (m) => m.SelectableListDocsModule
+                    )
             }
         ]
     }
