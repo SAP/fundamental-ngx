@@ -5,6 +5,9 @@ import { ReplaySubject } from 'rxjs';
 import { FN_DISABLED } from '../tokens/disabled';
 import { DisabledBehavior } from '../interfaces/disabled-behavior.interface';
 import { setDisabledState } from './set-disabled-state';
+import { takeUntil, tap } from 'rxjs/operators';
+import { AttributeObserver } from '../observers/attribute.observer';
+import { DestroyedBehavior } from '../common-behaviors/destroyed-behavior';
 
 @Directive({
     selector: '[fnDisabled]',
@@ -12,18 +15,14 @@ import { setDisabledState } from './set-disabled-state';
         {
             provide: FN_DISABLED,
             useExisting: DisabledBehaviorDirective
-        }
+        },
+        DestroyedBehavior
     ]
 })
 export class DisabledBehaviorDirective extends ReplaySubject<boolean> implements OnDestroy, DisabledBehavior {
     @Input()
     set fnDisabled(value: BooleanInput) {
-        const isDisabled = coerceBooleanProperty(value);
-        if (isDisabled !== this._disabled) {
-            this._disabled = isDisabled;
-            this.next(isDisabled);
-            setDisabledState(this._elementRef, isDisabled);
-        }
+        setDisabledState(this._elementRef, coerceBooleanProperty(value));
     }
 
     get fnDisabled(): boolean {
@@ -34,9 +33,12 @@ export class DisabledBehaviorDirective extends ReplaySubject<boolean> implements
 
     constructor(
         @Optional() @Self() @Inject(NG_VALUE_ACCESSOR) private valueAccessors: ControlValueAccessor[],
-        private _elementRef: ElementRef<HTMLElement>
+        private _elementRef: ElementRef<HTMLElement>,
+        private _contentObserver: AttributeObserver,
+        private _destroy$: DestroyedBehavior
     ) {
         super(1);
+
         if (valueAccessors?.length > 0) {
             for (const valueAccessor of valueAccessors) {
                 const originalSetDisabledState = valueAccessor.setDisabledState;
@@ -48,6 +50,28 @@ export class DisabledBehaviorDirective extends ReplaySubject<boolean> implements
                 };
             }
         }
+
+        _contentObserver
+            .observe(this._elementRef)
+            .pipe(
+                tap(() => {
+                    const isDisabled = this.isDisabled(this._elementRef.nativeElement);
+                    if (isDisabled !== this._disabled) {
+                        this._disabled = isDisabled;
+                        this.next(isDisabled);
+                    }
+                }),
+                takeUntil(this._destroy$)
+            )
+            .subscribe();
+    }
+
+    isDisabled(el: Element): boolean {
+        return (
+            el.hasAttribute('disabled') ||
+            el.getAttribute('aria-disabled') === 'true' ||
+            el.classList.contains('is-disabled')
+        );
     }
 
     ngOnDestroy(): void {

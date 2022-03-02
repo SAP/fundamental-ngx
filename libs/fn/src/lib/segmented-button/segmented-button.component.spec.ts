@@ -37,7 +37,7 @@ class TestSelectionDirective implements SelectableItemToken<string> {
 
 @Component({
     template: `
-        <fn-segmented-button [(selected)]="selectedItem" [multiple]="multiple" [toggle]="toggle" [disabled]="disabled">
+        <fn-segmented-button [(selected)]="selectedItem" [multiple]="multiple" [toggle]="toggle">
             <button fnTestSelection="value1" id="value1"></button>
             <button fnTestSelection="value2" id="value2"></button>
             <button fnTestSelection="value2" id="value2"></button>
@@ -49,7 +49,6 @@ class HostComponent {
     selectedItem: string | string[] = 'value1';
     multiple = false;
     toggle = false;
-    disabled = false;
 }
 
 describe('SegmentedButtonComponent', () => {

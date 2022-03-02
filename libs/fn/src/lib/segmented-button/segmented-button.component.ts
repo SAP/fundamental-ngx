@@ -23,7 +23,8 @@ import {
     selectableItemToFocusableItem,
     SelectableItemToken,
     SelectComponentRootToken,
-    SelectionService
+    SelectionService,
+    setDisabledState
 } from '@fundamental-ngx/fn/cdk';
 import { takeUntil, tap } from 'rxjs/operators';
 
@@ -86,13 +87,6 @@ export class SegmentedButtonComponent
     }
 
     /**
-     * Input for disabling all child elements
-     */
-    @Input()
-    @coerceBoolean
-    disabled!: boolean;
-
-    /**
      * Event, notifying about selected elements change after data model has been updated
      */
     @Output()
@@ -144,7 +138,7 @@ export class SegmentedButtonComponent
 
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
-        this.disabled = isDisabled;
+        setDisabledState(this._elementRef, isDisabled);
         this.changeDetectorRef.markForCheck();
     }
 
