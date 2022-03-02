@@ -1,5 +1,5 @@
-import { Directive, ElementRef, Input, OnDestroy } from '@angular/core';
-import { ReplaySubject } from 'rxjs';
+import { AfterViewInit, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
+import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { takeUntil, tap } from 'rxjs/operators';
 import { fnReadonly } from './fn-readonly.token';
@@ -18,10 +18,13 @@ import { DestroyedBehavior } from '../common-behaviors/destroyed-behavior';
         DestroyedBehavior
     ]
 })
-export class ReadonlyBehaviorDirective extends ReplaySubject<boolean> implements ReadonlyBehavior, OnDestroy {
+export class ReadonlyBehaviorDirective
+    extends ReplaySubject<boolean>
+    implements ReadonlyBehavior, AfterViewInit, OnDestroy
+{
     @Input()
     set fnReadonly(value: BooleanInput) {
-        setReadonlyState(this._elementRef, coerceBooleanProperty(value));
+        this._readonlyInput$.next(coerceBooleanProperty(value));
     }
 
     get fnReadonly(): boolean {
@@ -29,6 +32,7 @@ export class ReadonlyBehaviorDirective extends ReplaySubject<boolean> implements
     }
 
     _readonly = false;
+    _readonlyInput$ = new BehaviorSubject(false);
 
     constructor(
         private _elementRef: ElementRef<HTMLElement>,
@@ -45,6 +49,15 @@ export class ReadonlyBehaviorDirective extends ReplaySubject<boolean> implements
                         this.next(isReadonly);
                     }
                 }),
+                takeUntil(this._destroy$)
+            )
+            .subscribe();
+    }
+
+    ngAfterViewInit(): void {
+        this._readonlyInput$
+            .pipe(
+                tap((isReadonly) => setReadonlyState(this._elementRef, isReadonly)),
                 takeUntil(this._destroy$)
             )
             .subscribe();

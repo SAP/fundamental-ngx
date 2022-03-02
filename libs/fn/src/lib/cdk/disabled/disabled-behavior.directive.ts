@@ -1,7 +1,7 @@
-import { Directive, ElementRef, Input, OnDestroy } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { takeUntil, tap } from 'rxjs/operators';
-import { ReplaySubject } from 'rxjs';
+import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { DestroyedBehavior } from '../common-behaviors/destroyed-behavior';
 import { DisabledBehavior } from './disabled-behavior.interface';
 import { setDisabledState } from './set-disabled-state';
@@ -18,10 +18,13 @@ import { fnDisabled } from './fn-disabled.token';
         DestroyedBehavior
     ]
 })
-export class DisabledBehaviorDirective extends ReplaySubject<boolean> implements OnDestroy, DisabledBehavior {
+export class DisabledBehaviorDirective
+    extends ReplaySubject<boolean>
+    implements OnDestroy, AfterViewInit, DisabledBehavior
+{
     @Input()
     set fnDisabled(value: BooleanInput) {
-        setDisabledState(this._elementRef, coerceBooleanProperty(value));
+        this._fnDisableInput$.next(coerceBooleanProperty(value));
     }
 
     get fnDisabled(): boolean {
@@ -29,6 +32,7 @@ export class DisabledBehaviorDirective extends ReplaySubject<boolean> implements
     }
 
     _disabled = false;
+    _fnDisableInput$ = new BehaviorSubject(false);
 
     constructor(
         private _elementRef: ElementRef<HTMLElement>,
@@ -41,10 +45,20 @@ export class DisabledBehaviorDirective extends ReplaySubject<boolean> implements
             .pipe(
                 tap((isDisabled) => {
                     if (isDisabled !== this._disabled) {
+                        console.log({ isDisabled });
                         this._disabled = isDisabled;
                         this.next(isDisabled);
                     }
                 }),
+                takeUntil(this._destroy$)
+            )
+            .subscribe();
+    }
+
+    ngAfterViewInit(): void {
+        this._fnDisableInput$
+            .pipe(
+                tap((isDisabled) => setDisabledState(this._elementRef, isDisabled)),
                 takeUntil(this._destroy$)
             )
             .subscribe();
