@@ -35,6 +35,7 @@ export const FnDisabledProvider: Provider = {
             }
 
             ngOnDestroy(): void {
+                this.complete();
                 this._destroy$.next();
             }
         }
