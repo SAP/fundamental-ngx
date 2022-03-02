@@ -104,6 +104,13 @@ export const ROUTES: Routes = [
                     import('./component-docs/utilities/selectable-list/selectable-list-docs.module').then(
                         (m) => m.SelectableListDocsModule
                     )
+            },
+            {
+                path: 'focusable-list',
+                loadChildren: () =>
+                    import('./component-docs/utilities/focusable-list/focusable-list-docs.module').then(
+                        (m) => m.FocusableListDocsModule
+                    )
             }
         ]
     }

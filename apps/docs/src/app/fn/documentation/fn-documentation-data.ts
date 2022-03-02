@@ -48,6 +48,10 @@ export const utilities: SectionInterfaceContent[] = [
     {
         url: 'fn/selectable-list',
         name: 'Selectable List'
+    },
+    {
+        url: 'fn/focusable-list',
+        name: 'Focusable List'
     }
 ];
 

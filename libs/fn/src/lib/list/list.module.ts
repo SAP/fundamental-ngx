@@ -14,10 +14,10 @@ import {
     ListItemBylineDirective
 } from './structural-directives';
 import { ListItemCheckboxDirective } from './list-item-checkbox.directive';
-import { DisabledBehaviorModule, FocusableBehaviorModule, ReadonlyBehaviorModule } from '@fundamental-ngx/fn/cdk';
+import { DisabledBehaviorModule, FocusableListModule, ReadonlyBehaviorModule } from '@fundamental-ngx/fn/cdk';
 
 @NgModule({
-    imports: [CommonModule, DisabledBehaviorModule, ReadonlyBehaviorModule, FocusableBehaviorModule],
+    imports: [CommonModule, DisabledBehaviorModule, ReadonlyBehaviorModule, FocusableListModule],
     exports: [
         ListComponent,
         ListItemComponent,
@@ -33,7 +33,7 @@ import { DisabledBehaviorModule, FocusableBehaviorModule, ReadonlyBehaviorModule
         ListItemBylineDirective,
         DisabledBehaviorModule,
         ReadonlyBehaviorModule,
-        FocusableBehaviorModule
+        FocusableListModule
     ],
     declarations: [
         ListComponent,
