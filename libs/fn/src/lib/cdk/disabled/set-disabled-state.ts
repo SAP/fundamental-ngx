@@ -1,9 +1,9 @@
 import { ElementRef } from '@angular/core';
-import { HasElementRef } from '@fundamental-ngx/fn/cdk';
+import { HasElementRef } from '../HasElementRef';
 import { getNativeElement } from '@fundamental-ngx/fn/utils';
 
 export function setDisabledState(
-    element: HasElementRef | HTMLElement | ElementRef<HTMLElement>,
+    element: HasElementRef<Element> | Element | ElementRef<Element>,
     isDisabled: boolean
 ): void {
     const htmlElement = getNativeElement(element);

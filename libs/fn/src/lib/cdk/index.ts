@@ -6,7 +6,7 @@ export * from './disabled/set-disabled-state';
 
 export * from './interfaces/disabled-behavior.interface';
 
-export * from './directives/readonly/readonly.directive';
+export * from './readonly/readonly-behavior.directive';
 export * from './interfaces/readonly-behavior.interface';
 
 export * from './directives/clicked/clicked.directive';
@@ -35,3 +35,4 @@ export * from './tokens/disabled';
 export * from './tokens/readonly';
 
 export * from './HasElementRef';
+export { ReadonlyBehaviorModule } from './readonly/readonly-behavior.module';
