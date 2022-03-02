@@ -4,3 +4,4 @@ export * from './set-readonly-state';
 export * from './readonly-behavior.interface';
 export * from './readonly.observer';
 export * from './fn-readonly.token';
+export * from './fn-readonly.provider';

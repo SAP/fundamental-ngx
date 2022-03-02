@@ -6,7 +6,6 @@ import {
     HostBinding,
     Inject,
     Input,
-    Optional,
     ViewEncapsulation
 } from '@angular/core';
 import { BaseButton } from '@fundamental-ngx/core/button';
@@ -16,7 +15,8 @@ import {
     FN_DISABLED,
     FN_READONLY,
     FnDisabledProvider,
-    ReadonlyBehavior
+    ReadonlyBehavior,
+    FnReadonlyProvider
 } from '@fundamental-ngx/fn/cdk';
 import { merge } from 'rxjs';
 
@@ -41,7 +41,7 @@ export type ButtonType = '' | 'secondary' | 'layout' | 'positive' | 'critical' |
         '[attr.aria-label]': 'ariaLabel',
         '[value]': 'value'
     },
-    providers: [FnDisabledProvider]
+    providers: [FnDisabledProvider, FnReadonlyProvider]
 })
 export class ButtonComponent extends BaseButton {
     @Input()
@@ -83,10 +83,10 @@ export class ButtonComponent extends BaseButton {
         private _elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
         @Inject(FN_DISABLED) private _disabled$: DisabledBehavior,
-        @Optional() @Inject(FN_READONLY) private _readonly$: ReadonlyBehavior
+        @Inject(FN_READONLY) private _readonly$: ReadonlyBehavior
     ) {
         super();
-        merge(...[_disabled$, _readonly$].filter(Boolean)).subscribe((v) => (this.tabIndex = v ? -1 : 0));
+        merge(_disabled$, _readonly$).subscribe((v) => (this.tabIndex = v ? -1 : 0));
     }
 
     /** HasElementRef interface implementation
