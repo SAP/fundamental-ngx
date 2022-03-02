@@ -5,20 +5,14 @@ import {
     EventEmitter,
     forwardRef,
     Input,
+    OnDestroy,
     OnInit,
     Output,
     QueryList
 } from '@angular/core';
-import {
-    DestroyedBehavior,
-    FocusableListService,
-    selectableItemToFocusableItem,
-    SelectableItemToken,
-    SelectComponentRootToken,
-    SelectionService
-} from '@fundamental-ngx/fn/cdk';
+import { SelectableItemToken, SelectComponentRootToken, SelectionService } from '@fundamental-ngx/fn/cdk';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { BehaviorSubject, combineLatest, filter, map, startWith, switchMap } from 'rxjs';
+import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
 import { coerceBoolean } from '@fundamental-ngx/fn/utils';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { takeUntil, tap } from 'rxjs/operators';
@@ -36,13 +30,11 @@ import { takeUntil, tap } from 'rxjs/operators';
             provide: SelectComponentRootToken,
             useExisting: forwardRef(() => SelectableListDirective)
         },
-        SelectionService,
-        FocusableListService,
-        DestroyedBehavior
+        SelectionService
     ]
 })
 export class SelectableListDirective<ValueType>
-    implements SelectComponentRootToken<ValueType>, ControlValueAccessor, OnInit, AfterViewInit
+    implements SelectComponentRootToken<ValueType>, ControlValueAccessor, OnInit, AfterViewInit, OnDestroy
 {
     @Input()
     set selectable(isSelectable: BooleanInput) {
@@ -63,17 +55,16 @@ export class SelectableListDirective<ValueType>
     @Output()
     selectedChange = new EventEmitter<ValueType | ValueType[]>();
 
+    disabled!: boolean;
+
     selectable$ = new BehaviorSubject<boolean>(false);
     viewInit$ = new BehaviorSubject<boolean>(false);
     @ContentChildren(SelectableItemToken) items!: QueryList<SelectableItemToken>;
 
     onTouched: any;
+    private _destroy$ = new Subject<void>();
 
-    constructor(
-        private selectionService: SelectionService,
-        private focusableListService: FocusableListService,
-        private _destroy$: DestroyedBehavior
-    ) {
+    constructor(private selectionService: SelectionService) {
         this.selectionService.registerRootComponent(this);
         combineLatest([this.selectable$, this.viewInit$])
             .pipe(
@@ -84,16 +75,6 @@ export class SelectableListDirective<ValueType>
                         this.selectionService.clear();
                     }
                 }),
-                takeUntil(this._destroy$)
-            )
-            .subscribe();
-        this.viewInit$
-            .pipe(
-                filter((init) => init),
-                switchMap(() => this.items.changes.pipe(startWith(this.items))),
-                map((itemsQuery) => itemsQuery.toArray()),
-                map((items: SelectableItemToken[]) => items.map(selectableItemToFocusableItem)),
-                tap((items) => this.focusableListService.initialize(items)),
                 takeUntil(this._destroy$)
             )
             .subscribe();
@@ -120,6 +101,10 @@ export class SelectableListDirective<ValueType>
 
     registerOnTouched(fn: any): void {
         this.onTouched = fn;
+    }
+
+    ngOnDestroy(): void {
+        this._destroy$.next();
     }
 
     onChange: (value: ValueType | ValueType[]) => void = (val) => {

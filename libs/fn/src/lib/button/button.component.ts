@@ -6,19 +6,13 @@ import {
     HostBinding,
     Inject,
     Input,
+    Optional,
     ViewEncapsulation
 } from '@angular/core';
 import { BaseButton } from '@fundamental-ngx/core/button';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { SelectableItemToken, SelectComponentRootToken } from '@fundamental-ngx/fn/cdk';
 import { coerceBoolean } from '@fundamental-ngx/fn/utils';
-import {
-    DisabledBehavior,
-    FN_DISABLED,
-    FN_READONLY,
-    FnDisabledProvider,
-    ReadonlyBehavior,
-    FnReadonlyProvider
-} from '@fundamental-ngx/fn/cdk';
-import { merge } from 'rxjs';
 
 export type ButtonType = '' | 'secondary' | 'layout' | 'positive' | 'critical' | 'negative';
 
@@ -36,17 +30,19 @@ export type ButtonType = '' | 'secondary' | 'layout' | 'positive' | 'critical' |
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[attr.type]': 'type',
+        '[class.is-disabled]': 'disabled',
         '[class.fn-button--emphasized]': 'emphasized',
         '[class.fn-button--icon-only]': 'glyph && !label',
+        '[attr.aria-disabled]': 'disabled',
         '[attr.aria-label]': 'ariaLabel',
+        '[disabled]': 'disabled',
+        '[class.fn-button--selected]': 'selected',
+        '[attr.aria-selected]': 'selected',
         '[value]': 'value'
     },
-    providers: [FnDisabledProvider, FnReadonlyProvider]
+    providers: [{ provide: SelectableItemToken, useExisting: ButtonComponent }]
 })
-export class ButtonComponent extends BaseButton {
-    @Input()
-    value?: string;
-
+export class ButtonComponent extends BaseButton implements SelectableItemToken<string> {
     /** The type of the button. Types include:
      * '' | 'secondary' | 'layout' | 'positive' | 'critical' | 'negative'.
      * Leave empty for default (Standard button).'
@@ -61,6 +57,41 @@ export class ButtonComponent extends BaseButton {
     @Input()
     @coerceBoolean
     emphasized: boolean;
+
+    /**
+     * Set selected state of the button
+     */
+    @Input()
+    set selected(value: BooleanInput) {
+        this.setSelected(coerceBooleanProperty(value));
+    }
+
+    get selected(): boolean {
+        return this._selected;
+    }
+
+    /**
+     * Native disabled attribute of button element
+     */
+    @Input()
+    get disabled(): boolean {
+        return this._disabled || (this.selectComponent !== null && this.selectComponent.disabled);
+    }
+
+    set disabled(value: BooleanInput) {
+        const newDisabledState = coerceBooleanProperty(value);
+        if (this._disabled !== newDisabledState) {
+            this._disabled = newDisabledState;
+            this._changeDetectorRef.markForCheck();
+        }
+    }
+
+    /**
+     * Value of the button
+     */
+    @Input()
+    value: string;
+
     /**
      * Additional HTML classes
      */
@@ -75,18 +106,16 @@ export class ButtonComponent extends BaseButton {
         return ['fn-button', this.fnType ? `fn-button--${this.fnType}` : '', this.class].filter((c) => !!c).join(' ');
     }
 
-    @HostBinding('attr.tabindex')
-    tabIndex = 0;
+    /** @hidden */
+    _selected: boolean;
 
     /** @hidden */
     constructor(
+        @Optional() @Inject(SelectComponentRootToken) private selectComponent: SelectComponentRootToken,
         private _elementRef: ElementRef,
-        private _changeDetectorRef: ChangeDetectorRef,
-        @Inject(FN_DISABLED) private _disabled$: DisabledBehavior,
-        @Inject(FN_READONLY) private _readonly$: ReadonlyBehavior
+        private _changeDetectorRef: ChangeDetectorRef
     ) {
         super();
-        merge(_disabled$, _readonly$).subscribe((v) => (this.tabIndex = v ? -1 : 0));
     }
 
     /** HasElementRef interface implementation
@@ -94,6 +123,19 @@ export class ButtonComponent extends BaseButton {
      */
     elementRef(): ElementRef<HTMLButtonElement | HTMLAnchorElement> {
         return this._elementRef;
+    }
+
+    /** @hidden */
+    setSelected(selected: boolean): void {
+        if (selected !== this._selected) {
+            this._selected = selected;
+            this._changeDetectorRef.markForCheck();
+        }
+    }
+
+    /** @hidden */
+    getSelected(): boolean {
+        return this._selected;
     }
 
     /** @hidden */

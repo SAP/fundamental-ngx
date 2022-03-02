@@ -3,16 +3,11 @@ import {
     ChangeDetectorRef,
     Directive,
     ElementRef,
-    EventEmitter,
     HostBinding,
-    HostListener,
     Inject,
     Input,
-    Optional,
-    Output
+    Optional
 } from '@angular/core';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { merge } from 'rxjs';
 import {
     DestroyedBehavior,
     DisabledBehavior,
@@ -23,6 +18,8 @@ import {
     SelectComponentRootToken,
     SelectionService
 } from '@fundamental-ngx/fn/cdk';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { merge } from 'rxjs';
 
 @Directive({
     selector: 'fn-list-item[selectable], [fn-list-item][selectable]',
@@ -65,9 +62,6 @@ export class SelectableItemDirective<ValueType> implements SelectableItemToken<V
         }
     }
 
-    @Output()
-    clicked = new EventEmitter();
-
     /** @hidden */
     private _selected = false;
     /** @hidden */
@@ -76,7 +70,7 @@ export class SelectableItemDirective<ValueType> implements SelectableItemToken<V
     /** @hidden */
     constructor(
         private _destroy$: DestroyedBehavior,
-        @Optional() @Inject(SelectComponentRootToken) private rootComponent: SelectComponentRootToken<ValueType>,
+        @Inject(SelectComponentRootToken) private rootComponent: SelectComponentRootToken<ValueType>,
         private _elementRef: ElementRef<HTMLElement>,
         private _changeDetectorRef: ChangeDetectorRef,
         private selectionService: SelectionService,
@@ -86,14 +80,6 @@ export class SelectableItemDirective<ValueType> implements SelectableItemToken<V
         if (!rootComponent) {
             throw new Error('Usage of selectable list item without [selectable] list is not supported');
         }
-    }
-
-    @HostListener('click', ['$event'])
-    @HostListener('keydown.enter', ['$event'])
-    @HostListener('keydown.space', ['$event'])
-    onClick($event: Event): void {
-        $event.preventDefault();
-        this.clicked.emit();
     }
 
     elementRef(): ElementRef<HTMLElement> {

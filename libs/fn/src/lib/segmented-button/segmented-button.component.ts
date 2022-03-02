@@ -5,7 +5,6 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChildren,
-    ElementRef,
     EventEmitter,
     forwardRef,
     Input,
@@ -15,18 +14,9 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { map, startWith, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { coerceBoolean } from '@fundamental-ngx/fn/utils';
-import {
-    DestroyedBehavior,
-    FocusableListService,
-    selectableItemToFocusableItem,
-    SelectableItemToken,
-    SelectComponentRootToken,
-    SelectionService,
-    setDisabledState
-} from '@fundamental-ngx/fn/cdk';
-import { takeUntil, tap } from 'rxjs/operators';
+import { SelectableItemToken, SelectComponentRootToken, SelectionService } from '@fundamental-ngx/fn/cdk';
 
 @Component({
     selector: 'fn-segmented-button',
@@ -36,7 +26,7 @@ import { takeUntil, tap } from 'rxjs/operators';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '[class.fn-segmented-button]': 'true',
+        class: 'fn-segmented-button',
         role: 'group',
         '[attr.aria-label]': 'label'
     },
@@ -50,13 +40,11 @@ import { takeUntil, tap } from 'rxjs/operators';
             provide: SelectComponentRootToken,
             useExisting: forwardRef(() => SegmentedButtonComponent)
         },
-        SelectionService,
-        FocusableListService,
-        DestroyedBehavior
+        SelectionService
     ]
 })
 export class SegmentedButtonComponent
-    implements SelectComponentRootToken<string>, ControlValueAccessor, AfterContentInit, OnDestroy
+    implements SelectComponentRootToken<string | string[]>, ControlValueAccessor, AfterContentInit, OnDestroy
 {
     /**
      * Allow multiple item selection
@@ -87,6 +75,13 @@ export class SegmentedButtonComponent
     }
 
     /**
+     * Input for disabling all child elements
+     */
+    @Input()
+    @coerceBoolean
+    disabled!: boolean;
+
+    /**
      * Event, notifying about selected elements change after data model has been updated
      */
     @Output()
@@ -108,13 +103,7 @@ export class SegmentedButtonComponent
     };
 
     /** @hidden */
-    constructor(
-        private _elementRef: ElementRef<HTMLElement>,
-        private selectionService: SelectionService,
-        private changeDetectorRef: ChangeDetectorRef,
-        private focusableListService: FocusableListService,
-        private _destroy$: DestroyedBehavior
-    ) {
+    constructor(private selectionService: SelectionService, private changeDetectorRef: ChangeDetectorRef) {
         this.selectionService.registerRootComponent(this);
     }
 
@@ -138,30 +127,17 @@ export class SegmentedButtonComponent
 
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
-        setDisabledState(this._elementRef, isDisabled);
+        this.disabled = isDisabled;
         this.changeDetectorRef.markForCheck();
     }
 
     /** @hidden */
     ngAfterContentInit(): void {
         this.selectionService.initialize(this.buttons);
-        this.buttons.changes
-            .pipe(
-                startWith(this.buttons),
-                map((itemsQuery) => itemsQuery.toArray()),
-                map((items: SelectableItemToken[]) => items.map(selectableItemToFocusableItem)),
-                tap((items) => this.focusableListService.initialize(items, { direction: 'horizontal' })),
-                takeUntil(this._destroy$)
-            )
-            .subscribe();
     }
 
     /** @hidden */
     ngOnDestroy(): void {
         this.destroy$.next();
-    }
-
-    elementRef(): ElementRef<HTMLElement> {
-        return this._elementRef;
     }
 }

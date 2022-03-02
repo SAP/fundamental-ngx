@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SegmentedButtonComponent } from '@fundamental-ngx/fn/segmented-button';
-import { Component, Directive, ElementRef, EventEmitter, HostListener, Input, ViewChild } from '@angular/core';
+import { Component, Directive, ElementRef, Input, ViewChild } from '@angular/core';
 import { SelectableItemToken } from '@fundamental-ngx/fn/cdk';
 
 @Directive({
@@ -11,16 +11,8 @@ import { SelectableItemToken } from '@fundamental-ngx/fn/cdk';
 class TestSelectionDirective implements SelectableItemToken<string> {
     @Input('fnTestSelection') value!: string;
     selected = false;
-    clicked = new EventEmitter();
 
     constructor(private _elementRef: ElementRef<HTMLElement>) {}
-
-    @HostListener('click')
-    @HostListener('keydown.enter')
-    @HostListener('keydown.space')
-    onClick(): void {
-        this.clicked.emit();
-    }
 
     elementRef(): ElementRef<HTMLElement> {
         return this._elementRef;
@@ -37,7 +29,7 @@ class TestSelectionDirective implements SelectableItemToken<string> {
 
 @Component({
     template: `
-        <fn-segmented-button [(selected)]="selectedItem" [multiple]="multiple" [toggle]="toggle">
+        <fn-segmented-button [(selected)]="selectedItem" [multiple]="multiple" [toggle]="toggle" [disabled]="disabled">
             <button fnTestSelection="value1" id="value1"></button>
             <button fnTestSelection="value2" id="value2"></button>
             <button fnTestSelection="value2" id="value2"></button>
@@ -49,6 +41,7 @@ class HostComponent {
     selectedItem: string | string[] = 'value1';
     multiple = false;
     toggle = false;
+    disabled = false;
 }
 
 describe('SegmentedButtonComponent', () => {
