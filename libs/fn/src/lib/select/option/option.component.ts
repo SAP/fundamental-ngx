@@ -20,6 +20,7 @@ import {
     templateUrl: './option.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    styleUrls: ['./option.component.scss'],
     host: {
         role: 'option',
         class: 'fn-select__item',

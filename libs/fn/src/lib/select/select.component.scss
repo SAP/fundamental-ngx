@@ -12,3 +12,17 @@
         border-bottom-width: 0.125rem;
     }
 }
+
+.fn-select__menu {
+    line-height: 1.5rem;
+    color: #223548;
+    margin-top: 0.3rem;
+    position: absolute;
+    z-index: 1000;
+    width: 100%;
+    list-style: none;
+    padding: 0.25rem;
+    background: #fff;
+    box-shadow: 0 0 2px #8396a829, 0 8px 16px #8396a829;
+    border-radius: 0.5rem;
+}
