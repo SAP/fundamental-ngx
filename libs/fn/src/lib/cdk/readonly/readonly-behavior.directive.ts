@@ -1,9 +1,9 @@
 import { Directive, ElementRef, Input, OnDestroy } from '@angular/core';
-import { FN_READONLY } from '../tokens/readonly';
+import { FN_READONLY } from './fn-readonly.token';
 import { ReplaySubject } from 'rxjs';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { takeUntil, tap } from 'rxjs/operators';
-import { ReadonlyBehavior } from '../interfaces/readonly-behavior.interface';
+import { ReadonlyBehavior } from './readonly-behavior.interface';
 import { setReadonlyState } from './set-readonly-state';
 import { ReadonlyObserver } from './readonly.observer';
 import { DestroyedBehavior } from '../common-behaviors/destroyed-behavior';

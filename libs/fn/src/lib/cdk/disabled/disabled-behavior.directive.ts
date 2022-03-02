@@ -1,11 +1,11 @@
 import { Directive, ElementRef, Input, OnDestroy } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { ReplaySubject } from 'rxjs';
-import { FN_DISABLED } from '../tokens/disabled';
-import { DisabledBehavior } from '../interfaces/disabled-behavior.interface';
-import { setDisabledState } from './set-disabled-state';
 import { takeUntil, tap } from 'rxjs/operators';
+import { ReplaySubject } from 'rxjs';
 import { DestroyedBehavior } from '../common-behaviors/destroyed-behavior';
+import { FN_DISABLED } from './fn-disabled.token';
+import { DisabledBehavior } from './disabled-behavior.interface';
+import { setDisabledState } from './set-disabled-state';
 import { DisabledObserver } from './disabled.observer';
 
 @Directive({
