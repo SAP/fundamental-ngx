@@ -18,8 +18,6 @@ import {
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 import { A, DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
-import { of } from 'rxjs';
-import { delay, takeUntil } from 'rxjs/operators';
 import equal from 'fast-deep-equal';
 
 import { DynamicComponentService, KeyUtil } from '@fundamental-ngx/core/utils';
@@ -65,7 +63,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     _selectedSuggestions: SelectableOptionItem[] = [];
 
     constructor(
-        readonly cd: ChangeDetectorRef,
+        cd: ChangeDetectorRef,
         readonly elementRef: ElementRef,
         @Optional() @Self() readonly ngControl: NgControl,
         @Optional() @SkipSelf() readonly ngForm: NgForm,
@@ -116,11 +114,18 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         item.selected = !item.selected;
 
         this._propagateChange();
+
+        if (!this._selectedSuggestions.length) {
+            this._focusToSearchField();
+        }
+
+        this._cd.detectChanges();
     }
 
     /** @hidden */
-    onOptionCheckboxClicked(event: Event): void {
+    onOptionCheckboxClicked(event: PointerEvent, index: number): void {
         event.stopPropagation();
+        this._onListElementClicked(event, index);
     }
 
     /** @hidden */
@@ -148,6 +153,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     handleSelectAllItems(select: boolean): void {
         this._flatSuggestions.forEach((item) => (item.selected = select));
         this._selectedSuggestions = select ? [...this._flatSuggestions] : [];
+        this._rangeSelector.reset();
 
         this._propagateChange();
     }
@@ -164,21 +170,11 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         if (event) {
             event.preventDefault();
         }
-
-        // NOTE: needs to prevent ExpressionChangedAfterItHasBeenCheckedError
-        of(true)
-            .pipe(takeUntil(this._destroyed), delay(1))
-            .subscribe(() => {
-                const idx = this._getTokenIndexByLabelOrValue(token);
-                this._selectedSuggestions.splice(idx, 1);
-                token.selected = false;
-
-                this._propagateChange(true);
-
-                if (!this._selectedSuggestions.length) {
-                    this._focusToSearchField();
-                }
-            });
+        const optionItem = this._suggestions.find((s) => s.value === token.value);
+        if (optionItem) {
+            this.toggleSelection(optionItem);
+            this._rangeSelector.reset();
+        }
     }
 
     /** @hidden */
@@ -191,7 +187,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
 
         this.showList(true);
         this.selectedShown$.next(true);
-        this.cd.markForCheck();
+        this._cd.markForCheck();
     }
 
     /** @hidden */
@@ -222,7 +218,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     }
 
     /** @hidden */
-    onItemKeyDownHandler(event: KeyboardEvent, index = 0): void {
+    onItemKeyDownHandler(event: KeyboardEvent, index: number): void {
         if (KeyUtil.isKeyCode(event, ESCAPE)) {
             this._focusToSearchField();
             this.close();
@@ -238,11 +234,49 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         } else if ((event.ctrlKey || event.metaKey) && KeyUtil.isKeyCode(event, A)) {
             event.preventDefault();
             this.handleSelectAllItems(true);
-        } else if (!KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
-            return;
-        } else if (KeyUtil.isKeyCode(event, ENTER) && !this.mobile) {
-            this.close();
+        } else if (KeyUtil.isKeyCode(event, ENTER)) {
+            if (!this.mobile) {
+                this.close();
+            }
+            this._rangeSelector.reset();
+        } else if (KeyUtil.isKeyCode(event, SPACE)) {
+            this._rangeSelector.reset();
         }
+    }
+
+    /** @hidden */
+    onOptionClicked(event: PointerEvent, index: number): void {
+        this._onListElementClicked(event, index);
+        this.close();
+    }
+
+    /**
+     * @hidden
+     * applying range selection. Note, that this function will be invoked after combobox item's value has been changed
+     */
+    private _onListElementClicked(event: PointerEvent, index: number): void {
+        // value has been changed at this point, so it can be safely used
+        const selectionState = this._suggestions[index].selected;
+        this._rangeSelector.onRangeElementToggled(index, event);
+        const toRemoveSet = new Set();
+        this._rangeSelector.applyValueToEachInRange((idx) => {
+            const current = this._suggestions[idx];
+            if (current.selected !== selectionState) {
+                if (current.selected) {
+                    // removing from "_selectedSuggestions" list
+                    toRemoveSet.add(current.value);
+                } else {
+                    // adding current item to "_selectedSuggestions"
+                    this._selectedSuggestions.push(current);
+                }
+                current.selected = selectionState;
+            }
+        });
+        this._selectedSuggestions = this._selectedSuggestions.filter((s) => !toRemoveSet.has(s.value));
+        // selected items should be displayed in the same order as options
+        const valueIndexes = new Map<any, number>(this._suggestions.map((s, i) => [s.value, i]));
+        this._selectedSuggestions.sort((a, b) => valueIndexes.get(a.value) - valueIndexes.get(b.value));
+        this._propagateChange();
     }
 
     /** @hidden Handle dialog dismissing, closes popover and sets backup data. */
