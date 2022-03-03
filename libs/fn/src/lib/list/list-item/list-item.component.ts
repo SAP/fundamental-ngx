@@ -13,9 +13,8 @@ import {
     BaseFocusableBehavior,
     canAssignAdditionalClasses,
     DestroyedBehavior,
-    FN_READONLY,
     FnDisabledProvider,
-    ReadonlyBehavior,
+    FnReadonlyProvider,
     SelectableItemToken,
     SelectionService
 } from '@fundamental-ngx/fn/cdk';
@@ -79,7 +78,7 @@ export class ListItemComponent extends mixinBaseListItem {
         @Inject(ListComponent) private listComponent: ListComponent,
         private _elementRef: ElementRef<HTMLElement>,
         disabled$: FnDisabledProvider,
-        @Optional() @Inject(FN_READONLY) readonly$: ReadonlyBehavior
+        readonly$: FnReadonlyProvider
     ) {
         super(disabled$, readonly$);
         this.focusable$

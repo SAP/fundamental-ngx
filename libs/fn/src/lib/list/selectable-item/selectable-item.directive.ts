@@ -2,10 +2,8 @@ import { AfterViewInit, ChangeDetectorRef, Directive, ElementRef, HostBinding, I
 import {
     ClickedObservable,
     DestroyedBehavior,
-    FN_READONLY,
     FnDisabledProvider,
     FnReadonlyProvider,
-    ReadonlyBehavior,
     SelectableItemToken,
     SelectComponentRootToken,
     SelectionService
@@ -71,7 +69,7 @@ export class SelectableItemDirective<ValueType> implements SelectableItemToken<V
         private _changeDetectorRef: ChangeDetectorRef,
         private selectionService: SelectionService,
         private disabled$: FnDisabledProvider,
-        @Inject(FN_READONLY) private readonly$: ReadonlyBehavior
+        private readonly$: FnReadonlyProvider
     ) {
         if (!rootComponent) {
             throw new Error('Usage of selectable list item without [selectable] list is not supported');
