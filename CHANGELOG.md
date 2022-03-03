@@ -1,4 +1,11 @@
 
+### 0.33.5-rc.29 (2022-03-03)
+
+
+### Features
+
+* **platform:** checkbox,checkbox-group - range selection & code enhancements ([#7785](https://github.com/SAP/fundamental-ngx/issues/7785)) ([28aa305](https://github.com/SAP/fundamental-ngx/commit/28aa305fee0bf5d37004f4d99c07b62c84503a17))
+
 ### 0.33.5-rc.28 (2022-03-03)
 
 ### 0.33.5-rc.27 (2022-03-02)
