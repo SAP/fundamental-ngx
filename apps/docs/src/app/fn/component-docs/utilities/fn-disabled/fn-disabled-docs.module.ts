@@ -5,7 +5,7 @@ import { SharedDocumentationPageModule } from '../../../../documentation/shared-
 import { API_FILES } from '../../../api-files';
 import { FnDisabledDocsComponent } from './fn-disabled-docs.component';
 import { DefaultExampleComponent } from './examples/default-example/default-example.component';
-import { DisabledBehaviorModule } from '@fundamental-ngx/fn/cdk';
+import { DisabledBehaviorModule, FocusableListModule } from '@fundamental-ngx/fn/cdk';
 import { FnDisabledHeaderComponent } from './fn-disabled-header/fn-disabled-header.component';
 
 const routes: Routes = [
@@ -23,7 +23,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, DisabledBehaviorModule],
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        DisabledBehaviorModule,
+        FocusableListModule
+    ],
     exports: [RouterModule],
     declarations: [FnDisabledHeaderComponent, FnDisabledDocsComponent, DefaultExampleComponent]
 })

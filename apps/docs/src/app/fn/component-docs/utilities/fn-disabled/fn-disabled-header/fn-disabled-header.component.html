@@ -1,7 +1,15 @@
 <header>Disabled directive</header>
 <description>
-    You can quickly build out selectable list collection for your components. For that you will need to use combination
-    of <code>[fnSelectableList]</code> and <code>[fnSelectableItem]</code>
+    <p>
+        When you apply <code>[fnDisabled]</code> directive to the element it will get effectively disabled. It will have
+        class <code>.is-disabled</code>, as well as attributes <code>disabled</code> and <code>aria-disabled</code>.
+    </p>
+    <p>
+        This directive is also provided via injection token <code>fnDisabled</code> through the DI tree, but also, most
+        importantly you can add <code>FnDisabledProvider</code> to your providers list and gain always available watcher
+        on disabled state, whether or not you apply <code>[fnDisabled]</code>
+        to your component.
+    </p>
 </description>
 <import module="DisabledBehaviorModule" subPackage="cdk"></import>
 
