@@ -54,13 +54,12 @@ export class ReadonlyBehaviorDirective
             .subscribe();
     }
 
+    setReadonlyState = (isReadonly: boolean): void => {
+        setReadonlyState(this._elementRef, isReadonly);
+    };
+
     ngAfterViewInit(): void {
-        this._readonlyInput$
-            .pipe(
-                tap((isReadonly) => setReadonlyState(this._elementRef, isReadonly)),
-                takeUntil(this._destroy$)
-            )
-            .subscribe();
+        this._readonlyInput$.pipe(tap(this.setReadonlyState), takeUntil(this._destroy$)).subscribe();
     }
 
     ngOnDestroy(): void {
