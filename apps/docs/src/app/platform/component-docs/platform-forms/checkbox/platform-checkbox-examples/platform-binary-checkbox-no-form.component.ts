@@ -9,10 +9,4 @@ export class PlatformChekboxNoFormComponent {
     cygnus = false;
     lyra = true;
     gemini = false;
-
-    public checkedChangeFunction(): void {}
-
-    public indeterminateChangeFunction(): void {}
-
-    public changeFunction(): void {}
 }
