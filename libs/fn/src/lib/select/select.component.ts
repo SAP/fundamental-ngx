@@ -35,7 +35,7 @@ export type InputState = 'positive' | 'critical' | 'negative' | 'info';
             multi: true
         }
     ],
-    encapsulation: ViewEncapsulation.Emulated,
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectComponent implements AfterContentInit, OnDestroy, ControlValueAccessor {
