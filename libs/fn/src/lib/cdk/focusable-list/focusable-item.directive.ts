@@ -1,9 +1,9 @@
-import { Directive, ElementRef, HostBinding, Inject, Input } from '@angular/core';
+import { Directive, ElementRef, Inject, Input } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ReplaySubject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
 import { DisabledBehavior, FN_DISABLED, FnDisabledProvider } from '../disabled';
-import { FN_READONLY, ReadonlyBehavior, FnReadonlyProvider } from '../readonly';
+import { FN_READONLY, FnReadonlyProvider, ReadonlyBehavior } from '../readonly';
 import { FN_FOCUSABLE } from './focusable.tokens';
 import { BaseFocusableBehavior } from '../common-behaviors/base-focusable-behavior';
 import { DestroyedBehavior } from '../common-behaviors/destroyed-behavior';
@@ -24,19 +24,16 @@ import { HasElementRef } from '../HasElementRef';
 export class FocusableItemDirective extends ReplaySubject<boolean> implements HasElementRef {
     @Input()
     set fnFocusable(val: BooleanInput) {
-        const isFocusable = coerceBooleanProperty(val);
-        if (isFocusable !== this.baseFocusableInstance.focusable) {
-            this.baseFocusableInstance.focusable = isFocusable;
-            this.next(isFocusable);
-        }
+        this.baseFocusableInstance.focusable = coerceBooleanProperty(val);
     }
 
     get fnFocusable(): boolean {
         return this.baseFocusableInstance.focusable;
     }
 
-    @HostBinding('attr.tabindex')
-    tabIndex = 0;
+    set tabIndex(value: number) {
+        this._elementRef.nativeElement.setAttribute('tabindex', value + '');
+    }
 
     private baseFocusableInstance: BaseFocusableBehavior;
 
@@ -47,10 +44,17 @@ export class FocusableItemDirective extends ReplaySubject<boolean> implements Ha
         private _elementRef: ElementRef<HTMLElement>
     ) {
         super(1);
+        this.tabIndex = 0;
         this.baseFocusableInstance = new BaseFocusableBehavior(disabled$, readonly$);
-        this.baseFocusableInstance.focusable$.pipe(takeUntil(destroy$)).subscribe((isFocusable) => {
-            this.tabIndex = isFocusable ? 0 : -1;
-        });
+        this.baseFocusableInstance.focusable$
+            .pipe(
+                tap((isFocusable) => this.next(isFocusable)),
+                tap((isFocusable) => {
+                    this.tabIndex = isFocusable ? 0 : -1;
+                }),
+                takeUntil(destroy$)
+            )
+            .subscribe();
         destroy$.subscribe(() => this.complete());
     }
 

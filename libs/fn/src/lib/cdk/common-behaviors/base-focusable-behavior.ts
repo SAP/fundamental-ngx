@@ -1,5 +1,5 @@
 import { merge, Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 import { DisabledBehavior } from '../disabled/disabled-behavior.interface';
 import { ReadonlyBehavior } from '../readonly/readonly-behavior.interface';
 
@@ -28,6 +28,9 @@ export class BaseFocusableBehavior {
         if (readonly$) {
             events$.push(readonly$);
         }
-        this.focusable$ = merge(...events$).pipe(map(() => this.focusable));
+        this.focusable$ = merge(...events$).pipe(
+            map(() => this.focusable),
+            distinctUntilChanged()
+        );
     }
 }
