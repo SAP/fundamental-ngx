@@ -48,15 +48,14 @@ let cdkPopoverUniqueId = 0;
 @Component({
     selector: 'fd-popover',
     templateUrl: './popover.component.html',
-    styleUrls: ['./popover.component.scss'],
-    host: {
-        '[class.fd-popover-custom]': 'true',
-        '[class.fd-popover-custom--mobile]': 'mobile',
-        '[attr.id]': 'id'
-    },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [PopoverService]
+    providers: [PopoverService],
+    host: {
+        class: 'fd-popover-custom',
+        '[class.fd-popover-custom--mobile]': 'mobile',
+        '[attr.id]': 'id'
+    }
 })
 export class PopoverComponent
     extends BasePopoverClass
