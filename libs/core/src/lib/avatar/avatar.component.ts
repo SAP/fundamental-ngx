@@ -3,10 +3,13 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
+    EventEmitter,
     HostBinding,
+    HostListener,
     Input,
     OnChanges,
     OnInit,
+    Output,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
@@ -29,13 +32,14 @@ const ALTER_ICON_OPTIONS = {
 };
 
 @Component({
-    // TODO to be discussed
-    // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'fd-avatar',
     templateUrl: './avatar.component.html',
     styleUrls: ['./avatar.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        '[attr.tabindex]': '_tabindex'
+    }
 })
 export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom classes */
@@ -73,29 +77,32 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     /** The glyph name for zoom icon. */
     @Input() zoomGlyph: string = null;
 
-    /** Whether or not to apply a circle style to the Avatar. */
+    /** Whether to apply a circle style to the Avatar. */
     @Input() circle = false;
 
-    /** Whether or not to apply a transparent style to the Avatar. */
+    /** Whether to apply a transparent style to the Avatar. */
     @Input() transparent = false;
 
-    /** Whether or not to apply background size contain style to the Avatar */
+    /** Whether to apply background size contain style to the Avatar */
     @Input() contain = false;
 
-    /** Whether or not to apply a placeholder background style to the Avatar. */
+    /** Whether to apply a placeholder background style to the Avatar. */
     @Input() placeholder = false;
 
-    /** Whether or not to apply a tile background style to the Avatar. */
+    /** Whether to apply a tile background style to the Avatar. */
     @Input() tile = false;
 
-    /** Whether or not to apply a border to the Avatar. */
+    /** Whether to apply a border to the Avatar. */
     @Input() border = false;
 
     /** A number from 1 to 10 representing the background color of the Avatar. */
     @Input() colorAccent: ColorAccent = null;
 
-    /** Whether or not to apply random background color to the Avatar. */
+    /** Whether to apply random background color to the Avatar. */
     @Input() random = false;
+
+    /** Whether component should be focusable & clicable */
+    @Input() clickable = false;
 
     /**
      * @deprecated
@@ -116,6 +123,10 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
         return this._image;
     }
 
+    /** Backup options to use when image hasn't been loaded successfully.
+     * Options separated with "|" symbol.
+     * Possible options: content, alt, backup, default-icon
+     */
     @Input()
     set alterIcon(value: string) {
         this._alterIcon = value;
@@ -124,6 +135,9 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
         return this._alterIcon;
     }
 
+    /** Backup image to load when image hasn't been loaded successfully.
+     * Only applicable when using alterIcon input property.
+     */
     @Input()
     set backupImage(value: string) {
         this._backupImage = value;
@@ -131,6 +145,12 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     get backupImage(): string {
         return this._backupImage;
     }
+
+    /** Event emitted when avatar clicked. Only fires if clickable input property set to true. */
+    @Output() avatarClicked = new EventEmitter<void>();
+
+    /** Event emitted when zoom icon clicked. Only fires if zoomGlyph input property is set. */
+    @Output() zoomGlyphClicked = new EventEmitter<void>();
 
     /** @hidden */
     @HostBinding('style.background-image')
@@ -167,6 +187,11 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
 
     /** @hidden */
     private _bgImage: string = null;
+
+    /** @hidden */
+    get _tabindex(): number {
+        return this.clickable ? 0 : null;
+    }
 
     /** If a default placeholder should be displayed */
     get showDefault(): boolean {
@@ -212,6 +237,16 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
         return this._elementRef;
     }
 
+    /** @hidden */
+    @HostListener('click')
+    @HostListener('keyup.enter')
+    @HostListener('keyup.space')
+    _onClick(): void {
+        if (this.clickable) {
+            this.avatarClicked.emit();
+        }
+    }
+
     /** @hidden Get an abbreviate from the label or return null if not fit requirements */
     private _getAbbreviate(label: string): string | null {
         if (!label || this._image) {
@@ -221,7 +256,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
         return this._generateAbbreviation(label);
     }
 
-    /** @hidden Get the abbrevation string */
+    /** @hidden Get the abbreviation string */
     private _generateAbbreviation(label: string): string | null {
         const maxLettersCount = 3;
         const firstLetters = label.split(' ').map((word) => word.charAt(0));
@@ -263,59 +298,61 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     private _onErrorCallback(): void {
         if (!this._alterIcon) {
             this._showDefaultIcon();
-        } else {
-            const options = this._alterIcon.split('|');
-            for (let i = 0; i < options.length; i++) {
-                const option = options[i];
+            this._cdr.detectChanges();
+            return;
+        }
 
-                if (option === ALTER_ICON_OPTIONS.CONTENT) {
-                    const contentValue = this._content.nativeElement.innerText;
-                    if (contentValue && contentValue !== '') {
-                        this.abbreviate = this._generateAbbreviation(contentValue);
-                        break;
-                    }
+        const options = this._alterIcon.split('|');
+        for (let i = 0; i < options.length; i++) {
+            const option = options[i];
 
-                    continue;
-                }
-
-                if (option === ALTER_ICON_OPTIONS.ALT) {
-                    const altValue = this.elementRef().nativeElement.getAttribute('alt');
-                    if (altValue && altValue !== '') {
-                        this.abbreviate = this._generateAbbreviation(altValue);
-                        break;
-                    }
-
-                    continue;
-                }
-
-                if (option === ALTER_ICON_OPTIONS.BACKUP) {
-                    if (this._backupImage && this._backupImage !== '') {
-                        // Check if backupImage can be loaded successfully
-                        // If not, set default user icon
-                        this._verifyImageUrl(
-                            this._backupImage,
-                            () => {
-                                this._assignBgImage(this._backupImage);
-                                this._cdr.detectChanges();
-                            },
-                            () => {
-                                this._showDefaultIcon();
-                                this._cdr.detectChanges();
-                            }
-                        );
-                        break;
-                    }
-
-                    continue;
-                }
-
-                if (option === ALTER_ICON_OPTIONS.DEFAULT_ICON) {
-                    this._showDefaultIcon();
+            if (option === ALTER_ICON_OPTIONS.CONTENT) {
+                const contentValue = this._content.nativeElement.innerText;
+                if (contentValue) {
+                    this.abbreviate = this._generateAbbreviation(contentValue);
                     break;
                 }
 
-                this._showDefaultIcon();
+                continue;
             }
+
+            if (option === ALTER_ICON_OPTIONS.ALT) {
+                const altValue = this.elementRef().nativeElement.getAttribute('alt');
+                if (altValue) {
+                    this.abbreviate = this._generateAbbreviation(altValue);
+                    break;
+                }
+
+                continue;
+            }
+
+            if (option === ALTER_ICON_OPTIONS.BACKUP) {
+                if (this._backupImage && this._backupImage !== '') {
+                    // Check if backupImage can be loaded successfully
+                    // If not, set default user icon
+                    this._verifyImageUrl(
+                        this._backupImage,
+                        () => {
+                            this._assignBgImage(this._backupImage);
+                            this._cdr.detectChanges();
+                        },
+                        () => {
+                            this._showDefaultIcon();
+                            this._cdr.detectChanges();
+                        }
+                    );
+                    break;
+                }
+
+                continue;
+            }
+
+            if (option === ALTER_ICON_OPTIONS.DEFAULT_ICON) {
+                this._showDefaultIcon();
+                break;
+            }
+
+            this._showDefaultIcon();
         }
 
         this._cdr.detectChanges();
