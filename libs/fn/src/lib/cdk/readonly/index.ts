@@ -5,3 +5,5 @@ export * from './readonly-behavior.interface';
 export * from './readonly.observer';
 export * from './fn-readonly.token';
 export * from './fn-readonly.provider';
+export * from './default-readonly-view-modifier';
+export * from './readonly-view-modifier.interface';

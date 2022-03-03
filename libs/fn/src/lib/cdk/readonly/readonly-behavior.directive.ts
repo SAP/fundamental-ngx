@@ -2,7 +2,7 @@ import { AfterViewInit, Directive, ElementRef, Input, OnDestroy } from '@angular
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { takeUntil, tap } from 'rxjs/operators';
-import { fnReadonly } from './fn-readonly.token';
+import { FN_READONLY_DIRECTIVE } from './fn-readonly.token';
 import { ReadonlyBehavior } from './readonly-behavior.interface';
 import { setReadonlyState } from './set-readonly-state';
 import { ReadonlyObserver } from './readonly.observer';
@@ -12,7 +12,7 @@ import { DestroyedBehavior } from '../common-behaviors/destroyed-behavior';
     selector: '[fnReadonly]',
     providers: [
         {
-            provide: fnReadonly,
+            provide: FN_READONLY_DIRECTIVE,
             useExisting: ReadonlyBehaviorDirective
         },
         DestroyedBehavior

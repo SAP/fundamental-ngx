@@ -1,46 +1,75 @@
-import { Directive, ElementRef, OnDestroy, Optional, Provider } from '@angular/core';
-import { FN_READONLY, fnReadonly } from './fn-readonly.token';
+import { ElementRef, Inject, Injectable, NgZone, OnDestroy, Optional, Self, SkipSelf } from '@angular/core';
+import { BehaviorSubject, combineLatest, filter, firstValueFrom, Observable, ReplaySubject, Subject } from 'rxjs';
+import { map, startWith, takeUntil, tap } from 'rxjs/operators';
 import { ReadonlyObserver } from './readonly.observer';
 import { ReadonlyBehavior } from './readonly-behavior.interface';
-import { filter, ReplaySubject, Subject } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
+import { DefaultReadonlyViewModifier } from './default-readonly-view-modifier';
+import { ReadonlyViewModifier } from './readonly-view-modifier.interface';
+import { FN_READONLY_DIRECTIVE } from './fn-readonly.token';
 
-export const FnReadonlyProvider: Provider = {
-    provide: FN_READONLY,
-    useFactory: (
-        elementRef: ElementRef<Element>,
-        readonlyObserver: ReadonlyObserver,
-        readonly$: ReadonlyBehavior
-    ): ReadonlyBehavior => {
-        if (readonly$) {
-            return readonly$;
+@Injectable()
+export class FnReadonlyProvider extends ReplaySubject<boolean> implements ReadonlyBehavior, OnDestroy {
+    fnReadonly = false;
+    private _destroy$ = new Subject<void>();
+    private _viewModifiers$: BehaviorSubject<ReadonlyViewModifier[]> = new BehaviorSubject<ReadonlyViewModifier[]>(
+        this._getInitialViewModifiers()
+    );
+    private _readonlyChange$: Observable<boolean> = this._getReadonlyChange$();
+
+    constructor(
+        private ngZone: NgZone,
+        private elementRef: ElementRef<Element>,
+        private readonlyObserver: ReadonlyObserver,
+        @Optional() @Self() @Inject(FN_READONLY_DIRECTIVE) private selfReadonly$: ReadonlyBehavior,
+        @Optional() @SkipSelf() @Inject(FN_READONLY_DIRECTIVE) private parentReadonly$: ReadonlyBehavior
+    ) {
+        super(1);
+        combineLatest([this._readonlyChange$, this._viewModifiers$])
+            .pipe(
+                tap(([isReadonly]) => this.setReadonlyState(isReadonly)),
+                takeUntil(this._destroy$)
+            )
+            .subscribe();
+        this._readonlyChange$
+            .pipe(
+                tap((isDisabled) => (this.fnReadonly = isDisabled)),
+                tap((isDisabled) => this.next(isDisabled)),
+                takeUntil(this._destroy$)
+            )
+            .subscribe();
+    }
+
+    addViewModifier(modifier: ReadonlyViewModifier): void {
+        const viewModifiers = [...new Set([...this._viewModifiers$.value, modifier]).values()];
+        this._viewModifiers$.next(viewModifiers);
+    }
+
+    setReadonlyState(isReadonly: boolean): void {
+        firstValueFrom(this.ngZone.onStable).then(() => {
+            this._viewModifiers$.value.forEach((viewModifier) => viewModifier.setReadonlyState(isReadonly));
+        });
+    }
+
+    ngOnDestroy(): void {
+        this.complete();
+        this._destroy$.next();
+    }
+
+    private _getReadonlyChange$(): Observable<boolean> {
+        const self$ = (this.selfReadonly$ || this.readonlyObserver.observe(this.elementRef)).pipe(
+            startWith(this.fnReadonly)
+        );
+        const disablingEvents: Observable<boolean>[] = [self$];
+        if (this.parentReadonly$) {
+            disablingEvents.push(this.parentReadonly$);
         }
+        return combineLatest(disablingEvents).pipe(
+            map((readonlyStates: boolean[]) => readonlyStates.some(Boolean)),
+            filter((isReadonly) => isReadonly !== this.fnReadonly)
+        );
+    }
 
-        @Directive()
-        class LocalReadonlyObserver extends ReplaySubject<boolean> implements ReadonlyBehavior, OnDestroy {
-            fnReadonly = false;
-            private _destroy$ = new Subject<void>();
-
-            constructor() {
-                super(1);
-                readonlyObserver
-                    .observe(elementRef)
-                    .pipe(
-                        filter((isReadonly) => isReadonly !== this.fnReadonly),
-                        tap((isReadonly) => (this.fnReadonly = isReadonly)),
-                        tap((isReadonly) => this.next(isReadonly)),
-                        takeUntil(this._destroy$)
-                    )
-                    .subscribe();
-            }
-
-            ngOnDestroy(): void {
-                this.complete();
-                this._destroy$.next();
-            }
-        }
-
-        return new LocalReadonlyObserver();
-    },
-    deps: [ElementRef, ReadonlyObserver, [new Optional(), fnReadonly]]
-};
+    private _getInitialViewModifiers(): ReadonlyViewModifier[] {
+        return !this.selfReadonly$ ? [new DefaultReadonlyViewModifier(this.elementRef)] : [this.selfReadonly$];
+    }
+}
