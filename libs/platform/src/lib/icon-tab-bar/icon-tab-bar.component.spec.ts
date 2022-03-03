@@ -155,22 +155,27 @@ describe('IconTabBarComponent', () => {
 
 // eslint-disable-next-line max-len
 function emulateDnD(draggableItem: HTMLElement, targetCoords: { clientX: number; clientY: number }): void {
-    const mousedown = new MouseEvent('mousedown');
+    const mousedown = createFakeMouseEvent('mousedown');
     draggableItem.dispatchEvent(mousedown);
     fixture.detectChanges();
 
     // Need to move two times because cdk skip first moving
-    const firstMove = new MouseEvent('mousemove', {
+    const firstMove = createFakeMouseEvent('mousemove', {
         clientX: targetCoords.clientX - 50,
         clientY: targetCoords.clientY - 50
     });
     draggableItem.dispatchEvent(firstMove);
     fixture.detectChanges();
-    const finalMove = new MouseEvent('mousemove', targetCoords);
+    const finalMove = createFakeMouseEvent('mousemove', targetCoords);
     draggableItem.dispatchEvent(finalMove);
     fixture.detectChanges();
 
-    const mouseup = new MouseEvent('mouseup');
+    const mouseup = createFakeMouseEvent('mouseup');
     draggableItem.dispatchEvent(mouseup);
     fixture.detectChanges();
+}
+
+/** CDK validates events by checking "offsetX", "offsetY" and "buttons" params to not equal to "0" */
+function createFakeMouseEvent(type: string, eventInitDict?: MouseEventInit): MouseEvent {
+    return new MouseEvent(type, { buttons: 1, ...eventInitDict });
 }
