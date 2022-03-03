@@ -52,6 +52,10 @@ export const utilities: SectionInterfaceContent[] = [
     {
         url: 'fn/focusable-list',
         name: 'Focusable List'
+    },
+    {
+        url: 'fn/disabled',
+        name: 'Disabled'
     }
 ];
 

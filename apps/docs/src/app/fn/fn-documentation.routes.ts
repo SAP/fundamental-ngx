@@ -111,6 +111,13 @@ export const ROUTES: Routes = [
                     import('./component-docs/utilities/focusable-list/focusable-list-docs.module').then(
                         (m) => m.FocusableListDocsModule
                     )
+            },
+            {
+                path: 'disabled',
+                loadChildren: () =>
+                    import('./component-docs/utilities/fn-disabled/fn-disabled-docs.module').then(
+                        (m) => m.FnDisabledDocsModule
+                    )
             }
         ]
     }
