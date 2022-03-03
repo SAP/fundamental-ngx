@@ -133,7 +133,7 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
         } else if (
             !this.opened &&
             document.activeElement === this.selectInput.nativeElement &&
-            KeyUtil.isKeyCode(event, SPACE)
+            (KeyUtil.isKeyCode(event, SPACE) || KeyUtil.isKeyCode(event, ENTER))
         ) {
             event.preventDefault();
             this.opened = true;
