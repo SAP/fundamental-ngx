@@ -1,8 +1,10 @@
 <h4>Positive state</h4>
 <div style="width: 200px">
-    <fn-select placeholder="Select an option" label="Standard Selector" state="positive" #selectSemanticPositive>
-        <li fn-option *ngFor="let option of options" [value]="option">{{ option }}</li>
-    </fn-select>
+    <form>
+        <fn-select placeholder="Select an option" label="Standard Selector" state="positive" #selectSemanticPositive>
+            <li fn-option *ngFor="let option of options" [value]="option">{{ option }}</li>
+        </fn-select>
+    </form>
 </div>
 <p>
     <i>positive selection: {{ selectSemanticPositive.value }}</i>
@@ -11,9 +13,11 @@
 <br />
 <h4>Critical state</h4>
 <div style="width: 200px">
-    <fn-select placeholder="Select an option" label="Standard Selector" state="critical" #selectSemanticCritical>
-        <li fn-option *ngFor="let option of options" [value]="option">{{ option }}</li>
-    </fn-select>
+    <form>
+        <fn-select placeholder="Select an option" label="Standard Selector" state="critical" #selectSemanticCritical>
+            <li fn-option *ngFor="let option of options" [value]="option">{{ option }}</li>
+        </fn-select>
+    </form>
 </div>
 <p>
     <i>critical selection: {{ selectSemanticCritical.value }}</i>
@@ -22,9 +26,11 @@
 <br />
 <h4>Negative state</h4>
 <div style="width: 200px">
-    <fn-select placeholder="Select an option" label="Standard Selector" state="negative" #selectSemanticNegative>
-        <li fn-option *ngFor="let option of options" [value]="option">{{ option }}</li>
-    </fn-select>
+    <form>
+        <fn-select placeholder="Select an option" label="Standard Selector" state="negative" #selectSemanticNegative>
+            <li fn-option *ngFor="let option of options" [value]="option">{{ option }}</li>
+        </fn-select>
+    </form>
 </div>
 <p>
     <i>negative selection: {{ selectSemanticNegative.value }}</i>
@@ -33,9 +39,11 @@
 <br />
 <h4>Info state</h4>
 <div style="width: 200px">
-    <fn-select placeholder="Select an option" label="Standard Selector" state="info" #selectSemanticInfo>
-        <li fn-option *ngFor="let option of options" [value]="option">{{ option }}</li>
-    </fn-select>
+    <form>
+        <fn-select placeholder="Select an option" label="Standard Selector" state="info" #selectSemanticInfo>
+            <li fn-option *ngFor="let option of options" [value]="option">{{ option }}</li>
+        </fn-select>
+    </form>
 </div>
 <p>
     <i>info selection: {{ selectSemanticInfo.value }}</i>

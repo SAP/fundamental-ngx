@@ -1,13 +1,15 @@
 <div style="width: 200px">
-    <fn-select
-        [editable]="true"
-        placeholder="Select an option"
-        state="positive"
-        label="Editable Selector"
-        #selectEditableExample
-    >
-        <li fn-option *ngFor="let option of options" [value]="option">{{ option }}</li>
-    </fn-select>
+    <form>
+        <fn-select
+            [editable]="true"
+            placeholder="Select an option"
+            state="positive"
+            label="Editable Selector"
+            #selectEditableExample
+        >
+            <li fn-option *ngFor="let option of options" [value]="option">{{ option }}</li>
+        </fn-select>
+    </form>
 </div>
 <br />
 
