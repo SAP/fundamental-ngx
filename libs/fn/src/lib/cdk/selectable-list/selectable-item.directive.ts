@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Directive, ElementRef, Inject, Input, Optional, Outp
 import { merge, Observable } from 'rxjs';
 import { SelectableItemToken } from './selectable-item.token';
 import { FN_SELECTABLE_ITEM_PROVIDER } from './selectable-list.tokens';
-import { DisabledBehavior, FN_DISABLED, FnDisabledProvider } from '../disabled';
+import { FnDisabledProvider } from '../disabled';
 import { FN_READONLY, FnReadonlyProvider, ReadonlyBehavior } from '../readonly';
 import { SelectionService } from './selection.service';
 import { ClickedObservable } from '../clicked';
@@ -48,7 +48,7 @@ export class SelectableItemDirective<ValueType = any> implements SelectableItemT
 
     constructor(
         @Optional() @Inject(FN_SELECTABLE_ITEM_PROVIDER) private provider: Partial<SelectableItemToken<ValueType>>,
-        @Inject(FN_DISABLED) private disabled$: DisabledBehavior,
+        private disabled$: FnDisabledProvider,
         @Inject(FN_READONLY) private readonly$: ReadonlyBehavior,
         private selectionService: SelectionService,
         private _elementRef: ElementRef<HTMLElement>,

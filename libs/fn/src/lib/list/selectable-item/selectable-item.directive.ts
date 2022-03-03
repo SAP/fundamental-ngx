@@ -2,8 +2,6 @@ import { AfterViewInit, ChangeDetectorRef, Directive, ElementRef, HostBinding, I
 import {
     ClickedObservable,
     DestroyedBehavior,
-    DisabledBehavior,
-    FN_DISABLED,
     FN_READONLY,
     FnDisabledProvider,
     FnReadonlyProvider,
@@ -72,7 +70,7 @@ export class SelectableItemDirective<ValueType> implements SelectableItemToken<V
         private _elementRef: ElementRef<HTMLElement>,
         private _changeDetectorRef: ChangeDetectorRef,
         private selectionService: SelectionService,
-        @Inject(FN_DISABLED) private disabled$: DisabledBehavior,
+        private disabled$: FnDisabledProvider,
         @Inject(FN_READONLY) private readonly$: ReadonlyBehavior
     ) {
         if (!rootComponent) {

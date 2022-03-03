@@ -13,9 +13,8 @@ import {
     BaseFocusableBehavior,
     canAssignAdditionalClasses,
     DestroyedBehavior,
-    DisabledBehavior,
-    FN_DISABLED,
     FN_READONLY,
+    FnDisabledProvider,
     ReadonlyBehavior,
     SelectableItemToken,
     SelectionService
@@ -44,7 +43,7 @@ const mixinBaseListItem = canAssignAdditionalClasses(BaseFocusableBehavior);
     host: {
         '[class.fn-list__item]': 'true'
     },
-    providers: [DestroyedBehavior]
+    providers: [DestroyedBehavior, FnDisabledProvider]
 })
 export class ListItemComponent extends mixinBaseListItem {
     @Input()
@@ -79,7 +78,7 @@ export class ListItemComponent extends mixinBaseListItem {
         @Optional() @Inject(SelectableItemToken) private selectableItem: SelectableItemToken,
         @Inject(ListComponent) private listComponent: ListComponent,
         private _elementRef: ElementRef<HTMLElement>,
-        @Optional() @Inject(FN_DISABLED) disabled$: DisabledBehavior,
+        disabled$: FnDisabledProvider,
         @Optional() @Inject(FN_READONLY) readonly$: ReadonlyBehavior
     ) {
         super(disabled$, readonly$);

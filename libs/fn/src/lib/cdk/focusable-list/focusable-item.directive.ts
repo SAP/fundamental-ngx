@@ -2,7 +2,7 @@ import { Directive, ElementRef, Inject, Input } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ReplaySubject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
-import { DisabledBehavior, FN_DISABLED, FnDisabledProvider } from '../disabled';
+import { FnDisabledProvider } from '../disabled';
 import { FN_READONLY, FnReadonlyProvider, ReadonlyBehavior } from '../readonly';
 import { FN_FOCUSABLE } from './focusable.tokens';
 import { BaseFocusableBehavior } from '../common-behaviors/base-focusable-behavior';
@@ -39,7 +39,7 @@ export class FocusableItemDirective extends ReplaySubject<boolean> implements Ha
 
     constructor(
         destroy$: DestroyedBehavior,
-        @Inject(FN_DISABLED) disabled$: DisabledBehavior,
+        disabled$: FnDisabledProvider,
         @Inject(FN_READONLY) readonly$: ReadonlyBehavior,
         private _elementRef: ElementRef<HTMLElement>
     ) {
