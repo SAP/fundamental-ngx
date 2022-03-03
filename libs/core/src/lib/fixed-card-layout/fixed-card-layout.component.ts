@@ -22,7 +22,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { FocusKeyManager } from '@angular/cdk/a11y';
-import { CdkDragDrop, CdkDropList } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, CdkDragEnter, CdkDragSortEvent, CdkDropList } from '@angular/cdk/drag-drop';
 import { Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
@@ -156,6 +156,9 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     /** @hidden first number is the CardDefinition rank, i.e. id */
     _singleItemColumns = new Set<number>();
 
+    /** @hidden */
+    _isPlaceholderAboveCard = false;
+
     /** @hidden Return available width for fixed card layout */
     get _availableWidth(): number {
         return this._layout.nativeElement.getBoundingClientRect().width;
@@ -273,6 +276,14 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     /** @hidden */
     _onDropListExited(): void {
         this._shouldCalculateContainerHeight = true;
+    }
+
+    /** @hidden */
+    _onDropListSorted(event: CdkDragSortEvent | CdkDragEnter): void {
+        // Every card is the drag'n'drop container and always has only one item
+        // If card moved into the container above the card, placeholder should have margin bottom
+        // Otherwise placeholder should have margin top
+        this._isPlaceholderAboveCard = event.currentIndex === 0;
     }
 
     /** @hidden */
