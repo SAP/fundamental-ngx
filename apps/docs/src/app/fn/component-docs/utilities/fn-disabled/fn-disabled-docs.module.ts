@@ -7,6 +7,7 @@ import { FnDisabledDocsComponent } from './fn-disabled-docs.component';
 import { DefaultExampleComponent } from './examples/default-example/default-example.component';
 import { DisabledBehaviorModule, FocusableListModule } from '@fundamental-ngx/fn/cdk';
 import { FnDisabledHeaderComponent } from './fn-disabled-header/fn-disabled-header.component';
+import { DiExampleComponent, FnDisabledRecipientDirective } from './examples/di-example/di-example.component';
 
 const routes: Routes = [
     {
@@ -30,6 +31,12 @@ const routes: Routes = [
         FocusableListModule
     ],
     exports: [RouterModule],
-    declarations: [FnDisabledHeaderComponent, FnDisabledDocsComponent, DefaultExampleComponent]
+    declarations: [
+        FnDisabledHeaderComponent,
+        FnDisabledDocsComponent,
+        DefaultExampleComponent,
+        DiExampleComponent,
+        FnDisabledRecipientDirective
+    ]
 })
 export class FnDisabledDocsModule {}

@@ -6,13 +6,14 @@ import { DestroyedBehavior } from '../common-behaviors/destroyed-behavior';
 import { DisabledBehavior } from './disabled-behavior.interface';
 import { setDisabledState } from './set-disabled-state';
 import { DisabledObserver } from './disabled.observer';
-import { fnDisabled } from './fn-disabled.token';
+import { FN_DISABLED_DIRECTIVE } from './fn-disabled.token';
+import { DisabledViewModifier } from './disabled-view-modifier.interface';
 
 @Directive({
     selector: '[fnDisabled]',
     providers: [
         {
-            provide: fnDisabled,
+            provide: FN_DISABLED_DIRECTIVE,
             useExisting: DisabledBehaviorDirective
         },
         DestroyedBehavior
@@ -20,7 +21,7 @@ import { fnDisabled } from './fn-disabled.token';
 })
 export class DisabledBehaviorDirective
     extends ReplaySubject<boolean>
-    implements OnDestroy, AfterViewInit, DisabledBehavior
+    implements OnDestroy, AfterViewInit, DisabledBehavior, DisabledViewModifier
 {
     @Input()
     set fnDisabled(value: BooleanInput) {
@@ -54,13 +55,12 @@ export class DisabledBehaviorDirective
             .subscribe();
     }
 
+    setDisabledState = (isDisabled: boolean): void => {
+        setDisabledState(this._elementRef, isDisabled);
+    };
+
     ngAfterViewInit(): void {
-        this._fnDisableInput$
-            .pipe(
-                tap((isDisabled) => setDisabledState(this._elementRef, isDisabled)),
-                takeUntil(this._destroy$)
-            )
-            .subscribe();
+        this._fnDisableInput$.pipe(tap(this.setDisabledState), takeUntil(this._destroy$)).subscribe();
     }
 
     ngOnDestroy(): void {

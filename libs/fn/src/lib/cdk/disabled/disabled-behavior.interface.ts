@@ -1,5 +1,8 @@
 import { Observable } from 'rxjs';
+import { DisabledViewModifier } from './disabled-view-modifier.interface';
 
-export type DisabledBehavior = {
+type Base = Observable<boolean> & DisabledViewModifier;
+
+export interface DisabledBehavior extends Base {
     fnDisabled: boolean;
-} & Observable<boolean>;
+}
