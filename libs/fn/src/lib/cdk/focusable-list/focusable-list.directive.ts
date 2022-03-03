@@ -1,7 +1,7 @@
 import { AfterViewInit, ContentChildren, Directive, Input, QueryList } from '@angular/core';
 import { map, startWith, takeUntil, tap } from 'rxjs/operators';
 import { FocusableItem, FocusableListService } from './focusable-list.service';
-import { FocusableItemDirective } from './focusable-item.directive';
+import { FocusableItemDirective } from '../focusable-item/focusable-item.directive';
 import { DestroyedBehavior } from '../common-behaviors/destroyed-behavior';
 
 @Directive({

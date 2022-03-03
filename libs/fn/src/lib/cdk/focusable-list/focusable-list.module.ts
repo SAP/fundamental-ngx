@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
-import { FocusableItemDirective } from './focusable-item.directive';
 import { FocusableListDirective } from './focusable-list.directive';
+import { FocusableItemModule } from '../focusable-item';
 
 @NgModule({
-    declarations: [FocusableItemDirective, FocusableListDirective],
-    exports: [FocusableItemDirective, FocusableListDirective]
+    imports: [FocusableItemModule],
+    declarations: [FocusableListDirective],
+    exports: [FocusableListDirective, FocusableItemModule]
 })
 export class FocusableListModule {}
