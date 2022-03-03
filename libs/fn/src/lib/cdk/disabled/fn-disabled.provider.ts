@@ -26,9 +26,6 @@ export class FnDisabledProvider extends ReplaySubject<boolean> implements Disabl
         super(1);
         combineLatest([this._disabledChange$, this._viewModifiers$])
             .pipe(
-                tap(([isDisabled, viewModifiers]) =>
-                    console.log({ isDisabled, viewModifiers, el: this.elementRef.nativeElement })
-                ),
                 tap(([isDisabled]) => this.setDisabledState(isDisabled)),
                 takeUntil(this._destroy$)
             )
@@ -48,7 +45,6 @@ export class FnDisabledProvider extends ReplaySubject<boolean> implements Disabl
     }
 
     setDisabledState(isDisabled: boolean): void {
-        console.log({ isDisabled });
         firstValueFrom(this.ngZone.onStable).then(() => {
             this._viewModifiers$.value.forEach((viewModifier) => viewModifier.setDisabledState(isDisabled));
         });
