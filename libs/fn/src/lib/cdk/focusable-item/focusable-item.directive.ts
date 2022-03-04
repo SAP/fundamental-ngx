@@ -1,7 +1,7 @@
 import { AfterViewInit, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { BehaviorSubject, filter, first, ReplaySubject } from 'rxjs';
-import { FN_FOCUSABLE } from './focusable.tokens';
+import { FN_FOCUSABLE_ITEM_DIRECTIVE } from './focusable.tokens';
 import { DestroyedBehavior } from '../common-behaviors/destroyed-behavior';
 import { HasElementRef } from '../HasElementRef';
 import { FocusableItemViewModifier } from './focusable-item-view-modifier.interface';
@@ -13,7 +13,7 @@ import { takeUntil, tap } from 'rxjs/operators';
     selector: '[fnFocusableItem]',
     providers: [
         {
-            provide: FN_FOCUSABLE,
+            provide: FN_FOCUSABLE_ITEM_DIRECTIVE,
             useExisting: FocusableItemDirective
         },
         DestroyedBehavior

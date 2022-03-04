@@ -1,3 +1,3 @@
 import { InjectionToken } from '@angular/core';
 
-export const FN_FOCUSABLE = new InjectionToken('Focusable directive token');
+export const FN_FOCUSABLE_ITEM_DIRECTIVE = new InjectionToken('Focusable directive token');
