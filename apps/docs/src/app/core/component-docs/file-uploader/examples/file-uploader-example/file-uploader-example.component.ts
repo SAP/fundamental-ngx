@@ -9,8 +9,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 export class FileUploaderExampleComponent {
     files: File[];
 
-    filesDisabled: File[];
-
     handleFileSelection(files: File[]): void {
         alert(files.length + ' Files selected successfully!!!');
     }

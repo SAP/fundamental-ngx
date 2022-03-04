@@ -6,8 +6,9 @@
     buttonAriaLabel="browse file"
     accept=".png,.jpg"
     [required]="true"
-    [(ngModel)]="files"
+    [(ngModel)]="filesDisabled"
     [multiple]="true"
+    [disabled]="true"
     (selectedFilesChanged)="handleFileSelection($event)"
 >
 </fd-file-uploader>
@@ -16,6 +17,6 @@
 Files Selected:
 <br />
 
-<span *ngFor="let file of files">
+<span *ngFor="let file of filesDisabled">
     <span class="green">{{ file.name }} </span><br />
 </span>
