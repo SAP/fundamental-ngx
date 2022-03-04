@@ -1,6 +1,6 @@
 import { ElementRef, Inject, Injectable, NgZone, OnDestroy, Optional, Self, SkipSelf } from '@angular/core';
-import { BehaviorSubject, combineLatest, filter, firstValueFrom, Observable, ReplaySubject, Subject } from 'rxjs';
-import { map, startWith, takeUntil, tap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, firstValueFrom, Observable, ReplaySubject, Subject } from 'rxjs';
+import { distinctUntilChanged, startWith, takeUntil, tap } from 'rxjs/operators';
 import { FN_DISABLED_DIRECTIVE } from './fn-disabled.token';
 import { DisabledObserver } from './disabled.observer';
 import { DisabledBehavior } from './disabled-behavior.interface';
@@ -56,17 +56,43 @@ export class FnDisabledProvider extends ReplaySubject<boolean> implements Disabl
     }
 
     private _getDisabledChange$(): Observable<boolean> {
-        const self$ = (this.selfDisabled$ || this.disabledObserver.observe(this.elementRef)).pipe(
-            startWith(this.fnDisabled)
-        );
-        const disablingEvents: Observable<boolean>[] = [self$];
+        let selfDisabled = false;
+        let parentDisabled = false;
+
         if (this.parentDisabled$) {
-            disablingEvents.push(this.parentDisabled$);
+            this.parentDisabled$
+                .pipe(
+                    startWith(this.parentDisabled$.fnDisabled),
+                    tap((d) => (parentDisabled = d)),
+                    distinctUntilChanged(),
+                    tap(() => {
+                        if (parentDisabled) {
+                            this.setDisabledState(true);
+                        }
+                        if (!selfDisabled && !parentDisabled) {
+                            this.setDisabledState(false);
+                        }
+                    }),
+                    takeUntil(this._destroy$)
+                )
+                .subscribe();
         }
-        return combineLatest(disablingEvents).pipe(
-            map((disabledStates: boolean[]) => disabledStates.some(Boolean)),
-            filter((isDisabled) => isDisabled !== this.fnDisabled)
-        );
+        if (this.selfDisabled$) {
+            this.selfDisabled$
+                .pipe(
+                    startWith(this.selfDisabled$.fnDisabled),
+                    tap((d) => (selfDisabled = d)),
+                    distinctUntilChanged(),
+                    tap((isDisabled) => {
+                        if (!parentDisabled) {
+                            this.setDisabledState(isDisabled);
+                        }
+                    }),
+                    takeUntil(this._destroy$)
+                )
+                .subscribe();
+        }
+        return this.disabledObserver.observe(this.elementRef).pipe(distinctUntilChanged());
     }
 
     private _getInitialViewModifiers(): DisabledViewModifier[] {

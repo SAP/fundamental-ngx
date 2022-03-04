@@ -1,11 +1,10 @@
 import { AfterViewInit, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { takeUntil, tap } from 'rxjs/operators';
-import { BehaviorSubject, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, filter, ReplaySubject } from 'rxjs';
 import { DestroyedBehavior } from '../common-behaviors/destroyed-behavior';
 import { DisabledBehavior } from './disabled-behavior.interface';
 import { setDisabledState } from './set-disabled-state';
-import { DisabledObserver } from './disabled.observer';
 import { FN_DISABLED_DIRECTIVE } from './fn-disabled.token';
 import { DisabledViewModifier } from './disabled-view-modifier.interface';
 
@@ -25,7 +24,8 @@ export class DisabledBehaviorDirective
 {
     @Input()
     set fnDisabled(value: BooleanInput) {
-        this._fnDisableInput$.next(coerceBooleanProperty(value));
+        const val = coerceBooleanProperty(value);
+        this._fnDisableInput$.next(val);
     }
 
     get fnDisabled(): boolean {
@@ -35,25 +35,8 @@ export class DisabledBehaviorDirective
     _disabled = false;
     _fnDisableInput$ = new BehaviorSubject(false);
 
-    constructor(
-        private _elementRef: ElementRef<HTMLElement>,
-        private _disabledObserver: DisabledObserver,
-        private _destroy$: DestroyedBehavior
-    ) {
+    constructor(private _elementRef: ElementRef<HTMLElement>, private _destroy$: DestroyedBehavior) {
         super(1);
-        this._disabledObserver
-            .observe(this._elementRef)
-            .pipe(
-                tap((isDisabled) => {
-                    if (isDisabled !== this._disabled) {
-                        this.setDisabledState(isDisabled);
-                        this._disabled = isDisabled;
-                        this.next(isDisabled);
-                    }
-                }),
-                takeUntil(this._destroy$)
-            )
-            .subscribe();
     }
 
     setDisabledState = (isDisabled: boolean): void => {
@@ -61,7 +44,17 @@ export class DisabledBehaviorDirective
     };
 
     ngAfterViewInit(): void {
-        this._fnDisableInput$.pipe(tap(this.setDisabledState), takeUntil(this._destroy$)).subscribe();
+        this._fnDisableInput$
+            .pipe(
+                filter((isDisabled) => isDisabled !== this._disabled),
+                tap((isDisabled) => {
+                    this.setDisabledState(isDisabled);
+                    this._disabled = isDisabled;
+                    this.next(isDisabled);
+                }),
+                takeUntil(this._destroy$)
+            )
+            .subscribe();
     }
 
     ngOnDestroy(): void {
