@@ -1,4 +1,11 @@
 
+### 0.33.5-rc.31 (2022-03-04)
+
+
+### Bug Fixes
+
+* **docs:** fixed incorrect rendering of subItems ([#7829](https://github.com/SAP/fundamental-ngx/issues/7829)) ([f762009](https://github.com/SAP/fundamental-ngx/commit/f7620093a9fd0cdadd82547d177ff2029a5225e6))
+
 ### 0.33.5-rc.30 (2022-03-04)
 
 
