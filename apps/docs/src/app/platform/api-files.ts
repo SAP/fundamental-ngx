@@ -9,6 +9,7 @@ export const API_FILES = {
     actionbar: ['ActionBarComponent', 'ActionButtonGroupComponent'],
     button: ['ButtonComponent'],
     checkbox: ['CheckboxComponent'],
+    colorPicker: ['ColorPickerComponent'],
     formGenerator: [
         'FormGeneratorComponent',
         'FormGeneratorService',

@@ -42,6 +42,13 @@ export const ROUTES: Routes = [
                     ).then((m) => m.PlatformCheckboxGroupDocsModule)
             },
             {
+                path: 'color-picker',
+                loadChildren: () =>
+                    import('./component-docs/platform-color-picker/platform-color-picker.module').then(
+                        (m) => m.PlatformColorPickerDocsModule
+                    )
+            },
+            {
                 path: 'date-picker',
                 loadChildren: () =>
                     import(

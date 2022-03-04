@@ -123,6 +123,7 @@
         "@stackblitz/sdk": "1.5.3",
         "@types/google.visualization": "0.0.68",
         "@types/node": "14.14.10",
+        "@ui5/webcomponents": "1.2.1",
         "allure-commandline": "2.13.8",
         "core-js": "3.21.1",
         "fast-deep-equal": "3.1.3",
