@@ -25,4 +25,8 @@ export class DisabledObserver {
             distinctUntilChanged()
         );
     }
+
+    unobserve(element: HasElementRef<Element> | Element | ElementRef<Element>): void {
+        this._attributeObserver.unobserve(element);
+    }
 }

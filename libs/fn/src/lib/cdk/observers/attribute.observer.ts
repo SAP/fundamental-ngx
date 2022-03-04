@@ -37,6 +37,10 @@ export class AttributeObserver implements OnDestroy {
         });
     }
 
+    unobserve(element: HasElementRef<Element> | Element | ElementRef<Element>): void {
+        this._unobserveElement(getNativeElement(element));
+    }
+
     private _observeElement(element: Element): Subject<MutationRecord[]> {
         if (!this._observedElements.has(element)) {
             const stream = new Subject<MutationRecord[]>();
