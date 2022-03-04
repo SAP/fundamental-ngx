@@ -40,18 +40,6 @@ export class ReadonlyBehaviorDirective
         private _destroy$: DestroyedBehavior
     ) {
         super(1);
-        this._readonlyObserver
-            .observe(this._elementRef)
-            .pipe(
-                tap((isReadonly: boolean) => {
-                    if (isReadonly !== this._readonly) {
-                        this._readonly = isReadonly;
-                        this.next(isReadonly);
-                    }
-                }),
-                takeUntil(this._destroy$)
-            )
-            .subscribe();
     }
 
     setReadonlyState = (isReadonly: boolean): void => {
@@ -59,7 +47,18 @@ export class ReadonlyBehaviorDirective
     };
 
     ngAfterViewInit(): void {
-        this._readonlyInput$.pipe(tap(this.setReadonlyState), takeUntil(this._destroy$)).subscribe();
+        this._readonlyInput$
+            .pipe(
+                tap((isReadonly) => {
+                    if (isReadonly !== this._readonly) {
+                        this.setReadonlyState(isReadonly);
+                        this._readonly = isReadonly;
+                        this.next(isReadonly);
+                    }
+                }),
+                takeUntil(this._destroy$)
+            )
+            .subscribe();
     }
 
     ngOnDestroy(): void {

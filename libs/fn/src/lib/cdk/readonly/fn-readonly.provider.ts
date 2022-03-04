@@ -1,6 +1,6 @@
 import { ElementRef, Inject, Injectable, NgZone, OnDestroy, Optional, Self, SkipSelf } from '@angular/core';
-import { BehaviorSubject, combineLatest, filter, firstValueFrom, Observable, ReplaySubject, Subject } from 'rxjs';
-import { map, startWith, takeUntil, tap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, firstValueFrom, Observable, ReplaySubject, Subject } from 'rxjs';
+import { distinctUntilChanged, startWith, takeUntil, tap } from 'rxjs/operators';
 import { ReadonlyObserver } from './readonly.observer';
 import { ReadonlyBehavior } from './readonly-behavior.interface';
 import { DefaultReadonlyViewModifier } from './default-readonly-view-modifier';
@@ -53,20 +53,47 @@ export class FnReadonlyProvider extends ReplaySubject<boolean> implements Readon
     ngOnDestroy(): void {
         this.complete();
         this._destroy$.next();
+        this.readonlyObserver.unobserve(this.elementRef);
     }
 
     private _getReadonlyChange$(): Observable<boolean> {
-        const self$ = (this.selfReadonly$ || this.readonlyObserver.observe(this.elementRef)).pipe(
-            startWith(this.fnReadonly)
-        );
-        const disablingEvents: Observable<boolean>[] = [self$];
+        let selfReadonly = false;
+        let parentReadonly = false;
+
         if (this.parentReadonly$) {
-            disablingEvents.push(this.parentReadonly$);
+            this.parentReadonly$
+                .pipe(
+                    startWith(this.parentReadonly$.fnReadonly),
+                    tap((d) => (parentReadonly = d)),
+                    distinctUntilChanged(),
+                    tap(() => {
+                        if (parentReadonly) {
+                            this.setReadonlyState(true);
+                        }
+                        if (!selfReadonly && !parentReadonly) {
+                            this.setReadonlyState(false);
+                        }
+                    }),
+                    takeUntil(this._destroy$)
+                )
+                .subscribe();
         }
-        return combineLatest(disablingEvents).pipe(
-            map((readonlyStates: boolean[]) => readonlyStates.some(Boolean)),
-            filter((isReadonly) => isReadonly !== this.fnReadonly)
-        );
+        if (this.selfReadonly$) {
+            this.selfReadonly$
+                .pipe(
+                    startWith(this.selfReadonly$.fnReadonly),
+                    tap((d) => (selfReadonly = d)),
+                    distinctUntilChanged(),
+                    tap((isReadonly) => {
+                        if (!parentReadonly) {
+                            this.setReadonlyState(isReadonly);
+                        }
+                    }),
+                    takeUntil(this._destroy$)
+                )
+                .subscribe();
+        }
+        return this.readonlyObserver.observe(this.elementRef).pipe(distinctUntilChanged());
     }
 
     private _getInitialViewModifiers(): ReadonlyViewModifier[] {
