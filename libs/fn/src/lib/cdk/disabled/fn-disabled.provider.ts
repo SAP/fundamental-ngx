@@ -53,6 +53,7 @@ export class FnDisabledProvider extends ReplaySubject<boolean> implements Disabl
     ngOnDestroy(): void {
         this.complete();
         this._destroy$.next();
+        this.disabledObserver.unobserve(this.elementRef);
     }
 
     private _getDisabledChange$(): Observable<boolean> {
