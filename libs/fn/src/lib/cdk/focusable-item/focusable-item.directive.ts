@@ -1,6 +1,6 @@
 import { AfterViewInit, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { BehaviorSubject, filter, first, ReplaySubject, switchMap } from 'rxjs';
+import { BehaviorSubject, filter, first, ReplaySubject } from 'rxjs';
 import { FN_FOCUSABLE } from './focusable.tokens';
 import { DestroyedBehavior } from '../common-behaviors/destroyed-behavior';
 import { HasElementRef } from '../HasElementRef';
@@ -24,14 +24,11 @@ export class FocusableItemDirective
     implements HasElementRef, OnDestroy, AfterViewInit, FocusableItemViewModifier
 {
     @Input()
-    set fnFocusable(val: BooleanInput) {
-        this._viewInit$.pipe(filter(Boolean), first()).subscribe(() => {
-            console.log('set from input');
-            this.setFocusable(coerceBooleanProperty(val));
-        });
+    set fnFocusableItem(val: BooleanInput) {
+        this._viewInit$.pipe(filter(Boolean), first()).subscribe(() => this.setFocusable(coerceBooleanProperty(val)));
     }
 
-    get fnFocusable(): boolean {
+    get fnFocusableItem(): boolean {
         return this._focusable;
     }
 
@@ -44,11 +41,8 @@ export class FocusableItemDirective
         private _destroy$: DestroyedBehavior
     ) {
         super(1);
-        this._viewInit$
-            .pipe(
-                filter(Boolean),
-                switchMap(() => this._focusableObserver.observe(this._elementRef))
-            )
+        this._focusableObserver
+            .observe(this._elementRef)
             .pipe(
                 tap((isFocusable) => {
                     if (isFocusable !== this._focusable) {
