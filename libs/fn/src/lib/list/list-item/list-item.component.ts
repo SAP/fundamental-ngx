@@ -10,10 +10,9 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import {
-    BaseFocusableBehavior,
-    canAssignAdditionalClasses,
     DestroyedBehavior,
     FnDisabledProvider,
+    FnFocusableItemProvider,
     FnReadonlyProvider,
     SelectableItemToken,
     SelectionService
@@ -30,9 +29,6 @@ import {
 import { coerceBoolean, TemplateRefProviderToken } from '@fundamental-ngx/fn/utils';
 import { CheckboxContext } from '../list-item-checkbox.directive';
 import { ListComponent } from '../list/list.component';
-import { takeUntil } from 'rxjs/operators';
-
-const mixinBaseListItem = canAssignAdditionalClasses(BaseFocusableBehavior);
 
 @Component({
     selector: 'fn-list-item, [fn-list-item]',
@@ -42,16 +38,13 @@ const mixinBaseListItem = canAssignAdditionalClasses(BaseFocusableBehavior);
     host: {
         '[class.fn-list__item]': 'true'
     },
-    providers: [DestroyedBehavior, FnDisabledProvider]
+    providers: [DestroyedBehavior, FnDisabledProvider, FnReadonlyProvider, FnFocusableItemProvider]
 })
-export class ListItemComponent extends mixinBaseListItem {
+export class ListItemComponent {
     @Input()
     @HostBinding('class.fn-list__item--info-bar')
     @coerceBoolean
     infoBar!: boolean;
-
-    @HostBinding('attr.tabindex')
-    tabIndex = 0;
 
     @ContentChild(FN_LIST_CHECKBOX)
     checkboxProvider?: TemplateRefProviderToken<CheckboxContext>;
@@ -77,13 +70,11 @@ export class ListItemComponent extends mixinBaseListItem {
         @Optional() @Inject(SelectableItemToken) private selectableItem: SelectableItemToken,
         @Inject(ListComponent) private listComponent: ListComponent,
         private _elementRef: ElementRef<HTMLElement>,
-        disabled$: FnDisabledProvider,
-        readonly$: FnReadonlyProvider
+        private disabledProvider: FnDisabledProvider,
+        private readonlyProvider: FnReadonlyProvider,
+        private focusableItemProvider: FnFocusableItemProvider
     ) {
-        super(disabled$, readonly$);
-        this.focusable$
-            .pipe(takeUntil(this._destroy$))
-            .subscribe((isFocusable) => (this.tabIndex = isFocusable ? 0 : -1));
+        focusableItemProvider.setFocusable(true);
     }
 
     get byline(): boolean {
