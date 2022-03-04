@@ -24,39 +24,41 @@
             </div>
             <div fd-panel-content>
                 <fd-layout-grid *ngFor="let rule of _includeRules; let i = index">
-                    <fdp-table-filter-rule
-                        [fdLayoutGridCol]="10"
-                        [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
-                        [rule]="rule"
-                        (ruleChange)="_recalculateResetAvailability()"
-                        (ruleStateChange)="_onRuleStateChange()"
-                    ></fdp-table-filter-rule>
-                    <!-- Actions buttons -->
-                    <div [fdLayoutGridCol]="2">
-                        <button
-                            fd-button
-                            fdType="transparent"
-                            glyph="sys-cancel"
+                    <div fdLayoutGridRow>
+                        <fdp-table-filter-rule
+                            [fdLayoutGridCol]="10"
                             [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
-                            i18n-aria-label="platformTableP13FilterDialogRemoveFilter|Button aria-label attribute"
-                            aria-label="Remove Filter"
-                            i18n-title="platformTableP13FilterDialogRemoveFilter|Button title attribute"
-                            title="Remove Filter"
-                            (click)="_removeRule(rule, _includeRules)"
-                        ></button>
+                            [rule]="rule"
+                            (ruleChange)="_recalculateResetAvailability()"
+                            (ruleStateChange)="_onRuleStateChange()"
+                        ></fdp-table-filter-rule>
+                        <!-- Actions buttons -->
+                        <div [fdLayoutGridCol]="2">
+                            <button
+                                fd-button
+                                fdType="transparent"
+                                glyph="sys-cancel"
+                                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
+                                i18n-aria-label="platformTableP13FilterDialogRemoveFilter|Button aria-label attribute"
+                                aria-label="Remove Filter"
+                                i18n-title="platformTableP13FilterDialogRemoveFilter|Button title attribute"
+                                title="Remove Filter"
+                                (click)="_removeRule(rule, _includeRules)"
+                            ></button>
 
-                        <button
-                            *ngIf="_includeRules.length - 1 === i"
-                            fd-button
-                            fdType="transparent"
-                            glyph="add"
-                            [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
-                            i18n-aria-label="platformTableP13FilterDialogAddFilter|Button arial-label attribute"
-                            aria-label="Add Filter"
-                            i18n-title="platformTableP13FilterDialogAddFilter|Button title attribute"
-                            title="Add Filter"
-                            (click)="_addNewRule(_includeRules)"
-                        ></button>
+                            <button
+                                *ngIf="_includeRules.length - 1 === i"
+                                fd-button
+                                fdType="transparent"
+                                glyph="add"
+                                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
+                                i18n-aria-label="platformTableP13FilterDialogAddFilter|Button arial-label attribute"
+                                aria-label="Add Filter"
+                                i18n-title="platformTableP13FilterDialogAddFilter|Button title attribute"
+                                title="Add Filter"
+                                (click)="_addNewRule(_includeRules)"
+                            ></button>
+                        </div>
                     </div>
                 </fd-layout-grid>
             </div>
@@ -68,40 +70,44 @@
             </div>
             <div fd-panel-content>
                 <fd-layout-grid *ngFor="let rule of _excludeRules; let i = index">
-                    <fdp-table-filter-rule
-                        [fdLayoutGridCol]="10"
-                        [rule]="rule"
-                        (ruleChange)="_recalculateResetAvailability()"
-                        (ruleStateChange)="_onRuleStateChange()"
-                    ></fdp-table-filter-rule>
-                    <!-- Actions buttons -->
-                    <div [fdLayoutGridCol]="2">
-                        <button
-                            fd-button
-                            fdType="transparent"
-                            glyph="sys-cancel"
-                            [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
-                            i18n-aria-label="
-                                platformTableP13FilterDialogRemoveFilterFromExclude|Button aria-label attribute
-                            "
-                            aria-label="Remove Filter"
-                            i18n-title="platformTableP13FilterDialogRemoveFilterFromExclude|Button title attribute"
-                            title="Remove Filter"
-                            (click)="_removeRule(rule, _excludeRules)"
-                        ></button>
+                    <div fdLayoutGridRow>
+                        <fdp-table-filter-rule
+                            [fdLayoutGridCol]="10"
+                            [rule]="rule"
+                            (ruleChange)="_recalculateResetAvailability()"
+                            (ruleStateChange)="_onRuleStateChange()"
+                        ></fdp-table-filter-rule>
+                        <!-- Actions buttons -->
+                        <div [fdLayoutGridCol]="2">
+                            <button
+                                fd-button
+                                fdType="transparent"
+                                glyph="sys-cancel"
+                                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
+                                i18n-aria-label="
+                                    platformTableP13FilterDialogRemoveFilterFromExclude|Button aria-label attribute
+                                "
+                                aria-label="Remove Filter"
+                                i18n-title="platformTableP13FilterDialogRemoveFilterFromExclude|Button title attribute"
+                                title="Remove Filter"
+                                (click)="_removeRule(rule, _excludeRules)"
+                            ></button>
 
-                        <button
-                            *ngIf="_excludeRules.length - 1 === i"
-                            fd-button
-                            fdType="transparent"
-                            glyph="add"
-                            [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
-                            i18n-aria-label="platformTableP13FilterDialogAddFilterToExclude|Button aria-label attribute"
-                            aria-label="Add Filter"
-                            i18n-title="platformTableP13FilterDialogAddFilterToExclude|Button title attribute"
-                            title="Add Filter"
-                            (click)="_addNewRule(_excludeRules)"
-                        ></button>
+                            <button
+                                *ngIf="_excludeRules.length - 1 === i"
+                                fd-button
+                                fdType="transparent"
+                                glyph="add"
+                                [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
+                                i18n-aria-label="
+                                    platformTableP13FilterDialogAddFilterToExclude|Button aria-label attribute
+                                "
+                                aria-label="Add Filter"
+                                i18n-title="platformTableP13FilterDialogAddFilterToExclude|Button title attribute"
+                                title="Add Filter"
+                                (click)="_addNewRule(_excludeRules)"
+                            ></button>
+                        </div>
                     </div>
                 </fd-layout-grid>
             </div>

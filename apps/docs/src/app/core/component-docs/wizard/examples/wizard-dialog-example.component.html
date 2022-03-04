@@ -165,91 +165,99 @@
                             <fd-wizard-content size="sm">
                                 <h4 class="fd-title fd-title--h4" id="product-type-title">1. Product Type</h4>
                                 <fd-layout-grid style="margin-bottom: 2rem">
-                                    <div [fdLayoutGridCol]="4" [colMd]="2" [colLg]="2" [colXl]="2">
-                                        <label fd-form-label style="float: right">Type:</label>
-                                    </div>
-                                    <div [fdLayoutGridCol]="4" [colMd]="5" [colLg]="5" [colXl]="5">
-                                        <label fd-form-label style="color: black">Mobile</label>
-                                    </div>
-                                    <div [fdLayoutGridCol]="1" [colMd]="5" [colLg]="5" [colXl]="5">
-                                        <a
-                                            [routerLink]="['./']"
-                                            fd-link
-                                            (click)="goToStep(1)"
-                                            aria-labelledby="product-type-title"
-                                            >Edit</a
-                                        >
+                                    <div fdLayoutGridRow>
+                                        <div [fdLayoutGridCol]="4" [colMd]="2" [colLg]="2" [colXl]="2">
+                                            <label fd-form-label style="float: right">Type:</label>
+                                        </div>
+                                        <div [fdLayoutGridCol]="4" [colMd]="5" [colLg]="5" [colXl]="5">
+                                            <label fd-form-label style="color: black">Mobile</label>
+                                        </div>
+                                        <div [fdLayoutGridCol]="1" [colMd]="5" [colLg]="5" [colXl]="5">
+                                            <a
+                                                [routerLink]="['./']"
+                                                fd-link
+                                                (click)="goToStep(1)"
+                                                aria-labelledby="product-type-title"
+                                                >Edit</a
+                                            >
+                                        </div>
                                     </div>
                                 </fd-layout-grid>
                                 <h4 class="fd-title fd-title--h4" id="customer-information-title">
                                     2. Customer Information
                                 </h4>
                                 <fd-layout-grid>
-                                    <div [fdLayoutGridCol]="4" [colMd]="2" [colLg]="2" [colXl]="2">
-                                        <label fd-form-label style="float: right">Full Name:</label><br />
-                                        <label fd-form-label style="float: right">Address Line 1:</label><br />
-                                        <label fd-form-label style="float: right">Address Line 2:</label><br />
-                                    </div>
-                                    <div [fdLayoutGridCol]="4" [colMd]="5" [colLg]="5" [colXl]="5">
-                                        <label fd-form-label style="color: black">{{ fullName }}</label
-                                        ><br />
-                                        <label fd-form-label style="color: black">{{ addressLine1 }}</label
-                                        ><br />
-                                        <label fd-form-label style="color: black">{{ addressLine2 }}</label
-                                        ><br />
-                                    </div>
-                                    <div [fdLayoutGridCol]="1" [colMd]="5" [colLg]="5" [colXl]="5">
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <a
-                                            [routerLink]="['./']"
-                                            fd-link
-                                            (click)="goToStep(2)"
-                                            aria-labelledby="customer-information-title"
-                                            >Edit</a
-                                        >
+                                    <div fdLayoutGridRow>
+                                        <div [fdLayoutGridCol]="4" [colMd]="2" [colLg]="2" [colXl]="2">
+                                            <label fd-form-label style="float: right">Full Name:</label><br />
+                                            <label fd-form-label style="float: right">Address Line 1:</label><br />
+                                            <label fd-form-label style="float: right">Address Line 2:</label><br />
+                                        </div>
+                                        <div [fdLayoutGridCol]="4" [colMd]="5" [colLg]="5" [colXl]="5">
+                                            <label fd-form-label style="color: black">{{ fullName }}</label
+                                            ><br />
+                                            <label fd-form-label style="color: black">{{ addressLine1 }}</label
+                                            ><br />
+                                            <label fd-form-label style="color: black">{{ addressLine2 }}</label
+                                            ><br />
+                                        </div>
+                                        <div [fdLayoutGridCol]="1" [colMd]="5" [colLg]="5" [colXl]="5">
+                                            <br />
+                                            <br />
+                                            <br />
+                                            <a
+                                                [routerLink]="['./']"
+                                                fd-link
+                                                (click)="goToStep(2)"
+                                                aria-labelledby="customer-information-title"
+                                                >Edit</a
+                                            >
+                                        </div>
                                     </div>
                                 </fd-layout-grid>
                                 <h4 class="fd-title fd-title--h4" id="additional-information-id">
                                     3. Additional Information
                                 </h4>
                                 <fd-layout-grid>
-                                    <div [fdLayoutGridCol]="4" [colMd]="2" [colLg]="2" [colXl]="2">
-                                        <label fd-form-label style="float: right">Name:</label><br />
-                                        <label fd-form-label style="float: right">Weight:</label><br />
-                                        <label fd-form-label style="float: right">Delicious:</label><br />
-                                        <label fd-form-label style="float: right">Description:</label>
-                                    </div>
-                                    <div [fdLayoutGridCol]="4" [colMd]="5" [colLg]="5" [colXl]="5">
-                                        <label fd-form-label style="color: black">Pineapple</label><br />
-                                        <label fd-form-label style="color: black">1kg</label><br />
-                                        <label fd-form-label style="color: black">Yes</label><br />
-                                        <label fd-form-label style="color: black">n/a</label>
-                                    </div>
-                                    <div [fdLayoutGridCol]="1" [colMd]="5" [colLg]="5" [colXl]="5">
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <a
-                                            [routerLink]="['./']"
-                                            fd-link
-                                            (click)="goToStep(3)"
-                                            aria-labelledby="additional-information-id"
-                                            >Edit</a
-                                        >
+                                    <div fdLayoutGridRow>
+                                        <div [fdLayoutGridCol]="4" [colMd]="2" [colLg]="2" [colXl]="2">
+                                            <label fd-form-label style="float: right">Name:</label><br />
+                                            <label fd-form-label style="float: right">Weight:</label><br />
+                                            <label fd-form-label style="float: right">Delicious:</label><br />
+                                            <label fd-form-label style="float: right">Description:</label>
+                                        </div>
+                                        <div [fdLayoutGridCol]="4" [colMd]="5" [colLg]="5" [colXl]="5">
+                                            <label fd-form-label style="color: black">Pineapple</label><br />
+                                            <label fd-form-label style="color: black">1kg</label><br />
+                                            <label fd-form-label style="color: black">Yes</label><br />
+                                            <label fd-form-label style="color: black">n/a</label>
+                                        </div>
+                                        <div [fdLayoutGridCol]="1" [colMd]="5" [colLg]="5" [colXl]="5">
+                                            <br />
+                                            <br />
+                                            <br />
+                                            <a
+                                                [routerLink]="['./']"
+                                                fd-link
+                                                (click)="goToStep(3)"
+                                                aria-labelledby="additional-information-id"
+                                                >Edit</a
+                                            >
+                                        </div>
                                     </div>
                                 </fd-layout-grid>
                                 <h4 class="fd-title fd-title--h4">4. Payment Information</h4>
                                 <fd-layout-grid>
-                                    <div [fdLayoutGridCol]="4" [colMd]="2" [colLg]="2" [colXl]="2">
-                                        <label fd-form-label style="float: right">Payment Type:</label><br />
-                                    </div>
-                                    <div [fdLayoutGridCol]="4" [colMd]="5" [colLg]="5" [colXl]="5">
-                                        <label fd-form-label style="color: black"></label><br />
-                                    </div>
-                                    <div [fdLayoutGridCol]="1" [colMd]="5" [colLg]="5" [colXl]="5">
-                                        <a [routerLink]="['./']" fd-link (click)="goToStep(4)">Edit</a>
+                                    <div fdLayoutGridRow>
+                                        <div [fdLayoutGridCol]="4" [colMd]="2" [colLg]="2" [colXl]="2">
+                                            <label fd-form-label style="float: right">Payment Type:</label><br />
+                                        </div>
+                                        <div [fdLayoutGridCol]="4" [colMd]="5" [colLg]="5" [colXl]="5">
+                                            <label fd-form-label style="color: black"></label><br />
+                                        </div>
+                                        <div [fdLayoutGridCol]="1" [colMd]="5" [colLg]="5" [colXl]="5">
+                                            <a [routerLink]="['./']" fd-link (click)="goToStep(4)">Edit</a>
+                                        </div>
                                     </div>
                                 </fd-layout-grid>
                             </fd-wizard-content>

@@ -12,7 +12,14 @@ const XL_COL_SIZE = 3;
 @Component({
     template: `
         <fd-layout-grid>
-            <div [fdLayoutGridCol]="COL_SIZE" [colMd]="MD_COL_SIZE" [colLg]="LG_COL_SIZE" [colXl]="XL_COL_SIZE"></div>
+            <div fdLayoutGridRow>
+                <div
+                    [fdLayoutGridCol]="COL_SIZE"
+                    [colMd]="MD_COL_SIZE"
+                    [colLg]="LG_COL_SIZE"
+                    [colXl]="XL_COL_SIZE"
+                ></div>
+            </div>
         </fd-layout-grid>
     `
 })

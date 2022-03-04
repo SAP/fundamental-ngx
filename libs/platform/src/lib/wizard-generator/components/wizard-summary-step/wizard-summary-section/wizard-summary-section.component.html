@@ -1,22 +1,24 @@
 <ng-container *ngFor="let group of step.forms; trackBy: _trackFn">
     <h4 fd-title [headerSize]="4">{{ group.title }}</h4>
     <fd-layout-grid style="margin-bottom: 2rem">
-        <div [fdLayoutGridCol]="4" [colMd]="2" [colLg]="2" [colXl]="2">
-            <div *ngFor="let item of group.items">
-                <label fd-form-label> {{ item.label }}: </label>
+        <div fdLayoutGridRow>
+            <div [fdLayoutGridCol]="4" [colMd]="2" [colLg]="2" [colXl]="2">
+                <div *ngFor="let item of group.items">
+                    <label fd-form-label> {{ item.label }}: </label>
+                </div>
             </div>
-        </div>
-        <div [fdLayoutGridCol]="4" [colMd]="5" [colLg]="5" [colXl]="5">
-            <div *ngFor="let item of group.items">
-                <label fd-form-label>
-                    {{ item.value || '-' }}
-                </label>
+            <div [fdLayoutGridCol]="4" [colMd]="5" [colLg]="5" [colXl]="5">
+                <div *ngFor="let item of group.items">
+                    <label fd-form-label>
+                        {{ item.value || '-' }}
+                    </label>
+                </div>
             </div>
-        </div>
-        <div [fdLayoutGridCol]="1" [colMd]="5" [colLg]="5" [colXl]="5">
-            <fdp-link href="#" (click)="_editStep($event)" i18n="@@PlatformFormGeneratorSummarySectionEditStep">
-                Edit
-            </fdp-link>
+            <div [fdLayoutGridCol]="1" [colMd]="5" [colLg]="5" [colXl]="5">
+                <fdp-link href="#" (click)="_editStep($event)" i18n="@@PlatformFormGeneratorSummarySectionEditStep">
+                    Edit
+                </fdp-link>
+            </div>
         </div>
     </fd-layout-grid>
 </ng-container>
