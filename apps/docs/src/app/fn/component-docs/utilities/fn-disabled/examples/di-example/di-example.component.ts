@@ -1,4 +1,4 @@
-import { Component, Directive, ElementRef } from '@angular/core';
+import { Component, Directive, ElementRef, Self } from '@angular/core';
 import { DisabledViewModifier, FnDisabledProvider } from '@fundamental-ngx/fn/cdk';
 
 @Component({
@@ -6,6 +6,9 @@ import { DisabledViewModifier, FnDisabledProvider } from '@fundamental-ngx/fn/cd
     templateUrl: './di-example.component.html'
 })
 export class DiExampleComponent {
+    rootElementDisabled = false;
+    firstElementDisabled = false;
+
     constructor() {}
 }
 
@@ -15,11 +18,15 @@ export class DiExampleComponent {
     providers: [FnDisabledProvider]
 })
 export class FnDisabledRecipientDirective implements DisabledViewModifier {
-    constructor(private _disabled$: FnDisabledProvider, private _elementRef: ElementRef) {
+    constructor(@Self() private _disabled$: FnDisabledProvider, private _elementRef: ElementRef) {
         this._disabled$.addViewModifier(this);
     }
 
     setDisabledState(isDisabled: boolean): void {
-        // console.log({ fromRecipientDirective: isDisabled, element: this._elementRef.nativeElement });
+        if (isDisabled) {
+            this._elementRef.nativeElement.classList.add('is_very_disabled');
+        } else {
+            this._elementRef.nativeElement.classList.remove('is_very_disabled');
+        }
     }
 }
