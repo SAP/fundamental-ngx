@@ -42,15 +42,17 @@
                                             <ng-container
                                                 *ngFor="let subItem of item.subItems; trackBy: trackBySectionContent"
                                                 [ngTemplateOutlet]="listItemTpl"
-                                                [ngTemplateOutletContext]="{$implicit: subItem}"
+                                                [ngTemplateOutletContext]="{ $implicit: subItem }"
                                             >
                                             </ng-container>
                                         </ul>
                                     </li>
                                 </ng-container>
                                 <ng-template #rootListItem>
-                                    <ng-template [ngTemplateOutlet]="listItemTpl"
-                                                 [ngTemplateOutletContext]="{$implicit: item}">
+                                    <ng-template
+                                        [ngTemplateOutlet]="listItemTpl"
+                                        [ngTemplateOutletContext]="{ $implicit: item }"
+                                    >
                                     </ng-template>
                                 </ng-template>
                             </ng-container>
