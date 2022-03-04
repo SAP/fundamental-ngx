@@ -8,7 +8,7 @@ import { SelectComponentRootToken } from './select-component-root.token';
 
 @Injectable()
 export class SelectionService<ValueType = any> implements OnDestroy {
-    value$?: Observable<ValueType | ValueType[]>;
+    value$: Observable<ValueType | ValueType[]>;
 
     /** @hidden */
     private _items$!: Observable<SelectableItemToken[]>;

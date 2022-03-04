@@ -1,5 +1,6 @@
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ContentChild,
     ElementRef,
@@ -29,6 +30,8 @@ import {
 import { coerceBoolean, TemplateRefProviderToken } from '@fundamental-ngx/fn/utils';
 import { CheckboxContext } from '../list-item-checkbox.directive';
 import { ListComponent } from '../list/list.component';
+import { distinctUntilChanged, map, Observable } from 'rxjs';
+import { coerceArray } from '@angular/cdk/coercion';
 
 @Component({
     selector: 'fn-list-item, [fn-list-item]',
@@ -61,10 +64,13 @@ export class ListItemComponent {
     @ContentChild(FN_LIST_POSTFIX)
     postfixProvider?: TemplateRefProviderToken<void>;
 
+    checkboxContext$!: Observable<CheckboxContext>;
+
     readonly!: boolean;
     disabled!: boolean;
 
     constructor(
+        private _cd: ChangeDetectorRef,
         private _destroy$: DestroyedBehavior,
         @Optional() private selectionService: SelectionService,
         @Optional() @Inject(SelectableItemToken) private selectableItem: SelectableItemToken,
@@ -75,28 +81,32 @@ export class ListItemComponent {
         private focusableItemProvider: FnFocusableItemProvider
     ) {
         focusableItemProvider.setFocusable(true);
+        if (this.selectionService && this.selectableItem) {
+            this.checkboxContext$ = this.selectionService.value$.pipe(
+                map((v) => coerceArray(v)),
+                map((value: any[]) => value.includes(this.selectableItem.value)),
+                distinctUntilChanged(),
+                map((selected) => ({
+                    $implicit: selected,
+                    update: this.toggleItemSelection
+                }))
+            );
+        }
     }
 
     get byline(): boolean {
         return this.listComponent.byline;
     }
 
-    get checkboxContext(): CheckboxContext {
-        return {
-            $implicit: this.selectableItem?.getSelected(),
-            update: (selected) => this.toggleItemSelection(selected)
-        };
-    }
-
     public elementRef(): ElementRef<HTMLElement> {
         return this._elementRef;
     }
 
-    private toggleItemSelection(isSelected: boolean): void {
+    private toggleItemSelection = (isSelected: boolean): void => {
         if (isSelected) {
             this.selectionService?.selectItem(this.selectableItem);
         } else {
             this.selectionService?.deselectItem(this.selectableItem);
         }
-    }
+    };
 }

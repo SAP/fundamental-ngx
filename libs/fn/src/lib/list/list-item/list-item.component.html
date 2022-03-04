@@ -1,7 +1,7 @@
 <ng-container *ngIf="checkboxProvider">
     <ng-template
         [ngTemplateOutlet]="checkboxProvider.templateRef"
-        [ngTemplateOutletContext]="checkboxContext"
+        [ngTemplateOutletContext]="checkboxContext$ | async"
     ></ng-template>
 </ng-container>
 
