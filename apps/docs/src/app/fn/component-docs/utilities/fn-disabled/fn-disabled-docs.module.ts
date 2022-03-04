@@ -3,12 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { ClickedBehaviorModule, DisabledBehaviorModule, FocusableListModule } from '@fundamental-ngx/fn/cdk';
 import { ButtonModule } from '@fundamental-ngx/fn/button';
 import { FnDisabledHeaderComponent } from './fn-disabled-header/fn-disabled-header.component';
-import { DiExampleComponent, FnDisabledRecipientDirective } from './examples/di-example/di-example.component';
+import { DiExampleComponent } from './examples/di-example/di-example.component';
 import { ApiComponent } from '../../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../../documentation/shared-documentation-page.module';
 import { API_FILES } from '../../../api-files';
 import { FnDisabledDocsComponent } from './fn-disabled-docs.component';
 import { DefaultExampleComponent } from './examples/default-example/default-example.component';
+import { FnDisabledRecipientDirective } from './examples/di-example/fn-disabled-recipient.directive';
 
 const routes: Routes = [
     {
