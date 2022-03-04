@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { FocusableOption, FocusKeyManager } from '@angular/cdk/a11y';
 import { fromEvent, merge, Subject } from 'rxjs';
-import { HasElementRef } from '../HasElementRef';
+import { HasElementRef } from '../has-element-ref';
 import { takeUntil, tap } from 'rxjs/operators';
 
 interface FocusableListConfig {

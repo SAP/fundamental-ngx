@@ -3,7 +3,7 @@ import { MutationObserverFactory } from '@angular/cdk/observers';
 import { Observable, Observer, Subject } from 'rxjs';
 import { ElementRef, Injectable, OnDestroy } from '@angular/core';
 import { getNativeElement } from '@fundamental-ngx/fn/utils';
-import { HasElementRef } from '../HasElementRef';
+import { HasElementRef } from '../has-element-ref';
 
 @Injectable({
     providedIn: 'root'

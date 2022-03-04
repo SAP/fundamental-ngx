@@ -1,5 +1,5 @@
 import { ElementRef } from '@angular/core';
-import { HasElementRef } from '../HasElementRef';
+import { HasElementRef } from '../has-element-ref';
 import { getNativeElement } from '@fundamental-ngx/fn/utils';
 
 export function setDisabledState(

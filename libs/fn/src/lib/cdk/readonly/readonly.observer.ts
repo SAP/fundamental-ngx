@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { getNativeElement } from '@fundamental-ngx/fn/utils';
 import { AttributeObserver } from '../observers/attribute.observer';
-import { HasElementRef } from '../HasElementRef';
+import { HasElementRef } from '../has-element-ref';
 
 @Injectable({
     providedIn: 'root'

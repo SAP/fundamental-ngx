@@ -1,7 +1,7 @@
 import { filter, fromEvent, merge, Subject, Subscription } from 'rxjs';
 import { getNativeElement } from '@fundamental-ngx/fn/utils';
 import { ElementRef } from '@angular/core';
-import { HasElementRef } from '../HasElementRef';
+import { HasElementRef } from '../has-element-ref';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { tap } from 'rxjs/operators';
 

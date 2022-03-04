@@ -3,7 +3,7 @@ import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { BehaviorSubject, filter, first, ReplaySubject } from 'rxjs';
 import { FN_FOCUSABLE_ITEM_DIRECTIVE } from './focusable.tokens';
 import { DestroyedBehavior } from '../common-behaviors/destroyed-behavior';
-import { HasElementRef } from '../HasElementRef';
+import { HasElementRef } from '../has-element-ref';
 import { FocusableItemViewModifier } from './focusable-item-view-modifier.interface';
 import { setFocusable } from './set-focusable';
 import { FocusableObserver } from './focusable.observer';

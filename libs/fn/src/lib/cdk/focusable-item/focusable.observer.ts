@@ -5,7 +5,7 @@ import { distinctUntilChanged, map } from 'rxjs/operators';
 import { ReadonlyObserver } from '../readonly';
 import { DisabledObserver } from '../disabled';
 import { AttributeObserver } from '../observers/attribute.observer';
-import { HasElementRef } from '../HasElementRef';
+import { HasElementRef } from '../has-element-ref';
 
 @Injectable({
     providedIn: 'root'

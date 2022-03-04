@@ -1,7 +1,7 @@
 import { ElementRef, Injectable } from '@angular/core';
 import { AttributeObserver } from '../observers/attribute.observer';
 import { Observable } from 'rxjs';
-import { HasElementRef } from '../HasElementRef';
+import { HasElementRef } from '../has-element-ref';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { getNativeElement } from '@fundamental-ngx/fn/utils';
 

@@ -1,6 +1,6 @@
 import { ElementRef } from '@angular/core';
 import { getNativeElement } from '@fundamental-ngx/fn/utils';
-import { HasElementRef } from '../HasElementRef';
+import { HasElementRef } from '../has-element-ref';
 
 export function setFocusable(
     element: HasElementRef<Element> | Element | ElementRef<Element>,

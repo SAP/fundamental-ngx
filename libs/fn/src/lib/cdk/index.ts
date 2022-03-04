@@ -15,4 +15,4 @@ export * from './focusable-item';
 
 export * from './common-behaviors/destroyed-behavior';
 
-export * from './HasElementRef';
+export * from './has-element-ref';

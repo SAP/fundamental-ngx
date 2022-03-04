@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { HasElementRef } from '../HasElementRef';
+import { HasElementRef } from '../has-element-ref';
 
 export abstract class SelectableItemToken<ValueType = any> extends HasElementRef {
     abstract value: ValueType;
