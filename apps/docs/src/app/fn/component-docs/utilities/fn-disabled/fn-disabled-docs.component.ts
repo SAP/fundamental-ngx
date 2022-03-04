@@ -6,7 +6,6 @@ import defaultExampleTs from '!./examples/default-example/default-example.compon
 @Component({
     selector: 'app-tabs',
     templateUrl: './fn-disabled-docs.component.html',
-    styleUrls: ['fn-disabled-docs.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class FnDisabledDocsComponent {

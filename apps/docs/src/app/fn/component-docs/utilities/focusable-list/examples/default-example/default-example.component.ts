@@ -13,6 +13,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
                 cursor: pointer;
                 padding: 5px 7px;
             }
+
             span[fnFocusableItem] {
                 display: inline-block;
             }

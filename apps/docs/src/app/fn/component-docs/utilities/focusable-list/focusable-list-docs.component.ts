@@ -6,7 +6,6 @@ import defaultExampleTs from '!./examples/default-example/default-example.compon
 @Component({
     selector: 'app-tabs',
     templateUrl: './focusable-list-docs.component.html',
-    styleUrls: ['focusable-list-docs.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class FocusableListDocsComponent {
