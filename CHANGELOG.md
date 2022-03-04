@@ -1,4 +1,11 @@
 
+### 0.33.5-rc.30 (2022-03-04)
+
+
+### Bug Fixes
+
+* **core:** action-sheet, fix a11y issues ([#7390](https://github.com/SAP/fundamental-ngx/issues/7390)) ([ca49728](https://github.com/SAP/fundamental-ngx/commit/ca49728dda752ae4b1fb03255223dd3d3b0c4724))
+
 ### 0.33.5-rc.29 (2022-03-03)
 
 
