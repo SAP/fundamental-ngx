@@ -46,7 +46,7 @@ import { ActionSheetItemComponent, ActionSheetClickEvent } from './action-sheet-
     providers: [KeyboardSupportService]
 })
 export class ActionSheetComponent implements AfterContentInit, AfterViewInit, OnDestroy {
-    /** Whether should be displayed in compact mode **/
+    /** Whether should be displayed in compact mode */
     @Input()
     set compact(compact: boolean) {
         this._compact = compact;
@@ -58,19 +58,19 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         return this._compact;
     }
 
-    /** Whether should be displayed in mobile mode **/
+    /** Whether should be displayed in mobile mode */
     @Input()
     mobile = false;
 
-    /** The position of the popover body. Set to 'bottom' by default. **/
+    /** The position of the popover body. Set to 'bottom' by default. */
     @Input()
     placement: Placement = 'bottom';
 
-    /** Whether the popover body has an arrow. Set to false by default. **/
+    /** Whether the popover body has an arrow. Set to false by default. */
     @Input()
     noArrow = false;
 
-    /** Whenever links should be visible **/
+    /** Whenever links should be visible */
     @Input()
     isOpen = false;
 
@@ -78,9 +78,10 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     @Input()
     keyboardSupport = true;
 
-    /** To allow user to determine what event he wants to trigger the messages to show
+    /**
+     * To allow user to determine what event he wants to trigger the messages to show
      * Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp).
-     **/
+     */
     @Input()
     triggers: string[] = ['click'];
 
@@ -115,10 +116,10 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     /** @hidden */
     actionSheetMobileDynamic: ComponentRef<ActionSheetMobileComponent>;
 
-    /** @hidden **/
+    /** @hidden */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    /** @hidden **/
+    /** @hidden */
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
 
     /** @hidden */
@@ -190,6 +191,10 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
 
     /** @hidden */
     isOpenChangeHandle(isOpen: boolean): void {
+        if (this.isOpen === isOpen) {
+            return;
+        }
+
         this.isOpen = isOpen;
 
         if (this.mobile && this.actionSheetMobileDynamic) {
@@ -198,7 +203,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
 
         this.isOpenChange.emit(isOpen);
 
-        if (isOpen && !this.mobile) {
+        if (isOpen) {
             this._setItemActive(0);
         }
 
@@ -245,22 +250,21 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
 
     /** @hidden Set fake focus on element with passed index */
     private _setItemActive(index: number): void {
-        if (this._keyboardSupportService.keyManager) {
-            this._keyboardSupportService.keyManager.setActiveItem(index);
-        }
+        this._keyboardSupportService.keyManager?.setActiveItem(index);
     }
 
     /** @hidden */
     private _setItemsProperties(): void {
-        if (this.actionSheetItems) {
-            this.actionSheetItems.forEach((actionSheetItem) => (actionSheetItem.compact = this._compact));
-        }
+        this.actionSheetItems?.forEach((actionSheetItem) => (actionSheetItem.compact = this._compact));
     }
 
     /** @hidden */
     private async _setUpMobileMode(): Promise<void> {
         this.actionSheetMobileDynamic = await this._dynamicComponentService.createDynamicModule(
-            { actionSheetBodyTemplate: this.actionSheetBodyTemplate },
+            {
+                actionSheetBodyTemplate: this.actionSheetBodyTemplate,
+                isOpenChangeHandle: this.isOpenChangeHandle.bind(this)
+            },
             ActionSheetMobileModule,
             ActionSheetMobileComponent,
             this._viewContainerRef
