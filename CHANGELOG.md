@@ -1,4 +1,11 @@
 
+### 0.33.5-rc.32 (2022-03-04)
+
+
+### Bug Fixes
+
+* **core:** grid list filter-bar & group-header tabindexes ([#7836](https://github.com/SAP/fundamental-ngx/issues/7836)) ([c18547f](https://github.com/SAP/fundamental-ngx/commit/c18547fb6821a3384f6ea33b33a9dcb0cbb0a053))
+
 ### 0.33.5-rc.31 (2022-03-04)
 
 
