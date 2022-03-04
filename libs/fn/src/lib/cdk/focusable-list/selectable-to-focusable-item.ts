@@ -5,6 +5,6 @@ export function selectableItemToFocusableItem(selectableItem: SelectableItemToke
     return {
         elementRef: () => selectableItem.elementRef(),
         focus: () => selectableItem.elementRef().nativeElement.focus(),
-        focusable: () => selectableItem.selectable !== false
+        focusable: () => selectableItem.fnSelectableItem !== false
     };
 }

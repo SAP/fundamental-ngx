@@ -6,6 +6,7 @@ import { FnDisabledProvider } from '../disabled';
 import { FnReadonlyProvider } from '../readonly';
 import { SelectionService } from './selection.service';
 import { ClickedObservable } from '../clicked';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 
 @Directive({
     selector: '[fnSelectableItem]',
@@ -32,19 +33,32 @@ export class SelectableItemDirective<ValueType = any> implements SelectableItemT
         this._value = val;
     }
 
+    @Input()
+    set fnSelectableItem(value: BooleanInput) {
+        const isSelectable = coerceBooleanProperty(value);
+        if (isSelectable !== this._selectable) {
+            this._selectable = isSelectable;
+        }
+    }
+
+    get fnSelectableItem(): boolean {
+        let selectable = this._selectable;
+        if (typeof this.provider?.fnSelectableItem !== 'undefined') {
+            selectable = this.provider.fnSelectableItem;
+        }
+        return (
+            selectable &&
+            (!this.disabled$ || !this.disabled$?.fnDisabled) &&
+            (!this.readonly$ || !this.readonly$?.fnReadonly)
+        );
+    }
+
     @Output()
     clicked: Observable<MouseEvent | KeyboardEvent> = new ClickedObservable(this);
 
-    get selectable(): boolean {
-        // eslint-disable-next-line no-prototype-builtins
-        if (typeof this.provider?.selectable !== 'undefined') {
-            return this.provider.selectable;
-        }
-        return (!this.disabled$ || !this.disabled$?.fnDisabled) && (!this.readonly$ || !this.readonly$?.fnReadonly);
-    }
-
     private _value!: ValueType;
     private _selected = false;
+    private _selectable = true;
 
     constructor(
         @Optional() @Inject(FN_SELECTABLE_ITEM_PROVIDER) private provider: Partial<SelectableItemToken<ValueType>>,

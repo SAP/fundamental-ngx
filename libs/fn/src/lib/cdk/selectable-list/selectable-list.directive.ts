@@ -6,6 +6,7 @@ import { SelectableItemToken } from './selectable-item.token';
 
 @Directive({
     selector: '[fnSelectableList]',
+    exportAs: 'fnSelectableList',
     providers: [
         {
             provide: SelectComponentRootToken,
@@ -35,6 +36,22 @@ export class SelectableListDirective<ValueType = any> implements SelectComponent
 
     constructor(private _selectionService: SelectionService) {
         this._selectionService.registerRootComponent(this);
+    }
+
+    select(item: SelectableItemToken<ValueType>): void {
+        this._selectionService.selectItem(item);
+    }
+
+    deselect(item: SelectableItemToken<ValueType>): void {
+        this._selectionService.deselectItem(item);
+    }
+
+    toggleSelect(item: SelectableItemToken<ValueType>): void {
+        if (item.getSelected()) {
+            this.deselect(item);
+        } else {
+            this.select(item);
+        }
     }
 
     onChange(value: ValueType | ValueType[]): void {

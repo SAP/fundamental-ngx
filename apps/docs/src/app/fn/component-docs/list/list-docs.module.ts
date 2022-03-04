@@ -9,6 +9,7 @@ import { API_FILES } from '../../api-files';
 import { ListHeaderComponent } from './list-header/list-header.component';
 import { ListDocsComponent } from './list-docs.component';
 import { examples } from './examples';
+import { SelectableListModule } from '@fundamental-ngx/fn/cdk';
 
 const routes: Routes = [
     {
@@ -22,7 +23,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ListModule, ButtonModule, CheckboxModule],
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        ListModule,
+        SelectableListModule,
+        ButtonModule,
+        CheckboxModule
+    ],
     exports: [RouterModule],
     declarations: [examples, ListDocsComponent, ListHeaderComponent]
 })

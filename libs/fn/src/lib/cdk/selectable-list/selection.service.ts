@@ -87,7 +87,7 @@ export class SelectionService<ValueType = any> implements OnDestroy {
         if (this._items$) {
             this._items$
                 .pipe(
-                    map((items) => items.filter((itm) => itm.selectable !== false)),
+                    map((items) => items.filter((itm) => itm.fnSelectableItem !== false)),
                     switchMap((items: SelectableItemToken[]) => {
                         const clickedEvents$ = items.map((item) => item.clicked.pipe(map(() => item)));
                         return merge(...clickedEvents$);
@@ -125,7 +125,7 @@ export class SelectionService<ValueType = any> implements OnDestroy {
     }
 
     selectItem(item: SelectableItemToken<ValueType>): void {
-        if (item.selectable !== false) {
+        if (item.fnSelectableItem !== false) {
             const val: ValueType[] = [item.value, ...this._value];
             const properValues = this._getProperValues(val);
             this._value$.next(properValues);
