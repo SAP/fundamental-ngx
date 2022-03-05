@@ -1,4 +1,11 @@
 
+### 0.33.5-rc.33 (2022-03-05)
+
+
+### Features
+
+* **core:** avatar clickable & event, zoomGlyph event on click ([#7833](https://github.com/SAP/fundamental-ngx/issues/7833)) ([7d8c7f3](https://github.com/SAP/fundamental-ngx/commit/7d8c7f3f152351764a1d55e8bbc7482766fefd9a))
+
 ### 0.33.5-rc.32 (2022-03-04)
 
 
