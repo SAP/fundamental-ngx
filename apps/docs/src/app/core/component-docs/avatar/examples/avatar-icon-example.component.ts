@@ -11,4 +11,8 @@ import { Component } from '@angular/core';
         `
     ]
 })
-export class AvatarIconExampleComponent {}
+export class AvatarIconExampleComponent {
+    onAvatarClicked(num: number): void {
+        alert('avatar ' + num + ' clicked!');
+    }
+}
