@@ -89,6 +89,12 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     @Input()
     hintPlacement: HintPlacement = 'right';
 
+    /**
+     * Defines hint placement
+     */
+    @Input()
+    hintGlyph: string;
+
     /** Hint to be placed next to label */
     @Input()
     hint: string;

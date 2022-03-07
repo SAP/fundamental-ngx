@@ -6,6 +6,7 @@ import { InlineLayout, ColumnLayout, HintPlacement, LabelLayout, SelectItem } fr
 import { InputType } from '../../input/input.component';
 import { DynamicFormGroup } from './dynamic-form-group';
 import { DynamicFormControl, DynamicFormGroupControl } from '../dynamic-form-control';
+import { HintOptions } from './hint-options';
 
 export type DynamicFormItemChoices = number | string | SelectItem;
 export type DynamicFormItemValidationResult = null | boolean | string;
@@ -254,7 +255,7 @@ export interface DynamicFormItemGuiOptions extends BaseDynamicFormItemGuiOptions
      * @description
      * If set, hint icon is added to control label with tooltip message as a value.
      */
-    hint?: string;
+    hint?: string | HintOptions;
 
     /**
      * @description
