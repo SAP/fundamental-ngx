@@ -1,4 +1,11 @@
 
+### 0.33.5-rc.41 (2022-03-07)
+
+
+### Features
+
+* **platform:** multi-combobox - range selection ([#7835](https://github.com/SAP/fundamental-ngx/issues/7835)) ([e74f496](https://github.com/SAP/fundamental-ngx/commit/e74f496ebd3c97300a40f074f2de306508691382))
+
 ### 0.33.5-rc.40 (2022-03-07)
 
 
