@@ -1,22 +1,15 @@
 <h3>Binary Checkbox in Template Driven Form</h3>
 <fdp-form-group [noLabelLayout]="false">
     <fdp-form-field id="yellow" label="Yellow" [noLabelLayout]="true" [rank]="4" [editable]="true">
-        <fdp-checkbox
-            name="yellow-cb"
-            [isBinary]="true"
-            (checkedChange)="checkedChangeFunction()"
-            (indeterminateChange)="indeterminateChangeFunction()"
-            (change)="changeFunction()"
-            [(ngModel)]="yellow"
-        ></fdp-checkbox>
+        <fdp-checkbox name="yellow-cb" [(ngModel)]="yellow"></fdp-checkbox>
     </fdp-form-field>
 
     <fdp-form-field id="white" [rank]="4" label="White">
-        <fdp-checkbox name="white-cb" [isBinary]="true" title="White" [(ngModel)]="white"></fdp-checkbox>
+        <fdp-checkbox name="white-cb" title="White" [(ngModel)]="white"></fdp-checkbox>
     </fdp-form-field>
 
     <fdp-form-field id="violet" label="Violet" [rank]="4">
-        <fdp-checkbox name="violet-cb" [isBinary]="true" title="Violet" [(ngModel)]="violet"></fdp-checkbox>
+        <fdp-checkbox name="violet-cb" title="Violet" [(ngModel)]="violet"></fdp-checkbox>
     </fdp-form-field>
 </fdp-form-group>
 <div style="padding-left: 2rem">
@@ -30,23 +23,13 @@
 <h3>Binary Checkbox in Reactive/Model Driven Form</h3>
 <fdp-form-group [formGroup]="customForm" [object]="data">
     <fdp-form-field #red id="red" label="Red" [rank]="4">
-        <fdp-checkbox
-            name="red-cb"
-            [isBinary]="true"
-            title="Red"
-            (checkedChange)="checkedChangeFunction()"
-            (indeterminateChange)="indeterminateChangeFunction()"
-            (change)="changeFunction()"
-            contentDensity="compact"
-            [formControl]="red.formControl"
-        >
+        <fdp-checkbox name="red-cb" title="Red" contentDensity="compact" [formControl]="red.formControl">
         </fdp-checkbox>
     </fdp-form-field>
 
     <fdp-form-field #blue id="blue" label="Blue" [rank]="4">
         <fdp-checkbox
             name="blue-cb"
-            [isBinary]="true"
             title="Blue"
             contentDensity="compact"
             [formControl]="blue.formControl"
@@ -56,7 +39,6 @@
     <fdp-form-field #green id="green" label="Green" [rank]="4">
         <fdp-checkbox
             name="green-cb"
-            [isBinary]="true"
             title="Green"
             contentDensity="compact"
             [formControl]="green.formControl"
@@ -69,15 +51,6 @@
 <h3>Disabled Checkbox</h3>
 <fdp-form-group>
     <fdp-form-field #disabled id="disabled" label="Red" [rank]="1">
-        <fdp-checkbox
-            name="disabled-cb"
-            [isBinary]="true"
-            title="Red"
-            (checkedChange)="checkedChangeFunction()"
-            (indeterminateChange)="indeterminateChangeFunction()"
-            (change)="changeFunction()"
-            contentDensity="compact"
-            [disabled]="true"
-        ></fdp-checkbox>
+        <fdp-checkbox name="disabled-cb" title="Red" contentDensity="compact" [disabled]="true"></fdp-checkbox>
     </fdp-form-field>
 </fdp-form-group>

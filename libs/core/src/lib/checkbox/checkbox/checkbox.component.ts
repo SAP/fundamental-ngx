@@ -23,6 +23,7 @@ import { LIST_ITEM_COMPONENT, ListItemInterface, ContentDensityService } from '@
 import equal from 'fast-deep-equal';
 import { Subscription } from 'rxjs';
 import { FormStates } from '@fundamental-ngx/core/shared';
+import { FD_CHECKBOX_VALUES_DEFAULT } from './fd-checkbox-values.interface';
 
 let checkboxUniqueId = 0;
 
@@ -121,10 +122,12 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
     private _subscriptions = new Subscription();
 
     /** Sets values returned by control. */
-    // eslint-disable-next-line @angular-eslint/no-input-rename
-    @Input('values')
-    set _values(checkboxValues: FdCheckboxValues) {
-        this.values = { ...this.values, ...checkboxValues };
+    @Input()
+    get values(): FdCheckboxValues {
+        return this._values;
+    }
+    set values(checkboxValues: FdCheckboxValues) {
+        this._values = { ...FD_CHECKBOX_VALUES_DEFAULT, ...(checkboxValues ?? {}) };
     }
 
     /** @hidden */
@@ -138,8 +141,8 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
     /** Emits event on focus change */
     @Output() focusChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    /** Values returned by control. */
-    public values: FdCheckboxValues = { trueValue: true, falseValue: false, thirdStateValue: null };
+    /** @hidden values returned by control. */
+    private _values: FdCheckboxValues = { ...FD_CHECKBOX_VALUES_DEFAULT };
     /** Stores current checkbox value. */
     public checkboxValue: any;
     /** Stores current checkbox state. */

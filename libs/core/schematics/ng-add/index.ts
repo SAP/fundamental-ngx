@@ -1,25 +1,24 @@
-import { Rule, SchematicContext, Tree, chain, SchematicsException } from '@angular-devkit/schematics';
-import { addModuleImportToModule, findModuleFromOptions } from '@angular/cdk/schematics';
-import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
+import { Rule, SchematicContext, Tree, chain, SchematicsException, TaskId } from '@angular-devkit/schematics';
+import { NodePackageInstallTask, RunSchematicTask } from '@angular-devkit/schematics/tasks';
 import { addPackageJsonDependency, NodeDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
 import { WorkspaceSchema } from '@schematics/angular/utility/workspace-models';
 
 import { defaultFontStyle } from './styles';
-import { hasModuleImport } from '../utils/ng-module-utils';
 import { getPackageVersionFromPackageJson, hasPackage } from '../utils/package-utils';
 import { Schema } from './schema';
 
-const browserAnimationsModuleName = 'BrowserAnimationsModule';
-const noopAnimationsModuleName = 'NoopAnimationsModule';
+// Needed to queue dependent schematics
+let installTaskId: TaskId;
+
 const fdStylesIconPath = 'node_modules/fundamental-styles/dist/icon.css';
 
 export function ngAdd(options: any): Rule {
     return chain([
         addDependencies(options),
         endInstallTask(),
-        addAnimations(options),
         addStylePathToConfig(options),
-        addFontsToStyles(options)
+        addFontsToStyles(options),
+        callAnimationsSchematics(options)
     ]);
 }
 
@@ -86,51 +85,23 @@ function addDependencies(options: Schema): Rule {
 // Runs npm install. Called as the last rule.
 function endInstallTask(): Rule {
     return (tree: Tree, context: SchematicContext) => {
-        context.addTask(new NodePackageInstallTask());
+        installTaskId = context.addTask(new NodePackageInstallTask());
 
         return tree;
     };
 }
 
-// Configures browser animations.
-function addAnimations(options: any): any {
-    return async (tree: Tree, context: SchematicContext) => {
-        const modulePath = await findModuleFromOptions(tree, options);
+/**
+ * Process adding animations modules.
+ * Done as the separate schematics as @angular/cdk tools are used that may be not installed yet.
+ */
+function callAnimationsSchematics(options: Schema): Rule {
+    return (tree: Tree, context: SchematicContext) => {
+        // Chain won't work here since we need the externals to be actually installed before we call their schemas
+        // This ensures the externals are a dependency of the node install, so they exist when their schemas run.
+        context.addTask(new RunSchematicTask('add-animations', options), [installTaskId]);
 
-        if (options.animations) {
-            if (hasModuleImport(tree, modulePath, noopAnimationsModuleName)) {
-                context.logger.warn(
-                    `Could not set up "${browserAnimationsModuleName} because "${noopAnimationsModuleName}" is already imported. Please manually set up browser animations.`
-                );
-
-                return tree;
-            }
-
-            if (hasModuleImport(tree, modulePath, browserAnimationsModuleName)) {
-                context.logger.info(
-                    `✅️ Import of ${browserAnimationsModuleName} already present in root module. Skipping.`
-                );
-
-                return tree;
-            }
-
-            addModuleImportToModule(
-                tree,
-                modulePath,
-                browserAnimationsModuleName,
-                '@angular/platform-browser/animations'
-            );
-
-            context.logger.info(`✅️ Added ${browserAnimationsModuleName} to root module.`);
-
-            return tree;
-        }
-
-        if (!hasModuleImport(tree, modulePath, browserAnimationsModuleName)) {
-            addModuleImportToModule(tree, modulePath, noopAnimationsModuleName, '@angular/platform-browser/animations');
-
-            context.logger.info(`✅️ Added ${noopAnimationsModuleName} to root module.`);
-        }
+        context.logger.info('✅️ Added Fundamental NGX Add Animations schematic to tasks');
 
         return tree;
     };

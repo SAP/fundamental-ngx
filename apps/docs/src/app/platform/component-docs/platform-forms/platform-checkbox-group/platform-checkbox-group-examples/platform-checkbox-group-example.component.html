@@ -7,9 +7,9 @@
             ariaLabel="My favorite fruits"
             [formControl]="fl1.formControl"
         >
-            <fdp-checkbox value="apple" label="Apple"></fdp-checkbox>
-            <fdp-checkbox value="banana" label="Banana"></fdp-checkbox>
-            <fdp-checkbox value="grapes" label="Grapes"></fdp-checkbox>
+            <fdp-checkbox [values]="{ trueValue: 'apple' }" label="Apple"></fdp-checkbox>
+            <fdp-checkbox [values]="{ trueValue: 'banana' }" label="Banana"></fdp-checkbox>
+            <fdp-checkbox [values]="{ trueValue: 'grapes' }" label="Grapes"></fdp-checkbox>
         </fdp-checkbox-group>
     </fdp-form-field>
 
@@ -52,11 +52,7 @@
         [rank]="1"
         [i18Strings]="graduation"
     >
-        <fdp-checkbox
-            name="education"
-            [isBinary]="true"
-            title="minimum education level"
-            [formControl]="ffr1.formControl"
+        <fdp-checkbox name="education" title="minimum education level" [formControl]="ffr1.formControl"
             >Graduated</fdp-checkbox
         >
     </fdp-form-field>
@@ -69,18 +65,13 @@
         [rank]="2"
         [i18Strings]="engineering"
     >
-        <fdp-checkbox
-            name="engineering"
-            [isBinary]="true"
-            title="have engineering degree"
-            [formControl]="ffr2.formControl"
-        >
+        <fdp-checkbox name="engineering" title="have engineering degree" [formControl]="ffr2.formControl">
             Engineering completed
         </fdp-checkbox>
     </fdp-form-field>
 
     <fdp-form-field #ffr3 id="work" [validators]="validators" hintPlacement="left" [rank]="3" [i18Strings]="work">
-        <fdp-checkbox name="work" [isBinary]="true" title="Work experience" [formControl]="ffr3.formControl">
+        <fdp-checkbox name="work" title="Work experience" [formControl]="ffr3.formControl">
             5 year of work experience
         </fdp-checkbox>
     </fdp-form-field>
@@ -128,21 +119,15 @@
 <h3>Checkbox with same context</h3>
 <fdp-form-group #fg hintPlacement="left" [formGroup]="form4">
     <fdp-form-field id="apple" hintPlacement="left" [rank]="1" [validators]="validators" [i18Strings]="apple">
-        <fdp-checkbox name="apple" [isBinary]="true" title="apple" value="apple" formControlName="apple"
-            >Apple</fdp-checkbox
-        >
+        <fdp-checkbox name="apple" title="apple" formControlName="apple">Apple</fdp-checkbox>
     </fdp-form-field>
 
     <fdp-form-field id="banana" hintPlacement="left" [rank]="2" [validators]="validators" [i18Strings]="banana">
-        <fdp-checkbox name="engineering" [isBinary]="true" title="banana" value="banana" formControlName="banana"
-            >Banana</fdp-checkbox
-        >
+        <fdp-checkbox name="engineering" title="banana" formControlName="banana">Banana</fdp-checkbox>
     </fdp-form-field>
 
     <fdp-form-field id="grapes" [validators]="validators" hintPlacement="left" [rank]="3" [i18Strings]="grape">
-        <fdp-checkbox name="grapes" [isBinary]="true" title="grapes" value="grapes" formControlName="grapes"
-            >Grapes</fdp-checkbox
-        >
+        <fdp-checkbox name="grapes" title="grapes" formControlName="grapes">Grapes</fdp-checkbox>
     </fdp-form-field>
 
     <ng-template #i18n let-errors>

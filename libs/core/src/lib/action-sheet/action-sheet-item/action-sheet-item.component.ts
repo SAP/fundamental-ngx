@@ -36,7 +36,8 @@ export interface ActionSheetClickEvent {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        class: 'fd-action-sheet__item'
+        class: 'fd-action-sheet__item',
+        role: 'none'
     }
 })
 export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
@@ -52,11 +53,11 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     @Input()
     negative = false;
 
-    /** Indicate if items should be in compact or compare mode. **/
+    /** Indicate if items should be in compact mode. */
     @Input()
     compact = false;
 
-    /** Indicate if it's closing button **/
+    /** Indicate if it's closing button */
     @Input()
     isCloseButton = false;
 
@@ -68,14 +69,15 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     @ViewChild(ButtonComponent)
     buttonComponent: ButtonComponent;
 
-    /** @hidden **/
+    /** @hidden */
     @Output()
     keyDown = new EventEmitter<KeyboardEvent>();
 
-    /** @hidden **/
+    /** @hidden */
     clicked = new EventEmitter<ActionSheetClickEvent>();
 
-    constructor(private _elementRef: ElementRef) {}
+    /** @hidden */
+    constructor(private readonly _elementRef: ElementRef) {}
 
     /** @hidden */
     @HostListener('keydown', ['$event'])

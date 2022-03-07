@@ -5,6 +5,7 @@
         [disabled]="disabled"
         [label]="label"
         [tristate]="tristate"
+        [values]="values"
         [tristateSelectable]="tristateSelectable"
         [state]="state"
         [compact]="contentDensity | isCompactDensity"
@@ -13,8 +14,8 @@
         [ariaLabel]="ariaLabel || null"
         [ariaLabelledBy]="ariaLabelledBy"
         [ariaDescribedBy]="ariaDescribedBy"
-        [ngModel]="checkboxCurrentValue"
-        (ngModelChange)="onModelChange()"
+        [ngModel]="value"
+        (ngModelChange)="onModelChange($event)"
         (focusChange)="_onFocusChanged($event)"
     >
         <ng-content></ng-content>

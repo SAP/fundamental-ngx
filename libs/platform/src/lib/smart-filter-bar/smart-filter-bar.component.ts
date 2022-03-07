@@ -277,7 +277,9 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
      * Populates selected filters array with user-defined default filters.
      */
     _onFormCreated(): void {
-        this._setSelectedFilters([...this.subject?.getDefaultFields(), ...this._selectedFilters]);
+        if (this.subject) {
+            this._setSelectedFilters([...this.subject.getDefaultFields(), ...this._selectedFilters]);
+        }
     }
 
     /**

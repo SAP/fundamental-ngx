@@ -8,11 +8,7 @@
             </div>
 
             <!-- Flexible Column Layout -->
-            <fd-flexible-column-layout
-                [(layout)]="localLayout"
-                (layoutChange)="onLayoutChanged($event)"
-                (tabChange)="onTabChanged($event)"
-            >
+            <fd-flexible-column-layout [(layout)]="localLayout" (layoutChange)="onLayoutChanged($event)">
                 <ng-template #startColumn>
                     <div class="docs-fcl-example-section">
                         <h2>Start Column</h2>
@@ -25,7 +21,7 @@
                 </ng-template>
                 <ng-template #midColumn>
                     <div class="docs-fcl-example-section" cdkScrollable>
-                        <fdp-dynamic-page background="list">
+                        <fdp-dynamic-page [background]="'list'">
                             <fdp-dynamic-page-title
                                 [title]="pageTitle"
                                 subtitle="Oversized multimaterial sneakers with quilted effect"
@@ -105,7 +101,7 @@
                                 [collapsible]="true"
                                 [pinnable]="false"
                                 [collapsed]="false"
-                                (collapseChange)="onCollapseChange()"
+                                (collapsedChange)="onCollapseChange()"
                             >
                                 This is the header content. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                                 Ullam possimus corrupti architecto perspiciatis, delectus necessitatibus incidunt
