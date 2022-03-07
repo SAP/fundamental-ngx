@@ -44,6 +44,10 @@ export class FormLabelComponent implements OnChanges {
     @Input()
     inlineHelpGlyph = 'question-mark';
 
+    /** Trigger event names for the inline help */
+    @Input()
+    inlineHelpTriggers: string[];
+
     /**
      * The placement of the inline help.
      * It can be one of:
@@ -64,7 +68,6 @@ export class FormLabelComponent implements OnChanges {
     /** @hidden */
     @HostBinding('class.fd-form-label__wrapper--inline-help')
     inlineHelpClass = true;
-
     /** @hidden */
     @HostBinding('class.fd-form-label__wrapper--inline-help--after')
     inlineHelpAfter = true;

@@ -90,7 +90,13 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     hintPlacement: HintPlacement = 'right';
 
     /**
-     * Defines hint placement
+     * Defines hint trigger events
+     */
+    @Input()
+    hintTriggers: string[];
+
+    /**
+     * Defines hint glyph
      */
     @Input()
     hintGlyph: string;
@@ -365,7 +371,6 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
     /** @hidden */
     private _fieldColumnLayout: ColumnLayout;
-
     /** @hidden */
     private _gapColumnLayout: ColumnLayout;
 

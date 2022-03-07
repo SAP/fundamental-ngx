@@ -56,7 +56,8 @@ export class PlatformFormGeneratorExampleComponent {
                         hint: {
                             text: 'Some contextual hint',
                             position: 'before',
-                            glyph: 'accidental-leave'
+                            glyph: 'accidental-leave',
+                            trigger: ['focusin', 'focusout']
                         },
                         column: 1
                     },

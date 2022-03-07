@@ -10,7 +10,7 @@ const defaultHintOptions: HintOptions = {
     text: undefined,
     placement: 'left',
     position: 'after',
-    trigger: ['click'],
+    trigger: ['mouseenter', 'mouseleave', 'focusin', 'focusout'],
     glyph: 'message-information'
 };
 
@@ -101,7 +101,9 @@ export class FormGeneratorFieldComponent {
                 text: formItemHintOptions
             };
         }
-        console.log({ hintOptions });
+        if (formItemHintOptions) {
+            console.log({ hintOptions, item: field.formItem, formItemHintOptions });
+        }
         return hintOptions;
     }
 
