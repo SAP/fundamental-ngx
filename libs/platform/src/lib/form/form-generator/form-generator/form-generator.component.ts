@@ -314,7 +314,7 @@ export class FormGeneratorComponent implements OnDestroy {
      *
      * @hidden
      */
-    _trackFn(index: number, value: DynamicFormControl): string {
+    _trackFn(index: number, value: DynamicFormGroupControl): string {
         return `${index}_${value.formItem.name}`;
     }
 
