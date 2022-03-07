@@ -1,4 +1,11 @@
 
+### 0.33.5-rc.40 (2022-03-07)
+
+
+### Bug Fixes
+
+* **core:** fix form label spacing ([#7839](https://github.com/SAP/fundamental-ngx/issues/7839)) ([7849e97](https://github.com/SAP/fundamental-ngx/commit/7849e97ce0be92bf6f71bfb575c97a2fd7d65abf))
+
 ### 0.33.5-rc.39 (2022-03-07)
 
 ### 0.33.5-rc.38 (2022-03-07)
