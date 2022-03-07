@@ -14,6 +14,7 @@ import {
 
 import { ColumnLayout, FormField, FormFieldGroup, FormGroupContainer } from '@fundamental-ngx/platform/shared';
 import { FORM_GROUP_CHILD_FIELD_TOKEN } from '../constants';
+import { HintOptions } from '../../form-generator/interfaces/hint-options';
 
 const formFieldGroupProvider: Provider = {
     provide: FormFieldGroup,
@@ -27,7 +28,7 @@ const formGroupChildProvider: Provider = {
 
 @Component({
     selector: 'fdp-form-field-group',
-    template: `<ng-content></ng-content>`,
+    template: ` <ng-content></ng-content>`,
     styleUrls: ['./form-field-group.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
@@ -70,6 +71,12 @@ export class FormFieldGroupComponent implements FormFieldGroup, OnInit, OnDestro
     gapColumnLayout: ColumnLayout;
 
     /**
+     * Describes hint options for group header
+     */
+    @Input()
+    hintOptions: HintOptions;
+
+    /**
      * Get form fields wrapped into form field group
      */
     @ContentChildren(FormField, { descendants: true })
@@ -84,6 +91,7 @@ export class FormFieldGroupComponent implements FormFieldGroup, OnInit, OnDestro
     ngOnInit(): void {
         this._addToFormGroup();
         this._setDefaultLayout();
+        console.log({ hintOptions: this.hintOptions });
     }
 
     /** @hidden */

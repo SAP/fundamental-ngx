@@ -45,6 +45,14 @@ export class PlatformFormGeneratorExampleComponent {
         {
             name: 'some',
             message: 'Some group name',
+            guiOptions: {
+                hint: {
+                    text: 'Some contextual hint on group header',
+                    position: 'before',
+                    glyph: 'accidental-leave',
+                    trigger: ['focusin', 'focusout']
+                }
+            },
             items: [
                 {
                     type: 'input',

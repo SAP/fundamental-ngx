@@ -230,6 +230,18 @@ export interface BaseDynamicFormItemGuiOptions {
      * Defines gap column layout.
      */
     gapColumnLayout?: ColumnLayout;
+
+    /**
+     * @description
+     * If set, hint icon is added to control label or group heading with tooltip message as a value.
+     */
+    hint?: string | HintOptions;
+
+    /**
+     * @description
+     * Define hint placement.
+     */
+    hintPlacement?: HintPlacement;
 }
 
 export interface DynamicFormItemGuiOptions extends BaseDynamicFormItemGuiOptions {
@@ -250,18 +262,6 @@ export interface DynamicFormItemGuiOptions extends BaseDynamicFormItemGuiOptions
      * Inline layout for list based form item.
      */
     inlineLayout?: InlineLayout;
-
-    /**
-     * @description
-     * If set, hint icon is added to control label with tooltip message as a value.
-     */
-    hint?: string | HintOptions;
-
-    /**
-     * @description
-     * Define hint placement.
-     */
-    hintPlacement?: HintPlacement;
 
     /**
      * @deprecated

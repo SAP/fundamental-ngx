@@ -24,20 +24,20 @@ import {
     Component,
     ContentChild,
     ContentChildren,
+    ElementRef,
     EventEmitter,
     forwardRef,
     Input,
+    isDevMode,
+    OnChanges,
     OnDestroy,
     OnInit,
     Optional,
-    OnChanges,
     Output,
     Provider,
     QueryList,
     TemplateRef,
-    ViewEncapsulation,
-    isDevMode,
-    ElementRef
+    ViewEncapsulation
 } from '@angular/core';
 import { AbstractControl, ControlContainer, FormGroup } from '@angular/forms';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
@@ -73,7 +73,7 @@ import {
     DefaultVerticalLabelLayout,
     FORM_GROUP_CHILD_FIELD_TOKEN
 } from './constants';
-import { normalizeColumnLayout, generateColumnClass } from './helpers';
+import { generateColumnClass, normalizeColumnLayout } from './helpers';
 
 export const formGroupProvider: Provider = {
     provide: FormGroupContainer,

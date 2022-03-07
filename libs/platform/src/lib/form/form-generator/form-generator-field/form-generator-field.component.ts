@@ -6,14 +6,6 @@ import { DynamicFormControl } from '../dynamic-form-control';
 import { DynamicFormGroup } from '../interfaces/dynamic-form-group';
 import { HintOptions } from '../interfaces/hint-options';
 
-const defaultHintOptions: HintOptions = {
-    text: undefined,
-    placement: 'left',
-    position: 'after',
-    trigger: ['mouseenter', 'mouseleave', 'focusin', 'focusout'],
-    glyph: 'message-information'
-};
-
 const formFieldProvider: Provider = {
     provide: FormField,
     useExisting: forwardRef(() => FormGeneratorFieldComponent)
@@ -34,15 +26,7 @@ export class FormGeneratorFieldComponent {
     /**
      * Form control.
      */
-    @Input()
-    get field(): DynamicFormControl {
-        return this._field;
-    }
-
-    set field(value: DynamicFormControl) {
-        this._field = value;
-        this.hintOptions = this._calculateHintOptions(value);
-    }
+    @Input() field: DynamicFormControl;
 
     /**
      * Form generator's form.
@@ -76,38 +60,12 @@ export class FormGeneratorFieldComponent {
     @Input() shouldShow: boolean;
 
     /**
+     * Describes hint options for field label
+     */
+    @Input() hintOptions: HintOptions;
+
+    /**
      * Form field component.
      */
     @ViewChild(FormFieldComponent) fieldRenderer: FormFieldComponent;
-
-    hintOptions: HintOptions;
-
-    private _field: DynamicFormControl;
-
-    private _calculateHintOptions(field: DynamicFormControl): HintOptions {
-        let hintOptions: HintOptions;
-        const formItemHintOptions: string | HintOptions = field.formItem?.guiOptions.hint;
-        const hintPlacement = field.formItem?.guiOptions.hintPlacement;
-        if (this.isHintOptions(formItemHintOptions)) {
-            hintOptions = {
-                ...defaultHintOptions,
-                placement: hintPlacement || defaultHintOptions.placement,
-                ...formItemHintOptions
-            };
-        } else {
-            hintOptions = {
-                ...defaultHintOptions,
-                placement: hintPlacement || defaultHintOptions.placement,
-                text: formItemHintOptions
-            };
-        }
-        if (formItemHintOptions) {
-            console.log({ hintOptions, item: field.formItem, formItemHintOptions });
-        }
-        return hintOptions;
-    }
-
-    private isHintOptions(opts: string | HintOptions): opts is HintOptions {
-        return opts && typeof opts !== 'string';
-    }
 }

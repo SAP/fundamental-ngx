@@ -37,6 +37,7 @@
                         *fdpDynamicFormControlField="field; show: shouldShowFields[field.formItem.name] !== false"
                     >
                         <fdp-form-generator-field
+                            [hintOptions]="getHintOptions(field.formItem?.guiOptions)"
                             [form]="form"
                             [shouldShow]="shouldShowFields[field.formItem.name] !== false"
                             [field]="field"
@@ -49,6 +50,7 @@
                 </ng-template>
                 <ng-template #groupRenderer>
                     <fdp-form-field-group
+                        [hintOptions]="getHintOptions(field.formItem?.guiOptions)"
                         [label]="field.formItem?.message"
                         [labelColumnLayout]="field.formItem?.guiOptions?.labelColumnLayout"
                         [fieldColumnLayout]="field.formItem?.guiOptions?.fieldColumnLayout"
@@ -63,6 +65,7 @@
                                 "
                             >
                                 <fdp-form-generator-field
+                                    [hintOptions]="getHintOptions(groupField.formItem?.guiOptions)"
                                     [form]="form"
                                     [field]="groupField"
                                     [shouldShow]="shouldShowFields[groupField.formItem?.name] !== false"
