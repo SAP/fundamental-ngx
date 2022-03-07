@@ -56,7 +56,7 @@ describe('File uploader component test', () => {
         for (let i = 0; i < arrLength; i++) {
             scrollIntoView(browseButtonDisabled, i);
             expect(isElementClickable(browseButtonDisabled, i)).toBe(
-                true,
+                false,
                 `browse button with index ${i} is not clickable`
             );
         }
