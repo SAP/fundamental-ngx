@@ -1,7 +1,9 @@
+import { runValueAccessorTests } from 'ngx-cva-test-suite';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InputComponent } from './input.component';
 import { InputState } from './input-base';
+import { InputModule } from './input.module';
 
 describe('InputComponent', () => {
     let component: InputComponent;
@@ -47,4 +49,19 @@ describe('InputComponent', () => {
         component.setDisabledState(true);
         expect(component.disabledByForm).toBeTruthy();
     });
+});
+
+const INPUT_IDENTIFIER = 'fn-input-unit-test';
+
+runValueAccessorTests({
+    component: InputComponent,
+    testModuleMetadata: {
+        imports: [InputModule]
+    },
+    supportsOnBlur: true,
+    nativeControlSelector: `input[id="${INPUT_IDENTIFIER}"]`,
+    internalValueChangeSetter: (fixture, value) => {
+        fixture.componentInstance.inputText = value;
+    },
+    getComponentValue: (fixture) => fixture.componentInstance.inputText
 });
