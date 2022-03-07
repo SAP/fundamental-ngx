@@ -1,4 +1,11 @@
 
+### 0.33.5-rc.42 (2022-03-07)
+
+
+### Bug Fixes
+
+* **core:** file uploader disabled visual state ([#7814](https://github.com/SAP/fundamental-ngx/issues/7814)) ([ca29793](https://github.com/SAP/fundamental-ngx/commit/ca29793dd4adb2dac5fe73d77dd10348420b03a1))
+
 ### 0.33.5-rc.41 (2022-03-07)
 
 
