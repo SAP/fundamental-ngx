@@ -1,4 +1,11 @@
 
+### 0.33.5-rc.38 (2022-03-07)
+
+
+### Bug Fixes
+
+* **platform:** dynamic page onCollapsedChange, header-internal removing ([#7812](https://github.com/SAP/fundamental-ngx/issues/7812)) ([f3a743d](https://github.com/SAP/fundamental-ngx/commit/f3a743dccf36b5b78f6c4b00c183be26ff1c8f65))
+
 ### 0.33.5-rc.37 (2022-03-06)
 
 ### 0.33.5-rc.36 (2022-03-06)
