@@ -50,6 +50,7 @@ import { PlatformWizardGeneratorModule } from '@fundamental-ngx/platform/wizard-
 import { PlatformIconTabBarModule } from '@fundamental-ngx/platform/icon-tab-bar';
 import { PlatformSmartFilterBarModule } from '@fundamental-ngx/platform/smart-filter-bar';
 import { PlatformColorPickerModule } from '@fundamental-ngx/platform/color-picker';
+import { PlatformColorPaletteModule } from '@fundamental-ngx/platform/color-palette';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -100,7 +101,8 @@ import { PlatformColorPickerModule } from '@fundamental-ngx/platform/color-picke
         PlatformFormGeneratorModule,
         PlatformIconTabBarModule,
         PlatformSmartFilterBarModule,
-        PlatformColorPickerModule
+        PlatformColorPickerModule,
+        PlatformColorPaletteModule
     ],
     providers: []
 })

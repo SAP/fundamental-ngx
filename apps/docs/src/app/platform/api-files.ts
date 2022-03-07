@@ -10,6 +10,7 @@ export const API_FILES = {
     button: ['ButtonComponent'],
     checkbox: ['CheckboxComponent'],
     colorPicker: ['ColorPickerComponent'],
+    colorPalette: ['ColorPaletteComponent'],
     formGenerator: [
         'FormGeneratorComponent',
         'FormGeneratorService',

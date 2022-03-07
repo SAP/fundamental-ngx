@@ -15,6 +15,7 @@ export const components: SectionInterfaceContent[] = [
     { url: 'platform/checkbox', name: 'Checkbox' },
     { url: 'platform/checkbox-group', name: 'Checkbox Group' },
     { url: 'platform/color-picker', name: 'Color Picker' },
+    { url: 'platform/color-palette', name: 'Color Palette' },
     { url: 'platform/date-picker', name: 'Date Picker' },
     { url: 'platform/datetime-picker', name: 'Datetime Picker' },
     { url: 'platform/file-uploader', name: 'File Uploader' },

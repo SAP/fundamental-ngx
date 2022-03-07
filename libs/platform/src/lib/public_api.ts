@@ -29,3 +29,4 @@ export * from '@fundamental-ngx/platform/wizard-generator';
 export * from '@fundamental-ngx/platform/icon-tab-bar';
 export * from '@fundamental-ngx/platform/smart-filter-bar';
 export * from '@fundamental-ngx/platform/color-picker';
+export * from '@fundamental-ngx/platform/color-palette';

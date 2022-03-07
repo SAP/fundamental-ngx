@@ -49,6 +49,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'color-palette',
+                loadChildren: () =>
+                    import('./component-docs/platform-color-palette/platform-color-palette.module').then(
+                        (m) => m.PlatformColorPaletteDocsModule
+                    )
+            },
+            {
                 path: 'date-picker',
                 loadChildren: () =>
                     import(
