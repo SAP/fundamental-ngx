@@ -9,4 +9,8 @@ export class ColorPaletteComponent extends BaseComponent {
     constructor(_cd: ChangeDetectorRef) {
         super(_cd);
     }
+
+    colorClicked(event): void {
+        console.log(event.detail.color);
+    }
 }
