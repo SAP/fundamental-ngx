@@ -1,4 +1,11 @@
 
+### 0.33.5-rc.45 (2022-03-08)
+
+
+### Bug Fixes
+
+* **core:** make state input optional ([#7856](https://github.com/SAP/fundamental-ngx/issues/7856)) ([dfbcd9f](https://github.com/SAP/fundamental-ngx/commit/dfbcd9f6a9d7c53caa50f1856b6eee66f50b5292))
+
 ### 0.33.5-rc.44 (2022-03-08)
 
 ### 0.33.5-rc.43 (2022-03-08)
