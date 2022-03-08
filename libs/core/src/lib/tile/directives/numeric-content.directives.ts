@@ -134,7 +134,7 @@ export class NumericContentKpiContainerDirective {
 export class NumericContentKpiDirective implements OnInit, OnChanges, CssClassBuilder {
     /** State of the KPI. Options are neutral (default), 'positive', 'negative', 'critical', and 'informative'. */
     @Input()
-    state: NumericContentState;
+    state?: NumericContentState;
 
     /** Apply user custom styles */
     @Input()
@@ -228,7 +228,7 @@ export class NumericContentScaleArrowDirective implements OnInit, OnChanges, Css
 export class NumericContentScaleDirective implements OnInit, OnChanges, CssClassBuilder {
     /** State of the SCALE. Options are neutral (default), 'positive', 'negative', 'critical', and 'informative'. */
     @Input()
-    state: NumericContentState;
+    state?: NumericContentState;
 
     /** Apply user custom styles */
     @Input()

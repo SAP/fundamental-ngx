@@ -112,7 +112,7 @@ export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuil
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
      */
     @Input()
-    state: FormStates;
+    state?: FormStates;
 
     /**
      * Whether the icon add-on or the text add-on is a button.
