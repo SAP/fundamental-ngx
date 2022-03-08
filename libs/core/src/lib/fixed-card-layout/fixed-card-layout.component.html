@@ -18,7 +18,6 @@
         cdkDropList
         class="fd-fixed-card-layout__card"
         [class.fd-fixed-card-layout__card--single]="_singleItemColumns.has(card.fdCardDef)"
-        [style.width.%]="100 / _numberOfColumns"
         [cdkDropListData]="cardIndex"
         [cdkDropListEnterPredicate]="_enterPredicate"
         (cdkDropListSorted)="_onDropListSorted($event)"
