@@ -36,7 +36,7 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges,
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
      */
     @Input()
-    state: FormStates;
+    state?: FormStates;
 
     /**
      * Whether form is in compact mode

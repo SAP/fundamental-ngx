@@ -115,7 +115,7 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
      */
     @Input()
-    state: FormStates;
+    state?: FormStates;
 
     /**
      * Whether the input group is a popover control
