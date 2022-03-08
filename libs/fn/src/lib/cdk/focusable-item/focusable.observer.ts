@@ -22,7 +22,10 @@ export class FocusableObserver {
             return false;
         }
         const tabIndex = parseInt(element.getAttribute('tabindex') + '', 10);
-        return (isElementFocusableByDefault(element) && isNaN(tabIndex)) || (!isNaN(tabIndex) && tabIndex > -1);
+        if (isNaN(tabIndex)) {
+            return isElementFocusableByDefault(element);
+        }
+        return tabIndex > -1;
     }
 
     observe(element: HasElementRef<Element> | Element | ElementRef<Element>): Observable<boolean> {
