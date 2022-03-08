@@ -1,4 +1,4 @@
-import { ElementRef, Injectable, OnDestroy, Optional, Renderer2 } from '@angular/core';
+import { ElementRef, Injectable, Optional, Renderer2 } from '@angular/core';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
 import { MenuComponent } from '../menu.component';
 import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
@@ -15,7 +15,7 @@ interface MenuNode {
 type MenuMap = Map<MenuItemComponent, MenuNode>;
 
 @Injectable()
-export class MenuService implements OnDestroy {
+export class MenuService {
     /** Map of menu items to menu nodes */
     menuMap: MenuMap;
 
@@ -35,16 +35,11 @@ export class MenuService implements OnDestroy {
     private _destroyKeyboardHandlerListener: () => void;
 
     /** @hidden */
-    private _isRtl: boolean;
-
-    constructor(private _renderer: Renderer2, @Optional() private readonly _rtlService: RtlService) {
-        this._rtlService?.rtl.subscribe((isRtl) => (this._isRtl = isRtl));
+    get _isRtl(): boolean {
+        return this._rtlService?.rtl.value;
     }
 
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._rtlService?.rtl.unsubscribe();
-    }
+    constructor(private _renderer: Renderer2, @Optional() private readonly _rtlService: RtlService) {}
 
     /** Reference to menu component */
     get menu(): MenuComponent {
