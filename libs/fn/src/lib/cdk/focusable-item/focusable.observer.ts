@@ -6,6 +6,7 @@ import { ReadonlyObserver } from '../readonly';
 import { DisabledObserver } from '../disabled';
 import { AttributeObserver } from '../observers/attribute.observer';
 import { HasElementRef } from '../has-element-ref';
+import { isElementFocusableByDefault } from './is-element-focusable-by-default';
 
 @Injectable({
     providedIn: 'root'
@@ -21,7 +22,7 @@ export class FocusableObserver {
             return false;
         }
         const tabIndex = parseInt(element.getAttribute('tabindex') + '', 10);
-        return !isNaN(tabIndex) && tabIndex > -1;
+        return (isElementFocusableByDefault(element) && isNaN(tabIndex)) || (!isNaN(tabIndex) && tabIndex > -1);
     }
 
     observe(element: HasElementRef<Element> | Element | ElementRef<Element>): Observable<boolean> {
