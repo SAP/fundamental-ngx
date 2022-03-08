@@ -30,7 +30,7 @@ export class SelectionService<ValueType = any> implements OnDestroy {
         this._normalizedValue$ = this._value$.pipe(
             distinctUntilChanged(equal),
             map((v) => coerceArray<ValueType>(v)),
-            map((value) => (this._isMultipleMode() ? value : [value[0]])),
+            map((value) => (this._isMultipleMode ? value : [value[0]])),
             map((coerced: ValueType[]) => coerced.filter(Boolean))
         );
         this._normalizedValue$.pipe(takeUntil(this._destroy$)).subscribe((val) => (this._value = val));
@@ -134,7 +134,7 @@ export class SelectionService<ValueType = any> implements OnDestroy {
     }
 
     deselectItem(item: SelectableItemToken<ValueType>): void {
-        const canBeDeselected = this._rootComponent.toggle || (this._isMultipleMode() && this._value.length > 1);
+        const canBeDeselected = this._rootComponent.toggle || (this._isMultipleMode && this._value.length > 1);
         if (canBeDeselected) {
             const val: ValueType[] = this._value.filter((v) => v !== item.value);
             const properValues = this._getProperValues(val);
@@ -143,7 +143,7 @@ export class SelectionService<ValueType = any> implements OnDestroy {
         }
     }
 
-    private _isMultipleMode(): boolean {
+    private get _isMultipleMode(): boolean {
         return this._rootComponent.multiple === true;
     }
 
@@ -165,9 +165,6 @@ export class SelectionService<ValueType = any> implements OnDestroy {
 
     /** @hidden */
     private _getProperValues(values: ValueType[]): ValueType | ValueType[] {
-        if (this._isMultipleMode()) {
-            return values;
-        }
-        return values[0];
+        return this._isMultipleMode ? values : values[0];
     }
 }
