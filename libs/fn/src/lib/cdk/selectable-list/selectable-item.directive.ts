@@ -5,7 +5,7 @@ import { FN_SELECTABLE_ITEM_PROVIDER } from './selectable-list.tokens';
 import { FnDisabledProvider } from '../disabled';
 import { FnReadonlyProvider } from '../readonly';
 import { SelectionService } from './selection.service';
-import { ClickedObservable } from '../clicked';
+import { FnClickedProvider } from '../clicked';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 
 @Directive({
@@ -17,7 +17,8 @@ import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
             useExisting: SelectableItemDirective
         },
         FnReadonlyProvider,
-        FnDisabledProvider
+        FnDisabledProvider,
+        FnClickedProvider
     ]
 })
 export class SelectableItemDirective<ValueType = any> implements SelectableItemToken<ValueType> {
@@ -54,7 +55,7 @@ export class SelectableItemDirective<ValueType = any> implements SelectableItemT
     }
 
     @Output()
-    clicked: Observable<MouseEvent | KeyboardEvent> = new ClickedObservable(this);
+    clicked: Observable<MouseEvent | KeyboardEvent>;
 
     private _value!: ValueType;
     private _selected = false;
@@ -66,9 +67,10 @@ export class SelectableItemDirective<ValueType = any> implements SelectableItemT
         private readonly$: FnReadonlyProvider,
         private selectionService: SelectionService,
         private _elementRef: ElementRef<HTMLElement>,
-        private _cd: ChangeDetectorRef
+        private _cd: ChangeDetectorRef,
+        _clicked: FnClickedProvider
     ) {
-        this.clicked = this.provider?.clicked || this.clicked;
+        this.clicked = this.provider?.clicked || _clicked.asObservable();
         this._listenToDisablingEvents();
     }
 

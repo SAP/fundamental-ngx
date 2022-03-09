@@ -1,11 +1,15 @@
-import { Directive, ElementRef, Output } from '@angular/core';
-import { ClickedObservable } from './clicked.observable';
+import { Directive, Output } from '@angular/core';
+import { FnClickedProvider } from './fn-clicked.provider';
+import { Observable } from 'rxjs';
 
 @Directive({
-    selector: '[fnClicked]'
+    selector: '[fnClicked]',
+    providers: [FnClickedProvider]
 })
 export class ClickedDirective {
-    @Output() fnClicked = new ClickedObservable(this._elementRef);
+    @Output() fnClicked: Observable<MouseEvent | KeyboardEvent>;
 
-    constructor(private _elementRef: ElementRef<HTMLElement>) {}
+    constructor(_clicked: FnClickedProvider) {
+        this.fnClicked = _clicked.asObservable();
+    }
 }

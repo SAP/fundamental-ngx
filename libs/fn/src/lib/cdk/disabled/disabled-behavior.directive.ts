@@ -7,6 +7,7 @@ import { DisabledBehavior } from './disabled-behavior.interface';
 import { setDisabledState } from './set-disabled-state';
 import { FN_DISABLED_DIRECTIVE } from './fn-disabled.token';
 import { DisabledViewModifier } from './disabled-view-modifier.interface';
+import { FnClickedProvider } from '../clicked';
 
 @Directive({
     selector: '[fnDisabled]',
@@ -15,7 +16,8 @@ import { DisabledViewModifier } from './disabled-view-modifier.interface';
             provide: FN_DISABLED_DIRECTIVE,
             useExisting: DisabledBehaviorDirective
         },
-        DestroyedBehavior
+        DestroyedBehavior,
+        FnClickedProvider
     ]
 })
 export class DisabledBehaviorDirective
@@ -25,6 +27,7 @@ export class DisabledBehaviorDirective
     @Input()
     set fnDisabled(value: BooleanInput) {
         const val = coerceBooleanProperty(value);
+        this._clicked.setPreventDefault(val);
         this._fnDisableInput$.next(val);
     }
 
@@ -35,7 +38,11 @@ export class DisabledBehaviorDirective
     _disabled = false;
     _fnDisableInput$ = new BehaviorSubject(false);
 
-    constructor(private _elementRef: ElementRef<HTMLElement>, private _destroy$: DestroyedBehavior) {
+    constructor(
+        private _elementRef: ElementRef<HTMLElement>,
+        private _destroy$: DestroyedBehavior,
+        private _clicked: FnClickedProvider
+    ) {
         super(1);
     }
 

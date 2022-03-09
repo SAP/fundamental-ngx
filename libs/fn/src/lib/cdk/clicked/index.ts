@@ -1,3 +1,3 @@
 export * from './clicked-behavior.module';
 export * from './clicked.directive';
-export * from './clicked.observable';
+export * from './fn-clicked.provider';
