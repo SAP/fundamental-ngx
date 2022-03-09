@@ -68,15 +68,14 @@ export class TablePopinExampleComponent implements OnInit {
 
     select(index: number, checked: boolean): void {
         this.fruits[index].checked = checked;
-        this.masterCheckbox = this._allSelected();
+
+        this._handleMasterCheckboxState();
     }
 
     selectMaster(checked: boolean): void {
-        if (checked) {
-            this._selectAll();
-        } else {
-            this._deselectAll();
-        }
+        checked ? this._selectAll() : this._deselectAll();
+
+        this._handleMasterCheckboxState();
     }
 
     constructor(private _rtlService: RtlService) {}
@@ -87,6 +86,10 @@ export class TablePopinExampleComponent implements OnInit {
         );
     }
 
+    private _handleMasterCheckboxState(): void {
+        this.masterCheckbox = this._allSelected() ? true : this._anySelected() ? null : false;
+    }
+
     private _selectAll(): void {
         this.fruits.forEach((row) => (row.checked = true));
     }
@@ -95,7 +98,11 @@ export class TablePopinExampleComponent implements OnInit {
         this.fruits.forEach((row) => (row.checked = false));
     }
 
+    private _anySelected(): boolean {
+        return this.fruits.some((_row) => _row.checked);
+    }
+
     private _allSelected(): boolean {
-        return !this.fruits.find((_row) => !_row.checked);
+        return this.fruits.every((_row) => _row.checked);
     }
 }
