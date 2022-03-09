@@ -1,8 +1,9 @@
-import { Injectable, isDevMode, Optional } from '@angular/core';
+import { ApplicationRef, Injectable, isDevMode, NgZone, Optional } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { filter, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { setTheme as setWebComponentTheme } from '@ui5/webcomponents-base/dist/config/Theme.js';
 
 import { THEME_SWITCHER_ROUTER_MISSING_ERROR } from '../consts';
 
@@ -72,7 +73,12 @@ export class ThemesService {
     /** @hidden **/
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    constructor(@Optional() private _activatedRoute: ActivatedRoute, private _sanitizer: DomSanitizer) {}
+    constructor(
+        @Optional() private _activatedRoute: ActivatedRoute,
+        private _sanitizer: DomSanitizer,
+        private _appRef: ApplicationRef,
+        private _ngZone: NgZone
+    ) {}
 
     /**
      * Set theme according to additional URL parameter.
@@ -117,6 +123,7 @@ export class ThemesService {
 
     /** Assign css file corresponding to chosen theme from @sap-theming **/
     setTheme(theme: string): SafeResourceUrl {
+        setWebComponentTheme(theme);
         return this._sanitizer.bypassSecurityTrustResourceUrl('assets/theming-base/' + theme + '/css_variables.css');
     }
 
