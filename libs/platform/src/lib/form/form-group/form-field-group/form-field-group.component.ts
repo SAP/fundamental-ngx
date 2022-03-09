@@ -91,7 +91,6 @@ export class FormFieldGroupComponent implements FormFieldGroup, OnInit, OnDestro
     ngOnInit(): void {
         this._addToFormGroup();
         this._setDefaultLayout();
-        console.log({ hintOptions: this.hintOptions });
     }
 
     /** @hidden */

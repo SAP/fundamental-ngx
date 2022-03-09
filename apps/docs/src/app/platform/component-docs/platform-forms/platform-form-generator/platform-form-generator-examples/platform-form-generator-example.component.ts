@@ -2,11 +2,11 @@ import { Component, ViewChild } from '@angular/core';
 import { Validators } from '@angular/forms';
 
 import {
-    DatetimeAdapter,
     DATE_TIME_FORMATS,
+    DatetimeAdapter,
+    FD_DATETIME_FORMATS,
     FdDate,
-    FdDatetimeAdapter,
-    FD_DATETIME_FORMATS
+    FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
 import { DynamicFormItem, DynamicFormValue, FormGeneratorComponent } from '@fundamental-ngx/platform/form';
 
@@ -47,10 +47,7 @@ export class PlatformFormGeneratorExampleComponent {
             message: 'Some group name',
             guiOptions: {
                 hint: {
-                    text: 'Some contextual hint on group header',
-                    position: 'before',
-                    glyph: 'accidental-leave',
-                    trigger: ['focusin', 'focusout']
+                    text: 'Some contextual hint on group header'
                 }
             },
             items: [

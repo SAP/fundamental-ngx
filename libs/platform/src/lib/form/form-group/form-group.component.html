@@ -4,21 +4,17 @@
 
 <ng-template #body>
     <!--  Render fields and field groups with assigned columns -->
-    <ng-container *ngTemplateOutlet="fields; context: { $implicit: formRows, title: mainTitle }"> </ng-container>
+    <ng-container *ngTemplateOutlet="fields; context: { $implicit: formRows, title: mainTitle }"></ng-container>
 </ng-template>
 
 <ng-template #fields let-rows let-title="title">
     <div *ngIf="title" class="fd-form-header">
-        <span class="fd-form-header__text">{{ title }} A PLACE</span>
+        <span class="fd-form-header__text">{{ title }}</span>
     </div>
     <div class="fd-container fd-form-layout-grid-container" [class.fd-col--compact]="compact">
         <ng-container *ngFor="let row of rows | keyvalue; trackBy: trackByFn">
             <div class="fd-row fd-row--top">
-                <div class="fd-form-group__header" *ngIf="row.value.label">
-                    <h1 class="fd-form-group__header-text">
-                        {{ row.value.label }}
-                    </h1>
-                </div>
+                <div [fieldGroup]="$fieldGroup(row.value)" fdp-form-group-header></div>
                 <ng-container *ngFor="let fields of isFieldGroupRow(row) | keyvalue; trackBy: trackByFn">
                     <div
                         class="fd-form-group fd-col"

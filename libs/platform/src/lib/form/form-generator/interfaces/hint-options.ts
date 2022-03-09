@@ -13,3 +13,8 @@ export interface HintOptions {
     /** Icon name of the inline help element */
     glyph?: string;
 }
+
+export interface FieldHintOptions extends HintOptions {
+    /** Target where hint should be placed */
+    target?: 'input' | 'label';
+}

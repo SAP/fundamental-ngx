@@ -2,11 +2,11 @@ import { AsyncValidatorFn, ValidatorFn } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 import { ContentDensity } from '@fundamental-ngx/core/utils';
-import { InlineLayout, ColumnLayout, HintPlacement, LabelLayout, SelectItem } from '@fundamental-ngx/platform/shared';
+import { ColumnLayout, HintPlacement, InlineLayout, LabelLayout, SelectItem } from '@fundamental-ngx/platform/shared';
 import { InputType } from '../../input/input.component';
 import { DynamicFormGroup } from './dynamic-form-group';
 import { DynamicFormControl, DynamicFormGroupControl } from '../dynamic-form-control';
-import { HintOptions } from './hint-options';
+import { FieldHintOptions, HintOptions } from './hint-options';
 
 export type DynamicFormItemChoices = number | string | SelectItem;
 export type DynamicFormItemValidationResult = null | boolean | string;
@@ -298,6 +298,8 @@ export interface DynamicFormItemGuiOptions extends BaseDynamicFormItemGuiOptions
      * If label should be appended with colon. True by default.
      */
     appendColon?: boolean;
+
+    hint?: string | FieldHintOptions;
 }
 
 export interface DynamicFormValue {

@@ -74,11 +74,14 @@ import {
     FORM_GROUP_CHILD_FIELD_TOKEN
 } from './constants';
 import { generateColumnClass, normalizeColumnLayout } from './helpers';
+import { HintOptions } from '../form-generator/interfaces/hint-options';
 
 export const formGroupProvider: Provider = {
     provide: FormGroupContainer,
     useExisting: forwardRef(() => FormGroupComponent)
 };
+
+type FormGroupField = (FormField | FormFieldGroup) & { hintOptions?: HintOptions };
 
 /**
  *
@@ -341,7 +344,7 @@ export class FormGroupComponent
      *
      */
     @ContentChildren(FORM_GROUP_CHILD_FIELD_TOKEN as any, { descendants: true })
-    protected formGroupChildren: QueryList<FormField | FormFieldGroup>;
+    protected formGroupChildren: QueryList<FormGroupField>;
 
     /**
      * @hidden
@@ -353,7 +356,7 @@ export class FormGroupComponent
      * This list relies on the injection mechanism so nested FdpFormGroup's fields/fieldGroups
      * will be omitted
      */
-    private _formGroupDirectChildren: Array<FormField | FormFieldGroup> = [];
+    private _formGroupDirectChildren: Array<FormGroupField> = [];
 
     /** @hidden */
     xlColumnsNumber: number;
@@ -512,6 +515,8 @@ export class FormGroupComponent
         return ['fd-container', !this.compact ? 'fd-form-layout-grid-container' : '', this.class];
     }
 
+    $fieldGroup = (f: any): FieldGroup => f;
+
     /** @hidden */
     private _listenToFormGroupChildren(): void {
         this.formGroupChildren.changes.subscribe(() => {
@@ -571,7 +576,7 @@ export class FormGroupComponent
                     fieldGroupColumns[columnNumber].push(groupField);
                 });
 
-                rows[rowNumber] = new FieldGroup(child.label, fieldGroupColumns);
+                rows[rowNumber] = new FieldGroup(child.label, fieldGroupColumns, child.hintOptions);
                 rowNumber++;
             }
         }
@@ -598,7 +603,7 @@ export class FormGroupComponent
 
     /** @hidden */
     private _updateFormFieldsProperties(): void {
-        this._getFormGroupChildren().forEach((formField: FormField | FormFieldGroup) => {
+        this._getFormGroupChildren().forEach((formField: FormGroupField) => {
             if (isFieldChild(formField)) {
                 this._updateFormFieldProperties(formField);
             }
@@ -663,7 +668,7 @@ export class FormGroupComponent
     }
 
     /** @hidden */
-    private _addDirectFormGroupChild(child: FormField | FormFieldGroup): void {
+    private _addDirectFormGroupChild(child: FormGroupField): void {
         if (this._formGroupDirectChildren.indexOf(child) > -1) {
             return;
         }
@@ -679,11 +684,10 @@ export class FormGroupComponent
      * @hidden
      * Get direct form group children in the original order
      */
-    private _getFormGroupChildren(): (FormField | FormFieldGroup)[] {
+    private _getFormGroupChildren(): FormGroupField[] {
         if (!this.formGroupChildren) {
             return [];
         }
-
         const children = this.formGroupChildren
             .toArray()
             .map((child) => (isFieldGroupWrapperChild(child) ? child.fieldRenderer : child));

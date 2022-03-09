@@ -44,9 +44,10 @@ import {
     DefaultVerticalLabelLayout,
     FORM_GROUP_CHILD_FIELD_TOKEN
 } from '../constants';
-import { normalizeColumnLayout, generateColumnClass } from '../helpers';
+import { generateColumnClass, normalizeColumnLayout } from '../helpers';
 import { FormFieldControlExtrasComponent } from './../form-field-extras/form-field-extras.component';
 import { InputMessageGroupWithTemplate } from '../../input-message-group-with-template/input-message-group-with-template.component';
+import { InlineHelpPlacement } from '@fundamental-ngx/core/form';
 
 const formFieldProvider: Provider = {
     provide: FormField,
@@ -100,6 +101,12 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
      */
     @Input()
     hintGlyph: string;
+
+    /**
+     * Defines hint position, before or after label
+     */
+    @Input()
+    hintPosition: InlineHelpPlacement;
 
     /** Hint to be placed next to label */
     @Input()
