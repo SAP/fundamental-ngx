@@ -27,6 +27,7 @@ import { startWith, takeUntil } from 'rxjs/operators';
 import {
     Column,
     ColumnLayout,
+    FieldHintOptions,
     FormField,
     FormFieldControl,
     FormFieldGroup,
@@ -45,9 +46,9 @@ import {
     FORM_GROUP_CHILD_FIELD_TOKEN
 } from '../constants';
 import { generateColumnClass, normalizeColumnLayout } from '../helpers';
-import { FormFieldControlExtrasComponent } from './../form-field-extras/form-field-extras.component';
+import { FormFieldControlExtrasComponent } from '../form-field-extras/form-field-extras.component';
 import { InputMessageGroupWithTemplate } from '../../input-message-group-with-template/input-message-group-with-template.component';
-import { InlineHelpPlacement } from '@fundamental-ngx/core/form';
+import { FDP_FORM_FIELD_HINT_OPTIONS_DEFAULT } from '../fdp-form.tokens';
 
 const formFieldProvider: Provider = {
     provide: FormField,
@@ -85,32 +86,15 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     id: string;
 
     /**
+     * @deprecated use `hint.placement` input instead
      * Defines hint placement
      */
     @Input()
-    hintPlacement: HintPlacement = 'right';
-
-    /**
-     * Defines hint trigger events
-     */
-    @Input()
-    hintTriggers: string[];
-
-    /**
-     * Defines hint glyph
-     */
-    @Input()
-    hintGlyph: string;
-
-    /**
-     * Defines hint position, before or after label
-     */
-    @Input()
-    hintPosition: InlineHelpPlacement;
+    hintPlacement: HintPlacement;
 
     /** Hint to be placed next to label */
     @Input()
-    hint: string;
+    hint: string | FieldHintOptions;
 
     /**
      * @deprecated
@@ -415,7 +399,8 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         @Optional()
         @Inject(RESPONSIVE_BREAKPOINTS_CONFIG)
         readonly _defaultResponsiveBreakPointConfig: ResponsiveBreakPointConfig,
-        readonly _responsiveBreakpointsService: ResponsiveBreakpointsService
+        readonly _responsiveBreakpointsService: ResponsiveBreakpointsService,
+        @Inject(FDP_FORM_FIELD_HINT_OPTIONS_DEFAULT) private _defaultHintOptions: FieldHintOptions
     ) {
         // provides capability to make a field disabled. useful in reactive form approach.
         this.formControl = new FormControl({ value: null, disabled: this.disabled });
@@ -563,6 +548,22 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         this.control = null;
 
         this._removeControlFromFormGroup();
+    }
+
+    get hintOptions(): FieldHintOptions {
+        // placement is here set up because hintPlacement is deprecated
+        if (typeof this.hint === 'string') {
+            return {
+                ...this._defaultHintOptions,
+                placement: this.hintPlacement ? this.hintPlacement : this._defaultHintOptions.placement,
+                text: this.hint
+            };
+        }
+        return {
+            ...this._defaultHintOptions,
+            placement: this.hintPlacement ? this.hintPlacement : this._defaultHintOptions.placement,
+            ...this.hint
+        };
     }
 
     /** @hidden */

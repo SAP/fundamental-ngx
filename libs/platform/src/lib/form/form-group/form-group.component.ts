@@ -51,6 +51,7 @@ import {
     FormField,
     FormFieldGroup,
     FormGroupContainer,
+    HintOptions,
     HintPlacement,
     LabelLayout
 } from '@fundamental-ngx/platform/shared';
@@ -74,7 +75,6 @@ import {
     FORM_GROUP_CHILD_FIELD_TOKEN
 } from './constants';
 import { generateColumnClass, normalizeColumnLayout } from './helpers';
-import { HintOptions } from '../form-generator/interfaces/hint-options';
 
 export const formGroupProvider: Provider = {
     provide: FormGroupContainer,

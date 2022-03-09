@@ -7,18 +7,7 @@
             *ngIf="!noLabelLayout"
             [style.margin-bottom.px]="_controlExtrasHeightPx"
         >
-            <label
-                [id]="'fdp-form-label-' + id"
-                [required]="editable && required"
-                fd-form-label
-                [inlineHelpTitle]="hint"
-                [inlineHelpBodyPlacement]="hintPlacement"
-                [inlineHelpPlacement]="hintPosition"
-                [inlineHelpGlyph]="hintGlyph"
-                [inlineHelpTriggers]="hintTriggers"
-            >
-                <span [id]="'fdp-form-label-content-' + id">{{ label }}</span>
-            </label>
+            <ng-template [ngTemplateOutlet]="labelTemplate"></ng-template>
         </div>
         <ng-container *ngTemplateOutlet="withFormMessage"></ng-container>
         <div class="fd-col" [class]="_gapColumnLayoutClass"></div>
@@ -42,4 +31,26 @@
             </ng-container>
         </fd-form-message>
     </fdp-input-message-group>
+</ng-template>
+
+<ng-template #labelTemplate>
+    <ng-container *ngIf="hintOptions.target === 'label'; else withoutHint">
+        <label
+            [id]="'fdp-form-label-' + id"
+            [required]="editable && required"
+            fd-form-label
+            [inlineHelpTitle]="hintOptions.text"
+            [inlineHelpBodyPlacement]="hintOptions.placement"
+            [inlineHelpPlacement]="hintOptions.position"
+            [inlineHelpGlyph]="hintOptions.glyph"
+            [inlineHelpTriggers]="hintOptions.trigger"
+        >
+            <span [id]="'fdp-form-label-content-' + id">{{ label }}</span>
+        </label>
+    </ng-container>
+    <ng-template #withoutHint>
+        <label [id]="'fdp-form-label-' + id" [required]="editable && required" fd-form-label>
+            <span [id]="'fdp-form-label-content-' + id">{{ label }}</span>
+        </label>
+    </ng-template>
 </ng-template>

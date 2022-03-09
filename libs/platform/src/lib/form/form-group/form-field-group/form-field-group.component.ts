@@ -12,9 +12,14 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { ColumnLayout, FormField, FormFieldGroup, FormGroupContainer } from '@fundamental-ngx/platform/shared';
+import {
+    ColumnLayout,
+    FormField,
+    FormFieldGroup,
+    FormGroupContainer,
+    HintOptions
+} from '@fundamental-ngx/platform/shared';
 import { FORM_GROUP_CHILD_FIELD_TOKEN } from '../constants';
-import { HintOptions } from '../../form-generator/interfaces/hint-options';
 
 const formFieldGroupProvider: Provider = {
     provide: FormFieldGroup,

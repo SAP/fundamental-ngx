@@ -30,6 +30,7 @@ export * from './form-generator/dynamic-form-control';
 export * from './form-generator/dynamic-form-control-field.directive';
 export * from './form-generator/fdp-form-generator.module';
 export * from './form-generator/form-generator.service';
+export * from './form-generator/form-generator.tokens';
 export * from './form-generator/config/default-components-list';
 export * from './form-generator/config/default-validation-errors';
 export * from './form-generator/dynamic-form-generator-checkbox/dynamic-form-generator-checkbox.component';
@@ -54,6 +55,7 @@ export * from './form-group/form-group.component';
 export * from './form-group/form-field/form-field.component';
 export * from './form-group/form-field-group/form-field-group.component';
 export * from './form-group/form-field-extras/form-field-extras.component';
+export * from './form-group/fdp-form.tokens';
 
 export * from './input/fdp-input.module';
 export * from './input/input.component';

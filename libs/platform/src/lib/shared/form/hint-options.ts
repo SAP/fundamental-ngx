@@ -1,5 +1,5 @@
 import { InlineHelpPlacement } from '@fundamental-ngx/core/form';
-import { HintPlacement } from '@fundamental-ngx/platform/shared';
+import { HintPlacement } from './form-options';
 
 export interface HintOptions {
     /** Text of the hint */

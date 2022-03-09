@@ -1,10 +1,9 @@
 import { Component, forwardRef, Input, Provider, TemplateRef, ViewChild } from '@angular/core';
-import { FormField } from '@fundamental-ngx/platform/shared';
+import { FieldHintOptions, FormField } from '@fundamental-ngx/platform/shared';
 import { FormFieldComponent } from '../../form-group/form-field/form-field.component';
 import { FORM_GROUP_CHILD_FIELD_TOKEN } from '../../form-group/constants';
 import { DynamicFormControl } from '../dynamic-form-control';
 import { DynamicFormGroup } from '../interfaces/dynamic-form-group';
-import { HintOptions } from '../interfaces/hint-options';
 
 const formFieldProvider: Provider = {
     provide: FormField,
@@ -62,7 +61,7 @@ export class FormGeneratorFieldComponent {
     /**
      * Describes hint options for field label
      */
-    @Input() hintOptions: HintOptions;
+    @Input() hintOptions: FieldHintOptions;
 
     /**
      * Form field component.

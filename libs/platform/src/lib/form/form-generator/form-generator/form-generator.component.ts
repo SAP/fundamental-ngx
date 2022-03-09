@@ -15,10 +15,15 @@ import {
 import { NgForm } from '@angular/forms';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
-import { ColumnLayout, LabelLayout } from '@fundamental-ngx/platform/shared';
+import { ColumnLayout, FieldHintOptions, HintOptions, LabelLayout } from '@fundamental-ngx/platform/shared';
 
 import { FormGeneratorService } from '../form-generator.service';
-import { BaseDynamicFormItemGuiOptions, DynamicFormItem, DynamicFormValue } from '../interfaces/dynamic-form-item';
+import {
+    BaseDynamicFormItemGuiOptions,
+    DynamicFormItem,
+    DynamicFormItemGuiOptions,
+    DynamicFormValue
+} from '../interfaces/dynamic-form-item';
 import {
     DynamicFormControl,
     DynamicFormControlGroup,
@@ -33,9 +38,7 @@ import {
     DefaultVerticalFieldLayout,
     DefaultVerticalLabelLayout
 } from '../../form-group/constants';
-import { HintOptions } from '../interfaces/hint-options';
 import { FDP_FORM_GENERATOR_DEFAULT_HINT_OPTIONS } from '../form-generator.tokens';
-import { isHintOptions } from '../helpers';
 
 let formUniqueId = 0;
 
@@ -231,7 +234,7 @@ export class FormGeneratorComponent implements OnDestroy {
     constructor(
         private _fgService: FormGeneratorService,
         private _cd: ChangeDetectorRef,
-        @Inject(FDP_FORM_GENERATOR_DEFAULT_HINT_OPTIONS) private _defaultHintOptions: HintOptions
+        @Inject(FDP_FORM_GENERATOR_DEFAULT_HINT_OPTIONS) private _defaultHintOptions: FieldHintOptions
     ) {}
 
     /**
@@ -340,26 +343,23 @@ export class FormGeneratorComponent implements OnDestroy {
         return Object.values(controls).sort((a, b) => (a.formItem.rank > b.formItem.rank ? 1 : -1));
     }
 
-    getHintOptions(guiOptions?: BaseDynamicFormItemGuiOptions): HintOptions {
+    getHintOptions(guiOptions?: BaseDynamicFormItemGuiOptions | DynamicFormItemGuiOptions): FieldHintOptions {
         if (!guiOptions) {
             return;
         }
-        let hintOptions: HintOptions;
-        const formItemHintOptions: string | HintOptions = guiOptions.hint;
-        const hintPlacement = guiOptions.hintPlacement;
-        if (isHintOptions(formItemHintOptions)) {
-            hintOptions = {
+        const formItemHintOptions: string | HintOptions | FieldHintOptions = guiOptions.hint;
+        const placement = guiOptions.hintPlacement || this._defaultHintOptions.placement;
+        if (typeof formItemHintOptions === 'string') {
+            return {
                 ...this._defaultHintOptions,
-                placement: hintPlacement || this._defaultHintOptions.placement,
-                ...formItemHintOptions
-            };
-        } else {
-            hintOptions = {
-                ...this._defaultHintOptions,
-                placement: hintPlacement || this._defaultHintOptions.placement,
+                placement,
                 text: formItemHintOptions
             };
         }
-        return hintOptions;
+        return {
+            ...this._defaultHintOptions,
+            placement,
+            ...formItemHintOptions
+        };
     }
 }

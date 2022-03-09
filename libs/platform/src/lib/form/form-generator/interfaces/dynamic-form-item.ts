@@ -2,11 +2,18 @@ import { AsyncValidatorFn, ValidatorFn } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 import { ContentDensity } from '@fundamental-ngx/core/utils';
-import { ColumnLayout, HintPlacement, InlineLayout, LabelLayout, SelectItem } from '@fundamental-ngx/platform/shared';
+import {
+    ColumnLayout,
+    FieldHintOptions,
+    HintOptions,
+    HintPlacement,
+    InlineLayout,
+    LabelLayout,
+    SelectItem
+} from '@fundamental-ngx/platform/shared';
 import { InputType } from '../../input/input.component';
 import { DynamicFormGroup } from './dynamic-form-group';
 import { DynamicFormControl, DynamicFormGroupControl } from '../dynamic-form-control';
-import { FieldHintOptions, HintOptions } from './hint-options';
 
 export type DynamicFormItemChoices = number | string | SelectItem;
 export type DynamicFormItemValidationResult = null | boolean | string;
@@ -238,6 +245,7 @@ export interface BaseDynamicFormItemGuiOptions {
     hint?: string | HintOptions;
 
     /**
+     * @deprecated Use `hint.placement` instead
      * @description
      * Define hint placement.
      */

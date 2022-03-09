@@ -60,7 +60,6 @@ export class PlatformFormGeneratorExampleComponent {
                     guiOptions: {
                         hint: {
                             text: 'Some contextual hint',
-                            position: 'before',
                             glyph: 'accidental-leave',
                             trigger: ['focusin', 'focusout']
                         },
@@ -86,7 +85,10 @@ export class PlatformFormGeneratorExampleComponent {
             default: 'John',
             placeholder: 'Please provide your name',
             guiOptions: {
-                hint: 'Some contextual hint',
+                hint: {
+                    text: 'Some contextual hint',
+                    target: 'label'
+                },
                 column: 1
             },
             validate: async (value) => {
