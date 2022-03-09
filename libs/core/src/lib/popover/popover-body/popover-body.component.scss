@@ -10,8 +10,6 @@ $fd-popover-border-radius: var(--sapElement_BorderCornerRadius, 0.25rem);
 }
 
 .#{$block} {
-    /* These styles don't conform BEM so they're not moved to the styles lib, but left to not break anything */
-
     &-custom {
         display: inline-block;
         max-width: 100%;
