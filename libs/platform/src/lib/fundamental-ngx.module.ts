@@ -51,6 +51,7 @@ import { PlatformIconTabBarModule } from '@fundamental-ngx/platform/icon-tab-bar
 import { PlatformSmartFilterBarModule } from '@fundamental-ngx/platform/smart-filter-bar';
 import { PlatformColorPickerModule } from '@fundamental-ngx/platform/color-picker';
 import { PlatformColorPaletteModule } from '@fundamental-ngx/platform/color-palette';
+import { PlatformColorPalettePopoverModule } from '@fundamental-ngx/platform/color-palette-popover';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -102,7 +103,8 @@ import { PlatformColorPaletteModule } from '@fundamental-ngx/platform/color-pale
         PlatformIconTabBarModule,
         PlatformSmartFilterBarModule,
         PlatformColorPickerModule,
-        PlatformColorPaletteModule
+        PlatformColorPaletteModule,
+        PlatformColorPalettePopoverModule
     ],
     providers: []
 })

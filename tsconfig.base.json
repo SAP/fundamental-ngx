@@ -127,6 +127,7 @@
             "@fundamental-ngx/platform/approval-flow": ["libs/platform/src/lib/approval-flow/index.ts"],
             "@fundamental-ngx/platform/button": ["libs/platform/src/lib/button/index.ts"],
             "@fundamental-ngx/platform/color-palette": ["libs/platform/src/lib/color-palette/index.ts"],
+            "@fundamental-ngx/platform/color-palette-popover": ["libs/platform/src/lib/color-palette-popover/index.ts"],
             "@fundamental-ngx/platform/color-picker": ["libs/platform/src/lib/color-picker/index.ts"],
             "@fundamental-ngx/platform/dynamic-page": ["libs/platform/src/lib/dynamic-page/index.ts"],
             "@fundamental-ngx/platform/feed-input": ["libs/platform/src/lib/feed-input/index.ts"],
