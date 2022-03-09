@@ -38,11 +38,13 @@ export class NestedLinkDirective {
     @HostBinding('class.fd-nested-list__link')
     fdNestedListItemClass = true;
 
-    /**
-     * @hidden
-     */
+    /** @hidden */
     @HostBinding('attr.tabindex')
     tabIndex = 0;
+
+    /** @hidden */
+    @HostBinding('attr.role')
+    role = 'treeitem';
 
     /**
      *  @hidden

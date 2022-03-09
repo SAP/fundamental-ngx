@@ -23,6 +23,7 @@ import { NestedItemService } from '../nested-item/nested-item.service';
 import { NestedListKeyboardService } from '../nested-list-keyboard.service';
 import { NestedListInterface } from './nested-list.interface';
 import { NestedListHeaderDirective } from '../nested-list-directives';
+import { NestedListContentDirective } from '../nested-content/nested-list-content.directive';
 import { Nullable } from '@fundamental-ngx/core/shared';
 
 @Directive({
@@ -66,12 +67,15 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
     @ContentChild(NestedListHeaderDirective)
     private _nestedListHeader: NestedListHeaderDirective;
 
+    @ContentChild(NestedListContentDirective)
+    private _nestedContent: NestedListContentDirective;
+
     /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
     @HostBinding('attr.role')
-    private _role = 'tree';
+    private _role = 'group';
 
     /** @hidden */
     @HostBinding('attr.aria-roledescription')
@@ -190,6 +194,10 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
 
         if (this._nestedItemService?.popover) {
             this._ariaHaspopup = 'tree';
+        }
+
+        if (this._nestedContent) {
+            this._role = 'tree';
         }
     }
 }

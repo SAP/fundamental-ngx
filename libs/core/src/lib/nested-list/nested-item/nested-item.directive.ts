@@ -78,7 +78,7 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
 
     /** @hidden */
     @HostBinding('attr.role')
-    private _role = 'treeitem';
+    private _role: string;
 
     /** @hidden */
     private _expanded = false;
@@ -94,10 +94,6 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
     /** @hidden */
     @HostBinding('attr.aria-disabled')
     private _ariaDisabled = false;
-
-    /** @hidden */
-    @HostBinding('attr.tabindex')
-    private _tabindex = -1;
 
     /** @hidden */
     @HostBinding('attr.aria-label')
@@ -175,7 +171,6 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
     /** Method that toggle the item and propagate it to children */
     toggle(): void {
         /** Propagate initial open state to children */
-        console.log(this.expanded);
         this.propagateOpenChange(!this._expanded);
     }
 
@@ -226,6 +221,7 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
          */
         if (this.contentItem) {
             this.contentItem.changeExpandedState(open);
+            this.contentItem.ariaExpanded = true;
         }
 
         /** Propagate hidden flag to list component, that is passed from child */
