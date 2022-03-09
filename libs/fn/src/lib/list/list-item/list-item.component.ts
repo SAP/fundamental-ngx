@@ -8,6 +8,7 @@ import {
     Inject,
     Input,
     Optional,
+    TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
 import {
@@ -97,6 +98,8 @@ export class ListItemComponent {
     get byline(): boolean {
         return this.listComponent.byline;
     }
+
+    $templateRef = (templ: any): TemplateRef<any> => templ;
 
     public elementRef(): ElementRef<HTMLElement> {
         return this._elementRef;
