@@ -26,30 +26,32 @@
         [class.fd-input--compact]="compact"
         [title]="ariaLabel"
         [placeholder]="placeholder"
-        (click)="open()"
-        (keydown)="keyDownHandle($event)"
         [value]=""
         [hidden]="inputHidden"
+        [disabled]="disabled"
+        (click)="open()"
+        (keydown)="keyDownHandle($event)"
     />
 
     <button
         fd-button
-        [attr.aria-label]="buttonAriaLabel"
         class="file-uploader__button"
-        (click)="open()"
+        [attr.aria-label]="buttonAriaLabel"
         [label]="buttonLabel"
         [compact]="compact"
-        tabindex="0"
+        [disabled]="disabled"
+        (click)="open()"
     ></button>
     <ng-content select="[fd-form-control]"></ng-content>
 </div>
+
 <input
     #fileInput
+    fdFileSelect
     class="fd-file-uploader__hidden"
     type="file"
     [attr.accept]="accept"
-    (fileSelected)="selectHandler($event)"
     [multiple]="multiple"
     [disabled]="disabled"
-    fdFileSelect
+    (fileSelected)="selectHandler($event)"
 />

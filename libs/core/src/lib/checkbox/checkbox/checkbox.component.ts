@@ -84,7 +84,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
 
     /** State of control, changes visual appearance of control. */
     @Input()
-    state: FormStates;
+    state?: FormStates;
 
     /** Sets [name] property of input. */
     @Input()

@@ -30,7 +30,7 @@
                         </div>
                         <ul fd-nested-list>
                             <ng-container *ngFor="let item of section.content; trackBy: trackBySectionContent">
-                                <ng-container *ngIf="item.subItems; else listItemTpl">
+                                <ng-container *ngIf="item.subItems; else rootListItem">
                                     <li fd-nested-list-item [expanded]="true">
                                         <div fd-nested-list-content>
                                             <a fd-nested-list-link>
@@ -42,24 +42,18 @@
                                             <ng-container
                                                 *ngFor="let subItem of item.subItems; trackBy: trackBySectionContent"
                                                 [ngTemplateOutlet]="listItemTpl"
+                                                [ngTemplateOutletContext]="{ $implicit: subItem }"
                                             >
                                             </ng-container>
                                         </ul>
                                     </li>
                                 </ng-container>
-                                <ng-template #listItemTpl>
-                                    <li fd-nested-list-item>
-                                        <a
-                                            fd-nested-list-link
-                                            [routerLink]="'/' + item.url"
-                                            routerLinkActive="is-selected"
-                                            (keypress)="onKeypressHandler($event)"
-                                            tabindex="0"
-                                            role="button"
-                                        >
-                                            <span fd-nested-list-title>{{ item.name }}</span>
-                                        </a>
-                                    </li>
+                                <ng-template #rootListItem>
+                                    <ng-template
+                                        [ngTemplateOutlet]="listItemTpl"
+                                        [ngTemplateOutletContext]="{ $implicit: item }"
+                                    >
+                                    </ng-template>
                                 </ng-template>
                             </ng-container>
                         </ul>
@@ -69,3 +63,18 @@
         </fd-side-nav>
     </div>
 </div>
+
+<ng-template #listItemTpl let-item>
+    <li fd-nested-list-item>
+        <a
+            fd-nested-list-link
+            [routerLink]="'/' + item.url"
+            routerLinkActive="is-selected"
+            (keypress)="onKeypressHandler($event)"
+            tabindex="0"
+            role="button"
+        >
+            <span fd-nested-list-title>{{ item.name }}</span>
+        </a>
+    </li>
+</ng-template>

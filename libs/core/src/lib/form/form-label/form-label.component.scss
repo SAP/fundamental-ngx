@@ -27,7 +27,7 @@ $form-label-inline-help-placement-space: 0rem;
 
 .fd-form-label__wrapper {
     position: relative;
-    display: block;
+    display: flex;
 
     &--inline-help {
         display: flex;
