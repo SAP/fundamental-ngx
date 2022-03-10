@@ -56,6 +56,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'color-palette-popover',
+                loadChildren: () =>
+                    import(
+                        './component-docs/platform-color-palette-popover/platform-color-palette-popover.module'
+                    ).then((m) => m.PlatformColorPalettePopoverDocsModule)
+            },
+            {
                 path: 'date-picker',
                 loadChildren: () =>
                     import(

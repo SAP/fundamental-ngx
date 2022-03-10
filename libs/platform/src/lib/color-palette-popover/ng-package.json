@@ -1,0 +1,7 @@
+{
+    "$schema": "../../../../../node_modules/ng-packagr/ng-package.schema.json",
+    "dest": "../../../../../dist/libs/platform/color-palette-popover",
+    "lib": {
+        "entryFile": "./public_api.ts"
+    }
+}

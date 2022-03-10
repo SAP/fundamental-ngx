@@ -11,6 +11,7 @@ export const API_FILES = {
     checkbox: ['CheckboxComponent'],
     colorPicker: ['ColorPickerComponent'],
     colorPalette: ['ColorPaletteComponent'],
+    colorPalettePopover: ['ColorPalettePopoverComponent'],
     formGenerator: [
         'FormGeneratorComponent',
         'FormGeneratorService',
