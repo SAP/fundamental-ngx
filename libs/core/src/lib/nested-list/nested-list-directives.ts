@@ -132,6 +132,10 @@ export class NestedListExpandIconComponent {
     expanded = false;
 
     /** @hidden */
+    @HostBinding('attr.aria-hidden')
+    ariaHidden = true;
+
+    /** @hidden */
     sideArrowIcon$: Observable<string>;
 
     constructor(
