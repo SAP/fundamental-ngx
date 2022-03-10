@@ -1,11 +1,11 @@
-import { Component, ChangeDetectorRef, Input, ElementRef, ViewChild } from '@angular/core';
+import { Component, ChangeDetectorRef, Input, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 
 @Component({
     selector: 'fdp-color-palette-popover',
     templateUrl: './color-palette-popover.component.html'
 })
-export class ColorPalettePopoverComponent extends BaseComponent {
+export class ColorPalettePopoverComponent extends BaseComponent implements AfterViewInit {
     /** selects the default color of the component
      * The default color should be a part of the ColorPalette colors
      */
@@ -24,9 +24,7 @@ export class ColorPalettePopoverComponent extends BaseComponent {
     @Input()
     showRecentColors = false;
 
-    /** @hidden */
-    /** The currently selected color of the color palette */
-    selectedColor: string;
+    color: string;
 
     @ViewChild('colorPalettePopover') popoverComponent: any;
 
@@ -34,11 +32,34 @@ export class ColorPalettePopoverComponent extends BaseComponent {
         super(_cd);
     }
 
+    /**
+     * @todo
+     * WIP: gets the inital color from the palette
+     */
+    ngAfterViewInit(): void {
+        this.color = this.popoverComponent.nativeElement._colorPalette().selectedColor;
+    }
+
     openPopover(): void {
         this.popoverComponent.nativeElement.showAt(this._elementRef.nativeElement);
     }
 
-    setColorSelected(event): void {
-        this.selectedColor = event.detail.color;
+    /**
+     * @todo
+     * Returns the selected color.
+     */
+    get selectedColor(): string {
+        // return this.popoverComponent?.nativeElement._colorPalette()?.selectedColor;
+        // if (this.popoverComponent) {
+        //     console.log(this.popoverComponent.nativeElement._colorPalette().selectedColor);
+        //     return this.popoverComponent.nativeElement._colorPalette().selectedColor;
+        // }
+
+        return this.color;
+    }
+
+    clickEvent(event): Event {
+        this.color = event.detail.color;
+        return event;
     }
 }
