@@ -217,7 +217,7 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
          */
         if (this.contentItem) {
             this.contentItem.changeExpandedState(open);
-            this.contentItem.ariaExpanded = true;
+            this.contentItem.ariaExpanded = this._expanded;
         }
 
         /** Propagate hidden flag to list component, that is passed from child */
