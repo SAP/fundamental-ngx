@@ -48,6 +48,10 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
     @Input()
     ariaRoledescriptionMenuBar = 'Navigation List Menu Bar';
 
+    /** Aria defines aria label for the selected item when the list with disabled selection. */
+    @Input()
+    ariaLabelSelected = 'Selected';
+
     /** @hidden */
     @HostBinding('class.fd-nested-list')
     fdNestedListItemClass = true;
@@ -64,11 +68,9 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
     @ContentChildren(forwardRef(() => NestedItemDirective))
     nestedItems: QueryList<NestedItemDirective>;
 
+    /** @hidden */
     @ContentChild(NestedListHeaderDirective)
     private _nestedListHeader: NestedListHeaderDirective;
-
-    @ContentChild(NestedListContentDirective)
-    private _nestedContent: NestedListContentDirective;
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -174,7 +176,7 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
             item._ariaLevel = level;
             item.linkItem._ariaLabel = `${this._nestedListHeader ? this._nestedListHeader?.title : ''}
                  Tree Item ${item._title} ${i + 1} of ${this.nestedItems.length}
-                 ${!this._nestedListStateService.selectable && item.linkItem.selected ? 'selected' : ''}`;
+                 ${!this._nestedListStateService.selectable && item.linkItem.selected ? this.ariaLabelSelected : ''}`;
         });
 
         this._changeDetectionRef.detectChanges();
@@ -194,10 +196,6 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
 
         if (this._nestedItemService?.popover) {
             this._ariaHaspopup = 'tree';
-        }
-
-        if (this._nestedContent) {
-            this._role = 'tree';
         }
     }
 }
