@@ -77,7 +77,7 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
 
     /** @hidden */
     @HostBinding('attr.role')
-    private _role = 'group';
+    private _role = 'tree';
 
     /** @hidden */
     @HostBinding('attr.aria-roledescription')
