@@ -1,0 +1,11 @@
+<form [formGroup]="customForm">
+    <fdp-color-picker formControlName="colorPicker2" id="fdp-id-reactive-2" name="input2"></fdp-color-picker>
+</form>
+<br />
+<span>Form value: {{ customForm.get('colorPicker2').value }}</span
+><br />
+<span>Touched: {{ customForm.get('colorPicker2').touched }}</span
+><br />
+<span>Dirty: {{ customForm.get('colorPicker2').dirty }}</span
+><br />
+<span>Valid: {{ customForm.get('colorPicker2').valid }}</span>

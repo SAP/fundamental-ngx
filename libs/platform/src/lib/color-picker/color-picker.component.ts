@@ -1,56 +1,61 @@
-import { Component, ChangeDetectorRef, Input, ElementRef } from '@angular/core';
-import { BaseComponent } from '@fundamental-ngx/platform/shared';
-import { ControlValueAccessor } from '@angular/forms';
+import {
+    Component,
+    ChangeDetectorRef,
+    Input,
+    Optional,
+    Self,
+    SkipSelf,
+    Host,
+    ChangeDetectionStrategy,
+    HostListener
+} from '@angular/core';
+import { BaseInput, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
+import { NgControl, NgForm } from '@angular/forms';
 
 @Component({
     selector: 'fdp-color-picker',
-    templateUrl: './color-picker.component.html'
+    templateUrl: './color-picker.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [{ provide: FormFieldControl, useExisting: PlatformColorPickerComponent, multi: true }]
 })
-export class ColorPickerComponent extends BaseComponent implements ControlValueAccessor {
+export class PlatformColorPickerComponent extends BaseInput {
     /** @hidden */
-    _colorValue: string;
-
-    /** @hidden */
-    onChange: any = () => {};
+    _value: string;
 
     /** @hidden */
-    onTouched: any = () => {};
-
-    /** Get the value of the text input. */
-    @Input()
-    get color(): string {
-        return this._colorValue;
-    }
-
-    /** Set the value of the text input. */
-    set color(value) {
-        this._colorValue = value;
-        this.onChange(value);
+    @HostListener('click')
+    onClick(): void {
         this.onTouched();
     }
 
-    constructor(_cd: ChangeDetectorRef, private _elementRef: ElementRef) {
-        super(_cd);
+    // eslint-disable-next-line @angular-eslint/no-input-rename
+    @Input('color')
+    get value(): string {
+        return this._value;
+    }
+    set value(colorValue: string) {
+        this._value = colorValue;
+        this.onChange(colorValue);
+        this.onTouched();
     }
 
     /** @hidden */
-    elementRef(): ElementRef {
-        return this._elementRef;
+    onFocus(): void {
+        this.onTouched();
+    }
+
+    constructor(
+        protected _changeDetectorRef: ChangeDetectorRef,
+        @Optional() @Self() public ngControl: NgControl,
+        @Optional() @Self() public ngForm: NgForm,
+        @Optional() @SkipSelf() @Host() formField: FormField,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
+    ) {
+        super(_changeDetectorRef, ngControl, ngForm, formField, formControl);
     }
 
     /** @hidden */
-    writeValue(value: any): void {
-        this._colorValue = value;
-        this._cd.markForCheck();
-    }
-
-    /** @hidden */
-    registerOnChange(fn): void {
-        this.onChange = fn;
-    }
-
-    /** @hidden */
-    registerOnTouched(fn): void {
-        this.onTouched = fn;
+    colorChange(event: any): void {
+        this.value = event.target.valueOf().color;
     }
 }

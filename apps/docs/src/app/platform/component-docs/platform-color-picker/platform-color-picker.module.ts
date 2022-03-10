@@ -12,6 +12,8 @@ import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 import { PlatformColorPickerModule } from '@fundamental-ngx/platform/color-picker';
 import { PlatformActionButtonGroupModule } from '@fundamental-ngx/platform/action-button-group';
+import { PlatformColorPickerReactiveFormExampleComponent } from './platform-color-picker-examples/platform-color-picker-reactive-form-example.component';
+import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 const routes: Routes = [
     {
@@ -31,13 +33,15 @@ const routes: Routes = [
         PlatformColorPickerModule,
         PlatformButtonModule,
         PlatformMenuModule,
-        PlatformActionButtonGroupModule
+        PlatformActionButtonGroupModule,
+        FdpFormGroupModule
     ],
     exports: [RouterModule],
     declarations: [
         PlatformColorPickerDocsComponent,
         PlatformColorPickerHeaderComponent,
-        PlatformColorPickerExamplesComponent
+        PlatformColorPickerExamplesComponent,
+        PlatformColorPickerReactiveFormExampleComponent
     ]
 })
 export class PlatformColorPickerDocsModule {}

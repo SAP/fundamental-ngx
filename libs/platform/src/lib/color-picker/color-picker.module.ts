@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { PipeModule } from '@fundamental-ngx/core/utils';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { ColorPickerComponent } from './color-picker.component';
+import { PlatformColorPickerComponent } from './color-picker.component';
 import '@ui5/webcomponents/dist/ColorPicker.js';
 
 @NgModule({
-    declarations: [ColorPickerComponent],
+    declarations: [PlatformColorPickerComponent],
     imports: [CommonModule, ButtonModule, PipeModule],
-    exports: [ColorPickerComponent],
+    exports: [PlatformColorPickerComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class PlatformColorPickerModule {}
