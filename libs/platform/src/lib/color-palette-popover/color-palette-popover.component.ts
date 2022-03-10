@@ -26,7 +26,7 @@ export class ColorPalettePopoverComponent extends BaseComponent implements After
 
     color: string;
 
-    @ViewChild('colorPalettePopover') popoverComponent: any;
+    @ViewChild('colorPalettePopover') popoverComponent: ElementRef;
 
     constructor(_cd: ChangeDetectorRef, private _elementRef: ElementRef) {
         super(_cd);
