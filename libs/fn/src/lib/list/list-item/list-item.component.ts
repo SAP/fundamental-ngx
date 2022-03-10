@@ -1,5 +1,6 @@
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ContentChild,
     ElementRef,
@@ -7,16 +8,14 @@ import {
     Inject,
     Input,
     Optional,
+    TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
 import {
-    BaseFocusableBehavior,
-    canAssignAdditionalClasses,
     DestroyedBehavior,
-    DisabledBehavior,
-    FN_DISABLED,
-    FN_READONLY,
-    ReadonlyBehavior,
+    FnDisabledProvider,
+    FnFocusableItemProvider,
+    FnReadonlyProvider,
     SelectableItemToken,
     SelectionService
 } from '@fundamental-ngx/fn/cdk';
@@ -32,9 +31,8 @@ import {
 import { coerceBoolean, TemplateRefProviderToken } from '@fundamental-ngx/fn/utils';
 import { CheckboxContext } from '../list-item-checkbox.directive';
 import { ListComponent } from '../list/list.component';
-import { takeUntil } from 'rxjs/operators';
-
-const mixinBaseListItem = canAssignAdditionalClasses(BaseFocusableBehavior);
+import { distinctUntilChanged, map, Observable } from 'rxjs';
+import { coerceArray } from '@angular/cdk/coercion';
 
 @Component({
     selector: 'fn-list-item, [fn-list-item]',
@@ -44,16 +42,13 @@ const mixinBaseListItem = canAssignAdditionalClasses(BaseFocusableBehavior);
     host: {
         '[class.fn-list__item]': 'true'
     },
-    providers: [DestroyedBehavior]
+    providers: [DestroyedBehavior, FnDisabledProvider, FnReadonlyProvider, FnFocusableItemProvider]
 })
-export class ListItemComponent extends mixinBaseListItem {
+export class ListItemComponent {
     @Input()
     @HostBinding('class.fn-list__item--info-bar')
     @coerceBoolean
     infoBar!: boolean;
-
-    @HostBinding('attr.tabindex')
-    tabIndex = 0;
 
     @ContentChild(FN_LIST_CHECKBOX)
     checkboxProvider?: TemplateRefProviderToken<CheckboxContext>;
@@ -70,44 +65,51 @@ export class ListItemComponent extends mixinBaseListItem {
     @ContentChild(FN_LIST_POSTFIX)
     postfixProvider?: TemplateRefProviderToken<void>;
 
+    checkboxContext$!: Observable<CheckboxContext>;
+
     readonly!: boolean;
     disabled!: boolean;
 
     constructor(
+        private _cd: ChangeDetectorRef,
         private _destroy$: DestroyedBehavior,
         @Optional() private selectionService: SelectionService,
         @Optional() @Inject(SelectableItemToken) private selectableItem: SelectableItemToken,
         @Inject(ListComponent) private listComponent: ListComponent,
         private _elementRef: ElementRef<HTMLElement>,
-        @Optional() @Inject(FN_DISABLED) disabled$: DisabledBehavior,
-        @Optional() @Inject(FN_READONLY) readonly$: ReadonlyBehavior
+        private disabledProvider: FnDisabledProvider,
+        private readonlyProvider: FnReadonlyProvider,
+        private focusableItemProvider: FnFocusableItemProvider
     ) {
-        super(disabled$, readonly$);
-        this.focusable$
-            .pipe(takeUntil(this._destroy$))
-            .subscribe((isFocusable) => (this.tabIndex = isFocusable ? 0 : -1));
+        focusableItemProvider.setFocusable(true);
+        if (this.selectionService && this.selectableItem) {
+            this.checkboxContext$ = this.selectionService.value$.pipe(
+                map((v) => coerceArray(v)),
+                map((value: any[]) => value.includes(this.selectableItem.value)),
+                distinctUntilChanged(),
+                map((selected) => ({
+                    $implicit: selected,
+                    update: this.toggleItemSelection
+                }))
+            );
+        }
     }
 
     get byline(): boolean {
         return this.listComponent.byline;
     }
 
-    get checkboxContext(): CheckboxContext {
-        return {
-            $implicit: this.selectableItem?.getSelected(),
-            update: (selected) => this.toggleItemSelection(selected)
-        };
-    }
+    $templateRef = (templ: any): TemplateRef<any> => templ;
 
     public elementRef(): ElementRef<HTMLElement> {
         return this._elementRef;
     }
 
-    private toggleItemSelection(isSelected: boolean): void {
+    private toggleItemSelection = (isSelected: boolean): void => {
         if (isSelected) {
             this.selectionService?.selectItem(this.selectableItem);
         } else {
             this.selectionService?.deselectItem(this.selectableItem);
         }
-    }
+    };
 }
