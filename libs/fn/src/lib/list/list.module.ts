@@ -3,27 +3,23 @@ import { CommonModule } from '@angular/common';
 import { ListComponent } from './list/list.component';
 import { ListItemComponent } from './list-item/list-item.component';
 import { ListGroupHeaderComponent } from './list-group-header/list-group-header.component';
-import { SelectableItemDirective } from './selectable-item/selectable-item.directive';
-import { SelectableListDirective } from './selectable-list/selectable-list.directive';
 import {
     ListItemActionsDirective,
-    ListItemPostfixDirective,
+    ListItemBylineDirective,
     ListItemIconDirective,
+    ListItemPostfixDirective,
     ListItemPrefixDirective,
-    ListItemTitleDirective,
-    ListItemBylineDirective
+    ListItemTitleDirective
 } from './structural-directives';
 import { ListItemCheckboxDirective } from './list-item-checkbox.directive';
-import { DisabledBehaviorModule, FocusableBehaviorModule, ReadonlyBehaviorModule } from '@fundamental-ngx/fn/cdk';
+import { DisabledBehaviorModule, FocusableListModule, ReadonlyBehaviorModule } from '@fundamental-ngx/fn/cdk';
 
 @NgModule({
-    imports: [CommonModule, DisabledBehaviorModule, ReadonlyBehaviorModule, FocusableBehaviorModule],
+    imports: [CommonModule, DisabledBehaviorModule, ReadonlyBehaviorModule, FocusableListModule],
     exports: [
         ListComponent,
         ListItemComponent,
         ListGroupHeaderComponent,
-        SelectableListDirective,
-        SelectableItemDirective,
         ListItemTitleDirective,
         ListItemActionsDirective,
         ListItemPostfixDirective,
@@ -33,14 +29,12 @@ import { DisabledBehaviorModule, FocusableBehaviorModule, ReadonlyBehaviorModule
         ListItemBylineDirective,
         DisabledBehaviorModule,
         ReadonlyBehaviorModule,
-        FocusableBehaviorModule
+        FocusableListModule
     ],
     declarations: [
         ListComponent,
         ListItemComponent,
         ListGroupHeaderComponent,
-        SelectableListDirective,
-        SelectableItemDirective,
         ListItemTitleDirective,
         ListItemActionsDirective,
         ListItemPostfixDirective,

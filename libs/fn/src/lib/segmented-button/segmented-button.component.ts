@@ -44,7 +44,7 @@ import { SelectableItemToken, SelectComponentRootToken, SelectionService } from 
     ]
 })
 export class SegmentedButtonComponent
-    implements SelectComponentRootToken<string | string[]>, ControlValueAccessor, AfterContentInit, OnDestroy
+    implements SelectComponentRootToken<string>, ControlValueAccessor, AfterContentInit, OnDestroy
 {
     /**
      * Allow multiple item selection

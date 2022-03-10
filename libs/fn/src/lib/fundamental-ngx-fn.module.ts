@@ -9,7 +9,6 @@ import { SwitchModule } from '@fundamental-ngx/fn/switch';
 import { ButtonModule } from '@fundamental-ngx/fn/button';
 import { SearchModule } from '@fundamental-ngx/fn/search';
 import { SliderModule } from '@fundamental-ngx/fn/slider';
-import { TagModule } from '@fundamental-ngx/fn/tag';
 import { ProgressBarModule } from '@fundamental-ngx/fn/progress-bar';
 import { SegmentedButtonModule } from '@fundamental-ngx/fn/segmented-button';
 import { UtilsModule } from '@fundamental-ngx/fn/utils';
@@ -32,7 +31,6 @@ import { MessageStripModule } from '@fundamental-ngx/fn/message-strip';
         ButtonModule,
         SearchModule,
         SliderModule,
-        TagModule,
         AvatarModule,
         ProgressBarModule,
         GenericTagModule,

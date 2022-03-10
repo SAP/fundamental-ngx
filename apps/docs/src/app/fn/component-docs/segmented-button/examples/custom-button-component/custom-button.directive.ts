@@ -13,7 +13,11 @@ import { SelectableItemToken } from '@fundamental-ngx/fn/cdk';
     ]
 })
 export class CustomButtonDirective implements SelectableItemToken<string> {
-    constructor(@Self() private buttonComponent: ButtonComponent) {}
+    clicked;
+
+    constructor(@Self() private buttonComponent: ButtonComponent) {
+        this.clicked = buttonComponent.clicked;
+    }
 
     set value(val: string) {
         this.buttonComponent.value = val;

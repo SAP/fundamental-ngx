@@ -7,12 +7,14 @@ import {
     Inject,
     Input,
     Optional,
+    Output,
     ViewEncapsulation
 } from '@angular/core';
 import { BaseButton } from '@fundamental-ngx/core/button';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { SelectableItemToken, SelectComponentRootToken } from '@fundamental-ngx/fn/cdk';
+import { FnClickedProvider, SelectableItemToken, SelectComponentRootToken } from '@fundamental-ngx/fn/cdk';
 import { coerceBoolean } from '@fundamental-ngx/fn/utils';
+import { Observable } from 'rxjs';
 
 export type ButtonType = '' | 'secondary' | 'layout' | 'positive' | 'critical' | 'negative';
 
@@ -40,7 +42,7 @@ export type ButtonType = '' | 'secondary' | 'layout' | 'positive' | 'critical' |
         '[attr.aria-selected]': 'selected',
         '[value]': 'value'
     },
-    providers: [{ provide: SelectableItemToken, useExisting: ButtonComponent }]
+    providers: [{ provide: SelectableItemToken, useExisting: ButtonComponent }, FnClickedProvider]
 })
 export class ButtonComponent extends BaseButton implements SelectableItemToken<string> {
     /** The type of the button. Types include:
@@ -71,22 +73,6 @@ export class ButtonComponent extends BaseButton implements SelectableItemToken<s
     }
 
     /**
-     * Native disabled attribute of button element
-     */
-    @Input()
-    get disabled(): boolean {
-        return this._disabled || (this.selectComponent !== null && this.selectComponent.disabled);
-    }
-
-    set disabled(value: BooleanInput) {
-        const newDisabledState = coerceBooleanProperty(value);
-        if (this._disabled !== newDisabledState) {
-            this._disabled = newDisabledState;
-            this._changeDetectorRef.markForCheck();
-        }
-    }
-
-    /**
      * Value of the button
      */
     @Input()
@@ -97,6 +83,8 @@ export class ButtonComponent extends BaseButton implements SelectableItemToken<s
      */
     @Input()
     class: string;
+
+    @Output() clicked: Observable<MouseEvent | KeyboardEvent>;
 
     /**
      * Fiori Next button type class getter
@@ -113,9 +101,11 @@ export class ButtonComponent extends BaseButton implements SelectableItemToken<s
     constructor(
         @Optional() @Inject(SelectComponentRootToken) private selectComponent: SelectComponentRootToken,
         private _elementRef: ElementRef,
-        private _changeDetectorRef: ChangeDetectorRef
+        private _changeDetectorRef: ChangeDetectorRef,
+        _clicked: FnClickedProvider
     ) {
         super();
+        this.clicked = _clicked.asObservable();
     }
 
     /** HasElementRef interface implementation
