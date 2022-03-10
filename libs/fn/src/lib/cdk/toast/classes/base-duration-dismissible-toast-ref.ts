@@ -1,0 +1,39 @@
+import { OverlayRef } from '@angular/cdk/overlay';
+import { ToastDismissibleContainerComponent } from '../interfaces/toast-container-component.interface';
+import { BaseToastRef } from './base-toast-ref';
+
+/** Maximum amount of milliseconds that can be passed into setTimeout. */
+const MAX_TIMEOUT = Math.pow(2, 31) - 1;
+
+export abstract class BaseDurationDismissibleToastRef<T = any, P = any> extends BaseToastRef<T, P> {
+    /**
+     * Timeout ID for the duration setTimeout call. Used to clear the timeout if the toast is
+     * dismissed before the duration passes.
+     */
+    protected durationTimeoutId!: ReturnType<typeof setTimeout>;
+
+    /** @hidden */
+    protected constructor(
+        public containerInstance: ToastDismissibleContainerComponent<P>,
+        public overlayRef: OverlayRef
+    ) {
+        super(containerInstance, overlayRef);
+    }
+
+    /** Dismisses the toast and clears the timeout. */
+    dismiss(): void {
+        super.dismiss();
+
+        clearTimeout(this.durationTimeoutId);
+    }
+
+    /** Dismisses the Toast component after some duration */
+    dismissAfter(duration: number): void {
+        this.durationTimeoutId = setTimeout(() => this.dismiss(), Math.min(duration, MAX_TIMEOUT));
+    }
+
+    /** Cancels current dismiss timeout */
+    cancelDismiss(): void {
+        clearTimeout(this.durationTimeoutId);
+    }
+}

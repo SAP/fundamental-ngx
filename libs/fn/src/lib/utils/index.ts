@@ -1,5 +1,6 @@
 export * from './utils.module';
 export * from './decorators/coerce-boolean';
+export * from './decorators/coerce-css-pixel';
 export * from './template-ref.directive';
 export * from './template-ref-provider.token';
 export * from './utils.tokens';

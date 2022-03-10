@@ -1,0 +1,20 @@
+import { OverlayRef } from '@angular/cdk/overlay';
+import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
+import { ComponentRef, EmbeddedViewRef } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+
+export interface ToastContainerComponent<P> {
+    config: P;
+    readonly onExit$: Subject<void>;
+    readonly onEnter$: Subject<void>;
+    overlayRef: OverlayRef;
+    enter(): void;
+    exit(): Observable<void>;
+    attachComponentPortal<T>(portal: ComponentPortal<T>): ComponentRef<T>;
+    attachTemplatePortal<C>(portal: TemplatePortal<C>): EmbeddedViewRef<C>;
+}
+
+export interface ToastDismissibleContainerComponent<P> extends ToastContainerComponent<P> {
+    mouseover$: Subject<any>;
+    mouseleave$: Subject<any>;
+}

@@ -17,7 +17,7 @@ import { KeyUtil } from '@fundamental-ngx/core/utils';
 import equal from 'fast-deep-equal';
 import { SPACE } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs';
-import { FN_CHECKBOX_LABEL } from '../tokens';
+import { FN_CHECKBOX_LABEL } from '../checkbox.tokens';
 import { TemplateRefProviderToken } from '@fundamental-ngx/fn/utils';
 
 let checkboxUniqueId = 0;
