@@ -1,4 +1,11 @@
 
+### 0.33.5-rc.46 (2022-03-11)
+
+
+### Bug Fixes
+
+* **core:** fix backwards left/right arrows in RTL mode for menu ([#7818](https://github.com/SAP/fundamental-ngx/issues/7818)) ([a84e211](https://github.com/SAP/fundamental-ngx/commit/a84e211757935f1eceb8d609aed4e82931f4bcb7))
+
 ### 0.33.5-rc.45 (2022-03-08)
 
 
