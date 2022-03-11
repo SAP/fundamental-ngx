@@ -1,4 +1,11 @@
 
+### 0.33.5-rc.47 (2022-03-11)
+
+
+### Bug Fixes
+
+* **core:** fix carousel issue ([#7791](https://github.com/SAP/fundamental-ngx/issues/7791)) ([f334a0e](https://github.com/SAP/fundamental-ngx/commit/f334a0ec9f26a6cb05487df6fe31888c0558f5ab))
+
 ### 0.33.5-rc.46 (2022-03-11)
 
 
