@@ -47,7 +47,8 @@ export class PlatformFormGeneratorExampleComponent {
             message: 'Some group name',
             guiOptions: {
                 hint: {
-                    text: 'Some contextual hint on group header'
+                    text: 'Some contextual hint on group header',
+                    target: 'label'
                 }
             },
             items: [
@@ -61,8 +62,12 @@ export class PlatformFormGeneratorExampleComponent {
                         hint: {
                             text: 'Some contextual hint',
                             glyph: 'accidental-leave',
-                            trigger: ['focusin', 'focusout']
+                            // trigger: ['focusin', 'focusout'],
+                            target: 'input'
                         },
+                        labelColumnLayout: { S: 12, L: 2 },
+                        fieldColumnLayout: { S: 12, L: 9 },
+                        gapColumnLayout: { S: 12, L: 1 },
                         column: 1
                     },
                     validate: async (value) => {
@@ -87,7 +92,7 @@ export class PlatformFormGeneratorExampleComponent {
             guiOptions: {
                 hint: {
                     text: 'Some contextual hint',
-                    target: 'label'
+                    target: 'input'
                 },
                 column: 1
             },

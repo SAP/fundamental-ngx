@@ -16,5 +16,5 @@ export interface HintOptions {
 
 export interface FieldHintOptions extends HintOptions {
     /** Target where hint should be placed */
-    target?: 'input' | 'label';
+    target?: 'auto' | 'input' | 'label';
 }

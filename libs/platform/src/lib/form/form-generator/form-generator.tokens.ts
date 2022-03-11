@@ -9,7 +9,7 @@ export const FDP_FORM_GENERATOR_DEFAULT_HINT_OPTIONS = new InjectionToken<Omit<F
             position: 'after',
             trigger: ['mouseenter', 'mouseleave', 'focusin', 'focusout'],
             glyph: 'message-information',
-            target: 'label'
+            target: 'auto'
         })
     }
 );

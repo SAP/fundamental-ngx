@@ -11,11 +11,13 @@ import {
     Inject,
     Input,
     isDevMode,
+    OnChanges,
     OnDestroy,
     OnInit,
     Optional,
     Output,
     Provider,
+    SimpleChanges,
     TemplateRef,
     ViewChild
 } from '@angular/core';
@@ -74,7 +76,7 @@ const formGroupChildProvider: Provider = {
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [formFieldProvider, formGroupChildProvider]
 })
-export class FormFieldComponent implements FormField, AfterContentInit, AfterViewInit, OnDestroy, OnInit {
+export class FormFieldComponent implements FormField, AfterContentInit, AfterViewInit, OnDestroy, OnInit, OnChanges {
     /** Form field label */
     @Input()
     label: string;
@@ -173,7 +175,6 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         if (!value) {
             return;
         }
-
         this._labelColumnLayout = normalizeColumnLayout(value);
         this._labelColumnLayoutClass = generateColumnClass(this._labelColumnLayout);
     }
@@ -391,6 +392,36 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         );
     }
 
+    get groupHost(): FormGroupContainer | FormFieldGroup {
+        return this.formFieldGroup ? this.formFieldGroup : this.formGroupContainer;
+    }
+
+    get hintOptions(): FieldHintOptions {
+        // placement is here set up because hintPlacement is deprecated
+        if (typeof this.hint === 'string') {
+            return {
+                ...this._defaultHintOptions,
+                placement: this.hintPlacement ? this.hintPlacement : this._defaultHintOptions.placement,
+                text: this.hint
+            };
+        }
+        return {
+            ...this._defaultHintOptions,
+            placement: this.hintPlacement ? this.hintPlacement : this._defaultHintOptions.placement,
+            ...this.hint
+        };
+    }
+
+    get hintTarget(): 'label' | 'input' | null {
+        if (!this.hintOptions.text) {
+            return null;
+        }
+        if (this.hintOptions.target !== 'auto') {
+            return this.hintOptions.target;
+        }
+        return 'label';
+    }
+
     /** @hidden */
     constructor(
         private _cd: ChangeDetectorRef,
@@ -423,11 +454,9 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
             return;
         }
 
-        const groupHost = this.formFieldGroup ? this.formFieldGroup : this.formGroupContainer;
-
-        this.labelColumnLayout = groupHost.labelColumnLayout;
-        this.fieldColumnLayout = groupHost.fieldColumnLayout;
-        this.gapColumnLayout = groupHost.gapColumnLayout;
+        this.labelColumnLayout = this.groupHost.labelColumnLayout;
+        this.fieldColumnLayout = this.groupHost.fieldColumnLayout;
+        this.gapColumnLayout = this.groupHost.gapColumnLayout;
     }
 
     /** @hidden */
@@ -444,6 +473,13 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         }
 
         this._addToFormGroup();
+    }
+
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        if (this.hintTarget === 'input') {
+            console.log({ text: this.hintOptions.text });
+        }
     }
 
     /** @hidden */
@@ -548,22 +584,6 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         this.control = null;
 
         this._removeControlFromFormGroup();
-    }
-
-    get hintOptions(): FieldHintOptions {
-        // placement is here set up because hintPlacement is deprecated
-        if (typeof this.hint === 'string') {
-            return {
-                ...this._defaultHintOptions,
-                placement: this.hintPlacement ? this.hintPlacement : this._defaultHintOptions.placement,
-                text: this.hint
-            };
-        }
-        return {
-            ...this._defaultHintOptions,
-            placement: this.hintPlacement ? this.hintPlacement : this._defaultHintOptions.placement,
-            ...this.hint
-        };
     }
 
     /** @hidden */

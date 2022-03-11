@@ -10,9 +10,19 @@
             <ng-template [ngTemplateOutlet]="labelTemplate"></ng-template>
         </div>
         <ng-container *ngTemplateOutlet="withFormMessage"></ng-container>
-        <div class="fd-col" [class]="_gapColumnLayoutClass"></div>
+        <div class="fd-col" [class]="_gapColumnLayoutClass">
+            <ng-container *ngIf="hintTarget === 'input'">
+                <fd-icon
+                    [fd-inline-help]="hintOptions.text"
+                    [glyph]="hintOptions.glyph"
+                    [placement]="hintOptions.placement"
+                    [triggers]="hintOptions.trigger"
+                >
+                </fd-icon>
+            </ng-container>
+        </div>
     </div>
-    <span aria-hidden="true" style="display: none" [id]="'fdp-form-hint-' + id">{{ hint }}</span>
+    <span aria-hidden="true" style="display: none" [id]="'fdp-form-hint-' + id">{{ hintOptions.text }}</span>
 </ng-template>
 
 <ng-template #withFormMessage>
@@ -34,7 +44,7 @@
 </ng-template>
 
 <ng-template #labelTemplate>
-    <ng-container *ngIf="hintOptions.target === 'label'; else withoutHint">
+    <ng-container *ngIf="hintTarget === 'label'; else withoutHint">
         <label
             [id]="'fdp-form-label-' + id"
             [required]="editable && required"

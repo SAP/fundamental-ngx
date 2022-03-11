@@ -67,4 +67,14 @@ export class FormGeneratorFieldComponent {
      * Form field component.
      */
     @ViewChild(FormFieldComponent) fieldRenderer: FormFieldComponent;
+
+    get placeholder(): string {
+        if (!this.field) {
+            return '';
+        }
+        if (this.field.formItem?.placeholder) {
+            return this.field.formItem?.placeholder as string;
+        }
+        return this.field.formItem?.useMessageAsPlaceholder && (this.field.formItem?.message as string);
+    }
 }
