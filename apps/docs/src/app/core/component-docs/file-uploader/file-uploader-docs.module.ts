@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { FileUploaderDisabledExampleComponent } from './examples/file-uploader-disabled-example/file-uploader-example.component';
 import { FileUploaderHeaderComponent } from './file-uploader-header/file-uploader-header.component';
 import { FileUploaderDocsComponent } from './file-uploader-docs.component';
 import { API_FILES } from '../../api-files';
@@ -31,6 +32,7 @@ const routes: Routes = [
         FileUploaderDocsComponent,
         FileUploaderHeaderComponent,
         FileUploaderExampleComponent,
+        FileUploaderDisabledExampleComponent,
         FileUploaderMaxExampleComponent,
         FileUploaderDragDisabledExampleComponent,
         FileUploaderCompactExampleComponent,

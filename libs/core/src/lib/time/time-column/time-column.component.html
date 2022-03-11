@@ -31,7 +31,6 @@
             fdCarouselItem
             *ngFor="let row of rows; let index = index"
             #item="fdCarouselItem"
-            [attr.tabindex]="row.label === activeValue?.label ? 0 : -1"
             [id]="_createColumnItemIdByIndex(index)"
             [value]="row"
         >

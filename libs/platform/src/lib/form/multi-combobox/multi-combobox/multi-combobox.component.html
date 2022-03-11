@@ -216,12 +216,12 @@
                 fd-list-item
                 role="option"
                 [tabindex]="0"
-                (click)="!mobile && close()"
+                (click)="!mobile && onOptionClicked($event, i)"
                 (keyDown)="onItemKeyDownHandler($event, i)"
                 [selected]="optionItem.selected"
             >
                 <fd-checkbox
-                    (click)="onOptionCheckboxClicked($event)"
+                    (click)="onOptionCheckboxClicked($event, i)"
                     [compact]="contentDensity | isCompactDensity"
                     (ngModelChange)="toggleSelection(optionItem)"
                     [ngModel]="optionItem.selected"

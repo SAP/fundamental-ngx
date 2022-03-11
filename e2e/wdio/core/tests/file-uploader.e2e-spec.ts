@@ -20,6 +20,7 @@ describe('File uploader component test', () => {
     const {
         fileUploaderInput,
         browseButton,
+        browseButtonDisabled,
         fileUploaderInputFile,
         fileSelectedText,
         fileUploaderExample,
@@ -45,10 +46,19 @@ describe('File uploader component test', () => {
     });
 
     it('verify browser button', () => {
-        const arrLength = getElementArrayLength(browseButton);
+        let arrLength = getElementArrayLength(browseButton);
         for (let i = 0; i < arrLength; i++) {
             scrollIntoView(browseButton, i);
-            expect(isElementClickable(browseButton, i)).toBe(true, `browse button with index ${i} not clickable`);
+            expect(isElementClickable(browseButton, i)).toBe(true, `browse button with index ${i} is clickable`);
+        }
+
+        arrLength = getElementArrayLength(browseButtonDisabled);
+        for (let i = 0; i < arrLength; i++) {
+            scrollIntoView(browseButtonDisabled, i);
+            expect(isElementClickable(browseButtonDisabled, i)).toBe(
+                false,
+                `browse button with index ${i} is not clickable`
+            );
         }
     });
 

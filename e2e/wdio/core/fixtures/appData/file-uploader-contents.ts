@@ -1,5 +1,6 @@
 export const placeholderTestTextArr = [
     'Select the file ',
+    'Select the file ',
     'Choose file to upload to the server ',
     'Choose File to upload',
     'Choose File to upload',

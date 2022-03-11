@@ -172,7 +172,7 @@ export class ComboboxComponent
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
      */
     @Input()
-    state: FormStates;
+    state?: FormStates;
 
     /**
      * The template with which to display the individual listed items.

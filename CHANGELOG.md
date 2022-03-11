@@ -1,4 +1,50 @@
 
+### 0.33.5-rc.48 (2022-03-11)
+
+
+### Bug Fixes
+
+* **core:** time picker tabindexes ([#7858](https://github.com/SAP/fundamental-ngx/issues/7858)) ([20900b3](https://github.com/SAP/fundamental-ngx/commit/20900b36de6a692f52ce179e35292d347fdae89b))
+
+### 0.33.5-rc.47 (2022-03-11)
+
+
+### Bug Fixes
+
+* **core:** fix carousel issue ([#7791](https://github.com/SAP/fundamental-ngx/issues/7791)) ([f334a0e](https://github.com/SAP/fundamental-ngx/commit/f334a0ec9f26a6cb05487df6fe31888c0558f5ab))
+
+### 0.33.5-rc.46 (2022-03-11)
+
+
+### Bug Fixes
+
+* **core:** fix backwards left/right arrows in RTL mode for menu ([#7818](https://github.com/SAP/fundamental-ngx/issues/7818)) ([a84e211](https://github.com/SAP/fundamental-ngx/commit/a84e211757935f1eceb8d609aed4e82931f4bcb7))
+
+### 0.33.5-rc.45 (2022-03-08)
+
+
+### Bug Fixes
+
+* **core:** make state input optional ([#7856](https://github.com/SAP/fundamental-ngx/issues/7856)) ([dfbcd9f](https://github.com/SAP/fundamental-ngx/commit/dfbcd9f6a9d7c53caa50f1856b6eee66f50b5292))
+
+### 0.33.5-rc.44 (2022-03-08)
+
+### 0.33.5-rc.43 (2022-03-08)
+
+### 0.33.5-rc.42 (2022-03-07)
+
+
+### Bug Fixes
+
+* **core:** file uploader disabled visual state ([#7814](https://github.com/SAP/fundamental-ngx/issues/7814)) ([ca29793](https://github.com/SAP/fundamental-ngx/commit/ca29793dd4adb2dac5fe73d77dd10348420b03a1))
+
+### 0.33.5-rc.41 (2022-03-07)
+
+
+### Features
+
+* **platform:** multi-combobox - range selection ([#7835](https://github.com/SAP/fundamental-ngx/issues/7835)) ([e74f496](https://github.com/SAP/fundamental-ngx/commit/e74f496ebd3c97300a40f074f2de306508691382))
+
 ### 0.33.5-rc.40 (2022-03-07)
 
 
