@@ -1,4 +1,11 @@
 
+### 0.33.5-rc.48 (2022-03-11)
+
+
+### Bug Fixes
+
+* **core:** time picker tabindexes ([#7858](https://github.com/SAP/fundamental-ngx/issues/7858)) ([20900b3](https://github.com/SAP/fundamental-ngx/commit/20900b36de6a692f52ce179e35292d347fdae89b))
+
 ### 0.33.5-rc.47 (2022-03-11)
 
 
