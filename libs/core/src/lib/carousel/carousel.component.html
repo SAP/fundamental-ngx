@@ -40,7 +40,7 @@
             <ng-container *ngTemplateOutlet="buttonLeft"></ng-container>
         </ng-container>
 
-        <ng-container [ngTemplateOutlet]="pageIndicators"> </ng-container>
+        <ng-container *ngTemplateOutlet="pageIndicators"> </ng-container>
 
         <ng-container *ngIf="_showNavigationButtonInPageIndicatorContainer">
             <ng-container *ngTemplateOutlet="buttonRight"></ng-container>
