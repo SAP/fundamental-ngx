@@ -1,11 +1,12 @@
-import { Component, ChangeDetectorRef, Input, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ChangeDetectorRef, Input, ElementRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 
 @Component({
     selector: 'fdp-color-palette-popover',
-    templateUrl: './color-palette-popover.component.html'
+    templateUrl: './color-palette-popover.component.html',
+    encapsulation: ViewEncapsulation.ShadowDom
 })
-export class ColorPalettePopoverComponent extends BaseComponent implements AfterViewInit {
+export class ColorPalettePopoverComponent extends BaseComponent {
     /** selects the default color of the component
      * The default color should be a part of the ColorPalette colors
      */
@@ -32,14 +33,6 @@ export class ColorPalettePopoverComponent extends BaseComponent implements After
         super(_cd);
     }
 
-    /**
-     * @todo
-     * WIP: gets the inital color from the palette
-     */
-    ngAfterViewInit(): void {
-        this.color = this.popoverComponent.nativeElement._colorPalette().selectedColor;
-    }
-
     openPopover(): void {
         this.popoverComponent.nativeElement.showAt(this._elementRef.nativeElement);
     }
@@ -49,12 +42,6 @@ export class ColorPalettePopoverComponent extends BaseComponent implements After
      * Returns the selected color.
      */
     get selectedColor(): string {
-        // return this.popoverComponent?.nativeElement._colorPalette()?.selectedColor;
-        // if (this.popoverComponent) {
-        //     console.log(this.popoverComponent.nativeElement._colorPalette().selectedColor);
-        //     return this.popoverComponent.nativeElement._colorPalette().selectedColor;
-        // }
-
         return this.color;
     }
 

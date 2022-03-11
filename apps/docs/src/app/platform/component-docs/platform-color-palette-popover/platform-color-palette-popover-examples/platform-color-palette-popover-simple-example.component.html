@@ -12,9 +12,9 @@
 <fdp-color-palette-popover
     #colorPalettePopoverComplex
     defaultColor="pink"
-    showDefaultColor
-    showMoreColors
-    showRecentColors
+    [showDefaultColor]="true"
+    [showMoreColors]="true"
+    [showRecentColors]="true"
 ></fdp-color-palette-popover>
 <p>
     <i>Selected Color: {{ colorPalettePopoverComplex.selectedColor }}</i>

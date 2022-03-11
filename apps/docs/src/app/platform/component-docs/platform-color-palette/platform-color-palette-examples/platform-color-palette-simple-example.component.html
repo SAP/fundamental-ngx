@@ -1,29 +1,24 @@
 <fdp-color-palette #colorPalette>
     <fdp-color-palette-item [value]="'red'"></fdp-color-palette-item>
 </fdp-color-palette>
-
 <br />
-
 <p>
     <i>Selected Color: {{ colorPalette.selectedColor }}</i>
 </p>
 
 <br />
 <br />
+<br />
 <h4>Complex example</h4>
-
 <fdp-color-palette
     #colorPaletteComplex
-    [defaultColor]="'pink'"
+    defaultColor="pink"
     [showDefaultColor]="true"
     [showMoreColors]="true"
-    showRecentColors="true"
+    [showRecentColors]="true"
 >
-    <fdp-color-palette-item [value]="'red'"></fdp-color-palette-item>
 </fdp-color-palette>
-
 <br />
-
 <p>
     <i>Selected Color: {{ colorPaletteComplex.selectedColor }}</i>
 </p>

@@ -1,9 +1,10 @@
-import { Component, ChangeDetectorRef, ViewChild, Input, ElementRef } from '@angular/core';
+import { Component, ChangeDetectorRef, ViewChild, Input, ElementRef, ViewEncapsulation } from '@angular/core';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 
 @Component({
     selector: 'fdp-color-palette',
-    templateUrl: './color-palette.component.html'
+    templateUrl: './color-palette.component.html',
+    encapsulation: ViewEncapsulation.ShadowDom
 })
 export class ColorPaletteComponent extends BaseComponent {
     /** selects the default color of the component
@@ -14,15 +15,15 @@ export class ColorPaletteComponent extends BaseComponent {
 
     /** Defines whether the user can choose the default color from a button. */
     @Input()
-    showDefaultColor = true;
+    showDefaultColor = false;
 
     /** Defines whether the user can choose a custom color from a component */
     @Input()
-    showMoreColors = true;
+    showMoreColors = false;
 
     /** Defines whether the user can see the last used colors in the bottom of the component */
     @Input()
-    showRecentColors = true;
+    showRecentColors = false;
 
     @ViewChild('colorPalette') colorPalette: ElementRef;
 
