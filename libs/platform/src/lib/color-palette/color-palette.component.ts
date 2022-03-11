@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, ViewChild, Input, ElementRef } from '@angular/core';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 
 @Component({
@@ -6,15 +6,38 @@ import { BaseComponent } from '@fundamental-ngx/platform/shared';
     templateUrl: './color-palette.component.html'
 })
 export class ColorPaletteComponent extends BaseComponent {
-    /** @hidden */
-    /** The currently selected color of the color palette */
-    selectedColor: string;
+    /** selects the default color of the component
+     * The default color should be a part of the ColorPalette colors
+     */
+    @Input()
+    defaultColor?: string;
+
+    /** Defines whether the user can choose the default color from a button. */
+    @Input()
+    showDefaultColor = true;
+
+    /** Defines whether the user can choose a custom color from a component */
+    @Input()
+    showMoreColors = true;
+
+    /** Defines whether the user can see the last used colors in the bottom of the component */
+    @Input()
+    showRecentColors = true;
+
+    @ViewChild('colorPalette') colorPalette: ElementRef;
 
     constructor(_cd: ChangeDetectorRef) {
         super(_cd);
     }
 
-    setColorSelected(event): void {
-        this.selectedColor = event.detail.color;
+    /**
+     * Returns the selected color.
+     */
+    get selectedColor(): string {
+        return this.colorPalette?.nativeElement.selectedColor;
+    }
+
+    clickEvent(event): Event {
+        return event;
     }
 }

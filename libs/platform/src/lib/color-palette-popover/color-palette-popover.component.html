@@ -1,7 +1,7 @@
 <ui5-button (click)="openPopover()">Open ColorPalettePopover</ui5-button>
 <ui5-color-palette-popover
     #colorPalettePopover
-    (item-click)="setColorSelected($event)"
+    (item-click)="clickEvent($event)"
     [show-recent-colors]="showRecentColors"
     [show-more-colors]="showMoreColors"
     [show-default-color]="showDefaultColor"
