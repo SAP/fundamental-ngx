@@ -5,6 +5,7 @@ import {
     ContentChild,
     ElementRef,
     HostListener,
+    Optional,
     Renderer2,
     TemplateRef,
     ViewChild,
@@ -18,7 +19,7 @@ import { Subject } from 'rxjs';
 
 import { ARROW_SIZE, ArrowPosition } from '@fundamental-ngx/core/shared';
 import { PopoverFlippedXDirection } from '@fundamental-ngx/core/shared';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { ContentDensityService, KeyUtil } from '@fundamental-ngx/core/utils';
 import { PopoverPosition } from '@fundamental-ngx/core/shared';
 import { CdkTrapFocus } from '@angular/cdk/a11y';
 import { NotificationGroupComponent } from '@fundamental-ngx/core/notification';
@@ -90,6 +91,11 @@ export class PopoverBodyComponent {
     /** Close event from popover body */
     onClose = new Subject<void>();
 
+    /** @hidden */
+    get _isCompact(): boolean {
+        return this._contentDensityService?.contentDensity.value === 'compact';
+    }
+
     /** Handler escape keydown */
     @HostListener('keyup', ['$event'])
     bodyKeyupHandler(event: KeyboardEvent): void {
@@ -103,7 +109,8 @@ export class PopoverBodyComponent {
     constructor(
         readonly _elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
-        private _renderer2: Renderer2
+        private _renderer2: Renderer2,
+        @Optional() private _contentDensityService: ContentDensityService
     ) {}
 
     /** @hidden */

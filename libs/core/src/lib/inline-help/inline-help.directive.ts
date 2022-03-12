@@ -90,8 +90,8 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
     private _applyAdditionalInlineHelpClass(): void {
         this.additionalBodyClass = INLINE_HELP_CLASS + ' ' + this.additionalBodyClass;
 
-        // If conected to icon, but not button then apply additional class
-        // That will change arrow's position a bit
+        // If connected to the icon, but not button, then apply additional class
+        // That will change the arrow's position a bit
         if (this._icon) {
             this.additionalBodyClass += ' ' + INLINE_HELP_ICON_CLASS;
         }
