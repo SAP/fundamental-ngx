@@ -14,8 +14,7 @@ import {
     waitForElDisplayed,
     waitForNotDisplayed,
     getElementClass,
-    setValue,
-    elementArray
+    setValue
 } from '../../driver/wdio';
 
 describe('Standard List test suite', () => {
@@ -46,9 +45,8 @@ describe('Standard List test suite', () => {
     describe('action list examples', () => {
         it('should check show more button functionality', () => {
             const startItemsCount = getElementArrayLength(actionList + listItems);
-            const lastItem = elementArray(actionList + listItems)[startItemsCount - 1];
 
-            click(lastItem);
+            click(actionList + listItems, startItemsCount - 1);
             waitForNotDisplayed(actionList + busyIndicator);
 
             expect(getElementArrayLength(actionList + listItems)).not.toEqual(startItemsCount);
