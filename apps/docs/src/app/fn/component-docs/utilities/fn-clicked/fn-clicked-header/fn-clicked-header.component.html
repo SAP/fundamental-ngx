@@ -1,0 +1,24 @@
+<header>Clicked event manager</header>
+<description>
+    <p>
+        During development of the components, which should be accessible we encounter a lot of the repeated cases. One
+        of them is interaction detection. Besides "click" event, both "space" and "enter" can be indication of user's
+        will to select something. This is correct in most cases. Because of that need, we implement those three handlers
+        manually all the time. To eliminate that much repeated code we wrote custom Angular Event manager. Syntax is
+        very simple, just like you'd write <code>(click)="onClickHandler($event)"</code>, you will write
+        <code>(fnClicked)="onClickHandler($event)"</code>
+        and it will catch both "keydown.enter" and "keydown.space" events alongside with regular "click" event.
+    </p>
+    <p>
+        <code>(fnClicked)</code> also works with <code>@HostListener</code> decorator and with
+        <code>Renderer2.listen</code>
+    </p>
+    <p>
+        Include <code>ClickedBehaviorModule.forRoot()</code> in <code>imports</code> array of your <b>Root</b> module to
+        have access to the event handler.
+    </p>
+</description>
+<import module="ClickedBehaviorModule" subPackage="cdk"></import>
+
+<fd-header-tabs></fd-header-tabs>
+<router-outlet></router-outlet>
