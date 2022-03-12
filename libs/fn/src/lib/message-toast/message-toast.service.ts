@@ -26,7 +26,7 @@ export class MessageToastService<P = any> extends BaseDismissibleToastService<Me
     }
 
     /**
-     * Opens a toast with provided message.
+     * Opens toast with a provided message.
      * @param message Message to display in a Message Toast.
      * @param config Toast configuration.
      * @returns Toast reference.

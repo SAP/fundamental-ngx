@@ -17,7 +17,7 @@ export class BaseToastConfig<T = any> {
     /**
      * Toast position strategy.
      */
-    positionStategy?: BaseToastPosition = ToastBottomCenterPosition;
+    positionStrategy?: BaseToastPosition = ToastBottomCenterPosition;
 
     /**
      * Toast minimum width.

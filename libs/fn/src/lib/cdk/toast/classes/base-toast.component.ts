@@ -18,7 +18,7 @@ export abstract class BaseToastComponent<P extends BaseToastConfig = BaseToastCo
     @ViewChild(CdkPortalOutlet, { static: true })
     _portalOutlet!: CdkPortalOutlet;
 
-    /** Subject for notifying that the Toast has exited from view. */
+    /** Subject for notifying that the Toast has finished exiting from view. */
     readonly onExit$: Subject<void> = new Subject();
 
     /** Subject for notifying that the Toast has finished entering the view. */
@@ -77,9 +77,9 @@ export abstract class BaseToastComponent<P extends BaseToastConfig = BaseToastCo
         return this._portalOutlet.attachTemplatePortal(portal);
     }
 
-    /** Method which triggered when Toast component is ready to be shown. Used to trigger animations. */
+    /** Method, which is triggered when the Toast component is ready to be shown. Used to trigger animations. */
     abstract enter(): void;
 
-    /** Method which triggered when Toast component is ready to be removed. Used to trigger animations. */
+    /** Method, which is triggered when the Toast component is ready to be removed. Used to trigger animations. */
     abstract exit(): Observable<void>;
 }

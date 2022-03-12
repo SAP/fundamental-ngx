@@ -2,7 +2,7 @@ import { OverlayRef } from '@angular/cdk/overlay';
 import { ToastDismissibleContainerComponent } from '../interfaces/toast-container-component.interface';
 import { BaseToastRef } from './base-toast-ref';
 
-/** Maximum amount of milliseconds that can be passed into setTimeout. */
+/** Maximum number of milliseconds that can be passed into setTimeout. */
 const MAX_TIMEOUT = Math.pow(2, 31) - 1;
 
 export abstract class BaseDurationDismissibleToastRef<T = any, P = any> extends BaseToastRef<T, P> {

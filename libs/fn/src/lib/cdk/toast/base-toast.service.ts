@@ -42,12 +42,6 @@ export abstract class BaseToastService<
 
     /**
      * @hidden
-     * Array of all current overlay references.
-     */
-    protected _overlayRefs: OverlayRef[] = [];
-
-    /**
-     * @hidden
      * Array of all current toasts.
      */
     protected _toasts: BaseToastRef[] = [];
@@ -308,7 +302,7 @@ export abstract class BaseToastService<
 
     /** @hidden */
     private _refreshOverlayPositions(): void {
-        this._toasts.map((toastRef) => {
+        this._toasts.forEach((toastRef) => {
             const positionStrategy = this._updatePositionStrategy(toastRef.overlayRef);
             const overlayConfig = toastRef.overlayRef.getConfig();
 

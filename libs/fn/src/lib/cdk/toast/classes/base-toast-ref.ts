@@ -3,7 +3,7 @@ import { Observable, Subject } from 'rxjs';
 import { ToastContainerComponent } from '../interfaces/toast-container-component.interface';
 
 export abstract class BaseToastRef<T = any, P = any> {
-    /** The instance of the component making up the content of the Toast. */
+    /** The instance of the component is making up the content of the Toast. */
     instance!: T;
 
     /** Subject for notifying the user that the Toast has been dismissed. */
