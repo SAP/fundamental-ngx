@@ -63,7 +63,6 @@ export class ClickedEventPlugin {
                     return;
                 }
             }
-            console.log({ event });
             handler(event);
         };
 
