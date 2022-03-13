@@ -29,13 +29,13 @@ import { FormModule } from '@fundamental-ngx/core/form';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { TableModule } from '@fundamental-ngx/core/table';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { PaginationModule } from '@fundamental-ngx/core/pagination';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
+import { MenuModule } from '@fundamental-ngx/core/menu';
 
 const routes: Routes = [
     {
@@ -54,7 +54,6 @@ const routes: Routes = [
         ListModule,
         TableModule,
         DialogModule,
-        PopoverModule,
         ToolbarModule,
         DragDropModule,
         CdkTableModule,
@@ -65,7 +64,8 @@ const routes: Routes = [
         SharedDocumentationPageModule,
         RouterModule.forChild(routes),
         SharedDocumentationModule,
-        BusyIndicatorModule
+        BusyIndicatorModule,
+        MenuModule
     ],
     exports: [RouterModule],
     declarations: [
