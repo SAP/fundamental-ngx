@@ -6,9 +6,10 @@ import {
     Inject,
     Input,
     isDevMode,
+    OnChanges,
     OnDestroy,
     Output,
-    TemplateRef,
+    SimpleChanges,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
@@ -63,13 +64,7 @@ export interface SubmitFormEventResult {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormGeneratorComponent implements OnDestroy {
-    /**
-     * @description Renderer for the custom html code passed into the component.
-     */
-    @ViewChild('renderer', { static: false })
-    renderer: TemplateRef<any>;
-
+export class FormGeneratorComponent implements OnDestroy, OnChanges {
     /** @description Unique form name */
     @Input()
     formName = `fdp-form-generator-${formUniqueId++}`;
@@ -99,6 +94,13 @@ export class FormGeneratorComponent implements OnDestroy {
      */
     @Input()
     mainTitle: string;
+
+    /**
+     * @description
+     * Hint for the main title
+     */
+    @Input()
+    hint: string | HintOptions;
 
     /**
      * @description Specify the column layout in the format `XLn-Ln-Mn-Sn`
@@ -215,6 +217,11 @@ export class FormGeneratorComponent implements OnDestroy {
     /**
      * @hidden
      */
+    hintOptions: HintOptions;
+
+    /**
+     * @hidden
+     */
     private _formItems: DynamicFormItem[];
 
     /**
@@ -236,6 +243,22 @@ export class FormGeneratorComponent implements OnDestroy {
         private _cd: ChangeDetectorRef,
         @Inject(FDP_FORM_GENERATOR_DEFAULT_HINT_OPTIONS) private _defaultHintOptions: FieldHintOptions
     ) {}
+
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes.hint) {
+            if (typeof this.hint === 'string') {
+                this.hintOptions = {
+                    ...this._defaultHintOptions,
+                    text: this.hint
+                };
+            } else {
+                this.hintOptions = {
+                    ...this._defaultHintOptions,
+                    ...this.hint
+                };
+            }
+        }
+    }
 
     /**
      * @hidden
