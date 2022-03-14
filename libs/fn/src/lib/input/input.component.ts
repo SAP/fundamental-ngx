@@ -13,7 +13,12 @@ import {
 } from '@angular/core';
 import { InputBase } from './input-base';
 import { applyCssClass } from '@fundamental-ngx/core/utils';
-import { DisabledBehavior, FN_DISABLED, FN_READONLY, ReadonlyBehavior } from '@fundamental-ngx/fn/cdk';
+import {
+    DisabledBehavior,
+    FN_DISABLED_DIRECTIVE,
+    FN_READONLY_DIRECTIVE,
+    ReadonlyBehavior
+} from '@fundamental-ngx/fn/cdk';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -60,8 +65,8 @@ export class InputComponent extends InputBase implements OnInit, OnChanges, Cont
     constructor(
         private _elementRef: ElementRef,
         private _cdr: ChangeDetectorRef,
-        @Optional() @Inject(FN_DISABLED) disabled$: DisabledBehavior,
-        @Optional() @Inject(FN_READONLY) readonly$: ReadonlyBehavior
+        @Optional() @Inject(FN_DISABLED_DIRECTIVE) disabled$: DisabledBehavior,
+        @Optional() @Inject(FN_READONLY_DIRECTIVE) readonly$: ReadonlyBehavior
     ) {
         super(_cdr, disabled$, readonly$);
     }
