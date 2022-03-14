@@ -8,7 +8,7 @@ import {
     NgZone,
     HostListener
 } from '@angular/core';
-import { BaseToastDurationDismissibleComponent, toastAnimations } from '@fundamental-ngx/fn/cdk';
+import { BaseToastDurationDismissibleComponent, baseToastAnimations } from '@fundamental-ngx/fn/cdk';
 import { Observable, take } from 'rxjs';
 import { NotificationConfig } from './config/notification-config';
 
@@ -16,7 +16,7 @@ import { NotificationConfig } from './config/notification-config';
     selector: 'fn-notification',
     templateUrl: './notification.component.html',
     styleUrls: ['./notification.component.scss'],
-    animations: [toastAnimations.toastState],
+    animations: [baseToastAnimations.toastState],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {

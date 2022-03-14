@@ -10,7 +10,7 @@ import {
 import { AnimationEvent } from '@angular/animations';
 import {
     BaseToastDurationDismissibleComponent,
-    toastAnimations,
+    baseToastAnimations,
     ToastDismissibleContainerComponent
 } from '@fundamental-ngx/fn/cdk';
 import { Observable, take } from 'rxjs';
@@ -20,7 +20,7 @@ import { MessageToastConfig } from './config/message-toast.config';
     selector: 'fn-message-toast',
     templateUrl: './message-toast.component.html',
     styleUrls: ['./message-toast.component.scss'],
-    animations: [toastAnimations.toastState],
+    animations: [baseToastAnimations.toastState],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {

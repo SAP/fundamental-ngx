@@ -54,7 +54,7 @@ export abstract class BaseToastPosition {
 
 /**
  * Toast Position class.
- * First item will pop from the top-center of the screen.
+ * The first item will pop from the top-center of the screen.
  * New items will stack bellow first item.
  */
 export class ToastTopCenterPosition extends BaseToastPosition {
@@ -68,7 +68,7 @@ export class ToastTopCenterPosition extends BaseToastPosition {
 
 /**
  * Toast Position class.
- * First item will pop from the bottom-center of the screen.
+ * The first item will pop from the bottom-center of the screen.
  * New items will stack above first item.
  */
 export class ToastBottomCenterPosition extends BaseToastPosition {
@@ -82,7 +82,7 @@ export class ToastBottomCenterPosition extends BaseToastPosition {
 
 /**
  * Toast Position class.
- * First item will pop from the top-left of the screen.
+ * The first item will pop from the top-left of the screen.
  * New items will stack below first item.
  */
 export class ToastTopLeftPosition extends ToastTopCenterPosition {
@@ -92,7 +92,7 @@ export class ToastTopLeftPosition extends ToastTopCenterPosition {
 
 /**
  * Toast Position class.
- * First item will pop from the top-right of the screen.
+ * The first item will pop from the top-right of the screen.
  * New items will stack below first item.
  */
 export class ToastTopRightPosition extends ToastTopCenterPosition {
@@ -102,7 +102,7 @@ export class ToastTopRightPosition extends ToastTopCenterPosition {
 
 /**
  * Toast Position class.
- * First item will pop from the bottom-left of the screen.
+ * The first item will pop from the bottom-left of the screen.
  * New items will stack above first item.
  */
 export class ToastBottomLeftPosition extends ToastBottomCenterPosition {
@@ -112,7 +112,7 @@ export class ToastBottomLeftPosition extends ToastBottomCenterPosition {
 
 /**
  * Toast Position class.
- * First item will pop from the bottom-right of the screen.
+ * The first item will pop from the bottom-right of the screen.
  * New items will stack above first item.
  */
 export class ToastBottomRightPosition extends ToastBottomCenterPosition {

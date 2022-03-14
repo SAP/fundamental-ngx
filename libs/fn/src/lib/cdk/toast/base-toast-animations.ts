@@ -3,10 +3,10 @@ import { animate, state, style, transition, trigger, AnimationTriggerMetadata } 
 /**
  * Animations used by the Toast components.
  */
-export const toastAnimations: {
+export const baseToastAnimations: {
     readonly toastState: AnimationTriggerMetadata;
 } = {
-    /** Animation that shows and hides a Toast. */
+    /** Animation that shows and hides Toast. */
     toastState: trigger('state', [
         state(
             'void, hidden',

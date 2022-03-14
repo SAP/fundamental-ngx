@@ -1,10 +1,10 @@
 import { OverlayRef } from '@angular/cdk/overlay';
 import { BasePortalOutlet, CdkPortalOutlet, ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 import { ComponentRef, Directive, EmbeddedViewRef, ViewChild } from '@angular/core';
-import { coerceCssPixel } from '@fundamental-ngx/fn/utils';
 import { Observable, Subject } from 'rxjs';
-import { BaseToastConfig } from './base-toast-config';
+import { coerceCssPixel } from '@fundamental-ngx/fn/utils';
 import { ToastContainerComponent } from '../interfaces/toast-container-component.interface';
+import { BaseToastConfig } from './base-toast-config';
 
 @Directive()
 export abstract class BaseToastComponent<P extends BaseToastConfig = BaseToastConfig>

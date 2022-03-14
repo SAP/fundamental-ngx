@@ -15,6 +15,7 @@ export abstract class BaseActionDismissibleToastRef<T = any, P = any> extends Ba
         public overlayRef: OverlayRef
     ) {
         super(containerInstance, overlayRef);
+
         this.onAction().subscribe(() => this.dismiss());
     }
 

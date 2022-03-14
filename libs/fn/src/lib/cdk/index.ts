@@ -27,4 +27,4 @@ export * from './toast/classes/base-duration-dismissible-toast-ref';
 export * from './toast/classes/base-toast-config';
 export * from './toast/classes/base-toast-duration-dismissible.component';
 export * from './toast/classes/toast-overlay-container';
-export * from './toast/toast-animations';
+export * from './toast/base-toast-animations';

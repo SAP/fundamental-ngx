@@ -140,6 +140,7 @@ export abstract class BaseToastService<
      */
     private _getPositionStrategy(): PositionStrategy {
         const lastOverlay = this._toasts.length > 0 ? this._toasts[this._toasts.length - 1] : null;
+
         const globalOverlay = this._toasts.find(({ overlayRef }) => {
             const config = overlayRef.getConfig();
 
@@ -202,8 +203,8 @@ export abstract class BaseToastService<
      */
     private _createOverlay(): OverlayRef {
         const overlayConfig = new OverlayConfig();
-        overlayConfig.positionStrategy = this._getPositionStrategy();
 
+        overlayConfig.positionStrategy = this._getPositionStrategy();
         overlayConfig.panelClass = 'fn-toast-overlay';
 
         return this.overlay.create(overlayConfig);
@@ -229,22 +230,17 @@ export abstract class BaseToastService<
     ): BaseToastRef<T | EmbeddedViewRef<any>, P> {
         const config = { ...this.defaultConfig, ...userConfig };
         const overlayRef = this._createOverlay();
-
         const containerRef = this.attachToastContainer(overlayRef, config);
         const toastRef = this.getToastRef<T>(containerRef, overlayRef);
 
         if (content instanceof TemplateRef) {
             // TemplatePortal requires viewContainer ref
             const viewRef = null as any as ViewContainerRef;
-            const portal = new TemplatePortal(content, viewRef, {
-                $implicit: config,
-                toastRef
-            } as any);
+            const portal = new TemplatePortal(content, viewRef, { $implicit: config, toastRef } as any);
 
             toastRef.instance = containerRef.attachTemplatePortal(portal);
         } else {
             const injector = this.createInjector(config, toastRef);
-
             const portal = new ComponentPortal(content, undefined, injector);
             const contentRef = containerRef.attachComponentPortal<T>(portal);
 
@@ -255,6 +251,7 @@ export abstract class BaseToastService<
         this._toasts.push(toastRef);
 
         this.animateToast<T>(toastRef);
+
         return toastRef;
     }
 
@@ -268,10 +265,11 @@ export abstract class BaseToastService<
         });
 
         const containerPortal = new ComponentPortal(this.toastContainerComponent, null, injector);
-
         const containerRef: ComponentRef<C> = overlayRef.attach(containerPortal);
+
         containerRef.instance.config = config;
         containerRef.instance.overlayRef = overlayRef;
+
         return containerRef.instance;
     }
 
@@ -308,6 +306,7 @@ export abstract class BaseToastService<
 
             toastRef.overlayRef.updatePositionStrategy(positionStrategy);
             overlayConfig.positionStrategy = positionStrategy;
+
             return toastRef;
         });
     }

@@ -27,6 +27,7 @@ export class NotificationService<P = any> extends BaseDismissibleToastService<No
      */
     open(config: NotificationConfig<P>): NotificationRef<NotificationTextComponent> {
         const mergedConfig = { ...this.defaultConfig, ...config };
+
         return this.openFromComponent(
             this.textToastContainer,
             mergedConfig
