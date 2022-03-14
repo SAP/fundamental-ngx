@@ -1,9 +1,21 @@
-<fd-action-sheet [compact]="true">
+<fd-action-sheet [compact]="true" (isOpenChange)="isOpenChange($event)">
     <fd-action-sheet-control>
-        <button fd-button [compact]="true" glyph="settings"></button>
+        <button
+            fd-button
+            [compact]="true"
+            glyph="settings"
+            title="Open Action Sheet"
+            id="fd-action-sheet-compact-control"
+            aria-haspopup="menu"
+            [attr.aria-expanded]="isOpen"
+            aria-controls="fd-action-sheet-compact-body"
+        ></button>
     </fd-action-sheet-control>
 
-    <fd-action-sheet-body>
+    <fd-action-sheet-body
+        actionSheetBodyId="fd-action-sheet-compact-body"
+        ariaLabelledby="fd-action-sheet-compact-control"
+    >
         <li fd-action-sheet-item [compact]="true" label="Search" glyph="search" (click)="actionPicked('search')"></li>
         <li
             fd-action-sheet-item

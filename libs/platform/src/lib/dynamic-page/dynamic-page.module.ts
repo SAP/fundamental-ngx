@@ -12,7 +12,6 @@ import { DynamicPageFooterComponent } from './dynamic-page-footer/dynamic-page-f
 import { DynamicPageGlobalActionsComponent } from './dynamic-page-header/actions/global-actions/dynamic-page-global-actions.component';
 import { DynamicPageLayoutActionsComponent } from './dynamic-page-header/actions/layout-actions/dynamic-page-layout-actions.component';
 import { DynamicPageHeaderComponent } from './dynamic-page-header/header/dynamic-page-header.component';
-import { DynamicPageHeaderInternalComponent } from './dynamic-page-header/header/dynamic-page-header-internal.component';
 import { DynamicPageKeyInfoComponent } from './dynamic-page-header/key-info/dynamic-page-key-info.component';
 import { DynamicPageTitleComponent } from './dynamic-page-header/title/dynamic-page-title.component';
 import { DynamicPageTitleHostComponent } from './dynamic-page-header/title/dynamic-page-title-host.component';
@@ -27,7 +26,6 @@ import { DynamicPageComponent } from './dynamic-page.component';
         DynamicPageGlobalActionsComponent,
         DynamicPageLayoutActionsComponent,
         DynamicPageHeaderComponent,
-        DynamicPageHeaderInternalComponent,
         DynamicPageContentComponent,
         DynamicPageContentHostComponent,
         DynamicPageFooterComponent

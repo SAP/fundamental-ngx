@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
+import { MenuComponent } from '@fundamental-ngx/core/menu';
 
 interface ExampleRow {
     column1: any;
@@ -18,16 +19,18 @@ export class TableColumnSortingExampleComponent implements OnInit {
     displayedRows: ExampleRow[];
     ascending = true;
     filterVal = '';
-    open = false;
+
+    @ViewChild('menu')
+    menu: MenuComponent;
 
     sortColumn1(asc: boolean): void {
         this.ascending = asc;
-        this.open = false;
+        this.menu.close();
     }
 
     inputKeyup(event: KeyboardEvent): void {
         if (event.key === 'Enter' || event.key === 'Esc') {
-            this.open = false;
+            this.menu.close();
         }
     }
 

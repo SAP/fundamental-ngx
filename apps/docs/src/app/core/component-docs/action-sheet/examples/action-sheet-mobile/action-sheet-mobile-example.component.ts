@@ -11,7 +11,13 @@ export class ActionSheetMobileExampleComponent {
     @ViewChild(ActionSheetComponent)
     actionSheetComponent: ActionSheetComponent;
 
+    isOpen = false;
+
     constructor(private _messageToastService: MessageToastService) {}
+
+    isOpenChange(isOpen: boolean): void {
+        this.isOpen = isOpen;
+    }
 
     actionPicked(action: string): void {
         this.openMessageToast(action);

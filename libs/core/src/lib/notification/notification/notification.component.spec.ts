@@ -25,8 +25,7 @@ class TemplateTestComponent {
 
 @NgModule({
     declarations: [TemplateTestComponent],
-    imports: [CommonModule, BrowserModule, NotificationModule, ButtonModule],
-    entryComponents: [TemplateTestComponent]
+    imports: [CommonModule, BrowserModule, NotificationModule, ButtonModule]
 })
 class TestModule {}
 

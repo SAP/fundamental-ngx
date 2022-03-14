@@ -11,4 +11,8 @@ import { Component } from '@angular/core';
         `
     ]
 })
-export class AvatarZoomIconExampleComponent {}
+export class AvatarZoomIconExampleComponent {
+    onZoomGlyphClick(num: number): void {
+        alert('avatar ' + num + ' clicked!');
+    }
+}

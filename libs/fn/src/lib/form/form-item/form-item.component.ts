@@ -47,7 +47,7 @@ export class FormItemComponent implements CssClassBuilder, OnInit, OnChanges {
 
     _icon: string;
 
-    state: FormStates;
+    state?: FormStates;
 
     constructor(private _elementRef: ElementRef) {}
 

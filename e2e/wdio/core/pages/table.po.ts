@@ -39,7 +39,7 @@ export class TablePo extends CoreBaseComponentPo {
     dialogValue = '.fd-list__item.ng-star-inserted .fd-list__title';
     tableInner = '.fd-table__inner';
     columnSortingInput = '.fd-popover__popper input';
-    listItem = '.fd-list__item';
+    listItem = '.fd-menu__item';
     selectedPage = this.paginationLink + '.is-selected';
     tableCellWOHeader = ' .fd-table__cell:not(.cdk-header-cell)';
 

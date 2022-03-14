@@ -76,7 +76,7 @@ export class RadioButtonComponent
      * by default value is set to 'default'
      */
     @Input()
-    state: stateType = 'default';
+    state?: stateType = 'default';
 
     /** The field is used to tell if radio button should be disabled
      * Value: true or false

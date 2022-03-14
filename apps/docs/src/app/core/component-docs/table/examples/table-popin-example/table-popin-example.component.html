@@ -140,6 +140,7 @@
                 <th fd-table-cell>
                     <fd-checkbox
                         name="allCheckbox"
+                        [tristate]="true"
                         [ngModel]="masterCheckbox"
                         (ngModelChange)="selectMaster($event)"
                     ></fd-checkbox>

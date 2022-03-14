@@ -46,7 +46,7 @@ describe('Standard List test suite', () => {
         it('should check show more button functionality', () => {
             const startItemsCount = getElementArrayLength(actionList + listItems);
 
-            click(actionList + button);
+            click(actionList + listItems, startItemsCount - 1);
             waitForNotDisplayed(actionList + busyIndicator);
 
             expect(getElementArrayLength(actionList + listItems)).not.toEqual(startItemsCount);

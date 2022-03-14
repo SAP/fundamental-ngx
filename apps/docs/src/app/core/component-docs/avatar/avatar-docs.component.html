@@ -1,7 +1,9 @@
 <fd-docs-section-title id="avatar" componentName="avatar"> Icon </fd-docs-section-title>
 <description>
     Use the <code>[glyph]</code> property to specify the name of the icon. The size of the Avatar is controlled by the
-    <code>[size]</code> property. If omitted, the default size of the Avatar is set to large (<code>l</code>).
+    <code>[size]</code> property. If omitted, the default size of the Avatar is set to large (<code>l</code>). Use
+    <code>[clickable]</code> input property to make avatar focusable & clickable. Listen for
+    <code>avatarClicked</code> event to process avatar clicks.
 </description>
 <component-example>
     <fd-avatar-icon-example></fd-avatar-icon-example>
@@ -93,7 +95,10 @@
 <separator></separator>
 
 <fd-docs-section-title id="zoom-icon" componentName="avatar"> Zoom Icon </fd-docs-section-title>
-<description> To specify the zoom icon use the <code>[zoomGlyph]</code> property. </description>
+<description>
+    To specify the zoom icon use the <code>[zoomGlyph]</code> property. This icon is focusable & clickable, listen to
+    <code>zoomGlyphClicked</code> event.
+</description>
 <component-example>
     <fd-avatar-zoom-icon-example></fd-avatar-zoom-icon-example>
 </component-example>

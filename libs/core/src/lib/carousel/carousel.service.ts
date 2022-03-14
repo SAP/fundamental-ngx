@@ -245,6 +245,11 @@ export class CarouselService implements OnDestroy {
 
         // When elementsAtOnce > 1, swiping should stop at last index - elementsAtOnce
         if (!this.config.infinite && this.config.elementsAtOnce > 1) {
+            // When there're less items in the carousel than the area might display, it should stop to first
+            if (this.items.length < this.config.elementsAtOnce) {
+                return this.items.first;
+            }
+
             if (index + this.config.elementsAtOnce >= this.items.length) {
                 return this.items.get(this.items.length - this.config.elementsAtOnce);
             }

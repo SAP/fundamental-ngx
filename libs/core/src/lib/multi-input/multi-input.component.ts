@@ -197,7 +197,7 @@ export class MultiInputComponent
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
      */
     @Input()
-    state: FormStates;
+    state?: FormStates;
 
     /**
      * Whether AddOn Button should be focusable

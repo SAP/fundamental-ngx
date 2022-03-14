@@ -48,7 +48,7 @@ export class ProgressIndicatorComponent implements OnInit, OnDestroy, OnChanges,
 
     /** The state for the progress indicator. */
     @Input()
-    state: ProgressIndicatorState;
+    state?: ProgressIndicatorState;
 
     /** Whether or not to animate changes to the progress bar's valueNow. */
     @Input()

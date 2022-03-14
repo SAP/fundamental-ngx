@@ -36,6 +36,7 @@ import { takeUntil, skip } from 'rxjs/operators';
 import equal from 'fast-deep-equal';
 
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
+import { RangeSelector } from '@fundamental-ngx/core/utils';
 import { ContentDensity, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/core/utils';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { ListComponent } from '@fundamental-ngx/core/list';
@@ -178,12 +179,12 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** Event emitted when data loading is started. */
-    @Output()
-    onDataRequested = new EventEmitter<void>();
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+    @Output() onDataRequested = new EventEmitter<void>();
 
     /** Event emitted when data loading is finished. */
-    @Output()
-    onDataReceived = new EventEmitter<void>();
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+    @Output() onDataReceived = new EventEmitter<void>();
 
     /** @hidden */
     @ViewChild(ListComponent)
@@ -336,6 +337,9 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     private _previousStateMessage: string | SafeHtml;
 
     /** @hidden */
+    protected readonly _rangeSelector = new RangeSelector();
+
+    /** @hidden */
     private _displayFn = (value: any): string => this.displayValue(value);
 
     /** @hidden */
@@ -413,6 +417,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     /** @hidden */
     popoverOpenChangeHandle(isOpen: boolean): void {
         this.isOpen = isOpen;
+        this._rangeSelector.reset();
     }
 
     /** Opens the select popover body. */
@@ -424,6 +429,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
 
     /** Closes the select popover body. */
     close(): void {
+        this._rangeSelector.reset();
         this.selectedShown$.next(false);
         this.inputText = '';
         this._focusToSearchField();
@@ -649,7 +655,6 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
             .open()
             .pipe(skip(1), takeUntil(this._destroyed))
             .subscribe((data) => {
-                console.log('data', data);
                 if (data.length === 0) {
                     this._processingEmptyData();
 

@@ -1,6 +1,5 @@
 {
     "version": 1,
-    "newProjectRoot": "",
     "projects": {
         "components-e2e": {
             "root": "e2e",

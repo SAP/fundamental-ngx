@@ -379,12 +379,12 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     readonly cancel = new EventEmitter<void>();
 
     /** Event emitted when data loading is started. */
-    @Output()
-    onDataRequested = new EventEmitter<void>();
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+    @Output() onDataRequested = new EventEmitter<void>();
 
     /** Event emitted when data loading is finished. */
-    @Output()
-    onDataReceived = new EventEmitter<void>();
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+    @Output() onDataReceived = new EventEmitter<void>();
 
     /** @hidden */
     @ViewChild('verticalScrollable')

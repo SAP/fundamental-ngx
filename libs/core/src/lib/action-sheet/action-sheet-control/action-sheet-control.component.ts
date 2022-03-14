@@ -27,7 +27,7 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActionSheetControlComponent {
-    /** Emitted event when control button is clicked **/
+    /** Emitted event when control button is clicked */
     @Output()
     clicked: EventEmitter<void> = new EventEmitter<void>();
 

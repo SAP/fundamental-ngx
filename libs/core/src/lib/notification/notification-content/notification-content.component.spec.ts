@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { whenStable } from '@fundamental-ngx/core/tests';
+import { NotificationModule } from '../notification.module';
 import { NotificationContentComponent } from './notification-content.component';
 
 describe('NotificationContentComponent', () => {
@@ -9,7 +10,7 @@ describe('NotificationContentComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                declarations: [NotificationContentComponent]
+                imports: [NotificationModule]
             }).compileComponents();
         })
     );

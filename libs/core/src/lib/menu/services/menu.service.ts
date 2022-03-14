@@ -1,7 +1,7 @@
-import { ElementRef, Injectable, Renderer2 } from '@angular/core';
+import { ElementRef, Injectable, Optional, Renderer2 } from '@angular/core';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
 import { MenuComponent } from '../menu.component';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { Observable, Subject } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { DOWN_ARROW, ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
@@ -34,7 +34,12 @@ export class MenuService {
     /** @hidden */
     private _destroyKeyboardHandlerListener: () => void;
 
-    constructor(private _renderer: Renderer2) {}
+    /** @hidden */
+    get _isRtl(): boolean {
+        return this._rtlService?.rtl.value;
+    }
+
+    constructor(private _renderer: Renderer2, @Optional() private readonly _rtlService: RtlService) {}
 
     /** Reference to menu component */
     get menu(): MenuComponent {
@@ -227,12 +232,18 @@ export class MenuService {
         };
         let matched = true;
 
-        if (KeyUtil.isKeyCode(event, RIGHT_ARROW)) {
+        if (
+            (KeyUtil.isKeyCode(event, RIGHT_ARROW) && !this._isRtl) ||
+            (KeyUtil.isKeyCode(event, LEFT_ARROW) && this._isRtl)
+        ) {
             if (this.focusedNode.children.length) {
                 this.setActive(true, this.focusedNode.item);
                 focusRight(this.focusedNode);
             }
-        } else if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
+        } else if (
+            (KeyUtil.isKeyCode(event, LEFT_ARROW) && !this._isRtl) ||
+            (KeyUtil.isKeyCode(event, RIGHT_ARROW) && this._isRtl)
+        ) {
             if (this.focusedNode.parent.item) {
                 this.setActive(false, this.focusedNode.parent.item);
                 this.setFocused(this.focusedNode.parent.item);

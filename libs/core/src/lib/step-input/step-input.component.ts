@@ -146,7 +146,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** Sets state of the control. Can be `success`, `error`, `warning`, `information` or blank for default. */
     @Input()
-    state: FormStates;
+    state?: FormStates;
 
     /** Holds the message with respect to state */
     @Input()

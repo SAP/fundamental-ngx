@@ -19,8 +19,7 @@ class TemplateTestComponent {
 @NgModule({
     imports: [NotificationModule, RouterTestingModule],
     providers: [NotificationService],
-    declarations: [TemplateTestComponent],
-    entryComponents: [TemplateTestComponent]
+    declarations: [TemplateTestComponent]
 })
 class TestModule {}
 
@@ -40,7 +39,7 @@ describe('NotificationService', () => {
     });
 
     it('should open notifications from template', () => {
-        spyOn<any>(service, 'destroyNotificationComponent').and.callThrough();
+        spyOn<any>(service, '_destroyNotificationComponent').and.callThrough();
 
         expect(service['notifications'].length).toBe(0);
         expect(service['containerRef']).toBeFalsy();
@@ -51,13 +50,13 @@ describe('NotificationService', () => {
         expect(service['containerRef']).toBeTruthy();
 
         notificationRef.close();
-        expect((service as any).destroyNotificationComponent).toHaveBeenCalled();
+        expect((service as any)._destroyNotificationComponent).toHaveBeenCalled();
         expect(service['notifications'].length).toBe(0);
         expect(service['containerRef']).toBeFalsy();
     });
 
     it('should open notifications from component', () => {
-        spyOn<any>(service, 'destroyNotificationComponent').and.callThrough();
+        spyOn<any>(service, '_destroyNotificationComponent').and.callThrough();
 
         expect(service['notifications'].length).toBe(0);
         expect(service['containerRef']).toBeFalsy();
@@ -68,7 +67,7 @@ describe('NotificationService', () => {
         expect(service['containerRef']).toBeTruthy();
 
         notificationRef.close();
-        expect((service as any).destroyNotificationComponent).toHaveBeenCalled();
+        expect((service as any)._destroyNotificationComponent).toHaveBeenCalled();
         expect(service['notifications'].length).toBe(0);
         expect(service['containerRef']).toBeFalsy();
     });

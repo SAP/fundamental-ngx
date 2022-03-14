@@ -74,7 +74,7 @@ export class TabPanelComponent implements OnChanges {
 
     /** Semantic type of the tab item */
     @Input()
-    tabState: TabItemState;
+    tabState?: TabItemState;
 
     /** Event that is emitted when the tab panel has been opened. */
     @Output()
