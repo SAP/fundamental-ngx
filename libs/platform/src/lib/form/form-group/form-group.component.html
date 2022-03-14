@@ -14,7 +14,7 @@
     <div class="fd-container fd-form-layout-grid-container" [class.fd-col--compact]="compact">
         <ng-container *ngFor="let row of formRows | keyvalue; trackBy: trackByFn">
             <div class="fd-row fd-row--top">
-                <div [fieldGroup]="$fieldGroup(row.value)" fdp-form-group-header></div>
+                <div [fieldGroup]="$fieldGroup(row.value)" fdp-form-group-header *ngIf="row.value.label"></div>
                 <ng-container *ngFor="let fields of isFieldGroupRow(row) | keyvalue; trackBy: trackByFn">
                     <div
                         class="fd-form-group fd-col"
