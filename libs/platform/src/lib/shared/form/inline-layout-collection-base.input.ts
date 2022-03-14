@@ -69,12 +69,12 @@ export class ResponsiveBreakpointsService {
     }
 
     /** @hidden when screen size changes from one breakpoint to another */
-    private _breakPointMeet(breakPointMatchess: BreakpointState): string {
+    private _breakPointMeet(breakPointMatches: BreakpointState): string {
         let breakPointName: string;
 
-        if (breakPointMatchess.matches) {
-            for (const breakpoint in breakPointMatchess.breakpoints) {
-                if (breakPointMatchess.breakpoints[breakpoint]) {
+        if (breakPointMatches.matches) {
+            for (const breakpoint in breakPointMatches.breakpoints) {
+                if (breakPointMatches.breakpoints[breakpoint]) {
                     breakPointName = this._getBreakpointName(breakpoint);
                 }
             }
