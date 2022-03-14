@@ -11,7 +11,7 @@
         </div>
         <ng-container *ngTemplateOutlet="withFormMessage"></ng-container>
         <div class="fd-col" [class]="_gapColumnLayoutClass">
-            <ng-container *ngIf="hintTarget === 'input'">
+            <ng-container *ngIf="hintTarget === 'input' && hintOptions.text">
                 <fd-icon
                     [fd-inline-help]="hintOptions.text"
                     [glyph]="hintOptions.glyph"

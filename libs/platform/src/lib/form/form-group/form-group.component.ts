@@ -75,6 +75,7 @@ import {
     FORM_GROUP_CHILD_FIELD_TOKEN
 } from './constants';
 import { generateColumnClass, normalizeColumnLayout } from './helpers';
+import { FormFieldLayoutService } from './services/form-field-layout.service';
 
 export const formGroupProvider: Provider = {
     provide: FormGroupContainer,
@@ -163,7 +164,7 @@ type FormGroupField = (FormField | FormFieldGroup) & { hintOptions?: HintOptions
     styleUrls: ['./form-group.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [formGroupProvider]
+    providers: [formGroupProvider, FormFieldLayoutService]
 })
 export class FormGroupComponent
     implements FormGroupContainer, OnInit, AfterContentInit, AfterViewInit, OnDestroy, OnChanges
