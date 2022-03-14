@@ -10,7 +10,7 @@
         <ng-container cdkColumnDef="column1">
             <th fd-table-cell cdk-header-cell *cdkHeaderCellDef>Column 1</th>
             <td fd-table-cell cdk-cell *cdkCellDef="let cell" cdkDragHandle class="fd-has-font-weight-semi">
-                <a href="#">{{ cell.column1 }}</a>
+                <a fd-link href="#">{{ cell.column1 }}</a>
             </td>
         </ng-container>
 

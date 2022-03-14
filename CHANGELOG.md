@@ -1,4 +1,18 @@
 
+### 0.33.5-rc.50 (2022-03-14)
+
+
+### Bug Fixes
+
+* **core:** action list tabindex ([#7859](https://github.com/SAP/fundamental-ngx/issues/7859)) ([9378815](https://github.com/SAP/fundamental-ngx/commit/937881594a7115b7684c4f258e9b22a809885507))
+
+### 0.33.5-rc.49 (2022-03-13)
+
+
+### Bug Fixes
+
+* **core:** table defect hunting issues ([#7861](https://github.com/SAP/fundamental-ngx/issues/7861)) ([e8e25d6](https://github.com/SAP/fundamental-ngx/commit/e8e25d65291a97ef92cec78442fac69d44c591a7))
+
 ### 0.33.5-rc.48 (2022-03-11)
 
 

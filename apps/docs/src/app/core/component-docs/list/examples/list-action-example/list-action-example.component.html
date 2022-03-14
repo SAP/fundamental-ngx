@@ -5,11 +5,19 @@
     <li fd-list-item *ngFor="let i of items">
         <span fd-list-title> List Item {{ i }} </span>
     </li>
-    <li fd-list-item [action]="true" [growing]="true">
-        <button fd-list-title (click)="loadMore()">
+    <li
+        fd-list-item
+        [action]="true"
+        [growing]="true"
+        (click)="loadMore()"
+        (keyup.enter)="loadMore()"
+        (keydown.space)="$event.preventDefault()"
+        (keyup.space)="loadMore()"
+    >
+        <span fd-list-title>
             <fd-busy-indicator [block]="false" [loading]="loading"></fd-busy-indicator>
             <span fd-list-title-text> Show More </span>
-        </button>
+        </span>
     </li>
     <li fd-list-footer>List Footer</li>
 </ul>
