@@ -15,6 +15,7 @@ export class ListActionExampleComponent {
 
     loadMore(): void {
         this.loading = true;
+
         of(this._getNewItems())
             .pipe(delay(2000))
             .subscribe((result) => {
