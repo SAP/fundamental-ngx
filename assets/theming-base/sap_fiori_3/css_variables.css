@@ -1,11 +1,12 @@
 /**
 * Copyright (c) 2012-2020 SAP SE or an SAP affiliate company and Theming Base Content contributors. Licensed under the Apache License, Version 2.0 - see LICENSE.txt.
 *
-* Theming Engine 1.51.0
-* data:{"Path": "Base.baseLib.sap_fiori_3.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_base_fiori","baseTheme"], "Tags": ["Fiori_3","LightColorScheme"], "FallbackThemeId": "sap_belize", "Version": { "Build":"11.1.34.20211012133552", "Source": "11.1.34", "Engine": "1.51.0"}}
+* Theming Engine 1.68.3
+* data:{"Path": "Base.baseLib.sap_fiori_3.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_base_fiori","baseTheme"], "Tags": ["Fiori_3","LightColorScheme"], "FallbackThemeId": "sap_belize", "Engine": {"Name": "theming-engine", "Version": "1.68.3"}, "Version": { "Build": "11.1.35.20220214151218", "Source": "11.1.35"}}
 */
 
-.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_fiori_3.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_base_fiori","baseTheme"], "Tags": ["Fiori_3","LightColorScheme"], "FallbackThemeId": "sap_belize", "Version": { "Build":"11.1.34.20211012133552", "Source": "11.1.34", "Engine": "1.51.0"}}');}
+.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_fiori_3.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_base_fiori","baseTheme"], "Tags": ["Fiori_3","LightColorScheme"], "FallbackThemeId": "sap_belize", "Engine": {"Name": "theming-engine", "Version": "1.68.3"}, "Version": { "Build": "11.1.35.20220214151218", "Source": "11.1.35"}}');}
+:root{--sapThemeMetaData-Base-baseLib:{"Path": "Base.baseLib.sap_fiori_3.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_base_fiori","baseTheme"], "Tags": ["Fiori_3","LightColorScheme"], "FallbackThemeId": "sap_belize", "Engine": {"Name": "theming-engine", "Version": "1.68.3"}, "Version": { "Build": "11.1.35.20220214151218", "Source": "11.1.35"}};}
 :root {
   --sapBrandColor: #0a6ed1;
   --sapHighlightColor: #0854a0;
@@ -327,6 +328,7 @@
   --sapButton_Information_Hover_TextColor: #fff;
   --sapButton_Information_Active_Background: #0854a0;
   --sapButton_Information_Active_BorderColor: #0854a0;
+  --sapButton_Information_Active_TextColor: #fff;
   --sapButton_Neutral_Background: #6a6d70;
   --sapButton_Neutral_BorderColor: #6a6d70;
   --sapButton_Neutral_TextColor: #fff;

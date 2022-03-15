@@ -65,6 +65,28 @@
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Properties</h2>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+		<a name="defaultValue" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> default<wbr>Value</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">default<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from FormControl.defaultValue</p>
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>The default value of this FormControl, used whenever the control is reset without an explicit
+					value. See {@link FormControlOptions#initialValueIsDefault} for more information on configuring
+				a default value.</p>
+			</div>
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">publicapi</dt>
+				<dd></dd>
+			</dl>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 		<a name="errors" class="tsd-anchor"></a>
 		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> errors</h3>
 		<!-- {log decorators} -->
@@ -1599,9 +1621,22 @@
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Resets the form control, marking it <code>pristine</code> and <code>untouched</code>, and setting
-						the value to null.</p>
+						<p>Resets the form control, marking it <code>pristine</code> and <code>untouched</code>, and resetting
+							the value. The new value will be the provided value (if passed), <code>null</code>, or the initial value
+						if <code>initialValueIsDefault</code> was set in the constructor via {@link FormControlOptions}.</p>
 					</div>
+					<pre><code class="language-ts"><span style="color: #008000">// By default, the control will reset to null.</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">dog</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">FormControl</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;spot&#039;</span><span style="color: #000000">);</span>
+<span style="color: #001080">dog</span><span style="color: #000000">.</span><span style="color: #795E26">reset</span><span style="color: #000000">(); </span><span style="color: #008000">// dog.value is null</span>
+
+<span style="color: #008000">// If this flag is set, the control will instead reset to the initial value.</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">cat</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">FormControl</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;tabby&#039;</span><span style="color: #000000">, {</span><span style="color: #001080">initialValueIsDefault:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">});</span>
+<span style="color: #001080">cat</span><span style="color: #000000">.</span><span style="color: #795E26">reset</span><span style="color: #000000">(); </span><span style="color: #008000">// cat.value is &quot;tabby&quot;</span>
+
+<span style="color: #008000">// A value passed to reset always takes precedence.</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">fish</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">FormControl</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;finn&#039;</span><span style="color: #000000">, {</span><span style="color: #001080">initialValueIsDefault:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">});</span>
+<span style="color: #001080">fish</span><span style="color: #000000">.</span><span style="color: #795E26">reset</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;bubble&#039;</span><span style="color: #000000">); </span><span style="color: #008000">// fish.value is &quot;bubble&quot;</span>
+</code></pre>
 				</div>
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">

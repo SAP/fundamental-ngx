@@ -85,21 +85,6 @@
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="isBinary" class="tsd-anchor"></a>
-		<h3>is<wbr>Binary</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">is<wbr>Binary<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
-		<aside class="tsd-sources">
-			<ul>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>set to true if binary checkbox</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="label" class="tsd-anchor"></a>
 		<h3>label</h3>
 		<!-- {log decorators} -->
@@ -207,7 +192,7 @@
 		<a name="tristateSelectable" class="tsd-anchor"></a>
 		<h3>tristate<wbr>Selectable</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">tristate<wbr>Selectable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
+		<div class="tsd-signature tsd-kind-icon">tristate<wbr>Selectable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
 			</ul>
@@ -215,6 +200,21 @@
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
 				<p>when true indeterminate state can be selected</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="values" class="tsd-anchor"></a>
+		<h3>values</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">values<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FdCheckboxValues</span></div>
+		<aside class="tsd-sources">
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Values returned by control.</p>
 			</div>
 		</div>
 	</section>
@@ -234,13 +234,12 @@
 			</div>
 		</div>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
-		<a name="checkboxValue" class="tsd-anchor"></a>
-		<h3>checkbox<wbr>Value</h3>
+	<section class="tsd-panel tsd-member tsd-kind-set-signature tsd-parent-kind-class">
+		<a name="checkboxTrueValue" class="tsd-anchor"></a>
+		<h3>checkbox<wbr>True<wbr>Value</h3>
 		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> checkboxValue<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> checkboxValue<span class="tsd-signature-symbol">(</span>selectValue<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		<ul class="tsd-signatures tsd-kind-set-signature tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> checkboxTrueValue<span class="tsd-signature-symbol">(</span>trueValue<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -250,66 +249,13 @@
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>value for checkbox when selected</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
-			</li>
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>value for checkbox when selected</p>
+						<p>value for checkbox control</p>
 					</div>
 				</div>
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">
 					<li>
-						<h5>selectValue: <span class="tsd-signature-type">any</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
-		<a name="checked" class="tsd-anchor"></a>
-		<h3>checked</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> checked<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> checked<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>true when checkbox is checked. used when checkbox created outside form</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-			</li>
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>true when checkbox is checked. used when checkbox created outside form</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>value: <span class="tsd-signature-type">boolean</span></h5>
+						<h5>trueValue: <span class="tsd-signature-type">any</span></h5>
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -429,6 +375,35 @@
 			</li>
 		</ul>
 	</section>
+	<section class="tsd-panel tsd-member tsd-kind-set-signature tsd-parent-kind-class">
+		<a name="isBinary" class="tsd-anchor"></a>
+		<h3>is<wbr>Binary</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-set-signature tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> isBinary<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<dl class="tsd-comment-tags">
+						<dt class="fd-tsd-comment-tag-pill">deprecated</dt>
+						<dd></dd>
+					</dl>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>value: <span class="tsd-signature-type">boolean</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
 	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
 		<a name="state" class="tsd-anchor"></a>
 		<h3>state</h3>
@@ -477,13 +452,13 @@
 			</li>
 		</ul>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
-		<a name="stateType" class="tsd-anchor"></a>
-		<h3>state<wbr>Type</h3>
+	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
+		<a name="value" class="tsd-anchor"></a>
+		<h3>value</h3>
 		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> stateType<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ControlState</span></li>
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> stateType<span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ControlState</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> value<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> value<span class="tsd-signature-symbol">(</span>selectValue<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -492,23 +467,26 @@
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
-					<dl class="tsd-comment-tags">
-						<dt class="fd-tsd-comment-tag-pill">deprecated</dt>
-						<dd><p>set state of individual checkbox. Used by CBG to set checkbox states</p>
-						</dd>
-					</dl>
+					<div class="lead">
+						<p>value for checkbox control</p>
+					</div>
 				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ControlState</span></h4>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
 			</li>
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>value for checkbox control</p>
+					</div>
+				</div>
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">
 					<li>
-						<h5>state: <span class="tsd-signature-type">ControlState</span></h5>
+						<h5>selectValue: <span class="tsd-signature-type">any</span></h5>
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -528,9 +506,12 @@
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Emitting checkbox change event</p>
-			</div>
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">deprecated</dt>
+				<dd><p>use &quot;checkedChange&quot; instead
+					Emitting checkbox change event</p>
+				</dd>
+			</dl>
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
@@ -558,9 +539,12 @@
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Event emitted when the checkbox&#39;s <code>indeterminate</code> value changes.</p>
-			</div>
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">deprecated</dt>
+				<dd><p>rely on checkbox state directly instead
+					Event emitted when the checkbox&#39;s <code>indeterminate</code> value changes.</p>
+				</dd>
+			</dl>
 		</div>
 	</section>
 </section>
@@ -571,7 +555,7 @@
 		<h3>constructor</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-			<li class="tsd-signature tsd-kind-icon">new <wbr>Checkbox<wbr>Component<span class="tsd-signature-symbol">(</span>ngControl<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">NgControl</span>, ngForm<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">NgForm</span>, formField<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FormField</span>, formControl<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FormFieldControl</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span>, _changeDetector<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ChangeDetectorRef</span>, _ngZone<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">NgZone</span>, tabIndexValue<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CheckboxComponent</span></li>
+			<li class="tsd-signature tsd-kind-icon">new <wbr>Checkbox<wbr>Component<span class="tsd-signature-symbol">(</span>ngControl<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">NgControl</span>, ngForm<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">NgForm</span>, formField<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FormField</span>, formControl<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FormFieldControl</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span>, _changeDetector<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ChangeDetectorRef</span>, tabIndexValue<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CheckboxComponent</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -596,9 +580,6 @@
 					</li>
 					<li>
 						<h5>_changeDetector: <span class="tsd-signature-type">ChangeDetectorRef</span></h5>
-					</li>
-					<li>
-						<h5>_ngZone: <span class="tsd-signature-type">NgZone</span></h5>
 					</li>
 					<li>
 						<h5>tabIndexValue: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></h5>
@@ -699,16 +680,6 @@
 			</ul>
 		</aside>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-		<a name="corecheckbox" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagPrivate">Private</span> corecheckbox</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">corecheckbox<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CheckboxComponent</span></div>
-		<aside class="tsd-sources">
-			<ul>
-			</ul>
-		</aside>
-	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 		<a name="defaultId" class="tsd-anchor"></a>
 		<h3><span class="tsd-flag ts-flagProtected">Protected</span> default<wbr>Id</h3>
@@ -743,16 +714,6 @@
 		<div class="tsd-signature tsd-kind-icon">form<wbr>Field<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FormField</span><span class="tsd-signature-symbol"> = null</span></div>
 		<aside class="tsd-sources">
 			<p>Inherited from <span>BaseInput</span>.<span>formField</span></p>
-			<ul>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-		<a name="model" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagPrivate">Private</span> model</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">model<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
-		<aside class="tsd-sources">
 			<ul>
 			</ul>
 		</aside>
@@ -872,47 +833,6 @@
 			</li>
 		</ul>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
-		<a name="value" class="tsd-anchor"></a>
-		<h3>value</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> value<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> value<span class="tsd-signature-symbol">(</span>selectValue<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>value for checkbox control</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
-			</li>
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>value for checkbox control</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>selectValue: <span class="tsd-signature-type">any</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Methods</h2>
@@ -921,7 +841,7 @@
 		<h3><span class="tsd-flag ts-flagPrivate">Private</span> _emit<wbr>Change<wbr>Event</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-			<li class="tsd-signature tsd-kind-icon">_emit<wbr>Change<wbr>Event<span class="tsd-signature-symbol">(</span>modelValue<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+			<li class="tsd-signature tsd-kind-icon">_emit<wbr>Change<wbr>Event<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -934,12 +854,6 @@
 						<p>Method to emit change event</p>
 					</div>
 				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>modelValue: <span class="tsd-signature-type">any</span></h5>
-					</li>
-				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 			</li>
 		</ul>
@@ -1021,30 +935,6 @@
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-		<a name="ngAfterViewInit" class="tsd-anchor"></a>
-		<h3>ng<wbr>After<wbr>View<wbr>Init</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-			<li class="tsd-signature tsd-kind-icon">ng<wbr>After<wbr>View<wbr>Init<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Implementation of AfterViewInit.ngAfterViewInit</p>
-					<p>Overrides BaseInput.ngAfterViewInit</p>
-					<ul>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>child checkbox is initialized here</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 			</li>
 		</ul>
 	</section>
@@ -1143,7 +1033,7 @@
 		<h3>on<wbr>Model<wbr>Change</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">on<wbr>Model<wbr>Change<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+			<li class="tsd-signature tsd-kind-icon">on<wbr>Model<wbr>Change<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -1156,6 +1046,12 @@
 						<p>update controller on checkbox state change</p>
 					</div>
 				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>value: <span class="tsd-signature-type">any</span></h5>
+					</li>
+				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 			</li>
 		</ul>
@@ -1343,23 +1239,23 @@
 			</li>
 		</ul>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 		<a name="writeValue" class="tsd-anchor"></a>
 		<h3>write<wbr>Value</h3>
 		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 			<li class="tsd-signature tsd-kind-icon">write<wbr>Value<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
-					<p>Overrides <span>BaseInput</span>.<span>writeValue</span></p>
+					<p>Inherited from <span>BaseInput</span>.<span>writeValue</span></p>
 					<ul>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>ControlValueAccessor</p>
+						<p>Each sub class must override this method as inheritance does not work</p>
 					</div>
 				</div>
 				<h4 class="tsd-parameters-title">Parameters</h4>

@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/%40fundamental-ngx%2Fcore.svg)](//www.npmjs.com/package/@fundamental-ngx/core)
 ![Build Status](https://github.com/SAP/fundamental-ngx/actions/workflows/on-push-or-pull.yml/badge.svg?branch=main)
-[![Coverage Status](https://coveralls.io/repos/github/SAP/fundamental-ngx/badge.svg?branch=main)](https://coveralls.io/github/SAP/fundamental-ngx?branch=main)
+![npm](https://img.shields.io/npm/dm/@fundamental-ngx/core?label=npm%20downloads)
 [![Slack](https://img.shields.io/badge/slack-ui--fundamentals-blue.svg?logo=slack)](https://ui-fundamentals.slack.com)
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP/fundamental-ngx)](https://api.reuse.software/info/github.com/SAP/fundamental-ngx)
 
