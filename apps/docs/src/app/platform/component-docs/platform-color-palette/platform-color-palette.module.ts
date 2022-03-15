@@ -10,7 +10,6 @@ import {
     PlatformColorPaletteSimpleExampleComponent,
     PlatformColorPaletteComplexExampleComponent
 } from './platform-color-palette-examples/platform-color-palette-examples.component';
-
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 import { PlatformColorPaletteModule } from '@fundamental-ngx/platform/color-palette';

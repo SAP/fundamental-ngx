@@ -6,10 +6,8 @@ import { SharedDocumentationPageModule } from '../../../documentation/shared-doc
 
 import { PlatformColorPalettePopoverHeaderComponent } from './platform-color-palette-popover-header/platform-color-palette-popover-header.component';
 import { PlatformColorPalettePopoverDocsComponent } from './platform-color-palette-popover-docs.component';
-import {
-    PlatformColorPalettePopoverSimpleExampleComponent,
-    PlatformColorPalettePopoverComplexExampleComponent
-} from './platform-color-palette-popover-examples/platform-color-palette-popover-examples.component';
+import { PlatformColorPalettePopoverSimpleExampleComponent } from './platform-color-palette-popover-examples/platform-color-palette-popover-simple-example.component';
+import { PlatformColorPalettePopoverComplexExampleComponent } from './platform-color-palette-popover-examples/platform-color-palette-popover-complex-example.component';
 
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
