@@ -1,31 +1,22 @@
-import { ElementRef, Injectable, OnDestroy, Renderer2 } from '@angular/core';
-import { merge, Subject, Subscription } from 'rxjs';
-import { ENTER, SPACE } from '@angular/cdk/keycodes';
-import { tap } from 'rxjs/operators';
+import { ElementRef, Inject, Injectable, OnDestroy, Renderer2 } from '@angular/core';
+import { Subject } from 'rxjs';
+import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
+import { ClickedEventPlugin } from './clicked-event.plugin';
 
 @Injectable()
 export class FnClickedProvider extends Subject<MouseEvent | KeyboardEvent> implements OnDestroy {
-    private eventsSubscription: Subscription;
     private _preventDefault = true;
-    private readonly _clickListener: () => void;
-    private readonly _keydownListener: () => void;
+    private _listeners!: Array<() => void>;
+    private readonly _fnClickedEventManagerPluginLoaded: boolean;
 
-    constructor(private _elementRef: ElementRef<Element>, private _renderer: Renderer2) {
+    constructor(
+        private _elementRef: ElementRef<Element>,
+        private _renderer: Renderer2,
+        @Inject(EVENT_MANAGER_PLUGINS) private eventManagerPlugins: any[]
+    ) {
         super();
-        const click$ = new Subject<MouseEvent>();
-        const keyboard$ = new Subject<KeyboardEvent>();
-        this._clickListener = _renderer.listen(this._elementRef.nativeElement, 'click', (e: MouseEvent) =>
-            click$.next(e)
-        );
-        this._keydownListener = _renderer.listen(this._elementRef.nativeElement, 'keydown', (e: KeyboardEvent) => {
-            if (e.keyCode === ENTER || e.keyCode === SPACE) {
-                keyboard$.next(e);
-            }
-        });
-        this.eventsSubscription = merge(click$, keyboard$)
-            .pipe(tap((e) => this._preventDefault && e.preventDefault()))
-            .pipe(tap((e) => this.next(e)))
-            .subscribe();
+        this._fnClickedEventManagerPluginLoaded = eventManagerPlugins.some((em) => em instanceof ClickedEventPlugin);
+        this._initialize();
     }
 
     setPreventDefault(val: boolean): void {
@@ -33,9 +24,21 @@ export class FnClickedProvider extends Subject<MouseEvent | KeyboardEvent> imple
     }
 
     ngOnDestroy(): void {
-        this._clickListener();
-        this._keydownListener();
-        this.eventsSubscription.unsubscribe();
+        this._listeners.forEach((d) => d());
         this.complete();
+    }
+
+    private _initialize(): void {
+        const eventsList: string[] = this._fnClickedEventManagerPluginLoaded
+            ? ['fnClicked']
+            : ['click', 'keydown.enter', 'keydown.space'];
+        this._listeners = eventsList.map((eventName) =>
+            this._renderer.listen(this._elementRef.nativeElement, eventName, (event: MouseEvent | KeyboardEvent) => {
+                if (this._preventDefault) {
+                    event.preventDefault();
+                }
+                this.next(event);
+            })
+        );
     }
 }

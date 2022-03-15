@@ -6,6 +6,7 @@ import { MarkdownModule } from 'ngx-markdown';
 
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
 import { AppComponent } from './app.component';
+import { ClickedBehaviorModule } from '@fundamental-ngx/fn/cdk';
 
 const routes: Routes = [
     {
@@ -39,7 +40,8 @@ const routes: Routes = [
         BrowserAnimationsModule,
         HttpClientModule,
         RouterModule.forRoot(routes, { useHash: true, relativeLinkResolution: 'legacy' }),
-        MarkdownModule.forRoot({ loader: HttpClient })
+        MarkdownModule.forRoot({ loader: HttpClient }),
+        ClickedBehaviorModule.forRoot()
     ],
     bootstrap: [AppComponent],
     providers: [ContentDensityService]

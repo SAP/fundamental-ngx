@@ -118,6 +118,13 @@ export const ROUTES: Routes = [
                     import('./component-docs/utilities/fn-disabled/fn-disabled-docs.module').then(
                         (m) => m.FnDisabledDocsModule
                     )
+            },
+            {
+                path: 'clicked',
+                loadChildren: () =>
+                    import('./component-docs/utilities/fn-clicked/fn-clicked-docs.module').then(
+                        (m) => m.FnClickedDocsModule
+                    )
             }
         ]
     }
