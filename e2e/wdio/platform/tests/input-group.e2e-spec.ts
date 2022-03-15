@@ -1,9 +1,7 @@
 import {
     browserIsIEorSafari,
-    browserIsSafari,
     click,
     executeScriptAfterTagAttr,
-    executeScriptBeforeTagAttr,
     getAttributeByNameArr,
     getElementPlaceholder,
     getElementSize,
@@ -27,6 +25,8 @@ import {
     standardInputPlaceholders
 } from '../fixtures/appData/input-group-page-contents';
 import { email_value, numeric_value, string_value } from '../fixtures/testData/input-group';
+
+declare const $$: any;
 
 describe('Input Group should', () => {
     const inputGroupPage = new InputGroupPo();
@@ -161,19 +161,15 @@ describe('Input Group should', () => {
         expect(getValue(withFormInput)).toBe(numeric_value);
     });
 
-    it('with form input have error tooltip and visual que if empty', () => {
+    it('with form input have error tooltip and visual que if empty', async () => {
         waitForElDisplayed(withFormInput);
         scrollIntoView(withFormInput);
         click(withFormInput);
         click(withFormInputButtonAddon);
         mouseHoverElement(withFormInput);
 
-        if (browserIsSafari()) {
-            expect(executeScriptBeforeTagAttr(withFormInputQuestionMark, 'content')).toBe('');
-        }
-        if (!browserIsSafari()) {
-            expect(executeScriptBeforeTagAttr(withFormInputQuestionMark, 'content')).toBe('""');
-        }
+        expect($$(withFormInputQuestionMark)).toBeTruthy();
+
         expect(executeScriptAfterTagAttr(withFormInputAsterixMark, 'content')).toBe('"*"');
         expect(getText(inputGroupPage.withFormInputErrorTooltip).trim()).toEqual('Value is required');
     });
