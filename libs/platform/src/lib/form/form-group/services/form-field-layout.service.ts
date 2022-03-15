@@ -32,16 +32,22 @@ export class FormFieldLayoutService {
             labelColumnLayout: normalizeColumnLayout({ ...layouts.labelColumnLayout }),
             gapColumnLayout: normalizeColumnLayout({ ...layouts.gapColumnLayout })
         };
-
         if (this._needsInlineHelpPlace) {
             Object.keys(gapColumnLayout).forEach((sizeName) => {
                 if (sizeName !== 'S') {
+                    const shouldFitInOneLine =
+                        labelColumnLayout[sizeName] + fieldColumnLayout[sizeName] + gapColumnLayout[sizeName] <= 12;
                     if (gapColumnLayout[sizeName] === 0) {
                         gapColumnLayout[sizeName] = 1;
                     }
                     if (gapColumnLayout[sizeName] + fieldColumnLayout[sizeName] > 12) {
                         const diff = gapColumnLayout[sizeName] + fieldColumnLayout[sizeName] - 12;
                         fieldColumnLayout[sizeName] -= diff;
+                    }
+                    if (shouldFitInOneLine && labelColumnLayout[sizeName] + fieldColumnLayout[sizeName] > 11) {
+                        while (labelColumnLayout[sizeName] + fieldColumnLayout[sizeName] > 11) {
+                            fieldColumnLayout[sizeName] -= 1;
+                        }
                     }
                 }
             });
@@ -53,10 +59,6 @@ export class FormFieldLayoutService {
         this._elementsMap.delete(target);
         this._updateCombinedValue();
     }
-
-    // private _isHorizontal({ label, field, gap }: Record<string, number>): boolean {
-    //     return label + field + gap >= 12;
-    // }
 
     private _updateCombinedValue(): void {
         for (const [, needed] of this._elementsMap) {
