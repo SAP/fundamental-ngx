@@ -9,6 +9,19 @@ type HandlerRemoveFunction = () => void;
 export class ClickedEventPlugin {
     constructor(@Inject(DOCUMENT) private document: Document, @Inject(PLATFORM_ID) private platformId: any) {}
 
+    addEventListener(element: HTMLElement, eventName: string, handler: EventHandlerFunction): ($event: Event) => void {
+        return this.setupEventBinding(element, handler);
+    }
+
+    addGlobalEventListener(
+        higherOrderElement: string,
+        eventName: string,
+        handler: EventHandlerFunction
+    ): HandlerRemoveFunction {
+        const target = this.parseHigherOrderElement(higherOrderElement);
+        return this.setupEventBinding(target, handler);
+    }
+
     private parseHigherOrderElement(selector: string): EventTarget {
         if (this.platformId !== 'browser') {
             return this.document;
@@ -23,23 +36,6 @@ export class ClickedEventPlugin {
             default:
                 throw new Error(`Element selector [${selector}] not supported.`);
         }
-    }
-
-    public addEventListener(
-        element: HTMLElement,
-        eventName: string,
-        handler: EventHandlerFunction
-    ): ($event: Event) => void {
-        return this.setupEventBinding(element, handler);
-    }
-
-    public addGlobalEventListener(
-        higherOrderElement: string,
-        eventName: string,
-        handler: EventHandlerFunction
-    ): HandlerRemoveFunction {
-        const target = this.parseHigherOrderElement(higherOrderElement);
-        return this.setupEventBinding(target, handler);
     }
 
     public supports(eventName: string): boolean {
