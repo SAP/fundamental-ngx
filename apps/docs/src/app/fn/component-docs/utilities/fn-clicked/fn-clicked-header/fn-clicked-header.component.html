@@ -1,16 +1,17 @@
 <header>Clicked event manager</header>
 <description>
     <p>
-        During development of the components, which should be accessible we encounter a lot of the repeated cases. One
-        of them is interaction detection. Besides "click" event, both "space" and "enter" can be indication of user's
-        will to select something. This is correct in most cases. Because of that need, we implement those three handlers
-        manually all the time. To eliminate that much repeated code we wrote custom Angular Event manager. Syntax is
-        very simple, just like you'd write <code>(click)="onClickHandler($event)"</code>, you will write
+        During the development of accessible components, reoccurring behaviors are often found leading to frequent code
+        duplication. One of these instances is interaction detection. Besides the "click" event, both "space" and
+        "enter" can be an indication of the user's will to select something. This requires the developer to implement
+        handlers for all three of these events. To eliminate that much-repeated code, utilize the
+        <code>fnClicked</code> directive. The syntax is very simple, instead of writing
+        <code>(click)="onClickHandler($event)"</code>, you will write
         <code>(fnClicked)="onClickHandler($event)"</code>
-        and it will catch both "keydown.enter" and "keydown.space" events alongside with regular "click" event.
+        and it will catch both "keydown.enter" and "keydown.space" events alongside the regular "click" event.
     </p>
     <p>
-        <code>(fnClicked)</code> also works with <code>@HostListener</code> decorator and with
+        <code>(fnClicked)</code> also works with the <code>@HostListener</code> decorator and with
         <code>Renderer2.listen</code>
     </p>
     <p>
