@@ -52,6 +52,7 @@ export * from './form-generator/form-generator-field/form-generator-field.compon
 export * from './form-group/constants';
 export * from './form-group/fdp-form.module';
 export * from './form-group/form-group.component';
+export * from './form-group/form-group-header/form-group-header.component';
 export * from './form-group/form-field/form-field.component';
 export * from './form-group/form-field-group/form-field-group.component';
 export * from './form-group/form-field-extras/form-field-extras.component';
