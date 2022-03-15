@@ -56,6 +56,10 @@ export const utilities: SectionInterfaceContent[] = [
     {
         url: 'fn/disabled',
         name: 'Disabled'
+    },
+    {
+        url: 'fn/clicked',
+        name: 'Clicked'
     }
 ];
 

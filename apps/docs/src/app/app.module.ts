@@ -7,6 +7,7 @@ import { MarkdownModule } from 'ngx-markdown';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { ThemingModule } from '@fundamental-ngx/core/theming';
 import { AppComponent } from './app.component';
+import { ClickedBehaviorModule } from '@fundamental-ngx/fn/cdk';
 
 const routes: Routes = [
     {
@@ -46,7 +47,8 @@ const routes: Routes = [
         }),
         MarkdownModule.forRoot({ loader: HttpClient }),
         ThemingModule,
-        ContentDensityModule.forRoot({ storage: 'localStorage' })
+        ContentDensityModule.forRoot({ storage: 'localStorage' }),
+        ClickedBehaviorModule.forRoot()
     ],
     bootstrap: [AppComponent]
 })
