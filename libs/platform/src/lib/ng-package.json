@@ -7,6 +7,7 @@
     },
     "allowedNonPeerDependencies": [
         "@sap-theming/theming-base-content",
+        "@ui5/webcomponents",
         "focus-trap",
         "fundamental-styles",
         "@fundamental-ngx/core",

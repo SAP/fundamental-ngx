@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { filter, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { setTheme as setWebComponentTheme } from '@ui5/webcomponents-base/dist/config/Theme.js';
+import '@ui5/webcomponents/dist/Assets.js';
 
 import { THEME_SWITCHER_ROUTER_MISSING_ERROR } from '../consts';
 
