@@ -1,4 +1,4 @@
-<ui5-button (click)="openPopover()">Open ColorPalettePopover</ui5-button>
+<button fd-button (click)="openPopover()" [label]="buttonLabel"></button>
 <ui5-color-palette-popover
     #colorPalettePopover
     (item-click)="clickEvent($event)"

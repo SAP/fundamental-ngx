@@ -1,5 +1,32 @@
 <fd-docs-section-title id="simple" componentName="color-palette"> Simple Color Palette </fd-docs-section-title>
+<description>The default color palette</description>
 <component-example>
     <fdp-platform-color-palette-simple-example></fdp-platform-color-palette-simple-example>
 </component-example>
 <code-example [exampleFiles]="simpleColorPalette"></code-example>
+
+<fd-docs-section-title id="complex" componentName="color-palette"> Complex Color Palette </fd-docs-section-title>
+<description>
+    The color palette can be expanded with the following properties:
+    <ul>
+        <li>
+            <code>defaultColor="color"</code> input a css color that sets the default color. Used with
+            <i>showDefaultColor</i>.
+        </li>
+        <li>
+            <code>[showDefaultColor]="true"</code> shows a button that allows user to choose the default color. used
+            with <i>defaultColor</i>.
+        </li>
+        <li>
+            <code>[showMoreColors]="true"</code> defines whether the user can choose a custom color from a color-picker.
+        </li>
+        <li>
+            <code>[defaultColor]="true"</code> defines whether the user can see the last used colors in the bottom of
+            the component
+        </li>
+    </ul>
+</description>
+<component-example>
+    <fdp-platform-color-palette-complex-example></fdp-platform-color-palette-complex-example>
+</component-example>
+<code-example [exampleFiles]="complexColorPalette"></code-example>

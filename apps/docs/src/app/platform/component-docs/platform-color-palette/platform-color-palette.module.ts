@@ -6,7 +6,10 @@ import { SharedDocumentationPageModule } from '../../../documentation/shared-doc
 
 import { PlatformColorPaletteHeaderComponent } from './platform-color-palette-header/platform-color-palette-header.component';
 import { PlatformColorPaletteDocsComponent } from './platform-color-palette-docs.component';
-import { PlatformColorPaletteExamplesComponent } from './platform-color-palette-examples/platform-color-palette-simple-example.component';
+import {
+    PlatformColorPaletteSimpleExampleComponent,
+    PlatformColorPaletteComplexExampleComponent
+} from './platform-color-palette-examples/platform-color-palette-examples.component';
 
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
@@ -37,7 +40,8 @@ const routes: Routes = [
     declarations: [
         PlatformColorPaletteDocsComponent,
         PlatformColorPaletteHeaderComponent,
-        PlatformColorPaletteExamplesComponent
+        PlatformColorPaletteSimpleExampleComponent,
+        PlatformColorPaletteComplexExampleComponent
     ]
 })
 export class PlatformColorPaletteDocsModule {}

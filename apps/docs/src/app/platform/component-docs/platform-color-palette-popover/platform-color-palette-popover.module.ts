@@ -6,7 +6,10 @@ import { SharedDocumentationPageModule } from '../../../documentation/shared-doc
 
 import { PlatformColorPalettePopoverHeaderComponent } from './platform-color-palette-popover-header/platform-color-palette-popover-header.component';
 import { PlatformColorPalettePopoverDocsComponent } from './platform-color-palette-popover-docs.component';
-import { PlatformColorPalettePopoverExamplesComponent } from './platform-color-palette-popover-examples/platform-color-palette-popover-simple-example.component';
+import {
+    PlatformColorPalettePopoverSimpleExampleComponent,
+    PlatformColorPalettePopoverComplexExampleComponent
+} from './platform-color-palette-popover-examples/platform-color-palette-popover-examples.component';
 
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
@@ -37,7 +40,8 @@ const routes: Routes = [
     declarations: [
         PlatformColorPalettePopoverDocsComponent,
         PlatformColorPalettePopoverHeaderComponent,
-        PlatformColorPalettePopoverExamplesComponent
+        PlatformColorPalettePopoverSimpleExampleComponent,
+        PlatformColorPalettePopoverComplexExampleComponent
     ]
 })
 export class PlatformColorPalettePopoverDocsModule {}

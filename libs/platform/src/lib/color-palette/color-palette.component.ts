@@ -7,21 +7,27 @@ import { BaseComponent } from '@fundamental-ngx/platform/shared';
     encapsulation: ViewEncapsulation.ShadowDom
 })
 export class ColorPaletteComponent extends BaseComponent {
-    /** selects the default color of the component
-     * The default color should be a part of the ColorPalette colors
+    /**
+     * selects the default color of the component
      */
     @Input()
     defaultColor?: string;
 
-    /** Defines whether the user can choose the default color from a button. */
+    /**
+     * Defines whether the user can choose the default color from a button.
+     */
     @Input()
     showDefaultColor = false;
 
-    /** Defines whether the user can choose a custom color from a component */
+    /** 
+    Defines whether the user can choose a custom color from a component 
+*/
     @Input()
     showMoreColors = false;
 
-    /** Defines whether the user can see the last used colors in the bottom of the component */
+    /**
+     * Defines whether the user can see the last used colors in the bottom of the component
+     * */
     @Input()
     showRecentColors = false;
 
