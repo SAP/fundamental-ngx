@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
  * Custom overlay container for CDK Overlay.
  */
 @Injectable()
-export class ToastOverlayContainer extends OverlayContainer {
+export class BaseToastOverlayContainer extends OverlayContainer {
     /**
      * This method returns the overlay container element. It will lazily
      * create the element the first time it is called to facilitate using

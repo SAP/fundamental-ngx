@@ -8,7 +8,11 @@ import {
     NgZone,
     HostListener
 } from '@angular/core';
-import { BaseToastDurationDismissibleComponent, baseToastAnimations } from '@fundamental-ngx/fn/cdk';
+import {
+    BaseToastDurationDismissibleContainerComponent,
+    baseToastAnimations,
+    ToastDurationDismissibleContainerComponent
+} from '@fundamental-ngx/fn/cdk';
 import { Observable, take } from 'rxjs';
 import { NotificationConfig } from './config/notification-config';
 
@@ -30,8 +34,8 @@ import { NotificationConfig } from './config/notification-config';
     }
 })
 export class NotificationComponent
-    extends BaseToastDurationDismissibleComponent<NotificationConfig>
-    implements OnDestroy
+    extends BaseToastDurationDismissibleContainerComponent<NotificationConfig>
+    implements OnDestroy, ToastDurationDismissibleContainerComponent<NotificationConfig>
 {
     /** The state of the Notification animations. */
     @HostBinding('@state')

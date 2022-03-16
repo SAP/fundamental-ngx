@@ -9,9 +9,9 @@ import {
 } from '@angular/core';
 import { AnimationEvent } from '@angular/animations';
 import {
-    BaseToastDurationDismissibleComponent,
+    BaseToastDurationDismissibleContainerComponent,
     baseToastAnimations,
-    ToastDismissibleContainerComponent
+    ToastDurationDismissibleContainerComponent
 } from '@fundamental-ngx/fn/cdk';
 import { Observable, take } from 'rxjs';
 import { MessageToastConfig } from './config/message-toast.config';
@@ -33,8 +33,8 @@ import { MessageToastConfig } from './config/message-toast.config';
     }
 })
 export class MessageToastComponent
-    extends BaseToastDurationDismissibleComponent<MessageToastConfig>
-    implements OnDestroy, ToastDismissibleContainerComponent<MessageToastConfig>
+    extends BaseToastDurationDismissibleContainerComponent<MessageToastConfig>
+    implements OnDestroy, ToastDurationDismissibleContainerComponent<MessageToastConfig>
 {
     /** The state of the Message Toast animations. */
     @HostBinding('@state')

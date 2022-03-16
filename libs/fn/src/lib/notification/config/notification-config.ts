@@ -1,5 +1,5 @@
 import { IconFont } from '@fundamental-ngx/core/icon';
-import { BaseDurationDismissibleToastConfig } from '@fundamental-ngx/fn/cdk';
+import { BaseToastDurationDismissibleConfig } from '@fundamental-ngx/fn/cdk';
 
 export type NotificationState = 'positive' | 'info' | 'negative' | 'critical';
 
@@ -19,7 +19,7 @@ export interface NotificationSemanticState {
     iconAriaLabel?: string;
 }
 
-export class NotificationConfig<T = any> extends BaseDurationDismissibleToastConfig<T> {
+export class NotificationConfig<T = any> extends BaseToastDurationDismissibleConfig<T> {
     /** Notification Semantic State. */
     semantic?: NotificationSemanticState = {
         font: 'SAP-icons'

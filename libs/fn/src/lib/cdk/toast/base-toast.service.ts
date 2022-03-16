@@ -19,8 +19,7 @@ import {
     ViewContainerRef
 } from '@angular/core';
 import { BaseToastPosition } from './base-toast-positions';
-import { BaseDurationDismissibleToastRef } from './classes/base-duration-dismissible-toast-ref';
-import { BaseDurationDismissibleToastConfig, BaseToastConfig } from './classes/base-toast-config';
+import { BaseToastConfig } from './classes/base-toast-config';
 import { BaseToastRef } from './classes/base-toast-ref';
 import { ToastContainerComponent } from './interfaces/toast-container-component.interface';
 import { ToastTextComponent } from './interfaces/toast-text-component.interface';
@@ -309,36 +308,5 @@ export abstract class BaseToastService<
 
             return toastRef;
         });
-    }
-}
-
-export abstract class BaseDismissibleToastService<
-    P extends BaseDurationDismissibleToastConfig,
-    C extends ToastContainerComponent<P> = ToastContainerComponent<P>
-> extends BaseToastService<P, C> {
-    /**
-     * Animates the old Toast out and the new one in.
-     */
-    protected animateToast<T>(toastRef: BaseDurationDismissibleToastRef<T | EmbeddedViewRef<any>, P>): void {
-        super.animateToast<T>(toastRef);
-
-        const config = toastRef.containerInstance.config;
-
-        // If dismiss timeout is provided, set up dismiss based on after the Notification is opened.
-        if (config.duration && config.duration > 0) {
-            toastRef.afterOpened().subscribe(() => {
-                toastRef.dismissAfter(config.duration as number);
-
-                if (config.mousePersist) {
-                    toastRef.containerInstance.mouseover$.subscribe(() => {
-                        toastRef.cancelDismiss();
-                    });
-
-                    toastRef.containerInstance.mouseleave$.subscribe(() => {
-                        toastRef.dismissAfter(config.duration as number);
-                    });
-                }
-            });
-        }
     }
 }

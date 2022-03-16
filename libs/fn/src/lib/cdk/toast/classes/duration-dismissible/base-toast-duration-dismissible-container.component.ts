@@ -1,13 +1,13 @@
 import { Directive, HostListener, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
-import { ToastDismissibleContainerComponent } from '../interfaces/toast-container-component.interface';
-import { BaseToastConfig } from './base-toast-config';
-import { BaseToastComponent } from './base-toast.component';
+import { BaseToastConfig } from '../base-toast-config';
+import { BaseToastContainerComponent } from '../base-toast-container.component';
+import { ToastDurationDismissibleContainerComponent } from '../../interfaces/toast-duration-dismissible-container-component.interface';
 
 @Directive()
-export abstract class BaseToastDurationDismissibleComponent<P extends BaseToastConfig>
-    extends BaseToastComponent<P>
-    implements OnDestroy, ToastDismissibleContainerComponent<P>
+export abstract class BaseToastDurationDismissibleContainerComponent<P extends BaseToastConfig>
+    extends BaseToastContainerComponent<P>
+    implements OnDestroy, ToastDurationDismissibleContainerComponent<P>
 {
     /** Subject for notifying that component is out of hover */
     mouseleave$: Subject<void> = new Subject();

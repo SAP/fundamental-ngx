@@ -13,8 +13,3 @@ export interface ToastContainerComponent<P> {
     attachComponentPortal<T>(portal: ComponentPortal<T>): ComponentRef<T>;
     attachTemplatePortal<C>(portal: TemplatePortal<C>): EmbeddedViewRef<C>;
 }
-
-export interface ToastDismissibleContainerComponent<P> extends ToastContainerComponent<P> {
-    mouseover$: Subject<any>;
-    mouseleave$: Subject<any>;
-}
