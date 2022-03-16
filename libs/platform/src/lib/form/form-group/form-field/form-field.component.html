@@ -55,12 +55,12 @@
             [inlineHelpGlyph]="hintOptions.glyph"
             [inlineHelpTriggers]="hintOptions.trigger"
         >
-            <span [id]="'fdp-form-label-content-' + id">{{ label }}</span>
+            <span [id]="'fdp-form-label-content-' + id">{{ label | titlecase }}</span>
         </label>
     </ng-container>
     <ng-template #withoutHint>
         <label [id]="'fdp-form-label-' + id" [required]="editable && required" fd-form-label>
-            <span [id]="'fdp-form-label-content-' + id">{{ label }}</span>
+            <span [id]="'fdp-form-label-content-' + id">{{ label | titlecase }}</span>
         </label>
     </ng-template>
 </ng-template>
