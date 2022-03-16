@@ -52,7 +52,11 @@ import {
 import { generateColumnClass, normalizeColumnLayout } from '../helpers';
 import { FormFieldControlExtrasComponent } from '../form-field-extras/form-field-extras.component';
 import { InputMessageGroupWithTemplate } from '../../input-message-group-with-template/input-message-group-with-template.component';
-import { FDP_FORM_FIELD_HINT_OPTIONS_DEFAULT } from '../fdp-form.tokens';
+import {
+    FDP_FORM_FIELD_HINT_LAYOUT_CONFIG,
+    FDP_FORM_FIELD_HINT_OPTIONS_DEFAULT,
+    HintLayoutConfig
+} from '../fdp-form.tokens';
 import { FormFieldLayoutService } from '../services/form-field-layout.service';
 
 const formFieldProvider: Provider = {
@@ -317,6 +321,11 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     _gapColumnLayoutClass: string;
 
     /**
+     * hint and hint placement coerced to the FieldHintOptions
+     */
+    hintOptions: FieldHintOptions = this._defaultHintOptions;
+
+    /**
      * @hidden
      * Optional FormControl
      */
@@ -399,22 +408,6 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         return this.formFieldGroup ? this.formFieldGroup : this.formGroupContainer;
     }
 
-    get hintOptions(): FieldHintOptions {
-        // placement is here set up because hintPlacement is deprecated
-        if (typeof this.hint === 'string') {
-            return {
-                ...this._defaultHintOptions,
-                placement: this.hintPlacement ? this.hintPlacement : this._defaultHintOptions.placement,
-                text: this.hint
-            };
-        }
-        return {
-            ...this._defaultHintOptions,
-            placement: this.hintPlacement ? this.hintPlacement : this._defaultHintOptions.placement,
-            ...this.hint
-        };
-    }
-
     /**
      * Will be updated during onChanges and resize, resulting correct placement of the
      * hint respecting passed configs and given breakpoint of screen.
@@ -437,6 +430,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         readonly _defaultResponsiveBreakPointConfig: ResponsiveBreakPointConfig,
         readonly _responsiveBreakpointsService: ResponsiveBreakpointsService,
         @Inject(FDP_FORM_FIELD_HINT_OPTIONS_DEFAULT) private _defaultHintOptions: FieldHintOptions,
+        @Inject(FDP_FORM_FIELD_HINT_LAYOUT_CONFIG) private _hintLayoutConfig: HintLayoutConfig,
         @Self() _selfFormFieldLayoutService: FormFieldLayoutService,
         @Optional() @SkipSelf() _parentFormFieldLayoutService: FormFieldLayoutService
     ) {
@@ -499,21 +493,28 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
+        if (changes.hint || changes.hintPlacement) {
+            this._updateHintOptions();
+            this._formFieldLayoutService.setNeedsInlineHelp(
+                this,
+                this.hintOptions.target === 'input' || this.hintOptions.target === 'auto'
+            );
+        }
         if (changes.hint && changes.hint.firstChange) {
-            this.hintTarget = this.hintOptions.target;
             this._breakPointObserver
                 .pipe(
                     tap((sizeName) => {
                         if (this.hintOptions.target === 'auto') {
-                            this.hintTarget = sizeName !== 'S' ? 'input' : 'label';
+                            this.hintTarget = this._hintLayoutConfig.hintOnInputBreakpoints.includes(sizeName)
+                                ? 'input'
+                                : 'label';
+                        } else {
+                            this.hintTarget = this.hintOptions.target;
                         }
                     }),
                     takeUntil(this._destroyed$)
                 )
                 .subscribe();
-        }
-        if (changes.hint || changes.hintPlacement) {
-            this._formFieldLayoutService.setNeedsInlineHelp(this, this.hintTarget === 'input');
         }
     }
 
@@ -734,5 +735,23 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
         // emit column change, so form-group knows it and re-arranges the fields
         this.onColumnChange.emit(true);
+    }
+
+    /** @hidden */
+    private _updateHintOptions(): void {
+        // placement is here set up because hintPlacement is deprecated
+        if (typeof this.hint === 'string') {
+            this.hintOptions = {
+                ...this._defaultHintOptions,
+                placement: this.hintPlacement ? this.hintPlacement : this._defaultHintOptions.placement,
+                text: this.hint
+            };
+        } else {
+            this.hintOptions = {
+                ...this._defaultHintOptions,
+                placement: this.hintPlacement ? this.hintPlacement : this._defaultHintOptions.placement,
+                ...this.hint
+            };
+        }
     }
 }
