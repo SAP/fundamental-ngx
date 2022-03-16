@@ -1,12 +1,12 @@
-import { Directive, HostListener, OnDestroy } from '@angular/core';
+import { Directive, HostListener, NgZone, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
+import { BaseToastAnimatedContainerComponent } from '../base-toast-animated-container.component';
 import { BaseToastConfig } from '../base-toast-config';
-import { BaseToastContainerComponent } from '../base-toast-container.component';
 import { ToastDurationDismissibleContainerComponent } from '../../interfaces/toast-duration-dismissible-container-component.interface';
 
 @Directive()
 export abstract class BaseToastDurationDismissibleContainerComponent<P extends BaseToastConfig>
-    extends BaseToastContainerComponent<P>
+    extends BaseToastAnimatedContainerComponent<P>
     implements OnDestroy, ToastDurationDismissibleContainerComponent<P>
 {
     /** Subject for notifying that component is out of hover */
@@ -16,8 +16,8 @@ export abstract class BaseToastDurationDismissibleContainerComponent<P extends B
     mouseover$: Subject<void> = new Subject();
 
     /** @hidden */
-    protected constructor(config: P) {
-        super(config);
+    protected constructor(protected _ngZone: NgZone, config: P) {
+        super(_ngZone, config);
     }
 
     /** Emits mouseleave$ subject when component is out of hover. */
@@ -36,5 +36,7 @@ export abstract class BaseToastDurationDismissibleContainerComponent<P extends B
     ngOnDestroy(): void {
         this.mouseover$.complete();
         this.mouseleave$.complete();
+
+        super.ngOnDestroy();
     }
 }

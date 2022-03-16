@@ -1,12 +1,12 @@
 import { EmbeddedViewRef } from '@angular/core';
 import { BaseToastService } from '../../base-toast.service';
 import { BaseToastDurationDismissibleConfig } from './base-toast-duration-dismissible-config';
-import { BaseToastContainerComponent } from '../base-toast-container.component';
+import { BaseToastDurationDismissibleContainerComponent } from './base-toast-duration-dismissible-container.component';
 import { BaseToastDurationDismissibleRef } from './base-toast-duration-dismissible-ref';
 
 export abstract class BaseDismissibleToastService<
     P extends BaseToastDurationDismissibleConfig,
-    C extends BaseToastContainerComponent<P> = BaseToastContainerComponent<P>
+    C extends BaseToastDurationDismissibleContainerComponent<P> = BaseToastDurationDismissibleContainerComponent<P>
 > extends BaseToastService<P, C> {
     /**
      * Animates the old Toast out and the new one in.
