@@ -7,7 +7,7 @@ import { Component, ViewChild } from '@angular/core';
 export class PlatformColorPalettePopoverSimpleExampleComponent {
     @ViewChild('colorPalettePopover') popoverComponent: any;
 
-    openPopover(event: Event): void {
+    openPopover(event: PointerEvent): void {
         this.popoverComponent.showPopover(event.target);
     }
 }
