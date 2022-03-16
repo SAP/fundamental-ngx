@@ -24,7 +24,7 @@ export const FDP_FORM_FIELD_HINT_LAYOUT_CONFIG = new InjectionToken<HintLayoutCo
     {
         factory: () => ({
             hintOnInputBreakpoints: ['M', 'L', 'XL'],
-            hintPlaceMinSize: 12
+            hintPlaceMinSize: 1
         })
     }
 );
