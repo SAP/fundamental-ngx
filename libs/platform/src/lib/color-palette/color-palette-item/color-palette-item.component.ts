@@ -1,15 +1,15 @@
-import { Component, ChangeDetectorRef, Input } from '@angular/core';
-import '@ui5/webcomponents/dist/ColorPalette.js';
-// import { BaseComponent } from '@fundamental-ngx/platform/shared';
+import { Component, Input } from '@angular/core';
+import '@ui5/webcomponents/dist/ColorPaletteItem.js';
 
 @Component({
-    selector: 'fdp-color-palette-item',
-    templateUrl: './color-palette-item.component.html'
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: '[fdp-color-palette-item]',
+    template: `<ng-content></ng-content>`,
+    host: {
+        '[value]': 'value'
+    }
 })
 export class ColorPaletteItemComponent {
-    /** @hidden */
-    constructor(private _cd: ChangeDetectorRef) {}
-
     /**
      * value of the color
      */

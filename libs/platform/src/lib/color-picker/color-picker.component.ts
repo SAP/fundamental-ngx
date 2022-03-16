@@ -60,7 +60,13 @@ export class PlatformColorPickerComponent extends BaseInput implements AfterView
         private _wcElRef: ElementRef
     ) {
         super(_changeDetectorRef, ngControl, ngForm, formField, formControl);
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        super.ngAfterViewInit();
         if (this._rtlService) {
+            this._wcElRef.nativeElement.dir = this._rtlService.rtl.value ? 'rtl' : 'ltr';
             this._subscriptions.add(
                 this._rtlService.rtl.subscribe((value: boolean) => {
                     this._wcElRef.nativeElement.dir = value ? 'rtl' : 'ltr';
@@ -69,20 +75,18 @@ export class PlatformColorPickerComponent extends BaseInput implements AfterView
             );
         }
         if (this._contentDensityService) {
+            const classList = this._wcElRef.nativeElement.classList;
+            if (this._contentDensityService.contentDensity.value === 'compact') {
+                classList.add('ui5-content-density-compact');
+            }
             this._subscriptions.add(
                 this._contentDensityService._contentDensityListener.subscribe((density) => {
-                    const classList = this._wcElRef.nativeElement.classList;
                     isCompactDensity(density)
                         ? classList.add('ui5-content-density-compact')
                         : classList.remove('ui5-content-density-compact');
                 })
             );
         }
-    }
-
-    /** @hidden */
-    ngAfterViewInit(): void {
-        super.ngAfterViewInit();
     }
 
     /** @hidden */
