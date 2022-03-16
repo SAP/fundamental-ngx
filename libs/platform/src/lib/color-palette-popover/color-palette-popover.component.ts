@@ -4,16 +4,10 @@ import { BaseComponent } from '@fundamental-ngx/platform/shared';
 @Component({
     selector: 'fdp-color-palette-popover',
     templateUrl: './color-palette-popover.component.html',
-    encapsulation: ViewEncapsulation.ShadowDom,
-    styles: [':host { display: inline-block}']
+    encapsulation: ViewEncapsulation.ShadowDom
+    // styles: [':host { display: inline-block}']
 })
 export class ColorPalettePopoverComponent extends BaseComponent {
-    /**
-     * The text rendered for the button that opens popover component
-     */
-    @Input()
-    buttonLabel = 'Open ColorPalettePopover';
-
     /** selects the default color of the component
      * The default color should be a part of the ColorPalette colors
      */
@@ -43,22 +37,21 @@ export class ColorPalettePopoverComponent extends BaseComponent {
 
     @ViewChild('colorPalettePopover') popoverComponent: ElementRef;
 
-    constructor(_cd: ChangeDetectorRef, private _elementRef: ElementRef) {
+    constructor(_cd: ChangeDetectorRef) {
         super(_cd);
     }
 
-    openPopover(): void {
-        this.popoverComponent.nativeElement.showAt(this._elementRef.nativeElement);
+    /* Show the color palette popover */
+    showPopover(element: ElementRef): void {
+        this.popoverComponent.nativeElement.showAt(element);
     }
 
-    /**
-     * @todo
-     * Returns the selected color.
-     */
+    /* Returns the selected color. */
     get selectedColor(): string {
         return this.color;
     }
 
+    /* sets color to the clicked on color item */
     clickEvent(event: any): Event {
         this.color = event.detail.color;
         return event;
