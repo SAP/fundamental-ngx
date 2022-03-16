@@ -1,8 +1,9 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable, OnDestroy, Renderer2 } from '@angular/core';
 import { FocusableOption, FocusKeyManager } from '@angular/cdk/a11y';
-import { fromEvent, merge, Subject } from 'rxjs';
+import { finalize, fromEvent, merge, Subject } from 'rxjs';
 import { HasElementRef } from '../has-element-ref';
 import { takeUntil, tap } from 'rxjs/operators';
+import { getNativeElement } from '@fundamental-ngx/fn/utils';
 
 interface FocusableListConfig {
     wrap?: boolean;
@@ -10,7 +11,7 @@ interface FocusableListConfig {
     contentDirection?: 'ltr' | 'rtl' | null;
 }
 
-export type FocusableItem = FocusableOption & HasElementRef & { focusable: (() => boolean) | boolean };
+export type FocusableItem = FocusableOption & HasElementRef & { focusable: (() => boolean) | boolean; index: number };
 
 @Injectable()
 export class FocusableListService implements OnDestroy {
@@ -18,6 +19,8 @@ export class FocusableListService implements OnDestroy {
     _refresh$ = new Subject<void>();
 
     private _destroy$ = new Subject<void>();
+
+    constructor(private _renderer: Renderer2) {}
 
     initialize(items: FocusableItem[], config: FocusableListConfig = {}): void {
         this._refresh$.next();
@@ -33,11 +36,17 @@ export class FocusableListService implements OnDestroy {
             return !focusable;
         });
         this.keyManager = keyManager;
-        const events$ = items.map((item) => fromEvent<KeyboardEvent>(item.elementRef().nativeElement, 'keydown'));
+        const events$ = items.map((item) => fromEvent<KeyboardEvent>(getNativeElement(item), 'keydown'));
+        const focusListenerDestroyers = items.map((item) =>
+            this._renderer.listen(getNativeElement(item), 'focus', () => this.keyManager?.setActiveItem(item.index))
+        );
         merge(...events$)
             .pipe(
                 tap((keydownEvent: KeyboardEvent) => this.keyManager?.onKeydown(keydownEvent)),
-                takeUntil(merge(this._refresh$, this._destroy$))
+                takeUntil(merge(this._refresh$, this._destroy$)),
+                finalize(() => {
+                    focusListenerDestroyers.forEach((d) => d());
+                })
             )
             .subscribe();
     }

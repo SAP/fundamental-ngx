@@ -26,7 +26,8 @@ export class FocusableListDirective implements AfterViewInit {
                 startWith(this.focusableItems),
                 map((queryList) => queryList.toArray()),
                 tap((items: FocusableItemDirective[]): void => {
-                    const focusableItems: FocusableItem[] = items.map((item) => ({
+                    const focusableItems: FocusableItem[] = items.map((item, index) => ({
+                        index,
                         focusable: () => item.fnFocusableItem,
                         elementRef: () => item.elementRef(),
                         focus: () => item.elementRef().nativeElement.focus()
