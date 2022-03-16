@@ -29,7 +29,7 @@ export abstract class BaseToastService<
     C extends ToastContainerComponent<P> = ToastContainerComponent<P>
 > {
     /** Component for simple text toast. */
-    protected abstract textToastContainer: Type<ToastTextComponent>;
+    protected abstract toastTextComponent: Type<ToastTextComponent>;
     /** Component for Toast Container. */
     protected abstract toastContainerComponent: Type<C>;
     /** Injection token for Toast Data. */
@@ -51,14 +51,14 @@ export abstract class BaseToastService<
      * Gets Toast Container providers.
      * @param config Toast Config.
      */
-    protected abstract getContainerProviders(config: P): StaticProvider[];
+    protected abstract getContainerComponentProviders(config: P): StaticProvider[];
 
     /**
-     * Gets Injector providers.
+     * Gets Toast Content providers.
      * @param config Toast Config.
      * @param toastRef Toast Reference.
      */
-    protected abstract getInjectorProviders<T>(config: P, toastRef: BaseToastRef<T>): StaticProvider[];
+    protected abstract getContentComponentProviders<T>(config: P, toastRef: BaseToastRef<T>): StaticProvider[];
 
     /**
      * Opens a Toast with provided configuration.
@@ -229,7 +229,7 @@ export abstract class BaseToastService<
     ): BaseToastRef<T | EmbeddedViewRef<any>, P> {
         const config = { ...this.defaultConfig, ...userConfig };
         const overlayRef = this._createOverlay();
-        const containerRef = this.attachToastContainer(overlayRef, config);
+        const containerRef = this.attachToastContainerComponent(overlayRef, config);
         const toastRef = this.getToastRef<T>(containerRef, overlayRef);
 
         if (content instanceof TemplateRef) {
@@ -239,7 +239,7 @@ export abstract class BaseToastService<
 
             toastRef.instance = containerRef.attachTemplatePortal(portal);
         } else {
-            const injector = this.createInjector(config, toastRef);
+            const injector = this.createContentComponentInjector(config, toastRef);
             const portal = new ComponentPortal(content, undefined, injector);
             const contentRef = containerRef.attachComponentPortal<T>(portal);
 
@@ -257,10 +257,10 @@ export abstract class BaseToastService<
     /**
      * Attaches the Toast container component to the overlay.
      */
-    protected attachToastContainer(overlayRef: OverlayRef, config: P): C {
+    protected attachToastContainerComponent(overlayRef: OverlayRef, config: P): C {
         const injector = Injector.create({
             parent: this.injector,
-            providers: this.getContainerProviders(config)
+            providers: this.getContainerComponentProviders(config)
         });
 
         const containerPortal = new ComponentPortal(this.toastContainerComponent, null, injector);
@@ -277,10 +277,10 @@ export abstract class BaseToastService<
      * @param config Config that was used to create the Toast.
      * @param toastRef Reference to the Toastr.
      */
-    protected createInjector<T>(config: P, toastRef: BaseToastRef<T>): Injector {
+    protected createContentComponentInjector<T>(config: P, toastRef: BaseToastRef<T>): Injector {
         return Injector.create({
             parent: this.injector,
-            providers: this.getInjectorProviders(config, toastRef)
+            providers: this.getContentComponentProviders(config, toastRef)
         });
     }
 

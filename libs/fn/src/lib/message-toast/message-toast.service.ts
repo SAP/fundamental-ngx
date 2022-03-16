@@ -10,7 +10,7 @@ import { MessageToastRef } from './ref/message-toast.ref';
 @Injectable()
 export class MessageToastService<P = any> extends BaseDismissibleToastService<MessageToastConfig<P>> {
     /** @Hidden */
-    protected textToastContainer = MessageToastTextComponent;
+    protected toastTextComponent = MessageToastTextComponent;
     /** @Hidden */
     protected toastContainerComponent = MessageToastComponent;
     /** @Hidden */
@@ -37,7 +37,7 @@ export class MessageToastService<P = any> extends BaseDismissibleToastService<Me
         mergedConfig.data = message;
 
         return this.openFromComponent(
-            this.textToastContainer,
+            this.toastTextComponent,
             mergedConfig
         ) as MessageToastRef<MessageToastTextComponent>;
     }
@@ -63,12 +63,12 @@ export class MessageToastService<P = any> extends BaseDismissibleToastService<Me
     }
 
     /** @hidden */
-    protected getContainerProviders(config: MessageToastConfig<P>): StaticProvider[] {
+    protected getContainerComponentProviders(config: MessageToastConfig<P>): StaticProvider[] {
         return [{ provide: MessageToastConfig, useValue: config }];
     }
 
     /** @hidden */
-    protected getInjectorProviders<T>(
+    protected getContentComponentProviders<T>(
         config: MessageToastConfig<P>,
         messageToastRef: MessageToastRef<T>
     ): StaticProvider[] {

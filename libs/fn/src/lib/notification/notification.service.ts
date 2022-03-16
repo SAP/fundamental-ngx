@@ -9,7 +9,7 @@ import { NotificationRef } from './ref/notification-ref';
 
 @Injectable()
 export class NotificationService<P = any> extends BaseDismissibleToastService<NotificationConfig<P>> {
-    protected textToastContainer = NotificationTextComponent;
+    protected toastTextComponent = NotificationTextComponent;
     protected toastContainerComponent = NotificationComponent;
     protected toastDataInjectionToken = NOTIFICATION_DATA;
     protected toastPositionStrategy = ToastTopRightPosition;
@@ -29,7 +29,7 @@ export class NotificationService<P = any> extends BaseDismissibleToastService<No
         const mergedConfig = { ...this.defaultConfig, ...config };
 
         return this.openFromComponent(
-            this.textToastContainer,
+            this.toastTextComponent,
             mergedConfig
         ) as NotificationRef<NotificationTextComponent>;
     }
@@ -55,12 +55,12 @@ export class NotificationService<P = any> extends BaseDismissibleToastService<No
     }
 
     /** @hidden */
-    protected getContainerProviders(config: NotificationConfig<P>): StaticProvider[] {
+    protected getContainerComponentProviders(config: NotificationConfig<P>): StaticProvider[] {
         return [{ provide: NotificationConfig, useValue: config }];
     }
 
     /** @hidden */
-    protected getInjectorProviders<T>(
+    protected getContentComponentProviders<T>(
         config: NotificationConfig<P>,
         notificationRef: NotificationRef<T>
     ): StaticProvider[] {
