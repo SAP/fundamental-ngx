@@ -8,20 +8,22 @@ import { BaseToastOverlayContainer } from '@fundamental-ngx/fn/cdk';
 import { NotificationComponent } from './notification.component';
 import { NotificationService } from './notification.service';
 import { NotificationTextComponent } from './components/notification-text/notification-text.component';
-import { NotificationContainerComponent } from './components/notification-container/notification-container.component';
-import { NotificationTitleDirective } from './directives/notification-title.directive';
-import { NotificationTextDirective } from './directives/notification-text.directive';
-import { NotificationDismissButtonDirective } from './directives/notification-dismiss-button.directive';
-import { NotificationActionButtonsDirective } from './directives/notification-action-buttons.directive';
-import { NotificationSemanticTitleDirective } from './directives/notification-semantic-title.directive';
-import { NotificationSemanticIconDirective } from './directives/notification-semantic-icon.directive';
+import { NotificationContentComponent } from './components/notification-content/notification-content.component';
+import {
+    NotificationActionButtonsDirective,
+    NotificationDismissButtonDirective,
+    NotificationSemanticIconDirective,
+    NotificationSemanticTitleDirective,
+    NotificationTextDirective,
+    NotificationTitleDirective
+} from './structural-directives';
 
 @NgModule({
     imports: [CommonModule, PortalModule, OverlayModule, ButtonModule, IconModule],
     exports: [
         NotificationComponent,
         NotificationTextComponent,
-        NotificationContainerComponent,
+        NotificationContentComponent,
         NotificationTitleDirective,
         NotificationTextDirective,
         NotificationDismissButtonDirective,
@@ -32,7 +34,7 @@ import { NotificationSemanticIconDirective } from './directives/notification-sem
     declarations: [
         NotificationComponent,
         NotificationTextComponent,
-        NotificationContainerComponent,
+        NotificationContentComponent,
         NotificationTitleDirective,
         NotificationTextDirective,
         NotificationDismissButtonDirective,

@@ -11,7 +11,7 @@
 </div>
 
 <ng-template let-notification #template let-notificationRef="toastRef">
-    <fn-notification-container>
+    <fn-notification-content>
         <fn-avatar [circle]="true" [image]="notification.data.avatar" size="l"></fn-avatar>
         <ng-template fnNotificationTitle>{{ notification.title }}</ng-template>
         <ng-template fnNotificationText>{{ notification.message }}</ng-template>
@@ -34,5 +34,5 @@
                 label="Reject"
             ></button>
         </ng-template>
-    </fn-notification-container>
+    </fn-notification-content>
 </ng-template>

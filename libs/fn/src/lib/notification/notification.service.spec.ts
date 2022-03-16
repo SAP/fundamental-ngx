@@ -23,10 +23,10 @@ const dummySpy = new DummySpyClass();
 
 @Component({
     template: `
-        <fn-notification-container>
+        <fn-notification-content>
             <ng-template fnNotificationTitle>{{ notification.title }}</ng-template>
             <ng-template fnNotificationText>{{ notification.message }}</ng-template>
-        </fn-notification-container>
+        </fn-notification-content>
     `,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -38,10 +38,10 @@ export class NotificationComponentExampleComponent {
 @Component({
     template: `
         <ng-template let-notification #template let-notificationRef="toastRef">
-            <fn-notification-container>
+            <fn-notification-content>
                 <ng-template fnNotificationTitle>{{ notification.title }}</ng-template>
                 <ng-template fnNotificationText>{{ notification.message }}</ng-template>
-            </fn-notification-container>
+            </fn-notification-content>
         </ng-template>
     `,
     providers: [NotificationService]

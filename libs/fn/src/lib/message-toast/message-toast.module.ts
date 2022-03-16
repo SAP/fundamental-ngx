@@ -5,12 +5,12 @@ import { CommonModule } from '@angular/common';
 import { BaseToastOverlayContainer } from '@fundamental-ngx/fn/cdk';
 import { MessageToastComponent } from './message-toast.component';
 import { MessageToastService } from './message-toast.service';
-import { SimpleMessageToastComponent } from './components/simple-message-toast/simple-message-toast.component';
+import { MessageToastTextComponent } from './components/message-toast-text.component';
 
 @NgModule({
     imports: [CommonModule, PortalModule, OverlayModule],
     exports: [MessageToastComponent],
-    declarations: [MessageToastComponent, SimpleMessageToastComponent],
+    declarations: [MessageToastComponent, MessageToastTextComponent],
     providers: [MessageToastService, { provide: OverlayContainer, useClass: BaseToastOverlayContainer }]
 })
 export class MessageToastModule {}
