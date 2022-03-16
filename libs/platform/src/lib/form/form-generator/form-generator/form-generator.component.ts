@@ -366,6 +366,12 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
         return Object.values(controls).sort((a, b) => (a.formItem.rank > b.formItem.rank ? 1 : -1));
     }
 
+    /**
+     * @description
+     * Used for extracting hintOptions from GuiOptions. This will coerce string | HintOptions to FieldHintOptions,
+     * will combine default value of hints for form generator with provided options.
+     * @param guiOptions
+     */
     getHintOptions(guiOptions?: BaseDynamicFormItemGuiOptions | DynamicFormItemGuiOptions): FieldHintOptions {
         if (!guiOptions) {
             return;

@@ -415,10 +415,16 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         };
     }
 
+    /**
+     * Will be updated during onChanges and resize, resulting correct placement of the
+     * hint respecting passed configs and given breakpoint of screen.
+     */
     hintTarget: string;
 
+    /** @hidden */
     private _breakPointObserver: Observable<any>;
 
+    /** @hidden */
     private _formFieldLayoutService: FormFieldLayoutService;
 
     /** @hidden */

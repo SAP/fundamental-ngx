@@ -307,6 +307,9 @@ export interface DynamicFormItemGuiOptions extends BaseDynamicFormItemGuiOptions
      */
     appendColon?: boolean;
 
+    /**
+     * Hint options. Either only text or full config
+     */
     hint?: string | FieldHintOptions;
 }
 

@@ -378,7 +378,7 @@ export class FormGroupComponent
     formRows: { [key: number]: FieldColumn | FieldGroup } = {};
 
     /** @hidden */
-    hintOptions: HintOptions;
+    _hintOptions: HintOptions;
 
     /** @hidden */
     private _useForm = false;
@@ -409,12 +409,12 @@ export class FormGroupComponent
         this.buildComponentCssClass();
         if (changes.hint) {
             if (typeof this.hint === 'string') {
-                this.hintOptions = {
+                this._hintOptions = {
                     ...this._defaultHintOptions,
                     text: this.hint
                 };
             } else {
-                this.hintOptions = {
+                this._hintOptions = {
                     ...this._defaultHintOptions,
                     ...this.hint
                 };
@@ -532,6 +532,10 @@ export class FormGroupComponent
         return ['fd-container', !this.compact ? 'fd-form-layout-grid-container' : '', this.class];
     }
 
+    /**
+     * @hidden
+     * Used for template side Type correction
+     */
     $fieldGroup = (f: any): FieldGroup => f;
 
     /** @hidden */
