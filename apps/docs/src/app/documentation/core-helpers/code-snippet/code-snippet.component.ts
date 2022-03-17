@@ -16,14 +16,8 @@ import hljs from 'highlight.js/lib';
     styles: ['.bordered { border: 1px solid beige }'],
     template: `
         <pre [class.bordered]="standAlone">
-            <code #code class="hljs" [class]="file?.language || language">
-                <ng-container *ngIf="contentBased; else fileBased">
-                    <ng-content></ng-content>
-                </ng-container>
-                <ng-template #fileBased>
-                    {{ file.code }}
-                </ng-template>
-            </code>
+            <code #fileBasedElement class="hljs" [class]="file.language" *ngIf="file">{{ file.code }}</code>
+            <code #contentBasedElement class="hljs" [class]="language" *ngIf="contentBased"><ng-content></ng-content></code>
         </pre>
     `
 })
@@ -40,8 +34,11 @@ export class CodeSnippetComponent implements AfterViewInit, OnChanges {
     @Input()
     language: string;
 
-    @ViewChild('code', { read: ElementRef })
-    codeContainerRef: ElementRef;
+    @ViewChild('fileBasedElement', { read: ElementRef })
+    fileBasedElementRef: ElementRef;
+
+    @ViewChild('contentBasedElement', { read: ElementRef })
+    contentBasedElementRef: ElementRef;
 
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.contentBased && this.contentBased && !this.language && isDevMode()) {
@@ -51,6 +48,7 @@ export class CodeSnippetComponent implements AfterViewInit, OnChanges {
 
     ngAfterViewInit(): void {
         /** Highlight.js init */
-        hljs.highlightBlock(this.codeContainerRef.nativeElement);
+        const elementRef = this.fileBasedElementRef || this.contentBasedElementRef;
+        hljs.highlightBlock(elementRef.nativeElement);
     }
 }
