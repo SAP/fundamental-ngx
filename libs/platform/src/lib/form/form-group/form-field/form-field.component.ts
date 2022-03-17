@@ -58,6 +58,7 @@ import {
     HintLayoutConfig
 } from '../fdp-form.tokens';
 import { FormFieldLayoutService } from '../services/form-field-layout.service';
+import { defaultFormFieldHintOptions } from '../config/default-form-field-hint-options';
 
 const formFieldProvider: Provider = {
     provide: FormField,
@@ -143,7 +144,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
     /**
      * Rank is used for ordering.
-     * Than lower number then higher priority
+     * First lower number, then - higher
      */
     @Input()
     rank: number;
@@ -323,7 +324,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     /**
      * hint and hint placement coerced to the FieldHintOptions
      */
-    hintOptions: FieldHintOptions = this._defaultHintOptions;
+    hintOptions: FieldHintOptions = defaultFormFieldHintOptions as unknown as FieldHintOptions;
 
     /**
      * @hidden
@@ -365,7 +366,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     private _columnLayout: ColumnLayout;
 
     /** @hidden */
-    private _responsiveBreakPointConfig: ResponsiveBreakPointConfig;
+    private readonly _responsiveBreakPointConfig: ResponsiveBreakPointConfig;
 
     /** @hidden */
     private _labelLayout: LabelLayout;
@@ -420,6 +421,8 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
     /** @hidden */
     private _formFieldLayoutService: FormFieldLayoutService;
+    /** @hidden */
+    private readonly _defaultHintOptions: FieldHintOptions;
 
     /** @hidden */
     constructor(
@@ -430,11 +433,15 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         @Inject(RESPONSIVE_BREAKPOINTS_CONFIG)
         readonly _defaultResponsiveBreakPointConfig: ResponsiveBreakPointConfig,
         readonly _responsiveBreakpointsService: ResponsiveBreakpointsService,
-        @Inject(FDP_FORM_FIELD_HINT_OPTIONS_DEFAULT) private _defaultHintOptions: FieldHintOptions,
+        @Inject(FDP_FORM_FIELD_HINT_OPTIONS_DEFAULT) _providedHintOptions: FieldHintOptions,
         @Inject(FDP_FORM_FIELD_HINT_LAYOUT_CONFIG) private _hintLayoutConfig: HintLayoutConfig,
         @Self() _selfFormFieldLayoutService: FormFieldLayoutService,
         @Optional() @SkipSelf() _parentFormFieldLayoutService: FormFieldLayoutService
     ) {
+        this._defaultHintOptions = {
+            ...defaultFormFieldHintOptions,
+            ..._providedHintOptions
+        };
         this._formFieldLayoutService = _parentFormFieldLayoutService || _selfFormFieldLayoutService;
         // provides capability to make a field disabled. useful in reactive form approach.
         this.formControl = new FormControl({ value: null, disabled: this.disabled });

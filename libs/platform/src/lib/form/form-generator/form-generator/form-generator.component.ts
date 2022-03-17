@@ -40,6 +40,7 @@ import {
     DefaultVerticalLabelLayout
 } from '../../form-group/constants';
 import { FDP_FORM_GENERATOR_DEFAULT_HINT_OPTIONS } from '../form-generator.tokens';
+import { defaultFormGeneratorHintOptions } from '../config/default-form-generator-hint-options';
 
 let formUniqueId = 0;
 
@@ -239,11 +240,19 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
     private _labelLayout: LabelLayout;
 
     /** @hidden */
+    private readonly _defaultHintOptions: FieldHintOptions;
+
+    /** @hidden */
     constructor(
         private _fgService: FormGeneratorService,
         private _cd: ChangeDetectorRef,
-        @Inject(FDP_FORM_GENERATOR_DEFAULT_HINT_OPTIONS) private _defaultHintOptions: FieldHintOptions
-    ) {}
+        @Inject(FDP_FORM_GENERATOR_DEFAULT_HINT_OPTIONS) _providedHintOptions: FieldHintOptions
+    ) {
+        this._defaultHintOptions = {
+            ...defaultFormGeneratorHintOptions,
+            ..._providedHintOptions
+        };
+    }
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {

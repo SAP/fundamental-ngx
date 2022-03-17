@@ -9,8 +9,8 @@ import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformSliderModule } from '@fundamental-ngx/platform/slider';
 import {
-    PlatformCheckboxModule,
     FdpFormGroupModule,
+    PlatformCheckboxModule,
     PlatformFormGeneratorModule
 } from '@fundamental-ngx/platform/form';
 import { PlatformFormGeneratorHeaderComponent } from './platform-form-generator-header/platform-form-generator-header.component';
@@ -28,6 +28,7 @@ import { PlatformFormGeneratorNoColonsExampleComponent } from './platform-form-g
 import { PlatformFormGeneratorCustomFieldLayoutExampleComponent } from './platform-form-generator-examples/platform-form-generator-custom-field-layout-example.component';
 import { PlatformFormGeneratorGroupingExampleComponent } from './platform-form-generator-examples/platform-form-generator-grouping-example.component';
 import { PlatformFormGeneratorInlineHelpExampleComponent } from './platform-form-generator-examples/platform-form-generator-inline-help-example.component';
+import { TableModule } from '@fundamental-ngx/core/table';
 
 const routes: Routes = [
     {
@@ -49,7 +50,8 @@ const routes: Routes = [
         FdpFormGroupModule,
         PlatformButtonModule,
         PlatformSliderModule,
-        BusyIndicatorModule
+        BusyIndicatorModule,
+        TableModule
     ],
     exports: [RouterModule],
     declarations: [
