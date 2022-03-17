@@ -22,15 +22,16 @@
     <h3>Inline help default global options</h3>
     <p>
         Inline help has default options as below: <br />
-        <code class="hljs ts">
+        <fd-code-snippet>
             {{ '{' }}<br />
             {{ '&nbsp;'.repeat(4) }}placement: 'right',<br />
             {{ '&nbsp;'.repeat(4) }}position: 'after',<br />
             {{ '&nbsp;'.repeat(4) }}trigger: ['mouseenter', 'mouseleave', 'focusin', 'focusout'],<br />
             {{ '&nbsp;'.repeat(4) }}glyph: 'message-information',<br />
             {{ '&nbsp;'.repeat(4) }}target: 'auto'<br />
-            {{ '}' }} </code
-        ><br />
+            {{ '}' }}
+        </fd-code-snippet>
+        <br />
         if you want to modify default values globally and not per-field, provide
         <code>FDP_FORM_GENERATOR_DEFAULT_HINT_OPTIONS</code>
         in your module or component.
