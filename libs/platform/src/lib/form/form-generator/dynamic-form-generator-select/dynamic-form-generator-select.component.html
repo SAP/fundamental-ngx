@@ -3,7 +3,7 @@
         <fdp-select
             [contentDensity]="formItem.guiOptions?.contentDensity"
             [placeholder]="formItem.placeholder || formItem.message"
-            [inline]="formItem.guiOptions?.inline !== false"
+            [inline]="formItem.guiOptions?.inline === true"
             [name]="name"
             [list]="formItem.choices"
             [formControlName]="name"
