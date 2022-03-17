@@ -6,6 +6,7 @@ import { dynamicFormFieldProvider, dynamicFormGroupChildProvider } from '../prov
 @Component({
     selector: 'fdp-dynamic-form-generator-checkbox',
     templateUrl: './dynamic-form-generator-checkbox.component.html',
+    styleUrls: ['./dynamic-form-generator-checkbox.component.scss'],
     encapsulation: ViewEncapsulation.None,
     viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider]
 })

@@ -6,6 +6,7 @@ import { dynamicFormFieldProvider, dynamicFormGroupChildProvider } from '../prov
 @Component({
     selector: 'fdp-dynamic-form-generator-radio',
     templateUrl: './dynamic-form-generator-radio.component.html',
+    styleUrls: ['./dynamic-form-generator-radio.component.scss'],
     encapsulation: ViewEncapsulation.None,
     viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider]
 })
