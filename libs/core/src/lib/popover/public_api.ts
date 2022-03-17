@@ -12,3 +12,4 @@ export * from './popover.interface';
 export * from './popover-service/popover.service';
 export * from './base/base-popover.class';
 export * from './popover-child-content.interface';
+export * from './popover-container/popover-container.directive';
