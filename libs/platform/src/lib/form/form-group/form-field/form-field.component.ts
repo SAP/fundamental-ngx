@@ -404,7 +404,8 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         );
     }
 
-    get groupHost(): FormGroupContainer | FormFieldGroup {
+    /** @hidden */
+    get _groupHost(): FormGroupContainer | FormFieldGroup {
         return this.formFieldGroup ? this.formFieldGroup : this.formGroupContainer;
     }
 
@@ -466,7 +467,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         this._formFieldLayoutService.needsInlineHelpPlace
             .pipe(
                 map(() => {
-                    const source = this.labelColumnLayout ? this : this.groupHost;
+                    const source = this.labelColumnLayout ? this : this._groupHost;
                     return this._formFieldLayoutService.getFixedLayouts(source);
                 }),
                 tap(setLayouts),
@@ -713,7 +714,6 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
     /** @hidden */
     private _updateLayout(currentBreakingPointName: string): void {
-        console.log({ currentBreakingPointName });
         if (this._isColumnLayoutEnabled) {
             switch (currentBreakingPointName) {
                 case 'S':

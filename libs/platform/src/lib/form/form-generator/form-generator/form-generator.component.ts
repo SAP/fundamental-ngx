@@ -238,12 +238,14 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
     /** @hidden */
     private _labelLayout: LabelLayout;
 
+    /** @hidden */
     constructor(
         private _fgService: FormGeneratorService,
         private _cd: ChangeDetectorRef,
         @Inject(FDP_FORM_GENERATOR_DEFAULT_HINT_OPTIONS) private _defaultHintOptions: FieldHintOptions
     ) {}
 
+    /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.hint) {
             if (typeof this.hint === 'string') {

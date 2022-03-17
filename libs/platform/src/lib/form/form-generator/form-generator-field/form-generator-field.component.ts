@@ -68,7 +68,8 @@ export class FormGeneratorFieldComponent {
      */
     @ViewChild(FormFieldComponent) fieldRenderer: FormFieldComponent;
 
-    get placeholder(): string {
+    /** @hidden */
+    get _placeholder(): string {
         if (!this.field) {
             return '';
         }
