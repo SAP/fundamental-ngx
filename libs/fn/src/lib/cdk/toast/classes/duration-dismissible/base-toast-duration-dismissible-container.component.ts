@@ -10,10 +10,10 @@ export abstract class BaseToastDurationDismissibleContainerComponent<P extends B
     implements OnDestroy, ToastDurationDismissibleContainerComponent<P>
 {
     /** Subject for notifying that component is out of hover */
-    mouseleave$: Subject<void> = new Subject();
+    readonly mouseleave$: Subject<void> = new Subject();
 
     /** Subject for notifying that component is hovered */
-    mouseover$: Subject<void> = new Subject();
+    readonly mouseover$: Subject<void> = new Subject();
 
     /** @hidden */
     protected constructor(protected _ngZone: NgZone, config: P) {

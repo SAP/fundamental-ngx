@@ -1,7 +1,7 @@
 import { ComponentRef, Directive, EmbeddedViewRef, ViewChild } from '@angular/core';
 import { BasePortalOutlet, CdkPortalOutlet, ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 import { OverlayRef } from '@angular/cdk/overlay';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { coerceCssPixel } from '@fundamental-ngx/fn/utils';
 import { BaseToastConfig } from './base-toast-config';
 import { ToastContainerComponent } from '../interfaces/toast-container-component.interface';
@@ -81,5 +81,5 @@ export abstract class BaseToastContainerComponent<P extends BaseToastConfig = Ba
     abstract enter(): void;
 
     /** Method, which is triggered when the Toast component is ready to be removed. Used to trigger animations. */
-    abstract exit(): Observable<void>;
+    abstract exit(): void;
 }

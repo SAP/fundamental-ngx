@@ -104,112 +104,6 @@ export abstract class BaseToastService<
     }
 
     /**
-     * @hidden
-     * Updates the position of a current Overlay Reference.
-     * @param overlay Overlay reference which position needs to be updated.
-     * @returns New Position Strategy.
-     */
-    private _updatePositionStrategy(overlay: OverlayRef): PositionStrategy {
-        const config = overlay.getConfig();
-
-        if (config.positionStrategy instanceof GlobalPositionStrategy) {
-            return this._composeGlobalPosition();
-        }
-
-        const globalOverlay = this._toasts.find(({ overlayRef }) => {
-            const overlayConfig = overlayRef.getConfig();
-
-            return overlayConfig.positionStrategy instanceof GlobalPositionStrategy;
-        });
-
-        if (!globalOverlay) {
-            return this._composeGlobalPosition();
-        }
-
-        // Get Previous overlay item.
-        const overlayItemIndex = this._toasts.findIndex(({ overlayRef }) => overlayRef === overlay);
-        const previousOverlay = this._toasts[overlayItemIndex - 1];
-
-        return this._composeFlexibleConnectedPosition(previousOverlay.overlayRef.overlayElement);
-    }
-
-    /**
-     * @hidden
-     * @returns Initial Position Strategy of the Toast Overlay Reference.
-     */
-    private _getPositionStrategy(): PositionStrategy {
-        const lastOverlay = this._toasts.length > 0 ? this._toasts[this._toasts.length - 1] : null;
-
-        const globalOverlay = this._toasts.find(({ overlayRef }) => {
-            const config = overlayRef.getConfig();
-
-            return config.positionStrategy instanceof GlobalPositionStrategy;
-        });
-
-        if (lastOverlay && globalOverlay) {
-            return this._composeFlexibleConnectedPosition(lastOverlay.overlayRef.overlayElement);
-        }
-
-        return this._composeGlobalPosition();
-    }
-
-    /**
-     * @hidden
-     * @param connectedElm element to connect with.
-     * @returns Flexible Connected Position Strategy for Overlay Reference.
-     */
-    private _composeFlexibleConnectedPosition(connectedElm: HTMLElement): FlexibleConnectedPositionStrategy {
-        return this.overlay
-            .position()
-            .flexibleConnectedTo(connectedElm)
-            .withPush(false)
-            .withPositions([this.toastPositionStrategy.connected]);
-    }
-
-    /**
-     * @hidden
-     * @returns Default Global Position for Overlay Reference.
-     */
-    private _composeGlobalPosition(): GlobalPositionStrategy {
-        const globalPosition = this.overlay.position().global();
-
-        for (const [position, value] of Object.entries(this.toastPositionStrategy.global)) {
-            switch (position) {
-                case 'left':
-                    globalPosition.left(value);
-                    break;
-                case 'right':
-                    globalPosition.right(value);
-                    break;
-                case 'bottom':
-                    globalPosition.bottom(value);
-                    break;
-                case 'top':
-                    globalPosition.top(value);
-                    break;
-                case 'center':
-                    globalPosition.centerHorizontally();
-                    break;
-            }
-        }
-
-        return globalPosition;
-    }
-
-    /**
-     * @hidden
-     * Creates a new overlay and places it in the correct location.
-     */
-    private _createOverlay(): OverlayRef {
-        const overlayConfig = new OverlayConfig();
-
-        overlayConfig.positionStrategy = this._getPositionStrategy();
-        overlayConfig.panelClass = 'fn-toast-overlay';
-
-        return this.overlay.create(overlayConfig);
-    }
-
-    /**
      * Creates Toast Reference for provided container and overlay.
      * @param containerRef Container reference.
      * @param overlayRef Overlay Reference.
@@ -297,6 +191,82 @@ export abstract class BaseToastService<
         toastRef.containerInstance.enter();
     }
 
+    /**
+     * @hidden
+     * Creates a new overlay and places it in the correct location.
+     */
+    private _createOverlay(): OverlayRef {
+        const overlayConfig = new OverlayConfig();
+
+        overlayConfig.positionStrategy = this._getPositionStrategy();
+        overlayConfig.panelClass = 'fn-toast-overlay';
+
+        return this.overlay.create(overlayConfig);
+    }
+
+    /**
+     * @hidden
+     * @returns Initial Position Strategy of the Toast Overlay Reference.
+     */
+    private _getPositionStrategy(): PositionStrategy {
+        const lastOverlay = this._toasts.length > 0 ? this._toasts[this._toasts.length - 1] : null;
+
+        const globalOverlay = this._toasts.find(({ overlayRef }) => {
+            const config = overlayRef.getConfig();
+
+            return config.positionStrategy instanceof GlobalPositionStrategy;
+        });
+
+        if (lastOverlay && globalOverlay) {
+            return this._composeFlexibleConnectedPosition(lastOverlay.overlayRef.overlayElement);
+        }
+
+        return this._composeGlobalPosition();
+    }
+
+    /**
+     * @hidden
+     * @param connectedElm element to connect with.
+     * @returns Flexible Connected Position Strategy for Overlay Reference.
+     */
+    private _composeFlexibleConnectedPosition(connectedElm: HTMLElement): FlexibleConnectedPositionStrategy {
+        return this.overlay
+            .position()
+            .flexibleConnectedTo(connectedElm)
+            .withPush(false)
+            .withPositions([this.toastPositionStrategy.connected]);
+    }
+
+    /**
+     * @hidden
+     * @returns Default Global Position for Overlay Reference.
+     */
+    private _composeGlobalPosition(): GlobalPositionStrategy {
+        const globalPosition = this.overlay.position().global();
+
+        for (const [position, value] of Object.entries(this.toastPositionStrategy.global)) {
+            switch (position) {
+                case 'left':
+                    globalPosition.left(value);
+                    break;
+                case 'right':
+                    globalPosition.right(value);
+                    break;
+                case 'bottom':
+                    globalPosition.bottom(value);
+                    break;
+                case 'top':
+                    globalPosition.top(value);
+                    break;
+                case 'center':
+                    globalPosition.centerHorizontally();
+                    break;
+            }
+        }
+
+        return globalPosition;
+    }
+
     /** @hidden */
     private _refreshOverlayPositions(): void {
         this._toasts.forEach((toastRef) => {
@@ -308,5 +278,35 @@ export abstract class BaseToastService<
 
             return toastRef;
         });
+    }
+
+    /**
+     * @hidden
+     * Updates the position of a current Overlay Reference.
+     * @param overlay Overlay reference which position needs to be updated.
+     * @returns New Position Strategy.
+     */
+    private _updatePositionStrategy(overlay: OverlayRef): PositionStrategy {
+        const config = overlay.getConfig();
+
+        if (config.positionStrategy instanceof GlobalPositionStrategy) {
+            return this._composeGlobalPosition();
+        }
+
+        const globalOverlay = this._toasts.find(({ overlayRef }) => {
+            const overlayConfig = overlayRef.getConfig();
+
+            return overlayConfig.positionStrategy instanceof GlobalPositionStrategy;
+        });
+
+        if (!globalOverlay) {
+            return this._composeGlobalPosition();
+        }
+
+        // Get Previous overlay item.
+        const overlayItemIndex = this._toasts.findIndex(({ overlayRef }) => overlayRef === overlay);
+        const previousOverlay = this._toasts[overlayItemIndex - 1];
+
+        return this._composeFlexibleConnectedPosition(previousOverlay.overlayRef.overlayElement);
     }
 }

@@ -1,6 +1,6 @@
 import { AnimationEvent } from '@angular/animations';
 import { Directive, HostBinding, HostListener, NgZone, OnDestroy } from '@angular/core';
-import { Observable, take } from 'rxjs';
+import { take } from 'rxjs';
 import { BaseToastConfig } from './base-toast-config';
 import { BaseToastContainerComponent } from './base-toast-container.component';
 import { ToastContainerComponent } from '../interfaces/toast-container-component.interface';
@@ -25,9 +25,8 @@ export abstract class BaseToastAnimatedContainerComponent<P extends BaseToastCon
     }
 
     /** Begin animation of Message Toast removal. */
-    exit(): Observable<void> {
+    exit(): void {
         this._animationState = 'hidden';
-        return this.onExit$;
     }
 
     /** @hidden */
@@ -62,9 +61,13 @@ export abstract class BaseToastAnimatedContainerComponent<P extends BaseToastCon
      * errors where we end up removing an element which is in the middle of an animation.
      */
     private _completeExit(): void {
+        // Note: we shouldn't use `this` inside the zone callback,
+        // because it can cause a memory leak.
+        const onExit = this.onExit$;
+
         this._ngZone.onMicrotaskEmpty.pipe(take(1)).subscribe(() => {
-            this.onExit$.next();
-            this.onExit$.complete();
+            onExit.next();
+            onExit.complete();
         });
     }
 }

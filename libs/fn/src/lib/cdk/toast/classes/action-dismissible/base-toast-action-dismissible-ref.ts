@@ -23,6 +23,7 @@ export abstract class BaseToastActionDismissibleRef<T = any, P = any> extends Ba
     dismissWithAction(reason: string | null = null): void {
         if (!this.onAction$.closed) {
             this.dismissedByAction = true;
+
             this.onAction$.next(reason);
             this.onAction$.complete();
         }
@@ -33,11 +34,12 @@ export abstract class BaseToastActionDismissibleRef<T = any, P = any> extends Ba
         return this.onAction$;
     }
 
-    finishDismiss(): void {
+    /** Cleans up the DOM after closing. */
+    protected _finishDismiss(): void {
         if (!this.onAction$.closed) {
             this.onAction$.complete();
         }
 
-        super.finishDismiss();
+        super._finishDismiss();
     }
 }

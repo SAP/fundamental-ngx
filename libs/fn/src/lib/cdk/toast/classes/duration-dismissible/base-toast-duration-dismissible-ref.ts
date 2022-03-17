@@ -22,9 +22,9 @@ export abstract class BaseToastDurationDismissibleRef<T = any, P = any> extends 
 
     /** Dismisses the toast and clears the timeout. */
     dismiss(): void {
-        super.dismiss();
-
         clearTimeout(this.durationTimeoutId);
+
+        super.dismiss();
     }
 
     /** Dismisses the Toast component after some duration */

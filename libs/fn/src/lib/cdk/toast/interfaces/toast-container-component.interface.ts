@@ -1,7 +1,7 @@
 import { OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 import { ComponentRef, EmbeddedViewRef } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 export interface ToastContainerComponent<P> {
     config: P;
@@ -9,7 +9,7 @@ export interface ToastContainerComponent<P> {
     readonly onEnter$: Subject<void>;
     overlayRef: OverlayRef;
     enter(): void;
-    exit(): Observable<void>;
+    exit(): void;
     attachComponentPortal<T>(portal: ComponentPortal<T>): ComponentRef<T>;
     attachTemplatePortal<C>(portal: TemplatePortal<C>): EmbeddedViewRef<C>;
 }
