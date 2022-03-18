@@ -131,6 +131,7 @@
             "@fundamental-ngx/fn/form": ["libs/fn/src/lib/form/index.ts"],
             "@fundamental-ngx/fn/generic-tag": ["libs/fn/src/lib/generic-tag/index.ts"],
             "@fundamental-ngx/fn/info-label": ["libs/fn/src/lib/info-label/index.ts"],
+            "@fundamental-ngx/fn/input": ["libs/fn/src/lib/input/index.ts"],
             "@fundamental-ngx/fn/list": ["libs/fn/src/lib/list/index.ts"],
             "@fundamental-ngx/fn/message-strip": ["libs/fn/src/lib/message-strip/index.ts"],
             "@fundamental-ngx/fn/object-status": ["libs/fn/src/lib/object-status/index.ts"],
