@@ -6,7 +6,7 @@ import { BaseColorInput } from '@fundamental-ngx/platform/shared';
     templateUrl: './color-picker.component.html',
     encapsulation: ViewEncapsulation.ShadowDom
 })
-export class PlatformColorPickerComponent extends BaseColorInput {
+export class ColorPickerComponent extends BaseColorInput {
     /** @hidden */
     colorChange(event: any): void {
         this.value = event.target.valueOf().color;
