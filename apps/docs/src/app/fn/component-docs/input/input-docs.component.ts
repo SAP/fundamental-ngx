@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import formHtml from '!./examples/input-example.component.html?raw';
-import formStateHtml from '!./examples/input-state-example.component.html?raw';
-import formGroupInputHtml from '!./examples/input-form-group-example.component.html?raw';
-import formGroupInputTs from '!./examples/input-form-group-example.component.ts?raw';
-import formGroupInputScss from '!./examples/input-form-group-example.component.scss?raw';
+import inputHtml from '!./examples/input-example.component.html?raw';
+import StateHtml from '!./examples/input-state-example.component.html?raw';
+import FormHtml from '!./examples/input-form-example.component.html?raw';
+import FormTs from '!./examples/input-form-example.component.ts?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -11,34 +10,33 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     templateUrl: './input-docs.component.html'
 })
 export class InputDocsComponent {
-    inputsFormHtml: ExampleFile[] = [
+    inputsHtml: ExampleFile[] = [
         {
             language: 'html',
-            code: formHtml,
+            code: inputHtml,
             fileName: 'input-example'
         }
     ];
 
-    inputStatesFormHtml: ExampleFile[] = [
+    inputStatesHtml: ExampleFile[] = [
         {
             language: 'html',
-            code: formStateHtml,
+            code: StateHtml,
             fileName: 'input-state-example'
         }
     ];
 
-    formGroupInput: ExampleFile[] = [
+    inputFormsHtml: ExampleFile[] = [
         {
             language: 'html',
-            code: formGroupInputHtml,
-            fileName: 'input-form-group-example',
-            scssFileCode: formGroupInputScss
+            code: FormHtml,
+            fileName: 'input-form-example'
         },
         {
             language: 'typescript',
-            code: formGroupInputTs,
-            fileName: 'input-form-group-example',
-            component: 'InputFormGroupExampleComponent'
+            code: FormTs,
+            fileName: 'input-form-example',
+            component: 'InputFormExampleComponent'
         }
     ];
 }

@@ -19,6 +19,7 @@ import { ObjectStatusModule } from '@fundamental-ngx/fn/object-status';
 import { AvatarModule } from '@fundamental-ngx/fn/avatar';
 import { InfoLabelModule } from '@fundamental-ngx/fn/info-label';
 import { MessageStripModule } from '@fundamental-ngx/fn/message-strip';
+import { InputModule } from '@fundamental-ngx/fn/input';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -40,7 +41,8 @@ import { MessageStripModule } from '@fundamental-ngx/fn/message-strip';
         MessageStripModule,
         ObjectStatusModule,
         InfoLabelModule,
-        ListModule
+        ListModule,
+        InputModule
     ],
     providers: []
 })

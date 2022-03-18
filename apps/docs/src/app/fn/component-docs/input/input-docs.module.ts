@@ -4,10 +4,11 @@ import { ApiComponent } from '../../../documentation/core-helpers/api/api.compon
 import { API_FILES } from '../../api-files';
 import { InputHeaderComponent } from './input-header/input-header.component';
 import { InputDocsComponent } from './input-docs.component';
-import { InputFormGroupExampleComponent } from './examples/input-form-group-example.component';
 import { InputExampleComponent, InputStateExampleComponent } from './examples/input-examples.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
-import { FormModule } from '@fundamental-ngx/fn/form';
+import { InputModule } from '@fundamental-ngx/fn/input';
+import { DisabledBehaviorModule, ReadonlyBehaviorModule } from '@fundamental-ngx/fn/cdk';
+import { InputFormExampleComponent } from './examples/input-form-example.component';
 
 const routes: Routes = [
     {
@@ -21,14 +22,20 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, FormModule],
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        InputModule,
+        ReadonlyBehaviorModule,
+        DisabledBehaviorModule
+    ],
     exports: [RouterModule],
     declarations: [
         InputDocsComponent,
         InputHeaderComponent,
         InputExampleComponent,
         InputStateExampleComponent,
-        InputFormGroupExampleComponent
+        InputFormExampleComponent
     ]
 })
 export class InputDocsModule {}
