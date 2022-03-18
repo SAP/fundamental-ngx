@@ -10,9 +10,7 @@ import { PlatformColorPalettePopoverSimpleExampleComponent } from './platform-co
 import { PlatformColorPalettePopoverComplexExampleComponent } from './platform-color-palette-popover-examples/platform-color-palette-popover-complex-example.component';
 
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
-import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 import { PlatformColorPalettePopoverModule } from '@fundamental-ngx/platform/color-palette-popover';
-import { PlatformActionButtonGroupModule } from '@fundamental-ngx/platform/action-button-group';
 
 const routes: Routes = [
     {
@@ -30,9 +28,7 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
         PlatformColorPalettePopoverModule,
-        PlatformButtonModule,
-        PlatformMenuModule,
-        PlatformActionButtonGroupModule
+        PlatformButtonModule
     ],
     exports: [RouterModule],
     declarations: [

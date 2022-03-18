@@ -11,9 +11,7 @@ import {
     PlatformColorPaletteComplexExampleComponent
 } from './platform-color-palette-examples/platform-color-palette-examples.component';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
-import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 import { PlatformColorPaletteModule } from '@fundamental-ngx/platform/color-palette';
-import { PlatformActionButtonGroupModule } from '@fundamental-ngx/platform/action-button-group';
 
 const routes: Routes = [
     {
@@ -31,9 +29,7 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
         PlatformColorPaletteModule,
-        PlatformButtonModule,
-        PlatformMenuModule,
-        PlatformActionButtonGroupModule
+        PlatformButtonModule
     ],
     exports: [RouterModule],
     declarations: [
