@@ -1,31 +1,11 @@
-import {
-    AfterViewInit,
-    ChangeDetectorRef,
-    Directive,
-    ElementRef,
-    EventEmitter,
-    Host,
-    HostListener,
-    Input,
-    OnDestroy,
-    Optional,
-    Output,
-    Self,
-    SkipSelf
-} from '@angular/core';
-import { BaseInput } from './base.input';
-import { FormField } from './form-field';
-import { FormFieldControl } from './form-control';
-import { NgControl, NgForm } from '@angular/forms';
+import { AfterViewInit, Directive, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
+import { BaseWebComponentInputWrapper } from './base-web-component-input-wrapper';
 
 /**
  * Abstract class used by color-related input components.
  */
 @Directive()
-export abstract class BaseColorInput extends BaseInput implements AfterViewInit, OnDestroy {
-    /** @hidden */
-    _value: string;
-
+export abstract class BaseColorInput extends BaseWebComponentInputWrapper implements AfterViewInit, OnDestroy {
     /**
      * selects the default color of the component
      */
@@ -54,12 +34,6 @@ export abstract class BaseColorInput extends BaseInput implements AfterViewInit,
     @Output()
     readonly itemClick = new EventEmitter<Event>();
 
-    /** @hidden */
-    @HostListener('click')
-    onClick(): void {
-        this.onTouched();
-    }
-
     // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('color')
     get value(): string {
@@ -69,39 +43,6 @@ export abstract class BaseColorInput extends BaseInput implements AfterViewInit,
         this._value = colorValue;
         this.onChange(colorValue);
         this.onTouched();
-    }
-
-    /** @hidden */
-    onFocus(): void {
-        this.onTouched();
-    }
-
-    constructor(
-        protected _changeDetectorRef: ChangeDetectorRef,
-        @Optional() @Self() public ngControl: NgControl,
-        @Optional() @Self() public ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
-        private _wcElRef: ElementRef
-    ) {
-        super(_changeDetectorRef, ngControl, ngForm, formField, formControl);
-    }
-
-    /** @hidden */
-    ngAfterViewInit(): void {
-        super.ngAfterViewInit();
-        if (this._contentDensityService) {
-            this._contentDensityService.handleWebComponentContentDensity(
-                this._wcElRef.nativeElement.classList,
-                this._subscriptions
-            );
-        }
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        super.ngOnDestroy();
-        this._subscriptions.unsubscribe();
     }
 
     /** @hidden */

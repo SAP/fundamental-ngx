@@ -1,5 +1,6 @@
 export * from './base.input';
 export * from './base-color.input';
+export * from './base-web-component-input-wrapper';
 export * from './collection-base.input';
 export * from './form-control';
 export * from './form-field';
