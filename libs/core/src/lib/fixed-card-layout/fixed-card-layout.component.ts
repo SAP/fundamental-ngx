@@ -22,7 +22,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { FocusKeyManager } from '@angular/cdk/a11y';
-import { CdkDragDrop, CdkDragEnter, CdkDragSortEvent, CdkDropList } from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragDrop, CdkDragEnter, CdkDragSortEvent, CdkDropList } from '@angular/cdk/drag-drop';
 import { Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
@@ -30,6 +30,7 @@ import { resizeObservable, RtlService } from '@fundamental-ngx/core/utils';
 import { FixedCardLayoutItemComponent } from './fixed-card-layout-item/fixed-card-layout-item.component';
 import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
 
+const PX_IN_REM = 16;
 const CARD_MINIMUM_WIDTH = 320; // 320px = 20rem, max card width
 const CARD_GAP_WIDTH = 16; // 16px = 1rem
 const DRAG_START_DELAY = 200; // in ms
@@ -157,11 +158,22 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     _singleItemColumns = new Set<number>();
 
     /** @hidden */
-    _isPlaceholderAboveCard = false;
+    _isPlaceholderAboveCard: boolean = null;
 
     /** @hidden Return available width for fixed card layout */
     get _availableWidth(): number {
         return this._layout.nativeElement.getBoundingClientRect().width;
+    }
+
+    /** @hidden */
+    get _placeholderMargin(): { [klass: string]: string } {
+        if (this._isPlaceholderAboveCard == null) {
+            return {};
+        } else if (this._isPlaceholderAboveCard) {
+            return { 'margin-bottom': '1rem' };
+        } else {
+            return { 'margin-top': '1rem' };
+        }
     }
 
     /** @hidden */
@@ -244,7 +256,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     }
 
     /** @hidden Calculate container height basing on the card wrapper columns */
-    _calculateContainerHeight(): void {
+    _calculateContainerHeight(additionalSpace: number = 0): void {
         const wrapperColumns = this._cardColumns.map((column) =>
             column.map(
                 (card) => this._cardWrappers.find((wrapper) => wrapper.getSortedItems()[0].data === card).element
@@ -255,23 +267,33 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
             .map((column) => column.map((card) => card.nativeElement.getBoundingClientRect().height))
             .map((column) => column.reduce((height, cardHeight) => (height += cardHeight)));
 
-        // +4 because it's the top & bottom borders of card placeholder (0,125rem * 2)
-        this._containerHeight = Math.max(...columnsHeights) + 4;
+        // +4px because it's the top & bottom borders of card placeholder
+        this._containerHeight = Math.max(...columnsHeights) + 4 + additionalSpace;
 
         this._changeDetector.detectChanges();
     }
 
     /** @hidden */
-    _enterPredicate = (): boolean => {
+    _enterPredicate = (_: CdkDrag, drop: CdkDropList): boolean => {
         // We should update container's height & its children rects (to react when drag moves into the list) before we entered any drop list.
         // That's why it's done here instead of cdkDropListEntered. As this predicate being called many times here is the optimization.
         if (this._shouldCalculateContainerHeight) {
-            this._calculateContainerHeight();
             this._shouldCalculateContainerHeight = false;
+
+            // Placeholder doesn't have margin set yet but we need to count it
+            // Margin will be set only if there are already items in container
+            const additionalSpace = drop.getSortedItems().length ? PX_IN_REM : 0;
+
+            this._calculateContainerHeight(additionalSpace);
         }
 
         return true;
     };
+
+    /** @hidden */
+    _onDragStarted(): void {
+        this._isPlaceholderAboveCard = null;
+    }
 
     /** @hidden */
     _onDropListExited(): void {
@@ -280,9 +302,16 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
 
     /** @hidden */
     _onDropListSorted(event: CdkDragSortEvent | CdkDragEnter): void {
-        // Every card is the drag'n'drop container and always has only one item
-        // If card moved into the container above the card, placeholder should have margin bottom
-        // Otherwise placeholder should have margin top
+        const containerItemCardDef = (event.container.getSortedItems()[0].data as CardDefinitionDirective).fdCardDef;
+        const dragItemCardDef = (event.item.data as CardDefinitionDirective).fdCardDef;
+
+        // If card moved to its original container don't add the margin for the placeholder
+        if (containerItemCardDef === dragItemCardDef) {
+            this._isPlaceholderAboveCard = null;
+            return;
+        }
+
+        // If card moved into the container above the card, set margin-top for the placeholder, otherwise set margin-bottom
         this._isPlaceholderAboveCard = event.currentIndex === 0;
     }
 

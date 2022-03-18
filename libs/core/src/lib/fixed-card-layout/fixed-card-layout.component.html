@@ -34,17 +34,13 @@
             [itemIndex]="_itemIndexes.get(card.fdCardDef)"
             [groupIndex]="_groupIndexes.get(card.fdCardDef)"
             (cdkDragDropped)="_onDragDropped($event)"
+            (cdkDragStarted)="_onDragStarted()"
         >
             <fd-fixed-card-layout-item>
                 <ng-container *ngTemplateOutlet="card?.template"> </ng-container>
             </fd-fixed-card-layout-item>
 
-            <div
-                *cdkDragPlaceholder
-                class="fd-fixed-card-layout__card-placeholder"
-                [style.margin-bottom]="_isPlaceholderAboveCard ? '1rem' : 0"
-                [style.margin-top]="_isPlaceholderAboveCard ? 0 : '1rem'"
-            >
+            <div *cdkDragPlaceholder class="fd-fixed-card-layout__card-placeholder" [style]="_placeholderMargin">
                 <ng-container *ngTemplateOutlet="card?.template"></ng-container>
             </div>
         </div>
