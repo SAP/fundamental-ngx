@@ -245,7 +245,9 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
         fromEvent(element, 'scroll')
             .pipe(debounceTime(10), takeUntil(this._onDestroy$))
             .subscribe(() => {
-                const collapse = !this._dynamicPageService.pinned.value && element.scrollTop > 0;
+                const collapse =
+                    !this._dynamicPageService.pinned.value &&
+                    (element.scrollTop > 0 || element.scrollHeight <= element.clientHeight);
                 this._dynamicPageService.collapsed.next(collapse);
             });
     }
