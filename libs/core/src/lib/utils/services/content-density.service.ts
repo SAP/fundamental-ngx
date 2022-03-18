@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, map, startWith } from 'rxjs/operators';
 import { isCompactDensity } from '../functions/is-compact-density';
 
@@ -27,5 +27,19 @@ export class ContentDensityService {
     /** @hidden */
     get _isCompactDensity(): Observable<boolean> {
         return this._contentDensityListener.pipe(map((density) => isCompactDensity(density)));
+    }
+
+    /** @hidden */
+    handleWebComponentContentDensity(classList: DOMTokenList, subscriptions: Subscription): void {
+        if (this._isCompactDensity) {
+            classList.add('ui5-content-density-compact');
+        }
+        subscriptions.add(
+            this.contentDensity.subscribe((density) => {
+                isCompactDensity(density)
+                    ? classList.add('ui5-content-density-compact')
+                    : classList.remove('ui5-content-density-compact');
+            })
+        );
     }
 }

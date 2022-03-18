@@ -6,10 +6,12 @@ import simpleColorPalettePopoverTS from '!./platform-color-palette-popover-examp
 import complexColorPalettePopoverHtml from '!./platform-color-palette-popover-examples/platform-color-palette-popover-complex-example.component.html?raw';
 import complexColorPalettePopoverTS from '!./platform-color-palette-popover-examples/platform-color-palette-popover-complex-example.component.ts?raw';
 
+import reactiveColorPalettePopoverHtml from '!./platform-color-palette-popover-examples/platform-color-palette-popover-reactive-form-example.component.html?raw';
+import reactiveColorPalettePopoverTS from '!./platform-color-palette-popover-examples/platform-color-palette-popover-reactive-form-example.component.ts?raw';
+
 @Component({
     selector: 'app-platform-color-palette-popover',
-    templateUrl: './platform-color-palette-popover-docs.component.html',
-    styleUrls: ['./platform-color-palette-popover-docs.component.scss']
+    templateUrl: './platform-color-palette-popover-docs.component.html'
 })
 export class PlatformColorPalettePopoverDocsComponent {
     simpleColorPalettePopover: ExampleFile[] = [
@@ -37,6 +39,20 @@ export class PlatformColorPalettePopoverDocsComponent {
             component: 'PlatformColorPaletteComplexExampleComponent',
             code: complexColorPalettePopoverTS,
             fileName: 'platform-color-palette-popover-complex-example'
+        }
+    ];
+
+    reactiveColorPalettePopover: ExampleFile[] = [
+        {
+            language: 'html',
+            code: reactiveColorPalettePopoverHtml,
+            fileName: 'platform-color-palette-popover-reactive-example'
+        },
+        {
+            language: 'typescript',
+            component: 'PlatformColorPalettereactiveExampleComponent',
+            code: reactiveColorPalettePopoverTS,
+            fileName: 'platform-color-palette-popover-reactive-example'
         }
     ];
 }

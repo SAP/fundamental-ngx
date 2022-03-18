@@ -1,6 +1,11 @@
 <fdp-color-picker
+    #colorPicker
     [color]="'rgba(127, 17, 224, 1)'"
     (change)="colorChanged($event)"
-    id="fdp-id-reactive"
+    id="fdp-id"
     name="input1"
 ></fdp-color-picker>
+<br />
+<p>
+    <i>Selected Color: {{ colorPicker.value }}</i>
+</p>

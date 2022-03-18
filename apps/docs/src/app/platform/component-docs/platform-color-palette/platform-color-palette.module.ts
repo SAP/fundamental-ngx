@@ -12,6 +12,7 @@ import {
 } from './platform-color-palette-examples/platform-color-palette-examples.component';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformColorPaletteModule } from '@fundamental-ngx/platform/color-palette';
+import { PlatformColorPaletteReactiveFormExampleComponent } from './platform-color-palette-examples/platform-color-palette-reactive-form-example.component';
 
 const routes: Routes = [
     {
@@ -36,7 +37,8 @@ const routes: Routes = [
         PlatformColorPaletteDocsComponent,
         PlatformColorPaletteHeaderComponent,
         PlatformColorPaletteSimpleExampleComponent,
-        PlatformColorPaletteComplexExampleComponent
+        PlatformColorPaletteComplexExampleComponent,
+        PlatformColorPaletteReactiveFormExampleComponent
     ]
 })
 export class PlatformColorPaletteDocsModule {}

@@ -11,6 +11,7 @@ import { PlatformColorPalettePopoverComplexExampleComponent } from './platform-c
 
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformColorPalettePopoverModule } from '@fundamental-ngx/platform/color-palette-popover';
+import { PlatformColorPalettePopoverReactiveFormExampleComponent } from './platform-color-palette-popover-examples/platform-color-palette-popover-reactive-form-example.component';
 
 const routes: Routes = [
     {
@@ -35,7 +36,8 @@ const routes: Routes = [
         PlatformColorPalettePopoverDocsComponent,
         PlatformColorPalettePopoverHeaderComponent,
         PlatformColorPalettePopoverSimpleExampleComponent,
-        PlatformColorPalettePopoverComplexExampleComponent
+        PlatformColorPalettePopoverComplexExampleComponent,
+        PlatformColorPalettePopoverReactiveFormExampleComponent
     ]
 })
 export class PlatformColorPalettePopoverDocsModule {}

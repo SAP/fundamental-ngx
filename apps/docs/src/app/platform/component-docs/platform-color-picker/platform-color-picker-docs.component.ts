@@ -7,8 +7,7 @@ import reactiveColorPickerTs from '!./platform-color-picker-examples/platform-co
 
 @Component({
     selector: 'app-platform-color-picker',
-    templateUrl: './platform-color-picker-docs.component.html',
-    styleUrls: ['./platform-color-picker-docs.component.scss']
+    templateUrl: './platform-color-picker-docs.component.html'
 })
 export class PlatformColorPickerDocsComponent {
     simpleColorPicker: ExampleFile[] = [

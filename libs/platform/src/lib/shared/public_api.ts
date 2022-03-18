@@ -15,6 +15,7 @@ export * from './domain/data-source';
 export * from './domain/observable-data-source';
 
 export * from './form/base.input';
+export * from './form/base-color.input';
 export * from './form/collection-base.input';
 export * from './form/form-control';
 export * from './form/form-field';

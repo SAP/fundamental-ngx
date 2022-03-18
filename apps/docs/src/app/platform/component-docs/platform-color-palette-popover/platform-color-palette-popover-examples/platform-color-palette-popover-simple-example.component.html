@@ -1,5 +1,5 @@
 <fdp-button label="Open ColorPalettePopover" (buttonClicked)="openPopover($event)"></fdp-button>
-<fdp-color-palette-popover #colorPalettePopover buttonLabel="Open SimpleColorPalette">
+<fdp-color-palette-popover #colorPalettePopover buttonLabel="Open SimpleColorPalette" id="fdp-id-1" name="input1">
     <ui5-color-palette-item fdp-color-palette-item value="darkblue"></ui5-color-palette-item>
     <ui5-color-palette-item fdp-color-palette-item value="pink"></ui5-color-palette-item>
     <ui5-color-palette-item fdp-color-palette-item value="#444444"></ui5-color-palette-item>
@@ -15,5 +15,5 @@
 </fdp-color-palette-popover>
 <br />
 <p>
-    <i>Selected Color: {{ colorPalettePopover.selectedColor }}</i>
+    <i>Selected Color: {{ colorPalettePopover.value }}</i>
 </p>
