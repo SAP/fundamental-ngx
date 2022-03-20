@@ -22,7 +22,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { FocusKeyManager } from '@angular/cdk/a11y';
-import { CdkDrag, CdkDragDrop, CdkDragEnter, CdkDragSortEvent, CdkDropList } from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragDrop, CdkDragEnter, CdkDropList } from '@angular/cdk/drag-drop';
 import { Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
@@ -157,24 +157,13 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     /** @hidden first number is the CardDefinition rank, i.e. id */
     _singleItemColumns = new Set<number>();
 
-    /** @hidden */
-    _isPlaceholderAboveCard: boolean = null;
-
     /** @hidden Return available width for fixed card layout */
     get _availableWidth(): number {
         return this._layout.nativeElement.getBoundingClientRect().width;
     }
 
     /** @hidden */
-    get _placeholderMargin(): { [klass: string]: string } {
-        if (this._isPlaceholderAboveCard == null) {
-            return {};
-        } else if (this._isPlaceholderAboveCard) {
-            return { 'margin-bottom': '1rem' };
-        } else {
-            return { 'margin-top': '1rem' };
-        }
-    }
+    _placeholderMargin: { [klass: string]: string };
 
     /** @hidden */
     private _previousNumberOfColumns: number;
@@ -257,6 +246,8 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
 
     /** @hidden Calculate container height basing on the card wrapper columns */
     _calculateContainerHeight(additionalSpace: number = 0): void {
+        this._changeDetector.detectChanges();
+
         const wrapperColumns = this._cardColumns.map((column) =>
             column.map(
                 (card) => this._cardWrappers.find((wrapper) => wrapper.getSortedItems()[0].data === card).element
@@ -265,7 +256,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
 
         const columnsHeights = wrapperColumns
             .map((column) => column.map((card) => card.nativeElement.getBoundingClientRect().height))
-            .map((column) => column.reduce((height, cardHeight) => (height += cardHeight)));
+            .map((column) => column.reduce((height, cardHeight) => (height += cardHeight), 0));
 
         // +4px because it's the top & bottom borders of card placeholder
         this._containerHeight = Math.max(...columnsHeights) + 4 + additionalSpace;
@@ -291,28 +282,16 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     };
 
     /** @hidden */
-    _onDragStarted(): void {
-        this._isPlaceholderAboveCard = null;
-    }
-
-    /** @hidden */
     _onDropListExited(): void {
         this._shouldCalculateContainerHeight = true;
     }
 
     /** @hidden */
-    _onDropListSorted(event: CdkDragSortEvent | CdkDragEnter): void {
+    _onDropListEntered(event: CdkDragEnter): void {
         const containerItemCardDef = (event.container.getSortedItems()[0].data as CardDefinitionDirective).fdCardDef;
         const dragItemCardDef = (event.item.data as CardDefinitionDirective).fdCardDef;
 
-        // If card moved to its original container don't add the margin for the placeholder
-        if (containerItemCardDef === dragItemCardDef) {
-            this._isPlaceholderAboveCard = null;
-            return;
-        }
-
-        // If card moved into the container above the card, set margin-top for the placeholder, otherwise set margin-bottom
-        this._isPlaceholderAboveCard = event.currentIndex === 0;
+        this._setPlaceholderStyle(containerItemCardDef !== dragItemCardDef);
     }
 
     /** @hidden */
@@ -368,6 +347,11 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
 
         this._processDragDrop(indexFromArray, indexToArray, movedCard, replacedCard);
     };
+
+    /** @hidden */
+    _setPlaceholderStyle(value: boolean): void {
+        this._placeholderMargin = value ? { 'margin-bottom': '1rem' } : {};
+    }
 
     /** @hidden Arranges cards on drop of dragged card */
     private _processDragDrop(
