@@ -113,7 +113,7 @@
                                 (keyup.enter)="_columnHeaderSortBy(column.key, SORT_DIRECTION.ASC)"
                             >
                                 <span fd-list-icon glyph="sort-ascending"></span>
-                                <span fd-list-title i18n="@@platformTableHeaderMenuSortAsc">Sort Ascending</span>
+                                <span fd-list-title>{{ 'platformTable.headerMenuSortAsc' | fdTranslate }}</span>
                             </li>
                             <li
                                 class="fd-table__item--clickable"
@@ -122,7 +122,7 @@
                                 (keyup.enter)="_columnHeaderSortBy(column.key, SORT_DIRECTION.DESC)"
                             >
                                 <span fd-list-icon glyph="sort-descending"></span>
-                                <span fd-list-title i18n="@@platformTableHeaderMenuSortDesc">Sort Descending</span>
+                                <span fd-list-title>{{ 'platformTable.headerMenuSortDesc' | fdTranslate }}</span>
                             </li>
                         </ng-container>
 
@@ -135,7 +135,7 @@
                                 (keyup.enter)="_columnHeaderGroupBy(column.key)"
                             >
                                 <span fd-list-icon></span>
-                                <span fd-list-title i18n="@@platformTableHeaderMenuGroup">Group</span>
+                                <span fd-list-title>{{ 'platformTable.headerMenuGroup' | fdTranslate }}</span>
                             </li>
                         </ng-container>
 
@@ -149,7 +149,7 @@
                                 (keyup.enter)="freezeToColumn(column.name)"
                             >
                                 <span></span>
-                                <span fd-list-title i18n="@@platformTableHeaderMenuFreeze">Freeze</span>
+                                <span fd-list-title>{{ 'platformTable.headerMenuFreeze' | fdTranslate }}</span>
                             </li>
                             <ng-template #unfreezeTpl>
                                 <li
@@ -159,7 +159,7 @@
                                     (keyup.enter)="unfreeze(column.name)"
                                 >
                                     <span></span>
-                                    <span fd-list-title i18n="@@platformTableHeaderMenuUnfreeze">Unfreeze</span>
+                                    <span fd-list-title>{{ 'platformTable.headerMenuUnfreeze' | fdTranslate }}</span>
                                 </li>
                             </ng-template>
                         </ng-container>
@@ -169,12 +169,9 @@
                             <li fd-list-item>
                                 <i fd-list-icon glyph="filter"></i>
                                 <div fd-form-item [horizontal]="true" (click)="$event.stopPropagation()">
-                                    <label
-                                        fd-form-label
-                                        [for]="'fdp-table-column-filtering-' + column.name"
-                                        i18n="@@platformTableHeaderMenuFilter"
-                                        >Filter</label
-                                    >
+                                    <label fd-form-label [for]="'fdp-table-column-filtering-' + column.name">{{
+                                        'platformTable.headerMenuFilter' | fdTranslate
+                                    }}</label>
                                     <input
                                         fd-form-control
                                         [compact]="contentDensity | isCompactDensity"
@@ -479,7 +476,7 @@
                         <div
                             *ngIf="!noDataWrapper.hasChildNodes()"
                             i18n="@@platformTableEmptyMessage"
-                            [innerText]="emptyTableMessage"
+                            [innerText]="emptyTableMessage || ('platformTable.defaultEmptyMessage' | fdTranslate)"
                         ></div>
                     </ng-container>
                 </div>

@@ -132,6 +132,7 @@
             "@fundamental-ngx/fn/switch": ["libs/fn/src/lib/switch/index.ts"],
             "@fundamental-ngx/fn/tabs": ["libs/fn/src/lib/tabs/index.ts"],
             "@fundamental-ngx/fn/tag": ["libs/fn/src/lib/tag/index.ts"],
+            "@fundamental-ngx/i18n": ["libs/i18n/src/index.ts"],
             "@fundamental-ngx/moment-adapter": ["libs/moment-adapter/src/index.ts"],
             "@fundamental-ngx/platform": ["libs/platform/src/lib/index.ts"],
             "@fundamental-ngx/platform/action-bar": ["libs/platform/src/lib/action-bar/index.ts"],

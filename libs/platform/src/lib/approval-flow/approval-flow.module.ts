@@ -36,6 +36,7 @@ import { ApprovalFlowAddNodeViewService } from './services/approval-flow-add-nod
 import { ApprovalFlowSelectTypeComponent } from './approval-flow-select-type/approval-flow-select-type.component';
 import { ApprovalFlowMessagesComponent } from './approval-flow-messages/approval-flow-messages.component';
 import { ApprovalFlowToolbarActionsComponent } from './approval-flow-toolbar-actions/approval-flow-toolbar-actions.component';
+import { I18nModule } from '@fundamental-ngx/i18n';
 
 @NgModule({
     declarations: [
@@ -73,6 +74,7 @@ import { ApprovalFlowToolbarActionsComponent } from './approval-flow-toolbar-act
         MultiInputModule,
         MessageStripModule,
         CheckboxModule,
+        I18nModule,
         MenuModule,
         SelectModule,
         DatePickerModule,

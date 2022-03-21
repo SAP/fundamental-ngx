@@ -1,46 +1,44 @@
 <fd-dialog>
     <fd-dialog-header>
         <ng-template fdTemplate="header">
-            <p i18n="@@platformApprovalFlowSelectTypeDialogMoveApproverAs">Move approver as</p>
+            <p>{{ 'platformApprovalFlow.selectTypeDialogMoveApproverAs' | fdTranslate }}</p>
         </ng-template>
     </fd-dialog-header>
 
     <fd-dialog-body>
-        <span class="fd-form-label" i18n="@@platformApprovalFlowSelectTypeDialogParallelOrSerial">
-            Parallel or serial
+        <span class="fd-form-label">
+            {{ 'platformApprovalFlow.selectTypeDialogParallelOrSerial' | fdTranslate }}
         </span>
 
         <fd-form-group class="fdp-approval-flow-select-type__form">
             <div fd-form-item>
                 <fd-radio-button
-                    i18n="@@platformApprovalFlowSelectTypeDialogNodeTypeParallel"
                     [value]="_nodeTypes.PARALLEL"
                     [(ngModel)]="_nodeType"
                     [compact]="true"
                     id="select-type-parallel"
                     name="select-type-parallel"
                 >
-                    Parallel approver
+                    {{ 'platformApprovalFlow.selectTypeDialogNodeTypeParallel' | fdTranslate }}
                 </fd-radio-button>
             </div>
 
             <div fd-form-item>
                 <fd-radio-button
-                    i18n="@@platformApprovalFlowSelectTypeDialogNodeTypeSerial"
                     [value]="_nodeTypes.SERIAL"
                     [(ngModel)]="_nodeType"
                     [compact]="true"
                     id="select-type-serial"
                     name="select-type-serial"
                 >
-                    Serial approver
+                    {{ 'platformApprovalFlow.selectTypeDialogNodeTypeSerial' | fdTranslate }}
                 </fd-radio-button>
             </div>
 
             <div *ngIf="_nodeType === _nodeTypes.PARALLEL" fd-form-item>
-                <fd-checkbox [(ngModel)]="_toNextSerial" i18n="@@platformApprovalFlowAddToNext"
-                    >Add to the next serial node</fd-checkbox
-                >
+                <fd-checkbox [(ngModel)]="_toNextSerial">
+                    {{ 'platformApprovalFlow.addNodeDialogAddToNext' | fdTranslate }}
+                </fd-checkbox>
             </div>
         </fd-form-group>
     </fd-dialog-body>
@@ -52,8 +50,7 @@
                     fd-button
                     fd-dialog-decisive-button
                     fdType="emphasized"
-                    i18n-label="@@platformApprovalFlowSelectTypeDialogConfirm"
-                    label="Confirm"
+                    [label]="'platformApprovalFlow.selectTypeDialogConfirmButton' | fdTranslate"
                     [compact]="true"
                     (click)="_submit()"
                 ></button>
@@ -65,8 +62,7 @@
                     fd-initial-focus
                     fd-dialog-decisive-button
                     fdType="transparent"
-                    i18n-label="@@platformApprovalFlowSelectTypeDialogCancel"
-                    label="Cancel"
+                    [label]="'platformApprovalFlow.selectTypeDialogCancelButton' | fdTranslate"
                     [compact]="true"
                     (click)="_dialogRef.close()"
                 ></button>

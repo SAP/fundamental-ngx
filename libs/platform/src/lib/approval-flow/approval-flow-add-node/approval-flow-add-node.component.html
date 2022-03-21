@@ -2,25 +2,16 @@
     <fd-dialog-header [class.show-search]="_selectMode && !_userToShowDetails">
         <ng-template fdTemplate="header">
             <p>
-                <ng-container
-                    *ngIf="!_selectMode && !_data.isEdit"
-                    i18n="@@platformApprovalFlowAddNodeDialogAddApprovers"
-                >
-                    Add approvers
+                <ng-container *ngIf="!_selectMode && !_data.isEdit">
+                    {{ 'platformApprovalFlow.addNodeDialogHeaderAddApprovers' | fdTranslate }}
                 </ng-container>
 
-                <ng-container
-                    *ngIf="!_selectMode && _data.isEdit"
-                    i18n="@@platformApprovalFlowAddNodeDialogEditApprover"
-                >
-                    Edit approver
+                <ng-container *ngIf="!_selectMode && _data.isEdit">
+                    {{ 'platformApprovalFlow.addNodeDialogHeaderEditApprover' | fdTranslate }}
                 </ng-container>
 
-                <ng-container
-                    *ngIf="viewService.isSelectUserMode || viewService.isSelectTeamMode"
-                    i18n="@@platformApprovalFlowAddNodeDialogAddApproverTeam"
-                >
-                    User/Team
+                <ng-container *ngIf="viewService.isSelectUserMode || viewService.isSelectTeamMode">
+                    {{ 'platformApprovalFlow.addNodeDialogHeaderAddApproverTeam' | fdTranslate }}
                 </ng-container>
 
                 <ng-container *ngIf="viewService.isTeamMembersMode">
@@ -30,14 +21,13 @@
 
                 <ng-container *ngIf="viewService.isUserDetailsMode">
                     <fd-icon [glyph]="_headerArrowGlyph" (click)="_exitUserDetailsMode()"></fd-icon>
-                    <ng-container i18n="@@platformApprovalFlowAddNodeDialogUserDetailHeader">Detail</ng-container>
+                    {{ 'platformApprovalFlow.addNodeDialogHeaderDetail' | fdTranslate }}
                 </ng-container>
             </p>
 
             <fdp-search-field
                 *ngIf="_selectMode && !_userToShowDetails"
-                i18n-placeholder
-                placeholder="Search"
+                [placeholder]="'platformApprovalFlow.addNodeSearchPlaceholder' | fdTranslate"
                 contentDensity="compact"
                 [suggestions]="[]"
                 (inputChange)="_onSearchStringChange($event.text)"
@@ -48,25 +38,19 @@
     <fd-dialog-body [class.fd-dialog__body--auto-height]="viewService.isUserDetailsMode">
         <ng-container *ngIf="!_selectMode">
             <div fd-form-item *ngIf="_data.showNodeTypeSelect">
-                <label fd-form-label i18n="@@platformApprovalFlowAddNodeDialogNodeType">Parallel or serial</label>
+                <label fd-form-label>
+                    {{ 'platformApprovalFlow.addNodeDialogNodeType' | fdTranslate }}
+                </label>
 
                 <fd-select [compact]="true" [(value)]="_nodeType">
                     <ng-container *ngFor="let option of _nodeTypesArray">
                         <ng-container [ngSwitch]="option">
-                            <fd-option
-                                *ngSwitchCase="_nodeTypes.SERIAL"
-                                [value]="option"
-                                i18n="@@platformApprovalFlowAddNodeDialogNodeTypeSerial"
-                            >
-                                Serial
+                            <fd-option *ngSwitchCase="_nodeTypes.SERIAL" [value]="option">
+                                {{ 'platformApprovalFlow.addNodeDialogNodeTypeSerial' | fdTranslate }}
                             </fd-option>
 
-                            <fd-option
-                                *ngSwitchCase="_nodeTypes.PARALLEL"
-                                [value]="option"
-                                i18n="@@platformApprovalFlowAddNodeDialogNodeTypeParallel"
-                            >
-                                Parallel
+                            <fd-option *ngSwitchCase="_nodeTypes.PARALLEL" [value]="option">
+                                {{ 'platformApprovalFlow.addNodeDialogNodeTypeParallel' | fdTranslate }}
                             </fd-option>
                         </ng-container>
                     </ng-container>
@@ -74,33 +58,23 @@
             </div>
 
             <div fd-form-item>
-                <label fd-form-label i18n="@@platformApprovalFlowAddNodeDialogApproverType">Approver type</label>
+                <label fd-form-label>
+                    {{ 'platformApprovalFlow.addNodeDialogApproverType' | fdTranslate }}
+                </label>
 
                 <fd-select [compact]="true" [(value)]="_approverType">
                     <ng-container *ngFor="let option of _approverTypesArray">
                         <ng-container [ngSwitch]="option">
-                            <fd-option
-                                *ngSwitchCase="_approverTypes.SINGLE_USER"
-                                [value]="option"
-                                i18n="platformApprovalFlowAddNodeDialogApproverTypeUser"
-                            >
-                                A user
+                            <fd-option *ngSwitchCase="_approverTypes.SINGLE_USER" [value]="option">
+                                {{ 'platformApprovalFlow.addNodeDialogApproverTypeUser' | fdTranslate }}
                             </fd-option>
 
-                            <fd-option
-                                *ngSwitchCase="_approverTypes.ANYONE"
-                                [value]="option"
-                                i18n="platformApprovalFlowAddNodeDialogApproverTypeTeamAnyone"
-                            >
-                                Anyone on the team
+                            <fd-option *ngSwitchCase="_approverTypes.ANYONE" [value]="option">
+                                {{ 'platformApprovalFlow.addNodeDialogApproverTypeTeamAnyone' | fdTranslate }}
                             </fd-option>
 
-                            <fd-option
-                                *ngSwitchCase="_approverTypes.EVERYONE"
-                                [value]="option"
-                                i18n="platformApprovalFlowAddNodeDialogApproverTypeTeamEveryone"
-                            >
-                                Everyone on the team
+                            <fd-option *ngSwitchCase="_approverTypes.EVERYONE" [value]="option">
+                                {{ 'platformApprovalFlow.addNodeDialogApproverTypeTeamEveryone' | fdTranslate }}
                             </fd-option>
                         </ng-container>
                     </ng-container>
@@ -108,7 +82,7 @@
             </div>
 
             <div fd-form-item>
-                <label fd-form-label i18n="@@platformApprovalFlowAddNodeDialogUserOrTeam">User/Team</label>
+                <label fd-form-label>{{ 'platformApprovalFlow.addNodeDialogUserOrTeam' | fdTranslate }}</label>
 
                 <fd-multi-input
                     *ngIf="_isSingleUserMode"
@@ -133,13 +107,13 @@
             </div>
 
             <div *ngIf="_nodeType === _nodeTypes.PARALLEL" fd-form-item>
-                <fd-checkbox [(ngModel)]="_addToNextSerial" i18n="@@platformApprovalFlowAddToNext"
-                    >Add to the next serial node</fd-checkbox
-                >
+                <fd-checkbox [(ngModel)]="_addToNextSerial">
+                    {{ 'platformApprovalFlow.addNodeDialogAddToNext' | fdTranslate }}
+                </fd-checkbox>
             </div>
 
             <div *ngIf="_checkDueDate" fd-form-item>
-                <label fd-form-label i18n="@@platformApprovalFlowAddNodeDialogDueDate">Due date</label>
+                <label fd-form-label>{{ 'platformApprovalFlow.addNodeDialogDueDate' | fdTranslate }}</label>
 
                 <fd-date-picker
                     type="single"
@@ -190,8 +164,7 @@
                     fd-button
                     fd-dialog-decisive-button
                     fdType="emphasized"
-                    i18n-label="platformApprovalFlowDialogButtonAdd"
-                    label="Add"
+                    [label]="'platformApprovalFlow.addNodeAddActionBtnLabel' | fdTranslate"
                     [compact]="true"
                     [disabled]="_isMainSubmitButtonDisabled"
                     (click)="_submit()"
@@ -204,8 +177,7 @@
                     fd-initial-focus
                     fd-dialog-decisive-button
                     fdType="transparent"
-                    i18n-label="platformApprovalFlowDialogButtonCancel"
-                    label="Cancel"
+                    [label]="'platformApprovalFlow.addNodeCancelActionBtnLabel' | fdTranslate"
                     [compact]="true"
                     (click)="dialogRef.close()"
                 ></button>
@@ -218,8 +190,7 @@
                     <button
                         fd-button
                         fdType="emphasized"
-                        i18n-label="platformApprovalFlowAddNodeDialogSelectButton"
-                        label="Select"
+                        [label]="'platformApprovalFlow.addNodeSelectApproverActionBtnLabel' | fdTranslate"
                         [compact]="true"
                         [disabled]="!_selectedApprovers.length"
                         (click)="_confirmSelectedApprovers()"
@@ -231,8 +202,7 @@
                         fd-button
                         fd-initial-focus
                         fdType="transparent"
-                        i18n-label="platformApprovalFlowDialogButtonCancel"
-                        label="Cancel"
+                        [label]="'platformApprovalFlow.addNodeCancelApproverSelectionActionBtnLabel' | fdTranslate"
                         [compact]="true"
                         (click)="_exitSelectMode()"
                     ></button>
@@ -244,8 +214,7 @@
                     <button
                         fd-button
                         fdType="emphasized"
-                        i18n-label="platformApprovalFlowDialogButtonAdd"
-                        label="Add"
+                        [label]="'platformApprovalFlow.addNodeSelectApproverActionBtnLabel' | fdTranslate"
                         [compact]="true"
                         [disabled]="!_selectedTeam && !viewService.team"
                         (click)="_confirmSelectedTeam()"
@@ -257,8 +226,7 @@
                         fd-button
                         fd-initial-focus
                         fdType="transparent"
-                        i18n-label="platformApprovalFlowDialogButtonCancel"
-                        label="Cancel"
+                        [label]="'platformApprovalFlow.addNodeCancelApproverSelectionActionBtnLabel' | fdTranslate"
                         [compact]="true"
                         (click)="_exitSelectMode()"
                     ></button>
@@ -271,8 +239,7 @@
                         fd-button
                         fd-initial-focus
                         fdType="transparent"
-                        i18n-label="platformApprovalFlowDialogButtonClose"
-                        label="Close"
+                        [label]="'platformApprovalFlow.addNodeApproverOrTeamDetailsCloseActionBtnLabel' | fdTranslate"
                         [compact]="true"
                         (click)="_exitTeamMembersMode()"
                     ></button>
@@ -285,8 +252,7 @@
                         fd-button
                         fd-initial-focus
                         fdType="transparent"
-                        i18n-label="platformApprovalFlowDialogButtonClose"
-                        label="Close"
+                        [label]="'platformApprovalFlow.addNodeApproverOrTeamDetailsCloseActionBtnLabel' | fdTranslate"
                         [compact]="true"
                         (click)="_exitUserDetailsMode()"
                     ></button>

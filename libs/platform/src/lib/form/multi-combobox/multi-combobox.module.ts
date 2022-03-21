@@ -10,6 +10,7 @@ import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { TokenModule } from '@fundamental-ngx/core/token';
+import { I18nModule } from '@fundamental-ngx/i18n';
 import { PlatformListModule, StandardListItemModule } from '@fundamental-ngx/platform/list';
 import { MultiComboboxComponent } from './multi-combobox/multi-combobox.component';
 import { PlatformAutoCompleteModule } from '../auto-complete/auto-complete.module';
@@ -30,7 +31,8 @@ import { MultiComboboxHighlightPipe } from './pipes/highlight.pipe';
         PopoverModule,
         PlatformListModule,
         StandardListItemModule,
-        PlatformAutoCompleteModule
+        PlatformAutoCompleteModule,
+        I18nModule
     ],
     providers: [DynamicComponentService],
     exports: [MultiComboboxComponent, TemplateModule]

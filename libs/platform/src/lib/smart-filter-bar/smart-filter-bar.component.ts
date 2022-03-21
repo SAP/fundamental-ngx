@@ -97,21 +97,24 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
     }
     /**
      * 'Show filters' button label.
+     * @deprecated use i18n capabilities instead
      */
     @Input()
-    showFiltersLabel = 'Show filters';
+    showFiltersLabel: string;
 
     /**
      * 'Hide filters' button label.
+     * @deprecated use i18n capabilities instead
      */
     @Input()
-    hideFiltersLabel = 'Hide filters';
+    hideFiltersLabel: string;
 
     /**
      * 'Filters' button label.
+     * @deprecated use i18n capabilities instead
      */
     @Input()
-    filtersLabel = 'Filters';
+    filtersLabel: string;
 
     /**
      * Whether smart filter bar background should be transparent.

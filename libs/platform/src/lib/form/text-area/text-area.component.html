@@ -30,15 +30,25 @@
     [attr.id]="id + '-counter'"
     #counter
 >
-    <span>
-        <ng-container
-            *ngIf="counterExcessOrRemaining === 'excess'; else charactersRemaining"
-            i18n="@@platformI18nTextareaCounterMessageCharactersOverTheLimit"
-        >
-            {{ exceededCharCount | number: '1.0-0' }} characters over the limit
-        </ng-container>
-        <ng-template #charactersRemaining i18n="@@platformI18nTextareaCounterMessageCharacterseRemaining">
-            {{ exceededCharCount | number: '1.0-0' }} characters remaining
-        </ng-template>
-    </span>
+    <!-- render spaces instead of the actual value while translation string is loading in order to avoid content jumps -->
+    <ng-container *ngIf="counterExcessOrRemaining === 'excess'; else charactersRemaining">
+        <span
+            [innerHtml]="
+                (exceededCharCount === 1
+                    ? 'platformTextarea.counterMessageCharactersOverTheLimitSingular'
+                    : 'platformTextarea.counterMessageCharactersOverTheLimitPlural'
+                ) | fdTranslate: { count: exceededCharCount }:'&nbsp;&nbsp;'
+            "
+        ></span>
+    </ng-container>
+    <ng-template #charactersRemaining>
+        <span
+            [innerHtml]="
+                (exceededCharCount === 1
+                    ? 'platformTextarea.counterMessageCharactersRemainingSingular'
+                    : 'platformTextarea.counterMessageCharactersRemainingPlural'
+                ) | fdTranslate: { count: exceededCharCount }:'&nbsp;&nbsp;'
+            "
+        ></span>
+    </ng-template>
 </div>

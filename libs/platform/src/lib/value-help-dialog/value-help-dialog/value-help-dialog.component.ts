@@ -2,7 +2,6 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    ContentChild,
     ContentChildren,
     ElementRef,
     EventEmitter,
@@ -38,7 +37,6 @@ import {
     VhdValueChangeEvent
 } from '../models';
 import { VhdFilterComponent } from '../components/value-help-dialog-filter/value-help-dialog-filter.component';
-import { VhdSearchComponent } from '../components/value-help-dialog-search/value-help-dialog-search.component';
 import { defaultConditionDisplayFn } from '../constans/condition-display.function';
 import { cloneDeep } from 'lodash-es';
 
@@ -171,27 +169,6 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     @Input()
     defineTabTitle = 'Define Conditions';
 
-    /** Custom stratagies labels
-     * Allowed keys: contains, equalTo, between, startsWith, endsWith, lessThan, lessThanEqual, greaterThan, greaterThanEqual, empty
-     */
-    @Input()
-    defineStrategyLabels: {
-        [key in keyof (typeof VhdDefineIncludeStrategy | typeof VhdDefineExcludeStrategy)]?: string;
-    } = {
-        contains: 'contains',
-        equalTo: 'equal to',
-        between: 'between',
-        startsWith: 'starts with',
-        endsWith: 'ends with',
-        lessThan: 'less than',
-        lessThanEqual: 'less than or equal to',
-        greaterThan: 'greater than',
-        greaterThanEqual: 'greater than or equal to',
-        empty: 'empty',
-        not_equalTo: 'not equal to',
-        not_empty: 'not empty'
-    };
-
     /** Dialog outputs */
     /** Event emitted when filters/tokens were changed. */
     @Output()
@@ -204,10 +181,6 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     /** Event emitted when data loading is finished. */
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     @Output() onDataReceived = new EventEmitter<void>();
-
-    /** @hidden Search control component  */
-    @ContentChild(VhdSearchComponent)
-    searchField: VhdSearchComponent;
 
     /** @hidden Fitlers for search table and defince conditions */
     @ContentChildren(VhdFilterComponent)

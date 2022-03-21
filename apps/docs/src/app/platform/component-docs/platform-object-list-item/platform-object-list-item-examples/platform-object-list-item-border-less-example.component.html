@@ -3,6 +3,7 @@
     <fdp-object-list-item
         *ngFor="let item of items"
         [introductionText]="item.introductionText"
+        selectionMode="delete"
         [title]="item.title"
         [currency]="item.currency"
         [amount]="item.amount"

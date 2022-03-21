@@ -10,6 +10,7 @@ import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { InfiniteScrollModule } from '@fundamental-ngx/core/infinite-scroll';
 import { ListComponent, ListFooter, ListGroupHeader } from './list.component';
 import { ListItemDef } from './base-list-item';
+import { I18nModule } from '@fundamental-ngx/i18n';
 
 @NgModule({
     declarations: [ListComponent, ListFooter, ListGroupHeader, ListItemDef],
@@ -17,6 +18,7 @@ import { ListItemDef } from './base-list-item';
         CommonModule,
         FormsModule,
         FormModule,
+        I18nModule,
         ToolbarModule,
         ListModule,
         PipeModule,

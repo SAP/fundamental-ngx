@@ -10,7 +10,7 @@
     [selectionMode]="_isEditMode ? 'multiSelect' : 'none'"
     (selectionChange)="_onNodeSelectionChange($event)"
 >
-    <fd-grid-list-title-bar [title]="title">
+    <fd-grid-list-title-bar [title]="title || ('platformApprovalFlow.defaultTitle' | fdTranslate)">
         <fd-grid-list-title-bar-spacer></fd-grid-list-title-bar-spacer>
 
         <fdp-approval-flow-toolbar-actions
@@ -27,7 +27,9 @@
     </fd-grid-list-title-bar>
 
     <div class="fdp-approval-flow__watchers" *ngIf="_approvalProcess?.watchers?.length || _isEditMode">
-        <p class="fdp-approval-flow__watchers-title" i18n="@@platformApprovalFlowWatchers">{{ watchersLabel }}</p>
+        <p class="fdp-approval-flow__watchers-title">
+            {{ watchersLabel || ('platformApprovalFlow.defaultWatchersLabel' | fdTranslate) }}
+        </p>
 
         <ng-container *ngIf="!_isEditMode">
             <fd-avatar
@@ -46,8 +48,7 @@
             <fd-multi-input
                 [compact]="true"
                 [dropdownValues]="_usersForWatchersList"
-                i18n-placeholder
-                placeholder="Search here..."
+                [placeholder]="'platformApprovalFlow.watchersInputPlaceholder' | fdTranslate"
                 [displayFn]="_displayUserFn"
                 [valueFn]="_userValueFn"
                 [showAllButton]="true"
@@ -74,8 +75,7 @@
                     <button
                         *ngIf="_carouselStep > 0"
                         class="fdp-approval-flow-carousel-controls__button--prev-slide"
-                        aria-label="Go to previous slide"
-                        i18n-aria-label="@@platformApprovalPrevButton"
+                        [attr.aria-label]="'platformApprovalFlow.prevButtonAriaLabel' | fdTranslate"
                         (click)="previousSlide()"
                     >
                         <fd-icon [glyph]="'navigation-' + (_rtl ? 'right' : 'left') + '-arrow'"></fd-icon>
@@ -85,8 +85,7 @@
                     <button
                         *ngIf="_maxCarouselStep - _carouselStep > 0"
                         class="fdp-approval-flow-carousel-controls__button--next-slide"
-                        aria-label="Go to next slide"
-                        i18n-aria-label="@@platformApprovalNextButton"
+                        [attr.aria-label]="'platformApprovalFlow.nextButtonAriaLabel' | fdTranslate"
                         (click)="nextSlide()"
                     >
                         {{ _maxCarouselStep - _carouselStep }}
@@ -186,8 +185,7 @@
         <fd-bar-element>
             <button
                 fd-button
-                label="Save"
-                i18n-label="@@platformApprovalFlowEditModeSave"
+                [label]="'platformApprovalFlow.editModeSaveButtonLabel' | fdTranslate"
                 [compact]="true"
                 fdType="emphasized"
                 [disabled]="disableSaveButton"
@@ -198,8 +196,7 @@
         <fd-bar-element>
             <button
                 fd-button
-                label="Exit"
-                i18n-label="@@platformApprovalFlowEditModeExit"
+                [label]="'platformApprovalFlow.editModeExitButtonLabel' | fdTranslate"
                 [compact]="true"
                 fdType="transparent"
                 [disabled]="disableExitButton"
@@ -212,11 +209,11 @@
 <ng-template #emptyApprovalFlowGraph>
     <figure fd-illustrated-message type="spot" [svgConfig]="_emptyApprovalFlowSpotConfig">
         <figcaption fd-illustrated-message-figcaption>
-            <h3 fd-illustrated-message-title i18n="@@platformApprovalFlowEmptyTitle">
-                Start adding approvers and watchers
+            <h3 fd-illustrated-message-title>
+                {{ 'platformApprovalFlow.emptyTitle' | fdTranslate }}
             </h3>
-            <p fd-illustrated-message-text i18n="@@platformApprovalFlowEmptyHint">
-                To add approvers click <b>Add a step</b>. To add watchers, click the Watchers field.
+            <p fd-illustrated-message-text>
+                {{ 'platformApprovalFlow.emptyHint' | fdTranslate }}
             </p>
         </figcaption>
     </figure>

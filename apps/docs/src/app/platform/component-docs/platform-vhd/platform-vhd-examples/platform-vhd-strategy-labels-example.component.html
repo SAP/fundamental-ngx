@@ -18,12 +18,10 @@
     dialogTitle="Custom strategy labels"
     defineTabTitle="Define Conditions"
     tabs="define"
-    [defineStrategyLabels]="customStrategyLabels"
     [formatToken]="formatTokenFn"
     (valueChange)="valueChange($event)"
     headerId="fdp-vhd-header-2"
 >
-    <fdp-value-help-dialog-search placeholder="Search..."></fdp-value-help-dialog-search>
     <fdp-value-help-dialog-filter
         *ngFor="let filter of filters; index as i"
         [main]="i < 2"

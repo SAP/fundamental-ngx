@@ -114,16 +114,10 @@ export class SmartFilterBarConditionsDialogComponent {
             this.config.dataType
         );
 
-        const selectItems: SelectItem[] = [];
-
-        strategy.forEach((s: FilterAllStrategy) => {
-            selectItems.push({
-                label: this.config.defineStrategyLabels[s],
-                value: s
-            });
-        });
-
-        return selectItems;
+        return strategy.map((s: FilterAllStrategy) => ({
+            label: this.config.defineStrategyLabels[s],
+            value: s
+        }));
     }
 
     /**
