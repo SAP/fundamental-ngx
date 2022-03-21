@@ -5,19 +5,22 @@
     [style.height]="height"
     [style.width]="width"
     [attr.dir]="dir"
+    #carouselContainer
     (click)="_focus()"
 >
     <ng-container *ngIf="_showPageIndicatorContainer && pageIndicatorsOrientation === 'top'">
         <ng-container *ngTemplateOutlet="pageIndicatorContainer"></ng-container>
     </ng-container>
 
-    <div class="fd-carousel__content fd-carousel__content--display">
+    <div class="fd-carousel__content fd-carousel__content--display" #carouselContent>
         <ng-container *ngIf="_showNavigationButtonInContent">
             <ng-container *ngTemplateOutlet="buttonLeft"></ng-container>
         </ng-container>
 
-        <div #slideContainer [class.fd-carousel__content--horizontal]="!vertical">
-            <ng-content></ng-content>
+        <div class="fd-carousel__slides-wrapper" #slidesWrapper [style.width]="_slidesWrapperSizePx">
+            <div #slideContainer [class.fd-carousel__content--horizontal]="!vertical">
+                <ng-content></ng-content>
+            </div>
         </div>
 
         <ng-container *ngIf="_showNavigationButtonInContent">

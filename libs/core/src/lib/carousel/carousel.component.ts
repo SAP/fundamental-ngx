@@ -21,10 +21,10 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Direction } from '@angular/cdk/bidi';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { delay, takeUntil } from 'rxjs/operators';
+import { Subject, merge } from 'rxjs';
 
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { resizeObservable, RtlService } from '@fundamental-ngx/core/utils';
 
 import { CarouselItemComponent } from './carousel-item/carousel-item.component';
 import { CarouselResourceStringsEN, FdCarouselResourceStrings } from './i18n/carousel-resources';
@@ -53,7 +53,10 @@ class CarouselActiveSlides {
     styleUrls: ['./carousel.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [CarouselService]
+    providers: [CarouselService],
+    host: {
+        '[style.width]': 'width'
+    }
 })
 export class CarouselComponent implements OnInit, AfterContentInit, AfterViewInit, AfterViewChecked, OnDestroy {
     /** Id for the Carousel. */
@@ -83,7 +86,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     /** Width for carousel container */
     @Input()
-    width: string;
+    width = '100%';
 
     /** If carousel is in circular loop */
     @Input()
@@ -181,6 +184,15 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     @ViewChild('slideContainer')
     slideContainer: ElementRef;
 
+    @ViewChild('carouselContainer')
+    carouselContainer: ElementRef;
+
+    @ViewChild('carouselContent')
+    carouselContentContainer: ElementRef;
+
+    @ViewChild('slidesWrapper')
+    carouselSlidesWrapper: ElementRef;
+
     /** @hidden Start index of currently active items */
     currentActiveSlidesStartIndex = 0;
 
@@ -195,6 +207,14 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     /** @hidden Fake array for counting number of page indicator */
     pageIndicatorsCountArray: number[] = [];
+
+    /** @hidden */
+    _slidesWrapperSize = 0;
+
+    /** @hidden */
+    get _slidesWrapperSizePx(): string {
+        return this._slidesWrapperSize ? `${this._slidesWrapperSize}px` : this.width;
+    }
 
     /** @hidden */
     private _resourceStrings = CarouselResourceStringsEN;
@@ -257,6 +277,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
         // Subscribe to dynamic update of slides
         this.slides.changes.pipe(takeUntil(this._onDestroy$)).subscribe(() => this._onSlideUpdates());
+
         this._changeDetectorRef.markForCheck();
     }
 
@@ -265,6 +286,8 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         this._initializeServiceConfig();
         this._carouselService.initialise(this._config, this.slides, this.slideContainer);
         this._previousVisibleSlidesCount = this.visibleSlidesCount;
+
+        this._resizeContentContainer();
     }
 
     /** @hidden */
@@ -455,7 +478,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         // Handles navigator button enabled/disabled state
         this._buttonVisibility();
 
-        let arrayLength = 0;
+        let arrayLength: number;
         // set page indicator count with fake array, to use in template
         if (this.loop && this.visibleSlidesCount > 1) {
             // If loop with multi item visible.
@@ -636,5 +659,45 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
                 this._manageSlideVisibility(this.currentActiveSlidesStartIndex);
             }
         }
+    }
+
+    /**
+     * @hidden
+     * Resizes inner carousel container to fit all items in the viewport and hide those which are not fully in it.
+     */
+    private _resizeContentContainer(): void {
+        merge(
+            resizeObservable(this.slideContainer.nativeElement),
+            resizeObservable(this.carouselContainer.nativeElement)
+        )
+            .pipe(delay(30), takeUntil(this._onDestroy$))
+            .subscribe(() => {
+                const { width } = this.carouselContainer.nativeElement.getBoundingClientRect();
+                let maxSize = 0;
+
+                for (const slide of this.slides.toArray().slice(this.currentActiveSlidesStartIndex)) {
+                    const slideWidth = slide.getWidth();
+
+                    if (!slideWidth) {
+                        break;
+                    }
+
+                    const newSize = maxSize + slideWidth;
+
+                    if (newSize > width) {
+                        break;
+                    }
+
+                    maxSize = newSize;
+                }
+
+                if (this._slidesWrapperSize === maxSize) {
+                    return;
+                }
+
+                this._slidesWrapperSize = maxSize;
+
+                this._changeDetectorRef.detectChanges();
+            });
     }
 }
