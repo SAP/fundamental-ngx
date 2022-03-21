@@ -125,6 +125,20 @@ export const ROUTES: Routes = [
                     import('./component-docs/utilities/fn-clicked/fn-clicked-docs.module').then(
                         (m) => m.FnClickedDocsModule
                     )
+            },
+            {
+                path: 'message-toast',
+                loadChildren: () =>
+                    import('./component-docs/message-toast/message-toast-docs.module').then(
+                        (m) => m.MessageToastDocsModule
+                    )
+            },
+            {
+                path: 'notification',
+                loadChildren: () =>
+                    import('./component-docs/notification/notification-docs.module').then(
+                        (m) => m.NotificationDocsModule
+                    )
             }
         ]
     }
