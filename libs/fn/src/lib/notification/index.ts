@@ -6,3 +6,5 @@ export * from './ref/notification-ref';
 export * from './constants/notification-data.token';
 export * from './structural-directives';
 export * from './notification.tokens';
+export * from './components/notification-content/notification-content.component';
+export * from './components/notification-text/notification-text.component';
