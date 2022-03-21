@@ -16,8 +16,7 @@
         <fdp-search-field
             *ngIf="!hideSearchInput"
             style="min-width: 15.5rem"
-            i18n-placeholder="@@platformTableToolbarSearchPlaceholder"
-            placeholder="Search"
+            [placeholder]="'platformTable.toolbarSearchPlaceholder' | fdTranslate"
             [disabled]="!!(tableLoading$ | async)"
             [contentDensity]="size"
             [suggestions]="searchSuggestions"
@@ -28,23 +27,20 @@
 
         <ng-container *ngIf="editMode !== 'none'">
             <fdp-button
-                label="Create"
-                i18n-label="@@platformTableToolbarActionButtonCreate"
+                [label]="'platformTable.toolbarActionCreateButtonLabel' | fdTranslate"
                 [contentDensity]="size"
                 (click)="_addRow()"
             ></fdp-button>
             <ng-container *ngIf="_showSaveButton">
                 <fdp-button
-                    label="Save"
-                    i18n-label="@@platformTableToolbarActionButtonSave"
+                    [label]="'platformTable.toolbarActionSaveButtonLabel' | fdTranslate"
                     [contentDensity]="size"
                     *ngIf="_showSaveButton"
                     (click)="_saveRows()"
                 ></fdp-button>
                 <fd-toolbar-separator fd-toolbar-item></fd-toolbar-separator>
                 <fdp-button
-                    label="Cancel"
-                    i18n-label="@@platformTableToolbarActionButtonCancel"
+                    [label]="'platformTable.toolbarActionCancelButtonLabel' | fdTranslate"
                     [contentDensity]="size"
                     (click)="_cancelEditing()"
                     buttonType="transparent"
@@ -65,8 +61,7 @@
             <fdp-button
                 *ngIf="sortable"
                 glyph="sort"
-                i18n-title="@@platformTableToolbarActionButtonSort"
-                title="Sort"
+                [title]="'platformTable.toolbarActionSortButtonTitle' | fdTranslate"
                 buttonType="transparent"
                 [contentDensity]="size"
                 aria-haspopup="modal"
@@ -75,8 +70,7 @@
             <fdp-button
                 *ngIf="filterable"
                 glyph="filter"
-                i18n-title="@@platformTableToolbarActionButtonFilter"
-                title="Filter"
+                [title]="'platformTable.toolbarActionFilterButtonTitle' | fdTranslate"
                 buttonType="transparent"
                 [contentDensity]="size"
                 aria-haspopup="modal"
@@ -85,8 +79,7 @@
             <fdp-button
                 *ngIf="groupable"
                 glyph="group-2"
-                i18n-title="@@platformTableToolbarActionButtonGroup"
-                title="Group"
+                [title]="'platformTable.toolbarActionGroupButtonTitle' | fdTranslate"
                 buttonType="transparent"
                 [contentDensity]="size"
                 aria-haspopup="modal"
@@ -95,8 +88,7 @@
             <fdp-button
                 *ngIf="columns"
                 glyph="action-settings"
-                i18n-title="@@platformTableToolbarActionButtonColumns"
-                title="Columns"
+                [title]="'platformTable.toolbarActionColumnsButtonTitle' | fdTranslate"
                 buttonType="transparent"
                 [contentDensity]="size"
                 aria-haspopup="modal"

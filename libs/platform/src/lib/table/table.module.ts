@@ -24,6 +24,7 @@ import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
 import { PlatformDatePickerModule, PlatformInputModule, PlatformSwitchModule } from '@fundamental-ngx/platform/form';
 import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { I18nModule } from '@fundamental-ngx/i18n';
 
 import { TableComponent } from './table.component';
 import { TableColumnComponent } from './components/table-column/table-column.component';
@@ -138,6 +139,7 @@ const EXPORTABLE_DECLARATIONS = [
         DialogModule,
         PlatformSearchFieldModule,
         IconModule,
+        I18nModule,
         SelectModule,
         LayoutGridModule,
         PanelModule,

@@ -1,0 +1,46 @@
+<fd-docs-section-title id="basic" componentName="i18n"> Basic usage </fd-docs-section-title>
+<description>
+    If your app is in English, you don't have to do anything - components will load English language by default. In
+    order to use any other language, you will need to provide an object, that implements <code>FdLanguage</code>
+    interface in the root of your app.
+
+    <fd-code-snippet [file]="basicUsageExample"></fd-code-snippet>
+</description>
+
+<separator></separator>
+
+<fd-docs-section-title id="language-customization" componentName="i18n">
+    Customizing language per component
+</fd-docs-section-title>
+<description>
+    <p>
+        It's possible to easily override global language for a certain component by providing <code>FD_LANGUAGE</code>
+        token at any child scope.
+    </p>
+    <p>
+        <b>Note:</b> you should understand that providing an injection token in a certain module will affect the scope,
+        were this module is imported. Thus it's recommended to provide overrides on the level of components or lazy
+        loaded modules.
+    </p>
+</description>
+<component-example>
+    <app-i18n-translation-customization-example></app-i18n-translation-customization-example>
+</component-example>
+<code-example [exampleFiles]="translationCustomizationExample"></code-example>
+<separator></separator>
+
+<fd-docs-section-title id="language-change" componentName="i18n"> Changing languages at runtime </fd-docs-section-title>
+<description>
+    <p>
+        <code>FD_LANGUAGE</code> token is an observable, which means you can change the language at runtime using your
+        own logic.
+    </p>
+    <p>
+        In this particular example such capabilities are shown on the level of a component due to the limitations of the
+        example itself. The same scenario can and should be used in the root of your app.
+    </p>
+</description>
+<component-example>
+    <app-language-change-example></app-language-change-example>
+</component-example>
+<code-example [exampleFiles]="languageChangeExample"></code-example>

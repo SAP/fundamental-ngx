@@ -5,6 +5,7 @@ import {
     ElementRef,
     EventEmitter,
     Inject,
+    Injector,
     Input,
     OnChanges,
     OnDestroy,
@@ -88,7 +89,7 @@ import { cloneDeep, uniqBy } from 'lodash-es';
 })
 export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
     /** Title which is displayed in the header of the Approval Flow component. */
-    @Input() title = 'Approval process';
+    @Input() title: string;
 
     @Input() value: ApprovalProcess;
 
@@ -118,7 +119,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
     @Input() isEditAvailable = false;
 
     /** Text label for watchers list */
-    @Input() watchersLabel = 'Watchers';
+    @Input() watchersLabel: string;
 
     /** Enables or disables ability to add parallel nodes */
     @Input() allowAddParallelNodes = true;
@@ -263,6 +264,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
     constructor(
         private readonly _dialogService: DialogService,
         private readonly _cdr: ChangeDetectorRef,
+        private readonly _injector: Injector,
         @Optional() @Inject(DATA_PROVIDERS) private providers: Map<string, DataProvider<any>>,
         @Optional() private readonly _rtlService: RtlService
     ) {}
@@ -359,7 +361,8 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
                     allowSendReminder: this.allowSendRemindersForStatuses.includes(node.status),
                     ...this._defaultDialogOptions
                 }
-            }
+            },
+            this._injector
         );
 
         dialog.afterClosed.subscribe((reminderTargets) => {
@@ -392,12 +395,16 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
 
     /** @hidden Watcher's avatar click handler */
     _onWatcherClick(watcher: ApprovalUser): void {
-        this._dialogService.open<ApprovalFlowApproverDetailsDialogRefData>(ApprovalFlowApproverDetailsComponent, {
-            data: {
-                watcher,
-                ...this._defaultDialogOptions
-            }
-        });
+        this._dialogService.open<ApprovalFlowApproverDetailsDialogRefData>(
+            ApprovalFlowApproverDetailsComponent,
+            {
+                data: {
+                    watcher,
+                    ...this._defaultDialogOptions
+                }
+            },
+            this._injector
+        );
     }
 
     /** Retrive metadata by node id */
@@ -572,15 +579,19 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
     _addNode(source: ApprovalGraphNode, type: ApprovalFlowNodeTarget): void {
         const showNodeTypeSelect = type === 'before' && !source.actionsConfig?.disableAddParallel;
 
-        const dialog = this._dialogService.open<AddNodeDialogRefData>(ApprovalFlowAddNodeComponent, {
-            data: {
-                nodeTarget: type,
-                showNodeTypeSelect,
-                node: Object.assign(getBlankApprovalGraphNode(), { blank: false }),
-                checkDueDate: this.checkDueDate,
-                ...this._defaultDialogOptions
-            }
-        });
+        const dialog = this._dialogService.open<AddNodeDialogRefData>(
+            ApprovalFlowAddNodeComponent,
+            {
+                data: {
+                    nodeTarget: type,
+                    showNodeTypeSelect,
+                    node: Object.assign(getBlankApprovalGraphNode(), { blank: false }),
+                    checkDueDate: this.checkDueDate,
+                    ...this._defaultDialogOptions
+                }
+            },
+            this._injector
+        );
 
         dialog.afterClosed.subscribe((data: AddNodeDialogFormData) => {
             if (!data) {
@@ -656,14 +667,18 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
 
     /** @hidden Open edit node dialog */
     _editNode(node: ApprovalNode): void {
-        const dialog = this._dialogService.open<AddNodeDialogRefData>(ApprovalFlowAddNodeComponent, {
-            data: {
-                isEdit: true,
-                node: Object.assign({}, node),
-                checkDueDate: this.checkDueDate,
-                ...this._defaultDialogOptions
-            }
-        });
+        const dialog = this._dialogService.open<AddNodeDialogRefData>(
+            ApprovalFlowAddNodeComponent,
+            {
+                data: {
+                    isEdit: true,
+                    node: Object.assign({}, node),
+                    checkDueDate: this.checkDueDate,
+                    ...this._defaultDialogOptions
+                }
+            },
+            this._injector
+        );
 
         dialog.afterClosed.subscribe((data: { node: ApprovalNode }) => {
             const updatedNode = data?.node;
@@ -755,10 +770,8 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
             dropTarget.node.targets = [nodeToDrop.id];
 
             this._finishDragDropProcess(nodeToDrop);
-        }
-
-        if (placement === 'before') {
-            const dialog = this._dialogService.open(ApprovalFlowSelectTypeComponent);
+        } else if (placement === 'before') {
+            const dialog = this._dialogService.open(ApprovalFlowSelectTypeComponent, undefined, this._injector);
 
             dialog.afterClosed.subscribe((data: SelectTypeDialogFormData) => {
                 if (!data) {
@@ -781,18 +794,14 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
 
                 this._finishDragDropProcess(nodeToDrop);
             });
-        }
-
-        if (placement === 'before-all') {
+        } else if (placement === 'before-all') {
             this._deleteNode(nodeToDrop);
 
             const firstColumnNodes = this._graph.columns[0].nodes;
             nodeToDrop.targets = firstColumnNodes.map((node) => node.id);
 
             this._finishDragDropProcess(nodeToDrop);
-        }
-
-        if (placement === 'after-all') {
+        } else if (placement === 'after-all') {
             this._deleteNode(nodeToDrop);
             this._buildView(this._approvalProcess);
 

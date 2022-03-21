@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
+/** @deprecated */
 @Component({
     selector: 'fdp-value-help-dialog-search',
     template: '',
@@ -29,4 +30,11 @@ export class VhdSearchComponent {
     /** Text value displayed in toggle button control */
     @Input()
     hideAllAdvancedSearchLabel = 'Hide all filters';
+
+    constructor() {
+        console.warn(
+            '"VhdSearchComponent" is deprecated. Messages from it is no longer in use.' +
+                'In order to configure custom messages, use i18n tools instead.'
+        );
+    }
 }

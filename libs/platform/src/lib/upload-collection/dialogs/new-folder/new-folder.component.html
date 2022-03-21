@@ -1,24 +1,19 @@
 <fd-dialog>
     <fd-dialog-header>
-        <h1
-            class="fd-title--bold"
-            fd-dialog-title
-            id="fdp-upload-collection-new-folder-title"
-            fd-title
-            i18n="@@platformUploadCollection.NewFolder.Title"
-        >
-            New folder
+        <h1 class="fd-title--bold" fd-dialog-title id="fdp-upload-collection-new-folder-title" fd-title>
+            {{ 'platformUploadCollection.newFolderTitle' | fdTranslate }}
         </h1>
     </fd-dialog-header>
 
     <fd-dialog-body>
         <div fd-form-item>
             <label fd-form-label for="fdp-upload-collection-new-folder-input">
-                <span i18n="@@platformUploadCollection.NewFolder.InputLabel"> Name of new folder inside of </span>
-                <span *ngIf="_currentFolder">"{{ _currentFolder.name }}"</span>
-                <span *ngIf="!_currentFolder" i18n="@@platformUploadCollection.NewFolder.InputLabel.AllFiles">
-                    All files </span
-                >:
+                {{
+                    (_currentFolder
+                        ? 'platformUploadCollection.newFolderAtFolderInputLabel'
+                        : 'platformUploadCollection.newFolderAtRootInputLabel'
+                    ) | fdTranslate: { folderName: _currentFolder?.name }
+                }}:
             </label>
             <input
                 #formControl
@@ -27,19 +22,15 @@
                 id="fdp-upload-collection-new-folder-input"
                 type="text"
                 [(ngModel)]="_newFolderName"
-                i18n-placeholder
-                placeholder="Type here..."
+                [placeholder]="'platformUploadCollection.newFolderInputPlaceholder' | fdTranslate"
             />
             <span
                 *ngIf="_newFolderName.length > _maxFilenameLength"
                 fd-object-status
                 status="negative"
-                i18n-label="@@platformUploadCollection.NewFolder.Input.Error.Label"
-                [label]="'Maximum ' + _maxFilenameLength + ' characters allowed'"
-                i18n-title="@@platformUploadCollection.NewFolder.Input.Error.Title"
-                [attr.title]="'Maximum ' + _maxFilenameLength + ' characters allowed'"
-                i18n-aria-label="@@platformUploadCollection.NewFolder.Input.Error.AriaLabel"
-                [attr.aria-label]="'Maximum ' + _maxFilenameLength + ' characters allowed'"
+                [label]="'platformUploadCollection.newFolderInputErrorLabel' | fdTranslate"
+                [attr.title]="'platformUploadCollection.newFolderInputErrorLabel' | fdTranslate"
+                [attr.aria-label]="'platformUploadCollection.newFolderInputErrorLabel' | fdTranslate"
             ></span>
         </div>
     </fd-dialog-body>
@@ -47,12 +38,15 @@
     <fd-dialog-footer>
         <fd-button-bar
             fdType="emphasized"
-            i18n-label
-            label="Create"
+            [label]="'platformUploadCollection.newFolderDialogCreateBtnLabel' | fdTranslate"
             [disabled]="_newFolderName.length > _maxFilenameLength"
             (click)="dialogRef.close(_newFolderName)"
         >
         </fd-button-bar>
-        <fd-button-bar i18n-label label="Cancel" (click)="dialogRef.dismiss()"> </fd-button-bar>
+        <fd-button-bar
+            [label]="'platformUploadCollection.newFolderDialogCancelBtnLabel' | fdTranslate"
+            (click)="dialogRef.dismiss()"
+        >
+        </fd-button-bar>
     </fd-dialog-footer>
 </fd-dialog>

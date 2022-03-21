@@ -29,8 +29,7 @@
                             buttonType="transparent"
                             contentDensity="compact"
                             glyph="decline"
-                            i18n-label="@@PlatformSmartFilterBarDefineConditionsRemoveConditionButton"
-                            title="Remove condition"
+                            [title]="'platformSmartFilterBar.defineConditionsRemoveConditionButtonTitle' | fdTranslate"
                             type="button"
                         ></fdp-button>
                     </div>
@@ -43,8 +42,7 @@
                         <fdp-button
                             (click)="addCondition()"
                             contentDensity="compact"
-                            i18n-label="@@PlatformSmartFilterBarDefineConditionsAddConditionButton"
-                            label="Add condition"
+                            [label]="'platformSmartFilterBar.defineConditionsAddConditionButtonLabel' | fdTranslate"
                         ></fdp-button>
                     </div>
                 </div>
@@ -58,8 +56,7 @@
                 (click)="applyConditions()"
                 buttonType="emphasized"
                 contentDensity="compact"
-                i18n-label="@@PlatformSmartFilterBarDefineConditionsSubmitButton"
-                label="Go"
+                [label]="'platformSmartFilterBar.defineConditionsSubmitButtonLabel' | fdTranslate"
             ></fdp-button>
         </fd-dialog-footer-button>
 
@@ -68,8 +65,7 @@
                 (click)="_cancel()"
                 buttonType="transparent"
                 contentDensity="compact"
-                i18n-label="@@PlatformSmartFilterBarDefineConditionsCancelButton"
-                label="Cancel"
+                [label]="'platformSmartFilterBar.defineConditionsCancelButton' | fdTranslate"
             ></fdp-button>
         </fd-dialog-footer-button>
     </fd-dialog-footer>

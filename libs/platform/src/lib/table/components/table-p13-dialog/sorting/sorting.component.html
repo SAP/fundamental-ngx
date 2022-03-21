@@ -3,7 +3,9 @@
         <ng-template fdTemplate="header">
             <div fd-bar-left>
                 <fd-bar-element>
-                    <h4 fd-title [headerSize]="4" i18n="@@platformTableP13SortDialogHeader">Sort</h4>
+                    <h4 fd-title [headerSize]="4">
+                        {{ 'platformTable.P13SortDialogHeader' | fdTranslate }}
+                    </h4>
                 </fd-bar-element>
             </div>
             <div fd-bar-right>
@@ -21,8 +23,7 @@
                 [value]="rule.columnKey"
                 (valueChange)="_onRuleColumnKeyChange(rule, $event)"
                 [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
-                placeholder="(none)"
-                i18n-placeholder="@@platformTableP13SortDialogNoneSelectedColumn|Table column select placeholder"
+                [placeholder]="'platformTable.P13SortDialogNoneSelectedColumn' | fdTranslate"
             >
                 <fd-option
                     *ngFor="let column of columns | getAvailableSortColumns: rules:rule.columnKey"
@@ -37,14 +38,13 @@
                 [value]="rule.direction"
                 (valueChange)="_onRuleDirectionChange(rule, $event)"
                 [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
-                placeholder="(none)"
-                i18n-placeholder="@@platformTableP13SortDialogNoneSelectedSorting|Sorting select placeholder"
+                [placeholder]="'platformTable.P13SortDialogNoneSelectedSorting' | fdTranslate"
             >
-                <fd-option [value]="SORT_DIRECTION.ASC" i18n="@@platformTableP13SortDialogSortOrderAsc">
-                    Ascending
+                <fd-option [value]="SORT_DIRECTION.ASC">
+                    {{ 'platformTable.P13SortDialogSortOrderSelectOptionAsc' | fdTranslate }}
                 </fd-option>
-                <fd-option [value]="SORT_DIRECTION.DESC" i18n="@@platformTableP13SortDialogSortOrderDesc">
-                    Descending
+                <fd-option [value]="SORT_DIRECTION.DESC">
+                    {{ 'platformTable.P13SortDialogSortOrderSelectOptionDesc' | fdTranslate }}
                 </fd-option>
             </fd-select>
 
@@ -54,10 +54,8 @@
                     fdType="transparent"
                     glyph="sys-cancel"
                     [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
-                    i18n-aria-label="platformTableP13SortDialogRemoveSort|Remove btn aria-label attribute"
-                    aria-label="Remove"
-                    i18n-title="platformTableP13SortDialogRemoveSort|Remove btn title attribute"
-                    title="Remove"
+                    [attr.aria-label]="'platformTable.P13SortDialogRemoveSortBtnTitle' | fdTranslate"
+                    [title]="'platformTable.P13SortDialogRemoveSortBtnTitle' | fdTranslate"
                     (click)="_removeRule(rule)"
                 ></button>
 
@@ -66,10 +64,8 @@
                     fdType="transparent"
                     glyph="add"
                     [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
-                    i18n-aria-label="platformTableP13SortDialogAddNewSort|Add New btn aria-label attribute"
-                    aria-label="Add new"
-                    i18n-title="platformTableP13SortDialogAddNewSort|Add New btn title attribute"
-                    title="Add new"
+                    [attr.aria-label]="'platformTable.P13SortDialogAddNewSortBtnTitle' | fdTranslate"
+                    [title]="'platformTable.P13SortDialogAddNewSortBtnTitle' | fdTranslate"
                     (click)="_addNew(i)"
                 ></button>
             </div>
@@ -82,8 +78,7 @@
                 fd-button
                 fdType="emphasized"
                 fd-dialog-decisive-button
-                i18n-label="@@platformTableP13SortDialogConfirmationBtn"
-                label="OK"
+                [label]="'platformTable.P13SortDialogConfirmationBtnLabel' | fdTranslate"
                 [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 (click)="confirm()"
             ></button>
@@ -95,8 +90,7 @@
                 fdType="transparent"
                 fd-dialog-decisive-button
                 fd-initial-focus
-                i18n-label="@@platformTableP13SortDialogCancelBtn"
-                label="Cancel"
+                [label]="'platformTable.P13SortDialogCancelBtnLabel' | fdTranslate"
                 [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 (click)="cancel()"
             ></button>

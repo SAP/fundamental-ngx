@@ -3,13 +3,8 @@
         <ng-template fdTemplate="header">
             <div fd-bar-left>
                 <fd-bar-element>
-                    <h1
-                        class="fd-title--bold"
-                        *ngIf="!_currentFolder"
-                        fd-title
-                        i18n="@@platformUploadCollection.MoveTo.Title"
-                    >
-                        Move to
+                    <h1 class="fd-title--bold" *ngIf="!_currentFolder" fd-title>
+                        {{ 'platformUploadCollection.moveToTitle' | fdTranslate }}
                     </h1>
                     <ng-container *ngIf="_currentFolder">
                         <button
@@ -20,7 +15,7 @@
                             (click)="_goToParentFolder()"
                         ></button>
                         <h1 fd-title>
-                            <span i18n="@@platformUploadCollection.MoveTo.TitleFolder">Folder</span>
+                            <span>{{ 'platformUploadCollection.moveToTitleFolder' | fdTranslate }}</span>
                             {{ _currentFolder.name }}
                         </h1>
                     </ng-container>
@@ -31,7 +26,7 @@
                     <button
                         fd-button
                         [compact]="dialogRef.data.contentDensity | isCompactDensity"
-                        label="New Folder"
+                        [label]="'platformUploadCollection.moveToNewFolderBtnLabel' | fdTranslate"
                         (click)="_newFolder()"
                     ></button>
                 </fd-bar-element>
@@ -42,7 +37,7 @@
     <fd-dialog-body class="fd-dialog__body--no-horizontal-padding">
         <ul fd-list [compact]="dialogRef.data.contentDensity | isCompactDensity">
             <li *ngIf="!_currentFolder" fd-list-item class="fd-list__item--title-background">
-                <span fd-list-title i18n="@@platformUploadCollection.MoveTo.AllFile.Label">All files</span>
+                <span fd-list-title>{{ 'platformUploadCollection.moveToAllFilesSubHeaderLabel' | fdTranslate }}</span>
             </li>
             <li
                 fd-list-item
@@ -61,7 +56,6 @@
     <fd-dialog-footer>
         <fd-button-bar
             fdType="emphasized"
-            i18n="@@platformUploadCollection.MoveTo.Btn.Confirm"
             type="submit"
             [disabled]="
                 !(
@@ -71,8 +65,10 @@
             "
             (click)="_confirm()"
         >
-            Move
+            {{ 'platformUploadCollection.moveToConfirmBtn' | fdTranslate }}
         </fd-button-bar>
-        <fd-button-bar i18n="@@platformUploadCollection.MoveTo.Btn.Close" (click)="_close()"> Cancel </fd-button-bar>
+        <fd-button-bar (click)="_close()">
+            {{ 'platformUploadCollection.moveToCloseBtn' | fdTranslate }}
+        </fd-button-bar>
     </fd-dialog-footer>
 </fd-dialog>

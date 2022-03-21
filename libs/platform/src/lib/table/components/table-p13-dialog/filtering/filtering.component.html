@@ -3,7 +3,7 @@
         <ng-template fdTemplate="header">
             <div fd-bar-left>
                 <fd-bar-element>
-                    <h4 fd-title [headerSize]="4" i18n="@@platformTableP13FilterDialogHeader">Filter By</h4>
+                    <h4 fd-title [headerSize]="4">{{ 'platformTable.P13FilterDialogHeader' | fdTranslate }}</h4>
                 </fd-bar-element>
             </div>
             <div fd-bar-right>
@@ -19,8 +19,13 @@
     <fd-dialog-body>
         <!-- Include Rules -->
         <fd-panel [compact]="dialogRef.data.tableContentDensity | isCompactDensity" [expanded]="_includePanelExpanded">
-            <div fd-panel-title i18n="@@platformTableP13FilterDialogIncludePanelTitle">
-                Include <ng-container *ngIf="_validIncludeRulesCount > 0">({{ _validIncludeRulesCount }})</ng-container>
+            <div fd-panel-title>
+                {{
+                    (_validIncludeRulesCount > 0
+                        ? 'platformTable.P13FilterDialogIncludePanelTitleWithCount'
+                        : 'platformTable.P13FilterDialogIncludePanelTitleWithoutCount'
+                    ) | fdTranslate: { count: _validIncludeRulesCount }
+                }}
             </div>
             <div fd-panel-content>
                 <fd-layout-grid *ngFor="let rule of _includeRules; let i = index">
@@ -39,10 +44,8 @@
                                 fdType="transparent"
                                 glyph="sys-cancel"
                                 [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
-                                i18n-aria-label="platformTableP13FilterDialogRemoveFilter|Button aria-label attribute"
-                                aria-label="Remove Filter"
-                                i18n-title="platformTableP13FilterDialogRemoveFilter|Button title attribute"
-                                title="Remove Filter"
+                                [attr.aria-label]="'platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate"
+                                [title]="'platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate"
                                 (click)="_removeRule(rule, _includeRules)"
                             ></button>
 
@@ -52,10 +55,8 @@
                                 fdType="transparent"
                                 glyph="add"
                                 [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
-                                i18n-aria-label="platformTableP13FilterDialogAddFilter|Button arial-label attribute"
-                                aria-label="Add Filter"
-                                i18n-title="platformTableP13FilterDialogAddFilter|Button title attribute"
-                                title="Add Filter"
+                                [attr.aria-label]="'platformTable.P13FilterDialoAddFilterBtnTitle' | fdTranslate"
+                                [title]="'platformTable.P13FilterDialoAddFilterBtnTitle' | fdTranslate"
                                 (click)="_addNewRule(_includeRules)"
                             ></button>
                         </div>
@@ -65,8 +66,13 @@
         </fd-panel>
         <!-- Exclude Rules -->
         <fd-panel [compact]="dialogRef.data.tableContentDensity | isCompactDensity" [expanded]="_excludePanelExpanded">
-            <div fd-panel-title i18n="@@platformTableP13FilterDialogExcludePanelTitle">
-                Exclude <ng-container *ngIf="_validExcludeRulesCount > 0">({{ _validExcludeRulesCount }})</ng-container>
+            <div fd-panel-title>
+                {{
+                    (_validExcludeRulesCount > 0
+                        ? 'platformTable.P13FilterDialogExcludePanelTitleWithCount'
+                        : 'platformTable.P13FilterDialogExcludePanelTitleWithoutCount'
+                    ) | fdTranslate: { count: _validExcludeRulesCount }
+                }}
             </div>
             <div fd-panel-content>
                 <fd-layout-grid *ngFor="let rule of _excludeRules; let i = index">
@@ -84,12 +90,8 @@
                                 fdType="transparent"
                                 glyph="sys-cancel"
                                 [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
-                                i18n-aria-label="
-                                    platformTableP13FilterDialogRemoveFilterFromExclude|Button aria-label attribute
-                                "
-                                aria-label="Remove Filter"
-                                i18n-title="platformTableP13FilterDialogRemoveFilterFromExclude|Button title attribute"
-                                title="Remove Filter"
+                                [attr.aria-label]="'platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate"
+                                [title]="'platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate"
                                 (click)="_removeRule(rule, _excludeRules)"
                             ></button>
 
@@ -99,12 +101,8 @@
                                 fdType="transparent"
                                 glyph="add"
                                 [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
-                                i18n-aria-label="
-                                    platformTableP13FilterDialogAddFilterToExclude|Button aria-label attribute
-                                "
-                                aria-label="Add Filter"
-                                i18n-title="platformTableP13FilterDialogAddFilterToExclude|Button title attribute"
-                                title="Add Filter"
+                                [attr.aria-label]="'platformTable.P13FilterDialoAddFilterBtnTitle' | fdTranslate"
+                                [title]="'platformTable.P13FilterDialoAddFilterBtnTitle' | fdTranslate"
                                 (click)="_addNewRule(_excludeRules)"
                             ></button>
                         </div>
@@ -120,8 +118,7 @@
                 fd-button
                 fdType="emphasized"
                 fd-dialog-decisive-button
-                i18n-label="@@platformTableP13FilterDialogConfirmationBtn"
-                label="OK"
+                [label]="'platformTable.P13FilterDialogConfirmationBtnLabel' | fdTranslate"
                 [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 (click)="confirm()"
             ></button>
@@ -133,8 +130,7 @@
                 fdType="transparent"
                 fd-dialog-decisive-button
                 fd-initial-focus
-                i18n-label="@@platformTableP13FilterDialogCancelBtn"
-                label="Cancel"
+                [label]="'platformTable.P13FilterDialogCancelBtnLabel' | fdTranslate"
                 [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 (click)="cancel()"
             ></button>

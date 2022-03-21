@@ -782,6 +782,13 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
     }
 
     /** @hidden */
+    _getAllowedTypes(): string {
+        return `${this.fileTypes?.join(', ')}${
+            this.fileTypes?.length && this.mimeTypes?.length ? ', ' : ''
+        }${this.mimeTypes?.join(', ')}`;
+    }
+
+    /** @hidden */
     private _validateFiles(files: File[]): void {
         this._validatedFiles = this._filesValidatorService.validation(files, {
             maxFileSize: this.maxFileSize,

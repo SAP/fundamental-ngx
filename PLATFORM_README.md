@@ -48,7 +48,7 @@ c). If we need to group information into sections
 
 d). How we are handling and forms errors
 
-e). Dropdown wsage. Everything is heppening inside the component that manages the iteration of the items we just pass list of values.
+e). Dropdown usage. Everything is heppening inside the component that manages the iteration of the items we just pass list of values.
 
 ```html
 <fdp-form-group

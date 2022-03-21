@@ -7,13 +7,27 @@
 >
     <bdi>
         <span [ngSwitch]="message.type">
-            <ng-container *ngSwitchCase="'approverAddSuccess'" [ngTemplateOutlet]="approverAddSuccess"></ng-container>
-            <ng-container *ngSwitchCase="'teamAddSuccess'" [ngTemplateOutlet]="teamAddSuccess"></ng-container>
-            <ng-container *ngSwitchCase="'nodeEdit'" [ngTemplateOutlet]="nodeEdit"></ng-container>
-            <ng-container *ngSwitchCase="'nodeRemove'" [ngTemplateOutlet]="nodeRemove"></ng-container>
-            <ng-container *ngSwitchCase="'nodesRemove'" [ngTemplateOutlet]="nodesRemove"></ng-container>
-            <ng-container *ngSwitchCase="'teamRemove'" [ngTemplateOutlet]="teamRemove"></ng-container>
-            <ng-container *ngSwitchCase="'error'" [ngTemplateOutlet]="errorBuildGraph"></ng-container>
+            <ng-container *ngSwitchCase="'approverAddSuccess'">
+                {{ 'platformApprovalFlow.messagesApproverAddedSuccess' | fdTranslate }}
+            </ng-container>
+            <ng-container *ngSwitchCase="'teamAddSuccess'">
+                {{ 'platformApprovalFlow.messagesTeamAddedSuccess' | fdTranslate }}
+            </ng-container>
+            <ng-container *ngSwitchCase="'nodeEdit'">
+                {{ 'platformApprovalFlow.messagesNodeEdited' | fdTranslate }}
+            </ng-container>
+            <ng-container *ngSwitchCase="'nodeRemove'">
+                {{ 'platformApprovalFlow.messagesNodeRemovedSingular' | fdTranslate }}
+            </ng-container>
+            <ng-container *ngSwitchCase="'nodesRemove'">
+                {{ 'platformApprovalFlow.messagesNodeRemovedPlural' | fdTranslate }}
+            </ng-container>
+            <ng-container *ngSwitchCase="'teamRemove'">
+                {{ 'platformApprovalFlow.messagesTeamRemoved' | fdTranslate }}
+            </ng-container>
+            <ng-container *ngSwitchCase="'error'">
+                {{ 'platformApprovalFlow.messagesErrorBuildGraph' | fdTranslate }}
+            </ng-container>
         </span>
 
         <a
@@ -22,39 +36,8 @@
             (click)="_undoLastAction(i, $event)"
             (keyup.enter)="_undoLastAction(i, $event)"
             (keyup.space)="_undoLastAction(i, $event)"
-            i18n="@@platformApprovalFlowUndo"
         >
-            Undo
+            {{ 'platformApprovalFlow.messagesUndoAction' | fdTranslate }}
         </a>
     </bdi>
 </fd-message-strip>
-
-<ng-template #approverAddSuccess>
-    <ng-container i18n="@@platformApprovalFlowApproverAddedAlert"> 1 approver has been added </ng-container>
-</ng-template>
-
-<ng-template #teamAddSuccess>
-    <ng-container i18n="@@platformApprovalFlowTeamAddedAlert"> 1 team has been added </ng-container>
-</ng-template>
-
-<ng-template #nodeEdit>
-    <ng-container i18n="@@platformApprovalFlowNodeEditedAlert"> 1 approver has been edited </ng-container>
-</ng-template>
-
-<ng-template #nodeRemove>
-    <ng-container i18n="@@platformApprovalFlowNodeRemovedAlert"> 1 approver has been removed </ng-container>
-</ng-template>
-
-<ng-template #nodesRemove>
-    <ng-container i18n="@@platformApprovalFlowNodesRemovedAlert"> Approvers have been removed </ng-container>
-</ng-template>
-
-<ng-template #teamRemove>
-    <ng-container i18n="@@platformApprovalFlowTeamRemovedAlert"> 1 team has been removed </ng-container>
-</ng-template>
-
-<ng-template #errorBuildGraph>
-    <ng-container i18n="@@platformApprovalBuildGraphFailCheckData">
-        There was an error when trying to build graph. Check the initial data.
-    </ng-container>
-</ng-template>

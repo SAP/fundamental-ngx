@@ -14,6 +14,7 @@ import { RadioModule } from '@fundamental-ngx/core/radio';
 import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
 import { PlatformObjectStatusModule } from '@fundamental-ngx/platform/object-status';
 import { StandardListItemComponent } from './standard-list-item.component';
+import { I18nModule } from '@fundamental-ngx/i18n';
 
 @NgModule({
     declarations: [StandardListItemComponent],
@@ -25,6 +26,7 @@ import { StandardListItemComponent } from './standard-list-item.component';
         FormModule,
         RadioModule,
         PipeModule,
+        I18nModule,
         ButtonModule,
         PlatformLinkModule,
         ListModule,

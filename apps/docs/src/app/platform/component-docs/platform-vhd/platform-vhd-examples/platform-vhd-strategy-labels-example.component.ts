@@ -62,12 +62,6 @@ export class PlatformVhdStrategyLabelExampleComponent implements OnInit {
     actualValue: Partial<VhdValue<ExampleTestModel>> = {};
     actualItems: string[] = [];
 
-    customStrategyLabels: {
-        [key in keyof (typeof VhdDefineIncludeStrategy | typeof VhdDefineExcludeStrategy)]?: string;
-    } = {
-        equalTo: 'ilingana ne-',
-        between: 'FROM...TO'
-    };
     formatTokenFn = (value: Partial<VhdValue<ExampleTestModel>>): void => {
         this.actualItems = [
             ...(value.selected || []).map((item) => item.name),

@@ -67,7 +67,8 @@ export const layouts: SectionInterfaceContent[] = [
 
 export const utilities: SectionInterfaceContent[] = [
     { url: 'platform/form-generator', name: 'Form Generator' },
-    { url: 'platform/wizard-generator', name: 'Wizard Generator' }
+    { url: 'platform/wizard-generator', name: 'Wizard Generator' },
+    { url: 'platform/i18n', name: 'I18n' }
 ];
 
 export const sections: SectionInterface[] = [

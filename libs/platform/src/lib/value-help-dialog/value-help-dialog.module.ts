@@ -23,6 +23,7 @@ import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { InfiniteScrollModule } from '@fundamental-ngx/core/infinite-scroll';
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
+import { I18nModule } from '@fundamental-ngx/i18n';
 
 import { PlatformValueHelpDialogComponent } from './value-help-dialog/value-help-dialog.component';
 import { VhdFilterComponent } from './components/value-help-dialog-filter/value-help-dialog-filter.component';
@@ -52,6 +53,7 @@ import { ConditionCountMessageDirective } from './directives/condition-count-mes
         TokenModule,
         FormModule,
         BusyIndicatorModule,
+        I18nModule,
         LayoutGridModule,
         ToolbarModule,
         TableModule,

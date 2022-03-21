@@ -6,7 +6,9 @@
         glyph="navigation-left-arrow"
         (click)="back.emit()"
     ></button>
-    <h4 fd-title [headerSize]="4" i18n="@@platformTableFilterDialogFilterByLabel">Filter by: {{ filter.label }}</h4>
+    <h4 fd-title [headerSize]="4">
+        {{ 'platformTable.filterDialogFilterByLabel' | fdTranslate: { filterLabel: filter.label } }}
+    </h4>
 </ng-template>
 
 <ng-template #bodyTemplate>
