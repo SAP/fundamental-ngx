@@ -1,4 +1,4 @@
-import { ApplicationRef, Injectable, isDevMode, NgZone, Optional } from '@angular/core';
+import { Injectable, isDevMode, Optional } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { filter, takeUntil } from 'rxjs/operators';
@@ -74,12 +74,7 @@ export class ThemesService {
     /** @hidden **/
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    constructor(
-        @Optional() private _activatedRoute: ActivatedRoute,
-        private _sanitizer: DomSanitizer,
-        private _appRef: ApplicationRef,
-        private _ngZone: NgZone
-    ) {}
+    constructor(@Optional() private _activatedRoute: ActivatedRoute, private _sanitizer: DomSanitizer) {}
 
     /**
      * Set theme according to additional URL parameter.
