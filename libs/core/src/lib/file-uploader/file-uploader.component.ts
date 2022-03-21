@@ -1,4 +1,5 @@
 import {
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -11,6 +12,7 @@ import {
     OnInit,
     Optional,
     Output,
+    Renderer2,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
@@ -46,7 +48,7 @@ let fileUploaderInputUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDestroy {
+export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDestroy, AfterViewInit {
     /** @hidden */
     @HostBinding('class.fd-file-uploader')
     fdFileInputClass = true;
@@ -129,6 +131,10 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
     @Input()
     inputHidden = false;
 
+    /** Width of the file uploader */
+    @Input()
+    width: string;
+
     /** * It stores the valid files  */
     validFiles: File[] = [];
 
@@ -159,6 +165,7 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
     constructor(
         private _fileUploadService: FileUploaderService,
         private _changeDetRef: ChangeDetectorRef,
+        private _renderer: Renderer2,
         @Optional() private _contentDensityService: ContentDensityService
     ) {}
 
@@ -171,6 +178,13 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
                     this._changeDetRef.markForCheck();
                 })
             );
+        }
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        if (this.inputRefText) {
+            this._renderer.setStyle(this.inputRefText.nativeElement, 'width', this.width);
         }
     }
 

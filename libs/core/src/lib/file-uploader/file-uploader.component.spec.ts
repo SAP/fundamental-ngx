@@ -117,4 +117,11 @@ describe('FileUploaderComponent', () => {
         expect(component.validFiles).toEqual([]);
         expect(component.invalidFiles).toEqual([]);
     });
+
+    it('should be manageable width', () => {
+        const width = '300px';
+        component.width = width;
+        component.ngAfterViewInit();
+        expect(component.inputRefText.nativeElement.style.width).toEqual(width);
+    });
 });
