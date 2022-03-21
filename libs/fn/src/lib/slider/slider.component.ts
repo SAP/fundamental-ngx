@@ -384,8 +384,6 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
             const value = this._calculateValueFromPointerPosition(moveEvent, false) as number;
             this._setRangeHandleValueAndPosition(handleIndex, value);
 
-            console.log(value);
-
             this.writeValue(this._constructRangeModelValue());
         });
 

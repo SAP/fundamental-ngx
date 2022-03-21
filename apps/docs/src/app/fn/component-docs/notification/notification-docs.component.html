@@ -1,0 +1,51 @@
+<fd-docs-section-title id="default" componentName="Notification"> Notification Standard Usage </fd-docs-section-title>
+<description>
+    <p>Notifications can be created by using <code>NotificationService</code>.</p>
+    <p>This service supports creating notifications from the following entities:</p>
+    <ul>
+        <li>Use built-in component for rendering plain notification;</li>
+        <li>Use provided TemplateRef to render the notification;</li>
+        <li>Use provided Component Class to render the notification.</li>
+    </ul>
+</description>
+<component-example [hasBackground]="false">
+    <fundamental-ngx-notification-default-example></fundamental-ngx-notification-default-example>
+</component-example>
+<code-example [exampleFiles]="notificationDefaultExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="semantic" componentName="Notification"> Notification Semantic State </fd-docs-section-title>
+<description>
+    <p>Notifications also support semantic states.</p>
+    <p>
+        To add semantic state to your notifications, use <code>semantic</code> property of the notification
+        configuration.
+    </p>
+</description>
+<component-example [hasBackground]="false">
+    <fn-notification-semantic-state-example></fn-notification-semantic-state-example>
+</component-example>
+<code-example [exampleFiles]="notificationSemanticExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="position" componentName="Notification"> Notification Position </fd-docs-section-title>
+<description>
+    <p>
+        By default, notifications are stacked at the top right corner and newly added items will be stacked below the
+        old ones.
+    </p>
+    <p>
+        To change the position and direction of the notifications, use <code>setNewPositionStrategy</code> method of the
+        <code>NotificationService</code>.
+    </p>
+    <p>
+        Additionaly, developers can create their own position strategies by extending
+        <code>BaseToastPosition</code> class.
+    </p>
+</description>
+<component-example [hasBackground]="false">
+    <fn-notification-position-example></fn-notification-position-example>
+</component-example>
+<code-example [exampleFiles]="notificationPositionExample"></code-example>

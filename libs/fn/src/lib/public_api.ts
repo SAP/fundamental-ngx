@@ -18,3 +18,5 @@ export * from '@fundamental-ngx/fn/object-status';
 export * from '@fundamental-ngx/fn/list';
 export * from '@fundamental-ngx/fn/info-label';
 export * from '@fundamental-ngx/fn/input';
+export * from '@fundamental-ngx/fn/message-toast';
+export * from '@fundamental-ngx/fn/notification';

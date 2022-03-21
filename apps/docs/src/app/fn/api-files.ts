@@ -23,5 +23,7 @@ export const API_FILES = {
     progressBar: ['ProgressBarComponent'],
     infoLabel: ['InfoLabelComponent'],
     messageStrip: ['MessageStripComponent'],
-    objectStatus: ['ObjectStatusComponent']
+    objectStatus: ['ObjectStatusComponent'],
+    messageToast: ['MessageToastComponent', 'MessageToastService', 'MessageToastConfig', 'MessageToastRef'],
+    notification: ['NotificationComponent', 'NotificationService', 'NotificationConfig', 'NotificationRef']
 };

@@ -1,16 +1,10 @@
 <p>Rounded:</p>
 <div class="fn-avatar__example">
-    <fn-avatar
-        [thumbnail]="true"
-        image="https://picsum.photos/id/1025/400"
-        [size]="size"
-        *ngFor="let size of sizes"
-    ></fn-avatar>
+    <fn-avatar image="https://picsum.photos/id/1025/400" [size]="size" *ngFor="let size of sizes"></fn-avatar>
 </div>
 <p>Circle:</p>
 <div class="fn-avatar__example">
     <fn-avatar
-        [thumbnail]="true"
         [circle]="true"
         image="https://picsum.photos/id/1025/400"
         [size]="size"
@@ -21,7 +15,6 @@
 <div class="fn-avatar__example">
     <fn-avatar
         [interactive]="true"
-        [thumbnail]="true"
         image="https://picsum.photos/id/1025/400"
         [size]="size"
         *ngFor="let size of sizes"

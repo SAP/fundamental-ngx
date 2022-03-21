@@ -41,6 +41,14 @@ export const components: SectionInterfaceContent[] = [
     {
         url: 'fn/object-status',
         name: 'Object Status'
+    },
+    {
+        url: 'fn/message-toast',
+        name: 'Message Toast'
+    },
+    {
+        url: 'fn/notification',
+        name: 'Notification'
     }
 ];
 

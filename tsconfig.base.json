@@ -134,6 +134,8 @@
             "@fundamental-ngx/fn/input": ["libs/fn/src/lib/input/index.ts"],
             "@fundamental-ngx/fn/list": ["libs/fn/src/lib/list/index.ts"],
             "@fundamental-ngx/fn/message-strip": ["libs/fn/src/lib/message-strip/index.ts"],
+            "@fundamental-ngx/fn/message-toast": ["libs/fn/src/lib/message-toast/index.ts"],
+            "@fundamental-ngx/fn/notification": ["libs/fn/src/lib/notification/index.ts"],
             "@fundamental-ngx/fn/object-status": ["libs/fn/src/lib/object-status/index.ts"],
             "@fundamental-ngx/fn/progress-bar": ["libs/fn/src/lib/progress-bar/index.ts"],
             "@fundamental-ngx/fn/radio": ["libs/fn/src/lib/radio/index.ts"],

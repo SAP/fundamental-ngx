@@ -1,6 +1,6 @@
 import { TemplateRefDirective } from '@fundamental-ngx/fn/utils';
 import { Directive } from '@angular/core';
-import { FN_CHECKBOX_LABEL } from './tokens';
+import { FN_CHECKBOX_LABEL } from './checkbox.tokens';
 
 @Directive({
     selector: '[fnCheckboxLabel]',
