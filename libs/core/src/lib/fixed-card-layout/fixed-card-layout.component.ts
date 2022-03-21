@@ -11,11 +11,13 @@ import {
     EventEmitter,
     HostListener,
     Input,
+    OnChanges,
     OnDestroy,
     OnInit,
     Optional,
     Output,
     QueryList,
+    SimpleChanges,
     TemplateRef,
     ViewChild,
     ViewChildren,
@@ -31,7 +33,7 @@ import { FixedCardLayoutItemComponent } from './fixed-card-layout-item/fixed-car
 import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
 
 const PX_IN_REM = 16;
-const CARD_MINIMUM_WIDTH = 320; // 320px = 20rem, max card width
+const CARD_MINIMUM_WIDTH = 320; // 320px = 20rem
 const CARD_GAP_WIDTH = 16; // 16px = 1rem
 const DRAG_START_DELAY = 200; // in ms
 
@@ -74,6 +76,10 @@ export interface CardDropped {
     items: CardDefinitionDirective[];
 }
 
+type Columns = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+
+export type ColumnsWidthConfig = { [C in Columns]?: number };
+
 type CardColumn = CardDefinitionDirective[];
 
 @Component({
@@ -86,7 +92,9 @@ type CardColumn = CardDefinitionDirective[];
         class: 'fd-fixed-card-layout'
     }
 })
-export class FixedCardLayoutComponent implements OnInit, AfterContentInit, AfterViewInit, AfterViewChecked, OnDestroy {
+export class FixedCardLayoutComponent
+    implements OnInit, AfterContentInit, AfterViewInit, AfterViewChecked, OnChanges, OnDestroy
+{
     /** Drag drop behavior can be disabled */
     @Input()
     disableDragDrop: boolean;
@@ -97,8 +105,14 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
 
     /** Card's minimum width in pixels. */
     @Input()
-    set cardMinimumWidth(value: number) {
-        this._cardMinimumWidth = coerceNumberProperty(value);
+    set cardMinimumWidth(value: NumberInput) {
+        const coercedValue = coerceNumberProperty(value);
+
+        if (coercedValue < CARD_MINIMUM_WIDTH) {
+            return;
+        }
+
+        this._cardMinimumWidth = coercedValue;
 
         // If component is ready, do the recalculation.
         if (this._layout) {
@@ -108,6 +122,10 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     get cardMinimumWidth(): number {
         return this._cardMinimumWidth;
     }
+
+    /** Config with the width ratios that should take every column. Flex-grow principe. Missed values set to 0. s*/
+    @Input()
+    columnsWidthConfig: ColumnsWidthConfig;
 
     /** Event to emit, when layout changes */
     @Output()
@@ -156,6 +174,9 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
 
     /** @hidden first number is the CardDefinition rank, i.e. id */
     _singleItemColumns = new Set<number>();
+
+    /** @hidden */
+    private _columnsWidth = new Map<number, number>();
 
     /** @hidden Return available width for fixed card layout */
     get _availableWidth(): number {
@@ -213,6 +234,13 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     }
 
     /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        if ('columnsWidthConfig' in changes) {
+            this._setColumnsWidth();
+        }
+    }
+
+    /** @hidden */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
@@ -239,9 +267,11 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
 
         if (this._previousNumberOfColumns !== this._numberOfColumns) {
             this._previousNumberOfColumns = this._numberOfColumns;
-
             this._updateColumns();
+            return;
         }
+
+        this._setColumnsWidth();
     }
 
     /** @hidden Calculate container height basing on the card wrapper columns */
@@ -408,6 +438,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     /** @hidden Renders layout on column changes */
     private _updateColumns(): void {
         this._setCardColumns();
+        this._setColumnsWidth(false);
         this._calculateContainerHeight();
     }
 
@@ -448,6 +479,50 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
             }
         });
     }
+
+    /** @hidden */
+    private _setColumnsWidth(detectChanges = true): void {
+        this._columnsWidth = new Map();
+        const configPresent =
+            this.columnsWidthConfig &&
+            typeof this.columnsWidthConfig === 'object' &&
+            Object.keys(this.columnsWidthConfig).length;
+
+        if (!configPresent || !this._layout || this._numberOfColumns === 1) {
+            return;
+        }
+
+        const fixedWidthModifiers = fixWidthModifiers(this.columnsWidthConfig, this._numberOfColumns);
+        const totalWidthModifiers = fixedWidthModifiers.reduce((sum, width) => (sum += width), 0);
+        const freeSpace = this._availableWidth - this.cardMinimumWidth * this._numberOfColumns;
+
+        this._cardColumns.forEach((column, index) => {
+            const columnWidth = Math.round(
+                this.cardMinimumWidth + (freeSpace / totalWidthModifiers) * fixedWidthModifiers[index]
+            );
+
+            column.forEach((card) => this._columnsWidth.set(card.fdCardDef, columnWidth));
+        });
+
+        if (detectChanges) {
+            this._changeDetector.detectChanges();
+        }
+    }
+}
+
+/** @hidden */
+function fixWidthModifiers(config: ColumnsWidthConfig, numberOfColumns: number): number[] {
+    const modifiers = new Array(numberOfColumns).fill(0);
+
+    return modifiers.map((_, index) => {
+        const columnWidthModifier = config[index + 1];
+
+        if (!columnWidthModifier || columnWidthModifier < 0) {
+            return 0;
+        }
+
+        return columnWidthModifier;
+    });
 }
 
 /** @hidden Returns number of columns that can fit in current available width for fd-card-layout */
