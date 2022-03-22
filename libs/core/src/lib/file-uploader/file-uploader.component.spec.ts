@@ -7,6 +7,7 @@ import { FileUploaderSelectDirective } from './directives/file-uploader-select.d
 import { FileUploaderDragndropDirective } from './directives/file-uploader-dragndrop.directive';
 import { ButtonModule } from '../button/button.module';
 import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
+import { ChangeDetectorRef } from '@angular/core';
 
 interface MockFile extends File {
     size: number;
@@ -121,7 +122,7 @@ describe('FileUploaderComponent', () => {
     it('should be manageable width', () => {
         const width = '300px';
         component.width = width;
-        component.ngAfterViewInit();
+        fixture.componentRef.injector.get(ChangeDetectorRef).detectChanges();
         expect(component.inputRefText.nativeElement.style.width).toEqual(width);
     });
 });
