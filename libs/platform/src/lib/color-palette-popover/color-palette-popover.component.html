@@ -6,5 +6,7 @@
     [showDefaultColor]="showDefaultColor"
     [defaultColor]="defaultColor"
 >
-    <ng-content></ng-content>
+    <ng-container *ngFor="let item of items">
+        <ng-template [ngTemplateOutlet]="item.renderer"></ng-template>
+    </ng-container>
 </ui5-color-palette-popover>
