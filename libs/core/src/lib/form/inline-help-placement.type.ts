@@ -1,1 +1,1 @@
-export type InlineHelpPlacement = 'before' | 'after';
+export type InlineHelpFormPlacement = 'before' | 'after';

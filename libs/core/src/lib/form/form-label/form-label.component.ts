@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { Placement } from '@fundamental-ngx/core/shared';
-import { InlineHelpPlacement } from '../inline-help-placement.type';
+import { InlineHelpFormPlacement } from '../inline-help-placement.type';
 
 /**
  * Label to be linked to a form control.
@@ -59,7 +59,7 @@ export class FormLabelComponent implements OnChanges {
 
     /** If inline help trigger icon should be placed after, or before text */
     @Input()
-    inlineHelpPlacement: InlineHelpPlacement = 'after';
+    inlineHelpPlacement: InlineHelpFormPlacement = 'after';
 
     /** @hidden */
     @HostBinding('class.fd-form-label__wrapper')

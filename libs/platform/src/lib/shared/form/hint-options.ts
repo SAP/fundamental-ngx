@@ -1,11 +1,11 @@
-import { InlineHelpPlacement } from '@fundamental-ngx/core/form';
+import { InlineHelpFormPlacement } from '@fundamental-ngx/core/form';
 import { HintPlacement } from './form-options';
 
 export interface HintOptions {
     /** Text of the hint */
     text: string;
     /** Text position of the inline help icon, relative to label */
-    position?: InlineHelpPlacement;
+    position?: InlineHelpFormPlacement;
     /** Trigger events for showing and hiding help */
     trigger?: string[];
     /** Hint placement */
