@@ -36,6 +36,11 @@ export class FormLabelComponent implements OnChanges {
     @Input()
     radio = false;
 
+    /** Align label on end */
+    @Input()
+    @HostBinding('class.fd-form-label__wrapper__align-end')
+    alignLabelEnd = false;
+
     /** Inline help body text */
     @Input()
     inlineHelpTitle: string = null;

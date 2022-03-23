@@ -31,6 +31,10 @@ $form-label-bottom-spacing: 0.125rem;
     display: flex;
     padding-bottom: $form-label-bottom-spacing;
 
+    &__align-end {
+        justify-content: flex-end;
+    }
+
     span.fd-form-label {
         margin-bottom: -$form-label-bottom-spacing;
     }
