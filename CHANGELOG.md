@@ -1,4 +1,11 @@
 
+### 0.33.6-rc.4 (2022-03-24)
+
+
+### Bug Fixes
+
+* **core:** dynamic page fix flickering screen ([#7889](https://github.com/SAP/fundamental-ngx/issues/7889)) ([0a5c0d2](https://github.com/SAP/fundamental-ngx/commit/0a5c0d2e9debdc8073b5cd132cb9d3cad3121f1e))
+
 ### 0.33.6-rc.3 (2022-03-21)
 
 ### 0.33.6-rc.2 (2022-03-21)
