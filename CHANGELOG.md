@@ -1,4 +1,11 @@
 
+## 0.34.0-rc.1 (2022-03-25)
+
+
+### Features
+
+* **core:** file uploader add manageable width ([#7901](https://github.com/SAP/fundamental-ngx/issues/7901)) ([ce13b90](https://github.com/SAP/fundamental-ngx/commit/ce13b904890325a0089d105e982f8d23a7b63b45))
+
 ## 0.34.0-rc.0 (2022-03-25)
 
 
