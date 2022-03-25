@@ -1,4 +1,16 @@
 
+## 0.34.0-rc.0 (2022-03-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* **core:** * CardDropped interface from the FixedCardLayoutComponent changed
+* Input prop dndKeyboardDisabled removed from DndKeyboardItemDirective
+
+### Bug Fixes
+
+* **core:** fixed card layout performance ([#7701](https://github.com/SAP/fundamental-ngx/issues/7701)) ([54199c1](https://github.com/SAP/fundamental-ngx/commit/54199c1dab2f97ab1046ece3e1387a7d666ec0b9))
+
 ### 0.33.6-rc.4 (2022-03-24)
 
 
