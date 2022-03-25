@@ -73,7 +73,8 @@ describe('FeedInputComponent', () => {
         expect(textareaEl.nativeElement.style.height).toBeGreaterThan(defaultHeight);
     });
 
-    it('should set max height', () => {
+    // TODO: flaky test  https://github.com/SAP/fundamental-ngx/issues/7534
+    xit('should set max height', () => {
         component.maxHeight = 7;
         component.ngAfterViewInit();
 

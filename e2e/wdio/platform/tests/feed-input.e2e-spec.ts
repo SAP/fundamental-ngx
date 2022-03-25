@@ -132,11 +132,12 @@ describe('Verify Feed Input component', () => {
         }
     });
 
-    it('should stop growing after maxHeight option value was reached', () => {
+    xit('should stop growing after maxHeight option value was reached', () => {
         if (browserIsSafari()) {
             // correct value not returned on Safari
             return;
         }
+
         waitForPresent(feedInputTextArea, 4);
         scrollIntoView(feedInputTextArea, 4);
 
