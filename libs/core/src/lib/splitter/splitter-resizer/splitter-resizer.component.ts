@@ -16,8 +16,8 @@ import {
     Output,
     ViewEncapsulation
 } from '@angular/core';
-import { fromEvent, Subject } from 'rxjs';
-import { delay, take, takeUntil } from 'rxjs/operators';
+import { debounceTime, fromEvent, Subject } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
 
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 
@@ -181,7 +181,7 @@ export class SplitterResizerComponent implements OnDestroy {
 
         this._ngZone.runOutsideAngular(() => {
             fromEvent(this._document, 'mousemove')
-                .pipe(delay(10), takeUntil(this._pointerMoveListener))
+                .pipe(debounceTime(10), takeUntil(this._pointerMoveListener))
                 .subscribe((event: MouseEvent) => {
                     this._ngZone.run(() => {
                         const newPosition = this._isHorizontal ? event.clientY : event.clientX;

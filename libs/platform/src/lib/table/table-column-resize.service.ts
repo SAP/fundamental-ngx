@@ -1,6 +1,6 @@
 import { ElementRef, Injectable, OnDestroy, Optional } from '@angular/core';
 import { fromEvent, Observable, Subject, Subscription } from 'rxjs';
-import { delay, takeUntil } from 'rxjs/operators';
+import { debounceTime, takeUntil } from 'rxjs/operators';
 
 import { RtlService } from '@fundamental-ngx/core/utils';
 
@@ -314,7 +314,7 @@ export class TableColumnResizeService implements OnDestroy {
     /** Update column resizer position. */
     private _updateResizerPositionOnMouseMove(): void {
         this._resizerMoveSubscription = fromEvent(document, 'mousemove')
-            .pipe(delay(10))
+            .pipe(debounceTime(10))
             .subscribe((event: MouseEvent) => {
                 const diffX = this._rtl ? this._clientStartX - event.clientX : event.clientX - this._clientStartX;
 
