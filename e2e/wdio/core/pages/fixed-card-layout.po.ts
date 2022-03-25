@@ -7,7 +7,7 @@ export class FixedCardLayoutPo extends CoreBaseComponentPo {
     pageHeader = 'fd-fixed-card-layout-docs-header h1';
 
     hideCardBtnArr = 'fd-fixed-card-layout-examples button';
-    cardDivArr = 'div.cdk-drag.fd-fixed-card-layout__card.ng-star-inserted';
+    cardDivArr = '.fd-fixed-card-layout__card';
     cardHeaderArr = 'fd-card fd-card-header';
     cardContentArr = 'fd-card fd-card-content';
     cardColumnArr = 'div.cdk-drop-list';
@@ -16,7 +16,7 @@ export class FixedCardLayoutPo extends CoreBaseComponentPo {
     navigationMenuBtn = 'button[aria-label*="Switch Navigation"]';
     pageSidebar = 'sections-toolbar .sidebar';
     disabledCardContent = 'fd-fixed-card-layout-disabled-drag fd-card fd-card-content';
-    disabledCardDiv = 'fd-fixed-card-layout-disabled-drag div.cdk-drag.fd-fixed-card-layout__card.ng-star-inserted';
+    disabledCardDiv = 'fd-fixed-card-layout-disabled-drag .fd-fixed-card-layout__card';
 
     open(): void {
         super.open(this.url);

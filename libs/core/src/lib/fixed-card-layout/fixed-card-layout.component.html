@@ -1,40 +1,52 @@
 <div
     #layout
-    class="fd-fixed-card-layout__card-layout"
     cdkDropListGroup
-    [attr.dir]="dir"
     fdDndKeyboardGroup
-    [groups]="_columns"
+    class="fd-fixed-card-layout__card-layout fd-fixed-card-layout__card-layout--columns-{{ this._numberOfColumns }}"
+    [style.height]="_containerHeight + 'px'"
+    [groups]="_cardColumns"
+    orientation="horizontal"
+    [customMoveFn]="_customMoveFn"
+    [customTransferFn]="_customTransferFn"
+    [disableKeyboardDragDrop]="disableDragDrop"
+    [cdkDropListGroupDisabled]="disableDragDrop"
+    [attr.dir]="_dir"
 >
     <div
-        class="fd-fixed-card-layout__card-layout-column"
-        [cdkDropListData]="column"
+        #dropList
+        *ngFor="let card of _cardsArray; let cardIndex = index"
         cdkDropList
-        *ngFor="let column of _columns; let groupIndex = index"
-        [cdkDropListDisabled]="disableDragDrop"
+        cdkDropListSortingDisabled
+        class="fd-fixed-card-layout__card"
+        [class.fd-fixed-card-layout__card--single]="_singleItemColumns.has(card.fdCardDef)"
+        [cdkDropListData]="cardIndex"
+        [cdkDropListEnterPredicate]="_enterPredicate"
+        (cdkDropListEntered)="_onDropListEntered($event)"
+        (cdkDropListExited)="_onDropListExited()"
     >
-        <ng-container *ngFor="let card of column; let index = index">
-            <div
-                class="fd-fixed-card-layout__card"
-                cdkDrag
-                [cdkDragStartDelay]="dragStartDelay"
-                cdkDragPreviewClass="fd-fixed-card-layout__card-preview"
-                [cdkDragData]="card"
-                (cdkDragDropped)="dragDrop($event)"
-                fdDndKeyboardItem
-                [dndKeyboardDisabled]="disableDragDrop"
-                [itemIndex]="index"
-                [groupIndex]="groupIndex"
-                tabindex="0"
-            >
-                <fd-fixed-card-layout-item>
-                    <ng-container *ngTemplateOutlet="card?.template"> </ng-container>
-                </fd-fixed-card-layout-item>
+        <div
+            cdkDrag
+            fdDndKeyboardItem
+            tabindex="0"
+            cdkDragPreviewClass="fd-fixed-card-layout__card-preview"
+            [cdkDragData]="card"
+            [cdkDragStartDelay]="dragStartDelay"
+            [itemIndex]="_itemIndexes.get(card.fdCardDef)"
+            [groupIndex]="_groupIndexes.get(card.fdCardDef)"
+            (cdkDragDropped)="_onDragDropped($event)"
+            (cdkDragStarted)="_setPlaceholderStyle(false)"
+        >
+            <fd-fixed-card-layout-item>
+                <ng-container *ngTemplateOutlet="card?.template"> </ng-container>
+            </fd-fixed-card-layout-item>
 
-                <div *cdkDragPlaceholder class="fd-fixed-card-layout__card-placeholder">
-                    <ng-container *ngTemplateOutlet="card?.template"></ng-container>
-                </div>
+            <div *cdkDragPlaceholder class="fd-fixed-card-layout__card-placeholder" [style]="_placeholderMargin">
+                <ng-container *ngTemplateOutlet="card?.template"></ng-container>
             </div>
-        </ng-container>
+        </div>
     </div>
+
+    <ng-container *ngFor="let column of _cardColumns; let last = last; let index = index">
+        <div *ngIf="!last" class="fd-fixed-card-layout__clearfix" [style.order]="index + 1"></div>
+    </ng-container>
 </div>

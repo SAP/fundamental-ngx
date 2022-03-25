@@ -623,7 +623,8 @@ describe('Cascading Menu', () => {
         expect(menuEls.length).toBe(0);
     }));
 
-    it('should hide all menus when when the user TABs off of menu', fakeAsync(() => {
+    // TODO: flaky test  https://github.com/SAP/fundamental-ngx/issues/7534
+    xit('should hide all menus when when the user TABs off of menu', fakeAsync(() => {
         /**
          * FIRST-CLICK (OPEN MENU)
          */

@@ -61,7 +61,7 @@ describe('Fixed card layout test suite', () => {
             const originalFirstCardText = getText(cardDivArr);
 
             scrollIntoView(cardHeaderArr);
-            checkDragAndDrop(cardHeaderArr, cardContentArr, cardContentArr, 4);
+            checkDragAndDrop(cardHeaderArr, cardContentArr, 4);
             const newText = getText(cardDivArr);
             expect(newText).not.toBe(originalFirstCardText);
         });
@@ -70,7 +70,7 @@ describe('Fixed card layout test suite', () => {
             const originalFirstCardText = getText(cardDivArr);
 
             scrollIntoView(cardDivArr);
-            checkDragAndDrop(cardContentArr, cardDivArr, cardContentArr, 4);
+            checkDragAndDrop(cardContentArr, cardContentArr, 2);
             const newText = getText(cardDivArr);
             expect(newText).not.toBe(originalFirstCardText);
         });
@@ -80,14 +80,16 @@ describe('Fixed card layout test suite', () => {
             const originalSwapCardText = getText(cardDivArr, 1);
 
             scrollIntoView(cardDivArr);
-            checkDragAndDrop(cardContentArr, cardDivArr, cardContentArr, 1);
+            checkDragAndDrop(cardContentArr, cardContentArr, 1);
+
             const newFirstCardText = getText(cardDivArr);
             const newSwapCardText = getText(cardDivArr, 1);
+
             expect(newFirstCardText).not.toBe(originalFirstCardText);
             expect(newSwapCardText).not.toBe(originalSwapCardText);
         });
-        // unable to drag cards
-        // https://github.com/SAP/fundamental-ngx/issues/7342
+
+        // skipped until issue fixed https://github.com/SAP/fundamental-ngx/issues/7342
         xit('should check placeholder exists on drag', () => {
             scrollIntoView(cardDivArr);
             const clickElement = cardContentArr;
@@ -143,7 +145,7 @@ describe('Fixed card layout test suite', () => {
 
             scrollIntoView(disableDragBtn);
             click(disableDragBtn);
-            checkDragAndDrop(disabledCardContent, disabledCardDiv, disabledCardContent, 4);
+            checkDragAndDrop(disabledCardContent, disabledCardContent, 4);
             const newFirstCardText = getText(cardDivArr);
             expect(newFirstCardText).toBe(originalFirstCardText);
         });
@@ -162,11 +164,9 @@ describe('Fixed card layout test suite', () => {
         });
     });
 
-    function checkDragAndDrop(clickElement, startLocation, endLocation, endLocationIndex): void {
+    function checkDragAndDrop(clickElement, endLocation, endLocationIndex): void {
         const clickXLocation = Math.floor(getElementLocation(clickElement, 0, 'x'));
         const clickYLocation = Math.floor(getElementLocation(clickElement, 0, 'y'));
-        const startXLocation = Math.floor(getElementLocation(startLocation, 0, 'x'));
-        const startYLocation = Math.floor(getElementLocation(startLocation, 0, 'y'));
         const endXLocation = Math.floor(getElementLocation(endLocation, endLocationIndex, 'x'));
         const endYLocation = Math.floor(getElementLocation(endLocation, endLocationIndex, 'y'));
 
@@ -179,8 +179,7 @@ describe('Fixed card layout test suite', () => {
                     { type: 'pointerMove', duration: 200, x: clickXLocation + 2, y: clickYLocation + 2 },
                     { type: 'pointerDown', button: 0 },
                     { type: 'pause', duration: 1000 },
-                    { type: 'pointerMove', duration: 600, x: startXLocation + 2, y: startYLocation + 2 },
-                    { type: 'pointerMove', duration: 1000, x: endXLocation + 40, y: endYLocation + 40 },
+                    { type: 'pointerMove', duration: 1000, x: endXLocation + 40, y: endYLocation - 40 },
                     { type: 'pointerUp', button: 0 }
                 ]
             }
