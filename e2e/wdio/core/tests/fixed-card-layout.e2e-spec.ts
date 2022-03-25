@@ -81,8 +81,10 @@ describe('Fixed card layout test suite', () => {
 
             scrollIntoView(cardDivArr);
             checkDragAndDrop(cardContentArr, cardContentArr, 1);
+
             const newFirstCardText = getText(cardDivArr);
             const newSwapCardText = getText(cardDivArr, 1);
+
             expect(newFirstCardText).not.toBe(originalFirstCardText);
             expect(newSwapCardText).not.toBe(originalSwapCardText);
         });
@@ -177,7 +179,7 @@ describe('Fixed card layout test suite', () => {
                     { type: 'pointerMove', duration: 200, x: clickXLocation + 2, y: clickYLocation + 2 },
                     { type: 'pointerDown', button: 0 },
                     { type: 'pause', duration: 1000 },
-                    { type: 'pointerMove', duration: 1000, x: endXLocation + 40, y: endYLocation + 40 },
+                    { type: 'pointerMove', duration: 1000, x: endXLocation + 40, y: endYLocation - 40 },
                     { type: 'pointerUp', button: 0 }
                 ]
             }
