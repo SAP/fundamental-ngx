@@ -9,4 +9,12 @@ import { ColumnsWidthConfig } from '@fundamental-ngx/core/fixed-card-layout';
 })
 export class FixedCardLayoutCustomColumnWidthExampleComponent {
     config: ColumnsWidthConfig = {};
+
+    setConfig(): void {
+        this.config = { '1': 300 };
+    }
+
+    resetConfig(): void {
+        this.config = {};
+    }
 }
