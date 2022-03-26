@@ -1,4 +1,11 @@
 
+## 0.34.0-rc.2 (2022-03-26)
+
+
+### Bug Fixes
+
+* **core,platform:** rxjs debounceTime instead of delay ([#7915](https://github.com/SAP/fundamental-ngx/issues/7915)) ([0fc6cc1](https://github.com/SAP/fundamental-ngx/commit/0fc6cc1f5a36f94db5bd32aad7c734242921bd40))
+
 ## 0.34.0-rc.1 (2022-03-25)
 
 
