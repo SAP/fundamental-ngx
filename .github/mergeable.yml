@@ -20,15 +20,13 @@ mergeable:
                 - required:
                       reviewers: ['droshev']
                 - required:
-                      reviewers: ['fkolar']
+                      reviewers: ['N1XUS']
                 - required:
-                      reviewers: ['KevinOkamoto']
+                      reviewers: ['g-cheishvili']
                 - required:
-                      reviewers: ['JKMarkowski']
+                      reviewers: ['platon-rov']
                 - required:
                       reviewers: ['mikerodonnell89']
-                - required:
-                      reviewers: ['valorkin']
                 - min:
                       count: 2
     - when: schedule.repository
