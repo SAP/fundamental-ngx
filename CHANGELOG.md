@@ -1,4 +1,11 @@
 
+## 0.34.0-rc.3 (2022-03-27)
+
+
+### Features
+
+* **core:** fixed card layout column width ([#7909](https://github.com/SAP/fundamental-ngx/issues/7909)) ([6a1747a](https://github.com/SAP/fundamental-ngx/commit/6a1747aa03301136758008cfae5d7e416d82db02))
+
 ## 0.34.0-rc.2 (2022-03-26)
 
 
