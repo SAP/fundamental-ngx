@@ -19,6 +19,7 @@ import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { TableModule } from '@fundamental-ngx/core/table';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { FixedCardLayoutCustomWidthExampleComponent } from './examples/custom-width/fixed-card-layout-custom-width-example.component';
+import { FixedCardLayoutCustomColumnWidthExampleComponent } from './examples/custom-column-width/fixed-card-layout-custom-column-width-example.component';
 
 const routes: Routes = [
     {
@@ -51,7 +52,8 @@ const routes: Routes = [
         FixedCardLayoutDisabledDragExampleComponent,
         FixedCardLayoutMobileExampleComponent,
         FixedCardLayoutDocsHeaderComponent,
-        FixedCardLayoutCustomWidthExampleComponent
+        FixedCardLayoutCustomWidthExampleComponent,
+        FixedCardLayoutCustomColumnWidthExampleComponent
     ]
 })
 export class FixedCardLayoutDocsModule {}

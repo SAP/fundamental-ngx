@@ -36,7 +36,7 @@
 <separator></separator>
 
 <fd-docs-section-title id="custom-card-width" componentName="fixed-card-layout">
-    Custom card width
+    Custom card minimum width
 </fd-docs-section-title>
 <description>
     <p>
@@ -45,12 +45,29 @@
     </p>
     <p>
         This parameter can be changed by providing <code>[cardMinimumWidth]</code> input property. The value should be a
-        number of pixels.
+        number of pixels greater than 320.
     </p>
 </description>
 <component-example>
     <fd-fixed-card-layout-custom-width-example></fd-fixed-card-layout-custom-width-example>
 </component-example>
 <code-example [exampleFiles]="defaultFixedCardLayout"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="custom-column-width" componentName="fixed-card-layout">
+    Custom columns width
+</fd-docs-section-title>
+<description>
+    <p>
+        By default, columns are equal by their width. It can be changed by providing
+        <code>[columnsWidthConfig]</code> input property. It works similar to the <code>flex-grow</code> in CSS. You
+        should pass an object with the column indexes and their "flex-grow" factors.
+    </p>
+</description>
+<component-example>
+    <fd-fixed-card-layout-custom-column-width-example></fd-fixed-card-layout-custom-column-width-example>
+</component-example>
+<code-example [exampleFiles]="customColumnWidth"></code-example>
 
 <separator></separator>

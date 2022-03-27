@@ -4,6 +4,8 @@ import disabledDragFixedCardLayoutH from '!./examples/disabled-drag-drop/fixed-c
 import disabledDragFixedCardLayoutTs from '!./examples/disabled-drag-drop/fixed-card-layout-disabled-drag.component.ts?raw';
 import mobileFixedCardlayoutH from '!./examples/mobile/fixed-card-layout-mobile-examples.component.html?raw';
 import mobileFixedCardlayoutTs from '!./examples/mobile/fixed-card-layout-mobile-examples.component.ts?raw';
+import customColumnWidthHtml from '!./examples/custom-column-width/fixed-card-layout-custom-column-width-example.component.html?raw';
+import customColumnWidthTs from '!./examples/custom-column-width/fixed-card-layout-custom-column-width-example.component.ts?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -44,6 +46,20 @@ export class FixedCardLayoutDocsComponent {
             component: 'FixedCardLayoutMobileExampleComponent',
             code: mobileFixedCardlayoutTs,
             fileName: 'fixed-card-layout-mobile-examples'
+        }
+    ];
+
+    customColumnWidth: ExampleFile[] = [
+        {
+            language: 'html',
+            code: customColumnWidthHtml,
+            fileName: 'fixed-card-layout-custom-column-width-example'
+        },
+        {
+            language: 'typescript',
+            component: 'FixedCardLayoutCustomColumnWidthExampleComponent',
+            code: customColumnWidthTs,
+            fileName: 'fixed-card-layout-custom-column-width-example'
         }
     ];
 }
