@@ -174,35 +174,6 @@ For an existing Angular CLI application,
     </fdp-link>
     ```
 
-4. **To add support for i18n**
-
-    To mark a text for translation, use [Angular's i18n marker](https://angular.io/guide/i18n#mark-text-with-the-i18n-attribute).
-
-    For example, to translate the button text, add `i18n` on the element `fdp-button`:
-
-    ```html
-    <fdp-button
-        i18n="emphasized button|An example for button with emphasized property@@buttonEmphasizedBtn"
-        buttonType="emphasized"
-        label="Emphasized Button"
-    ></fdp-button>
-    ```
-
-    It is recommended to give ID to the marker like `@@buttonEmphasizedBtn` in the format `@@<Module>.<Component>.<UniqueId>` for easier tracking in the extracted `messages.xlf` file. A meaningful description such as `An example for button with emphasized property` and a context like `emphasized button` for easier understanding for translators can also be given.
-
-    Note: Some components allow you to provide data imperatively through an array of objects like `[list]="seasons"` in the below example:
-
-    ```html
-    <fdp-radio-group [id]="'radio1'" [name]="'radio1'" [list]="seasons" [value]="'Summer'" formControlName="example1">
-    </fdp-radio-group>
-    ```
-
-    When data is provided like this (probably coming from a db or backend server), it is left to the application to provide for the translated
-    text. Providing i18n markers as shown in the previous example will not work as this is a limitation of Angular's i18n for now.
-
-    Note: Due to SAP's needs was disabled support of select & plural i18n features (issue [#5098](https://github.com/SAP/fundamental-ngx/issues/5098)).
-    Details how to provide such functionality see in [Wiki](https://github.com/SAP/fundamental-ngx/wiki/Internationalization-Supporting-in-@fundamental-ngx-platform).
-
 ## Tests
 
 Fundamental Library for Angular makes use of Jasmine and Karma for its unit tests.

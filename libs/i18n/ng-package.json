@@ -3,5 +3,6 @@
     "dest": "../../dist/libs/i18n",
     "lib": {
         "entryFile": "src/index.ts"
-    }
+    },
+    "allowedNonPeerDependencies": ["lodash-es", "fast-deep-equal"]
 }
