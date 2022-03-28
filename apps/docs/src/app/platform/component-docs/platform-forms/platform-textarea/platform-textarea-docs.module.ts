@@ -13,7 +13,6 @@ import { PlatformTextareaBasicExampleComponent } from './platform-textarea-examp
 import { PlatformTextareaCounterExampleComponent } from './platform-textarea-examples/platform-textarea-counter-example.component';
 import { PlatformTextareaCounterTemplateExampleComponent } from './platform-textarea-examples/platform-textarea-counter-template-example.component';
 import { PlatformTextareaAutogrowExampleComponent } from './platform-textarea-examples/platform-textarea-autogrow-example.component';
-import { PlatformTextareaI18nExampleComponent } from './platform-textarea-examples/platform-textarea-i18n-example.component';
 
 const routes: Routes = [
     {
@@ -42,8 +41,7 @@ const routes: Routes = [
         PlatformTextareaBasicExampleComponent,
         PlatformTextareaCounterExampleComponent,
         PlatformTextareaCounterTemplateExampleComponent,
-        PlatformTextareaAutogrowExampleComponent,
-        PlatformTextareaI18nExampleComponent
+        PlatformTextareaAutogrowExampleComponent
     ]
 })
 export class PlatformTextareaDocsModule {}

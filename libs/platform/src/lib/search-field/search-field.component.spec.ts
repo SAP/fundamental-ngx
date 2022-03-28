@@ -3,7 +3,6 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { By } from '@angular/platform-browser';
 import { DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
-import '@angular/localize/init';
 import { Observable, of } from 'rxjs';
 
 import { RtlService } from '@fundamental-ngx/core/utils';

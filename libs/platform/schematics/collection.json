@@ -5,21 +5,6 @@
             "description": "Adds @fundamental-ngx/platform to the project.",
             "factory": "./ng-add/index#ngAdd",
             "schema": "./ng-add/schema.json"
-        },
-        "ng-update": {
-            "description": "Updates existing @fundamental-ngx/platform.",
-            "factory": "./ng-update/index#ngUpdate",
-            "schema": "./ng-update/schema.json"
-        },
-        "read-translation-files": {
-            "description": "Read translation files. Runned as schematics to ensure the tasks order.",
-            "factory": "./utils/translation-utils#readTranslationFiles",
-            "schema": "./ng-add/schema.json"
-        },
-        "remove-xml-to-js": {
-            "description": "Remove xml2js package. Runned as schematics to ensure the tasks order.",
-            "factory": "./utils/translation-utils#removeXML2JSPackage",
-            "schema": "./ng-add/schema.json"
         }
     }
 }

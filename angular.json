@@ -3838,16 +3838,6 @@
                                     "with": "apps/docs/src/environments/environment.prod.ts"
                                 }
                             ]
-                        },
-                        "fr": {
-                            "outputPath": "dist/libs/platform/locale",
-                            "i18nMissingTranslation": "error",
-                            "localize": ["fr"]
-                        },
-                        "ar": {
-                            "outputPath": "dist/libs/platform/locale",
-                            "i18nMissingTranslation": "error",
-                            "localize": ["ar"]
                         }
                     },
                     "outputs": ["{options.outputPath}"],
@@ -3874,12 +3864,6 @@
                         }
                     }
                 },
-                "extract-i18n": {
-                    "builder": "@angular-devkit/build-angular:extract-i18n",
-                    "options": {
-                        "browserTarget": "docs:build"
-                    }
-                },
                 "lint": {
                     "builder": "@nrwl/linter:eslint",
                     "options": {
@@ -3901,18 +3885,6 @@
                         "assets": ["apps/docs/src/favicon.ico", "apps/docs/src/assets"]
                     },
                     "outputs": ["coverage/apps/docs/"]
-                }
-            },
-            "i18n": {
-                "locales": {
-                    "fr": {
-                        "translation": "apps/docs/src/app/platform/locale/fr/messages.fr.xlf",
-                        "baseHref": ""
-                    },
-                    "ar": {
-                        "translation": "apps/docs/src/app/platform/locale/ar/messages.ar.xlf",
-                        "baseHref": ""
-                    }
                 }
             },
             "tags": ["scope:docs", "type:app"]
