@@ -26,6 +26,7 @@
     "focus-trap": "FOCUSTRAP_VER_PLACEHOLDER",
     "focus-visible": "FOCUSVISIBLE_VER_PLACEHOLDER",
     "fundamental-styles": "FDSTYLES_VER_PLACEHOLDER",
+    "@fundamental-ngx/i18n": "VERSION_PLACEHOLDER",
     "@fundamental-styles/fn": "FDNSTYLES_VER_PLACEHOLDER",
     "fast-deep-equal": "FAST_DEEP_EQUAL_VER_PLACEHOLDER",
     "lodash-es": "LODASH_ES_VER_PLACEHOLDER",
