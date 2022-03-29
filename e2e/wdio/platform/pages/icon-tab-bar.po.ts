@@ -9,7 +9,7 @@ export class IconTabBarPO extends BaseComponentPo {
     iconOnlyExample = '#background-ex2 ';
     iconExample = '#background-ex3 ';
     filterExample = '#background-ex4 ';
-    processExample = '#background-ex5 ';
+    processExample = 'fdp-icon-tab-bar-process-type ';
     nestedTabsExample = '#background-ex6 ';
     reorderingExample = '#background-ex7 ';
     overflowingExample = '#background-ex8 ';

@@ -1,8 +1,20 @@
-import { Directive, ElementRef, Input, OnChanges, OnInit, SimpleChanges, TemplateRef } from '@angular/core';
+import {
+    Directive,
+    ElementRef,
+    Input,
+    OnChanges,
+    OnInit,
+    Optional,
+    Self,
+    SimpleChanges,
+    TemplateRef
+} from '@angular/core';
 import { PopoverService } from '@fundamental-ngx/core/popover';
 import { BasePopoverClass } from '@fundamental-ngx/core/popover';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 
-const INLINE_HELP_CLASS = 'fd-inline-help__content';
+const INLINE_HELP_CLASS = 'fd-popover__inline-help fd-inline-help__content';
+const INLINE_HELP_ICON_CLASS = 'fd-popover__inline-help--icon';
 
 /**
  * The component that represents an inline-help.
@@ -42,7 +54,11 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
     @Input('fd-inline-help-template')
     inlineHelpTemplate: TemplateRef<any> = null;
 
-    constructor(private _popoverService: PopoverService, private _elementRef: ElementRef) {
+    constructor(
+        private _popoverService: PopoverService,
+        private _elementRef: ElementRef,
+        @Optional() @Self() private _icon: IconComponent
+    ) {
         super();
     }
 
@@ -73,5 +89,11 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
     /** @hidden */
     private _applyAdditionalInlineHelpClass(): void {
         this.additionalBodyClass = INLINE_HELP_CLASS + ' ' + this.additionalBodyClass;
+
+        // If connected to the icon, but not button, then apply additional class
+        // That will change the arrow's position a bit
+        if (this._icon) {
+            this.additionalBodyClass += ' ' + INLINE_HELP_ICON_CLASS;
+        }
     }
 }
