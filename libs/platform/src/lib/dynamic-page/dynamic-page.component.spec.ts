@@ -129,7 +129,7 @@ describe('DynamicPageComponent default values', () => {
         const throttleTime = 100;
         const contentEl = fixture.debugElement.query(By.css('fd-dynamic-page-content'));
 
-        spyOn(component.dynamicPageHeaderComponent.collapsedChange, 'emit');
+        const emitSpy = spyOn(component.dynamicPageHeaderComponent.collapsedChange, 'emit');
 
         contentEl.nativeElement.dispatchEvent(new Event('scroll'));
 
@@ -137,7 +137,7 @@ describe('DynamicPageComponent default values', () => {
         tick(throttleTime);
 
         fixture.whenStable().then(() => {
-            expect(component.dynamicPageHeaderComponent.collapsedChange.emit).toHaveBeenCalled();
+            expect(emitSpy).toHaveBeenCalled();
         });
     }));
 });

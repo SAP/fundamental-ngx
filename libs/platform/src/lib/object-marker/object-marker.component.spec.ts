@@ -47,7 +47,6 @@ describe('PlatformObjectMarkerComponent', () => {
         host.glyph = 'add-favorite';
         fixture.detectChanges();
         let linkElement = fixture.debugElement.query(By.css('i'));
-        console.log('linkElement.nativeElement.classList' + linkElement.nativeElement.classList);
         expect(linkElement.nativeElement.classList.contains('fd-object-marker__icon')).toBe(true);
         expect(linkElement.nativeElement.classList.contains('sap-icon--add-favorite')).toBe(true);
         host.glyph = 'private';
