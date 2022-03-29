@@ -4,6 +4,30 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI libarary for English language
  */
 export const FD_LANGUAGE_ENGLISH: FdLanguage = {
+    coreGridList: {
+        filterBarCancelButtonTitle: 'Cancel',
+        listItemStatusAriaLabel: 'Item has status. Status: {{ status }}.',
+        listItemCounterAriaLabel: 'Item has {{ count }} children.',
+        listItemButtonDetailsTitle: 'Details',
+        listItemButtonDeleteTitle: 'Delete',
+        listItemStatusContainsErrors: 'Contains errors',
+        listItemStatusLocked: 'Locked',
+        listItemStatusDraft: 'Draft'
+    },
+    coreSlider: {
+        singleMinMaxDetails: 'Slider minimum value is {{ min }}, maximum value is {{ max }}',
+        singleValueminDetails: 'Value is {{ value }}',
+        singleValuemaxDetails: 'Value is {{ value }}',
+        singleValueNowDetails: 'Current value is {{ value }}',
+        multipleHandle1MinMaxDetails: 'Range slider minimum value is {{ min }}, maximum value is {{ max }}',
+        multipleHandle1ValueminDetails: 'Value is {{ value }}',
+        multipleHandle1ValuemaxDetails: 'Value is {{ value }}',
+        multipleHandle1ValueNowDetails: 'Current value is {{ value }}',
+        multipleHandle2MinMaxDetails: 'Range slider minimum value is {{ min }}, maximum value is {{ max }}',
+        multipleHandle2ValueminDetails: 'Value is {{ value }}',
+        multipleHandle2ValuemaxDetails: 'Value is {{ value }}',
+        multipleHandle2ValueNowDetails: 'Current value is {{ value }}'
+    },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Watchers',
         defaultTitle: 'Approval process',
@@ -354,5 +378,11 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Edit'
+    },
+    fnSlider: {
+        minMaxDetails: 'Slider minimum value is {{ min }}, maximum value is {{ max }}',
+        valueminDetails: 'Value is {{ value }}',
+        valuemaxDetails: 'Value is {{ value }}',
+        valueNowDetails: 'Current value is {{ value }}'
     }
 };

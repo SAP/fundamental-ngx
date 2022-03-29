@@ -4,6 +4,30 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI libarary for Russian language
  */
 export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
+    coreGridList: {
+        filterBarCancelButtonTitle: 'Отмена',
+        listItemStatusAriaLabel: 'Элемент имеет статус. Статус: {{ status }}.',
+        listItemCounterAriaLabel: 'Элемент имеет {{ count }} дочерних элементов.',
+        listItemButtonDetailsTitle: 'Подробности',
+        listItemButtonDeleteTitle: 'Удалить',
+        listItemStatusContainsErrors: 'Содержит ошибки',
+        listItemStatusLocked: 'Заблокировано',
+        listItemStatusDraft: 'Черновик'
+    },
+    coreSlider: {
+        singleMinMaxDetails: 'Минимальное значение слайдера {{ min }}, максимальное значение {{ max }}',
+        singleValueminDetails: 'Значение равно {{ value }}',
+        singleValuemaxDetails: 'Значение равно {{ value }}',
+        singleValueNowDetails: 'Текущее значение: {{ value }}',
+        multipleHandle1MinMaxDetails: 'Минимальное значение слайдера {{ min }}, максимальное значение {{ max }}',
+        multipleHandle1ValueminDetails: 'Значение равно {{ value }}',
+        multipleHandle1ValuemaxDetails: 'Значение равно {{ value }}',
+        multipleHandle1ValueNowDetails: 'Текущее значение: {{ value }}',
+        multipleHandle2MinMaxDetails: 'Минимальное значение слайдера {{ min }}, максимальное значение {{ max }}',
+        multipleHandle2ValueminDetails: 'Значение равно {{ value }}',
+        multipleHandle2ValuemaxDetails: 'Значение равно {{ value }}',
+        multipleHandle2ValueNowDetails: 'Текущее значение: {{ value }}'
+    },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Наблюдатели',
         defaultTitle: 'Процесс утверждения',
@@ -357,5 +381,11 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Редактировать'
+    },
+    fnSlider: {
+        minMaxDetails: 'Минимальное значение слайдера {{ min }}, максимальное значение {{ max }}',
+        valueminDetails: 'Значение равно {{ value }}',
+        valuemaxDetails: 'Значение равно {{ value }}',
+        valueNowDetails: 'Текущее значение: {{ value }}'
     }
 };

@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ApprovalProcess, ApprovalUser } from '../interfaces';
 
 import { generateApprovalFlowGraph, generateApprovalFlowGraphMetadata } from '../approval-flow-graph';
 import { ApprovalFlowToolbarActionsComponent } from './approval-flow-toolbar-actions.component';
+import { PlatformApprovalFlowModule } from '../approval-flow.module';
 
 const DAY_IN_MILLISECONDS = 1000 * 60 * 60 * 24;
 const users: ApprovalUser[] = [
@@ -70,8 +70,7 @@ describe('ApprovalFlowToolbarActionsComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [ApprovalFlowToolbarActionsComponent],
-            imports: [ButtonModule]
+            imports: [PlatformApprovalFlowModule]
         }).compileComponents();
     });
 

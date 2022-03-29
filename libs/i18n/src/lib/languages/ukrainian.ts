@@ -4,6 +4,30 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI libarary for Ukrainian language
  */
 export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
+    coreGridList: {
+        filterBarCancelButtonTitle: 'Скасувати',
+        listItemStatusAriaLabel: 'Елемент має статус. Статус: {{ status }}.',
+        listItemCounterAriaLabel: 'Елемент має {{ count }} дочірніх елементів.',
+        listItemButtonDetailsTitle: 'Подробиці',
+        listItemButtonDeleteTitle: 'Видалити',
+        listItemStatusContainsErrors: 'Містить помилки',
+        listItemStatusLocked: 'Заблоковано',
+        listItemStatusDraft: 'Чернетка'
+    },
+    coreSlider: {
+        singleMinMaxDetails: 'Мінімальне значення слайдера {{min}}, максимальне значення {{ max }}',
+        singleValueminDetails: 'Поточне значення: {{ value }}',
+        singleValuemaxDetails: 'Поточне значення: {{ value }}',
+        singleValueNowDetails: 'Поточне значення: {{ value }}',
+        multipleHandle1MinMaxDetails: 'Мінімальне значення слайдера {{ min }}, максимальне значення {{ max }}',
+        multipleHandle1ValueminDetails: 'Поточне значення: {{ value }}',
+        multipleHandle1ValuemaxDetails: 'Поточне значення: {{ value }}',
+        multipleHandle1ValueNowDetails: 'Поточне значення: {{ value }}',
+        multipleHandle2MinMaxDetails: 'Мінімальне значення слайдера {{ min }}, максимальне значення {{ max }}',
+        multipleHandle2ValueminDetails: 'Поточне значення: {{ value }}',
+        multipleHandle2ValuemaxDetails: 'Поточне значення: {{ value }}',
+        multipleHandle2ValueNowDetails: 'Поточне значення: {{ value }}'
+    },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Спостерігачі',
         defaultTitle: 'Процес затвердження',
@@ -356,5 +380,11 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Редагувати'
+    },
+    fnSlider: {
+        minMaxDetails: 'Мінімальне значення слайдера {{min}}, максимальне значення {{ max }}',
+        valueminDetails: 'Поточне значення: {{ value }}',
+        valuemaxDetails: 'Поточне значення: {{ value }}',
+        valueNowDetails: 'Поточне значення: {{ value }}'
     }
 };

@@ -59,24 +59,27 @@
         [class.fd-slider__handle--lg]="cozy"
         [attr.tabindex]="disabled ? -1 : 0"
         role="slider"
-        [attr.aria-label]="ariaLabel || 'slider minimum value is ' + minValue + ', maximum value is ' + maxValue"
+        [attr.aria-label]="
+            ariaLabel || 'coreSlider.singleMinMaxDetails' | fdTranslate: { min: minValue, max: maxValue }
+        "
         [attr.aria-labelledby]="ariaLabelledBy"
         [fdPopoverTrigger]="tooltipMode ? singleSliderPopover : null"
-        [attr.aria-valuemin]="'value is ' + minValue"
-        [attr.aria-valuemax]="'value is ' + maxValue"
+        [attr.aria-valuemin]="'coreSlider.singleValueminDetails' | fdTranslate: { value: minValue }"
+        [attr.aria-valuemax]="'coreSlider.singleValuemaxDetails' | fdTranslate: { value: maxValue }"
         [attr.aria-valuenow]="
-            _singleSliderCurrentValuePrefix + getValuenow(_position, _sliderValueTargets.SINGLE_SLIDER)
+            _useSliderValuePrefix
+                ? ('coreSlider.singleValueNowDetails'
+                  | fdTranslate: { value: getValuenow(_position, _sliderValueTargets.SINGLE_SLIDER) })
+                : getValuenow(_position, _sliderValueTargets.SINGLE_SLIDER)
         "
         [attr.aria-valuetext]="
-            _singleSliderCurrentValuePrefix + getValuenow(_position, _sliderValueTargets.SINGLE_SLIDER)
+            _useSliderValuePrefix
+                ? ('coreSlider.singleValueNowDetails'
+                  | fdTranslate: { value: getValuenow(_position, _sliderValueTargets.SINGLE_SLIDER) })
+                : getValuenow(_position, _sliderValueTargets.SINGLE_SLIDER)
         "
         fd-slider-position
         [position]="_progress"
-        i18n-aria-label="@@slider.single.min.max.details|Slider aria-label attribute"
-        i18n-aria-valuemin="@@slider.single.valuemin.details|Slider valuemin attribute"
-        i18n-aria-valuemax="@@slider.single.valuemax.details|Slider valuemax attribute"
-        i18n-aria-valuenow="@@slider.single.valuenow.details|Slider valuenow attribute"
-        i18n-aria-valuetext="@@slider.single.valuetext.details|Slider valuetext attribute"
         (mousedown)="onHandleClick($event); $event.stopPropagation()"
         (focus)="_handleFocused$.next(true)"
         (blur)="_handleFocused$.next(false)"
@@ -109,24 +112,27 @@
         [class.fd-slider__handle--lg]="cozy"
         [attr.tabindex]="disabled ? -1 : 0"
         role="slider"
-        [attr.aria-label]="ariaLabel || 'range slider minimum value is ' + minValue + ', maximum value is ' + maxValue"
+        [attr.aria-label]="
+            ariaLabel || 'coreSlider.multipleHandle1MinMaxDetails' | fdTranslate: { min: minValue, max: maxValue }
+        "
         [attr.aria-labelledby]="ariaLabelledBy"
         [fdPopoverTrigger]="tooltipMode ? rangeSliderPopover1 : null"
-        [attr.aria-valuemin]="'value is ' + minValue"
-        [attr.aria-valuemax]="'value is ' + maxValue"
+        [attr.aria-valuemin]="'coreSlider.multipleHandle1ValueminDetails' | fdTranslate: { value: minValue }"
+        [attr.aria-valuemax]="'coreSlider.multipleHandle1ValuemaxDetails' | fdTranslate: { value: maxValue }"
         [attr.aria-valuenow]="
-            _rangeSliderHandle1CurrentValuePrefix + getValuenow(_handle1Value, _sliderValueTargets.RANGE_SLIDER1)
+            _useSliderValuePrefix
+                ? ('coreSlider.multipleHandle1ValueNowDetails'
+                  | fdTranslate: { value: getValuenow(_handle1Value, _sliderValueTargets.RANGE_SLIDER1) })
+                : getValuenow(_handle1Value, _sliderValueTargets.RANGE_SLIDER1)
         "
         [attr.aria-valuetext]="
-            _rangeSliderHandle1CurrentValuePrefix + getValuenow(_handle1Value, _sliderValueTargets.RANGE_SLIDER1)
+            _useSliderValuePrefix
+                ? ('coreSlider.multipleHandle1ValueNowDetails'
+                  | fdTranslate: { value: getValuenow(_handle1Value, _sliderValueTargets.RANGE_SLIDER1) })
+                : getValuenow(_handle1Value, _sliderValueTargets.RANGE_SLIDER1)
         "
         fd-slider-position
         [position]="_handle1Position"
-        i18n-aria-label="@@slider.range.handle1.min.max.details|range slider aria-label attribute"
-        i18n-aria-valuemin="@@slider.range.handle1.valuemin.details|range slider valuemin attribute"
-        i18n-aria-valuemax="@@slider.range.handle1.valuemax.details|range slider valuemax attribute"
-        i18n-aria-valuenow="@@slider.range.handle1.valuenow.details|range slider valuenow attribute"
-        i18n-aria-valuetext="@@slider.range.handle1.valuetext.details|range slider valuetext attribute"
         (mousedown)="onHandleClick($event); $event.stopPropagation()"
         (keydown)="onKeyDown($event)"
         (focus)="_rangeHandle1Focused$.next(true)"
@@ -139,24 +145,27 @@
         [class.fd-slider__handle--lg]="cozy"
         [attr.tabindex]="disabled ? -1 : 0"
         role="slider"
-        [attr.aria-label]="ariaLabel || 'range slider minimum value is ' + minValue + ', maximum value is ' + maxValue"
+        [attr.aria-label]="
+            ariaLabel || 'coreSlider.multipleHandle2MinMaxDetails' | fdTranslate: { min: minValue, max: maxValue }
+        "
         [attr.aria-labelledby]="ariaLabelledBy"
         [fdPopoverTrigger]="tooltipMode ? rangeSliderPopover2 : null"
-        [attr.aria-valuemin]="'value is ' + minValue"
-        [attr.aria-valuemax]="'value is ' + maxValue"
+        [attr.aria-valuemin]="'coreSlider.multipleHandle2ValueminDetails' | fdTranslate: { value: minValue }"
+        [attr.aria-valuemax]="'coreSlider.multipleHandle2ValuemaxDetails' | fdTranslate: { value: maxValue }"
         [attr.aria-valuenow]="
-            _rangeSliderHandle2CurrentValuePrefix + getValuenow(_handle2Value, _sliderValueTargets.RANGE_SLIDER2)
+            _useSliderValuePrefix
+                ? ('coreSlider.multipleHandle2ValueNowDetails'
+                  | fdTranslate: { value: getValuenow(_handle2Value, _sliderValueTargets.RANGE_SLIDER2) })
+                : getValuenow(_handle2Value, _sliderValueTargets.RANGE_SLIDER2)
         "
         [attr.aria-valuetext]="
-            _rangeSliderHandle2CurrentValuePrefix + getValuenow(_handle2Value, _sliderValueTargets.RANGE_SLIDER2)
+            _useSliderValuePrefix
+                ? ('coreSlider.multipleHandle2ValueNowDetails'
+                  | fdTranslate: { value: getValuenow(_handle2Value, _sliderValueTargets.RANGE_SLIDER2) })
+                : getValuenow(_handle2Value, _sliderValueTargets.RANGE_SLIDER2)
         "
         fd-slider-position
         [position]="_handle2Position"
-        i18n-aria-label="@@slider.range.handle2.min.max.details|range 2 slider aria-label attribute"
-        i18n-aria-valuemin="@@slider.range.handle2.valuemin.details|range 2 slider valuemin attribute"
-        i18n-aria-valuemax="@@slider.range.handle2.valuemax.details|range 2 slider valuemax attribute"
-        i18n-aria-valuenow="@@slider.range.handle2.valuenow.details|range 2 slider valuenow attribute"
-        i18n-aria-valuetext="@@slider.range.handle2.valuetext.details|range 2 slider valuetext attribute"
         (mousedown)="onHandleClick($event); $event.stopPropagation()"
         (keydown)="onKeyDown($event)"
         (focus)="_rangeHandle2Focused$.next(true)"

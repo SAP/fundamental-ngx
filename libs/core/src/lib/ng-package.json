@@ -10,7 +10,8 @@
         "focus-trap",
         "fundamental-styles",
         "lodash-es",
-        "fast-deep-equal",
-        "compare-versions"
+        "compare-versions",
+        "@fundamental-ngx/i18n",
+        "fast-deep-equal"
     ]
 }

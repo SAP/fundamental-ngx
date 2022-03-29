@@ -205,25 +205,28 @@ export class SliderComponent
      * slider current value verbose string.
      * This will be read only once by screen reader and upon slider value change,
      * this string will not be read.
+     * @deprecated no longer used, use i18n capabilities instead
      */
     @Input()
-    singleSliderCurrentValuePrefix = 'Current value is ';
+    singleSliderCurrentValuePrefix: string;
 
     /**
      * @hidden range slider handle 1 current value supporting string
      * This will be read only once by screen reader and upon slider value change,
      * this string will not be read.
+     * * @deprecated no longer used, use i18n capabilities instead
      */
     @Input()
-    rangeSliderHandle1CurrentValuePrefix = 'handle 1 value is ';
+    rangeSliderHandle1CurrentValuePrefix: string;
 
     /**
      * @hidden range slider handle 2 current value supporting string
      * This will be read only once by screen reader and upon slider value change,
      * this string will not be read.
+     * * @deprecated no longer used, use i18n capabilities instead
      */
     @Input()
-    rangeSliderHandle2CurrentValuePrefix = 'handle 2 value is ';
+    rangeSliderHandle2CurrentValuePrefix: string;
 
     _position: number | number[] = 0;
 
@@ -305,19 +308,10 @@ export class SliderComponent
     _isRtl = false;
 
     /**
-     * @hidden slider current value supporting string.
+     * @hidden
+     * whether to use value with a prefix for announcing
      */
-    _singleSliderCurrentValuePrefix = this.singleSliderCurrentValuePrefix;
-
-    /**
-     * @hidden range slider handle 1 current value supporting string
-     */
-    _rangeSliderHandle1CurrentValuePrefix = this.rangeSliderHandle1CurrentValuePrefix;
-
-    /**
-     * @hidden range slider handle 2 current value supporting string
-     */
-    _rangeSliderHandle2CurrentValuePrefix = this.rangeSliderHandle2CurrentValuePrefix;
+    _useSliderValuePrefix = true;
 
     /** @hidden */
     private _min = 0;
@@ -658,12 +652,7 @@ export class SliderComponent
             newValue = this.min;
         }
 
-        if (this._isRange) {
-            this._rangeSliderHandle1CurrentValuePrefix = '';
-            this._rangeSliderHandle2CurrentValuePrefix = '';
-        } else {
-            this._singleSliderCurrentValuePrefix = '';
-        }
+        this._useSliderValuePrefix = false;
         this._cdr.markForCheck();
 
         const stepDiffArray = this._valuesBySteps
@@ -988,12 +977,7 @@ export class SliderComponent
     /** @hidden reset default prefix on leaving the slider */
     private _resetPrefix(): void {
         // reset prefix string for slider current value that need to be announced
-        if (this._isRange) {
-            this._rangeSliderHandle1CurrentValuePrefix = this.rangeSliderHandle1CurrentValuePrefix;
-            this._rangeSliderHandle2CurrentValuePrefix = this.rangeSliderHandle2CurrentValuePrefix;
-        } else {
-            this._singleSliderCurrentValuePrefix = this.singleSliderCurrentValuePrefix;
-        }
+        this._useSliderValuePrefix = true;
         this._cdr.markForCheck();
     }
 

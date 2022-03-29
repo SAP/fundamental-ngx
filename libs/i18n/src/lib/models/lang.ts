@@ -8,6 +8,53 @@ export type FdLanguageKey = string | FdLanguageKeyFunction;
  * Representation of the dictionary per UI component
  */
 export interface FdLanguage {
+    coreGridList: {
+        filterBarCancelButtonTitle: FdLanguageKey;
+        /** @param status */
+        listItemStatusAriaLabel: FdLanguageKey;
+        /** @param count */
+        listItemCounterAriaLabel: FdLanguageKey;
+        listItemButtonDetailsTitle: FdLanguageKey;
+        listItemButtonDeleteTitle: FdLanguageKey;
+        listItemStatusContainsErrors: FdLanguageKey;
+        listItemStatusLocked: FdLanguageKey;
+        listItemStatusDraft: FdLanguageKey;
+    };
+    coreSlider: {
+        /**
+         * @param min
+         * @param max
+         */
+        singleMinMaxDetails: FdLanguageKey;
+        /** @param value */
+        singleValueminDetails: FdLanguageKey;
+        /** @param value */
+        singleValuemaxDetails: FdLanguageKey;
+        /** @param value */
+        singleValueNowDetails: FdLanguageKey;
+        /**
+         * @param min
+         * @param max
+         */
+        multipleHandle1MinMaxDetails: FdLanguageKey;
+        /** @param value */
+        multipleHandle1ValueminDetails: FdLanguageKey;
+        /** @param value */
+        multipleHandle1ValuemaxDetails: FdLanguageKey;
+        /** @param value */
+        multipleHandle1ValueNowDetails: FdLanguageKey;
+        /**
+         * @param min
+         * @param max
+         */
+        multipleHandle2MinMaxDetails: FdLanguageKey;
+        /** @param value */
+        multipleHandle2ValueminDetails: FdLanguageKey;
+        /** @param value */
+        multipleHandle2ValuemaxDetails: FdLanguageKey;
+        /** @param value */
+        multipleHandle2ValueNowDetails: FdLanguageKey;
+    };
     platformApprovalFlow: {
         defaultWatchersLabel: FdLanguageKey;
         defaultTitle: FdLanguageKey;
@@ -478,5 +525,18 @@ export interface FdLanguage {
     };
     platformWizardGenerator: {
         summarySectionEditStep: FdLanguageKey;
+    };
+    fnSlider: {
+        /**
+         * @param min
+         * @param max
+         */
+        minMaxDetails: FdLanguageKey;
+        /** @param value */
+        valueminDetails: FdLanguageKey;
+        /** @param value */
+        valuemaxDetails: FdLanguageKey;
+        /** @param value */
+        valueNowDetails: FdLanguageKey;
     };
 }

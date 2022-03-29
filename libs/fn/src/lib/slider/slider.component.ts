@@ -141,14 +141,6 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     @Input()
     customValues: SliderCustomValue[] = [];
 
-    /**
-     * slider current value verbose string.
-     * This will be read only once by screen reader and upon slider value change,
-     * this string will not be read.
-     */
-    @Input()
-    singleSliderCurrentValuePrefix = 'Current value is ';
-
     /** @hidden */
     _position: number | number[] = 0;
 
@@ -201,9 +193,10 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     _isRtl = false;
 
     /**
-     * @hidden slider current value supporting string.
+     * @hidden
+     * whether to use value with a prefix for announcing
      */
-    _singleSliderCurrentValuePrefix = this.singleSliderCurrentValuePrefix;
+    _useSliderValuePrefix = true;
 
     /** @hidden */
     private _min = 0;
@@ -392,7 +385,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     /** @hidden reset default prefix on leaving the slider */
     onBlur(): void {
         // reset prefix string for slider current value that need to be announced
-        this._singleSliderCurrentValuePrefix = this.singleSliderCurrentValuePrefix;
+        this._useSliderValuePrefix = true;
         this._cdr.markForCheck();
     }
 
@@ -427,7 +420,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
             newValue = this.min;
         }
 
-        this._singleSliderCurrentValuePrefix = '';
+        this._useSliderValuePrefix = false;
         this._cdr.markForCheck();
 
         const stepDiffArray = this._valuesBySteps
