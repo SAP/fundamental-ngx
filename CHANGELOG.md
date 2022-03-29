@@ -1,4 +1,11 @@
 
+## 0.34.0-rc.5 (2022-03-29)
+
+
+### Bug Fixes
+
+* **core, platform:** popover styles refactoring ([#7832](https://github.com/SAP/fundamental-ngx/issues/7832)) ([57f8a5e](https://github.com/SAP/fundamental-ngx/commit/57f8a5e49315857330b2ede1a2fa8961ad0e8f15))
+
 ## 0.34.0-rc.4 (2022-03-27)
 
 ## 0.34.0-rc.3 (2022-03-27)
