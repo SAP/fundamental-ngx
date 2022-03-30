@@ -427,6 +427,6 @@ export class CarouselService implements OnDestroy {
 
     /** @hidden */
     private _isTouchEvent(event: MouseEvent | TouchEvent): event is TouchEvent {
-        return event instanceof TouchEvent;
+        return window.TouchEvent && event instanceof TouchEvent;
     }
 }
