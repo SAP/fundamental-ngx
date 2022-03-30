@@ -503,8 +503,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         }
 
         if (this._isColumnLayoutEnabled) {
-            this._responsiveBreakpointsService
-                .observeBreakpointByConfig(this._responsiveBreakPointConfig)
+            this._breakPointObserver
                 .pipe(takeUntil(this._destroyed$))
                 .subscribe((breakPointName) => this._updateLayout(breakPointName));
         }
@@ -517,14 +516,9 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
             this._gapColumnLayout$.pipe(map((g) => normalizeColumnLayout(g || { S: 0 })))
         ]).pipe(
             switchMap(([label, field, gap]) =>
-                this._responsiveBreakpointsService
-                    .observeBreakpointByConfig(this._responsiveBreakPointConfig)
-                    .pipe(
-                        map(
-                            (breakpointName) =>
-                                label[breakpointName] + field[breakpointName] + gap[breakpointName] <= 12
-                        )
-                    )
+                this._breakPointObserver.pipe(
+                    map((breakpointName) => label[breakpointName] + field[breakpointName] + gap[breakpointName] <= 12)
+                )
             )
         );
     }
