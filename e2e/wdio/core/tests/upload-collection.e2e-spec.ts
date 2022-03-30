@@ -171,8 +171,7 @@ describe('File uploader component test', () => {
 
     function checkFileNameChange(example: string): void {
         scrollIntoView(example);
-        const buttonLength = getElementArrayLength(example + editButton);
-        for (let i = 0; i < buttonLength; i++) {
+        for (let i = 0; i < 3; i++) {
             click(example + editButton, i);
             setValue(example + input, testText);
             click(okButton);
@@ -183,14 +182,19 @@ describe('File uploader component test', () => {
     }
 
     function checkItemDecline(example: string): void {
+        const itemsBefore = getElementArrayLength(example + declineButton);
+
         scrollIntoView(example);
         click(example + declineButton);
+
         if (example === uploadCollectionComplexExample) {
             click(emphasizedButton);
         }
+
         expect(getAlertText()).toBe(declineAlertText);
         acceptAlert();
+
         const itemCount = getElementArrayLength(example + item);
-        expect(itemCount).toEqual(2);
+        expect(itemCount).toEqual(itemsBefore - 1);
     }
 });
