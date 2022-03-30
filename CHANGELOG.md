@@ -1,4 +1,15 @@
 
+## 0.34.0-rc.8 (2022-03-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* **core:** * Upload collection item object status now needs [fd-upload-collection-status-item] directive to be applied.
+
+### Bug Fixes
+
+* **core:** upload collection overflow ([#7857](https://github.com/SAP/fundamental-ngx/issues/7857)) ([a25f2da](https://github.com/SAP/fundamental-ngx/commit/a25f2da90c8849c468944ade2a84ba01e8127074))
+
 ## 0.34.0-rc.7 (2022-03-30)
 
 
