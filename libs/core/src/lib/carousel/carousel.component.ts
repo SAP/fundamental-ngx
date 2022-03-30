@@ -21,7 +21,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Direction } from '@angular/cdk/bidi';
-import { delay, takeUntil } from 'rxjs/operators';
+import { debounceTime, takeUntil } from 'rxjs/operators';
 import { Subject, merge } from 'rxjs';
 
 import { resizeObservable, RtlService } from '@fundamental-ngx/core/utils';
@@ -184,12 +184,15 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     @ViewChild('slideContainer')
     slideContainer: ElementRef;
 
+    /** Carousel container element. */
     @ViewChild('carouselContainer')
     carouselContainer: ElementRef;
 
+    /** Carousel content container. */
     @ViewChild('carouselContent')
     carouselContentContainer: ElementRef;
 
+    /** Carousel slides container. */
     @ViewChild('slidesWrapper')
     carouselSlidesWrapper: ElementRef;
 
@@ -670,7 +673,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
             resizeObservable(this.slideContainer.nativeElement),
             resizeObservable(this.carouselContainer.nativeElement)
         )
-            .pipe(delay(30), takeUntil(this._onDestroy$))
+            .pipe(debounceTime(30), takeUntil(this._onDestroy$))
             .subscribe(() => {
                 const { width } = this.carouselContainer.nativeElement.getBoundingClientRect();
                 let maxSize = 0;
