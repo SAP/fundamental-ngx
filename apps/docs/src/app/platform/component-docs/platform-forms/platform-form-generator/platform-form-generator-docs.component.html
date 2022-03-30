@@ -117,7 +117,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="custom-field-layout" componentName="form-generator">
+<fd-docs-section-title id="grouping-of-fields" componentName="form-generator">
     Grouping of the fields
 </fd-docs-section-title>
 <description>
@@ -145,3 +145,18 @@
     <fdp-platform-form-generator-custom-field-layout-example></fdp-platform-form-generator-custom-field-layout-example>
 </component-example>
 <code-example [exampleFiles]="customLayoutFiles"></code-example>
+
+<fd-docs-section-title id="inline-help" componentName="form-generator"> Inline helps </fd-docs-section-title>
+<description>
+    <code>DynamicFormItem.guiOptions.hint</code> can be either <code>string</code> or <code>HintOptions</code> for more
+    control over appearance of hint. By default target for hints is <code>auto</code>, meaning that it will be added to
+    the label on <b>S</b> breakpoint and will be added to the input over <b>S</b>. If gap is not provided, then it will
+    automatically add gap with size <b>1</b> and subtract <b>1</b> from
+    <code>DynamicFormItem.guiOptions.fieldLayoutConfig</code>. If any of the elements have inline help with target
+    either <code>input</code> or <code>auto</code>, every form item in form generator will have gap size minimum of
+    1(more, if requested, by you, via <code>DynamicFormItem.guiOptions.gapLayoutConfig</code>).
+</description>
+<component-example>
+    <fdp-platform-form-generator-inline-help-example></fdp-platform-form-generator-inline-help-example>
+</component-example>
+<code-example [exampleFiles]="inlineHelpFiles"></code-example>

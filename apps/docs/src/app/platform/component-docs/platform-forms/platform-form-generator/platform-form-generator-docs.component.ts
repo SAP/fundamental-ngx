@@ -26,6 +26,9 @@ import groupingSrc from '!./platform-form-generator-examples/platform-form-gener
 import customFieldLayoutHtml from '!./platform-form-generator-examples/platform-form-generator-custom-field-layout-example.component.html?raw';
 import customFieldLayoutSrc from '!./platform-form-generator-examples/platform-form-generator-custom-field-layout-example.component.ts?raw';
 
+import inlineHelpHtml from '!./platform-form-generator-examples/platform-form-generator-inline-help-example.component.html?raw';
+import inlineHelpSrc from '!./platform-form-generator-examples/platform-form-generator-inline-help-example.component.ts?raw';
+
 import { ExampleFile } from '../../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -156,6 +159,20 @@ export class PlatformFormGeneratorDocsComponent {
             code: customFieldLayoutSrc,
             fileName: 'platform-form-generator-custom-field-layout-example',
             component: 'PlatformFormGeneratorCustomFieldLayoutExampleComponent'
+        }
+    ];
+
+    inlineHelpFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: inlineHelpHtml,
+            fileName: 'platform-form-generator-inline-help-example'
+        },
+        {
+            language: 'typescript',
+            code: inlineHelpSrc,
+            fileName: 'platform-form-generator-inline-help-example',
+            component: 'PlatformFormGeneratorInlineHelpExampleComponent'
         }
     ];
 }

@@ -1,12 +1,10 @@
 import {
     addValue,
-    browserIsSafari,
     browserIsSafariorFF,
     clearValue,
     click,
     doesItExist,
     executeScriptAfterTagAttr,
-    executeScriptBeforeTagAttr,
     getAttributeByNameArr,
     getElementArrayLength,
     getElementSize,
@@ -31,6 +29,8 @@ import {
 } from '../fixtures/appData/input-page-contents';
 import { autocompleteOption, longLine, number, special_characters, text } from '../fixtures/testData/input';
 import { InputPo } from '../pages/input.po';
+
+declare const $$: any;
 
 describe('Input should ', () => {
     const inputPage = new InputPo();
@@ -169,12 +169,7 @@ describe('Input should ', () => {
     });
 
     it('should have visual cue for information', () => {
-        if (browserIsSafari()) {
-            expect(executeScriptBeforeTagAttr(questionMarkSpan, 'content')).toBe('');
-        }
-        if (!browserIsSafari()) {
-            expect(executeScriptBeforeTagAttr(questionMarkSpan, 'content')).toBe('""');
-        }
+        expect($$(questionMarkSpan)).toBeTruthy();
     });
 
     it('should implement autosuggestion', () => {

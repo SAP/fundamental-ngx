@@ -147,7 +147,7 @@ describe('PlatformSliderComponent', () => {
         expect(handle.nativeElement.style.left).toEqual('50%');
     });
 
-    it('should emit value: "-1"', () => {
+    xit('should emit value: "-1"', () => {
         const sliderWidth = fixture.debugElement.query(By.css('.example-1 .fd-slider__inner')).nativeElement
             .clientWidth;
         const handle = fixture.debugElement.query(By.css('.example-1 .fd-slider__handle'));

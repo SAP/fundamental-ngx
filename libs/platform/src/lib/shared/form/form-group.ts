@@ -3,7 +3,7 @@ import { FormGroup, AbstractControl } from '@angular/forms';
 
 import { FormField } from './form-field';
 import { FormFieldGroup } from './form-field-group';
-import { LabelLayout, HintPlacement, ColumnLayout } from './form-options';
+import { LabelLayout, ColumnLayout } from './form-options';
 
 /**
  * FormGroup base class.
@@ -52,10 +52,6 @@ export abstract class FormGroupContainer {
      */
     gapColumnLayout: ColumnLayout;
 
-    /**
-     * Define hints placement.
-     */
-    hintPlacement: HintPlacement;
     /**
      * Attach underlying form field.
      */

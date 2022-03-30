@@ -2,11 +2,11 @@ import { Component, ViewChild } from '@angular/core';
 import { Validators } from '@angular/forms';
 
 import {
-    DatetimeAdapter,
     DATE_TIME_FORMATS,
+    DatetimeAdapter,
+    FD_DATETIME_FORMATS,
     FdDate,
-    FdDatetimeAdapter,
-    FD_DATETIME_FORMATS
+    FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
 import { DynamicFormItem, DynamicFormValue, FormGeneratorComponent } from '@fundamental-ngx/platform/form';
 
@@ -45,6 +45,9 @@ export class PlatformFormGeneratorExampleComponent {
         {
             name: 'some',
             message: 'Some group name',
+            guiOptions: {
+                hint: 'Some contextual hint on group header'
+            },
             items: [
                 {
                     type: 'input',
@@ -53,7 +56,10 @@ export class PlatformFormGeneratorExampleComponent {
                     default: 'John',
                     placeholder: 'Please provide your name',
                     guiOptions: {
-                        hint: 'Some contextual hint',
+                        hint: {
+                            text: 'Some contextual hint',
+                            glyph: 'accidental-leave'
+                        },
                         column: 1
                     },
                     validate: async (value) => {

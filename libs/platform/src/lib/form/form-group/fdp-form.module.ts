@@ -11,13 +11,15 @@ import { FormFieldComponent } from './form-field/form-field.component';
 import { InputMessageGroupWithTemplate } from '../input-message-group-with-template/input-message-group-with-template.component';
 import { FormFieldGroupComponent } from './form-field-group/form-field-group.component';
 import { FormFieldControlExtrasComponent } from './form-field-extras/form-field-extras.component';
+import { FormGroupHeaderComponent } from './form-group-header/form-group-header.component';
 
 const EXPORTABLE_DECLARATIONS = [
     FormGroupComponent,
     FormFieldComponent,
     InputMessageGroupWithTemplate,
     FormFieldGroupComponent,
-    FormFieldControlExtrasComponent
+    FormFieldControlExtrasComponent,
+    FormGroupHeaderComponent
 ];
 
 @NgModule({

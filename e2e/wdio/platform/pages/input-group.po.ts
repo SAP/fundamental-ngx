@@ -38,7 +38,7 @@ export class InputGroupPo extends BaseComponentPo {
     withFormInputTextAddon = 'fdp-input-group-form-example fdp-input-group-addon-body';
     withFormInputButtonAddon = 'fdp-input-group-form-example fdp-input-group-addon-body button';
     withFormInputLabel = 'fdp-input-group-form-example label > span';
-    withFormInputQuestionMark = 'fdp-input-group-form-example label .sap-icon--question-mark';
+    withFormInputQuestionMark = 'fdp-input-group-form-example .sap-icon--message-information';
     withFormInputAsterixMark = 'fdp-input-group-form-example label span';
     withFormInputErrorTooltip = '[type="error"] span';
     withFormInputInfoTooltip = '.fd-inline-help__content';

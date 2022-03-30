@@ -1,5 +1,5 @@
 import { Component, forwardRef, Input, Provider, TemplateRef, ViewChild } from '@angular/core';
-import { FormField } from '@fundamental-ngx/platform/shared';
+import { FieldHintOptions, FormField } from '@fundamental-ngx/platform/shared';
 import { FormFieldComponent } from '../../form-group/form-field/form-field.component';
 import { FORM_GROUP_CHILD_FIELD_TOKEN } from '../../form-group/constants';
 import { DynamicFormControl } from '../dynamic-form-control';
@@ -23,14 +23,14 @@ const formGroupChildProvider: Provider = {
 })
 export class FormGeneratorFieldComponent {
     /**
-     * Form generator's form.
-     */
-    @Input() form: DynamicFormGroup;
-
-    /**
      * Form control.
      */
     @Input() field: DynamicFormControl;
+
+    /**
+     * Form generator's form.
+     */
+    @Input() form: DynamicFormGroup;
 
     /**
      * Translations template reference.
@@ -59,7 +59,23 @@ export class FormGeneratorFieldComponent {
     @Input() shouldShow: boolean;
 
     /**
+     * Describes hint options for field label
+     */
+    @Input() hintOptions: FieldHintOptions;
+
+    /**
      * Form field component.
      */
     @ViewChild(FormFieldComponent) fieldRenderer: FormFieldComponent;
+
+    /** @hidden */
+    get _placeholder(): string {
+        if (!this.field) {
+            return '';
+        }
+        if (this.field.formItem?.placeholder) {
+            return this.field.formItem?.placeholder as string;
+        }
+        return this.field.formItem?.useMessageAsPlaceholder && (this.field.formItem?.message as string);
+    }
 }

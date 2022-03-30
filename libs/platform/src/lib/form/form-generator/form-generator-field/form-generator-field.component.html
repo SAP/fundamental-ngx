@@ -1,7 +1,6 @@
 <fdp-form-field
-    [hint]="field.formItem?.guiOptions?.hint"
-    [hintPlacement]="field.formItem?.guiOptions?.hintPlacement || 'left'"
-    [placeholder]="field.formItem?.placeholder || (field.formItem?.useMessageAsPlaceholder && field.formItem?.message)"
+    [hint]="hintOptions"
+    [placeholder]="_placeholder"
     [id]="formFieldName"
     [i18Strings]="i18n"
     [column]="field.formItem?.guiOptions?.column || 1"

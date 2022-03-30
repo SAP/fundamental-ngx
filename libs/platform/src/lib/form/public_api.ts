@@ -30,8 +30,10 @@ export * from './form-generator/dynamic-form-control';
 export * from './form-generator/dynamic-form-control-field.directive';
 export * from './form-generator/fdp-form-generator.module';
 export * from './form-generator/form-generator.service';
+export * from './form-generator/form-generator.tokens';
 export * from './form-generator/config/default-components-list';
 export * from './form-generator/config/default-validation-errors';
+export * from './form-generator/config/default-form-generator-hint-options';
 export * from './form-generator/dynamic-form-generator-checkbox/dynamic-form-generator-checkbox.component';
 export * from './form-generator/dynamic-form-generator-datepicker/dynamic-form-generator-datepicker.component';
 export * from './form-generator/dynamic-form-generator-editor/dynamic-form-generator-editor.component';
@@ -49,11 +51,14 @@ export * from './form-generator/providers/providers';
 export * from './form-generator/form-generator-field/form-generator-field.component';
 
 export * from './form-group/constants';
+export * from './form-group/config/default-form-field-hint-options';
 export * from './form-group/fdp-form.module';
 export * from './form-group/form-group.component';
+export * from './form-group/form-group-header/form-group-header.component';
 export * from './form-group/form-field/form-field.component';
 export * from './form-group/form-field-group/form-field-group.component';
 export * from './form-group/form-field-extras/form-field-extras.component';
+export * from './form-group/fdp-form.tokens';
 
 export * from './input/fdp-input.module';
 export * from './input/input.component';

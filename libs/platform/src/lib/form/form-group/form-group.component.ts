@@ -24,20 +24,22 @@ import {
     Component,
     ContentChild,
     ContentChildren,
+    ElementRef,
     EventEmitter,
     forwardRef,
+    Inject,
     Input,
+    isDevMode,
+    OnChanges,
     OnDestroy,
     OnInit,
     Optional,
-    OnChanges,
     Output,
     Provider,
     QueryList,
+    SimpleChanges,
     TemplateRef,
-    ViewEncapsulation,
-    isDevMode,
-    ElementRef
+    ViewEncapsulation
 } from '@angular/core';
 import { AbstractControl, ControlContainer, FormGroup } from '@angular/forms';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
@@ -48,9 +50,11 @@ import { Subject, Subscription } from 'rxjs';
 import { ContentDensityService, isCompactDensity, resizeObservable } from '@fundamental-ngx/core/utils';
 import {
     ColumnLayout,
+    FieldHintOptions,
     FormField,
     FormFieldGroup,
     FormGroupContainer,
+    HintOptions,
     HintPlacement,
     LabelLayout
 } from '@fundamental-ngx/platform/shared';
@@ -73,12 +77,16 @@ import {
     DefaultVerticalLabelLayout,
     FORM_GROUP_CHILD_FIELD_TOKEN
 } from './constants';
-import { normalizeColumnLayout, generateColumnClass } from './helpers';
+import { generateColumnClass, normalizeColumnLayout } from './helpers';
+import { FormFieldLayoutService } from './services/form-field-layout.service';
+import { FDP_FORM_FIELD_HINT_OPTIONS_DEFAULT } from './fdp-form.tokens';
 
 export const formGroupProvider: Provider = {
     provide: FormGroupContainer,
     useExisting: forwardRef(() => FormGroupComponent)
 };
+
+type FormGroupField = (FormField | FormFieldGroup) & { hintOptions?: HintOptions };
 
 /**
  *
@@ -160,7 +168,7 @@ export const formGroupProvider: Provider = {
     styleUrls: ['./form-group.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [formGroupProvider]
+    providers: [formGroupProvider, FormFieldLayoutService]
 })
 export class FormGroupComponent
     implements FormGroupContainer, OnInit, AfterContentInit, AfterViewInit, OnDestroy, OnChanges
@@ -187,6 +195,12 @@ export class FormGroupComponent
     /** User's custom classes */
     @Input()
     class: string;
+
+    /**
+     * Form group hint options
+     */
+    @Input()
+    hint: string | HintOptions;
 
     /**
      * @deprecated
@@ -279,17 +293,6 @@ export class FormGroupComponent
     @Input()
     i18Strings: TemplateRef<any>;
 
-    /** Defines hint placement */
-    @Input()
-    get hintPlacement(): HintPlacement {
-        return this._hintPlacement;
-    }
-
-    set hintPlacement(value: HintPlacement) {
-        this._hintPlacement = value;
-        this._cd.markForCheck();
-    }
-
     /** Whether to wrap all the provided content in a `<form>` */
     @Input()
     get useForm(): boolean {
@@ -341,7 +344,7 @@ export class FormGroupComponent
      *
      */
     @ContentChildren(FORM_GROUP_CHILD_FIELD_TOKEN as any, { descendants: true })
-    protected formGroupChildren: QueryList<FormField | FormFieldGroup>;
+    protected formGroupChildren: QueryList<FormGroupField>;
 
     /**
      * @hidden
@@ -353,7 +356,7 @@ export class FormGroupComponent
      * This list relies on the injection mechanism so nested FdpFormGroup's fields/fieldGroups
      * will be omitted
      */
-    private _formGroupDirectChildren: Array<FormField | FormFieldGroup> = [];
+    private _formGroupDirectChildren: Array<FormGroupField> = [];
 
     /** @hidden */
     xlColumnsNumber: number;
@@ -375,6 +378,9 @@ export class FormGroupComponent
     formRows: { [key: number]: FieldColumn | FieldGroup } = {};
 
     /** @hidden */
+    _hintOptions: HintOptions;
+
+    /** @hidden */
     private _useForm = false;
     /** @hidden */
     private _hintPlacement: HintPlacement = 'right';
@@ -392,14 +398,28 @@ export class FormGroupComponent
         private _cd: ChangeDetectorRef,
         private elementRef: ElementRef,
         @Optional() private formContainer: ControlContainer,
-        @Optional() private _contentDensityService: ContentDensityService
+        @Optional() private _contentDensityService: ContentDensityService,
+        @Inject(FDP_FORM_FIELD_HINT_OPTIONS_DEFAULT) private _defaultHintOptions: FieldHintOptions
     ) {
         this.formGroup = <FormGroup>(this.formContainer ? this.formContainer.control : new FormGroup({}));
     }
 
     /** @hidden */
-    ngOnChanges(): void {
+    ngOnChanges(changes: SimpleChanges): void {
         this.buildComponentCssClass();
+        if (changes.hint) {
+            if (typeof this.hint === 'string') {
+                this._hintOptions = {
+                    ...this._defaultHintOptions,
+                    text: this.hint
+                };
+            } else {
+                this._hintOptions = {
+                    ...this._defaultHintOptions,
+                    ...this.hint
+                };
+            }
+        }
     }
 
     /** @hidden */
@@ -512,6 +532,12 @@ export class FormGroupComponent
         return ['fd-container', !this.compact ? 'fd-form-layout-grid-container' : '', this.class];
     }
 
+    /**
+     * @hidden
+     * Used for template side Type correction
+     */
+    $fieldGroup = (f: any): FieldGroup => f;
+
     /** @hidden */
     private _listenToFormGroupChildren(): void {
         this.formGroupChildren.changes.subscribe(() => {
@@ -571,7 +597,7 @@ export class FormGroupComponent
                     fieldGroupColumns[columnNumber].push(groupField);
                 });
 
-                rows[rowNumber] = new FieldGroup(child.label, fieldGroupColumns);
+                rows[rowNumber] = new FieldGroup(child.label, fieldGroupColumns, child.hintOptions);
                 rowNumber++;
             }
         }
@@ -598,7 +624,7 @@ export class FormGroupComponent
 
     /** @hidden */
     private _updateFormFieldsProperties(): void {
-        this._getFormGroupChildren().forEach((formField: FormField | FormFieldGroup) => {
+        this._getFormGroupChildren().forEach((formField: FormGroupField) => {
             if (isFieldChild(formField)) {
                 this._updateFormFieldProperties(formField);
             }
@@ -663,7 +689,7 @@ export class FormGroupComponent
     }
 
     /** @hidden */
-    private _addDirectFormGroupChild(child: FormField | FormFieldGroup): void {
+    private _addDirectFormGroupChild(child: FormGroupField): void {
         if (this._formGroupDirectChildren.indexOf(child) > -1) {
             return;
         }
@@ -679,11 +705,10 @@ export class FormGroupComponent
      * @hidden
      * Get direct form group children in the original order
      */
-    private _getFormGroupChildren(): (FormField | FormFieldGroup)[] {
+    private _getFormGroupChildren(): FormGroupField[] {
         if (!this.formGroupChildren) {
             return [];
         }
-
         const children = this.formGroupChildren
             .toArray()
             .map((child) => (isFieldGroupWrapperChild(child) ? child.fieldRenderer : child));

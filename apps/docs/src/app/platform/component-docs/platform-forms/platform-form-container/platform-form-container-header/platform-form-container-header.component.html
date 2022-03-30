@@ -48,6 +48,31 @@
     <strong>Change of column number for a field</strong> for reference.
     <br />
     <br />
+
+    <h3>Inline help default global options</h3>
+    <p>Inline help has default options as below:</p>
+    <table fd-table>
+        <thead fd-table-header>
+            <tr fd-table-row>
+                <th fd-table-cell>Property name</th>
+                <th fd-table-cell>Value</th>
+            </tr>
+        </thead>
+        <tbody fd-table-body>
+            <tr fd-table-row *ngFor="let prop of defaultHintOptions">
+                <td fd-table-cell>{{ prop[0] }}</td>
+                <td fd-table-cell>{{ prop[1] }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>
+        if you want to modify default values globally and not per-field, provide
+        <code>FDP_FORM_FIELD_HINT_OPTIONS_DEFAULT</code>
+        in your module or component.
+        <import module="FDP_FORM_FIELD_HINT_OPTIONS_DEFAULT" subPackage="form"></import>
+    </p>
+    <br />
+    <br />
     <import module="FdpFormGroupModule" subPackage="form"></import>
 </description>
 

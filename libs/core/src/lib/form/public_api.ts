@@ -18,3 +18,4 @@ export * from './form-input-message-group/form-input-message-group.component';
 export * from './form-input-message-group/form-input-message-group.module';
 export * from './form-header/form-header.component';
 export * from './form-header/form-header.module';
+export * from './inline-help-placement.type';

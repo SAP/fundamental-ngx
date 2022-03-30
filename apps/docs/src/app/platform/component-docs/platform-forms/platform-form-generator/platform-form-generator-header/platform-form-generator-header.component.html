@@ -19,6 +19,28 @@
         <li>Question-specific validator function with asynchronous functions support;</li>
         <li>Rule function that can determine if question should be shown to the user;</li>
     </ul>
+    <h3>Inline help default global options</h3>
+    <p>Inline help has default options as below:</p>
+    <table fd-table>
+        <thead fd-table-header>
+            <tr fd-table-row>
+                <th fd-table-cell>Property name</th>
+                <th fd-table-cell>Value</th>
+            </tr>
+        </thead>
+        <tbody fd-table-body>
+            <tr fd-table-row *ngFor="let prop of defaultHintOptions">
+                <td fd-table-cell>{{ prop[0] }}</td>
+                <td fd-table-cell>{{ prop[1] }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>
+        if you want to modify default values globally and not per-field, provide
+        <code>FDP_FORM_GENERATOR_DEFAULT_HINT_OPTIONS</code>
+        in your module or component.
+        <import module="FDP_FORM_GENERATOR_DEFAULT_HINT_OPTIONS" subPackage="form"></import>
+    </p>
 </description>
 <import module="PlatformFormGeneratorModule" subPackage="form"></import>
 

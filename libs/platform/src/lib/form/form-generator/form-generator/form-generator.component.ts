@@ -3,21 +3,28 @@ import {
     ChangeDetectorRef,
     Component,
     EventEmitter,
+    Inject,
     Input,
     isDevMode,
+    OnChanges,
     OnDestroy,
     Output,
-    TemplateRef,
+    SimpleChanges,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
-import { ColumnLayout, LabelLayout } from '@fundamental-ngx/platform/shared';
+import { ColumnLayout, FieldHintOptions, HintOptions, LabelLayout } from '@fundamental-ngx/platform/shared';
 
 import { FormGeneratorService } from '../form-generator.service';
-import { DynamicFormItem, DynamicFormValue } from '../interfaces/dynamic-form-item';
+import {
+    BaseDynamicFormItemGuiOptions,
+    DynamicFormItem,
+    DynamicFormItemGuiOptions,
+    DynamicFormValue
+} from '../interfaces/dynamic-form-item';
 import {
     DynamicFormControl,
     DynamicFormControlGroup,
@@ -32,6 +39,8 @@ import {
     DefaultVerticalFieldLayout,
     DefaultVerticalLabelLayout
 } from '../../form-group/constants';
+import { FDP_FORM_GENERATOR_DEFAULT_HINT_OPTIONS } from '../form-generator.tokens';
+import { defaultFormGeneratorHintOptions } from '../config/default-form-generator-hint-options';
 
 let formUniqueId = 0;
 
@@ -56,13 +65,7 @@ export interface SubmitFormEventResult {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormGeneratorComponent implements OnDestroy {
-    /**
-     * @description Renderer for the custom html code passed into the component.
-     */
-    @ViewChild('renderer', { static: false })
-    renderer: TemplateRef<any>;
-
+export class FormGeneratorComponent implements OnDestroy, OnChanges {
     /** @description Unique form name */
     @Input()
     formName = `fdp-form-generator-${formUniqueId++}`;
@@ -92,6 +95,13 @@ export class FormGeneratorComponent implements OnDestroy {
      */
     @Input()
     mainTitle: string;
+
+    /**
+     * @description
+     * Hint for the main title
+     */
+    @Input()
+    hint: string | HintOptions;
 
     /**
      * @description Specify the column layout in the format `XLn-Ln-Mn-Sn`
@@ -208,6 +218,11 @@ export class FormGeneratorComponent implements OnDestroy {
     /**
      * @hidden
      */
+    hintOptions: HintOptions;
+
+    /**
+     * @hidden
+     */
     private _formItems: DynamicFormItem[];
 
     /**
@@ -224,7 +239,37 @@ export class FormGeneratorComponent implements OnDestroy {
     /** @hidden */
     private _labelLayout: LabelLayout;
 
-    constructor(private _fgService: FormGeneratorService, private _cd: ChangeDetectorRef) {}
+    /** @hidden */
+    private readonly _defaultHintOptions: FieldHintOptions;
+
+    /** @hidden */
+    constructor(
+        private _fgService: FormGeneratorService,
+        private _cd: ChangeDetectorRef,
+        @Inject(FDP_FORM_GENERATOR_DEFAULT_HINT_OPTIONS) _providedHintOptions: FieldHintOptions
+    ) {
+        this._defaultHintOptions = {
+            ...defaultFormGeneratorHintOptions,
+            ..._providedHintOptions
+        };
+    }
+
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes.hint) {
+            if (typeof this.hint === 'string') {
+                this.hintOptions = {
+                    ...this._defaultHintOptions,
+                    text: this.hint
+                };
+            } else {
+                this.hintOptions = {
+                    ...this._defaultHintOptions,
+                    ...this.hint
+                };
+            }
+        }
+    }
 
     /**
      * @hidden
@@ -314,7 +359,7 @@ export class FormGeneratorComponent implements OnDestroy {
      *
      * @hidden
      */
-    _trackFn(index: number, value: DynamicFormControl): string {
+    _trackFn(index: number, value: DynamicFormGroupControl): string {
         return `${index}_${value.formItem.name}`;
     }
 
@@ -330,5 +375,31 @@ export class FormGeneratorComponent implements OnDestroy {
     /** @hidden */
     _getOrderedControls(controls: DynamicFormGroupControls): (DynamicFormControl | DynamicFormControlGroup)[] {
         return Object.values(controls).sort((a, b) => (a.formItem.rank > b.formItem.rank ? 1 : -1));
+    }
+
+    /**
+     * @description
+     * Used for extracting hintOptions from GuiOptions. This will coerce string | HintOptions to FieldHintOptions,
+     * will combine default value of hints for form generator with provided options.
+     * @param guiOptions
+     */
+    getHintOptions(guiOptions?: BaseDynamicFormItemGuiOptions | DynamicFormItemGuiOptions): FieldHintOptions {
+        if (!guiOptions) {
+            return;
+        }
+        const formItemHintOptions: string | HintOptions | FieldHintOptions = guiOptions.hint;
+        const placement = guiOptions.hintPlacement || this._defaultHintOptions.placement;
+        if (typeof formItemHintOptions === 'string') {
+            return {
+                ...this._defaultHintOptions,
+                placement,
+                text: formItemHintOptions
+            };
+        }
+        return {
+            ...this._defaultHintOptions,
+            placement,
+            ...formItemHintOptions
+        };
     }
 }
