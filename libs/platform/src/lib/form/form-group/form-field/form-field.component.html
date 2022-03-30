@@ -10,7 +10,7 @@
             <ng-template [ngTemplateOutlet]="labelTemplate"></ng-template>
         </div>
         <ng-container *ngTemplateOutlet="withFormMessage"></ng-container>
-        <div class="fd-col" [class]="_gapColumnLayoutClass">
+        <div class="fd-col" [class]="_gapColumnLayoutClass" [style.text-overflow]="'clip'">
             <ng-container *ngIf="hintTarget === 'input' && hintOptions.text">
                 <fd-icon
                     [fd-inline-help]="hintOptions.text"
