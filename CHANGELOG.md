@@ -1,4 +1,11 @@
 
+## 0.34.0-rc.6 (2022-03-30)
+
+
+### Features
+
+* **platform, core:** advanced inline help management ([#7878](https://github.com/SAP/fundamental-ngx/issues/7878)) ([81ec159](https://github.com/SAP/fundamental-ngx/commit/81ec15989c273e66b9a3421657cc390a317c92ed))
+
 ## 0.34.0-rc.5 (2022-03-29)
 
 
