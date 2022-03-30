@@ -1,4 +1,11 @@
 
+## 0.34.0-rc.7 (2022-03-30)
+
+
+### Bug Fixes
+
+* **core:** hide items outside viewport ([#7902](https://github.com/SAP/fundamental-ngx/issues/7902)) ([aec3475](https://github.com/SAP/fundamental-ngx/commit/aec3475cd22efbd1b1fec8a368a836b2b9dc95bf))
+
 ## 0.34.0-rc.6 (2022-03-30)
 
 
