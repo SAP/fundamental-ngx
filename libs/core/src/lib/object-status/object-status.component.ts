@@ -26,6 +26,9 @@ export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
         </fd-icon>
 
         <span *ngIf="label" class="fd-object-status__text" [class]="_textClass">{{ label }}</span>
+
+        <!-- DEPRECATED - Remove in v0.23.0 -->
+        <ng-content></ng-content>
     `,
     styleUrls: ['./object-status.component.scss'],
     encapsulation: ViewEncapsulation.None,
