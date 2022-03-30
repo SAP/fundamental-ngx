@@ -83,7 +83,8 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this.onResize();
+        // Process resize after all the children views is initialized
+        setTimeout(() => this.onResize());
     }
 
     /** @hidden */
@@ -200,7 +201,7 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
         if (str.length > cutLength) {
             const stringLeftIndex = Math.floor(cutLength / 2);
             const stringRightIndex = str.length - stringLeftIndex + 3;
-            return str.substring(0, stringLeftIndex) + '... ' + str.substring(stringRightIndex, str.length);
+            return str.substring(0, stringLeftIndex) + '...' + str.substring(stringRightIndex, str.length);
         }
         return str;
     }
