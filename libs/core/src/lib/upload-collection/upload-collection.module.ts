@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {
     UploadCollectionDescriptionDirective,
     UploadCollectionStatusGroupDirective,
+    UploadCollectionStatusItemDirective,
     UploadCollectionTextSeparatorDirective,
     UploadCollectionThumbnailDirective,
     UploadCollectionTitleContainerDirective,
@@ -27,6 +28,7 @@ import { UploadCollectionItemDirective } from './upload-collection-item.directiv
         UploadCollectionDescriptionDirective,
         UploadCollectionTextSeparatorDirective,
         UploadCollectionStatusGroupDirective,
+        UploadCollectionStatusItemDirective,
         UploadCollectionButtonGroupComponent,
         UploadCollectionFormItemComponent,
         UploadCollectionTitleContainerDirective
@@ -40,6 +42,7 @@ import { UploadCollectionItemDirective } from './upload-collection-item.directiv
         UploadCollectionDescriptionDirective,
         UploadCollectionTextSeparatorDirective,
         UploadCollectionStatusGroupDirective,
+        UploadCollectionStatusItemDirective,
         UploadCollectionButtonGroupComponent,
         UploadCollectionFormItemComponent,
         UploadCollectionTitleContainerDirective
