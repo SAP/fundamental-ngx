@@ -1,4 +1,11 @@
 
+### [0.32.12](https://github.com/SAP/fundamental-ngx/compare/v0.32.11...v0.32.12) (2022-03-31)
+
+
+### Bug Fixes
+
+* **core:** carousel issue downgrade ([e02b145](https://github.com/SAP/fundamental-ngx/commit/e02b1455de70975cc61abc3c61a443c9d63ba530))
+
 ### [0.32.11](https://github.com/SAP/fundamental-ngx/compare/v0.32.10...v0.32.11) (2022-02-14)
 
 
