@@ -49,6 +49,22 @@ export class ThemesService {
         {
             id: 'sap_fiori_3_light_dark',
             name: 'Light Dark'
+        },
+        {
+            id: 'sap_horizon',
+            name: 'Morning Horizon'
+        },
+        {
+            id: 'sap_horizon_dark',
+            name: 'Evening Horizon'
+        },
+        {
+            id: 'sap_horizon_hcb',
+            name: 'High Contrast Black Horizon'
+        },
+        {
+            id: 'sap_horizon_hcw',
+            name: 'High Contrast White Horizon'
         }
     ];
 
