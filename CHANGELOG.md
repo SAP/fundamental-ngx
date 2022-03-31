@@ -1,4 +1,11 @@
 
+### [0.31.3](https://github.com/SAP/fundamental-ngx/compare/v0.31.2...v0.31.3) (2022-03-31)
+
+
+### Features
+
+* **deps:** bring horizon family themes ([609a282](https://github.com/SAP/fundamental-ngx/commit/609a2822bb04386af2d067d028909b8bbf46b8cc))
+
 ### [0.31.2](https://github.com/SAP/fundamental-ngx/compare/v0.31.0...v0.31.2) (2021-12-20)
 
 
