@@ -17,6 +17,7 @@ import {
     PlatformLinkStandardExampleComponent,
     PlatformLinkTruncatedExampleComponent
 } from './platform-link-examples/platform-link-examples.component';
+import { getI18nKey, I18nDocsComponent } from '../../../documentation/core-helpers/i18n-docs/i18n-docs.component';
 
 const routes: Routes = [
     {
@@ -24,7 +25,8 @@ const routes: Routes = [
         component: PlatformLinkHeaderComponent,
         children: [
             { path: '', component: PlatformLinkDocsComponent },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.link } }
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.link } },
+            { path: 'i18n', component: I18nDocsComponent, data: getI18nKey('platformLink') }
         ]
     }
 ];

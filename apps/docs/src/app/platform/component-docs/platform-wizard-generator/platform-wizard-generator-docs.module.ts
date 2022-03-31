@@ -28,6 +28,7 @@ import { WizardGeneratorOnchangeExampleComponent } from './examples/wizard-gener
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { WizardGeneratorVisibilityBetweenStepsExampleComponent } from './examples/wizard-generator-visibility-between-steps-example.component';
 import { WizardGeneratorSpecialElementsExampleComponent } from './examples/wizard-generator-special-elements-example.component';
+import { getI18nKey, I18nDocsComponent } from '../../../documentation/core-helpers/i18n-docs/i18n-docs.component';
 
 const routes: Routes = [
     {
@@ -35,7 +36,8 @@ const routes: Routes = [
         component: PlatformWizardGeneratorHeaderComponent,
         children: [
             { path: '', component: PlatformWizardGeneratorDocsComponent },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.wizardGenerator } }
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.wizardGenerator } },
+            { path: 'i18n', component: I18nDocsComponent, data: getI18nKey('platformWizardGenerator') }
         ]
     }
 ];

@@ -22,6 +22,7 @@ import { PlatformStandardListItemBorderLessExampleComponent } from './platform-s
 import { PlatformStandardListItemWithNavigationExampleComponent } from './platform-standard-list-item-examples/platform-standard-list-item-with-navigation-example.component';
 import { PlatformStandardListItemWithSingleSelectionExampleComponent } from './platform-standard-list-item-examples/platform-standard-list-item-with-single-selection-example.component';
 import { PlatformStandardListItemWithSelectionExampleComponent } from './platform-standard-list-item-examples/platform-standard-list-item-with-selection-example.component';
+import { getI18nKey, I18nDocsComponent } from '../../../documentation/core-helpers/i18n-docs/i18n-docs.component';
 
 const routes: Routes = [
     {
@@ -29,7 +30,8 @@ const routes: Routes = [
         component: PlatformStandardListItemHeaderComponent,
         children: [
             { path: '', component: PlatformStandardListItemDocsComponent },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.standardlistitem } }
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.standardlistitem } },
+            { path: 'i18n', component: I18nDocsComponent, data: getI18nKey('platformStandardListItem') }
         ]
     }
 ];

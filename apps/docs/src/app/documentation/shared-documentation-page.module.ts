@@ -23,47 +23,47 @@ import { ApiComponent } from './core-helpers/api/api.component';
 import { sharedCoreModules } from './shared-core-modules';
 import { CodeSnippetComponent } from './core-helpers/code-snippet/code-snippet.component';
 import { DatetimeImportantComponent } from './common-components/datetime-important/datetime-important.component';
+import { I18nDocsModule } from './core-helpers/i18n-docs/i18n-docs.module';
 
 /** THIS MODULE PROVIDES BASIC SET OF DEPENDENCIES NEEDED TO CREATE COMPONENT EXAMPLE PAGE */
+
+const EXPORTABLE_DECLARATIONS = [
+    ApiComponent,
+    ImportComponent,
+    HeaderComponent,
+    SeparatorComponent,
+    HeaderTabsComponent,
+    PlayGroundComponent,
+    CodeSnippetComponent,
+    CodeExampleComponent,
+    DescriptionComponent,
+    DirectionalityComponent,
+    DocsSectionTitleComponent,
+    ComponentExampleComponent,
+    ExampleBackgroundComponent,
+    DatetimeImportantComponent
+];
+
 @NgModule({
-    declarations: [
-        ApiComponent,
-        ImportComponent,
-        HeaderComponent,
-        SeparatorComponent,
-        HeaderTabsComponent,
-        PlayGroundComponent,
-        CodeSnippetComponent,
-        CodeExampleComponent,
-        DescriptionComponent,
-        DirectionalityComponent,
-        DocsSectionTitleComponent,
-        ComponentExampleComponent,
-        ExampleBackgroundComponent,
-        DatetimeImportantComponent
+    declarations: [...EXPORTABLE_DECLARATIONS],
+    imports: [
+        FormsModule,
+        CommonModule,
+        RouterModule,
+        SchemaModule,
+        sharedCoreModules,
+        MarkdownModule.forChild(),
+        I18nDocsModule
     ],
-    imports: [FormsModule, CommonModule, RouterModule, SchemaModule, sharedCoreModules, MarkdownModule.forChild()],
     providers: [CopyService, ApiDocsService],
     exports: [
+        ...EXPORTABLE_DECLARATIONS,
         FormsModule,
         ReactiveFormsModule,
         SchemaModule,
+        I18nDocsModule,
         CommonModule,
-        ApiComponent,
-        ImportComponent,
-        HeaderComponent,
-        SeparatorComponent,
-        HeaderTabsComponent,
-        PlayGroundComponent,
-        CodeSnippetComponent,
-        CodeExampleComponent,
-        DescriptionComponent,
-        DirectionalityComponent,
-        DocsSectionTitleComponent,
-        ComponentExampleComponent,
-        ExampleBackgroundComponent,
-        sharedCoreModules,
-        DatetimeImportantComponent
+        sharedCoreModules
     ]
 })
 export class SharedDocumentationPageModule {}
