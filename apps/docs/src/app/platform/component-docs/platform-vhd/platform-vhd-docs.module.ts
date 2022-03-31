@@ -24,6 +24,7 @@ import {
     PlatformVhdStrategyLabelExampleComponent
 } from './platform-vhd-examples';
 import { PlatformVhdLoadingExampleComponent } from './platform-vhd-examples/platform-vhd-loading-example.component';
+import { getI18nKey, I18nDocsComponent } from '../../../documentation/core-helpers/i18n-docs/i18n-docs.component';
 
 const routes: Routes = [
     {
@@ -31,7 +32,8 @@ const routes: Routes = [
         component: PlatformVhdHeaderComponent,
         children: [
             { path: '', component: PlatformVhdDocsComponent },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.valueHelpDialog } }
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.valueHelpDialog } },
+            { path: 'i18n', component: I18nDocsComponent, data: getI18nKey('platformVHD') }
         ]
     }
 ];

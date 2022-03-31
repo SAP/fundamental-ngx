@@ -33,7 +33,7 @@ export class VhdSearchComponent {
 
     constructor() {
         console.warn(
-            '"VhdSearchComponent" is deprecated. Messages from it is no longer in use.' +
+            '"VhdSearchComponent" is deprecated. Messages from it is no longer in use. ' +
                 'In order to configure custom messages, use i18n tools instead.'
         );
     }

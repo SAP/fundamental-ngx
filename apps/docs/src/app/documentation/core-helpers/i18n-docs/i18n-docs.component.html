@@ -1,0 +1,38 @@
+<div [ngSwitch]="status" *ngIf="{ value: data$ | async } as data" style="margin-top: 2rem">
+    <div style="text-align: center" *ngSwitchCase="loadStatus.Loading">
+        <fd-busy-indicator [loading]="true" title="Please Wait"></fd-busy-indicator>
+    </div>
+    <ng-container *ngSwitchCase="loadStatus.Loaded">
+        <table fd-table *ngIf="data.value?.length; else noData">
+            <thead fd-table-header>
+                <tr fd-table-row>
+                    <th fd-table-cell>Key</th>
+                    <th fd-table-cell>Default English value</th>
+                    <th fd-table-cell>Properties</th>
+                </tr>
+            </thead>
+            <tbody fd-table-body>
+                <tr *ngFor="let row of data.value" fd-table-row>
+                    <td fd-table-cell>
+                        <strong>{{ row.key }}</strong>
+                    </td>
+                    <td fd-table-cell>
+                        {{ row.englishTranslation }}
+                    </td>
+                    <td fd-table-cell>
+                        <ul *ngIf="row.params.length">
+                            <li *ngFor="let p of row.params">{{ p }}</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ng-template #noData>
+            <h3 style="text-align: center">There's no translation keys for this component.</h3>
+        </ng-template>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="loadStatus.Error">
+        <h3 style="text-align: center">Failed to load data..</h3>
+    </ng-container>
+</div>
