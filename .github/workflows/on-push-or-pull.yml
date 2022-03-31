@@ -317,26 +317,35 @@ jobs:
             || github.ref == 'refs/heads/hotfix_tmp_branch_for_automated_release_do_not_use'
             ) }}
         steps:
-            - uses: actions/checkout@v2.3.4
+            - uses: actions/checkout@v2.4.0
               with:
                   token: ${{ secrets.GHACTIONS }}
+                  submodules: true
+                  fetch-depth: 0
             - uses: actions/cache@v2
               with:
                   path: ${{ env.CACHE_NODE_MODULES_PATH }}
                   key: node_modules-${{ hashFiles('**/package-lock.json') }}
 
-            - run: echo "STAGE_NAME=Release" >> $GITHUB_ENV
+            - run: |
+                  echo "STAGE_NAME=Release" >> $GITHUB_ENV
+                  git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
+                  git fetch
+                  git checkout tmp_branch_for_automated_release_do_not_use
               if: ${{ github.ref == 'refs/heads/tmp_branch_for_automated_release_do_not_use' }}
             - run: |
                   echo "STAGE_NAME=Pre-release" >> $GITHUB_ENV 
                   echo "releaseTag=prerelease" >> $GITHUB_ENV
-              if: ${{ github.ref == 'refs/heads/main' }}
-            - run: echo "STAGE_NAME=Hotfix-release" >> $GITHUB_ENV
-              if: ${{ github.ref == 'refs/heads/hotfix_tmp_branch_for_automated_release_do_not_use' }}
-            - run: |
                   git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
                   git fetch
                   git checkout main
+              if: ${{ github.ref == 'refs/heads/main' }}
+            - run: |
+                  echo "STAGE_NAME=Hotfix-release" >> $GITHUB_ENV
+                  git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
+                  git fetch
+                  git checkout hotfix_tmp_branch_for_automated_release_do_not_use
+              if: ${{ github.ref == 'refs/heads/hotfix_tmp_branch_for_automated_release_do_not_use' }}
             - run: bash ./ci-scripts/publish.sh
               env:
                   GH_TOKEN: ${{ secrets.GHACTIONS }}

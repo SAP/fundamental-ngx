@@ -4,6 +4,12 @@ set -u -e
 
 source .ci-env/flags.sh
 
+# git fetch
+# git fetch --all --tags
+git status
+echo "before describe --------------- "
+git describe --tags --abbrev=0
+
 #PACKAGES=(core platform moment-adapter)
 HOTFIX_BRANCH=hotfix_tmp_branch_for_automated_release_do_not_use
 MAIN_BRANCH=refs/heads/main
