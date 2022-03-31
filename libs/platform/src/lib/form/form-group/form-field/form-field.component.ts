@@ -411,8 +411,11 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         );
     }
 
+    /** @hidden */
     private _labelColumnLayout$: BehaviorSubject<ColumnLayout>;
+    /** @hidden */
     private _fieldColumnLayout$: BehaviorSubject<ColumnLayout>;
+    /** @hidden */
     private _gapColumnLayout$: BehaviorSubject<ColumnLayout>;
 
     /** @hidden */
