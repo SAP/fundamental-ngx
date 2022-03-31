@@ -25,7 +25,7 @@ import {
 } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { BooleanInput, coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
-import { BehaviorSubject, combineLatest, filter, Observable, Subject, tap } from 'rxjs';
+import { BehaviorSubject, combineLatest, filter, Observable, Subject, Subscription, tap } from 'rxjs';
 import { map, startWith, switchMap, takeUntil } from 'rxjs/operators';
 
 import {
@@ -417,6 +417,8 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     private _fieldColumnLayout$: BehaviorSubject<ColumnLayout>;
     /** @hidden */
     private _gapColumnLayout$: BehaviorSubject<ColumnLayout>;
+    /** @hidden */
+    private _needsInlineHelpPlaceSubscription: Subscription;
 
     /** @hidden */
     get _groupHost(): FormGroupContainer | FormFieldGroup {
@@ -482,17 +484,22 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         if (this.labelColumnLayout) {
             return;
         }
+        this.listenToInlineHelpPlaceRequirementChanges(() => (this.labelColumnLayout ? this : this._groupHost));
+    }
+
+    listenToInlineHelpPlaceRequirementChanges(getSource: () => any): void {
+        if (this._needsInlineHelpPlaceSubscription) {
+            this._needsInlineHelpPlaceSubscription.unsubscribe();
+            this._needsInlineHelpPlaceSubscription = void 0;
+        }
         const setLayouts = (source: any): void => {
             this.labelColumnLayout = source.labelColumnLayout;
             this.fieldColumnLayout = source.fieldColumnLayout;
             this.gapColumnLayout = source.gapColumnLayout;
         };
-        this._formFieldLayoutService.needsInlineHelpPlace
+        this._needsInlineHelpPlaceSubscription = this._formFieldLayoutService.needsInlineHelpPlace
             .pipe(
-                map(() => {
-                    const source = this.labelColumnLayout ? this : this._groupHost;
-                    return this._formFieldLayoutService.getFixedLayouts(source);
-                }),
+                map(() => this._formFieldLayoutService.getFixedLayouts(getSource())),
                 tap(setLayouts),
                 takeUntil(this._destroyed$)
             )
@@ -524,6 +531,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
                 )
             )
         );
+        this.listenToInlineHelpPlaceRequirementChanges(() => this);
     }
 
     /** @hidden */

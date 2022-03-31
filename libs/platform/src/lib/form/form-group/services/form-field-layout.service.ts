@@ -49,7 +49,9 @@ export class FormFieldLayoutService {
     getFixedLayouts(layouts: Layouts): Layouts {
         const fieldColumnLayout = normalizeColumnLayout({ ...layouts.fieldColumnLayout });
         const labelColumnLayout = normalizeColumnLayout({ ...layouts.labelColumnLayout });
-        const gapColumnLayout = normalizeColumnLayout({ ...layouts.gapColumnLayout });
+        const gapColumnLayout = normalizeColumnLayout({
+            ...(layouts.gapColumnLayout ? layouts.gapColumnLayout : { S: 0 })
+        });
         if (this._needsInlineHelpPlace$.value) {
             this._hintLayoutConfig.hintOnInputBreakpoints.forEach((sizeName) => {
                 const shouldFitInOneLine =
