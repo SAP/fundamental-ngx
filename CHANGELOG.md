@@ -1,4 +1,11 @@
 
+### [0.32.13](https://github.com/SAP/fundamental-ngx/compare/v0.32.12...v0.32.13) (2022-03-31)
+
+
+### Features
+
+* **deps:** bring Horizon Theme Family - theming-base-content 11.1.37 ([2366f13](https://github.com/SAP/fundamental-ngx/commit/2366f13cc84b67fd4149a06d2896fa90b730c58e))
+
 ### [0.32.12](https://github.com/SAP/fundamental-ngx/compare/v0.32.11...v0.32.12) (2022-03-31)
 
 
