@@ -1,4 +1,11 @@
 
+## 0.34.0-rc.10 (2022-03-31)
+
+
+### Features
+
+* **deps:** upgrade to theming-base-content version 11.1.37 ([#7912](https://github.com/SAP/fundamental-ngx/issues/7912)) ([ca6a0e6](https://github.com/SAP/fundamental-ngx/commit/ca6a0e640fa8c2024db07bd7d0e149c394ad0973))
+
 ## 0.34.0-rc.9 (2022-03-31)
 
 ## 0.34.0-rc.8 (2022-03-30)
