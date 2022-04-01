@@ -13,6 +13,7 @@ import { DynamicPageTitleContentComponent } from './dynamic-page-header/actions/
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { DynamicPageWrapperDirective } from './dynamic-page-wrapper.directive';
+import { IgnoreClickOnSelectionModule } from '@fundamental-ngx/core/utils';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,7 @@ import { DynamicPageWrapperDirective } from './dynamic-page-wrapper.directive';
         DynamicPageTitleContentComponent,
         DynamicPageWrapperDirective
     ],
-    imports: [CommonModule, ButtonModule, ToolbarModule, PopoverModule],
+    imports: [CommonModule, ButtonModule, ToolbarModule, PopoverModule, IgnoreClickOnSelectionModule],
     exports: [
         DynamicPageComponent,
         DynamicPageHeaderComponent,
