@@ -4,7 +4,7 @@ export const basic_text_area_popover = 'This Is Tooltip Help';
 export const readonly_text_area_label = 'Readonly Textarea';
 export const disabled_text_area_label = 'Disabled Textarea';
 export const compact_text_area_label = 'Compact Textarea';
-export const no_platforms_form_text_area_label = 'Textarea Without Platform Forms';
+export const no_platforms_form_text_area_label = 'Textarea without Platform Forms';
 export const basicTextareaPlaceholderArr = [
     'Start entering detailed description',
     'Start entering detailed description',
