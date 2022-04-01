@@ -1,3 +1,5 @@
+export * from './directives/ignore-click-on-selection/ignore-click-on-selection.directive';
+export * from './directives/ignore-click-on-selection/ignore-click-on-selection.module';
 export * from './directives/template/template.directive';
 export * from './directives/template/template.module';
 export * from './directives/only-digits/only-digits.directive';
