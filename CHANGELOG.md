@@ -1,4 +1,11 @@
 
+### 0.34.1-rc.1 (2022-04-01)
+
+
+### Features
+
+* **core:** added ignore click on selection directive ([#7934](https://github.com/SAP/fundamental-ngx/issues/7934)) ([a0a5255](https://github.com/SAP/fundamental-ngx/commit/a0a5255e1c76392d724da41da6625742bd72e2df))
+
 ### 0.34.1-rc.0 (2022-04-01)
 
 
