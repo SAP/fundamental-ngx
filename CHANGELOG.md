@@ -1,4 +1,11 @@
 
+### 0.34.1-rc.0 (2022-04-01)
+
+
+### Bug Fixes
+
+* **deps:** fix ngx versions ([#7935](https://github.com/SAP/fundamental-ngx/issues/7935)) ([50c7820](https://github.com/SAP/fundamental-ngx/commit/50c782062f848abb0bdb301681b4cdaa5d42f27b))
+
 ## [0.34.0](https://github.com/SAP/fundamental-ngx/compare/v0.33.6-rc.0...v0.34.0) (2022-04-01)
 
 ## 0.34.0-rc.11 (2022-03-31)
