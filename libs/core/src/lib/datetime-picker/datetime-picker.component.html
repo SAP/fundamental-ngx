@@ -48,12 +48,19 @@
             [style.display]="'block'"
         >
             <div class="fd-popover__wrapper fd-datetime__wrapper">
+                <div class="fd-datetime__display-type-switcher">
+                    <fd-segmented-button [(ngModel)]="_displayType">
+                        <button fd-button [label]="displayTypeDateLabel" value="date"></button>
+                        <button fd-button [label]="displayTypeTimeLabel" value="time"></button>
+                    </fd-segmented-button>
+                </div>
                 <fd-form-message id="fd-form-message" [embedded]="true" *ngIf="_message" [type]="state">
                     {{ _message }}
                 </fd-form-message>
                 <ng-content></ng-content>
                 <div class="fd-datetime__container">
                     <fd-calendar
+                        [class.fd-datetime__active-display-type]="_displayType === 'date'"
                         calType="single"
                         [activeView]="activeView"
                         [disableFunction]="disableFunction || null"
@@ -73,6 +80,7 @@
                     <div class="fd-datetime__separator"></div>
                     <fd-time
                         *ngIf="isOpen"
+                        [class.fd-datetime__active-display-type]="_displayType === 'time'"
                         [disabled]="disabled"
                         [elementsAtOnce]="5"
                         [keepTwoDigits]="keepTwoDigitsTime"
