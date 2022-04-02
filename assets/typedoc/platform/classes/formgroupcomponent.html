@@ -192,6 +192,21 @@
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="hint" class="tsd-anchor"></a>
+		<h3>hint</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">hint<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">HintOptions</span></div>
+		<aside class="tsd-sources">
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Form group hint options</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="i18Strings" class="tsd-anchor"></a>
 		<h3>i18<wbr>Strings</h3>
 		<!-- {log decorators} -->
@@ -326,47 +341,6 @@
 				<p>Whether or not all form items should have identical layout provided for form group</p>
 			</div>
 		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
-		<a name="hintPlacement" class="tsd-anchor"></a>
-		<h3>hint<wbr>Placement</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> hintPlacement<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HintPlacement</span></li>
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> hintPlacement<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HintPlacement</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Defines hint placement</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">HintPlacement</span></h4>
-			</li>
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Defines hint placement</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>value: <span class="tsd-signature-type">HintPlacement</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
 		<a name="inlineColumnLayout" class="tsd-anchor"></a>
@@ -515,7 +489,7 @@
 		<h3>constructor</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">new <wbr>Form<wbr>Group<wbr>Component<span class="tsd-signature-symbol">(</span>_cd<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ChangeDetectorRef</span>, elementRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span>, formContainer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ControlContainer</span>, _contentDensityService<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ContentDensityService</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FormGroupComponent</span></li>
+			<li class="tsd-signature tsd-kind-icon">new <wbr>Form<wbr>Group<wbr>Component<span class="tsd-signature-symbol">(</span>_cd<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ChangeDetectorRef</span>, elementRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span>, formContainer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ControlContainer</span>, _contentDensityService<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ContentDensityService</span>, _defaultHintOptions<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FieldHintOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FormGroupComponent</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -536,6 +510,9 @@
 					</li>
 					<li>
 						<h5>_contentDensityService: <span class="tsd-signature-type">ContentDensityService</span></h5>
+					</li>
+					<li>
+						<h5>_defaultHintOptions: <span class="tsd-signature-type">FieldHintOptions</span></h5>
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">FormGroupComponent</span></h4>

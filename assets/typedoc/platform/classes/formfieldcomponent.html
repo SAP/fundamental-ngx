@@ -26,6 +26,7 @@
 		<li><span class="tsd-signature-type">AfterViewInit</span></li>
 		<li><span class="tsd-signature-type">OnDestroy</span></li>
 		<li><span class="tsd-signature-type">OnInit</span></li>
+		<li><span class="tsd-signature-type">OnChanges</span></li>
 	</ul>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
@@ -81,7 +82,7 @@
 		<a name="hint" class="tsd-anchor"></a>
 		<h3>hint</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">hint<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<div class="tsd-signature tsd-kind-icon">hint<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FieldHintOptions</span></div>
 		<aside class="tsd-sources">
 			<ul>
 			</ul>
@@ -96,16 +97,19 @@
 		<a name="hintPlacement" class="tsd-anchor"></a>
 		<h3>hint<wbr>Placement</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">hint<wbr>Placement<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HintPlacement</span><span class="tsd-signature-symbol"> = &#x27;right&#x27;</span></div>
+		<div class="tsd-signature tsd-kind-icon">hint<wbr>Placement<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HintPlacement</span></div>
 		<aside class="tsd-sources">
 			<p>Implementation of FormField.hintPlacement</p>
 			<ul>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Defines hint placement</p>
-			</div>
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">deprecated</dt>
+				<dd><p>use <code>hint.placement</code> input instead
+					Defines hint placement</p>
+				</dd>
+			</dl>
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
@@ -200,7 +204,7 @@
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
 				<p>Rank is used for ordering.
-				Than lower number then higher priority</p>
+				First lower number, then - higher</p>
 			</div>
 		</div>
 	</section>
@@ -620,6 +624,37 @@
 		<div class="tsd-signature tsd-kind-icon">form<wbr>Field<wbr>Group<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FormFieldGroup</span></div>
 		<aside class="tsd-sources">
 		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="hintOptions" class="tsd-anchor"></a>
+		<h3>hint<wbr>Options</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">hint<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FieldHintOptions</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>hint and hint placement coerced to the FieldHintOptions</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="hintTarget" class="tsd-anchor"></a>
+		<h3>hint<wbr>Target</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">hint<wbr>Target<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Will be updated during onChanges and resize, resulting correct placement of the
+				hint respecting passed configs and given breakpoint of screen.</p>
+			</div>
+		</div>
 	</section>
 </section>
 <section class="tsd-panel-group tsd-member-group ">

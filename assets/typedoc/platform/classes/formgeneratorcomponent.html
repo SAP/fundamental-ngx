@@ -22,6 +22,7 @@
 	<h3>Implements</h3>
 	<ul class="tsd-hierarchy">
 		<li><span class="tsd-signature-type">OnDestroy</span></li>
+		<li><span class="tsd-signature-type">OnChanges</span></li>
 	</ul>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
@@ -91,6 +92,23 @@
 			<div class="lead">
 				<p>Defines gap column layout.</p>
 			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="hint" class="tsd-anchor"></a>
+		<h3>hint</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">hint<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">HintOptions</span></div>
+		<aside class="tsd-sources">
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<dl class="tsd-comment-tags">
+				<dt class="fd-tsd-comment-tag-pill">description</dt>
+				<dd><p>Hint for the main title</p>
+				</dd>
+			</dl>
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
@@ -286,35 +304,6 @@
 	</section>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
-	<h2>Constructors</h2>
-	<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
-		<a name="constructor" class="tsd-anchor"></a>
-		<h3>constructor</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">new <wbr>Form<wbr>Generator<wbr>Component<span class="tsd-signature-symbol">(</span>_fgService<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FormGeneratorService</span>, _cd<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ChangeDetectorRef</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FormGeneratorComponent</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-					</ul>
-				</aside>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>_fgService: <span class="tsd-signature-type">FormGeneratorService</span></h5>
-					</li>
-					<li>
-						<h5>_cd: <span class="tsd-signature-type">ChangeDetectorRef</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">FormGeneratorComponent</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
 	<h2>Properties</h2>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="form" class="tsd-anchor"></a>
@@ -383,23 +372,6 @@
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="renderer" class="tsd-anchor"></a>
-		<h3>renderer</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">renderer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">description</dt>
-				<dd><p>Renderer for the custom html code passed into the component.</p>
-				</dd>
-			</dl>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="shouldShowFields" class="tsd-anchor"></a>
 		<h3>should<wbr>Show<wbr>Fields</h3>
 		<!-- {log decorators} -->
@@ -425,6 +397,39 @@
 </section>
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Methods</h2>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="getHintOptions" class="tsd-anchor"></a>
+		<h3>get<wbr>Hint<wbr>Options</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">get<wbr>Hint<wbr>Options<span class="tsd-signature-symbol">(</span>guiOptions<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">BaseDynamicFormItemGuiOptions</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DynamicFormItemGuiOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FieldHintOptions</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<dl class="tsd-comment-tags">
+						<dt class="fd-tsd-comment-tag-pill">description</dt>
+						<dd><p>Used for extracting hintOptions from GuiOptions. This will coerce string | HintOptions to FieldHintOptions,
+							will combine default value of hints for form generator with provided options.</p>
+						</dd>
+					</dl>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5><span class="tsd-flag ts-flagOptional">Optional</span> guiOptions: <span class="tsd-signature-type">BaseDynamicFormItemGuiOptions</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DynamicFormItemGuiOptions</span></h5>
+						<div class="tsd-comment tsd-typography">
+						</div>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">FieldHintOptions</span></h4>
+			</li>
+		</ul>
+	</section>
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="refreshStepsVisibility" class="tsd-anchor"></a>
 		<h3>refresh<wbr>Steps<wbr>Visibility</h3>
