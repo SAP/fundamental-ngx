@@ -317,9 +317,11 @@ jobs:
             || github.ref == 'refs/heads/hotfix_tmp_branch_for_automated_release_do_not_use'
             ) }}
         steps:
-            - uses: actions/checkout@v2.3.4
+            - uses: actions/checkout@v2.4.0
               with:
                   token: ${{ secrets.GHACTIONS }}
+                  submodules: true
+                  fetch-depth: 0
             - uses: actions/cache@v2
               with:
                   path: ${{ env.CACHE_NODE_MODULES_PATH }}
