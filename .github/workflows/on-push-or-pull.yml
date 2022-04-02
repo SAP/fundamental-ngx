@@ -329,7 +329,7 @@ jobs:
                   echo "STAGE_NAME=Release" >> $GITHUB_ENV
                   git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
                   git fetch
-                  git checkout refs/heads/tmp_branch_for_automated_release_do_not_use
+                  git checkout tmp_branch_for_automated_release_do_not_use
               if: ${{ github.ref == 'refs/heads/tmp_branch_for_automated_release_do_not_use' }}
             - run: |
                   echo "STAGE_NAME=Pre-release" >> $GITHUB_ENV 
@@ -342,7 +342,7 @@ jobs:
                   echo "STAGE_NAME=Hotfix-release" >> $GITHUB_ENV
                   git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
                   git fetch
-                  git checkout refs/heads/hotfix_tmp_branch_for_automated_release_do_not_use
+                  git checkout hotfix_tmp_branch_for_automated_release_do_not_use
               if: ${{ github.ref == 'refs/heads/hotfix_tmp_branch_for_automated_release_do_not_use' }}
             - run: bash ./ci-scripts/publish.sh
               env:
