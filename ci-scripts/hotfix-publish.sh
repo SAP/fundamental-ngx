@@ -2,9 +2,6 @@
 
 set -u -e
 
-git status
-git status
-
 source .ci-env/flags.sh
 
 #PACKAGES=(core platform moment-adapter)
