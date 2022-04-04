@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.5...v0.34.3-rc.6) (2022-04-04)
+
+
+### Features
+
+* **core:** handle dynamic container height ([#7884](https://github.com/SAP/fundamental-ngx/issues/7884)) ([4a025d0](https://github.com/SAP/fundamental-ngx/commit/4a025d0f88391c8ebd8ad1404ed1be68b84a7a27))
+
 ### [0.34.3-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.4...v0.34.3-rc.5) (2022-04-04)
 
 ### [0.34.3-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.3...v0.34.3-rc.4) (2022-04-04)
