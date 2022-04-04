@@ -1,4 +1,9 @@
 <fd-docs-section-title id="basic" componentName="input"> Input </fd-docs-section-title>
+<description
+    >Inputs are used to collect data from the user and should always be paired with a label. When a field is required,
+    the label should include an asterisk (*). A text input field allows users to enter and edit text or numeric values
+    in one line.</description
+>
 <component-example>
     <fd-input-example></fd-input-example>
 </component-example>
@@ -28,6 +33,20 @@
     ><code>FormInputMessageGroupComponent</code> component follows control inputs from
     <code>PopoverComponent</code></description
 >
+The state of the input field can reflect validity of the data entered, whether the input data is editable or disabled.
+<ul>
+    <li><b>Success</b>: The data format entered has been validated and it's correct, such as an email address.</li>
+    <li><b>Error</b>: The data entered is not valid and must be corrected.</li>
+    <li>
+        <b>Warning</b>: The data entered is formatted correctly but there are other issues are problematic but will not
+        stop the user from moving forward.
+    </li>
+    <li>
+        <b>Disabled</b>: This indicates the field is not editable. A common use case is that this field is dependent on
+        a previous entry or selection within the form.
+    </li>
+    <li><b>Read Only</b>: Used to display static information in the context of a form.</li>
+</ul>
 <component-example>
     <fd-input-state-example></fd-input-state-example>
 </component-example>
