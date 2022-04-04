@@ -43,6 +43,7 @@ describe('Popover test suite', () => {
     const popoverPage = new PopoverPo();
     const {
         avatar,
+        programmaticAvatar,
         popover,
         option,
         icon,
@@ -226,8 +227,8 @@ describe('Popover test suite', () => {
 
     describe('Check Programmatic Control', () => {
         it('should check that avatar has popover and all options are clickable', () => {
-            scrollIntoView(avatar, 2);
-            expect(isElementDisplayed(avatar, 2)).toBe(true, `avatar not displayed`);
+            scrollIntoView(programmaticAvatar);
+            expect(isElementDisplayed(avatar)).toBe(true, `avatar not displayed`);
             click(programmaticControlButton);
             expect(isElementDisplayed(popover, 1)).toBe(true, `popover not displayed`);
             const buttonLength = getElementArrayLength(option);

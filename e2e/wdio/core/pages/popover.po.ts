@@ -4,7 +4,8 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 export class PopoverPo extends CoreBaseComponentPo {
     private url = '/popover';
 
-    avatar = '.fd-avatar--circle';
+    avatar = 'fd-popover-example .fd-avatar--circle';
+    programmaticAvatar = 'fd-popover-programmatic-open-example .fd-avatar--circle';
     popover = 'ul.fd-list';
     button = '.fd-button';
     option = 'li.fd-list__item';
