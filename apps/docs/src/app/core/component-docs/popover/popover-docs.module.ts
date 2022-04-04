@@ -1,5 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
+import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
+import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { FormModule } from '@fundamental-ngx/core/form';
+import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
+import { LinkModule } from '@fundamental-ngx/core/link';
+
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { API_FILES } from '../../api-files';
@@ -20,17 +33,7 @@ import { PopoverCdkPlacementExampleComponent } from './examples/popover-new-plac
 import { PopoverFocusExampleComponent } from './examples/popover-focus-example/popover-focus-example.component';
 import { PopoverMobileExampleComponent } from './examples/popover-mobile/popover-mobile-example.component';
 import { PopoverTriggerExampleComponent } from './examples/popover-trigger-example/popover-trigger-example.component';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
-import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
-import { DialogModule } from '@fundamental-ngx/core/dialog';
-import { ListModule } from '@fundamental-ngx/core/list';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
-import { BarModule } from '@fundamental-ngx/core/bar';
-import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
-import { FormModule } from '@fundamental-ngx/core/form';
-import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
-import { LinkModule } from '@fundamental-ngx/core/link';
+import { PopoverDynamicContainerHeightExampleComponent } from './examples/popover-dynamic-container-height/popover-dynamic-container-height-example.component';
 
 const routes: Routes = [
     {
@@ -76,7 +79,8 @@ const routes: Routes = [
         PopoverCdkPlacementExampleComponent,
         PopoverFocusExampleComponent,
         PopoverTriggerExampleComponent,
-        PopoverMobileExampleComponent
+        PopoverMobileExampleComponent,
+        PopoverDynamicContainerHeightExampleComponent
     ]
 })
 export class PopoverDocsModule {}

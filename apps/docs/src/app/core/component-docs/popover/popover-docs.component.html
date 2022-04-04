@@ -158,7 +158,6 @@
 <code-example [exampleFiles]="popoverDynamicExample"></code-example>
 
 <separator></separator>
-<separator></separator>
 
 <fd-docs-section-title id="dropdown" componentName="popover"> Dropdown Popover </fd-docs-section-title>
 <description>
@@ -169,7 +168,6 @@
 </component-example>
 <code-example [exampleFiles]="dropdownPopover"></code-example>
 
-<separator></separator>
 <separator></separator>
 
 <fd-docs-section-title id="mobile-popover" componentName="popover">
@@ -199,3 +197,19 @@
 <code-example [exampleFiles]="mobilePopover"></code-example>
 
 <separator></separator>
+
+<fd-docs-section-title id="dynamic-control-container-height" componentName="popover">
+    Handling dynamic control offset
+</fd-docs-section-title>
+<description>
+    <p>There might be cases when offset of the popover control is changed dynamically without user interaction.</p>
+    <p>For this case, you can add <code>fdPopoverContainer</code> directive to the parent element.</p>
+    <p>
+        When the size of the element with <code>fdPopoverContainer</code> changes, it will automatically trigger
+        position refresh of all opened popovers in it.
+    </p>
+</description>
+<component-example>
+    <fd-popover-dynamic-container-height-example></fd-popover-dynamic-container-height-example>
+</component-example>
+<code-example [exampleFiles]="dynamicContainerHeight"></code-example>
