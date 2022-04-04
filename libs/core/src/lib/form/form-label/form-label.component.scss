@@ -1,6 +1,7 @@
 @import '~fundamental-styles/dist/form-label';
 
 $form-label-inline-help-placement-space: 0rem;
+$form-label-bottom-spacing: 0.125rem;
 
 @mixin rtl() {
     @at-root {
@@ -28,6 +29,15 @@ $form-label-inline-help-placement-space: 0rem;
 .fd-form-label__wrapper {
     position: relative;
     display: flex;
+    padding-bottom: $form-label-bottom-spacing;
+
+    &--align-end {
+        justify-content: flex-end;
+    }
+
+    span.fd-form-label {
+        margin-bottom: -$form-label-bottom-spacing;
+    }
 
     &--inline-help {
         display: flex;

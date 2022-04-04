@@ -3,7 +3,7 @@ export const labelsArray = [
     'Text Input Field',
     'Number Input Field',
     'Compact Input Field',
-    'ReadOnly Input Field',
+    'Readonly Input Field',
     'Disabled Input Field',
     'Inline Help Input Field',
     'Password Input Field'

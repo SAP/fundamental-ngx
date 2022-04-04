@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
-import { Observable, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ColumnLayout } from '@fundamental-ngx/platform/shared';
-import { distinctUntilChanged, startWith } from 'rxjs/operators';
+import { distinctUntilChanged } from 'rxjs/operators';
 import { normalizeColumnLayout } from '../helpers';
 import { GRID_COLUMNS_NUMBER as maxColumnsPerRow } from '@fundamental-ngx/core/layout-grid';
 import { FDP_FORM_FIELD_HINT_LAYOUT_CONFIG, HintLayoutConfig } from '../fdp-form.tokens';
@@ -25,15 +25,13 @@ export class FormFieldLayoutService {
      */
     readonly needsInlineHelpPlace: Observable<boolean>;
     /** @hidden */
-    private _needsInlineHelpPlace$ = new ReplaySubject<boolean>(1);
+    private _needsInlineHelpPlace$ = new BehaviorSubject<boolean>(false);
     /** @hidden */
     private _elementsMap: Map<Record<string, any>, boolean> = new Map();
-    /** @hidden */
-    private _needsInlineHelpPlace = false;
 
     /** @hidden */
     constructor(@Inject(FDP_FORM_FIELD_HINT_LAYOUT_CONFIG) private _hintLayoutConfig: HintLayoutConfig) {
-        this.needsInlineHelpPlace = this._needsInlineHelpPlace$.pipe(startWith(false), distinctUntilChanged());
+        this.needsInlineHelpPlace = this._needsInlineHelpPlace$.pipe(distinctUntilChanged());
     }
 
     /**
@@ -51,8 +49,10 @@ export class FormFieldLayoutService {
     getFixedLayouts(layouts: Layouts): Layouts {
         const fieldColumnLayout = normalizeColumnLayout({ ...layouts.fieldColumnLayout });
         const labelColumnLayout = normalizeColumnLayout({ ...layouts.labelColumnLayout });
-        const gapColumnLayout = normalizeColumnLayout({ ...layouts.gapColumnLayout });
-        if (this._needsInlineHelpPlace) {
+        const gapColumnLayout = normalizeColumnLayout({
+            ...(layouts.gapColumnLayout ? layouts.gapColumnLayout : { S: 0 })
+        });
+        if (this._needsInlineHelpPlace$.value) {
             this._hintLayoutConfig.hintOnInputBreakpoints.forEach((sizeName) => {
                 const shouldFitInOneLine =
                     labelColumnLayout[sizeName] + fieldColumnLayout[sizeName] + gapColumnLayout[sizeName] <=
@@ -95,11 +95,9 @@ export class FormFieldLayoutService {
     private _updateCombinedValue(): void {
         for (const [, needed] of this._elementsMap) {
             if (needed) {
-                this._needsInlineHelpPlace = true;
                 return this._needsInlineHelpPlace$.next(true);
             }
         }
         this._needsInlineHelpPlace$.next(false);
-        this._needsInlineHelpPlace = false;
     }
 }

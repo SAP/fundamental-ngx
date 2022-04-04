@@ -255,7 +255,7 @@ describe('Form Container test suite', () => {
                 mouseHoverElement(changeExampleHelpIcon, i);
                 waitForElDisplayed(popover);
 
-                expect(getText(popover)).toEqual(labelText);
+                expect(getText(popover).toLowerCase()).toEqual(labelText.toLowerCase());
             }
         });
 
