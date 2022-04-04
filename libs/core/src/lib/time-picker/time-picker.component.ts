@@ -144,6 +144,7 @@ export class TimePickerComponent<D>
         this._message = message;
         this._popoverFormMessage.message = message;
     }
+
     /** @hidden */
     _message: string = null;
 
@@ -153,6 +154,7 @@ export class TimePickerComponent<D>
         this._messageType = messageType;
         this._popoverFormMessage.messageType = messageType;
     }
+
     /** @hidden */
     _messageType: FormStates = null;
 
@@ -165,6 +167,7 @@ export class TimePickerComponent<D>
         this._messageTriggers = triggers;
         this._popoverFormMessage.triggers = triggers;
     }
+
     /** @hidden */
     _messageTriggers: string[] = ['focusin', 'focusout'];
 
@@ -196,6 +199,7 @@ export class TimePickerComponent<D>
         }
         return this._state;
     }
+
     private _state: FormStates = null;
 
     /**
@@ -348,6 +352,7 @@ export class TimePickerComponent<D>
 
         this._dateTimeAdapter.localeChanges.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
             this._calculateTimeOptions();
+            console.log({ _inputTimeValue: this._inputTimeValue, time: this.time });
             this._formatTimeInputField();
             this._changeDetectorRef.detectChanges();
         });
@@ -422,6 +427,12 @@ export class TimePickerComponent<D>
         let formattedTime = '';
 
         try {
+            if (this.allowNull) {
+                const parsed = this._dateTimeAdapter.parse(time, this.getDisplayFormat());
+                if (!this._dateTimeAdapter.isValid(parsed) && time === null) {
+                    return formattedTime;
+                }
+            }
             formattedTime = this._dateTimeAdapter.format(time, this.getDisplayFormat());
         } catch (e) {}
 
