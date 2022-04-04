@@ -352,7 +352,6 @@ export class TimePickerComponent<D>
 
         this._dateTimeAdapter.localeChanges.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
             this._calculateTimeOptions();
-            console.log({ _inputTimeValue: this._inputTimeValue, time: this.time });
             this._formatTimeInputField();
             this._changeDetectorRef.detectChanges();
         });
