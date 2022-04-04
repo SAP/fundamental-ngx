@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.3...v0.34.3-rc.4) (2022-04-04)
+
+
+### Bug Fixes
+
+* **platform,core:** form mis-alignments ([#7905](https://github.com/SAP/fundamental-ngx/issues/7905)) ([0e4eb14](https://github.com/SAP/fundamental-ngx/commit/0e4eb14687bd6a11729cc165a92fc4698bb43cbc))
+
 ### [0.34.3-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.2...v0.34.3-rc.3) (2022-04-03)
 
 ### 0.34.3-rc.2 (2022-04-02)
