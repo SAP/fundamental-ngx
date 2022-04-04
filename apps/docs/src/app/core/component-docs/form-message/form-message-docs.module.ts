@@ -5,6 +5,7 @@ import { API_FILES } from '../../api-files';
 import { FormMessageHeaderComponent } from './form-message-header/form-message-header.component';
 import { FormMessageDocsComponent } from './form-message-docs.component';
 import { FormMessageExampleComponent } from './examples/form-message-example.component';
+import { FormMessagingStateExampleComponent } from './examples/state-message/form-messaging-state-example.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
@@ -32,6 +33,11 @@ const routes: Routes = [
         MultiInputModule
     ],
     exports: [RouterModule],
-    declarations: [FormMessageDocsComponent, FormMessageHeaderComponent, FormMessageExampleComponent]
+    declarations: [
+        FormMessageDocsComponent,
+        FormMessageHeaderComponent,
+        FormMessageExampleComponent,
+        FormMessagingStateExampleComponent
+    ]
 })
 export class FormMessageDocsModule {}
