@@ -1,5 +1,6 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Injectable, ComponentRef, TemplateRef, Type } from '@angular/core';
+import { Injectable, ComponentRef, TemplateRef, Type, Inject } from '@angular/core';
+import { MESSAGE_TOAST_CONFIG } from '../constants';
 import { MessageToastComponent } from '../message-toast.component';
 import { MessageToastContainerComponent } from '../message-toast-utils/message-toast-container.component';
 import { MessageToastRef } from '../message-toast-utils/message-toast-ref';
@@ -15,7 +16,11 @@ export class MessageToastService {
     private _messageToastContainerRef: ComponentRef<MessageToastContainerComponent>;
 
     /** @hidden */
-    constructor(private _dynamicComponentService: DynamicComponentService, private _liveAnnouncer: LiveAnnouncer) {}
+    constructor(
+        private _dynamicComponentService: DynamicComponentService,
+        private _liveAnnouncer: LiveAnnouncer,
+        @Inject(MESSAGE_TOAST_CONFIG) private _defaultConfig: MessageToastConfig
+    ) {}
 
     /**
      * Returns true if there are some message toasts currently open. False otherwise.
@@ -29,12 +34,12 @@ export class MessageToastService {
      * @param content Content of the message toast component.
      * @param  messageToastConfig Configuration of the message toast component.
      */
-    open(
-        content: TemplateRef<any> | Type<any> | string,
-        messageToastConfig: MessageToastConfig = new MessageToastConfig()
-    ): MessageToastRef {
+    open(content: TemplateRef<any> | Type<any> | string, messageToastConfig: MessageToastConfig = {}): MessageToastRef {
         // Get default values from message toast model
-        messageToastConfig = Object.assign(new MessageToastConfig(), messageToastConfig);
+        const mergedConfig = { ...this._defaultConfig, ...messageToastConfig };
+
+        // We need MessageToastConfig instance for correct DI in the component.
+        messageToastConfig = Object.assign(new MessageToastConfig(), mergedConfig);
 
         // Instantiate message toast ref service
         const service: MessageToastRef = new MessageToastRef();
