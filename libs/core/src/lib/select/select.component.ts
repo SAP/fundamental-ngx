@@ -70,8 +70,7 @@ export class FdSelectChange {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '[class.fd-select-custom-class]': 'inline',
-        '[class.fd-select-custom-class--mobile]': 'mobile'
+        '[class.fd-select--inline]': 'inline'
     },
     providers: [
         {

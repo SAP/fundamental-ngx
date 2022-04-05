@@ -3,14 +3,14 @@
 <ng-template #desktopTemplate>
     <div class="fd-select" [class.fd-select--compact]="compact" (keydown)="_handleKeydown($event)" (click)="toggle()">
         <fd-popover
-            additionalBodyClass="fd-popover-custom-list"
+            class="fd-select__popover"
             [isOpen]="_isOpen"
             [triggers]="[]"
             [focusTrapped]="true"
             [disabled]="disabled || readonly"
             [appendTo]="appendTo"
             [closeOnEscapeKey]="true"
-            fillControlMode="at-least"
+            [fillControlMode]="fillControlMode"
             [maxWidth]="600"
             [closeOnOutsideClick]="closeOnOutsideClick"
             (isOpenChange)="_popoverOpenChangeHandle($event)"
@@ -19,7 +19,7 @@
                 <ng-container [ngTemplateOutlet]="selectInputControlTemplate"></ng-container>
             </fd-popover-control>
 
-            <fd-popover-body class="fd-popover-custom-select-body">
+            <fd-popover-body>
                 <ng-container [ngTemplateOutlet]="selectOptionsListTemplate"></ng-container>
             </fd-popover-body>
         </fd-popover>
@@ -65,10 +65,12 @@
                 {{ triggerValue }}
             </ng-template>
         </div>
+
         <button
             fd-button
             tabindex="-1"
             class="fd-button--transparent fd-select__button"
+            [class.fd-button--compact]="compact"
             *ngIf="!readonly"
             [disabled]="disabled"
             [glyph]="glyph"
