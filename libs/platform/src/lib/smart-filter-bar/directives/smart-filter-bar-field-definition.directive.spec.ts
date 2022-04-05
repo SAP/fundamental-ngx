@@ -5,7 +5,7 @@ import { PlatformSmartFilterBarModule } from '../smart-filter-bar.module';
 import { SmartFilterBarFieldDefinitionDirective } from './smart-filter-bar-field-definition.directive';
 
 @Component({
-    template: `<div fdp-smart-filter-bar-field-definition filterable="false" required="true"></div>`
+    template: `<div fdp-smart-filter-bar-field-definition smartFilterBarFilterable="false" required="true"></div>`
 })
 class TestComponent {
     @ViewChild(SmartFilterBarFieldDefinitionDirective)
@@ -35,7 +35,7 @@ describe('SmartFilterBarFieldDefinitionDirective', () => {
 
     it('should convert string to boolean', async () => {
         await whenStable(fixture);
-        expect(component.directive.filterable).toBeFalse();
+        expect(component.directive.smartFilterBarFilterable).toBeFalse();
         expect(component.directive.required).toBeTrue();
     });
 });

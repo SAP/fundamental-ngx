@@ -60,12 +60,13 @@ $fd-block: fdp-smart-filter-bar;
         }
 
         .fd-dialog__body {
+            padding: 0 0.5rem;
             background-color: var(--sapBackgroundColor, #f7f7f7);
         }
 
         .fd-container.fd-form-layout-grid-container,
         .fd-container.fd-form-layout-grid-container .fd-row .fd-col__form-group {
-            padding: 0 1rem;
+            padding: 0;
         }
     }
 }

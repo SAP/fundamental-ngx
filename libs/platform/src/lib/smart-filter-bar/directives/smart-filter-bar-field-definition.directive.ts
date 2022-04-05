@@ -31,16 +31,16 @@ export class SmartFilterBarFieldDefinitionDirective {
     conditionStrategy: CollectionFilterGroupStrategy = 'or';
 
     /** @hidden */
-    private _filterable = false;
+    private _smartFilterBarFilterable = true;
 
-    get filterable(): boolean {
-        return this._filterable;
+    get smartFilterBarFilterable(): boolean {
+        return this._smartFilterBarFilterable;
     }
 
-    /** Whether this field can be filtered. */
+    /** Whether this field can be filtered. Default value is true. */
     @Input()
-    set filterable(value: BooleanInput) {
-        this._filterable = coerceBooleanProperty(value);
+    set smartFilterBarFilterable(value: BooleanInput) {
+        this._smartFilterBarFilterable = coerceBooleanProperty(value);
     }
 
     /** @hidden */
