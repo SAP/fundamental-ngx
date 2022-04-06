@@ -41,6 +41,7 @@ export class PlatformFormGeneratorCustomFieldLayoutExampleComponent {
             name: 'personalInformation',
             message: 'Form Field Group Column Layout Definition',
             guiOptions: {
+                hint: 'Some hint?',
                 labelColumnLayout: { S: 12, M: 4 },
                 fieldColumnLayout: { S: 12, M: 8 }
             },
