@@ -1,4 +1,4 @@
-export const basic_text_area_label = 'Basic Textarea With Platform Forms';
+export const basic_text_area_label = 'Basic Textarea with Platform Forms';
 export const basic_text_area_placeholder = 'Start Entering Detailed Description';
 export const basic_text_area_popover = 'This Is Tooltip Help';
 export const readonly_text_area_label = 'Readonly Textarea';
