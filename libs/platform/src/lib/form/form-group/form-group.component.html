@@ -54,14 +54,16 @@
             </ng-container>
         </span>
         <ng-template #hintTemplate>
-            <fd-icon
-                [ariaLabel]="_hintOptions.text"
-                [fd-inline-help]="_hintOptions.text"
-                [glyph]="_hintOptions.glyph"
-                [placement]="_hintOptions.placement"
-                [triggers]="_hintOptions.trigger"
-                tabindex="0"
-            ></fd-icon>
+            <span fd-link [undecorated]="true">
+                <fd-icon
+                    [ariaLabel]="_hintOptions.text"
+                    [fd-inline-help]="_hintOptions.text"
+                    [glyph]="_hintOptions.glyph"
+                    [placement]="_hintOptions.placement"
+                    [triggers]="_hintOptions.trigger"
+                    tabindex="0"
+                ></fd-icon>
+            </span>
         </ng-template>
     </ng-template>
 </ng-template>

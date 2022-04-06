@@ -3,3 +3,9 @@
     width: 100%;
     white-space: nowrap;
 }
+.fd-form-field-inline-help-container {
+    text-overflow: clip;
+    .fd-link {
+        text-decoration: none;
+    }
+}

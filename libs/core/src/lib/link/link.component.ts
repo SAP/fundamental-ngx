@@ -39,6 +39,9 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder {
     @Input()
     subtle: boolean;
 
+    @Input()
+    undecorated: boolean;
+
     /** @hidden */
     constructor(private _elementRef: ElementRef) {}
 
@@ -58,6 +61,7 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder {
             this.disabled ? 'is-disabled' : '',
             this.inverted ? `fd-link--inverted` : '',
             this.subtle ? 'fd-link--subtle' : '',
+            this.undecorated ? 'fd-link--undecorated' : '',
             this.class
         ];
     }

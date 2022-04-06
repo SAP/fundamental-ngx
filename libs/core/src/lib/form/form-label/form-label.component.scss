@@ -62,10 +62,7 @@ $form-label-bottom-spacing: 0.125rem;
 
 .fd-form-label__help {
     position: relative;
-    top: 50%;
-    transform: translateY(3%);
-    align-items: center;
-    display: flex;
+    vertical-align: middle;
 
     @include left-placed();
 
