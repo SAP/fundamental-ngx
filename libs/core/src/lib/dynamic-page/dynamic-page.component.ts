@@ -18,6 +18,7 @@ import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsi
 import { DynamicPageContentComponent } from './dynamic-page-content/dynamic-page-content.component';
 import { DynamicPageSubheaderComponent } from './dynamic-page-header/subheader/dynamic-page-subheader.component';
 import { DynamicPageHeaderComponent } from './dynamic-page-header/header/dynamic-page-header.component';
+import { DynamicPageFooterComponent } from './dynamic-page-footer/dynamic-page-footer.component';
 import { DynamicPageWrapperDirective } from './dynamic-page-wrapper.directive';
 import { DynamicPageService } from './dynamic-page.service';
 import { addClassNameToElement, dynamicPageWidthToSize } from './utils';
@@ -100,6 +101,10 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
     /** @hidden reference to content component  */
     @ContentChild(DynamicPageContentComponent)
     _contentComponent: DynamicPageContentComponent;
+
+    /** @hidden reference to footer component  */
+    @ContentChild(DynamicPageFooterComponent)
+    _footerComponent: DynamicPageContentComponent;
 
     /** @hidden reference to tab component */
     @ContentChild(TabListComponent)

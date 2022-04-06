@@ -4,12 +4,14 @@ import {
     ElementRef,
     Input,
     OnInit,
+    Optional,
     Renderer2,
     ViewEncapsulation
 } from '@angular/core';
 
 import { DYNAMIC_PAGE_CLASS_NAME } from '../constants';
 import { addClassNameToElement } from '../utils';
+import { DynamicPageComponent } from '../dynamic-page.component';
 
 @Component({
     selector: 'fd-dynamic-page-content',
@@ -32,7 +34,11 @@ export class DynamicPageContentComponent implements OnInit {
     id: string;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef<HTMLElement>, public _renderer: Renderer2) {}
+    constructor(
+        public _renderer: Renderer2,
+        @Optional() public _dynamicPageComponent: DynamicPageComponent,
+        private _elementRef: ElementRef<HTMLElement>
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
