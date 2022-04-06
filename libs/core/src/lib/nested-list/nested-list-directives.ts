@@ -19,10 +19,16 @@ import { RtlService } from '@fundamental-ngx/core/utils';
 import { map } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 
+let uniqueId = 0;
+
 @Directive({
     selector: '[fdNestedDirectivesHeader], [fd-nested-list-header]'
 })
 export class NestedListHeaderDirective {
+    @Input()
+    @HostBinding('attr.id')
+    id: string | null = `fd-nested-list-group-header-${++uniqueId}`;
+
     /** @hidden */
     @HostBinding('class.fd-nested-list__group-header')
     fdNestedListHeaderClass = true;

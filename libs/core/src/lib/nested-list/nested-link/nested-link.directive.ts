@@ -30,6 +30,11 @@ export class NestedLinkDirective {
     @HostBinding('attr.aria-label')
     _ariaLabel: string;
 
+    /** @hidden */
+    @Input()
+    @HostBinding('attr.aria-describedby')
+    ariaDescribedby: string;
+
     /** Event thrown, when selected state is changed */
     @Output()
     selectedChange: EventEmitter<boolean> = new EventEmitter<boolean>();

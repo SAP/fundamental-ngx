@@ -174,8 +174,9 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
     private _setAriaAttributes(level: number): void {
         this.nestedItems.forEach((item, i) => {
             item._ariaLevel = level;
-            item.linkItem._ariaLabel = `${this._nestedListHeader ? this._nestedListHeader?.title : ''}
-                 Tree Item ${item._title} ${i + 1} of ${this.nestedItems.length}
+            item.linkItem.ariaDescribedby = this._nestedListHeader && this._nestedListHeader.id;
+            item.linkItem._ariaLabel = `
+                 Tree Item ${item.linkItem.getTitle()} ${i + 1} of ${this.nestedItems.length}
                  ${!this._nestedListStateService.selectable && item.linkItem.selected ? this.ariaLabelSelected : ''}`;
         });
 
@@ -185,11 +186,10 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
     /** @hidden */
     private _setAccessibilityProperties(level: number): void {
         if (this._nestedListStateService.condensed && level === 1) {
-            this._role = 'menubar';
             this._ariaRoledescription = this.ariaRoledescriptionMenuBar;
         }
 
-        if (level > 1 || this._nestedItemService?.popover) {
+        if (level > 1 || (this._nestedItemService?.popover && !this._nestedListStateService.condensed)) {
             this._role = 'group';
             this._ariaRoledescription = null;
         }

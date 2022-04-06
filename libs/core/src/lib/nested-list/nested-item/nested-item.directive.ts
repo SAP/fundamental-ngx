@@ -70,7 +70,7 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
 
     /** @hidden */
     @HostBinding('attr.title')
-    _title = '';
+    _title: string;
 
     /** @hidden */
     @HostBinding('attr.role')
@@ -123,9 +123,8 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
         if (this.linkItem) {
             this._ariaSelected = this.linkItem.selected;
             this._ariaDisabled = !this._stateService.selectable && !this.linkItem.selected;
+            this._title = this.linkItem.getTitle();
         }
-
-        this._title = this.linkItem.getTitle();
     }
 
     /** @hidden */
