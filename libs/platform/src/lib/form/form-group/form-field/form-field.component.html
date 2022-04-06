@@ -46,7 +46,7 @@
             [inlineHelpTriggers]="hintOptions.trigger"
             [alignLabelEnd]="isHorizontal$ | async"
         >
-            <span [id]="'fdp-form-label-content-' + id">{{ label | titlecase }}</span>
+            <span [id]="'fdp-form-label-content-' + id">{{ label }}</span>
         </label>
     </ng-container>
     <ng-template #withoutHint>
@@ -56,7 +56,7 @@
             fd-form-label
             [alignLabelEnd]="isHorizontal$ | async"
         >
-            <span [id]="'fdp-form-label-content-' + id">{{ label | titlecase }}</span>
+            <span [id]="'fdp-form-label-content-' + id">{{ label }}</span>
         </label>
     </ng-template>
 </ng-template>
