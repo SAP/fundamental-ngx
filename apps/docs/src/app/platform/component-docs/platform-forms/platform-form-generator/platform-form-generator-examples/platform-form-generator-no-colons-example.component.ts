@@ -25,7 +25,7 @@ export class PlatformFormGeneratorNoColonsExampleComponent {
         {
             type: 'input',
             name: 'labelWithoutColon',
-            message: 'Label without colon',
+            message: 'Label Without Colon',
             guiOptions: {
                 hint: 'Some contextual hint',
                 column: 1,
@@ -35,7 +35,7 @@ export class PlatformFormGeneratorNoColonsExampleComponent {
         {
             type: 'input',
             name: 'labelWithColon',
-            message: 'Label with colon',
+            message: 'Label With Colon',
             guiOptions: {
                 hint: 'Some contextual hint',
                 column: 1,

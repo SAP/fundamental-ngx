@@ -27,14 +27,14 @@ export class PlatformFormGeneratorGroupingExampleComponent {
     questions: DynamicFormItem[] = [
         {
             name: 'personalInformation',
-            message: 'Personal information',
+            message: 'Personal Information',
             items: [
                 {
                     type: 'input',
                     name: 'firstName',
                     message: 'Your name',
                     default: 'John',
-                    placeholder: 'Please provide your first name',
+                    placeholder: 'Please Provide Your First Name',
                     guiOptions: {
                         hint: 'Some contextual hint',
                         column: 1
@@ -46,7 +46,7 @@ export class PlatformFormGeneratorGroupingExampleComponent {
                     name: 'secondName',
                     message: 'Your name',
                     default: 'Doe',
-                    placeholder: 'Please provide your second name',
+                    placeholder: 'Please Provide Your Second Name',
                     guiOptions: {
                         hint: 'Some contextual hint',
                         column: 2
@@ -57,7 +57,7 @@ export class PlatformFormGeneratorGroupingExampleComponent {
         },
         {
             name: 'contactInformation',
-            message: 'Contact information',
+            message: 'Contact Information',
             items: [
                 {
                     type: 'input',

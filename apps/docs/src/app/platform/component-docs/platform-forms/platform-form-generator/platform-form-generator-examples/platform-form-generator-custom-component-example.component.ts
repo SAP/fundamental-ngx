@@ -45,7 +45,7 @@ export class PlatformFormGeneratorCustomComponentExampleComponent {
         {
             type: 'slider',
             name: 'some_slider',
-            message: 'Slider component',
+            message: 'Slider Component',
             default: { value: 30, label: 'Thirty' },
             choices: [
                 { value: 10, label: 'Ten' },

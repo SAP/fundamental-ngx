@@ -52,7 +52,7 @@ export class PlatformFormGeneratorInlineHelpExampleComponent {
     formItemsHintOnGroupHeader: DynamicFormItem[] = [
         {
             name: 'firstAndLastName',
-            message: 'First and last name',
+            message: 'First And Last Name',
             guiOptions: {
                 hint: 'Some contextual hint on group header'
             },

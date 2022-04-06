@@ -15,7 +15,7 @@ export class PlatformFormGeneratorCustomErrorExampleComponent {
     formItems: DynamicFormItem[] = [
         {
             type: 'input',
-            message: 'Custom validation error example',
+            message: 'Custom Validation Error Example',
             name: 'custom_validation_error_example',
             required: true,
             validate: (value: string) => (value !== 'abc' ? null : "This field value should not be equal to 'abc'"),
@@ -25,7 +25,7 @@ export class PlatformFormGeneratorCustomErrorExampleComponent {
         },
         {
             type: 'input',
-            message: 'Default validation error example',
+            message: 'Default Validation Error Example',
             name: 'default_validation_error_example',
             validators: [Validators.required],
             guiOptions: {
@@ -35,7 +35,7 @@ export class PlatformFormGeneratorCustomErrorExampleComponent {
         {
             type: 'input',
             name: 'custom_validation_example',
-            message: 'Custom generic validation error example',
+            message: 'Custom Generic Validation Error Example',
             validators: [Validators.pattern('^\\d+$')],
             guiOptions: {
                 hint: 'This field will fail validation if non-numeric symbols are present in the input'

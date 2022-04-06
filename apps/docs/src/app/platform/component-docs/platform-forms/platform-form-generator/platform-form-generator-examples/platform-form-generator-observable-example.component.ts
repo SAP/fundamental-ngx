@@ -47,7 +47,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
         {
             type: 'input',
             name: 'name2',
-            message: 'Your name',
+            message: 'Your Name',
             default: 'John',
             placeholder: () => of('Please provide your name').pipe(delay(400)),
             guiOptions: {
@@ -82,7 +82,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
             type: 'number',
             name: 'age2',
             controlType: 'number',
-            message: () => of('Your age').pipe(delay(400)),
+            message: () => of('Your Age').pipe(delay(400)),
             default: '18',
             validators: [Validators.required],
             guiOptions: {
@@ -92,7 +92,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
         {
             type: 'editor',
             name: 'bio2',
-            message: 'Your biography',
+            message: 'Your Biography',
             guiOptions: {
                 column: 1
             }
@@ -100,7 +100,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
         {
             type: 'checkbox',
             name: 'citizenship2',
-            message: 'Your citizenship',
+            message: 'Your Citizenship',
             validators: [Validators.required],
             guiOptions: {
                 inline: true,
@@ -120,7 +120,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
         {
             type: 'list',
             name: 'department2',
-            message: 'Department you work in',
+            message: 'Department You Work In',
             validators: [Validators.required],
             default: 'IT',
             choices: () => of(['IT', 'Accounting', 'Management']),
@@ -131,7 +131,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
         {
             type: 'list',
             name: 'main_speciality2',
-            message: 'Main speciality',
+            message: 'Main Speciality',
             validators: [Validators.required],
             choices: () => of(['Front-end', 'Back-end']),
             when: (formValue: any) => of(formValue.department === 'IT'),
@@ -142,7 +142,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
         {
             type: 'confirm',
             name: 'agree2',
-            message: 'Do you agree with terms and conditions?',
+            message: 'Do You Agree With Terms And Conditions?',
             choices: ['Yes', 'No'],
             validators: [Validators.required],
             validate: (value) => of(value === 'Yes' ? null : 'You must agree'),
@@ -153,7 +153,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
         {
             type: 'radio',
             name: 'choose_best_option2',
-            message: 'Primary front-end framework you use',
+            message: 'Primary Front-end Framework You Use',
             choices: ['Angular', 'React', 'VueJS'],
             guiOptions: {
                 column: 2
@@ -164,7 +164,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
         {
             type: 'datepicker',
             name: 'birthday2',
-            message: 'Your birthday',
+            message: 'Your Birthday',
             guiOptions: {
                 column: 1
             },
@@ -176,7 +176,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
         {
             type: 'switch',
             name: 'enable_feature2',
-            message: 'Enable some analytics',
+            message: 'Enable Some Analytics',
             default: false,
             guiOptions: {
                 additionalData: {

@@ -47,7 +47,7 @@ export class PlatformFormGeneratorProgramaticSubmitComponent {
         {
             type: 'input',
             name: 'name3',
-            message: 'Your name',
+            message: 'Your Name',
             default: 'John',
             guiOptions: {
                 hint: 'Some contextual hint',
@@ -81,7 +81,7 @@ export class PlatformFormGeneratorProgramaticSubmitComponent {
             type: 'number',
             name: 'age3',
             controlType: 'number',
-            message: () => of('Your age').pipe(delay(400)),
+            message: () => of('Your Age').pipe(delay(400)),
             default: '18',
             validators: [Validators.required],
             guiOptions: {
@@ -91,7 +91,7 @@ export class PlatformFormGeneratorProgramaticSubmitComponent {
         {
             type: 'editor',
             name: 'bio3',
-            message: 'Your biography',
+            message: 'Your Biography',
             guiOptions: {
                 column: 1
             }
@@ -99,7 +99,7 @@ export class PlatformFormGeneratorProgramaticSubmitComponent {
         {
             type: 'checkbox',
             name: 'citizenship3',
-            message: 'Your citizenship',
+            message: 'Your Citizenship',
             guiOptions: {
                 inline: true,
                 column: 2
@@ -119,7 +119,7 @@ export class PlatformFormGeneratorProgramaticSubmitComponent {
         {
             type: 'list',
             name: 'department3',
-            message: 'Department you work in',
+            message: 'Department You Work In',
             validators: [Validators.required],
             default: 'IT',
             choices: () => of(['IT', 'Accounting', 'Management']),
@@ -130,7 +130,7 @@ export class PlatformFormGeneratorProgramaticSubmitComponent {
         {
             type: 'list',
             name: 'main_speciality3',
-            message: 'Main speciality',
+            message: 'Main Speciality',
             validators: [Validators.required],
             choices: () => of(['Front-end', 'Back-end']),
             when: (formValue: any) => of(formValue.department === 'IT'),
@@ -141,7 +141,7 @@ export class PlatformFormGeneratorProgramaticSubmitComponent {
         {
             type: 'confirm',
             name: 'agree3',
-            message: 'Do you agree with terms and conditions?',
+            message: 'Do You Agree With Terms And Conditions?',
             choices: ['Yes', 'No'],
             validators: [Validators.required],
             validate: (value) => of(value === 'Yes' ? null : 'You must agree'),
@@ -152,7 +152,7 @@ export class PlatformFormGeneratorProgramaticSubmitComponent {
         {
             type: 'radio',
             name: 'choose_best_option3',
-            message: 'Primary front-end framework you use',
+            message: 'Primary Front-end Framework You Use',
             choices: ['Angular', 'React', 'VueJS'],
             guiOptions: {
                 column: 2
@@ -163,7 +163,7 @@ export class PlatformFormGeneratorProgramaticSubmitComponent {
         {
             type: 'datepicker',
             name: 'birthday3',
-            message: 'Your birthday',
+            message: 'Your Birthday',
             guiOptions: {
                 column: 1
             },
@@ -175,7 +175,7 @@ export class PlatformFormGeneratorProgramaticSubmitComponent {
         {
             type: 'switch',
             name: 'enable_feature3',
-            message: 'Enable some analytics',
+            message: 'Enable Some Analytics',
             default: false,
             guiOptions: {
                 additionalData: {
