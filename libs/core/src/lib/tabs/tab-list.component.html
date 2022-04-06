@@ -4,6 +4,7 @@
     class="fd-tabs"
     [class]="(mode ? 'fd-tabs--' + mode : '') + (' fd-tabs--' + size)"
     [class.fd-tabs--compact]="compact"
+    [attr.aria-roledescription]="ariaRoledescription"
 >
     <div class="fd-tabs__wrapper" [class.fd-tabs__wrapper--collapsible]="_isCollapsed">
         <ng-container *ngFor="let tab of _visualOrder.visible; let i = index; let last = last">
