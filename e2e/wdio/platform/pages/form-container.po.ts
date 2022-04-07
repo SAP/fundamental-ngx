@@ -8,7 +8,7 @@ export class FormContainerPo extends BaseComponentPo {
     checkboxLabel = 'fd-checkbox label';
     formGroup = 'fdp-form-group';
     popover = '.cdk-overlay-container .cdk-overlay-pane';
-    helpIcon = '.sap-icon--message-information';
+    helpIcon = '.sap-icon--hint';
     fdSwitch = 'fd-switch label';
     dropdownOption = '.cdk-overlay-container fd-option';
     dropdownOptionAlt = 'ul .fd-list__item span';

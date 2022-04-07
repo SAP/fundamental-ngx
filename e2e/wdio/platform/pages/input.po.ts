@@ -18,7 +18,7 @@ export class InputPo extends BaseComponentPo {
     submitBtn = 'button[type="submit"]';
     errorTextAttr = 'fd-form-message span';
     requiredInputLabel = 'fdp-platform-input-reactive-validation-example .fd-form-label--required';
-    questionMarkSpan = '.sap-icon--message-information';
+    questionMarkSpan = '.sap-icon--hint';
     inputsLabels = '.fd-container label .fd-form-label';
     inputsArray = 'input.fd-input';
     autocompleteInput = 'input#form-input-10';
