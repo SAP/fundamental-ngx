@@ -39,6 +39,7 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder {
     @Input()
     subtle: boolean;
 
+    /** Whether user wants to have a link without underline decoration */
     @Input()
     undecorated: boolean;
 
