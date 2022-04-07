@@ -2,14 +2,17 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
+    Inject,
     Input,
     OnInit,
+    Optional,
     Renderer2,
     ViewEncapsulation
 } from '@angular/core';
 
 import { DYNAMIC_PAGE_CLASS_NAME } from '../constants';
 import { addClassNameToElement } from '../utils';
+import { FD_DYNAMIC_PAGE_COMPONENT, WithDynamicPageFooterComponent } from '../dynamic-page.component';
 
 @Component({
     selector: 'fd-dynamic-page-content',
@@ -32,7 +35,11 @@ export class DynamicPageContentComponent implements OnInit {
     id: string;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef<HTMLElement>, public _renderer: Renderer2) {}
+    constructor(
+        public _renderer: Renderer2,
+        @Inject(FD_DYNAMIC_PAGE_COMPONENT) @Optional() public _dynamicPageComponent: WithDynamicPageFooterComponent,
+        private _elementRef: ElementRef<HTMLElement>
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {

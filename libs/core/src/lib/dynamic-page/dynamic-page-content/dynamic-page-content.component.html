@@ -1,2 +1,3 @@
 <ng-content></ng-content>
-<div class="footer-spacer"></div>
+
+<div *ngIf="_dynamicPageComponent?._footerComponent" class="footer-spacer"></div>

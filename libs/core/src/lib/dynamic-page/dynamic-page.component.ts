@@ -6,6 +6,7 @@ import {
     ContentChild,
     ElementRef,
     HostBinding,
+    InjectionToken,
     Input,
     OnDestroy,
     Optional,
@@ -18,6 +19,7 @@ import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsi
 import { DynamicPageContentComponent } from './dynamic-page-content/dynamic-page-content.component';
 import { DynamicPageSubheaderComponent } from './dynamic-page-header/subheader/dynamic-page-subheader.component';
 import { DynamicPageHeaderComponent } from './dynamic-page-header/header/dynamic-page-header.component';
+import { DynamicPageFooterComponent } from './dynamic-page-footer/dynamic-page-footer.component';
 import { DynamicPageWrapperDirective } from './dynamic-page-wrapper.directive';
 import { DynamicPageService } from './dynamic-page.service';
 import { addClassNameToElement, dynamicPageWidthToSize } from './utils';
@@ -27,15 +29,27 @@ import { FlexibleColumnLayoutComponent } from '@fundamental-ngx/core/flexible-co
 import { fromEvent, Observable, Subject } from 'rxjs';
 import { debounceTime, delay, map, takeUntil } from 'rxjs/operators';
 
+export const FD_DYNAMIC_PAGE_COMPONENT = new InjectionToken('FD_DYNAMIC_PAGE_COMPONENT');
+
+export interface WithDynamicPageFooterComponent {
+    _footerComponent: DynamicPageFooterComponent;
+}
+
 @Component({
     selector: 'fd-dynamic-page',
     templateUrl: './dynamic-page.component.html',
     styleUrls: ['./dynamic-page.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [DynamicPageService]
+    providers: [
+        DynamicPageService,
+        {
+            provide: FD_DYNAMIC_PAGE_COMPONENT,
+            useExisting: DynamicPageComponent
+        }
+    ]
 })
-export class DynamicPageComponent implements AfterViewInit, OnDestroy {
+export class DynamicPageComponent implements AfterViewInit, OnDestroy, WithDynamicPageFooterComponent {
     /** Page role  */
     @Input()
     @HostBinding('attr.role')
@@ -100,6 +114,10 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
     /** @hidden reference to content component  */
     @ContentChild(DynamicPageContentComponent)
     _contentComponent: DynamicPageContentComponent;
+
+    /** @hidden reference to footer component  */
+    @ContentChild(DynamicPageFooterComponent)
+    _footerComponent: DynamicPageContentComponent;
 
     /** @hidden reference to tab component */
     @ContentChild(TabListComponent)
