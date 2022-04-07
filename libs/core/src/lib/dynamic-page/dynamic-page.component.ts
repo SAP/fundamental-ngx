@@ -6,6 +6,7 @@ import {
     ContentChild,
     ElementRef,
     HostBinding,
+    InjectionToken,
     Input,
     OnDestroy,
     Optional,
@@ -28,15 +29,27 @@ import { FlexibleColumnLayoutComponent } from '@fundamental-ngx/core/flexible-co
 import { fromEvent, Observable, Subject } from 'rxjs';
 import { debounceTime, delay, map, takeUntil } from 'rxjs/operators';
 
+export const FD_DYNAMIC_PAGE_COMPONENT = new InjectionToken('FD_DYNAMIC_PAGE_COMPONENT');
+
+export interface WithDynamicPageFooterComponent {
+    _footerComponent: DynamicPageFooterComponent;
+}
+
 @Component({
     selector: 'fd-dynamic-page',
     templateUrl: './dynamic-page.component.html',
     styleUrls: ['./dynamic-page.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [DynamicPageService]
+    providers: [
+        DynamicPageService,
+        {
+            provide: FD_DYNAMIC_PAGE_COMPONENT,
+            useExisting: DynamicPageComponent
+        }
+    ]
 })
-export class DynamicPageComponent implements AfterViewInit, OnDestroy {
+export class DynamicPageComponent implements AfterViewInit, OnDestroy, WithDynamicPageFooterComponent {
     /** Page role  */
     @Input()
     @HostBinding('attr.role')

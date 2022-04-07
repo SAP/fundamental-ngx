@@ -2,6 +2,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
+    Inject,
     Input,
     OnInit,
     Optional,
@@ -11,7 +12,7 @@ import {
 
 import { DYNAMIC_PAGE_CLASS_NAME } from '../constants';
 import { addClassNameToElement } from '../utils';
-import { DynamicPageComponent } from '../dynamic-page.component';
+import { FD_DYNAMIC_PAGE_COMPONENT, WithDynamicPageFooterComponent } from '../dynamic-page.component';
 
 @Component({
     selector: 'fd-dynamic-page-content',
@@ -36,7 +37,7 @@ export class DynamicPageContentComponent implements OnInit {
     /** @hidden */
     constructor(
         public _renderer: Renderer2,
-        @Optional() public _dynamicPageComponent: DynamicPageComponent,
+        @Inject(FD_DYNAMIC_PAGE_COMPONENT) @Optional() public _dynamicPageComponent: WithDynamicPageFooterComponent,
         private _elementRef: ElementRef<HTMLElement>
     ) {}
 
