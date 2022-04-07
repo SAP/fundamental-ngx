@@ -426,11 +426,8 @@ export class TimePickerComponent<D>
         let formattedTime = '';
 
         try {
-            if (this.allowNull) {
-                const parsed = this._dateTimeAdapter.parse(time, this.getDisplayFormat());
-                if (!this._dateTimeAdapter.isValid(parsed) && time === null) {
-                    return formattedTime;
-                }
+            if (this.allowNull && time === null) {
+                return '';
             }
             formattedTime = this._dateTimeAdapter.format(time, this.getDisplayFormat());
         } catch (e) {}
