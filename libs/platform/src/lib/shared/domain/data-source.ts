@@ -162,6 +162,15 @@ export class ComboBoxDataSource<T> implements DataSource<T> {
 
     protected _dataLoading = false;
 
+    protected _limitless = false;
+
+    set limitless(value: boolean) {
+        this._limitless = value;
+    }
+    get limitless(): boolean {
+        return this._limitless;
+    }
+
     get isDataLoading(): boolean {
         return this._dataLoading;
     }
@@ -181,7 +190,7 @@ export class ComboBoxDataSource<T> implements DataSource<T> {
             throw new Error('DataSource.match() predicate can only accepts string and Map');
         }
 
-        if (!searchParam.has('limit')) {
+        if (!searchParam.has('limit') && !this._limitless) {
             searchParam.set('limit', ComboBoxDataSource.MaxLimit);
         }
 

@@ -64,6 +64,8 @@ import {
 import { TextAlignment } from '../../combobox';
 import { MultiComboboxConfig } from '../multi-combobox.config';
 
+export const MAP_LIMIT = 12;
+
 export type FdpMultiComboboxDataSource<T> = MultiComboBoxDataSource<T> | Observable<T[]> | T[];
 
 export class MultiComboboxSelectionChangeEvent {
@@ -169,6 +171,9 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     /** Sets invalid entry message. */
     @Input()
     invalidEntryMessage = 'Invalid entry';
+
+    @Input()
+    limitless = true;
 
     /** Event emitted when item is selected. */
     @Output()
@@ -462,7 +467,11 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
 
         const map = new Map();
         map.set('query', text);
-        map.set('limit', 12);
+
+        if (!this.limitless) {
+            map.set('limit', MAP_LIMIT);
+        }
+
         this.ds.match(map);
 
         this._cd.markForCheck();
@@ -642,6 +651,8 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
         const initDataSource = this._toDataStream(ds);
         let isInitDataSource = true;
 
+        initDataSource.limitless = this.limitless;
+
         if (initDataSource === undefined) {
             throw new Error(`[dataSource] source did not match an array, Observable, or DataSource`);
         }
@@ -714,7 +725,11 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
         // initial data fetch
         const map = new Map();
         map.set('query', '*');
-        map.set('limit', 12);
+
+        if (!this.limitless) {
+            map.set('limit', MAP_LIMIT);
+        }
+
         initDataSource.match(map);
 
         return initDataSource;
