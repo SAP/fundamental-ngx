@@ -245,7 +245,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
             return;
         }
 
-        const contentElement = this._contentComponent?.first.elementRef?.nativeElement;
+        const contentElement = this._contentComponent.first?.elementRef?.nativeElement;
         if (contentElement) {
             this._listenOnScroll(contentElement);
         }
