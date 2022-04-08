@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.8...v0.34.3-rc.9) (2022-04-08)
+
+
+### Features
+
+* **core:** global message toast configuration ([#7957](https://github.com/SAP/fundamental-ngx/issues/7957)) ([7c15bf8](https://github.com/SAP/fundamental-ngx/commit/7c15bf838248a42158e1d0fb2e6d9fb03c0f6032))
+
 ### [0.34.3-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.7...v0.34.3-rc.8) (2022-04-07)
 
 
