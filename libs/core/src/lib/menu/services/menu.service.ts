@@ -153,7 +153,7 @@ export class MenuService {
     /** @hidden Removes given element and all its successors from the Active Node Path and setts as inactive*/
     private _removeFromActivePath(menuItem: MenuItemComponent): void {
         const menuNode = this.menuMap.get(menuItem);
-        const pathIndex = this.activeNodePath.findIndex((i) => i.item === menuNode.item);
+        const pathIndex = this.activeNodePath.findIndex((i) => i.item === menuNode?.item);
 
         if (pathIndex !== -1) {
             this.activeNodePath
