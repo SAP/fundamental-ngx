@@ -33,7 +33,7 @@ export class DynamicPageContentComponent implements OnInit {
     id: string;
 
     /** @hidden */
-    _showSpacer = true;
+    _showSpacer = false;
 
     /** @hidden */
     constructor(

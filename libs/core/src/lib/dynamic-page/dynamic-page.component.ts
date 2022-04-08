@@ -27,7 +27,7 @@ import { addClassNameToElement, dynamicPageWidthToSize } from './utils';
 import { TabListComponent } from '@fundamental-ngx/core/tabs';
 import { FlexibleColumnLayoutComponent } from '@fundamental-ngx/core/flexible-column-layout';
 
-import { fromEvent, Observable, Subject } from 'rxjs';
+import { fromEvent, Observable, startWith, Subject } from 'rxjs';
 import { debounceTime, delay, map, takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -313,23 +313,24 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _setContentFooterSpacer(): void {
-        const showSpacerFn = (components: DynamicPageContentComponent[]): void => {
-            components.forEach((content, index) => {
-                /** show spacer when:
-                 * a) footer + no tabs = only last
-                 * b) footer + tabs, not stacked = all
-                 * c) footer + tabs, stacked = only last
-                 */
-                content._toggleSpacer(
-                    this._footerComponent && (!this._tabComponent?.stackContent || index === components.length - 1)
-                );
-            });
-        };
-
-        showSpacerFn(this._contentComponent.toArray());
-
         this._contentComponent.changes
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe((components) => showSpacerFn(components));
+            .pipe(
+                startWith(this._contentComponent.toArray()),
+                // to avoid NG0100: Expression has changed after it was checked
+                debounceTime(0),
+                takeUntil(this._onDestroy$)
+            )
+            .subscribe((components) => {
+                components.forEach((content, index) => {
+                    /** show spacer when:
+                     * a) footer + no tabs = only last
+                     * b) footer + tabs, not stacked = all
+                     * c) footer + tabs, stacked = only last
+                     */
+                    content._toggleSpacer(
+                        this._footerComponent && (!this._tabComponent?.stackContent || index === components.length - 1)
+                    );
+                });
+            });
     }
 }
