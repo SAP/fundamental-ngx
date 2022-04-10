@@ -159,7 +159,7 @@
         "@commitlint/travis-cli": "16.2.1",
         "@nrwl/cli": "13.8.8",
         "@nrwl/devkit": "13.8.3",
-        "@nrwl/eslint-plugin-nx": "13.8.3",
+        "@nrwl/eslint-plugin-nx": "13.9.7",
         "@nrwl/linter": "13.8.3",
         "@nrwl/nx-cloud": "13.1.5",
         "@nrwl/schematics": "8.12.11",
