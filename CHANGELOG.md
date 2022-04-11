@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.9...v0.34.3-rc.10) (2022-04-11)
+
+
+### Bug Fixes
+
+* **platform:** rename input property ([#7954](https://github.com/SAP/fundamental-ngx/issues/7954)) ([de0c273](https://github.com/SAP/fundamental-ngx/commit/de0c273e1becf5099f9621049a7f483bbffd80a5))
+
 ### [0.34.3-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.8...v0.34.3-rc.9) (2022-04-08)
 
 
