@@ -41,6 +41,11 @@ export enum SlideDirection {
     PREVIOUS
 }
 
+export interface FittingSlidesAndWidth {
+    width: number;
+    slides: number;
+}
+
 let carouselCounter = 0;
 
 class CarouselActiveSlides {
@@ -59,7 +64,7 @@ class CarouselActiveSlides {
     }
 })
 export class CarouselComponent implements OnInit, AfterContentInit, AfterViewInit, AfterViewChecked, OnDestroy {
-    /** Id for the Carousel. */
+    /** ID for the Carousel. */
     @Input()
     @HostBinding('attr.id')
     id = `fd-carousel-${carouselCounter++}`;
@@ -150,7 +155,14 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     /** Number of items to be visible at a time */
     @Input()
-    visibleSlidesCount = 1;
+    set visibleSlidesCount(value: number | 'auto') {
+        this._visibleSlidesCount = value;
+        this._visibleSlidesNumericCount = this._getVisibleSlidesCount();
+    }
+
+    get visibleSlidesCount(): number | 'auto' {
+        return this._visibleSlidesCount;
+    }
 
     /** An event that is emitted after a slide transition has happened */
     @Output()
@@ -218,6 +230,12 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     get _slidesWrapperSizePx(): string {
         return this._slidesWrapperSize ? `${this._slidesWrapperSize}px` : this.width;
     }
+
+    /** @hidden */
+    private _visibleSlidesCount: number | 'auto' = 1;
+
+    /** @hidden */
+    private _visibleSlidesNumericCount = 1;
 
     /** @hidden */
     private _resourceStrings = CarouselResourceStringsEN;
@@ -288,18 +306,18 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     ngAfterViewInit(): void {
         this._initializeServiceConfig();
         this._carouselService.initialise(this._config, this.slides, this.slideContainer);
-        this._previousVisibleSlidesCount = this.visibleSlidesCount;
+        this._previousVisibleSlidesCount = this._visibleSlidesNumericCount;
 
         this._resizeContentContainer();
     }
 
     /** @hidden */
     ngAfterViewChecked(): void {
-        if (this._previousVisibleSlidesCount && this._previousVisibleSlidesCount !== this.visibleSlidesCount) {
+        if (this._previousVisibleSlidesCount && this._previousVisibleSlidesCount !== this._visibleSlidesNumericCount) {
             this._initializeCarousel();
             this._initializeServiceConfig();
             this._carouselService.updateConfig(this._config);
-            this._previousVisibleSlidesCount = this.visibleSlidesCount;
+            this._previousVisibleSlidesCount = this._visibleSlidesNumericCount;
             this._changeDetectorRef.detectChanges();
         }
     }
@@ -445,8 +463,8 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
                 this.rightButtonDisabled = true;
                 this.leftButtonDisabled = false;
             } else if (
-                this.visibleSlidesCount > 1 &&
-                this.currentActiveSlidesStartIndex + this.visibleSlidesCount >= this.slides.length
+                this._visibleSlidesNumericCount > 1 &&
+                this.currentActiveSlidesStartIndex + this._visibleSlidesNumericCount >= this.slides.length
             ) {
                 this.rightButtonDisabled = true;
             } else {
@@ -483,11 +501,11 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
         let arrayLength: number;
         // set page indicator count with fake array, to use in template
-        if (this.loop && this.visibleSlidesCount > 1) {
+        if (this.loop && this._visibleSlidesNumericCount > 1) {
             // If loop with multi item visible.
             arrayLength = this.slides.length;
         } else {
-            arrayLength = this.slides.length - this.visibleSlidesCount + 1;
+            arrayLength = this.slides.length - this._visibleSlidesNumericCount + 1;
         }
 
         const pageIndicatorsIfZeroCount = this.slides.length === 0 ? 0 : 1;
@@ -499,7 +517,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         this.slides.forEach((_slide, index) => {
             if (
                 index >= this.currentActiveSlidesStartIndex &&
-                index < this.currentActiveSlidesStartIndex + this.visibleSlidesCount
+                index < this.currentActiveSlidesStartIndex + this._visibleSlidesNumericCount
             ) {
                 _slide.visibility = 'visible';
             } else {
@@ -523,7 +541,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     /** @hidden Initialize config for Carousel service */
     private _initializeServiceConfig(): void {
         this._config.vertical = this.vertical;
-        this._config.elementsAtOnce = this.visibleSlidesCount;
+        this._config.elementsAtOnce = this._visibleSlidesNumericCount;
         this._config.gestureSupport = this.swipeEnabled;
         this._config.infinite = this.loop;
         this._config.transition = String(this.slideTransitionDuration) + 'ms';
@@ -575,7 +593,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
             firstActiveSlideIndex = this.currentActiveSlidesStartIndex;
         }
 
-        for (let activeSlideIndex = 0; activeSlideIndex < this.visibleSlidesCount; activeSlideIndex++) {
+        for (let activeSlideIndex = 0; activeSlideIndex < this._visibleSlidesNumericCount; activeSlideIndex++) {
             const index = firstActiveSlideIndex + activeSlideIndex;
             const slide = this.slides.get(index);
             if (slide) {
@@ -593,7 +611,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     private _manageSlideVisibility(firstActiveSlideIndex: number): void {
         setTimeout(() => {
             this.slides.forEach((_slides, index) => {
-                if (index >= firstActiveSlideIndex && index < firstActiveSlideIndex + this.visibleSlidesCount) {
+                if (index >= firstActiveSlideIndex && index < firstActiveSlideIndex + this._visibleSlidesNumericCount) {
                     if (_slides.visibility === 'hidden') {
                         _slides.visibility = 'visible';
                     }
@@ -647,7 +665,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     }
 
     /**
-     * @hidden Making slides visible when slides are dragged. Otherwise it looses the effect.
+     * @hidden Making slides visible when slides are dragged. Otherwise, it looses the effect.
      */
     private _onSlideDrag(isDragging: boolean): void {
         if (isDragging) {
@@ -673,34 +691,103 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
             resizeObservable(this.slideContainer.nativeElement),
             resizeObservable(this.carouselContainer.nativeElement)
         )
-            .pipe(debounceTime(30), takeUntil(this._onDestroy$))
+            .pipe(debounceTime(100), takeUntil(this._onDestroy$))
             .subscribe(() => {
-                const { width } = this.carouselContainer.nativeElement.getBoundingClientRect();
-                let maxSize = 0;
+                const { width, slides } = this._getFittingSlidesAndWidth();
 
-                for (const slide of this.slides.toArray().slice(this.currentActiveSlidesStartIndex)) {
-                    const slideWidth = slide.getWidth();
+                if (this.visibleSlidesCount === 'auto') {
+                    this._visibleSlidesNumericCount = slides;
+                    const totalSlides = this.slides.length;
 
-                    if (!slideWidth) {
-                        break;
+                    let needleSlideIndex = this.currentActiveSlidesStartIndex;
+
+                    // If amount of slides insufficient to fill whole carousel, slide back a bit.
+                    if (this.currentActiveSlidesStartIndex + slides > totalSlides) {
+                        needleSlideIndex =
+                            this.currentActiveSlidesStartIndex -
+                            (this.currentActiveSlidesStartIndex + slides - totalSlides);
                     }
 
-                    const newSize = maxSize + slideWidth;
+                    const needleSlide = this.slides.get(needleSlideIndex);
 
-                    if (newSize > width) {
-                        break;
-                    }
+                    this.currentActiveSlidesStartIndex = needleSlideIndex;
 
-                    maxSize = newSize;
+                    this._carouselService.active = needleSlide;
+
+                    // Refresh carousel config and transition to the current slide.
+                    this._initializeCarousel();
+
+                    this._carouselService.goToItem(needleSlide);
+                    this._notifySlideChange(SlideDirection.None);
                 }
 
-                if (this._slidesWrapperSize === maxSize) {
-                    return;
+                if (this._slidesWrapperSize !== width) {
+                    this._slidesWrapperSize = width;
                 }
-
-                this._slidesWrapperSize = maxSize;
 
                 this._changeDetectorRef.detectChanges();
             });
+    }
+
+    /**
+     * @hidden
+     * Calculates how many slides can be shown within current carousel viewport.
+     * @returns Object containing fitting slides count and total width of those slides.
+     */
+    private _getFittingSlidesAndWidth(): FittingSlidesAndWidth {
+        if (!this.carouselContainer) {
+            return {
+                width: 0,
+                slides: 1
+            };
+        }
+
+        const { width } = this.carouselContainer.nativeElement.getBoundingClientRect();
+        let maxSize = 0;
+        let slidesCount = 0;
+
+        const carouselSlides = this.slides.toArray();
+        const previousSlides = carouselSlides.splice(0, this.currentActiveSlidesStartIndex);
+
+        const getSlides = (slides: CarouselItemComponent[]): void => {
+            for (const slide of slides) {
+                const slideWidth = slide.getWidth();
+
+                if (!slideWidth) {
+                    break;
+                }
+
+                const newSize = maxSize + slideWidth;
+
+                if (newSize > width) {
+                    break;
+                }
+
+                maxSize = newSize;
+                slidesCount++;
+            }
+        };
+
+        getSlides(carouselSlides);
+
+        // If with of the rest of the slides is lesser than carouse's viewport, add previous slides to it.
+        if (maxSize < width) {
+            getSlides(previousSlides);
+        }
+
+        return {
+            width: maxSize,
+            slides: slidesCount
+        };
+    }
+
+    /** @hidden */
+    private _getVisibleSlidesCount(): number {
+        if (this._visibleSlidesCount !== 'auto') {
+            return this._visibleSlidesCount;
+        }
+
+        const { slides } = this._getFittingSlidesAndWidth();
+        return slides;
     }
 }
