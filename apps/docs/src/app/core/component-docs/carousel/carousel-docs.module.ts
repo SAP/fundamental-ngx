@@ -1,5 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
+import { CarouselModule } from '@fundamental-ngx/core/carousel';
+import { CardModule } from '@fundamental-ngx/core/card';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { TableModule } from '@fundamental-ngx/core/table';
+import { MessagePageModule } from '@fundamental-ngx/core/message-page';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
@@ -15,12 +22,7 @@ import { CarouselContentNavigationExampleComponent } from './examples/carousel-c
 import { CarouselLoopedNavigationExampleComponent } from './examples/carousel-looped-navigation-example.component';
 import { CarouselErrorMessageExampleComponent } from './examples/carousel-error-message-example.component';
 import { CarouselLoadingContentExampleComponent } from './examples/carousel-loading-content-example.component';
-import { CarouselModule } from '@fundamental-ngx/core/carousel';
-import { CardModule } from '@fundamental-ngx/core/card';
-import { ListModule } from '@fundamental-ngx/core/list';
-import { TableModule } from '@fundamental-ngx/core/table';
-import { MessagePageModule } from '@fundamental-ngx/core/message-page';
-import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { CarouselAutoSlidesExampleComponent } from './examples/carousel-auto-slides-example.component';
 
 const routes: Routes = [
     {
@@ -42,7 +44,8 @@ const routes: Routes = [
         ListModule,
         SegmentedButtonModule,
         TableModule,
-        MessagePageModule
+        MessagePageModule,
+        ToolbarModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -57,7 +60,8 @@ const routes: Routes = [
         CarouselContentNavigationExampleComponent,
         CarouselLoopedNavigationExampleComponent,
         CarouselErrorMessageExampleComponent,
-        CarouselLoadingContentExampleComponent
+        CarouselLoadingContentExampleComponent,
+        CarouselAutoSlidesExampleComponent
     ]
 })
 export class CarouselDocsModule {}
