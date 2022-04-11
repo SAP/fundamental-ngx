@@ -9,7 +9,7 @@ projects = Object.keys(angularJson.projects).map((projName) => {
 });
 
 const knownTypes = new Set(['app', 'e2e', 'tools', 'lib']);
-const knownScopes = new Set(['docs', 'fd', 'fdp', 'fn', 'tools', 'moment-adapter', 'components-e2e']);
+const knownScopes = new Set(['docs', 'fd', 'fdp', 'fn', 'tools', 'datetime-adapter', 'components-e2e']);
 
 describe('Nx projects (nx.json)', () => {
     // generate tests so we have a clear output of which project failed

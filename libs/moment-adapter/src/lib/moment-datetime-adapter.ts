@@ -1,4 +1,4 @@
-import { Inject, Injectable, InjectionToken, LOCALE_ID, Optional } from '@angular/core';
+import { Inject, Injectable, InjectionToken, isDevMode, LOCALE_ID, Optional } from '@angular/core';
 import moment, { Locale, LongDateFormatSpec, Moment, MomentFormatSpecification, MomentInput } from 'moment';
 
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
@@ -30,6 +30,8 @@ export function MOMENT_DATE_TIME_ADAPTER_OPTIONS_FACTORY(): MomentDatetimeAdapte
 }
 
 /**
+ * @deprecated Use `DayjsDatetimeAdapter` from `@fundamental-ngx/datetime-adapter` package instead.
+ *
  * DatetimeAdapter implementation based on moment.
  *
  * This uses moment.js as a date model instance.
@@ -53,6 +55,13 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
         super();
 
         this.setLocale(localeId || moment.locale());
+
+        if (isDevMode()) {
+            console.warn(
+                'MomentDatetimeAdapter is deprecated. ' +
+                    'Use "DayjsDatetimeAdapter" from "@fundamental-ngx/datetime-adapter" package instead.'
+            );
+        }
     }
 
     setLocale(locale: string): void {

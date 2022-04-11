@@ -115,6 +115,7 @@ export const utilities: SectionInterfaceContent[] = [
 ];
 
 export const adapters: SectionInterfaceContent[] = [
+    { url: 'core/dayjs-datetime-adapter', name: 'Dayjs DateTime Adapter' },
     { url: 'core/moment-datetime-adapter', name: 'Moment DateTime Adapter' }
 ];
 

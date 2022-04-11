@@ -48,9 +48,11 @@
             "prefix": "fd"
         },
         "@nrwl/angular:application": {
+            "linter": "eslint",
             "unitTestRunner": "jest"
         },
         "@nrwl/angular:library": {
+            "linter": "eslint",
             "unitTestRunner": "jest"
         },
         "@nrwl/angular:component": {
