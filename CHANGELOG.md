@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.10...v0.34.3-rc.11) (2022-04-11)
+
+
+### Bug Fixes
+
+* **core:** add auto slides calculation ([#7949](https://github.com/SAP/fundamental-ngx/issues/7949)) ([1ed1471](https://github.com/SAP/fundamental-ngx/commit/1ed14713be7a5c49a9c73b011091086505d53279))
+
 ### [0.34.3-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.9...v0.34.3-rc.10) (2022-04-11)
 
 
