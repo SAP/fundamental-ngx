@@ -181,7 +181,7 @@ describe('Input Group should', () => {
         }
         waitForElDisplayed(withFormInput);
         scrollIntoView(withFormInput);
-        mouseHoverElement(withFormInputQuestionMark);
+        click(withFormInputQuestionMark);
         expect(getText(withFormInputInfoTooltip)).toBe('This is tooltip to help');
     });
 

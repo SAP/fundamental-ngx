@@ -10,7 +10,6 @@ import {
     getValue,
     isElementClickable,
     isElementDisplayed,
-    mouseHoverElement,
     refreshPage,
     scrollIntoView,
     sendKeys,
@@ -84,7 +83,7 @@ describe('Form Container test suite', () => {
             checkAddingText(recommendedExampleTextArea);
         });
 
-        it('should show popover when hovering ? icon', () => {
+        it('should show popover when clicking ? icon', () => {
             refreshPage();
             waitForPresent(formContainerPage.title);
             checkHelpPopover(recommendedExampleHelpIcon);
@@ -104,7 +103,7 @@ describe('Form Container test suite', () => {
             checkAddingText(possibleExampleTextArea);
         });
 
-        it('should show popover when hovering ? icon', () => {
+        it('should show popover when clicking ? icon', () => {
             refreshPage();
             waitForPresent(formContainerPage.title);
             checkHelpPopover(possibleExampleHelpIcon);
@@ -124,7 +123,7 @@ describe('Form Container test suite', () => {
             checkAddingText(notRecommendedExampleTextArea);
         });
 
-        it('should show popover when hovering ? icon', () => {
+        it('should show popover when clicking ? icon', () => {
             refreshPage();
             waitForPresent(formContainerPage.title);
             checkHelpPopover(notRecommendedExampleHelpIcon);
@@ -144,7 +143,7 @@ describe('Form Container test suite', () => {
             checkAddingText(complexExampleTextArea);
         });
 
-        it('should show popover when hovering ? icon', () => {
+        it('should show popover when clicking ? icon', () => {
             if (browserIsSafari()) {
                 // mouse hover method not working correctly on Safari
                 return;
@@ -228,7 +227,7 @@ describe('Form Container test suite', () => {
             expect(isElementClickable(formExampleSwitch)).toBe(true, 'switch is not clickable');
         });
 
-        it('should show popover when hovering ? icon', () => {
+        it('should show popover when clicking ? icon', () => {
             refreshPage();
             waitForPresent(formContainerPage.title);
             checkHelpPopover(formExampleHelpIcon);
@@ -252,7 +251,7 @@ describe('Form Container test suite', () => {
             for (let i = 0; i < labelCount; i++) {
                 const labelText = getText(changeExampleTextAreaLabel, i);
                 scrollIntoView(changeExampleHelpIcon, i);
-                mouseHoverElement(changeExampleHelpIcon, i);
+                click(changeExampleHelpIcon, i);
                 waitForElDisplayed(popover);
 
                 expect(getText(popover).toLowerCase()).toEqual(labelText.toLowerCase());
@@ -317,11 +316,7 @@ describe('Form Container test suite', () => {
             expect(getValue(isInlineExampleCombobox)).toEqual(firstOption);
         });
 
-        it('should show popover when hovering ? icon', () => {
-            if (browserIsSafari()) {
-                // mouse hover method not working correctly on Safari
-                return;
-            }
+        it('should show popover when clicking ? icon', () => {
             refreshPage();
             waitForPresent(formContainerPage.title);
 
@@ -329,7 +324,7 @@ describe('Form Container test suite', () => {
 
             for (let i = 0; i < iconLength; i++) {
                 scrollIntoView(isInlineExampleHelpIcon, i);
-                mouseHoverElement(isInlineExampleHelpIcon, i);
+                click(isInlineExampleHelpIcon, i);
 
                 expect(waitForPresent(popover)).toBe(true, `tooltip for icon ${i} not displayed`);
                 expect(['', null, undefined]).not.toContain(getText(popover));
@@ -373,15 +368,11 @@ describe('Form Container test suite', () => {
     }
 
     function checkHelpPopover(selector: string): void {
-        if (browserIsSafari()) {
-            // mouse hover not working correctly on Safari
-            return;
-        }
         const iconLength = getElementArrayLength(selector);
 
         for (let i = 0; i < iconLength; i++) {
             scrollIntoView(selector, i);
-            mouseHoverElement(selector, i);
+            click(selector, i);
 
             expect(waitForPresent(popover)).toBe(true, `tooltip for icon ${i} not displayed`);
             expect(['This is tooltip help', 'This is tooltip to help']).toContain(getText(popover));
