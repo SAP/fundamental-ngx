@@ -1,4 +1,12 @@
 
+### [0.34.3-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.11...v0.34.3-rc.12) (2022-04-11)
+
+
+### Bug Fixes
+
+* **core:** added missing column numbers sequence ([#7973](https://github.com/SAP/fundamental-ngx/issues/7973)) ([b7f77c5](https://github.com/SAP/fundamental-ngx/commit/b7f77c52eafd08f8ce54301c5f71202c88471ddc))
+* **core:** clicking on tabs in overflow menu produced errors ([#7971](https://github.com/SAP/fundamental-ngx/issues/7971)) ([0932208](https://github.com/SAP/fundamental-ngx/commit/0932208005f9e138a10998258daa0632479b6f17))
+
 ### [0.34.3-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.10...v0.34.3-rc.11) (2022-04-11)
 
 
