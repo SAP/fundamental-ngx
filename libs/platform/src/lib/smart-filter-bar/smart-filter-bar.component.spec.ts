@@ -17,28 +17,14 @@ import { PlatformSmartFilterBarModule } from './smart-filter-bar.module';
             [dataSource]="source"
             [trackBy]="trackBy"
         >
-            <fdp-column
-                fdp-smart-filter-bar-field-definition
-                filterable="true"
-                name="name"
-                key="name"
-                label="Name"
-                align="start"
-            >
+            <fdp-column fdp-smart-filter-bar-field-definition name="name" key="name" label="Name" align="start">
+            </fdp-column>
+
+            <fdp-column fdp-smart-filter-bar-field-definition name="description" key="description" label="Description">
             </fdp-column>
 
             <fdp-column
                 fdp-smart-filter-bar-field-definition
-                filterable="true"
-                name="description"
-                key="description"
-                label="Description"
-            >
-            </fdp-column>
-
-            <fdp-column
-                fdp-smart-filter-bar-field-definition
-                filterable="true"
                 dataType="number"
                 name="price"
                 key="price.value"
@@ -50,7 +36,6 @@ import { PlatformSmartFilterBarModule } from './smart-filter-bar.module';
             <fdp-column
                 fdp-smart-filter-bar-field-definition
                 filterType="multi-select"
-                filterable="true"
                 name="status"
                 key="status"
                 label="Status"
@@ -61,7 +46,6 @@ import { PlatformSmartFilterBarModule } from './smart-filter-bar.module';
             <fdp-column
                 fdp-smart-filter-bar-field-definition
                 filterType="single-select"
-                filterable="true"
                 name="statusColor"
                 key="statusColor"
                 label="Status color"
@@ -71,7 +55,6 @@ import { PlatformSmartFilterBarModule } from './smart-filter-bar.module';
 
             <fdp-column
                 fdp-smart-filter-bar-field-definition
-                filterable="true"
                 dataType="date"
                 name="date"
                 key="date"
@@ -80,7 +63,6 @@ import { PlatformSmartFilterBarModule } from './smart-filter-bar.module';
 
             <fdp-column
                 fdp-smart-filter-bar-field-definition
-                filterable="true"
                 filterType="single-select"
                 dataType="boolean"
                 name="verified"

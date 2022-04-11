@@ -79,7 +79,7 @@ export class SmartFilterBarSubjectDirective implements AfterViewInit {
             name: column.name,
             label: column.label,
             filterType: column.filterType,
-            filterable: column.filterable,
+            filterable: column.smartFilterBarFilterable,
             dataType: column.dataType,
             required: column.required,
             customFilterType: column.customFilterType,
