@@ -1,4 +1,11 @@
 
+### [0.32.15](https://github.com/SAP/fundamental-ngx/compare/v0.32.14...v0.32.15) (2022-04-11)
+
+
+### Bug Fixes
+
+* **core:** auto slides for carousel ([1a62878](https://github.com/SAP/fundamental-ngx/commit/1a62878af1c8ffda9899637cd25ec0f1c9c3e942))
+
 ### [0.32.14](https://github.com/SAP/fundamental-ngx/compare/v0.32.13...v0.32.14) (2022-04-05)
 
 ### [0.32.13](https://github.com/SAP/fundamental-ngx/compare/v0.32.12...v0.32.13) (2022-03-31)
