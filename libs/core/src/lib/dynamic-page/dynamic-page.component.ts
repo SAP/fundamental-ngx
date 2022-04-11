@@ -27,8 +27,8 @@ import { addClassNameToElement, dynamicPageWidthToSize } from './utils';
 import { TabListComponent } from '@fundamental-ngx/core/tabs';
 import { FlexibleColumnLayoutComponent } from '@fundamental-ngx/core/flexible-column-layout';
 
-import { fromEvent, Observable, startWith, Subject } from 'rxjs';
-import { debounceTime, delay, map, takeUntil } from 'rxjs/operators';
+import { asyncScheduler, fromEvent, Observable, startWith, Subject } from 'rxjs';
+import { debounceTime, delay, map, observeOn, takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-dynamic-page',
@@ -314,12 +314,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _setContentFooterSpacer(): void {
         this._contentComponent.changes
-            .pipe(
-                startWith(this._contentComponent.toArray()),
-                // to avoid NG0100: Expression has changed after it was checked
-                debounceTime(0),
-                takeUntil(this._onDestroy$)
-            )
+            .pipe(startWith(this._contentComponent.toArray()), observeOn(asyncScheduler), takeUntil(this._onDestroy$))
             .subscribe((components) => {
                 components.forEach((content, index) => {
                     /** show spacer when:
