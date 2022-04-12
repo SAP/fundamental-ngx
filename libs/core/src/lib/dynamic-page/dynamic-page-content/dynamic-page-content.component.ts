@@ -1,18 +1,16 @@
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ElementRef,
-    Inject,
     Input,
     OnInit,
-    Optional,
     Renderer2,
     ViewEncapsulation
 } from '@angular/core';
 
 import { DYNAMIC_PAGE_CLASS_NAME } from '../constants';
 import { addClassNameToElement } from '../utils';
-import { FD_DYNAMIC_PAGE_COMPONENT, WithDynamicPageFooterComponent } from '../dynamic-page.component';
 
 @Component({
     selector: 'fd-dynamic-page-content',
@@ -35,10 +33,13 @@ export class DynamicPageContentComponent implements OnInit {
     id: string;
 
     /** @hidden */
+    _showSpacer = false;
+
+    /** @hidden */
     constructor(
         public _renderer: Renderer2,
-        @Inject(FD_DYNAMIC_PAGE_COMPONENT) @Optional() public _dynamicPageComponent: WithDynamicPageFooterComponent,
-        private _elementRef: ElementRef<HTMLElement>
+        private _elementRef: ElementRef<HTMLElement>,
+        private _cdr: ChangeDetectorRef
     ) {}
 
     /** @hidden */
@@ -49,6 +50,13 @@ export class DynamicPageContentComponent implements OnInit {
     /** Element reference to host of content dynamic page */
     get elementRef(): ElementRef {
         return this._elementRef;
+    }
+
+    /** @hidden */
+    _toggleSpacer(state: boolean): void {
+        this._showSpacer = state;
+
+        this._cdr.markForCheck();
     }
 
     /** @hidden */
