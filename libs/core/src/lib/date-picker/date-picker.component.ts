@@ -341,6 +341,9 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
     /** @hidden Whether the date input is invalid */
     _isInvalidDateInput = false;
 
+    /** @hidden Date Format */
+    _dateFormat = 'MM/DD/YYYY';
+
     /** @hidden */
     readonly _formValueStateMessageId = `fd-date-picker-form-message-${datePickerCounter++}`;
 
@@ -387,7 +390,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
      * @hidden
      */
     get _dateInputArialLabel(): string {
-        return this.type === 'range' ? this.dateRangeInputLabel : this.dateInputLabel;
+        return (this.type === 'range' ? this.dateRangeInputLabel : this.dateInputLabel) + this._dateFormat;
     }
 
     /** @hidden */
