@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.12...v0.34.3-rc.13) (2022-04-12)
+
+
+### Bug Fixes
+
+* **core, platform:** dynamic page spacer fix, update for tabs ([#7970](https://github.com/SAP/fundamental-ngx/issues/7970)) ([6595c69](https://github.com/SAP/fundamental-ngx/commit/6595c695868bbdf7be4ee9b6b0a6e8f059ae547f))
+
 ### [0.34.3-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.11...v0.34.3-rc.12) (2022-04-11)
 
 
