@@ -23,7 +23,7 @@ import { filter, takeUntil } from 'rxjs/operators';
 
 import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 import { ContentDensity, ContentDensityEnum, RtlService, ContentDensityService } from '@fundamental-ngx/core/utils';
-import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
+import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { isDataSource } from '@fundamental-ngx/platform/shared';
 import {
     ArrayValueHelpDialogDataSource,
@@ -102,6 +102,10 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
     /** Unique key from the source field names. Required field. */
     @Input()
     uniqueKey: string;
+
+    /** Id attribute for dialog title */
+    @Input()
+    headerId: string | null = null;
 
     /** Field name for default render from data.
      * Required field if tokenizerFn is not exist. */
@@ -548,7 +552,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
     }
 
     /** @hidden */
-    _searchAction(input: InputGroupInputDirective): void {
+    _searchAction(input: FormControlComponent): void {
         const inputElement = input.elementRef().nativeElement as HTMLInputElement;
         inputElement.focus();
     }
@@ -583,7 +587,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
         if (this.showSelectionTab) {
             this._dsSubscription = new Subscription();
 
-            const dsSub = this.openDataStream(ds)
+            const dsSub = this.openDataStream()
                 .pipe(takeUntil(this._destroyed))
                 .subscribe((data) => {
                     this._displayedData = data.slice();
@@ -672,7 +676,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
     }
 
     /** @hidden */
-    private openDataStream(ds: FdpValueHelpDialogDataSource<T>): Observable<T[]> {
+    private openDataStream(): Observable<T[]> {
         if (this._dataSource) {
             this._dataSource.match();
 

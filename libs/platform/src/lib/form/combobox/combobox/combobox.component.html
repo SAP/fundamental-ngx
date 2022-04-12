@@ -2,7 +2,6 @@
 
 <ng-template #desktopTemplate>
     <fd-popover
-        [class.fd-combobox-full-width]="isSearch"
         [isOpen]="isOpen && _suggestions.length > 0"
         (isOpenChange)="isOpenChangeHandle($event)"
         [fillControlMode]="fillControlMode"
@@ -34,7 +33,7 @@
             [compact]="contentDensity | isCompactDensity"
             [button]="!readonly"
             [glyph]="!readonly ? 'navigation-down-arrow' : ' '"
-            [state]="mobile && isOpen ? null : status === 'error' ? 'error' : state"
+            [state]="mobile && isOpen ? null : state"
             [buttonFocusable]="buttonFocusable"
             [disabled]="disabled"
             [readonly]="readonly"

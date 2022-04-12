@@ -116,6 +116,18 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
     @Input()
     unifiedLayout = true;
 
+    /** Whether current step is a branching step. */
+    @Input()
+    isBranchingStep = false;
+
+    /** Whether current step is completed */
+    @Input()
+    isCurrentStepCompleted = false;
+
+    /** Whether order of steps was changed  */
+    @Input()
+    stepsOrderChanged = false;
+
     /**
      * @description Array of visible Wizard Steps.
      */

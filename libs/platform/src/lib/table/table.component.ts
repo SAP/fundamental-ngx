@@ -637,7 +637,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     private contentDensityManuallySet = false;
 
     /** @hidden */
-    private get _selectionColumnWidth(): number {
+    get _selectionColumnWidth(): number {
         return this._isShownSelectionColumn ? SELECTION_COLUMN_WIDTH.get(this.contentDensity) : 0;
     }
 

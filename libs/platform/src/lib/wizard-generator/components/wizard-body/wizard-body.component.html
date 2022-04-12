@@ -54,7 +54,7 @@
                                 </ng-template>
                                 <ng-template
                                     [ngIf]="
-                                        (isBranchingStep && (!isCurrentStepCompleted || _stepsOrderChanged)) ||
+                                        (isBranchingStep && (!isCurrentStepCompleted || stepsOrderChanged)) ||
                                         !isNextStepSummary
                                     "
                                     [ngIfElse]="reviewButton"

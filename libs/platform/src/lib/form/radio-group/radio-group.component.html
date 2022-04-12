@@ -52,7 +52,7 @@
         <div fd-form-item>
             <fdp-radio-button
                 [name]="name"
-                [value]="lookupValue(item)"
+                [value]="_lookupValueFn(item)"
                 [contentDensity]="contentDensity"
                 [state]="state"
                 [disabled]="_getListItemDisabledValue(item)"

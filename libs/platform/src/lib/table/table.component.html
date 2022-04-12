@@ -156,7 +156,7 @@
                         <!-- Freeze -->
                         <ng-container *ngIf="column.freezable">
                             <li
-                                *ngIf="!_freezableColumns?.has(column.name); else unfreeze"
+                                *ngIf="!_freezableColumns?.has(column.name); else unfreezeTpl"
                                 class="fd-table__item--clickable"
                                 fd-list-item
                                 (click)="freezeToColumn(column.name)"
@@ -165,7 +165,7 @@
                                 <span></span>
                                 <span fd-list-title i18n="@@platformTableHeaderMenuFreeze">Freeze</span>
                             </li>
-                            <ng-template #unfreeze>
+                            <ng-template #unfreezeTpl>
                                 <li
                                     class="fd-table__item--clickable"
                                     fd-list-item
