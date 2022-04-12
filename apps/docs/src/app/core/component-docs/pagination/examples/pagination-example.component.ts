@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { of } from 'rxjs';
 import { tap, delay } from 'rxjs/operators';
 import { PaginationComponent } from '@fundamental-ngx/core/pagination';
 
@@ -13,8 +13,9 @@ import { PaginationComponent } from '@fundamental-ngx/core/pagination';
             [currentPage]="currentPage"
             ariaLabel="Basic pagination example"
         ></fd-pagination>
-        <br /><br />
+
         <button fd-button label="Go to page 1" (click)="goToPage(1)"></button>
+
         <div *ngIf="notification">{{ notification }}</div>
     `
 })
@@ -27,13 +28,12 @@ export class PaginationExampleComponent {
     @ViewChild(PaginationComponent) paginationComponent: PaginationComponent;
 
     newPageClicked(event: number): void {
-        this.http
-            .get('assets/pagination-data.json')
+        of(1)
             .pipe(
                 tap(() => {
                     this.notification = 'loading...';
                 }),
-                delay(100)
+                delay(1000)
             )
             .subscribe(
                 () => {
@@ -54,6 +54,4 @@ export class PaginationExampleComponent {
     goToPage(page: number): void {
         this.paginationComponent.goToPage(page);
     }
-
-    constructor(private http: HttpClient) {}
 }

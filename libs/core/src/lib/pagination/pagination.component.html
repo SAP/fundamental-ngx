@@ -31,7 +31,7 @@
             (click)="goToFirstPage()"
             (keyup.enter)="goToFirstPage()"
             (keydown.space)="$event.preventDefault()"
-            (keyup.space)="goToFirstPage($event)"
+            (keyup.space)="goToFirstPage()"
         ></button>
 
         <button
@@ -48,7 +48,7 @@
             (click)="previousPage()"
             (keyup.enter)="previousPage()"
             (keydown.space)="$event.preventDefault()"
-            (keyup.space)="previousPage($event)"
+            (keyup.space)="previousPage()"
         ></button>
 
         <!-- Duplicated to preserve the items order for keyboard navigation -->
