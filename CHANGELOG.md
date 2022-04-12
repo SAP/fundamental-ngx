@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.13...v0.34.3-rc.14) (2022-04-12)
+
+
+### Features
+
+* **platform:** enhancement of form generator and form container ([#7964](https://github.com/SAP/fundamental-ngx/issues/7964)) ([7373bd7](https://github.com/SAP/fundamental-ngx/commit/7373bd7cf05d7601a1c53ced27f2f9f04e86fa30))
+
 ### [0.34.3-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.12...v0.34.3-rc.13) (2022-04-12)
 
 
