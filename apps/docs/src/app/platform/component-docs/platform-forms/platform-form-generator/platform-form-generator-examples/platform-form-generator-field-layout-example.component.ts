@@ -44,7 +44,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
         {
             type: 'input',
             name: 'name1',
-            message: 'Your name: XL: 1, L: 2, M: 1, S: 2',
+            message: 'Your Name: XL: 1, L: 2, M: 1, S: 2',
             default: 'John',
             placeholder: 'Please provide your name',
             guiOptions: {
@@ -83,7 +83,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
             type: 'number',
             name: 'age1',
             controlType: 'number',
-            message: () => 'Your age: XL: 1, L: 2, M: 1, S: 1',
+            message: () => 'Your Age: XL: 1, L: 2, M: 1, S: 1',
             default: '18',
             validators: [Validators.required],
             guiOptions: {
@@ -94,7 +94,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
         {
             type: 'editor',
             name: 'bio1',
-            message: 'Your biography: XL: 2, L: 1, M: 2, S: 1',
+            message: 'Your Biography: XL: 2, L: 1, M: 2, S: 1',
             guiOptions: {
                 columnLayout: { XL: 2, L: 1, M: 2, S: 1 },
                 hint: 'XL: 2, L: 1, M: 2, S: 1'
@@ -103,7 +103,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
         {
             type: 'checkbox',
             name: 'citizenship1',
-            message: 'Your citizenship: XL: 2 true, L: 1 false, M: 2 true, S: 1 false',
+            message: 'Your Citizenship: XL: 2 true, L: 1 false, M: 2 true, S: 1 false',
             guiOptions: {
                 inline: true,
                 columnLayout: { XL: 2, L: 1, M: 2, S: 1 },
@@ -124,7 +124,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
         {
             type: 'list',
             name: 'department1',
-            message: 'Department you work in: column: 2',
+            message: 'Department You Work In: column: 2',
             validators: [Validators.required],
             default: 'IT',
             choices: ['IT', 'Accounting', 'Management'],
@@ -136,7 +136,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
         {
             type: 'list',
             name: 'main_speciality1',
-            message: 'Main speciality: XL: 2, L: 1, M: 1, S: 1',
+            message: 'Main Speciality: XL: 2, L: 1, M: 1, S: 1',
             validators: [Validators.required],
             choices: async () => {
                 await dummyAwaitablePromise();
@@ -154,7 +154,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
         {
             type: 'confirm',
             name: 'agree1',
-            message: 'Do you agree with terms and conditions?: XL: 2, L: 1, M: 2, S: 1',
+            message: 'Do You Agree With Terms And Conditions?: XL: 2, L: 1, M: 2, S: 1',
             choices: ['Yes', 'No'],
             validators: [Validators.required],
             validate: async (value) => {
@@ -169,7 +169,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
         {
             type: 'radio',
             name: 'choose_best_option1',
-            message: 'Primary front-end framework: XL: 2 false, L: 1 true, M: 1 false, S: 1 true',
+            message: 'Primary Front-end Framework: XL: 2 false, L: 1 true, M: 1 false, S: 1 true',
             choices: ['Angular', 'React', 'VueJS'],
             guiOptions: {
                 columnLayout: { XL: 2, L: 1, M: 1 },
@@ -182,7 +182,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
         {
             type: 'datepicker',
             name: 'birthday1',
-            message: 'Your birthday: XL: 1, L: 2, M: 1, S: 1',
+            message: 'Your Birthday: XL: 1, L: 2, M: 1, S: 1',
             guiOptions: {
                 columnLayout: { XL: 1, L: 2, M: 1, S: 1 },
                 hint: 'XL: 1, L: 2, M: 1, S: 1'
@@ -195,7 +195,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
         {
             type: 'switch',
             name: 'enable_feature1',
-            message: 'Enable some analytics',
+            message: 'Enable Some Analytics',
             default: false,
             guiOptions: {
                 additionalData: {

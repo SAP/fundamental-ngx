@@ -28,7 +28,7 @@ export class PlatformFormGeneratorCustomFieldLayoutExampleComponent {
         {
             type: 'input',
             name: 'formGroupColumnDefinition',
-            message: 'Form container column layout definition',
+            message: 'Form Container Column Layout Definition',
             default: 'John',
             placeholder: 'Please provide your first name',
             guiOptions: {
@@ -39,8 +39,9 @@ export class PlatformFormGeneratorCustomFieldLayoutExampleComponent {
         },
         {
             name: 'personalInformation',
-            message: 'Form field group column layout definition',
+            message: 'Form Field Group Column Layout Definition',
             guiOptions: {
+                hint: 'Some hint?',
                 labelColumnLayout: { S: 12, M: 4 },
                 fieldColumnLayout: { S: 12, M: 8 }
             },
@@ -48,7 +49,7 @@ export class PlatformFormGeneratorCustomFieldLayoutExampleComponent {
                 {
                     type: 'input',
                     name: 'firstName',
-                    message: 'Your name',
+                    message: 'Your Name',
                     default: 'John',
                     placeholder: 'Please provide your first name',
                     guiOptions: {
@@ -60,7 +61,7 @@ export class PlatformFormGeneratorCustomFieldLayoutExampleComponent {
                 {
                     type: 'input',
                     name: 'secondName',
-                    message: 'Your name',
+                    message: 'Your Name',
                     default: 'Doe',
                     placeholder: 'Please provide your second name',
                     guiOptions: {
@@ -73,13 +74,13 @@ export class PlatformFormGeneratorCustomFieldLayoutExampleComponent {
         },
         {
             name: 'contactInformation',
-            message: 'Individual column layout per field',
+            message: 'Individual Column Layout Per Field',
             items: [
                 {
                     type: 'input',
                     name: 'state',
                     message: 'State/Province',
-                    placeholder: 'Please provide your state or province name',
+                    placeholder: 'Please Provide Your State Or Province Name',
                     guiOptions: {
                         hint: 'Some contextual hint',
                         column: 1,
@@ -92,7 +93,7 @@ export class PlatformFormGeneratorCustomFieldLayoutExampleComponent {
                     type: 'input',
                     name: 'street',
                     message: 'Street',
-                    placeholder: 'Please provide your street name',
+                    placeholder: 'Please Provide Your Street Name',
                     guiOptions: {
                         hint: 'Some contextual hint',
                         column: 2,

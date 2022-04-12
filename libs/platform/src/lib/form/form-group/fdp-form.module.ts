@@ -12,6 +12,7 @@ import { InputMessageGroupWithTemplate } from '../input-message-group-with-templ
 import { FormFieldGroupComponent } from './form-field-group/form-field-group.component';
 import { FormFieldControlExtrasComponent } from './form-field-extras/form-field-extras.component';
 import { FormGroupHeaderComponent } from './form-group-header/form-group-header.component';
+import { LinkModule } from '@fundamental-ngx/core/link';
 
 const EXPORTABLE_DECLARATIONS = [
     FormGroupComponent,
@@ -31,7 +32,8 @@ const EXPORTABLE_DECLARATIONS = [
         FdFormModule,
         InlineHelpModule,
         PopoverModule,
-        IconModule
+        IconModule,
+        LinkModule
     ],
     exports: [...EXPORTABLE_DECLARATIONS]
 })

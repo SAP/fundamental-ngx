@@ -244,7 +244,7 @@ describe('Form generator test suite', () => {
         if (section === defaultExample) {
             expect(getElementClass(section + mainSpecialitySelect)).toContain(
                 'is-error',
-                'element is not highlited by error'
+                'element is not highlighted by error'
             );
         }
 

@@ -10,17 +10,7 @@
             <ng-template [ngTemplateOutlet]="labelTemplate"></ng-template>
         </div>
         <ng-container *ngTemplateOutlet="withFormMessage"></ng-container>
-        <div class="fd-col" [class]="_gapColumnLayoutClass" [style.text-overflow]="'clip'">
-            <ng-container *ngIf="hintTarget === 'input' && hintOptions.text">
-                <fd-icon
-                    [fd-inline-help]="hintOptions.text"
-                    [glyph]="hintOptions.glyph"
-                    [placement]="hintOptions.placement"
-                    [triggers]="hintOptions.trigger"
-                >
-                </fd-icon>
-            </ng-container>
-        </div>
+        <ng-container *ngTemplateOutlet="gapTemplate"></ng-container>
     </div>
     <span aria-hidden="true" style="display: none" [id]="'fdp-form-hint-' + id">{{ hintOptions.text }}</span>
 </ng-template>
@@ -56,7 +46,7 @@
             [inlineHelpTriggers]="hintOptions.trigger"
             [alignLabelEnd]="isHorizontal$ | async"
         >
-            <span [id]="'fdp-form-label-content-' + id">{{ label | titlecase }}</span>
+            <span [id]="'fdp-form-label-content-' + id">{{ label }}</span>
         </label>
     </ng-container>
     <ng-template #withoutHint>
@@ -66,7 +56,27 @@
             fd-form-label
             [alignLabelEnd]="isHorizontal$ | async"
         >
-            <span [id]="'fdp-form-label-content-' + id">{{ label | titlecase }}</span>
+            <span [id]="'fdp-form-label-content-' + id">{{ label }}</span>
         </label>
+    </ng-template>
+</ng-template>
+
+<ng-template #gapTemplate>
+    <ng-container *ngIf="hintTarget === 'input' && hintOptions.text; else withoutHint">
+        <div class="fd-col fd-form-field-inline-help-container" [class]="_gapColumnLayoutClass">
+            <span fd-link [undecorated]="true">
+                <fd-icon
+                    [fd-inline-help]="hintOptions.text"
+                    [glyph]="hintOptions.glyph"
+                    [placement]="hintOptions.placement"
+                    [triggers]="hintOptions.trigger"
+                    tabindex="0"
+                >
+                </fd-icon>
+            </span>
+        </div>
+    </ng-container>
+    <ng-template #withoutHint>
+        <div class="fd-col" [class]="_gapColumnLayoutClass"></div>
     </ng-template>
 </ng-template>

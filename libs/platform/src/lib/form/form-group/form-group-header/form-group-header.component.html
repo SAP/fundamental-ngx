@@ -1,13 +1,16 @@
 <ng-container *ngIf="hintOptions(fieldGroup) as HintOptions; else noHint">
     <ng-template #inlineHelpRef>
-        <fd-icon
-            [ariaLabel]="HintOptions.text"
-            [fd-inline-help]="HintOptions.text"
-            [glyph]="HintOptions.glyph"
-            [placement]="HintOptions.placement"
-            [triggers]="HintOptions.trigger"
-            tabindex="0"
-        ></fd-icon>
+        <span fd-link [undecorated]="true">
+            <fd-icon
+                [style.vertical-align]="'middle'"
+                [ariaLabel]="HintOptions.text"
+                [fd-inline-help]="HintOptions.text"
+                [glyph]="HintOptions.glyph"
+                [placement]="HintOptions.placement"
+                [triggers]="HintOptions.trigger"
+                tabindex="0"
+            ></fd-icon>
+        </span>
     </ng-template>
     <h1 class="fd-form-group__header-text">
         <ng-container *ngIf="HintOptions.position === 'before'">
