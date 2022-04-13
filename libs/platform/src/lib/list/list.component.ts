@@ -1,4 +1,6 @@
 import {
+    AfterContentChecked,
+    AfterContentInit,
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -21,7 +23,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { FocusKeyManager } from '@angular/cdk/a11y';
+import { FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
 import { NgControl, NgForm } from '@angular/forms';
 import { SelectionModel } from '@angular/cdk/collections';
 import { DOWN_ARROW, ENTER, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
@@ -67,9 +69,13 @@ let nextListGrpHeaderId = 0;
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['./list.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: FormFieldControl, useExisting: ListComponent, multi: true }]
+    providers: [{ provide: FormFieldControl, useExisting: ListComponent, multi: true }],
+    host: {
+        '[attr.tabindex]': '-1'
+    }
 })
-export class ListComponent<T> extends CollectionBaseInput implements OnInit, AfterViewInit, OnDestroy {
+export class ListComponent<T>
+    extends CollectionBaseInput implements OnInit, AfterViewInit, OnDestroy, AfterContentInit, AfterContentChecked {
     /** An array that holds a list of all selected items */
     @Input()
     selectedItems: BaseListItem[];
@@ -85,6 +91,10 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
     /** Title used on button when data loads on button click */
     @Input()
     loadTitle: string;
+
+    /** Label used on announce message of data was loaded for screen readers */
+    @Input()
+    loadedLabel = 'Loaded';
 
     /** Wait time for new items */
     @Input()
@@ -405,6 +415,71 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
         indicator?.setAttribute('aria-label', '');
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ngAfterContentChecked(): void {
+        if (!this.ariaSetsize) {
+            this.ariaSetsize = this.listItems.length;
+
+            for (let i = 0; i < this.listItems.length; i++) {
+                this.listItems.get(i).ariaPosinet = i + 1;
+            }
+
+            this._cd.markForCheck();
+        }
+    }
+
+    /**
+     * @hidden
+     * Setting values from list to list items
+     * example:
+     * Does list item has navigation,
+     * should show arrows,
+     * will it be compact mode,
+     * should be in which selection mode
+     * set values when passed via datasource
+     */
+    ngAfterContentInit(): void {
+        this._itemsSubscription = this.listItems.changes.subscribe((items) => {
+            if (this.listItems.length !== 0) {
+                this.listItems.first.listItem.nativeElement.setAttribute('tabindex', 0);
+            }
+
+            // verfiying partial navgation set for all items in one go
+            items.forEach((item) => {
+                if (item.navigationIndicator || item.listType === 'detail') {
+                    this._partialNavigation = true;
+                }
+            });
+            items.forEach((item) => {
+                if (!this._partialNavigation) {
+                    item.navigated = this.navigated;
+                    item.navigationIndicator = this.navigationIndicator;
+                    item.listType = this.listType;
+                }
+                item.contentDensity = this.contentDensity;
+                item.selectRow = this.selectRow;
+                item.selectionMode = this.selectionMode;
+                item._hasByLine = this.hasByLine;
+                this.stateChanges.next(item);
+            });
+        });
+    }
+
     /** @hidden */
     ngOnDestroy(): void {
         super.ngOnDestroy();
@@ -488,6 +563,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
                         this._items[i] = result[j];
                     }
                 }
+                this._liveAnnouncer.announce(this.loadedLabel, 'assertive');
                 this._loading = false;
                 this.stateChanges.next(this._items);
                 this._changeDetectorRef.markForCheck();
@@ -552,6 +628,15 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
     _selectItem(item: BaseListItem): void {
         this._selectionModel.select(item);
         this.stateChanges.next(item);
+    }
+
+    /** @hidden */
+    trackByFn(index: number, item: BaseListItem): string | number {
+        if (item) {
+            return item.id;
+        }
+
+        return index;
     }
 
     /** @hidden */

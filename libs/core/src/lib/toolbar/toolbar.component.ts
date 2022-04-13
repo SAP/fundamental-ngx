@@ -55,7 +55,10 @@ export const enum OverflowPriorityEnum {
     templateUrl: './toolbar.component.html',
     styleUrls: ['./toolbar.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        '[attr.tabindex]': '_tabIndex'
+    }
 })
 export class ToolbarComponent
     implements OnInit, AfterViewInit, OnDestroy, AfterViewChecked, CssClassBuilder, AfterContentInit
@@ -135,6 +138,11 @@ export class ToolbarComponent
 
     /** @hidden */
     overflowVisibility: Observable<boolean> = of(false);
+
+    /** @hidden */
+    get _tabIndex(): string {
+        return this.fdType === 'info' && this.active ? '0' : '-1';
+    }
 
     /** @hidden */
     private _subscriptions = new Subscription();

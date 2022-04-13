@@ -2,30 +2,79 @@
 <h5>Cozy Mode</h5>
 <fdp-list [noBorder]="true" [dataSource]="_dataSource" id="cozy-list">
     <fdp-standard-list-item *fdpItemDef="let address" [title]="address.name" [ariaLabel]="address.name">
+<h3 id="fd-list-imperative">Imperative Approach</h3>
+<h5 id="fd-list-header-1">Cozy Mode</h5>
+<fdp-list [noBorder]="true" [dataSource]="_dataSource">
+    <fdp-standard-list-item
+        *fdpItemDef="let address; let i"
+        [title]="address.name"
+        [ariaLabel]="address.name"
+        ariaDescribedBy="fd-list-imperative fd-list-header-1"
+    >
     </fdp-standard-list-item>
 </fdp-list>
+
 <br /><br />
 <h5>Compact Mode</h5>
 <fdp-list [noBorder]="true" [dataSource]="_dataSource" contentDensity="compact" id="compact-list">
     <fdp-standard-list-item *fdpItemDef="let address" [title]="address.name" [ariaLabel]="address.name">
+
+<h5 id="fd-list-header-2">Compact Mode</h5>
+<fdp-list [noBorder]="true" [dataSource]="_dataSource" contentDensity="compact">
+    <fdp-standard-list-item
+        *fdpItemDef="let address"
+        [title]="address.name"
+        [ariaLabel]="address.name"
+        ariaDescribedBy="fd-list-imperative fd-list-header-2"
+    >
     </fdp-standard-list-item>
 </fdp-list>
 
 <br /><br />
 
-<h3>Declrative Approach</h3>
-<h5>Cozy Mode</h5>
-<fdp-list [noBorder]="true">
-    <fdp-standard-list-item title="Title1" ariaLabel="firstRow"> </fdp-standard-list-item>
-    <fdp-standard-list-item title="Title2" ariaLabel="secondRow"> </fdp-standard-list-item>
-    <fdp-standard-list-item title="Title3" ariaLabel="thirdRow"> </fdp-standard-list-item>
-    <fdp-standard-list-item title="Title4" ariaLabel="fourthRow"> </fdp-standard-list-item>
+<h3 id="fd-list-declarative">Declarative Approach</h3>
+<h5 id="fd-list-header-3">Cozy Mode</h5>
+<fdp-list [noBorder]="true" ariaSetsize="4">
+    <fdp-standard-list-item
+        title="Title1"
+        ariaPosinet="1"
+        ariaDescribedBy="fd-list-declarative fd-list-header-3"
+    ></fdp-standard-list-item>
+    <fdp-standard-list-item
+        title="Title2"
+        ariaPosinet="2"
+        ariaDescribedBy="fd-list-declarative fd-list-header-3"
+    ></fdp-standard-list-item>
+    <fdp-standard-list-item
+        title="Title3"
+        ariaPosinet="3"
+        ariaDescribedBy="fd-list-declarative fd-list-header-3"
+    ></fdp-standard-list-item>
+    <fdp-standard-list-item
+        title="Title4"
+        ariaPosinet="4"
+        ariaDescribedBy="fd-list-declarative fd-list-header-3"
+    ></fdp-standard-list-item>
 </fdp-list>
+
 <br /><br />
-<h5>Compact Mode</h5>
+
+<h5 id="fd-list-header-4">Compact Mode</h5>
 <fdp-list contentDensity="compact" [noBorder]="true">
-    <fdp-standard-list-item title="Title1" ariaLabel="compact first row"> </fdp-standard-list-item>
-    <fdp-standard-list-item title="Title2" ariaLabel="compact second row"> </fdp-standard-list-item>
-    <fdp-standard-list-item title="Title3" ariaLabel="compact third row"> </fdp-standard-list-item>
-    <fdp-standard-list-item title="Title4" ariaLabel="compact fourth row"> </fdp-standard-list-item>
+    <fdp-standard-list-item
+        title="Title1"
+        ariaDescribedBy="fd-list-declarative fd-list-header-4"
+    ></fdp-standard-list-item>
+    <fdp-standard-list-item
+        title="Title2"
+        ariaDescribedBy="fd-list-declarative fd-list-header-4"
+    ></fdp-standard-list-item>
+    <fdp-standard-list-item
+        title="Title3"
+        ariaDescribedBy="fd-list-declarative fd-list-header-4"
+    ></fdp-standard-list-item>
+    <fdp-standard-list-item
+        title="Title4"
+        ariaDescribedBy="fd-list-declarative fd-list-header-4"
+    ></fdp-standard-list-item>
 </fdp-list>
