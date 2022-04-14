@@ -85,7 +85,7 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
     }
 
     /** @hidden */
-    thumbnailClick(selectedMedia: Media, event?: KeyboardEvent): void {
+    thumbnailClick(selectedMedia: Media, event?: Event): void {
         if (event instanceof KeyboardEvent && KeyUtil.isKeyCode(event, SPACE)) {
             event?.preventDefault();
         }
@@ -105,7 +105,7 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
         }
     }
 
-    openImage(image: Media, event?: KeyboardEvent): void {
+    openImage(image: Media, event?: Event): void {
         image.overlayRequired ? this.openDialog(image) : this.thumbnailClick(image, event);
     }
 }

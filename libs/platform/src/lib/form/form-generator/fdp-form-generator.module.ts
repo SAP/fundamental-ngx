@@ -27,6 +27,7 @@ import { DynamicFormGeneratorSwitchComponent } from './dynamic-form-generator-sw
 import { FormGeneratorService } from './form-generator.service';
 import { FormGeneratorFieldComponent } from './form-generator-field/form-generator-field.component';
 import { DynamicFormGeneratorMultiInputComponent } from './dynamic-form-generator-multi-input/dynamic-form-generator-multi-input.component';
+import { GetOrderedFieldControlsPipe } from './pipes/get-ordered-form-controls.pipe';
 import { PlatformMultiComboboxModule } from '../multi-combobox/multi-combobox.module';
 import { PlatformMultiInputModule } from '../multi-input/multi-input.module';
 
@@ -43,7 +44,8 @@ import { PlatformMultiInputModule } from '../multi-input/multi-input.module';
         DynamicFormGeneratorDatepickerComponent,
         DynamicFormGeneratorSwitchComponent,
         FormGeneratorFieldComponent,
-        DynamicFormGeneratorMultiInputComponent
+        DynamicFormGeneratorMultiInputComponent,
+        GetOrderedFieldControlsPipe
     ],
     imports: [
         CommonModule,

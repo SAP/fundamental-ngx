@@ -29,7 +29,7 @@ export class WizardSummarySectionComponent {
      * @description Sets current step on wizard.
      * @param event Mouse click event to prevent.
      */
-    _editStep(event: MouseEvent): void {
+    _editStep(event: MouseEvent | KeyboardEvent | TouchEvent): void {
         event.preventDefault();
         this.editStep.emit(this.step.id);
     }

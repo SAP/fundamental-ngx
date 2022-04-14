@@ -43,7 +43,6 @@ import {
 } from '@angular/core';
 import { AbstractControl, ControlContainer, FormGroup } from '@angular/forms';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { KeyValue } from '@angular/common';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
 
@@ -523,19 +522,11 @@ export class FormGroupComponent
     }
 
     /** @hidden */
-    isFieldGroupRow(row: KeyValue<FieldColumn, FieldGroup>): FieldColumn {
-        return row.value instanceof FieldGroup ? row.value.fields : row.value;
-    }
-
-    /** @hidden */
     buildComponentCssClass(): string[] {
         return ['fd-container', !this.compact ? 'fd-form-layout-grid-container' : '', this.class];
     }
 
-    /**
-     * @hidden
-     * Used for template side Type correction
-     */
+    /** @hidden used for template side Type correction */
     $fieldGroup = (f: any): FieldGroup => f;
 
     /** @hidden */

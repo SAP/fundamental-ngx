@@ -19,8 +19,8 @@ import { NgControl, NgForm } from '@angular/forms';
 import { CalendarYearGrid, DaysOfWeek, FdCalendarView } from '@fundamental-ngx/core/calendar';
 import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
-import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
-import { BaseInput, FormField, FormFieldControl, ControlState } from '@fundamental-ngx/platform/shared';
+import { Placement, SpecialDayRule, FormStates } from '@fundamental-ngx/core/shared';
+import { BaseInput, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
 import { createMissingDateImplementationError } from './errors';
 
 @Component({
@@ -121,11 +121,11 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
      */
     @Input()
-    set state(state: ControlState) {
+    set state(state: FormStates) {
         super.state = state;
     }
 
-    get state(): ControlState {
+    get state(): FormStates {
         if (this.dateTimePickerComponent?.isInvalidDateInput) {
             // if any other error from core dtp
             return 'error';

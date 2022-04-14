@@ -373,7 +373,7 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
     }
 
     /** @hidden */
-    _getOrderedControls(controls: DynamicFormGroupControls): (DynamicFormControl | DynamicFormControlGroup)[] {
+    private _getOrderedControls(controls: DynamicFormGroupControls): (DynamicFormControl | DynamicFormControlGroup)[] {
         return Object.values(controls).sort((a, b) => (a.formItem.rank > b.formItem.rank ? 1 : -1));
     }
 

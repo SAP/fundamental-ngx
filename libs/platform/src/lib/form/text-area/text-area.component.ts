@@ -20,7 +20,8 @@ import { NgControl, NgForm } from '@angular/forms';
 import { BACKSPACE, DELETE } from '@angular/cdk/keycodes';
 
 import { ContentDensity, KeyUtil } from '@fundamental-ngx/core/utils';
-import { BaseInput, ControlState, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
+import { FormStates } from '@fundamental-ngx/core/shared';
+import { BaseInput, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
 import { TextAreaConfig } from './text-area.config';
 
 const VALID_WRAP_TYPES = ['hard', 'soft', 'off'];
@@ -104,14 +105,14 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
      * @deprecated
      * set state of individual checkbox. Used by CBG to set checkbox states */
     @Input()
-    get stateType(): ControlState {
+    get stateType(): FormStates {
         if (isDevMode()) {
             console.warn('"stateType" is deprecated. Use "state" instead');
         }
         return super.state;
     }
 
-    set stateType(state: ControlState) {
+    set stateType(state: FormStates) {
         if (isDevMode()) {
             console.warn('"stateType" is deprecated. Use "state" instead');
         }
@@ -340,7 +341,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     /**
      * get the updated state when character count breaches `maxLength`
      */
-    getUpdatedState(): ControlState {
+    getUpdatedState(): FormStates {
         if (this._getContentLength() > this.maxLength) {
             this.hasTextExceeded = true; // set flag for error message to also change accordingly
             this.counterExcessOrRemaining = this.excessText;

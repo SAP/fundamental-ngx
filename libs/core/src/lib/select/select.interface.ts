@@ -1,7 +1,6 @@
 import { EventEmitter, InjectionToken, QueryList, ElementRef } from '@angular/core';
 
 import { OptionComponent } from './option/option.component';
-import { FdSelectChange } from './select.component';
 import { MobileMode } from '@fundamental-ngx/core/mobile-mode';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
@@ -24,7 +23,7 @@ export interface SelectInterface extends MobileMode {
     _liveAnnouncer: LiveAnnouncer;
 
     isOpenChange: EventEmitter<boolean>;
-    valueChange: EventEmitter<FdSelectChange>;
+    valueChange: EventEmitter<any>;
 
     close(forceClose?: boolean): void;
     open(): void;

@@ -152,7 +152,7 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
     }
 
     /** @hidden */
-    onCheckboxClick(index: number, source: 'contentChildren' | 'list', event?: PointerEvent): void {
+    onCheckboxClick(index: number, source: 'contentChildren' | 'list', event?: MouseEvent): void {
         // this handler will be invoked after "valueChange"
         const queryList = source === 'list' ? this.viewCheckboxes : this.contentCheckboxes;
         const target = queryList.get(index);

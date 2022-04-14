@@ -1,6 +1,6 @@
 import { TemplateRef } from '@angular/core';
 
-import { ColumnAlign } from '../../enums/column-align.enum';
+import { ColumnAlignValue } from '../../enums/column-align.enum';
 import { FilterableColumnDataType } from '../../enums/filter-type.enum';
 
 export abstract class TableColumn {
@@ -14,7 +14,7 @@ export abstract class TableColumn {
     abstract label: string;
 
     /** Cell text alignment. */
-    abstract align: ColumnAlign;
+    abstract align: ColumnAlignValue;
 
     /** Toggles sort feature in the column header. */
     abstract sortable: boolean;

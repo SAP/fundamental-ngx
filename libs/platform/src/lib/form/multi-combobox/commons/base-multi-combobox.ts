@@ -17,7 +17,6 @@ import {
     ViewChild
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
-import { SafeHtml } from '@angular/platform-browser';
 import {
     BACKSPACE,
     CONTROL,
@@ -334,7 +333,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     private _previousState: 'success' | 'error' | 'warning' | 'default' | 'information';
 
     /** @hidden */
-    private _previousStateMessage: string | SafeHtml;
+    private _previousStateMessage: string;
 
     /** @hidden */
     protected readonly _rangeSelector = new RangeSelector();

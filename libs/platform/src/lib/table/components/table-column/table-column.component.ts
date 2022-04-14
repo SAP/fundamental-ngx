@@ -17,7 +17,7 @@ import { map, switchMap, takeUntil } from 'rxjs/operators';
 
 import { RtlService } from '@fundamental-ngx/core/utils';
 
-import { ColumnAlign } from '../../enums/column-align.enum';
+import { ColumnAlign, ColumnAlignValue } from '../../enums/column-align.enum';
 import { FilterableColumnDataType } from '../../enums/filter-type.enum';
 import { FdpCellDef, FdpEditableCellDef } from '../../directives/table-cell.directive';
 import { FdpHeaderCellDef } from '../../directives/table-header.directive';
@@ -25,12 +25,6 @@ import { FdpHeaderCellDef } from '../../directives/table-header.directive';
 import { TableColumn } from './table-column';
 import { TableService } from '../../table.service';
 import { TableColumnResizeService } from '../../table-column-resize.service';
-
-enum ColumnAlignEnum {
-    Start = 'left',
-    Center = 'center',
-    End = 'right'
-}
 
 /**
  * The component that represents a table column.
@@ -72,28 +66,24 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
     label: string;
 
     /** Cell text alignment. */
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    /** @ts-ignore */
-    @Input() set align(align: ColumnAlign) {
-        let _align = ColumnAlignEnum.Start;
+    @Input() set align(align: ColumnAlignValue) {
+        let _align = ColumnAlign.START;
 
         switch (align) {
             case ColumnAlign.CENTER:
-                _align = ColumnAlignEnum.Center;
+                _align = ColumnAlign.CENTER;
                 break;
             case ColumnAlign.END:
-                _align = ColumnAlignEnum.End;
+                _align = ColumnAlign.END;
                 break;
             case ColumnAlign.START:
-                _align = ColumnAlignEnum.Start;
+                _align = ColumnAlign.START;
         }
 
         this._align$.next(_align);
     }
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    /** @ts-ignore */
-    get align(): string {
+    get align(): ColumnAlignValue {
         return this._align;
     }
 
@@ -161,10 +151,10 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
     }
 
     /** @hidden */
-    private _align$: BehaviorSubject<ColumnAlignEnum> = new BehaviorSubject<ColumnAlignEnum>(null);
+    private _align$: BehaviorSubject<ColumnAlign> = new BehaviorSubject<ColumnAlign>(null);
 
     /** @hidden */
-    private _align: ColumnAlignEnum;
+    private _align: ColumnAlignValue;
 
     /** @hidden */
     private _destroyed = new Subject<void>();
@@ -225,13 +215,13 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
                     }
 
                     return this._rtlService.rtl.pipe(
-                        map((isRtl): ColumnAlignEnum => {
-                            if (isRtl && align === ColumnAlignEnum.Start) {
-                                return ColumnAlignEnum.End;
+                        map((isRtl): ColumnAlign => {
+                            if (isRtl && align === ColumnAlign.START) {
+                                return ColumnAlign.END;
                             }
 
-                            if (isRtl && align === ColumnAlignEnum.End) {
-                                return ColumnAlignEnum.Start;
+                            if (isRtl && align === ColumnAlign.END) {
+                                return ColumnAlign.START;
                             }
 
                             return align;

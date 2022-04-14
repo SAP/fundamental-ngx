@@ -30,6 +30,7 @@ import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap }
 
 import {
     ContentDensityEnum,
+    ContentDensity,
     ContentDensityService,
     FdDropEvent,
     intersectionObservable,
@@ -47,7 +48,14 @@ import { EditableTableCell } from './table-cell.class';
 import { TableService } from './table.service';
 import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilter, TableState } from './interfaces';
 import { SearchInput } from './interfaces/search-field.interface';
-import { FILTER_STRING_STRATEGY, FilterableColumnDataType, SelectionMode, SortDirection, TableRowType } from './enums';
+import {
+    FILTER_STRING_STRATEGY,
+    FilterableColumnDataType,
+    SelectionMode,
+    SelectionModeValue,
+    SortDirection,
+    TableRowType
+} from './enums';
 import {
     DEFAULT_HIGHLIGHTING_KEY,
     DEFAULT_TABLE_STATE,
@@ -195,11 +203,11 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
     /** The content density for which to render table. 'cozy' | 'compact' | 'condensed' */
     @Input()
-    contentDensity: ContentDensityEnum = ContentDensityEnum.COZY;
+    contentDensity: ContentDensity = ContentDensityEnum.COZY;
 
     /** Sets selection mode for the table. 'single' | 'multiple' | 'none' */
     @Input()
-    selectionMode: SelectionMode = SelectionMode.NONE;
+    selectionMode: SelectionModeValue = SelectionMode.NONE;
 
     /** Toggle for page scrolling feature. */
     @Input()
@@ -1101,7 +1109,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
      * @hidden
      * Toggle selectable row in SelectionMode.MULTIPLE
      */
-    _toggleMultiSelectRow(rowToToggle: TableRow, index: number, event?: PointerEvent | KeyboardEvent): void {
+    _toggleMultiSelectRow(rowToToggle: TableRow, index: number, event?: Event): void {
         if (this.selectionMode !== SelectionMode.MULTIPLE) {
             throw new Error('Unexpected selection mode');
         }
@@ -1109,7 +1117,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         const rows = this._tableRows;
         const removed = [];
         const added = [];
-        this._rangeSelector.onRangeElementToggled(index, event);
+        this._rangeSelector.onRangeElementToggled(index, event as PointerEvent | KeyboardEvent);
 
         this._rangeSelector.applyValueToEachInRange((idx) => {
             const row = rows[idx];
@@ -1318,7 +1326,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     }
 
     /** @hidden */
-    _onRowClick(row: TableRow<T>, event?: KeyboardEvent): void {
+    _onRowClick(row: TableRow<T>, event?: Event): void {
         if (row.state !== 'readonly') {
             return;
         }

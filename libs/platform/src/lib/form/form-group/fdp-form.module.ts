@@ -13,6 +13,7 @@ import { FormFieldGroupComponent } from './form-field-group/form-field-group.com
 import { FormFieldControlExtrasComponent } from './form-field-extras/form-field-extras.component';
 import { FormGroupHeaderComponent } from './form-group-header/form-group-header.component';
 import { LinkModule } from '@fundamental-ngx/core/link';
+import { FieldGroupRowValuePipe } from './pipes/field-group-row-value.pipe';
 
 const EXPORTABLE_DECLARATIONS = [
     FormGroupComponent,
@@ -20,7 +21,8 @@ const EXPORTABLE_DECLARATIONS = [
     InputMessageGroupWithTemplate,
     FormFieldGroupComponent,
     FormFieldControlExtrasComponent,
-    FormGroupHeaderComponent
+    FormGroupHeaderComponent,
+    FieldGroupRowValuePipe
 ];
 
 @NgModule({

@@ -193,7 +193,7 @@
                                         fd-form-control
                                         [compact]="contentDensity | isCompactDensity"
                                         [id]="'fdp-table-column-filtering-' + column.name"
-                                        (keyup.enter)="_columnHeaderFilterBy(column.key, $event.target.value)"
+                                        (keyup.enter)="_columnHeaderFilterBy(column.key, $any($event.target)?.value)"
                                     />
                                 </div>
                             </li>
@@ -327,7 +327,6 @@
                                             [compact]="contentDensity | isCompactDensity"
                                             labelClass="fd-table__checkbox-label"
                                             [ngModel]="row.checked"
-                                            [disabled]="row.state === 'new'"
                                             (click)="_toggleMultiSelectRow(row, rowIdx, $event)"
                                             (keydown.enter)="_toggleMultiSelectRow(row, rowIdx, $event)"
                                             (keydown.space)="_toggleMultiSelectRow(row, rowIdx, $event)"

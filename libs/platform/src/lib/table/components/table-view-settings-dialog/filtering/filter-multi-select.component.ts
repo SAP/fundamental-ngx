@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 
 import { ContentDensity } from '@fundamental-ngx/core/utils';
 
-import { CollectionSelectFilter } from '../../../interfaces/collection-filter.interface';
+import { CollectionFilter } from '../../../interfaces/collection-filter.interface';
 import { TableFilterSelectOption } from '../../../interfaces/selection-value.interface';
 
 /**
@@ -24,7 +24,7 @@ export class FilterMultiSelectComponent {
 
     /** The filter model */
     @Input()
-    set filterBy(filterBy: CollectionSelectFilter) {
+    set filterBy(filterBy: CollectionFilter) {
         const filterByValue = filterBy?.value || [];
         this._selectableOptions = this.options.map(
             (option): SelectableOption => ({

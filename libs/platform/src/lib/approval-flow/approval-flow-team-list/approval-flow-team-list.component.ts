@@ -21,7 +21,7 @@ export class ApprovalFlowTeamListComponent {
     isRtl = false;
 
     @Input()
-    selectedTeamId: number;
+    selectedTeamId: string;
 
     @Output()
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
