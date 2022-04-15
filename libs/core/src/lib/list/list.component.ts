@@ -183,8 +183,13 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
 
     /** @hidden */
     private _listenOnItemsClick(): void {
-        /** Finish all of the streams, from before */
+        /** Finish all the streams, from before */
         this._onRefresh$.next();
+
+        if (!this.keyboardSupport) {
+            return;
+        }
+
         /** Merge refresh/destroy observables */
         const completion$ = merge(this._onRefresh$, this._onDestroy$);
         const interactionChangesIndexes: Observable<{ index: number; updateOnly: boolean }>[] = this._focusItems.map(
