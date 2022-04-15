@@ -93,7 +93,7 @@
             class="fd-input-group__addon fd-input-group__addon--button"
             [class.fd-input-group__addon--compact]="compact"
             [class.fd-shellbar__input-group-addon]="inShellbar"
-            *ngIf="isSearch && showClearButton && inputText && inputText.length > 0"
+            *ngIf="isSearch && showClearButton && inputText && inputText?.length > 0"
         >
             <button
                 fd-button
