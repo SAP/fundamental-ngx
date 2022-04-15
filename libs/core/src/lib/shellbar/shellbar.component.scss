@@ -1,5 +1,4 @@
 @import '~fundamental-styles/dist/shellbar';
-@import '~fundamental-styles/dist/counter';
 
 .fd-shellbar {
     // TODO: Investigate why this is necessary here but not in styles
@@ -13,10 +12,6 @@
 
     .fd-input-group__addon {
         background-color: transparent;
-    }
-
-    .fd-counter {
-        z-index: 1;
     }
 
     .fd-shellbar__group {

@@ -249,11 +249,11 @@ describe('ComboboxComponent', () => {
             expect(inputGroup.classList.contains('fd-shellbar__input-group')).toBeTrue();
 
             const input = fixture.nativeElement.querySelector('.fd-input');
-            expect(input.classList.contains('fd-shellbar__input-group__input')).toBeTrue();
+            expect(input.classList.contains('fd-shellbar__input-group-input')).toBeTrue();
 
             const addOns = fixture.nativeElement.querySelectorAll('.fd-input-group__addon');
             addOns.forEach((element) => {
-                expect(element.classList.contains('fd-shellbar__input-group__addon')).toBeTrue();
+                expect(element.classList.contains('fd-shellbar__input-group-addon')).toBeTrue();
                 const button = element.querySelector('.fd-button');
                 expect(button.classList.contains('fd-shellbar__button')).toBeTrue();
             });
