@@ -7,7 +7,7 @@
                 *ngFor="let colYears of _calendarYearListGrid; let rowIndex = index"
             >
                 <td
-                    class="fd-calendar__item"
+                    class="fd-button fd-button--transparent fd-calendar__item"
                     role="gridcell"
                     *ngFor="let yearCell of colYears; let colIndex = index"
                     [class.fd-calendar__item--current]="yearCell.current"
