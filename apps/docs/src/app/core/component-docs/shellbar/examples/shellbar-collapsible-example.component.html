@@ -10,9 +10,12 @@
         <fd-shellbar-logo>
             <a href="#" class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
         </fd-shellbar-logo>
+
         <fd-product-menu [control]="productMenuControl" [closePopoverOnSelect]="true" [items]="productMenuItems">
         </fd-product-menu>
+
         <fd-shellbar-subtitle> Subtitle </fd-shellbar-subtitle>
+
         <fd-shellbar-actions [user]="user" [userMenu]="userMenu">
             <fd-shellbar-action
                 *ngFor="let action of actions"
@@ -21,12 +24,13 @@
                 [label]="action.label"
                 [notificationCount]="action.notificationCount"
                 [notificationLabel]="action.notificationLabel"
-            >
-            </fd-shellbar-action>
+            ></fd-shellbar-action>
+
             <fd-product-switch>
                 <fd-product-switch-body [products]="productSwitcher" [forceListMode]="currentSize === 's'">
                 </fd-product-switch-body>
             </fd-product-switch>
+
             <fd-combobox
                 [(ngModel)]="searchTerm"
                 glyph="search"
@@ -34,8 +38,7 @@
                 placeholder="Type some text..."
                 maxHeight="250px"
                 [isSearch]="true"
-            >
-            </fd-combobox>
+            ></fd-combobox>
         </fd-shellbar-actions>
     </fd-shellbar>
 </div>

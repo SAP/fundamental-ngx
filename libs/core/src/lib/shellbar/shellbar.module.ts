@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ListModule } from '@fundamental-ngx/core/list';
 import { ShellbarComponent } from './shellbar.component';
 import { ProductMenuComponent } from './product-menu/product-menu.component';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
@@ -38,6 +39,7 @@ import { AvatarModule } from '@fundamental-ngx/core/avatar';
         CommonModule,
         PopoverModule,
         MenuModule,
+        ListModule,
         ButtonModule,
         DragAndDropModule,
         DragDropModule,

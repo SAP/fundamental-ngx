@@ -6,11 +6,8 @@
         (click)="callback ? callback($event) : ''"
         [glyph]="glyph"
     >
-        <span
-            *ngIf="notificationCount"
-            class="fd-counter fd-counter--notification fd-shellbar__counter--notification"
-            [attr.aria-label]="notificationLabel"
-            >{{ notificationCount }}</span
-        >
+        <span *ngIf="notificationCount" class="fd-button__badge" [attr.aria-label]="notificationLabel">
+            {{ notificationCount }}
+        </span>
     </button>
 </div>

@@ -1,4 +1,4 @@
-import { Directive, HostBinding } from '@angular/core';
+import { Directive } from '@angular/core';
 
 @Directive({
     selector: '[fdShellbarSidenav], [fd-shellbar-side-nav]',
@@ -6,8 +6,4 @@ import { Directive, HostBinding } from '@angular/core';
         class: 'fd-shellbar__button'
     }
 })
-export class ShellbarSidenavDirective {
-    /** @hidden */
-    @HostBinding('class.fd-shellbar-side-nav-control')
-    classSideNavUtility = true;
-}
+export class ShellbarSidenavDirective {}

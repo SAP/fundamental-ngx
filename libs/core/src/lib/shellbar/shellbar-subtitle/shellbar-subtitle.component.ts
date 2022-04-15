@@ -13,6 +13,13 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     selector: 'fd-shellbar-subtitle',
     templateUrl: './shellbar-subtitle.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    styles: [
+        `
+            fd-shellbar-subtitle {
+                display: flex;
+            }
+        `
+    ]
 })
 export class ShellbarSubtitleComponent {}

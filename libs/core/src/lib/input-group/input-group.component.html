@@ -21,14 +21,14 @@
             [compact]="compact"
             [button]="true"
             [placement]="placement"
-            [class.fd-shellbar__input-group__addon]="inShellbar"
+            [class.fd-shellbar__input-group-addon]="inShellbar"
         >
             <button
                 #button
                 fd-button
                 class="fd-input-group__button"
                 type="button"
-                fdType="transparent"
+                [fdType]="inShellbar ? 'standard' : 'transparent'"
                 [compact]="compact"
                 [id]="_addOnButtonId"
                 [attr.tabindex]="buttonFocusable ? 0 : -1"
@@ -74,7 +74,7 @@
         [(ngModel)]="inputText"
         [id]="_inputId"
         [attr.aria-labelledby]="_getAriaLabelledbyIdsForInput()"
-        [class.fd-shellbar__input-group__input]="inShellbar"
+        [class.fd-shellbar__input-group-input]="inShellbar"
         fd-input-group-input
         [compact]="compact"
         [type]="type"

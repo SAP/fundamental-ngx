@@ -403,6 +403,7 @@ export class ComboboxComponent
     /** @hidden */
     ngAfterViewInit(): void {
         this._addShellbarClass();
+
         if (this.mobile) {
             this._setUpMobileMode();
         }
@@ -640,7 +641,7 @@ export class ComboboxComponent
     /** @hidden */
     private _addShellbarClass(): void {
         if (this.inShellbar) {
-            this.searchInputElement.nativeElement.classList.add('fd-shellbar__input-group__input');
+            this.searchInputElement.nativeElement.classList.add('fd-shellbar__input-group-input');
             if (this.inputGroup) {
                 this.inputGroup.setInShellbar(true);
             }
