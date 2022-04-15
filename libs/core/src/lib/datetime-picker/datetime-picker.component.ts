@@ -162,7 +162,7 @@ export class DatetimePickerComponent<D>
 
     /** Actually shown active view one of 'day' | 'month' | 'year' in calendar component*/
     @Input()
-    public activeView: FdCalendarView = 'day';
+    activeView: FdCalendarView = 'day';
 
     /** Aria label for the datetime picker input. */
     @Input()
@@ -171,6 +171,14 @@ export class DatetimePickerComponent<D>
     /** Aria label for the button to show/hide the calendar. */
     @Input()
     displayDatetimeToggleLabel = 'Display calendar toggle';
+
+    /** Label for the "Date" button in display type switcher in mobile mode */
+    @Input()
+    displayTypeDateLabel = 'Date';
+
+    /** Label for the "Time" button in display type switcher in mobile mode */
+    @Input()
+    displayTypeTimeLabel = 'Time';
 
     /** Whether a null input is considered valid. */
     @Input()
@@ -349,6 +357,9 @@ export class DatetimePickerComponent<D>
 
     /** @hidden */
     _displayHours: boolean;
+
+    /** @hidden whether to display date or time in mobile mode */
+    _displayType: 'date' | 'time' = 'date';
 
     /** @hidden */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
