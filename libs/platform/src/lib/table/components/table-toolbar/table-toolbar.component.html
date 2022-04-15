@@ -7,9 +7,9 @@
     let-columns="columns"
 >
     <fd-toolbar fdType="transparent" [clearBorder]="true" [hasTitle]="!!title" [size]="size">
-        <label fd-toolbar-label [id]="tableToolbarTitleId"
-            >{{ title }} <span *ngIf="!hideItemCount">({{ counter }})</span></label
-        >
+        <label fd-toolbar-label [id]="tableToolbarTitleId" [class.fd-toolbar__title]="!!title">
+            {{ title }} <span *ngIf="!hideItemCount">({{ counter }})</span>
+        </label>
 
         <fd-toolbar-spacer></fd-toolbar-spacer>
 
