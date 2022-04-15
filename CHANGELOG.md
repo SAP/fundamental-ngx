@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.14...v0.34.3-rc.15) (2022-04-15)
+
+
+### Bug Fixes
+
+* **core:** time picker locale change incorrect behavior ([#7956](https://github.com/SAP/fundamental-ngx/issues/7956)) ([6e491ed](https://github.com/SAP/fundamental-ngx/commit/6e491ed8d9b61871f1af1e3c57fdb9413c137377))
+
 ### [0.34.3-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.13...v0.34.3-rc.14) (2022-04-12)
 
 
