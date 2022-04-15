@@ -7,7 +7,7 @@
                 *ngFor="let colMonths of _calendarMonthListGrid; let rowIndex = index"
             >
                 <td
-                    class="fd-calendar__item"
+                    class="fd-button fd-button--transparent fd-calendar__item"
                     role="gridcell"
                     *ngFor="let monthCell of colMonths; let colIndex = index"
                     [class.fd-calendar__item--current]="monthCell.current"
