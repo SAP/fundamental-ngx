@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.15...v0.34.3-rc.16) (2022-04-15)
+
+
+### Bug Fixes
+
+* **core:** datetime picker - add scroll for overflow ([#7933](https://github.com/SAP/fundamental-ngx/issues/7933)) ([b575e19](https://github.com/SAP/fundamental-ngx/commit/b575e19233bca4cecc1cd5f2b0afe02b6d285b46))
+
 ### [0.34.3-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.14...v0.34.3-rc.15) (2022-04-15)
 
 
