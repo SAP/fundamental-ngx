@@ -2,8 +2,8 @@ import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit } from '@a
 import { applyCssClass } from '@fundamental-ngx/core/utils';
 import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 
-type NumericContentState = 'negative' | 'critical' | 'positive' | 'informative' | null | 'neutral';
-type NumericContentSize = 's' | 'm' | 'l' | null;
+type NumericContentState = 'negative' | 'critical' | 'positive' | 'informative' | 'neutral';
+type NumericContentSize = 's' | 'm' | 'l';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
@@ -16,7 +16,7 @@ export class NumericContentDirective implements OnInit, OnChanges, CssClassBuild
 
     /** Size of the numeric content */
     @Input()
-    size: NumericContentSize;
+    size: NumericContentSize | null;
 
     /** @hidden */
     @HostBinding('class.fd-numeric-content')
@@ -134,7 +134,7 @@ export class NumericContentKpiContainerDirective {
 export class NumericContentKpiDirective implements OnInit, OnChanges, CssClassBuilder {
     /** State of the KPI. Options are neutral (default), 'positive', 'negative', 'critical', and 'informative'. */
     @Input()
-    state?: NumericContentState;
+    state?: NumericContentState | null;
 
     /** Apply user custom styles */
     @Input()
@@ -228,7 +228,7 @@ export class NumericContentScaleArrowDirective implements OnInit, OnChanges, Css
 export class NumericContentScaleDirective implements OnInit, OnChanges, CssClassBuilder {
     /** State of the SCALE. Options are neutral (default), 'positive', 'negative', 'critical', and 'informative'. */
     @Input()
-    state?: NumericContentState;
+    state?: NumericContentState | null;
 
     /** Apply user custom styles */
     @Input()

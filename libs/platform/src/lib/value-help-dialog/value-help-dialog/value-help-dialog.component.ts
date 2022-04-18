@@ -56,7 +56,7 @@ let vhiUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy {
+export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnDestroy {
     /** Id of the popover */
     @Input()
     id: string = 'fdp-vhd-' + vhiUniqueId++;
@@ -115,7 +115,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
     /** Tokenizer function for custom token render, it has higher prio that `tokenViewField`.
      * Required field if tokenViewField is not exist. */
     @Input()
-    tokenizerFn: () => void;
+    tokenizerFn: (item: T) => string;
 
     /** Whether the value help dialog should be view in mobile mode */
     @Input()
@@ -123,7 +123,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
 
     /** It should be able if you use multiple selection */
     @Input()
-    formatToken: (value: VhdValueChangeEvent) => void;
+    formatToken: (value: VhdValueChangeEvent<T>) => void;
 
     /** Tokenizer function for condition's token render */
     @Input()
@@ -196,7 +196,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
     /** Dialog outputs */
     /** Event emitted when filters/tokens were changed. */
     @Output()
-    valueChange = new EventEmitter<VhdValueChangeEvent>();
+    valueChange = new EventEmitter<VhdValueChangeEvent<T[]>>();
 
     /** Event emitted when data loading is started. */
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix

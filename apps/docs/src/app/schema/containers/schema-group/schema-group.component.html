@@ -11,7 +11,7 @@
                                 fd-form-control
                                 class="form-control"
                                 [attr.id]="'playground' + control.key"
-                                [formControl]="control.control"
+                                [formControl]="control.control | asFormControl"
                             >
                                 <option
                                     *ngFor="let value of control.enum; let i = index; let c = count"
@@ -34,7 +34,7 @@
                                 type="text"
                                 class="form-control"
                                 [attr.id]="'playground' + control.key"
-                                [formControl]="control.control"
+                                [formControl]="control.control | asFormControl"
                             />
                         </div>
                     </ng-template>
@@ -47,7 +47,7 @@
                             <select
                                 class="form-control"
                                 [attr.id]="'playground' + control.key"
-                                [formControl]="control.control"
+                                [formControl]="control.control | asFormControl"
                             >
                                 <option
                                     *ngFor="let value of control.enum; let i = index; let c = count"
@@ -70,7 +70,7 @@
                                 type="number"
                                 class="form-control"
                                 [attr.id]="'playground' + control.key"
-                                [formControl]="control.control"
+                                [formControl]="control.control | asFormControl"
                             />
                         </div>
                     </ng-template>
@@ -80,7 +80,7 @@
                     <div fd-form-item>
                         <fd-checkbox
                             [label]="control.key"
-                            [formControl]="control.control"
+                            [formControl]="control.control | asFormControl"
                             [inputId]="'playground' + control.key"
                         >
                         </fd-checkbox>
@@ -91,7 +91,7 @@
                     <div fd-form-item>
                         <fd-checkbox
                             [label]="control.key"
-                            [formControl]="control.control"
+                            [formControl]="control.control | asFormControl"
                             [inputId]="'playground' + control.key"
                         >
                         </fd-checkbox>
@@ -105,7 +105,7 @@
                 <legend fd-form-legend class="schema--sub-header">{{ control.key }}</legend>
 
                 <schema-group
-                    [schemaGroup]="control.control"
+                    [schemaGroup]="control.control | asFormGroup"
                     [properties]="properties[control.key].properties"
                 ></schema-group>
             </fieldset>

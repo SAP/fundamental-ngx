@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { FormStates } from '@fundamental-ngx/core/shared';
 import { ComboboxSelectionChangeEvent } from '@fundamental-ngx/platform/form';
 
 import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
@@ -29,8 +30,8 @@ export class MultiComboboxStatesExampleComponent {
         { name: 'Spinach' }
     ];
 
-    states = ['Default', 'Success', 'Error', 'Warning', 'Information'];
-    selectedState = this.states[0];
+    states: FormStates[] = ['default', 'success', 'error', 'warning', 'information'];
+    selectedState: FormStates = this.states[0];
 
     onSelectState(item: ComboboxSelectionChangeEvent): void {
         this.selectedState = item.payload;

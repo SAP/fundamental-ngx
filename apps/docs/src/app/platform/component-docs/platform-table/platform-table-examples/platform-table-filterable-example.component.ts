@@ -14,7 +14,8 @@ import {
     TableDataProvider,
     TableState,
     TableFilterSelectOption,
-    TableFilterChangeEvent
+    TableFilterChangeEvent,
+    FilterType
 } from '@fundamental-ngx/platform/table';
 
 @Component({
@@ -28,6 +29,7 @@ import {
     ]
 })
 export class PlatformTableFilterableExampleComponent {
+    readonly filterTypeEnum = FilterType;
     statusFilteringValues: TableFilterSelectOption[] = [
         { value: 'Out of stock', label: 'Out of stock' },
         { value: 'Stocked on demand', label: 'Stocked on demand' }

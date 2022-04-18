@@ -71,7 +71,7 @@
 
                 <fdp-column
                     fdp-smart-filter-bar-field-definition
-                    dataType="number"
+                    [dataType]="dataTypeEnum.NUMBER"
                     name="price"
                     key="price.value"
                     label="Price"
@@ -81,7 +81,7 @@
 
                 <fdp-column
                     fdp-smart-filter-bar-field-definition
-                    filterType="multi-select"
+                    [filterType]="filterTypeEnum.MULTI"
                     name="status"
                     key="status"
                     label="Status"
@@ -93,7 +93,7 @@
 
                 <fdp-column
                     fdp-smart-filter-bar-field-definition
-                    filterType="single-select"
+                    [filterType]="filterTypeEnum.SINGLE"
                     name="statusColor"
                     key="statusColor"
                     label="Status color"
@@ -104,7 +104,7 @@
 
                 <fdp-column
                     fdp-smart-filter-bar-field-definition
-                    dataType="date"
+                    [dataType]="dataTypeEnum.DATE"
                     name="date"
                     key="date"
                     label="Date"
@@ -112,8 +112,8 @@
 
                 <fdp-column
                     fdp-smart-filter-bar-field-definition
-                    filterType="single-select"
-                    dataType="boolean"
+                    [filterType]="filterTypeEnum.SINGLE"
+                    [dataType]="dataTypeEnum.BOOLEAN"
                     name="verified"
                     key="verified"
                     label="Verified"

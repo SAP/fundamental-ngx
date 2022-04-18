@@ -28,7 +28,8 @@ import {
     RESPONSIVE_BREAKPOINTS_CONFIG,
     ResponsiveBreakPointConfig,
     ResponsiveBreakpointsService,
-    coerceArraySafe
+    coerceArraySafe,
+    SelectItem
 } from '@fundamental-ngx/platform/shared';
 import { CheckboxComponent } from '../checkbox/checkbox.component';
 
@@ -208,7 +209,7 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
 
     /** @hidden */
     public getListItemDisabledValue(item: CheckboxGroupComponent['list'][number]): boolean {
-        return this.disabled || typeof item === 'string' ? this.disabled : item.disabled;
+        return this.disabled || (typeof item === 'object' && !!(<SelectItem>item).disabled);
     }
 
     /** @hidden */

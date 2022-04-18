@@ -2,6 +2,7 @@ import { Component, Renderer2, ElementRef, AfterViewInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { ListDataSource, DataProvider } from '@fundamental-ngx/platform/shared';
+import { SelectionChangeEvent } from '@fundamental-ngx/platform/list';
 
 const LIST_ELEMENTS: Address[] = [
     {
@@ -14,7 +15,7 @@ const LIST_ELEMENTS: Address[] = [
     {
         img: 'https://placeimg.com/400/400/nature',
         imgInfo: 'nature',
-        name: 'Yello',
+        name: 'Yellow',
         description: 'First text item in Byline (Standard text item)',
         info: 'Second text item in Byline (Can be semantic (Status) or not)'
     },
@@ -69,7 +70,7 @@ export class PlatformStandardListItemWithSingleSelectionExampleComponent impleme
         this._render.setStyle(toolbar, 'outline', 'none');
     }
 
-    _showItemInfo(event: any): void {
-        this._selectedItems = event.selectedItems[0].getAttribute('id');
+    selectionChange(event: SelectionChangeEvent): void {
+        this._selectedItems = event.selectedItems;
     }
 }

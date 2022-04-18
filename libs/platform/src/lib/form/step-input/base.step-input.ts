@@ -9,7 +9,7 @@ import { StepInputConfig } from './step-input.config';
 import { addAndCutFloatingNumberDistortion, getNumberDecimalLength } from './step-input.util';
 
 /** Change event object emitted by Platform Step Input component */
-export abstract class StepInputChangeEvent<T extends StepInputComponent = StepInputComponent, K = number> {
+export class StepInputChangeEvent<T extends StepInputComponent = StepInputComponent, K = number> {
     constructor(
         /** The source Step Input of the event. */
         public source: T,
@@ -18,7 +18,7 @@ export abstract class StepInputChangeEvent<T extends StepInputComponent = StepIn
     ) {}
 }
 
-export const enum StepInputAlign {
+export enum StepInputAlign {
     Left = 'left',
     Center = 'center',
     Right = 'right'
@@ -124,7 +124,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
 
     /** Emits new value when control value has changed */
     @Output()
-    valueChange: EventEmitter<StepInputChangeEvent> = new EventEmitter<StepInputChangeEvent>();
+    valueChange = new EventEmitter<StepInputChangeEvent>();
 
     /** @hidden */
     lastEmittedValue: number;

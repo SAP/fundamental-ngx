@@ -28,6 +28,8 @@ import {
 export class PlatformTableInitialStateExampleComponent {
     source: TableDataSource<ExampleItem>;
 
+    readonly sortDirectionEnum = SortDirection;
+
     constructor(datetimeAdapter: DatetimeAdapter<FdDate>) {
         this.source = new TableDataSource(new TableDataProviderExample(datetimeAdapter));
     }

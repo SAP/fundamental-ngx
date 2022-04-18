@@ -170,7 +170,7 @@ export class MultiInputComponent
      * See multi input examples for details.
      */
     @Input()
-    newTokenParseFn = this._defaultParse;
+    newTokenParseFn: (searchTerm: string) => any = this._defaultParse;
 
     /**
      * Validate function. Used to check if new token can be added into list.
@@ -514,7 +514,7 @@ export class MultiInputComponent
     /** @hidden */
     async _onCheckboxClick(
         value: any,
-        event: PointerEvent | KeyboardEvent,
+        event: MouseEvent | KeyboardEvent,
         index: number,
         isListItem = false
     ): Promise<void> {
@@ -535,7 +535,7 @@ export class MultiInputComponent
     }
 
     /** @hidden */
-    _onTokenClick(value: any, resetSearch: boolean, event?: PointerEvent): void {
+    _onTokenClick(value: any, resetSearch: boolean, event?: MouseEvent): void {
         event?.preventDefault(); // prevent this function from being called twice when checkbox updates
         this._handleSelect(false, value, resetSearch);
     }

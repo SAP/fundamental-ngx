@@ -23,6 +23,10 @@ export class PlatformChekboxTristateComponent implements AfterViewInit {
         agreements: new FormGroup({})
     });
 
+    get agreementsFormGroup(): FormGroup {
+        return this.registrationForm.get('agreements') as FormGroup;
+    }
+
     public choices: Record<string, any> = { termsAndConditions: true, marketing: true, newsletter: false };
 
     // code for nested form group with tristate checkbox.

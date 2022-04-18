@@ -143,7 +143,7 @@
                     [attr.aria-placeholder]="group.key"
                     [tabindex]="0"
                     class="fd-combobox-list-item"
-                    *ngFor="let term of group.value"
+                    *ngFor="let term of $any(group.value)"
                     [selected]="inputText === (term | displayFnPipe: displayFn)"
                     (keyDown)="onItemKeyDownHandler($event, term)"
                     (click)="onMenuClickHandler(term)"

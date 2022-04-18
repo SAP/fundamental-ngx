@@ -103,7 +103,7 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
      * Emitting checked event for non-form checkbox
      */
     @Output()
-    readonly checkedChange: EventEmitter<PlatformCheckboxChange> = new EventEmitter<PlatformCheckboxChange>();
+    readonly checkedChange = new EventEmitter<any>();
 
     /**
      * @deprecated use "checkedChange" instead
@@ -153,10 +153,11 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
      * Method to emit change event
      */
     private _emitChangeEvent(): void {
+        this.checkedChange.emit(this.value);
+
         const event = new PlatformCheckboxChange();
         event.source = this;
         event.checked = this.value;
-        this.checkedChange.emit(event);
         this.change.emit(event);
         this.indeterminateChange.emit(this.value === this.coreCheckbox?.values.thirdStateValue);
     }

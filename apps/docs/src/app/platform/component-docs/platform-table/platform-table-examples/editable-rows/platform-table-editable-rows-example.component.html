@@ -15,7 +15,7 @@
                     [(ngModel)]="item.name"
                     name="name-input"
                     type="text"
-                    required
+                    [required]="true"
                 ></fdp-input>
             </form>
         </fdp-table-cell>
@@ -23,10 +23,18 @@
 
     <fdp-column name="description" key="description" label="Description" [sortable]="true"> </fdp-column>
 
-    <fdp-column width="100px" name="price" key="price.value" dataType="number" label="Price" [sortable]="true">
+    <fdp-column
+        width="100px"
+        name="price"
+        key="price.value"
+        [dataType]="dataTypeEnum.NUMBER"
+        label="Price"
+        [sortable]="true"
+    >
     </fdp-column>
 
-    <fdp-column name="verified" key="verified" dataType="boolean" label="Verified" [sortable]="true"> </fdp-column>
+    <fdp-column name="verified" key="verified" [dataType]="dataTypeEnum.BOOLEAN" label="Verified" [sortable]="true">
+    </fdp-column>
 
     <fdp-column name="status" key="status" label="Status" [sortable]="true">
         <fdp-table-cell *fdpEditableCellDef="let item">
@@ -38,7 +46,7 @@
         </fdp-table-cell>
     </fdp-column>
 
-    <fdp-column name="date" key="date" dataType="date" label="Date" [sortable]="true">
+    <fdp-column name="date" key="date" [dataType]="dataTypeEnum.DATE" label="Date" [sortable]="true">
         <fdp-table-cell *fdpCellDef="let item">
             {{ item.date?.toDateString() }}
         </fdp-table-cell>

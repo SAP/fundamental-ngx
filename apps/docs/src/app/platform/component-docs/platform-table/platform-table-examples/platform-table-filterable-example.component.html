@@ -14,7 +14,7 @@
 
 <!-- View Settings Dialog-->
 <fdp-table-view-settings-dialog [table]="table">
-    <fdp-table-view-settings-filter column="price" label="Price" type="custom">
+    <fdp-table-view-settings-filter column="price" label="Price" [type]="filterTypeEnum.CUSTOM">
         <ng-container *fdpViewSettingsFilterCustomDef="let model; let tableDensity = contentDensity">
             <fdp-form-group #fg1 [compact]="tableDensity !== 'cozy'" columnLayout="XL1-L1-M1-S1" labelLayout="vertical">
                 <fdp-form-field label="Minimum Price">
@@ -37,12 +37,17 @@
         </ng-container>
     </fdp-table-view-settings-filter>
 
-    <fdp-table-view-settings-filter column="status" type="multi-select" label="Status" [values]="statusFilteringValues">
+    <fdp-table-view-settings-filter
+        column="status"
+        [type]="filterTypeEnum.MULTI"
+        label="Status"
+        [values]="statusFilteringValues"
+    >
     </fdp-table-view-settings-filter>
 
     <fdp-table-view-settings-filter
         column="statusColor"
-        type="single-select"
+        [type]="filterTypeEnum.SINGLE"
         label="Status Color"
         [values]="statusColorFilteringValues"
     >
