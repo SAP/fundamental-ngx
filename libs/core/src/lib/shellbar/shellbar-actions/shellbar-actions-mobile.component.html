@@ -1,30 +1,24 @@
 <div class="fd-shellbar-collapse">
-    <fd-popover [focusAutoCapture]="true" placement="bottom-end">
-        <fd-popover-control>
+    <fd-action-sheet placement="bottom-end">
+        <fd-action-sheet-control>
             <button fd-button glyph="overflow" class="fd-shellbar__button" [attr.aria-label]="collapsedItemMenuLabel">
                 <span *ngIf="totalNotifications" class="fd-button__badge">
                     {{ totalNotifications }}
                 </span>
             </button>
-        </fd-popover-control>
+        </fd-action-sheet-control>
 
-        <fd-popover-body>
-            <ul fd-list>
-                <li fd-list-item *ngFor="let action of shellbarActions" tabindex="-1">
-                    <button
-                        fd-button
-                        fdType="transparent"
-                        class="fd-button--full-width fd-button--text-alignment-left fd-shellbar__button"
-                        [glyph]="action.glyph"
-                        [label]="action.label"
-                        (click)="actionClicked(action, $event)"
-                    >
-                        <span *ngIf="action.notificationCount" class="fd-button__badge">{{
-                            action.notificationCount
-                        }}</span>
-                    </button>
-                </li>
-            </ul>
-        </fd-popover-body>
-    </fd-popover>
+        <fd-action-sheet-body>
+            <li
+                fd-action-sheet-item
+                *ngFor="let action of shellbarActions"
+                tabindex="-1"
+                [glyph]="action.glyph"
+                [label]="action.label"
+                (click)="actionClicked(action, $event)"
+            >
+                <span *ngIf="action.notificationCount" class="fd-button__badge">{{ action.notificationCount }}</span>
+            </li>
+        </fd-action-sheet-body>
+    </fd-action-sheet>
 </div>
