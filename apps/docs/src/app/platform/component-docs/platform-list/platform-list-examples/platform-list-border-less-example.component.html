@@ -1,10 +1,6 @@
-<h3>Imperative Approach</h3>
-<h5>Cozy Mode</h5>
-<fdp-list [noBorder]="true" [dataSource]="_dataSource" id="cozy-list">
-    <fdp-standard-list-item *fdpItemDef="let address" [title]="address.name" [ariaLabel]="address.name">
-<h3 id="fd-list-imperative">Imperative Approach</h3>
+<h3 id="fd-list-imperative-1">Imperative Approach</h3>
 <h5 id="fd-list-header-1">Cozy Mode</h5>
-<fdp-list [noBorder]="true" [dataSource]="_dataSource">
+<fdp-list [noBorder]="true" [dataSource]="_dataSource" id="cozy-list">
     <fdp-standard-list-item
         *fdpItemDef="let address; let i"
         [title]="address.name"
@@ -32,7 +28,7 @@
 
 <br /><br />
 
-<h3 id="fd-list-declarative">Declarative Approach</h3>
+<h3 id="fd-list-declarative-1">Declarative Approach</h3>
 <h5 id="fd-list-header-3">Cozy Mode</h5>
 <fdp-list [noBorder]="true" ariaSetsize="4">
     <fdp-standard-list-item

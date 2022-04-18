@@ -1,72 +1,75 @@
 <ng-content selector="fd-toolbar"></ng-content>
-<ul
-    fd-list
-    [attr.id]="id"
-    [compact]="contentDensity | isCompactDensity"
-    [noBorder]="noBorder"
-    [selection]="selection"
-    [byline]="hasByLine"
-    [class.fd-list--navigation]="navigated"
-    [navigationIndicator]="navigationIndicator"
-    style="outline: none"
-    [class.fd-list--navigation]="navigationIndicator"
-    (keydown)="_keyManager?.onKeydown($event); _handleKeyDown($event)"
-    (change)="_onSelectionChanged($event)"
-    [attr.aria-setsize]="ariaSetsize"
-    [attr.aria-label]="ariaLabel"
-    [attr.aria-multiselectable]="ariaMultiselectable"
-    [attr.role]="role"
->
-    <ng-container *ngIf="loadMore && loadOnScroll">
-        <fd-busy-indicator
-            size="l"
-            class="fd-busy-indicator-custom fd-list__item--growing"
-            [block]="true"
-            [loading]="_loading"
-            role="alert"
-            [attr.aria-busy]="_loading"
-            [attr.aria-labelledby]="_loading ? 'loadingOnScroll' : ''"
-        >
-            <div
-                fd-list
-                fdInfiniteScroll
-                class="fd-list__infinite-scroll"
-                [style.max-height]="maxHeight"
-                (onScrollAction)="_scrollHandler()"
-                [scrollPercent]="scrollOffsetPercentage"
-                [attr.role]="role"
+<ng-container>
+    <ul
+        fd-list
+        #fdlist
+        [attr.id]="id"
+        [compact]="contentDensity | isCompactDensity"
+        [noBorder]="noBorder"
+        [selection]="selection"
+        [byline]="hasByLine"
+        [class.fd-list--navigation]="navigated"
+        [navigationIndicator]="navigationIndicator"
+        style="outline: none"
+        [class.fd-list--navigation]="navigationIndicator"
+        (keydown)="_keyManager.onKeydown($event); _handleKeyDown($event)"
+        (change)="_onSelectionChanged($event)"
+        [attr.aria-setsize]="ariaSetsize"
+        [attr.aria-label]="ariaLabel"
+        [attr.aria-multiselectable]="ariaMultiselectable"
+        [attr.role]="role"
+    >
+        <ng-container *ngIf="loadMore && loadOnScroll">
+            <fd-busy-indicator
+                size="l"
+                class="fd-busy-indicator-custom fd-list__item--growing"
+                [block]="true"
+                [loading]="_loading"
+                role="alert"
+                [attr.aria-busy]="_loading"
+                [attr.aria-labelledby]="_loading ? 'loadingOnScroll' : ''"
             >
-                <ng-template *ngIf="_items.length !== 0; then thenBlock; else elseBlock"> </ng-template>
-            </div>
-        </fd-busy-indicator>
-    </ng-container>
-    <ng-container *ngIf="!loadOnScroll">
-        <ng-template *ngIf="_items.length !== 0; then thenBlock; else elseBlock"> </ng-template>
-        <li
-            #listItem
-            *ngIf="loadMore && !loadOnScroll"
-            (click)="_getMoreData()"
-            fd-list-item
-            (keydown)="_loadOnkeyPress($event)"
-            class="fd-list__item fd-list__item--growing fd-list__item--action"
-            [tabindex]="0"
-            role="button"
-        >
-            <button class="fd-list__title">
-                <fd-busy-indicator
-                    size="m"
-                    class="fd-busy-indicator-custom"
-                    [block]="true"
-                    [loading]="_loading"
-                    role="alert"
-                    [attr.aria-labelledby]="_loading ? 'loadingOnScroll' : 'loadingOnbutton'"
+                <div
+                    fd-list
+                    fdInfiniteScroll
+                    class="fd-list__infinite-scroll"
+                    [style.max-height]="maxHeight"
+                    (onScrollAction)="_scrollHandler()"
+                    [scrollPercent]="scrollOffsetPercentage"
+                    [attr.role]="role"
                 >
-                </fd-busy-indicator>
-                {{ loadTitle }} <ng-content selector="#load"></ng-content>
-            </button>
-        </li>
-    </ng-container>
-</ul>
+                    <ng-template *ngIf="_items.length !== 0; then thenBlock; else elseBlock"> </ng-template>
+                </div>
+            </fd-busy-indicator>
+        </ng-container>
+        <ng-container *ngIf="!loadOnScroll">
+            <ng-template *ngIf="_items.length !== 0; then thenBlock; else elseBlock"> </ng-template>
+        </ng-container>
+    </ul>
+    <div
+        #listItem
+        *ngIf="loadMore && !loadOnScroll"
+        (click)="_getMoreData()"
+        fd-list-item
+        (keydown)="_loadOnkeyPress($event)"
+        class="fd-list__item fd-list__item--growing fd-list__item--action"
+        [tabindex]="0"
+        role="button"
+    >
+        <button class="fd-list__title">
+            <fd-busy-indicator
+                size="m"
+                class="fd-busy-indicator-custom"
+                [block]="true"
+                [loading]="_loading"
+                role="alert"
+                [attr.aria-labelledby]="_loading ? 'loadingOnScroll' : 'loadingOnbutton'"
+            >
+            </fd-busy-indicator>
+            {{ loadTitle }} <ng-content selector="#load"></ng-content>
+        </button>
+    </div>
+</ng-container>
 
 <ng-template #thenBlock>
     <ng-container *ngFor="let item of _items; let i = index; trackBy: trackByFn">

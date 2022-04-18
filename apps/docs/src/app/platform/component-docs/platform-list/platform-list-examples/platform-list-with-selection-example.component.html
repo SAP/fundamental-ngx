@@ -1,4 +1,4 @@
-<h3>Cozy Mode</h3>
+<h3 id="fd-list-header-12">Cozy Mode</h3>
 <fd-toolbar fdType="info" [active]="true">
     <label fd-toolbar-label>{{ _selectedItems.length }} : Items selected</label>
 </fd-toolbar>
@@ -10,7 +10,10 @@
     (selectedItemChange)="_showItemInfo($event)"
     [selection]="true"
     [ariaMultiselectable]="true"
-    [ariaLabel]="_selectedItems.length > 0 ? _selectedItems.length + 'Items selected' : '0 Items selected'"
 >
-    <fdp-standard-list-item *fdpItemDef="let address" [title]="address.name"> </fdp-standard-list-item>
+    <fdp-standard-list-item
+        *fdpItemDef="let address"
+        [title]="address.name"
+        ariaDescribedBy="fd-list-header-12"
+    ></fdp-standard-list-item>
 </fdp-list>
