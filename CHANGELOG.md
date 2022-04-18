@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.17...v0.34.3-rc.18) (2022-04-18)
+
+
+### Bug Fixes
+
+* **core:** fixed time picker drag end on last array element ([#7982](https://github.com/SAP/fundamental-ngx/issues/7982)) ([bcf414a](https://github.com/SAP/fundamental-ngx/commit/bcf414a6b3f9c386c5a843effba5158cf4b69947))
+
 ### [0.34.3-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.16...v0.34.3-rc.17) (2022-04-18)
 
 
