@@ -383,8 +383,8 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
 
     /**
      * Navigates to a specific page.
-     * @param page The number of the page to navigate to.
-     * @param $event The mouse event (optional).
+     * @param page The page to navigate to.
+     * @param event The mouse event (optional).
      */
     goToPage(page: number, event?: KeyboardEvent): void {
         if (page > this._lastPage || page < 1) {
@@ -399,7 +399,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
 
         this.pageChangeStart.emit(page);
 
-        this._liveAnnouncer.announce(this.currentPageAriaLabel(this.currentPage));
+        this._liveAnnouncer.announce(this.currentPageAriaLabel(page));
     }
 
     /** Navigates to the first page */
@@ -415,7 +415,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     }
 
     /**
-     * Navigates to a next page.
+     * Navigates to the next page.
      */
     nextPage(): void {
         this.goToPage(this.currentPage + 1);
