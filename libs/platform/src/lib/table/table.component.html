@@ -82,7 +82,6 @@
                 [ngStyle]="_getCellStyles(column)"
                 [fdPopoverTrigger]="columnHeaderPopover"
                 [class.fd-table__item--clickable]="_isColumnHasHeaderMenu(column)"
-                [style.text-align]="column.align"
             >
                 <div
                     class="fd-table__text fd-table__text--no-wrap"
@@ -342,7 +341,6 @@
                                 [columnName]="column.name"
                                 role="cell"
                                 [headers]="id + '__' + column.name"
-                                [style.textAlign]="column.align"
                                 [ngClass]="'fdp-table__col--' + column.name"
                                 [class.fd-table__cell--fixed]="_freezableColumns?.has(column.name)"
                                 [class.fd-table__cell--fixed-last]="column.name === freezeColumnsTo"

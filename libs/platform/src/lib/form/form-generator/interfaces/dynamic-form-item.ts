@@ -221,8 +221,8 @@ export interface DynamicFormFieldItem {
 
 type PreparedDynamicFormFieldItemFields = {
     message: string;
-    placeholder: string;
-    choices: SelectItem[];
+    placeholder?: string;
+    choices?: SelectItem[];
 };
 
 /**

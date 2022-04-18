@@ -54,7 +54,8 @@ import {
     SelectionMode,
     SelectionModeValue,
     SortDirection,
-    TableRowType
+    TableRowType,
+    ColumnAlign
 } from './enums';
 import {
     DEFAULT_HIGHLIGHTING_KEY,
@@ -1304,6 +1305,21 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         styles['min-width'] = columnWidth;
         styles['max-width'] = columnWidth;
         styles['width'] = columnWidth;
+
+        // The "start" value does align left when you are using a LTR browser.
+        // In RTL browsers, the "start" value aligns right.
+        // Since we want to dynamically apply alignment only depending on the service value, we are using "left"/"right" as values instead
+        switch (column.align) {
+            case ColumnAlign.START:
+                styles['text-align'] = this._rtl ? 'right' : 'left';
+                break;
+            case ColumnAlign.END:
+                styles['text-align'] = this._rtl ? 'left' : 'right';
+                break;
+            default:
+                styles['text-align'] = 'center';
+                break;
+        }
 
         return styles;
     }
