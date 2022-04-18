@@ -23,7 +23,6 @@ export * from './directives/focus-key-manager/focus-key-manager-list.directive';
 export * from './directives/focus-key-manager/focus-key-manager-helpers.module';
 
 export * from './pipes/pipe.module';
-export * from './pipes/list-group.pipe';
 export * from './pipes/displayFn.pipe';
 export * from './pipes/two-digits.pipe';
 export * from './pipes/search-highlight.pipe';

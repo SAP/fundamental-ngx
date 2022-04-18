@@ -133,7 +133,7 @@
     >
         <ng-content></ng-content>
         <ng-container *ngIf="groupFn">
-            <ng-container *ngFor="let group of displayedValues | listGroupPipe: groupFn | keyvalue">
+            <ng-container *ngFor="let group of displayedValues | listGroupPipe: groupFn">
                 <li role="group" fd-list-group-header [tabindex]="0">
                     <span fd-list-title>{{ group.key }}</span>
                 </li>
@@ -143,7 +143,7 @@
                     [attr.aria-placeholder]="group.key"
                     [tabindex]="0"
                     class="fd-combobox-list-item"
-                    *ngFor="let term of $any(group.value)"
+                    *ngFor="let term of group.value"
                     [selected]="inputText === (term | displayFnPipe: displayFn)"
                     (keyDown)="onItemKeyDownHandler($event, term)"
                     (click)="onMenuClickHandler(term)"

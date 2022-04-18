@@ -59,6 +59,7 @@ export * from './form-group/form-field/form-field.component';
 export * from './form-group/form-field-group/form-field-group.component';
 export * from './form-group/form-field-extras/form-field-extras.component';
 export * from './form-group/fdp-form.tokens';
+export * from './form-group/pipes/field-group-row-value.pipe';
 
 export * from './input/fdp-input.module';
 export * from './input/input.component';

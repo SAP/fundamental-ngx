@@ -4,3 +4,4 @@ export * from './combobox-item';
 export * from './combobox-mobile/combobox-mobile.component';
 export * from './combobox-mobile/combobox-mobile.module';
 export * from './combobox.interface';
+export * from './list-group.pipe';

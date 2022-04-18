@@ -100,9 +100,6 @@ export class RadioGroupComponent
     change: EventEmitter<RadioButtonComponent> = new EventEmitter<RadioButtonComponent>();
 
     /** @hidden */
-    _lookupValueFn = this.lookupValue;
-
-    /** @hidden */
     private _activeItemSet = false;
 
     /** @hidden The currently selected radio button. Should match value. */

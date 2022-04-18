@@ -59,7 +59,7 @@ export abstract class CollectionBaseInput extends BaseInput {
         super(cd, ngControl, ngForm, formField, formControl);
     }
 
-    protected lookupValue(item: any): string {
+    public lookupValue(item: any): string {
         if (isSelectItem(item)) {
             return this.lookupKey && item ? item.value[this.lookupKey] : item.value;
         } else {
@@ -67,7 +67,7 @@ export abstract class CollectionBaseInput extends BaseInput {
         }
     }
 
-    protected displayValue(item: any): string {
+    public displayValue(item: any): string {
         if (isSelectItem(item)) {
             return item.label;
         } else if (isJsObject(item) && this.displayKey) {
@@ -79,7 +79,7 @@ export abstract class CollectionBaseInput extends BaseInput {
         }
     }
 
-    protected objectGet(obj: any, is: string | string[]): any {
+    public objectGet(obj: any, is: string | string[]): any {
         if (!isJsObject(obj)) {
             return obj;
         } else if (isString(is)) {
