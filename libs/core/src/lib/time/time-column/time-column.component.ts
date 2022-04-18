@@ -284,7 +284,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
         const array = this.items.toArray();
         let index: number = array.findIndex((__item) => __item === output.item) + this.offset;
 
-        if (index > array.length) {
+        if (index >= array.length) {
             index = index - array.length;
         }
 
