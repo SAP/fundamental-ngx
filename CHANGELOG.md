@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.16...v0.34.3-rc.17) (2022-04-18)
+
+
+### Bug Fixes
+
+* **core:** pagination announcement, examples ([#7979](https://github.com/SAP/fundamental-ngx/issues/7979)) ([ba5f1be](https://github.com/SAP/fundamental-ngx/commit/ba5f1be6f4837e0764db6eb1bb74e9125d6cafd6))
+
 ### [0.34.3-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.15...v0.34.3-rc.16) (2022-04-15)
 
 
