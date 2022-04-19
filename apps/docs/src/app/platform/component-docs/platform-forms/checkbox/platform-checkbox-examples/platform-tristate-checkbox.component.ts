@@ -19,13 +19,11 @@ export class PlatformChekboxTristateComponent implements AfterViewInit {
     public cities = new FormGroup({});
     public citiesData = new SomeObject(false, 'Yes', null, false, true, null, null, false);
 
-    public registrationForm = new FormGroup({
-        agreements: new FormGroup({})
-    });
+    public agreementsFormGroup = new FormGroup({});
 
-    get agreementsFormGroup(): FormGroup {
-        return this.registrationForm.get('agreements') as FormGroup;
-    }
+    public registrationForm = new FormGroup({
+        agreements: this.agreementsFormGroup
+    });
 
     public choices: Record<string, any> = { termsAndConditions: true, marketing: true, newsletter: false };
 

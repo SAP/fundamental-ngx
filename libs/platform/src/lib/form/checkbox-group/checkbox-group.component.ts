@@ -209,7 +209,7 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
 
     /** @hidden */
     public getListItemDisabledValue(item: CheckboxGroupComponent['list'][number]): boolean {
-        return this.disabled || (typeof item === 'object' && !!(<SelectItem>item).disabled);
+        return this.disabled || !!(<SelectItem>item)?.disabled;
     }
 
     /** @hidden */

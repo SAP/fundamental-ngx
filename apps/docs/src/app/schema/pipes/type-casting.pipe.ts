@@ -1,16 +1,14 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 
-@Pipe({ name: 'asFormGroup' })
-export class AsFormGroupPipe implements PipeTransform {
-    transform(value: AbstractControl): FormGroup {
-        return value as FormGroup;
+abstract class TypeEnforcerPipe<AsType, OriginalType = any> implements PipeTransform {
+    transform(value: OriginalType): AsType {
+        return (<any>value) as AsType;
     }
 }
 
+@Pipe({ name: 'asFormGroup' })
+export class AsFormGroupPipe extends TypeEnforcerPipe<FormGroup, AbstractControl> implements PipeTransform {}
+
 @Pipe({ name: 'asFormControl' })
-export class AsFormControlPipe implements PipeTransform {
-    transform(value: AbstractControl): FormControl {
-        return value as FormControl;
-    }
-}
+export class AsFormControlPipe extends TypeEnforcerPipe<FormControl, AbstractControl> implements PipeTransform {}
