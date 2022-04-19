@@ -9,7 +9,7 @@ export class ValueHelpDialogPo extends BaseComponentPo {
     // Example block selectors
     inputToken = 'fd-token .fd-token';
     menuCheckboxes = 'fd-popover-body fd-checkbox';
-    menuDialogBtn = 'fd-popover button';
+    menuDialogBtn = 'app-platform-vhd fd-popover button';
     menuItemNames = 'fd-popover-body .fd-list__title';
     miniOpenDialogBtn = 'button[class*="fd-button--compact"]';
     openDialogBtn = 'button[class="fd-button fd-button--standard"]';
