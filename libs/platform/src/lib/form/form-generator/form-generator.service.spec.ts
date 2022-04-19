@@ -6,7 +6,12 @@ import { PlatformSliderModule } from '../../slider/slider.module';
 import { FormGeneratorComponentsAccessorService } from './form-generator-components-accessor.service';
 import { FormGeneratorService } from './form-generator.service';
 import { DynamicFormFieldItem } from './interfaces/dynamic-form-item';
-import { BaseDynamicFormGeneratorControl, dynamicFormFieldProvider, dynamicFormGroupChildProvider } from './public_api';
+import {
+    BaseDynamicFormGeneratorControl,
+    defaultFormGeneratorItemConfigProvider,
+    dynamicFormFieldProvider,
+    dynamicFormGroupChildProvider
+} from './public_api';
 
 export const dummyFormItemsWithWhenCondition: DynamicFormFieldItem[] = [
     {
@@ -76,7 +81,11 @@ describe('FormGeneratorService', () => {
         TestBed.configureTestingModule({
             declarations: [TestCustomComponent],
             imports: [FormsModule, ReactiveFormsModule, PlatformSliderModule],
-            providers: [FormGeneratorService, FormGeneratorComponentsAccessorService]
+            providers: [
+                defaultFormGeneratorItemConfigProvider,
+                FormGeneratorService,
+                FormGeneratorComponentsAccessorService
+            ]
         });
         service = TestBed.inject(FormGeneratorService);
     });

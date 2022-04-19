@@ -1,7 +1,8 @@
 import { Directive, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { ContentDensity } from '@fundamental-ngx/core/utils';
 
-import { FormField } from '@fundamental-ngx/platform/shared';
+import { FormField, SelectItem } from '@fundamental-ngx/platform/shared';
 import { PreparedDynamicFormFieldItem } from './interfaces/dynamic-form-item';
 import { dynamicFormFieldProvider, dynamicFormGroupChildProvider } from './providers/providers';
 
@@ -20,7 +21,7 @@ export interface BaseDynamicFormGeneratorControlInterface {
 })
 export abstract class BaseDynamicFormGeneratorControl implements BaseDynamicFormGeneratorControlInterface {
     /**
-     * @description @see DynamicFormItem
+     * @description @see DynamicFormItem.
      */
     @Input() formItem: PreparedDynamicFormFieldItem;
 
@@ -35,10 +36,31 @@ export abstract class BaseDynamicFormGeneratorControl implements BaseDynamicForm
     @Input() form: FormGroup;
 
     /**
-     * @description Reference to the @see FormFieldComponent
+     * @description Reference to the @see FormFieldComponent.
      */
     @Input() formField: FormField;
 
     /** @description Inner form group name */
     @Input() formGroupName: string;
+
+    /** @description Returns form item content density. */
+    get contentDensity(): ContentDensity | undefined {
+        return this.formItem.guiOptions?.contentDensity;
+    }
+
+    /** @description Returns form item choices. */
+    get choices(): SelectItem[] {
+        return this.formItem.choices;
+    }
+
+    /** @description Returns form item placeholder. */
+    get placeholder(): string {
+        if (!this.formItem) {
+            return '';
+        }
+        if (this.formItem?.placeholder) {
+            return this.formItem?.placeholder;
+        }
+        return this.formItem?.useMessageAsPlaceholder && this.formItem?.message;
+    }
 }

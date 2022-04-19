@@ -1,11 +1,11 @@
 <ng-container [formGroup]="form">
     <ng-container [formGroupName]="formGroupName">
         <fdp-radio-group
-            [contentDensity]="formItem.guiOptions?.contentDensity"
+            [contentDensity]="contentDensity"
             [isInline]="formItem.guiOptions?.inline || false"
             [inlineLayout]="formItem.guiOptions?.inlineLayout"
             [name]="name"
-            [list]="formItem.choices"
+            [list]="choices"
             [formControlName]="name"
         ></fdp-radio-group>
     </ng-container>

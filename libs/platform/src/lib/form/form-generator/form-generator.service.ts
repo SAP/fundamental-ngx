@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy, Type } from '@angular/core';
+import { Inject, Injectable, OnDestroy, Optional, SkipSelf, Type } from '@angular/core';
 import { AsyncValidatorFn, FormBuilder, Validators } from '@angular/forms';
 import { cloneDeep } from 'lodash-es';
 
@@ -19,6 +19,7 @@ import { FormComponentDefinition } from './interfaces/form-component-definition'
 import { DEFAULT_VALIDATION_ERRORS } from './config/default-validation-errors';
 import { BaseDynamicFormGeneratorControl } from './base-dynamic-form-generator-control';
 import { DynamicFormGroup } from './interfaces/dynamic-form-group';
+import { FORM_GENERATOR_ITEM_CONFIG } from './providers/providers';
 
 export const UNGROUPED_FORM_GROUP_NAME = 'ungrouped';
 
@@ -44,7 +45,14 @@ export class FormGeneratorService implements OnDestroy {
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    constructor(private _fb: FormBuilder, private _componentsAccessor: FormGeneratorComponentsAccessorService) {}
+    constructor(
+        private _fb: FormBuilder,
+        private _componentsAccessor: FormGeneratorComponentsAccessorService,
+        @Optional()
+        @SkipSelf()
+        @Inject(FORM_GENERATOR_ITEM_CONFIG)
+        private _defaultConfig: Partial<DynamicFormFieldItem>
+    ) {}
 
     /**
      * @hidden
@@ -70,6 +78,8 @@ export class FormGeneratorService implements OnDestroy {
             },
             {}
         );
+
+        formItems = this._transformFormItems(formItems);
 
         formItems.forEach((formItem) => {
             if (!this.isFormFieldItem(formItem)) {
@@ -133,65 +143,6 @@ export class FormGeneratorService implements OnDestroy {
         this.forms.set(formName, form);
 
         return form;
-    }
-
-    private _generateDynamicFormItem(
-        formItem: PreparedDynamicFormFieldItem,
-        form: DynamicFormGroup
-    ): DynamicFormControl {
-        const formItemComponentType = this.getComponentDefinitionByType(formItem.type);
-
-        if (!formItemComponentType) {
-            console.warn(`Form item '${formItem.name}' with type '${formItem.type}' has no defined component.
-            Please use 'addComponent' method in ${FormGeneratorService.name} to define appropriate relations.`);
-
-            return;
-        }
-
-        let validator: AsyncValidatorFn = null;
-
-        if (isFunction(formItem.validate)) {
-            validator = async (control: DynamicFormControl) => {
-                const obj = formItem.validate(control.value, this._getFormValueWithoutUngrouped(form));
-
-                const result = await this._getFunctionValue(obj);
-
-                const returnObj = {};
-
-                returnObj[`${control.formItem.name}Validator`] = typeof result === 'boolean' ? true : result;
-
-                return result === null ? result : returnObj;
-            };
-
-            formItem.asyncValidators = formItem.asyncValidators || [];
-            formItem.asyncValidators =
-                typeof formItem.asyncValidators === 'function' ? [formItem.asyncValidators] : formItem.asyncValidators;
-
-            formItem.asyncValidators.push(validator);
-        }
-
-        formItem.validators = formItem.validators || [Validators.nullValidator];
-
-        formItem.required = formItem.required || formItem.validators.includes(Validators.required);
-
-        const formControl = new DynamicFormControl(formItem.default, {
-            validators: formItem.validators,
-            asyncValidators: formItem.asyncValidators,
-            dynamicFormItem: formItem,
-            updateOn: 'change'
-        });
-
-        if (isFunction(formItem.onchange)) {
-            formControl.valueChanges.pipe(debounceTime(50), takeUntil(this._onDestroy$)).subscribe(async (value) => {
-                const obj = formItem.onchange(value, this.forms, formControl);
-
-                await this._getFunctionValue(obj);
-            });
-        }
-
-        formControl.updateValueAndValidity({ emitEvent: false });
-
-        return formControl;
     }
 
     /**
@@ -324,6 +275,76 @@ export class FormGeneratorService implements OnDestroy {
     }
 
     /** @hidden */
+    private _assignFormItemValidators(
+        formItem: PreparedDynamicFormFieldItem,
+        form: DynamicFormGroup
+    ): PreparedDynamicFormFieldItem {
+        let validator: AsyncValidatorFn = null;
+
+        if (isFunction(formItem.validate)) {
+            validator = async (control: DynamicFormControl) => {
+                const obj = formItem.validate(control.value, this._getFormValueWithoutUngrouped(form));
+
+                const result = await this._getFunctionValue(obj);
+
+                const returnObj = {};
+
+                returnObj[`${control.formItem.name}Validator`] = typeof result === 'boolean' ? true : result;
+
+                return result === null ? result : returnObj;
+            };
+
+            formItem.asyncValidators = formItem.asyncValidators || [];
+            formItem.asyncValidators =
+                typeof formItem.asyncValidators === 'function' ? [formItem.asyncValidators] : formItem.asyncValidators;
+
+            formItem.asyncValidators.push(validator);
+        }
+
+        formItem.validators = formItem.validators || [Validators.nullValidator];
+
+        formItem.required = formItem.required || formItem.validators.includes(Validators.required);
+
+        return formItem;
+    }
+
+    /** @hidden */
+    private _generateDynamicFormItem(
+        formItem: PreparedDynamicFormFieldItem,
+        form: DynamicFormGroup
+    ): DynamicFormControl {
+        const formItemComponentType = this.getComponentDefinitionByType(formItem.type);
+
+        if (!formItemComponentType) {
+            console.warn(`Form item '${formItem.name}' with type '${formItem.type}' has no defined component.
+            Please use 'addComponent' method in ${FormGeneratorService.name} to define appropriate relations.`);
+
+            return;
+        }
+
+        formItem = this._assignFormItemValidators(formItem, form);
+
+        const formControl = new DynamicFormControl(formItem.default, {
+            validators: formItem.validators,
+            asyncValidators: formItem.asyncValidators,
+            dynamicFormItem: formItem,
+            updateOn: 'change'
+        });
+
+        if (isFunction(formItem.onchange)) {
+            formControl.valueChanges.pipe(debounceTime(50), takeUntil(this._onDestroy$)).subscribe(async (value) => {
+                const obj = formItem.onchange(value, this.forms, formControl);
+
+                await this._getFunctionValue(obj);
+            });
+        }
+
+        formControl.updateValueAndValidity({ emitEvent: false });
+
+        return formControl;
+    }
+
+    /** @hidden */
     private async _checkFormControlsVisibility(
         form: DynamicFormGroup | DynamicFormControlGroup,
         formValue: any
@@ -426,5 +447,23 @@ export class FormGeneratorService implements OnDestroy {
     /** @hidden */
     private _formatPasswordValue(password: string): string {
         return '*'.repeat(password?.length);
+    }
+
+    /** @hidden */
+    private _getMergedFormFieldItemConfig(formItem: DynamicFormFieldItem): DynamicFormFieldItem {
+        return Object.assign({ ...this._defaultConfig }, { ...formItem });
+    }
+
+    /** @hidden */
+    private _transformFormItems(formItems: DynamicFormItem[]): DynamicFormItem[] {
+        formItems.forEach((item, index) => {
+            if (!this.isFormFieldItem(item)) {
+                return;
+            }
+
+            formItems[index] = this._getMergedFormFieldItemConfig(item);
+        });
+
+        return formItems;
     }
 }

@@ -49,12 +49,12 @@ export class FormGeneratorFieldComponent {
 
     /**
      * Rank is used for ordering.
-     * Than lower number then higher priority.
+     * The lower number the higher priority.
      */
     @Input() rank: number;
 
     /**
-     * Whether or not this field should be visible.
+     * Whether this field should be visible.
      */
     @Input() shouldShow: boolean;
 
