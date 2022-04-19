@@ -219,6 +219,19 @@ export interface DynamicFormFieldItem {
     rank?: number;
 }
 
+type PreparedDynamicFormFieldItemFields = {
+    message: string;
+    placeholder?: string;
+    choices?: SelectItem[];
+};
+
+/**
+ * @hidden
+ * Internal representation of DynamicFormFieldItem with all fields resolved to a plain value
+ */
+export type PreparedDynamicFormFieldItem = Omit<DynamicFormFieldItem, keyof PreparedDynamicFormFieldItemFields> &
+    PreparedDynamicFormFieldItemFields;
+
 export interface BaseDynamicFormItemGuiOptions {
     /**
      * @description
@@ -313,6 +326,4 @@ export interface DynamicFormItemGuiOptions extends BaseDynamicFormItemGuiOptions
     hint?: string | FieldHintOptions;
 }
 
-export interface DynamicFormValue {
-    [key: string]: any;
-}
+export type DynamicFormValue = Record<string, any>;

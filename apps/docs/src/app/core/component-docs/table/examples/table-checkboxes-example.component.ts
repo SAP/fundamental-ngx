@@ -90,7 +90,7 @@ export class TableCheckboxesExampleComponent {
         }
     ];
 
-    select(index: number, event: PointerEvent, size: string): void {
+    select(index: number, event: MouseEvent, size: string): void {
         // using rangeSelector utility to be able to select multiple rows while "shift" is pressed
         const checkedToggled = !this._getTable(size)[index].checked;
         this._rangeSelector.onRangeElementToggled(index, event);

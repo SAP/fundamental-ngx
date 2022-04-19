@@ -1,5 +1,5 @@
 <fd-message-strip
-    *ngFor="let message of messages; let i = index; trackBy: _trackByFn"
+    *ngFor="let message of messages; let i = index"
     class="fdp-approval-flow-messages__item"
     [type]="message.type === 'error' ? 'error' : 'success'"
     [dismissible]="message.type !== 'error'"

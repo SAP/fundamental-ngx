@@ -19,17 +19,19 @@ import { isSelectItem, SelectItem } from '../domain/data-model';
 @Directive()
 export abstract class CollectionBaseInput extends BaseInput {
     /**
-     * list of values, it can be of type SelectItem or String.
+     * List of values, it can be of type SelectItem, string or any object.
+     * Generic object type is among the list of types,
+     * because we allow to get labels and values using `displayKey` and `lookupKey` inputs accordingly.
      */
     @Input()
-    get list(): Array<SelectItem | string> {
+    get list(): Array<SelectItem | string | object> {
         return this._list;
     }
 
-    set list(value: Array<SelectItem | string>) {
+    set list(value: Array<SelectItem | string | object>) {
         this._list = value;
     }
-    private _list: Array<SelectItem | string>;
+    private _list: Array<SelectItem | string | object>;
 
     /**
      * Used in filters and any kind of comparators when we work with objects and this identify
@@ -57,7 +59,7 @@ export abstract class CollectionBaseInput extends BaseInput {
         super(cd, ngControl, ngForm, formField, formControl);
     }
 
-    protected lookupValue(item: any): string {
+    public lookupValue(item: any): string {
         if (isSelectItem(item)) {
             return this.lookupKey && item ? item.value[this.lookupKey] : item.value;
         } else {
@@ -65,7 +67,7 @@ export abstract class CollectionBaseInput extends BaseInput {
         }
     }
 
-    protected displayValue(item: any): string {
+    public displayValue(item: any): string {
         if (isSelectItem(item)) {
             return item.label;
         } else if (isJsObject(item) && this.displayKey) {
@@ -77,7 +79,7 @@ export abstract class CollectionBaseInput extends BaseInput {
         }
     }
 
-    protected objectGet(obj: any, is: string | string[]): any {
+    public objectGet(obj: any, is: string | string[]): any {
         if (!isJsObject(obj)) {
             return obj;
         } else if (isString(is)) {

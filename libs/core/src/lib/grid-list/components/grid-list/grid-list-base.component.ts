@@ -11,6 +11,6 @@ export abstract class GridList<T> {
         item: T,
         componentIndex: number,
         action?: GridListSelectionActions,
-        event?: PointerEvent
+        event?: MouseEvent
     ): void;
 }

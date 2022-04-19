@@ -78,14 +78,14 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
     }
 
     /** Opens the Dialog when the imgaes croses the maximum number of images to display */
-    openDialog(media: Media, _mediaList: Media[]): void {
+    openDialog(media: Media): void {
         this.mediaList.forEach((item) => (item.selected = false));
         media.selected = true;
         this.openDetailsDialog.emit(media);
     }
 
     /** @hidden */
-    thumbnailClick(selectedMedia: Media, event?: KeyboardEvent | MouseEvent): void {
+    thumbnailClick(selectedMedia: Media, event?: Event): void {
         if (event instanceof KeyboardEvent && KeyUtil.isKeyCode(event, SPACE)) {
             event?.preventDefault();
         }
@@ -105,7 +105,7 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
         }
     }
 
-    openImage(image: Media, $event: KeyboardEvent | MouseEvent): void {
-        image.overlayRequired ? this.openDialog(image, this.mediaList) : this.thumbnailClick(image, $event);
+    openImage(image: Media, event?: Event): void {
+        image.overlayRequired ? this.openDialog(image) : this.thumbnailClick(image, event);
     }
 }

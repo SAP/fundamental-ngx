@@ -10,10 +10,6 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-export class ObjectAttributeClickedEvent {
-    constructor(public source: ObjectAttributeComponent, public payload: any) {}
-}
-
 @Component({
     selector: 'fdp-object-attribute',
     templateUrl: './object-attribute.component.html',
@@ -40,7 +36,7 @@ export class ObjectAttributeComponent implements OnInit {
 
     /** Emitting object attribute link click event */
     @Output()
-    objectAttributeclick: EventEmitter<ObjectAttributeClickedEvent> = new EventEmitter();
+    objectAttributeclick = new EventEmitter<Event>();
 
     /** @hidden */
     constructor(private _el: ElementRef, private _renderer: Renderer2) {}
@@ -57,9 +53,9 @@ export class ObjectAttributeComponent implements OnInit {
     /**
      *  Handles link click
      */
-    onObjectAttributeClick($event: ObjectAttributeClickedEvent): void {
+    onObjectAttributeClick(event: Event): void {
         if (this.islink) {
-            this.objectAttributeclick.emit($event);
+            this.objectAttributeclick.emit(event);
         }
     }
 }

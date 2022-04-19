@@ -13,8 +13,9 @@
         <form>
             <fd-layout-grid *ngFor="let condition of _formItems; let i = index">
                 <div colGrow fdLayoutGridCol>
+                    <!-- wrapping "formSubmitted" event payload as any, because it's type is more generic than we're expecting -->
                     <fdp-form-generator
-                        (formSubmitted)="_onFormSubmitted($event)"
+                        (formSubmitted)="_onFormSubmitted($any($event))"
                         [formItems]="condition"
                         [unifiedLayout]="false"
                         columnLayout="XL3-L3-M3-S3"

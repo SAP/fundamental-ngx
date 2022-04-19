@@ -23,7 +23,7 @@ import { filter, takeUntil } from 'rxjs/operators';
 
 import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 import { ContentDensity, ContentDensityEnum, RtlService, ContentDensityService } from '@fundamental-ngx/core/utils';
-import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
+import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { isDataSource } from '@fundamental-ngx/platform/shared';
 import {
     ArrayValueHelpDialogDataSource,
@@ -56,7 +56,7 @@ let vhiUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy {
+export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnDestroy {
     /** Id of the popover */
     @Input()
     id: string = 'fdp-vhd-' + vhiUniqueId++;
@@ -103,6 +103,10 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
     @Input()
     uniqueKey: string;
 
+    /** Id attribute for dialog title */
+    @Input()
+    headerId: string | null = null;
+
     /** Field name for default render from data.
      * Required field if tokenizerFn is not exist. */
     @Input()
@@ -111,7 +115,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
     /** Tokenizer function for custom token render, it has higher prio that `tokenViewField`.
      * Required field if tokenViewField is not exist. */
     @Input()
-    tokenizerFn: () => void;
+    tokenizerFn: (item: T) => string;
 
     /** Whether the value help dialog should be view in mobile mode */
     @Input()
@@ -119,7 +123,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
 
     /** It should be able if you use multiple selection */
     @Input()
-    formatToken: (value: VhdValueChangeEvent) => void;
+    formatToken: (value: VhdValueChangeEvent<T>) => void;
 
     /** Tokenizer function for condition's token render */
     @Input()
@@ -192,7 +196,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
     /** Dialog outputs */
     /** Event emitted when filters/tokens were changed. */
     @Output()
-    valueChange = new EventEmitter<VhdValueChangeEvent>();
+    valueChange = new EventEmitter<VhdValueChangeEvent<T[]>>();
 
     /** Event emitted when data loading is started. */
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
@@ -548,7 +552,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
     }
 
     /** @hidden */
-    _searchAction(input: InputGroupInputDirective): void {
+    _searchAction(input: FormControlComponent): void {
         const inputElement = input.elementRef().nativeElement as HTMLInputElement;
         inputElement.focus();
     }
@@ -583,7 +587,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
         if (this.showSelectionTab) {
             this._dsSubscription = new Subscription();
 
-            const dsSub = this.openDataStream(ds)
+            const dsSub = this.openDataStream()
                 .pipe(takeUntil(this._destroyed))
                 .subscribe((data) => {
                     this._displayedData = data.slice();
@@ -672,7 +676,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
     }
 
     /** @hidden */
-    private openDataStream(ds: FdpValueHelpDialogDataSource<T>): Observable<T[]> {
+    private openDataStream(): Observable<T[]> {
         if (this._dataSource) {
             this._dataSource.match();
 

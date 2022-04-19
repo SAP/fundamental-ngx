@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FdDate } from '@fundamental-ngx/core/datetime';
+import { FilterableColumnDataType, FilterType } from '@fundamental-ngx/platform/table';
 
 @Component({
     selector: 'fdp-platform-smart-filter-bar-dynamic-page-example',
@@ -19,6 +20,9 @@ import { FdDate } from '@fundamental-ngx/core/datetime';
     ]
 })
 export class PlatformSmartFilterBarDynamicPageExampleComponent {
+    readonly dataTypeEnum = FilterableColumnDataType;
+    readonly filterTypeEnum = FilterType;
+
     visible = false;
 
     source: ExampleItem[] = ITEMS;

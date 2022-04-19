@@ -11,6 +11,7 @@ import {
 } from './components/wizard-generator-step/wizard-generator-step.component';
 import { WizardGeneratorFormGroup, WizardGeneratorFormItem } from './interfaces/wizard-generator-form-group.interface';
 import {
+    PreparedWizardGeneratorItem,
     WizardGeneratorDependencyFields,
     WizardGeneratorFormsValue,
     WizardGeneratorItem,
@@ -45,7 +46,7 @@ export interface StepDependencyFields {
  */
 @Injectable()
 export class WizardGeneratorService {
-    items: WizardGeneratorItem[];
+    items: PreparedWizardGeneratorItem[];
 
     /**
      * @description Visible steps components
@@ -69,10 +70,10 @@ export class WizardGeneratorService {
     /**
      * @description Steps that are visible to the user.
      */
-    public visibleWizardSteps: WizardGeneratorItem[] = [];
+    public visibleWizardSteps: PreparedWizardGeneratorItem[] = [];
 
     /** @hidden */
-    private _visibleWizardSteps$ = new Subject<WizardGeneratorItem[]>();
+    private _visibleWizardSteps$ = new Subject<PreparedWizardGeneratorItem[]>();
 
     /** @hidden */
     private _appendToWizard$ = new BehaviorSubject<boolean>(this.appendToWizard);
@@ -160,7 +161,7 @@ export class WizardGeneratorService {
      * @description Sets new array of visible steps for Wizard.
      * @param steps steps that needs to be shown in Wizard.
      */
-    setVisibleSteps(steps: WizardGeneratorItem[]): void {
+    setVisibleSteps(steps: PreparedWizardGeneratorItem[]): void {
         this.visibleWizardSteps = steps;
         this._visibleWizardSteps$.next(steps);
 
@@ -168,26 +169,26 @@ export class WizardGeneratorService {
     }
 
     /**
-     * @returns {Observable<WizardGeneratorItem[]>} Observable, which will emit every time
+     * @returns {Observable<PreparedWizardGeneratorItem[]>} Observable, which will emit every time
      * when array of visible step items has been changed.
      */
-    getVisibleSteps(): Observable<WizardGeneratorItem[]> {
+    getVisibleSteps(): Observable<PreparedWizardGeneratorItem[]> {
         return this._visibleWizardSteps$.asObservable();
     }
 
     /**
      * @description Runs initial transformation for passed Wizard steps.
      * @param items All Wizard steps.
-     * @returns {Promise<WizardGeneratorItem[]>} Array of transformed Wizard steps.
+     * @returns {Promise<PreparedWizardGeneratorItem[]>} Array of transformed Wizard steps.
      */
-    async prepareWizardItems(items: WizardGeneratorItem[]): Promise<WizardGeneratorItem[]> {
-        let newItems: WizardGeneratorItem[] = await Promise.all(
+    async prepareWizardItems(items: WizardGeneratorItem[]): Promise<PreparedWizardGeneratorItem[]> {
+        let newItems: PreparedWizardGeneratorItem[] = await Promise.all(
             items.map(async (i, index) => {
                 const item = { ...i };
                 item.status = item.status || 'upcoming';
                 item.title = await this._getFormItemPropertyValue(item, index, 'title');
                 item.name = await this._getFormItemPropertyValue(item, index, 'name');
-                return item;
+                return item as PreparedWizardGeneratorItem;
             })
         );
 
@@ -497,7 +498,7 @@ export class WizardGeneratorService {
      * @param items
      * @returns
      */
-    private _setBranchingSteps(items: WizardGeneratorItem[]): WizardGeneratorItem[] {
+    private _setBranchingSteps(items: PreparedWizardGeneratorItem[]): PreparedWizardGeneratorItem[] {
         const branchingItems: string[] = items
             .filter((i) => i.dependencyFields)
             .reduce((stepIds, item) => {
@@ -537,7 +538,7 @@ export class WizardGeneratorService {
     }
 
     /** @hidden */
-    private _buildDependencyMap(items: WizardGeneratorItem[]): void {
+    private _buildDependencyMap(items: PreparedWizardGeneratorItem[]): void {
         this.dependencySteps = {};
 
         const mergeArrays = (objValue: any, srcValue: any): any[] => {

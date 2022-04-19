@@ -14,6 +14,7 @@ import {
     TableDataProvider,
     TableState,
     SaveRowsEvent,
+    FilterableColumnDataType,
     CollectionSort
 } from '@fundamental-ngx/platform/table';
 
@@ -28,6 +29,7 @@ import {
     ]
 })
 export class PlatformTableEditableRowsExampleComponent {
+    readonly dataTypeEnum = FilterableColumnDataType;
     source: TableDataSource<ExampleItem>;
     loading = false;
 

@@ -3,7 +3,11 @@ import { Observable, Subject } from 'rxjs';
 import { debounceTime, finalize, takeUntil } from 'rxjs/operators';
 
 import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
-import { WizardGeneratorFormsValue, WizardGeneratorItem } from './interfaces/wizard-generator-item.interface';
+import {
+    PreparedWizardGeneratorItem,
+    WizardGeneratorFormsValue,
+    WizardGeneratorItem
+} from './interfaces/wizard-generator-item.interface';
 import { WizardNavigationButtons } from './interfaces/wizard-navigation-buttons.interface';
 import { WizardGeneratorService } from './wizard-generator.service';
 import { WizardStepSubmittedForms } from './components/wizard-generator-step/wizard-generator-step.component';
@@ -139,11 +143,11 @@ export class BaseWizardGenerator implements OnDestroy {
     /**
      * @description Array of visible Wizard Steps.
      */
-    get visibleItems(): WizardGeneratorItem[] {
+    get visibleItems(): PreparedWizardGeneratorItem[] {
         return this._visibleItems || this._items;
     }
 
-    set visibleItems(items: WizardGeneratorItem[]) {
+    set visibleItems(items: PreparedWizardGeneratorItem[]) {
         this._visibleItems = items;
     }
 
@@ -187,7 +191,7 @@ export class BaseWizardGenerator implements OnDestroy {
     /**
      * @hidden
      */
-    _visibleItems: WizardGeneratorItem[] = [];
+    _visibleItems: PreparedWizardGeneratorItem[] = [];
 
     /** @hidden */
     _nextStepIndex: number;
@@ -198,7 +202,7 @@ export class BaseWizardGenerator implements OnDestroy {
     /**
      * @hidden
      */
-    private _items: WizardGeneratorItem[] = [];
+    private _items: PreparedWizardGeneratorItem[] = [];
 
     /** @hidden */
     private _appendToWizard = false;

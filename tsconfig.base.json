@@ -1,5 +1,9 @@
 {
     "compileOnSave": false,
+    "angularCompilerOptions": {
+        "strictTemplates": true,
+        "fullTemplateTypeCheck": true
+    },
     "compilerOptions": {
         "baseUrl": ".",
         "outDir": "./dist/out-tsc",

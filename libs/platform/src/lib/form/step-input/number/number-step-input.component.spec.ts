@@ -8,8 +8,9 @@ import { ContentDensity, RtlService } from '@fundamental-ngx/core/utils';
 import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
 import { FormFieldComponent } from '../../form-group/form-field/form-field.component';
 import { PlatformStepInputModule } from '../step-input.module';
-import { NumberStepInputChangeEvent, NumberStepInputComponent } from './number-step-input.component';
+import { NumberStepInputComponent } from './number-step-input.component';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
+import { StepInputChangeEvent } from '../base.step-input';
 
 @Component({
     template: `<fdp-number-step-input name="number"></fdp-number-step-input>`
@@ -97,7 +98,7 @@ class NumberStepInputMainFunctionalityHostComponent {
 
     stepFn: (value: number, action: 'increase' | 'decrease') => number;
 
-    onValueChanged(event: NumberStepInputChangeEvent): void {
+    onValueChanged(event: StepInputChangeEvent): void {
         this.value = event.payload;
     }
 }

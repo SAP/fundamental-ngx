@@ -123,7 +123,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     }
 
     /** @hidden */
-    onOptionCheckboxClicked(event: PointerEvent, index: number): void {
+    onOptionCheckboxClicked(event: MouseEvent, index: number): void {
         event.stopPropagation();
         this._onListElementClicked(event, index);
     }
@@ -245,7 +245,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     }
 
     /** @hidden */
-    onOptionClicked(event: PointerEvent, index: number): void {
+    onOptionClicked(event: MouseEvent, index: number): void {
         this._onListElementClicked(event, index);
         this.close();
     }
@@ -254,7 +254,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
      * @hidden
      * applying range selection. Note, that this function will be invoked after combobox item's value has been changed
      */
-    private _onListElementClicked(event: PointerEvent, index: number): void {
+    private _onListElementClicked(event: MouseEvent, index: number): void {
         // value has been changed at this point, so it can be safely used
         const selectionState = this._suggestions[index].selected;
         this._rangeSelector.onRangeElementToggled(index, event);

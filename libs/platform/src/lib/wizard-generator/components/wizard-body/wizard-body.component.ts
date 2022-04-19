@@ -14,7 +14,7 @@ import { Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
 import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
-import { WizardGeneratorItem } from '../../interfaces/wizard-generator-item.interface';
+import { PreparedWizardGeneratorItem, WizardGeneratorItem } from '../../interfaces/wizard-generator-item.interface';
 import { WizardNavigationButtons } from '../../interfaces/wizard-navigation-buttons.interface';
 import { WizardGeneratorService } from '../../wizard-generator.service';
 
@@ -116,14 +116,26 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
     @Input()
     unifiedLayout = true;
 
+    /** Whether current step is a branching step. */
+    @Input()
+    isBranchingStep = false;
+
+    /** Whether current step is completed */
+    @Input()
+    isCurrentStepCompleted = false;
+
+    /** Whether order of steps was changed  */
+    @Input()
+    stepsOrderChanged = false;
+
     /**
      * @description Array of visible Wizard Steps.
      */
-    get visibleItems(): WizardGeneratorItem[] {
+    get visibleItems(): PreparedWizardGeneratorItem[] {
         return this._visibleItems || this._wizardGeneratorService.items;
     }
 
-    set visibleItems(items: WizardGeneratorItem[]) {
+    set visibleItems(items: PreparedWizardGeneratorItem[]) {
         this._visibleItems = items;
     }
 
@@ -154,7 +166,7 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
     /**
      * @hidden
      */
-    private _visibleItems: WizardGeneratorItem[];
+    private _visibleItems: PreparedWizardGeneratorItem[];
 
     /** @hidden */
     constructor(private _wizardGeneratorService: WizardGeneratorService, private _cd: ChangeDetectorRef) {}

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TIMELINE_EXAMPLE_DATA } from './timeline-basic-example/timeline-example-data';
+import { TimelineAxis, TimelineSidePosition } from '@fundamental-ngx/core/timeline';
 
 @Component({
     selector: 'fd-timeline-horizontal-double-side',
@@ -8,7 +9,7 @@ import { TIMELINE_EXAMPLE_DATA } from './timeline-basic-example/timeline-example
 export class TimelineHorizontalDoubleSideExampleComponent {
     data = TIMELINE_EXAMPLE_DATA;
 
-    axis = 'horizontal';
+    axis: TimelineAxis = 'horizontal';
 
-    layout = 'double';
+    layout: TimelineSidePosition = 'double';
 }

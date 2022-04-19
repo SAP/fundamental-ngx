@@ -12,7 +12,8 @@ import {
     DynamicFormFieldItem,
     DynamicFormItem,
     DynamicFormItemChoices,
-    DynamicFormValue
+    DynamicFormValue,
+    PreparedDynamicFormFieldItem
 } from './interfaces/dynamic-form-item';
 import { FormComponentDefinition } from './interfaces/form-component-definition';
 import { DEFAULT_VALIDATION_ERRORS } from './config/default-validation-errors';
@@ -79,7 +80,10 @@ export class FormGeneratorService implements OnDestroy {
                 const group = new DynamicFormControlGroup(formItem, {});
 
                 formItem.items.forEach((groupFormItem) => {
-                    const groupFormControl = this._generateDynamicFormItem(groupFormItem, form);
+                    const groupFormControl = this._generateDynamicFormItem(
+                        groupFormItem as PreparedDynamicFormFieldItem,
+                        form
+                    );
 
                     group.addControl(groupFormItem.name, groupFormControl);
 
@@ -90,7 +94,7 @@ export class FormGeneratorService implements OnDestroy {
                 return;
             }
 
-            const formControl = this._generateDynamicFormItem(formItem, form);
+            const formControl = this._generateDynamicFormItem(formItem as PreparedDynamicFormFieldItem, form);
 
             if (!formControl) {
                 return;
@@ -123,7 +127,7 @@ export class FormGeneratorService implements OnDestroy {
             // Update form value since it might be changed
             defaultFormGroup.controls[formItem.name].setValue(formItem.default);
 
-            defaultFormGroup.controls[key].formItem = formItem;
+            defaultFormGroup.controls[key].formItem = formItem as PreparedDynamicFormFieldItem;
         }
 
         this.forms.set(formName, form);
@@ -131,7 +135,10 @@ export class FormGeneratorService implements OnDestroy {
         return form;
     }
 
-    private _generateDynamicFormItem(formItem: DynamicFormFieldItem, form: DynamicFormGroup): DynamicFormControl {
+    private _generateDynamicFormItem(
+        formItem: PreparedDynamicFormFieldItem,
+        form: DynamicFormGroup
+    ): DynamicFormControl {
         const formItemComponentType = this.getComponentDefinitionByType(formItem.type);
 
         if (!formItemComponentType) {

@@ -271,13 +271,13 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
     }
 
     /** @hidden handles click on the native checkbox input */
-    _onInputClick(event: PointerEvent): void {
+    _onInputClick(event: MouseEvent): void {
         // When there's a click event dispatched from the input, we have to catch it, process and then re-dispatch it further.
         // This is needed in order to set the value to the component before any external listeners will receive it.
         // Otherwise checkbox might be out of sync.
         event.stopPropagation();
         this.nextValue();
-        this.elementRef.nativeElement.dispatchEvent(new PointerEvent(event.type, event));
+        this.elementRef.nativeElement.dispatchEvent(new MouseEvent(event.type, event));
     }
 
     /** @hidden Based on current control value sets new control state. */

@@ -71,7 +71,7 @@
                                 placeholder="from"
                                 required
                                 [compact]="contentDensity | isCompactDensity"
-                                [state]="fromModel.invalid ? 'error' : ''"
+                                [state]="fromModel.invalid ? 'error' : null"
                                 [name]="uid + '-' + type + '-from-' + item.id"
                                 (blur)="_validateConditionValue(item, [fromModel.valid, toModel.valid])"
                                 #fromModel="ngModel"
@@ -94,7 +94,7 @@
                                 placeholder="to"
                                 required
                                 [compact]="contentDensity | isCompactDensity"
-                                [state]="toModel.invalid ? 'error' : ''"
+                                [state]="toModel.invalid ? 'error' : null"
                                 [name]="uid + '-' + type + '-to-' + item.id"
                                 (blur)="_validateConditionValue(item, [fromModel.valid, toModel.valid])"
                                 #toModel="ngModel"
@@ -118,7 +118,7 @@
                                 i18n-placeholder="@@platformI18nValueHelpDialog.Define.Condition.ValuePlaceholder"
                                 placeholder="value"
                                 [compact]="contentDensity | isCompactDensity"
-                                [state]="valueModel.invalid ? 'error' : ''"
+                                [state]="valueModel.invalid ? 'error' : null"
                                 [name]="uid + '-' + type + '-value-' + item.id"
                                 (blur)="_validateConditionValue(item, valueModel.valid)"
                                 #valueModel="ngModel"

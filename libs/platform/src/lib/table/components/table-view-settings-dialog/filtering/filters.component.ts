@@ -17,6 +17,7 @@ import { TableViewSettingsFilterComponent } from '../../table-view-settings-dial
 import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
 import { FILTERS_VIEW_STEP_TOKEN, FiltersViewStep } from './filters-active-step';
 import { TableDialogCommonData } from '../../../models/table-dialog-common-data.model';
+import { SelectableFilter } from './filters-list-step.component';
 
 export interface FiltersDialogData extends TableDialogCommonData {
     filterBy: CollectionFilter[];
@@ -97,10 +98,12 @@ export class FiltersComponent implements Resettable, AfterViewInit {
     }
 
     /** Select filter to drill down */
-    selectFilter(filter: TableViewSettingsFilterComponent): void {
+    selectFilter(filter: SelectableFilter): void {
         this.activeStep = ACTIVE_STEP.FILTER;
-        this.activeFilter = filter;
-        this.activeFilterColumnKey = this.columns.find(({ name }) => name === filter.column)?.key;
+        this.activeFilter = filter as TableViewSettingsFilterComponent;
+        this.activeFilterColumnKey = this.columns.find(
+            ({ name }) => name === (<TableViewSettingsFilterComponent>filter).column
+        )?.key;
         this._cd.detectChanges();
     }
 

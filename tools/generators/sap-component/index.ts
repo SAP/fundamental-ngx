@@ -29,7 +29,6 @@ export default function (schema: SapComponentSchema): Rule {
     return chain([
         externalSchematic('@nrwl/angular', 'lib', {
             name: schema.name,
-            style: 'scss',
             directory: `${getProjectDirName(schema)}/src/lib`,
             tags: [`scope:${getProjectTag(schema)}`, 'type:lib'].join(','),
             unitTestRunner: 'karma',

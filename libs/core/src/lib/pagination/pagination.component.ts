@@ -386,7 +386,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      * @param page The page to navigate to.
      * @param event The mouse event (optional).
      */
-    goToPage(page: number, event?: KeyboardEvent): void {
+    goToPage(page: number, event?: Event): void {
         if (page > this._lastPage || page < 1) {
             return;
         }

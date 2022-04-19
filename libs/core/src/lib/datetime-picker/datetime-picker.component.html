@@ -35,7 +35,7 @@
                     [compact]="compact"
                     [disabled]="disabled"
                     [ngModel]="_inputFieldDate"
-                    (keyup.enter)="handleInputChange($event.target.value, false)"
+                    (keyup.enter)="handleInputChange($any($event.target).value, false)"
                     (ngModelChange)="handleInputChange($event, true)"
                     (blur)="handleOnTouched($event)"
                 />

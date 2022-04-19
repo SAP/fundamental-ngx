@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { NumberStepInputChangeEvent } from '@fundamental-ngx/platform/form';
+import { StepInputChangeEvent, StepInputAlign } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-number-step-input-example',
@@ -8,9 +8,11 @@ import { NumberStepInputChangeEvent } from '@fundamental-ngx/platform/form';
     styleUrls: ['./platform-number-step-input-example.component.scss']
 })
 export class PlatformNumberStepInputExampleComponent {
+    readonly stepInputAlign = StepInputAlign;
+
     value = 100;
 
-    onValueChange(event: NumberStepInputChangeEvent): void {
+    onValueChange(event: StepInputChangeEvent): void {
         this.value = event.payload;
     }
 }

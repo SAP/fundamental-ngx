@@ -32,7 +32,8 @@ import {
     InLineLayoutCollectionBaseInput,
     RESPONSIVE_BREAKPOINTS_CONFIG,
     ResponsiveBreakPointConfig,
-    ResponsiveBreakpointsService
+    ResponsiveBreakpointsService,
+    SelectItem
 } from '@fundamental-ngx/platform/shared';
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 
@@ -183,7 +184,7 @@ export class RadioGroupComponent
 
     /** @hidden */
     _getListItemDisabledValue(item: RadioGroupComponent['list'][number]): boolean {
-        return this.disabled || typeof item === 'string' ? this.disabled : item.disabled;
+        return this.disabled || (typeof item === 'object' && !!(<SelectItem>item).disabled);
     }
 
     /** @hidden */

@@ -19,9 +19,7 @@
                 buttonLabel="Browse"
                 buttonAriaLabel="browse file"
                 accept=".png,.jpg"
-                value="files"
                 [multiple]="true"
-                minFileSize="200KB"
                 (selectionChange)="handleFileSelection($event)"
             ></fdp-file-uploader>
         </fdp-form-field>
@@ -35,6 +33,6 @@
 
 Files Selected:
 <br />
-<span *ngFor="let file of this.files">
+<span *ngFor="let file of files">
     <span class="green">{{ file.name }} </span><br
 /></span>

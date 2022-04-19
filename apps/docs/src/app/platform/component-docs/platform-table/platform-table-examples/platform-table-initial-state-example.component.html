@@ -2,9 +2,9 @@
     #table
     [dataSource]="source"
     [initialVisibleColumns]="['updatedOn', 'name', 'price', 'status']"
-    [initialSortBy]="[{ field: 'price.value', direction: 'asc' }]"
+    [initialSortBy]="[{ field: 'price.value', direction: sortDirectionEnum.ASC }]"
     [initialFilterBy]="[{ field: 'price.value', strategy: 'greaterThanOrEqualTo', value: 100 }]"
-    [initialGroupBy]="[{ field: 'verified', direction: 'none', showAsColumn: true }]"
+    [initialGroupBy]="[{ field: 'verified', direction: sortDirectionEnum.NONE, showAsColumn: true }]"
 >
     <fdp-table-toolbar title="Order Items"></fdp-table-toolbar>
 

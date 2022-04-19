@@ -299,13 +299,13 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
     }
 
     /** @hidden */
-    _checkboxClick(event: PointerEvent): void {
+    _checkboxClick(event: MouseEvent): void {
         const checked = (<HTMLInputElement>event.target).checked;
         this._selectionItem(checked, event);
     }
 
     /** @hidden */
-    _selectionItem(value: boolean | number | T, event?: PointerEvent): void {
+    _selectionItem(value: boolean | number | T, event?: MouseEvent): void {
         const action =
             this.selectionMode !== 'multiSelect'
                 ? null

@@ -176,7 +176,7 @@ export class FixedCardLayoutComponent
     _singleItemColumns = new Set<number>();
 
     /** @hidden */
-    private _columnsWidth = new Map<number, number>();
+    _columnsWidth = new Map<number, number>();
 
     /** @hidden Return available width for fixed card layout */
     get _availableWidth(): number {

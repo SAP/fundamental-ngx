@@ -27,7 +27,7 @@
         <fd-input-group
             [id]="id + '-input-group-container'"
             class="fdp-multi-combobox-input-group-custom"
-            [state]="status === 'error' ? 'error' : state"
+            [state]="state"
             [buttonFocusable]="buttonFocusable"
             [button]="!readonly"
             [glyph]="!readonly ? 'navigation-down-arrow' : ' '"
@@ -50,7 +50,7 @@
                 [compact]="contentDensity | isCompactDensity"
                 [tokenizerFocusable]="false"
                 class="fdp-multi-combobox-tokenizer-custom"
-                [class]="isCompact ? 'fdp-multi-combobox-tokenizer-custom--compact' : ''"
+                [class]="(contentDensity | isCompactDensity) ? 'fdp-multi-combobox-tokenizer-custom--compact' : ''"
                 (moreClickedEvent)="moreClicked()"
             >
                 <fd-token
@@ -110,7 +110,7 @@
     <fd-input-group
         [id]="id + '-input-group-container'"
         class="fdp-multi-combobox-input-group-custom"
-        [state]="status === 'error' ? 'error' : state"
+        [state]="state"
         [buttonFocusable]="false"
         [compact]="contentDensity | isCompactDensity"
         [isControl]="true"
@@ -196,7 +196,7 @@
                     [selected]="optionItem.selected"
                 >
                     <fd-checkbox
-                        (click)="onOptionCheckboxClicked($event)"
+                        (click)="onOptionCheckboxClicked($event, i)"
                         [compact]="contentDensity | isCompactDensity"
                         (ngModelChange)="toggleSelection(optionItem)"
                         [ngModel]="optionItem.selected"

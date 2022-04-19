@@ -1,4 +1,4 @@
-<fd-menu #menu [compact]="compact" closeOnEscapeKey="true" [focusAutoCapture]="true" [placement]="placement$ | async">
+<fd-menu #menu [compact]="compact" [closeOnEscapeKey]="true" [focusAutoCapture]="true" [placement]="placement$ | async">
     <li fd-menu-item *ngFor="let collapsedBreadcrumbItem of collapsedBreadcrumbItems">
         <a
             fd-menu-interactive

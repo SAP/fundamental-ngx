@@ -58,7 +58,7 @@
                         [gapColumnLayout]="field.formItem?.guiOptions?.gapColumnLayout"
                         [formName]="field.formItem?.name"
                     >
-                        <ng-container *ngFor="let groupField of _getOrderedControls(field.controls)">
+                        <ng-container *ngFor="let groupField of field | getOrderedFieldControls">
                             <ng-container
                                 *fdpDynamicFormControlField="
                                     groupField;

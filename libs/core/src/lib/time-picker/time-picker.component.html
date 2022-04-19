@@ -28,8 +28,8 @@
                 fd-input-group-input
                 [compact]="compact"
                 [value]="_inputTimeValue"
-                (focusout)="_timeInputChanged($event.currentTarget.value)"
-                (keyup.enter)="_timeInputChanged($event.currentTarget.value)"
+                (focusout)="_timeInputChanged($any($event.currentTarget).value)"
+                (keyup.enter)="_timeInputChanged($any($event.currentTarget).value)"
                 [disabled]="disabled"
                 [attr.id]="inputId"
                 [placeholder]="_placeholder"

@@ -30,6 +30,7 @@ import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap }
 
 import {
     ContentDensityEnum,
+    ContentDensity,
     ContentDensityService,
     FdDropEvent,
     intersectionObservable,
@@ -47,7 +48,15 @@ import { EditableTableCell } from './table-cell.class';
 import { TableService } from './table.service';
 import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilter, TableState } from './interfaces';
 import { SearchInput } from './interfaces/search-field.interface';
-import { FILTER_STRING_STRATEGY, FilterableColumnDataType, SelectionMode, SortDirection, TableRowType } from './enums';
+import {
+    FILTER_STRING_STRATEGY,
+    FilterableColumnDataType,
+    SelectionMode,
+    SelectionModeValue,
+    SortDirection,
+    TableRowType,
+    ColumnAlign
+} from './enums';
 import {
     DEFAULT_HIGHLIGHTING_KEY,
     DEFAULT_TABLE_STATE,
@@ -195,11 +204,11 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
     /** The content density for which to render table. 'cozy' | 'compact' | 'condensed' */
     @Input()
-    contentDensity: ContentDensityEnum = ContentDensityEnum.COZY;
+    contentDensity: ContentDensity = ContentDensityEnum.COZY;
 
     /** Sets selection mode for the table. 'single' | 'multiple' | 'none' */
     @Input()
-    selectionMode: SelectionMode = SelectionMode.NONE;
+    selectionMode: SelectionModeValue = SelectionMode.NONE;
 
     /** Toggle for page scrolling feature. */
     @Input()
@@ -637,7 +646,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     private contentDensityManuallySet = false;
 
     /** @hidden */
-    private get _selectionColumnWidth(): number {
+    get _selectionColumnWidth(): number {
         return this._isShownSelectionColumn ? SELECTION_COLUMN_WIDTH.get(this.contentDensity) : 0;
     }
 
@@ -1101,7 +1110,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
      * @hidden
      * Toggle selectable row in SelectionMode.MULTIPLE
      */
-    _toggleMultiSelectRow(rowToToggle: TableRow, index: number, event?: PointerEvent | KeyboardEvent): void {
+    _toggleMultiSelectRow(rowToToggle: TableRow, index: number, event?: Event): void {
         if (this.selectionMode !== SelectionMode.MULTIPLE) {
             throw new Error('Unexpected selection mode');
         }
@@ -1109,7 +1118,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         const rows = this._tableRows;
         const removed = [];
         const added = [];
-        this._rangeSelector.onRangeElementToggled(index, event);
+        this._rangeSelector.onRangeElementToggled(index, event as PointerEvent | KeyboardEvent);
 
         this._rangeSelector.applyValueToEachInRange((idx) => {
             const row = rows[idx];
@@ -1297,6 +1306,21 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         styles['max-width'] = columnWidth;
         styles['width'] = columnWidth;
 
+        // The "start" value does align left when you are using a LTR browser.
+        // In RTL browsers, the "start" value aligns right.
+        // Since we want to dynamically apply alignment only depending on the service value, we are using "left"/"right" as values instead
+        switch (column.align) {
+            case ColumnAlign.START:
+                styles['text-align'] = this._rtl ? 'right' : 'left';
+                break;
+            case ColumnAlign.END:
+                styles['text-align'] = this._rtl ? 'left' : 'right';
+                break;
+            default:
+                styles['text-align'] = 'center';
+                break;
+        }
+
         return styles;
     }
 
@@ -1318,7 +1342,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     }
 
     /** @hidden */
-    _onRowClick(row: TableRow<T>, event?: KeyboardEvent): void {
+    _onRowClick(row: TableRow<T>, event?: Event): void {
         if (row.state !== 'readonly') {
             return;
         }

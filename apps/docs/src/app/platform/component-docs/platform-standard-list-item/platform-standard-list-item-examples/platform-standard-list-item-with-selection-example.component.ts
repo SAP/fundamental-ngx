@@ -14,7 +14,7 @@ const LIST_ELEMENTS: Address[] = [
     {
         img: 'https://placeimg.com/400/400/nature',
         imgInfo: 'nature',
-        name: 'Yello',
+        name: 'Yellow',
         description: 'First text item in Byline (Standard text item)',
         info: 'Second text item in Byline (Can be semantic (Status) or not)'
     },

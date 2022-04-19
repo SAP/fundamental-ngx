@@ -13,7 +13,9 @@ import {
     isCollectionFilter,
     TableDataProvider,
     TableDataSource,
-    TableState
+    TableState,
+    FilterableColumnDataType,
+    FilterType
 } from '@fundamental-ngx/platform/table';
 
 import {
@@ -87,6 +89,9 @@ export class PlatformSmartFilterBarDateRendererComponent extends BaseSmartFilter
     templateUrl: './platform-smart-filter-bar-custom-filter-example.component.html'
 })
 export class PlatformSmartFilterBarCustomFilterExampleComponent {
+    readonly dataTypeEnum = FilterableColumnDataType;
+    readonly filterTypeEnum = FilterType;
+
     source: TableDataSource<ExampleItem>;
 
     constructor(datetimeAdapter: DatetimeAdapter<FdDate>, private _smartFilterBarService: SmartFilterBarService) {

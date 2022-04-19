@@ -29,8 +29,13 @@
                             <button fd-nested-list-expand-icon></button>
                         </div>
                         <ul fd-nested-list>
-                            <ng-container *ngFor="let item of section.content; trackBy: trackBySectionContent">
-                                <ng-container *ngIf="item.subItems; else rootListItem">
+                            <ng-container
+                                *ngFor="
+                                    let item of $asSectionNestedContent(section.content);
+                                    trackBy: trackBySectionContent
+                                "
+                            >
+                                <ng-container *ngIf="item.subItems as itemSubItems; else rootListItem">
                                     <li fd-nested-list-item [expanded]="true">
                                         <div fd-nested-list-content>
                                             <a fd-nested-list-link>
@@ -40,7 +45,7 @@
                                         </div>
                                         <ul fd-nested-list>
                                             <ng-container
-                                                *ngFor="let subItem of item.subItems; trackBy: trackBySectionContent"
+                                                *ngFor="let subItem of itemSubItems; trackBy: trackBySectionContent"
                                                 [ngTemplateOutlet]="listItemTpl"
                                                 [ngTemplateOutletContext]="{ $implicit: subItem }"
                                             >

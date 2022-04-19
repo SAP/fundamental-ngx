@@ -13,6 +13,7 @@ import {
     TableDataProvider,
     TableState
 } from '@fundamental-ngx/platform/table';
+import { FilterableColumnDataType } from '@fundamental-ngx/platform/table';
 
 @Component({
     selector: 'fdp-platform-table-p13-filter-example',
@@ -26,6 +27,8 @@ import {
 })
 export class PlatformTableP13FilterExampleComponent {
     source: TableDataSource<ExampleItem>;
+
+    readonly dataTypeEnum = FilterableColumnDataType;
 
     constructor(datetimeAdapter: DatetimeAdapter<FdDate>) {
         this.source = new TableDataSource(new TableDataProviderExample(datetimeAdapter));

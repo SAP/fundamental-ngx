@@ -1,6 +1,6 @@
-import { ContentDensityEnum } from '@fundamental-ngx/core/utils';
+import { ContentDensity } from '@fundamental-ngx/core/utils';
 
 /** Common properties for table dialogs */
 export interface TableDialogCommonData {
-    tableContentDensity: ContentDensityEnum;
+    tableContentDensity: ContentDensity;
 }

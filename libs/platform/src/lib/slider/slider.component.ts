@@ -21,7 +21,7 @@ export type SliderCustomValue = Omit<SliderTickMark, 'position'>;
 export type SliderControlValue = number | number[] | SliderTickMark | SliderTickMark[];
 
 /** Switch change event instance */
-export class SliderChangeEvent<T> {
+export class SliderChangeEvent<T extends SliderControlValue = any> {
     /** The source Slider of the event. */
     source: SliderComponent;
     /** The new `payload` value of the slider. */
@@ -92,9 +92,7 @@ export class SliderComponent extends BaseInput {
      * *$event* can be used to retrieve the new state of the slider.
      */
     @Output()
-    readonly sliderChange: EventEmitter<SliderChangeEvent<SliderControlValue>> = new EventEmitter<
-        SliderChangeEvent<SliderControlValue>
-    >();
+    readonly sliderChange = new EventEmitter<SliderChangeEvent>();
 
     constructor(
         cd: ChangeDetectorRef,
@@ -127,7 +125,7 @@ export class SliderComponent extends BaseInput {
      * Method to emit change event
      */
     private _emitChangeEvent(modelValue: SliderControlValue): void {
-        const event = new SliderChangeEvent<SliderControlValue>();
+        const event = new SliderChangeEvent();
         event.source = this;
         event.payload = modelValue;
 

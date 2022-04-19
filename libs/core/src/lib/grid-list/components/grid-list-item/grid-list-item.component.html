@@ -5,7 +5,7 @@
     class="fd-grid-list__item"
     role="option"
     [class.is-navigated]="isNavigated"
-    [class.is-selected]="!!_selectedItem || _selectedItem === 0"
+    [class.is-selected]="!!_selectedItem"
     [class.fd-grid-list__item--link]="_isActive && (type === 'active' || type === 'detailsAndActive')"
     [class.fd-grid-list__item--unread]="state === 'unread'"
     [class.fd-grid-list__item--locked]="state === 'locked'"
@@ -16,7 +16,7 @@
     [attr.aria-label]="ariaLabel"
     (mouseover)="_setActive($event, false)"
     (mouseout)="_setActive($event, true)"
-    [attr.aria-selected]="selectionMode === 'none' ? null : !!_selectedItem || _selectedItem === 0"
+    [attr.aria-selected]="selectionMode === 'none' ? null : !!_selectedItem"
 >
     <span
         *ngIf="status"

@@ -4,6 +4,7 @@ import {
     SmartFilterBarStrategyLabels,
     SmartFilterBarVisibilityCategoryLabels
 } from '@fundamental-ngx/platform/smart-filter-bar';
+import { FilterableColumnDataType, FilterType } from '@fundamental-ngx/platform/table';
 
 @Component({
     selector: 'fdp-platform-smart-filter-bar-custom-labels-example',
@@ -12,6 +13,9 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlatformSmartFilterBarCustomLabelsExampleComponent {
+    readonly dataTypeEnum = FilterableColumnDataType;
+    readonly filterTypeEnum = FilterType;
+
     source: ExampleItem[] = ITEMS;
 
     defineStrategyLabels: SmartFilterBarStrategyLabels = {
