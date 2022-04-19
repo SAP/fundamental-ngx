@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.18...v0.34.3-rc.19) (2022-04-19)
+
+
+### Features
+
+* **docs/core/platform:** strict angularCompilerOptions ([#7998](https://github.com/SAP/fundamental-ngx/issues/7998)) ([acd8502](https://github.com/SAP/fundamental-ngx/commit/acd8502a00abc0eb15ef19647f1b9188962ed294))
+
 ### [0.34.3-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.17...v0.34.3-rc.18) (2022-04-18)
 
 
