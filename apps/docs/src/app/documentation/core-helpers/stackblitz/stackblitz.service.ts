@@ -102,6 +102,7 @@ export class StackblitzService {
 <html>
     <head>
         <link rel="stylesheet" href="node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_fiori_3/css_variables.css" />
+        <link rel="stylesheet" href="node_modules/fundamental-styles/dist/theming/sap_fiori_3.css" />
         <link rel="stylesheet" href="node_modules/fundamental-styles/dist/fonts.css" />
         <link rel="stylesheet" href="node_modules/fundamental-styles/dist/icon.css" />
     </head>
