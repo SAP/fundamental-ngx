@@ -5,7 +5,7 @@ export class ActionSheetPo extends CoreBaseComponentPo {
     url = '/action-sheet';
     root = '#page-content';
 
-    actionSheetMenuButton = 'fd-action-sheet-control button';
+    actionSheetMenuButton = 'app-action-sheet fd-action-sheet-control button';
     actionSheetList = 'fd-action-sheet-body ul';
     actionSheetListItems = 'fd-action-sheet-body li';
     actionSheetListItemButtons = 'fd-action-sheet-body button';
