@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.19...v0.34.3-rc.20) (2022-04-19)
+
+
+### Bug Fixes
+
+* **docs:** fixed missing variables file in stackblitz examples ([#7999](https://github.com/SAP/fundamental-ngx/issues/7999)) ([7826a5b](https://github.com/SAP/fundamental-ngx/commit/7826a5b46b83a53057767197fb35ee6d11c459a2))
+
 ### [0.34.3-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.18...v0.34.3-rc.19) (2022-04-19)
 
 
