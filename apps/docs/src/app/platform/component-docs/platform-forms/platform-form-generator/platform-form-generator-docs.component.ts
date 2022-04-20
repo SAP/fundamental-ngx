@@ -29,6 +29,8 @@ import customFieldLayoutSrc from '!./platform-form-generator-examples/platform-f
 import inlineHelpHtml from '!./platform-form-generator-examples/platform-form-generator-inline-help-example.component.html?raw';
 import inlineHelpSrc from '!./platform-form-generator-examples/platform-form-generator-inline-help-example.component.ts?raw';
 
+import defaultConfigSrc from '!./platform-form-generator-examples/platform-form-generator-global-config-example.ts?raw';
+
 import { ExampleFile } from '../../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -175,4 +177,6 @@ export class PlatformFormGeneratorDocsComponent {
             component: 'PlatformFormGeneratorInlineHelpExampleComponent'
         }
     ];
+
+    defaultConfigExample = defaultConfigSrc;
 }

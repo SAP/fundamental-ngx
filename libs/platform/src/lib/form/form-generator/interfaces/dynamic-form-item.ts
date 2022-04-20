@@ -92,7 +92,7 @@ export interface DynamicFormFieldItem {
 
     /**
      * @description
-     * If true, will fallback to `message` property if `placeholder` was not provided.
+     * If true, will fall back to `message` property if `placeholder` was not provided.
      */
     useMessageAsPlaceholder?: boolean;
 
