@@ -282,14 +282,14 @@ export class FormGeneratorService implements OnDestroy {
         let validator: AsyncValidatorFn = null;
 
         if (isFunction(formItem.validate)) {
-            validator = async (control: DynamicFormControl) => {
+            validator = async (control) => {
                 const obj = formItem.validate(control.value, this._getFormValueWithoutUngrouped(form));
 
                 const result = await this._getFunctionValue(obj);
 
                 const returnObj = {};
 
-                returnObj[`${control.formItem.name}Validator`] = typeof result === 'boolean' ? true : result;
+                returnObj[`${(<DynamicFormControl>control).formItem.name}Validator`] = typeof result === 'boolean' ? true : result;
 
                 return result === null ? result : returnObj;
             };

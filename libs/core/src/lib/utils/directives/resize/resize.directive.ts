@@ -103,9 +103,9 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
         const resizeContainer = this._findResizeContainer();
         const isBoundaryOverflow = this._getBoundaryOverflowFunction(resizeContainer);
 
-        const mouseUpEvent$ = fromEvent(window, 'mouseup');
-        const mouseMoveEvent$ = fromEvent(resizeContainer, 'mousemove');
-        const mouseDownEvent$ = fromEvent(this.resizeHandleReference.elementRef.nativeElement, 'mousedown');
+        const mouseUpEvent$ = fromEvent<MouseEvent>(window, 'mouseup');
+        const mouseMoveEvent$ = fromEvent<MouseEvent>(resizeContainer, 'mousemove');
+        const mouseDownEvent$ = fromEvent<MouseEvent>(this.resizeHandleReference.elementRef.nativeElement, 'mousedown');
 
         const resizeActive$ = merge(mouseDownEvent$.pipe(mapTo(true)), mouseUpEvent$.pipe(mapTo(false)));
         const emitResizableEvents$ = this._getResizeEventsNotifiers(resizeActive$);

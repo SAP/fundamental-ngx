@@ -67,7 +67,7 @@ export class PlatformVhdMultiInputExampleComponent implements OnInit {
         this.dataSource = new ValueHelpDialogDataSource(new VhdDataProvider(data.dataSource));
     }
 
-    valueChange($event: VhdValueChangeEvent<ExampleTestModel[]>): void {
+    valueChange($event: VhdValueChangeEvent<ExampleTestModel>): void {
         this.selected = [...$event.selected];
         this._changeDetectorRef.detectChanges();
     }

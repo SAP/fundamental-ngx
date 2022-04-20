@@ -539,8 +539,8 @@ export class FormGroupComponent
 
     /** @hidden */
     private _listenFormFieldColumnChange(): void {
-        this.formGroupChildren.forEach((field: FormFieldComponent) =>
-            field.onColumnChange?.pipe(takeUntil(this._destroyed)).subscribe(() => {
+        this.formGroupChildren.forEach((field: FormGroupField) =>
+            (<FormFieldComponent>field).onColumnChange?.pipe(takeUntil(this._destroyed)).subscribe(() => {
                 this._updateFieldByColumn();
                 this._cd.markForCheck();
             })

@@ -180,9 +180,9 @@ export class SplitterResizerComponent implements OnDestroy {
         }
 
         this._ngZone.runOutsideAngular(() => {
-            fromEvent(this._document, 'mousemove')
+            fromEvent<MouseEvent>(this._document, 'mousemove')
                 .pipe(debounceTime(10), takeUntil(this._pointerMoveListener))
-                .subscribe((event: MouseEvent) => {
+                .subscribe((event) => {
                     this._ngZone.run(() => {
                         const newPosition = this._isHorizontal ? event.clientY : event.clientX;
 

@@ -59,7 +59,7 @@ export class PlatformVhdStrategyLabelExampleComponent implements OnInit {
     filters: FilterData[];
     dataSource: ValueHelpDialogDataSource<ExampleTestModel>;
 
-    actualValue: Partial<VhdValue<ExampleTestModel[]>> = {};
+    actualValue: Partial<VhdValue<ExampleTestModel>> = {};
     actualItems = [];
 
     customStrategyLabels: {
@@ -68,7 +68,7 @@ export class PlatformVhdStrategyLabelExampleComponent implements OnInit {
         equalTo: 'ilingana ne-',
         between: 'FROM...TO'
     };
-    formatTokenFn = ((value: Partial<VhdValue<ExampleTestModel[]>>) => {
+    formatTokenFn = ((value: Partial<VhdValue<ExampleTestModel>>) => {
         this.actualItems = [
             ...(value.selected || []).map((item) => item.name),
             ...(value.conditions || []).map((item) => this.conditionDisplayFn(item))
@@ -113,7 +113,7 @@ export class PlatformVhdStrategyLabelExampleComponent implements OnInit {
         this.dataSource = new ValueHelpDialogDataSource(new VhdDataProvider(data.dataSource));
     }
 
-    valueChange($event: VhdValueChangeEvent<ExampleTestModel[]>): void {
+    valueChange($event: VhdValueChangeEvent<ExampleTestModel>): void {
         this.actualValue = { ...$event };
     }
 }

@@ -458,15 +458,15 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
 
         const groups = Object.keys(this._groupedCollectionPriority);
 
-        return <number>groups.reduce((lowestGroup, currentGroup) => {
+        return groups.reduce((lowestGroup, currentGroup) => {
             const lowestGroupPriority = this._groupedCollectionPriority[lowestGroup];
             const currentGroupPriority = this._groupedCollectionPriority[currentGroup];
             if (OVERFLOW_PRIORITY_SCORE.get(currentGroupPriority) < OVERFLOW_PRIORITY_SCORE.get(lowestGroupPriority)) {
-                return currentGroup;
+                return +currentGroup;
             }
 
             return lowestGroup;
-        }, itemGroup);
+        }, itemGroup as number);
     }
 
     /** @hidden */

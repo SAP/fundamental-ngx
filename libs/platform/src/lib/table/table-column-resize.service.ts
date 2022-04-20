@@ -313,9 +313,9 @@ export class TableColumnResizeService implements OnDestroy {
 
     /** Update column resizer position. */
     private _updateResizerPositionOnMouseMove(): void {
-        this._resizerMoveSubscription = fromEvent(document, 'mousemove')
+        this._resizerMoveSubscription = fromEvent<MouseEvent>(document, 'mousemove')
             .pipe(debounceTime(10))
-            .subscribe((event: MouseEvent) => {
+            .subscribe((event) => {
                 const diffX = this._rtl ? this._clientStartX - event.clientX : event.clientX - this._clientStartX;
 
                 this._resizerPosition = this._startX + diffX;

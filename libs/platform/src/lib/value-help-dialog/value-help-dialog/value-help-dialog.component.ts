@@ -62,7 +62,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
 
     /** Initial state of Value help dialog */
     @Input()
-    value: VhdValue<T[]> = {
+    value: VhdValue<T> = {
         selected: [],
         conditions: []
     };
@@ -195,7 +195,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     /** Dialog outputs */
     /** Event emitted when filters/tokens were changed. */
     @Output()
-    valueChange = new EventEmitter<VhdValueChangeEvent<T[]>>();
+    valueChange = new EventEmitter<VhdValueChangeEvent<T>>();
 
     /** Event emitted when data loading is started. */
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
@@ -255,12 +255,12 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     private _contentDensityManuallySet = false;
 
     /** @hidden Previous state */
-    private _prevState: VhdValue<T[]> = {
+    private _prevState: VhdValue<T> = {
         selected: [],
         conditions: []
     };
     /** @hidden Current data for local manupulation */
-    private _currentValue: VhdValue<T[]> = {
+    private _currentValue: VhdValue<T> = {
         selected: [],
         conditions: []
     };
@@ -499,8 +499,9 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
                 selected: this.selectedItems,
                 conditions: this.validConditions
             };
-            if (this.formatToken && typeof this.formatToken === 'function') {
-                return this.activeDialog.close(this.formatToken(value));
+            if (typeof this.formatToken === 'function') {
+                this.formatToken(value);
+                return this.activeDialog.close(value);
             }
             this.activeDialog.close(value);
         }

@@ -37,12 +37,12 @@ export class DirectionalityComponent implements OnInit {
 
         if (this.className) {
             Array.from(document.getElementsByClassName(this.className)).forEach(
-                (element: HTMLElement) => (element.dir = dirValue)
+                (element) => ((<HTMLElement>element).dir = dirValue)
             );
         }
         if (this.element) {
             Array.from(document.getElementsByTagName(this.element)).forEach(
-                (element: HTMLElement) => (element.dir = dirValue)
+                (element) => ((<HTMLElement>element).dir = dirValue)
             );
         }
         if (this.label) {
