@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.21...v0.34.3-rc.22) (2022-04-20)
+
+
+### Bug Fixes
+
+* **platform:** wizard generator content density ([#8000](https://github.com/SAP/fundamental-ngx/issues/8000)) ([b6d955a](https://github.com/SAP/fundamental-ngx/commit/b6d955aba40d0b08470fb4402121bf3143abf431))
+
 ### [0.34.3-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.20...v0.34.3-rc.21) (2022-04-20)
 
 
