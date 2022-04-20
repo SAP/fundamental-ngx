@@ -8,6 +8,7 @@ import {
     Host,
     Input,
     OnDestroy,
+    OnInit,
     Optional,
     Output,
     QueryList,
@@ -76,7 +77,7 @@ export class MultiComboboxSelectionChangeEvent {
 }
 
 @Directive()
-export abstract class BaseMultiCombobox extends CollectionBaseInput implements AfterViewInit, OnDestroy {
+export abstract class BaseMultiCombobox extends CollectionBaseInput implements OnInit, AfterViewInit, OnDestroy {
     /** Provides selected items. */
     @Input()
     selectedItems: any[] = [];
@@ -96,7 +97,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     @Input()
     set dataSource(value: FdpMultiComboboxDataSource<any>) {
         if (value) {
-            this._initializeDataSource(value);
+            this._data = value;
         }
     }
     get dataSource(): FdpMultiComboboxDataSource<any> {
@@ -171,9 +172,14 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     /** Sets invalid entry message. */
     @Input()
     invalidEntryMessage = 'Invalid entry';
-
+    private _limitless = false;
     @Input()
-    limitless = true;
+    set limitless(val: boolean) {
+        this._limitless = val;
+    }
+    get limitless(): boolean {
+        return this._limitless;
+    }
 
     /** Event emitted when item is selected. */
     @Output()
@@ -268,10 +274,10 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
      * @hidden
      * Grouped suggestions mapped to array.
      */
-    _flatSuggestions: SelectableOptionItem[];
+    _flatSuggestions: SelectableOptionItem[] = [];
 
     /** @hidden */
-    _fullFlatSuggestions: SelectableOptionItem[];
+    _fullFlatSuggestions: SelectableOptionItem[] = [];
 
     /**
      * @hidden
@@ -299,6 +305,9 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
 
     /** @hidden */
     selectedShown$ = new BehaviorSubject(false);
+
+    /** @hidden */
+    private _data: any;
 
     /** @hidden */
     protected _dataSource: FdpMultiComboboxDataSource<any>;
@@ -371,6 +380,10 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
         super(_cd, ngControl, ngForm, formField, formControl);
+    }
+
+    ngOnInit(): void {
+        this._initializeDataSource(this._data);
     }
 
     /** @hidden */

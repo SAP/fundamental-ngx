@@ -52,6 +52,21 @@
         ></fdp-multi-combobox>
         <p>Selected: {{ selectedItems4 | json }}</p>
     </fdp-form-field>
+
+    <fdp-form-field id="ds-limitless" label="Data Source (Limitless)">
+        <fdp-multi-combobox
+            [autoResize]="true"
+            name="dsLimitless"
+            placeholder="Type some text..."
+            [dataSource]="ds"
+            displayKey="name"
+            lookupKey="name"
+            (selectionChange)="onSelect6($event)"
+            [selectedItems]="selectedItems6"
+            [limitless]="true"
+        ></fdp-multi-combobox>
+        <p>Selected: {{ selectedItems4 | json }}</p>
+    </fdp-form-field>
 </fdp-form-group>
 
 <fdp-form-group [noLabelLayout]="false" columnLayout="XL1-L2-M1-S1">
