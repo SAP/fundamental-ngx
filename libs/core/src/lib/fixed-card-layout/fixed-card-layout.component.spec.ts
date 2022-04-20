@@ -9,17 +9,25 @@ import { RtlService } from '@fundamental-ngx/core/utils';
 @Component({
     template: `
         <div>
-            <fd-fixed-card-layout>
+            <fd-fixed-card-layout [maxColumns]="maxColumns">
                 <fd-card *fdCardDef="1">1</fd-card>
                 <fd-card *fdCardDef="2">2</fd-card>
                 <fd-card *fdCardDef="3">3</fd-card>
                 <fd-card *fdCardDef="4">4</fd-card>
                 <fd-card *fdCardDef="5">5</fd-card>
+                <fd-card *fdCardDef="6">1</fd-card>
+                <fd-card *fdCardDef="7">2</fd-card>
+                <fd-card *fdCardDef="8">3</fd-card>
+                <fd-card *fdCardDef="9">4</fd-card>
+                <fd-card *fdCardDef="10">5</fd-card>
+                <fd-card *fdCardDef="11">1</fd-card>
             </fd-fixed-card-layout>
         </div>
     `
 })
 class TestFixedCardLayoutComponent {
+    maxColumns = 10;
+
     @ViewChild(FixedCardLayoutComponent)
     fixedCardLayout: FixedCardLayoutComponent;
 }
@@ -48,10 +56,10 @@ describe('FixedCardLayoutComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should have 5 cards on screen', async () => {
+    it('should have 11 cards on screen', async () => {
         await whenStable(fixture);
 
-        expect(component.fixedCardLayout._cards.length).toEqual(5);
+        expect(component.fixedCardLayout._cards.length).toEqual(11);
     });
 
     describe('Columns calculation', () => {
@@ -70,6 +78,14 @@ describe('FixedCardLayoutComponent', () => {
                 expect(component.fixedCardLayout._cardColumns.length).toEqual(columns[i]);
             });
         }
+
+        it('should have 1 column when maxColumns set', async () => {
+            component.maxColumns = 1;
+
+            await whenStable(fixture);
+
+            expect(component.fixedCardLayout._numberOfColumns).toEqual(1);
+        });
     });
 
     describe('Drag & drop', () => {

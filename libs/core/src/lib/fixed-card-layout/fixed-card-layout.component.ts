@@ -36,6 +36,7 @@ const PX_IN_REM = 16;
 const CARD_MINIMUM_WIDTH = 320; // 320px = 20rem
 const CARD_GAP_WIDTH = 16; // 16px = 1rem
 const DRAG_START_DELAY = 200; // in ms
+const MAX_COLUMNS = 10;
 
 let cardRank = 1;
 
@@ -126,6 +127,10 @@ export class FixedCardLayoutComponent
     /** Config with the width ratios that should take every column. Flex-grow principe. Missed values set to 0. s*/
     @Input()
     columnsWidthConfig: ColumnsWidthConfig;
+
+    /** Limit the number of columns. Default is 10. */
+    @Input()
+    maxColumns = MAX_COLUMNS;
 
     /** Event to emit, when layout changes */
     @Output()
@@ -235,7 +240,13 @@ export class FixedCardLayoutComponent
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        if ('columnsWidthConfig' in changes && this._cards?.length) {
+        if (!this._cards?.length) {
+            return;
+        }
+
+        if ('maxColumns' in changes) {
+            this.updateLayout();
+        } else if ('columnsWidthConfig' in changes) {
             this._setColumnsWidth();
         }
     }
@@ -264,7 +275,12 @@ export class FixedCardLayoutComponent
 
         const possibleNumberOfColumns = getNumberOfColumns(this._availableWidth, this.cardMinimumWidth);
 
-        this._numberOfColumns = Math.min(possibleNumberOfColumns, this._cards.length);
+        this._numberOfColumns = Math.min(
+            possibleNumberOfColumns,
+            this._cards.length,
+            this.maxColumns || MAX_COLUMNS,
+            MAX_COLUMNS
+        );
 
         this.layoutChange.emit({
             numberOfColumns: this._numberOfColumns,

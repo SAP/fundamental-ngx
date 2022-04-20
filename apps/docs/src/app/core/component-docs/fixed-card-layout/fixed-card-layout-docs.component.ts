@@ -6,6 +6,8 @@ import mobileFixedCardlayoutH from '!./examples/mobile/fixed-card-layout-mobile-
 import mobileFixedCardlayoutTs from '!./examples/mobile/fixed-card-layout-mobile-examples.component.ts?raw';
 import customColumnWidthHtml from '!./examples/custom-column-width/fixed-card-layout-custom-column-width-example.component.html?raw';
 import customColumnWidthTs from '!./examples/custom-column-width/fixed-card-layout-custom-column-width-example.component.ts?raw';
+import maxColumnsHtml from '!./examples/max-columns/fixed-card-layout-max-columns-example.component.html?raw';
+import maxColumnsTs from '!./examples/max-columns/fixed-card-layout-max-columns-example.component.ts?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -60,6 +62,20 @@ export class FixedCardLayoutDocsComponent {
             component: 'FixedCardLayoutCustomColumnWidthExampleComponent',
             code: customColumnWidthTs,
             fileName: 'fixed-card-layout-custom-column-width-example'
+        }
+    ];
+
+    maxColumns: ExampleFile[] = [
+        {
+            language: 'html',
+            code: maxColumnsHtml,
+            fileName: 'fixed-card-layout-max-columns-example'
+        },
+        {
+            language: 'typescript',
+            component: 'FixedCardLayoutMaxColumnsExampleComponent',
+            code: maxColumnsTs,
+            fileName: 'fixed-card-layout-max-columns-example'
         }
     ];
 }
