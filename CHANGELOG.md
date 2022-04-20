@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.20...v0.34.3-rc.21) (2022-04-20)
+
+
+### Bug Fixes
+
+* **core:** fixed card layout columns ([#8001](https://github.com/SAP/fundamental-ngx/issues/8001)) ([0752083](https://github.com/SAP/fundamental-ngx/commit/0752083dd35a28a67e76d6ccf5e497e9eb56256c))
+
 ### [0.34.3-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.19...v0.34.3-rc.20) (2022-04-19)
 
 
