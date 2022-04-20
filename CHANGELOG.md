@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.22...v0.34.3-rc.23) (2022-04-20)
+
+
+### Features
+
+* **core:** maxColumns feature for fixed grid layout ([#8002](https://github.com/SAP/fundamental-ngx/issues/8002)) ([64060f2](https://github.com/SAP/fundamental-ngx/commit/64060f257d51c0f06a9e7b61fd10f6d50137c518))
+
 ### [0.34.3-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.21...v0.34.3-rc.22) (2022-04-20)
 
 
