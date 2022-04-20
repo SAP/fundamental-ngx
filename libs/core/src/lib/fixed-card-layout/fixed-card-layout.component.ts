@@ -235,7 +235,7 @@ export class FixedCardLayoutComponent
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        if ('columnsWidthConfig' in changes) {
+        if ('columnsWidthConfig' in changes && this._cards?.length) {
             this._setColumnsWidth();
         }
     }
@@ -258,7 +258,13 @@ export class FixedCardLayoutComponent
 
     /** Distribute cards on window resize */
     updateLayout(): void {
-        this._numberOfColumns = getNumberOfColumns(this._availableWidth, this.cardMinimumWidth);
+        if (!this._cards.length) {
+            return;
+        }
+
+        const possibleNumberOfColumns = getNumberOfColumns(this._availableWidth, this.cardMinimumWidth);
+
+        this._numberOfColumns = Math.min(possibleNumberOfColumns, this._cards.length);
 
         this.layoutChange.emit({
             numberOfColumns: this._numberOfColumns,
@@ -483,6 +489,7 @@ export class FixedCardLayoutComponent
     /** @hidden */
     private _setColumnsWidth(detectChanges = true): void {
         this._columnsWidth = new Map();
+
         const configPresent =
             this.columnsWidthConfig &&
             typeof this.columnsWidthConfig === 'object' &&
