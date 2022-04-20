@@ -278,7 +278,7 @@ export class FixedCardLayoutComponent
         this._numberOfColumns = Math.min(
             possibleNumberOfColumns,
             this._cards.length,
-            this.maxColumns || 0,
+            this.maxColumns || MAX_COLUMNS,
             MAX_COLUMNS
         );
 
