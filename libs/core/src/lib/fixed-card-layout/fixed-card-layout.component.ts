@@ -264,7 +264,7 @@ export class FixedCardLayoutComponent
 
         const possibleNumberOfColumns = getNumberOfColumns(this._availableWidth, this.cardMinimumWidth);
 
-        this._numberOfColumns = Math.min(possibleNumberOfColumns, this._cards.length)
+        this._numberOfColumns = Math.min(possibleNumberOfColumns, this._cards.length);
 
         this.layoutChange.emit({
             numberOfColumns: this._numberOfColumns,
