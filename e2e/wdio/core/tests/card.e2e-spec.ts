@@ -16,7 +16,6 @@ import {
     barChartCounterText,
     barChartItemsText,
     barChartTitleText,
-    btnText,
     cardListItemText,
     cardSubtitleText,
     cardTypeAttr,
@@ -48,7 +47,9 @@ describe('Card test suite:', () => {
         ftCardHeader,
         ftCardListItems,
         ftFooter,
-        ftButtons,
+        ftButtonsStart,
+        ftButtonsCenter,
+        ftButtonsEnd,
         kpiCardHeader,
         kpiCardTitle,
         kpiAnalyticsHeaderIcons,
@@ -132,8 +133,12 @@ describe('Card test suite:', () => {
 
         it('should check footer', () => {
             expect(isElementDisplayed(ftFooter)).toBe(true);
-            checkElArrIsClickable(ftButtons);
-            checkElementTextValue(ftButtons, btnText);
+            checkElArrIsClickable(ftButtonsStart);
+            checkElementTextValue(ftButtonsStart, 'Start');
+            checkElArrIsClickable(ftButtonsCenter);
+            checkElementTextValue(ftButtonsCenter, 'Center');
+            checkElArrIsClickable(ftButtonsEnd);
+            checkElementTextValue(ftButtonsEnd, 'End');
         });
     });
 

@@ -19,7 +19,6 @@ export class CardContentComponent implements OnInit, CssClassBuilder {
     /** @hidden */
     @ContentChild(FD_LIST)
     set containsList(list: any) {
-        console.log(list);
         this._containsList = !!list;
     }
 
