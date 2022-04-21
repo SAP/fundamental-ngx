@@ -172,7 +172,8 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     /** Sets invalid entry message. */
     @Input()
     invalidEntryMessage = 'Invalid entry';
-    private _limitless = false;
+
+    /** Sets _limitless value */
     @Input()
     set limitless(val: boolean) {
         this._limitless = val;
@@ -308,6 +309,9 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
 
     /** @hidden */
     private _data: any;
+
+    /** @hidden */
+    private _limitless = false;
 
     /** @hidden */
     protected _dataSource: FdpMultiComboboxDataSource<any>;
