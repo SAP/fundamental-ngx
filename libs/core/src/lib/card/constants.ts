@@ -1,6 +1,7 @@
 export const CLASS_NAME = {
     card: 'fd-card',
     cardCompact: 'fd-card--compact',
+    cardList: 'fd-card--list',
 
     cardHeader: 'fd-card__header',
     cardHeaderNonInteractive: 'fd-card__header--non-interactive',

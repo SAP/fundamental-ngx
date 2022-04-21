@@ -7,6 +7,7 @@ import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 
 import { CardComponent } from './card.component';
 import { CardHeaderComponent } from './card-header.component';
+import { CardFooterComponent } from './card-footer.component';
 import { CardTitleDirective } from './card-title.directive';
 import { CardSubtitleDirective } from './card-subtitle.directive';
 import { CardSecondSubtitleDirective } from './card-second-subtitle.directive';
@@ -37,7 +38,8 @@ const components = [
     CardKpiScaleTextDirective,
     CardKpiAnalyticsDirective,
     CardKpiAnalyticsLabelDirective,
-    CardKpiAnalyticsContentDirective
+    CardKpiAnalyticsContentDirective,
+    CardFooterComponent
 ];
 
 @NgModule({

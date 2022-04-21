@@ -17,13 +17,10 @@
                 <span fd-list-title> item 4 </span>
             </li>
         </ul>
-        <div fd-bar barDesign="footer" [cozy]="false">
-            <div fd-bar-right>
-                <fd-toolbar size="compact" fdType="transparent" [clearBorder]="true">
-                    <button fd-toolbar-item fd-button fdType="positive" [compact]="true">Approve</button>
-                    <button fd-toolbar-item fd-button fdType="negative" [compact]="true">Reject</button>
-                </fd-toolbar>
-            </div>
-        </div>
     </fd-card-content>
+    <fd-card-footer>
+        <button start fd-button fdType="positive" [compact]="true">Start</button>
+        <button center fd-button fdType="positive" [compact]="true">Center</button>
+        <button end fd-button fdType="negative" [compact]="true">End</button>
+    </fd-card-footer>
 </fd-card>
