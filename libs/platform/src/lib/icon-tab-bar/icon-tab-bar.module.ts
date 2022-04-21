@@ -8,7 +8,6 @@ import { OverflowListModule } from '@fundamental-ngx/core/utils';
 
 import { IconTabBarComponent } from './icon-tab-bar.component';
 import { IconTabBarTextTypeComponent } from './components/icon-tab-bar-text-type/icon-tab-bar-text-type.component';
-import { ExtraButtonDirective } from './directives/extra-button/extra-button.directive';
 import { IconTabBarIconTypeComponent } from './components/icon-tab-bar-icon-type/icon-tab-bar-icon-type.component';
 import { IconTabBarProcessTypeComponent } from './components/icon-tab-bar-process-type/icon-tab-bar-process-type.component';
 import { IconTabBarFilterTypeComponent } from './components/icon-tab-bar-filter-type/icon-tab-bar-filter-type.component';
@@ -22,7 +21,6 @@ import { IconBarDndListDirective } from './directives/dnd/icon-bar-dnd-list.dire
     declarations: [
         IconTabBarComponent,
         IconTabBarTextTypeComponent,
-        ExtraButtonDirective,
         IconTabBarIconTypeComponent,
         IconTabBarProcessTypeComponent,
         IconTabBarFilterTypeComponent,
@@ -36,7 +34,6 @@ import { IconBarDndListDirective } from './directives/dnd/icon-bar-dnd-list.dire
     exports: [
         IconTabBarComponent,
         IconTabBarTextTypeComponent,
-        ExtraButtonDirective,
         IconTabBarIconTypeComponent,
         IconTabBarProcessTypeComponent,
         IconTabBarFilterTypeComponent,
