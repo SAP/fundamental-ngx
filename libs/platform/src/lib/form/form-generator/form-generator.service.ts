@@ -262,8 +262,7 @@ export class FormGeneratorService implements OnDestroy {
     }
 
     /** @hidden */
-    _getFormValueWithout
-    (value: any): any {
+    _getFormValueWithout(value: any): any {
         if (value[UNGROUPED_FORM_GROUP_NAME]) {
             const ungroupedGroupValue: { [key: string]: any } = value[UNGROUPED_FORM_GROUP_NAME];
             for (const [fieldName, fieldValue] of Object.entries(ungroupedGroupValue)) {
