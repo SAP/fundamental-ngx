@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { iconTypeConfig, longIconTypeConfig } from '../config-for-examples/icon-type-config';
 import { cloneDeep } from 'lodash-es';
-import { TabConfig } from '../../platform-icon-tab-bar-docs.component';
+import { TabConfig } from '@fundamental-ngx/platform/icon-tab-bar';
 
 @Component({
     selector: 'fd-icon-tab-bar-process-type-example',

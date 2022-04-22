@@ -65,7 +65,7 @@ export class AvatarGroupDataExampleService {
         return people;
     }
 
-    private _generateImage(): { imageUrl?: string; glyph?: string } {
+    private _generateImage(): { imageUrl?: string; glyph?: string } | null {
         const option = Math.floor(Math.random() * 3);
 
         switch (option) {

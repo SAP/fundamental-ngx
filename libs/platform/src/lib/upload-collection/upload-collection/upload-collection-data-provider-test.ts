@@ -86,7 +86,7 @@ export class UploadCollectionDataProviderTest extends UploadCollectionDataProvid
             map((updatedItems) => {
                 const ids = newFiles
                     .filter((file) => {
-                        const includes = this._cancelUploadNewFileIds.includes(file.item.documentId);
+                        const includes = file.item.documentId && this._cancelUploadNewFileIds.includes(file.item.documentId);
                         if (includes) {
                             this._cancelUploadNewFileIds = this._cancelUploadNewFileIds.filter(
                                 (id) => id !== file.item.documentId
@@ -109,7 +109,7 @@ export class UploadCollectionDataProviderTest extends UploadCollectionDataProvid
     download(data: DownloadEvent): Observable<void> {
         console.log('download', data);
 
-        return of(null);
+        return of(undefined);
     }
 
     /**
@@ -119,7 +119,7 @@ export class UploadCollectionDataProviderTest extends UploadCollectionDataProvid
     moveTo(data: MoveToEvent): Observable<UploadCollectionItem[]> {
         console.log('moveTo', data);
 
-        return of(null);
+        return of([]);
     }
 
     /** The method is triggered when an uploaded attachment is selected and the Delete button is pressed. */
@@ -147,7 +147,7 @@ export class UploadCollectionDataProviderTest extends UploadCollectionDataProvid
             delay(5000),
             map((updatedItems) => {
                 const itemId = item.documentId;
-                const includes = this._cancelUploadNewFileIds.includes(itemId);
+                const includes = itemId && this._cancelUploadNewFileIds.includes(itemId);
                 if (includes) {
                     updatedItem = { ...updatedItem };
                     updatedItem.name = item.name;
@@ -170,7 +170,7 @@ export class UploadCollectionDataProviderTest extends UploadCollectionDataProvid
 
         this._findParentFolderAndAddNewFiles(parentFolderId, [
             {
-                temporaryDocumentId: folder.documentId,
+                temporaryDocumentId: folder.documentId!,
                 item: folder
             }
         ]);
@@ -179,7 +179,7 @@ export class UploadCollectionDataProviderTest extends UploadCollectionDataProvid
             delay(5000),
             map((updatedItems) => {
                 const folderId = folder.documentId;
-                const includes = this._cancelUploadNewFileIds.includes(folderId);
+                const includes = !!folderId && this._cancelUploadNewFileIds.includes(folderId);
                 if (includes) {
                     this._cancelUploadNewFileIds = this._cancelUploadNewFileIds.filter((id) => id !== folderId);
                     this._findParentFolderAndRemoveItemsByIds(parentFolderId, [folderId], updatedItems);
@@ -251,12 +251,12 @@ export class UploadCollectionDataProviderTest extends UploadCollectionDataProvid
 
         this._findParentFolderAndRemoveItemsByIds(parentFolderId, [id]);
 
-        return of(null);
+        return of([]);
     }
 
     /** @hidden */
     private _findParentFolderAndUpdateItem(
-        parentFolderId: string | number | null,
+        parentFolderId: string | number | undefined,
         updatedItem: UploadCollectionItem,
         items = this.items
     ): void {
@@ -291,7 +291,7 @@ export class UploadCollectionDataProviderTest extends UploadCollectionDataProvid
 
     /** @hidden */
     private _findParentFolderAndAddNewFiles(
-        parentFolderId: string | number | null,
+        parentFolderId: string | number | undefined,
         uploadedFiles: UploadCollectionNewItem[],
         items = this.items
     ): void {
@@ -301,9 +301,9 @@ export class UploadCollectionDataProviderTest extends UploadCollectionDataProvid
 
         if (!parentFolderId) {
             const uploadedFile = uploadedFiles.pop();
-            const index = items.findIndex((item) => item.documentId === uploadedFile.temporaryDocumentId);
+            const index = items.findIndex((item) => item.documentId === uploadedFile?.temporaryDocumentId);
             if (index !== -1) {
-                items[index] = uploadedFile.item;
+                items[index] = uploadedFile!.item;
                 this._findParentFolderAndAddNewFiles(parentFolderId, uploadedFiles);
             }
 
@@ -320,10 +320,10 @@ export class UploadCollectionDataProviderTest extends UploadCollectionDataProvid
                 const hash = uploadedFiles.reduce((res, file) => {
                     res[file.temporaryDocumentId] = file.item;
                     return res;
-                }, {});
+                }, {} as Record<string, UploadCollectionItem>);
 
                 currentItem.files = currentItem.files.map((item) =>
-                    hash[item.documentId] ? hash[item.documentId] : item
+                    hash[item.documentId as any] || item
                 );
 
                 break;
@@ -335,8 +335,8 @@ export class UploadCollectionDataProviderTest extends UploadCollectionDataProvid
 
     /** @hidden */
     private _findParentFolderAndRemoveItemsByIds(
-        parentFolderId: string | number | null,
-        documentsIds: (number | string)[],
+        parentFolderId: string | number | undefined,
+        documentsIds: (number | string | undefined)[],
         items = this.items
     ): void {
         if (documentsIds.length === 0) {

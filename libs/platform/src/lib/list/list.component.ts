@@ -25,7 +25,7 @@ import {
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { NgControl, NgForm } from '@angular/forms';
 import { SelectionModel } from '@angular/cdk/collections';
-import { DOWN_ARROW, ENTER, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { isObservable, Observable, of, Subject, Subscription } from 'rxjs';
 import { delay, takeUntil, tap } from 'rxjs/operators';
 
@@ -137,7 +137,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     @Output()
     selectedItemChange: EventEmitter<SelectionChangeEvent> = new EventEmitter<SelectionChangeEvent>();
     /** Access child element, for checking link content*/
-    @ViewChild('link', { read: ElementRef })
+    @ViewChild('linkElement', { read: ElementRef })
     anchor: ElementRef;
     @ContentChild(ListItemDef)
     listItemDef: ListItemDef;
@@ -156,9 +156,9 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
      * keyManger to handle keybord events
      * used in template
      */
-    _keyManager: FocusKeyManager<BaseListItem>;
+    _keyManager?: FocusKeyManager<BaseListItem>;
     /** @hidden */
-    _items = [];
+    _items: any[] = [];
     /** @hidden
      */
     _destroyed = new Subject<void>();
@@ -173,8 +173,6 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
      * Whether list component has multiselection
      * binding in tempate to append class */
     private _multiSelect = false;
-    /** @hidden */
-    private _selectedvalue: string;
     /** @hidden
      * Whether row level selection mode is enabled to list component
      * for all the items
@@ -182,7 +180,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     private _rowSelection: boolean;
     /** @hidden
      * To store */
-    private _tempItems = [];
+    private _tempItems: any[] = [];
     /** @hidden
      */
     private _startIndex = 0;
@@ -191,7 +189,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     private _lastIndex = this.itemSize;
     /** @hidden
      */
-    private _dsItems = [];
+    private _dsItems: any[] = [];
     /** @hidden
      * for data source handling
      */
@@ -209,7 +207,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
         @Optional() @Self() public ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
-        protected _listConfig?: ListConfig
+        protected _listConfig: ListConfig
     ) {
         super(_changeDetectorRef, ngControl, ngForm, formField, formControl);
     }
@@ -454,17 +452,11 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     /** handline keyboard operations
      * in template on list and list items
      */
-    _handleKeyDown(event: KeyboardEvent): boolean {
+    _handleKeyDown(event: KeyboardEvent): void {
         event.stopImmediatePropagation();
-        if (this._keyManager) {
-            this._keyManager.setActiveItem(this._keyManager.activeItemIndex);
-            if (KeyUtil.isKeyCode(event, DOWN_ARROW) || KeyUtil.isKeyCode(event, UP_ARROW)) {
-                return false;
-            } else if (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE)) {
-                this._updateNavigation(event);
-                return false;
-            }
-        }
+        if (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE)) {
+             this._updateNavigation(event);
+         }
     }
 
     /** @hidden
@@ -525,40 +517,19 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
      * seprate PR for custom event**/
     @HostListener('click', ['$event'])
     _updateNavigation(event: Event): void {
-        let selectedItemId = '0';
-        const el = event.target instanceof HTMLElement && event.target;
-        const parent = el?.closest('.fd-list__item');
-        if (parent !== null && parent !== undefined) {
-            selectedItemId = parent.getAttribute('id');
-        }
-
         this.listItems.forEach((item, index) => {
-            if (item.anchor !== undefined) {
-                item.anchor.nativeElement.classList.remove('is-navigated');
-            }
+            item.anchor?.nativeElement.classList.remove('is-navigated');
             if (item._focused) {
-                this._keyManager.updateActiveItem(index);
+                this._keyManager?.updateActiveItem(index);
             }
         });
-        if (el !== null && el.tagName.toLowerCase() === 'a') {
-            el.classList.add('is-navigated');
-        } else if (
-            el !== null &&
-            el.tagName.toLowerCase() === 'li' &&
-            el.querySelector('a') !== undefined &&
-            el.querySelector('a') !== null
-        ) {
-            el.querySelector('a').classList.add('is-navigated');
-        }
 
-        if (el !== null && el !== undefined) {
-            if (this.selectRow) {
-                this._handleRowSelect(selectedItemId);
-            } else if (this.selectionMode === 'single') {
-                this._handleSingleSelect(event, selectedItemId);
-            } else if (this.selectionMode === 'multi') {
-                this._handleMultiSelect(selectedItemId);
-            }
+        const el = event.target instanceof HTMLElement ? event.target : null;
+        
+        if (el?.tagName.toLowerCase() === 'a') {
+            el.classList.add('is-navigated');
+        } else if ( el?.tagName.toLowerCase() === 'li') {
+            el.querySelector('a')?.classList.add('is-navigated');
         }
     }
 
@@ -583,7 +554,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     }
 
     /** @hidden */
-    private _toDataStream(source: FdpListDataSource<any>): ListDataSource<any> {
+    private _toDataStream(source: FdpListDataSource<any>): ListDataSource<any> | undefined {
         if (isDataSource(source)) {
             return <ListDataSource<any>>source;
         }
@@ -630,91 +601,6 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
         this._lastIndex = this._lastIndex + this.itemSize;
         this._tempItems = this._dsItems.slice(this._startIndex, this._lastIndex);
         return this._tempItems;
-    }
-
-    /** @hidden
-     /**List item with radio button styles,check,uncheckupdates
-     * event:any to avoid code duplication
-     */
-    private _handleSingleSelect(event: Event, selectedItemId: string): void {
-        const parent = event.target instanceof HTMLElement && event.target.closest('.fd-list__item');
-        const radio = parent ? parent.querySelector('input') : null;
-        this._selectedvalue = radio ? radio.getAttribute('ng-reflect-value') : null;
-
-        this.listItems.forEach((item) => {
-            if (item.radioButtonComponent !== undefined) {
-                item._selected = false;
-                item.listItem.nativeElement.setAttribute('aria-checked', false);
-            }
-            this.stateChanges.next(item);
-        });
-        this._selectionModel.clear();
-        this.listItems.forEach((item) => {
-            item.selectionValue = this._selectedvalue;
-            if (item.listItem.nativeElement.getAttribute('id') === selectedItemId) {
-                item.listItem.nativeElement.setAttribute('_selected', true);
-                item.listItem.nativeElement.setAttribute('aria-checked', true);
-                this._selectItem(item);
-            }
-        });
-    }
-
-    private _handleRowSelect(selectedItemId: string): void {
-        // handles mutli select on row level without checkbox
-        if (this.selectionMode === 'multi') {
-            this.listItems.forEach((item) => {
-                if (item._selected) {
-                    this._selectionModel.select(item);
-                } else {
-                    this._selectionModel.deselect(item);
-                }
-                this.stateChanges.next(item);
-            });
-        }
-        // handles single select on row level without radiobutton
-        if (this.selectionMode === 'single') {
-            this.listItems.forEach((item) => {
-                if (item.anchor !== undefined) {
-                    item.listItem.nativeElement.setAttribute('_selected', false);
-                    item.listItem.nativeElement.setAttribute('aria-selected', false);
-                    item.listItem.nativeElement.classList.remove('is-selected');
-                    item.anchor.nativeElement.classList.remove('is-selected');
-                    this.stateChanges.next(item);
-                }
-            });
-            this._selectionModel.clear();
-            this.listItems.forEach((item) => {
-                if (item.listItem.nativeElement.getAttribute('id') === selectedItemId) {
-                    item.listItem.nativeElement.setAttribute('_selected', true);
-                    if (item.anchor !== undefined) {
-                        item.anchor.nativeElement.classList.add('is-selected');
-                    }
-                    this._selectItem(item);
-                }
-            });
-            selectedItemId = '0';
-        }
-    }
-
-    /** @hidden */
-    /** List item with checkbox styles,check,uncheckupdates
-     * event:any to avoid code duplication
-     */
-    private _handleMultiSelect(selectedItemId: string): void {
-        this.listItems.forEach((item) => {
-            if (item.listItem.nativeElement.getAttribute('id') === selectedItemId) {
-                const select = item.listItem.nativeElement.getAttribute('_selected');
-                item.listItem.nativeElement.setAttribute('_selected', !select);
-                if (item._selected) {
-                    item.listItem.nativeElement.setAttribute('aria-selected', true);
-                    this._selectionModel.select(item);
-                } else {
-                    item.listItem.nativeElement.setAttribute('aria-selected', false);
-                    this._selectionModel.deselect(item);
-                }
-                this.stateChanges.next(item);
-            }
-        });
     }
 }
 

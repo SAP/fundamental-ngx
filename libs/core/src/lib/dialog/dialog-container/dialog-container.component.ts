@@ -2,7 +2,6 @@ import {
     AfterViewInit,
     ChangeDetectorRef,
     Component,
-    ComponentFactoryResolver,
     ElementRef,
     Input,
     TemplateRef,
@@ -48,10 +47,9 @@ export class DialogContainerComponent
         public dialogConfig: DialogConfig,
         private _dialogRef: DialogRef,
         elementRef: ElementRef,
-        componentFactoryResolver: ComponentFactoryResolver,
         private _changeDetectorRef: ChangeDetectorRef
     ) {
-        super(elementRef, componentFactoryResolver);
+        super(elementRef);
     }
 
     /** @hidden */
@@ -88,10 +86,9 @@ export class DialogContainerComponent
     }
 
     /** @hidden Load Dialog component from passed object */
-    private _createFromDefaultDialog(config: DialogDefaultContent): void {
+    private _createFromDefaultDialog(config?: DialogDefaultContent): void {
         this.containerRef.clear();
-        const componentFactory = this._componentFactoryResolver.resolveComponentFactory(DialogDefaultComponent);
-        this._componentRef = this.containerRef.createComponent(componentFactory);
+        this._componentRef = this.containerRef.createComponent(DialogDefaultComponent);
         this._componentRef.instance._defaultDialogContent = config;
         this._componentRef.instance._defaultDialogConfiguration = this.dialogConfig;
     }

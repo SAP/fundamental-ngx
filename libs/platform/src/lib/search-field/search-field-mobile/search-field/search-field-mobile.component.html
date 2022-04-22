@@ -4,7 +4,10 @@
             <ng-template fdTemplate="header">
                 <div fd-bar-middle>
                     <fd-bar-element [fullWidth]="true">
-                        <ng-container *ngTemplateOutlet="childContent?.inputFieldTemplate"></ng-container>
+                        <ng-container 
+                        *ngIf="childContent?.inputFieldTemplate"
+                        [ngTemplateOutlet]="childContent?.inputFieldTemplate!"
+                        ></ng-container>
                     </fd-bar-element>
                     <button
                         fd-dialog-close-button
@@ -18,14 +21,17 @@
         </fd-dialog-header>
 
         <fd-dialog-body>
-            <ng-container *ngTemplateOutlet="childContent?.suggestionMenuTemplate"></ng-container>
+            <ng-container 
+                *ngIf="childContent?.suggestionMenuTemplate" 
+                [ngTemplateOutlet]="childContent?.suggestionMenuTemplate!"
+            ></ng-container>
         </fd-dialog-body>
 
         <fd-dialog-footer>
             <fd-button-bar
                 *ngIf="mobileConfig?.approveButtonText"
                 fdType="emphasized"
-                [label]="mobileConfig?.approveButtonText"
+                [label]="mobileConfig.approveButtonText!"
                 (click)="_handleApprove()"
             >
             </fd-button-bar>

@@ -288,7 +288,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     /** @hidden */
     private _secondaryFn = (value: any): string => {
         if (isOptionItem(value)) {
-            return value.secondaryText;
+            return value.secondaryText ?? '';
         }
 
         if (isJsObject(value) && this.secondaryKey) {
@@ -513,7 +513,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
     /** @hidden Map grouped values to array. */
     protected _flatGroups(items: OptionItem[]): OptionItem[] {
-        return items.reduce((result: OptionItem[], item: OptionItem) => result.concat(item.children), []);
+        return items.reduce((result: OptionItem[], item: OptionItem) => result.concat(item.children ?? []), []);
     }
 
     /**
@@ -521,7 +521,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
      * Method that picks other value moved from current one by offset, called only when combobox is closed
      */
     private _chooseOtherItem(offset: number): void {
-        const activeValue: OptionItem = this._getSelectItemByValue(this.inputText);
+        const activeValue = this._getSelectItemByValue(this.inputText);
         const index: number = this._suggestions.findIndex((value) => value === activeValue);
 
         if (this._suggestions[index + offset]) {
@@ -530,7 +530,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     }
 
     /** @hidden */
-    private _getSelectItemByValue(displayValue: string): OptionItem {
+    private _getSelectItemByValue(displayValue: string): OptionItem | undefined {
         return this._suggestions.find((value) => value.label === displayValue);
     }
 
@@ -543,7 +543,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
             if (this._dsSubscription) {
                 this._dsSubscription.unsubscribe();
-                this._dsSubscription = null;
+                this._dsSubscription = undefined;
             }
         }
 
@@ -692,7 +692,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
         for (let i = 0; i < items.length; i++) {
             const item = items[i];
-            const keyValue = item[this.groupKey];
+            const keyValue = this.groupKey && item[this.groupKey];
             if (!keyValue) {
                 continue;
             }

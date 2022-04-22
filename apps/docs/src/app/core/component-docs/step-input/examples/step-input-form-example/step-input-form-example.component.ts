@@ -72,6 +72,6 @@ import { FormControl } from '@angular/forms';
 export class StepInputFormExampleComponent {
     stepInputFormControl1 = new FormControl(100);
     stepInputFormControl2 = new FormControl({ disabled: true, value: 100 });
-    value1 = 100;
-    value2 = 100;
+    value1: number | null = 100;
+    value2: number | null = 100;
 }

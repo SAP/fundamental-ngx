@@ -21,8 +21,6 @@ export class ComboboxDisplaywithExampleComponent {
     searchTerm = '';
 
     displayFunc(obj: { name: string }): string {
-        if (obj) {
-            return obj.name.toLocaleUpperCase();
-        }
+        return obj?.name.toLocaleUpperCase() ?? '';
     }
 }

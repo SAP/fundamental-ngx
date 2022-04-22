@@ -79,12 +79,12 @@ export abstract class CollectionBaseInput extends BaseInput {
         }
     }
 
-    public objectGet(obj: any, is: string | string[]): any {
+    public objectGet(obj: any, is: string | string[] | undefined): any {
         if (!isJsObject(obj)) {
             return obj;
         } else if (isString(is)) {
             return this.objectGet(obj, is.split('.'));
-        } else if (is.length === 0) {
+        } else if (!is?.length) {
             return obj;
         } else {
             return this.objectGet(obj[is[0]], is.slice(1));

@@ -85,10 +85,10 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
 
     /** Data source */
     @Input()
-    get dataSource(): FdpValueHelpDialogDataSource<any> {
+    get dataSource(): FdpValueHelpDialogDataSource<any> | undefined {
         return this._dataSource;
     }
-    set dataSource(value: FdpValueHelpDialogDataSource<any>) {
+    set dataSource(value: FdpValueHelpDialogDataSource<any> | undefined) {
         if (value) {
             this._dataSource = this.toDataStream(value);
         }
@@ -218,7 +218,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     dialogContainer: TemplateRef<any>;
 
     /** @hidden */
-    activeDialog: DialogRef;
+    activeDialog?: DialogRef;
 
     /** @hidden */
     _tabTypes = VhdTab;
@@ -246,10 +246,10 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     private _destroyed = new Subject<void>();
 
     /** @hidden */
-    private _dataSource: FdpValueHelpDialogDataSource<any>;
+    private _dataSource: FdpValueHelpDialogDataSource<any> | undefined;
 
     /** @hidden for data source handling */
-    private _dsSubscription: Subscription;
+    private _dsSubscription: Subscription | null;
 
     /** @hidden */
     private _contentDensityManuallySet = false;
@@ -266,7 +266,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     };
 
     /** @hidden */
-    selectedTab: VhdTab = null;
+    selectedTab: VhdTab | null = null;
 
     /** @hidden */
     shownFilterCount = Infinity;
@@ -307,7 +307,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
 
     /** @hidden */
     get hasSelectedTab(): boolean {
-        return this.selectedTab in VhdTab;
+        return !!this.selectedTab && (this.selectedTab in VhdTab);
     }
 
     /** @hidden */
@@ -405,9 +405,9 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
             ...this.dialogConfig,
 
             fullScreen: this.mobile,
-            maxWidth: this.mobile ? null : '92%',
-            width: this.mobile ? null : '1080px',
-            height: this.mobile ? null : '98%'
+            maxWidth: this.mobile ? undefined : '92%',
+            width: this.mobile ? undefined : '1080px',
+            height: this.mobile ? undefined : '98%'
         });
         this._listenDialogEvents();
     }
@@ -456,8 +456,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
         if (this._mainSearch.length) {
             nonEmptyFilters.set('*', this._mainSearch);
         }
-
-        this.dataSource.match(nonEmptyFilters);
+        this.dataSource?.match(nonEmptyFilters);
     }
 
     /**
@@ -486,7 +485,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     /**
      * Switch tab by type
      */
-    switchTab(type: VhdTab = null): void {
+    switchTab(type: VhdTab | null = null): void {
         this.selectedTab = type;
     }
 
@@ -583,7 +582,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     }
 
     /** @hidden */
-    private _initializeDS(ds: FdpValueHelpDialogDataSource<any> = this.dataSource): void {
+    private _initializeDS(ds: FdpValueHelpDialogDataSource<any> | undefined = this.dataSource): void {
         this._resetSourceStream();
 
         if (this.showSelectionTab) {
@@ -599,14 +598,14 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
             this._dsSubscription.add(dsSub);
 
             this._dsSubscription.add(
-                ds.onDataRequested().subscribe(() => {
+                ds?.onDataRequested().subscribe(() => {
                     this._internalLoadingState = true;
                     this.onDataRequested.emit();
                 })
             );
 
             this._dsSubscription.add(
-                ds.onDataReceived().subscribe(() => {
+                ds?.onDataReceived().subscribe(() => {
                     this._internalLoadingState = false;
                     this.onDataReceived.emit();
                 })
@@ -627,7 +626,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
             this.isOpenAdvanced = false;
         }
         if (this.showSelectionTab && this.showDefineTab) {
-            this.switchTab(this.mobile ? null : this.initialTab);
+            this.switchTab(this.mobile ? undefined : this.initialTab);
         } else if (this.showSelectionTab) {
             this.switchTab(VhdTab.selectFromList);
         } else if (this.showDefineTab) {
@@ -690,7 +689,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     }
 
     /** @hidden */
-    private toDataStream(ds: FdpValueHelpDialogDataSource<T>): FdpValueHelpDialogDataSource<T> {
+    private toDataStream(ds: FdpValueHelpDialogDataSource<T>): FdpValueHelpDialogDataSource<T> | undefined {
         if (isDataSource(ds)) {
             return ds as ValueHelpDialogDataSource<T>;
         } else if (Array.isArray(ds)) {
@@ -717,7 +716,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     private isValidOptions(): boolean {
         if (this.showSelectionTab) {
             return (
-                this.dataSource &&
+                !!this.dataSource &&
                 typeof this.uniqueKey === 'string' &&
                 (typeof this.tokenViewField === 'string' || typeof this.tokenizerFn === 'function')
             );

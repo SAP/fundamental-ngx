@@ -14,13 +14,11 @@ import {
     Optional,
     OnDestroy
 } from '@angular/core';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
 import { Subscription } from 'rxjs';
 
 import { PanelContentDirective } from './panel-content/panel-content.directive';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
-import { RtlService } from '@fundamental-ngx/core/utils';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { CssClassBuilder, RtlService, applyCssClass, ContentDensityService } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 let panelUniqueId = 0;
 let panelExpandUniqueId = 0;
@@ -62,15 +60,15 @@ export class PanelComponent implements CssClassBuilder, OnChanges, OnInit, OnDes
 
     /** aria-label of the expand button */
     @Input()
-    expandAriaLabel: string;
+    expandAriaLabel: Nullable<string>;
 
     /** aria-labelledby of the expand button */
     @Input()
-    expandAriaLabelledBy: string;
+    expandAriaLabelledBy: Nullable<string>;
 
     /** Whether the Panel Content is expanded */
     @Input()
-    expanded: boolean;
+    expanded = false;
 
     /** Output event triggered when the Expand button is clicked */
     @Output()

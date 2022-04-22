@@ -2,6 +2,7 @@ import { Subject } from 'rxjs';
 import { Injectable, Optional } from '@angular/core';
 
 import { RtlService } from '@fundamental-ngx/core/utils';
+import { EscapeFocusFunction } from './models/common';
 
 @Injectable()
 export class CalendarService {
@@ -24,7 +25,7 @@ export class CalendarService {
     leftArrowId: string;
 
     /** Function that is called when the focus would escape the element. */
-    focusEscapeFunction: (event: KeyboardEvent) => void;
+    focusEscapeFunction: EscapeFocusFunction;
 
     constructor(@Optional() private _rtlService: RtlService) {}
 
@@ -98,7 +99,7 @@ export class CalendarService {
                     if (typeof this.focusEscapeFunction === 'function') {
                         this.focusEscapeFunction(event);
                     } else {
-                        const element: HTMLElement = document.getElementById(this.leftArrowId);
+                        const element = document.getElementById(this.leftArrowId);
                         if (element) {
                             element.focus();
                         }

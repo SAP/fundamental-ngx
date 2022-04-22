@@ -7,6 +7,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
 import { FormGeneratorService } from '@fundamental-ngx/platform/form';
 import { WizardGeneratorFormsValue, WizardGeneratorItem } from '../../interfaces/wizard-generator-item.interface';
@@ -64,7 +65,7 @@ export class WizardSummaryStepComponent {
      * User-defined template for Summary step.
      */
     @Input()
-    customSummaryStepTemplate: TemplateRef<HTMLElement>;
+    customSummaryStepTemplate: Nullable<TemplateRef<HTMLElement>>;
 
     /**
      * @hidden
@@ -133,14 +134,14 @@ export class WizardSummaryStepComponent {
     ): Promise<FormattedFormStep[]> {
         const formattedStepValue: FormattedFormStep[] = [];
 
-        for (const formGroup of step.formGroups) {
+        for (const formGroup of step.formGroups ?? []) {
             const formId = formGroup.id;
 
             const form = componentForms[formId];
 
             // Form might be skipped due to conditional rendering
             if (!form) {
-                return;
+                continue;
             }
 
             const formattedFormValue = await this._formGeneratorService.getFormValue(form.form, true);

@@ -11,6 +11,9 @@ import {
     ViewChild,
     ViewChildren
 } from '@angular/core';
+
+import { Nullable } from '@fundamental-ngx/core/shared';
+
 import { IconTabBarPopoverBase } from '../icon-tab-bar-popover-base.class';
 import { IconTabBarItem } from '../../../interfaces/icon-tab-bar-item.interface';
 
@@ -41,7 +44,7 @@ export class TextTypePopoverComponent extends IconTabBarPopoverBase implements O
      * @description uId of selected subItem
      */
     @Input()
-    selectedSubItemUid: string;
+    selectedSubItemUid: Nullable<string>;
 
     /**
      * @description tabIndex of the particular item. Aplicable only for subitems mode
@@ -61,7 +64,7 @@ export class TextTypePopoverComponent extends IconTabBarPopoverBase implements O
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         super.ngOnChanges(changes);
-        if (!this.isExtraItemsMode && changes.parentTab) {
+        if (!this.isExtraItemsMode && changes.parentTab && this.parentTab.subItems) {
             this._setStyles(this.parentTab.subItems);
         }
         if (changes.selectedSubItemUid) {
@@ -88,7 +91,7 @@ export class TextTypePopoverComponent extends IconTabBarPopoverBase implements O
 
     /** @hidden */
     private _calculateIfContainsSelected(): void {
-        this._containsSelected = this._getChildren(this.parentTab.subItems).some(
+        this._containsSelected = !!this.parentTab.subItems && this._getChildren(this.parentTab.subItems).some(
             ({ uId }) => uId === this.selectedSubItemUid
         );
     }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ResizableCardLayoutConfig, ResizedEvent } from '@fundamental-ngx/core/resizable-card-layout';
+import { ResizableCardLayoutConfig, ResizedEvent, ResizableCardItemConfig } from '@fundamental-ngx/core/resizable-card-layout';
 
 @Component({
     selector: 'fd-resizable-card-layout-example-layoutconfig',
@@ -118,126 +118,54 @@ export class ResizableCardLayoutExampleLayoutConfigComponent implements OnInit {
     /** Decides how much data is shown on card */
     private _showData(event: ResizedEvent): void {
         switch (event.card.title) {
-            case 'card1':
-                this._handleCard1Data(event);
+            case 'card1':{
+                const config = this.layoutConfig[0];
+                this.card1Data = this._getCardData(event, config, 4);
                 break;
-
-            case 'card2':
-                this._handleCard2Data(event);
+}
+            case 'card2':{
+                const config = this.layoutConfig[1];
+                this.card2Data = this._getCardData(event, config, 3);
                 break;
-
-            case 'card3':
-                this._handleCard3Data(event);
+}
+            case 'card3':{
+                const config = this.layoutConfig[2];
+                this.card3Data = this._getCardData(event, config, 3);
                 break;
-
-            case 'card4':
-                this._handleCard4Data(event);
+}
+            case 'card4':{
+                const config = this.layoutConfig[3];
+                this.card4Data = this._getCardData(event, config, 3);
                 break;
-
-            case 'card5':
-                this._handleCard5Data(event);
+}
+            case 'card5':{
+                const config = this.layoutConfig[4];
+                this.card5Data = this._getCardData(event, config, 3);
                 break;
-
-            case 'card6':
-                this._handleCard6Data(event);
+}
+            case 'card6':{
+                const config = this.layoutConfig[5];
+                this.card6Data = this._getCardData(event, config, 3);
                 break;
-
-            case 'card7':
-                this._handleCard7Data(event);
+}
+            case 'card7':{
+                const config = this.layoutConfig[6];
+                this.card7Data = this._getCardData(event, config, 3);
                 break;
-        }
+        }}
     }
 
-    private _handleCard1Data(event: ResizedEvent): void {
-        const config = this.layoutConfig[0];
-
+    private _getCardData(event: ResizedEvent, config: ResizableCardItemConfig, listDataAmount: number): number[] {
         if (event.newCardHeightRowSpan === config.cardMiniHeaderRowSpan) {
-            this.card1Data = [];
-        } else if (event.newCardHeightRowSpan === config.cardMiniHeaderRowSpan + config.cardMiniContentRowSpan) {
-            this.card1Data = this._getListData(4);
+            return [];
+        } else if (event.newCardHeightRowSpan === (config.cardMiniHeaderRowSpan ?? 0) + (config.cardMiniContentRowSpan ?? 0)) {
+            return this.listData.slice(0, listDataAmount);
         } else {
-            const index = (event.newCardHeightRowSpan - config.cardMiniHeaderRowSpan) / 3;
-            this.card1Data = this._getListData(index);
+            const index = (event.newCardHeightRowSpan - (config.cardMiniHeaderRowSpan ?? 0)) / 3;
+            return this.listData.slice(0, index);
         }
     }
 
-    private _handleCard2Data(event: ResizedEvent): void {
-        const config = this.layoutConfig[1];
-
-        if (event.newCardHeightRowSpan === config.cardMiniHeaderRowSpan) {
-            this.card2Data = [];
-        } else if (event.newCardHeightRowSpan === config.cardMiniHeaderRowSpan + config.cardMiniContentRowSpan) {
-            this.card2Data = this._getListData(3);
-        } else {
-            const index = (event.newCardHeightRowSpan - config.cardMiniHeaderRowSpan) / 3;
-            this.card2Data = this._getListData(index);
-        }
-    }
-
-    private _handleCard3Data(event: ResizedEvent): void {
-        const config = this.layoutConfig[2];
-
-        if (event.newCardHeightRowSpan === config.cardMiniHeaderRowSpan) {
-            this.card3Data = [];
-        } else if (event.newCardHeightRowSpan === config.cardMiniHeaderRowSpan + config.cardMiniContentRowSpan) {
-            this.card3Data = this._getListData(3);
-        } else {
-            const index = (event.newCardHeightRowSpan - config.cardMiniHeaderRowSpan) / 3;
-            this.card3Data = this._getListData(index);
-        }
-    }
-
-    private _handleCard4Data(event: ResizedEvent): void {
-        const config = this.layoutConfig[3];
-
-        if (event.newCardHeightRowSpan === config.cardMiniHeaderRowSpan) {
-            this.card4Data = [];
-        } else if (event.newCardHeightRowSpan === config.cardMiniHeaderRowSpan + config.cardMiniContentRowSpan) {
-            this.card4Data = this._getListData(3);
-        } else {
-            const index = (event.newCardHeightRowSpan - config.cardMiniHeaderRowSpan) / 3;
-            this.card4Data = this._getListData(index);
-        }
-    }
-
-    private _handleCard5Data(event: ResizedEvent): void {
-        const config = this.layoutConfig[4];
-
-        if (event.newCardHeightRowSpan === config.cardMiniHeaderRowSpan) {
-            this.card5Data = [];
-        } else if (event.newCardHeightRowSpan === config.cardMiniHeaderRowSpan + config.cardMiniContentRowSpan) {
-            this.card5Data = this._getListData(3);
-        } else {
-            const index = (event.newCardHeightRowSpan - config.cardMiniHeaderRowSpan) / 3;
-            this.card5Data = this._getListData(index);
-        }
-    }
-
-    private _handleCard6Data(event: ResizedEvent): void {
-        const config = this.layoutConfig[5];
-
-        if (event.newCardHeightRowSpan === config.cardMiniHeaderRowSpan) {
-            this.card6Data = [];
-        } else if (event.newCardHeightRowSpan === config.cardMiniHeaderRowSpan + config.cardMiniContentRowSpan) {
-            this.card6Data = this._getListData(3);
-        } else {
-            const index = (event.newCardHeightRowSpan - config.cardMiniHeaderRowSpan) / 3;
-            this.card6Data = this._getListData(index);
-        }
-    }
-
-    private _handleCard7Data(event: ResizedEvent): void {
-        const config = this.layoutConfig[6];
-
-        if (event.newCardHeightRowSpan === config.cardMiniHeaderRowSpan) {
-            this.card7Data = [];
-        } else if (event.newCardHeightRowSpan === config.cardMiniHeaderRowSpan + config.cardMiniContentRowSpan) {
-            this.card7Data = this._getListData(3);
-        } else {
-            const index = (event.newCardHeightRowSpan - config.cardMiniHeaderRowSpan) / 3;
-            this.card7Data = this._getListData(index);
-        }
-    }
 
     private _getListData(index: number): Array<number> {
         return this.listData.slice(0, index);

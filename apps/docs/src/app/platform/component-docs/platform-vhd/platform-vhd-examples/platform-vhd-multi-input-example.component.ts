@@ -81,9 +81,10 @@ export class PlatformVhdMultiInputExampleComponent implements OnInit {
         this._changeDetectorRef.detectChanges();
     }
 
-    parseFunc(value: string): Record<string, any> {
+    parseFunc(value: string): Record<string, any> | null {
         if (value && value.length) {
             return { name: value, id: Date.now() };
         }
+        return null;
     }
 }

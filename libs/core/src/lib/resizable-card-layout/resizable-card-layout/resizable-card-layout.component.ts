@@ -471,7 +471,8 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
      * @param card: ResizableCardItemComponent
      */
     private _updateColumnsHeight(card: ResizableCardItemComponent): void {
-        const columnsStart = Math.floor(card[this._directionPosition] / horizontalResizeStep);
+        const columnsStart = card[this._directionPosition] != null ? 
+            Math.floor(card[this._directionPosition]! / horizontalResizeStep) : 0;
 
         // Get width of current card resizing and assign width here for that card
         const cardBaseColSpan = Math.floor(card.cardWidth / horizontalResizeStep);
@@ -521,7 +522,7 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
      * @returns It returns true when card position id found otherwise it returns false.
      */
     private _isPositionSetSuccess(height: number, card: ResizableCardItemComponent): boolean {
-        const columnPositions = [];
+        const columnPositions: number[] = [];
         let index = 0;
         for (const columnHeight of this._columnsHeight) {
             index++;
@@ -601,7 +602,7 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
     private _getSortedUniqueHeights(): number[] {
         const tempArray = this._columnsHeight.slice();
         const sortedColumnsHeightArray = tempArray.sort(comparer);
-        const uniqueHeights = [];
+        const uniqueHeights: number[] = [];
 
         for (const sortedHeight of sortedColumnsHeightArray) {
             if (uniqueHeights.indexOf(sortedHeight) === -1) {

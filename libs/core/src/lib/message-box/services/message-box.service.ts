@@ -30,7 +30,7 @@ export class MessageBoxService extends DialogBaseService<MessageBoxContainerComp
     public open<T = any>(content: MessageBoxContentType, config?: MessageBoxConfig<T>): MessageBoxRef<T> {
         const messageBoxRef = new MessageBoxRef();
 
-        config = this._applyDefaultConfig(config, this._defaultConfig || new MessageBoxConfig());
+        config = this._applyDefaultConfig(config = {}, this._defaultConfig || new MessageBoxConfig());
         messageBoxRef.data = config.data;
 
         const injector = Injector.create({

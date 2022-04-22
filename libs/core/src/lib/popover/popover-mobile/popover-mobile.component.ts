@@ -38,15 +38,15 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
      * from mobile class can not prefix _,
      * to avoid build issues
      */
-    childContent: PopoverChildContent = undefined;
+    childContent?: PopoverChildContent = undefined;
 
     /** Current popover title */
     title: string;
 
     /** Dialog body content */
-    viewBody: TemplateRef<any>;
+    viewBody: TemplateRef<any> | null;
     /** Dialog footer content */
-    viewFooter: TemplateRef<any>;
+    viewFooter: TemplateRef<any> | null;
 
     /** @hidden */
     @ViewChild('dialogTemplate')
@@ -79,8 +79,8 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
         this._listenOnPopoverOpenChange();
 
         this.title = this.mobileConfig.title || '';
-        this.viewBody = this.childContent.popoverBodyContentTemplate;
-        this.viewFooter = this.childContent.popoverFooterContentTemplate;
+        this.viewBody = this.childContent?.popoverBodyContentTemplate ?? null;
+        this.viewFooter = this.childContent?.popoverFooterContentTemplate ?? null;
 
         this._changeDetectorref.markForCheck();
     }

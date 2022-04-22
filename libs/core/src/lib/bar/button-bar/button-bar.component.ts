@@ -12,6 +12,7 @@ import { BaseButton, ButtonType } from '@fundamental-ngx/core/button';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { Subscription } from 'rxjs';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 let randomButtonBarId = 0;
 @Component({
@@ -58,7 +59,7 @@ export class ButtonBarComponent extends BaseButton implements OnInit, OnDestroy 
 
     /** Aria label attribute value. */
     @Input()
-    ariaLabel: string;
+    ariaLabel: Nullable<string | null>;
 
     /** the aria-labelledby ids to be associated with this element */
     @Input()

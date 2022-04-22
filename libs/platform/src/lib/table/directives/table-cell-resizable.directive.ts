@@ -62,18 +62,22 @@ export class PlatformTableCellResizableDirective implements AfterViewInit, OnDes
             return;
         }
 
-        const [resizerPosition, resizedColumn] = this._getResizer(event);
+        const data = this._getResizer(event);
 
-        this._tableColumnResizeService.setInitialResizerPosition(resizerPosition, resizedColumn);
+        if (!data) {
+            return;
+        }
+
+        this._tableColumnResizeService.setInitialResizerPosition(data.resizerPosition, data.resizedColumn);
     }
 
     /** @hidden */
-    private _getResizer(event: MouseEvent): [number, string] {
+    private _getResizer(event: MouseEvent): { resizerPosition: number, resizedColumn: string } | null {
         const el = this._elRef.nativeElement;
         const elPosition = el.getBoundingClientRect();
 
-        let resizerPosition: number;
-        let resizedColumn: string;
+        let resizerPosition: number | undefined;
+        let resizedColumn: string | undefined;
 
         const pointerOnLeft = this._isRtl
             ? elPosition.right - event.clientX < TABLE_CELL_RESIZABLE_THRESHOLD_PX
@@ -99,6 +103,10 @@ export class PlatformTableCellResizableDirective implements AfterViewInit, OnDes
             resizedColumn = this.columnName;
         }
 
-        return [resizerPosition, resizedColumn];
+        if (!resizedColumn) {
+            return null;
+        }
+
+        return { resizerPosition: resizerPosition!, resizedColumn };
     }
 }

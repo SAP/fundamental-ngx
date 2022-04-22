@@ -109,7 +109,7 @@ export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit,
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
      */
     @Input()
-    set state(state: FormStates) {
+    set state(state: FormStates | undefined) {
         super.state = state;
     }
 

@@ -14,14 +14,12 @@ import {
 
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { ESCAPE } from '@angular/cdk/keycodes';
+import { CdkTrapFocus } from '@angular/cdk/a11y';
 
 import { Subject } from 'rxjs';
 
-import { ARROW_SIZE, ArrowPosition } from '@fundamental-ngx/core/shared';
-import { PopoverFlippedXDirection } from '@fundamental-ngx/core/shared';
+import { ARROW_SIZE, ArrowPosition, Nullable, PopoverFlippedXDirection, PopoverPosition } from '@fundamental-ngx/core/shared';
 import { ContentDensityService, KeyUtil } from '@fundamental-ngx/core/utils';
-import { PopoverPosition } from '@fundamental-ngx/core/shared';
-import { CdkTrapFocus } from '@angular/cdk/a11y';
 import { NotificationGroupComponent } from '@fundamental-ngx/core/notification';
 
 /**
@@ -53,7 +51,7 @@ export class PopoverBodyComponent {
     _noArrow = true;
 
     /** Whether the popover container needs an extra class for styling. */
-    _additionalBodyClass: string;
+    _additionalBodyClass: Nullable<string>;
 
     /** Whether the popover should be focusTrapped. */
     _focusTrapped = false;
@@ -71,7 +69,7 @@ export class PopoverBodyComponent {
     _popoverBodyMinWidth: number;
 
     /** @hidden Property bind to popover's body */
-    _maxWidth: number;
+    _maxWidth: Nullable<number>;
 
     /** @hidden Property bind to popover's body */
     _closeOnEscapeKey = false;
@@ -80,10 +78,10 @@ export class PopoverBodyComponent {
     _arrowClasses: string[] = [];
 
     /** Additional style to put margin into body component, to give a place for arrow */
-    _marginStyle: string = null;
+    _marginStyle: Nullable<string> = null;
 
     /** @hidden text rendered inside popover's body */
-    text: string = null;
+    text: Nullable<string> = null;
 
     /** @hidden template rendered inside popover's body */
     _templateToDisplay: TemplateRef<any>;
@@ -151,12 +149,14 @@ export class PopoverBodyComponent {
     }
 
     /** @hidden */
-    private _addMarginStyle(arrowDirection: ArrowPosition): void {
-        this._renderer2.setStyle(
-            this._elementRef.nativeElement,
-            PopoverPosition.getMarginDirection(arrowDirection),
-            ARROW_SIZE
-        );
+    private _addMarginStyle(arrowDirection: ArrowPosition | null): void {
+        if (arrowDirection) {
+            this._renderer2.setStyle(
+                this._elementRef.nativeElement,
+                PopoverPosition.getMarginDirection(arrowDirection),
+                ARROW_SIZE
+            );
+        }
     }
 
     /** @hidden */

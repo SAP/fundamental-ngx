@@ -24,7 +24,7 @@
                             </a>
                             <button fd-nested-list-expand-icon></button>
                         </div>
-                        <ul fd-nested-list *ngIf="component.tasks?.length > 0">
+                        <ul fd-nested-list *ngIf="component.tasks && component.tasks.length > 0">
                             <li fd-nested-list-item *ngFor="let task of component.tasks">
                                 <a fd-nested-list-link>
                                     <span fd-nested-list-title>{{ task.name }}</span>

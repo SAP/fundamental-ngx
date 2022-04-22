@@ -112,8 +112,8 @@ export class PopoverPosition {
         return resultCdkPlacement;
     }
 
-    static getArrowPosition(position: ConnectedPosition, rtl?: boolean): ArrowPosition {
-        let _position: ArrowPosition = null;
+    static getArrowPosition(position: ConnectedPosition, rtl?: boolean): ArrowPosition | null {
+        let _position: ArrowPosition | null = null;
 
         if (position.overlayY !== position.originY && position.originY !== 'center' && position.overlayY !== 'center') {
             _position = position.overlayY;
@@ -133,10 +133,6 @@ export class PopoverPosition {
     }
 
     static getMarginDirection(position: ArrowPosition): string {
-        if (!position) {
-            return;
-        }
-
         const resultPosition = position.replace('start', 'left').replace('end', 'right');
         return 'margin-' + resultPosition;
     }

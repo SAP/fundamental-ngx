@@ -80,13 +80,13 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    private _placeholderElement: HTMLElement;
+    private _placeholderElement: HTMLElement | null;
 
     /** @hidden */
-    private _lineElement: HTMLElement;
+    private _lineElement: HTMLElement | null;
 
     /** @hidden */
-    private _replaceIndicator: HTMLElement;
+    private _replaceIndicator: HTMLElement | null;
 
     /** @hidden */
     constructor(public elementRef: ElementRef, private _dragDrop: DragDrop) {}
@@ -231,21 +231,26 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
 
     /** @hidden */
     private createPlaceholder(): void {
+        const placeholder = this.elementRef.nativeElement.cloneNode(true);
         /** Cloning container element */
-        this._placeholderElement = this.elementRef.nativeElement.cloneNode(true);
+        this._placeholderElement = placeholder;
 
-        this._placeholderElement.classList.add('fd-dnd-placeholder');
+        placeholder.classList.add('fd-dnd-placeholder');
         this._setPlaceholderStyles();
 
         /** Including element to the container
          *  IE11 equivalent to `this.element.nativeElement.after(clone);`
          */
-        this._placeAfter(this.elementRef.nativeElement, this._placeholderElement);
+        this._placeAfter(this.elementRef.nativeElement, placeholder);
     }
 
     /** @hidden */
     private _setPlaceholderStyles(): void {
         const offset = this._getOffsetToParent(this.elementRef.nativeElement);
+
+        if (!offset || !this._placeholderElement) {
+            return;
+        }
 
         this._placeholderElement.style.top = offset.y + 'px';
         this._placeholderElement.style.left = offset.x + 'px';
@@ -258,8 +263,11 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
     }
 
     /** @hidden */
-    private _getOffsetToParent(element: Element): { x: number; y: number } {
+    private _getOffsetToParent(element: Element): { x: number; y: number } | undefined {
         const parentElement = element.parentElement;
+        if (!parentElement) {
+            return;
+        }
 
         const parentTop = parentElement.getBoundingClientRect().top;
         const parentLeft = parentElement.getBoundingClientRect().left;
@@ -283,7 +291,7 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
     private _placeAfter(element: Element, cloneNode: Node): void {
         const docFrag = document.createDocumentFragment();
         docFrag.appendChild(cloneNode);
-        element.parentNode.insertBefore(docFrag, element.nextSibling);
+        element.parentNode?.insertBefore(docFrag, element.nextSibling);
     }
 
     private _listenElementEvents(): void {

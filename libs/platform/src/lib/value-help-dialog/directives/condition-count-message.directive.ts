@@ -23,7 +23,7 @@ export class ConditionCountMessageDirective {
         this.validator = this.checkError();
     }
 
-    validate(control: FormControl): ValidationErrors {
+    validate(control: FormControl): ValidationErrors | null {
         return this.validator(control);
     }
 

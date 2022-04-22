@@ -149,7 +149,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     _contentDensity: ContentDensity = this.config.contentDensity;
 
     /** @hidden */
-    _align: StepInputAlign;
+    _align: StepInputAlign | null;
 
     /** @hidden */
     private _max: number = Number.MAX_VALUE;
@@ -167,7 +167,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     private _precision: number;
 
     /** @hidden */
-    private _align$: BehaviorSubject<StepInputAlign> = new BehaviorSubject<StepInputAlign>(null);
+    private _align$ = new BehaviorSubject<StepInputAlign | null>(null);
 
     /** @hidden */
     private _pendingEnteredValue: number | Error | null = null;
@@ -284,7 +284,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
 
         const needToUpdateView = this._value === newValue;
 
-        this.value = newValue;
+        this.value = newValue ?? this.min;
 
         if (needToUpdateView) {
             this._updateViewValue();
@@ -355,8 +355,8 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
                     }
 
                     return this._rtlService.rtl.pipe(
-                        map((isRtl): StepInputAlign => {
-                            if (!ALIGN_INPUT_OPTIONS_LIST.includes(align)) {
+                        map((isRtl): StepInputAlign | null => {
+                            if (!ALIGN_INPUT_OPTIONS_LIST.includes(align!)) {
                                 return null;
                             }
                             if (isRtl && align === StepInputAlign.Left) {
@@ -400,7 +400,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     private _getStepValue(action: StepInputStepFunctionAction): number {
         // steFn has precedence
         if (typeof this._stepFn === 'function') {
-            const calculatedStep = this._stepFn(this._currentValue, action);
+            const calculatedStep = this._stepFn(this._currentValue ?? this.min, action);
             return calculatedStep;
         }
         return this.step;

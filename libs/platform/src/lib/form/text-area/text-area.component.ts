@@ -174,7 +174,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
      * @hidden
      * @see FormFieldControl.extraContentHeightPx
      */
-    get extraContentHeightPx(): number {
+    get extraContentHeightPx(): number | undefined {
         return this._textareaCounter?.nativeElement.offsetHeight;
     }
 
@@ -218,7 +218,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
 
         // don't set any error state if we are not showing counter message
         if (!this._shouldTrackTextLimit) {
-            this.state = null;
+            this.state = undefined;
         }
 
         super.ngAfterViewInit();

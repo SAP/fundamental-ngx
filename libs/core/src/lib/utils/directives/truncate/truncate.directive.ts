@@ -12,6 +12,7 @@ import {
 import { fromEvent, Subscription } from 'rxjs';
 import { coerceNumberProperty } from '@angular/cdk/coercion';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 export enum DefaultTruncateCharCount {
     MAX = 500,
@@ -33,7 +34,7 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
      * Count chars for truncating
      */
     @Input()
-    set fdTruncateChars(value: number) {
+    set fdTruncateChars(value: Nullable<number>) {
         this._customCharCount = coerceNumberProperty(value);
     }
 

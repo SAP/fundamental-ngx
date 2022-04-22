@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { Validators } from '@angular/forms';
 
-import { Observable, Subscription } from 'rxjs';
+import { firstValueFrom, Observable, Subscription } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
 import { DialogConfig, DialogService } from '@fundamental-ngx/core/dialog';
@@ -245,8 +245,7 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
         dialogRef.afterClosed.pipe(take(1)).subscribe(
             (selectedFilters: string[]) => {
                 this._setSelectedFilters(selectedFilters);
-            },
-            (_) => {}
+            }
         );
     }
 
@@ -299,7 +298,7 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
         const columns = this._getSubjectDefinitions();
 
         Object.entries(value)
-            .filter(([_, fieldConditions]) => !!fieldConditions)
+            .filter(([, fieldConditions]) => !!fieldConditions)
             .forEach(([fieldName, fieldConditions]) => {
                 const column = columns.find((c) => c.name === fieldName) as SmartFilterBarFieldDefinition;
                 const filterGroup: CollectionFilterGroup = {
@@ -490,7 +489,7 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
     /** @hidden */
     private _getFilterDefaultOptions(column: string, filterType: FilterType): () => Promise<any[]> {
         return async () => {
-            const variants = await this._getFieldVariants(column).pipe(take(1)).toPromise();
+            const variants = await firstValueFrom(this._getFieldVariants(column).pipe(take(1)));
 
             const availableDefaultConditions: SmartFilterBarCondition[] = [];
 

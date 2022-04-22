@@ -25,7 +25,7 @@ import {
     ]
 })
 export class PlatformTimePickerBasicExampleComponent {
-    allowNullTimeObject: FdDate = new FdDate().setTime(12, 0, 0);
+    allowNullTimeObject: FdDate | null = new FdDate().setTime(12, 0, 0);
     displayFormat = { hour: 'numeric', minute: '2-digit', second: '2-digit', hour12: false };
 
     setNull(): void {

@@ -8,6 +8,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { CarouselItemInterface } from '../carousel.service';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 export type Visibility = 'visible' | 'hidden';
 
@@ -29,17 +30,17 @@ export class CarouselItemComponent implements CarouselItemInterface {
     /** Sets aria-label attribute for carousel item */
     @Input()
     @HostBinding('attr.aria-label')
-    ariaLabel: string;
+    ariaLabel: Nullable<string>;
 
     /** Sets aria-labelledby attribute for carousel item */
     @Input()
     @HostBinding('attr.aria-labelledby')
-    ariaLabelledBy: string;
+    ariaLabelledBy: Nullable<string>;
 
     /** Sets aria-describedby attribute for carousel item */
     @Input()
     @HostBinding('attr.aria-describedby')
-    ariaDescribedBy: string;
+    ariaDescribedBy: Nullable<string>;
 
     /**
      * Loading indicator when item is not yet loaded

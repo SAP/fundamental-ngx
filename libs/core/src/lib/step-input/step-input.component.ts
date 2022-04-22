@@ -18,13 +18,12 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { FormStates } from '@fundamental-ngx/core/shared';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
 import { defer, fromEvent, interval, merge, Observable, Subscription, timer } from 'rxjs';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
 import NumberFormat = Intl.NumberFormat;
 import { DOWN_ARROW, ENTER, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { ContentDensityService, KeyUtil } from '@fundamental-ngx/core/utils';
 import { SafeHtml } from '@angular/platform-browser';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 
@@ -70,7 +69,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** Specifies algorithm used to match locale. Check Intl.NumberFormat documentation for more information */
     @Input()
-    localeMatcher: string;
+    localeMatcher: Nullable<string>;
 
     /** Sets icon displayed in Increment Button */
     @Input()
@@ -90,7 +89,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** Sets input aria-label attribute */
     @Input()
-    ariaLabel: string = null;
+    ariaLabel: Nullable<string> = null;
 
     /** Aria defines role description for the Step Input. */
     @Input()
@@ -102,9 +101,10 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** Set control value */
     @Input()
-    set value(value: number) {
-        if (value === null) {
-            this._value = value;
+    set value(value: Nullable<number>) {
+        if (value == null) {
+            // cast null or undefined to "null"
+            this._value = null;
         } else if (!isNaN(value)) {
             value = Number(value);
             this._value = this._checkValueLimits(value);
@@ -116,7 +116,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     }
 
     /** Control value */
-    get value(): number {
+    get value(): number | null {
         return this._value;
     }
 
@@ -134,7 +134,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** Sets input name attribute */
     @Input()
-    name: boolean = null;
+    name: Nullable<string>;
 
     /** Sets input title attribute */
     @Input()
@@ -146,7 +146,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** Sets state of the control. Can be `success`, `error`, `warning`, `information` or blank for default. */
     @Input()
-    state?: FormStates;
+    state: FormStates = 'default';
 
     /** Holds the message with respect to state */
     @Input()
@@ -191,16 +191,16 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     /** Emits event when input gets focused */
     @Output()
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    onFocusIn: EventEmitter<void> = new EventEmitter<void>();
+    onFocusIn = new EventEmitter<void>();
 
     /** Emits event when input loses focus */
     @Output()
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    onFocusOut: EventEmitter<void> = new EventEmitter<void>();
+    onFocusOut = new EventEmitter<void>();
 
     /** Emits new value when control value has changed */
     @Output()
-    valueChange: EventEmitter<number> = new EventEmitter<number>();
+    valueChange = new EventEmitter<number | null>();
 
     /** @hidden */
     @ViewChild('incrementBtn', { read: ElementRef })
@@ -215,7 +215,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     inputElement: ElementRef;
 
     /** @hidden */
-    lastEmittedValue: number;
+    lastEmittedValue: Nullable<number>;
 
     /** @hidden */
     currencySign: string;
@@ -224,7 +224,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     focused: boolean;
 
     /** @hidden */
-    private _value: number = null;
+    private _value: number | null = null;
 
     /** @hidden */
     private _numerals: RegExp;
@@ -251,7 +251,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     private _index: any;
 
     /** @hidden */
-    onChange: (value: number) => void = () => {};
+    onChange: (value: Nullable<number>) => void = () => {};
 
     /** @hidden */
     onTouched = (): void => {};
@@ -290,7 +290,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     }
 
     /** @hidden */
-    registerOnChange(fn: (value: number) => void): void {
+    registerOnChange(fn: (value: Nullable<number>) => void): void {
         this.onChange = fn;
     }
 
@@ -311,11 +311,17 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** @hidden */
     get canIncrement(): boolean {
+        if (this.value == null) {
+            return false;
+        }
         return this.value + this.step <= this._max;
     }
 
     /** @hidden */
     get canDecrement(): boolean {
+        if (this.value == null) {
+            return false;
+        }
         return this.value - this.step >= this._min;
     }
 
@@ -327,7 +333,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     /** Increment input value by step value */
     increment(): void {
         if (this.canIncrement) {
-            this._value = this._cutFloatingNumberDistortion(this.value, this.step);
+            this._value = this._cutFloatingNumberDistortion(this.value!, this.step);
             this._emitChangedValue();
             this._updateViewValue();
         }
@@ -336,7 +342,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     /** Decrement input value by step value */
     decrement(): void {
         if (this.canDecrement) {
-            this._value = this._cutFloatingNumberDistortion(this.value, -this.step);
+            this._value = this._cutFloatingNumberDistortion(this.value!, -this.step);
             this._emitChangedValue();
             this._updateViewValue();
         }
@@ -399,7 +405,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     /** @hidden Track parsed value when user changes value of the input control. */
     trackInputValue(event: any): void {
         const parsedValue = this._parseValue(event.target.value);
-        this._value = parsedValue !== null ? this._checkValueLimits(parsedValue) : null;
+        this._value = parsedValue != null ? this._checkValueLimits(parsedValue) : null;
     }
 
     /** @hidden */
@@ -507,7 +513,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     }
 
     /** @hidden */
-    private _parseValue(text: string): number | null {
+    private _parseValue(text: string): Nullable<number> {
         const trimmedText = text.trim();
 
         if (trimmedText === '') {
@@ -537,10 +543,11 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         }
 
         return new NumberFormat(this.locale, {
-            localeMatcher: this.localeMatcher,
+            localeMatcher: this.localeMatcher ?? undefined,
             style: this.mode,
             currency: this.currency,
-            currencyDisplay: this.currencyDisplay,
+            // only available in ES2020 and later
+            ['currencyDisplay' as any]: this.currencyDisplay,
             useGrouping: this.useGrouping,
             minimumFractionDigits: this.minFractionDigits,
             maximumFractionDigits: this.maxFractionDigits
@@ -582,7 +589,8 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
             const formatter = new NumberFormat(this.locale, {
                 style: 'currency',
                 currency: this.currency,
-                currencyDisplay: this.currencyDisplay
+                // only available in ES2020 and later
+                ['currencyDisplay' as any]: this.currencyDisplay
             });
             this.currencySign = `${formatter
                 .format(1)
@@ -607,8 +615,8 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     }
 
     /** @hidden */
-    private _formatToViewValue(number: number): string {
-        if (number === null) {
+    private _formatToViewValue(number: Nullable<number>): string {
+        if (number == null) {
             return '';
         } else {
             return this.currency

@@ -21,7 +21,7 @@ import { Subscription } from 'rxjs';
 
 import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
-import { SpecialDayRule } from '@fundamental-ngx/core/shared';
+import { SpecialDayRule, Nullable } from '@fundamental-ngx/core/shared';
 
 import { DateRange } from './models/date-range';
 import { CalendarCurrent } from './models/calendar-current';
@@ -34,8 +34,9 @@ import { CalendarHeaderComponent } from './calendar-header/calendar-header.compo
 import { CalendarService } from './calendar.service';
 import { createMissingDateImplementationError } from './calendar-errors';
 import { CalendarAggregatedYearViewComponent } from './calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
-import { FocusableCalendarView } from './models/common';
+import { DisableDateFunction, EscapeFocusFunction, FocusableCalendarView } from './models/common';
 import { FdCalendarView, DaysOfWeek, CalendarType, NavigationButtonDisableFunction } from './types';
+
 
 let calendarUniqueId = 0;
 
@@ -78,7 +79,7 @@ let calendarUniqueId = 0;
 export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAccessor, Validator, OnDestroy {
     /** The currently selected date model in single mode. */
     @Input()
-    selectedDate: D;
+    selectedDate: Nullable<D>;
 
     /** Whether compact mode should be included into calendar */
     @Input()
@@ -246,7 +247,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
 
     /** That allows to define function that should happen, when focus should normally escape of component */
     @Input()
-    escapeFocusFunction = (event?: KeyboardEvent): void => {
+    escapeFocusFunction: EscapeFocusFunction = (event?: KeyboardEvent): void => {
         event?.preventDefault();
         this._calendarHeaderComponent?.focus();
     };
@@ -256,21 +257,21 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      * @param date date
      */
     @Input()
-    disableFunction: (date: D) => boolean = () => false;
+    disableFunction: DisableDateFunction<D> = () => false;
 
     /**
      * Function used to disable certain dates in the calendar for the range start selection.
      * @param date date
      */
     @Input()
-    disableRangeStartFunction: (date: D) => boolean = () => false;
+    disableRangeStartFunction: DisableDateFunction<D> = () => false;
 
     /**
      * Function used to disable certain dates in the calendar for the range end selection.
      * @param date date
      */
     @Input()
-    disableRangeEndFunction: (date: D) => boolean = () => false;
+    disableRangeEndFunction: DisableDateFunction<D> = () => false;
 
     /** @hidden */
     onChange: (_: D | DateRange<D>) => void = () => {};
@@ -373,9 +374,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      * @hidden
      * Function that implements Validator Interface, adds validation support for forms
      */
-    validate(): {
-        [key: string]: any;
-    } {
+    validate(): { [key: string]: any; } | null {
         return this.isModelValid()
             ? null
             : {
@@ -547,11 +546,11 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      * Function that allows to change currently displayed month/year configuration,
      * which are connected to days displayed
      */
-    setCurrentlyDisplayed(date: D): void {
+    setCurrentlyDisplayed(date: Nullable<D>): void {
         if (this._dateTimeAdapter.isValid(date)) {
             this._currentlyDisplayed = {
-                month: this._dateTimeAdapter.getMonth(date),
-                year: this._dateTimeAdapter.getYear(date)
+                month: this._dateTimeAdapter.getMonth(date!),
+                year: this._dateTimeAdapter.getYear(date!)
             };
         }
     }

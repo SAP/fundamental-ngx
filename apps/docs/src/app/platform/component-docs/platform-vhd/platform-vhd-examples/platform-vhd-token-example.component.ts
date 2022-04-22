@@ -48,7 +48,7 @@ export class PlatformVhdTokenExampleComponent implements OnInit {
     filters: FilterData[];
     dataSource: ValueHelpDialogDataSource<ExampleTestModel>;
     hasAdvanced = false;
-    selectedValue = [];
+    selectedValue: ExampleTestModel[] = [];
     currentValue: Partial<VhdValue> = {};
 
     ngOnInit(): void {

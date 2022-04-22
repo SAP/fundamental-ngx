@@ -67,9 +67,9 @@ export abstract class UploadCollectionDataProvider extends DataProvider<UploadCo
         }
 
         let _list = this._defaultSorting(currentItems);
-        const searchText = params.get('searchText') as string;
-        const limit = +params.get('limit');
-        const page = params.get('page') as number | 1;
+        const searchText = params.get('searchText') as string ?? '';
+        const limit = +(params.get('limit') ?? 100 as number);
+        const page = +(params.get('page') ?? 1);
 
         if (!searchText || searchText === '*') {
             this.list = _list;
@@ -146,6 +146,7 @@ export abstract class UploadCollectionDataProvider extends DataProvider<UploadCo
                 return res;
             }, 0);
         }
+        return 0;
     }
 
     /** @hidden */
@@ -155,7 +156,7 @@ export abstract class UploadCollectionDataProvider extends DataProvider<UploadCo
 
     /** @hidden */
     private _findFolderById(folderId: number | string): UploadCollectionFolder | undefined {
-        let foundObj: UploadCollectionFolder;
+        let foundObj: UploadCollectionFolder | undefined;
 
         JSON.stringify(this.items, (_, nestedValue) => {
             if (nestedValue && nestedValue.documentId === folderId) {

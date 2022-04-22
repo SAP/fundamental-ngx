@@ -74,6 +74,6 @@ export class DatePickerFormExampleComponent {
     });
 
     isValid(): boolean {
-        return this.customForm.get('date').valid;
+        return !!this.customForm.get('date')?.valid;
     }
 }

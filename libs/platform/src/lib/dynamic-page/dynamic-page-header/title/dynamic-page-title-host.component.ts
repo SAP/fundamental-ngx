@@ -78,7 +78,7 @@ export class DynamicPageTitleHostComponent implements OnInit, AfterViewInit {
     /** @hidden */
     _globalActionsContainer: ElementRef<HTMLElement> | undefined;
     /** @hidden */
-    _globalActionsToolbarEl: HTMLElement | undefined;
+    _globalActionsToolbarEl: HTMLElement | undefined | null;
 
     /** @hidden */
     @ContentChild('globalActionsContainer')
@@ -87,7 +87,7 @@ export class DynamicPageTitleHostComponent implements OnInit, AfterViewInit {
         if (!globalActionsContainer) {
             return;
         }
-        this._globalActionsToolbarEl = globalActionsContainer.nativeElement.querySelector('.fd-toolbar');
+        this._globalActionsToolbarEl = globalActionsContainer.nativeElement.querySelector<HTMLElement>('.fd-toolbar');
         if (this._globalActionsToolbarEl) {
             addClassNameToElement(this._renderer, this._globalActionsToolbarEl, CLASS_NAME.dynamicPageGlobalActions);
         }
@@ -96,7 +96,7 @@ export class DynamicPageTitleHostComponent implements OnInit, AfterViewInit {
     /** @hidden */
     _layoutActionsContainer: ElementRef<HTMLElement> | undefined;
     /** @hidden */
-    _layoutActionsToolbarEl: HTMLElement | undefined;
+    _layoutActionsToolbarEl: HTMLElement | undefined | null;
 
     /** @hidden */
     @ContentChild('layoutActionsContainer')
@@ -105,7 +105,7 @@ export class DynamicPageTitleHostComponent implements OnInit, AfterViewInit {
         if (!layoutActionsContainer) {
             return;
         }
-        this._layoutActionsToolbarEl = layoutActionsContainer.nativeElement.querySelector('.fd-toolbar');
+        this._layoutActionsToolbarEl = layoutActionsContainer.nativeElement.querySelector<HTMLElement>('.fd-toolbar');
         if (this._layoutActionsToolbarEl) {
             addClassNameToElement(this._renderer, this._layoutActionsToolbarEl, CLASS_NAME.dynamicPageLayoutActions);
         }

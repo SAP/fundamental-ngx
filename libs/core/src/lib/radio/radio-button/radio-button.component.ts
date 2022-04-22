@@ -15,9 +15,8 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder, ContentDensityService } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 export type stateType = 'success' | 'error' | 'warning' | 'default' | 'information';
 let uniqueId = 0;
@@ -44,15 +43,15 @@ export class RadioButtonComponent
 
     /** Sets the `aria-label` attribute to the element. */
     @Input()
-    ariaLabel = null;
+    ariaLabel: Nullable<string>;
 
     /** Sets the `aria-labelledby` attribute to the element. */
     @Input()
-    ariaLabelledBy = null;
+    ariaLabelledBy: Nullable<string>;
 
     /** Sets the `aria-describedby` attribute to the element. */
     @Input()
-    ariaDescribedBy: string;
+    ariaDescribedBy: Nullable<string>;;
 
     /** sets radio tooltip */
     @Input()

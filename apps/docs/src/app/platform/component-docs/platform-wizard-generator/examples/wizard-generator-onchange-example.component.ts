@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { FormGeneratorService } from '@fundamental-ngx/platform/form';
+import { FormGeneratorService, DynamicFormGroup } from '@fundamental-ngx/platform/form';
 import { WizardGeneratorFormsValue, WizardGeneratorItem } from '@fundamental-ngx/platform/wizard-generator';
 
 @Component({
@@ -27,7 +27,7 @@ export class WizardGeneratorOnchangeExampleComponent {
                             type: 'input',
                             validators: [Validators.required],
                             onchange: (value, forms) => {
-                                const repositoryForm = forms.get('repositoryInformation');
+                                const repositoryForm = forms.get('repositoryInformation') as DynamicFormGroup;
 
                                 const control = this._formGeneratorService.getFormControl(
                                     repositoryForm,

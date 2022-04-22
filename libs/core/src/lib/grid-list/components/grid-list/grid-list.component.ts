@@ -22,6 +22,7 @@ import {
     GridListSelectionEvent
 } from './../../models/grid-list-selection.models';
 import { RangeSelector } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { GridList } from './grid-list-base.component';
 
 let gridListUniqueId = 0;
@@ -45,7 +46,7 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
 
     /** Sets the `aria-label` attribute to the element. */
     @Input()
-    ariaLabel: string;
+    ariaLabel: Nullable<string>;
 
     /**
      * Defines the mode of Grid List
@@ -157,7 +158,7 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
     }
 
     /** @hidden */
-    setSelectedItem(item: T, componentIndex: number, action?: GridListSelectionActions, event?: PointerEvent): void {
+    setSelectedItem(item: T, componentIndex: number, action?: GridListSelectionActions | null, event?: PointerEvent): void {
         if (!action) {
             this._selectedItems.added = [item];
             const selectedItem = this._selectedItems.selection[0];
@@ -174,10 +175,13 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
         }
 
         this._rangeSelector.onRangeElementToggled(componentIndex, event);
-        const { from, to } = this._rangeSelector.lastRangeSelectionState;
-        const itemIndexes = new Array(to - from + 1).fill(null).map((e, i) => from + i);
-        const selectedItems = itemIndexes.map((idx) => this.gridListItems.get(idx).value);
-        const itemsSet = new Set(selectedItems);
+        const state = this._rangeSelector.lastRangeSelectionState;
+        if (!state) {
+            return;
+        }
+        const itemIndexes = new Array(state.to - state.from + 1).fill(null).map((e, i) => state.from + i);
+        const selectedItems = itemIndexes.map((idx) => this.gridListItems.get(idx)?.value).filter((v): v is T => !!v);
+        const itemsSet = new Set<T>(selectedItems);
 
         if (action === GridListSelectionActions.ADD) {
             this._selectedItems.added = [...itemsSet.values()];

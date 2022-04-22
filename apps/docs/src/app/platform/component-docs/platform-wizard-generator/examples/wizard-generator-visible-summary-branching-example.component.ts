@@ -20,7 +20,7 @@ export class WizardGeneratorVisibleSummaryBranchingExampleComponent implements O
         text: 'Checkout'
     };
 
-    wizardValue: WizardGeneratorFormsValue;
+    wizardValue: WizardGeneratorFormsValue | undefined;
 
     stepItems: WizardGeneratorItem[] = [
         {
@@ -195,7 +195,7 @@ export class WizardGeneratorVisibleSummaryBranchingExampleComponent implements O
                 }
             })
             .afterClosed.pipe(takeUntil(this._onDestroy$))
-            .subscribe((wizardValue: WizardGeneratorFormsValue) => {
+            .subscribe((wizardValue) => {
                 this.wizardValue = wizardValue;
             });
     }

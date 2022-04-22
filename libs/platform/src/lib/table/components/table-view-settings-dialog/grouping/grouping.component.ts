@@ -19,7 +19,7 @@ export interface SettingsGroupDialogData extends TableDialogCommonData {
 }
 
 export interface SettingsGroupDialogResultData {
-    field: string;
+    field: string | null;
     direction: SortDirection;
 }
 
@@ -36,7 +36,7 @@ export class GroupingComponent implements Resettable {
     direction: SortDirection;
 
     /** Current selected field */
-    field: string;
+    field: string | null = null;
 
     /** Table columns */
     readonly columns: SettingsGroupDialogColumn[] = [];

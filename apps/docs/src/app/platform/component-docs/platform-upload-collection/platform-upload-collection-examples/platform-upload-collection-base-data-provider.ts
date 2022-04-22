@@ -31,7 +31,7 @@ enum CancelActiveRequest {
 export class PlatformUploadCollectionDataProviderExample extends UploadCollectionDataProvider {
     items: UploadCollectionItem[] = generateUploadCollectionItems(50, 4, 2);
     private _cancelUploadNewFileIds: (string | number)[] = [];
-    private _activeRequest: CancelActiveRequest = null;
+    private _activeRequest: CancelActiveRequest | null = null;
 
     constructor(private readonly _http: HttpClient) {
         super();
@@ -84,7 +84,7 @@ export class PlatformUploadCollectionDataProviderExample extends UploadCollectio
                 a.click();
                 URL.revokeObjectURL(objectUrl);
 
-                return null;
+                return;
             })
         );
     }
@@ -96,16 +96,16 @@ export class PlatformUploadCollectionDataProviderExample extends UploadCollectio
     moveTo({ from, to, items, newFolder }: MoveToEvent): Observable<UploadCollectionItem[]> {
         console.log('moveTo', from, to, items, newFolder);
 
-        const ids = items.map((item) => item.documentId);
+        const ids = items.map((item) => item.documentId as string);
 
         this._findParentFolderAndRemoveItemsByIds(from ? from.documentId : null, ids);
         if (newFolder) {
             const folder = this._generateNewFolder(newFolder.folderName);
 
             this._findParentFolderAndAddFiles(newFolder.parentFolderId, [folder]);
-            this._findParentFolderAndAddFiles(folder.documentId, items);
+            this._findParentFolderAndAddFiles(folder.documentId!, items);
         } else {
-            this._findParentFolderAndAddFiles(to ? to.documentId : null, items);
+            this._findParentFolderAndAddFiles(to ? to.documentId! : null, items);
         }
 
         return of(this.items);
@@ -115,7 +115,7 @@ export class PlatformUploadCollectionDataProviderExample extends UploadCollectio
     delete({ parentFolderId, items }: DeleteEvent): Observable<UploadCollectionItem[]> {
         console.log('delete', parentFolderId, items);
 
-        const ids = items.map((item) => item.documentId);
+        const ids = items.map((item) => item.documentId as string);
         this._findParentFolderAndRemoveItemsByIds(parentFolderId, ids);
 
         return of(this.items);
@@ -144,7 +144,7 @@ export class PlatformUploadCollectionDataProviderExample extends UploadCollectio
         return of(this.items).pipe(
             delay(5000),
             tap(() => {
-                const folderId = folder.documentId;
+                const folderId = folder.documentId as string;
                 const includes = this._cancelUploadNewFileIds.includes(folderId);
 
                 if (includes) {
@@ -156,7 +156,7 @@ export class PlatformUploadCollectionDataProviderExample extends UploadCollectio
             takeUntil(complete),
             tap(() => {
                 const uploadedFile = {
-                    temporaryDocumentId: folder.documentId,
+                    temporaryDocumentId: folder.documentId as string,
                     item: {
                         ...folder,
                         status: UploadCollectionItemStatus.SUCCESSFUL
@@ -240,16 +240,16 @@ export class PlatformUploadCollectionDataProviderExample extends UploadCollectio
         }
 
         if (this._activeRequest === CancelActiveRequest.UPDATE_VERSION) {
-            item.status = null;
+            delete item.status;
             this._findParentFolderAndUpdateItem(parentFolderId, item);
         }
 
-        return of(null);
+        return of([]);
     }
 
     /** @hidden */
     private _findParentFolderAndUpdateItem(
-        parentFolderId: string | number | null,
+        parentFolderId: string | number | null | undefined,
         updatedItem: UploadCollectionItem,
         items = this.items
     ): void {
@@ -284,7 +284,7 @@ export class PlatformUploadCollectionDataProviderExample extends UploadCollectio
 
     /** @hidden */
     private _findParentFolderAndAddNewFiles(
-        parentFolderId: string | number | null,
+        parentFolderId: string | number | null | undefined,
         uploadedFiles: UploadCollectionNewItem[],
         items = this.items
     ): void {
@@ -293,7 +293,7 @@ export class PlatformUploadCollectionDataProviderExample extends UploadCollectio
         }
 
         if (!parentFolderId) {
-            const uploadedFile = uploadedFiles.pop();
+            const uploadedFile = uploadedFiles.pop()!;
             const index = items.findIndex((item) => item.documentId === uploadedFile.temporaryDocumentId);
             if (index !== -1) {
                 items[index] = uploadedFile.item;
@@ -319,7 +319,7 @@ export class PlatformUploadCollectionDataProviderExample extends UploadCollectio
                 }, {});
 
                 currentItem.files = currentItem.files.map((item) =>
-                    hash[item.documentId] ? hash[item.documentId] : item
+                item.documentId && hash[item.documentId] ? hash[item.documentId] : item
                 );
 
                 break;
@@ -363,7 +363,7 @@ export class PlatformUploadCollectionDataProviderExample extends UploadCollectio
 
     /** @hidden */
     private _findParentFolderAndRemoveItemsByIds(
-        parentFolderId: string | number | null,
+        parentFolderId: string | number | null | undefined,
         documentsIds: (number | string)[],
         items = this.items
     ): void {

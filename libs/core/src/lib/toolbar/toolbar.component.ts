@@ -145,10 +145,10 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     private _disappearElements: ToolbarItemDirective[] = [];
 
     /** @hidden */
-    private _groupedCollection: { [key: number]: ToolbarItemDirective[] };
+    private _groupedCollection: { [key: number]: ToolbarItemDirective[] } | null;
 
     /** @hidden */
-    private _groupedCollectionPriority: { [key: number]: OverflowPriority };
+    private _groupedCollectionPriority: { [key: number]: OverflowPriority } | null;
 
     /** @hidden */
     private _alive = true;
@@ -323,6 +323,9 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     /** @hidden */
     private _hideElementsFromCurrentGroup(itemGroup: number): void {
         const lowestPriorityFromGroup = this._getLowestPriorityFromGroup(itemGroup);
+        if (!this._groupedCollection || !this._groupedCollectionPriority) {
+            return;
+        }
         let itemsToRemove = this._groupedCollection[lowestPriorityFromGroup];
 
         delete this._groupedCollection[lowestPriorityFromGroup];
@@ -334,9 +337,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
             delete this._groupedCollectionPriority[itemGroup];
         }
 
-        // eslint-disable-next-line no-unused-expressions, @typescript-eslint/no-unused-expressions
-        itemsToRemove &&
-            itemsToRemove.forEach((item) => {
+            itemsToRemove?.forEach((item) => {
                 this._removeItemFromArray(this._normalElements, item);
                 const isDisappear = this._getElementPriority(item) === OverflowPriorityEnum.DISAPPEAR;
                 if (isDisappear) {
@@ -391,7 +392,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
                     minIndex = Math.min(minIndex, item.index);
                     maxPriority = Math.max(
                         maxPriority,
-                        OVERFLOW_PRIORITY_SCORE.get(this._getElementPriority(item.element))
+                        OVERFLOW_PRIORITY_SCORE.get(this._getElementPriority(item.element)) ?? -Infinity
                     );
                 }
 
@@ -434,10 +435,14 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
 
     /** @hidden Get the object with the highest priority for each group of elements. */
     private _getGroupedCollectionPriority(): { [key: number]: OverflowPriority } {
+        if (!this._groupedCollection) {
+            return {};
+        }
+
         const groups = Object.keys(this._groupedCollection);
 
         return groups.reduce((acc, itemGroup) => {
-            const sortedPriorities = this._groupedCollection[itemGroup]
+            const sortedPriorities = this._groupedCollection![itemGroup]
                 .map(this._getElementPriority)
                 .filter((prio) => prio !== OverflowPriorityEnum.ALWAYS && prio !== OverflowPriorityEnum.NEVER)
                 .sort(this._sortPriorities.bind(this));
@@ -452,16 +457,17 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
      *  Uses for detecting a group of elements which would be hidden from the toolbar.
      *  */
     private _getLowestPriorityFromGroup(itemGroup: number): number {
-        if (!OVERFLOW_PRIORITY_SCORE.get(this._groupedCollectionPriority[itemGroup])) {
+        const priority = this._groupedCollectionPriority;
+        if (!priority || !OVERFLOW_PRIORITY_SCORE.get(priority[itemGroup])) {
             return itemGroup;
         }
 
-        const groups = Object.keys(this._groupedCollectionPriority);
+        const groups = Object.keys(priority);
 
         return groups.reduce((lowestGroup, currentGroup) => {
-            const lowestGroupPriority = this._groupedCollectionPriority[lowestGroup];
-            const currentGroupPriority = this._groupedCollectionPriority[currentGroup];
-            if (OVERFLOW_PRIORITY_SCORE.get(currentGroupPriority) < OVERFLOW_PRIORITY_SCORE.get(lowestGroupPriority)) {
+            const lowestGroupPriority = priority[lowestGroup];
+            const currentGroupPriority = priority[currentGroup];
+            if (OVERFLOW_PRIORITY_SCORE.get(currentGroupPriority)! < OVERFLOW_PRIORITY_SCORE.get(lowestGroupPriority)!) {
                 return +currentGroup;
             }
 
@@ -541,7 +547,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
 
     /** @hidden Sort priorities of elements/groups. */
     private _sortPriorities(a: OverflowPriority, b: OverflowPriority): number {
-        return OVERFLOW_PRIORITY_SCORE.get(b) - OVERFLOW_PRIORITY_SCORE.get(a);
+        return OVERFLOW_PRIORITY_SCORE.get(b)! - OVERFLOW_PRIORITY_SCORE.get(a)!;
     }
 
     /** @hidden */
@@ -559,7 +565,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
         let lastItem: ToolbarItemDirective = normalElements[normalElements.length - 1];
 
         while (isSpacer(lastItem) && normalElements.length > 0) {
-            overflowElements.push(normalElements.pop());
+            overflowElements.push(normalElements.pop()!);
             lastItem = normalElements[normalElements.length - 1];
         }
     }

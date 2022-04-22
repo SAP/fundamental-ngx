@@ -324,7 +324,7 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
 
     /** @hidden
      * Close list * */
-    close(event: MouseEvent = null, forceClose: boolean = false): void {
+    close(event: MouseEvent|null = null, forceClose: boolean = false): void {
         if (event) {
             const target = event.target as HTMLInputElement;
             if (target && target.id === this.id) {

@@ -51,6 +51,7 @@ import { FormStates, PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { InputGroupComponent } from '@fundamental-ngx/core/input-group';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 import { ComboboxMobileModule } from './combobox-mobile/combobox-mobile.module';
 import { ComboboxMobileComponent } from './combobox-mobile/combobox-mobile.component';
@@ -106,12 +107,12 @@ export class ComboboxComponent
     /** Aria-label for Combobox. */
     @Input()
     @HostBinding('attr.aria-label')
-    ariaLabel: string = null;
+    ariaLabel: Nullable<string>;
 
     /** Aria-Labelledby for element describing Combobox. */
     @Input()
     @HostBinding('attr.aria-labelledby')
-    ariaLabelledBy: string = null;
+    ariaLabelledBy: Nullable<string>;
 
     /** If it is mandatory field */
     @Input()
@@ -668,6 +669,7 @@ export class ComboboxComponent
         } else if (typeof searchTerm === 'object') {
             return contentArray.filter((item) => item === searchTerm);
         }
+        return contentArray;
     }
 
     /** @hidden */

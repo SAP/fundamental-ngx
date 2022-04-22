@@ -12,8 +12,8 @@ import {
 import { FormStates } from '@fundamental-ngx/core/shared';
 import { Subscription } from 'rxjs';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/core/utils';
+
 
 /**
  * Directive intended for use on form controls.
@@ -36,7 +36,7 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges,
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
      */
     @Input()
-    state?: FormStates;
+    state: FormStates | null = null;
 
     /**
      * Whether form is in compact mode
@@ -62,13 +62,13 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges,
     buildComponentCssClass(): string[] {
         return [
             this.state ? 'is-' + this.state : '',
-            this._getFormClass(),
+            this._getFormClass() || '',
             this.compact ? this._getFormClass() + '--compact' : '',
             this.class
         ];
     }
 
-    private _getFormClass(): string {
+    private _getFormClass(): string | undefined {
         switch (this._getElementTag()) {
             case 'input':
                 return 'fd-input';
@@ -109,7 +109,7 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges,
     }
 
     /** @hidden */
-    private _getElementTag(): string {
+    private _getElementTag(): string | undefined {
         if (this.elementRef() && this.elementRef().nativeElement) {
             return this.elementRef().nativeElement.tagName.toLocaleLowerCase();
         }

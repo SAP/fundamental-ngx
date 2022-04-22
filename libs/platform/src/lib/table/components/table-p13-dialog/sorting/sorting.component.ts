@@ -31,7 +31,7 @@ export interface SortDialogResultData {
 }
 
 export interface SortRule {
-    columnKey: string;
+    columnKey: string | null;
     direction: SortDirection;
 }
 
@@ -44,7 +44,7 @@ class ValidatedSortRule implements SortRule {
 
     constructor(
         /** Column key the rule belongs to */
-        public columnKey: string = NOT_SELECTED_OPTION_VALUE,
+        public columnKey: string | null = NOT_SELECTED_OPTION_VALUE,
         /** Sort direction */
         public direction: SortDirection = SortDirection.ASC
     ) {}
@@ -136,7 +136,7 @@ export class P13SortingDialogComponent implements Resettable {
     }
 
     /** @hidden */
-    _trackByColumnKey(index: number, rule: ValidatedSortRule): string {
+    _trackByColumnKey(index: number, rule: ValidatedSortRule): string | null {
         return rule.columnKey;
     }
 
@@ -178,7 +178,10 @@ export class P13SortingDialogComponent implements Resettable {
 
 @Pipe({ name: 'getAvailableSortColumns', pure: false })
 export class GetAvailableSortColumnsPipe implements PipeTransform {
-    transform(columns: SortDialogColumn[], rules: SortRule[], currentKey: string): SortDialogColumn[] {
+    transform(columns: SortDialogColumn[], rules: SortRule[], currentKey: string | null): SortDialogColumn[] {
+        if (!currentKey) {
+            return columns;
+        }
         const usedKeys = new Set(rules.map((r) => r.columnKey));
         return columns.filter((c) => !usedKeys.has(c.key) || currentKey === c.key);
     }

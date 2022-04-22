@@ -275,7 +275,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     /** @hidden */
     private _secondaryFn = (value: any): string => {
         if (isOptionItem(value)) {
-            return value.secondaryText;
+            return value.secondaryText ?? '';
         } else if (isJsObject(value) && this.description) {
             const currentItem = this.objectGet(value, this.description);
 
@@ -463,17 +463,11 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     /** @hidden
      * Method that picks other value moved from current one by offset, called only when Multi Input is closed */
     private _chooseOtherItem(offset: number): void {
-        const activeValue: MultiInputOption = this._getSelectItemByValue(this.inputText);
-        const index: number = this._suggestions.findIndex((value) => value === activeValue);
+        const index: number = this._suggestions.findIndex((value) => value.label === this.inputText);
 
         if (this._suggestions[index + offset]) {
             this.handleOptionItem(this._suggestions[index + offset]);
         }
-    }
-
-    /** @hidden */
-    private _getSelectItemByValue(displayValue: string): MultiInputOption {
-        return this._suggestions.find((value) => value.label === displayValue);
     }
 
     /** @hidden */
@@ -485,7 +479,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
 
             if (this._dsSubscription) {
                 this._dsSubscription.unsubscribe();
-                this._dsSubscription = null;
+                this._dsSubscription = undefined;
             }
         }
         // Convert whatever comes in as DataSource so we can work with it identically
@@ -627,7 +621,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
 
         for (let i = 0; i < items.length; i++) {
             const item = items[i];
-            const keyValue = item[this.groupKey];
+            const keyValue = this.groupKey && item[this.groupKey];
             if (!keyValue) {
                 continue;
             }
@@ -644,7 +638,6 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
                 label: key,
                 value: null,
                 isGroup: true,
-                avatarSrc: null
             };
 
             const currentGroup = group[key];

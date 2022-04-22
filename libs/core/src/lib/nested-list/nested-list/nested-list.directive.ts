@@ -111,7 +111,7 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
      */
     private _getNestedLevel(): number {
         let element = this._elementRef.nativeElement;
-        const parentElements = [];
+        const parentElements: Element[] = [];
 
         /** Method that gathers all of the parentNode elements of current NestedListDirective element */
         while (element.parentNode) {

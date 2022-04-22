@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
     templateUrl: './multi-input-new-tokens-example.component.html'
 })
 export class MultiInputNewTokensExampleComponent {
-    values = [
+    values: Item[] = [
         { name: 'Apple' },
         { name: 'Banana' },
         { name: 'Pineapple' },
@@ -16,7 +16,7 @@ export class MultiInputNewTokensExampleComponent {
         { name: 'Orange' }
     ];
 
-    selected = [];
+    selected: Item[] = [];
 
     displayFunc(obj: any): string {
         return obj.name;
@@ -29,4 +29,8 @@ export class MultiInputNewTokensExampleComponent {
     validateFunc(value: string): boolean {
         return value?.length >= 3;
     }
+}
+
+interface Item {
+    name: string;
 }

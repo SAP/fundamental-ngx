@@ -302,8 +302,8 @@ export class FixedCardLayoutComponent
 
         const wrapperColumns = this._cardColumns.map((column) =>
             column.map(
-                (card) => this._cardWrappers.find((wrapper) => wrapper.getSortedItems()[0].data === card).element
-            )
+                (card) => this._cardWrappers.find((wrapper) => wrapper.getSortedItems()[0].data === card)?.element
+            ).filter((v): v is ElementRef<HTMLElement> => !!v)
         );
 
         const columnsHeights = wrapperColumns
@@ -365,7 +365,7 @@ export class FixedCardLayoutComponent
         // If we dragged the card from the same column as the column we're dropping into
         // There may be a situation where the order shouldn't change but since there are a different drop lists it will change
         // We should prevent this
-        if (movedCardColumn === replacedCardColumn && movedCardColumn.length === 2) {
+        if (movedCardColumn === replacedCardColumn && movedCardColumn?.length === 2) {
             if (movedCard.fdCardDef < replacedCard.fdCardDef && event.previousContainer.data < event.container.data) {
                 return;
             }

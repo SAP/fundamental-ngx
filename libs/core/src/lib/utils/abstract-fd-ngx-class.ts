@@ -50,7 +50,7 @@ export abstract class AbstractFdNgxClass implements OnInit, OnChanges {
     ngOnChanges(): void {
         const classList = (this._elementRef.nativeElement as HTMLElement).classList;
         while (classList.length > 0) {
-            classList.remove(classList.item(0));
+            classList.remove(classList.item(0)!);
         }
         if (this.class) {
             this._addClassToElement(this.class);

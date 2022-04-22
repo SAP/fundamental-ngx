@@ -42,10 +42,10 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
     isSubmenu: boolean;
 
     /** @hidden External content */
-    childContent: TemplateRef<any> = undefined;
+    childContent: TemplateRef<any> | undefined;
 
     /** @hidden Currently rendered menu view */
-    view: TemplateRef<any>;
+    view: TemplateRef<any> | undefined;
 
     /** @hidden Navigation icon name based on RTL */
     navigationIcon$: Observable<string>;
@@ -102,7 +102,8 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
 
     /** @hidden Listens on Active Path changes and updates mobile view */
     private _listenOnActivePathChange(): void {
-        const initialItemPath: MenuItemComponent[] = this._menuService.activeNodePath.map((node) => node.item);
+        const initialItemPath: MenuItemComponent[] = this._menuService.activeNodePath
+            .map((node) => node.item).filter((v): v is MenuItemComponent => !!v);
         this._component.activePath
             .pipe(takeUntil(this._onDestroy$), startWith(initialItemPath))
             .subscribe((items) => this._setMenuView(items));
@@ -141,7 +142,7 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
     }
 
     /** @hidden Returns dialog content view */
-    private _getMenuView(menuItem: MenuItemComponent): TemplateRef<any> {
+    private _getMenuView(menuItem: MenuItemComponent): TemplateRef<any> | undefined {
         if (this.isSubmenu) {
             return menuItem.submenu ? menuItem.submenu.templateRef : this.view;
         }

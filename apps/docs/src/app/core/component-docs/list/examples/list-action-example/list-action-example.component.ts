@@ -26,7 +26,7 @@ export class ListActionExampleComponent {
 
     _getNewItems(): number[] {
         const lastItem = this._lastItem();
-        const items = [];
+        const items: number[] = [];
         for (let i = lastItem; i < lastItem + this.ITEMS_AMOUNT_ON_LOAD; ++i) {
             items.push(i);
         }

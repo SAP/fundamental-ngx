@@ -2,7 +2,6 @@ import {
     AfterViewInit,
     ChangeDetectorRef,
     Component,
-    ComponentFactoryResolver,
     ElementRef,
     Input,
     TemplateRef,
@@ -47,10 +46,9 @@ export class MessageBoxContainerComponent
         public messageBoxConfig: MessageBoxConfig,
         private _messageBoxRef: MessageBoxRef,
         elementRef: ElementRef,
-        componentFactoryResolver: ComponentFactoryResolver,
         private _changeDetectorRef: ChangeDetectorRef
     ) {
-        super(elementRef, componentFactoryResolver);
+        super(elementRef);
     }
 
     /** @hidden */
@@ -76,7 +74,7 @@ export class MessageBoxContainerComponent
         } else if (this.childContent instanceof TemplateRef) {
             this._createFromTemplate(this.childContent, this._templateContext());
         } else {
-            this._createFromDefaultMessageBox(this.childContent);
+            this._createFromDefaultMessageBox(this.childContent ?? null);
         }
         this._changeDetectorRef.detectChanges();
     }
@@ -87,10 +85,9 @@ export class MessageBoxContainerComponent
     }
 
     /** @hidden Load Dialog component from passed object */
-    private _createFromDefaultMessageBox(content: MessageBoxContent): void {
+    private _createFromDefaultMessageBox(content: MessageBoxContent | null): void {
         this.containerRef.clear();
-        const componentFactory = this._componentFactoryResolver.resolveComponentFactory(MessageBoxDefaultComponent);
-        this._componentRef = this.containerRef.createComponent<MessageBoxDefaultComponent>(componentFactory);
+        this._componentRef = this.containerRef.createComponent(MessageBoxDefaultComponent);
         this._componentRef.instance._messageBoxContent = content;
     }
 }

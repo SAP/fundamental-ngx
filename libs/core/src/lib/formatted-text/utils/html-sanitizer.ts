@@ -17,7 +17,7 @@ export class HtmlSanitizer {
         href: true
     };
 
-    private _safeWrapper?: SanitizeWrapper = {
+    private _safeWrapper: SanitizeWrapper | null = {
         iframe: null,
         iframeDoc: null
     };
@@ -84,7 +84,7 @@ export class HtmlSanitizer {
         }
 
         this._safeWrapper = this._getSafeWrapper();
-        if (!this._safeWrapper) {
+        if (!this._safeWrapper?.iframeDoc) {
             return '';
         }
 
@@ -110,7 +110,11 @@ export class HtmlSanitizer {
     }
 
     private _implementTag(node: HTMLElement): HTMLElement {
-        const newNode = this._safeWrapper.iframeDoc.createElement(node.tagName);
+        const newNode = this._safeWrapper?.iframeDoc?.createElement(node.tagName);
+
+        if (!newNode) {
+            throw new Error("Failed to create node");
+        }
 
         for (const key in this.attributeWhitelist) {
             if (this.attributeWhitelist[key]) {
@@ -146,7 +150,8 @@ export class HtmlSanitizer {
 
     private _extendLinkTarget(node: HTMLElement): HTMLElement {
         if (node.tagName === 'A') {
-            if (!node.getAttribute('href') || /^#/.test(node.getAttribute('href'))) {
+            const hrefAttr = node.getAttribute('href');
+            if (!hrefAttr || /^#/.test(hrefAttr)) {
                 node.removeAttribute('target');
             } else {
                 const defTarget = this.attributeWhitelist['target'] || '_blank';
@@ -157,7 +162,7 @@ export class HtmlSanitizer {
         return node;
     }
 
-    private _getSafeWrapper(): SanitizeWrapper {
+    private _getSafeWrapper(): SanitizeWrapper | null {
         const iframe = document.createElement('iframe');
         if (iframe.sandbox === undefined) {
             console.warn('Your browser does not support sandboxed iframes. Please upgrade to a modern browser.');
@@ -166,8 +171,13 @@ export class HtmlSanitizer {
         iframe.setAttribute('sandbox', 'allow-same-origin');
         iframe.style.setProperty('display', 'none');
         document.body.appendChild(iframe);
-        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-        if (iframeDoc.body === null) {
+        const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
+
+        if (!iframeDoc) {
+            console.warn('Could not resolve document from the provided iframe');
+            return null;
+        }
+        if (!iframeDoc?.body) {
             iframeDoc.write('<body></body>');
         }
 
@@ -175,12 +185,12 @@ export class HtmlSanitizer {
     }
 
     private _removeSafeWrapper(): void {
-        if (this._safeWrapper.iframe) {
+        if (this._safeWrapper?.iframe) {
             document.body.removeChild(this._safeWrapper.iframe);
         }
     }
 
-    private _validateBySchema(value: string): boolean {
+    private _validateBySchema(value: string | null): boolean {
         return !!value && value.indexOf(':') > -1 && !this._startsWithAny(value, this._schemaWhiteList);
     }
 

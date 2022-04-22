@@ -37,10 +37,10 @@ export class TableColumnResizeService implements OnDestroy {
     private _visibleColumnNames: string[] = [];
 
     /** @hidden */
-    private _startX: number;
+    private _startX: number | null = null;
 
     /** @hidden */
-    private _clientStartX: number;
+    private _clientStartX: number | null = null;
 
     /** @hidden */
     private _resizeInProgress = false;
@@ -49,7 +49,7 @@ export class TableColumnResizeService implements OnDestroy {
     private _resizedColumn: string;
 
     /** @hidden */
-    private _resizerPosition: number;
+    private _resizerPosition: number | null = null;
 
     /** @hidden */
     private _scrollLeft = 0;
@@ -73,7 +73,7 @@ export class TableColumnResizeService implements OnDestroy {
 
     /** Current column resizer position. */
     get resizerPosition(): number {
-        return this._resizerPosition;
+        return this._resizerPosition ?? 0;
     }
 
     /** Observable to notify to run CD */
@@ -132,7 +132,7 @@ export class TableColumnResizeService implements OnDestroy {
         if (actualWidth > maxWidth) {
             const reduceBy = actualWidth / maxWidth;
             [...this._tableRef._freezableColumns.keys()].forEach((columnName) => {
-                const currentWidth = this._columnsWidthMap.get(columnName);
+                const currentWidth = this._columnsWidthMap.get(columnName) ?? 0;
                 const newWidth = Math.floor(currentWidth / reduceBy);
                 this._columnsWidthMap.set(columnName, newWidth);
                 this._columnsWidthChangeSourceMap.set(columnName, ColumnWidthChangeSource.Resize);
@@ -213,7 +213,7 @@ export class TableColumnResizeService implements OnDestroy {
                 break;
             }
 
-            columnsWidth += this._columnsWidthMap.get(currentColumnName);
+            columnsWidth += this._columnsWidthMap.get(currentColumnName) ?? 0;
         }
 
         return columnsWidth;
@@ -290,7 +290,8 @@ export class TableColumnResizeService implements OnDestroy {
         this._resizerPosition = null;
 
         if (this._startX != null) {
-            const diffX = this._rtl ? this._clientStartX - event.clientX : event.clientX - this._clientStartX;
+            const clientStartX = this._clientStartX ?? 0;
+            const diffX = this._rtl ? clientStartX - event.clientX : event.clientX - clientStartX;
 
             this._processResize(diffX);
         }
@@ -316,9 +317,10 @@ export class TableColumnResizeService implements OnDestroy {
         this._resizerMoveSubscription = fromEvent<MouseEvent>(document, 'mousemove')
             .pipe(debounceTime(10))
             .subscribe((event) => {
-                const diffX = this._rtl ? this._clientStartX - event.clientX : event.clientX - this._clientStartX;
+                const clientStartX = this._clientStartX ?? 0;
+                const diffX = this._rtl ? clientStartX - event.clientX : event.clientX - clientStartX;
 
-                this._resizerPosition = this._startX + diffX;
+                this._resizerPosition = (this._startX ?? 0) + diffX;
 
                 this._markForCheck.next();
             });
@@ -326,7 +328,7 @@ export class TableColumnResizeService implements OnDestroy {
 
     /** Update columns width after resizing, prevent from having too small columns. */
     private _processResize(diffX: number): void {
-        const columnWidth = this._columnsWidthMap.get(this._resizedColumn);
+        const columnWidth = this._columnsWidthMap.get(this._resizedColumn) ?? 0;
 
         let newDiffX = diffX;
 

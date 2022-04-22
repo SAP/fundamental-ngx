@@ -1,3 +1,5 @@
+import { Nullable } from '@fundamental-ngx/core/shared';
+
 /**
  * Utility type, that allows to track and select ranges of elements while using multi-selection.
  *
@@ -68,7 +70,7 @@ export class RangeSelector {
      *
      * See usage example on this class itself.
      */
-    onRangeElementToggled(index?: number, event?: KeyboardEvent | MouseEvent | TouchEvent): RangeSelectionState {
+    onRangeElementToggled(index?: number, event?: KeyboardEvent | MouseEvent | TouchEvent): RangeSelectionState | null {
         if (
             this._isNonNegativeInteger(this._previousSelectedIndex) &&
             this._isNonNegativeInteger(index) &&
@@ -99,8 +101,8 @@ export class RangeSelector {
     applyValueToEachInRange(selectionMethod: (index: number) => void): void {
         const state = this.lastRangeSelectionState;
 
-        if (this._isNonNegativeInteger(state?.from) && this._isNonNegativeInteger(state.to)) {
-            for (let index = state.from; index <= state.to; index++) {
+        if (this._isNonNegativeInteger(state?.from) && this._isNonNegativeInteger(state?.to)) {
+            for (let index = state!.from; index <= state!.to; index++) {
                 selectionMethod(index);
             }
         }
@@ -113,8 +115,8 @@ export class RangeSelector {
     }
 
     /** @hidden */
-    private _isNonNegativeInteger(num: number): boolean {
-        return Number.isInteger(num) && num >= 0;
+    private _isNonNegativeInteger(num: Nullable<number>): num is number {
+        return Number.isInteger(num) && num! >= 0;
     }
 }
 

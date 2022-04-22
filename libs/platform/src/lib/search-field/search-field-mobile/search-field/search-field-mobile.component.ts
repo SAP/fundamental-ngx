@@ -34,7 +34,7 @@ export class SearchFieldMobileComponent
     extends MobileModeBase<SearchFieldMobileInterface>
     implements OnInit, OnDestroy
 {
-    childContent: SearchFieldChildContent = null;
+    childContent: SearchFieldChildContent | null = null;
 
     /** @hidden */
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;

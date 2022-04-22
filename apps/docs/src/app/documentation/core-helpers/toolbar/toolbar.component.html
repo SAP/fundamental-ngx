@@ -19,7 +19,7 @@
     <fd-product-menu placement="bottom-start" [control]="library" [closePopoverOnSelect]="true" [items]="items">
     </fd-product-menu>
 
-    <fd-shellbar-actions [closePopoverOnSelect]>
+    <fd-shellbar-actions [closePopoverOnSelect]="true">
         <ng-container *ngIf="size === 's'">
             <button
                 fd-button

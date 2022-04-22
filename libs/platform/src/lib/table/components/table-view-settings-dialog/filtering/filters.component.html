@@ -3,7 +3,10 @@
         <ng-template fdTemplate="header">
             <div fd-bar-left>
                 <fd-bar-element>
-                    <ng-container *ngTemplateOutlet="activeFilterStepView?.titleTemplateRef"></ng-container>
+                    <ng-container 
+                        *ngIf="activeFilterStepView?.titleTemplateRef" 
+                        [ngTemplateOutlet]="activeFilterStepView.titleTemplateRef"
+                    ></ng-container>
                 </fd-bar-element>
             </div>
             <div fd-bar-right>
@@ -17,7 +20,10 @@
     </fd-dialog-header>
 
     <fd-dialog-body>
-        <ng-container *ngTemplateOutlet="activeFilterStepView?.bodyTemplateRef"></ng-container>
+        <ng-container 
+            *ngIf="activeFilterStepView?.bodyTemplateRef" 
+            [ngTemplateOutlet]="activeFilterStepView.bodyTemplateRef"
+        ></ng-container>
     </fd-dialog-body>
 
     <fd-dialog-footer>
@@ -51,12 +57,12 @@
     </ng-container>
     <ng-container *ngSwitchCase="ACTIVE_STEP.FILTER">
         <fdp-filter-step
-            [columnKey]="activeFilterColumnKey"
-            [filter]="activeFilter"
+            [columnKey]="activeFilterColumnKey!"
+            [filter]="activeFilter!"
             [contentDensity]="dialogRef.data.tableContentDensity"
             [filterBy]="filterBy"
             (back)="goToFilters()"
-            (valueChange)="applyFilter($event, activeFilter)"
+            (valueChange)="applyFilter($event, activeFilter!)"
         ></fdp-filter-step>
     </ng-container>
 </ng-container>

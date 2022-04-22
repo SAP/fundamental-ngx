@@ -5,7 +5,6 @@ import {
     CollectionDateFilter,
     CollectionFilter,
     CollectionNumberFilter,
-    CollectionSelectFilter,
     CollectionStringFilter
 } from './interfaces';
 import { TableRow } from './models/table-row.model';
@@ -101,15 +100,6 @@ export const filterByDate = <D = any>(
 export const filterByBoolean = (rows: TableRow[], filter: CollectionBooleanFilter): TableRow[] =>
     rows.filter((r) => get(r.value, filter.field) === filter.value);
 
-export const filterBySelect = (rows: TableRow[], filter: CollectionSelectFilter): TableRow[] => {
-    // needs concat because of "error TS2345: Argument of type 'any' is not assignable to parameter of type 'never'".
-    const filterValues = [].concat(filter.value);
-    if (!filterValues.length) {
-        return rows;
-    }
-
-    return rows.filter((r) => filterValues.includes(get(r.value, filter.field)));
-};
 
 export const getUniqueListValuesByKey = <T, K extends keyof T>(list: T[], key: K): T[] =>
     Array.from(

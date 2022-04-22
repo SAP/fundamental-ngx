@@ -1,7 +1,7 @@
 import { BehaviorSubject } from 'rxjs';
 
 export class TableService {
-    propagateKeys$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>(null);
+    propagateKeys$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
 
     changeKeys(keys: string[]): void {
         if (keys && keys.length > 0) {

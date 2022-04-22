@@ -26,7 +26,7 @@
         ></fdp-approval-flow-toolbar-actions>
     </fd-grid-list-title-bar>
 
-    <div class="fdp-approval-flow__watchers" *ngIf="_approvalProcess?.watchers.length || _isEditMode">
+    <div class="fdp-approval-flow__watchers" *ngIf="_approvalProcess?.watchers?.length || _isEditMode">
         <p class="fdp-approval-flow__watchers-title" i18n="@@platformApprovalFlowWatchers">{{ watchersLabel }}</p>
 
         <ng-container *ngIf="!_isEditMode">
@@ -34,7 +34,7 @@
                 *ngFor="let watcher of _approvalProcess?.watchers; trackBy: _trackByFn"
                 tabindex="0"
                 size="xs"
-                [image]="watcher.imgUrl"
+                [image]="watcher.imgUrl || ''"
                 [label]="watcher.name"
                 [circle]="true"
                 (keyup.enter)="$event.stopPropagation(); _onWatcherClick(watcher)"
@@ -133,7 +133,7 @@
                                 [checkDueDate]="checkDueDate"
                                 [dueDateThreshold]="dueDateThreshold"
                                 [renderArrow]="columnIndex > 0"
-                                [allNodesInColumnApproved]="column.allNodesApproved"
+                                [allNodesInColumnApproved]="!!column.allNodesApproved"
                                 (onAdd)="_addNode(node, $event)"
                                 (onEdit)="_editNode(node)"
                                 (onDelete)="_onNodeDelete(node)"
@@ -146,7 +146,7 @@
                                 <fd-grid-list-item
                                     type="active"
                                     [value]="node"
-                                    [selected]="node.selected"
+                                    [selected]="!!node.selected"
                                     [disableToolbarClick]="true"
                                     class="fdp-approval-flow__graph-node-inner"
                                     [class.fdp-approval-flow__graph-node-inner--edit]="_isEditMode"

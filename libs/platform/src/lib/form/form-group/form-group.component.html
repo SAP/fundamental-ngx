@@ -31,7 +31,7 @@
                                 [ngClass]="_inlineColumnLayoutClass"
                                 [style.order]="field.rank"
                             >
-                                <ng-container *ngTemplateOutlet="field?.renderer"></ng-container>
+                                <ng-container *ngTemplateOutlet="field?.renderer || null"></ng-container>
                             </div>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                     [fd-inline-help]="_hintOptions.text"
                     [glyph]="_hintOptions.glyph"
                     [placement]="_hintOptions.placement"
-                    [triggers]="_hintOptions.trigger"
+                    [triggers]="_hintOptions.trigger || []"
                     tabindex="0"
                 ></fd-icon>
             </span>

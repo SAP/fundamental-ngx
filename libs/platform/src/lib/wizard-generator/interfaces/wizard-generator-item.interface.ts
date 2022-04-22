@@ -93,19 +93,16 @@ export interface WizardGeneratorItem {
     completed?: boolean;
 }
 
-/**
- * @hidden
- * item properties, that are being resolved to string.
- *
- * not using keys directly in "WizardGeneratorItemPreparableFields" to keep reference to the original type
- */
-type WizardGeneratorItemPreparableFields = Pick<WizardGeneratorItem, 'name' | 'title' | 'optionalText'>;
-/** @hidden */
-type PreparedWizardGeneratorItemFields = { [P in keyof WizardGeneratorItemPreparableFields]: string };
+type PreparedWizardGeneratorItemFields = {
+    name: string;
+    title: string;
+    optionalText: string;
+    status: WizardStepStatus;
+}
 
 /**
  * @hidden
  * Internal representation of WizardGeneratorItem with all fields resolved to a plain value
  */
-export type PreparedWizardGeneratorItem = Omit<WizardGeneratorItem, keyof WizardGeneratorItemPreparableFields> &
+export type PreparedWizardGeneratorItem = Omit<WizardGeneratorItem, keyof PreparedWizardGeneratorItemFields> &
     PreparedWizardGeneratorItemFields;

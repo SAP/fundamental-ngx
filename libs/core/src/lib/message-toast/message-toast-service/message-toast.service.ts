@@ -13,7 +13,7 @@ import { DynamicComponentService } from '@fundamental-ngx/core/utils';
 @Injectable()
 export class MessageToastService {
     private _messageToasts: ComponentRef<MessageToastComponent>[] = [];
-    private _messageToastContainerRef: ComponentRef<MessageToastContainerComponent>;
+    private _messageToastContainerRef: ComponentRef<MessageToastContainerComponent> | undefined;
 
     /** @hidden */
     constructor(
@@ -89,8 +89,7 @@ export class MessageToastService {
 
     /** @hidden */
     private _destroyMessageToastComponent(messageToast: ComponentRef<MessageToastComponent>): void {
-        this._messageToasts[this._messageToasts.indexOf(messageToast)] = null;
-        this._messageToasts = this._messageToasts.filter((item) => item !== null && item !== undefined);
+        this._messageToasts = this._messageToasts.filter((item) => item && item !== messageToast);
         this._dynamicComponentService.destroyComponent(messageToast);
 
         if (this._messageToastContainerRef && (!this._messageToasts || this._messageToasts.length === 0)) {
@@ -100,7 +99,9 @@ export class MessageToastService {
 
     /** @hidden */
     private _destroyMessageToastContainer(): void {
-        this._dynamicComponentService.destroyComponent(this._messageToastContainerRef);
-        this._messageToastContainerRef = undefined;
+        if (this._messageToastContainerRef) {
+            this._dynamicComponentService.destroyComponent(this._messageToastContainerRef);
+            this._messageToastContainerRef = undefined;
+        }
     }
 }

@@ -6,11 +6,9 @@ import {
     EventEmitter,
     forwardRef,
     Input,
-    Optional,
     Output,
     ViewChild
 } from '@angular/core';
-import { Router } from '@angular/router';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
 import { KeyUtil } from '@fundamental-ngx/core/utils';
@@ -40,9 +38,8 @@ export class ActionListItemComponent extends BaseListItem {
         _changeDetectorRef: ChangeDetectorRef,
         public itemEl: ElementRef,
         protected _listConfig: ListConfig,
-        @Optional() protected _router: Router
     ) {
-        super(_changeDetectorRef, itemEl, _listConfig, _router);
+        super(_changeDetectorRef, itemEl, _listConfig);
     }
 
     /**

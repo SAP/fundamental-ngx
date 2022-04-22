@@ -8,7 +8,7 @@
         [focusTrapped]="true"
         [triggers]="triggers"
         [disabled]="disabled || readonly"
-        [maxWidth]="!autoResize && minWidth"
+        [maxWidth]="autoResize ? null : minWidth"
         [closeOnOutsideClick]="closeOnOutsideClick"
         additionalBodyClass="fdp-combobox__popover"
     >

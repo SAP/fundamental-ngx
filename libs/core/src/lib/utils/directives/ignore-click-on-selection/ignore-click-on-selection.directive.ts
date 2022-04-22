@@ -24,10 +24,10 @@ export class IgnoreClickOnSelectionDirective {
     @HostListener('click', ['$event'])
     clicked($event: MouseEvent): void {
         const selection = this.document.getSelection();
-        if (selection.toString()) {
-            if (
-                this._elementRef.nativeElement.isSameNode(selection.anchorNode) ||
-                this._elementRef.nativeElement.isSameNode(selection.anchorNode.parentElement)
+        if (selection?.toString()) {
+            if (selection.anchorNode &&
+                (this._elementRef.nativeElement.isSameNode(selection.anchorNode) ||
+                this._elementRef.nativeElement.isSameNode(selection.anchorNode.parentElement))
             ) {
                 $event.stopPropagation();
                 $event.preventDefault();

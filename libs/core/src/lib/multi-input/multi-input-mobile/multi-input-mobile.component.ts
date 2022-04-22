@@ -46,7 +46,7 @@ export class MultiInputMobileComponent
     childContent: {
         listTemplate: TemplateRef<any>;
         controlTemplate: TemplateRef<any>;
-    } = null;
+    } | null = null;
 
     /** @hidden */
     private _selectedBackup: any[];

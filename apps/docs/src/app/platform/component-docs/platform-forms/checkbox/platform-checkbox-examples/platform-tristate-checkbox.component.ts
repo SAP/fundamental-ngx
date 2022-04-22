@@ -8,13 +8,13 @@ import { map } from 'rxjs/operators';
 })
 export class PlatformChekboxTristateComponent implements AfterViewInit {
     public havana = false;
-    public beirut: boolean = null;
+    public beirut: boolean | null = null;
     public budapest = 'Yes';
     public lisbon = false;
-    public istanbul: boolean = null;
+    public istanbul: boolean | null = null;
     public busan = true;
-    public dubrovnik: boolean = null;
-    public jaipur: boolean = null;
+    public dubrovnik: boolean | null = null;
+    public jaipur: boolean | null = null;
 
     public cities = new FormGroup({});
     public citiesData = new SomeObject(false, 'Yes', null, false, true, null, null, false);
@@ -34,13 +34,12 @@ export class PlatformChekboxTristateComponent implements AfterViewInit {
     }
 
     private setAgreementsOnAcceptAllChange(): void {
-        this.registrationForm.get('acceptAll').valueChanges.subscribe((value) => this.acceptAll(value));
+        this.registrationForm.get('acceptAll')?.valueChanges.subscribe((value) => this.acceptAll(value));
     }
 
     private setControlOnAgreementsChange(): void {
         this.registrationForm
-            .get('agreements')
-            .valueChanges.pipe(
+            .get('agreements')?.valueChanges.pipe(
                 map((agreements) => this.getValuesFromObject(agreements)),
                 map((agreementsValues: boolean[]) => {
                     const agreeAll = agreementsValues.reduce((overall, value) => value && overall, true);
@@ -59,7 +58,7 @@ export class PlatformChekboxTristateComponent implements AfterViewInit {
 
     private acceptAll(accept: boolean): void {
         if (accept !== null) {
-            this.registrationForm.get('agreements').patchValue(
+            this.registrationForm.get('agreements')?.patchValue(
                 {
                     marketing: accept,
                     newsletter: accept,
@@ -70,7 +69,7 @@ export class PlatformChekboxTristateComponent implements AfterViewInit {
         }
     }
 
-    private setAcceptAll(value: boolean): void {
+    private setAcceptAll(value: boolean | null): void {
         if (this.registrationForm.get('acceptAll')?.value !== value) {
             this.registrationForm.patchValue(
                 {
@@ -91,11 +90,11 @@ class SomeObject {
     constructor(
         public paris: string | boolean,
         public doha: string | boolean,
-        public amsterdam: string | boolean,
+        public amsterdam: string | boolean | null,
         public venice: string | boolean,
         public kyoto: string | boolean,
-        public barcelona: string | boolean,
-        public athens: string | boolean,
+        public barcelona: string | boolean | null,
+        public athens: string | boolean | null,
         public sydney: string | boolean
     ) {}
 }

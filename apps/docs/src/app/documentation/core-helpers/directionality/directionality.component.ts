@@ -46,7 +46,8 @@ export class DirectionalityComponent implements OnInit {
             );
         }
         if (this.label) {
-            document.getElementById(this.label).dir = dirValue;
+            const labelElement = document.getElementById(this.label);
+            labelElement && (labelElement.dir = dirValue);
         }
     }
 }

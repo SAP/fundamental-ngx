@@ -23,8 +23,8 @@ import {
     RatingIndicatorSize,
     RatingIndicatorSizeEnum
 } from '../constants';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 let ratingUID = 0;
 
@@ -65,7 +65,7 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
      */
     @Input()
     @HostBinding('attr.aria-label')
-    ariaLabel: string;
+    ariaLabel: Nullable<string>;
 
     /**
      * Sets the aria-disabled attribute to the element.

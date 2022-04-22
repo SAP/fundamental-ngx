@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { cloneDeep, concat, mergeWith, uniq } from 'lodash-es';
 
@@ -97,9 +97,9 @@ export class WizardGeneratorService {
 
     /**
      * @description Returns current step ID in Wizard.
-     * @returns {string | null} Current step ID.
+     * @returns {string | undefined} Current step ID.
      */
-    getCurrentStepId(): string | null {
+    getCurrentStepId(): string | undefined {
         const currentStepId = this.visibleWizardSteps?.find((i) => i.status === 'current');
 
         return currentStepId?.id;
@@ -119,7 +119,7 @@ export class WizardGeneratorService {
      * @param stepId Step ID
      * @returns Index in the array of steps for defined step ID.
      */
-    getStepIndex(stepId: string): number {
+    getStepIndex(stepId?: string): number {
         const stepIndex = this.visibleWizardSteps?.findIndex((i) => i.id === stepId);
         return stepIndex > -1 ? stepIndex : 0;
     }
@@ -131,10 +131,18 @@ export class WizardGeneratorService {
      * @returns {Observable<WizardStepSubmittedForms>} Observable, which will emit
      * when all visible forms in step are submitted.
      */
-    submitStepForms(stepId: string, skipIfUntouched = false): Observable<WizardStepSubmittedForms | null> {
-        return this.stepsComponents
-            .get(stepId)
-            .submitForms(skipIfUntouched)
+    submitStepForms(stepId?: string, skipIfUntouched = false): Observable<WizardStepSubmittedForms | null> {
+        if (!stepId) {
+            return of(null);
+        }
+
+        const step = this.stepsComponents.get(stepId);
+
+        if (!step) {
+            return of(null);
+        }
+
+        return step.submitForms(skipIfUntouched)
             .pipe(
                 take(1),
                 map((result) => {
@@ -152,6 +160,11 @@ export class WizardGeneratorService {
      */
     validateStepForms(skipIfUntouched = false): Observable<boolean> {
         const currentStepId = this.getCurrentStepId();
+
+        if (!currentStepId) {
+            return of(true);
+        }
+
         return this.submitStepForms(currentStepId, skipIfUntouched).pipe(
             map((result) => result === null || Object.values(result).every((r) => r.success))
         );
@@ -228,7 +241,7 @@ export class WizardGeneratorService {
                 continue;
             }
 
-            const obj = item.when(this._getCompletedStepIds(), formValue, this._formGeneratorService.forms);
+            const obj = item.when!(this._getCompletedStepIds(), formValue, this._formGeneratorService.forms);
 
             visibleStepIds[item.id] = await this._getFunctionValue(obj);
         }
@@ -243,7 +256,7 @@ export class WizardGeneratorService {
     async refreshFormVisibility(formGroup: WizardGeneratorFormGroup): Promise<boolean> {
         const formValue = await this.getWizardFormValue();
 
-        const obj = formGroup.when(this._getCompletedStepIds(), formValue, this._formGeneratorService.forms);
+        const obj = formGroup.when?.(this._getCompletedStepIds(), formValue, this._formGeneratorService.forms) ?? true;
 
         return await this._getFunctionValue(obj);
     }
@@ -332,7 +345,7 @@ export class WizardGeneratorService {
 
             const forms = component.getForms();
 
-            for (const form of item.formGroups) {
+            for (const form of item?.formGroups ?? []) {
                 wizardFormValue[item.id][form.id] = formatted
                     ? await this._formGeneratorService.getFormValue(forms[form.id]?.form)
                     : this._formGeneratorService._getFormValueWithoutUngrouped(cloneDeep(forms[form.id]?.form.value));
@@ -499,13 +512,15 @@ export class WizardGeneratorService {
      * @returns
      */
     private _setBranchingSteps(items: PreparedWizardGeneratorItem[]): PreparedWizardGeneratorItem[] {
-        const branchingItems: string[] = items
+        const branchingItems = items
             .filter((i) => i.dependencyFields)
             .reduce((stepIds, item) => {
-                stepIds = [...stepIds, ...Object.keys(item.dependencyFields)];
+                if (item.dependencyFields) {
+                    stepIds = [...stepIds, ...Object.keys(item.dependencyFields)];
+                }
 
                 return stepIds;
-            }, []);
+            }, [] as string[]);
 
         if (branchingItems.length > 0) {
             items = items.map((item) => {
@@ -545,6 +560,7 @@ export class WizardGeneratorService {
             if (Array.isArray(objValue) && !objValue.includes(srcValue)) {
                 return uniq(objValue.concat(srcValue));
             }
+            return [];
         };
 
         const buildDependencySteps = (
@@ -562,29 +578,29 @@ export class WizardGeneratorService {
         };
 
         items
-            .filter((s) => s.formGroups?.length > 0)
+            .filter((s) => s.formGroups?.length)
             .forEach((step) => {
                 if (step.dependencyFields) {
                     buildDependencySteps(step.dependencyFields, WizardGeneratorRefreshStrategy.REFRESH_STEP_VISIBILITY);
                 }
 
-                const dependentForms = step.formGroups.filter((form) => form.dependencyFields);
+                const dependentForms = step.formGroups?.filter((form) => form.dependencyFields);
 
-                dependentForms.forEach((form) => {
+                dependentForms?.forEach((form) => {
                     buildDependencySteps(
-                        form.dependencyFields,
+                        form.dependencyFields!,
                         WizardGeneratorRefreshStrategy.REFRESH_FORM_VISIBILITY,
                         step.id
                     );
                 });
 
                 const stepFields: WizardGeneratorFormItem[] = concat(
-                    ...[...step.formGroups].map((item) => item.formItems.filter((f) => f.dependencyFields))
+                    ...[...step.formGroups ?? []].map((item) => item.formItems.filter((f) => f.dependencyFields))
                 );
 
                 stepFields.forEach((formItem) => {
                     buildDependencySteps(
-                        formItem.dependencyFields,
+                        formItem.dependencyFields!,
                         WizardGeneratorRefreshStrategy.REVALIDATE_STEP_FORMS,
                         step.id
                     );

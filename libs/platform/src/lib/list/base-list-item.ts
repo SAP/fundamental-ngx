@@ -8,15 +8,14 @@ import {
     HostListener,
     Input,
     OnInit,
-    Optional,
     Output,
     TemplateRef,
     ViewChild
 } from '@angular/core';
-import { Router } from '@angular/router';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
 import { ContentDensity, KeyUtil } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
@@ -81,7 +80,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
 
     /** Description of the title*/
     @Input()
-    description: string;
+    description: Nullable<string>;
 
     /** To invert the status of secondary text*/
     @Input()
@@ -113,7 +112,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
 
     /** Used for placeing navigation Link */
     @Input()
-    link: string;
+    link: Nullable<string>;
 
     /**
      * Enabling this flag causes forcing title directive to not wrap text,
@@ -170,7 +169,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     @ViewChild('listItem', { read: ElementRef })
     listItem: ElementRef;
     /** Access child element, for checking link content*/
-    @ViewChild('link', { read: ElementRef })
+    @ViewChild('linkElement', { read: ElementRef })
     anchor: ElementRef;
     /** Access edit button*/
     @ViewChild('edit', { read: ElementRef })
@@ -211,19 +210,8 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
         protected _changeDetectorRef: ChangeDetectorRef,
         public itemEl: ElementRef,
         protected _listConfig: ListConfig,
-        @Optional() private router: Router
     ) {
         super(_changeDetectorRef);
-    }
-
-    /** setter and getter for _link */
-    @Input('link')
-    get routerLink(): string {
-        return this.link;
-    }
-
-    set routerLink(value: string) {
-        this.link = value;
     }
 
     /** @hidden

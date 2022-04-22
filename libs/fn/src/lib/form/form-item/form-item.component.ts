@@ -88,7 +88,7 @@ export class FormItemComponent implements CssClassBuilder, OnInit, OnChanges {
     }
 
     setStateIcon(): void {
-        this._icon = STATE_ICON[this.state] || '';
+        this._icon = this.state && STATE_ICON[this.state] || '';
     }
 
     /** @hidden */

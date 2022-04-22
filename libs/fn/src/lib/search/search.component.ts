@@ -12,6 +12,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { Subscription } from 'rxjs';
 
 let searchUniqueId = 0;
@@ -71,11 +72,11 @@ export class SearchComponent implements ControlValueAccessor, OnDestroy {
 
     /** aria-label attribute of the inner input element. */
     @Input()
-    ariaLabel: string = null;
+    ariaLabel: Nullable<string>;
 
     /** aria-labelledby attribute of the inner input element. */
     @Input()
-    ariaLabelledby: string = null;
+    ariaLabelledby: Nullable<string>;
 
     /**
      * Event fired when the state of the search changes.

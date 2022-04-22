@@ -44,17 +44,17 @@ export class MessageBoxDefaultComponent implements OnInit, AfterViewInit {
 
     /** @hidden */
     _onCloseButton(): void {
-        this._messageBoxContent.closeButtonCallback();
+        this._messageBoxContent.closeButtonCallback?.();
     }
 
     /** @hidden */
     _onApproveButton(): void {
-        this._messageBoxContent.approveButtonCallback();
+        this._messageBoxContent.approveButtonCallback?.();
     }
 
     /** @hidden */
     _onCancelButton(): void {
-        this._messageBoxContent.cancelButtonCallback();
+        this._messageBoxContent.cancelButtonCallback?.();
     }
 
     /** @hidden */

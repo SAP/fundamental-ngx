@@ -25,7 +25,7 @@ export class FileUploaderService {
         const maxSize = parserFileSize(maxFileSize);
         const minSize = parserFileSize(minFileSize);
 
-        let allowedExtensions = null;
+        let allowedExtensions: string[] | null = null;
         if (acceptedExtensions) {
             allowedExtensions = acceptedExtensions.toLocaleLowerCase().replace(/[\s.]/g, '').split(',');
         }
@@ -43,9 +43,12 @@ export class FileUploaderService {
     }
 
     /** @hidden */
-    private _checkExtension(file: File, allowedExtensions: string[]): boolean {
+    private _checkExtension(file: File, allowedExtensions: string[] | null): boolean {
+        if (!allowedExtensions) {
+            return true;
+        }
         const extension = file.name.split('.')[file.name.split('.').length - 1].toLocaleLowerCase();
-        return !allowedExtensions || allowedExtensions.lastIndexOf(extension) !== -1;
+        return allowedExtensions.lastIndexOf(extension) !== -1;
     }
 
     private _checkSize(fileSize: number, maxSize: number, minSize: number): boolean {

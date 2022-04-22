@@ -94,7 +94,7 @@ export class DynamicComponentService {
         const configObj = Object.assign({}, config);
         const componentEl = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
         if (configObj.container !== 'body') {
-            configObj.container.appendChild(componentEl);
+            configObj.container?.appendChild(componentEl);
         } else {
             document.body.appendChild(componentEl);
         }
@@ -103,7 +103,7 @@ export class DynamicComponentService {
     private _createComponent<V>(
         componentType: Type<V>,
         dependenciesMap: WeakMap<any, any>,
-        injector: Injector
+        injector?: Injector
     ): ComponentRef<V> {
         const dynamicComponentInjector = new DynamicComponentInjector(injector || this._injector, dependenciesMap);
         const componentFactory = this._componentFactoryResolver.resolveComponentFactory(componentType);

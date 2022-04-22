@@ -84,23 +84,21 @@ export class OnlyDigitsDirective {
     /** @hidden */
     @HostListener('paste', ['$event'])
     onPaste(event: any): void {
-        let pastedInput: string;
         if (window['clipboardData']) {
             // Browser is IE
-            pastedInput = window['clipboardData'].getData('text');
+            this._pasteData(window['clipboardData'].getData('text'));
         } else if (event.clipboardData && event.clipboardData.getData) {
             // Other browsers
-            pastedInput = event.clipboardData.getData('text/plain');
+            this._pasteData(event.clipboardData.getData('text/plain'));
         }
 
-        this._pasteData(pastedInput);
         event.preventDefault();
     }
 
     /** @hidden */
     @HostListener('drop', ['$event'])
     onDrop(event: DragEvent): void {
-        const textData = event.dataTransfer.getData('text');
+        const textData = event.dataTransfer?.getData('text') ?? '';
         this._inputElement.focus();
         this._pasteData(textData);
 
@@ -114,7 +112,7 @@ export class OnlyDigitsDirective {
         if (!pasted) {
             if (this._inputElement.setRangeText) {
                 const { selectionStart: start, selectionEnd: end } = this._inputElement;
-                this._inputElement.setRangeText(sanitizedContent, start, end, 'end');
+                this._inputElement.setRangeText(sanitizedContent, start ?? 0, end ?? 0, 'end');
                 // Angular's Reactive Form relies on "input" event, but on Firefox, the setRangeText method doesn't trigger it
                 // so we have to trigger it ourself.
                 if (typeof window['InstallTrigger'] !== 'undefined') {
@@ -135,8 +133,8 @@ export class OnlyDigitsDirective {
     // https://stackoverflow.com/questions/11076975/how-to-insert-text-into-the-textarea-at-the-current-cursor-position
     /** @hidden */
     private _insertAtCursor(myField: HTMLInputElement, myValue: string): void {
-        const startPos = myField.selectionStart;
-        const endPos = myField.selectionEnd;
+        const startPos = myField.selectionStart ?? 0;
+        const endPos = myField.selectionEnd ?? 0;
 
         myField.value =
             myField.value.substring(0, startPos) + myValue + myField.value.substring(endPos, myField.value.length);
@@ -202,16 +200,16 @@ export class OnlyDigitsDirective {
     private get _getSelection(): string {
         const { selectionStart, selectionEnd } = this._inputElement;
 
-        return this._inputElement.value.substring(selectionStart, selectionEnd);
+        return this._inputElement.value.substring(selectionStart ?? 0, selectionEnd ?? 0);
     }
 
     /** @hidden */
     private _forecastValue(key: string): string {
         const { selectionStart, selectionEnd, value: oldValue } = this._inputElement;
-        const selection = oldValue.substring(selectionStart, selectionEnd);
+        const selection = oldValue.substring(selectionStart ?? 0, selectionEnd ?? 0);
 
         return selection
             ? oldValue.replace(selection, key)
-            : oldValue.substring(0, selectionStart) + key + oldValue.substring(selectionStart);
+            : oldValue.substring(0, selectionStart ?? 0) + key + oldValue.substring(selectionStart ?? 0);
     }
 }

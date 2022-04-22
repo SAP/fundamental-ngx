@@ -111,7 +111,7 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
         if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
             target.click();
         } else if (!this._isListMode()) {
-            const i = Array.from(target.parentElement.children).indexOf(target);
+            const i = Array.from(target.parentElement?.children ?? []).indexOf(target);
             this._handleNoListKeydown(event, target, i);
         } else if (this._isListMode() && KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW])) {
             this._handleListArrowUpDown(event, target);
@@ -160,7 +160,12 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
     /** @hidden */
     private _handleNoListMoreThanSeven(event: KeyboardEvent, target: HTMLElement, i: number): void {
         const nextIndexByColumn = 4;
-        const { children } = target.parentElement;
+        const children = target.parentElement?.children;
+
+        if (!children) {
+            return;
+        }
+
         if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
             (<HTMLElement>children[i + nextIndexByColumn])?.focus();
         }
@@ -173,7 +178,12 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
     /** @hidden */
     private _handleNoListLessThanSeven(event: KeyboardEvent, target: HTMLElement, i: number): void {
         const nextIndexByColumn = 3;
-        const { children } = target.parentElement;
+        const children = target.parentElement?.children;
+
+        if (!children) {
+            return;
+        }
+
 
         if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
             (<HTMLElement>children[i + nextIndexByColumn])?.focus();

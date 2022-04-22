@@ -83,7 +83,7 @@ export class FormGeneratorService implements OnDestroy {
 
         formItems.forEach((formItem) => {
             if (!this.isFormFieldItem(formItem)) {
-                if (formItem.items.length === 0) {
+                if (!formItem.items?.length) {
                     return;
                 }
 
@@ -94,6 +94,10 @@ export class FormGeneratorService implements OnDestroy {
                         groupFormItem as PreparedDynamicFormFieldItem,
                         form
                     );
+
+                    if (!groupFormControl) {
+                        return;
+                    }
 
                     group.addControl(groupFormItem.name, groupFormControl);
 
@@ -203,7 +207,7 @@ export class FormGeneratorService implements OnDestroy {
      * @param type form item type
      * @returns @see FormComponentDefinition Component definition for the form item
      */
-    getComponentDefinitionByType(type: string): FormComponentDefinition | null {
+    getComponentDefinitionByType(type: string): FormComponentDefinition | undefined {
         return this._componentsAccessor.getComponentDefinitionByType(type);
     }
 
@@ -240,7 +244,7 @@ export class FormGeneratorService implements OnDestroy {
      * @param item form item.
      * @returns is current form item is a field.
      */
-    isFormFieldItem(item: DynamicFormItem): item is DynamicFormFieldItem {
+    isFormFieldItem(item: DynamicFormItem | undefined): item is DynamicFormFieldItem {
         return !!(item as DynamicFormFieldItem).type;
     }
 

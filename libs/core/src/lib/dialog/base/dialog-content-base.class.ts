@@ -1,3 +1,5 @@
+import { Nullable } from "@fundamental-ngx/core/shared";
+
 export class DialogContentBase {
     /** Dialog Title id */
     titleId?: string;
@@ -12,13 +14,13 @@ export class DialogContentBase {
     ariaModal?: boolean;
 
     /** Aria label for the dialog component element. */
-    ariaLabel?: string = null;
+    ariaLabel?: Nullable<string>;
 
     /** Aria labelby for the dialog component element. */
-    ariaLabelledBy?: string = null;
+    ariaLabelledBy?: Nullable<string>;
 
     /** Aria DescribedBy for the dialog component element.. */
-    ariaDescribedBy?: string = null;
+    ariaDescribedBy?: Nullable<string>;
 
     /** Approve Button Label */
     approveButton?: string;

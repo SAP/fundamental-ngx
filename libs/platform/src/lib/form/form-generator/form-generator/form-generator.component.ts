@@ -17,6 +17,7 @@ import { NgForm } from '@angular/forms';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
 import { ColumnLayout, FieldHintOptions, HintOptions, LabelLayout } from '@fundamental-ngx/platform/shared';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 import { FormGeneratorService } from '../form-generator.service';
 import {
@@ -52,7 +53,7 @@ export interface SubmitFormEventResult {
     /**
      * @description Formatted form value.
      */
-    value: DynamicFormValue;
+    value: DynamicFormValue | null;
 }
 
 /**
@@ -110,7 +111,7 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
      * and M sizes and single-column layout for S size.
      */
     @Input()
-    columnLayout: string;
+    columnLayout: Nullable<string>;
 
     /**
      * @deprecated
@@ -374,7 +375,7 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
 
     /** @hidden */
     private _getOrderedControls(controls: DynamicFormGroupControls): (DynamicFormControl | DynamicFormControlGroup)[] {
-        return Object.values(controls).sort((a, b) => (a.formItem.rank > b.formItem.rank ? 1 : -1));
+        return Object.values(controls).sort((a, b) => ((a.formItem?.rank ?? -Infinity) - (b.formItem?.rank ?? -Infinity)));
     }
 
     /**
@@ -383,8 +384,8 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
      * will combine default value of hints for form generator with provided options.
      * @param guiOptions
      */
-    getHintOptions(guiOptions?: BaseDynamicFormItemGuiOptions | DynamicFormItemGuiOptions): FieldHintOptions {
-        if (!guiOptions) {
+    getHintOptions(guiOptions?: BaseDynamicFormItemGuiOptions | DynamicFormItemGuiOptions): FieldHintOptions | undefined {
+        if (!guiOptions?.hint) {
             return;
         }
         const formItemHintOptions: string | HintOptions | FieldHintOptions = guiOptions.hint;

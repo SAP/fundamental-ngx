@@ -65,14 +65,14 @@ export class PlatformVhdBasicExampleComponent {
 
     actualValue: Partial<VhdValue<ExampleTestModel>> = {};
 
-    actualItems = [];
-    formatTokenFn = ((value: VhdValueChangeEvent<ExampleTestModel>) => {
+    actualItems: string[] = [];
+    formatTokenFn = ((value: VhdValueChangeEvent<ExampleTestModel>): void => {
         this.actualItems = [
             ...(value.selected || []).map((item) => item.name),
             ...(value.conditions || []).map((item) => this.conditionDisplayFn(item))
-        ];
-    }).bind(this);
-    conditionDisplayFn = (item: VhdIncludedEntity | VhdExcludedEntity): string => {
+        ].filter((v): v is string => !!v);
+    });
+    conditionDisplayFn = (item: VhdIncludedEntity | VhdExcludedEntity): string | null => {
         let value = (() => {
             switch (item.strategy) {
                 case VhdDefineIncludeStrategy.empty:
