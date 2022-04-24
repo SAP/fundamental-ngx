@@ -13,7 +13,7 @@ import hljs from 'highlight.js/lib';
 
 @Component({
     selector: 'fd-code-snippet',
-    styles: ['.bordered { border: 1px solid beige }'],
+    styles: ['.bordered { border: 1px solid beige } code.hljs { width: 100%; background: transparent; }'],
     template: `
         <pre [class.bordered]="standAlone">
             <code #fileBasedElement class="hljs" [class]="file.language" *ngIf="file">{{ file.code }}</code>
