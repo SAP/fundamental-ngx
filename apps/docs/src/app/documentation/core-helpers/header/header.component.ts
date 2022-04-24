@@ -10,6 +10,7 @@ import { Component } from '@angular/core';
     styles: [
         `
             .header {
+                color: var(--sapPageHeader_TextColor);
                 margin-top: 2rem;
                 font-size: 2.2rem;
             }

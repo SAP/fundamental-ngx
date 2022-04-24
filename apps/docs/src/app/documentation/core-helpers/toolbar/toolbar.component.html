@@ -156,6 +156,7 @@
 </fd-shellbar>
 <link rel="stylesheet" *ngIf="cssUrl" [href]="cssUrl" />
 <link rel="stylesheet" *ngIf="customCssUrl" [href]="customCssUrl" />
+<link rel="stylesheet" *ngIf="highlightJsThemeCss" [href]="highlightJsThemeCss" />
 
 <ng-template #themesTemplate>
     <li fd-menu-item *ngFor="let theme of themes">

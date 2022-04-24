@@ -13,7 +13,7 @@
     flex-grow: 1;
     overflow-y: scroll;
     padding-bottom: 2rem;
-    background-color: #ffffff;
+    background-color: var(--sapBaseColor);
     padding-top: 52px;
 
     &:focus {
