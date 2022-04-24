@@ -5,7 +5,7 @@
 
 .sidebar {
     color: #21262c;
-    background-color: #f1f3f6;
+    background-color: var(--sapBackgroundColor);
     transition: 0.3s margin ease-in-out, 0.3s box-shadow ease-in-out;
     z-index: 3;
     width: 255px;
