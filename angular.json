@@ -3630,6 +3630,11 @@
                                 "glob": "**/*",
                                 "input": "./node_modules/fundamental-styles/dist/theming/",
                                 "output": "./assets/fundamental-styles-theming/"
+                            },
+                            {
+                                "glob": "**/*",
+                                "input": "./node_modules/highlight.js/styles/",
+                                "output": "./assets/highlight-js-styles/"
                             }
                         ],
                         "styles": [
