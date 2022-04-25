@@ -146,37 +146,16 @@
             class="fdp-value-help-dialog__row fdp-value-help-dialog__advanced-search"
             aria-label="Selectid filters"
             [id]="'advanced-search-' + id"
-            (ngSubmit)="search()"
         >
             <fd-layout-grid *ngIf="!mobile || (mobile && !isOpenAdvanced)">
                 <div [fdLayoutGridCol]="12" [colMd]="12" [colLg]="mobile ? 12 : 6" [colXl]="mobile ? 12 : 6">
-                    <div fd-form-item>
-                        <fd-input-group>
-                            <input
-                                #inputGroupField
-                                fd-input-group-input
-                                fd-form-control
-                                [compact]="contentDensity | isCompactDensity"
-                                type="search"
-                                [(ngModel)]="_mainSearch"
-                                name="value-help-dialog-search"
-                                id="value-help-dialog-search"
-                                [placeholder]="searchField.placeholder"
-                                [attr.aria-label]="searchField.placeholder"
-                            />
-
-                            <span fd-input-group-addon [compact]="contentDensity | isCompactDensity" [button]="true">
-                                <button
-                                    fd-button
-                                    [compact]="contentDensity | isCompactDensity"
-                                    title="Search"
-                                    glyph="search"
-                                    fdType="transparent"
-                                    (click)="_searchAction(inputGroupField)"
-                                ></button>
-                            </span>
-                        </fd-input-group>
-                    </div>
+                    <fdp-search-field
+                        [contentDensity]="contentDensity"
+                        [placeholder]="searchField.placeholder"
+                        [ariaLabel]="searchField.placeholder"
+                        (searchSubmit)="search()"
+                        (inputChange)="_mainSearch = $event.text"
+                    ></fdp-search-field>
                 </div>
 
                 <div
@@ -222,6 +201,7 @@
                             [compact]="contentDensity | isCompactDensity"
                             aria-label="Go"
                             i18n-aria-label="@@platformI18nValueHelpDialog.Search.Button"
+                            (click)="filter()"
                         ></button>
                     </fd-toolbar>
                 </div>
