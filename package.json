@@ -137,7 +137,7 @@
         "moment": "2.29.2",
         "ngx-markdown": "12.0.1",
         "rxjs": "7.5.4",
-        "tslib": "2.3.0",
+        "tslib": "2.4.0",
         "webdriver-manager": "12.1.7",
         "zone.js": "0.11.4"
     },
