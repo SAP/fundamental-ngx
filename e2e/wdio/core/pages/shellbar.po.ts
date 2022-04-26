@@ -30,7 +30,7 @@ export class ShellbarPo extends CoreBaseComponentPo {
     sideNavItems = this.sideNavExample + 'fd-side-nav li';
     sideNavIcons = this.sideNavItems + ' .fd-nested-list__icon';
     sideNavText = this.sideNavItems + ' .fd-nested-list__title';
-    sideNavControlBtn = this.sideNavExample + ' .fd-shellbar-side-nav-control';
+    sideNavControlBtn = this.sideNavExample + ' button[fd-shellbar-side-nav]';
 
     open(): void {
         super.open(this.url);
