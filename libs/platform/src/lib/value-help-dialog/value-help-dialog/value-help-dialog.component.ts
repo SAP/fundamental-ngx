@@ -591,7 +591,6 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
             const dsSub = this.openDataStream()
                 .pipe(takeUntil(this._destroyed))
                 .subscribe((data) => {
-                    console.log(data);
                     this._displayedData = data.slice();
                     this._changeDetectorRef.markForCheck();
                 });
