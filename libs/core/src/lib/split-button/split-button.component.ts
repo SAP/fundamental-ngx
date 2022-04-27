@@ -134,6 +134,11 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     mainButtonWidth: string;
 
     /** @hidden */
+    get typeClass(): string {
+        return this.fdType ? `fd-button-split--${this.fdType}` : '';
+    }
+
+    /** @hidden */
     private _menuItemSubscriptions = new Subscription();
 
     /** @hidden */
