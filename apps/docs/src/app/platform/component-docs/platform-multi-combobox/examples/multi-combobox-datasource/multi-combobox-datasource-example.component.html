@@ -63,9 +63,11 @@
             lookupKey="name"
             (selectionChange)="onSelect6($event)"
             [selectedItems]="selectedItems6"
-            [limitless]="true"
+            [limitless]="isLimitless"
         ></fdp-multi-combobox>
-        <p>Selected: {{ selectedItems4 | json }}</p>
+        <p>Limitless: {{ isLimitless }}</p>
+        <p>Selected: {{ selectedItems6 | json }}</p>
+        <button fd-button (click)="isLimitless = !isLimitless">Toggle Limitless</button>
     </fdp-form-field>
 </fdp-form-group>
 

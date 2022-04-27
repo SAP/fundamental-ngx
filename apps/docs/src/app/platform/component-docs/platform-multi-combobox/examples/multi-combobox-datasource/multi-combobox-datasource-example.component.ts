@@ -11,6 +11,8 @@ import { MultiComboboxSelectionChangeEvent } from '@fundamental-ngx/platform/for
     providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }]
 })
 export class MultiComboboxDatasourceExampleComponent {
+    isLimitless = true;
+
     dataSourceStrings = ['Apple', 'Banana', 'Pineapple', 'Strawberry', 'Broccoli', 'Carrot', 'Jalapeño', 'Spinach'];
 
     dataSource = [
