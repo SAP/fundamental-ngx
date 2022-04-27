@@ -26,7 +26,8 @@ export class CardContentComponent implements OnInit, CssClassBuilder {
         return this._containsList;
     }
 
-    _containsList: boolean;
+    /** @hidden */
+    private _containsList: boolean;
 
     /** @hidden */
     constructor(private _elementRef: ElementRef<HTMLElement>) {}
