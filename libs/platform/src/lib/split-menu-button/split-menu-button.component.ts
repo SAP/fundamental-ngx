@@ -91,6 +91,11 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, A
      * @hidden */
     private _rtlChangeSubscription = Subscription.EMPTY;
 
+    /** @hidden */
+    get typeClass(): string {
+        return this.type ? `fd-button-split--${this.type}` : '';
+    }
+
     constructor(protected _cd: ChangeDetectorRef, @Optional() private _rtlService: RtlService) {
         super(_cd);
     }
