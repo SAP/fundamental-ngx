@@ -9,20 +9,11 @@
     [trackBy]="trackBy"
     emptyTableMessage="No data found"
 >
-    <fdp-column
-        fdp-smart-filter-bar-field-definition
-        [filterable]="true"
-        name="name"
-        key="name"
-        label="Name"
-        required="true"
-        align="start"
-    >
+    <fdp-column fdp-smart-filter-bar-field-definition name="name" key="name" label="Name" required="true" align="start">
     </fdp-column>
 
     <fdp-column
         fdp-smart-filter-bar-field-definition
-        [filterable]="true"
         name="description"
         key="description"
         required="true"
@@ -32,8 +23,7 @@
 
     <fdp-column
         fdp-smart-filter-bar-field-definition
-        [filterable]="true"
-        dataType="number"
+        [dataType]="dataTypeEnum.NUMBER"
         name="price"
         key="price.value"
         label="Price"
@@ -43,8 +33,7 @@
 
     <fdp-column
         fdp-smart-filter-bar-field-definition
-        filterType="multi-select"
-        [filterable]="true"
+        [filterType]="filterTypeEnum.MULTI"
         name="status"
         key="status"
         label="Status"
@@ -56,8 +45,7 @@
 
     <fdp-column
         fdp-smart-filter-bar-field-definition
-        filterType="single-select"
-        [filterable]="true"
+        [filterType]="filterTypeEnum.SINGLE"
         name="statusColor"
         key="statusColor"
         label="Status color"
@@ -68,8 +56,7 @@
 
     <fdp-column
         fdp-smart-filter-bar-field-definition
-        [filterable]="true"
-        dataType="date"
+        [dataType]="dataTypeEnum.DATE"
         name="date"
         key="date"
         label="Date"
@@ -77,9 +64,8 @@
 
     <fdp-column
         fdp-smart-filter-bar-field-definition
-        [filterable]="true"
-        filterType="single-select"
-        dataType="boolean"
+        [filterType]="filterTypeEnum.SINGLE"
+        [dataType]="dataTypeEnum.BOOLEAN"
         name="verified"
         key="verified"
         label="Verified"

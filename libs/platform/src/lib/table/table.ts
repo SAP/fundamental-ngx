@@ -1,6 +1,6 @@
 import { EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ContentDensityEnum } from '@fundamental-ngx/core/utils';
+import { ContentDensity } from '@fundamental-ngx/core/utils';
 
 import { SaveRowsEvent } from './interfaces/save-rows-event.interface';
 import { TableState } from './interfaces/table-state.interface';
@@ -22,7 +22,7 @@ export abstract class Table<T = any> {
     abstract get _tableWidthPx(): number;
 
     /** The content density for which to render table. 'cozy' | 'compact' | 'condensed' */
-    abstract get contentDensity(): ContentDensityEnum;
+    abstract get contentDensity(): ContentDensity;
 
     /** Table columns definition list */
     abstract readonly tableColumnsStream: Observable<TableColumn[]>;

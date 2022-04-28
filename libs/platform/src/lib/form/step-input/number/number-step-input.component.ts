@@ -20,9 +20,6 @@ import { FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
 import { StepInputChangeEvent, StepInputComponent } from '../base.step-input';
 import { StepInputConfig } from '../step-input.config';
 
-/** Change event object emitted by Platform Number Step Input. */
-export class NumberStepInputChangeEvent extends StepInputChangeEvent<NumberStepInputComponent, number> {}
-
 /**
  * Fundamental number-step-input component
  *
@@ -69,8 +66,8 @@ export class NumberStepInputComponent extends StepInputComponent {
     /** @hidden
      * Create change event instance
      */
-    createChangeEvent(value: number): NumberStepInputChangeEvent {
-        return new NumberStepInputChangeEvent(this, value);
+    createChangeEvent(value: number): StepInputChangeEvent {
+        return new StepInputChangeEvent(this, value);
     }
 
     /** @hidden

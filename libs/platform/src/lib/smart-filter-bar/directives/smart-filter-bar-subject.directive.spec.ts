@@ -47,7 +47,7 @@ class TableDataProviderMock extends ArrayTableDataProvider<SourceItem> {
     >
         <fdp-column
             fdp-smart-filter-bar-field-definition
-            filterable="true"
+            smartFilterBarFilterable="true"
             name="name"
             key="name"
             label="Name"
@@ -59,7 +59,7 @@ class TableDataProviderMock extends ArrayTableDataProvider<SourceItem> {
 
         <fdp-column
             fdp-smart-filter-bar-field-definition
-            filterable="true"
+            smartFilterBarFilterable="true"
             name="description"
             key="description"
             required="true"
@@ -70,7 +70,7 @@ class TableDataProviderMock extends ArrayTableDataProvider<SourceItem> {
 
         <fdp-column
             fdp-smart-filter-bar-field-definition
-            filterable="true"
+            smartFilterBarFilterable="true"
             dataType="number"
             name="price"
             key="price.value"
@@ -83,7 +83,7 @@ class TableDataProviderMock extends ArrayTableDataProvider<SourceItem> {
         <fdp-column
             fdp-smart-filter-bar-field-definition
             filterType="multi-select"
-            filterable="true"
+            smartFilterBarFilterable="true"
             name="status"
             key="status"
             label="Status"

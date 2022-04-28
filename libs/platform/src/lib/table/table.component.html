@@ -82,7 +82,6 @@
                 [ngStyle]="_getCellStyles(column)"
                 [fdPopoverTrigger]="columnHeaderPopover"
                 [class.fd-table__item--clickable]="_isColumnHasHeaderMenu(column)"
-                [style.text-align]="column.align"
             >
                 <div
                     class="fd-table__text fd-table__text--no-wrap"
@@ -156,7 +155,7 @@
                         <!-- Freeze -->
                         <ng-container *ngIf="column.freezable">
                             <li
-                                *ngIf="!_freezableColumns?.has(column.name); else unfreeze"
+                                *ngIf="!_freezableColumns?.has(column.name); else unfreezeTpl"
                                 class="fd-table__item--clickable"
                                 fd-list-item
                                 (click)="freezeToColumn(column.name)"
@@ -165,7 +164,7 @@
                                 <span></span>
                                 <span fd-list-title i18n="@@platformTableHeaderMenuFreeze">Freeze</span>
                             </li>
-                            <ng-template #unfreeze>
+                            <ng-template #unfreezeTpl>
                                 <li
                                     class="fd-table__item--clickable"
                                     fd-list-item
@@ -193,7 +192,7 @@
                                         fd-form-control
                                         [compact]="contentDensity | isCompactDensity"
                                         [id]="'fdp-table-column-filtering-' + column.name"
-                                        (keyup.enter)="_columnHeaderFilterBy(column.key, $event.target.value)"
+                                        (keyup.enter)="_columnHeaderFilterBy(column.key, $any($event.target)?.value)"
                                     />
                                 </div>
                             </li>
@@ -327,7 +326,6 @@
                                             [compact]="contentDensity | isCompactDensity"
                                             labelClass="fd-table__checkbox-label"
                                             [ngModel]="row.checked"
-                                            [disabled]="row.state === 'new'"
                                             (click)="_toggleMultiSelectRow(row, rowIdx, $event)"
                                             (keydown.enter)="_toggleMultiSelectRow(row, rowIdx, $event)"
                                             (keydown.space)="_toggleMultiSelectRow(row, rowIdx, $event)"
@@ -343,7 +341,6 @@
                                 [columnName]="column.name"
                                 role="cell"
                                 [headers]="id + '__' + column.name"
-                                [style.textAlign]="column.align"
                                 [ngClass]="'fdp-table__col--' + column.name"
                                 [class.fd-table__cell--fixed]="_freezableColumns?.has(column.name)"
                                 [class.fd-table__cell--fixed-last]="column.name === freezeColumnsTo"

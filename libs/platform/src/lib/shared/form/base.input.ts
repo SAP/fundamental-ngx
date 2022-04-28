@@ -17,13 +17,11 @@ import {
 import { ControlValueAccessor, FormControl, NgControl, NgForm } from '@angular/forms';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subject } from 'rxjs';
+import { FormStates, isValidControlState } from '@fundamental-ngx/core/shared';
 
 import { BaseComponent } from '../base';
 import { FormFieldControl } from './form-control';
-import { ControlState } from './form-options';
 import { FormField } from './form-field';
-import { SafeHtml } from '@angular/platform-browser';
-import { isValidControlState } from './../utils/form';
 
 let randomId = 0;
 
@@ -59,30 +57,31 @@ export abstract class BaseInput
      * @default 'default'
      */
     @Input()
-    get state(): ControlState {
+    get state(): FormStates {
         if (this._state) {
             return this._state;
         }
         return this.controlInvalid ? 'error' : 'default';
     }
 
-    set state(state: ControlState) {
+    set state(state: FormStates) {
         if (!state || isValidControlState(state)) {
             this._state = state || 'default';
         } else if (isDevMode()) {
-            console.warn(`Provided value "${state}" is not a valid option for ControlState type`);
+            console.warn(`Provided value "${state}" is not a valid option for FormStates type`);
         }
     }
 
     /** Holds the message with respect to state */
     @Input()
-    stateMessage: string | SafeHtml;
+    stateMessage: string;
+
     /**
      * @hidden
      *  The state of the form control - applies css classes.
      *  Can be `success`, `error`, `warning`, `information` or 'default'
      */
-    protected _state: ControlState;
+    protected _state: FormStates;
 
     @Input()
     get disabled(): boolean {

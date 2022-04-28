@@ -51,7 +51,7 @@
                 <label fd-form-label i18n="@@platformApprovalFlowAddNodeDialogNodeType">Parallel or serial</label>
 
                 <fd-select [compact]="true" [(value)]="_nodeType">
-                    <ng-container *ngFor="let option of _nodeTypesArray; trackBy: _trackByFn">
+                    <ng-container *ngFor="let option of _nodeTypesArray">
                         <ng-container [ngSwitch]="option">
                             <fd-option
                                 *ngSwitchCase="_nodeTypes.SERIAL"
@@ -77,7 +77,7 @@
                 <label fd-form-label i18n="@@platformApprovalFlowAddNodeDialogApproverType">Approver type</label>
 
                 <fd-select [compact]="true" [(value)]="_approverType">
-                    <ng-container *ngFor="let option of _approverTypesArray; trackBy: _trackByFn">
+                    <ng-container *ngFor="let option of _approverTypesArray">
                         <ng-container [ngSwitch]="option">
                             <fd-option
                                 *ngSwitchCase="_approverTypes.SINGLE_USER"
@@ -144,7 +144,7 @@
                 <fd-date-picker
                     type="single"
                     [compact]="true"
-                    [state]="!this._dueDate ? 'error' : ''"
+                    [state]="!this._dueDate ? 'error' : null"
                     [(ngModel)]="_dueDate"
                 >
                 </fd-date-picker>

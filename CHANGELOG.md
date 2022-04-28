@@ -1,4 +1,213 @@
 
+### [0.34.3-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.24...v0.34.3-rc.25) (2022-04-25)
+
+### [0.34.3-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.23...v0.34.3-rc.24) (2022-04-24)
+
+### [0.34.3-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.22...v0.34.3-rc.23) (2022-04-20)
+
+
+### Features
+
+* **core:** maxColumns feature for fixed grid layout ([#8002](https://github.com/SAP/fundamental-ngx/issues/8002)) ([64060f2](https://github.com/SAP/fundamental-ngx/commit/64060f257d51c0f06a9e7b61fd10f6d50137c518))
+
+### [0.34.3-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.21...v0.34.3-rc.22) (2022-04-20)
+
+
+### Bug Fixes
+
+* **platform:** wizard generator content density ([#8000](https://github.com/SAP/fundamental-ngx/issues/8000)) ([b6d955a](https://github.com/SAP/fundamental-ngx/commit/b6d955aba40d0b08470fb4402121bf3143abf431))
+
+### [0.34.3-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.20...v0.34.3-rc.21) (2022-04-20)
+
+
+### Bug Fixes
+
+* **core:** fixed card layout columns ([#8001](https://github.com/SAP/fundamental-ngx/issues/8001)) ([0752083](https://github.com/SAP/fundamental-ngx/commit/0752083dd35a28a67e76d6ccf5e497e9eb56256c))
+
+### [0.34.3-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.19...v0.34.3-rc.20) (2022-04-19)
+
+
+### Bug Fixes
+
+* **docs:** fixed missing variables file in stackblitz examples ([#7999](https://github.com/SAP/fundamental-ngx/issues/7999)) ([7826a5b](https://github.com/SAP/fundamental-ngx/commit/7826a5b46b83a53057767197fb35ee6d11c459a2))
+
+### [0.34.3-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.18...v0.34.3-rc.19) (2022-04-19)
+
+
+### Features
+
+* **docs/core/platform:** strict angularCompilerOptions ([#7998](https://github.com/SAP/fundamental-ngx/issues/7998)) ([acd8502](https://github.com/SAP/fundamental-ngx/commit/acd8502a00abc0eb15ef19647f1b9188962ed294))
+
+### [0.34.3-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.17...v0.34.3-rc.18) (2022-04-18)
+
+
+### Bug Fixes
+
+* **core:** fixed time picker drag end on last array element ([#7982](https://github.com/SAP/fundamental-ngx/issues/7982)) ([bcf414a](https://github.com/SAP/fundamental-ngx/commit/bcf414a6b3f9c386c5a843effba5158cf4b69947))
+
+### [0.34.3-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.16...v0.34.3-rc.17) (2022-04-18)
+
+
+### Bug Fixes
+
+* **core:** pagination announcement, examples ([#7979](https://github.com/SAP/fundamental-ngx/issues/7979)) ([ba5f1be](https://github.com/SAP/fundamental-ngx/commit/ba5f1be6f4837e0764db6eb1bb74e9125d6cafd6))
+
+### [0.34.3-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.15...v0.34.3-rc.16) (2022-04-15)
+
+
+### Bug Fixes
+
+* **core:** datetime picker - add scroll for overflow ([#7933](https://github.com/SAP/fundamental-ngx/issues/7933)) ([b575e19](https://github.com/SAP/fundamental-ngx/commit/b575e19233bca4cecc1cd5f2b0afe02b6d285b46))
+
+### [0.34.3-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.14...v0.34.3-rc.15) (2022-04-15)
+
+
+### Bug Fixes
+
+* **core:** time picker locale change incorrect behavior ([#7956](https://github.com/SAP/fundamental-ngx/issues/7956)) ([6e491ed](https://github.com/SAP/fundamental-ngx/commit/6e491ed8d9b61871f1af1e3c57fdb9413c137377))
+
+### [0.34.3-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.13...v0.34.3-rc.14) (2022-04-12)
+
+
+### Features
+
+* **platform:** enhancement of form generator and form container ([#7964](https://github.com/SAP/fundamental-ngx/issues/7964)) ([7373bd7](https://github.com/SAP/fundamental-ngx/commit/7373bd7cf05d7601a1c53ced27f2f9f04e86fa30))
+
+### [0.34.3-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.12...v0.34.3-rc.13) (2022-04-12)
+
+
+### Bug Fixes
+
+* **core, platform:** dynamic page spacer fix, update for tabs ([#7970](https://github.com/SAP/fundamental-ngx/issues/7970)) ([6595c69](https://github.com/SAP/fundamental-ngx/commit/6595c695868bbdf7be4ee9b6b0a6e8f059ae547f))
+
+### [0.34.3-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.11...v0.34.3-rc.12) (2022-04-11)
+
+
+### Bug Fixes
+
+* **core:** added missing column numbers sequence ([#7973](https://github.com/SAP/fundamental-ngx/issues/7973)) ([b7f77c5](https://github.com/SAP/fundamental-ngx/commit/b7f77c52eafd08f8ce54301c5f71202c88471ddc))
+* **core:** clicking on tabs in overflow menu produced errors ([#7971](https://github.com/SAP/fundamental-ngx/issues/7971)) ([0932208](https://github.com/SAP/fundamental-ngx/commit/0932208005f9e138a10998258daa0632479b6f17))
+
+### [0.34.3-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.10...v0.34.3-rc.11) (2022-04-11)
+
+
+### Bug Fixes
+
+* **core:** add auto slides calculation ([#7949](https://github.com/SAP/fundamental-ngx/issues/7949)) ([1ed1471](https://github.com/SAP/fundamental-ngx/commit/1ed14713be7a5c49a9c73b011091086505d53279))
+
+### [0.34.3-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.9...v0.34.3-rc.10) (2022-04-11)
+
+
+### Bug Fixes
+
+* **platform:** rename input property ([#7954](https://github.com/SAP/fundamental-ngx/issues/7954)) ([de0c273](https://github.com/SAP/fundamental-ngx/commit/de0c273e1becf5099f9621049a7f483bbffd80a5))
+
+### [0.34.3-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.8...v0.34.3-rc.9) (2022-04-08)
+
+
+### Features
+
+* **core:** global message toast configuration ([#7957](https://github.com/SAP/fundamental-ngx/issues/7957)) ([7c15bf8](https://github.com/SAP/fundamental-ngx/commit/7c15bf838248a42158e1d0fb2e6d9fb03c0f6032))
+
+### [0.34.3-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.7...v0.34.3-rc.8) (2022-04-07)
+
+
+### Bug Fixes
+
+* **core, platform:** dynamic page spacer ([#7962](https://github.com/SAP/fundamental-ngx/issues/7962)) ([ad7bdb4](https://github.com/SAP/fundamental-ngx/commit/ad7bdb44c3f346c8c782d027874dad009068352f))
+
+### [0.34.3-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.6...v0.34.3-rc.7) (2022-04-05)
+
+### [0.34.3-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.5...v0.34.3-rc.6) (2022-04-04)
+
+
+### Features
+
+* **core:** handle dynamic container height ([#7884](https://github.com/SAP/fundamental-ngx/issues/7884)) ([4a025d0](https://github.com/SAP/fundamental-ngx/commit/4a025d0f88391c8ebd8ad1404ed1be68b84a7a27))
+
+### [0.34.3-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.4...v0.34.3-rc.5) (2022-04-04)
+
+### [0.34.3-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.3...v0.34.3-rc.4) (2022-04-04)
+
+
+### Bug Fixes
+
+* **platform,core:** form mis-alignments ([#7905](https://github.com/SAP/fundamental-ngx/issues/7905)) ([0e4eb14](https://github.com/SAP/fundamental-ngx/commit/0e4eb14687bd6a11729cc165a92fc4698bb43cbc))
+
+### [0.34.3-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.2...v0.34.3-rc.3) (2022-04-03)
+
+### 0.34.3-rc.2 (2022-04-02)
+
+### 0.34.3-rc.1 (2022-04-02)
+
+### 0.34.3-rc.0 (2022-04-02)
+
+### [0.34.2](https://github.com/SAP/fundamental-ngx/compare/v0.34.2-rc.0...v0.34.2) (2022-04-02)
+
+### 0.34.2-rc.0 (2022-04-01)
+
+## [0.34.0](https://github.com/SAP/fundamental-ngx/compare/v0.34.1-rc.0...v0.34.1) (2022-04-01)
+
+
+### 0.34.1-rc.1 (2022-04-01)
+
+
+### Features
+
+* **core:** added ignore click on selection directive ([#7934](https://github.com/SAP/fundamental-ngx/issues/7934)) ([a0a5255](https://github.com/SAP/fundamental-ngx/commit/a0a5255e1c76392d724da41da6625742bd72e2df))
+
+### 0.34.1-rc.0 (2022-04-01)
+
+
+### Bug Fixes
+
+* **deps:** fix ngx versions ([#7935](https://github.com/SAP/fundamental-ngx/issues/7935)) ([50c7820](https://github.com/SAP/fundamental-ngx/commit/50c782062f848abb0bdb301681b4cdaa5d42f27b))
+
+## [0.34.0](https://github.com/SAP/fundamental-ngx/compare/v0.33.6-rc.0...v0.34.0) (2022-04-01)
+
+## 0.34.0-rc.11 (2022-03-31)
+
+## 0.34.0-rc.10 (2022-03-31)
+
+
+### Features
+
+* **deps:** upgrade to theming-base-content version 11.1.37 ([#7912](https://github.com/SAP/fundamental-ngx/issues/7912)) ([ca6a0e6](https://github.com/SAP/fundamental-ngx/commit/ca6a0e640fa8c2024db07bd7d0e149c394ad0973))
+
+## 0.34.0-rc.9 (2022-03-31)
+
+## 0.34.0-rc.8 (2022-03-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* **core:** * Upload collection item object status now needs [fd-upload-collection-status-item] directive to be applied.
+
+### Bug Fixes
+
+* **core:** upload collection overflow ([#7857](https://github.com/SAP/fundamental-ngx/issues/7857)) ([a25f2da](https://github.com/SAP/fundamental-ngx/commit/a25f2da90c8849c468944ade2a84ba01e8127074))
+
+## 0.34.0-rc.7 (2022-03-30)
+
+
+### Bug Fixes
+
+* **core:** hide items outside viewport ([#7902](https://github.com/SAP/fundamental-ngx/issues/7902)) ([aec3475](https://github.com/SAP/fundamental-ngx/commit/aec3475cd22efbd1b1fec8a368a836b2b9dc95bf))
+
+## 0.34.0-rc.6 (2022-03-30)
+
+
+### Features
+
+* **platform, core:** advanced inline help management ([#7878](https://github.com/SAP/fundamental-ngx/issues/7878)) ([81ec159](https://github.com/SAP/fundamental-ngx/commit/81ec15989c273e66b9a3421657cc390a317c92ed))
+
+## 0.34.0-rc.5 (2022-03-29)
+
+
+### Bug Fixes
+
+* **core, platform:** popover styles refactoring ([#7832](https://github.com/SAP/fundamental-ngx/issues/7832)) ([57f8a5e](https://github.com/SAP/fundamental-ngx/commit/57f8a5e49315857330b2ede1a2fa8961ad0e8f15))
+
 ## 0.34.0-rc.4 (2022-03-27)
 
 ## 0.34.0-rc.3 (2022-03-27)

@@ -1,6 +1,11 @@
 import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 
-import { GridListComponent, GridListItemOutputEvent, GridListItemType } from '@fundamental-ngx/core/grid-list';
+import {
+    GridListComponent,
+    GridListItemOutputEvent,
+    GridListItemType,
+    GridListSelectionEvent
+} from '@fundamental-ngx/core/grid-list';
 
 interface GridListItem {
     id: number;
@@ -66,7 +71,7 @@ export class GridListMultiSelectExampleComponent {
         }
     ];
 
-    onSelectionChange(event: GridListItemOutputEvent<number>): void {
+    onSelectionChange(event: GridListSelectionEvent<number>): void {
         console.log('Multi-Select: selected items', event);
     }
 

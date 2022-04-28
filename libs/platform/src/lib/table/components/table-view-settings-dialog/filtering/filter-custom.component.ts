@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, DoChec
 
 import { ContentDensity } from '@fundamental-ngx/core/utils';
 
-import { CollectionSelectFilter } from '../../../interfaces/collection-filter.interface';
+import { CollectionFilter } from '../../../interfaces/collection-filter.interface';
 import { TableViewSettingsFilterComponent } from '../../table-view-settings-dialog/table-view-settings-filter.component';
 
 /**
@@ -29,7 +29,7 @@ export class FilterCustomComponent implements DoCheck {
 
     /** The filter model */
     @Input()
-    set filterBy(filterBy: CollectionSelectFilter) {
+    set filterBy(filterBy: CollectionFilter) {
         if (!filterBy?.value || Object.prototype.toString.call(filterBy?.value) !== '[object Object]') {
             // force value to be an object
             this._value = {};

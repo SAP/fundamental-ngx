@@ -104,9 +104,8 @@ export class WizardGeneratorStepComponent implements OnInit, OnDestroy, OnChange
 
     /**
      * @hidden
-     * @private
      */
-    private _visibleFormGroupIds: Record<string, boolean>;
+    _visibleFormGroupIds: Record<string, boolean>;
 
     /**
      * @hidden

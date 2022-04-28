@@ -43,7 +43,7 @@
 
 <h3>Checkboxes with different context</h3>
 <div>Qualification form</div>
-<fdp-form-group #fg hintPlacement="left" [formGroup]="form1">
+<fdp-form-group #fg [formGroup]="form1">
     <fdp-form-field
         #ffr1
         id="education"
@@ -117,8 +117,8 @@
 <span style="margin-left: 2rem">Languages Known: {{ form3.controls.language?.value }}</span>
 
 <h3>Checkbox with same context</h3>
-<fdp-form-group #fg hintPlacement="left" [formGroup]="form4">
-    <fdp-form-field id="apple" hintPlacement="left" [rank]="1" [validators]="validators" [i18Strings]="apple">
+<fdp-form-group #fg [formGroup]="form4">
+    <fdp-form-field id="apple" [rank]="1" [validators]="validators" [i18Strings]="apple">
         <fdp-checkbox name="apple" title="apple" formControlName="apple">Apple</fdp-checkbox>
     </fdp-form-field>
 

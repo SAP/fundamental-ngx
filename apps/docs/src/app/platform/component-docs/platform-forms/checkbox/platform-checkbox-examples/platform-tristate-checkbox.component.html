@@ -175,12 +175,7 @@
         </fdp-form-field>
     </fdp-form-group>
     <div style="padding-left: 2rem; border: black solid">
-        <fdp-form-group
-            class="padding-top:0%;"
-            #checkboxes
-            [formGroup]="registrationForm.get('agreements')"
-            [object]="choices"
-        >
+        <fdp-form-group class="padding-top:0%;" #checkboxes [formGroup]="agreementsFormGroup" [object]="choices">
             <fdp-form-field #ffr2 id="termsAndConditions" label="I accept Terms and Conditions" [rank]="3">
                 <fdp-checkbox name="termsAndConditions-cb" [formControl]="ffr2.formControl"> </fdp-checkbox>
             </fdp-form-field>

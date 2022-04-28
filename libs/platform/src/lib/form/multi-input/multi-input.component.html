@@ -137,7 +137,7 @@
                     *ngFor="let optionItem of group.children; let i = index"
                     [title]="optionItem.label"
                     (itemSelected)="addToArray(optionItem)"
-                    (buttonClicked)="deleteToken($event)"
+                    (buttonClicked)="deleteToken(optionItem)"
                     role="option"
                 >
                 </fdp-standard-list-item>

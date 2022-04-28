@@ -1,6 +1,6 @@
 import { TemplateRef } from '@angular/core';
 
-import { FormField } from '@fundamental-ngx/platform/shared';
+import { FormField, HintOptions } from '@fundamental-ngx/platform/shared';
 import { FormFieldComponent } from './form-group/form-field/form-field.component';
 import { FormFieldGroupComponent } from './form-group/form-field-group/form-field-group.component';
 import { FormGeneratorFieldComponent } from './form-generator/form-generator-field/form-generator-field.component';
@@ -41,5 +41,5 @@ export class Field {
 }
 
 export class FieldGroup {
-    constructor(public label: string, public fields: FieldColumn) {}
+    constructor(public label: string, public fields: FieldColumn, public hintOptions?: HintOptions) {}
 }

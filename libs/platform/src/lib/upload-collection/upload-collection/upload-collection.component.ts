@@ -17,7 +17,7 @@ import { filter, take, takeUntil, tap } from 'rxjs/operators';
 
 import { uuidv4, ContentDensityEnum, ContentDensityService } from '@fundamental-ngx/core/utils';
 import { DialogService, DialogConfig } from '@fundamental-ngx/core/dialog';
-import { TableRowSelectionChangeEvent } from '@fundamental-ngx/platform/table';
+import { TableRowSelectionChangeEvent, ColumnAlign, SelectionMode } from '@fundamental-ngx/platform/table';
 import { isDataSource } from '@fundamental-ngx/platform/shared';
 import { NewFolderComponent } from '../dialogs/new-folder/new-folder.component';
 import { MoveToComponent, MoveToComponentDialogData } from '../dialogs/move-to/move-to.component';
@@ -258,6 +258,12 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
     _messageStripType = MessageStripType;
 
     /** @hidden */
+    _columnAlign = ColumnAlign;
+
+    /** @hidden */
+    _selectionMode = SelectionMode;
+
+    /** @hidden */
     private _dataSource: UploadCollectionDataSource;
 
     /** @hidden */
@@ -403,7 +409,7 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
     }
 
     /** @hidden */
-    _checkName(e: FocusEvent, currentItem: UploadCollectionItem): void {
+    _checkName(e: Event, currentItem: UploadCollectionItem): void {
         const input = e.target as HTMLInputElement;
         const itemName = input.value.trim();
         const newName = currentItem.type === 'file' ? `${itemName}.${currentItem.name.split('.').pop()}` : itemName;

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { GridListItemOutputEvent, GridListItemType } from '@fundamental-ngx/core/grid-list';
+import { GridListItemOutputEvent, GridListItemType, GridListSelectionEvent } from '@fundamental-ngx/core/grid-list';
 
 interface GridListItem {
     id: number;
@@ -62,7 +62,7 @@ export class GridListSingleSelectRightExampleComponent {
         }
     ];
 
-    onSelectionChange(event: GridListItemOutputEvent<number>): void {
+    onSelectionChange(event: GridListSelectionEvent<number>): void {
         console.log('Single Select Right: selected item', event);
     }
 

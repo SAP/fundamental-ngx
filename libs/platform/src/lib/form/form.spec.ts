@@ -23,13 +23,7 @@ describe('Platform Form', () => {
     @Component({
         template: `
             <form [formGroup]="userFormGroup" (ngSubmit)="onSubmit()">
-                <fdp-form-group
-                    #userForm
-                    [object]="user"
-                    [formGroup]="userFormGroup"
-                    [hintPlacement]="'right'"
-                    [i18Strings]="i18n"
-                >
+                <fdp-form-group #userForm [object]="user" [formGroup]="userFormGroup" [i18Strings]="i18n">
                     <fdp-form-field
                         *ngIf="showFirstNameControl"
                         #firstName
@@ -354,13 +348,7 @@ describe('fdp-form-field out of fdp-form-group', () => {
     @Component({
         template: `
             <form [formGroup]="userFormGroup" (ngSubmit)="onSubmit()">
-                <fdp-form-group
-                    #fdpUserFormGroup
-                    [object]="user"
-                    [formGroup]="userFormGroup"
-                    [hintPlacement]="'right'"
-                    [i18Strings]="i18n"
-                >
+                <fdp-form-group #fdpUserFormGroup [object]="user" [formGroup]="userFormGroup" [i18Strings]="i18n">
                     <ng-container
                         *ngTemplateOutlet="formFieldTemplateRef; context: { fdpFormGroup: fdpUserFormGroup }"
                     ></ng-container>

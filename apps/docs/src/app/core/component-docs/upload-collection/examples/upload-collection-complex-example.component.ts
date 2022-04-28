@@ -65,7 +65,7 @@ export class UploadCollectionComplexExampleComponent {
         }
     }
 
-    onCheckboxClick(file: FileItem, index: number, event: PointerEvent): void {
+    onCheckboxClick(file: FileItem, index: number, event: MouseEvent): void {
         // additionally to ngModel tracking clicks on checkboxes in order to be able to select ranges
         // this function will be invoked after ngModel's value is updated, so we can use "file.selected" as current value
         this._rangeSelector.onRangeElementToggled(index, event);

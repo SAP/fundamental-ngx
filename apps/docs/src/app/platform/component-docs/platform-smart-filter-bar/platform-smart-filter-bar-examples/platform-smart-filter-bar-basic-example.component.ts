@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FdDate } from '@fundamental-ngx/core/datetime';
+import { FilterableColumnDataType, FilterType } from '@fundamental-ngx/platform/table';
 
 @Component({
     selector: 'fdp-platform-smart-filter-bar-basic-example',
@@ -8,6 +9,9 @@ import { FdDate } from '@fundamental-ngx/core/datetime';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlatformSmartFilterBarBasicExampleComponent {
+    readonly dataTypeEnum = FilterableColumnDataType;
+    readonly filterTypeEnum = FilterType;
+
     source: ExampleItem[] = ITEMS;
 
     trackBy(_: number, item: ExampleItem): number {

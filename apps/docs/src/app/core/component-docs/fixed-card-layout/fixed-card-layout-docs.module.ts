@@ -20,6 +20,7 @@ import { TableModule } from '@fundamental-ngx/core/table';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { FixedCardLayoutCustomWidthExampleComponent } from './examples/custom-width/fixed-card-layout-custom-width-example.component';
 import { FixedCardLayoutCustomColumnWidthExampleComponent } from './examples/custom-column-width/fixed-card-layout-custom-column-width-example.component';
+import { FixedCardLayoutMaxColumnsExampleComponent } from './examples/max-columns/fixed-card-layout-max-columns-example.component';
 
 const routes: Routes = [
     {
@@ -53,7 +54,8 @@ const routes: Routes = [
         FixedCardLayoutMobileExampleComponent,
         FixedCardLayoutDocsHeaderComponent,
         FixedCardLayoutCustomWidthExampleComponent,
-        FixedCardLayoutCustomColumnWidthExampleComponent
+        FixedCardLayoutCustomColumnWidthExampleComponent,
+        FixedCardLayoutMaxColumnsExampleComponent
     ]
 })
 export class FixedCardLayoutDocsModule {}

@@ -36,6 +36,7 @@ const PX_IN_REM = 16;
 const CARD_MINIMUM_WIDTH = 320; // 320px = 20rem
 const CARD_GAP_WIDTH = 16; // 16px = 1rem
 const DRAG_START_DELAY = 200; // in ms
+const MAX_COLUMNS = 10;
 
 let cardRank = 1;
 
@@ -127,6 +128,10 @@ export class FixedCardLayoutComponent
     @Input()
     columnsWidthConfig: ColumnsWidthConfig;
 
+    /** Limit the number of columns. Default is 10. */
+    @Input()
+    maxColumns = MAX_COLUMNS;
+
     /** Event to emit, when layout changes */
     @Output()
     layoutChange: EventEmitter<Layout> = new EventEmitter<Layout>();
@@ -176,7 +181,7 @@ export class FixedCardLayoutComponent
     _singleItemColumns = new Set<number>();
 
     /** @hidden */
-    private _columnsWidth = new Map<number, number>();
+    _columnsWidth = new Map<number, number>();
 
     /** @hidden Return available width for fixed card layout */
     get _availableWidth(): number {
@@ -235,7 +240,13 @@ export class FixedCardLayoutComponent
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        if ('columnsWidthConfig' in changes) {
+        if (!this._cards?.length) {
+            return;
+        }
+
+        if ('maxColumns' in changes) {
+            this.updateLayout();
+        } else if ('columnsWidthConfig' in changes) {
             this._setColumnsWidth();
         }
     }
@@ -258,7 +269,18 @@ export class FixedCardLayoutComponent
 
     /** Distribute cards on window resize */
     updateLayout(): void {
-        this._numberOfColumns = getNumberOfColumns(this._availableWidth, this.cardMinimumWidth);
+        if (!this._cards.length) {
+            return;
+        }
+
+        const possibleNumberOfColumns = getNumberOfColumns(this._availableWidth, this.cardMinimumWidth);
+
+        this._numberOfColumns = Math.min(
+            possibleNumberOfColumns,
+            this._cards.length,
+            this.maxColumns || MAX_COLUMNS,
+            MAX_COLUMNS
+        );
 
         this.layoutChange.emit({
             numberOfColumns: this._numberOfColumns,
@@ -483,6 +505,7 @@ export class FixedCardLayoutComponent
     /** @hidden */
     private _setColumnsWidth(detectChanges = true): void {
         this._columnsWidth = new Map();
+
         const configPresent =
             this.columnsWidthConfig &&
             typeof this.columnsWidthConfig === 'object' &&

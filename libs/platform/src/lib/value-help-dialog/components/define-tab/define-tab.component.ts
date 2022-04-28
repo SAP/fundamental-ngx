@@ -23,13 +23,13 @@ import { MAX_CHARACTER_HINT_COUNT } from '../../constans';
 import { VhdBaseTab } from '../base-tab/vhd-base-tab.component';
 
 class ExtendedBaseEntity extends BaseEntity {
-    id: number;
+    id?: number;
 }
 class ExtendedIncludedEntity extends VhdIncludedEntity {
-    id: number;
+    id?: number;
 }
 class ExtendedExcludedEntity extends VhdExcludedEntity {
-    id: number;
+    id?: number;
 }
 
 let titleUniqueId = 0;

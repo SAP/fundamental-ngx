@@ -235,7 +235,7 @@ describe('Verify Textarea component', () => {
             expect(textareaSizeBefore.height).toBe(textareaSizeAfter.height);
         });
 
-        it('should grow if growing option is enabled (growing up to 5 lines)', () => {
+        xit('should grow if growing option is enabled (growing up to 5 lines)', () => {
             clearValue(growingMaxLinesTextarea);
             const textareaSize1 = getElementSize(growingMaxLinesTextarea);
             setValue(growingMaxLinesTextarea, multiple_lines_text);

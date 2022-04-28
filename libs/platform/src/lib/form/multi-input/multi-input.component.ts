@@ -342,7 +342,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     }
 
     /** @hidden */
-    _onKeydownEnter(event: KeyboardEvent): void {
+    _onKeydownEnter(event: Event): void {
         if (this.inputText) {
             event.preventDefault();
         }

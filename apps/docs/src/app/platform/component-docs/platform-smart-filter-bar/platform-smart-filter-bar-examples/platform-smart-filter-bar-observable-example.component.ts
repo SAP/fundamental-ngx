@@ -13,7 +13,9 @@ import {
     isCollectionFilter,
     ObservableTableDataProvider,
     TableDataSource,
-    TableState
+    TableState,
+    FilterableColumnDataType,
+    FilterType
 } from '@fundamental-ngx/platform/table';
 import { Observable, of } from 'rxjs';
 import { map, take } from 'rxjs/operators';
@@ -26,6 +28,9 @@ import get from 'lodash-es/get';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlatformSmartFilterBarObservableExampleComponent {
+    readonly dataTypeEnum = FilterableColumnDataType;
+    readonly filterTypeEnum = FilterType;
+
     source: TableDataSource<ExampleItem>;
 
     constructor(datetimeAdapter: DatetimeAdapter<FdDate>) {

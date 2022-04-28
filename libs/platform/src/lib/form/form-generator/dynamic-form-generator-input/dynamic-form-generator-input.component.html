@@ -1,8 +1,8 @@
 <ng-container [formGroup]="form" *ngIf="formField">
     <ng-container [formGroupName]="formGroupName">
         <fdp-input
-            [contentDensity]="formItem.guiOptions?.contentDensity"
-            [placeholder]="formItem.message"
+            [contentDensity]="contentDensity"
+            [placeholder]="placeholder"
             [name]="name"
             [type]="formItem.controlType || 'text'"
             [formControlName]="name"

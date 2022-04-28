@@ -7,11 +7,13 @@ import {
     EventEmitter,
     Host,
     Input,
+    OnChanges,
     OnDestroy,
     Optional,
     Output,
     QueryList,
     Self,
+    SimpleChanges,
     SkipSelf,
     TemplateRef,
     ViewChild
@@ -29,8 +31,8 @@ import {
     UP_ARROW
 } from '@angular/cdk/keycodes';
 
-import { fromEvent, isObservable, Observable, Subject, Subscription } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { combineLatest, fromEvent, isObservable, Observable, Subject, Subscription } from 'rxjs';
+import { takeUntil, startWith } from 'rxjs/operators';
 
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import { ContentDensity, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/core/utils';
@@ -66,7 +68,7 @@ export class MultiInputSelectionChangeEvent {
 }
 
 @Directive()
-export abstract class BaseMultiInput extends CollectionBaseInput implements AfterViewInit, OnDestroy {
+export abstract class BaseMultiInput extends CollectionBaseInput implements AfterViewInit, OnChanges, OnDestroy {
     /** Provides maximum height for the optionPanel */
     @Input()
     maxHeight = '250px';
@@ -243,6 +245,9 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
      */
     openChange = new Subject<boolean>();
 
+    /** @hidden emits whenever there're changes to the inputs, that affect the data creation from data source */
+    private readonly _updateDataSourceValues$ = new Subject<void>();
+
     protected _dataSource: FdpMultiInputDataSource<any>;
 
     /** @hidden */
@@ -298,6 +303,13 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         this._initWindowResize();
         this._assignCustomTemplates();
         super.ngAfterViewInit();
+    }
+
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        if ('group' in changes || 'groupKey' in changes) {
+            this._updateDataSourceValues$.next();
+        }
     }
 
     /** @hidden */
@@ -493,12 +505,10 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
          * its here.
          */
         this._dsSubscription = new Subscription();
-        const dsSub = initDataSource
-            .open()
+        const dsSub = combineLatest([initDataSource.open(), this._updateDataSourceValues$.pipe(startWith(null))])
             .pipe(takeUntil(this._destroyed))
-            .subscribe((data) => {
+            .subscribe(([data]) => {
                 this._suggestions = this._convertToOptionItems(data);
-
                 this.stateChanges.next('initDataSource.open().');
 
                 this.cd.markForCheck();

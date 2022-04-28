@@ -17,7 +17,7 @@ import {
 
 import { paddingsSizes } from '../fixtures/appData/icon-tab-bar-contents';
 
-describe('Info Label component test suite', () => {
+describe('Icon Tab Bar component test suite', () => {
     const iconTabBarPage = new IconTabBarPO();
     const {
         iconExample,
@@ -87,7 +87,7 @@ describe('Info Label component test suite', () => {
     });
 
     describe('Process example', () => {
-        it('should check selecting tabs in process example', () => {
+        xit('should check selecting tabs in process example', () => {
             checkSelectingTabs(processExample);
         });
 
@@ -95,7 +95,7 @@ describe('Info Label component test suite', () => {
             expect(isElementDisplayed(processExample + processIcon)).toBe(true, 'process icon is not displayed');
         });
 
-        it('should check quantity of communicators in process example', () => {
+        xit('should check quantity of communicators in process example', () => {
             const itemsQuantity = getElementArrayLength(processExample + tabBarItem);
             expect(getElementArrayLength(processExample + processIcon)).toBe(
                 itemsQuantity - 1,

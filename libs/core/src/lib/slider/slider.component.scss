@@ -1,7 +1,7 @@
 @import '~fundamental-styles/dist/slider';
 @import '~fundamental-styles/dist/input';
 
-.fd-popover__popper--cdk-custom.fd-slider--tooltip-popover {
+.fd-popover__popper.fd-slider--tooltip-popover {
     top: -7px !important;
     overflow: hidden;
 

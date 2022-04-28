@@ -2,11 +2,11 @@ import { Component, ViewChild } from '@angular/core';
 import { Validators } from '@angular/forms';
 
 import {
-    DatetimeAdapter,
     DATE_TIME_FORMATS,
+    DatetimeAdapter,
+    FD_DATETIME_FORMATS,
     FdDate,
-    FdDatetimeAdapter,
-    FD_DATETIME_FORMATS
+    FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
 import { DynamicFormItem, DynamicFormValue, FormGeneratorComponent } from '@fundamental-ngx/platform/form';
 
@@ -44,16 +44,22 @@ export class PlatformFormGeneratorExampleComponent {
     questions: DynamicFormItem[] = [
         {
             name: 'some',
-            message: 'Some group name',
+            message: 'Some Group Name',
+            guiOptions: {
+                hint: 'Some contextual hint on group header'
+            },
             items: [
                 {
                     type: 'input',
                     name: 'nameInGroup',
-                    message: 'Your name (group)',
+                    message: 'Your Name (Group)',
                     default: 'John',
                     placeholder: 'Please provide your name',
                     guiOptions: {
-                        hint: 'Some contextual hint',
+                        hint: {
+                            text: 'Some contextual hint',
+                            glyph: 'accidental-leave'
+                        },
                         column: 1
                     },
                     validate: async (value) => {
@@ -72,7 +78,7 @@ export class PlatformFormGeneratorExampleComponent {
         {
             type: 'input',
             name: 'name',
-            message: 'Your name',
+            message: 'Your Name',
             default: 'John',
             placeholder: 'Please provide your name',
             guiOptions: {
@@ -110,7 +116,7 @@ export class PlatformFormGeneratorExampleComponent {
             type: 'number',
             name: 'age',
             controlType: 'number',
-            message: () => 'Your age',
+            message: () => 'Your Age',
             default: '18',
             validators: [Validators.required],
             guiOptions: {
@@ -120,7 +126,7 @@ export class PlatformFormGeneratorExampleComponent {
         {
             type: 'editor',
             name: 'bio',
-            message: 'Your biography',
+            message: 'Your Biography',
             guiOptions: {
                 column: 1
             }
@@ -128,7 +134,7 @@ export class PlatformFormGeneratorExampleComponent {
         {
             type: 'checkbox',
             name: 'citizenship',
-            message: 'Your citizenship',
+            message: 'Your Citizenship',
             guiOptions: {
                 inline: true,
                 column: 2
@@ -147,7 +153,7 @@ export class PlatformFormGeneratorExampleComponent {
         {
             type: 'list',
             name: 'department',
-            message: 'Department you work in',
+            message: 'Department You Work In',
             validators: [Validators.required],
             default: 'IT',
             choices: ['IT', 'Accounting', 'Management'],
@@ -158,7 +164,7 @@ export class PlatformFormGeneratorExampleComponent {
         {
             type: 'list',
             name: 'main_speciality',
-            message: 'Main speciality',
+            message: 'Main Speciality',
             validators: [Validators.required],
             choices: async () => {
                 await dummyAwaitablePromise();
@@ -175,7 +181,7 @@ export class PlatformFormGeneratorExampleComponent {
         {
             type: 'confirm',
             name: 'agree',
-            message: 'Do you agree with terms and conditions?',
+            message: 'Do You Agree With Terms And Conditions?',
             choices: ['Yes', 'No'],
             validators: [Validators.required],
             validate: async (value) => {
@@ -189,7 +195,7 @@ export class PlatformFormGeneratorExampleComponent {
         {
             type: 'radio',
             name: 'choose_best_option',
-            message: 'Primary front-end framework you use',
+            message: 'Primary Front-end Framework You Use',
             choices: ['Angular', 'React', 'VueJS'],
             guiOptions: {
                 column: 2
@@ -200,7 +206,7 @@ export class PlatformFormGeneratorExampleComponent {
         {
             type: 'datepicker',
             name: 'birthday',
-            message: 'Your birthday',
+            message: 'Your Birthday',
             guiOptions: {
                 column: 1
             },
@@ -212,7 +218,7 @@ export class PlatformFormGeneratorExampleComponent {
         {
             type: 'switch',
             name: 'enable_feature',
-            message: 'Enable some analytics',
+            message: 'Enable Some Analytics',
             default: false,
             guiOptions: {
                 additionalData: {

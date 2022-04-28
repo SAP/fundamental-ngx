@@ -45,8 +45,6 @@
                 [(ngModel)]="inputText"
                 (ngModelChange)="onValueChange($event)"
                 (click)="mobile && openMobileMode()"
-                (focus)="mobile && onFocus()"
-                (blur)="mobile && onBlur()"
             />
             <span
                 class="fd-input-group__addon fd-input-group__addon--button"

@@ -9,9 +9,11 @@ import {
 } from '@angular/core';
 import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { FormStates } from '@fundamental-ngx/core/shared';
 import { CSS_CLASS_NAME, getTypeClassName } from './constants';
 
-export type MessageStates = 'success' | 'error' | 'warning' | 'information';
+/** @deprecated use FormStates instead */
+export type MessageStates = FormStates;
 
 /**
  * Form message. Intended to be displayed with a form control for validation purposes.
@@ -28,9 +30,9 @@ export type MessageStates = 'success' | 'error' | 'warning' | 'information';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormMessageComponent implements CssClassBuilder, OnInit, OnChanges {
-    /** Type of the message. Can be 'success' | 'error' | 'warning' | 'information' */
+    /** Type of the message. */
     @Input()
-    type: MessageStates;
+    type: FormStates;
 
     /** Whether message should be in static mode, without popover. It's mostly used for forms component, that contain dropdown */
     @Input()

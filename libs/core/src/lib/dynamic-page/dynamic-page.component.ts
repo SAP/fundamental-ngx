@@ -4,11 +4,13 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChild,
+    ContentChildren,
     ElementRef,
     HostBinding,
     Input,
     OnDestroy,
     Optional,
+    QueryList,
     Renderer2,
     ViewChild,
     ViewEncapsulation
@@ -18,14 +20,15 @@ import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsi
 import { DynamicPageContentComponent } from './dynamic-page-content/dynamic-page-content.component';
 import { DynamicPageSubheaderComponent } from './dynamic-page-header/subheader/dynamic-page-subheader.component';
 import { DynamicPageHeaderComponent } from './dynamic-page-header/header/dynamic-page-header.component';
+import { DynamicPageFooterComponent } from './dynamic-page-footer/dynamic-page-footer.component';
 import { DynamicPageWrapperDirective } from './dynamic-page-wrapper.directive';
 import { DynamicPageService } from './dynamic-page.service';
 import { addClassNameToElement, dynamicPageWidthToSize } from './utils';
 import { TabListComponent } from '@fundamental-ngx/core/tabs';
 import { FlexibleColumnLayoutComponent } from '@fundamental-ngx/core/flexible-column-layout';
 
-import { fromEvent, Observable, Subject } from 'rxjs';
-import { debounceTime, delay, map, takeUntil } from 'rxjs/operators';
+import { asyncScheduler, fromEvent, Observable, startWith, Subject } from 'rxjs';
+import { debounceTime, delay, map, observeOn, takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-dynamic-page',
@@ -98,8 +101,12 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
     _headerComponent: DynamicPageHeaderComponent;
 
     /** @hidden reference to content component  */
-    @ContentChild(DynamicPageContentComponent)
-    _contentComponent: DynamicPageContentComponent;
+    @ContentChildren(DynamicPageContentComponent, { descendants: true })
+    _contentComponent: QueryList<DynamicPageContentComponent>;
+
+    /** @hidden reference to footer component  */
+    @ContentChild(DynamicPageFooterComponent)
+    _footerComponent: DynamicPageContentComponent;
 
     /** @hidden reference to tab component */
     @ContentChild(TabListComponent)
@@ -132,6 +139,8 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
         this._listenOnResize();
         this._listenOnCollapse();
         this._propagatePropertiesToChildren();
+        this._setContentFooterSpacer();
+
         if (this._pageSubheaderComponent?.collapsible) {
             this._addScrollListeners();
         }
@@ -141,6 +150,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
         }
 
         setTimeout(() => this._setContainerPositions());
+
         this._cd.detectChanges();
     }
 
@@ -232,9 +242,10 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
         const tabElement = this._tabComponent?.contentContainer?.nativeElement;
         if (tabElement) {
             this._listenOnScroll(tabElement);
+            return;
         }
 
-        const contentElement = this._contentComponent?.elementRef?.nativeElement;
+        const contentElement = this._contentComponent.first?.elementRef?.nativeElement;
         if (contentElement) {
             this._listenOnScroll(contentElement);
         }
@@ -298,5 +309,23 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
                 DYNAMIC_PAGE_CLASS_NAME.dynamicPageCollapsibleHeaderPinCollapseNoShadow
             );
         }
+    }
+
+    /** @hidden */
+    private _setContentFooterSpacer(): void {
+        this._contentComponent.changes
+            .pipe(startWith(this._contentComponent.toArray()), observeOn(asyncScheduler), takeUntil(this._onDestroy$))
+            .subscribe((components) => {
+                components.forEach((content, index) => {
+                    /** show spacer when:
+                     * a) footer + no tabs = only last
+                     * b) footer + tabs, not stacked = all
+                     * c) footer + tabs, stacked = only last
+                     */
+                    content._toggleSpacer(
+                        this._footerComponent && (!this._tabComponent?.stackContent || index === components.length - 1)
+                    );
+                });
+            });
     }
 }

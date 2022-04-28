@@ -30,7 +30,9 @@ export class SectionsToolbarComponent implements OnInit, OnChanges {
         return window.innerWidth < SMALL_SCREEN_BREAKPOINT;
     }
 
-    constructor() {}
+    /** @hidden type enforcing */
+    $asSectionNestedContent = (sectionContent: SectionInterfaceContent[]): SectionInterfaceContentNested[] =>
+        <any>sectionContent;
 
     ngOnInit(): void {
         this.onActivate();

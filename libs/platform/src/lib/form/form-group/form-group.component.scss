@@ -5,7 +5,7 @@
 
 fdp-form-group {
     // resize observer won't work with inline elements
-    display: inline-block;
+    display: block;
 }
 
 .fd-form-layout-grid-container {

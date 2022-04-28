@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { Placement } from '@fundamental-ngx/core/shared';
+import { InlineHelpFormPlacement } from '../inline-help-placement.type';
 
 /**
  * Label to be linked to a form control.
@@ -35,6 +36,11 @@ export class FormLabelComponent implements OnChanges {
     @Input()
     radio = false;
 
+    /** Align label on end */
+    @Input()
+    @HostBinding('class.fd-form-label__wrapper--align-end')
+    alignLabelEnd = false;
+
     /** Inline help body text */
     @Input()
     inlineHelpTitle: string = null;
@@ -42,6 +48,10 @@ export class FormLabelComponent implements OnChanges {
     /** Glyph of icon triggering inline help */
     @Input()
     inlineHelpGlyph = 'question-mark';
+
+    /** Trigger event names for the inline help */
+    @Input()
+    inlineHelpTriggers: string[] = ['mouseenter', 'mouseleave', 'focusin', 'focusout'];
 
     /**
      * The placement of the inline help.
@@ -54,7 +64,7 @@ export class FormLabelComponent implements OnChanges {
 
     /** If inline help trigger icon should be placed after, or before text */
     @Input()
-    inlineHelpPlacement: 'before' | 'after' = 'after';
+    inlineHelpPlacement: InlineHelpFormPlacement = 'after';
 
     /** @hidden */
     @HostBinding('class.fd-form-label__wrapper')
@@ -63,7 +73,6 @@ export class FormLabelComponent implements OnChanges {
     /** @hidden */
     @HostBinding('class.fd-form-label__wrapper--inline-help')
     inlineHelpClass = true;
-
     /** @hidden */
     @HostBinding('class.fd-form-label__wrapper--inline-help--after')
     inlineHelpAfter = true;

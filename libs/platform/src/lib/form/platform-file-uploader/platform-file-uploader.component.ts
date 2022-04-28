@@ -15,7 +15,8 @@ import {
 import { NgControl, NgForm } from '@angular/forms';
 
 import { ContentDensity } from '@fundamental-ngx/core/utils';
-import { BaseInput, ControlState, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
+import { FormStates } from '@fundamental-ngx/core/shared';
+import { BaseInput, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
 
 export class FileUploaderInvalidChangeEvent {
     constructor(
@@ -84,14 +85,14 @@ export class PlatformFileUploaderComponent extends BaseInput implements OnInit {
      * @deprecated
      * set state of individual checkbox. Used by CBG to set checkbox states */
     @Input()
-    get stateType(): ControlState {
+    get stateType(): FormStates {
         if (isDevMode()) {
             console.warn('"stateType" is deprecated. Use "state" instead');
         }
         return super.state;
     }
 
-    set stateType(state: ControlState) {
+    set stateType(state: FormStates) {
         if (isDevMode()) {
             console.warn('"stateType" is deprecated. Use "state" instead');
         }

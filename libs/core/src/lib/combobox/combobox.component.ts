@@ -40,7 +40,6 @@ import { Subscription } from 'rxjs';
 
 import { ListComponent, ListMessageDirective } from '@fundamental-ngx/core/list';
 import {
-    GroupFunction,
     KeyUtil,
     AutoCompleteEvent,
     DynamicComponentService,
@@ -57,6 +56,7 @@ import { ComboboxMobileModule } from './combobox-mobile/combobox-mobile.module';
 import { ComboboxMobileComponent } from './combobox-mobile/combobox-mobile.component';
 import { COMBOBOX_COMPONENT, ComboboxInterface } from './combobox.interface';
 import { ComboboxItem } from './combobox-item';
+import { GroupFunction } from './list-group.pipe';
 
 let comboboxUniqueId = 0;
 

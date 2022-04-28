@@ -1,7 +1,7 @@
 import { AbstractControlOptions, AsyncValidatorFn, FormControl, FormGroup, ValidatorFn } from '@angular/forms';
 
 import { DynamicAbstractControlOptions } from './interfaces/dynamic-abstract-control';
-import { DynamicFormFieldGroup, DynamicFormFieldItem } from './interfaces/dynamic-form-item';
+import { DynamicFormFieldGroup, PreparedDynamicFormFieldItem } from './interfaces/dynamic-form-item';
 
 export type DynamicFormGroupControl = DynamicFormControl | DynamicFormControlGroup;
 
@@ -26,7 +26,7 @@ export class DynamicFormControlGroup extends FormGroup {
 }
 
 export class DynamicFormControl extends FormControl {
-    public formItem: DynamicFormFieldItem;
+    public formItem: PreparedDynamicFormFieldItem;
     public type = 'field';
 
     /**

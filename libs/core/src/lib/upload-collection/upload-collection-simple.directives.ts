@@ -1,5 +1,15 @@
-import { ContentChildren, Directive, ElementRef, HostBinding, QueryList } from '@angular/core';
+import {
+    ContentChildren,
+    Directive,
+    ElementRef,
+    HostBinding,
+    Inject,
+    OnInit,
+    Optional,
+    QueryList
+} from '@angular/core';
 import { ObjectMarkerComponent } from '@fundamental-ngx/core/object-marker';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
@@ -37,6 +47,21 @@ export class UploadCollectionTextSeparatorDirective {}
     host: { class: 'fd-upload-collection__status-group' }
 })
 export class UploadCollectionStatusGroupDirective {}
+
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
+    selector: '[fd-upload-collection-status-item]',
+    host: { class: 'fd-upload-collection__status-group-item' }
+})
+export class UploadCollectionStatusItemDirective implements OnInit {
+    constructor(@Optional() @Inject(ObjectStatusComponent) private _objectStatus: ObjectStatusComponent) {}
+
+    ngOnInit(): void {
+        if (this._objectStatus) {
+            this._objectStatus._textClass += ' fd-upload-collection__status-group-item-text';
+        }
+    }
+}
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector

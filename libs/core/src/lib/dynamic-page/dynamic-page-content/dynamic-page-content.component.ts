@@ -1,5 +1,6 @@
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ElementRef,
     Input,
@@ -32,7 +33,14 @@ export class DynamicPageContentComponent implements OnInit {
     id: string;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef<HTMLElement>, public _renderer: Renderer2) {}
+    _showSpacer = false;
+
+    /** @hidden */
+    constructor(
+        public _renderer: Renderer2,
+        private _elementRef: ElementRef<HTMLElement>,
+        private _cdr: ChangeDetectorRef
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -42,6 +50,13 @@ export class DynamicPageContentComponent implements OnInit {
     /** Element reference to host of content dynamic page */
     get elementRef(): ElementRef {
         return this._elementRef;
+    }
+
+    /** @hidden */
+    _toggleSpacer(state: boolean): void {
+        this._showSpacer = state;
+
+        this._cdr.markForCheck();
     }
 
     /** @hidden */

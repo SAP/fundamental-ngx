@@ -10,6 +10,7 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { FormMessageModule } from '@fundamental-ngx/core/form';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 
 @NgModule({
     declarations: [DatetimePickerComponent],
@@ -23,6 +24,7 @@ import { FormMessageModule } from '@fundamental-ngx/core/form';
         InputGroupModule,
         ButtonModule,
         BarModule,
+        SegmentedButtonModule,
         FormMessageModule
     ],
     exports: [DatetimePickerComponent]

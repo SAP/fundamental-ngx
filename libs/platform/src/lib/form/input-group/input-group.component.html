@@ -17,7 +17,7 @@
             [ariaLabel]="ariaLabel"
             [ariaLabelledBy]="ariaLabelledBy"
             [required]="required"
-            (input)="_onChangeInputValue($event.target.value)"
+            (input)="_onChangeInputValue($any($event.target)?.value)"
             (focusChange)="_onFocusChanged($event)"
             (keypress)="_onKeyPress($event)"
         ></fdp-input>

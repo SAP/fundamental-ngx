@@ -2,7 +2,15 @@ import { AsyncValidatorFn, ValidatorFn } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 import { ContentDensity } from '@fundamental-ngx/core/utils';
-import { InlineLayout, ColumnLayout, HintPlacement, LabelLayout, SelectItem } from '@fundamental-ngx/platform/shared';
+import {
+    ColumnLayout,
+    FieldHintOptions,
+    HintOptions,
+    HintPlacement,
+    InlineLayout,
+    LabelLayout,
+    SelectItem
+} from '@fundamental-ngx/platform/shared';
 import { InputType } from '../../input/input.component';
 import { DynamicFormGroup } from './dynamic-form-group';
 import { DynamicFormControl, DynamicFormGroupControl } from '../dynamic-form-control';
@@ -84,7 +92,7 @@ export interface DynamicFormFieldItem {
 
     /**
      * @description
-     * If true, will fallback to `message` property if `placeholder` was not provided.
+     * If true, will fall back to `message` property if `placeholder` was not provided.
      */
     useMessageAsPlaceholder?: boolean;
 
@@ -211,6 +219,19 @@ export interface DynamicFormFieldItem {
     rank?: number;
 }
 
+type PreparedDynamicFormFieldItemFields = {
+    message: string;
+    placeholder?: string;
+    choices?: SelectItem[];
+};
+
+/**
+ * @hidden
+ * Internal representation of DynamicFormFieldItem with all fields resolved to a plain value
+ */
+export type PreparedDynamicFormFieldItem = Omit<DynamicFormFieldItem, keyof PreparedDynamicFormFieldItemFields> &
+    PreparedDynamicFormFieldItemFields;
+
 export interface BaseDynamicFormItemGuiOptions {
     /**
      * @description
@@ -229,6 +250,19 @@ export interface BaseDynamicFormItemGuiOptions {
      * Defines gap column layout.
      */
     gapColumnLayout?: ColumnLayout;
+
+    /**
+     * @description
+     * If set, hint icon is added to control label or group heading with tooltip message as a value.
+     */
+    hint?: string | HintOptions;
+
+    /**
+     * @deprecated Use `hint.placement` instead
+     * @description
+     * Define hint placement.
+     */
+    hintPlacement?: HintPlacement;
 }
 
 export interface DynamicFormItemGuiOptions extends BaseDynamicFormItemGuiOptions {
@@ -249,18 +283,6 @@ export interface DynamicFormItemGuiOptions extends BaseDynamicFormItemGuiOptions
      * Inline layout for list based form item.
      */
     inlineLayout?: InlineLayout;
-
-    /**
-     * @description
-     * If set, hint icon is added to control label with tooltip message as a value.
-     */
-    hint?: string;
-
-    /**
-     * @description
-     * Define hint placement.
-     */
-    hintPlacement?: HintPlacement;
 
     /**
      * @deprecated
@@ -297,8 +319,11 @@ export interface DynamicFormItemGuiOptions extends BaseDynamicFormItemGuiOptions
      * If label should be appended with colon. True by default.
      */
     appendColon?: boolean;
+
+    /**
+     * Hint options. Either only text or full config
+     */
+    hint?: string | FieldHintOptions;
 }
 
-export interface DynamicFormValue {
-    [key: string]: any;
-}
+export type DynamicFormValue = Record<string, any>;

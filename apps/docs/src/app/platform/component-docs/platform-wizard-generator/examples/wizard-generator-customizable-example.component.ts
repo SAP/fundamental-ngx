@@ -163,7 +163,7 @@ export class WizardGeneratorCustomizableExampleComponent implements OnDestroy {
             });
     }
 
-    _editStep(event: MouseEvent, stepId: string, callback: (stepId: string) => void): void {
+    _editStep(event: Event, stepId: string, callback: (stepId: string) => void): void {
         event.preventDefault();
         callback(stepId);
     }

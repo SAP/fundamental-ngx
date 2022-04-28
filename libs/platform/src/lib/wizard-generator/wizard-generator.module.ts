@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { DialogModule } from '@fundamental-ngx/core/dialog';
@@ -8,7 +8,11 @@ import { TitleModule } from '@fundamental-ngx/core/title';
 import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
 import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
 import { FormLabelModule } from '@fundamental-ngx/core/form';
-import { PlatformFormGeneratorModule } from '@fundamental-ngx/platform/form';
+import {
+    DynamicFormFieldItem,
+    FORM_GENERATOR_ITEM_CONFIG,
+    PlatformFormGeneratorModule
+} from '@fundamental-ngx/platform/form';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { WizardGeneratorStepComponent } from './components/wizard-generator-step/wizard-generator-step.component';
 import { WizardBodyComponent } from './components/wizard-body/wizard-body.component';
@@ -22,6 +26,13 @@ import { WizardGeneratorComponent } from './components/wizard-generator/wizard-g
 import { WizardGeneratorSummaryStepDirective } from './directives/wizard-generator-summary-step.directive';
 import { WizardGeneratorReviewButtonDirective } from './directives/wizard-generator-review-button.directive';
 
+/**
+ * Adds Wizard Generator functionality to your application.
+ *
+ * Can be imported in two ways:
+ * * Plain PlatformWizardGeneratorModule with default configuration
+ * * With `withConfig()` method which allows passing custom default configuration.
+ */
 @NgModule({
     declarations: [
         WizardGeneratorComponent,
@@ -62,4 +73,20 @@ import { WizardGeneratorReviewButtonDirective } from './directives/wizard-genera
     ],
     providers: [WizardDialogGeneratorService]
 })
-export class PlatformWizardGeneratorModule {}
+export class PlatformWizardGeneratorModule {
+    /**
+     * Allows configuring module on a global level with custom configuration.
+     * @param config User's custom configuration.
+     */
+    static withConfig(config: Partial<DynamicFormFieldItem>): ModuleWithProviders<PlatformWizardGeneratorModule> {
+        return {
+            ngModule: PlatformWizardGeneratorModule,
+            providers: [
+                {
+                    provide: FORM_GENERATOR_ITEM_CONFIG,
+                    useValue: config
+                }
+            ]
+        };
+    }
+}

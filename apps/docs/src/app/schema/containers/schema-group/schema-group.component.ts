@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
-import { Property } from '../../models/schema.model';
+import { Properties } from '../../models/schema.model';
 
 @Component({
     selector: 'schema-group',
@@ -9,7 +9,7 @@ import { Property } from '../../models/schema.model';
 })
 export class SchemaGroupComponent implements OnInit {
     @Input() schemaGroup: FormGroup;
-    @Input() properties: Property;
+    @Input() properties: Properties;
 
     /**
      * Is current playground can be resetted.
@@ -20,7 +20,7 @@ export class SchemaGroupComponent implements OnInit {
         key: string;
         control: AbstractControl;
         type: string;
-        enum: [any];
+        enum: any[];
     }> = [];
 
     /**
@@ -45,7 +45,7 @@ export class SchemaGroupComponent implements OnInit {
     }
 
     /** @hidden */
-    _isFormControl(form: FormControl | FormGroup): boolean {
+    _isFormControl(form: AbstractControl): boolean {
         return form instanceof FormControl;
     }
 

@@ -11,22 +11,27 @@ import {
     Inject,
     Input,
     isDevMode,
+    OnChanges,
     OnDestroy,
     OnInit,
     Optional,
     Output,
     Provider,
+    Self,
+    SimpleChanges,
+    SkipSelf,
     TemplateRef,
     ViewChild
 } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { BooleanInput, coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
-import { Subject } from 'rxjs';
-import { startWith, takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, filter, Observable, Subject, Subscription, tap } from 'rxjs';
+import { map, startWith, switchMap, takeUntil } from 'rxjs/operators';
 
 import {
     Column,
     ColumnLayout,
+    FieldHintOptions,
     FormField,
     FormFieldControl,
     FormFieldGroup,
@@ -44,9 +49,16 @@ import {
     DefaultVerticalLabelLayout,
     FORM_GROUP_CHILD_FIELD_TOKEN
 } from '../constants';
-import { normalizeColumnLayout, generateColumnClass } from '../helpers';
-import { FormFieldControlExtrasComponent } from './../form-field-extras/form-field-extras.component';
+import { generateColumnClass, normalizeColumnLayout } from '../helpers';
+import { FormFieldControlExtrasComponent } from '../form-field-extras/form-field-extras.component';
 import { InputMessageGroupWithTemplate } from '../../input-message-group-with-template/input-message-group-with-template.component';
+import {
+    FDP_FORM_FIELD_HINT_LAYOUT_CONFIG,
+    FDP_FORM_FIELD_HINT_OPTIONS_DEFAULT,
+    HintLayoutConfig
+} from '../fdp-form.tokens';
+import { FormFieldLayoutService } from '../services/form-field-layout.service';
+import { defaultFormFieldHintOptions } from '../config/default-form-field-hint-options';
 
 const formFieldProvider: Provider = {
     provide: FormField,
@@ -70,9 +82,9 @@ const formGroupChildProvider: Provider = {
     templateUrl: 'form-field.component.html',
     styleUrls: ['./form-field.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [formFieldProvider, formGroupChildProvider]
+    providers: [formFieldProvider, formGroupChildProvider, FormFieldLayoutService]
 })
-export class FormFieldComponent implements FormField, AfterContentInit, AfterViewInit, OnDestroy, OnInit {
+export class FormFieldComponent implements FormField, AfterContentInit, AfterViewInit, OnDestroy, OnInit, OnChanges {
     /** Form field label */
     @Input()
     label: string;
@@ -84,14 +96,15 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     id: string;
 
     /**
+     * @deprecated use `hint.placement` input instead
      * Defines hint placement
      */
     @Input()
-    hintPlacement: HintPlacement = 'right';
+    hintPlacement: HintPlacement;
 
     /** Hint to be placed next to label */
     @Input()
-    hint: string;
+    hint: string | FieldHintOptions;
 
     /**
      * @deprecated
@@ -131,7 +144,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
     /**
      * Rank is used for ordering.
-     * Than lower number then higher priority
+     * First lower number, then - higher
      */
     @Input()
     rank: number;
@@ -170,9 +183,9 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         if (!value) {
             return;
         }
-
         this._labelColumnLayout = normalizeColumnLayout(value);
         this._labelColumnLayoutClass = generateColumnClass(this._labelColumnLayout);
+        this._labelColumnLayout$.next(this._labelColumnLayout);
     }
 
     /**
@@ -190,6 +203,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
         this._fieldColumnLayout = normalizeColumnLayout(value);
         this._fieldColumnLayoutClass = generateColumnClass(this._fieldColumnLayout);
+        this._fieldColumnLayout$.next(this._fieldColumnLayout);
     }
 
     /**
@@ -207,6 +221,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
         this._gapColumnLayout = normalizeColumnLayout(value);
         this._gapColumnLayoutClass = generateColumnClass(this._gapColumnLayout);
+        this._gapColumnLayout$.next(this._gapColumnLayout);
     }
 
     /**
@@ -295,6 +310,9 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     @ViewChild(InputMessageGroupWithTemplate, { read: ElementRef })
     inputMessageGroup: ElementRef<HTMLElement>;
 
+    /** @hidden */
+    isHorizontal$: Observable<boolean>;
+
     /**
      * Child FormFieldControl
      */
@@ -308,6 +326,11 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
     /** @hidden */
     _gapColumnLayoutClass: string;
+
+    /**
+     * hint and hint placement coerced to the FieldHintOptions
+     */
+    hintOptions: FieldHintOptions = defaultFormFieldHintOptions as unknown as FieldHintOptions;
 
     /**
      * @hidden
@@ -349,7 +372,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     private _columnLayout: ColumnLayout;
 
     /** @hidden */
-    private _responsiveBreakPointConfig: ResponsiveBreakPointConfig;
+    private readonly _responsiveBreakPointConfig: ResponsiveBreakPointConfig;
 
     /** @hidden */
     private _labelLayout: LabelLayout;
@@ -359,7 +382,6 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
     /** @hidden */
     private _fieldColumnLayout: ColumnLayout;
-
     /** @hidden */
     private _gapColumnLayout: ColumnLayout;
 
@@ -390,6 +412,34 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     }
 
     /** @hidden */
+    private _labelColumnLayout$: BehaviorSubject<ColumnLayout>;
+    /** @hidden */
+    private _fieldColumnLayout$: BehaviorSubject<ColumnLayout>;
+    /** @hidden */
+    private _gapColumnLayout$: BehaviorSubject<ColumnLayout>;
+    /** @hidden */
+    private _needsInlineHelpPlaceSubscription: Subscription;
+
+    /** @hidden */
+    get _groupHost(): FormGroupContainer | FormFieldGroup {
+        return this.formFieldGroup ? this.formFieldGroup : this.formGroupContainer;
+    }
+
+    /**
+     * Will be updated during onChanges and resize, resulting correct placement of the
+     * hint respecting passed configs and given breakpoint of screen.
+     */
+    hintTarget: string;
+
+    /** @hidden */
+    private _breakPointObserver: Observable<any>;
+
+    /** @hidden */
+    private _formFieldLayoutService: FormFieldLayoutService;
+    /** @hidden */
+    private readonly _defaultHintOptions: FieldHintOptions;
+
+    /** @hidden */
     constructor(
         private _cd: ChangeDetectorRef,
         @Optional() formGroupContainer: FormGroupContainer,
@@ -397,8 +447,20 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         @Optional()
         @Inject(RESPONSIVE_BREAKPOINTS_CONFIG)
         readonly _defaultResponsiveBreakPointConfig: ResponsiveBreakPointConfig,
-        readonly _responsiveBreakpointsService: ResponsiveBreakpointsService
+        readonly _responsiveBreakpointsService: ResponsiveBreakpointsService,
+        @Inject(FDP_FORM_FIELD_HINT_OPTIONS_DEFAULT) _providedHintOptions: FieldHintOptions,
+        @Inject(FDP_FORM_FIELD_HINT_LAYOUT_CONFIG) private _hintLayoutConfig: HintLayoutConfig,
+        @Self() _selfFormFieldLayoutService: FormFieldLayoutService,
+        @Optional() @SkipSelf() _parentFormFieldLayoutService: FormFieldLayoutService
     ) {
+        this._defaultHintOptions = {
+            ...defaultFormFieldHintOptions,
+            ..._providedHintOptions
+        };
+        this._formFieldLayoutService = _parentFormFieldLayoutService || _selfFormFieldLayoutService;
+        this._labelColumnLayout$ = new BehaviorSubject(this._labelColumnLayout);
+        this._fieldColumnLayout$ = new BehaviorSubject(this._fieldColumnLayout);
+        this._gapColumnLayout$ = new BehaviorSubject(this._gapColumnLayout);
         // provides capability to make a field disabled. useful in reactive form approach.
         this.formControl = new FormControl({ value: null, disabled: this.disabled });
         // formGroupContainer can be injected only if current form-field is located
@@ -409,6 +471,9 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         // component input annotation
         this.formGroupContainer = formGroupContainer;
         this._responsiveBreakPointConfig = _defaultResponsiveBreakPointConfig || new ResponsiveBreakPointConfig();
+        this._breakPointObserver = this._responsiveBreakpointsService.observeBreakpointByConfig(
+            this._responsiveBreakPointConfig
+        );
     }
 
     /**
@@ -419,12 +484,26 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         if (this.labelColumnLayout) {
             return;
         }
+        this.listenToInlineHelpPlaceRequirementChanges(() => (this.labelColumnLayout ? this : this._groupHost));
+    }
 
-        const groupHost = this.formFieldGroup ? this.formFieldGroup : this.formGroupContainer;
-
-        this.labelColumnLayout = groupHost.labelColumnLayout;
-        this.fieldColumnLayout = groupHost.fieldColumnLayout;
-        this.gapColumnLayout = groupHost.gapColumnLayout;
+    listenToInlineHelpPlaceRequirementChanges(getSource: () => any): void {
+        if (this._needsInlineHelpPlaceSubscription) {
+            this._needsInlineHelpPlaceSubscription.unsubscribe();
+            this._needsInlineHelpPlaceSubscription = void 0;
+        }
+        const setLayouts = (source: any): void => {
+            this.labelColumnLayout = source.labelColumnLayout;
+            this.fieldColumnLayout = source.fieldColumnLayout;
+            this.gapColumnLayout = source.gapColumnLayout;
+        };
+        this._needsInlineHelpPlaceSubscription = this._formFieldLayoutService.needsInlineHelpPlace
+            .pipe(
+                map(() => this._formFieldLayoutService.getFixedLayouts(getSource())),
+                tap(setLayouts),
+                takeUntil(this._destroyed$)
+            )
+            .subscribe();
     }
 
     /** @hidden */
@@ -434,13 +513,52 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         }
 
         if (this._isColumnLayoutEnabled) {
-            this._responsiveBreakpointsService
-                .observeBreakpointByConfig(this._responsiveBreakPointConfig)
+            this._breakPointObserver
                 .pipe(takeUntil(this._destroyed$))
                 .subscribe((breakPointName) => this._updateLayout(breakPointName));
         }
 
         this._addToFormGroup();
+
+        this.isHorizontal$ = combineLatest([
+            this._labelColumnLayout$.pipe(filter(Boolean), map(normalizeColumnLayout)),
+            this._fieldColumnLayout$.pipe(filter(Boolean), map(normalizeColumnLayout)),
+            this._gapColumnLayout$.pipe(map((g) => normalizeColumnLayout(g || { S: 0 })))
+        ]).pipe(
+            switchMap(([label, field, gap]) =>
+                this._breakPointObserver.pipe(
+                    map((breakpointName) => label[breakpointName] + field[breakpointName] + gap[breakpointName] <= 12)
+                )
+            )
+        );
+        this.listenToInlineHelpPlaceRequirementChanges(() => this);
+    }
+
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes.hint || changes.hintPlacement) {
+            this._updateHintOptions();
+            this._formFieldLayoutService.setNeedsInlineHelp(
+                this,
+                this.hintOptions.target === 'input' || this.hintOptions.target === 'auto'
+            );
+        }
+        if (changes.hint && changes.hint.firstChange) {
+            this._breakPointObserver
+                .pipe(
+                    tap((sizeName) => {
+                        if (this.hintOptions.target === 'auto') {
+                            this.hintTarget = this._hintLayoutConfig.hintOnInputBreakpoints.includes(sizeName)
+                                ? 'input'
+                                : 'label';
+                        } else {
+                            this.hintTarget = this.hintOptions.target;
+                        }
+                    }),
+                    takeUntil(this._destroyed$)
+                )
+                .subscribe();
+        }
     }
 
     /** @hidden */
@@ -457,6 +575,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
     /** @hidden */
     ngOnDestroy(): void {
+        this._formFieldLayoutService.removeEntry(this);
         this._removeFromFormGroup();
         this._destroyed$.next();
         this._destroyed$.complete();
@@ -658,5 +777,23 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
         // emit column change, so form-group knows it and re-arranges the fields
         this.onColumnChange.emit(true);
+    }
+
+    /** @hidden */
+    private _updateHintOptions(): void {
+        // placement is here set up because hintPlacement is deprecated
+        if (typeof this.hint === 'string') {
+            this.hintOptions = {
+                ...this._defaultHintOptions,
+                placement: this.hintPlacement ? this.hintPlacement : this._defaultHintOptions.placement,
+                text: this.hint
+            };
+        } else {
+            this.hintOptions = {
+                ...this._defaultHintOptions,
+                placement: this.hintPlacement ? this.hintPlacement : this._defaultHintOptions.placement,
+                ...this.hint
+            };
+        }
     }
 }

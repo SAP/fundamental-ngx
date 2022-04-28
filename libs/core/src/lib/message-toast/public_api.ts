@@ -4,3 +4,4 @@ export * from './message-toast.component';
 export * from './message-toast-utils/message-toast-ref';
 export * from './message-toast-utils/message-toast-config';
 export * from './message-toast-utils/message-toast-container.component';
+export * from './constants';

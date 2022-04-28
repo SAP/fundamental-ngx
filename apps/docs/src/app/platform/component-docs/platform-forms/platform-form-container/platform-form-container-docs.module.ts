@@ -6,16 +6,16 @@ import { SharedDocumentationPageModule } from '../../../../documentation/shared-
 
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import {
-    PlatformTextAreaModule,
     FdpFormGroupModule,
-    PlatformRadioGroupModule,
-    PlatformInputModule,
     PlatformCheckboxGroupModule,
-    PlatformStepInputModule,
-    PlatformInputGroupModule,
-    PlatformSwitchModule,
     PlatformComboboxModule,
-    PlatformSelectModule
+    PlatformInputGroupModule,
+    PlatformInputModule,
+    PlatformRadioGroupModule,
+    PlatformSelectModule,
+    PlatformStepInputModule,
+    PlatformSwitchModule,
+    PlatformTextAreaModule
 } from '@fundamental-ngx/platform/form';
 import { PlatformFormContainerDocsComponent } from './platform-form-container-docs.component';
 import { PlatformFormContainerRecommendedExampleComponent } from './platform-form-container-examples/platform-form-container-recommended-example.component';
@@ -28,6 +28,7 @@ import { PlatformFormGroupExampleComponent } from './platform-form-container-exa
 import { PlatformFieldColumnChangeExampleComponent } from './platform-form-container-examples/platform-field-layout/platform-field-column-change-example.component';
 import { PlatformFieldIsInlineChangeExampleComponent } from './platform-form-container-examples/platform-field-layout/platform-field-isinline-change-example.component';
 import { PlatformFormCustomLayoutComponent } from './platform-form-container-examples/platform-form-custom-layout.component';
+import { TableModule } from '@fundamental-ngx/core/table';
 
 const routes: Routes = [
     {
@@ -54,7 +55,8 @@ const routes: Routes = [
         PlatformSwitchModule,
         PlatformComboboxModule,
         PlatformSelectModule,
-        FdpFormGroupModule
+        FdpFormGroupModule,
+        TableModule
     ],
     exports: [RouterModule],
     declarations: [

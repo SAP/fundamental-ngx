@@ -9,7 +9,7 @@ import { delay, switchMap, startWith } from 'rxjs/operators';
 })
 export class MultiInputAsyncExampleComponent {
     readonly searchValue$ = new Subject<string>();
-    readonly dropdownValues$: Observable<ReadonlyArray<OptionItem>>;
+    readonly dropdownValues$: Observable<OptionItem[]>;
     selected = [];
 
     displayFn = (v): string => v.label;
@@ -29,7 +29,7 @@ export class MultiInputAsyncExampleComponent {
     /**
      * Server request emulation
      */
-    private serverRequest(searchQuery: string): Observable<ReadonlyArray<OptionItem>> {
+    private serverRequest(searchQuery: string): Observable<OptionItem[]> {
         const preparedQuery = searchQuery.trim().toLowerCase();
         const result = MOCK_DATA.filter((item) => item.value.toLowerCase().startsWith(preparedQuery)).slice(0, 5);
 

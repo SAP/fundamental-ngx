@@ -5,19 +5,13 @@ import {
     Host,
     Input,
     OnChanges,
-    OnDestroy,
     OnInit,
     Optional,
     SimpleChanges,
     TemplateRef
 } from '@angular/core';
 
-import { BehaviorSubject, of, Subject } from 'rxjs';
-import { map, switchMap, takeUntil } from 'rxjs/operators';
-
-import { RtlService } from '@fundamental-ngx/core/utils';
-
-import { ColumnAlign } from '../../enums/column-align.enum';
+import { ColumnAlignValue } from '../../enums/column-align.enum';
 import { FilterableColumnDataType } from '../../enums/filter-type.enum';
 import { FdpCellDef, FdpEditableCellDef } from '../../directives/table-cell.directive';
 import { FdpHeaderCellDef } from '../../directives/table-header.directive';
@@ -25,12 +19,6 @@ import { FdpHeaderCellDef } from '../../directives/table-header.directive';
 import { TableColumn } from './table-column';
 import { TableService } from '../../table.service';
 import { TableColumnResizeService } from '../../table-column-resize.service';
-
-enum ColumnAlignEnum {
-    Start = 'left',
-    Center = 'center',
-    End = 'right'
-}
 
 /**
  * The component that represents a table column.
@@ -58,7 +46,7 @@ enum ColumnAlignEnum {
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: TableColumn, useExisting: TableColumnComponent }]
 })
-export class TableColumnComponent extends TableColumn implements OnInit, OnChanges, OnDestroy {
+export class TableColumnComponent extends TableColumn implements OnInit, OnChanges {
     /** Column unique identifier. */
     @Input()
     name: string;
@@ -72,30 +60,7 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
     label: string;
 
     /** Cell text alignment. */
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    /** @ts-ignore */
-    @Input() set align(align: ColumnAlign) {
-        let _align = ColumnAlignEnum.Start;
-
-        switch (align) {
-            case ColumnAlign.CENTER:
-                _align = ColumnAlignEnum.Center;
-                break;
-            case ColumnAlign.END:
-                _align = ColumnAlignEnum.End;
-                break;
-            case ColumnAlign.START:
-                _align = ColumnAlignEnum.Start;
-        }
-
-        this._align$.next(_align);
-    }
-
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    /** @ts-ignore */
-    get align(): string {
-        return this._align;
-    }
+    @Input() align: ColumnAlignValue = 'start';
 
     /** Toggles sort feature for the column. */
     @Input()
@@ -161,21 +126,11 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
     }
 
     /** @hidden */
-    private _align$: BehaviorSubject<ColumnAlignEnum> = new BehaviorSubject<ColumnAlignEnum>(null);
-
-    /** @hidden */
-    private _align: ColumnAlignEnum;
-
-    /** @hidden */
-    private _destroyed = new Subject<void>();
-
-    /** @hidden */
     private _width: string;
 
     /** @hidden */
     constructor(
         @Optional() @Host() private readonly _tableService: TableService,
-        @Optional() private readonly _rtlService: RtlService,
         private readonly _tableColumnResizeService: TableColumnResizeService
     ) {
         super();
@@ -184,65 +139,20 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
     /** @hidden */
     ngOnInit(): void {
         this._validateNameOption();
-
-        this._listenToAlign();
     }
 
     /** Table won't know about column properties update so notify about it manually
      * @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        if (
-            this._tableService &&
-            (changes.sortable?.currentValue !== changes.sortable?.previousValue ||
-                changes.filterable?.currentValue !== changes.filterable?.previousValue ||
-                changes.groupable?.currentValue !== changes.groupable?.previousValue ||
-                changes.freezable?.currentValue !== changes.freezable?.previousValue)
-        ) {
+        if (this._tableService && (changes.sortable || changes.filterable || changes.groupable || changes.freezable)) {
             this._tableService.markForCheck();
         }
     }
 
     /** @hidden */
-    ngOnDestroy(): void {
-        this._destroyed.next();
-        this._destroyed.complete();
-    }
-
     private _validateNameOption(): void {
         if (typeof this.name !== 'string') {
             throw Error('fdp-column: "name" option is required.');
         }
-    }
-
-    /** @hidden */
-    private _listenToAlign(): void {
-        this._align$
-            .asObservable()
-            .pipe(
-                switchMap((align) => {
-                    if (!this._rtlService) {
-                        return of(align);
-                    }
-
-                    return this._rtlService.rtl.pipe(
-                        map((isRtl): ColumnAlignEnum => {
-                            if (isRtl && align === ColumnAlignEnum.Start) {
-                                return ColumnAlignEnum.End;
-                            }
-
-                            if (isRtl && align === ColumnAlignEnum.End) {
-                                return ColumnAlignEnum.Start;
-                            }
-
-                            return align;
-                        })
-                    );
-                }),
-                takeUntil(this._destroyed)
-            )
-            .subscribe((align) => {
-                this._align = align;
-                this._tableService?.markForCheck();
-            });
     }
 }

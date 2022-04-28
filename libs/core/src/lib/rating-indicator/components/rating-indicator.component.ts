@@ -253,11 +253,7 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
 
     /** @hidden */
     trackByFn(index: number, item: { id: string; value: number }): number | string {
-        if (item.id) {
-            return item.id;
-        }
-
-        return index;
+        return item.id;
     }
 
     /** @hidden */

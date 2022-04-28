@@ -3,8 +3,8 @@
     The Form Input Message Group has a built-in popover component which uses most of the
     <code>popover</code> properties.
     <br />
-    At a minimum, it should contain a control element and a <code>FormMessage</code>. The suggested elements to use with
-    this component are:
+    At a minimum, it should contain a control element and a <code>FormMessage</code>. The Form Message can be paired
+    with one of the components listed below:
     <ul>
         <li>Input</li>
         <li>Textarea</li>
@@ -16,3 +16,25 @@
     <fd-form-message-example></fd-form-message-example>
 </component-example>
 <code-example [exampleFiles]="formMessageExample"></code-example>
+
+<fd-docs-section-title id="input" componentName="form-message">Form Message State in Input Type </fd-docs-section-title>
+
+<description>
+    The Form Message offers four value states listed below:
+    <ul>
+        <li><b>Information</b>: The message is informative guiding the user on how to fill out the input.</li>
+        <li>
+            <b>Warning</b>: The message is giving the user warnings on the data input format although it doesn't stop
+            the user with moving forward.
+        </li>
+        <li>
+            <b>Error</b>: The message tells the user that the data entered is invalid and the user cannot move forward.
+        </li>
+        <li><b>Success</b>: The message shows that the user has entered the data correctly.</li>
+    </ul>
+    The value state message can be either a plain text or a formatted text.
+</description>
+<component-example>
+    <fd-form-messaging-state-example></fd-form-messaging-state-example>
+</component-example>
+<code-example [exampleFiles]="formMessagingStateExample"></code-example>

@@ -16,8 +16,11 @@ import { SchemaFactoryService } from './services/schema-factory/schema-factory.s
 // models
 import { Schema } from './models/schema.model';
 
+// pipes
+import { AsFormControlPipe, AsFormGroupPipe } from './pipes/type-casting.pipe';
+
 @NgModule({
-    declarations: [SchemaComponent, SchemaGroupComponent],
+    declarations: [SchemaComponent, SchemaGroupComponent, AsFormControlPipe, AsFormGroupPipe],
     imports: [CommonModule, ReactiveFormsModule, FundamentalNgxCoreModule, FundamentalNgxPlatformModule],
     exports: [SchemaComponent]
 })

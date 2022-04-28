@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -27,9 +27,19 @@ import { DynamicFormGeneratorSwitchComponent } from './dynamic-form-generator-sw
 import { FormGeneratorService } from './form-generator.service';
 import { FormGeneratorFieldComponent } from './form-generator-field/form-generator-field.component';
 import { DynamicFormGeneratorMultiInputComponent } from './dynamic-form-generator-multi-input/dynamic-form-generator-multi-input.component';
+import { GetOrderedFieldControlsPipe } from './pipes/get-ordered-form-controls.pipe';
 import { PlatformMultiComboboxModule } from '../multi-combobox/multi-combobox.module';
 import { PlatformMultiInputModule } from '../multi-input/multi-input.module';
+import { DynamicFormFieldItem } from './interfaces/dynamic-form-item';
+import { defaultFormGeneratorItemConfigProvider, FORM_GENERATOR_ITEM_CONFIG } from './providers/providers';
 
+/**
+ * Adds Form Generator functionality to your application.
+ *
+ * Can be imported in two ways:
+ * * Plain PlatformFormGeneratorModule with default configuration
+ * * With `withConfig()` method which allows passing custom default configuration.
+ */
 @NgModule({
     declarations: [
         FormGeneratorComponent,
@@ -43,7 +53,8 @@ import { PlatformMultiInputModule } from '../multi-input/multi-input.module';
         DynamicFormGeneratorDatepickerComponent,
         DynamicFormGeneratorSwitchComponent,
         FormGeneratorFieldComponent,
-        DynamicFormGeneratorMultiInputComponent
+        DynamicFormGeneratorMultiInputComponent,
+        GetOrderedFieldControlsPipe
     ],
     imports: [
         CommonModule,
@@ -64,7 +75,7 @@ import { PlatformMultiInputModule } from '../multi-input/multi-input.module';
         PlatformMultiComboboxModule,
         PlatformMultiInputModule
     ],
-    providers: [FormGeneratorService, FormGeneratorComponentsAccessorService],
+    providers: [FormGeneratorService, FormGeneratorComponentsAccessorService, defaultFormGeneratorItemConfigProvider],
     exports: [
         FormGeneratorComponent,
         DynamicFormControlFieldDirective,
@@ -79,4 +90,20 @@ import { PlatformMultiInputModule } from '../multi-input/multi-input.module';
         FormGeneratorFieldComponent
     ]
 })
-export class PlatformFormGeneratorModule {}
+export class PlatformFormGeneratorModule {
+    /**
+     * Allows configuring module on a global level with custom configuration.
+     * @param config User's custom configuration.
+     */
+    static withConfig(config: Partial<DynamicFormFieldItem>): ModuleWithProviders<PlatformFormGeneratorModule> {
+        return {
+            ngModule: PlatformFormGeneratorModule,
+            providers: [
+                {
+                    provide: FORM_GENERATOR_ITEM_CONFIG,
+                    useValue: config
+                }
+            ]
+        };
+    }
+}

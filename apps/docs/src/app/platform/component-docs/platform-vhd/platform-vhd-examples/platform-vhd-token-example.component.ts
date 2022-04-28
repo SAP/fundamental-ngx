@@ -59,9 +59,9 @@ export class PlatformVhdTokenExampleComponent implements OnInit {
 
     tokenizerFn = (row: ExampleTestModel): string => `${row.name} (Id: ${row.id})`;
 
-    valueChange($event: VhdValueChangeEvent<ExampleTestModel[]>): void {
-        console.log($event);
-        this.currentValue = $event;
-        this.selectedValue = [...($event.selected || [])];
+    valueChange(event: VhdValueChangeEvent<ExampleTestModel[]>): void {
+        console.log(event);
+        this.currentValue = event;
+        this.selectedValue = [...(event.selected || [])];
     }
 }

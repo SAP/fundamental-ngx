@@ -10,6 +10,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { PopoverComponent } from './popover.component';
 import { A11yModule } from '@angular/cdk/a11y';
 import { PopoverTriggerDirective } from './popover-trigger.directive';
+import { PopoverContainerDirective } from './popover-container/popover-container.directive';
 
 @NgModule({
     declarations: [
@@ -18,7 +19,8 @@ import { PopoverTriggerDirective } from './popover-trigger.directive';
         PopoverBodyHeaderDirective,
         PopoverBodyFooterDirective,
         PopoverComponent,
-        PopoverTriggerDirective
+        PopoverTriggerDirective,
+        PopoverContainerDirective
     ],
     imports: [CommonModule, OverlayModule, A11yModule],
     exports: [
@@ -27,7 +29,8 @@ import { PopoverTriggerDirective } from './popover-trigger.directive';
         PopoverBodyHeaderDirective,
         PopoverBodyFooterDirective,
         PopoverComponent,
-        PopoverTriggerDirective
+        PopoverTriggerDirective,
+        PopoverContainerDirective
     ],
     entryComponents: [PopoverBodyComponent]
 })

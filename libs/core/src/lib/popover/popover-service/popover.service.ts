@@ -17,6 +17,7 @@ import { GetDefaultPosition, PopoverPosition } from '@fundamental-ngx/core/share
 
 import { BasePopoverClass } from '../base/base-popover.class';
 import { PopoverBodyComponent } from '../popover-body/popover-body.component';
+import { PopoverContainerDirective } from '../popover-container/popover-container.directive';
 
 const MAX_BODY_SIZE = 99999999;
 
@@ -72,7 +73,8 @@ export class PopoverService extends BasePopoverClass {
         private _renderer: Renderer2,
         private _viewportRuler: ViewportRuler,
         private _injector: Injector,
-        @Optional() private _rtlService: RtlService
+        @Optional() private _rtlService: RtlService,
+        @Optional() private readonly _popoverContainer: PopoverContainerDirective
     ) {
         super();
 
@@ -102,6 +104,11 @@ export class PopoverService extends BasePopoverClass {
         if (this.isOpen) {
             this.open();
         }
+
+        // If wrapper container height changes outside, refresh popover position.
+        this._popoverContainer?.refreshPosition$.pipe(takeUntil(this._refresh$)).subscribe(() => {
+            this.refreshPosition();
+        });
     }
 
     /** Closes the popover. */

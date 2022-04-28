@@ -8,6 +8,7 @@ import { MessageToastComponent } from '../message-toast.component';
 import { MessageToastContainerComponent } from '../message-toast-utils/message-toast-container.component';
 import { MessageToastRef } from '../message-toast-utils/message-toast-ref';
 import { MessageToastConfig } from '../message-toast-utils/message-toast-config';
+import { MESSAGE_TOAST_CONFIG } from '../constants';
 
 @Component({
     template: ` <ng-template #testTemplate let-messageToast> Message Toast Test Content </ng-template> `
@@ -19,7 +20,14 @@ class TemplateTestComponent {
 @NgModule({
     declarations: [MessageToastComponent, MessageToastContainerComponent, TemplateTestComponent],
     imports: [CommonModule, BrowserModule],
-    providers: [MessageToastService, DynamicComponentService],
+    providers: [
+        MessageToastService,
+        DynamicComponentService,
+        {
+            provide: MESSAGE_TOAST_CONFIG,
+            useValue: new MessageToastConfig()
+        }
+    ],
     entryComponents: [MessageToastComponent, MessageToastContainerComponent, TemplateTestComponent]
 })
 class TestModule {}

@@ -11,13 +11,18 @@ import { FormFieldComponent } from './form-field/form-field.component';
 import { InputMessageGroupWithTemplate } from '../input-message-group-with-template/input-message-group-with-template.component';
 import { FormFieldGroupComponent } from './form-field-group/form-field-group.component';
 import { FormFieldControlExtrasComponent } from './form-field-extras/form-field-extras.component';
+import { FormGroupHeaderComponent } from './form-group-header/form-group-header.component';
+import { LinkModule } from '@fundamental-ngx/core/link';
+import { FieldGroupRowValuePipe } from './pipes/field-group-row-value.pipe';
 
 const EXPORTABLE_DECLARATIONS = [
     FormGroupComponent,
     FormFieldComponent,
     InputMessageGroupWithTemplate,
     FormFieldGroupComponent,
-    FormFieldControlExtrasComponent
+    FormFieldControlExtrasComponent,
+    FormGroupHeaderComponent,
+    FieldGroupRowValuePipe
 ];
 
 @NgModule({
@@ -29,7 +34,8 @@ const EXPORTABLE_DECLARATIONS = [
         FdFormModule,
         InlineHelpModule,
         PopoverModule,
-        IconModule
+        IconModule,
+        LinkModule
     ],
     exports: [...EXPORTABLE_DECLARATIONS]
 })

@@ -18,7 +18,8 @@ import { NgControl, NgForm } from '@angular/forms';
 
 import { SelectComponent as CoreSelect } from '@fundamental-ngx/core/select';
 import { DynamicComponentService } from '@fundamental-ngx/core/utils';
-import { ControlState, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
+import { FormStates } from '@fundamental-ngx/core/shared';
+import { FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
 import { BaseSelect } from '../commons/base-select';
 import { SelectConfig } from '../select.config';
 
@@ -36,13 +37,13 @@ export class SelectComponent extends BaseSelect implements AfterViewInit, AfterV
      * Holds the control state of select
      */
     @Input()
-    get selectState(): ControlState {
+    get selectState(): FormStates {
         if (isDevMode()) {
             console.warn('"selectState" is deprecated. Use "state" instead');
         }
         return super.state;
     }
-    set selectState(state: ControlState) {
+    set selectState(state: FormStates) {
         if (isDevMode()) {
             console.warn('"selectState" is deprecated. Use "state" instead');
         }

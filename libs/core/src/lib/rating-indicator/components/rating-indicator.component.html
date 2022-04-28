@@ -38,11 +38,7 @@
     placement="top"
     additionalBodyClass="fd-rating-indicator__popover"
 >
-    <div
-        class="fd-rating-indicator__sum-row"
-        [class]="sizeClass"
-        *ngFor="let rating of _ratingItems; trackBy: trackByFn"
-    >
+    <div class="fd-rating-indicator__sum-row" [class]="sizeClass" *ngFor="let rating of _ratingItems">
         <div class="fd-rating-indicator__container">
             <ng-container *ngFor="let rate of _rates; trackBy: trackByFn">
                 <span

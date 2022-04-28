@@ -152,7 +152,7 @@ describe('Form generator test suite', () => {
         });
     });
 
-    it('should check custom controls example', () => {
+    xit('should check custom controls example', () => {
         scrollIntoView(sliderPoint);
         clickAndMoveElement(sliderPoint, -400, 0);
         expect(doesItExist(formValue)).toBe(false, 'form value row exists');
@@ -244,7 +244,7 @@ describe('Form generator test suite', () => {
         if (section === defaultExample) {
             expect(getElementClass(section + mainSpecialitySelect)).toContain(
                 'is-error',
-                'element is not highlited by error'
+                'element is not highlighted by error'
             );
         }
 

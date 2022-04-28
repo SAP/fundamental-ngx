@@ -24,7 +24,8 @@ export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
             [ariaLabel]="glyphAriaLabel"
         >
         </fd-icon>
-        <span *ngIf="label" class="fd-object-status__text">{{ label }}</span>
+
+        <span *ngIf="label" class="fd-object-status__text" [class]="_textClass">{{ label }}</span>
 
         <!-- DEPRECATED - Remove in v0.23.0 -->
         <ng-content></ng-content>
@@ -83,6 +84,9 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
     /** Whether the Object Status is in Large Design. */
     @Input()
     large = false;
+
+    /** @hidden */
+    _textClass: string;
 
     /** @hidden */
     constructor(private _elementRef: ElementRef) {}

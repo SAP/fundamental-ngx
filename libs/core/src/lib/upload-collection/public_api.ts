@@ -10,5 +10,6 @@ export {
     UploadCollectionDescriptionDirective,
     UploadCollectionTextSeparatorDirective,
     UploadCollectionStatusGroupDirective,
-    UploadCollectionTitleContainerDirective
+    UploadCollectionTitleContainerDirective,
+    UploadCollectionStatusItemDirective
 } from './upload-collection-simple.directives';

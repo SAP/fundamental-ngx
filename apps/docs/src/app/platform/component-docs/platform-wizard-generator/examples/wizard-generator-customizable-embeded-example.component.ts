@@ -123,7 +123,7 @@ export class WizardGeneratorCustomizableEmbededExampleComponent {
         return formattedStep.id;
     }
 
-    _editStep(event: MouseEvent, stepId: string, callback: (stepId: string) => void): void {
+    _editStep(event: Event, stepId: string, callback: (stepId: string) => void): void {
         event.preventDefault();
         callback(stepId);
     }

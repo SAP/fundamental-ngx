@@ -34,6 +34,7 @@ import { startWith, takeUntil, switchMap } from 'rxjs/operators';
 
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { ContentDensityService, DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
+import { FormStates } from '@fundamental-ngx/core/shared';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 
 import { SELECT_COMPONENT, SelectInterface } from './select.interface';
@@ -44,7 +45,8 @@ import { SelectMobileModule } from './select-mobile/select-mobile.module';
 
 let selectUniqueId = 0;
 
-export type SelectControlState = 'error' | 'success' | 'warning' | 'information';
+/** @deprecated use `import { FormStates } from "@fundamental-ngx/core/shared"` instead */
+export type SelectControlState = FormStates;
 
 const SELECT_HEADER_IDENTIFIER = '.fd-list__group-header';
 
@@ -53,12 +55,6 @@ export const SELECT_PANEL_MAX_HEIGHT = 250;
 /** The height of the select items in `rem` units. */
 export const SELECT_ITEM_HEIGHT_EM = 4;
 
-/**
- * Event object that is emitted when selection is changed
- */
-export class FdSelectChange {
-    constructor(readonly source: SelectComponent, readonly value: any) {}
-}
 /**
  * Select component intended to mimic
  * the behaviour of the native select element.
@@ -90,7 +86,7 @@ export class SelectComponent
 
     /** Holds the control state of select */
     @Input()
-    state: SelectControlState = null;
+    state: FormStates = null;
 
     /** Whether the select component should be displayed in mobile mode. */
     @Input()
@@ -202,7 +198,7 @@ export class SelectComponent
 
     /** Event emitted when the selected value of the select changes. */
     @Output()
-    readonly valueChange: EventEmitter<FdSelectChange> = new EventEmitter<FdSelectChange>();
+    readonly valueChange = new EventEmitter<any>();
 
     /** @hidden */
     @ContentChildren(OptionComponent, { descendants: true })

@@ -58,7 +58,7 @@ xdescribe('DynamicPageComponent default values', () => {
 
     it('should collapse on scroll content', fakeAsync(() => {
         fixture.detectChanges();
-        const element = dynamicPageComponent._contentComponent.elementRef.nativeElement;
+        const element = dynamicPageComponent._contentComponent.first.elementRef.nativeElement;
         element.scrollTop = 1000;
         fixture.detectChanges();
         element.dispatchEvent(new Event('scroll'));
@@ -69,7 +69,7 @@ xdescribe('DynamicPageComponent default values', () => {
     it('should not collapse on scroll content, when pinned', fakeAsync(() => {
         fixture.detectChanges();
         (<any>dynamicPageComponent)._dynamicPageService.pinned.next(true);
-        const element = dynamicPageComponent._contentComponent.elementRef.nativeElement;
+        const element = dynamicPageComponent._contentComponent.first.elementRef.nativeElement;
         element.scrollTop = 1000;
         fixture.detectChanges();
         element.dispatchEvent(new Event('scroll'));
@@ -98,7 +98,7 @@ xdescribe('DynamicPageComponent default values', () => {
         (<any>dynamicPageComponent)._setContainerPositions();
         fixture.detectChanges();
 
-        const element = dynamicPageComponent._contentComponent.elementRef.nativeElement;
+        const element = dynamicPageComponent._contentComponent.first.elementRef.nativeElement;
         const styles = window.getComputedStyle(element);
         expect(styles.height).toBe(size);
     });

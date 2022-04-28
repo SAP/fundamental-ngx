@@ -173,7 +173,7 @@ describe('WizardGeneratorService', () => {
         expect(visibleItems.findIndex((i) => i.id === 'paymentMethodStep')).toEqual(-1);
     });
 
-    it('should return visible steps in observable', async (done) => {
+    it('should return visible steps in observable', (done) => {
         service
             .getVisibleSteps()
             .pipe(first())
@@ -182,7 +182,7 @@ describe('WizardGeneratorService', () => {
                 done();
             });
 
-        await service.prepareWizardItems(TEST_ITEMS);
+        service.prepareWizardItems(TEST_ITEMS).then(done);
     });
 
     it('should return current step ID', async () => {
@@ -199,31 +199,31 @@ describe('WizardGeneratorService', () => {
         expect(service.getCurrentStepIndex()).toEqual(1);
     });
 
-    it('should set visible steps', async (done) => {
-        const items = await service.prepareWizardItems(TEST_ITEMS);
-        service
-            .getVisibleSteps()
-            .pipe(first())
-            .subscribe((steps) => {
-                expect(steps.length).toEqual(4);
-                done();
-            });
-
-        service.setVisibleSteps(items);
+    it('should set visible steps', (done) => {
+        service.prepareWizardItems(TEST_ITEMS).then((items) => {
+            service
+                .getVisibleSteps()
+                .pipe(first())
+                .subscribe((steps) => {
+                    expect(steps.length).toEqual(4);
+                    done();
+                });
+            service.setVisibleSteps(items);
+        });
     });
 
-    it('should clear steps components', async (done) => {
-        await service.prepareWizardItems(TEST_ITEMS);
+    it('should clear steps components', (done) => {
+        service.prepareWizardItems(TEST_ITEMS).then(() => {
+            service
+                .trackStepsComponents()
+                .pipe(first())
+                .subscribe((components) => {
+                    expect(Object.keys(components).length).toEqual(0);
+                    done();
+                });
 
-        service
-            .trackStepsComponents()
-            .pipe(first())
-            .subscribe((components) => {
-                expect(Object.keys(components).length).toEqual(0);
-                done();
-            });
-
-        service.clearWizardStepComponents();
+            service.clearWizardStepComponents();
+        });
     });
 
     it('should refresh steps visibility and show new step', async () => {

@@ -33,6 +33,9 @@ import popoverTriggerTsSrc from '!./examples/popover-trigger-example/popover-tri
 import mobilePopoverHtmlSrc from '!./examples/popover-mobile/popover-mobile-example.component.html?raw';
 import mobilePopoverTsSrc from '!./examples/popover-mobile/popover-mobile-example.component.ts?raw';
 
+import dynamicContainerHeightHtmlSrc from '!./examples/popover-dynamic-container-height/popover-dynamic-container-height-example.component.html?raw';
+import dynamicContainerHeightTsSrc from '!./examples/popover-dynamic-container-height/popover-dynamic-container-height-example.component.ts?raw';
+
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -233,6 +236,20 @@ export class PopoverDocsComponent {
             component: 'PopoverMobileExampleComponent',
             code: mobilePopoverTsSrc,
             fileName: 'popover-mobile-example'
+        }
+    ];
+
+    dynamicContainerHeight: ExampleFile[] = [
+        {
+            language: 'html',
+            code: dynamicContainerHeightHtmlSrc,
+            fileName: 'popover-dynamic-container-height-example'
+        },
+        {
+            language: 'typescript',
+            component: 'PopoverDynamicContainerHeightExampleComponent',
+            code: dynamicContainerHeightTsSrc,
+            fileName: 'popover-dynamic-container-height-example'
         }
     ];
 }
