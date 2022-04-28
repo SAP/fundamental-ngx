@@ -1,11 +1,4 @@
-export const iconsArr = [
-    'question-mark',
-    'message-information',
-    'message-error',
-    'message-warning',
-    'message-success',
-    'thumb-up'
-];
+export const iconsArr = ['sys-help-2', 'information', 'error', 'alert', 'sys-enter-2', 'thumb-up'];
 
 export const buttonClassArr = ['standard', 'emphasized', 'negative', 'attention', 'positive', 'positive', 'positive'];
 
