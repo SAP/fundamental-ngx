@@ -21,13 +21,18 @@ import { map, startWith, Subject, tap } from 'rxjs';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardFooterComponent implements AfterViewInit, OnDestroy {
+    /** @hidden */
     @ContentChildren(CardActionItemDirective) cardActionItems: QueryList<CardActionItemDirective>;
+
+    /** @hidden */
     actionItems: CardActionItemDirective[];
 
+    /** @hidden */
     private _destroyed$ = new Subject<void>();
 
     constructor(private _changeDetectorRef: ChangeDetectorRef) {}
 
+    /** @hidden */
     ngAfterViewInit(): void {
         this.cardActionItems.changes
             .pipe(
@@ -39,6 +44,7 @@ export class CardFooterComponent implements AfterViewInit, OnDestroy {
             .subscribe();
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         this._destroyed$.next();
         this._destroyed$.complete();
