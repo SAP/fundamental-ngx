@@ -6,7 +6,6 @@ export * from './interfaces/tab-color-associations.interface';
 export * from './directives/dnd/icon-bar-dnd-container.directive';
 export * from './directives/dnd/icon-bar-dnd-item.directive';
 export * from './directives/dnd/icon-bar-dnd-list.directive';
-export * from './directives/extra-button/extra-button.directive';
 export * from './constants';
 export * from './types';
 export * from './components';

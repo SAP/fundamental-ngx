@@ -56,14 +56,7 @@
                 </fdp-text-type-popover>
             </ng-template>
         </li>
-        <li
-            *ngIf="_extraTabs.length"
-            role="presentation"
-            class="fd-icon-tab-bar__item fd-icon-tab-bar__item--overflow"
-            fdpExtraButton
-            [isRtl]="isRtl"
-            [anchorIndexInsideParent]="_lastVisibleTabIndex"
-        >
+        <li *ngIf="_extraTabs.length" role="presentation" class="fd-icon-tab-bar__item fd-icon-tab-bar__item--overflow">
             <fdp-text-type-popover
                 #extraItemsPopover
                 [isRtl]="isRtl"
