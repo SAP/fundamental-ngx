@@ -7,12 +7,13 @@ import {
     EventEmitter,
     Host,
     Input,
+    OnChanges,
     OnDestroy,
-    OnInit,
     Optional,
     Output,
     QueryList,
     Self,
+    SimpleChanges,
     SkipSelf,
     TemplateRef,
     ViewChild
@@ -77,7 +78,7 @@ export class MultiComboboxSelectionChangeEvent {
 }
 
 @Directive()
-export abstract class BaseMultiCombobox extends CollectionBaseInput implements OnInit, AfterViewInit, OnDestroy {
+export abstract class BaseMultiCombobox extends CollectionBaseInput implements OnChanges, AfterViewInit, OnDestroy {
     /** Provides selected items. */
     @Input()
     selectedItems: any[] = [];
@@ -386,8 +387,10 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         super(_cd, ngControl, ngForm, formField, formControl);
     }
 
-    ngOnInit(): void {
-        this._initializeDataSource(this._data);
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes['dataSource']) {
+            this._initializeDataSource(this._data);
+        }
     }
 
     /** @hidden */

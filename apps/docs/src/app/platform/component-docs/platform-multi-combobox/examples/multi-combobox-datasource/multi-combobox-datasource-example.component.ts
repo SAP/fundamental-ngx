@@ -49,6 +49,7 @@ export class MultiComboboxDatasourceExampleComponent {
 
     dataSourceOf = of(this.dataSource);
     ds = new ArrayComboBoxDataSource(this.dataSource);
+    dsl = new ArrayComboBoxDataSource(this.dataSource);
 
     selectedItems1 = [this.dataSourceStrings[1]];
     selectedItems2 = [this.dataSource[1]];
