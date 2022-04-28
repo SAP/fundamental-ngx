@@ -9,6 +9,7 @@ import localizedFormat from 'dayjs/plugin/localizedFormat';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 function range<T>(length: number, mapFn: (index: number) => T): T[] {
     return Array.from(new Array(length)).map((_, index) => mapFn(index));
@@ -267,7 +268,7 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
 
     clone(date: Dayjs): Dayjs {
         if (!date) {
-            return;
+            return date;
         }
 
         if (this.locale) {
@@ -301,8 +302,8 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
         return dateToCheck.isBetween(startDate, endDate);
     }
 
-    isValid(date: Dayjs): boolean {
-        return date?.isValid();
+    isValid(date: Nullable<Dayjs>): date is Dayjs {
+        return !!date?.isValid();
     }
 
     toIso8601(date: Dayjs): string {

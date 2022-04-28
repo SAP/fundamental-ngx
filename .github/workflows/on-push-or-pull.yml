@@ -126,6 +126,26 @@ jobs:
                   key: dist-platform-${{ github.run_id }}
             - run: npx nx build moment-adapter --configuration=production --runner cloud
 
+    # build datetime-adapter
+    build-datetime-adapter:
+        needs: build-core
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/cache@v2
+              with:
+                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
+                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
+            - uses: actions/cache@v2
+              with:
+                  path: dist/libs/core
+                  key: dist-core-${{ github.run_id }}
+            - uses: actions/cache@v2
+              with:
+                  path: dist/libs/platform
+                  key: dist-platform-${{ github.run_id }}
+            - run: npx nx build datetime-adapter --configuration=production --runner cloud
+
     # build fn
     build-fn:
         needs: build-core
@@ -178,7 +198,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                lib: [core, platform, moment-adapter]
+                lib: [core, platform, moment-adapter, datetime-adapter, fn]
         steps:
             - uses: actions/checkout@v2
             - uses: actions/cache@v2
@@ -375,6 +395,11 @@ jobs:
             - uses: JS-DevTools/npm-publish@v1
               with:
                   package: 'dist/libs/moment-adapter/package.json'
+                  token: ${{ secrets.NPM_TOKEN }}
+                  tag: ${{ env.releaseTag }}
+            - uses: JS-DevTools/npm-publish@v1
+              with:
+                  package: 'dist/libs/datetime-adapter/package.json'
                   token: ${{ secrets.NPM_TOKEN }}
                   tag: ${{ env.releaseTag }}
             - uses: JS-DevTools/npm-publish@v1
