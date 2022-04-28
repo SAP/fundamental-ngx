@@ -61,15 +61,7 @@
             <fd-icon glyph="process"></fd-icon>
         </span>
     </li>
-    <li
-        *ngIf="_showRightBtn"
-        role="presentation"
-        class="fd-icon-tab-bar__item fd-icon-tab-bar__item--overflow"
-        fdpExtraButton
-        [isRtl]="isRtl"
-        [addButtonOffset]="true"
-        [anchorIndexInsideParent]="_anchorIndexForExtraBtnDirective"
-    >
+    <li *ngIf="_showRightBtn" role="presentation" class="fd-icon-tab-bar__item fd-icon-tab-bar__item--overflow">
         <fdp-icon-tab-bar-popover
             [isRtl]="isRtl"
             [extraTabs]="_nextSteps"
