@@ -295,6 +295,7 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
         if (typeof this._selectedItem !== 'undefined' || !this.value || this._index == null) {
             return;
         }
+
         this._gridList.setSelectedItem(this.value, this._index);
     }
 
@@ -360,7 +361,12 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
             return;
         }
 
-        if (this.type !== 'active' && this.type !== 'detailsAndActive') {
+        if (this.type !== 'active' && this.type !== 'detailsAndActive' && this.type !== 'navigation') {
+            return;
+        }
+
+        if (this.type === 'navigation') {
+            this._onNavigate(event);
             return;
         }
 

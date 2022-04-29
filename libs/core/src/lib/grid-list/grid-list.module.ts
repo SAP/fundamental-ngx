@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
+import { IconModule } from '@fundamental-ngx/core/icon';
 
 import { GridListComponent } from './components/grid-list/grid-list.component';
 import { GridListFilterBarComponent } from './components/grid-list-filter-bar/grid-list-filter-bar.component';
@@ -32,7 +33,7 @@ import { GridListTitleBarSpacerComponent } from './components/grid-list-title-ba
         GridListTitleBarSpacerComponent,
         GridListTitleBarAdditionalTitleItemDirective
     ],
-    imports: [CommonModule, ButtonModule, ToolbarModule, ObjectStatusModule, FormsModule],
+    imports: [CommonModule, ButtonModule, IconModule, ToolbarModule, ObjectStatusModule, FormsModule],
     exports: [
         GridListComponent,
         GridListItemComponent,

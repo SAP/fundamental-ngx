@@ -6,19 +6,18 @@
     <fd-grid-list-item *ngFor="let item of list" [layoutItemPattern]="item.layoutItemPattern">
         <fd-grid-list-item-toolbar> Custom Text </fd-grid-list-item-toolbar>
 
-        <div class="fd-grid-list-item-body--container">
-            <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
-            <div class="fd-grid-list-item-body--content">
-                <h6 fd-title [innerText]="item.title"></h6>
-                <p [innerText]="item.description"></p>
-                <div class="fd-grid-list-item-body--content-address">
-                    <p>781 Main Street</p>
-                    <p>Anytown, SD 57401</p>
-                    <p>USA</p>
-                </div>
+        <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s" class="fd-grid-list__item-image"></fd-avatar>
 
-                <a [routerLink]="['./']" fd-link tabindex="0">john_li@example.com</a>
-            </div>
+        <div class="fd-grid-list__item-header">
+            <h4 fd-title [innerText]="item.title" class="fd-grid-list__item-title"></h4>
+            <span class="fd-grid-list__item-subtitle" [innerText]="item.description"></span>
+        </div>
+
+        <div class="fd-grid-list__item-content">
+            <p>781 Main Street</p>
+            <p>Anytown, SD 57401</p>
+            <p>USA</p>
+            <a [routerLink]="['./']" fd-link tabindex="0">john_li@example.com</a>
         </div>
     </fd-grid-list-item>
 </fd-grid-list>

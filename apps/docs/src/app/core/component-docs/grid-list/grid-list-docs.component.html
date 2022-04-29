@@ -33,6 +33,11 @@
 <description>
     One item in the grid list can be selected. Need click on an item to select it. To use the Single select mode, set
     <code>[mode]</code> as <code>singleSelect</code>.
+
+    <p>
+        <b>Note</b>: Whole item with link is clickable. If used within single select mode - selection event will be
+        emitted first, then navigation event.
+    </p>
 </description>
 <component-example>
     <fd-grid-list-single-select-example></fd-grid-list-single-select-example>

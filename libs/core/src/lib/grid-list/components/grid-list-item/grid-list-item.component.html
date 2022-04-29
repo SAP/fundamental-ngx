@@ -6,7 +6,9 @@
     role="option"
     [class.is-navigated]="isNavigated"
     [class.is-selected]="!!_selectedItem"
-    [class.fd-grid-list__item--link]="_isActive && (type === 'active' || type === 'detailsAndActive')"
+    [class.fd-grid-list__item--link]="
+        _isActive && (type === 'active' || type === 'detailsAndActive' || type === 'navigation')
+    "
     [class.fd-grid-list__item--unread]="state === 'unread'"
     [class.fd-grid-list__item--locked]="state === 'locked'"
     [class.fd-grid-list__item--draft]="state === 'draft'"
@@ -97,19 +99,13 @@
             (click)="_onDelete($event)"
         ></button>
 
-        <button
+        <span
             *ngIf="type === 'navigation'"
-            fd-button
-            fdType="transparent"
-            glyph="navigation-right-arrow"
-            i18n-aria-label="coreGridList.Item.Btn.Navigation|Button aria-label attribute"
-            aria-label="Navigation"
-            i18n-title="coreGridList.Item.Btn.Navigation|Button aria-label attribute"
-            title="Navigation"
-            class="fd-grid-list__action-button fd-grid-list__btn-navigation"
-            [compact]="true"
+            class="fd-grid-list__item-navigation-indicator"
             (click)="_onNavigate($event)"
-        ></button>
+        >
+            <fd-icon glyph="navigation-right-arrow"></fd-icon>
+        </span>
 
         <ng-container *ngIf="selectionMode === 'singleSelectRight'">
             <ng-container *ngTemplateOutlet="radio"></ng-container>
@@ -117,10 +113,6 @@
     </div>
 
     <div class="fd-grid-list__item-body" [class.fd-grid-list__item-body--no-padding]="noPadding">
-        <ng-container *ngIf="state">
-            <ng-container *ngTemplateOutlet="itemFooter"></ng-container>
-        </ng-container>
-
         <ng-template>
             <ng-content select="fd-grid-list-item-toolbar"></ng-content>
             <ng-content select="fd-grid-list-item-footer-bar"></ng-content>
@@ -128,7 +120,7 @@
 
         <ng-content></ng-content>
 
-        <ng-container *ngIf="!state && footerBarComponent?.contentTemplateRef">
+        <ng-container *ngIf="footerBarComponent?.contentTemplateRef">
             <ng-container *ngTemplateOutlet="itemFooter"></ng-container>
         </ng-container>
     </div>
