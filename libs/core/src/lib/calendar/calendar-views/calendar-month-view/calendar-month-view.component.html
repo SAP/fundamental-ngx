@@ -7,7 +7,7 @@
                 *ngFor="let colMonths of _calendarMonthListGrid; let rowIndex = index"
             >
                 <td
-                    class="fd-button fd-button--transparent fd-calendar__item"
+                    class="fd-calendar__item"
                     role="gridcell"
                     *ngFor="let monthCell of colMonths; let colIndex = index"
                     [class.fd-calendar__item--current]="monthCell.current"
@@ -20,18 +20,20 @@
                     (keydown)="_onKeydownMonthHandler($event, monthCell.index)"
                     (click)="selectMonth(monthCell, $event)"
                 >
-                    <span
-                        role="button"
-                        class="fd-calendar__text"
-                        [attr.aria-labelledby]="
-                            monthCell.id +
-                            '-aria-label ' +
-                            (monthCell.current ? _todayLabelId + ' ' : '') +
-                            (monthCell.selected ? _selectedDateLabelId : '')
-                        "
-                    >
-                        {{ monthCell.label }}
-                    </span>
+                    <button fd-button fdType="transparent" class="fd-calendar__item-button" taindex="-1">
+                        <span
+                            class="fd-calendar__text"
+                            [attr.aria-labelledby]="
+                                monthCell.id +
+                                '-aria-label ' +
+                                (monthCell.current ? _todayLabelId + ' ' : '') +
+                                (monthCell.selected ? _selectedDateLabelId : '')
+                            "
+                        >
+                            {{ monthCell.label }}
+                        </span>
+                    </button>
+
                     <span hidden aria-hidden="true" [attr.id]="monthCell.id + '-aria-label'">
                         {{ monthCell.ariaLabel }}
                     </span>
