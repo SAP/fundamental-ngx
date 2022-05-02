@@ -26,6 +26,7 @@ import { FormModule } from '@fundamental-ngx/core/form';
 import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { DatetimePickerModule } from '@fundamental-ngx/core/datetime-picker';
 import { ToolbarOverflowExampleComponent } from './examples/toolbar-overflow-example.component';
+import { TitleModule } from '@fundamental-ngx/core/title';
 
 const examples = [
     ToolbarTypeExampleComponent,
@@ -62,7 +63,8 @@ const routes: Routes = [
         CheckboxModule,
         FormModule,
         FdDatetimeModule,
-        DatetimePickerModule
+        DatetimePickerModule,
+        TitleModule
     ],
     exports: [RouterModule],
     declarations: [ToolbarDocsComponent, ToolbarHeaderComponent, ...examples]

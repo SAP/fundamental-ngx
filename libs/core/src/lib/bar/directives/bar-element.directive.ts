@@ -13,9 +13,8 @@ export class BarElementDirective {
     @HostBinding('class.fd-bar__element--full-width')
     fullWidth = false;
 
-    /** Whether the element is title. */
+    /** @deprecated */
     @Input()
-    @HostBinding('class.fd-bar__element--title')
     isTitle = false;
 
     /** @hidden */
