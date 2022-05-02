@@ -14,18 +14,26 @@
                     (keydown)="_onKeydownYearHandler($event, cell.index)"
                     (click)="selectYear(cell, $event)"
                 >
-                    <span
-                        role="button"
-                        class="fd-calendar__text"
-                        [attr.aria-labelledby]="
-                            cell.id +
-                            '-aria-label ' +
-                            (cell.current ? _todayLabelId + ' ' : '') +
-                            (cell.selected ? _selectedDateLabelId : '')
-                        "
+                    <button
+                        fd-button
+                        fdType="transparent"
+                        class="fd-calendar__item-button"
+                        [class.is-active]="cell.current"
+                        tabindex="-1"
                     >
-                        {{ cell.label }}
-                    </span>
+                        <span
+                            class="fd-calendar__text"
+                            [attr.aria-labelledby]="
+                                cell.id +
+                                '-aria-label ' +
+                                (cell.current ? _todayLabelId + ' ' : '') +
+                                (cell.selected ? _selectedDateLabelId : '')
+                            "
+                        >
+                            {{ cell.label }}
+                        </span>
+                    </button>
+
                     <span hidden aria-hidden="true" [attr.id]="cell.id + '-aria-label'">
                         {{ cell.ariaLabel }}
                     </span>
