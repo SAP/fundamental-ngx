@@ -20,8 +20,8 @@ export class DateTimePicker extends CoreBaseComponentPo {
     okButton = 'button[fdtype="emphasized"]';
     cancelButton = 'button[label="Cancel"]';
     buttonFirstRangeYear = '(//td[contains(@id,"-view-aggregated-years")]/child::span)[1]';
-    buttonFirstYear = '(//td[contains(@id,"year")]/child::span)[1]';
-    buttonFirstMonth = '(//td[contains(@id,"month")]/child::span)[1]';
+    buttonFirstYear = '(//td[contains(@id,"year")]/child::button)[1]';
+    buttonFirstMonth = '(//td[contains(@id,"month")]/child::button)[1]';
     selectedHours = '(//div[contains(@class, "fd-time__wrapper")]//li[contains(@class, "fd-time__item")])[12]';
     selectedMinutes = '(//div[contains(@class, "fd-time__wrapper")]//li[contains(@class, "fd-time__item")])[54]';
     navigationUpArrowButton = 'button[glyph="navigation-up-arrow"]';
