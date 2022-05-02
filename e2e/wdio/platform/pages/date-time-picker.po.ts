@@ -33,8 +33,8 @@ export class DateTimePicker extends BaseComponentPo {
 
     selectYearButton = '.fd-calendar__action:nth-child(3) .fd-button';
     selectMonthButton = '.fd-calendar__action:nth-child(2) .fd-button';
-    firstYearButton = '(//td[contains(@id,"year")]/child::span)[1]';
-    firstMonthButton = '(//td[contains(@id,"month")]/child::span)[1]';
+    firstYearButton = '(//td[contains(@id,"year")]/child::button)[1]';
+    firstMonthButton = '(//td[contains(@id,"month")]/child::button)[1]';
     navigationUpArrowButton = 'button[glyph="navigation-up-arrow"]';
     navigationDownArrowButton = 'button[glyph="navigation-down-arrow"]';
     timeColumn = 'fd-time-column';
