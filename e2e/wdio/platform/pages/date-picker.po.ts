@@ -11,7 +11,6 @@ export class DatePicker extends BaseComponentPo {
     calendarExpanded = '.fd-popover__popper fd-calendar';
     calendarYearsSection = '.fd-calendar__content--years';
 
-    currentYear = '.fd-calendar__action:nth-child(3) .fd-button';
     currentDay = '//*[contains(@class, "fd-calendar__item--current") or contains(@class, "is-active")]';
 
     buttonGerman = 'fd-segmented-button button:nth-child(2)';
@@ -20,9 +19,9 @@ export class DatePicker extends BaseComponentPo {
     buttonSelectMonth = '.fd-calendar__action:nth-child(2) .fd-button';
     buttonSelectYearsRange = '.fd-calendar__action:nth-child(2) .fd-button';
 
-    buttonFirstRangeYear = '(//td[contains(@id,"-view-aggregated-years")]/child::span)[1]';
-    buttonFirstYear = '(//td[contains(@id,"year")]/child::span)[1]';
-    buttonFirstMonth = '(//td[contains(@id,"month")]/child::span)[1]';
+    buttonFirstRangeYear = '(//td[contains(@id,"-view-aggregated-years")]/child::button)[1]';
+    buttonFirstYear = '(//td[contains(@id,"year")]/child::button)[1]';
+    buttonFirstMonth = '(//td[contains(@id,"month")]/child::button)[1]';
 
     filterCalendarValue = (name: string): string => `//td[contains(@id,"-view-${name}")]`;
 
