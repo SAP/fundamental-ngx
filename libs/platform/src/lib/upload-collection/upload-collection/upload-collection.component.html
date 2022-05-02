@@ -17,12 +17,7 @@
         <div #responsiveBreadcrumbContainer style="flex-grow: 1">
             <fd-breadcrumb [containerElement]="responsiveBreadcrumbContainer" [id]="id + '-breadcrumb'">
                 <fd-breadcrumb-item>
-                    <a
-                        *ngIf="_breadcrumbList.length > 0"
-                        href="#"
-                        fd-link
-                        (click)="_breadcrumbGoTo($event)"
-                    >
+                    <a *ngIf="_breadcrumbList.length > 0" href="#" fd-link (click)="_breadcrumbGoTo($event)">
                         {{ 'platformUploadCollection.breadcrumbLabelAllFiles' | fdTranslate }}
                     </a>
                     <span *ngIf="_breadcrumbList.length === 0">
@@ -703,14 +698,14 @@
     <ng-container *ngIf="payload.items.length > 1">
         {{
             'platformUploadCollection.messageFileSizeExceededPlural'
-                | fdTranslate: { filesCount: payload.items.length, maxFileSize: maxFileSize }
+                | fdTranslate: { filesCount: payload.items.length, maxFileSize: maxFileSize || 0 }
         }}
     </ng-container>
 
     <ng-container *ngIf="payload.items.length === 1">
         {{
             'platformUploadCollection.messageFileSizeExceededSingular'
-                | fdTranslate: { fileName: payload.items[0].name, maxFileSize: maxFileSize }
+                | fdTranslate: { fileName: payload.items[0].name, maxFileSize: maxFileSize || 0 }
         }}
     </ng-container>
 </ng-template>
@@ -719,14 +714,14 @@
     <ng-container *ngIf="payload.items.length > 1">
         {{
             'platformUploadCollection.messageFileNameLengthExceededPlural'
-                | fdTranslate: { filesCount: payload.items.length, maxFilenameLength: maxFilenameLength }
+                | fdTranslate: { filesCount: payload.items.length, maxFilenameLength: maxFilenameLength || 0 }
         }}
     </ng-container>
 
     <ng-container *ngIf="payload.items.length === 1">
         {{
             'platformUploadCollection.messageFileNameLengthExceededSingular'
-                | fdTranslate: { fileName: payload.items[0].name, maxFilenameLength: maxFilenameLength }
+                | fdTranslate: { fileName: payload.items[0].name, maxFilenameLength: maxFilenameLength || 0 }
         }}
     </ng-container>
 </ng-template>

@@ -13,9 +13,10 @@
     Customizing language per component
 </fd-docs-section-title>
 <description>
+    <p>In order to provide language customizations per component, use <code>fdLanguagePatch</code> directive.</p>
     <p>
-        It's possible to easily override global language for a certain component by providing <code>FD_LANGUAGE</code>
-        token at any child scope.
+        Also it's possible to easily override global language for a certain component by providing
+        <code>FD_LANGUAGE</code> token at any child scope. Use <code>patchLanguage</code> utility function for this.
     </p>
     <p>
         <b>Note:</b> you should understand that providing an injection token in a certain module will affect the scope,
@@ -44,3 +45,28 @@
     <app-language-change-example></app-language-change-example>
 </component-example>
 <code-example [exampleFiles]="languageChangeExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="custom-translations" componentName="i18n">
+    Creating custom translations
+</fd-docs-section-title>
+<description>
+    <p>
+        Although <code>fundamental-ngx</code> library provide rich set of languages to work with out of the box, it's
+        possible to also define own languages when needed. The language object is just a set of key/values, that are
+        defined per component. This object should implement <code>FdLanguage</code> interface.
+    </p>
+    <p>
+        You may provide both strings with interpolation using double curly brackets (<code>
+            {{ '{{ paramName }}' }}</code
+        >) or functions as language values.
+    </p>
+    <p>
+        The list of available keys can be found in the corresponding docs section of each component (I18n section is
+        visible only for the components that have translations). You also can find there English value for each
+        translation property.
+    </p>
+
+    <fd-code-snippet [file]="translationExample"></fd-code-snippet>
+</description>

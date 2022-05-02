@@ -142,8 +142,8 @@
                     <div [fdLayoutGridCol]="12" [colMd]="12" [colLg]="mobile ? 12 : 6" [colXl]="mobile ? 12 : 6">
                         <fdp-search-field
                             [contentDensity]="contentDensity"
-                            [placeholder]="searchField.placeholder"
-                            [ariaLabel]="searchField.placeholder"
+                            [placeholder]="'platformVHD.searchButtonLabel' | fdTranslate"
+                            [ariaLabel]="'platformVHD.searchButtonLabel' | fdTranslate"
                             (searchSubmit)="search()"
                             (inputChange)="_mainSearch = $event.text"
                         ></fdp-search-field>

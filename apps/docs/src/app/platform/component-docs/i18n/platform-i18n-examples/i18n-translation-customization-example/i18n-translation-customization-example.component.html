@@ -2,6 +2,18 @@
 <fdp-textarea [id]="'textarea-standard'" name="textarea-standard" [maxLength]="10" [showExceededText]="true">
 </fdp-textarea>
 
+<label fd-form-label for="textarea-standard"
+    >Textarea with partial translation overrides using "patchLanguage" directive</label
+>
+<fdp-textarea
+    [id]="'textarea-standard'"
+    name="textarea-standard"
+    [maxLength]="10"
+    [showExceededText]="true"
+    [fdPatchLanguage]="languagePatch"
+>
+</fdp-textarea>
+
 <app-translation-wrapper-1>
     <label fd-form-label for="textarea-customized-translation-1"
         >Textarea with partial translation overrides using wrapper component and content projection</label

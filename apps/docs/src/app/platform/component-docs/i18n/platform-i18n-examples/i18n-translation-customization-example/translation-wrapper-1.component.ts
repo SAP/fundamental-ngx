@@ -8,10 +8,20 @@ import { patchLanguage } from '@fundamental-ngx/i18n';
     providers: [
         patchLanguage({
             // it's possible to partially override translations for component
-            // overriding only 2 out of all translation strings for textarea here
+            // overriding only 3 out of all translation strings for textarea here
+            // also function can be used to provide complex translation logic
             platformTextarea: {
                 counterMessageCharactersRemainingSingular: 'You can type 1 more character',
-                counterMessageCharactersRemainingPlural: 'You can type {{ count }} more characters'
+                counterMessageCharactersRemainingPlural: 'You can type {{ count }} more characters',
+                counterMessageCharactersOverTheLimitPlural: (params) => {
+                    switch (+params.count) {
+                        case 2:
+                            return 'Two charactes over the limit';
+                        case 3:
+                            return 'Three charactes over the limit';
+                    }
+                    return `${params.count} characters over the limit`;
+                }
             }
         })
     ]

@@ -64,18 +64,17 @@
             </ng-container>
 
             <ng-container *ngIf="checkDueDate && _showDueDateWarning">
-                <ng-container *ngIf="_dueIn === dueDateThreshold" i18n="@@platformApprovalFlowNodeStatusDueToday">
+                <ng-container *ngIf="_dueIn === dueDateThreshold">
                     {{ 'platformApprovalFlow.nodeStatusDueToday' | fdTranslate }}
                 </ng-container>
 
-                <ng-container *ngIf="_dueIn < dueDateThreshold" i18n="@@platformApprovalFlowNodeStatusDueInXDays">
+                <ng-container *ngIf="_dueIn < dueDateThreshold">
                     {{
-                        'platformApprovalFlow.nodeStatusDueInXDays'
-                            | fdTranslate: { count: dueDateThreshold - _dueIn }
+                        'platformApprovalFlow.nodeStatusDueInXDays' | fdTranslate: { count: dueDateThreshold - _dueIn }
                     }}
                 </ng-container>
 
-                <ng-container *ngIf="_dueIn > dueDateThreshold" i18n="@@platformApprovalFlowNodeStatusXDaysOverdue">
+                <ng-container *ngIf="_dueIn > dueDateThreshold">
                     {{
                         'platformApprovalFlow.nodeStatusXDaysOverdue'
                             | fdTranslate: { count: _dueIn - dueDateThreshold }

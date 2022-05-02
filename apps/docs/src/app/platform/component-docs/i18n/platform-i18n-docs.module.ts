@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { I18nModule } from '@fundamental-ngx/i18n';
 
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { PlatformI18nDocsComponent } from './platform-i18n-docs.component';
@@ -24,7 +25,8 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
         PlatformTextAreaModule,
-        SegmentedButtonModule
+        SegmentedButtonModule,
+        I18nModule
     ],
     exports: [RouterModule],
     declarations: [
