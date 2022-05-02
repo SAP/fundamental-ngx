@@ -20,7 +20,13 @@
                     (keydown)="_onKeydownMonthHandler($event, monthCell.index)"
                     (click)="selectMonth(monthCell, $event)"
                 >
-                    <button fd-button fdType="transparent" class="fd-calendar__item-button" taindex="-1">
+                    <button
+                        fd-button
+                        fdType="transparent"
+                        class="fd-calendar__item-button"
+                        [class.is-active]="monthCell.current"
+                        tabindex="-1"
+                    >
                         <span
                             class="fd-calendar__text"
                             [attr.aria-labelledby]="
