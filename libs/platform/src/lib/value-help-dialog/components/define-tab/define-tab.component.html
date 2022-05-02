@@ -10,7 +10,8 @@
                 >
                 <label [id]="selectedId" fd-form-label class="fdp-value-help-dialog__hidden_label">
                     {{
-                        'platformVHD.defineConditionSelectedValueHiddenA11yLabel' | fdTranslate: { value: item.strategy }
+                        'platformVHD.defineConditionSelectedValueHiddenA11yLabel'
+                            | fdTranslate: { value: item.strategy }
                     }}</label
                 >
                 <fd-select
@@ -30,7 +31,9 @@
                     [ariaLabelledBy]="titleId + ' ' + 'CONDITIONPANEL_OPERATOR_LABEL' + ' ' + selectedId"
                 >
                     <ng-container *ngIf="_includeStrategy.length">
-                        <li fd-list-group-header>{{ 'platformVHD.defineConditionConditionsGroupHeaderInclude' | fdTranslate }}</li>
+                        <li fd-list-group-header>
+                            {{ 'platformVHD.defineConditionConditionsGroupHeaderInclude' | fdTranslate }}
+                        </li>
                         <fd-option *ngFor="let strategy of _includeStrategy" [value]="strategy.key">
                             <ng-container
                                 [ngTemplateOutlet]="conditionStrategyOption"
@@ -39,7 +42,9 @@
                         </fd-option>
                     </ng-container>
                     <ng-container *ngIf="_excludeStrategy.length">
-                        <li fd-list-group-header>{{ 'platformVHD.defineConditionConditionsGroupHeaderExclude' | fdTranslate }}</li>
+                        <li fd-list-group-header>
+                            {{ 'platformVHD.defineConditionConditionsGroupHeaderExclude' | fdTranslate }}
+                        </li>
                         <fd-option *ngFor="let strategy of _excludeStrategy" [value]="strategy.key">
                             <ng-container
                                 [ngTemplateOutlet]="conditionStrategyOption"

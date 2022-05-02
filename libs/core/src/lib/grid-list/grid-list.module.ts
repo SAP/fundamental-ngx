@@ -39,7 +39,16 @@ import { GridListItemImageDirective } from './directives/grid-list-item-image.di
         GridListItemImageDirective,
         GridListItemBodyDirective
     ],
-    imports: [CommonModule, FormsModule, ButtonModule, IconModule, TitleModule, ToolbarModule, ObjectStatusModule, I18nModule],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ButtonModule,
+        IconModule,
+        TitleModule,
+        ToolbarModule,
+        ObjectStatusModule,
+        I18nModule
+    ],
     exports: [
         GridListComponent,
         GridListItemComponent,

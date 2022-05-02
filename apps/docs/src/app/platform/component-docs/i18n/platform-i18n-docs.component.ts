@@ -30,6 +30,30 @@ export class PlatformI18nDocsComponent {
 export class AppModule {}`
     };
 
+    translationExample = {
+        language: 'typescript',
+        code: `import { FdLanguage } from '@fundamental-ngx/i18n';
+
+// Note, you're seeing the part of the language. Not putting the entire language object here for the sake of simplicity
+export const CUSTOM_LANGUAGE: FdLanguage = {
+    platformTextarea: {
+        counterMessageCharactersRemainingSingular: 'You can type 1 more character',
+        counterMessageCharactersRemainingPlural: 'You can type {{ count }} more characters',
+        counterMessageCharactersOverTheLimitSingular: '1 character over the limit',
+        counterMessageCharactersOverTheLimitPlural: (params) => {
+            switch (+params.count) {
+                case 2:
+                    return 'Two charactes over the limit';
+                case 3:
+                    return 'Three charactes over the limit';
+            }
+            return \`\${params.count} characters over the limit\`;
+        }
+    },
+}
+        `
+    };
+
     translationCustomizationExample: ExampleFile[] = [
         {
             language: 'html',
@@ -40,19 +64,22 @@ export class AppModule {}`
             language: 'typescript',
             component: 'PlatformI18nTranslationCustomizationExampleComponent',
             code: translationCustomizationExampleComponentTs,
-            fileName: 'i18n-translation-customization-example'
+            fileName: 'i18n-translation-customization-example',
+            name: 'Host component'
         },
         {
             language: 'typescript',
             component: 'TranslationWrapper1Component',
             code: translationCustomizationWrapper1Component,
-            fileName: 'translation-wrapper-1'
+            fileName: 'translation-wrapper-1',
+            name: 'Wrapper component 1'
         },
         {
             language: 'typescript',
             component: 'TranslationWrapper2Component',
             code: translationCustomizationWrapper2Component,
-            fileName: 'translation-wrapper-2'
+            fileName: 'translation-wrapper-2',
+            name: 'Wrapper component 2'
         }
     ];
 
