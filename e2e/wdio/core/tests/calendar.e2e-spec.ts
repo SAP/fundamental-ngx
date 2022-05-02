@@ -26,7 +26,8 @@ import {
     mondayStartDate,
     portraitAttribute,
     otherMonth,
-    fullCurrentDayClass
+    currentItem,
+    activeItem
 } from '../fixtures/appData/calendar-contents';
 
 describe('calendar test suite', () => {
@@ -104,6 +105,7 @@ describe('calendar test suite', () => {
             const startOutput = getText(standardCalendar + selectionOutput);
 
             checkSingleSelection(standardCalendar, calendarItem);
+
             expect(getText(standardCalendar + selectionOutput)).not.toEqual(startOutput);
         });
     });
@@ -420,13 +422,16 @@ describe('calendar test suite', () => {
 
     function checkSingleSelection(calendar: string, selector: string, index: number = 0): void {
         scrollIntoView(calendar + selector, index);
+
         while (
             getAttributeByName(calendar + selector, disabledAttribute, index) === 'true' ||
-            getAttributeByName(calendar + selector, classAttribute, index) === otherMonth ||
-            getAttributeByName(calendar + selector, classAttribute, index) === fullCurrentDayClass
+            getAttributeByName(calendar + selector, classAttribute, index).includes(otherMonth) ||
+            getAttributeByName(calendar + selector, classAttribute, index).includes(currentItem) ||
+            getAttributeByName(calendar + selector, classAttribute, index).includes(activeItem)
         ) {
             index++;
         }
+
         click(calendar + selector, index);
 
         expect(getAttributeByName(calendar + selector, classAttribute, index)).toContain(activeClass);
