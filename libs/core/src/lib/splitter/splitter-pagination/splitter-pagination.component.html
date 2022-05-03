@@ -1,5 +1,7 @@
 <button
     *ngFor="let page of pages"
+    fd-button
+    fdType="transparent"
     class="fd-splitter__pagination-item"
     [class.fd-splitter__pagination-item--active]="page === currentPage"
     role="radio"
