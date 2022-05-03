@@ -46,6 +46,7 @@
 
     <ng-template #i18n let-errors>
         <span *ngIf="errors.required"> Value is required </span>
+        <span *ngIf="errors.dateValidation"> Date is invalid </span>
     </ng-template>
 </fdp-form-group>
 

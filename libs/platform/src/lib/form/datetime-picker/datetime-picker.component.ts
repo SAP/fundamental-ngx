@@ -215,11 +215,17 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     readonly onClose: EventEmitter<void> = new EventEmitter<void>();
 
+    /** @hidden */
     @ViewChild(DatetimePickerComponent)
     dateTimePickerComponent: DatetimePickerComponent<D>;
 
+    /** @hidden */
     @ViewChild(DatetimePickerComponent, { static: true, read: ElementRef })
     protected _elRef: ElementRef;
+
+    /** @hidden */
+    @ViewChild(DatetimePickerComponent, { static: true, read: NgControl })
+    protected _control: NgControl;
 
     /**
      * Function used to disable certain dates in the calendar.
@@ -289,7 +295,10 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
      */
     handleDatetimeInputChange(datetime: D): void {
         if (this.dateTimePickerComponent) {
-            if (this.dateTimePickerComponent.isInvalidDateInput) {
+            if (this.dateTimePickerComponent._isInvalidDateInput) {
+                if (this.ngControl && this._control.value) {
+                    this.ngControl.control.setErrors(this._control.errors);
+                }
                 this.state = 'error';
             } else {
                 if (!this.dateTimePickerComponent._inputFieldDate && !this.allowNull) {
