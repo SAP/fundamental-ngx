@@ -63,6 +63,7 @@ export class CardComponent implements OnChanges, AfterViewChecked, OnInit, CssCl
     @HostBinding('attr.role')
     role = 'region';
 
+    /** Reference to the card container element */
     @ContentChild(FD_CARD_CONTAINER)
     cardContainer: { containsList: boolean };
 
