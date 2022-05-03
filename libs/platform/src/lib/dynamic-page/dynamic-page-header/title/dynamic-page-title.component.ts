@@ -5,8 +5,10 @@ import {
     TemplateRef,
     ViewChild,
     ContentChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    forwardRef
 } from '@angular/core';
+import { DYNAMIC_PAGE_HEADER_TOKEN, DynamicPageHeader } from '@fundamental-ngx/core/shared';
 
 import { DynamicPageBackgroundType, DynamicPageResponsiveSize } from '../../constants';
 import { DynamicPageGlobalActionsComponent } from '../actions/global-actions/dynamic-page-global-actions.component';
@@ -21,9 +23,15 @@ import { DynamicPageKeyInfoComponent } from '../key-info/dynamic-page-key-info.c
     selector: 'fdp-dynamic-page-title',
     templateUrl: './dynamic-page-title.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    providers: [
+        {
+            provide: DYNAMIC_PAGE_HEADER_TOKEN,
+            useExisting: forwardRef(() => DynamicPageTitleComponent)
+        }
+    ]
 })
-export class DynamicPageTitleComponent {
+export class DynamicPageTitleComponent implements DynamicPageHeader {
     /**
      * Page Title
      */
