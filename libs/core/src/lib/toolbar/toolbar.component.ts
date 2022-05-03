@@ -76,11 +76,13 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     @Input()
     size: ToolbarSize = null;
 
-    /** Determines if toolbar contains text which size is equal to h4
-     * Default value: false
-     */
+    /** @deprecated */
     @Input()
     hasTitle = false;
+
+    /** The title for the toolbar. */
+    @Input()
+    title: string;
 
     /** Determines if toolbar should has active state (only when fdType == 'info')
      * Default value: false
@@ -225,7 +227,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
             `fd-toolbar--${this.fdType}`,
             `${this.active && this.fdType === 'info' ? 'fd-toolbar--active' : ''}`,
             `${this.size === 'cozy' ? 'fd-toolbar--cozy' : ''}`,
-            `${this.hasTitle ? 'fd-toolbar--title' : ''}`,
+            `${this.hasTitle || this.title ? 'fd-toolbar--title' : ''}`,
             `${this.clearBorder ? 'fd-toolbar--clear' : ''}`
         ];
     }
