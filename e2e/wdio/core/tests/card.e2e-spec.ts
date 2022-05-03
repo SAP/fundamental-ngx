@@ -5,7 +5,8 @@ import {
     getText,
     waitForElDisplayed,
     getElementClass,
-    scrollIntoView
+    scrollIntoView,
+    getElementArrayLength
 } from '../../driver/wdio';
 import { checkElArrIsClickable, checkElementText, checkElementTextValue } from '../../helper/assertion-helper';
 import {
@@ -47,9 +48,7 @@ describe('Card test suite:', () => {
         ftCardHeader,
         ftCardListItems,
         ftFooter,
-        ftButtonsStart,
-        ftButtonsCenter,
-        ftButtonsEnd,
+        ftCardFooterActionItems,
         kpiCardHeader,
         kpiCardTitle,
         kpiAnalyticsHeaderIcons,
@@ -133,12 +132,7 @@ describe('Card test suite:', () => {
 
         it('should check footer', () => {
             expect(isElementDisplayed(ftFooter)).toBe(true);
-            checkElArrIsClickable(ftButtonsStart);
-            checkElementTextValue(ftButtonsStart, 'Start');
-            checkElArrIsClickable(ftButtonsCenter);
-            checkElementTextValue(ftButtonsCenter, 'Center');
-            checkElArrIsClickable(ftButtonsEnd);
-            checkElementTextValue(ftButtonsEnd, 'End');
+            expect(getElementArrayLength(ftCardFooterActionItems)).toBe(3);
         });
     });
 
