@@ -42,7 +42,7 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
     isSubmenu: boolean;
 
     /** @hidden External content */
-    childContent: TemplateRef<any> | undefined;
+    childContent: TemplateRef<any> | undefined = undefined;
 
     /** @hidden Currently rendered menu view */
     view: TemplateRef<any> | undefined;

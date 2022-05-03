@@ -848,7 +848,7 @@ describe('TableComponent internal', () => {
     class TableDataProviderWithPaging extends TableDataProvider<SourceItem> {
         private readonly ALL_ITEMS = generateItems(200);
 
-        items = [];
+        items: SourceItem[] = [];
         totalItems = 0;
 
         fetch(state: TableState): Observable<SourceItem[]> {

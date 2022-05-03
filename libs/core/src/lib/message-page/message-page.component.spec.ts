@@ -66,22 +66,22 @@ describe('MessagePageComponent', () => {
 
     it('should render title', () => {
         const messagePageEl: HTMLElement = fixture.debugElement.query(By.directive(MessagePageComponent)).nativeElement;
-        expect(messagePageEl.textContent.includes(host.titleText)).toBeTruthy();
+        expect(messagePageEl.textContent?.includes(host.titleText)).toBeTruthy();
     });
 
     it('should render subtitle', () => {
         const messagePageEl: HTMLElement = fixture.debugElement.query(By.directive(MessagePageComponent)).nativeElement;
-        expect(messagePageEl.textContent.includes(host.subtitleText)).toBeTruthy();
+        expect(messagePageEl.textContent?.includes(host.subtitleText)).toBeTruthy();
     });
 
     it('should render actions', () => {
         const messagePageEl: HTMLElement = fixture.debugElement.query(By.directive(MessagePageComponent)).nativeElement;
-        expect(messagePageEl.textContent.includes(host.actionsText)).toBeTruthy();
+        expect(messagePageEl.textContent?.includes(host.actionsText)).toBeTruthy();
     });
 
     it('should render more', () => {
         const messagePageEl: HTMLElement = fixture.debugElement.query(By.directive(MessagePageComponent)).nativeElement;
-        expect(messagePageEl.textContent.includes(host.moreText)).toBeTruthy();
+        expect(messagePageEl.textContent?.includes(host.moreText)).toBeTruthy();
     });
 
     it('should has type binding', () => {

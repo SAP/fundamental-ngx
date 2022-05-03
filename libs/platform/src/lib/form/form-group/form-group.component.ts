@@ -581,15 +581,7 @@ export class FormGroupComponent
 
                 const groupFields = child.fields.map((field) => getField(field));
                 groupFields.forEach((groupField) => {
-                    if (!groupField.column) {
-                        return;
-                    }
-
                     const columnNumber = this._validateFieldColumn(groupField.column);
-
-                    if (!Number.isInteger(groupField.column)) {
-                        return;
-                    }
 
                     if (!fieldGroupColumns[columnNumber]) {
                         fieldGroupColumns[columnNumber] = [];
@@ -606,7 +598,7 @@ export class FormGroupComponent
     }
 
     /** @hidden Validate column number */
-    private _validateFieldColumn(columnNumber: number): number {
+    private _validateFieldColumn(columnNumber: number | undefined): number {
         if (this.columnLayout && columnNumber) {
             if (isNaN(columnNumber)) {
                 throw new Error('Input a valid column number');

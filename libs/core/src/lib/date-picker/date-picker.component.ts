@@ -566,7 +566,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
      * @hidden
      * Function that provides support for ControlValueAccessor that allows to use [(ngModel)] or forms
      */
-    writeValue(selected: DateRange<D> | D): void {
+    writeValue(selected: DateRange<D> | D | null): void {
         /** If written value is not defined, null, empty string */
         if (!selected) {
             this._inputFieldDate = '';

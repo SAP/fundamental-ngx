@@ -111,7 +111,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
             this.menuInteractive.setDisabled(this.disabled);
         }
         if (changes['submenu'] && !changes['submenu'].firstChange) {
-            this.menuInteractive.setSubmenu(!!this.submenu, this.submenu ? this.itemId : null);
+            this.menuInteractive.setSubmenu(!!this.submenu, this.submenu ? this.itemId : undefined);
         }
     }
 

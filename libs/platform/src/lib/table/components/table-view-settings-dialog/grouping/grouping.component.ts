@@ -14,7 +14,7 @@ export interface SettingsGroupDialogColumn {
 
 export interface SettingsGroupDialogData extends TableDialogCommonData {
     direction: SortDirection;
-    field: string;
+    field: string | null;
     columns: SettingsGroupDialogColumn[];
 }
 

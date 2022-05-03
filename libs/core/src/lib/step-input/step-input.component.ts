@@ -300,7 +300,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     }
 
     /** @hidden */
-    writeValue(value: number): void {
+    writeValue(value: number | null): void {
         this.value = value;
     }
 

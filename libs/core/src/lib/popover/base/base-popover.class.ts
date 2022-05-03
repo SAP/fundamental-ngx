@@ -92,7 +92,7 @@ export class BasePopoverClass {
      * * Leave blank for no effect.
      */
     @Input()
-    fillControlMode: Nullable<PopoverFillMode>;
+    fillControlMode: Nullable<PopoverFillMode> = null;
 
     /** The element to which  the overlay is attached. By default it is body */
     @Input()

@@ -51,7 +51,7 @@ export class MenuInteractiveDirective {
     }
 
     /** @hidden */
-    setSubmenu(hasSubmenu: boolean, itemId: string | null): void {
+    setSubmenu(hasSubmenu: boolean, itemId?: string): void {
         this.ariaHaspopup = hasSubmenu;
         this.ariaControls = hasSubmenu ? itemId || this.ariaControls : null;
     }

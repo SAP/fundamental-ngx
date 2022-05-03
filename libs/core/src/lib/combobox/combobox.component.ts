@@ -350,7 +350,7 @@ export class ComboboxComponent
     displayedValues: any[] = [];
 
     /** @hidden */
-    inputTextValue: string;
+    inputTextValue = '';
 
     /** @hidden */
     clearInputBtnFocused = false;

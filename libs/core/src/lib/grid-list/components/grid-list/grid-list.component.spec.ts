@@ -258,7 +258,7 @@ describe('GridListComponent', () => {
 
         fixture.detectChanges();
 
-        let selectedItemEvent = { added: ['Title 5'], index: [4], removed: [], selection: ['Title 5'] };
+        let selectedItemEvent = { added: ['Title 5'], index: [4], removed: [] as string[], selection: ['Title 5'] };
         expect(component.selectionChange).toHaveBeenCalledWith(selectedItemEvent);
 
         radioButtons[5].nativeElement.click();

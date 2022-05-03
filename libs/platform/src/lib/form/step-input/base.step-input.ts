@@ -4,6 +4,7 @@ import { BehaviorSubject, of } from 'rxjs';
 import { takeUntil, switchMap, map } from 'rxjs/operators';
 
 import { ContentDensity, RtlService } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { BaseInput, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
 import { StepInputConfig } from './step-input.config';
 import { addAndCutFloatingNumberDistortion, getNumberDecimalLength } from './step-input.util';
@@ -38,10 +39,10 @@ const ALIGN_INPUT_OPTIONS_LIST = [StepInputAlign.Left, StepInputAlign.Center, St
 export abstract class StepInputComponent extends BaseInput implements OnInit {
     /** Sets input value */
     @Input()
-    get value(): number {
+    get value(): Nullable<number> {
         return super.getValue();
     }
-    set value(value: number) {
+    set value(value: Nullable<number>) {
         if (value !== this._value) {
             super.setValue(value);
             this._calculateCanDecrementIncrement();
@@ -284,7 +285,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
 
         const needToUpdateView = this._value === newValue;
 
-        this.value = newValue ?? this.min;
+        this.value = newValue;
 
         if (needToUpdateView) {
             this._updateViewValue();

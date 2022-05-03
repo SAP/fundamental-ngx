@@ -25,7 +25,7 @@ class TestObjectIdentifierComponent {
 
     getTitleElementClassList(): DOMTokenList {
         const elements = document.getElementsByClassName('fd-object-identifier__title');
-        return elements.item(0).classList;
+        return elements.item(0)?.classList as DOMTokenList;
     }
 }
 

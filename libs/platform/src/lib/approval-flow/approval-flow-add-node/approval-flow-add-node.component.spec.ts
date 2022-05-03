@@ -31,7 +31,7 @@ describe('ApprovalFlowAddNodeComponent', () => {
     const dialogConfig = new DialogConfig();
 
     dialogRef.data = {
-        userDetailsTemplate: null,
+        userDetailsTemplate: null as any,
         rtl: false,
         node,
         teamDataSource: new ApprovalFlowTeamDataSource(new TeamDataProvider()),
@@ -81,7 +81,7 @@ describe('ApprovalFlowAddNodeComponent', () => {
         component._confirmSelectedTeam();
         component._submit();
 
-        const nodeApprovers = component._data.node.approvers.map((approver) => approver.id).join(',');
+        const nodeApprovers = component._data.node?.approvers.map((approver) => approver.id).join(',');
         expect(nodeApprovers).toEqual(teamMemberIds);
     });
 
@@ -92,8 +92,8 @@ describe('ApprovalFlowAddNodeComponent', () => {
 
         component._setSelectedApprovers(approvers);
 
-        expect(component._data.node.approvers).toEqual(approvers);
-        expect(component._data.node.variousTeams).toEqual(false);
+        expect(component._data.node?.approvers).toEqual(approvers);
+        expect(component._data.node?.variousTeams).toEqual(false);
         expect(viewServiceSpy).toHaveBeenCalled();
     });
 
@@ -106,8 +106,8 @@ describe('ApprovalFlowAddNodeComponent', () => {
         component._setSelectedTeam(approvalTeam);
         component._confirmSelectedTeam();
 
-        expect(component._data.node.approvalTeamId).toEqual(approvalTeam.id);
-        expect(component._data.node.description).toEqual(approvalTeam.name);
+        expect(component._data.node?.approvalTeamId).toEqual(approvalTeam.id);
+        expect(component._data.node?.description).toEqual(approvalTeam.name);
         expect(viewServiceSpy).toHaveBeenCalled();
     });
 });

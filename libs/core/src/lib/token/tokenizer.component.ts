@@ -652,8 +652,8 @@ export class TokenizerComponent
 
         this.tokenList.forEach((token, indexOfToken) => {
             token.selected =
-                !!this._firstElementInSelection &&
-                !!this._lastElementInSelection &&
+                this._firstElementInSelection != null &&
+                this._lastElementInSelection != null &&
                 indexOfToken >= this._firstElementInSelection &&
                 indexOfToken <= this._lastElementInSelection;
         });

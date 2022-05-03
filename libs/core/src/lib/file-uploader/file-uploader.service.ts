@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { parserFileSize } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 export interface FileUploadOutput {
     validFiles?: File[];
@@ -20,7 +21,7 @@ export class FileUploaderService {
         files: File[],
         minFileSize: string,
         maxFileSize: string,
-        acceptedExtensions: string
+        acceptedExtensions: Nullable<string>
     ): FileUploadOutput {
         const maxSize = parserFileSize(maxFileSize);
         const minSize = parserFileSize(minFileSize);

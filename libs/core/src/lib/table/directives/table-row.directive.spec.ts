@@ -18,7 +18,7 @@ class TestComponent {
     tableRow: TableRowDirective;
 
     getElements(): HTMLCollection {
-        return document.getElementById('row').children;
+        return (document.getElementById('row') as HTMLElement).children;
     }
 }
 

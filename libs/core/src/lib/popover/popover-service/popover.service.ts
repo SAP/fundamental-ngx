@@ -218,7 +218,7 @@ export class PopoverService extends BasePopoverClass {
             }
         }
 
-        /**
+        /** TODO
          * This overriding is dangerous thing and leads to unexpected behavior
          * We have to avoid this.
          */

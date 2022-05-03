@@ -116,6 +116,7 @@ export class DynamicComponentService {
         componentRef: ComponentRef<V>,
         content: TemplateRef<any> | Type<any> | string | Record<string, any>
     ): void {
+        // TODO: this approach should be revisited, it can cause issues, that is really hard to debug
         if (Object.prototype.hasOwnProperty.call(componentRef.instance, 'childContent')) {
             (componentRef.instance as any).childContent = content;
         }

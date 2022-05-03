@@ -38,27 +38,27 @@ class TestWrapperComponent {
 
     value: number = initialValue;
 
-    compact = undefined;
+    compact: boolean | undefined = undefined;
 
-    unit: string = null;
+    unit: string | null = null;
 
-    state: string = null;
+    state: string | null = null;
 
-    inputId: string = null;
+    inputId: string | null = null;
 
-    ariaLabel: string = null;
+    ariaLabel: string | null = null;
 
     locale = 'en-US';
 
-    inputTitle: string = null;
+    inputTitle: string | null = null;
 
-    incrementButtonIcon: string = null;
+    incrementButtonIcon: string | null = null;
 
-    decrementButtonIcon: string = null;
+    decrementButtonIcon: string | null = null;
 
-    incrementButtonTitle: string = null;
+    incrementButtonTitle: string | null = null;
 
-    decrementButtonTitle: string = null;
+    decrementButtonTitle: string | null = null;
 }
 
 describe('StepInputComponent', () => {
