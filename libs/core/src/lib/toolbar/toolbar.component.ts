@@ -1,31 +1,35 @@
 import {
-    Component,
-    ViewEncapsulation,
-    AfterViewInit,
     AfterViewChecked,
+    AfterViewInit,
     ChangeDetectionStrategy,
-    ElementRef,
-    ViewChild,
-    OnInit,
-    forwardRef,
-    ContentChildren,
-    QueryList,
     ChangeDetectorRef,
-    Renderer2,
+    Component,
+    ContentChildren,
+    ElementRef,
+    forwardRef,
+    Inject,
     Input,
     OnDestroy,
-    Optional
+    OnInit,
+    Optional,
+    QueryList,
+    Renderer2,
+    SkipSelf,
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
+import { DYNAMIC_PAGE_HEADER_TOKEN, DynamicPageHeader } from '@fundamental-ngx/core/shared';
 
-import { Observable, of, fromEvent, Subscription } from 'rxjs';
-import { delay, debounceTime, takeWhile, distinctUntilChanged, filter } from 'rxjs/operators';
-
-import { OVERFLOW_PRIORITY_SCORE } from '@fundamental-ngx/core/utils';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
+import {
+    applyCssClass,
+    ContentDensityService,
+    CssClassBuilder,
+    OVERFLOW_PRIORITY_SCORE,
+    OverflowPriority
+} from '@fundamental-ngx/core/utils';
+import { fromEvent, Observable, of, Subscription } from 'rxjs';
+import { debounceTime, delay, distinctUntilChanged, filter, takeWhile } from 'rxjs/operators';
 import { ToolbarItemDirective } from './toolbar-item.directive';
-import { OverflowPriority } from '@fundamental-ngx/core/utils';
 
 const ELEMENT_MARGIN = 8;
 const OVERFLOW_SPACE = 50 + 2 * ELEMENT_MARGIN;
@@ -160,7 +164,8 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     constructor(
         private _cd: ChangeDetectorRef,
         private _renderer: Renderer2,
-        @Optional() private _contentDensityService: ContentDensityService
+        @Optional() private _contentDensityService?: ContentDensityService,
+        @Optional() @SkipSelf() @Inject(DYNAMIC_PAGE_HEADER_TOKEN) private _dynamicPageHeader?: DynamicPageHeader
     ) {}
 
     /** @hidden */
@@ -213,7 +218,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     }
 
     /** @hidden */
-    elementRef(): ElementRef<any> {
+    elementRef(): ElementRef {
         return this.toolbar;
     }
 
@@ -226,7 +231,8 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
             `${this.active && this.fdType === 'info' ? 'fd-toolbar--active' : ''}`,
             `${this.size === 'cozy' ? 'fd-toolbar--cozy' : ''}`,
             `${this.hasTitle ? 'fd-toolbar--title' : ''}`,
-            `${this.clearBorder ? 'fd-toolbar--clear' : ''}`
+            `${this.clearBorder ? 'fd-toolbar--clear' : ''}`,
+            `${this._dynamicPageHeader ? 'fd-dynamic-page__toolbar' : ''}`
         ];
     }
 
