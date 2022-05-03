@@ -8,24 +8,24 @@ import {
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
-import { CardActionItemDirective } from './card-action-item.directive';
+import { CardFooterActionItemDirective } from './card-footer-action-item.directive';
 import { map, startWith, Subject, tap } from 'rxjs';
 
 @Component({
     selector: 'fd-card-footer',
     templateUrl: './card-footer.component.html',
     host: {
-        ['[class.fd-card__footer]']: 'true'
+        class: 'fd-card__footer'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardFooterComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
-    @ContentChildren(CardActionItemDirective) cardActionItems: QueryList<CardActionItemDirective>;
+    @ContentChildren(CardFooterActionItemDirective) cardActionItems: QueryList<CardFooterActionItemDirective>;
 
     /** @hidden */
-    actionItems: CardActionItemDirective[];
+    actionItems: CardFooterActionItemDirective[];
 
     /** @hidden */
     private _destroyed$ = new Subject<void>();

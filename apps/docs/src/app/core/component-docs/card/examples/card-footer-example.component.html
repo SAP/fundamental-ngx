@@ -20,9 +20,9 @@
         </ul>
     </fd-card-content>
     <fd-card-footer>
-        <button *fdCardActionItem fd-button fdType="positive">Start</button>
-        <button *fdCardActionItem fd-button fdType="positive">Center</button>
-        <button *fdCardActionItem fd-button fdType="negative">End</button>
+        <button *fdCardFooterActionItem fd-button fdType="positive">Start</button>
+        <button *fdCardFooterActionItem fd-button fdType="positive">Center</button>
+        <button *fdCardFooterActionItem fd-button fdType="negative">End</button>
     </fd-card-footer>
 </fd-card>
 
@@ -48,10 +48,10 @@
         </ul>
     </fd-card-content>
     <fd-card-footer>
-        <button *fdCardActionItem fd-button fdType="positive">Start</button>
-        <button *fdCardActionItem fd-button fdType="positive">Center</button>
-        <button *fdCardActionItem fd-button fdType="negative">End</button>
-        <ng-template fdCardActionItem>
+        <button *fdCardFooterActionItem fd-button fdType="positive">Start</button>
+        <button *fdCardFooterActionItem fd-button fdType="positive">Center</button>
+        <button *fdCardFooterActionItem fd-button fdType="negative">End</button>
+        <ng-template fdCardFooterActionItem>
             <button fd-button fdType="transparent" glyph="overflow" [fdMenuTrigger]="menuIcons"></button>
             <fd-menu #menuIcons>
                 <li fd-menu-item>

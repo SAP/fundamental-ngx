@@ -8,6 +8,7 @@ export { CardSecondSubtitleDirective } from './card-second-subtitle.directive';
 export { CardContentComponent } from './card-content.component';
 export { CardLoaderComponent } from './card-loader.component';
 export { CardFooterComponent } from './card-footer.component';
+export { CardFooterActionItemDirective } from './card-footer-action-item.directive';
 
 export { CardKpiHeaderComponent } from './kpi/card-kpi-header.component';
 export { CardKpiValueDirective } from './kpi/card-kpi-value.directive';

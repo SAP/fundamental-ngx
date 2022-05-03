@@ -22,7 +22,7 @@ import { CardKpiScaleTextDirective } from './kpi/card-kpi-scale-text.directive';
 import { CardKpiAnalyticsDirective } from './kpi/card-kpi-analytics.directive';
 import { CardKpiAnalyticsLabelDirective } from './kpi/card-kpi-analytics-label.directive';
 import { CardKpiAnalyticsContentDirective } from './kpi/card-kpi-analytics-content.directive';
-import { CardActionItemDirective } from './card-action-item.directive';
+import { CardFooterActionItemDirective } from './card-footer-action-item.directive';
 
 const components = [
     CardComponent,
@@ -40,12 +40,13 @@ const components = [
     CardKpiAnalyticsDirective,
     CardKpiAnalyticsLabelDirective,
     CardKpiAnalyticsContentDirective,
-    CardFooterComponent
+    CardFooterComponent,
+    CardFooterActionItemDirective
 ];
 
 @NgModule({
-    declarations: [...components, CardActionItemDirective],
+    declarations: [...components],
     imports: [CommonModule, ButtonModule, AvatarModule, ObjectStatusModule],
-    exports: [ButtonModule, AvatarModule, ...components, CardActionItemDirective]
+    exports: [ButtonModule, AvatarModule, ...components]
 })
 export class CardModule {}

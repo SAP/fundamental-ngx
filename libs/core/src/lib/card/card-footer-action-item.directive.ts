@@ -1,8 +1,8 @@
 import { Directive, TemplateRef } from '@angular/core';
 
 @Directive({
-    selector: '[fdCardActionItem]'
+    selector: '[fdCardFooterActionItem]'
 })
-export class CardActionItemDirective {
+export class CardFooterActionItemDirective {
     constructor(readonly templateRef: TemplateRef<void>) {}
 }
