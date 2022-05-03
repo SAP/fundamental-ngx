@@ -4,8 +4,8 @@
     </fdp-form-field>
 
     <ng-template #i18n let-errors>
-        <span *ngIf="errors.required">Value is required</span>
-        <span *ngIf="errors.dateValidation">Date is invalid</span>
+        <span *ngIf="errors.required" role="alert" aria-atomic="true">Value is required</span>
+        <span *ngIf="errors.dateValidation" role="alert" aria-atomic="true">Date is invalid</span>
     </ng-template>
 </fdp-form-group>
 
