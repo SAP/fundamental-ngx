@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.26...v0.34.3-rc.27) (2022-05-04)
+
+
+### Bug Fixes
+
+* **platform:** value help dialog search ([#8022](https://github.com/SAP/fundamental-ngx/issues/8022)) ([2bdd5cc](https://github.com/SAP/fundamental-ngx/commit/2bdd5cc8656e2ac0401972845ccd65e67f99af50))
+
 ### [0.34.3-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.25...v0.34.3-rc.26) (2022-05-04)
 
 ### [0.34.3-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.24...v0.34.3-rc.25) (2022-04-25)
