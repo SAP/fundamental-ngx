@@ -46,6 +46,11 @@ export class TitleComponent implements OnInit {
         this._setHeaderSize();
     }
 
+    /** returns the reference to the title element */
+    get elementRef(): ElementRef {
+        return this._elementRef;
+    }
+
     /** @hidden */
     private _setHeaderSize(): void {
         let headerSize;
