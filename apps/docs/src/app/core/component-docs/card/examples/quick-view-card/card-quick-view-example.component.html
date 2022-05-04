@@ -43,13 +43,9 @@
                     </fd-quick-view-group-item>
                 </fd-quick-view-group>
             </fd-quick-view>
-            <div fd-bar barDesign="footer" [cozy]="false">
-                <div fd-bar-right>
-                    <fd-toolbar size="compact" fdType="transparent" [clearBorder]="true">
-                        <button fd-toolbar-item fd-button [compact]="true">Assign to Project</button>
-                    </fd-toolbar>
-                </div>
-            </div>
         </fd-card-content>
+        <fd-card-footer>
+            <button end fd-button [compact]="true">Assign to Project</button>
+        </fd-card-footer>
     </fd-card>
 </div>
