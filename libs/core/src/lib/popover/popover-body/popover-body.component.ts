@@ -18,7 +18,13 @@ import { CdkTrapFocus } from '@angular/cdk/a11y';
 
 import { Subject } from 'rxjs';
 
-import { ARROW_SIZE, ArrowPosition, Nullable, PopoverFlippedXDirection, PopoverPosition } from '@fundamental-ngx/core/shared';
+import {
+    ARROW_SIZE,
+    ArrowPosition,
+    Nullable,
+    PopoverFlippedXDirection,
+    PopoverPosition
+} from '@fundamental-ngx/core/shared';
 import { ContentDensityService, KeyUtil } from '@fundamental-ngx/core/utils';
 import { NotificationGroupComponent } from '@fundamental-ngx/core/notification';
 

@@ -637,7 +637,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
             const selectItem: MultiInputOption = {
                 label: key,
                 value: null,
-                isGroup: true,
+                isGroup: true
             };
 
             const currentGroup = group[key];

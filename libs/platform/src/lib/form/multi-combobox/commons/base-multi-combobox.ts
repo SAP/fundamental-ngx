@@ -305,7 +305,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     private _matchingStrategy: MatchingStrategy = this.multiComboboxConfig.matchingStrategy;
 
     /** @hidden */
-    private _dsSubscription: Subscription | null = null; 
+    private _dsSubscription: Subscription | null = null;
 
     /** @hidden */
     private _element: HTMLElement = this.elementRef.nativeElement;

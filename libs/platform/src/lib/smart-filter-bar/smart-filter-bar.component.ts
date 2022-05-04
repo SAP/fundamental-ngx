@@ -242,11 +242,9 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
             data: dialogData
         });
 
-        dialogRef.afterClosed.pipe(take(1)).subscribe(
-            (selectedFilters: string[]) => {
-                this._setSelectedFilters(selectedFilters);
-            }
-        );
+        dialogRef.afterClosed.pipe(take(1)).subscribe((selectedFilters: string[]) => {
+            this._setSelectedFilters(selectedFilters);
+        });
     }
 
     /** @hidden */

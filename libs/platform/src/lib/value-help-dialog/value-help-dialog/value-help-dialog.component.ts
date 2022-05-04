@@ -307,7 +307,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
 
     /** @hidden */
     get hasSelectedTab(): boolean {
-        return !!this.selectedTab && (this.selectedTab in VhdTab);
+        return this.selectedTab != null && this.selectedTab in VhdTab;
     }
 
     /** @hidden */

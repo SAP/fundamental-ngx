@@ -144,17 +144,16 @@ export class MoveToComponent implements OnInit {
     private _getParentFolderByCurrentFolderId(documentId?: string | number): UploadCollectionFolder | undefined {
         let foundObj: UploadCollectionFolder | undefined;
 
-
         if (documentId) {
             JSON.stringify(this.items, (_, nestedValue) => {
                 if (!isObject(nestedValue) || nestedValue.type === 'file' || !nestedValue.files) {
                     return nestedValue;
                 }
-    
+
                 if (nestedValue.files.some((item) => item.documentId === documentId)) {
                     foundObj = nestedValue;
                 }
-    
+
                 return nestedValue;
             });
         }

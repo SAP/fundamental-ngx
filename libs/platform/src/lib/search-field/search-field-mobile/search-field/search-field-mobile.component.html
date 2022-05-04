@@ -4,9 +4,9 @@
             <ng-template fdTemplate="header">
                 <div fd-bar-middle>
                     <fd-bar-element [fullWidth]="true">
-                        <ng-container 
-                        *ngIf="childContent?.inputFieldTemplate"
-                        [ngTemplateOutlet]="childContent?.inputFieldTemplate!"
+                        <ng-container
+                            *ngIf="childContent?.inputFieldTemplate"
+                            [ngTemplateOutlet]="childContent?.inputFieldTemplate!"
                         ></ng-container>
                     </fd-bar-element>
                     <button
@@ -21,8 +21,8 @@
         </fd-dialog-header>
 
         <fd-dialog-body>
-            <ng-container 
-                *ngIf="childContent?.suggestionMenuTemplate" 
+            <ng-container
+                *ngIf="childContent?.suggestionMenuTemplate"
                 [ngTemplateOutlet]="childContent?.suggestionMenuTemplate!"
             ></ng-container>
         </fd-dialog-body>

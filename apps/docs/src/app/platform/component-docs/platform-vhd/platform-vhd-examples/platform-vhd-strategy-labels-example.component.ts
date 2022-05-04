@@ -68,12 +68,12 @@ export class PlatformVhdStrategyLabelExampleComponent implements OnInit {
         equalTo: 'ilingana ne-',
         between: 'FROM...TO'
     };
-    formatTokenFn = ((value: Partial<VhdValue<ExampleTestModel>>): void => {
+    formatTokenFn = (value: Partial<VhdValue<ExampleTestModel>>): void => {
         this.actualItems = [
             ...(value.selected || []).map((item) => item.name),
             ...(value.conditions || []).map((item) => this.conditionDisplayFn(item))
         ].filter((v): v is string => !!v);
-    });
+    };
 
     conditionDisplayFn = (item: VhdIncludedEntity | VhdExcludedEntity): string | null => {
         const value = (() => {

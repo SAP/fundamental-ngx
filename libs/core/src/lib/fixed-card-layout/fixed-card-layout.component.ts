@@ -301,9 +301,9 @@ export class FixedCardLayoutComponent
         this._changeDetector.detectChanges();
 
         const wrapperColumns = this._cardColumns.map((column) =>
-            column.map(
-                (card) => this._cardWrappers.find((wrapper) => wrapper.getSortedItems()[0].data === card)?.element
-            ).filter((v): v is ElementRef<HTMLElement> => !!v)
+            column
+                .map((card) => this._cardWrappers.find((wrapper) => wrapper.getSortedItems()[0].data === card)?.element)
+                .filter((v): v is ElementRef<HTMLElement> => !!v)
         );
 
         const columnsHeights = wrapperColumns

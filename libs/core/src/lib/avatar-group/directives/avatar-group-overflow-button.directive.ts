@@ -41,7 +41,7 @@ export class AvatarGroupOverflowButtonDirective implements OnChanges, CssClassBu
         return [
             'fd-button',
             'fd-avatar-group__more-button',
-            this.color && this._getMoreButtonColorCssClass() || '',
+            (this.color && this._getMoreButtonColorCssClass()) || '',
             this.size ? `fd-avatar-group__more-button--${this.size}` : '',
             this.class
         ];

@@ -62,9 +62,8 @@ export class PanelContentDirective {
     }
 
     /** @hidden */
-    private readonly _defaultId = 'fd-panel-content-' + panelContentUniqueId++;;
-    
+    private readonly _defaultId = 'fd-panel-content-' + panelContentUniqueId++;
+
     /** @hidden */
     private _id: string = this._defaultId;
-
 }

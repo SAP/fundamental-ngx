@@ -179,9 +179,6 @@ export class P13SortingDialogComponent implements Resettable {
 @Pipe({ name: 'getAvailableSortColumns', pure: false })
 export class GetAvailableSortColumnsPipe implements PipeTransform {
     transform(columns: SortDialogColumn[], rules: SortRule[], currentKey: string | null): SortDialogColumn[] {
-        if (!currentKey) {
-            return columns;
-        }
         const usedKeys = new Set(rules.map((r) => r.columnKey));
         return columns.filter((c) => !usedKeys.has(c.key) || currentKey === c.key);
     }

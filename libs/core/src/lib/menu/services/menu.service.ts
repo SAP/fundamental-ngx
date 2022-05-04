@@ -40,7 +40,7 @@ export class MenuService {
         return this._rtlService?.rtl.value;
     }
 
-    constructor(private _renderer: Renderer2, @Optional() private readonly _rtlService: RtlService) { }
+    constructor(private _renderer: Renderer2, @Optional() private readonly _rtlService: RtlService) {}
 
     /** Reference to menu component */
     get menu(): MenuComponent {
@@ -293,11 +293,12 @@ export class MenuService {
 
     /** @hidden Depending on direction returns closest enabled sibling of given node */
     private _closestEnabled(node: MenuNode, direction: 'up' | 'down'): MenuNode | null {
-        const siblings = direction === 'up' ? [...this._nodeSiblings(node) ?? []].reverse() : this._nodeSiblings(node);
+        const siblings =
+            direction === 'up' ? [...(this._nodeSiblings(node) ?? [])].reverse() : this._nodeSiblings(node);
 
         if (siblings) {
             const startIndex = siblings.indexOf(node) + 1;
-    
+
             for (let i = startIndex; i < siblings.length; i++) {
                 if (siblings[i].item && !siblings[i].item!.disabled) {
                     return siblings[i];

@@ -113,7 +113,7 @@ export class HtmlSanitizer {
         const newNode = this._safeWrapper?.iframeDoc?.createElement(node.tagName);
 
         if (!newNode) {
-            throw new Error("Failed to create node");
+            throw new Error('Failed to create node');
         }
 
         for (const key in this.attributeWhitelist) {

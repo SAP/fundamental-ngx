@@ -122,7 +122,8 @@ export class IconTabBarTextTypeComponent extends IconTabBarBase {
 
     /** @hidden */
     private _canDrop(event: FdDnDEvent): boolean {
-        let parentUId: Nullable<string> = event.action === 'replace' ? event.targetItem.parentUId : event.targetItem.uId;
+        let parentUId: Nullable<string> =
+            event.action === 'replace' ? event.targetItem.parentUId : event.targetItem.uId;
         while (parentUId) {
             if (parentUId === event.draggableItem.uId) {
                 return false;

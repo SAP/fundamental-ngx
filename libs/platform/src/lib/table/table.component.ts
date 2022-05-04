@@ -708,7 +708,9 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
         if ('trackBy' in changes) {
             this._rowTrackBy =
-                typeof this.trackBy === 'function' ? (index, item) => this.trackBy(index, item.value) : undefined as any;
+                typeof this.trackBy === 'function'
+                    ? (index, item) => this.trackBy(index, item.value)
+                    : (undefined as any);
         }
 
         if (changes.contentDensity?.currentValue) {
@@ -1852,7 +1854,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
     /** @hidden */
     private _buildSortRulesMap(state = this.getTableState()): void {
-        this._sortRulesMap = new Map(state.sortBy.filter(rule => rule.field).map((rule) => [rule.field!, rule]));
+        this._sortRulesMap = new Map(state.sortBy.filter((rule) => rule.field).map((rule) => [rule.field!, rule]));
     }
 
     /** @hidden */

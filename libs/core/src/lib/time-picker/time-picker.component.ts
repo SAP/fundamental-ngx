@@ -198,10 +198,10 @@ export class TimePickerComponent<D>
         if (this._state == null && this.useValidation && this._isInvalidTimeInput) {
             return 'error';
         }
-        return this._state;
+        return this._state ?? 'default';
     }
 
-    private _state: FormStates = 'default';
+    private _state: FormStates | null = null;
 
     /**
      * Whether AddOn Button should be focusable
@@ -387,7 +387,7 @@ export class TimePickerComponent<D>
      * @hidden
      * Function that implements Validator Interface, adds validation support for forms
      */
-    validate(): { [key: string]: any; } | null {
+    validate(): { [key: string]: any } | null {
         if (this._isInvalidTimeInput) {
             return {
                 timeValidation: {
@@ -616,6 +616,6 @@ export class TimePickerComponent<D>
         this._popoverFormMessage.init(this._inputGroupElement);
         this._popoverFormMessage.message = this._message ?? '';
         this._popoverFormMessage.triggers = this._messageTriggers;
-        this._popoverFormMessage.messageType = this._state;
+        this._popoverFormMessage.messageType = this._state ?? 'default';
     }
 }

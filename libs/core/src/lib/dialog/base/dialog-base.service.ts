@@ -37,6 +37,6 @@ export abstract class DialogBaseService<T> {
     /** @hidden Destroy existing dialog */
     protected _destroyDialog(dialog: ComponentRef<T>): void {
         this._dynamicComponentService.destroyComponent(dialog);
-        this._dialogs = this._dialogs.filter(d => d !== dialog);
+        this._dialogs = this._dialogs.filter((d) => d !== dialog);
     }
 }

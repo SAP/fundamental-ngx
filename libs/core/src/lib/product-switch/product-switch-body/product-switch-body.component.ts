@@ -184,7 +184,6 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
             return;
         }
 
-
         if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
             (<HTMLElement>children[i + nextIndexByColumn])?.focus();
         }

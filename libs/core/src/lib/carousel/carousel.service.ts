@@ -379,7 +379,9 @@ export class CarouselService implements OnDestroy {
         const events = ['mousemove', 'touchmove'];
 
         if (!this._document) {
-            throw new Error(`Could not setup drag event subscription. Expected to get document ref, got ${this._document} instead`);
+            throw new Error(
+                `Could not setup drag event subscription. Expected to get document ref, got ${this._document} instead`
+            );
         }
 
         this._subscribeToEvents(events, this._document, (event) => {
@@ -399,7 +401,9 @@ export class CarouselService implements OnDestroy {
         const events = ['mouseup', 'touchend'];
 
         if (!this._document) {
-            throw new Error(`Could not setup drag event subscription. Expected to get document ref, got ${this._document} instead`);
+            throw new Error(
+                `Could not setup drag event subscription. Expected to get document ref, got ${this._document} instead`
+            );
         }
 
         this._subscribeToEvents(events, this._document, (event) => {

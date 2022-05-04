@@ -86,7 +86,8 @@ export class UploadCollectionDataProviderTest extends UploadCollectionDataProvid
             map((updatedItems) => {
                 const ids = newFiles
                     .filter((file) => {
-                        const includes = file.item.documentId && this._cancelUploadNewFileIds.includes(file.item.documentId);
+                        const includes =
+                            file.item.documentId && this._cancelUploadNewFileIds.includes(file.item.documentId);
                         if (includes) {
                             this._cancelUploadNewFileIds = this._cancelUploadNewFileIds.filter(
                                 (id) => id !== file.item.documentId
@@ -322,9 +323,7 @@ export class UploadCollectionDataProviderTest extends UploadCollectionDataProvid
                     return res;
                 }, {} as Record<string, UploadCollectionItem>);
 
-                currentItem.files = currentItem.files.map((item) =>
-                    hash[item.documentId as any] || item
-                );
+                currentItem.files = currentItem.files.map((item) => hash[item.documentId as any] || item);
 
                 break;
             } else {

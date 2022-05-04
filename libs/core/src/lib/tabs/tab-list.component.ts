@@ -19,7 +19,14 @@ import {
 } from '@angular/core';
 import { fromEvent, merge, Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime, delay, filter, first, map, startWith, switchMap, takeUntil } from 'rxjs/operators';
-import { getElementCapacity, getElementWidth, KeyUtil, resizeObservable, scrollTop, ContentDensityService } from '@fundamental-ngx/core/utils';
+import {
+    getElementCapacity,
+    getElementWidth,
+    KeyUtil,
+    resizeObservable,
+    scrollTop,
+    ContentDensityService
+} from '@fundamental-ngx/core/utils';
 import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.component';
 import { TabLinkDirective } from './tab-link/tab-link.directive';
 import { TabItemDirective } from './tab-item/tab-item.directive';

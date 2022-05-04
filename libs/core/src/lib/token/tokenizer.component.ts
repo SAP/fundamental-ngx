@@ -487,7 +487,7 @@ export class TokenizerComponent
                 const moreTokens = side === 'right' ? this.moreTokensRight : this.moreTokensLeft;
 
                 if (token) {
-                    if ( moreTokens.indexOf(token) === -1) {
+                    if (moreTokens.indexOf(token) === -1) {
                         moreTokens.push(token);
                     }
                     token.elementRef.nativeElement.style.display = 'none';

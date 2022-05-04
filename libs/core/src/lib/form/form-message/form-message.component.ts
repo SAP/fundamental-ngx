@@ -70,7 +70,7 @@ export class FormMessageComponent implements CssClassBuilder, OnInit, OnChanges 
             this.embedded ? CSS_CLASS_NAME.messageEmbedded : '',
             getTypeClassName(this.type),
             this.class
-        ].filter((v): v is string => !!v);;
+        ].filter((v): v is string => !!v);
     }
 
     /** @hidden */

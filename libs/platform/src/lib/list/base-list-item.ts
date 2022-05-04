@@ -209,21 +209,21 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     constructor(
         protected _changeDetectorRef: ChangeDetectorRef,
         public itemEl: ElementRef,
-        protected _listConfig: ListConfig,
+        protected _listConfig: ListConfig
     ) {
         super(_changeDetectorRef);
     }
 
     /** @hidden
      * radio button selected value binded to template */
-    _selectionValue: string;
+    _selectionValue: Nullable<string>;
 
     @Input('selectionValue')
-    get selectionValue(): string {
+    get selectionValue(): Nullable<string> {
         return this._selectionValue;
     }
 
-    set selectionValue(value: string) {
+    set selectionValue(value: Nullable<string>) {
         this._selected = false;
         this._selectionValue = value;
         if (this._selectionValue !== undefined && this.selectionValue !== null) {

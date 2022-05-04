@@ -135,7 +135,9 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
 
         try {
             const am = formatter.formatToParts(new Date(2020, 0, 1, 6)).find(({ type }) => type === 'dayPeriod')?.value;
-            const pm = formatter.formatToParts(new Date(2020, 0, 1, 16)).find(({ type }) => type === 'dayPeriod')?.value;
+            const pm = formatter
+                .formatToParts(new Date(2020, 0, 1, 16))
+                .find(({ type }) => type === 'dayPeriod')?.value;
 
             return am && pm ? [am, pm] : DEFAULT_PERIODS;
         } catch (e) {

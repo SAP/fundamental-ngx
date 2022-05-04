@@ -23,11 +23,13 @@ export class AvatarGroupGroupTypeExampleComponent {
     }
 
     getPopoverCtrlAriaLabel(overflowItemsCount = 0): string {
-        return 'Has popup type dialog Conjoined avatars, ' +
-        ((this.people?.length || 0) - overflowItemsCount) +
-        ' avatars displayed, ' +
-        overflowItemsCount +
-        ' avatars hidden, activate for complete list';
+        return (
+            'Has popup type dialog Conjoined avatars, ' +
+            ((this.people?.length || 0) - overflowItemsCount) +
+            ' avatars displayed, ' +
+            overflowItemsCount +
+            ' avatars hidden, activate for complete list'
+        );
     }
 
     constructor(private readonly avatarGroupDataExampleService: AvatarGroupDataExampleService) {}

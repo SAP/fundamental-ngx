@@ -46,7 +46,13 @@ import {
     SliderValueTargets
 } from './slider.model';
 import { MIN_DISTANCE_BETWEEN_TICKS } from './constants';
-import { RtlService,ContentDensityService ,KeyUtil ,applyCssClass ,CssClassBuilder } from '@fundamental-ngx/core/utils';
+import {
+    RtlService,
+    ContentDensityService,
+    KeyUtil,
+    applyCssClass,
+    CssClassBuilder
+} from '@fundamental-ngx/core/utils';
 
 export const SLIDER_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
@@ -752,7 +758,7 @@ export class SliderComponent
         } else {
             const total = this.max - this.min;
             const tickMarksCount = total / this.step + 1;
-            if (tickMarksCount > this._maxTickMarksNumber) {
+            if (this._maxTickMarksNumber !== undefined && tickMarksCount > this._maxTickMarksNumber) {
                 this._tickMarks = [
                     { position: 0, value: 0, label: `${this.min}` },
                     { position: 100, value: total, label: `${this.max}` }
@@ -773,9 +779,9 @@ export class SliderComponent
     }
 
     /** @hidden */
-    private get _maxTickMarksNumber(): number {
+    private get _maxTickMarksNumber(): number | undefined {
         if (!this.trackEl || !this.trackEl.nativeElement) {
-            return 0;
+            return;
         }
 
         return Math.floor(this.trackEl.nativeElement.getBoundingClientRect().width / MIN_DISTANCE_BETWEEN_TICKS);

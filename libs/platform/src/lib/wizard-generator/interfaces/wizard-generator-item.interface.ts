@@ -98,7 +98,7 @@ type PreparedWizardGeneratorItemFields = {
     title: string;
     optionalText: string;
     status: WizardStepStatus;
-}
+};
 
 /**
  * @hidden

@@ -19,10 +19,7 @@ export type FillingType = 'radial' | 'angled' | 'linearup' | 'lineardown' | 'lin
 export type FillingDirection = 'clockwise' | 'counterclockwise';
 
 export class Point {
-    constructor(
-        public x: number,
-        public y: number,
-    ) {}
+    constructor(public x: number, public y: number) {}
 }
 
 @Component({
@@ -302,7 +299,10 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
         // starts at 12, the algorithm computes the coordination for clockwise direction only
         // counter clockwise direction is managed by symmetry
         const oStartPoint = new Point(boundingBoxSvg.x + boundingBoxSvg.width / 2, boundingBoxSvg.y);
-        const oCentrePoint = new Point(boundingBoxSvg.x + boundingBoxSvg.width / 2, boundingBoxSvg.y + boundingBoxSvg.height / 2);
+        const oCentrePoint = new Point(
+            boundingBoxSvg.x + boundingBoxSvg.width / 2,
+            boundingBoxSvg.y + boundingBoxSvg.height / 2
+        );
 
         // Reflects x coordinate by centre point for Counter Clockwise type
         const _adjustIfCounterClockwise = (oPoint: Point): Point => {
@@ -338,7 +338,9 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
         }
 
         if (45 <= angle) {
-            points.push(_adjustIfCounterClockwise(new Point(boundingBoxSvg.x + boundingBoxSvg.width, boundingBoxSvg.y)));
+            points.push(
+                _adjustIfCounterClockwise(new Point(boundingBoxSvg.x + boundingBoxSvg.width, boundingBoxSvg.y))
+            );
         }
 
         if (45 < angle && angle < 135) {
@@ -351,7 +353,11 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
         }
 
         if (135 <= angle) {
-            points.push(_adjustIfCounterClockwise(new Point(boundingBoxSvg.x + boundingBoxSvg.width, boundingBoxSvg.y + boundingBoxSvg.height)));
+            points.push(
+                _adjustIfCounterClockwise(
+                    new Point(boundingBoxSvg.x + boundingBoxSvg.width, boundingBoxSvg.y + boundingBoxSvg.height)
+                )
+            );
         }
 
         if (135 < angle && angle < 225) {
@@ -364,12 +370,17 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
         }
 
         if (225 <= angle) {
-            points.push(_adjustIfCounterClockwise(new Point(boundingBoxSvg.x, boundingBoxSvg.y + boundingBoxSvg.height)));
+            points.push(
+                _adjustIfCounterClockwise(new Point(boundingBoxSvg.x, boundingBoxSvg.y + boundingBoxSvg.height))
+            );
         }
 
         if (225 < angle && angle < 315) {
             yDifferenceFromBoundaryCentre = computeDifferenceFromBoundaryCentre(angle, 270, boundingBoxSvg.width);
-            polygonPoint = new Point(boundingBoxSvg.x, boundingBoxSvg.y + boundingBoxSvg.height / 2 + yDifferenceFromBoundaryCentre);
+            polygonPoint = new Point(
+                boundingBoxSvg.x,
+                boundingBoxSvg.y + boundingBoxSvg.height / 2 + yDifferenceFromBoundaryCentre
+            );
             points.push(_adjustIfCounterClockwise(polygonPoint));
         }
 
@@ -379,7 +390,10 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
 
         if (315 < angle && angle <= 360) {
             xDifferenceFromBoundaryCentre = computeDifferenceFromBoundaryCentre(angle, 360, boundingBoxSvg.height);
-            polygonPoint = new Point(boundingBoxSvg.x + boundingBoxSvg.width / 2 - xDifferenceFromBoundaryCentre, boundingBoxSvg.y);
+            polygonPoint = new Point(
+                boundingBoxSvg.x + boundingBoxSvg.width / 2 - xDifferenceFromBoundaryCentre,
+                boundingBoxSvg.y
+            );
             points.push(_adjustIfCounterClockwise(polygonPoint));
         }
 

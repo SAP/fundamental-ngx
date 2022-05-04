@@ -91,9 +91,9 @@ export class TextTypePopoverComponent extends IconTabBarPopoverBase implements O
 
     /** @hidden */
     private _calculateIfContainsSelected(): void {
-        this._containsSelected = !!this.parentTab.subItems && this._getChildren(this.parentTab.subItems).some(
-            ({ uId }) => uId === this.selectedSubItemUid
-        );
+        this._containsSelected =
+            !!this.parentTab.subItems &&
+            this._getChildren(this.parentTab.subItems).some(({ uId }) => uId === this.selectedSubItemUid);
     }
 
     /** @hidden */

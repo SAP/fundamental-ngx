@@ -61,9 +61,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
     set selectedDate(date: Nullable<D>) {
         this._selectedDate = date;
         if (this._dayViewGrid) {
-            const dayFromDate = this._calendarDayList.find((day) =>
-                this._dateTimeAdapter.datesEqual(day.date, date)
-            );
+            const dayFromDate = this._calendarDayList.find((day) => this._dateTimeAdapter.datesEqual(day.date, date));
             this._changeSelectedSingleDay(dayFromDate, this._calendarDayList);
         }
     }
@@ -590,9 +588,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
         });
 
         if (this.calType === 'single' && this._selectedDate) {
-            const _day = calendar.find((day) =>
-                this._dateTimeAdapter.datesEqual(day.date, this._selectedDate)
-            );
+            const _day = calendar.find((day) => this._dateTimeAdapter.datesEqual(day.date, this._selectedDate));
             this._changeSelectedSingleDay(_day, calendar);
         }
 
@@ -932,7 +928,8 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
                     startDay &&
                     !startDay.blocked &&
                     !startDay.disabled &&
-                    (typeof this.disableRangeStartFunction !== 'function' || !this.disableRangeStartFunction(startDay.date))
+                    (typeof this.disableRangeStartFunction !== 'function' ||
+                        !this.disableRangeStartFunction(startDay.date))
                 ) {
                     startDay.selected = true;
                     startDay.selectedFirst = true;

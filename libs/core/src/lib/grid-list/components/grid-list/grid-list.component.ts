@@ -158,7 +158,12 @@ export class GridListComponent<T> extends GridList<T> implements OnChanges, Afte
     }
 
     /** @hidden */
-    setSelectedItem(item: T, componentIndex: number, action?: GridListSelectionActions | null, event?: PointerEvent): void {
+    setSelectedItem(
+        item: T,
+        componentIndex: number,
+        action?: GridListSelectionActions | null,
+        event?: PointerEvent
+    ): void {
         if (!action) {
             this._selectedItems.added = [item];
             const selectedItem = this._selectedItems.selection[0];

@@ -337,17 +337,17 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
             delete this._groupedCollectionPriority[itemGroup];
         }
 
-            itemsToRemove?.forEach((item) => {
-                this._removeItemFromArray(this._normalElements, item);
-                const isDisappear = this._getElementPriority(item) === OverflowPriorityEnum.DISAPPEAR;
-                if (isDisappear) {
-                    this._disappearElements.push(item);
-                }
+        itemsToRemove?.forEach((item) => {
+            this._removeItemFromArray(this._normalElements, item);
+            const isDisappear = this._getElementPriority(item) === OverflowPriorityEnum.DISAPPEAR;
+            if (isDisappear) {
+                this._disappearElements.push(item);
+            }
 
-                if (this._overflowElements.indexOf(item) === -1 && !isDisappear) {
-                    this._overflowElements.push(item);
-                }
-            });
+            if (this._overflowElements.indexOf(item) === -1 && !isDisappear) {
+                this._overflowElements.push(item);
+            }
+        });
     }
 
     /** @hidden */
@@ -442,8 +442,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
         const groups = Object.keys(this._groupedCollection);
 
         return groups.reduce((acc, itemGroup) => {
-            const sortedPriorities = this._groupedCollection![itemGroup]
-                .map(this._getElementPriority)
+            const sortedPriorities = this._groupedCollection![itemGroup].map(this._getElementPriority)
                 .filter((prio) => prio !== OverflowPriorityEnum.ALWAYS && prio !== OverflowPriorityEnum.NEVER)
                 .sort(this._sortPriorities.bind(this));
 
@@ -467,7 +466,9 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
         return groups.reduce((lowestGroup, currentGroup) => {
             const lowestGroupPriority = priority[lowestGroup];
             const currentGroupPriority = priority[currentGroup];
-            if (OVERFLOW_PRIORITY_SCORE.get(currentGroupPriority)! < OVERFLOW_PRIORITY_SCORE.get(lowestGroupPriority)!) {
+            if (
+                OVERFLOW_PRIORITY_SCORE.get(currentGroupPriority)! < OVERFLOW_PRIORITY_SCORE.get(lowestGroupPriority)!
+            ) {
                 return +currentGroup;
             }
 

@@ -28,7 +28,6 @@ import textTypeConfigs from '!./examples/config-for-examples/text-type.config?ra
 // Duplicate types here, because import for pure files doesn't work for stackblitz  https://github.com/SAP/fundamental-ngx/issues/5351
 export type SemanticColor = 'negative' | 'critical' | 'positive' | 'informative';
 
-
 export interface IconTabBarItem extends TabConfig {
     index: number;
     uId: string;

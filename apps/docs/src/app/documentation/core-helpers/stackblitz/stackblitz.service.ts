@@ -94,7 +94,8 @@ export class StackblitzService {
 
         defaultProjectInfo.files['src/app/app.module.ts'] = this.getModule(stackBlitzFiles);
 
-        const mainFileSelector: string = stackBlitzFiles.find((file) => file.main)?.selector || stackBlitzFiles[0].selector;
+        const mainFileSelector: string =
+            stackBlitzFiles.find((file) => file.main)?.selector || stackBlitzFiles[0].selector;
 
         defaultProjectInfo.files['src/index.html'] = `
 <html>

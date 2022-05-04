@@ -1,4 +1,10 @@
-<fdp-table [dataSource]="source" [pageScrolling]="true" [pageSize]="50" bodyHeight="20rem" [loading]="!!(loading | async)">
+<fdp-table
+    [dataSource]="source"
+    [pageScrolling]="true"
+    [pageSize]="50"
+    bodyHeight="20rem"
+    [loading]="!!(loading | async)"
+>
     <fdp-table-toolbar title="Order Items"> </fdp-table-toolbar>
 
     <fdp-column name="name" key="name" label="Name" align="start"> </fdp-column>

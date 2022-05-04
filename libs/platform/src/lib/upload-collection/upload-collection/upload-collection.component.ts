@@ -514,7 +514,7 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
 
         const _activeItem = this._activeItem;
         const currentFolder = this._getCurrentFolder();
-        const movableItems = multiple ? this.selectedItems : (_activeItem ? [_activeItem] : []);
+        const movableItems = multiple ? this.selectedItems : _activeItem ? [_activeItem] : [];
         const dialogRef = this._dialogService.open(MoveToComponent, {
             responsivePadding: true,
             verticalPadding: false,

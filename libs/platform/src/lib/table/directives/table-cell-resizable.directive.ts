@@ -72,7 +72,7 @@ export class PlatformTableCellResizableDirective implements AfterViewInit, OnDes
     }
 
     /** @hidden */
-    private _getResizer(event: MouseEvent): { resizerPosition: number, resizedColumn: string } | null {
+    private _getResizer(event: MouseEvent): { resizerPosition: number; resizedColumn: string } | null {
         const el = this._elRef.nativeElement;
         const elPosition = el.getBoundingClientRect();
 

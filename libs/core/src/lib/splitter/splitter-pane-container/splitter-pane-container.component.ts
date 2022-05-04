@@ -351,7 +351,8 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
     private _setDefaultPane(): void {
         const setDefaultPane = (): void => {
             if (this._splitter.defaultPaneId) {
-                this._defaultPane = this._panes.find((pane) => pane.id === this._splitter.defaultPaneId) ?? this._directPanes[0];;
+                this._defaultPane =
+                    this._panes.find((pane) => pane.id === this._splitter.defaultPaneId) ?? this._directPanes[0];
             }
 
             /** Detaching basically works without the code but it's the edge-case */

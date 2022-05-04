@@ -14,7 +14,6 @@ import { Subscription } from 'rxjs';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
 import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/core/utils';
 
-
 /**
  * Directive intended for use on form controls.
  *

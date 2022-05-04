@@ -471,8 +471,10 @@ export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, Afte
      * @param card: ResizableCardItemComponent
      */
     private _updateColumnsHeight(card: ResizableCardItemComponent): void {
-        const columnsStart = card[this._directionPosition] != null ? 
-            Math.floor(card[this._directionPosition]! / horizontalResizeStep) : 0;
+        const columnsStart =
+            card[this._directionPosition] != null
+                ? Math.floor(card[this._directionPosition]! / horizontalResizeStep)
+                : 0;
 
         // Get width of current card resizing and assign width here for that card
         const cardBaseColSpan = Math.floor(card.cardWidth / horizontalResizeStep);

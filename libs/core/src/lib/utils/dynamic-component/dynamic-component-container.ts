@@ -1,4 +1,5 @@
 import {
+    ComponentFactoryResolver,
     ComponentRef,
     ElementRef,
     EmbeddedViewRef,
@@ -18,7 +19,7 @@ export abstract class DynamicComponentContainer<T = TemplateRef<any> | Type<any>
     protected _componentRef: ComponentRef<any> | EmbeddedViewRef<any>;
 
     /** @hidden */
-    constructor(protected _elementRef: ElementRef) {}
+    constructor(protected _elementRef: ElementRef, protected _componentFactoryResolver: ComponentFactoryResolver) {}
 
     /** @hidden Load received content */
     protected abstract _loadContent(): void;
@@ -26,7 +27,8 @@ export abstract class DynamicComponentContainer<T = TemplateRef<any> | Type<any>
     /** @hidden Load received content as component */
     protected _createFromComponent(content: Type<any>): void {
         this.containerRef.clear();
-        this._componentRef = this.containerRef.createComponent(content);
+        const componentFactory = this._componentFactoryResolver.resolveComponentFactory(content);
+        this._componentRef = this.containerRef.createComponent(componentFactory);
     }
 
     /** @hidden Load received content as embedded view */

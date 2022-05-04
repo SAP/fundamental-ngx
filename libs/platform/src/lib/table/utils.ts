@@ -100,7 +100,6 @@ export const filterByDate = <D = any>(
 export const filterByBoolean = (rows: TableRow[], filter: CollectionBooleanFilter): TableRow[] =>
     rows.filter((r) => get(r.value, filter.field) === filter.value);
 
-
 export const getUniqueListValuesByKey = <T, K extends keyof T>(list: T[], key: K): T[] =>
     Array.from(
         list

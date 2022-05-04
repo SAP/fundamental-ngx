@@ -173,6 +173,8 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
      * Whether list component has multiselection
      * binding in tempate to append class */
     private _multiSelect = false;
+    /** @hidden */
+    private _selectedvalue: string | null;
     /** @hidden
      * Whether row level selection mode is enabled to list component
      * for all the items
@@ -455,8 +457,8 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     _handleKeyDown(event: KeyboardEvent): void {
         event.stopImmediatePropagation();
         if (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE)) {
-             this._updateNavigation(event);
-         }
+            this._updateNavigation(event);
+        }
     }
 
     /** @hidden
@@ -517,19 +519,41 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
      * seprate PR for custom event**/
     @HostListener('click', ['$event'])
     _updateNavigation(event: Event): void {
+        let selectedItemId: string | null = '0';
+        const el = event.target instanceof HTMLElement ? event.target : null;
+        const parent = el?.closest('.fd-list__item');
+        if (parent) {
+            selectedItemId = parent.getAttribute('id');
+        }
+
         this.listItems.forEach((item, index) => {
-            item.anchor?.nativeElement.classList.remove('is-navigated');
+            if (item.anchor !== undefined) {
+                item.anchor.nativeElement.classList.remove('is-navigated');
+            }
             if (item._focused) {
                 this._keyManager?.updateActiveItem(index);
             }
         });
-
-        const el = event.target instanceof HTMLElement ? event.target : null;
-        
-        if (el?.tagName.toLowerCase() === 'a') {
+        if (el !== null && el.tagName.toLowerCase() === 'a') {
             el.classList.add('is-navigated');
-        } else if ( el?.tagName.toLowerCase() === 'li') {
+        } else if (
+            el !== null &&
+            el.tagName.toLowerCase() === 'li' &&
+            el.querySelector('a') !== undefined &&
+            el.querySelector('a') !== null
+        ) {
             el.querySelector('a')?.classList.add('is-navigated');
+        }
+
+        // TODO: selection management should be completely changed https://github.com/SAP/fundamental-ngx/issues/8008
+        if (el && selectedItemId) {
+            if (this.selectRow) {
+                this._handleRowSelect(selectedItemId);
+            } else if (this.selectionMode === 'single') {
+                this._handleSingleSelect(event, selectedItemId);
+            } else if (this.selectionMode === 'multi') {
+                this._handleMultiSelect(selectedItemId);
+            }
         }
     }
 
@@ -601,6 +625,92 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
         this._lastIndex = this._lastIndex + this.itemSize;
         this._tempItems = this._dsItems.slice(this._startIndex, this._lastIndex);
         return this._tempItems;
+    }
+
+    /** @hidden
+     /**List item with radio button styles,check,uncheckupdates
+     * event:any to avoid code duplication
+     */
+    private _handleSingleSelect(event: Event, selectedItemId: string): void {
+        const parent = event.target instanceof HTMLElement && event.target.closest('.fd-list__item');
+        const radio = parent ? parent.querySelector('input') : null;
+        // TODO: this doesn't work in production, should be fixed within https://github.com/SAP/fundamental-ngx/issues/8008
+        this._selectedvalue = radio ? radio.getAttribute('ng-reflect-value') : null;
+
+        this.listItems.forEach((item) => {
+            if (item.radioButtonComponent !== undefined) {
+                item._selected = false;
+                item.listItem.nativeElement.setAttribute('aria-checked', false);
+            }
+            this.stateChanges.next(item);
+        });
+        this._selectionModel.clear();
+        this.listItems.forEach((item) => {
+            item.selectionValue = this._selectedvalue;
+            if (item.listItem.nativeElement.getAttribute('id') === selectedItemId) {
+                item.listItem.nativeElement.setAttribute('_selected', true);
+                item.listItem.nativeElement.setAttribute('aria-checked', true);
+                this._selectItem(item);
+            }
+        });
+    }
+
+    private _handleRowSelect(selectedItemId: string): void {
+        // handles mutli select on row level without checkbox
+        if (this.selectionMode === 'multi') {
+            this.listItems.forEach((item) => {
+                if (item._selected) {
+                    this._selectionModel.select(item);
+                } else {
+                    this._selectionModel.deselect(item);
+                }
+                this.stateChanges.next(item);
+            });
+        }
+        // handles single select on row level without radiobutton
+        if (this.selectionMode === 'single') {
+            this.listItems.forEach((item) => {
+                if (item.anchor !== undefined) {
+                    item.listItem.nativeElement.setAttribute('_selected', false);
+                    item.listItem.nativeElement.setAttribute('aria-selected', false);
+                    item.listItem.nativeElement.classList.remove('is-selected');
+                    item.anchor.nativeElement.classList.remove('is-selected');
+                    this.stateChanges.next(item);
+                }
+            });
+            this._selectionModel.clear();
+            this.listItems.forEach((item) => {
+                if (item.listItem.nativeElement.getAttribute('id') === selectedItemId) {
+                    item.listItem.nativeElement.setAttribute('_selected', true);
+                    if (item.anchor !== undefined) {
+                        item.anchor.nativeElement.classList.add('is-selected');
+                    }
+                    this._selectItem(item);
+                }
+            });
+            selectedItemId = '0';
+        }
+    }
+
+    /** @hidden */
+    /** List item with checkbox styles,check,uncheckupdates
+     * event:any to avoid code duplication
+     */
+    private _handleMultiSelect(selectedItemId: string): void {
+        this.listItems.forEach((item) => {
+            if (item.listItem.nativeElement.getAttribute('id') === selectedItemId) {
+                const select = item.listItem.nativeElement.getAttribute('_selected');
+                item.listItem.nativeElement.setAttribute('_selected', !select);
+                if (item._selected) {
+                    item.listItem.nativeElement.setAttribute('aria-selected', true);
+                    this._selectionModel.select(item);
+                } else {
+                    item.listItem.nativeElement.setAttribute('aria-selected', false);
+                    this._selectionModel.deselect(item);
+                }
+                this.stateChanges.next(item);
+            }
+        });
     }
 }
 

@@ -51,7 +51,7 @@ export class RadioButtonComponent
 
     /** Sets the `aria-describedby` attribute to the element. */
     @Input()
-    ariaDescribedBy: Nullable<string>;;
+    ariaDescribedBy: Nullable<string>;
 
     /** sets radio tooltip */
     @Input()

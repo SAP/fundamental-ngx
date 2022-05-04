@@ -34,11 +34,7 @@ export class ActionListItemComponent extends BaseListItem {
     actionClicked = new EventEmitter<ActionChangeEvent>();
 
     /** @hidden */
-    constructor(
-        _changeDetectorRef: ChangeDetectorRef,
-        public itemEl: ElementRef,
-        protected _listConfig: ListConfig,
-    ) {
+    constructor(_changeDetectorRef: ChangeDetectorRef, public itemEl: ElementRef, protected _listConfig: ListConfig) {
         super(_changeDetectorRef, itemEl, _listConfig);
     }
 

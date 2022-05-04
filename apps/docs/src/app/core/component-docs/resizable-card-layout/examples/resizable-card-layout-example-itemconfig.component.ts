@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ResizableCardLayoutConfig, ResizedEvent, ResizableCardItemConfig } from '@fundamental-ngx/core/resizable-card-layout';
+import {
+    ResizableCardLayoutConfig,
+    ResizedEvent,
+    ResizableCardItemConfig
+} from '@fundamental-ngx/core/resizable-card-layout';
 
 @Component({
     selector: 'fd-resizable-card-layout-example-itemconfig',
@@ -119,47 +123,51 @@ export class ResizableCardLayoutExampleItemConfigComponent implements OnInit {
     /** Decides how much data is shown on card */
     private _showData(event: ResizedEvent): void {
         switch (event.card.title) {
-            case 'card1':{
+            case 'card1': {
                 const config = this.layoutConfig[0];
                 this.card1Data = this._getCardData(event, config, 4);
                 break;
-}
-            case 'card2':{
+            }
+            case 'card2': {
                 const config = this.layoutConfig[1];
                 this.card2Data = this._getCardData(event, config, 3);
                 break;
-}
-            case 'card3':{
+            }
+            case 'card3': {
                 const config = this.layoutConfig[2];
                 this.card3Data = this._getCardData(event, config, 3);
                 break;
-}
-            case 'card4':{
+            }
+            case 'card4': {
                 const config = this.layoutConfig[3];
                 this.card4Data = this._getCardData(event, config, 3);
                 break;
-}
-            case 'card5':{
+            }
+            case 'card5': {
                 const config = this.layoutConfig[4];
                 this.card5Data = this._getCardData(event, config, 3);
                 break;
-}
-            case 'card6':{
+            }
+            case 'card6': {
                 const config = this.layoutConfig[5];
                 this.card6Data = this._getCardData(event, config, 3);
                 break;
-}
-            case 'card7':{
+            }
+            case 'card7': {
                 const config = this.layoutConfig[6];
                 this.card7Data = this._getCardData(event, config, 3);
                 break;
-        }}
+            }
+        }
     }
 
     private _getCardData(event: ResizedEvent, config: ResizableCardItemConfig, listDataAmount: number): number[] {
         if (event.newCardHeightRowSpan === config.cardMiniHeaderRowSpan) {
             return [];
-        } else if (event.newCardHeightRowSpan === (config.cardMiniHeaderRowSpan ?? 0) + (config.cardMiniContentRowSpan ?? 0)) {
+        } else if (
+            event.newCardHeightRowSpan ===
+            (config.cardMiniHeaderRowSpan ?? 0) + (config.cardMiniContentRowSpan ?? 0)
+        ) {
             return this.listData.slice(0, listDataAmount);
         } else {
             const index = (event.newCardHeightRowSpan - (config.cardMiniHeaderRowSpan ?? 0)) / 3;

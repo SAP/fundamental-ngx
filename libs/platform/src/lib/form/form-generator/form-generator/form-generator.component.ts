@@ -375,7 +375,9 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
 
     /** @hidden */
     private _getOrderedControls(controls: DynamicFormGroupControls): (DynamicFormControl | DynamicFormControlGroup)[] {
-        return Object.values(controls).sort((a, b) => ((a.formItem?.rank ?? -Infinity) - (b.formItem?.rank ?? -Infinity)));
+        return Object.values(controls).sort(
+            (a, b) => (a.formItem?.rank ?? -Infinity) - (b.formItem?.rank ?? -Infinity)
+        );
     }
 
     /**
@@ -384,7 +386,9 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
      * will combine default value of hints for form generator with provided options.
      * @param guiOptions
      */
-    getHintOptions(guiOptions?: BaseDynamicFormItemGuiOptions | DynamicFormItemGuiOptions): FieldHintOptions | undefined {
+    getHintOptions(
+        guiOptions?: BaseDynamicFormItemGuiOptions | DynamicFormItemGuiOptions
+    ): FieldHintOptions | undefined {
         if (!guiOptions?.hint) {
             return;
         }

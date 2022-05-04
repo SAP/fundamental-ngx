@@ -144,10 +144,10 @@ export class TableDataProvider<T> {
             case 'number':
                 result = this.filterNumber(item, filter as CollectionNumberFilter);
                 break;
-            case 'date':{
+            case 'date': {
                 result = this.filterDate(item, filter as CollectionDateFilter, this.dateTimeAdapter);
                 break;
-            };
+            }
             case 'string':
             default:
                 result = Array.isArray(filter.value)

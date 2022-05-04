@@ -166,7 +166,7 @@ export class P13FilteringDialogComponent implements Resettable {
                 field: columnKey!,
                 value,
                 value2,
-                strategy: strategy!,
+                strategy: strategy!
             })
         );
     }

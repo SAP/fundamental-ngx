@@ -34,7 +34,8 @@ export class FilterRuleComponent implements OnDestroy {
             return;
         }
         this._subscriptions.add(
-            ngForm.statusChanges?.pipe(
+            ngForm.statusChanges
+                ?.pipe(
                     // Skip first that triggers on initial phase
                     skip(1)
                 )

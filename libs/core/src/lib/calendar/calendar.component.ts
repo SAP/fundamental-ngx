@@ -37,7 +37,6 @@ import { CalendarAggregatedYearViewComponent } from './calendar-views/calendar-a
 import { DisableDateFunction, EscapeFocusFunction, FocusableCalendarView } from './models/common';
 import { FdCalendarView, DaysOfWeek, CalendarType, NavigationButtonDisableFunction } from './types';
 
-
 let calendarUniqueId = 0;
 
 /**
@@ -374,7 +373,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
      * @hidden
      * Function that implements Validator Interface, adds validation support for forms
      */
-    validate(): { [key: string]: any; } | null {
+    validate(): { [key: string]: any } | null {
         return this.isModelValid()
             ? null
             : {

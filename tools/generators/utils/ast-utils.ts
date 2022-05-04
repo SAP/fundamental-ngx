@@ -91,7 +91,7 @@ export function replaceContentInFile(
     if (!tree.exists(filePath)) {
         throw new SchematicsException(`File not found: ${filePath}`);
     }
-    let indexTs = tree.read(filePath).toString();
+    let indexTs = tree.read(filePath)?.toString() ?? '';
     replacements.forEach(([replacer, replaceValue]) => (indexTs = indexTs.replace(replacer, replaceValue)));
     tree.overwrite(filePath, indexTs);
 }

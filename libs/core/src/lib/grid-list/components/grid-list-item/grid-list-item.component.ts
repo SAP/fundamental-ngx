@@ -62,7 +62,7 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
      */
     @Input()
     set layoutItemPattern(value: Nullable<string>) {
-        this.gridLayoutClasses = parseLayoutPattern(value || undefined, false);
+        this.gridLayoutClasses = value ? parseLayoutPattern(value, false) : [];
     }
 
     /**
@@ -74,7 +74,7 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
 
     /** Sets number of sub items */
     @Input()
-    counter: Nullable<number>;;
+    counter: Nullable<number>;
 
     /**
      * Value field stores information for radio button value, checkbox button and for GridListSelectionEvent
@@ -125,7 +125,7 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
     get type(): GridListItemType {
         return this._type;
     }
- 
+
     /** @hidden */
     private _type: GridListItemType = 'inactive';
 
@@ -201,14 +201,6 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
     }
 
     set gridLayoutClasses(value: string[]) {
-        if (!this._gridLayoutClasses) {
-            this._gridLayoutClasses = value;
-
-            this._addClassesNames(this._gridLayoutClasses);
-
-            return;
-        }
-
         this._removeClassesNames(this._gridLayoutClasses);
         this._gridLayoutClasses = value;
         this._addClassesNames(this._gridLayoutClasses);
@@ -226,12 +218,12 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
     _selectedItem?: T;
 
     /** @hidden */
-    get selectionMode(): GridListSelectionMode {
+    get selectionMode(): GridListSelectionMode | undefined {
         return this._selectionMode;
     }
 
     /** @hidden */
-    set selectionMode(mode: GridListSelectionMode) {
+    set selectionMode(mode: GridListSelectionMode | undefined) {
         this._selectionMode = mode;
 
         if (mode !== 'delete' && mode !== 'none' && !this.value) {
@@ -240,9 +232,8 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
 
         if (this.selected && this.value && this._index != null) {
             const action = this.selectionMode !== 'multiSelect' ? null : GridListSelectionActions.ADD;
-            const value = this.value;
 
-            this._gridList.setSelectedItem(value, this._index, action);
+            this._gridList.setSelectedItem(this.value, this._index, action);
         }
 
         this._cd.detectChanges();
@@ -252,7 +243,7 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
     _index?: number;
 
     /** @hidden */
-    private _selectionMode: GridListSelectionMode = 'none';
+    private _selectionMode?: GridListSelectionMode;
 
     /** @hidden */
     private _gridLayoutClasses: string[] = [];

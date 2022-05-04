@@ -25,7 +25,7 @@
                 i18n-placeholder="@@platformTableP13SortDialogNoneSelectedColumn|Table column select placeholder"
             >
                 <fd-option
-                    *ngFor="let column of columns | getAvailableSortColumns: rules : rule.columnKey"
+                    *ngFor="let column of columns | getAvailableSortColumns: rules:rule.columnKey"
                     [value]="column.key"
                 >
                     {{ column.label }}

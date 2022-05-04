@@ -39,7 +39,8 @@ export class PlatformChekboxTristateComponent implements AfterViewInit {
 
     private setControlOnAgreementsChange(): void {
         this.registrationForm
-            .get('agreements')?.valueChanges.pipe(
+            .get('agreements')
+            ?.valueChanges.pipe(
                 map((agreements) => this.getValuesFromObject(agreements)),
                 map((agreementsValues: boolean[]) => {
                     const agreeAll = agreementsValues.reduce((overall, value) => value && overall, true);

@@ -67,8 +67,8 @@ export abstract class UploadCollectionDataProvider extends DataProvider<UploadCo
         }
 
         let _list = this._defaultSorting(currentItems);
-        const searchText = params.get('searchText') as string ?? '';
-        const limit = +(params.get('limit') ?? 100 as number);
+        const searchText = (params.get('searchText') as string) ?? '';
+        const limit = +(params.get('limit') ?? (100 as number));
         const page = +(params.get('page') ?? 1);
 
         if (!searchText || searchText === '*') {

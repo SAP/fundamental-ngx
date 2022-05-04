@@ -319,7 +319,7 @@ export class PlatformUploadCollectionDataProviderExample extends UploadCollectio
                 }, {});
 
                 currentItem.files = currentItem.files.map((item) =>
-                item.documentId && hash[item.documentId] ? hash[item.documentId] : item
+                    item.documentId && hash[item.documentId] ? hash[item.documentId] : item
                 );
 
                 break;

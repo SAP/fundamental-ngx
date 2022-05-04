@@ -208,7 +208,9 @@
         <div
             *ngIf="(customValues && customValues.length > 0) || tooltipMode === 'readonly'"
             class="fd-slider--tooltip"
-            [innerText]="(customValues && customValues.length > 0) ? customValues[position].label : _popoverValueRef[target]"
+            [innerText]="
+                customValues && customValues.length > 0 ? customValues[position].label : _popoverValueRef[target]
+            "
         ></div>
 
         <input

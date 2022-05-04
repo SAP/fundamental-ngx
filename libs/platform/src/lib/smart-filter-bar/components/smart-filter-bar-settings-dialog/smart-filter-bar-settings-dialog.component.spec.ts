@@ -2,13 +2,12 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SmartFilterBarSettingsDialogComponent } from './smart-filter-bar-settings-dialog.component';
 import {
-    FdpSelectionChangeEvent,
-    FilterableColumnDataType,
-    FilterType,
     PlatformSmartFilterBarModule,
     SmartFilterSettingsDialogConfig
-} from '@fundamental-ngx/platform';
-import { DialogConfig, DialogRef } from '@fundamental-ngx/core';
+} from '@fundamental-ngx/platform/smart-filter-bar';
+import { DialogConfig, DialogRef } from '@fundamental-ngx/core/dialog';
+import { FilterableColumnDataType, FilterType } from '@fundamental-ngx/platform/table';
+import { FdpSelectionChangeEvent } from '@fundamental-ngx/platform/form';
 import { whenStable } from '@fundamental-ngx/core/tests';
 import { SmartFilterBarVisibilityCategory } from '../../interfaces/smart-filter-bar-visibility-category';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';

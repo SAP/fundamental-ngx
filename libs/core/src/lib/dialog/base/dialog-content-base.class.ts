@@ -1,4 +1,4 @@
-import { Nullable } from "@fundamental-ngx/core/shared";
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 export class DialogContentBase {
     /** Dialog Title id */

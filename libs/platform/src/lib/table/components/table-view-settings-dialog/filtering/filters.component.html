@@ -3,8 +3,8 @@
         <ng-template fdTemplate="header">
             <div fd-bar-left>
                 <fd-bar-element>
-                    <ng-container 
-                        *ngIf="activeFilterStepView?.titleTemplateRef" 
+                    <ng-container
+                        *ngIf="activeFilterStepView?.titleTemplateRef"
                         [ngTemplateOutlet]="activeFilterStepView.titleTemplateRef"
                     ></ng-container>
                 </fd-bar-element>
@@ -20,8 +20,8 @@
     </fd-dialog-header>
 
     <fd-dialog-body>
-        <ng-container 
-            *ngIf="activeFilterStepView?.bodyTemplateRef" 
+        <ng-container
+            *ngIf="activeFilterStepView?.bodyTemplateRef"
             [ngTemplateOutlet]="activeFilterStepView.bodyTemplateRef"
         ></ng-container>
     </fd-dialog-body>

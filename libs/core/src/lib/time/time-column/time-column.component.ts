@@ -440,7 +440,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
                     buffer(trigger),
                     map((keys) => keys.join('')),
                     map((value) => this._getValue(value)),
-                    map((value) => this._getItem(value)),
+                    map((value) => this._getItem(value))
                 )
                 .subscribe((item) => this._pickTime(item, false, true))
         );

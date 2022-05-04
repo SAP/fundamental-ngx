@@ -226,12 +226,11 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     /** @hidden Updates focused menu item on outer focus */
     private _listenOnOuterFocus(): void {
         this._subscriptions.add(
-            fromEvent(this.menuInteractive.elementRef.nativeElement, 'focus')
-                .subscribe(() => {
-                    if (this.menuService && this.menuService.focusedNode !== this.menuService.menuMap.get(this)) {
-                        this.menuService.setFocused(this);
-                    }
-                })
+            fromEvent(this.menuInteractive.elementRef.nativeElement, 'focus').subscribe(() => {
+                if (this.menuService && this.menuService.focusedNode !== this.menuService.menuMap.get(this)) {
+                    this.menuService.setFocused(this);
+                }
+            })
         );
     }
 }

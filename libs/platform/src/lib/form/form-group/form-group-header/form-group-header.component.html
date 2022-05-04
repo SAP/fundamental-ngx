@@ -6,7 +6,7 @@
                 [ariaLabel]="hintOptions.text"
                 [fd-inline-help]="hintOptions.text"
                 [glyph]="hintOptions.glyph"
-                [placement]="hintOptions.placement"
+                [placement]="hintOptions.placement || null"
                 [triggers]="hintOptions.trigger || []"
                 tabindex="0"
             ></fd-icon>

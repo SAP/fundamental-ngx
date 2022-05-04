@@ -142,16 +142,15 @@ export class WizardGeneratorService {
             return of(null);
         }
 
-        return step.submitForms(skipIfUntouched)
-            .pipe(
-                take(1),
-                map((result) => {
-                    if (result) {
-                        this._submittedFormRawValues[stepId] = result;
-                    }
-                    return result;
-                })
-            );
+        return step.submitForms(skipIfUntouched).pipe(
+            take(1),
+            map((result) => {
+                if (result) {
+                    this._submittedFormRawValues[stepId] = result;
+                }
+                return result;
+            })
+        );
     }
 
     /**
@@ -556,11 +555,10 @@ export class WizardGeneratorService {
     private _buildDependencyMap(items: PreparedWizardGeneratorItem[]): void {
         this.dependencySteps = {};
 
-        const mergeArrays = (objValue: any, srcValue: any): any[] => {
+        const mergeArrays = (objValue: any, srcValue: any): any => {
             if (Array.isArray(objValue) && !objValue.includes(srcValue)) {
                 return uniq(objValue.concat(srcValue));
             }
-            return [];
         };
 
         const buildDependencySteps = (
@@ -595,7 +593,7 @@ export class WizardGeneratorService {
                 });
 
                 const stepFields: WizardGeneratorFormItem[] = concat(
-                    ...[...step.formGroups ?? []].map((item) => item.formItems.filter((f) => f.dependencyFields))
+                    ...[...(step.formGroups ?? [])].map((item) => item.formItems.filter((f) => f.dependencyFields))
                 );
 
                 stepFields.forEach((formItem) => {

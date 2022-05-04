@@ -140,12 +140,12 @@ export class FdDate {
 
         if (!this._isValid) {
             this.hour = NaN;
-this.minute = NaN;
+            this.minute = NaN;
             this.second = NaN;
         } else {
-            this.hour = (hour || hour === 0) ? hour : this.hour;
-            this.minute = (minute || minute === 0) ? minute : this.minute;
-            this.second = (second || second === 0) ? second : this.second;
+            this.hour = hour || hour === 0 ? hour : this.hour;
+            this.minute = minute || minute === 0 ? minute : this.minute;
+            this.second = second || second === 0 ? second : this.second;
         }
 
         return this;

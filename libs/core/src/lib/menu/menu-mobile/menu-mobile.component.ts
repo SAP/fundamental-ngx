@@ -103,7 +103,8 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
     /** @hidden Listens on Active Path changes and updates mobile view */
     private _listenOnActivePathChange(): void {
         const initialItemPath: MenuItemComponent[] = this._menuService.activeNodePath
-            .map((node) => node.item).filter((v): v is MenuItemComponent => !!v);
+            .map((node) => node.item)
+            .filter((v): v is MenuItemComponent => !!v);
         this._component.activePath
             .pipe(takeUntil(this._onDestroy$), startWith(initialItemPath))
             .subscribe((items) => this._setMenuView(items));

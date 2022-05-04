@@ -47,9 +47,7 @@ describe('TextTypePopoverComponent', () => {
         subItem.color = colorToTest;
         component.ngOnChanges({ parentTab: tabs[5] } as unknown as SimpleChanges);
 
-        const appliedStyle = subItem.cssClasses.includes(
-            `fd-icon-tab-bar__list-item--${colorToTest}`
-        );
+        const appliedStyle = subItem.cssClasses.includes(`fd-icon-tab-bar__list-item--${colorToTest}`);
         expect(appliedStyle).toBeTruthy();
     });
 
