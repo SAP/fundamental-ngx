@@ -9,7 +9,6 @@ import {
     HostBinding,
     OnDestroy,
     Optional,
-    ContentChild,
     AfterViewChecked
 } from '@angular/core';
 
@@ -21,7 +20,6 @@ import { Subscription } from 'rxjs';
 import { applyCssClass } from '@fundamental-ngx/core/utils';
 import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { getCardModifierClassNameByCardType } from './utils';
-import { FD_CARD_CONTAINER } from './card.tokens';
 
 let cardId = 0;
 
@@ -63,10 +61,6 @@ export class CardComponent implements OnChanges, AfterViewChecked, OnInit, CssCl
     @HostBinding('attr.role')
     role = 'region';
 
-    /** Reference to the card container element */
-    @ContentChild(FD_CARD_CONTAINER)
-    cardContainer: { containsList: boolean };
-
     /** @hidden */
     class: string;
 
@@ -75,8 +69,7 @@ export class CardComponent implements OnChanges, AfterViewChecked, OnInit, CssCl
         return [
             CLASS_NAME.card,
             this.cardType ? getCardModifierClassNameByCardType(this.cardType) : null,
-            this.compact ? CLASS_NAME.cardCompact : null,
-            this.cardContainer?.containsList ? CLASS_NAME.cardList : null
+            this.compact ? CLASS_NAME.cardCompact : null
         ];
     }
 
