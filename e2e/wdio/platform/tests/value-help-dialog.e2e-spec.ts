@@ -18,12 +18,7 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
-import {
-    basicSearchId,
-    conditionsValues,
-    customLabels,
-    inputIDs
-} from '../fixtures/appData/value-help-dialog-contents';
+import { conditionsValues, customLabels, inputIDs } from '../fixtures/appData/value-help-dialog-contents';
 import { searchValues, valueOne, valueZero } from '../fixtures/testData/value-help-dialog';
 
 describe('Value help dialog test suite', () => {
@@ -31,6 +26,7 @@ describe('Value help dialog test suite', () => {
     const {
         dialogHeader,
         openDialogBtn,
+        basicSearchInput,
         formInputField,
         goBtn,
         tableRows,
@@ -102,8 +98,8 @@ describe('Value help dialog test suite', () => {
 
         it('should check the basic search results', () => {
             click(openDialogBtn);
-            click(formInputField(basicSearchId));
-            setValue(formInputField(basicSearchId), searchValues[0]);
+            click(basicSearchInput);
+            setValue(basicSearchInput, searchValues[0]);
             click(goBtn);
             pause(300);
             checkResults(tableRows, searchValues[0]);
@@ -331,7 +327,7 @@ describe('Value help dialog test suite', () => {
             click(openMobileExampleBtn);
             click(dialogButton);
             const text = getText(productNameColumn);
-            click(dialogButton, 2);
+            click(dialogButton, 3);
             setValue(dialogInput, text);
             click(dialogButton, 2);
             const itemsQuantity = getElementArrayLength(productNameColumn);

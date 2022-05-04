@@ -23,7 +23,6 @@ import { filter, takeUntil } from 'rxjs/operators';
 
 import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 import { ContentDensity, ContentDensityEnum, RtlService, ContentDensityService } from '@fundamental-ngx/core/utils';
-import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { isDataSource } from '@fundamental-ngx/platform/shared';
 import {
     ArrayValueHelpDialogDataSource,
@@ -437,20 +436,27 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
         this._changeDetectorRef.markForCheck();
     }
 
-    /**
-     * Bacis search by all filled filters
-     */
+    /** Search by only the search term. */
     search(): void {
+        this.filter(true);
+    }
+
+    /**
+     * Search by all filled filters, including the search term.
+     */
+    filter(onlySearch = false): void {
         const nonEmptyFilters = new Map();
-        this._displayedFilters
-            .filter(({ value }) => !!value && value.trim().length)
-            .forEach((e) => {
-                nonEmptyFilters.set(e.key, e.value);
-            });
+
+        if (!onlySearch) {
+            this._displayedFilters
+                .filter(({ value }) => !!value && value.trim().length)
+                .forEach((e) => nonEmptyFilters.set(e.key, e.value));
+        }
 
         if (this._mainSearch.length) {
             nonEmptyFilters.set('*', this._mainSearch);
         }
+
         this.dataSource.match(nonEmptyFilters);
     }
 
@@ -458,7 +464,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
      * Apply search from advanced filters view, using when mobile view is active
      */
     searchAdvanced(): void {
-        this.search();
+        this.filter();
         this.selectedTab = VhdTab.selectFromList;
         this.isOpenAdvanced = false;
     }
@@ -552,12 +558,6 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     }
 
     /** @hidden */
-    _searchAction(input: FormControlComponent): void {
-        const inputElement = input.elementRef().nativeElement as HTMLInputElement;
-        inputElement.focus();
-    }
-
-    /** @hidden */
     private _initShownFilters(): void {
         this.shownFilterCount = this.maxShownInitialFilters || Infinity;
     }
@@ -584,6 +584,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     /** @hidden */
     private _initializeDS(ds: FdpValueHelpDialogDataSource<any> = this.dataSource): void {
         this._resetSourceStream();
+
         if (this.showSelectionTab) {
             this._dsSubscription = new Subscription();
 
@@ -595,12 +596,14 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
                 });
 
             this._dsSubscription.add(dsSub);
+
             this._dsSubscription.add(
                 ds.onDataRequested().subscribe(() => {
                     this._internalLoadingState = true;
                     this.onDataRequested.emit();
                 })
             );
+
             this._dsSubscription.add(
                 ds.onDataReceived().subscribe(() => {
                     this._internalLoadingState = false;

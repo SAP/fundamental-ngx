@@ -441,10 +441,11 @@ export class SearchFieldComponent
      * Callback function which gets executed on keyboard enter of input text field.
      * @hidden
      */
-    onSearchSubmit(): void {
+    onSearchSubmit(event?: Event): void {
+        event?.preventDefault();
+
         if (this.isLoading) {
             this.cancelSearch.emit();
-
             return;
         }
 
