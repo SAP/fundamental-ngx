@@ -5,7 +5,6 @@ export const cardTypeAttr = 'cardtype';
 export const compactAttr = 'fd-card fd-card--list fd-card--compact';
 export const loaderAttr = 'loading';
 export const cardListItemText = ['item 1', 'item 2', 'item 3', 'item 4'];
-export const btnText = ['Approve', 'Reject'];
 export const analyticsTitle = 'Failure Breakdown';
 export const tableHeaderText = ['Name', 'Country', 'Price', 'Status'];
 export const tableContentsText = [
