@@ -23,7 +23,7 @@ export class CardPo extends CoreBaseComponentPo {
     loaderIcon = 'fd-card-loader-example fd-busy-indicator';
     // footer examples
     ftCardHeader = 'fd-card-footer-example fd-card-header';
-    ftCardListItems = 'fd-card-footer-example li';
+    ftCardListItems = 'fd-card-footer-example fd-card:first-of-type li';
     ftFooter = 'fd-card-footer-example fd-card-footer';
     ftCardFooterActionItems =
         'fd-card-footer-example fd-card:first-of-type fd-card-footer .fd-card__footer-actions-item';
