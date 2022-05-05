@@ -5,7 +5,7 @@
         fd-list-item
         [attr.id]="id"
         [selected]="_selected"
-        tabindex="-1"
+        [tabindex]="-1"
         (keydown)="_onKeyDown($event)"
         (keyup)="_onKeyUp($event)"
         class="fd-list__item--link"
@@ -35,7 +35,7 @@
         [attr.id]="id"
         [selected]="_selected"
         (keydown)="_onKeyDown($event)"
-        tabindex="-1"
+        [tabindex]="-1"
         (keyup)="_onKeyUp($event)"
         [attr.aria-label]="ariaLabel"
         [attr.aria-level]="ariaLevel"
