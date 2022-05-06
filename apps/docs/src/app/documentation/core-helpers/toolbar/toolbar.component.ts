@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Libraries } from '../../utilities/libraries';
@@ -27,7 +27,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
     cssUrl: SafeResourceUrl;
     customCssUrl: SafeResourceUrl;
 
-    library: string;
+    library: Libraries;
 
     size: ShellbarSizes = 'm';
 
@@ -69,8 +69,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         private _themesService: ThemesService,
         private _docsThemeService: DocsThemeService,
         private _contentDensityService: ContentDensityService,
-        @Inject('CURRENT_LIB') private _currentLib: Libraries,
-        private _route: ActivatedRoute
+        _route: ActivatedRoute
     ) {
         this.library = _route.snapshot.data.library || 'Core';
 

@@ -9,7 +9,7 @@ import { Inject, Injectable } from '@angular/core';
 import { StackblitzFile } from './interfaces/stackblitz-parameters';
 import { StackblitzDependencies } from './stackblitz-dependencies';
 import { StackblitzProject } from './interfaces/stackblitz-project';
-import { Libraries } from '../../utilities/libraries';
+import { CURRENT_LIB, Libraries } from '../../utilities/libraries';
 import { ExampleFile } from '../code-example/example-file';
 import { StackblitzModuleWrapper } from './stackblitz-module-wrapper';
 
@@ -26,7 +26,7 @@ interface GeneratedFiles {
 
 @Injectable()
 export class StackblitzService {
-    constructor(@Inject('CURRENT_LIB') private currentLib: Libraries) {}
+    constructor(@Inject(CURRENT_LIB) private currentLib: Libraries) {}
 
     get defaultProjectInfo(): StackblitzProject {
         return {
