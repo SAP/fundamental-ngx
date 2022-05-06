@@ -12,11 +12,12 @@ export class MenuTitleDirective {
     @HostBinding('class.fd-menu__title')
     fdMenuTitleClass = true;
 
-    /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
-
     /** Returns element title text */
+    @HostBinding('attr.title')
     get title(): string {
         return this._elementRef.nativeElement.textContent;
     }
+
+    /** @hidden */
+    constructor(private _elementRef: ElementRef) {}
 }
