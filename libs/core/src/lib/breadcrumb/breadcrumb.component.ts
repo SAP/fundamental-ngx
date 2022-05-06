@@ -76,6 +76,10 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit, OnDestroy 
     @Input()
     containerElement: HTMLElement;
 
+    /** Whether or not to append items to the overflow dropdown in reverse order. Default is true. */
+    @Input()
+    reverse = false;
+
     /** @hidden */
     containerBoundary: number;
 
@@ -177,7 +181,9 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit, OnDestroy 
         ) {
             const breadcrumbItem = this.breadcrumbItems.filter((item, index) => index === i)[0];
             if (this.collapsedBreadcrumbItems.indexOf(breadcrumbItem) === -1) {
-                this.collapsedBreadcrumbItems.push(breadcrumbItem);
+                this.reverse
+                    ? this.collapsedBreadcrumbItems.push(breadcrumbItem)
+                    : this.collapsedBreadcrumbItems.unshift(breadcrumbItem);
             }
             // hide the original breadcrumb items that have been moved in to the collapsed menu
             breadcrumbItem.elementRef.nativeElement.style.display = 'none';
