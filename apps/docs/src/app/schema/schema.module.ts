@@ -6,18 +6,11 @@ import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
 // eslint-disable-next-line no-restricted-imports
 import { FundamentalNgxPlatformModule } from '@fundamental-ngx/platform';
 
-// containers
 import { SchemaComponent } from './containers/schema/schema.component';
 import { SchemaGroupComponent } from './containers/schema-group/schema-group.component';
-
-// services
 import { SchemaFactoryService } from './services/schema-factory/schema-factory.service';
-
-// models
-import { Schema } from './models/schema.model';
-
-// pipes
 import { AsFormControlPipe, AsFormGroupPipe } from './pipes/type-casting.pipe';
+import { Schemas, SCHEMAS } from './consts/schemas';
 
 @NgModule({
     declarations: [SchemaComponent, SchemaGroupComponent, AsFormControlPipe, AsFormGroupPipe],
@@ -25,13 +18,13 @@ import { AsFormControlPipe, AsFormGroupPipe } from './pipes/type-casting.pipe';
     exports: [SchemaComponent]
 })
 export class SchemaModule {
-    static forRoot(componentSchemas: { [name: string]: Schema }): ModuleWithProviders<SchemaModule> {
+    static forRoot(componentSchemas: Schemas): ModuleWithProviders<SchemaModule> {
         return {
             ngModule: SchemaModule,
             providers: [
                 SchemaFactoryService,
                 {
-                    provide: 'SCHEMAS',
+                    provide: SCHEMAS,
                     useValue: componentSchemas
                 }
             ]

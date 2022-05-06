@@ -71,7 +71,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         private _contentDensityService: ContentDensityService,
         _route: ActivatedRoute
     ) {
-        this.library = _route.snapshot.data.library || 'Core';
+        this.library = _route.snapshot.data.library || 'core';
 
         this._docsThemeService.onThemeChange.pipe(takeUntil(this._onDestroy$)).subscribe((theme) => {
             this.cssUrl = theme.themeUrl;
