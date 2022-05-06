@@ -32,7 +32,7 @@ import {
 import { fromEvent, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, delay, distinctUntilChanged, filter, takeWhile } from 'rxjs/operators';
 import { ToolbarItemDirective } from './toolbar-item.directive';
-import { TitleComponent } from '@fundamental-ngx/core/title';
+import { TitleToken } from '@fundamental-ngx/core/title';
 
 const ELEMENT_MARGIN = 8;
 const OVERFLOW_SPACE = 50 + 2 * ELEMENT_MARGIN;
@@ -126,8 +126,8 @@ export class ToolbarComponent
     toolbarItems: QueryList<ToolbarItemDirective>;
 
     /** @hidden */
-    @ContentChild(TitleComponent)
-    titleComponent: TitleComponent;
+    @ContentChild(TitleToken)
+    titleComponent: TitleToken | null = null;
 
     /** @hidden */
     overflowVisibility: Observable<boolean> = of(false);

@@ -2,6 +2,10 @@ import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewEnca
 
 export type HeaderSizes = 1 | 2 | 3 | 4 | 5 | 6;
 
+export abstract class TitleToken {
+    abstract elementRef: ElementRef;
+}
+
 @Component({
     // eslint-disable-next-line
     selector: 'h1[fd-title], h2[fd-title], h3[fd-title], h4[fd-title], h5[fd-title], h6[fd-title]',
@@ -13,9 +17,10 @@ export type HeaderSizes = 1 | 2 | 3 | 4 | 5 | 6;
     },
     styleUrls: ['./title.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    providers: [{ provide: TitleToken, useExisting: TitleComponent }]
 })
-export class TitleComponent implements OnInit {
+export class TitleComponent extends TitleToken implements OnInit {
     /** The size of the header */
     _headerSize: HeaderSizes = null;
 
@@ -39,7 +44,9 @@ export class TitleComponent implements OnInit {
     private _appliedHeaderSize: number;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(private _elementRef: ElementRef) {
+        super();
+    }
 
     /** @hidden */
     ngOnInit(): void {
