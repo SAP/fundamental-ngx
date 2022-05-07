@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.28...v0.34.3-rc.29) (2022-05-07)
+
+
+### Bug Fixes
+
+* **core:** correct breadcrumb order and add boolean to allow dev to configure ([#8069](https://github.com/SAP/fundamental-ngx/issues/8069)) ([2ba066f](https://github.com/SAP/fundamental-ngx/commit/2ba066ffce5f43db36b015c7944c1fa9d89de246))
+
 ### [0.34.3-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.27...v0.34.3-rc.28) (2022-05-07)
 
 
