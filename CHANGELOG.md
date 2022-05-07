@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.27...v0.34.3-rc.28) (2022-05-07)
+
+
+### Features
+
+* **core:** add an ability to set "id" for dialog buttons from config ([#8065](https://github.com/SAP/fundamental-ngx/issues/8065)) ([9808891](https://github.com/SAP/fundamental-ngx/commit/9808891b5f09899940b469000a7a07f4daab9bbd))
+
 ### [0.34.3-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.26...v0.34.3-rc.27) (2022-05-04)
 
 
