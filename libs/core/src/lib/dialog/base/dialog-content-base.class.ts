@@ -8,9 +8,6 @@ export class DialogContentBase {
     /** Dialog Body */
     content?: unknown;
 
-    /** Approve Button Label */
-    approveButton?: string;
-
     /** Aria Modal for the dialog component element */
     ariaModal?: boolean;
 
@@ -23,11 +20,23 @@ export class DialogContentBase {
     /** Aria DescribedBy for the dialog component element.. */
     ariaDescribedBy?: string = null;
 
+    /** Approve Button Label */
+    approveButton?: string;
+
+    /** Approve Button Id */
+    approveButtonId?: string;
+
     /** Approve Button Click Callback */
     approveButtonCallback?: () => void;
 
+    /** Aria label for the dialog approve button element. */
+    approveButtonAriaLabel?: string;
+
     /** Cancel Button Label */
     cancelButton?: string;
+
+    /** Cancel Button Id */
+    cancelButtonId?: string;
 
     /** Cancel Button Click Callback */
     cancelButtonCallback?: () => void;
@@ -37,9 +46,6 @@ export class DialogContentBase {
 
     /** close button title */
     closeButtonTitle?: string;
-
-    /** Aria label for the dialog approve button element. */
-    approveButtonAriaLabel?: string;
 
     /** Aria labelby for the dialog close button element. */
     closeButtonAriaLabel?: string;

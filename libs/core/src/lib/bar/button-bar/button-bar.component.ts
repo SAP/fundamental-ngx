@@ -64,9 +64,19 @@ export class ButtonBarComponent extends BaseButton implements OnInit, OnDestroy 
     @Input()
     ariaLabelledby: string;
 
+    /** @hidden */
+    private readonly _defaultId = `fd-button-bar-id-${randomButtonBarId++}`;
+
     /** id for this element */
     @Input()
-    id = `fd-button-bar-id-${randomButtonBarId++}`;
+    get id(): string {
+        return this._id || this._defaultId;
+    }
+    set id(value: string | null | undefined) {
+        this._id = value;
+    }
+
+    _id: string | null | undefined;
 
     /** @hidden */
     @HostBinding('class.fd-bar__element')
