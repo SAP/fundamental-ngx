@@ -90,6 +90,10 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     @Input()
     dateInputLabel = 'Date input';
 
+    /** Aria label for the datepicker input. */
+    @Input()
+    dateRangeInputLabel = 'Date range input';
+
     /** Aria label for the button to show/hide the calendar. */
     @Input()
     displayCalendarToggleLabel = 'Display calendar toggle';
