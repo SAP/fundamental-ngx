@@ -16,7 +16,7 @@ import {
     Output,
     ViewEncapsulation
 } from '@angular/core';
-import { debounceTime, fromEvent, Subject } from 'rxjs';
+import { fromEvent, Subject, throttleTime } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 
 import { KeyUtil } from '@fundamental-ngx/core/utils';
@@ -34,7 +34,7 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         class: 'fd-splitter__resizer',
-        '[class.fd-splitter__resizer--active]': '_start != null || _isInFocus',
+        '[class.is-active]': '_start != null || _isInFocus',
         '[tabindex]': '0'
     }
 })
@@ -183,8 +183,8 @@ export class SplitterResizerComponent implements OnDestroy {
 
         this._ngZone.runOutsideAngular(() => {
             fromEvent<MouseEvent>(this._document!, 'mousemove')
-                .pipe(debounceTime(10), takeUntil(this._pointerMoveListener))
-                .subscribe((event) => {
+                .pipe(throttleTime(10), takeUntil(this._pointerMoveListener))
+                .subscribe(event => {
                     this._ngZone.run(() => {
                         const newPosition = this._isHorizontal ? event.clientY : event.clientX;
 
