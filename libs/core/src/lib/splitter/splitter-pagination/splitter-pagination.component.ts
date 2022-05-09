@@ -26,9 +26,6 @@ export class SplitterPaginationComponent {
     onPageChange = new EventEmitter<string>();
 
     /** @hidden */
-    _pages: string[] = [];
-
-    /** @hidden */
     get paginationItemAriaLabel(): string {
         return this._splitter.paginationItemAriaLabel;
     }

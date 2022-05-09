@@ -264,7 +264,7 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
     _onPageChange(page: string = ROOT_PAGE): void {
         this._currentPage = page;
 
-        this._cdr.markForCheck();
+        this._cdr.detectChanges();
     }
 
     /** @hidden */
