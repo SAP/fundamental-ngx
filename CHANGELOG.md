@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.30...v0.34.3-rc.31) (2022-05-10)
+
+
+### Bug Fixes
+
+* **platform:** approval-flow - approvers menu overflow ([#8060](https://github.com/SAP/fundamental-ngx/issues/8060)) ([810d080](https://github.com/SAP/fundamental-ngx/commit/810d0808ed6d15cd0c9c1988479a03448df5d166))
+
 ### [0.34.3-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.29...v0.34.3-rc.30) (2022-05-10)
 
 
