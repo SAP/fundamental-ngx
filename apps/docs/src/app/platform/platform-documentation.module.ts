@@ -14,6 +14,7 @@ import { SchemaModule } from '../schema/schema.module';
 import { PLATFORM_COMPONENT_SCHEMAS } from './component-docs/schemas';
 import { StackblitzService } from '../documentation/core-helpers/stackblitz/stackblitz.service';
 import { DocsThemeService } from '../documentation/services/docs-theme.service';
+import { CURRENT_LIB } from '../documentation/utilities/libraries';
 
 @NgModule({
     declarations: [PlatformDocumentationComponent, PlatformHomeComponent, NewComponentComponent],
@@ -25,6 +26,6 @@ import { DocsThemeService } from '../documentation/services/docs-theme.service';
         RouterModule.forChild(ROUTES),
         SchemaModule.forRoot(PLATFORM_COMPONENT_SCHEMAS)
     ],
-    providers: [{ provide: 'CURRENT_LIB', useValue: 'platform' }, StackblitzService, DocsThemeService]
+    providers: [{ provide: CURRENT_LIB, useValue: 'platform' }, StackblitzService, DocsThemeService]
 })
 export class PlatformDocumentationModule {}
