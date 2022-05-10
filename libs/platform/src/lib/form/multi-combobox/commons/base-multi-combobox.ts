@@ -6,6 +6,8 @@ import {
     ElementRef,
     EventEmitter,
     Host,
+    Inject,
+    InjectionToken,
     Input,
     OnChanges,
     OnDestroy,
@@ -65,7 +67,7 @@ import {
 import { TextAlignment } from '../../combobox';
 import { MultiComboboxConfig } from '../multi-combobox.config';
 
-export const MAP_LIMIT = 12;
+export const MAP_LIMIT = new InjectionToken<number>('Map limit≥');
 
 export type FdpMultiComboboxDataSource<T> = MultiComboBoxDataSource<T> | Observable<T[]> | T[];
 
@@ -95,14 +97,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
 
     /** Datasource for suggestion list. */
     @Input()
-    set dataSource(value: FdpMultiComboboxDataSource<any>) {
-        if (value) {
-            this._data = value;
-        }
-    }
-    get dataSource(): FdpMultiComboboxDataSource<any> {
-        return this._dataSource;
-    }
+    dataSource: any;
 
     /** Whether the autocomplete should be enabled; Enabled by default. */
     @Input()
@@ -173,14 +168,9 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     @Input()
     invalidEntryMessage = 'Invalid entry';
 
-    /** Sets _limitless value */
+    /** Turns limitless mode, ON or OFF */
     @Input()
-    set limitless(val: boolean) {
-        this._limitless = val;
-    }
-    get limitless(): boolean {
-        return this._limitless;
-    }
+    limitless: boolean;
 
     /** Event emitted when item is selected. */
     @Output()
@@ -308,12 +298,6 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     selectedShown$ = new BehaviorSubject(false);
 
     /** @hidden */
-    private _data: any;
-
-    /** @hidden */
-    private _limitless = false;
-
-    /** @hidden */
     protected _dataSource: FdpMultiComboboxDataSource<any>;
 
     /** @hidden */
@@ -381,14 +365,15 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         @Optional() readonly dialogConfig: DialogConfig,
         protected multiComboboxConfig: MultiComboboxConfig,
         @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
+        @Inject(MAP_LIMIT) private _mapLimit: number
     ) {
         super(_cd, ngControl, ngForm, formField, formControl);
     }
 
     ngOnChanges(changes: SimpleChanges): void {
         if (changes['dataSource']) {
-            this._initializeDataSource(this._data);
+            this._initializeDataSource(this.dataSource);
         }
     }
 
@@ -488,7 +473,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         map.set('query', text);
 
         if (!this.limitless) {
-            map.set('limit', MAP_LIMIT);
+            map.set('limit', this._mapLimit);
         }
 
         this.ds.match(map);
