@@ -8,7 +8,7 @@
     </p>
 </description>
 <component-example>
-    <fd-icon-tab-bar-text-type-example></fd-icon-tab-bar-text-type-example>
+    <fd-icon-tab-bar-text-type-example id="textExample"></fd-icon-tab-bar-text-type-example>
 </component-example>
 <code-example [exampleFiles]="iconTabBarTextTypeFiles"></code-example>
 
@@ -21,7 +21,10 @@
     <p>To use this mode you need to pass input<code class="code-snippet">[layoutMode]="'column'"</code></p>
 </description>
 <component-example>
-    <fd-icon-tab-bar-text-type-example textTypeLayoutMode="column"></fd-icon-tab-bar-text-type-example>
+    <fd-icon-tab-bar-text-type-example
+        id="columnsExample"
+        textTypeLayoutMode="column"
+    ></fd-icon-tab-bar-text-type-example>
 </component-example>
 <code-example [exampleFiles]="iconTabBarTextTypeFiles"></code-example>
 
@@ -49,7 +52,7 @@
     To use the icon type of the tabs you must pass input <code class="code-snippet">[type]="'icon'"</code>
 </description>
 <component-example>
-    <fd-icon-tab-bar-icon-type-example></fd-icon-tab-bar-icon-type-example>
+    <fd-icon-tab-bar-icon-type-example id="iconExample"></fd-icon-tab-bar-icon-type-example>
 </component-example>
 <code-example [exampleFiles]="iconTabBarIconTypeFiles"></code-example>
 
@@ -104,7 +107,7 @@
     </fd-message-strip>
 </description>
 <component-example>
-    <fd-icon-tab-bar-text-type-example [nested]="true"></fd-icon-tab-bar-text-type-example>
+    <fd-icon-tab-bar-text-type-example id="nestedTabsExample" [nested]="true"></fd-icon-tab-bar-text-type-example>
 </component-example>
 <code-example [exampleFiles]="iconTabBarTextTypeFiles"></code-example>
 
@@ -122,7 +125,10 @@
     </fd-message-strip>
 </description>
 <component-example>
-    <fd-icon-tab-bar-text-type-example [enableTabReordering]="true"></fd-icon-tab-bar-text-type-example>
+    <fd-icon-tab-bar-text-type-example
+        id="reorderingExample"
+        [enableTabReordering]="true"
+    ></fd-icon-tab-bar-text-type-example>
 </component-example>
 <code-example [exampleFiles]="iconTabBarTextTypeFiles"></code-example>
 
@@ -136,7 +142,10 @@
     </p>
 </description>
 <component-example class="icon-tab-bar-docs-overflow">
-    <fd-icon-tab-bar-icon-type-example [withOverflowExample]="true"></fd-icon-tab-bar-icon-type-example>
+    <fd-icon-tab-bar-icon-type-example
+        id="overflowingExample"
+        [withOverflowExample]="true"
+    ></fd-icon-tab-bar-icon-type-example>
 </component-example>
 <code-example [exampleFiles]="iconTabBarIconTypeFiles"></code-example>
 

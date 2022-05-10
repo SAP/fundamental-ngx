@@ -8,7 +8,7 @@
 >
     <li *ngIf="showTotalTab" class="fd-icon-tab-bar__item" role="presentation" fdOverflowListItem>
         <a
-            (click)="_selectItem(_totalTab)"
+            (click)="_totalTab && _selectItem(_totalTab)"
             (keydown)="_keyDownHandler($event, _totalTab, 0)"
             [attr.aria-selected]="_totalTab?.uId === _selectedUid"
             class="fd-icon-tab-bar__tab"

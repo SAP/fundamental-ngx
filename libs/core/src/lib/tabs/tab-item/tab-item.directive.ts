@@ -1,6 +1,6 @@
 import { ContentChild, Directive, ElementRef, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { TabLinkDirective } from '../tab-link/tab-link.directive';
 
 export type TabItemState = 'success' | 'error' | 'warning' | 'information' | 'neutral';
@@ -27,7 +27,7 @@ export class TabItemDirective implements CssClassBuilder, OnChanges, OnInit {
 
     /** Semantic type of the tab item */
     @Input()
-    tabItemState: TabItemState;
+    tabItemState: Nullable<TabItemState>;
 
     /** This should be used only on `filterMode`. Flag should be enable for first item */
     @Input()

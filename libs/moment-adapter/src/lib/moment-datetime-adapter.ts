@@ -1,7 +1,8 @@
-import { Inject, Injectable, InjectionToken, LOCALE_ID, Optional } from '@angular/core';
+import { Inject, Injectable, InjectionToken, isDevMode, LOCALE_ID, Optional } from '@angular/core';
 import moment, { Locale, LongDateFormatSpec, Moment, MomentFormatSpecification, MomentInput } from 'moment';
 
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 function range<T>(length: number, mapFn: (index: number) => T): T[] {
     return Array.from(new Array(length)).map((_, index) => mapFn(index));
@@ -29,6 +30,8 @@ export function MOMENT_DATE_TIME_ADAPTER_OPTIONS_FACTORY(): MomentDatetimeAdapte
 }
 
 /**
+ * @deprecated Use `DayjsDatetimeAdapter` from `@fundamental-ngx/datetime-adapter` package instead.
+ *
  * DatetimeAdapter implementation based on moment.
  *
  * This uses moment.js as a date model instance.
@@ -52,6 +55,13 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
         super();
 
         this.setLocale(localeId || moment.locale());
+
+        if (isDevMode()) {
+            console.warn(
+                'MomentDatetimeAdapter is deprecated. ' +
+                    'Use "DayjsDatetimeAdapter" from "@fundamental-ngx/datetime-adapter" package instead.'
+            );
+        }
     }
 
     setLocale(locale: string): void {
@@ -253,7 +263,7 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
 
     clone(date: Moment): Moment {
         if (!date) {
-            return;
+            return moment();
         }
 
         return date.clone().locale(this.locale);
@@ -283,8 +293,8 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
         return dateToCheck.isBetween(startDate, endDate);
     }
 
-    isValid(date: Moment): boolean {
-        return date?.isValid();
+    isValid(date: Nullable<Moment>): date is Moment {
+        return !!date?.isValid();
     }
 
     toIso8601(date: Moment): string {

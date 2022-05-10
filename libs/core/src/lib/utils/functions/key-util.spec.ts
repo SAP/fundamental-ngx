@@ -5,8 +5,8 @@ import { A, B, CONTROL, DOWN_ARROW, SHIFT, TAB, UP_ARROW, Z } from '@angular/cdk
 describe('KeyUtil', () => {
     describe('isKeyCode', () => {
         interface TestValue {
-            event: KeyboardEvent;
-            keyCode: number | number[];
+            event: KeyboardEvent | null;
+            keyCode: number | number[] | null;
         }
 
         const positiveTestValues: TestValue[] = [
@@ -33,6 +33,7 @@ describe('KeyUtil', () => {
             },
             {
                 event: {
+                    // @ts-expect-error fault tolerance test
                     ...new KeyboardEvent('ArrowUp', { key: null }),
                     keyCode: UP_ARROW
                 },
@@ -58,6 +59,7 @@ describe('KeyUtil', () => {
             {
                 event: {
                     ...new KeyboardEvent('ArrowDown', { key: 'ArrowUp' }),
+                    // @ts-expect-error fault tolerance test
                     keyCode: null
                 },
                 keyCode: DOWN_ARROW
@@ -74,6 +76,7 @@ describe('KeyUtil', () => {
             },
             {
                 event: {
+                    // @ts-expect-error fault tolerance test
                     ...new KeyboardEvent('ArrowUp', { key: null }),
                     keyCode: UP_ARROW
                 },
@@ -87,17 +90,20 @@ describe('KeyUtil', () => {
 
         it('should identify positive key examples', () =>
             positiveTestValues.forEach((example) =>
+                // @ts-expect-error fault tolerance test
                 expect(KeyUtil.isKeyCode(example.event, example.keyCode)).toBeTrue()
             ));
 
         it('should identify negative key examples', () =>
             negativeTestValues.forEach((example) =>
+                // @ts-expect-error fault tolerance test
                 expect(KeyUtil.isKeyCode(example.event, example.keyCode)).toBeFalse()
             ));
 
         it('should throw error for broken examples', () => {
             if (isDevMode()) {
                 errorTestValues.forEach((example) =>
+                    // @ts-expect-error fault tolerance test
                     expect(() => KeyUtil.isKeyCode(example.event, example.keyCode)).toThrow()
                 );
             }
@@ -107,7 +113,7 @@ describe('KeyUtil', () => {
     describe('isKeyType', () => {
         interface TestValue {
             event: KeyboardEvent;
-            keyType: 'numeric' | 'alphabetical';
+            keyType: 'numeric' | 'alphabetical' | null | undefined;
         }
 
         const positiveTestValues: TestValue[] = [
@@ -127,6 +133,7 @@ describe('KeyUtil', () => {
             },
             {
                 event: {
+                    // @ts-expect-error fault tolerance test
                     ...new KeyboardEvent('KeyZ', { code: null }),
                     keyCode: Z
                 },
@@ -148,6 +155,7 @@ describe('KeyUtil', () => {
             },
             {
                 event: {
+                    // @ts-expect-error fault tolerance test
                     ...new KeyboardEvent('Digit9', { code: null }),
                     keyCode: 57
                 },
@@ -188,6 +196,7 @@ describe('KeyUtil', () => {
 
         const errorTestValues: TestValue[] = [
             {
+                // @ts-expect-error fault tolerance test
                 event: undefined,
                 keyType: 'alphabetical'
             },
@@ -202,17 +211,20 @@ describe('KeyUtil', () => {
 
         it('should identify positive keyType examples', () =>
             positiveTestValues.forEach((example) =>
+                // @ts-expect-error fault tolerance test
                 expect(KeyUtil.isKeyType(example.event, example.keyType)).toBeTrue()
             ));
 
         it('should identify negative keyType examples', () =>
             negativeTestValues.forEach((example) =>
+                // @ts-expect-error fault tolerance test
                 expect(KeyUtil.isKeyType(example.event, example.keyType)).toBeFalse()
             ));
 
         it('should throw error for broken keyType examples', () => {
             if (isDevMode()) {
                 errorTestValues.forEach((example) =>
+                    // @ts-expect-error fault tolerance test
                     expect(() => KeyUtil.isKeyType(example.event, example.keyType)).toThrow()
                 );
             }

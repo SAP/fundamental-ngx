@@ -20,7 +20,7 @@ import { DateTimeFormats, DATE_TIME_FORMATS, DatetimeAdapter } from '@fundamenta
 
 import { CalendarService } from '../../calendar.service';
 import { CalendarMonth } from '../../models/calendar-month';
-import { DefaultCalendarActiveCellStrategy, FocusableCalendarView } from '../../models/common';
+import { DefaultCalendarActiveCellStrategy, EscapeFocusFunction, FocusableCalendarView } from '../../models/common';
 import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
 
 /** Component representing the month view of the calendar. */
@@ -45,7 +45,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
 
     /** A function that handles escape focus */
     @Input()
-    focusEscapeFunction: (event: KeyboardEvent) => void;
+    focusEscapeFunction: EscapeFocusFunction;
 
     /** A year the month view is referring to */
     @Input()
@@ -304,7 +304,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
      * Returns transformed 1d array from 2d month grid.
      */
     private _getMonthList(): CalendarMonth[] {
-        return [].concat(...this._calendarMonthListGrid);
+        return (<CalendarMonth[]>[]).concat(...this._calendarMonthListGrid);
     }
 
     /** @hidden */

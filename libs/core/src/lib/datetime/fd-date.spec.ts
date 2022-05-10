@@ -90,10 +90,13 @@ describe('FdDate', () => {
 
         expect(new FdDate('date' as any).isDateValid()).not.toBeTrue();
         expect(new FdDate(NaN).isDateValid()).not.toBeTrue();
+        // @ts-expect-error fault tolerance test
         expect(new FdDate(null).isDateValid()).not.toBeTrue();
         expect(new FdDate(2020, NaN).isDateValid()).not.toBeTrue();
+        // @ts-expect-error fault tolerance test
         expect(new FdDate(2020, null).isDateValid()).not.toBeTrue();
         expect(new FdDate(2020, 1, NaN).isDateValid()).not.toBeTrue();
+        // @ts-expect-error fault tolerance test
         expect(new FdDate(2020, 1, null).isDateValid()).not.toBeTrue();
         expect(new FdDate(2020, 1, 1, NaN).isDateValid()).not.toBeTrue();
         expect(new FdDate(2020, 1, 1, 0, NaN).isDateValid()).not.toBeTrue();

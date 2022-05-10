@@ -13,7 +13,7 @@ export class NotificationService {
         notificationConfig: Readonly<NotificationConfig>;
     }[] = [];
 
-    public containerRef: ComponentRef<NotificationContainer>;
+    public containerRef: ComponentRef<NotificationContainer> | null;
 
     /**
      * @hidden
@@ -113,7 +113,7 @@ export class NotificationService {
         this._dynamicComponentService.destroyComponent(notification);
 
         // If there is no other notification Components, just remove container.
-        if (this.notifications.length === 0) {
+        if (this.notifications.length === 0 && this.containerRef) {
             this._dynamicComponentService.destroyComponent(this.containerRef);
             this.containerRef = null;
             this._restoreFocus();

@@ -16,6 +16,7 @@
     (ngModelChange)="valueChange($event)"
     #inputElement
     [value]="value"
+    [attr.value]="value"
 />
 <label class="fd-radio__label" [attr.title]="title" [for]="id" (click)="labelClicked($event)">
     <ng-content></ng-content>

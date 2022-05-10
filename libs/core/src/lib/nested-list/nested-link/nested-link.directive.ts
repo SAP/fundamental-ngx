@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import { NestedListTitleDirective } from '../nested-list-directives';
 import { NestedItemService } from '../nested-item/nested-item.service';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 @Directive({
     selector: '[fdNestedLink], [fd-nested-list-link]'
@@ -26,6 +27,15 @@ export class NestedLinkDirective {
     @HostBinding('class.is-selected')
     selected = false;
 
+    /** @hidden */
+    @HostBinding('attr.aria-label')
+    _ariaLabel: string;
+
+    /** @hidden */
+    @Input()
+    @HostBinding('attr.aria-describedby')
+    ariaDescribedby: Nullable<string | number>;
+
     /** Event thrown, when selected state is changed */
     @Output()
     selectedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -34,11 +44,13 @@ export class NestedLinkDirective {
     @HostBinding('class.fd-nested-list__link')
     fdNestedListItemClass = true;
 
-    /**
-     * @hidden
-     */
+    /** @hidden */
     @HostBinding('attr.tabindex')
     tabIndex = 0;
+
+    /** @hidden */
+    @HostBinding('attr.role')
+    role = 'treeitem';
 
     /**
      *  @hidden

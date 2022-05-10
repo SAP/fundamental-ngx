@@ -5,8 +5,7 @@ import { MOBILE_MODE_CONFIG } from '@fundamental-ngx/core/mobile-mode';
 import {
     FdpFormGroupModule,
     PlatformMultiComboboxModule,
-    PlatformComboboxModule,
-    MAP_LIMIT
+    PlatformComboboxModule
 } from '@fundamental-ngx/platform/form';
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 
@@ -46,10 +45,7 @@ const routes: Routes = [
         BusyIndicatorModule
     ],
     exports: [RouterModule],
-    providers: [
-        { provide: MOBILE_MODE_CONFIG, useValue: MULTI_COMBOBOX_MOBILE_CONFIG, multi: true },
-        { provide: MAP_LIMIT, useValue: 12 }
-    ],
+    providers: [{ provide: MOBILE_MODE_CONFIG, useValue: MULTI_COMBOBOX_MOBILE_CONFIG, multi: true }],
     declarations: [
         PlatformMultiComboboxHeaderComponent,
         PlatformMultiComboboxDocsComponent,

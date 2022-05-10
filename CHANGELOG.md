@@ -1,4 +1,134 @@
 
+### [0.34.3-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.44...v0.34.3-rc.45) (2022-05-25)
+
+
+### Bug Fixes
+
+* **platform:** action-bar, fix i11y issues ([#7413](https://github.com/SAP/fundamental-ngx/issues/7413)) ([0263acf](https://github.com/SAP/fundamental-ngx/commit/0263acf63c2b5bfe3b7d77c9a2bdd25871d74c54))
+
+### [0.34.3-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.43...v0.34.3-rc.44) (2022-05-25)
+
+
+### Bug Fixes
+
+* **core:** nested-list, fix a11y issues ([#7341](https://github.com/SAP/fundamental-ngx/issues/7341)) ([eaee826](https://github.com/SAP/fundamental-ngx/commit/eaee826ca2842d8966cebd949c68f245a86e46db))
+
+### [0.34.3-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.42...v0.34.3-rc.43) (2022-05-25)
+
+
+### Bug Fixes
+
+* **platform:** allow dots in control name ([#8133](https://github.com/SAP/fundamental-ngx/issues/8133)) ([8f64405](https://github.com/SAP/fundamental-ngx/commit/8f64405fdcd6015941bcf94c1bdb68fd60d5036f))
+
+### [0.34.3-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.41...v0.34.3-rc.42) (2022-05-25)
+
+
+### Bug Fixes
+
+* **platform:** standard and display list, fix a11y issues ([#7385](https://github.com/SAP/fundamental-ngx/issues/7385)) ([82bd126](https://github.com/SAP/fundamental-ngx/commit/82bd1263d652609ce0adab8849299be9f7d7c6d1))
+
+### [0.34.3-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.40...v0.34.3-rc.41) (2022-05-24)
+
+
+### Bug Fixes
+
+* **docs:** reset component search results when X clicked ([#8120](https://github.com/SAP/fundamental-ngx/issues/8120)) ([ce6e2af](https://github.com/SAP/fundamental-ngx/commit/ce6e2affb7d6cba292c152f9d5fea5bc611fb329))
+
+### [0.34.3-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.39...v0.34.3-rc.40) (2022-05-20)
+
+
+### Features
+
+* dayjs datetime adapter package ([#7978](https://github.com/SAP/fundamental-ngx/issues/7978)) ([d4b386c](https://github.com/SAP/fundamental-ngx/commit/d4b386cb595470955ce01494e9b475918aae2bb5))
+
+### [0.34.3-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.38...v0.34.3-rc.39) (2022-05-19)
+
+### [0.34.3-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.37...v0.34.3-rc.38) (2022-05-19)
+
+
+### Bug Fixes
+
+* **core:** remove unused product switch control class ([#8113](https://github.com/SAP/fundamental-ngx/issues/8113)) ([349fe9d](https://github.com/SAP/fundamental-ngx/commit/349fe9dbef7fca368dd2ec81e3ba1781a564a148))
+
+### [0.34.3-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.36...v0.34.3-rc.37) (2022-05-19)
+
+
+### Bug Fixes
+
+* **core:** standard list a11y ([#7308](https://github.com/SAP/fundamental-ngx/issues/7308)) ([0712ac9](https://github.com/SAP/fundamental-ngx/commit/0712ac9a27c59669d0123e612928341229006278))
+
+### [0.34.3-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.35...v0.34.3-rc.36) (2022-05-19)
+
+
+### Bug Fixes
+
+* **platform:** date time picker form validation ([#8054](https://github.com/SAP/fundamental-ngx/issues/8054)) ([8bcec06](https://github.com/SAP/fundamental-ngx/commit/8bcec068be9bf4bb26cbae0e5b7c6429cd79ab7b))
+
+### [0.34.3-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.34...v0.34.3-rc.35) (2022-05-19)
+
+
+### Features
+
+* **platform:** table - remove extra JS logic ([#8084](https://github.com/SAP/fundamental-ngx/issues/8084)) ([112f512](https://github.com/SAP/fundamental-ngx/commit/112f5127f813acab2774cd82f00635eb3cba7cab))
+
+### [0.34.3-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.33...v0.34.3-rc.34) (2022-05-19)
+
+
+### Bug Fixes
+
+* **core:** inline-help - fix destroy behavior ([#8110](https://github.com/SAP/fundamental-ngx/issues/8110)) ([c4d6b0c](https://github.com/SAP/fundamental-ngx/commit/c4d6b0c51ef3afae2b9cc0eb4f3fce8304d075ae))
+
+### [0.34.3-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.32...v0.34.3-rc.33) (2022-05-18)
+
+
+### Bug Fixes
+
+* **core:** update popover docs to not use fd-list ([#8055](https://github.com/SAP/fundamental-ngx/issues/8055)) ([f23f0cf](https://github.com/SAP/fundamental-ngx/commit/f23f0cfee7ad748135f01be14029a619e7e37702))
+
+### [0.34.3-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.31...v0.34.3-rc.32) (2022-05-16)
+
+
+### Features
+
+* ts strict compilation rules ([#8057](https://github.com/SAP/fundamental-ngx/issues/8057)) ([70fa44a](https://github.com/SAP/fundamental-ngx/commit/70fa44af5e84d8bd0f58dc42499d3e27d3ae58e7))
+
+### [0.34.3-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.30...v0.34.3-rc.31) (2022-05-10)
+
+
+### Bug Fixes
+
+* **platform:** approval-flow - approvers menu overflow ([#8060](https://github.com/SAP/fundamental-ngx/issues/8060)) ([810d080](https://github.com/SAP/fundamental-ngx/commit/810d0808ed6d15cd0c9c1988479a03448df5d166))
+
+### [0.34.3-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.29...v0.34.3-rc.30) (2022-05-10)
+
+
+### Bug Fixes
+
+* **docs:** use injection tokens instead of plain strings ([#8066](https://github.com/SAP/fundamental-ngx/issues/8066)) ([715525c](https://github.com/SAP/fundamental-ngx/commit/715525c8dcfcc426762d95b323ea0173f13df241))
+
+### [0.34.3-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.28...v0.34.3-rc.29) (2022-05-07)
+
+
+### Bug Fixes
+
+* **core:** correct breadcrumb order and add boolean to allow dev to configure ([#8069](https://github.com/SAP/fundamental-ngx/issues/8069)) ([2ba066f](https://github.com/SAP/fundamental-ngx/commit/2ba066ffce5f43db36b015c7944c1fa9d89de246))
+
+### [0.34.3-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.27...v0.34.3-rc.28) (2022-05-07)
+
+
+### Features
+
+* **core:** add an ability to set "id" for dialog buttons from config ([#8065](https://github.com/SAP/fundamental-ngx/issues/8065)) ([9808891](https://github.com/SAP/fundamental-ngx/commit/9808891b5f09899940b469000a7a07f4daab9bbd))
+
+### [0.34.3-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.26...v0.34.3-rc.27) (2022-05-04)
+
+
+### Bug Fixes
+
+* **platform:** value help dialog search ([#8022](https://github.com/SAP/fundamental-ngx/issues/8022)) ([2bdd5cc](https://github.com/SAP/fundamental-ngx/commit/2bdd5cc8656e2ac0401972845ccd65e67f99af50))
+
+### [0.34.3-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.25...v0.34.3-rc.26) (2022-05-04)
+
 ### [0.34.3-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.24...v0.34.3-rc.25) (2022-04-25)
 
 ### [0.34.3-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.23...v0.34.3-rc.24) (2022-04-24)

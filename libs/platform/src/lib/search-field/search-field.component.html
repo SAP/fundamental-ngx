@@ -41,7 +41,7 @@
                 aria-haspopup="true"
                 [class.fd-input--compact]="contentDensity | isCompactDensity"
                 (keydown)="onKeydown($event)"
-                (keydown.enter)="onSearchSubmit()"
+                (keydown.enter)="onSearchSubmit($event)"
                 [(ngModel)]="inputText"
                 (ngModelChange)="onValueChange($event)"
                 (click)="mobile && openMobileMode()"
@@ -105,7 +105,7 @@
     <div
         class="fdp-search-field__suggestion-dropdown"
         [attr.dir]="_dir"
-        *ngIf="(_dropdownValues$ | async | suggestionMatches: inputText:mobile)?.length > 0"
+        *ngIf="(_dropdownValues$ | async | suggestionMatches: inputText:mobile)?.length"
     >
         <nav
             class="fd-menu"

@@ -1,15 +1,16 @@
-// This is config that user should provide to input
+import { NullableObject } from '@fundamental-ngx/core/shared';
 import { SemanticColor } from '../types';
 
-export interface TabConfig {
-    icon?: string;
-    label?: string;
-    color?: SemanticColor;
-    counter?: number;
+/** This is config that user should provide to input */
+export type TabConfig = NullableObject<{
+    icon: string;
+    label: string;
+    color: SemanticColor;
+    counter: number;
     /** whether the tab is selected */
-    active?: boolean;
+    active: boolean;
     /** if set to true, will show red circle in top-right corner of tab */
-    badge?: boolean;
+    badge: boolean;
     /** config for nested tabs */
-    subItems?: TabConfig[];
-}
+    subItems: TabConfig[];
+}>;

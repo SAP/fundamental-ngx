@@ -26,9 +26,9 @@ export class ComboboxBylineExampleComponent {
         { name: 'Journey Change', icon: 'journey-change' }
     ];
 
-    selectedItem: ComboboxItem = null;
+    selectedItem: ComboboxItem | null = null;
 
-    selectedItem2: ComboboxItem = null;
+    selectedItem2: ComboboxItem | null = null;
 
     mobileConfig: MobileModeConfig = {
         title: 'Title',

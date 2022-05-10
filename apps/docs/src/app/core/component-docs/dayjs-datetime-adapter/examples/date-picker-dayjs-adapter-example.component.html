@@ -1,0 +1,12 @@
+<label fd-form-label>Languages</label>
+<fd-segmented-button
+    id="language"
+    style="margin-bottom: 20px"
+    [ngModel]="actualLocale"
+    (ngModelChange)="setLocale($event)"
+>
+    <button fd-button [label]="o.label" [value]="o.value" *ngFor="let o of localeOptions"></button>
+</fd-segmented-button>
+
+<br />
+<fd-date-picker [(ngModel)]="date"> </fd-date-picker>

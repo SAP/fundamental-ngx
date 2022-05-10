@@ -23,6 +23,7 @@ export class StackblitzDependencies {
         'core-js',
         'focus-trap',
         'fundamental-styles',
+        'dayjs',
         'moment',
         'tslib',
         'typescript',

@@ -3,7 +3,15 @@ import { By } from '@angular/platform-browser';
 import { Component, ViewChild } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ComponentFixture, fakeAsync, flushMicrotasks, inject, TestBed, waitForAsync } from '@angular/core/testing';
+import {
+    ComponentFixture,
+    fakeAsync,
+    flushMicrotasks,
+    flush,
+    inject,
+    TestBed,
+    waitForAsync
+} from '@angular/core/testing';
 
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { FormModule } from '@fundamental-ngx/core/form';
@@ -50,7 +58,7 @@ class ComboboxStandardComponent {
         { name: 'Jalapeño', type: 'Vegetables' },
         { name: 'Spinach', type: 'Vegetables' }
     ];
-    selectedItem = null;
+    selectedItem: ComboboxSelectionChangeEvent | null = null;
     maxHeight: string;
     autoResize = false;
     contentDensity: ContentDensity = 'cozy';
@@ -102,6 +110,7 @@ describe('ComboboxComponent default values', () => {
         fixture.detectChanges();
         combobox = component.combobox;
         flushMicrotasks();
+        flush();
     }));
 
     it('dataSource items should be converted to OptionItem', () => {
@@ -152,7 +161,7 @@ describe('ComboboxComponent default values', () => {
 
         expect(component.selectedItem instanceof ComboboxSelectionChangeEvent).toBeTrue();
 
-        expect(component.selectedItem.payload).toEqual(component.dataSource[0]);
+        expect(component.selectedItem?.payload).toEqual(component.dataSource[0]);
         expect(combobox.isOpen).toBeFalse();
 
         combobox.onPrimaryButtonClick();
@@ -162,7 +171,7 @@ describe('ComboboxComponent default values', () => {
         item = listItems[2] as HTMLElement;
         item.click();
         fixture.detectChanges();
-        expect(component.selectedItem.payload).toEqual(component.dataSource[2]);
+        expect(component.selectedItem?.payload).toEqual(component.dataSource[2]);
     });
 
     it('should be able to see Group', fakeAsync(() => {
@@ -178,6 +187,8 @@ describe('ComboboxComponent default values', () => {
 
         const group = overlayContainerEl.querySelectorAll('.fd-list__group-header');
         expect(group.length).toBe(2);
+
+        flush();
     }));
 
     it('should be able to see Secondary Columns', () => {

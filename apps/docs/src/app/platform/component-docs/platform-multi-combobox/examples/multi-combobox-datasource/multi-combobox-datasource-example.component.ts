@@ -53,15 +53,15 @@ export class MultiComboboxDatasourceExampleComponent {
 
     selectedItems1 = [this.dataSourceStrings[1]];
     selectedItems2 = [this.dataSource[1]];
-    selectedItems3 = null;
-    selectedItems4 = null;
+    selectedItems3 = [];
+    selectedItems4 = [];
     selectedItems5 = [
         this.dataSourceStrings[1],
         this.dataSourceStrings[2],
         this.dataSourceStrings[3],
         this.dataSourceStrings[4]
     ];
-    selectedItems6 = null;
+    selectedItems6 = [];
 
     onSelect1(item: MultiComboboxSelectionChangeEvent): void {
         this.selectedItems1 = item.selectedItems;

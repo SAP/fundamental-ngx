@@ -9,8 +9,9 @@ import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
 import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
 import { FormLabelModule } from '@fundamental-ngx/core/form';
 import {
-    DynamicFormFieldItem,
+    FORM_GENERATOR_CONFIG,
     FORM_GENERATOR_ITEM_CONFIG,
+    FormGeneratorModuleConfig,
     PlatformFormGeneratorModule
 } from '@fundamental-ngx/platform/form';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
@@ -78,13 +79,17 @@ export class PlatformWizardGeneratorModule {
      * Allows configuring module on a global level with custom configuration.
      * @param config User's custom configuration.
      */
-    static withConfig(config: Partial<DynamicFormFieldItem>): ModuleWithProviders<PlatformWizardGeneratorModule> {
+    static withConfig(config: Partial<FormGeneratorModuleConfig>): ModuleWithProviders<PlatformWizardGeneratorModule> {
         return {
             ngModule: PlatformWizardGeneratorModule,
             providers: [
                 {
                     provide: FORM_GENERATOR_ITEM_CONFIG,
-                    useValue: config
+                    useValue: config.itemConfig
+                },
+                {
+                    provide: FORM_GENERATOR_CONFIG,
+                    useValue: config.formConfig
                 }
             ]
         };

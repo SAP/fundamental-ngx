@@ -17,7 +17,7 @@ export class UserDataProvider extends DataProvider<ApprovalUser> {
 
     getOne(params: ProviderParams): Observable<ApprovalUser & { phone: string; email: string }> {
         const id = params.get('id');
-        const found = users.find((user) => user.id === id);
+        const found = users.find((user) => user.id === id)!;
         return of({
             ...found,
             phone: Math.random().toFixed(13).toString().replace('0.', ''),

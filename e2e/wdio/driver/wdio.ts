@@ -61,10 +61,28 @@ export function goBack(): void {
     browser.back();
 }
 
-export function refreshPage(): void {
-    browser.refresh();
-    if (browserIsSafari()) {
-        pause();
+export function refreshPage(isFullRefresh = false): void {
+    try {
+        // alerts block any interactions with the page
+        browser.dismissAlert();
+    } catch {}
+    if (!isFullRefresh) {
+        const url = browser.getUrl();
+        click(`#toolbar-home-btn`);
+        if (browser.getUrl().includes(`/home`)) {
+            goBack();
+        } else {
+            // failed to navigate, reset the url and perform full page refresh
+            browser.url(url);
+            if (browserIsSafari()) {
+                pause();
+            }
+        }
+    } else {
+        browser.refresh();
+        if (browserIsSafari()) {
+            pause();
+        }
     }
 }
 

@@ -31,7 +31,7 @@ export class ListPo extends BaseComponentPo {
     multiListItems = 'fdp-platform-list-with-selection-example li';
     multiToolbar = 'fdp-platform-list-with-selection-example fd-toolbar';
     multiCheckbox = 'fdp-platform-list-with-selection-example fd-checkbox';
-    multiCheckBoxMark = 'fdp-platform-list-with-selection-example fdp-standard-list-item';
+    multiCheckBoxMark = 'fdp-platform-list-with-selection-example fdp-standard-list-item li';
     // single selection examples
     singleList = 'fdp-platform-list-with-single-selection-example fdp-list ul';
     singleListItems = 'fdp-platform-list-with-single-selection-example li';
@@ -65,8 +65,8 @@ export class ListPo extends BaseComponentPo {
     // unread data examples
     unreadListItems = 'fdp-platform-list-with-unread-example li';
     unreadListItemText = 'fdp-platform-list-with-unread-example li span';
-    cozyItem = '#fdp-list-item-8';
-    compactItem = '#fdp-list-item-12';
+    cozyItem = 'fdp-platform-list-border-less-example fdp-list#cozy-list .fd-list__item';
+    compactItem = 'fdp-platform-list-border-less-example fdp-list#compact-list .fd-list__item';
 
     open(): void {
         super.open(this.url);

@@ -30,7 +30,7 @@ export class PlatformTimePickerTemplateExampleComponent {
     time12h: FdDate = new FdDate().setTime(18, 0, 0);
     timeWithoutSeconds: FdDate = new FdDate().setTime(12, 0, 0);
     timeCompact: FdDate = new FdDate().setTime(12, 0, 0);
-    timeAllowNull: FdDate = new FdDate().setTime(12, 0, 0);
+    timeAllowNull: FdDate | null = new FdDate().setTime(12, 0, 0);
     timeDisabled: FdDate = new FdDate().setTime(12, 0, 0);
     displayFormat = { hour: 'numeric', minute: '2-digit', second: '2-digit', hour12: false };
 

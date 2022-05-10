@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewCh
 
 import { DynamicPageBackgroundType, DynamicPageResponsiveSize } from '../../constants';
 import { DynamicPageConfig } from '../../dynamic-page.config';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 /** Dynamic Page collapse change event */
 export class DynamicPageCollapseChangeEvent {
@@ -74,7 +75,7 @@ export class DynamicPageHeaderComponent {
      * aria label for header
      */
     @Input()
-    headerAriaLabel: string;
+    headerAriaLabel: Nullable<string>;
 
     /**
      * aria label for pin state of pin button

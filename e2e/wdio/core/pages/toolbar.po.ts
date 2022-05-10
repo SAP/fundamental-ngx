@@ -6,14 +6,14 @@ export class ToolbarPo extends CoreBaseComponentPo {
 
     button = ' .fd-button--standard.fd-button--compact';
     activeInfoToolbar = '.fd-toolbar--active';
-    overflowButton = '#background-ex2' + this.button;
-    overflowPriorityButton = '#background-ex3' + this.button;
+    overflowButton = 'fd-toolbar-overflow-example' + this.button;
+    overflowPriorityButton = 'fd-toolbar-overflow-priority-example' + this.button;
     overflowPriorityExample = 'fd-toolbar-overflow-priority-example';
     overflowGroupingExample = 'fd-toolbar-overflow-grouping-example';
     moreButton = ' [title="More"]';
     overflowBody = '.fd-toolbar__overflow';
     alwaysButton = '[label="Always"]';
-    overflowGroupingButton = '#background-ex7' + this.button;
+    overflowGroupingButton = 'fd-toolbar-separator-example' + this.button;
     checkbox = '.fd-checkbox__label';
     dropdownMenu = '.fd-select__control.ng-star-inserted';
     dropdownOption = '.fd-list__item.ng-star-inserted';

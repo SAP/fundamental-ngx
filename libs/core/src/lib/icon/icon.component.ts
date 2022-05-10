@@ -9,6 +9,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 export type IconFont = 'SAP-icons' | 'BusinessSuiteInAppSymbols' | 'SAP-icons-TNT';
 
@@ -52,7 +53,7 @@ export class IconComponent implements OnChanges, OnInit, CssClassBuilder {
     /** Aria-label for Icon. */
     @Input()
     @HostBinding('attr.aria-label')
-    ariaLabel: string = null;
+    ariaLabel: Nullable<string>;
 
     /** Whether or not this icon is for a list navigation item. */
     @HostBinding('class.fd-list__navigation-item-icon')

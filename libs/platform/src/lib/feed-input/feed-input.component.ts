@@ -100,6 +100,7 @@ export class FeedInputComponent implements AfterViewInit {
 
             return parseInt(lineHeight, 10);
         }
+        return 1;
     }
 
     /** @hidden Get the total height including borders and scroll height */

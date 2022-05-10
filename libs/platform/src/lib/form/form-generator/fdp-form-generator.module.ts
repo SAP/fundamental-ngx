@@ -27,11 +27,16 @@ import { DynamicFormGeneratorSwitchComponent } from './dynamic-form-generator-sw
 import { FormGeneratorService } from './form-generator.service';
 import { FormGeneratorFieldComponent } from './form-generator-field/form-generator-field.component';
 import { DynamicFormGeneratorMultiInputComponent } from './dynamic-form-generator-multi-input/dynamic-form-generator-multi-input.component';
+import { FormGeneratorModuleConfig } from './interfaces/form-generator-module-config';
 import { GetOrderedFieldControlsPipe } from './pipes/get-ordered-form-controls.pipe';
 import { PlatformMultiComboboxModule } from '../multi-combobox/multi-combobox.module';
 import { PlatformMultiInputModule } from '../multi-input/multi-input.module';
-import { DynamicFormFieldItem } from './interfaces/dynamic-form-item';
-import { defaultFormGeneratorItemConfigProvider, FORM_GENERATOR_ITEM_CONFIG } from './providers/providers';
+import {
+    defaultFormGeneratorConfigProvider,
+    defaultFormGeneratorItemConfigProvider,
+    FORM_GENERATOR_CONFIG,
+    FORM_GENERATOR_ITEM_CONFIG
+} from './providers/providers';
 
 /**
  * Adds Form Generator functionality to your application.
@@ -75,7 +80,12 @@ import { defaultFormGeneratorItemConfigProvider, FORM_GENERATOR_ITEM_CONFIG } fr
         PlatformMultiComboboxModule,
         PlatformMultiInputModule
     ],
-    providers: [FormGeneratorService, FormGeneratorComponentsAccessorService, defaultFormGeneratorItemConfigProvider],
+    providers: [
+        FormGeneratorService,
+        FormGeneratorComponentsAccessorService,
+        defaultFormGeneratorItemConfigProvider,
+        defaultFormGeneratorConfigProvider
+    ],
     exports: [
         FormGeneratorComponent,
         DynamicFormControlFieldDirective,
@@ -95,13 +105,17 @@ export class PlatformFormGeneratorModule {
      * Allows configuring module on a global level with custom configuration.
      * @param config User's custom configuration.
      */
-    static withConfig(config: Partial<DynamicFormFieldItem>): ModuleWithProviders<PlatformFormGeneratorModule> {
+    static withConfig(config: Partial<FormGeneratorModuleConfig>): ModuleWithProviders<PlatformFormGeneratorModule> {
         return {
             ngModule: PlatformFormGeneratorModule,
             providers: [
                 {
                     provide: FORM_GENERATOR_ITEM_CONFIG,
-                    useValue: config
+                    useValue: config.itemConfig
+                },
+                {
+                    provide: FORM_GENERATOR_CONFIG,
+                    useValue: config.formConfig
                 }
             ]
         };

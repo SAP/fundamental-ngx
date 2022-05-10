@@ -5,7 +5,7 @@
     <ng-container *ngIf="sideNavigationConfiguration">
         <div fd-side-nav-main *ngIf="sideNavigationConfiguration.mainNavigation">
             <fd-prepared-nested-list
-                [condensed]="condensed || sideNavigationConfiguration.condensed"
+                [condensed]="condensed || !!sideNavigationConfiguration.condensed"
                 [first]="true"
                 [list]="sideNavigationConfiguration.mainNavigation"
             >
@@ -13,7 +13,7 @@
         </div>
         <div fd-side-nav-utility *ngIf="sideNavigationConfiguration.utilityNavigation">
             <fd-prepared-nested-list
-                [condensed]="condensed || sideNavigationConfiguration.condensed"
+                [condensed]="condensed || !!sideNavigationConfiguration.condensed"
                 [first]="true"
                 [list]="sideNavigationConfiguration.utilityNavigation"
             >

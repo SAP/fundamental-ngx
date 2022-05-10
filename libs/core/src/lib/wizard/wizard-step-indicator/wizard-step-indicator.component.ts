@@ -14,6 +14,7 @@ import { WizardStepComponent } from '../wizard-step/wizard-step.component';
 import { ActionSheetComponent } from '@fundamental-ngx/core/action-sheet';
 import { Subscription } from 'rxjs';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 @Component({
     selector: 'fd-wizard-step-indicator',
@@ -25,7 +26,7 @@ export class WizardStepIndicatorComponent implements OnInit, OnDestroy {
      * The icon to use for this step.
      */
     @Input()
-    glyph: string;
+    glyph: Nullable<string>;
 
     /**
      * Whether or not the step indicator (specifically, the action sheet) is compact.
@@ -73,7 +74,7 @@ export class WizardStepIndicatorComponent implements OnInit, OnDestroy {
             if (this.actionSheet) {
                 this.actionSheet.close();
             }
-            event.preventDefault();
+            event?.preventDefault();
             this.stepIndicatorItemClicked.emit(step);
         }
     }

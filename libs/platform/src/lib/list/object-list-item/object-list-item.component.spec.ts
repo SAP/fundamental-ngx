@@ -83,11 +83,11 @@ describe('ObjectListItemComponent', () => {
         });
     });
 
-    it('Object list item has role as list item', () => {
-        const listItems = fixture.debugElement.queryAll(By.css('fdp-object-list-item'));
+    it('Object list item has role as listbox item', () => {
+        const listItems = fixture.debugElement.queryAll(By.css('fdp-object-list-item .fd-object-list'));
         fixture.detectChanges();
         listItems.forEach((listElem) => {
-            expect(listElem.nativeElement.getAttribute('role')).toEqual('listitem');
+            expect(listElem.nativeElement.getAttribute('role')).toEqual('listbox');
         });
     });
 
@@ -311,8 +311,9 @@ export class ListDataProvider extends DataProvider<Product> {
 
     fetch(params: Map<string, string>): Observable<Product[]> {
         let data = LIST_ELEMENTS;
-        if (params.get('name')) {
-            const keyword = params.get('name').toLowerCase();
+        const name = params.get('name');
+        if (name) {
+            const keyword = name.toLowerCase();
             data = data.filter((item) => item.title.toLowerCase().indexOf(keyword) > -1);
         }
         return of(data);
@@ -359,7 +360,7 @@ export class ListDataProvider extends DataProvider<Product> {
     `
 })
 class ObjectListItemDataSourceTestComponent {
-    @ViewChild(ListComponent, { static: true }) component: ListComponent;
+    @ViewChild(ListComponent, { static: true }) component: ListComponent<Product>;
     @ViewChild(ObjectListItemComponent, { static: true }) childComponent: ObjectListItemComponent;
     public _dataSource = new ListDataSource<Product>(new ListDataProvider());
 }
@@ -387,10 +388,10 @@ describe('Object  List Item Component with DataSource', () => {
         expect(component).toBeTruthy();
     });
 
-    it('Should Object list container with role as list', () => {
+    it('Should Object list container with role as listbox', () => {
         const listContainer = fixture.debugElement.query(By.css('ul'));
         fixture.detectChanges();
-        expect(listContainer.nativeElement.getAttribute('role')).toEqual('list');
+        expect(listContainer.nativeElement.getAttribute('role')).toEqual('listbox');
     });
 
     it('Should contain fd-list and fd-object-list class in list', () => {

@@ -22,8 +22,9 @@ export class ListDataProvider extends DataProvider<Address> {
     }
     fetch(params: Map<string, string>): Observable<Address[]> {
         let data = LIST_ELEMENTS;
-        if (params.get('name')) {
-            const keyword = params.get('name').toLowerCase();
+        const name = params.get('name');
+        if (name) {
+            const keyword = name.toLowerCase();
             data = data.filter((city) => city.name.toLowerCase().indexOf(keyword) > -1);
         }
         return of(data);

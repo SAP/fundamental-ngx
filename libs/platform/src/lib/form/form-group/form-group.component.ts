@@ -57,6 +57,7 @@ import {
     HintPlacement,
     LabelLayout
 } from '@fundamental-ngx/platform/shared';
+import { Nullable } from '@fundamental-ngx/core/shared';
 import {
     Field,
     FieldColumn,
@@ -307,7 +308,7 @@ export class FormGroupComponent
      * eg: XL2-L2-M2-S1 would create 2-column layouts for XL, L, and M sizes and single-column layout for S size.
      */
     @Input()
-    columnLayout: string;
+    columnLayout: Nullable<string>;
 
     /** Whether or not all form items should have identical layout provided for form group */
     @Input()
@@ -539,8 +540,8 @@ export class FormGroupComponent
 
     /** @hidden */
     private _listenFormFieldColumnChange(): void {
-        this.formGroupChildren.forEach((field: FormFieldComponent) =>
-            field.onColumnChange?.pipe(takeUntil(this._destroyed)).subscribe(() => {
+        this.formGroupChildren.forEach((field: FormGroupField) =>
+            (<FormFieldComponent>field).onColumnChange?.pipe(takeUntil(this._destroyed)).subscribe(() => {
                 this._updateFieldByColumn();
                 this._cd.markForCheck();
             })
@@ -597,7 +598,7 @@ export class FormGroupComponent
     }
 
     /** @hidden Validate column number */
-    private _validateFieldColumn(columnNumber: number): number {
+    private _validateFieldColumn(columnNumber: number | undefined): number {
         if (this.columnLayout && columnNumber) {
             if (isNaN(columnNumber)) {
                 throw new Error('Input a valid column number');
@@ -648,7 +649,7 @@ export class FormGroupComponent
      */
     private _setUserLayout(): void {
         if (this.columnLayout) {
-            this._getColumnNumbers();
+            this._getColumnNumbers(this.columnLayout);
             if (isNaN(this.xlColumnsNumber) || isNaN(this.lgColumnsNumber) || isNaN(this.mdColumnsNumber)) {
                 throw new Error('Input a valid number for columns');
             }
@@ -672,8 +673,8 @@ export class FormGroupComponent
     }
 
     /** @hidden */
-    private _getColumnNumbers(): void {
-        const [xl, lg, md] = this.columnLayout.split('-');
+    private _getColumnNumbers(layout: string): void {
+        const [xl, lg, md] = layout.split('-');
         this.xlColumnsNumber = parseInt(xl.slice(2, xl.length), 10);
         this.lgColumnsNumber = parseInt(lg.slice(1, lg.length), 10);
         this.mdColumnsNumber = parseInt(md.slice(1, md.length), 10);

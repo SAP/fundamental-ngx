@@ -1,6 +1,6 @@
 import { SortDirection } from '../enums';
 
 export interface CollectionSort {
-    field: string;
+    field: string | null;
     direction: SortDirection;
 }

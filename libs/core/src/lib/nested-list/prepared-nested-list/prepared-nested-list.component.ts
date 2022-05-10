@@ -1,15 +1,6 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    forwardRef,
-    Input,
-    Optional,
-    ViewChild,
-    ViewEncapsulation
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NestedListDirective } from '../nested-list/nested-list.directive';
-import { NestedListModel } from '../nested-list-model';
-import { NestedItemService } from '../nested-item/nested-item.service';
+import { NestedListItem, NestedListModel } from '../nested-list-model';
 
 /**
  * Component for internal usage, allows to generate the nested list from defined object.
@@ -53,5 +44,7 @@ export class PreparedNestedListComponent {
     }
 
     /** @hidden */
-    constructor(@Optional() private _nestedItemService: NestedItemService) {}
+    _expandedChange(expanded: boolean, item: NestedListItem): void {
+        item.expanded = expanded;
+    }
 }

@@ -56,7 +56,7 @@ export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges, 
     onSelectionChange = new EventEmitter<ApprovalUser[]>();
 
     @ViewChild(ListComponent)
-    list: ListComponent;
+    list: ListComponent<ApprovalUser>;
 
     @ViewChildren(StandardListItemComponent)
     listItems: QueryList<StandardListItemComponent>;
@@ -116,9 +116,9 @@ export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges, 
 
     /** @hidden */
     private _getUsersFromSelectedItems(items: BaseListItem[]): ApprovalUser[] {
-        return items.map((item) =>
-            this.users.find((user) => `${this._idPrefix + user.id}` === item.itemEl.nativeElement.id)
-        );
+        return items
+            .map((item) => this.users.find((user) => `${this._idPrefix + user.id}` === item.itemEl.nativeElement.id))
+            .filter((u): u is ApprovalUser => !!u);
     }
 
     /** @hidden */
@@ -144,7 +144,7 @@ export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges, 
     private _userCollectorIntervalFn(tracker: { currentIndex: number }): void {
         const nextIndex = tracker.currentIndex + ITEMS_RENDERED_AT_ONCE;
 
-        const collectedUsers = [];
+        const collectedUsers: ApprovalUser[] = [];
 
         for (let i = tracker.currentIndex; i <= nextIndex; i++) {
             if (i >= this.users.length) {

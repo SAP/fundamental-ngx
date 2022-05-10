@@ -45,41 +45,29 @@ describe('Action sheet test suite', () => {
         expect(getElementClass(actionSheetListItemButtons)).toContain(compactValue);
     });
 
-    it('should check alert appears after selection', () => {
-        const actionSheetCount = getElementArrayLength(actionSheetMenuButton);
+    it('should check alert appears after selection for default action sheet', () => {
+        checkAlertItems(0);
+    });
 
-        for (let i = 0; actionSheetCount > i; i++) {
-            click(actionSheetMenuButton, i);
-            const actionSheetItemCount = getElementArrayLength(actionSheetListItems);
-
-            if (i === 2) {
-                for (let j = 0; actionSheetItemCount > j; j++) {
-                    if (j > 3) {
-                        click(actionSheetListItemButtons, j);
-                        click(actionSheetMenuButton, i);
-                        continue;
-                    }
-                    click(actionSheetListItemButtons, j);
-                    expect(getText(alertMessage)).toEqual(alertMessages[j]);
-                    waitForNotDisplayed(alertMessage);
-                    click(actionSheetMenuButton, i);
-                }
+    it('should check alert appears after selection for compact action sheet', () => {
+        checkAlertItems(1);
+    });
+    it('should check alert appears after selection for mobile action sheet', () => {
+        click(actionSheetMenuButton, 2);
+        const actionSheetItemCount = getElementArrayLength(actionSheetListItems);
+        for (let j = 0; actionSheetItemCount > j; j++) {
+            if (j > 3) {
+                click(actionSheetListItemButtons, j);
+                click(actionSheetMenuButton, 2);
                 continue;
             }
-
-            for (let j = 0; actionSheetItemCount > j; j++) {
-                if (j === 4) {
-                    click(actionSheetListItemButtons, j);
-                    click(actionSheetMenuButton, i);
-                    continue;
-                }
-                click(actionSheetListItemButtons, j);
-                expect(getText(alertMessage)).toEqual(alertMessages[j]);
-                waitForNotDisplayed(alertMessage);
-                click(actionSheetMenuButton, i);
-            }
+            click(actionSheetListItemButtons, j);
+            expect(getText(alertMessage)).toEqual(alertMessages[j]);
+            waitForNotDisplayed(alertMessage);
+            click(actionSheetMenuButton, 2);
         }
     });
+
     describe('Check orientation', () => {
         it('should check orientation', () => {
             actionSheetPage.checkRtlSwitch();
@@ -113,4 +101,20 @@ describe('Action sheet test suite', () => {
             }
         });
     });
+
+    function checkAlertItems(i: number): void {
+        click(actionSheetMenuButton, i);
+        const actionSheetItemCount = getElementArrayLength(actionSheetListItems);
+        for (let j = 0; actionSheetItemCount > j; j++) {
+            if (j === 4) {
+                click(actionSheetListItemButtons, j);
+                click(actionSheetMenuButton, i);
+                continue;
+            }
+            click(actionSheetListItemButtons, j);
+            expect(getText(alertMessage)).toEqual(alertMessages[j]);
+            waitForNotDisplayed(alertMessage);
+            click(actionSheetMenuButton, i);
+        }
+    }
 });

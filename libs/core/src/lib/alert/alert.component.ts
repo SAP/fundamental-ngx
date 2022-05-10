@@ -22,6 +22,7 @@ import {
 } from '@angular/core';
 import { alertFadeNgIf } from './alert-utils/alert-animations';
 import { AbstractFdNgxClass } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { AlertRef } from './alert-utils/alert-ref';
 import { AlertConfig } from './alert-utils/alert-config';
 
@@ -79,11 +80,11 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
 
     /** Id of the element that labels the alert. */
     @Input()
-    ariaLabelledBy: string = null;
+    ariaLabelledBy: Nullable<string>;
 
     /** Aria label for the alert component element. */
     @Input()
-    ariaLabel: string = null;
+    ariaLabel: Nullable<string>;
 
     /** Aria label for the dismiss button. */
     @Input()
@@ -113,7 +114,7 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
     componentRef: ComponentRef<any> | EmbeddedViewRef<any>;
 
     /** @hidden */
-    childContent: Type<any> | TemplateRef<any> | string = undefined;
+    childContent: Type<any> | TemplateRef<any> | string | undefined = undefined;
 
     /** @hidden */
     constructor(

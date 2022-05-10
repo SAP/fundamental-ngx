@@ -10,7 +10,12 @@
         (click)="this.btnClicked.emit()"
     ></button>
     <fd-shellbar-logo>
-        <a aria-label="Home" class="fd-shellbar__logo fd-docs--toolbar__home-logo" href="/">
+        <a
+            aria-label="Home"
+            class="fd-shellbar__logo fd-docs--toolbar__home-logo"
+            [routerLink]="'/' + library + '/home' | lowercase"
+            id="toolbar-home-btn"
+        >
             Fundamental
             <span class="fd-docs--toolbar__home-logo-framework"> NGX </span>
         </a>
@@ -19,7 +24,7 @@
     <fd-product-menu placement="bottom-start" [control]="library" [closePopoverOnSelect]="true" [items]="items">
     </fd-product-menu>
 
-    <fd-shellbar-actions [closePopoverOnSelect]>
+    <fd-shellbar-actions [closePopoverOnSelect]="true">
         <ng-container *ngIf="size === 's'">
             <button
                 fd-button

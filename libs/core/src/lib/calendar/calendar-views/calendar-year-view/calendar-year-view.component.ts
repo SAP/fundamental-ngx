@@ -20,7 +20,7 @@ import { DateTimeFormats, DATE_TIME_FORMATS, DatetimeAdapter } from '@fundamenta
 
 import { CalendarService } from '../../calendar.service';
 import { CalendarYearGrid, CalendarYear } from '../../models/calendar-year-grid';
-import { DefaultCalendarActiveCellStrategy, FocusableCalendarView } from '../../models/common';
+import { DefaultCalendarActiveCellStrategy, EscapeFocusFunction, FocusableCalendarView } from '../../models/common';
 import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
 
 /** Component representing the YearView of the Calendar Component. */
@@ -41,7 +41,7 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
 
     /** Function that is called when the focus would escape the element. */
     @Input()
-    focusEscapeFunction: (event: KeyboardEvent) => void;
+    focusEscapeFunction: EscapeFocusFunction;
 
     /** Parameter holding the year that is currently selected. */
     @Input()
@@ -339,7 +339,7 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
      * Returns transformed 1d array from 2d year grid.
      */
     private _getYearList(): CalendarYear[] {
-        return [].concat(...this._calendarYearListGrid);
+        return (<CalendarYear[]>[]).concat(...this._calendarYearListGrid);
     }
 
     /**

@@ -8,12 +8,6 @@ import { XPositions, YPositions } from '@fundamental-ngx/core/shared';
     templateUrl: './popover-cdk-placement-example.component.html'
 })
 export class PopoverCdkPlacementExampleComponent {
-    list = [
-        { text: 'Option 1', url: '#' },
-        { text: 'Option 2', url: '#' },
-        { text: 'Option 3', url: '#' }
-    ];
-
     @ViewChild(PopoverComponent)
     popover: PopoverComponent;
 

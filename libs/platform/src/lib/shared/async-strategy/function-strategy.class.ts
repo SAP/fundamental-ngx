@@ -6,7 +6,7 @@ import { isFunction } from '../utils/lang';
  */
 export class FunctionStrategy<T> implements SubscriptionStrategy<T> {
     createSubscription(fn: () => T, updateLatestValue: (v: T) => any): Promise<void> {
-        const result = isFunction(fn) ? fn() : fn;
+        const result = isFunction(fn) ? fn() : ((<any>fn) as T);
         return Promise.resolve(result).then(updateLatestValue);
     }
 }

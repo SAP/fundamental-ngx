@@ -41,7 +41,7 @@ export class AvatarGroupOverflowButtonDirective implements OnChanges, CssClassBu
         return [
             'fd-button',
             'fd-avatar-group__more-button',
-            this.color ? this._getMoreButtonColorCssClass() : '',
+            (this.color && this._getMoreButtonColorCssClass()) || '',
             this.size ? `fd-avatar-group__more-button--${this.size}` : '',
             this.class
         ];
@@ -53,7 +53,7 @@ export class AvatarGroupOverflowButtonDirective implements OnChanges, CssClassBu
     }
 
     /** @hidden */
-    private _getMoreButtonColorCssClass(): string {
+    private _getMoreButtonColorCssClass(): string | null {
         if (this.color === 'random') {
             return `fd-avatar-group__more-button--accent-color-${getRandomColorAccent()}`;
         }
@@ -61,5 +61,6 @@ export class AvatarGroupOverflowButtonDirective implements OnChanges, CssClassBu
         if (!Number.isNaN(parseInt(this.color as string, 10))) {
             return `fd-avatar-group__more-button--accent-color-${this.color}`;
         }
+        return null;
     }
 }

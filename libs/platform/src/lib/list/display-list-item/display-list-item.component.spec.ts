@@ -55,10 +55,10 @@ describe('DisplayListItemComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('Should display list container with role as list', () => {
+    it('Should display list container with role as listbox', () => {
         const listContainer = fixture.debugElement.query(By.css('ul'));
         fixture.detectChanges();
-        expect(listContainer.nativeElement.getAttribute('role')).toEqual('list');
+        expect(listContainer.nativeElement.getAttribute('role')).toEqual('listbox');
     });
 
     it('Should contain fd-list in list container', () => {
@@ -73,16 +73,15 @@ describe('DisplayListItemComponent', () => {
         expect(listItems.length).toEqual(4);
     });
 
-    it('Display items should has aria-label attribute', () => {
-        const spanElems = fixture.debugElement.queryAll(By.css('span'));
-        expect(spanElems.length).toEqual(10);
-        expect(spanElems[1].nativeElement.getAttribute('aria-label')).toContain('secondary 1');
+    it('Display items should have aria-label attribute', () => {
+        const secondaryItems = fixture.debugElement.queryAll(By.css('[fd-list-secondary]'));
+        expect(secondaryItems[0].nativeElement.getAttribute('aria-label')).toContain('secondary 1');
     });
 
-    it('Should display item role as list item', () => {
-        const listContainer = fixture.debugElement.query(By.css('fdp-display-list-item'));
+    it('Should display item role as option', () => {
+        const listContainer = fixture.debugElement.query(By.css('fdp-display-list-item .fd-list__item'));
         fixture.detectChanges();
-        expect(listContainer.nativeElement.getAttribute('role')).toEqual('listitem');
+        expect(listContainer.nativeElement.getAttribute('role')).toEqual('option');
     });
 
     it('Should title 1 title2 2 title 3 and as title 4 as list item', () => {

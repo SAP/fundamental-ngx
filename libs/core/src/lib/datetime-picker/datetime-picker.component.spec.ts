@@ -68,7 +68,7 @@ describe('DatetimePickerComponent', () => {
 
         expect(component.onChange).toHaveBeenCalledWith(null);
         // not comparing time as it may face difference by 1 second
-        expect(component.date.toDateString()).toEqual(today.toDateString());
+        expect(component.date?.toDateString()).toEqual(today.toDateString());
     });
 
     it('should not update input with invalid time', () => {
@@ -85,9 +85,9 @@ describe('DatetimePickerComponent', () => {
         component.handleDateChange(date);
         component.submit();
 
-        expect(component.date.year).toEqual(date.year);
-        expect(component.date.hour).toEqual(tempTime.hour);
-        expect(component.date.minute).toEqual(tempTime.minute);
+        expect(component.date?.year).toEqual(date.year);
+        expect(component.date?.hour).toEqual(tempTime.hour);
+        expect(component.date?.minute).toEqual(tempTime.minute);
     });
 
     it('should handle correct write value function', () => {

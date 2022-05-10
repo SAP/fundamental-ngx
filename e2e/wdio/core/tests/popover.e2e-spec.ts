@@ -70,10 +70,9 @@ describe('Popover test suite', () => {
         scrollButton,
         scrollMessage,
         plusButton,
-        dynamicOption,
+        dynamicButton,
         dropdownButton,
         dropdownOption,
-        dynamicSubOption,
         cdkButton,
         topButton,
         endButton,
@@ -103,7 +102,7 @@ describe('Popover test suite', () => {
     }, 1);
 
     describe('Check Basic Popovers', () => {
-        it('should check that avatars have popovers and all options are clickable', () => {
+        it('should check that avatars have popovers', () => {
             scrollIntoView(avatar);
             const avatarLength = getElementArrayLength(avatar);
             for (let i = 0; i < avatarLength - 1; i++) {
@@ -226,15 +225,11 @@ describe('Popover test suite', () => {
     });
 
     describe('Check Programmatic Control', () => {
-        it('should check that avatar has popover and all options are clickable', () => {
+        it('should check that avatar has popover', () => {
             scrollIntoView(programmaticAvatar);
             expect(isElementDisplayed(avatar)).toBe(true, `avatar not displayed`);
             click(programmaticControlButton);
             expect(isElementDisplayed(popover, 1)).toBe(true, `popover not displayed`);
-            const buttonLength = getElementArrayLength(option);
-            for (let i = 3; i < buttonLength; i++) {
-                expect(isElementClickable(option, i)).toBe(true, `option with index ${i} not clickable`);
-            }
             click(programmaticControlButton, 1);
         });
     });
@@ -245,7 +240,7 @@ describe('Popover test suite', () => {
             click(popoverDialogsButton);
             click(multiInputButton);
             const optionLength = getElementArrayLength(multiInputOption);
-            for (let i = 3; i < optionLength; i++) {
+            for (let i = 0; i < optionLength; i++) {
                 click(multiInputOption, i);
 
                 if (i !== optionLength - 1) {
@@ -390,59 +385,10 @@ describe('Popover test suite', () => {
     });
 
     describe('Check Dynamic Body Height', () => {
-        it('should check that first dropdown option has clickable suboptions', () => {
+        it('should check that popover has clickable button', () => {
             scrollIntoView(plusButton);
             click(plusButton);
-            click(dynamicOption);
-            const subOptionsLength = getElementArrayLength(dynamicSubOption);
-            for (let i = 0; i < subOptionsLength - 12; i++) {
-                scrollIntoView(dynamicSubOption, i);
-                expect(isElementClickable(dynamicSubOption, i)).toBe(true, `suboption with index ${i} not clickable`);
-            }
-        });
-
-        it('should check that second dropdown option has clickable suboptions', () => {
-            scrollIntoView(plusButton);
-            click(plusButton);
-            click(dynamicOption, 1);
-            const subOptionsLength = getElementArrayLength(dynamicSubOption);
-            for (let i = 3; i < subOptionsLength - 9; i++) {
-                scrollIntoView(dynamicSubOption, i);
-                expect(isElementClickable(dynamicSubOption, i)).toBe(true, `suboption with index ${i} not clickable`);
-            }
-        });
-
-        it('should check that third dropdown option has clickable suboptions', () => {
-            scrollIntoView(plusButton);
-            click(plusButton);
-            click(dynamicOption, 2);
-            const subOptionsLength = getElementArrayLength(dynamicSubOption);
-            for (let i = 6; i < subOptionsLength - 6; i++) {
-                scrollIntoView(dynamicSubOption, i);
-                expect(isElementClickable(dynamicSubOption, i)).toBe(true, `suboption with index ${i} not clickable`);
-            }
-        });
-
-        it('should check that forth dropdown option has clickable suboptions', () => {
-            scrollIntoView(plusButton);
-            click(plusButton);
-            click(dynamicOption, 3);
-            const subOptionsLength = getElementArrayLength(dynamicSubOption);
-            for (let i = 9; i < subOptionsLength - 3; i++) {
-                scrollIntoView(dynamicSubOption, i);
-                expect(isElementClickable(dynamicSubOption, i)).toBe(true, `suboption with index ${i} not clickable`);
-            }
-        });
-
-        it('should check that fifth dropdown option has clickable suboptions', () => {
-            scrollIntoView(plusButton);
-            click(plusButton);
-            click(dynamicOption, 4);
-            const subOptionsLength = getElementArrayLength(dynamicSubOption);
-            for (let i = 12; i < subOptionsLength; i++) {
-                scrollIntoView(dynamicSubOption, i);
-                expect(isElementClickable(dynamicSubOption, i)).toBe(true, `suboption with index ${i} not clickable`);
-            }
+            click(dynamicButton);
         });
     });
 

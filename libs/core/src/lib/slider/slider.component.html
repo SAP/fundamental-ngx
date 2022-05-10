@@ -16,7 +16,7 @@
                     <div
                         class="fd-slider__tick"
                         fd-slider-position
-                        [position]="tick.position"
+                        [position]="tick.position || 0"
                         [class.fd-slider__tick--in-range]="
                             !hideProgressBar &&
                             (_isRange
@@ -34,7 +34,7 @@
                     *ngIf="first || last || i % tickmarksBetweenLabels === 0"
                     class="fd-slider__label"
                     fd-slider-position
-                    [position]="tick.position"
+                    [position]="tick.position || 0"
                     [innerText]="tick.label"
                 ></div>
             </ng-container>
@@ -206,9 +206,11 @@
         (mouseleave)="_popoverInputFieldHovered$.next(false)"
     >
         <div
-            *ngIf="customValues?.length > 0 || tooltipMode === 'readonly'"
+            *ngIf="(customValues && customValues.length > 0) || tooltipMode === 'readonly'"
             class="fd-slider--tooltip"
-            [innerText]="customValues?.length > 0 ? customValues[position].label : _popoverValueRef[target]"
+            [innerText]="
+                customValues && customValues.length > 0 ? customValues[position].label : _popoverValueRef[target]
+            "
         ></div>
 
         <input

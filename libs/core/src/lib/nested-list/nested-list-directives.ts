@@ -19,13 +19,26 @@ import { RtlService } from '@fundamental-ngx/core/utils';
 import { map } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 
+let uniqueId = 0;
+
 @Directive({
     selector: '[fdNestedDirectivesHeader], [fd-nested-list-header]'
 })
 export class NestedListHeaderDirective {
+    @Input()
+    @HostBinding('attr.id')
+    id: string | null = `fd-nested-list-group-header-${++uniqueId}`;
+
     /** @hidden */
     @HostBinding('class.fd-nested-list__group-header')
     fdNestedListHeaderClass = true;
+
+    constructor(private _elementRef: ElementRef) {}
+
+    /** Get the header title */
+    get title(): string {
+        return this._elementRef.nativeElement.textContent;
+    }
 }
 
 @Directive({
@@ -123,6 +136,10 @@ export class NestedListExpandIconComponent {
     @HostBinding('class.is-expanded')
     @HostBinding('attr.aria-expanded')
     expanded = false;
+
+    /** @hidden */
+    @HostBinding('attr.aria-hidden')
+    ariaHidden = true;
 
     /** @hidden */
     sideArrowIcon$: Observable<string>;

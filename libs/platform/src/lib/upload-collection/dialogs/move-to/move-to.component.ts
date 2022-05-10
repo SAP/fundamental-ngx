@@ -53,9 +53,9 @@ export class MoveToComponent implements OnInit {
     readonly _maxFilenameLength = this.dialogRef.data.maxFilenameLength;
 
     /** @hidden */
-    _currentFolder?: UploadCollectionFolder = this.originalFolder ? { ...this.originalFolder } : null;
+    _currentFolder?: UploadCollectionFolder = this.originalFolder && { ...this.originalFolder };
     /** @hidden */
-    selectedFolder?: UploadCollectionFolder;
+    selectedFolder: UploadCollectionFolder | null;
 
     /** @hidden */
     _foldersList: UploadCollectionFolder[] = [];
@@ -73,7 +73,7 @@ export class MoveToComponent implements OnInit {
     /** @hidden */
     _goToParentFolder(): void {
         this.selectedFolder = null;
-        this._currentFolder = this._getParentFolderByCurrentFolderId(this._currentFolder.documentId);
+        this._currentFolder = this._getParentFolderByCurrentFolderId(this._currentFolder?.documentId);
         this._init(this._currentFolder ? this._currentFolder.files : this.items);
 
         this._cd.detectChanges();
@@ -136,25 +136,27 @@ export class MoveToComponent implements OnInit {
     private _init(items: UploadCollectionItem[]): void {
         this._foldersList = items.filter(
             (item) =>
-                item.type === 'folder' && !this.movableFolders.some((folder) => folder.documentId === item.documentId)
+                item.type === 'folder' && !this.movableFolders?.some((folder) => folder.documentId === item.documentId)
         ) as UploadCollectionFolder[];
     }
 
     /** @hidden */
-    private _getParentFolderByCurrentFolderId(documentId: string | number): UploadCollectionFolder | undefined {
-        let foundObj: UploadCollectionFolder;
+    private _getParentFolderByCurrentFolderId(documentId?: string | number): UploadCollectionFolder | undefined {
+        let foundObj: UploadCollectionFolder | undefined;
 
-        JSON.stringify(this.items, (_, nestedValue) => {
-            if (!isObject(nestedValue) || nestedValue.type === 'file' || !nestedValue.files) {
+        if (documentId) {
+            JSON.stringify(this.items, (_, nestedValue) => {
+                if (!isObject(nestedValue) || nestedValue.type === 'file' || !nestedValue.files) {
+                    return nestedValue;
+                }
+
+                if (nestedValue.files.some((item) => item.documentId === documentId)) {
+                    foundObj = nestedValue;
+                }
+
                 return nestedValue;
-            }
-
-            if (nestedValue.files.some((item) => item.documentId === documentId)) {
-                foundObj = nestedValue;
-            }
-
-            return nestedValue;
-        });
+            });
+        }
 
         return foundObj;
     }

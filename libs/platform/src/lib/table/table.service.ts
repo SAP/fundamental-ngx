@@ -11,11 +11,9 @@ import { ColumnsChange, FilterChange, FreezeChange, GroupChange, PageChange, Sea
 @Injectable()
 export class TableService {
     private _tableStateSubject$: BehaviorSubject<TableState> = new BehaviorSubject(DEFAULT_TABLE_STATE);
-    private _tableLoadingSubject$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+    private _tableLoadingSubject$ = new BehaviorSubject<boolean>(false);
     private _markForCheck$: Subject<void> = new Subject<void>();
-    private _tableColumnsWidth$ = new Subject<void>();
 
-    readonly tableColumnsWidth$ = this._tableColumnsWidth$.asObservable();
     readonly tableState$ = this._tableStateSubject$.asObservable();
     readonly tableLoading$ = this._tableLoadingSubject$.asObservable();
     readonly tableStateChanges$ = this.tableState$.pipe(skip(1));
@@ -221,11 +219,6 @@ export class TableService {
         this.setTableState(state);
 
         this.pageChange.emit({ current: state.page, previous: prevPageState });
-    }
-
-    /** Trigger table columns width recalculation */
-    recalculateColumnsWidth(): void {
-        this._tableColumnsWidth$.next();
     }
 }
 

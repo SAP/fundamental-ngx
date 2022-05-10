@@ -320,7 +320,8 @@ describe('FdDatetimeAdapter', () => {
 
     it('should parse invalid value to invalid date', () => {
         const d = adapter.parse('hello');
-        expect(d.isDateValid()).toBeFalse();
+        expect(d).toBeDefined();
+        expect(d?.isDateValid()).toBeFalse();
     });
 
     it('should format', () => {

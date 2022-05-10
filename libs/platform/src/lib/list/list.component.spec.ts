@@ -23,8 +23,9 @@ export class ListDataProvider extends DataProvider<Address> {
 
     fetch(params: Map<string, string>): Observable<Address[]> {
         let data = LIST_ELEMENTS;
-        if (params.get('name')) {
-            const keyword = params.get('name').toLowerCase();
+        const name = params.get('name');
+        if (name) {
+            const keyword = name.toLowerCase();
             data = data.filter((city) => city.name.toLowerCase().indexOf(keyword) > -1);
         }
         return of(data);
@@ -74,10 +75,10 @@ describe('ListComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should display list container with role as list', () => {
+    it('should display list container with role as listbox', () => {
         const listContainer = fixture.debugElement.nativeElement.querySelector('ul');
         fixture.detectChanges();
-        expect(listContainer.getAttribute('role')).toEqual('list');
+        expect(listContainer.getAttribute('role')).toEqual('listbox');
     });
 
     it('should contain fd-list in list container', () => {
@@ -121,7 +122,7 @@ describe('ListComponent', () => {
     `
 })
 class ListDataSourceTestComponent {
-    @ViewChild(ListComponent, { static: true }) component: ListComponent;
+    @ViewChild(ListComponent, { static: true }) component: ListComponent<Address>;
     @ViewChild(StandardListItemComponent, { static: true }) childComponent: StandardListItemComponent;
     public dataSource = new ListDataSource<Address>(new ListDataProvider());
 }

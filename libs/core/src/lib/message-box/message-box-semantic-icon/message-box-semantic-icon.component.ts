@@ -28,7 +28,7 @@ export class MessageBoxSemanticIconComponent {
 
     /** @hidden */
     get _showSemanticIcon(): boolean {
-        return this.messageBoxConfig.showSemanticIcon;
+        return !!this.messageBoxConfig.showSemanticIcon;
     }
 
     /** @hidden */

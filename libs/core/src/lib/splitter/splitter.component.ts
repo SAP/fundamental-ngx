@@ -53,7 +53,7 @@ export class SplitterComponent {
 
         const paneToCheck = this._panes.find((pane) => pane.id === paneId);
 
-        return paneToCheck?.isOnCanvas;
+        return !!paneToCheck?.isOnCanvas;
     }
 
     /** Hide certain pane from the canvas. */

@@ -29,4 +29,3 @@ export const customLabels = [
     'not equal to',
     'not empty'
 ];
-export const basicSearchId = 'value-help-dialog-search';

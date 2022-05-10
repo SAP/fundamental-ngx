@@ -30,6 +30,14 @@ export class NestedListContentDirective implements AfterContentInit, OnDestroy {
     @HostBinding('class.is-selected')
     selected = false;
 
+    /** @hidden */
+    @HostBinding('attr.role')
+    role = 'treeitem';
+
+    /** @hidden */
+    @HostBinding('attr.aria-expanded')
+    ariaExpanded = false;
+
     /** Event thrown, when selected state is changed */
     @Output()
     selectedChange: EventEmitter<boolean> = new EventEmitter<boolean>();

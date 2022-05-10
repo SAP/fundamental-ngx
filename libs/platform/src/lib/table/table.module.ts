@@ -63,12 +63,61 @@ import {
 import { FdpHeaderCellDef, FdpTableHeader } from './directives/table-header.directive';
 import { FdpViewSettingsFilterCustomDef } from './directives/table-view-settings-filter-custom.directive';
 import { TableScrollableDirective } from './directives/table-scrollable.directive';
-import { TableScrollerDirective } from './directives/table-scroller.directive';
 import { FdpCellSelectableDirective } from './directives/table-cell-selectable.directive';
 import { PlatformTableCellResizableDirective } from './directives/table-cell-resizable.directive';
 import { PlatformTableColumnResizerComponent } from './components/table-column-resizer/table-column-resizer.component';
 import { NoDataWrapperComponent } from './components/no-data-wrapper/no-data-wrapper.component';
 import { TableEditableCellComponent } from './components/table-editable-cell/table-editable-cell.component';
+import { TableCellStylesPipe } from './pipes/cell-styles.pipe';
+import { SelectionCellStylesPipe } from './pipes/selection-cell-styles.pipe';
+import { RowClassesPipe } from './pipes/row-classes.pipe';
+import { ColumnResizableSidePipe } from './pipes/column-resizable-side.pipe';
+
+const EXPORTABLE_DECLARATIONS = [
+    TableComponent,
+    TableColumnComponent,
+    TableToolbarComponent,
+    TableToolbarActionsComponent,
+    FdpTableCell,
+    FdpCellDef,
+    FdpEditableCellDef,
+    FdpCellSelectableDirective,
+    FdpTableHeader,
+    FdpHeaderCellDef,
+    TableViewSettingsDialogComponent,
+    TableViewSettingsFilterComponent,
+    FdpViewSettingsFilterCustomDef,
+    SortingComponent,
+    GroupingComponent,
+    FiltersComponent,
+    FiltersListStepComponent,
+    FilterStepComponent,
+    FilterSingleSelectComponent,
+    FilterMultiSelectComponent,
+    FilterCustomComponent,
+    ResetButtonComponent,
+    TableP13DialogComponent,
+    TableCellStylesPipe,
+    SelectionCellStylesPipe,
+    ColumnResizableSidePipe,
+    RowClassesPipe,
+    TableP13SortComponent,
+    TableP13FilterComponent,
+    TableP13GroupComponent,
+    TableP13ColumnsComponent,
+    P13SortingDialogComponent,
+    P13GroupingDialogComponent,
+    P13FilteringDialogComponent,
+    FilterRuleComponent,
+    P13ColumnsDialogComponent,
+    TableScrollableDirective,
+    PlatformTableCellResizableDirective,
+    PlatformTableColumnResizerComponent,
+    NoDataWrapperComponent,
+    GetAvailableSortColumnsPipe,
+    TableEditableCellComponent,
+    FdpEditableCellFormDirective
+];
 
 @NgModule({
     imports: [
@@ -99,88 +148,7 @@ import { TableEditableCellComponent } from './components/table-editable-cell/tab
         PlatformDatePickerModule,
         PlatformSwitchModule
     ],
-    declarations: [
-        TableComponent,
-        TableColumnComponent,
-        TableToolbarComponent,
-        TableToolbarActionsComponent,
-        FdpTableCell,
-        FdpCellDef,
-        FdpEditableCellDef,
-        FdpCellSelectableDirective,
-        FdpTableHeader,
-        FdpHeaderCellDef,
-        TableViewSettingsDialogComponent,
-        TableViewSettingsFilterComponent,
-        FdpViewSettingsFilterCustomDef,
-        SortingComponent,
-        GroupingComponent,
-        FiltersComponent,
-        FiltersListStepComponent,
-        FilterStepComponent,
-        FilterSingleSelectComponent,
-        FilterMultiSelectComponent,
-        FilterCustomComponent,
-        ResetButtonComponent,
-        TableP13DialogComponent,
-        TableP13SortComponent,
-        TableP13FilterComponent,
-        TableP13GroupComponent,
-        TableP13ColumnsComponent,
-        P13SortingDialogComponent,
-        P13GroupingDialogComponent,
-        P13FilteringDialogComponent,
-        FilterRuleComponent,
-        P13ColumnsDialogComponent,
-        TableScrollableDirective,
-        TableScrollerDirective,
-        PlatformTableCellResizableDirective,
-        PlatformTableColumnResizerComponent,
-        NoDataWrapperComponent,
-        GetAvailableSortColumnsPipe,
-        TableEditableCellComponent,
-        FdpEditableCellFormDirective
-    ],
-    exports: [
-        TableComponent,
-        TableColumnComponent,
-        TableToolbarComponent,
-        TableToolbarActionsComponent,
-        FdpTableCell,
-        FdpCellDef,
-        FdpEditableCellDef,
-        FdpCellSelectableDirective,
-        FdpTableHeader,
-        FdpHeaderCellDef,
-        TableViewSettingsDialogComponent,
-        TableViewSettingsFilterComponent,
-        FdpViewSettingsFilterCustomDef,
-        SortingComponent,
-        GroupingComponent,
-        FiltersComponent,
-        FiltersListStepComponent,
-        FilterStepComponent,
-        FilterSingleSelectComponent,
-        FilterMultiSelectComponent,
-        FilterCustomComponent,
-        ResetButtonComponent,
-        TableP13DialogComponent,
-        TableP13SortComponent,
-        TableP13FilterComponent,
-        TableP13GroupComponent,
-        TableP13ColumnsComponent,
-        P13SortingDialogComponent,
-        P13GroupingDialogComponent,
-        P13FilteringDialogComponent,
-        FilterRuleComponent,
-        P13ColumnsDialogComponent,
-        TableScrollableDirective,
-        TableScrollerDirective,
-        PlatformTableCellResizableDirective,
-        PlatformTableColumnResizerComponent,
-        NoDataWrapperComponent,
-        GetAvailableSortColumnsPipe,
-        FdpEditableCellFormDirective
-    ]
+    declarations: [...EXPORTABLE_DECLARATIONS],
+    exports: [...EXPORTABLE_DECLARATIONS]
 })
 export class PlatformTableModule {}

@@ -8,7 +8,7 @@ export class RadioButtonPo extends CoreBaseComponentPo {
     disableRadioButton = 'fd-radio-button.ng-untouched:not(.ng-valid) input';
     activeRadioButton = 'fd-radio-button.ng-valid .fd-radio__label';
     activeInput = 'fd-radio-button.ng-valid input';
-    disableDefaultRadioButton = '#radio-id-19';
+    disableDefaultRadioButton = '#radio-17';
 
     open(): void {
         super.open(this.url);

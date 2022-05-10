@@ -3,6 +3,7 @@ import {
     ElementRef,
     Input,
     OnChanges,
+    OnDestroy,
     OnInit,
     Optional,
     Self,
@@ -12,6 +13,7 @@ import {
 import { PopoverService } from '@fundamental-ngx/core/popover';
 import { BasePopoverClass } from '@fundamental-ngx/core/popover';
 import { IconComponent } from '@fundamental-ngx/core/icon';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 const INLINE_HELP_CLASS = 'fd-popover__inline-help fd-inline-help__content';
 const INLINE_HELP_ICON_CLASS = 'fd-popover__inline-help--icon';
@@ -28,7 +30,7 @@ const INLINE_HELP_ICON_CLASS = 'fd-popover__inline-help--icon';
         '[class.fd-inline-help__trigger]': 'true'
     }
 })
-export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnChanges {
+export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnChanges, OnDestroy {
     /** The trigger events that will open/close the inline help component.
      *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
     @Input()
@@ -48,11 +50,11 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
 
     /** Inline help text to display inside generated popover */
     @Input('fd-inline-help')
-    inlineHelpText: string = null;
+    inlineHelpText: Nullable<string> = null;
 
     /** Inline help template to display inside generated popover */
     @Input('fd-inline-help-template')
-    inlineHelpTemplate: TemplateRef<any> = null;
+    inlineHelpTemplate: Nullable<TemplateRef<any>> = null;
 
     constructor(
         private _popoverService: PopoverService,
@@ -84,6 +86,11 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
         this._popoverService.stringContent = this.inlineHelpText;
         this._popoverService.templateContent = this.inlineHelpTemplate;
         this._popoverService.initialise(this._elementRef, this);
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._popoverService.onDestroy();
     }
 
     /** @hidden */

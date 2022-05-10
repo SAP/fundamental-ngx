@@ -4,10 +4,10 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 export class AvatarGroupPo extends CoreBaseComponentPo {
     private url = '/avatar-group';
 
-    firstExampleAvatar = '#background-ex0 fd-avatar';
+    firstExampleAvatar = 'fd-avatar-group-individual-type-example fd-avatar';
     usedDetailsPopup = '.fd-form-item';
     usedGroupDetailsPopup = '.fd-avatar-group__overflow-body';
-    secondExampleAvatar = '#background-ex1 .fd-avatar-group__item';
+    secondExampleAvatar = 'fd-avatar-group-group-type-example .fd-avatar-group__item';
     popoverUserAvatar = 'fd-popover-body .fd-avatar';
     individualCard = 'fd-popover-body fd-quick-view';
     contactLinks = 'fd-quick-view-group-item a';

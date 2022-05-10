@@ -27,6 +27,7 @@ import { TimeComponent } from '@fundamental-ngx/core/time';
 import { PopoverFormMessageService } from '@fundamental-ngx/core/form';
 import { PopoverService } from '@fundamental-ngx/core/popover';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
 
 import { createMissingDateImplementationError } from './errors';
@@ -65,7 +66,7 @@ export class TimePickerComponent<D>
      * Date time object representation
      */
     @Input()
-    time: D;
+    time: Nullable<D>;
 
     /** Id attribute for input element inside TimePicker component */
     @Input()
@@ -146,7 +147,7 @@ export class TimePickerComponent<D>
     }
 
     /** @hidden */
-    _message: string = null;
+    _message: string | null = null;
 
     /** Type of the message. Can be 'success' | 'error' | 'warning' | 'information' */
     @Input()
@@ -156,7 +157,7 @@ export class TimePickerComponent<D>
     }
 
     /** @hidden */
-    _messageType: FormStates = null;
+    _messageType: FormStates | null = null;
 
     /**
      * The trigger events that will open/close the message box.
@@ -197,10 +198,10 @@ export class TimePickerComponent<D>
         if (this._state == null && this.useValidation && this._isInvalidTimeInput) {
             return 'error';
         }
-        return this._state;
+        return this._state ?? 'default';
     }
 
-    private _state: FormStates = null;
+    private _state: FormStates | null = null;
 
     /**
      * Whether AddOn Button should be focusable
@@ -310,7 +311,7 @@ export class TimePickerComponent<D>
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    onChange: (_: D) => void = () => {};
+    onChange: (_: Nullable<D>) => void = () => {};
     /** @hidden */
     onTouched: () => void = () => {};
 
@@ -386,9 +387,7 @@ export class TimePickerComponent<D>
      * @hidden
      * Function that implements Validator Interface, adds validation support for forms
      */
-    validate(): {
-        [key: string]: any;
-    } {
+    validate(): { [key: string]: any } | null {
         if (this._isInvalidTimeInput) {
             return {
                 timeValidation: {
@@ -403,7 +402,7 @@ export class TimePickerComponent<D>
     /**
      * Returns the current value of the time input.
      */
-    getTime(): D {
+    getTime(): Nullable<D> {
         return this.time;
     }
 
@@ -429,7 +428,7 @@ export class TimePickerComponent<D>
             if (this.allowNull && time === null) {
                 return '';
             }
-            formattedTime = this._dateTimeAdapter.format(time, this.getDisplayFormat());
+            formattedTime = this._dateTimeAdapter.format(time!, this.getDisplayFormat());
         } catch (e) {}
 
         return formattedTime;
@@ -465,7 +464,7 @@ export class TimePickerComponent<D>
 
         if (inputValue !== '') {
             this.time = this._dateTimeAdapter.parse(inputValue, this.getParseFormat());
-            this._isInvalidTimeInput = !this._dateTimeAdapter.isValid(this.time);
+            this._isInvalidTimeInput = !this._dateTimeAdapter.isValid(this.time!);
         }
 
         this.onChange(this.time);
@@ -515,7 +514,7 @@ export class TimePickerComponent<D>
 
     /** @hidden */
     _timeComponentValueChanged(time: D): void {
-        if (this._dateTimeAdapter.dateTimesEqual(time, this.time)) {
+        if (this._dateTimeAdapter.dateTimesEqual(time, this.time!)) {
             return;
         }
         this._inputTimeValue = this._getFormattedTime(time);
@@ -528,7 +527,7 @@ export class TimePickerComponent<D>
     // #region ControlValueAccessor
 
     /** @hidden */
-    registerOnChange(fn: (time: D) => void): void {
+    registerOnChange(fn: (time: Nullable<D>) => void): void {
         this.onChange = fn;
     }
 
@@ -615,8 +614,8 @@ export class TimePickerComponent<D>
     /** @hidden */
     private initialiseVariablesInMessageService(): void {
         this._popoverFormMessage.init(this._inputGroupElement);
-        this._popoverFormMessage.message = this._message;
+        this._popoverFormMessage.message = this._message ?? '';
         this._popoverFormMessage.triggers = this._messageTriggers;
-        this._popoverFormMessage.messageType = this._state;
+        this._popoverFormMessage.messageType = this._state ?? 'default';
     }
 }

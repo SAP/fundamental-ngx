@@ -14,12 +14,12 @@ export interface SettingsSortDialogColumn {
 
 export interface SettingsSortDialogData extends TableDialogCommonData {
     direction: SortDirection;
-    field: string;
+    field: string | null;
     columns: SettingsSortDialogColumn[];
 }
 
 export interface SettingsSortDialogResultData {
-    field: string;
+    field: string | null;
     direction: SortDirection;
 }
 
@@ -36,7 +36,7 @@ export class SortingComponent implements Resettable {
     direction: SortDirection;
 
     /** Current selected field */
-    field: string;
+    field: string | null;
 
     /** Table columns */
     readonly columns: SettingsSortDialogColumn[] = [];

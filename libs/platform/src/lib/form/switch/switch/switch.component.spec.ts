@@ -136,7 +136,7 @@ describe('SwitchComponent', () => {
 
         // default value
         expect(switches[0].switchCurrentValue).toBeFalse();
-        expect(component.customForm.get('switch0').value).toBeFalse();
+        expect(component.customForm.get('switch0')?.value).toBeFalse();
 
         const switchLabel = fixture.debugElement.query(By.css('#switch-0 .fd-switch'));
 
@@ -144,13 +144,13 @@ describe('SwitchComponent', () => {
         fixture.detectChanges();
 
         expect(switches[0].switchCurrentValue).toBeTrue();
-        expect(component.customForm.get('switch0').value).toBeTrue();
+        expect(component.customForm.get('switch0')?.value).toBeTrue();
 
         switchLabel.nativeElement.click();
         fixture.detectChanges();
 
         expect(switches[0].switchCurrentValue).toBeFalse();
-        expect(component.customForm.get('switch0').value).toBeFalse();
+        expect(component.customForm.get('switch0')?.value).toBeFalse();
     });
 
     it('should apply is-error style on form Error', async () => {
@@ -160,8 +160,8 @@ describe('SwitchComponent', () => {
         expect(inputElem.nativeElement.classList.contains('is-error')).toBeFalsy();
         expect(inputElem.nativeElement.classList.contains('is-warning')).toBeFalsy();
 
-        component.customForm.get('switch0').setErrors({ 'has error': true });
-        component.customForm.get('switch0').markAsTouched();
+        component.customForm.get('switch0')?.setErrors({ 'has error': true });
+        component.customForm.get('switch0')?.markAsTouched();
 
         fixture.detectChanges();
 

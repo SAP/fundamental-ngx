@@ -61,19 +61,19 @@ describe('TimeComponent', () => {
     it('should keep active view items up to date', () => {
         component.time = new FdDate().setTime(15, 30, 45);
         (<any>component)._setUpViewGrid();
-        expect(component.activeHourViewItem.value).toBe(15);
-        expect(component.activeMinuteViewItem.value).toBe(30);
-        expect(component.activeSecondViewItem.value).toBe(45);
-        expect(component.activeMeridianViewItem.value).toBe(Meridian.PM);
+        expect(component.activeHourViewItem?.value).toBe(15);
+        expect(component.activeMinuteViewItem?.value).toBe(30);
+        expect(component.activeSecondViewItem?.value).toBe(45);
+        expect(component.activeMeridianViewItem?.value).toBe(Meridian.PM);
     });
 
     it('should set period after hour change', () => {
         component.meridian = true;
         component.handleHourChange(0);
-        expect(component.activeMeridianViewItem.value).toBe(Meridian.AM);
+        expect(component.activeMeridianViewItem?.value).toBe(Meridian.AM);
 
         component.handleHourChange(12);
-        expect(component.activeMeridianViewItem.value).toBe(Meridian.PM);
+        expect(component.activeMeridianViewItem?.value).toBe(Meridian.PM);
     });
 
     it('should set hour after period change', () => {

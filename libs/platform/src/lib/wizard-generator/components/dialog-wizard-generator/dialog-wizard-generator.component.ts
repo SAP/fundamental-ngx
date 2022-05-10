@@ -46,35 +46,35 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
     /**
      * User-defined template for "Go Next" button.
      */
-    goNextButtonTemplate: TemplateRef<HTMLElement>;
+    goNextButtonTemplate?: TemplateRef<HTMLElement>;
 
     /**
      * User-defined template for "Go Back" button.
      */
-    goBackButtonTemplate: TemplateRef<HTMLElement>;
+    goBackButtonTemplate?: TemplateRef<HTMLElement>;
 
     /**
      * User-defined template for "Finish" button.
      */
-    finishButtonTemplate: TemplateRef<HTMLElement>;
+    finishButtonTemplate?: TemplateRef<HTMLElement>;
 
     /**
      * User-defined template for "Cancel" button.
      */
-    cancelButtonTemplate: TemplateRef<HTMLElement>;
+    cancelButtonTemplate?: TemplateRef<HTMLElement>;
 
     /**
      * User-defined template for cancellation confirmation dialog.
      */
-    confirmationDialogTemplate: TemplateRef<HTMLElement>;
+    confirmationDialogTemplate?: TemplateRef<HTMLElement>;
 
     /**
      * User-defined template for summary step.
      */
-    summaryStepTemplate: TemplateRef<HTMLElement>;
+    summaryStepTemplate?: TemplateRef<HTMLElement>;
 
     /** User-defined template for "Review" button */
-    reviewButtonTemplate: TemplateRef<HTMLElement>;
+    reviewButtonTemplate?: TemplateRef<HTMLElement>;
 
     /** @hidden */
     constructor(
@@ -88,7 +88,7 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
         this.items = this._dialogRef.data.items;
         this.title = this._dialogRef.data.title;
         this.appendToWizard = this._dialogRef.data.appendToWizard;
-        this.navigationButtonLabels = this._dialogRef.data.navigationButtonLabels;
+        this.navigationButtonLabels = this._dialogRef.data.navigationButtonLabels ?? {};
         this.contentHeight = this._dialogRef.data.contentHeight;
         this.responsivePaddings = this._dialogRef.data.responsivePaddings;
         this.goNextButtonTemplate = this._dialogRef.data.goNextButtonTemplate;
@@ -159,7 +159,7 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
         this.submitStepForms(currentStepId)
             .pipe(takeUntil(this._onDestroy$))
             .subscribe(async (result) => {
-                if (Object.values(result).some((r) => !r.success)) {
+                if (result && Object.values(result).some((r) => !r.success)) {
                     return;
                 }
 

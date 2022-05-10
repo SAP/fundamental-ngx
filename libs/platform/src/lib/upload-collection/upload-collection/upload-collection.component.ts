@@ -38,7 +38,8 @@ import {
     TypeMismatchEvent,
     FilenameLengthExceedEvent,
     FileSizeExceedEvent,
-    MoveToEvent
+    MoveToEvent,
+    UpdateVersionEvent
 } from '../models/upload-collection-events.models';
 import { generateMessageStripeData } from '../helpers/generate-message-stripe-data';
 import { UploadCollectionDataSource } from '../domain/upload-collection-data-source';
@@ -335,7 +336,7 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
-        this._dsSubscription.unsubscribe();
+        this._dsSubscription?.unsubscribe();
         this.dataSource.close();
     }
 
@@ -356,7 +357,7 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
             return;
         }
 
-        if (itemName.length > this.maxFilenameLength) {
+        if (this.maxFilenameLength && itemName.length > this.maxFilenameLength) {
             const renamedItem = {
                 ...currentItem,
                 name: newName
@@ -423,7 +424,7 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
             return;
         }
 
-        currentItem.sameFilenameState = null;
+        delete currentItem.sameFilenameState;
     }
 
     /** @hidden
@@ -513,7 +514,7 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
 
         const _activeItem = this._activeItem;
         const currentFolder = this._getCurrentFolder();
-        const movableItems = multiple ? this.selectedItems : [_activeItem];
+        const movableItems = multiple ? this.selectedItems : _activeItem ? [_activeItem] : [];
         const dialogRef = this._dialogService.open(MoveToComponent, {
             responsivePadding: true,
             verticalPadding: false,
@@ -522,7 +523,7 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
             data: {
                 items: this.dataSource.dataProvider.items,
                 currentFolder,
-                movableFolders: movableItems.filter((item) => item.type === 'folder'),
+                movableFolders: movableItems.filter((item) => item?.type === 'folder'),
                 maxFilenameLength: this.maxFilenameLength,
                 contentDensity: this.contentDensity
             } as MoveToComponentDialogData
@@ -591,7 +592,7 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
             return;
         }
 
-        const _activeItem = { ...this._activeItem };
+        const _activeItem = { ...this._activeItem } as UploadCollectionItem;
         const items = multiple ? this.selectedItems : [_activeItem];
         const data = { parentFolderId: this._getCurrentFolderId(), items };
 
@@ -638,12 +639,12 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
 
     /** @hidden */
     _messageStripDismiss(): void {
-        this._message = null;
+        this._message = undefined;
     }
 
     /** @hidden */
     _openFolder(item: UploadCollectionItem): void {
-        if (item.type === 'file') {
+        if (item.type === 'file' || !item.documentId) {
             return;
         }
 
@@ -681,14 +682,14 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
         event.preventDefault();
         event.stopPropagation();
 
-        if (isNaN(index)) {
+        if (!Number.isInteger(index)) {
             this._breadcrumbList = [];
             this._match();
 
             return;
         }
 
-        this._breadcrumbList = this._breadcrumbList.slice(0, index + 1);
+        this._breadcrumbList = this._breadcrumbList.slice(0, index! + 1);
         this._breadcrumbList[this._breadcrumbList.length - 1].clikable = false;
 
         this._match();
@@ -784,7 +785,7 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
     private _validateFiles(files: File[]): void {
         this._validatedFiles = this._filesValidatorService.validation(files, {
             maxFileSize: this.maxFileSize,
-            maxFileNameLength: +this.maxFilenameLength,
+            maxFileNameLength: this.maxFilenameLength,
             fileTypes: this.fileTypes,
             mimeTypes: this.mimeTypes
         });
@@ -836,13 +837,13 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
         const currentItem = {
             ...this._currentUpdateFileVersion,
             status: UploadCollectionItemStatus.LOADING
-        };
+        } as UploadCollectionItem;
 
         const data = {
             parentFolderId: this._getCurrentFolderId(),
             item: this._currentUpdateFileVersion,
             newItem
-        };
+        } as UpdateVersionEvent;
 
         this._findParentFolderAndUpdateItem(currentFolderId, currentItem);
 
@@ -855,7 +856,7 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
                         payload: data,
                         type: MessageStripType.SUCCESS
                     });
-                    this._currentUpdateFileVersion = null;
+                    this._currentUpdateFileVersion = undefined;
                 },
                 error: () => {
                     this.showMessage(MessageType.UPDATE_VERSION, {
@@ -901,7 +902,7 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
         folderId: number | string,
         items: UploadCollectionItem[] = this.dataSource.dataProvider.items
     ): UploadCollectionFolder | undefined {
-        let foundObj: UploadCollectionFolder;
+        let foundObj: UploadCollectionFolder | undefined;
 
         JSON.stringify(items, (_, nestedValue) => {
             if (nestedValue && nestedValue.documentId === folderId) {
@@ -916,7 +917,7 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
 
     /** @hidden */
     private _findParentFolderAndUpdateItem(
-        parentFolderId: string | number | null,
+        parentFolderId: string | number | undefined,
         updatedItem: UploadCollectionItem,
         items = this.dataSource.dataProvider.items
     ): void {
@@ -954,7 +955,7 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
 
     /** @hidden */
     private _findParentFolderAndAddTemporaryFiles(
-        parentFolderId: string | number | null,
+        parentFolderId: string | number | undefined,
         newItems: UploadCollectionItem[],
         items = this.dataSource.dataProvider.items
     ): void {
@@ -1024,7 +1025,7 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
             this.dataSource.close();
             if (this._dsSubscription) {
                 this._dsSubscription.unsubscribe();
-                this._dsSubscription = null;
+                this._dsSubscription = undefined;
             }
         }
 
@@ -1057,7 +1058,7 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
     }
 
     /** @hidden */
-    private _toDataStream(ds: FdpUploadCollectionDataSource): UploadCollectionDataSource {
+    private _toDataStream(ds: FdpUploadCollectionDataSource): UploadCollectionDataSource | undefined {
         if (isDataSource(ds)) {
             return ds as UploadCollectionDataSource;
         }
@@ -1092,11 +1093,12 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
             return;
         }
 
-        this._getList().forEach((item) => {
+        for (const item of this._getList()) {
             if (item.documentId === currentItem.documentId) {
-                item.sameFilenameState = null;
+                delete item.sameFilenameState;
+                break;
             }
-        });
+        }
     }
 
     /** @hidden */

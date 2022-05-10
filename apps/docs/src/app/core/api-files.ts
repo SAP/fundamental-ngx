@@ -163,6 +163,7 @@ export const API_FILES = {
     messageToast: ['MessageToastComponent', 'MessageToastConfig', 'MessageToastService', 'MessageToastRef'],
     microProcessFlow: ['MicroProcessFlowComponent', 'MicroProcessFlowItemComponent', 'MicroProcessFlowIconComponent'],
     momentDatetimeAdapter: ['MomentDatetimeAdapter'],
+    dayjsDatetimeAdapter: ['DayjsDatetimeAdapter'],
     dialog: [
         'DialogService',
         'DialogContainerComponent',

@@ -46,11 +46,8 @@ export class ComboboxHighlightPipe implements PipeTransform {
             return value;
         }
 
-        const startIndex = valueLowerCase.indexOf(searchTextLowerCase);
-        if (startIndex !== -1) {
-            const matchingString = value.substr(startIndex, searchText.length);
-            return value.replace(matchingString, '<strong>' + matchingString + '</strong>');
-        }
+        const matchingString = value.substr(0, searchText.length);
+        return value.replace(matchingString, '<strong>' + matchingString + '</strong>');
     }
 
     private _searchByStrategyContains(value: string, searchText: string): string {

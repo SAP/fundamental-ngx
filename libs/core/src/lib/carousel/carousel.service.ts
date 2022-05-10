@@ -2,6 +2,7 @@ import { ElementRef, EventEmitter, Inject, OnDestroy, QueryList, Injectable } fr
 import { DOCUMENT } from '@angular/common';
 import { fromEvent, merge, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 export const DEFAULT_TRANSITION_DURATION = '150ms';
 
@@ -44,7 +45,7 @@ export class CarouselService implements OnDestroy {
     config: CarouselConfig;
 
     /** Initial active item of carousel, position first + offset */
-    active: CarouselItemInterface;
+    active: Nullable<CarouselItemInterface>;
 
     /** Set to true for rtl mode */
     isRtl = false;
@@ -60,6 +61,13 @@ export class CarouselService implements OnDestroy {
     /** set current transition value in px */
     set currentTransitionPx(currentTransitionPx: number) {
         this._currentTransitionPx = currentTransitionPx;
+    }
+
+    /** @hidden */
+    private get elementsAtOnce(): number {
+        const num = this.config?.elementsAtOnce ?? 1;
+
+        return Math.max(1, num);
     }
 
     /** @hidden */
@@ -153,7 +161,7 @@ export class CarouselService implements OnDestroy {
         }
 
         const activeItemIndex = this._getIndexOfItem(this.active);
-        const itemToActivate = this.items.get(activeItemIndex + 1);
+        const itemToActivate = this.items.get(activeItemIndex + 1) ?? this.items.first;
 
         this.goToItem(itemToActivate, true);
         this.active = itemToActivate;
@@ -181,23 +189,25 @@ export class CarouselService implements OnDestroy {
     /** @hidden */
     private _centerActive(index: number): void {
         const middleIndex = Math.ceil(this.items.length / 2);
-        const offset = Math.ceil(this.config.elementsAtOnce / 2);
+        const offset = Math.ceil(this.elementsAtOnce / 2);
         const missingItems = index + offset - middleIndex;
         const array = this.items.toArray();
 
         if (missingItems > 0) {
             for (let i = 0; i < missingItems; i++) {
-                array.push(array.shift());
+                const item = array.shift();
+                item && array.push(item);
             }
         } else {
             for (let i = 0; i < Math.abs(missingItems); i++) {
-                array.unshift(array.pop());
+                const item = array.pop();
+                item && array.unshift(item);
             }
         }
 
         /** Changing order of elements in QueryList and Native HTML */
         this.items.reset(array);
-        this.items.forEach((item) => item.element.parentNode.appendChild(item.element));
+        this.items.forEach((item) => item.element.parentNode?.appendChild(item.element));
 
         /**
          * For proper animation it's needed to transform elements,
@@ -244,14 +254,15 @@ export class CarouselService implements OnDestroy {
         let index = Math.ceil(Math.abs(this._currentTransitionPx / size));
 
         // When elementsAtOnce > 1, swiping should stop at last index - elementsAtOnce
-        if (!this.config.infinite && this.config.elementsAtOnce > 1) {
+        const elementsAtOnce = this.elementsAtOnce;
+        if (!this.config.infinite && elementsAtOnce > 1) {
             // When there're less items in the carousel than the area might display, it should stop to first
-            if (this.items.length < this.config.elementsAtOnce) {
+            if (this.items.length < elementsAtOnce) {
                 return this.items.first;
             }
 
-            if (index + this.config.elementsAtOnce >= this.items.length) {
-                return this.items.get(this.items.length - this.config.elementsAtOnce);
+            if (index + elementsAtOnce >= this.items.length) {
+                return this.items.get(this.items.length - elementsAtOnce) ?? this.items.first;
             }
         }
 
@@ -263,7 +274,10 @@ export class CarouselService implements OnDestroy {
     }
 
     /** @hidden */
-    private _getIndexOfItem(item: CarouselItemInterface): number {
+    private _getIndexOfItem(item?: CarouselItemInterface): number {
+        if (!item) {
+            return -1;
+        }
         return this.items.toArray().findIndex((_item) => _item === item);
     }
 
@@ -364,6 +378,12 @@ export class CarouselService implements OnDestroy {
     private _setupDrag(): void {
         const events = ['mousemove', 'touchmove'];
 
+        if (!this._document) {
+            throw new Error(
+                `Could not setup drag event subscription. Expected to get document ref, got ${this._document} instead`
+            );
+        }
+
         this._subscribeToEvents(events, this._document, (event) => {
             const coordinate = this._getDragCoordinate(event);
 
@@ -379,6 +399,12 @@ export class CarouselService implements OnDestroy {
     /** @hidden */
     private _setupDragEnd(): void {
         const events = ['mouseup', 'touchend'];
+
+        if (!this._document) {
+            throw new Error(
+                `Could not setup drag event subscription. Expected to get document ref, got ${this._document} instead`
+            );
+        }
 
         this._subscribeToEvents(events, this._document, (event) => {
             if (!this._listenToMouseMove) {
@@ -398,11 +424,7 @@ export class CarouselService implements OnDestroy {
 
     /** @hidden */
     private _getTransition(): string {
-        if (this.config) {
-            return this.config.transition;
-        } else {
-            return DEFAULT_TRANSITION_DURATION;
-        }
+        return this.config?.transition ?? DEFAULT_TRANSITION_DURATION;
     }
 
     /** @hidden */

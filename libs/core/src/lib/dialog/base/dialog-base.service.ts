@@ -36,15 +36,7 @@ export abstract class DialogBaseService<T> {
 
     /** @hidden Destroy existing dialog */
     protected _destroyDialog(dialog: ComponentRef<T>): void {
-        const index = this._dialogs.indexOf(dialog);
-
-        if (index === -1) {
-            return;
-        }
-
         this._dynamicComponentService.destroyComponent(dialog);
-
-        this._dialogs[index] = null;
-        this._dialogs = this._dialogs.filter((item) => item);
+        this._dialogs = this._dialogs.filter((d) => d !== dialog);
     }
 }

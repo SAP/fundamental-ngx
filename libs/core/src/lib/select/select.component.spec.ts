@@ -139,7 +139,7 @@ describe('SelectComponent', () => {
             triggerControl.click();
             await wait(fixture);
 
-            const option1: HTMLElement = document.querySelector('.cdk-overlay-container #option-1');
+            const option1 = document.querySelector('.cdk-overlay-container #option-1') as HTMLElement;
             option1.click();
             await wait(fixture);
 
@@ -175,7 +175,7 @@ describe('SelectComponent', () => {
             await wait(fixture);
 
             expect(component.selected.value).toBe('value-2');
-            expect(_keyService._keyManager.activeItem.value).toBe('value-2');
+            expect(_keyService._keyManager.activeItem?.value).toBe('value-2');
         });
 
         it('should initialize select with option value-3 active when [value] binding is set ', async () => {
@@ -183,7 +183,7 @@ describe('SelectComponent', () => {
             await wait(fixture);
 
             expect(component.selected.value).toBe('value-3');
-            expect(_keyService._keyManager.activeItem.value).toBe('value-3');
+            expect(_keyService._keyManager.activeItem?.value).toBe('value-3');
         });
 
         it('should reset to NULL when initialized with non-existing value that is not part of original list', async () => {
@@ -201,14 +201,14 @@ describe('SelectComponent', () => {
 
             expect(component.selected).toBeTruthy();
             expect(component.selected.value).toBe(testValue);
-            expect(_keyService._keyManager.activeItem.value).toBe(testValue);
+            expect(_keyService._keyManager.activeItem?.value).toBe(testValue);
 
             fixture.componentInstance.value = 'value-2';
             await wait(fixture);
 
             expect(component.selected).toBeTruthy();
             expect(component.selected.value).toBe('value-2');
-            expect(_keyService._keyManager.activeItem.value).toBe('value-2');
+            expect(_keyService._keyManager.activeItem?.value).toBe('value-2');
         });
 
         it('should not be clickable if option item is disabled', async () => {
@@ -218,7 +218,7 @@ describe('SelectComponent', () => {
             await wait(fixture);
             expect(component.selected).toBeTruthy();
             expect(component.selected.value).toBe(testValue);
-            expect(_keyService._keyManager.activeItem.value).toBe(testValue);
+            expect(_keyService._keyManager.activeItem?.value).toBe(testValue);
 
             const optionComponent = component._options.toArray()[2];
             optionComponent._getHtmlElement().click();
@@ -227,7 +227,7 @@ describe('SelectComponent', () => {
 
             expect(component.selected).toBeTruthy();
             expect(component.selected.value).toBe('value-3');
-            expect(_keyService._keyManager.activeItem.value).toBe('value-3');
+            expect(_keyService._keyManager.activeItem?.value).toBe('value-3');
         });
     });
 
@@ -255,7 +255,7 @@ describe('SelectComponent', () => {
             await wait(fixture);
 
             expect(_keyService._keyManager.activeItemIndex).toBe(1);
-            expect(_keyService._keyManager.activeItem.active).toBeTruthy();
+            expect(_keyService._keyManager.activeItem?.active).toBeTruthy();
         });
 
         it('should navigate to the end of the list when pressing END', async () => {

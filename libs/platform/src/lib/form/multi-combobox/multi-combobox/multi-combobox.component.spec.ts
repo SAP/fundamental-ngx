@@ -201,12 +201,12 @@ describe('MultiComboboxComponent default values', () => {
 
         multiCombobox.onPrimaryButtonClick(multiCombobox.isOpen);
         fixture.detectChanges();
-        overlayContainerEl.querySelector('.fd-list__item').dispatchEvent(selectEvent);
+        overlayContainerEl.querySelector('.fd-list__item')?.dispatchEvent(selectEvent);
         fixture.detectChanges();
 
         expect(multiCombobox._selectedSuggestions.length).toEqual(component.dataSource.length);
 
-        overlayContainerEl.querySelector('.fd-list__item').dispatchEvent(unselectEvent);
+        overlayContainerEl.querySelector('.fd-list__item')?.dispatchEvent(unselectEvent);
         fixture.detectChanges();
 
         expect(multiCombobox._selectedSuggestions.length).toEqual(0);

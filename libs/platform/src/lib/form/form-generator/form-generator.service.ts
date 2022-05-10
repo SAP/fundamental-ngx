@@ -1,6 +1,6 @@
 import { Inject, Injectable, OnDestroy, Optional, SkipSelf, Type } from '@angular/core';
 import { AsyncValidatorFn, FormBuilder, Validators } from '@angular/forms';
-import { cloneDeep } from 'lodash-es';
+import { cloneDeep, merge } from 'lodash-es';
 
 import { Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
@@ -19,9 +19,8 @@ import { FormComponentDefinition } from './interfaces/form-component-definition'
 import { DEFAULT_VALIDATION_ERRORS } from './config/default-validation-errors';
 import { BaseDynamicFormGeneratorControl } from './base-dynamic-form-generator-control';
 import { DynamicFormGroup } from './interfaces/dynamic-form-group';
-import { FORM_GENERATOR_ITEM_CONFIG } from './providers/providers';
-
-export const UNGROUPED_FORM_GROUP_NAME = 'ungrouped';
+import { FormGeneratorConfig } from './interfaces/form-generator-module-config';
+import { defaultFormGeneratorConfig, FORM_GENERATOR_CONFIG, FORM_GENERATOR_ITEM_CONFIG } from './providers/providers';
 
 /**
  * @description Form generator service
@@ -38,6 +37,9 @@ export class FormGeneratorService implements OnDestroy {
      */
     private _validationErrorHints = DEFAULT_VALIDATION_ERRORS;
 
+    /** @hidden */
+    private readonly _config: FormGeneratorConfig = defaultFormGeneratorConfig;
+
     /**
      * @hidden
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
@@ -51,8 +53,14 @@ export class FormGeneratorService implements OnDestroy {
         @Optional()
         @SkipSelf()
         @Inject(FORM_GENERATOR_ITEM_CONFIG)
-        private _defaultConfig: Partial<DynamicFormFieldItem>
-    ) {}
+        private _defaultItemConfig: Partial<DynamicFormFieldItem>,
+        @Optional()
+        @SkipSelf()
+        @Inject(FORM_GENERATOR_CONFIG)
+        private _providedConfig: Partial<FormGeneratorConfig>
+    ) {
+        this._config = merge(cloneDeep(this._config), cloneDeep(this._providedConfig));
+    }
 
     /**
      * @hidden
@@ -74,7 +82,7 @@ export class FormGeneratorService implements OnDestroy {
 
         const defaultFormGroup = new DynamicFormControlGroup(
             {
-                name: UNGROUPED_FORM_GROUP_NAME
+                name: this._config.ungroupedControlsName
             },
             {}
         );
@@ -83,7 +91,7 @@ export class FormGeneratorService implements OnDestroy {
 
         formItems.forEach((formItem) => {
             if (!this.isFormFieldItem(formItem)) {
-                if (formItem.items.length === 0) {
+                if (!formItem.items?.length) {
                     return;
                 }
 
@@ -94,6 +102,10 @@ export class FormGeneratorService implements OnDestroy {
                         groupFormItem as PreparedDynamicFormFieldItem,
                         form
                     );
+
+                    if (!groupFormControl) {
+                        return;
+                    }
 
                     group.addControl(groupFormItem.name, groupFormControl);
 
@@ -119,7 +131,7 @@ export class FormGeneratorService implements OnDestroy {
 
         const formControlNames = Object.keys(defaultFormGroup.controls);
 
-        form.addControl(UNGROUPED_FORM_GROUP_NAME, defaultFormGroup);
+        form.addControl(this._config.ungroupedControlsName, defaultFormGroup);
 
         // After we created initial form, we need to get dynamic labels, choices and value
         for (const key of formControlNames) {
@@ -203,7 +215,7 @@ export class FormGeneratorService implements OnDestroy {
      * @param type form item type
      * @returns @see FormComponentDefinition Component definition for the form item
      */
-    getComponentDefinitionByType(type: string): FormComponentDefinition | null {
+    getComponentDefinitionByType(type: string): FormComponentDefinition | undefined {
         return this._componentsAccessor.getComponentDefinitionByType(type);
     }
 
@@ -240,22 +252,28 @@ export class FormGeneratorService implements OnDestroy {
      * @param item form item.
      * @returns is current form item is a field.
      */
-    isFormFieldItem(item: DynamicFormItem): item is DynamicFormFieldItem {
+    isFormFieldItem(item: DynamicFormItem | undefined): item is DynamicFormFieldItem {
         return !!(item as DynamicFormFieldItem).type;
     }
 
     /**
      * Method for searching a form control inside form group. Can also search inside ungrouped form group.
      * @param form Form group.
-     * @param controlName Name of the form control.
+     * @param controlNames Name of the form control.
      * @returns Found form control.
      */
-    getFormControl(form: DynamicFormGroup, controlName: string): DynamicFormGroupControl {
-        let control = form?.get(controlName);
+    getFormControl(form: DynamicFormGroup, ...controlNames: string[]): DynamicFormGroupControl {
+        controlNames = controlNames.reduce((names: string[], name) => {
+            names = [...names, ...name.split(this._config.controlNameSeparator)];
+
+            return names;
+        }, []);
+
+        let control = form?.get(controlNames);
 
         // If no control found, try to find it in ungrouped group
         if (!control) {
-            control = form?.get(UNGROUPED_FORM_GROUP_NAME + '.' + controlName);
+            control = form?.get([this._config.ungroupedControlsName, ...controlNames]);
         }
 
         return control as DynamicFormGroupControl;
@@ -263,13 +281,13 @@ export class FormGeneratorService implements OnDestroy {
 
     /** @hidden */
     _getFormValueWithoutUngrouped(value: any): any {
-        if (value[UNGROUPED_FORM_GROUP_NAME]) {
-            const ungroupedGroupValue: { [key: string]: any } = value[UNGROUPED_FORM_GROUP_NAME];
+        if (value[this._config.ungroupedControlsName]) {
+            const ungroupedGroupValue: Record<string, any> = value[this._config.ungroupedControlsName];
             for (const [fieldName, fieldValue] of Object.entries(ungroupedGroupValue)) {
                 value[fieldName] = fieldValue;
             }
         }
-        delete value[UNGROUPED_FORM_GROUP_NAME];
+        delete value[this._config.ungroupedControlsName];
 
         return value;
     }
@@ -279,17 +297,18 @@ export class FormGeneratorService implements OnDestroy {
         formItem: PreparedDynamicFormFieldItem,
         form: DynamicFormGroup
     ): PreparedDynamicFormFieldItem {
-        let validator: AsyncValidatorFn = null;
+        let validator: AsyncValidatorFn | null = null;
 
         if (isFunction(formItem.validate)) {
-            validator = async (control: DynamicFormControl) => {
-                const obj = formItem.validate(control.value, this._getFormValueWithoutUngrouped(form));
+            validator = async (control) => {
+                const obj = formItem.validate!(control.value, this._getFormValueWithoutUngrouped(form));
 
                 const result = await this._getFunctionValue(obj);
 
                 const returnObj = {};
 
-                returnObj[`${control.formItem.name}Validator`] = typeof result === 'boolean' ? true : result;
+                returnObj[`${(<DynamicFormControl>control).formItem.name}Validator`] =
+                    typeof result === 'boolean' ? true : result;
 
                 return result === null ? result : returnObj;
             };
@@ -312,7 +331,7 @@ export class FormGeneratorService implements OnDestroy {
     private _generateDynamicFormItem(
         formItem: PreparedDynamicFormFieldItem,
         form: DynamicFormGroup
-    ): DynamicFormControl {
+    ): DynamicFormControl | undefined {
         const formItemComponentType = this.getComponentDefinitionByType(formItem.type);
 
         if (!formItemComponentType) {
@@ -333,7 +352,7 @@ export class FormGeneratorService implements OnDestroy {
 
         if (isFunction(formItem.onchange)) {
             formControl.valueChanges.pipe(debounceTime(50), takeUntil(this._onDestroy$)).subscribe(async (value) => {
-                const obj = formItem.onchange(value, this.forms, formControl);
+                const obj = formItem.onchange!(value, this.forms, formControl);
 
                 await this._getFunctionValue(obj);
             });
@@ -451,7 +470,7 @@ export class FormGeneratorService implements OnDestroy {
 
     /** @hidden */
     private _getMergedFormFieldItemConfig(formItem: DynamicFormFieldItem): DynamicFormFieldItem {
-        return Object.assign({ ...this._defaultConfig }, { ...formItem });
+        return merge(cloneDeep(this._defaultItemConfig), formItem);
     }
 
     /** @hidden */

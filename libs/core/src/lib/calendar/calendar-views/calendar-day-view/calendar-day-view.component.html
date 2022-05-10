@@ -25,6 +25,7 @@
                 class="fd-calendar__item fd-calendar__item--side-helper"
                 role="rowheader"
                 scope="row"
+                [attr.data-fd-calendar-week]="_weeks[rowIndex]"
                 [attr.id]="viewId + '-week-' + _weeks[rowIndex]"
                 [attr.aria-labelledby]="_weekNumbersColumnHeaderId + ' ' + (viewId + '-week-' + _weeks[rowIndex])"
             >
@@ -47,6 +48,7 @@
                 [class.is-disabled]="cell.disabled"
                 [class]="cell.specialNumber ? 'fd-calendar__special-day--' + cell.specialNumber : ''"
                 [attr.id]="cell.id"
+                [attr.data-fd-calendar-day]="cell.index"
                 [attr.aria-selected]="cell.selected"
                 [attr.aria-disabled]="cell.disabled"
                 [attr.tabindex]="cell.isTabIndexed ? 0 : -1"

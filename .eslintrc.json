@@ -22,7 +22,7 @@
                                 "onlyDependOnLibsWithTags": ["scope:fd", "scope:fn"]
                             },
                             {
-                                "sourceTag": "scope:moment-adapter",
+                                "sourceTag": "scope:datetime-adapter",
                                 "onlyDependOnLibsWithTags": ["scope:fd"]
                             },
                             {
@@ -31,7 +31,7 @@
                                     "scope:fd",
                                     "scope:fdp",
                                     "scope:fn",
-                                    "scope:moment-adapter"
+                                    "scope:datetime-adapter"
                                 ]
                             }
                         ],

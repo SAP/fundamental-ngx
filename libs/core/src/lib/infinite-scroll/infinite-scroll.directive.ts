@@ -1,6 +1,7 @@
 import { Directive, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 /**
  * Tool directive used to achieve the infinite scroll mechanism.
@@ -15,7 +16,7 @@ export class InfiniteScrollDirective implements OnInit, OnDestroy {
 
     /** Scroll PX at which the onScrollAction event is fired. */
     @Input()
-    scrollOffset: number = null;
+    scrollOffset: Nullable<number> = null;
 
     /** Event emitted when the scrollPercent threshold is met. */
     @Output()

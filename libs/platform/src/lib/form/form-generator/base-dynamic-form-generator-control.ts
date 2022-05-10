@@ -44,13 +44,13 @@ export abstract class BaseDynamicFormGeneratorControl implements BaseDynamicForm
     @Input() formGroupName: string;
 
     /** @description Returns form item content density. */
-    get contentDensity(): ContentDensity | undefined {
-        return this.formItem.guiOptions?.contentDensity;
+    get contentDensity(): ContentDensity {
+        return this.formItem.guiOptions?.contentDensity || 'cozy';
     }
 
     /** @description Returns form item choices. */
     get choices(): SelectItem[] {
-        return this.formItem.choices;
+        return this.formItem.choices ?? [];
     }
 
     /** @description Returns form item placeholder. */
@@ -61,6 +61,6 @@ export abstract class BaseDynamicFormGeneratorControl implements BaseDynamicForm
         if (this.formItem?.placeholder) {
             return this.formItem?.placeholder;
         }
-        return this.formItem?.useMessageAsPlaceholder && this.formItem?.message;
+        return (this.formItem?.useMessageAsPlaceholder && this.formItem?.message) || '';
     }
 }

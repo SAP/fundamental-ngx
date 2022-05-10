@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Directive, EventEmitter, Input, OnDestroy, Output } 
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, finalize, takeUntil } from 'rxjs/operators';
 
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
 import {
     PreparedWizardGeneratorItem,
@@ -15,7 +16,7 @@ import { WizardStepSubmittedForms } from './components/wizard-generator-step/wiz
 /**
  * @description Default button labels.
  */
-export const DEFAULT_WIZARD_NAVIGATION_BUTTONS: WizardNavigationButtons = {
+export const DEFAULT_WIZARD_NAVIGATION_BUTTONS: Required<WizardNavigationButtons> = {
     goBack: {
         label: 'Previous Step',
         contentDensity: 'compact',
@@ -108,7 +109,7 @@ export class BaseWizardGenerator implements OnDestroy {
      * is the combined height of the shellbar, wizard header and wizard footer.
      */
     @Input()
-    contentHeight: string;
+    contentHeight: Nullable<string>;
 
     /**
      * @description Boolean flag indicating whether to display Summary step in Wizard progress bar.
@@ -221,7 +222,7 @@ export class BaseWizardGenerator implements OnDestroy {
     /**
      * @hidden
      */
-    private _navigationButtonLabels = DEFAULT_WIZARD_NAVIGATION_BUTTONS;
+    _navigationButtonLabels: Required<WizardNavigationButtons> = DEFAULT_WIZARD_NAVIGATION_BUTTONS;
 
     /** @hidden */
     constructor(protected _wizardGeneratorService: WizardGeneratorService, private _cd: ChangeDetectorRef) {
@@ -339,9 +340,9 @@ export class BaseWizardGenerator implements OnDestroy {
     /**
      * @description Submits step forms.
      * @param currentStepIndex current step index.
-     * @returns {Observable<WizardStepSubmittedForms>} Observable with form values.
+     * @returns {Observable<WizardStepSubmittedForms | null>} Observable with form values.
      */
-    submitStepForms(currentStepIndex: string): Observable<WizardStepSubmittedForms> {
+    submitStepForms(currentStepIndex?: string): Observable<WizardStepSubmittedForms | null> {
         this._formPending = true;
 
         return this._wizardGeneratorService.submitStepForms(currentStepIndex).pipe(

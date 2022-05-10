@@ -92,7 +92,7 @@ export class PaginationService {
                 );
             }
 
-            if (isNaN(pagination.itemsPerPage) || pagination.itemsPerPage <= 0) {
+            if (isNaN(pagination.itemsPerPage!) || pagination.itemsPerPage! <= 0) {
                 console.warn(
                     `"itemsPerPage" must be a number greater than zero but got "${pagination.itemsPerPage}". This warning only appears in development mode.`
                 );

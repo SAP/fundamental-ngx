@@ -43,8 +43,9 @@ import { RangeSelector } from '@fundamental-ngx/core/utils';
 import { ContentDensity, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/core/utils';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { ListComponent } from '@fundamental-ngx/core/list';
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { PopoverFillMode } from '@fundamental-ngx/core/shared';
+import { PopoverFillMode, FormStates } from '@fundamental-ngx/core/shared';
 import {
     ArrayMultiComboBoxDataSource,
     coerceArraySafe,
@@ -67,7 +68,7 @@ import {
 import { TextAlignment } from '../../combobox';
 import { MultiComboboxConfig } from '../multi-combobox.config';
 
-export const MAP_LIMIT = new InjectionToken<number>('Map limit≥');
+export const MAP_LIMIT = new InjectionToken<number>('Map limit≥', { factory: () => 12 });
 
 export type FdpMultiComboboxDataSource<T> = MultiComboBoxDataSource<T> | Observable<T[]> | T[];
 
@@ -97,7 +98,10 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
 
     /** Datasource for suggestion list. */
     @Input()
-    dataSource: any;
+    set dataSource(value: FdpMultiComboboxDataSource<any>) {}
+    get dataSource(): FdpMultiComboboxDataSource<any> {
+        return this._dataSource;
+    }
 
     /** Whether the autocomplete should be enabled; Enabled by default. */
     @Input()
@@ -307,7 +311,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     private _matchingStrategy: MatchingStrategy = this.multiComboboxConfig.matchingStrategy;
 
     /** @hidden */
-    private _dsSubscription?: Subscription;
+    private _dsSubscription: Subscription | null = null;
 
     /** @hidden */
     private _element: HTMLElement = this.elementRef.nativeElement;
@@ -333,10 +337,10 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     private _timerSub$: Subscription;
 
     /** @hidden */
-    private _previousState: 'success' | 'error' | 'warning' | 'default' | 'information';
+    private _previousState?: FormStates;
 
     /** @hidden */
-    private _previousStateMessage: string;
+    private _previousStateMessage: Nullable<string>;
 
     /** @hidden */
     protected readonly _rangeSelector = new RangeSelector();
@@ -347,7 +351,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     /** @hidden */
     private _secondaryFn = (value: any): string => {
         if (isOptionItem(value)) {
-            return value.secondaryText;
+            return value.secondaryText ?? '';
         } else if (isJsObject(value) && this.secondaryKey) {
             const currentItem = this.objectGet(value, this.secondaryKey);
 
@@ -372,8 +376,10 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        if (changes['dataSource']) {
-            this._initializeDataSource(this.dataSource);
+        const dataSourceChange = changes['dataSource'];
+
+        if (dataSourceChange) {
+            this._initializeDataSource(dataSourceChange.currentValue);
         }
     }
 
@@ -630,7 +636,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     /** @hidden
      *  Map grouped values to array. */
     protected _flattenGroups(items: SelectableOptionItem[]): SelectableOptionItem[] {
-        return items.reduce((result, item) => result.concat(item.children), <SelectableOptionItem[]>[]);
+        return items.reduce((result, item) => result.concat(item.children ?? []), <SelectableOptionItem[]>[]);
     }
 
     /** @hidden */
@@ -655,11 +661,12 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         const initDataSource = this._toDataStream(ds);
         let isInitDataSource = true;
 
-        initDataSource.limitless = this.limitless;
-
         if (initDataSource === undefined) {
             throw new Error(`[dataSource] source did not match an array, Observable, or DataSource`);
         }
+
+        initDataSource.limitless = this.limitless;
+
         /**
          * This is single point of data entry to the component. We dont want to set data on different
          * places. If any new data comes in either you do a search and you want to pass initial data
@@ -770,10 +777,10 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     /** @hidden */
     private _unsetInvalidEntry(): void {
         this.state = this._previousState;
-        this._previousState = null;
+        this._previousState = undefined;
 
         this.stateMessage = this._previousStateMessage;
-        this._previousStateMessage = null;
+        this._previousStateMessage = undefined;
 
         this._cd.markForCheck();
     }

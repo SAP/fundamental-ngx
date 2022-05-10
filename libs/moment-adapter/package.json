@@ -2,7 +2,7 @@
   "name": "@fundamental-ngx/moment-adapter",
   "version": "VERSION_PLACEHOLDER",
   "schematics": "./schematics/collection.json",
-  "description": "SAP Fundamentals, implemented in Angular",
+  "description": "Datetime adapter for SAP Fundamentals, based on Moment.js package",
   "license": "Apache-2.0",
   "homepage": "https://sap.github.io/fundamental-ngx/home",
   "repository": {

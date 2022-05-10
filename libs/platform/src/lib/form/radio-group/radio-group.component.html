@@ -11,7 +11,7 @@
             <div fd-form-item>
                 <ng-container
                     *ngTemplateOutlet="
-                        radio?.renderer;
+                        radio?.renderer || null;
                         context: {
                             name: name,
                             value: radio.value,

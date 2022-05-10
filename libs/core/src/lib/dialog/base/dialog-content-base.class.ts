@@ -1,3 +1,5 @@
+import { Nullable } from '@fundamental-ngx/core/shared';
+
 export class DialogContentBase {
     /** Dialog Title id */
     titleId?: string;
@@ -8,26 +10,35 @@ export class DialogContentBase {
     /** Dialog Body */
     content?: unknown;
 
-    /** Approve Button Label */
-    approveButton?: string;
-
     /** Aria Modal for the dialog component element */
     ariaModal?: boolean;
 
     /** Aria label for the dialog component element. */
-    ariaLabel?: string = null;
+    ariaLabel?: Nullable<string>;
 
     /** Aria labelby for the dialog component element. */
-    ariaLabelledBy?: string = null;
+    ariaLabelledBy?: Nullable<string>;
 
     /** Aria DescribedBy for the dialog component element.. */
-    ariaDescribedBy?: string = null;
+    ariaDescribedBy?: Nullable<string>;
+
+    /** Approve Button Label */
+    approveButton?: string;
+
+    /** Approve Button Id */
+    approveButtonId?: string;
 
     /** Approve Button Click Callback */
     approveButtonCallback?: () => void;
 
+    /** Aria label for the dialog approve button element. */
+    approveButtonAriaLabel?: string;
+
     /** Cancel Button Label */
     cancelButton?: string;
+
+    /** Cancel Button Id */
+    cancelButtonId?: string;
 
     /** Cancel Button Click Callback */
     cancelButtonCallback?: () => void;
@@ -37,9 +48,6 @@ export class DialogContentBase {
 
     /** close button title */
     closeButtonTitle?: string;
-
-    /** Aria label for the dialog approve button element. */
-    approveButtonAriaLabel?: string;
 
     /** Aria labelby for the dialog close button element. */
     closeButtonAriaLabel?: string;

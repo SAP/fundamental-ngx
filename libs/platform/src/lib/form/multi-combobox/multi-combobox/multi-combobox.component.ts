@@ -86,8 +86,8 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
 
         const providers = this._providers?.size === 0 ? this._multiComboboxConfig.providers : this._providers;
         // if we have both prefer dataSource
-        if (!this.dataSource && this.entityClass && providers.has(this.entityClass)) {
-            this.dataSource = new MultiComboBoxDataSource(providers.get(this.entityClass));
+        if (!this.dataSource && this.entityClass && providers?.has(this.entityClass)) {
+            this.dataSource = new MultiComboBoxDataSource(providers.get(this.entityClass)!);
         }
     }
 
@@ -276,7 +276,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         this._selectedSuggestions = this._selectedSuggestions.filter((s) => !toRemoveSet.has(s.value));
         // selected items should be displayed in the same order as options
         const valueIndexes = new Map<any, number>(this._suggestions.map((s, i) => [s.value, i]));
-        this._selectedSuggestions.sort((a, b) => valueIndexes.get(a.value) - valueIndexes.get(b.value));
+        this._selectedSuggestions.sort((a, b) => valueIndexes.get(a.value)! - valueIndexes.get(b.value)!);
         this._propagateChange();
     }
 

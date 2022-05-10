@@ -73,7 +73,7 @@
                                 [compact]="contentDensity | isCompactDensity"
                                 [state]="fromModel.invalid ? 'error' : null"
                                 [name]="uid + '-' + type + '-from-' + item.id"
-                                (blur)="_validateConditionValue(item, [fromModel.valid, toModel.valid])"
+                                (blur)="_validateConditionValue(item, [!!fromModel.valid, !!toModel.valid])"
                                 #fromModel="ngModel"
                                 [(ngModel)]="item.value"
                             />
@@ -96,7 +96,7 @@
                                 [compact]="contentDensity | isCompactDensity"
                                 [state]="toModel.invalid ? 'error' : null"
                                 [name]="uid + '-' + type + '-to-' + item.id"
-                                (blur)="_validateConditionValue(item, [fromModel.valid, toModel.valid])"
+                                (blur)="_validateConditionValue(item, [!!fromModel.valid, !!toModel.valid])"
                                 #toModel="ngModel"
                                 [(ngModel)]="item.valueTo"
                             />
@@ -120,7 +120,7 @@
                                 [compact]="contentDensity | isCompactDensity"
                                 [state]="valueModel.invalid ? 'error' : null"
                                 [name]="uid + '-' + type + '-value-' + item.id"
-                                (blur)="_validateConditionValue(item, valueModel.valid)"
+                                (blur)="_validateConditionValue(item, !!valueModel.valid)"
                                 #valueModel="ngModel"
                                 [(ngModel)]="item.value"
                             />

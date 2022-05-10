@@ -8,6 +8,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { TAB } from '@angular/cdk/keycodes';
 
 export type BusyIndicatorSize = 's' | 'm' | 'l';
@@ -44,7 +45,7 @@ export class BusyIndicatorComponent {
 
     /** Aria label attribute value. */
     @Input()
-    ariaLabel: string;
+    ariaLabel: Nullable<string>;
 
     /** title attribute value for tooltip. */
     @Input()
@@ -56,7 +57,7 @@ export class BusyIndicatorComponent {
 
     /** Aria live attribute value. */
     @Input()
-    ariaLive: 'assertive' | 'polite' | null = 'polite';
+    ariaLive: Nullable<'assertive' | 'polite' | 'off'> = 'polite';
 
     /** @hidden */
     @ViewChild('fakeFocusElement')

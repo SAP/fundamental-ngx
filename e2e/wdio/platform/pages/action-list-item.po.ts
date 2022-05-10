@@ -6,8 +6,8 @@ export class ActionListItemPo extends BaseComponentPo {
 
     actionBtns = 'fdp-action-list-item button';
     actionSections = 'fdp-platform-action-list-item-border-less-example ul';
-    cozyItem = '#fdp-list-item-8';
-    compactItem = '#fdp-list-item-12';
+    cozyItem = 'fdp-platform-action-list-item-border-less-example fdp-list#cozy-list .fd-list__item';
+    compactItem = 'fdp-platform-action-list-item-border-less-example fdp-list#compact-list .fd-list__item';
 
     open(): void {
         super.open(this.url);
