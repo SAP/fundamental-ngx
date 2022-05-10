@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.29...v0.34.3-rc.30) (2022-05-10)
+
+
+### Bug Fixes
+
+* **docs:** use injection tokens instead of plain strings ([#8066](https://github.com/SAP/fundamental-ngx/issues/8066)) ([715525c](https://github.com/SAP/fundamental-ngx/commit/715525c8dcfcc426762d95b323ea0173f13df241))
+
 ### [0.34.3-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.28...v0.34.3-rc.29) (2022-05-07)
 
 
