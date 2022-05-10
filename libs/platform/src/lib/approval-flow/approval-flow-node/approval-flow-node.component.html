@@ -159,7 +159,9 @@
         fd-menu-item
         (click)="menu.close(); onAdd.emit('before')"
     >
-        <div fd-menu-interactive i18n="@@platformApprovalFlowNodeAddApproversBefore">Add approvers before</div>
+        <div fd-menu-interactive>
+            <span i18n="@@platformApprovalFlowNodeAddApproversBefore" fd-menu-title>Add approvers before</span>
+        </div>
     </li>
 
     <li
@@ -167,7 +169,9 @@
         fd-menu-item
         (click)="menu.close(); onAdd.emit('after')"
     >
-        <div fd-menu-interactive i18n="@@platformApprovalFlowNodeAddApproversAfter">Add approvers after</div>
+        <div fd-menu-interactive>
+            <span i18n="@@platformApprovalFlowNodeAddApproversAfter" fd-menu-title>Add approvers after</span>
+        </div>
     </li>
 
     <li
@@ -175,7 +179,9 @@
         fd-menu-item
         (click)="menu.close(); onAdd.emit('parallel')"
     >
-        <div fd-menu-interactive i18n="@@platformApprovalFlowNodeAddApproversParallel">Add parallel approvers</div>
+        <div fd-menu-interactive>
+            <span i18n="@@platformApprovalFlowNodeAddApproversParallel" fd-menu-title>Add parallel approvers</span>
+        </div>
     </li>
 
     <li
@@ -183,10 +189,14 @@
         fd-menu-item
         (click)="menu.close(); onEdit.emit()"
     >
-        <div fd-menu-interactive i18n="@@platformApprovalFlowNodeEditApprover">Edit approver</div>
+        <div fd-menu-interactive>
+            <span i18n="@@platformApprovalFlowNodeEditApprover" fd-menu-title>Edit approver</span>
+        </div>
     </li>
 
     <li *ngIf="!this.node?.actionsConfig?.disableRemove" fd-menu-item (click)="menu.close(); onDelete.emit()">
-        <div fd-menu-interactive i18n="@@platformApprovalFlowNodeRemoveNode">Remove</div>
+        <div fd-menu-interactive>
+            <span i18n="@@platformApprovalFlowNodeRemoveNode" fd-menu-title>Remove</span>
+        </div>
     </li>
 </fd-menu>
