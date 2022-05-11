@@ -58,7 +58,7 @@ export class PlatformTableCellResizableDirective implements AfterViewInit, OnDes
     /** @hidden */
     @HostListener('mousemove', ['$event'])
     _onMouseMove(event: MouseEvent): void {
-        if (!this._tableColumnResizeService) {
+        if (!this._tableColumnResizeService || this._tableColumnResizeService.resizeInProgress) {
             return;
         }
 
