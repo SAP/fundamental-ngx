@@ -1,6 +1,10 @@
 @import '~fundamental-styles/dist/slider';
 @import '~fundamental-styles/dist/input';
 
+.fd-popover--slider {
+    display: block !important;
+}
+
 .fd-popover__popper.fd-slider--tooltip-popover {
     top: -7px !important;
     overflow: hidden;
@@ -36,6 +40,10 @@
         .fd-slider__tick {
             position: absolute;
         }
+    }
+
+    &__ticks {
+        height: var(--fdSlider_Tick_Height);
     }
 
     &__track {
