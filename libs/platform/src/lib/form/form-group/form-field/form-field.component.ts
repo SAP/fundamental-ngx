@@ -61,6 +61,8 @@ import {
 import { FormFieldLayoutService } from '../services/form-field-layout.service';
 import { defaultFormFieldHintOptions } from '../config/default-form-field-hint-options';
 
+let defaultId = 0;
+
 const formFieldProvider: Provider = {
     provide: FormField,
     useExisting: forwardRef(() => FormFieldComponent)
@@ -91,10 +93,10 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     label: string;
 
     /**
-     * Form field id
+     * Suffix for ids of control elements inside this form field
      */
     @Input()
-    id: string;
+    id: string = (++defaultId).toString();
 
     /**
      * @deprecated use `hint.placement` input instead
