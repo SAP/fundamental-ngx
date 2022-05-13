@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { TitleModule } from '@fundamental-ngx/core/title';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { IconModule } from '@fundamental-ngx/core/icon';
 
@@ -18,6 +19,8 @@ import { GridListMoreBtnComponent } from './components/grid-list-more-btn/grid-l
 import { GridListTitleBarComponent } from './components/grid-list-title-bar/grid-list-title-bar.component';
 import { GridListTitleBarAdditionalTitleItemDirective } from './components/grid-list-title-bar/grid-list-title-bar.directive';
 import { GridListTitleBarSpacerComponent } from './components/grid-list-title-bar-spacer/grid-list-title-bar-spacer.component';
+import { GridListItemBodyDirective } from './directives/grid-list-item-body.directive';
+import { GridListItemImageDirective } from './directives/grid-list-item-image.directive';
 
 @NgModule({
     declarations: [
@@ -31,9 +34,11 @@ import { GridListTitleBarSpacerComponent } from './components/grid-list-title-ba
         GridListItemToolbarComponent,
         GridListGroupHeaderComponent,
         GridListTitleBarSpacerComponent,
-        GridListTitleBarAdditionalTitleItemDirective
+        GridListTitleBarAdditionalTitleItemDirective,
+        GridListItemImageDirective,
+        GridListItemBodyDirective
     ],
-    imports: [CommonModule, ButtonModule, IconModule, ToolbarModule, ObjectStatusModule, FormsModule],
+    imports: [CommonModule, FormsModule, ButtonModule, IconModule, TitleModule, ToolbarModule, ObjectStatusModule],
     exports: [
         GridListComponent,
         GridListItemComponent,
@@ -45,7 +50,9 @@ import { GridListTitleBarSpacerComponent } from './components/grid-list-title-ba
         GridListItemToolbarComponent,
         GridListGroupHeaderComponent,
         GridListTitleBarSpacerComponent,
-        GridListTitleBarAdditionalTitleItemDirective
+        GridListTitleBarAdditionalTitleItemDirective,
+        GridListItemImageDirective,
+        GridListItemBodyDirective
     ]
 })
 export class GridListModule {}

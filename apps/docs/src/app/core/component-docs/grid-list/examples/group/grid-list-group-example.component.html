@@ -6,47 +6,37 @@
         ></span>
     </fd-grid-list-title-bar>
 
-    <fd-grid-list-filter-bar *ngIf="showFilterBur" (close)="close()"
-        >Grouped by: Company (Company A, Company B)</fd-grid-list-filter-bar
-    >
+    <fd-grid-list-filter-bar *ngIf="showFilterBur" (close)="close()">
+        Grouped by: Company (Company A, Company B)
+    </fd-grid-list-filter-bar>
 
     <fd-grid-list-group-header> Company: Company A </fd-grid-list-group-header>
 
-    <fd-grid-list-item *ngFor="let item of group1">
+    <fd-grid-list-item *ngFor="let item of group1" [title]="item.title" [description]="item.description">
         <fd-grid-list-item-toolbar> Custom Text </fd-grid-list-item-toolbar>
 
-        <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s" class="fd-grid-list__item-image"></fd-avatar>
+        <fd-avatar fd-grid-list-item-image image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
 
-        <div class="fd-grid-list__item-header">
-            <h4 fd-title [innerText]="item.title" class="fd-grid-list__item-title"></h4>
-            <span class="fd-grid-list__item-subtitle" [innerText]="item.description"></span>
-        </div>
-
-        <div class="fd-grid-list__item-content">
+        <ng-template fd-grid-list-item-body>
             <p>781 Main Street</p>
             <p>Anytown, SD 57401</p>
             <p>USA</p>
             <a [routerLink]="['./']" fd-link tabindex="0">john_li@example.com</a>
-        </div>
+        </ng-template>
     </fd-grid-list-item>
 
     <fd-grid-list-group-header> Company: Company B </fd-grid-list-group-header>
 
-    <fd-grid-list-item *ngFor="let item of group2">
+    <fd-grid-list-item *ngFor="let item of group2" [title]="item.title" [description]="item.description">
         <fd-grid-list-item-toolbar> Custom Text </fd-grid-list-item-toolbar>
 
-        <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s" class="fd-grid-list__item-image"></fd-avatar>
+        <fd-avatar fd-grid-list-item-image image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
 
-        <div class="fd-grid-list__item-header">
-            <h4 fd-title [innerText]="item.title" class="fd-grid-list__item-title"></h4>
-            <span class="fd-grid-list__item-subtitle" [innerText]="item.description"></span>
-        </div>
-
-        <div class="fd-grid-list__item-content">
+        <ng-template fd-grid-list-item-body>
             <p>781 Main Street</p>
             <p>Anytown, SD 57401</p>
             <p>USA</p>
             <a [routerLink]="['./']" fd-link tabindex="0">john_li@example.com</a>
-        </div>
+        </ng-template>
     </fd-grid-list-item>
 </fd-grid-list>

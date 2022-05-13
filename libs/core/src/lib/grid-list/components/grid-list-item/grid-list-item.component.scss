@@ -21,6 +21,14 @@
     }
 
     &__item {
+        &-header {
+            padding-bottom: 1rem;
+        }
+
+        &-content {
+            padding-top: 0;
+        }
+
         .drop-area__line--vertical {
             height: 100%;
 
