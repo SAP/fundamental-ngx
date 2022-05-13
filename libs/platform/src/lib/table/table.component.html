@@ -191,7 +191,10 @@
 
         <th *ngIf="_isShownNavigationColumn" fd-table-cell class="fdp-table__cell--navigation" role="columnheader"></th>
 
-        <th class="fd-table__cell fd-table__cell--mock"></th>
+        <th
+            class="fd-table__cell fd-table__cell--mock"
+            [class.fd-table__cell--mock-borderless]="!_cellMockVisible"
+        ></th>
     </tr>
 </ng-template>
 
@@ -214,7 +217,6 @@
 <ng-template #tableTemplate>
     <div
         class="fdp-table__body fd-scrollbar"
-        [class.fd-table--fixed]="_showRows"
         fdpTableScrollable
         #verticalScrollable="tableScrollable"
         [style.height]="bodyHeight"
@@ -230,7 +232,7 @@
                 <ng-container [ngTemplateOutlet]="tableHeaderRowTemplate"></ng-container>
             </thead>
             <tbody
-                *ngIf="_showRows; else emptyTableTemplate"
+                *ngIf="!!this._tableRowsVisible.length || this.loadingState; else emptyTableTemplate"
                 fd-table-body
                 fd-dnd-list
                 [noBorderX]="noBodyBorders"
@@ -410,7 +412,10 @@
                             ></i>
                         </td>
 
-                        <td class="fd-table__cell fd-table__cell--mock"></td>
+                        <td
+                            class="fd-table__cell fd-table__cell--mock"
+                            [class.fd-table__cell--mock-borderless]="!_cellMockVisible"
+                        ></td>
                     </tr>
                 </ng-container>
             </tbody>

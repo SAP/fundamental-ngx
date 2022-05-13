@@ -19,9 +19,6 @@ export const TABLE_RESIZER_BORDER_WIDTH = 3;
 @Injectable()
 export class TableColumnResizeService implements OnDestroy {
     /** @hidden */
-    private _fixedWidth = false;
-
-    /** @hidden */
     private _fixedColumnsWidthMap = new Map<string, string>();
 
     /** @hidden */
@@ -81,6 +78,11 @@ export class TableColumnResizeService implements OnDestroy {
         return this._markForCheck.asObservable();
     }
 
+    /** table has fixed width if all of it's columns are fixed */
+    get fixedWidth(): boolean {
+        return this._fixedColumnsWidthMap.size === this._visibleColumnNames.length;
+    }
+
     /** @hidden */
     private get _rtl(): boolean {
         return this._rtlService?.rtl.getValue();
@@ -127,7 +129,7 @@ export class TableColumnResizeService implements OnDestroy {
         let allPreviousWidths = 0;
         for (const [column, prevColumn] of this._visibleColumnLeftNeighbourMap.entries()) {
             allPreviousWidths +=
-                this._columnsCellMap.get(prevColumn)?.[0]?.nativeElement.getBoundingClientRect().width ?? 0;
+                this._columnsCellMap.get(prevColumn as string)?.[0]?.nativeElement.getBoundingClientRect().width ?? 0;
             this._visibleColumnLeftOffsetPxMap.set(column, allPreviousWidths);
         }
     }
@@ -151,7 +153,7 @@ export class TableColumnResizeService implements OnDestroy {
     }
 
     /** Previous column name */
-    getPreviousColumnName(columnName: string): string {
+    getPreviousColumnName(columnName: string): string | undefined {
         return this._visibleColumnLeftNeighbourMap.get(columnName);
     }
 
@@ -267,8 +269,7 @@ export class TableColumnResizeService implements OnDestroy {
             diffX = TABLE_COLUMN_MIN_WIDTH - columnWidth;
         }
 
-        if (!this._fixedWidth) {
-            this._fixedWidth = true;
+        if (!this.fixedWidth) {
             for (const [columnName, cells] of this._columnsCellMap.entries()) {
                 if (cells.length) {
                     this._fixedColumnsWidthMap.set(

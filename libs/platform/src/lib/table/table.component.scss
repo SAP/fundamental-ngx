@@ -176,6 +176,9 @@ $fd-table-scrollbar-width-with-border: calc(#{$fd-table-scrollbar-width} + var(-
     }
 
     &__header {
+        // is needed to have proper overflow for header cells with frozen columns
+        z-index: 2;
+
         .fd-table__cell,
         .fd-table__cell--mock {
             border-top: $fd-table-border;
@@ -308,6 +311,13 @@ $fd-table-scrollbar-width-with-border: calc(#{$fd-table-scrollbar-width} + var(-
             min-width: 0.375rem; // TODO: should be moved to styles
 
             @include fd-rtl {
+                border-right: none;
+            }
+        }
+
+        &--mock {
+            &.fd-table__cell--mock-borderless {
+                border-left: none;
                 border-right: none;
             }
         }

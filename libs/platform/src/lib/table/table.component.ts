@@ -37,7 +37,7 @@ import {
     RtlService,
     RangeSelector
 } from '@fundamental-ngx/core/utils';
-import { TableRowDirective } from '@fundamental-ngx/core/table';
+import { TableRowDirective, TableComponent as FdTableComponent } from '@fundamental-ngx/core/table';
 import { isDataSource, isString } from '@fundamental-ngx/platform/shared';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { cloneDeep, get } from 'lodash-es';
@@ -406,6 +406,10 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     readonly tableContainer: ElementRef<HTMLDivElement>;
 
     /** @hidden */
+    @ViewChild(FdTableComponent, { read: ElementRef })
+    readonly table: ElementRef<HTMLDivElement>;
+
+    /** @hidden */
     @ContentChildren(TableColumn)
     readonly columns: QueryList<TableColumn>;
 
@@ -598,8 +602,11 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     }
 
     /** @hidden */
-    get _showRows(): boolean {
-        return !!this._tableRowsVisible.length || this.loadingState;
+    get _cellMockVisible(): boolean {
+        return (
+            this._tableColumnResizeService.fixedWidth &&
+            (this.tableContainer?.nativeElement?.scrollWidth ?? 0) > (this.table?.nativeElement?.scrollWidth ?? 0)
+        );
     }
 
     /** @hidden */
