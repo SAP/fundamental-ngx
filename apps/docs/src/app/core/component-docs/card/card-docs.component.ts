@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 import cardExampleHtml from '!./examples/card-example.component.html?raw';
+import cardExampleTs from '!./examples/card-example.component.ts?raw';
+import cardExampleScss from '!./examples/card-example.component.scss?raw';
 import cardCompactExampleHtml from '!./examples/card-compact-example.component.html?raw';
 import cardLoaderExampleHtml from '!./examples/card-loader-example.component.html?raw';
 import cardFooterExampleHtml from '!./examples/card-footer-example.component.html?raw';
@@ -36,6 +38,16 @@ export class CardDocsComponent {
         {
             language: 'html',
             code: cardExampleHtml,
+            fileName: 'card-example'
+        },
+        {
+            language: 'ts',
+            code: cardExampleTs,
+            fileName: 'card-example'
+        },
+        {
+            language: 'scss',
+            code: cardExampleScss,
             fileName: 'card-example'
         }
     ];
