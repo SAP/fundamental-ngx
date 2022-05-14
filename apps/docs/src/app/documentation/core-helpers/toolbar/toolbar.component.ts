@@ -148,9 +148,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         } else if (isDark(safeUrl)) {
             theme = 'tomorrow-night.css';
         }
-        this.highlightJsThemeCss = this._domSanitizer.bypassSecurityTrustResourceUrl(
-            `assets/highlight-js-styles/${theme}`
-        );
+        this.highlightJsThemeCss = this.trustedResourceUrl(`assets/highlight-js-styles/${theme}`);
     }
 
     selectVersion(version: any): void {
