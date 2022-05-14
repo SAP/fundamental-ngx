@@ -1,7 +1,9 @@
 <div class="fd-shellbar__action fd-shellbar__action--show-always" *ngIf="user">
     <div class="fd-user-menu">
         <button
-            class="fd-button fd-shellbar__button fd-shellbar__button--user-menu"
+            fd-button
+            fdType="transparent"
+            class="fd-shellbar__button fd-shellbar__button--user-menu"
             [disabled]="disabled"
             [fdMenuTrigger]="menu"
         >
@@ -13,6 +15,7 @@
                 label="{{ user.fullName }}"
             >
             </fd-avatar>
+
             <fd-avatar
                 [colorAccent]="user.colorAccent"
                 [circle]="true"
@@ -21,6 +24,7 @@
                 image="{{ user.image }}"
             ></fd-avatar>
         </button>
+
         <fd-menu
             #menu
             [compact]="compact"

@@ -14,6 +14,7 @@
 </div>
 
 <ng-content select="fd-shellbar-action"></ng-content>
+
 <ng-container *ngIf="userItem">
     <ng-container *ngIf="!userComponent">
         <fd-shellbar-user-menu
@@ -23,6 +24,7 @@
             (itemClicked)="triggerItems()"
         ></fd-shellbar-user-menu>
     </ng-container>
+
     <ng-container *ngIf="userComponent">
         <ng-content select="fd-shellbar-user-menu"></ng-content>
     </ng-container>
