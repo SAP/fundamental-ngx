@@ -216,7 +216,7 @@
         "ng-packagr": "~13.2.1",
         "ngx-cva-test-suite": "~1.0.4",
         "postcss": "^8.4.8",
-        "postcss-import": "^14.0.2",
+        "postcss-import": "^14.1.0",
         "postcss-preset-env": "^7.3.1",
         "postcss-url": "^10.1.1",
         "prettier": "2.5.1",
