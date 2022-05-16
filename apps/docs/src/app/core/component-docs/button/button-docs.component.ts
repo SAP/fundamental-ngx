@@ -7,6 +7,7 @@ import buttonIconsExample from '!./examples/button-icons-example.component.html?
 import buttonSizesExample from '!./examples/button-sizes-example.component.html?raw';
 import buttonStateExample from '!./examples/button-state-example.component.html?raw';
 import buttonTypesExample from '!./examples/button-types-example.component.html?raw';
+import buttonToggledExample from '!./examples/button-toggled-example.component.html?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { Icons } from '../../../documentation/utilities/icons';
 
@@ -108,6 +109,15 @@ export class ButtonDocsComponent {
             language: 'html',
             code: buttonStateExample,
             fileName: 'button-state-example',
+            scssFileCode: buttonScss
+        }
+    ];
+
+    buttonHtmlToggled: ExampleFile[] = [
+        {
+            language: 'html',
+            code: buttonToggledExample,
+            fileName: 'button-toggled-example',
             scssFileCode: buttonScss
         }
     ];

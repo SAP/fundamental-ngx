@@ -34,3 +34,18 @@ export class ButtonIconsExampleComponent {}
     styleUrls: ['./button-examples.component.scss']
 })
 export class ButtonStateExampleComponent {}
+
+@Component({
+    selector: 'fd-button-toggled-example',
+    templateUrl: './button-toggled-example.component.html',
+    styleUrls: ['./button-examples.component.scss']
+})
+export class ButtonToggledExampleComponent {
+    toggled = true;
+    emphasizedToggled = true;
+    ghostToggled = true;
+    positiveToggled = true;
+    negativeToggled = true;
+    attentionToggled = true;
+    transparentToggled = true;
+}
