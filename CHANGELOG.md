@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.31...v0.34.3-rc.32) (2022-05-16)
+
+
+### Features
+
+* ts strict compilation rules ([#8057](https://github.com/SAP/fundamental-ngx/issues/8057)) ([70fa44a](https://github.com/SAP/fundamental-ngx/commit/70fa44af5e84d8bd0f58dc42499d3e27d3ae58e7))
+
 ### [0.34.3-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.30...v0.34.3-rc.31) (2022-05-10)
 
 
