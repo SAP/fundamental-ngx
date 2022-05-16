@@ -310,21 +310,21 @@ describe('MomentDatetimeAdapter', () => {
     });
 
     it('should parse "en" date string', () => {
-        expect(adapter.parse('1/1/2017', 'M/D/YYYY').format()).toEqual(moment([2017, JAN, 1]).format());
+        expect(adapter.parse('1/1/2017', 'M/D/YYYY')?.format()).toEqual(moment([2017, JAN, 1]).format());
     });
 
     it('should parse "en" time string', () => {
-        expect(adapter.parse('10:30 PM', 'HH:mm:ss A').format()).toEqual(
+        expect(adapter.parse('10:30 PM', 'HH:mm:ss A')?.format()).toEqual(
             moment({ hours: 22, minutes: 30, seconds: 0 }).format()
         );
-        expect(adapter.parse('10:30', 'HH:mm:ss').format()).toEqual(
+        expect(adapter.parse('10:30', 'HH:mm:ss')?.format()).toEqual(
             moment({ hours: 10, minutes: 30, seconds: 0 }).format()
         );
     });
 
     it('should parse number', () => {
         const timestamp = new Date(2017, JAN, 1).getTime();
-        expect(adapter.parse(timestamp).format()).toEqual(moment([2017, JAN, 1]).format());
+        expect(adapter.parse(timestamp)?.format()).toEqual(moment([2017, JAN, 1]).format());
     });
 
     it('should parse Date', () => {
@@ -336,7 +336,7 @@ describe('MomentDatetimeAdapter', () => {
     it('should parse invalid value as invalid', () => {
         const date = adapter.parse('hello', 'M/D/YYYY');
         expect(date).not.toBeNull();
-        expect(date.isValid()).toBeFalse();
+        expect(date?.isValid()).toBeFalse();
     });
 
     it('should format', () => {

@@ -121,9 +121,9 @@ export class PlatformTableColumnResizerComponent implements OnInit, OnDestroy {
             return;
         }
 
-        this._pointerMoveListener = fromEvent(this._document, 'mouseup')
+        this._pointerMoveListener = fromEvent<MouseEvent>(this._document, 'mouseup')
             .pipe(take(1), takeUntil(this._destroyed))
-            .subscribe((event: MouseEvent) => {
+            .subscribe((event) => {
                 this._tableColumnResizeService.finishResize(event);
                 this._cd.markForCheck();
             });

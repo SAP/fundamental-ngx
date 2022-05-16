@@ -27,7 +27,7 @@
         </ng-template>
 
         <fd-form-message *ngIf="hasErrors() && i18Strings" type="error">
-            <ng-container *ngTemplateOutlet="i18Strings; context: { $implicit: control?.ngControl.errors }">
+            <ng-container *ngTemplateOutlet="i18Strings; context: { $implicit: control?.ngControl?.errors }">
             </ng-container>
         </fd-form-message>
     </fdp-input-message-group>
@@ -39,12 +39,12 @@
             [id]="'fdp-form-label-' + id"
             [required]="editable && required"
             fd-form-label
-            [inlineHelpTitle]="hintOptions.text"
-            [inlineHelpBodyPlacement]="hintOptions.placement"
-            [inlineHelpPlacement]="hintOptions.position"
-            [inlineHelpGlyph]="hintOptions.glyph"
-            [inlineHelpTriggers]="hintOptions.trigger"
-            [alignLabelEnd]="isHorizontal$ | async"
+            [inlineHelpTitle]="hintOptions.text || ''"
+            [inlineHelpBodyPlacement]="hintOptions.placement || 'top'"
+            [inlineHelpPlacement]="hintOptions.position || 'after'"
+            [inlineHelpGlyph]="hintOptions.glyph || ''"
+            [inlineHelpTriggers]="hintOptions.trigger || []"
+            [alignLabelEnd]="!!(isHorizontal$ | async)"
         >
             <span [id]="'fdp-form-label-content-' + id">{{ label }}</span>
         </label>
@@ -54,7 +54,7 @@
             [id]="'fdp-form-label-' + id"
             [required]="editable && required"
             fd-form-label
-            [alignLabelEnd]="isHorizontal$ | async"
+            [alignLabelEnd]="!!(isHorizontal$ | async)"
         >
             <span [id]="'fdp-form-label-content-' + id">{{ label }}</span>
         </label>
@@ -68,8 +68,8 @@
                 <fd-icon
                     [fd-inline-help]="hintOptions.text"
                     [glyph]="hintOptions.glyph"
-                    [placement]="hintOptions.placement"
-                    [triggers]="hintOptions.trigger"
+                    [placement]="hintOptions.placement || null"
+                    [triggers]="hintOptions.trigger || []"
                     tabindex="0"
                 >
                 </fd-icon>

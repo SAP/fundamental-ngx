@@ -52,6 +52,9 @@ export class BaseDataProvider<T> extends DataProvider<T> {
      * that does not do deep compare.
      */
     matches(item: T, pattern: string): boolean {
+        if (!this._matchingBy) {
+            return false;
+        }
         const { firstBy, secondaryBy } = this._matchingBy;
 
         let matched = this.matchesBy(item, pattern, firstBy);
@@ -63,21 +66,21 @@ export class BaseDataProvider<T> extends DataProvider<T> {
     }
 
     matchesBy(item: any, pattern: string, matchingBy: MatchBy): boolean {
-        let value = isJsObject(item) && matchingBy ? matchingBy(item) : item;
+        const value = isJsObject(item) && matchingBy ? matchingBy(item) : item;
 
         if (isFunction(value)) {
-            value = value.call(item);
+            return value.call(item);
         } else if (isJsObject(value)) {
             return this.hasObjectValue(item, pattern);
         } else if (this._matchingStrategy === MatchingStrategy.STARTS_WITH_PER_TERM) {
             const reqexp = getMatchingStrategyStartsWithPerTermReqexp(pattern);
-            return pattern && value && !!value.match(reqexp);
+            return !!pattern && !!value && !!value.match(reqexp);
         } else if (this._matchingStrategy === MatchingStrategy.STARTS_WITH) {
-            return pattern && value && value.toString().toLowerCase().startsWith(pattern.toLowerCase());
+            return !!pattern && !!value && value.toString().toLowerCase().startsWith(pattern.toLowerCase());
         } else if (this._matchingStrategy === MatchingStrategy.CONTAINS) {
-            return pattern && value && value.toString().toLowerCase().indexOf(pattern) > -1;
+            return !!pattern && !!value && value.toString().toLowerCase().indexOf(pattern) > -1;
         } else {
-            return pattern && value && value.toString().toLowerCase() === pattern;
+            return !!pattern && !!value && value.toString().toLowerCase() === pattern;
         }
     }
 

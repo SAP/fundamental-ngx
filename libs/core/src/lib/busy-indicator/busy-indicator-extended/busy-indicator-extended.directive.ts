@@ -28,9 +28,11 @@ export class BusyIndicatorExtendedDirective implements AfterContentInit {
     /** @hidden */
     private _appendCssToParent(): void {
         const hasLabel = this.busyIndicator.label;
-        if (hasLabel !== undefined) {
-            this.elementRef().nativeElement.parentElement.classList.add('fd-busy-indicator-extended');
-            const { classList } = this.elementRef().nativeElement.parentElement;
+        if (!hasLabel) {
+            return;
+        }
+        const classList = this.elementRef().nativeElement.parentElement?.classList;
+        if (classList) {
             classList.add('fd-busy-indicator-extended');
             if (classList.contains(messageToastClass)) {
                 classList.add('fd-busy-indicator-extended--message-toast');

@@ -1,11 +1,16 @@
-<ul fd-nested-list [textOnly]="list?.textOnly">
+<ul fd-nested-list [textOnly]="!!list?.textOnly">
     <ng-container *ngFor="let item of list?.items">
         <li *ngIf="item.headerTitle" fd-nested-list-header>
             {{ item.headerTitle }}
         </li>
-        <li *ngIf="!item.headerTitle" fd-nested-list-item [(expanded)]="item.expanded">
-            <fd-nested-list-popover *ngIf="condensed && first && item.list" [title]="item.link?.title">
-                <div fd-nested-list-content [selected]="item.link.selected">
+        <li
+            *ngIf="!item.headerTitle"
+            fd-nested-list-item
+            [expanded]="!!item.expanded"
+            (expandedChange)="_expandedChange($event, item)"
+        >
+            <fd-nested-list-popover *ngIf="condensed && first && item.list" [title]="item.link?.title || ''">
+                <div fd-nested-list-content [selected]="!!item.link?.selected">
                     <ng-container [ngTemplateOutlet]="link" [ngTemplateOutletContext]="{ item: item }"></ng-container>
                     <button fd-nested-list-expand-icon></button>
                 </div>

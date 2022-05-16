@@ -63,7 +63,7 @@ export class PlatformVhdMobileExampleComponent implements OnInit {
         this.dataSource = new ValueHelpDialogDataSource(new VhdDataProvider(data.dataSource));
     }
 
-    valueChange($event: VhdValueChangeEvent<ExampleTestModel[]>): void {
+    valueChange($event: VhdValueChangeEvent<ExampleTestModel>): void {
         this.currentValue = $event;
         this.selectedValue = $event.selected[0];
     }

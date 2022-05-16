@@ -9,13 +9,15 @@ export class SchemaFactoryService {
     constructor(@Inject(SCHEMAS) private readonly schemas: Schemas) {}
 
     getComponent(name: string): Schema {
-        if (!this.schemasMap.has(name)) {
-            this.schemasMap.set(name, {
+        let component = this.schemasMap.get(name);
+        if (!component) {
+            component = {
                 ...this.schemas[name],
                 properties: this._buildSchema({ ...this.schemas[name].properties })
-            });
+            };
+            this.schemasMap.set(name, component);
         }
-        return this.schemasMap.get(name);
+        return component;
     }
 
     private _buildSchema(properties: Properties): Properties {

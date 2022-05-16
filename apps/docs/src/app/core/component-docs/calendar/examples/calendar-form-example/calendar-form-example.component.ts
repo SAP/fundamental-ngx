@@ -36,13 +36,13 @@ export class CalendarFormExamplesComponent {
     });
 
     setInvalid(): void {
-        this.customForm.get('date').setValue(new FdDate(null));
+        this.customForm.get('date')?.setValue(new FdDate(null as any));
     }
 
     setInvalidRange(): void {
-        this.customForm.get('dateRange').setValue({
-            start: new FdDate(null),
-            end: new FdDate(null)
+        this.customForm.get('dateRange')?.setValue({
+            start: new FdDate(null as any),
+            end: new FdDate(null as any)
         });
     }
 }

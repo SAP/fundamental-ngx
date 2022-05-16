@@ -45,8 +45,8 @@ export class SliderPositionDirective implements OnInit, OnChanges, OnDestroy {
     private _setPosition(): void {
         const { style } = this._elementRef.nativeElement;
 
-        style.left = !this._isRtl ? `${this.position}%` : null;
-        style.right = this._isRtl ? `${this.position}%` : null;
+        style.left = !this._isRtl ? `${this.position}%` : 'unset';
+        style.right = this._isRtl ? `${this.position}%` : 'unset';
     }
 
     /** @hidden Rtl change subscription */

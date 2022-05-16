@@ -1,4 +1,4 @@
-import { MessageStates } from '@fundamental-ngx/core/form';
+import { FormStates } from '@fundamental-ngx/core/shared';
 import { EventPayload } from './upload-collection-events.models';
 
 export enum UploadCollectionItemStatus {
@@ -13,7 +13,7 @@ export interface Author {
 }
 
 export interface UploadCollectionFolder {
-    documentId: number | string | null;
+    documentId?: number | string;
     type: 'folder';
     name: string;
     uploadedBy: Author;
@@ -21,7 +21,7 @@ export interface UploadCollectionFolder {
     fileSize?: number;
     files: UploadCollectionItem[];
     status?: UploadCollectionItemStatus;
-    sameFilenameState?: MessageStates;
+    sameFilenameState?: FormStates;
 }
 
 export interface UploadCollectionFile {
@@ -35,7 +35,7 @@ export interface UploadCollectionFile {
     url: string;
     status?: UploadCollectionItemStatus;
     file?: File;
-    sameFilenameState?: MessageStates;
+    sameFilenameState?: FormStates;
 }
 
 export interface ItemPerPage {

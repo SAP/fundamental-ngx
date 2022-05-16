@@ -9,6 +9,7 @@ import {
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { DialogRef } from '@fundamental-ngx/core/dialog';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 import { FilterType } from '../../../enums/filter-type.enum';
 import { CollectionFilter } from '../../../interfaces/collection-filter.interface';
@@ -59,7 +60,7 @@ export class FiltersComponent implements Resettable, AfterViewInit {
     activeFilter: TableViewSettingsFilterComponent | null = null;
 
     /** Table column key associated with the currently selected filter  */
-    activeFilterColumnKey: string | null = null;
+    activeFilterColumnKey: Nullable<string> = null;
 
     private _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     /** Indicates when reset command is available */

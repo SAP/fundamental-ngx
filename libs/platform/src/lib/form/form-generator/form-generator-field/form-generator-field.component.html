@@ -6,7 +6,7 @@
     [column]="field.formItem?.guiOptions?.column || 1"
     [columnLayout]="field.formItem?.guiOptions?.columnLayout"
     [label]="field.formItem?.message + (field.formItem?.guiOptions?.appendColon !== false ? ':' : '')"
-    [validators]="field.formItem?.validators"
+    [validators]="field.formItem?.validators || []"
     [required]="field.formItem?.required"
     [rank]="rank"
     [labelColumnLayout]="field.formItem?.guiOptions?.labelColumnLayout"

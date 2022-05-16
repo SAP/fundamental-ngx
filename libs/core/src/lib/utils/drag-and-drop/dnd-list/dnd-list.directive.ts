@@ -73,10 +73,10 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
     private _elementsCoordinates: ElementChord[];
 
     /** @hidden */
-    private _closestItemIndex: number = null;
+    private _closestItemIndex: number | null = null;
 
     /** @hidden */
-    private _closestItemPosition: 'before' | 'after' = null;
+    private _closestItemPosition: 'before' | 'after' | null = null;
 
     /** An RxJS Subject that will kill the current data stream (for unsubscribing)  */
     private readonly _refresh$ = new Subject<void>();
@@ -105,7 +105,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
     /** Method called, when the item is being moved by 1 px */
     onMove(mousePosition: ElementPosition, draggedItemIndex: number): void {
         /** Temporary object, to store lowest distance values */
-        let closestItemIndex: number = null;
+        let closestItemIndex: number | null = null;
 
         const closestItem = this._elementsCoordinates.find((element, index) => {
             /** Check if element can be replaced */
@@ -156,6 +156,10 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
         const items = this.items.slice();
         const replacedItemIndex = this._closestItemIndex;
         const draggedItem = items[draggedItemIndex];
+
+        if (!replacedItemIndex) {
+            return;
+        }
 
         if (draggedItemIndex !== replacedItemIndex) {
             if (draggedItemIndex < replacedItemIndex) {

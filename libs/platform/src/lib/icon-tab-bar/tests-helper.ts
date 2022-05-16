@@ -5,13 +5,13 @@ import { UNIQUE_KEY_SEPARATOR } from './constants';
 export function getGetCenterCoordsOfElement(el: HTMLElement | null): { clientX: number; clientY: number } {
     const rect = el?.getBoundingClientRect();
     return {
-        clientX: (rect?.left || 0) + window?.scrollX + el.offsetWidth / 2,
-        clientY: (rect?.top || 0) + window?.scrollY + el.offsetHeight / 2
+        clientX: (rect?.left || 0) + window?.scrollX + (el?.offsetWidth ?? 0) / 2,
+        clientY: (rect?.top || 0) + window?.scrollY + (el?.offsetHeight ?? 0) / 2
     };
 }
 
 export function generateTestConfig(length: number, subTabs: boolean = false): TabConfig[] {
-    const items = [];
+    const items: TabConfig[] = [];
     for (let i = 0; i < length; i++) {
         items.push({
             icon: 'cart',
@@ -31,13 +31,13 @@ export function generateTabBarItems(config: TabConfig[], flatIndexRef = { value:
             cssClasses: [],
             uId: index.toString(),
             hidden: false,
-            subItems: null,
+            subItems: undefined,
             flatIndex: flatIndexRef.value++
         };
         if (item.color) {
             result.cssClasses = [`fd-icon-tab-bar__item--${item.color}`];
         }
-        result.subItems = item.subItems?.length ? generateTestSubItems(item.subItems, result, flatIndexRef) : null;
+        result.subItems = item.subItems?.length ? generateTestSubItems(item.subItems, result, flatIndexRef) : undefined;
         return result;
     });
 }
@@ -53,7 +53,7 @@ function generateTestSubItems(
             index,
             uId: `${parent.uId}${UNIQUE_KEY_SEPARATOR}${index}`,
             cssClasses: [],
-            subItems: null,
+            subItems: undefined,
             flatIndex: flatIndexRef.value++
         };
         if (Array.isArray(item.subItems) && item.subItems.length) {

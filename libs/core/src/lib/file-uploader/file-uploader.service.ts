@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { parserFileSize } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 export interface FileUploadOutput {
     validFiles?: File[];
@@ -20,12 +21,12 @@ export class FileUploaderService {
         files: File[],
         minFileSize: string,
         maxFileSize: string,
-        acceptedExtensions: string
+        acceptedExtensions: Nullable<string>
     ): FileUploadOutput {
         const maxSize = parserFileSize(maxFileSize);
         const minSize = parserFileSize(minFileSize);
 
-        let allowedExtensions = null;
+        let allowedExtensions: string[] | null = null;
         if (acceptedExtensions) {
             allowedExtensions = acceptedExtensions.toLocaleLowerCase().replace(/[\s.]/g, '').split(',');
         }
@@ -43,9 +44,12 @@ export class FileUploaderService {
     }
 
     /** @hidden */
-    private _checkExtension(file: File, allowedExtensions: string[]): boolean {
+    private _checkExtension(file: File, allowedExtensions: string[] | null): boolean {
+        if (!allowedExtensions) {
+            return true;
+        }
         const extension = file.name.split('.')[file.name.split('.').length - 1].toLocaleLowerCase();
-        return !allowedExtensions || allowedExtensions.lastIndexOf(extension) !== -1;
+        return allowedExtensions.lastIndexOf(extension) !== -1;
     }
 
     private _checkSize(fileSize: number, maxSize: number, minSize: number): boolean {

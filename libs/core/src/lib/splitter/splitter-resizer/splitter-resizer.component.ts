@@ -57,7 +57,7 @@ export class SplitterResizerComponent implements OnDestroy {
     resize = new EventEmitter<number>();
 
     /** @hidden */
-    _start: number;
+    _start: number | null = null;
 
     /** @hidden */
     _isInFocus = false;
@@ -92,7 +92,7 @@ export class SplitterResizerComponent implements OnDestroy {
 
     /** @hidden */
     constructor(
-        private readonly _elementRef: ElementRef,
+        private readonly _elementRef: ElementRef<Element>,
         private readonly _cdr: ChangeDetectorRef,
         private readonly _ngZone: NgZone,
         @Optional() @Inject(DOCUMENT) private readonly _document: Document | null
@@ -121,7 +121,7 @@ export class SplitterResizerComponent implements OnDestroy {
         if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW])) {
             event.preventDefault();
 
-            let diff: number;
+            let diff: number | undefined;
 
             if (this._isHorizontal) {
                 this._start = this._elementRef.nativeElement.getBoundingClientRect().left;
@@ -147,9 +147,11 @@ export class SplitterResizerComponent implements OnDestroy {
                 }
             }
 
-            this.startResize.emit();
-            this._emitResize(diff);
-            this.endResize.emit();
+            if (diff !== undefined) {
+                this.startResize.emit();
+                this._emitResize(diff);
+                this.endResize.emit();
+            }
 
             this._unsubscribe(false);
         }
@@ -180,9 +182,9 @@ export class SplitterResizerComponent implements OnDestroy {
         }
 
         this._ngZone.runOutsideAngular(() => {
-            fromEvent(this._document, 'mousemove')
+            fromEvent<MouseEvent>(this._document!, 'mousemove')
                 .pipe(debounceTime(10), takeUntil(this._pointerMoveListener))
-                .subscribe((event: MouseEvent) => {
+                .subscribe((event) => {
                     this._ngZone.run(() => {
                         const newPosition = this._isHorizontal ? event.clientY : event.clientX;
 
@@ -191,7 +193,7 @@ export class SplitterResizerComponent implements OnDestroy {
                     });
                 });
 
-            fromEvent(this._document, 'mouseup')
+            fromEvent(this._document!, 'mouseup')
                 .pipe(take(1), takeUntil(this._pointerMoveListener))
                 .subscribe(() => {
                     this._ngZone.run(() => {
@@ -205,7 +207,7 @@ export class SplitterResizerComponent implements OnDestroy {
 
     /** @hidden */
     private _emitResize(newPosition: number): void {
-        const diff = newPosition - this._start;
+        const diff = newPosition - (this._start ?? newPosition);
 
         this.resize.emit(diff - this._prevDiff);
 

@@ -20,6 +20,7 @@ import {
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { SelectableOptionItem } from '@fundamental-ngx/platform/shared';
 import { MULTICOMBOBOX_COMPONENT, MultiComboboxInterface } from '../../multi-combobox.interface';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 @Component({
     selector: 'fdp-multi-combobox-mobile',
@@ -35,10 +36,10 @@ export class MultiComboboxMobileComponent extends MobileModeBase<MultiComboboxIn
      * Control element, which will be rendered inside dialog.
      * List element, which will be rendered inside dialog.
      */
-    childContent: {
+    childContent: Nullable<{
         listTemplate: TemplateRef<any>;
         controlTemplate: TemplateRef<any>;
-    } = null;
+    }> = null;
 
     /** @hidden */
     selectedShown$ = this._component.selectedShown$;

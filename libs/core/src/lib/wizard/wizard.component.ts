@@ -19,6 +19,7 @@ import {
 import { Subscription } from 'rxjs';
 import { DialogBodyComponent } from '@fundamental-ngx/core/dialog';
 import { scrollTop } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { WizardStepComponent } from './wizard-step/wizard-step.component';
 import { WizardProgressBarDirective } from './wizard-progress-bar/wizard-progress-bar.directive';
 import { WizardContentComponent } from './wizard-content/wizard-content.component';
@@ -39,7 +40,7 @@ export const BAR_FOOTER_CLASS = 'fd-bar--footer';
 export const BAR_FLOATING_FOOTER_CLASS = 'fd-bar--floating-footer';
 
 export let _fromScrollToCurrentStep;
-export let timer = null;
+export let timer: any = null;
 export const handleTimeoutReference = (): void => {
     if (timer !== null) {
         clearTimeout(timer);
@@ -79,7 +80,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
      * is the combined height of the shellbar, wizard header and wizard footer.
      */
     @Input()
-    contentHeight: string;
+    contentHeight: Nullable<string | null>;
 
     /**
      * Whether or not apply responsive paddings styling.
@@ -198,13 +199,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _getShellbarHeight(): number {
-        let retVal;
-        if (document.querySelector<HTMLElement>('.' + SHELLBAR_CLASS)) {
-            retVal = document.querySelector<HTMLElement>('.' + SHELLBAR_CLASS).clientHeight;
-        } else {
-            retVal = 0;
-        }
-        return retVal;
+        return document.querySelector<HTMLElement>('.' + SHELLBAR_CLASS)?.clientHeight ?? 0;
     }
 
     /** @hidden */
@@ -508,8 +503,10 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
             }
         });
         const summary = this.steps.find((step) => step.isSummary);
-        summary.content.tallContent = true;
-        this.contentTemplates = [summary.content.contentTemplate];
+        if (summary) {
+            summary.content.tallContent = true;
+            this.contentTemplates = [summary.content.contentTemplate];
+        }
     }
 
     /** @hidden */

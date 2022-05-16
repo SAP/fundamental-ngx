@@ -121,8 +121,9 @@ export function generateApprovalFlowGraphMetadata(graph: ApprovalFlowGraph): App
             nodeMetadata.isLastInParallel = metadata[node.targets[0]]?.parallelEnd;
             nodeMetadata.isFirstInParallel = metadata[nodeMetadata.parents[0]?.id]?.parallelStart;
 
-            const graphPrevColumn = graph.columns[column.index - 1];
-            const graphNextColumn = graph.columns[column.index + 1];
+            const columnIndex = column.index;
+            const graphPrevColumn = columnIndex ? graph.columns[columnIndex - 1] : undefined;
+            const graphNextColumn = columnIndex ? graph.columns[columnIndex + 1] : undefined;
 
             const prevHNode = graphPrevColumn?.nodes[nodeIndex];
             const nextHNode = graphNextColumn?.nodes[nodeIndex];
@@ -134,8 +135,8 @@ export function generateApprovalFlowGraphMetadata(graph: ApprovalFlowGraph): App
                     nodeMetadata.isLastInParallel ||
                     nextHNode?.blank);
 
-            if (nodeMetadata.parallelStart) {
-                const nextColumnNodes = graphNextColumn.nodes;
+            const nextColumnNodes = graphNextColumn?.nodes;
+            if (nodeMetadata.parallelStart && nextColumnNodes) {
                 const children = nextColumnNodes.filter((_node) => node.targets.includes(_node.id));
                 const firstChildIndex = nextColumnNodes.findIndex((_node) => _node.id === children[0].id);
                 const lastChildIndex = nextColumnNodes.findIndex(
@@ -147,8 +148,8 @@ export function generateApprovalFlowGraphMetadata(graph: ApprovalFlowGraph): App
                 }
             }
 
-            if (nodeMetadata.parallelEnd) {
-                const prevColumnNodes = graphPrevColumn.nodes;
+            const prevColumnNodes = graphPrevColumn?.nodes;
+            if (nodeMetadata.parallelEnd && prevColumnNodes) {
                 const firstParentIndex = prevColumnNodes.findIndex((_node) => _node.id === nodeMetadata.parents[0].id);
                 const lastParentIndex = prevColumnNodes.findIndex(
                     (_node) => _node.id === nodeMetadata.parents[nodeMetadata.parents.length - 1].id
@@ -189,7 +190,10 @@ function getPaths(rootNodes: ApprovalGraphNode[], nodes: ApprovalGraphNode[]): A
 
         while (queue.length) {
             const path = queue.pop();
-            const lastNodeInPath = path[path.length - 1];
+            let lastNodeInPath: ApprovalGraphNode | undefined;
+            if (path) {
+                lastNodeInPath = path[path.length - 1];
+            }
 
             /** Indicates about an error */
             if (!lastNodeInPath) {
@@ -197,11 +201,14 @@ function getPaths(rootNodes: ApprovalGraphNode[], nodes: ApprovalGraphNode[]): A
             }
 
             if (!lastNodeInPath.targets.length) {
-                paths.push(path);
+                paths.push(path!);
             } else {
                 lastNodeInPath.targets.forEach((targetId) => {
                     const targetNode = nodes.find((node) => node.id === targetId);
-                    const newPath = [...path, targetNode];
+                    if (!targetNode) {
+                        return;
+                    }
+                    const newPath = [...path!, targetNode];
 
                     queue.push(newPath);
                 });
@@ -311,7 +318,7 @@ function getBlankNodes(count: number, status: ApprovalStatus): ApprovalGraphNode
     const nodes: ApprovalGraphNode[] = [];
 
     let node: ApprovalGraphNode;
-    let nodeId: string;
+    let nodeId: string | undefined;
 
     for (let i = count; i > 0; i--) {
         node = Object.assign({}, getBlankApprovalGraphNode(), { targets: nodeId ? [nodeId] : [], status });
@@ -351,7 +358,7 @@ function sortPaths(paths: ApprovalGraphNode[][]): ApprovalGraphNode[][] {
 
     similarities = similarities.sort((a, b) => (a[2] > b[2] ? -1 : 1));
 
-    const usedPathIndexes = [];
+    const usedPathIndexes: number[] = [];
     const processedPaths: ApprovalGraphNode[][] = [];
 
     similarities.forEach((similarity) => {

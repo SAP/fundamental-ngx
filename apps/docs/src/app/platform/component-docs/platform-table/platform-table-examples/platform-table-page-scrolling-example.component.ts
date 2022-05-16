@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { delay, finalize } from 'rxjs/operators';
+import { finalize, delay } from 'rxjs/operators';
 
 import { FdDate } from '@fundamental-ngx/core/datetime';
 import { TableDataSource, TableDataProvider, TableState } from '@fundamental-ngx/platform/table';
@@ -58,8 +58,6 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
     totalItems = 0;
 
     fetch(tableState?: TableState): Observable<ExampleItem[]> {
-        const { currentPage, pageSize } = tableState.page;
-
         this.items = [...this.ALL_ITEMS];
 
         // apply searching
@@ -70,9 +68,9 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
         this.totalItems = this.items.length;
 
         // Apply paging
-        if (currentPage) {
-            const startIndex = (currentPage - 1) * pageSize;
-            this.items = this.items.slice(startIndex, startIndex + pageSize);
+        if (tableState?.page?.currentPage) {
+            const startIndex = (tableState.page.currentPage - 1) * tableState.page.pageSize;
+            this.items = this.items.slice(startIndex, startIndex + tableState.page.pageSize);
         }
 
         this.loading.next(true);

@@ -36,16 +36,16 @@ export class DialogDefaultComponent implements AfterViewInit {
 
     /** @hidden */
     _closeButtonClicked(): void {
-        this._defaultDialogContent.closeButtonCallback();
+        this._defaultDialogContent.closeButtonCallback?.();
     }
 
     /** @hidden */
     _approveButtonClicked(): void {
-        this._defaultDialogContent.approveButtonCallback();
+        this._defaultDialogContent.approveButtonCallback?.();
     }
 
     /** @hidden */
     _cancelButtonClicked(): void {
-        this._defaultDialogContent.cancelButtonCallback();
+        this._defaultDialogContent.cancelButtonCallback?.();
     }
 }

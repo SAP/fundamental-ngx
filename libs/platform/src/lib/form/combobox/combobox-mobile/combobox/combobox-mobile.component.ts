@@ -20,6 +20,7 @@ import {
 } from '@fundamental-ngx/core/mobile-mode';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { COMBOBOX_COMPONENT, ComboboxInterface } from '../../combobox.interface';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 @Component({
     selector: 'fdp-combobox-mobile',
@@ -36,10 +37,10 @@ export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> i
      * Control element, which will be rendered inside dialog.
      * List element, which will be rendered inside dialog.
      */
-    childContent: {
+    childContent: Nullable<{
         listTemplate: TemplateRef<any>;
         controlTemplate: TemplateRef<any>;
-    } = null;
+    }> = null;
 
     /** @hidden */
     private _selectedBackup: string;

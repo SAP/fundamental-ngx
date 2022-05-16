@@ -36,6 +36,7 @@ describe('Pagination Component', () => {
     });
 
     it('should default to first page', () => {
+        // @ts-expect-error fault tolerance test
         component.currentPage = null;
         fixture.detectChanges();
 

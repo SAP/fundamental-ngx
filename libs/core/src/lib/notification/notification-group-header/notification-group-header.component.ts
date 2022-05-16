@@ -12,9 +12,9 @@ import {
     ViewEncapsulation,
     Renderer2
 } from '@angular/core';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { ContentDensityService, RtlService } from '@fundamental-ngx/core/utils';
 import { Subscription } from 'rxjs';
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { NotificationGroupBaseDirective } from '../notification-utils/notification-group-base';
 @Component({
     selector: 'fd-notification-group-header',
@@ -63,11 +63,11 @@ export class NotificationGroupHeaderComponent extends NotificationGroupBaseDirec
 
     /** aria-label of the expand button */
     @Input()
-    expandAriaLabel: string;
+    expandAriaLabel: Nullable<string>;
 
     /** aria-labelledby of the expand button */
     @Input()
-    expandAriaLabelledBy: string;
+    expandAriaLabelledBy: Nullable<string>;
 
     /** Whether the button is in expanded state */
     @Input()
@@ -75,7 +75,7 @@ export class NotificationGroupHeaderComponent extends NotificationGroupBaseDirec
 
     /** Output event triggered when the Expand button is clicked */
     @Output()
-    expandedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+    expandedChange = new EventEmitter<boolean>();
 
     constructor(
         private _cdRef: ChangeDetectorRef,

@@ -20,12 +20,12 @@ export class SliderPositionDirective implements OnInit, OnChanges, OnDestroy {
     private _isRtl = false;
 
     /** @hidden */
-    private _rtlSubscription: Subscription;
+    private _rtlSubscription?: Subscription;
 
     /** @hidden */
     constructor(
         private readonly _elementRef: ElementRef<HTMLElement>,
-        @Optional() private readonly _rtlService: RtlService
+        @Optional() private readonly _rtlService: RtlService | null
     ) {}
 
     /** @hidden */
@@ -52,8 +52,8 @@ export class SliderPositionDirective implements OnInit, OnChanges, OnDestroy {
         if (this.vertical) {
             style.bottom = `${this.position}%`;
         } else {
-            style.left = !this._isRtl ? `${this.position}%` : null;
-            style.right = this._isRtl ? `${this.position}%` : null;
+            style.left = !this._isRtl ? `${this.position}%` : 'unset';
+            style.right = this._isRtl ? `${this.position}%` : 'unset';
         }
     }
 

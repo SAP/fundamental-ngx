@@ -118,7 +118,7 @@ export class PopoverComponent
     directiveRef: any;
 
     /** @hidden */
-    private _clickEventListener: () => void;
+    private _clickEventListener: null | (() => void);
 
     /** @hidden */
     private _mobileModeComponentRef: ComponentRef<PopoverMobileComponent>;
@@ -187,9 +187,9 @@ export class PopoverComponent
         if (
             // popoverControl will be undefined when popover is used from "fdPopoverTrigger"
             this.popoverControl?.elRef.nativeElement.children[0] === activeElement &&
-            activeElement.tagName !== 'INPUT' &&
-            activeElement.tagName !== 'TEXTAREA' &&
-            !activeElement.classList.contains(SELECT_CLASS_NAMES.selectControl)
+            activeElement?.tagName !== 'INPUT' &&
+            activeElement?.tagName !== 'TEXTAREA' &&
+            !activeElement?.classList.contains(SELECT_CLASS_NAMES.selectControl)
         ) {
             if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
                 // prevent page scrolling on Space keydown

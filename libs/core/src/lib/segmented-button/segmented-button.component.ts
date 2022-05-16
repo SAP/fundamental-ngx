@@ -20,6 +20,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export const isSelectedClass = 'fd-button--toggled';
 export const isDisabledClass = 'is-disabled';
 
+export type SegmentedButtonValue = string | (string | null)[] | null;
+
 /**
  * Container for grouped buttons.
  *
@@ -66,7 +68,7 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
      * - string, when there is no toggle mode and only 1 value can be chosen.
      * - array of strings, when there is toggle mode and more than 1 value can be chosen.
      */
-    private _currentValue: string | string[];
+    private _currentValue: SegmentedButtonValue;
 
     /** @hidden */
     private _isDisabled = false;
@@ -78,7 +80,7 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    onChange: (value: string | string[]) => void = () => {};
+    onChange: (value: SegmentedButtonValue) => void = () => {};
 
     /** @hidden */
     onTouched = (): void => {};
@@ -101,7 +103,7 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
      * @hidden
      * @param fn User defined function that handles the *onChange* event of the SegmentedButtons.
      */
-    registerOnChange(fn: (value: string | string[]) => void): void {
+    registerOnChange(fn: (value: SegmentedButtonValue) => void): void {
         this.onChange = fn;
     }
 
@@ -196,7 +198,7 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
     }
 
     /** @hidden */
-    private _pickButtonsByValues(values: string | string[]): void {
+    private _pickButtonsByValues(values: SegmentedButtonValue): void {
         if (!this._buttons) {
             return;
         }
@@ -205,7 +207,7 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
     }
 
     /** @hidden */
-    private _getButtonsByValues(values: string | string[]): ButtonComponent[] {
+    private _getButtonsByValues(values: SegmentedButtonValue): ButtonComponent[] {
         if (!values) {
             return [];
         }
@@ -257,7 +259,7 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
     }
 
     /** @hidden */
-    private _getButtonValue(buttonComponent: ButtonComponent): string {
+    private _getButtonValue(buttonComponent: ButtonComponent): string | null {
         const element = buttonComponent.elementRef().nativeElement;
         if (element instanceof HTMLButtonElement) {
             return element.value;
@@ -268,7 +270,7 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
     /** @hidden
      * Returns values depending on selected state of buttons
      */
-    private _getValuesBySelected(): string[] | string {
+    private _getValuesBySelected(): SegmentedButtonValue {
         if (!this._buttons) {
             return [];
         }

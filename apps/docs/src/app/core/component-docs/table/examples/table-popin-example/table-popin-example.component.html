@@ -19,7 +19,9 @@
                         {{ fruit.price }}
                     </td>
                     <td fd-table-cell [fitContent]="true" [noPadding]="true">
-                        <i fd-table-icon [glyph]="navigationArrow$ | async" [navigation]="true" role="presentation"></i>
+                        <ng-container *ngIf="navigationArrow$ | async as navigationArrow">
+                            <i fd-table-icon [glyph]="navigationArrow" [navigation]="true" role="presentation"></i>
+                        </ng-container>
                     </td>
                 </tr>
                 <tr fd-table-row [secondary]="true">
@@ -72,7 +74,9 @@
                         {{ fruit.dateOfExpire }}
                     </td>
                     <td fd-table-cell [fitContent]="true" [noPadding]="true">
-                        <i fd-table-icon [glyph]="navigationArrow$ | async" [navigation]="true" role="presentation"></i>
+                        <ng-container *ngIf="navigationArrow$ | async as navigationArrow">
+                            <i fd-table-icon [glyph]="navigationArrow" [navigation]="true" role="presentation"></i>
+                        </ng-container>
                     </td>
                 </tr>
                 <tr fd-table-row [secondary]="true">
@@ -124,7 +128,9 @@
                         {{ fruit.description }}
                     </td>
                     <td fd-table-cell [fitContent]="true" [noPadding]="true">
-                        <i fd-table-icon [glyph]="navigationArrow$ | async" [navigation]="true" role="presentation"></i>
+                        <ng-container *ngIf="navigationArrow$ | async as navigationArrow">
+                            <i fd-table-icon [glyph]="navigationArrow" [navigation]="true" role="presentation"></i>
+                        </ng-container>
                     </td>
                 </tr>
             </ng-container>
@@ -168,7 +174,9 @@
                         {{ fruit.price }}
                     </td>
                     <td fd-table-cell [fitContent]="true" [noPadding]="true">
-                        <i fd-table-icon [glyph]="navigationArrow$ | async" [navigation]="true" role="presentation"></i>
+                        <ng-container *ngIf="navigationArrow$ | async as navigationArrow">
+                            <i fd-table-icon [glyph]="navigationArrow" [navigation]="true" role="presentation"></i>
+                        </ng-container>
                     </td>
                 </tr>
                 <tr fd-table-row [secondary]="true" [attr.aria-selected]="fruit.checked">

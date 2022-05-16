@@ -1,4 +1,3 @@
-import { isDevMode } from '@angular/core';
 import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
 import { SearchInput } from '@fundamental-ngx/platform/search-field';
 import { isSelectItem, SelectItem } from '@fundamental-ngx/platform/shared';
@@ -30,7 +29,7 @@ export class TableDataProvider<T> {
     /** Additional set of filters provided by outside component. */
     protected filterBy: CollectionFilterAndGroup[];
     /** Additional search query provided by outside component. */
-    protected searchInput: SearchInput;
+    protected searchInput?: SearchInput;
 
     /**
      * Method for retrieving the data.
@@ -145,9 +144,10 @@ export class TableDataProvider<T> {
             case 'number':
                 result = this.filterNumber(item, filter as CollectionNumberFilter);
                 break;
-            case 'date':
+            case 'date': {
                 result = this.filterDate(item, filter as CollectionDateFilter, this.dateTimeAdapter);
                 break;
+            }
             case 'string':
             default:
                 result = Array.isArray(filter.value)
@@ -289,9 +289,9 @@ export class TableDataProvider<T> {
      * @param adapter
      * @returns whether or not item should be included in data source array.
      */
-    protected filterDate<D = FdDate>(item: T, filter: CollectionDateFilter, adapter: DatetimeAdapter<D>): boolean {
-        if (!adapter && isDevMode()) {
-            console.error(
+    protected filterDate<D = FdDate>(item: T, filter: CollectionDateFilter, adapter?: DatetimeAdapter<D>): boolean {
+        if (!adapter) {
+            throw new Error(
                 'In order to filter date columns, please provide DateTime adapter in your TableDataProvider constructor.'
             );
         }

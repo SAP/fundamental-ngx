@@ -101,7 +101,7 @@ export class CardComponent implements OnChanges, OnInit, CssClassBuilder, OnDest
             CLASS_NAME.card,
             this.cardType ? getCardModifierClassNameByCardType(this.cardType) : null,
             this.compact ? CLASS_NAME.cardCompact : null
-        ];
+        ].filter((v): v is string => !!v);
     }
 
     /** @hidden */

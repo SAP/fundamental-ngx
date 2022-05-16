@@ -28,7 +28,7 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
     public open<T = any>(content: DialogContentType, dialogConfig?: DialogConfig<T>): DialogRef<T> {
         const dialogRef = new DialogRef();
 
-        dialogConfig = this._applyDefaultConfig(dialogConfig, this._defaultConfig || new DialogConfig());
+        dialogConfig = this._applyDefaultConfig(dialogConfig || {}, this._defaultConfig || new DialogConfig());
         dialogRef.data = dialogConfig.data;
 
         const injector = Injector.create({

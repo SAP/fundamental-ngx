@@ -43,7 +43,7 @@ describe('MenuTriggerDirective', () => {
         const listenersSpy = spyOn<any>(directive, '_subscribeToMenu');
         const attributesSpy = spyOn<any>(directive, '_setAriaAttributes');
 
-        directive.menu = null;
+        directive.menu = undefined;
 
         expect(setTriggerSpy).not.toHaveBeenCalled();
         expect(listenersSpy).not.toHaveBeenCalled();
@@ -66,7 +66,7 @@ describe('MenuTriggerDirective', () => {
         expect(directive.ariaControls).toBeFalsy();
 
         menu.isOpen = true;
-        menu.isOpenChange.emit(true);
+        menu.isOpenChange!.emit(true);
 
         tick();
 

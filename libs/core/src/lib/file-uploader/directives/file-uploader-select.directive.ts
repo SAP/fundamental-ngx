@@ -18,8 +18,8 @@ export class FileUploaderSelectDirective {
 
     /** @hidden */
     @HostBinding('attr.multiple')
-    get multipleBinding(): string {
-        return this.multiple ? '' : undefined;
+    get multipleBinding(): boolean | undefined {
+        return this.multiple ? true : undefined;
     }
 
     /** @hidden */
@@ -28,8 +28,8 @@ export class FileUploaderSelectDirective {
         if (event.target instanceof HTMLInputElement) {
             const elRef = <HTMLInputElement>event.target;
             const files = elRef.files;
-            const fileArray = Array.from(files);
-            if (files.length) {
+            if (files?.length) {
+                const fileArray = Array.from(files);
                 this.fileSelected.emit(fileArray);
             }
         }

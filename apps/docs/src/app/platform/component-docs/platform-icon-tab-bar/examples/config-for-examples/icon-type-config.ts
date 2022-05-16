@@ -1,4 +1,4 @@
-import { TabConfig } from '../../platform-icon-tab-bar-docs.component';
+import { TabConfig } from '@fundamental-ngx/platform/icon-tab-bar';
 
 export const iconTypeConfig: TabConfig[] = [
     {

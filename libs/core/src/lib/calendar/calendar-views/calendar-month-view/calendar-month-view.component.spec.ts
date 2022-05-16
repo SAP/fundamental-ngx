@@ -3,6 +3,7 @@ import { By } from '@angular/platform-browser';
 
 import { FdDate, FdDatetimeModule } from '../../../datetime';
 import { CalendarService } from '../../calendar.service';
+import { CalendarMonth } from '../../models/calendar-month';
 import { CalendarMonthViewComponent } from './calendar-month-view.component';
 
 describe('CalendarMonthViewComponent', () => {
@@ -35,7 +36,7 @@ describe('CalendarMonthViewComponent', () => {
 
     it('Should have 12 months', () => {
         expect(component._calendarMonthListGrid).toBeDefined();
-        const monthList: string[] = [].concat(...component._calendarMonthListGrid);
+        const monthList = ([] as CalendarMonth[]).concat(...component._calendarMonthListGrid);
         expect(monthList.length).toBe(12);
     });
 

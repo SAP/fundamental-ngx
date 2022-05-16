@@ -101,11 +101,14 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
         const resize = this._getResizeFunction();
         const moveOffset = this._getMoveOffsetFunction();
         const resizeContainer = this._findResizeContainer();
+        if (!resizeContainer) {
+            return;
+        }
         const isBoundaryOverflow = this._getBoundaryOverflowFunction(resizeContainer);
 
-        const mouseUpEvent$ = fromEvent(window, 'mouseup');
-        const mouseMoveEvent$ = fromEvent(resizeContainer, 'mousemove');
-        const mouseDownEvent$ = fromEvent(this.resizeHandleReference.elementRef.nativeElement, 'mousedown');
+        const mouseUpEvent$ = fromEvent<MouseEvent>(window, 'mouseup');
+        const mouseMoveEvent$ = fromEvent<MouseEvent>(resizeContainer, 'mousemove');
+        const mouseDownEvent$ = fromEvent<MouseEvent>(this.resizeHandleReference.elementRef.nativeElement, 'mousedown');
 
         const resizeActive$ = merge(mouseDownEvent$.pipe(mapTo(true)), mouseUpEvent$.pipe(mapTo(false)));
         const emitResizableEvents$ = this._getResizeEventsNotifiers(resizeActive$);
@@ -174,7 +177,7 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
     }
 
     /** @hidden Return boundary container */
-    private _findResizeContainer(): Element {
+    private _findResizeContainer(): Element | null {
         let resizeContainer: Element | null;
         if (typeof this.resizeBoundary === 'string') {
             resizeContainer = this._elementRef.nativeElement.closest(this.resizeBoundary);

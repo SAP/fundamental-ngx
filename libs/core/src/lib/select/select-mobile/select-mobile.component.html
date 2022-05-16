@@ -20,13 +20,13 @@
             <fd-button-bar
                 *ngIf="mobileConfig?.approveButtonText"
                 fdType="emphasized"
-                [label]="mobileConfig?.approveButtonText"
+                [label]="mobileConfig.approveButtonText!"
                 (click)="_approve()"
             >
             </fd-button-bar>
             <fd-button-bar
                 *ngIf="mobileConfig?.cancelButtonText"
-                [label]="mobileConfig?.cancelButtonText"
+                [label]="mobileConfig.cancelButtonText!"
                 (click)="_cancel()"
             >
             </fd-button-bar>

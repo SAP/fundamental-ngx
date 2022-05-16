@@ -65,7 +65,8 @@ describe('SplitterResizerComponent', () => {
         component._onKeydown(new KeyboardEvent('keydown', { key: 'ArrowLeft' }));
         fixture.detectChanges();
 
-        let initialValue = component._start;
+        let initialValue = component._start as number;
+        expect(initialValue).toBeDefined();
         let changedValue = initialValue - 1;
 
         expect(startResizeSpy).toHaveBeenCalled();
@@ -75,7 +76,8 @@ describe('SplitterResizerComponent', () => {
         component._onKeydown(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
         fixture.detectChanges();
 
-        initialValue = component._start;
+        initialValue = component._start as number;
+        expect(initialValue).toBeDefined();
         changedValue = initialValue + 1;
 
         expect(startResizeSpy).toHaveBeenCalled();

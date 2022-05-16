@@ -1,16 +1,27 @@
+import { Nullable } from '@fundamental-ngx/core/shared';
+
 /**
  * Base Calendar Cell
  */
 export interface BaseCalendarCell {
-    label: string; // Representation in string
-    id?: string; // cell unique id
-    current?: boolean; // currently active (today)
-    selected?: boolean; // selected cell
-    disabled?: boolean; // disabled cell
-    tabIndex?: number; // cell tabindex
-    ariaLabel?: string; // aria-label
-    ariaLabelledBy?: string; // aria-labelledby
-    index?: number; // list index
+    /** Representation in string */
+    label: string;
+    /** cell unique id */
+    id?: string;
+    /** currently active (today) */
+    current?: boolean;
+    /** selected cell */
+    selected?: boolean;
+    /** disabled cell */
+    disabled?: boolean;
+    /** cell tabindex */
+    tabIndex?: number;
+    /** aria-label */
+    ariaLabel?: string;
+    /** aria-labelledby */
+    ariaLabelledBy?: string;
+    /** list index */
+    index?: number;
 }
 
 export interface FocusableCalendarView {
@@ -45,3 +56,7 @@ export class DefaultCalendarActiveCellStrategy<
         return cells[0] || null;
     }
 }
+
+export type EscapeFocusFunction = Nullable<(event?: KeyboardEvent) => void>;
+
+export type DisableDateFunction<D> = Nullable<(date: D) => boolean>;

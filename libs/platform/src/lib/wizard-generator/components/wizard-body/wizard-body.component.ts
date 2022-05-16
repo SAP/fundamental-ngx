@@ -10,10 +10,12 @@ import {
     TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
-import { Subject } from 'rxjs';
+import { firstValueFrom, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
 import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
+import { Nullable } from '@fundamental-ngx/core/shared';
+
 import { PreparedWizardGeneratorItem, WizardGeneratorItem } from '../../interfaces/wizard-generator-item.interface';
 import { WizardNavigationButtons } from '../../interfaces/wizard-navigation-buttons.interface';
 import { WizardGeneratorService } from '../../wizard-generator.service';
@@ -40,7 +42,7 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
      * @description Button labels to be used in Wizard navigation
      */
     @Input()
-    navigationButtonLabels: WizardNavigationButtons;
+    navigationButtonLabels: Required<WizardNavigationButtons>;
 
     /**
      * @description Whether or not to append the step to the wizard. If false, each step will be displayed on a different page.
@@ -54,7 +56,7 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
      * is the combined height of the Shellbar, wizard header and wizard footer.
      */
     @Input()
-    contentHeight: string;
+    contentHeight: Nullable<string>;
 
     /**
      * @description Whether or not Wizard is currently on the first step
@@ -96,11 +98,11 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
      * User-defined template for summary step.
      */
     @Input()
-    customSummaryStepTemplate: TemplateRef<HTMLElement>;
+    customSummaryStepTemplate?: TemplateRef<HTMLElement>;
 
     /** User-defined template for "Review" button */
     @Input()
-    reviewButtonTemplate: TemplateRef<HTMLElement>;
+    reviewButtonTemplate?: TemplateRef<HTMLElement>;
 
     /**
      * @description Is current step is summary step.
@@ -222,7 +224,7 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
                 return false;
             }
 
-            return await this._wizardGeneratorService.validateStepForms(true).toPromise();
+            return await firstValueFrom(this._wizardGeneratorService.validateStepForms(true));
         };
     }
 

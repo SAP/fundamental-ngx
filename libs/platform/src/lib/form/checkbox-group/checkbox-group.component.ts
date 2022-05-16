@@ -158,20 +158,20 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
         const queryList = source === 'list' ? this.viewCheckboxes : this.contentCheckboxes;
         const target = queryList.get(index);
 
-        const isChecked = this._selectionModel.isSelected(target.values.trueValue);
+        const isChecked = this._selectionModel.isSelected(target?.values.trueValue);
         this._rangeSelector.onRangeElementToggled(index, event);
 
-        if (!this._rangeSelector.lastRangeSelectionState.isRangeSelection) {
+        if (!this._rangeSelector.lastRangeSelectionState?.isRangeSelection) {
             // no need to proceed, if it's not a range selection - current checkbox is already updated
             return;
         }
 
         this._rangeSelector.applyValueToEachInRange((idx) => {
             const checkbox = queryList.get(idx);
-            if (checkbox.disabled) {
+            if (checkbox?.disabled) {
                 return;
             }
-            const checkboxValue = checkbox.values.trueValue;
+            const checkboxValue = checkbox?.values.trueValue;
             if (isChecked) {
                 this._selectionModel.select(checkboxValue);
             } else {

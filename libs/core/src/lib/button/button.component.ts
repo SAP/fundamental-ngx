@@ -51,7 +51,7 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
      * Calculate aria-label attribute
      * @hidden
      */
-    get buttonArialabel(): string {
+    get buttonArialabel(): string | null {
         if (this.ariaLabel) {
             return this.ariaLabel;
         }

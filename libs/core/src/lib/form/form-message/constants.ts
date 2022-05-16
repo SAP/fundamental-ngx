@@ -1,4 +1,4 @@
-import { MessageStates } from './form-message.component';
+import { FormStates } from '@fundamental-ngx/core/shared';
 
 export const CSS_CLASS_NAME = {
     message: 'fd-form-message',
@@ -10,7 +10,7 @@ export const CSS_CLASS_NAME = {
     messageInformation: 'fd-form-message--information'
 };
 
-export function getTypeClassName(size: MessageStates): string {
+export function getTypeClassName(size: FormStates): string | null {
     switch (size) {
         case 'error':
             return CSS_CLASS_NAME.messageError;

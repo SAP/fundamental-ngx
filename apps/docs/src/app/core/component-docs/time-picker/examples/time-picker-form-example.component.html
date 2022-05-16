@@ -4,9 +4,9 @@
         <fd-time-picker
             inputId="timePickerFormExample1"
             formControlName="time"
-            [state]="customForm.get('time').valid ? 'success' : 'error'"
+            [state]="customForm.get('time')?.valid ? 'success' : 'error'"
             [required]="true"
-            [message]="customForm.get('time').valid ? 'Valid Time' : 'Invalid Time'"
+            [message]="customForm.get('time')?.valid ? 'Valid Time' : 'Invalid Time'"
         >
         </fd-time-picker>
         <br />

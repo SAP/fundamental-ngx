@@ -105,7 +105,7 @@
     <div
         class="fdp-search-field__suggestion-dropdown"
         [attr.dir]="_dir"
-        *ngIf="(_dropdownValues$ | async | suggestionMatches: inputText:mobile)?.length > 0"
+        *ngIf="(_dropdownValues$ | async | suggestionMatches: inputText:mobile)?.length"
     >
         <nav
             class="fd-menu"

@@ -44,19 +44,19 @@ export class PlatformTimePickerReactiveExampleComponent {
     }
 
     setNull(): void {
-        this.timePickerForm.get('nullValidity').setValue(null);
+        this.timePickerForm.get('nullValidity')?.setValue(null);
         this.markControlAsTouched('nullValidity');
     }
 
     setValid(): void {
-        this.timePickerForm.get('nullValidity').setValue(new FdDate().setTime(0, 0, 0));
+        this.timePickerForm.get('nullValidity')?.setValue(new FdDate().setTime(0, 0, 0));
         this.markControlAsTouched('nullValidity');
     }
 
     private markControlAsTouched(controlName: string): void {
         const control = this.timePickerForm.get(controlName);
 
-        if (control.untouched) {
+        if (control?.untouched) {
             control.markAsTouched();
         }
     }

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 
 import { DynamicComponentConfig } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 import { DialogPosition } from '../utils/dialog-position.class';
 
@@ -33,13 +34,13 @@ export class DialogConfigBase<T> implements DynamicComponentConfig {
     ariaModal?: boolean = false;
 
     /** Aria label for the dialog component element. */
-    ariaLabel?: string = null;
+    ariaLabel?: Nullable<string>;
 
     /** Id of the element that labels the dialog. */
-    ariaLabelledBy?: string = null;
+    ariaLabelledBy?: Nullable<string>;
 
     /** Id of the element that describes the dialog. */
-    ariaDescribedBy?: string = null;
+    ariaDescribedBy?: Nullable<string>;
 
     /** Whether the dialog should have a backdrop. */
     hasBackdrop?: boolean = true;

@@ -6,8 +6,8 @@ import { Component } from '@angular/core';
     styleUrls: ['./list-selection-example.component.scss']
 })
 export class ListSelectionExampleComponent {
-    selectionValue: string = null;
-    selectionValueTwo: string = null;
+    selectionValue: string | null = null;
+    selectionValueTwo: string | null = null;
 
     cozyObject = [
         {

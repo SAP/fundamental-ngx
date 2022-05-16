@@ -95,7 +95,7 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
     _afterInputAddons: InputGroupAddonComponent[] = [];
 
     /** @hidden */
-    get _controlStateClass(): string {
+    get _controlStateClass(): string | null {
         const state = this.state;
         return state ? `is-${state}` : null;
     }
@@ -208,7 +208,7 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
         const before = this._beforeInputAddons || [];
         const after = this._afterInputAddons || [];
         [...before, ...after].forEach((addon) => {
-            addon.contentDensity = this._contentDensity;
+            addon.contentDensity = this._contentDensity ?? 'cozy';
             addon.disabled = this.disabled;
         });
     }

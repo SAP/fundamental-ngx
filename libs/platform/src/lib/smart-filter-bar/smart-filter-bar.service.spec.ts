@@ -58,7 +58,7 @@ describe('SmartFilterBarService', () => {
     it('should return applicable filter condition operators', () => {
         service.addCustomFilter(filterConfig);
         const operators = service.getApplicableFilterConditions('test');
-        expect(operators).toEqual(filterConfig.filterStrategies);
+        expect(operators).toEqual(filterConfig.filterStrategies!);
     });
 
     it('should use custom value renderer', async () => {

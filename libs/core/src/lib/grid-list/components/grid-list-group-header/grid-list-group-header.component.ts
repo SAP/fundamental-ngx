@@ -1,5 +1,5 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
-
+import { Nullable } from '@fundamental-ngx/core/shared';
 @Component({
     selector: 'fd-grid-list-group-header',
     templateUrl: './grid-list-group-header.component.html',
@@ -11,5 +11,5 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 export class GridListGroupHeaderComponent {
     /** Sets the `aria-label` attribute to the element. */
     @Input()
-    ariaLabel: string;
+    ariaLabel: Nullable<string>;
 }

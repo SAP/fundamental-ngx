@@ -10,8 +10,8 @@ import {
     OnChanges,
     ChangeDetectorRef
 } from '@angular/core';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 import { CSS_CLASS_NAME } from '../../constants';
 
@@ -37,7 +37,7 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
      * Link to Author of feed
      */
     @Input()
-    authorLink: string;
+    authorLink: Nullable<string>;
 
     /**
      * Feed text

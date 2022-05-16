@@ -91,11 +91,11 @@ export class LayoutGridColDirective implements CssClassBuilder, OnInit, OnChange
             this.getCssClassWithColWidth(CSS_CLASS_NAME.lgColOffsetPrefix, this.colOffsetLg),
             this.getCssClassWithColWidth(CSS_CLASS_NAME.xlColOffsetPrefix, this.colOffsetXl),
             this.class
-        ];
+        ].filter((v): v is string => !!v);
     }
 
     /** @hidden */
-    getCssClassWithColWidth(classPrefix: string, colWidth: NumberInput): string {
+    getCssClassWithColWidth(classPrefix: string, colWidth: NumberInput): string | null {
         if (!colWidth) {
             return null;
         }

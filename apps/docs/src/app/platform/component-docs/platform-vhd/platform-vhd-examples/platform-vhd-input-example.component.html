@@ -1,7 +1,7 @@
 <div fd-form-item>
     <label fd-form-label for="test-selection-type-single">Selection type: single</label>
     <fd-input-group>
-        <input fd-input-group-input fd-form-control id="test-selection-type-single" [value]="values.single?.name" />
+        <input fd-input-group-input fd-form-control id="test-selection-type-single" [value]="valuesSingle?.name" />
         <span fd-input-group-addon [button]="true">
             <button
                 fd-button
@@ -24,7 +24,7 @@
     searchSelection="single"
     tabs="select"
     [dataSource]="dataSource"
-    (valueChange)="values.single = $event.selected[0]"
+    (valueChange)="vhd1ValueChange($event)"
     headerId="fdp-vhd-header-4"
 >
     <fdp-value-help-dialog-search placeholder="Search..."></fdp-value-help-dialog-search>
@@ -39,10 +39,10 @@
 <br />
 <div fd-form-item>
     <label fd-form-label for="test-selection-type-single">Selection type: multi</label>
-    <fd-token fd-toolbar-item *ngFor="let item of values.multi" [compact]="true" [readOnly]="true">
+    <fd-token fd-toolbar-item *ngFor="let item of valuesMulti" [compact]="true" [readOnly]="true">
         {{ item.name }}
     </fd-token>
-    <br *ngIf="values.multi?.length" />
+    <br *ngIf="valuesMulti && valuesMulti?.length" />
     <button
         fd-button
         [compact]="true"
@@ -60,7 +60,7 @@
     searchSelection="multi"
     tabs="select"
     [dataSource]="dataSource"
-    (valueChange)="values.multi = $event.selected"
+    (valueChange)="vhd2ValueChange($event)"
     headerId="fdp-vhd-header-5"
 >
     <fdp-value-help-dialog-search placeholder="Search..."></fdp-value-help-dialog-search>
@@ -76,7 +76,7 @@
 <div fd-form-item>
     <label fd-form-label for="test-selection-type-once">Selection type: once</label>
     <fd-input-group>
-        <input fd-input-group-input fd-form-control id="test-selection-type-once" [value]="values.once?.name" />
+        <input fd-input-group-input fd-form-control id="test-selection-type-once" [value]="valuesOnce?.name" />
         <span fd-input-group-addon [button]="true">
             <button
                 fd-button
@@ -100,7 +100,7 @@
     searchSelection="once"
     tabs="select"
     [dataSource]="dataSource"
-    (valueChange)="values.once = $event.selected[0]"
+    (valueChange)="vhd3ValueChange($event)"
     headerId="fdp-vhd-header-6"
 >
     <fdp-value-help-dialog-search placeholder="Search..."></fdp-value-help-dialog-search>

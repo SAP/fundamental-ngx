@@ -7,7 +7,7 @@
             [navigationButtons]="false"
             [displaySummaryStep]="displaySummaryStep"
             [responsivePaddings]="responsivePaddings"
-            [navigationButtonLabels]="navigationButtonLabels"
+            [navigationButtonLabels]="_navigationButtonLabels"
             [customSummaryStepTemplate]="summaryStepTemplate"
             [reviewButtonTemplate]="reviewButtonTemplate"
             [hidden]="!wizardCreated"
@@ -27,9 +27,9 @@
                     <ng-template #defaultGoBackButtonTemplate>
                         <fdp-button
                             class="fd-bar__element"
-                            [contentDensity]="navigationButtonLabels.goBack.contentDensity"
-                            [buttonType]="navigationButtonLabels.goBack.type"
-                            [label]="navigationButtonLabels.goBack.label"
+                            [contentDensity]="_navigationButtonLabels.goBack.contentDensity"
+                            [buttonType]="_navigationButtonLabels.goBack.type"
+                            [label]="_navigationButtonLabels.goBack.label"
                             (click)="goBack()"
                         ></fdp-button>
                     </ng-template>
@@ -42,18 +42,18 @@
                     <ng-template #defaultGoNextButtonTemplate>
                         <fdp-button
                             class="fd-bar__element"
-                            [contentDensity]="navigationButtonLabels.goNext.contentDensity"
-                            [buttonType]="navigationButtonLabels.goNext.type"
-                            [label]="navigationButtonLabels.goNext.label"
+                            [contentDensity]="_navigationButtonLabels.goNext.contentDensity"
+                            [buttonType]="_navigationButtonLabels.goNext.type"
+                            [label]="_navigationButtonLabels.goNext.label"
                             (click)="goNext()"
                         ></fdp-button>
                     </ng-template>
                     <ng-template #defaultReviewButtonTemplate>
                         <fdp-button
                             class="fd-bar__element"
-                            [contentDensity]="navigationButtonLabels.review.contentDensity"
-                            [buttonType]="navigationButtonLabels.review.type"
-                            [label]="navigationButtonLabels.review.label"
+                            [contentDensity]="_navigationButtonLabels.review.contentDensity"
+                            [buttonType]="_navigationButtonLabels.review.type"
+                            [label]="_navigationButtonLabels.review.label"
                             (click)="goNext()"
                         ></fdp-button>
                     </ng-template>
@@ -79,9 +79,9 @@
                     <ng-template #defaultFinishButtonTemplate>
                         <fdp-button
                             class="fd-bar__element"
-                            [contentDensity]="navigationButtonLabels.finish.contentDensity"
-                            [buttonType]="navigationButtonLabels.finish.type"
-                            [label]="navigationButtonLabels.finish.label"
+                            [contentDensity]="_navigationButtonLabels.finish.contentDensity"
+                            [buttonType]="_navigationButtonLabels.finish.type"
+                            [label]="_navigationButtonLabels.finish.label"
                             (click)="finish()"
                         ></fdp-button>
                     </ng-template>
@@ -94,9 +94,9 @@
                     <ng-template #defaultCancelButtonTemplate>
                         <fdp-button
                             class="fd-bar__element"
-                            [contentDensity]="navigationButtonLabels.cancel.contentDensity"
-                            [buttonType]="navigationButtonLabels.cancel.type"
-                            [label]="navigationButtonLabels.cancel.label"
+                            [contentDensity]="_navigationButtonLabels.cancel.contentDensity"
+                            [buttonType]="_navigationButtonLabels.cancel.type"
+                            [label]="_navigationButtonLabels.cancel.label"
                             (click)="cancel()"
                         ></fdp-button>
                     </ng-template>

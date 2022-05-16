@@ -1,15 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SmartFilterBarConditionsDialogComponent } from './smart-filter-bar-conditions-dialog.component';
-import {
-    DynamicFormFieldItem,
-    FilterableColumnDataType,
-    PlatformSmartFilterBarModule,
-    SmartFilterBarConditionBuilder
-} from '@fundamental-ngx/platform';
-import { DialogConfig, DialogRef } from '@fundamental-ngx/core';
+import { FilterableColumnDataType } from '@fundamental-ngx/platform/table';
+import { DynamicFormFieldItem } from '@fundamental-ngx/platform/form';
+import { DialogConfig, DialogRef } from '@fundamental-ngx/core/dialog';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { whenStable } from '@fundamental-ngx/core/tests';
+import { SmartFilterBarConditionBuilder } from './../../interfaces/smart-filter-bar-condition';
+import { PlatformSmartFilterBarModule } from './../../smart-filter-bar.module';
 
 const mockData: SmartFilterBarConditionBuilder = {
     header: 'Test',
@@ -88,12 +86,12 @@ describe('SmartFilterBarConditionsDialogComponent', () => {
     });
 
     it('should properly parse predefined conditions', () => {
-        const formItems = component._formItems;
+        const formItems = component._formItems as DynamicFormFieldItem[][];
 
-        formItems.forEach((form: DynamicFormFieldItem[], index: number) => {
-            const operator = form.find((field) => field.name === 'operator').default;
-            const firstValue = form.find((field) => field.name === 'value').default;
-            const secondValue = form.find((field) => field.name === 'value2').default;
+        formItems.forEach((form, index) => {
+            const operator = form.find((field) => field.name === 'operator')?.default;
+            const firstValue = form.find((field) => field.name === 'value')?.default;
+            const secondValue = form.find((field) => field.name === 'value2')?.default;
 
             expect(operator).toEqual(mockData.conditions[index].operator);
             expect(firstValue).toEqual(mockData.conditions[index].value);

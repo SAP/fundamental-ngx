@@ -187,7 +187,7 @@ describe('Simple PanelComponent', () => {
     });
 
     it('Should emit a panelExpandChange event when the Panel is expanded and collapsed', async () => {
-        let changeEvent: PanelExpandChangeEvent;
+        let changeEvent: PanelExpandChangeEvent | undefined;
         const onExpandChangeSpy = spyOn(component, 'onExpandChange').and.callFake((event: PanelExpandChangeEvent) => {
             changeEvent = event;
         });
@@ -195,13 +195,14 @@ describe('Simple PanelComponent', () => {
 
         toggleButton.click();
         fixture.detectChanges();
+        expect(changeEvent).toBeDefined();
         expect(onExpandChangeSpy.calls.count()).toEqual(1);
-        expect(changeEvent.payload).toBeFalse();
+        expect(changeEvent!.payload).toBeFalse();
 
         toggleButton.click();
         fixture.detectChanges();
         expect(onExpandChangeSpy.calls.count()).toEqual(2);
-        expect(changeEvent.payload).toBeTrue();
+        expect(changeEvent!.payload).toBeTrue();
 
         expect(changeEvent instanceof PanelExpandChangeEvent).toBeTrue();
     });

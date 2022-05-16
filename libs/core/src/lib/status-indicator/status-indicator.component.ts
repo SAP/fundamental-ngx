@@ -9,8 +9,8 @@ import {
     ChangeDetectorRef,
     OnInit
 } from '@angular/core';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 export type StatusIndicatorSize = 'sm' | 'md' | 'lg' | 'xl';
 export type StatusIndicatorColor = 'negative' | 'critical' | 'positive';
@@ -18,9 +18,8 @@ export type LablePosition = 'left' | 'right' | 'top' | 'bottom';
 export type FillingType = 'radial' | 'angled' | 'linearup' | 'lineardown' | 'linearleft';
 export type FillingDirection = 'clockwise' | 'counterclockwise';
 
-export interface Point {
-    x: number;
-    y: number;
+export class Point {
+    constructor(public x: number, public y: number) {}
 }
 
 @Component({
@@ -90,11 +89,11 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
 
     /** Aria label for the Status Indicator. */
     @Input()
-    ariaLabel: string = null;
+    ariaLabel: Nullable<string>;
 
     /** Aria defines role description for the Status Indicator. */
     @Input()
-    ariaRoleDescription: string = null;
+    ariaRoleDescription: Nullable<string>;
 
     /** Aria Focusable for the Status Indicator. */
     @Input()
@@ -102,15 +101,15 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
 
     /** Aria Role for the Status Indicator. */
     @Input()
-    role: string = null;
+    role: Nullable<string>;
 
     /** Aria Value Text for the Status Indicator. */
     @Input()
-    ariaValueText: string = null;
+    ariaValueText: Nullable<string>;
 
     /** Aria title for the status indicator. */
     @Input()
-    title: string = null;
+    title: Nullable<string>;
 
     /** defines the label position the value can be 'left' | 'right' | 'top' | 'bottom' */
     @Input()
@@ -282,8 +281,7 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
 
     /** @hidden */
     private _assignBinaryValue(binaryString: string): void {
-        let binaryValue = [];
-        binaryValue = binaryString.split(',');
+        const binaryValue = binaryString.split(',');
         this.x1 = binaryValue[0];
         this.y1 = binaryValue[1];
         this.x2 = binaryValue[2];
@@ -291,107 +289,116 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
     }
 
     /** @hidden */
-    private _createPoint(iX, iY): Point {
-        return { x: iX, y: iY };
-    }
-
-    /** @hidden */
-    private _getPolygonPointsForCircularFilling(iValue, _oBoundingBoxSvg): Array<Point> {
-        // eslint-disable-next-line @typescript-eslint/no-this-alias
-        const that = this;
-        const iAngle = 3.6 * iValue;
-        const oBox = _oBoundingBoxSvg;
-        const aPoints = [];
-        let iXDifferenceFromBoundaryCentre: number;
-        let iYDifferenceFromBoundaryCentre: number;
-        let oPolygonPoint: Point;
+    private _getPolygonPointsForCircularFilling(value: number, boundingBoxSvg: DOMRect): Array<Point> {
+        const angle = 3.6 * value;
+        const points: Point[] = [];
+        let xDifferenceFromBoundaryCentre: number;
+        let yDifferenceFromBoundaryCentre: number;
+        let polygonPoint: Point;
 
         // starts at 12, the algorithm computes the coordination for clockwise direction only
         // counter clockwise direction is managed by symmetry
-        const oStartPoint = this._createPoint(oBox.x + oBox.width / 2, oBox.y);
-        const oCentrePoint = this._createPoint(oBox.x + oBox.width / 2, oBox.y + oBox.height / 2);
+        const oStartPoint = new Point(boundingBoxSvg.x + boundingBoxSvg.width / 2, boundingBoxSvg.y);
+        const oCentrePoint = new Point(
+            boundingBoxSvg.x + boundingBoxSvg.width / 2,
+            boundingBoxSvg.y + boundingBoxSvg.height / 2
+        );
 
         // Reflects x coordinate by centre point for Counter Clockwise type
-        function _adjustIfCounterClockwise(oPoint: Point): Point {
-            const oResult = Object.assign({}, oPoint);
+        const _adjustIfCounterClockwise = (oPoint: Point): Point => {
+            const res = Object.assign({}, oPoint);
 
-            if (that._fillDirection === 'counterclockwise') {
+            if (this._fillDirection === 'counterclockwise') {
                 const iXDistanceFromCentre = oPoint.x - oCentrePoint.x;
-                oResult.x = oCentrePoint.x - iXDistanceFromCentre;
+                res.x = oCentrePoint.x - iXDistanceFromCentre;
             }
 
-            return oResult;
-        }
+            return res;
+        };
 
         // Boundary centre is given by angle distance from the beginning (0°). The returned difference is related
         // to x or y coordinate depending on boundary centre angle (e.g. 0° -> x, 90° -> y, 180° -> x  270° -> y).
         // Boundary length is length of the corresponding side of bounding box (width for x, height for y).
-        function computeDifferenceFromBoundaryCentre(
+        const computeDifferenceFromBoundaryCentre = (
             inAngle: number,
             iBoundaryCentreAngle: number,
             iBoundaryLength: number
-        ): number {
+        ): number => {
             const tan = Math.tan(((iBoundaryCentreAngle - inAngle) * Math.PI) / 180);
 
             return (tan * iBoundaryLength) / 2;
+        };
+
+        points.push(oStartPoint);
+
+        if (0 < angle && angle < 45) {
+            xDifferenceFromBoundaryCentre = computeDifferenceFromBoundaryCentre(angle, 0, boundingBoxSvg.height);
+            polygonPoint = new Point(oStartPoint.x - xDifferenceFromBoundaryCentre, oStartPoint.y);
+            points.push(_adjustIfCounterClockwise(polygonPoint));
         }
 
-        aPoints.push(oStartPoint);
-
-        if (0 < iAngle && iAngle < 45) {
-            iXDifferenceFromBoundaryCentre = computeDifferenceFromBoundaryCentre(iAngle, 0, oBox.height);
-            oPolygonPoint = this._createPoint(oStartPoint.x - iXDifferenceFromBoundaryCentre, oStartPoint.y);
-            aPoints.push(_adjustIfCounterClockwise(oPolygonPoint));
-        }
-
-        if (45 <= iAngle) {
-            aPoints.push(_adjustIfCounterClockwise(this._createPoint(oBox.x + oBox.width, oBox.y)));
-        }
-
-        if (45 < iAngle && iAngle < 135) {
-            iYDifferenceFromBoundaryCentre = computeDifferenceFromBoundaryCentre(iAngle, 90, oBox.width);
-            oPolygonPoint = this._createPoint(
-                oBox.x + oBox.width,
-                oBox.y + oBox.height / 2 - iYDifferenceFromBoundaryCentre
+        if (45 <= angle) {
+            points.push(
+                _adjustIfCounterClockwise(new Point(boundingBoxSvg.x + boundingBoxSvg.width, boundingBoxSvg.y))
             );
-            aPoints.push(_adjustIfCounterClockwise(oPolygonPoint));
         }
 
-        if (135 <= iAngle) {
-            aPoints.push(_adjustIfCounterClockwise(this._createPoint(oBox.x + oBox.width, oBox.y + oBox.height)));
-        }
-
-        if (135 < iAngle && iAngle < 225) {
-            iXDifferenceFromBoundaryCentre = computeDifferenceFromBoundaryCentre(iAngle, 180, oBox.height);
-            oPolygonPoint = this._createPoint(
-                oBox.x + oBox.width / 2 + iXDifferenceFromBoundaryCentre,
-                oBox.y + oBox.height
+        if (45 < angle && angle < 135) {
+            yDifferenceFromBoundaryCentre = computeDifferenceFromBoundaryCentre(angle, 90, boundingBoxSvg.width);
+            polygonPoint = new Point(
+                boundingBoxSvg.x + boundingBoxSvg.width,
+                boundingBoxSvg.y + boundingBoxSvg.height / 2 - yDifferenceFromBoundaryCentre
             );
-            aPoints.push(_adjustIfCounterClockwise(oPolygonPoint));
+            points.push(_adjustIfCounterClockwise(polygonPoint));
         }
 
-        if (225 <= iAngle) {
-            aPoints.push(_adjustIfCounterClockwise(this._createPoint(oBox.x, oBox.y + oBox.height)));
+        if (135 <= angle) {
+            points.push(
+                _adjustIfCounterClockwise(
+                    new Point(boundingBoxSvg.x + boundingBoxSvg.width, boundingBoxSvg.y + boundingBoxSvg.height)
+                )
+            );
         }
 
-        if (225 < iAngle && iAngle < 315) {
-            iYDifferenceFromBoundaryCentre = computeDifferenceFromBoundaryCentre(iAngle, 270, oBox.width);
-            oPolygonPoint = this._createPoint(oBox.x, oBox.y + oBox.height / 2 + iYDifferenceFromBoundaryCentre);
-            aPoints.push(_adjustIfCounterClockwise(oPolygonPoint));
+        if (135 < angle && angle < 225) {
+            xDifferenceFromBoundaryCentre = computeDifferenceFromBoundaryCentre(angle, 180, boundingBoxSvg.height);
+            polygonPoint = new Point(
+                boundingBoxSvg.x + boundingBoxSvg.width / 2 + xDifferenceFromBoundaryCentre,
+                boundingBoxSvg.y + boundingBoxSvg.height
+            );
+            points.push(_adjustIfCounterClockwise(polygonPoint));
         }
 
-        if (315 <= iAngle) {
-            aPoints.push(_adjustIfCounterClockwise(this._createPoint(oBox.x, oBox.y)));
+        if (225 <= angle) {
+            points.push(
+                _adjustIfCounterClockwise(new Point(boundingBoxSvg.x, boundingBoxSvg.y + boundingBoxSvg.height))
+            );
         }
 
-        if (315 < iAngle && iAngle <= 360) {
-            iXDifferenceFromBoundaryCentre = computeDifferenceFromBoundaryCentre(iAngle, 360, oBox.height);
-            oPolygonPoint = this._createPoint(oBox.x + oBox.width / 2 - iXDifferenceFromBoundaryCentre, oBox.y);
-            aPoints.push(_adjustIfCounterClockwise(oPolygonPoint));
+        if (225 < angle && angle < 315) {
+            yDifferenceFromBoundaryCentre = computeDifferenceFromBoundaryCentre(angle, 270, boundingBoxSvg.width);
+            polygonPoint = new Point(
+                boundingBoxSvg.x,
+                boundingBoxSvg.y + boundingBoxSvg.height / 2 + yDifferenceFromBoundaryCentre
+            );
+            points.push(_adjustIfCounterClockwise(polygonPoint));
         }
 
-        aPoints.push(oCentrePoint);
+        if (315 <= angle) {
+            points.push(_adjustIfCounterClockwise(new Point(boundingBoxSvg.x, boundingBoxSvg.y)));
+        }
 
-        return aPoints;
+        if (315 < angle && angle <= 360) {
+            xDifferenceFromBoundaryCentre = computeDifferenceFromBoundaryCentre(angle, 360, boundingBoxSvg.height);
+            polygonPoint = new Point(
+                boundingBoxSvg.x + boundingBoxSvg.width / 2 - xDifferenceFromBoundaryCentre,
+                boundingBoxSvg.y
+            );
+            points.push(_adjustIfCounterClockwise(polygonPoint));
+        }
+
+        points.push(oCentrePoint);
+
+        return points;
     }
 }

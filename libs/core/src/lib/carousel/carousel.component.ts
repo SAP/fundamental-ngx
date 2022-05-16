@@ -244,7 +244,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     private _config: CarouselConfig = {};
 
     /** @hidden */
-    private _slidesCopy = [];
+    private _slidesCopy: CarouselItemComponent[] = [];
 
     /** @hidden */
     private _previousVisibleSlidesCount: number;
@@ -581,7 +581,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     }
 
     /** @hidden Handles notification on visible slide change */
-    private _notifySlideChange(slideDirection: SlideDirection, firstActiveSlide?: CarouselItemInterface): void {
+    private _notifySlideChange(slideDirection: SlideDirection, firstActiveSlide?: CarouselItemInterface | null): void {
         const activeSlides: CarouselItemComponent[] = [];
         let firstActiveSlideIndex: number;
 
@@ -633,7 +633,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
             this.dir = this._isRtl() ? 'rtl' : 'ltr';
             this._carouselService.isRtl = this.dir === 'rtl';
 
-            if (this._carouselService.items) {
+            if (this._carouselService.items && this._carouselService.active) {
                 this._carouselService.goToItem(this._carouselService.active, false);
             }
             this._changeDetectorRef.detectChanges();
@@ -719,7 +719,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
                     // Refresh carousel config and transition to the current slide.
                     this._initializeCarousel();
 
-                    this._carouselService.goToItem(needleSlide);
+                    needleSlide && this._carouselService.goToItem(needleSlide);
                     this._notifySlideChange(SlideDirection.None);
                 }
 

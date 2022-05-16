@@ -9,8 +9,8 @@ import {
     EventEmitter,
     Output
 } from '@angular/core';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 let messageStripUniqueId = 0;
 
@@ -61,11 +61,11 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
 
     /** Id of the element that labels the message-strip. */
     @Input()
-    ariaLabelledBy: string = null;
+    ariaLabelledBy: Nullable<string>;
 
     /** Aria label for the message-strip component element. */
     @Input()
-    ariaLabel: string = null;
+    ariaLabel: Nullable<string>;
 
     /** Aria label for the dismiss button. */
     @Input()

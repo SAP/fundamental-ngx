@@ -1,5 +1,5 @@
 import { FormGroup } from '@angular/forms';
-import { Component, Optional } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'fdp-platform-binary-checkbox',
@@ -15,5 +15,5 @@ export class PlatformCompactChekboxExampleComponent {
 }
 
 class DataObject {
-    constructor(public red: boolean, public blue: boolean, @Optional() public green?: boolean) {}
+    constructor(public red: boolean, public blue: boolean, public green?: boolean) {}
 }

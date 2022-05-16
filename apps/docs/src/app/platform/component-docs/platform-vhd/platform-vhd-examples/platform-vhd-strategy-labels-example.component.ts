@@ -59,8 +59,8 @@ export class PlatformVhdStrategyLabelExampleComponent implements OnInit {
     filters: FilterData[];
     dataSource: ValueHelpDialogDataSource<ExampleTestModel>;
 
-    actualValue: Partial<VhdValue<ExampleTestModel[]>> = {};
-    actualItems = [];
+    actualValue: Partial<VhdValue<ExampleTestModel>> = {};
+    actualItems: string[] = [];
 
     customStrategyLabels: {
         [key in keyof (typeof VhdDefineIncludeStrategy | typeof VhdDefineExcludeStrategy)]?: string;
@@ -68,14 +68,14 @@ export class PlatformVhdStrategyLabelExampleComponent implements OnInit {
         equalTo: 'ilingana ne-',
         between: 'FROM...TO'
     };
-    formatTokenFn = ((value: Partial<VhdValue<ExampleTestModel[]>>) => {
+    formatTokenFn = (value: Partial<VhdValue<ExampleTestModel>>): void => {
         this.actualItems = [
             ...(value.selected || []).map((item) => item.name),
             ...(value.conditions || []).map((item) => this.conditionDisplayFn(item))
-        ];
-    }).bind(this);
+        ].filter((v): v is string => !!v);
+    };
 
-    conditionDisplayFn = (item: VhdIncludedEntity | VhdExcludedEntity): string => {
+    conditionDisplayFn = (item: VhdIncludedEntity | VhdExcludedEntity): string | null => {
         const value = (() => {
             switch (item.strategy) {
                 case VhdDefineIncludeStrategy.empty:
@@ -113,7 +113,7 @@ export class PlatformVhdStrategyLabelExampleComponent implements OnInit {
         this.dataSource = new ValueHelpDialogDataSource(new VhdDataProvider(data.dataSource));
     }
 
-    valueChange($event: VhdValueChangeEvent<ExampleTestModel[]>): void {
+    valueChange($event: VhdValueChangeEvent<ExampleTestModel>): void {
         this.actualValue = { ...$event };
     }
 }

@@ -10,7 +10,7 @@
         [focusTrapped]="true"
         [triggers]="triggers"
         [disabled]="disabled || readonly"
-        [maxWidth]="!autoResize && minWidth"
+        [maxWidth]="(!autoResize && minWidth) || 0"
         [closeOnOutsideClick]="closeOnOutsideClick"
     >
         <fd-popover-control>
@@ -111,7 +111,7 @@
             <fdp-standard-list-item
                 *ngFor="let listItem of _suggestions"
                 [title]="listItem.label"
-                [description]="listItem.description"
+                [description]="listItem.description || ''"
                 [avatarSrc]="listItem.avatarSrc"
                 (itemSelected)="addToArray(listItem)"
                 [contentDensity]="contentDensity"

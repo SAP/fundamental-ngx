@@ -10,6 +10,7 @@ import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { TimeModule } from '@fundamental-ngx/core/time';
 import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '@fundamental-ngx/core/utils';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 import { TimePickerComponent } from './time-picker.component';
 import { TimePickerModule } from './time-picker.module';
@@ -81,14 +82,14 @@ describe('TimePickerComponent', () => {
             const newTime = new FdDate().setTime(15, 30, 0);
             component.allowNull = false;
             component._timeInputChanged('3:30 PM');
-            expect(component.time.toTimeString()).toEqual(newTime.toTimeString());
-            expect(component.time.isDateValid()).toBeTrue();
+            expect(component.time?.toTimeString()).toEqual(newTime.toTimeString());
+            expect(component.time?.isDateValid()).toBeTrue();
             expect(component._isInvalidTimeInput).toBeFalse();
         });
         it('should be in invalid state if input value can not be parsed', () => {
             component.allowNull = false;
             component._timeInputChanged('hello');
-            expect(component.time.isDateValid()).toBeFalse();
+            expect(component.time?.isDateValid()).toBeFalse();
             expect(component._isInvalidTimeInput).toBeTrue();
         });
 
@@ -96,7 +97,7 @@ describe('TimePickerComponent', () => {
             it('should set model to "null"', () => {
                 component.time = new FdDate().setTime(15, 40, 0);
                 component._timeInputChanged('');
-                expect(component.time).toBe(null);
+                expect(component.time as Nullable<FdDate>).toBe(null);
             });
             it('should be invalid if "allowNull=false"', () => {
                 component.allowNull = false;

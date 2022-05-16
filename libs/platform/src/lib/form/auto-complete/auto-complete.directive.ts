@@ -103,7 +103,7 @@ export class AutoCompleteDirective {
     private _setSelectionRange(selectionStart: number, selectionEnd: number): void {
         const direction = this._element.selectionDirection;
 
-        this._element.setSelectionRange(selectionStart, selectionEnd, direction);
+        this._element.setSelectionRange(selectionStart, selectionEnd, direction ?? undefined);
     }
 
     /** @hidden */
@@ -144,6 +144,9 @@ export class AutoCompleteDirective {
             let matchedSelectItem: OptionItem | undefined;
 
             for (const option of this.options) {
+                if (!option.children) {
+                    continue;
+                }
                 matchedSelectItem = this._findByStrategyStartsWith(option.children, this.inputText);
 
                 if (matchedSelectItem) {

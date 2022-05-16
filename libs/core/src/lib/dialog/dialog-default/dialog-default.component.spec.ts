@@ -48,7 +48,7 @@ describe('DefaultDialogComponent', () => {
     });
 
     it('should not have footer', () => {
-        component._defaultDialogContent = { ...object, cancelButton: null, approveButton: null };
+        component._defaultDialogContent = { ...object, cancelButton: undefined, approveButton: undefined };
         fixture.detectChanges();
         expect(component._showFooter()).toBeFalsy();
     });

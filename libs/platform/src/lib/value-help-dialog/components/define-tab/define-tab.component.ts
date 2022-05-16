@@ -103,10 +103,10 @@ export class DefineTabComponent extends VhdBaseTab implements OnChanges {
     _defineTypes = VhdDefineType;
 
     /** @hidden */
-    _includeStrategy = [];
+    _includeStrategy: StategyItem[] = [];
 
     /** @hidden */
-    _excludeStrategy = [];
+    _excludeStrategy: StategyItem[] = [];
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -159,7 +159,7 @@ export class DefineTabComponent extends VhdBaseTab implements OnChanges {
 
     /** @hidden */
     _validateConditionValue(item: ExtendedIncludedEntity | ExtendedExcludedEntity, valid: boolean | boolean[]): void {
-        item.valid = Array.isArray(valid) ? valid.every(Boolean) : valid;
+        item.valid = Array.isArray(valid) ? valid.every(Boolean) : !!valid;
         this._filterChanged();
     }
 
@@ -181,4 +181,9 @@ export class DefineTabComponent extends VhdBaseTab implements OnChanges {
             this.addEmptyCondition();
         }
     }
+}
+
+interface StategyItem {
+    key: string;
+    type: VhdDefineType;
 }

@@ -4,7 +4,7 @@ import { SearchInput } from '@fundamental-ngx/platform/search-field';
 import { CollectionPage, TableState } from '../interfaces';
 
 export const DEFAULT_TABLE_PAGE: Readonly<CollectionPage> = {
-    pageSize: null,
+    pageSize: 0,
     currentPage: 1
 };
 

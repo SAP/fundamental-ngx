@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
 import { ContentDensity } from '@fundamental-ngx/core/utils';
@@ -69,12 +69,12 @@ describe('InputGroup component', () => {
 
         expect(addons.length === 3).toBeTrue();
 
-        expect(addons[0].textContent.includes('$')).toBeTruthy();
-        expect(addons[1].textContent.includes('0.00')).toBeTruthy();
-        expect(addons[2].textContent.includes('Button')).toBeTruthy();
+        expect(addons[0].textContent?.includes('$')).toBeTruthy();
+        expect(addons[1].textContent?.includes('0.00')).toBeTruthy();
+        expect(addons[2].textContent?.includes('Button')).toBeTruthy();
         // input lies among first and second addon
         expect(addons[0].nextElementSibling).toBe(input);
-        expect(input.nextElementSibling).toBe(addons[1]);
+        expect(input?.nextElementSibling).toBe(addons[1]);
     });
 
     it('Should add class to child input', () => {
@@ -174,17 +174,17 @@ describe('Input group within platform form', () => {
         const inputGroupComponent = host.inputGroupComponent;
         inputGroupComponent.value = 25;
         await wait(fixture);
-        expect(host.form.get('qty').value).toBe(25);
+        expect(host.form.get('qty')?.value).toBe(25);
 
         inputGroupComponent.value = 50;
         await wait(fixture);
 
-        expect(host.form.get('qty').value).toBe(50);
+        expect(host.form.get('qty')?.value).toBe(50);
     });
 
     it('should be in an error state if control is empty and touched', async () => {
         const inputGroupComponent = host.inputGroupComponent;
-        const formControl = host.form.get('qty');
+        const formControl = host.form.get('qty') as FormControl;
         const inputGroupElement = fixture.debugElement.query(By.css('.fd-input-group'));
 
         expect(inputGroupElement.nativeElement.className.includes('is-error')).not.toBeTrue();
@@ -199,7 +199,7 @@ describe('Input group within platform form', () => {
     });
 
     it('should mark form field as touched when gets blurred', async () => {
-        const formControl = host.form.get('qty');
+        const formControl = host.form.get('qty') as FormControl;
         const inputEl = fixture.debugElement.query(By.css('fdp-input input[id="qty"]'));
 
         expect(formControl.touched).not.toBeTrue();

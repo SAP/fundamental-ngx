@@ -176,13 +176,15 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
         }
         changes.forEachOperation(
             (item: IterableChangeRecord<T>, adjustedPreviousIndex: number | null, currentIndex: number | null) => {
-                if (item.previousIndex === null) {
+                if (currentIndex != null && item.previousIndex === null) {
                     this._insertNode(data[currentIndex], currentIndex, vcr);
-                } else if (currentIndex === null) {
+                } else if (currentIndex === null && adjustedPreviousIndex != null) {
                     vcr.remove(adjustedPreviousIndex);
-                } else {
+                } else if (adjustedPreviousIndex != null && currentIndex != null) {
                     const view = vcr.get(adjustedPreviousIndex);
-                    vcr.move(view, currentIndex);
+                    if (view) {
+                        vcr.move(view, currentIndex);
+                    }
                 }
             }
         );
@@ -223,8 +225,8 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
      */
     /** @hidden */
     private _splitList(dataSource: T[]): T[][] {
-        let dataForFirstList = [];
-        let dataForSecondList = [];
+        let dataForFirstList: T[] = [];
+        let dataForSecondList: T[] = [];
         if (this.layout === 'left' || this.layout === 'top') {
             dataForFirstList = [...dataSource];
         } else if (this.layout === 'right' || this.layout === 'bottom') {

@@ -70,7 +70,7 @@ export class FilterStepComponent implements FiltersViewStep {
     readonly FILTER_TYPE = FilterType;
 
     /** @hidden */
-    _filterBy: CollectionFilter;
+    _filterBy?: CollectionFilter;
 
     /** @hidden */
     _onFilterValueChange(filterValue: any): void {

@@ -54,12 +54,12 @@ export class StackblitzService {
         const stackBlitzFiles: StackblitzFile[] = [];
 
         exampleFiles.forEach((example: ExampleFile) => {
-            let generatedFiles: GeneratedFiles;
+            let generatedFiles: GeneratedFiles | undefined;
 
             /**
              * Main Component Will be bootstrapped on app module and added to index.html
              * */
-            const mainComponent: boolean = exampleFiles.length === 1 || example.main;
+            const mainComponent: boolean = exampleFiles.length === 1 || !!example.main;
 
             if (example.language === 'html') {
                 generatedFiles = this.handleHtmlFile(exampleFiles, example);
@@ -72,21 +72,21 @@ export class StackblitzService {
                 return;
             }
 
-            if (generatedFiles.html) {
+            if (generatedFiles?.html) {
                 defaultProjectInfo.files[generatedFiles.html.path] = generatedFiles.html.code;
             }
 
             const scssFilePath = this.getFilePath(example, 'scss');
 
-            if (generatedFiles.scss) {
+            if (generatedFiles?.scss) {
                 defaultProjectInfo.files[generatedFiles.scss.path] = generatedFiles.scss.code;
-            } else if (!defaultProjectInfo.files[scssFilePath] && this.containsStyleUrls(generatedFiles.ts)) {
+            } else if (!defaultProjectInfo.files[scssFilePath] && this.containsStyleUrls(generatedFiles?.ts)) {
                 // Typescript files created by default has got scss file included, so it's mandatory to create
                 // Empty scss file, to avoid errors
                 defaultProjectInfo.files[scssFilePath] = '';
             }
 
-            if (generatedFiles.ts) {
+            if (generatedFiles?.ts) {
                 defaultProjectInfo.files[generatedFiles.ts.path] = generatedFiles.ts.code;
                 stackBlitzFiles.push(this.getStackBlitzTsFile(example, mainComponent));
             }
@@ -94,9 +94,8 @@ export class StackblitzService {
 
         defaultProjectInfo.files['src/app/app.module.ts'] = this.getModule(stackBlitzFiles);
 
-        const mainFileSelector: string = stackBlitzFiles.find((file) => file.main)
-            ? stackBlitzFiles.find((file) => file.main).selector
-            : stackBlitzFiles[0].selector;
+        const mainFileSelector: string =
+            stackBlitzFiles.find((file) => file.main)?.selector || stackBlitzFiles[0].selector;
 
         defaultProjectInfo.files['src/index.html'] = `
 <html>
@@ -137,7 +136,7 @@ export class ${componentName} {}`;
         }
     }
 
-    private containsStyleUrls(tsFile: GeneratedFile): boolean {
+    private containsStyleUrls(tsFile?: GeneratedFile): boolean {
         if (tsFile && tsFile.code) {
             return tsFile.code.includes('styleUrls');
         } else {
@@ -172,16 +171,16 @@ export class ${componentName} {}`;
 
     private getStackBlitzTsFile(example: ExampleFile, mainComponent: boolean): StackblitzFile {
         const path = this.getFilePath(example, 'ts');
-        const componentName = example.component || this.transformSnakeCaseToPascalCase(example.fileName);
+        const componentName = example.component || this.transformSnakeCaseToPascalCase(example.fileName ?? '');
 
         return {
             path,
             componentName,
             basis: this.getFileBasis(example),
             selector: this.getLibraryPrefix() + example.fileName,
-            entryComponent: example.entryComponent,
+            entryComponent: !!example.entryComponent,
             main: mainComponent,
-            service: example.service
+            service: !!example.service
         };
     }
 
@@ -209,7 +208,7 @@ export class ${componentName} {}`;
         if (this.isStandAlone(exampleFiles, file)) {
             generatedFile.ts = {
                 path: this.getFilePath(file, 'ts'),
-                code: file.typescriptFileCode || this.getDefaultTypescriptFile(file.fileName)
+                code: file.typescriptFileCode || this.getDefaultTypescriptFile(file.fileName ?? '')
             };
         }
         return generatedFile;
