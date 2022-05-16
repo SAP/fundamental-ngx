@@ -17,6 +17,7 @@ import { NestedListContentDirective } from '../nested-content/nested-list-conten
 import { NestedListStateService } from '../nested-list-state.service';
 import { NestedItemInterface } from './nested-item.interface';
 import { NestedItemService } from './nested-item.service';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 let sideNavigationItemUniqueId = 0;
 
@@ -66,7 +67,7 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
 
     /** @hidden */
     @HostBinding('attr.aria-level')
-    _ariaLevel = null;
+    _ariaLevel: Nullable<number> = null;
 
     /** @hidden */
     @HostBinding('attr.title')
@@ -81,11 +82,11 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
 
     /** @hidden */
     @HostBinding('attr.aria-expanded')
-    private _ariaExpanded = null;
+    private _ariaExpanded: Nullable<boolean> = null;
 
     /** @hidden */
     @HostBinding('attr.aria-selected')
-    private _ariaSelected = null;
+    private _ariaSelected: Nullable<boolean> = null;
 
     /** @hidden */
     @HostBinding('attr.aria-disabled')

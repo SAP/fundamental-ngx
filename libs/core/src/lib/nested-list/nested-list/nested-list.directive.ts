@@ -23,7 +23,6 @@ import { NestedItemService } from '../nested-item/nested-item.service';
 import { NestedListKeyboardService } from '../nested-list-keyboard.service';
 import { NestedListInterface } from './nested-list.interface';
 import { NestedListHeaderDirective } from '../nested-list-directives';
-import { NestedListContentDirective } from '../nested-content/nested-list-content.directive';
 import { Nullable } from '@fundamental-ngx/core/shared';
 
 @Directive({
@@ -81,11 +80,11 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
 
     /** @hidden */
     @HostBinding('attr.aria-roledescription')
-    private _ariaRoledescription = this.ariaRoledescriptionTree;
+    private _ariaRoledescription: Nullable<string> = this.ariaRoledescriptionTree;
 
     /** @hidden */
     @HostBinding('attr.aria-haspopup')
-    private _ariaHaspopup = null;
+    private _ariaHaspopup: Nullable<string> = null;
 
     /** @hidden */
     @HostBinding('attr.tabindex')

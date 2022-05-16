@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import { NestedListTitleDirective } from '../nested-list-directives';
 import { NestedItemService } from '../nested-item/nested-item.service';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 @Directive({
     selector: '[fdNestedLink], [fd-nested-list-link]'
@@ -33,7 +34,7 @@ export class NestedLinkDirective {
     /** @hidden */
     @Input()
     @HostBinding('attr.aria-describedby')
-    ariaDescribedby: string;
+    ariaDescribedby: Nullable<string | number>;
 
     /** Event thrown, when selected state is changed */
     @Output()
