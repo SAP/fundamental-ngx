@@ -49,15 +49,15 @@
             [style.display]="'block'"
         >
             <div class="fd-popover__wrapper fd-datetime__wrapper">
+                <fd-form-message id="fd-form-message" [embedded]="true" *ngIf="_message" [type]="state">
+                    {{ _message }}
+                </fd-form-message>
                 <div class="fd-datetime__display-type-switcher">
                     <fd-segmented-button [(ngModel)]="_displayType">
                         <button fd-button [label]="displayTypeDateLabel" value="date"></button>
                         <button fd-button [label]="displayTypeTimeLabel" value="time"></button>
                     </fd-segmented-button>
                 </div>
-                <fd-form-message id="fd-form-message" [embedded]="true" *ngIf="_message" [type]="state">
-                    {{ _message }}
-                </fd-form-message>
                 <ng-content></ng-content>
                 <div class="fd-datetime__container">
                     <fd-calendar

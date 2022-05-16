@@ -98,7 +98,9 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
 
     /** Aria label for the datetime picker input. */
     @Input()
-    datetimeInputLabel = 'Datetime input';
+    datetimeInputLabel: string;
+
+    readonly _defaultDatetimeInputLabel = 'Datetime input';
 
     /** Aria label for the button to show/hide the calendar. */
     @Input()

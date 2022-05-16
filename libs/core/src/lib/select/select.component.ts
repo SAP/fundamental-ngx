@@ -403,7 +403,6 @@ export class SelectComponent
     /** @hidden */
     ngOnInit(): void {
         this.ariaLabel = this.ariaLabel || this.placeholder;
-        this.ariaLabelledBy = this.ariaLabelledBy || this.placeholder;
 
         this._initializeCommonBehavior();
 

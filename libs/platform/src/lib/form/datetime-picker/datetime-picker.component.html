@@ -1,5 +1,6 @@
 <fd-datetime-picker
     [attr.aria-label]="ariaLabel"
+    [attr.aria-required]="_isRequired"
     [attr.ariaLabelledBy]="ariaLabelledBy"
     [attr.ariaDescribedBy]="ariaDescribedBy"
     [inputId]="id"
@@ -17,7 +18,7 @@
     [isOpen]="isOpen"
     [startingDayOfWeek]="startingDayOfWeek"
     [activeView]="activeView"
-    [datetimeInputLabel]="datetimeInputLabel"
+    [datetimeInputLabel]="datetimeInputLabel || formField?.label || _defaultDatetimeInputLabel"
     [displayDatetimeToggleLabel]="displayDatetimeToggleLabel"
     [allowNull]="allowNull && !_isRequired"
     [keepTwoDigitsTime]="keepTwoDigitsTime"
