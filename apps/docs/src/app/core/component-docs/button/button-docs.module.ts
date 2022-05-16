@@ -9,6 +9,7 @@ import {
     ButtonMenuExampleComponent,
     ButtonSizesExampleComponent,
     ButtonStateExampleComponent,
+    ButtonToggledExampleComponent,
     ButtonTypesExampleComponent
 } from './examples/button-examples.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
@@ -40,7 +41,8 @@ const routes: Routes = [
         ButtonSizesExampleComponent,
         ButtonIconsExampleComponent,
         ButtonStateExampleComponent,
-        ButtonMenuExampleComponent
+        ButtonMenuExampleComponent,
+        ButtonToggledExampleComponent
     ]
 })
 export class ButtonDocsModule {}

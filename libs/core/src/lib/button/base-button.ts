@@ -64,6 +64,16 @@ export class BaseButton {
     @Input()
     ariaLabel: Nullable<string>;
 
+    /** Whether button is in toggled state. */
+    @Input()
+    get toggled(): boolean {
+        return this._toggled;
+    }
+
+    set toggled(value: BooleanInput) {
+        this._toggled = coerceBooleanProperty(value);
+    }
+
     /**
      * Native disabled attribute of button element
      */
@@ -93,4 +103,7 @@ export class BaseButton {
 
     /** @hidden */
     _ariaDisabled: boolean;
+
+    /** @hidden */
+    _toggled: boolean;
 }
