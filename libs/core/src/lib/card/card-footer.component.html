@@ -1,5 +1,5 @@
 <ng-content></ng-content>
-<div class="fd-card__footer-actions" *ngIf="actionItems?.length > 0">
+<div class="fd-card__footer-actions" *ngIf="actionItems && actionItems.length > 0">
     <div class="fd-card__footer-actions-item" *ngFor="let actionItem of actionItems">
         <ng-template [ngTemplateOutlet]="actionItem.templateRef"></ng-template>
     </div>
