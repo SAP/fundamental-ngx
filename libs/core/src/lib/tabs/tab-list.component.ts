@@ -58,7 +58,7 @@ export type TabSizes = 's' | 'm' | 'l' | 'xl' | 'xxl';
 export class TabListComponent implements AfterContentInit, AfterViewInit, OnDestroy, OnInit {
     /** Aria defines role description for the Tab List. */
     @Input()
-    ariaRoledescription: string = null;
+    ariaRoledescription: Nullable<string> = null;
 
     /** Whether user wants to use tab component in compact mode */
     @Input()
