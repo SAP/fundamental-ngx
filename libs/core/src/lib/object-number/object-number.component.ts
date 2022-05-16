@@ -7,8 +7,8 @@ import {
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
 
@@ -58,11 +58,11 @@ export class ObjectNumberComponent implements OnInit, OnChanges, CssClassBuilder
 
     /** Id of the element that labels object number. */
     @Input()
-    ariaLabelledBy: string = null;
+    ariaLabelledBy: Nullable<string>;
 
     /** Aria label for the object number. */
     @Input()
-    ariaLabel: string = null;
+    ariaLabel: Nullable<string>;
 
     /** @hidden */
     _numberPipeConfig = '';

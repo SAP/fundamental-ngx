@@ -75,7 +75,7 @@ export class NumberStepInputComponent extends StepInputComponent {
      */
     formatValue(value: number | null): string {
         const precision = this.precision;
-        const digitsInfo = !isNaN(precision) && `1.${precision}-${precision}`;
+        const digitsInfo = !isNaN(precision) ? `1.${precision}-${precision}` : undefined;
         return formatNumber(value || 0, this.localeId, digitsInfo);
     }
 
@@ -99,7 +99,7 @@ export class NumberStepInputComponent extends StepInputComponent {
      */
     parseValueInFocusMode(value: string | null): number | null {
         // if user leaves input empty we should consider it as '0' by default
-        value = value === '' ? '0' : value;
+        value = value || '0';
         const parsedValue = Number.parseFloat(value);
         return isNaN(parsedValue) ? null : parsedValue;
     }

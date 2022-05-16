@@ -7,8 +7,8 @@ import {
     ViewEncapsulation,
     OnInit
 } from '@angular/core';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { NullableObject, Nullable } from '@fundamental-ngx/core/shared';
 
 export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
 
@@ -48,7 +48,7 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
      * For default Object Status omit this property
      */
     @Input()
-    status: ObjectStatus;
+    status: Nullable<ObjectStatus>;
 
     /**
      * Glyph (icon) of the Object Status.
@@ -58,7 +58,7 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
 
     /** Define the text content of the Object Status */
     @Input()
-    label: string;
+    label: Nullable<string>;
 
     /**
      * Label applied to glyph element, should be used when there is no text included
@@ -71,7 +71,7 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
      * Option includes numbers from 1 to 8
      */
     @Input()
-    indicationColor: number = null;
+    indicationColor: Nullable<number>;
 
     /** Whether the Object Status is clickable. */
     @Input()
@@ -116,26 +116,21 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
     }
 }
 
-export const buildObjectStatusCssClasses = ({
-    status,
-    inverted,
-    large,
-    indicationColor,
-    clickable,
-    class: className
-}: Partial<{
+type ObjectStatusData = NullableObject<{
     status: ObjectStatus;
     inverted: boolean;
     large: boolean;
     indicationColor: number;
     clickable: boolean;
     class: string;
-}>): string[] => [
+}>;
+
+export const buildObjectStatusCssClasses = (data: ObjectStatusData): string[] => [
     'fd-object-status',
-    inverted ? 'fd-object-status--inverted' : '',
-    large ? 'fd-object-status--large' : '',
-    status ? `fd-object-status--${status}` : '',
-    indicationColor ? `fd-object-status--indication-${indicationColor}` : '',
-    clickable ? 'fd-object-status--link' : '',
-    className
+    data.inverted ? 'fd-object-status--inverted' : '',
+    data.large ? 'fd-object-status--large' : '',
+    data.status ? `fd-object-status--${data.status}` : '',
+    data.indicationColor ? `fd-object-status--indication-${data.indicationColor}` : '',
+    data.clickable ? 'fd-object-status--link' : '',
+    data.class || ''
 ];

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { IconFont } from '@fundamental-ngx/core/icon';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 @Component({
     selector: 'fd-micro-process-flow-icon',
@@ -28,5 +29,5 @@ export class MicroProcessFlowIconComponent {
 
     /** Aria-label for Icon. */
     @Input()
-    ariaLabel: string = null;
+    ariaLabel: Nullable<string>;
 }

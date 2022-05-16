@@ -17,7 +17,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { DATE_TIME_FORMATS, DateTimeFormats, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
-import { SpecialDayRule } from '@fundamental-ngx/core/shared';
+import { SpecialDayRule, Nullable } from '@fundamental-ngx/core/shared';
 import equal from 'fast-deep-equal';
 
 import { DateRange } from '../../models/date-range';
@@ -27,7 +27,7 @@ import { ActiveCalendarDayCellStrategy as CalendarActiveDayCellStrategy, Calenda
 import { CalendarType, DaysOfWeek } from '../../types';
 import { CalendarService } from '../../calendar.service';
 import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
-import { FocusableCalendarView } from '../../models/common';
+import { DisableDateFunction, EscapeFocusFunction, FocusableCalendarView } from '../../models/common';
 
 /** Component representing the day view of the calendar. */
 @Component({
@@ -58,20 +58,18 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
 
     /** The currently selected date model in single mode. */
     @Input()
-    set selectedDate(date: D) {
+    set selectedDate(date: Nullable<D>) {
         this._selectedDate = date;
         if (this._dayViewGrid) {
-            const dayFromDate: CalendarDay<D> = this._calendarDayList.find((day) =>
-                this._dateTimeAdapter.datesEqual(day.date, date)
-            );
+            const dayFromDate = this._calendarDayList.find((day) => this._dateTimeAdapter.datesEqual(day.date, date));
             this._changeSelectedSingleDay(dayFromDate, this._calendarDayList);
         }
     }
-    get selectedDate(): D {
+    get selectedDate(): Nullable<D> {
         return this._selectedDate;
     }
     /** @hidden */
-    private _selectedDate: D;
+    private _selectedDate: Nullable<D>;
 
     /** The currently selected FdDates model start and end in range mode. */
     @Input()
@@ -128,7 +126,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
 
     /** Function that allows to specify which function would be called, when focus wants to escape */
     @Input()
-    focusEscapeFunction: (event: KeyboardEvent) => void;
+    focusEscapeFunction: EscapeFocusFunction;
 
     /**
      * Special days mark, it can be used by passing array of object with
@@ -201,21 +199,21 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
      * @param date date type
      */
     @Input()
-    disableFunction: (date: D) => boolean = () => false;
+    disableFunction: DisableDateFunction<D>;
 
     /**
      * Function used to disable certain dates in the calendar for the range start selection.
      * @param date date representation
      */
     @Input()
-    disableRangeStartFunction: (date: D) => boolean = () => false;
+    disableRangeStartFunction: DisableDateFunction<D>;
 
     /**
      * Function used to disable certain dates in the calendar for the range end selection.
      * @param date date representation
      */
     @Input()
-    disableRangeEndFunction: (date: D) => boolean = () => false;
+    disableRangeEndFunction: DisableDateFunction<D>;
 
     /** @hidden */
     constructor(
@@ -284,7 +282,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
                     this.selectedRangeDateChange.emit(this.selectedRangeDate);
                 } else if (this._selectCounter === 1) {
                     // Check if date picked is higher than already chosen, otherwise just reverse them
-                    if (this._dateTimeAdapter.compareDate(this.selectedRangeDate.start, day.date) < 0) {
+                    if (this._dateTimeAdapter.compareDate(this.selectedRangeDate.start!, day.date) < 0) {
                         this._selectedRangeDate = {
                             start: this.selectedRangeDate.start,
                             end: day.date
@@ -315,7 +313,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
      */
     setFocusOnCell(): void {
         const cellToFocus = new CalendarActiveDayCellStrategy().getActiveCell(this._calendarDayList);
-        if (!cellToFocus) {
+        if (!cellToFocus?.index && cellToFocus?.index !== 0) {
             return;
         }
         this.focusOnCellByIndex(cellToFocus.index);
@@ -323,18 +321,19 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
 
     /** @hidden */
     _refreshHoverRange(day: CalendarDay<D>): void {
-        if (this._isOnRangePick) {
-            if (this._dateTimeAdapter.compareDate(day.date, this.selectedRangeDate.start) < 0) {
+        const start = this.selectedRangeDate?.start;
+        if (this._isOnRangePick && start) {
+            if (this._dateTimeAdapter.compareDate(day.date, start) < 0) {
                 this._calendarDayList.forEach((_day) => {
                     _day.hoverRange =
                         this._dateTimeAdapter.compareDate(_day.date, day.date) > 0 &&
-                        this._dateTimeAdapter.compareDate(_day.date, this.selectedRangeDate.start) < 0;
+                        this._dateTimeAdapter.compareDate(_day.date, start) < 0;
                 });
             } else {
                 this._calendarDayList.forEach((_day) => {
                     _day.hoverRange =
                         this._dateTimeAdapter.compareDate(_day.date, day.date) < 0 &&
-                        this._dateTimeAdapter.compareDate(_day.date, this.selectedRangeDate.start) > 0;
+                        this._dateTimeAdapter.compareDate(_day.date, start) > 0;
                 });
             }
         }
@@ -364,6 +363,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
         ) {
             return 2;
         }
+        return 0;
     }
 
     /**
@@ -588,9 +588,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
         });
 
         if (this.calType === 'single' && this._selectedDate) {
-            const _day: CalendarDay<D> = calendar.find((day) =>
-                this._dateTimeAdapter.datesEqual(day.date, this._selectedDate)
-            );
+            const _day = calendar.find((day) => this._dateTimeAdapter.datesEqual(day.date, this._selectedDate));
             this._changeSelectedSingleDay(_day, calendar);
         }
 
@@ -668,7 +666,8 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
                 current: this._dateTimeAdapter.datesEqual(today, date)
             });
         }
-        this._getActiveCell(calendarDays).isTabIndexed = true;
+        const cell = this._getActiveCell(calendarDays);
+        cell && (cell.isTabIndexed = true);
         return calendarDays;
     }
 
@@ -679,7 +678,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
      * if there is no selected day, but there is today day, return today day
      * if there is no today, or selected, return first one
      */
-    private _getActiveCell(calendarDays: CalendarDay<D>[]): CalendarDay<D> {
+    private _getActiveCell(calendarDays: CalendarDay<D>[]): CalendarDay<D> | null {
         return new CalendarActiveDayCellStrategy<D>().getActiveCell(calendarDays);
     }
 
@@ -759,7 +758,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
             weekDay,
             weekend: this._isWeekendDay(weekDay),
             ariaLabel: this._dateTimeAdapter.format(date, this._dateTimeFormats.display.dateA11yLabel),
-            specialNumber: this._getSpecialDay(date),
+            specialNumber: this._getSpecialDay(date) ?? undefined,
             past: isPast
         };
 
@@ -889,7 +888,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
      * @hidden
      * Change selection flag on days to false, besides the selected one
      */
-    private _changeSelectedSingleDay(day: CalendarDay<D>, calendar: CalendarDay<D>[]): void {
+    private _changeSelectedSingleDay(day: CalendarDay<D> | undefined, calendar: CalendarDay<D>[]): void {
         calendar.forEach((_day) => (_day.selected = false));
         if (day && !day.blocked && !day.disabled) {
             day.selected = true;
@@ -920,8 +919,8 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
         );
 
         if (dates) {
-            let startDay: CalendarDay<D>;
-            let endDay: CalendarDay<D>;
+            let startDay: CalendarDay<D> | undefined;
+            let endDay: CalendarDay<D> | undefined;
             if (dates.start) {
                 /** Find start date and mark it as selected */
                 startDay = calendarList.find((_day) => this._dateTimeAdapter.datesEqual(_day.date, dates.start));
@@ -929,7 +928,8 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
                     startDay &&
                     !startDay.blocked &&
                     !startDay.disabled &&
-                    !this.disableRangeStartFunction(startDay.date)
+                    (typeof this.disableRangeStartFunction !== 'function' ||
+                        !this.disableRangeStartFunction(startDay.date))
                 ) {
                     startDay.selected = true;
                     startDay.selectedFirst = true;
@@ -938,7 +938,12 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
             if (dates.end) {
                 /** Find end date and mark it as selected */
                 endDay = calendarList.find((_day) => this._dateTimeAdapter.datesEqual(_day.date, dates.end));
-                if (endDay && !endDay.blocked && !endDay.disabled && !this.disableRangeEndFunction(endDay.date)) {
+                if (
+                    endDay &&
+                    !endDay.blocked &&
+                    !endDay.disabled &&
+                    (typeof this.disableRangeEndFunction !== 'function' || !this.disableRangeEndFunction(endDay.date))
+                ) {
                     endDay.selected = true;
                     endDay.selectedLast = true;
                 }
@@ -950,7 +955,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
                 calendarList
                     .filter(
                         (_day) =>
-                            (_day.selectedRange = this._dateTimeAdapter.isBetween(_day.date, dates.start, dates.end))
+                            (_day.selectedRange = this._dateTimeAdapter.isBetween(_day.date, dates.start!, dates.end!))
                     )
                     .forEach((_day) => (_day.selectedRange = true));
             }
@@ -960,22 +965,23 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
 
         /** Apply disabled state to days marked with passed function */
         if (this.disableFunction) {
-            calendarList.forEach((_day) => (_day.disabled = this.disableFunction(_day.date)));
+            calendarList.forEach((_day) => (_day.disabled = this.disableFunction!(_day.date)));
         }
 
         if ((this._selectCounter === 0 || this._selectCounter === 2) && this.disableRangeStartFunction) {
             calendarList.forEach(
-                (_day) => (_day.disabled = _day.disabled || this.disableRangeStartFunction(_day.date))
+                (_day) => (_day.disabled = _day.disabled || this.disableRangeStartFunction!(_day.date))
             );
         } else if (this._selectCounter === 1 && this.disableRangeEndFunction) {
-            calendarList.forEach((_day) => (_day.disabled = _day.disabled || this.disableRangeEndFunction(_day.date)));
+            calendarList.forEach((_day) => (_day.disabled = _day.disabled || this.disableRangeEndFunction!(_day.date)));
         }
     }
 
     /** @hidden */
     private refreshTabIndex(calendar: CalendarDay<D>[]): void {
         calendar.forEach((_day) => (_day.isTabIndexed = false));
-        this._getActiveCell(calendar.filter((_day) => _day.monthStatus === 'current')).isTabIndexed = true;
+        const cell = this._getActiveCell(calendar.filter((_day) => _day.monthStatus === 'current'));
+        cell && (cell.isTabIndexed = true);
     }
 
     /** @hidden */

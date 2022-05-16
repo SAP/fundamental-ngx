@@ -3,7 +3,7 @@ import { ShellbarUser } from '../model/shellbar-user';
 import { ShellbarUserMenu } from '../model/shellbar-user-menu';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { Placement } from '@fundamental-ngx/core/shared';
-import { PopoverFillMode } from '@fundamental-ngx/core/shared';
+import { PopoverFillMode, Nullable } from '@fundamental-ngx/core/shared';
 
 /**
  * This Component extends popover component and passes all of the options and events from outside to popover component
@@ -30,7 +30,7 @@ export class ShellbarUserMenuComponent {
      * * Leave blank for no effect.
      */
     @Input()
-    fillControlMode: PopoverFillMode = null;
+    fillControlMode: Nullable<PopoverFillMode>;
 
     /** The placement of the popover. It can be one of: top, top-start, top-end, bottom,
      *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end. */

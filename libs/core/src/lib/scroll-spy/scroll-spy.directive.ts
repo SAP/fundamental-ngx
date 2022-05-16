@@ -48,7 +48,7 @@ export class ScrollSpyDirective {
     readonly spyChange: EventEmitter<HTMLElement> = new EventEmitter<HTMLElement>();
 
     /** @hidden */
-    private _currentActive: HTMLElement;
+    private _currentActive: HTMLElement | undefined;
 
     /** @hidden */
     constructor(private readonly _elRef: ElementRef) {}
@@ -60,7 +60,7 @@ export class ScrollSpyDirective {
             return;
         }
 
-        let spiedTag: HTMLElement;
+        let spiedTag: HTMLElement | undefined;
         const target = event.target as HTMLElement;
         const children: HTMLElement[] = this._elRef.nativeElement.children;
         const [firstChild] = children;

@@ -23,7 +23,7 @@ export class PaginationExampleComponent {
     totalItems = 50;
     itemsPerPage = 10;
     currentPage = 5;
-    notification: string = null;
+    notification = '';
 
     @ViewChild(PaginationComponent) paginationComponent: PaginationComponent;
 

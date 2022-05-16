@@ -143,7 +143,7 @@ describe('ComboboxComponent', () => {
         component.open = false;
         spyOn(component, 'onMenuClickHandler');
         component.displayFn = (item: any): string => item.displayedValue;
-        component.inputTextValue = null;
+        component.inputTextValue = '';
         component.onInputKeydownHandler(<any>{ stopPropagation: () => {}, preventDefault: () => {}, key: 'ArrowDown' });
 
         expect(component.onMenuClickHandler).toHaveBeenCalledWith(component.dropdownValues[0]);
@@ -186,7 +186,7 @@ describe('ComboboxComponent', () => {
 
         expect(component.onChange).not.toHaveBeenCalled();
 
-        expect(component.inputText).toEqual(undefined);
+        expect(component.inputText).toEqual('');
 
         component.dialogDismiss('test');
 

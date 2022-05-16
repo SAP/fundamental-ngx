@@ -22,7 +22,7 @@ describe('Nx projects (nx.json)', () => {
                 const scopeTag = testEntry.tags?.find((x) => x.startsWith('scope:'));
                 expect(scopeTag).toBeTruthy();
                 const scopeValue = scopeTag?.split(':')[1];
-                expect(knownScopes.has(scopeValue)).toBeTruthy();
+                expect(knownScopes.has(scopeValue as string)).toBeTruthy();
             });
 
             it('should have a type tag', () => {
@@ -32,7 +32,7 @@ describe('Nx projects (nx.json)', () => {
                 const typeTag = testEntry.tags?.find((x) => x.startsWith('type:'));
                 expect(typeTag).toBeTruthy();
                 const typeValue = typeTag?.split(':')[1];
-                expect(knownTypes.has(typeValue)).toBeTruthy();
+                expect(knownTypes.has(typeValue as string)).toBeTruthy();
             });
         });
     });

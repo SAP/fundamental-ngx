@@ -8,11 +8,9 @@ import {
     EventEmitter,
     HostBinding,
     Input,
-    OnChanges,
     OnDestroy,
     Output,
     Renderer2,
-    SimpleChanges,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
@@ -20,17 +18,19 @@ import { Subscription } from 'rxjs';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
 import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 import { parseLayoutPattern } from '../../helpers/parse-layout-pattern';
 import { GridListItemToolbarComponent } from '../grid-list-item-toolbar/grid-list-item-toolbar.component';
 import { GridListSelectionMode, GridListSelectionActions } from '../../models/grid-list-selection.models';
 import { GridListItemFooterBarComponent } from '../grid-list-item-footer-bar/grid-list-item-footer-bar.component';
 import { GridList } from './../grid-list/grid-list-base.component';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 let gridListItemUniqueId = 0;
 
 export interface GridListItemOutputEvent<T> {
-    index: number;
+    index?: number;
     value?: T;
 }
 
@@ -45,7 +45,7 @@ export type GridListItemStatus = 'success' | 'warning' | 'error' | 'neutral';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDestroy {
+export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
     /** id for the Element */
     @Input()
     id = `fd-grid-list-item-${gridListItemUniqueId++}`;
@@ -61,7 +61,9 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
      * the number of occupied columns and n can be different for each size.
      */
     @Input()
-    layoutItemPattern: string;
+    set layoutItemPattern(value: Nullable<string>) {
+        this.gridLayoutClasses = value ? parseLayoutPattern(value, false) : [];
+    }
 
     /**
      * Defines the status of Grid List Item
@@ -72,7 +74,7 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
 
     /** Sets number of sub items */
     @Input()
-    counter: number;
+    counter: Nullable<number>;
 
     /**
      * Value field stores information for radio button value, checkbox button and for GridListSelectionEvent
@@ -87,7 +89,16 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
 
     /** Allows an item to be selected programmatically */
     @Input()
-    selected = false;
+    set selected(value: Nullable<boolean>) {
+        this._selected = coerceBooleanProperty(value);
+    }
+
+    get selected(): boolean {
+        return this._selected;
+    }
+
+    /** @hidden */
+    private _selected = false;
 
     /** Remove the padding from the Item body */
     @Input()
@@ -95,7 +106,7 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
 
     /** Sets the `aria-label` attribute to the element. */
     @Input()
-    ariaLabel: string;
+    ariaLabel: Nullable<string>;
 
     /**
      * Defines the type of Grid List Item
@@ -108,7 +119,15 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
      * Default: inactive
      */
     @Input()
-    type: GridListItemType = 'inactive';
+    set type(value: Nullable<GridListItemType>) {
+        this._type = value ?? 'inactive';
+    }
+    get type(): GridListItemType {
+        return this._type;
+    }
+
+    /** @hidden */
+    private _type: GridListItemType = 'inactive';
 
     /**
      * Sets the state of Grid List Item
@@ -182,14 +201,6 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
     }
 
     set gridLayoutClasses(value: string[]) {
-        if (!this._gridLayoutClasses) {
-            this._gridLayoutClasses = value;
-
-            this._addClassesNames(this._gridLayoutClasses);
-
-            return;
-        }
-
         this._removeClassesNames(this._gridLayoutClasses);
         this._gridLayoutClasses = value;
         this._addClassesNames(this._gridLayoutClasses);
@@ -207,23 +218,22 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
     _selectedItem?: T;
 
     /** @hidden */
-    get selectionMode(): GridListSelectionMode {
+    get selectionMode(): GridListSelectionMode | undefined {
         return this._selectionMode;
     }
 
     /** @hidden */
-    set selectionMode(mode: GridListSelectionMode) {
+    set selectionMode(mode: GridListSelectionMode | undefined) {
         this._selectionMode = mode;
 
         if (mode !== 'delete' && mode !== 'none' && !this.value) {
             throw new Error('Grid List Item must have [value] attribute.');
         }
 
-        if (this.selected) {
+        if (this.selected && this.value && this._index != null) {
             const action = this.selectionMode !== 'multiSelect' ? null : GridListSelectionActions.ADD;
-            const value = this.value;
 
-            this._gridList.setSelectedItem(value, this._index, action);
+            this._gridList.setSelectedItem(this.value, this._index, action);
         }
 
         this._cd.detectChanges();
@@ -236,7 +246,7 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
     private _selectionMode?: GridListSelectionMode;
 
     /** @hidden */
-    private _gridLayoutClasses?: string[] = [];
+    private _gridLayoutClasses: string[] = [];
 
     /** @hidden */
     private readonly subscription = new Subscription();
@@ -252,16 +262,6 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
             this._cd.markForCheck();
         });
         this.subscription.add(selectedItemsSub);
-    }
-
-    /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
-        if (
-            changes.layoutItemPattern &&
-            changes.layoutItemPattern.previousValue !== changes.layoutItemPattern.currentValue
-        ) {
-            this.gridLayoutClasses = parseLayoutPattern(this.layoutItemPattern, false);
-        }
     }
 
     /** @hidden */
@@ -292,7 +292,7 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
     _singleSelect(event: Event): void {
         this._preventDefault(event);
 
-        if (typeof this._selectedItem !== 'undefined') {
+        if (typeof this._selectedItem !== 'undefined' || !this.value || this._index == null) {
             return;
         }
         this._gridList.setSelectedItem(this.value, this._index);
@@ -306,6 +306,9 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
 
     /** @hidden */
     _selectionItem(value: boolean | number | T, event?: MouseEvent): void {
+        if (!this.value || this._index == null) {
+            return;
+        }
         const action =
             this.selectionMode !== 'multiSelect'
                 ? null
@@ -414,7 +417,7 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
             return false;
         }
 
-        while (!element.parentElement.classList.contains('fd-grid-list__item')) {
+        while (element.parentElement && !element.parentElement.classList.contains('fd-grid-list__item')) {
             if (element.classList.contains('fd-toolbar--extra-content')) {
                 return true;
             }

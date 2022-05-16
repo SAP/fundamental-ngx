@@ -34,7 +34,7 @@ import { startWith, takeUntil, switchMap } from 'rxjs/operators';
 
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { ContentDensityService, DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
-import { FormStates } from '@fundamental-ngx/core/shared';
+import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 
 import { SELECT_COMPONENT, SelectInterface } from './select.interface';
@@ -86,7 +86,7 @@ export class SelectComponent
 
     /** Holds the control state of select */
     @Input()
-    state: FormStates = null;
+    state: Nullable<FormStates>;
 
     /** Whether the select component should be displayed in mobile mode. */
     @Input()
@@ -94,7 +94,7 @@ export class SelectComponent
 
     /** Holds the message with respect to state */
     @Input()
-    stateMessage: string;
+    stateMessage: Nullable<string>;
 
     /** Whether the select component is disabled. */
     @Input()
@@ -178,11 +178,11 @@ export class SelectComponent
 
     /** Binds to control aria-labelledBy attribute */
     @Input()
-    ariaLabelledBy: string = null;
+    ariaLabelledBy: Nullable<string>;
 
     /** Sets control aria-label attribute value */
     @Input()
-    ariaLabel: string = null;
+    ariaLabel: Nullable<string>;
 
     /** Select Input Mobile Configuration */
     @Input()
@@ -266,13 +266,11 @@ export class SelectComponent
     readonly _optionSelectionChanges: Observable<FdOptionSelectionChange> = defer(() => {
         const _options = this._options;
 
-        if (_options) {
-            return _options.changes.pipe(
-                startWith(_options),
-                switchMap(() => merge(..._options.map((option) => option.selectionChange)))
-            );
-        }
-    }) as Observable<FdOptionSelectionChange>;
+        return _options?.changes.pipe(
+            startWith(_options),
+            switchMap(() => merge(..._options.map((option) => option.selectionChange)))
+        );
+    });
 
     /** @hidden */
     private _controlElemFontSize = 0;
@@ -343,7 +341,7 @@ export class SelectComponent
                 !!this.mobileConfig.approveButtonText &&
                 !this._isOpen) ||
             // CloseButton. Emits when you click on the option item
-            (this.mobileConfig.hasCloseButton && !!this.mobileConfig.approveButtonText === false)
+            (!!this.mobileConfig.hasCloseButton && !!this.mobileConfig.approveButtonText === false)
         );
     }
 
@@ -598,8 +596,7 @@ export class SelectComponent
 
     /** @hidden */
     _getOptionScrollPosition(optionIndex: number, itemHeight: number, currentScrollPosition: number): number {
-        const offsetHeight = this._options.get(optionIndex)._getHtmlElement().offsetHeight;
-        const optionHeight = offsetHeight === 0 ? itemHeight : offsetHeight;
+        const optionHeight = this._options.get(optionIndex)?._getHtmlElement().offsetHeight || itemHeight;
         const optionOffset = optionIndex * optionHeight;
         if (optionOffset < currentScrollPosition) {
             return optionOffset;

@@ -134,8 +134,10 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         });
 
         try {
-            const am = formatter.formatToParts(new Date(2020, 0, 1, 6)).find(({ type }) => type === 'dayPeriod').value;
-            const pm = formatter.formatToParts(new Date(2020, 0, 1, 16)).find(({ type }) => type === 'dayPeriod').value;
+            const am = formatter.formatToParts(new Date(2020, 0, 1, 6)).find(({ type }) => type === 'dayPeriod')?.value;
+            const pm = formatter
+                .formatToParts(new Date(2020, 0, 1, 16))
+                .find(({ type }) => type === 'dayPeriod')?.value;
 
             return am && pm ? [am, pm] : DEFAULT_PERIODS;
         } catch (e) {
@@ -266,7 +268,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         return new FdDate(date.year, date.month, date.day, date.hour, date.minute, date.second);
     }
 
-    isValid(date: FdDate): boolean {
+    isValid(date: FdDate): date is FdDate {
         if (!(date instanceof FdDate)) {
             return false;
         }

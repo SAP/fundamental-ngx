@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 
+import { Nullable } from '@fundamental-ngx/core/shared';
+
 @Component({
     selector: 'fdp-object-marker',
     templateUrl: './object-marker.component.html'
@@ -25,7 +27,7 @@ export class PlatformObjectMarkerComponent {
 
     /** Sets control aria-label attribute value */
     @Input()
-    ariaLabel: string = null;
+    ariaLabel: Nullable<string>;
 
     /** Sets control aria-hiden to a boolean attribute value */
     @Input()

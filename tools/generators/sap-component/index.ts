@@ -60,10 +60,11 @@ function updateApiFiles(schema: SapComponentSchema): Rule {
     return (tree) => {
         const filePath = `apps/docs/src/app/${getProjectDirName(schema)}/api-files.ts`;
         const content = tree.read(filePath);
-        const tsSourceFile = ts.createSourceFile(filePath, content.toString(), ts.ScriptTarget.Latest, true);
-        const apiFilesVar = getVariableValue(getVariableStatement(tsSourceFile, 'API_FILES'));
+        const tsSourceFile = ts.createSourceFile(filePath, content?.toString() ?? '', ts.ScriptTarget.Latest, true);
+        const statement = getVariableStatement(tsSourceFile, 'API_FILES');
+        const apiFilesVar = statement && getVariableValue(statement);
 
-        if (!ts.isObjectLiteralExpression(apiFilesVar)) {
+        if (!apiFilesVar || !ts.isObjectLiteralExpression(apiFilesVar)) {
             throw new SchematicsException(`Could not resolve "API_FILES" variable in "${filePath}"`);
         }
         const prefixComma = apiFilesVar.properties.hasTrailingComma ? '' : ', ';
@@ -84,15 +85,16 @@ function updateDocsRoutes(schema: SapComponentSchema): Rule {
             schema
         )}-documentation.routes.ts`;
         const content = tree.read(filePath);
-        const tsSourceFile = ts.createSourceFile(filePath, content.toString(), ts.ScriptTarget.Latest, true);
-        const routesVar = getVariableValue(getVariableStatement(tsSourceFile, 'ROUTES'));
+        const tsSourceFile = ts.createSourceFile(filePath, content?.toString() ?? '', ts.ScriptTarget.Latest, true);
+        const statement = getVariableStatement(tsSourceFile, 'ROUTES');
+        const routesVar = statement && getVariableValue(statement);
 
-        if (!ts.isArrayLiteralExpression(routesVar)) {
+        if (!routesVar || !ts.isArrayLiteralExpression(routesVar)) {
             throw new SchematicsException(`Could not resolve "children" property in "${filePath}"`);
         }
         const routesValues = routesVar.elements[0] as ts.ObjectLiteralExpression;
         const childrenProp = getPropertyAssignmentByName(routesValues.properties, 'children')?.initializer;
-        if (!ts.isArrayLiteralExpression(childrenProp)) {
+        if (!childrenProp || !ts.isArrayLiteralExpression(childrenProp)) {
             throw new SchematicsException(`Could not resolve "children" property in "${filePath}"`);
         }
 
@@ -115,10 +117,11 @@ function addDocsRouteToNav(schema: SapComponentSchema): Rule {
         )}-documentation-data.ts`;
 
         const content = tree.read(filePath);
-        const tsSourceFile = ts.createSourceFile(filePath, content.toString(), ts.ScriptTarget.Latest, true);
-        const componentsVar = getVariableValue(getVariableStatement(tsSourceFile, 'components'));
+        const tsSourceFile = ts.createSourceFile(filePath, content?.toString() ?? '', ts.ScriptTarget.Latest, true);
+        const statement = getVariableStatement(tsSourceFile, 'components');
+        const componentsVar = statement && getVariableValue(statement);
 
-        if (!ts.isArrayLiteralExpression(componentsVar)) {
+        if (!componentsVar || !ts.isArrayLiteralExpression(componentsVar)) {
             throw new SchematicsException(`Could not resolve "components" variable in "${filePath}"`);
         }
 
@@ -222,7 +225,8 @@ function updateLibraryData(schema: SapComponentSchema): Rule {
             );
 
             // add created module to exports from root package's public_api.ts
-            let modulePublicApiContent = tree.read(`${getLibraryDirectory(schema, false)}/public_api.ts`).toString();
+            let modulePublicApiContent =
+                tree.read(`${getLibraryDirectory(schema, false)}/public_api.ts`)?.toString() ?? '';
             modulePublicApiContent = modulePublicApiContent + `export * from '${getImportPath(schema)}';\n`;
             tree.overwrite(`${getLibraryDirectory(schema, false)}/public_api.ts`, modulePublicApiContent);
         }

@@ -19,6 +19,7 @@ import {
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 import { PANE_AUTO_SIZE } from '../constants';
 
@@ -89,7 +90,7 @@ export class SplitterSplitPaneComponent implements OnInit, AfterViewInit, OnDest
     }
 
     /** @hidden */
-    private get _window(): Window & typeof globalThis {
+    private get _window(): Nullable<Window & typeof globalThis> {
         return this._document?.defaultView;
     }
 

@@ -78,9 +78,9 @@ export class TableToolbarExampleComponent implements OnInit {
             (result) => {
                 this.confirmationReason = 'Dialog closed with result: ' + result;
                 this.tableRows.push({
-                    column1: this.myForm.get('nameInput').value,
-                    column2: this.myForm.get('typeInput').value,
-                    region: this.myForm.get('regionInput').value
+                    column1: this.myForm.get('nameInput')?.value,
+                    column2: this.myForm.get('typeInput')?.value,
+                    region: this.myForm.get('regionInput')?.value
                 });
                 this.searchInputChanged(this.searchTerm);
                 this.myForm.setValue({ nameInput: '', typeInput: '', regionInput: '' });

@@ -20,7 +20,7 @@ export class SchemaGroupComponent implements OnInit {
         key: string;
         control: AbstractControl;
         type: string;
-        enum: any[];
+        enum: any[] | undefined;
     }> = [];
 
     /**

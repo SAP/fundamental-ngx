@@ -61,25 +61,52 @@ export class FormFieldGroupComponent implements FormFieldGroup, OnInit, OnDestro
      * Defines label's column layout.
      */
     @Input()
-    labelColumnLayout: ColumnLayout;
+    set labelColumnLayout(value: ColumnLayout | undefined) {
+        if (value) {
+            this._labelColumnLayout = value;
+        }
+    }
+    get labelColumnLayout(): ColumnLayout {
+        return this._labelColumnLayout;
+    }
+    /** @hidden */
+    private _labelColumnLayout: ColumnLayout;
 
     /**
      * Defines field's column layout.
      */
     @Input()
-    fieldColumnLayout: ColumnLayout;
+    set fieldColumnLayout(value: ColumnLayout | undefined) {
+        if (value) {
+            this._fieldColumnLayout = value;
+        }
+    }
+    get fieldColumnLayout(): ColumnLayout {
+        return this._fieldColumnLayout;
+    }
+    /** @hidden */
+    private _fieldColumnLayout: ColumnLayout;
 
     /**
      * Defines gap column layout.
      */
     @Input()
-    gapColumnLayout: ColumnLayout;
+    set gapColumnLayout(value: ColumnLayout | undefined) {
+        if (value) {
+            this._gapColumnLayout = value;
+        }
+    }
+    get gapColumnLayout(): ColumnLayout {
+        return this._gapColumnLayout;
+    }
+    /** @hidden */
+    private _gapColumnLayout: ColumnLayout;
 
     /**
      * Describes hint options for group header
      */
     @Input()
-    hintOptions: HintOptions;
+    hintOptions?: HintOptions;
 
     /**
      * Get form fields wrapped into form field group

@@ -23,6 +23,7 @@ import { debounceTime, takeUntil } from 'rxjs/operators';
 
 import { SliderControlValue, SliderCustomValue, SliderTickMark, SliderValueTargets } from './slider.model';
 import { RtlService, applyCssClass, CssClassBuilder, KeyUtil } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 export const SLIDER_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
@@ -56,15 +57,15 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
     /** User's custom classes */
     @Input()
-    class: string;
+    class: Nullable<string>;
 
     /** Id of the element that labels slider. */
     @Input()
-    ariaLabelledBy: string = null;
+    ariaLabelledBy: Nullable<string>;
 
     /** Aria label for the slider. */
     @Input()
-    ariaLabel: string = null;
+    ariaLabel: Nullable<string>;
 
     /** Get Minimum value. */
     @Input()
@@ -290,7 +291,11 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string[] {
-        return ['fn-slider', this.class];
+        const classList = ['fn-slider'];
+        if (this.class) {
+            classList.push(this.class);
+        }
+        return classList;
     }
 
     /** @hidden */

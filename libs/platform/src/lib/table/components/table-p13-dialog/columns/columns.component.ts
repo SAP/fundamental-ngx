@@ -68,9 +68,9 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
     _filteredColumns: SelectableColumn[] = [];
 
     /** Search Query subject */
-    _searchQuerySubject: BehaviorSubject<string> = new BehaviorSubject(INITIAL_SEARCH_TEXT);
+    _searchQuerySubject = new BehaviorSubject<string>(INITIAL_SEARCH_TEXT);
     /** Show All flag subject */
-    _showAllItemsSubject: BehaviorSubject<boolean> = new BehaviorSubject(INITIAL_SHOW_ALL_ITEMS);
+    _showAllItemsSubject = new BehaviorSubject<boolean>(INITIAL_SHOW_ALL_ITEMS);
 
     /** Selected columns count */
     _selectedColumnsCount = 0;

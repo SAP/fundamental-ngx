@@ -116,7 +116,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
 
     /** @hidden */
     @ContentChild(SplitButtonActionTitle, { read: TemplateRef })
-    titleTemplate: TemplateRef<any>;
+    titleTemplate: TemplateRef<any> | null;
 
     /** @hidden */
     @ContentChild(MenuComponent)

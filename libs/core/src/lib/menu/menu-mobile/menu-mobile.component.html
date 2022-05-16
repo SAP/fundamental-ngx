@@ -32,7 +32,7 @@
         </fd-dialog-header>
 
         <fd-dialog-body>
-            <ng-container *ngTemplateOutlet="isSubmenu ? subMenuTemplate : view"> </ng-container>
+            <ng-container *ngTemplateOutlet="(isSubmenu ? subMenuTemplate : view) || null"> </ng-container>
         </fd-dialog-body>
 
         <fd-dialog-footer *ngIf="mobileConfig.approveButtonText || mobileConfig.cancelButtonText">
@@ -57,7 +57,7 @@
 <ng-template #subMenuTemplate>
     <nav class="fd-menu fd-menu--mobile" [class.fd-menu--compact]="false">
         <ul class="fd-menu__sublist">
-            <ng-container *ngTemplateOutlet="view"></ng-container>
+            <ng-container *ngTemplateOutlet="view || null"></ng-container>
         </ul>
     </nav>
 </ng-template>

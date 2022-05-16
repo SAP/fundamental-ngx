@@ -23,17 +23,17 @@ import { AvatarComponent, AvatarModule } from '@fundamental-ngx/core/avatar';
 })
 class TestComponent {
     size: 'xs' | 's' | 'm' | 'l' | 'xl' = 'm';
-    glyph: string = null;
+    glyph: string | null = null;
     circle = false;
     transparent = false;
     placeholder = false;
     contain = false;
     tile = false;
-    colorAccent: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 = null;
+    colorAccent: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | null = null;
     random = false;
-    zoomGlyph: string = null;
+    zoomGlyph: string | null = null;
     border = false;
-    label: string = null;
+    label: string | null = null;
 }
 
 describe('AvatarComponent', () => {

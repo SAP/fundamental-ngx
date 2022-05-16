@@ -1,3 +1,5 @@
+import { Nullable } from '@fundamental-ngx/core/shared';
+
 /**
  * Configuration for opening a notification with the NotificationService.
  */
@@ -6,13 +8,13 @@ export class NotificationConfig {
     id?: string;
 
     /** aria-label attribute for the notification component element. */
-    ariaLabel?: string = null;
+    ariaLabel?: Nullable<string>;
 
     /** aria-labelledby attribute for the notification component element. */
-    ariaLabelledBy?: string = null;
+    ariaLabelledBy?: Nullable<string>;
 
     /** aria-describedby attribute for the notification component element. */
-    ariaDescribedBy?: string = null;
+    ariaDescribedBy?: Nullable<string>;
 
     /** The container that the notification is appended to. By default, it is appended to the body. */
     container?: HTMLElement | 'body' = 'body';

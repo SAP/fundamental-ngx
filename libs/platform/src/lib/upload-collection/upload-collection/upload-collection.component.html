@@ -458,7 +458,7 @@
     let-count="count"
     #message
 >
-    <ng-container [ngSwitch]="messageType">
+    <ng-container *ngIf="_message" [ngSwitch]="messageType">
         <ng-container
             *ngSwitchCase="_messageType.CREATE"
             [ngTemplateOutlet]="messageNewFolder"

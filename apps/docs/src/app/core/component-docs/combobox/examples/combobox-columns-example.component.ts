@@ -19,5 +19,6 @@ export class ComboboxColumnsExampleComponent {
         if (obj) {
             return obj.name + ' - ' + obj.price;
         }
+        return '';
     }
 }

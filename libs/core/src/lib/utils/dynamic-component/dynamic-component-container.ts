@@ -13,7 +13,7 @@ export abstract class DynamicComponentContainer<T = TemplateRef<any> | Type<any>
     abstract containerRef: ViewContainerRef;
 
     /** @hidden */
-    childContent: T = undefined;
+    childContent: T | undefined = undefined;
 
     /** @hidden */
     protected _componentRef: ComponentRef<any> | EmbeddedViewRef<any>;

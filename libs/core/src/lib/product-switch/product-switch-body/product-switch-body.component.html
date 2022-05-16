@@ -19,7 +19,7 @@
             (keydown)="_keyDownHandle($event)"
             (click)="_itemClick(product, $event)"
             [draggable]="!product.disabledDragAndDrop && dragAndDropEnabled"
-            [stickInPlace]="product.stickToPosition"
+            [stickInPlace]="!!product.stickToPosition"
         >
             <i
                 role="presentation"

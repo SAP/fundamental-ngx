@@ -235,11 +235,11 @@ describe('Simple Menu', () => {
         tick(1);
         fixture.detectChanges();
 
-        const menuEl = overlayContainerEl.querySelector('.fd-menu');
+        const menuEl = overlayContainerEl.querySelector('.fd-menu') as Element;
 
         // check to see if first item is focused
         const items = overlayContainerEl.querySelectorAll('.fd-menu__link');
-        expect(items[0]).toBe(document.activeElement);
+        expect(items[0]).toBe(document.activeElement as Element);
 
         /**
          * KEYPRESS ARROWDOWN
@@ -248,7 +248,7 @@ describe('Simple Menu', () => {
         menuEl.dispatchEvent(keyboardEvent);
         fixture.detectChanges();
 
-        expect(items[1]).toBe(document.activeElement);
+        expect(items[1]).toBe(document.activeElement as Element);
 
         /**
          * KEYPRESS ARROWDOWN
@@ -257,7 +257,7 @@ describe('Simple Menu', () => {
         menuEl.dispatchEvent(keyboardEvent);
         fixture.detectChanges();
 
-        expect(items[2]).toBe(document.activeElement);
+        expect(items[2]).toBe(document.activeElement as Element);
 
         /**
          * KEYPRESS ARROWUP
@@ -266,7 +266,7 @@ describe('Simple Menu', () => {
         menuEl.dispatchEvent(keyboardEvent);
         fixture.detectChanges();
 
-        expect(items[1]).toBe(document.activeElement);
+        expect(items[1]).toBe(document.activeElement as Element);
     }));
 
     // TODO: flaky test  https://github.com/SAP/fundamental-ngx/issues/7534
@@ -284,7 +284,7 @@ describe('Simple Menu', () => {
 
         // check to see if first item is focused
         const items = overlayContainerEl.querySelectorAll('.fd-menu__link');
-        expect(items[0]).toBe(document.activeElement);
+        expect(items[0]).toBe(document.activeElement as Element);
 
         /**
          * KEYPRESS ESC TO CLOSE MENU

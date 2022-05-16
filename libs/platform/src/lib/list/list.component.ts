@@ -25,7 +25,7 @@ import {
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { NgControl, NgForm } from '@angular/forms';
 import { SelectionModel } from '@angular/cdk/collections';
-import { DOWN_ARROW, ENTER, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { isObservable, Observable, of, Subject, Subscription } from 'rxjs';
 import { delay, takeUntil, tap } from 'rxjs/operators';
 
@@ -137,7 +137,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     @Output()
     selectedItemChange: EventEmitter<SelectionChangeEvent> = new EventEmitter<SelectionChangeEvent>();
     /** Access child element, for checking link content*/
-    @ViewChild('link', { read: ElementRef })
+    @ViewChild('linkElement', { read: ElementRef })
     anchor: ElementRef;
     @ContentChild(ListItemDef)
     listItemDef: ListItemDef;
@@ -156,9 +156,9 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
      * keyManger to handle keybord events
      * used in template
      */
-    _keyManager: FocusKeyManager<BaseListItem>;
+    _keyManager?: FocusKeyManager<BaseListItem>;
     /** @hidden */
-    _items = [];
+    _items: any[] = [];
     /** @hidden
      */
     _destroyed = new Subject<void>();
@@ -174,7 +174,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
      * binding in tempate to append class */
     private _multiSelect = false;
     /** @hidden */
-    private _selectedvalue: string;
+    private _selectedvalue: string | null;
     /** @hidden
      * Whether row level selection mode is enabled to list component
      * for all the items
@@ -182,7 +182,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     private _rowSelection: boolean;
     /** @hidden
      * To store */
-    private _tempItems = [];
+    private _tempItems: any[] = [];
     /** @hidden
      */
     private _startIndex = 0;
@@ -191,7 +191,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     private _lastIndex = this.itemSize;
     /** @hidden
      */
-    private _dsItems = [];
+    private _dsItems: any[] = [];
     /** @hidden
      * for data source handling
      */
@@ -209,7 +209,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
         @Optional() @Self() public ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
-        protected _listConfig?: ListConfig
+        protected _listConfig: ListConfig
     ) {
         super(_changeDetectorRef, ngControl, ngForm, formField, formControl);
     }
@@ -454,16 +454,10 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     /** handline keyboard operations
      * in template on list and list items
      */
-    _handleKeyDown(event: KeyboardEvent): boolean {
+    _handleKeyDown(event: KeyboardEvent): void {
         event.stopImmediatePropagation();
-        if (this._keyManager) {
-            this._keyManager.setActiveItem(this._keyManager.activeItemIndex);
-            if (KeyUtil.isKeyCode(event, DOWN_ARROW) || KeyUtil.isKeyCode(event, UP_ARROW)) {
-                return false;
-            } else if (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE)) {
-                this._updateNavigation(event);
-                return false;
-            }
+        if (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE)) {
+            this._updateNavigation(event);
         }
     }
 
@@ -525,10 +519,10 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
      * seprate PR for custom event**/
     @HostListener('click', ['$event'])
     _updateNavigation(event: Event): void {
-        let selectedItemId = '0';
-        const el = event.target instanceof HTMLElement && event.target;
+        let selectedItemId: string | null = '0';
+        const el = event.target instanceof HTMLElement ? event.target : null;
         const parent = el?.closest('.fd-list__item');
-        if (parent !== null && parent !== undefined) {
+        if (parent) {
             selectedItemId = parent.getAttribute('id');
         }
 
@@ -537,7 +531,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
                 item.anchor.nativeElement.classList.remove('is-navigated');
             }
             if (item._focused) {
-                this._keyManager.updateActiveItem(index);
+                this._keyManager?.updateActiveItem(index);
             }
         });
         if (el !== null && el.tagName.toLowerCase() === 'a') {
@@ -548,10 +542,11 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
             el.querySelector('a') !== undefined &&
             el.querySelector('a') !== null
         ) {
-            el.querySelector('a').classList.add('is-navigated');
+            el.querySelector('a')?.classList.add('is-navigated');
         }
 
-        if (el !== null && el !== undefined) {
+        // TODO: selection management should be completely changed https://github.com/SAP/fundamental-ngx/issues/8008
+        if (el && selectedItemId) {
             if (this.selectRow) {
                 this._handleRowSelect(selectedItemId);
             } else if (this.selectionMode === 'single') {
@@ -583,7 +578,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     }
 
     /** @hidden */
-    private _toDataStream(source: FdpListDataSource<any>): ListDataSource<any> {
+    private _toDataStream(source: FdpListDataSource<any>): ListDataSource<any> | undefined {
         if (isDataSource(source)) {
             return <ListDataSource<any>>source;
         }
@@ -639,6 +634,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     private _handleSingleSelect(event: Event, selectedItemId: string): void {
         const parent = event.target instanceof HTMLElement && event.target.closest('.fd-list__item');
         const radio = parent ? parent.querySelector('input') : null;
+        // TODO: this doesn't work in production, should be fixed within https://github.com/SAP/fundamental-ngx/issues/8008
         this._selectedvalue = radio ? radio.getAttribute('ng-reflect-value') : null;
 
         this.listItems.forEach((item) => {

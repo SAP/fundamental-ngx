@@ -57,7 +57,7 @@ export class PopoverFormMessageService {
             CSS_CLASS_NAME.message,
             getTypeClassName(this._type),
             this._shouldBeHidden() ? 'fd-popover__body--hidden' : ''
-        ];
+        ].filter((v): v is string => !!v);
     }
 
     /** @hidden */

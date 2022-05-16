@@ -17,6 +17,7 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { WizardContentComponent } from '../wizard-content/wizard-content.component';
 import { WizardStepIndicatorComponent } from '../wizard-step-indicator/wizard-step-indicator.component';
@@ -45,7 +46,7 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
      * The aria-label for the step container.
      */
     @Input()
-    ariaLabel: string;
+    ariaLabel: Nullable<string>;
 
     /**
      * The aria-label for the step container.

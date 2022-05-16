@@ -1,6 +1,7 @@
 import { Directive, ElementRef, HostBinding, Input, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { startWith } from 'rxjs/operators';
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { PopoverComponent } from './popover.component';
 
 @Directive({
@@ -9,7 +10,7 @@ import { PopoverComponent } from './popover.component';
 export class PopoverTriggerDirective implements OnDestroy {
     /** Set reference to Popover Component */
     @Input('fdPopoverTrigger')
-    set popover(popover: PopoverComponent) {
+    set popover(popover: Nullable<PopoverComponent>) {
         if (popover) {
             popover.trigger = this._elementRef;
             this._listenOnExpanded(popover);
@@ -19,15 +20,15 @@ export class PopoverTriggerDirective implements OnDestroy {
 
     /** @hidden */
     @HostBinding('attr.aria-haspopup')
-    ariaHasPopup: boolean;
+    ariaHasPopup: Nullable<boolean>;
 
     /** @hidden */
     @HostBinding('attr.aria-controls')
-    ariaControls: string;
+    ariaControls: Nullable<string>;
 
     /** @hidden */
     @HostBinding('attr.aria-expanded')
-    ariaExpanded: boolean;
+    ariaExpanded: Nullable<boolean>;
 
     /** @hidden */
     private _isExpandedSubscription: Subscription;
@@ -51,7 +52,7 @@ export class PopoverTriggerDirective implements OnDestroy {
     }
 
     /** @hidden */
-    private _setAriaAttributes(popover: PopoverComponent): void {
+    private _setAriaAttributes(popover: Nullable<PopoverComponent>): void {
         this.ariaHasPopup = !!popover;
         this.ariaControls = popover ? popover.id : null;
     }

@@ -11,7 +11,7 @@ export function parserFileSize(fileSize: string): number {
     }
 
     const sizes = fileSize.match(/[\d.]+|\D+/g);
-    if (sizes.length > 1) {
+    if (sizes && sizes.length > 1) {
         const size = Number(sizes[0].replace(/ +/g, ''));
         const unit = sizes[1].replace(/ +/g, '').toUpperCase();
 
@@ -20,13 +20,13 @@ export function parserFileSize(fileSize: string): number {
         } else if (unit === 'B' || unit === 'BYTE' || unit === 'BYTES') {
             return size;
         } else if (unit === 'KB') {
-            return fileSizeMap.get(unit) * size;
+            return fileSizeMap.get(unit)! * size;
         } else if (unit === 'MB') {
-            return fileSizeMap.get(unit) * size;
+            return fileSizeMap.get(unit)! * size;
         } else if (unit === 'GB') {
-            return fileSizeMap.get(unit) * size;
+            return fileSizeMap.get(unit)! * size;
         } else if (unit === 'TB') {
-            return fileSizeMap.get(unit) * size;
+            return fileSizeMap.get(unit)! * size;
         } else {
             throw new Error('FileSizeError - Invalid File size please check.');
         }

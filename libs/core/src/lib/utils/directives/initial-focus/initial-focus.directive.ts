@@ -54,7 +54,7 @@ export class InitialFocusDirective implements AfterViewInit {
      * @hidden
      * Searches for appropriate focusable element
      */
-    private _getFocusableElement(): HTMLElement {
+    private _getFocusableElement(): HTMLElement | null {
         if (!this.focusableItem) {
             return this._getTabbableElement(this._elmRef.nativeElement);
         }
@@ -104,7 +104,6 @@ export class InitialFocusDirective implements AfterViewInit {
         if (!this.enabled) {
             return;
         }
-        const elm = this._getFocusableElement();
-        elm.focus();
+        this._getFocusableElement()?.focus();
     }
 }

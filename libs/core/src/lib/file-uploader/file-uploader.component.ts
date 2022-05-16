@@ -18,9 +18,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { stateType } from '@fundamental-ngx/core/radio';
 import { FileUploaderService, FileUploadOutput } from './file-uploader.service';
 import { Subscription } from 'rxjs';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil, ContentDensityService } from '@fundamental-ngx/core/utils';
 import { ENTER, SPACE, TAB } from '@angular/cdk/keycodes';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 let fileUploaderInputUniqueId = 0;
 
@@ -92,11 +92,11 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
 
     /** aria-label value for input element. */
     @Input()
-    ariaLabel: string;
+    ariaLabel: Nullable<string>;
 
     /** aria-label-by value for input element.*/
     @Input()
-    ariaLabelledBy: string;
+    ariaLabelledBy: Nullable<string>;
 
     /** placeholder for input element. */
     @Input()
@@ -108,7 +108,7 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
 
     /** value for input element. */
     @Input()
-    buttonAriaLabel: string;
+    buttonAriaLabel: Nullable<string>;
 
     /** boolean value to enable compact mode */
     @Input()
@@ -218,8 +218,8 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
 
     /** @hidden */
     handleDrop(files: FileUploadOutput): void {
-        this.validFiles = files.validFiles;
-        this.invalidFiles = files.invalidFiles;
+        this.validFiles = files.validFiles ?? [];
+        this.invalidFiles = files.invalidFiles ?? [];
         this._propagateFiles();
     }
 
@@ -241,8 +241,8 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
             this.accept
         );
 
-        this.validFiles = fileOutput.validFiles;
-        this.invalidFiles = fileOutput.invalidFiles;
+        this.validFiles = fileOutput.validFiles ?? [];
+        this.invalidFiles = fileOutput.invalidFiles ?? [];
     }
 
     setInputValue(selectedFiles: File[]): void {

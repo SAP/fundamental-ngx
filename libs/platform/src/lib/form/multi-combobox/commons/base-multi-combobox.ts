@@ -39,8 +39,9 @@ import { RangeSelector } from '@fundamental-ngx/core/utils';
 import { ContentDensity, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/core/utils';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { ListComponent } from '@fundamental-ngx/core/list';
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { PopoverFillMode } from '@fundamental-ngx/core/shared';
+import { PopoverFillMode, FormStates } from '@fundamental-ngx/core/shared';
 import {
     ArrayMultiComboBoxDataSource,
     coerceArraySafe,
@@ -304,7 +305,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     private _matchingStrategy: MatchingStrategy = this.multiComboboxConfig.matchingStrategy;
 
     /** @hidden */
-    private _dsSubscription?: Subscription;
+    private _dsSubscription: Subscription | null = null;
 
     /** @hidden */
     private _element: HTMLElement = this.elementRef.nativeElement;
@@ -330,10 +331,10 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     private _timerSub$: Subscription;
 
     /** @hidden */
-    private _previousState: 'success' | 'error' | 'warning' | 'default' | 'information';
+    private _previousState?: FormStates;
 
     /** @hidden */
-    private _previousStateMessage: string;
+    private _previousStateMessage: Nullable<string>;
 
     /** @hidden */
     protected readonly _rangeSelector = new RangeSelector();
@@ -344,7 +345,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     /** @hidden */
     private _secondaryFn = (value: any): string => {
         if (isOptionItem(value)) {
-            return value.secondaryText;
+            return value.secondaryText ?? '';
         } else if (isJsObject(value) && this.secondaryKey) {
             const currentItem = this.objectGet(value, this.secondaryKey);
 
@@ -616,7 +617,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     /** @hidden
      *  Map grouped values to array. */
     protected _flattenGroups(items: SelectableOptionItem[]): SelectableOptionItem[] {
-        return items.reduce((result, item) => result.concat(item.children), <SelectableOptionItem[]>[]);
+        return items.reduce((result, item) => result.concat(item.children ?? []), <SelectableOptionItem[]>[]);
     }
 
     /** @hidden */
@@ -750,10 +751,10 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     /** @hidden */
     private _unsetInvalidEntry(): void {
         this.state = this._previousState;
-        this._previousState = null;
+        this._previousState = undefined;
 
         this.stateMessage = this._previousStateMessage;
-        this._previousStateMessage = null;
+        this._previousStateMessage = undefined;
 
         this._cd.markForCheck();
     }

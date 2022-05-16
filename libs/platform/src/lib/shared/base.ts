@@ -3,6 +3,7 @@ import { ChangeDetectorRef, Directive, InjectFlags, Input, OnDestroy, OnInit } f
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { ContentDensity, ContentDensityService } from '@fundamental-ngx/core/utils';
 import { PlatformConfig } from './platform.config';
 
@@ -20,15 +21,15 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
 
     /** Sets the `aria-label` attribute to the element. */
     @Input()
-    ariaLabel = null;
+    ariaLabel: Nullable<string>;
 
     /** Sets the `aria-labelledby` attribute to the element. */
     @Input()
-    ariaLabelledBy = null;
+    ariaLabelledBy: Nullable<string>;
 
     /** Sets the `aria-describedby` attribute to the element. */
     @Input()
-    ariaDescribedBy: string;
+    ariaDescribedBy: Nullable<string>;
 
     /** id for the Element */
     @Input()
@@ -44,11 +45,11 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
         this._contentDensity = contentDensity;
     }
     get contentDensity(): ContentDensity {
-        return this._contentDensity;
+        return this._contentDensity ?? 'cozy';
     }
     /** @hidden - Avoiding private property name collision */
-    _contentDensity: ContentDensity = 'cozy';
-    protected _contentDensityService: ContentDensityService;
+    _contentDensity?: ContentDensity = 'cozy';
+    protected _contentDensityService: ContentDensityService | null = null;
 
     /** @hidden */
     protected _subscriptions = new Subscription();
@@ -75,7 +76,7 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
         // There is an issue in ViewEngine, it simply ignores InjectFlags.Optional
         // so to make it work in ViewEngine we need to to use notFoundValue as "null" and avoid "undefined"
         // cause "undefined" is equal to Injector.THROW_IF_NOT_FOUND
-        this._contentDensityService = injector?.get(ContentDensityService, null, InjectFlags.Optional);
+        this._contentDensityService = injector?.get(ContentDensityService, null, InjectFlags.Optional) || null;
     }
 
     /** @hidden */

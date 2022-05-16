@@ -21,3 +21,4 @@ export * from './providers/providers';
 export * from './base-dynamic-form-generator-control';
 export * from './form-generator-field/form-generator-field.component';
 export * from './form-generator.tokens';
+export * from './helpers';

@@ -44,7 +44,7 @@ export class ApprovalFlowApproverDetailsComponent implements OnInit {
     _selectedUsers: ApprovalUser[] = [];
 
     /** @hidden */
-    _userToShowDetails: ApprovalUser;
+    _userToShowDetails?: ApprovalUser;
 
     /** @hidden */
     _userToShowDetailsData$: Observable<any>;
@@ -62,17 +62,22 @@ export class ApprovalFlowApproverDetailsComponent implements OnInit {
 
     /** @hidden */
     ngOnInit(): void {
-        this._isListMode = this._data.node?.approvers.length > 1;
+        this._isListMode = (this._data.node?.approvers.length ?? 0) > 1;
 
         if (this._isListMode) {
-            this._setListItems(this._data.node.approvers);
+            this._setListItems(this._data.node?.approvers ?? []);
         } else {
-            this._seeUserDetails(this._data.watcher || this._data.node?.approvers[0]);
+            const user = this._data.watcher || this._data.node?.approvers[0];
+            if (user) {
+                this._seeUserDetails(user);
+            } else {
+                this.dialogRef.close();
+            }
         }
     }
 
     /** @hidden */
-    _setListItems(items: ApprovalUser[]): void {
+    _setListItems(items: ApprovalUser[] = []): void {
         this._listItems = [...items];
         this._cdr.detectChanges();
     }
@@ -94,17 +99,17 @@ export class ApprovalFlowApproverDetailsComponent implements OnInit {
 
     /** @hidden */
     _sendReminder(): void {
-        const reminderTargets = this._isListMode ? this._selectedUsers : this._data.node.approvers;
+        const reminderTargets = this._isListMode ? this._selectedUsers : this._data.node?.approvers;
         this.dialogRef.close(reminderTargets);
     }
 
     /** @hidden */
     _onSearchStringChange(searchString: string): void {
         if (!searchString) {
-            this._setListItems(this._data.node.approvers);
+            this._setListItems(this._data.node?.approvers);
             return;
         }
 
-        this._setListItems(this._data.node.approvers.filter((user) => filterByName(user, searchString)));
+        this._setListItems(this._data.node?.approvers.filter((user) => filterByName(user, searchString)));
     }
 }

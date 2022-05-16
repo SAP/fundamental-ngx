@@ -31,11 +31,11 @@ export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit,
      * @Input date time object representation
      */
     @Input()
-    get value(): D {
+    get value(): D | null {
         return super.getValue();
     }
 
-    set value(value: D) {
+    set value(value: D | null) {
         super.setValue(value);
     }
 
@@ -109,7 +109,7 @@ export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit,
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
      */
     @Input()
-    set state(state: FormStates) {
+    set state(state: FormStates | undefined) {
         super.state = state;
     }
 

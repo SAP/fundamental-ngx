@@ -40,7 +40,7 @@ export class CheckboxReactiveFormsExampleComponent implements OnInit {
     }
 
     private acceptAll(accept: boolean): void {
-        this.registrationForm.get('agreements').setValue({
+        this.registrationForm.get('agreements')?.setValue({
             marketing: accept,
             newsletter: accept,
             termsAndConditions: accept
@@ -48,13 +48,13 @@ export class CheckboxReactiveFormsExampleComponent implements OnInit {
     }
 
     private setAgreementsOnAcceptAllChange(): void {
-        this.registrationForm.get('acceptAll').valueChanges.subscribe((value) => this.acceptAll(value));
+        this.registrationForm.get('acceptAll')?.valueChanges.subscribe((value) => this.acceptAll(value));
     }
 
     private setControlOnAgreementsChange(): void {
         this.registrationForm
             .get('agreements')
-            .valueChanges.pipe(
+            ?.valueChanges.pipe(
                 map((agreements) => this.getValuesFromObject(agreements)),
                 map((agreementsValues: boolean[]) => {
                     const agreeAll = agreementsValues.reduce((overall, value) => value && overall, true);
@@ -69,7 +69,7 @@ export class CheckboxReactiveFormsExampleComponent implements OnInit {
                 })
             )
             .subscribe((acceptAllValue) =>
-                this.registrationForm.get('acceptAll').setValue(acceptAllValue, { emitEvent: false })
+                this.registrationForm.get('acceptAll')?.setValue(acceptAllValue, { emitEvent: false })
             );
     }
 

@@ -43,8 +43,8 @@ import { DialogService } from '@fundamental-ngx/core/dialog';
         <ng-container [formGroup]="form">
             <ng-container [formGroupName]="formGroupName">
                 <fdp-slider
-                    [contentDensity]="formItem.guiOptions?.contentDensity"
-                    [customValues]="formItem.choices"
+                    [contentDensity]="formItem.guiOptions?.contentDensity || 'cozy'"
+                    [customValues]="formItem.choices || []"
                     tooltipMode="readonly"
                     [name]="name"
                     [formControlName]="name"
@@ -66,7 +66,7 @@ export class PlatformSmartFilterBarSliderComponent extends BaseDynamicFormGenera
         <ng-container [formGroup]="form">
             <ng-container [formGroupName]="formGroupName">
                 <fdp-date-picker
-                    [contentDensity]="formItem.guiOptions?.contentDensity"
+                    [contentDensity]="formItem.guiOptions?.contentDensity || 'cozy'"
                     [placeholder]="formItem.placeholder || formItem.message"
                     [name]="name"
                     [formControlName]="name"
@@ -455,8 +455,14 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
     private _filterDate<D = FdDate>(
         item: ExampleItem,
         filter: CollectionDateFilter,
-        adapter: DatetimeAdapter<D>
+        adapter?: DatetimeAdapter<D>
     ): boolean {
+        if (!adapter) {
+            throw new Error(
+                'In order to filter date columns, please provide DateTime adapter in your TableDataProvider constructor.'
+            );
+        }
+
         const filterValue = filter.value;
         const filterValue2 = filter.value2;
         const itemValue = get(item, filter.field);

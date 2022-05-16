@@ -6,8 +6,8 @@ interface ParseLayout {
     };
 }
 
-export function parseLayoutPattern(pattern: string, isBaseLayout = true): string[] | undefined {
-    const parseLayout = validateAndParseLayoutPattern(pattern, isBaseLayout);
+export function parseLayoutPattern(pattern: string | undefined, isBaseLayout = true): string[] {
+    const parseLayout = pattern && validateAndParseLayoutPattern(pattern, isBaseLayout);
 
     if (!parseLayout) {
         throw new Error('Invalid layoutPattern.');

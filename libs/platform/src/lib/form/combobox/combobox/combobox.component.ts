@@ -80,8 +80,8 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
         super.ngOnInit();
         const providers = this.providers?.size === 0 ? this._comboboxConfig.providers : this.providers;
         // if we have both prefer dataSource
-        if (!this.dataSource && this.entityClass && providers.has(this.entityClass)) {
-            this.dataSource = new ComboBoxDataSource(providers.get(this.entityClass));
+        if (!this.dataSource && this.entityClass && providers?.has(this.entityClass)) {
+            this.dataSource = new ComboBoxDataSource(providers.get(this.entityClass)!);
         }
     }
 
@@ -147,7 +147,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
             return;
         }
 
-        this._selectedElement = (this.isGroup && selectedItem?.children[0]) || selectedItem;
+        this._selectedElement = (this.isGroup && selectedItem?.children?.[0]) || selectedItem;
         this.inputText = this.displayValue(this._selectedElement);
     }
 
@@ -230,7 +230,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
 
         return this._suggestions
             .reduce((result: OptionItem[], item: OptionItem) => {
-                result.push(...item.children);
+                result.push(...(item.children ?? []));
 
                 return result;
             }, [])

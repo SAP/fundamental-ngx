@@ -12,6 +12,7 @@ import {
 import { PopoverService } from '@fundamental-ngx/core/popover';
 import { BasePopoverClass } from '@fundamental-ngx/core/popover';
 import { IconComponent } from '@fundamental-ngx/core/icon';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 const INLINE_HELP_CLASS = 'fd-popover__inline-help fd-inline-help__content';
 const INLINE_HELP_ICON_CLASS = 'fd-popover__inline-help--icon';
@@ -48,11 +49,11 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
 
     /** Inline help text to display inside generated popover */
     @Input('fd-inline-help')
-    inlineHelpText: string = null;
+    inlineHelpText: Nullable<string> = null;
 
     /** Inline help template to display inside generated popover */
     @Input('fd-inline-help-template')
-    inlineHelpTemplate: TemplateRef<any> = null;
+    inlineHelpTemplate: Nullable<TemplateRef<any>> = null;
 
     constructor(
         private _popoverService: PopoverService,

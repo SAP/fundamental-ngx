@@ -139,7 +139,7 @@ describe('DatePickerComponent', () => {
         spyOn(component.selectedDateChange, 'emit');
         component.type = 'single';
         component.dateStringUpdate('hello');
-        const date: FdDate = adapter.parse('hello');
+        const date = adapter.parse('hello');
         expect(component._isInvalidDateInput).toBe(true);
         expect(component.selectedDateChange.emit).toHaveBeenCalledWith(date);
         expect(component.isModelValid()).toBe(false);
@@ -149,8 +149,8 @@ describe('DatePickerComponent', () => {
         spyOn(component.selectedRangeDateChange, 'emit');
         component.type = 'range';
         component.dateStringUpdate('start - end');
-        const start: FdDate = adapter.parse('start');
-        const end: FdDate = adapter.parse('end');
+        const start = adapter.parse('start');
+        const end = adapter.parse('end');
         expect(component._isInvalidDateInput).toBe(true);
         expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start, end });
         expect(component.isModelValid()).toBe(false);
@@ -171,6 +171,7 @@ describe('DatePickerComponent', () => {
             if (str === strDate2) {
                 return date2;
             }
+            return null;
         });
 
         component.type = 'range';
@@ -220,6 +221,7 @@ describe('DatePickerComponent', () => {
             if (str === strDate2) {
                 return date2;
             }
+            return null;
         });
         component.dateStringUpdate(strDate1 + ' - ' + strDate2);
 
@@ -249,6 +251,7 @@ describe('DatePickerComponent', () => {
             if (str === strDate2) {
                 return date2;
             }
+            return null;
         });
         component.dateStringUpdate(strDate1 + ' - ' + strDate2);
 
@@ -338,7 +341,7 @@ describe('DatePickerComponent Accessibility', () => {
         dateRangeInputLabel = 'Date range input';
         message = 'This is a message';
         required = false;
-        state: FormStates = null;
+        state: FormStates | null = null;
         valueStateSuccessMessage = 'Value state Success';
         valueStateInformationMessage = 'Value state Information';
         valueStateWarningMessage = 'Value state Warning';
@@ -401,29 +404,29 @@ describe('DatePickerComponent Accessibility', () => {
     });
 
     it('has aria-describedby referencing to "message" prop', () => {
-        const messageId = getInputElement().getAttribute('aria-describedby');
+        const messageId = getInputElement().getAttribute('aria-describedby') as string;
         expect(messageId).toBeDefined();
-        expect(document.getElementById(messageId).textContent).toContain('This is a message');
+        expect(document.getElementById(messageId)?.textContent).toContain('This is a message');
     });
 
     it('has aria-describedby referencing to value state message based on "state" prop', () => {
-        const messageId = getInputElement().getAttribute('aria-describedby');
+        const messageId = getInputElement().getAttribute('aria-describedby') as string;
 
         fixture.componentInstance.state = 'error';
         fixture.detectChanges();
-        expect(document.getElementById(messageId).textContent).toContain('Value state Error');
+        expect(document.getElementById(messageId)?.textContent).toContain('Value state Error');
 
         fixture.componentInstance.state = 'warning';
         fixture.detectChanges();
-        expect(document.getElementById(messageId).textContent).toContain('Value state Warning');
+        expect(document.getElementById(messageId)?.textContent).toContain('Value state Warning');
 
         fixture.componentInstance.state = 'information';
         fixture.detectChanges();
-        expect(document.getElementById(messageId).textContent).toContain('Value state Information');
+        expect(document.getElementById(messageId)?.textContent).toContain('Value state Information');
 
         fixture.componentInstance.state = 'success';
         fixture.detectChanges();
-        expect(document.getElementById(messageId).textContent).toContain('Value state Success');
+        expect(document.getElementById(messageId)?.textContent).toContain('Value state Success');
     });
 });
 

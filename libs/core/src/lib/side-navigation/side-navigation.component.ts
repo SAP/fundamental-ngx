@@ -77,7 +77,7 @@ export class SideNavigationComponent implements AfterContentInit, AfterViewInit,
     ngOnInit(): void {
         /** Set up condensed state */
         this.nestedListState.condensed =
-            this.condensed || (this.sideNavigationConfiguration && this.sideNavigationConfiguration.condensed);
+            this.condensed || !!(this.sideNavigationConfiguration && this.sideNavigationConfiguration.condensed);
 
         if (this.collapseWidth) {
             this.onResize();

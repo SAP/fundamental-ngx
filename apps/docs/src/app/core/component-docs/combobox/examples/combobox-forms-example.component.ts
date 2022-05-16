@@ -25,9 +25,5 @@ export class ComboboxFormsExampleComponent {
         { displayedValue: 'Tomato', value: 'TomatoValue' }
     ];
 
-    myDisplayFunction = (item: ComboboxItem): string => {
-        if (item) {
-            return item.displayedValue;
-        }
-    };
+    myDisplayFunction = (item: ComboboxItem): string => item?.displayedValue ?? '';
 }

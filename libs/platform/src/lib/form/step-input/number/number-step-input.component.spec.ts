@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 
 import { ContentDensity, RtlService } from '@fundamental-ngx/core/utils';
 import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
@@ -487,7 +487,7 @@ describe('Basic number Step Input withing platforms form', () => {
         const controlHint = host.stepInputFormField.hint;
         expect(controlHint).toBe('This is tooltip help');
 
-        const controlDefaultValue = host.form.get('qty').value;
+        const controlDefaultValue = host.form.get('qty')?.value;
         expect(controlDefaultValue).toBe(host.initialFormModel.qty);
     });
 
@@ -495,17 +495,17 @@ describe('Basic number Step Input withing platforms form', () => {
         const stepInputComponent = host.stepInputComponent;
         stepInputComponent.value = 25;
         await wait(fixture);
-        expect(host.form.get('qty').value).toBe(25);
+        expect(host.form.get('qty')?.value).toBe(25);
 
         stepInputComponent.value = 50;
         await wait(fixture);
 
-        expect(host.form.get('qty').value).toBe(50);
+        expect(host.form.get('qty')?.value).toBe(50);
     });
 
     it('should be in an error state if value is empty and touched', async () => {
         const stepInputComponent = host.stepInputComponent;
-        const formControl = host.form.get('qty');
+        const formControl = host.form.get('qty') as FormControl;
         const stepInputEl = fixture.debugElement.query(By.css('.fd-step-input'));
 
         expect(formControl.value).toBe(100);
@@ -522,7 +522,7 @@ describe('Basic number Step Input withing platforms form', () => {
 
     it('should be in an error state if entered number cannot be parsed', async () => {
         const stepInputComponent = host.stepInputComponent;
-        const formControl = host.form.get('qty');
+        const formControl = host.form.get('qty') as FormControl;
         const stepInputEl = fixture.debugElement.query(By.css('.fd-step-input'));
 
         expect(formControl.value).toBe(100);

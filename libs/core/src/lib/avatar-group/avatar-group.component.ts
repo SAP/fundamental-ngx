@@ -21,6 +21,7 @@ import { DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB } from '@angular/cdk
 import { of, Subscription } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { ColorAccent, KeyUtil, RtlService, Size } from '@fundamental-ngx/core/utils';
 import { AvatarGroupItemDirective } from './directives/avatar-group-item.directive';
 import { AvatarGroupInterface } from './avatar-group.interface';
@@ -56,7 +57,7 @@ export class AvatarGroupComponent implements AvatarGroupInterface, OnChanges, On
 
     /** Aria-label for Avatar Group. */
     @Input()
-    ariaLabel: string = null;
+    ariaLabel: Nullable<string>;
 
     /** Counter for all avatars. */
     allItemsCount = 0;

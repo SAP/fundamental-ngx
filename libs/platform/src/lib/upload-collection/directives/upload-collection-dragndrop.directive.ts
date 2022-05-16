@@ -68,7 +68,7 @@ export class UploadCollectionDragnDropDirective {
     readonly onDropzone = new EventEmitter<boolean>();
 
     /** @hidden */
-    private dropzonePreviousState: boolean;
+    private dropzonePreviousState: boolean | null = null;
 
     /** @hidden */
     private elementSelector: string;
@@ -133,7 +133,7 @@ export class UploadCollectionDragnDropDirective {
         }
 
         this._muteEvent(event);
-        const rawFiles = event.dataTransfer.files;
+        const rawFiles = event.dataTransfer?.files ?? [];
         const files: File[] = Array.from(rawFiles);
 
         const output = this._filesValidatorService.validation(files, {

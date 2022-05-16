@@ -22,7 +22,7 @@ import { FdCheckboxValues } from './fd-checkbox-values.interface';
 import { LIST_ITEM_COMPONENT, ListItemInterface, ContentDensityService } from '@fundamental-ngx/core/utils';
 import equal from 'fast-deep-equal';
 import { Subscription } from 'rxjs';
-import { FormStates } from '@fundamental-ngx/core/shared';
+import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
 import { FD_CHECKBOX_VALUES_DEFAULT } from './fd-checkbox-values.interface';
 
 let checkboxUniqueId = 0;
@@ -55,7 +55,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
 
     /** Sets the `aria-label` attribute to the element. */
     @Input()
-    ariaLabel = '';
+    ariaLabel: Nullable<string>;
 
     /** Current selection state of the checkbox component */
     @Input()
@@ -68,15 +68,15 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
 
     /** Sets the `aria-labelledby` attribute to the element. */
     @Input()
-    ariaLabelledBy = null;
+    ariaLabelledBy: Nullable<string>;
 
     /** Sets the `aria-describedby` attribute to the element. */
     @Input()
-    ariaDescribedBy: string;
+    ariaDescribedBy: Nullable<string>;
 
     /** sets checkbox tooltip */
     @Input()
-    title: string;
+    title: Nullable<string>;
 
     /** Sets [id] property of input, binds input with input label using [for] property. */
     @Input()

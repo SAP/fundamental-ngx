@@ -19,6 +19,7 @@ import {
     MobileModeControl
 } from '@fundamental-ngx/core/mobile-mode';
 import { DialogService } from '@fundamental-ngx/core/dialog';
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { MULTIINPUT_COMPONENT, PlatformMultiInputInterface } from '../multi-input.interface';
 
 @Component({
@@ -40,10 +41,10 @@ export class PlatformMultiInputMobileComponent
      * Control element, which will be rendered inside dialog.
      * List element, which will be rendered inside dialog.
      */
-    childContent: {
+    childContent: Nullable<{
         listTemplate: TemplateRef<any>;
         controlTemplate: TemplateRef<any>;
-    } = null;
+    }> = null;
 
     /** @hidden */
     private _selectedBackup: any[];

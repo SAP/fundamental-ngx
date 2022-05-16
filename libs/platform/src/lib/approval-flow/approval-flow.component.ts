@@ -189,10 +189,10 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
     _approvalProcess: ApprovalProcess;
 
     /** @hidden */
-    _initialApprovalProcess: ApprovalProcess;
+    _initialApprovalProcess?: ApprovalProcess;
 
     /** @hidden */
-    _previousApprovalProcess: ApprovalProcess;
+    _previousApprovalProcess?: ApprovalProcess;
 
     /** @hidden */
     _graph: ApprovalFlowGraph;
@@ -337,7 +337,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         const nextNodeBlank = nextNode?.blank;
         const nextNodeParallelEnd = this._graphMetadata[nextNode?.id]?.parallelEnd;
 
-        return !node.blank && nextNodeBlank && !nextNodeParallelEnd;
+        return !node.blank && !!nextNodeBlank && !nextNodeParallelEnd;
     }
 
     /** @hidden */
@@ -478,22 +478,21 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         }
 
         event.preventDefault();
+
         let nextFocusTarget;
 
-        if (KeyUtil.isKeyCode(event, UP_ARROW) && nodeIndex > 0) {
-            nextFocusTarget = this._getNextVerticalNode(nodeIndex, columnIndex, 'up');
-        }
-
-        if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
-            nextFocusTarget = this._getNextVerticalNode(nodeIndex, columnIndex, 'down');
-        }
-
-        if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
-            nextFocusTarget = this._getNextHorizontalNode(nodeIndex, columnIndex, this._rtl ? 'right' : 'left');
-        }
-
-        if (KeyUtil.isKeyCode(event, RIGHT_ARROW)) {
-            nextFocusTarget = this._getNextHorizontalNode(nodeIndex, columnIndex, this._rtl ? 'left' : 'right');
+        if (typeof nodeIndex === 'number' && typeof columnIndex === 'number') {
+            if (KeyUtil.isKeyCode(event, UP_ARROW)) {
+                if (nodeIndex > 0) {
+                    nextFocusTarget = this._getNextVerticalNode(nodeIndex, columnIndex, 'up');
+                }
+            } else if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
+                nextFocusTarget = this._getNextVerticalNode(nodeIndex, columnIndex, 'down');
+            } else if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
+                nextFocusTarget = this._getNextHorizontalNode(nodeIndex, columnIndex, this._rtl ? 'right' : 'left');
+            } else if (KeyUtil.isKeyCode(event, RIGHT_ARROW)) {
+                nextFocusTarget = this._getNextHorizontalNode(nodeIndex, columnIndex, this._rtl ? 'left' : 'right');
+            }
         }
 
         if (nextFocusTarget?.nextNode) {
@@ -522,7 +521,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         this._editModeInitSub?.unsubscribe();
         this.watcherDataSource.close();
 
-        this._initialApprovalProcess = null;
+        this._initialApprovalProcess = undefined;
         this._isEditMode = false;
         this._messages = [];
 
@@ -541,8 +540,8 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         this._editModeInitSub?.unsubscribe();
         this.watcherDataSource.close();
 
-        this._approvalProcess = cloneDeep(this._initialApprovalProcess);
-        this._initialApprovalProcess = null;
+        this._approvalProcess = cloneDeep(this._initialApprovalProcess!);
+        this._initialApprovalProcess = undefined;
         this._isEditMode = false;
         this._messages = [];
 
@@ -563,8 +562,8 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
 
     /** @hidden Restore previously saved approval process state */
     _undoLastAction(): void {
-        this._approvalProcess = cloneDeep(this._previousApprovalProcess);
-        this._previousApprovalProcess = null;
+        this._approvalProcess = cloneDeep(this._previousApprovalProcess!);
+        this._previousApprovalProcess = undefined;
 
         this._buildView(this._approvalProcess);
     }
@@ -709,7 +708,11 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
     _onNodeDragMoved(node: ApprovalGraphNode): void {
         const draggedNodeDimensions = this._nodeComponents
             .find((comp) => comp.node === node)
-            ._nativeElement.getBoundingClientRect();
+            ?._nativeElement.getBoundingClientRect();
+
+        if (!draggedNodeDimensions) {
+            return;
+        }
 
         this._nodeComponents.forEach((component) => {
             if (component.node !== node && Boolean(component._dropZones.length)) {
@@ -747,7 +750,8 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
                 this._buildView(this._approvalProcess);
             }
 
-            nodeToDrop.targets = this._approvalProcess.nodes.find((node) => node.id === dropTarget.node.id).targets;
+            nodeToDrop.targets =
+                this._approvalProcess.nodes.find((node) => node.id === dropTarget.node.id)?.targets ?? [];
             dropTarget.node.targets = [nodeToDrop.id];
 
             this._finishDragDropProcess(nodeToDrop);
@@ -904,17 +908,17 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         const nodesToDelete = [nodeToDelete];
         const graphNodes = getGraphNodes(this._graph);
         let currNode = graphNodes.find((node) => node.id === nodeToDelete.id);
-        let nextNode: ApprovalGraphNode;
+        let nextNode: ApprovalGraphNode | undefined;
 
         do {
-            if (currNode.targets.length === 1) {
-                nextNode = graphNodes.find((node) => node.id === currNode.targets[0]);
+            if (currNode?.targets.length === 1) {
+                nextNode = graphNodes.find((node) => node.id === currNode?.targets[0]);
 
                 if (nextNode?.blank && this._graphMetadata[nextNode.id].parents.length === 1) {
                     nodesToDelete.push(nextNode);
 
                     currNode = nextNode;
-                    nextNode = graphNodes.find((node) => node.id === currNode.targets[0]);
+                    nextNode = graphNodes.find((node) => node.id === currNode?.targets[0]);
                 }
             }
         } while (nextNode?.blank && this._graphMetadata[nextNode.id].parents.length === 1);
@@ -924,7 +928,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         const isParentParallelStart = this._graphMetadata[parent?.id]?.parallelStart;
         const isTargetParallelEnd = this._graphMetadata[target]?.parallelEnd;
         const targets =
-            (isParentParallelStart && isTargetParallelEnd) || nodesToDelete.length > 1 ? [] : currNode.targets;
+            (isParentParallelStart && isTargetParallelEnd) || nodesToDelete.length > 1 ? [] : currNode?.targets ?? [];
 
         this._replaceTargets(nodeToDelete.id, targets);
 
@@ -978,7 +982,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         columnIndex: number,
         direction: 'left' | 'right',
         stepSize = 1
-    ): { nextNode: ApprovalGraphNode; stepSize: number } => {
+    ): { nextNode: ApprovalGraphNode | undefined; stepSize: number } => {
         const indexDiff = direction === 'right' ? 1 : -1;
         const nextColumn = this._graph.columns[columnIndex + indexDiff];
         const nextNode = nextColumn?.nodes[nodeIndex];
@@ -1000,7 +1004,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         columnIndex: number,
         direction: 'up' | 'down',
         stepSize = 1
-    ): { nextNode: ApprovalGraphNode; stepSize: number } => {
+    ): { nextNode: ApprovalGraphNode | undefined; stepSize: number } => {
         const indexDiff = direction === 'down' ? 1 : -1;
         const currColumn = this._graph.columns[columnIndex];
         const nextNode = currColumn.nodes[nodeIndex + indexDiff];
@@ -1037,15 +1041,20 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     /** @hidden */
-    private _findSerialNode(yIndex: number, targets: string[]): string[] {
-        const targetIsParent = targets.some((targetId) => this._graphMetadata[targetId].nodeIndex <= yIndex - 1);
+    private _findSerialNode(yIndex?: number, targets?: string[]): string[] {
+        const targetIsParent =
+            Number.isInteger(yIndex) &&
+            targets?.some((targetId) => {
+                const nodeIndex = this._graphMetadata[targetId]?.nodeIndex;
+                return Number.isInteger(nodeIndex) && nodeIndex! <= yIndex! - 1;
+            });
 
         if (targetIsParent) {
-            return targets;
+            return targets ?? [];
         }
 
-        const targetNode = this._approvalProcess.nodes.find((node) => node.id === targets[0]);
-        return this._findSerialNode(yIndex, targetNode.targets);
+        const targetNode = this._approvalProcess.nodes.find((node) => node.id === targets?.[0]);
+        return this._findSerialNode(yIndex, targetNode?.targets);
     }
 
     /** @hidden */
@@ -1064,7 +1073,7 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
 
             if (yIndex === 0) {
                 const sourceNodeMetadata = this._graphMetadata[sourceNode.id];
-                const columnNodes = this._graph.columns[sourceNodeMetadata.columnIndex].nodes;
+                const columnNodes = this._graph.columns?.[sourceNodeMetadata.columnIndex!]?.nodes;
                 const nextParallelNode = columnNodes.find((node, index) => index > 0 && !node.space);
 
                 if (nextParallelNode) {

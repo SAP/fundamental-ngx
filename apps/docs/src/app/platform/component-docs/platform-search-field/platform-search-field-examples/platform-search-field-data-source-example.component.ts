@@ -56,11 +56,11 @@ export class PlatformSearchFieldDataSourceExampleComponent implements OnInit {
 
     onSearchSubmit($event: SearchInput): void {
         this.searchTerm = $event.text;
-        this.searchCategory = $event.category;
+        this.searchCategory = $event.category ?? '';
     }
 
     onInputChange($event: SearchInput): void {
         this.inputText = $event.text;
-        this.inputCategory = $event.category;
+        this.inputCategory = $event.category ?? '';
     }
 }

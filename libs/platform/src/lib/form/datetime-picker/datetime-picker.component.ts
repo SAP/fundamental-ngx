@@ -121,7 +121,7 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
      */
     @Input()
-    set state(state: FormStates) {
+    set state(state: FormStates | undefined) {
         super.state = state;
     }
 

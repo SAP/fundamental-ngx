@@ -45,7 +45,7 @@ describe('IconTabBarTextTypeComponent', () => {
             targetItem,
             action: 'insert'
         });
-        const child = targetItem.subItems.find((item) => item.label === draggableItem.label);
+        const child = targetItem.subItems?.find((item) => item.label === draggableItem.label);
         expect(child).toBeTruthy();
     });
 

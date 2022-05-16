@@ -119,7 +119,7 @@ xdescribe('WizardGeneratorStepComponent', () => {
             .submitStepForms('productTypeStep')
             .pipe(first())
             .subscribe((forms) => {
-                expect(forms.productType.success).toBeTrue();
+                expect(forms!.productType.success).toBeTrue();
 
                 done();
             });

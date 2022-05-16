@@ -11,5 +11,5 @@ export interface CalendarAggregatedYear {
     selected?: boolean;
     tabIndex?: number;
     ariaLabel?: string;
-    index?: number;
+    index: number;
 }

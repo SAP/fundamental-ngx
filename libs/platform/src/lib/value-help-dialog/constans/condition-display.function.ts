@@ -9,7 +9,7 @@ import {
 export const defaultConditionDisplayFn = (
     item: VhdIncludedEntity | VhdExcludedEntity,
     filters?: VhdFilter[]
-): string => {
+): string | null => {
     const filter = (filters || []).find((f) => f.key === item.key);
     let value = (() => {
         switch (item.strategy) {

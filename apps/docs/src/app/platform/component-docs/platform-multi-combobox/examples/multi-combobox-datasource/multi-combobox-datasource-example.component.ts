@@ -29,8 +29,8 @@ export class MultiComboboxDatasourceExampleComponent {
 
     selectedItems1 = [this.dataSourceStrings[1]];
     selectedItems2 = [this.dataSource[1]];
-    selectedItems3 = null;
-    selectedItems4 = null;
+    selectedItems3 = [];
+    selectedItems4 = [];
     selectedItems5 = [
         this.dataSourceStrings[1],
         this.dataSourceStrings[2],

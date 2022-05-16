@@ -7,8 +7,8 @@ import {
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 export type LabelType = 'numeric' | 'icon';
 
@@ -51,11 +51,11 @@ export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
 
     /** Define the ariaLabel content of the info label */
     @Input()
-    ariaLabel: string;
+    ariaLabel: Nullable<string>;
 
     /** Define the labelled by content of the info label */
     @Input()
-    ariaLabelledBy: string;
+    ariaLabelledBy: Nullable<string>;
 
     /** @hidden */
     constructor(private _elementRef: ElementRef) {}

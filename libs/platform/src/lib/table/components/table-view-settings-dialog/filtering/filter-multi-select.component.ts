@@ -24,7 +24,7 @@ export class FilterMultiSelectComponent {
 
     /** The filter model */
     @Input()
-    set filterBy(filterBy: CollectionFilter) {
+    set filterBy(filterBy: CollectionFilter | undefined) {
         const filterByValue = filterBy?.value || [];
         this._selectableOptions = this.options.map(
             (option): SelectableOption => ({

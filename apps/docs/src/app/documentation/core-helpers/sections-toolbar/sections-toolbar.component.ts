@@ -66,7 +66,7 @@ export class SectionsToolbarComponent implements OnInit, OnChanges {
                                 return this._filterFn(contentEl, preparedSearchTerm) ? contentEl : null;
                             }
                         })
-                        .filter(Boolean);
+                        .filter((v): v is SectionInterfaceContent => !!v);
                     return { header: section.header, content };
                 })
                 .filter(({ content }) => content.length);
@@ -77,7 +77,7 @@ export class SectionsToolbarComponent implements OnInit, OnChanges {
         if (event.code === 'Enter' || event.code === 'Space') {
             event.preventDefault();
             const _event = new MouseEvent('click');
-            event.target.dispatchEvent(_event);
+            event.target?.dispatchEvent(_event);
         }
     }
 

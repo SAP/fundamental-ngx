@@ -42,7 +42,7 @@ export class DatetimePickerComplexI18nExampleComponent {
 
     date = FdDate.getNow();
 
-    placeholder = placeholders.get(this.locale);
+    placeholder = placeholders.get(this.locale) as string;
 
     @ViewChild(DatetimePickerComponent) datetimePickerComponent: DatetimePickerComponent<FdDate>;
 
@@ -51,6 +51,6 @@ export class DatetimePickerComplexI18nExampleComponent {
     public setLocale(locale: string): void {
         this.locale = locale;
         this.datetimeAdapter.setLocale(locale);
-        this.placeholder = placeholders.get(this.locale);
+        this.placeholder = placeholders.get(this.locale) as string;
     }
 }
