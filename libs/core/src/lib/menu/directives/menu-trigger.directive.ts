@@ -1,5 +1,6 @@
 import { Directive, ElementRef, HostBinding, Input, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 import { MenuComponent } from '../menu.component';
 
@@ -21,13 +22,13 @@ export class MenuTriggerDirective implements OnDestroy {
     }
 
     @HostBinding('attr.aria-haspopup')
-    ariaHasPopup: boolean;
+    ariaHasPopup: Nullable<boolean>;
 
     @HostBinding('attr.aria-controls')
-    ariaControls: string;
+    ariaControls: Nullable<string>;
 
     @HostBinding('attr.aria-expanded')
-    ariaExpanded: boolean;
+    ariaExpanded: Nullable<boolean>;
 
     /** @hidden */
     private _menuSubscription: Subscription = new Subscription();

@@ -74,8 +74,8 @@ describe('MenuService', () => {
 
     it('should properly build menu', () => {
         menuItems.forEach((menuItem) => expect(menuService.menuMap.get(menuItem)).toBeTruthy());
-        expect(menuService.menuMap.get(menuItems.first).children.length).toEqual(1);
-        expect(menuService.menuMap.get(null).children.length).toEqual(3);
+        expect(menuService.menuMap.get(menuItems.first)?.children.length).toEqual(1);
+        expect(menuService.menuMap.get(null)?.children.length).toEqual(3);
     });
 
     it('should set menu item as focused', () => {
@@ -83,7 +83,7 @@ describe('MenuService', () => {
         menuService.setFocused(menuItems.last);
 
         expect(focusSpy).toHaveBeenCalled();
-        expect(menuService.focusedNode.item).toBe(menuItems.last);
+        expect(menuService.focusedNode?.item).toBe(menuItems.last);
     });
 
     it('should set menu item active and update active path', () => {
@@ -147,8 +147,8 @@ describe('MenuService', () => {
     });
 
     it('should return node siblings', () => {
-        const siblings = menuService['_nodeSiblings'](menuService.menuMap.get(menuItems.first));
-        expect(siblings.length).toEqual(3);
+        const siblings = menuService['_nodeSiblings'](menuService.menuMap.get(menuItems.first)!);
+        expect(siblings?.length).toEqual(3);
     });
 
     it('should open submenu on arrow right', fakeAsync(() => {
@@ -225,6 +225,8 @@ describe('MenuService', () => {
 
     it('should close menu on Escape', () => {
         const closeSpy = spyOn(menu, 'close');
+
+        menuService.focusedNode = menuService.menuMap.get(menuItems.first);
 
         menuService['_handleKey'](new KeyboardEvent('keydown', { key: 'Escape' }));
 

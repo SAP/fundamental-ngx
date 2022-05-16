@@ -15,7 +15,7 @@ import { map } from 'rxjs/operators';
     ]
 })
 export class TablePopinExampleComponent implements OnInit {
-    masterCheckbox = false;
+    masterCheckbox: boolean | null = false;
 
     navigationArrow$: Observable<string>;
 

@@ -96,21 +96,21 @@ export class PlatformSearchFieldCategoriesExampleComponent implements OnInit {
 
     onSearchSubmit($event: SearchInput): void {
         this.searchTerm = $event.text;
-        this.searchCategory = $event.category;
+        this.searchCategory = $event.category ?? '';
     }
 
     onInputChange($event: SearchInput): void {
         this.inputText = $event.text;
-        this.inputCategory = $event.category;
+        this.inputCategory = $event.category ?? '';
     }
 
     onCompactSearchSubmit($event: SearchInput): void {
         this.compactSearchTerm = $event.text;
-        this.compactSearchCategory = $event.category;
+        this.compactSearchCategory = $event.category ?? '';
     }
 
     onCompactInputChange($event: SearchInput): void {
         this.compactInputText = $event.text;
-        this.compactInputCategory = $event.category;
+        this.compactInputCategory = $event.category ?? '';
     }
 }

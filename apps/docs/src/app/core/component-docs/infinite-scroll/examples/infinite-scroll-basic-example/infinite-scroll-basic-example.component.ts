@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InfiniteScrollBasicExampleComponent implements OnInit {
     // List that is displayed to the user
-    displayedElements = [
+    displayedElements: Item[] = [
         { label: 'Initially shown element' },
         { label: 'Initially shown element' },
         { label: 'Initially shown element' },
@@ -17,7 +17,7 @@ export class InfiniteScrollBasicExampleComponent implements OnInit {
     // Data to add. Can also come from an observable, service...
     // Can also be concatenated directly to displayedElements.
     // Here it comes from the generateArray() method.
-    data = [];
+    data: Item[] = [];
 
     // Used to emulate paging in this static example
     private dataSelector = 0;
@@ -41,4 +41,8 @@ export class InfiniteScrollBasicExampleComponent implements OnInit {
             this.data.push({ label: 'New element number: ' + i });
         }
     }
+}
+
+interface Item {
+    label: string;
 }

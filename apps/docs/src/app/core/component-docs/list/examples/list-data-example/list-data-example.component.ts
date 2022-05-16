@@ -10,7 +10,7 @@ export class ListDataExampleComponent implements OnInit {
 
     ascendingSort = true;
 
-    displayedItems = [];
+    displayedItems: string[] = [];
 
     searchTerm = '';
 

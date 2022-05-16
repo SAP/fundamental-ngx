@@ -15,7 +15,7 @@ import {
     templateUrl: './wizard-generator-dialog-example.component.html'
 })
 export class WizardGeneratorDialogExampleComponent implements OnDestroy {
-    wizardValue: any;
+    wizardValue: WizardGeneratorFormsValue | undefined;
 
     wizardTitle: WizardTitle = {
         size: 2,
@@ -140,7 +140,7 @@ export class WizardGeneratorDialogExampleComponent implements OnDestroy {
                 }
             })
             .afterClosed.pipe(takeUntil(this._onDestroy$))
-            .subscribe((wizardValue: WizardGeneratorFormsValue) => {
+            .subscribe((wizardValue) => {
                 this.wizardValue = wizardValue;
             });
     }

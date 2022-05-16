@@ -111,7 +111,7 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
         if (this._router) {
             this._subscriptions.add(
                 this._router.events
-                    .pipe(filter((event) => event instanceof NavigationStart && this._config.closeOnNavigation))
+                    .pipe(filter((event) => event instanceof NavigationStart && !!this._config.closeOnNavigation))
                     .subscribe(() => this._ref.dismiss())
             );
         }

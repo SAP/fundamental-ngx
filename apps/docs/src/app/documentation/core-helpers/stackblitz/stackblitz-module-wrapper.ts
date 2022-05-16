@@ -40,7 +40,7 @@ export class StackblitzModuleWrapper {
 
         // Main component that will be added as a root, if there is no component with main flag, first is chosen
         let mainComponent: string;
-        const _mainComponent: StackblitzFile = tsFiles.find((file) => file.main);
+        const _mainComponent = tsFiles.find((file) => file.main);
         if (_mainComponent) {
             mainComponent = _mainComponent.componentName;
         } else {

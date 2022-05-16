@@ -264,7 +264,7 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
     _onPageChange(page: string = ROOT_PAGE): void {
         this._currentPage = page;
 
-        this._cdr.markForCheck();
+        this._cdr.detectChanges();
     }
 
     /** @hidden */
@@ -297,7 +297,7 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
             /** Detaching basically works without the code but it's the edge-case */
             const isShouldDetachDefaultPane = this._currentPage === this._defaultPane?.id && newPage === ROOT_PAGE;
 
-            if (isShouldDetachDefaultPane && this._defaultPane?._content.isAttached) {
+            if (isShouldDetachDefaultPane && this._defaultPane?._content?.isAttached) {
                 this._defaultPane._content.detach();
             }
 
@@ -351,15 +351,12 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
     private _setDefaultPane(): void {
         const setDefaultPane = (): void => {
             if (this._splitter.defaultPaneId) {
-                this._defaultPane = this._panes.find((pane) => pane.id === this._splitter.defaultPaneId);
-            }
-
-            if (!this._defaultPane) {
-                this._defaultPane = this._directPanes[0];
+                this._defaultPane =
+                    this._panes.find((pane) => pane.id === this._splitter.defaultPaneId) ?? this._directPanes[0];
             }
 
             /** Detaching basically works without the code but it's the edge-case */
-            if (this._defaultPane?._content.isAttached) {
+            if (this._defaultPane?._content?.isAttached) {
                 this._defaultPane._content.detach();
             }
         };
@@ -419,7 +416,7 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
         const paneElement = this._getPaneElement(paneId);
 
         if (!paneElement) {
-            return null;
+            return 0;
         }
 
         return this._isHorizontal ? paneElement.offsetHeight : paneElement.offsetWidth;

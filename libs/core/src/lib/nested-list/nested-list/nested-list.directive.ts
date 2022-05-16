@@ -19,6 +19,7 @@ import { NestedListKeyboardService } from '../nested-list-keyboard.service';
 import { NestedListInterface } from './nested-list.interface';
 import { Subscription } from 'rxjs';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 @Directive({
     selector: '[fdNestedList], [fd-nested-list]'
@@ -32,7 +33,7 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
     /** In case the user wants put compact mode in this list */
     @Input()
     @HostBinding('class.fd-nested-list--compact')
-    compact?: boolean;
+    compact: Nullable<boolean>;
 
     /** @hidden */
     @HostBinding('class.fd-nested-list')
@@ -111,7 +112,7 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
      */
     private _getNestedLevel(): number {
         let element = this._elementRef.nativeElement;
-        const parentElements = [];
+        const parentElements: Element[] = [];
 
         /** Method that gathers all of the parentNode elements of current NestedListDirective element */
         while (element.parentNode) {

@@ -1,6 +1,8 @@
 import { Directive, Input } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 
+import { Nullable } from '@fundamental-ngx/core/shared';
+
 export type GlyphPosition = 'before' | 'after';
 
 export type ButtonType =
@@ -21,7 +23,7 @@ export class BaseButton {
      * Native type of button element
      */
     @Input()
-    type = 'button';
+    type: Nullable<string> = 'button';
 
     /** Position of glyph related to text */
     @Input()
@@ -32,7 +34,7 @@ export class BaseButton {
      * Default value is set to ''.
      */
     @Input()
-    glyph: string = null;
+    glyph: Nullable<string>;
 
     /** Whether to apply compact mode to the button. */
     @Input()
@@ -60,7 +62,17 @@ export class BaseButton {
 
     /** adding native aria-label to the component */
     @Input()
-    ariaLabel: string = null;
+    ariaLabel: Nullable<string>;
+
+    /** Whether button is in toggled state. */
+    @Input()
+    get toggled(): boolean {
+        return this._toggled;
+    }
+
+    set toggled(value: BooleanInput) {
+        this._toggled = coerceBooleanProperty(value);
+    }
 
     /**
      * Native disabled attribute of button element
@@ -91,4 +103,7 @@ export class BaseButton {
 
     /** @hidden */
     _ariaDisabled: boolean;
+
+    /** @hidden */
+    _toggled: boolean;
 }

@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
     templateUrl: './combobox-displaywith-example.component.html'
 })
 export class ComboboxDisplaywithExampleComponent {
-    values = [
+    values: Item[] = [
         { name: 'Apple' },
         { name: 'Tomato' },
         { name: 'Banana' },
@@ -18,11 +18,13 @@ export class ComboboxDisplaywithExampleComponent {
         { name: 'Pear' }
     ];
 
-    searchTerm = '';
+    searchTerm: Item | null = null;
 
-    displayFunc(obj: { name: string }): string {
-        if (obj) {
-            return obj.name.toLocaleUpperCase();
-        }
+    displayFunc(obj: Item | null): string {
+        return obj?.name.toLocaleUpperCase() ?? '';
     }
+}
+
+interface Item {
+    name: string;
 }

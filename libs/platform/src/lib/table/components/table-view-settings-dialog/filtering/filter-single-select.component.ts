@@ -23,7 +23,7 @@ export class FilterSingleSelectComponent {
 
     /** The filter model */
     @Input()
-    set filterBy(filterBy: CollectionFilter) {
+    set filterBy(filterBy: CollectionFilter | undefined) {
         const value = filterBy?.value?.[0];
         this._value = value === undefined ? NOT_FILTERED_OPTION_VALUE : value;
     }

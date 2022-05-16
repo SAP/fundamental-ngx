@@ -9,7 +9,7 @@
                 id="form-input-1"
                 placeholder="Field placeholder text"
             />
-            Input Value: {{ myForm.get('inputControl').value }}
+            Input Value: {{ myForm.get('inputControl')?.value }}
         </div>
         <div fd-form-item>
             <label fd-form-label for="form-input-2">Default Input:</label>
@@ -20,11 +20,11 @@
                 id="form-input-2"
                 placeholder="Field placeholder text"
             />
-            Input Value: {{ myForm.get('disabledInputControl').value }} <br />
-            Disabled : {{ myForm.get('disabledInputControl').disabled }}
+            Input Value: {{ myForm.get('disabledInputControl')?.value }} <br />
+            Disabled : {{ myForm.get('disabledInputControl')?.disabled }}
         </div>
     </div>
-    <div formArrayName="arr" *ngFor="let a of myForm.get('arr')['controls']; let i = index">
+    <div formArrayName="arr" *ngFor="let a of arr.controls; let i = index">
         <div [formGroupName]="i" style="margin-bottom: 10px">
             <div fd-form-set>
                 <div fd-form-item>

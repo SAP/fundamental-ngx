@@ -15,7 +15,7 @@ import {
 import { NgControl, NgForm } from '@angular/forms';
 
 import { ContentDensity } from '@fundamental-ngx/core/utils';
-import { FormStates } from '@fundamental-ngx/core/shared';
+import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
 import { BaseInput, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
 
 export class FileUploaderInvalidChangeEvent {
@@ -44,7 +44,7 @@ export class PlatformFileUploaderComponent extends BaseInput implements OnInit {
 
     /** Value for input element. */
     @Input()
-    buttonAriaLabel: string;
+    buttonAriaLabel: Nullable<string>;
 
     /** Whether the file input accepts drag and dropped files. */
     @Input()

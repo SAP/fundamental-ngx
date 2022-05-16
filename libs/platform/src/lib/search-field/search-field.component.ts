@@ -35,6 +35,7 @@ import { fromEvent, isObservable, merge, Observable, of, Subject } from 'rxjs';
 import { filter, map, take, takeUntil } from 'rxjs/operators';
 
 import { DynamicComponentService, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { BaseComponent, SearchFieldDataSource } from '@fundamental-ngx/platform/shared';
@@ -47,7 +48,7 @@ import { PlatformSearchFieldMobileModule } from './search-field-mobile/search-fi
 
 export interface SearchInput {
     text: string;
-    category: string;
+    category: string | null;
 }
 
 export interface SuggestionItem {
@@ -174,7 +175,7 @@ export class SearchFieldComponent
      * Not shown in the UI, only visible by the screen-readers.
      */
     @Input()
-    ariaLabel: string;
+    ariaLabel: Nullable<string>;
 
     /**
      * Id of elements (separated by space) for setting aria-labelledby for search input
@@ -227,7 +228,7 @@ export class SearchFieldComponent
      * Currently set category.
      * @hidden
      */
-    _currentCategory: ValueLabelItem;
+    _currentCategory?: ValueLabelItem;
 
     /**
      * Whether or not to show typeahead dropdown.
@@ -281,7 +282,7 @@ export class SearchFieldComponent
     private _currentSearchSuggestionAnnoucementMessage = '';
 
     /** @hidden */
-    private _suggestionOverlayRef: OverlayRef;
+    private _suggestionOverlayRef: OverlayRef | null;
 
     /** @hidden */
     private _suggestionPortal: TemplatePortal;
@@ -441,10 +442,11 @@ export class SearchFieldComponent
      * Callback function which gets executed on keyboard enter of input text field.
      * @hidden
      */
-    onSearchSubmit(): void {
+    onSearchSubmit(event?: Event): void {
+        event?.preventDefault();
+
         if (this.isLoading) {
             this.cancelSearch.emit();
-
             return;
         }
 
@@ -657,9 +659,14 @@ export class SearchFieldComponent
     name: 'suggestionMatches'
 })
 export class SuggestionMatchesPipe implements PipeTransform {
-    transform(values: string[], match: string, mobile = false): string[] {
-        return mobile && !match
-            ? values
-            : (values || []).filter((value) => value.toLowerCase().indexOf(match?.trim().toLowerCase()) > -1);
+    transform(values: string[] | null, match: string, mobile = false): string[] {
+        if (!values) {
+            values = [];
+        }
+        if (mobile && !match) {
+            return values;
+        }
+        const processedMatch = match.trim().toLowerCase();
+        return values.filter((value) => value.toLowerCase().indexOf(processedMatch) > -1);
     }
 }

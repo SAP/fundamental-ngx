@@ -1,4 +1,52 @@
 
+### [0.34.3-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.31...v0.34.3-rc.32) (2022-05-16)
+
+
+### Features
+
+* ts strict compilation rules ([#8057](https://github.com/SAP/fundamental-ngx/issues/8057)) ([70fa44a](https://github.com/SAP/fundamental-ngx/commit/70fa44af5e84d8bd0f58dc42499d3e27d3ae58e7))
+
+### [0.34.3-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.30...v0.34.3-rc.31) (2022-05-10)
+
+
+### Bug Fixes
+
+* **platform:** approval-flow - approvers menu overflow ([#8060](https://github.com/SAP/fundamental-ngx/issues/8060)) ([810d080](https://github.com/SAP/fundamental-ngx/commit/810d0808ed6d15cd0c9c1988479a03448df5d166))
+
+### [0.34.3-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.29...v0.34.3-rc.30) (2022-05-10)
+
+
+### Bug Fixes
+
+* **docs:** use injection tokens instead of plain strings ([#8066](https://github.com/SAP/fundamental-ngx/issues/8066)) ([715525c](https://github.com/SAP/fundamental-ngx/commit/715525c8dcfcc426762d95b323ea0173f13df241))
+
+### [0.34.3-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.28...v0.34.3-rc.29) (2022-05-07)
+
+
+### Bug Fixes
+
+* **core:** correct breadcrumb order and add boolean to allow dev to configure ([#8069](https://github.com/SAP/fundamental-ngx/issues/8069)) ([2ba066f](https://github.com/SAP/fundamental-ngx/commit/2ba066ffce5f43db36b015c7944c1fa9d89de246))
+
+### [0.34.3-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.27...v0.34.3-rc.28) (2022-05-07)
+
+
+### Features
+
+* **core:** add an ability to set "id" for dialog buttons from config ([#8065](https://github.com/SAP/fundamental-ngx/issues/8065)) ([9808891](https://github.com/SAP/fundamental-ngx/commit/9808891b5f09899940b469000a7a07f4daab9bbd))
+
+### [0.34.3-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.26...v0.34.3-rc.27) (2022-05-04)
+
+
+### Bug Fixes
+
+* **platform:** value help dialog search ([#8022](https://github.com/SAP/fundamental-ngx/issues/8022)) ([2bdd5cc](https://github.com/SAP/fundamental-ngx/commit/2bdd5cc8656e2ac0401972845ccd65e67f99af50))
+
+### [0.34.3-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.25...v0.34.3-rc.26) (2022-05-04)
+
+### [0.34.3-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.24...v0.34.3-rc.25) (2022-04-25)
+
+### [0.34.3-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.23...v0.34.3-rc.24) (2022-04-24)
+
 ### [0.34.3-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.22...v0.34.3-rc.23) (2022-04-20)
 
 

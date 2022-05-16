@@ -3,12 +3,12 @@
         <ng-template fdTemplate="header">
             <p>
                 <fd-icon
-                    *ngIf="_userToShowDetails && _data.node?.approvers.length > 1"
+                    *ngIf="_userToShowDetails && _data.node?.approvers && _data.node!.approvers!.length > 1"
                     [glyph]="'navigation-' + (_data.rtl ? 'right' : 'left') + '-arrow'"
                     (click)="_exitUserDetailsMode()"
                 ></fd-icon>
                 <ng-container *ngIf="_isListMode && !_userToShowDetails; else defaultHeader"
-                    >{{ _data.node.description }} ({{ _data.node.approvers.length }})</ng-container
+                    >{{ _data.node?.description }} ({{ _data.node?.approvers?.length ?? 0 }})</ng-container
                 >
             </p>
 
@@ -39,7 +39,7 @@
     </fd-dialog-body>
 
     <fd-dialog-footer>
-        <fd-dialog-footer-button *ngIf="_isListMode || (_userToShowDetails && _data.node?.approvers.length === 1)">
+        <fd-dialog-footer-button *ngIf="_isListMode || (_userToShowDetails && _data.node?.approvers?.length === 1)">
             <button
                 fd-button
                 fd-dialog-decisive-button

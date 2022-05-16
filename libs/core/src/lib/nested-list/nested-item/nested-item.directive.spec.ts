@@ -123,7 +123,8 @@ describe('NestedItemDirective', () => {
 
     it('Item with popover should react to open change from popover', () => {
         spyOn(nestedItemPopoverDirective, 'triggerOpen');
-        itemService.popover.handleOpenChange(true);
+        expect(itemService.popover).toBeDefined();
+        itemService.popover!.handleOpenChange(true);
         expect(nestedItemPopoverDirective.triggerOpen).toHaveBeenCalled();
     });
 
@@ -142,7 +143,7 @@ describe('NestedItemDirective', () => {
     });
 
     it('Item with popover, should pass reference to popover child', () => {
-        expect(itemService.popover.parentItemElement).toBe(nestedItemPopoverDirective);
+        expect(itemService.popover!.parentItemElement).toBe(nestedItemPopoverDirective);
     });
 
     it('Item with list should have children', () => {
@@ -178,7 +179,8 @@ describe('NestedItemDirective', () => {
 
     it('Popover should react to events from icon child', () => {
         fixture.detectChanges();
-        itemService.popover.handleOpenChange(true);
+        expect(itemService.popover).toBeDefined();
+        itemService.popover!.handleOpenChange(true);
         spyOn(nestedItemPopoverDirective, 'toggle');
         nestedItemPopoverDirective.contentItem.nestedExpandIcon.onClick(new MouseEvent('click'));
         fixture.detectChanges();

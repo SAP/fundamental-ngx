@@ -18,14 +18,12 @@ export function applyCssStyle(target: any, propertyKey: string, descriptor: Prop
         }
 
         const _styles: Hash<number | string> = originalMethod.apply(this);
-        if (!this.elementRef()) {
-            return;
+        if (this.elementRef()) {
+            const htmlElement = this.elementRef().nativeElement as HTMLElement;
+            Object.keys(_styles).forEach((key) => {
+                htmlElement.style[key] = _styles[key];
+            });
         }
-
-        const htmlElement = this.elementRef().nativeElement as HTMLElement;
-        Object.keys(_styles).forEach((key) => {
-            htmlElement.style[key] = _styles[key];
-        });
 
         return _styles;
     };

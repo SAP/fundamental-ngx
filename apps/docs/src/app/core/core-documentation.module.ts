@@ -19,6 +19,7 @@ import {
     SELECT_MOBILE_CONFIG
 } from '../documentation/utilities/consts';
 import { DocsThemeService } from '../documentation/services/docs-theme.service';
+import { CURRENT_LIB } from '../documentation/utilities/libraries';
 
 @NgModule({
     declarations: [HomeDocsComponent, NewComponentComponent, CoreDocumentationComponent],
@@ -26,7 +27,7 @@ import { DocsThemeService } from '../documentation/services/docs-theme.service';
     providers: [
         StackblitzService,
         DocsThemeService,
-        { provide: 'CURRENT_LIB', useValue: 'core' },
+        { provide: CURRENT_LIB, useValue: 'core' },
         { provide: MOBILE_MODE_CONFIG, useValue: MENU_MOBILE_CONFIG, multi: true },
         { provide: MOBILE_MODE_CONFIG, useValue: SELECT_MOBILE_CONFIG, multi: true },
         { provide: MOBILE_MODE_CONFIG, useValue: COMBOBOX_MOBILE_CONFIG, multi: true },

@@ -15,11 +15,11 @@ export class ActionSheetMobileComponent {
     childContent: {
         actionSheetBodyTemplate: TemplateRef<any>;
         isOpenChangeHandle: OpenChangeHandle;
-    } = null;
+    } | null = null;
 
     /** @hidden */
-    get _isOpenChangeHandle(): OpenChangeHandle {
-        return this.childContent.isOpenChangeHandle;
+    get _isOpenChangeHandle(): OpenChangeHandle | undefined {
+        return this.childContent?.isOpenChangeHandle;
     }
 
     /** @hidden */

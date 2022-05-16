@@ -51,18 +51,21 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
      * Calculate aria-label attribute
      * @hidden
      */
-    get buttonArialabel(): string {
+    get buttonArialabel(): string | null {
         if (this.ariaLabel) {
             return this.ariaLabel;
         }
+
         if (this.specialButtonType.includes(this.fdType)) {
             if (this.label != null) {
                 return this.label + ', ' + this.fdType;
             }
+
             if (this.glyph != null) {
                 return this.fdType + ', ' + this.glyph.split('-').join(' ');
             }
         }
+
         return null;
     }
 
@@ -105,6 +108,7 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
                 })
             );
         }
+
         this.buildComponentCssClass();
     }
 
@@ -125,6 +129,7 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
             this.compact ? 'fd-button--compact' : '',
             this.fdMenu ? 'fd-button--menu' : '',
             this._disabled || this._ariaDisabled ? 'is-disabled' : '',
+            this.toggled ? `fd-button--toggled` : '',
             this.class
         ];
     }

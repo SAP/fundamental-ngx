@@ -54,10 +54,10 @@
             </div>
         </div>
         <fd-upload-collection-button-group
-            [allowFileDeletion]="file.allowDelete"
-            [allowFileNameEdit]="file.allowEdit"
-            [disableFileDeletion]="file.disableDeletion"
-            [disableFileNameEdit]="file.disableEdit"
+            [allowFileDeletion]="!!file.allowDelete"
+            [allowFileNameEdit]="!!file.allowEdit"
+            [disableFileDeletion]="!!file.disableDeletion"
+            [disableFileNameEdit]="!!file.disableEdit"
         ></fd-upload-collection-button-group>
     </li>
 </fd-upload-collection>

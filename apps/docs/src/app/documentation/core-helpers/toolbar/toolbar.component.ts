@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Libraries } from '../../utilities/libraries';
+import { CURRENT_LIB, Libraries } from '../../utilities/libraries';
 
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { DocsThemeService } from '../../services/docs-theme.service';
@@ -35,7 +35,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
     customCssUrl: SafeResourceUrl;
     highlightJsThemeCss: SafeResourceUrl;
 
-    library: string;
+    library: Libraries;
 
     size: ShellbarSizes = 'm';
 
@@ -77,11 +77,11 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         private _themesService: ThemesService,
         private _docsThemeService: DocsThemeService,
         private _contentDensityService: ContentDensityService,
-        @Inject('CURRENT_LIB') private _currentLib: Libraries,
+        @Inject(CURRENT_LIB) private _currentLib: Libraries,
         private _route: ActivatedRoute,
         private _domSanitizer: DomSanitizer
     ) {
-        this.library = _route.snapshot.data.library || 'Core';
+        this.library = this._route.snapshot.data.library || 'core';
 
         this._docsThemeService.onThemeChange.pipe(takeUntil(this._onDestroy$)).subscribe((theme) => {
             this.cssUrl = theme.themeUrl;
@@ -148,9 +148,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         } else if (isDark(safeUrl)) {
             theme = 'tomorrow-night.css';
         }
-        this.highlightJsThemeCss = this._domSanitizer.bypassSecurityTrustResourceUrl(
-            `assets/highlight-js-styles/${theme}`
-        );
+        this.highlightJsThemeCss = this.trustedResourceUrl(`assets/highlight-js-styles/${theme}`);
     }
 
     selectVersion(version: any): void {

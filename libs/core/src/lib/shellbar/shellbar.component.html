@@ -1,12 +1,17 @@
 <div class="fd-shellbar" [class]="'fd-shellbar--' + size" [class.fd-shellbar--side-nav]="sideNav">
     <div class="fd-shellbar__group fd-shellbar__group--product">
         <ng-content select="[fd-shellbar-side-nav]"></ng-content>
+
         <ng-content select="fd-shellbar-logo"></ng-content>
+
         <ng-content select="fd-shellbar-title"></ng-content>
+
         <div class="fd-shellbar__product">
             <ng-content select="fd-product-menu"></ng-content>
         </div>
+
         <ng-content select="fd-shellbar-subtitle"></ng-content>
     </div>
+
     <ng-content select="fd-shellbar-actions"></ng-content>
 </div>

@@ -316,8 +316,14 @@ export class ObservableTableDataProviderExample extends ObservableTableDataProvi
     private _filterDate<D = FdDate>(
         item: ExampleItem,
         filter: CollectionDateFilter,
-        adapter: DatetimeAdapter<D>
+        adapter?: DatetimeAdapter<D>
     ): boolean {
+        if (!adapter) {
+            throw new Error(
+                'In order to filter date columns, please provide DateTime adapter in your TableDataProvider constructor.'
+            );
+        }
+
         const filterValue = filter.value;
         const filterValue2 = filter.value2;
         const itemValue = get(item, filter.field);

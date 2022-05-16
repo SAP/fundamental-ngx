@@ -48,10 +48,10 @@ export class IconBarDndContainerDirective implements OnDestroy {
     private _virtualSeparatorsCoordinates: ElementChord[] = [];
 
     /** @hidden */
-    private _closestItemIndex: number = null;
+    private _closestItemIndex: number | null = null;
 
     /** @hidden */
-    private _closestSeparatorIndex: number = null;
+    private _closestSeparatorIndex: number | null = null;
 
     /** @hidden */
     private _draggable = true;
@@ -84,8 +84,8 @@ export class IconBarDndContainerDirective implements OnDestroy {
      * @description Method called, when the item is being moved by 1 px
      */
     onMove(mousePosition: Point): void {
-        let newClosestIndex: number = null;
-        let newClosestSeparatorIndex: number = null;
+        let newClosestIndex: number | null = null;
+        let newClosestSeparatorIndex: number | null = null;
 
         this._elementsCoordinates.find((element, index) => {
             /** Check if element can be replaced */
@@ -104,7 +104,7 @@ export class IconBarDndContainerDirective implements OnDestroy {
 
         if (this._closestItemIndex !== newClosestIndex) {
             this.dndItemDirectives[this._closestItemIndex]?.toggleHoveredStyles();
-            this.dndItemDirectives[this._closestSeparatorIndex]?.toggleSeparatorStyles();
+            this.dndItemDirectives[this._closestSeparatorIndex!]?.toggleSeparatorStyles();
         }
 
         this._closestItemIndex = newClosestIndex;
@@ -129,7 +129,7 @@ export class IconBarDndContainerDirective implements OnDestroy {
         }
 
         if (this._closestSeparatorIndex !== newClosestSeparatorIndex) {
-            this.dndItemDirectives[this._closestItemIndex]?.toggleHoveredStyles();
+            this.dndItemDirectives[this._closestItemIndex!]?.toggleHoveredStyles();
             this.dndItemDirectives[this._closestSeparatorIndex]?.toggleSeparatorStyles();
         }
 

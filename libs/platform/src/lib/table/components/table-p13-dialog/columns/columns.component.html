@@ -22,7 +22,7 @@
                 i18n-placeholder="@@platformTableP13ColumnsDialogSearchPlaceholder"
                 placeholder="Search"
                 [contentDensity]="dialogRef.data.tableContentDensity"
-                [inputText]="_searchQuerySubject | async"
+                [inputText]="(_searchQuerySubject | async) || ''"
                 [suggestions]="[]"
                 (inputChange)="_searchInputChange($event)"
             ></fdp-search-field>

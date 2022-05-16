@@ -35,7 +35,7 @@ export class MenuShortcutDirective implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _hideOnMobile(): void {
         this._subscriptions.add(
-            this._menuItem.menuService.isMobileMode.pipe(filter(() => this.hideOnMobile)).subscribe((isMobile) => {
+            this._menuItem.menuService?.isMobileMode.pipe(filter(() => this.hideOnMobile)).subscribe((isMobile) => {
                 if (isMobile) {
                     this._elementRef.nativeElement.style.display = 'none';
                 } else {

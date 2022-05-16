@@ -101,7 +101,7 @@
                             *ngIf="_sortRulesMap.has(column.key)"
                             fd-table-icon
                             [glyph]="
-                                _sortRulesMap.get(column.key).direction === SORT_DIRECTION.ASC
+                                _sortRulesMap.get(column.key)?.direction === SORT_DIRECTION.ASC
                                     ? 'sort-ascending'
                                     : 'sort-descending'
                             "

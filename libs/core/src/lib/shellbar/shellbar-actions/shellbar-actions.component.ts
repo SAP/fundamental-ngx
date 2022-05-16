@@ -40,7 +40,6 @@ import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.compo
 @Component({
     selector: 'fd-shellbar-actions',
     templateUrl: './shellbar-actions.component.html',
-    styleUrls: ['./shellbar-actions.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {

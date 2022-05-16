@@ -3,7 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 
 import { SmartFilterBarComponent } from './smart-filter-bar.component';
 import { whenStable } from '@fundamental-ngx/core/tests';
-import { FdDate } from '@fundamental-ngx/core';
+import { FdDate } from '@fundamental-ngx/core/datetime';
 import { PlatformTableModule } from '@fundamental-ngx/platform/table';
 import { PlatformSmartFilterBarModule } from './smart-filter-bar.module';
 

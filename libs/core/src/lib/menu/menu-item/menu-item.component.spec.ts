@@ -64,7 +64,7 @@ describe('MenuItemComponent', () => {
     });
 
     it('should set item as active on click', fakeAsync(() => {
-        const setActiveSpy = spyOn(menuItem.menuService, 'setActive').and.callThrough();
+        const setActiveSpy = spyOn(menuItem.menuService!, 'setActive').and.callThrough();
         const setSelectedSpy = spyOn(menuItem, 'setSelected');
 
         menu.open();
@@ -84,7 +84,7 @@ describe('MenuItemComponent', () => {
 
         tick();
 
-        const setActiveSpy = spyOn(menuItem.menuService, 'setActive');
+        const setActiveSpy = spyOn(menuItem.menuService!, 'setActive');
 
         menuInteractive.elementRef.nativeElement.dispatchEvent(new MouseEvent('mouseenter'));
 
@@ -96,7 +96,7 @@ describe('MenuItemComponent', () => {
     }));
 
     it('should have no hover listener in mobile mode', fakeAsync(() => {
-        menuItem.menuService.setMenuMode(true);
+        menuItem.menuService!.setMenuMode(true);
 
         tick();
 

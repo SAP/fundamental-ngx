@@ -153,11 +153,11 @@ export class TokenizerComponent
 
     /** @hidden */
     /* Variable which will keep the index of the first token pressed in the tokenizer*/
-    private _firstElementInSelection: number;
+    private _firstElementInSelection: number | null = null;
 
     /** @hidden */
     /* Variable which will keep the index of the last token pressed in the tokenizer*/
-    private _lastElementInSelection: number;
+    private _lastElementInSelection: number | null = null;
 
     /** @hidden */
     /* Flag which will say if the last keyboard and click operation they used was using control*/
@@ -165,7 +165,7 @@ export class TokenizerComponent
 
     /** @hidden */
     /* Flag which will say if they held shift and clicked highlighting elements before or*/
-    private _directionShiftIsRight: boolean;
+    private _directionShiftIsRight: boolean | null = null;
 
     /** An RxJS Subject that will kill the data stream upon destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
@@ -288,15 +288,15 @@ export class TokenizerComponent
     }
 
     /** @hidden */
-    focusTokenElement(newIndex: number): HTMLElement {
-        let elementToFocus: HTMLElement;
+    focusTokenElement(newIndex: number): HTMLElement | undefined {
+        let elementToFocus: HTMLElement | undefined;
         const tokenListArray: TokenComponent[] = this.tokenList.toArray();
         if (tokenListArray[newIndex]) {
             elementToFocus = tokenListArray[newIndex].tokenWrapperElement.nativeElement;
             // element needs tabindex in order to be focused
-            elementToFocus.setAttribute('tabindex', '0');
-            elementToFocus.focus();
-            this.addKeyboardListener(elementToFocus, newIndex);
+            elementToFocus!.setAttribute('tabindex', '0');
+            elementToFocus!.focus();
+            this.addKeyboardListener(elementToFocus!, newIndex);
         }
 
         return elementToFocus;
@@ -364,7 +364,7 @@ export class TokenizerComponent
 
     /** @hidden */
     handleKeyDown(event: KeyboardEvent, fromIndex: number): void {
-        let newIndex: number;
+        let newIndex: number | undefined;
         const rtl = this._rtlService && this._rtlService.rtl ? this._rtlService.rtl.getValue() : false;
         if (KeyUtil.isKeyCode(event, SPACE) && !this._isInputFocused()) {
             const token = this.tokenList.find((_, index) => index === fromIndex);
@@ -373,7 +373,7 @@ export class TokenizerComponent
                     shadowedToken.selected = false;
                 }
             });
-            token.selected = !token.selected;
+            token && (token.selected = !token.selected);
             event.preventDefault();
         } else if (KeyUtil.isKeyCode(event, ENTER)) {
             this._focusInput();
@@ -392,8 +392,8 @@ export class TokenizerComponent
             ((KeyUtil.isKeyCode(event, RIGHT_ARROW) && !rtl) || (KeyUtil.isKeyCode(event, LEFT_ARROW) && rtl))
         ) {
             this._focusInput();
-        } else if (newIndex > this.tokenList.length - this.moreTokensRight.length && this._isInputFocused()) {
-            this.focusTokenElement(newIndex - this.moreTokensRight.length);
+        } else if (newIndex! > this.tokenList.length - this.moreTokensRight.length && this._isInputFocused()) {
+            this.focusTokenElement(newIndex! - this.moreTokensRight.length);
         } else if (newIndex || newIndex === 0) {
             this.focusTokenElement(newIndex);
         }
@@ -486,10 +486,12 @@ export class TokenizerComponent
                 const token = this.tokenList.find((item, index) => index === i);
                 const moreTokens = side === 'right' ? this.moreTokensRight : this.moreTokensLeft;
 
-                if (moreTokens.indexOf(token) === -1) {
-                    moreTokens.push(token);
+                if (token) {
+                    if (moreTokens.indexOf(token) === -1) {
+                        moreTokens.push(token);
+                    }
+                    token.elementRef.nativeElement.style.display = 'none';
                 }
-                token.elementRef.nativeElement.style.display = 'none';
                 // get the new elementWidth and combinedTokenWidth as these will have changed after setting a token display to 'none'
                 elementWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
                 combinedTokenWidth = this.getCombinedTokenWidth();
@@ -499,7 +501,7 @@ export class TokenizerComponent
             this._cdRef.detectChanges();
             this._hiddenTokens.forEach((hiddenToken, index) => {
                 hiddenToken._viewContainer.clear();
-                this._viewContainer.get(index).createEmbeddedView(hiddenToken._content);
+                this._viewContainer.get(index)?.createEmbeddedView(hiddenToken._content);
             });
         } else {
             this._getHiddenCozyTokenCount();
@@ -628,13 +630,13 @@ export class TokenizerComponent
             this._lastElementInSelection = index;
             this._directionShiftIsRight = null;
         } else {
-            if (index < this._firstElementInSelection) {
+            if (this._firstElementInSelection && index < this._firstElementInSelection) {
                 if (this._directionShiftIsRight) {
                     this._lastElementInSelection = this._firstElementInSelection;
                 }
                 this._directionShiftIsRight = false;
                 this._firstElementInSelection = index;
-            } else if (index > this._lastElementInSelection) {
+            } else if (this._lastElementInSelection && index > this._lastElementInSelection) {
                 if (!this._directionShiftIsRight) {
                     this._firstElementInSelection = this._lastElementInSelection;
                 }
@@ -650,7 +652,10 @@ export class TokenizerComponent
 
         this.tokenList.forEach((token, indexOfToken) => {
             token.selected =
-                indexOfToken >= this._firstElementInSelection && indexOfToken <= this._lastElementInSelection;
+                this._firstElementInSelection != null &&
+                this._lastElementInSelection != null &&
+                indexOfToken >= this._firstElementInSelection &&
+                indexOfToken <= this._lastElementInSelection;
         });
         this._ctrlPrevious = false;
     }
@@ -661,11 +666,6 @@ export class TokenizerComponent
         this._lastElementInSelection = null;
         const selected = token.selected;
         token.selected = true;
-        if (index < this._firstElementInSelection) {
-            this._firstElementInSelection = index;
-        } else if (index < this._lastElementInSelection) {
-            this._lastElementInSelection = index;
-        }
         if (selected) {
             token.selected = false;
             this.tokenList.forEach((element, indexOfToken) => {
@@ -678,10 +678,10 @@ export class TokenizerComponent
                 }
             });
             if (index === this._lastElementInSelection) {
-                this._lastElementInSelection = this._lastElementInSelection - 1;
+                this._lastElementInSelection = this._lastElementInSelection! - 1;
             }
             if (index === this._firstElementInSelection) {
-                this._firstElementInSelection = this._firstElementInSelection - 1;
+                this._firstElementInSelection = this._firstElementInSelection! - 1;
             }
         }
         this._ctrlPrevious = true;
@@ -729,9 +729,9 @@ export class TokenizerComponent
 
     /** @hidden */
     private _listenElementEvents(): void {
-        fromEvent(this.elementRef().nativeElement, 'focus', { capture: true })
+        fromEvent<Event>(this.elementRef().nativeElement, 'focus', { capture: true })
             .pipe(
-                filter((event) => event['target']?.tagName === 'INPUT' && this.tokenizerFocusable),
+                filter((event) => (event['target'] as any)?.tagName === 'INPUT' && this.tokenizerFocusable),
                 tap(() => {
                     this._tokenizerHasFocus = true;
                     this._cdRef.markForCheck();

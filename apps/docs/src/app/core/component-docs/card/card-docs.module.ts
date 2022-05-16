@@ -33,6 +33,8 @@ import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { QuickViewModule } from '@fundamental-ngx/core/quick-view';
 import { InfoLabelModule } from '@fundamental-ngx/core/info-label';
 import { SelectModule } from '@fundamental-ngx/core/select';
+import { MenuModule } from '@fundamental-ngx/core/menu';
+import { LinkModule } from '@fundamental-ngx/core/link';
 
 const routes: Routes = [
     {
@@ -61,7 +63,9 @@ const routes: Routes = [
         FdDatetimeModule,
         QuickViewModule,
         InfoLabelModule,
-        SelectModule
+        SelectModule,
+        MenuModule,
+        LinkModule
     ],
     exports: [RouterModule],
     declarations: [

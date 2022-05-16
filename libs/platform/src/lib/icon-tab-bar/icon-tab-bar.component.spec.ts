@@ -116,7 +116,8 @@ describe('IconTabBarComponent', () => {
 
         const hostEl: HTMLElement = fixture.debugElement.nativeElement;
         const tabsWithBadge = hostEl.querySelector<HTMLElement>('.fd-icon-tab-bar__badge');
-        tabsWithBadge.click();
+        expect(tabsWithBadge).toBeDefined();
+        tabsWithBadge?.click();
         fixture.detectChanges();
         const emptyResult = hostEl.querySelector<HTMLElement>('.fd-icon-tab-bar__badge');
 
@@ -128,7 +129,8 @@ describe('IconTabBarComponent', () => {
         const someTab = hostEl.querySelector<HTMLElement>('.fd-icon-tab-bar__tab');
 
         spyOn(component, 'selected');
-        someTab.click();
+        expect(someTab).toBeDefined();
+        someTab?.click();
         fixture.detectChanges();
 
         expect(component.selected).toHaveBeenCalled();

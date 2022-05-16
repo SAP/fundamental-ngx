@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { ApprovalTeam } from '../interfaces';
 import { trackByFn } from '../helpers';
 
@@ -21,7 +22,7 @@ export class ApprovalFlowTeamListComponent {
     isRtl = false;
 
     @Input()
-    selectedTeamId: string;
+    selectedTeamId: Nullable<string>;
 
     @Output()
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix

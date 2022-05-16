@@ -37,6 +37,7 @@ import {
 } from 'rxjs/operators';
 
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { Nullable } from '@fundamental-ngx/core/shared';
 import {
     SliderControlValue,
     SliderCustomValue,
@@ -45,11 +46,13 @@ import {
     SliderValueTargets
 } from './slider.model';
 import { MIN_DISTANCE_BETWEEN_TICKS } from './constants';
-import { RtlService } from '@fundamental-ngx/core/utils';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import {
+    RtlService,
+    ContentDensityService,
+    KeyUtil,
+    applyCssClass,
+    CssClassBuilder
+} from '@fundamental-ngx/core/utils';
 
 export const SLIDER_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
@@ -82,7 +85,7 @@ export class SliderComponent
     /** Whether to apply cozy mode. */
     @Input()
     @HostBinding('class.fd-slider--lg')
-    cozy: boolean = null;
+    cozy: Nullable<boolean>;
 
     /** User's custom classes */
     @Input()
@@ -90,11 +93,11 @@ export class SliderComponent
 
     /** Id of the element that labels slider. */
     @Input()
-    ariaLabelledBy: string = null;
+    ariaLabelledBy: Nullable<string>;
 
     /** Aria label for the slider. */
     @Input()
-    ariaLabel: string = null;
+    ariaLabel: Nullable<string>;
 
     /** Get Minimum value. */
     @Input()
@@ -501,10 +504,10 @@ export class SliderComponent
             let handleIndex: SliderRangeHandles;
             if (event.target === this.rangeHandle1.nativeElement) {
                 handleIndex = SliderRangeHandles.First;
-            }
-
-            if (event.target === this.rangeHandle2.nativeElement) {
+            } else if (event.target === this.rangeHandle2.nativeElement) {
                 handleIndex = SliderRangeHandles.Second;
+            } else {
+                return;
             }
 
             const value = this._calculateValueFromPointerPosition(moveEvent, false) as number;
@@ -534,14 +537,12 @@ export class SliderComponent
         const diff = event.shiftKey ? this.jump : this.step;
         let newValue: number | SliderTickMark | null = null;
         let prevValue = this._position as number;
-        let handleIndex: SliderRangeHandles;
+        let handleIndex: SliderRangeHandles | undefined;
         if (this._isRange) {
             if (event.target === this.rangeHandle1.nativeElement) {
                 prevValue = this._handle1Value;
                 handleIndex = SliderRangeHandles.First;
-            }
-
-            if (event.target === this.rangeHandle2.nativeElement) {
+            } else if (event.target === this.rangeHandle2.nativeElement) {
                 prevValue = this._handle2Value;
                 handleIndex = SliderRangeHandles.Second;
             }
@@ -572,7 +573,7 @@ export class SliderComponent
 
         if (!this._isRange) {
             this._setValue(newValue);
-        } else {
+        } else if (handleIndex) {
             this._setRangeHandleValueAndPosition(handleIndex, newValue as number);
             this._setValue(this._constructRangeModelValue());
         }
@@ -757,7 +758,7 @@ export class SliderComponent
         } else {
             const total = this.max - this.min;
             const tickMarksCount = total / this.step + 1;
-            if (tickMarksCount > this._maxTickMarksNumber) {
+            if (this._maxTickMarksNumber !== undefined && tickMarksCount > this._maxTickMarksNumber) {
                 this._tickMarks = [
                     { position: 0, value: 0, label: `${this.min}` },
                     { position: 100, value: total, label: `${this.max}` }
@@ -778,7 +779,7 @@ export class SliderComponent
     }
 
     /** @hidden */
-    private get _maxTickMarksNumber(): number {
+    private get _maxTickMarksNumber(): number | undefined {
         if (!this.trackEl || !this.trackEl.nativeElement) {
             return;
         }

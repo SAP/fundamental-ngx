@@ -1,6 +1,6 @@
 import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 @Directive({
     selector: '[fdTileContent], [fd-tile-content]'
@@ -181,16 +181,16 @@ export class TileProfileImgDirective {
     /** Aria-label for tile. */
     @Input()
     @HostBinding('attr.aria-label')
-    ariaLabel: string = null;
+    ariaLabel: Nullable<string>;
 
     /** Aria-Labelledby for element describing tile. */
     @Input()
     @HostBinding('attr.aria-labelledby')
-    ariaLabelledby: string = null;
+    ariaLabelledby: Nullable<string>;
 
     /** Background image url. */
     @Input()
-    backgroundImage: string = null;
+    backgroundImage: Nullable<string>;
 
     /** @hidden */
     @HostBinding('style.background-image')
@@ -250,7 +250,7 @@ export class TileBackgroundImgDirective {
 
     /** Background image url. */
     @Input()
-    backgroundImage: string = null;
+    backgroundImage: Nullable<string>;
 
     /** @hidden */
     @HostBinding('style.background-image')

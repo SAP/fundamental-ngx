@@ -1,5 +1,6 @@
 import { Directive, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 import { AsyncValidatorFn, ValidatorFn } from '@angular/forms';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 import { DynamicFormControl } from './dynamic-form-control';
 
@@ -41,12 +42,12 @@ export class DynamicFormControlFieldDirective implements OnInit {
     /**
      * @hidden
      */
-    private _originalValidators: ValidatorFn | ValidatorFn[];
+    private _originalValidators?: Nullable<ValidatorFn | ValidatorFn[]>;
 
     /**
      * @hidden
      */
-    private _originalAsyncValidators: AsyncValidatorFn | AsyncValidatorFn[];
+    private _originalAsyncValidators: Nullable<AsyncValidatorFn | AsyncValidatorFn[]>;
 
     /**
      * @hidden
@@ -78,8 +79,8 @@ export class DynamicFormControlFieldDirective implements OnInit {
             this._control.clearValidators();
             this._control.clearAsyncValidators();
         } else {
-            this._control.setValidators(this._originalValidators);
-            this._control.setAsyncValidators(this._originalAsyncValidators);
+            this._control.setValidators(this._originalValidators ?? []);
+            this._control.setAsyncValidators(this._originalAsyncValidators ?? []);
         }
 
         this._control.updateValueAndValidity({ emitEvent: false });

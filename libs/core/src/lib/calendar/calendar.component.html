@@ -3,7 +3,7 @@
     [activeView]="activeView"
     [id]="id"
     [calendarYearGrid]="yearGrid"
-    [compact]="compact"
+    [compact]="!!compact"
     [mobileLandscape]="mobileLandscape"
     (closeClicked)="closeClicked.emit()"
     (nextClicked)="handleNextArrowClick()"
@@ -12,7 +12,7 @@
     [nextButtonDisabled]="nextButtonDisabled"
     (activeViewChange)="handleActiveViewChange($event)"
 ></fd-calendar-header>
-<ng-container [ngSwitch]="activeView">
+<ng-container [ngSwitch]="activeView" *ngIf="_currentlyDisplayed">
     <div
         class="fd-calendar__content"
         [class.fd-calendar__content--dates]="activeView === 'day'"
@@ -42,15 +42,15 @@
         ></fd-calendar-day-view>
         <fd-calendar-month-view
             *ngSwitchCase="'month'"
-            [monthSelected]="_currentlyDisplayed?.month"
-            [year]="_currentlyDisplayed?.year"
+            [monthSelected]="_currentlyDisplayed.month"
+            [year]="_currentlyDisplayed.year"
             [id]="id"
             [focusEscapeFunction]="escapeFocusFunction"
             (monthClicked)="handleMonthViewChange($event)"
         ></fd-calendar-month-view>
         <fd-calendar-year-view
             *ngSwitchCase="'year'"
-            [yearSelected]="_currentlyDisplayed?.year"
+            [yearSelected]="_currentlyDisplayed.year"
             [yearViewGrid]="yearGrid"
             [id]="id"
             [focusEscapeFunction]="escapeFocusFunction"
@@ -60,7 +60,7 @@
         <fd-calendar-aggregated-year-view
             *ngSwitchCase="'aggregatedYear'"
             (yearsClicked)="selectedYears($event)"
-            [yearSelected]="_currentlyDisplayed?.year"
+            [yearSelected]="_currentlyDisplayed.year"
             [yearViewGrid]="yearGrid"
             [aggregatedYearsViewGrid]="aggregatedYearGrid"
             [id]="id"

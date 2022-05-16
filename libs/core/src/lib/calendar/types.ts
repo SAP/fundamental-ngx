@@ -1,3 +1,5 @@
+import { Nullable } from '@fundamental-ngx/core/shared';
+
 import { CalendarCurrent } from './models/calendar-current';
 
 /** Type of calendar */
@@ -10,7 +12,7 @@ export type FdCalendarView = 'day' | 'month' | 'year' | 'aggregatedYear';
 export type DaysOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 
 export type NavigationButtonDisableFunction<D> = (
-    date: D,
+    date: Nullable<D>,
     currentlyDisplayedDate: CalendarCurrent,
     activeView: FdCalendarView
 ) => boolean;

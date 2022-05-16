@@ -22,7 +22,7 @@ export class MultiComboboxColumnsExampleComponent {
         { name: 'Spinach', type: 'Vegetables' }
     ];
 
-    selectedItems = null;
+    selectedItems = [];
 
     onSelect(item: MultiComboboxSelectionChangeEvent): void {
         this.selectedItems = item.selectedItems;

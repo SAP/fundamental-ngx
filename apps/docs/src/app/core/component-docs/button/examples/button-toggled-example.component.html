@@ -1,0 +1,47 @@
+<button fd-button [toggled]="toggled" label="Standard Button" (click)="toggled = !toggled"></button>
+<button
+    fd-button
+    [toggled]="emphasizedToggled"
+    label="Emphasized Button"
+    fdType="emphasized"
+    (click)="emphasizedToggled = !emphasizedToggled"
+></button>
+<button
+    fd-button
+    [toggled]="ghostToggled"
+    label="Ghost Button"
+    fdType="ghost"
+    (click)="ghostToggled = !ghostToggled"
+></button>
+<button
+    fd-button
+    [toggled]="positiveToggled"
+    label="Positive Button"
+    fdType="positive"
+    ariaLabel="Positive"
+    (click)="positiveToggled = !positiveToggled"
+></button>
+<button
+    fd-button
+    [toggled]="negativeToggled"
+    label="Negative Button"
+    fdType="negative"
+    ariaLabel="Negative"
+    (click)="negativeToggled = !negativeToggled"
+></button>
+<button
+    fd-button
+    [toggled]="attentionToggled"
+    label="Attention Button"
+    fdType="attention"
+    ariaLabel="Attention"
+    (click)="attentionToggled = !attentionToggled"
+></button>
+<button
+    fd-button
+    [toggled]="transparentToggled"
+    label="Transparent Button"
+    fdType="transparent"
+    ariaLabel="Transparent"
+    (click)="transparentToggled = !transparentToggled"
+></button>

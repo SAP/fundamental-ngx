@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewEncapsulation } from '@angular/core';
 
+import { Nullable } from '@fundamental-ngx/core/shared';
+
 export type HeaderSizes = 1 | 2 | 3 | 4 | 5 | 6;
 
 export abstract class TitleToken {
@@ -22,14 +24,14 @@ export abstract class TitleToken {
 })
 export class TitleComponent extends TitleToken implements OnInit {
     /** The size of the header */
-    _headerSize: HeaderSizes = null;
+    _headerSize: Nullable<HeaderSizes> = null;
 
-    get headerSize(): HeaderSizes {
+    get headerSize(): Nullable<HeaderSizes> {
         return this._headerSize;
     }
 
     @Input()
-    set headerSize(value: HeaderSizes) {
+    set headerSize(value: Nullable<HeaderSizes>) {
         this._headerSize = value;
         if (this._appliedHeaderSize !== this.headerSize) {
             this._setHeaderSize();

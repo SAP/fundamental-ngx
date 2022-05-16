@@ -139,7 +139,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
      * @hidden
      * reference to currently selected hourViewItems element
      */
-    activeHourViewItem: HourViewItem;
+    activeHourViewItem?: HourViewItem;
 
     /**
      * @hidden
@@ -150,7 +150,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
      * @hidden
      * reference to currently selected minuteViewItems element
      */
-    activeMinuteViewItem: MinuteViewItem;
+    activeMinuteViewItem?: MinuteViewItem;
 
     /**
      * @hidden
@@ -161,7 +161,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
      * @hidden
      * reference to currently selected secondViewItems element
      */
-    activeSecondViewItem: SecondViewItem;
+    activeSecondViewItem?: SecondViewItem;
 
     /**
      * @hidden
@@ -172,7 +172,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
      * @hidden
      * reference to currently selected meridianViewItems element
      */
-    activeMeridianViewItem: MeridianViewItem;
+    activeMeridianViewItem?: MeridianViewItem;
 
     /** Component aria-label */
     get _componentAriaLabel(): string {

@@ -2,5 +2,5 @@
 # Each line is a file pattern followed by one or more owners.
 
 # Changes to eslint or tsconfig files should be reviewed carefully
-**/.eslint.json @valorkin @fkolar @droshev
-**/tsconfig.json @valorkin @fkolar @droshev
+**/.eslint.json @mikerodonnell89 @droshev @InnaAtanasova
+**/tsconfig.json @mikerodonnell89 @droshev @InnaAtanasova

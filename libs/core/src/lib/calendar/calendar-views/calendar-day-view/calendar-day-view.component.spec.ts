@@ -60,7 +60,7 @@ describe('CalendarDayViewComponent', () => {
             }
         );
         const selected = calendarDays.find((cell) => cell.selected);
-        expect(selected.date.toDateString()).toBe(component.selectedDate.toDateString());
+        expect(selected?.date.toDateString()).toBe(component.selectedDate.toDateString());
     });
 
     it('Should Select Proper First Range Date', (done) => {
@@ -82,8 +82,8 @@ describe('CalendarDayViewComponent', () => {
         const dayStartPicked = component._dayViewGrid[2][3];
         const dayEndPicked = component._dayViewGrid[3][3];
         component.selectedRangeDate = { start: dayStartPicked.date, end: null };
-        component.selectedRangeDateChange.pipe(first()).subscribe((date: { start: FdDate; end: FdDate }) => {
-            expect(date.end.toDateString()).toBe(dayEndPicked.date.toDateString());
+        component.selectedRangeDateChange.pipe(first()).subscribe((date) => {
+            expect(date.end?.toDateString()).toBe(dayEndPicked.date.toDateString());
             done();
         });
         component.selectDate(dayEndPicked);

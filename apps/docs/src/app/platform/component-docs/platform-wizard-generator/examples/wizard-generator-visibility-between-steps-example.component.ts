@@ -20,7 +20,7 @@ export class WizardGeneratorVisibilityBetweenStepsExampleComponent implements On
         text: 'Checkout'
     };
 
-    wizardValue: WizardGeneratorFormsValue;
+    wizardValue: WizardGeneratorFormsValue | undefined;
 
     stepItems: WizardGeneratorItem[] = [
         {
@@ -98,7 +98,7 @@ export class WizardGeneratorVisibilityBetweenStepsExampleComponent implements On
                                 }
                             },
                             when: (formValue: DynamicFormValue, forms: Map<string, DynamicFormGroup>): boolean => {
-                                const productTypeForm = forms.get('productType');
+                                const productTypeForm = forms.get('productType') as DynamicFormGroup;
 
                                 const productControl = this._formGeneratorService.getFormControl(
                                     productTypeForm,
@@ -119,7 +119,7 @@ export class WizardGeneratorVisibilityBetweenStepsExampleComponent implements On
                                 }
                             },
                             when: (formValue: DynamicFormValue, forms: Map<string, DynamicFormGroup>): boolean => {
-                                const productTypeForm = forms.get('productType');
+                                const productTypeForm = forms.get('productType') as DynamicFormGroup;
 
                                 const productControl = this._formGeneratorService.getFormControl(
                                     productTypeForm,
@@ -286,7 +286,7 @@ export class WizardGeneratorVisibilityBetweenStepsExampleComponent implements On
                 }
             })
             .afterClosed.pipe(takeUntil(this._onDestroy$))
-            .subscribe((wizardValue: WizardGeneratorFormsValue) => {
+            .subscribe((wizardValue) => {
                 this.wizardValue = wizardValue;
             });
     }

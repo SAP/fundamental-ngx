@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input } from '@angular/core';
 
 import { LabelType } from '@fundamental-ngx/core/info-label';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 @Component({
     selector: 'fdp-info-label',
@@ -31,11 +32,11 @@ export class InfoLabelComponent {
 
     /** Sets control aria-label attribute value */
     @Input()
-    ariaLabel: string = null;
+    ariaLabel: Nullable<string>;
 
     /** Binds to control aria-labelledBy attribute */
     @Input()
-    ariaLabelledBy: string = null;
+    ariaLabelledBy: Nullable<string>;
 
     /** Sets control aria-title to a string attribute value */
     @Input()

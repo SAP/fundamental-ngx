@@ -131,7 +131,7 @@ describe('MenuMobileComponent', () => {
 
         await whenStable(fixture);
 
-        expect(menuMobile.title).toEqual(MOBILE_CONFIG.title);
+        expect(menuMobile.title).toEqual(MOBILE_CONFIG.title as string);
 
         fixture.nativeElement.querySelector('[fd-menu-interactive]').click();
 

@@ -137,7 +137,7 @@ export abstract class IconTabBarPopoverBase implements OnChanges {
         return this._tabExtraUIElements
             .toArray()
             .map((e) => ({
-                flatIndex: parseInt(e.nativeElement.getAttribute('data-flatIndex'), 10),
+                flatIndex: parseInt(e.nativeElement.getAttribute('data-flatIndex')!, 10),
                 nativeElement: e.nativeElement
             }))
             .sort(({ flatIndex: aFlatIndex }, { flatIndex: bFlatIndex }) => aFlatIndex - bFlatIndex)

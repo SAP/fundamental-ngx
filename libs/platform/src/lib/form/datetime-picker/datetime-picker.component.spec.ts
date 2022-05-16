@@ -126,7 +126,7 @@ describe('PlatformDatetimePickerComponent', () => {
         const datetimePickerHint = host.datetimePickerFormField.hint;
         expect(datetimePickerHint).toBe('This is a hint');
 
-        const datetimePickerDefaultValue = host.datetimePickerForm.get('datetimePicker').value.day;
+        const datetimePickerDefaultValue = host.datetimePickerForm.get('datetimePicker')?.value.day;
         expect(datetimePickerDefaultValue).toBe(11);
     });
 
@@ -152,10 +152,10 @@ describe('PlatformDatetimePickerComponent', () => {
     it('should call disabled state method', async () => {
         const datetimePicker = host.datetimePickerComponent;
         datetimePicker.disabled = true;
-        host.datetimePickerForm.get('datetimePicker').disable();
+        host.datetimePickerForm.get('datetimePicker')?.disable();
 
         await wait(fixture);
-        expect(host.datetimePickerForm.get('datetimePicker').disabled).toBe(true);
+        expect(host.datetimePickerForm.get('datetimePicker')?.disabled).toBe(true);
     });
 
     it('should be in an error state if value is empty and touched', async () => {
@@ -166,6 +166,7 @@ describe('PlatformDatetimePickerComponent', () => {
 
         expect(inputGroupEl.nativeElement.classList.contains('is-error')).not.toBeTrue();
 
+        // @ts-expect-error fault tolerance test
         const invalidDate = new FdDate(null);
         datetimePicker.value = invalidDate;
         datetimePicker.handleDatetimeInputChange(invalidDate);

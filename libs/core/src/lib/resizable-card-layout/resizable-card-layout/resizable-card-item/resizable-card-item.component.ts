@@ -14,6 +14,7 @@ import {
 } from '@angular/core';
 import { FocusableOption } from '@angular/cdk/a11y';
 import { RtlService } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { Subscription } from 'rxjs';
 
 export type ResizeDirection = 'vertical' | 'horizontal' | 'both';
@@ -150,7 +151,7 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
      */
     @Input()
     get cardMiniContentRowSpan(): number {
-        return this._cardMiniContentRowSpan;
+        return this._cardMiniContentRowSpan ?? 0;
     }
 
     /**
@@ -168,12 +169,12 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
     /** Set left position for the card */
     @Input()
     @HostBinding('style.left.px')
-    left = null;
+    left: Nullable<number>;
 
     /** Set right position for the card */
     @Input()
     @HostBinding('style.right.px')
-    right = null;
+    right: Nullable<number>;
 
     /** Set top position for the card*/
     @Input()
@@ -736,7 +737,7 @@ export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
 
     /** @hidden Returns card mini content height */
     private _setCardMiniContentHeight(): void {
-        this.cardMiniContentHeight = this._cardMiniContentRowSpan * verticalResizeStep;
+        this.cardMiniContentHeight = this.cardMiniContentRowSpan * verticalResizeStep;
         this._cd.markForCheck();
     }
 }

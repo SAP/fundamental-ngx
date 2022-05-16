@@ -128,7 +128,7 @@ describe('Checkbox test Component', () => {
 
         // default value
         expect(checkboxes[0].value).toEqual('Yes');
-        expect(host.customForm.get('example1').value).toEqual('Yes');
+        expect(host.customForm.get('example1')?.value).toEqual('Yes');
 
         const checkboxLabel = fixture.debugElement.query(By.css('.fd-checkbox__label'));
 
@@ -136,19 +136,19 @@ describe('Checkbox test Component', () => {
         fixture.detectChanges();
 
         expect(checkboxes[0].value).toBeFalsy();
-        expect(host.customForm.get('example1').value).toBeFalsy();
+        expect(host.customForm.get('example1')?.value).toBeFalsy();
 
         checkboxLabel.nativeElement.click();
         fixture.detectChanges();
 
         expect(checkboxes[0].value).toEqual(null);
-        expect(host.customForm.get('example1').value).toEqual(null);
+        expect(host.customForm.get('example1')?.value).toEqual(null);
 
         checkboxLabel.nativeElement.click();
         fixture.detectChanges();
 
         expect(checkboxes[0].value).toEqual('Yes');
-        expect(host.customForm.get('example1').value).toEqual('Yes');
+        expect(host.customForm.get('example1')?.value).toEqual('Yes');
     });
 
     it('should apply is-error style on form Error', async () => {
@@ -158,8 +158,8 @@ describe('Checkbox test Component', () => {
         expect(inputElem.nativeElement.classList.contains('is-error')).toBeFalsy();
         expect(inputElem.nativeElement.classList.contains('is-warning')).toBeFalsy();
 
-        host.customForm.get('example1').setErrors({ 'has error': true });
-        host.customForm.get('example1').markAsTouched();
+        host.customForm.get('example1')?.setErrors({ 'has error': true });
+        host.customForm.get('example1')?.markAsTouched();
 
         fixture.detectChanges();
 
@@ -216,7 +216,7 @@ describe('Checkbox test Component', () => {
         await wait(fixture);
         fixture.detectChanges();
 
-        expect(host.customForm.get('example5').value).toBe(null);
+        expect(host.customForm.get('example5')?.value).toBe(null);
 
         const checkboxes = host.fdpCheckboxes.toArray();
         const checkboxLabels = fixture.debugElement.queryAll(By.css('.fd-checkbox__label'));
@@ -224,13 +224,13 @@ describe('Checkbox test Component', () => {
         // fisrt click to unchecked state
         checkboxLabels[4].nativeElement.click();
         fixture.detectChanges();
-        expect(host.customForm.get('example5').value).toBe('Checkbox4');
+        expect(host.customForm.get('example5')?.value).toBe('Checkbox4');
         expect(checkboxes[4].value).toEqual('Checkbox4');
 
         // second click to intermediate state
         checkboxLabels[4].nativeElement.click();
         fixture.detectChanges();
-        expect(host.customForm.get('example5').value).toBe(false);
+        expect(host.customForm.get('example5')?.value).toBe(false);
         expect(checkboxes[4].value).toEqual(false);
     });
 });

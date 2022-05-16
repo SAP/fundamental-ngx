@@ -15,8 +15,8 @@ export class DynamicFormControlGroup extends FormGroup {
     public controls: DynamicFormGroupControls;
 
     constructor(
-        formItem?: DynamicFormFieldGroup,
-        controls?: DynamicFormGroupControls,
+        formItem: DynamicFormFieldGroup,
+        controls: DynamicFormGroupControls,
         validatorOrOpts?: ValidatorFn | ValidatorFn[] | AbstractControlOptions | null,
         asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null
     ) {
@@ -44,7 +44,7 @@ export class DynamicFormControl extends FormControl {
      * @param formItem `DynamicFormItem` object
      *
      */
-    constructor(formState?: any, validatorOrOpts?: DynamicAbstractControlOptions | null) {
+    constructor(formState: any, validatorOrOpts: DynamicAbstractControlOptions) {
         super(formState, validatorOrOpts);
         this.formItem = validatorOrOpts.dynamicFormItem;
     }

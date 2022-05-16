@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Inject, Input, OnInit } from '@angular/core';
-import { Libraries } from '../../utilities/libraries';
+import { CURRENT_LIB, Libraries } from '../../utilities/libraries';
 import { ExampleFile } from '../code-example/example-file';
 
 @Component({
@@ -20,7 +20,7 @@ export class ImportComponent implements OnInit {
         };
     }
 
-    constructor(@Inject('CURRENT_LIB') private currentLib: Libraries) {}
+    constructor(@Inject(CURRENT_LIB) private currentLib: Libraries) {}
 
     ngOnInit(): void {
         const libraryPath = ['@fundamental-ngx', this.currentLib];

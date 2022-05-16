@@ -11,6 +11,7 @@ import {
     ChangeDetectorRef
 } from '@angular/core';
 import { distinctUntilChanged } from 'rxjs/operators';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 import { DynamicPageConfig } from '../../dynamic-page.config';
 import { DynamicPageService } from '../../dynamic-page.service';
@@ -77,7 +78,7 @@ export class DynamicPageSubheaderComponent {
      * aria label for header
      */
     @Input()
-    headerAriaLabel: string;
+    headerAriaLabel: Nullable<string>;
 
     /**
      * aria label for pin state of pin button

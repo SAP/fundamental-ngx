@@ -6,7 +6,11 @@ import { of } from 'rxjs';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { RtlService, uuidv4 } from '@fundamental-ngx/core/utils';
 import { FileSizeExceedEvent } from '../models/upload-collection-events.models';
-import { UploadCollectionFile, UploadCollectionItemStatus } from '../models/upload-collection.models';
+import {
+    UploadCollectionFile,
+    UploadCollectionItem,
+    UploadCollectionItemStatus
+} from '../models/upload-collection.models';
 import { UploadCollectionComponent } from './upload-collection.component';
 import { PlatformUploadCollectionModule } from '../upload-collection.module';
 import { UploadCollectionDataSource } from '../domain/upload-collection-data-source';
@@ -113,7 +117,9 @@ describe('UploadCollectionComponent', () => {
             expect(component._getList().length).toEqual(3);
             expect(component._visibleList.length).toEqual(3);
 
-            const newFolder = component._getList().find((item) => item.documentId === newTemporaryFiles.documentId);
+            const newFolder = component
+                ._getList()
+                .find((item) => item.documentId === newTemporaryFiles.documentId) as UploadCollectionItem;
             expect(newFolder.name).toEqual(newFolderName);
         })
     );
@@ -121,10 +127,10 @@ describe('UploadCollectionComponent', () => {
     it(
         'toolbar: should remove item',
         waitForAsync(() => {
-            const item = component.dataSource.dataProvider.items.pop();
+            const item = component.dataSource.dataProvider.items.pop() as UploadCollectionItem;
             component._activeItem = item;
 
-            spyOn(component.dataSource, 'delete').and.returnValue(of(null));
+            spyOn(component.dataSource, 'delete').and.returnValue(of([]));
             spyOn(component.dataSource, 'open').and.returnValue(of(component.dataSource.dataProvider.items));
 
             component._remove();

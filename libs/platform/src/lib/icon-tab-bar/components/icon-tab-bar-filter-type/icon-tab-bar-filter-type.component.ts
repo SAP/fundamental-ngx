@@ -21,7 +21,7 @@ export class IconTabBarFilterTypeComponent extends IconTabBarBase {
     showTotalTab = true;
 
     /** @hidden */
-    _totalTab: IconTabBarItem;
+    _totalTab?: IconTabBarItem;
 
     /**
      * @hidden
@@ -29,6 +29,6 @@ export class IconTabBarFilterTypeComponent extends IconTabBarBase {
      */
     protected _initTabs(): void {
         super._initTabs();
-        this._totalTab = this.showTotalTab && this._tabs[0];
+        this._totalTab = this.showTotalTab ? this._tabs[0] : undefined;
     }
 }

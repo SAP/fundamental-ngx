@@ -31,7 +31,7 @@ export class DatetimeFormExampleComponent {
     constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {}
 
     isValid(): boolean {
-        return this.customForm.get('date').valid;
+        return !!this.customForm.get('date')?.valid;
     }
 
     disableFunction = (fdDate: FdDate): boolean => this.datetimeAdapter.compareDate(FdDate.getToday(), fdDate) > 0;

@@ -21,9 +21,9 @@ import {
 } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { NotificationRef } from '../notification-utils/notification-ref';
-import { AbstractFdNgxClass, RtlService } from '@fundamental-ngx/core/utils';
+import { AbstractFdNgxClass, RtlService, KeyUtil } from '@fundamental-ngx/core/utils';
 import { NotificationConfig } from '../notification-utils/notification-config';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { ESCAPE } from '@angular/cdk/keycodes';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { filter, take, takeUntil } from 'rxjs/operators';
@@ -74,16 +74,16 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     closeOnNavigation = true;
 
     /** aria-labelledby attribute for the notification component element. */
-    ariaLabelledBy: string = null;
+    ariaLabelledBy: Nullable<string>;
 
     /** aria-label attribute for the notification component element. */
-    ariaLabel: string = null;
+    ariaLabel: Nullable<string>;
 
     /** aria-describedby attribute for the notification component element. */
-    ariaDescribedBy: string = null;
+    ariaDescribedBy: Nullable<string>;
 
     /** Reference to the child content */
-    childContent: TemplateRef<any> | Type<any> = undefined;
+    childContent: TemplateRef<any> | Type<any> | undefined = undefined;
 
     /** Reference to the component or the embedded view */
     public componentRef: ComponentRef<any> | EmbeddedViewRef<any>;

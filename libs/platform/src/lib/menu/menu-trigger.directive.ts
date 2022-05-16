@@ -44,7 +44,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
     /** @hidden */
     private _menu: MenuComponent;
     /** @hidden */
-    private _overlayRef: OverlayRef;
+    private _overlayRef: OverlayRef | null;
     /** @hidden */
     private _portal: TemplatePortal;
     /** @hidden */

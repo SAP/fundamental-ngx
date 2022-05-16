@@ -6,6 +6,7 @@ import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/di
 
 import { SortingComponent, SettingsSortDialogData } from './sorting.component';
 import { PlatformTableModule } from '../../../table.module';
+import { SortDirection } from '../../../enums';
 
 describe('PlatformTableSortDialogComponent', () => {
     let component: SortingComponent;
@@ -13,7 +14,7 @@ describe('PlatformTableSortDialogComponent', () => {
     const dialogRef = new DialogRef();
     const dialogData: SettingsSortDialogData = {
         columns: [],
-        direction: null,
+        direction: SortDirection.NONE,
         field: null,
         tableContentDensity: ContentDensityEnum.COZY
     };

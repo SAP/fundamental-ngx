@@ -27,6 +27,7 @@ import { MenuTitleDirective } from '../directives/menu-title.directive';
 import { DefaultMenuItem } from '../default-menu-item.class';
 import { MenuInteractiveDirective } from '../directives/menu-interactive.directive';
 import { MenuService } from '../services/menu.service';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 let menuUniqueId = 0;
 
@@ -34,8 +35,8 @@ export interface BaseSubmenu {
     templateRef: TemplateRef<any>;
     menuItems: QueryList<any>;
     menuService: MenuService;
-    ariaLabel: string;
-    ariaLabelledby: string;
+    ariaLabel: Nullable<string>;
+    ariaLabelledby: Nullable<string>;
 }
 
 export const SUBMENU = new InjectionToken<BaseSubmenu>('Submenu component dependency');
@@ -110,7 +111,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
             this.menuInteractive.setDisabled(this.disabled);
         }
         if (changes['submenu'] && !changes['submenu'].firstChange) {
-            this.menuInteractive.setSubmenu(!!this.submenu, this.submenu ? this.itemId : null);
+            this.menuInteractive.setSubmenu(!!this.submenu, this.submenu ? this.itemId : undefined);
         }
     }
 
@@ -122,7 +123,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
 
     /** Whether menu item has popup (desktop mode)  */
     get hasPopup(): boolean {
-        return this.submenu && (!this.menuService?.menu || !this.menuService?.menu.mobile);
+        return !!this.submenu && (!this.menuService?.menu || !this.menuService?.menu.mobile);
     }
 
     /** Focuses Menu Item interactive element */
@@ -186,11 +187,11 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
                 .subscribe(() => {
                     if (this.submenu) {
                         // Open submenu
-                        this.menuService.setActive(true, this);
+                        this.menuService!.setActive(true, this);
                     }
                     if (!this.submenu) {
                         // Close sibling submenu if opened
-                        this.menuService.setInactiveSiblingMenuItem(this);
+                        this.menuService!.setInactiveSiblingMenuItem(this);
                     }
                 })
         );
@@ -206,8 +207,8 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
 
     /** @hidden Checks for Menu Service dependency and passes it if further */
     private _setMenuService(): void {
-        this.menuService = this.menuService || this._submenu?.menuService;
-        if (this.submenu) {
+        this.menuService = this.menuService || this._submenu?.menuService || null;
+        if (this.submenu && this.menuService) {
             this.submenu.menuService = this.menuService;
         }
     }
@@ -225,12 +226,11 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     /** @hidden Updates focused menu item on outer focus */
     private _listenOnOuterFocus(): void {
         this._subscriptions.add(
-            fromEvent(this.menuInteractive.elementRef.nativeElement, 'focus')
-                .pipe(
-                    filter(() => !!this.menuService),
-                    filter(() => this.menuService.focusedNode !== this.menuService.menuMap.get(this))
-                )
-                .subscribe(() => this.menuService.setFocused(this))
+            fromEvent(this.menuInteractive.elementRef.nativeElement, 'focus').subscribe(() => {
+                if (this.menuService && this.menuService.focusedNode !== this.menuService.menuMap.get(this)) {
+                    this.menuService.setFocused(this);
+                }
+            })
         );
     }
 }
@@ -250,11 +250,11 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
 export class SubmenuComponent implements BaseSubmenu {
     /** Aria-label for navigation */
     @Input()
-    ariaLabel: string = null;
+    ariaLabel: Nullable<string>;
 
     /** Aria-Labelledby for element describing navigation */
     @Input()
-    ariaLabelledby: string = null;
+    ariaLabelledby: Nullable<string>;
 
     /** @hidden Reference to template with Submenu items  */
     @ViewChild(TemplateRef) templateRef: TemplateRef<any>;

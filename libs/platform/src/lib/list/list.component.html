@@ -11,7 +11,7 @@
     [navigationIndicator]="navigationIndicator"
     style="outline: none"
     [class.fd-list--navigation]="navigationIndicator"
-    (keydown)="_keyManager.onKeydown($event); _handleKeyDown($event)"
+    (keydown)="_keyManager?.onKeydown($event); _handleKeyDown($event)"
     (change)="_onSelectionChanged($event)"
     [attr.aria-setsize]="ariaSetsize"
     [attr.aria-label]="ariaLabel"
