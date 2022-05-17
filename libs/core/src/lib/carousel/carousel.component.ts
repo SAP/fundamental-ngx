@@ -481,7 +481,6 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     /** @hidden Handle when slide is added or removed */
     private _onSlideUpdates(): void {
-        console.log('ON SLIDE UPDATES');
         this._slidesCopy = this.slides.toArray();
         this.currentActiveSlidesStartIndex = 0;
         this._carouselService.initialise(this._config, this.slides, this.slideContainer);
@@ -512,7 +511,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         const pageIndicatorsIfZeroCount = this.slides.length === 0 ? 0 : 1;
 
         this.pageIndicatorsCountArray = new Array(arrayLength > 0 ? arrayLength : pageIndicatorsIfZeroCount);
-        console.log('Visible Slide Numeric Count: ', this._visibleSlidesNumericCount);
+
         this._goToFirstItem();
 
         this.slides.forEach((_slide, index) => {
