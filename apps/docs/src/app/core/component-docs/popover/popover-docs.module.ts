@@ -33,8 +33,6 @@ import { PopoverFocusExampleComponent } from './examples/popover-focus-example/p
 import { PopoverMobileExampleComponent } from './examples/popover-mobile/popover-mobile-example.component';
 import { PopoverTriggerExampleComponent } from './examples/popover-trigger-example/popover-trigger-example.component';
 import { PopoverDynamicContainerHeightExampleComponent } from './examples/popover-dynamic-container-height/popover-dynamic-container-height-example.component';
-import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
-import { ListModule } from '@fundamental-ngx/core/list';
 
 const routes: Routes = [
     {
@@ -60,9 +58,7 @@ const routes: Routes = [
         SegmentedButtonModule,
         FormModule,
         CheckboxModule,
-        LinkModule,
-        ListModule,
-        BusyIndicatorModule
+        LinkModule
     ],
     exports: [RouterModule],
     declarations: [
