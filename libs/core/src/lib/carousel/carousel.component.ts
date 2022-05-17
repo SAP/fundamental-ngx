@@ -200,14 +200,6 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     @ViewChild('carouselContainer')
     carouselContainer: ElementRef;
 
-    /** Carousel content container. */
-    @ViewChild('carouselContent')
-    carouselContentContainer: ElementRef;
-
-    /** Carousel slides container. */
-    @ViewChild('slidesWrapper')
-    carouselSlidesWrapper: ElementRef;
-
     /** @hidden Start index of currently active items */
     currentActiveSlidesStartIndex = 0;
 
