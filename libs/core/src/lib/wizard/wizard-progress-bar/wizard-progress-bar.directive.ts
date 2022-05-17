@@ -1,4 +1,5 @@
 import { Directive, Input } from '@angular/core';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 export type WizardSize = 'sm' | 'md' | 'lg' | 'xl';
 
@@ -19,7 +20,7 @@ export class WizardProgressBarDirective {
      * Size (horizontal paddings) of the wizard progress bar.
      */
     @Input()
-    size: WizardSize = null;
+    size: Nullable<WizardSize> = null;
 
     /** @hidden */
     visible = true;

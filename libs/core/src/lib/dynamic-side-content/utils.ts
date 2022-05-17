@@ -1,6 +1,6 @@
 import { DYNAMIC_SIDE_CONTENT_CLASS_NAME, DynamicSideContentPosition, DynamicSideContentSize } from './constants';
 
-export const getSizeClassName = (size: DynamicSideContentSize): string => {
+export const getSizeClassName = (size: DynamicSideContentSize): string | null => {
     switch (size) {
         case 'sm':
             return DYNAMIC_SIDE_CONTENT_CLASS_NAME.containerSizeSm;
@@ -14,7 +14,7 @@ export const getSizeClassName = (size: DynamicSideContentSize): string => {
     }
 };
 
-export const getPositionClassName = (position: DynamicSideContentPosition): string => {
+export const getPositionClassName = (position: DynamicSideContentPosition): string | null => {
     switch (position) {
         case 'bottom':
             return DYNAMIC_SIDE_CONTENT_CLASS_NAME.containerSideBelow;

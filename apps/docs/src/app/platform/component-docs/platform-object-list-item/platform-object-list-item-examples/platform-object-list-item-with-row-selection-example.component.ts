@@ -111,11 +111,11 @@ export interface Product {
     attribute1: string;
     attribute2: string;
     attribute3: string;
-    status1: ObjectStatus;
+    status1?: ObjectStatus;
     statusgyph1: string;
     statuslabel1: string;
     inverted1: boolean;
-    status2: ObjectStatus;
+    status2?: ObjectStatus;
     statusgyph2: string;
     statuslabel2: string;
     inverted2: boolean;
@@ -131,8 +131,9 @@ export class ListDataProvider extends DataProvider<Product> {
     }
     fetch(params: Map<string, string>): Observable<Product[]> {
         let data = LIST_ELEMENTS;
-        if (params.get('name')) {
-            const keyword = params.get('name').toLowerCase();
+        const name = params.get('name');
+        if (name) {
+            const keyword = name.toLowerCase();
             data = data.filter((item) => item.title.toLowerCase().indexOf(keyword) > -1);
         }
         return of(data);

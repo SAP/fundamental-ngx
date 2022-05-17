@@ -2,7 +2,7 @@ import { Observable, Subject } from 'rxjs';
 
 export class DialogRefBase<T, P = any> {
     /** @hidden */
-    protected readonly _afterClosed = new Subject<P>();
+    protected readonly _afterClosed = new Subject<P | undefined>();
 
     /** @hidden */
     protected readonly _afterLoaded = new Subject<boolean>();
@@ -11,7 +11,7 @@ export class DialogRefBase<T, P = any> {
      * Observable that is triggered when the dialog is closed.
      * On close a *result* is passed back. On dismiss, an *error* is returned instead.
      */
-    public afterClosed: Observable<P> = this._afterClosed.asObservable();
+    public afterClosed: Observable<P | undefined> = this._afterClosed.asObservable();
 
     /** Observable that is triggered when the modal view is initialised. */
     public afterLoaded: Observable<boolean> = this._afterLoaded.asObservable();

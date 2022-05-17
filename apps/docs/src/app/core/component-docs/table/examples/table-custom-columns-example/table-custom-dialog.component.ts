@@ -88,7 +88,7 @@ export class TableCustomDialogComponent {
     }
 
     handleChange(column: { key: string; checked: boolean }, checked?: boolean): void {
-        column.checked = checked;
+        column.checked = !!checked;
 
         this.allSelected = this._areAllSelected();
 
@@ -103,7 +103,7 @@ export class TableCustomDialogComponent {
     }
 
     handleAllChange(selected?: boolean): void {
-        this.allSelected = selected;
+        this.allSelected = !!selected;
         if (selected) {
             this.columns.forEach((item) => (item.checked = true));
             this.showError = false;

@@ -83,7 +83,7 @@ export class FormGeneratorService implements OnDestroy {
 
         formItems.forEach((formItem) => {
             if (!this.isFormFieldItem(formItem)) {
-                if (formItem.items.length === 0) {
+                if (!formItem.items?.length) {
                     return;
                 }
 
@@ -94,6 +94,10 @@ export class FormGeneratorService implements OnDestroy {
                         groupFormItem as PreparedDynamicFormFieldItem,
                         form
                     );
+
+                    if (!groupFormControl) {
+                        return;
+                    }
 
                     group.addControl(groupFormItem.name, groupFormControl);
 
@@ -203,7 +207,7 @@ export class FormGeneratorService implements OnDestroy {
      * @param type form item type
      * @returns @see FormComponentDefinition Component definition for the form item
      */
-    getComponentDefinitionByType(type: string): FormComponentDefinition | null {
+    getComponentDefinitionByType(type: string): FormComponentDefinition | undefined {
         return this._componentsAccessor.getComponentDefinitionByType(type);
     }
 
@@ -240,7 +244,7 @@ export class FormGeneratorService implements OnDestroy {
      * @param item form item.
      * @returns is current form item is a field.
      */
-    isFormFieldItem(item: DynamicFormItem): item is DynamicFormFieldItem {
+    isFormFieldItem(item: DynamicFormItem | undefined): item is DynamicFormFieldItem {
         return !!(item as DynamicFormFieldItem).type;
     }
 
@@ -279,17 +283,18 @@ export class FormGeneratorService implements OnDestroy {
         formItem: PreparedDynamicFormFieldItem,
         form: DynamicFormGroup
     ): PreparedDynamicFormFieldItem {
-        let validator: AsyncValidatorFn = null;
+        let validator: AsyncValidatorFn | null = null;
 
         if (isFunction(formItem.validate)) {
-            validator = async (control: DynamicFormControl) => {
-                const obj = formItem.validate(control.value, this._getFormValueWithoutUngrouped(form));
+            validator = async (control) => {
+                const obj = formItem.validate!(control.value, this._getFormValueWithoutUngrouped(form));
 
                 const result = await this._getFunctionValue(obj);
 
                 const returnObj = {};
 
-                returnObj[`${control.formItem.name}Validator`] = typeof result === 'boolean' ? true : result;
+                returnObj[`${(<DynamicFormControl>control).formItem.name}Validator`] =
+                    typeof result === 'boolean' ? true : result;
 
                 return result === null ? result : returnObj;
             };
@@ -312,7 +317,7 @@ export class FormGeneratorService implements OnDestroy {
     private _generateDynamicFormItem(
         formItem: PreparedDynamicFormFieldItem,
         form: DynamicFormGroup
-    ): DynamicFormControl {
+    ): DynamicFormControl | undefined {
         const formItemComponentType = this.getComponentDefinitionByType(formItem.type);
 
         if (!formItemComponentType) {
@@ -333,7 +338,7 @@ export class FormGeneratorService implements OnDestroy {
 
         if (isFunction(formItem.onchange)) {
             formControl.valueChanges.pipe(debounceTime(50), takeUntil(this._onDestroy$)).subscribe(async (value) => {
-                const obj = formItem.onchange(value, this.forms, formControl);
+                const obj = formItem.onchange!(value, this.forms, formControl);
 
                 await this._getFunctionValue(obj);
             });

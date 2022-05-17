@@ -1,4 +1,5 @@
 import { Observable, Subject } from 'rxjs';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 /**
  * Datetime Adapter is an abstract class that must be implemented by each adapter.
@@ -200,7 +201,7 @@ export abstract class DatetimeAdapter<D> {
      * @param displayFormat The format to use to display the date as a string.
      * @returns The formatted date string.
      */
-    abstract format(date: D, displayFormat: unknown): string;
+    abstract format(date: Nullable<D>, displayFormat: unknown): string;
 
     /**
      * Creates a date with the given year, month, and date.
@@ -266,7 +267,7 @@ export abstract class DatetimeAdapter<D> {
      * @param date2 The second date to compare with
      * @returns If dates are equal or not
      */
-    abstract datesEqual(date1: D, date2: D): boolean;
+    abstract datesEqual(date1: Nullable<D>, date2: Nullable<D>): boolean;
 
     /**
      * Method that check equality of 2 dates taking into account time value as well
@@ -274,7 +275,7 @@ export abstract class DatetimeAdapter<D> {
      * @param date2 The second date to compare with
      * @returns If dates are equal or not
      */
-    abstract dateTimesEqual(date1: D, date2: D): boolean;
+    abstract dateTimesEqual(date1: Nullable<D>, date2: Nullable<D>): boolean;
 
     /**
      * Method to check if date is between 2 dates
@@ -289,7 +290,7 @@ export abstract class DatetimeAdapter<D> {
      * Method that checks validity of current date.
      * @param date The date to be checked
      */
-    abstract isValid(date: D): boolean;
+    abstract isValid(date: Nullable<D>): date is D;
 
     /**
      * Gets the RFC 3339 compatible string (https://tools.ietf.org/html/rfc3339) for the given date.

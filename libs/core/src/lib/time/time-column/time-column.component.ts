@@ -63,7 +63,11 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
 
     /** Currently chosen, centered time column item */
     @Input()
-    set activeValue(activeItem: T) {
+    set activeValue(activeItem: T | undefined) {
+        if (activeItem == null) {
+            // omitting "null" and "undefined"
+            return;
+        }
         if (this._viewInit$.value && this._activeValue !== activeItem) {
             this._pickTime(this._getItem(activeItem), false);
         }
@@ -369,7 +373,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
      * after => Defines if value was incremented/decremented, needed for hours to trigger AM/PM change
      * @hidden
      */
-    private _pickTime(item: CarouselItemDirective, smooth?: boolean, emitEvent?: boolean, after?: boolean): void {
+    private _pickTime(item?: CarouselItemDirective, smooth?: boolean, emitEvent?: boolean, after?: boolean): void {
         if (!item) {
             return;
         }
@@ -393,7 +397,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
      * Returns item with passed value
      * @hidden
      */
-    private _getItem(_item: T): CarouselItemDirective {
+    private _getItem(_item: T): CarouselItemDirective | undefined {
         return this.items.find((item) => item.value === _item);
     }
 
@@ -414,9 +418,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
      * @hidden
      */
     private _focusIndicator(): void {
-        if (document.getElementById(this.currentIndicatorId)) {
-            document.getElementById(this.currentIndicatorId).focus();
-        }
+        document.getElementById(this.currentIndicatorId)?.focus();
     }
 
     /** @hidden */

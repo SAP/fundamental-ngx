@@ -42,6 +42,8 @@ import { TableRowDirective } from '@fundamental-ngx/core/table';
 import { isDataSource, isFunction, isString } from '@fundamental-ngx/platform/shared';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { cloneDeep, get } from 'lodash-es';
+import { Nullable } from '@fundamental-ngx/core/shared';
+
 import { SaveRowsEvent } from './interfaces/save-rows-event.interface';
 import { EditableTableCell } from './table-cell.class';
 
@@ -216,7 +218,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
     /** Number of items per page. */
     @Input()
-    pageSize: number = null;
+    pageSize: Nullable<number>;
 
     /** Page scrolling threshold in px. */
     @Input()
@@ -425,7 +427,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     editableCellForms: QueryList<NgForm>;
 
     /** @hidden */
-    _tableColumnsSubject: BehaviorSubject<TableColumn[]> = new BehaviorSubject([]);
+    readonly _tableColumnsSubject = new BehaviorSubject<TableColumn[]>([]);
+
     /** @hidden */
     readonly tableColumnsStream = this._tableColumnsSubject.asObservable();
 
@@ -647,7 +650,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
     /** @hidden */
     get _selectionColumnWidth(): number {
-        return this._isShownSelectionColumn ? SELECTION_COLUMN_WIDTH.get(this.contentDensity) : 0;
+        return this._isShownSelectionColumn ? SELECTION_COLUMN_WIDTH.get(this.contentDensity) ?? 0 : 0;
     }
 
     /** @hidden */
@@ -705,7 +708,9 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
         if ('trackBy' in changes) {
             this._rowTrackBy =
-                typeof this.trackBy === 'function' ? (index, item) => this.trackBy(index, item.value) : undefined;
+                typeof this.trackBy === 'function'
+                    ? (index, item) => this.trackBy(index, item.value)
+                    : (undefined as any);
         }
 
         if (changes.contentDensity?.currentValue) {
@@ -958,7 +963,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             return;
         }
 
-        row.navigatable = null;
+        row.navigatable = false;
 
         this._calculateIsShownNavigationColumn();
 
@@ -1055,7 +1060,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         const forms = [...this.customEditableCells.toArray(), ...this.editableCells.toArray()].map((t) => t.form);
 
         // Trigger form revalidation
-        forms.forEach((form) => form.onSubmit(undefined));
+        forms.forEach((form) => form.onSubmit(null as any));
         if (forms.some((form) => form.invalid)) {
             return;
         }
@@ -1116,8 +1121,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         }
         const checked = (rowToToggle.checked = !rowToToggle.checked);
         const rows = this._tableRows;
-        const removed = [];
-        const added = [];
+        const removed: TableRow<T>[] = [];
+        const added: TableRow<T>[] = [];
         this._rangeSelector.onRangeElementToggled(index, event as PointerEvent | KeyboardEvent);
 
         this._rangeSelector.applyValueToEachInRange((idx) => {
@@ -1143,8 +1148,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         }
 
         const checked = (rowToToggle.checked = !rowToToggle.checked);
-        const removed = [];
-        const added = [];
+        const removed: TableRow<T>[] = [];
+        const added: TableRow<T>[] = [];
 
         // uncheck previously checked
         this._getSelectableRows().forEach((row) => {
@@ -1331,7 +1336,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
     /** @hidden */
     _getRowHeight(): number {
-        return ROW_HEIGHT.get(this.contentDensity);
+        return ROW_HEIGHT.get(this.contentDensity) ?? 0;
     }
 
     /** @hidden */
@@ -1390,8 +1395,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
      * Select / Unselect all children rows
      */
     _toggleAllChildrenRows(treeRow: TableRow): void {
-        const removed = [];
-        const added = [];
+        const removed: TableRow<T>[] = [];
+        const added: TableRow<T>[] = [];
 
         this._findRowChildren(treeRow).forEach((row) => {
             if (row.checked === treeRow.checked) {
@@ -1783,7 +1788,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
         this._visibleColumns = columns // need to start mapping from state.columns list to keep right order
             .map((name) => columnsDefinition.find((column) => column.name === name))
-            .filter((column) => !!column)
+            .filter((column): column is TableColumn => !!column)
             .filter(({ key }) => !groupedColumnsToHide.includes(key)); // exclude columns which shouldn't be shown due to the group settings
 
         this._calculateTableColumnsLength();
@@ -1849,7 +1854,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
     /** @hidden */
     private _buildSortRulesMap(state = this.getTableState()): void {
-        this._sortRulesMap = new Map(state.sortBy.map((rule) => [rule.field, rule]));
+        this._sortRulesMap = new Map(state.sortBy.filter((rule) => rule.field).map((rule) => [rule.field!, rule]));
     }
 
     /** @hidden */
@@ -1859,7 +1864,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             if (!hash.has(key)) {
                 hash.set(key, []);
             }
-            hash.get(key).push(rule);
+            hash.get(key)?.push(rule);
             return hash;
         }, new Map<string, CollectionFilter[]>());
     }
@@ -1882,7 +1887,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     private _createGroupedTableRowsTree(
         rules: CollectionGroup[],
         rows: TableRow[],
-        parent: TableRow = null,
+        parent: TableRow | null = null,
         level = 0
     ): TreeLike<TableRow>[] {
         rules = [...rules];
@@ -1892,13 +1897,13 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             return rows.map((row) => {
                 row.parent = parent;
                 row.level = level;
-                row.hidden = parent && !parent.expanded;
+                row.hidden = !!parent && !parent.expanded;
                 return row;
             });
         }
 
         // Retrieve first group rule
-        const rule = rules.shift();
+        const rule = rules.shift()!;
 
         // Build map of unique values for a given group rule
         const valuesHash = rows
@@ -1910,7 +1915,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                     hash.set(modelValue, []);
                 }
 
-                hash.get(modelValue).push(row);
+                hash.get(modelValue)?.push(row);
 
                 return hash;
             }, new Map<unknown, TableRow[]>());
@@ -1924,7 +1929,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                 .map((row) => {
                     row.parent = parent;
                     row.level = -1;
-                    row.hidden = parent && !parent.expanded;
+                    row.hidden = !!parent && !parent.expanded;
                     return row;
                 });
         }
@@ -1945,7 +1950,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                 level,
                 true /** expandable */,
                 true /** expanded */,
-                parent && !parent.expanded /** hidden */
+                !!parent && !parent.expanded /** hidden */
             );
 
             // Ads group's children rows
@@ -2077,7 +2082,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
         let index = allRows.indexOf(row);
         const parents = this._getRowParents(row);
-        const children = [];
+        const children: TableRow<T>[] = [];
 
         while (index++ < rowsLength) {
             const nextRow = allRows[index];
@@ -2097,11 +2102,11 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
      * @returns parents list [direct parent, ..., ancestor]
      * @hidden
      */
-    private _getRowParents(row: TableRow, untilParent: TableRow = null): TableRow[] {
+    private _getRowParents(row: TableRow, untilParent: TableRow | null = null): TableRow[] {
         untilParent = untilParent || null; // to avoid "undefined"
-        const parents = [];
+        const parents: TableRow<T>[] = [];
         let parent = row.parent || null; // empty parent should be coerced to "null" do not get into infinite loop
-        while (parent !== untilParent) {
+        while (parent && parent !== untilParent) {
             parents.push(parent);
             parent = parent.parent || null;
         }
@@ -2112,7 +2117,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     private _resetAllSelectedRows(emitEvent = false): void {
         this._checkedAll = false;
         this._checkedAny = false;
-        const removed = [];
+        const removed: TableRow<T>[] = [];
         this._getSelectableRows().forEach((r) => {
             if (emitEvent && r.checked) {
                 removed.push(r);
@@ -2214,7 +2219,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     }
 
     /** @hidden */
-    private _toDataStream(source: FdpTableDataSource<T>): TableDataSource<T> {
+    private _toDataStream(source: FdpTableDataSource<T>): TableDataSource<T> | undefined {
         if (isDataSource(source)) {
             return source as TableDataSource<T>;
         }

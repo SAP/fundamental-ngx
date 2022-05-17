@@ -86,13 +86,13 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
     /** @hidden */
     @HostBinding('class.fdp-approval-flow-node--blank')
     get _blank(): boolean {
-        return this.node?.blank;
+        return !!this.node?.blank;
     }
 
     /** @hidden */
     @HostBinding('class.fdp-approval-flow-node--space')
     get _space(): boolean {
-        return this.node?.space;
+        return !!this.node?.space;
     }
 
     /** @hidden */
@@ -129,7 +129,7 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
     @HostBinding('class.fdp-approval-flow-node--parent-approved')
     get _isParentApproved(): boolean {
         if (!this.meta?.parents?.length) {
-            return this.meta?.rootNodesApproved;
+            return !!this.meta?.rootNodesApproved;
         }
 
         return this.meta.parents.every((node) => isNodeApproved(node));
@@ -173,7 +173,7 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
 
     /** @hidden */
     get _isSelected(): boolean {
-        return this.node.selected;
+        return !!this.node.selected;
     }
 
     /** @hidden */
@@ -258,7 +258,7 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
     /** @hidden */
     get _isVerticalLineBeforeSolid(): boolean {
         if (!this.meta?.parents.length) {
-            return this.meta?.isVerticalLineBeforeSolid;
+            return !!this.meta?.isVerticalLineBeforeSolid;
         }
 
         return this.meta.parents.every((parentNode) => isNodeApproved(parentNode));
@@ -267,7 +267,7 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
     /** @hidden */
     get _isVerticalLineAfterSolid(): boolean {
         if (!this.node?.targets.length) {
-            return this.meta?.isVerticalLineAfterSolid;
+            return !!this.meta?.isVerticalLineAfterSolid;
         }
 
         return this._isVerticalLineBeforeSolid && this.allNodesInColumnApproved;

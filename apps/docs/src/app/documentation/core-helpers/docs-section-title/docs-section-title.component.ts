@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit, Inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Libraries } from '../../utilities/libraries';
+import { ActivatedRoute } from '@angular/router';
+import { CURRENT_LIB, Libraries } from '../../utilities/libraries';
 
 @Component({
     selector: 'fd-docs-section-title',
@@ -29,15 +29,11 @@ export class DocsSectionTitleComponent implements OnInit, AfterViewInit {
     @Input()
     componentName = '';
 
-    readonly currentLibrary: Libraries = null;
+    readonly currentLibrary: Libraries;
 
     private idFromUrl: any;
 
-    constructor(
-        private activatedRoute: ActivatedRoute,
-        private router: Router,
-        @Inject('CURRENT_LIB') private currentLib: Libraries
-    ) {
+    constructor(private activatedRoute: ActivatedRoute, @Inject(CURRENT_LIB) private currentLib: Libraries) {
         this.currentLibrary = this.currentLib;
     }
 
@@ -62,8 +58,9 @@ export class DocsSectionTitleComponent implements OnInit, AfterViewInit {
     }
 
     private addOffset(): void {
-        if (document.getElementById('page-content')) {
-            document.getElementById('page-content').scrollTop -= 30;
+        const pageContent = document.getElementById('page-content');
+        if (pageContent) {
+            pageContent.scrollTop -= 30;
         }
     }
 }

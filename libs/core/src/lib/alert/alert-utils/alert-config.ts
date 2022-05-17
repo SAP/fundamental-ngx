@@ -1,4 +1,5 @@
 import { DynamicComponentConfig } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 /**
  * @deprecated
@@ -33,10 +34,10 @@ export class AlertConfig implements DynamicComponentConfig {
     mousePersist = false;
 
     /** Id of the element that labels the alert. */
-    ariaLabelledBy?: string = null;
+    ariaLabelledBy?: Nullable<string>;
 
     /** Aria label for the alert component element. */
-    ariaLabel?: string = null;
+    ariaLabel?: Nullable<string>;
 
     /** The container that the Alert is appended to. By default, it is appended to the body. */
     container?: HTMLElement | 'body' = 'body';

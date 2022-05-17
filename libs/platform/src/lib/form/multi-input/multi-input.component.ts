@@ -194,8 +194,8 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
 
         const providers = this._providers?.size === 0 ? this._multiInputConfig.providers : this._providers;
         // if we have both prefer dataSource
-        if (!this.dataSource && this.entityClass && providers.has(this.entityClass)) {
-            this.dataSource = new MultiInputDataSource(providers.get(this.entityClass));
+        if (!this.dataSource && this.entityClass && providers?.has(this.entityClass)) {
+            this.dataSource = new MultiInputDataSource(providers.get(this.entityClass)!);
         }
     }
 
@@ -279,7 +279,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         this.emitChangeEvent(token ? this.selected : null);
         this.searchInputElement.nativeElement.focus();
         if (this.selected.length === 0) {
-            this._selected = null;
+            this._selected = [];
         }
         this._updateModel(this.selected);
         this._cd.markForCheck();
@@ -380,7 +380,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
 
         return this._suggestions
             .reduce((result: MultiInputOption[], item: MultiInputOption) => {
-                result.push(...item.children);
+                item.children && result.push(...item.children);
 
                 return result;
             }, [])

@@ -25,7 +25,7 @@
 
                 <ng-container *ngIf="viewService.isTeamMembersMode">
                     <fd-icon [glyph]="_headerArrowGlyph" (click)="_exitTeamMembersMode()"></fd-icon>
-                    {{ viewService.team.name }} ({{ viewService.team.members.length }})
+                    {{ viewService.team?.name ?? '' }} ({{ viewService.team?.members?.length ?? 0 }})
                 </ng-container>
 
                 <ng-container *ngIf="viewService.isUserDetailsMode">

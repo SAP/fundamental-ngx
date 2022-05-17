@@ -13,13 +13,7 @@
     >
         <fd-popover-control
             fd-avatar-group-popover-control
-            [attr.aria-label]="
-                'Has popup type dialog Conjoined avatars, ' +
-                (people?.length - avatarGroup_GroupType?.overflowItemsCount) +
-                ' avatars displayed, ' +
-                avatarGroup_GroupType?.overflowItemsCount +
-                ' avatars hidden, activate for complete list'
-            "
+            [attr.aria-label]="getPopoverCtrlAriaLabel(avatarGroup_GroupType?.overflowItemsCount)"
             (click)="handleControlClick($event, overflowPopover)"
             (keydown)="handleControlKeydown($event, overflowPopover)"
         >

@@ -462,9 +462,11 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         this._pagesBeforeCurrent = this._pages.slice(0, currentPageIndex);
         this._pagesAfterCurrent = this._pages.slice(currentPageIndex + 1);
 
+        const itemsPerPage = pagination.itemsPerPage ?? DEFAULT_ITEMS_PER_PAGE;
+
         this._currentShowing = {
-            from: this.currentPage - 1 === 0 ? 1 : (this.currentPage - 1) * pagination.itemsPerPage + 1,
-            to: Math.min((this.currentPage - 1) * pagination.itemsPerPage + pagination.itemsPerPage, this.totalItems),
+            from: this.currentPage - 1 === 0 ? 1 : (this.currentPage - 1) * itemsPerPage + 1,
+            to: Math.min((this.currentPage - 1) * itemsPerPage + itemsPerPage, this.totalItems),
             of: this.totalItems
         };
 

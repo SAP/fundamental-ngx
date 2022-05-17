@@ -99,7 +99,7 @@ describe('PlatformTimePickerComponent', () => {
         const timePickerHint = component.timePickerFormField.hint;
         expect(timePickerHint).toBe('This is a hint');
 
-        const timePickerDefaultValue = component.timePickerForm.get('timePicker').value;
+        const timePickerDefaultValue = component.timePickerForm.get('timePicker')?.value;
         expect(timePickerDefaultValue).toEqual(time);
     });
 
@@ -117,16 +117,16 @@ describe('PlatformTimePickerComponent', () => {
     it('should call disabled state method', async () => {
         const timePicker = component.timePickerComponent;
         timePicker.disabled = true;
-        component.timePickerForm.get('timePicker').disable();
+        component.timePickerForm.get('timePicker')?.disable();
 
         await wait(fixture);
-        expect(component.timePickerForm.get('timePicker').disabled).toBe(true);
+        expect(component.timePickerForm.get('timePicker')?.disabled).toBe(true);
     });
 
     it('should be in an error state if value is empty and touched', async () => {
         const timePicker = component.timePickerComponent;
         timePicker.allowNull = false;
-        const formControl = component.timePickerForm.get('timePicker');
+        const formControl = component.timePickerForm.get('timePicker') as FormControl;
         const inputEl = fixture.debugElement.query(By.css('.fd-input-group'));
 
         expect(inputEl.nativeElement.classList.contains('is-error')).not.toBeTrue();

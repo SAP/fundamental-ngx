@@ -15,7 +15,7 @@ import { AlertRef } from '../alert-utils/alert-ref';
 @Injectable()
 export class AlertService {
     private alerts: ComponentRef<AlertComponent>[] = [];
-    private alertContainerRef: ComponentRef<AlertContainerComponent>;
+    private alertContainerRef?: ComponentRef<AlertContainerComponent>;
 
     /** @hidden */
     constructor(private dynamicComponentService: DynamicComponentService) {}
@@ -85,8 +85,7 @@ export class AlertService {
     }
 
     private destroyAlertComponent(alert: ComponentRef<AlertComponent>): void {
-        this.alerts[this.alerts.indexOf(alert)] = null;
-        this.alerts = this.alerts.filter((item) => item !== null && item !== undefined);
+        this.alerts = this.alerts.filter((item) => item && item !== alert);
         this.dynamicComponentService.destroyComponent(alert);
 
         if (this.alertContainerRef && (!this.alerts || this.alerts.length === 0)) {
@@ -95,7 +94,7 @@ export class AlertService {
     }
 
     private destroyAlertContainer(): void {
-        this.dynamicComponentService.destroyComponent(this.alertContainerRef);
+        this.alertContainerRef && this.dynamicComponentService.destroyComponent(this.alertContainerRef);
         this.alertContainerRef = undefined;
     }
 }

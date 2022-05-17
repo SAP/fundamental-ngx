@@ -16,6 +16,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 let switchUniqueId = 0;
 
@@ -84,11 +85,11 @@ export class SwitchComponent implements ControlValueAccessor, OnInit, OnDestroy 
 
     /** aria-label attribute of the inner input element. */
     @Input()
-    ariaLabel: string = null;
+    ariaLabel: Nullable<string>;
 
     /** aria-labelledby attribute of the inner input element. */
     @Input()
-    ariaLabelledby: string = null;
+    ariaLabelledby: Nullable<string>;
 
     /** Semantic Label Accept set for Accessibility */
     @Input()

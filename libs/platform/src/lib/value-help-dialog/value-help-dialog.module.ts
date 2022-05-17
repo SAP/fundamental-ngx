@@ -22,6 +22,7 @@ import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { InfiniteScrollModule } from '@fundamental-ngx/core/infinite-scroll';
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
+import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
 
 import { PlatformValueHelpDialogComponent } from './value-help-dialog/value-help-dialog.component';
 import { VhdFilterComponent } from './components/value-help-dialog-filter/value-help-dialog-filter.component';
@@ -64,7 +65,8 @@ import { ConditionCountMessageDirective } from './directives/condition-count-mes
         PanelModule,
         InputGroupModule,
         PopoverModule,
-        InfiniteScrollModule
+        InfiniteScrollModule,
+        PlatformSearchFieldModule
     ],
     exports: [PlatformValueHelpDialogComponent, VhdFilterComponent, VhdSearchComponent]
 })

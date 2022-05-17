@@ -1,5 +1,5 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
-import { Libraries } from '../../utilities/libraries';
+import { CURRENT_LIB, Libraries } from '../../utilities/libraries';
 
 @Component({
     selector: 'import',
@@ -18,7 +18,7 @@ export class ImportComponent implements OnInit {
 
     library: string;
 
-    constructor(@Inject('CURRENT_LIB') private currentLib: Libraries) {}
+    constructor(@Inject(CURRENT_LIB) private currentLib: Libraries) {}
 
     ngOnInit(): void {
         const libraryPath = ['@fundamental-ngx', this.currentLib];

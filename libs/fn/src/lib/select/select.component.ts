@@ -211,15 +211,8 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
     }
 
     /** @hidden */
-    private _getFocusedOption(): OptionComponent {
-        let retVal = null;
-        this.options.forEach((option) => {
-            if (option.elementRef.nativeElement.classList.contains('focus-visible')) {
-                retVal = option;
-            }
-        });
-
-        return retVal;
+    private _getFocusedOption(): OptionComponent | undefined {
+        return this.options.find((option) => option.elementRef.nativeElement.classList.contains('focus-visible'));
     }
 
     /** @hidden */

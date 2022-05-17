@@ -1,5 +1,5 @@
 import { ConnectedPosition } from '@angular/cdk/overlay';
-import { PopoverPosition } from '../../shared/interfaces/popover-position';
+import { PopoverPosition, ArrowPosition } from '@fundamental-ngx/core/shared';
 
 describe('PopoverPosition', () => {
     it('should return proper arrow position and margin - top', () => {
@@ -9,7 +9,7 @@ describe('PopoverPosition', () => {
             originX: 'center',
             originY: 'bottom'
         };
-        const arrowPosition = PopoverPosition.getArrowPosition(position);
+        const arrowPosition = PopoverPosition.getArrowPosition(position) as ArrowPosition;
         const margin = PopoverPosition.getMarginDirection(arrowPosition);
 
         expect(arrowPosition).toBe('top');
@@ -23,7 +23,7 @@ describe('PopoverPosition', () => {
             originX: 'center',
             originY: 'top'
         };
-        const arrowPosition = PopoverPosition.getArrowPosition(position);
+        const arrowPosition = PopoverPosition.getArrowPosition(position) as ArrowPosition;
         const margin = PopoverPosition.getMarginDirection(arrowPosition);
 
         expect(arrowPosition).toBe('bottom');
@@ -32,7 +32,7 @@ describe('PopoverPosition', () => {
 
     it('should return proper arrow position and margin - start', () => {
         const position: ConnectedPosition = { overlayY: 'center', overlayX: 'start', originX: 'end', originY: 'top' };
-        const arrowPosition = PopoverPosition.getArrowPosition(position);
+        const arrowPosition = PopoverPosition.getArrowPosition(position) as ArrowPosition;
         const margin = PopoverPosition.getMarginDirection(arrowPosition);
 
         expect(arrowPosition).toBe('start');
@@ -41,7 +41,7 @@ describe('PopoverPosition', () => {
 
     it('should return proper arrow position and margin - end', () => {
         const position: ConnectedPosition = { overlayY: 'center', overlayX: 'end', originX: 'start', originY: 'top' };
-        const arrowPosition = PopoverPosition.getArrowPosition(position);
+        const arrowPosition = PopoverPosition.getArrowPosition(position) as ArrowPosition;
         const margin = PopoverPosition.getMarginDirection(arrowPosition);
 
         expect(arrowPosition).toBe('end');
@@ -50,7 +50,7 @@ describe('PopoverPosition', () => {
 
     it('should return proper arrow position and margin - start with rtl', () => {
         const position: ConnectedPosition = { overlayY: 'center', overlayX: 'start', originX: 'end', originY: 'top' };
-        const arrowPosition = PopoverPosition.getArrowPosition(position, true);
+        const arrowPosition = PopoverPosition.getArrowPosition(position, true) as ArrowPosition;
         const margin = PopoverPosition.getMarginDirection(arrowPosition);
 
         expect(arrowPosition).toBe('end');
@@ -59,7 +59,7 @@ describe('PopoverPosition', () => {
 
     it('should return proper arrow position and margin - end with rtl', () => {
         const position: ConnectedPosition = { overlayY: 'center', overlayX: 'end', originX: 'start', originY: 'top' };
-        const arrowPosition = PopoverPosition.getArrowPosition(position, true);
+        const arrowPosition = PopoverPosition.getArrowPosition(position, true) as ArrowPosition;
         const margin = PopoverPosition.getMarginDirection(arrowPosition);
 
         expect(arrowPosition).toBe('start');

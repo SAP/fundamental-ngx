@@ -88,7 +88,7 @@ export class DialogContainerComponent
     }
 
     /** @hidden Load Dialog component from passed object */
-    private _createFromDefaultDialog(config: DialogDefaultContent): void {
+    private _createFromDefaultDialog(config?: DialogDefaultContent): void {
         this.containerRef.clear();
         const componentFactory = this._componentFactoryResolver.resolveComponentFactory(DialogDefaultComponent);
         this._componentRef = this.containerRef.createComponent(componentFactory);

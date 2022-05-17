@@ -12,5 +12,5 @@ import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/cor
     ]
 })
 export class TimeNoSecondsExampleComponent {
-    timeNoSeconds = new FdDate().setTime(12, 0, null);
+    timeNoSeconds = new FdDate().setTime(12, 0);
 }

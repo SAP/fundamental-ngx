@@ -27,6 +27,7 @@ import { ContentDensityService, DynamicComponentService } from '@fundamental-ngx
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { BasePopoverClass, PopoverService } from '@fundamental-ngx/core/popover';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 import { MenuMobileComponent } from './menu-mobile/menu-mobile.component';
 import { MenuMobileModule } from './menu-mobile/menu-mobile.module';
@@ -81,11 +82,11 @@ export class MenuComponent
 
     /** Aria-label for navigation */
     @Input()
-    ariaLabel: string = null;
+    ariaLabel: Nullable<string>;
 
     /** Aria-Labelledby for element describing navigation */
     @Input()
-    ariaLabelledby: string = null;
+    ariaLabelledby: Nullable<string>;
 
     /** Id of the control. */
     @Input()
@@ -119,7 +120,7 @@ export class MenuComponent
     private _mobileModeComponentRef: ComponentRef<MenuMobileComponent>;
 
     /** @hidden */
-    private _clickEventListener: () => void;
+    private _clickEventListener: null | (() => void);
 
     /** @hidden */
     constructor(

@@ -50,7 +50,7 @@ class ComboboxStandardComponent {
         { name: 'Jalapeño', type: 'Vegetables' },
         { name: 'Spinach', type: 'Vegetables' }
     ];
-    selectedItem = null;
+    selectedItem: ComboboxSelectionChangeEvent | null = null;
     maxHeight: string;
     autoResize = false;
     contentDensity: ContentDensity = 'cozy';
@@ -152,7 +152,7 @@ describe('ComboboxComponent default values', () => {
 
         expect(component.selectedItem instanceof ComboboxSelectionChangeEvent).toBeTrue();
 
-        expect(component.selectedItem.payload).toEqual(component.dataSource[0]);
+        expect(component.selectedItem?.payload).toEqual(component.dataSource[0]);
         expect(combobox.isOpen).toBeFalse();
 
         combobox.onPrimaryButtonClick();
@@ -162,7 +162,7 @@ describe('ComboboxComponent default values', () => {
         item = listItems[2] as HTMLElement;
         item.click();
         fixture.detectChanges();
-        expect(component.selectedItem.payload).toEqual(component.dataSource[2]);
+        expect(component.selectedItem?.payload).toEqual(component.dataSource[2]);
     });
 
     it('should be able to see Group', fakeAsync(() => {

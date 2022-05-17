@@ -12,8 +12,8 @@ export class ValueHelpDialogPo extends BaseComponentPo {
     menuDialogBtn = 'fd-popover button';
     menuItemNames = 'fd-popover-body .fd-list__title';
     miniOpenDialogBtn = 'button[class*="fd-button--compact"]';
-    mobileExampleDialog = 'fdp-value-help-dialog[dialogtitle="Mobile value help dialog"]';
     openDialogBtn = 'button[class="fd-button fd-button--standard"]';
+    basicSearchInput = '.fdp-search-field__input';
 
     // Dialog form selectors
     advSearchLabels = 'fd-layout-grid .fd-form-label';

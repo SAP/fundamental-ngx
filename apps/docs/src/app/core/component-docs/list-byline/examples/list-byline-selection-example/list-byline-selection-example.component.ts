@@ -5,8 +5,8 @@ import { Component } from '@angular/core';
     templateUrl: './list-byline-selection-example.component.html'
 })
 export class ListBylineSelectionExampleComponent {
-    selectionValue: string = null;
-    selectionValueTwo: string = null;
+    selectionValue: string | null = null;
+    selectionValueTwo: string | null = null;
 
     bylineSelectionItems = [
         {

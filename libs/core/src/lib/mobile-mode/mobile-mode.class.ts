@@ -31,7 +31,7 @@ export abstract class MobileModeBase<T extends MobileMode> {
     dialogRef: DialogRef;
 
     /** @hidden */
-    dialogConfig: DialogConfig;
+    dialogConfig?: DialogConfig;
 
     /** @hidden */
     mobileConfig: MobileModeConfig;

@@ -30,10 +30,9 @@ export function toIso8601(fdDate: {
  * @param minute 0 - 59
  * @param second 0 - 59
  */
-// eslint-disable-next-line max-len
 export function isValidByParams(params: {
     year: number;
-    month?: number;
+    month: number;
     day?: number;
     hour?: number;
     minute?: number;
@@ -41,20 +40,15 @@ export function isValidByParams(params: {
 }): boolean {
     const { year, month, day, hour, minute, second } = params;
     if (
-        month < 1 ||
-        month > 12 ||
-        day < 1 ||
-        day > 31 ||
-        hour < 0 ||
-        hour > 23 ||
-        minute < 0 ||
-        minute > 59 ||
-        second < 0 ||
-        second > 59
+        !undefinedOrInRange(month, 1, 12) ||
+        !undefinedOrInRange(day, 1, 31) ||
+        !undefinedOrInRange(hour, 0, 23) ||
+        !undefinedOrInRange(minute, 0, 59) ||
+        !undefinedOrInRange(second, 0, 59)
     ) {
         return false;
     }
-    if (!isNaN(year) && !isNaN(month) && !isNaN(day)) {
+    if (!isNaN(year) && !isNaN(month) && day != null && !isNaN(day)) {
         const tempDate = new Date(year, month - 1, day);
         if (tempDate.getMonth() + 1 !== month) {
             return false;
@@ -62,4 +56,8 @@ export function isValidByParams(params: {
     }
     const date = new Date(year, month - 1, day, hour, minute, second);
     return !Number.isNaN(date.getTime());
+}
+
+function undefinedOrInRange(value: number | undefined, from: number, to: number): boolean {
+    return value == null || (value >= from && value <= to);
 }

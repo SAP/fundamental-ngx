@@ -32,7 +32,7 @@ export class FilterRule<T = any> {
     strategies: ReadonlyArray<FilterStrategy> = [];
 
     /** Data type */
-    dataType: FilterableColumnDataType;
+    dataType?: FilterableColumnDataType;
 
     /** returns whether filter rule has value */
     get hasValue(): boolean {
@@ -46,9 +46,9 @@ export class FilterRule<T = any> {
         /** Data type */
         public strategy?: FilterStrategy,
         /** Main filter value */
-        public value?: T,
+        public value?: T | null,
         /** Additional filter value */
-        public value2?: T
+        public value2?: T | null
     ) {
         if (!this.columnKey) {
             this.setColumnKey(columns[0]?.key);
@@ -65,11 +65,11 @@ export class FilterRule<T = any> {
         this.isValid = isValid;
     }
 
-    setValue(value: T): void {
+    setValue(value: T | null): void {
         this.value = value;
     }
 
-    setValue2(value: T): void {
+    setValue2(value: T | null): void {
         this.value2 = value;
     }
 
@@ -77,8 +77,12 @@ export class FilterRule<T = any> {
         this.strategy = strategy;
     }
 
-    setStrategiesByColumnKey(columnKey: string): void {
+    setStrategiesByColumnKey(columnKey?: string): void {
         const dataType = this.columns.find((column) => column.key === columnKey)?.dataType;
+        if (!dataType) {
+            return;
+        }
+
         const strategies = getFilterStrategiesBasedOnDataType(dataType);
 
         if (this.strategies === strategies) {
@@ -87,7 +91,7 @@ export class FilterRule<T = any> {
 
         this.strategies = strategies;
 
-        if (!this.strategies.includes(this.strategy)) {
+        if (!this.strategies.includes(this.strategy!)) {
             this.setStrategy(strategies[0]);
         }
     }
@@ -109,7 +113,7 @@ export class FilterRule<T = any> {
         this.setStrategiesByColumnKey(columnKey);
     }
 
-    setDataTypeByColumnKey(columnKey: string): void {
+    setDataTypeByColumnKey(columnKey?: string): void {
         const dataType = this.columns.find((column) => column.key === columnKey)?.dataType;
 
         if (dataType === this.dataType) {

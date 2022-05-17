@@ -11,7 +11,7 @@ import { CLASS_NAME } from './constants';
     template: `<span fd-card-counter [status]="status">1 of 10</span>`
 })
 class TestComponent {
-    status: ObjectStatus = null;
+    status: ObjectStatus | null = null;
 }
 
 describe('CardCounterComponent', () => {

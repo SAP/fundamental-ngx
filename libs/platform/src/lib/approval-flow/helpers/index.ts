@@ -30,7 +30,7 @@ export function trackByFn(index: number, item: { id: string }): number | string 
 }
 
 export function getGraphNodes(graph: ApprovalFlowGraph): ApprovalGraphNode[] {
-    return graph.columns.reduce((acc, column) => acc.concat(column.nodes), []);
+    return graph.columns.reduce((acc, column) => acc.concat(column.nodes), <ApprovalGraphNode[]>[]);
 }
 
 export function getParentNodes(node: ApprovalNode, nodes: ApprovalNode[]): ApprovalNode[] {

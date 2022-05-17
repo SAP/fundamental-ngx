@@ -4,6 +4,7 @@ import { whenStable } from '@fundamental-ngx/core/tests';
 import { PlatformSmartFilterBarModule } from '../smart-filter-bar.module';
 import { ArrayTableDataProvider, PlatformTableModule, TableDataSource } from '@fundamental-ngx/platform/table';
 import { SmartFilterBarSubjectDirective } from './smart-filter-bar-subject.directive';
+import { firstValueFrom } from 'rxjs';
 
 interface SourceItem {
     id: string;
@@ -146,7 +147,7 @@ describe('SmartFilterBarSubjectDirective', () => {
     });
 
     it('should return field variants', async () => {
-        const options = (await component.directive.getFieldVariants('status').toPromise()).map((o) => o.value);
+        const options = (await firstValueFrom(component.directive.getFieldVariants('status'))).map((o) => o.value);
         expect(options.filter((o: string, i: number) => options.indexOf(o) === i)).toEqual(['valid', 'invalid']);
     });
 

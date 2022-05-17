@@ -81,7 +81,7 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
     _contentDensityOptions = ContentDensityEnum;
 
     /** @hidden indeterminate flag for `select all` checkbox */
-    _selectedAll = false;
+    _selectedAll: boolean | null = false;
 
     /** @hidden Shown items count in mobile view */
     _shownFrom = 0;

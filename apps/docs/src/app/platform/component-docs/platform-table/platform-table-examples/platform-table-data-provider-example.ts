@@ -62,13 +62,14 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
             return items;
         }
 
-        return items.sort((a, b) =>
-            sortBy
-                .map(({ field, direction }) => {
-                    const ascModifier = direction === SortDirection.ASC ? 1 : -1;
-                    return sort(a, b, field) * ascModifier;
-                })
-                .find((result, index, list) => result !== 0 || index === list.length - 1)
+        return items.sort(
+            (a, b) =>
+                sortBy
+                    .map(({ field, direction }) => {
+                        const ascModifier = direction === SortDirection.ASC ? 1 : -1;
+                        return sort(a, b, field as string) * ascModifier;
+                    })
+                    .find((result, index, list) => result !== 0 || index === list.length - 1) ?? 0
         );
     }
 
@@ -138,7 +139,7 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
 
         const ascModifier: number = groupCriteria.direction === SortDirection.ASC ? 1 : -1;
 
-        items
+        return items
             .slice()
             .sort(
                 (a, b) =>

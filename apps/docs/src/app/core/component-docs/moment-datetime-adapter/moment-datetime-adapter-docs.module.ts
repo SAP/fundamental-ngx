@@ -16,6 +16,7 @@ import { MomentDatetimeAdapterDocsComponent } from './moment-datetime-adapter-do
 import { DatePickerMomentAdapterExampleComponent } from './examples/date-picker-moment-adapter-example.component';
 import { MomentAdapterOptionsExampleComponent } from './examples/moment-adapter-options-example.component';
 import { MomentDatetimeFormatsExampleComponent } from './examples/moment-datetime-formats-example.component';
+import { CURRENT_LIB } from '../../../documentation/utilities/libraries';
 
 const routes: Routes = [
     {
@@ -47,6 +48,6 @@ const routes: Routes = [
         MomentAdapterOptionsExampleComponent,
         MomentDatetimeFormatsExampleComponent
     ],
-    providers: [{ provide: 'CURRENT_LIB', useValue: 'moment-adapter' }]
+    providers: [{ provide: CURRENT_LIB, useValue: 'moment-adapter' }]
 })
 export class MomentDatetimeAdapterDocsModule {}

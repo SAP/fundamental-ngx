@@ -7,6 +7,7 @@ import {
     Output,
     ViewEncapsulation
 } from '@angular/core';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 /** Type of hyphenation */
 export type HyphenationType = 'none' | 'manual' | 'auto' | null;
@@ -29,7 +30,7 @@ export class TextComponent {
      * Max visible lines of text
      */
     @Input()
-    maxLines = null;
+    maxLines: Nullable<number> = null;
 
     /**
      * Property allowing browsers to render whitespace and tabs
@@ -75,12 +76,12 @@ export class TextComponent {
 
     /** @hidden */
     get _isCollapsed(): boolean {
-        return this.isCollapsed && this.maxLines > 0;
+        return this.isCollapsed && !!this.maxLines && this.maxLines > 0;
     }
 
     /** @hidden */
     get _expandable(): boolean {
-        return this.expandable && this.maxLines > 0;
+        return this.expandable && !!this.maxLines && this.maxLines > 0;
     }
 
     /** @hidden */
@@ -97,7 +98,7 @@ export class TextComponent {
 
     /** @hidden */
     checkLineCount(count: number): void {
-        this._hasMore = count > this.maxLines;
+        this._hasMore = !!this.maxLines && count > this.maxLines;
         this._changeDetectorRef.detectChanges();
     }
 }

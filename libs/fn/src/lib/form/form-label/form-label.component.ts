@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, OnChanges, ViewEncapsulation } from '@angular/core';
-import { Placement } from '@fundamental-ngx/core/shared';
+import { Placement, Nullable } from '@fundamental-ngx/core/shared';
 
 /**
  * Label to be linked to a form control.
@@ -40,7 +40,7 @@ export class FormLabelComponent implements OnChanges {
 
     /** Inline help body text */
     @Input()
-    inlineHelpTitle: string = null;
+    inlineHelpTitle: Nullable<string>;
 
     /** Glyph of icon triggering inline help */
     @Input()
@@ -74,6 +74,6 @@ export class FormLabelComponent implements OnChanges {
     /** @hidden */
     ngOnChanges(): void {
         this.inlineHelpClass = !!this.inlineHelpTitle;
-        this.inlineHelpAfter = this.inlineHelpTitle && this.inlineHelpPlacement === 'after';
+        this.inlineHelpAfter = !!this.inlineHelpTitle && this.inlineHelpPlacement === 'after';
     }
 }

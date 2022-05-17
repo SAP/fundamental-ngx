@@ -21,6 +21,8 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
+
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { MessageToastConfig } from './message-toast-utils/message-toast-config';
 import { MessageToastRef } from './message-toast-utils/message-toast-ref';
 
@@ -81,7 +83,7 @@ export class MessageToastComponent implements OnInit, AfterViewInit {
 
     /** Aria label for the message toast component element. */
     @Input()
-    ariaLabel: string = null;
+    ariaLabel: Nullable<string>;
 
     /** Alternative way of passing in a message to the message toast. */
     @Input()
@@ -115,7 +117,7 @@ export class MessageToastComponent implements OnInit, AfterViewInit {
     componentRef: ComponentRef<any> | EmbeddedViewRef<any>;
 
     /** @hidden */
-    childContent: Type<any> | TemplateRef<any> | string = undefined;
+    childContent: Type<any> | TemplateRef<any> | string | undefined = undefined;
 
     /** @hidden */
     @HostBinding('class.fd-message-toast')

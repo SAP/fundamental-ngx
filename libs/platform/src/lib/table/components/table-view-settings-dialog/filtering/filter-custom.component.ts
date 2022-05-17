@@ -29,7 +29,7 @@ export class FilterCustomComponent implements DoCheck {
 
     /** The filter model */
     @Input()
-    set filterBy(filterBy: CollectionFilter) {
+    set filterBy(filterBy: CollectionFilter | undefined) {
         if (!filterBy?.value || Object.prototype.toString.call(filterBy?.value) !== '[object Object]') {
             // force value to be an object
             this._value = {};

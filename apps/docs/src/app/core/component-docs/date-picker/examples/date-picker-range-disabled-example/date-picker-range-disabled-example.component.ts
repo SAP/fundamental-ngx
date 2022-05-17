@@ -35,7 +35,7 @@ export class DatePickerRangeDisabledExampleComponent {
     constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {}
 
     isValid(): boolean {
-        return this.customForm.get('dates').valid;
+        return !!this.customForm.get('dates')?.valid;
     }
 
     disabledEndFunction = (fdDate: FdDate): boolean =>

@@ -1,6 +1,6 @@
 {
     "name": "fundamental-ngx",
-    "version": "0.34.3-rc.23",
+    "version": "0.34.3-rc.32",
     "license": "Apache-2.0",
     "main": "dist/libs/core/index.js",
     "description": "Fundamental Library for Angular is a themable Fiori Angular component library.",
@@ -211,7 +211,7 @@
         "karma-typescript": "5.5.3",
         "karma-typescript-angular2-transform": "5.5.3",
         "karma-webpack": "5.0.0",
-        "lint-staged": "12.3.4",
+        "lint-staged": "12.4.0",
         "nan": "2.14.2",
         "ng-packagr": "~13.2.1",
         "ngx-cva-test-suite": "~1.0.4",

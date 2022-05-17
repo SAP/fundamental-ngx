@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TabConfig } from '@fundamental-ngx/platform/icon-tab-bar';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
@@ -27,16 +28,6 @@ import textTypeConfigs from '!./examples/config-for-examples/text-type.config?ra
 // Duplicate types here, because import for pure files doesn't work for stackblitz  https://github.com/SAP/fundamental-ngx/issues/5351
 export type SemanticColor = 'negative' | 'critical' | 'positive' | 'informative';
 
-export interface TabConfig {
-    icon?: string;
-    label?: string;
-    color?: SemanticColor;
-    counter?: number;
-    active?: boolean;
-    badge?: boolean;
-    subItems?: TabConfig[];
-}
-
 export interface IconTabBarItem extends TabConfig {
     index: number;
     uId: string;
@@ -44,6 +35,7 @@ export interface IconTabBarItem extends TabConfig {
     hidden?: boolean;
     subItems?: IconTabBarItem[];
 }
+
 @Component({
     selector: 'fd-icon-tab-bar-docs',
     templateUrl: './platform-icon-tab-bar-docs.component.html'

@@ -19,6 +19,7 @@ import {
 } from './approval-flow-add-node/approval-flow-add-node.component';
 import { simpleGraph, users } from './tests/data';
 import { TeamDataProvider, UserDataProvider } from './tests/providers';
+import { ApprovalGraphNode } from './interfaces';
 
 const TEST_APPROVAL_FLOW_TITLE = 'Test title';
 
@@ -172,11 +173,11 @@ describe('ApprovalFlowComponent', () => {
             afterClosed: of(null)
         } as any);
 
-        component._addNode(null, 'empty');
+        component._addNode({} as ApprovalGraphNode, 'empty');
 
         expect(dialogSpy).toHaveBeenCalled();
 
-        const diagogSpyArgs = dialogSpy.calls.mostRecent().args[1].data as AddNodeDialogRefData;
+        const diagogSpyArgs = dialogSpy.calls.mostRecent().args[1]?.data as AddNodeDialogRefData;
 
         expect(diagogSpyArgs.nodeTarget).toEqual('empty');
         expect(diagogSpyArgs.showNodeTypeSelect).toEqual(false);

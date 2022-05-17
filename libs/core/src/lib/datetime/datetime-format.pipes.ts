@@ -11,7 +11,7 @@ export class DateFormatPipe<D> implements PipeTransform {
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
     ) {}
 
-    transform(date: D, noDateMessage?: string): string {
+    transform(date: D, noDateMessage = ''): string {
         if (date) {
             return this._dateTimeAdapter.format(date, this._dateTimeFormats.display.dateInput);
         } else {
@@ -29,7 +29,7 @@ export class DateTimeFormatPipe<D> implements PipeTransform {
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
     ) {}
 
-    transform(date: D, noDateMessage?: string): string {
+    transform(date: D, noDateMessage = ''): string {
         if (date) {
             return this._dateTimeAdapter.format(date, this._dateTimeFormats.display.dateTimeInput);
         } else {
@@ -44,8 +44,8 @@ export class DateTimeFormatPipe<D> implements PipeTransform {
 export class DateFromNowPipe<D> implements PipeTransform {
     constructor(private _dateTimeAdapter: DatetimeAdapter<D>) {}
 
-    transform(date: D, noDateMessage?: string): string {
-        if (this._dateTimeAdapter.fromNow && typeof this._dateTimeAdapter.fromNow !== 'undefined') {
+    transform(date: D, noDateMessage = ''): string {
+        if (this._dateTimeAdapter.fromNow && typeof this._dateTimeAdapter.fromNow === 'function') {
             if (date) {
                 return this._dateTimeAdapter.fromNow(date);
             } else {
@@ -53,6 +53,7 @@ export class DateFromNowPipe<D> implements PipeTransform {
             }
         } else {
             console.warn('No fromNow function provided to the DatetimeAdapter');
+            return '';
         }
     }
 }

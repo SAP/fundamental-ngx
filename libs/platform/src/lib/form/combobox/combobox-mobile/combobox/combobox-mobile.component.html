@@ -11,27 +11,27 @@
             <ng-template fdTemplate="subheader">
                 <div fd-bar-middle>
                     <fd-bar-element [fullWidth]="true">
-                        <ng-container *ngTemplateOutlet="childContent?.controlTemplate"></ng-container>
+                        <ng-container *ngTemplateOutlet="childContent?.controlTemplate || null"></ng-container>
                     </fd-bar-element>
                 </div>
             </ng-template>
         </fd-dialog-header>
 
         <fd-dialog-body>
-            <ng-container *ngTemplateOutlet="childContent?.listTemplate"></ng-container>
+            <ng-container *ngTemplateOutlet="childContent?.listTemplate || null"></ng-container>
         </fd-dialog-body>
 
         <fd-dialog-footer>
             <fd-button-bar
-                *ngIf="mobileConfig?.approveButtonText"
+                *ngIf="mobileConfig.approveButtonText"
                 fdType="emphasized"
-                [label]="mobileConfig?.approveButtonText"
+                [label]="mobileConfig.approveButtonText!"
                 (click)="handleApprove()"
             >
             </fd-button-bar>
             <fd-button-bar
                 *ngIf="mobileConfig?.cancelButtonText"
-                [label]="mobileConfig?.cancelButtonText"
+                [label]="mobileConfig.cancelButtonText!"
                 (click)="handleDismiss()"
             >
             </fd-button-bar>

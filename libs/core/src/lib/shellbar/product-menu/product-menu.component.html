@@ -1,4 +1,4 @@
-<ng-template [ngIf]="items?.length > 0" [ngIfElse]="subHeader">
+<ng-template [ngIf]="items && items.length > 0" [ngIfElse]="subHeader">
     <button
         fd-button
         fdType="transparent"

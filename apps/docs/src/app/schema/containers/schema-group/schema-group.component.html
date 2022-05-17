@@ -106,7 +106,7 @@
 
                 <schema-group
                     [schemaGroup]="control.control | asFormGroup"
-                    [properties]="properties[control.key].properties"
+                    [properties]="properties[control.key].properties!"
                 ></schema-group>
             </fieldset>
         </ng-template>

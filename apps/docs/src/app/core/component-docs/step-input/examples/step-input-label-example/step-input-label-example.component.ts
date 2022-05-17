@@ -25,7 +25,7 @@ import { Component } from '@angular/core';
     `
 })
 export class StepInputLabelExampleComponent {
-    value1 = 0;
-    value2 = 0;
-    value3 = 0;
+    value1: number | null = 0;
+    value2: number | null = 0;
+    value3: number | null = 0;
 }

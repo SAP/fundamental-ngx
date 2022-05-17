@@ -20,7 +20,7 @@ import { NgControl, NgForm } from '@angular/forms';
 import { BACKSPACE, DELETE } from '@angular/cdk/keycodes';
 
 import { ContentDensity, KeyUtil } from '@fundamental-ngx/core/utils';
-import { FormStates } from '@fundamental-ngx/core/shared';
+import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
 import { BaseInput, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
 import { TextAreaConfig } from './text-area.config';
 
@@ -51,14 +51,14 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
      * The height to which the textarea will grow when `growing` is set.
      */
     @Input()
-    height: string;
+    height: Nullable<string>;
 
     /**
      * The number of rows that will be visible when `growing` is set.
      * If both `growingMaxLines` and `height` are provided, `height` value takes precedence.
      */
     @Input()
-    growingMaxLines: number;
+    growingMaxLines: Nullable<number>;
 
     /**
      * The textarea `cols` attribute wrapped- the number of letters visible per line.
@@ -174,7 +174,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
      * @hidden
      * @see FormFieldControl.extraContentHeightPx
      */
-    get extraContentHeightPx(): number {
+    get extraContentHeightPx(): number | undefined {
         return this._textareaCounter?.nativeElement.offsetHeight;
     }
 
@@ -218,7 +218,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
 
         // don't set any error state if we are not showing counter message
         if (!this._shouldTrackTextLimit) {
-            this.state = null;
+            this.state = undefined;
         }
 
         super.ngAfterViewInit();

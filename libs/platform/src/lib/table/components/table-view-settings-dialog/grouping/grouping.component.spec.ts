@@ -5,6 +5,7 @@ import { ContentDensityEnum } from '@fundamental-ngx/core/utils';
 import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 import { GroupingComponent, SettingsGroupDialogData } from './grouping.component';
 import { PlatformTableModule } from '../../../table.module';
+import { SortDirection } from '../../../enums';
 
 describe('PlatformTableGroupDialogComponent', () => {
     let component: GroupingComponent;
@@ -12,7 +13,7 @@ describe('PlatformTableGroupDialogComponent', () => {
     const dialogRef = new DialogRef();
     const dialogData: SettingsGroupDialogData = {
         columns: [],
-        direction: null,
+        direction: SortDirection.NONE,
         field: null,
         tableContentDensity: ContentDensityEnum.COZY
     };

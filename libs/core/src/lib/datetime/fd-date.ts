@@ -128,7 +128,7 @@ export class FdDate {
      * @param minute
      * @param second
      */
-    setTime(hour: number, minute: number, second: number): FdDate {
+    setTime(hour: number, minute?: number, second?: number): FdDate {
         this._isValid = isValidByParams({
             year: this.year,
             month: this.month,
@@ -138,9 +138,16 @@ export class FdDate {
             second
         });
 
-        this.hour = this._isValid ? hour : NaN;
-        this.minute = this._isValid ? minute : NaN;
-        this.second = this._isValid ? second : NaN;
+        if (!this._isValid) {
+            this.hour = NaN;
+            this.minute = NaN;
+            this.second = NaN;
+        } else {
+            this.hour = hour || hour === 0 ? hour : this.hour;
+            this.minute = minute || minute === 0 ? minute : this.minute;
+            this.second = second || second === 0 ? second : this.second;
+        }
+
         return this;
     }
 

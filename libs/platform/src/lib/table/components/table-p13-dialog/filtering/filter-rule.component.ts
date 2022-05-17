@@ -35,12 +35,12 @@ export class FilterRuleComponent implements OnDestroy {
         }
         this._subscriptions.add(
             ngForm.statusChanges
-                .pipe(
+                ?.pipe(
                     // Skip first that triggers on initial phase
                     skip(1)
                 )
                 .subscribe(() => {
-                    const isValid = ngForm.valid;
+                    const isValid = !!ngForm.valid;
                     this.rule.setValid(isValid);
                     this.ruleStateChange.emit(isValid);
                 })

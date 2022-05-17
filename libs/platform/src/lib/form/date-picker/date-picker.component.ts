@@ -20,7 +20,7 @@ import {
 import { CalendarType, CalendarYearGrid, DateRange, DaysOfWeek, FdCalendarView } from '@fundamental-ngx/core/calendar';
 import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { DatePickerComponent as FdDatePickerComponent } from '@fundamental-ngx/core/date-picker';
-import { Placement, SpecialDayRule, FormStates } from '@fundamental-ngx/core/shared';
+import { Placement, SpecialDayRule, FormStates, Nullable } from '@fundamental-ngx/core/shared';
 import { FormFieldControl, BaseInput, FormField } from '@fundamental-ngx/platform/shared';
 
 /**
@@ -226,15 +226,15 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
 
     /** Fired when a new date is selected. */
     @Output()
-    readonly selectedDateChange: EventEmitter<D> = new EventEmitter<D>();
+    readonly selectedDateChange = new EventEmitter<Nullable<D>>();
 
     /** Event thrown every time selected first or last date in range mode is changed */
     @Output()
-    readonly selectedRangeDateChange: EventEmitter<DateRange<D>> = new EventEmitter<DateRange<D>>();
+    readonly selectedRangeDateChange = new EventEmitter<DateRange<D>>();
 
     /** Event thrown every time calendar active view is changed */
     @Output()
-    readonly activeViewChange: EventEmitter<FdCalendarView> = new EventEmitter<FdCalendarView>();
+    readonly activeViewChange = new EventEmitter<FdCalendarView>();
 
     /** @hidden */
     private _datePickerValid = true;
@@ -287,7 +287,7 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
         }
     }
 
-    writeValue(value: D | DateRange<D>): void {
+    writeValue(value: D | DateRange<D> | null): void {
         super.writeValue(value);
         this._changeDetectorRef.detectChanges();
     }
@@ -325,7 +325,7 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
         this.isOpenChange.emit(open);
     };
 
-    handleSelectedDateChange = (fdDate: D): void => {
+    handleSelectedDateChange = (fdDate: Nullable<D>): void => {
         this.selectedDateChange.emit(fdDate);
     };
 

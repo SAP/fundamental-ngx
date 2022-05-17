@@ -54,7 +54,7 @@ export class TableScrollDispatcherService implements OnDestroy {
             return;
         }
 
-        this._scrollableSubscriptionsMap.get(scrollable).unsubscribe();
+        this._scrollableSubscriptionsMap.get(scrollable)?.unsubscribe();
     }
 
     /** Scroll stream */

@@ -23,9 +23,7 @@ export class ComboboxGroupExampleComponent {
     ];
 
     displayFunc(obj: ComboboxItem): string {
-        if (obj) {
-            return obj.name;
-        }
+        return obj?.name ?? '';
     }
 
     groupFunc: GroupFunction<ComboboxItem> = (items) => ({

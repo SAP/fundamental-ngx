@@ -19,7 +19,14 @@ import {
 } from '@angular/core';
 import { fromEvent, merge, Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime, delay, filter, first, map, startWith, switchMap, takeUntil } from 'rxjs/operators';
-import { getElementCapacity, getElementWidth, KeyUtil, resizeObservable } from '@fundamental-ngx/core/utils';
+import {
+    getElementCapacity,
+    getElementWidth,
+    KeyUtil,
+    resizeObservable,
+    scrollTop,
+    ContentDensityService
+} from '@fundamental-ngx/core/utils';
 import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.component';
 import { TabLinkDirective } from './tab-link/tab-link.directive';
 import { TabItemDirective } from './tab-item/tab-item.directive';
@@ -28,8 +35,7 @@ import { TabInfo } from './tab-utils/tab-info.class';
 import { TabsService } from './tabs.service';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
-import { scrollTop } from '@fundamental-ngx/core/utils';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 export type TabModes = 'icon-only' | 'process' | 'filter';
 
@@ -72,7 +78,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
     /** Limits the maximum number of tabs visible in the tab bar in collapseOverflow mode.
      * Other tabs will be moved to the collapsed tabs dropdown */
     @Input()
-    maxVisibleTabs: number = null;
+    maxVisibleTabs: Nullable<number> = null;
 
     /** Whether to open tab content one under another without collapsing */
     @Input()
@@ -213,8 +219,10 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
     /** @hidden */
     _highlightActiveTab({ id }: HTMLElement): void {
         const tab = this._tabArray.find((_tab) => _tab.id === id);
-        this._activateStackedTab(tab.panel, false);
-        this.selectedTabChange.emit(tab.panel);
+        if (tab) {
+            this._activateStackedTab(tab.panel, false);
+            this.selectedTabChange.emit(tab.panel);
+        }
     }
 
     /** @hidden */
@@ -306,7 +314,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
                 delay(0),
                 takeUntil(this._onDestroy$)
             )
-            .subscribe((tab) => this._expandTab(tab.panel, true));
+            .subscribe((tab) => tab && this._expandTab(tab.panel, true));
     }
 
     /** @hidden */

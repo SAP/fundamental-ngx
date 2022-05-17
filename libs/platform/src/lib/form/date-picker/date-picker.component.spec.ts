@@ -264,7 +264,7 @@ describe('TestDatePickerComponent', () => {
         spyOn(fdDatePickerComponent.selectedDateChange, 'emit');
         fdDatePickerComponent.type = 'single';
         fdDatePickerComponent.dateStringUpdate('hello');
-        const date: FdDate = adapter.parse('hello');
+        const date = adapter.parse('hello');
         expect(fdDatePickerComponent._isInvalidDateInput).toBe(true);
         expect(fdDatePickerComponent.selectedDateChange.emit).toHaveBeenCalledWith(date);
         expect(fdDatePickerComponent.isModelValid()).toBe(false);
@@ -277,8 +277,8 @@ describe('TestDatePickerComponent', () => {
         spyOn(fdDatePickerComponent.selectedRangeDateChange, 'emit');
         fdDatePickerComponent.type = 'range';
         fdDatePickerComponent.dateStringUpdate('start - end');
-        const start: FdDate = adapter.parse('start');
-        const end: FdDate = adapter.parse('end');
+        const start = adapter.parse('start');
+        const end = adapter.parse('end');
         expect(fdDatePickerComponent._isInvalidDateInput).toBe(true);
         expect(fdDatePickerComponent.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start, end });
         expect(fdDatePickerComponent.isModelValid()).toBe(false);

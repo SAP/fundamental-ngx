@@ -30,7 +30,7 @@ export class ApprovalFlowToolbarActionsComponent {
         this._selectedNodes = value;
 
         this._canRemoveSelectedNodes =
-            this.selectedNodes.length &&
+            !!this.selectedNodes.length &&
             this.selectedNodes.every((node) => !node.disableActions && !node.actionsConfig?.disableRemove);
     }
     get selectedNodes(): ApprovalGraphNode[] {
@@ -64,7 +64,7 @@ export class ApprovalFlowToolbarActionsComponent {
     private _selectedNodes: ApprovalGraphNode[] = [];
 
     /** @hidden */
-    get _notApprovedSelectedNode(): ApprovalGraphNode {
+    get _notApprovedSelectedNode(): ApprovalGraphNode | null {
         if (this.selectedNodes.length !== 1) {
             return null;
         }
@@ -77,10 +77,10 @@ export class ApprovalFlowToolbarActionsComponent {
         const node = this._notApprovedSelectedNode;
 
         return (
-            node &&
+            !!node &&
             !node.disableActions &&
             !node.actionsConfig?.disableAddBefore &&
-            this.graphMetadata[node.id].canAddNodeBefore
+            !!this.graphMetadata[node.id].canAddNodeBefore
         );
     }
 
@@ -89,10 +89,10 @@ export class ApprovalFlowToolbarActionsComponent {
         const node = this._notApprovedSelectedNode;
 
         return (
-            node &&
+            !!node &&
             !node.disableActions &&
             !node.actionsConfig?.disableAddAfter &&
-            this.graphMetadata[node.id].canAddNodeAfter
+            !!this.graphMetadata[node.id].canAddNodeAfter
         );
     }
 
@@ -101,10 +101,10 @@ export class ApprovalFlowToolbarActionsComponent {
         const node = this._notApprovedSelectedNode;
 
         return (
-            this._notApprovedSelectedNode &&
-            !node.disableActions &&
-            !node.actionsConfig?.disableAddParallel &&
-            this.graphMetadata[node.id].canAddParallel
+            !!this._notApprovedSelectedNode &&
+            !node?.disableActions &&
+            !node?.actionsConfig?.disableAddParallel &&
+            !!this.graphMetadata[node!.id].canAddParallel
         );
     }
 
@@ -112,7 +112,7 @@ export class ApprovalFlowToolbarActionsComponent {
     get _canEditNode(): boolean {
         const node = this._notApprovedSelectedNode;
 
-        return node && !node.disableActions && !node.actionsConfig?.disableEdit;
+        return !!node && !node.disableActions && !node.actionsConfig?.disableEdit;
     }
 
     /** @hidden */

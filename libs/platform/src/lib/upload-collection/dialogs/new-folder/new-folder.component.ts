@@ -45,6 +45,6 @@ export class NewFolderComponent implements AfterViewInit {
     private _setSelectionRange(el: HTMLInputElement, selectionStart: number, selectionEnd: number): void {
         const direction = el.selectionDirection;
 
-        el.setSelectionRange(selectionStart, selectionEnd, direction);
+        el.setSelectionRange(selectionStart, selectionEnd, direction || undefined);
     }
 }

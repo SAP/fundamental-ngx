@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostListener, Input, ViewEncapsulation } from '@angular/core';
 
 import { KeyboardSupportService } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 import { ActionSheetItemComponent } from '../action-sheet-item/action-sheet-item.component';
 
@@ -40,11 +41,11 @@ export class ActionSheetBodyComponent {
 
     /** Aria-label for Action Sheet Body. */
     @Input()
-    ariaLabel: string;
+    ariaLabel: Nullable<string>;
 
     /** Aria-Labelledby for element describing Action Sheet Body. */
     @Input()
-    ariaLabelledby: string;
+    ariaLabelledby: Nullable<string>;
 
     /** @hidden */
     constructor(private readonly _keyboardSupportService: KeyboardSupportService<ActionSheetItemComponent>) {}

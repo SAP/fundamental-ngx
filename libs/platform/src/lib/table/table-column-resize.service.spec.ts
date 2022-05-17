@@ -28,7 +28,7 @@ describe('TableColumnResizeService', () => {
     it('should initialize service', () => {
         const columnNames = ['name'];
         const widthInPixels = 100;
-        const tableColumn = { name: columnNames[0], width: null } as TableColumn;
+        const tableColumn = (<any>{ name: columnNames[0], width: null }) as TableColumn;
         const tableColumnCell = {
             nativeElement: { getBoundingClientRect: () => ({ width: widthInPixels }), clientWidth: widthInPixels }
         } as ElementRef;
@@ -69,7 +69,7 @@ describe('TableColumnResizeService', () => {
         const clientEndX = 100;
         const initialColumnWidth = 100;
         const tableColumnNames = ['name'];
-        const tableColumn = { name: tableColumnNames[0], width: null } as TableColumn;
+        const tableColumn = (<any>{ name: tableColumnNames[0], width: null }) as TableColumn;
         const tableColumnCell = {
             nativeElement: {
                 getBoundingClientRect: () => ({ width: initialColumnWidth }),
@@ -92,7 +92,7 @@ describe('TableColumnResizeService', () => {
         const clientEndX = -80;
         const initialColumnWidth = 100;
         const tableColumnNames = ['name'];
-        const tableColumn = { name: tableColumnNames[0], width: null } as TableColumn;
+        const tableColumn = (<any>{ name: tableColumnNames[0], width: null }) as TableColumn;
         const tableColumnCell = {
             nativeElement: {
                 getBoundingClientRect: () => ({ width: initialColumnWidth }),

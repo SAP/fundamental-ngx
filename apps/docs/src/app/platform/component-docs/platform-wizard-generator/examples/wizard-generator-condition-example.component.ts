@@ -20,7 +20,7 @@ export class WizardGeneratorConditionExampleComponent implements OnDestroy {
         text: 'Checkout'
     };
 
-    wizardValue: WizardGeneratorFormsValue;
+    wizardValue: WizardGeneratorFormsValue | undefined;
 
     stepItems: WizardGeneratorItem[] = [
         {
@@ -192,7 +192,7 @@ export class WizardGeneratorConditionExampleComponent implements OnDestroy {
                 }
             })
             .afterClosed.pipe(takeUntil(this._onDestroy$))
-            .subscribe((wizardValue: WizardGeneratorFormsValue) => {
+            .subscribe((wizardValue) => {
                 this.wizardValue = wizardValue;
             });
     }

@@ -10,6 +10,8 @@ import {
     ViewChild,
     ViewChildren
 } from '@angular/core';
+import { Nullable } from '@fundamental-ngx/core/shared';
+
 import { IconTabBarBase } from '../icon-tab-bar-base.class';
 import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
 import { UNIQUE_KEY_SEPARATOR } from '../../constants';
@@ -64,14 +66,17 @@ export class IconTabBarTextTypeComponent extends IconTabBarBase {
      * @hidden
      * @param selectedItem
      */
-    async _selectExtraItem(selectedItem: IconTabBarItem): Promise<void> {
+    async _selectExtraItem(selectedItem: IconTabBarItem | undefined): Promise<void> {
         // Check if selected item is subItem
         // Then to find root tab, and pass it to parent method.
-        if (selectedItem.uId.includes(UNIQUE_KEY_SEPARATOR)) {
+        if (selectedItem?.uId.includes(UNIQUE_KEY_SEPARATOR)) {
             const rootTabUid = selectedItem.uId.split(UNIQUE_KEY_SEPARATOR)[0];
             selectedItem = this._tabs.find((tab) => tab.uId === rootTabUid);
         }
-        super._selectExtraItem(selectedItem);
+        if (!selectedItem) {
+            return;
+        }
+        await super._selectExtraItem(selectedItem);
     }
 
     /**
@@ -93,6 +98,10 @@ export class IconTabBarTextTypeComponent extends IconTabBarBase {
         const tabInfoForNewList = this._getTabInfoFromMainList(event.targetItem.uId);
         const tabInfoForPrevList = this._getTabInfoFromMainList(event.draggableItem.uId);
 
+        if (!tabInfoForNewList || !tabInfoForPrevList) {
+            return;
+        }
+
         const dataForAction = {
             replacedItemInfo: {
                 arr: tabInfoForNewList.parent,
@@ -113,7 +122,8 @@ export class IconTabBarTextTypeComponent extends IconTabBarBase {
 
     /** @hidden */
     private _canDrop(event: FdDnDEvent): boolean {
-        let parentUId: string | null = event.action === 'replace' ? event.targetItem.parentUId : event.targetItem.uId;
+        let parentUId: Nullable<string> =
+            event.action === 'replace' ? event.targetItem.parentUId : event.targetItem.uId;
         while (parentUId) {
             if (parentUId === event.draggableItem.uId) {
                 return false;
@@ -173,8 +183,8 @@ export class IconTabBarTextTypeComponent extends IconTabBarBase {
     private _getTabInfoFromMainList(
         uid: string,
         arr: any[] = this._tabs
-    ): { parent: IconTabBarItem[]; tab: IconTabBarItem } {
-        let result: { parent: IconTabBarItem[]; tab: IconTabBarItem };
+    ): { parent: IconTabBarItem[]; tab: IconTabBarItem } | undefined {
+        let result: { parent: IconTabBarItem[]; tab: IconTabBarItem } | undefined;
         for (let i = 0; i < arr.length; i++) {
             const item = arr[i];
             if (item.uId === uid) {

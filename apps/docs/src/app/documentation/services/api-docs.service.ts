@@ -2,13 +2,13 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { Libraries } from '../utilities/libraries';
+import { CURRENT_LIB, Libraries } from '../utilities/libraries';
 
 @Injectable()
 export class ApiDocsService {
     readonly BASE_URL = 'assets/typedoc/';
 
-    constructor(private httpClient: HttpClient, @Inject('CURRENT_LIB') private currentLib: Libraries) {}
+    constructor(private httpClient: HttpClient, @Inject(CURRENT_LIB) private currentLib: Libraries) {}
 
     getComponentHtml(component: string): Observable<string> {
         component = component.toLocaleLowerCase() + '.html';
