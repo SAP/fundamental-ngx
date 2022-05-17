@@ -36,7 +36,7 @@
     </ng-container>
 
     <div
-        class="fd-toolbar fd-toolbar--transparent fd-grid-list__item-toolbar"
+        class="fd-toolbar fd-grid-list__item-toolbar"
         *ngIf="
             counter ||
             itemToolbarComponent?.contentTemplateRef ||
@@ -45,15 +45,11 @@
         "
     >
         <ng-container *ngIf="selectionMode === 'singleSelectLeft'">
-            <div class="fd-grid-list__item-input">
-                <ng-container *ngTemplateOutlet="radio"></ng-container>
-            </div>
+            <ng-container *ngTemplateOutlet="radio"></ng-container>
         </ng-container>
 
         <ng-container *ngIf="selectionMode === 'multiSelect'">
-            <div class="fd-grid-list__item-input">
-                <ng-container *ngTemplateOutlet="checkbox"></ng-container>
-            </div>
+            <ng-container *ngTemplateOutlet="checkbox"></ng-container>
         </ng-container>
 
         <ng-container *ngIf="itemToolbarComponent?.contentTemplateRef">
@@ -121,7 +117,7 @@
             <ng-container [ngTemplateOutlet]="body.templateRef"></ng-container>
         </div>
 
-        <ng-container *ngIf="footerBarComponent?.contentTemplateRef">
+        <ng-container *ngIf="state || footerBarComponent?.contentTemplateRef">
             <ng-container *ngTemplateOutlet="itemFooter"></ng-container>
         </ng-container>
     </div>

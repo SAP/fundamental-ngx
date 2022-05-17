@@ -30,7 +30,7 @@ export class GridListSingleSelectExampleComponent {
             id: 2,
             selected: true,
             toolbarText: 'Custom Text',
-            type: 'navigation',
+            type: 'detailsAndActive',
             counter: 8,
             url: 'https://picsum.photos/id/1001/300/200'
         },
