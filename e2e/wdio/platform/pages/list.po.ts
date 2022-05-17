@@ -65,8 +65,8 @@ export class ListPo extends BaseComponentPo {
     // unread data examples
     unreadListItems = 'fdp-platform-list-with-unread-example li';
     unreadListItemText = 'fdp-platform-list-with-unread-example li span';
-    cozyItem = '#fdp-list-item-8';
-    compactItem = '#fdp-list-item-12';
+    cozyItem = 'fdp-platform-list-border-less-example fdp-list#cozy-list .fd-list__item';
+    compactItem = 'fdp-platform-list-border-less-example fdp-list#compact-list .fd-list__item';
 
     open(): void {
         super.open(this.url);

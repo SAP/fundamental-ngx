@@ -257,6 +257,7 @@ jobs:
     # run e2e tests
     e2e_smoke:
         runs-on: ubuntu-latest
+        timeout-minutes: 100
         needs: firebase_preview
 
         strategy:

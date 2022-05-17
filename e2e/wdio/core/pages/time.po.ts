@@ -40,9 +40,9 @@ export class TimePo extends CoreBaseComponentPo {
     timeItem = 'li.fd-time__item';
     enableTimeRow = this.formExample + 'fd-time + span';
 
-    formExample1Hour = '#fd-time-column-101';
-    formExample2Minute = '#fd-time-column-292';
-    formExample3Second = '#fd-time-column-303';
+    formExample1Hour = 'fd-time-form-example .fd-time__col:nth-child(1) .fd-time__item[data-displayed-value="1"]';
+    formExample2Minute = 'fd-time-form-example .fd-time__col:nth-child(2) .fd-time__item[data-displayed-value="2"]';
+    formExample3Second = 'fd-time-form-example .fd-time__col:nth-child(3) .fd-time__item[data-displayed-value="3"]';
 
     open(): void {
         super.open(this.url);

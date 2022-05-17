@@ -203,14 +203,11 @@ describe('Datetime picker suite', () => {
         scrollIntoView(disabledFunctionExample + datePickerButton);
         click(disabledFunctionExample + datePickerButton);
         waitForElDisplayed(calendarContainer);
-        if (dateTimePickerPage.getCurrentDayIndex() !== 0) {
-            waitForUnclickable(
-                dateTimePickerPage.dayInDisabledFunctionsCalendarByIndex(
-                    (dateTimePickerPage.getCurrentDayIndex() - 1).toString()
-                )
-            );
+        const index = dateTimePickerPage.getCurrentDayIndex();
+        if (index) {
+            waitForUnclickable(dateTimePickerPage.dayInDisabledFunctionsCalendarByIndex((index - 1).toString()));
         }
-        if (dateTimePickerPage.getCurrentDayIndex() === 0) {
+        if (index === 0) {
             // can't click previous day when today's day is index 0
             return;
         }

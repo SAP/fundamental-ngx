@@ -32,6 +32,7 @@
             *ngFor="let row of rows; let index = index"
             #item="fdCarouselItem"
             [id]="_createColumnItemIdByIndex(index)"
+            [attr.data-displayed-value]="row.value"
             [value]="row"
         >
             <span class="fd-time__unit" role="button" [attr.aria-label]="row.label" (click)="pick(item, index)">

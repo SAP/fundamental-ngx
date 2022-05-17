@@ -85,7 +85,7 @@ describe('Radio button group  Test Suite', () => {
     }, 1);
 
     afterEach(() => {
-        refreshPage();
+        refreshPage(true);
         waitForPresent(radioButtonGroupPage.root);
         waitForElDisplayed(radioButtonGroupPage.title);
     }, 2);

@@ -21,7 +21,7 @@ describe('Textarea component test', () => {
     }, 1);
 
     beforeEach(() => {
-        refreshPage();
+        refreshPage(true);
         waitForPresent(messageToastPage.root);
         waitForElDisplayed(messageToastPage.title);
     }, 2);

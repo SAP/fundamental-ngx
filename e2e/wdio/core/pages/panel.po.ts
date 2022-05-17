@@ -6,10 +6,10 @@ export class PanelPo extends CoreBaseComponentPo {
     root = '#page-content';
 
     toggleButton = '.docs-button';
-    panelExpandableButton = '#fd-panel-0 button';
+    panelExpandableButton = 'fd-panel-expandable-example fd-panel button';
     panelParagraphs = '.fd-panel__content';
     expandableButton = '.fd-panel__button';
-    compactPanelButton = 'div#background-ex2 button';
+    compactPanelButton = 'fd-panel-compact-example button';
     panelTitle = 'h5.fd-panel__title';
 
     open(): void {
