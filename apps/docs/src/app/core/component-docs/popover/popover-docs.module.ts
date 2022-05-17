@@ -5,7 +5,6 @@ import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
 import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
-import { ListModule } from '@fundamental-ngx/core/list';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
@@ -34,6 +33,8 @@ import { PopoverFocusExampleComponent } from './examples/popover-focus-example/p
 import { PopoverMobileExampleComponent } from './examples/popover-mobile/popover-mobile-example.component';
 import { PopoverTriggerExampleComponent } from './examples/popover-trigger-example/popover-trigger-example.component';
 import { PopoverDynamicContainerHeightExampleComponent } from './examples/popover-dynamic-container-height/popover-dynamic-container-height-example.component';
+import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
+import { ListModule } from '@fundamental-ngx/core/list';
 
 const routes: Routes = [
     {
@@ -54,13 +55,14 @@ const routes: Routes = [
         SideNavigationModule,
         MultiInputModule,
         DialogModule,
-        ListModule,
         AvatarModule,
         BarModule,
         SegmentedButtonModule,
         FormModule,
         CheckboxModule,
-        LinkModule
+        LinkModule,
+        ListModule,
+        BusyIndicatorModule
     ],
     exports: [RouterModule],
     declarations: [

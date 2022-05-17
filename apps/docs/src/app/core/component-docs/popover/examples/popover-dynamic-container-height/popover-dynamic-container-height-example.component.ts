@@ -20,12 +20,6 @@ export class PopoverDynamicContainerHeightExampleComponent {
 
     overflowContainerTimeout: any;
 
-    list1 = [
-        { text: 'Option 1', url: '#' },
-        { text: 'Option 2', url: '#' },
-        { text: 'Option 3', url: '#' }
-    ];
-
     resetOverflowContainer(): void {
         clearTimeout(this.overflowContainerTimeout);
         this.showOverflowContainer = false;
