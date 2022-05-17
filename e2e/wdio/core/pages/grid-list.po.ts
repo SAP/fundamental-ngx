@@ -20,7 +20,7 @@ export class GridListPo extends CoreBaseComponentPo {
     unreadStateItem = '[state="unread"] h6';
     errorStateItem = '.fd-object-status--negative';
     lockedStateItemButton = '[state="locked"] button';
-    lockedStateItemText = '[state="locked"] span';
+    lockedStateItemText = '[state="locked"] .fd-button__text';
     draftStateItemButton = '[state="draft"] button';
     draftStateItemText = '[state="draft"] span';
     successStatusIndicator = '[status="success"] span';
