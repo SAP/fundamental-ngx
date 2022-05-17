@@ -100,11 +100,7 @@
             (click)="_onDelete($event)"
         ></button>
 
-        <span
-            *ngIf="type === 'navigation'"
-            class="fd-grid-list__item-navigation-indicator"
-            (click)="_onNavigate($event)"
-        >
+        <span *ngIf="type === 'navigation'" class="fd-grid-list__item-navigation-indicator">
             <fd-icon glyph="navigation-right-arrow"></fd-icon>
         </span>
 

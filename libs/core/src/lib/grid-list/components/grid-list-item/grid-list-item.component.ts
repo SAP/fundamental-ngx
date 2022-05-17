@@ -223,6 +223,7 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
     @ContentChild(GridListItemToolbarComponent)
     itemToolbarComponent: GridListItemToolbarComponent;
 
+    /** @hidden */
     @ContentChild(GridListItemBodyDirective)
     body: GridListItemBodyDirective;
 

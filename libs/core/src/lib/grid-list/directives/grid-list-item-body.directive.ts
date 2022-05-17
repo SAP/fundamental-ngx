@@ -5,5 +5,6 @@ import { Directive, TemplateRef } from '@angular/core';
     selector: '[fd-grid-list-item-body]'
 })
 export class GridListItemBodyDirective {
+    /** @hidden */
     constructor(public readonly templateRef: TemplateRef<any>) {}
 }

@@ -1,4 +1,4 @@
-// these css are related to drag and drop
+/* All these css are related to drag and drop */
 @mixin grabbing-cursor {
     cursor: -webkit-grabbing;
     cursor: -moz-grabbing;
@@ -21,14 +21,6 @@
     }
 
     &__item {
-        &-header {
-            padding-bottom: 1rem;
-        }
-
-        &-content {
-            padding-top: 0;
-        }
-
         .drop-area__line--vertical {
             height: 100%;
 
