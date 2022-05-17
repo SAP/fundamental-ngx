@@ -28,7 +28,8 @@ import { DOWN_ARROW, ENTER, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import { isObservable, Observable, of, Subject, Subscription } from 'rxjs';
 import { delay, takeUntil, tap } from 'rxjs/operators';
 
-import { ContentDensity, KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 import {
     ArrayListDataSource,
     BaseComponent,
@@ -157,9 +158,9 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
         this._rowSelection = value;
         if (this._rowSelection) {
             this.selection = true;
-            this._ulElement.classList.add('fd-list--selection-row');
+            this._ulElement?.classList.add('fd-list--selection-row');
             if (this.navigated && this.hasObject) {
-                this._ulElement.classList.remove('fd-list--selection-row');
+                this._ulElement?.classList.remove('fd-list--selection-row');
             }
         }
     }
@@ -190,7 +191,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
             classList.push('fd-list--navigation-object');
         }
 
-        this._ulElement.classList.add(...classList);
+        this._ulElement?.classList.add(...classList);
     }
 
     /** setter and getter for _navigationIndicator */
@@ -201,7 +202,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
 
     set navigationIndicator(value: boolean) {
         this._navigationIndicator = value;
-        this._ulElement.classList.add('fd-list--navigation-indication');
+        this._ulElement?.classList.add('fd-list--navigation-indication');
     }
 
     /** setter and getter for hasByLine */
@@ -212,7 +213,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
 
     set hasByLine(value: boolean) {
         this._hasByLine = value;
-        this._ulElement.classList.add('fd-list--byline');
+        this._ulElement?.classList.add('fd-list--byline');
     }
 
     /** setter and getter for hasObject */
@@ -223,7 +224,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
 
     set hasObject(value: boolean) {
         this._hasObject = value;
-        this._ulElement.classList.add('fd-object-list');
+        this._ulElement?.classList.add('fd-object-list');
     }
 
     /** Event thrown, when selected item is changed */
@@ -243,7 +244,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
     listItems: QueryList<BaseListItem>;
 
     /** @hidden */
-    get _ulElement(): HTMLUListElement {
+    get _ulElement(): Nullable<HTMLUListElement> {
         return this.itemEl.nativeElement.querySelector('ul');
     }
 
@@ -264,9 +265,6 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
 
     /** @hidden */
     _destroyed = new Subject<void>();
-
-    /** @hidden */
-    _contentDensity: ContentDensity = this._listConfig.contentDensity;
 
     /** @hidden */
     protected _dataSource: FdpListDataSource<T>;
@@ -318,7 +316,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
     private _multiSelect = false;
 
     /** @hidden */
-    private _selectedvalue: string;
+    private _selectedvalue: Nullable<string>;
 
     /**
      * @hidden
@@ -343,7 +341,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
      * @hidden
      * for data source handling
      */
-    private _dsSubscription: Subscription;
+    private _dsSubscription: Nullable<Subscription>;
 
     /** @hidden */
     constructor(
@@ -425,14 +423,19 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
      * handline keyboard operations
      * in template on list and list items
      */
-    _handleKeyDown(event: KeyboardEvent): boolean {
+    _handleKeyDown(event: KeyboardEvent): Nullable<boolean> {
         if (!this._keyManager) {
             return;
         }
 
         event.stopImmediatePropagation();
 
-        this._keyManager.setActiveItem(this._keyManager.activeItemIndex);
+        const activeItemIndex: Nullable<number> = this._keyManager.activeItemIndex;
+
+        if (activeItemIndex) {
+            this._keyManager.setActiveItem(activeItemIndex);
+        }
+
         if (KeyUtil.isKeyCode(event, DOWN_ARROW) || KeyUtil.isKeyCode(event, UP_ARROW)) {
             return false;
         } else if (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE)) {
@@ -508,8 +511,8 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
      */
     @HostListener('click', ['$event'])
     _updateNavigation(event: Event): void {
-        let selectedItemId: string | null = '0';
-        const element = event.target instanceof HTMLElement && event.target;
+        let selectedItemId: Nullable<string> = '0';
+        const element: Nullable<HTMLElement> = event.target instanceof HTMLElement ? event.target : null;
         const parent = element?.closest('.fd-list__item');
         if (isPresent(parent)) {
             selectedItemId = parent?.getAttribute('id');
@@ -566,7 +569,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
     }
 
     /** @hidden */
-    private _toDataStream(source: FdpListDataSource<T>): ListDataSource<T> {
+    private _toDataStream(source: FdpListDataSource<T>): ListDataSource<T> | undefined {
         if (isDataSource(source)) {
             return <ListDataSource<T>>source;
         }
@@ -624,7 +627,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
      * List item with radio button styles, check, uncheckupdates
      * event:any to avoid code duplication
      */
-    private _handleSingleSelect(event: Event, selectedItemId: string): void {
+    private _handleSingleSelect(event: Event, selectedItemId: Nullable<string>): void {
         const parent = event.target instanceof HTMLElement && event.target.closest('.fd-list__item');
         const radio = parent ? parent.querySelector('input') : null;
         this._selectedvalue = radio ? (<HTMLInputElement>radio).value : null;
@@ -653,7 +656,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
     }
 
     /** @hidden */
-    private _handleRowSelect(selectedItemId: string): void {
+    private _handleRowSelect(selectedItemId: Nullable<string>): void {
         // handles mutli select on row level without checkbox
         if (this.selectionMode === 'multi') {
             this.listItems.forEach((item) => {
@@ -705,7 +708,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
      * List item with checkbox styles,check,uncheckupdates
      * event:any to avoid code duplication
      */
-    private _handleMultiSelect(selectedItemId: string): void {
+    private _handleMultiSelect(selectedItemId: Nullable<string>): void {
         this.listItems.forEach((item) => {
             const { nativeElement } = item.listItem;
             if (nativeElement.getAttribute('id') !== selectedItemId) {

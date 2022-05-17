@@ -166,21 +166,6 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     @Input()
     role = 'option';
 
-    /** Selected radio button value. */
-    @Input()
-    get selectionValue(): string {
-        return this._selectionValue;
-    }
-
-    set selectionValue(value: string) {
-        this._selected = false;
-        this._selectionValue = value;
-
-        if (isPresent(this._selectionValue)) {
-            this._selected = this.value === this._selectionValue;
-        }
-    }
-
     /**
      * event emitter for selected item
      * seprate PR for custom event
@@ -250,26 +235,22 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
      */
     _focused: boolean;
 
-    /**
-     * @hidden
-     * radio button selected value binded to template
-     */
-    private _selectionValue: string;
-
     /** @hidden */
     constructor(
-        itemEl: ElementRef<HTMLElement>,
         protected _changeDetectorRef: ChangeDetectorRef,
+        public itemEl: ElementRef<HTMLElement>,
         protected _listConfig: ListConfig
     ) {
         super(_changeDetectorRef);
     }
 
-    /** @hidden
-     * radio button selected value binded to template */
-    _selectionValue: Nullable<string>;
+    /**
+     * @hidden
+     * radio button selected value binded to template
+     */
+    private _selectionValue: Nullable<string>;
 
-    @Input('selectionValue')
+    @Input()
     get selectionValue(): Nullable<string> {
         return this._selectionValue;
     }
@@ -296,7 +277,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
      * will be deducted in list item
      */
     ngAfterViewChecked(): void {
-        const currentitem: HTMLLIElement = this.itemEl.nativeElement.querySelector('li');
+        const currentitem: Nullable<HTMLLIElement> = this.itemEl.nativeElement.querySelector('li');
         if (!currentitem) {
             return;
         }
