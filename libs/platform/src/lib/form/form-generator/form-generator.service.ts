@@ -262,7 +262,7 @@ export class FormGeneratorService implements OnDestroy {
             control = form?.get([UNGROUPED_FORM_GROUP_NAME, controlName]);
         }
         
-            return control as DynamicFormGroupControl;
+        return control as DynamicFormGroupControl;
     }
 
     /** @hidden */
