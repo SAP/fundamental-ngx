@@ -6,7 +6,7 @@ export class PopoverPo extends CoreBaseComponentPo {
 
     avatar = 'fd-popover-example .fd-avatar--circle';
     programmaticAvatar = 'fd-popover-programmatic-open-example .fd-avatar--circle';
-    popover = 'ul.fd-list';
+    popover = '.fd-popover__popper';
     button = '.fd-button';
     option = 'li.fd-list__item';
     icon = 'fd-icon.sap-icon--menu2';
@@ -25,8 +25,8 @@ export class PopoverPo extends CoreBaseComponentPo {
     multiInputOption = 'li.fd-list__item';
     multiInputSpan = '.no-text-select span';
     popoverDialogParagraph = 'fd-multi-input~p';
-    clickMeButton = 'fd-dialog-body button';
-    popoverDialogMessage = '.fd-popover__popper div';
+    clickMeButton = 'fd-dialog-body .fd-button--standard';
+    popoverDialogMessage = '#fd-dialog-button-1';
     hoverElement = 'fd-popover-c-fill .fd-popover__control div';
     triggerButton2 = '#background-ex8 button';
     triggerButton = '#background-ex7 button';
@@ -35,8 +35,7 @@ export class PopoverPo extends CoreBaseComponentPo {
     scrollMessage = '.fd-popover__popper--no-arrow div';
     scrollCheckbox = 'fd-popover-scroll-example .fd-checkbox__label';
     plusButton = '#background-ex11 button';
-    dynamicOption = '.fd-popover__popper .fd-nested-list__button';
-    dynamicSubOption = '.level-2.fd-nested-list.ng-star-inserted li a span';
+    dynamicButton = '.fd-popover__popper .fd-button';
     dropdownButton = '#background-ex12 button';
     dropdownOption = '#cdk-overlay-6 li.fd-list__item';
     cdkButton = '#background-ex9 button';

@@ -12,12 +12,8 @@
                     image="http://picsum.photos/id/1018/400"
                 ></fd-avatar>
             </fd-popover-control>
-            <fd-popover-body *ngIf="list1 && list1.length">
-                <ul fd-list>
-                    <li fd-list-item *ngFor="let option of list1">
-                        <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
-                    </li>
-                </ul>
+            <fd-popover-body>
+                <fd-avatar [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
             </fd-popover-body>
         </fd-popover>
 
@@ -25,12 +21,8 @@
             <fd-popover-control>
                 <fd-icon glyph="menu2" ariaLabel="menu2"></fd-icon>
             </fd-popover-control>
-            <fd-popover-body *ngIf="list1 && list1.length">
-                <ul fd-list>
-                    <li fd-list-item *ngFor="let option of list1">
-                        <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
-                    </li>
-                </ul>
+            <fd-popover-body>
+                <fd-avatar [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
             </fd-popover-body>
         </fd-popover>
 
@@ -38,7 +30,7 @@
             <fd-popover-control>
                 <fd-avatar size="m" glyph="money-bills" ariaLabel="money-bills" [colorAccent]="3"></fd-avatar>
             </fd-popover-control>
-            <fd-popover-body *ngIf="list1 && list1.length" style="min-width: 400px">
+            <fd-popover-body style="min-width: 400px">
                 <div fd-popover-body-header id="popover-bar-simple-header-1">
                     <div fd-bar barDesign="header">
                         <div fd-bar-left>
@@ -51,11 +43,7 @@
                         </div>
                     </div>
                 </div>
-                <ul fd-list aria-labelledby="popover-bar-simple-header-1">
-                    <li fd-list-item *ngFor="let option of list1">
-                        <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
-                    </li>
-                </ul>
+                <fd-avatar [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
             </fd-popover-body>
         </fd-popover>
 
@@ -63,7 +51,7 @@
             <fd-popover-control>
                 <button fd-button label="Sample"></button>
             </fd-popover-control>
-            <fd-popover-body *ngIf="list1 && list1.length">
+            <fd-popover-body>
                 <div fd-popover-body-header id="popover-bar-simple-header-2">
                     <div fd-bar barDesign="header-with-subheader" [cozy]="true">
                         <div fd-bar-left>
@@ -78,11 +66,7 @@
                         </div>
                     </div>
                 </div>
-                <ul fd-list aria-labelledby="popover-bar-simple-header-2 popover-bar-simple-header-3">
-                    <li fd-list-item *ngFor="let option of list1">
-                        <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
-                    </li>
-                </ul>
+                <fd-avatar [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
                 <div fd-popover-body-footer>
                     <div fd-bar barDesign="footer" [cozy]="true">
                         <div fd-bar-right>
@@ -103,12 +87,8 @@
                     image="https://picsum.photos/id/2/400/400"
                 ></fd-avatar>
             </fd-popover-control>
-            <fd-popover-body *ngIf="list1 && list1.length">
-                <ul fd-list>
-                    <li fd-list-item *ngFor="let option of list1">
-                        <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
-                    </li>
-                </ul>
+            <fd-popover-body>
+                <fd-avatar [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
             </fd-popover-body>
         </fd-popover>
 
@@ -122,12 +102,8 @@
             <fd-popover-control>
                 <button fd-button label="Fixed Position"></button>
             </fd-popover-control>
-            <fd-popover-body *ngIf="list1 && list1.length">
-                <ul fd-list>
-                    <li fd-list-item *ngFor="let option of list1">
-                        <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
-                    </li>
-                </ul>
+            <fd-popover-body>
+                <fd-avatar [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
             </fd-popover-body>
         </fd-popover>
     </div>

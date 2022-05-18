@@ -10,30 +10,7 @@
         <button fd-button glyph="add"></button>
     </fd-popover-control>
     <fd-popover-body>
-        <fd-side-nav>
-            <div fd-side-nav-main>
-                <ul fd-nested-list [textOnly]="true">
-                    <li
-                        fd-nested-list-item
-                        *ngFor="let component of componentWithTasks"
-                        (expandedChange)="updatePopover()"
-                    >
-                        <div fd-nested-list-content>
-                            <a fd-nested-list-link>
-                                <span fd-nested-list-title>{{ component.name }}</span>
-                            </a>
-                            <button fd-nested-list-expand-icon></button>
-                        </div>
-                        <ul fd-nested-list *ngIf="component.tasks && component.tasks.length > 0">
-                            <li fd-nested-list-item *ngFor="let task of component.tasks">
-                                <a fd-nested-list-link>
-                                    <span fd-nested-list-title>{{ task.name }}</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </fd-side-nav>
+        <button style="margin: 1rem" fd-button (click)="updatePopover()">Click me to show the avatar</button>
+        <fd-avatar *ngIf="showAvatar" [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
     </fd-popover-body>
 </fd-popover>

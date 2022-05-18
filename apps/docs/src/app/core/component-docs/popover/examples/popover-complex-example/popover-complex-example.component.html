@@ -4,11 +4,7 @@
             <button fd-button label="Simple"></button>
         </fd-popover-control>
         <fd-popover-body>
-            <ul fd-list>
-                <li fd-list-item *ngFor="let option of list">
-                    <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
-                </li>
-            </ul>
+            <fd-avatar [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
         </fd-popover-body>
     </fd-popover>
 
@@ -24,11 +20,7 @@
                     </div>
                 </div>
             </div>
-            <ul fd-list aria-labelledby="popover-bar-header-1">
-                <li fd-list-item *ngFor="let option of list">
-                    <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
-                </li>
-            </ul>
+            <fd-avatar [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
         </fd-popover-body>
     </fd-popover>
 
@@ -44,11 +36,7 @@
                     </div>
                 </div>
             </div>
-            <ul fd-list aria-labelledby="popover-bar-header-2">
-                <li fd-list-item *ngFor="let option of list">
-                    <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
-                </li>
-            </ul>
+            <fd-avatar [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
             <div fd-popover-body-footer>
                 <div fd-bar barDesign="footer" [cozy]="true">
                     <div fd-bar-right>
@@ -77,11 +65,7 @@
                     </div>
                 </div>
             </div>
-            <ul fd-list aria-labelledby="popover-bar-header-3 popover-bar-header-4">
-                <li fd-list-item *ngFor="let option of list">
-                    <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
-                </li>
-            </ul>
+            <fd-avatar [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
             <div fd-popover-body-footer>
                 <div fd-bar barDesign="footer" [cozy]="true">
                     <div fd-bar-right>

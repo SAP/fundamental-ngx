@@ -57,11 +57,7 @@
             <button fd-button glyph="navigation-up-arrow"></button>
         </fd-popover-control>
         <fd-popover-body>
-            <ul fd-list>
-                <li fd-list-item *ngFor="let option of list">
-                    <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
-                </li>
-            </ul>
+            <fd-avatar [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
         </fd-popover-body>
     </fd-popover>
 </div>

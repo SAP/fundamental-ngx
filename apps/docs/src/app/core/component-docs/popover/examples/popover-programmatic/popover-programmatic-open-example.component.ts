@@ -7,6 +7,4 @@ import { Component } from '@angular/core';
 })
 export class PopoverProgrammaticOpenExampleComponent {
     isOpen = false;
-
-    list = ['Option 1', 'Option 2', 'Option 3'];
 }

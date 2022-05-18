@@ -5,7 +5,6 @@ import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
 import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
-import { ListModule } from '@fundamental-ngx/core/list';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
@@ -54,7 +53,6 @@ const routes: Routes = [
         SideNavigationModule,
         MultiInputModule,
         DialogModule,
-        ListModule,
         AvatarModule,
         BarModule,
         SegmentedButtonModule,
