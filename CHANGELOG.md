@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.32...v0.34.3-rc.33) (2022-05-18)
+
+
+### Bug Fixes
+
+* **core:** update popover docs to not use fd-list ([#8055](https://github.com/SAP/fundamental-ngx/issues/8055)) ([f23f0cf](https://github.com/SAP/fundamental-ngx/commit/f23f0cfee7ad748135f01be14029a619e7e37702))
+
 ### [0.34.3-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.31...v0.34.3-rc.32) (2022-05-16)
 
 
