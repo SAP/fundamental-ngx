@@ -219,7 +219,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     _slidesWrapperSize = 0;
 
     /** @hidden */
-    get _slidesWrapperSizePx(): string {
+    get _contentSizePx(): string {
         return this._slidesWrapperSize ? `${this._slidesWrapperSize}px` : this.width;
     }
 

@@ -1,1 +1,10 @@
 @import '~fundamental-styles/dist/carousel';
+
+.fd-carousel {
+    &__item {
+        fd-busy-indicator {
+            display: block;
+            height: 100%;
+        }
+    }
+}

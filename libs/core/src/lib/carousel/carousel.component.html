@@ -12,15 +12,17 @@
         <ng-container *ngTemplateOutlet="pageIndicatorContainer"></ng-container>
     </ng-container>
 
-    <div class="fd-carousel__content" [class.fd-carousel__content--horizontal]="!vertical">
+    <div
+        class="fd-carousel__content"
+        [class.fd-carousel__content--horizontal]="!vertical"
+        [style.width]="_contentSizePx"
+    >
         <ng-container *ngIf="_showNavigationButtonInContent">
             <ng-container *ngTemplateOutlet="buttonLeft"></ng-container>
         </ng-container>
 
-        <div class="fd-carousel__slides-wrapper" [style.width]="_slidesWrapperSizePx">
-            <div #slideContainer class="fd-carousel__slides">
-                <ng-content></ng-content>
-            </div>
+        <div #slideContainer class="fd-carousel__slides">
+            <ng-content></ng-content>
         </div>
 
         <ng-container *ngIf="_showNavigationButtonInContent">
