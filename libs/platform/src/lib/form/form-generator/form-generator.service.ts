@@ -254,16 +254,7 @@ export class FormGeneratorService implements OnDestroy {
      * @param controlName Name of the form control.
      * @returns Found form control.
      */
-    getFormControl(form: DynamicFormGroup, ...controlNames: string[]): DynamicFormGroupControl {
-        let control = form?.get(controlNames);
-
-        // If no control found, try to find it in ungrouped group
-        if (!control) {
-            control = form?.get([UNGROUPED_FORM_GROUP_NAME, ...controlNames]);
-        }
-
-        return control as DynamicFormGroupControl;
-    }
+    getFormControl(form: DynamicFormGroup, controlName: string): DynamicFormGroupControl {
         let control = form?.get([controlName]);
 
         // If no control found, try to find it in ungrouped group
@@ -271,7 +262,7 @@ export class FormGeneratorService implements OnDestroy {
             control = form?.get([UNGROUPED_FORM_GROUP_NAME, controlName]);
         }
         
-        return control as DynamicFormGroupControl;
+            return control as DynamicFormGroupControl;
     }
 
     /** @hidden */
