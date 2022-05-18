@@ -296,7 +296,7 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
     handleDatetimeInputChange(datetime: D): void {
         if (this.dateTimePickerComponent) {
             if (this.dateTimePickerComponent._isInvalidDateInput) {
-                if (this.ngControl && this._control.value) {
+                if (this.ngControl.control && this._control.value) {
                     this.ngControl.control.setErrors(this._control.errors);
                 }
                 this.state = 'error';
