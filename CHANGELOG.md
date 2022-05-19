@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.36...v0.34.3-rc.37) (2022-05-19)
+
+
+### Bug Fixes
+
+* **core:** standard list a11y ([#7308](https://github.com/SAP/fundamental-ngx/issues/7308)) ([0712ac9](https://github.com/SAP/fundamental-ngx/commit/0712ac9a27c59669d0123e612928341229006278))
+
 ### [0.34.3-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.35...v0.34.3-rc.36) (2022-05-19)
 
 
