@@ -8,5 +8,9 @@
 <ng-content></ng-content>
 
 <span *ngIf="counter || counter === 0" class="fd-list__item-counter">
-    {{ counter.toString() | slice: 0:5 }}
+    {{ counter | number: '1.0-2' }}
 </span>
+
+<span class="fd-screenreader-only" aria-hidden="true" [id]="_uniqueId + '-screenReader-content'">{{
+    screenReaderContent
+}}</span>

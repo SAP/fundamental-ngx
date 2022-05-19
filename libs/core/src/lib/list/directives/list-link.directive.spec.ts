@@ -4,13 +4,7 @@ import { ListModule } from '../list.module';
 
 @Component({
     template: `
-        <li
-            #componentElement
-            fd-list-link
-            [navigated]="navigated"
-            [navigationIndicator]="navigationIndicator"
-            [selected]="selected"
-        >
+        <li #componentElement fd-list-link [navigated]="navigated" [navigationIndicator]="navigationIndicator">
             ListLinkComponent
         </li>
     `
@@ -22,8 +16,6 @@ class TestComponent {
     navigated = false;
 
     navigationIndicator = false;
-
-    selected = false;
 }
 
 describe('ListTitleComponent', () => {
@@ -54,7 +46,6 @@ describe('ListTitleComponent', () => {
     });
 
     it('should assign additional classes', () => {
-        component.selected = true;
         component.navigated = true;
         component.navigationIndicator = true;
 
@@ -62,6 +53,5 @@ describe('ListTitleComponent', () => {
 
         expect(component.ref.nativeElement.classList).toContain('fd-list__link--navigation-indicator');
         expect(component.ref.nativeElement.classList).toContain('is-navigated');
-        expect(component.ref.nativeElement.classList).toContain('is-selected');
     });
 });

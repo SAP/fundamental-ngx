@@ -57,7 +57,7 @@ export class BusyIndicatorComponent {
 
     /** Aria live attribute value. */
     @Input()
-    ariaLive: 'assertive' | 'polite' | null = 'polite';
+    ariaLive: Nullable<'assertive' | 'polite' | 'off'> = 'polite';
 
     /** @hidden */
     @ViewChild('fakeFocusElement')

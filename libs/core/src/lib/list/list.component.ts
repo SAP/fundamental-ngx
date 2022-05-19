@@ -16,15 +16,14 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ListItemComponent } from './list-item/list-item.component';
-import { merge, Subject, Subscription } from 'rxjs';
-import { startWith, takeUntil } from 'rxjs/operators';
+import { merge, Observable, Subject, Subscription } from 'rxjs';
+import { map, startWith, takeUntil } from 'rxjs/operators';
 import { FocusEscapeDirection, KeyboardSupportService } from '@fundamental-ngx/core/utils';
 import { ListGroupHeaderDirective } from './directives/list-group-header.directive';
 import { ListFocusItem } from './list-focus-item.model';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
 import { ListNavigationItemComponent } from './list-navigation-item/list-navigation-item.component';
 
-type FocusItem = ListGroupHeaderDirective | ListItemComponent;
 /**
  * The directive that represents a list.
  * It is used to display a list of items with simple information such as scopes, names, etc.
@@ -110,7 +109,7 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
 
     /** @hidden */
     @ContentChildren(ListFocusItem)
-    private _focusItems: QueryList<FocusItem>;
+    private _focusItems: QueryList<ListFocusItem>;
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -123,7 +122,7 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
 
     /** @hidden */
     constructor(
-        private _keyboardSupportService: KeyboardSupportService<FocusItem>,
+        private _keyboardSupportService: KeyboardSupportService<ListFocusItem>,
         private _cdr: ChangeDetectorRef,
         @Optional() private _contentDensityService: ContentDensityService
     ) {}
@@ -162,8 +161,12 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
     }
 
     /** Set fake focus on element with passed index */
-    setItemActive(index: number): void {
-        this._keyboardSupportService.keyManager.setActiveItem(index);
+    setItemActive(index: number, updateOnly = false): void {
+        if (updateOnly) {
+            this._keyboardSupportService.keyManager.updateActiveItem(index);
+        } else {
+            this._keyboardSupportService.keyManager.setActiveItem(index);
+        }
     }
 
     /** @hidden */
@@ -171,6 +174,10 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
         this._focusItems.changes.pipe(startWith(0), takeUntil(this._onDestroy$)).subscribe(() => {
             this._recheckLinks();
             this._listenOnItemsClick();
+            setTimeout(() => {
+                // using setTimeout to avoid ExpressionChangedAfterItHasBeenCheckedError
+                this.updateItemsProperties();
+            });
         });
     }
 
@@ -179,10 +186,30 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
         /** Finish all of the streams, from before */
         this._onRefresh$.next();
         /** Merge refresh/destroy observables */
-        const refreshObs = merge(this._onRefresh$, this._onDestroy$);
-        this._focusItems.forEach((item, index) =>
-            item.clicked.pipe(takeUntil(refreshObs)).subscribe(() => this.setItemActive(index))
+        const completion$ = merge(this._onRefresh$, this._onDestroy$);
+        const interactionChangesIndexes: Observable<{ index: number; updateOnly: boolean }>[] = this._focusItems.map(
+            (item, index) =>
+                merge(
+                    item._clicked$.pipe(map(() => ({ index, updateOnly: false }))),
+                    item._focused$.pipe(map(({ focusedWithin }) => ({ index, updateOnly: focusedWithin })))
+                )
         );
+        merge(...interactionChangesIndexes)
+            .pipe(takeUntil(completion$))
+            .subscribe(({ index, updateOnly }) => this.setItemActive(index, updateOnly));
+    }
+
+    /** @hidden */
+    private updateItemsProperties(): void {
+        let closestListHeader: ListGroupHeaderDirective | null = null;
+        this._focusItems.forEach((item, index) => {
+            if (item instanceof ListGroupHeaderDirective) {
+                closestListHeader = item;
+            } else if (item instanceof ListItemComponent && closestListHeader) {
+                item._relatedGroupHeaderId = closestListHeader.nativeElementId;
+            }
+            item.setIsFirst(index === 0);
+        });
     }
 
     /** @hidden */

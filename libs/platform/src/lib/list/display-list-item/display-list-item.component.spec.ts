@@ -73,10 +73,9 @@ describe('DisplayListItemComponent', () => {
         expect(listItems.length).toEqual(4);
     });
 
-    it('Display items should has aria-label attribute', () => {
-        const spanElems = fixture.debugElement.queryAll(By.css('span'));
-        expect(spanElems.length).toEqual(10);
-        expect(spanElems[1].nativeElement.getAttribute('aria-label')).toContain('secondary 1');
+    it('Display items should have aria-label attribute', () => {
+        const secondaryItems = fixture.debugElement.queryAll(By.css('[fd-list-secondary]'));
+        expect(secondaryItems[0].nativeElement.getAttribute('aria-label')).toContain('secondary 1');
     });
 
     it('Should display item role as list item', () => {
