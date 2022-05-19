@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.37...v0.34.3-rc.38) (2022-05-19)
+
+
+### Bug Fixes
+
+* **core:** remove unused product switch control class ([#8113](https://github.com/SAP/fundamental-ngx/issues/8113)) ([349fe9d](https://github.com/SAP/fundamental-ngx/commit/349fe9dbef7fca368dd2ec81e3ba1781a564a148))
+
 ### [0.34.3-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.36...v0.34.3-rc.37) (2022-05-19)
 
 
