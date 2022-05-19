@@ -33,13 +33,12 @@ import {
     ContentDensity,
     ContentDensityService,
     FdDropEvent,
-    intersectionObservable,
     resizeObservable,
     RtlService,
     RangeSelector
 } from '@fundamental-ngx/core/utils';
-import { TableRowDirective } from '@fundamental-ngx/core/table';
-import { isDataSource, isFunction, isString } from '@fundamental-ngx/platform/shared';
+import { TableRowDirective, TableComponent as FdTableComponent } from '@fundamental-ngx/core/table';
+import { isDataSource, isString } from '@fundamental-ngx/platform/shared';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { cloneDeep, get } from 'lodash-es';
 import { Nullable } from '@fundamental-ngx/core/shared';
@@ -56,8 +55,7 @@ import {
     SelectionMode,
     SelectionModeValue,
     SortDirection,
-    TableRowType,
-    ColumnAlign
+    TableRowType
 } from './enums';
 import {
     DEFAULT_HIGHLIGHTING_KEY,
@@ -87,17 +85,15 @@ import {
     TableGroupChangeEvent,
     TableRow,
     TableRowActivateEvent,
+    TableRowClass,
     TableRowSelectionChangeEvent,
     TableRowsRearrangeEvent,
     TableRowToggleOpenStateEvent,
     TableSortChangeEvent
 } from './models';
 import { TableColumnResizeService } from './table-column-resize.service';
-import { TableColumnResizableSide } from './directives/table-cell-resizable.directive';
 
 export type FdpTableDataSource<T> = T[] | Observable<T[]> | TableDataSource<T>;
-
-export type TableRowClass<T> = string | ((row: T) => string);
 
 type TreeLike<T> = T & {
     _children?: TreeLike<T>[];
@@ -410,6 +406,10 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     readonly tableContainer: ElementRef<HTMLDivElement>;
 
     /** @hidden */
+    @ViewChild(FdTableComponent, { read: ElementRef })
+    readonly table: ElementRef<HTMLDivElement>;
+
+    /** @hidden */
     @ContentChildren(TableColumn)
     readonly columns: QueryList<TableColumn>;
 
@@ -602,6 +602,14 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     }
 
     /** @hidden */
+    get _cellMockVisible(): boolean {
+        return (
+            this._tableColumnResizeService.fixedWidth &&
+            (this.tableContainer?.nativeElement?.scrollWidth ?? 0) > (this.table?.nativeElement?.scrollWidth ?? 0)
+        );
+    }
+
+    /** @hidden */
     get _rowsDraggable(): boolean {
         return (
             this.isTreeTable &&
@@ -691,7 +699,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         private readonly _cdr: ChangeDetectorRef,
         private readonly _tableService: TableService,
         private readonly _tableScrollDispatcher: TableScrollDispatcherService,
-        private readonly _tableColumnResizeService: TableColumnResizeService,
+        public readonly _tableColumnResizeService: TableColumnResizeService,
         private readonly _elRef: ElementRef,
         @Optional() private readonly _rtlService: RtlService,
         @Optional() private readonly _contentDensityService: ContentDensityService
@@ -776,8 +784,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         this._listenToPageScrolling();
 
         this._listenToColumnPropertiesChange();
-
-        this._listenToColumnsWidthChange();
 
         this._listenToTableWidthChanges();
 
@@ -972,38 +978,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
     /** Manually triggers columns width recalculation */
     recalculateTableColumnWidth(): void {
-        const recalculateFn = (): void => {
-            const columnNames = this._visibleColumns.map((column) => column.name);
-
-            this._tableColumnResizeService.setColumnsWidth(columnNames);
-            this._setFreezableInfo();
-
-            this._cdr.detectChanges();
-        };
-
-        this._tableColumnResizeService.resetColumnsWidth();
-        this._cdr.detectChanges();
-
-        let elRect = this._elRef.nativeElement.getBoundingClientRect();
-        let elVisible = elRect.width && elRect.height;
-
-        if (elVisible) {
-            recalculateFn();
-            return;
-        }
-
-        /** Element may not be visible due to any reason so process recalculation when it becomes visible */
-        const intersectionSubscription = intersectionObservable(this._elRef.nativeElement).subscribe((entries) => {
-            elRect = entries[0]?.boundingClientRect;
-            elVisible = elRect?.width && elRect?.height;
-
-            if (elVisible) {
-                recalculateFn();
-                intersectionSubscription.unsubscribe();
-            }
-        });
-
-        this._subscriptions.add(intersectionSubscription);
+        this._tableColumnResizeService.setColumnNames(this._visibleColumns.map((column) => column.name));
+        this._setFreezableInfo();
     }
 
     /** Gets the max allowed width for all freezable columns */
@@ -1070,21 +1046,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     }
 
     // Private API
-
-    /** @hidden */
-    _getColumnResizableSide(columnIndex: number): TableColumnResizableSide {
-        if (columnIndex === 0) {
-            return 'end';
-        }
-
-        const isLastColumn = columnIndex === this._visibleColumns.length - 1;
-
-        if (isLastColumn && this._isShownNavigationColumn) {
-            return 'start';
-        }
-
-        return 'both';
-    }
 
     /** @hidden */
     _isColumnHasHeaderMenu(column: TableColumn): boolean {
@@ -1262,71 +1223,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     _columnHeaderSortBy(field: string, direction: SortDirection): void {
         this.sort([{ field, direction }]);
         this._closePopoverForColumnByFieldName(field);
-    }
-
-    /** @hidden */
-    _getCellHeightPx(parentRow: HTMLTableRowElement): string {
-        return parentRow ? parentRow.getBoundingClientRect().height + 'px' : 'unset';
-    }
-
-    /** @hidden */
-    _getSelectionCellStyles(parentRow: HTMLTableRowElement): { [styleProp: string]: string } {
-        const rtlKey = this._rtl ? 'right' : 'left';
-        const selectionColumnWidth = SELECTION_COLUMN_WIDTH.get(this.contentDensity) + 'px';
-
-        return {
-            [rtlKey]: this._semanticHighlightingColumnWidth + 'px',
-            'min-width': selectionColumnWidth,
-            'max-width': selectionColumnWidth,
-            height: this._getCellHeightPx(parentRow)
-        };
-    }
-
-    /** @hidden */
-    _getRowClasses(row: TableRow<T>): string {
-        const treeRowClass = this._isTreeRow(row) ? 'fdp-table__row--tree' : '';
-        const rowClasses = this._getRowCustomCssClasses(row);
-
-        return rowClasses.concat(' ', treeRowClass).trim();
-    }
-
-    /** @hidden */
-    _getCellStyles(column: TableColumn): { [styleProp: string]: number | string } {
-        if (!this._tableWidthPx) {
-            return {};
-        }
-
-        const styles: { [property: string]: number | string } = {};
-
-        if (this._freezableColumns.has(column.name)) {
-            const key = this._rtl ? 'right.px' : 'left.px';
-            styles[key] =
-                this._semanticHighlightingColumnWidth +
-                this._selectionColumnWidth +
-                this._tableColumnResizeService.getPrevColumnsWidth(column.name);
-        }
-
-        const columnWidth = this._tableColumnResizeService.getColumnWidthStyle(column);
-        styles['min-width'] = columnWidth;
-        styles['max-width'] = columnWidth;
-        styles['width'] = columnWidth;
-
-        // The "start" value does align left when you are using a LTR browser.
-        // In RTL browsers, the "start" value aligns right.
-        // Since we want to dynamically apply alignment only depending on the service value, we are using "left"/"right" as values instead
-        switch (column.align) {
-            case ColumnAlign.START:
-                styles['text-align'] = this._rtl ? 'right' : 'left';
-                break;
-            case ColumnAlign.END:
-                styles['text-align'] = this._rtl ? 'left' : 'right';
-                break;
-            default:
-                styles['text-align'] = 'center';
-                break;
-        }
-
-        return styles;
     }
 
     /** @hidden */
@@ -2273,13 +2169,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     }
 
     /** @hidden */
-    private _listenToColumnsWidthChange(): void {
-        this._subscriptions.add(
-            this._tableService.tableColumnsWidth$.subscribe(() => this.recalculateTableColumnWidth())
-        );
-    }
-
-    /** @hidden */
     private _listenToTableWidthChanges(): void {
         this._subscriptions.add(
             resizeObservable(this.tableContainer.nativeElement)
@@ -2328,25 +2217,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                     })
             );
         }
-    }
-
-    /** @hidden */
-    private _getRowCustomCssClasses(row: TableRow<T>): string {
-        if (!this.rowsClass) {
-            return '';
-        }
-
-        let rowClasses = '';
-
-        if (isString(this.rowsClass)) {
-            rowClasses = this.rowsClass;
-        }
-
-        if (isFunction(this.rowsClass)) {
-            rowClasses = (this.rowsClass as any)(row.value) || '';
-        }
-
-        return rowClasses.trim();
     }
 
     /**

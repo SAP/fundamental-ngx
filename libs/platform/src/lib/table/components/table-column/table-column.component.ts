@@ -92,8 +92,7 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
     }
     set width(value: string) {
         this._width = value;
-        this._tableColumnResizeService.registerColumnWidthInputChange(this.name);
-        this._tableService?.recalculateColumnsWidth();
+        this._tableColumnResizeService.setCustomWidth(this.name, value);
     }
 
     /** Whether the text should wrap, when text is too long for 1 line */
@@ -130,8 +129,8 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
 
     /** @hidden */
     constructor(
-        @Optional() @Host() private readonly _tableService: TableService,
-        private readonly _tableColumnResizeService: TableColumnResizeService
+        private readonly _tableColumnResizeService: TableColumnResizeService,
+        @Optional() @Host() private readonly _tableService?: TableService
     ) {
         super();
     }

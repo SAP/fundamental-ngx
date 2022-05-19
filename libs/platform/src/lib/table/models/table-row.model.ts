@@ -54,3 +54,5 @@ export class TableRow<T = any> {
         public state: TableRowState = 'readonly'
     ) {}
 }
+
+export type TableRowClass<T = any> = string | ((row: T) => string);

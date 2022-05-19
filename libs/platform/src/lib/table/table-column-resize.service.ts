@@ -4,17 +4,11 @@ import { debounceTime, takeUntil } from 'rxjs/operators';
 
 import { RtlService } from '@fundamental-ngx/core/utils';
 
-import { TableColumn } from './components/table-column/table-column';
 import { TABLE_COLUMN_MIN_WIDTH } from './constants';
 import { TableScrollDispatcherService } from './table-scroll-dispatcher.service';
 import { Table } from './table';
 
 export const TABLE_RESIZER_BORDER_WIDTH = 3;
-
-enum ColumnWidthChangeSource {
-    WidthInput = 1,
-    Resize
-}
 
 /**
  * Service to handle all things related to column resizing:
@@ -25,16 +19,19 @@ enum ColumnWidthChangeSource {
 @Injectable()
 export class TableColumnResizeService implements OnDestroy {
     /** @hidden */
-    private _columnsWidthMap = new Map<string, number>();
-
-    /** @hidden is used to determine which width to rely on */
-    private _columnsWidthChangeSourceMap = new Map<string, ColumnWidthChangeSource>();
+    private _fixedColumnsWidthMap = new Map<string, string>();
 
     /** @hidden */
     private _columnsCellMap = new Map<string, ElementRef<HTMLTableDataCellElement>[]>();
 
     /** @hidden */
     private _visibleColumnNames: string[] = [];
+
+    /** @hidden */
+    private _visibleColumnLeftNeighbourMap = new Map<string, string | undefined>();
+
+    /** @hidden */
+    private _visibleColumnLeftOffsetPxMap = new Map<string, number>();
 
     /** @hidden */
     private _startX: number | null = null;
@@ -81,6 +78,11 @@ export class TableColumnResizeService implements OnDestroy {
         return this._markForCheck.asObservable();
     }
 
+    /** table has fixed width if all of it's columns are fixed */
+    get fixedWidth(): boolean {
+        return this._fixedColumnsWidthMap.size === this._visibleColumnNames.length;
+    }
+
     /** @hidden */
     private get _rtl(): boolean {
         return this._rtlService?.rtl.getValue();
@@ -112,111 +114,52 @@ export class TableColumnResizeService implements OnDestroy {
         this._tableRef = ref;
     }
 
-    /** Reset columns width */
-    resetColumnsWidth(): void {
-        this._columnsWidthMap.clear();
-    }
-
-    /** Initialize service with data, trigger columns width calculation. */
-    setColumnsWidth(visibleColumnNames: string[]): void {
-        this._visibleColumnNames = visibleColumnNames;
-
-        this._calculateColumnsWidth();
-    }
-
-    /** checks if freezable columns in total exceeds the size of table viewport. If yes, reduces each column equally  */
-    updateFrozenColumnsWidth(): void {
-        const maxWidth = this._tableRef.getMaxAllowedFreezableColumnsWidth();
-        const freezeToNextColumnName = this._visibleColumnNames[this._tableRef._freezableColumns.size];
-        const actualWidth = this.getPrevColumnsWidth(freezeToNextColumnName);
-        if (actualWidth > maxWidth) {
-            const reduceBy = actualWidth / maxWidth;
-            [...this._tableRef._freezableColumns.keys()].forEach((columnName) => {
-                const currentWidth = this._columnsWidthMap.get(columnName) ?? 0;
-                const newWidth = Math.floor(currentWidth / reduceBy);
-                this._columnsWidthMap.set(columnName, newWidth);
-                this._columnsWidthChangeSourceMap.set(columnName, ColumnWidthChangeSource.Resize);
-            });
-            this._markForCheck.next();
-        }
-    }
-
-    /**
-     *  Get the column width, try in the next order:
-     *  1. Width from map with calculated widths.
-     *  2. Width defined by the user.
-     *  3. Literally `auto`, means no width set.
-     *
-     *  In case there was a change to the width of the column (from the component input or resize event),
-     *  corresponding value will be treated as higher priority
-     */
-    getColumnWidthStyle(column: TableColumn): string {
-        const calculatedWidth = this._columnsWidthMap.get(column.name);
-        const changeSource = this._columnsWidthChangeSourceMap.get(column.name);
-
-        if (changeSource) {
-            switch (changeSource) {
-                case ColumnWidthChangeSource.Resize:
-                    if (calculatedWidth) {
-                        return calculatedWidth + 'px';
-                    }
-
-                    break;
-                case ColumnWidthChangeSource.WidthInput:
-                    if (column.width) {
-                        return this.getColumnWidth(column.width);
-                    }
-
-                    break;
-            }
-        }
-
-        if (calculatedWidth) {
-            return calculatedWidth + 'px';
-        }
-
-        if (column.width) {
-            return this.getColumnWidth(column.width);
-        }
-
-        return 'auto';
+    /** @hidden initializes service with data, trigger columns width calculation. */
+    setColumnNames(visibleColumnNames: string[]): void {
+        this._visibleColumnLeftNeighbourMap.clear();
+        visibleColumnNames.forEach((column, index) => {
+            this._visibleColumnLeftNeighbourMap.set(column, visibleColumnNames[index - 1]);
+        });
+        this._visibleColumnNames = [...visibleColumnNames];
+        this.updateFrozenColumnsWidth();
     }
 
     /** @hidden */
-    private getColumnWidth(width: string): string {
-        if (!width.trim().endsWith('%')) {
-            return width;
+    updateFrozenColumnsWidth(): void {
+        let allPreviousWidths = 0;
+        for (const [column, prevColumn] of this._visibleColumnLeftNeighbourMap.entries()) {
+            allPreviousWidths +=
+                this._columnsCellMap.get(prevColumn as string)?.[0]?.nativeElement.getBoundingClientRect().width ?? 0;
+            this._visibleColumnLeftOffsetPxMap.set(column, allPreviousWidths);
         }
+    }
 
-        const percent = parseFloat(width);
+    /** @hidden */
+    updateFrozenColumnsWidthAfterResize(columnName: string, diffX: number): void {
+        let found = false;
+        for (const [column, width] of this._visibleColumnLeftOffsetPxMap.entries()) {
+            if (column === columnName) {
+                found = true;
+            } else if (found) {
+                this._visibleColumnLeftOffsetPxMap.set(column, width + diffX);
+            }
+        }
+    }
 
-        return (this._tableRef._tableWidthPx * percent) / 100 + 'px';
+    /** Retrieves custom column value or returns `unset` */
+    getColumnWidthStyle(columnName: string): string {
+        const calculatedWidth = this._fixedColumnsWidthMap.get(columnName);
+        return calculatedWidth || 'unset';
     }
 
     /** Previous column name */
-    getPreviousColumnName(columnName: string): string {
-        return this._visibleColumnNames[this._visibleColumnNames.findIndex((name) => name === columnName) - 1];
+    getPreviousColumnName(columnName: string): string | undefined {
+        return this._visibleColumnLeftNeighbourMap.get(columnName);
     }
 
     /** Overall previous columns width. Used to calculate offset for the absolute positioned cells. */
     getPrevColumnsWidth(columnName: string): number {
-        if (!this._columnsWidthMap.size || !columnName) {
-            return 0;
-        }
-
-        let columnsWidth = 0;
-
-        for (let i = 0; i < this._visibleColumnNames.length; i++) {
-            const currentColumnName = this._visibleColumnNames[i];
-
-            if (columnName === currentColumnName) {
-                break;
-            }
-
-            columnsWidth += this._columnsWidthMap.get(currentColumnName) ?? 0;
-        }
-
-        return columnsWidth;
+        return this._visibleColumnLeftOffsetPxMap.get(columnName) ?? 0;
     }
 
     /** Register column's cell to get its dimensions in further. */
@@ -238,9 +181,9 @@ export class TableColumnResizeService implements OnDestroy {
         this._columnsCellMap.set(columnName, columnCells);
     }
 
-    /** Register the fact column width input was changed */
-    registerColumnWidthInputChange(columnName: string): void {
-        this._columnsWidthChangeSourceMap.set(columnName, ColumnWidthChangeSource.WidthInput);
+    /** Register the value of column width that changed from  input */
+    setCustomWidth(columnName: string, value: string): void {
+        this._fixedColumnsWidthMap.set(columnName, value);
     }
 
     /** Set the appropriate column resizer position. */
@@ -270,10 +213,6 @@ export class TableColumnResizeService implements OnDestroy {
 
     /** Handle start resizing. */
     startResize(event: MouseEvent): void {
-        if (!this._columnsWidthMap.size) {
-            return;
-        }
-
         this._startX = this.resizerPosition;
         this._clientStartX = event.clientX;
 
@@ -298,18 +237,8 @@ export class TableColumnResizeService implements OnDestroy {
 
         this._startX = null;
         this._clientStartX = null;
-    }
 
-    /** @hidden */
-    private _calculateColumnsWidth(): void {
-        this._columnsCellMap.forEach((cells, columnName) => {
-            const cellsWithWidth = cells.filter((c) => c.nativeElement.clientWidth > 0);
-            if (cellsWithWidth.length === 0) {
-                return;
-            }
-            const { width } = cellsWithWidth[0].nativeElement.getBoundingClientRect();
-            this._columnsWidthMap.set(columnName, width);
-        });
+        this._markForCheck.next();
     }
 
     /** Update column resizer position. */
@@ -328,26 +257,41 @@ export class TableColumnResizeService implements OnDestroy {
 
     /** Update columns width after resizing, prevent from having too small columns. */
     private _processResize(diffX: number): void {
-        const columnWidth = this._columnsWidthMap.get(this._resizedColumn) ?? 0;
+        const columnWidth = this._columnsCellMap
+            .get(this._resizedColumn)?.[0]
+            ?.nativeElement.getBoundingClientRect().width;
 
-        let newDiffX = diffX;
-
-        if (diffX < 0 && columnWidth + diffX < TABLE_COLUMN_MIN_WIDTH) {
-            newDiffX = diffX + (TABLE_COLUMN_MIN_WIDTH - (columnWidth + diffX));
+        if (!columnWidth) {
+            return;
         }
 
-        if (newDiffX > 0 && this._tableRef._freezableColumns.has(this._resizedColumn)) {
-            const freezeToNextColumnName = this._visibleColumnNames[this._tableRef._freezableColumns.size];
-            const actualWidth = this.getPrevColumnsWidth(freezeToNextColumnName);
-            const newWidth = actualWidth + newDiffX;
-            const maxWidth = this._tableRef.getMaxAllowedFreezableColumnsWidth();
-            // in case "_resizedColumn" is freezable, make sure the overall width of freezable columns does not exceed the width of the table
-            if (newWidth >= maxWidth) {
-                newDiffX = maxWidth - actualWidth;
+        if (diffX < 0 && columnWidth + diffX < TABLE_COLUMN_MIN_WIDTH) {
+            diffX = TABLE_COLUMN_MIN_WIDTH - columnWidth;
+        }
+
+        if (!this.fixedWidth) {
+            for (const [columnName, cells] of this._columnsCellMap.entries()) {
+                if (cells.length) {
+                    this._fixedColumnsWidthMap.set(
+                        columnName,
+                        cells[0].nativeElement.getBoundingClientRect().width + 'px'
+                    );
+                }
             }
         }
 
-        this._columnsWidthMap.set(this._resizedColumn, columnWidth + newDiffX);
-        this._columnsWidthChangeSourceMap.set(this._resizedColumn, ColumnWidthChangeSource.Resize);
+        if (diffX > 0 && this._tableRef._freezableColumns.has(this._resizedColumn)) {
+            const freezeToNextColumnName = this._visibleColumnNames[this._tableRef._freezableColumns.size];
+            const actualWidth = this.getPrevColumnsWidth(freezeToNextColumnName);
+            const newWidth = actualWidth + diffX;
+            const maxWidth = this._tableRef.getMaxAllowedFreezableColumnsWidth();
+            // in case "_resizedColumn" is freezable, make sure the overall width of freezable columns does not exceed the width of the table
+            if (newWidth >= maxWidth) {
+                diffX = maxWidth - actualWidth;
+            }
+        }
+
+        this._fixedColumnsWidthMap.set(this._resizedColumn, columnWidth + diffX + 'px');
+        this.updateFrozenColumnsWidthAfterResize(this._resizedColumn, diffX);
     }
 }

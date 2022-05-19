@@ -45,7 +45,6 @@ export * from './directives/table-cell-resizable.directive';
 export * from './directives/table-cell-selectable.directive';
 export * from './directives/table-header.directive';
 export * from './directives/table-scrollable.directive';
-export * from './directives/table-scroller.directive';
 export * from './directives/table-view-settings-filter-custom.directive';
 
 export * from './domain/array-data-source';
@@ -59,6 +58,11 @@ export * from './enums/filter-type.enum';
 export * from './enums/row-type.enum';
 export * from './enums/selection-mode.enum';
 export * from './enums/sort-direction.enum';
+
+export * from './pipes/cell-styles.pipe';
+export * from './pipes/column-resizable-side.pipe';
+export * from './pipes/row-classes.pipe';
+export * from './pipes/selection-cell-styles.pipe';
 
 export * from './interfaces/collection-filter.interface';
 export * from './interfaces/collection-group.interface';

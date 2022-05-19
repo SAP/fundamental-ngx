@@ -11,8 +11,8 @@ import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { TableDataProvider, TableDataSource } from './domain';
 import { FILTER_STRING_STRATEGY, FilterableColumnDataType, SelectionMode, SortDirection, TableRowType } from './enums';
 import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilter, TableState } from './interfaces';
-import { TableRowSelectionChangeEvent, TableRowToggleOpenStateEvent } from './models';
-import { TableRowClass, TableComponent } from './table.component';
+import { TableRowClass, TableRowSelectionChangeEvent, TableRowToggleOpenStateEvent } from './models';
+import { TableComponent } from './table.component';
 import { PlatformTableModule } from './table.module';
 import { TableService } from './table.service';
 
@@ -264,7 +264,7 @@ describe('TableComponent internal', () => {
             tableHeaderCells = fixture.debugElement.queryAll(
                 By.css('.fdp-table__header .fd-table__row .fd-table__cell:not(.fd-table__cell--mock)')
             );
-            tableBodyRows = fixture.debugElement.queryAll(By.css('.fdp-table__body .fd-table__row'));
+            tableBodyRows = fixture.debugElement.queryAll(By.css('.fdp-table__body tbody .fd-table__row'));
             tableRowCells2DArray = tableBodyRows.map((row) =>
                 row.queryAll(By.css('.fd-table__cell:not(.fd-table__cell--mock)'))
             );
@@ -919,7 +919,7 @@ describe('TableComponent internal', () => {
         let tableBodyContainer: DebugElement;
 
         const calculateTableElementsMetaData = (): void => {
-            tableBodyRows = fixture.debugElement.queryAll(By.css('.fdp-table__body .fd-table__row'));
+            tableBodyRows = fixture.debugElement.queryAll(By.css('.fdp-table__body tbody .fd-table__row'));
             tableBodyContainer = fixture.debugElement.query(By.css('.fdp-table__body'));
         };
 
@@ -1056,9 +1056,9 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
         let tableRowTogglerCellsArray: DebugElement[] = [];
 
         const calculateTableElementsMetaData = (): void => {
-            tableBodyRows = fixture.debugElement.queryAll(By.css('.fdp-table__body .fd-table__row'));
+            tableBodyRows = fixture.debugElement.queryAll(By.css('.fdp-table__body tbody .fd-table__row'));
             tableRowTogglerCellsArray = fixture.debugElement.queryAll(
-                By.css('.fdp-table__body .fd-table__row .fd-table__cell--expand')
+                By.css('.fdp-table__body tbody .fd-table__row .fd-table__cell--expand')
             );
         };
 
