@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.34...v0.34.3-rc.35) (2022-05-19)
+
+
+### Features
+
+* **platform:** table - remove extra JS logic ([#8084](https://github.com/SAP/fundamental-ngx/issues/8084)) ([112f512](https://github.com/SAP/fundamental-ngx/commit/112f5127f813acab2774cd82f00635eb3cba7cab))
+
 ### [0.34.3-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.33...v0.34.3-rc.34) (2022-05-19)
 
 
