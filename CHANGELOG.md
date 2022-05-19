@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.33...v0.34.3-rc.34) (2022-05-19)
+
+
+### Bug Fixes
+
+* **core:** inline-help - fix destroy behavior ([#8110](https://github.com/SAP/fundamental-ngx/issues/8110)) ([c4d6b0c](https://github.com/SAP/fundamental-ngx/commit/c4d6b0c51ef3afae2b9cc0eb4f3fce8304d075ae))
+
 ### [0.34.3-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.32...v0.34.3-rc.33) (2022-05-18)
 
 
