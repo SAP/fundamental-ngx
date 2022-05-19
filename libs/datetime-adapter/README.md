@@ -1,7 +1,7 @@
-# datetime-adapter
+# Fundamental Dayjs datetime adapter implementation
 
-This library was generated with [Nx](https://nx.dev).
+## Description
 
-## Running unit tests
+Fundamental Date Picker, Time Picker, Date Time Picker and similar components rely on provided datetime implementation `DatetimeAdapter` and datetime formats `DateTimeFormats`.
 
-Run `nx test datetime-adapter` to execute the unit tests.
+These components could be used with FdDatetimeAdapter, based on the JavaScript's native Date object, but one of the biggest shortcomings of the native Date object is the inability to set the parse format. As an alternative could be the DayjsDatetimeAdapter based on `Day.js` library or a custom DateAdapter that works with the formatting/parsing library of your choice.

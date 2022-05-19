@@ -291,7 +291,7 @@ describe('DayjsDatetimeAdapter', () => {
     it('should parse invalid value as invalid', () => {
         const date = adapter.parse('hello', 'M/D/YYYY');
         expect(date).not.toBeNull();
-        expect(date.isValid()).toBeFalse();
+        expect(date?.isValid()).toBeFalse();
     });
 
     it('should format', () => {
