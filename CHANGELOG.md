@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.35...v0.34.3-rc.36) (2022-05-19)
+
+
+### Bug Fixes
+
+* **platform:** date time picker form validation ([#8054](https://github.com/SAP/fundamental-ngx/issues/8054)) ([8bcec06](https://github.com/SAP/fundamental-ngx/commit/8bcec068be9bf4bb26cbae0e5b7c6429cd79ab7b))
+
 ### [0.34.3-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.34...v0.34.3-rc.35) (2022-05-19)
 
 
