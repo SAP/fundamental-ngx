@@ -3,6 +3,7 @@ import {
     ElementRef,
     Input,
     OnChanges,
+    OnDestroy,
     OnInit,
     Optional,
     Self,
@@ -29,7 +30,7 @@ const INLINE_HELP_ICON_CLASS = 'fd-popover__inline-help--icon';
         '[class.fd-inline-help__trigger]': 'true'
     }
 })
-export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnChanges {
+export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnChanges, OnDestroy {
     /** The trigger events that will open/close the inline help component.
      *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
     @Input()
@@ -85,6 +86,11 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
         this._popoverService.stringContent = this.inlineHelpText;
         this._popoverService.templateContent = this.inlineHelpTemplate;
         this._popoverService.initialise(this._elementRef, this);
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._popoverService.onDestroy();
     }
 
     /** @hidden */
