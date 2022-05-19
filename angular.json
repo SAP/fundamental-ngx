@@ -3609,7 +3609,8 @@
                     "builder": "@nrwl/angular:package",
                     "outputs": ["dist/libs/datetime-adapter"],
                     "options": {
-                        "project": "libs/datetime-adapter/ng-package.json"
+                        "project": "libs/datetime-adapter/ng-package.json",
+                        "updateBuildableProjectDepsInPackageJson": false
                     },
                     "configurations": {
                         "production": {

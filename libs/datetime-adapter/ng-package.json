@@ -3,5 +3,6 @@
     "dest": "../../dist/libs/datetime-adapter",
     "lib": {
         "entryFile": "src/index.ts"
-    }
+    },
+    "allowedNonPeerDependencies": ["@fundamental-ngx/core", "dayjs"]
 }
