@@ -48,7 +48,7 @@ export class DateTimePicker extends BaseComponentPo {
     buttonText = ' .fd-button__text';
     inputGroup = this.root + ' .fd-input-group';
 
-    getCurrentDayIndex = (): number => {
+    getCurrentDayIndex = (): number | undefined => {
         for (let i = 0; i < this.currentMonthCalendarItem.length; i++) {
             if (getElementClass(this.currentMonthCalendarItem, i).includes('current')) {
                 return i;
@@ -58,7 +58,7 @@ export class DateTimePicker extends BaseComponentPo {
 
     filterCalendarValue = (name: string): string => `//td[contains(@id,"-view-${name}")]`;
 
-    dayInDisabledFunctionsCalendarByIndex = (index: string): string => `#fd-calendar-9-day-view-day-${index}`;
+    dayInDisabledFunctionsCalendarByIndex = (index: string): string => `[data-fd-calendar-day="${index}"]`;
 
     dayInCalendarButtonByValue = (index: string): string =>
         `//span[text()="${index}"]/ancestor::td[not (contains(@class, 'fd-calendar__item--other-month'))]`;

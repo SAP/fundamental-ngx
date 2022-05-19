@@ -33,6 +33,7 @@ describe('Busy Indicator test suite:', () => {
         busyIndicatorLabelExample,
         messageToast,
         openBusyIndicatorButton,
+        hideBusyIndicatorButton,
         hideAllButton
     } = busyIndicatorPage;
     const text = 'test';
@@ -118,6 +119,7 @@ describe('Busy Indicator test suite:', () => {
     it('should check opening busy indicator in message toast by clicking button', () => {
         click(openBusyIndicatorButton);
         expect(isElementDisplayed(messageToast + busyIndicator)).toBe(true);
+        click(hideBusyIndicatorButton);
     });
 
     it('should check that we can open few busy indicators in message toast', () => {
@@ -125,6 +127,7 @@ describe('Busy Indicator test suite:', () => {
         click(openBusyIndicatorButton);
         click(openBusyIndicatorButton);
         expect(getElementArrayLength(messageToast + busyIndicator)).toBe(3);
+        click(hideBusyIndicatorButton);
     });
 
     it('should check closing all busy indicators in message toast by clicking Hide All button', () => {
@@ -132,6 +135,7 @@ describe('Busy Indicator test suite:', () => {
         click(openBusyIndicatorButton);
         click(hideAllButton);
         expect(doesItExist(messageToast + busyIndicator)).toBe(false);
+        click(hideBusyIndicatorButton);
     });
 
     it('should check LTR and RTL', () => {

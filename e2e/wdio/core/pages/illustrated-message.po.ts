@@ -6,7 +6,7 @@ export class IllustratedMessagePo extends CoreBaseComponentPo {
     root = '#page-content';
 
     sceneAndSpotButtons = 'fd-illustrated-message-actions button';
-    buttonDialog = '#background-ex1 .fd-button';
+    buttonDialog = 'fd-illustrated-message-dialog-example .fd-button';
     dialogPopup = '[role="dialog"]';
     closePopupSignButton = '.fd-dialog__header .fd-button';
     closePopupButton = '.fd-dialog__footer [label="Close"]>button';

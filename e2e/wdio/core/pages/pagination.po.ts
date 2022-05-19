@@ -4,8 +4,8 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 export class PaginationPo extends CoreBaseComponentPo {
     private url = '/pagination';
 
-    basicPaginationExample = '#background-ex0 ';
-    showingItemsPaginationExample = '#background-ex1 ';
+    basicPaginationExample = 'fd-pagination-example ';
+    showingItemsPaginationExample = 'fd-pagination-showing-example ';
     perPagePaginationExample = 'fd-pagination-per-page-example ';
     mobilePaginationExample = 'fd-pagination-mobile-example ';
     playgroundExample = '.fd-playground ';

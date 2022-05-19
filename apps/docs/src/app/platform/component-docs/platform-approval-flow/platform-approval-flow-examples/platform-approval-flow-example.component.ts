@@ -26,6 +26,8 @@ import { MessageToastService } from '@fundamental-ngx/core/message-toast';
     templateUrl: './platform-approval-flow-example.component.html'
 })
 export class PlatformApprovalFlowExampleComponent implements OnDestroy {
+    private graphs = getGraphs();
+
     /** @hidden */
     @ViewChild(ApprovalFlowComponent)
     _approvalFlow: ApprovalFlowComponent;
@@ -34,7 +36,7 @@ export class PlatformApprovalFlowExampleComponent implements OnDestroy {
 
     examples: GraphTypes[] = ['empty', 'simple', 'medium', 'complex'];
     selectedExample: GraphTypes = 'complex';
-    approvalProcess: ApprovalProcess = graphs[this.selectedExample];
+    approvalProcess: ApprovalProcess = this.graphs[this.selectedExample];
 
     userDataSource = new ApprovalFlowUserDataSource(new UserDataProvider());
     watcherDataSource = new ApprovalFlowUserDataSource(new UserDataProvider());
@@ -91,7 +93,7 @@ export class PlatformApprovalFlowExampleComponent implements OnDestroy {
     }
 
     changeExampleData(): void {
-        this.approvalProcess = cloneDeep(graphs[this.selectedExample]);
+        this.approvalProcess = cloneDeep(this.graphs[this.selectedExample]);
     }
 
     toggleNodeActions(state: boolean): void {
@@ -149,7 +151,9 @@ export class PlatformApprovalFlowExampleComponent implements OnDestroy {
 
     setNotStarted(): void {
         const approvalProcess = this._approvalFlow.approvalProcess;
-        const initialNodeMap = new Map((graphs[this.selectedExample] as ApprovalProcess).nodes.map((n) => [n.id, n]));
+        const initialNodeMap = new Map(
+            (this.graphs[this.selectedExample] as ApprovalProcess).nodes.map((n) => [n.id, n])
+        );
         const updatedState = cloneDeep(approvalProcess);
         updatedState.nodes = updatedState.nodes.map((n) => {
             const status =
@@ -172,7 +176,7 @@ export class PlatformApprovalFlowExampleComponent implements OnDestroy {
 
 const DAY_IN_MILLISECONDS = 1000 * 60 * 60 * 24;
 
-const users: ApprovalUser[] = [
+const users: () => ApprovalUser[] = () => [
     {
         id: 'uid28141',
         teamId: 'teamId3',
@@ -309,9 +313,9 @@ const users: ApprovalUser[] = [
 ];
 
 const usersMap = {};
-users.forEach((u) => (usersMap[u.id] = u));
+users().forEach((u) => (usersMap[u.id] = u));
 
-const teams: ApprovalTeam[] = [
+const teams: () => ApprovalTeam[] = () => [
     {
         id: 'teamId1',
         name: 'Accounting team',
@@ -340,12 +344,12 @@ const teams: ApprovalTeam[] = [
     }
 ];
 
-const emptyGraph: ApprovalProcess = {
+const emptyGraph: () => ApprovalProcess = () => ({
     watchers: [getUser('uid66161')],
     nodes: []
-};
+});
 
-const simpleGraph: ApprovalProcess = {
+const simpleGraph: () => ApprovalProcess = () => ({
     watchers: [getUser('uid66161')],
     nodes: [
         {
@@ -379,9 +383,9 @@ const simpleGraph: ApprovalProcess = {
             createDate: daysFromNow(-30)
         }
     ]
-};
+});
 
-const mediumGraph: ApprovalProcess = {
+const mediumGraph: () => ApprovalProcess = () => ({
     watchers: [getUser('uid66151'), getUser('uid77115')],
     nodes: [
         {
@@ -452,9 +456,9 @@ const mediumGraph: ApprovalProcess = {
             createDate: daysFromNow(-30)
         }
     ]
-};
+});
 
-const complexGraph: ApprovalProcess = {
+const complexGraph: () => ApprovalProcess = () => ({
     watchers: [getUser('uid66151'), getUser('uid66141'), getUser('uid99651'), getUser('uid99655')],
     nodes: [
         {
@@ -538,14 +542,14 @@ const complexGraph: ApprovalProcess = {
             createDate: daysFromNow(-30)
         }
     ]
-};
+});
 
-const graphs: Record<GraphTypes, ApprovalProcess> = {
-    empty: emptyGraph,
-    simple: simpleGraph,
-    medium: mediumGraph,
-    complex: complexGraph
-};
+const getGraphs: () => Record<GraphTypes, ApprovalProcess> = () => ({
+    empty: emptyGraph(),
+    simple: simpleGraph(),
+    medium: mediumGraph(),
+    complex: complexGraph()
+});
 
 function getUser(id: string): ApprovalUser {
     return usersMap[id];
@@ -559,7 +563,7 @@ type GraphTypes = 'empty' | 'simple' | 'medium' | 'complex';
 
 class UserDataProvider extends DataProvider<ApprovalUser> {
     fetch(params: ProviderParams): Observable<ApprovalUser[]> {
-        let result = users;
+        let result = users();
         const query = params.get('query')?.toLowerCase();
         if (query) {
             result = result.filter((u) => u.name?.toLowerCase().startsWith(query));
@@ -569,7 +573,7 @@ class UserDataProvider extends DataProvider<ApprovalUser> {
 
     getOne(params: ProviderParams): Observable<ApprovalUser & { phone: string; email: string }> {
         const id = params.get('id');
-        const found = users.find((user) => user.id === id) as ApprovalUser;
+        const found = users().find((user) => user.id === id) as ApprovalUser;
         return of({
             ...found,
             phone: Math.random().toFixed(13).toString().replace('0.', ''),
@@ -580,7 +584,7 @@ class UserDataProvider extends DataProvider<ApprovalUser> {
 
 class TeamDataProvider extends DataProvider<ApprovalTeam> {
     fetch(params: ProviderParams): Observable<ApprovalTeam[]> {
-        let result = teams;
+        let result = teams();
         const query = params.get('query')?.toLowerCase();
         if (query) {
             result = result.filter((u) => u.name?.toLowerCase().startsWith(query));

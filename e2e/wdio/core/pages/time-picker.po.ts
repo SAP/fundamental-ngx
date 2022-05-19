@@ -35,12 +35,12 @@ export class TimePickerPo extends CoreBaseComponentPo {
     hoursPoint = this.hoursColumn + '> .fd-time__wrapper ul > li';
 
     formatList = '.fd-popover__popper';
-    usFormat = '#fd-option-0';
-    frFormat = '#fd-option-1';
-    bgFormat = '#fd-option-2';
-    zhFormat = '#fd-option-3';
-    bnFormat = '#fd-option-4';
-    arFormat = '#fd-option-5';
+    usFormat = '.cdk-overlay-container ul[fd-list] fd-option:nth-child(1)';
+    frFormat = '.cdk-overlay-container ul[fd-list] fd-option:nth-child(2)';
+    bgFormat = '.cdk-overlay-container ul[fd-list] fd-option:nth-child(3)';
+    zhFormat = '.cdk-overlay-container ul[fd-list] fd-option:nth-child(4)';
+    bnFormat = '.cdk-overlay-container ul[fd-list] fd-option:nth-child(5)';
+    arFormat = '.cdk-overlay-container ul[fd-list] fd-option:nth-child(6)';
 
     openClock(): void {
         click(this.localExample + this.clockIcon);
