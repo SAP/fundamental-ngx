@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.39...v0.34.3-rc.40) (2022-05-20)
+
+
+### Features
+
+* dayjs datetime adapter package ([#7978](https://github.com/SAP/fundamental-ngx/issues/7978)) ([d4b386c](https://github.com/SAP/fundamental-ngx/commit/d4b386cb595470955ce01494e9b475918aae2bb5))
+
 ### [0.34.3-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.38...v0.34.3-rc.39) (2022-05-19)
 
 ### [0.34.3-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.37...v0.34.3-rc.38) (2022-05-19)
