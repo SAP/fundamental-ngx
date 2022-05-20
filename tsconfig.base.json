@@ -119,6 +119,7 @@
             "@fundamental-ngx/core/utils": ["libs/core/src/lib/utils/index.ts"],
             "@fundamental-ngx/core/vertical-navigation": ["libs/core/src/lib/vertical-navigation/index.ts"],
             "@fundamental-ngx/core/wizard": ["libs/core/src/lib/wizard/index.ts"],
+            "@fundamental-ngx/datetime-adapter": ["libs/datetime-adapter/src/index.ts"],
             "@fundamental-ngx/fn": ["libs/fn/src/lib/index.ts"],
             "@fundamental-ngx/fn/button": ["libs/fn/src/lib/button/index.ts"],
             "@fundamental-ngx/fn/checkbox": ["libs/fn/src/lib/checkbox/index.ts"],

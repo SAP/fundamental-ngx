@@ -1,5 +1,9 @@
 # Fundamental Moment date time adapter implementation
 
+## Moment.js status
+
+Moment.js is a legacy project, now in maintenance mode. Same applies to this adapter, which is based on Moment.js. Please consider using `@fundamental-ngx/datetime-adapter` instead.
+
 ## Description
 
 Fundamental Date Picker, Time Picker, Date Time Picker and similar components rely on provided datetime implementation (DatetimeAdapter) and datetime formats (DateTimeFormats).
