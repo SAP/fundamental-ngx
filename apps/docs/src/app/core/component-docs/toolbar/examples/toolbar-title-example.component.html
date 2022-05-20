@@ -1,3 +1,8 @@
-<fd-toolbar [hasTitle]="true">
-    <h4 class="fd-title fd-title--h4 fd-toolbar__title">H4 sized text</h4>
+<h5 fd-title>Title via Input Property</h5>
+<fd-toolbar title="H4 sized text"></fd-toolbar>
+<br />
+<h5 fd-title>Title via ng-content</h5>
+<fd-toolbar>
+    <h4 fd-title>H4 sized text with Icon</h4>
+    <fd-icon glyph="account"></fd-icon>
 </fd-toolbar>

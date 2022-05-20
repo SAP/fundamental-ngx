@@ -11,8 +11,10 @@
 
 <fd-docs-section-title id="title" componentName="toolbar"> Toolbar Title </fd-docs-section-title>
 <description>
-    When the text inside a Toolbar is set to h4, the <code class="code-snippet">[hasTitle]="true"</code> must be used as
-    seen in the exmaple below.
+    There are two ways to add a title to a toolbar component. The simplest way, when only text is needed, is to pass a
+    string to the <code>[title]</code> input. For more complex titles, such as those containing icons or other elements,
+    pass a <code>&lt;h4 fd-title&gt;</code> component along with the other elements inside the
+    <code>&lt;fd-toolbar&gt;</code> as shown in the second example below.
 </description>
 <component-example>
     <fd-toolbar-title-example></fd-toolbar-title-example>
