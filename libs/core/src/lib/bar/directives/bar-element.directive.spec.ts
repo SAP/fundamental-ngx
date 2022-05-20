@@ -49,11 +49,4 @@ describe('BarElementDirective', () => {
         fixture.detectChanges();
         expect(component.ref.nativeElement.className).toContain('fd-bar__element--full-width');
     });
-
-    it('should take into account the "isTitle" input property', () => {
-        expect(component.ref.nativeElement.className).not.toContain('fd-bar__element--title');
-        component.isTitle = true;
-        fixture.detectChanges();
-        expect(component.ref.nativeElement.className).toContain('fd-bar__element--title');
-    });
 });

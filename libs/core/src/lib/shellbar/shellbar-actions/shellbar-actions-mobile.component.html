@@ -1,0 +1,24 @@
+<div class="fd-shellbar-collapse">
+    <fd-action-sheet placement="bottom-end">
+        <fd-action-sheet-control>
+            <button fd-button glyph="overflow" class="fd-shellbar__button" [attr.aria-label]="collapsedItemMenuLabel">
+                <span *ngIf="totalNotifications" class="fd-button__badge">
+                    {{ totalNotifications }}
+                </span>
+            </button>
+        </fd-action-sheet-control>
+
+        <fd-action-sheet-body>
+            <li
+                fd-action-sheet-item
+                *ngFor="let action of shellbarActions"
+                tabindex="-1"
+                [glyph]="action.glyph"
+                [label]="action.label"
+                (click)="actionClicked(action, $event)"
+            >
+                <span *ngIf="action.notificationCount" class="fd-button__badge">{{ action.notificationCount }}</span>
+            </li>
+        </fd-action-sheet-body>
+    </fd-action-sheet>
+</div>

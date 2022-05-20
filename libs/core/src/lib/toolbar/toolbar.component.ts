@@ -1,9 +1,11 @@
 import {
+    AfterContentInit,
     AfterViewChecked,
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ContentChild,
     ContentChildren,
     ElementRef,
     forwardRef,
@@ -30,6 +32,7 @@ import {
 import { fromEvent, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, delay, distinctUntilChanged, filter, takeWhile } from 'rxjs/operators';
 import { ToolbarItemDirective } from './toolbar-item.directive';
+import { TitleToken } from '@fundamental-ngx/core/title';
 
 const ELEMENT_MARGIN = 8;
 const OVERFLOW_SPACE = 50 + 2 * ELEMENT_MARGIN;
@@ -54,7 +57,9 @@ export const enum OverflowPriorityEnum {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, AfterViewChecked, CssClassBuilder {
+export class ToolbarComponent
+    implements OnInit, AfterViewInit, OnDestroy, AfterViewChecked, CssClassBuilder, AfterContentInit
+{
     /** Property allows user to pass additional class
      */
     @Input()
@@ -80,11 +85,13 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     @Input()
     size: ToolbarSize = null;
 
-    /** Determines if toolbar contains text which size is equal to h4
-     * Default value: false
-     */
+    /** @deprecated */
     @Input()
     hasTitle = false;
+
+    /** The title for the toolbar. */
+    @Input()
+    title: string;
 
     /** Determines if toolbar should has active state (only when fdType == 'info')
      * Default value: false
@@ -117,6 +124,10 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     /** @hidden */
     @ContentChildren(forwardRef(() => ToolbarItemDirective))
     toolbarItems: QueryList<ToolbarItemDirective>;
+
+    /** @hidden */
+    @ContentChild(TitleToken)
+    titleComponent: TitleToken | null = null;
 
     /** @hidden */
     overflowVisibility: Observable<boolean> = of(false);
@@ -207,6 +218,14 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     }
 
     /** @hidden */
+    ngAfterContentInit(): void {
+        if (this.titleComponent) {
+            this.titleComponent.elementRef?.nativeElement.classList.add('fd-toolbar__title');
+            this.buildComponentCssClass();
+        }
+    }
+
+    /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
         this._alive = false;
@@ -230,7 +249,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
             `fd-toolbar--${this.fdType}`,
             `${this.active && this.fdType === 'info' ? 'fd-toolbar--active' : ''}`,
             `${this.size === 'cozy' ? 'fd-toolbar--cozy' : ''}`,
-            `${this.hasTitle ? 'fd-toolbar--title' : ''}`,
+            `${this.hasTitle || this.title || this.titleComponent ? 'fd-toolbar--title' : ''}`,
             `${this.clearBorder ? 'fd-toolbar--clear' : ''}`,
             `${this._dynamicPageHeader ? 'fd-dynamic-page__toolbar' : ''}`
         ];
