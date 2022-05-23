@@ -168,26 +168,6 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     @Output()
     readonly slideChange: EventEmitter<CarouselActiveSlides> = new EventEmitter<CarouselActiveSlides>();
 
-    /**
-     * @hidden Returns the `role` attribute of the carousel.
-     */
-    @HostBinding('attr.role')
-    role = 'region';
-
-    /**
-     * @hidden Returns the `tabIndex` of the carousel component.
-     */
-    @HostBinding('attr.tabindex')
-    get tabIndex(): number {
-        return 0;
-    }
-
-    /**
-     * @hidden Sets the overflow to auto value.
-     */
-    @HostBinding('style.overflow')
-    overflow = 'auto';
-
     /** @hidden */
     @ContentChildren(CarouselItemComponent, { descendants: true })
     slides: QueryList<CarouselItemComponent>;
@@ -199,14 +179,6 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     /** Carousel container element. */
     @ViewChild('carouselContainer')
     carouselContainer: ElementRef;
-
-    /** Carousel content container. */
-    @ViewChild('carouselContent')
-    carouselContentContainer: ElementRef;
-
-    /** Carousel slides container. */
-    @ViewChild('slidesWrapper')
-    carouselSlidesWrapper: ElementRef;
 
     /** @hidden Start index of currently active items */
     currentActiveSlidesStartIndex = 0;
@@ -227,7 +199,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     _slidesWrapperSize = 0;
 
     /** @hidden */
-    get _slidesWrapperSizePx(): string {
+    get _contentSizePx(): string {
         return this._slidesWrapperSize ? `${this._slidesWrapperSize}px` : this.width;
     }
 
