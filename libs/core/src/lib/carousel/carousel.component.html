@@ -2,9 +2,11 @@
     class="fd-carousel"
     [class.fd-carousel--no-navigation]="!navigation"
     data-ride="carousel"
+    tabindex="0"
     [style.height]="height"
     [style.width]="width"
     [attr.dir]="dir"
+    role="region"
     #carouselContainer
     (click)="_focus()"
 >

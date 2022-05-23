@@ -168,26 +168,6 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     @Output()
     readonly slideChange: EventEmitter<CarouselActiveSlides> = new EventEmitter<CarouselActiveSlides>();
 
-    /**
-     * @hidden Returns the `role` attribute of the carousel.
-     */
-    @HostBinding('attr.role')
-    role = 'region';
-
-    /**
-     * @hidden Returns the `tabIndex` of the carousel component.
-     */
-    @HostBinding('attr.tabindex')
-    get tabIndex(): number {
-        return 0;
-    }
-
-    /**
-     * @hidden Sets the overflow to auto value.
-     */
-    @HostBinding('style.overflow')
-    overflow = 'auto';
-
     /** @hidden */
     @ContentChildren(CarouselItemComponent, { descendants: true })
     slides: QueryList<CarouselItemComponent>;
