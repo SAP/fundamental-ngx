@@ -7,7 +7,7 @@ export class CarouselPo extends CoreBaseComponentPo {
 
     sectionTitle = 'fd-docs-section-title h2';
     carouselProperties = 'div fd-carousel';
-    displayedContent = 'fd-carousel div[style*=visible]';
+    displayedContent = 'fd-carousel [style*=visible]';
     displayedImg = this.displayedContent + ' img';
     navBtns = 'fd-carousel button';
     pageIndicators = 'fd-carousel .fd-carousel__page-indicator';
