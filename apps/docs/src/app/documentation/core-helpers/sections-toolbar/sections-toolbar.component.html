@@ -9,7 +9,7 @@
             [disabled]="false"
             [ngModel]="search"
             (ngModelChange)="onSearchChange($event)"
-            (addOnButtonClicked)="search = ''; onSearchChange('')"
+            (addOnButtonClicked)="onSearchChange('')"
         >
         </fd-input-group>
     </div>
