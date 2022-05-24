@@ -27,7 +27,7 @@ import { map, startWith, distinctUntilChanged, first } from 'rxjs/operators';
 
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
-import { FormStates, PopoverFillMode } from '@fundamental-ngx/core/shared';
+import { FormStates, PopoverFillMode, Nullable } from '@fundamental-ngx/core/shared';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { TokenizerComponent } from '@fundamental-ngx/core/token';
 import { ListComponent } from '@fundamental-ngx/core/list';
@@ -220,7 +220,7 @@ export class MultiInputComponent
 
     /** Max width of multi input body in PX */
     @Input()
-    bodyMaxWidth: number = null;
+    bodyMaxWidth: Nullable<number>;
 
     /** Multi Input Mobile Configuration, it's applied only, when mobile is enabled */
     @Input()

@@ -12,11 +12,7 @@
         <fd-avatar size="s" [circle]="true" ariaLabel="photo 1" image="http://picsum.photos/id/1018/400"></fd-avatar>
     </fd-popover-control>
     <fd-popover-body>
-        <ul fd-list>
-            <li fd-list-item *ngFor="let option of list">
-                <span fd-list-title>{{ option }}</span>
-            </li>
-        </ul>
+        <fd-avatar [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
     </fd-popover-body>
 </fd-popover>
 

@@ -119,7 +119,7 @@ describe('Basic Textarea', () => {
         const textareaHint = host.basicTextareaField.hint;
         expect(textareaHint).toBe('This is tooltip help');
 
-        const textareaDefaultValue = host.form.get('basicTextarea').value;
+        const textareaDefaultValue = host.form.get('basicTextarea')?.value;
         expect(textareaDefaultValue).toBe('this is a random note');
     });
 
@@ -127,12 +127,12 @@ describe('Basic Textarea', () => {
         const textareaElement = host.textareaComponent;
         textareaElement.value = 'this is a new value';
         await wait(fixture);
-        expect(host.form.get('basicTextarea').value).toBe('this is a new value');
+        expect(host.form.get('basicTextarea')?.value).toBe('this is a new value');
 
         textareaElement.value = '';
         await wait(fixture);
 
-        expect(host.form.get('basicTextarea').value).toBe('');
+        expect(host.form.get('basicTextarea')?.value).toBe('');
     });
 
     it('should submit the value', async () => {
@@ -197,7 +197,7 @@ describe('Advanced Textarea', () => {
 
         await wait(fixture);
 
-        expect(host.form.get('basicTextarea').value).toBe('abcdefgg');
+        expect(host.form.get('basicTextarea')?.value).toBe('abcdefgg');
 
         const textareaCounterElement = fixture.debugElement.query(By.css('.fd-textarea-counter'));
         const result = textareaCounterElement.nativeElement.textContent.toString().trim();
@@ -211,7 +211,7 @@ describe('Advanced Textarea', () => {
 
         await wait(fixture);
 
-        expect(host.form.get('basicTextarea').value).toBe('abc');
+        expect(host.form.get('basicTextarea')?.value).toBe('abc');
 
         const textareaCounterElement = fixture.debugElement.query(By.css('.fd-textarea-counter'));
         const result = textareaCounterElement.nativeElement.textContent.toString().trim();
@@ -222,9 +222,9 @@ describe('Advanced Textarea', () => {
         const textareaElement = host.textareaComponent;
         spyOn(textareaElement, 'setDisabledState');
 
-        host.form.get('basicTextarea').disable();
+        host.form.get('basicTextarea')?.disable();
         await wait(fixture);
-        expect(host.form.get('basicTextarea').disabled).toBe(true);
+        expect(host.form.get('basicTextarea')?.disabled).toBe(true);
         expect(textareaElement.setDisabledState).toHaveBeenCalled();
         textareaElement._targetElement.click();
         await wait(fixture);
@@ -241,7 +241,7 @@ describe('Advanced Textarea', () => {
         textareaComponent.handleBackPress(keyboardEvent);
         await fixture.whenStable();
 
-        expect(host.form.get('basicTextarea').value).toBe('abcde');
+        expect(host.form.get('basicTextarea')?.value).toBe('abcde');
     });
 
     // TODO: flaky test  https://github.com/SAP/fundamental-ngx/issues/7534

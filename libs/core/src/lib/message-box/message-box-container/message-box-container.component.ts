@@ -76,7 +76,7 @@ export class MessageBoxContainerComponent
         } else if (this.childContent instanceof TemplateRef) {
             this._createFromTemplate(this.childContent, this._templateContext());
         } else {
-            this._createFromDefaultMessageBox(this.childContent);
+            this._createFromDefaultMessageBox(this.childContent ?? null);
         }
         this._changeDetectorRef.detectChanges();
     }
@@ -87,7 +87,7 @@ export class MessageBoxContainerComponent
     }
 
     /** @hidden Load Dialog component from passed object */
-    private _createFromDefaultMessageBox(content: MessageBoxContent): void {
+    private _createFromDefaultMessageBox(content: MessageBoxContent | null): void {
         this.containerRef.clear();
         const componentFactory = this._componentFactoryResolver.resolveComponentFactory(MessageBoxDefaultComponent);
         this._componentRef = this.containerRef.createComponent<MessageBoxDefaultComponent>(componentFactory);

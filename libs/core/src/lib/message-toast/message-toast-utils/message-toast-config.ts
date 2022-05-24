@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 import { DynamicComponentConfig } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 /**
  * Configuration for opening a message toast with the MessageToastService.
@@ -18,7 +19,7 @@ export class MessageToastConfig implements DynamicComponentConfig {
     mousePersist?: boolean = false;
 
     /** Aria label for the message toast component element. */
-    ariaLabel?: string = null;
+    ariaLabel?: Nullable<string>;
 
     /** Width of the message toast. */
     width?: string;

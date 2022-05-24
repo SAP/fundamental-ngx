@@ -1,5 +1,5 @@
 <fd-multi-input
-    [dropdownValues]="dropdownValues$ | async"
+    [dropdownValues]="(dropdownValues$ | async) || []"
     placeholder="Search here..."
     [(ngModel)]="selected"
     (searchTermChange)="searchValue$.next($event)"

@@ -1,4 +1,4 @@
-export const addAndCutFloatingNumberDistortion = (value: number, step: number): number => {
+export const addAndCutFloatingNumberDistortion = (value: number | null, step: number): number => {
     value = value || 0;
     const stepDecimals = `${step}`.split('.')[1];
     const valueDecimals = `${value}`.split('.')[1];

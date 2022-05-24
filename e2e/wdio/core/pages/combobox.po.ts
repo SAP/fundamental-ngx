@@ -4,7 +4,7 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 export class ComboboxPo extends CoreBaseComponentPo {
     url = '/combobox';
 
-    standardButton = '#background-ex0 button';
+    standardButton = 'fd-combobox-example button';
     dropdownPopover = 'fd-popover-body';
     dropdownOption = 'li.fd-list__item:not(.fd-list__group-header)';
     smallText = 'div~small';
@@ -13,8 +13,8 @@ export class ComboboxPo extends CoreBaseComponentPo {
     activeInputButton = 'fd-popover-control .fd-input-group__button';
     mobileButton = '.cdk-drag-disabled button';
     mobileTitle = 'h1.fd-title--h5';
-    reactiveFormButton = '#background-ex13 button';
-    reactiveFormText = '#background-ex13 small';
+    reactiveFormButton = 'fd-combobox-forms-example button';
+    reactiveFormText = 'fd-combobox-forms-example small';
     compactInput = '.fd-input--compact';
 
     open(): void {

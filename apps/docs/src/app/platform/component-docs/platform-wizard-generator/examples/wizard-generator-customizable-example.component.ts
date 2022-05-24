@@ -24,7 +24,7 @@ export class WizardGeneratorCustomizableExampleComponent implements OnDestroy {
     @ViewChild('summaryStepTemplate') summaryStepTemplate: TemplateRef<any>;
     @ViewChild('reviewButtonTemplate') reviewButtonTemplate: TemplateRef<any>;
 
-    wizardValue: WizardGeneratorFormsValue;
+    wizardValue: WizardGeneratorFormsValue | undefined;
 
     wizardTitle: WizardTitle = {
         size: 2,
@@ -158,7 +158,7 @@ export class WizardGeneratorCustomizableExampleComponent implements OnDestroy {
                 }
             })
             .afterClosed.pipe(takeUntil(this._onDestroy$))
-            .subscribe((wizardValue: WizardGeneratorFormsValue) => {
+            .subscribe((wizardValue) => {
                 this.wizardValue = wizardValue;
             });
     }

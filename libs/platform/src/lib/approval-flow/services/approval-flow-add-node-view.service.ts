@@ -12,8 +12,8 @@ export enum VIEW_MODES {
 export class ApprovalFlowAddNodeViewService {
     onViewChange = new EventEmitter();
 
-    private currentView: VIEW_MODES;
-    private selectedTeam: ApprovalTeam;
+    private currentView?: VIEW_MODES;
+    private selectedTeam?: ApprovalTeam;
 
     get isUserDetailsMode(): boolean {
         return this.currentView === VIEW_MODES.USER_DETAILS;
@@ -31,7 +31,7 @@ export class ApprovalFlowAddNodeViewService {
         return this.currentView === VIEW_MODES.SELECT_TEAM;
     }
 
-    get team(): ApprovalTeam {
+    get team(): ApprovalTeam | undefined {
         return this.selectedTeam;
     }
 

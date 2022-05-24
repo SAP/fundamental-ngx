@@ -27,7 +27,6 @@ describe('Select component:', () => {
         overlayContainer,
         buttons,
         option,
-        options,
         displayedText
     } = selectPage;
 
@@ -46,7 +45,7 @@ describe('Select component:', () => {
             const textBefore = getText(selectModesExample + displayedText);
             click(selectModesExample + buttons);
             waitForElDisplayed(option, 4);
-            click(options(2));
+            click(option, 4);
             const textAfter = getText(selectModesExample + displayedText);
             expect(textBefore).not.toEqual(textAfter);
         });
@@ -55,7 +54,7 @@ describe('Select component:', () => {
             const textBefore = getText(selectModesExample + displayedText, 1);
             click(selectModesExample + buttons, 1);
             waitForElDisplayed(option, 4);
-            click(options(7));
+            click(option, 4);
             const textAfter = getText(selectModesExample + displayedText, 1);
             expect(textBefore).not.toEqual(textAfter);
         });
@@ -71,7 +70,7 @@ describe('Select component:', () => {
             const textBefore = getText(selectSemanticStatesExample + displayedText);
             click(selectSemanticStatesExample + buttons);
             waitForElDisplayed(option, 4);
-            click(options(18));
+            click(option, 4);
             const textAfter = getText(selectSemanticStatesExample + displayedText);
             expect(textBefore).not.toEqual(textAfter);
         });
@@ -80,7 +79,7 @@ describe('Select component:', () => {
             const textBefore = getText(selectSemanticStatesExample + displayedText, 1);
             click(selectSemanticStatesExample + buttons, 1);
             waitForElDisplayed(option, 4);
-            click(options(21));
+            click(option, 4);
             const textAfter = getText(selectSemanticStatesExample + displayedText, 1);
             expect(textBefore).not.toEqual(textAfter);
         });
@@ -89,7 +88,7 @@ describe('Select component:', () => {
             const textBefore = getText(selectSemanticStatesExample + displayedText, 2);
             click(selectSemanticStatesExample + buttons, 2);
             waitForElDisplayed(option, 4);
-            click(options(26));
+            click(option, 4);
             const textAfter = getText(selectSemanticStatesExample + displayedText, 2);
             expect(textBefore).not.toEqual(textAfter);
         });
@@ -98,7 +97,7 @@ describe('Select component:', () => {
             const textBefore = getText(selectSemanticStatesExample + displayedText, 3);
             click(selectSemanticStatesExample + buttons, 3);
             waitForElDisplayed(option, 4);
-            click(options(29));
+            click(option, 4);
             const textAfter = getText(selectSemanticStatesExample + displayedText, 3);
             expect(textBefore).not.toEqual(textAfter);
         });
@@ -109,7 +108,7 @@ describe('Select component:', () => {
             const textBefore = getText(customControlExample + displayedText);
             click(customControlExample + buttons);
             waitForElDisplayed(option, 4);
-            click(options(34));
+            click(option, 4);
             const textAfter = getText(customControlExample + displayedText);
             expect(textBefore).not.toEqual(textAfter);
         });
@@ -120,7 +119,7 @@ describe('Select component:', () => {
             const textBefore = getText(extendedOptionsExample + displayedText);
             click(extendedOptionsExample + buttons);
             waitForElDisplayed(option, 4);
-            click(options(38));
+            click(option, 4);
             const textAfter = getText(extendedOptionsExample + displayedText);
             expect(textBefore).not.toEqual(textAfter);
         });
@@ -131,7 +130,7 @@ describe('Select component:', () => {
             const textBefore = getText(mobileModeExample + displayedText);
             click(mobileModeExample + buttons);
             waitForElDisplayed(option);
-            click(options(44));
+            click(option);
             const textAfter = getText(mobileModeExample + displayedText);
             expect(textBefore).not.toEqual(textAfter);
         });
@@ -142,7 +141,7 @@ describe('Select component:', () => {
             const textBefore = getText(maxHeightExample + displayedText);
             click(maxHeightExample + buttons);
             waitForElDisplayed(option, 4);
-            click(options(47));
+            click(option, 4);
             const textAfter = getText(maxHeightExample + displayedText);
             expect(textBefore).not.toEqual(textAfter);
         });
@@ -153,7 +152,7 @@ describe('Select component:', () => {
             const textBefore = getText(addRemoveOptionExample + displayedText);
             click(addRemoveOptionExample + buttons, 2);
             waitForElDisplayed(option, 4);
-            click(options(56));
+            click(option, 4);
             const textAfter = getText(addRemoveOptionExample + displayedText);
             expect(textBefore).not.toEqual(textAfter);
         });
@@ -208,8 +207,8 @@ describe('Select component:', () => {
         it('should be able to select the option', () => {
             const textBefore = getText(programmaticControlExample + displayedText);
             click(programmaticControlExample + buttons, 3);
-            waitForElDisplayed(option, 4);
-            click(options(60));
+            waitForElDisplayed(option, 5);
+            click(option, 5);
             const textAfter = getText(programmaticControlExample + displayedText);
             expect(textBefore).not.toEqual(textAfter);
         });

@@ -90,7 +90,7 @@ export class WizardGeneratorStepComponent implements OnInit, OnDestroy, OnChange
     /**
      * @hidden
      */
-    private _formSubmitted$ = new Subject<WizardStepSubmittedForms>();
+    private _formSubmitted$ = new Subject<WizardStepSubmittedForms | null>();
 
     /**
      * @hidden
@@ -157,13 +157,13 @@ export class WizardGeneratorStepComponent implements OnInit, OnDestroy, OnChange
      */
     async onFormCreated(form: DynamicFormGroup, key: string): Promise<void> {
         this._forms[key] = {
-            title: this.item.formGroups.find((g) => g.id === key)?.title as string,
+            title: this.item.formGroups?.find((g) => g.id === key)?.title ?? '',
             form
         };
 
         await this._wizardGeneratorService.refreshStepVisibility();
 
-        if (Object.keys(this._forms).length === this.item.formGroups.length) {
+        if (Object.keys(this._forms).length === this.item.formGroups?.length) {
             await this.addComponentToParent();
             this.formsCreated.emit(this._forms);
         }
@@ -257,11 +257,11 @@ export class WizardGeneratorStepComponent implements OnInit, OnDestroy, OnChange
                         await this._wizardGeneratorService.refreshStepVisibility();
                     }
 
-                    if (revalidateForms?.length > 0) {
+                    if (revalidateForms?.length) {
                         this._wizardGeneratorService.notifyStepsToRevalidateForms(revalidateForms);
                     }
 
-                    if (refreshFormVisibility?.length > 0) {
+                    if (refreshFormVisibility?.length) {
                         await this._wizardGeneratorService.refreshFormsVisibility(refreshFormVisibility);
                     }
                 });
@@ -285,6 +285,10 @@ export class WizardGeneratorStepComponent implements OnInit, OnDestroy, OnChange
      */
     async refreshFormsVisibility(): Promise<void> {
         this._visibleFormGroupIds = {};
+
+        if (!this.item.formGroups) {
+            return;
+        }
 
         for (const formGroup of this.item.formGroups.filter((fg) => isFunction(fg.when))) {
             const result = await this._wizardGeneratorService.refreshFormVisibility(formGroup);

@@ -1,4 +1,76 @@
 
+### [0.34.3-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.39...v0.34.3-rc.40) (2022-05-20)
+
+
+### Features
+
+* dayjs datetime adapter package ([#7978](https://github.com/SAP/fundamental-ngx/issues/7978)) ([d4b386c](https://github.com/SAP/fundamental-ngx/commit/d4b386cb595470955ce01494e9b475918aae2bb5))
+
+### [0.34.3-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.38...v0.34.3-rc.39) (2022-05-19)
+
+### [0.34.3-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.37...v0.34.3-rc.38) (2022-05-19)
+
+
+### Bug Fixes
+
+* **core:** remove unused product switch control class ([#8113](https://github.com/SAP/fundamental-ngx/issues/8113)) ([349fe9d](https://github.com/SAP/fundamental-ngx/commit/349fe9dbef7fca368dd2ec81e3ba1781a564a148))
+
+### [0.34.3-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.36...v0.34.3-rc.37) (2022-05-19)
+
+
+### Bug Fixes
+
+* **core:** standard list a11y ([#7308](https://github.com/SAP/fundamental-ngx/issues/7308)) ([0712ac9](https://github.com/SAP/fundamental-ngx/commit/0712ac9a27c59669d0123e612928341229006278))
+
+### [0.34.3-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.35...v0.34.3-rc.36) (2022-05-19)
+
+
+### Bug Fixes
+
+* **platform:** date time picker form validation ([#8054](https://github.com/SAP/fundamental-ngx/issues/8054)) ([8bcec06](https://github.com/SAP/fundamental-ngx/commit/8bcec068be9bf4bb26cbae0e5b7c6429cd79ab7b))
+
+### [0.34.3-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.34...v0.34.3-rc.35) (2022-05-19)
+
+
+### Features
+
+* **platform:** table - remove extra JS logic ([#8084](https://github.com/SAP/fundamental-ngx/issues/8084)) ([112f512](https://github.com/SAP/fundamental-ngx/commit/112f5127f813acab2774cd82f00635eb3cba7cab))
+
+### [0.34.3-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.33...v0.34.3-rc.34) (2022-05-19)
+
+
+### Bug Fixes
+
+* **core:** inline-help - fix destroy behavior ([#8110](https://github.com/SAP/fundamental-ngx/issues/8110)) ([c4d6b0c](https://github.com/SAP/fundamental-ngx/commit/c4d6b0c51ef3afae2b9cc0eb4f3fce8304d075ae))
+
+### [0.34.3-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.32...v0.34.3-rc.33) (2022-05-18)
+
+
+### Bug Fixes
+
+* **core:** update popover docs to not use fd-list ([#8055](https://github.com/SAP/fundamental-ngx/issues/8055)) ([f23f0cf](https://github.com/SAP/fundamental-ngx/commit/f23f0cfee7ad748135f01be14029a619e7e37702))
+
+### [0.34.3-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.31...v0.34.3-rc.32) (2022-05-16)
+
+
+### Features
+
+* ts strict compilation rules ([#8057](https://github.com/SAP/fundamental-ngx/issues/8057)) ([70fa44a](https://github.com/SAP/fundamental-ngx/commit/70fa44af5e84d8bd0f58dc42499d3e27d3ae58e7))
+
+### [0.34.3-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.30...v0.34.3-rc.31) (2022-05-10)
+
+
+### Bug Fixes
+
+* **platform:** approval-flow - approvers menu overflow ([#8060](https://github.com/SAP/fundamental-ngx/issues/8060)) ([810d080](https://github.com/SAP/fundamental-ngx/commit/810d0808ed6d15cd0c9c1988479a03448df5d166))
+
+### [0.34.3-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.29...v0.34.3-rc.30) (2022-05-10)
+
+
+### Bug Fixes
+
+* **docs:** use injection tokens instead of plain strings ([#8066](https://github.com/SAP/fundamental-ngx/issues/8066)) ([715525c](https://github.com/SAP/fundamental-ngx/commit/715525c8dcfcc426762d95b323ea0173f13df241))
+
 ### [0.34.3-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.28...v0.34.3-rc.29) (2022-05-07)
 
 

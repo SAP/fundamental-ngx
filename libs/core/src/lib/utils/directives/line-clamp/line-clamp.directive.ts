@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
@@ -61,7 +62,7 @@ export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
      * Count lines for clamping
      */
     @Input()
-    set fdLineClampLines(value: number) {
+    set fdLineClampLines(value: Nullable<number>) {
         this._lineCount = coerceNumberProperty(value);
     }
 

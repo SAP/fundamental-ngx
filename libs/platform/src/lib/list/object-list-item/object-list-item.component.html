@@ -18,10 +18,10 @@
     >
         <ng-container *ngTemplateOutlet="selectionTemplate"> </ng-container>
         <a
-            #link
+            #linkElement
             fd-list-link
-            [routerLink]="routerLink"
-            [attr.href]="routerLink"
+            [routerLink]="link"
+            [attr.href]="link"
             [attr.aria-label]="title"
             [navigationIndicator]="navigationIndicator"
             [navigated]="navigated"

@@ -91,8 +91,8 @@ class TestComponent {
     isLoading = false;
     disabled = false;
 
-    inputValue: SearchInput;
-    submitValue: SearchInput;
+    inputValue: SearchInput | null;
+    submitValue: SearchInput | null;
     isSearchCanceled = false;
 
     @ViewChild('outsideButton') outsideButton: ElementRef<HTMLElement>;
@@ -170,7 +170,7 @@ describe('SearchFieldComponent', () => {
         textInput.triggerEventHandler('keyup', { key: 'a' });
         fixture.detectChanges();
 
-        const menuEl = overlayContainerEl.querySelector('.fd-menu');
+        const menuEl = overlayContainerEl.querySelector('.fd-menu') as Element;
         expect(menuEl.id).toContain('fdp-search-field-menu-');
     });
 
@@ -298,7 +298,7 @@ describe('SearchFieldComponent', () => {
         fixture.detectChanges();
 
         // click on category item
-        let menuEl = overlayContainerEl.querySelector('.fd-menu');
+        let menuEl = overlayContainerEl.querySelector('.fd-menu') as Element;
         let items = getDropdownItems(menuEl);
         (items[2] as HTMLElement).click();
         fixture.detectChanges();
@@ -306,7 +306,7 @@ describe('SearchFieldComponent', () => {
         expect(component._currentCategory).toEqual(CATEGORIES[2]);
         let categoryLabel = fixture.debugElement.query(By.css('.fdp-search-field__category-label'));
         expect(categoryLabel.nativeElement.innerText).toBe(CATEGORIES[2].label);
-        expect(host.inputValue.category).toBe(CATEGORIES[2].value);
+        expect(host.inputValue?.category).toBe(CATEGORIES[2].value);
 
         // click on category button
         mouseClickOnElement(button.nativeElement);
@@ -314,7 +314,7 @@ describe('SearchFieldComponent', () => {
         fixture.detectChanges();
 
         // click on category item
-        menuEl = overlayContainerEl.querySelector('.fd-menu');
+        menuEl = overlayContainerEl.querySelector('.fd-menu') as Element;
         items = getDropdownItems(menuEl);
         (items[1] as HTMLElement).click();
         fixture.detectChanges();
@@ -322,7 +322,7 @@ describe('SearchFieldComponent', () => {
         expect(component._currentCategory).toEqual(CATEGORIES[1]);
         categoryLabel = fixture.debugElement.query(By.css('.fdp-search-field__category-label'));
         expect(categoryLabel.nativeElement.innerText).toBe(CATEGORIES[1].label);
-        expect(host.inputValue.category).toBe(CATEGORIES[1].value);
+        expect(host.inputValue?.category).toBe(CATEGORIES[1].value);
     }));
 
     it('should allow user to set the size of the component', () => {
@@ -766,8 +766,8 @@ class DataSourceTestComponent implements OnInit {
     disabled = false;
     dataSource: SearchFieldDataSource<any>;
 
-    inputValue: SearchInput;
-    submitValue: SearchInput;
+    inputValue: SearchInput | null;
+    submitValue: SearchInput | null;
     isSearchCanceled = false;
 
     @ViewChild('outsideButton') outsideButton: ElementRef<HTMLElement>;

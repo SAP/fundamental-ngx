@@ -12,5 +12,5 @@ import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/cor
     ]
 })
 export class TimeOnlyHoursExampleComponent {
-    onlyHoursTime = new FdDate().setTime(12, null, null);
+    onlyHoursTime = new FdDate().setTime(12);
 }

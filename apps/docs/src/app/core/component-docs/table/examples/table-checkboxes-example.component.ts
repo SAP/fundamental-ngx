@@ -8,9 +8,9 @@ import { RangeSelector } from '@fundamental-ngx/core/utils';
 export class TableCheckboxesExampleComponent {
     private readonly _rangeSelector = new RangeSelector();
 
-    checkboxValue = false;
-    checkboxValueCompact = false;
-    checkboxValueCondensed = false;
+    checkboxValue: boolean | null = false;
+    checkboxValueCompact: boolean | null = false;
+    checkboxValueCondensed: boolean | null = false;
 
     tableRows: any[] = [
         {

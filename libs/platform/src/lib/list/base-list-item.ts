@@ -8,15 +8,14 @@ import {
     HostListener,
     Input,
     OnInit,
-    Optional,
     Output,
     TemplateRef,
     ViewChild
 } from '@angular/core';
-import { Router } from '@angular/router';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
 import { ContentDensity, KeyUtil } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
@@ -81,7 +80,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
 
     /** Description of the title*/
     @Input()
-    description: string;
+    description: Nullable<string>;
 
     /** To invert the status of secondary text*/
     @Input()
@@ -113,7 +112,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
 
     /** Used for placeing navigation Link */
     @Input()
-    link: string;
+    link: Nullable<string>;
 
     /**
      * Enabling this flag causes forcing title directive to not wrap text,
@@ -170,7 +169,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     @ViewChild('listItem', { read: ElementRef })
     listItem: ElementRef;
     /** Access child element, for checking link content*/
-    @ViewChild('link', { read: ElementRef })
+    @ViewChild('linkElement', { read: ElementRef })
     anchor: ElementRef;
     /** Access edit button*/
     @ViewChild('edit', { read: ElementRef })
@@ -210,32 +209,21 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     constructor(
         protected _changeDetectorRef: ChangeDetectorRef,
         public itemEl: ElementRef,
-        protected _listConfig: ListConfig,
-        @Optional() private router: Router
+        protected _listConfig: ListConfig
     ) {
         super(_changeDetectorRef);
     }
 
-    /** setter and getter for _link */
-    @Input('link')
-    get routerLink(): string {
-        return this.link;
-    }
-
-    set routerLink(value: string) {
-        this.link = value;
-    }
-
     /** @hidden
      * radio button selected value binded to template */
-    _selectionValue: string;
+    _selectionValue: Nullable<string>;
 
     @Input('selectionValue')
-    get selectionValue(): string {
+    get selectionValue(): Nullable<string> {
         return this._selectionValue;
     }
 
-    set selectionValue(value: string) {
+    set selectionValue(value: Nullable<string>) {
         this._selected = false;
         this._selectionValue = value;
         if (this._selectionValue !== undefined && this.selectionValue !== null) {

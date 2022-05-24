@@ -3599,6 +3599,46 @@
             },
             "tags": ["type:lib", "scope:fd"]
         },
+        "datetime-adapter": {
+            "projectType": "library",
+            "root": "libs/datetime-adapter",
+            "sourceRoot": "libs/datetime-adapter/src",
+            "prefix": "fundamental-ngx",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/datetime-adapter"],
+                    "options": {
+                        "project": "libs/datetime-adapter/ng-package.json",
+                        "updateBuildableProjectDepsInPackageJson": false
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/datetime-adapter/tsconfig.lib.prod.json"
+                        },
+                        "development": {
+                            "tsConfig": "libs/datetime-adapter/tsconfig.lib.json"
+                        }
+                    },
+                    "defaultConfiguration": "production"
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/datetime-adapter/src/test.ts",
+                        "tsConfig": "libs/datetime-adapter/tsconfig.spec.json",
+                        "karmaConfig": "libs/datetime-adapter/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["libs/datetime-adapter/src/**/*.ts", "libs/datetime-adapter/src/**/*.html"]
+                    }
+                }
+            },
+            "tags": ["type:lib", "scope:datetime-adapter"]
+        },
         "docs": {
             "root": "apps/docs/",
             "sourceRoot": "apps/docs/src",
@@ -4268,7 +4308,7 @@
                     "styleext": "scss"
                 }
             },
-            "tags": ["type:lib", "scope:moment-adapter"]
+            "tags": ["type:lib", "scope:datetime-adapter"]
         },
         "platform": {
             "projectType": "library",

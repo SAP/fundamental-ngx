@@ -178,10 +178,14 @@ export class PlatformDynamicPageDocsComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this._subscription = this._overflowHandlingService.isExampleOpened.subscribe((isExampleOpened) => {
+            const content = document.getElementById('page-content');
+            if (!content) {
+                return;
+            }
             if (isExampleOpened) {
-                document.getElementById('page-content').style.overflowY = 'hidden'; // hide the underlying page scrollbars
+                content.style.overflowY = 'hidden'; // hide the underlying page scrollbars
             } else {
-                document.getElementById('page-content').style.overflowY = '';
+                content.style.overflowY = '';
             }
         });
     }

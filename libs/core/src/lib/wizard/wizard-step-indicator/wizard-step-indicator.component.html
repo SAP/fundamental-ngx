@@ -1,5 +1,5 @@
 <ng-container *ngIf="stackedItems && stackedItems.length > 1">
-    <fd-action-sheet [compact]="compact" style="pointer-events: all">
+    <fd-action-sheet [compact]="!!compact" style="pointer-events: all">
         <fd-action-sheet-control>
             <span class="fd-wizard__step-indicator">
                 <ng-container *ngTemplateOutlet="stepIndicatorContent"></ng-container>
@@ -19,7 +19,7 @@
 </ng-container>
 
 <ng-container *ngIf="!stackedItems || stackedItems.length <= 1">
-    <span class="fd-wizard__step-indicator" (click)="stepItemClicked(stackedItems ? stackedItems[0] : null, $event)">
+    <span class="fd-wizard__step-indicator" (click)="stepItemClicked(stackedItems?.[0], $event)">
         <ng-container *ngTemplateOutlet="stepIndicatorContent"></ng-container>
     </span>
 </ng-container>

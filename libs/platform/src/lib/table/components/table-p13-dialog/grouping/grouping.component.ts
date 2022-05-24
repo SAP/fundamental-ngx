@@ -32,7 +32,7 @@ class GroupRule {
 
     constructor(
         /** Column key the rule belongs to */
-        public columnKey: string = NOT_SELECTED_OPTION_VALUE,
+        public columnKey: string | null = NOT_SELECTED_OPTION_VALUE,
         /** Show Field as Column */
         public showAsColumn = true
     ) {}
@@ -140,7 +140,7 @@ export class P13GroupingDialogComponent implements Resettable {
     private _getCollectionGroupFromGroupRules(rules = this.rules): CollectionGroup[] {
         return rules.filter(this._isRuleValid).map(
             ({ columnKey, showAsColumn }): CollectionGroup => ({
-                field: columnKey,
+                field: columnKey!,
                 showAsColumn,
                 direction: SortDirection.NONE
             })

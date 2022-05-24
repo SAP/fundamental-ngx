@@ -193,7 +193,7 @@
                     [tabindex]="0"
                     (click)="!mobile && close()"
                     (keyDown)="onItemKeyDownHandler($event, i)"
-                    [selected]="optionItem.selected"
+                    [selected]="!!optionItem.selected"
                 >
                     <fd-checkbox
                         (click)="onOptionCheckboxClicked($event, i)"
@@ -218,7 +218,7 @@
                 [tabindex]="0"
                 (click)="!mobile && onOptionClicked($event, i)"
                 (keyDown)="onItemKeyDownHandler($event, i)"
-                [selected]="optionItem.selected"
+                [selected]="!!optionItem.selected"
             >
                 <fd-checkbox
                     (click)="onOptionCheckboxClicked($event, i)"

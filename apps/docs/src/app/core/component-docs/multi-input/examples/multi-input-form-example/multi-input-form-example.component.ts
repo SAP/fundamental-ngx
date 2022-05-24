@@ -12,6 +12,7 @@ export class MultiInputFormExampleComponent {
     });
 
     isValid(): boolean {
-        return this.customForm.get('selectedValues').value && this.customForm.get('selectedValues').value.length > 0;
+        const value = this.customForm.get('selectedValues')?.value;
+        return value && value.length > 0;
     }
 }

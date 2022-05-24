@@ -10,7 +10,7 @@ export abstract class GridList<T> {
     abstract setSelectedItem(
         item: T,
         componentIndex: number,
-        action?: GridListSelectionActions,
+        action?: GridListSelectionActions | null,
         event?: MouseEvent
     ): void;
 }

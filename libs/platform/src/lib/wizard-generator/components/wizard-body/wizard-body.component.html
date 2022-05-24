@@ -12,13 +12,13 @@
                     fd-wizard-step
                     [label]="step.name"
                     [status]="step.status"
-                    [branching]="step.branching"
+                    [branching]="!!step.branching"
                     [stepClickValidator]="stepClickValidatorFn(i)"
-                    [isSummary]="step.summary"
+                    [isSummary]="!!step.summary"
                     (statusChange)="stepStatusChanged(step.id, $event)"
                     (stepClicked)="stepClicked(step.id)"
                 >
-                    <fd-wizard-step-indicator [glyph]="step.icon">
+                    <fd-wizard-step-indicator [glyph]="step.icon || null">
                         <ng-container *ngIf="!step.icon">{{ i + 1 }}</ng-container>
                     </fd-wizard-step-indicator>
                     <fd-wizard-content>

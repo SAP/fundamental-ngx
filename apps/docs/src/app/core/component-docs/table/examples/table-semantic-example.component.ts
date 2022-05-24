@@ -7,7 +7,7 @@ import { RangeSelector } from '@fundamental-ngx/core/utils';
 })
 export class TableSemanticExampleComponent {
     private readonly _rangeSelector = new RangeSelector();
-    isAllSelected = false;
+    isAllSelected: boolean | null = false;
 
     tableRows: any[] = [
         {

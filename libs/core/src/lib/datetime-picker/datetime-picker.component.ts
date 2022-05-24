@@ -20,7 +20,7 @@ import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } fro
 import { Subject, Subscription } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
-import { Placement, SpecialDayRule, FormStates } from '@fundamental-ngx/core/shared';
+import { Placement, SpecialDayRule, FormStates, Nullable } from '@fundamental-ngx/core/shared';
 import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
 import { CalendarComponent, DaysOfWeek, FdCalendarView, CalendarYearGrid } from '@fundamental-ngx/core/calendar';
 import { PopoverFormMessageService } from '@fundamental-ngx/core/form';
@@ -118,7 +118,7 @@ export class DatetimePickerComponent<D>
         this._popoverFormMessage.message = message;
     }
     /** @hidden */
-    _message: string = null;
+    _message: string | null = null;
 
     /** The trigger events that will open/close the message box.
      *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
@@ -150,7 +150,7 @@ export class DatetimePickerComponent<D>
 
     /** Current selected date. Two-way binding is supported. */
     @Input()
-    date: D;
+    date: Nullable<D>;
 
     /** Whether the popover is open. Two-way binding is supported. */
     @Input()
@@ -209,7 +209,7 @@ export class DatetimePickerComponent<D>
         return this._state;
     }
     /** @hidden */
-    private _state: FormStates = null;
+    private _state: FormStates = 'default';
 
     /**
      * Whether AddOn Button should be focusable
@@ -335,16 +335,16 @@ export class DatetimePickerComponent<D>
      * Date of the input field. Internal use.
      * For programmatic selection, use two-way binding on the date input.
      */
-    _inputFieldDate: string = null;
+    _inputFieldDate: string | null = null;
 
     /** @hidden */
     _isInvalidDateInput = false;
 
     /** @hidden The temporary Time object for use before 'OK' is pressed. Internal use. */
-    _tempTime: D;
+    _tempTime: Nullable<D>;
 
     /** @hidden The temporary CalendarDay object for use before 'OK' is pressed. Internal use. */
-    _tempDate: D;
+    _tempDate: Nullable<D>;
 
     /** @hidden */
     _meridian: boolean;
@@ -371,7 +371,7 @@ export class DatetimePickerComponent<D>
     private _touched = false;
 
     /** @hidden */
-    onChange: (value: D) => void = () => {};
+    onChange: (value: D | null) => void = () => {};
 
     /** @hidden */
     onTouched = (): void => {};
@@ -465,7 +465,7 @@ export class DatetimePickerComponent<D>
      * @hidden
      * Function that implements Validator Interface, adds validation support for forms
      */
-    validate(): { [key: string]: any } {
+    validate(): { [key: string]: any } | null {
         return this.isCurrentModelValid() && !this._isInvalidDateInput
             ? null
             : {
@@ -583,16 +583,20 @@ export class DatetimePickerComponent<D>
      * Method that is triggered when 'OK' button is pressed.
      */
     submit(): void {
-        const currentDate = this._tempDate;
-        const currentTime = this._tempTime;
+        // marking date & time as not null, errors will be caught below
+        const currentDate = this._tempDate!;
+        const currentTime = this._tempTime!;
 
-        this.date = this._dateTimeAdapter.setTime(
-            currentDate,
-            this._dateTimeAdapter.getHours(currentTime),
-            this._dateTimeAdapter.getMinutes(currentTime),
-            this._dateTimeAdapter.getSeconds(currentTime)
-        );
-
+        try {
+            this.date = this._dateTimeAdapter.setTime(
+                currentDate,
+                this._dateTimeAdapter.getHours(currentTime),
+                this._dateTimeAdapter.getMinutes(currentTime),
+                this._dateTimeAdapter.getSeconds(currentTime)
+            );
+        } catch {
+            this.date = null;
+        }
         this._isInvalidDateInput = !this.isCurrentModelValid();
 
         this._setInput(this.date);
@@ -681,17 +685,17 @@ export class DatetimePickerComponent<D>
     }
 
     /** Method that provides information if FdDateTime passed as arg has properly types and is valid */
-    private _isModelValid(date: D): boolean {
+    private _isModelValid(date: Nullable<D>): boolean {
         return this._dateTimeAdapter.isValid(date);
     }
 
-    private _setInput(dateTime: D): void {
+    private _setInput(dateTime: Nullable<D>): void {
         this._inputFieldDate = dateTime && this._isModelValid ? this._formatDateTime(dateTime) : '';
         this._changeDetRef.detectChanges();
     }
 
     /** @hidden */
-    private _refreshCurrentlyDisplayedCalendarDate(date: D): void {
+    private _refreshCurrentlyDisplayedCalendarDate(date: Nullable<D>): void {
         if (this._calendarComponent) {
             this._calendarComponent.setCurrentlyDisplayed(date);
         }
@@ -712,7 +716,7 @@ export class DatetimePickerComponent<D>
     /** @hidden */
     private _InitialiseVariablesInMessageService(): void {
         this._popoverFormMessage.init(this._inputGroupElement);
-        this._popoverFormMessage.message = this._message;
+        this._popoverFormMessage.message = this._message ?? '';
         this._popoverFormMessage.triggers = this._messageTriggers;
         this._popoverFormMessage.messageType = this._state;
     }

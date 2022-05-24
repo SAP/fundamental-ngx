@@ -55,6 +55,7 @@ describe('PaginationService', () => {
         });
 
         it('should return 0 if itemsPerPage is empty', () => {
+            // @ts-expect-error fault tolerance test
             let total = service.getTotalPages({ totalItems: 21, itemsPerPage: null });
             expect(total).toEqual(0);
             total = service.getTotalPages({ totalItems: 21, itemsPerPage: undefined });

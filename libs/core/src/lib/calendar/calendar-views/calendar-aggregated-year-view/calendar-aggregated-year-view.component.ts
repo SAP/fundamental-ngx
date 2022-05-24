@@ -21,7 +21,7 @@ import { DateTimeFormats, DATE_TIME_FORMATS, DatetimeAdapter } from '@fundamenta
 import { CalendarService } from '../../calendar.service';
 import { AggregatedYear, CalendarAggregatedYear } from '../../models/aggregated-year';
 import { CalendarYearGrid } from '../../models/calendar-year-grid';
-import { DefaultCalendarActiveCellStrategy, FocusableCalendarView } from '../../models/common';
+import { DefaultCalendarActiveCellStrategy, EscapeFocusFunction, FocusableCalendarView } from '../../models/common';
 import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
 
 @Component({
@@ -41,7 +41,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
 
     /** Function that is called when the focus would escape the element. */
     @Input()
-    focusEscapeFunction: (event: KeyboardEvent) => void;
+    focusEscapeFunction: EscapeFocusFunction;
 
     /** Parameter holding the year that is currently selected. */
     @Input()
@@ -128,7 +128,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
      * @hidden
      * Current period of years selected
      */
-    _yearsSelected: AggregatedYear;
+    _yearsSelected: AggregatedYear | null;
 
     /**
      * @hidden
@@ -411,7 +411,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
      * Returns transformed 1d array from 2d year grid.
      */
     private _getYearsList(): CalendarAggregatedYear[] {
-        return [].concat(...this._calendarYearListGrid);
+        return (<CalendarAggregatedYear[]>[]).concat(...this._calendarYearListGrid);
     }
 
     /**

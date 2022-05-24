@@ -108,10 +108,12 @@ export class SelectComponent extends BaseSelect implements AfterViewInit, AfterV
             // by default text will be overlapped, below it will help to truncate
             if (this.noWrapText) {
                 const listTitle = optionItem.querySelector('.fd-list__title');
-                const listTitleInnerHTML = listTitle.innerHTML;
-                listTitle.setAttribute('title', listTitleInnerHTML);
-                listTitle.setAttribute('aria-label', listTitleInnerHTML);
-                listTitle.classList.add('fd-list__title--no-wrap');
+                if (listTitle) {
+                    const listTitleInnerHTML = listTitle.innerHTML;
+                    listTitle.setAttribute('title', listTitleInnerHTML);
+                    listTitle.setAttribute('aria-label', listTitleInnerHTML);
+                    listTitle.classList.add('fd-list__title--no-wrap');
+                }
             }
         });
     }

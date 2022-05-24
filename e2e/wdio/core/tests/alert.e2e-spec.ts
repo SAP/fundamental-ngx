@@ -44,7 +44,7 @@ describe('Alert test suite', () => {
     }, 1);
 
     afterEach(() => {
-        refreshPage();
+        refreshPage(true);
         waitForPresent(alertPage.root);
         waitForElDisplayed(alertPage.title);
     }, 1);

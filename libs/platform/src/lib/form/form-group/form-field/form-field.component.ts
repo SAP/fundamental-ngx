@@ -42,6 +42,7 @@ import {
     ResponsiveBreakPointConfig,
     ResponsiveBreakpointsService
 } from '@fundamental-ngx/platform/shared';
+import { Nullable } from '@fundamental-ngx/core/shared';
 import {
     DefaultHorizontalFieldLayout,
     DefaultHorizontalLabelLayout,
@@ -104,7 +105,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
     /** Hint to be placed next to label */
     @Input()
-    hint: string | FieldHintOptions;
+    hint: Nullable<string | FieldHintOptions>;
 
     /**
      * @deprecated
@@ -165,7 +166,10 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         return this._columnLayout;
     }
 
-    set columnLayout(layout: ColumnLayout) {
+    set columnLayout(layout: ColumnLayout | undefined) {
+        if (!layout) {
+            return;
+        }
         this._columnLayout = layout;
         this._isColumnLayoutEnabled = true;
         this._setLayout();
@@ -179,7 +183,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         return this._labelColumnLayout;
     }
 
-    set labelColumnLayout(value: ColumnLayout) {
+    set labelColumnLayout(value: ColumnLayout | undefined) {
         if (!value) {
             return;
         }
@@ -196,7 +200,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         return this._fieldColumnLayout;
     }
 
-    set fieldColumnLayout(value: ColumnLayout) {
+    set fieldColumnLayout(value: ColumnLayout | undefined) {
         if (!value) {
             return;
         }
@@ -214,7 +218,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         return this._gapColumnLayout;
     }
 
-    set gapColumnLayout(value: ColumnLayout) {
+    set gapColumnLayout(value: ColumnLayout | undefined) {
         if (!value) {
             return;
         }
@@ -316,7 +320,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     /**
      * Child FormFieldControl
      */
-    control: FormFieldControl<any>;
+    control: FormFieldControl<any> | null;
 
     /** @hidden */
     _labelColumnLayoutClass: string;
@@ -407,7 +411,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
             return null;
         }
         return (
-            (this.formFieldExtras?.nativeElement.offsetHeight ?? 0 + this.control?.extraContentHeightPx ?? 0) || null
+            (this.formFieldExtras?.nativeElement.offsetHeight ?? 0) + (this.control?.extraContentHeightPx ?? 0) || null
         );
     }
 
@@ -418,7 +422,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     /** @hidden */
     private _gapColumnLayout$: BehaviorSubject<ColumnLayout>;
     /** @hidden */
-    private _needsInlineHelpPlaceSubscription: Subscription;
+    private _needsInlineHelpPlaceSubscription?: Subscription;
 
     /** @hidden */
     get _groupHost(): FormGroupContainer | FormFieldGroup {
@@ -429,7 +433,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
      * Will be updated during onChanges and resize, resulting correct placement of the
      * hint respecting passed configs and given breakpoint of screen.
      */
-    hintTarget: string;
+    hintTarget?: string;
 
     /** @hidden */
     private _breakPointObserver: Observable<any>;
@@ -583,7 +587,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
     /** @hidden */
     hasErrors(): boolean {
-        return this._editable && this.control?.controlInvalid;
+        return this._editable && !!this.control?.controlInvalid;
     }
 
     /**
@@ -606,7 +610,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         });
 
         // Refresh UI when value changes
-        if (formFieldControl?.ngControl) {
+        if (formFieldControl?.ngControl?.valueChanges) {
             formFieldControl.ngControl.valueChanges.pipe(takeUntil(this._destroyed$)).subscribe(() => {
                 // this.onChange.emit('valueChanges');
                 this._cd.markForCheck();
@@ -744,11 +748,12 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     /** @hidden */
     private _setLayout(): void {
         try {
-            this.columnLayout = normalizeColumnLayout(this.columnLayout, 1);
-            this._sColumnNumber = this.columnLayout['S'];
-            this._mdColumnNumber = this.columnLayout['M'];
-            this._lgColumnNumber = this.columnLayout['L'];
-            this._xlColumnNumber = this.columnLayout['XL'];
+            const normalized = normalizeColumnLayout(this.columnLayout, 1);
+            this.columnLayout = normalized;
+            this._sColumnNumber = normalized['S'];
+            this._mdColumnNumber = normalized['M'];
+            this._lgColumnNumber = normalized['L'];
+            this._xlColumnNumber = normalized['XL'];
         } catch (error) {
             this._isColumnLayoutEnabled = false;
         }
@@ -788,7 +793,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
                 placement: this.hintPlacement ? this.hintPlacement : this._defaultHintOptions.placement,
                 text: this.hint
             };
-        } else {
+        } else if (typeof this.hint === 'object') {
             this.hintOptions = {
                 ...this._defaultHintOptions,
                 placement: this.hintPlacement ? this.hintPlacement : this._defaultHintOptions.placement,

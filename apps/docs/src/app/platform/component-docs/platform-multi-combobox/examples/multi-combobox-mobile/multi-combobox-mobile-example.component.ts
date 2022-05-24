@@ -22,7 +22,7 @@ export class MultiComboboxMobileExampleComponent {
         { name: 'Spinach', type: 'Vegetables' }
     ];
 
-    selectedItems = null;
+    selectedItems = [];
 
     mobileConfig: MobileModeConfig = {
         title: 'Title',

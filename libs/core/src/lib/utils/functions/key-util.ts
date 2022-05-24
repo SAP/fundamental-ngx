@@ -67,7 +67,7 @@ export class KeyUtil {
         }
 
         if (event && keyMap.get(keyCode)) {
-            return keyMap.get(keyCode).some((alias) => alias === event.key) || keyCode === event.keyCode;
+            return keyMap.get(keyCode)?.some((alias) => alias === event.key) || keyCode === event.keyCode;
         }
 
         if (isDevMode()) {

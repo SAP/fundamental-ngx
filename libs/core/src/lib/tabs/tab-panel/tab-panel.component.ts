@@ -16,6 +16,7 @@ import { TabTitleDirective } from '../tab-utils/tab-directives';
 import { TabItemState } from '../tab-item/tab-item.directive';
 import { TabsService } from '../tabs.service';
 import { Subject } from 'rxjs';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 let tabPanelUniqueId = 0;
 
@@ -46,19 +47,19 @@ export class TabPanelComponent implements OnChanges {
 
     /** Aria-label of the tab. Also applied to the tab header. */
     @Input()
-    ariaLabel: string;
+    ariaLabel: Nullable<string>;
 
     /** Id of the element that labels the tab. Also applied to the tab header. */
     @Input()
-    ariaLabelledBy: string;
+    ariaLabelledBy: Nullable<string>;
 
     /** The title of tab, depending on mode used, it will be placed in different position */
     @Input()
-    title: string;
+    title: Nullable<string>;
 
     /** The count of tab, depending on mode used, it will be placed in different position */
     @Input()
-    count: string;
+    count: Nullable<string>;
 
     /** Glyph icon, it can be used only on  */
     @Input()
@@ -74,7 +75,7 @@ export class TabPanelComponent implements OnChanges {
 
     /** Semantic type of the tab item */
     @Input()
-    tabState?: TabItemState;
+    tabState: Nullable<TabItemState>;
 
     /** Event that is emitted when the tab panel has been opened. */
     @Output()

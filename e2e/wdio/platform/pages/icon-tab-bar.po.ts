@@ -4,16 +4,16 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 export class IconTabBarPO extends BaseComponentPo {
     url = '/icon-tab-bar';
 
-    textExample = '#background-ex0 ';
-    columnsExample = '#background-ex1 ';
-    iconOnlyExample = '#background-ex2 ';
-    iconExample = '#background-ex3 ';
-    filterExample = '#background-ex4 ';
+    textExample = 'fd-icon-tab-bar-text-type-example#textExample ';
+    columnsExample = 'fd-icon-tab-bar-text-type-example#columnsExample ';
+    iconOnlyExample = 'fd-icon-tab-bar-icon-only-type-example ';
+    iconExample = 'fd-icon-tab-bar-icon-type-example#iconExample ';
+    filterExample = 'fd-icon-tab-bar-filter-type-example ';
     processExample = 'fdp-icon-tab-bar-process-type ';
-    nestedTabsExample = '#background-ex6 ';
-    reorderingExample = '#background-ex7 ';
-    overflowingExample = '#background-ex8 ';
-    configuratablePaddingsExample = '#background-ex9 ';
+    nestedTabsExample = 'fd-icon-tab-bar-text-type-example#nestedTabsExample ';
+    reorderingExample = 'fd-icon-tab-bar-text-type-example#reorderingExample ';
+    overflowingExample = 'fd-icon-tab-bar-icon-type-example#overflowingExample ';
+    configuratablePaddingsExample = 'fd-platform-icon-tab-bar-configurable-paddings-example ';
 
     tabBarItem = '.fd-icon-tab-bar__item';
     tabBarTab = ' .fd-icon-tab-bar__tab';

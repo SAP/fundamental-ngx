@@ -6,6 +6,7 @@ import { NestedListKeyboardService } from '../nested-list-keyboard.service';
 import { NestedListStateService } from '../nested-list-state.service';
 import { NestedListDirective } from './nested-list.directive';
 import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../../utils/public_api';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 @Component({
     template: `
@@ -40,7 +41,7 @@ import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../../utils/publ
     `
 })
 class TestNestedContainerComponent {
-    compact = undefined;
+    compact: boolean | undefined = undefined;
 
     @ViewChild('level4List', { static: true, read: NestedListDirective })
     level4List: NestedListDirective;
@@ -102,6 +103,6 @@ describe('NestedListDirective', () => {
     it('should handle content density when compact input is not provided', () => {
         level1List.compact = undefined;
         level1List.ngOnInit();
-        expect(level1List.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
+        expect(level1List.compact as Nullable<boolean>).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 });

@@ -17,7 +17,7 @@ export class ThemeUrlExampleComponent implements OnDestroy {
     themes = this._themesService.themes;
     cssUrl: SafeResourceUrl;
     cssCustomUrl: SafeResourceUrl;
-    themeFromUrl: ThemeServiceOutput;
+    themeFromUrl: ThemeServiceOutput | undefined;
 
     readonly themeQueryParamName = 'customQueryParam';
 

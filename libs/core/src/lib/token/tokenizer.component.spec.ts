@@ -18,7 +18,7 @@ import { ContentDensityService, DEFAULT_CONTENT_DENSITY, RtlService } from '@fun
     `
 })
 class HostComponent {
-    compact = undefined;
+    compact: boolean | undefined = undefined;
 
     @ViewChild(TokenizerComponent) tokenizer: TokenizerComponent;
     @ViewChild(FormControlComponent) formControl: FormControlComponent;

@@ -39,7 +39,7 @@ class CardHostTestComponent {
     loaderText = 'Loading...';
 
     isLoading = false;
-    isCompact = undefined;
+    isCompact: boolean | undefined = undefined;
     cardType: CardType = 'standard';
 }
 describe('CardComponent', () => {
@@ -87,24 +87,24 @@ describe('CardComponent', () => {
 
         it('should render it in view', () => {
             const cardEl: HTMLElement = fixture.debugElement.query(By.directive(CardComponent)).nativeElement;
-            expect(cardEl.textContent.includes(host.badgeText)).toBeTruthy();
+            expect(cardEl.textContent?.includes(host.badgeText)).toBeTruthy();
         });
     });
 
     it('should render title', () => {
         const cardEl: HTMLElement = fixture.debugElement.query(By.directive(CardTitleDirective)).nativeElement;
-        expect(cardEl.textContent.includes(host.titleText)).toBeTruthy();
+        expect(cardEl.textContent?.includes(host.titleText)).toBeTruthy();
     });
 
     it('should render content', () => {
         const cardEl: HTMLElement = fixture.debugElement.query(By.directive(CardContentComponent)).nativeElement;
-        expect(cardEl.textContent.includes(host.contentText)).toBeTruthy();
+        expect(cardEl.textContent?.includes(host.contentText)).toBeTruthy();
     });
 
     /** TODO: Card footer issue #6246 */
     xit('should render footer', () => {
         const cardEl: HTMLElement = fixture.debugElement.query(By.directive(CardComponent)).nativeElement;
-        expect(cardEl.textContent.includes(host.footerText)).toBeTruthy();
+        expect(cardEl.textContent?.includes(host.footerText)).toBeTruthy();
     });
 
     describe('loader', () => {

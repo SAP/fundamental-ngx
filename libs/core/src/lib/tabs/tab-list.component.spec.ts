@@ -129,13 +129,7 @@ class TestCollapsibleTabsComponent {
     tabs: QueryList<TabPanelComponent>;
 
     maxVisibleTabs = 10;
-    _tabs = [];
-
-    constructor() {
-        for (let i = 0; i < NUMBER_OF_TABS; i++) {
-            this._tabs.push(`Tab ${i + 1}`);
-        }
-    }
+    _tabs = new Array(NUMBER_OF_TABS).fill(null).map((e, i) => `Tab ${i + 1}`);
 }
 
 describe('TabListComponent', () => {

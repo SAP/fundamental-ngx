@@ -115,7 +115,7 @@ describe('DynamicPageTitleComponent', () => {
     });
 
     it('should add tabindex to host', async () => {
-        expect(+titleHostComponentDebugElement.attributes['tabindex']).toEqual(0);
+        expect(titleHostComponentDebugElement.attributes['tabindex']).toEqual('0');
     });
 
     describe('title text', () => {

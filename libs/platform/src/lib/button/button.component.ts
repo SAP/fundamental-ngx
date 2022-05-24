@@ -9,6 +9,7 @@ import {
     Output
 } from '@angular/core';
 
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { ButtonType, GlyphPosition } from '@fundamental-ngx/core/button';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 
@@ -45,38 +46,38 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
     /** arialabel, tooltip for truncated text
      * for acccesiblity of the element */
     @Input()
-    title?: string;
+    title: Nullable<string>;
 
     /** aria-selected for acccesiblity to
      *  the native HTML button*/
     @Input()
-    ariaSelected: boolean;
+    ariaSelected: Nullable<boolean>;
 
     /** aria-disabled for acccesiblity to
      *  the native HTML button*/
     @Input()
-    ariaDisabled: boolean;
+    ariaDisabled: Nullable<boolean>;
 
     /**
      * propagate aria-expanded for accessiblity to
      * the native HTML button
      */
     @Input()
-    ariaExpanded: boolean;
+    ariaExpanded: Nullable<boolean>;
 
     /**
      * propagate aria-controls for accessiblity to
      * the native HTML button
      */
     @Input()
-    ariaControlsId: string;
+    ariaControlsId: Nullable<string>;
 
     /**
      * propagate aria-pressed for accessiblity to
      * the native HTML button
      */
     @Input()
-    ariaPressed: boolean;
+    ariaPressed: Nullable<boolean>;
 
     /** Specifies a name to
      *  the native HTML button */
@@ -86,12 +87,12 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
     /** Specifies the type to
      *  the native HTML button */
     @Input()
-    type?: string;
+    type: Nullable<string>;
 
     /** Specifies an initial value to
      *  the native HTML button */
     @Input()
-    value?: string;
+    value: Nullable<string>;
 
     /** Event sent when button is clicked */
     @Output()

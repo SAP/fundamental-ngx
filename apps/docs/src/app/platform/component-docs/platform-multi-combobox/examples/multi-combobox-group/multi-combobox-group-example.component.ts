@@ -22,7 +22,7 @@ export class MultiComboboxGroupExampleComponent {
     ];
 
     selectedItems = [this.dataSource[1]];
-    selectedItems1 = null;
+    selectedItems1 = [];
 
     onSelect(item: MultiComboboxSelectionChangeEvent): void {
         this.selectedItems = item.selectedItems;

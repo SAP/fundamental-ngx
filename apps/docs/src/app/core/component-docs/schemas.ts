@@ -1,4 +1,4 @@
-import { Schema } from '../../schema/models/schema.model';
+import { Schemas } from '../../schema/consts/schemas';
 
 // components
 import { ButtonDocsComponent } from './button/button-docs.component';
@@ -13,7 +13,7 @@ import { TimeDocsComponent } from './time/time-docs.component';
 import { SwitchDocsComponent } from './switch/switch-docs.component';
 import { SliderDocsComponent } from './slider/slider-docs.component';
 
-export const COMPONENT_SCHEMAS: { [name: string]: Schema } = {
+export const COMPONENT_SCHEMAS: Schemas = {
     button: ButtonDocsComponent.schema,
     alert: AlertDocsComponent.schema,
     inputGroup: InputGroupDocsComponent.schema,

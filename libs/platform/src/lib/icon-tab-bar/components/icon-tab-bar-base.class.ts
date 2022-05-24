@@ -89,7 +89,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     extraBtnDirective: ExtraButtonDirective;
 
     /** @hidden */
-    _selectedUid: string;
+    _selectedUid?: string;
 
     /** @hidden */
     _extraTabs: IconTabBarItem[] = [];
@@ -165,7 +165,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
                 cssClasses: [],
                 uId: index.toString(),
                 hidden: false,
-                subItems: null,
+                subItems: undefined,
                 flatIndex: flatIndexRef.value++
             };
             if (item.color) {
@@ -173,7 +173,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
             }
             result.subItems = item.subItems?.length
                 ? this._generateSubItems(item.subItems, result, flatIndexRef)
-                : null;
+                : undefined;
             return result;
         });
     }
@@ -190,7 +190,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
                 index,
                 uId: `${parent.uId}${UNIQUE_KEY_SEPARATOR}${index}`,
                 cssClasses: [],
-                subItems: null,
+                subItems: undefined,
                 flatIndex: flatIndexRef.value++,
                 parentUId: parent.uId
             };
@@ -214,8 +214,8 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     }
 
     /** @hidden */
-    _keyDownHandler(event: KeyboardEvent, tab: IconTabBarItem, currentIndex: number): void {
-        if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
+    _keyDownHandler(event: KeyboardEvent, tab: IconTabBarItem | undefined, currentIndex: number): void {
+        if (tab && KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
             event.preventDefault();
             this._selectItem(tab);
         } else if (KeyUtil.isKeyCode(event, [RIGHT_ARROW, DOWN_ARROW])) {
@@ -266,7 +266,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
      * Mapping function to resolve UI tab element to it's focusable part/descendant
      */
     protected _getTabUIElementFocusable(tabUIElement: unknown): HTMLElement | null {
-        if (typeof tabUIElement === 'object' && 'nativeElement' in tabUIElement) {
+        if (tabUIElement && typeof tabUIElement === 'object' && 'nativeElement' in tabUIElement) {
             if ((<ElementRef>tabUIElement).nativeElement instanceof HTMLElement) {
                 return (<ElementRef<HTMLElement>>tabUIElement).nativeElement;
             }

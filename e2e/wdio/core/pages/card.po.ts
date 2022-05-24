@@ -46,7 +46,7 @@ export class CardPo extends CoreBaseComponentPo {
     barChartHeader = 'fd-bar-chart-list-card-example fd-card-header';
     barChartTitle = 'fd-bar-chart-list-card-example fd-card-header h2';
     barChartCounter = 'fd-bar-chart-list-card-example fd-card-header span';
-    barChartItems = 'fd-bar-chart-list-card-example li span';
+    barChartItems = 'fd-bar-chart-list-card-example li span.fd-list__title';
     barCharBars = 'fd-bar-chart-list-card-example fd-card-bar';
 
     quickViewExampleHeader = 'fd-card-quick-view-example fd-card-header';

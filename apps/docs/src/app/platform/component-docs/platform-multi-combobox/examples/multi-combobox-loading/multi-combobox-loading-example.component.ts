@@ -24,7 +24,7 @@ const OPTIONS = [
 export class MultiComboboxLoadingExampleComponent {
     dataSource = new MultiComboBoxDataSource(new DelayedBaseDataProvider(OPTIONS));
 
-    selectedItems = null;
+    selectedItems = [];
     loading = false;
 
     onSelect(item: MultiComboboxSelectionChangeEvent): void {

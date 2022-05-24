@@ -38,7 +38,7 @@ export class SelectMobileComponent extends MobileModeBase<SelectInterface> imple
      * from mobile class can not prefix _,
      * to avoid build issues
      */
-    childContent: TemplateRef<any> = undefined;
+    childContent: TemplateRef<any> | null = null;
 
     /** @hidden */
     @ViewChild('dialogTemplate')

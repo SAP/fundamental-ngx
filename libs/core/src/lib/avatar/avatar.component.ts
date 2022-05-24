@@ -21,6 +21,7 @@ import {
     getRandomColorAccent,
     CssClassBuilder
 } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 let avatarUniqueId = 0;
 
@@ -54,16 +55,16 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     /** Aria-label for Avatar. */
     @Input()
     @HostBinding('attr.aria-label')
-    ariaLabel: string = null;
+    ariaLabel: Nullable<string> = null;
 
     /** Aria-Labelledby for element describing Avatar. */
     @Input()
     @HostBinding('attr.aria-labelledby')
-    ariaLabelledby: string = null;
+    ariaLabelledby: Nullable<string> = null;
 
     /** Localized text for label */
     @Input()
-    set label(value: string) {
+    set label(value: Nullable<string>) {
         this.ariaLabel = value || null;
         this.abbreviate = this._getAbbreviate(value);
     }
@@ -72,10 +73,10 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     @Input() size: Size = 'l';
 
     /** The glyph name. */
-    @Input() glyph: string = null;
+    @Input() glyph: Nullable<string> = null;
 
     /** The glyph name for zoom icon. */
-    @Input() zoomGlyph: string = null;
+    @Input() zoomGlyph: Nullable<string> = null;
 
     /** Whether to apply a circle style to the Avatar. */
     @Input() circle = false;
@@ -96,7 +97,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     @Input() border = false;
 
     /** A number from 1 to 10 representing the background color of the Avatar. */
-    @Input() colorAccent: ColorAccent = null;
+    @Input() colorAccent: Nullable<ColorAccent> = null;
 
     /** Whether to apply random background color to the Avatar. */
     @Input() random = false;
@@ -116,10 +117,10 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
 
     /** Background image resource: url or base64. */
     @Input()
-    set image(value: string) {
+    set image(value: Nullable<string>) {
         this._setImage(value);
     }
-    get image(): string {
+    get image(): Nullable<string> {
         return this._image;
     }
 
@@ -128,10 +129,10 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
      * Possible options: content, alt, backup, default-icon
      */
     @Input()
-    set alterIcon(value: string) {
+    set alterIcon(value: Nullable<string>) {
         this._alterIcon = value;
     }
-    get alterIcon(): string {
+    get alterIcon(): Nullable<string> {
         return this._alterIcon;
     }
 
@@ -139,10 +140,10 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
      * Only applicable when using alterIcon input property.
      */
     @Input()
-    set backupImage(value: string) {
+    set backupImage(value: Nullable<string>) {
         this._backupImage = value;
     }
-    get backupImage(): string {
+    get backupImage(): Nullable<string> {
         return this._backupImage;
     }
 
@@ -154,7 +155,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
 
     /** @hidden */
     @HostBinding('style.background-image')
-    get bgImage(): string {
+    get bgImage(): Nullable<string> {
         return this._bgImage;
     }
 
@@ -171,25 +172,25 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     }
 
     /** @hidden */
-    abbreviate: string = null;
+    abbreviate: Nullable<string> = null;
 
     /** @hidden */
-    private _image: string = null;
+    private _image: Nullable<string> = null;
 
     /** @hidden */
-    private _alterIcon: string = null;
+    private _alterIcon: Nullable<string> = null;
 
     /** @hidden */
-    private _content: ElementRef = null;
+    private _content: Nullable<ElementRef> = null;
 
     /** @hidden */
-    private _backupImage: string = null;
+    private _backupImage: Nullable<string> = null;
 
     /** @hidden */
-    private _bgImage: string = null;
+    private _bgImage: Nullable<string> = null;
 
     /** @hidden */
-    get _tabindex(): number {
+    get _tabindex(): number | null {
         return this.clickable ? 0 : null;
     }
 
@@ -248,7 +249,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     }
 
     /** @hidden Get an abbreviate from the label or return null if not fit requirements */
-    private _getAbbreviate(label: string): string | null {
+    private _getAbbreviate(label: Nullable<string>): string | null {
         if (!label || this._image) {
             return null;
         }
@@ -270,7 +271,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     }
 
     /** @hidden */
-    private _setImage(value: string): void {
+    private _setImage(value: Nullable<string>): void {
         this._image = value;
 
         if (value) {
@@ -290,8 +291,8 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     }
 
     /** @hidden */
-    private _assignBgImage(srcValue: string): void {
-        this._bgImage = `url(${srcValue})`;
+    private _assignBgImage(srcValue: Nullable<string>): void {
+        this._bgImage = srcValue ? `url(${srcValue})` : null;
     }
 
     /** @hidden */
@@ -307,7 +308,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
             const option = options[i];
 
             if (option === ALTER_ICON_OPTIONS.CONTENT) {
-                const contentValue = this._content.nativeElement.innerText;
+                const contentValue = this._content?.nativeElement.innerText;
                 if (contentValue) {
                     this.abbreviate = this._generateAbbreviation(contentValue);
                     break;

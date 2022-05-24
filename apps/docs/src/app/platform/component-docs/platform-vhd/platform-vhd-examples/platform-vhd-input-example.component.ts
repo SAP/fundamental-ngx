@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import {
     VhdDataProvider,
-    VhdValue,
     VhdValueChangeEvent,
     ValueHelpDialogDataSource
 } from '@fundamental-ngx/platform/value-help-dialog';
@@ -55,13 +54,9 @@ export class PlatformVhdInputExampleComponent implements OnInit {
     filters: FilterData[];
     dataSource: ValueHelpDialogDataSource<ExampleTestModel>;
 
-    values = {
-        single: null,
-        multi: null,
-        once: null
-    };
-    selectedValue: ExampleTestModel;
-    currentValue: VhdValue = {};
+    valuesSingle: ExampleTestModel | null = null;
+    valuesMulti: ExampleTestModel[] | null = null;
+    valuesOnce: ExampleTestModel | null = null;
 
     ngOnInit(): void {
         const data = exampleDataSource();
@@ -69,8 +64,15 @@ export class PlatformVhdInputExampleComponent implements OnInit {
         this.dataSource = new ValueHelpDialogDataSource(new VhdDataProvider(data.dataSource));
     }
 
-    valueChange($event: VhdValueChangeEvent<ExampleTestModel[]>): void {
-        this.currentValue = $event;
-        this.selectedValue = $event.selected[0];
+    vhd1ValueChange(event: VhdValueChangeEvent<ExampleTestModel>): void {
+        this.valuesSingle = event.selected[0];
+    }
+
+    vhd2ValueChange(event: VhdValueChangeEvent<ExampleTestModel[]>): void {
+        this.valuesMulti = event.selected[0];
+    }
+
+    vhd3ValueChange(event: VhdValueChangeEvent<ExampleTestModel>): void {
+        this.valuesOnce = event.selected[0];
     }
 }

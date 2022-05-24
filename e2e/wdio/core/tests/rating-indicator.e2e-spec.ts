@@ -49,7 +49,7 @@ describe('Rating indicator test suite', () => {
                 scrollIntoView(sizeRatingIndicator, i);
                 mouseHoverElement(sizeRatingIndicator, i);
                 expect(doesItExist(starsRatingDisabledMode)).toBe(true, `Size rating ${i} not have popover`);
-                refreshPage();
+                refreshPage(true);
             }
         });
 

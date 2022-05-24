@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs';
 
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { ApprovalUser } from '../interfaces';
 
 @Component({
@@ -18,7 +19,7 @@ export class ApprovalFlowUserDetailsComponent {
     user: ApprovalUser;
 
     @Input()
-    details: Observable<any>;
+    details: Nullable<Observable<any>>;
 
     @Input()
     detailsTemplate: TemplateRef<any>;

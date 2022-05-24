@@ -45,7 +45,8 @@ describe('TimelineNodeBodyComponent', () => {
             fixture.componentInstance.timelinePositionControlService,
             'calculatePositions'
         );
-        moreBtn.click();
+        expect(moreBtn).toBeDefined();
+        moreBtn?.click();
         expect(calculatePositionsSpy).toHaveBeenCalledTimes(1);
     });
 });

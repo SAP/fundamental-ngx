@@ -8,7 +8,7 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
 @Directive()
 export abstract class DialogFooterBase implements AfterContentInit {
     /** @hidden */
-    footerTemplate: TemplateRef<any>;
+    footerTemplate: TemplateRef<any> | undefined;
 
     /** @hidden */
     @ContentChildren(TemplateDirective)

@@ -1,9 +1,45 @@
-import { ElementRef, EventEmitter } from '@angular/core';
+import { coerceNumberProperty } from '@angular/cdk/coercion';
+import { Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input } from '@angular/core';
 import { KeyboardSupportItemInterface } from '@fundamental-ngx/core/utils';
+import { Subject } from 'rxjs';
 
-export class ListFocusItem implements KeyboardSupportItemInterface {
+@Directive()
+export abstract class ListFocusItem implements KeyboardSupportItemInterface {
+    /** tab index attribute */
+    @Input()
+    @HostBinding('attr.tabindex')
+    get tabindex(): number {
+        if (this._isFirstItem && isNaN(this._tabIndex as number)) {
+            return 0;
+        }
+        return this._tabIndex ?? -1;
+    }
+    set tabindex(value: number) {
+        this._tabIndex = coerceNumberProperty(value, -1);
+    }
+
+    /** @hidden */
+    readonly _focused$ = new Subject<{ focusedWithin: boolean }>();
+
+    /** @hidden */
+    readonly _clicked$ = new Subject<MouseEvent>();
+
+    /** @hidden */
+    protected _isFirstItem = false;
+
+    /** @hidden */
+    protected _tabIndex: number | undefined;
+
     /** @hidden Implementation of KeyboardSupportItemInterface */
     keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
+
+    /** @hidden */
+    @HostListener('focusin', ['$event'])
+    protected onFocus(event: FocusEvent): void {
+        this._focused$.next({
+            focusedWithin: event.target !== this.elementRef?.nativeElement
+        });
+    }
 
     constructor(readonly elementRef: ElementRef) {}
 
@@ -15,5 +51,10 @@ export class ListFocusItem implements KeyboardSupportItemInterface {
     /** @hidden */
     focus(): void {
         this.elementRef?.nativeElement?.focus();
+    }
+
+    /** @hidden */
+    setIsFirst(value: boolean): void {
+        this._isFirstItem = value;
     }
 }

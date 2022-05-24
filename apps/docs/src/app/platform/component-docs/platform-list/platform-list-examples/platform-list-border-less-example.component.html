@@ -1,12 +1,12 @@
 <h3>Imperative Approach</h3>
 <h5>Cozy Mode</h5>
-<fdp-list [noBorder]="true" [dataSource]="_dataSource">
+<fdp-list [noBorder]="true" [dataSource]="_dataSource" id="cozy-list">
     <fdp-standard-list-item *fdpItemDef="let address" [title]="address.name" [ariaLabel]="address.name">
     </fdp-standard-list-item>
 </fdp-list>
 <br /><br />
 <h5>Compact Mode</h5>
-<fdp-list [noBorder]="true" [dataSource]="_dataSource" contentDensity="compact">
+<fdp-list [noBorder]="true" [dataSource]="_dataSource" contentDensity="compact" id="compact-list">
     <fdp-standard-list-item *fdpItemDef="let address" [title]="address.name" [ariaLabel]="address.name">
     </fdp-standard-list-item>
 </fdp-list>

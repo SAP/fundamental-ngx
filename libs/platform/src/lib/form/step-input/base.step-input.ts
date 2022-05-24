@@ -4,6 +4,7 @@ import { BehaviorSubject, of } from 'rxjs';
 import { takeUntil, switchMap, map } from 'rxjs/operators';
 
 import { ContentDensity, RtlService } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { BaseInput, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
 import { StepInputConfig } from './step-input.config';
 import { addAndCutFloatingNumberDistortion, getNumberDecimalLength } from './step-input.util';
@@ -38,10 +39,10 @@ const ALIGN_INPUT_OPTIONS_LIST = [StepInputAlign.Left, StepInputAlign.Center, St
 export abstract class StepInputComponent extends BaseInput implements OnInit {
     /** Sets input value */
     @Input()
-    get value(): number {
+    get value(): Nullable<number> {
         return super.getValue();
     }
-    set value(value: number) {
+    set value(value: Nullable<number>) {
         if (value !== this._value) {
             super.setValue(value);
             this._calculateCanDecrementIncrement();
@@ -149,7 +150,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     _contentDensity: ContentDensity = this.config.contentDensity;
 
     /** @hidden */
-    _align: StepInputAlign;
+    _align: StepInputAlign | null;
 
     /** @hidden */
     private _max: number = Number.MAX_VALUE;
@@ -167,7 +168,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     private _precision: number;
 
     /** @hidden */
-    private _align$: BehaviorSubject<StepInputAlign> = new BehaviorSubject<StepInputAlign>(null);
+    private _align$ = new BehaviorSubject<StepInputAlign | null>(null);
 
     /** @hidden */
     private _pendingEnteredValue: number | Error | null = null;
@@ -355,8 +356,8 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
                     }
 
                     return this._rtlService.rtl.pipe(
-                        map((isRtl): StepInputAlign => {
-                            if (!ALIGN_INPUT_OPTIONS_LIST.includes(align)) {
+                        map((isRtl): StepInputAlign | null => {
+                            if (!ALIGN_INPUT_OPTIONS_LIST.includes(align!)) {
                                 return null;
                             }
                             if (isRtl && align === StepInputAlign.Left) {
@@ -400,7 +401,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     private _getStepValue(action: StepInputStepFunctionAction): number {
         // steFn has precedence
         if (typeof this._stepFn === 'function') {
-            const calculatedStep = this._stepFn(this._currentValue, action);
+            const calculatedStep = this._stepFn(this._currentValue ?? this.min, action);
             return calculatedStep;
         }
         return this.step;

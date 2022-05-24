@@ -75,7 +75,7 @@ describe('MenuComponent', () => {
     });
 
     it('should open/close popover', fakeAsync(() => {
-        const menuElement = (): Element => document.querySelector('[fd-menu-interactive]');
+        const menuElement = (): Element => document.querySelector('[fd-menu-interactive]') as Element;
         const openEmitterSpy = spyOn(menu.isOpenChange, 'emit');
 
         menu.open();

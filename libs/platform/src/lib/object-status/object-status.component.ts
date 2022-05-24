@@ -11,6 +11,7 @@ import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { ObjectStatus } from '@fundamental-ngx/core/object-status';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 export type IndicationColorType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 
@@ -27,7 +28,7 @@ export class ObjectStatusComponent {
      * For default Object Status omit this property
      */
     @Input()
-    status: ObjectStatus;
+    status: Nullable<ObjectStatus>;
 
     /**
      * Glyph (icon) of the Object Status.
@@ -56,11 +57,11 @@ export class ObjectStatusComponent {
 
     /** Sets control label attribute value */
     @Input()
-    label: string = null;
+    label: Nullable<string>;
 
     /** Sets control aria-label attribute value */
     @Input()
-    ariaLabel: string = null;
+    ariaLabel: Nullable<string>;
 
     /** Sets control aria-title to a string attribute value */
     @Input()

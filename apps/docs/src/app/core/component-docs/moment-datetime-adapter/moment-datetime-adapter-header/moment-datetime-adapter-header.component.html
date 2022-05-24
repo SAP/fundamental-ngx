@@ -1,4 +1,10 @@
 <header>Moment Datetime Adapter</header>
+<fd-message-strip type="warning" [dismissible]="false">
+    DEPRECATED. Since Moment library is now
+    <a href="https://momentjs.com/docs/#/-project-status/" target="_blank">considered as legacy</a>, we are deprecating
+    the MomentDatetimeAdapter in favour of Dayjs. Please use
+    <a routerLink="/core/dayjs-datetime-adapter">DayjsDatetimeAdapter</a> instead
+</fd-message-strip>
 <description>
     The Date Picker, Time Picker, Date Time Picker and similar components
     <strong>rely on provided datetime implementation</strong> (<code>DatetimeAdapter</code>) and

@@ -55,7 +55,7 @@ function generateFiles(number: number): UploadCollectionFile[] {
         const fileSize = getRandomInt(1, maxSize);
         const extension = extensions[Math.floor(Math.random() * extensions.length)];
 
-        let url: string;
+        let url: string | undefined;
 
         switch (extension) {
             case '.jpg':
@@ -68,6 +68,10 @@ function generateFiles(number: number): UploadCollectionFile[] {
             case '.xls':
                 url = 'https://file-examples-com.github.io/uploads/2017/02/file_example_XLS_10.xls';
                 break;
+        }
+
+        if (!url) {
+            continue;
         }
 
         files.push({

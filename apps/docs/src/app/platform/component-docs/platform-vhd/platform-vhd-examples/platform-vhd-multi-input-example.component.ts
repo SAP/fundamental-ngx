@@ -67,7 +67,7 @@ export class PlatformVhdMultiInputExampleComponent implements OnInit {
         this.dataSource = new ValueHelpDialogDataSource(new VhdDataProvider(data.dataSource));
     }
 
-    valueChange($event: VhdValueChangeEvent<ExampleTestModel[]>): void {
+    valueChange($event: VhdValueChangeEvent<ExampleTestModel>): void {
         this.selected = [...$event.selected];
         this._changeDetectorRef.detectChanges();
     }
@@ -81,9 +81,10 @@ export class PlatformVhdMultiInputExampleComponent implements OnInit {
         this._changeDetectorRef.detectChanges();
     }
 
-    parseFunc(value: string): Record<string, any> {
+    parseFunc(value: string): Record<string, any> | null {
         if (value && value.length) {
             return { name: value, id: Date.now() };
         }
+        return null;
     }
 }

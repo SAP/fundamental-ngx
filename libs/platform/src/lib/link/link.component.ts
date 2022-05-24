@@ -16,6 +16,7 @@ import {
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 import { IconComponent } from '@fundamental-ngx/core/icon';
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 
 export type LinkType = 'standard' | 'emphasized' | 'subtle';
@@ -34,7 +35,7 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
      * href value to Navigate to. sets href to Native anchor.
      */
     @Input()
-    href: string;
+    href: Nullable<string>;
 
     /**
      * target where navigation will happen, Default=same frame
@@ -129,7 +130,7 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
     ngOnInit(): void {
         /* if link disabled, for Avoiding tab focus and click. marking href undefined. */
         if (this.disabled) {
-            this.href = undefined;
+            this.href = null;
         }
 
         /* If link linkType===emphasized then make link emphasized type */

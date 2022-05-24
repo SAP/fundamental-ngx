@@ -9,7 +9,7 @@ class TestComponent {
     @ViewChild('componentElement', { read: ElementRef })
     ref: ElementRef;
 
-    glyph: string = null;
+    glyph: string | null = null;
 }
 
 describe('ListTitleComponent', () => {

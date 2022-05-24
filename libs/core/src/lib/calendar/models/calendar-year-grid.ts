@@ -14,4 +14,5 @@ export interface CalendarYearGrid {
 
 export interface CalendarYear extends BaseCalendarCell {
     year: number;
+    index: number;
 }

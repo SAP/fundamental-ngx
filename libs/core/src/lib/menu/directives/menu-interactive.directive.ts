@@ -1,5 +1,5 @@
 import { Directive, ElementRef, HostBinding } from '@angular/core';
-
+import { Nullable } from '@fundamental-ngx/core/shared';
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-menu-interactive]',
@@ -18,7 +18,7 @@ export class MenuInteractiveDirective {
 
     /** @hidden */
     @HostBinding('attr.aria-controls')
-    ariaControls: string = null;
+    ariaControls: Nullable<string>;
 
     /** @hidden */
     @HostBinding('class.is-selected')

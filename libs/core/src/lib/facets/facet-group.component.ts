@@ -1,5 +1,7 @@
 import { Component, ChangeDetectionStrategy, ViewEncapsulation, Input } from '@angular/core';
 
+import { Nullable } from '@fundamental-ngx/core/shared';
+
 @Component({
     selector: 'fd-facet-group',
     template: ` <ng-content select="fd-facet"></ng-content> `,
@@ -17,5 +19,5 @@ export class FacetGroupComponent {
      * the aria label for the facet group
      */
     @Input()
-    ariaLabel: string;
+    ariaLabel: Nullable<string>;
 }

@@ -25,6 +25,7 @@ import { DynamicPageWrapperDirective } from './dynamic-page-wrapper.directive';
 import { DynamicPageService } from './dynamic-page.service';
 import { addClassNameToElement, dynamicPageWidthToSize } from './utils';
 import { TabListComponent } from '@fundamental-ngx/core/tabs';
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { FlexibleColumnLayoutComponent } from '@fundamental-ngx/core/flexible-column-layout';
 
 import { asyncScheduler, fromEvent, Observable, startWith, Subject } from 'rxjs';
@@ -46,7 +47,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
 
     /** aria label for the page */
     @Input()
-    ariaLabel: string;
+    ariaLabel: Nullable<string>;
 
     /**
      * sets background for content to `list`, `transparent`, or `solid` background color.
@@ -214,7 +215,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
     }
 
     /** @hidden */
-    private _getCalculatedFullHeight(element: HTMLElement): string {
+    private _getCalculatedFullHeight(element: HTMLElement): string | null {
         if (!element) {
             return null;
         }

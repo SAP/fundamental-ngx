@@ -1,0 +1,51 @@
+<fd-docs-section-title id="simple" componentName="datetime-adapter">
+    Date Picker example with DayjsDatetimeAdapter
+</fd-docs-section-title>
+<description>
+    DateAdapter is a generic class, components such as Datepicker also need to be made generic. When working with these
+    classes (for example as a ViewChild) you should include the appropriate generic type that corresponds to the
+    DateAdapter implementation you are using. For example:
+    <br />
+    <br />
+    <code>@ViewChild(DatePickerComponent) datePicker: DatePickerComponent&lt;<strong>Dayjs</strong>&gt;</code>;
+</description>
+<component-example>
+    <fd-date-picker-dayjs-adapter-example></fd-date-picker-dayjs-adapter-example>
+</component-example>
+<code-example [exampleFiles]="datePickerDayjsAdapter"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="datetime-options" componentName="datetime-adapter">
+    Locale time zone and strict mode
+</fd-docs-section-title>
+<description>
+    By default the DayjsDatetimeAdapter creates dates in your time zone specific locale and in
+    <a href="https://day.js.org/docs/en/parse/string-format">without strict parsing</a>. You can change the default
+    behaviour by setting <code>useUtc: true</code> and <code>strict: true</code>.
+</description>
+<component-example>
+    <fd-dayjs-adapter-options-example></fd-dayjs-adapter-options-example>
+</component-example>
+<code-example [exampleFiles]="dayjsAdapterOptions"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="datetime-formats" componentName="datetime-adapter">
+    DayjsDatetimeAdapter formats
+</fd-docs-section-title>
+<description>
+    The <code>DATE_TIME_FORMATS</code> object is a collection of formats that components such as datepicker, timepicker,
+    etc. uses when parsing and displaying dates. These formats are passed through to the <code>DatetimeAdapter</code>.
+    The <code>DayjsDatetimeAdapter</code> has <code>DAYJS_DATETIME_FORMATS</code>, provided in the code of the example.
+    <br />
+    <br />
+    These formats could be customized, but be sure they are compatible with the DatetimeAdapter.
+    <br />
+    You can read more about Dayjs <a href="https://day.js.org/docs/en/parse/string-format">parsing formats</a>, and
+    <a href="https://day.js.org/docs/en/display/format">display formats</a>.
+</description>
+<component-example>
+    <fd-dayjs-datetime-formats-example></fd-dayjs-datetime-formats-example>
+</component-example>
+<code-example [exampleFiles]="dayjsDatetimeFormats"></code-example>

@@ -1,5 +1,5 @@
 <button
-    *ngIf="!graph?.columns.length && !graph?.errors"
+    *ngIf="!graph?.columns?.length && !graph?.errors"
     fd-button
     label="Add a step"
     i18n-label="@@platformApprovalAddStep"
@@ -8,7 +8,7 @@
 ></button>
 
 <button
-    *ngIf="graph?.columns.length && !isEditMode"
+    *ngIf="!!graph?.columns?.length && !isEditMode"
     fd-button
     label="Edit"
     i18n-label="@@platformApprovalEdit"

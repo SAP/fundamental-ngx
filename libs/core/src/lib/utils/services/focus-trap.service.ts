@@ -42,7 +42,7 @@ export class FocusTrapService {
 
         const trap = this.getFocusTrapInstance(id);
 
-        trap.activate();
+        trap?.activate();
     }
 
     /**
@@ -56,7 +56,7 @@ export class FocusTrapService {
 
         const trap = this.getFocusTrapInstance(id);
 
-        trap.deactivate();
+        trap?.deactivate();
 
         this._focusTrapInstances.delete(id);
     }

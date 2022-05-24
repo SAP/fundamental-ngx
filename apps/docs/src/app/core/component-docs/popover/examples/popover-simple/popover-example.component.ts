@@ -6,10 +6,4 @@ import { Component, ViewEncapsulation } from '@angular/core';
     styleUrls: ['popover-example.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class PopoverExampleComponent {
-    list1 = [
-        { text: 'Option 1', url: '#' },
-        { text: 'Option 2', url: '#' },
-        { text: 'Option 3', url: '#' }
-    ];
-}
+export class PopoverExampleComponent {}

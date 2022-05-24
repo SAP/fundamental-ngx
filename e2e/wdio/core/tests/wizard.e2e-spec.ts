@@ -208,6 +208,7 @@ describe('Wizard component test', () => {
             expect(getElementClass(mobileExample + step, i)).toContain('step--current');
             click(mobileExample + nextStep);
         }
+        refreshPage(true);
     });
 
     it('should check orientations', () => {

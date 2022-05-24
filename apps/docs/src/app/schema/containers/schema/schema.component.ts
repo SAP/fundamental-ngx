@@ -89,7 +89,10 @@ export class SchemaComponent implements OnInit, OnChanges, OnDestroy {
         const formGroup = {};
         for (const property in properties) {
             if (properties[property].type === 'object') {
-                formGroup[property] = this._constructProperties(properties[property].properties);
+                const innerProps = properties[property].properties;
+                if (innerProps) {
+                    formGroup[property] = this._constructProperties(innerProps);
+                }
             } else {
                 formGroup[property] = new FormControl();
             }

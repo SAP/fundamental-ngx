@@ -9,6 +9,7 @@ export class BusyIndicatorPo extends CoreBaseComponentPo {
     busyIndicatorLabelExample = 'fd-busy-indicator-label-example ';
     busyIndicatorExtendedExample = 'fd-busy-indicator-extended-example ';
     openBusyIndicatorButton = this.busyIndicatorExtendedExample + '.fd-button--standard';
+    hideBusyIndicatorButton = this.busyIndicatorExtendedExample + '.fd-button--emphasized';
     formName = 'input[id="name"]';
     formSurname = 'input[id="surname"]';
     formPassword = 'input[id="password"]';

@@ -20,6 +20,7 @@ import {
 import { startWith } from 'rxjs/operators';
 
 import { TabPanelComponent } from '@fundamental-ngx/core/tabs';
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 import { DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
 import { DynamicPageContentHostComponent } from './dynamic-page-content/dynamic-page-content-host.component';
@@ -50,7 +51,7 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
 
     /** aria label for the page */
     @Input()
-    ariaLabel: string;
+    ariaLabel: Nullable<string>;
 
     /** Whether or not tabs should be stacked. */
     @Input()
@@ -186,7 +187,7 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     _onSelectedTabChange(event: TabPanelComponent): void {
         const content = this.contentComponents.find((contentComponent) => contentComponent.id === event.id);
 
-        this.tabChange.emit(new DynamicPageTabChangeEvent(content, event));
+        content && this.tabChange.emit(new DynamicPageTabChangeEvent(content, event));
     }
 
     /** @hidden */

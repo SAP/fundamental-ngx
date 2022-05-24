@@ -16,12 +16,12 @@ export class MultiInputPo extends CoreBaseComponentPo {
     approveButton = '.fd-button--emphasized';
     multiSelectButton = '.custom-multi-input-select-all-bar-element button';
     mobileInputOptions = 'fd-multi-input-mobile-example .fd-token__text span';
-    displayObjectOptions = 'div#background-ex3 .fd-token__text span';
-    searchTermOptions = 'div#background-ex4 .fd-token__text span';
-    customFilterOptions = 'div#background-ex5 .fd-token__text span';
+    displayObjectOptions = 'fd-multi-input-displaywith-example .fd-token__text span';
+    searchTermOptions = 'fd-multi-input-includes-example .fd-token__text span';
+    customFilterOptions = 'fd-multi-input-filter-example .fd-token__text span';
     asyncExampleOptions = 'div#rtl-ex6 .fd-token__text span';
-    tokenOptions = 'div#background-ex8 .fd-token__text span';
-    templateOptions = 'div#background-ex9 .fd-token__text span';
+    tokenOptions = 'fd-multi-input-new-tokens-example .fd-token__text span';
+    templateOptions = 'fd-multi-input-custom-item-example .fd-token__text span';
     simpleExampleTokens = 'fd-multi-input-example fd-tokenizer fd-token';
     simpleHiddenAddonExampleTokens = 'fd-multi-input-example fd-multi-input:nth-of-type(3) fd-tokenizer fd-token';
     compactExampleTokens = 'fd-multi-input-compact-example fd-tokenizer fd-token';

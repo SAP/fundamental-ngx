@@ -521,6 +521,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'dayjs-datetime-adapter',
+                loadChildren: () =>
+                    import('./component-docs/dayjs-datetime-adapter/dayjs-datetime-adapter-docs.module').then(
+                        (m) => m.DayjsDatetimeAdapterDocsModule
+                    )
+            },
+            {
                 path: 'timeline',
                 loadChildren: () =>
                     import('./component-docs/timeline/timeline-docs.module').then((m) => m.TimelineDocsModule)

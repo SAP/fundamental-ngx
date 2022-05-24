@@ -66,7 +66,7 @@ describe('SplitButtonComponent', () => {
 
     it('should handle content init - no selected item', () => {
         spyOn(componentInstance, 'selectMenuItem');
-        componentInstance.mainActionTitle = null;
+        componentInstance.mainActionTitle = null as any;
         componentInstance.ngAfterContentInit();
         expect(componentInstance.selectMenuItem).toHaveBeenCalledWith(componentInstance.menu.menuItems.first);
         expect(componentInstance.selected).toBe(componentInstance.menu.menuItems.first);
@@ -75,7 +75,7 @@ describe('SplitButtonComponent', () => {
     it('should handle content init - selected item', () => {
         spyOn(componentInstance, 'selectMenuItem');
         componentInstance.selected = componentInstance.menu.menuItems.last;
-        componentInstance.mainActionTitle = null;
+        componentInstance.mainActionTitle = null as any;
         componentInstance.ngAfterContentInit();
         expect(componentInstance.selectMenuItem).toHaveBeenCalledWith(componentInstance.menu.menuItems.last);
         componentInstance.menu.menuItems.last.onSelect.emit();
@@ -87,7 +87,7 @@ describe('SplitButtonComponent', () => {
         const mouseEvent = new MouseEvent('click');
         spyOn(mouseEvent, 'stopPropagation');
         spyOn(componentInstance.primaryButtonClicked, 'emit');
-        componentInstance.selected = null;
+        componentInstance.selected = null as any;
         componentInstance.mainAction = {
             mainActionTitle: 'title',
             callback: createSpy()

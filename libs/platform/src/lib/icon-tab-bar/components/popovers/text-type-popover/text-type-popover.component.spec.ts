@@ -6,6 +6,7 @@ import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { TextTypePopoverComponent } from './text-type-popover.component';
 import { generateTabBarItems, generateTestConfig } from '../../../tests-helper';
 import { IconTabBarComponent } from '../../../icon-tab-bar.component';
+import { IconTabBarItem } from '../../../interfaces/icon-tab-bar-item.interface';
 
 describe('TextTypePopoverComponent', () => {
     let component: TextTypePopoverComponent;
@@ -24,7 +25,7 @@ describe('TextTypePopoverComponent', () => {
         fixture = TestBed.createComponent(TextTypePopoverComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
-        component.popover = fakePopover as PopoverComponent;
+        component.popover = fakePopover;
     });
 
     it('should generate styles for tabs', () => {
@@ -42,36 +43,35 @@ describe('TextTypePopoverComponent', () => {
         const parentConfig = generateTestConfig(10, true);
         const tabs = generateTabBarItems(parentConfig);
         component.parentTab = tabs[5];
-        component.parentTab.subItems[0].color = colorToTest;
+        const subItem = component.parentTab.subItems?.[0] as IconTabBarItem;
+        subItem.color = colorToTest;
         component.ngOnChanges({ parentTab: tabs[5] } as unknown as SimpleChanges);
 
-        const appliedStyle = component.parentTab.subItems[0].cssClasses.includes(
-            `fd-icon-tab-bar__list-item--${colorToTest}`
-        );
+        const appliedStyle = subItem.cssClasses.includes(`fd-icon-tab-bar__list-item--${colorToTest}`);
         expect(appliedStyle).toBeTruthy();
     });
 
     it('should highlight parent tab if child is selected', () => {
         component.parentTab = {
-            cssClasses: null,
+            cssClasses: [],
             index: 0,
             uId: '0',
             flatIndex: 0,
             subItems: [
                 {
-                    cssClasses: null,
+                    cssClasses: [],
                     index: 1,
                     uId: '0.1',
                     flatIndex: 1,
                     subItems: [
                         {
-                            cssClasses: null,
+                            cssClasses: [],
                             index: 2,
                             uId: '0.1.2',
                             flatIndex: 2,
                             subItems: [
                                 {
-                                    cssClasses: null,
+                                    cssClasses: [],
                                     index: 3,
                                     uId: '0.1.2.3',
                                     flatIndex: 3
@@ -112,12 +112,14 @@ describe('TextTypePopoverComponent', () => {
         component.ngOnChanges({ parentTab: tabs[5] } as unknown as SimpleChanges);
 
         const emitSpy = spyOn(component.selectedSubItem, 'emit');
-        component._selectItem(component.parentTab.subItems[0]);
+        const subItem = component.parentTab.subItems?.[0];
+        expect(subItem).toBeDefined();
+        component._selectItem(subItem!);
 
         expect(emitSpy).toHaveBeenCalled();
     });
 });
 
-const fakePopover = {
+const fakePopover: PopoverComponent = {
     close: () => null
-};
+} as any;

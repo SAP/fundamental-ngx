@@ -63,16 +63,16 @@ export class PlatformVhdBasicExampleComponent {
     filters = data.filters;
     dataSource = new ValueHelpDialogDataSource(new DelayedVhdDataProvider(data.dataSource));
 
-    actualValue: Partial<VhdValue<ExampleTestModel[]>> = {};
+    actualValue: Partial<VhdValue<ExampleTestModel>> = {};
 
-    actualItems = [];
-    formatTokenFn = ((value: Partial<VhdValue<ExampleTestModel[]>>) => {
+    actualItems: string[] = [];
+    formatTokenFn = (value: VhdValueChangeEvent<ExampleTestModel>): void => {
         this.actualItems = [
             ...(value.selected || []).map((item) => item.name),
             ...(value.conditions || []).map((item) => this.conditionDisplayFn(item))
-        ];
-    }).bind(this);
-    conditionDisplayFn = (item: VhdIncludedEntity | VhdExcludedEntity): string => {
+        ].filter((v): v is string => !!v);
+    };
+    conditionDisplayFn = (item: VhdIncludedEntity | VhdExcludedEntity): string | null => {
         let value = (() => {
             switch (item.strategy) {
                 case VhdDefineIncludeStrategy.empty:
@@ -107,7 +107,7 @@ export class PlatformVhdBasicExampleComponent {
         return value;
     };
 
-    valueChange($event: VhdValueChangeEvent<ExampleTestModel[]>): void {
+    valueChange($event: VhdValueChangeEvent<ExampleTestModel>): void {
         this.actualValue = { ...$event };
     }
 }
