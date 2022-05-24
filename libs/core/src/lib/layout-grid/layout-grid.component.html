@@ -1,0 +1,14 @@
+<ng-container *ngIf="_rowsQueryList.length; else rowWrapper">
+    <ng-template [ngTemplateOutlet]="content"></ng-template>
+</ng-container>
+
+<!-- To avoid breaking change-->
+<ng-template #rowWrapper>
+    <div fdLayoutGridRow>
+        <ng-template [ngTemplateOutlet]="content"></ng-template>
+    </div>
+</ng-template>
+
+<ng-template #content>
+    <ng-content></ng-content>
+</ng-template>
