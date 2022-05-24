@@ -148,62 +148,64 @@
             [id]="'advanced-search-' + id"
         >
             <fd-layout-grid *ngIf="!mobile || (mobile && !isOpenAdvanced)">
-                <div [fdLayoutGridCol]="12" [colMd]="12" [colLg]="mobile ? 12 : 6" [colXl]="mobile ? 12 : 6">
-                    <fdp-search-field
-                        [contentDensity]="contentDensity"
-                        [placeholder]="searchField.placeholder"
-                        [ariaLabel]="searchField.placeholder"
-                        (searchSubmit)="search()"
-                        (inputChange)="_mainSearch = $event.text"
-                    ></fdp-search-field>
-                </div>
+                <div fdLayoutGridRow>
+                    <div [fdLayoutGridCol]="12" [colMd]="12" [colLg]="mobile ? 12 : 6" [colXl]="mobile ? 12 : 6">
+                        <fdp-search-field
+                            [contentDensity]="contentDensity"
+                            [placeholder]="searchField.placeholder"
+                            [ariaLabel]="searchField.placeholder"
+                            (searchSubmit)="search()"
+                            (inputChange)="_mainSearch = $event.text"
+                        ></fdp-search-field>
+                    </div>
 
-                <div
-                    [fdLayoutGridCol]="12"
-                    [colMd]="12"
-                    [colLg]="mobile ? 12 : 6"
-                    [colXl]="mobile ? 12 : 6"
-                    *ngIf="_hasAdvanced"
-                    class="fdp-value-help-dialog__advanced-actions"
-                >
-                    <fd-toolbar [clearBorder]="true">
-                        <fd-toolbar-spacer></fd-toolbar-spacer>
-                        <button
-                            fd-toolbar-item
-                            fd-button
-                            fdType="transparent"
-                            *ngIf="_hasAdvanced"
-                            [label]="
-                                mobile
-                                    ? searchField.advancedSearchLabel
-                                    : isOpenAdvanced
-                                    ? searchField.hideAdvancedSearchLabel
-                                    : searchField.showAdvancedSearchLabel
-                            "
-                            [compact]="contentDensity | isCompactDensity"
-                            (click)="toggleAdvancedSearch()"
-                            [attr.aria-label]="
-                                mobile
-                                    ? searchField.advancedSearchLabel
-                                    : isOpenAdvanced
-                                    ? searchField.hideAdvancedSearchLabel
-                                    : searchField.showAdvancedSearchLabel
-                            "
-                            i18n-aria-label="@@platformI18nValueHelpDialog.filter.Button"
-                        ></button>
-                        <button
-                            fd-toolbar-item
-                            type="submit"
-                            fd-button
-                            i18n-label="@@platformI18nValueHelpDialog.Search.Button"
-                            label="Go"
-                            fdType="emphasized"
-                            [compact]="contentDensity | isCompactDensity"
-                            aria-label="Go"
-                            i18n-aria-label="@@platformI18nValueHelpDialog.Search.Button"
-                            (click)="filter()"
-                        ></button>
-                    </fd-toolbar>
+                    <div
+                        [fdLayoutGridCol]="12"
+                        [colMd]="12"
+                        [colLg]="mobile ? 12 : 6"
+                        [colXl]="mobile ? 12 : 6"
+                        *ngIf="_hasAdvanced"
+                        class="fdp-value-help-dialog__advanced-actions"
+                    >
+                        <fd-toolbar [clearBorder]="true">
+                            <fd-toolbar-spacer></fd-toolbar-spacer>
+                            <button
+                                fd-toolbar-item
+                                fd-button
+                                fdType="transparent"
+                                *ngIf="_hasAdvanced"
+                                [label]="
+                                    mobile
+                                        ? searchField.advancedSearchLabel
+                                        : isOpenAdvanced
+                                        ? searchField.hideAdvancedSearchLabel
+                                        : searchField.showAdvancedSearchLabel
+                                "
+                                [compact]="contentDensity | isCompactDensity"
+                                (click)="toggleAdvancedSearch()"
+                                [attr.aria-label]="
+                                    mobile
+                                        ? searchField.advancedSearchLabel
+                                        : isOpenAdvanced
+                                        ? searchField.hideAdvancedSearchLabel
+                                        : searchField.showAdvancedSearchLabel
+                                "
+                                i18n-aria-label="@@platformI18nValueHelpDialog.filter.Button"
+                            ></button>
+                            <button
+                                fd-toolbar-item
+                                type="submit"
+                                fd-button
+                                i18n-label="@@platformI18nValueHelpDialog.Search.Button"
+                                label="Go"
+                                fdType="emphasized"
+                                [compact]="contentDensity | isCompactDensity"
+                                aria-label="Go"
+                                i18n-aria-label="@@platformI18nValueHelpDialog.Search.Button"
+                                (click)="filter()"
+                            ></button>
+                        </fd-toolbar>
+                    </div>
                 </div>
             </fd-layout-grid>
             <div
@@ -215,50 +217,52 @@
                 <fd-layout-grid
                     [class.fdp-value-help-dialog__with-toggle-all]="filters.length > maxShownInitialFilters"
                 >
-                    <ng-container
-                        *ngFor="
-                            let filter of _displayedFilters | slice: 0:shownFilterCount + 1;
-                            trackBy: _trackByFilterFn
-                        "
-                    >
-                        <ng-container *ngIf="filter.advanced">
-                            <div [fdLayoutGridCol]="12" [colMd]="12" [colLg]="6" [colXl]="3">
-                                <label class="fd-form-group__header" fd-form-label [for]="'input' + filter.key"
-                                    >{{ filter.label }}:</label
-                                >
-                                <input
-                                    [(ngModel)]="filter.value"
-                                    fd-form-control
-                                    [compact]="contentDensity | isCompactDensity"
-                                    type="text"
-                                    [name]="'search-by-' + filter.label"
-                                    [id]="'input' + filter.key"
-                                />
-                            </div>
-                        </ng-container>
-                    </ng-container>
-
-                    <div
-                        colGrow
-                        [fdLayoutGridCol]="12"
-                        [colMd]="12"
-                        [colLg]="6"
-                        [colXl]="3"
-                        *ngIf="filters.length > maxShownInitialFilters"
-                        class="fdp-value-help-dialog__toggle-filters"
-                    >
-                        <button
-                            fd-button
-                            fdType="transparent"
-                            [compact]="contentDensity | isCompactDensity"
-                            (click)="toggleShownFilters()"
-                            i18n-label="@@platformI18nValueHelpDialog.ShowAllFilters.Button"
-                            [label]="
-                                isShowAllFilters
-                                    ? searchField.hideAllAdvancedSearchLabel
-                                    : searchField.showAllAdvancedSearchLabel
+                    <div fdLayoutGridRow>
+                        <ng-container
+                            *ngFor="
+                                let filter of _displayedFilters | slice: 0:shownFilterCount + 1;
+                                trackBy: _trackByFilterFn
                             "
-                        ></button>
+                        >
+                            <ng-container *ngIf="filter.advanced">
+                                <div [fdLayoutGridCol]="12" [colMd]="12" [colLg]="6" [colXl]="3">
+                                    <label class="fd-form-group__header" fd-form-label [for]="'input' + filter.key"
+                                        >{{ filter.label }}:</label
+                                    >
+                                    <input
+                                        [(ngModel)]="filter.value"
+                                        fd-form-control
+                                        [compact]="contentDensity | isCompactDensity"
+                                        type="text"
+                                        [name]="'search-by-' + filter.label"
+                                        [id]="'input' + filter.key"
+                                    />
+                                </div>
+                            </ng-container>
+                        </ng-container>
+
+                        <div
+                            colGrow
+                            [fdLayoutGridCol]="12"
+                            [colMd]="12"
+                            [colLg]="6"
+                            [colXl]="3"
+                            *ngIf="filters.length > maxShownInitialFilters"
+                            class="fdp-value-help-dialog__toggle-filters"
+                        >
+                            <button
+                                fd-button
+                                fdType="transparent"
+                                [compact]="contentDensity | isCompactDensity"
+                                (click)="toggleShownFilters()"
+                                i18n-label="@@platformI18nValueHelpDialog.ShowAllFilters.Button"
+                                [label]="
+                                    isShowAllFilters
+                                        ? searchField.hideAllAdvancedSearchLabel
+                                        : searchField.showAllAdvancedSearchLabel
+                                "
+                            ></button>
+                        </div>
                     </div>
                 </fd-layout-grid>
             </div>

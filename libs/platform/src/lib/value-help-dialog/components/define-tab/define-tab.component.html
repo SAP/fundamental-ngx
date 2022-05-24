@@ -10,143 +10,147 @@
 </h5>
 <ng-container *ngFor="let item of _conditions; trackBy: _trackByKeyAndType; index as i">
     <fd-layout-grid class="condition-row" [noGap]="true">
-        <div [fdLayoutGridCol]="5">
-            <label id="CONDITIONPANEL_OPERATOR_LABEL" fd-form-label class="fdp-value-help-dialog__hidden_label">
-                CONDITIONPANEL_OPERATOR_LABEL</label
-            >
-            <label [id]="selectedId" fd-form-label class="fdp-value-help-dialog__hidden_label">
-                selected value {{ item.strategy }}</label
-            >
-            <fd-select
-                class="vhd-condition-filters"
+        <div fdLayoutGridRow>
+            <div [fdLayoutGridCol]="5">
+                <label id="CONDITIONPANEL_OPERATOR_LABEL" fd-form-label class="fdp-value-help-dialog__hidden_label">
+                    CONDITIONPANEL_OPERATOR_LABEL</label
+                >
+                <label [id]="selectedId" fd-form-label class="fdp-value-help-dialog__hidden_label">
+                    selected value {{ item.strategy }}</label
+                >
+                <fd-select
+                    class="vhd-condition-filters"
+                    fdLayoutGridCol
+                    colGrow
+                    [class.fd-select-custom-class]="false"
+                    #sttr
+                    [compact]="contentDensity | isCompactDensity"
+                    [controlTemplate]="customSelectTemplate"
+                    [name]="uid + '-' + type + '-strategy-' + item.id"
+                    [(ngModel)]="item.strategy"
+                    (valueChange)="_filterChanged()"
+                    role="combobox"
+                    aria-roledescription="select"
+                    aria-haspopup="listbox"
+                    [ariaLabelledBy]="titleId + ' ' + 'CONDITIONPANEL_OPERATOR_LABEL' + ' ' + selectedId"
+                >
+                    <ng-container *ngIf="_includeStrategy.length">
+                        <li fd-list-group-header>Include</li>
+                        <fd-option *ngFor="let strategy of _includeStrategy" [value]="strategy.key">
+                            <ng-container
+                                [ngTemplateOutlet]="conditionStrategyOption"
+                                [ngTemplateOutletContext]="{ type: _defineTypes.include, strategy: strategy }"
+                            ></ng-container>
+                        </fd-option>
+                    </ng-container>
+                    <ng-container *ngIf="_excludeStrategy.length">
+                        <li fd-list-group-header>Exclude</li>
+                        <fd-option *ngFor="let strategy of _excludeStrategy" [value]="strategy.key">
+                            <ng-container
+                                [ngTemplateOutlet]="conditionStrategyOption"
+                                [ngTemplateOutletContext]="{ type: _defineTypes.exclude, strategy: strategy }"
+                            ></ng-container>
+                        </fd-option>
+                    </ng-container>
+                </fd-select>
+            </div>
+            <div
                 fdLayoutGridCol
                 colGrow
-                [class.fd-select-custom-class]="false"
-                #sttr
-                [compact]="contentDensity | isCompactDensity"
-                [controlTemplate]="customSelectTemplate"
-                [name]="uid + '-' + type + '-strategy-' + item.id"
-                [(ngModel)]="item.strategy"
-                (valueChange)="_filterChanged()"
-                role="combobox"
-                aria-roledescription="select"
-                aria-haspopup="listbox"
-                [ariaLabelledBy]="titleId + ' ' + 'CONDITIONPANEL_OPERATOR_LABEL' + ' ' + selectedId"
+                *ngIf="
+                    item.strategy !== _strategyIncludeValues.empty && item.strategy !== _strategyExcludeValues.not_empty
+                "
             >
-                <ng-container *ngIf="_includeStrategy.length">
-                    <li fd-list-group-header>Include</li>
-                    <fd-option *ngFor="let strategy of _includeStrategy" [value]="strategy.key">
-                        <ng-container
-                            [ngTemplateOutlet]="conditionStrategyOption"
-                            [ngTemplateOutletContext]="{ type: _defineTypes.include, strategy: strategy }"
-                        ></ng-container>
-                    </fd-option>
-                </ng-container>
-                <ng-container *ngIf="_excludeStrategy.length">
-                    <li fd-list-group-header>Exclude</li>
-                    <fd-option *ngFor="let strategy of _excludeStrategy" [value]="strategy.key">
-                        <ng-container
-                            [ngTemplateOutlet]="conditionStrategyOption"
-                            [ngTemplateOutletContext]="{ type: _defineTypes.exclude, strategy: strategy }"
-                        ></ng-container>
-                    </fd-option>
-                </ng-container>
-            </fd-select>
-        </div>
-        <div
-            fdLayoutGridCol
-            colGrow
-            *ngIf="item.strategy !== _strategyIncludeValues.empty && item.strategy !== _strategyExcludeValues.not_empty"
-        >
-            <div fdLayoutGridRow>
-                <ng-container *ngIf="item.strategy === _strategyIncludeValues.between; else valueIncludeTemplate">
-                    <div fdLayoutGridCol colGrow>
-                        <fd-form-input-message-group [triggers]="['focusin', 'focusout']">
-                            <input
-                                fd-form-control
-                                fdp-condition-count-message
-                                [maxCharacters]="_rules.maxCharactersHintCount"
-                                type="text"
-                                i18n-placeholder="@@platformI18nValueHelpDialog.Define.Condition.FromPlaceholder"
-                                placeholder="from"
-                                required
-                                [compact]="contentDensity | isCompactDensity"
-                                [state]="fromModel.invalid ? 'error' : null"
-                                [name]="uid + '-' + type + '-from-' + item.id"
-                                (blur)="_validateConditionValue(item, [!!fromModel.valid, !!toModel.valid])"
-                                #fromModel="ngModel"
-                                [(ngModel)]="item.value"
-                            />
-                            <ng-container
-                                [ngTemplateOutlet]="countError"
-                                [ngTemplateOutletContext]="{ $implicit: item.value?.length }"
-                            ></ng-container>
-                        </fd-form-input-message-group>
-                    </div>
-                    <div fdLayoutGridCol colGrow>
-                        <fd-form-input-message-group [triggers]="['focusin', 'focusout']">
-                            <input
-                                fd-form-control
-                                fdp-condition-count-message
-                                [maxCharacters]="_rules.maxCharactersHintCount"
-                                type="text"
-                                i18n-placeholder="@@platformI18nValueHelpDialog.Define.Condition.ToPlaceholder"
-                                placeholder="to"
-                                required
-                                [compact]="contentDensity | isCompactDensity"
-                                [state]="toModel.invalid ? 'error' : null"
-                                [name]="uid + '-' + type + '-to-' + item.id"
-                                (blur)="_validateConditionValue(item, [!!fromModel.valid, !!toModel.valid])"
-                                #toModel="ngModel"
-                                [(ngModel)]="item.valueTo"
-                            />
-                            <ng-container
-                                [ngTemplateOutlet]="countError"
-                                [ngTemplateOutletContext]="{ $implicit: item.valueTo?.length }"
-                            ></ng-container>
-                        </fd-form-input-message-group>
-                    </div>
-                </ng-container>
-                <ng-template #valueIncludeTemplate>
-                    <div fdLayoutGridCol colGrow>
-                        <fd-form-input-message-group>
-                            <input
-                                fd-form-control
-                                fdp-condition-count-message
-                                [maxCharacters]="_rules.maxCharactersHintCount"
-                                type="text"
-                                i18n-placeholder="@@platformI18nValueHelpDialog.Define.Condition.ValuePlaceholder"
-                                placeholder="value"
-                                [compact]="contentDensity | isCompactDensity"
-                                [state]="valueModel.invalid ? 'error' : null"
-                                [name]="uid + '-' + type + '-value-' + item.id"
-                                (blur)="_validateConditionValue(item, !!valueModel.valid)"
-                                #valueModel="ngModel"
-                                [(ngModel)]="item.value"
-                            />
-                            <ng-container *ngIf="valueModel.invalid">
+                <div fdLayoutGridRow>
+                    <ng-container *ngIf="item.strategy === _strategyIncludeValues.between; else valueIncludeTemplate">
+                        <div fdLayoutGridCol colGrow>
+                            <fd-form-input-message-group [triggers]="['focusin', 'focusout']">
+                                <input
+                                    fd-form-control
+                                    fdp-condition-count-message
+                                    [maxCharacters]="_rules.maxCharactersHintCount"
+                                    type="text"
+                                    i18n-placeholder="@@platformI18nValueHelpDialog.Define.Condition.FromPlaceholder"
+                                    placeholder="from"
+                                    required
+                                    [compact]="contentDensity | isCompactDensity"
+                                    [state]="fromModel.invalid ? 'error' : null"
+                                    [name]="uid + '-' + type + '-from-' + item.id"
+                                    (blur)="_validateConditionValue(item, [!!fromModel.valid, !!toModel.valid])"
+                                    #fromModel="ngModel"
+                                    [(ngModel)]="item.value"
+                                />
                                 <ng-container
                                     [ngTemplateOutlet]="countError"
                                     [ngTemplateOutletContext]="{ $implicit: item.value?.length }"
                                 ></ng-container>
-                            </ng-container>
-                        </fd-form-input-message-group>
-                    </div>
-                </ng-template>
+                            </fd-form-input-message-group>
+                        </div>
+                        <div fdLayoutGridCol colGrow>
+                            <fd-form-input-message-group [triggers]="['focusin', 'focusout']">
+                                <input
+                                    fd-form-control
+                                    fdp-condition-count-message
+                                    [maxCharacters]="_rules.maxCharactersHintCount"
+                                    type="text"
+                                    i18n-placeholder="@@platformI18nValueHelpDialog.Define.Condition.ToPlaceholder"
+                                    placeholder="to"
+                                    required
+                                    [compact]="contentDensity | isCompactDensity"
+                                    [state]="toModel.invalid ? 'error' : null"
+                                    [name]="uid + '-' + type + '-to-' + item.id"
+                                    (blur)="_validateConditionValue(item, [!!fromModel.valid, !!toModel.valid])"
+                                    #toModel="ngModel"
+                                    [(ngModel)]="item.valueTo"
+                                />
+                                <ng-container
+                                    [ngTemplateOutlet]="countError"
+                                    [ngTemplateOutletContext]="{ $implicit: item.valueTo?.length }"
+                                ></ng-container>
+                            </fd-form-input-message-group>
+                        </div>
+                    </ng-container>
+                    <ng-template #valueIncludeTemplate>
+                        <div fdLayoutGridCol colGrow>
+                            <fd-form-input-message-group>
+                                <input
+                                    fd-form-control
+                                    fdp-condition-count-message
+                                    [maxCharacters]="_rules.maxCharactersHintCount"
+                                    type="text"
+                                    i18n-placeholder="@@platformI18nValueHelpDialog.Define.Condition.ValuePlaceholder"
+                                    placeholder="value"
+                                    [compact]="contentDensity | isCompactDensity"
+                                    [state]="valueModel.invalid ? 'error' : null"
+                                    [name]="uid + '-' + type + '-value-' + item.id"
+                                    (blur)="_validateConditionValue(item, !!valueModel.valid)"
+                                    #valueModel="ngModel"
+                                    [(ngModel)]="item.value"
+                                />
+                                <ng-container *ngIf="valueModel.invalid">
+                                    <ng-container
+                                        [ngTemplateOutlet]="countError"
+                                        [ngTemplateOutletContext]="{ $implicit: item.value?.length }"
+                                    ></ng-container>
+                                </ng-container>
+                            </fd-form-input-message-group>
+                        </div>
+                    </ng-template>
+                </div>
             </div>
-        </div>
-        <div class="action-col" fdLayoutGridCol colGrow>
-            <button
-                fd-button
-                i18n-aria-label="@@platformI18nValueHelpDialog.Condition.RemoveLabel"
-                ariaLabel="Remove Define Condition"
-                fdType="transparent"
-                glyph="decline"
-                [compact]="contentDensity | isCompactDensity"
-                title="Remove Define Condition"
-                i18n-title="@@platformI18nValueHelpDialog.defineTab.removeButton"
-                (click)="removeCondition(i)"
-            ></button>
+            <div class="action-col" fdLayoutGridCol colGrow>
+                <button
+                    fd-button
+                    i18n-aria-label="@@platformI18nValueHelpDialog.Condition.RemoveLabel"
+                    ariaLabel="Remove Define Condition"
+                    fdType="transparent"
+                    glyph="decline"
+                    [compact]="contentDensity | isCompactDensity"
+                    title="Remove Define Condition"
+                    i18n-title="@@platformI18nValueHelpDialog.defineTab.removeButton"
+                    (click)="removeCondition(i)"
+                ></button>
+            </div>
         </div>
     </fd-layout-grid>
 </ng-container>
