@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.40...v0.34.3-rc.41) (2022-05-24)
+
+
+### Bug Fixes
+
+* **docs:** reset component search results when X clicked ([#8120](https://github.com/SAP/fundamental-ngx/issues/8120)) ([ce6e2af](https://github.com/SAP/fundamental-ngx/commit/ce6e2affb7d6cba292c152f9d5fea5bc611fb329))
+
 ### [0.34.3-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.39...v0.34.3-rc.40) (2022-05-20)
 
 
