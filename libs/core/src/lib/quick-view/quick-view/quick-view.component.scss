@@ -2,6 +2,5 @@
 @import '~fundamental-styles/dist/quick-view';
 
 .fd-popover__popper .fd-quick-view__content {
-    border-bottom-left-radius: var(--sapElement_BorderCornerRadius);
-    border-bottom-right-radius: var(--sapElement_BorderCornerRadius);
+    border-radius: var(--sapElement_BorderCornerRadius);
 }
