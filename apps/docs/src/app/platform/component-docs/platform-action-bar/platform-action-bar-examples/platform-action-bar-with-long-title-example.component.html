@@ -1,6 +1,8 @@
 <fdp-action-bar
     contentDensity="compact"
-    title="A Very Long Page Title Which Should Be Truncated at Some Point with a Small Enough Page Width and a Long Enough Text String"
+    [title]="
+        'A Very Long Page Title Which Should Be Truncated at Some Point with a Small Enough Page Width and a Long Enough Text String'
+    "
     [showBackButton]="true"
     description="This Action Bar description should be composed with enough text to span the entire width of the Action Bar plus a good amount more such that it will force the Action Bar to truncate the text to a more managable size but not so much that it looses its meaning."
 >
