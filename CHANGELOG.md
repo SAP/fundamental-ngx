@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.42...v0.34.3-rc.43) (2022-05-25)
+
+
+### Bug Fixes
+
+* **platform:** allow dots in control name ([#8133](https://github.com/SAP/fundamental-ngx/issues/8133)) ([8f64405](https://github.com/SAP/fundamental-ngx/commit/8f64405fdcd6015941bcf94c1bdb68fd60d5036f))
+
 ### [0.34.3-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.41...v0.34.3-rc.42) (2022-05-25)
 
 
