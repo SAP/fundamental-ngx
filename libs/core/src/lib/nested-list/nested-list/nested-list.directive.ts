@@ -1,6 +1,7 @@
 import {
     AfterContentInit,
     ChangeDetectorRef,
+    ContentChild,
     ContentChildren,
     Directive,
     ElementRef,
@@ -12,13 +13,16 @@ import {
     Optional,
     QueryList
 } from '@angular/core';
+import { Subscription } from 'rxjs';
+
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
+
 import { NestedListStateService } from '../nested-list-state.service';
 import { NestedItemDirective } from '../nested-item/nested-item.directive';
 import { NestedItemService } from '../nested-item/nested-item.service';
 import { NestedListKeyboardService } from '../nested-list-keyboard.service';
 import { NestedListInterface } from './nested-list.interface';
-import { Subscription } from 'rxjs';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { NestedListHeaderDirective } from '../nested-list-directives';
 import { Nullable } from '@fundamental-ngx/core/shared';
 
 @Directive({
@@ -34,6 +38,18 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
     @Input()
     @HostBinding('class.fd-nested-list--compact')
     compact: Nullable<boolean>;
+
+    /** Aria defines role description for the Nested List Tree. */
+    @Input()
+    ariaRoledescriptionTree = 'Navigation List Tree';
+
+    /** Aria defines role description for the Nested List MenuBar. */
+    @Input()
+    ariaRoledescriptionMenuBar = 'Navigation List Menu Bar';
+
+    /** Aria defines aria label for the selected item when the list with disabled selection. */
+    @Input()
+    ariaLabelSelected = 'Selected';
 
     /** @hidden */
     @HostBinding('class.fd-nested-list')
@@ -52,7 +68,27 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
     nestedItems: QueryList<NestedItemDirective>;
 
     /** @hidden */
+    @ContentChild(NestedListHeaderDirective)
+    private _nestedListHeader: NestedListHeaderDirective;
+
+    /** @hidden */
     private _subscriptions = new Subscription();
+
+    /** @hidden */
+    @HostBinding('attr.role')
+    private _role = 'tree';
+
+    /** @hidden */
+    @HostBinding('attr.aria-roledescription')
+    private _ariaRoledescription: Nullable<string> = this.ariaRoledescriptionTree;
+
+    /** @hidden */
+    @HostBinding('attr.aria-haspopup')
+    private _ariaHaspopup: Nullable<string> = null;
+
+    /** @hidden */
+    @HostBinding('attr.tabindex')
+    private _tabindex = '-1';
 
     /** @hidden */
     constructor(
@@ -91,7 +127,15 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
         if (this._nestedListStateService.condensed) {
             nestedLevel = Math.min(...[nestedLevel, 2]);
         }
-        this.nestedItems.changes.subscribe(() => this._nestedListKeyboardService.refresh$.next());
+
+        this._setAccessibilityProperties(nestedLevel);
+
+        this.nestedItems.changes.subscribe(() => {
+            this._nestedListKeyboardService.refresh$.next();
+            this._setAriaAttributes(nestedLevel);
+        });
+
+        this._setAriaAttributes(nestedLevel);
         this._handleNestedLevel(nestedLevel);
     }
 
@@ -123,5 +167,34 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
         /** Filter only elements, that has `fd-nested-list` directive attribute */
         const filteredParentElements = parentElements.filter((_element) => _element.hasAttribute('fd-nested-list'));
         return filteredParentElements.length;
+    }
+
+    /** @hidden */
+    private _setAriaAttributes(level: number): void {
+        this.nestedItems.forEach((item, i) => {
+            item._ariaLevel = level;
+            item.linkItem.ariaDescribedby = this._nestedListHeader && this._nestedListHeader.id;
+            item.linkItem._ariaLabel = `
+                 Tree Item ${item.linkItem.getTitle()} ${i + 1} of ${this.nestedItems.length}
+                 ${!this._nestedListStateService.selectable && item.linkItem.selected ? this.ariaLabelSelected : ''}`;
+        });
+
+        this._changeDetectionRef.detectChanges();
+    }
+
+    /** @hidden */
+    private _setAccessibilityProperties(level: number): void {
+        if (this._nestedListStateService.condensed && level === 1) {
+            this._ariaRoledescription = this.ariaRoledescriptionMenuBar;
+        }
+
+        if (level > 1 || (this._nestedItemService?.popover && !this._nestedListStateService.condensed)) {
+            this._role = 'group';
+            this._ariaRoledescription = null;
+        }
+
+        if (this._nestedItemService?.popover) {
+            this._ariaHaspopup = 'tree';
+        }
     }
 }
