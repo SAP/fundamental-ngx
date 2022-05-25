@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.43...v0.34.3-rc.44) (2022-05-25)
+
+
+### Bug Fixes
+
+* **core:** nested-list, fix a11y issues ([#7341](https://github.com/SAP/fundamental-ngx/issues/7341)) ([eaee826](https://github.com/SAP/fundamental-ngx/commit/eaee826ca2842d8966cebd949c68f245a86e46db))
+
 ### [0.34.3-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.42...v0.34.3-rc.43) (2022-05-25)
 
 
