@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.44...v0.34.3-rc.45) (2022-05-25)
+
+
+### Bug Fixes
+
+* **platform:** action-bar, fix i11y issues ([#7413](https://github.com/SAP/fundamental-ngx/issues/7413)) ([0263acf](https://github.com/SAP/fundamental-ngx/commit/0263acf63c2b5bfe3b7d77c9a2bdd25871d74c54))
+
 ### [0.34.3-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.43...v0.34.3-rc.44) (2022-05-25)
 
 
