@@ -75,10 +75,10 @@ describe('ListComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should display list container with role as list', () => {
+    it('should display list container with role as listbox', () => {
         const listContainer = fixture.debugElement.nativeElement.querySelector('ul');
         fixture.detectChanges();
-        expect(listContainer.getAttribute('role')).toEqual('list');
+        expect(listContainer.getAttribute('role')).toEqual('listbox');
     });
 
     it('should contain fd-list in list container', () => {
@@ -122,7 +122,7 @@ describe('ListComponent', () => {
     `
 })
 class ListDataSourceTestComponent {
-    @ViewChild(ListComponent, { static: true }) component: ListComponent;
+    @ViewChild(ListComponent, { static: true }) component: ListComponent<Address>;
     @ViewChild(StandardListItemComponent, { static: true }) childComponent: StandardListItemComponent;
     public dataSource = new ListDataSource<Address>(new ListDataProvider());
 }

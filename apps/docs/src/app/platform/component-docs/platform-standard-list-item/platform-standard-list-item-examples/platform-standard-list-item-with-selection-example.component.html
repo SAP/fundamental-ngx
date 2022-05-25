@@ -1,15 +1,15 @@
 <fd-toolbar fdType="info" [active]="true">
-    <label fd-toolbar-label>{{ _selectedItems.length }} : Items selected</label>
+    <label role="status" fd-toolbar-label>{{ _selectedItems.length }} : Items selected</label>
 </fd-toolbar>
 <fdp-list
     [selection]="true"
     [dataSource]="_dataSource"
-    selectionMode="multi"
+    [selectionMode]="selectionMode"
     [(ngModel)]="_selectedItems"
     (selectedItemChange)="_showItemInfo($event)"
     [hasByLine]="true"
     [ariaMultiselectable]="true"
-    [ariaLabel]="_selectedItems.length > 0 ? _selectedItems.length + 'Items selected' : '0 Items selected'"
+    [ariaLabel]="ariaLabel"
 >
     <fdp-standard-list-item
         *fdpItemDef="let address"

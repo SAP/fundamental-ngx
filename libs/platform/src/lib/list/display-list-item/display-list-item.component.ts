@@ -11,7 +11,11 @@ import { ListConfig } from '../list.config';
 })
 export class DisplayListItemComponent extends BaseListItem {
     /** @hidden */
-    constructor(_changeDetectorRef: ChangeDetectorRef, itemEl: ElementRef, protected _listConfig: ListConfig) {
+    constructor(
+        _changeDetectorRef: ChangeDetectorRef,
+        itemEl: ElementRef<HTMLElement>,
+        protected _listConfig: ListConfig
+    ) {
         super(_changeDetectorRef, itemEl, _listConfig);
     }
 }

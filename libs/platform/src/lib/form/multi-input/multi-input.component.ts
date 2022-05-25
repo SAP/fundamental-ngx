@@ -75,7 +75,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     autofocus = false;
 
     @ViewChild(ListComponent)
-    listTemplateDD: ListComponent;
+    listTemplateDD: ListComponent<MultiInputOption>;
 
     /** Selected values from the list items. */
     _selected: any[] = [];

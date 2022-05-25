@@ -62,10 +62,10 @@ describe('ActionListItemComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('Should display list container with role as list', () => {
+    it('Should display list container with role as listbox', () => {
         const listContainer = fixture.debugElement.query(By.css('ul'));
         fixture.detectChanges();
-        expect(listContainer.nativeElement.getAttribute('role')).toEqual('list');
+        expect(listContainer.nativeElement.getAttribute('role')).toEqual('listbox');
     });
 
     it('Should contain fd-list in list container', () => {
@@ -86,10 +86,10 @@ describe('ActionListItemComponent', () => {
         expect(actionItems[0].nativeElement.classList).toContain('fd-list__item--action');
     });
 
-    it('Should display action item  with role as list item', () => {
-        const listContainer = fixture.debugElement.query(By.css('fdp-action-list-item'));
+    it('Should display action item with role as option', () => {
+        const listContainer = fixture.debugElement.query(By.css('fdp-action-list-item .fd-list__item--action'));
         fixture.detectChanges();
-        expect(listContainer.nativeElement.getAttribute('role')).toEqual('listitem');
+        expect(listContainer.nativeElement.getAttribute('role')).toEqual('option');
     });
 
     it('Should Action 1 Action 2 Action 3 and as Action 4  as list item', () => {
