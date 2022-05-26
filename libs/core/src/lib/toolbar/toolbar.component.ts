@@ -109,6 +109,10 @@ export class ToolbarComponent
     @Input()
     forceOverflow = false;
 
+    /** Tabindex of the toolbar element, to be used when fdType="info" */
+    @Input()
+    tabindex = -1;
+
     /** @hidden */
     @ViewChild('toolbar')
     toolbar: ElementRef;
