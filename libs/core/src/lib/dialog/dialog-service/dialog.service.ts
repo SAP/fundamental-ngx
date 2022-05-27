@@ -1,4 +1,4 @@
-import { Inject, Injectable, Injector, Optional, TemplateRef, Type } from '@angular/core';
+import { Inject, Injectable, Injector, Optional, StaticProvider, TemplateRef, Type } from '@angular/core';
 import { DialogContainerComponent } from '../dialog-container/dialog-container.component';
 import { DIALOG_DEFAULT_CONFIG, DialogConfig } from '../utils/dialog-config.class';
 import { DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
@@ -23,9 +23,14 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
     /**
      * Opens a dialog component with provided content.
      * @param content Content of the dialog component.
-     * @param dialogConfig Configuration of the dialog component.
+     * @param dialogConfig Configuration of the dialog component (optional).
+     * @param providers Additional providers (optional).
      */
-    public open<T = any>(content: DialogContentType, dialogConfig?: DialogConfig<T>): DialogRef<T> {
+    public open<T = any>(
+        content: DialogContentType,
+        dialogConfig?: DialogConfig<T>,
+        providers?: StaticProvider[]
+    ): DialogRef<T> {
         const dialogRef = new DialogRef();
 
         dialogConfig = this._applyDefaultConfig(dialogConfig || {}, this._defaultConfig || new DialogConfig());
@@ -36,7 +41,8 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
                 { provide: DialogConfig, useValue: dialogConfig },
                 { provide: DialogRef, useValue: dialogRef },
                 { provide: RtlService, useValue: this._rtlService },
-                { provide: DialogService, useValue: this }
+                { provide: DialogService, useValue: this },
+                ...(providers ?? [])
             ]
         });
 

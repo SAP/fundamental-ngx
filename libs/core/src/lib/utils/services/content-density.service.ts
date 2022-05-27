@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { distinctUntilChanged, map, startWith } from 'rxjs/operators';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 import { isCompactDensity } from '../functions/is-compact-density';
 
 export type ContentDensity = 'cozy' | 'condensed' | 'compact';
@@ -21,7 +21,7 @@ export class ContentDensityService {
 
     /** @hidden */
     get _contentDensityListener(): Observable<ContentDensity> {
-        return this.contentDensity.pipe(distinctUntilChanged(), startWith(this.contentDensity.getValue()));
+        return this.contentDensity.pipe(distinctUntilChanged());
     }
 
     /** @hidden */

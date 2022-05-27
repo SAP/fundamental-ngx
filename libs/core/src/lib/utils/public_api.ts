@@ -29,6 +29,7 @@ export * from './pipes/search-highlight.pipe';
 export * from './pipes/safe.pipe';
 export * from './pipes/is-compact.pipe';
 export * from './pipes/value-by-path.pipe';
+export * from './pipes/listen-to-density.pipe';
 
 export * from './drag-and-drop/drag-and-drop.module';
 export * from './drag-and-drop/dnd-list/dnd-list.directive';
@@ -56,7 +57,9 @@ export * from './utils.module';
 export * from './datatypes/hash.datatype';
 export * from './datatypes/size.datatype';
 export * from './datatypes/color-accent.datatype';
+
 export * from './services/content-density.service';
+export * from './services/local-content-density.service';
 export * from './services/rtl.service';
 export * from './services/themes.service';
 export * from './services/keyboard-support/keyboard-support.service';

@@ -21,6 +21,7 @@ import { ListModule } from '@fundamental-ngx/core/list';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { PlatformTableModule } from '@fundamental-ngx/platform/table';
 import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
+import { PipeModule } from '@fundamental-ngx/core/utils';
 
 import { SmartFilterBarComponent } from './smart-filter-bar.component';
 
@@ -59,7 +60,8 @@ import { SmartFilterBarService } from './smart-filter-bar.service';
         PlatformSelectModule,
         PlatformMultiInputModule,
         FdpFormGroupModule,
-        LayoutGridModule
+        LayoutGridModule,
+        PipeModule
     ],
     exports: [
         SmartFilterBarComponent,

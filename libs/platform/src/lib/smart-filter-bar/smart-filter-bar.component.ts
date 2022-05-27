@@ -6,6 +6,7 @@ import {
     forwardRef,
     Input,
     OnDestroy,
+    Optional,
     Output,
     Provider,
     ViewChild,
@@ -31,6 +32,7 @@ import {
     FormGeneratorService
 } from '@fundamental-ngx/platform/form';
 import { ColumnLayout, SelectItem } from '@fundamental-ngx/platform/shared';
+import { ContentDensity, LocalContentDensityService } from '@fundamental-ngx/core/utils';
 
 import { SmartFilterBarSettingsDialogComponent } from './components/smart-filter-bar-settings-dialog/smart-filter-bar-settings-dialog.component';
 import { SmartFilterBarSubjectDirective } from './directives/smart-filter-bar-subject.directive';
@@ -77,7 +79,7 @@ export interface SmartFilterChangeObject {
     styleUrls: ['./smart-filter-bar.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [smartFilterBarProvider],
+    providers: [smartFilterBarProvider, LocalContentDensityService],
     host: {
         class: 'fdp-smart-filter-bar',
         '[class.fdp-smart-filter-bar--transparent]': 'transparent'
@@ -163,6 +165,19 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
     @Input()
     filtersColumnLayout: ColumnLayout = defaultColumnsLayout;
 
+    /** ContentDensity for the component & its children */
+    @Input()
+    set contentDensity(value: ContentDensity) {
+        this._localContentDensityService.setDensity(value);
+
+        this._contentDensity = value;
+    }
+    get contentDensity(): ContentDensity {
+        return this._contentDensity;
+    }
+    /** @hidden */
+    private _contentDensity: ContentDensity;
+
     /**
      * Event emitted when the selected filters have been changed.
      */
@@ -201,7 +216,8 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
         private _dialogService: DialogService,
         private _cdr: ChangeDetectorRef,
         private _smartFilterBarService: SmartFilterBarService,
-        private _fgService: FormGeneratorService
+        private _fgService: FormGeneratorService,
+        @Optional() public _localContentDensityService: LocalContentDensityService
     ) {
         this._fgService.addComponent(SmartFilterBarConditionFieldComponent, [SMART_FILTER_BAR_RENDERER_COMPONENT]);
     }
@@ -234,13 +250,17 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
             visibilityCategories: this.filtersVisibilityCategoryLabels
         };
 
-        const dialogRef = this._dialogService.open(SmartFilterBarSettingsDialogComponent, {
-            ...dialogConfig,
-            responsivePadding: false,
-            verticalPadding: false,
-            width: '50rem',
-            data: dialogData
-        });
+        const dialogRef = this._dialogService.open(
+            SmartFilterBarSettingsDialogComponent,
+            {
+                ...dialogConfig,
+                responsivePadding: false,
+                verticalPadding: false,
+                width: '50rem',
+                data: dialogData
+            },
+            [{ provide: LocalContentDensityService, useValue: this._localContentDensityService }]
+        );
 
         dialogRef.afterClosed.pipe(take(1)).subscribe((selectedFilters: string[]) => {
             this._setSelectedFilters(selectedFilters);
