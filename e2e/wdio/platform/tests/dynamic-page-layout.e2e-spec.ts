@@ -73,7 +73,7 @@ describe('Dynamic Page Layout test suite:', () => {
             waitForElDisplayed(dynamicPage);
             waitForElDisplayed(dynamicPageCollapsibleHeader);
             click(dynamicPageTitle);
-            expect(elementDisplayed(dynamicPageCollapsibleHeader)).toBe(false);
+            expect(waitForNotDisplayed(dynamicPageCollapsibleHeader)).toBe(true);
         });
 
         it('should verify dynamic page closed on Accept button click', () => {

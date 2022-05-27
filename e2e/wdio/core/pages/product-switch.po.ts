@@ -4,7 +4,7 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 export class ProductSwitchPo extends CoreBaseComponentPo {
     url = '/product-switch';
 
-    shellbarButton = 'app-product-switch fd-popover-control button.fd-product-switch__control';
+    shellbarButton = 'app-product-switch .fd-product-switch fd-popover-control button.fd-shellbar__button';
     shellbarSwitchItems = 'fd-popover-body .fd-product-switch__item';
     switchItems = 'fd-product-switch-body .fd-product-switch__item';
 
