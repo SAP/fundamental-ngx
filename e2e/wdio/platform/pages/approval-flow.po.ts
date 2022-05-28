@@ -24,9 +24,8 @@ export class ApprovalFlowPo extends BaseComponentPo {
     detailsDialogParallelSerialSelect = this.detailsDialog + ' fd-select';
     detailsDialogParallelSerialSelectOption = 'fd-option';
 
-    approvalFlow = 'fdp-approval-flow .approval-flow__container';
     selectExample = 'select';
-    approvalFlowNode = '.fdp-approval-flow-node__inner';
+    approvalFlowNode = 'fdp-approval-flow-node .fd-grid-list__item-body';
     approvalFlowTeamNode = this.approvalFlowNode + '.fdp-approval-flow-node__name--members-count';
     approvalFlowNodeAvatar = this.approvalFlowNode + ' fd-avatar';
     approvalFlowNodeStatus = this.approvalFlowNode + ' fdp-object-status';

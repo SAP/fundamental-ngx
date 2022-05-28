@@ -5,147 +5,105 @@
 
     <fd-grid-list-group-header> State: Unread </fd-grid-list-group-header>
 
-    <fd-grid-list-item state="unread">
+    <fd-grid-list-item state="unread" title="Title 1" description="Description 1">
         <fd-grid-list-item-toolbar> Custom Text </fd-grid-list-item-toolbar>
 
-        <div class="fd-grid-list-item-body--container">
-            <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
-            <div class="fd-grid-list-item-body--content">
-                <h6 fd-title>Title 1</h6>
-                <p>Description 1</p>
-                <div class="fd-grid-list-item-body--content-address">
-                    <p>781 Main Street</p>
-                    <p>Anytown, SD 57401</p>
-                    <p>USA</p>
-                </div>
+        <fd-avatar fd-grid-list-item-image image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
 
-                <a [routerLink]="['./']" fd-link tabindex="0">john_li@example.com</a>
-            </div>
-        </div>
+        <ng-template fd-grid-list-item-body>
+            <p>781 Main Street</p>
+            <p>Anytown, SD 57401</p>
+            <p>USA</p>
+            <a [routerLink]="['./']" fd-link tabindex="0">john_li@example.com</a>
+        </ng-template>
     </fd-grid-list-item>
 
     <fd-grid-list-group-header> State: Error </fd-grid-list-group-header>
 
-    <fd-grid-list-item state="error">
+    <fd-grid-list-item state="error" title="Title 2" description="Description 2">
         <fd-grid-list-item-toolbar> Custom Text </fd-grid-list-item-toolbar>
 
-        <div class="fd-grid-list-item-body--container">
-            <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
-            <div class="fd-grid-list-item-body--content">
-                <h6 fd-title>Title 2</h6>
-                <p>Description 2</p>
-                <div class="fd-grid-list-item-body--content-address">
-                    <p>781 Main Street</p>
-                    <p>Anytown, SD 57401</p>
-                    <p>USA</p>
-                </div>
+        <fd-avatar fd-grid-list-item-image image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
 
-                <a [routerLink]="['./']" fd-link tabindex="0">john_li@example.com</a>
-            </div>
-        </div>
+        <ng-template fd-grid-list-item-body>
+            <p>781 Main Street</p>
+            <p>Anytown, SD 57401</p>
+            <p>USA</p>
+            <a [routerLink]="['./']" fd-link tabindex="0">john_li@example.com</a>
+        </ng-template>
     </fd-grid-list-item>
 
-    <fd-grid-list-item state="error">
+    <fd-grid-list-item state="error" title="Title 2.1" description="Description 2.1">
         <fd-grid-list-item-toolbar> Custom Text </fd-grid-list-item-toolbar>
 
-        <div class="fd-grid-list-item-body--container">
-            <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
-            <div class="fd-grid-list-item-body--content">
-                <h6 fd-title>Title 2.1</h6>
-                <p>Description 2.1</p>
-                <div class="fd-grid-list-item-body--content-address">
-                    <p>781 Main Street</p>
-                    <p>Anytown, SD 57401</p>
-                    <p>USA</p>
-                </div>
+        <fd-avatar fd-grid-list-item-image image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
 
-                <a [routerLink]="['./']" fd-link tabindex="0">john_li@example.com</a>
-            </div>
-        </div>
+        <ng-template fd-grid-list-item-body>
+            <p>781 Main Street</p>
+            <p>Anytown, SD 57401</p>
+            <p>USA</p>
+            <a [routerLink]="['./']" fd-link tabindex="0">john_li@example.com</a>
+        </ng-template>
 
         <fd-grid-list-item-footer-bar> Custom error message </fd-grid-list-item-footer-bar>
     </fd-grid-list-item>
 
     <fd-grid-list-group-header> State: Locked </fd-grid-list-group-header>
 
-    <fd-grid-list-item state="locked" (locked)="locked($event)">
+    <fd-grid-list-item state="locked" title="Title 3" description="Description 3" (locked)="locked($event)">
         <fd-grid-list-item-toolbar> Custom Text </fd-grid-list-item-toolbar>
 
-        <div class="fd-grid-list-item-body--container">
-            <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
-            <div class="fd-grid-list-item-body--content">
-                <h6 fd-title>Title 3</h6>
-                <p>Description 3</p>
-                <div class="fd-grid-list-item-body--content-address">
-                    <p>781 Main Street</p>
-                    <p>Anytown, SD 57401</p>
-                    <p>USA</p>
-                </div>
+        <fd-avatar fd-grid-list-item-image image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
 
-                <a [routerLink]="['./']" fd-link tabindex="0">john_li@example.com</a>
-            </div>
-        </div>
+        <ng-template fd-grid-list-item-body>
+            <p>781 Main Street</p>
+            <p>Anytown, SD 57401</p>
+            <p>USA</p>
+            <a [routerLink]="['./']" fd-link tabindex="0">john_li@example.com</a>
+        </ng-template>
     </fd-grid-list-item>
 
-    <fd-grid-list-item state="locked">
+    <fd-grid-list-item state="locked" title="Title 3.1" description="Description 3.1">
         <fd-grid-list-item-toolbar> Custom Text </fd-grid-list-item-toolbar>
 
-        <div class="fd-grid-list-item-body--container">
-            <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
-            <div class="fd-grid-list-item-body--content">
-                <h6 fd-title>Title 3.1</h6>
-                <p>Description 3.1</p>
-                <div class="fd-grid-list-item-body--content-address">
-                    <p>781 Main Street</p>
-                    <p>Anytown, SD 57401</p>
-                    <p>USA</p>
-                </div>
+        <fd-avatar fd-grid-list-item-image image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
 
-                <a [routerLink]="['./']" fd-link tabindex="0">john_li@example.com</a>
-            </div>
-        </div>
+        <ng-template fd-grid-list-item-body>
+            <p>781 Main Street</p>
+            <p>Anytown, SD 57401</p>
+            <p>USA</p>
+            <a [routerLink]="['./']" fd-link tabindex="0">john_li@example.com</a>
+        </ng-template>
 
         <fd-grid-list-item-footer-bar> Locked button redefined to text </fd-grid-list-item-footer-bar>
     </fd-grid-list-item>
 
     <fd-grid-list-group-header> State: Draft </fd-grid-list-group-header>
 
-    <fd-grid-list-item state="draft" (draft)="draft($event)">
+    <fd-grid-list-item state="draft" title="Title 4" description="Description 4" (draft)="draft($event)">
         <fd-grid-list-item-toolbar> Custom Text </fd-grid-list-item-toolbar>
 
-        <div class="fd-grid-list-item-body--container">
-            <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
-            <div class="fd-grid-list-item-body--content">
-                <h6 fd-title>Title 4</h6>
-                <p>Description 4</p>
-                <div class="fd-grid-list-item-body--content-address">
-                    <p>781 Main Street</p>
-                    <p>Anytown, SD 57401</p>
-                    <p>USA</p>
-                </div>
+        <fd-avatar fd-grid-list-item-image image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
 
-                <a [routerLink]="['./']" fd-link tabindex="0">john_li@example.com</a>
-            </div>
-        </div>
+        <ng-template fd-grid-list-item-body>
+            <p>781 Main Street</p>
+            <p>Anytown, SD 57401</p>
+            <p>USA</p>
+            <a [routerLink]="['./']" fd-link tabindex="0">john_li@example.com</a>
+        </ng-template>
     </fd-grid-list-item>
 
-    <fd-grid-list-item state="draft">
+    <fd-grid-list-item state="draft" title="Title 4.1" description="Description 4.1">
         <fd-grid-list-item-toolbar> Custom Text </fd-grid-list-item-toolbar>
 
-        <div class="fd-grid-list-item-body--container">
-            <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
-            <div class="fd-grid-list-item-body--content">
-                <h6 fd-title>Title 4.1</h6>
-                <p>Description 4.1</p>
-                <div class="fd-grid-list-item-body--content-address">
-                    <p>781 Main Street</p>
-                    <p>Anytown, SD 57401</p>
-                    <p>USA</p>
-                </div>
+        <fd-avatar fd-grid-list-item-image image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
 
-                <a [routerLink]="['./']" fd-link tabindex="0">john_li@example.com</a>
-            </div>
-        </div>
+        <ng-template fd-grid-list-item-body>
+            <p>781 Main Street</p>
+            <p>Anytown, SD 57401</p>
+            <p>USA</p>
+            <a [routerLink]="['./']" fd-link tabindex="0">john_li@example.com</a>
+        </ng-template>
 
         <fd-grid-list-item-footer-bar> Draft button redefined to text </fd-grid-list-item-footer-bar>
     </fd-grid-list-item>

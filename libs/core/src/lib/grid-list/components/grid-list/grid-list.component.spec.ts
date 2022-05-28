@@ -139,21 +139,22 @@ describe('GridListComponent', () => {
         expect(toolbarsLength).toEqual(1);
     });
 
-    it('toolbar should contain counter and button', () => {
+    it('toolbar should contain counter and nav indicator', () => {
         const counters = fixture.debugElement.queryAll(By.css('.fd-grid-list__item .fd-grid-list__item-counter'));
         expect(counters.length).toEqual(1);
         expect(counters[0].nativeElement.innerText).toEqual('15');
 
-        const buttons = fixture.debugElement.queryAll(By.css('.fd-grid-list__item .fd-button'));
-        expect(buttons.length).toEqual(1);
-        expect(buttons[0].nativeElement.getAttribute('title')).toEqual('Navigation');
+        const navIndicators = fixture.debugElement.queryAll(
+            By.css('.fd-grid-list__item .fd-grid-list__item-navigation-indicator')
+        );
+        expect(navIndicators.length).toEqual(1);
     });
 
     it('should throw Navigation event if click on Navigation button', () => {
         spyOn(component, 'navigate');
-        const button = fixture.debugElement.query(By.css('.fd-grid-list__item .fd-toolbar .fd-button'));
-        button.nativeElement.click();
+        const item = fixture.debugElement.query(By.css('.fd-grid-list__item.fd-grid-list__item--link'));
 
+        item.nativeElement.click();
         fixture.detectChanges();
 
         expect(component.navigate).toHaveBeenCalledWith({ value: 'Title 3', index: 2 });
