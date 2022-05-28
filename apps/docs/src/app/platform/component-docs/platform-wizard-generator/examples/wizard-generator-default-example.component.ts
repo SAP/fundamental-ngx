@@ -13,6 +13,8 @@ export class WizardGeneratorDefaultExampleComponent {
     stepItems: WizardGeneratorItem[] = [
         {
             name: 'Product type',
+            title: 'Product Type Selection',
+            optionalText: 'first step',
             id: 'productTypeStep',
             formGroups: [
                 {
@@ -33,6 +35,7 @@ export class WizardGeneratorDefaultExampleComponent {
         {
             name: 'Customer information',
             id: 'customerInformationStep',
+            optionalText: 'second step',
             formGroups: [
                 {
                     title: '2. Customer Information',
@@ -68,6 +71,7 @@ export class WizardGeneratorDefaultExampleComponent {
         {
             name: 'Credit Card Details',
             id: 'creditCardStep',
+            optionalText: 'third step',
             formGroups: [
                 {
                     title: '3. Credit Card Details',
@@ -86,6 +90,7 @@ export class WizardGeneratorDefaultExampleComponent {
         {
             name: 'Discount',
             id: 'discountStep',
+            optionalText: 'forth step',
             formGroups: [
                 {
                     title: '4. Discount details',
