@@ -1,2 +1,6 @@
 @import '~fundamental-styles/dist/form-group';
 @import '~fundamental-styles/dist/quick-view';
+
+.fd-popover__popper .fd-quick-view__content {
+    border-radius: var(--sapElement_BorderCornerRadius);
+}
