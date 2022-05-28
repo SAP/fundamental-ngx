@@ -41,7 +41,6 @@ export class GridListPo extends CoreBaseComponentPo {
     gridListToolbar = '.fd-toolbar.fd-toolbar--info ';
     gridListRadioButton = '.fd-grid-list__item-toolbar .fd-grid-list__radio-label';
     gridListCheckbox = '.fd-grid-list__checkbox-label';
-    button = '.fd-button';
 
     gridListItemsByMode = (name: string): string => ` [selectionmode="${name}"] fd-grid-list-item`;
 

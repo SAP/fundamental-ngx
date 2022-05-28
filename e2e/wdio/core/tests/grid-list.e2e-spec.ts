@@ -34,8 +34,7 @@ describe('Grid-list test suite', () => {
         multiSelectModeSelectedItems,
         singleSelectItemsSelected,
         dragAndDropItems,
-        gridListToolbar,
-        button
+        gridListToolbar
     } = gridListPage;
 
     beforeAll(() => {
@@ -130,7 +129,7 @@ describe('Grid-list test suite', () => {
 
     it('should check closing grid list toolbar', () => {
         scrollIntoView(gridListToolbar);
-        click(gridListToolbar + button);
+        click(gridListToolbar);
         expect(doesItExist(gridListToolbar)).toBe(false);
     });
 
