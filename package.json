@@ -172,7 +172,7 @@
         "@types/jasmine": "3.10.2",
         "@types/jasminewd2": "2.0.8",
         "@types/lodash-es": "4.17.6",
-        "@typescript-eslint/eslint-plugin": "5.10.2",
+        "@typescript-eslint/eslint-plugin": "5.26.0",
         "@typescript-eslint/parser": "5.10.2",
         "@wdio/allure-reporter": "7.7.3",
         "@wdio/cli": "7.16.16",
