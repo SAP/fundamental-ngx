@@ -3143,6 +3143,43 @@
             },
             "tags": ["type:lib", "scope:fd"]
         },
+        "core-theming": {
+            "projectType": "library",
+            "root": "libs/core/src/lib/theming",
+            "sourceRoot": "libs/core/src/lib/theming",
+            "prefix": "fd",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/core/theming"],
+                    "options": {
+                        "tsConfig": "libs/core/src/lib/theming/tsconfig.lib.json",
+                        "project": "libs/core/src/lib/theming/ng-package.json",
+                        "updateBuildableProjectDepsInPackageJson": false
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/core/src/lib/theming/tsconfig.lib.prod.json"
+                        }
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/core/src/lib/theming/test.ts",
+                        "tsConfig": "libs/core/src/lib/theming/tsconfig.spec.json",
+                        "karmaConfig": "libs/core/src/lib/theming/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["libs/core/src/lib/theming/**/*.ts", "libs/core/src/lib/theming/**/*.html"]
+                    }
+                }
+            },
+            "tags": ["type:lib", "scope:fd"]
+        },
         "core-tile": {
             "projectType": "library",
             "root": "libs/core/src/lib/tile",
@@ -3680,7 +3717,17 @@
                         "styles": [
                             "node_modules/fundamental-styles/dist/icon.css",
                             "apps/docs/src/fd-typedoc/assets/css/main.scss",
-                            "apps/docs/src/styles.scss"
+                            "apps/docs/src/styles.scss",
+                            {
+                                "input": "apps/docs/src/theming/sap_fiori_3_fonts.css",
+                                "inject": false,
+                                "bundleName": "sap_fiori_3_fonts"
+                            },
+                            {
+                                "input": "apps/docs/src/theming/sap_horizon_fonts.css",
+                                "inject": false,
+                                "bundleName": "sap_horizon_fonts"
+                            }
                         ],
                         "scripts": ["node_modules/marked/lib/marked.js"],
                         "allowedCommonJsDependencies": ["moment", "highlight.js", "focus-trap", "@angularclass/hmr"],

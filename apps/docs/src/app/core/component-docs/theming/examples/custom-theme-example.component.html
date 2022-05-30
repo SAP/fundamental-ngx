@@ -1,0 +1,6 @@
+<span *ngFor="let theme of themes" style="padding: 10px; display: inline-block">
+    <button fd-button (click)="selectTheme(theme.id)" [label]="theme.name"></button>
+</span>
+
+<label fd-form-label> Current theme: </label>
+{{ currentTheme | json }}

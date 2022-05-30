@@ -1,0 +1,44 @@
+<fd-docs-section-title id="theme-switcher" componentName="theming"> Theme switcher </fd-docs-section-title>
+<description> Css files are switched via choosing option. </description>
+<component-example>
+    <fd-theming-example></fd-theming-example>
+</component-example>
+<code-example [exampleFiles]="themeSwitcherExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="via-url" componentName="theming"> Setting theme via url </fd-docs-section-title>
+<description>
+    <p>Theming service allows to automatically set theme based on provided URL query parameter.</p>
+    <p>Parameter name can be configured through <code>ThemingModule</code>.</p>
+    <p>See example by adding <code>?customQueryParam=sap_fiori_3_dark</code> to URL.</p>
+    <p>To make it work properly, you need to have imported <code>RouterModule</code> into the project.</p>
+</description>
+<component-example>
+    <fd-theming-url-example></fd-theming-url-example>
+</component-example>
+<code-example [exampleFiles]="themeUrlExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="custom-config" componentName="theming"> Using custom configuration </fd-docs-section-title>
+<description>
+    <p>
+        Developers can easily configure <code>ThemingService</code> and provide custom configuration object to
+        manipulate the behaviour of <code>ThemingService</code>.
+    </p>
+    <p>For more information please refer to <code>ThemingConfig</code> class available in the API section.</p>
+</description>
+<fd-code-snippet [file]="themeConfigExample"></fd-code-snippet>
+
+<separator></separator>
+
+<fd-docs-section-title id="custom-themes" componentName="theming"> Using custom themes </fd-docs-section-title>
+<description>
+    Developers can easily define set of custom themes by providing custom configuration object for the
+    <code>ThemingModule</code>.
+</description>
+<component-example>
+    <fd-custom-theme-example></fd-custom-theme-example>
+</component-example>
+<code-example [exampleFiles]="customThemesExample"></code-example>
