@@ -1,24 +1,39 @@
 import {
+    AfterViewInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
+    ContentChildren,
     ElementRef,
     Input,
     OnChanges,
-    ViewEncapsulation,
-    OnInit
+    OnDestroy,
+    OnInit,
+    QueryList,
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { ContentObserver } from '@angular/cdk/observers';
+import { map, startWith, Subject, takeUntil, tap } from 'rxjs';
+import { DomPortal, Portal } from '@angular/cdk/portal';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fdLink], [fd-link]',
-    template: ` <ng-content></ng-content> `,
+    templateUrl: './link.component.html',
     styleUrls: ['./link.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LinkComponent implements OnChanges, OnInit, CssClassBuilder {
+export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterViewInit, OnDestroy {
+    @ContentChildren(IconComponent)
+    iconComponents: QueryList<IconComponent>;
+
+    @ViewChild('content')
+    contentSpan: ElementRef<HTMLSpanElement>;
+
     /** user's custom classes */
     @Input()
     class: string;
@@ -43,8 +58,18 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder {
     @Input()
     undecorated: boolean;
 
+    prefixPortal: Portal<any>;
+    postfixPortal: Portal<any>;
+
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    private _destroyed$ = new Subject<void>();
+
+    /** @hidden */
+    constructor(
+        private _elementRef: ElementRef<Element>,
+        private contentObserver: ContentObserver,
+        private changeDetectorRef: ChangeDetectorRef
+    ) {}
 
     /** @hidden */
     ngOnChanges(): void {
@@ -75,5 +100,62 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder {
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this.iconComponents.changes
+            .pipe(
+                startWith(this.iconComponents),
+                map((c) => c.toArray()),
+                map((icons) =>
+                    // We are only interested in the first descendant of the content element
+                    icons.filter(
+                        (icon) => icon.elementRef().nativeElement.parentElement === this.contentSpan.nativeElement
+                    )
+                ),
+                map((icons) => {
+                    if (icons.length === 0) {
+                        return {};
+                    }
+                    const prefix =
+                        icons[0].elementRef().nativeElement === this.contentSpan.nativeElement.childNodes[0]
+                            ? icons[0].elementRef().nativeElement
+                            : null;
+                    const postfix =
+                        icons[icons.length - 1].elementRef().nativeElement ===
+                        this.contentSpan.nativeElement.childNodes[this.contentSpan.nativeElement.childNodes.length - 1]
+                            ? icons[icons.length - 1].elementRef().nativeElement
+                            : null;
+                    return { prefix, postfix };
+                }),
+                tap(() => {
+                    if (this.prefixPortal?.isAttached) {
+                        this.prefixPortal.detach();
+                    }
+                    if (this.postfixPortal?.isAttached) {
+                        this.postfixPortal.detach();
+                    }
+                }),
+                tap(({ prefix, postfix }) => {
+                    if (prefix) {
+                        this.prefixPortal = new DomPortal(prefix);
+                    }
+                    if (postfix) {
+                        this.postfixPortal = new DomPortal(postfix);
+                    }
+                }),
+                tap(() => {
+                    this.changeDetectorRef.detectChanges();
+                }),
+                takeUntil(this._destroyed$)
+            )
+            .subscribe();
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._destroyed$.next();
+        this._destroyed$.complete();
     }
 }
