@@ -58,8 +58,8 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterV
     @Input()
     undecorated: boolean;
 
-    prefixPortal: Portal<any>;
-    postfixPortal: Portal<any>;
+    prefixPortal: Portal<any> | null;
+    postfixPortal: Portal<any> | null;
 
     /** @hidden */
     private _destroyed$ = new Subject<void>();
@@ -138,12 +138,8 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterV
                     }
                 }),
                 tap(({ prefix, postfix }) => {
-                    if (prefix) {
-                        this.prefixPortal = new DomPortal(prefix);
-                    }
-                    if (postfix) {
-                        this.postfixPortal = new DomPortal(postfix);
-                    }
+                    this.prefixPortal = prefix ? new DomPortal(prefix) : null;
+                    this.postfixPortal = postfix ? new DomPortal(postfix) : null;
                 }),
                 tap(() => {
                     this.changeDetectorRef.detectChanges();
