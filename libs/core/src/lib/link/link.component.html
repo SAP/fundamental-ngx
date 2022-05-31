@@ -1,0 +1,9 @@
+<span class="sap-icon" *ngIf="prefixPortal">
+    <ng-container *cdkPortalOutlet="prefixPortal"></ng-container>
+</span>
+<span #content>
+    <ng-content></ng-content>
+</span>
+<span class="sap-icon" *ngIf="postfixPortal">
+    <ng-container *cdkPortalOutlet="postfixPortal"></ng-container>
+</span>
