@@ -25,6 +25,7 @@ import {
 } from '../constants';
 import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
+import { registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
 
 let ratingUID = 0;
 
@@ -48,10 +49,13 @@ interface RatingViewItem {
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => RatingIndicatorComponent),
             multi: true
-        }
+        },
+        registerFormItemControl(RatingIndicatorComponent)
     ]
 })
-export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuilder, ControlValueAccessor {
+export class RatingIndicatorComponent
+    implements OnInit, OnChanges, CssClassBuilder, ControlValueAccessor, FormItemControl
+{
     /** User's custom classes */
     @Input()
     class: string;
@@ -66,6 +70,13 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
     @Input()
     @HostBinding('attr.aria-label')
     ariaLabel: Nullable<string>;
+
+    /**
+     * Sets the aria-labelledby attribute to the element.
+     */
+    @Input()
+    @HostBinding('attr.aria-label')
+    ariaLabelledBy: Nullable<string>;
 
     /**
      * Sets the aria-disabled attribute to the element.

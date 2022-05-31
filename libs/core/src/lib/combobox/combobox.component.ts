@@ -7,7 +7,6 @@ import {
     ElementRef,
     EventEmitter,
     forwardRef,
-    HostBinding,
     Injector,
     Input,
     OnChanges,
@@ -46,6 +45,7 @@ import {
     FocusEscapeDirection,
     ContentDensityService
 } from '@fundamental-ngx/core/utils';
+import { registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { FormStates, PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
@@ -83,6 +83,7 @@ let comboboxUniqueId = 0;
             useExisting: forwardRef(() => ComboboxComponent),
             multi: true
         },
+        registerFormItemControl(ComboboxComponent),
         MenuKeyboardService
     ],
     host: {
@@ -94,7 +95,7 @@ let comboboxUniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ComboboxComponent
-    implements ComboboxInterface, ControlValueAccessor, OnInit, OnChanges, AfterViewInit, OnDestroy
+    implements ComboboxInterface, ControlValueAccessor, OnInit, OnChanges, AfterViewInit, OnDestroy, FormItemControl
 {
     /** Id for the Combobox. */
     @Input()
@@ -106,12 +107,10 @@ export class ComboboxComponent
 
     /** Aria-label for Combobox. */
     @Input()
-    @HostBinding('attr.aria-label')
     ariaLabel: Nullable<string>;
 
     /** Aria-Labelledby for element describing Combobox. */
     @Input()
-    @HostBinding('attr.aria-labelledby')
     ariaLabelledBy: Nullable<string>;
 
     /** If it is mandatory field */

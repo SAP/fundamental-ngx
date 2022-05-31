@@ -24,7 +24,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Placement, FormStates, ValueStateAriaMessageService } from '@fundamental-ngx/core/shared';
 import { DatetimeAdapter, DATE_TIME_FORMATS, DateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { TimeComponent } from '@fundamental-ngx/core/time';
-import { PopoverFormMessageService } from '@fundamental-ngx/core/form';
+import { PopoverFormMessageService, registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
 import { PopoverService } from '@fundamental-ngx/core/popover';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
@@ -53,14 +53,15 @@ let timePickerCounter = 0;
             multi: true
         },
         PopoverFormMessageService,
-        PopoverService
+        PopoverService,
+        registerFormItemControl(TimePickerComponent)
     ],
     styleUrls: ['./time-picker.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TimePickerComponent<D>
-    implements ControlValueAccessor, OnInit, AfterViewInit, OnChanges, OnDestroy, Validator
+    implements ControlValueAccessor, OnInit, AfterViewInit, OnChanges, OnDestroy, Validator, FormItemControl
 {
     /**
      * Date time object representation
@@ -130,6 +131,10 @@ export class TimePickerComponent<D>
     /** Aria label for the time picker toggle button. */
     @Input()
     timePickerButtonLabel = 'Open picker';
+
+    /** Aria-labelledby for the time picker toggle button. */
+    @Input()
+    ariaLabelledBy: Nullable<string>;
 
     /** Whether a null input is considered valid(success). */
     @Input()

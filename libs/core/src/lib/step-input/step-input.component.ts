@@ -26,6 +26,7 @@ import { DOWN_ARROW, ENTER, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import { ContentDensityService, KeyUtil } from '@fundamental-ngx/core/utils';
 import { SafeHtml } from '@angular/platform-browser';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
 
 let stepInputUniqueId = 0;
 
@@ -40,13 +41,14 @@ let stepInputUniqueId = 0;
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => StepInputComponent),
             multi: true
-        }
+        },
+        registerFormItemControl(StepInputComponent)
     ],
     host: {
         class: 'fd-step-input__container'
     }
 })
-export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor {
+export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor, FormItemControl {
     /** Sets compact mode */
     @Input()
     compact?: boolean;
@@ -89,7 +91,11 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** Sets input aria-label attribute */
     @Input()
-    ariaLabel: Nullable<string> = null;
+    ariaLabel: Nullable<string>;
+
+    /** Sets input aria-labelledby attribute */
+    @Input()
+    ariaLabelledBy: Nullable<string>;
 
     /** Aria defines role description for the Step Input. */
     @Input()
