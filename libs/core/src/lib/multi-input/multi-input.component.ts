@@ -30,6 +30,7 @@ import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { FormStates, PopoverFillMode, Nullable } from '@fundamental-ngx/core/shared';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { TokenizerComponent } from '@fundamental-ngx/core/token';
+import { registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
 import { ListComponent } from '@fundamental-ngx/core/list';
 import {
     ContentDensityService,
@@ -67,13 +68,22 @@ import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interf
             useExisting: forwardRef(() => MultiInputComponent),
             multi: true
         },
-        MenuKeyboardService
+        MenuKeyboardService,
+        registerFormItemControl(MultiInputComponent)
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MultiInputComponent
-    implements MultiInputInterface, ControlValueAccessor, CssClassBuilder, OnInit, OnChanges, AfterViewInit, OnDestroy
+    implements
+        MultiInputInterface,
+        ControlValueAccessor,
+        CssClassBuilder,
+        OnInit,
+        OnChanges,
+        AfterViewInit,
+        OnDestroy,
+        FormItemControl
 {
     /** Placeholder for the input field. */
     @Input()
@@ -179,9 +189,13 @@ export class MultiInputComponent
     @Input()
     newTokenValidateFn = this._defaultTokenValidate;
 
-    /** Aria label for the multi input body. */
+    /** aria-label attribute binding. */
     @Input()
-    multiInputBodyLabel = 'Multi input body';
+    ariaLabel: Nullable<string>;
+
+    /** aria-labelledby attribute binding. */
+    @Input()
+    ariaLabelledBy: Nullable<string>;
 
     /**
      * Preset options for the Select body width, whatever is chosen, the body has a 600px limit.

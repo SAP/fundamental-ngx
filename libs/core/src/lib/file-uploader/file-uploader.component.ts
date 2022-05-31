@@ -19,6 +19,7 @@ import { stateType } from '@fundamental-ngx/core/radio';
 import { FileUploaderService, FileUploadOutput } from './file-uploader.service';
 import { Subscription } from 'rxjs';
 import { KeyUtil, ContentDensityService } from '@fundamental-ngx/core/utils';
+import { registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
 import { ENTER, SPACE, TAB } from '@angular/cdk/keycodes';
 import { Nullable } from '@fundamental-ngx/core/shared';
 
@@ -41,12 +42,13 @@ let fileUploaderInputUniqueId = 0;
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => FileUploaderComponent),
             multi: true
-        }
+        },
+        registerFormItemControl(FileUploaderComponent)
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDestroy {
+export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDestroy, FormItemControl {
     /** @hidden */
     @HostBinding('class.fd-file-uploader')
     fdFileInputClass = true;

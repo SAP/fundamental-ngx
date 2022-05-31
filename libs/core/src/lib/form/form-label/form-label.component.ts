@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, OnChanges, View
 import { Placement, Nullable } from '@fundamental-ngx/core/shared';
 import { InlineHelpFormPlacement } from '../inline-help-placement.type';
 
+let formLabelIdCount = 0;
+
 /**
  * Label to be linked to a form control.
  *
@@ -73,9 +75,24 @@ export class FormLabelComponent implements OnChanges {
     /** @hidden */
     @HostBinding('class.fd-form-label__wrapper--inline-help')
     inlineHelpClass = true;
+
     /** @hidden */
     @HostBinding('class.fd-form-label__wrapper--inline-help--after')
     inlineHelpAfter = true;
+
+    /** @hidden */
+    // eslint-disable-next-line @angular-eslint/no-input-rename
+    @Input('id')
+    @HostBinding('id')
+    set formLabelId(value: Nullable<string>) {
+        this._formLabelId = value || this._formLabelId;
+    }
+    get formLabelId(): string {
+        return this._formLabelId;
+    }
+
+    /** @hidden */
+    private _formLabelId = `fd-form-label-${++formLabelIdCount}`;
 
     /** @hidden */
     ngOnChanges(): void {

@@ -5,6 +5,7 @@ export * from './form-group/form-group.component';
 export * from './form-group/form-group.module';
 export * from './form-item/form-item.component';
 export * from './form-item/form-item.module';
+export * from './form-item-control/form-item-control';
 export * from './form-label/form-label.component';
 export * from './form-label/form-label.module';
 export * from './form-legend/form-legend.directive';

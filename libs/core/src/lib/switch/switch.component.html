@@ -21,7 +21,7 @@
             [disabled]="disabled"
             [attr.aria-required]="required"
             [attr.aria-checked]="checked"
-            [attr.aria-labelledby]="ariaLabelledby + ' ' + (semantic ? _semanticLabelId : '')"
+            [attr.aria-labelledby]="ariaLabelledBy + ' ' + (semantic ? _semanticLabelId : '')"
             [(ngModel)]="isChecked"
         />
         <div class="fd-switch__slider">

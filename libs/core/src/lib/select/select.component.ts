@@ -32,10 +32,10 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { Subject, Subscription, merge, Observable, defer } from 'rxjs';
 import { startWith, takeUntil, switchMap } from 'rxjs/operators';
 
-import { PopoverFillMode } from '@fundamental-ngx/core/shared';
+import { PopoverFillMode, FormStates, Nullable } from '@fundamental-ngx/core/shared';
 import { ContentDensityService, DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
-import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
 
 import { SELECT_COMPONENT, SelectInterface } from './select.interface';
 import { SelectKeyManagerService } from './select-key-manager.service';
@@ -74,11 +74,20 @@ export const SELECT_ITEM_HEIGHT_EM = 4;
             provide: SELECT_COMPONENT,
             useExisting: SelectComponent
         },
+        registerFormItemControl(SelectComponent),
         SelectKeyManagerService
     ]
 })
 export class SelectComponent
-    implements ControlValueAccessor, SelectInterface, OnInit, AfterViewInit, AfterContentInit, OnChanges, OnDestroy
+    implements
+        ControlValueAccessor,
+        SelectInterface,
+        OnInit,
+        AfterViewInit,
+        AfterContentInit,
+        OnChanges,
+        OnDestroy,
+        FormItemControl
 {
     /** Id of the control. */
     @Input()

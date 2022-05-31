@@ -28,7 +28,8 @@
                     type="text"
                     class="fd-input"
                     fd-input-group-input
-                    [attr.aria-label]="datetimeInputLabel"
+                    [attr.aria-label]="ariaLabel || datetimeInputLabel"
+                    [attr.aria-labelledby]="ariaLabelledBy"
                     [attr.id]="inputId"
                     [attr.aria-required]="required"
                     [placeholder]="placeholder"

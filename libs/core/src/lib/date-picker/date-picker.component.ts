@@ -30,7 +30,7 @@ import {
     CalendarYearGrid
 } from '@fundamental-ngx/core/calendar';
 import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
-import { PopoverFormMessageService } from '@fundamental-ngx/core/form';
+import { PopoverFormMessageService, registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
 import { PopoverService } from '@fundamental-ngx/core/popover';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
@@ -71,13 +71,16 @@ let datePickerCounter = 0;
             useExisting: forwardRef(() => DatePickerComponent),
             multi: true
         },
+        registerFormItemControl(DatePickerComponent),
         PopoverFormMessageService,
         PopoverService
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor, Validator {
+export class DatePickerComponent<D>
+    implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor, Validator, FormItemControl
+{
     /** The type of calendar, 'single' for single date selection or 'range' for a range of dates. */
     @Input()
     type: CalendarType = 'single';
@@ -292,6 +295,14 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
     @Input()
     inline = true;
 
+    /** aria-label for the date-picker. */
+    @Input()
+    ariaLabel: Nullable<string>;
+
+    /** aria-labelledby for element describing date-picker. */
+    @Input()
+    ariaLabelledBy: Nullable<string>;
+
     /**
      * Whether to recalculate value from the input as user types or on blur.
      * By default, updates the value as user types.
@@ -388,6 +399,9 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
      * @hidden
      */
     get _dateInputArialLabel(): string {
+        if (this.ariaLabel) {
+            return this.ariaLabel;
+        }
         return this.type === 'range' ? this.dateRangeInputLabel : this.dateInputLabel;
     }
 

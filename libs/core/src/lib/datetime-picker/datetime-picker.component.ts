@@ -23,7 +23,7 @@ import { filter, takeUntil } from 'rxjs/operators';
 import { Placement, SpecialDayRule, FormStates, Nullable } from '@fundamental-ngx/core/shared';
 import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
 import { CalendarComponent, DaysOfWeek, FdCalendarView, CalendarYearGrid } from '@fundamental-ngx/core/calendar';
-import { PopoverFormMessageService } from '@fundamental-ngx/core/form';
+import { PopoverFormMessageService, registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
 import { PopoverService } from '@fundamental-ngx/core/popover';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
 import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
@@ -57,6 +57,7 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
             useExisting: forwardRef(() => DatetimePickerComponent),
             multi: true
         },
+        registerFormItemControl(DatetimePickerComponent),
         PopoverFormMessageService,
         PopoverService
     ],
@@ -64,7 +65,7 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DatetimePickerComponent<D>
-    implements OnInit, OnDestroy, OnChanges, AfterViewInit, ControlValueAccessor, Validator
+    implements OnInit, OnDestroy, OnChanges, AfterViewInit, ControlValueAccessor, Validator, FormItemControl
 {
     /** Placeholder for the inner input element. */
     @Input()
@@ -110,6 +111,14 @@ export class DatetimePickerComponent<D>
      * */
     @Input()
     displaySeconds: boolean;
+
+    /** aria-label for the date-picker. */
+    @Input()
+    ariaLabel: Nullable<string>;
+
+    /** aria-labelledby for element describing date-picker. */
+    @Input()
+    ariaLabelledBy: Nullable<string>;
 
     /** Text displayed in message */
     @Input()

@@ -14,7 +14,8 @@ import {
     OnInit,
     Optional,
     Inject,
-    ViewChild
+    ViewChild,
+    isDevMode
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DOCUMENT } from '@angular/common';
@@ -23,6 +24,7 @@ import { takeUntil, tap } from 'rxjs/operators';
 
 import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
 
 import { InputGroupAddOnDirective, InputGroupInputDirective } from './input-group-directives';
 import { InputGroupPlacement } from './types';
@@ -49,12 +51,13 @@ let addOnInputRandomId = 0;
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => InputGroupComponent),
             multi: true
-        }
+        },
+        registerFormItemControl(InputGroupComponent)
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDestroy {
+export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDestroy, FormItemControl {
     /** Input template */
     @Input()
     inputTemplate: TemplateRef<any>;
@@ -141,9 +144,18 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
     @Input()
     iconTitle: Nullable<string>;
 
+    /** @deprecated renamed to "ariaLabelledBy" */
+    @Input()
+    set ariaLabelledby(value: Nullable<string>) {
+        if (isDevMode()) {
+            console.warn('"ariaLabelledby" is deprecated. Use "ariaLabelledBy" instead');
+        }
+        this.ariaLabelledBy = value;
+    }
+
     /** the associated ids for the input aria-labelledby field */
     @Input()
-    ariaLabelledby: Nullable<string>;
+    ariaLabelledBy: Nullable<string>;
 
     /** Event emitted when the add-on button is clicked. */
     @Output()
@@ -299,7 +311,7 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
      * calculate the correct ids for input aria-labelledby
      */
     _getAriaLabelledbyIdsForInput(): string {
-        let ariaLabelledByIds = this.ariaLabelledby ? this.ariaLabelledby + ' ' : '';
+        let ariaLabelledByIds = this.ariaLabelledBy ? this.ariaLabelledBy + ' ' : '';
         if (!this.button) {
             ariaLabelledByIds += this._addOnNonButtonId;
         }

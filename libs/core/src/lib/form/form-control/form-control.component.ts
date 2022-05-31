@@ -1,7 +1,9 @@
 import {
+    Attribute,
     ChangeDetectionStrategy,
     Component,
     ElementRef,
+    HostBinding,
     Input,
     OnChanges,
     OnDestroy,
@@ -9,10 +11,10 @@ import {
     Optional,
     ViewEncapsulation
 } from '@angular/core';
-import { FormStates } from '@fundamental-ngx/core/shared';
+import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
 import { Subscription } from 'rxjs';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
-import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/core/utils';
+import { ContentDensityService, CssClassBuilder, applyCssClass } from '@fundamental-ngx/core/utils';
+import { registerFormItemControl, FormItemControl } from './../form-item-control/form-item-control';
 
 /**
  * Directive intended for use on form controls.
@@ -27,9 +29,10 @@ import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/core/utils';
     template: `<ng-content></ng-content>`,
     styleUrls: ['./form-control.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [registerFormItemControl(FormControlComponent)]
 })
-export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges, OnDestroy {
+export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges, OnDestroy, FormItemControl {
     /**
      *  The state of the form control - applies css classes.
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
@@ -49,6 +52,24 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges,
     /** user's custom classes */
     @Input()
     class: string;
+
+    /** @hidden */
+    @HostBinding('attr.aria-label')
+    private get ariaLabelBinding(): string {
+        return this.ariaLabelAttr || this.ariaLabel || '';
+    }
+
+    /** aria-label for form-control. */
+    ariaLabel: Nullable<string>;
+
+    /** @hidden */
+    @HostBinding('attr.aria-labelledby')
+    private get ariaLabelledByBinding(): string {
+        return this.ariaLabelledByAttr || this.ariaLabelledBy || '';
+    }
+
+    /** aria-label for form-control. */
+    ariaLabelledBy: Nullable<string>;
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -77,7 +98,13 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges,
     }
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef, @Optional() private _contentDensityService: ContentDensityService) {}
+    constructor(
+        private _elementRef: ElementRef,
+        @Optional()
+        private _contentDensityService: ContentDensityService,
+        @Attribute('aria-label') private ariaLabelAttr: string,
+        @Attribute('aria-labelledby') private ariaLabelledByAttr: string
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {

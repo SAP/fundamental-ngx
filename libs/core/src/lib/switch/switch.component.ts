@@ -6,6 +6,7 @@ import {
     EventEmitter,
     forwardRef,
     Input,
+    isDevMode,
     OnDestroy,
     OnInit,
     Optional,
@@ -17,6 +18,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
+import { registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
 
 let switchUniqueId = 0;
 
@@ -33,7 +35,8 @@ let switchUniqueId = 0;
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => SwitchComponent),
             multi: true
-        }
+        },
+        registerFormItemControl(SwitchComponent)
     ],
     host: {
         class: 'fd-form__item fd-form__item--check fd-switch-custom',
@@ -42,7 +45,7 @@ let switchUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SwitchComponent implements ControlValueAccessor, OnInit, OnDestroy {
+export class SwitchComponent implements ControlValueAccessor, OnInit, OnDestroy, FormItemControl {
     /** @hidden */
     @ViewChild('switchInput')
     inputElement: ElementRef<HTMLInputElement>;
@@ -87,9 +90,18 @@ export class SwitchComponent implements ControlValueAccessor, OnInit, OnDestroy 
     @Input()
     ariaLabel: Nullable<string>;
 
+    /** @deprecated renamed to "ariaLabelledBy" */
+    @Input()
+    set ariaLabelledby(value: Nullable<string>) {
+        if (isDevMode()) {
+            console.warn('"ariaLabelledby" is deprecated. Use "ariaLabelledBy" instead');
+        }
+        this.ariaLabelledBy = value;
+    }
+
     /** aria-labelledby attribute of the inner input element. */
     @Input()
-    ariaLabelledby: Nullable<string>;
+    ariaLabelledBy: Nullable<string>;
 
     /** Semantic Label Accept set for Accessibility */
     @Input()
