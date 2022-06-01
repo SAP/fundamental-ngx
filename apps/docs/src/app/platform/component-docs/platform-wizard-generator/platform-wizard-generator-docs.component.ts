@@ -40,6 +40,8 @@ import interactionTsExample from '!./examples/wizard-generator-onchange-example.
 import whenConditionHtmlExample from '!./examples/wizard-generator-visibility-between-steps-example.component.html?raw';
 import whenConditionTsExample from '!./examples/wizard-generator-visibility-between-steps-example.component.ts?raw';
 
+import specialElementsHtmlExamples from '!./examples/wizard-generator-special-elements-example.component.html?raw';
+import specialElementsTsExamples from '!./examples/wizard-generator-special-elements-example.component.ts?raw';
 @Component({
     selector: 'fdp-platform-wizard-generator-docs',
     templateUrl: './platform-wizard-generator-docs.component.html'
@@ -226,6 +228,20 @@ export class PlatformWizardGeneratorDocsComponent {
             component: 'WizardGeneratorVisibilityBetweenStepsExampleComponent'
         }
     ];
+    specialElementsExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: specialElementsHtmlExamples,
+            fileName: 'wizard-generator-special-elements-example'
+        },
+        {
+            language: 'typescript',
+            code: specialElementsTsExamples,
+            fileName: 'wizard-generator-special-elements-example',
+            component: 'WizardGeneratorSpecialElementsExampleComponent'
+        }
+    ];
+    specialElementsExamplesHTML: string;
 
     constructor() {}
 }

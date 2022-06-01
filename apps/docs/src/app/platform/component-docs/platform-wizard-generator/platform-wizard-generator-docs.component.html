@@ -260,3 +260,41 @@
     <fdp-wizard-generator-visibility-between-steps-example></fdp-wizard-generator-visibility-between-steps-example>
 </component-example>
 <code-example [exampleFiles]="fieldsVisibilityExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="special-elements" componentName="wizard-generator"
+    >Special Elements in Wizard Generator
+</fd-docs-section-title>
+<description>
+    <p>This is an example of components which require further attributes rather than just the type declaration.</p>
+    <ul>
+        <li>
+            <b> select </b>: the type <code> select</code> is accompanied by the attribute <code>choices</code> to put
+            the list of the options the user can pick.
+        </li>
+        <li>
+            <b> switch </b>: the type <code> switch</code> is accompanied by the attribute <code>default</code> which
+            can be <code>true</code> or <code>false</code>.
+        </li>
+        <li>
+            <b> password </b>: the type <code>password</code>is accompanied by the attribute
+            <code>controlType</code> which can be set to <code>'password'</code>.
+        </li>
+        <li>
+            <b> datepicker </b>: the type <code>datepicker</code> doesn't require any further attributes but the
+            following providers should be added to the project :
+        </li>
+    </ul>
+    <code>
+        provide: DatetimeAdapter, useClass: FdDatetimeAdapter provide: DATE_TIME_FORMATS, useValue: FD_DATETIME_FORMATS
+    </code>
+
+    <p></p>
+
+    <component-example>
+        <fundamental-ngx-wizard-generator-special-elements-example>
+        </fundamental-ngx-wizard-generator-special-elements-example>
+    </component-example>
+    <code-example [exampleFiles]="specialElementsExample"></code-example
+></description>
