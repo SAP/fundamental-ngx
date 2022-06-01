@@ -423,13 +423,15 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         this._cdr.detectChanges();
     }
 
-    private _setScrollPosition(pos: number): void {
+    /** @hidden */
+    _setScrollPosition(pos: number): void {
         this._graphContainerEl.nativeElement.scrollTo({
             left: pos,
             behavior: 'smooth'
         });
     }
 
+    /** @hidden */
     private _moveColInView(colIndex: number): any {
         const node = this._graphEl.nativeElement.children[colIndex].firstElementChild;
         if (!node) {

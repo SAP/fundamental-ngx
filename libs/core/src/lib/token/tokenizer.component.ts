@@ -25,7 +25,7 @@ import {
 } from '@angular/core';
 import { A, BACKSPACE, DELETE, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
 import { fromEvent, merge, Subject, Subscription } from 'rxjs';
-import { filter, mapTo, takeUntil, startWith, debounceTime } from 'rxjs/operators';
+import { filter, mapTo, takeUntil, debounceTime } from 'rxjs/operators';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
 import {
     ContentDensityService,
@@ -502,7 +502,7 @@ export class TokenizerComponent
         }
         this.handleTokenClickSubscriptions();
         this.previousTokenCount = this.tokenList.length;
-        this.tokenList.forEach((token) => token.setTotalCount(this.tokenList.length));
+        this.tokenList.forEach((token) => token._setTotalCount(this.tokenList.length));
     }
 
     /** @hidden */

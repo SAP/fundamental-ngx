@@ -147,7 +147,7 @@ export class TokenComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     /** @hidden */
-    setTotalCount(count: number): void {
+    _setTotalCount(count: number): void {
         this.totalCount = count;
         this._cdRef.markForCheck();
     }
