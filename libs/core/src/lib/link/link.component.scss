@@ -1,14 +1,1 @@
 @import '~fundamental-styles/dist/link';
-
-.fd-link {
-    &--undecorated {
-        &:hover {
-            text-decoration: none;
-
-            [class*='sap-icon'],
-            &[class*='sap-icon'] {
-                text-decoration: none;
-            }
-        }
-    }
-}
