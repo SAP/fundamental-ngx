@@ -11,17 +11,14 @@
 </fdp-list>
 
 <br /><br />
-<h5>Compact Mode</h5>
-<fdp-list [noBorder]="true" [dataSource]="_dataSource" contentDensity="compact" id="compact-list">
-    <fdp-standard-list-item *fdpItemDef="let address" [title]="address.name" [ariaLabel]="address.name">
 
 <h5 id="fd-list-header-2">Compact Mode</h5>
-<fdp-list [noBorder]="true" [dataSource]="_dataSource" contentDensity="compact">
+<fdp-list [noBorder]="true" [dataSource]="_dataSource" contentDensity="compact" id="compact-list">
     <fdp-standard-list-item
         *fdpItemDef="let address"
         [title]="address.name"
         [ariaLabel]="address.name"
-        ariaDescribedBy="fd-list-imperative fd-list-header-2"
+        ariaDescribedBy="fd-list-imperative-1 fd-list-header-2"
     >
     </fdp-standard-list-item>
 </fdp-list>

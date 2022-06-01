@@ -1,6 +1,4 @@
 import {
-    AfterContentChecked,
-    AfterContentInit,
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -74,7 +72,7 @@ let nextListGrpHeaderId = 0;
         '[attr.tabindex]': '-1'
     }
 })
-export class ListComponent<T> extends CollectionBaseInput implements OnInit, AfterViewInit, AfterContentInit, AfterContentChecked, OnDestroy {
+export class ListComponent<T> extends CollectionBaseInput implements OnInit, AfterViewInit, OnDestroy {
     /**  An array that holds a list of all selected items**/
     @Input()
     selectedItems: BaseListItem[];
@@ -356,6 +354,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
     constructor(
         protected _changeDetectorRef: ChangeDetectorRef,
         public itemEl: ElementRef<HTMLElement>,
+        private _liveAnnouncer: LiveAnnouncer,
         @Optional() @Self() public ngControl: NgControl,
         @Optional() @Self() public ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
@@ -412,45 +411,6 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
 
         const indicator = this.itemEl.nativeElement.querySelector('fd-busy-indicator');
         indicator?.setAttribute('aria-label', '');
-    }
-
-    /**
-     * @hidden
-     * Setting values from list to list items
-     * example:
-     * Does list item has navigation,
-     * should show arrows,
-     * will it be compact mode,
-     * should be in which selection mode
-     * set values when passed via datasource
-     */
-    ngAfterContentInit(): void {
-        this._itemsSubscription = this.listItems.changes.subscribe((items) => {
-            if (this.listItems.length !== 0) {
-                this.listItems.first.listItem.nativeElement.setAttribute('tabindex', 0);
-            }
-
-            // verfiying partial navgation set for all items in one go
-            items.forEach((item) => {
-                if (item.navigationIndicator || item.listType === 'detail') {
-                    this._partialNavigation = true;
-                }
-            });
-            items.forEach((item) => {
-                if (!this._partialNavigation) {
-                    item.navigated = this.navigated;
-                    item.navigationIndicator = this.navigationIndicator;
-                    item.listType = this.listType;
-                }
-                item.contentDensity = this.contentDensity;
-                item.selectRow = this.selectRow;
-                item.selectionMode = this.selectionMode;
-                item._hasByLine = this.hasByLine;
-                this.stateChanges.next(item);
-            });
-        });
-
-        this._setAriaSize();
     }
 
     /** @hidden */
@@ -602,15 +562,6 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
     _selectItem(item: BaseListItem): void {
         this._selectionModel.select(item);
         this.stateChanges.next(item);
-    }
-
-    /** @hidden */
-    trackByFn(index: number, item: BaseListItem): string | number {
-        if (item) {
-            return item.id || item.name;
-        }
-
-        return index;
     }
 
     /** @hidden */
@@ -819,6 +770,8 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
 
             this.stateChanges.next(item);
         });
+
+        this._setAriaSize();
     }
 
     /** @hidden Set aria-setsize and aria-poinset attributes */
@@ -827,7 +780,10 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
             this.ariaSetsize = this.listItems.length;
 
             for (let i = 0; i < this.listItems.length; i++) {
-                this.listItems.get(i).ariaPosinet = i + 1;
+                const listItem = this.listItems && this.listItems.get(i);
+                if (listItem) {
+                    listItem.ariaPosinet = i + 1;
+                }
             }
 
             this._cd.markForCheck();

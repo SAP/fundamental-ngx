@@ -72,7 +72,7 @@
 </ng-container>
 
 <ng-template #thenBlock>
-    <ng-container *ngFor="let item of _items; let i = index; trackBy: trackByFn">
+    <ng-container *ngFor="let item of _items; let i = index">
         <ng-container *ngTemplateOutlet="listItemDef.templateRef; context: { $implicit: item }"> </ng-container>
     </ng-container>
 </ng-template>
