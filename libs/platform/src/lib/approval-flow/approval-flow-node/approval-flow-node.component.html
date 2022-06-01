@@ -27,7 +27,9 @@
         class="fdp-approval-flow-node__menu-button"
         fd-button
         fdType="transparent"
+        tabindex="0"
         glyph="overflow"
+        title="Menu"
         [compact]="true"
         [fdMenuTrigger]="menu"
         [disabled]="_isEditActionsAvailable"
@@ -40,6 +42,7 @@
         <div
             class="fdp-approval-flow-node__name"
             [class.fdp-approval-flow-node__name--members-count]="node.approvers.length > 1"
+            [id]="approvalFlowNodeId"
         >
             <ng-container *ngIf="node.approvers.length === 1; else multipleApprovers">
                 {{ node.approvers[0].name }}
@@ -115,6 +118,7 @@
         *ngIf="node.status !== 'approved'"
         fd-button
         glyph="add"
+        title="Add node"
         [compact]="true"
         class="fdp-approval-flow-node__add"
         [class.fdp-approval-flow-node__add--blank]="this._blank"

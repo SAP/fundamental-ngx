@@ -18,8 +18,7 @@ import {
     isDevMode
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { filter, fromEvent, map, merge, Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { filter, fromEvent, map, merge, Observable, Subject, takeUntil, debounceTime } from 'rxjs';
 
 import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
@@ -336,6 +335,8 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, AfterV
             fromEvent(inputElement, 'focusin').pipe(map(() => true)),
             fromEvent(inputElement, 'focusout').pipe(map(() => false))
         ).pipe(
+            // debounceTime is needed in order to filter subsequent focus-blur events, that happen simultaneously
+            debounceTime(10),
             filter(() => this.showFocus),
             takeUntil(this._onDestroy$)
         );

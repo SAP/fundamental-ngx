@@ -16,6 +16,7 @@
     (keydown)="_onKeyDown($event)"
     (click)="selectionMode === 'singleSelect' && _singleSelect($event); _onClick($event)"
     [attr.aria-label]="ariaLabel"
+    [attr.aria-labelledby]="ariaLabelledBy"
     (mouseover)="_setActive($event, false)"
     (mouseout)="_setActive($event, true)"
     [attr.aria-selected]="selectionMode === 'none' ? null : !!_selectedItem"
@@ -132,6 +133,7 @@
         [id]="id + '-radio'"
         [name]="'fd-grid-list-item-toolbar-' + selectionMode"
         [attr.aria-label]="ariaLabel"
+        [attr.aria-labelledby]="ariaLabelledBy"
         [value]="value"
         [ngModel]="_selectedItem"
         (ngModelChange)="$event && _selectionItem($event)"
@@ -151,6 +153,7 @@
         class="fd-checkbox fd-checkbox--compact fd-grid-list__checkbox-input"
         [id]="id + '-checkbox'"
         [attr.aria-label]="ariaLabel"
+        [attr.aria-labelledby]="ariaLabelledBy"
         [ngModel]="_selectedItem"
         (click)="_checkboxClick($event)"
     />
