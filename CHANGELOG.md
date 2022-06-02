@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.46...v0.34.3-rc.47) (2022-06-02)
+
+
+### Bug Fixes
+
+* **platform:** add limitless option to multi combobox ([#7967](https://github.com/SAP/fundamental-ngx/issues/7967)) ([63dc89f](https://github.com/SAP/fundamental-ngx/commit/63dc89f222d7780b63bd54f53c389e2b4acda7d7))
+
 ### [0.34.3-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.45...v0.34.3-rc.46) (2022-05-29)
 
 
