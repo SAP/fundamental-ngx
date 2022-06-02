@@ -32,7 +32,7 @@ import {
     SelectableOptionItem
 } from '@fundamental-ngx/platform/shared';
 
-import { BaseMultiCombobox } from '../commons/base-multi-combobox';
+import { BaseMultiCombobox, MAP_LIMIT } from '../commons/base-multi-combobox';
 import { MultiComboboxMobileComponent } from '../multi-combobox-mobile/multi-combobox/multi-combobox-mobile.component';
 import { PlatformMultiComboboxMobileModule } from '../multi-combobox-mobile/multi-combobox-mobile.module';
 import { MULTICOMBOBOX_COMPONENT } from '../multi-combobox.interface';
@@ -74,9 +74,10 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         private readonly _viewContainerRef: ViewContainerRef,
         private readonly _injector: Injector,
         @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
+        @Inject(MAP_LIMIT) _mapLimit: number
     ) {
-        super(cd, elementRef, ngControl, ngForm, dialogConfig, _multiComboboxConfig, formField, formControl);
+        super(cd, elementRef, ngControl, ngForm, dialogConfig, _multiComboboxConfig, formField, formControl, _mapLimit);
     }
 
     /** @hidden */

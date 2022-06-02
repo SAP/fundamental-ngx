@@ -6,12 +6,16 @@ import {
     ElementRef,
     EventEmitter,
     Host,
+    Inject,
+    InjectionToken,
     Input,
+    OnChanges,
     OnDestroy,
     Optional,
     Output,
     QueryList,
     Self,
+    SimpleChanges,
     SkipSelf,
     TemplateRef,
     ViewChild
@@ -64,6 +68,8 @@ import {
 import { TextAlignment } from '../../combobox';
 import { MultiComboboxConfig } from '../multi-combobox.config';
 
+export const MAP_LIMIT = new InjectionToken<number>('Map limit≥', { factory: () => 12 });
+
 export type FdpMultiComboboxDataSource<T> = MultiComboBoxDataSource<T> | Observable<T[]> | T[];
 
 export class MultiComboboxSelectionChangeEvent {
@@ -74,7 +80,7 @@ export class MultiComboboxSelectionChangeEvent {
 }
 
 @Directive()
-export abstract class BaseMultiCombobox extends CollectionBaseInput implements AfterViewInit, OnDestroy {
+export abstract class BaseMultiCombobox extends CollectionBaseInput implements OnChanges, AfterViewInit, OnDestroy {
     /** Provides selected items. */
     @Input()
     selectedItems: any[] = [];
@@ -92,11 +98,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
 
     /** Datasource for suggestion list. */
     @Input()
-    set dataSource(value: FdpMultiComboboxDataSource<any>) {
-        if (value) {
-            this._initializeDataSource(value);
-        }
-    }
+    set dataSource(value: FdpMultiComboboxDataSource<any>) {}
     get dataSource(): FdpMultiComboboxDataSource<any> {
         return this._dataSource;
     }
@@ -169,6 +171,10 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     /** Sets invalid entry message. */
     @Input()
     invalidEntryMessage = 'Invalid entry';
+
+    /** Turns limitless mode, ON or OFF */
+    @Input()
+    limitless: boolean;
 
     /** Event emitted when item is selected. */
     @Output()
@@ -263,10 +269,10 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
      * @hidden
      * Grouped suggestions mapped to array.
      */
-    _flatSuggestions: SelectableOptionItem[];
+    _flatSuggestions: SelectableOptionItem[] = [];
 
     /** @hidden */
-    _fullFlatSuggestions: SelectableOptionItem[];
+    _fullFlatSuggestions: SelectableOptionItem[] = [];
 
     /**
      * @hidden
@@ -363,9 +369,18 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
         @Optional() readonly dialogConfig: DialogConfig,
         protected multiComboboxConfig: MultiComboboxConfig,
         @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
+        @Inject(MAP_LIMIT) private _mapLimit: number
     ) {
         super(_cd, ngControl, ngForm, formField, formControl);
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        const dataSourceChange = changes['dataSource'];
+
+        if (dataSourceChange) {
+            this._initializeDataSource(dataSourceChange.currentValue);
+        }
     }
 
     /** @hidden */
@@ -462,7 +477,11 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
 
         const map = new Map();
         map.set('query', text);
-        map.set('limit', 12);
+
+        if (!this.limitless) {
+            map.set('limit', this._mapLimit);
+        }
+
         this.ds.match(map);
 
         this._cd.markForCheck();
@@ -645,6 +664,9 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
         if (initDataSource === undefined) {
             throw new Error(`[dataSource] source did not match an array, Observable, or DataSource`);
         }
+
+        initDataSource.limitless = this.limitless;
+
         /**
          * This is single point of data entry to the component. We dont want to set data on different
          * places. If any new data comes in either you do a search and you want to pass initial data
@@ -714,7 +736,11 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
         // initial data fetch
         const map = new Map();
         map.set('query', '*');
-        map.set('limit', 12);
+
+        if (!this.limitless) {
+            map.set('limit', MAP_LIMIT);
+        }
+
         initDataSource.match(map);
 
         return initDataSource;
