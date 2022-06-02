@@ -144,14 +144,14 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
             }
             this.openMenu();
         } else if (KeyUtil.isKeyCode(event, [RIGHT_ARROW])) {
-            if (this._menu._cascadesRight()) {
+            if (this._menu._cascadesRight() && this._menu.openByArrowKeys) {
                 if (this._menuItem) {
                     this._menuItem.isSelected = true;
                 }
                 this.openMenu();
             }
         } else if (KeyUtil.isKeyCode(event, [LEFT_ARROW])) {
-            if (this._menu._cascadesLeft()) {
+            if (this._menu._cascadesLeft() && this._menu.openByArrowKeys) {
                 if (this._menuItem) {
                     this._menuItem.isSelected = true;
                 }
