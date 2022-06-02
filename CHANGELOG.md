@@ -1,4 +1,11 @@
 
+### [0.34.3-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.45...v0.34.3-rc.46) (2022-05-29)
+
+
+### Bug Fixes
+
+* **platform:** link optionalText from wizardGenerator's steps to wizard steps ([#8148](https://github.com/SAP/fundamental-ngx/issues/8148)) ([3e60f5d](https://github.com/SAP/fundamental-ngx/commit/3e60f5dc846fec211fe8385b8e2429ec54a58a32))
+
 ### [0.34.3-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.44...v0.34.3-rc.45) (2022-05-25)
 
 

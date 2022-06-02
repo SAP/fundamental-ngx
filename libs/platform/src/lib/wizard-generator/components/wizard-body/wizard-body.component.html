@@ -12,6 +12,7 @@
                     fd-wizard-step
                     [label]="step.name"
                     [status]="step.status"
+                    [optionalText]="step.optionalText"
                     [branching]="!!step.branching"
                     [stepClickValidator]="stepClickValidatorFn(i)"
                     [isSummary]="!!step.summary"
