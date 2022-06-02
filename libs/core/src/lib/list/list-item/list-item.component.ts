@@ -154,19 +154,19 @@ export class ListItemComponent
 
     /** @hidden */
     @HostBinding('attr.aria-describedBy')
-    get getCombinedAriaDescribedBy(): string {
-        let describedBy = this._uniqueId + '-screenReader-content';
+    get getCombinedAriaDescribedBy(): string | null {
+        let describedBy = this.screenReaderContent ? this._uniqueId + '-screenReader-content' : '';
         if (this.ariaDescribedBy) {
             describedBy += ' ' + this.ariaDescribedBy;
         }
         if (this._relatedGroupHeaderId) {
             describedBy += ' ' + this._relatedGroupHeaderId;
         }
-        return describedBy;
+        return describedBy.trim() || null;
     }
 
     /** @hidden */
-    readonly _uniqueId = 'fdp-list-item-' + ++listItemUniqueId;
+    readonly _uniqueId = 'fd-list-item-' + ++listItemUniqueId;
 
     constructor(public elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) {
         super(elementRef);
@@ -275,6 +275,9 @@ export class ListItemComponent
         }
         if (this.linkDirectives.some((d) => d.navigationIndicator)) {
             content += `, ${this.navigatableListItemScreenReaderText ?? 'navigatable'}`;
+        }
+        if (content.startsWith(', ')) {
+            content = content.substring(2);
         }
         this.screenReaderContent = content;
         this._changeDetectorRef.markForCheck();
