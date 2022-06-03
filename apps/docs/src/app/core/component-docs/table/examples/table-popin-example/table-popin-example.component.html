@@ -1,6 +1,13 @@
 <div style="max-width: 450px; padding-bottom: 50px">
     <h4 class="table-example-popin-title">Mobile Mode</h4>
-    <table fd-table [popIn]="true" [noBorderX]="true" [noBorderY]="true" [responsive]="true">
+    <table
+        fd-table
+        [popIn]="true"
+        [noBorderX]="true"
+        [noBorderY]="true"
+        [responsive]="true"
+        aria-label="Pop In Mode on Responsive Table Mobile Mode"
+    >
         <thead fd-table-header>
             <tr fd-table-row>
                 <th fd-table-cell>Fruit Description</th>
@@ -47,7 +54,14 @@
 
 <div style="max-width: 768px; padding-bottom: 50px">
     <h4 class="table-example-popin-title">Tablet Mode</h4>
-    <table fd-table [popIn]="true" [noBorderX]="true" [noBorderY]="true" [responsive]="true">
+    <table
+        fd-table
+        [popIn]="true"
+        [noBorderX]="true"
+        [noBorderY]="true"
+        [responsive]="true"
+        aria-label="Pop In Mode on Responsive Table Tablet Mode"
+    >
         <thead fd-table-header>
             <tr fd-table-row>
                 <th fd-table-cell>Fruit Description</th>
@@ -94,7 +108,7 @@
 
 <div style="max-width: 1200px; padding-bottom: 50px">
     <h4 class="table-example-popin-title">Desktop Mode</h4>
-    <table fd-table [noBorderX]="true" [responsive]="true">
+    <table fd-table [noBorderX]="true" [responsive]="true" aria-label="Pop In Mode on Responsive Table Tablet Mode">
         <thead fd-table-header>
             <tr fd-table-row>
                 <th fd-table-cell>Name</th>
@@ -140,11 +154,20 @@
 
 <div style="max-width: 450px; padding-bottom: 50px">
     <h4 class="table-example-popin-title">Popin Mobile Mode with Checkboxes</h4>
-    <table fd-table [popIn]="true" [noBorderX]="true" [noBorderY]="true" [responsive]="true">
+    <table
+        fd-table
+        [popIn]="true"
+        [noBorderX]="true"
+        [noBorderY]="true"
+        [responsive]="true"
+        aria-label="Popin Mobile Mode with Checkboxes"
+    >
         <thead fd-table-header>
             <tr fd-table-row>
                 <th fd-table-cell>
                     <fd-checkbox
+                        aria-label="Select all"
+                        title="Select all"
                         name="allCheckbox"
                         [tristate]="true"
                         [ngModel]="masterCheckbox"
@@ -161,6 +184,8 @@
                 <tr fd-table-row [main]="true" [attr.aria-selected]="fruit.checked">
                     <td fd-table-cell>
                         <fd-checkbox
+                            [attr.aria-label]="'Select row ' + (ind + 1)"
+                            [attr.title]="'Select row ' + (ind + 1)"
                             name="firstCheckbox{{ fruit.name }}"
                             [ngModel]="fruit.checked"
                             (ngModelChange)="select(ind, $event)"

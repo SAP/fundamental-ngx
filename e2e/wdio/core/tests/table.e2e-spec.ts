@@ -2,27 +2,25 @@ import { TablePo } from '../pages/table.po';
 import {
     acceptAlert,
     browserIsFirefox,
-    checkElementScreenshot,
     click,
     clickAndMoveElement,
     getAlertText,
     getAttributeByName,
     getElementArrayLength,
     getElementClass,
-    getImageTagBrowserPlatform,
     getText,
     isElementClickable,
     isElementDisplayed,
     isEnabled,
     refreshPage,
-    saveElementScreenshot,
     scrollIntoView,
     setValue,
     waitForElDisplayed,
     getCurrentUrl,
     browserIsSafari,
     browserIsSafariorFF,
-    waitForPresent
+    waitForPresent,
+    getTextArr
 } from '../../driver/wdio';
 import {
     alertText,
@@ -43,7 +41,6 @@ describe('Table test suite', () => {
         busyIndicator,
         dialogContent,
         inputField,
-        table,
         tableRow,
         tableCell,
         markAllCheckboxes,
@@ -61,7 +58,6 @@ describe('Table test suite', () => {
         tableCustomColumnsExample,
         inputGroup,
         dialogValue,
-        tableInner,
         columnSortingInput,
         tableColumnSortingExample,
         sortAscending,
@@ -154,34 +150,14 @@ describe('Table test suite', () => {
             click(tableCustomColumnsExample + button);
             click(dialogContent + button, 1);
             click(dialogContent + button, 2);
-            saveElementScreenshot(
-                tableCustomColumnsExample + table,
-                'table-sort-down-example-' + getImageTagBrowserPlatform(),
-                tablePage.getScreenshotFolder()
-            );
-            expect(
-                checkElementScreenshot(
-                    tableCustomColumnsExample + table,
-                    'table-sort-down-example-' + getImageTagBrowserPlatform(),
-                    tablePage.getScreenshotFolder()
-                )
-            ).toBeLessThan(5, `element item state mismatch`);
+            const rowsDesc: string[] = getTextArr(tableCustomColumnsExample + ' thead .fd-table__cell');
+            expect(checkSortDirection(rowsDesc, 'desc')).toBe(true);
 
             click(tableCustomColumnsExample + button);
             click(dialogContent + button);
             click(dialogContent + button, 2);
-            saveElementScreenshot(
-                tableCustomColumnsExample + table,
-                'table-sort-up-example-' + getImageTagBrowserPlatform(),
-                tablePage.getScreenshotFolder()
-            );
-            expect(
-                checkElementScreenshot(
-                    tableCustomColumnsExample + table,
-                    'table-sort-up-example-' + getImageTagBrowserPlatform(),
-                    tablePage.getScreenshotFolder()
-                )
-            ).toBeLessThan(5, `element item state mismatch`);
+            const rowsAsc: string[] = getTextArr(tableCustomColumnsExample + ' thead .fd-table__cell');
+            expect(checkSortDirection(rowsAsc, 'asc')).toBe(true);
         });
 
         it('should check search work correctly', () => {
@@ -201,8 +177,7 @@ describe('Table test suite', () => {
 
     describe('Check Column Sorting and Filtering example', () => {
         it('should check filter work correctly', () => {
-            scrollIntoView(tableInner);
-            click(tableInner);
+            scrollIntoView(tableColumnSortingExample);
             setValue(columnSortingInput, 'Apple');
             const rowLength = getElementArrayLength(tableColumnSortingExample + tableRow);
             expect(rowLength).toEqual(1);
@@ -213,36 +188,14 @@ describe('Table test suite', () => {
         });
 
         it('should check sort ascending and descending work correctly', () => {
-            scrollIntoView(tableInner);
-            click(tableInner);
+            scrollIntoView(tableColumnSortingExample);
             click(sortDescending);
-            saveElementScreenshot(
-                tableColumnSortingExample + table,
-                'table-descending-example-' + getImageTagBrowserPlatform(),
-                tablePage.getScreenshotFolder()
-            );
-            expect(
-                checkElementScreenshot(
-                    tableColumnSortingExample + table,
-                    'table-descending-example-' + getImageTagBrowserPlatform(),
-                    tablePage.getScreenshotFolder()
-                )
-            ).toBeLessThan(5, `element item state mismatch`);
+            const rowsDesc: string[] = getTextArr(tableColumnSortingExample + ' tbody .fd-table__cell:first-child');
+            expect(checkSortDirection(rowsDesc, 'desc')).toBe(true);
 
-            click(tableInner);
             click(sortAscending);
-            saveElementScreenshot(
-                tableColumnSortingExample + table,
-                'table-ascending-example-' + getImageTagBrowserPlatform(),
-                tablePage.getScreenshotFolder()
-            );
-            expect(
-                checkElementScreenshot(
-                    tableColumnSortingExample + table,
-                    'table-ascending-example-' + getImageTagBrowserPlatform(),
-                    tablePage.getScreenshotFolder()
-                )
-            ).toBeLessThan(5, `element item state mismatch`);
+            const rowsAsc: string[] = getTextArr(tableColumnSortingExample + ' tbody .fd-table__cell:first-child');
+            expect(checkSortDirection(rowsAsc, 'asc')).toBe(true);
         });
     });
 
@@ -448,5 +401,16 @@ describe('Table test suite', () => {
                 `link with index ${i} in ${selector} example not clickable`
             );
         }
+    }
+
+    function checkSortDirection(entries: string[], dir: 'asc' | 'desc'): boolean {
+        return entries.every((right, index) => {
+            if (index === 0) {
+                return true;
+            }
+            const left = entries[index - 1];
+            const compared = right.localeCompare(left);
+            return dir === 'asc' ? compared >= 0 : compared <= 0;
+        });
     }
 });

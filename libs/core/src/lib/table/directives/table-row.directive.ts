@@ -10,6 +10,7 @@ import {
     QueryList
 } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { startWith } from 'rxjs/operators';
 
 import { TableService } from '../table.service';
 import { TableCellDirective } from './table-cell.directive';
@@ -69,6 +70,7 @@ export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
     /** @hidden */
     ngAfterViewInit(): void {
         this._resetCells(this._tableService.propagateKeys$.getValue());
+        this._setupCellsSubscription();
     }
 
     /** @hidden */
@@ -103,7 +105,7 @@ export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
     /** @hidden */
     private _sortNativeElements(): void {
         this.cells.forEach((cell) =>
-            cell.elementRef.nativeElement.parentNode.appendChild(cell.elementRef.nativeElement)
+            cell.elementRef.nativeElement.parentNode?.appendChild(cell.elementRef.nativeElement)
         );
     }
 
@@ -119,5 +121,13 @@ export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
     /** @hidden */
     private _hideElement(element: TableCellDirective): void {
         element.elementRef.nativeElement.classList.add(HIDDEN_CLASS_NAME);
+    }
+
+    private _setupCellsSubscription(): void {
+        this.cells.changes.pipe(startWith(null)).subscribe(() => {
+            this.cells.forEach((cell, index) => {
+                cell.elementRef.nativeElement.ariaColIndex = index.toString();
+            });
+        });
     }
 }

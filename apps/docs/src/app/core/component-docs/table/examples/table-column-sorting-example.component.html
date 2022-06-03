@@ -4,6 +4,7 @@
     <fd-input-group
         glyph="decline"
         glyphAriaLabel="Clear"
+        title="Search"
         placeholder="Search"
         [button]="true"
         [compact]="true"
@@ -28,16 +29,20 @@
         (click)="changeSort(false)"
     ></button>
 </fd-toolbar>
-<table fd-table>
+<table fd-table aria-label="Column Sorting and Filtering">
     <thead fd-table-header>
         <tr fd-table-row>
             <th fd-table-cell>
                 <span class="fd-table__inner">
                     Column 1
-                    <div class="fd-table__column-header-icons">
-                        <fd-icon fd-table-icon [glyph]="ascending ? 'sort-ascending' : 'sort-descending'"></fd-icon>
+                    <div class="fd-table__column-header-icons" aria-hidden="true">
+                        <fd-icon
+                            fd-table-icon
+                            [glyph]="ascending ? 'sort-ascending' : 'sort-descending'"
+                            [title]="ascending ? 'Ascending' : 'Descending'"
+                        ></fd-icon>
 
-                        <fd-icon *ngIf="filterVal" fd-table-icon glyph="filter"></fd-icon>
+                        <fd-icon *ngIf="filterVal" fd-table-icon glyph="filter" title="Filter"></fd-icon>
                     </div>
                 </span>
             </th>

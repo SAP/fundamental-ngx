@@ -1,5 +1,7 @@
 import { Directive, Input } from '@angular/core';
 
+import { Nullable } from '@fundamental-ngx/core/shared';
+
 export type TableStatuses = 'valid' | 'warning' | 'information' | 'error';
 
 @Directive({
@@ -15,5 +17,5 @@ export type TableStatuses = 'valid' | 'warning' | 'information' | 'error';
 export class TableStatusIndicatorDirective {
     /** The type of indicator. Options are 'valid', 'warning', 'information' and 'error'. */
     @Input()
-    status: TableStatuses;
+    status: Nullable<TableStatuses>;
 }

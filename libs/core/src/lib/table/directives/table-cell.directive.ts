@@ -1,3 +1,4 @@
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 import {
     AfterContentInit,
     Directive,
@@ -6,14 +7,20 @@ import {
     Input,
     QueryList,
     ContentChildren,
-    forwardRef
+    forwardRef,
+    OnDestroy,
+    Optional
 } from '@angular/core';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
+import { fromEvent, Subject, takeUntil } from 'rxjs';
+import { Nullable } from '@fundamental-ngx/core/shared';
+import { NumberInput } from '@angular/cdk/coercion';
+import { FdTable } from '../fd-table.interface';
 
 @Directive({
     selector: '[fdTableCell], [fd-table-cell]'
 })
-export class TableCellDirective implements AfterContentInit {
+export class TableCellDirective implements AfterContentInit, OnDestroy {
     /** Whether or not to show the table cell's horizontal borders */
     @HostBinding('class.fd-table__cell--no-horizontal-border')
     @Input()
@@ -32,7 +39,30 @@ export class TableCellDirective implements AfterContentInit {
     /** Whether or not the table cell is focusable */
     @HostBinding('class.fd-table__cell--focusable')
     @Input()
-    focusable = false;
+    set focusable(value: Nullable<boolean>) {
+        this._focusable = value;
+    }
+
+    get focusable(): Nullable<boolean> {
+        return this._focusable ?? this._table?.allCellsFocusable;
+    }
+
+    /** @hidden */
+    private _focusable: Nullable<boolean>;
+
+    /** Tabindex attribute for the cell */
+    @HostBinding('attr.tabindex')
+    @Input()
+    set tabindex(value: Nullable<NumberInput>) {
+        this._tabindex = value;
+    }
+
+    get tabindex(): Nullable<NumberInput> {
+        return this._tabindex ?? (this.focusable ? 0 : null);
+    }
+
+    /** @hidden */
+    private _tabindex: Nullable<NumberInput>;
 
     /** Whether or not the table cell is hoverable */
     @HostBinding('class.fd-table__cell--hoverable')
@@ -58,6 +88,10 @@ export class TableCellDirective implements AfterContentInit {
     @Input()
     key: string;
 
+    /** Function, that creates a string to be announced by screenreader whenever cell receives focus */
+    @Input()
+    cellFocusedEventAnnouncer: (data: TableCellPosition) => string = this._defaultCellFocusedEventAnnouncer;
+
     /** @hidden */
     @ContentChildren(forwardRef(() => CheckboxComponent))
     _checkboxes: QueryList<CheckboxComponent>;
@@ -66,16 +100,83 @@ export class TableCellDirective implements AfterContentInit {
     @HostBinding('class.fd-table__cell')
     _fdTableCellClass = true;
 
-    constructor(public elementRef: ElementRef) {}
+    /** @hidden */
+    private readonly _onDestroy$ = new Subject<void>();
+
+    constructor(
+        public readonly elementRef: ElementRef<HTMLElement>,
+        private readonly _liveAnnouncer: LiveAnnouncer,
+        @Optional() private readonly _table?: FdTable
+    ) {}
+
+    ngOnDestroy(): void {
+        this._onDestroy$.next();
+    }
 
     /** @hidden */
     ngAfterContentInit(): void {
+        const cell = this.elementRef.nativeElement;
+
         if (this._checkboxes && this._checkboxes.length) {
-            this.elementRef.nativeElement.classList.add('fd-table__cell--checkbox');
+            cell.classList.add('fd-table__cell--checkbox');
         }
 
         if (this.noData) {
-            this.elementRef.nativeElement.setAttribute('colspan', '100%');
+            cell.setAttribute('colspan', '100%');
         }
+
+        fromEvent(cell, 'focusin')
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe(() => {
+                const data = this.getCellPosition();
+
+                if (!data) {
+                    return;
+                }
+
+                this._liveAnnouncer.clear();
+                this._liveAnnouncer.announce(this.cellFocusedEventAnnouncer(data));
+            });
+
+        fromEvent<KeyboardEvent>(cell, 'keydown')
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe((event) => this._table?._onCellKeydown(event, this));
     }
+
+    /** Returns row and col indexes for the cell */
+    getCellPosition(): TableCellPosition | undefined {
+        const parentRow = this.elementRef.nativeElement.parentElement;
+        if (!(parentRow instanceof HTMLTableRowElement)) {
+            return;
+        }
+        const section = parentRow.parentElement;
+        if (!(section instanceof HTMLTableSectionElement)) {
+            return;
+        }
+        const rows = section.children;
+        const cols = parentRow.children;
+
+        const row = [...(rows as any as Element[])].indexOf(parentRow);
+        const col = [...(cols as any as Element[])].indexOf(this.elementRef.nativeElement);
+        return {
+            row,
+            col,
+            totalRows: rows.length,
+            totalCols: cols.length,
+            origin: section
+        };
+    }
+
+    /** @hidden */
+    private _defaultCellFocusedEventAnnouncer(data: TableCellPosition): string {
+        return `Column ${data.col + 1} of ${data.totalCols}, row: ${data.row + 1} of ${data.totalRows}`;
+    }
+}
+
+export interface TableCellPosition {
+    row: number;
+    col: number;
+    totalRows: number;
+    totalCols: number;
+    origin: HTMLTableSectionElement;
 }

@@ -1,9 +1,11 @@
-<table fd-table>
+<table fd-table aria-label="With Semantic Row Highlighting">
     <thead fd-table-header>
         <tr fd-table-row>
             <th fd-table-cell fd-table-status-indicator></th>
             <th fd-table-cell>
                 <fd-checkbox
+                    aria-label="Select all"
+                    title="Select all"
                     [tristate]="true"
                     [ngModel]="isAllSelected"
                     (ngModelChange)="selectAll($event)"
@@ -19,7 +21,12 @@
         <tr *ngFor="let row of tableRows; let i = index" fd-table-row [attr.aria-selected]="tableRows[i].checked">
             <td fd-table-cell fd-table-status-indicator [status]="row.status"></td>
             <td fd-table-cell>
-                <fd-checkbox [value]="row.checked" (click)="select(i, $event)"></fd-checkbox>
+                <fd-checkbox
+                    [attr.aria-label]="getRowAriaLabel(row, i)"
+                    [attr.title]="getRowAriaLabel(row, i)"
+                    [value]="row.checked"
+                    (click)="select(i, $event)"
+                ></fd-checkbox>
             </td>
             <td fd-table-cell>
                 <a fd-link href="#">{{ row.column1 }}</a>
