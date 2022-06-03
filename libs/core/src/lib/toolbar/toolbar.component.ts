@@ -1,31 +1,38 @@
 import {
-    Component,
-    ViewEncapsulation,
-    AfterViewInit,
+    AfterContentInit,
     AfterViewChecked,
+    AfterViewInit,
     ChangeDetectionStrategy,
-    ElementRef,
-    ViewChild,
-    OnInit,
-    forwardRef,
-    ContentChildren,
-    QueryList,
     ChangeDetectorRef,
-    Renderer2,
+    Component,
+    ContentChild,
+    ContentChildren,
+    ElementRef,
+    forwardRef,
+    Inject,
     Input,
     OnDestroy,
-    Optional
+    OnInit,
+    Optional,
+    QueryList,
+    Renderer2,
+    SkipSelf,
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
+import { DYNAMIC_PAGE_HEADER_TOKEN, DynamicPageHeader } from '@fundamental-ngx/core/shared';
 
-import { Observable, of, fromEvent, Subscription } from 'rxjs';
-import { delay, debounceTime, takeWhile, distinctUntilChanged, filter } from 'rxjs/operators';
-
-import { OVERFLOW_PRIORITY_SCORE } from '@fundamental-ngx/core/utils';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
+import {
+    applyCssClass,
+    ContentDensityService,
+    CssClassBuilder,
+    OVERFLOW_PRIORITY_SCORE,
+    OverflowPriority
+} from '@fundamental-ngx/core/utils';
+import { fromEvent, Observable, of, Subscription } from 'rxjs';
+import { debounceTime, delay, distinctUntilChanged, filter, takeWhile } from 'rxjs/operators';
 import { ToolbarItemDirective } from './toolbar-item.directive';
-import { OverflowPriority } from '@fundamental-ngx/core/utils';
+import { TitleToken } from '@fundamental-ngx/core/title';
 
 const ELEMENT_MARGIN = 8;
 const OVERFLOW_SPACE = 50 + 2 * ELEMENT_MARGIN;
@@ -50,7 +57,9 @@ export const enum OverflowPriorityEnum {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, AfterViewChecked, CssClassBuilder {
+export class ToolbarComponent
+    implements OnInit, AfterViewInit, OnDestroy, AfterViewChecked, CssClassBuilder, AfterContentInit
+{
     /** Property allows user to pass additional class
      */
     @Input()
@@ -76,11 +85,13 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     @Input()
     size: ToolbarSize = null;
 
-    /** Determines if toolbar contains text which size is equal to h4
-     * Default value: false
-     */
+    /** @deprecated */
     @Input()
     hasTitle = false;
+
+    /** The title for the toolbar. */
+    @Input()
+    title: string;
 
     /** Determines if toolbar should has active state (only when fdType == 'info')
      * Default value: false
@@ -98,6 +109,10 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     @Input()
     forceOverflow = false;
 
+    /** Tabindex of the toolbar element, to be used when fdType="info" */
+    @Input()
+    tabindex = -1;
+
     /** @hidden */
     @ViewChild('toolbar')
     toolbar: ElementRef;
@@ -113,6 +128,10 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     /** @hidden */
     @ContentChildren(forwardRef(() => ToolbarItemDirective))
     toolbarItems: QueryList<ToolbarItemDirective>;
+
+    /** @hidden */
+    @ContentChild(TitleToken)
+    titleComponent: TitleToken | null = null;
 
     /** @hidden */
     overflowVisibility: Observable<boolean> = of(false);
@@ -160,7 +179,8 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     constructor(
         private _cd: ChangeDetectorRef,
         private _renderer: Renderer2,
-        @Optional() private _contentDensityService: ContentDensityService
+        @Optional() private _contentDensityService?: ContentDensityService,
+        @Optional() @SkipSelf() @Inject(DYNAMIC_PAGE_HEADER_TOKEN) private _dynamicPageHeader?: DynamicPageHeader
     ) {}
 
     /** @hidden */
@@ -202,6 +222,14 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     }
 
     /** @hidden */
+    ngAfterContentInit(): void {
+        if (this.titleComponent) {
+            this.titleComponent.elementRef?.nativeElement.classList.add('fd-toolbar__title');
+            this.buildComponentCssClass();
+        }
+    }
+
+    /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
         this._alive = false;
@@ -213,7 +241,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     }
 
     /** @hidden */
-    elementRef(): ElementRef<any> {
+    elementRef(): ElementRef {
         return this.toolbar;
     }
 
@@ -225,8 +253,9 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
             `fd-toolbar--${this.fdType}`,
             `${this.active && this.fdType === 'info' ? 'fd-toolbar--active' : ''}`,
             `${this.size === 'cozy' ? 'fd-toolbar--cozy' : ''}`,
-            `${this.hasTitle ? 'fd-toolbar--title' : ''}`,
-            `${this.clearBorder ? 'fd-toolbar--clear' : ''}`
+            `${this.hasTitle || this.title || this.titleComponent ? 'fd-toolbar--title' : ''}`,
+            `${this.clearBorder ? 'fd-toolbar--clear' : ''}`,
+            `${this._dynamicPageHeader ? 'fd-dynamic-page__toolbar' : ''}`
         ];
     }
 

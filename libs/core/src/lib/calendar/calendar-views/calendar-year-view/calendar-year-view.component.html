@@ -7,7 +7,7 @@
                 *ngFor="let colYears of _calendarYearListGrid; let rowIndex = index"
             >
                 <td
-                    class="fd-calendar__item"
+                    class="fd-button fd-button--transparent fd-calendar__item"
                     role="gridcell"
                     *ngFor="let yearCell of colYears; let colIndex = index"
                     [class.fd-calendar__item--current]="yearCell.current"
@@ -20,18 +20,26 @@
                     (keydown)="_onKeydownYearHandler($event, yearCell.index)"
                     (click)="selectYear(yearCell, $event)"
                 >
-                    <span
-                        class="fd-calendar__text"
-                        role="button"
-                        [attr.aria-labelledby]="
-                            yearCell.id +
-                            '-aria-label ' +
-                            (yearCell.current ? _todayLabelId + ' ' : '') +
-                            (yearCell.selected ? _selectedDateLabelId : '')
-                        "
+                    <button
+                        fd-button
+                        fdType="transparent"
+                        class="fd-calendar__item-button"
+                        [class.is-active]="yearCell.current"
+                        tabindex="-1"
                     >
-                        {{ yearCell.label }}
-                    </span>
+                        <span
+                            class="fd-calendar__text"
+                            [attr.aria-labelledby]="
+                                yearCell.id +
+                                '-aria-label ' +
+                                (yearCell.current ? _todayLabelId + ' ' : '') +
+                                (yearCell.selected ? _selectedDateLabelId : '')
+                            "
+                        >
+                            {{ yearCell.label }}
+                        </span>
+                    </button>
+
                     <span hidden aria-hidden="true" [attr.id]="yearCell.id + '-aria-label'">
                         {{ yearCell.ariaLabel }}
                     </span>

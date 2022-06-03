@@ -30,7 +30,6 @@
         color: var(--sapShell_TextColor, #fff);
         line-height: 2.3rem;
         flex: 0 0 auto;
-        font-size: 1.2rem;
         display: inline-block;
         margin-right: 0.5rem;
 
@@ -53,6 +52,7 @@
     margin: 0 0.5rem;
     color: #fff;
     color: var(--sapShell_TextColor, #fff);
+
     &:hover {
         color: #fff;
         color: var(--sapShell_TextColor, #fff);

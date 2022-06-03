@@ -2,13 +2,15 @@
     <button
         fd-shellbar-side-nav
         fd-button
-        aria-expanded="false"
         fdType="transparent"
+        class="fd-shellbar__button--menu"
+        aria-expanded="false"
         glyph="menu2"
         aria-label="Switch Navigation"
         [compact]="false"
         (click)="this.btnClicked.emit()"
     ></button>
+
     <fd-shellbar-logo>
         <a
             aria-label="Home"
@@ -28,12 +30,13 @@
         <ng-container *ngIf="size === 's'">
             <button
                 fd-button
-                class="fd-shellbar__button--menu fd-docs--theme-menu"
                 fdType="transparent"
+                class="fd-shellbar__button fd-shellbar__button--menu fd-docs--theme-menu"
                 [compact]="false"
                 glyph="settings"
                 [fdMenuTrigger]="optionsMenu"
             ></button>
+
             <fd-menu
                 #optionsMenu
                 [compact]="false"
@@ -74,11 +77,12 @@
                 <ng-container *ngTemplateOutlet="versionsTemplate"></ng-container>
             </fd-submenu>
         </ng-container>
+
         <ng-container *ngIf="size !== 's'">
             <button
                 fd-button
-                class="fd-shellbar__button--menu fd-docs--theme-menu"
                 fdType="transparent"
+                class="fd-shellbar__button fd-shellbar__button--menu fd-docs--theme-menu"
                 [fdMenu]="true"
                 [fdMenuTrigger]="densityMenu"
             >
@@ -91,9 +95,9 @@
 
             <button
                 fd-button
-                glyph="palette"
-                class="fd-shellbar__button--menu fd-docs--theme-menu"
                 fdType="transparent"
+                glyph="palette"
+                class="fd-shellbar__button fd-shellbar__button--menu fd-docs--theme-menu"
                 [fdMenu]="true"
                 [fdMenuTrigger]="themesMenu"
             ></button>
@@ -107,9 +111,9 @@
                 fdType="transparent"
                 [fdMenu]="true"
                 [fdMenuTrigger]="versionsMenu"
-                class="fd-shellbar__button--menu fd-docs--toolbar__version fd-docs--theme-menu"
+                class="fd-shellbar__button fd-shellbar__button--menu fd-docs--toolbar__version fd-docs--theme-menu"
             >
-                v {{ version.id }}
+                v{{ version.id }}
             </button>
 
             <fd-menu #versionsMenu [fillControlMode]="null" placement="bottom-end">
@@ -118,9 +122,11 @@
         </ng-container>
 
         <a
+            fd-button
+            fdType="transparent"
             href="https://github.com/SAP/fundamental-ngx"
             title="Find us on Github!"
-            class="fd-button fd-button--standard fd-shellbar__button fd-shellbar__button"
+            class="fd-button fd-shellbar__button fd-shellbar__button"
         >
             <svg
                 class="logo-github logo-github--white"
@@ -162,8 +168,10 @@
         </a>
     </fd-shellbar-actions>
 </fd-shellbar>
+
 <link rel="stylesheet" *ngIf="cssUrl" [href]="cssUrl" />
 <link rel="stylesheet" *ngIf="customCssUrl" [href]="customCssUrl" />
+<link rel="stylesheet" *ngIf="highlightJsThemeCss" [href]="highlightJsThemeCss" />
 
 <ng-template #themesTemplate>
     <li fd-menu-item *ngFor="let theme of themes">

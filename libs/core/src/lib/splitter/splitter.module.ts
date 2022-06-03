@@ -1,6 +1,7 @@
 import { PortalModule } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 import { IconModule } from '@fundamental-ngx/core/icon';
 
@@ -22,7 +23,7 @@ import { SplitterComponent } from './splitter.component';
         SplitterPaginationComponent,
         NoDefaultPanePipe
     ],
-    imports: [CommonModule, IconModule, PortalModule],
+    imports: [CommonModule, IconModule, ButtonModule, PortalModule],
     exports: [
         SplitterComponent,
         SplitterPaneContainerComponent,

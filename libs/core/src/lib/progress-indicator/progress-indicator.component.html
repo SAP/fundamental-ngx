@@ -13,7 +13,7 @@
         <ng-container *ngTemplateOutlet="indicatorContainer"></ng-container>
     </ng-container>
     <ng-container *ngIf="hasPopover">
-        <fd-popover [noArrow]="false" #popover>
+        <fd-popover [style.width.%]="100" [noArrow]="false" #popover>
             <fd-popover-control>
                 <ng-container *ngTemplateOutlet="indicatorContainer"></ng-container>
             </fd-popover-control>
@@ -37,23 +37,28 @@
         *ngIf="calculateProgressBarWidth() === 0 || calculateProgressBarWidth() as progressBarWidth"
     >
         <div
+            *ngIf="progressBarWidth > 0"
             class="fd-progress-indicator__progress-bar"
             [class.fd-progress-indicator__progress-bar--animated]="animate"
             [style.min-width.%]="progressBarWidth"
             [style.width.%]="progressBarWidth"
         >
-            <span class="fd-progress-indicator__label" *ngIf="progressBarWidth > 50 && !valueText"
-                >{{ valueNow }}%</span
-            >
-            <span class="fd-progress-indicator__label" *ngIf="progressBarWidth > 50 && valueText">{{ valueText }}</span>
+            <ng-container *ngIf="progressBarWidth > 50">
+                <ng-template [ngTemplateOutlet]="progressBarLabel"></ng-template>
+            </ng-container>
         </div>
-        <div class="fd-progress-indicator__remaining">
-            <span class="fd-progress-indicator__label" *ngIf="progressBarWidth <= 50 && !valueText"
-                >{{ valueNow }}%</span
-            >
-            <span class="fd-progress-indicator__label" *ngIf="progressBarWidth <= 50 && valueText">{{
-                valueText
-            }}</span>
+        <div class="fd-progress-indicator__remaining" [style.min-width]="0">
+            <ng-container *ngIf="progressBarWidth <= 50">
+                <ng-template [ngTemplateOutlet]="progressBarLabel"></ng-template>
+            </ng-container>
         </div>
     </div>
+</ng-template>
+
+<ng-template #progressBarLabel>
+    <span class="fd-progress-indicator__icon" *ngIf="state"></span>
+    <span class="fd-progress-indicator__label" *ngIf="!valueText"> {{ valueNow }}% </span>
+    <span class="fd-progress-indicator__label" *ngIf="valueText">
+        {{ valueText }}
+    </span>
 </ng-template>

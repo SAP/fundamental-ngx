@@ -25,7 +25,7 @@ export class FormGeneratorPo extends BaseComponentPo {
     formValue = 'p.ng-star-inserted';
     sliderPoint = '.fd-slider__handle';
     validationInput = '.fd-input[aria-labelledby*="validation"]';
-    busyIndicator = 'fd-busy-indicator .fd-busy-indicator--circle-0';
+    busyIndicator = 'fd-busy-indicator .fd-busy-indicator';
 
     open(): void {
         super.open(this.url);

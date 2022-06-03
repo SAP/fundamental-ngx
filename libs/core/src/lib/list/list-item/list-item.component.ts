@@ -253,7 +253,7 @@ export class ListItemComponent
 
     /** @hidden */
     private _addClassToButtons(button: ButtonComponent): void {
-        button.class += 'fd-list__button';
+        button.class += ' fd-list__button';
         button.buildComponentCssClass();
         button.detectChanges();
     }

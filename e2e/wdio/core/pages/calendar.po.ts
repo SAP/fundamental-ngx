@@ -32,8 +32,6 @@ export class CalendarPo extends CoreBaseComponentPo {
     currentDay = '.fd-calendar__item--current';
     selectedDays = '.fd-calendar__item.is-active';
     weekendDays = '.fd-calendar__item--weekend';
-    disabledDays = '.fd-calendar__item.is-disabled';
-    disabledWeekendDays = this.weekendDays + '.is-disabled';
     calendarItem = ' td.fd-calendar__item:not(.hidden-day)';
     selectionOutput = '> div';
     calendarOptions = 'fd-checkbox label';
@@ -41,9 +39,7 @@ export class CalendarPo extends CoreBaseComponentPo {
     weekCount = 'th[role="rowheader"]';
     calendarAttributes = 'fd-calendar';
     markedWeekendDays = this.weekendDays + ' span';
-    markedMondays = 'td:nth-of-type(2) span';
     calendarDays = 'thead .fd-calendar__item';
-    markedDays = 'td[class*="fd-calendar__special-day"] span';
     rangeHoverItems = '.fd-calendar__item--range';
     calendarRow = 'tbody .fd-calendar__row';
     mondays = this.specialDaysCalendar + this.calendarRow + this.calendarItem + ':nth-child(2):not(.hidden-day)';

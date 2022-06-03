@@ -6,7 +6,6 @@ import {
     EventEmitter,
     HostBinding,
     Input,
-    OnChanges,
     OnInit,
     ViewEncapsulation,
     Output,
@@ -17,7 +16,7 @@ import {
 import { Subscription } from 'rxjs';
 
 import { PanelContentDirective } from './panel-content/panel-content.directive';
-import { CssClassBuilder, RtlService, applyCssClass, ContentDensityService } from '@fundamental-ngx/core/utils';
+import { RtlService, ContentDensityService } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
 
 let panelUniqueId = 0;
@@ -36,7 +35,7 @@ let panelExpandUniqueId = 0;
     styleUrls: ['./panel.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PanelComponent implements CssClassBuilder, OnChanges, OnInit, OnDestroy {
+export class PanelComponent implements OnInit, OnDestroy {
     /** User's custom classes */
     @Input()
     class: string;
@@ -98,30 +97,14 @@ export class PanelComponent implements CssClassBuilder, OnChanges, OnInit, OnDes
             this._subscription.add(
                 this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
                     this.compact = isCompact;
-                    this.buildComponentCssClass();
                 })
             );
         }
         this._listenRtl();
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
     }
 
     ngOnDestroy(): void {
         this._subscription.unsubscribe();
-    }
-
-    @applyCssClass
-    /** CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    buildComponentCssClass(): string[] {
-        return ['fd-panel', this.fixed ? 'fd-panel--fixed' : '', this.compact ? 'fd-panel--compact' : '', this.class];
     }
 
     /** @hidden */

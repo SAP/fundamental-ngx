@@ -1,15 +1,22 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Libraries } from '../../utilities/libraries';
+import { CURRENT_LIB, Libraries } from '../../utilities/libraries';
 
-import { SafeResourceUrl } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { DocsThemeService } from '../../services/docs-theme.service';
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, startWith, takeUntil } from 'rxjs/operators';
 import { MenuComponent, MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { ContentDensity, ContentDensityService, ThemesService } from '@fundamental-ngx/core/utils';
 import { ShellbarMenuItem, ShellbarSizes } from '@fundamental-ngx/core/shellbar';
+
+const urlContains = (url: SafeResourceUrl, search: string): boolean =>
+    (url as any).changingThisBreaksApplicationSecurity.toLowerCase().includes(search);
+
+const isHcb = (safeUrl: SafeResourceUrl): boolean => urlContains(safeUrl, 'hcb');
+const isHcw = (safeUrl: SafeResourceUrl): boolean => urlContains(safeUrl, 'hcw');
+const isDark = (safeUrl: SafeResourceUrl): boolean => urlContains(safeUrl, 'dark');
 
 @Component({
     selector: 'fd-docs-toolbar',
@@ -26,6 +33,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
 
     cssUrl: SafeResourceUrl;
     customCssUrl: SafeResourceUrl;
+    highlightJsThemeCss: SafeResourceUrl;
 
     library: Libraries;
 
@@ -69,13 +77,16 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         private _themesService: ThemesService,
         private _docsThemeService: DocsThemeService,
         private _contentDensityService: ContentDensityService,
-        _route: ActivatedRoute
+        @Inject(CURRENT_LIB) private _currentLib: Libraries,
+        private _route: ActivatedRoute,
+        private _domSanitizer: DomSanitizer
     ) {
-        this.library = _route.snapshot.data.library || 'core';
+        this.library = this._route.snapshot.data.library || 'core';
 
         this._docsThemeService.onThemeChange.pipe(takeUntil(this._onDestroy$)).subscribe((theme) => {
             this.cssUrl = theme.themeUrl;
             this.customCssUrl = theme.customThemeUrl;
+            this.updateHighlightTheme(this.cssUrl);
         });
     }
 
@@ -125,6 +136,19 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
     selectTheme(selectedTheme: string): void {
         this.cssUrl = this._themesService.setTheme(selectedTheme);
         this.customCssUrl = this._themesService.setCustomTheme(selectedTheme);
+        this.updateHighlightTheme(this.cssUrl);
+    }
+
+    updateHighlightTheme(safeUrl: SafeResourceUrl): void {
+        let theme = 'googlecode.css';
+        if (isHcb(safeUrl)) {
+            theme = 'a11y-dark.css';
+        } else if (isHcw(safeUrl)) {
+            theme = 'a11y-light.css';
+        } else if (isDark(safeUrl)) {
+            theme = 'tomorrow-night.css';
+        }
+        this.highlightJsThemeCss = this.trustedResourceUrl(`assets/highlight-js-styles/${theme}`);
     }
 
     selectVersion(version: any): void {
@@ -134,6 +158,9 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
     selectDensity(density: ContentDensity): void {
         this._contentDensityService.contentDensity.next(density);
     }
+
+    private trustedResourceUrl = (url: string): SafeResourceUrl =>
+        this._domSanitizer.bypassSecurityTrustResourceUrl(url);
 
     private _getShellbarSize(): ShellbarSizes {
         const width = window.innerWidth;

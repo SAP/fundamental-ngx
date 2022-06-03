@@ -40,14 +40,7 @@
             </div>
         </a>
     </li>
-    <li
-        *ngIf="_extraTabs.length"
-        role="presentation"
-        class="fd-icon-tab-bar__item fd-icon-tab-bar__item--overflow"
-        fdpExtraButton
-        [isRtl]="isRtl"
-        [anchorIndexInsideParent]="_lastVisibleTabIndex"
-    >
+    <li *ngIf="_extraTabs.length" role="presentation" class="fd-icon-tab-bar__item fd-icon-tab-bar__item--overflow">
         <fdp-icon-tab-bar-popover
             [showItemLabel]="showLabel"
             [isRtl]="isRtl"

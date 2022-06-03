@@ -2,8 +2,8 @@
     <button
         fd-shellbar-side-nav
         fd-button
-        glyph="menu2"
         fdType="transparent"
+        glyph="menu2"
         style="width: 2.75rem"
         (click)="condensed = !condensed"
     ></button>
@@ -12,6 +12,7 @@
         <a href="#" class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
     </fd-shellbar-logo>
 </fd-shellbar>
+
 <div class="shellbar-sidenav-content-example">
     <fd-side-nav [condensed]="condensed" [collapseWidth]="768">
         <div fd-side-nav-main>
@@ -69,7 +70,9 @@
             </fd-layout-panel-head>
             <fd-layout-panel-actions> Sample Text </fd-layout-panel-actions>
         </fd-layout-panel-header>
+
         <fd-layout-panel-body> Sample Body </fd-layout-panel-body>
+
         <fd-layout-panel-footer> Sample Footer </fd-layout-panel-footer>
     </fd-layout-panel>
 </div>

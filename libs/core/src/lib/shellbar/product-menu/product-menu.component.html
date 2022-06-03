@@ -2,13 +2,14 @@
     <button
         fd-button
         fdType="transparent"
-        class="fd-shellbar__button--menu"
+        class="fd-shellbar__button fd-shellbar__button--menu"
+        glyph="megamenu"
+        glyphPosition="after"
         [compact]="false"
         [disabled]="disabled"
         [fdMenuTrigger]="menu"
     >
         <span class="fd-shellbar__title">{{ control }}</span>
-        <i role="presentation" class="sap-icon--megamenu fd-shellbar__button--icon"></i>
     </button>
 
     <fd-menu

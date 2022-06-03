@@ -1,16 +1,14 @@
 <div class="fd-shellbar__action fd-shellbar__action--desktop">
     <button
         fd-button
+        fdType="transparent"
         class="fd-shellbar__button"
         [compact]="false"
-        (click)="callback ? callback($event) : ''"
         [glyph]="glyph"
+        (click)="callback ? callback($event) : ''"
     >
-        <span
-            *ngIf="notificationCount"
-            class="fd-counter fd-counter--notification fd-shellbar__counter--notification"
-            [attr.aria-label]="notificationLabel"
-            >{{ notificationCount }}</span
-        >
+        <span *ngIf="notificationCount" class="fd-button__badge" [attr.aria-label]="notificationLabel">
+            {{ notificationCount }}
+        </span>
     </button>
 </div>

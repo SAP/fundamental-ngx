@@ -13,10 +13,12 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
+import { DYNAMIC_PAGE_HEADER_TOKEN, DynamicPageHeader } from '@fundamental-ngx/core/shared';
+import { BreadcrumbComponent } from '@fundamental-ngx/core/breadcrumb';
+
 import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageResponsiveSize } from '../../constants';
 import { DynamicPageService } from '../../dynamic-page.service';
 import { addClassNameToElement } from '../../utils';
-import { BreadcrumbComponent } from '@fundamental-ngx/core/breadcrumb';
 import { DynamicPageGlobalActionsComponent } from '../actions/dynamic-page-global-actions.component';
 import { DynamicPageTitleContentComponent } from '../actions/dynamic-page-title-content.component';
 
@@ -33,9 +35,15 @@ export const ActionSquashBreakpointPx = 1280;
     encapsulation: ViewEncapsulation.None,
     host: {
         '[attr.tabindex]': '0'
-    }
+    },
+    providers: [
+        {
+            provide: DYNAMIC_PAGE_HEADER_TOKEN,
+            useExisting: DynamicPageHeaderComponent
+        }
+    ]
 })
-export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
+export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDestroy, DynamicPageHeader {
     /** @hidden */
     _collapsed = false;
 

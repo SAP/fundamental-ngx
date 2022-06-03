@@ -9,9 +9,9 @@
         [class.fd-busy-indicator--s]="size === 's'"
         [class.fd-busy-indicator--absolute]="busyIndicator?.previousElementSibling"
     >
-        <div class="fd-busy-indicator--circle-0"></div>
-        <div class="fd-busy-indicator--circle-1"></div>
-        <div class="fd-busy-indicator--circle-2"></div>
+        <div class="fd-busy-indicator__circle"></div>
+        <div class="fd-busy-indicator__circle"></div>
+        <div class="fd-busy-indicator__circle"></div>
     </div>
 
     <span *ngIf="label" class="fd-busy-indicator-extended__label">{{ label }}</span>

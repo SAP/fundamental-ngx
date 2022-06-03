@@ -1,16 +1,12 @@
 <div class="fd-slider__inner">
-    <div class="fd-slider__track" (click)="onTrackClick($event)" #track>
-        <ng-container *ngIf="!_isRange">
-            <ng-container *ngTemplateOutlet="singleMode"></ng-container>
-        </ng-container>
+    <ng-container *ngTemplateOutlet="_isRange ? rangeMode : singleMode"></ng-container>
 
-        <ng-container *ngIf="_isRange">
-            <ng-container *ngTemplateOutlet="rangeMode"></ng-container>
-        </ng-container>
+    <div class="fd-slider__track" (click)="onTrackClick($event)" #track>
+        <ng-container *ngTemplateOutlet="_isRange ? rangeModeTrack : singleModeTrack"></ng-container>
     </div>
 
     <div class="fd-slider__tick-wrapper">
-        <div class="fd-slider__ticks" style="height: 1rem" (click)="onTrackClick($event)">
+        <div class="fd-slider__ticks" (click)="onTrackClick($event)">
             <ng-container *ngIf="showTicks">
                 <ng-container *ngFor="let tick of _tickMarks; index as i">
                     <div
@@ -42,8 +38,21 @@
     </div>
 </div>
 
-<ng-template #singleMode>
+<ng-template #singleModeTrack>
     <div *ngIf="!hideProgressBar" class="fd-slider__track-range" [style.width.%]="_progress"></div>
+</ng-template>
+
+<ng-template #rangeModeTrack>
+    <div
+        *ngIf="!hideProgressBar"
+        class="fd-slider__track-range"
+        [style.width.%]="_rangeProgress"
+        fd-slider-position
+        [position]="_handle1Position < _handle2Position ? _handle1Position : _handle2Position"
+    ></div>
+</ng-template>
+
+<ng-template #singleMode>
     <div
         #handle
         class="fd-slider__handle"
@@ -80,6 +89,7 @@
         [closeOnOutsideClick]="false"
         [appendTo]="handle"
         [disabled]="!tooltipMode"
+        class="fd-popover--slider"
         additionalBodyClass="fd-slider--tooltip-popover"
         placement="top"
     >
@@ -93,14 +103,6 @@
 </ng-template>
 
 <ng-template #rangeMode>
-    <div
-        *ngIf="!hideProgressBar"
-        class="fd-slider__track-range"
-        [style.width.%]="_rangeProgress"
-        fd-slider-position
-        [position]="_handle1Position < _handle2Position ? _handle1Position : _handle2Position"
-    ></div>
-
     <div
         #rangeHandle1
         class="fd-slider__handle"
@@ -168,6 +170,7 @@
         [appendTo]="rangeHandle1"
         [disabled]="!tooltipMode"
         additionalBodyClass="fd-slider--tooltip-popover"
+        class="fd-popover--slider"
         placement="top"
     >
         <ng-container
@@ -185,6 +188,7 @@
         [appendTo]="rangeHandle2"
         [disabled]="!tooltipMode"
         additionalBodyClass="fd-slider--tooltip-popover"
+        class="fd-popover--slider"
         placement="top"
     >
         <ng-container

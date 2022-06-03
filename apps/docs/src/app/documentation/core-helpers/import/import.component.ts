@@ -1,22 +1,24 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, Input, OnInit } from '@angular/core';
 import { CURRENT_LIB, Libraries } from '../../utilities/libraries';
+import { ExampleFile } from '../code-example/example-file';
 
 @Component({
     selector: 'import',
-    template: `
-        <code>
-            <span style="color: rgb(0, 0, 136);">import</span>
-            &#123; {{ module }} &#125;
-            <span style="color: rgb(0, 0, 136);">from </span>
-            <span style="color: rgb(0, 136, 0);">'{{ library }}'</span>;
-        </code>
-    `
+    template: ` <fd-code-snippet [file]="file"></fd-code-snippet>`,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ImportComponent implements OnInit {
     @Input() module: string;
     @Input() subPackage: string;
 
     library: string;
+
+    get file(): ExampleFile {
+        return {
+            code: `import { ${this.module} } from '${this.library}';`,
+            language: 'ts'
+        };
+    }
 
     constructor(@Inject(CURRENT_LIB) private currentLib: Libraries) {}
 

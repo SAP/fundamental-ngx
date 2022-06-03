@@ -5,12 +5,11 @@
         ></ng-container>
     </ng-container>
 
-    <div class="fd-splitter__pane-container-wrapper" [style.flex-grow]="_activePanes.length - 1 || 1">
+    <div class="fd-splitter__split-pane">
         <div
             class="fd-splitter__pane-container"
             [class.fd-splitter__pane-container--horizontal]="!_isRootContainer && _isHorizontal"
             [class.fd-splitter__pane-container--vertical]="_isRootContainer || _isVertical"
-            [class.fd-splitter__pane-container--root]="_isRootContainer"
         >
             <ng-container
                 *ngTemplateOutlet="

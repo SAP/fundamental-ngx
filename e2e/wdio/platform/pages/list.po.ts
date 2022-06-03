@@ -44,7 +44,7 @@ export class ListPo extends BaseComponentPo {
     navListLink = 'fdp-platform-list-with-navigation-example a';
     // virtual scroll examples:
     vScrollListItems = 'fdp-platform-list-with-infinite-scroll-example fdp-standard-list-item li';
-    vScrollLoadIcon = 'fd-busy-indicator .fd-busy-indicator--circle-0';
+    vScrollLoadIcon = 'fd-busy-indicator .fd-busy-indicator';
     busyIndicator = '.fd-busy-indicator';
     // load on btn click examples
     loadList = 'fdp-platform-list-with-more-button-example fdp-list';
