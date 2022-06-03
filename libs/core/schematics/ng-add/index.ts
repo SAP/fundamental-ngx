@@ -65,39 +65,31 @@ function addDependencies(options: Schema): Rule {
         }
 
         if (options.styleFonts) {
-            if (!hasPackage(tree, 'fundamental-styles')) {
+            if (
+                !hasPackage(tree, 'fundamental-styles') ||
+                checkPackageVersion(tree, 'fundamental-styles', 'FDSTYLES_VER_PLACEHOLDER', '<')
+            ) {
                 dependencies.push({
                     type: NodeDependencyType.Default,
-                    // Will be replaced with the real version during sync-version scipt run
+                    // Will be replaced with the real version during sync-version script run
                     version: `FDSTYLES_VER_PLACEHOLDER`,
-                    name: 'fundamental-styles'
+                    name: 'fundamental-styles',
+                    overwrite: true
                 });
             }
 
-            if (!hasPackage(tree, '@sap-theming/theming-base-content')) {
+            if (
+                !hasPackage(tree, '@sap-theming/theming-base-content') ||
+                checkPackageVersion(tree, '@sap-theming/theming-base-content', 'THEMING_VER_PLACEHOLDER', '<')
+            ) {
                 dependencies.push({
                     type: NodeDependencyType.Default,
                     // Will be replaced with the real version during sync-version scipt run
                     version: `THEMING_VER_PLACEHOLDER`,
-                    name: '@sap-theming/theming-base-content'
+                    name: '@sap-theming/theming-base-content',
+                    overwrite: true
                 });
             }
-        }
-
-        if (
-            hasPackage(tree, 'fundamental-styles') &&
-            checkPackageVersion(tree, 'fundamental-styles', 'FDSTYLES_VER_PLACEHOLDER', '<')
-        ) {
-            dependencies[dependencies.findIndex((d) => d.name === 'fundamental-styles')].version =
-                'FDSTYLES_VER_PLACEHOLDER';
-        }
-
-        if (
-            hasPackage(tree, '@sap-theming/theming-base-content') &&
-            checkPackageVersion(tree, '@sap-theming/theming-base-content', 'THEMING_VER_PLACEHOLDER', '<')
-        ) {
-            dependencies[dependencies.findIndex((d) => d.name === '@sap-theming/theming-base-content')].version =
-                'THEMING_VER_PLACEHOLDER';
         }
 
         dependencies.forEach((dependency) => {
