@@ -1,20 +1,22 @@
 <fd-menu #menu [compact]="compact" [closeOnEscapeKey]="true" [focusAutoCapture]="true" [placement]="placement$ | async">
-    <li fd-menu-item *ngFor="let collapsedBreadcrumbItem of collapsedBreadcrumbItems">
-        <a
-            fd-menu-interactive
-            [attr.href]="collapsedBreadcrumbItem.href"
-            [routerLink]="collapsedBreadcrumbItem.routerLink"
-        >
-            <span fd-menu-title>{{ collapsedBreadcrumbItem.elementRef.nativeElement.innerText }}</span>
-        </a>
-    </li>
+    <fd-breadcrumb-hidden-item
+        *ngFor="let collapsedBreadcrumbItem of collapsedBreadcrumbItems"
+        [breadcrumbItem]="collapsedBreadcrumbItem"
+    >
+    </fd-breadcrumb-hidden-item>
 </fd-menu>
 
-<fd-breadcrumb-item *ngIf="collapsedBreadcrumbItems.length" [fdMenuTrigger]="menu">
-    <a fd-breadcrumb-link tabindex="0" class="fd-breadcrumb__collapsed" (keydown)="keyDownHandle($event)">
+<span class="fd-breadcrumb__item" *ngIf="collapsedBreadcrumbItems.length" [fdMenuTrigger]="menu">
+    <a
+        fd-link
+        tabindex="0"
+        class="fd-breadcrumb__collapsed"
+        (keydown.enter)="keyDownHandle($event)"
+        (keydown.space)="keyDownHandle($event)"
+    >
         ...
-        <i role="presentation" class="fd-breadcrumb__dropdown-icon sap-icon sap-icon--slim-arrow-down"></i>
+        <fd-icon glyph="slim-arrow-down"></fd-icon>
     </a>
-</fd-breadcrumb-item>
+</span>
 
 <ng-content></ng-content>

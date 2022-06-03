@@ -1,14 +1,21 @@
 <fd-breadcrumb>
     <fd-breadcrumb-item>
-        <a fd-breadcrumb-link routerLink="../../avatar">Breadcrumb Level 1</a>
+        <a fd-link routerLink="../../avatar">
+            Breadcrumb Level 1 <span style="font-weight: bold">Bold</span> {{ glyph }}
+            <fd-icon [glyph]="glyph" *ngIf="showIcon"></fd-icon>
+        </a>
     </fd-breadcrumb-item>
     <fd-breadcrumb-item>
-        <a fd-breadcrumb-link routerLink="../../alert">Breadcrumb Level 2</a>
+        <a fd-link routerLink="../../alert">Breadcrumb Level 2</a>
     </fd-breadcrumb-item>
     <fd-breadcrumb-item>
-        <a fd-breadcrumb-link routerLink="../../bar">Breadcrumb Level 3</a>
+        <a fd-link routerLink="../../bar">Breadcrumb Level 3</a>
     </fd-breadcrumb-item>
     <fd-breadcrumb-item>
         <span>Breadcrumb Level 4</span>
     </fd-breadcrumb-item>
 </fd-breadcrumb>
+
+<div style="padding: 20px">
+    <button fd-button (click)="showIcon = !showIcon">toggle</button>
+</div>

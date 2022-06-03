@@ -1,12 +1,11 @@
 import {
-    AfterContentInit,
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ContentChildren,
     ElementRef,
     forwardRef,
-    HostListener,
     Input,
     OnDestroy,
     OnInit,
@@ -16,11 +15,9 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { BreadcrumbItemDirective } from './breadcrumb-item.directive';
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { ResizeObserverService, RtlService } from '@fundamental-ngx/core/utils';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
-import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
@@ -47,7 +44,7 @@ import { ContentDensityService } from '@fundamental-ngx/core/utils';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BreadcrumbComponent implements AfterContentInit, OnInit, OnDestroy {
+export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
     /** Whenever links wrapped inside overflow should be displayed in compact mode  */
     @Input()
     compact?: boolean;
@@ -87,16 +84,12 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit, OnDestroy 
     private _subscriptions = new Subscription();
 
     constructor(
-        public elementRef: ElementRef,
+        public elementRef: ElementRef<Element>,
         @Optional() private _rtlService: RtlService,
         @Optional() private _contentDensityService: ContentDensityService,
-        private _cdRef: ChangeDetectorRef
+        private _cdRef: ChangeDetectorRef,
+        private _resizeObserver: ResizeObserverService
     ) {}
-
-    /** @hidden */
-    ngAfterContentInit(): void {
-        this.onResize();
-    }
 
     /** @hidden */
     ngOnInit(): void {
@@ -115,13 +108,20 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit, OnDestroy 
         }
     }
 
+    ngAfterViewInit(): void {
+        this._subscriptions.add(
+            this._resizeObserver
+                .observe(this.elementRef.nativeElement.parentElement as Element)
+                .subscribe(() => this.onResize())
+        );
+    }
+
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 
     /** @hidden */
-    @HostListener('window:resize', [])
     onResize(): void {
         if (!this.elementRef.nativeElement.parentElement) {
             return;
@@ -148,16 +148,14 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit, OnDestroy 
     }
 
     /** @hidden */
-    keyDownHandle(event: KeyboardEvent): void {
-        if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
-            this.menuComponent.toggle();
-            event.preventDefault();
-        }
+    keyDownHandle(event: Event): void {
+        this.menuComponent.toggle();
+        event.preventDefault();
     }
 
     /** @hidden */
     getContainerBoundary(): number {
-        let containerBoundary = this.elementRef.nativeElement.parentElement.getBoundingClientRect().width;
+        let containerBoundary = (this.elementRef.nativeElement.parentElement as Element).getBoundingClientRect().width;
         if (this.containerElement) {
             containerBoundary = this.containerElement.getBoundingClientRect().width;
         }

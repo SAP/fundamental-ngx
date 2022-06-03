@@ -9,7 +9,9 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { BreadcrumbComponent } from './breadcrumb.component';
 import { whenStable } from '@fundamental-ngx/core/tests';
-import { BreadcrumbItemDirective, BreadcrumbLinkDirective } from './public_api';
+import { BreadcrumbItemDirective } from './public_api';
+import { LinkModule } from '@fundamental-ngx/core/link';
+
 @Component({
     selector: 'fd-breadcrumb-test-component',
     template: `
@@ -18,7 +20,7 @@ import { BreadcrumbItemDirective, BreadcrumbLinkDirective } from './public_api';
                 <a fd-breadcrumb-link [routerLink]="'#'">Breadcrumb Level 1</a>
             </fd-breadcrumb-item>
             <fd-breadcrumb-item>
-                <a fd-breadcrumb-link [routerLink]="'#'" [queryParams]="'#'">Breadcrumb Level 2</a>
+                <a fd-breadcrumb-link [routerLink]="'#'">Breadcrumb Level 2</a>
             </fd-breadcrumb-item>
             <fd-breadcrumb-item>
                 <span>Breadcrumb Level 3</span>
@@ -37,13 +39,8 @@ describe('BreadcrumbComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                declarations: [
-                    BreadcrumbComponent,
-                    BreadcrumbItemDirective,
-                    BreadcrumbLinkDirective,
-                    BreadcrumbWrapperComponent
-                ],
-                imports: [PopoverModule, MenuModule, IconModule, RouterModule, RouterTestingModule],
+                declarations: [BreadcrumbComponent, BreadcrumbItemDirective, BreadcrumbWrapperComponent],
+                imports: [PopoverModule, MenuModule, IconModule, LinkModule, RouterModule, RouterTestingModule],
                 providers: [RtlService]
             }).compileComponents();
         })

@@ -1,0 +1,13 @@
+<li fd-menu-item>
+    <a fd-menu-interactive [attr.href]="breadcrumbItem.href" [routerLink]="breadcrumbItem.routerLink">
+        <ng-container *ngIf="breadcrumbItem.breadcrumbLink.prefixIconName">
+            <fd-menu-addon position="before" [glyph]="breadcrumbItem.breadcrumbLink.prefixIconName"></fd-menu-addon>
+        </ng-container>
+        <span fd-menu-title>
+            <ng-container [cdkPortalOutlet]="linkContentPortal"></ng-container>
+        </span>
+        <ng-container *ngIf="breadcrumbItem.breadcrumbLink.postfixIconName">
+            <fd-menu-addon [glyph]="breadcrumbItem.breadcrumbLink.postfixIconName"></fd-menu-addon>
+        </ng-container>
+    </a>
+</li>

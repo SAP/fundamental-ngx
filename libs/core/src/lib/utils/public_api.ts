@@ -60,6 +60,7 @@ export * from './services/content-density.service';
 export * from './services/rtl.service';
 export * from './services/themes.service';
 export * from './services/keyboard-support/keyboard-support.service';
+export * from './services/resize-observer.service';
 
 export * from './functions';
 

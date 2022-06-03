@@ -20,7 +20,7 @@
                     <a
                         *ngIf="_breadcrumbList.length > 0"
                         href="#"
-                        fd-breadcrumb-link
+                        fd-link
                         (click)="_breadcrumbGoTo($event)"
                         i18n="@@platformUploadCollection.Breadcrumb.Label.AllFiles"
                     >
@@ -38,7 +38,7 @@
                     <a
                         href="#"
                         *ngIf="item.clikable"
-                        fd-breadcrumb-link
+                        fd-link
                         [innerText]="item.folderName"
                         (click)="_breadcrumbGoTo($event, i)"
                     ></a>
