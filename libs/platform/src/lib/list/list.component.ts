@@ -411,6 +411,8 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
 
         const indicator = this.itemEl.nativeElement.querySelector('fd-busy-indicator');
         indicator?.setAttribute('aria-label', '');
+
+        // this._setAriaSize();
     }
 
     /** @hidden */
@@ -754,9 +756,13 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
             this.listItems.first.listItem.nativeElement.setAttribute('tabindex', '0');
         }
 
+        if (!this.ariaLabel) {
+            this.ariaSetsize = this.listItems.length;
+        }
+
         this._partialNavigation = this.listItems.some((item) => item.navigationIndicator || item.listType === 'detail');
 
-        this.listItems.forEach((item) => {
+        this.listItems.forEach((item, i) => {
             if (!this._partialNavigation) {
                 item.navigated = this.navigated;
                 item.navigationIndicator = this.navigationIndicator;
@@ -767,27 +773,10 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
             item.selectionMode = this.selectionMode;
             item.rowSelection = this.rowSelection;
             item._hasByLine = this.hasByLine;
+            item.ariaPosinet = ++i;
 
             this.stateChanges.next(item);
         });
-
-        this._setAriaSize();
-    }
-
-    /** @hidden Set aria-setsize and aria-poinset attributes */
-    private _setAriaSize(): void {
-        if (!this.ariaSetsize) {
-            this.ariaSetsize = this.listItems.length;
-
-            for (let i = 0; i < this.listItems.length; i++) {
-                const listItem = this.listItems && this.listItems.get(i);
-                if (listItem) {
-                    listItem.ariaPosinet = i + 1;
-                }
-            }
-
-            this._cd.markForCheck();
-        }
     }
 }
 
