@@ -90,7 +90,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
     @Input()
     compact?: boolean;
 
-    /** Id attribute for input element inside DatePicker component */
+    /** ID attribute for input element inside DatePicker component */
     @Input()
     inputId: string;
 
@@ -140,15 +140,15 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
     @Input()
     useValidation = true;
 
-    /** Aria label for the datepicker input. */
+    /** Aria-label for the datepicker input. */
     @Input()
     dateInputLabel = 'Date input';
 
-    /** Aria label for the datepicker input. */
+    /** Aria-label for the datepicker input. */
     @Input()
     dateRangeInputLabel = 'Date range input';
 
-    /** Aria label for the button to show/hide the calendar. */
+    /** Aria-label for the button to show/hide the calendar. */
     @Input()
     displayCalendarToggleLabel = 'Open picker';
 
@@ -217,7 +217,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
 
     /**
      *  The state of the form control - applies css classes.
-     *  Also this is applied to message.
+     *  Also, this is applied to message.
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
      */
     @Input()
@@ -305,6 +305,12 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
         return this._processInputOnBlur;
     }
 
+    /**
+     * Whether to prevent page scrolling when focusing date picker input field after calendar has been closed.
+     */
+    @Input()
+    preventScrollOnFocus = false;
+
     /** @hidden */
     _processInputOnBlur = false;
 
@@ -334,7 +340,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
 
     /** @hidden */
     @ViewChild(InputGroupInputDirective, { read: ElementRef })
-    _inputElement: ElementRef;
+    _inputElement: ElementRef<HTMLInputElement>;
 
     /** @hidden The value of the input */
     _inputFieldDate: string | null = null;
@@ -578,7 +584,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
         }
         if (this.type === 'single') {
             /**
-             * For single mode, if the date is invalid, model is changed, it refresh currently
+             * For single mode, if the date is invalid, model is changed, it refreshes currently
              * input field text, but it does not refresh currently displayed day
              */
             selected = selected as D;
@@ -726,7 +732,9 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
         this._changeMessageVisibility();
         // focus input control every time popup is closed
         if (!isOpen && this._inputElement) {
-            this._inputElement.nativeElement.focus();
+            this._inputElement.nativeElement.focus({
+                preventScroll: this.preventScrollOnFocus
+            });
         }
         // focus calendar cell on opening
         if (isOpen && this._calendarComponent) {

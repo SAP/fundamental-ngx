@@ -198,6 +198,12 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
     @Input()
     processInputOnBlur = false;
 
+    /**
+     * Whether to prevent page scrolling when focusing date picker input field after calendar has been closed.
+     */
+    @Input()
+    preventScrollOnFocus = false;
+
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
     readonly isOpenChange = new EventEmitter<boolean>();

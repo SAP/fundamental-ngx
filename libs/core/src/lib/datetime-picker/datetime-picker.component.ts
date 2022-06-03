@@ -281,6 +281,12 @@ export class DatetimePickerComponent<D>
         return this._processInputOnBlur;
     }
 
+    /**
+     * Whether to prevent page scrolling when focusing date picker input field after calendar has been closed.
+     */
+    @Input()
+    preventScrollOnFocus = false;
+
     /** @hidden */
     _processInputOnBlur = false;
 
@@ -328,7 +334,7 @@ export class DatetimePickerComponent<D>
 
     /** @hidden */
     @ViewChild(InputGroupInputDirective, { read: ElementRef })
-    _inputElement: ElementRef;
+    _inputElement: ElementRef<HTMLInputElement>;
 
     /**
      * @hidden
@@ -671,7 +677,9 @@ export class DatetimePickerComponent<D>
         this._changeMessageVisibility();
         // focus input control every time popup is closed
         if (!isOpen && this._inputElement) {
-            this._inputElement.nativeElement.focus();
+            this._inputElement.nativeElement.focus({
+                preventScroll: this.preventScrollOnFocus
+            });
         }
         // focus calendar cell on opening
         if (isOpen && this._calendarComponent) {

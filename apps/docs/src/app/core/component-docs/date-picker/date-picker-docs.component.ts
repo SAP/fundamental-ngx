@@ -15,6 +15,7 @@ import datePickerRangeDisableH from '!./examples/date-picker-range-disabled-exam
 import datePickerSingleDisableTs from '!./examples/date-picker-disable-func-example/date-picker-disable-func-example.component.ts?raw';
 import datePickerSingleDisableH from '!./examples/date-picker-disable-func-example/date-picker-disable-func-example.component.html?raw';
 import datePickerUpdateOnBlurSrcTs from '!./examples/date-picker-update-on-blur-example.component.ts?raw';
+import datePickerDisableScrollSrcTs from '!./examples/date-picker-disable-focus-scroll-example.component.ts?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -145,6 +146,15 @@ export class DatePickerDocsComponent {
             component: 'DatePickerUpdateOnBlurExampleComponent',
             code: datePickerUpdateOnBlurSrcTs,
             fileName: 'date-picker-update-on-blur-example'
+        }
+    ];
+
+    datePickerDisableScroll: ExampleFile[] = [
+        {
+            language: 'typescript',
+            component: 'DatePickerDisableFocusScrollExampleComponent',
+            code: datePickerDisableScrollSrcTs,
+            fileName: 'date-picker-disable-focus-scroll-example'
         }
     ];
 }
