@@ -1,4 +1,13 @@
 
+## [0.35.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.47...v0.35.0-rc.0) (2022-06-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* **core,platform:** updates in (core) grid-list, (core)toolbar table, (core) slider, (core)shellbar related to Horizon Family themes
+
+* **core,platform:** Horizon Changed from Fundamental-Styles ([#7987](https://github.com/SAP/fundamental-ngx/issues/7987)) ([48612cb](https://github.com/SAP/fundamental-ngx/commit/48612cbad6a1d787c0b5d96e9aa78899cddf4311))
+
 ### [0.34.3-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.46...v0.34.3-rc.47) (2022-06-02)
 
 
