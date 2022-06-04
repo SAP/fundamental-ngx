@@ -16,6 +16,7 @@ import {
             name="datePickerOnBlur"
             [processInputOnBlur]="true"
             [(ngModel)]="date"
+            dateInputLabel="date input mm/dd/yyy"
         ></fdp-date-picker>
         <br />
         <div>Selected Date: {{ date?.toDateString() || 'null' }}</div>`,

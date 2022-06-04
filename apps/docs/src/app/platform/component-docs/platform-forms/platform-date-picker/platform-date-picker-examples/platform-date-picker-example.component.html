@@ -16,7 +16,13 @@
         label="Pre-populated single type date-picker:"
         [validators]="requiredDateValidator"
     >
-        <fdp-date-picker name="birthday" type="single" [allowNull]="false" [formControl]="ffl1.formControl">
+        <fdp-date-picker
+            name="birthday"
+            type="single"
+            [allowNull]="false"
+            [formControl]="ffl1.formControl"
+            dateInputLabel="date input mm/dd/yyy"
+        >
         </fdp-date-picker>
     </fdp-form-field>
 
@@ -27,6 +33,7 @@
             [allowNull]="false"
             placeholder="Enter your Exam dates"
             [formControl]="ffl2.formControl"
+            dateInputLabel="date input mm/dd/yyy"
         >
         </fdp-date-picker>
     </fdp-form-field>
@@ -47,6 +54,7 @@
             contentDensity="compact"
             placeholder="Holiday in between?"
             [formControl]="ffl3.formControl"
+            dateRangeInputLabel="date range input mm/dd/yyy"
         >
         </fdp-date-picker>
     </fdp-form-field>
@@ -58,6 +66,7 @@
             contentDensity="compact"
             placeholder="Journey dates?"
             [formControl]="ffl4.formControl"
+            dateRangeInputLabel="date range input mm/dd/yyy"
         >
         </fdp-date-picker>
     </fdp-form-field>
@@ -68,6 +77,7 @@
             [allowNull]="false"
             placeholder="This is a disabled date picker"
             [formControl]="ffl5.formControl"
+            dateInputLabel="date input mm/dd/yyy"
         >
         </fdp-date-picker>
     </fdp-form-field>
@@ -100,6 +110,7 @@
             type="single"
             [allowNull]="false"
             [(ngModel)]="birthdayPicker"
+            dateInputLabel="date input mm/dd/yyy"
         >
         </fdp-date-picker>
     </fdp-form-field>
@@ -119,6 +130,7 @@
             contentDensity="compact"
             placeholder="When are you going to holiday?"
             [(ngModel)]="holidayPicker"
+            dateRangeInputLabel="date range input mm/dd/yyy"
         >
         </fdp-date-picker>
     </fdp-form-field>
@@ -129,6 +141,7 @@
             type="single"
             [disabled]="true"
             [(ngModel)]="disabledDate"
+            dateInputLabel="date input mm/dd/yyy"
         ></fdp-date-picker>
     </fdp-form-field>
 
