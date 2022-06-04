@@ -1,4 +1,11 @@
 
+## [0.35.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.0...v0.35.0-rc.1) (2022-06-04)
+
+
+### Bug Fixes
+
+* **platform:** datepicker examples accessibility issues ([#8070](https://github.com/SAP/fundamental-ngx/issues/8070)) ([286a1f3](https://github.com/SAP/fundamental-ngx/commit/286a1f372708f7b12bee1f0fe5eb836b4d9a6170))
+
 ## [0.35.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.47...v0.35.0-rc.0) (2022-06-03)
 
 
