@@ -224,7 +224,7 @@
         "postcss-url": "^10.1.1",
         "prettier": "2.5.1",
         "rollup": "2.68.0",
-        "standard-version": "9.3.2",
+        "standard-version": "9.5.0",
         "ts-node": "9.1.1",
         "typedoc": "0.21.9",
         "typedoc-plugin-merge-modules": "2.1.1",
