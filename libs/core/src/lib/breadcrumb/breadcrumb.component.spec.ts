@@ -9,7 +9,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { BreadcrumbComponent } from './breadcrumb.component';
 import { whenStable } from '@fundamental-ngx/core/tests';
-import { BreadcrumbItemDirective } from './public_api';
+import { BreadcrumbItemComponent } from './public_api';
 import { LinkModule } from '@fundamental-ngx/core/link';
 
 @Component({
@@ -39,7 +39,7 @@ describe('BreadcrumbComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                declarations: [BreadcrumbComponent, BreadcrumbItemDirective, BreadcrumbWrapperComponent],
+                declarations: [BreadcrumbComponent, BreadcrumbItemComponent, BreadcrumbWrapperComponent],
                 imports: [PopoverModule, MenuModule, IconModule, LinkModule, RouterModule, RouterTestingModule],
                 providers: [RtlService]
             }).compileComponents();
@@ -59,8 +59,10 @@ describe('BreadcrumbComponent', () => {
     });
 
     it('should handle onResize - enlarging the screen', async () => {
-        spyOn(component.elementRef.nativeElement.parentElement, 'getBoundingClientRect').and.returnValue({ width: 3 });
-        spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
+        spyOn(component.elementRef.nativeElement.parentElement as Element, 'getBoundingClientRect').and.returnValue({
+            width: 3
+        } as any);
+        spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 } as any);
         spyOn(component, 'collapseBreadcrumbs');
         spyOn(component, 'expandBreadcrumbs');
         component.previousContainerWidth = 2;
@@ -83,8 +85,10 @@ describe('BreadcrumbComponent', () => {
     it('should handle onResize - shrinking the screen', () => {
         spyOn(component, 'collapseBreadcrumbs');
         spyOn(component, 'expandBreadcrumbs');
-        spyOn(component.elementRef.nativeElement.parentElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
-        spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({ width: 3 });
+        spyOn(component.elementRef.nativeElement.parentElement as Element, 'getBoundingClientRect').and.returnValue({
+            width: 1
+        } as any);
+        spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({ width: 3 } as any);
         component.previousContainerWidth = 2;
 
         component.onResize();
@@ -95,7 +99,7 @@ describe('BreadcrumbComponent', () => {
     });
 
     it('should collapse the breadcrumbs', async () => {
-        spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({ width: 2 });
+        spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({ width: 2 } as any);
         spyOn(component, 'getContainerBoundary').and.returnValue(1);
 
         component.collapseBreadcrumbs();
@@ -111,11 +115,11 @@ describe('BreadcrumbComponent', () => {
 
     it('should expand all of the breadcrumbs', () => {
         // collapse all the breadcrumbs first
-        spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({ width: 3 });
+        spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({ width: 3 } as any);
         spyOn(component, 'getContainerBoundary').and.returnValue(2);
         component.collapseBreadcrumbs();
 
-        component.elementRef.nativeElement.getBoundingClientRect.and.returnValue({ width: 1 });
+        spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 } as any);
 
         component.expandBreadcrumbs();
 

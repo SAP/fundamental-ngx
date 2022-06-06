@@ -14,7 +14,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { BreadcrumbItemDirective } from './breadcrumb-item.directive';
+import { BreadcrumbItemComponent } from './breadcrumb-item.component';
 import { ResizeObserverService, RtlService } from '@fundamental-ngx/core/utils';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
@@ -50,15 +50,15 @@ export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
     compact?: boolean;
 
     /** @hidden */
-    @ContentChildren(forwardRef(() => BreadcrumbItemDirective))
-    breadcrumbItems: QueryList<BreadcrumbItemDirective>;
+    @ContentChildren(forwardRef(() => BreadcrumbItemComponent))
+    breadcrumbItems: QueryList<BreadcrumbItemComponent>;
 
     /** @hidden */
     @ViewChild(MenuComponent)
     menuComponent: MenuComponent;
 
     /** @hidden */
-    collapsedBreadcrumbItems: Array<BreadcrumbItemDirective> = [];
+    collapsedBreadcrumbItems: Array<BreadcrumbItemComponent> = [];
 
     /** @hidden used to compare to the current width to know whether to collapse or expand breadcrumbs */
     previousContainerWidth: number;
@@ -233,15 +233,15 @@ export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
         return this.elementRef.nativeElement.getBoundingClientRect().width < this.getContainerBoundary();
     }
 
-    private getCollapsedItem(): BreadcrumbItemDirective {
+    private getCollapsedItem(): BreadcrumbItemComponent {
         return this.collapsedBreadcrumbItems[this.collapsedBreadcrumbItems.length - 1];
     }
 
-    private getBreadcrumbToCheck(collapsedItemToPop: BreadcrumbItemDirective): BreadcrumbItemDirective {
+    private getBreadcrumbToCheck(collapsedItemToPop: BreadcrumbItemComponent): BreadcrumbItemComponent {
         return this.breadcrumbItems.filter((item) => item === collapsedItemToPop)[0];
     }
 
-    private applyStylesToBreadcrumb(breadcrumb: BreadcrumbItemDirective): void {
+    private applyStylesToBreadcrumb(breadcrumb: BreadcrumbItemComponent): void {
         breadcrumb.elementRef.nativeElement.style.display = 'inline-block';
         breadcrumb.elementRef.nativeElement.style.visibility = 'hidden';
     }
@@ -251,11 +251,11 @@ export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
         // make the breadcrumb we checked visible
     }
 
-    private makeBreadcrumbVisible(breadcrumb: BreadcrumbItemDirective): void {
+    private makeBreadcrumbVisible(breadcrumb: BreadcrumbItemComponent): void {
         breadcrumb.elementRef.nativeElement.style.visibility = 'visible';
     }
 
-    private makeBreadcrumbInvisible(breadcrumb: BreadcrumbItemDirective): void {
+    private makeBreadcrumbInvisible(breadcrumb: BreadcrumbItemComponent): void {
         breadcrumb.elementRef.nativeElement.style.display = 'none';
     }
 }

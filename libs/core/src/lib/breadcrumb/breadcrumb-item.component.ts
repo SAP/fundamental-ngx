@@ -1,4 +1,4 @@
-import { ContentChild, Directive, ElementRef, forwardRef } from '@angular/core';
+import { Component, ContentChild, ElementRef, forwardRef } from '@angular/core';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 
 /**
@@ -10,17 +10,16 @@ import { LinkComponent } from '@fundamental-ngx/core/link';
  * </fd-breadcrumb-item>
  * ```
  */
-@Directive({
-    // TODO to be discussed
-    // eslint-disable-next-line @angular-eslint/directive-selector
+@Component({
     selector: 'fd-breadcrumb-item',
+    template: '<div style="display: inline"><ng-content></ng-content></div>',
     host: {
         class: 'fd-breadcrumb__item'
     }
 })
-export class BreadcrumbItemDirective {
+export class BreadcrumbItemComponent {
     /** @hidden */
-    get elementRef(): ElementRef {
+    get elementRef(): ElementRef<HTMLElement> {
         return this._elementRef;
     }
 
@@ -28,7 +27,7 @@ export class BreadcrumbItemDirective {
     @ContentChild(forwardRef(() => LinkComponent))
     breadcrumbLink: LinkComponent;
 
-    constructor(private _elementRef: ElementRef) {}
+    constructor(private _elementRef: ElementRef<HTMLElement>) {}
 
     /** @hidden */
     get needsClickProxy(): boolean {

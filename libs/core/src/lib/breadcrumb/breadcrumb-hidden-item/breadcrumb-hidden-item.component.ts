@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, Input } from '@angular/core';
-import { BreadcrumbItemDirective } from '../breadcrumb-item.directive';
+import { BreadcrumbItemComponent } from '../breadcrumb-item.component';
 import { DomPortal } from '@angular/cdk/portal';
 
 @Component({
@@ -8,13 +8,19 @@ import { DomPortal } from '@angular/cdk/portal';
 })
 export class BreadcrumbHiddenItemComponent implements AfterViewInit {
     @Input()
-    breadcrumbItem: BreadcrumbItemDirective;
+    breadcrumbItem: BreadcrumbItemComponent;
 
+    breadcrumbItemPortal: DomPortal<Element>;
     linkContentPortal: DomPortal;
 
     ngAfterViewInit(): void {
-        this.linkContentPortal = new DomPortal<HTMLElement>(
-            this.breadcrumbItem.breadcrumbLink.contentSpan.nativeElement
+        if (this.breadcrumbItem.breadcrumbLink) {
+            this.linkContentPortal = new DomPortal<HTMLElement>(
+                this.breadcrumbItem.breadcrumbLink.contentSpan.nativeElement
+            );
+        }
+        this.breadcrumbItemPortal = new DomPortal(
+            this.breadcrumbItem.elementRef.nativeElement.firstElementChild as Element
         );
     }
 
