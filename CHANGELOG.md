@@ -1,4 +1,11 @@
 
+## [0.35.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.1...v0.35.0-rc.2) (2022-06-06)
+
+
+### Bug Fixes
+
+* **core,platform:** dont scroll into view on focus ([#8172](https://github.com/SAP/fundamental-ngx/issues/8172)) ([6a88a5d](https://github.com/SAP/fundamental-ngx/commit/6a88a5d45fa6af0654735a65176ce06ca9d18bf4))
+
 ## [0.35.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.0...v0.35.0-rc.1) (2022-06-04)
 
 
