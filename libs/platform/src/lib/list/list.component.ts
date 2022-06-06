@@ -411,8 +411,6 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
 
         const indicator = this.itemEl.nativeElement.querySelector('fd-busy-indicator');
         indicator?.setAttribute('aria-label', '');
-
-        // this._setAriaSize();
     }
 
     /** @hidden */

@@ -1,12 +1,5 @@
 @import '~fundamental-styles/dist/toolbar';
 
-.fd-toolbar {
-    & > * {
-        flex-shrink: 0;
-    }
-
-    &--active:focus {
-        outline: 1px dotted;
-        outline-offset: -0.1875rem;
-    }
+.fd-toolbar > * {
+    flex-shrink: 0;
 }
