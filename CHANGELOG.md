@@ -1,4 +1,11 @@
 
+## [0.35.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.2...v0.35.0-rc.3) (2022-06-06)
+
+
+### Features
+
+* theming module with font manipulation ([#8167](https://github.com/SAP/fundamental-ngx/issues/8167)) ([88f5427](https://github.com/SAP/fundamental-ngx/commit/88f54273ad59f5323e14b469f8a93bf6fd55cd1f))
+
 ## [0.35.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.1...v0.35.0-rc.2) (2022-06-06)
 
 
