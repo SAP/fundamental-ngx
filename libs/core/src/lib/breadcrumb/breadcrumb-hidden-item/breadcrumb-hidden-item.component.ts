@@ -17,4 +17,11 @@ export class BreadcrumbHiddenItemComponent implements AfterViewInit {
             this.breadcrumbItem.breadcrumbLink.contentSpan.nativeElement
         );
     }
+
+    itemClicked($event: any): void {
+        if (this.breadcrumbItem.needsClickProxy) {
+            $event.preventDefault();
+            this.breadcrumbItem.breadcrumbLink.elementRef().nativeElement.click();
+        }
+    }
 }

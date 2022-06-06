@@ -1,5 +1,10 @@
-<li fd-menu-item>
-    <a fd-menu-interactive [attr.href]="breadcrumbItem.href" [routerLink]="breadcrumbItem.routerLink">
+<li fd-menu-item [disabled]="breadcrumbItem.breadcrumbLink ? breadcrumbItem.breadcrumbLink.disabled : false">
+    <a
+        fd-menu-interactive
+        (click)="itemClicked($event)"
+        (keydown.enter)="itemClicked($event)"
+        (keydown.space)="itemClicked($event)"
+    >
         <ng-container *ngIf="breadcrumbItem.breadcrumbLink.prefixIconName">
             <fd-menu-addon position="before" [glyph]="breadcrumbItem.breadcrumbLink.prefixIconName"></fd-menu-addon>
         </ng-container>

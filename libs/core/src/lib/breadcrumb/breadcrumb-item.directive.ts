@@ -1,4 +1,4 @@
-import { AfterContentInit, ContentChild, Directive, ElementRef, forwardRef } from '@angular/core';
+import { ContentChild, Directive, ElementRef, forwardRef } from '@angular/core';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 
 /**
@@ -18,17 +18,11 @@ import { LinkComponent } from '@fundamental-ngx/core/link';
         class: 'fd-breadcrumb__item'
     }
 })
-export class BreadcrumbItemDirective implements AfterContentInit {
+export class BreadcrumbItemDirective {
     /** @hidden */
     get elementRef(): ElementRef {
         return this._elementRef;
     }
-
-    /** @hidden */
-    href = '';
-
-    /** @hidden */
-    routerLink = '';
 
     /** @hidden */
     @ContentChild(forwardRef(() => LinkComponent))
@@ -37,12 +31,9 @@ export class BreadcrumbItemDirective implements AfterContentInit {
     constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
-    ngAfterContentInit(): void {
-        if (this.breadcrumbLink && this.breadcrumbLink.elementRef().nativeElement.getAttribute('href')) {
-            this.href = this.breadcrumbLink.elementRef().nativeElement.getAttribute('href');
-        }
-        // if (this.breadcrumbLink && this.breadcrumbLink.routerLink) {
-        //     this.routerLink = this.breadcrumbLink.routerLink;
-        // }
+    get needsClickProxy(): boolean {
+        return (
+            !!this.breadcrumbLink?.elementRef().nativeElement.getAttribute('href') || !!this.breadcrumbLink.routerLink
+        );
     }
 }
