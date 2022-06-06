@@ -19,7 +19,9 @@ export interface Theme {
 
 @Injectable()
 /**
+ * @deprecated
  * Service providing theme switcher functionality.
+ * Deprecated since 0.35.0 in favor of ThemingService from ThemingModule
  */
 export class ThemesService {
     /** Available themes */

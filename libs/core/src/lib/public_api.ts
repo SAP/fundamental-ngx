@@ -90,5 +90,5 @@ export * from '@fundamental-ngx/core/micro-process-flow';
 export * from '@fundamental-ngx/core/timeline';
 export * from '@fundamental-ngx/core/progress-indicator';
 export * from '@fundamental-ngx/core/scrollbar';
-
+export * from '@fundamental-ngx/core/theming';
 export * from '@fundamental-ngx/core/utils';

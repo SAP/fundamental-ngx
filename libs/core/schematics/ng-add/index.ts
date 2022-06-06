@@ -3,22 +3,34 @@ import { NodePackageInstallTask, RunSchematicTask } from '@angular-devkit/schema
 import { addPackageJsonDependency, NodeDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
 import { WorkspaceSchema } from '@schematics/angular/utility/workspace-models';
 
-import { defaultFontStyle } from './styles';
-import { getPackageVersionFromPackageJson, hasPackage } from '../utils/package-utils';
+import { defaultStyles } from './styles';
+import { checkPackageVersion, getPackageVersionFromPackageJson, hasPackage } from '../utils/package-utils';
 import { Schema } from './schema';
 
 // Needed to queue dependent schematics
 let installTaskId: TaskId;
 
 const fdStylesIconPath = 'node_modules/fundamental-styles/dist/icon.css';
+const angularConfigPath = '/angular.json';
+
+const FONT_FACE_REGEX = /(@font-face)[\w\s]?{[\s\S\W\w]+?(?=\s}\s)?\s?}/gi;
+
+interface AngularAssets {
+    glob: string;
+    input: string;
+    output: string;
+}
 
 export function ngAdd(options: any): Rule {
     return chain([
+        endInstallTask(),
         addDependencies(options),
         endInstallTask(),
         addStylePathToConfig(options),
+        addAssetsPathToConfig(options),
         addFontsToStyles(options),
-        callAnimationsSchematics(options)
+        callAnimationsSchematics(options),
+        callFontMigrationSchematics(options)
     ]);
 }
 
@@ -53,21 +65,29 @@ function addDependencies(options: Schema): Rule {
         }
 
         if (options.styleFonts) {
-            if (!hasPackage(tree, 'fundamental-styles')) {
+            if (
+                !hasPackage(tree, 'fundamental-styles') ||
+                checkPackageVersion(tree, 'fundamental-styles', 'FDSTYLES_VER_PLACEHOLDER', '<')
+            ) {
                 dependencies.push({
                     type: NodeDependencyType.Default,
-                    // Will be replaced with the real version during sync-version scipt run
+                    // Will be replaced with the real version during sync-version script run
                     version: `FDSTYLES_VER_PLACEHOLDER`,
-                    name: 'fundamental-styles'
+                    name: 'fundamental-styles',
+                    overwrite: true
                 });
             }
 
-            if (!hasPackage(tree, '@sap-theming/theming-base-content')) {
+            if (
+                !hasPackage(tree, '@sap-theming/theming-base-content') ||
+                checkPackageVersion(tree, '@sap-theming/theming-base-content', 'THEMING_VER_PLACEHOLDER', '<')
+            ) {
                 dependencies.push({
                     type: NodeDependencyType.Default,
                     // Will be replaced with the real version during sync-version scipt run
                     version: `THEMING_VER_PLACEHOLDER`,
-                    name: '@sap-theming/theming-base-content'
+                    name: '@sap-theming/theming-base-content',
+                    overwrite: true
                 });
             }
         }
@@ -91,6 +111,16 @@ function endInstallTask(): Rule {
     };
 }
 
+function callFontMigrationSchematics(options: Schema): Rule {
+    return (tree: Tree, context: SchematicContext) => {
+        // Chain won't work here since we need the externals to be actually installed before we call their schemas
+        // This ensures the externals are a dependency of the node install, so they exist when their schemas run.
+        context.addTask(new RunSchematicTask('migrate-theme-fonts', options), [installTaskId]);
+
+        return tree;
+    };
+}
+
 /**
  * Process adding animations modules.
  * Done as the separate schematics as @angular/cdk tools are used that may be not installed yet.
@@ -107,17 +137,64 @@ function callAnimationsSchematics(options: Schema): Rule {
     };
 }
 
+function getWorkspaceJson(tree: Tree): WorkspaceSchema {
+    const angularConfigPath = '/angular.json';
+    const workspaceConfig = tree.read(angularConfigPath);
+
+    if (!workspaceConfig) {
+        throw new SchematicsException(`Unable to find angular.json. Please manually configure your styles array.`);
+    }
+
+    return JSON.parse(workspaceConfig.toString());
+}
+
+function addAssetsPathToConfig(options: Schema): Rule {
+    return (tree: Tree, context: SchematicContext) => {
+        const workspaceJson = getWorkspaceJson(tree);
+
+        try {
+            const additionalAssets: AngularAssets[] = [
+                {
+                    glob: '**/css_variables.css',
+                    input: './node_modules/@sap-theming/theming-base-content/content/Base/baseLib/',
+                    output: './assets/theming-base/'
+                },
+                {
+                    glob: '**/*',
+                    input: './node_modules/fundamental-styles/dist/theming/',
+                    output: './assets/fundamental-styles-theming/'
+                }
+            ];
+
+            let assetsArray = (workspaceJson!.projects[options.project]!.architect!.build!.options as any)[
+                'assets'
+            ] as (string | AngularAssets)[];
+
+            additionalAssets.forEach((asset) => {
+                if (
+                    !assetsArray.find((jsonAsset) => typeof jsonAsset === 'object' && jsonAsset.input === asset.input)
+                ) {
+                    assetsArray.push(asset);
+                }
+            });
+        } catch (e) {
+            throw new SchematicsException(
+                `Unable to find angular.json project assets. Please manually configure your assets array.`
+            );
+        }
+
+        tree.overwrite(angularConfigPath, JSON.stringify(workspaceJson, null, 2));
+
+        context.logger.info(`✅️ Added theming assets to angular.json.`);
+
+        return tree;
+    };
+}
+
 // Adds the icon style path to the angular.json.
 function addStylePathToConfig(options: any): Rule {
     return (tree: Tree, context: SchematicContext) => {
-        const angularConfigPath = '/angular.json';
-        const workspaceConfig = tree.read(angularConfigPath);
-
-        if (!workspaceConfig) {
-            throw new SchematicsException(`Unable to find angular.json. Please manually configure your styles array.`);
-        }
-
-        const workspaceJson: WorkspaceSchema = JSON.parse(workspaceConfig.toString());
+        const workspaceJson = getWorkspaceJson(tree);
 
         try {
             let stylesArray = (workspaceJson!.projects[options.project]!.architect!.build!.options as any)['styles'];
@@ -169,13 +246,18 @@ function addFontsToStyles(options: any): Rule {
             try {
                 let stylesFileString = stylesFileContent.toString();
 
-                if (!stylesFileString.includes(defaultFontStyle)) {
-                    stylesFileString = defaultFontStyle + stylesFileString;
+                let fontsImported = false;
 
+                Object.keys(defaultStyles).forEach((font) => {
+                    if (stylesFileString.match(FONT_FACE_REGEX).filter((match) => match.includes(font)).length === 0) {
+                        stylesFileString = stylesFileString + (defaultStyles[font] as string);
+                        fontsImported = true;
+                    }
+                });
+
+                if (fontsImported) {
                     tree.overwrite(stylesFilePath, stylesFileString);
-
                     context.logger.info(`✅️ Added imports from @sap-theming to styles file.`);
-
                     return tree;
                 }
 

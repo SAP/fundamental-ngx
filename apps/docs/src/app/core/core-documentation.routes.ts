@@ -466,6 +466,11 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'theming',
+                loadChildren: () =>
+                    import('./component-docs/theming/theming-docs.module').then((m) => m.ThemingDocsModule)
+            },
+            {
                 path: 'tile',
                 loadChildren: () => import('./component-docs/tile/tile-docs.module').then((m) => m.TileDocsModule)
             },

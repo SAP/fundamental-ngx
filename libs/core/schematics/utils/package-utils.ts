@@ -1,6 +1,7 @@
 import { Tree, SchematicsException } from '@angular-devkit/schematics';
 
 import * as ts from 'typescript';
+import { compare, CompareOperator } from 'compare-versions';
 
 // Gets the ts source file from a path
 export function getSourceFile(host: Tree, path: string): ts.SourceFile {
@@ -38,4 +39,10 @@ export function hasPackage(tree: Tree, name: string): boolean | null {
     const packageJson = JSON.parse(tree.read('package.json')!.toString('utf-8'));
 
     return packageJson.dependencies && packageJson.dependencies[name];
+}
+
+export function checkPackageVersion(tree: Tree, name: string, compareTo: string, operator: CompareOperator): boolean {
+    const packageJson = JSON.parse(tree.read('package.json')!.toString('utf-8'));
+
+    return compare(packageJson.dependencies[name], compareTo, operator);
 }
