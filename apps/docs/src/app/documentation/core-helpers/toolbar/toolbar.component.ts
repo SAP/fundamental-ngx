@@ -5,19 +5,17 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CURRENT_LIB, Libraries } from '../../utilities/libraries';
 
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { DocsThemeService } from '../../services/docs-theme.service';
-import { fromEvent, Subject } from 'rxjs';
+import { filter, fromEvent, Subject } from 'rxjs';
 import { debounceTime, startWith, takeUntil } from 'rxjs/operators';
 import { MenuComponent, MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { ContentDensity, ContentDensityService } from '@fundamental-ngx/core/utils';
 import { ShellbarMenuItem, ShellbarSizes } from '@fundamental-ngx/core/shellbar';
 
-const urlContains = (url: SafeResourceUrl, search: string): boolean =>
-    (url as any).changingThisBreaksApplicationSecurity.toLowerCase().includes(search);
+const urlContains = (themeName: string, search: string): boolean => themeName.toLowerCase().includes(search);
 
-const isHcb = (safeUrl: SafeResourceUrl): boolean => urlContains(safeUrl, 'hcb');
-const isHcw = (safeUrl: SafeResourceUrl): boolean => urlContains(safeUrl, 'hcw');
-const isDark = (safeUrl: SafeResourceUrl): boolean => urlContains(safeUrl, 'dark');
+const isHcb = (themeName: string): boolean => urlContains(themeName, 'hcb');
+const isHcw = (themeName: string): boolean => urlContains(themeName, 'hcw');
+const isDark = (themeName: string): boolean => urlContains(themeName, 'dark');
 
 @Component({
     selector: 'fd-docs-toolbar',
@@ -79,11 +77,17 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         private _route: ActivatedRoute,
         private _domSanitizer: DomSanitizer
     ) {
+        this._themingService.init();
         this.library = this._route.snapshot.data.library || 'core';
 
-        this._themingService.currentTheme.pipe(takeUntil(this._onDestroy$)).subscribe((theme) => {
-            this.updateHighlightTheme(theme?.id);
-        });
+        this._themingService.currentTheme
+            .pipe(
+                takeUntil(this._onDestroy$),
+                filter((theme) => !!theme)
+            )
+            .subscribe((theme) => {
+                this.updateHighlightTheme(theme?.id as string);
+            });
     }
 
     ngOnInit(): void {
@@ -127,13 +131,13 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         this._onDestroy$.complete();
     }
 
-    updateHighlightTheme(safeUrl: SafeResourceUrl): void {
+    updateHighlightTheme(themeName: string): void {
         let theme = 'googlecode.css';
-        if (isHcb(safeUrl)) {
+        if (isHcb(themeName)) {
             theme = 'a11y-dark.css';
-        } else if (isHcw(safeUrl)) {
+        } else if (isHcw(themeName)) {
             theme = 'a11y-light.css';
-        } else if (isDark(safeUrl)) {
+        } else if (isDark(themeName)) {
             theme = 'tomorrow-night.css';
         }
         this.highlightJsThemeCss = this.trustedResourceUrl(`assets/highlight-js-styles/${theme}`);

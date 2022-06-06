@@ -167,8 +167,6 @@ export class ThemingService implements OnDestroy {
         themes = themes || [];
         const mergedThemes = [...this._standardThemes, ...themes];
 
-        console.log(mergedThemes);
-
         if (mergedThemes.length === 0 && isDevMode()) {
             console.error('Error. No themes were provided. Please check your configuration.');
         }
