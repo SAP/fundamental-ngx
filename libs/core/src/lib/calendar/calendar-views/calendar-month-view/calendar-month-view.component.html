@@ -20,18 +20,26 @@
                     (keydown)="_onKeydownMonthHandler($event, monthCell.index)"
                     (click)="selectMonth(monthCell, $event)"
                 >
-                    <span
-                        role="button"
-                        class="fd-calendar__text"
-                        [attr.aria-labelledby]="
-                            monthCell.id +
-                            '-aria-label ' +
-                            (monthCell.current ? _todayLabelId + ' ' : '') +
-                            (monthCell.selected ? _selectedDateLabelId : '')
-                        "
+                    <button
+                        fd-button
+                        fdType="transparent"
+                        class="fd-calendar__item-button"
+                        [class.is-active]="monthCell.current"
+                        tabindex="-1"
                     >
-                        {{ monthCell.label }}
-                    </span>
+                        <span
+                            class="fd-calendar__text"
+                            [attr.aria-labelledby]="
+                                monthCell.id +
+                                '-aria-label ' +
+                                (monthCell.current ? _todayLabelId + ' ' : '') +
+                                (monthCell.selected ? _selectedDateLabelId : '')
+                            "
+                        >
+                            {{ monthCell.label }}
+                        </span>
+                    </button>
+
                     <span hidden aria-hidden="true" [attr.id]="monthCell.id + '-aria-label'">
                         {{ monthCell.ariaLabel }}
                     </span>

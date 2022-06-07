@@ -6,7 +6,9 @@
     role="option"
     [class.is-navigated]="isNavigated"
     [class.is-selected]="!!_selectedItem"
-    [class.fd-grid-list__item--link]="_isActive && (type === 'active' || type === 'detailsAndActive')"
+    [class.fd-grid-list__item--link]="
+        _isActive && (type === 'active' || type === 'detailsAndActive' || type === 'navigation')
+    "
     [class.fd-grid-list__item--unread]="state === 'unread'"
     [class.fd-grid-list__item--locked]="state === 'locked'"
     [class.fd-grid-list__item--draft]="state === 'draft'"
@@ -34,7 +36,7 @@
     </ng-container>
 
     <div
-        class="fd-toolbar fd-toolbar--transparent fd-grid-list__item-toolbar"
+        class="fd-toolbar fd-grid-list__item-toolbar"
         *ngIf="
             counter ||
             itemToolbarComponent?.contentTemplateRef ||
@@ -43,15 +45,11 @@
         "
     >
         <ng-container *ngIf="selectionMode === 'singleSelectLeft'">
-            <div class="fd-grid-list__item-input">
-                <ng-container *ngTemplateOutlet="radio"></ng-container>
-            </div>
+            <ng-container *ngTemplateOutlet="radio"></ng-container>
         </ng-container>
 
         <ng-container *ngIf="selectionMode === 'multiSelect'">
-            <div class="fd-grid-list__item-input">
-                <ng-container *ngTemplateOutlet="checkbox"></ng-container>
-            </div>
+            <ng-container *ngTemplateOutlet="checkbox"></ng-container>
         </ng-container>
 
         <ng-container *ngIf="itemToolbarComponent?.contentTemplateRef">
@@ -61,6 +59,7 @@
         </ng-container>
 
         <fd-grid-list-title-bar-spacer></fd-grid-list-title-bar-spacer>
+
         <span
             *ngIf="counter"
             class="fd-grid-list__item-counter"
@@ -97,19 +96,9 @@
             (click)="_onDelete($event)"
         ></button>
 
-        <button
-            *ngIf="type === 'navigation'"
-            fd-button
-            fdType="transparent"
-            glyph="navigation-right-arrow"
-            i18n-aria-label="coreGridList.Item.Btn.Navigation|Button aria-label attribute"
-            aria-label="Navigation"
-            i18n-title="coreGridList.Item.Btn.Navigation|Button aria-label attribute"
-            title="Navigation"
-            class="fd-grid-list__action-button fd-grid-list__btn-navigation"
-            [compact]="true"
-            (click)="_onNavigate($event)"
-        ></button>
+        <span *ngIf="type === 'navigation'" class="fd-grid-list__item-navigation-indicator">
+            <fd-icon glyph="navigation-right-arrow"></fd-icon>
+        </span>
 
         <ng-container *ngIf="selectionMode === 'singleSelectRight'">
             <ng-container *ngTemplateOutlet="radio"></ng-container>
@@ -117,18 +106,18 @@
     </div>
 
     <div class="fd-grid-list__item-body" [class.fd-grid-list__item-body--no-padding]="noPadding">
-        <ng-container *ngIf="state">
-            <ng-container *ngTemplateOutlet="itemFooter"></ng-container>
-        </ng-container>
+        <ng-content select="[fd-grid-list-item-image]"></ng-content>
 
-        <ng-template>
-            <ng-content select="fd-grid-list-item-toolbar"></ng-content>
-            <ng-content select="fd-grid-list-item-footer-bar"></ng-content>
-        </ng-template>
+        <div *ngIf="title || description" class="fd-grid-list__item-header">
+            <h4 *ngIf="title" fd-title>{{ title }}</h4>
+            <span *ngIf="description" class="fd-grid-list__item-subtitle">{{ description }}</span>
+        </div>
 
-        <ng-content></ng-content>
+        <div *ngIf="body?.templateRef" class="fd-grid-list__item-content">
+            <ng-container [ngTemplateOutlet]="body.templateRef"></ng-container>
+        </div>
 
-        <ng-container *ngIf="!state && footerBarComponent?.contentTemplateRef">
+        <ng-container *ngIf="state || footerBarComponent?.contentTemplateRef">
             <ng-container *ngTemplateOutlet="itemFooter"></ng-container>
         </ng-container>
     </div>

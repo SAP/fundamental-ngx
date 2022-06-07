@@ -1,8 +1,13 @@
-<div #toolbar>
+<div #toolbar [tabindex]="tabindex">
+    <h4 *ngIf="title" class="fd-title fd-title--h4 fd-toolbar__title">{{ title }}</h4>
+
     <ng-content></ng-content>
+
     <ng-container *ngIf="shouldOverflow">
         <span #overflowSpacer class="fd-toolbar__spacer"></span>
+
         <span class="fd-toolbar__separator" *ngIf="overflowVisibility | async"></span>
+
         <fd-popover placement="bottom-end" [noArrow]="true" class="fd-popover">
             <fd-popover-control>
                 <button
@@ -16,6 +21,7 @@
                     glyph="overflow"
                 ></button>
             </fd-popover-control>
+
             <fd-popover-body>
                 <div class="fd-toolbar__overflow" #overflowBody></div>
             </fd-popover-body>

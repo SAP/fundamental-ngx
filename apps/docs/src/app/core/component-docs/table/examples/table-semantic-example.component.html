@@ -24,9 +24,15 @@
             <td fd-table-cell>
                 <a fd-link href="#">{{ row.column1 }}</a>
             </td>
-            <td fd-table-cell>{{ row.column2 }}</td>
-            <td fd-table-cell>{{ row.column3 }}</td>
-            <td fd-table-cell>{{ row.date }}</td>
+            <td fd-table-cell>
+                <span fd-table-text>{{ row.column2 }}</span>
+            </td>
+            <td fd-table-cell>
+                <span fd-table-text>{{ row.column3 }}</span>
+            </td>
+            <td fd-table-cell>
+                <span fd-table-text>{{ row.date }}</span>
+            </td>
         </tr>
     </tbody>
 </table>

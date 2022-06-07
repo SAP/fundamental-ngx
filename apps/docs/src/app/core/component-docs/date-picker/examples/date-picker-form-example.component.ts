@@ -19,6 +19,7 @@ import {
                         [state]="isValid() ? 'success' : 'error'"
                         [message]="isValid() ? 'This is valid Date picker' : 'This is invalid Date picker'"
                         [required]="true"
+                        [preventScrollOnFocus]="true"
                         formControlName="date"
                         inputId="fd-date-picker-form-example-1"
                     >

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'fd-quick-view-base-example',
-    styles: ['.example-wrapper { background-color: #fff; }'],
     templateUrl: './quick-view-base-example.component.html'
 })
 export class QuickViewBaseExampleComponent {

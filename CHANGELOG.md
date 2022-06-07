@@ -1,4 +1,55 @@
 
+## [0.35.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.3...v0.35.0-rc.4) (2022-06-07)
+
+
+### Bug Fixes
+
+* **core:** list single selection focus ([#8185](https://github.com/SAP/fundamental-ngx/issues/8185)) ([9487a85](https://github.com/SAP/fundamental-ngx/commit/9487a85af1c796aa98c59c4f6867c5ebcc2880d5))
+
+## [0.35.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.2...v0.35.0-rc.3) (2022-06-06)
+
+
+### Features
+
+* theming module with font manipulation ([#8167](https://github.com/SAP/fundamental-ngx/issues/8167)) ([88f5427](https://github.com/SAP/fundamental-ngx/commit/88f54273ad59f5323e14b469f8a93bf6fd55cd1f))
+
+## [0.35.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.1...v0.35.0-rc.2) (2022-06-06)
+
+
+### Bug Fixes
+
+* **core,platform:** dont scroll into view on focus ([#8172](https://github.com/SAP/fundamental-ngx/issues/8172)) ([6a88a5d](https://github.com/SAP/fundamental-ngx/commit/6a88a5d45fa6af0654735a65176ce06ca9d18bf4))
+
+## [0.35.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.0...v0.35.0-rc.1) (2022-06-04)
+
+
+### Bug Fixes
+
+* **platform:** datepicker examples accessibility issues ([#8070](https://github.com/SAP/fundamental-ngx/issues/8070)) ([286a1f3](https://github.com/SAP/fundamental-ngx/commit/286a1f372708f7b12bee1f0fe5eb836b4d9a6170))
+
+## [0.35.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.47...v0.35.0-rc.0) (2022-06-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* **core,platform:** updates in (core) grid-list, (core)toolbar table, (core) slider, (core)shellbar related to Horizon Family themes
+
+* **core,platform:** Horizon Changed from Fundamental-Styles ([#7987](https://github.com/SAP/fundamental-ngx/issues/7987)) ([48612cb](https://github.com/SAP/fundamental-ngx/commit/48612cbad6a1d787c0b5d96e9aa78899cddf4311))
+
+### [0.34.3-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.46...v0.34.3-rc.47) (2022-06-02)
+
+
+### Bug Fixes
+
+* **platform:** add limitless option to multi combobox ([#7967](https://github.com/SAP/fundamental-ngx/issues/7967)) ([63dc89f](https://github.com/SAP/fundamental-ngx/commit/63dc89f222d7780b63bd54f53c389e2b4acda7d7))
+
+### [0.34.3-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.45...v0.34.3-rc.46) (2022-05-29)
+
+
+### Bug Fixes
+
+* **platform:** link optionalText from wizardGenerator's steps to wizard steps ([#8148](https://github.com/SAP/fundamental-ngx/issues/8148)) ([3e60f5d](https://github.com/SAP/fundamental-ngx/commit/3e60f5dc846fec211fe8385b8e2429ec54a58a32))
+
 ### [0.34.3-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.34.3-rc.44...v0.34.3-rc.45) (2022-05-25)
 
 

@@ -20,6 +20,7 @@ import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
 
+import { GridListItemBodyDirective } from '../../directives/grid-list-item-body.directive';
 import { parseLayoutPattern } from '../../helpers/parse-layout-pattern';
 import { GridListItemToolbarComponent } from '../grid-list-item-toolbar/grid-list-item-toolbar.component';
 import { GridListSelectionMode, GridListSelectionActions } from '../../models/grid-list-selection.models';
@@ -143,11 +144,13 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
     @Input()
     isNavigated = false;
 
-    /** @hidden
-     * The active state of the list item.
-     * If set to true, the whole card has active state. Becomes false only when the Edit button is clicked.
-     */
-    _isActive = true;
+    /** Title of the item */
+    @Input()
+    title: string;
+
+    /** Description of the item */
+    @Input()
+    description: string;
 
     /**
      * Event is thrown, when type is active
@@ -195,6 +198,12 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
     @ViewChild('gridListItem')
     _gridListItem: ElementRef;
 
+    /** @hidden
+     * The active state of the list item.
+     * If set to true, the whole card has active state. Becomes false only when the Edit button is clicked.
+     */
+    _isActive = true;
+
     /** @hidden */
     get gridLayoutClasses(): string[] {
         return this._gridLayoutClasses;
@@ -213,6 +222,10 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
     /** @hidden */
     @ContentChild(GridListItemToolbarComponent)
     itemToolbarComponent: GridListItemToolbarComponent;
+
+    /** @hidden */
+    @ContentChild(GridListItemBodyDirective)
+    body: GridListItemBodyDirective;
 
     /** @hidden */
     _selectedItem?: T;
@@ -295,6 +308,7 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
         if (typeof this._selectedItem !== 'undefined' || !this.value || this._index == null) {
             return;
         }
+
         this._gridList.setSelectedItem(this.value, this._index);
     }
 
@@ -360,7 +374,12 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
             return;
         }
 
-        if (this.type !== 'active' && this.type !== 'detailsAndActive') {
+        if (this.type !== 'active' && this.type !== 'detailsAndActive' && this.type !== 'navigation') {
+            return;
+        }
+
+        if (this.type === 'navigation') {
+            this._onNavigate(event);
             return;
         }
 

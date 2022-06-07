@@ -106,7 +106,7 @@
 <separator></separator>
 
 <fd-docs-section-title id="update-on-blur" componentName="date-picker">
-    Date picker that updates it's value on blur.
+    Date picker that updates its value on blur.
 </fd-docs-section-title>
 <description>
     Set <code>[processInputOnBlur]="true"</code> in order to move the processing of input value to whenever component
@@ -149,6 +149,23 @@
     <fd-date-picker-disabled-example></fd-date-picker-disabled-example>
 </component-example>
 <code-example [exampleFiles]="datePickerDisabled"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="prevent-scroll" componentName="date-picker"
+    >Prevent scrolling when calendar is closed</fd-docs-section-title
+>
+<description>
+    <p>It is a common behaviour for browsers to scroll into element's viewport once it has been focused.</p>
+    <p>
+        Yet this behaviour can be changed with <code>[preventScrollOnFocus]="true"</code> input property of the
+        <code>fd-date-picker</code>
+    </p>
+</description>
+<component-example name="ex11">
+    <fd-date-picker-disable-focus-scroll-example></fd-date-picker-disable-focus-scroll-example>
+</component-example>
+<code-example [exampleFiles]="datePickerDisableScroll"></code-example>
 
 <!-- Moment example is commented due to the lack of DatetimeAdapter<Moment> implementation  -->
 <!-- <separator></separator>

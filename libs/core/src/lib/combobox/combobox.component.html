@@ -92,14 +92,14 @@
         <span
             class="fd-input-group__addon fd-input-group__addon--button"
             [class.fd-input-group__addon--compact]="compact"
-            [class.fd-shellbar__input-group__addon]="inShellbar"
+            [class.fd-shellbar__input-group-addon]="inShellbar"
             *ngIf="isSearch && showClearButton && inputText && inputText.length > 0"
         >
             <button
                 fd-button
                 class="fd-input-group__button"
                 type="button"
-                fdType="transparent"
+                [fdType]="inShellbar ? 'standard' : 'transparent'"
                 title="Clear input"
                 [class.fd-button--compact]="compact"
                 [class.fd-shellbar__button]="inShellbar"

@@ -25,7 +25,6 @@ import { IconTabBarItem } from '../interfaces/icon-tab-bar-item.interface';
 import { TabConfig } from '../interfaces/tab-config.interface';
 import { TabDestinyMode } from '../types';
 import { ICON_TAB_HIDDEN_CLASS_NAME, UNIQUE_KEY_SEPARATOR } from '../constants';
-import { ExtraButtonDirective } from '../directives/extra-button/extra-button.directive';
 import { IconTabBarPopoverBase } from './popovers/icon-tab-bar-popover-base.class';
 import { TabColorAssociations } from '../interfaces/tab-color-associations.interface';
 
@@ -81,12 +80,6 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
      */
     @ViewChild(OverflowListDirective)
     overflowDirective: OverflowListDirective;
-
-    /**
-     * @description Reference to ExtraButtonDirective
-     */
-    @ViewChild(ExtraButtonDirective)
-    extraBtnDirective: ExtraButtonDirective;
 
     /** @hidden */
     _selectedUid?: string;
@@ -344,7 +337,6 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
         if (this.overflowDirective && !this._destroyed) {
             const extra = this.overflowDirective.getAmountOfExtraItems();
             this._recalculateVisibleItems(extra);
-            this.extraBtnDirective?.calculatePosition();
             this._cd.markForCheck();
         }
     }

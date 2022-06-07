@@ -89,7 +89,6 @@ export class IconTabBarProcessTypeComponent extends IconTabBarBase {
                 isPreviousStepsStrategy
                     ? this.recalculateItemsByPrevArr(extra, amountOfPreviousSteps)
                     : this._recalculateItemsByNextArr(extra, amountOfNextSteps);
-                this.extraBtnDirective?.calculatePosition();
                 this._cd.detectChanges();
             }
         });

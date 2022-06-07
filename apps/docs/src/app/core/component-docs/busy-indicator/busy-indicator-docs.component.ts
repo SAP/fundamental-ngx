@@ -15,7 +15,7 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     templateUrl: './busy-indicator-docs.component.html',
     styles: [
         `
-            .fd-button {
+            app-busy-indicator-docs .fd-button {
                 margin-right: 8px;
             }
         `

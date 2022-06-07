@@ -155,6 +155,10 @@ export abstract class DataProvider<T> {
 
 export class ComboBoxDataSource<T> implements DataSource<T> {
     static readonly MaxLimit = 5;
+
+    /** @hidden */
+    limitless = false;
+
     protected readonly _dataChanges: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
     protected readonly _onDataRequested$ = new Subject<void>();
     protected readonly _onDataReceived$ = new Subject<void>();
@@ -181,7 +185,7 @@ export class ComboBoxDataSource<T> implements DataSource<T> {
             throw new Error('DataSource.match() predicate can only accepts string and Map');
         }
 
-        if (!searchParam.has('limit')) {
+        if (!searchParam.has('limit') && !this.limitless) {
             searchParam.set('limit', ComboBoxDataSource.MaxLimit);
         }
 

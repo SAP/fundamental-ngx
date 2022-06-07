@@ -23,6 +23,7 @@ import { ListGroupHeaderDirective } from './directives/list-group-header.directi
 import { ListFocusItem } from './list-focus-item.model';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
 import { ListNavigationItemComponent } from './list-navigation-item/list-navigation-item.component';
+import { FD_LIST } from './list.tokens';
 
 /**
  * The directive that represents a list.
@@ -39,7 +40,7 @@ import { ListNavigationItemComponent } from './list-navigation-item/list-navigat
     styleUrls: ['./list.component.scss', '../utils/drag-and-drop/drag-and-drop.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [KeyboardSupportService]
+    providers: [KeyboardSupportService, { provide: FD_LIST, useExisting: ListComponent }]
 })
 export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
     /** Whether dropdown mode is included to component, used for Select and Combobox */
@@ -183,8 +184,13 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
 
     /** @hidden */
     private _listenOnItemsClick(): void {
-        /** Finish all of the streams, from before */
+        /** Finish all the streams, from before */
         this._onRefresh$.next();
+
+        if (!this.keyboardSupport) {
+            return;
+        }
+
         /** Merge refresh/destroy observables */
         const completion$ = merge(this._onRefresh$, this._onDestroy$);
         const interactionChangesIndexes: Observable<{ index: number; updateOnly: boolean }>[] = this._focusItems.map(

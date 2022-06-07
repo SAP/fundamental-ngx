@@ -90,6 +90,10 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     @Input()
     dateInputLabel = 'Date input';
 
+    /** Aria label for the datepicker input. */
+    @Input()
+    dateRangeInputLabel = 'Date range input';
+
     /** Aria label for the button to show/hide the calendar. */
     @Input()
     displayCalendarToggleLabel = 'Display calendar toggle';
@@ -219,6 +223,12 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
      */
     @Input()
     processInputOnBlur = false;
+
+    /**
+     * Whether to prevent page scrolling when focusing date picker input field after calendar has been closed.
+     */
+    @Input()
+    preventScrollOnFocus = false;
 
     /** Event emitted when the state of the isOpen property changes. */
     @Output()

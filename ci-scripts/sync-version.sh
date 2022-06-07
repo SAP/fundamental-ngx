@@ -18,6 +18,7 @@ FDNSTYLES_VERSION=$(node -p "require('./package.json').dependencies['@fundamenta
 FOCUSTRAP_VERSION=$(node -p "require('./package.json').dependencies['focus-trap']")
 FOCUSVISIBLE_VERSION=$(node -p "require('./package.json').dependencies['focus-visible']")
 LODASH_ES_VERSION=$(node -p "require('./package.json').dependencies['lodash-es']")
+COMPARE_VERSIONS_PLACEHOLDER=$(node -p "require('./package.json').dependencies['compare-versions']")
 DAYJS_VERSION=$(node -p "require('./package.json').dependencies['dayjs']")
 THEMING_VERSION=$(node -p "require('./package.json').dependencies['@sap-theming/theming-base-content']")
 
@@ -32,6 +33,7 @@ grep -rl 'FDNSTYLES_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/FDNSTYLES_VE
 grep -rl 'FOCUSTRAP_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/FOCUSTRAP_VER_PLACEHOLDER/${FOCUSTRAP_VERSION}/g"
 grep -rl 'FOCUSVISIBLE_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/FOCUSVISIBLE_VER_PLACEHOLDER/${FOCUSVISIBLE_VERSION}/g"
 grep -rl 'LODASH_ES_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/LODASH_ES_VER_PLACEHOLDER/${LODASH_ES_VERSION}/g"
+grep -rl 'COMPARE_VERSIONS_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/COMPARE_VERSIONS_VER_PLACEHOLDER/${COMPARE_VERSIONS_PLACEHOLDER}/g"
 grep -rl 'DAYJS_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/DAYJS_VER_PLACEHOLDER/${DAYJS_VERSION}/g"
 grep -rl 'THEMING_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/THEMING_VER_PLACEHOLDER/${THEMING_VERSION}/g"
 

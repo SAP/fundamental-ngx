@@ -17,7 +17,6 @@ let carouselItemCounter = 0;
 @Component({
     selector: 'fd-carousel-item',
     templateUrl: './carousel-item.component.html',
-    styleUrls: ['carousel-item.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
@@ -73,13 +72,8 @@ export class CarouselItemComponent implements CarouselItemInterface {
     @HostBinding('class.fd-carousel__item--active')
     carouselItemActive = true;
 
-    /**
-     * @hidden Handling width height in IE versions.
-     */
-    @HostBinding('class.fd-carousel--ie-handling')
-    ieAutoWidth = true;
-
     /** @hidden Hide/show slide, useful for managing tab order */
+    @HostBinding('style.visibility')
     _visibility: Visibility = 'visible';
 
     /** @hidden */

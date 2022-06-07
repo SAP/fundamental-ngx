@@ -2,9 +2,11 @@
     class="fd-carousel"
     [class.fd-carousel--no-navigation]="!navigation"
     data-ride="carousel"
+    tabindex="0"
     [style.height]="height"
     [style.width]="width"
     [attr.dir]="dir"
+    role="region"
     #carouselContainer
     (click)="_focus()"
 >
@@ -12,15 +14,17 @@
         <ng-container *ngTemplateOutlet="pageIndicatorContainer"></ng-container>
     </ng-container>
 
-    <div class="fd-carousel__content fd-carousel__content--display" #carouselContent>
+    <div
+        class="fd-carousel__content"
+        [class.fd-carousel__content--horizontal]="!vertical"
+        [style.width]="_contentSizePx"
+    >
         <ng-container *ngIf="_showNavigationButtonInContent">
             <ng-container *ngTemplateOutlet="buttonLeft"></ng-container>
         </ng-container>
 
-        <div class="fd-carousel__slides-wrapper" #slidesWrapper [style.width]="_slidesWrapperSizePx">
-            <div #slideContainer [class.fd-carousel__content--horizontal]="!vertical">
-                <ng-content></ng-content>
-            </div>
+        <div #slideContainer class="fd-carousel__slides">
+            <ng-content></ng-content>
         </div>
 
         <ng-container *ngIf="_showNavigationButtonInContent">

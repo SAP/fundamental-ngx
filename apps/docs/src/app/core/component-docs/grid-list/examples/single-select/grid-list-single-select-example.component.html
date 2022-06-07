@@ -16,6 +16,8 @@
     >
         <fd-grid-list-item-toolbar *ngIf="item.toolbarText">{{ item.toolbarText }}</fd-grid-list-item-toolbar>
 
-        <img [src]="item.url" alt="Image" />
+        <ng-template fd-grid-list-item-body>
+            <img [src]="item.url" alt="Image" />
+        </ng-template>
     </fd-grid-list-item>
 </fd-grid-list>

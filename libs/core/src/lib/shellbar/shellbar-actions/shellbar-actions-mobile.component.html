@@ -1,35 +1,24 @@
 <div class="fd-shellbar-collapse">
-    <div class="fd-shellbar-collapse--control">
-        <button
-            fd-button
-            glyph="overflow"
-            class="fd-shellbar__button"
-            [fdMenuTrigger]="menu"
-            [attr.aria-label]="collapsedItemMenuLabel"
-        >
-            <span
-                *ngIf="totalNotifications"
-                class="fd-counter fd-counter--notification fd-shellbar__counter--notification"
-            >
-                {{ totalNotifications }}
-            </span>
-        </button>
-    </div>
-
-    <fd-menu #menu [options]="{ placement: 'bottom-end' }" [fillControlMode]="null">
-        <li
-            fd-menu-item
-            *ngFor="let action of shellbarActions"
-            (click)="actionClicked(action, $event)"
-            class="fd-shellbar__action"
-        >
-            <div fd-menu-interactive>
-                <fd-menu-addon position="before" [glyph]="action.glyph"></fd-menu-addon>
-                <span fd-menu-title>{{ action.label }}</span>
-                <span *ngIf="action.notificationCount" class="fd-counter fd-shellbar__counter--overflowed">
-                    {{ action.notificationCount }}
+    <fd-action-sheet placement="bottom-end">
+        <fd-action-sheet-control>
+            <button fd-button glyph="overflow" class="fd-shellbar__button" [attr.aria-label]="collapsedItemMenuLabel">
+                <span *ngIf="totalNotifications" class="fd-button__badge">
+                    {{ totalNotifications }}
                 </span>
-            </div>
-        </li>
-    </fd-menu>
+            </button>
+        </fd-action-sheet-control>
+
+        <fd-action-sheet-body>
+            <li
+                fd-action-sheet-item
+                *ngFor="let action of shellbarActions"
+                tabindex="-1"
+                [glyph]="action.glyph"
+                [label]="action.label"
+                (click)="actionClicked(action, $event)"
+            >
+                <span *ngIf="action.notificationCount" class="fd-button__badge">{{ action.notificationCount }}</span>
+            </li>
+        </fd-action-sheet-body>
+    </fd-action-sheet>
 </div>

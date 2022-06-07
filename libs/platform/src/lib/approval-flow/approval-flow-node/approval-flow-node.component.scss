@@ -347,14 +347,6 @@ $border-color-variable: var(--sapGroup_TitleBorderColor, #d9d9d9);
             }
         }
 
-        .#{$block}__inner {
-            display: flex;
-        }
-
-        .#{$block}__avatar {
-            margin-right: 1rem;
-        }
-
         .#{$block}__name {
             font-size: 1rem;
             line-height: 1.25rem;
@@ -406,11 +398,6 @@ $border-color-variable: var(--sapGroup_TitleBorderColor, #d9d9d9);
         }
 
         @include fd-rtl() {
-            .#{$block}__avatar {
-                margin-right: 0;
-                margin-left: 1rem;
-            }
-
             .#{$block}__arrow {
                 left: auto;
                 right: -0.5rem;

@@ -17,7 +17,7 @@
         class="fd-calendar__content"
         [class.fd-calendar__content--dates]="activeView === 'day'"
         [class.fd-calendar__content--months]="activeView === 'month'"
-        [class.fd-calendar__content--years]="activeView === 'year'"
+        [class.fd-calendar__content--years]="activeView === 'year' || activeView === 'aggregatedYear'"
     >
         <fd-calendar-day-view
             *ngSwitchCase="'day'"

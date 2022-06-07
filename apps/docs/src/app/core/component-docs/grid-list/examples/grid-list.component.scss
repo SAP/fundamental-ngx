@@ -1,31 +1,11 @@
-.fd-grid-list-item-body {
-    &--container {
-        display: flex;
-        word-break: break-all;
+.fd-grid-list__item-body {
+    .fd-grid-list__item-content {
+        p {
+            margin-top: 0;
 
-        fd-avatar {
-            margin-right: 1rem;
-
-            @at-root {
-                [dir='rtl'] & {
-                    margin-right: 0;
-                    margin-left: 1rem;
-                }
+            &:not(:last-of-type) {
+                margin-bottom: 0;
             }
-        }
-    }
-
-    &--content {
-        * {
-            margin: 0;
-        }
-
-        .fd-title {
-            font-weight: bold;
-        }
-
-        .fd-grid-list-item-body--content-address {
-            margin: 10px 0;
         }
     }
 }

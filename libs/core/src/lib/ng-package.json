@@ -10,6 +10,7 @@
         "focus-trap",
         "fundamental-styles",
         "lodash-es",
-        "fast-deep-equal"
+        "fast-deep-equal",
+        "compare-versions"
     ]
 }

@@ -107,6 +107,7 @@
             "@fundamental-ngx/core/tabs": ["libs/core/src/lib/tabs/index.ts"],
             "@fundamental-ngx/core/tests": ["libs/core/src/lib/tests/index.ts"],
             "@fundamental-ngx/core/text": ["libs/core/src/lib/text/index.ts"],
+            "@fundamental-ngx/core/theming": ["libs/core/src/lib/theming/index.ts"],
             "@fundamental-ngx/core/tile": ["libs/core/src/lib/tile/index.ts"],
             "@fundamental-ngx/core/time": ["libs/core/src/lib/time/index.ts"],
             "@fundamental-ngx/core/time-picker": ["libs/core/src/lib/time-picker/index.ts"],

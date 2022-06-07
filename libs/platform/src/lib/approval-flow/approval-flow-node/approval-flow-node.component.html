@@ -36,59 +36,47 @@
 </ng-template>
 
 <ng-template #nodeContent>
-    <div class="fdp-approval-flow-node__inner">
-        <div class="fdp-approval-flow-node__avatar">
-            <ng-container *ngIf="node.approvers.length === 1">
-                <fd-avatar [image]="node.approvers[0].imgUrl" size="xs" [circle]="true"></fd-avatar>
+    <div class="fdp-approval-flow-node__info">
+        <div
+            class="fdp-approval-flow-node__name"
+            [class.fdp-approval-flow-node__name--members-count]="node.approvers.length > 1"
+        >
+            <ng-container *ngIf="node.approvers.length === 1; else multipleApprovers">
+                {{ node.approvers[0].name }}
             </ng-container>
 
-            <ng-container *ngIf="node.approvers.length > 1">
-                <fd-avatar [label]="node.description" size="xs" [circle]="true"></fd-avatar>
+            <ng-template #multipleApprovers i18n="@@platformApprovalFlowNodeMembers">
+                {{ node.approvers.length }} members
+            </ng-template>
+        </div>
+
+        <div class="fdp-approval-flow-node__description">
+            <ng-container *ngIf="!node.variousTeams; else variousTeams">
+                {{ node.approvers.length > 1 ? node.description : node.approvers[0]?.description }}
             </ng-container>
+
+            <ng-template #variousTeams i18n="@@platformApprovalFlowNodeVariousTeams"> Various teams </ng-template>
         </div>
 
-        <div class="fdp-approval-flow-node__info">
-            <div
-                class="fdp-approval-flow-node__name"
-                [class.fdp-approval-flow-node__name--members-count]="node.approvers.length > 1"
-            >
-                <ng-container *ngIf="node.approvers.length === 1; else multipleApprovers">
-                    {{ node.approvers[0].name }}
+        <fdp-object-status [status]="_objectStatus" [inverted]="true">
+            <ng-container *ngIf="!checkDueDate || !_showDueDateWarning">
+                {{ node.status }}
+            </ng-container>
+
+            <ng-container *ngIf="checkDueDate && _showDueDateWarning">
+                <ng-container *ngIf="_dueIn === dueDateThreshold" i18n="@@platformApprovalFlowNodeStatusDueToday">
+                    Due today
                 </ng-container>
 
-                <ng-template #multipleApprovers i18n="@@platformApprovalFlowNodeMembers">
-                    {{ node.approvers.length }} members
-                </ng-template>
-            </div>
-
-            <div class="fdp-approval-flow-node__description">
-                <ng-container *ngIf="!node.variousTeams; else variousTeams">
-                    {{ node.approvers.length > 1 ? node.description : node.approvers[0]?.description }}
+                <ng-container *ngIf="_dueIn < dueDateThreshold" i18n="@@platformApprovalFlowNodeStatusDueInXDays">
+                    Due in {{ dueDateThreshold - _dueIn }} days
                 </ng-container>
 
-                <ng-template #variousTeams i18n="@@platformApprovalFlowNodeVariousTeams"> Various teams </ng-template>
-            </div>
-
-            <fdp-object-status [status]="_objectStatus" [inverted]="true">
-                <ng-container *ngIf="!checkDueDate || !_showDueDateWarning">
-                    {{ node.status }}
+                <ng-container *ngIf="_dueIn > dueDateThreshold" i18n="@@platformApprovalFlowNodeStatusXDaysOverdue">
+                    {{ _dueIn - dueDateThreshold }} days overdue
                 </ng-container>
-
-                <ng-container *ngIf="checkDueDate && _showDueDateWarning">
-                    <ng-container *ngIf="_dueIn === dueDateThreshold" i18n="@@platformApprovalFlowNodeStatusDueToday">
-                        Due today
-                    </ng-container>
-
-                    <ng-container *ngIf="_dueIn < dueDateThreshold" i18n="@@platformApprovalFlowNodeStatusDueInXDays">
-                        Due in {{ dueDateThreshold - _dueIn }} days
-                    </ng-container>
-
-                    <ng-container *ngIf="_dueIn > dueDateThreshold" i18n="@@platformApprovalFlowNodeStatusXDaysOverdue">
-                        {{ _dueIn - dueDateThreshold }} days overdue
-                    </ng-container>
-                </ng-container>
-            </fdp-object-status>
-        </div>
+            </ng-container>
+        </fdp-object-status>
     </div>
 </ng-template>
 

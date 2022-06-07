@@ -27,13 +27,6 @@ $gutter-size: 15px;
 }
 
 @font-face {
-    font-family: 'SAP-icons';
-    src: url('~@sap-theming/theming-base-content/content/Base/baseLib/sap_horizon/fonts/SAP-icons.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
     font-family: 'BusinessSuiteInAppSymbols';
     src: url('~@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/BusinessSuiteInAppSymbols.woff')
         format('woff');

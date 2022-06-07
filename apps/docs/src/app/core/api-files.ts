@@ -402,5 +402,6 @@ export const API_FILES = {
         'TimelineNodeActionDirective',
         'TimelineHeaderInfoSubTitleDirective'
     ],
-    scrollbar: ['ScrollbarComponent']
+    scrollbar: ['ScrollbarComponent'],
+    theming: ['ThemingService', 'BaseThemingConfig']
 };
