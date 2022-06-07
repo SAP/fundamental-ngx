@@ -203,7 +203,7 @@ export class ListItemComponent
                 this.checkbox.nextValue();
                 this._muteEvent(event);
             } else if (this.radio) {
-                this.radio.labelClicked(event);
+                this.radio.labelClicked(event, false);
                 this._muteEvent(event);
             } else if (this.interactive) {
                 this.selected = !this.selected;
@@ -226,7 +226,7 @@ export class ListItemComponent
             }
         }
         if (this.radio && !this.link) {
-            this.radio.labelClicked(event);
+            this.radio.labelClicked(event, false);
         }
     }
 

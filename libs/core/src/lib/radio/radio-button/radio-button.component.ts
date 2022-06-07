@@ -215,9 +215,13 @@ export class RadioButtonComponent
     }
 
     /** @hidden */
-    labelClicked(event: MouseEvent | KeyboardEvent): void {
+    labelClicked(event: MouseEvent | KeyboardEvent, applyFocus = true): void {
         this.valueChange(this.value);
-        this._setFocusOnNativeElement();
+
+        if (applyFocus) {
+            this._setFocusOnNativeElement();
+        }
+
         event.stopPropagation();
     }
 
