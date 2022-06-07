@@ -1,4 +1,11 @@
 
+## [0.35.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.3...v0.35.0-rc.4) (2022-06-07)
+
+
+### Bug Fixes
+
+* **core:** list single selection focus ([#8185](https://github.com/SAP/fundamental-ngx/issues/8185)) ([9487a85](https://github.com/SAP/fundamental-ngx/commit/9487a85af1c796aa98c59c4f6867c5ebcc2880d5))
+
 ## [0.35.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.2...v0.35.0-rc.3) (2022-06-06)
 
 
