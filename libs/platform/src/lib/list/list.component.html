@@ -46,7 +46,7 @@
             <ng-template *ngIf="_items.length !== 0; then thenBlock; else elseBlock"> </ng-template>
         </ng-container>
     </ul>
-    <div
+    <li
         #listItem
         *ngIf="loadMore && !loadOnScroll"
         (click)="_getMoreData()"
@@ -68,7 +68,7 @@
             </fd-busy-indicator>
             {{ loadTitle }} <ng-content selector="#load"></ng-content>
         </button>
-    </div>
+    </li>
 </ng-container>
 
 <ng-template #thenBlock>

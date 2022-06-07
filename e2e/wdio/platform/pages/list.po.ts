@@ -7,6 +7,7 @@ export class ListPo extends BaseComponentPo {
     // borderless examples
     noBorderListItems = 'fdp-platform-list-border-less-example li';
     noBorderCompactList = 'fdp-platform-list-border-less-example fdp-list:nth-of-type(2)';
+    noBorderList = 'fdp-platform-list-border-less-example fdp-list ul';
     // footer examples
     footerListItems = 'fdp-platform-list-with-footer-example fdp-standard-list-item li';
     footerCompactList = 'fdp-platform-list-with-footer-example fdp-list:nth-of-type(2)';
@@ -59,9 +60,6 @@ export class ListPo extends BaseComponentPo {
     // no data examples
     noDataListItems = 'fdp-platform-list-with-nodata-example li';
     noDataCompactList = 'fdp-platform-list-with-nodata-example fdp-list:nth-of-type(2) ul';
-    // no separator examples
-    noSepList = 'fdp-platform-list-with-no-seperator-example ul';
-    noSepListItems = 'fdp-platform-list-with-no-seperator-example li';
     // unread data examples
     unreadListItems = 'fdp-platform-list-with-unread-example li';
     unreadListItemText = 'fdp-platform-list-with-unread-example li span';
