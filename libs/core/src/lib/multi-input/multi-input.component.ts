@@ -308,7 +308,7 @@ export class MultiInputComponent
     readonly _selectionModel = new SelectionModel<any>(true);
 
     /** @hidden */
-    readonly viewModel$: Observable<ViewModel> = this._getViewModel();
+    readonly _viewModel$: Observable<ViewModel> = this._getViewModel();
 
     /** @hidden */
     _dir: string;
@@ -520,7 +520,7 @@ export class MultiInputComponent
     ): Promise<void> {
         const toggledSelection = !this._selectionModel.isSelected(value);
         this._rangeSelector.onRangeElementToggled(index, event);
-        const sub = this.viewModel$.pipe(first()).subscribe((vm) => {
+        const sub = this._viewModel$.pipe(first()).subscribe((vm) => {
             this._rangeSelector.applyValueToEachInRange((idx) =>
                 this._handleSelect(toggledSelection, vm.displayedOptions[idx].value, false)
             );

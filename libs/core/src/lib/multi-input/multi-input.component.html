@@ -1,7 +1,8 @@
-<ng-container *ngIf="viewModel$ | async as vm">
+<ng-container *ngIf="_viewModel$ | async as viewModel">
     <div class="fd-multi-input fd-multi-input-custom">
         <div class="fd-multi-input-field">
-            <ng-container [ngTemplateOutlet]="control" *ngIf="mobile && !open"></ng-container>
+            <ng-container [ngTemplateOutlet]="control" *ngIf="mobile"></ng-container>
+
             <fd-popover
                 additionalBodyClass="fd-popover-custom-list"
                 *ngIf="!mobile"
@@ -20,11 +21,13 @@
                         <ng-container *ngTemplateOutlet="control"></ng-container>
                     </form>
                 </fd-popover-control>
+
                 <fd-popover-body
                     [attr.aria-hidden]="!open"
-                    [class.fd-popover__body--hidden]="!vm.displayedOptions.length"
+                    [class.fd-popover__body--hidden]="!viewModel.displayedOptions.length"
                 >
                     <ng-container *ngTemplateOutlet="list"></ng-container>
+
                     <ng-content></ng-content>
                 </fd-popover-body>
             </fd-popover>
@@ -39,7 +42,7 @@
             [button]="displayAddonButton"
             [compact]="compact"
             [disabled]="disabled"
-            [isExpanded]="open && !mobile && vm.displayedOptions.length > 0"
+            [isExpanded]="open && !mobile && viewModel.displayedOptions.length > 0"
             [isControl]="true"
             [glyph]="displayAddonButton ? glyph : ''"
             [iconTitle]="title"
@@ -56,7 +59,7 @@
                 tabindex="-1"
             >
                 <fd-token
-                    *ngFor="let option of vm.selectedOptions; trackBy: valueFn"
+                    *ngFor="let option of viewModel.selectedOptions; trackBy: valueFn"
                     [compact]="compact"
                     [disabled]="disabled"
                     (onCloseClick)="_onTokenClick(option.value, false, $event)"
@@ -64,6 +67,7 @@
                 >
                     <span [innerHtml]="option.label"></span>
                 </fd-token>
+
                 <input
                     type="text"
                     class="fd-input fd-tokenizer__input fd-multi-input-tokenizer-input"
@@ -91,7 +95,7 @@
 
     <ng-template #list>
         <ul
-            *ngIf="vm.displayedOptions.length"
+            *ngIf="viewModel.displayedOptions.length"
             fd-list
             class="fd-multi-input-menu-overflow"
             [selection]="true"
@@ -102,7 +106,7 @@
             [style.minWidth]="'100%'"
         >
             <li
-                *ngFor="let option of vm.displayedOptions; index as idx; trackBy: valueFn"
+                *ngFor="let option of viewModel.displayedOptions; index as idx; trackBy: valueFn"
                 fd-list-item
                 (click)="_onCheckboxClick(option.value, $event, idx, true)"
                 (keyup)="_onCheckboxKeyup(option.value, $event, idx)"
@@ -115,13 +119,15 @@
                 >
                     <!-- TODO -->
                 </fd-checkbox>
+
                 <ng-container
                     [ngTemplateOutlet]="itemSource"
                     [ngTemplateOutletContext]="{ option: option }"
                 ></ng-container>
             </li>
+
             <li
-                *ngIf="showAllButton && vm.displayedOptions.length < dropdownValues.length"
+                *ngIf="showAllButton && viewModel.displayedOptions.length < dropdownValues.length"
                 fd-list-item
                 class="fd-multi-input-show-all"
                 (keyDown)="_showAllKeyDown($event)"
@@ -137,8 +143,7 @@
             *ngIf="!itemTemplate"
             fd-list-title
             [innerHtml]="option.label | highlight: _searchTermCtrl.value:highlight"
-        >
-        </span>
+        ></span>
 
         <ng-container *ngIf="itemTemplate">
             <ng-container
