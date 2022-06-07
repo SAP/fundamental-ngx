@@ -45,4 +45,7 @@ export abstract class TableColumn {
 
     /** Whether the text should wrap, when text is too long for 1 line. */
     abstract noWrap: boolean;
+
+    /** Whether to apply fd-table-text (text-shadow) to the cell content, if disabled noWrap has no effect. */
+    abstract applyText: boolean;
 }

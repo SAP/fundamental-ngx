@@ -200,12 +200,13 @@
 
 <!-- Column Header Cell Content Template  -->
 <ng-template #tableHeaderCellContentTemplate let-column="column">
-    <ng-container [ngIf]="column?.headerCellTemplate" *ngTemplateOutlet="column.headerCellTemplate"></ng-container>
+    <ng-container *ngIf="column?.headerCellTemplate; else defaultHeaderCellTemplate">
+        <ng-container *ngTemplateOutlet="column.headerCellTemplate"></ng-container>
+    </ng-container>
 
-    <ng-container
-        [ngIf]="!column?.headerCellTemplate"
-        *ngTemplateOutlet="defaultTableHeaderCellTemplate; context: { column: column }"
-    ></ng-container>
+    <ng-template #defaultHeaderCellTemplate>
+        <ng-container *ngTemplateOutlet="defaultTableHeaderCellTemplate; context: { column: column }"></ng-container>
+    </ng-template>
 </ng-template>
 
 <!-- Default Header Cell Content Template  -->
@@ -353,7 +354,7 @@
                             (click)="_onCellClick(colIdx, row)"
                             (keyup.enter)="_isTreeRowFirstCell(colIdx, row) && _toggleGroupRow(row)"
                         >
-                            <div fd-table-text [noWrap]="column.noWrap">
+                            <div fd-table-text [fdTableTextClass]="column.applyText" [noWrap]="column.noWrap">
                                 <span
                                     *ngIf="_isTreeRowFirstCell(colIdx, row)"
                                     class="fd-table__expand"

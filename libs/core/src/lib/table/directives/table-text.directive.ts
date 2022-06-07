@@ -6,6 +6,7 @@ import { Directive, HostBinding, Input } from '@angular/core';
 export class TableTextDirective {
     /** @hidden */
     @HostBinding('class.fd-table__text')
+    @Input()
     fdTableTextClass = true;
 
     /** Whether or not  the text should wrap, when text is too long for 1 line */
