@@ -27,7 +27,6 @@ import { DynamicPageLayoutActionsComponent } from '../actions/dynamic-page-layou
 import { DynamicPageGlobalActionsComponent } from '../actions/dynamic-page-global-actions.component';
 import { DynamicPageTitleContentComponent } from '../actions/dynamic-page-title-content.component';
 
-
 export const ActionSquashBreakpointPx = 1280;
 
 @Component({
@@ -46,7 +45,9 @@ export const ActionSquashBreakpointPx = 1280;
         }
     ]
 })
-export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, AfterContentInit, OnDestroy, DynamicPageHeader {
+export class DynamicPageHeaderComponent
+    implements OnInit, AfterViewInit, AfterContentInit, OnDestroy, DynamicPageHeader
+{
     /** @hidden */
     _collapsed = false;
 
