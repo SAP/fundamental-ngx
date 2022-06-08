@@ -118,7 +118,7 @@ $fd-timeline-group-arrow-border: 0.0625rem solid var(--sapButton_BorderColor) !d
         position: relative;
         height: $fd-timeline-group-height;
         background: var(--sapButton_Selected_Background);
-        border-radius: var(--sapElement_BorderCornerRadius);
+        border-radius: var(--fdPopover_Border_Radius);
         border: 0.0625rem solid var(--sapButton_Selected_BorderColor);
 
         @include fd-hover() {

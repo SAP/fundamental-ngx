@@ -138,8 +138,7 @@ $block: fdp-value-help-dialog;
         border: 1px solid #89919a;
         border-color: var(--sapContent_ForegroundBorderColor, #89919a);
         margin-right: 0.5rem;
-        border-radius: 0.25rem;
-        border-radius: var(--sapElement_BorderCornerRadius, 0.25rem);
+        border-radius: var(--fdPopover_Border_Radius);
         background: none;
 
         fd-toolbar {

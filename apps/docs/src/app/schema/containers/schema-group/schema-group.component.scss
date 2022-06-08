@@ -8,8 +8,7 @@ $sub-header--margin-left: 20px;
     border-color: #89919a;
     border-color: var(--sapField_BorderColor, #89919a);
     border-style: solid;
-    border-radius: 0.25rem;
-    border-radius: var(--sapElement_BorderCornerRadius, 0.25rem);
+    border-radius: var(--fdPopover_Border_Radius);
     background-color: #f7f7f7;
     background-color: var(--sapBackgroundColor, #f7f7f7);
 }

@@ -13,10 +13,8 @@
         }
 
         &--popover.fd-form-message {
-            border-top-left-radius: 0.25rem;
-            border-top-left-radius: var(--sapElement_BorderCornerRadius, 0.25rem);
-            border-top-right-radius: 0.25rem;
-            border-top-right-radius: var(--sapElement_BorderCornerRadius, 0.25rem);
+            border-top-left-radius: var(--fdPopover_Border_Radius);
+            border-top-right-radius: var(--fdPopover_Border_Radius);
         }
     }
 

@@ -2,7 +2,7 @@
 @import '~@angular/cdk/overlay-prebuilt';
 
 $block: fd-popover;
-$fd-popover-border-radius: var(--sapElement_BorderCornerRadius, 0.25rem);
+$fd-popover-border-radius: var(--fdPopover_Border_Radius);
 
 @mixin set-list-border-radius($position, $radius: $fd-popover-border-radius) {
     border-#{$position}-right-radius: $radius;
