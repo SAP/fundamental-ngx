@@ -2,7 +2,7 @@
 
 <div cdkScrollable class="docs-fcl-example-overlay" #overlay>
     <ng-container *ngIf="fullscreen">
-        <div class="docs-fcl-example-overlay-content">
+        <div class="docs-fcl-example-overlay-content" style="background: var(--sapGroup_ContentBackground)">
             <div class="docs-fcl-example-button">
                 <button fd-button (click)="exitFullscreenExample($event)">Exit Example</button>
             </div>
