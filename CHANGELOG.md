@@ -1,4 +1,11 @@
 
+## [0.35.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.4...v0.35.0-rc.5) (2022-06-08)
+
+
+### Bug Fixes
+
+* **core:** fillControlMode property forwarding to the popover in select component ([#8193](https://github.com/SAP/fundamental-ngx/issues/8193)) ([16b73a6](https://github.com/SAP/fundamental-ngx/commit/16b73a613f985e0f84b73f17ac98be8bafa8d37b))
+
 ## [0.35.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.3...v0.35.0-rc.4) (2022-06-07)
 
 
