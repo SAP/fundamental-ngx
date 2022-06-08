@@ -302,18 +302,20 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, AfterV
     /** @hidden */
     private _listenInputFocus(): void {
         const inputElement =
-            this.inputElement?.elementRef()?.nativeElement || this.localInputElement.elementRef()?.nativeElement;
+            this.inputElement?.elementRef()?.nativeElement || this.localInputElement?.elementRef()?.nativeElement;
 
         if (!inputElement) {
             return;
         }
 
         this._inputFocused$ = merge(
-            fromEvent(inputElement, 'focus').pipe(map(() => true)),
-            fromEvent(inputElement, 'blur').pipe(map(() => false))
+            fromEvent(inputElement, 'focusin').pipe(map(() => true)),
+            fromEvent(inputElement, 'focusout').pipe(map(() => false))
         ).pipe(
             filter(() => this.showFocus),
             takeUntil(this._onDestroy$)
         );
+
+        this._changeDetectorRef.markForCheck();
     }
 }
