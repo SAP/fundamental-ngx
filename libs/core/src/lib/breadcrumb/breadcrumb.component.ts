@@ -15,11 +15,10 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { BreadcrumbItemComponent } from './breadcrumb-item.component';
-import { ResizeObserverService, RtlService } from '@fundamental-ngx/core/utils';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { ContentDensityService, ResizeObserverService, RtlService } from '@fundamental-ngx/core/utils';
+import { BehaviorSubject, map, startWith, Subscription, tap } from 'rxjs';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { Placement } from '@fundamental-ngx/core/shared';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 /**
  * Breadcrumb parent wrapper directive. Must have breadcrumb item child directives.
@@ -60,9 +59,6 @@ export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
     /** @hidden */
     collapsedBreadcrumbItems: Array<BreadcrumbItemComponent> = [];
 
-    /** @hidden used to compare to the current width to know whether to collapse or expand breadcrumbs */
-    previousContainerWidth: number;
-
     /** @hidden */
     placement$ = new BehaviorSubject<Placement>('bottom-start');
 
@@ -73,7 +69,7 @@ export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
     @Input()
     containerElement: HTMLElement;
 
-    /** Whether or not to append items to the overflow dropdown in reverse order. Default is true. */
+    /** Whether to append items to the overflow dropdown in reverse order. Default is true. */
     @Input()
     reverse = false;
 
@@ -82,6 +78,9 @@ export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
 
     /** @hidden */
     private _subscriptions = new Subscription();
+
+    /** @hidden */
+    private _itemToSize = new Map<BreadcrumbItemComponent, number>();
 
     constructor(
         public elementRef: ElementRef<Element>,
@@ -110,6 +109,16 @@ export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
 
     ngAfterViewInit(): void {
         this._subscriptions.add(
+            this.breadcrumbItems.changes
+                .pipe(
+                    startWith(this.breadcrumbItems),
+                    map((items) => items.toArray() as BreadcrumbItemComponent[]),
+                    map((items) => items.map((item) => [item, item.width]) as [BreadcrumbItemComponent, number][]),
+                    tap((itemToSize: [BreadcrumbItemComponent, number][]) => (this._itemToSize = new Map(itemToSize)))
+                )
+                .subscribe()
+        );
+        this._subscriptions.add(
             this._resizeObserver
                 .observe(this.elementRef.nativeElement.parentElement as Element)
                 .subscribe(() => this.onResize())
@@ -127,23 +136,29 @@ export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
             return;
         }
         this.containerBoundary = this.elementRef.nativeElement.parentElement.getBoundingClientRect().width;
+
         if (this.containerElement) {
             this.containerBoundary = this.containerElement.getBoundingClientRect().width;
         }
-        /*
-            if this is the first load and there is no previousContainerWidth,
-            or the container boundary is smaller than the previousContainerWidth
-         */
-        if (!this.previousContainerWidth || this.containerBoundary < this.previousContainerWidth) {
-            // and the breadcrumbs extend past the window
-            if (this.elementRef.nativeElement.getBoundingClientRect().width > this.containerBoundary) {
-                this.collapseBreadcrumbs();
+
+        let visibleSum = 0;
+        const breadcrumbItemComponents = this.breadcrumbItems.toArray();
+        let i;
+        for (i = breadcrumbItemComponents.length - 1; i >= 0; i--) {
+            const breadcrumbItem = breadcrumbItemComponents[i];
+            const itemSize = this._itemToSize.has(breadcrumbItem)
+                ? (this._itemToSize.get(breadcrumbItem) as number)
+                : breadcrumbItem.width;
+            if (visibleSum + itemSize <= this.containerBoundary) {
+                visibleSum += itemSize;
+                breadcrumbItem.show();
+            } else {
+                break;
             }
-        } else if (this.collapsedBreadcrumbItems.length) {
-            // if the screen is getting bigger and there are collapsed breadcrumbs
-            this.expandBreadcrumbs();
         }
-        this.previousContainerWidth = this.containerBoundary;
+        const collapsedBreadcrumbItems = breadcrumbItemComponents.slice(0, ++i);
+        this.collapsedBreadcrumbItems = this.reverse ? collapsedBreadcrumbItems : collapsedBreadcrumbItems.reverse();
+        this.collapsedBreadcrumbItems.forEach((item) => item.hide());
         this._cdRef.detectChanges();
     }
 
@@ -151,111 +166,5 @@ export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
     keyDownHandle(event: Event): void {
         this.menuComponent.toggle();
         event.preventDefault();
-    }
-
-    /** @hidden */
-    getContainerBoundary(): number {
-        let containerBoundary = (this.elementRef.nativeElement.parentElement as Element).getBoundingClientRect().width;
-        if (this.containerElement) {
-            containerBoundary = this.containerElement.getBoundingClientRect().width;
-        }
-
-        return containerBoundary;
-    }
-
-    /**
-     * @hidden
-     *
-     * This function moves breadcrumbs from the original QueryList of BreadCrumbItemDirectives into the array of
-     * collapsedBreadcrumbItems.
-     * */
-    collapseBreadcrumbs(): void {
-        let i = 0;
-        const containerBoundary = this.getContainerBoundary();
-        // move the breadcrumb items into a collapsed menu one by one, until the last one is inside the window
-        while (
-            this.elementRef.nativeElement.getBoundingClientRect().width > containerBoundary &&
-            i < this.breadcrumbItems.length
-        ) {
-            const breadcrumbItem = this.breadcrumbItems.filter((item, index) => index === i)[0];
-            if (this.collapsedBreadcrumbItems.indexOf(breadcrumbItem) === -1) {
-                this.reverse
-                    ? this.collapsedBreadcrumbItems.push(breadcrumbItem)
-                    : this.collapsedBreadcrumbItems.unshift(breadcrumbItem);
-            }
-            // hide the original breadcrumb items that have been moved in to the collapsed menu
-            breadcrumbItem.elementRef.nativeElement.style.display = 'none';
-            i++;
-        }
-    }
-
-    /**
-     * @hidden
-     *
-     * This function removes breadcrumb items from the collapsedBreadcrumbItems array and makes them visible again in the
-     * original QueryList of BreadcrumbItemDirectives.
-     * */
-    expandBreadcrumbs(): void {
-        let breakLoop = false;
-        let i = 0;
-        const originalCollapsedLength = this.collapsedBreadcrumbItems.length;
-        while (this.fitInBoundries() && !breakLoop && i < originalCollapsedLength) {
-            // get the most recently collapsed breadcrumb
-            const collapsedItemToPop = this.getCollapsedItem();
-            // find the corresponding breadcrumb from the original breadcrumb item QueryList
-            const breadcrumbToCheck = this.getBreadcrumbToCheck(collapsedItemToPop);
-            /*
-              set display: 'inline-block' and visibility: 'hidden' - this way, the parent breadcrumb component's width will
-              contain the width of the breadcrumb item we might pop, without actually making the item visible to the user
-             */
-            this.applyStylesToBreadcrumb(breadcrumbToCheck);
-
-            if (this.fitInBoundries()) {
-                /*
-                  if the width of the breadcrumb component is still smaller than the window width, including the
-                  breadcrumbToCheck, pop the latest collapsedBreadcrumbItem
-                */
-                this.popLastElement();
-                this.makeBreadcrumbVisible(breadcrumbToCheck);
-            } else {
-                /*
-                  if the width of the breadcrumb component is wider than the window after making the breadcrumbToCheck's
-                  display: 'inline-block', then put it's display back to 'none' and don't pop the collapsedBreadcrumbItem
-                 */
-                this.makeBreadcrumbInvisible(breadcrumbToCheck);
-                breakLoop = true;
-            }
-            i++;
-        }
-    }
-
-    private fitInBoundries(): boolean {
-        return this.elementRef.nativeElement.getBoundingClientRect().width < this.getContainerBoundary();
-    }
-
-    private getCollapsedItem(): BreadcrumbItemComponent {
-        return this.collapsedBreadcrumbItems[this.collapsedBreadcrumbItems.length - 1];
-    }
-
-    private getBreadcrumbToCheck(collapsedItemToPop: BreadcrumbItemComponent): BreadcrumbItemComponent {
-        return this.breadcrumbItems.filter((item) => item === collapsedItemToPop)[0];
-    }
-
-    private applyStylesToBreadcrumb(breadcrumb: BreadcrumbItemComponent): void {
-        breadcrumb.elementRef.nativeElement.style.display = 'inline-block';
-        breadcrumb.elementRef.nativeElement.style.visibility = 'hidden';
-    }
-
-    private popLastElement(): void {
-        this.collapsedBreadcrumbItems.pop();
-        // make the breadcrumb we checked visible
-    }
-
-    private makeBreadcrumbVisible(breadcrumb: BreadcrumbItemComponent): void {
-        breadcrumb.elementRef.nativeElement.style.visibility = 'visible';
-    }
-
-    private makeBreadcrumbInvisible(breadcrumb: BreadcrumbItemComponent): void {
-        breadcrumb.elementRef.nativeElement.style.display = 'none';
     }
 }

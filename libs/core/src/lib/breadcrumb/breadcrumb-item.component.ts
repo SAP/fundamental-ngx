@@ -1,4 +1,4 @@
-import { Component, ContentChild, ElementRef, forwardRef } from '@angular/core';
+import { Component, ContentChild, ElementRef, forwardRef, Renderer2 } from '@angular/core';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 
 /**
@@ -27,7 +27,12 @@ export class BreadcrumbItemComponent {
     @ContentChild(forwardRef(() => LinkComponent))
     breadcrumbLink: LinkComponent;
 
-    constructor(private _elementRef: ElementRef<HTMLElement>) {}
+    /** @hidden */
+    get width(): number {
+        return this._elementRef.nativeElement.getBoundingClientRect().width;
+    }
+
+    constructor(private _elementRef: ElementRef<HTMLElement>, private renderer2: Renderer2) {}
 
     /** @hidden */
     get needsClickProxy(): boolean {
@@ -35,4 +40,8 @@ export class BreadcrumbItemComponent {
             !!this.breadcrumbLink?.elementRef().nativeElement.getAttribute('href') || !!this.breadcrumbLink.routerLink
         );
     }
+
+    show = (): void => this.renderer2.setStyle(this._elementRef.nativeElement, 'display', 'inline-block');
+
+    hide = (): void => this.renderer2.setStyle(this._elementRef.nativeElement, 'display', 'none');
 }

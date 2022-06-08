@@ -9,6 +9,13 @@ interface ObservedElement {
 }
 
 @Injectable({ providedIn: 'root' })
+export class ResizeObserverFactory {
+    create(callback: ResizeObserverCallback): ResizeObserver | null {
+        return typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(callback);
+    }
+}
+
+@Injectable({ providedIn: 'root' })
 export class ResizeObserverService implements OnDestroy {
     private _observedElements = new Map<Element, ObservedElement>();
 
@@ -73,12 +80,5 @@ export class ResizeObserverService implements OnDestroy {
             stream.complete();
             this._observedElements.delete(element);
         }
-    }
-}
-
-@Injectable({ providedIn: 'root' })
-class ResizeObserverFactory {
-    create(callback: ResizeObserverCallback): ResizeObserver | null {
-        return typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(callback);
     }
 }
