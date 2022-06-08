@@ -1,4 +1,11 @@
 
+## [0.35.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.5...v0.35.0-rc.6) (2022-06-08)
+
+
+### Bug Fixes
+
+* **core:** multi input - show input when mobile dialog opened ([#8190](https://github.com/SAP/fundamental-ngx/issues/8190)) ([7cb8d00](https://github.com/SAP/fundamental-ngx/commit/7cb8d007c6f6d96a4f00d4332bfe5a47cc9d6c9d))
+
 ## [0.35.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.4...v0.35.0-rc.5) (2022-06-08)
 
 
