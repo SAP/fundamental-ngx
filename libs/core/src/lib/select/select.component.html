@@ -10,7 +10,7 @@
             [disabled]="disabled || readonly"
             [appendTo]="appendTo"
             [closeOnEscapeKey]="true"
-            fillControlMode="at-least"
+            [fillControlMode]="fillControlMode"
             [maxWidth]="600"
             [closeOnOutsideClick]="closeOnOutsideClick"
             (isOpenChange)="_popoverOpenChangeHandle($event)"
