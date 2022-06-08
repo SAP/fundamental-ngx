@@ -14,7 +14,8 @@ import {
     OnInit,
     Optional,
     ViewChild,
-    AfterViewInit
+    AfterViewInit,
+    isDevMode
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { filter, fromEvent, map, merge, Observable, Subject } from 'rxjs';
@@ -56,7 +57,16 @@ let addOnInputRandomId = 0;
 export class InputGroupComponent implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy {
     /** @deprecated Input template, use fd-input-group-input directive instead. */
     @Input()
-    inputTemplate: TemplateRef<any>;
+    set inputTemplate(value: TemplateRef<any>) {
+        if (isDevMode()) {
+            console.warn('"inputTemplate" is deprecated. Use "fd-input-group-input" directive instead');
+        }
+
+        this._inputTemplate = value;
+    }
+    get inputTemplate(): TemplateRef<any> {
+        return this._inputTemplate;
+    }
 
     /**
      * The placement of the add-on.
@@ -187,6 +197,9 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, AfterV
      * @hidden
      */
     inShellbar = false;
+
+    /** @hidden */
+    private _inputTemplate: TemplateRef<any>;
 
     /** An RxJS Subject that will kill the stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
