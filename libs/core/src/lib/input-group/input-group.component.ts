@@ -13,13 +13,12 @@ import {
     OnDestroy,
     OnInit,
     Optional,
-    Inject,
-    ViewChild
+    ViewChild,
+    AfterViewInit
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DOCUMENT } from '@angular/common';
-import { fromEvent, Subject, Subscription } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
+import { filter, fromEvent, map, merge, Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
@@ -54,8 +53,8 @@ let addOnInputRandomId = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDestroy {
-    /** Input template */
+export class InputGroupComponent implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy {
+    /** @deprecated Input template, use fd-input-group-input directive instead. */
     @Input()
     inputTemplate: TemplateRef<any>;
 
@@ -147,52 +146,29 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
 
     /** Event emitted when the add-on button is clicked. */
     @Output()
-    addOnButtonClicked: EventEmitter<Event> = new EventEmitter<Event>();
+    addOnButtonClicked = new EventEmitter<Event>();
 
     /**
      * Event emitted when the native clear button is clicked, or when native search is executed.
      * Works only for native search for input[type="search"]
      */
     @Output()
-    search: EventEmitter<Event> = new EventEmitter<Event>();
-
-    /** @hidden Focus state */
-    get isFocused(): boolean {
-        return this._isFocused;
-    }
+    search = new EventEmitter<Event>();
 
     /** @hidden */
-    get _isButtonFocused(): boolean {
-        return this._document?.activeElement === this._button?.nativeElement;
-    }
-
-    /** @hidden */
-    private _isFocused = false;
-
-    /** An RxJS Subject that will kill the stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
-
     @ContentChild(InputGroupInputDirective)
     inputElement: InputGroupInputDirective;
+
+    /** @hidden */
+    @ViewChild(InputGroupInputDirective)
+    localInputElement: InputGroupInputDirective;
 
     /** @hidden */
     @ContentChild(InputGroupAddOnDirective)
     addOnElement: InputGroupAddOnDirective;
 
     /** @hidden */
-    @ViewChild('button', { read: ElementRef })
-    readonly _button: ElementRef<any>;
-
-    /** @hidden */
-    constructor(
-        private readonly elementRef: ElementRef,
-        private readonly changeDetectorRef: ChangeDetectorRef,
-        @Optional() private readonly _contentDensityService: ContentDensityService,
-        @Inject(DOCUMENT) private readonly _document: Document
-    ) {}
-
-    /** @hidden */
-    inputTextValue: string;
+    _inputTextValue: string;
 
     /** @hidden */
     _inputId = `fd-input-group-input-id-${addOnInputRandomId++}`;
@@ -203,14 +179,17 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
     /** @hidden */
     _addOnButtonId = `fd-input-group-button-id-${addOnButtonRandomId++}`;
 
+    /** @hidden */
+    _inputFocused$: Observable<boolean>;
+
     /**
-     * Whether or not the input coup is in the shellbar. Only for internal use by combobox component
+     * Whether the input group is in the shellbar. Only for internal use by combobox component.
      * @hidden
      */
     inShellbar = false;
 
-    /** @hidden */
-    private _subscriptions = new Subscription();
+    /** An RxJS Subject that will kill the stream upon component’s destruction (for unsubscribing)  */
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
     onChange: any = () => {};
@@ -220,40 +199,63 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
 
     /** Get the value of the text input. */
     get inputText(): string {
-        return this.inputTextValue;
+        return this._inputTextValue;
     }
 
     /** Set the value of the text input. */
     set inputText(value) {
-        this.inputTextValue = value;
+        this._inputTextValue = value;
+
         this.onChange(value);
         this.onTouched();
     }
 
+    /** @hidden
+     *  Calculate the correct ids for input aria-labelledby
+     */
+    get _inputAriaLabelledBy(): string {
+        let ariaLabelledByIds = this.ariaLabelledby ? this.ariaLabelledby + ' ' : '';
+
+        if (!this.button) {
+            ariaLabelledByIds += this._addOnNonButtonId;
+        }
+
+        return ariaLabelledByIds;
+    }
+
+    /** @hidden */
+    constructor(
+        private readonly _elementRef: ElementRef,
+        private readonly _changeDetectorRef: ChangeDetectorRef,
+        @Optional() private readonly _contentDensityService: ContentDensityService
+    ) {}
+
     /** @hidden */
     ngOnInit(): void {
-        this._listenElementEvents();
         if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                    this.changeDetectorRef.markForCheck();
-                })
-            );
+            this._contentDensityService._isCompactDensity.pipe(takeUntil(this._onDestroy$)).subscribe((isCompact) => {
+                this.compact = isCompact;
+                this._changeDetectorRef.markForCheck();
+            });
         }
     }
 
     /** @hidden */
+    ngAfterViewInit(): void {
+        this._listenInputFocus();
+    }
+
+    /** @hidden */
     ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
         this._onDestroy$.next();
         this._onDestroy$.complete();
     }
 
     /** @hidden */
     writeValue(value: any): void {
-        this.inputTextValue = value;
-        this.changeDetectorRef.markForCheck();
+        this._inputTextValue = value;
+
+        this._changeDetectorRef.markForCheck();
     }
 
     /** @hidden */
@@ -269,64 +271,49 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
-        this.changeDetectorRef.detectChanges();
+
+        this._changeDetectorRef.detectChanges();
     }
 
     /** @hidden */
     setInShellbar(value: boolean): void {
         this.inShellbar = value;
-        this.changeDetectorRef.detectChanges();
+
+        this._changeDetectorRef.detectChanges();
     }
 
     /** @hidden */
-    buttonClicked($event: MouseEvent): void {
+    _buttonClicked($event: MouseEvent): void {
         this.addOnButtonClicked.emit($event);
     }
 
     /** @hidden */
-    onSearchEvent(event: Event): void {
+    _onSearchEvent(event: Event): void {
         this.search.emit(event);
     }
 
     /** @hidden */
-    preventFocus(event: MouseEvent): void {
+    _preventFocus(event: MouseEvent): void {
         if (!this.buttonFocusable) {
             event.preventDefault();
         }
     }
 
-    /** @hidden
-     * calculate the correct ids for input aria-labelledby
-     */
-    _getAriaLabelledbyIdsForInput(): string {
-        let ariaLabelledByIds = this.ariaLabelledby ? this.ariaLabelledby + ' ' : '';
-        if (!this.button) {
-            ariaLabelledByIds += this._addOnNonButtonId;
+    /** @hidden */
+    private _listenInputFocus(): void {
+        const inputElement =
+            this.inputElement?.elementRef()?.nativeElement || this.localInputElement.elementRef()?.nativeElement;
+
+        if (!inputElement) {
+            return;
         }
 
-        return ariaLabelledByIds;
-    }
-
-    /** @hidden */
-    private _listenElementEvents(): void {
-        fromEvent(this.elementRef.nativeElement, 'focus', { capture: true })
-            .pipe(
-                tap(() => {
-                    this._isFocused = true;
-                    this.changeDetectorRef.markForCheck();
-                }),
-                takeUntil(this._onDestroy$)
-            )
-            .subscribe();
-
-        fromEvent(this.elementRef.nativeElement, 'blur', { capture: true })
-            .pipe(
-                tap(() => {
-                    this._isFocused = false;
-                    this.changeDetectorRef.markForCheck();
-                }),
-                takeUntil(this._onDestroy$)
-            )
-            .subscribe();
+        this._inputFocused$ = merge(
+            fromEvent(inputElement, 'focus').pipe(map(() => true)),
+            fromEvent(inputElement, 'blur').pipe(map(() => false))
+        ).pipe(
+            filter(() => this.showFocus),
+            takeUntil(this._onDestroy$)
+        );
     }
 }
