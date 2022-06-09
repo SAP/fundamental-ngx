@@ -6,14 +6,17 @@
         (keydown.space)="itemClicked($event)"
     >
         <ng-container *ngIf="breadcrumbItem?.breadcrumbLink; else portalContent">
-            <ng-container *ngIf="breadcrumbItem.breadcrumbLink.prefixIconName">
-                <fd-menu-addon position="before" [glyph]="breadcrumbItem.breadcrumbLink.prefixIconName"></fd-menu-addon>
+            <ng-container *ngIf="breadcrumbItem.breadcrumbLink._prefixIconName">
+                <fd-menu-addon
+                    position="before"
+                    [glyph]="breadcrumbItem.breadcrumbLink._prefixIconName"
+                ></fd-menu-addon>
             </ng-container>
             <span fd-menu-title>
                 <ng-container [cdkPortalOutlet]="linkContentPortal"></ng-container>
             </span>
-            <ng-container *ngIf="breadcrumbItem.breadcrumbLink.postfixIconName">
-                <fd-menu-addon [glyph]="breadcrumbItem.breadcrumbLink.postfixIconName"></fd-menu-addon>
+            <ng-container *ngIf="breadcrumbItem.breadcrumbLink._postfixIconName">
+                <fd-menu-addon [glyph]="breadcrumbItem.breadcrumbLink._postfixIconName"></fd-menu-addon>
             </ng-container>
         </ng-container>
         <ng-template #portalContent>

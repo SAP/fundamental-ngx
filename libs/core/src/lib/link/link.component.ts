@@ -83,10 +83,12 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterV
     _postfixPortal: Portal<any> | null;
 
     /** @hidden */
-    private _destroyed$ = new Subject<void>();
+    _prefixIconName: string;
+    /** @hidden */
+    _postfixIconName: string;
 
-    prefixIconName: string;
-    postfixIconName: string;
+    /** @hidden */
+    private _destroyed$ = new Subject<void>();
 
     /** @hidden */
     constructor(
@@ -157,14 +159,14 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterV
                             ? icons[icons.length - 1].elementRef().nativeElement
                             : null;
                     if (prefix) {
-                        this.prefixIconName = this.iconComponents.first.glyph;
+                        this._prefixIconName = this.iconComponents.first.glyph;
                     } else {
-                        this.prefixIconName = '';
+                        this._prefixIconName = '';
                     }
                     if (postfix) {
-                        this.postfixIconName = this.iconComponents.last.glyph;
+                        this._postfixIconName = this.iconComponents.last.glyph;
                     } else {
-                        this.postfixIconName = '';
+                        this._postfixIconName = '';
                     }
                     return { prefix, postfix };
                 }),

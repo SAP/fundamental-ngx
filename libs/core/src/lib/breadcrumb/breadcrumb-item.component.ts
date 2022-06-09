@@ -42,6 +42,5 @@ export class BreadcrumbItemComponent {
     }
 
     show = (): void => this.renderer2.setStyle(this._elementRef.nativeElement, 'display', 'inline-block');
-
     hide = (): void => this.renderer2.setStyle(this._elementRef.nativeElement, 'display', 'none');
 }
