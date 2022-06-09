@@ -5,10 +5,10 @@
     [class.is-readonly]="readonly"
     [class.fd-shellbar__input-group]="inShellbar"
     [class.fd-input-group--control]="isControl"
-    [class.is-focus]="isFocused && showFocus && !_isButtonFocused"
+    [class.is-focus]="_inputFocused$ | async"
     [class]="state ? 'is-' + state : ' '"
 >
-    <ng-container *ngIf="placement !== 'before' && !inputElement">
+    <ng-container *ngIf="placement === 'after' && !inputElement">
         <ng-container *ngTemplateOutlet="input"></ng-container>
     </ng-container>
 
@@ -24,7 +24,6 @@
             [class.fd-shellbar__input-group-addon]="inShellbar"
         >
             <button
-                #button
                 fd-button
                 class="fd-input-group__button"
                 type="button"
@@ -40,8 +39,8 @@
                 [ariaLabel]="glyphAriaLabel || glyph || addOnText"
                 [attr.aria-controls]="input"
                 [disabled]="disabled"
-                (mousedown)="preventFocus($event)"
-                (click)="buttonClicked($event)"
+                (mousedown)="_preventFocus($event)"
+                (click)="_buttonClicked($event)"
             >
                 <ng-container *ngIf="!glyph">{{ addOnText }}</ng-container>
             </button>
@@ -57,6 +56,7 @@
             [attr.title]="iconTitle || glyph || addOnText"
         >
             <ng-container *ngIf="!glyph">{{ addOnText }}</ng-container>
+
             <span *ngIf="glyph" [className]="'sap-icon--' + glyph"></span>
         </span>
     </ng-container>
@@ -70,19 +70,20 @@
     <ng-container *ngIf="inputTemplate">
         <ng-container *ngTemplateOutlet="inputTemplate"></ng-container>
     </ng-container>
+
     <input
+        *ngIf="!inputTemplate"
         [(ngModel)]="inputText"
         [id]="_inputId"
-        [attr.aria-labelledby]="_getAriaLabelledbyIdsForInput()"
+        [attr.aria-labelledby]="_inputAriaLabelledBy"
         [class.fd-shellbar__input-group-input]="inShellbar"
         fd-input-group-input
         [compact]="compact"
         [type]="type"
         [disabled]="disabled"
         [readonly]="readonly"
-        *ngIf="!inputElement && !inputTemplate"
         [attr.placeholder]="placeholder"
         [attr.aria-required]="required"
-        (search)="onSearchEvent($event)"
+        (search)="_onSearchEvent($event)"
     />
 </ng-template>
