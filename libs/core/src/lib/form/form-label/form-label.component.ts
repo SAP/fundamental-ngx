@@ -20,11 +20,11 @@ import { InlineHelpFormPlacement } from '../inline-help-placement.type';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormLabelComponent implements OnChanges {
-    /** Whether form is required */
+    /** Whether form is required. */
     @Input()
     required = false;
 
-    /** Whether form is required */
+    /** Whether label text should be appended with colon. */
     @Input()
     colon = false;
 
@@ -36,20 +36,20 @@ export class FormLabelComponent implements OnChanges {
     @Input()
     radio = false;
 
-    /** Align label on end */
+    /** Align label on end. */
     @Input()
     @HostBinding('class.fd-form-label__wrapper--align-end')
     alignLabelEnd = false;
 
-    /** Inline help body text */
+    /** Inline help body text. */
     @Input()
     inlineHelpTitle: Nullable<string> = null;
 
-    /** Glyph of icon triggering inline help */
+    /** Glyph of icon triggering inline help. */
     @Input()
     inlineHelpGlyph = 'question-mark';
 
-    /** Trigger event names for the inline help */
+    /** Trigger event names for the inline help. */
     @Input()
     inlineHelpTriggers: string[] = ['mouseenter', 'mouseleave', 'focusin', 'focusout'];
 
@@ -62,7 +62,7 @@ export class FormLabelComponent implements OnChanges {
     @Input()
     inlineHelpBodyPlacement: Placement;
 
-    /** If inline help trigger icon should be placed after, or before text */
+    /** If inline help trigger icon should be placed after, or before text. */
     @Input()
     inlineHelpPlacement: InlineHelpFormPlacement = 'after';
 

@@ -279,6 +279,10 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     @Input()
     disabled = false;
 
+    /** Whether label text should be appended with colon. */
+    @Input()
+    colon = false;
+
     /**
      * Form Group Container to bind the Form-Field to.
      * This will override default value injected by constructor
