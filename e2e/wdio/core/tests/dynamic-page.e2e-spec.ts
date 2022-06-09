@@ -125,7 +125,7 @@ describe('dynamic side content test suite', () => {
             // click to exit from full screen mode
             click(flexibleColumn + button, 11);
             pause(1000);
-            expect(isElementDisplayed(flexibleColumn, 0)).toBe(false, 'flexible column is not visible - 1st column');
+            expect(isElementDisplayed(flexibleColumn, 0)).toBe(true, 'flexible column is not visible - 1st column');
             expect(isElementDisplayed(flexibleColumn, 1)).toBe(true, 'flexible column is not visible - 2nd column');
             expect(isElementDisplayed(flexibleColumn, 2)).toBe(true, 'flexible column is not visible - 3rd column');
             // click to close 3rd column
