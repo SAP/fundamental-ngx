@@ -74,7 +74,9 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
     /** @hidden */
     ngAfterContentInit(): void {
         this.fileNameFull = this.fileName + '.' + this.extension;
-        this._titleDirective.elRef.nativeElement.innerHTML = this.fileNameFull;
+        this._titleDirective.elRef.nativeElement.tabIndex = '0';
+        this._titleDirective.elRef.nativeElement.innerHTML =
+            '<span class="fd-link__content">' + this.fileNameFull + '</span>';
         this._handleDeleteClickedSubscription();
         this._handleOkClickedSubscription();
         this._handleEditClickedSubscription();
