@@ -94,6 +94,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         this.themes = this._themingService.getThemes();
 
         this.versions = [
+            { id: '0.34.2', url: 'https://624793d2f1d02d000925c339--fundamental-ngx.netlify.app/' },
             { id: '0.33.2', url: 'https://620423a8f2458b000724fd5f--fundamental-ngx.netlify.app/' },
             { id: '0.32.0', url: 'https://6130e294b2dc5c00086828de--fundamental-ngx.netlify.app/' },
             { id: '0.31.0', url: 'https://6116c4d420b1d40007ce5fd9--fundamental-ngx.netlify.app/' },
