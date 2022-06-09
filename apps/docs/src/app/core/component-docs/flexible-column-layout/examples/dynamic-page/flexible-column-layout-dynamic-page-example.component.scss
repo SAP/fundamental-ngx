@@ -22,7 +22,7 @@
 }
 
 .docs-fcl-example-section {
-    height: 100vh;
+    height: calc(100vh - 77px);
 
     h2 {
         font-size: 30px;

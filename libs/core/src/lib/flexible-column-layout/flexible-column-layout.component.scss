@@ -7,6 +7,7 @@
 
 .fd-flexible-column-layout__column {
     transition: width 0.56s cubic-bezier(0.1, 0, 0.05, 1), visibility 0.1s ease-in;
+    overflow: hidden;
 }
 
 .fd-flexible-column-layout__column {
