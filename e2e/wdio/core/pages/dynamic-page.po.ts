@@ -27,10 +27,10 @@ export class DynamicPagePo extends CoreBaseComponentPo {
     pinButton = '.fd-dynamic-page__pin-button';
     tab = '.fd-dynamic-page .fd-tabs__link';
     tabsContent = '.fd-tabs__panel ' + this.dynamicPageContent + 'div:first-of-type';
-    flexileColumn = '.fd-flexible-column-layout__column ';
+    flexibleColumn = '.fd-flexible-column-layout__column ';
     article = '.fd-dynamic-page-section-example';
-    breadcumbLink = '.fd-dynamic-page__breadcrumb-wrapper a';
-    currentBreadcumbLink = '.fd-dynamic-page__breadcrumb-wrapper span';
+    breadcrumbLink = '.fd-dynamic-page__breadcrumb-wrapper a';
+    currentBreadcrumbLink = '.fd-dynamic-page__breadcrumb-wrapper fd-breadcrumb-item:last-child span';
 
     open(): void {
         super.open(this.url);
