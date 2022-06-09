@@ -6,7 +6,7 @@ import { LinkComponent } from '@fundamental-ngx/core/link';
  *
  * ```html
  * <fd-breadcrumb-item>
- *     <a fd-breadcrumb-link [routerLink]="'#'">Breadcrumb Link</a>
+ *     <a fd-link [routerLink]="'#'">Breadcrumb Link</a>
  * </fd-breadcrumb-item>
  * ```
  */

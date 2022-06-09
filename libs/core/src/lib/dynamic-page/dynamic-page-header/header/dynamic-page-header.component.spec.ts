@@ -16,10 +16,10 @@ import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
     template: ` <fd-dynamic-page-header [title]="title" [subtitle]="subtitle">
         <fd-breadcrumb>
             <fd-breadcrumb-item>
-                <a fd-breadcrumb-link [attr.href]="'#'">Men</a>
+                <a fd-link [attr.href]="'#'">Men</a>
             </fd-breadcrumb-item>
             <fd-breadcrumb-item>
-                <a fd-breadcrumb-link [attr.href]="'#'">Shoes</a>
+                <a fd-link [attr.href]="'#'">Shoes</a>
             </fd-breadcrumb-item>
         </fd-breadcrumb>
 

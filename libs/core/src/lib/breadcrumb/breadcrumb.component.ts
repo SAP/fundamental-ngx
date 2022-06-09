@@ -7,6 +7,7 @@ import {
     ElementRef,
     forwardRef,
     Input,
+    NgZone,
     OnDestroy,
     OnInit,
     Optional,
@@ -16,7 +17,7 @@ import {
 } from '@angular/core';
 import { BreadcrumbItemComponent } from './breadcrumb-item.component';
 import { ContentDensityService, ResizeObserverService, RtlService } from '@fundamental-ngx/core/utils';
-import { BehaviorSubject, map, startWith, Subscription, tap } from 'rxjs';
+import { BehaviorSubject, firstValueFrom, map, startWith, Subscription, tap } from 'rxjs';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { Placement } from '@fundamental-ngx/core/shared';
 
@@ -26,7 +27,7 @@ import { Placement } from '@fundamental-ngx/core/shared';
  * ```html
  * <fd-breadcrumb>
  *     <fd-breadcrumb-item>
- *         <a fd-breadcrumb-link [routerLink]="'#'">Breadcrumb Link</a>
+ *         <a fd-link [routerLink]="'#'">Breadcrumb Link</a>
  *     </fd-breadcrumb-item>
  * </fd-breadcrumb>
  * ```
@@ -87,7 +88,8 @@ export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
         @Optional() private _rtlService: RtlService,
         @Optional() private _contentDensityService: ContentDensityService,
         private _cdRef: ChangeDetectorRef,
-        private _resizeObserver: ResizeObserverService
+        private _resizeObserver: ResizeObserverService,
+        private _ngZone: NgZone
     ) {}
 
     /** @hidden */
@@ -118,11 +120,13 @@ export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
                 )
                 .subscribe()
         );
-        this._subscriptions.add(
-            this._resizeObserver
-                .observe(this.elementRef.nativeElement.parentElement as Element)
-                .subscribe(() => this.onResize())
-        );
+        firstValueFrom(this._ngZone.onStable).then(() => {
+            this._subscriptions.add(
+                this._resizeObserver
+                    .observe(this.containerElement || (this.elementRef.nativeElement.parentElement as Element))
+                    .subscribe(() => this.onResize())
+            );
+        });
     }
 
     /** @hidden */
