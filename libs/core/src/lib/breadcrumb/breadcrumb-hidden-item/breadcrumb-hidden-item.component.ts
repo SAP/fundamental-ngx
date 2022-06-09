@@ -1,10 +1,11 @@
-import { AfterViewInit, Component, Input } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { BreadcrumbItemComponent } from '../breadcrumb-item.component';
 import { DomPortal } from '@angular/cdk/portal';
 
 @Component({
     selector: 'fd-breadcrumb-hidden-item',
-    templateUrl: './breadcrumb-hidden-item.component.html'
+    templateUrl: './breadcrumb-hidden-item.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BreadcrumbHiddenItemComponent implements AfterViewInit {
     @Input()
@@ -12,6 +13,8 @@ export class BreadcrumbHiddenItemComponent implements AfterViewInit {
 
     breadcrumbItemPortal: DomPortal<Element>;
     linkContentPortal: DomPortal;
+
+    constructor(private _cdr: ChangeDetectorRef) {}
 
     ngAfterViewInit(): void {
         if (this.breadcrumbItem.breadcrumbLink) {
@@ -22,6 +25,7 @@ export class BreadcrumbHiddenItemComponent implements AfterViewInit {
         this.breadcrumbItemPortal = new DomPortal(
             this.breadcrumbItem.elementRef.nativeElement.firstElementChild as Element
         );
+        this._cdr.detectChanges();
     }
 
     itemClicked($event: any): void {
