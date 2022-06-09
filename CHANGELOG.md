@@ -1,4 +1,11 @@
 
+## [0.35.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.6...v0.35.0-rc.7) (2022-06-09)
+
+
+### Bug Fixes
+
+* **core:** input group focus issue & code enhancements ([#8197](https://github.com/SAP/fundamental-ngx/issues/8197)) ([9193d8b](https://github.com/SAP/fundamental-ngx/commit/9193d8bb616f408cb98d4931dd058382e5e3cf17))
+
 ## [0.35.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.5...v0.35.0-rc.6) (2022-06-08)
 
 
