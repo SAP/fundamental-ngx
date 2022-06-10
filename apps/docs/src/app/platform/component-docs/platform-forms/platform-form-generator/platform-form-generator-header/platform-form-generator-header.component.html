@@ -23,27 +23,30 @@
         Developers can also set default form field parameters by calling <code>withConfig()</code> method of the
         <code>PlatformFormGeneratorModule</code> during it's import.
     </p>
-    <h3>Form Generator Elements:</h3>
-    <ul>
-        <li><b>input</b>: specifies an input field where the user can enter data.</li>
-        <li><b>number</b>: specifies an input field where the user can enter a number.</li>
-        <li><b>password</b>: specifies an input field where the user can enter a password.</li>
-        <li>
-            <b>checkbox</b>: specifies square boxes which are ticked (checked) when the user select one or more options.
-        </li>
-        <li><b>radio</b>: allows the user to see all options and select one.</li>
-        <li><b>confirm</b>: is a button which allows to gather all the data from the form generator.</li>
-        <li><b>editor</b>: is a text-field area where the user can include a short text.</li>
-        <li>
-            <b>select</b>: is a combination of select and option components where the list of options is shown in the
-            dropdown format.
-        </li>
-        <li><b>list</b>: shows all the options in the dropdown format</li>
-        <li><b>datepicker</b>: is a combination of "input-group", "popover" and "calendar" to select a date.</li>
-        <li><b>switch</b>: is used to activate or deactivate an element.</li>
-        <li><b>multi-input</b>: is an input with multiple selection enabled.</li>
-    </ul>
 
+    <h3>Form Generator Elements:</h3>
+    <p>
+        The table below shows a list of element types, attributes, and descriptions. All types have a built-in validator
+        function <code> validators: [Validators.required] </code> but you can choose to write your own validator
+        functions.
+    </p>
+    <table fd-table>
+        <thead fd-table-header>
+            <tr fd-table-row>
+                <th fd-table-cell><b>Type</b></th>
+                <th fd-table-cell><b>Attribute</b></th>
+                <th fd-table-cell><b>Description</b></th>
+            </tr>
+        </thead>
+        <tbody fd-table-body>
+            <tr fd-table-row *ngFor="let prop of Elementtype">
+                <td fd-table-cell>{{ prop[0] }}</td>
+                <td fd-table-cell>{{ prop[1] }}</td>
+                <td fd-table-cell>{{ prop[2] }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
     <h3>Inline help default global options</h3>
     <p>Inline help has default options as below:</p>
     <table fd-table>
