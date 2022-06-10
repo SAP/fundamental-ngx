@@ -74,7 +74,9 @@ describe('UploadCollectionItemDirective', () => {
 
     it('should set the fileName and extension', () => {
         component.item.ngAfterContentInit();
-        expect(component.item._titleDirective.elRef.nativeElement.innerHTML).toEqual('File_Name.txt');
+        expect(component.item._titleDirective.elRef.nativeElement.innerHTML).toEqual(
+            '<span class="fd-link__content">File_Name.txt</span>'
+        );
     });
 
     it('should handle the delete button subscriptions', fakeAsync(() => {
