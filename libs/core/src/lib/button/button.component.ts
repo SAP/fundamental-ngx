@@ -4,6 +4,7 @@ import {
     Component,
     ElementRef,
     HostListener,
+    Inject,
     Input,
     OnChanges,
     OnDestroy,
@@ -13,7 +14,12 @@ import {
 } from '@angular/core';
 import { BaseButton } from './base-button';
 import { Subscription } from 'rxjs';
-import { ContentDensityService, CssClassBuilder, applyCssClass } from '@fundamental-ngx/core/utils';
+import { applyCssClass, ContentDensityService, CssClassBuilder } from '@fundamental-ngx/core/utils';
+import {
+    ContentDensityConsumer,
+    contentDensityConsumer,
+    ContentDensityMode
+} from '@fundamental-ngx/core/content-density';
 
 /**
  * Button directive, used to enhance standard HTML buttons.
@@ -37,7 +43,13 @@ import { ContentDensityService, CssClassBuilder, applyCssClass } from '@fundamen
         '[attr.type]': 'type',
         '[attr.disabled]': '_disabled || null',
         '[attr.aria-label]': 'buttonArialabel'
-    }
+    },
+    providers: [
+        contentDensityConsumer({
+            modifiers: { [ContentDensityMode.COMPACT]: 'fd-button--compact' },
+            supportedContentDensity: [ContentDensityMode.COZY, ContentDensityMode.COMPACT]
+        })
+    ]
 })
 export class ButtonComponent extends BaseButton implements OnChanges, CssClassBuilder, OnInit, OnDestroy {
     /** The property allows user to pass additional css classes. */
@@ -86,9 +98,11 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
     constructor(
         private _elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
-        @Optional() private _contentDensityService: ContentDensityService
+        @Optional() private _contentDensityService: ContentDensityService,
+        @Inject(ContentDensityConsumer) private _contentDensityConsumer: ContentDensityConsumer
     ) {
         super();
+        _contentDensityConsumer.subscribe((mode) => console.log(mode));
     }
 
     /** Function runs when component is initialized
@@ -126,7 +140,6 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
         return [
             'fd-button',
             this.fdType ? `fd-button--${this.fdType}` : '',
-            this.compact ? 'fd-button--compact' : '',
             this.fdMenu ? 'fd-button--menu' : '',
             this._disabled || this._ariaDisabled ? 'is-disabled' : '',
             this.toggled ? `fd-button--toggled` : '',

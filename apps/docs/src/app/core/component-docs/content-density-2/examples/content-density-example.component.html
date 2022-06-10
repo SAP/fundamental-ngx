@@ -1,0 +1,9 @@
+<div style="display: flex" [fdContentDensity]="selectedDensity">
+    <fd-select [(ngModel)]="selectedDensity" style="margin-right: 8px">
+        <fd-option value="cozy">Cozy</fd-option>
+        <fd-option value="condensed">Condensed</fd-option>
+        <fd-option value="compact">Compact</fd-option>
+    </fd-select>
+
+    <button fd-button>My size changes when "Compact" or "Condensed" is selected</button>
+</div>
