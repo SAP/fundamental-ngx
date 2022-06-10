@@ -17,6 +17,7 @@ import {
     UploadCollectionTitleContainerDirective,
     UploadCollectionTitleDirective
 } from './upload-collection-simple.directives';
+import { LINK_CLASS_NAME } from '@fundamental-ngx/core/link';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
@@ -76,7 +77,7 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
         this.fileNameFull = this.fileName + '.' + this.extension;
         this._titleDirective.elRef.nativeElement.tabIndex = '0';
         this._titleDirective.elRef.nativeElement.innerHTML =
-            '<span class="fd-link__content">' + this.fileNameFull + '</span>';
+            '<span class="' + LINK_CLASS_NAME.linkContent + '">' + this.fileNameFull + '</span>';
         this._handleDeleteClickedSubscription();
         this._handleOkClickedSubscription();
         this._handleEditClickedSubscription();
