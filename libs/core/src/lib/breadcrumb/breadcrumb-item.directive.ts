@@ -38,11 +38,25 @@ export class BreadcrumbItemDirective implements AfterContentInit {
 
     /** @hidden */
     ngAfterContentInit(): void {
+        const childElements = this._elementRef.nativeElement.getElementsByTagName('*');
+        for (const child of childElements) {
+            child.innerText = this._truncateBreadcrumbText(child.innerText);
+        }
         if (this.breadcrumbLink && this.breadcrumbLink.elementRef.nativeElement.getAttribute('href')) {
             this.href = this.breadcrumbLink.elementRef.nativeElement.getAttribute('href');
         }
         if (this.breadcrumbLink && this.breadcrumbLink.routerLink) {
             this.routerLink = this.breadcrumbLink.routerLink;
         }
+    }
+    /**
+     * @hidden
+     *  it truncates breadcrumb text when item text is longer than 30 chars
+     */
+    private _truncateBreadcrumbText(text: string): string {
+        if (text.length > 30) {
+            text = text.substring(0, 29) + '...';
+        }
+        return text;
     }
 }

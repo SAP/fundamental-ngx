@@ -18,7 +18,9 @@ import { BreadcrumbItemDirective, BreadcrumbLinkDirective } from './public_api';
                 <a fd-breadcrumb-link [routerLink]="'#'">Breadcrumb Level 1</a>
             </fd-breadcrumb-item>
             <fd-breadcrumb-item>
-                <a fd-breadcrumb-link [routerLink]="'#'" [queryParams]="'#'">Breadcrumb Level 2</a>
+                <a fd-breadcrumb-link [routerLink]="'#'" [queryParams]="'#'">
+                    Breadcrumb Level 2, very very long breadcrumb text that needs to be truncated
+                </a>
             </fd-breadcrumb-item>
             <fd-breadcrumb-item>
                 <span>Breadcrumb Level 3</span>
@@ -127,5 +129,15 @@ describe('BreadcrumbComponent', () => {
             expect(item.elementRef.nativeElement.style.visibility).toBe('visible');
         });
         expect(component.collapsedBreadcrumbItems.length).toBe(0);
+    });
+
+    it('should truncate the breadcrumb text when it is too long', () => {
+        component.breadcrumbItems.forEach((item) => {
+            item.ngAfterContentInit();
+        });
+
+        component.breadcrumbItems.forEach((item) => {
+            expect(item.elementRef.nativeElement.innerText.length).toBeLessThanOrEqual(33);
+        });
     });
 });
