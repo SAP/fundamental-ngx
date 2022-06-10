@@ -1,4 +1,11 @@
 
+## [0.35.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.7...v0.35.0-rc.8) (2022-06-10)
+
+
+### Bug Fixes
+
+* **core:** upload collection title bug ([#8207](https://github.com/SAP/fundamental-ngx/issues/8207)) ([1c1da5c](https://github.com/SAP/fundamental-ngx/commit/1c1da5c807179172323244a82af801d6f10011f9))
+
 ## [0.35.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.6...v0.35.0-rc.7) (2022-06-09)
 
 
