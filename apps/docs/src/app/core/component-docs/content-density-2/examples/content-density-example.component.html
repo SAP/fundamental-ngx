@@ -1,9 +1,35 @@
-<div style="display: flex" [fdContentDensity]="selectedDensity">
-    <fd-select [(ngModel)]="selectedDensity" style="margin-right: 8px">
+<div style="display: flex">
+    <fd-select [ngModel]="selectedDensity" (ngModelChange)="onChange($event)" style="margin-right: 8px">
         <fd-option value="cozy">Cozy</fd-option>
         <fd-option value="condensed">Condensed</fd-option>
         <fd-option value="compact">Compact</fd-option>
     </fd-select>
 
-    <button fd-button>My size changes when "Compact" or "Condensed" is selected</button>
+    <button fd-button>My size changes when "Compact" or "Condensed" is selected globally</button>
+</div>
+
+<div fdCompact style="padding: 20px 0">
+    <button fd-button>My size always stays "Compact", because parent node has [fdCompact]</button>
+</div>
+
+<div fdCondensed style="padding: 20px 0">
+    <button fd-button>
+        My size always stays "Compact", because parent node has [fdCondensed] and fd-button does not have "condensed"
+    </button>
+</div>
+
+<div fdCozy style="padding: 20px 0">
+    <button fd-button>My size always stays "Cozy", because parent node has [fdCozy]</button>
+</div>
+
+<div fdCompact>
+    <button fd-button>My size always stays "Compact", because parent node has [fdCompact]</button>
+
+    <div fdCozy style="padding: 20px 0">
+        <button fd-button>My size always stays "Cozy", because parent node has [fdCozy]</button>
+
+        <div fdContentDensity style="padding: 20px 0">
+            <button fd-button>My size changes when "Compact" or "Condensed" is selected globally</button>
+        </div>
+    </div>
 </div>

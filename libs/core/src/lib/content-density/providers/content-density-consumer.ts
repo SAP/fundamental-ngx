@@ -1,5 +1,5 @@
 import { ElementRef, Optional, Provider, Self, SkipSelf } from '@angular/core';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { ContentDensityControllerService } from '@fundamental-ngx/core/content-density';
 import { BehaviorSubject, distinctUntilChanged, map, Observable, of, Subscription, switchMap, tap } from 'rxjs';
 import { ContentDensityDirective } from '../directives/content-density.directive';
 import { ContentDensityMode } from '../content-density.types';
@@ -27,7 +27,7 @@ export function contentDensityConsumer(providedConfiguration: {
             elementRef: ElementRef<Element>,
             parentContentDensityDirective?: ContentDensityDirective,
             contentDensityDirective?: ContentDensityDirective,
-            contentDensityService?: ContentDensityService
+            contentDensityService?: ContentDensityControllerService
         ) => {
             const contentDensity$ = new BehaviorSubject(configuration.defaultContentDensity);
 
@@ -39,7 +39,7 @@ export function contentDensityConsumer(providedConfiguration: {
                         switchMap((density) => {
                             if (density === ContentDensityMode.GLOBAL) {
                                 return contentDensityService
-                                    ? contentDensityService._contentDensityListener
+                                    ? contentDensityService.contentDensityListener()
                                     : of(configuration.defaultContentDensity);
                             }
                             return of(density);
@@ -50,14 +50,14 @@ export function contentDensityConsumer(providedConfiguration: {
                         switchMap((density) => {
                             if (density === ContentDensityMode.GLOBAL) {
                                 return contentDensityService
-                                    ? contentDensityService._contentDensityListener
+                                    ? contentDensityService.contentDensityListener()
                                     : of(configuration.defaultContentDensity);
                             }
                             return of(density);
                         })
                     );
                 } else if (contentDensityService) {
-                    changesSource$ = contentDensityService._contentDensityListener;
+                    changesSource$ = contentDensityService.contentDensityListener();
                 }
 
                 subscription.add(
@@ -108,7 +108,7 @@ export function contentDensityConsumer(providedConfiguration: {
             ElementRef,
             [new Optional(), new SkipSelf(), ContentDensityDirective],
             [new Optional(), new Self(), ContentDensityDirective],
-            [new Optional(), ContentDensityService]
+            [new Optional(), ContentDensityControllerService]
         ]
     };
 }

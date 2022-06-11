@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import contentDensitySrc from '!./examples/content-density-example.component.ts?raw';
+import contentDensityHTMLSrc from '!./examples/content-density-example.component.html?raw';
 
 @Component({
     selector: 'app-content-density-docs',
@@ -11,6 +12,12 @@ export class ContentDensityDocsComponent {
         {
             language: 'typescript',
             code: contentDensitySrc,
+            fileName: 'content-density-example',
+            component: 'ContentDensityExampleComponent'
+        },
+        {
+            language: 'html',
+            code: contentDensityHTMLSrc,
             fileName: 'content-density-example',
             component: 'ContentDensityExampleComponent'
         }

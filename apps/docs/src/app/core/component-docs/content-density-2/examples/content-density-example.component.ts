@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ContentDensity, ContentDensityService } from '@fundamental-ngx/core/utils';
-import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
+import { ContentDensityMode, ContentDensityControllerService } from '@fundamental-ngx/core/content-density';
 
 @Component({
     selector: 'fd-content-density-example',
@@ -9,13 +8,13 @@ import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 export class ContentDensityExampleComponent implements OnInit {
     selectedDensity: ContentDensityMode;
 
-    constructor(private _contentDensityService: ContentDensityService) {}
+    constructor(private _contentDensityService: ContentDensityControllerService) {}
 
     ngOnInit(): void {
-        this.selectedDensity = this._contentDensityService.contentDensity.value as ContentDensityMode;
+        this.selectedDensity = this._contentDensityService.currentContentDensity;
     }
 
-    onChange(): void {
-        this._contentDensityService.contentDensity.next(this.selectedDensity as ContentDensity);
+    onChange($event: any): void {
+        this._contentDensityService.updateContentDensity($event);
     }
 }
