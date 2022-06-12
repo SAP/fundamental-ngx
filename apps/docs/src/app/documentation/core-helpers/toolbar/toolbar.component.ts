@@ -1,15 +1,15 @@
 import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { CompleteThemeDefinition, ThemingService } from '@fundamental-ngx/core/theming';
 import { environment } from '../../../../environments/environment';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CURRENT_LIB, Libraries } from '../../utilities/libraries';
 
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { filter, fromEvent, Subject } from 'rxjs';
 import { debounceTime, startWith, takeUntil } from 'rxjs/operators';
 import { MenuComponent, MenuKeyboardService } from '@fundamental-ngx/core/menu';
-import { ContentDensity, ContentDensityService } from '@fundamental-ngx/core/utils';
 import { ShellbarMenuItem, ShellbarSizes } from '@fundamental-ngx/core/shellbar';
+import { ContentDensityControllerService, ContentDensityMode } from '@fundamental-ngx/core/content-density';
 
 const urlContains = (themeName: string, search: string): boolean => themeName.toLowerCase().includes(search);
 
@@ -66,12 +66,18 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         }
     ];
 
+    contentDensities: { name: string; mode: ContentDensityMode }[] = [
+        { name: 'Cozy', mode: ContentDensityMode.COZY },
+        { name: 'Compact', mode: ContentDensityMode.COMPACT },
+        { name: 'Condensed', mode: ContentDensityMode.CONDENSED }
+    ];
+
     /** An RxJS Subject that will kill the data stream upon destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     constructor(
         private _routerService: Router,
-        private _contentDensityService: ContentDensityService,
+        private _contentDensityService: ContentDensityControllerService,
         private _themingService: ThemingService,
         @Inject(CURRENT_LIB) private _currentLib: Libraries,
         private _route: ActivatedRoute,
@@ -152,8 +158,8 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         this.updateHighlightTheme(themeId);
     }
 
-    selectDensity(density: ContentDensity): void {
-        this._contentDensityService.contentDensity.next(density);
+    selectDensity(density: ContentDensityMode): void {
+        this._contentDensityService.updateContentDensity(density);
     }
 
     private trustedResourceUrl = (url: string): SafeResourceUrl =>

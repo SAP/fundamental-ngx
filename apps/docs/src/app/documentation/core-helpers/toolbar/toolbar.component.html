@@ -180,19 +180,9 @@
 </ng-template>
 
 <ng-template #densitiesTemplate>
-    <li fd-menu-item>
-        <div fd-menu-interactive (click)="selectDensity('cozy')">
-            <span fd-menu-title>Cozy</span>
-        </div>
-    </li>
-    <li fd-menu-item>
-        <div fd-menu-interactive (click)="selectDensity('condensed')">
-            <span fd-menu-title>Condensed</span>
-        </div>
-    </li>
-    <li fd-menu-item>
-        <div fd-menu-interactive (click)="selectDensity('compact')">
-            <span fd-menu-title>Compact</span>
+    <li fd-menu-item *ngFor="let density of contentDensities">
+        <div fd-menu-interactive (click)="selectDensity(density.mode)">
+            <span fd-menu-title>{{ density.name }}</span>
         </div>
     </li>
 </ng-template>
