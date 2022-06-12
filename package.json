@@ -121,7 +121,7 @@
         "@angular/platform-browser-dynamic": "~13.2.4",
         "@angular/router": "~13.2.4",
         "@fundamental-styles/fn": "0.21.0-rc.31",
-        "@nrwl/angular": "~13.8.3",
+        "@nrwl/angular": "~14.2.4",
         "@sap-theming/theming-base-content": "11.1.38",
         "@stackblitz/sdk": "1.6.0",
         "@types/google.visualization": "0.0.68",
