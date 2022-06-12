@@ -5,7 +5,11 @@ import { ContentDensityControllerService } from '../services/content-density-con
 import { ContentDensityDirective } from '../directives/content-density.directive';
 import { ContentDensityMode } from '../content-density.types';
 
-export abstract class ContentDensityConsumer extends Observable<string> {}
+export abstract class ContentDensityConsumer extends Observable<ContentDensityMode> {
+    abstract isCompact$: Observable<boolean>;
+    abstract isCozy$: Observable<boolean>;
+    abstract isCondensed$: Observable<boolean>;
+}
 
 const defaultContentDensityConsumerConfigs = {
     modifiers: {},
@@ -94,8 +98,7 @@ export function contentDensityConsumer(providedConfiguration: {
                     )
                     .subscribe();
             }
-
-            return new Observable((subscriber) => {
+            const consumer = new Observable((subscriber) => {
                 const subscription = contentDensity$.subscribe((density) => {
                     subscriber.next(density);
                 });
@@ -104,6 +107,10 @@ export function contentDensityConsumer(providedConfiguration: {
                     contentDensity$.complete();
                 };
             });
+            consumer['isCompact$'] = contentDensity$.pipe(map((density) => density === ContentDensityMode.COMPACT));
+            consumer['isCozy$'] = contentDensity$.pipe(map((density) => density === ContentDensityMode.COZY));
+            consumer['isCondensed$'] = contentDensity$.pipe(map((density) => density === ContentDensityMode.CONDENSED));
+            return consumer;
         },
         deps: [
             ElementRef,
