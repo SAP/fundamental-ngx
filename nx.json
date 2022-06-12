@@ -1,47 +1,37 @@
 {
-  "npmScope": "fundamental-ngx",
-  "implicitDependencies": {
-    "angular.json": "*",
-    "package.json": "*",
-    "tsconfig.json": "*",
-    "nx.json": "*"
-  },
-  "targetDependencies": {
-    "build": [
-      {
-        "target": "build",
-        "projects": "dependencies"
-      }
-    ]
-  },
-  "affected": {
-    "defaultBase": "main"
-  },
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
-      "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test",
-          "e2e"
-        ],
-        "parallel": 1
-      }
+    "npmScope": "fundamental-ngx",
+    "implicitDependencies": {
+        "angular.json": "*",
+        "package.json": "*",
+        "tsconfig.json": "*",
+        "nx.json": "*"
     },
-    "cloud": {
-      "runner": "@nrwl/nx-cloud",
-      "options": {
-        "strictlyOrderedTargets": [
-          "build",
-          "lint",
-          "test",
-          "e2e"
-        ],
-        "canTrackAnalytics": false,
-        "showUsageWarnings": true
-      }
+    "targetDependencies": {
+        "build": [
+            {
+                "target": "build",
+                "projects": "dependencies"
+            }
+        ]
+    },
+    "affected": {
+        "defaultBase": "main"
+    },
+    "tasksRunnerOptions": {
+        "default": {
+            "runner": "@nrwl/workspace/tasks-runners/default",
+            "options": {
+                "cacheableOperations": ["build", "lint", "test", "e2e"],
+                "parallel": 1
+            }
+        },
+        "cloud": {
+            "runner": "@nrwl/nx-cloud",
+            "options": {
+                "strictlyOrderedTargets": ["build", "lint", "test", "e2e"],
+                "canTrackAnalytics": false,
+                "showUsageWarnings": true
+            }
+        }
     }
-  }
 }

@@ -14,7 +14,7 @@ import {
 } from '@angular/core';
 import { BaseButton } from './base-button';
 import { Subscription } from 'rxjs';
-import { applyCssClass, ContentDensityService, CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass, ContentDensityService, CssClassBuilder, DestroyedService } from '@fundamental-ngx/core/utils';
 import {
     ContentDensityConsumer,
     contentDensityConsumer,
@@ -45,6 +45,7 @@ import {
         '[attr.aria-label]': 'buttonArialabel'
     },
     providers: [
+        DestroyedService,
         contentDensityConsumer({
             modifiers: { [ContentDensityMode.COMPACT]: 'fd-button--compact' },
             supportedContentDensity: [ContentDensityMode.COZY, ContentDensityMode.COMPACT]
@@ -102,7 +103,6 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
         @Inject(ContentDensityConsumer) private _contentDensityConsumer: ContentDensityConsumer
     ) {
         super();
-        _contentDensityConsumer.subscribe((mode) => console.log(mode));
     }
 
     /** Function runs when component is initialized

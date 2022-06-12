@@ -4,7 +4,8 @@ import { ContentDensityMode } from '../content-density.types';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 
 @Directive({
-    selector: '[fdContentDensity], [fdCompact], [fdCondensed], [fdCozy]'
+    selector: '[fdContentDensity], [fdCompact], [fdCondensed], [fdCozy]',
+    exportAs: 'fdContentDensity'
 })
 export class ContentDensityDirective extends BehaviorSubject<ContentDensityMode> implements OnDestroy {
     @Input()
