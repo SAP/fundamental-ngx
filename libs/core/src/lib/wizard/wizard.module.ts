@@ -10,6 +10,7 @@ import { WizardNextStepComponent } from './wizard-next-step/wizard-next-step.com
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { ActionSheetModule } from '@fundamental-ngx/core/action-sheet';
 import { ScrollSpyModule } from '@fundamental-ngx/core/scroll-spy';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
     declarations: [
@@ -21,7 +22,7 @@ import { ScrollSpyModule } from '@fundamental-ngx/core/scroll-spy';
         WizardContentComponent,
         WizardNextStepComponent
     ],
-    imports: [CommonModule, IconModule, ScrollSpyModule, ActionSheetModule],
+    imports: [CommonModule, IconModule, ScrollSpyModule, ActionSheetModule, ContentDensityModule],
     exports: [
         WizardComponent,
         WizardNavigationComponent,

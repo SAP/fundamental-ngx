@@ -7,9 +7,10 @@ import { ActionSheetItemComponent } from './action-sheet-item/action-sheet-item.
 import { ActionSheetBodyComponent } from './action-sheet-body/action-sheet-body.component';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
-    imports: [CommonModule, PopoverModule, ButtonModule],
+    imports: [CommonModule, PopoverModule, ButtonModule, ContentDensityModule],
     exports: [ActionSheetComponent, ActionSheetControlComponent, ActionSheetItemComponent, ActionSheetBodyComponent],
     declarations: [
         ActionSheetComponent,

@@ -7,6 +7,7 @@ import { SharedDocumentationPageModule } from '../../../documentation/shared-doc
 import { examples } from './examples';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 const routes: Routes = [
     {
@@ -20,7 +21,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ActionSheetModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ActionSheetModule, ContentDensityModule],
     exports: [RouterModule],
     declarations: [ActionSheetDocsComponent, ActionSheetHeaderComponent, examples]
 })

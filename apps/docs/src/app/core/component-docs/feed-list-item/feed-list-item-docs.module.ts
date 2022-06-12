@@ -13,6 +13,7 @@ import { MenuModule } from '@fundamental-ngx/core/menu';
 import { ActionSheetModule } from '@fundamental-ngx/core/action-sheet';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 const routes: Routes = [
     {
@@ -33,7 +34,8 @@ const routes: Routes = [
         MenuModule,
         ActionSheetModule,
         AvatarModule,
-        ToolbarModule
+        ToolbarModule,
+        ContentDensityModule
     ],
     exports: [RouterModule],
     declarations: [FeedListItemHeaderComponent, FeedListItemDocsComponent, ...examples]

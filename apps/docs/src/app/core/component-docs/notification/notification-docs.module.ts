@@ -20,6 +20,7 @@ import { MenuModule } from '@fundamental-ngx/core/menu';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { ActionSheetModule } from '@fundamental-ngx/core/action-sheet';
 import { MessageToastModule } from '@fundamental-ngx/core/message-toast';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 const routes: Routes = [
     {
@@ -45,7 +46,8 @@ const routes: Routes = [
         MenuModule,
         ListModule,
         ActionSheetModule,
-        MessageToastModule
+        MessageToastModule,
+        ContentDensityModule
     ],
     exports: [RouterModule],
     declarations: [
