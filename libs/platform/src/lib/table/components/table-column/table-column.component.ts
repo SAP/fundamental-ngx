@@ -99,6 +99,10 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
     @Input()
     noWrap = false;
 
+    /** Whether to apply fd-table-text (text-shadow) to the cell content, if disabled noWrap has no effect. */
+    @Input()
+    applyText = true;
+
     /** Column cell template */
     columnCellTemplate: TemplateRef<any>;
 
