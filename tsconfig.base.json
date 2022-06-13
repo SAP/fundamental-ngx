@@ -42,6 +42,7 @@
             "@fundamental-ngx/core/carousel": ["libs/core/src/lib/carousel/index.ts"],
             "@fundamental-ngx/core/checkbox": ["libs/core/src/lib/checkbox/index.ts"],
             "@fundamental-ngx/core/combobox": ["libs/core/src/lib/combobox/index.ts"],
+            "@fundamental-ngx/core/content-density": ["libs/core/src/lib/content-density/index.ts"],
             "@fundamental-ngx/core/date-picker": ["libs/core/src/lib/date-picker/index.ts"],
             "@fundamental-ngx/core/datetime": ["libs/core/src/lib/datetime/index.ts"],
             "@fundamental-ngx/core/datetime-picker": ["libs/core/src/lib/datetime-picker/index.ts"],

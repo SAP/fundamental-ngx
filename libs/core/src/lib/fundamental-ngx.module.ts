@@ -90,6 +90,7 @@ import { TimelineModule } from '@fundamental-ngx/core/timeline';
 import { ProgressIndicatorModule } from '@fundamental-ngx/core/progress-indicator';
 import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
 import { ThemingModule } from '@fundamental-ngx/core/theming';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -186,7 +187,8 @@ import { ThemingModule } from '@fundamental-ngx/core/theming';
         TimelineModule,
         ProgressIndicatorModule,
         ScrollbarModule,
-        ThemingModule
+        ThemingModule,
+        ContentDensityModule
     ]
 })
 export class FundamentalNgxCoreModule {}

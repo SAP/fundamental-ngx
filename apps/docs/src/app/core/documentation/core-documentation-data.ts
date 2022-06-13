@@ -112,7 +112,8 @@ export const utilities: SectionInterfaceContent[] = [
     { url: 'core/initial-focus', name: 'Initial Focus' },
     { url: 'core/scroll-spy', name: 'Scroll Spy' },
     { url: 'core/theme-switcher', name: 'Theme Switcher API' },
-    { url: 'core/theming', name: 'Theming' }
+    { url: 'core/theming', name: 'Theming' },
+    { url: 'core/content-density-2', name: 'Content Density 2' }
 ];
 
 export const adapters: SectionInterfaceContent[] = [
