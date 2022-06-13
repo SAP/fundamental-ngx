@@ -45,6 +45,7 @@
             [inlineHelpGlyph]="hintOptions.glyph || ''"
             [inlineHelpTriggers]="hintOptions.trigger || []"
             [alignLabelEnd]="!!(isHorizontal$ | async)"
+            [colon]="colon"
         >
             <span [id]="'fdp-form-label-content-' + id">{{ label }}</span>
         </label>
@@ -54,6 +55,7 @@
             [id]="'fdp-form-label-' + id"
             [required]="editable && required"
             fd-form-label
+            [colon]="colon"
             [alignLabelEnd]="!!(isHorizontal$ | async)"
         >
             <span [id]="'fdp-form-label-content-' + id">{{ label }}</span>

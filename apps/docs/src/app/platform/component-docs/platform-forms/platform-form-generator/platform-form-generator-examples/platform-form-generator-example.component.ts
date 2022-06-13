@@ -60,6 +60,7 @@ export class PlatformFormGeneratorExampleComponent {
                             text: 'Some contextual hint',
                             glyph: 'accidental-leave'
                         },
+                        appendColon: true,
                         column: 1
                     },
                     validate: async (value) => {

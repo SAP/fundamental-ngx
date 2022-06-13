@@ -11,7 +11,7 @@
     >
         <fdp-textarea name="basicTextarea" [formControl]="ff1.formControl"></fdp-textarea>
     </fdp-form-field>
-    <fdp-form-field #ff2 id="seasons0" label="My favourite Seasons:" [column]="1" [rank]="2">
+    <fdp-form-field #ff2 id="seasons0" label="My favourite Seasons" [colon]="true" [column]="1" [rank]="2">
         <fdp-checkbox-group
             [list]="seasons"
             name="seasons0"
