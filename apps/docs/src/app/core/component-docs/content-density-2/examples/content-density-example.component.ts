@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ContentDensityControllerService, ContentDensityMode } from '@fundamental-ngx/core/content-density';
+import { ContentDensityControllerService, GlobalContentDensityMode } from '@fundamental-ngx/core/content-density';
 
 @Component({
     selector: 'fd-content-density-example',
     templateUrl: './content-density-example.component.html'
 })
 export class ContentDensityExampleComponent implements OnInit {
-    selectedDensity: ContentDensityMode;
+    selectedDensity: GlobalContentDensityMode;
 
     constructor(readonly _contentDensityService: ContentDensityControllerService) {}
 

@@ -16,7 +16,7 @@ import { CONTENT_DENSITY_DIRECTIVE } from '../tokens/content-density-directive';
 })
 export class ContentDensityDirective extends BehaviorSubject<LocalContentDensityMode> implements OnDestroy {
     @Input()
-    set fdContentDensity(val: LocalContentDensityMode) {
+    set fdContentDensity(val: LocalContentDensityMode | '') {
         this.next(val ? val : ContentDensityGlobalKeyword);
     }
 
