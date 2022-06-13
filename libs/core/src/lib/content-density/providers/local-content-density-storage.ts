@@ -15,7 +15,6 @@ export class LocalContentDensityStorage implements ContentDensityStorage {
         @Inject(CONTENT_DENSITY_STORAGE_KEY) private _storageKey: string,
         private _storage: LocalStorageService
     ) {
-        console.log({ _defaultContentDensity, _storageKey });
         this._initialize();
     }
 
