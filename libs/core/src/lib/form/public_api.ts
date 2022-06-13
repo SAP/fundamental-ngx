@@ -1,5 +1,7 @@
 export * from './form.module';
 export * from './form-control/form-control.component';
+export * from './form-control/textarea-form-control.directive';
+export * from './form-control/input-form-control.directive';
 export * from './form-control/form-control.module';
 export * from './form-group/form-group.component';
 export * from './form-group/form-group.module';
