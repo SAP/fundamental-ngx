@@ -37,11 +37,11 @@ describe('dynamic side content test suite', () => {
         dynamicPageContent,
         tabsContent,
         dynamicPage,
-        flexileColumn,
+        flexibleColumn,
         dynamicPageBtn,
-        breadcumbLink,
+        breadcrumbLink,
         article,
-        currentBreadcumbLink
+        currentBreadcrumbLink
     } = dynamicPagePage;
 
     beforeAll(() => {
@@ -92,7 +92,7 @@ describe('dynamic side content test suite', () => {
 
         it('should check links clickable', () => {
             openPage(columnLayoutExample);
-            checkElArrIsClickable(columnLayoutExample + breadcumbLink);
+            checkElArrIsClickable(columnLayoutExample + breadcrumbLink);
         });
 
         it('should check collapsing area', () => {
@@ -111,27 +111,27 @@ describe('dynamic side content test suite', () => {
             click(dynamicPageBtn, 7);
             // pause animation to complete
             pause(1000);
-            expect(isElementDisplayed(flexileColumn, 1)).toBe(true, 'flexible column is not visible');
+            expect(isElementDisplayed(flexibleColumn, 1)).toBe(true, 'flexible column is not visible - first column');
             // click to open 3rd column
-            click(flexileColumn + button, 10);
+            click(flexibleColumn + button, 10);
             pause(1000);
-            expect(isElementDisplayed(flexileColumn, 2)).toBe(true, 'flexible column is not visible');
+            expect(isElementDisplayed(flexibleColumn, 2)).toBe(true, 'flexible column is not visible - 2nd column');
             // click to expand 3rd column
-            click(flexileColumn + button, 11);
+            click(flexibleColumn + button, 11);
             pause(1000);
-            expect(isElementDisplayed(flexileColumn, 0)).toBe(false, 'flexible column is not hidden');
-            expect(isElementDisplayed(flexileColumn, 1)).toBe(false, 'flexible column is not hidden');
-            expect(isElementDisplayed(flexileColumn, 2)).toBe(true, 'flexible column is not visible');
+            expect(isElementDisplayed(flexibleColumn, 0)).toBe(false, 'flexible column is not hidden - 1st column');
+            expect(isElementDisplayed(flexibleColumn, 1)).toBe(false, 'flexible column is not hidden - 2nd column');
+            expect(isElementDisplayed(flexibleColumn, 2)).toBe(true, 'flexible column is not visible - 3rd column');
             // click to exit from full screen mode
-            click(flexileColumn + button, 11);
+            click(flexibleColumn + button, 11);
             pause(1000);
-            expect(isElementDisplayed(flexileColumn, 0)).toBe(true, 'flexible column is not visible');
-            expect(isElementDisplayed(flexileColumn, 1)).toBe(true, 'flexible column is not visible');
-            expect(isElementDisplayed(flexileColumn, 2)).toBe(true, 'flexible column is not visible');
+            expect(isElementDisplayed(flexibleColumn, 0)).toBe(true, 'flexible column is not visible - 1st column');
+            expect(isElementDisplayed(flexibleColumn, 1)).toBe(true, 'flexible column is not visible - 2nd column');
+            expect(isElementDisplayed(flexibleColumn, 2)).toBe(true, 'flexible column is not visible - 3rd column');
             // click to close 3rd column
-            click(flexileColumn + button, 12);
+            click(flexibleColumn + button, 12);
             pause(1000);
-            expect(isElementDisplayed(flexileColumn, 2)).toBe(false, 'flexible column is not hidden');
+            expect(isElementDisplayed(flexibleColumn, 2)).toBe(false, 'flexible column is not hidden - 3rd column');
         });
     });
 
@@ -201,7 +201,7 @@ describe('dynamic side content test suite', () => {
 
         it('should check links clickable', () => {
             openPage(responsiveExample);
-            checkElArrIsClickable(responsiveExample + breadcumbLink);
+            checkElArrIsClickable(responsiveExample + breadcrumbLink);
         });
 
         it('should check navigate by link', () => {
@@ -265,7 +265,7 @@ describe('dynamic side content test suite', () => {
 
         it('should check links clickable', () => {
             openPage(tabsExample);
-            checkElArrIsClickable(tabsExample + breadcumbLink);
+            checkElArrIsClickable(tabsExample + breadcrumbLink);
         });
 
         it('should check navigate by link', () => {
@@ -307,7 +307,7 @@ describe('dynamic side content test suite', () => {
 
         it('should check links clickable', () => {
             openPage(defaultExample);
-            checkElArrIsClickable(defaultExample + breadcumbLink);
+            checkElArrIsClickable(defaultExample + breadcrumbLink);
         });
 
         it('should check navigate by link', () => {
@@ -352,10 +352,10 @@ describe('dynamic side content test suite', () => {
 
     function checkUrlNavigation(): void {
         const currentUrl = getCurrentUrl();
-        click(currentBreadcumbLink);
+        click(currentBreadcrumbLink);
         // check that link is clickable and does not navigate
         expect(getCurrentUrl()).toEqual(currentUrl);
-        click(breadcumbLink);
+        click(breadcrumbLink);
         // check that url works correct and directs to page
         expect(getCurrentUrl()).not.toEqual(currentUrl);
         goBack();

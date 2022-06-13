@@ -5,14 +5,19 @@ import {
     Component,
     ContentChildren,
     ElementRef,
+    Inject,
     Input,
+    isDevMode,
     OnChanges,
     OnDestroy,
     OnInit,
+    Optional,
     QueryList,
+    Self,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
+import { RouterLink, RouterLinkWithHref } from '@angular/router';
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { ContentObserver } from '@angular/cdk/observers';
 import { map, startWith, Subject, takeUntil, tap } from 'rxjs';
@@ -21,11 +26,24 @@ import { IconComponent } from '@fundamental-ngx/core/icon';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
-    selector: '[fdLink], [fd-link]',
+    selector: '[fdLink], [fd-link], [fd-breadcrumb-link]',
     templateUrl: './link.component.html',
     styleUrls: ['./link.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: 'linkRouterTarget',
+            useFactory: (
+                withHref?: RouterLinkWithHref,
+                routerLink?: RouterLink
+            ): RouterLinkWithHref | RouterLink | undefined => withHref || routerLink,
+            deps: [
+                [new Optional(), new Self(), RouterLinkWithHref],
+                [new Optional(), new Self(), RouterLink]
+            ]
+        }
+    ]
 })
 export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterViewInit, OnDestroy {
     @ContentChildren(IconComponent)
@@ -65,14 +83,24 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterV
     _postfixPortal: Portal<any> | null;
 
     /** @hidden */
+    _prefixIconName: string;
+    /** @hidden */
+    _postfixIconName: string;
+
+    /** @hidden */
     private _destroyed$ = new Subject<void>();
 
     /** @hidden */
     constructor(
         private _elementRef: ElementRef<Element>,
         private contentObserver: ContentObserver,
-        private changeDetectorRef: ChangeDetectorRef
-    ) {}
+        private changeDetectorRef: ChangeDetectorRef,
+        @Inject('linkRouterTarget') readonly routerLink: RouterLinkWithHref | RouterLink
+    ) {
+        if (isDevMode() && this.elementRef().nativeElement.hasAttribute('fd-breadcrumb-link')) {
+            console.warn('The fd-breadcrumb-link attribute is deprecated. Please use fd-link instead.');
+        }
+    }
 
     /** @hidden */
     ngOnChanges(): void {
@@ -130,6 +158,16 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterV
                         this.contentSpan.nativeElement.childNodes[this.contentSpan.nativeElement.childNodes.length - 1]
                             ? icons[icons.length - 1].elementRef().nativeElement
                             : null;
+                    if (prefix) {
+                        this._prefixIconName = this.iconComponents.first.glyph;
+                    } else {
+                        this._prefixIconName = '';
+                    }
+                    if (postfix) {
+                        this._postfixIconName = this.iconComponents.last.glyph;
+                    } else {
+                        this._postfixIconName = '';
+                    }
                     return { prefix, postfix };
                 }),
                 tap(() => {

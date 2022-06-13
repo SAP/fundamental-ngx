@@ -21,10 +21,10 @@ import { DynamicPageTitleHostComponent } from './dynamic-page-title-host.compone
         <fdp-dynamic-page-title [title]="title" [subtitle]="subtitle" [size]="size" [background]="background">
             <fd-breadcrumb>
                 <fd-breadcrumb-item>
-                    <a fd-breadcrumb-link [attr.href]="'#'">Men</a>
+                    <a fd-link [attr.href]="'#'">Men</a>
                 </fd-breadcrumb-item>
                 <fd-breadcrumb-item>
-                    <a fd-breadcrumb-link [attr.href]="'#'">Shoes</a>
+                    <a fd-link [attr.href]="'#'">Shoes</a>
                 </fd-breadcrumb-item>
             </fd-breadcrumb>
 

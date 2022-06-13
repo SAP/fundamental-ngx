@@ -156,6 +156,7 @@ export class PopoverService extends BasePopoverClass {
             this._listenOnOutClicks();
             this._focusFirstTabbableElement();
             this._onLoad.next(this._getPopoverBody()._elementRef);
+            this._overlayRef.updatePosition();
         }
     }
 

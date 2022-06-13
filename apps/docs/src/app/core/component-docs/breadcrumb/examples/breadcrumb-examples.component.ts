@@ -12,7 +12,17 @@ import { Component } from '@angular/core';
         `
     ]
 })
-export class BreadcrumbRouterLinkExampleComponent {}
+export class BreadcrumbRouterLinkExampleComponent {
+    showIcon = true;
+    glyph = 'delete';
+
+    constructor() {
+        setInterval(() => {
+            this.glyph = this.glyph === 'delete' ? 'add' : 'delete';
+            // this.showIcon = !this.showIcon
+        }, 3000);
+    }
+}
 
 @Component({
     selector: 'fd-breadcrumb-href-example',
