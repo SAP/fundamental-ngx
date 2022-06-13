@@ -1,4 +1,11 @@
 
+## [0.35.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.11...v0.35.0-rc.12) (2022-06-13)
+
+
+### Features
+
+* **core:** breadcrumbs updates ([#8196](https://github.com/SAP/fundamental-ngx/issues/8196)) ([5bfcd9b](https://github.com/SAP/fundamental-ngx/commit/5bfcd9b2d62d085d4a81da9c8d9bbe0145d591e1))
+
 ## [0.35.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.10...v0.35.0-rc.11) (2022-06-13)
 
 
