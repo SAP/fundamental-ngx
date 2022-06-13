@@ -1,4 +1,16 @@
 
+## [0.35.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.9...v0.35.0-rc.10) (2022-06-13)
+
+
+### Features
+
+* **platform:** add optional colon for form label ([#8201](https://github.com/SAP/fundamental-ngx/issues/8201)) ([b0deded](https://github.com/SAP/fundamental-ngx/commit/b0dededa35e12d07a6a3964e15c53512b5853f7b))
+
+
+### Bug Fixes
+
+* **core:** handle overflow scrollbar with hidden columns ([#8202](https://github.com/SAP/fundamental-ngx/issues/8202)) ([00df374](https://github.com/SAP/fundamental-ngx/commit/00df37481fffd741e4219a922e3387de521a170e))
+
 ## [0.35.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.8...v0.35.0-rc.9) (2022-06-12)
 
 ## [0.35.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.7...v0.35.0-rc.8) (2022-06-10)
