@@ -20,8 +20,8 @@ import {
                 [ContentDensityMode.COMPACT]: 'example-component--compact',
                 [ContentDensityMode.CONDENSED]: 'example-component--condensed'
             },
-            defaultContentDensity: ContentDensityMode.COMPACT,
-            enforceMode: true
+            supportedContentDensity: [ContentDensityMode.COMPACT, ContentDensityMode.COZY],
+            defaultContentDensity: ContentDensityMode.COMPACT
         })
     ],
     encapsulation: ViewEncapsulation.None
