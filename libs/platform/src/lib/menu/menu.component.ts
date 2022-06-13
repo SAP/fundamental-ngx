@@ -76,6 +76,13 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     contentDensity: ContentDensity;
 
     /**
+     * Whether menu can be opened using arrow keys
+     * @default true
+     */
+    @Input()
+    openByArrowKeys = true;
+
+    /**
      * Horizontal position of menu in relation to trigger element.
      */
     @Input()
