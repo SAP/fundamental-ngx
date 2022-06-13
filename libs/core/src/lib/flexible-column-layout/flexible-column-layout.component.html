@@ -8,6 +8,7 @@
         class="fd-flexible-column-layout__column"
         [style.width.%]="_columnLayout.start"
         [style.visibility]="_columnLayout.start === 0 ? 'hidden' : 'visible'"
+        [style.height]="_columnLayout.start === 0 ? '0' : 'auto'"
         [attr.aria-hidden]="_columnLayout.start === 0"
     >
         <ng-container *ngTemplateOutlet="startColumn"></ng-container>
@@ -30,6 +31,7 @@
         class="fd-flexible-column-layout__column"
         [style.width.%]="_columnLayout.mid"
         [style.visibility]="_columnLayout.mid === 0 ? 'hidden' : 'visible'"
+        [style.height]="_columnLayout.mid === 0 ? '0' : 'auto'"
         [attr.aria-hidden]="_columnLayout.mid === 0"
     >
         <ng-container *ngTemplateOutlet="midColumn"></ng-container>
@@ -52,6 +54,7 @@
         class="fd-flexible-column-layout__column"
         [style.width.%]="_columnLayout.end"
         [style.visibility]="_columnLayout.end === 0 ? 'hidden' : 'visible'"
+        [style.height]="_columnLayout.end === 0 ? '0' : 'auto'"
         [attr.aria-hidden]="_columnLayout.end === 0"
     >
         <ng-container *ngTemplateOutlet="endColumn"></ng-container>
