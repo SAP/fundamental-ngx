@@ -1,11 +1,17 @@
 import { Provider } from '@angular/core';
 
+export const ContentDensityGlobalKeyword = 'global';
+export const ContentDensityDefaultKeyword = 'default';
+
 export enum ContentDensityMode {
     COZY = 'cozy',
     CONDENSED = 'condensed',
-    COMPACT = 'compact',
-    GLOBAL = 'global'
+    COMPACT = 'compact'
 }
+
+export type GlobalContentDensityMode = ContentDensityMode | typeof ContentDensityDefaultKeyword;
+
+export type LocalContentDensityMode = ContentDensityMode | typeof ContentDensityGlobalKeyword;
 
 interface BaseContentDensityModuleConfig {
     defaultGlobalContentDensity?: ContentDensityMode;

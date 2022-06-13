@@ -1,16 +1,23 @@
-import { Directive, Input, OnDestroy } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { ContentDensityMode } from '../content-density.types';
+import { Directive, forwardRef, Input, OnDestroy } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { BehaviorSubject } from 'rxjs';
+import { ContentDensityGlobalKeyword, ContentDensityMode, LocalContentDensityMode } from '../content-density.types';
+import { CONTENT_DENSITY_DIRECTIVE } from '../tokens/content-density-directive';
 
 @Directive({
     selector: '[fdContentDensity], [fdCompact], [fdCondensed], [fdCozy]',
-    exportAs: 'fdContentDensity'
+    exportAs: 'fdContentDensity',
+    providers: [
+        {
+            provide: CONTENT_DENSITY_DIRECTIVE,
+            useExisting: forwardRef(() => ContentDensityDirective)
+        }
+    ]
 })
-export class ContentDensityDirective extends BehaviorSubject<ContentDensityMode> implements OnDestroy {
+export class ContentDensityDirective extends BehaviorSubject<LocalContentDensityMode> implements OnDestroy {
     @Input()
-    set fdContentDensity(val: ContentDensityMode | '') {
-        this.next(val ? val : ContentDensityMode.GLOBAL);
+    set fdContentDensity(val: LocalContentDensityMode) {
+        this.next(val ? val : ContentDensityGlobalKeyword);
     }
 
     @Input()
@@ -18,7 +25,7 @@ export class ContentDensityDirective extends BehaviorSubject<ContentDensityMode>
         if (coerceBooleanProperty(val)) {
             this.next(ContentDensityMode.COMPACT);
         } else {
-            this.next(ContentDensityMode.GLOBAL);
+            this.next(ContentDensityGlobalKeyword);
         }
     }
 
@@ -27,7 +34,7 @@ export class ContentDensityDirective extends BehaviorSubject<ContentDensityMode>
         if (coerceBooleanProperty(val)) {
             this.next(ContentDensityMode.CONDENSED);
         } else {
-            this.next(ContentDensityMode.GLOBAL);
+            this.next(ContentDensityGlobalKeyword);
         }
     }
 
@@ -36,12 +43,12 @@ export class ContentDensityDirective extends BehaviorSubject<ContentDensityMode>
         if (coerceBooleanProperty(val)) {
             this.next(ContentDensityMode.COZY);
         } else {
-            this.next(ContentDensityMode.GLOBAL);
+            this.next(ContentDensityGlobalKeyword);
         }
     }
 
     constructor() {
-        super(ContentDensityMode.GLOBAL);
+        super(ContentDensityGlobalKeyword);
     }
 
     ngOnDestroy(): void {
