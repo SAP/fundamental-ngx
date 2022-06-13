@@ -1,4 +1,12 @@
 
+## [0.35.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.10...v0.35.0-rc.11) (2022-06-13)
+
+
+### Features
+
+* **core:** ability to optionally apply table-text directive in table ([#8192](https://github.com/SAP/fundamental-ngx/issues/8192)) ([af98200](https://github.com/SAP/fundamental-ngx/commit/af9820055e643a7eeeaca49656f35d5161e69edf))
+* **platform:** menu - ability to disable opening by arrow keys ([#8169](https://github.com/SAP/fundamental-ngx/issues/8169)) ([ebc1abf](https://github.com/SAP/fundamental-ngx/commit/ebc1abffc758382d7a8323b0dfea222a4f756381))
+
 ## [0.35.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.9...v0.35.0-rc.10) (2022-06-13)
 
 
