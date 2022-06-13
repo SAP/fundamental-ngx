@@ -13,7 +13,6 @@ export function contentDensityConsumer(providedConfiguration: {
     supportedContentDensity?: ContentDensityMode[];
     defaultContentDensity?: ContentDensityMode;
     applyMode?: boolean;
-    enforceMode?: boolean;
 }): Provider {
     const configuration = { ...defaultContentDensityConsumerConfigs, ...providedConfiguration };
 

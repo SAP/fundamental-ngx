@@ -4,6 +4,5 @@ export const defaultContentDensityConsumerConfigs = {
     modifiers: {},
     supportedContentDensity: [ContentDensityMode.COMPACT, ContentDensityMode.COZY, ContentDensityMode.CONDENSED],
     defaultContentDensity: ContentDensityMode.COZY,
-    applyMode: true,
-    enforceMode: false
+    applyMode: true
 };
