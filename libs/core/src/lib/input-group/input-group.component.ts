@@ -14,7 +14,6 @@ import {
     OnInit,
     Optional,
     AfterViewInit,
-    Inject,
     ViewChild,
     isDevMode
 } from '@angular/core';
