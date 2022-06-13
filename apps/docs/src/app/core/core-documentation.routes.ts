@@ -186,6 +186,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'content-density-2',
+                loadChildren: () =>
+                    import('./component-docs/content-density-2/content-density-docs.module').then(
+                        (m) => m.ContentDensityDocsModule
+                    )
+            },
+            {
                 path: 'grid-list',
                 loadChildren: () =>
                     import('./component-docs/grid-list/grid-list-docs.module').then((m) => m.GridListDocsModule)
