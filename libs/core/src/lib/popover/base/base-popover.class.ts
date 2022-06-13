@@ -42,10 +42,24 @@ export class BasePopoverClass {
     @Input()
     placement: Placement | null = null;
 
-    /** The trigger events that will open/close the popover.
-     *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
+    /**
+     * The trigger events that will open/close the popover.
+     * Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp) or a config object for the corresponding event.
+     * Using the config object allows to specify whether an event should apply both for open and close actions or only some of them.
+     *
+     * Consider the following value for `triggers`:
+     * ```
+     * [
+     *  'click', // basically it's an alias for "{ trigger: 'click', openAction: true, closeAction: true }"
+     *  { trigger: 'mouseenter', openAction: true, closeAction: false }, // "mouseenter" will only open the popover
+     *  { trigger: 'mouseleave', openAction: false, closeAction: true } // "mouseleave" will only close the popover
+     * ]
+     * ```
+     *
+     * @default ['click']
+     */
     @Input()
-    triggers: string[] = ['click'];
+    triggers: (string | TriggerConfig)[] = ['click'];
 
     /** Whether the popover is open. Can be used through two-way binding. */
     @Input()
@@ -117,4 +131,14 @@ export class BasePopoverClass {
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+}
+
+/**
+ * Config for the trigger event, which allows to specify
+ * whether an event should apply both for open and close actions or only some of them
+ */
+export interface TriggerConfig {
+    trigger: string;
+    openAction: boolean;
+    closeAction: boolean;
 }

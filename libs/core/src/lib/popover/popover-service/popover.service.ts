@@ -62,9 +62,6 @@ export class PopoverService extends BasePopoverClass {
     /** @hidden */
     private _templateData: Nullable<PopoverTemplate>;
 
-    /** @hidden */
-    private _prevTrigger: string;
-
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
@@ -170,11 +167,11 @@ export class PopoverService extends BasePopoverClass {
     }
 
     /** Toggles the popover open state */
-    toggle(): void {
+    toggle(openAction = true, closeAction = true): void {
         if (this.isOpen) {
-            this.close();
+            closeAction && this.close();
         } else {
-            this.open();
+            openAction && this.open();
         }
     }
 
@@ -249,23 +246,16 @@ export class PopoverService extends BasePopoverClass {
 
         if (this.triggers?.length) {
             this.triggers.forEach((trigger) => {
+                const triggerName = typeof trigger === 'string' ? trigger : trigger.trigger;
                 this._eventRef.push(
-                    this._renderer.listen(this._triggerElement.nativeElement, trigger, () => {
-                        this._isToggle(trigger);
+                    this._renderer.listen(this._triggerElement.nativeElement, triggerName, () => {
+                        const closeAction = typeof trigger !== 'object' || !!trigger.closeAction;
+                        const openAction = typeof trigger !== 'object' || !!trigger.openAction;
+                        this.toggle(openAction, closeAction);
                     })
                 );
             });
         }
-    }
-
-    /** @hidden */
-    private _isToggle(trigger: string): void {
-        // prevent unexpected toggling when it triggers the same event
-        if (this._prevTrigger !== trigger || this.triggers?.length <= 1) {
-            this.toggle();
-        }
-
-        this._prevTrigger = trigger;
     }
 
     /** @hidden */
