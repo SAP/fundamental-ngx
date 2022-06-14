@@ -23,6 +23,30 @@
         Developers can also set default form field parameters by calling <code>withConfig()</code> method of the
         <code>PlatformFormGeneratorModule</code> during it's import.
     </p>
+
+    <h3>Form Generator Elements:</h3>
+    <p>
+        The table below shows a list of element types, attributes, and descriptions. All types have a built-in validator
+        function <code> validators: [Validators.required] </code> but you can choose to write your own validator
+        functions.
+    </p>
+    <table fd-table>
+        <thead fd-table-header>
+            <tr fd-table-row>
+                <th fd-table-cell><b>Type</b></th>
+                <th fd-table-cell><b>Attribute</b></th>
+                <th fd-table-cell><b>Description</b></th>
+            </tr>
+        </thead>
+        <tbody fd-table-body>
+            <tr fd-table-row *ngFor="let prop of Elementtype">
+                <td fd-table-cell>{{ prop[0] }}</td>
+                <td fd-table-cell>{{ prop[1] }}</td>
+                <td fd-table-cell>{{ prop[2] }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
     <h3>Inline help default global options</h3>
     <p>Inline help has default options as below:</p>
     <table fd-table>
