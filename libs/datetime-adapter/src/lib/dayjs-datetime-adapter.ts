@@ -240,7 +240,7 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
     }
 
     createDate(year: number, month: number, date: number): Dayjs {
-        const result = this._createDayjsDate(new Date(year, month, date));
+        const result = this._createDayjsDate(new Date(year, month - 1, date));
 
         if (!result.isValid()) {
             throw Error(`Invalid date "${date}" for month with index "${month}" and year "${year}".`);

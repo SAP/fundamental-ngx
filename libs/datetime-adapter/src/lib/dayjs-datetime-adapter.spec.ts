@@ -224,11 +224,11 @@ describe('DayjsDatetimeAdapter', () => {
     });
 
     it('should create Date', () => {
-        expect(adapter.createDate(2017, JAN, 1).format()).toEqual(dayjs(new Date(2017, JAN, 1)).format());
+        expect(adapter.createDate(2017, JAN + 1, 1).format()).toEqual(dayjs(new Date(2017, JAN, 1)).format());
     });
 
     it('should get year name for low year numbers', () => {
-        const createAndFormat = (year: number): string => adapter.getYearName(adapter.createDate(year, JAN, 1));
+        const createAndFormat = (year: number): string => adapter.getYearName(adapter.createDate(year, JAN + 1, 1));
 
         expect(createAndFormat(50)).toEqual('1950');
         expect(createAndFormat(99)).toEqual('1999');
@@ -236,15 +236,15 @@ describe('DayjsDatetimeAdapter', () => {
     });
 
     it('should create Date with low year number', () => {
-        expect(adapter.createDate(-1, JAN, 1).year()).toBe(-1);
-        expect(adapter.createDate(0, JAN, 1).year()).toBe(1900);
-        expect(adapter.createDate(50, JAN, 1).year()).toBe(1950);
-        expect(adapter.createDate(99, JAN, 1).year()).toBe(1999);
-        expect(adapter.createDate(100, JAN, 1).year()).toBe(100);
+        expect(adapter.createDate(-1, JAN + 1, 1).year()).toBe(-1);
+        expect(adapter.createDate(0, JAN + 1, 1).year()).toBe(1900);
+        expect(adapter.createDate(50, JAN + 1, 1).year()).toBe(1950);
+        expect(adapter.createDate(99, JAN + 1, 1).year()).toBe(1999);
+        expect(adapter.createDate(100, JAN + 1, 1).year()).toBe(100);
     });
 
     it('should format Date with low year number', () => {
-        const createAndFormat = (year: number): string => adapter.format(adapter.createDate(year, JAN, 1), 'L');
+        const createAndFormat = (year: number): string => adapter.format(adapter.createDate(year, JAN + 1, 1), 'L');
 
         expect(createAndFormat(50)).toBe('01/01/1950');
         expect(createAndFormat(99)).toBe('01/01/1999');

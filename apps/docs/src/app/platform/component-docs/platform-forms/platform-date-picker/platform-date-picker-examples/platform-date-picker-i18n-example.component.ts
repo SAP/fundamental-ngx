@@ -1,8 +1,9 @@
 import { Component, Injectable, LOCALE_ID } from '@angular/core';
 
 import { CalendarI18nLabels } from '@fundamental-ngx/core/calendar';
-import { FdDate, DatetimeAdapter, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
+import { DatetimeAdapter, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
 import { DayjsDatetimeAdapter, DAYJS_DATETIME_FORMATS } from '@fundamental-ngx/datetime-adapter';
+import dayjs from 'dayjs';
 
 // Dayjs locale data required for this example
 import 'dayjs/locale/fr';
@@ -65,10 +66,10 @@ const CUSTOM_DATETIME_FORMATS = {
     ]
 })
 export class PlatformDatePickeri18nExampleComponent {
-    date = FdDate.getNow();
+    date = dayjs();
     locale = 'fr';
 
-    constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {}
+    constructor(private datetimeAdapter: DatetimeAdapter<dayjs.Dayjs>) {}
 
     setLocale(locale: string): void {
         this.locale = locale;
