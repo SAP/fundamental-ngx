@@ -549,7 +549,7 @@ export class TimePickerComponent<D>
             this._inputTimeValue = '';
             this._isInvalidTimeInput = !this.allowNull;
         } else {
-            this.time = time;
+            this.time = this._dateTimeAdapter.parse(time, this.getParseFormat());
             this._inputTimeValue = this._getFormattedTime(time);
             this._isInvalidTimeInput = !this._dateTimeAdapter.isValid(time);
         }

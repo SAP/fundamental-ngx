@@ -48,6 +48,7 @@ describe('Date picker suite', () => {
         buttonFirstMonth,
         filterCalendarValue,
         dayInCalendarButtonByValue,
+        monthInCalendarByValue,
         yearInCalendarByValue
     } = datePickerPage;
 
@@ -211,6 +212,12 @@ describe('Date picker suite', () => {
 
     it('verify internationalization of Date Picker', () => {
         click(buttonDatePicker, 13);
+        click(buttonSelectYear);
+        waitForElDisplayed(calendarYearsSection);
+        click(yearInCalendarByValue(year2025));
+        click(buttonSelectMonth);
+        waitForElDisplayed(filterCalendarValue('month'));
+        click(monthInCalendarByValue(1));
         click(dayInCalendarButtonByValue('1'));
         expect(getValue(inputDatePicker, 13)).toEqual(date11);
         click(buttonGerman);

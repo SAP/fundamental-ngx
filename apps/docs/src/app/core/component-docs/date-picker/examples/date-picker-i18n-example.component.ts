@@ -1,12 +1,7 @@
 import { Component, Injectable, LOCALE_ID } from '@angular/core';
-import {
-    FdDate,
-    DatetimeAdapter,
-    FdDatetimeAdapter,
-    DATE_TIME_FORMATS,
-    FD_DATETIME_FORMATS
-} from '@fundamental-ngx/core/datetime';
+import { FdDate, DatetimeAdapter, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
 import { CalendarI18nLabels } from '@fundamental-ngx/core/calendar';
+import { DayjsDatetimeAdapter, DAYJS_DATETIME_FORMATS } from '@fundamental-ngx/datetime-adapter';
 
 // Translated aria labels.
 // Please note these labels should be translated for each locale separately
@@ -25,6 +20,19 @@ export class CustomI18nLabels extends CalendarI18nLabels {
     nextMonthLabel = 'Mois suivant';
 }
 
+// using custom date format to better demonstrate i18n capabilities
+const CUSTOM_DATETIME_FORMATS = {
+    ...DAYJS_DATETIME_FORMATS,
+    parse: {
+        ...DAYJS_DATETIME_FORMATS.parse,
+        dateInput: 'YYYY MMMM DD'
+    },
+    display: {
+        ...DAYJS_DATETIME_FORMATS.parse,
+        dateInput: 'YYYY MMMM DD'
+    }
+};
+
 @Component({
     selector: 'fd-datepicker-i18n-example',
     template: `
@@ -41,6 +49,7 @@ export class CustomI18nLabels extends CalendarI18nLabels {
         </fd-segmented-button>
         <br />
         <fd-date-picker [(ngModel)]="date" [startingDayOfWeek]="1"></fd-date-picker>
+        <p>Selected: {{ date }}</p>
     `,
 
     // Note that this can be provided in the root of your application.
@@ -48,15 +57,16 @@ export class CustomI18nLabels extends CalendarI18nLabels {
         { provide: LOCALE_ID, useValue: 'fr' },
         {
             provide: DatetimeAdapter,
-            useClass: FdDatetimeAdapter
-        },
-        {
-            provide: DATE_TIME_FORMATS,
-            useValue: FD_DATETIME_FORMATS
+            useClass: DayjsDatetimeAdapter,
+            deps: [LOCALE_ID]
         },
         {
             provide: CalendarI18nLabels,
             useClass: CustomI18nLabels
+        },
+        {
+            provide: DATE_TIME_FORMATS,
+            useValue: CUSTOM_DATETIME_FORMATS
         }
     ]
 })

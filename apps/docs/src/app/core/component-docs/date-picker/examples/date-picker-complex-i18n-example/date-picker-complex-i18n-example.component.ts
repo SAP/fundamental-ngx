@@ -1,12 +1,12 @@
 import { Component, LOCALE_ID, ViewChild } from '@angular/core';
 
-// Moment locale data required for this example
-import 'moment/locale/es';
-import 'moment/locale/en-gb';
-import 'moment/locale/de';
-import 'moment/locale/fr';
-import 'moment/locale/bg';
-import 'moment/locale/pl';
+// Dayjs locale data required for this example
+import 'dayjs/locale/es';
+import 'dayjs/locale/en-gb';
+import 'dayjs/locale/de';
+import 'dayjs/locale/fr';
+import 'dayjs/locale/bg';
+import 'dayjs/locale/pl';
 import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
 

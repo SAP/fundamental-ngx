@@ -1,13 +1,14 @@
 import { Component, Injectable, LOCALE_ID } from '@angular/core';
 
 import { CalendarI18nLabels } from '@fundamental-ngx/core/calendar';
-import {
-    FdDate,
-    DatetimeAdapter,
-    FdDatetimeAdapter,
-    DATE_TIME_FORMATS,
-    FD_DATETIME_FORMATS
-} from '@fundamental-ngx/core/datetime';
+import { DatetimeAdapter, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
+import { DayjsDatetimeAdapter, DAYJS_DATETIME_FORMATS } from '@fundamental-ngx/datetime-adapter';
+import dayjs from 'dayjs';
+
+// Dayjs locale data required for this example
+import 'dayjs/locale/fr';
+import 'dayjs/locale/de';
+import 'dayjs/locale/bg';
 
 // Translated aria labels.
 // Please note these labels should be translated for each locale separately
@@ -26,6 +27,19 @@ export class CustomI18nLabels extends CalendarI18nLabels {
     nextMonthLabel = 'Mois suivant';
 }
 
+// using custom date format to better demonstrate i18n capabilities
+const CUSTOM_DATETIME_FORMATS = {
+    ...DAYJS_DATETIME_FORMATS,
+    parse: {
+        ...DAYJS_DATETIME_FORMATS.parse,
+        dateInput: 'YYYY MMMM DD'
+    },
+    display: {
+        ...DAYJS_DATETIME_FORMATS.parse,
+        dateInput: 'YYYY MMMM DD'
+    }
+};
+
 @Component({
     selector: 'fdp-platform-date-picker-i18n-example',
     templateUrl: './platform-date-picker-i18n-example.component.html',
@@ -38,7 +52,8 @@ export class CustomI18nLabels extends CalendarI18nLabels {
         { provide: LOCALE_ID, useValue: 'fr' },
         {
             provide: DatetimeAdapter,
-            useClass: FdDatetimeAdapter
+            useClass: DayjsDatetimeAdapter,
+            deps: [LOCALE_ID]
         },
         {
             provide: CalendarI18nLabels,
@@ -46,15 +61,15 @@ export class CustomI18nLabels extends CalendarI18nLabels {
         },
         {
             provide: DATE_TIME_FORMATS,
-            useValue: FD_DATETIME_FORMATS
+            useValue: CUSTOM_DATETIME_FORMATS
         }
     ]
 })
 export class PlatformDatePickeri18nExampleComponent {
-    date = FdDate.getNow();
+    date = dayjs();
     locale = 'fr';
 
-    constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {}
+    constructor(private datetimeAdapter: DatetimeAdapter<dayjs.Dayjs>) {}
 
     setLocale(locale: string): void {
         this.locale = locale;
