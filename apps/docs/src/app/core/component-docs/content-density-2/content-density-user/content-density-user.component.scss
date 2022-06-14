@@ -1,23 +1,27 @@
 .example-component {
     display: block;
-    padding: 10px 15px;
+    padding: 15px;
     border: 1px solid var(--sapNegativeColor);
+    border-radius: var(--sapTile_BorderCornerRadius);
     background-color: var(--sapBaseColor);
+    font-size: var(--sapFontSize);
     color: var(--sapTextColor);
-    margin-bottom: 10px;
+    margin: 10px 0;
+    position: relative;
 
-    &:hover {
-        background-color: var(--sapHighlightColor) !important;
-        > .example-component {
-            background-color: var(--sapBaseColor);
-        }
+    &__object-status {
+        position: absolute;
+        top: -5px;
+        right: 5px;
     }
 
     &--compact {
-        padding: 7px 12px;
+        padding: 12px;
+        font-size: var(--sapFontSmallSize);
     }
 
     &--condensed {
-        padding: 5px 7px;
+        padding: 7px;
+        font-size: var(--sapFontSmallSize);
     }
 }

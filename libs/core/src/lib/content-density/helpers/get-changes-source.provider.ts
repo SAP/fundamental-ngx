@@ -1,11 +1,6 @@
-import { map, Observable, of, switchMap } from 'rxjs';
+import { Observable, of, switchMap } from 'rxjs';
 import { ContentDensityControllerService } from '../services/content-density-controller.service';
-import {
-    ContentDensityDefaultKeyword,
-    ContentDensityGlobalKeyword,
-    ContentDensityMode,
-    LocalContentDensityMode
-} from '../content-density.types';
+import { ContentDensityGlobalKeyword, ContentDensityMode, LocalContentDensityMode } from '../content-density.types';
 
 export const getChangesSource$ = (params: {
     defaultContentDensity: ContentDensityMode;
@@ -13,18 +8,10 @@ export const getChangesSource$ = (params: {
     contentDensityService?: ContentDensityControllerService;
 }): Observable<ContentDensityMode> => {
     const serviceValue$: Observable<ContentDensityMode> = params.contentDensityService
-        ? params.contentDensityService
-              .contentDensityListener()
-              .pipe(
-                  map((density) => (density === ContentDensityDefaultKeyword ? params.defaultContentDensity : density))
-              )
+        ? params.contentDensityService.contentDensityListener()
         : of(params.defaultContentDensity);
-    let changesSource$: Observable<LocalContentDensityMode> = of(params.defaultContentDensity);
-    if (params.contentDensityDirective) {
-        changesSource$ = params.contentDensityDirective;
-    } else if (params.contentDensityService) {
-        changesSource$ = serviceValue$;
-    }
+    const changesSource$ = params.contentDensityDirective ? params.contentDensityDirective : serviceValue$;
+
     return changesSource$.pipe(
         switchMap((mode: LocalContentDensityMode) => {
             if (mode !== ContentDensityGlobalKeyword) {

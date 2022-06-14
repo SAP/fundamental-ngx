@@ -8,7 +8,12 @@ import {
 
 @Component({
     selector: 'fundamental-ngx-content-density-user',
-    template: '<ng-content></ng-content> - {{ _contentDensityConsumer | async }}',
+    template: `
+        <ng-content></ng-content>
+        <span fd-object-status class="example-component__object-status" [inverted]="true">
+            {{ _contentDensityConsumer | async }}
+        </span>
+    `,
     styleUrls: ['./content-density-user.component.scss'],
     host: {
         class: 'example-component'
@@ -20,7 +25,11 @@ import {
                 [ContentDensityMode.COMPACT]: 'example-component--compact',
                 [ContentDensityMode.CONDENSED]: 'example-component--condensed'
             },
-            supportedContentDensity: [ContentDensityMode.COMPACT, ContentDensityMode.COZY],
+            supportedContentDensity: [
+                ContentDensityMode.COMPACT,
+                ContentDensityMode.COZY,
+                ContentDensityMode.CONDENSED
+            ],
             defaultContentDensity: ContentDensityMode.COMPACT
         })
     ],
