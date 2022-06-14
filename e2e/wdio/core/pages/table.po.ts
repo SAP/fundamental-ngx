@@ -38,8 +38,9 @@ export class TablePo extends CoreBaseComponentPo {
     inputGroup = ' .fd-input-group__input';
     dialogValue = '.fd-list__item.ng-star-inserted .fd-list__title';
     tableInner = '.fd-table__inner';
-    columnSortingInput = '.fd-popover__popper input';
-    listItem = '.fd-menu__item';
+    columnSortingInput = '#fd-input-group-input-id-2';
+    sortAscending = 'button[title="Sort ascending"]';
+    sortDescending = 'button[title="Sort descending"]';
     selectedPage = this.paginationLink + '.is-selected';
     tableCellWOHeader = ' .fd-table__cell:not(.cdk-header-cell)';
 

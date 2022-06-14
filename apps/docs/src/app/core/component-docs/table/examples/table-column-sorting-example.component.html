@@ -1,14 +1,37 @@
+<fd-toolbar>
+    <label fd-toolbar-label> Filter and sort for table elements </label>
+    <fd-toolbar-spacer></fd-toolbar-spacer>
+    <fd-input-group
+        glyph="decline"
+        glyphAriaLabel="Clear"
+        placeholder="Search"
+        [button]="true"
+        [compact]="true"
+        [disabled]="false"
+        [(ngModel)]="filterVal"
+    >
+    </fd-input-group>
+    <button
+        ariaLabel="Sort ascending"
+        title="Sort ascending"
+        fd-button
+        [compact]="true"
+        glyph="sort-ascending"
+        (click)="changeSort(true)"
+    ></button>
+    <button
+        ariaLabel="Sort descending"
+        title="Sort descending"
+        fd-button
+        [compact]="true"
+        glyph="sort-descending"
+        (click)="changeSort(false)"
+    ></button>
+</fd-toolbar>
 <table fd-table>
     <thead fd-table-header>
         <tr fd-table-row>
-            <th
-                fd-table-cell
-                tabindex="0"
-                [fdMenuTrigger]="menu"
-                [activable]="true"
-                [hoverable]="true"
-                (keydown.space)="$event.preventDefault()"
-            >
+            <th fd-table-cell>
                 <span class="fd-table__inner">
                     Column 1
                     <div class="fd-table__column-header-icons">
@@ -36,34 +59,3 @@
         </tr>
     </tbody>
 </table>
-
-<fd-menu #menu [compact]="true">
-    <li fd-menu-item (click)="sortColumn1(true)">
-        <a fd-menu-interactive>
-            <fd-menu-addon position="before" glyph="sort-ascending"></fd-menu-addon>
-            <span fd-menu-title>Sort Ascending</span>
-        </a>
-    </li>
-    <li fd-menu-item (click)="sortColumn1(false)">
-        <a fd-menu-interactive>
-            <fd-menu-addon position="before" glyph="sort-descending"></fd-menu-addon>
-            <span fd-menu-title>Sort Descending</span>
-        </a>
-    </li>
-    <li fd-menu-item>
-        <a fd-menu-interactive>
-            <fd-menu-addon position="before" glyph="filter"></fd-menu-addon>
-            <div fd-form-item [horizontal]="true" (click)="$event.stopPropagation()">
-                <label fd-form-label for="input-1">Filter</label>
-                <input
-                    fd-form-control
-                    [compact]="true"
-                    id="input-1"
-                    (keyup)="inputKeyup($event)"
-                    [(ngModel)]="filterVal"
-                    style="min-width: 164px"
-                />
-            </div>
-        </a>
-    </li>
-</fd-menu>

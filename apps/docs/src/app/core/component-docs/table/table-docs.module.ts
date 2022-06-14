@@ -35,7 +35,6 @@ import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { PaginationModule } from '@fundamental-ngx/core/pagination';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
-import { MenuModule } from '@fundamental-ngx/core/menu';
 
 const routes: Routes = [
     {
@@ -64,8 +63,7 @@ const routes: Routes = [
         SharedDocumentationPageModule,
         RouterModule.forChild(routes),
         SharedDocumentationModule,
-        BusyIndicatorModule,
-        MenuModule
+        BusyIndicatorModule
     ],
     exports: [RouterModule],
     declarations: [
