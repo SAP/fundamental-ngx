@@ -149,6 +149,9 @@ export class TokenizerComponent
     _tokenizerHasFocus = false;
 
     /** @hidden */
+    _showOverflowPopover = true;
+
+    /** @hidden */
     private _contentDensitySubscription = new Subscription();
 
     /** @hidden */
