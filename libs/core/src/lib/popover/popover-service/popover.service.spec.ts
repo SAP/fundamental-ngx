@@ -288,11 +288,89 @@ describe('PopoverService', () => {
     });
 
     it('should toggle open state on trigger event', () => {
-        componentInstance.triggers = ['mouseenter'];
+        componentInstance.triggers = ['mouseenter', 'keydown'];
         service.initialise(componentInstance.triggerRef, componentInstance, componentInstance.getPopoverTemplateData());
-        const mouseoverEvent = new Event('mouseenter');
-        spyOn(service, 'toggle');
-        componentInstance.triggerRef.nativeElement.dispatchEvent(mouseoverEvent);
-        expect(service.toggle).toHaveBeenCalled();
+        spyOn(service, 'toggle').and.callThrough();
+        spyOn(service, 'open').and.callThrough();
+        spyOn(service, 'close').and.callThrough();
+        // should trigger the toggling
+        componentInstance.triggerRef.nativeElement.dispatchEvent(new Event('mouseenter'));
+        expect(service.toggle).toHaveBeenCalledTimes(1);
+        // should work fine with subsequent events
+        componentInstance.triggerRef.nativeElement.dispatchEvent(new Event('mouseenter'));
+        expect(service.toggle).toHaveBeenCalledTimes(2);
+        // should ignore irrelevant events
+        componentInstance.triggerRef.nativeElement.dispatchEvent(new Event('click'));
+        expect(service.toggle).toHaveBeenCalledTimes(2);
+        // should work fine with all specified triggers
+        componentInstance.triggerRef.nativeElement.dispatchEvent(new Event('keydown'));
+        expect(service.toggle).toHaveBeenCalledTimes(3);
+
+        componentInstance.triggerRef.nativeElement.dispatchEvent(new Event('keydown'));
+        expect(service.toggle).toHaveBeenCalledTimes(4);
+
+        expect(service.open).toHaveBeenCalledTimes(2);
+        // "close" is being invoked twice for each action
+        expect(service.close).toHaveBeenCalledTimes(4);
+    });
+
+    it('should support trigger config', () => {
+        componentInstance.triggers = [
+            'mouseenter',
+            { trigger: 'click', closeAction: false, openAction: true },
+            { trigger: 'mouseleave', closeAction: true, openAction: false }
+        ];
+        service.initialise(componentInstance.triggerRef, componentInstance, componentInstance.getPopoverTemplateData());
+        spyOn(service, 'toggle').and.callThrough();
+        spyOn(service, 'open').and.callThrough();
+        spyOn(service, 'close').and.callThrough();
+
+        expect(service.isOpen).toBe(false);
+        componentInstance.triggerRef.nativeElement.dispatchEvent(new Event('click'));
+        expect(service.toggle).toHaveBeenCalledTimes(1);
+        expect(service.open).toHaveBeenCalledTimes(1);
+        expect(service.close).toHaveBeenCalledTimes(0 * 2);
+
+        expect(service.isOpen).toBe(true);
+        componentInstance.triggerRef.nativeElement.dispatchEvent(new Event('click'));
+        expect(service.toggle).toHaveBeenCalledTimes(2);
+        expect(service.open).toHaveBeenCalledTimes(1);
+        expect(service.close).toHaveBeenCalledTimes(0 * 2);
+
+        expect(service.isOpen).toBe(true);
+        componentInstance.triggerRef.nativeElement.dispatchEvent(new Event('click'));
+        expect(service.toggle).toHaveBeenCalledTimes(3);
+        expect(service.open).toHaveBeenCalledTimes(1);
+        expect(service.close).toHaveBeenCalledTimes(0 * 2);
+
+        expect(service.isOpen).toBe(true);
+        componentInstance.triggerRef.nativeElement.dispatchEvent(new Event('mouseenter'));
+        expect(service.toggle).toHaveBeenCalledTimes(4);
+        expect(service.open).toHaveBeenCalledTimes(1);
+        expect(service.close).toHaveBeenCalledTimes(1 * 2);
+
+        expect(service.isOpen).toBe(false);
+        componentInstance.triggerRef.nativeElement.dispatchEvent(new Event('mouseenter'));
+        expect(service.toggle).toHaveBeenCalledTimes(5);
+        expect(service.open).toHaveBeenCalledTimes(2);
+        expect(service.close).toHaveBeenCalledTimes(1 * 2);
+
+        expect(service.isOpen).toBe(true);
+        componentInstance.triggerRef.nativeElement.dispatchEvent(new Event('mouseleave'));
+        expect(service.toggle).toHaveBeenCalledTimes(6);
+        expect(service.open).toHaveBeenCalledTimes(2);
+        expect(service.close).toHaveBeenCalledTimes(2 * 2);
+
+        expect(service.isOpen).toBe(false);
+        componentInstance.triggerRef.nativeElement.dispatchEvent(new Event('mouseleave'));
+        expect(service.toggle).toHaveBeenCalledTimes(7);
+        expect(service.open).toHaveBeenCalledTimes(2);
+        expect(service.close).toHaveBeenCalledTimes(2 * 2);
+
+        expect(service.isOpen).toBe(false);
+        componentInstance.triggerRef.nativeElement.dispatchEvent(new Event('mouseleave'));
+        expect(service.toggle).toHaveBeenCalledTimes(8);
+        expect(service.open).toHaveBeenCalledTimes(2);
+        expect(service.close).toHaveBeenCalledTimes(2 * 2);
     });
 });
