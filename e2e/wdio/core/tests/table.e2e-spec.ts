@@ -64,7 +64,8 @@ describe('Table test suite', () => {
         tableInner,
         columnSortingInput,
         tableColumnSortingExample,
-        listItem,
+        sortAscending,
+        sortDescending,
         markAllCheckboxesFF,
         clickableTableRowFF,
         selectedPage,
@@ -214,7 +215,7 @@ describe('Table test suite', () => {
         it('should check sort ascending and descending work correctly', () => {
             scrollIntoView(tableInner);
             click(tableInner);
-            click(listItem, 1);
+            click(sortDescending);
             saveElementScreenshot(
                 tableColumnSortingExample + table,
                 'table-descending-example-' + getImageTagBrowserPlatform(),
@@ -229,7 +230,7 @@ describe('Table test suite', () => {
             ).toBeLessThan(5, `element item state mismatch`);
 
             click(tableInner);
-            click(listItem);
+            click(sortAscending);
             saveElementScreenshot(
                 tableColumnSortingExample + table,
                 'table-ascending-example-' + getImageTagBrowserPlatform(),
