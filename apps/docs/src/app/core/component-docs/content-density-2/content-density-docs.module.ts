@@ -10,7 +10,7 @@ import { SelectModule } from '@fundamental-ngx/core/select';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { DirectiveUsageExampleComponent } from './examples/directive-usage/directive-usage-example.component';
 import { ContentDensityUserComponent } from './content-density-user/content-density-user.component';
-import { ContentDensityUserTwoComponent } from './content-density-user-2/content-density-user.component';
+import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 
 const routes: Routes = [
     {
@@ -24,15 +24,20 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, SelectModule, ContentDensityModule],
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        SelectModule,
+        ContentDensityModule,
+        ObjectStatusModule
+    ],
     exports: [RouterModule],
     declarations: [
         ContentDensityDocsComponent,
         ContentDensityHeaderComponent,
         ContentDensityExampleComponent,
         DirectiveUsageExampleComponent,
-        ContentDensityUserComponent,
-        ContentDensityUserTwoComponent
+        ContentDensityUserComponent
     ]
 })
 export class ContentDensityDocsModule {}

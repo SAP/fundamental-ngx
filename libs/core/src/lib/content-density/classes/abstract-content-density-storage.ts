@@ -1,8 +1,8 @@
-import { GlobalContentDensityMode } from '../content-density.types';
+import { ContentDensityMode } from '../content-density.types';
 import { Observable } from 'rxjs';
 
 export abstract class ContentDensityStorage {
-    abstract getContentDensity(): Observable<GlobalContentDensityMode>;
+    abstract getContentDensity(): Observable<ContentDensityMode>;
 
-    abstract setContentDensity(density: GlobalContentDensityMode): Observable<void>;
+    abstract setContentDensity(density: ContentDensityMode): Observable<void>;
 }
