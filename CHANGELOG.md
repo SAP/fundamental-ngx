@@ -1,4 +1,11 @@
 
+## [0.35.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.13...v0.35.0-rc.14) (2022-06-14)
+
+
+### Bug Fixes
+
+* **core:** popover - fix subsequent openings triggered by same event ([#8224](https://github.com/SAP/fundamental-ngx/issues/8224)) ([fd765f7](https://github.com/SAP/fundamental-ngx/commit/fd765f735a29b830f5f9541475a522dcdac98de8))
+
 ## [0.35.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.12...v0.35.0-rc.13) (2022-06-14)
 
 ## [0.35.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.11...v0.35.0-rc.12) (2022-06-13)
