@@ -1,4 +1,11 @@
 
+## [0.35.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.16...v0.35.0-rc.17) (2022-06-14)
+
+
+### Bug Fixes
+
+* **core,platform:** date & time pickers - fix i18n ([#7745](https://github.com/SAP/fundamental-ngx/issues/7745)) ([65ece92](https://github.com/SAP/fundamental-ngx/commit/65ece92fd62c63ff65a14ff72aaf16ef679956d1))
+
 ## [0.35.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.15...v0.35.0-rc.16) (2022-06-14)
 
 ## [0.35.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.14...v0.35.0-rc.15) (2022-06-14)
