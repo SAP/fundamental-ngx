@@ -1,4 +1,11 @@
 
+## [0.35.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.14...v0.35.0-rc.15) (2022-06-14)
+
+
+### Bug Fixes
+
+* **core:** fixed busy indicator overlay background color ([#8225](https://github.com/SAP/fundamental-ngx/issues/8225)) ([f7d87d3](https://github.com/SAP/fundamental-ngx/commit/f7d87d3b8b43b362ef38f19e294e48f3197cd351))
+
 ## [0.35.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.13...v0.35.0-rc.14) (2022-06-14)
 
 
