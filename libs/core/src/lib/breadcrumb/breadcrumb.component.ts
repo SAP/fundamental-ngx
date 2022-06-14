@@ -1,4 +1,5 @@
 import {
+    AfterContentInit,
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -9,7 +10,6 @@ import {
     forwardRef,
     HostListener,
     Input,
-    Inject,
     NgZone,
     OnDestroy,
     OnInit,
@@ -23,13 +23,9 @@ import { BehaviorSubject, firstValueFrom, map, startWith, Subscription, tap } fr
 import { TAB } from '@angular/cdk/keycodes';
 import { FocusKeyManager } from '@angular/cdk/a11y';
 
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { ContentDensityService, ResizeObserverService, RtlService, KeyUtil } from '@fundamental-ngx/core/utils';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { Placement } from '@fundamental-ngx/core/shared';
-import { DYNAMIC_PAGE_HEADER_COMPONENT, DynamicPageHeaderInterface } from '@fundamental-ngx/core/utils';
-import { DynamicPageService } from '@fundamental-ngx/core/dynamic-page';
-import { ContentDensityService, ResizeObserverService, RtlService } from '@fundamental-ngx/core/utils';
-import { BreadcrumbItemDirective } from './breadcrumb-item.directive';
 import { BreadcrumbItemComponent } from './breadcrumb-item.component';
 
 /**
@@ -56,7 +52,7 @@ import { BreadcrumbItemComponent } from './breadcrumb-item.component';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
+export class BreadcrumbComponent implements AfterViewInit, AfterContentInit, OnInit, OnDestroy {
     /** Whenever links wrapped inside overflow should be displayed in compact mode  */
     @Input()
     compact?: boolean;
@@ -107,7 +103,7 @@ export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    private _keyManager: FocusKeyManager<BreadcrumbItemDirective>;
+    private _keyManager: FocusKeyManager<BreadcrumbItemComponent>;
 
     /** @hidden */
     private _itemToSize = new Map<BreadcrumbItemComponent, number>();
@@ -116,8 +112,6 @@ export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
         public elementRef: ElementRef<Element>,
         @Optional() private _rtlService: RtlService,
         @Optional() private _contentDensityService: ContentDensityService,
-        @Optional() private _dynamicPageService: DynamicPageService,
-        @Optional() @Inject(DYNAMIC_PAGE_HEADER_COMPONENT) private _dynamicPageHeader: DynamicPageHeaderInterface,
         private _cdRef: ChangeDetectorRef,
         private _resizeObserver: ResizeObserverService,
         private _ngZone: NgZone
@@ -128,9 +122,9 @@ export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
         this.onResize();
 
         if (this.arrowNavigation) {
-            this._keyManager = new FocusKeyManager<BreadcrumbItemDirective>(this.breadcrumbItems)
+            this._keyManager = new FocusKeyManager<BreadcrumbItemComponent>(this.breadcrumbItems)
                 .withWrap(false)
-                .skipPredicate((item) => !(item.breadcrumbLink || item.href))
+                .skipPredicate((item) => !item.breadcrumbLink)
                 .withHorizontalOrientation(this._isRtl ? 'rtl' : 'ltr');
 
             this._subscriptions.add(
@@ -161,6 +155,7 @@ export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
         }
     }
 
+    /** @hidden */
     ngAfterViewInit(): void {
         this._subscriptions.add(
             this.breadcrumbItems.changes

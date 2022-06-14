@@ -1,4 +1,5 @@
 import { Component, ContentChild, ElementRef, forwardRef, Renderer2 } from '@angular/core';
+import { FocusableOption } from '@angular/cdk/a11y';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 
 /**
@@ -17,7 +18,7 @@ import { LinkComponent } from '@fundamental-ngx/core/link';
         class: 'fd-breadcrumb__item'
     }
 })
-export class BreadcrumbItemComponent {
+export class BreadcrumbItemComponent implements FocusableOption {
     /** @hidden */
     get elementRef(): ElementRef<HTMLElement> {
         return this._elementRef;
@@ -39,6 +40,13 @@ export class BreadcrumbItemComponent {
         return (
             !!this.breadcrumbLink?.elementRef().nativeElement.getAttribute('href') || !!this.breadcrumbLink.routerLink
         );
+    }
+
+    /** @hidden */
+    focus(): void {
+        if (this.needsClickProxy) {
+            this.breadcrumbLink.elementRef().nativeElement.focus();
+        }
     }
 
     show = (): void => this.renderer2.setStyle(this._elementRef.nativeElement, 'display', 'inline-block');
