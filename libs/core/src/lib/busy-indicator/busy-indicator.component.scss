@@ -37,7 +37,8 @@
         left: 0;
         right: 0;
         z-index: 1;
-        background-color: rgba(247, 247, 247, 0.72);
+        background-color: var(--sapBaseColor);
+        opacity: 0.72;
 
         &--transparent {
             background-color: transparent;
