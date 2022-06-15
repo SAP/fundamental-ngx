@@ -34,7 +34,11 @@ import { MenuMobileModule } from './menu-mobile/menu-mobile.module';
 import { MenuService } from './services/menu.service';
 import { MENU_COMPONENT, MenuInterface } from './menu.interface';
 import { MenuItemComponent } from './menu-item/menu-item.component';
-import { ContentDensityConsumer, contentDensityConsumer } from '@fundamental-ngx/core/content-density';
+import {
+    ContentDensityConsumer,
+    contentDensityConsumer,
+    ContentDensityMode
+} from '@fundamental-ngx/core/content-density';
 
 let menuUniqueId = 0;
 
@@ -47,7 +51,12 @@ let menuUniqueId = 0;
     styleUrls: ['menu.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [MenuService, PopoverService, DestroyedService, contentDensityConsumer({})]
+    providers: [
+        MenuService,
+        PopoverService,
+        DestroyedService,
+        contentDensityConsumer({ supportedContentDensity: [ContentDensityMode.COMPACT, ContentDensityMode.COZY] })
+    ]
 })
 export class MenuComponent
     extends BasePopoverClass
