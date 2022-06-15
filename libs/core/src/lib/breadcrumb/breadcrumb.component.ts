@@ -16,7 +16,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { BreadcrumbItemComponent } from './breadcrumb-item.component';
-import { ContentDensityService, ResizeObserverService, RtlService } from '@fundamental-ngx/core/utils';
+import { ResizeObserverService, RtlService } from '@fundamental-ngx/core/utils';
 import { BehaviorSubject, firstValueFrom, map, startWith, Subscription, tap } from 'rxjs';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { Placement } from '@fundamental-ngx/core/shared';
@@ -45,10 +45,6 @@ import { Placement } from '@fundamental-ngx/core/shared';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
-    /** Whenever links wrapped inside overflow should be displayed in compact mode  */
-    @Input()
-    compact?: boolean;
-
     /** @hidden */
     @ContentChildren(forwardRef(() => BreadcrumbItemComponent))
     breadcrumbItems: QueryList<BreadcrumbItemComponent>;
@@ -86,7 +82,6 @@ export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
     constructor(
         public elementRef: ElementRef<Element>,
         @Optional() private _rtlService: RtlService,
-        @Optional() private _contentDensityService: ContentDensityService,
         private _cdRef: ChangeDetectorRef,
         private _resizeObserver: ResizeObserverService,
         private _ngZone: NgZone
@@ -97,14 +92,6 @@ export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
         if (this._rtlService) {
             this._subscriptions.add(
                 this._rtlService.rtl.subscribe((value) => this.placement$.next(value ? 'bottom-end' : 'bottom-start'))
-            );
-        }
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                    this._cdRef.markForCheck();
-                })
             );
         }
     }

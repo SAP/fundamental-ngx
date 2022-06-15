@@ -9,7 +9,7 @@
         [attr.aria-labelledby]="ariaLabelledby"
         [attr.aria-label]="ariaLabel"
         role="menu"
-        [class.fd-menu--compact]="compact"
+        [class.fd-menu--compact]="_contentDensityConsumer.isCompact$ | async"
         [class.fd-menu--mobile]="mobile"
     >
         <ul role="none" class="fd-menu__list fd-menu__list--no-shadow">
