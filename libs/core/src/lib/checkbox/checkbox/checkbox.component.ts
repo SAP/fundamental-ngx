@@ -108,10 +108,6 @@ export class CheckboxComponent implements ControlValueAccessor, OnDestroy, FormI
     @Input()
     disabled: boolean;
 
-    /** Allows to minimize control to compact mode. */
-    @Input()
-    compact?: boolean;
-
     /** Enables controls third state. */
     @Input()
     tristate = false;

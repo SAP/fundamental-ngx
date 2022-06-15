@@ -1,10 +1,10 @@
-import { ComponentFixture, TestBed, tick, fakeAsync, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { Component, ViewChild } from '@angular/core';
 
 import { CheckboxComponent } from './checkbox.component';
 import { whenStable } from '@fundamental-ngx/core/tests';
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '@fundamental-ngx/core/utils';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 import { CheckboxModule } from '../checkbox.module';
 
 function getCheckboxInput(fixture: ComponentFixture<any>): any {
@@ -31,13 +31,11 @@ describe('CheckboxComponent', () => {
     let checkbox: CheckboxComponent;
     let hostComponent: TestCheckboxWrapperComponent;
     let fixture: ComponentFixture<TestCheckboxWrapperComponent>;
-
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 imports: [FormsModule, CheckboxModule],
-                declarations: [TestCheckboxWrapperComponent],
-                providers: [ContentDensityService]
+                declarations: [TestCheckboxWrapperComponent]
             }).compileComponents();
         })
     );
@@ -79,11 +77,6 @@ describe('CheckboxComponent', () => {
 
         await fixture.whenStable();
         expect(checkbox.isChecked).toBe(false);
-    });
-
-    it('should handle content density when compact input is not provided', () => {
-        checkbox.ngOnInit();
-        expect(checkbox.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 
     it('should be checked on click', async () => {
@@ -142,19 +135,6 @@ describe('CheckboxComponent', () => {
         expect(input.disabled).toBe(true);
         expect(hostComponent.value).toBe(false);
         expect(checkbox.checkboxValue).toBe(false);
-    });
-
-    it('should be compact', async () => {
-        checkbox.compact = true;
-
-        checkboxDetectChanges(checkbox);
-        await whenStable(fixture);
-
-        const input = getCheckboxInput(fixture);
-        const checkboxLabel = getCheckboxLabel(fixture);
-
-        expect(input).toHaveClass('fd-checkbox--compact');
-        expect(checkboxLabel).toHaveClass('fd-checkbox__label--compact');
     });
 
     it('should use custom values', async () => {
@@ -224,7 +204,7 @@ describe('CheckboxComponent', () => {
 });
 
 @Component({
-    template: ` <fd-checkbox [value]="value" (click)="onClicked()"></fd-checkbox> `
+    template: ` <fd-checkbox [value]="checked" (click)="onClicked()"></fd-checkbox> `
 })
 class TestCheckboxWrapper2Component {
     @ViewChild(CheckboxComponent) checkboxRef: CheckboxComponent;
