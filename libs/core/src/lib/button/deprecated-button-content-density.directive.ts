@@ -14,6 +14,5 @@ import { Directive, ElementRef, forwardRef } from '@angular/core';
 export class DeprecatedButtonContentDensityDirective extends DeprecatedCompactDirective {
     constructor(private elementRef: ElementRef) {
         super('[fd-button]');
-        console.log(elementRef.nativeElement);
     }
 }
