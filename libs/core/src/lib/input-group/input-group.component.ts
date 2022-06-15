@@ -24,7 +24,6 @@ import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/
 
 import { InputGroupAddOnDirective, InputGroupInputDirective } from './input-group-directives';
 import { InputGroupPlacement } from './types';
-import { ContentDensityConsumer } from '@fundamental-ngx/core/content-density';
 
 let addOnNonButtonRandomId = 0;
 let addOnButtonRandomId = 0;
@@ -64,6 +63,7 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
 
         this._inputTemplate = value;
     }
+
     get inputTemplate(): TemplateRef<any> {
         return this._inputTemplate;
     }
@@ -242,11 +242,7 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
     }
 
     /** @hidden */
-    constructor(
-        private readonly _elementRef: ElementRef,
-        private readonly _changeDetectorRef: ChangeDetectorRef,
-        readonly _contentDensityConsumer: ContentDensityConsumer
-    ) {}
+    constructor(private readonly _elementRef: ElementRef, private readonly _changeDetectorRef: ChangeDetectorRef) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
