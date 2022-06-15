@@ -18,3 +18,4 @@ export { CardKpiAnalyticsDirective } from './kpi/card-kpi-analytics.directive';
 export { CardKpiAnalyticsLabelDirective } from './kpi/card-kpi-analytics-label.directive';
 export { CardKpiAnalyticsContentDirective } from './kpi/card-kpi-analytics-content.directive';
 export * from './card-counter.directive';
+export * from './deprecated-card-content-density.directive';

@@ -3,16 +3,16 @@ import { Directive, forwardRef } from '@angular/core';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-button][compact]',
+    selector: 'fd-card[compact]',
     providers: [
         {
             provide: CONTENT_DENSITY_DIRECTIVE,
-            useExisting: forwardRef(() => DeprecatedButtonContentDensityDirective)
+            useExisting: forwardRef(() => DeprecatedCardContentDensityDirective)
         }
     ]
 })
-export class DeprecatedButtonContentDensityDirective extends DeprecatedCompactDirective {
+export class DeprecatedCardContentDensityDirective extends DeprecatedCompactDirective {
     constructor() {
-        super('[fd-button]');
+        super('fd-card');
     }
 }
