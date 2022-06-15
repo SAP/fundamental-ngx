@@ -4,7 +4,6 @@
             <button
                 #prevButton
                 fd-button
-                [compact]="compact"
                 fdType="transparent"
                 glyph="slim-arrow-left"
                 [attr.id]="_prevButtonId"
@@ -21,7 +20,6 @@
                 <button
                     fd-button
                     type="button"
-                    [compact]="compact"
                     fdType="transparent"
                     [attr.aria-labelledby]="_monthButtonLabelId + ' ' + _selectMonthButtonAriaLabelId"
                     [attr.data-fd-calendar-month]="currentlyDisplayed.month"
@@ -35,7 +33,6 @@
                 <button
                     fd-button
                     type="button"
-                    [compact]="compact"
                     fdType="transparent"
                     [attr.aria-labelledby]="_yearButtonLabelId + ' ' + _selectYearButtonAriaLabelId"
                     [attr.data-fd-calendar-year]="currentlyDisplayed.year"
@@ -49,7 +46,6 @@
             <div class="fd-calendar__action" aria-live="polite">
                 <button
                     fd-button
-                    [compact]="compact"
                     fdType="transparent"
                     [attr.aria-labelledby]="_yearsRangeButtonLabelId + ' ' + _selectYearsRangeButtonAriaLabelId"
                     (click)="_processViewChange('aggregatedYear', $event)"
@@ -62,7 +58,6 @@
         <div class="fd-calendar__action fd-calendar__action--arrow-right">
             <button
                 fd-button
-                [compact]="compact"
                 fdType="transparent"
                 glyph="slim-arrow-right"
                 [attr.id]="_nextButtonId"
