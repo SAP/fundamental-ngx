@@ -1,4 +1,11 @@
 
+## [0.35.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.18...v0.35.0-rc.19) (2022-06-15)
+
+
+### Bug Fixes
+
+* **core:** assign labels as aria-labelledby for corresponding controls inside fd-form-item ([#8223](https://github.com/SAP/fundamental-ngx/issues/8223)) ([bb15061](https://github.com/SAP/fundamental-ngx/commit/bb150610bb903749f275c5e258a0e817afa57e82))
+
 ## [0.35.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.17...v0.35.0-rc.18) (2022-06-14)
 
 ## [0.35.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.16...v0.35.0-rc.17) (2022-06-14)
