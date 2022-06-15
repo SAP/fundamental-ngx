@@ -13,8 +13,8 @@ import {
     OnDestroy,
     OnInit,
     Optional,
-    ViewChild,
     AfterViewInit,
+    ViewChild,
     isDevMode
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -23,6 +23,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
 
 import { InputGroupAddOnDirective, InputGroupInputDirective } from './input-group-directives';
 import { InputGroupPlacement } from './types';
@@ -49,12 +50,13 @@ let addOnInputRandomId = 0;
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => InputGroupComponent),
             multi: true
-        }
+        },
+        registerFormItemControl(InputGroupComponent)
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InputGroupComponent implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy {
+export class InputGroupComponent implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy, FormItemControl {
     /** @deprecated Input template, use fd-input-group-input directive instead. */
     @Input()
     set inputTemplate(value: TemplateRef<any>) {
@@ -150,9 +152,18 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, AfterV
     @Input()
     iconTitle: Nullable<string>;
 
+    /** @deprecated renamed to "ariaLabelledBy" */
+    @Input()
+    set ariaLabelledby(value: Nullable<string>) {
+        if (isDevMode()) {
+            console.warn('"ariaLabelledby" is deprecated. Use "ariaLabelledBy" instead');
+        }
+        this.ariaLabelledBy = value;
+    }
+
     /** the associated ids for the input aria-labelledby field */
     @Input()
-    ariaLabelledby: Nullable<string>;
+    ariaLabelledBy: Nullable<string>;
 
     /** Event emitted when the add-on button is clicked. */
     @Output()
@@ -227,7 +238,7 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, AfterV
      *  Calculate the correct ids for input aria-labelledby
      */
     get _inputAriaLabelledBy(): string {
-        let ariaLabelledByIds = this.ariaLabelledby ? this.ariaLabelledby + ' ' : '';
+        let ariaLabelledByIds = this.ariaLabelledBy ? this.ariaLabelledBy + ' ' : '';
 
         if (!this.button) {
             ariaLabelledByIds += this._addOnNonButtonId;

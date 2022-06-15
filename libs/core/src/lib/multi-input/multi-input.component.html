@@ -85,6 +85,8 @@
                     [formControl]="_searchTermCtrl"
                     [compact]="compact"
                     [attr.aria-required]="required"
+                    [attr.aria-label]="ariaLabel"
+                    [attr.aria-labelledby]="ariaLabelledBy"
                     [class.fd-input--compact]="compact"
                     (keydown)="_handleInputKeydown($event)"
                     [attr.id]="inputId"

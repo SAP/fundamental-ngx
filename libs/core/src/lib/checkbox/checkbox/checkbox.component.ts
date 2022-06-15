@@ -23,6 +23,7 @@ import { LIST_ITEM_COMPONENT, ListItemInterface, ContentDensityService } from '@
 import equal from 'fast-deep-equal';
 import { Subscription } from 'rxjs';
 import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
+import { registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
 import { FD_CHECKBOX_VALUES_DEFAULT } from './fd-checkbox-values.interface';
 
 let checkboxUniqueId = 0;
@@ -40,11 +41,12 @@ export type FdCheckboxTypes = 'checked' | 'unchecked' | 'indeterminate' | 'force
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => CheckboxComponent),
             multi: true
-        }
+        },
+        registerFormItemControl(CheckboxComponent)
     ],
     host: { '[attr.tabindex]': '-1' }
 })
-export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestroy {
+export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestroy, FormItemControl {
     /** @hidden */
     @ViewChild('inputElement')
     inputElement: ElementRef<HTMLInputElement>;

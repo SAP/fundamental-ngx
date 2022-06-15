@@ -17,6 +17,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { applyCssClass, CssClassBuilder, ContentDensityService } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
+import { registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
 
 export type stateType = 'success' | 'error' | 'warning' | 'default' | 'information';
 let uniqueId = 0;
@@ -31,11 +32,12 @@ let uniqueId = 0;
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => RadioButtonComponent),
             multi: true
-        }
+        },
+        registerFormItemControl(RadioButtonComponent)
     ]
 })
 export class RadioButtonComponent
-    implements OnChanges, AfterViewInit, CssClassBuilder, ControlValueAccessor, OnInit, OnDestroy
+    implements OnChanges, AfterViewInit, CssClassBuilder, ControlValueAccessor, OnInit, OnDestroy, FormItemControl
 {
     /** @hidden */
     @ViewChild('inputElement')

@@ -11,6 +11,11 @@
     {{ counter | number: '1.0-2' }}
 </span>
 
-<span class="fd-screenreader-only" aria-hidden="true" [id]="_uniqueId + '-screenReader-content'">{{
-    screenReaderContent
-}}</span>
+<span
+    class="fd-screenreader-only"
+    aria-hidden="true"
+    [id]="_uniqueId + '-screenReader-content'"
+    *ngIf="screenReaderContent"
+>
+    {{ screenReaderContent }}
+</span>

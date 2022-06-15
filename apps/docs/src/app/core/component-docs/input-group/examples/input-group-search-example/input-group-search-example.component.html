@@ -8,7 +8,6 @@
         [disabled]="false"
         [(ngModel)]="searchTerm"
         (addOnButtonClicked)="searchTerm = ''"
-        ariaLabelledby="fd-input-group-search-label-1"
     >
     </fd-input-group>
     <small>Search term: {{ searchTerm }}</small>
@@ -28,7 +27,6 @@
         [button]="true"
         [disabled]="false"
         [(ngModel)]="searchTermSecond"
-        ariaLabelledby="fd-input-group-search-label-2"
     >
     </fd-input-group>
     <small>Search term: {{ searchTermSecond }}</small>

@@ -53,6 +53,7 @@ import {
     applyCssClass,
     CssClassBuilder
 } from '@fundamental-ngx/core/utils';
+import { registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
 
 export const SLIDER_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
@@ -68,14 +69,14 @@ let sliderId = 0;
     styleUrls: ['./slider.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [SLIDER_VALUE_ACCESSOR],
+    providers: [SLIDER_VALUE_ACCESSOR, registerFormItemControl(SliderComponent)],
     host: {
         '(mouseenter)': 'this._componentHovered$.next(true)',
         '(mouseleave)': 'this._componentHovered$.next(false)'
     }
 })
 export class SliderComponent
-    implements OnInit, OnChanges, AfterViewInit, OnDestroy, ControlValueAccessor, CssClassBuilder
+    implements OnInit, OnChanges, AfterViewInit, OnDestroy, ControlValueAccessor, CssClassBuilder, FormItemControl
 {
     /** Slider id, it has some default value if not set,  */
     @Input()

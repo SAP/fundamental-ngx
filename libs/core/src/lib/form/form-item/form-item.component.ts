@@ -1,4 +1,14 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    Component,
+    ContentChild,
+    HostBinding,
+    Input,
+    ViewEncapsulation
+} from '@angular/core';
+import { FormItemControl, FORM_ITEM_CONTROL } from './../form-item-control/form-item-control';
+import { FormLabelComponent } from './../form-label/form-label.component';
 
 /**
  * Directive to be applied to the parent of a form control.
@@ -18,7 +28,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormItemComponent {
+export class FormItemComponent implements AfterViewInit {
     /** Whether the form item is inline. */
     @Input()
     @HostBinding('class.fd-form-item--inline')
@@ -32,4 +42,19 @@ export class FormItemComponent {
     /** @hidden */
     @HostBinding('class.fd-form-item')
     fdFormItemClass = true;
+
+    /** @hidden */
+    @ContentChild(FormLabelComponent)
+    formLabel?: FormLabelComponent;
+
+    /** @hidden */
+    @ContentChild(FORM_ITEM_CONTROL)
+    formItemControl?: FormItemControl;
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        if (this.formLabel && this.formItemControl && !this.formItemControl.ariaLabelledBy) {
+            this.formItemControl.ariaLabelledBy = this.formLabel.formLabelId;
+        }
+    }
 }
