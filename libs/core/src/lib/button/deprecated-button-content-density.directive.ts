@@ -1,5 +1,5 @@
 import { CONTENT_DENSITY_DIRECTIVE, DeprecatedCompactDirective } from '@fundamental-ngx/core/content-density';
-import { Directive, forwardRef } from '@angular/core';
+import { Directive, ElementRef, forwardRef } from '@angular/core';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
@@ -12,7 +12,8 @@ import { Directive, forwardRef } from '@angular/core';
     ]
 })
 export class DeprecatedButtonContentDensityDirective extends DeprecatedCompactDirective {
-    constructor() {
+    constructor(private elementRef: ElementRef) {
         super('[fd-button]');
+        console.log(elementRef.nativeElement);
     }
 }
