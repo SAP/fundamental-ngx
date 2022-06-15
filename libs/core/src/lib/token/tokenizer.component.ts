@@ -188,12 +188,14 @@ export class TokenizerComponent
             this.tokenListChangesSubscription.unsubscribe();
         }
         this.tokenListChangesSubscription = this.tokenList.changes.subscribe(() => {
-            this._cdRef.detectChanges();
-            this.moreTokensLeft = [];
-            this.moreTokensRight = [];
-            this.previousTokenCount > this.tokenList.length ? this._expandTokens() : this._collapseTokens();
-            this.previousTokenCount = this.tokenList.length;
-            this.handleTokenClickSubscriptions();
+            this._resetTokens();
+        });
+        this.tokenList.forEach((token) => {
+            this.tokenListChangesSubscription.add(
+                token.onCloseClick.subscribe(() => {
+                    this._resetTokens();
+                })
+            );
         });
         if (!this.compact && !this.compactCollapse) {
             this._handleInitCozyTokenCount();
@@ -352,12 +354,7 @@ export class TokenizerComponent
     onResize(): void {
         if (this._elementRef) {
             const elementWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
-            // if the element is geting smaller, try collapsing tokens
-            if (elementWidth <= this.previousElementWidth) {
-                this._collapseTokens();
-            } else {
-                this._expandTokens(); // if it's getting bigger, try expanding
-            }
+            this._resetTokens();
             this.previousElementWidth = elementWidth;
         }
     }
@@ -509,49 +506,20 @@ export class TokenizerComponent
     }
 
     /** @hidden */
-    private _expandTokens(): void {
+    private _resetTokens(): void {
+        this.moreTokensLeft = [];
+        this.moreTokensRight = [];
         if (this.compact || this.compactCollapse) {
-            let elementWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
-            let combinedTokenWidth = this.getCombinedTokenWidth(); // the combined width of all tokens, the "____ more" text, and the input
-
-            let breakLoop = false;
-            let i = this.moreTokensLeft.length - 1 + this.moreTokensRight.length;
-            while (combinedTokenWidth < elementWidth && i >= 0 && !breakLoop) {
-                // we want to get the first hidden token and check to see if it can fit in the whole tokenizer
-                const tokenToCheck = this.tokenList.filter(
-                    (token) => token.elementRef.nativeElement.style.display === 'none'
-                )[i];
-                /*
-                  set display: 'inline-block' and visibility: 'hidden' - this way, the tokenizer width will
-                  contain the width of the token we might display, without actually making the token visible to the user.
-                 */
-                tokenToCheck.elementRef.nativeElement.style.display = 'inline-block';
-                tokenToCheck.elementRef.nativeElement.style.visibility = 'hidden';
-                elementWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
-                combinedTokenWidth = this.getCombinedTokenWidth();
-                /*
-                  if the width of the inner tokenizer component is still smaller than the whole tokenizer component, we'll
-                  make the token visible and reduce the hidden count
-                */
-                if (combinedTokenWidth < elementWidth) {
-                    tokenToCheck.elementRef.nativeElement.style.visibility = 'visible';
-                    tokenToCheck._viewContainer.createEmbeddedView(tokenToCheck._content);
-                    if (this.moreTokensLeft.length) {
-                        this.moreTokensLeft.pop();
-                    } else if (this.moreTokensRight.length) {
-                        this.moreTokensRight.pop();
-                    }
-                } else {
-                    // otherwise, stop looping and set the token's display back to 'none'
-                    tokenToCheck.elementRef.nativeElement.style.display = 'none';
-                    breakLoop = true;
-                }
-                i--;
-                this._cdRef.markForCheck();
-            }
+            this.tokenList.forEach((token) => {
+                this._makeElementVisible(token.elementRef);
+            });
+            this._cdRef.markForCheck();
+            this._collapseTokens();
         } else {
             this._getHiddenCozyTokenCount();
         }
+        this.handleTokenClickSubscriptions();
+        this.previousTokenCount = this.tokenList.length;
     }
 
     /** @hidden */
