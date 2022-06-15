@@ -36,10 +36,6 @@ export class BaseButton {
     @Input()
     glyph: Nullable<string>;
 
-    /** Whether to apply compact mode to the button. */
-    @Input()
-    compact?: boolean;
-
     /** The type of the button. Types include:
      * 'standard' | 'positive' | 'negative' | 'attention' | 'half' | 'ghost' | 'transparent' | 'emphasized' | 'menu'.
      * Leave empty for default (Standard button).'
