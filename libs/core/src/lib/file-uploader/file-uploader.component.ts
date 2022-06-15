@@ -8,8 +8,6 @@ import {
     HostBinding,
     Input,
     OnDestroy,
-    OnInit,
-    Optional,
     Output,
     ViewChild,
     ViewEncapsulation
@@ -18,10 +16,15 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { stateType } from '@fundamental-ngx/core/radio';
 import { FileUploaderService, FileUploadOutput } from './file-uploader.service';
 import { Subscription } from 'rxjs';
-import { KeyUtil, ContentDensityService } from '@fundamental-ngx/core/utils';
-import { registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
+import { DestroyedService, KeyUtil } from '@fundamental-ngx/core/utils';
+import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import { ENTER, SPACE, TAB } from '@angular/cdk/keycodes';
 import { Nullable } from '@fundamental-ngx/core/shared';
+import {
+    ContentDensityConsumer,
+    contentDensityConsumer,
+    ContentDensityMode
+} from '@fundamental-ngx/core/content-density';
 
 let fileUploaderInputUniqueId = 0;
 
@@ -43,12 +46,16 @@ let fileUploaderInputUniqueId = 0;
             useExisting: forwardRef(() => FileUploaderComponent),
             multi: true
         },
-        registerFormItemControl(FileUploaderComponent)
+        registerFormItemControl(FileUploaderComponent),
+        DestroyedService,
+        contentDensityConsumer({
+            supportedContentDensity: [ContentDensityMode.COMPACT, ContentDensityMode.COZY]
+        })
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDestroy, FormItemControl {
+export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, FormItemControl {
     /** @hidden */
     @HostBinding('class.fd-file-uploader')
     fdFileInputClass = true;
@@ -112,10 +119,6 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
     @Input()
     buttonAriaLabel: Nullable<string>;
 
-    /** boolean value to enable compact mode */
-    @Input()
-    compact?: boolean;
-
     /** The field to set state of radio button using:
      * 'success' | 'error' | 'warning' | 'default' | 'information'
      * by default value is set to 'default'
@@ -165,20 +168,8 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
     constructor(
         private _fileUploadService: FileUploaderService,
         private _changeDetRef: ChangeDetectorRef,
-        @Optional() private _contentDensityService: ContentDensityService
+        readonly _contentDensityConsumer: ContentDensityConsumer
     ) {}
-
-    /** @hidden */
-    ngOnInit(): void {
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                    this._changeDetRef.markForCheck();
-                })
-            );
-        }
-    }
 
     /** @hidden */
     ngOnDestroy(): void {
