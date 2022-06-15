@@ -10,7 +10,6 @@ import {
     Input,
     OnDestroy,
     OnInit,
-    Optional,
     Output,
     QueryList,
     ViewEncapsulation
@@ -18,12 +17,16 @@ import {
 import { ListItemComponent } from './list-item/list-item.component';
 import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
-import { FocusEscapeDirection, KeyboardSupportService } from '@fundamental-ngx/core/utils';
+import { DestroyedService, FocusEscapeDirection, KeyboardSupportService } from '@fundamental-ngx/core/utils';
 import { ListGroupHeaderDirective } from './directives/list-group-header.directive';
 import { ListFocusItem } from './list-focus-item.model';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
 import { ListNavigationItemComponent } from './list-navigation-item/list-navigation-item.component';
 import { FD_LIST } from './list.tokens';
+import {
+    ContentDensityConsumer,
+    contentDensityConsumer,
+    ContentDensityMode
+} from '@fundamental-ngx/core/content-density';
 
 /**
  * The directive that represents a list.
@@ -40,7 +43,18 @@ import { FD_LIST } from './list.tokens';
     styleUrls: ['./list.component.scss', '../utils/drag-and-drop/drag-and-drop.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [KeyboardSupportService, { provide: FD_LIST, useExisting: ListComponent }]
+    providers: [
+        KeyboardSupportService,
+        {
+            provide: FD_LIST,
+            useExisting: ListComponent
+        },
+        DestroyedService,
+        contentDensityConsumer({
+            modifiers: { [ContentDensityMode.COMPACT]: 'fd-list--compact' },
+            supportedContentDensity: [ContentDensityMode.COMPACT, ContentDensityMode.COZY]
+        })
+    ]
 })
 export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
     /** Whether dropdown mode is included to component, used for Select and Combobox */
@@ -57,11 +71,6 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
     @Input()
     @HostBinding('class.fd-list--mobile')
     mobileMode = false;
-
-    /** Whether compact mode is included to component */
-    @Input()
-    @HostBinding('class.fd-list--compact')
-    compact?: boolean;
 
     /** Whether list component contains message */
     @Input()
@@ -125,19 +134,11 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
     constructor(
         private _keyboardSupportService: KeyboardSupportService<ListFocusItem>,
         private _cdr: ChangeDetectorRef,
-        @Optional() private _contentDensityService: ContentDensityService
+        private _contentDensityConsumer: ContentDensityConsumer
     ) {}
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                    this._cdr.detectChanges();
-                })
-            );
-        }
         this._listenOnListFocusEscape();
     }
 
