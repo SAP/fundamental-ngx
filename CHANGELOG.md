@@ -1,4 +1,11 @@
 
+## [0.35.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.20...v0.35.0-rc.21) (2022-06-16)
+
+
+### Bug Fixes
+
+* **core,platform:** styles version ([#8237](https://github.com/SAP/fundamental-ngx/issues/8237)) ([135b653](https://github.com/SAP/fundamental-ngx/commit/135b653ec4018d05d1ec45a6937c2a433bd614c2))
+
 ## [0.35.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.19...v0.35.0-rc.20) (2022-06-16)
 
 
