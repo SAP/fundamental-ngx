@@ -12,7 +12,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { applyCssClass, CssClassBuilder, DestroyedService } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 import equal from 'fast-deep-equal';
 
 import { CardType, CLASS_NAME } from './constants';
@@ -21,7 +21,7 @@ import { getCardModifierClassNameByCardType } from './utils';
 import { FD_CARD_CONTAINER } from './card.tokens';
 import {
     ContentDensityConsumer,
-    contentDensityConsumer,
+    contentDensityConsumerProviders,
     ContentDensityMode
 } from '@fundamental-ngx/core/content-density';
 
@@ -34,12 +34,10 @@ let cardId = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
-        DestroyedService,
-        contentDensityConsumer({
+        contentDensityConsumerProviders({
             modifiers: {
                 [ContentDensityMode.COMPACT]: CLASS_NAME.cardCompact
-            },
-            supportedContentDensity: [ContentDensityMode.COMPACT, ContentDensityMode.COZY]
+            }
         })
     ]
 })

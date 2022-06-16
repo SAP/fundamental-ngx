@@ -16,15 +16,11 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { stateType } from '@fundamental-ngx/core/radio';
 import { FileUploaderService, FileUploadOutput } from './file-uploader.service';
 import { Subscription } from 'rxjs';
-import { DestroyedService, KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import { ENTER, SPACE, TAB } from '@angular/cdk/keycodes';
 import { Nullable } from '@fundamental-ngx/core/shared';
-import {
-    ContentDensityConsumer,
-    contentDensityConsumer,
-    ContentDensityMode
-} from '@fundamental-ngx/core/content-density';
+import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundamental-ngx/core/content-density';
 
 let fileUploaderInputUniqueId = 0;
 
@@ -47,10 +43,7 @@ let fileUploaderInputUniqueId = 0;
             multi: true
         },
         registerFormItemControl(FileUploaderComponent),
-        DestroyedService,
-        contentDensityConsumer({
-            supportedContentDensity: [ContentDensityMode.COMPACT, ContentDensityMode.COZY]
-        })
+        contentDensityConsumerProviders()
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush

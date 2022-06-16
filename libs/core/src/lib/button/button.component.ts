@@ -12,10 +12,10 @@ import {
 } from '@angular/core';
 import { BaseButton } from './base-button';
 import { Subscription } from 'rxjs';
-import { applyCssClass, CssClassBuilder, DestroyedService } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 import {
     ContentDensityConsumer,
-    contentDensityConsumer,
+    contentDensityConsumerProviders,
     ContentDensityMode
 } from '@fundamental-ngx/core/content-density';
 
@@ -43,12 +43,10 @@ import {
         '[attr.aria-label]': 'buttonArialabel'
     },
     providers: [
-        DestroyedService,
-        contentDensityConsumer({
+        contentDensityConsumerProviders({
             modifiers: {
                 [ContentDensityMode.COMPACT]: 'fd-button--compact'
-            },
-            supportedContentDensity: [ContentDensityMode.COMPACT, ContentDensityMode.COZY]
+            }
         })
     ]
 })

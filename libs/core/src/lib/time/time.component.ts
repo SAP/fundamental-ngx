@@ -20,18 +20,14 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
-import { DestroyedService, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 
 import { Meridian, SelectableViewItem } from './models';
 import { createMissingDateImplementationError } from './errors';
 import { TimeI18n } from './i18n/time-i18n';
 import { TimeColumnConfig } from './time-column/time-column-config';
 import { TimeColumnComponent } from './time-column/time-column.component';
-import {
-    ContentDensityConsumer,
-    contentDensityConsumer,
-    ContentDensityMode
-} from '@fundamental-ngx/core/content-density';
+import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundamental-ngx/core/content-density';
 
 export type FdTimeActiveView = 'hour' | 'minute' | 'second' | 'meridian';
 
@@ -53,8 +49,7 @@ type MeridianViewItem = SelectableViewItem<Meridian>;
             useExisting: forwardRef(() => TimeComponent),
             multi: true
         },
-        DestroyedService,
-        contentDensityConsumer({ supportedContentDensity: [ContentDensityMode.COMPACT, ContentDensityMode.COZY] })
+        contentDensityConsumerProviders()
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None

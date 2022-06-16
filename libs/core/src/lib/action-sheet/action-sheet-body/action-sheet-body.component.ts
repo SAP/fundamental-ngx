@@ -4,6 +4,7 @@ import { KeyboardSupportService } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
 
 import { ActionSheetItemComponent } from '../action-sheet-item/action-sheet-item.component';
+import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundamental-ngx/core/content-density';
 
 let actionSheetBodyUniqueIdCounter = 0;
 
@@ -24,16 +25,13 @@ let actionSheetBodyUniqueIdCounter = 0;
     selector: 'fd-action-sheet-body',
     templateUrl: './action-sheet-body.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [contentDensityConsumerProviders()]
 })
 export class ActionSheetBodyComponent {
     /** Id of the Action Sheet Body. */
     @Input()
     actionSheetBodyId = `fd-action-sheet-body-${actionSheetBodyUniqueIdCounter++}`;
-
-    /** Indicate if items should be in compact or compare mode. */
-    @Input()
-    compact = false;
 
     /** Display in mobile view. */
     @Input()
@@ -48,7 +46,10 @@ export class ActionSheetBodyComponent {
     ariaLabelledby: Nullable<string>;
 
     /** @hidden */
-    constructor(private readonly _keyboardSupportService: KeyboardSupportService<ActionSheetItemComponent>) {}
+    constructor(
+        private readonly _keyboardSupportService: KeyboardSupportService<ActionSheetItemComponent>,
+        readonly _contentDensityConsumer: ContentDensityConsumer
+    ) {}
 
     /** Handler for mouse events */
     @HostListener('click', ['$event'])

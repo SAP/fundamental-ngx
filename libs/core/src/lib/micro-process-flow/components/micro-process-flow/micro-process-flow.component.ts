@@ -15,15 +15,15 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { DestroyedService, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, startWith } from 'rxjs/operators';
 import { MicroProcessFlowFocusableItemDirective } from '../../micro-process-flow-focusable-item.directive';
 import { MicroProcessFlowItemComponent } from '../micro-process-flow-item/micro-process-flow-item.component';
 import { MICRO_PROCESS_FLOW } from '../../injection-tokens';
 import {
-    contentDensityConsumer,
     ContentDensityConsumer,
+    contentDensityConsumerProviders,
     ContentDensityMode
 } from '@fundamental-ngx/core/content-density';
 
@@ -42,10 +42,8 @@ import {
             provide: MICRO_PROCESS_FLOW,
             useExisting: MicroProcessFlowComponent
         },
-        DestroyedService,
-        contentDensityConsumer({
-            modifiers: { [ContentDensityMode.COMPACT]: 'fd-micro-process-flow--compact' },
-            supportedContentDensity: [ContentDensityMode.COMPACT, ContentDensityMode.COZY]
+        contentDensityConsumerProviders({
+            modifiers: { [ContentDensityMode.COMPACT]: 'fd-micro-process-flow--compact' }
         })
     ]
 })

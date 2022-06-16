@@ -20,7 +20,6 @@ import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } fro
 import { Subscription } from 'rxjs';
 
 import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
-import { DestroyedService } from '@fundamental-ngx/core/utils';
 import { Nullable, SpecialDayRule } from '@fundamental-ngx/core/shared';
 
 import { DateRange } from './models/date-range';
@@ -38,7 +37,7 @@ import { DisableDateFunction, EscapeFocusFunction, FocusableCalendarView } from 
 import { CalendarType, DaysOfWeek, FdCalendarView, NavigationButtonDisableFunction } from './types';
 import {
     ContentDensityConsumer,
-    contentDensityConsumer,
+    contentDensityConsumerProviders,
     ContentDensityMode
 } from '@fundamental-ngx/core/content-density';
 
@@ -72,12 +71,10 @@ let calendarUniqueId = 0;
             multi: true
         },
         CalendarService,
-        DestroyedService,
-        contentDensityConsumer({
+        contentDensityConsumerProviders({
             modifiers: {
                 [ContentDensityMode.COMPACT]: 'fd-calendar--compact'
-            },
-            supportedContentDensity: [ContentDensityMode.COMPACT, ContentDensityMode.COZY]
+            }
         })
     ],
     host: {

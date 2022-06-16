@@ -17,14 +17,14 @@ import {
 import { ListItemComponent } from './list-item/list-item.component';
 import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
-import { DestroyedService, FocusEscapeDirection, KeyboardSupportService } from '@fundamental-ngx/core/utils';
+import { FocusEscapeDirection, KeyboardSupportService } from '@fundamental-ngx/core/utils';
 import { ListGroupHeaderDirective } from './directives/list-group-header.directive';
 import { ListFocusItem } from './list-focus-item.model';
 import { ListNavigationItemComponent } from './list-navigation-item/list-navigation-item.component';
 import { FD_LIST } from './list.tokens';
 import {
     ContentDensityConsumer,
-    contentDensityConsumer,
+    contentDensityConsumerProviders,
     ContentDensityMode
 } from '@fundamental-ngx/core/content-density';
 
@@ -49,10 +49,8 @@ import {
             provide: FD_LIST,
             useExisting: ListComponent
         },
-        DestroyedService,
-        contentDensityConsumer({
-            modifiers: { [ContentDensityMode.COMPACT]: 'fd-list--compact' },
-            supportedContentDensity: [ContentDensityMode.COMPACT, ContentDensityMode.COZY]
+        contentDensityConsumerProviders({
+            modifiers: { [ContentDensityMode.COMPACT]: 'fd-list--compact' }
         })
     ]
 })

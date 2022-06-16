@@ -37,14 +37,8 @@ import {
 import { Subscription } from 'rxjs';
 
 import { ListComponent, ListMessageDirective } from '@fundamental-ngx/core/list';
-import {
-    AutoCompleteEvent,
-    DestroyedService,
-    DynamicComponentService,
-    FocusEscapeDirection,
-    KeyUtil
-} from '@fundamental-ngx/core/utils';
-import { registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
+import { AutoCompleteEvent, DynamicComponentService, FocusEscapeDirection, KeyUtil } from '@fundamental-ngx/core/utils';
+import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { FormStates, Nullable, PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
@@ -56,11 +50,7 @@ import { ComboboxMobileComponent } from './combobox-mobile/combobox-mobile.compo
 import { COMBOBOX_COMPONENT, ComboboxInterface } from './combobox.interface';
 import { ComboboxItem } from './combobox-item';
 import { GroupFunction } from './list-group.pipe';
-import {
-    ContentDensityConsumer,
-    contentDensityConsumer,
-    ContentDensityMode
-} from '@fundamental-ngx/core/content-density';
+import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundamental-ngx/core/content-density';
 
 let comboboxUniqueId = 0;
 
@@ -88,8 +78,7 @@ let comboboxUniqueId = 0;
         },
         registerFormItemControl(ComboboxComponent),
         MenuKeyboardService,
-        DestroyedService,
-        contentDensityConsumer({ supportedContentDensity: [ContentDensityMode.COMPACT, ContentDensityMode.COZY] })
+        contentDensityConsumerProviders()
     ],
     host: {
         '[class.fd-combobox-custom-class]': 'true',

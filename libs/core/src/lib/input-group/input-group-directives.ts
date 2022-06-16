@@ -12,10 +12,10 @@ import {
 import { InputGroupPlacement } from './types';
 import { FormStates } from '@fundamental-ngx/core/shared';
 import { Subscription } from 'rxjs';
-import { applyCssClass, CssClassBuilder, DestroyedService } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 import {
     ContentDensityConsumer,
-    contentDensityConsumer,
+    contentDensityConsumerProviders,
     ContentDensityMode
 } from '@fundamental-ngx/core/content-density';
 
@@ -23,10 +23,8 @@ import {
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-input-group-input]',
     providers: [
-        DestroyedService,
-        contentDensityConsumer({
-            modifiers: { [ContentDensityMode.COMPACT]: 'fd-input--compact' },
-            supportedContentDensity: [ContentDensityMode.COMPACT, ContentDensityMode.COZY]
+        contentDensityConsumerProviders({
+            modifiers: { [ContentDensityMode.COMPACT]: 'fd-input--compact' }
         })
     ]
 })
@@ -80,10 +78,8 @@ export class InputGroupTextareaDirective {}
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-input-group-addon]',
     providers: [
-        DestroyedService,
-        contentDensityConsumer({
-            modifiers: { [ContentDensityMode.COMPACT]: 'fd-input-group__addon--compact' },
-            supportedContentDensity: [ContentDensityMode.COMPACT, ContentDensityMode.COZY]
+        contentDensityConsumerProviders({
+            modifiers: { [ContentDensityMode.COMPACT]: 'fd-input-group__addon--compact' }
         })
     ]
 })
