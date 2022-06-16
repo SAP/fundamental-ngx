@@ -38,6 +38,7 @@ import { PlatformMultiComboboxMobileModule } from '../multi-combobox-mobile/mult
 import { MULTICOMBOBOX_COMPONENT } from '../multi-combobox.interface';
 import { MultiComboboxConfig } from '../multi-combobox.config';
 import { AutoCompleteEvent } from '../../auto-complete/auto-complete.directive';
+import { TokenizerComponent } from '@fundamental-ngx/core/token';
 
 @Component({
     selector: 'fdp-multi-combobox',
@@ -55,6 +56,10 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     /** @hidden */
     @ViewChild('listTemplate')
     listTemplate: TemplateRef<any>;
+
+    /** @hidden */
+    @ViewChild(TokenizerComponent)
+    _tokenizer: TokenizerComponent;
 
     /**
      * @hidden
@@ -100,6 +105,8 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         }
 
         this._setSelectedSuggestions();
+
+        this._tokenizer._showOverflowPopover = false;
     }
 
     /** @hidden */

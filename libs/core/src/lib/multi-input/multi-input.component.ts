@@ -410,6 +410,7 @@ export class MultiInputComponent
         if (this.mobile) {
             this._setUpMobileMode();
         }
+        this.tokenizer._showOverflowPopover = false;
     }
 
     /** @hidden */

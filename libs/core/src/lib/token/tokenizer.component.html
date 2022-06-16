@@ -6,7 +6,7 @@
     <div class="fd-tokenizer__inner" #tokenizerInner>
         <ng-content select="fd-token"></ng-content>
 
-        <ng-container *ngIf="compact || compactCollapse; else moreElement">
+        <ng-container *ngIf="_showOverflowPopover && (compact || compactCollapse); else moreElement">
             <ng-container *ngTemplateOutlet="tokensOverflow"></ng-container>
         </ng-container>
 

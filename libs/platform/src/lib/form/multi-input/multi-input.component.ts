@@ -210,6 +210,8 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         if (this.autofocus) {
             this.searchInputElement.nativeElement.focus();
         }
+
+        this.tokenizer._showOverflowPopover = false;
     }
 
     /** @hidden Method to emit change event */
