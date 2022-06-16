@@ -1,4 +1,11 @@
 
+## [0.35.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.19...v0.35.0-rc.20) (2022-06-16)
+
+
+### Bug Fixes
+
+* **core,platform:** fix bug where extra popover would be shown when clicking more text on multi-input ([#8233](https://github.com/SAP/fundamental-ngx/issues/8233)) ([9722f3b](https://github.com/SAP/fundamental-ngx/commit/9722f3b01420b8a82d8d67e3c92ceb9bad08b2b6))
+
 ## [0.35.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.18...v0.35.0-rc.19) (2022-06-15)
 
 
