@@ -1,4 +1,7 @@
-import { FdLanguage } from '../models/lang';
+import { FdLanguage, FdLanguageKeyArgs } from '../models/lang';
+import { PluralizationSet1 } from './pluralization/set1';
+
+const pluralization = new PluralizationSet1();
 
 /**
  * Default set of translations of Fundamental UI libarary for Russian language
@@ -7,7 +10,18 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
     coreGridList: {
         filterBarCancelButtonTitle: 'Отмена',
         listItemStatusAriaLabel: 'Элемент имеет статус. Статус: {{ status }}.',
-        listItemCounterAriaLabel: 'Элемент имеет {{ count }} дочерних элементов.',
+        listItemCounterAriaLabel: (params) => {
+            const count = params['count'];
+            const option = pluralization.process(count);
+            switch (option) {
+                case 'one':
+                    return `Элемент имеет 1 дочерний элемент.`;
+                case 'few':
+                    return `Элемент имеет ${count} дочерних элемента.`;
+                default:
+                    return `Элемент имеет ${count} дочeрних элементов.`;
+            }
+        },
         listItemButtonDetailsTitle: 'Подробности',
         listItemButtonDeleteTitle: 'Удалить',
         listItemStatusContainsErrors: 'Содержит ошибки',
@@ -61,19 +75,52 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         userDetailsHeader: 'Детали',
         userDetailsSendReminderBtnLabel: 'Отправить напоминание',
         userDetailsCancelBtnLabel: 'Отменить',
-        messagesApproverAddedSuccess: '1 утверждающий был добавлен',
-        messagesTeamAddedSuccess: '1 команда была добавлена',
-        messagesNodeEdited: '1 утверждающий был отредактирован',
-        messagesNodeRemovedSingular: '1 утверждающий был удален',
-        messagesNodeRemovedPlural: 'Утверждающие были удалены',
+        messagesApproverAddedSuccess: '1 утверждающий добавлен',
+        messagesTeamAddedSuccess: '1 команда добавлена',
+        messagesNodeEdited: '1 утверждающий отредактирован',
+        messagesNodeRemovedSingular: '1 утверждающий удален',
+        messagesNodeRemovedPlural: 'Утверждающие удалены',
         messagesTeamRemoved: '1 команда удалена',
         messagesErrorBuildGraph: 'При попытке построить график произошла ошибка. Проверьте входящие данные.',
         messagesUndoAction: 'Отменить',
-        nodeMembersCount: '{{ count }} членов команды',
+        nodeMembersCount: (params) => {
+            const count = params['count'];
+            const option = pluralization.process(count);
+            switch (option) {
+                case 'one':
+                    return `1 член команды`;
+                case 'few':
+                    return `${count} члена команды`;
+                default:
+                    return `${count || 0} членов команды`;
+            }
+        },
         nodeVariousTeams: 'Различные команды',
         nodeStatusDueToday: 'Срок выполнения сегодня',
-        nodeStatusDueInXDays: ' Срок выполнения через {{ count }} дней',
-        nodeStatusXDaysOverdue: 'Просрочено на {{ count }} дней',
+        nodeStatusDueInXDays: (params) => {
+            const count = params['count'];
+            const option = pluralization.process(count);
+            switch (option) {
+                case 'one':
+                    return `Срок выполнения через 1 день`;
+                case 'few':
+                    return `Срок выполнения через ${count} дня`;
+                default:
+                    return `Срок выполнения через ${count || 0} дней`;
+            }
+        },
+        nodeStatusXDaysOverdue: (params) => {
+            const count = params['count'];
+            const option = pluralization.process(count);
+            switch (option) {
+                case 'one':
+                    return `Просрочено на 1 день`;
+                case 'few':
+                    return `Просрочено на ${count} дня`;
+                default:
+                    return `Просрочено на ${count || 0} дней`;
+            }
+        },
         nodeActionAddApproversBefore: 'Добавить утверждающих до',
         nodeActionAddApproversAfter: 'Добавить утверждающих после',
         nodeActionAddApproversParallel: 'Добавить параллельных утверждающих',
@@ -94,9 +141,19 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         toolbarEditApprover: 'Редактировать утверждающего',
         watchersInputPlaceholder: 'Поиск',
         userListSelectedItemsCountSingular: 'Выбран 1 элемент',
-        userListSelectedItemsCountPlural: 'Выбрано {{ count }} элементов'
+        userListSelectedItemsCountPlural: (params) => {
+            const count = params['count'];
+            const option = pluralization.process(count);
+            switch (option) {
+                case 'one':
+                    return `Выбрано 1 элемент`;
+                case 'few':
+                    return `Выбрано ${count} элемента`;
+                default:
+                    return `Выбрано ${count || 0} элементов`;
+            }
+        }
     },
-    //
     platformVHD: {
         selectionBarLabel: 'Выбранные элементы и условия',
         selectedAndConditionLabel: 'Выбранные элементы и условия',
@@ -114,7 +171,37 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         searchHideAllAdvancedSearchLabel: 'Скрыть все фильтры',
         selectTabDisplayCountLabel: 'Элементы ({{ count }})',
         selectTabMoreBtnLabel: 'Больше',
-        selectTabCountHiddenA11yLabel: 'содержащие {{ rowCount }} строк и {{ colCount }} столбцов',
+        selectTabCountHiddenA11yLabel: (params) => {
+            const rowCount = params['rowCount'];
+            const rowOption = pluralization.process(rowCount);
+            let rowPart: string;
+            switch (rowOption) {
+                case 'one':
+                    rowPart = 'содержит 1 строку';
+                    break;
+                case 'few':
+                    rowPart = `содержит ${rowCount} строки`;
+                    break;
+                default:
+                    rowPart = `содержит ${rowCount} строк`;
+                    break;
+            }
+            const colCount = params['colCount'];
+            const colOption = pluralization.process(colCount);
+            let colPart: string;
+            switch (colOption) {
+                case 'one':
+                    colPart = '1 столбец';
+                    break;
+                case 'few':
+                    colPart = `${colCount} столбца`;
+                    break;
+                default:
+                    colPart = `${colCount} столбцов`;
+                    break;
+            }
+            return `${rowPart} и ${colPart}`;
+        },
         selectMobileTabBackBtnTitle: 'Назад',
         selectMobileTabBtnOpenDialogLabel: 'Открыть диалоговое окно',
         selectMobileTabTitle: '{{ title }} вкладка',
@@ -141,11 +228,31 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         defineConditionConditionStrategyLabelEmpty: 'пусто',
         defineConditionConditionStrategyLabelNotEqualTo: 'не равно',
         defineConditionConditionStrategyLabelNotEmpty: 'не пусто',
-        defineConditionMaxCountError: 'Введите значение не более {{ count }} символов'
+        defineConditionMaxCountError: (params) => {
+            const count = params['count'];
+            const option = pluralization.process(count);
+            switch (option) {
+                case 'one':
+                    return `Введите значение не более 1 символа`;
+                default:
+                    return `Введите значение не более ${count || 0} символов`;
+            }
+        }
     },
     platformCombobox: {
         countListResultsSingular: '1 элемент',
-        countListResultsPlural: '{{ count }} элементов'
+        countListResultsPlural: (params) => {
+            const count = params['count'];
+            const option = pluralization.process(count);
+            switch (option) {
+                case 'one':
+                    return `1 элемент`;
+                case 'few':
+                    return `${count} элемента`;
+                default:
+                    return `${count || 0} элементов`;
+            }
+        }
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Выбрать опции',
@@ -155,9 +262,31 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: 'Превышен лимит на 1 символ',
-        counterMessageCharactersOverTheLimitPlural: 'Превышен лимит на {{ count }} символов',
+        counterMessageCharactersOverTheLimitPlural: (params) => {
+            const count = params['count'];
+            const option = pluralization.process(count);
+            switch (option) {
+                case 'one':
+                    return `Превышен лимит на 1 символ`;
+                case 'few':
+                    return `Превышен лимит на ${count} символа`;
+                default:
+                    return `Превышен лимит на ${count || 0} символов`;
+            }
+        },
         counterMessageCharactersRemainingSingular: 'Остался 1 символ',
-        counterMessageCharactersRemainingPlural: 'Осталось {{ count }} символов'
+        counterMessageCharactersRemainingPlural: (params) => {
+            const count = params['count'];
+            const option = pluralization.process(count);
+            switch (option) {
+                case 'one':
+                    return `Остался 1 символ`;
+                case 'few':
+                    return `Осталось ${count} символа`;
+                default:
+                    return `Осталось ${count || 0} символов`;
+            }
+        }
     },
 
     platformLink: {
@@ -308,7 +437,18 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         newFolderAtRootInputLabel: 'Название новой папки',
         newFolderAtFolderInputLabel: 'Название новой папки внутри {{ folderName }',
         newFolderInputPlaceholder: 'Введите имя..',
-        newFolderInputErrorLabel: 'Максимально разрешено {{ count }} символов',
+        newFolderInputErrorLabel: (params) => {
+            const count = params['count'];
+            const option = pluralization.process(count);
+            switch (option) {
+                case 'one':
+                    return `Максимально разрешено 1 символ`;
+                case 'few':
+                    return `Максимально разрешено ${count} символа`;
+                default:
+                    return `Максимально разрешено ${count} символов`;
+            }
+        },
         newFolderDialogCreateBtnLabel: 'Создать',
         newFolderDialogCancelBtnLabel: 'Отменить',
         breadcrumbLabelAllFiles: 'Все файлы',
@@ -336,46 +476,86 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         messageCreateFailed: 'Не удалось создать {{ folderName }}.',
         messageCreateSuccess: '{{ folderName }} успешно создано.',
         messageUpdateVersionFailed: 'Не удалось обновить версию {{ folderName }}.',
-        messageUpdateVersionSuccess: 'Версия {{ folderName }} была обновлена.',
+        messageUpdateVersionSuccess: 'Версия {{ folderName }} обновлена.',
         messageFileRenameFailed: 'Не удалось переименовать "{{ from }}" в "{{ to }}."',
-        messageFileRenameSuccess: '{{ from }}" было переименовано в "{{ to }}".',
-        messageRemoveFoldersAndFilesFailed: 'Не удалось удалить {{ foldersCount }} папок и {{ filesCount }} файлов.',
-        messageRemoveFoldersAndFilesSuccess: '{{ foldersCount }} папок и {{ filesCount }} файлов было удалено.',
-        messageRemoveFoldersFailed: 'Не удалось удалить {{ folderCount }} папок.',
-        messageRemoveFoldersSuccess: 'Удалено {{ foldersCount }} папок.',
+        messageFileRenameSuccess: '{{ from }}" переименовано в "{{ to }}".',
+        messageRemoveFoldersAndFilesFailed: (params) =>
+            `Не удалось удалить ${folderNamePluralization(params)} и ${fileNamePluralization(params)}.`,
+        messageRemoveFoldersAndFilesSuccess: (params) =>
+            `${folderNamePluralization(params)} и ${fileNamePluralization(params)} удалено.`,
+        messageRemoveFoldersFailed: (params) => `Не удалось удалить ${folderNamePluralization(params)}.`,
+        messageRemoveFoldersSuccess: (params) => `Удалено ${folderNamePluralization(params)}.`,
         messageRemoveFilesFailed: 'Не удалось удалить файлы {{ filesCount }}.',
-        messageRemoveFilesSuccess: 'Удалено {{ filesCount }} файлов.',
+        messageRemoveFilesSuccess: (params) => `Удалено ${fileNamePluralization(params)}.`,
         messageRemoveFileOrFolderFailed: 'Не удалось удалить {{ name }}.',
         messageRemoveFileOrFolderSuccess: '{{ name }} удалено.',
-        messageMoveFoldersAndFilesFailed:
-            'Не удалось переместить {{ foldersCount }} папок и {{ filesCount }} файлов в {{ to }}.',
-        messageMoveFoldersAndFilesSuccess: '{{ foldersCount }} папок и {{ filesCount }} файлов перемещены в {{ to }}.',
-        messageMoveFoldersFailed: 'Не удалось переместить {{ foldersCount }} папок в {{ to }}.',
-        messageMoveFoldersSuccess: '{{ foldersCount }} папок перемещен в {{ to }}.',
-        messageMoveFilesFailed: 'Не удалось переместить {{ filesCount }} файлов в {{ to }}.',
-        messageMoveFilesSuccess: '{{ filesCount }} файлов перемещен в {{ to }}.',
+        messageMoveFoldersAndFilesFailed: (params) =>
+            `Не удалось переместить ${folderNamePluralization(params)} и ${fileNamePluralization(params)} в {{ to }}.`,
+        messageMoveFoldersAndFilesSuccess: (params) =>
+            `${folderNamePluralization(params)} и ${fileNamePluralization(params)} перемещены в {{ to }}.`,
+        messageMoveFoldersFailed: (params) => `Не удалось переместить ${folderNamePluralization(params)} в {{ to }}.`,
+        messageMoveFoldersSuccess: (params) => `${folderNamePluralization(params)} перемещен в {{ to }}.`,
+        messageMoveFilesFailed: (params) => `Не удалось переместить ${fileNamePluralization(params)} в {{ to }}.`,
+        messageMoveFilesSuccess: (params) => `${fileNamePluralization(params)} перемещен в {{ to }}.`,
         messageMoveFileOrFolderFailed: 'Не удалось переместить {{ name }} в {{ to }}.',
         messageMoveFileOrFolderSuccess: '{{ name }} перемещен в {{ to }}.',
-        messageMoveRootFoldersAndFilesFailed:
-            'Не удалось переместить {{ foldersCount }} папок и {{ filesCount }} файлов во все файлы.',
-        messageMoveRootFoldersAndFilesSuccess:
-            '{{ foldersCount }} папок и {{ filesCount }} файлов перемещены ко всем файлам.',
-        messageMoveRootFoldersFailed: 'Не удалось переместить папки {{ foldersCount }} во все файлы.',
-        messageMoveRootFoldersSuccess: '{{ foldersCount }} папок перемещен ко всем файлам.',
-        messageMoveRootFilesFailed: 'Не удалось переместить файлы {{ filesCount }} во все файлы.',
-        messageMoveRootFilesSuccess: '{{ filesCount }} файлов перемещены ко всем файлам.',
+        messageMoveRootFoldersAndFilesFailed: (params) =>
+            `Не удалось переместить ${folderNamePluralization(params)} и ${fileNamePluralization(
+                params
+            )} во все файлы.`,
+        messageMoveRootFoldersAndFilesSuccess: (params) =>
+            `${folderNamePluralization(params)} и ${fileNamePluralization(params)} перемещены ко всем файлам.`,
+        messageMoveRootFoldersFailed: (params) =>
+            `Не удалось переместить ${folderNamePluralization(params)} во все файлы.`,
+        messageMoveRootFoldersSuccess: (params) => `${folderNamePluralization(params)} перемещен ко всем файлам.`,
+        messageMoveRootFilesFailed: (params) => `Не удалось переместить ${fileNamePluralization(params)} во все файлы.`,
+        messageMoveRootFilesSuccess: (params) => `${fileNamePluralization(params)} перемещены ко всем файлам.`,
         messageMoveRootFileOrFolderFailed: 'Не удалось переместить {{ name }} во все файлы.',
         messageMoveRootFileOrFolderSuccess: '{{ name }} перемещен ко всем файлам.',
-        messageFileTypeMismatchPlural:
-            '{{filesCount}} файлов имеют неправильный тип. Разрешенные типы: {{ allowedTypes }}.',
+        messageFileTypeMismatchPlural: (params) => {
+            const filesCount = params['filesCount'];
+            const foldersCountOption = pluralization.process(filesCount);
+            switch (foldersCountOption) {
+                case 'one':
+                    return '1 файл имеет неправильный тип. Разрешенные типы: {{ allowedTypes }}.';
+                case 'few':
+                    return `${filesCount} файла имеют неправильный тип. Разрешенные типы: {{ allowedTypes }}.`;
+                default:
+                    return `${filesCount || 0} файлов имеют неправильный тип. Разрешенные типы: {{ allowedTypes }}.`;
+            }
+        },
         messageFileTypeMismatchSingular:
             'Файл "{{ fileName }}" имеет неправильный тип. Разрешенные типы: {{ allowedTypes }}.',
-        messageFileSizeExceededPlural:
-            '{{ filesCount }} файлов превышают максимальный размер файла. Разрешен максимальный размер файла: {{ maxFileSize }}.',
+        messageFileSizeExceededPlural: (params) => {
+            const filesCount = params['filesCount'];
+            const foldersCountOption = pluralization.process(filesCount);
+            switch (foldersCountOption) {
+                case 'one':
+                    return '1 файл превышают максимальный размер файла. Разрешен максимальный размер файла: {{ maxFileSize }}.';
+                case 'few':
+                    return `${filesCount} файла превышают максимальный размер файла. Разрешен максимальный размер файла: {{ maxFileSize }}.`;
+                default:
+                    return `${
+                        filesCount || 0
+                    } файлов превышают максимальный размер файла. Разрешен максимальный размер файла: {{ maxFileSize }}.`;
+            }
+        },
         messageFileSizeExceededSingular:
             'Файл "{{ fileName }}" превышает максимальный размер файла. Разрешен максимальный размер файла: {{ maxFileSize }}.',
-        messageFileNameLengthExceededPlural:
-            '{{ filesCount }} файлов превысили максимальную длину имени файла. Разрешена длина имени файла: {{ maxFilenameLength }} символов.',
+        messageFileNameLengthExceededPlural: (params) => {
+            const filesCount = params['filesCount'];
+            const foldersCountOption = pluralization.process(filesCount);
+            switch (foldersCountOption) {
+                case 'one':
+                    return '1 файл превысили максимальную длину имени файла. Разрешена длина имени файла: {{ maxFilenameLength }} символов.';
+                case 'few':
+                    return `${filesCount} файла превысили максимальную длину имени файла. Разрешена длина имени файла: {{ maxFilenameLength }} символов.`;
+                default:
+                    return `${
+                        filesCount || 0
+                    } файлов превысили максимальную длину имени файла. Разрешена длина имени файла: {{ maxFilenameLength }} символов.`;
+            }
+        },
         messageFileNameLengthExceededSingular:
             'Имя "{{ fileName }}" превышает максимальную длину имени файла. Разрешена длина имени файла: {{ maxFilenameLength }} символов.'
     },
@@ -389,3 +569,45 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         valueNowDetails: 'Текущее значение: {{ value }}'
     }
 };
+
+/**
+ * Pluralization for "file" word in russian language
+ *
+ * Output samples:
+ * * 1 файл
+ * * 2 файла
+ * * 10 файлов
+ */
+function fileNamePluralization(params: FdLanguageKeyArgs): string {
+    const filesCount = params['filesCount'];
+    const filesCountOption = pluralization.process(filesCount);
+    switch (filesCountOption) {
+        case 'one':
+            return '1 файл';
+        case 'few':
+            return `${filesCount} файла`;
+        default:
+            return `${filesCount || 0} файлов`;
+    }
+}
+
+/**
+ * Pluralization for "folder" word in russian language
+ *
+ * Outputs samples:
+ * * 1 папку
+ * * 2 папки
+ * * 10 папок
+ */
+function folderNamePluralization(params: FdLanguageKeyArgs): string {
+    const foldersCount = params['foldersCount'];
+    const foldersCountOption = pluralization.process(foldersCount);
+    switch (foldersCountOption) {
+        case 'one':
+            return '1 папку';
+        case 'few':
+            return `${foldersCount} папки`;
+        default:
+            return `${foldersCount || 0} папок`;
+    }
+}
