@@ -2,22 +2,23 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ContentChild,
     ElementRef,
     EventEmitter,
     HostBinding,
     Input,
+    OnDestroy,
     OnInit,
-    ViewEncapsulation,
-    Output,
-    ContentChild,
     Optional,
-    OnDestroy
+    Output,
+    ViewEncapsulation
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { PanelContentDirective } from './panel-content/panel-content.directive';
-import { RtlService, ContentDensityService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
+import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundamental-ngx/core/content-density';
 
 let panelUniqueId = 0;
 let panelExpandUniqueId = 0;
@@ -33,7 +34,8 @@ let panelExpandUniqueId = 0;
     templateUrl: './panel.component.html',
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['./panel.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [contentDensityConsumerProviders()]
 })
 export class PanelComponent implements OnInit, OnDestroy {
     /** User's custom classes */
@@ -43,10 +45,6 @@ export class PanelComponent implements OnInit, OnDestroy {
     /** Whether the Panel is fixed */
     @Input()
     fixed: boolean;
-
-    /** Whether to apply compact mode to the Panel */
-    @Input()
-    compact?: boolean;
 
     /** Id of the panel element. */
     @Input()
@@ -87,19 +85,12 @@ export class PanelComponent implements OnInit, OnDestroy {
     constructor(
         private _cdRef: ChangeDetectorRef,
         private _elementRef: ElementRef,
-        @Optional() private _contentDensityService: ContentDensityService,
+        readonly _contentDensityConsumer: ContentDensityConsumer,
         @Optional() private _rtlService: RtlService
     ) {}
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscription.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                })
-            );
-        }
         this._listenRtl();
     }
 
