@@ -100,7 +100,7 @@ export class FdTranslatePipe implements PipeTransform, OnDestroy {
             // attempt to resolve function
             const resolvedFunctionValue = this._tryExecuteLanguageFunction(resolvedKey, args);
             if (resolvedFunctionValue) {
-                return resolvedFunctionValue;
+                return this._interpolate(resolvedFunctionValue, args);
             }
         }
         return null;
