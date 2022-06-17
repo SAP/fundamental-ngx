@@ -5,7 +5,6 @@ import { FdDate, FdDatetimeModule } from '../datetime';
 import { CalendarComponent } from './calendar.component';
 import { CalendarModule } from './calendar.module';
 import { ButtonModule } from '../button/button.module';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 describe('CalendarComponent', () => {
     let component: CalendarComponent<FdDate>;
@@ -14,8 +13,7 @@ describe('CalendarComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [FdDatetimeModule, CalendarModule, ButtonModule],
-                providers: [ContentDensityService]
+                imports: [FdDatetimeModule, CalendarModule, ButtonModule]
             }).compileComponents();
         })
     );

@@ -4,7 +4,6 @@ import { Component, ViewChild } from '@angular/core';
 
 import { CheckboxComponent } from './checkbox.component';
 import { whenStable } from '@fundamental-ngx/core/tests';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
 import { CheckboxModule } from '../checkbox.module';
 
 function getCheckboxInput(fixture: ComponentFixture<any>): any {
@@ -224,8 +223,7 @@ describe('CheckboxComponent with external listeners', () => {
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 imports: [FormsModule, CheckboxModule],
-                declarations: [TestCheckboxWrapper2Component],
-                providers: [ContentDensityService]
+                declarations: [TestCheckboxWrapper2Component]
             }).compileComponents();
         })
     );
