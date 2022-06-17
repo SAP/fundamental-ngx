@@ -17,6 +17,7 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { CardModule, FixedCardLayoutModule, ListModule, ObjectStatusModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -46,7 +47,11 @@ const routes: Routes = [
         ButtonModule,
         FormModule,
         InputGroupModule,
-        SegmentedButtonModule
+        SegmentedButtonModule,
+        FixedCardLayoutModule,
+        CardModule,
+        ListModule,
+        ObjectStatusModule
     ],
     exports: [RouterModule],
     declarations: [examples, TabsHeaderComponent, TabsDocsComponent]

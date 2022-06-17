@@ -220,6 +220,7 @@ export class FixedCardLayoutComponent
     /** @hidden */
     ngAfterContentInit(): void {
         this._listenOnCardsChange();
+        this.updateLayout();
     }
 
     /** @hidden */
@@ -227,6 +228,7 @@ export class FixedCardLayoutComponent
         this._processCards();
         this._listenOnResize();
         this._accessibilitySetup();
+        this.updateLayout();
     }
 
     /** @hidden */
@@ -269,6 +271,7 @@ export class FixedCardLayoutComponent
 
     /** Distribute cards on window resize */
     updateLayout(): void {
+        console.log('updateLayout');
         if (!this._cards.length) {
             return;
         }
