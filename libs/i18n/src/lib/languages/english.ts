@@ -338,7 +338,7 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         messageFileRenameSuccess: '"{{ from }}" has been renamed to "{{ to }}".',
         messageRemoveFoldersAndFilesFailed: 'Failed to remove {{ foldersCount }} folders and {{ filesCount }} files.',
         messageRemoveFoldersAndFilesSuccess: '{{ foldersCount }} folders and {{ filesCount }} files have been removed.',
-        messageRemoveFoldersFailed: 'Failed to remove {{ folderCount }} folders.',
+        messageRemoveFoldersFailed: 'Failed to remove {{ foldersCount }} folders.',
         messageRemoveFoldersSuccess: '{{ foldersCount }} folders have been removed.',
         messageRemoveFilesFailed: 'Failed to remove {{ filesCount }} files.',
         messageRemoveFilesSuccess: '{{ filesCount }} files have been removed.',
