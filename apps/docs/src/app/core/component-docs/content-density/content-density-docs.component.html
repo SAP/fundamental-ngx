@@ -1,7 +1,7 @@
 <description>
     Content Density can be maintained app-wide using the <code>ContentDensityService</code>, and components can
     subscribe to a <code>BehaviorSubject </code> managed by the service and use that to handle changes to the content
-    density. Before using it, you should add <code>ContentDensityService</code> to the provider's array,
+    density. Before using it, you should add <code>ContentDensityService</code> to the <code>providers</code> array of
     <code>AppModule</code>, or other root modules in your application.<br />
     Note that many components only come in one size, and others (such as the button below) only have compact and cozy
     sizes, so setting the size to condensed will have the same effect as compact.<br />
