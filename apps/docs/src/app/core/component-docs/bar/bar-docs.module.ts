@@ -18,6 +18,7 @@ import { SharedDocumentationPageModule } from '../../../documentation/shared-doc
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { BarWithTitleExampleComponent } from './examples/bar-with-title-example.component';
+import { BarCustomColorsExampleComponent } from './examples/bar-custom-colors-example.component';
 
 const routes: Routes = [
     {
@@ -44,7 +45,8 @@ const routes: Routes = [
         BarFloatingFooterExampleComponent,
         BarPageExampleComponent,
         BarPageResponsiveExampleComponent,
-        BarWithTitleExampleComponent
+        BarWithTitleExampleComponent,
+        BarCustomColorsExampleComponent
     ]
 })
 export class BarDocsModule {}

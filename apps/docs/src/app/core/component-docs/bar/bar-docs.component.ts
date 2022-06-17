@@ -14,6 +14,9 @@ import barPageResponsiveExampleHtml from '!./examples/bar-page-responsive-exampl
 import barPageResponsiveExampleTs from '!./examples/bar-page-responsive-example.component.ts?raw';
 import barWithTitleExampleHtml from '!./examples/bar-with-title-example.component.html?raw';
 import barWithTitleExampleTs from '!./examples/bar-with-title-example.component.ts?raw';
+import barCustomColorsExampleHtml from '!./examples/bar-custom-colors-example.component.html?raw';
+import barCustomColorsExampleScss from '!./examples/bar-custom-colors-example.component.scss?raw';
+import barCustomColorsExampleTs from '!./examples/bar-custom-colors-example.component.ts?raw';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
@@ -120,6 +123,20 @@ export class BarDocsComponent {
             code: barWithTitleExampleTs,
             fileName: 'bar-with-title-example',
             component: 'BarWithTitleExampleComponent'
+        }
+    ];
+    barCustomColorsExample: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'bar-custom-colors-example',
+            code: barCustomColorsExampleHtml,
+            scssFileCode: barCustomColorsExampleScss
+        },
+        {
+            language: 'typescript',
+            code: barCustomColorsExampleTs,
+            fileName: 'bar-custom-colors-example',
+            component: 'BarCustomColorsExampleComponent'
         }
     ];
 }
