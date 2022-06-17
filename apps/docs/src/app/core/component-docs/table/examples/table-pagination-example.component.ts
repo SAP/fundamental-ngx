@@ -30,7 +30,7 @@ export class TablePaginationExampleComponent implements OnInit {
 
     itemsPerPageChange(value: number): void {
         this.itemsPerPage = value;
-        this.newPageClicked(1);
+        this.newPageClicked(this.currentPage);
     }
 
     constructor(private _rtlService: RtlService) {}
