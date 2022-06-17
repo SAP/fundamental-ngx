@@ -5,8 +5,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NestedListKeyboardService } from '../nested-list-keyboard.service';
 import { NestedListStateService } from '../nested-list-state.service';
 import { NestedListDirective } from './nested-list.directive';
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../../utils/public_api';
-import { Nullable } from '@fundamental-ngx/core/shared';
 
 @Component({
     template: `
@@ -65,12 +63,7 @@ describe('NestedListDirective', () => {
             TestBed.configureTestingModule({
                 imports: [NestedListModule],
                 declarations: [TestNestedContainerComponent],
-                providers: [
-                    NestedListKeyboardService,
-                    MenuKeyboardService,
-                    NestedListStateService,
-                    ContentDensityService
-                ]
+                providers: [NestedListKeyboardService, MenuKeyboardService, NestedListStateService]
             }).compileComponents();
         })
     );
@@ -98,11 +91,5 @@ describe('NestedListDirective', () => {
         expect((level1List as any)._elementRef.nativeElement.classList.contains('level-1')).toBeTruthy();
         expect((level3List as any)._elementRef.nativeElement.classList.contains('level-3')).toBeTruthy();
         expect((level4List as any)._elementRef.nativeElement.classList.contains('level-4')).toBeTruthy();
-    });
-
-    it('should handle content density when compact input is not provided', () => {
-        level1List.compact = undefined;
-        level1List.ngOnInit();
-        expect(level1List.compact as Nullable<boolean>).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 });
