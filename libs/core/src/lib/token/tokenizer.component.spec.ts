@@ -4,12 +4,12 @@ import { FormControlComponent } from '@fundamental-ngx/core/form';
 
 import { whenStable } from '@fundamental-ngx/core/tests';
 import { TokenComponent, TokenizerComponent, TokenModule } from '@fundamental-ngx/core/token';
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY, RtlService } from '@fundamental-ngx/core/utils';
+import { DEFAULT_CONTENT_DENSITY, RtlService } from '@fundamental-ngx/core/utils';
 
 @Component({
     selector: 'fd-tokenizer-test-component',
     template: `
-        <fd-tokenizer [compact]="compact">
+        <fd-tokenizer [fdCompact]="compact">
             <fd-token>Token 1</fd-token>
             <fd-token>Token 2</fd-token>
             <fd-token>Token 3</fd-token>
@@ -36,7 +36,7 @@ describe('TokenizerComponent', () => {
             TestBed.configureTestingModule({
                 imports: [TokenModule],
                 declarations: [HostComponent, FormControlComponent],
-                providers: [RtlService, ContentDensityService]
+                providers: [RtlService]
             }).compileComponents();
         })
     );
@@ -200,7 +200,7 @@ describe('TokenizerComponent', () => {
     });
 
     it('should handle resize - getting smaller', () => {
-        component.compact = true;
+        fixture.componentInstance.compact = true;
         spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
         spyOn(component, 'getCombinedTokenWidth').and.returnValue(2);
         component.previousElementWidth = 2;
@@ -216,7 +216,7 @@ describe('TokenizerComponent', () => {
     });
 
     it('should handle resize - getting bigger', () => {
-        component.compact = true;
+        fixture.componentInstance.compact = true;
         // need to collapse the tokens before running expand
         spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
         spyOn(component, 'getCombinedTokenWidth').and.returnValue(2);
@@ -232,7 +232,7 @@ describe('TokenizerComponent', () => {
     });
 
     it('should handle resize - getting bigger', () => {
-        component.compact = true;
+        fixture.componentInstance.compact = true;
         // need to collapse the tokens before running expand
         spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
         spyOn(component, 'getCombinedTokenWidth').and.returnValue(2);

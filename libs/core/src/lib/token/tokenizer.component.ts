@@ -28,21 +28,17 @@ import { A, BACKSPACE, DELETE, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@an
 import { fromEvent, Subject, Subscription } from 'rxjs';
 import { filter, takeUntil, tap } from 'rxjs/operators';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
-import {
-    ContentDensityService,
-    CssClassBuilder,
-    applyCssClass,
-    RtlService,
-    KeyUtil
-} from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { TokenComponent } from './token.component';
+import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundamental-ngx/core/content-density';
 
 @Component({
     selector: 'fd-tokenizer',
     templateUrl: './tokenizer.component.html',
     styleUrls: ['./tokenizer.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [contentDensityConsumerProviders()]
 })
 export class TokenizerComponent
     implements AfterViewChecked, AfterViewInit, AfterContentInit, OnDestroy, CssClassBuilder, OnInit, OnChanges
@@ -89,12 +85,15 @@ export class TokenizerComponent
         return this.tokenList.filter((token) => token.elementRef.nativeElement.style.display === 'none');
     }
 
+    /**
+     * Component is in compact mode, determined by the consumer
+     */
+    get compact(): boolean {
+        return this._contentDensityConsumer.isCompact;
+    }
+
     /** @hidden */
     inputGroupAddonEl: ElementRef;
-
-    /** Whether the tokenizer is compact */
-    @Input()
-    compact?: boolean;
 
     /** Whether to use cozy visuals but compact collapsing behavior. */
     @Input()
@@ -152,9 +151,6 @@ export class TokenizerComponent
     _showOverflowPopover = true;
 
     /** @hidden */
-    private _contentDensitySubscription = new Subscription();
-
-    /** @hidden */
     /* Variable which will keep the index of the first token pressed in the tokenizer*/
     private _firstElementInSelection: number | null = null;
 
@@ -172,6 +168,22 @@ export class TokenizerComponent
 
     /** An RxJS Subject that will kill the data stream upon destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
+
+    constructor(
+        readonly _contentDensityConsumer: ContentDensityConsumer,
+        private _elementRef: ElementRef,
+        private _cdRef: ChangeDetectorRef,
+        @Optional() private _rtlService: RtlService,
+        private _renderer: Renderer2
+    ) {
+        this._renderer.listen('window', 'click', (e: Event) => {
+            if (this.elementRef().nativeElement.contains(e.target) === false) {
+                this.tokenList.forEach((token) => {
+                    token.selected = false;
+                });
+            }
+        });
+    }
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -220,42 +232,16 @@ export class TokenizerComponent
         this._onDestroy$.next();
         this._onDestroy$.complete();
         this._unsubscribeClicks();
-        this._contentDensitySubscription.unsubscribe();
     }
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.compact === undefined && this._contentDensityService) {
-            this._contentDensitySubscription.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                    this._cdRef.markForCheck();
-                    this.buildComponentCssClass();
-                })
-            );
-        }
         this.buildComponentCssClass();
     }
 
     /** @hidden */
     ngOnChanges(): void {
         this.buildComponentCssClass();
-    }
-
-    constructor(
-        private _elementRef: ElementRef,
-        @Optional() private _contentDensityService: ContentDensityService,
-        private _cdRef: ChangeDetectorRef,
-        @Optional() private _rtlService: RtlService,
-        private _renderer: Renderer2
-    ) {
-        this._renderer.listen('window', 'click', (e: Event) => {
-            if (this.elementRef().nativeElement.contains(e.target) === false) {
-                this.tokenList.forEach((token) => {
-                    token.selected = false;
-                });
-            }
-        });
     }
 
     @applyCssClass
@@ -594,6 +580,7 @@ export class TokenizerComponent
             this._lastElementInSelection = null;
         }
     }
+
     /** @hidden Method which handles what happens to token when it is clicked and the shift key is being held down.*/
     private _shiftSelected(index): void {
         if (!this._firstElementInSelection && !this._lastElementInSelection) {
