@@ -9,13 +9,10 @@ import {
     HostBinding,
     Input,
     OnDestroy,
-    OnInit,
     Optional,
     QueryList
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 import { NestedListStateService } from '../nested-list-state.service';
 import { NestedItemDirective } from '../nested-item/nested-item.directive';
@@ -24,20 +21,23 @@ import { NestedListKeyboardService } from '../nested-list-keyboard.service';
 import { NestedListInterface } from './nested-list.interface';
 import { NestedListHeaderDirective } from '../nested-list-directives';
 import { Nullable } from '@fundamental-ngx/core/shared';
+import {
+    ContentDensityConsumer,
+    contentDensityConsumerProviders,
+    ContentDensityMode
+} from '@fundamental-ngx/core/content-density';
 
 @Directive({
-    selector: '[fdNestedList], [fd-nested-list]'
+    selector: '[fdNestedList], [fd-nested-list]',
+    providers: [
+        contentDensityConsumerProviders({ modifiers: { [ContentDensityMode.COMPACT]: 'fd-nested-list--compact' } })
+    ]
 })
-export class NestedListDirective implements AfterContentInit, NestedListInterface, OnInit, OnDestroy {
+export class NestedListDirective implements AfterContentInit, NestedListInterface, OnDestroy {
     /** In case the user wants to no use icons for items in this list */
     @Input()
     @HostBinding('class.fd-nested-list--text-only')
     textOnly = false;
-
-    /** In case the user wants put compact mode in this list */
-    @Input()
-    @HostBinding('class.fd-nested-list--compact')
-    compact: Nullable<boolean>;
 
     /** Aria defines role description for the Nested List Tree. */
     @Input()
@@ -97,21 +97,10 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
         private _nestedListKeyboardService: NestedListKeyboardService,
         private _elementRef: ElementRef,
         private _changeDetectionRef: ChangeDetectorRef,
-        @Optional() private _contentDensityService: ContentDensityService
+        private _contentDensityConsumer: ContentDensityConsumer
     ) {
         if (this._nestedItemService) {
             this._nestedItemService.list = this;
-        }
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                })
-            );
         }
     }
 
