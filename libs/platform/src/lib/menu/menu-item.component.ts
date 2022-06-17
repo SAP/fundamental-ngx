@@ -31,6 +31,10 @@ import { MenuInteractiveDirective } from '@fundamental-ngx/core/menu';
     }
 })
 export class MenuItemComponent implements OnDestroy, FocusableOption {
+    /** Set the Menu Item as disabled/enabled */
+    @Input()
+    disabled = false;
+
     /** Menu direction */
     @Input()
     cascadeDirection: 'right' | 'left' = 'right';
@@ -83,22 +87,28 @@ export class MenuItemComponent implements OnDestroy, FocusableOption {
 
     /**
      * @hidden
-     * Handle selection of item via keyboard 'Enter' or mouseclick.
+     * Handle selection of item via keyboard 'Enter'
      */
     @HostListener('keydown', ['$event'])
     _onItemKeydown(event: KeyboardEvent): void {
-        if (event && KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
+        if (event && KeyUtil.isKeyCode(event, [SPACE, ENTER]) && !this.disabled) {
             this.itemSelect.emit();
+        } else if (this.disabled) {
+            event.stopPropagation();
         }
     }
 
     /**
      * @hidden
-     * Handle click of item via keyboard 'Enter'.
+     * Handle click of item via mouse click.
      */
-    @HostListener('click')
-    _onItemClick(): void {
-        this.itemSelect.emit();
+    @HostListener('click', ['$event'])
+    _onItemClick(event: MouseEvent): void {
+        if (!this.disabled) {
+            this.itemSelect.emit();
+        } else {
+            event.stopPropagation();
+        }
     }
 
     /**
