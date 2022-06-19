@@ -1,5 +1,6 @@
-import { Component, ChangeDetectionStrategy, ViewEncapsulation, ChangeDetectorRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
 import { DynamicPageResponsiveSize } from '../../constants';
+import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundamental-ngx/core/content-density';
 
 @Component({
     selector: 'fd-dynamic-page-title-content',
@@ -12,7 +13,7 @@ import { DynamicPageResponsiveSize } from '../../constants';
                 [clearBorder]="true"
                 [forceOverflow]="true"
                 [shouldOverflow]="true"
-                [size]="!compact ? 'cozy' : 'compact'"
+                [size]="!_contentDensityConsumer.isCompact ? 'cozy' : 'compact'"
             >
                 <div fd-toolbar-item>
                     <ng-container *ngTemplateOutlet="templateContentRef"></ng-container>
@@ -29,18 +30,15 @@ import { DynamicPageResponsiveSize } from '../../constants';
         </ng-template>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    providers: [contentDensityConsumerProviders()]
 })
 export class DynamicPageTitleContentComponent {
-    /** Whether should be on compact mode */
-    @Input()
-    compact = false;
-
     /** @hidden */
     _size: DynamicPageResponsiveSize;
 
     /** @hidden */
-    constructor(private _changeDetRef: ChangeDetectorRef) {}
+    constructor(private _changeDetRef: ChangeDetectorRef, readonly _contentDensityConsumer: ContentDensityConsumer) {}
 
     /** @hidden */
     _setSize(size: DynamicPageResponsiveSize): void {
