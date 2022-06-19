@@ -4,6 +4,7 @@ import { ShellbarUserMenu } from '../model/shellbar-user-menu';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { PopoverFillMode, Nullable } from '@fundamental-ngx/core/shared';
+import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundamental-ngx/core/content-density';
 
 /**
  * This Component extends popover component and passes all of the options and events from outside to popover component
@@ -12,7 +13,8 @@ import { PopoverFillMode, Nullable } from '@fundamental-ngx/core/shared';
 @Component({
     selector: 'fd-shellbar-user-menu',
     templateUrl: './shellbar-user-menu.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [contentDensityConsumerProviders()]
 })
 export class ShellbarUserMenuComponent {
     /** The user data. */
@@ -46,10 +48,6 @@ export class ShellbarUserMenuComponent {
     @Input()
     closeOnEscapeKey = true;
 
-    /** Display menu in compact mode */
-    @Input()
-    compact = false;
-
     /** Whether the popover should close when a click is made outside its boundaries. */
     @Input()
     closeOnOutsideClick = true;
@@ -69,6 +67,8 @@ export class ShellbarUserMenuComponent {
     /** Reference to Menu Component */
     @ViewChild(MenuComponent)
     menu: MenuComponent;
+
+    constructor(private _contentDensityConsumer: ContentDensityConsumer) {}
 
     /**
      * @hidden
