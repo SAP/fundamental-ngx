@@ -224,7 +224,7 @@
         "postcss-import": "^14.0.2",
         "postcss-preset-env": "^7.3.1",
         "postcss-url": "^10.1.1",
-        "prettier": "2.5.1",
+        "prettier": "2.7.1",
         "rollup": "2.68.0",
         "standard-version": "9.3.2",
         "ts-node": "9.1.1",
