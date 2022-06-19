@@ -17,7 +17,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { Observable, Subscription, takeUntil, tap } from 'rxjs';
+import { Subscription, takeUntil, tap } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { ButtonType } from '@fundamental-ngx/core/button';
 import { MenuComponent, MenuItemComponent } from '@fundamental-ngx/core/menu';
@@ -25,6 +25,7 @@ import { MenuComponent, MenuItemComponent } from '@fundamental-ngx/core/menu';
 import { SplitButtonActionTitle } from './split-button-utils/split-button.directives';
 import { MainAction } from './main-action';
 import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundamental-ngx/core/content-density';
+import { DestroyedService } from '@fundamental-ngx/core/utils';
 
 export const splitButtonTextClass = 'fd-button-split__text';
 export const splitButtonTextCompactClass = 'fd-button-split__text--compact';
@@ -147,7 +148,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     /** @hidden */
     constructor(
         private _cdRef: ChangeDetectorRef,
-        private _destroy$: Observable<void>,
+        private _destroy$: DestroyedService,
         private _contentDensityConsumer: ContentDensityConsumer,
         private _renderer: Renderer2
     ) {}
