@@ -7,7 +7,7 @@ import { SelectComponent } from './select.component';
 import { PopoverComponent } from '../popover/popover.component';
 import { SelectModule } from './select.module';
 import { SelectKeyManagerService } from './select-key-manager.service';
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
+import { ContentDensityService } from '../utils/public_api';
 
 @Component({
     template: `
@@ -105,11 +105,6 @@ describe('SelectComponent', () => {
     describe('basic behavior', () => {
         it('should create so that componennt instance is non null', () => {
             expect(component).toBeTruthy();
-        });
-
-        it('should handle content density when compact input is not provided', () => {
-            component.ngOnInit();
-            expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
         });
 
         it('should have default state closed when component is initialized', () => {

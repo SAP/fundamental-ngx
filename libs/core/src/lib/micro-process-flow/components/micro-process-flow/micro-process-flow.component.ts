@@ -52,10 +52,6 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
     @Input()
     independentSteps = false;
 
-    /** Whether to apply compact mode to the micro process flow. */
-    @Input()
-    compact: boolean;
-
     /** Pagination transition speed in milliseconds */
     @Input()
     transitionSpeed = 300;
