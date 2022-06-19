@@ -7,17 +7,19 @@ import {
     HostBinding,
     Input,
     OnDestroy,
-    OnInit,
-    Optional,
     ViewEncapsulation
 } from '@angular/core';
-import { ContentDensityService, KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { Subscription } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/core/shared';
 import { TableCellDirective } from './directives/table-cell.directive';
 import { FdTable } from './fd-table.interface';
-
 import { TableService } from './table.service';
+import {
+    ContentDensityConsumer,
+    contentDensityConsumerProviders,
+    ContentDensityMode
+} from '@fundamental-ngx/core/content-density';
 
 /**
  * The component that represents a table.
@@ -34,9 +36,19 @@ import { TableService } from './table.service';
     styleUrls: ['./table.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [TableService, { provide: FdTable, useExisting: TableComponent }]
+    providers: [
+        TableService,
+        { provide: FdTable, useExisting: TableComponent },
+        contentDensityConsumerProviders({
+            modifiers: {
+                [ContentDensityMode.COMPACT]: 'fd-table--compact',
+                [ContentDensityMode.CONDENSED]: 'fd-table--condensed'
+            },
+            supportedContentDensity: [ContentDensityMode.COMPACT, ContentDensityMode.CONDENSED, ContentDensityMode.COZY]
+        })
+    ]
 })
-export class TableComponent implements AfterViewInit, OnInit, OnDestroy, FdTable {
+export class TableComponent implements AfterViewInit, OnDestroy, FdTable {
     /** @hidden */
     @HostBinding('class.fd-table')
     fdTableClass = true;
@@ -50,16 +62,6 @@ export class TableComponent implements AfterViewInit, OnInit, OnDestroy, FdTable
     @HostBinding('class.fd-table--no-vertical-borders')
     @Input()
     noBorderY = false;
-
-    /** Whether or not to display the table in compact mode */
-    @HostBinding('class.fd-table--compact')
-    @Input()
-    compact?: boolean;
-
-    /** Whether or not to display the table in condensed mode */
-    @HostBinding('class.fd-table--condensed')
-    @Input()
-    condensed?: boolean;
 
     /** Whether or not to display the table in pop in mode, it also require change of markup */
     @HostBinding('class.fd-table--pop-in')
@@ -85,21 +87,8 @@ export class TableComponent implements AfterViewInit, OnInit, OnDestroy, FdTable
     constructor(
         private _tableService: TableService,
         private _cdr: ChangeDetectorRef,
-        @Optional() private _contentDensityService: ContentDensityService
+        private _contentDensityConsumer: ContentDensityConsumer
     ) {}
-
-    /** @hidden */
-    ngOnInit(): void {
-        if (this.compact === undefined && this.condensed === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._contentDensityListener.subscribe((density) => {
-                    this.compact = density === 'compact';
-                    this.condensed = density === 'condensed';
-                    this._cdr.detectChanges();
-                })
-            );
-        }
-    }
 
     /** @hidden */
     ngOnDestroy(): void {
