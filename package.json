@@ -160,7 +160,7 @@
         "@angularclass/hmr": "3.0.0",
         "@babel/core": "7.13.14",
         "@commitlint/cli": "16.1.0",
-        "@commitlint/config-conventional": "16.2.1",
+        "@commitlint/config-conventional": "17.0.2",
         "@commitlint/travis-cli": "16.2.1",
         "@nrwl/cli": "13.8.8",
         "@nrwl/devkit": "13.8.3",
