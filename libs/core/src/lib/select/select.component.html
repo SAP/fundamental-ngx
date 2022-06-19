@@ -1,7 +1,12 @@
 <ng-container *ngTemplateOutlet="mobile ? mobileTemplate : desktopTemplate"></ng-container>
 
 <ng-template #desktopTemplate>
-    <div class="fd-select" [class.fd-select--compact]="compact" (keydown)="_handleKeydown($event)" (click)="toggle()">
+    <div
+        class="fd-select"
+        [class.fd-select--compact]="_contentDensityConsumer.isCompact"
+        (keydown)="_handleKeydown($event)"
+        (click)="toggle()"
+    >
         <fd-popover
             additionalBodyClass="fd-popover-custom-list"
             [isOpen]="_isOpen"
@@ -83,7 +88,6 @@
         class="fd-select-options"
         role="listbox"
         tabindex="-1"
-        [compact]="compact"
         [mobileMode]="mobile"
         [dropdownMode]="true"
         [hasMessage]="!!stateMessage"
@@ -106,7 +110,12 @@
 </ng-template>
 
 <ng-template #mobileTemplate>
-    <div class="fd-select" [class.fd-select--compact]="compact" (keydown)="_handleKeydown($event)" (click)="toggle()">
+    <div
+        class="fd-select"
+        [class.fd-select--compact]="_contentDensityConsumer.isCompact"
+        (keydown)="_handleKeydown($event)"
+        (click)="toggle()"
+    >
         <ng-container [ngTemplateOutlet]="selectInputControlTemplate"></ng-container>
     </div>
 
