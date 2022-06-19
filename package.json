@@ -198,7 +198,7 @@
         "eslint-plugin-prefer-arrow": "1.2.3",
         "fs-extra": "10.0.1",
         "github-assistant": "0.3.3",
-        "husky": "6.0.0",
+        "husky": "8.0.1",
         "jasmine-core": "3.9.0",
         "jasmine-marbles": "0.8.4",
         "jasmine-spec-reporter": "6.0.0",
