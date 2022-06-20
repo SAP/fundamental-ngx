@@ -89,8 +89,6 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         }
     }
 
-    showSelectedList$ = new BehaviorSubject<any>(false);
-
     /** Whether the autocomplete should be enabled; Enabled by default */
     @Input()
     autoComplete = true;
@@ -181,14 +179,16 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     @ContentChildren(TemplateDirective)
     customTemplates: QueryList<TemplateDirective>;
 
-    /** @hidden
+    /**
+     * @hidden
      * Custom Option item Template
-     * */
+     */
     optionItemTemplate: TemplateRef<any>;
 
-    /** @hidden
+    /**
+     * @hidden
      * Custom Group Header item Template
-     * */
+     */
     groupItemTemplate: TemplateRef<any>;
 
     /** @hidden
@@ -224,32 +224,41 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         return !(this.mobile && this.mobileConfig.approveButtonText);
     }
 
-    /** @hidden
-     * List of matched suggestions
-     * */
+    /**
+     * @hidden
+     * List of matched suggestion
+     */
     _suggestions: MultiInputOption[];
 
-    /** @hidden
+    /**
+     * @hidden
      * List of matched suggestions
-     * */
+     */
     _newSuggestions: MultiInputOption[];
 
-    /** @hidden
+    /**
+     * @hidden
      * Max width of list container
-     * */
+     */
     maxWidth?: number;
 
-    /** @hidden
+    /**
+     * @hidden
      * Min width of list container
-     * */
+     */
     minWidth?: number;
 
     /**
-     * Need for opening mobile version
-     *
      * @hidden
+     * Need for opening mobile version
      */
     openChange = new Subject<boolean>();
+
+    /**
+     * @hidden
+     * Need for opening more label selected items list
+     */
+    showSelectedList$ = new BehaviorSubject<any>(false);
 
     /** @hidden emits whenever there're changes to the inputs, that affect the data creation from data source */
     private readonly _updateDataSourceValues$ = new Subject<void>();
@@ -258,10 +267,13 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
 
     /** @hidden */
     private _matchingStrategy: MatchingStrategy = this.multiInputConfig.matchingStrategy;
+
     /** @hidden */
     private _dsSubscription?: Subscription;
+
     /** @hidden */
     private _element: HTMLElement = this.elementRef.nativeElement;
+
     /** Keys, that won't trigger the popover's open state, when dispatched on search input */
     private readonly _nonOpeningKeys: number[] = [
         ESCAPE,
@@ -308,7 +320,6 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     ngAfterViewInit(): void {
         this._initWindowResize();
         this._assignCustomTemplates();
-        // this._setSelectedSuggestions();
         super.ngAfterViewInit();
     }
 
@@ -478,28 +489,6 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
             this.handleOptionItem(this._suggestions[index + offset]);
         }
     }
-
-    // /** @hidden */
-    // protected _setSelectedSuggestions(): void {
-    //     this._selectedSuggestions = [];
-    //
-    //     if (!this._selectedItems?.length) {
-    //         return;
-    //     }
-    //
-    //     for (let i = 0; i <= this._selectedItems.length; i++) {
-    //         const selectedItem = this._selectedItems[i];
-    //         const idx = this._suggestions.findIndex(
-    //             (item) => item.label === selectedItem || item.value === selectedItem
-    //         );
-    //         if (idx !== -1) {
-    //             this._selectedSuggestions.push(this._suggestions[idx]);
-    //             this._suggestions[idx].selected = true;
-    //         }
-    //     }
-    //
-    //     this._cd.detectChanges();
-    // }
 
     /** @hidden */
     private _initializeDataSource(ds: FdpMultiInputDataSource<any>): void {

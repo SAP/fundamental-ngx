@@ -33,7 +33,7 @@ import {
     MultiInputOption,
     isFunction
 } from '@fundamental-ngx/platform/shared';
-import { ListComponent, SelectionType } from '@fundamental-ngx/platform/list';
+import { ListComponent } from '@fundamental-ngx/platform/list';
 
 import { InputType } from '../input/input.component';
 import { AutoCompleteEvent } from '../auto-complete/auto-complete.directive';
@@ -44,6 +44,8 @@ import { MULTIINPUT_COMPONENT } from './multi-input.interface';
 import { MultiInputConfig } from './multi-input.config';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 let uniqueHiddenLabel = 0;
+
+export type MultiInputSelectionType = 'none' | 'multi' | 'single';
 
 @Component({
     selector: 'fdp-multi-input',
@@ -91,7 +93,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
      * Selection mode
      */
     @Input()
-    selectionMode: SelectionType = 'none';
+    selectionMode: MultiInputSelectionType = 'none';
 
     @Input()
     hasByLine = false;
