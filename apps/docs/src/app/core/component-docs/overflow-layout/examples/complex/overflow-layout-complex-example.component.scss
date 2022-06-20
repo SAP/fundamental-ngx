@@ -1,0 +1,21 @@
+.fd-avatar-group {
+    .fd-overflow-layout__item {
+        position: relative;
+        &:not(:first-child) {
+            margin-left: -1rem;
+        }
+        &:hover {
+            z-index: 20;
+        }
+    }
+
+    .fd-button {
+        height: 3rem;
+        max-height: 3rem;
+        min-height: 3rem;
+        min-width: 3rem;
+        font-size: 1.125rem;
+        border-radius: 25rem;
+        border-width: var(--fdAvatarGroup_MoreButton_Border);
+    }
+}

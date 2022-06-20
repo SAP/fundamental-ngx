@@ -403,5 +403,13 @@ export const API_FILES = {
         'TimelineHeaderInfoSubTitleDirective'
     ],
     scrollbar: ['ScrollbarComponent'],
-    theming: ['ThemingService', 'BaseThemingConfig']
+    theming: ['ThemingService', 'BaseThemingConfig'],
+    overflowLayout: [
+        'OverflowLayoutComponent',
+        'OverflowItemRefDirective',
+        'OverflowExpandDirective',
+        'OverflowLayoutItemDirective',
+        'OverflowItemContainerRefDirective',
+        'OverflowLayoutPopoverContentDirective'
+    ]
 };

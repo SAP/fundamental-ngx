@@ -541,6 +541,13 @@ export const ROUTES: Routes = [
                 path: 'scrollbar',
                 loadChildren: () =>
                     import('./component-docs/scrollbar/scrollbar-docs.module').then((m) => m.ScrollbarDocsModule)
+            },
+            {
+                path: 'overflow-layout',
+                loadChildren: () =>
+                    import('./component-docs/overflow-layout/overflow-layout-docs.module').then(
+                        (m) => m.OverflowLayoutDocsModule
+                    )
             }
         ]
     }

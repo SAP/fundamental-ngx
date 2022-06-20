@@ -1,0 +1,226 @@
+<ng-template let-person #personDetailsCard>
+    <fd-quick-view [id]="person.id">
+        <fd-quick-view-title align="left" [id]="person.id + '-popover-header'">
+            <fd-button-bar
+                *ngIf="isDetailStage"
+                (click)="openOverflowMain()"
+                glyph="navigation-left-arrow"
+                fdType="transparent"
+                aria-label="Back"
+                title="Back"
+            ></fd-button-bar>
+            Business card
+        </fd-quick-view-title>
+        <fd-quick-view-subheader [id]="person.id + '-popover-subheader'">
+            <fd-avatar
+                *ngIf="!person.imageUrl && !person.glyph"
+                [circle]="true"
+                size="s"
+                role="img"
+                [label]="person.firstName + ' ' + person.lastName"
+                [title]="person.firstName + ' ' + person.lastName"
+                [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
+            ></fd-avatar>
+
+            <fd-avatar
+                *ngIf="person.imageUrl"
+                [circle]="true"
+                size="s"
+                role="img"
+                [image]="person.imageUrl"
+                [title]="person.firstName + ' ' + person.lastName"
+                [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
+            ></fd-avatar>
+
+            <fd-avatar
+                *ngIf="person.glyph"
+                [circle]="true"
+                size="s"
+                role="img"
+                [glyph]="person.glyph"
+                [title]="person.firstName + ' ' + person.lastName"
+                [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
+            ></fd-avatar>
+            <fd-quick-view-subheader-title>
+                {{ person.firstName }} {{ person.lastName }}
+            </fd-quick-view-subheader-title>
+            <fd-quick-view-subheader-subtitle>{{ person.position }}</fd-quick-view-subheader-subtitle>
+        </fd-quick-view-subheader>
+
+        <fd-quick-view-group [attr.aria-labelledby]="person.id + '-group-title'">
+            <fd-quick-view-group-title [id]="person.id + '-group-title'"> Contact Details </fd-quick-view-group-title>
+            <fd-quick-view-group-item>
+                <fd-quick-view-group-item-label>Phone</fd-quick-view-group-item-label>
+                <fd-quick-view-group-item-content>
+                    <a fd-link [href]="'tel:' + person.phone" [innerText]="person.phone"></a>
+                </fd-quick-view-group-item-content>
+            </fd-quick-view-group-item>
+
+            <fd-quick-view-group-item>
+                <fd-quick-view-group-item-label>Mobile</fd-quick-view-group-item-label>
+                <fd-quick-view-group-item-content>
+                    <a fd-link [href]="'tel:' + person.mobile" [innerText]="person.mobile"></a>
+                </fd-quick-view-group-item-content>
+            </fd-quick-view-group-item>
+
+            <fd-quick-view-group-item>
+                <fd-quick-view-group-item-label>Email</fd-quick-view-group-item-label>
+                <fd-quick-view-group-item-content>
+                    <a fd-link [href]="'mailto:' + person.email" [innerText]="person.email"></a>
+                </fd-quick-view-group-item-content>
+            </fd-quick-view-group-item>
+        </fd-quick-view-group>
+    </fd-quick-view>
+</ng-template>
+
+<fd-overflow-layout class="fd-avatar-group">
+    <ng-container *ngFor="let person of itemsToRender; let i = index">
+        <ng-container *fdOverflowItemRef="let hidden; let innerIndex = index">
+            <ng-template #avatarRenderer let-person let-hidden="hidden">
+                <fd-avatar
+                    *ngIf="!person.imageUrl && !person.glyph"
+                    [circle]="true"
+                    [border]="true"
+                    [size]="size"
+                    (click)="hidden ? openOverflowDetails(innerIndex) : null"
+                    (keyup.enter)="hidden ? openOverflowDetails(innerIndex) : null"
+                    (keyup.space)="hidden ? openOverflowDetails(innerIndex) : null"
+                    role="img"
+                    fdOverflowLayoutItem
+                    [focusable]="true"
+                    [title]="person.firstName + ' ' + person.lastName"
+                    [label]="person.firstName + ' ' + person.lastName"
+                    [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
+                ></fd-avatar>
+
+                <fd-avatar
+                    *ngIf="person.imageUrl"
+                    [circle]="true"
+                    [border]="true"
+                    [size]="size"
+                    [image]="person.imageUrl"
+                    (click)="hidden ? openOverflowDetails(innerIndex) : null"
+                    (keyup.enter)="hidden ? openOverflowDetails(innerIndex) : null"
+                    (keyup.space)="hidden ? openOverflowDetails(innerIndex) : null"
+                    role="img"
+                    fdOverflowLayoutItem
+                    [focusable]="true"
+                    [title]="person.firstName + ' ' + person.lastName"
+                    [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
+                ></fd-avatar>
+
+                <fd-avatar
+                    *ngIf="person.glyph"
+                    [circle]="true"
+                    [border]="true"
+                    [size]="size"
+                    [glyph]="person.glyph"
+                    (click)="hidden ? openOverflowDetails(innerIndex) : null"
+                    (keyup.enter)="hidden ? openOverflowDetails(innerIndex) : null"
+                    (keyup.space)="hidden ? openOverflowDetails(innerIndex) : null"
+                    role="img"
+                    fdOverflowLayoutItem
+                    [focusable]="true"
+                    [title]="person.firstName + ' ' + person.lastName"
+                    [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
+                ></fd-avatar>
+            </ng-template>
+            <ng-container *ngIf="hidden; then hiddenItem; else visibleItem"></ng-container>
+            <ng-template #visibleItem>
+                <fd-popover
+                    [noArrow]="false"
+                    placement="top"
+                    [closeOnOutsideClick]="true"
+                    [closeOnEscapeKey]="true"
+                    [focusAutoCapture]="true"
+                    [focusTrapped]="true"
+                >
+                    <fd-popover-control>
+                        <ng-container
+                            *ngTemplateOutlet="avatarRenderer; context: { $implicit: person, hidden: hidden }"
+                        ></ng-container>
+                    </fd-popover-control>
+                    <fd-popover-body
+                        [attr.aria-labelledby]="person.id + '-popover-header'"
+                        [attr.aria-describedby]="person.id + '-popover-subheader'"
+                        role="tooltip"
+                    >
+                        <ng-template
+                            [ngTemplateOutlet]="personDetailsCard"
+                            [ngTemplateOutletContext]="{ $implicit: person }"
+                        ></ng-template>
+                    </fd-popover-body>
+                </fd-popover>
+            </ng-template>
+            <ng-template #hiddenItem>
+                <ng-container
+                    *ngTemplateOutlet="avatarRenderer; context: { $implicit: person, hidden: hidden }"
+                ></ng-container>
+            </ng-template>
+        </ng-container>
+    </ng-container>
+    <ng-container *fdOverflowExpand="let items">
+        <fd-popover
+            [noArrow]="false"
+            [focusTrapped]="true"
+            [focusAutoCapture]="true"
+            [triggers]="[]"
+            [closeOnOutsideClick]="true"
+            [closeOnEscapeKey]="true"
+            placement="top"
+            [maxWidth]="312"
+            (isOpenChange)="handleOverflowPopoverOpen($event)"
+            #overflowPopover
+        >
+            <fd-popover-control>
+                <button
+                    fd-button
+                    fd-avatar-group-overflow-button
+                    [compact]="false"
+                    [size]="size"
+                    (click)="handleControlClick($event, overflowPopover)"
+                    (keydown)="handleControlKeydown($event, overflowPopover)"
+                >
+                    +{{ items.length }}
+                </button>
+            </fd-popover-control>
+            <fd-popover-body aria-labelledby="avatar-group-0-popover-header" role="tooltip">
+                <div class="fd-popover__wrapper" fdOverflowLayoutPopoverContent [items]="items">
+                    <div fd-popover-body-header *ngIf="!isDetailStage">
+                        <div fd-bar barDesign="header">
+                            <div fd-bar-left>
+                                <fd-bar-element id="avatar-group-0-popover-header">
+                                    Team Members ({{ items.length }})
+                                </fd-bar-element>
+                                <fd-bar-element *ngIf="isDetailStage">&nbsp;</fd-bar-element>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <ng-container *ngIf="overflowPopoverStage === 'main'">
+                            <ng-container *ngFor="let person of items; let i = index">
+                                <ng-container
+                                    *ngTemplateOutlet="
+                                        person.templateRef;
+                                        context: { $implicit: person, hidden: true, index: person.index }
+                                    "
+                                ></ng-container>
+                            </ng-container>
+                        </ng-container>
+
+                        <ng-container *ngIf="overflowPopoverStage === 'detail'">
+                            <ng-template
+                                [ngTemplateOutlet]="personDetailsCard"
+                                [ngTemplateOutletContext]="{ $implicit: personDetails }"
+                            ></ng-template>
+                        </ng-container>
+                    </div>
+                </div>
+            </fd-popover-body>
+        </fd-popover>
+    </ng-container>
+</fd-overflow-layout>
+
+<button fd-button label="Add new item" (click)="addItem()"></button>
+<button fd-button label="Remove item" (click)="removeItem()"></button>

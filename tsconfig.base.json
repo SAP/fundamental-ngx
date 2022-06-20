@@ -81,6 +81,7 @@
             "@fundamental-ngx/core/object-marker": ["libs/core/src/lib/object-marker/index.ts"],
             "@fundamental-ngx/core/object-number": ["libs/core/src/lib/object-number/index.ts"],
             "@fundamental-ngx/core/object-status": ["libs/core/src/lib/object-status/index.ts"],
+            "@fundamental-ngx/core/overflow-layout": ["libs/core/src/lib/overflow-layout/index.ts"],
             "@fundamental-ngx/core/pagination": ["libs/core/src/lib/pagination/index.ts"],
             "@fundamental-ngx/core/panel": ["libs/core/src/lib/panel/index.ts"],
             "@fundamental-ngx/core/popover": ["libs/core/src/lib/popover/index.ts"],
