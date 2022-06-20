@@ -1,22 +1,26 @@
-<header>Pagination</header>
-<description>
-    Use pagination components in conjunction with Lists, Tables, and Trees to allow for more efficient performance and
-    quick access to specific records in the overall data set.<br /><br />
+<fd-doc-page>
+    <header>Pagination</header>
+    <description>
+        Use pagination components in conjunction with Lists, Tables, and Trees to allow for more efficient performance
+        and
+        quick access to specific records in the overall data set.<br /><br />
 
-    Pagination links are navigable via the tab key and selected with the space bar or enter key.<br /><br />
+        Pagination links are navigable via the tab key and selected with the space bar or enter key.<br /><br />
 
-    If <= 9 pages present - all pages shown, button in active state shown for the current page, otherwise "..." (more)
-    elements shown, input with the current page value shown, can be used to navigate to certain page.<br /><br />
+        If <= 9 pages present - all pages shown, button in active state shown for the current page, otherwise "..."
+        (more)
+        elements shown, input with the current page value shown, can be used to navigate to certain page.<br /><br />
 
-    Pres Enter or Space after filling the input with page number to navigate to the certain page.<br /><br />
+        Pres Enter or Space after filling the input with page number to navigate to the certain page.<br /><br />
 
-    The pagination component's <code>currentPage</code> value must be updated from your component for the component to
-    work properly.<br /><br />
+        The pagination component's <code>currentPage</code> value must be updated from your component for the component
+        to
+        work properly.<br /><br />
 
-    Pages can be selected programmatically by calling the <code>goToPage(pageNumber)</code> method of the pagination
-    component.
-</description>
-<import module="PaginationModule" subPackage="pagination"></import>
+        Pages can be selected programmatically by calling the <code>goToPage(pageNumber)</code> method of the pagination
+        component.
+    </description>
+    <import module="PaginationModule" subPackage="pagination"></import>
 
-<fd-header-tabs></fd-header-tabs>
-<router-outlet></router-outlet>
+    <fd-header-tabs></fd-header-tabs>
+</fd-doc-page>

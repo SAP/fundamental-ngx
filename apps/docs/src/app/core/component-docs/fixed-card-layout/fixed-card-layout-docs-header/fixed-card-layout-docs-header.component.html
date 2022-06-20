@@ -1,28 +1,33 @@
-<header>Fixed Card Layout</header>
-<description>
-    The fixed card layout supports automatic, easy and fast card design. The cards are ordered in responsive and
-    collapsible columns. The cards are arranged into a “Z” flow: from left to right, starting with the first card on the
-    top left of the page. The maximum number of columns is 10.
-</description>
-<import module="FixedCardLayoutModule" subPackage="fixed-card-layout"></import>
+<fd-doc-page>
+    <header>Fixed Card Layout</header>
+    <description>
+        The fixed card layout supports automatic, easy and fast card design. The cards are ordered in responsive and
+        collapsible columns. The cards are arranged into a “Z” flow: from left to right, starting with the first card on
+        the
+        top left of the page. The maximum number of columns is 10.
+    </description>
+    <import module="FixedCardLayoutModule" subPackage="fixed-card-layout"></import>
 
-<description>
-    <b>Notes:</b> <br />
+    <description>
+        <b>Notes:</b> <br />
 
-    <ul>
-        <li>
-            Layout available size change can be detected when angular triggers change detection. For example
-            <a href="https://www.npmjs.com/package/angular-resize-event/" target="_blank">angular-resize-event</a> can
-            be used for detecting layout size change and then angular can trigger change detection. Using which Fixed
-            card layout will be able to re-distribute card.
-        </li>
+        <ul>
+            <li>
+                Layout available size change can be detected when angular triggers change detection. For example
+                <a href="https://www.npmjs.com/package/angular-resize-event/" target="_blank">angular-resize-event</a>
+                can
+                be used for detecting layout size change and then angular can trigger change detection. Using which
+                Fixed
+                card layout will be able to re-distribute card.
+            </li>
 
-        <li>
-            Drag'n'Drop feature by default has delay of 200 ms after pointer down and before dragging is started. That's
-            made to avoid breaking scrolling on mobile devices with touch screen. In case you need to change this
-            behavior, use <code>dragStartDelay</code> input property.
-        </li>
-    </ul>
-</description>
-<fd-header-tabs></fd-header-tabs>
-<router-outlet></router-outlet>
+            <li>
+                Drag'n'Drop feature by default has delay of 200 ms after pointer down and before dragging is started.
+                That's
+                made to avoid breaking scrolling on mobile devices with touch screen. In case you need to change this
+                behavior, use <code>dragStartDelay</code> input property.
+            </li>
+        </ul>
+    </description>
+    <fd-header-tabs></fd-header-tabs>
+</fd-doc-page>

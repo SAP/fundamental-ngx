@@ -1,30 +1,34 @@
-<header>Popover</header>
-<description>
-    <p>The popover is a wrapping component that accepts a “control” as well as a “body".</p>
-    <p>
-        A control can be anything that you want to trigger the interaction from. The body will be the contents of what
-        you reveal on the page after triggering the popover. Commonly used as the interaction/wrapping component when
-        composing “dropdowns”, “contextual menus”, etc, when paired with the menu component.
-    </p>
-    <p>
-        The popover body can have optional Header, Subheader and/or Footer. When the Header is used with a Subheader,
-        the Header should set the [hasSubheader] property to "true". Header, Subheader and Footer have compact mode
-        which is available by setting the [compact] property to "true".
-    </p>
-    <p>
-        As a general rule, it is suggested that one popover be revealed on the page at any given time. Opening one
-        popover should close all others to prevent multiple layers and collisions of several popovers.
-    </p>
-    <p>
-        Fundamental-ngx popovers use the <code>overlay</code> package provided by
-        <a href="https://material.angular.io/cdk/overlay/overview" target="_blank">Angular CDK</a>.
-    </p>
-    <fd-message-strip [dismissible]="false" type="information">
-        <b>IMPORTANT</b> If you place Popover inside scrollable container - you need to add
-        <code>cdkScrollable</code> directive into container and import <code>ScrollingModule</code> into module.
-    </fd-message-strip>
-</description>
-<import module="PopoverModule" subPackage="popover"></import>
+<fd-doc-page>
+    <header>Popover</header>
+    <description>
+        <p>The popover is a wrapping component that accepts a “control” as well as a “body".</p>
+        <p>
+            A control can be anything that you want to trigger the interaction from. The body will be the contents of
+            what
+            you reveal on the page after triggering the popover. Commonly used as the interaction/wrapping component
+            when
+            composing “dropdowns”, “contextual menus”, etc, when paired with the menu component.
+        </p>
+        <p>
+            The popover body can have optional Header, Subheader and/or Footer. When the Header is used with a
+            Subheader,
+            the Header should set the [hasSubheader] property to "true". Header, Subheader and Footer have compact mode
+            which is available by setting the [compact] property to "true".
+        </p>
+        <p>
+            As a general rule, it is suggested that one popover be revealed on the page at any given time. Opening one
+            popover should close all others to prevent multiple layers and collisions of several popovers.
+        </p>
+        <p>
+            Fundamental-ngx popovers use the <code>overlay</code> package provided by
+            <a href="https://material.angular.io/cdk/overlay/overview" target="_blank">Angular CDK</a>.
+        </p>
+        <fd-message-strip [dismissible]="false" type="information">
+            <b>IMPORTANT</b> If you place Popover inside scrollable container - you need to add
+            <code>cdkScrollable</code> directive into container and import <code>ScrollingModule</code> into module.
+        </fd-message-strip>
+    </description>
+    <import module="PopoverModule" subPackage="popover"></import>
 
-<fd-header-tabs></fd-header-tabs>
-<router-outlet></router-outlet>
+    <fd-header-tabs></fd-header-tabs>
+</fd-doc-page>

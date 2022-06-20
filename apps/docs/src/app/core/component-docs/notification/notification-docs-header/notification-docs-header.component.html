@@ -1,89 +1,103 @@
-<header>Notification</header>
-<import module="NotificationModule" subPackage="notification"></import>
-<br /><br />
-<description>
-    Notifications are the best way to make users aware of a situation that requires timely action or attention. This
-    could be a situation that has just arisen or a task triggered by a workflow.
+<fd-doc-page>
+    <header>Notification</header>
+    <import module="NotificationModule" subPackage="notification"></import>
     <br /><br />
-    <b>Use notifications in the following cases:</b>
-    <ul>
-        <li>To make users aware of situations that require attention.</li>
-        <li>
-            To reduce the amount of information and the number of actions to a minimum, but provide enough information
-            to help users decide if the information is important.
-        </li>
-        <li>
-            The notification list items and notification list groups are only used in the SAP Fiori notifications
-            popover.
-        </li>
-    </ul>
-    <p>
-        Users access notifications by clicking the bell icon in the shell bar at the top right of the screen. In the
-        notifications popover, the user can order notifications in various ways, take action, and navigate to the source
-        of a specific notification.<br />
-        High-priority notifications are shown using the banner. The banner appears on the upper right-hand corner of the
-        screen for a short period of time and then disappears. It's recommended to set a notification to high priority
-        if you need to get the user’s immediate attention. In this case you need to use the NotificationService and pass
-        the content of the notifications as a template or a component.
-    </p>
-    <ul>
-        <li>
-            <code>fd-notification</code> component. The <code>width</code> input property controls the width of the
-            notification. The width of the notification cannot exceed 40rem. The input property
-            <code>mobile</code> specifies if the notification is in mobile mode.
-        </li>
-        <li>
-            <code>fd-notification-body</code> component. A container for an avatar (optional), a message strip
-            (optional) and a notification content (required).
-        </li>
-        <li>
-            <code>fd-notification-content</code> component. A container for the notification header, paragraph and
-            footer.
-        </li>
-        <li>
-            <code>fd-notification-header</code> component. Consists of a mandatory title and an optional priority
-            indicator.
-        </li>
-        <li>
-            <code>fd-notification-indicator</code> directive. The <code>type</code> input property specifies the
-            priority of the notification. Options include "success", "error", "warning" and "information".
-        </li>
-        <li>
-            <code>fd-notification-title</code> directive. The “read” or “unread” status of a notification is visualized
-            using medium and bold headlines. Unclicked/unopened notifications are shown as “unread” and in bold. To
-            control this state use the <code>unread</code> property.
-        </li>
-        <li><code>fd-notification-paragraph</code> directive.</li>
-        <li>
-            <code>fd-notification-footer</code> component. Contains information about the author/source and a mandatory
-            timestamp. The content is divided by a separator.
-        </li>
-        <li><code>fd-notification-footer-content</code> directive.</li>
-        <li><code>fd-notification-separator</code> directive.</li>
-        <li>
-            <code>fd-notification-actions</code> component. The actions associated with notifications allow users to act
-            on notifications from within the notification popover. If more than one actions is exposed, all actions move
-            into the overflow (<b>Action Sheet</b> component). It's recommended to display only self-explanatory actions
-            that don’t require additional context.
-        </li>
-    </ul>
+    <description>
+        Notifications are the best way to make users aware of a situation that requires timely action or attention. This
+        could be a situation that has just arisen or a task triggered by a workflow.
+        <br /><br />
+        <b>Use notifications in the following cases:</b>
+        <ul>
+            <li>To make users aware of situations that require attention.</li>
+            <li>
+                To reduce the amount of information and the number of actions to a minimum, but provide enough
+                information
+                to help users decide if the information is important.
+            </li>
+            <li>
+                The notification list items and notification list groups are only used in the SAP Fiori notifications
+                popover.
+            </li>
+        </ul>
+        <p>
+            Users access notifications by clicking the bell icon in the shell bar at the top right of the screen. In the
+            notifications popover, the user can order notifications in various ways, take action, and navigate to the
+            source
+            of a specific notification.<br />
+            High-priority notifications are shown using the banner. The banner appears on the upper right-hand corner of
+            the
+            screen for a short period of time and then disappears. It's recommended to set a notification to high
+            priority
+            if you need to get the user’s immediate attention. In this case you need to use the NotificationService and
+            pass
+            the content of the notifications as a template or a component.
+        </p>
+        <ul>
+            <li>
+                <code>fd-notification</code> component. The <code>width</code> input property controls the width of the
+                notification. The width of the notification cannot exceed 40rem. The input property
+                <code>mobile</code> specifies if the notification is in mobile mode.
+            </li>
+            <li>
+                <code>fd-notification-body</code> component. A container for an avatar (optional), a message strip
+                (optional) and a notification content (required).
+            </li>
+            <li>
+                <code>fd-notification-content</code> component. A container for the notification header, paragraph and
+                footer.
+            </li>
+            <li>
+                <code>fd-notification-header</code> component. Consists of a mandatory title and an optional priority
+                indicator.
+            </li>
+            <li>
+                <code>fd-notification-indicator</code> directive. The <code>type</code> input property specifies the
+                priority of the notification. Options include "success", "error", "warning" and "information".
+            </li>
+            <li>
+                <code>fd-notification-title</code> directive. The “read” or “unread” status of a notification is
+                visualized
+                using medium and bold headlines. Unclicked/unopened notifications are shown as “unread” and in bold. To
+                control this state use the <code>unread</code> property.
+            </li>
+            <li><code>fd-notification-paragraph</code> directive.</li>
+            <li>
+                <code>fd-notification-footer</code> component. Contains information about the author/source and a
+                mandatory
+                timestamp. The content is divided by a separator.
+            </li>
+            <li><code>fd-notification-footer-content</code> directive.</li>
+            <li><code>fd-notification-separator</code> directive.</li>
+            <li>
+                <code>fd-notification-actions</code> component. The actions associated with notifications allow users to
+                act
+                on notifications from within the notification popover. If more than one actions is exposed, all actions
+                move
+                into the overflow (<b>Action Sheet</b> component). It's recommended to display only self-explanatory
+                actions
+                that don’t require additional context.
+            </li>
+        </ul>
 
-    <b>Notification Groups</b>
-    <ul>
-        <li>
-            <code>fd-notification-group</code> component. The <code>width</code> input property controls the width of
-            the group.
-        </li>
-        <li>
-            <code>fd-notification-group-list</code> component. Contains the header of the group and aggregated single
-            notification items.
-        </li>
-        <li>
-            <code>fd-notification-group-header</code> component. Contains an expand/collapse button, group priority
-            (indicator), title with item counter and actions. The <code>expanded</code> property controls the display
-            and hide the individual items.
-        </li>
-    </ul>
-</description>
-<fd-header-tabs></fd-header-tabs>
-<router-outlet></router-outlet>
+        <b>Notification Groups</b>
+        <ul>
+            <li>
+                <code>fd-notification-group</code> component. The <code>width</code> input property controls the width
+                of
+                the group.
+            </li>
+            <li>
+                <code>fd-notification-group-list</code> component. Contains the header of the group and aggregated
+                single
+                notification items.
+            </li>
+            <li>
+                <code>fd-notification-group-header</code> component. Contains an expand/collapse button, group priority
+                (indicator), title with item counter and actions. The <code>expanded</code> property controls the
+                display
+                and hide the individual items.
+            </li>
+        </ul>
+    </description>
+    <fd-header-tabs></fd-header-tabs>
+</fd-doc-page>

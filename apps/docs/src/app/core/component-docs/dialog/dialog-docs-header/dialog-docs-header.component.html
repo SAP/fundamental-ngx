@@ -1,28 +1,32 @@
-<header>Dialog</header>
-<description>
-    <p>
-        The dialog is used as a container to be displayed in response to an action. It is commonly used to collect
-        simple information with a short form, to get confirmation or display contextual information that does not
-        require a page.
-    </p>
-    <p>
-        Dialogs make use of a singleton service called <code>DialogService</code>. It provides the ability to
-        <code>open()</code> dialog windows.
-    </p>
-    <p>
-        The <code>open()</code> method accepts either a <code>TemplateRef</code> or <code>Component</code> as dialog
-        content. In addition, you may also provide a <code>DialogConfig</code> object to override some system-default
-        dialog window behaviours.
-    </p>
-    <p>When a dialog window is opened, the content is positioned in a parent element that is appended to the body.</p>
-    <p>
-        Importing either <code>BrowserAnimationsModule</code> or <code>NoopAnimationsModule</code> is required.
-        <code>BrowserAnimationsModule</code> is the standard Angular animation module, it animates content as expected.
-        <code>NoopAnimationsModule</code> mocks the animations and does not render them, potentially increasing
-        performance.
-    </p>
-</description>
-<import module="DialogModule" subPackage="dialog"></import>
+<fd-doc-page>
+    <header>Dialog</header>
+    <description>
+        <p>
+            The dialog is used as a container to be displayed in response to an action. It is commonly used to collect
+            simple information with a short form, to get confirmation or display contextual information that does not
+            require a page.
+        </p>
+        <p>
+            Dialogs make use of a singleton service called <code>DialogService</code>. It provides the ability to
+            <code>open()</code> dialog windows.
+        </p>
+        <p>
+            The <code>open()</code> method accepts either a <code>TemplateRef</code> or <code>Component</code> as dialog
+            content. In addition, you may also provide a <code>DialogConfig</code> object to override some
+            system-default
+            dialog window behaviours.
+        </p>
+        <p>When a dialog window is opened, the content is positioned in a parent element that is appended to the
+            body.</p>
+        <p>
+            Importing either <code>BrowserAnimationsModule</code> or <code>NoopAnimationsModule</code> is required.
+            <code>BrowserAnimationsModule</code> is the standard Angular animation module, it animates content as
+            expected.
+            <code>NoopAnimationsModule</code> mocks the animations and does not render them, potentially increasing
+            performance.
+        </p>
+    </description>
+    <import module="DialogModule" subPackage="dialog"></import>
 
-<fd-header-tabs></fd-header-tabs>
-<router-outlet></router-outlet>
+    <fd-header-tabs></fd-header-tabs>
+</fd-doc-page>

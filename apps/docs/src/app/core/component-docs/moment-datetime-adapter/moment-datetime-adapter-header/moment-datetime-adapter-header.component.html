@@ -1,22 +1,24 @@
-<header>Moment Datetime Adapter</header>
-<fd-message-strip type="warning" [dismissible]="false">
-    DEPRECATED. Since Moment library is now
-    <a href="https://momentjs.com/docs/#/-project-status/" target="_blank">considered as legacy</a>, we are deprecating
-    the MomentDatetimeAdapter in favour of Dayjs. Please use
-    <a routerLink="/core/dayjs-datetime-adapter">DayjsDatetimeAdapter</a> instead
-</fd-message-strip>
-<description>
-    The Date Picker, Time Picker, Date Time Picker and similar components
-    <strong>rely on provided datetime implementation</strong> (<code>DatetimeAdapter</code>) and
-    <strong>datetime formats</strong> (<code>DateTimeFormats</code>). <br /><br />
-    These components could be used with <code>FdDatetimeAdapter</code>, based on the JavaScript's native
-    <code>Date</code> object, but one of the biggest shortcomings of the native <code>Date</code> object is the
-    inability to set the parse format. As an alternative could be the <code>MomentDateAdapter</code> or a custom
-    <code>DateAdapter</code> that works with the formatting/parsing library of your choice. <br /><br />
-    Please consider that you need to install this package separately.
-    <fd-code-snippet [file]="installSnippet"></fd-code-snippet>
-</description>
-<import module="MomentDatetimeModule"></import>
+<fd-doc-page>
+    <header>Moment Datetime Adapter</header>
+    <fd-message-strip type="warning" [dismissible]="false">
+        DEPRECATED. Since Moment library is now
+        <a href="https://momentjs.com/docs/#/-project-status/" target="_blank">considered as legacy</a>, we are
+        deprecating
+        the MomentDatetimeAdapter in favour of Dayjs. Please use
+        <a routerLink="/core/dayjs-datetime-adapter">DayjsDatetimeAdapter</a> instead
+    </fd-message-strip>
+    <description>
+        The Date Picker, Time Picker, Date Time Picker and similar components
+        <strong>rely on provided datetime implementation</strong> (<code>DatetimeAdapter</code>) and
+        <strong>datetime formats</strong> (<code>DateTimeFormats</code>). <br /><br />
+        These components could be used with <code>FdDatetimeAdapter</code>, based on the JavaScript's native
+        <code>Date</code> object, but one of the biggest shortcomings of the native <code>Date</code> object is the
+        inability to set the parse format. As an alternative could be the <code>MomentDateAdapter</code> or a custom
+        <code>DateAdapter</code> that works with the formatting/parsing library of your choice. <br /><br />
+        Please consider that you need to install this package separately.
+        <fd-code-snippet [file]="installSnippet"></fd-code-snippet>
+    </description>
+    <import module="MomentDatetimeModule"></import>
 
-<fd-header-tabs></fd-header-tabs>
-<router-outlet></router-outlet>
+    <fd-header-tabs></fd-header-tabs>
+</fd-doc-page>

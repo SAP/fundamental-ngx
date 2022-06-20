@@ -1,43 +1,50 @@
-<header>Grid List</header>
-<description>
-    As with the list and the responsive table, the grid list displays a set of items. In contrast to both controls, the
-    grid list displays the items not in rows, but in a grid. The grid list is usually used as an alternative view for a
-    list or table. It is ideal for displaying images, charts, object cards, and other content, which profit from more
-    height (but less width).
+<fd-doc-page>
+    <header>Grid List</header>
+    <description>
+        As with the list and the responsive table, the grid list displays a set of items. In contrast to both controls,
+        the
+        grid list displays the items not in rows, but in a grid. The grid list is usually used as an alternative view
+        for a
+        list or table. It is ideal for displaying images, charts, object cards, and other content, which profit from
+        more
+        height (but less width).
 
-    <h3>Usage</h3>
-    <h4>Use the grid list if:</h4>
+        <h3>Usage</h3>
+        <h4>Use the grid list if:</h4>
 
-    <ul>
-        <li>
-            Your content is “visual” and profits from the rectangular format of the items. This is true for e.g. images,
-            charts, and object cards.
-        </li>
-        <li>The focus is on items, not on cells. The grid list shows complete items.</li>
-        <li>You want to display a homogeneous set of basic data.</li>
-        <li>You need to sort, group, or filter simple data sets.</li>
-        <li>As an alternative view for tables or lists, if the content profits from the different format.</li>
-    </ul>
-    <h4>Do not use the grid list if:</h4>
+        <ul>
+            <li>
+                Your content is “visual” and profits from the rectangular format of the items. This is true for e.g.
+                images,
+                charts, and object cards.
+            </li>
+            <li>The focus is on items, not on cells. The grid list shows complete items.</li>
+            <li>You want to display a homogeneous set of basic data.</li>
+            <li>You need to sort, group, or filter simple data sets.</li>
+            <li>As an alternative view for tables or lists, if the content profits from the different format.</li>
+        </ul>
+        <h4>Do not use the grid list if:</h4>
 
-    <ul>
-        <li>
-            Your content is not appropriate for a card-like format. For example, do not use the grid list for displaying
-            a wall of text. Use a table instead.
-        </li>
-        <li>
-            The main use case is to select one item from a very small number of items, without viewing additional
-            details. In this case, a select or combo box might be more appropriate.
-        </li>
-        <li>Data needs to be structured in a hierarchical manner. In this case, a tree might be more appropriate.</li>
-        <li>You need an overview of a large amount of data. In this case, use a chart.</li>
-        <li>
-            You want to manage complex datasets that need to be extensively sorted, grouped, filtered, or edited. In
-            this case, use a table.
-        </li>
-    </ul>
-</description>
-<import module="GridListModule" subPackage="grid-list"></import>
+        <ul>
+            <li>
+                Your content is not appropriate for a card-like format. For example, do not use the grid list for
+                displaying
+                a wall of text. Use a table instead.
+            </li>
+            <li>
+                The main use case is to select one item from a very small number of items, without viewing additional
+                details. In this case, a select or combo box might be more appropriate.
+            </li>
+            <li>Data needs to be structured in a hierarchical manner. In this case, a tree might be more appropriate.
+            </li>
+            <li>You need an overview of a large amount of data. In this case, use a chart.</li>
+            <li>
+                You want to manage complex datasets that need to be extensively sorted, grouped, filtered, or edited. In
+                this case, use a table.
+            </li>
+        </ul>
+    </description>
+    <import module="GridListModule" subPackage="grid-list"></import>
 
-<fd-header-tabs></fd-header-tabs>
-<router-outlet></router-outlet>
+    <fd-header-tabs></fd-header-tabs>
+</fd-doc-page>
