@@ -4,10 +4,10 @@ import { ApiComponent } from '../../../documentation/core-helpers/api/api.compon
 import { API_FILES } from '../../api-files';
 import { BarDocsComponent } from './bar-docs.component';
 import {
-    BarSubHeaderExampleComponent,
-    BarHeaderSubHeaderExampleComponent,
+    BarFloatingFooterExampleComponent,
     BarFooterExampleComponent,
-    BarFloatingFooterExampleComponent
+    BarHeaderSubHeaderExampleComponent,
+    BarSubHeaderExampleComponent
 } from './examples/bar-simple-examples.component';
 import { BarDefaultExampleComponent } from './examples/bar-default-example.component';
 import { BarHeaderExampleComponent } from './examples/bar-header-example.component';
@@ -22,7 +22,7 @@ import {
     DeprecatedBarContentDensityDirective
 } from '@fundamental-ngx/core/bar';
 import { BarWithTitleExampleComponent } from './examples/bar-with-title-example.component';
-import { ModuleDeprecations } from '@fundamental-ngx/core/utils';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
 
 const routes: Routes = [
     {
@@ -52,16 +52,8 @@ const routes: Routes = [
         BarWithTitleExampleComponent
     ],
     providers: [
-        {
-            provide: ModuleDeprecations,
-            useClass: DeprecatedBarContentDensityDirective,
-            multi: true
-        },
-        {
-            provide: ModuleDeprecations,
-            useClass: DeprecatedBarButtonContentDensityDirective,
-            multi: true
-        }
+        moduleDeprecationsProvider(DeprecatedBarContentDensityDirective),
+        moduleDeprecationsProvider(DeprecatedBarButtonContentDensityDirective)
     ]
 })
 export class BarDocsModule {}

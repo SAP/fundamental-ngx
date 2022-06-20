@@ -7,11 +7,11 @@ import { CONTENT_DENSITY_DIRECTIVE, DeprecatedCompactDirective } from '@fundamen
     providers: [
         {
             provide: CONTENT_DENSITY_DIRECTIVE,
-            useExisting: forwardRef(() => DeprecatedTimeModuleContentDensityDirective)
+            useExisting: forwardRef(() => DeprecatedTimeContentDensityDirective)
         }
     ]
 })
-export class DeprecatedTimeModuleContentDensityDirective extends DeprecatedCompactDirective {
+export class DeprecatedTimeContentDensityDirective extends DeprecatedCompactDirective {
     constructor() {
         super('fd-time-column[compact], fd-time');
     }

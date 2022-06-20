@@ -7,7 +7,7 @@ import { SharedDocumentationPageModule } from '../../../documentation/shared-doc
 import { examples } from './examples';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
-import { ModuleDeprecations } from '@fundamental-ngx/core/utils';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
 
 const routes: Routes = [
     {
@@ -24,12 +24,6 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ActionSheetModule],
     exports: [RouterModule],
     declarations: [ActionSheetDocsComponent, ActionSheetHeaderComponent, examples],
-    providers: [
-        {
-            provide: ModuleDeprecations,
-            useClass: DeprecatedActionSheetCompactDirective,
-            multi: true
-        }
-    ]
+    providers: [moduleDeprecationsProvider(DeprecatedActionSheetCompactDirective)]
 })
 export class ActionSheetDocsModule {}
