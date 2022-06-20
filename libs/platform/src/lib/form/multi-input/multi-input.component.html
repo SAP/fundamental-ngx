@@ -41,12 +41,12 @@
         (click)="onInputGroupClicked()"
     >
         <span [attr.id]="tokenHiddenId" aria-hidden="true" class="fdp-multi-input__invisible-text"
-            >Contains {{ selected.length || 'no' }} token</span
+            >Contains {{ selectedItems.length || 'no' }} token</span
         >
         <fd-tokenizer
-            *ngIf="selected"
+            *ngIf="selectedItems"
             [compact]="contentDensity | isCompactDensity"
-            [tokenizerFocusable]="false"
+            [tokenizerFocusable]="true"
             class="fd-multi-input-tokenizer-custom"
             [class]="(contentDensity | isCompactDensity) ? 'fd-multi-input-tokenizer-custom--compact' : ''"
             (moreClickedEvent)="moreClicked()"
@@ -57,9 +57,9 @@
                 [readOnly]="disabled"
                 [compact]="contentDensity | isCompactDensity"
                 (onCloseClick)="removeToken(token)"
-                *ngFor="let token of selected; let i = index"
+                *ngFor="let token of selectedItems; let i = index"
                 [attr.aria-posinset]="i"
-                [attr.aria-setsize]="selected.length"
+                [attr.aria-setsize]="selectedItems.length"
             >
                 <span [innerText]="token.label | displayFnPipe: displayFn"></span>
             </fd-token>
@@ -101,9 +101,10 @@
         [noBorder]="true"
         #listTemplateDD
         [hasByLine]="hasByLine"
-        [selectionMode]="selectionMode"
+        [selectionMode]="(showSelectedList$ | async) ? 'delete' : selectionMode"
         [contentDensity]="contentDensity"
         *ngIf="_suggestions && _suggestions.length"
+        [selection]="true"
         role="listbox"
         aria-multiselectable="true"
     >
@@ -113,7 +114,8 @@
                 [title]="listItem.label"
                 [description]="listItem.description || ''"
                 [avatarSrc]="listItem.avatarSrc"
-                (itemSelected)="addToArray(listItem)"
+                [selected]="listItem.selected"
+                (itemSelected)="onSelect(listItem)"
                 [contentDensity]="contentDensity"
                 (buttonClicked)="deleteToken(listItem)"
                 role="option"
@@ -136,7 +138,7 @@
                 <fdp-standard-list-item
                     *ngFor="let optionItem of group.children; let i = index"
                     [title]="optionItem.label"
-                    (itemSelected)="addToArray(optionItem)"
+                    (itemSelected)="onSelect(optionItem)"
                     (buttonClicked)="deleteToken(optionItem)"
                     role="option"
                 >

@@ -5,6 +5,12 @@
     &--compact {
         width: calc(100% - 2rem);
     }
+
+    .fd-tokenizer {
+        &.is-focus {
+            outline: none;
+        }
+    }
 }
 // code to adjust to the parent width
 

@@ -231,6 +231,19 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
 
     /**
      * @hidden
+     * Mark a list item as selected
+     */
+    @Input()
+    get selected(): boolean {
+        return this._selected;
+    }
+
+    set selected(value: boolean) {
+        this._selected = value;
+    }
+
+    /**
+     * @hidden
      * get the focused element for key manager
      */
     _focused: boolean;

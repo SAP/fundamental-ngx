@@ -31,7 +31,7 @@ import {
     UP_ARROW
 } from '@angular/cdk/keycodes';
 
-import { combineLatest, fromEvent, isObservable, Observable, Subject, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, fromEvent, isObservable, Observable, Subject, Subscription } from 'rxjs';
 import { takeUntil, startWith } from 'rxjs/operators';
 
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
@@ -52,7 +52,8 @@ import {
     MultiInputOption,
     ArrayMultiInputDataSource,
     ObservableMultiInputDataSource,
-    MultiInputDataSource
+    MultiInputDataSource,
+    SelectableOptionItem
 } from '@fundamental-ngx/platform/shared';
 import { PlatformMultiInputComponent } from './multi-input.component';
 import { TextAlignment } from '../combobox';
@@ -73,6 +74,9 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     @Input()
     maxHeight = '250px';
 
+    /** Selected values from the list items. */
+    _selectedItems: any[] = [];
+
     /** Datasource for suggestion list */
     @Input()
     get dataSource(): FdpMultiInputDataSource<any> {
@@ -84,6 +88,8 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
             this._initializeDataSource(value);
         }
     }
+
+    showSelectedList$ = new BehaviorSubject<any>(false);
 
     /** Whether the autocomplete should be enabled; Enabled by default */
     @Input()
@@ -302,6 +308,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     ngAfterViewInit(): void {
         this._initWindowResize();
         this._assignCustomTemplates();
+        // this._setSelectedSuggestions();
         super.ngAfterViewInit();
     }
 
@@ -360,6 +367,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         this.openChange.next(this.isOpen);
         this._cd.markForCheck();
     }
+
     /** Closes the select popover body. */
     close(): void {
         this.isOpen = false;
@@ -375,6 +383,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
 
     /** @hidden */
     searchTermChanged(text: string = this.inputText): void {
+        this.showSelectedList$.next(false);
         if (text) {
             this.open();
         }
@@ -470,6 +479,28 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         }
     }
 
+    // /** @hidden */
+    // protected _setSelectedSuggestions(): void {
+    //     this._selectedSuggestions = [];
+    //
+    //     if (!this._selectedItems?.length) {
+    //         return;
+    //     }
+    //
+    //     for (let i = 0; i <= this._selectedItems.length; i++) {
+    //         const selectedItem = this._selectedItems[i];
+    //         const idx = this._suggestions.findIndex(
+    //             (item) => item.label === selectedItem || item.value === selectedItem
+    //         );
+    //         if (idx !== -1) {
+    //             this._selectedSuggestions.push(this._suggestions[idx]);
+    //             this._suggestions[idx].selected = true;
+    //         }
+    //     }
+    //
+    //     this._cd.detectChanges();
+    // }
+
     /** @hidden */
     private _initializeDataSource(ds: FdpMultiInputDataSource<any>): void {
         this._suggestions = [];
@@ -499,10 +530,26 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
          * its here.
          */
         this._dsSubscription = new Subscription();
-        const dsSub = combineLatest([initDataSource.open(), this._updateDataSourceValues$.pipe(startWith(null))])
+        const dsSub = combineLatest([
+            initDataSource.open(),
+            this.showSelectedList$,
+            this._updateDataSourceValues$.pipe(startWith(null))
+        ])
             .pipe(takeUntil(this._destroyed))
             .subscribe(([data]) => {
-                this._suggestions = this._convertToOptionItems(data);
+                this._suggestions = this._convertToOptionItems(data).map((optionItem: MultiInputOption) => {
+                    const selectedElement = this._selectedItems.find(
+                        (selectedItem: SelectableOptionItem) => selectedItem.label === optionItem.label
+                    );
+
+                    if (selectedElement) {
+                        optionItem.selected = true;
+                    }
+
+                    return optionItem;
+                });
+
+                this._newSuggestions = this._suggestions;
                 this.stateChanges.next('initDataSource.open().');
 
                 this.cd.markForCheck();
@@ -637,7 +684,8 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
             const selectItem: MultiInputOption = {
                 label: key,
                 value: null,
-                isGroup: true
+                isGroup: true,
+                selected: false
             };
 
             const currentGroup = group[key];
@@ -664,7 +712,8 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
                 label: this.displayValue(value),
                 avatarSrc: this.avatarsrc ? this.objectGet(value, this.avatarsrc) : null,
                 description: this.description ? this.objectGet(value, this.description) : null,
-                value
+                value,
+                selected: this._selectedItems?.includes(value) || false
             });
         }
 
@@ -679,7 +728,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         const selectItems: MultiInputOption[] = [];
         for (let i = 0; i < items.length; i++) {
             const value = items[i];
-            selectItems.push({ label: value, value });
+            selectItems.push({ label: value, value, selected: this._selectedItems?.includes(value) || false });
         }
 
         return selectItems;
@@ -692,11 +741,15 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     private _convertObjectsToDefaultOptionItems(items: any[]): MultiInputOption[] {
         const selectItems: MultiInputOption[] = [];
 
+        console.log('select', this._selectedItems);
+        console.log('value', items);
+
         for (let i = 0; i < items.length; i++) {
             const value = items[i];
             selectItems.push({
                 label: this.displayValue(value),
-                value
+                value,
+                selected: this._selectedItems?.includes(value) || false
             });
         }
 

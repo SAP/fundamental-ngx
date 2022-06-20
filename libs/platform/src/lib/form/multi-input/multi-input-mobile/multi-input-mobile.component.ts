@@ -92,7 +92,7 @@ export class PlatformMultiInputMobileComponent
             return;
         }
 
-        this._selectedBackup = [...this._component._selected];
+        this._selectedBackup = [...this._component._selectedItems];
         if (!this._dialogService.hasOpenDialogs()) {
             this._open();
         }

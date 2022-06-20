@@ -79,6 +79,7 @@ export interface MultiInputOption {
     isGroup?: boolean;
     description?: string;
     children?: MultiInputOption[];
+    selected: boolean;
 }
 
 export const isOptionItem = isSelectItem;

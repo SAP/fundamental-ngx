@@ -78,18 +78,17 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     listTemplateDD: ListComponent<MultiInputOption>;
 
     /** Selected values from the list items. */
-    _selected: any[] = [];
-
     @Input()
-    set selected(selectedValue: any[]) {
+    set selectedItems(selectedValue: any[]) {
         this.value = selectedValue;
     }
-    get selected(): any[] {
-        return this._selected;
+
+    get selectedItems(): any[] {
+        return this._selectedItems;
     }
 
     /**
-     *
+     * Selection mode
      */
     @Input()
     selectionMode: SelectionType = 'none';
@@ -153,29 +152,17 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     listTemplate: TemplateRef<any>;
 
     constructor(
-        /** @hidden */
         readonly cd: ChangeDetectorRef,
-        /** @hidden */
         readonly elementRef: ElementRef,
-        /** @hidden */
         @Optional() @Self() readonly ngControl: NgControl,
-        /** @hidden */
         @Optional() @Self() readonly ngForm: NgForm,
-        /** @hidden */
         @Optional() readonly dialogConfig: DialogConfig,
-        /** @hidden */
         readonly _dynamicComponentService: DynamicComponentService,
-        /** @hidden */
         private readonly _viewContainerRef: ViewContainerRef,
-        /** @hidden */
         private readonly _injector: Injector,
-        /** @hidden */
         @Optional() @Inject(DATA_PROVIDERS) private _providers: Map<string, DataProvider<any>>,
-        /** @hidden */
         readonly _multiInputConfig: MultiInputConfig,
-        /** @hidden */
         @Optional() @SkipSelf() @Host() formField: FormField,
-        /** @hidden */
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
         super(cd, elementRef, ngControl, ngForm, dialogConfig, _multiInputConfig, formField, formControl);
@@ -220,17 +207,24 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     }
 
     /** @hidden */
-    addToArray(value: any): void {
-        const index = this.selected.findIndex((selectvalue) => selectvalue.label === value.label);
+    onSelect(value: any): void {
+        const index = this.selectedItems.findIndex((selectvalue) => selectvalue.label === value.label);
+
         if (index === -1) {
-            this.selected.push(value);
-            if (!this.mobile) {
-                this.close();
-            }
+            this.selectedItems.push(value);
         }
-        this._updateModel(this.selected);
+
+        if (index >= 0) {
+            this.selectedItems.splice(index, 1);
+        }
+
+        if (!this.mobile) {
+            this.close();
+        }
+
+        this._updateModel(this.selectedItems);
         this.searchInputElement.nativeElement.focus();
-        this.emitChangeEvent(value ? this.selected : null);
+        this.emitChangeEvent(value ? this.selectedItems : null);
         this._cd.detectChanges();
     }
 
@@ -241,6 +235,8 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
             return;
         }
 
+        this.showSelectedList$.next(false);
+        this._suggestions = this._newSuggestions;
         this.showList(!this.isOpen);
     }
 
@@ -253,8 +249,9 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
 
     /** @hidden */
     moreClicked(): void {
+        this.showSelectedList$.next(true);
         this.open();
-        this._suggestions = this.selected;
+        this._suggestions = this.selectedItems;
         this._cd.markForCheck();
     }
 
@@ -263,11 +260,11 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         if (this.tokenizer.tokenList.length > 0) {
             this.tokenizer.tokenList.forEach((token) => {
                 if (token.tokenWrapperElement.nativeElement.innerText === selectedValue.label) {
-                    this.selected.splice(this.selected.indexOf(selectedValue), 1);
+                    this.selectedItems.splice(this.selectedItems.indexOf(selectedValue), 1);
                 }
             });
         }
-        this._updateModel(this.selected);
+        this._updateModel(this.selectedItems);
         this.searchInputElement.nativeElement.focus();
         this.close();
         this._cd.markForCheck();
@@ -275,13 +272,13 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
 
     /** @hidden */
     removeToken(token: any): void {
-        this.selected.splice(this.selected.indexOf(token), 1);
-        this.emitChangeEvent(token ? this.selected : null);
+        this.selectedItems.splice(this.selectedItems.indexOf(token), 1);
+        this.emitChangeEvent(token ? this.selectedItems : null);
         this.searchInputElement.nativeElement.focus();
-        if (this.selected.length === 0) {
-            this._selected = [];
+        if (this.selectedItems.length === 0) {
+            this.selectedItems = [];
         }
-        this._updateModel(this.selected);
+        this._updateModel(this.selectedItems);
         this._cd.markForCheck();
     }
 
@@ -300,11 +297,12 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         }
         this._cd.markForCheck();
     }
+
     /** @hidden Define is selected item selected */
     isSelectedOptionItem(selectedItem: any): boolean {
         return (
-            (this.lookupKey && this.lookupValue(this.selected) === this.lookupValue(selectedItem)) ||
-            this.displayValue(this.selected) === this.displayValue(selectedItem)
+            (this.lookupKey && this.lookupValue(this.selectedItems) === this.lookupValue(selectedItem)) ||
+            this.displayValue(this.selectedItems) === this.displayValue(selectedItem)
         );
     }
 
@@ -324,8 +322,8 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     }
 
     /** @hidden Method to set as selected */
-    setAsSelected(item: MultiInputOption[]): void {
-        this._selected = item;
+    setAsSelected(items: MultiInputOption[]): void {
+        this._selectedItems = items;
         this.inputText = '';
     }
 
@@ -337,7 +335,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
 
         const [item] = this.isGroup ? this._suggestions[0]?.children || [] : this._suggestions;
         if (item && item.label === event.term) {
-            this.addToArray(item);
+            this.onSelect(item);
         }
     }
 
@@ -350,14 +348,14 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
 
     /** @hidden Handle dialog dismissing, closes popover and sets backup data. */
     _dialogDismiss(selected: any[]): void {
-        this._selected = selected;
+        this.selectedItems = selected;
         this.showList(false);
     }
 
     /** @hidden Handle dialog approval, closes popover and propagates data changes. */
     _dialogApprove(): void {
-        this.onChange(this.selected);
-        this._updateModel(this.selected);
+        this.onChange(this.selectedItems);
+        this._updateModel(this.selectedItems);
         this.showList(false);
     }
 

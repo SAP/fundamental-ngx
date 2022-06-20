@@ -6,7 +6,7 @@ import { MobileMode } from '@fundamental-ngx/core/mobile-mode';
 export const MULTIINPUT_COMPONENT = new InjectionToken<string[]>('PlatformMultiInputInterface');
 
 export interface PlatformMultiInputInterface extends MobileMode {
-    _selected: any[];
+    _selectedItems: any[];
     openChange: Subject<boolean>;
 
     _dialogApprove(): void;

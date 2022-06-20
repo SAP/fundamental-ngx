@@ -82,7 +82,7 @@ describe('PlatformMultiInputComponent', () => {
         expect(toggleButton.length).toBe(0);
     });
     it('should check adding number of tokens in the component', async () => {
-        component.platformMultiInputComponent.addToArray('name1');
+        component.platformMultiInputComponent.onSelect('name1');
         fixture.detectChanges();
         const toggleButton = fixture.nativeElement.querySelectorAll('.fd-token');
         expect(toggleButton.length).toBe(1);

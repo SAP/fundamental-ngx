@@ -241,7 +241,7 @@ describe('Multi input test suite', () => {
         expect(getText(validationPopover).trim()).toBe('Invalid entry');
     });
 
-    it('should verify user cannot add the same item twice', () => {
+    it('should verify the selected item deletes by selecting it from list', () => {
         scrollIntoView(activeInputs, 1);
         multiInputPage.expandDropdown(activeDropdownButtons, 1);
         const optionsArr = getAttributeByNameArr(options, 'title');
@@ -253,7 +253,7 @@ describe('Multi input test suite', () => {
         const secondSelectionTokenCount = getElementArrayLength(compactExampleTokens);
 
         expect(firstSelectionTokenCount).toEqual(1);
-        expect(secondSelectionTokenCount).toEqual(1);
+        expect(secondSelectionTokenCount).toEqual(0);
     });
 
     it('should verify only 1 token created', () => {

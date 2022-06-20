@@ -8,7 +8,7 @@ import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
     providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }]
 })
 export class PlatformMultiInputDeclineExampleComponent {
-    list_elements = [
+    _datasource = [
         { state: 'Alabama', city: 'Montgomery' },
         { state: 'Alaska', city: 'Juneau' },
         { state: 'Arizona', city: 'Phoenix' },
@@ -66,7 +66,6 @@ export class PlatformMultiInputDeclineExampleComponent {
         { state: 'Arizona', city: 'Phoenix' },
         { state: 'Arkansas', city: 'Little Rock' },
         { state: 'California', city: 'Sacramento' },
-        { state: 'Colorado', city: 'Denver' },
         { state: 'Connecticut', city: 'Hartford' },
         { state: 'Delaware', city: 'Dover' },
         { state: 'Florida', city: 'Tallahassee' },
@@ -111,5 +110,13 @@ export class PlatformMultiInputDeclineExampleComponent {
         { state: 'West Virginia', city: 'Charleston' },
         { state: 'Wisconsin', city: 'Madison' },
         { state: 'Wyoming', city: 'Cheyenne' }
+    ];
+
+    selected = [
+        this._datasource[0],
+        this._datasource[1],
+        this._datasource[3],
+        this._datasource[4],
+        this._datasource[5]
     ];
 }
