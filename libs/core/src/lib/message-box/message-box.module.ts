@@ -34,7 +34,6 @@ const declarations = [
     declarations: [declarations],
     imports: [CommonModule, IconModule, InitialFocusModule, TemplateModule, BarModule, TitleModule, ButtonModule],
     exports: [declarations, TemplateModule, InitialFocusModule, TitleModule],
-    providers: [MessageBoxService, DynamicComponentService],
-    entryComponents: [MessageBoxContainerComponent, MessageBoxDefaultComponent]
+    providers: [MessageBoxService, DynamicComponentService]
 })
 export class MessageBoxModule {}

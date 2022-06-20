@@ -55,13 +55,6 @@ const routes: Routes = [
         DialogInnerPopoverComponent,
         DialogInnerPopoverExampleComponent
     ],
-    entryComponents: [
-        DialogExampleComponent,
-        FirstDialogExampleComponent,
-        SecondDialogExampleComponent,
-        DialogStackedExampleComponent,
-        DialogInnerPopoverExampleComponent
-    ],
     providers: [DialogService]
 })
 export class DialogDocsModule {}

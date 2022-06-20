@@ -23,7 +23,6 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, MessageBoxModule, BarModule],
     exports: [RouterModule],
-    declarations: [examples, MessageBoxDocsComponent, MessageBoxDocsHeaderComponent],
-    entryComponents: [entryComponents]
+    declarations: [examples, MessageBoxDocsComponent, MessageBoxDocsHeaderComponent]
 })
 export class MessageBoxDocsModule {}

@@ -47,7 +47,6 @@ import { WizardGeneratorReviewButtonDirective } from './directives/wizard-genera
         WizardGeneratorSummaryStepDirective,
         WizardGeneratorReviewButtonDirective
     ],
-    entryComponents: [DialogWizardGeneratorComponent],
     imports: [
         CommonModule,
         DialogModule,

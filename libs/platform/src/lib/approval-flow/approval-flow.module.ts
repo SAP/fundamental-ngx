@@ -51,11 +51,6 @@ import { ApprovalFlowToolbarActionsComponent } from './approval-flow-toolbar-act
         ApprovalFlowMessagesComponent,
         ApprovalFlowToolbarActionsComponent
     ],
-    entryComponents: [
-        ApprovalFlowAddNodeComponent,
-        ApprovalFlowApproverDetailsComponent,
-        ApprovalFlowSelectTypeComponent
-    ],
     providers: [ApprovalFlowAddNodeViewService],
     imports: [
         CommonModule,

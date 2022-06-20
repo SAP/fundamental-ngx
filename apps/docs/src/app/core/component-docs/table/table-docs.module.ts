@@ -85,7 +85,6 @@ const routes: Routes = [
         TableCustomDialogComponent,
         TableFocusableExampleComponent,
         TableNavigatableRowExampleComponent
-    ],
-    entryComponents: [TableCustomDialogComponent]
+    ]
 })
 export class TableDocsModule {}

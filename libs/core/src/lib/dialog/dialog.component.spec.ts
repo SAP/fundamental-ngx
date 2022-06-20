@@ -30,8 +30,7 @@ class TemplateTestComponent {
 @NgModule({
     declarations: [TemplateTestComponent],
     imports: [CommonModule, BrowserModule, DialogModule, NoopAnimationsModule],
-    providers: [DialogService],
-    entryComponents: [TemplateTestComponent]
+    providers: [DialogService]
 })
 class TestModule {}
 

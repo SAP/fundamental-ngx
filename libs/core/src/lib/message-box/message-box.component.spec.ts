@@ -29,8 +29,7 @@ class TemplateTestComponent {
 
 @NgModule({
     declarations: [TemplateTestComponent],
-    imports: [CommonModule, BrowserModule, MessageBoxModule, NoopAnimationsModule],
-    entryComponents: [TemplateTestComponent]
+    imports: [CommonModule, BrowserModule, MessageBoxModule, NoopAnimationsModule]
 })
 class TestModule {}
 

@@ -25,8 +25,7 @@ class TemplateTestComponent {
 @NgModule({
     declarations: [AlertComponent, AlertContainerComponent, TemplateTestComponent],
     imports: [CommonModule, BrowserModule, NoopAnimationsModule, ButtonModule],
-    providers: [AlertService, DynamicComponentService],
-    entryComponents: [AlertComponent, AlertContainerComponent, TemplateTestComponent]
+    providers: [AlertService, DynamicComponentService]
 })
 class TestModule {}
 

@@ -1,69 +1,78 @@
 {
-    "npmScope": "fundamental-ngx",
-    "implicitDependencies": {
-        "angular.json": "*",
-        "package.json": "*",
-        "tsconfig.json": "*",
-        "nx.json": "*"
+  "npmScope": "fundamental-ngx",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "nx.json": "*"
+  },
+  "affected": {
+    "defaultBase": "main"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "nx/tasks-runners/default",
+      "options": {
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e"
+        ],
+        "parallel": 1
+      }
     },
-    "targetDependencies": {
-        "build": [
-            {
-                "target": "build",
-                "projects": "dependencies"
-            }
-        ]
-    },
-    "affected": {
-        "defaultBase": "main"
-    },
-    "tasksRunnerOptions": {
-        "default": {
-            "runner": "@nrwl/workspace/tasks-runners/default",
-            "options": {
-                "cacheableOperations": ["build", "lint", "test", "e2e"],
-                "parallel": 1
-            }
-        },
-        "cloud": {
-            "runner": "@nrwl/nx-cloud",
-            "options": {
-                "strictlyOrderedTargets": ["build", "lint", "test", "e2e"],
-                "canTrackAnalytics": false,
-                "showUsageWarnings": true
-            }
-        }
-    },
-    "cli": {
-        "defaultCollection": "@nrwl/angular",
-        "analytics": false
-    },
-    "defaultProject": "docs",
-    "generators": {
-        "@schematics/angular:component": {
-            "prefix": "fd",
-            "style": "scss"
-        },
-        "@schematics/angular:directive": {
-            "prefix": "fd"
-        },
-        "@nrwl/angular:application": {
-            "linter": "eslint",
-            "unitTestRunner": "jest"
-        },
-        "@nrwl/angular:library": {
-            "linter": "eslint",
-            "unitTestRunner": "jest"
-        },
-        "@nrwl/angular:component": {
-            "style": "scss"
-        },
-        "@nrwl/angular": {
-            "convert-tslint-to-eslint": {
-                "ignoreExistingTslintConfig": false,
-                "removeTSLintIfNoMoreTSLintTargets": true,
-                "skipFormat": false
-            }
-        }
+    "cloud": {
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "strictlyOrderedTargets": [
+          "build",
+          "lint",
+          "test",
+          "e2e"
+        ],
+        "canTrackAnalytics": false,
+        "showUsageWarnings": true
+      }
     }
+  },
+  "cli": {
+    "analytics": false
+  },
+  "defaultProject": "docs",
+  "generators": {
+    "@schematics/angular:component": {
+      "prefix": "fd",
+      "style": "scss"
+    },
+    "@schematics/angular:directive": {
+      "prefix": "fd"
+    },
+    "@nrwl/angular:application": {
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:library": {
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    },
+    "@nrwl/angular": {
+      "convert-tslint-to-eslint": {
+        "ignoreExistingTslintConfig": false,
+        "removeTSLintIfNoMoreTSLintTargets": true,
+        "skipFormat": false
+      }
+    }
+  },
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "targetDefaults": {
+    "build": {
+      "dependsOn": [
+        "^build"
+      ]
+    }
+  }
 }

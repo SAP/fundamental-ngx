@@ -9,7 +9,6 @@ import { MultiComboboxMobileComponent } from './multi-combobox/multi-combobox-mo
 @NgModule({
     declarations: [MultiComboboxMobileComponent],
     imports: [BarModule, DialogModule, ButtonModule, CommonModule],
-    entryComponents: [MultiComboboxMobileComponent],
     exports: [MultiComboboxMobileComponent]
 })
 export class PlatformMultiComboboxMobileModule {}
