@@ -30,7 +30,7 @@
                                     {{ step.contentText }}
                                 </p>
                                 <fd-wizard-next-step *ngIf="i !== steps.length - 1">
-                                    <button fd-button [compact]="true" fdType="emphasized" (click)="goToStep(i + 2)">
+                                    <button fd-button fdCompact fdType="emphasized" (click)="goToStep(i + 2)">
                                         Go to Step {{ i + 2 }}
                                     </button>
                                 </fd-wizard-next-step>
@@ -41,10 +41,10 @@
                 <div fd-bar barDesign="footer">
                     <div fd-bar-right>
                         <fd-bar-element>
-                            <button fd-button label="Save" fdType="transparent" [compact]="true"></button>
+                            <button fd-button label="Save" fdType="transparent" fdCompact></button>
                         </fd-bar-element>
                         <fd-bar-element>
-                            <button fd-button label="Cancel" fdType="transparent" [compact]="true"></button>
+                            <button fd-button label="Cancel" fdType="transparent" fdCompact></button>
                         </fd-bar-element>
                     </div>
                 </div>

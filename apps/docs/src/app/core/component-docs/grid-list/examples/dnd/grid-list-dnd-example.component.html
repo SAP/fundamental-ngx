@@ -4,34 +4,33 @@
 
         <fd-grid-list-title-bar-spacer></fd-grid-list-title-bar-spacer>
 
-        <button
-            fd-button
-            fdType="transparent"
-            glyph="sort"
-            aria-label="Sort"
-            aria-labelledby="grid-list-title-bar-dnd-1 grid-list-button-dnd-1"
-            title="Sort"
-            [compact]="true"
-            (click)="showAlert('Sort')"
-        ></button>
-        <button
-            fd-button
-            fdType="transparent"
-            glyph="filter"
-            aria-label="Filter"
-            title="Filter"
-            [compact]="true"
-            (click)="showAlert('Filter')"
-        ></button>
-        <button
-            fd-button
-            fdType="transparent"
-            glyph="group-2"
-            aria-label="Group"
-            title="Group"
-            [compact]="true"
-            (click)="showAlert('Group')"
-        ></button>
+        <ng-container fdCompact>
+            <button
+                fd-button
+                fdType="transparent"
+                glyph="sort"
+                aria-label="Sort"
+                aria-labelledby="grid-list-title-bar-dnd-1 grid-list-button-dnd-1"
+                title="Sort"
+                (click)="showAlert('Sort')"
+            ></button>
+            <button
+                fd-button
+                fdType="transparent"
+                glyph="filter"
+                aria-label="Filter"
+                title="Filter"
+                (click)="showAlert('Filter')"
+            ></button>
+            <button
+                fd-button
+                fdType="transparent"
+                glyph="group-2"
+                aria-label="Group"
+                title="Group"
+                (click)="showAlert('Group')"
+            ></button>
+        </ng-container>
     </fd-grid-list-title-bar>
 
     <fd-grid-list-item

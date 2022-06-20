@@ -65,12 +65,12 @@
             <fd-button-bar
                 fdType="emphasized"
                 label="Send reminder"
-                [compact]="true"
+                fdCompact
                 (click)="dialog.close('Continue')"
             >
             </fd-button-bar>
 
-            <fd-button-bar fdType="transparent" label="Cancel" [compact]="true" (click)="dialog.dismiss('backdrop')">
+            <fd-button-bar fdType="transparent" label="Cancel" fdCompact (click)="dialog.dismiss('backdrop')">
             </fd-button-bar>
         </fd-dialog-footer>
     </fd-dialog>

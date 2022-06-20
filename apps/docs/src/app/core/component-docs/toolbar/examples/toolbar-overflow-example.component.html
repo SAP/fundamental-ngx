@@ -1,23 +1,23 @@
 <fd-toolbar [shouldOverflow]="true">
-    <button fd-toolbar-item fd-button label="Button" [compact]="true"></button>
-    <button fd-toolbar-item fd-button label="Button" [compact]="true"></button>
-    <button fd-toolbar-item fd-button label="Button" [compact]="true"></button>
+    <button fd-toolbar-item fd-button label="Button" fdCompact></button>
+    <button fd-toolbar-item fd-button label="Button" fdCompact></button>
+    <button fd-toolbar-item fd-button label="Button" fdCompact></button>
 
-    <fd-datetime-picker fd-toolbar-item [compact]="true"></fd-datetime-picker>
+    <fd-datetime-picker fd-toolbar-item fdCompact></fd-datetime-picker>
 
-    <fd-select fd-toolbar-item [compact]="true" placeholder="Select an option" [closeOnOutsideClick]="false">
+    <fd-select fd-toolbar-item fdCompact placeholder="Select an option" [closeOnOutsideClick]="false">
         <fd-option *ngFor="let option of ['Apple', 'Pineapple', 'Tomato', 'Strawberry']" [value]="option">{{
             option
         }}</fd-option>
     </fd-select>
 
-    <button fd-toolbar-item fd-button label="Button" [compact]="true"></button>
+    <button fd-toolbar-item fd-button label="Button" fdCompact></button>
 
     <fd-checkbox fd-toolbar-item label="Option 1" [tristate]="true"> </fd-checkbox>
 
-    <button fd-toolbar-item fd-button label="Button" [compact]="true"></button>
+    <button fd-toolbar-item fd-button label="Button" fdCompact></button>
 
-    <fd-split-button fd-toolbar-item [compact]="true">
+    <fd-split-button fd-toolbar-item fdCompact>
         <fd-menu>
             <li fd-menu-item>
                 <div fd-menu-interactive>
@@ -34,7 +34,7 @@
 
     <label fd-toolbar-item fd-toolbar-label fd-form-label for="input-1">Default Input</label>
     <input
-        [compact]="true"
+        fdCompact
         fd-toolbar-item
         fd-form-control
         type="text"
@@ -50,19 +50,19 @@
         fd-toolbar-overflow-button-menu
         label="Button"
         [fdMenu]="true"
-        [compact]="true"
+        fdCompact
     ></button>
 
     <fd-segmented-button fd-toolbar-item>
-        <button fd-button label="Left" [compact]="true"></button>
-        <button fd-button label="Middle" [compact]="true"></button>
-        <button fd-button label="Right" [compact]="true"></button>
+        <button fd-button label="Left" fdCompact></button>
+        <button fd-button label="Middle" fdCompact></button>
+        <button fd-button label="Right" fdCompact></button>
     </fd-segmented-button>
 
-    <button fd-toolbar-item fd-button fd-toolbar-overflow-button label="Button" [compact]="true"></button>
-    <button fd-toolbar-item fd-button fd-toolbar-overflow-button label="Button" [compact]="true"></button>
+    <button fd-toolbar-item fd-button fd-toolbar-overflow-button label="Button" fdCompact></button>
+    <button fd-toolbar-item fd-button fd-toolbar-overflow-button label="Button" fdCompact></button>
     <fd-toolbar-spacer fd-toolbar-item [fixed]="true" width="200px"></fd-toolbar-spacer>
-    <button fd-toolbar-item fd-button fd-toolbar-overflow-button label="Button" [compact]="true"></button>
-    <button fd-toolbar-item fd-button fd-toolbar-overflow-button label="Button" [compact]="true"></button>
-    <button fd-toolbar-item fd-button fd-toolbar-overflow-button label="Button" [compact]="true"></button>
+    <button fd-toolbar-item fd-button fd-toolbar-overflow-button label="Button" fdCompact></button>
+    <button fd-toolbar-item fd-button fd-toolbar-overflow-button label="Button" fdCompact></button>
+    <button fd-toolbar-item fd-button fd-toolbar-overflow-button label="Button" fdCompact></button>
 </fd-toolbar>

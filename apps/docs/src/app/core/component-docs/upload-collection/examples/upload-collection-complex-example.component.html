@@ -12,15 +12,15 @@
         buttonLabel="Upload"
         buttonAriaLabel="browse files"
         [multiple]="true"
-        [compact]="true"
+        fdCompact
         [inputHidden]="true"
         [(ngModel)]="uploaderFiles"
     >
     </fd-file-uploader>
-    <button fd-button [compact]="true" [disabled]="getFilesSelected() === 0" (click)="alert('Download button clicked')">
+    <button fd-button fdCompact [disabled]="getFilesSelected() === 0" (click)="alert('Download button clicked')">
         Download
     </button>
-    <button fd-button [compact]="true" [disabled]="getFilesSelected() < 2" (click)="deleteMultiple()">
+    <button fd-button fdCompact [disabled]="getFilesSelected() < 2" (click)="deleteMultiple()">
         Delete Multiple
     </button>
 </fd-toolbar>
@@ -100,10 +100,10 @@
             <p role="dialog">Are you sure you want to delete this file?</p>
         </fd-dialog-body>
 
-        <fd-dialog-footer>
-            <fd-button-bar fdType="emphasized" label="Yes" [compact]="false" (click)="dialog.close('Yes')">
+        <fd-dialog-footer fdCozy>
+            <fd-button-bar fdType="emphasized" label="Yes" (click)="dialog.close('Yes')">
             </fd-button-bar>
-            <fd-button-bar label="Cancel" [compact]="false" (click)="dialog.dismiss()"> </fd-button-bar>
+            <fd-button-bar label="Cancel" (click)="dialog.dismiss()"> </fd-button-bar>
         </fd-dialog-footer>
     </fd-dialog>
 </ng-template>

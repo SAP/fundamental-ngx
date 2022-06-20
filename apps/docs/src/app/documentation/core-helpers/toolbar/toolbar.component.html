@@ -7,7 +7,7 @@
         aria-expanded="false"
         glyph="menu2"
         aria-label="Switch Navigation"
-        [compact]="false"
+        fdCozy
         (click)="this.btnClicked.emit()"
     ></button>
 
@@ -32,14 +32,14 @@
                 fd-button
                 fdType="transparent"
                 class="fd-shellbar__button fd-shellbar__button--menu fd-docs--theme-menu"
-                [compact]="false"
+                fdCozy
                 glyph="settings"
                 [fdMenuTrigger]="optionsMenu"
             ></button>
 
             <fd-menu
                 #optionsMenu
-                [compact]="false"
+                fdCozy
                 [mobile]="true"
                 [mobileConfig]="{ title: 'Options', hasCloseButton: true }"
             >

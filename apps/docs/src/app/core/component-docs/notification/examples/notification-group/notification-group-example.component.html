@@ -16,7 +16,7 @@
                                     <button
                                         fd-button
                                         label="Accept All"
-                                        [compact]="true"
+                                        fdCompact
                                         *ngIf="expandedByDate"
                                     ></button>
                                     <button
@@ -25,7 +25,7 @@
                                         ariaLabel="Close"
                                         glyph="decline"
                                         title="close"
-                                        [compact]="true"
+                                        fdCompact
                                     ></button>
                                 </fd-notification-actions>
                             </fd-notification-group-header>
@@ -50,7 +50,7 @@
                                     <button
                                         fd-button
                                         label="Accept All"
-                                        [compact]="true"
+                                        fdCompact
                                         *ngIf="expandedByType1"
                                     ></button>
                                     <button
@@ -59,7 +59,7 @@
                                         glyph="decline"
                                         ariaLabel="Close"
                                         title="close"
-                                        [compact]="true"
+                                        fdCompact
                                     ></button>
                                 </fd-notification-actions>
                             </fd-notification-group-header>
@@ -75,7 +75,7 @@
                                     <button
                                         fd-button
                                         label="Accept All"
-                                        [compact]="true"
+                                        fdCompact
                                         *ngIf="expandedByType2"
                                     ></button>
                                     <button
@@ -84,7 +84,7 @@
                                         glyph="decline"
                                         ariaLabel="Close"
                                         title="close"
-                                        [compact]="true"
+                                        fdCompact
                                     ></button>
                                 </fd-notification-actions>
                             </fd-notification-group-header>
@@ -104,7 +104,7 @@
                                         glyph="decline"
                                         ariaLabel="Close"
                                         title="close"
-                                        [compact]="true"
+                                        fdCompact
                                     ></button>
                                 </fd-notification-actions>
                             </fd-notification-group-header>
@@ -137,14 +137,14 @@
             </fd-notification-footer>
         </fd-notification-content>
         <fd-notification-actions>
-            <button fd-button [label]="notification.actionButton" [compact]="true"></button>
+            <button fd-button [label]="notification.actionButton" fdCompact></button>
             <button
                 fd-button
                 fdType="transparent"
                 glyph="decline"
                 ariaLabel="Close"
                 title="close"
-                [compact]="true"
+                fdCompact
             ></button>
         </fd-notification-actions>
     </fd-notification-body>
@@ -170,14 +170,14 @@
             </fd-notification-footer>
         </fd-notification-content>
         <fd-notification-actions>
-            <button fd-button [label]="notification.actionButton" [compact]="true"></button>
+            <button fd-button [label]="notification.actionButton" fdCompact></button>
             <button
                 fd-button
                 fdType="transparent"
                 glyph="decline"
                 ariaLabel="Close"
                 title="close"
-                [compact]="true"
+                fdCompact
             ></button>
         </fd-notification-actions>
     </fd-notification-body>
