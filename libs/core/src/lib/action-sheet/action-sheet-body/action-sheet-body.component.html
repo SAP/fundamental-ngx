@@ -3,7 +3,7 @@
     [attr.aria-label]="ariaLabel"
     [attr.aria-labelledby]="ariaLabelledby"
     class="fd-action-sheet"
-    [class.fd-action-sheet--compact]="compact"
+    [class.fd-action-sheet--compact]="_contentDensityConsumer.isCompact"
     [class.fd-action-sheet--mobile]="mobile"
     role="menu"
 >

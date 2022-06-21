@@ -2,6 +2,7 @@ import { Directive, Input, isDevMode, OnDestroy } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ContentDensityMode } from '../content-density.types';
+import { ModuleDeprecation } from '@fundamental-ngx/core/utils';
 
 /**
  * Directive decorator is only for allowing @Input
