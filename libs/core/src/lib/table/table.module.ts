@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
+
 import { TableComponent } from './table.component';
 import { TableResponsiveWrapperDirective } from './directives/table-responsive-wrapper.directive';
 import { TableHeaderDirective } from './directives/table-header.directive';
@@ -17,7 +19,7 @@ import { TableIconDirective } from './directives/table-icon.directive';
 import { TableService } from './table.service';
 
 @NgModule({
-    imports: [CommonModule],
+    imports: [CommonModule, SkeletonModule],
     declarations: [
         TableComponent,
         TableResponsiveWrapperDirective,

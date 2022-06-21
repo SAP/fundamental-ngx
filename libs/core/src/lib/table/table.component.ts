@@ -26,7 +26,7 @@ import { TableService } from './table.service';
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'table[fd-table]',
     exportAs: 'fd-table',
-    template: `<ng-content></ng-content>`,
+    templateUrl: './table.component.html',
     styleUrls: ['./table.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,

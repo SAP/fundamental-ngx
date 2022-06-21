@@ -19,9 +19,11 @@ import {
     Size,
     applyCssClass,
     getRandomColorAccent,
-    CssClassBuilder
+    CssClassBuilder,
+    DestroyedService
 } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
+import { SkeletonConsumer, skeletonConsumer } from '@fundamental-ngx/core/skeleton';
 
 let avatarUniqueId = 0;
 
@@ -40,7 +42,9 @@ const ALTER_ICON_OPTIONS = {
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[attr.tabindex]': '_tabindex'
-    }
+    },
+    // TODO: Import skeleton styles in the root
+    providers: [DestroyedService, skeletonConsumer()]
 })
 export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom classes */
@@ -200,7 +204,11 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     }
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef, private _cdr: ChangeDetectorRef) {}
+    constructor(
+        private _elementRef: ElementRef,
+        private _cdr: ChangeDetectorRef,
+        private readonly _skeletonConsumer: SkeletonConsumer
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
