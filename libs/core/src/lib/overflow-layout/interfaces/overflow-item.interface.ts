@@ -14,4 +14,8 @@ export interface OverflowItem extends FocusableOption {
      * Element reference.
      */
     elmRef: ElementRef;
+    /**
+     * Whether the item is hidden.
+     */
+    hidden: boolean;
 }

@@ -22,7 +22,9 @@ export class OverflowLayoutPopoverContentDirective implements OverflowPopoverCon
     @Input()
     set items(value: OverflowItemRef[]) {
         this._items = value;
-        this._keyboardEventsManager = new FocusKeyManager(this._items.map((item) => item.overflowItem))
+        this._keyboardEventsManager = new FocusKeyManager(
+            this._items.filter((item) => item.overflowItem.focusable).map((item) => item.overflowItem)
+        )
             .withWrap()
             .withHorizontalOrientation('ltr');
     }

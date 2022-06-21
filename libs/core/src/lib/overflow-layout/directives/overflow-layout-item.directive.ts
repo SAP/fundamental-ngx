@@ -46,6 +46,12 @@ export class OverflowLayoutItemDirective implements OverflowItem, OnInit {
     get forceVisibility(): boolean {
         return this._forceVisibility;
     }
+    /**
+     * Whether the item is hidden.
+     */
+    get hidden(): boolean {
+        return this._overflowItemRef?.hidden === true;
+    }
 
     /** @hidden */
     @HostBinding('attr.tabindex')

@@ -89,7 +89,7 @@ export class OverflowLayoutComponent implements AfterViewInit, OnDestroy, Overfl
      * Template for the custom "More" button.
      */
     @ContentChild(FD_OVERFLOW_EXPAND)
-    moreButton: OverflowExpand;
+    _moreButton: OverflowExpand;
 
     /**
      * @hidden
@@ -151,11 +151,13 @@ export class OverflowLayoutComponent implements AfterViewInit, OnDestroy, Overfl
     /** @hidden */
     private _overflowPopoverContent: OverflowPopoverContent;
 
+    /** @hidden */
     private _fillTrigger$ = new Subject<void>();
 
     /** @hidden */
     private _dir: 'rtl' | 'ltr' = 'ltr';
 
+    /** @hidden */
     private _maxVisibleItems = Infinity;
 
     /** @hidden */
@@ -293,7 +295,6 @@ export class OverflowLayoutComponent implements AfterViewInit, OnDestroy, Overfl
         ) {
             this._showMore = false;
             this._cdr.detectChanges();
-            this._setFocusKeyManager();
             this._listenToItemResize = true;
             return;
         }
@@ -351,19 +352,17 @@ export class OverflowLayoutComponent implements AfterViewInit, OnDestroy, Overfl
         this._showMore = this._hiddenItems.length > 0;
 
         this._cdr.detectChanges();
-        this._setFocusKeyManager();
 
         this._listenToItemResize = true;
     }
 
     /** @hidden */
     private _setFocusKeyManager(): void {
-        const items = this._allItems
-            .filter((item) => item.overflowItem?.focusable === true && !item.hidden)
-            .map((item) => item.overflowItem);
         this._dir = this._rtlService?.rtl.value ? 'rtl' : 'ltr';
-        this._keyboardEventsManager = new FocusKeyManager(items).withWrap().withHorizontalOrientation(this._dir);
-        this._keyboardEventsManager.setActiveItem(0);
+        this._keyboardEventsManager = new FocusKeyManager(this._overflowItems)
+            .withWrap()
+            .withHorizontalOrientation(this._dir)
+            .skipPredicate((item) => !item.focusable || item.hidden);
     }
 
     /** @hidden Rtl change subscription */

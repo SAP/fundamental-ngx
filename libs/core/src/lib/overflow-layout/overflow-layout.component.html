@@ -38,7 +38,7 @@
         </fd-popover>
     </ng-template>
     <ng-template
-        [ngTemplateOutlet]="moreButton?.templateRef || defaultShowMore"
+        [ngTemplateOutlet]="_moreButton?.templateRef || defaultShowMore"
         [ngTemplateOutletContext]="{ $implicit: _hiddenItems }"
     ></ng-template>
 </div>
