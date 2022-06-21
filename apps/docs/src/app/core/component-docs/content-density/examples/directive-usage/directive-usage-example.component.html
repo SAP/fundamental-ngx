@@ -1,19 +1,19 @@
-<fundamental-ngx-content-density-user>
+<fd-docs-content-density-user>
     This should be global value - Does not use any directive
-    <fundamental-ngx-content-density-user fdCozy>
+    <fd-docs-content-density-user fdCozy>
         This should be cozy regardless of global value - Uses fdCozy directive
-        <fundamental-ngx-content-density-user>
+        <fd-docs-content-density-user>
             This should be cozy regardless of global value, because of parent element - Does not use any directive
-            <fundamental-ngx-content-density-user fdCondensed>
+            <fd-docs-content-density-user fdCondensed>
                 This should be condensed regardless of global and parent values - Uses fdCondensed directive
-            </fundamental-ngx-content-density-user>
-        </fundamental-ngx-content-density-user>
-        <fundamental-ngx-content-density-user fdCompact>
+            </fd-docs-content-density-user>
+        </fd-docs-content-density-user>
+        <fd-docs-content-density-user fdCompact>
             This should be compact regardless of global or parent preferences - Uses fdCompact directive
-        </fundamental-ngx-content-density-user>
-        <fundamental-ngx-content-density-user fdContentDensity>
+        </fd-docs-content-density-user>
+        <fd-docs-content-density-user fdContentDensity>
             This element will follow global, despite parent's preferences - Uses fdContentDensity directive, to follow
             global. Could have also used <code>[fdContentDensity]="global"</code>
-        </fundamental-ngx-content-density-user>
-    </fundamental-ngx-content-density-user>
-</fundamental-ngx-content-density-user>
+        </fd-docs-content-density-user>
+    </fd-docs-content-density-user>
+</fd-docs-content-density-user>

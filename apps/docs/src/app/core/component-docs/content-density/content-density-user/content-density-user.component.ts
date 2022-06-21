@@ -6,7 +6,7 @@ import {
 } from '@fundamental-ngx/core/content-density';
 
 @Component({
-    selector: 'fundamental-ngx-content-density-user',
+    selector: 'fd-docs-content-density-user',
     template: `
         <ng-content></ng-content>
         <span fd-object-status class="example-component__object-status" [inverted]="true">
