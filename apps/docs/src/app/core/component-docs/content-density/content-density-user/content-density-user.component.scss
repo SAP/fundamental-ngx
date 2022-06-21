@@ -1,13 +1,25 @@
 .example-component {
     display: block;
     padding: 15px;
-    border: 1px solid var(--sapNegativeColor);
+    border: 1px solid var(--sapNeutralColor);
     border-radius: var(--sapTile_BorderCornerRadius);
     background-color: var(--sapBaseColor);
     font-size: var(--sapFontSize);
     color: var(--sapTextColor);
     margin: 10px 0;
     position: relative;
+
+    &[fdCozy] {
+        border: 3px solid var(--sapPositiveColor);
+    }
+
+    &[fdCompact] {
+        border: 3px solid var(--sapWarningColor);
+    }
+
+    &[fdCompact] {
+        border: 3px solid var(--sapNegativeColor);
+    }
 
     &__object-status {
         position: absolute;
