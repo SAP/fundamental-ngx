@@ -1,8 +1,7 @@
 import { Component, Inject, ViewEncapsulation } from '@angular/core';
-import { DestroyedService } from '@fundamental-ngx/core/utils';
 import {
     ContentDensityConsumer,
-    contentDensityConsumer,
+    contentDensityConsumerProviders,
     ContentDensityMode
 } from '@fundamental-ngx/core/content-density';
 
@@ -19,8 +18,7 @@ import {
         class: 'example-component'
     },
     providers: [
-        DestroyedService,
-        contentDensityConsumer({
+        contentDensityConsumerProviders({
             modifiers: {
                 [ContentDensityMode.COMPACT]: 'example-component--compact',
                 [ContentDensityMode.CONDENSED]: 'example-component--condensed'

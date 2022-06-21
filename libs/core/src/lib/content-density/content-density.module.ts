@@ -10,6 +10,8 @@ import { ContentDensityControllerService } from './services/content-density-cont
 import { LocalContentDensityStorage } from './providers/local-content-density-storage';
 import { CONTENT_DENSITY_STORAGE_KEY } from './tokens/content-density-storage-key.token';
 import { UrlContentDensityStorage } from './providers/url-content-density-storage';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { DeprecatedContentDensityService } from './services/deprecated-content-density.service';
 
 function generateContentDensityStorage(config: ContentDensityModuleConfig): Provider {
     if (config.storage === 'localStorage') {
@@ -65,6 +67,10 @@ export class ContentDensityModule {
                 {
                     provide: CONTENT_DENSITY_STORAGE_KEY,
                     useValue: (conf as any).storageKey || '__ContentDensity__'
+                },
+                {
+                    provide: ContentDensityService,
+                    useClass: DeprecatedContentDensityService
                 },
                 ContentDensityControllerService,
                 storage

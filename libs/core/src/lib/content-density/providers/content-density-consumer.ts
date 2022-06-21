@@ -1,4 +1,4 @@
-import { ElementRef, Optional, Provider, Self, SkipSelf } from '@angular/core';
+import { ChangeDetectorRef, ElementRef, Optional, Provider, Self, SkipSelf } from '@angular/core';
 import { distinctUntilChanged, map, Observable, takeUntil, tap } from 'rxjs';
 import { DestroyedService } from '@fundamental-ngx/core/utils';
 import { ContentDensityControllerService } from '../services/content-density-controller.service';
@@ -15,12 +15,23 @@ export function contentDensityConsumer(providedConfiguration: {
     applyMode?: boolean;
 }): Provider {
     const configuration = { ...defaultContentDensityConsumerConfigs, ...providedConfiguration };
+    const isSupported = (density: ContentDensityMode): boolean =>
+        configuration.supportedContentDensity.includes(density);
+
+    const alternativeTo = {
+        [ContentDensityMode.COMPACT]: (): ContentDensityMode =>
+            isSupported(ContentDensityMode.CONDENSED) ? ContentDensityMode.CONDENSED : ContentDensityMode.COZY,
+        [ContentDensityMode.CONDENSED]: (): ContentDensityMode =>
+            isSupported(ContentDensityMode.COMPACT) ? ContentDensityMode.COMPACT : ContentDensityMode.COZY,
+        [ContentDensityMode.COZY]: (): ContentDensityMode => ContentDensityMode.COZY // No alternative here, everyone should support it
+    };
 
     return {
         provide: ContentDensityConsumer,
         useFactory: (
             elementRef: ElementRef<Element>,
             destroy$: Observable<void>,
+            changeDetectorRef: ChangeDetectorRef,
             parentContentDensityDirective?: Observable<LocalContentDensityMode>,
             contentDensityDirective?: Observable<LocalContentDensityMode>,
             contentDensityService?: ContentDensityControllerService
@@ -31,11 +42,8 @@ export function contentDensityConsumer(providedConfiguration: {
                 contentDensityService
             }).pipe(
                 map((density: ContentDensityMode) => {
-                    if (
-                        density === ContentDensityMode.CONDENSED &&
-                        configuration.supportedContentDensity.indexOf(density) === -1
-                    ) {
-                        return ContentDensityMode.COMPACT;
+                    if (!isSupported(density)) {
+                        return alternativeTo[density]();
                     }
 
                     return density;
@@ -55,14 +63,25 @@ export function contentDensityConsumer(providedConfiguration: {
 
             changesSource$.pipe(takeUntil(destroy$)).subscribe();
 
-            return new ContentDensityConsumer(changesSource$);
+            return new ContentDensityConsumer(changesSource$, destroy$, changeDetectorRef);
         },
         deps: [
             ElementRef,
             DestroyedService,
+            ChangeDetectorRef,
             [new Optional(), new SkipSelf(), CONTENT_DENSITY_DIRECTIVE],
             [new Optional(), new Self(), CONTENT_DENSITY_DIRECTIVE],
             [new Optional(), ContentDensityControllerService]
         ]
     };
+}
+
+export function contentDensityConsumerProviders(params?: {
+    modifiers?: Partial<Record<ContentDensityMode, string>>;
+    supportedContentDensity?: ContentDensityMode[];
+    defaultContentDensity?: ContentDensityMode;
+    applyMode?: boolean;
+}): Provider[] {
+    const providedConfiguration = params || {};
+    return [DestroyedService, contentDensityConsumer(providedConfiguration)];
 }
