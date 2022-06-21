@@ -20,7 +20,7 @@ export class DeprecatedCozyDirective
     readonly message: string;
     readonly alternative = {
         name: 'Use [fdCozy] directive instead',
-        link: ['/core', 'content-density-2']
+        link: ['/core', 'content-density']
     };
 
     constructor(selectorBase: string) {

@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, ElementRef, Optional, Provider, Self, SkipSelf } from '@angular/core';
 import { distinctUntilChanged, map, Observable, takeUntil, tap } from 'rxjs';
 import { DestroyedService } from '@fundamental-ngx/core/utils';
-import { ContentDensityControllerService } from '../services/content-density-controller.service';
+import { GlobalContentDensityService } from '../services/global-content-density.service';
 import { ContentDensityMode, LocalContentDensityMode } from '../content-density.types';
 import { CONTENT_DENSITY_DIRECTIVE } from '../tokens/content-density-directive';
 import { ContentDensityConsumer } from '../classes/content-density-consumer.class';
@@ -34,7 +34,7 @@ export function contentDensityConsumer(providedConfiguration: {
             changeDetectorRef: ChangeDetectorRef,
             parentContentDensityDirective?: Observable<LocalContentDensityMode>,
             contentDensityDirective?: Observable<LocalContentDensityMode>,
-            contentDensityService?: ContentDensityControllerService
+            contentDensityService?: GlobalContentDensityService
         ) => {
             const changesSource$: Observable<ContentDensityMode> = getChangesSource$({
                 defaultContentDensity: configuration.defaultContentDensity,
@@ -71,7 +71,7 @@ export function contentDensityConsumer(providedConfiguration: {
             ChangeDetectorRef,
             [new Optional(), new SkipSelf(), CONTENT_DENSITY_DIRECTIVE],
             [new Optional(), new Self(), CONTENT_DENSITY_DIRECTIVE],
-            [new Optional(), ContentDensityControllerService]
+            [new Optional(), GlobalContentDensityService]
         ]
     };
 }

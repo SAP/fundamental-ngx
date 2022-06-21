@@ -6,7 +6,7 @@ import { DEFAULT_CONTENT_DENSITY } from './tokens/default-content-density.token'
 import { ContentDensityMode, ContentDensityModuleConfig } from './content-density.types';
 import { ContentDensityStorage } from './classes/abstract-content-density-storage';
 import { MemoryContentDensityStorage } from './providers/memory-content-density-storage';
-import { ContentDensityControllerService } from './services/content-density-controller.service';
+import { GlobalContentDensityService } from './services/global-content-density.service';
 import { LocalContentDensityStorage } from './providers/local-content-density-storage';
 import { CONTENT_DENSITY_STORAGE_KEY } from './tokens/content-density-storage-key.token';
 import { UrlContentDensityStorage } from './providers/url-content-density-storage';
@@ -72,7 +72,7 @@ export class ContentDensityModule {
                     provide: ContentDensityService,
                     useClass: DeprecatedContentDensityService
                 },
-                ContentDensityControllerService,
+                GlobalContentDensityService,
                 storage
             ]
         };

@@ -8,7 +8,7 @@ export * from './directives/content-density.directive';
 
 export * from './providers/content-density-consumer';
 
-export * from './services/content-density-controller.service';
+export * from './services/global-content-density.service';
 
 export * from './helpers/density-type-checkers';
 

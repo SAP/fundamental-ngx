@@ -1,10 +1,8 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { MarkdownModule } from 'ngx-markdown';
-
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
 import { AppComponent } from './app.component';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
@@ -39,11 +37,14 @@ const routes: Routes = [
     imports: [
         BrowserAnimationsModule,
         HttpClientModule,
-        RouterModule.forRoot(routes, { useHash: true, relativeLinkResolution: 'legacy' }),
+        RouterModule.forRoot(routes, {
+            useHash: true,
+            relativeLinkResolution: 'legacy',
+            preloadingStrategy: PreloadAllModules
+        }),
         MarkdownModule.forRoot({ loader: HttpClient }),
         ContentDensityModule.forRoot({ storage: 'localStorage' })
     ],
-    bootstrap: [AppComponent],
-    providers: [ContentDensityService]
+    bootstrap: [AppComponent]
 })
 export class AppModule {}

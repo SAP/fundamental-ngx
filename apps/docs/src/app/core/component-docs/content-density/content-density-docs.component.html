@@ -1,16 +1,45 @@
+<fd-docs-section-title id="content-density-storage" componentName="content-density-storage">
+    ContentDensityStorage
+</fd-docs-section-title>
 <description>
-    Content Density can be maintained app-wide using the <code>ContentDensityService</code>, and components can
-    subscribe to a <code>BehaviorSubject</code> managed by the service and use that to handle changes to the content
-    density. Before using it, you should add <code>ContentDensityService</code> to providers array to
+    <p>
+        <code>ContentDensityModule</code> has support for configurable storage of application content density
+        preference. Out of the box, 3 storage options are available:
+    </p>
+    <ul>
+        <li>LocalContentDensityStorage - mode gets saved and consumed in local storage</li>
+        <li>UrlContentDensityStorage - mode gets saved and consumed from URL</li>
+        <li>MemoryContentDensityStorage - mode is saved in memory</li>
+    </ul>
+    <p>
+        The documentation page uses LocalContentDensityStorage, so if you change content density preference from either
+        toolbar or from <code>GlobalContentDensityService</code> example, changes will be saved in local storage
+    </p>
+    <p>
+        Also, as an additional comfort, you can modify under which key does storage get saved in local storage or in url
+        query params
+    </p>
+</description>
+<fd-code-snippet [file]="contentDensityStorageExampleFile"></fd-code-snippet>
+
+<separator></separator>
+
+<fd-docs-section-title id="content-density-service" componentName="content-density-service">
+    GlobalContentDensityService
+</fd-docs-section-title>
+<description>
+    Content Density can be maintained app-wide using the <code>ContentDensityControllerService</code>, and components
+    can subscribe to a <code>Observable</code> managed by the service and use that to handle changes to the content
+    density. Before using it, you should add <code>ContentDensityModule</code> to imports array of
     <code>AppModule</code>, or other root module in your application.
     <br />
-    Note that many components only come in one size, and others (such as the button below) only have
+    Note that many components only come in one size, and others (such as the button) only have
     <code>compact</code> and <code>cozy</code> sizes, so setting the size to <code>condensed</code>
     will have same effect as compact.
     <br />
     All components that have content density options will first check to see if the developer has provided a
-    <code>compact</code> input value, and if not, it will then refer to the value set in the
-    <code>ContentDensityService</code>.
+    <code>fdContentDensity</code> directive, and if not, it will then refer to the value set in the
+    <code>GlobalContentDensityService</code>.
 </description>
 <component-example>
     <fd-content-density-example></fd-content-density-example>
@@ -18,3 +47,20 @@
 <code-example [exampleFiles]="contentDensityExample"></code-example>
 
 <separator></separator>
+
+<fd-docs-section-title id="directives" componentName="directives">Directives</fd-docs-section-title>
+<description>
+    <p>
+        You can use directives to make components explicitly use desired content density configuration. We have created
+        one directive called
+        <code>[fdContentDensity]</code>, which also has 3 other names <code>[fdCompact]</code>,
+        <code>[fdCozy]</code> and <code>[fdCondensed]</code>. Although these three names are just for ease of use and
+        writing less code.
+        <br />
+        You can check out their behavior in example below.
+    </p>
+</description>
+<component-example>
+    <fd-directive-usage-example></fd-directive-usage-example>
+</component-example>
+<code-example [exampleFiles]="directiveUsageExample"></code-example>

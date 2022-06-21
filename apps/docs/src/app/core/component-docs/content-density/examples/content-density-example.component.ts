@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { ContentDensity, ContentDensityService } from '@fundamental-ngx/core/utils';
+import { GlobalContentDensityService, ContentDensityMode } from '@fundamental-ngx/core/content-density';
 
 @Component({
     selector: 'fd-content-density-example',
     templateUrl: './content-density-example.component.html'
 })
 export class ContentDensityExampleComponent implements OnInit {
-    selectedDensity: ContentDensity;
+    selectedDensity: ContentDensityMode;
 
-    constructor(private _contentDensityService: ContentDensityService) {}
+    constructor(readonly _contentDensityService: GlobalContentDensityService) {}
 
     ngOnInit(): void {
-        this.selectedDensity = this._contentDensityService.contentDensity.value;
+        this.selectedDensity = this._contentDensityService.currentContentDensity;
     }
 
-    onChange(): void {
-        this._contentDensityService.contentDensity.next(this.selectedDensity);
+    onChange($event: any): void {
+        this._contentDensityService.updateContentDensity($event);
     }
 }

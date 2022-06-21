@@ -21,7 +21,7 @@ export class DeprecatedCompactDirective
     readonly message: string;
     readonly alternative = {
         name: 'Use [fdCompact] directive instead',
-        link: ['/core', 'content-density-2']
+        link: ['/core', 'content-density']
     };
 
     constructor(selectorBase: string) {

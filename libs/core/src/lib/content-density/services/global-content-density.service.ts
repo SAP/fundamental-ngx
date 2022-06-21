@@ -5,7 +5,7 @@ import { ContentDensityMode } from '../content-density.types';
 import { DEFAULT_CONTENT_DENSITY } from '../tokens/default-content-density.token';
 
 @Injectable()
-export class ContentDensityControllerService implements OnDestroy {
+export class GlobalContentDensityService implements OnDestroy {
     currentContentDensity: ContentDensityMode;
     private _subscription = new Subscription();
 

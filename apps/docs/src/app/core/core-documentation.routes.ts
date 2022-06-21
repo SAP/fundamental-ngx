@@ -179,16 +179,16 @@ export const ROUTES: Routes = [
                     )
             },
             {
-                path: 'content-density',
+                path: 'old-content-density',
                 loadChildren: () =>
-                    import('./component-docs/content-density/content-density-docs.module').then(
+                    import('./component-docs/old-content-density/content-density-docs.module').then(
                         (m) => m.ContentDensityDocsModule
                     )
             },
             {
-                path: 'content-density-2',
+                path: 'content-density',
                 loadChildren: () =>
-                    import('./component-docs/content-density-2/content-density-docs.module').then(
+                    import('./component-docs/content-density/content-density-docs.module').then(
                         (m) => m.ContentDensityDocsModule
                     )
             },
