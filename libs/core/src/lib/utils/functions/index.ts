@@ -7,3 +7,4 @@ export * from './random-color-accent';
 export * from './resize-observable';
 export * from './intersection-observable';
 export * from './is-compact-density';
+export * from './module-deprecations-provider';
