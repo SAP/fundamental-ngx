@@ -9,7 +9,10 @@ import { CONTENT_DENSITY_DIRECTIVE } from '../tokens/content-density-directive';
  * This Directive is used in density controllers and consumers
  */
 @Directive({
-    selector: '[fdContentDensity], [fdCompact], [fdCondensed], [fdCozy]',
+    selector: `[fdContentDensity]:not([fdCompact]):not([fdCondensed]):not([fdCozy]),
+                [fdCompact]:not([fdContentDensity]):not([fdCondensed]):not([fdCozy]),
+                [fdCondensed]:not([fdContentDensity]):not([fdCompact]):not([fdCozy]),
+                [fdCozy]:not([fdContentDensity]):not([fdCompact]):not([fdCondensed])`,
     exportAs: 'fdContentDensity',
     providers: [
         {
