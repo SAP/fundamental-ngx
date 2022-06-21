@@ -14,7 +14,7 @@ const routes: Routes = [
         component: ContentDensityHeaderComponent,
         children: [
             { path: '', component: ContentDensityDocsComponent },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.contentDensity } }
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.oldContentDensity } }
         ]
     }
 ];
