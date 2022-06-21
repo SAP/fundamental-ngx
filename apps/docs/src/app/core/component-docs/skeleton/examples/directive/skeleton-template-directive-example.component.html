@@ -1,0 +1,61 @@
+<div class="examples-wrapper">
+    <button fd-button (click)="localLoading = !localLoading">Toggle local loading</button>
+
+    <button fd-button (click)="changeGlobalState()">Toggle global loading</button>
+</div>
+
+<div class="examples-wrapper">
+    <fd-card badge="New" cardType="list" *fdSkeleton="localLoading; template: loadingCard">
+        <fd-card-header>
+            <h2 fd-card-title>Card reacts to local skeleton state and is has a template on the card level.</h2>
+        </fd-card-header>
+
+        <fd-card-content>
+            <ul fd-list [noBorder]="true">
+                <li *ngFor="let i of [1, 2, 3, 4]; let index = index" fd-list-item>
+                    <span fd-list-title> item {{ i }} </span>
+                </li>
+            </ul>
+        </fd-card-content>
+    </fd-card>
+
+    <fd-card badge="New" cardType="list" *fdSkeleton="localLoading">
+        <fd-card-header>
+            <h2 fd-card-title>Card reacts to local skeleton state but it doesn't have a template on the card level.</h2>
+        </fd-card-header>
+
+        <fd-card-content *fdSkeletonTemplate="skeletonCardContent">
+            <ul fd-list [noBorder]="true">
+                <li *ngFor="let i of [1, 2, 3, 4]; let index = index" fd-list-item>
+                    <span fd-list-title> Instead it has template on the card content level.</span>
+                </li>
+            </ul>
+        </fd-card-content>
+    </fd-card>
+
+    <fd-card badge="New" cardType="list" *fdSkeleton="'global'; template: loadingCard">
+        <fd-card-header>
+            <h2 fd-card-title>Card reacts to global skeleton state and it has a template on the card level.</h2>
+        </fd-card-header>
+
+        <fd-card-content>
+            <ul fd-list [noBorder]="true">
+                <li *ngFor="let i of [1, 2, 3, 4]; let index = index" fd-list-item>
+                    <span fd-list-title> item {{ i }} </span>
+                </li>
+            </ul>
+        </fd-card-content>
+    </fd-card>
+</div>
+
+<ng-template #loadingCard>
+    <fd-skeleton width="250px" height="300px"></fd-skeleton>
+</ng-template>
+
+<ng-template #skeletonCardContent>
+    <ul fd-list [noBorder]="true">
+        <li *ngFor="let i of [1, 2, 3, 4]; let index = index" fd-list-item>
+            <fd-skeleton type="text"></fd-skeleton>
+        </li>
+    </ul>
+</ng-template>

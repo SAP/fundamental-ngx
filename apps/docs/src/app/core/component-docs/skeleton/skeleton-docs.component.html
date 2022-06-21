@@ -1,0 +1,53 @@
+<fd-docs-section-title id="template-directive" componentName="skeleton">Template Directives</fd-docs-section-title>
+
+<description>
+    Use the <code>fdSkeleton</code> template directive to set the skeleton state for the components subtree. Provide
+    your own template using the <code>fdSkeletonTemplate</code> input property of the directive. You could use
+    <code>*fdSkeleton="skeletonState; template: skeletonTemplate"</code> shorthand.
+
+    <br /><br />
+
+    You could change the skeleton state to the <code>'global'</code> value and it will react only to the global skeleton
+    state changes.
+
+    <br /><br />
+
+    You could also use omit the <code>fdSkeletonTemplate</code> input property of the <code>fdSkeleton</code> directive
+    and use the separate <code>fdSkeletonTemplate</code> template directive severals levels deeper. This separate
+    directive just listen to the skeleton state set somewhere above (via the directive or the service) in the components
+    subtree.
+</description>
+
+<component-example>
+    <fd-skeleton-template-directive-example></fd-skeleton-template-directive-example>
+</component-example>
+
+<code-example [exampleFiles]="directive"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="component" componentName="skeleton">Component</fd-docs-section-title>
+
+<description>
+    Bare skeleton component that can be used as a placeholder for content instead of the spinner component. It supports
+    setting <code>width</code>, <code>height</code>, <code>type</code> - may be
+    <code>circle | text | rectangle (default)</code> and disabling <code>animation</code> if needed (enabled by
+    default).
+
+    <br /><br />
+
+    If <code>type</code> set to <code>text</code> then <code>height</code> input property is ignored and height will be
+    automatically calculated.
+
+    <br /><br />
+    <code>width</code> input property can be set to <code>'rand'</code> so the skeleton will be randomly 30-90% in
+    width. It's also set like that by default.
+</description>
+
+<component-example>
+    <fd-skeleton-component-example></fd-skeleton-component-example>
+</component-example>
+
+<code-example [exampleFiles]="component"></code-example>
+
+<separator></separator>

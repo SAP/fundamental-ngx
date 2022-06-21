@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { MarkdownModule } from 'ngx-markdown';
 
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 import { AppComponent } from './app.component';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
@@ -41,7 +42,8 @@ const routes: Routes = [
         HttpClientModule,
         RouterModule.forRoot(routes, { useHash: true, relativeLinkResolution: 'legacy' }),
         MarkdownModule.forRoot({ loader: HttpClient }),
-        ContentDensityModule.forRoot({ storage: 'localStorage' })
+        ContentDensityModule.forRoot({ storage: 'localStorage' }),
+        SkeletonModule.forRoot({ defaultSkeletonState: false })
     ],
     bootstrap: [AppComponent],
     providers: [ContentDensityService]

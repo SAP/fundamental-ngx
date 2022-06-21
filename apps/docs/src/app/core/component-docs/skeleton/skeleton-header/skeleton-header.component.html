@@ -1,0 +1,22 @@
+<header>Skeleton</header>
+
+<description>
+    Skeleton component to be used as a placeholder for content instead of the spinner component.
+
+    <br /><br />
+
+    To provide <code>SkeletonService</code> that manage global skeleton state you need to use
+    <code>forRoot</code> method of <code>SkeletonModule</code> in the root module of your application. It's also
+    possible to set <code>defaultSkeletonState</code>(<code>true | false (default)</code>) via this way.
+
+    <br /><br />
+
+    <b>Notice</b>: We will iteratively add skeleton state support out of the box to all the components but before it
+    happened please provide your own templates.
+</description>
+
+<import module="SplitterModule" subPackage="splitter"></import>
+
+<fd-header-tabs></fd-header-tabs>
+
+<router-outlet></router-outlet>

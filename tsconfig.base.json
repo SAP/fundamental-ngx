@@ -98,6 +98,7 @@
             "@fundamental-ngx/core/shared": ["libs/core/src/lib/shared/index.ts"],
             "@fundamental-ngx/core/shellbar": ["libs/core/src/lib/shellbar/index.ts"],
             "@fundamental-ngx/core/side-navigation": ["libs/core/src/lib/side-navigation/index.ts"],
+            "@fundamental-ngx/core/skeleton": ["libs/core/src/lib/skeleton/index.ts"],
             "@fundamental-ngx/core/slider": ["libs/core/src/lib/slider/index.ts"],
             "@fundamental-ngx/core/split-button": ["libs/core/src/lib/split-button/index.ts"],
             "@fundamental-ngx/core/splitter": ["libs/core/src/lib/splitter/index.ts"],

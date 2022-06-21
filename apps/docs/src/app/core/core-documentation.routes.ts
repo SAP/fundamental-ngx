@@ -548,6 +548,11 @@ export const ROUTES: Routes = [
                 path: 'scrollbar',
                 loadChildren: () =>
                     import('./component-docs/scrollbar/scrollbar-docs.module').then((m) => m.ScrollbarDocsModule)
+            },
+            {
+                path: 'skeleton',
+                loadChildren: () =>
+                    import('./component-docs/skeleton/skeleton-docs.module').then((m) => m.SkeletonDocsModule)
             }
         ]
     }

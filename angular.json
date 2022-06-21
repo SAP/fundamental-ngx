@@ -2803,6 +2803,48 @@
             },
             "tags": ["type:lib", "scope:fd"]
         },
+        "core-skeleton": {
+            "projectType": "library",
+            "root": "libs/core/src/lib/skeleton",
+            "sourceRoot": "libs/core/src/lib/skeleton",
+            "prefix": "fd",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/core/skeleton"],
+                    "options": {
+                        "project": "libs/core/src/lib/skeleton/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/core/src/lib/skeleton/tsconfig.lib.prod.json"
+                        },
+                        "development": {
+                            "tsConfig": "libs/core/src/lib/skeleton/tsconfig.lib.json"
+                        }
+                    },
+                    "defaultConfiguration": "production"
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/core/src/lib/skeleton/test.ts",
+                        "tsConfig": "libs/core/src/lib/skeleton/tsconfig.spec.json",
+                        "karmaConfig": "libs/core/src/lib/skeleton/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/skeleton/**/*.ts",
+                            "libs/core/src/lib/skeleton/**/*.html"
+                        ]
+                    }
+                }
+            },
+            "tags": ["scope:fd", "type:lib"]
+        },
         "core-slider": {
             "projectType": "library",
             "root": "libs/core/src/lib/slider",

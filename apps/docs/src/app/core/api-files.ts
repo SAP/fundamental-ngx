@@ -403,5 +403,6 @@ export const API_FILES = {
         'TimelineHeaderInfoSubTitleDirective'
     ],
     scrollbar: ['ScrollbarComponent'],
+    skeleton: ['SkeletonComponent', 'SkeletonService', 'SkeletonDirective', 'SkeletonTemplateDirective'],
     theming: ['ThemingService', 'BaseThemingConfig']
 };

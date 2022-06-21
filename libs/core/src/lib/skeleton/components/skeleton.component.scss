@@ -1,0 +1,75 @@
+$block: fd-skeleton;
+
+/* TODO: To be moved in Fund Styles */
+.#{$block} {
+    /** PSEUDO BASIC RESET */
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+    display: block;
+    flex-shrink: 0;
+    background: var(--sapContent_Placeholderloading_Background);
+
+    &--animated {
+        background-image: var(--sapContent_Placeholderloading_Gradient);
+        background-size: 2000px 100%;
+        animation: shimmer 3.5s linear infinite;
+    }
+
+    &--mimic {
+        position: relative;
+        color: transparent !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+
+        * {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            user-select: none;
+            border-radius: inherit;
+            background: var(--sapContent_Placeholderloading_Background);
+        }
+
+        &.#{$block}--animated {
+            &::after {
+                background-image: var(--sapContent_Placeholderloading_Gradient);
+                background-size: 2000px 100%;
+                animation: shimmer 2.5s linear infinite;
+            }
+        }
+    }
+
+    &--circle {
+        border-radius: 100%;
+    }
+
+    &--text {
+        height: auto;
+        flex-shrink: 1;
+
+        &::before {
+            content: '\a0';
+        }
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position-x: -2000px;
+    }
+    100% {
+        background-position-x: 2000px;
+    }
+}
