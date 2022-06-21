@@ -90,7 +90,7 @@ export class MenuItemComponent implements OnDestroy, FocusableOption {
      * Handle selection of item via keyboard 'Enter'
      */
     @HostListener('keydown', ['$event'])
-    _onItemKeydown(event: KeyboardEvent): void {
+    private _onItemKeydown(event: KeyboardEvent): void {
         if (event && KeyUtil.isKeyCode(event, [SPACE, ENTER]) && !this.disabled) {
             this.itemSelect.emit();
         } else if (this.disabled) {
@@ -103,7 +103,7 @@ export class MenuItemComponent implements OnDestroy, FocusableOption {
      * Handle click of item via mouse click.
      */
     @HostListener('click', ['$event'])
-    _onItemClick(event: MouseEvent): void {
+    private _onItemClick(event: MouseEvent): void {
         if (!this.disabled) {
             this.itemSelect.emit();
         } else {
@@ -113,10 +113,10 @@ export class MenuItemComponent implements OnDestroy, FocusableOption {
 
     /**
      * @hidden
-     * Handle click of item via keyboard 'Enter'.
+     * Handle mouse enter event.
      */
     @HostListener('mouseenter')
-    _onMouseEnter(): void {
+    private _onMouseEnter(): void {
         this.hovered.next(this);
     }
 }
