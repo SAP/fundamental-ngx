@@ -1,4 +1,11 @@
 
+## [0.35.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.23...v0.35.0-rc.24) (2022-06-22)
+
+
+### Bug Fixes
+
+* **platform:** capitalize tooltips ([#8261](https://github.com/SAP/fundamental-ngx/issues/8261)) ([4521ad8](https://github.com/SAP/fundamental-ngx/commit/4521ad83bb6823f2c2c593cfab4a5492b63b487f))
+
 ## [0.35.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.22...v0.35.0-rc.23) (2022-06-21)
 
 ## [0.35.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.21...v0.35.0-rc.22) (2022-06-17)
