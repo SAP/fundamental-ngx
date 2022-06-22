@@ -16,7 +16,8 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { ContentDensityService, KeyUtil } from '@fundamental-ngx/core/utils';
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
 /**
  * A token is used to represent contextualizing information.
@@ -136,5 +137,12 @@ export class TokenComponent implements OnInit, AfterViewInit, OnDestroy {
     /** @hidden */
     tokenClickHandler(event): void {
         this.onTokenClick.emit(event);
+    }
+
+    /** @hidden */
+    tokenKeydownHandler(event): void {
+        if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
+            this.onTokenClick.emit(event);
+        }
     }
 }

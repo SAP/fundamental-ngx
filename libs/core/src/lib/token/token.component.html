@@ -5,6 +5,7 @@
     tabindex="0"
     [attr.aria-roledescription]="ariaRoleDescription"
     (click)="tokenClickHandler($event)"
+    (keydown)="tokenKeydownHandler($event)"
     [class.fd-token__disabled]="disabled"
     [class.fd-token--compact]="compact"
     [class.fd-token--selected]="selected"
