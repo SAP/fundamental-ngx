@@ -2,6 +2,7 @@
     #tokenWrapperElement
     class="fd-token"
     role="option"
+    tabindex="0"
     [attr.aria-roledescription]="ariaRoleDescription"
     (click)="tokenClickHandler($event)"
     [class.fd-token__disabled]="disabled"
@@ -20,7 +21,6 @@
         [attr.aria-label]="deleteButtonLabel"
         *ngIf="!readOnly"
         class="fd-token__close"
-        tabindex="-1"
     ></span>
 </span>
 

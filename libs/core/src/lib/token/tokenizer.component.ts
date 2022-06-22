@@ -275,6 +275,7 @@ export class TokenizerComponent
     handleTokenClickSubscriptions(): void {
         this._unsubscribeClicks();
         this.tokenList.forEach((token, index) => {
+            token.tokenWrapperElement.nativeElement.tabIndex = -1;
             this.tokenListClickSubscriptions.push(
                 token.onTokenClick.subscribe((event) => {
                     event.stopPropagation();
