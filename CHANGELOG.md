@@ -1,4 +1,11 @@
 
+## [0.35.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.24...v0.35.0-rc.25) (2022-06-22)
+
+
+### Bug Fixes
+
+* **platform:** allow platform menu items to be disabled ([#8240](https://github.com/SAP/fundamental-ngx/issues/8240)) ([76ed043](https://github.com/SAP/fundamental-ngx/commit/76ed0437b0f7da4ad444a0b42ade8f5ac959d7b7))
+
 ## [0.35.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.23...v0.35.0-rc.24) (2022-06-22)
 
 
