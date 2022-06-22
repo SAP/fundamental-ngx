@@ -19,3 +19,13 @@
         border-width: var(--fdAvatarGroup_MoreButton_Border);
     }
 }
+
+.fd-overflow-layout__popover-container--avatar-group {
+    max-height: 18.5rem;
+    .fd-popover__body-content {
+        padding: 0.75rem;
+        .fd-avatar {
+            margin: 0.25rem;
+        }
+    }
+}

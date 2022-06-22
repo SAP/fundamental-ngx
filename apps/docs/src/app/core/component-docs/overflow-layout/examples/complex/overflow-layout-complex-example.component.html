@@ -168,7 +168,7 @@
             [closeOnOutsideClick]="true"
             [closeOnEscapeKey]="true"
             placement="top"
-            [maxWidth]="312"
+            [maxWidth]="340"
             (isOpenChange)="handleOverflowPopoverOpen($event)"
             #overflowPopover
         >
@@ -185,7 +185,11 @@
                 </button>
             </fd-popover-control>
             <fd-popover-body aria-labelledby="avatar-group-0-popover-header" role="tooltip">
-                <div class="fd-popover__wrapper" fdOverflowLayoutPopoverContent [items]="items">
+                <div
+                    class="fd-popover__wrapper fd-overflow-layout__popover-container--avatar-group"
+                    fdOverflowLayoutPopoverContent
+                    [items]="items"
+                >
                     <div fd-popover-body-header *ngIf="!isDetailStage">
                         <div fd-bar barDesign="header">
                             <div fd-bar-left>
@@ -197,7 +201,7 @@
                         </div>
                     </div>
 
-                    <div>
+                    <div class="fd-popover__body-content">
                         <ng-container *ngIf="overflowPopoverStage === 'main'">
                             <ng-container *ngFor="let person of items; let i = index">
                                 <ng-container
