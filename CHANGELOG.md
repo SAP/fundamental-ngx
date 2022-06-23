@@ -1,4 +1,11 @@
 
+## [0.35.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.25...v0.35.0-rc.26) (2022-06-23)
+
+
+### Features
+
+* **core:** table - a11y issues ([#8184](https://github.com/SAP/fundamental-ngx/issues/8184)) ([c817fe8](https://github.com/SAP/fundamental-ngx/commit/c817fe8ed94ff521ee2e565d845a25deabcb4bd2))
+
 ## [0.35.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.24...v0.35.0-rc.25) (2022-06-22)
 
 
