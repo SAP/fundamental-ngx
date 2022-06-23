@@ -4,7 +4,7 @@ import { OverflowItem } from '../interfaces/overflow-item.interface';
 import { FD_OVERFLOW_ITEM_REF } from '../tokens/overflow-item-ref.token';
 
 /**
- * Structural directive which is used to pass the context of the item to the template endine.
+ * Structural directive which is used to pass the context of the item to the template engine.
  */
 @Directive({
     selector: '[fdOverflowItemRef]',

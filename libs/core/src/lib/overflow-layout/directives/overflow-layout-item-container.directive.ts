@@ -5,11 +5,16 @@ import { OverflowItemContainerRefDirective } from './overflow-item-container-ref
     selector: '[fdOverflowLayoutItemContainer]'
 })
 export class OverflowLayoutItemContainerDirective {
+    /** @hidden */
     @HostBinding('class')
     private readonly _initialClass = 'fd-overflow-layout__item';
 
+    /**
+     * Container reference.
+     */
     @ContentChild(OverflowItemContainerRefDirective)
     containerRef: OverflowItemContainerRefDirective;
 
+    /** @hidden */
     constructor(public elementRef: ElementRef) {}
 }

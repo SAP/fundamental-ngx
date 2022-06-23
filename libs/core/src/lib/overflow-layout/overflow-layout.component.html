@@ -23,7 +23,14 @@
             [maxWidth]="312"
         >
             <fd-popover-control>
-                <button fd-button [fdMenu]="true" fdType="transparent">{{ _hiddenItems.length }} more</button>
+                <button
+                    fd-button
+                    [fdMenu]="true"
+                    i18n="@overflowLayout.moreItemsButton|Overflow Layout more button text"
+                    fdType="transparent"
+                >
+                    {{ _hiddenItems.length }} more
+                </button>
             </fd-popover-control>
             <fd-popover-body>
                 <div fdOverflowLayoutPopoverContent [items]="_hiddenItems">
