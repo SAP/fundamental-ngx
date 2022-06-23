@@ -296,6 +296,18 @@ export class DatetimePickerComponent<D>
     @Input()
     preventScrollOnFocus = false;
 
+    /**
+     * Text and aria-label of the DateTimePicker 'OK' button.
+     */
+    @Input()
+    okLabel = 'OK';
+
+    /**
+     * Text and aria-label of the DateTimePicker 'Cancel' button.
+     */
+    @Input()
+    cancelLabel = 'Cancel';
+
     /** @hidden */
     _processInputOnBlur = false;
 

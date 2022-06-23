@@ -38,6 +38,8 @@
     (activeViewChange)="handleActiveViewChange($event)"
     (isOpenChange)="handleOpenChange($event)"
     (touched)="onTouched()"
+    [okLabel]="okLabel"
+    [cancelLabel]="cancelLabel"
 >
     <ng-content></ng-content>
 </fd-datetime-picker>
