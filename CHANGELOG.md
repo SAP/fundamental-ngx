@@ -1,4 +1,11 @@
 
+### [0.35.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.35.0...v0.35.1-rc.0) (2022-06-23)
+
+
+### Bug Fixes
+
+* **core:** modified ng-add schema of core to include theme in client project ([#8272](https://github.com/SAP/fundamental-ngx/issues/8272)) ([c3c4b5c](https://github.com/SAP/fundamental-ngx/commit/c3c4b5c64824b74d6e101af2d9903441a9a408af))
+
 ## [0.35.0](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.28...v0.35.0) (2022-06-23)
 
 
