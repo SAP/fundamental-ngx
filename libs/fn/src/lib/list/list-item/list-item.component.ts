@@ -32,7 +32,7 @@ import { coerceBoolean, TemplateRefProviderToken } from '@fundamental-ngx/fn/uti
 import { CheckboxContext } from '../list-item-checkbox.directive';
 import { ListComponent } from '../list/list.component';
 import { distinctUntilChanged, map, Observable } from 'rxjs';
-import { coerceArray } from '@angular/cdk/coercion';
+import { BooleanInput, coerceArray } from '@angular/cdk/coercion';
 
 @Component({
     selector: 'fn-list-item, [fn-list-item]',
@@ -48,7 +48,7 @@ export class ListItemComponent {
     @Input()
     @HostBinding('class.fn-list__item--info-bar')
     @coerceBoolean
-    infoBar!: boolean;
+    infoBar!: BooleanInput;
 
     @ContentChild(FN_LIST_CHECKBOX)
     checkboxProvider?: TemplateRefProviderToken<CheckboxContext>;
@@ -96,10 +96,10 @@ export class ListItemComponent {
     }
 
     get byline(): boolean {
-        return this.listComponent.byline;
+        return !!this.listComponent.byline;
     }
 
-    $templateRef = (templ: any): TemplateRef<any> => templ;
+    $templateRef = (template: any): TemplateRef<any> => template;
 
     public elementRef(): ElementRef<HTMLElement> {
         return this._elementRef;

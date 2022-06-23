@@ -3,4 +3,4 @@
     <small>Search Query Entered: {{ customForm.controls.formInput.value }}</small>
 </form>
 
-<button fd-button style="margin-top: 1rem" (click)="customForm.get('formInput').enable()">Click to Enable</button>
+<button fd-button style="margin-top: 1rem" (click)="customForm.get('formInput')?.enable()">Click to Enable</button>

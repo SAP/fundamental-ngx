@@ -1,5 +1,10 @@
 <fn-notification-content>
-    <fn-avatar [circle]="true" [image]="notification.data.avatar" size="l"></fn-avatar>
+    <fn-avatar
+        [circle]="true"
+        *ngIf="notification.data?.avatar"
+        [image]="notification.data!.avatar"
+        size="l"
+    ></fn-avatar>
     <ng-template fnNotificationTitle>{{ notification.title }}</ng-template>
     <ng-template fnNotificationText>{{ notification.message }}</ng-template>
     <ng-template fnNotificationDismissButton>

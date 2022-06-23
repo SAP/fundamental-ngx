@@ -3,9 +3,10 @@
  * select, multi-input etc.
  */
 
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { AfterViewInit, ChangeDetectorRef, Directive, Input, OnDestroy } from '@angular/core';
 import { DisabledBehavior, ReadonlyBehavior } from '@fundamental-ngx/fn/cdk';
-import { Subscription, merge } from 'rxjs';
+import { Subscription, merge, Observable } from 'rxjs';
 
 export type InputState = 'positive' | 'critical' | 'negative' | 'info';
 
@@ -15,22 +16,30 @@ export abstract class InputBase implements AfterViewInit, OnDestroy {
     @Input()
     placeholder: string;
 
-    /** Whether or not this input is the 'display' type. */
+    /** Whether this input is the 'display' type. */
     @Input()
-    display: boolean;
+    set display(value: BooleanInput) {
+        this._display = coerceBooleanProperty(value);
+    }
+
+    get display(): boolean {
+        return this._display;
+    }
 
     /** The state of the input. */
     @Input()
     state: InputState;
 
-    /** Whether or not this input is disabled. */
-    disabled: boolean;
+    /** Whethert this input is disabled. */
+    disabled: boolean | undefined;
 
-    /** Whether or not this input has been disabled via Angular Forms. */
+    /** Whether this input has been disabled via Angular Forms. */
     disabledByForm: boolean;
 
-    /** Whether or not this input is readonly. */
-    readonly: boolean;
+    /** Whether this input is readonly. */
+    readonly: boolean | undefined;
+
+    _display: boolean;
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -55,7 +64,7 @@ export abstract class InputBase implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _listenToDisablingEvents(): void {
-        const disablingEvents$ = [];
+        const disablingEvents$: Observable<boolean>[] = [];
         if (this.disabled$) {
             disablingEvents$.push(this.disabled$);
         }

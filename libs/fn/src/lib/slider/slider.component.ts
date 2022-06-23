@@ -60,7 +60,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     /** Whether slider is disabled */
     @Input()
     @HostBinding('class.is-disabled')
-    class: Nullable<string>;
+    disabled = false;
 
     /** Id of the element that labels slider. */
     @Input()
@@ -372,10 +372,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
                 return;
             }
 
-            let handleIndex: SliderRangeHandles;
-            if (event.target === this.rangeHandle1.nativeElement) {
-                handleIndex = SliderRangeHandles.First;
-            }
+            let handleIndex = SliderRangeHandles.First;
 
             if (event.target === this.rangeHandle2.nativeElement) {
                 handleIndex = SliderRangeHandles.Second;
@@ -404,14 +401,9 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
         const diff = event.shiftKey ? this.jump : this.step;
         let newValue: number | SliderTickMark | null = null;
         let prevValue = this._position as number;
-        let handleIndex: SliderRangeHandles;
+        let handleIndex = SliderRangeHandles.First;
 
         if (this.range) {
-            if (event.target === this.rangeHandle1.nativeElement) {
-                prevValue = this._handle1Value;
-                handleIndex = SliderRangeHandles.First;
-            }
-
             if (event.target === this.rangeHandle2.nativeElement) {
                 prevValue = this._handle2Value;
                 handleIndex = SliderRangeHandles.Second;

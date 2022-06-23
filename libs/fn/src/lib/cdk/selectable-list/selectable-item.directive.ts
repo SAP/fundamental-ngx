@@ -103,7 +103,7 @@ export class SelectableItemDirective<ValueType = any> implements SelectableItemT
 
     /** @hidden */
     private _listenToDisablingEvents(): void {
-        const disablingEvents$ = [];
+        const disablingEvents$: Observable<boolean>[] = [];
         if (this.disabled$) {
             disablingEvents$.push(this.disabled$);
         }

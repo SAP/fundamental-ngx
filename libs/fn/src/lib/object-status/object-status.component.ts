@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input, HostBinding } from '@angular/core';
 import { IconFont } from '@fundamental-ngx/core/icon';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 export type ObjectStatusState = 'positive' | 'critical' | 'negative' | 'info';
 
@@ -38,7 +39,7 @@ export class ObjectStatusComponent {
 
     /** Aria-label for Icon. */
     @Input()
-    iconAriaLabel: string = null;
+    iconAriaLabel: Nullable<string> = null;
 
     /** Whether element is disabled */
     @Input()

@@ -39,7 +39,8 @@ export class GenericTagComponent implements OnInit, OnChanges, CssClassBuilder {
     /** The icon name to display. See the icon page for the list of icons
      * here: https://sap.github.io/fundamental-ngx/icon
      * */
-    @Input() glyph;
+    @Input()
+    glyph: string;
 
     /**
      * The icon font
@@ -49,7 +50,7 @@ export class GenericTagComponent implements OnInit, OnChanges, CssClassBuilder {
 
     /** Aria-label for Icon. */
     @Input()
-    iconAriaLabel: string = null;
+    iconAriaLabel: string | null = null;
 
     /** Whether element is disabled */
     @Input()

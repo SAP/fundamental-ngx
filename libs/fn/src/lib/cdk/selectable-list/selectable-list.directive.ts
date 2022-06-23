@@ -1,7 +1,8 @@
+import { BooleanInput } from '@angular/cdk/coercion';
 import { AfterViewInit, ContentChildren, Directive, EventEmitter, Input, Output, QueryList } from '@angular/core';
 import { coerceBoolean } from '@fundamental-ngx/fn/utils';
 import { SelectionService } from './selection.service';
-import { SelectComponentRootToken } from './select-component-root.token';
+import { SelectableListValueType, SelectComponentRootToken } from './select-component-root.token';
 import { SelectableItemToken } from './selectable-item.token';
 
 @Directive({
@@ -15,38 +16,38 @@ import { SelectableItemToken } from './selectable-item.token';
         SelectionService
     ]
 })
-export class SelectableListDirective<ValueType = any> implements SelectComponentRootToken<ValueType>, AfterViewInit {
+export class SelectableListDirective<T = any> implements SelectComponentRootToken<T>, AfterViewInit {
     @Output()
-    selectedChange = new EventEmitter<ValueType | ValueType[]>();
+    selectedChange = new EventEmitter<SelectableListValueType<T>>();
 
     @Input()
     @coerceBoolean
-    toggle = false;
+    toggle: BooleanInput = false;
 
     @Input()
     @coerceBoolean
-    multiple = false;
+    multiple: BooleanInput = false;
 
     @Input()
-    set selected(value: ValueType | ValueType[]) {
+    set selected(value: SelectableListValueType<T>) {
         this._selectionService.setValue(value);
     }
 
-    @ContentChildren(SelectableItemToken) selectableItems!: QueryList<SelectableItemToken<ValueType>>;
+    @ContentChildren(SelectableItemToken) selectableItems!: QueryList<SelectableItemToken<T>>;
 
-    constructor(private _selectionService: SelectionService) {
+    constructor(private _selectionService: SelectionService<T>) {
         this._selectionService.registerRootComponent(this);
     }
 
-    select(item: SelectableItemToken<ValueType>): void {
+    select(item: SelectableItemToken<T>): void {
         this._selectionService.selectItem(item);
     }
 
-    deselect(item: SelectableItemToken<ValueType>): void {
+    deselect(item: SelectableItemToken<T>): void {
         this._selectionService.deselectItem(item);
     }
 
-    toggleSelect(item: SelectableItemToken<ValueType>): void {
+    toggleSelect(item: SelectableItemToken<T>): void {
         if (item.getSelected()) {
             this.deselect(item);
         } else {
@@ -54,7 +55,7 @@ export class SelectableListDirective<ValueType = any> implements SelectComponent
         }
     }
 
-    onChange(value: ValueType | ValueType[]): void {
+    onChange(value: SelectableListValueType<T>): void {
         this.selectedChange.emit(value);
     }
 

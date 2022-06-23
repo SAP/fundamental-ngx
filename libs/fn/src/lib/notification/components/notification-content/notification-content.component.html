@@ -3,12 +3,16 @@
 <div class="fn-notification__main-container">
     <ng-content></ng-content>
     <ng-template [ngTemplateOutlet]="textContainer"></ng-template>
-    <ng-template [ngTemplateOutlet]="dismissButton?.templateRef"></ng-template>
+    <ng-container *ngIf="dismissButton">
+        <ng-template [ngTemplateOutlet]="dismissButton.templateRef"></ng-template>
+    </ng-container>
 </div>
 
 <ng-template #semanticContainer>
     <div class="fn-notification__semantic-container" *ngIf="semanticTitle">
-        <ng-template [ngTemplateOutlet]="semanticIcon?.templateRef"></ng-template>
+        <ng-container *ngIf="semanticIcon">
+            <ng-template [ngTemplateOutlet]="semanticIcon.templateRef"></ng-template>
+        </ng-container>
         <span class="fn-notification__semantic-title">
             <ng-template [ngTemplateOutlet]="semanticTitle.templateRef"></ng-template>
         </span>

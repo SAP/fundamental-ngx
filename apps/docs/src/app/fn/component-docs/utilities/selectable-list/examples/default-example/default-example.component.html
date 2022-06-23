@@ -10,7 +10,7 @@
 
 <h5>Multiple selection</h5>
 
-<div fnSelectableList [selected]="[1, 4]" multiple>
+<div fnSelectableList [selected]="multipleSelectionValues" multiple>
     <ng-container *ngFor="let item of selectableItems; let index = index">
         <div
             fnSelectableItem
@@ -25,7 +25,7 @@
 
 <h5>Allow `toggle`</h5>
 
-<div fnSelectableList [selected]="[2, 3]" multiple toggle>
+<div fnSelectableList [selected]="toggleSelectionValues" multiple toggle>
     <ng-container *ngFor="let item of selectableItems; let index = index">
         <div
             fnSelectableItem

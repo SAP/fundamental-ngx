@@ -1,3 +1,4 @@
+import { BooleanInput } from '@angular/cdk/coercion';
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { coerceBoolean } from '@fundamental-ngx/fn/utils';
 
@@ -19,5 +20,5 @@ export class ListComponent {
 
     @Input()
     @coerceBoolean
-    byline!: boolean;
+    byline!: BooleanInput;
 }

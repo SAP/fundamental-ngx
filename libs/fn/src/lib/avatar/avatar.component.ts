@@ -76,7 +76,7 @@ export class AvatarComponent implements OnInit {
 
     /** The glyph name. */
     @Input()
-    glyph: string;
+    glyph: string | null;
 
     /** A number from 1 to 10 representing the background color of the Avatar. */
     @Input()
@@ -84,10 +84,10 @@ export class AvatarComponent implements OnInit {
 
     /** Background image resource: url or base64. */
     @Input()
-    set image(value: string) {
+    set image(value: string | null) {
         this._setImage(value);
     }
-    get image(): string {
+    get image(): string | null {
         return this._image;
     }
 
@@ -108,7 +108,7 @@ export class AvatarComponent implements OnInit {
     }
 
     /** @hidden */
-    get bgImage(): string {
+    get bgImage(): string | null {
         return this._bgImage;
     }
 
@@ -119,7 +119,7 @@ export class AvatarComponent implements OnInit {
     }
 
     @HostBinding('attr.tabindex')
-    get tabindex(): number {
+    get tabindex(): number | null {
         return this.interactive && !this.disabled ? 0 : null;
     }
 
@@ -130,10 +130,10 @@ export class AvatarComponent implements OnInit {
     }
 
     /** @hidden */
-    _bgImage: string;
+    _bgImage: string | null;
 
     /** @hidden */
-    _abbreviate: string;
+    _abbreviate: string | null;
 
     /**
      * @hidden
@@ -142,7 +142,7 @@ export class AvatarComponent implements OnInit {
     private _thumbnail = false;
 
     /** @hidden */
-    private _image: string;
+    private _image: string | null;
 
     /** @hidden */
     private _alterIcon: string;
@@ -194,7 +194,7 @@ export class AvatarComponent implements OnInit {
     }
 
     /** @hidden Get an abbreviate from the label or return null if not fit requirements */
-    private _getAbbreviate(label: string, force = false): string {
+    private _getAbbreviate(label: string, force = false): string | null {
         if (!label || this._bgImage) {
             return null;
         }
@@ -211,7 +211,7 @@ export class AvatarComponent implements OnInit {
     }
 
     /** @hidden */
-    private _setImage(value: string): void {
+    private _setImage(value: string | null): void {
         this._image = value;
 
         if (value) {

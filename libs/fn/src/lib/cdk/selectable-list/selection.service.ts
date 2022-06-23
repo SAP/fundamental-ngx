@@ -4,16 +4,16 @@ import { combineLatest, merge, Observable, ReplaySubject, Subject, switchMap } f
 import { distinctUntilChanged, map, shareReplay, startWith, takeUntil, tap } from 'rxjs/operators';
 import equal from 'fast-deep-equal';
 import { SelectableItemToken } from './selectable-item.token';
-import { SelectComponentRootToken } from './select-component-root.token';
+import { SelectableListValueType, SelectComponentRootToken } from './select-component-root.token';
 
 @Injectable()
 export class SelectionService<ValueType = any> implements OnDestroy {
-    value$: Observable<ValueType | ValueType[]>;
+    value$: Observable<SelectableListValueType<ValueType>>;
 
     /** @hidden */
     private _items$!: Observable<SelectableItemToken[]>;
     /** @hidden */
-    private _value$ = new ReplaySubject<ValueType | ValueType[]>(1);
+    private _value$ = new ReplaySubject<SelectableListValueType<ValueType>>(1);
     /** @hidden */
     private _normalizedValue$: Observable<ValueType[]>;
     /** @hidden */
@@ -35,7 +35,7 @@ export class SelectionService<ValueType = any> implements OnDestroy {
         );
         this._normalizedValue$.pipe(takeUntil(this._destroy$)).subscribe((val) => (this._value = val));
         this.value$ = this._normalizedValue$.pipe(
-            map((v) => this._getProperValues(v)),
+            map((v) => this._getProperValues(v as SelectableListValueType<ValueType>)),
             shareReplay(1)
         );
     }
@@ -69,12 +69,12 @@ export class SelectionService<ValueType = any> implements OnDestroy {
     /**
      * Sets Value, on which service looks at and updates UI accordingly
      * */
-    setValue(v: ValueType | ValueType[]): void {
+    setValue(v: SelectableListValueType<ValueType>): void {
         this._value$.next(v);
     }
 
-    getValue(): ValueType | ValueType[] {
-        return this._getProperValues(this._value);
+    getValue(): SelectableListValueType<ValueType> {
+        return this._getProperValues(this._value as SelectableListValueType<ValueType>);
     }
 
     /**
@@ -105,8 +105,8 @@ export class SelectionService<ValueType = any> implements OnDestroy {
                             !this._rootComponent.toggle
                         ) {
                             const selectedValues = this._getSelectedValues(items);
-                            this._rootComponent.onChange(selectedValues);
-                            return this._value$.next(selectedValues);
+                            this._rootComponent.onChange(selectedValues as SelectableListValueType<ValueType>);
+                            return this._value$.next(selectedValues as SelectableListValueType<ValueType>);
                         }
                         items.forEach((item) => {
                             item.setSelected(value.includes(item.value));
@@ -127,7 +127,7 @@ export class SelectionService<ValueType = any> implements OnDestroy {
     selectItem(item: SelectableItemToken<ValueType>): void {
         if (item.fnSelectableItem !== false) {
             const val: ValueType[] = [item.value, ...this._value];
-            const properValues = this._getProperValues(val);
+            const properValues = this._getProperValues(val as SelectableListValueType<ValueType>);
             this._value$.next(properValues);
             this._rootComponent.onChange(properValues);
         }
@@ -136,7 +136,9 @@ export class SelectionService<ValueType = any> implements OnDestroy {
     deselectItem(item: SelectableItemToken<ValueType>): void {
         const canBeDeselected = this._rootComponent.toggle || (this._isMultipleMode && this._value.length > 1);
         if (canBeDeselected) {
-            const val: ValueType[] = this._value.filter((v) => v !== item.value);
+            const val: SelectableListValueType<ValueType> = this._value.filter(
+                (v) => v !== item.value
+            ) as SelectableListValueType<ValueType>;
             const properValues = this._getProperValues(val);
             this._value$.next(properValues);
             this._rootComponent.onChange(properValues);
@@ -160,11 +162,11 @@ export class SelectionService<ValueType = any> implements OnDestroy {
     /** @hidden */
     private _getSelectedValues(items: SelectableItemToken[]): ValueType | ValueType[] {
         const selectedValues = items.filter((itm) => itm.getSelected()).map((itm) => itm.value);
-        return this._getProperValues(selectedValues);
+        return this._getProperValues(selectedValues as SelectableListValueType<ValueType>);
     }
 
     /** @hidden */
-    private _getProperValues(values: ValueType[]): ValueType | ValueType[] {
+    private _getProperValues(values: SelectableListValueType<ValueType>): SelectableListValueType<ValueType> {
         return this._isMultipleMode ? values : values[0];
     }
 }

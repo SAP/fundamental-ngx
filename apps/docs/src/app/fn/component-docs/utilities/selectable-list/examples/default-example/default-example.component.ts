@@ -23,6 +23,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 export class DefaultExampleComponent {
     selectableItems = new Array(5).fill(undefined);
     selectedItemIndex = 2;
+    multipleSelectionValues = [1, 4];
+    toggleSelectionValues = [2, 3];
 
     constructor() {}
 }

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 @Component({
     selector: 'fn-slider-handle',
@@ -18,40 +19,40 @@ export class SliderHandleComponent {
      */
     @Input()
     @HostBinding('[attr.aria-label]')
-    ariaLabel: string | null = null;
+    ariaLabel: Nullable<string> = null;
 
     /**
      * Aria-labelledby for slider handle.
      */
     @Input()
     @HostBinding('[attr.aria-labelledby]')
-    ariaLabelledBy: string | null = null;
+    ariaLabelledBy: Nullable<string> = null;
 
     /**
      * Aria-valuenow for slider handle.
      */
     @Input()
     @HostBinding('[attr.aria-valuenow]')
-    ariaValueNow: string | null = null;
+    ariaValueNow: Nullable<string> = null;
 
     /**
      * Aria-valuetext for slider handle.
      */
     @Input()
     @HostBinding('[attr.aria-valuetext]')
-    ariaValueText: string | null = null;
+    ariaValueText: Nullable<string> = null;
 
     /**
      * Aria-valuemax for slider handle.
      */
     @Input()
     @HostBinding('[attr.aria-valuemax]')
-    ariaValueMax: string | null = null;
+    ariaValueMax: Nullable<string> = null;
 
     /**
      * Aria-valuemin for slider handle.
      */
     @Input()
     @HostBinding('[attr.aria-valuemin]')
-    ariaValueMin: string | null = null;
+    ariaValueMin: Nullable<string> = null;
 }

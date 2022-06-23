@@ -1,4 +1,5 @@
 /* eslint-disable @angular-eslint/no-host-metadata-property */
+import { BooleanInput } from '@angular/cdk/coercion';
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
@@ -16,7 +17,12 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { coerceBoolean } from '@fundamental-ngx/fn/utils';
-import { SelectableItemToken, SelectComponentRootToken, SelectionService } from '@fundamental-ngx/fn/cdk';
+import {
+    SelectableItemToken,
+    SelectableListValueType,
+    SelectComponentRootToken,
+    SelectionService
+} from '@fundamental-ngx/fn/cdk';
 
 @Component({
     selector: 'fn-segmented-button',
@@ -43,22 +49,22 @@ import { SelectableItemToken, SelectComponentRootToken, SelectionService } from 
         SelectionService
     ]
 })
-export class SegmentedButtonComponent
-    implements SelectComponentRootToken<string>, ControlValueAccessor, AfterContentInit, OnDestroy
+export class SegmentedButtonComponent<T>
+    implements SelectComponentRootToken<T>, ControlValueAccessor, AfterContentInit, OnDestroy
 {
     /**
      * Allow multiple item selection
      */
     @Input()
     @coerceBoolean
-    multiple!: boolean;
+    multiple!: BooleanInput;
 
     /**
      * Allow to unselect all elements
      */
     @Input()
     @coerceBoolean
-    toggle!: boolean;
+    toggle!: BooleanInput;
 
     /**
      * Aria label for element
@@ -70,7 +76,7 @@ export class SegmentedButtonComponent
      * Describe initially selected elements
      */
     @Input()
-    set selected(value: string | string[]) {
+    set selected(value: SelectableListValueType<T>) {
         this.selectionService.setValue(value);
     }
 
@@ -79,13 +85,13 @@ export class SegmentedButtonComponent
      */
     @Input()
     @coerceBoolean
-    disabled!: boolean;
+    disabled!: BooleanInput;
 
     /**
      * Event, notifying about selected elements change after data model has been updated
      */
     @Output()
-    selectedChange = new EventEmitter<string | string[]>();
+    selectedChange = new EventEmitter<SelectableListValueType<T>>();
 
     /** @hidden */
     @ContentChildren(SelectableItemToken)
@@ -98,7 +104,7 @@ export class SegmentedButtonComponent
     onTouched: any;
 
     /** @hidden */
-    onChange: (v: string | string[]) => void = (v) => {
+    onChange: (v: SelectableListValueType<T>) => void = (v) => {
         this.selectedChange.emit(v);
     };
 
@@ -113,8 +119,8 @@ export class SegmentedButtonComponent
     }
 
     /** @hidden */
-    registerOnChange(fn: (v: string | string[]) => void): void {
-        this.onChange = (value: string | string[]) => {
+    registerOnChange(fn: (v: SelectableListValueType<T>) => void): void {
+        this.onChange = (value: SelectableListValueType<T>) => {
             fn(value);
             this.selectedChange.emit(value);
         };

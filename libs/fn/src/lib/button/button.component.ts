@@ -58,7 +58,7 @@ export class ButtonComponent extends BaseButton implements SelectableItemToken<s
      */
     @Input()
     @coerceBoolean
-    emphasized: boolean;
+    emphasized: BooleanInput;
 
     /**
      * Set selected state of the button

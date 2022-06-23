@@ -6,5 +6,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListSelectableExampleComponent {
-    selectedItems = ['5'];
+    selectedItems: string[] = ['5'];
 }

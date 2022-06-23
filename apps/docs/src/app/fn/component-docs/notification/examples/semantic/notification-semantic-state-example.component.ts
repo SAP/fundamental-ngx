@@ -16,7 +16,9 @@ import { NotificationExampleData } from '../default/notification-default-example
     ]
 })
 export class NotificationSemanticStateExampleComponent {
-    states: ButtonType[] = ['positive', 'negative', 'critical', 'info'] as ButtonType[];
+    states: NotificationState[] = ['positive', 'negative', 'critical', 'info'] as NotificationState[];
+
+    buttonStates: ButtonType[] = this.states.map((state) => (state === 'info' ? '' : state));
 
     constructor(private _notificationService: NotificationService<NotificationExampleData>) {}
 
