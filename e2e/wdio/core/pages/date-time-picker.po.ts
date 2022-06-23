@@ -18,7 +18,7 @@ export class DateTimePicker extends CoreBaseComponentPo {
     selectMonthButton = '.fd-calendar__action:nth-child(2) .fd-button';
     buttonSelectYearsRange = '.fd-calendar__action:nth-child(2) .fd-button';
     okButton = 'button[fdtype="emphasized"]';
-    cancelButton = 'button[label="Cancel"]';
+    cancelButton = 'button[aria-label="Cancel"]';
     buttonFirstRangeYear = '(//td[contains(@id,"-view-aggregated-years")]/child::button)[1]';
     buttonFirstYear = '(//td[contains(@id,"year")]/child::button)[1]';
     buttonFirstMonth = '(//td[contains(@id,"month")]/child::button)[1]';

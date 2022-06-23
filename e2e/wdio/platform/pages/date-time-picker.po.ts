@@ -39,7 +39,7 @@ export class DateTimePicker extends BaseComponentPo {
     navigationDownArrowButton = 'button[glyph="navigation-down-arrow"]';
     timeColumn = 'fd-time-column';
     okButton = 'button[fdtype="emphasized"]';
-    cancelButton = 'button[label="Cancel"]';
+    cancelButton = 'button[aria-label="Cancel"]';
     calendarContainer = 'div.fd-datetime__container';
 
     selectedHours = '(//div[contains(@class, "fd-time__wrapper")]//li[contains(@class, "fd-time__item")])[12]';
