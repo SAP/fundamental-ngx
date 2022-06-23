@@ -8,6 +8,14 @@
 		</div>
 	</div>
 </section>
+<section class="tsd-panel tsd-type-parameters">
+	<h3>Type parameters</h3>
+	<ul class="tsd-type-parameters">
+		<li>
+			<h4>T</h4>
+		</li>
+	</ul>
+</section>
 <section class="tsd-panel tsd-hierarchy">
 	<h3>Hierarchy</h3>
 	<ul class="tsd-hierarchy">
@@ -26,7 +34,6 @@
 	<ul class="tsd-hierarchy">
 		<li><span class="tsd-signature-type">OnInit</span></li>
 		<li><span class="tsd-signature-type">AfterViewInit</span></li>
-		<li><span class="tsd-signature-type">AfterContentInit</span></li>
 		<li><span class="tsd-signature-type">OnDestroy</span></li>
 	</ul>
 </section>
@@ -36,7 +43,7 @@
 		<a name="ariaDescribedBy" class="tsd-anchor"></a>
 		<h3>aria<wbr>Described<wbr>By</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">aria<wbr>Described<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<div class="tsd-signature tsd-kind-icon">aria<wbr>Described<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<p>Inherited from <span>CollectionBaseInput</span>.<span>ariaDescribedBy</span></p>
 			<ul>
@@ -52,7 +59,7 @@
 		<a name="ariaLabel" class="tsd-anchor"></a>
 		<h3>aria<wbr>Label</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">aria<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = null</span></div>
+		<div class="tsd-signature tsd-kind-icon">aria<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<p>Inherited from <span>CollectionBaseInput</span>.<span>ariaLabel</span></p>
 			<ul>
@@ -68,7 +75,7 @@
 		<a name="ariaLabelledBy" class="tsd-anchor"></a>
 		<h3>aria<wbr>Labelled<wbr>By</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">aria<wbr>Labelled<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = null</span></div>
+		<div class="tsd-signature tsd-kind-icon">aria<wbr>Labelled<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<p>Inherited from <span>CollectionBaseInput</span>.<span>ariaLabelledBy</span></p>
 			<ul>
@@ -220,8 +227,7 @@
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
 				<p>Enables data load on scroll for true
-					false: enables data loading on button
-				click</p>
+				false: enables data loading on button click</p>
 			</div>
 		</div>
 	</section>
@@ -334,7 +340,7 @@
 		<a name="role" class="tsd-anchor"></a>
 		<h3>role</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">role<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;list&#x27;</span></div>
+		<div class="tsd-signature tsd-kind-icon">role<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;listbox&#x27;</span></div>
 		<aside class="tsd-sources">
 			<ul>
 			</ul>
@@ -412,7 +418,7 @@
 		<a name="stateMessage" class="tsd-anchor"></a>
 		<h3>state<wbr>Message</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">state<wbr>Message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">SafeHtml</span></div>
+		<div class="tsd-signature tsd-kind-icon">state<wbr>Message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<p>Inherited from <span>CollectionBaseInput</span>.<span>stateMessage</span></p>
 			<ul>
@@ -486,8 +492,8 @@
 		<h3>data<wbr>Source</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> dataSource<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FdpListDataSource</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> dataSource<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FdpListDataSource</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> dataSource<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FdpListDataSource</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> dataSource<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FdpListDataSource</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -500,7 +506,7 @@
 						<p>Datasource for suggestion list</p>
 					</div>
 				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">FdpListDataSource</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">FdpListDataSource</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
 			</li>
 			<li class="tsd-description">
 				<aside class="tsd-sources">
@@ -515,7 +521,7 @@
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">
 					<li>
-						<h5>value: <span class="tsd-signature-type">FdpListDataSource</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+						<h5>value: <span class="tsd-signature-type">FdpListDataSource</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -681,8 +687,8 @@
 		<h3>list</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> list<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">SelectItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></li>
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> list<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">SelectItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> list<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">SelectItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> list<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">SelectItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -692,10 +698,12 @@
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>list of values, it can be of type SelectItem or String.</p>
+						<p>List of values, it can be of type SelectItem, string or any object.
+							Generic object type is among the list of types,
+						because we allow to get labels and values using <code>displayKey</code> and <code>lookupKey</code> inputs accordingly.</p>
 					</div>
 				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">SelectItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h4>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">SelectItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h4>
 			</li>
 			<li class="tsd-description">
 				<aside class="tsd-sources">
@@ -704,13 +712,15 @@
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>list of values, it can be of type SelectItem or String.</p>
+						<p>List of values, it can be of type SelectItem, string or any object.
+							Generic object type is among the list of types,
+						because we allow to get labels and values using <code>displayKey</code> and <code>lookupKey</code> inputs accordingly.</p>
 					</div>
 				</div>
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">
 					<li>
-						<h5>value: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">SelectItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h5>
+						<h5>value: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">SelectItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h5>
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -800,12 +810,12 @@
 		</ul>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
-		<a name="selectRow" class="tsd-anchor"></a>
-		<h3>select<wbr>Row</h3>
+		<a name="rowSelection" class="tsd-anchor"></a>
+		<h3>row<wbr>Selection</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> selectRow<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> selectRow<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> rowSelection<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> rowSelection<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -845,8 +855,8 @@
 		<h3>state</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> state<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ControlState</span></li>
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> state<span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ControlState</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> state<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FormStates</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> state<span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FormStates</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -865,7 +875,7 @@
 						</dd>
 					</dl>
 				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ControlState</span></h4>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">FormStates</span></h4>
 			</li>
 			<li class="tsd-description">
 				<aside class="tsd-sources">
@@ -881,7 +891,7 @@
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">
 					<li>
-						<h5>state: <span class="tsd-signature-type">ControlState</span></h5>
+						<h5>state: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FormStates</span></h5>
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -926,6 +936,24 @@
 	</section>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
+	<h2>Outputs</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="selectedItemChange" class="tsd-anchor"></a>
+		<h3>selected<wbr>Item<wbr>Change</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">selected<wbr>Item<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SelectionChangeEvent</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Event thrown, when selected item is changed</p>
+			</div>
+		</div>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
 	<h2>Properties</h2>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 		<a name="_cd" class="tsd-anchor"></a>
@@ -948,7 +976,7 @@
 		<a name="_contentDensityService" class="tsd-anchor"></a>
 		<h3><span class="tsd-flag ts-flagProtected">Protected</span> _content<wbr>Density<wbr>Service</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">_content<wbr>Density<wbr>Service<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ContentDensityService</span></div>
+		<div class="tsd-signature tsd-kind-icon">_content<wbr>Density<wbr>Service<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ContentDensityService</span><span class="tsd-signature-symbol"> = null</span></div>
 		<aside class="tsd-sources">
 			<p>Inherited from <span>CollectionBaseInput</span>.<span>_contentDensityService</span></p>
 			<ul>
@@ -1016,7 +1044,7 @@
 		<a name="anchor" class="tsd-anchor"></a>
 		<h3>anchor</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">anchor<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<div class="tsd-signature tsd-kind-icon">anchor<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLLinkElement</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<ul>
 			</ul>
@@ -1058,7 +1086,7 @@
 		<a name="formField" class="tsd-anchor"></a>
 		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> form<wbr>Field</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">form<wbr>Field<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FormField</span><span class="tsd-signature-symbol"> = null</span></div>
+		<div class="tsd-signature tsd-kind-icon">form<wbr>Field<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FormField</span><span class="tsd-signature-symbol"> = null</span></div>
 		<aside class="tsd-sources">
 			<p>Inherited from <span>CollectionBaseInput</span>.<span>formField</span></p>
 			<ul>
@@ -1069,28 +1097,8 @@
 		<a name="itemEl" class="tsd-anchor"></a>
 		<h3>item<wbr>El</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">item<wbr>El<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<div class="tsd-signature tsd-kind-icon">item<wbr>El<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="li" class="tsd-anchor"></a>
-		<h3>li</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">li<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="listItemDef" class="tsd-anchor"></a>
-		<h3>list<wbr>Item<wbr>Def</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">list<wbr>Item<wbr>Def<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ListItemDef</span></div>
-		<aside class="tsd-sources">
-			<ul>
-			</ul>
 		</aside>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
@@ -1216,117 +1224,8 @@
 		</ul>
 	</section>
 </section>
-<section class="tsd-panel-group tsd-member-group ">
+<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
 	<h2>Methods</h2>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="_handleKeyDown" class="tsd-anchor"></a>
-		<h3>_handle<wbr>Key<wbr>Down</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">_handle<wbr>Key<wbr>Down<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">KeyboardEvent</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>handline keyboard operations
-						in template on list and list items</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>event: <span class="tsd-signature-type">KeyboardEvent</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-		<a name="_handleMultiSelect" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagPrivate">Private</span> _handle<wbr>Multi<wbr>Select</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-			<li class="tsd-signature tsd-kind-icon">_handle<wbr>Multi<wbr>Select<span class="tsd-signature-symbol">(</span>selectedItemId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>List item with checkbox styles,check,uncheckupdates
-						event:any to avoid code duplication</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>selectedItemId: <span class="tsd-signature-type">string</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-		<a name="_handleRowSelect" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagPrivate">Private</span> _handle<wbr>Row<wbr>Select</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-			<li class="tsd-signature tsd-kind-icon">_handle<wbr>Row<wbr>Select<span class="tsd-signature-symbol">(</span>selectedItemId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-					</ul>
-				</aside>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>selectedItemId: <span class="tsd-signature-type">string</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="_loadOnkeyPress" class="tsd-anchor"></a>
-		<h3>_load<wbr>Onkey<wbr>Press</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">_load<wbr>Onkey<wbr>Press<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">KeyboardEvent</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>load more on enter or space press</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>event: <span class="tsd-signature-type">KeyboardEvent</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 		<a name="_onFocusChanged" class="tsd-anchor"></a>
 		<h3>_on<wbr>Focus<wbr>Changed</h3>
@@ -1356,41 +1255,11 @@
 			</li>
 		</ul>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="_updateNavigation" class="tsd-anchor"></a>
-		<h3>_update<wbr>Navigation</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">_update<wbr>Navigation<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Event</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>on Update navgiation styles for non navigated items
-							event:any to avoid code duplication
-						seprate PR for custom event</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>event: <span class="tsd-signature-type">Event</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 		<a name="displayValue" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagProtected">Protected</span> display<wbr>Value</h3>
+		<h3>display<wbr>Value</h3>
 		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 			<li class="tsd-signature tsd-kind-icon">display<wbr>Value<span class="tsd-signature-symbol">(</span>item<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
@@ -1461,11 +1330,11 @@
 			</li>
 		</ul>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 		<a name="lookupValue" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagProtected">Protected</span> lookup<wbr>Value</h3>
+		<h3>lookup<wbr>Value</h3>
 		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 			<li class="tsd-signature tsd-kind-icon">lookup<wbr>Value<span class="tsd-signature-symbol">(</span>item<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
@@ -1482,30 +1351,6 @@
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-		<a name="ngAfterViewInit" class="tsd-anchor"></a>
-		<h3>ng<wbr>After<wbr>View<wbr>Init</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-			<li class="tsd-signature tsd-kind-icon">ng<wbr>After<wbr>View<wbr>Init<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Implementation of AfterViewInit.ngAfterViewInit</p>
-					<p>Overrides CollectionBaseInput.ngAfterViewInit</p>
-					<ul>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Keyboard manager on list items, set values when passed via array</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 			</li>
 		</ul>
 	</section>
@@ -1533,36 +1378,12 @@
 			</li>
 		</ul>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-		<a name="ngOnInit" class="tsd-anchor"></a>
-		<h3>ng<wbr>OnInit</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-			<li class="tsd-signature tsd-kind-icon">ng<wbr>OnInit<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Implementation of OnInit.ngOnInit</p>
-					<p>Overrides <span>CollectionBaseInput</span>.<span>ngOnInit</span></p>
-					<ul>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Instailization of list with selection mode</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 		<a name="objectGet" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagProtected">Protected</span> object<wbr>Get</h3>
+		<h3>object<wbr>Get</h3>
 		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-			<li class="tsd-signature tsd-kind-icon">object<wbr>Get<span class="tsd-signature-symbol">(</span>obj<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, is<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+			<li class="tsd-signature tsd-kind-icon">object<wbr>Get<span class="tsd-signature-symbol">(</span>obj<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, is<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -1577,7 +1398,7 @@
 						<h5>obj: <span class="tsd-signature-type">any</span></h5>
 					</li>
 					<li>
-						<h5>is: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+						<h5>is: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>

@@ -27,6 +27,7 @@
 		<li><span class="tsd-signature-type">OnChanges</span></li>
 		<li><span class="tsd-signature-type">AfterViewInit</span></li>
 		<li><span class="tsd-signature-type">OnDestroy</span></li>
+		<li><span class="tsd-signature-type">FormItemControl</span></li>
 	</ul>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
@@ -43,6 +44,37 @@
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
 				<p>Whether the multi-input allows the creation of new tokens.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="ariaLabel" class="tsd-anchor"></a>
+		<h3>aria<wbr>Label</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">aria<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>aria-label attribute binding.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="ariaLabelledBy" class="tsd-anchor"></a>
+		<h3>aria<wbr>Labelled<wbr>By</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">aria<wbr>Labelled<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+			<p>Implementation of <span>FormItemControl</span>.<span>ariaLabelledBy</span></p>
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>aria-labelledby attribute binding.</p>
 			</div>
 		</div>
 	</section>
@@ -65,7 +97,7 @@
 		<a name="bodyMaxWidth" class="tsd-anchor"></a>
 		<h3>body<wbr>Max<wbr>Width</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">body<wbr>Max<wbr>Width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = null</span></div>
+		<div class="tsd-signature tsd-kind-icon">body<wbr>Max<wbr>Width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<ul>
 			</ul>
@@ -377,21 +409,6 @@
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="multiInputBodyLabel" class="tsd-anchor"></a>
-		<h3>multi<wbr>Input<wbr>Body<wbr>Label</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">multi<wbr>Input<wbr>Body<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;Multi input body&#x27;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Aria label for the multi input body.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="newTokenParseFn" class="tsd-anchor"></a>
 		<h3>new<wbr>Token<wbr>Parse<wbr>Fn</h3>
 		<!-- {log decorators} -->
@@ -410,6 +427,29 @@
 		<div class="tsd-type-declaration">
 			<h4>Type declaration</h4>
 			<ul class="tsd-parameters">
+				<li class="tsd-parameter-signature">
+					<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>searchTerm<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Parse function. Used for submitting new tokens. Accepts a string by default.
+										An arrow function can be used to access the <em>this</em> keyword in the calling component.
+									See multi input examples for details.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>searchTerm: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</li>
 			</ul>
 		</div>
 	</section>

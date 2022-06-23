@@ -18,7 +18,6 @@
 <section class="tsd-panel">
 	<h3>Implements</h3>
 	<ul class="tsd-hierarchy">
-		<li><span class="tsd-signature-type">OnChanges</span></li>
 		<li><span class="tsd-signature-type">AfterViewInit</span></li>
 		<li><span class="tsd-signature-type">OnDestroy</span></li>
 	</ul>
@@ -29,7 +28,7 @@
 		<a name="ariaLabel" class="tsd-anchor"></a>
 		<h3>aria<wbr>Label</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">aria<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<div class="tsd-signature tsd-kind-icon">aria<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<ul>
 			</ul>
@@ -44,7 +43,7 @@
 		<a name="counter" class="tsd-anchor"></a>
 		<h3>counter</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">counter<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+		<div class="tsd-signature tsd-kind-icon">counter<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<ul>
 			</ul>
@@ -52,6 +51,21 @@
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
 				<p>Sets number of sub items</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="description" class="tsd-anchor"></a>
+		<h3>description</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">description<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Description of the item</p>
 			</div>
 		</div>
 	</section>
@@ -102,22 +116,6 @@
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="layoutItemPattern" class="tsd-anchor"></a>
-		<h3>layout<wbr>Item<wbr>Pattern</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">layout<wbr>Item<wbr>Pattern<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-		<aside class="tsd-sources">
-			<ul>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>specify the cell layout in the format <code>XLn-Ln-Mn-Sn</code> where n is
-				the number of occupied columns and n can be different for each size.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="noPadding" class="tsd-anchor"></a>
 		<h3>no<wbr>Padding</h3>
 		<!-- {log decorators} -->
@@ -129,21 +127,6 @@
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
 				<p>Remove the padding from the Item body</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="selected" class="tsd-anchor"></a>
-		<h3>selected</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">selected<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
-		<aside class="tsd-sources">
-			<ul>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Allows an item to be selected programmatically</p>
 			</div>
 		</div>
 	</section>
@@ -180,26 +163,17 @@
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="type" class="tsd-anchor"></a>
-		<h3>type</h3>
+		<a name="title" class="tsd-anchor"></a>
+		<h3>title</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">GridListItemType</span><span class="tsd-signature-symbol"> = &#x27;inactive&#x27;</span></div>
+		<div class="tsd-signature tsd-kind-icon">title<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Defines the type of Grid List Item
-				Types:</p>
-				<ul>
-					<li>active: indicates that the item is clickable via active feedback when item is pressed</li>
-					<li>detail: enables detail button of the list item that fires event.</li>
-					<li>detailsAndActive: enables &quot;detail&quot; and &quot;active&quot; enumerations together</li>
-					<li>inactive: indicates the list item does not have any active feedback when item is pressed</li>
-					<li>navigation: indicates the list item is navigable to show extra information about the item
-					Default: inactive</li>
-				</ul>
+				<p>Title of the item</p>
 			</div>
 		</div>
 	</section>
@@ -233,6 +207,135 @@
 				<p>width of the element</p>
 			</div>
 		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-set-signature tsd-parent-kind-class">
+		<a name="layoutItemPattern" class="tsd-anchor"></a>
+		<h3>layout<wbr>Item<wbr>Pattern</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-set-signature tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> layoutItemPattern<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>specify the cell layout in the format <code>XLn-Ln-Mn-Sn</code> where n is
+						the number of occupied columns and n can be different for each size.</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>value: <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+		<a name="selected" class="tsd-anchor"></a>
+		<h3>selected</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> selected<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> selected<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Allows an item to be selected programmatically</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+			</li>
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Allows an item to be selected programmatically</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>value: <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+		<a name="type" class="tsd-anchor"></a>
+		<h3>type</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> type<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">GridListItemType</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> type<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">GridListItemType</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Defines the type of Grid List Item
+						Types:</p>
+						<ul>
+							<li>active: indicates that the item is clickable via active feedback when item is pressed</li>
+							<li>detail: enables detail button of the list item that fires event.</li>
+							<li>detailsAndActive: enables &quot;detail&quot; and &quot;active&quot; enumerations together</li>
+							<li>inactive: indicates the list item does not have any active feedback when item is pressed</li>
+							<li>navigation: indicates the list item is navigable to show extra information about the item
+							Default: inactive</li>
+						</ul>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">GridListItemType</span></h4>
+			</li>
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Defines the type of Grid List Item
+						Types:</p>
+						<ul>
+							<li>active: indicates that the item is clickable via active feedback when item is pressed</li>
+							<li>detail: enables detail button of the list item that fires event.</li>
+							<li>detailsAndActive: enables &quot;detail&quot; and &quot;active&quot; enumerations together</li>
+							<li>inactive: indicates the list item does not have any active feedback when item is pressed</li>
+							<li>navigation: indicates the list item is navigable to show extra information about the item
+							Default: inactive</li>
+						</ul>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>value: <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">GridListItemType</span><span class="tsd-signature-symbol">&gt;</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
 	</section>
 </section>
 <section class="tsd-panel-group tsd-member-group ">

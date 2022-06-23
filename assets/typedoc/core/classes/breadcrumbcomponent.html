@@ -7,7 +7,7 @@
 		</div>
 		<pre><code class="language-html"><span style="color: #800000">&lt;fd-breadcrumb&gt;</span>
 <span style="color: #000000">    </span><span style="color: #800000">&lt;fd-breadcrumb-item&gt;</span>
-<span style="color: #000000">        </span><span style="color: #800000">&lt;a</span><span style="color: #000000"> </span><span style="color: #FF0000">fd-breadcrumb-link</span><span style="color: #000000"> </span><span style="color: #FF0000">[routerLink]</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;&#039;#&#039;&quot;</span><span style="color: #800000">&gt;</span><span style="color: #000000">Breadcrumb Link</span><span style="color: #800000">&lt;/a&gt;</span>
+<span style="color: #000000">        </span><span style="color: #800000">&lt;a</span><span style="color: #000000"> </span><span style="color: #FF0000">fd-link</span><span style="color: #000000"> </span><span style="color: #FF0000">[routerLink]</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;&#039;#&#039;&quot;</span><span style="color: #800000">&gt;</span><span style="color: #000000">Breadcrumb Link</span><span style="color: #800000">&lt;/a&gt;</span>
 <span style="color: #000000">    </span><span style="color: #800000">&lt;/fd-breadcrumb-item&gt;</span>
 <span style="color: #800000">&lt;/fd-breadcrumb&gt;</span>
 </code></pre>
@@ -24,7 +24,7 @@
 <section class="tsd-panel">
 	<h3>Implements</h3>
 	<ul class="tsd-hierarchy">
-		<li><span class="tsd-signature-type">AfterContentInit</span></li>
+		<li><span class="tsd-signature-type">AfterViewInit</span></li>
 		<li><span class="tsd-signature-type">OnInit</span></li>
 		<li><span class="tsd-signature-type">OnDestroy</span></li>
 	</ul>
@@ -62,6 +62,21 @@
 			</div>
 		</div>
 	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="reverse" class="tsd-anchor"></a>
+		<h3>reverse</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">reverse<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether to append items to the overflow dropdown in reverse order. Default is true.</p>
+			</div>
+		</div>
+	</section>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Constructors</h2>
@@ -70,7 +85,7 @@
 		<h3>constructor</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">new <wbr>Breadcrumb<wbr>Component<span class="tsd-signature-symbol">(</span>elementRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span>, _rtlService<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RtlService</span>, _contentDensityService<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ContentDensityService</span>, _cdRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ChangeDetectorRef</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BreadcrumbComponent</span></li>
+			<li class="tsd-signature tsd-kind-icon">new <wbr>Breadcrumb<wbr>Component<span class="tsd-signature-symbol">(</span>elementRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">&gt;</span>, _rtlService<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RtlService</span>, _contentDensityService<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ContentDensityService</span>, _cdRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ChangeDetectorRef</span>, _resizeObserver<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ResizeObserverService</span>, _ngZone<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">NgZone</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BreadcrumbComponent</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -81,7 +96,7 @@
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">
 					<li>
-						<h5>elementRef: <span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+						<h5>elementRef: <span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">&gt;</span></h5>
 					</li>
 					<li>
 						<h5>_rtlService: <span class="tsd-signature-type">RtlService</span></h5>
@@ -91,6 +106,12 @@
 					</li>
 					<li>
 						<h5>_cdRef: <span class="tsd-signature-type">ChangeDetectorRef</span></h5>
+					</li>
+					<li>
+						<h5>_resizeObserver: <span class="tsd-signature-type">ResizeObserverService</span></h5>
+					</li>
+					<li>
+						<h5>_ngZone: <span class="tsd-signature-type">NgZone</span></h5>
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">BreadcrumbComponent</span></h4>
@@ -104,149 +125,24 @@
 		<a name="elementRef" class="tsd-anchor"></a>
 		<h3>element<wbr>Ref</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">element<wbr>Ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<div class="tsd-signature tsd-kind-icon">element<wbr>Ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 		</aside>
 	</section>
 </section>
-<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
+<section class="tsd-panel-group tsd-member-group ">
 	<h2>Methods</h2>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-		<a name="applyStylesToBreadcrumb" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagPrivate">Private</span> apply<wbr>Styles<wbr>ToBreadcrumb</h3>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="ngAfterViewInit" class="tsd-anchor"></a>
+		<h3>ng<wbr>After<wbr>View<wbr>Init</h3>
 		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-			<li class="tsd-signature tsd-kind-icon">apply<wbr>Styles<wbr>ToBreadcrumb<span class="tsd-signature-symbol">(</span>breadcrumb<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BreadcrumbItemDirective</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">ng<wbr>After<wbr>View<wbr>Init<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
-					<ul>
-					</ul>
-				</aside>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>breadcrumb: <span class="tsd-signature-type">BreadcrumbItemDirective</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-		<a name="fitInBoundries" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagPrivate">Private</span> fit<wbr>InBoundries</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-			<li class="tsd-signature tsd-kind-icon">fit<wbr>InBoundries<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-					</ul>
-				</aside>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-		<a name="getBreadcrumbToCheck" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagPrivate">Private</span> get<wbr>Breadcrumb<wbr>ToCheck</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-			<li class="tsd-signature tsd-kind-icon">get<wbr>Breadcrumb<wbr>ToCheck<span class="tsd-signature-symbol">(</span>collapsedItemToPop<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BreadcrumbItemDirective</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BreadcrumbItemDirective</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-					</ul>
-				</aside>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>collapsedItemToPop: <span class="tsd-signature-type">BreadcrumbItemDirective</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">BreadcrumbItemDirective</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-		<a name="getCollapsedItem" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagPrivate">Private</span> get<wbr>Collapsed<wbr>Item</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-			<li class="tsd-signature tsd-kind-icon">get<wbr>Collapsed<wbr>Item<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BreadcrumbItemDirective</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-					</ul>
-				</aside>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">BreadcrumbItemDirective</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-		<a name="makeBreadcrumbInvisible" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagPrivate">Private</span> make<wbr>Breadcrumb<wbr>Invisible</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-			<li class="tsd-signature tsd-kind-icon">make<wbr>Breadcrumb<wbr>Invisible<span class="tsd-signature-symbol">(</span>breadcrumb<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BreadcrumbItemDirective</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-					</ul>
-				</aside>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>breadcrumb: <span class="tsd-signature-type">BreadcrumbItemDirective</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-		<a name="makeBreadcrumbVisible" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagPrivate">Private</span> make<wbr>Breadcrumb<wbr>Visible</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-			<li class="tsd-signature tsd-kind-icon">make<wbr>Breadcrumb<wbr>Visible<span class="tsd-signature-symbol">(</span>breadcrumb<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BreadcrumbItemDirective</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-					</ul>
-				</aside>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>breadcrumb: <span class="tsd-signature-type">BreadcrumbItemDirective</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-		<a name="popLastElement" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagPrivate">Private</span> pop<wbr>Last<wbr>Element</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-			<li class="tsd-signature tsd-kind-icon">pop<wbr>Last<wbr>Element<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
+					<p>Implementation of AfterViewInit.ngAfterViewInit</p>
 					<ul>
 					</ul>
 				</aside>

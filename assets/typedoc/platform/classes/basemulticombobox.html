@@ -20,6 +20,7 @@
 <section class="tsd-panel">
 	<h3>Implements</h3>
 	<ul class="tsd-hierarchy">
+		<li><span class="tsd-signature-type">OnChanges</span></li>
 		<li><span class="tsd-signature-type">AfterViewInit</span></li>
 		<li><span class="tsd-signature-type">OnDestroy</span></li>
 	</ul>
@@ -45,7 +46,7 @@
 		<a name="ariaDescribedBy" class="tsd-anchor"></a>
 		<h3>aria<wbr>Described<wbr>By</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">aria<wbr>Described<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<div class="tsd-signature tsd-kind-icon">aria<wbr>Described<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<p>Inherited from <span>CollectionBaseInput</span>.<span>ariaDescribedBy</span></p>
 			<ul>
@@ -61,7 +62,7 @@
 		<a name="ariaLabel" class="tsd-anchor"></a>
 		<h3>aria<wbr>Label</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">aria<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = null</span></div>
+		<div class="tsd-signature tsd-kind-icon">aria<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<p>Inherited from <span>CollectionBaseInput</span>.<span>ariaLabel</span></p>
 			<ul>
@@ -77,7 +78,7 @@
 		<a name="ariaLabelledBy" class="tsd-anchor"></a>
 		<h3>aria<wbr>Labelled<wbr>By</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">aria<wbr>Labelled<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = null</span></div>
+		<div class="tsd-signature tsd-kind-icon">aria<wbr>Labelled<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<p>Inherited from <span>CollectionBaseInput</span>.<span>ariaLabelledBy</span></p>
 			<ul>
@@ -259,6 +260,21 @@
 			</div>
 		</div>
 	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="limitless" class="tsd-anchor"></a>
+		<h3>limitless</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">limitless<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+		<aside class="tsd-sources">
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Turns limitless mode, ON or OFF</p>
+			</div>
+		</div>
+	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 		<a name="lookupKey" class="tsd-anchor"></a>
 		<h3>lookup<wbr>Key</h3>
@@ -428,7 +444,7 @@
 		<a name="stateMessage" class="tsd-anchor"></a>
 		<h3>state<wbr>Message</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">state<wbr>Message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">SafeHtml</span></div>
+		<div class="tsd-signature tsd-kind-icon">state<wbr>Message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<p>Inherited from <span>CollectionBaseInput</span>.<span>stateMessage</span></p>
 			<ul>
@@ -615,8 +631,8 @@
 		<h3>list</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> list<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">SelectItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></li>
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> list<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">SelectItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> list<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">SelectItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> list<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">SelectItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -626,10 +642,12 @@
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>list of values, it can be of type SelectItem or String.</p>
+						<p>List of values, it can be of type SelectItem, string or any object.
+							Generic object type is among the list of types,
+						because we allow to get labels and values using <code>displayKey</code> and <code>lookupKey</code> inputs accordingly.</p>
 					</div>
 				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">SelectItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h4>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">SelectItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h4>
 			</li>
 			<li class="tsd-description">
 				<aside class="tsd-sources">
@@ -638,13 +656,15 @@
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>list of values, it can be of type SelectItem or String.</p>
+						<p>List of values, it can be of type SelectItem, string or any object.
+							Generic object type is among the list of types,
+						because we allow to get labels and values using <code>displayKey</code> and <code>lookupKey</code> inputs accordingly.</p>
 					</div>
 				</div>
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">
 					<li>
-						<h5>value: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">SelectItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h5>
+						<h5>value: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">SelectItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h5>
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -656,8 +676,8 @@
 		<h3>state</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> state<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ControlState</span></li>
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> state<span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ControlState</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> state<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FormStates</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> state<span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FormStates</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -676,7 +696,7 @@
 						</dd>
 					</dl>
 				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ControlState</span></h4>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">FormStates</span></h4>
 			</li>
 			<li class="tsd-description">
 				<aside class="tsd-sources">
@@ -692,7 +712,7 @@
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">
 					<li>
-						<h5>state: <span class="tsd-signature-type">ControlState</span></h5>
+						<h5>state: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FormStates</span></h5>
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -786,7 +806,7 @@
 		<h3>constructor</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-			<li class="tsd-signature tsd-kind-icon">new <wbr>Base<wbr>Multi<wbr>Combobox<span class="tsd-signature-symbol">(</span>_cd<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ChangeDetectorRef</span>, elementRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span>, ngControl<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">NgControl</span>, ngForm<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">NgForm</span>, dialogConfig<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DialogConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span>, multiComboboxConfig<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MultiComboboxConfig</span>, formField<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FormField</span>, formControl<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FormFieldControl</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BaseMultiCombobox</span></li>
+			<li class="tsd-signature tsd-kind-icon">new <wbr>Base<wbr>Multi<wbr>Combobox<span class="tsd-signature-symbol">(</span>_cd<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ChangeDetectorRef</span>, elementRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span>, ngControl<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">NgControl</span>, ngForm<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">NgForm</span>, dialogConfig<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DialogConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span>, multiComboboxConfig<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MultiComboboxConfig</span>, formField<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FormField</span>, formControl<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FormFieldControl</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span>, _mapLimit<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BaseMultiCombobox</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -821,6 +841,9 @@
 					<li>
 						<h5>formControl: <span class="tsd-signature-type">FormFieldControl</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
 					</li>
+					<li>
+						<h5>_mapLimit: <span class="tsd-signature-type">number</span></h5>
+					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">BaseMultiCombobox</span></h4>
 			</li>
@@ -842,7 +865,7 @@
 		<a name="_contentDensityService" class="tsd-anchor"></a>
 		<h3><span class="tsd-flag ts-flagProtected">Protected</span> _content<wbr>Density<wbr>Service</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">_content<wbr>Density<wbr>Service<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ContentDensityService</span></div>
+		<div class="tsd-signature tsd-kind-icon">_content<wbr>Density<wbr>Service<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ContentDensityService</span><span class="tsd-signature-symbol"> = null</span></div>
 		<aside class="tsd-sources">
 			<p>Inherited from <span>CollectionBaseInput</span>.<span>_contentDensityService</span></p>
 			<ul>
@@ -956,7 +979,7 @@
 		<a name="formField" class="tsd-anchor"></a>
 		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> form<wbr>Field</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">form<wbr>Field<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FormField</span><span class="tsd-signature-symbol"> = null</span></div>
+		<div class="tsd-signature tsd-kind-icon">form<wbr>Field<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FormField</span><span class="tsd-signature-symbol"> = null</span></div>
 		<aside class="tsd-sources">
 			<p>Inherited from <span>CollectionBaseInput</span>.<span>formField</span></p>
 			<ul>
@@ -1210,11 +1233,11 @@
 			</li>
 		</ul>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 		<a name="displayValue" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagProtected">Protected</span> display<wbr>Value</h3>
+		<h3>display<wbr>Value</h3>
 		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 			<li class="tsd-signature tsd-kind-icon">display<wbr>Value<span class="tsd-signature-symbol">(</span>item<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
@@ -1313,11 +1336,11 @@
 			</li>
 		</ul>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 		<a name="lookupValue" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagProtected">Protected</span> lookup<wbr>Value</h3>
+		<h3>lookup<wbr>Value</h3>
 		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 			<li class="tsd-signature tsd-kind-icon">lookup<wbr>Value<span class="tsd-signature-symbol">(</span>item<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
@@ -1361,6 +1384,30 @@
 			</li>
 		</ul>
 	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="ngOnChanges" class="tsd-anchor"></a>
+		<h3>ng<wbr>OnChanges</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">ng<wbr>OnChanges<span class="tsd-signature-symbol">(</span>changes<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SimpleChanges</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Implementation of OnChanges.ngOnChanges</p>
+					<ul>
+					</ul>
+				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>changes: <span class="tsd-signature-type">SimpleChanges</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 		<a name="ngOnInit" class="tsd-anchor"></a>
 		<h3>ng<wbr>OnInit</h3>
@@ -1379,12 +1426,12 @@
 			</li>
 		</ul>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 		<a name="objectGet" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagProtected">Protected</span> object<wbr>Get</h3>
+		<h3>object<wbr>Get</h3>
 		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-			<li class="tsd-signature tsd-kind-icon">object<wbr>Get<span class="tsd-signature-symbol">(</span>obj<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, is<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+			<li class="tsd-signature tsd-kind-icon">object<wbr>Get<span class="tsd-signature-symbol">(</span>obj<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, is<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -1399,7 +1446,7 @@
 						<h5>obj: <span class="tsd-signature-type">any</span></h5>
 					</li>
 					<li>
-						<h5>is: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+						<h5>is: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>

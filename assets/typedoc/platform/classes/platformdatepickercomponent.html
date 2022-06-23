@@ -101,7 +101,7 @@
 		<a name="ariaDescribedBy" class="tsd-anchor"></a>
 		<h3>aria<wbr>Described<wbr>By</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">aria<wbr>Described<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<div class="tsd-signature tsd-kind-icon">aria<wbr>Described<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<p>Inherited from <span>BaseInput</span>.<span>ariaDescribedBy</span></p>
 			<ul>
@@ -117,7 +117,7 @@
 		<a name="ariaLabel" class="tsd-anchor"></a>
 		<h3>aria<wbr>Label</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">aria<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = null</span></div>
+		<div class="tsd-signature tsd-kind-icon">aria<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<p>Inherited from <span>BaseInput</span>.<span>ariaLabel</span></p>
 			<ul>
@@ -133,7 +133,7 @@
 		<a name="ariaLabelledBy" class="tsd-anchor"></a>
 		<h3>aria<wbr>Labelled<wbr>By</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">aria<wbr>Labelled<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = null</span></div>
+		<div class="tsd-signature tsd-kind-icon">aria<wbr>Labelled<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<p>Inherited from <span>BaseInput</span>.<span>ariaLabelledBy</span></p>
 			<ul>
@@ -192,6 +192,21 @@
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
 				<p>Aria label for the date picker input.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="dateRangeInputLabel" class="tsd-anchor"></a>
+		<h3>date<wbr>Range<wbr>Input<wbr>Label</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">date<wbr>Range<wbr>Input<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;Date range input&#x27;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Aria label for the datepicker input.</p>
 			</div>
 		</div>
 	</section>
@@ -450,6 +465,21 @@
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="preventScrollOnFocus" class="tsd-anchor"></a>
+		<h3>prevent<wbr>Scroll<wbr>OnFocus</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">prevent<wbr>Scroll<wbr>OnFocus<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether to prevent page scrolling when focusing date picker input field after calendar has been closed.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="processInputOnBlur" class="tsd-anchor"></a>
 		<h3>process<wbr>Input<wbr>OnBlur</h3>
 		<!-- {log decorators} -->
@@ -585,7 +615,7 @@
 		<a name="stateMessage" class="tsd-anchor"></a>
 		<h3>state<wbr>Message</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">state<wbr>Message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">SafeHtml</span></div>
+		<div class="tsd-signature tsd-kind-icon">state<wbr>Message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<p>Inherited from <span>BaseInput</span>.<span>stateMessage</span></p>
 			<ul>
@@ -705,8 +735,8 @@
 		<h3>datepicker<wbr>State</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> datepickerState<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ControlState</span></li>
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> datepickerState<span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ControlState</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> datepickerState<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FormStates</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> datepickerState<span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FormStates</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -722,7 +752,7 @@
 						</dd>
 					</dl>
 				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ControlState</span></h4>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">FormStates</span></h4>
 			</li>
 			<li class="tsd-description">
 				<aside class="tsd-sources">
@@ -732,7 +762,7 @@
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">
 					<li>
-						<h5>state: <span class="tsd-signature-type">ControlState</span></h5>
+						<h5>state: <span class="tsd-signature-type">FormStates</span></h5>
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -816,8 +846,8 @@
 		<h3>state</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> state<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ControlState</span></li>
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> state<span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ControlState</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> state<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FormStates</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> state<span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FormStates</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -831,7 +861,7 @@
 						Can be <code>success</code>, <code>error</code>, <code>warning</code>, <code>information</code> or blank for default.</p>
 					</div>
 				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ControlState</span></h4>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">FormStates</span></h4>
 			</li>
 			<li class="tsd-description">
 				<aside class="tsd-sources">
@@ -847,7 +877,7 @@
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">
 					<li>
-						<h5>state: <span class="tsd-signature-type">ControlState</span></h5>
+						<h5>state: <span class="tsd-signature-type">FormStates</span></h5>
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -932,7 +962,7 @@
 		<a name="selectedDateChange" class="tsd-anchor"></a>
 		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> selected<wbr>Date<wbr>Change</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">selected<wbr>Date<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<div class="tsd-signature tsd-kind-icon">selected<wbr>Date<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
 		<aside class="tsd-sources">
 			<ul>
 			</ul>
@@ -1033,7 +1063,7 @@
 		<a name="_contentDensityService" class="tsd-anchor"></a>
 		<h3><span class="tsd-flag ts-flagProtected">Protected</span> _content<wbr>Density<wbr>Service</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">_content<wbr>Density<wbr>Service<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ContentDensityService</span></div>
+		<div class="tsd-signature tsd-kind-icon">_content<wbr>Density<wbr>Service<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ContentDensityService</span><span class="tsd-signature-symbol"> = null</span></div>
 		<aside class="tsd-sources">
 			<p>Inherited from <span>BaseInput</span>.<span>_contentDensityService</span></p>
 			<ul>
@@ -1131,7 +1161,7 @@
 		<a name="formField" class="tsd-anchor"></a>
 		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> form<wbr>Field</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">form<wbr>Field<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FormField</span><span class="tsd-signature-symbol"> = null</span></div>
+		<div class="tsd-signature tsd-kind-icon">form<wbr>Field<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FormField</span><span class="tsd-signature-symbol"> = null</span></div>
 		<aside class="tsd-sources">
 			<p>Inherited from <span>BaseInput</span>.<span>formField</span></p>
 			<ul>
@@ -1415,7 +1445,7 @@
 		<h3>handle<wbr>Selected<wbr>Date<wbr>Change</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">handle<wbr>Selected<wbr>Date<wbr>Change<span class="tsd-signature-symbol">(</span>fdDate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+			<li class="tsd-signature tsd-kind-icon">handle<wbr>Selected<wbr>Date<wbr>Change<span class="tsd-signature-symbol">(</span>fdDate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -1426,7 +1456,7 @@
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">
 					<li>
-						<h5>fdDate: <span class="tsd-signature-type">D</span></h5>
+						<h5>fdDate: <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span></h5>
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -1734,7 +1764,7 @@
 		<h3>write<wbr>Value</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-			<li class="tsd-signature tsd-kind-icon">write<wbr>Value<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DateRange</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+			<li class="tsd-signature tsd-kind-icon">write<wbr>Value<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DateRange</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -1751,7 +1781,7 @@
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">
 					<li>
-						<h5>value: <span class="tsd-signature-type">D</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DateRange</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span></h5>
+						<h5>value: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DateRange</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span></h5>
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>

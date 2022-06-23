@@ -24,7 +24,9 @@
 	<ul class="tsd-hierarchy">
 		<li><span class="tsd-signature-type">ControlValueAccessor</span></li>
 		<li><span class="tsd-signature-type">OnInit</span></li>
+		<li><span class="tsd-signature-type">AfterViewInit</span></li>
 		<li><span class="tsd-signature-type">OnDestroy</span></li>
+		<li><span class="tsd-signature-type">FormItemControl</span></li>
 	</ul>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
@@ -45,11 +47,12 @@
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="ariaLabelledby" class="tsd-anchor"></a>
-		<h3>aria<wbr>Labelledby</h3>
+		<a name="ariaLabelledBy" class="tsd-anchor"></a>
+		<h3>aria<wbr>Labelled<wbr>By</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">aria<wbr>Labelledby<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<div class="tsd-signature tsd-kind-icon">aria<wbr>Labelled<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
+			<p>Implementation of <span>FormItemControl</span>.<span>ariaLabelledBy</span></p>
 			<ul>
 			</ul>
 		</aside>
@@ -123,7 +126,7 @@
 		<a name="glyph" class="tsd-anchor"></a>
 		<h3>glyph</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">glyph<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<div class="tsd-signature tsd-kind-icon">glyph<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<ul>
 			</ul>
@@ -138,7 +141,7 @@
 		<a name="glyphAriaLabel" class="tsd-anchor"></a>
 		<h3>glyph<wbr>Aria<wbr>Label</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">glyph<wbr>Aria<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<div class="tsd-signature tsd-kind-icon">glyph<wbr>Aria<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<ul>
 			</ul>
@@ -153,7 +156,7 @@
 		<a name="iconTitle" class="tsd-anchor"></a>
 		<h3>icon<wbr>Title</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">icon<wbr>Title<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<div class="tsd-signature tsd-kind-icon">icon<wbr>Title<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<ul>
 			</ul>
@@ -176,21 +179,6 @@
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
 				<p>Whether the input group is inline.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="inputTemplate" class="tsd-anchor"></a>
-		<h3>input<wbr>Template</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">input<wbr>Template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Input template</p>
 			</div>
 		</div>
 	</section>
@@ -287,9 +275,9 @@
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="state" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagOptional">Optional</span> state</h3>
+		<h3>state</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">state<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FormStates</span></div>
+		<div class="tsd-signature tsd-kind-icon">state<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FormStates</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<ul>
 			</ul>
@@ -315,6 +303,74 @@
 				<p>The type of the input, used in Input Group. By default value is set to &#39;text&#39;</p>
 			</div>
 		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-set-signature tsd-parent-kind-class">
+		<a name="ariaLabelledby" class="tsd-anchor"></a>
+		<h3>aria<wbr>Labelledby</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-set-signature tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> ariaLabelledby<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<dl class="tsd-comment-tags">
+						<dt class="fd-tsd-comment-tag-pill">deprecated</dt>
+						<dd><p>renamed to &quot;ariaLabelledBy&quot;</p>
+						</dd>
+					</dl>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>value: <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+		<a name="inputTemplate" class="tsd-anchor"></a>
+		<h3>input<wbr>Template</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> inputTemplate<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> inputTemplate<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+					</ul>
+				</aside>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+			</li>
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<dl class="tsd-comment-tags">
+						<dt class="fd-tsd-comment-tag-pill">deprecated</dt>
+						<dd><p>Input template, use fd-input-group-input directive instead.</p>
+						</dd>
+					</dl>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>value: <span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
 	</section>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
@@ -367,16 +423,6 @@
 				<p>An RxJS Subject that will kill the stream upon component’s destruction (for unsubscribing)</p>
 			</div>
 		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="inputElement" class="tsd-anchor"></a>
-		<h3>input<wbr>Element</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">input<wbr>Element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">InputGroupInputDirective</span></div>
-		<aside class="tsd-sources">
-			<ul>
-			</ul>
-		</aside>
 	</section>
 </section>
 <section class="tsd-panel-group tsd-member-group ">

@@ -42,32 +42,6 @@
 </section>
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Methods</h2>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-		<a name="_generateDynamicFormItem" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagPrivate">Private</span> _generate<wbr>Dynamic<wbr>Form<wbr>Item</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-			<li class="tsd-signature tsd-kind-icon">_generate<wbr>Dynamic<wbr>Form<wbr>Item<span class="tsd-signature-symbol">(</span>formItem<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DynamicFormFieldItem</span>, form<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DynamicFormGroup</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DynamicFormControl</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-					</ul>
-				</aside>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>formItem: <span class="tsd-signature-type">DynamicFormFieldItem</span></h5>
-					</li>
-					<li>
-						<h5>form: <span class="tsd-signature-type">DynamicFormGroup</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">DynamicFormControl</span></h4>
-			</li>
-		</ul>
-	</section>
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="addComponent" class="tsd-anchor"></a>
 		<h3>add<wbr>Component</h3>
@@ -224,7 +198,7 @@
 		<h3>get<wbr>Component<wbr>Definition<wbr>ByType</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">get<wbr>Component<wbr>Definition<wbr>ByType<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FormComponentDefinition</span></li>
+			<li class="tsd-signature tsd-kind-icon">get<wbr>Component<wbr>Definition<wbr>ByType<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FormComponentDefinition</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -248,7 +222,7 @@
 						</div>
 					</li>
 				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">FormComponentDefinition</span></h4>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FormComponentDefinition</span></h4>
 				<p>@see FormComponentDefinition Component definition for the form item</p>
 			</li>
 		</ul>
@@ -258,7 +232,7 @@
 		<h3>get<wbr>Form<wbr>Control</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">get<wbr>Form<wbr>Control<span class="tsd-signature-symbol">(</span>form<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DynamicFormGroup</span>, controlName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DynamicFormGroupControl</span></li>
+			<li class="tsd-signature tsd-kind-icon">get<wbr>Form<wbr>Control<span class="tsd-signature-symbol">(</span>form<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DynamicFormGroup</span>, <span class="tsd-signature-symbol">...</span>controlNames<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DynamicFormGroupControl</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -280,7 +254,7 @@
 						</div>
 					</li>
 					<li>
-						<h5>controlName: <span class="tsd-signature-type">string</span></h5>
+						<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>controlNames: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
 						<div class="tsd-comment tsd-typography">
 							<p>Name of the form control.</p>
 						</div>
@@ -361,7 +335,7 @@
 		<h3>is<wbr>Form<wbr>Field<wbr>Item</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">is<wbr>Form<wbr>Field<wbr>Item<span class="tsd-signature-symbol">(</span>item<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DynamicFormItem</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">item</span></li>
+			<li class="tsd-signature tsd-kind-icon">is<wbr>Form<wbr>Field<wbr>Item<span class="tsd-signature-symbol">(</span>item<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DynamicFormItem</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">item</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -377,7 +351,7 @@
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">
 					<li>
-						<h5>item: <span class="tsd-signature-type">DynamicFormItem</span></h5>
+						<h5>item: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DynamicFormItem</span></h5>
 						<div class="tsd-comment tsd-typography">
 							<p>form item.</p>
 						</div>

@@ -1,11 +1,14 @@
 <div class="fd-tsdoc-container">
 <section class="tsd-panel tsd-comment">
 	<div class="tsd-comment tsd-typography">
-		<div class="lead">
-			<p>DatetimeAdapter implementation based on moment.</p>
-		</div>
-		<p>This uses moment.js as a date model instance.
-		It relies on moment implementation for formatting and translation purposes.</p>
+		<dl class="tsd-comment-tags">
+			<dt class="fd-tsd-comment-tag-pill">deprecated</dt>
+			<dd><p>Use <code>DayjsDatetimeAdapter</code> from <code>@fundamental-ngx/datetime-adapter</code> package instead.</p>
+				<p>DatetimeAdapter implementation based on moment.</p>
+				<p>This uses moment.js as a date model instance.
+				It relies on moment implementation for formatting and translation purposes.</p>
+			</dd>
+		</dl>
 	</div>
 </section>
 <section class="tsd-panel tsd-hierarchy">
@@ -993,7 +996,7 @@
 		<h3>is<wbr>Valid</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-			<li class="tsd-signature tsd-kind-icon">is<wbr>Valid<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Moment</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+			<li class="tsd-signature tsd-kind-icon">is<wbr>Valid<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Moment</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">date</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -1005,10 +1008,10 @@
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">
 					<li>
-						<h5>date: <span class="tsd-signature-type">Moment</span></h5>
+						<h5>date: <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Moment</span><span class="tsd-signature-symbol">&gt;</span></h5>
 					</li>
 				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">date</span></h4>
 			</li>
 		</ul>
 	</section>
@@ -1035,7 +1038,7 @@
 		<h3>parse</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-			<li class="tsd-signature tsd-kind-icon">parse<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, parseFormat<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">MomentFormatSpecification</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Moment</span></li>
+			<li class="tsd-signature tsd-kind-icon">parse<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, parseFormat<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">MomentFormatSpecification</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Moment</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -1053,7 +1056,7 @@
 						<h5>parseFormat: <span class="tsd-signature-type">MomentFormatSpecification</span><span class="tsd-signature-symbol"> = &#x27;&#x27;</span></h5>
 					</li>
 				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Moment</span></h4>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Moment</span></h4>
 			</li>
 		</ul>
 	</section>

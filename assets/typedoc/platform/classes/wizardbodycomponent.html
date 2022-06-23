@@ -38,7 +38,7 @@
 		<a name="contentHeight" class="tsd-anchor"></a>
 		<h3>content<wbr>Height</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">content<wbr>Height<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<div class="tsd-signature tsd-kind-icon">content<wbr>Height<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<ul>
 			</ul>
@@ -54,7 +54,7 @@
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="customSummaryStepTemplate" class="tsd-anchor"></a>
-		<h3>custom<wbr>Summary<wbr>Step<wbr>Template</h3>
+		<h3><span class="tsd-flag ts-flagOptional">Optional</span> custom<wbr>Summary<wbr>Step<wbr>Template</h3>
 		<!-- {log decorators} -->
 		<div class="tsd-signature tsd-kind-icon">custom<wbr>Summary<wbr>Step<wbr>Template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
@@ -111,6 +111,36 @@
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
 				<p>User-defined template for &quot;Go Next&quot; button.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="isBranchingStep" class="tsd-anchor"></a>
+		<h3>is<wbr>Branching<wbr>Step</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">is<wbr>Branching<wbr>Step<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether current step is a branching step.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="isCurrentStepCompleted" class="tsd-anchor"></a>
+		<h3>is<wbr>Current<wbr>Step<wbr>Completed</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">is<wbr>Current<wbr>Step<wbr>Completed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether current step is completed</p>
 			</div>
 		</div>
 	</section>
@@ -184,7 +214,7 @@
 		<a name="navigationButtonLabels" class="tsd-anchor"></a>
 		<h3>navigation<wbr>Button<wbr>Labels</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">navigation<wbr>Button<wbr>Labels<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">WizardNavigationButtons</span></div>
+		<div class="tsd-signature tsd-kind-icon">navigation<wbr>Button<wbr>Labels<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Required</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">WizardNavigationButtons</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<ul>
 			</ul>
@@ -231,7 +261,7 @@
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="reviewButtonTemplate" class="tsd-anchor"></a>
-		<h3>review<wbr>Button<wbr>Template</h3>
+		<h3><span class="tsd-flag ts-flagOptional">Optional</span> review<wbr>Button<wbr>Template</h3>
 		<!-- {log decorators} -->
 		<div class="tsd-signature tsd-kind-icon">review<wbr>Button<wbr>Template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
@@ -241,6 +271,21 @@
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
 				<p>User-defined template for &quot;Review&quot; button</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="stepsOrderChanged" class="tsd-anchor"></a>
+		<h3>steps<wbr>Order<wbr>Changed</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">steps<wbr>Order<wbr>Changed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether order of steps was changed</p>
 			</div>
 		</div>
 	</section>
@@ -321,8 +366,8 @@
 		<h3>visible<wbr>Items</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> visibleItems<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">WizardGeneratorItem</span><span class="tsd-signature-symbol">[]</span></li>
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> visibleItems<span class="tsd-signature-symbol">(</span>items<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">WizardGeneratorItem</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> visibleItems<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PreparedWizardGeneratorItem</span><span class="tsd-signature-symbol">[]</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> visibleItems<span class="tsd-signature-symbol">(</span>items<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PreparedWizardGeneratorItem</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -337,7 +382,7 @@
 						</dd>
 					</dl>
 				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">WizardGeneratorItem</span><span class="tsd-signature-symbol">[]</span></h4>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">PreparedWizardGeneratorItem</span><span class="tsd-signature-symbol">[]</span></h4>
 			</li>
 			<li class="tsd-description">
 				<aside class="tsd-sources">
@@ -347,7 +392,7 @@
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">
 					<li>
-						<h5>items: <span class="tsd-signature-type">WizardGeneratorItem</span><span class="tsd-signature-symbol">[]</span></h5>
+						<h5>items: <span class="tsd-signature-type">PreparedWizardGeneratorItem</span><span class="tsd-signature-symbol">[]</span></h5>
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
