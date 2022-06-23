@@ -1,4 +1,11 @@
 
+## [0.35.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.26...v0.35.0-rc.27) (2022-06-23)
+
+
+### Bug Fixes
+
+* **core,platform:** add inputs for datetimepicker ok/cancel buttons ([#8263](https://github.com/SAP/fundamental-ngx/issues/8263)) ([ff55731](https://github.com/SAP/fundamental-ngx/commit/ff55731d832c997c82d4f86bf2440cb8f93001db))
+
 ## [0.35.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.25...v0.35.0-rc.26) (2022-06-23)
 
 
