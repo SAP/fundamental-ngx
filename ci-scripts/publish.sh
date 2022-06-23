@@ -11,14 +11,10 @@ if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Pre-release" ]]; then
    npm run std-version -- --prerelease rc --no-verify
 
 elif [[ $TRAVIS_BUILD_STAGE_NAME =~ "Release" ]]; then
-  # git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
-  # git fetch
-  # git checkout main
-
   echo "################ Running Master deploy tasks ################"
 
   # delete temp branch
-  git push "https://$GHACTIONS@github.com/$TRAVIS_REPO_SLUG.git" ":$TRAVIS_BRANCH" -v
+  git push "https://$GHACTIONS@github.com/$TRAVIS_REPO_SLUG.git" ":$TRAVIS_BRANCH"  > /dev/null;
   std_ver=$(npm run std-version)
   release_tag=$(echo "$std_ver" | grep "tagging release" | awk '{print $4}')
 
