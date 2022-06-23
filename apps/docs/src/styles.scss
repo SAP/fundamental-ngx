@@ -1,6 +1,8 @@
-// @import url("../../../node_modules/fundamental-styles/dist/fundamental-styles.css");
+@use '@angular/cdk';
 @import '~fundamental-styles/dist/info-label.css';
 @import '~fundamental-styles/dist/form-layout-grid.css';
+
+@include cdk.a11y-visually-hidden();
 
 $gutter-size: 15px;
 

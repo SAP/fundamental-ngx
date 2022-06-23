@@ -20,6 +20,8 @@ import tableSemanticHtml from '!./examples/table-semantic-example.component.html
 import tableSemanticTs from '!./examples/table-semantic-example.component.ts?raw';
 import tablePaginationHtml from '!./examples/table-pagination-example.component.html?raw';
 import tablePaginationTs from '!./examples/table-pagination-example.component.ts?raw';
+import tableResponsiveHtml from '!./examples/table-responsive-example.component.html?raw';
+import tableResponsiveTs from '!./examples/table-responsive-example.component.ts?raw';
 import tableFooterHtml from '!./examples/table-footer-example.component.html?raw';
 import tableFooterTs from '!./examples/table-footer-example.component.ts?raw';
 import tableCdkHtml from '!./examples/table-cdk-example.component.html?raw';
@@ -260,6 +262,20 @@ export class TableDocsComponent {
             component: 'TablePaginationExampleComponent',
             code: tablePaginationTs,
             fileName: 'table-pagination-example'
+        }
+    ];
+
+    tableResponsive: ExampleFile[] = [
+        {
+            language: 'html',
+            code: tableResponsiveHtml,
+            fileName: 'table-responsive-example'
+        },
+        {
+            language: 'typescript',
+            component: 'TableResponsiveExampleComponent',
+            code: tableResponsiveTs,
+            fileName: 'table-responsive-example'
         }
     ];
 
