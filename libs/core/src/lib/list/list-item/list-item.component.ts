@@ -174,6 +174,12 @@ export class ListItemComponent
 
     /** @hidden */
     ngAfterContentInit(): void {
+        if (this.radio && this.radio.tabIndex != null) {
+            this.radio.tabIndex = -1;
+        }
+        if (this.checkbox && this.checkbox.tabIndexValue != null) {
+            this.checkbox.tabIndexValue = -1;
+        }
         this._listenOnLinkQueryChange();
         this._listenOnButtonQueryChange();
     }
