@@ -1,4 +1,11 @@
 
+## [0.35.0](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.28...v0.35.0) (2022-06-23)
+
+
+### Bug Fixes
+
+* **ci:** fixed release script ([#8269](https://github.com/SAP/fundamental-ngx/issues/8269)) ([b7fd171](https://github.com/SAP/fundamental-ngx/commit/b7fd17104ae67cce52b6ada6087c200afbdcf755))
+
 ## [0.35.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.27...v0.35.0-rc.28) (2022-06-23)
 
 ## [0.35.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.26...v0.35.0-rc.27) (2022-06-23)
