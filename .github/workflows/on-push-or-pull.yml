@@ -352,10 +352,10 @@ jobs:
                   echo "STAGE_NAME=Release" >> $GITHUB_ENV
                   git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
                   git fetch
-                  git checkout tmp_branch_for_automated_release_do_not_use
+                  git checkout main
               if: ${{ github.ref == 'refs/heads/tmp_branch_for_automated_release_do_not_use' }}
             - run: |
-                  echo "STAGE_NAME=Pre-release" >> $GITHUB_ENV 
+                  echo "STAGE_NAME=Pre-release" >> $GITHUB_ENV
                   echo "releaseTag=prerelease" >> $GITHUB_ENV
                   git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
                   git fetch
