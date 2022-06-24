@@ -75,7 +75,7 @@ jobs:
                       ${{ runner.os }}-pnpm-store-
 
             - name: Install dependencies
-              run: pnpm install --shamefully-hoist --frozen-lockfile
+              run: pnpm install --shamefully-hoist --store=node_modules/.pnpm-store --frozen-lockfile
 
     # lint commit name
     commit_lint:
@@ -364,7 +364,7 @@ jobs:
               if: ${{ needs.firebase_preview.outputs.output_url }}
               run: |
                   pnpm rebuild
-                  pnpm install --shamefully-hoist --frozen-lockfile
+                  pnpm install --shamefully-hoist --store=node_modules/.pnpm-store --frozen-lockfile
                   export DISPLAY=:99
                   chrome --version
                   sudo Xvfb -ac :99 -screen 0 1920x1080x24 > /dev/null 2>&1 & # optional
@@ -376,7 +376,7 @@ jobs:
               if: ${{ !needs.firebase_preview.outputs.output_url }}
               run: |
                   pnpm rebuild
-                  pnpm install --shamefully-hoist --frozen-lockfile
+                  pnpm install --shamefully-hoist --store=node_modules/.pnpm-store --frozen-lockfile
                   npx ng serve --watch false --configuration production &
                   npx wait-on http://localhost:4200
                   export DISPLAY=:99
