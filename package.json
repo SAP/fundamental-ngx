@@ -9,6 +9,7 @@
         "type": "git",
         "url": "https://github.com/SAP/fundamental-ngx"
     },
+    "packageManager": "pnpm@7.1.0",
     "scripts": {
         "build": "nx build",
         "build-all": "npm run build-artifacts && npm run build-docs -- --configuration production --base-href=\"/fundamental-ngx/\"",

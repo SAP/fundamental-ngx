@@ -363,7 +363,7 @@ jobs:
                   CAP_SLUG: ${{ matrix.browser }}
               if: ${{ needs.firebase_preview.outputs.output_url }}
               run: |
-                  npm rebuild
+                  pnpm rebuild
                   pnpm install --shamefully-hoist --frozen-lockfile
                   export DISPLAY=:99
                   chrome --version
@@ -375,7 +375,7 @@ jobs:
                   CAP_SLUG: ${{ matrix.browser }}
               if: ${{ !needs.firebase_preview.outputs.output_url }}
               run: |
-                  npm rebuild
+                  pnpm rebuild
                   pnpm install --shamefully-hoist --frozen-lockfile
                   npx ng serve --watch false --configuration production &
                   npx wait-on http://localhost:4200
