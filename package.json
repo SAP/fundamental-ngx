@@ -104,7 +104,9 @@
         "prepare": "husky install",
         "pre-commit": "lint-staged",
         "std-version": "standard-version --infile ./CHANGELOG.md --releaseCommitMessageFormat \"chore(release): version {{currentTag}} build ${GITHUB_RUN_NUMBER} [ci skip]\" --header \"\"",
-        "transform-typedocs": "node ./transform-typedoc-files.js"
+        "transform-typedocs": "node ./transform-typedoc-files.js",
+        "preinstall": "npx only-allow pnpm",
+        "prebuild-docs-netlify": "test \"$CI\" = true && npx pnpm install || echo skipping pnpm install"
     },
     "publishConfig": {
         "registry": "https://repository.hybris.com/api/npm/npm-repository/"
@@ -237,6 +239,9 @@
         "wdio-html-format-reporter": "0.4.0",
         "wdio-image-comparison-service": "2.0.0",
         "webdriverio": "7.16.16"
+    },
+    "engines": {
+        "node": ">= 14 < 18"
     },
     "lint-staged": {
         "*.{js,ts,html,md,scss,css,json,yml}": "nx format:write --files=",
