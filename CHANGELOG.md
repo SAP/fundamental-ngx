@@ -1,4 +1,11 @@
 
+### [0.35.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.35.1...v0.35.2-rc.0) (2022-06-24)
+
+
+### Features
+
+* **core:** overflow layout component ([#8254](https://github.com/SAP/fundamental-ngx/issues/8254)) ([5fa82be](https://github.com/SAP/fundamental-ngx/commit/5fa82bef4816b8dd64f789ad1a90afd9fb915645))
+
 ### [0.35.1](https://github.com/SAP/fundamental-ngx/compare/v0.35.1-rc.2...v0.35.1) (2022-06-24)
 
 ### [0.35.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.35.1-rc.1...v0.35.1-rc.2) (2022-06-24)
