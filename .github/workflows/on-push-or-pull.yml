@@ -352,13 +352,19 @@ jobs:
               with:
                   node-version: 15.11.0
 
+            - uses: pnpm/action-setup@v2.0.1
+              name: Install pnpm
+              id: pnpm-install
+              with:
+                  version: 7
+                  run_install: false
             - name: smoke e2e on firebase
               env:
                   CAP_SLUG: ${{ matrix.browser }}
               if: ${{ needs.firebase_preview.outputs.output_url }}
               run: |
                   npm rebuild
-                  npm ci
+                  pnpm install --shamefully-hoist --frozen-lockfile
                   export DISPLAY=:99
                   chrome --version
                   sudo Xvfb -ac :99 -screen 0 1920x1080x24 > /dev/null 2>&1 & # optional
@@ -370,7 +376,7 @@ jobs:
               if: ${{ !needs.firebase_preview.outputs.output_url }}
               run: |
                   npm rebuild
-                  npm ci
+                  pnpm install --shamefully-hoist --frozen-lockfile
                   npx ng serve --watch false --configuration production &
                   npx wait-on http://localhost:4200
                   export DISPLAY=:99
