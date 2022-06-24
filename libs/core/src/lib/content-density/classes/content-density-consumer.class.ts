@@ -6,14 +6,15 @@ import { contentDensityCallbackFactory } from '../helpers/content-density-change
 
 /** Class, which is used for consuming calculated content density state information in components */
 export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> {
-    /** Stream for getting compact state */
+    /** Stream for getting compact state changes */
     isCompact$: Observable<boolean>;
-    /** Stream for getting cozy state */
+    /** Stream for getting cozy state changes */
     isCozy$: Observable<boolean>;
-    /** Stream for getting condensed state */
+    /** Stream for getting condensed state changes */
     isCondensed$: Observable<boolean>;
 
-    callbacks: Map<any, ContentDensityCallbackFn> = new Map<any, ContentDensityCallbackFn>();
+    /** @hidden */
+    private _callbacks: Map<any, ContentDensityCallbackFn> = new Map<any, ContentDensityCallbackFn>();
 
     /** @hidden */
     private _isCompact: boolean;
@@ -89,7 +90,7 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
     ): ContentDensityObserver {
         consumerConfigs.forEach((consumerConfig) => {
             const callback = contentDensityCallbackFactory(consumerConfig);
-            this.callbacks.set(consumerConfig, callback);
+            this._callbacks.set(consumerConfig, callback);
             callback(this.value);
         });
         return this;
@@ -102,14 +103,14 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
         ...consumerConfigs: Array<ContentDensityConsumerTarget | ContentDensityCallbackFn>
     ): ContentDensityObserver {
         consumerConfigs.forEach((consumerConfig) => {
-            this.callbacks.delete(consumerConfig);
+            this._callbacks.delete(consumerConfig);
         });
         return this;
     }
 
     /** @hidden */
     private _callCallbacks(density: ContentDensityMode): void {
-        this.callbacks.forEach((callback) => callback(density));
+        this._callbacks.forEach((callback) => callback(density));
     }
 
     /** @hidden */
