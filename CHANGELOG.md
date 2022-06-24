@@ -1,4 +1,11 @@
 
+### [0.35.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.35.1-rc.0...v0.35.1-rc.1) (2022-06-24)
+
+
+### Features
+
+* **core:** configurable flexible column layout ([#8262](https://github.com/SAP/fundamental-ngx/issues/8262)) ([9c4d029](https://github.com/SAP/fundamental-ngx/commit/9c4d0291c2acb958c20566f6b8426e249edd5cec))
+
 ### [0.35.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.35.0...v0.35.1-rc.0) (2022-06-23)
 
 
