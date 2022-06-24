@@ -201,6 +201,7 @@ describe('TokenizerComponent', () => {
 
     it('should handle resize - getting smaller', () => {
         fixture.componentInstance.compact = true;
+        fixture.detectChanges();
         spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
         spyOn(component, 'getCombinedTokenWidth').and.returnValue(2);
         component.previousElementWidth = 2;
@@ -217,6 +218,7 @@ describe('TokenizerComponent', () => {
 
     it('should handle resize - getting bigger', () => {
         fixture.componentInstance.compact = true;
+        fixture.detectChanges();
         // need to collapse the tokens before running expand
         spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
         spyOn(component, 'getCombinedTokenWidth').and.returnValue(2);
@@ -233,6 +235,7 @@ describe('TokenizerComponent', () => {
 
     it('should handle resize - getting bigger', () => {
         fixture.componentInstance.compact = true;
+        fixture.detectChanges();
         // need to collapse the tokens before running expand
         spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
         spyOn(component, 'getCombinedTokenWidth').and.returnValue(2);
