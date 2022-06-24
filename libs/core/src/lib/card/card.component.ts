@@ -20,8 +20,8 @@ import { Subscription } from 'rxjs';
 import { getCardModifierClassNameByCardType } from './utils';
 import { FD_CARD_CONTAINER } from './card.tokens';
 import {
-    ContentDensityConsumer,
-    contentDensityConsumerProviders,
+    ContentDensityObserver,
+    contentDensityObserverProviders,
     ContentDensityMode
 } from '@fundamental-ngx/core/content-density';
 
@@ -34,7 +34,7 @@ let cardId = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
-        contentDensityConsumerProviders({
+        contentDensityObserverProviders({
             modifiers: {
                 [ContentDensityMode.COMPACT]: CLASS_NAME.cardCompact
             }
@@ -89,10 +89,9 @@ export class CardComponent implements OnChanges, AfterViewChecked, OnInit, CssCl
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    constructor(
-        private _elementRef: ElementRef<HTMLElement>,
-        private _contentDensityConsumer: ContentDensityConsumer
-    ) {}
+    constructor(private _elementRef: ElementRef<HTMLElement>, private _contentDensityObserver: ContentDensityObserver) {
+        _contentDensityObserver.subscribe();
+    }
 
     /** @hidden */
     ngOnChanges(): void {

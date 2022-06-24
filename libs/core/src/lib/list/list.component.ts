@@ -23,8 +23,8 @@ import { ListFocusItem } from './list-focus-item.model';
 import { ListNavigationItemComponent } from './list-navigation-item/list-navigation-item.component';
 import { FD_LIST } from './list.tokens';
 import {
-    ContentDensityConsumer,
-    contentDensityConsumerProviders,
+    ContentDensityObserver,
+    contentDensityObserverProviders,
     ContentDensityMode
 } from '@fundamental-ngx/core/content-density';
 
@@ -49,7 +49,7 @@ import {
             provide: FD_LIST,
             useExisting: ListComponent
         },
-        contentDensityConsumerProviders({
+        contentDensityObserverProviders({
             modifiers: { [ContentDensityMode.COMPACT]: 'fd-list--compact' }
         })
     ]
@@ -132,8 +132,10 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
     constructor(
         private _keyboardSupportService: KeyboardSupportService<ListFocusItem>,
         private _cdr: ChangeDetectorRef,
-        private _contentDensityConsumer: ContentDensityConsumer
-    ) {}
+        private _contentDensityObserver: ContentDensityObserver
+    ) {
+        _contentDensityObserver.subscribe();
+    }
 
     /** @hidden */
     ngOnInit(): void {

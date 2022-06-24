@@ -23,7 +23,7 @@
         [attr.aria-label]="ariaLabel"
         [attr.aria-labelledby]="ariaLabelledBy"
         [attr.aria-required]="required"
-        [class.fd-input--compact]="_contentDensityConsumer.isCompact$ | async"
+        [class.fd-input--compact]="_contentDensityObserver.isCompact$ | async"
         [title]="ariaLabel"
         [placeholder]="placeholder"
         [value]=""

@@ -1,7 +1,7 @@
 import { Directive } from '@angular/core';
 import {
-    ContentDensityConsumer,
-    contentDensityConsumerProviders,
+    ContentDensityObserver,
+    contentDensityObserverProviders,
     ContentDensityMode
 } from '@fundamental-ngx/core/content-density';
 
@@ -9,7 +9,7 @@ import {
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: 'input[fd-form-control]',
     providers: [
-        contentDensityConsumerProviders({
+        contentDensityObserverProviders({
             modifiers: {
                 [ContentDensityMode.COMPACT]: 'fd-input--compact'
             }
@@ -20,5 +20,5 @@ import {
     }
 })
 export class InputFormControlDirective {
-    constructor(readonly _contentDensityConsumer: ContentDensityConsumer) {}
+    constructor(readonly _contentDensityObserver: ContentDensityObserver) {}
 }

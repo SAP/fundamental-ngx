@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs';
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
 import { registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
-import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundamental-ngx/core/content-density';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 export type stateType = 'success' | 'error' | 'warning' | 'default' | 'information';
 let uniqueId = 0;
@@ -34,7 +34,7 @@ let uniqueId = 0;
             multi: true
         },
         registerFormItemControl(RadioButtonComponent),
-        contentDensityConsumerProviders()
+        contentDensityObserverProviders()
     ]
 })
 export class RadioButtonComponent
@@ -131,7 +131,7 @@ export class RadioButtonComponent
     /** @hidden */
     constructor(
         private changeDetectionRef: ChangeDetectorRef,
-        readonly _contentDensityConsumer: ContentDensityConsumer
+        readonly _contentDensityObserver: ContentDensityObserver
     ) {}
 
     /** @hidden */

@@ -22,8 +22,8 @@ import { MicroProcessFlowFocusableItemDirective } from '../../micro-process-flow
 import { MicroProcessFlowItemComponent } from '../micro-process-flow-item/micro-process-flow-item.component';
 import { MICRO_PROCESS_FLOW } from '../../injection-tokens';
 import {
-    ContentDensityConsumer,
-    contentDensityConsumerProviders,
+    ContentDensityObserver,
+    contentDensityObserverProviders,
     ContentDensityMode
 } from '@fundamental-ngx/core/content-density';
 
@@ -42,7 +42,7 @@ import {
             provide: MICRO_PROCESS_FLOW,
             useExisting: MicroProcessFlowComponent
         },
-        contentDensityConsumerProviders({
+        contentDensityObserverProviders({
             modifiers: { [ContentDensityMode.COMPACT]: 'fd-micro-process-flow--compact' }
         })
     ]
@@ -126,8 +126,10 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
     constructor(
         private _cd: ChangeDetectorRef,
         @Optional() private _rtl: RtlService,
-        private _contentDensityConsumer: ContentDensityConsumer
-    ) {}
+        private _contentDensityObserver: ContentDensityObserver
+    ) {
+        _contentDensityObserver.subscribe();
+    }
 
     /** @hidden */
     ngOnInit(): void {

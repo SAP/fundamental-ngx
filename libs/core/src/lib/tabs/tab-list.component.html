@@ -3,7 +3,7 @@
     role="tablist"
     class="fd-tabs"
     [class]="(mode ? 'fd-tabs--' + mode : '') + (' fd-tabs--' + size)"
-    [class.fd-tabs--compact]="_contentDensityConsumer.isCompact"
+    [class.fd-tabs--compact]="_contentDensityObserver.isCompact"
 >
     <div class="fd-tabs__wrapper" [class.fd-tabs__wrapper--collapsible]="_isCollapsed">
         <ng-container *ngFor="let tab of _visualOrder.visible; let i = index; let last = last">

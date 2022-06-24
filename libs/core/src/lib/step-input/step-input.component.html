@@ -5,7 +5,7 @@
         [class.is-focus]="focused"
         [class.is-readonly]="readonly"
         [class.is-disabled]="disabled"
-        [class.fd-step-input--compact]="_contentDensityConsumer.isCompact"
+        [class.fd-step-input--compact]="_contentDensityObserver.isCompact"
         [class.fd-step-input--without-buttons]="!hasStepButtons"
     >
         <button
@@ -31,7 +31,7 @@
             [disabled]="disabled"
             [readOnly]="readonly"
             [placeholder]="placeholder"
-            [class.fd-input--compact]="_contentDensityConsumer.isCompact"
+            [class.fd-input--compact]="_contentDensityObserver.isCompact"
             [attr.aria-label]="ariaLabel"
             [attr.aria-labelledby]="ariaLabelledBy"
             [attr.aria-valuenow]="value"

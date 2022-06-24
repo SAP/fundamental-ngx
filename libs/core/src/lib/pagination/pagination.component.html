@@ -169,7 +169,7 @@
 <ng-template #more>
     <span
         class="fd-pagination__more"
-        [class.fd-pagination__more--compact]="_contentDensityConsumer.isCompact$ | async"
+        [class.fd-pagination__more--compact]="_contentDensityObserver.isCompact$ | async"
         aria-hidden="true"
         aria-label="..."
         role="presentation"

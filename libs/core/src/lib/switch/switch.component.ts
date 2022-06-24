@@ -16,7 +16,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/core/shared';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
-import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundamental-ngx/core/content-density';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 let switchUniqueId = 0;
 
@@ -35,7 +35,7 @@ let switchUniqueId = 0;
             multi: true
         },
         registerFormItemControl(SwitchComponent),
-        contentDensityConsumerProviders()
+        contentDensityObserverProviders()
     ],
     host: {
         class: 'fd-form__item fd-form__item--check fd-switch-custom',
@@ -124,7 +124,7 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
 
     constructor(
         private readonly _changeDetectorRef: ChangeDetectorRef,
-        readonly _contentDensityConsumer: ContentDensityConsumer
+        readonly _contentDensityObserver: ContentDensityObserver
     ) {}
 
     /** @hidden */

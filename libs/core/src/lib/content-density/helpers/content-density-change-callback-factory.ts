@@ -1,14 +1,14 @@
 import { coerceElement } from '@angular/cdk/coercion';
 import {
     ContentDensityCallbackFn,
-    ContentDensityConsumerSettings,
-    ContentDensityConsumerTarget,
+    ContentDensityObserverSettings,
+    ContentDensityObserverTarget,
     ContentDensityMode
 } from '../content-density.types';
-import { defaultContentDensityConsumerConfigs } from '../variables/default-content-density-consumer-config';
+import { defaultContentDensityObserverConfigs } from '../variables/default-content-density-consumer-config';
 
 export function contentDensityCallbackFactory(
-    consumerConfig: ContentDensityConsumerTarget | ContentDensityCallbackFn
+    consumerConfig: ContentDensityObserverTarget | ContentDensityCallbackFn
 ): ContentDensityCallbackFn {
     if (typeof consumerConfig === 'function') {
         return consumerConfig;
@@ -16,12 +16,12 @@ export function contentDensityCallbackFactory(
     return (contentDensityMode: ContentDensityMode) => {
         const configs = {
             contentDensitySettings: {
-                ...defaultContentDensityConsumerConfigs,
+                ...defaultContentDensityObserverConfigs,
                 ...consumerConfig.contentDensitySettings
             },
             elementRef: () => consumerConfig.elementRef()
         };
-        const settings: Required<ContentDensityConsumerSettings> = configs.contentDensitySettings;
+        const settings: Required<ContentDensityObserverSettings> = configs.contentDensitySettings;
         const element = coerceElement(configs.elementRef());
 
         Object.values(settings.modifiers).forEach((className) => {

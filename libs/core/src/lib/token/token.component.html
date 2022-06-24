@@ -5,7 +5,7 @@
     [attr.aria-roledescription]="ariaRoleDescription"
     (click)="tokenClickHandler($event)"
     [class.fd-token__disabled]="disabled"
-    [class.fd-token--compact]="_contentDensityConsumer.isCompact$ | async"
+    [class.fd-token--compact]="_contentDensityObserver.isCompact$ | async"
     [class.fd-token--selected]="selected"
     [class.fd-token--readonly]="readOnly"
     [attr.aria-selected]="selected"

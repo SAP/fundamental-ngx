@@ -2,7 +2,6 @@ import { ChangeDetectorRef, Component, HostBinding, Input, OnDestroy, ViewChild 
 import { BaseButton, ButtonComponent, ButtonType } from '@fundamental-ngx/core/button';
 import { Subscription } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/core/shared';
-import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundamental-ngx/core/content-density';
 
 let randomButtonBarId = 0;
 
@@ -24,8 +23,7 @@ let randomButtonBarId = 0;
         >
             <ng-content></ng-content>
         </button>
-    `,
-    providers: [contentDensityConsumerProviders()]
+    `
 })
 export class ButtonBarComponent extends BaseButton implements OnDestroy {
     /** Whether the element should take the whole width of the container. */
@@ -83,7 +81,7 @@ export class ButtonBarComponent extends BaseButton implements OnDestroy {
     /** @hidden */
     private _subscriptions = new Subscription();
 
-    constructor(private _contentDensityConsumer: ContentDensityConsumer, private _cdRef: ChangeDetectorRef) {
+    constructor(private _cdRef: ChangeDetectorRef) {
         super();
     }
 

@@ -30,7 +30,7 @@ import { filter, takeUntil, tap } from 'rxjs/operators';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { applyCssClass, CssClassBuilder, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { TokenComponent } from './token.component';
-import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundamental-ngx/core/content-density';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 @Component({
     selector: 'fd-tokenizer',
@@ -38,7 +38,7 @@ import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundam
     styleUrls: ['./tokenizer.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [contentDensityConsumerProviders()]
+    providers: [contentDensityObserverProviders()]
 })
 export class TokenizerComponent
     implements AfterViewChecked, AfterViewInit, AfterContentInit, OnDestroy, CssClassBuilder, OnInit, OnChanges
@@ -89,7 +89,7 @@ export class TokenizerComponent
      * Component is in compact mode, determined by the consumer
      */
     get compact(): boolean {
-        return this._contentDensityConsumer.isCompact;
+        return this._contentDensityObserver.isCompact;
     }
 
     /** @hidden */
@@ -170,7 +170,7 @@ export class TokenizerComponent
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     constructor(
-        readonly _contentDensityConsumer: ContentDensityConsumer,
+        readonly _contentDensityObserver: ContentDensityObserver,
         private _elementRef: ElementRef,
         private _cdRef: ChangeDetectorRef,
         @Optional() private _rtlService: RtlService,

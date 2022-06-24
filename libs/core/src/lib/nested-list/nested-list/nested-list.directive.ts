@@ -22,15 +22,15 @@ import { NestedListInterface } from './nested-list.interface';
 import { NestedListHeaderDirective } from '../nested-list-directives';
 import { Nullable } from '@fundamental-ngx/core/shared';
 import {
-    ContentDensityConsumer,
-    contentDensityConsumerProviders,
+    ContentDensityObserver,
+    contentDensityObserverProviders,
     ContentDensityMode
 } from '@fundamental-ngx/core/content-density';
 
 @Directive({
     selector: '[fdNestedList], [fd-nested-list]',
     providers: [
-        contentDensityConsumerProviders({ modifiers: { [ContentDensityMode.COMPACT]: 'fd-nested-list--compact' } })
+        contentDensityObserverProviders({ modifiers: { [ContentDensityMode.COMPACT]: 'fd-nested-list--compact' } })
     ]
 })
 export class NestedListDirective implements AfterContentInit, NestedListInterface, OnDestroy {
@@ -97,11 +97,12 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
         private _nestedListKeyboardService: NestedListKeyboardService,
         private _elementRef: ElementRef,
         private _changeDetectionRef: ChangeDetectorRef,
-        private _contentDensityConsumer: ContentDensityConsumer
+        private _contentDensityObserver: ContentDensityObserver
     ) {
         if (this._nestedItemService) {
             this._nestedItemService.list = this;
         }
+        _contentDensityObserver.subscribe();
     }
 
     /** @hidden */

@@ -9,7 +9,6 @@ import {
     ContentChildren,
     EventEmitter,
     HostListener,
-    Inject,
     Input,
     OnDestroy,
     Optional,
@@ -32,7 +31,6 @@ import { ActionSheetMobileComponent } from './action-sheet-mobile/action-sheet-m
 import { ActionSheetBodyComponent } from './action-sheet-body/action-sheet-body.component';
 import { ActionSheetControlComponent } from './action-sheet-control/action-sheet-control.component';
 import { ActionSheetClickEvent, ActionSheetItemComponent } from './action-sheet-item/action-sheet-item.component';
-import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundamental-ngx/core/content-density';
 
 @Component({
     selector: 'fd-action-sheet',
@@ -40,7 +38,7 @@ import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundam
     styleUrls: ['./action-sheet.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [KeyboardSupportService, contentDensityConsumerProviders()]
+    providers: [KeyboardSupportService]
 })
 export class ActionSheetComponent implements AfterContentInit, AfterViewInit, OnDestroy {
     /** Whether should be displayed in mobile mode */
@@ -114,7 +112,6 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         private readonly _keyboardSupportService: KeyboardSupportService<ActionSheetItemComponent>,
         private readonly _changeDetectionRef: ChangeDetectorRef,
         private readonly _viewContainerRef: ViewContainerRef,
-        @Inject(ContentDensityConsumer) private _contentDensityConsumer: ContentDensityConsumer,
         @Optional() private _dynamicComponentService: DynamicComponentService
     ) {}
 

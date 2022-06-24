@@ -50,7 +50,7 @@ import { ComboboxMobileComponent } from './combobox-mobile/combobox-mobile.compo
 import { COMBOBOX_COMPONENT, ComboboxInterface } from './combobox.interface';
 import { ComboboxItem } from './combobox-item';
 import { GroupFunction } from './list-group.pipe';
-import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundamental-ngx/core/content-density';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 let comboboxUniqueId = 0;
 
@@ -78,7 +78,7 @@ let comboboxUniqueId = 0;
         },
         registerFormItemControl(ComboboxComponent),
         MenuKeyboardService,
-        contentDensityConsumerProviders()
+        contentDensityObserverProviders()
     ],
     host: {
         '[class.fd-combobox-custom-class]': 'true',
@@ -359,7 +359,7 @@ export class ComboboxComponent
         private readonly _injector: Injector,
         private readonly _viewContainerRef: ViewContainerRef,
         private readonly _dynamicComponentService: DynamicComponentService,
-        readonly _contentDensityConsumer: ContentDensityConsumer
+        readonly _contentDensityObserver: ContentDensityObserver
     ) {}
 
     /** @hidden */

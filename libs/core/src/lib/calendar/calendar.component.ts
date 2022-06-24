@@ -36,8 +36,8 @@ import { CalendarAggregatedYearViewComponent } from './calendar-views/calendar-a
 import { DisableDateFunction, EscapeFocusFunction, FocusableCalendarView } from './models/common';
 import { CalendarType, DaysOfWeek, FdCalendarView, NavigationButtonDisableFunction } from './types';
 import {
-    ContentDensityConsumer,
-    contentDensityConsumerProviders,
+    ContentDensityObserver,
+    contentDensityObserverProviders,
     ContentDensityMode
 } from '@fundamental-ngx/core/content-density';
 
@@ -71,7 +71,7 @@ let calendarUniqueId = 0;
             multi: true
         },
         CalendarService,
-        contentDensityConsumerProviders({
+        contentDensityObserverProviders({
             modifiers: {
                 [ContentDensityMode.COMPACT]: 'fd-calendar--compact'
             }
@@ -285,7 +285,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     /** @hidden */
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
-        private _contentDensityConsumer: ContentDensityConsumer,
+        private _contentDensityObserver: ContentDensityObserver,
         // Use @Optional to avoid angular injection error message and throw our own which is more precise one
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
@@ -296,7 +296,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
         if (!this._dateTimeFormats) {
             throw createMissingDateImplementationError('DATE_TIME_FORMATS');
         }
-
+        _contentDensityObserver.subscribe();
         // set default value
         this._adapterStartingDayOfWeek = (this._dateTimeAdapter.getFirstDayOfWeek() + 1) as DaysOfWeek;
         this.selectedDate = this._dateTimeAdapter.today();

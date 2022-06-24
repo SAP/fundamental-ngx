@@ -1,10 +1,23 @@
-import { ChangeDetectionStrategy, Component, HostListener, Input, ViewEncapsulation } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    HostListener,
+    Input,
+    ViewChild,
+    ViewEncapsulation
+} from '@angular/core';
 
 import { KeyboardSupportService } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
 
 import { ActionSheetItemComponent } from '../action-sheet-item/action-sheet-item.component';
-import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundamental-ngx/core/content-density';
+import {
+    ContentDensityMode,
+    ContentDensityObserver,
+    contentDensityObserverProviders
+} from '@fundamental-ngx/core/content-density';
 
 let actionSheetBodyUniqueIdCounter = 0;
 
@@ -26,9 +39,9 @@ let actionSheetBodyUniqueIdCounter = 0;
     templateUrl: './action-sheet-body.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [contentDensityConsumerProviders()]
+    providers: [contentDensityObserverProviders()]
 })
-export class ActionSheetBodyComponent {
+export class ActionSheetBodyComponent implements AfterViewInit {
     /** Id of the Action Sheet Body. */
     @Input()
     actionSheetBodyId = `fd-action-sheet-body-${actionSheetBodyUniqueIdCounter++}`;
@@ -45,10 +58,12 @@ export class ActionSheetBodyComponent {
     @Input()
     ariaLabelledby: Nullable<string>;
 
+    @ViewChild('actionSheetElement') actionSheetElementRef: ElementRef<HTMLUListElement>;
+
     /** @hidden */
     constructor(
         private readonly _keyboardSupportService: KeyboardSupportService<ActionSheetItemComponent>,
-        readonly _contentDensityConsumer: ContentDensityConsumer
+        readonly _contentDensityObserver: ContentDensityObserver
     ) {}
 
     /** Handler for mouse events */
@@ -63,5 +78,19 @@ export class ActionSheetBodyComponent {
         if (this._keyboardSupportService.keyManager) {
             this._keyboardSupportService.onKeyDown(event);
         }
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this._contentDensityObserver
+            .consume({
+                contentDensitySettings: {
+                    modifiers: {
+                        [ContentDensityMode.COMPACT]: 'fd-action-sheet--compact'
+                    }
+                },
+                elementRef: () => this.actionSheetElementRef
+            })
+            .subscribe();
     }
 }

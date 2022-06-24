@@ -16,8 +16,8 @@ import { TableCellDirective } from './directives/table-cell.directive';
 import { FdTable } from './fd-table.interface';
 import { TableService } from './table.service';
 import {
-    ContentDensityConsumer,
-    contentDensityConsumerProviders,
+    ContentDensityObserver,
+    contentDensityObserverProviders,
     ContentDensityMode
 } from '@fundamental-ngx/core/content-density';
 
@@ -39,7 +39,7 @@ import {
     providers: [
         TableService,
         { provide: FdTable, useExisting: TableComponent },
-        contentDensityConsumerProviders({
+        contentDensityObserverProviders({
             modifiers: {
                 [ContentDensityMode.COMPACT]: 'fd-table--compact',
                 [ContentDensityMode.CONDENSED]: 'fd-table--condensed'
@@ -87,8 +87,10 @@ export class TableComponent implements AfterViewInit, OnDestroy, FdTable {
     constructor(
         private _tableService: TableService,
         private _cdr: ChangeDetectorRef,
-        private _contentDensityConsumer: ContentDensityConsumer
-    ) {}
+        private _contentDensityObserver: ContentDensityObserver
+    ) {
+        _contentDensityObserver.subscribe();
+    }
 
     /** @hidden */
     ngOnDestroy(): void {

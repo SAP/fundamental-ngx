@@ -14,8 +14,8 @@ import { FormStates } from '@fundamental-ngx/core/shared';
 import { Subscription } from 'rxjs';
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 import {
-    ContentDensityConsumer,
-    contentDensityConsumerProviders,
+    ContentDensityObserver,
+    contentDensityObserverProviders,
     ContentDensityMode
 } from '@fundamental-ngx/core/content-density';
 
@@ -23,7 +23,7 @@ import {
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-input-group-input]',
     providers: [
-        contentDensityConsumerProviders({
+        contentDensityObserverProviders({
             modifiers: { [ContentDensityMode.COMPACT]: 'fd-input--compact' }
         })
     ]
@@ -37,7 +37,9 @@ export class InputGroupInputDirective implements CssClassBuilder, OnInit, OnChan
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef, private _contentDensityConsumer: ContentDensityConsumer) {}
+    constructor(private _elementRef: ElementRef, private _contentDensityObserver: ContentDensityObserver) {
+        _contentDensityObserver.subscribe();
+    }
 
     /** @hidden */
     ngOnInit(): void {
@@ -78,7 +80,7 @@ export class InputGroupTextareaDirective {}
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-input-group-addon]',
     providers: [
-        contentDensityConsumerProviders({
+        contentDensityObserverProviders({
             modifiers: { [ContentDensityMode.COMPACT]: 'fd-input-group__addon--compact' }
         })
     ]
@@ -124,8 +126,10 @@ export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuil
     constructor(
         private _elementRef: ElementRef,
         private renderer: Renderer2,
-        private _contentDensityConsumer: ContentDensityConsumer
-    ) {}
+        private _contentDensityObserver: ContentDensityObserver
+    ) {
+        _contentDensityObserver.subscribe();
+    }
 
     /** @hidden */
     ngOnInit(): void {

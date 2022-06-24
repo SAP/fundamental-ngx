@@ -11,11 +11,6 @@ import {
 } from '@angular/core';
 import { KeyboardSupportItemInterface } from '@fundamental-ngx/core/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import {
-    ContentDensityConsumer,
-    contentDensityConsumerProviders,
-    ContentDensityMode
-} from '@fundamental-ngx/core/content-density';
 
 export interface ActionSheetClickEvent {
     shouldClose: boolean;
@@ -43,12 +38,7 @@ export interface ActionSheetClickEvent {
     host: {
         class: 'fd-action-sheet__item',
         role: 'none'
-    },
-    providers: [
-        contentDensityConsumerProviders({
-            supportedContentDensity: [ContentDensityMode.COMPACT, ContentDensityMode.COZY]
-        })
-    ]
+    }
 })
 export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     /** Sets text of button. */
@@ -83,7 +73,7 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     clicked = new EventEmitter<ActionSheetClickEvent>();
 
     /** @hidden */
-    constructor(private readonly _elementRef: ElementRef, readonly _contentDensityConsumer: ContentDensityConsumer) {}
+    constructor(private readonly _elementRef: ElementRef) {}
 
     /** @hidden */
     @HostListener('keydown', ['$event'])

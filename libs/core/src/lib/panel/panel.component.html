@@ -1,7 +1,7 @@
 <div
     class="fd-panel"
     [class.fd-panel--fixed]="fixed"
-    [class.fd-panel--compact]="_contentDensityConsumer.isCompact$ | async"
+    [class.fd-panel--compact]="_contentDensityObserver.isCompact$ | async"
     [class]="class"
 >
     <div class="fd-panel__header">

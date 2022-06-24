@@ -24,7 +24,7 @@ import { DOWN_ARROW, ENTER, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { SafeHtml } from '@angular/platform-browser';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundamental-ngx/core/content-density';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import NumberFormat = Intl.NumberFormat;
 
@@ -42,7 +42,7 @@ let stepInputUniqueId = 0;
             useExisting: forwardRef(() => StepInputComponent),
             multi: true
         },
-        contentDensityConsumerProviders(),
+        contentDensityObserverProviders(),
         registerFormItemControl(StepInputComponent)
     ],
     host: {
@@ -267,7 +267,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         @Inject(LOCALE_ID) locale,
         private _changeDetectorRef: ChangeDetectorRef,
         private readonly _liveAnnouncer: LiveAnnouncer,
-        readonly _contentDensityConsumer: ContentDensityConsumer
+        readonly _contentDensityObserver: ContentDensityObserver
     ) {
         this.locale = locale;
     }

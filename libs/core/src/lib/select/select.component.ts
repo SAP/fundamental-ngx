@@ -42,7 +42,7 @@ import { SelectKeyManagerService } from './select-key-manager.service';
 import { FdOptionSelectionChange, OptionComponent } from './option/option.component';
 import { SelectMobileComponent } from './select-mobile/select-mobile.component';
 import { SelectMobileModule } from './select-mobile/select-mobile.module';
-import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundamental-ngx/core/content-density';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 let selectUniqueId = 0;
 
@@ -77,7 +77,7 @@ export const SELECT_ITEM_HEIGHT_EM = 4;
         },
         registerFormItemControl(SelectComponent),
         SelectKeyManagerService,
-        contentDensityConsumerProviders()
+        contentDensityObserverProviders()
     ]
 })
 export class SelectComponent
@@ -390,7 +390,7 @@ export class SelectComponent
         @Optional() private readonly _dynamicComponentService: DynamicComponentService,
         @Optional() @Self() private readonly ngControl: NgControl,
         @Optional() private readonly _injector: Injector,
-        readonly _contentDensityConsumer: ContentDensityConsumer
+        readonly _contentDensityObserver: ContentDensityObserver
     ) {
         if (this.ngControl) {
             this.ngControl.valueAccessor = this;

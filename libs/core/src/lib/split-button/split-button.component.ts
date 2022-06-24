@@ -24,7 +24,7 @@ import { MenuComponent, MenuItemComponent } from '@fundamental-ngx/core/menu';
 
 import { SplitButtonActionTitle } from './split-button-utils/split-button.directives';
 import { MainAction } from './main-action';
-import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundamental-ngx/core/content-density';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { DestroyedService } from '@fundamental-ngx/core/utils';
 
 export const splitButtonTextClass = 'fd-button-split__text';
@@ -58,7 +58,7 @@ const splitButtonTextClasses = [splitButtonTextClass, splitButtonTextCompactClas
     styleUrls: ['./split-button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [contentDensityConsumerProviders()]
+    providers: [contentDensityObserverProviders()]
 })
 export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDestroy, AfterViewInit {
     /** The icon to include in the button. See the icon page for the list of icons. */
@@ -149,7 +149,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     constructor(
         private _cdRef: ChangeDetectorRef,
         private _destroy$: DestroyedService,
-        private _contentDensityConsumer: ContentDensityConsumer,
+        private _contentDensityObserver: ContentDensityObserver,
         private _renderer: Renderer2
     ) {}
 
@@ -192,7 +192,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._contentDensityConsumer.isCompact$
+        this._contentDensityObserver.isCompact$
             .pipe(tap(this._addButtonTextClass), takeUntil(this._destroy$))
             .subscribe();
     }

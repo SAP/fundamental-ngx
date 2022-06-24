@@ -20,7 +20,7 @@ import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import { ENTER, SPACE, TAB } from '@angular/cdk/keycodes';
 import { Nullable } from '@fundamental-ngx/core/shared';
-import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundamental-ngx/core/content-density';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 let fileUploaderInputUniqueId = 0;
 
@@ -43,7 +43,7 @@ let fileUploaderInputUniqueId = 0;
             multi: true
         },
         registerFormItemControl(FileUploaderComponent),
-        contentDensityConsumerProviders()
+        contentDensityObserverProviders()
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -161,7 +161,7 @@ export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, F
     constructor(
         private _fileUploadService: FileUploaderService,
         private _changeDetRef: ChangeDetectorRef,
-        readonly _contentDensityConsumer: ContentDensityConsumer
+        readonly _contentDensityObserver: ContentDensityObserver
     ) {}
 
     /** @hidden */

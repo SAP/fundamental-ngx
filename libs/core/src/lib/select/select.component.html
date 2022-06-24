@@ -3,7 +3,7 @@
 <ng-template #desktopTemplate>
     <div
         class="fd-select"
-        [class.fd-select--compact]="_contentDensityConsumer.isCompact"
+        [class.fd-select--compact]="_contentDensityObserver.isCompact"
         (keydown)="_handleKeydown($event)"
         (click)="toggle()"
     >
@@ -112,7 +112,7 @@
 <ng-template #mobileTemplate>
     <div
         class="fd-select"
-        [class.fd-select--compact]="_contentDensityConsumer.isCompact"
+        [class.fd-select--compact]="_contentDensityObserver.isCompact"
         (keydown)="_handleKeydown($event)"
         (click)="toggle()"
     >

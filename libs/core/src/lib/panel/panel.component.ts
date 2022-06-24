@@ -18,7 +18,7 @@ import { Subscription } from 'rxjs';
 import { PanelContentDirective } from './panel-content/panel-content.directive';
 import { RtlService } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
-import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundamental-ngx/core/content-density';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 let panelUniqueId = 0;
 let panelExpandUniqueId = 0;
@@ -35,7 +35,7 @@ let panelExpandUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['./panel.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [contentDensityConsumerProviders()]
+    providers: [contentDensityObserverProviders()]
 })
 export class PanelComponent implements OnInit, OnDestroy {
     /** User's custom classes */
@@ -85,7 +85,7 @@ export class PanelComponent implements OnInit, OnDestroy {
     constructor(
         private _cdRef: ChangeDetectorRef,
         private _elementRef: ElementRef,
-        readonly _contentDensityConsumer: ContentDensityConsumer,
+        readonly _contentDensityObserver: ContentDensityObserver,
         @Optional() private _rtlService: RtlService
     ) {}
 

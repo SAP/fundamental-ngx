@@ -53,7 +53,7 @@
                 [tokenizerFocusable]="false"
                 (moreClickedEvent)="_moreClicked()"
                 class="fd-multi-input-tokenizer-custom"
-                [class.fd-multi-input-tokenizer-custom--compact]="_contentDensityConsumer.isCompact$ | async"
+                [class.fd-multi-input-tokenizer-custom--compact]="_contentDensityObserver.isCompact$ | async"
                 tabindex="-1"
             >
                 <fd-token

@@ -27,7 +27,7 @@ import { TabsService } from './tabs.service';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { Nullable } from '@fundamental-ngx/core/shared';
-import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundamental-ngx/core/content-density';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 export type TabModes = 'icon-only' | 'process' | 'filter';
 
@@ -45,7 +45,7 @@ export type TabSizes = 's' | 'm' | 'l' | 'xl' | 'xxl';
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [TabsService, contentDensityConsumerProviders()]
+    providers: [TabsService, contentDensityObserverProviders()]
 })
 export class TabListComponent implements AfterContentInit, AfterViewInit, OnDestroy {
     /** Size of tab, it's mostly about adding spacing on tab container, available sizes 's' | 'm' | 'l' | 'xl' | 'xxl' */
@@ -143,7 +143,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
         private _tabsService: TabsService,
         private _changeDetectorRef: ChangeDetectorRef,
         private _elRef: ElementRef,
-        readonly _contentDensityConsumer: ContentDensityConsumer
+        readonly _contentDensityObserver: ContentDensityObserver
     ) {}
 
     /** @hidden */

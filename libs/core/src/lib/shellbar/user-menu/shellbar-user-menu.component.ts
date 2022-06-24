@@ -2,19 +2,16 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewCh
 import { ShellbarUser } from '../model/shellbar-user';
 import { ShellbarUserMenu } from '../model/shellbar-user-menu';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
-import { Placement } from '@fundamental-ngx/core/shared';
-import { PopoverFillMode, Nullable } from '@fundamental-ngx/core/shared';
-import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundamental-ngx/core/content-density';
+import { Nullable, Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
 
 /**
- * This Component extends popover component and passes all of the options and events from outside to popover component
+ * This Component extends popover component and passes all the options and events from outside to popover component
  * and Vice Versa
  * */
 @Component({
     selector: 'fd-shellbar-user-menu',
     templateUrl: './shellbar-user-menu.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [contentDensityConsumerProviders()]
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShellbarUserMenuComponent {
     /** The user data. */
@@ -67,8 +64,6 @@ export class ShellbarUserMenuComponent {
     /** Reference to Menu Component */
     @ViewChild(MenuComponent)
     menu: MenuComponent;
-
-    constructor(private _contentDensityConsumer: ContentDensityConsumer) {}
 
     /**
      * @hidden

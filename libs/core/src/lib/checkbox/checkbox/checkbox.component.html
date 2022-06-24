@@ -13,7 +13,6 @@
     [attr.aria-describedby]="ariaDescribedBy"
     [attr.aria-disabled]="disabled"
     [attr.aria-required]="required"
-    [class.fd-checkbox--compact]="_contentDensityConsumer.isCompact$ | async"
     [class]="state ? 'is-' + state : ''"
     (click)="_onInputClick($event)"
     (blur)="_onBlur()"
@@ -26,7 +25,6 @@
     [for]="inputId"
     [class]="labelClass"
     [attr.title]="title"
-    [class.fd-checkbox__label--compact]="_contentDensityConsumer.isCompact$ | async"
     [class.fd-checkbox__label--required]="required"
     (click)="_onLabelClick($event)"
 >

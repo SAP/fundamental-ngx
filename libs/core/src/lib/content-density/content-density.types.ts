@@ -41,14 +41,14 @@ export type ContentDensityModuleConfig = (
 ) &
     BaseContentDensityModuleConfig;
 
-export interface ContentDensityConsumerSettings {
+export interface ContentDensityObserverSettings {
     modifiers?: Partial<Record<ContentDensityMode, string>>;
     supportedContentDensity?: ContentDensityMode[];
     defaultContentDensity?: ContentDensityMode;
 }
 
-export interface ContentDensityConsumerTarget extends HasElementRef {
-    contentDensitySettings: ContentDensityConsumerSettings;
+export interface ContentDensityObserverTarget extends HasElementRef {
+    contentDensitySettings: ContentDensityObserverSettings;
 }
 
 export type ContentDensityCallbackFn = (target: ContentDensityMode) => void;

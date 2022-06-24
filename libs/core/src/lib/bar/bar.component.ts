@@ -11,8 +11,8 @@ import {
 import { Subscription } from 'rxjs';
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 import {
-    ContentDensityConsumer,
-    contentDensityConsumerProviders,
+    ContentDensityObserver,
+    contentDensityObserverProviders,
     ContentDensityMode
 } from '@fundamental-ngx/core/content-density';
 
@@ -32,7 +32,7 @@ export type BarDesignType = 'header' | 'subheader' | 'header-with-subheader' | '
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
-        contentDensityConsumerProviders({
+        contentDensityObserverProviders({
             modifiers: {
                 [ContentDensityMode.COZY]: 'fd-bar--cozy'
             },
@@ -73,7 +73,9 @@ export class BarComponent implements OnChanges, OnInit, CssClassBuilder, OnDestr
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef, private _contentDensityConsumer: ContentDensityConsumer) {}
+    constructor(private _elementRef: ElementRef, private _contentDensityObserver: ContentDensityObserver) {
+        this._contentDensityObserver.subscribe();
+    }
 
     /** @hidden */
     ngOnInit(): void {

@@ -19,8 +19,8 @@ import { TabModes, TabSizes } from '../tab-list.component';
 import { filter, takeUntil } from 'rxjs/operators';
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 import {
-    ContentDensityConsumer,
-    contentDensityConsumerProviders,
+    ContentDensityObserver,
+    contentDensityObserverProviders,
     ContentDensityMode
 } from '@fundamental-ngx/core/content-density';
 
@@ -30,7 +30,7 @@ import {
     template: ` <ng-content></ng-content>`,
     providers: [
         TabsService,
-        contentDensityConsumerProviders({ modifiers: { [ContentDensityMode.COMPACT]: 'fd-tabs--compact' } })
+        contentDensityObserverProviders({ modifiers: { [ContentDensityMode.COMPACT]: 'fd-tabs--compact' } })
     ],
     styleUrls: ['./tab-nav.component.scss'],
     encapsulation: ViewEncapsulation.None,
@@ -73,8 +73,10 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
     constructor(
         private _tabsService: TabsService,
         private _elementRef: ElementRef,
-        private _contentDensityConsumer: ContentDensityConsumer
-    ) {}
+        private _contentDensityObserver: ContentDensityObserver
+    ) {
+        this._contentDensityObserver.subscribe();
+    }
 
     /** @hidden */
     ngAfterContentInit(): void {

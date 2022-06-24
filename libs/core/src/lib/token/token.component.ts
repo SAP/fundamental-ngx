@@ -14,7 +14,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundamental-ngx/core/content-density';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 /**
  * A token is used to represent contextualizing information.
@@ -26,7 +26,7 @@ import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundam
     styleUrls: ['./token.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [contentDensityConsumerProviders()]
+    providers: [contentDensityObserverProviders()]
 })
 export class TokenComponent implements AfterViewInit, OnDestroy {
     /** Whether the token is disabled. */
@@ -92,7 +92,7 @@ export class TokenComponent implements AfterViewInit, OnDestroy {
     constructor(
         public elementRef: ElementRef,
         private _cdRef: ChangeDetectorRef,
-        readonly _contentDensityConsumer: ContentDensityConsumer
+        readonly _contentDensityObserver: ContentDensityObserver
     ) {}
 
     /** @hidden */

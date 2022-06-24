@@ -26,7 +26,7 @@ import {
 } from '@fundamental-ngx/core/shared';
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { NotificationGroupComponent } from '@fundamental-ngx/core/notification';
-import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundamental-ngx/core/content-density';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 /**
  * A component used to enforce a certain layout for the popover.
@@ -43,7 +43,7 @@ import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundam
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrls: ['./popover-body.component.scss'],
-    providers: [contentDensityConsumerProviders()]
+    providers: [contentDensityObserverProviders()]
 })
 export class PopoverBodyComponent {
     /** @hidden */
@@ -110,7 +110,7 @@ export class PopoverBodyComponent {
         readonly _elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
         private _renderer2: Renderer2,
-        readonly _contentDensityConsumer: ContentDensityConsumer
+        readonly _contentDensityObserver: ContentDensityObserver
     ) {}
 
     /** @hidden */

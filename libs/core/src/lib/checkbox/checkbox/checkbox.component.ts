@@ -1,4 +1,5 @@
 import {
+    AfterViewInit,
     Attribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -23,7 +24,11 @@ import equal from 'fast-deep-equal';
 import { Subscription } from 'rxjs';
 import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
-import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundamental-ngx/core/content-density';
+import {
+    ContentDensityMode,
+    ContentDensityObserver,
+    contentDensityObserverProviders
+} from '@fundamental-ngx/core/content-density';
 
 let checkboxUniqueId = 0;
 
@@ -42,11 +47,11 @@ export type FdCheckboxTypes = 'checked' | 'unchecked' | 'indeterminate' | 'force
             multi: true
         },
         registerFormItemControl(CheckboxComponent),
-        contentDensityConsumerProviders()
+        contentDensityObserverProviders()
     ],
     host: { '[attr.tabindex]': '-1' }
 })
-export class CheckboxComponent implements ControlValueAccessor, OnDestroy, FormItemControl {
+export class CheckboxComponent implements ControlValueAccessor, AfterViewInit, OnDestroy, FormItemControl {
     /** @hidden */
     @ViewChild('inputElement')
     inputElement: ElementRef<HTMLInputElement>;
@@ -169,10 +174,30 @@ export class CheckboxComponent implements ControlValueAccessor, OnDestroy, FormI
         @Attribute('tabIndexValue') public tabIndexValue: number = 0,
         private _changeDetectorRef: ChangeDetectorRef,
         private renderer: Renderer2,
-        readonly _contentDensityConsumer: ContentDensityConsumer,
+        readonly _contentDensityObserver: ContentDensityObserver,
         @Optional() @Inject(LIST_ITEM_COMPONENT) private _listItemComponent: ListItemInterface
     ) {
         this.tabIndexValue = tabIndexValue;
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this._contentDensityObserver
+            .consume(
+                {
+                    elementRef: () => this.inputElement,
+                    contentDensitySettings: {
+                        modifiers: { [ContentDensityMode.COMPACT]: 'fd-checkbox--compact' }
+                    }
+                },
+                {
+                    elementRef: () => this.labelElement,
+                    contentDensitySettings: {
+                        modifiers: { [ContentDensityMode.COMPACT]: 'fd-checkbox__label--compact' }
+                    }
+                }
+            )
+            .subscribe();
     }
 
     /** @hidden */

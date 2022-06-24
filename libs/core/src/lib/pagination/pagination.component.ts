@@ -26,7 +26,7 @@ import { FocusKeyManagerItemDirective, FocusKeyManagerListDirective, RtlService 
 
 import { Pagination } from './pagination.model';
 import { PaginationService } from './pagination.service';
-import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundamental-ngx/core/content-density';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 /** Constant representing the default number of items per page. */
 const DEFAULT_ITEMS_PER_PAGE = 10;
@@ -52,7 +52,7 @@ let paginationUniqueId = 0;
 @Component({
     selector: 'fd-pagination',
     templateUrl: './pagination.component.html',
-    providers: [PaginationService, contentDensityConsumerProviders()],
+    providers: [PaginationService, contentDensityObserverProviders()],
     host: {
         class: 'fd-pagination',
         '[class.fd-pagination--mobile]': 'mobile',
@@ -326,7 +326,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         private readonly _cdr: ChangeDetectorRef,
         private readonly _liveAnnouncer: LiveAnnouncer,
         @Optional() private readonly _rtlService: RtlService,
-        readonly _contentDensityConsumer: ContentDensityConsumer
+        readonly _contentDensityObserver: ContentDensityObserver
     ) {}
 
     /** @hidden */

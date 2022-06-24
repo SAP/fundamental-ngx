@@ -27,7 +27,7 @@ import { createMissingDateImplementationError } from './errors';
 import { TimeI18n } from './i18n/time-i18n';
 import { TimeColumnConfig } from './time-column/time-column-config';
 import { TimeColumnComponent } from './time-column/time-column.component';
-import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundamental-ngx/core/content-density';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 export type FdTimeActiveView = 'hour' | 'minute' | 'second' | 'meridian';
 
@@ -49,7 +49,7 @@ type MeridianViewItem = SelectableViewItem<Meridian>;
             useExisting: forwardRef(() => TimeComponent),
             multi: true
         },
-        contentDensityConsumerProviders()
+        contentDensityObserverProviders()
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
@@ -189,7 +189,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         private _timeI18nLabels: TimeI18n,
         // Use @Optional to avoid angular injection error message and throw our own which is more precise one
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
-        readonly _contentDensityConsumer: ContentDensityConsumer,
+        readonly _contentDensityObserver: ContentDensityObserver,
         @Optional() private _rtlService: RtlService
     ) {
         if (!_dateTimeAdapter) {

@@ -47,7 +47,7 @@ import {
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MultiInputMobileModule } from './multi-input-mobile/multi-input-mobile.module';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
-import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundamental-ngx/core/content-density';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -70,7 +70,7 @@ import { ContentDensityConsumer, contentDensityConsumerProviders } from '@fundam
         },
         MenuKeyboardService,
         registerFormItemControl(MultiInputComponent),
-        contentDensityConsumerProviders()
+        contentDensityObserverProviders()
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -338,7 +338,7 @@ export class MultiInputComponent
 
     /** @hidden */
     constructor(
-        readonly _contentDensityConsumer: ContentDensityConsumer,
+        readonly _contentDensityObserver: ContentDensityObserver,
         private readonly _elementRef: ElementRef,
         private readonly _changeDetRef: ChangeDetectorRef,
         private readonly _dynamicComponentService: DynamicComponentService,
