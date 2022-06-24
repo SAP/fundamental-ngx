@@ -61,6 +61,13 @@ jobs:
                   version: 7
                   run_install: false
 
+            - uses: pnpm/action-setup@v2.0.1
+              name: Install pnpm
+              id: pnpm-install
+              with:
+                  version: 7
+                  run_install: false
+
             - name: Get pnpm store directory
               id: pnpm-cache
               run: |
@@ -75,7 +82,7 @@ jobs:
                       ${{ runner.os }}-pnpm-store-
 
             - name: Install dependencies
-              run: pnpm install
+              run: pnpm install --shamefully-hoist --frozen-lockfile
 
     # lint commit name
     commit_lint:
@@ -92,12 +99,27 @@ jobs:
         needs: install
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/cache@v2
+            - uses: actions/checkout@v3
+
+            - uses: pnpm/action-setup@v2.0.1
+              name: Install pnpm
+              id: pnpm-install
               with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
-            - uses: actions/cache@v2
+                  version: 7
+                  run_install: false
+
+            - name: Get pnpm store directory
+              id: pnpm-cache
+              run: |
+                  echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+            - uses: actions/cache@v3
+              name: Setup pnpm cache
+              with:
+                  path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+                  key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+                  restore-keys: |
+                      ${{ runner.os }}-pnpm-store-
+            - uses: actions/cache@v3
               with:
                   path: dist/libs/core
                   key: dist-core-${{ github.run_id }}
@@ -108,16 +130,32 @@ jobs:
         needs: build-core
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/cache@v2
+            - uses: actions/checkout@v3
+
+            - uses: pnpm/action-setup@v2.0.1
+              name: Install pnpm
+              id: pnpm-install
               with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
-            - uses: actions/cache@v2
+                  version: 7
+                  run_install: false
+
+            - name: Get pnpm store directory
+              id: pnpm-cache
+              run: |
+                  echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+
+            - uses: actions/cache@v3
+              name: Setup pnpm cache
+              with:
+                  path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+                  key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+                  restore-keys: |
+                      ${{ runner.os }}-pnpm-store-
+            - uses: actions/cache@v3
               with:
                   path: dist/libs/core
                   key: dist-core-${{ github.run_id }}
-            - uses: actions/cache@v2
+            - uses: actions/cache@v3
               with:
                   path: dist/libs/platform
                   key: dist-platform-${{ github.run_id }}
@@ -128,16 +166,32 @@ jobs:
         needs: build-core
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/cache@v2
+            - uses: actions/checkout@v3
+
+            - uses: pnpm/action-setup@v2.0.1
+              name: Install pnpm
+              id: pnpm-install
               with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
-            - uses: actions/cache@v2
+                  version: 7
+                  run_install: false
+
+            - name: Get pnpm store directory
+              id: pnpm-cache
+              run: |
+                  echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+
+            - uses: actions/cache@v3
+              name: Setup pnpm cache
+              with:
+                  path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+                  key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+                  restore-keys: |
+                      ${{ runner.os }}-pnpm-store-
+            - uses: actions/cache@v3
               with:
                   path: dist/libs/core
                   key: dist-core-${{ github.run_id }}
-            - uses: actions/cache@v2
+            - uses: actions/cache@v3
               with:
                   path: dist/libs/platform
                   key: dist-platform-${{ github.run_id }}
@@ -148,16 +202,32 @@ jobs:
         needs: build-core
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/cache@v2
+            - uses: actions/checkout@v3
+
+            - uses: pnpm/action-setup@v2.0.1
+              name: Install pnpm
+              id: pnpm-install
               with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
-            - uses: actions/cache@v2
+                  version: 7
+                  run_install: false
+
+            - name: Get pnpm store directory
+              id: pnpm-cache
+              run: |
+                  echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+
+            - uses: actions/cache@v3
+              name: Setup pnpm cache
+              with:
+                  path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+                  key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+                  restore-keys: |
+                      ${{ runner.os }}-pnpm-store-
+            - uses: actions/cache@v3
               with:
                   path: dist/libs/core
                   key: dist-core-${{ github.run_id }}
-            - uses: actions/cache@v2
+            - uses: actions/cache@v3
               with:
                   path: dist/libs/platform
                   key: dist-platform-${{ github.run_id }}
@@ -168,12 +238,28 @@ jobs:
         needs: build-core
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/cache@v2
+            - uses: actions/checkout@v3
+
+            - uses: pnpm/action-setup@v2.0.1
+              name: Install pnpm
+              id: pnpm-install
               with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
-            - uses: actions/cache@v2
+                  version: 7
+                  run_install: false
+
+            - name: Get pnpm store directory
+              id: pnpm-cache
+              run: |
+                  echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+
+            - uses: actions/cache@v3
+              name: Setup pnpm cache
+              with:
+                  path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+                  key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+                  restore-keys: |
+                      ${{ runner.os }}-pnpm-store-
+            - uses: actions/cache@v3
               with:
                   path: dist/libs/core
                   key: dist-core-${{ github.run_id }}
@@ -185,20 +271,36 @@ jobs:
         needs: install
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/cache@v2
+            - uses: actions/checkout@v3
+
+            - uses: pnpm/action-setup@v2.0.1
+              name: Install pnpm
+              id: pnpm-install
               with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
-            - uses: actions/cache@v2
+                  version: 7
+                  run_install: false
+
+            - name: Get pnpm store directory
+              id: pnpm-cache
+              run: |
+                  echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+
+            - uses: actions/cache@v3
+              name: Setup pnpm cache
+              with:
+                  path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+                  key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+                  restore-keys: |
+                      ${{ runner.os }}-pnpm-store-
+            - uses: actions/cache@v3
               with:
                   path: dist/libs/core
                   key: dist-core-${{ github.run_id }}
-            - uses: actions/cache@v2
+            - uses: actions/cache@v3
               with:
                   path: dist/libs/platform
                   key: dist-platform-${{ github.run_id }}
-            - uses: actions/cache@v2
+            - uses: actions/cache@v3
               with:
                   path: dist/apps/docs
                   key: dist-docs-${{ github.run_id }}
@@ -217,11 +319,27 @@ jobs:
             matrix:
                 lib: [core, platform, moment-adapter, datetime-adapter, fn]
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/cache@v2
+            - uses: actions/checkout@v3
+
+            - uses: pnpm/action-setup@v2.0.1
+              name: Install pnpm
+              id: pnpm-install
               with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
+                  version: 7
+                  run_install: false
+
+            - name: Get pnpm store directory
+              id: pnpm-cache
+              run: |
+                  echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+
+            - uses: actions/cache@v3
+              name: Setup pnpm cache
+              with:
+                  path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+                  key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+                  restore-keys: |
+                      ${{ runner.os }}-pnpm-store-
             - run: npx nx test ${{ matrix.lib }} --watch false --code-coverage true --browsers=ChromeHeadless --runner cloud
             - run: npm run test:coveralls
 
@@ -234,11 +352,27 @@ jobs:
             matrix:
                 lib: [core, platform, docs, moment-adapter, fn, components-e2e]
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/cache@v2
+            - uses: actions/checkout@v3
+
+            - uses: pnpm/action-setup@v2.0.1
+              name: Install pnpm
+              id: pnpm-install
               with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
+                  version: 7
+                  run_install: false
+
+            - name: Get pnpm store directory
+              id: pnpm-cache
+              run: |
+                  echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+
+            - uses: actions/cache@v3
+              name: Setup pnpm cache
+              with:
+                  path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+                  key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+                  restore-keys: |
+                      ${{ runner.os }}-pnpm-store-
             - run: npx nx lint ${{ matrix.lib }} --runner cloud
 
     # run workspace checks
@@ -248,11 +382,27 @@ jobs:
         strategy:
             fail-fast: false
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/cache@v2
+            - uses: actions/checkout@v3
+
+            - uses: pnpm/action-setup@v2.0.1
+              name: Install pnpm
+              id: pnpm-install
               with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
+                  version: 7
+                  run_install: false
+
+            - name: Get pnpm store directory
+              id: pnpm-cache
+              run: |
+                  echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+
+            - uses: actions/cache@v3
+              name: Setup pnpm cache
+              with:
+                  path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+                  key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+                  restore-keys: |
+                      ${{ runner.os }}-pnpm-store-
             - run: npx nx run workspace-tools:test --runner cloud
 
     # check formatting
@@ -260,11 +410,27 @@ jobs:
         runs-on: ubuntu-latest
         needs: install
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/cache@v2
+            - uses: actions/checkout@v3
+
+            - uses: pnpm/action-setup@v2.0.1
+              name: Install pnpm
+              id: pnpm-install
               with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
+                  version: 7
+                  run_install: false
+
+            - name: Get pnpm store directory
+              id: pnpm-cache
+              run: |
+                  echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+
+            - uses: actions/cache@v3
+              name: Setup pnpm cache
+              with:
+                  path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+                  key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+                  restore-keys: |
+                      ${{ runner.os }}-pnpm-store-
             - run: git fetch origin main
             - run: npm run format:check -- --base=origin/main --head=HEAD
 
@@ -275,8 +441,8 @@ jobs:
         outputs:
             output_url: ${{ steps.firebase_hosting_preview.outputs.details_url }}
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/cache@v2
+            - uses: actions/checkout@v3
+            - uses: actions/cache@v3
               with:
                   path: dist/apps/docs
                   key: dist-docs-${{ github.run_id }}
@@ -307,14 +473,30 @@ jobs:
             matrix:
                 suite: ['suite platformA', 'suite platformB', 'suite platformC', 'suite coreA', 'suite coreB']
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
             - uses: browser-actions/setup-chrome@latest
               with:
                   chrome-version: stable
-            - uses: actions/cache@v2
+
+            - uses: pnpm/action-setup@v2.0.1
+              name: Install pnpm
+              id: pnpm-install
               with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
+                  version: 7
+                  run_install: false
+
+            - name: Get pnpm store directory
+              id: pnpm-cache
+              run: |
+                  echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+
+            - uses: actions/cache@v3
+              name: Setup pnpm cache
+              with:
+                  path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+                  key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+                  restore-keys: |
+                      ${{ runner.os }}-pnpm-store-
             - uses: actions/setup-node@v2
               with:
                   node-version: 15.11.0
@@ -360,10 +542,26 @@ jobs:
                   token: ${{ secrets.GHACTIONS }}
                   submodules: true
                   fetch-depth: 0
-            - uses: actions/cache@v2
+
+            - uses: pnpm/action-setup@v2.0.1
+              name: Install pnpm
+              id: pnpm-install
               with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
+                  version: 7
+                  run_install: false
+
+            - name: Get pnpm store directory
+              id: pnpm-cache
+              run: |
+                  echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+
+            - uses: actions/cache@v3
+              name: Setup pnpm cache
+              with:
+                  path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+                  key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+                  restore-keys: |
+                      ${{ runner.os }}-pnpm-store-
 
             - run: |
                   echo "STAGE_NAME=Release" >> $GITHUB_ENV
