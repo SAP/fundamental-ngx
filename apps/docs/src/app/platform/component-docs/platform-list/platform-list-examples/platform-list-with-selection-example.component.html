@@ -10,9 +10,5 @@
     [selection]="true"
     [ariaMultiselectable]="true"
 >
-    <fdp-standard-list-item
-        *fdpItemDef="let address"
-        [title]="address.name"
-        ariaDescribedBy="fd-list-header-12"
-    ></fdp-standard-list-item>
+    <fdp-standard-list-item *fdpItemDef="let address" [title]="address.name"></fdp-standard-list-item>
 </fdp-list>
