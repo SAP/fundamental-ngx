@@ -63,3 +63,5 @@ sauce_connect.log
 .firebase
 
 .angular
+package-lock.json
+yarn.lock

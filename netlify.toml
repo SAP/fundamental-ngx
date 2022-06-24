@@ -10,3 +10,6 @@
   environment = { NODE_VERSION = "14.17.0", PYTHON_VERSION="3.7", NPM_FLAGS="--prefix=/dev/null" }
   publish = "dist/apps/docs"
   command = "NODE_OPTIONS=--max_old_space_size=8192 npm run build-docs-netlify"
+
+[build.environment]
+  NPM_FLAGS="--prefix=/dev/null"
