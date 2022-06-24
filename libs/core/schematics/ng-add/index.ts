@@ -6,8 +6,8 @@ import { WorkspaceSchema } from '@schematics/angular/utility/workspace-models';
 import { defaultStyles } from './styles';
 import { checkPackageVersion, getPackageVersionFromPackageJson, hasPackage } from '../utils/package-utils';
 import { Schema } from './schema';
-import { getProjectFromWorkspace, getProjectTargetOptions } from '@angular/cdk/schematics';
 import { updateWorkspace } from '@schematics/angular/utility/workspace';
+import { getProjectTargetOptions } from '../utils/angular-json-utils';
 
 // Needed to queue dependent schematics
 let installTaskId: TaskId;
@@ -307,8 +307,7 @@ function addThemeToApplication(options: Schema): Rule {
                     `./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/${options.theme}/css_variables.css`,
                     `./node_modules/fundamental-styles/dist/theming/${options.theme}.css`
                 ];
-                const project = getProjectFromWorkspace(workspace, options.project);
-                const targetOptions = getProjectTargetOptions(project, 'build');
+                const targetOptions = getProjectTargetOptions(workspace.projects.get(options.project), 'build');
                 const styles = targetOptions.styles as (string | { input: string })[];
 
                 for (let i = 0; i < styles.length; i++) {
