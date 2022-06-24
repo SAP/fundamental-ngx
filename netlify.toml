@@ -11,5 +11,7 @@
   command = "NODE_OPTIONS=--max_old_space_size=8192 npm run build-docs-netlify"
 
 [build.environment]
-  NODE_VERSION = "15.11.0"
+  # Added to ignore npm installation.
+  NPM_FLAGS = "--version"
+  NODE_VERSION = "16.15.1"
   PYTHON_VERSION="3.7"
