@@ -8,7 +8,7 @@
 [build]
   ignore = 'sh ./ignore.sh'
   publish = "dist/apps/docs"
-  command = "rm -rf node_modules && NODE_OPTIONS=--max_old_space_size=8192 npx pnpm i --store=node_modules/.pnpm-store --frozen-lockfile && npm run build-docs-netlify"
+  command = "NODE_OPTIONS=--max_old_space_size=8192 npx pnpm i --store=node_modules/.pnpm-store --frozen-lockfile && npm run build-docs-netlify"
 
 [build.environment]
   NPM_FLAGS = "--version" # prevent Netlify npm install
