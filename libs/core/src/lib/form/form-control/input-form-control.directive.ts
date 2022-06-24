@@ -20,5 +20,7 @@ import {
     }
 })
 export class InputFormControlDirective {
-    constructor(readonly _contentDensityObserver: ContentDensityObserver) {}
+    constructor(private _contentDensityObserver: ContentDensityObserver) {
+        _contentDensityObserver.subscribe();
+    }
 }

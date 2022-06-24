@@ -20,5 +20,7 @@ import {
     }
 })
 export class TextareaFormControlDirective {
-    constructor(readonly _contentDensityObserver: ContentDensityObserver) {}
+    constructor(private _contentDensityObserver: ContentDensityObserver) {
+        _contentDensityObserver.subscribe();
+    }
 }
