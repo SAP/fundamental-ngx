@@ -37,12 +37,7 @@
                 [fdMenuTrigger]="optionsMenu"
             ></button>
 
-            <fd-menu
-                #optionsMenu
-                fdCozy
-                [mobile]="true"
-                [mobileConfig]="{ title: 'Options', hasCloseButton: true }"
-            >
+            <fd-menu #optionsMenu fdCozy [mobile]="true" [mobileConfig]="{ title: 'Options', hasCloseButton: true }">
                 <li fd-menu-item [submenu]="themeSubmenu">
                     <div fd-menu-interactive>
                         <span fd-menu-title>Themes</span>
@@ -181,17 +176,17 @@
 
 <ng-template #densitiesTemplate>
     <li fd-menu-item>
-        <div fd-menu-interactive (click)="selectDensity('cozy')">
+        <div fd-menu-interactive (click)="selectDensity(ContentDensityMode.COZY)">
             <span fd-menu-title>Cozy</span>
         </div>
     </li>
     <li fd-menu-item>
-        <div fd-menu-interactive (click)="selectDensity('condensed')">
+        <div fd-menu-interactive (click)="selectDensity(ContentDensityMode.CONDENSED)">
             <span fd-menu-title>Condensed</span>
         </div>
     </li>
     <li fd-menu-item>
-        <div fd-menu-interactive (click)="selectDensity('compact')">
+        <div fd-menu-interactive (click)="selectDensity(ContentDensityMode.COMPACT)">
             <span fd-menu-title>Compact</span>
         </div>
     </li>
