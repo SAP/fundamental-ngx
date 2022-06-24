@@ -1,4 +1,11 @@
 
+### [0.35.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.35.1-rc.1...v0.35.1-rc.2) (2022-06-24)
+
+
+### Bug Fixes
+
+* **core:** cdk reference in schematics ([#8274](https://github.com/SAP/fundamental-ngx/issues/8274)) ([6e737e1](https://github.com/SAP/fundamental-ngx/commit/6e737e13f18b99c90d59054b78c7b2ce152cdc19))
+
 ### [0.35.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.35.1-rc.0...v0.35.1-rc.1) (2022-06-24)
 
 
