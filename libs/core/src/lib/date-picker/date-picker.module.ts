@@ -9,9 +9,11 @@ import { DatePickerComponent } from './date-picker.component';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { FormMessageModule } from '@fundamental-ngx/core/form';
+import { DeprecatedDatePickerCompactDirective } from './deprecated-date-picker-compact.directive';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
-    declarations: [DatePickerComponent],
+    declarations: [DatePickerComponent, DeprecatedDatePickerCompactDirective],
     imports: [
         CommonModule,
         IconModule,
@@ -20,8 +22,9 @@ import { FormMessageModule } from '@fundamental-ngx/core/form';
         FormsModule,
         InputGroupModule,
         ButtonModule,
-        FormMessageModule
+        FormMessageModule,
+        ContentDensityModule
     ],
-    exports: [DatePickerComponent]
+    exports: [DatePickerComponent, DeprecatedDatePickerCompactDirective, ContentDensityModule]
 })
 export class DatePickerModule {}

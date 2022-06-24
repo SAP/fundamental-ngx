@@ -131,7 +131,7 @@
 <code-example [exampleFiles]="collapsibleTab"></code-example>
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
-    <fd-tab-list [mode]="data.properties.items.mode" [compact]="data.properties.items.compact">
+    <fd-tab-list [mode]="data.properties.items.mode" [fdCompact]="data.properties.items.compact">
         <fd-tab
             [header]="data.properties.items.mode === 'filter'"
             [title]="data.properties.item1.title"

@@ -1,4 +1,5 @@
 import {
+    AfterViewInit,
     Attribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -10,7 +11,6 @@ import {
     Inject,
     Input,
     OnDestroy,
-    OnInit,
     Optional,
     Output,
     Renderer2,
@@ -18,13 +18,17 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { FdCheckboxValues } from './fd-checkbox-values.interface';
-import { LIST_ITEM_COMPONENT, ListItemInterface, ContentDensityService } from '@fundamental-ngx/core/utils';
+import { FD_CHECKBOX_VALUES_DEFAULT, FdCheckboxValues } from './fd-checkbox-values.interface';
+import { LIST_ITEM_COMPONENT, ListItemInterface } from '@fundamental-ngx/core/utils';
 import equal from 'fast-deep-equal';
 import { Subscription } from 'rxjs';
 import { FormStates, Nullable } from '@fundamental-ngx/core/shared';
-import { registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
-import { FD_CHECKBOX_VALUES_DEFAULT } from './fd-checkbox-values.interface';
+import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
+import {
+    ContentDensityMode,
+    ContentDensityObserver,
+    contentDensityObserverProviders
+} from '@fundamental-ngx/core/content-density';
 
 let checkboxUniqueId = 0;
 
@@ -42,11 +46,12 @@ export type FdCheckboxTypes = 'checked' | 'unchecked' | 'indeterminate' | 'force
             useExisting: forwardRef(() => CheckboxComponent),
             multi: true
         },
-        registerFormItemControl(CheckboxComponent)
+        registerFormItemControl(CheckboxComponent),
+        contentDensityObserverProviders()
     ],
     host: { '[attr.tabindex]': '-1' }
 })
-export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestroy, FormItemControl {
+export class CheckboxComponent implements ControlValueAccessor, AfterViewInit, OnDestroy, FormItemControl {
     /** @hidden */
     @ViewChild('inputElement')
     inputElement: ElementRef<HTMLInputElement>;
@@ -64,6 +69,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
     set value(value: any) {
         this.writeValue(value);
     }
+
     get value(): any {
         return this.checkboxValue;
     }
@@ -100,10 +106,6 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
     @Input()
     disabled: boolean;
 
-    /** Allows to minimize control to compact mode. */
-    @Input()
-    compact?: boolean;
-
     /** Enables controls third state. */
     @Input()
     tristate = false;
@@ -128,6 +130,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
     get values(): FdCheckboxValues {
         return this._values;
     }
+
     set values(checkboxValues: FdCheckboxValues) {
         this._values = { ...FD_CHECKBOX_VALUES_DEFAULT, ...(checkboxValues ?? {}) };
     }
@@ -171,22 +174,30 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
         @Attribute('tabIndexValue') public tabIndexValue: number = 0,
         private _changeDetectorRef: ChangeDetectorRef,
         private renderer: Renderer2,
-        @Optional() private _contentDensityService: ContentDensityService,
+        readonly _contentDensityObserver: ContentDensityObserver,
         @Optional() @Inject(LIST_ITEM_COMPONENT) private _listItemComponent: ListItemInterface
     ) {
         this.tabIndexValue = tabIndexValue;
     }
 
     /** @hidden */
-    ngOnInit(): void {
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                    this._changeDetectorRef.markForCheck();
-                })
-            );
-        }
+    ngAfterViewInit(): void {
+        this._contentDensityObserver
+            .consume(
+                {
+                    elementRef: () => this.inputElement,
+                    contentDensitySettings: {
+                        modifiers: { [ContentDensityMode.COMPACT]: 'fd-checkbox--compact' }
+                    }
+                },
+                {
+                    elementRef: () => this.labelElement,
+                    contentDensitySettings: {
+                        modifiers: { [ContentDensityMode.COMPACT]: 'fd-checkbox__label--compact' }
+                    }
+                }
+            )
+            .subscribe();
     }
 
     /** @hidden */
@@ -259,6 +270,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
         }
         this.focusChange.emit(false);
     }
+
     /** @hidden handles focus event */
     _onFocus(): void {
         this.focusChange.emit(true);

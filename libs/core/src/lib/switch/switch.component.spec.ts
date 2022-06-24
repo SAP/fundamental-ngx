@@ -4,7 +4,6 @@ import { SwitchComponent } from './switch.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ChangeDetectorRef } from '@angular/core';
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
 
 describe('SwitchComponent', () => {
     let component: SwitchComponent;
@@ -16,8 +15,7 @@ describe('SwitchComponent', () => {
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 imports: [CommonModule, FormsModule],
-                declarations: [SwitchComponent],
-                providers: [ContentDensityService]
+                declarations: [SwitchComponent]
             }).compileComponents();
         })
     );
@@ -37,11 +35,6 @@ describe('SwitchComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
-    });
-
-    it('should handle content density when compact input is not provided', () => {
-        component.ngOnInit();
-        expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 
     it('should accept custom id', () => {
@@ -86,15 +79,6 @@ describe('SwitchComponent', () => {
         component.focus();
 
         expect(input.focus).toHaveBeenCalled();
-    });
-
-    it('should display compact', () => {
-        component.compact = true;
-
-        detectChangesOnPush();
-
-        const switchComp = fixture.nativeElement.querySelector('.fd-switch');
-        expect(switchComp.classList).toContain('fd-switch--compact');
     });
 
     it('should display semantic', () => {

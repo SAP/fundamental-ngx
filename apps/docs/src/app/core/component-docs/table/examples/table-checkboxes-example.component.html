@@ -1,5 +1,5 @@
 <span>Table With Checkbox Cozy Mode</span>
-<table fd-table [compact]="false" aria-label="With Checkboxes Cozy Mode">
+<table fd-table fdCozy aria-label="With Checkboxes Cozy Mode">
     <thead fd-table-header>
         <tr fd-table-row>
             <th fd-table-cell>
@@ -46,7 +46,7 @@
 <br />
 
 <span>Table With Checkbox Compact Mode</span>
-<table fd-table [compact]="true" aria-label="With Checkboxes Compact Mode">
+<table fd-table fdCompact aria-label="With Checkboxes Compact Mode">
     <thead fd-table-header>
         <tr fd-table-row>
             <th fd-table-cell>
@@ -54,7 +54,6 @@
                     aria-label="Select all"
                     title="Select all"
                     [tristate]="true"
-                    [compact]="true"
                     [ngModel]="checkboxValueCompact"
                     (ngModelChange)="selectAll($event, 'compact')"
                 ></fd-checkbox>
@@ -74,10 +73,9 @@
         >
             <td fd-table-cell>
                 <fd-checkbox
+                    [value]="tableRowsCompact[i].checked"
                     [attr.aria-label]="'Select row ' + (i + 1)"
                     [attr.title]="'Select row ' + (i + 1)"
-                    [compact]="true"
-                    [value]="tableRowsCompact[i].checked"
                     (click)="select(i, $event, 'compact')"
                 ></fd-checkbox>
             </td>
@@ -101,7 +99,7 @@
 <br />
 
 <span>Table With Checkbox Condensed Mode</span>
-<table fd-table [condensed]="true" aria-label="With Checkboxes Condensed Mode">
+<table fd-table fdCondensed aria-label="With Checkboxes Condensed Mode">
     <thead fd-table-header>
         <tr fd-table-row>
             <th fd-table-cell>
@@ -109,7 +107,6 @@
                     aria-label="Select all"
                     title="Select all"
                     [tristate]="true"
-                    [compact]="true"
                     [ngModel]="checkboxValueCondensed"
                     (ngModelChange)="selectAll($event, 'condensed')"
                 ></fd-checkbox>
@@ -129,10 +126,9 @@
         >
             <td fd-table-cell>
                 <fd-checkbox
+                    [value]="tableRowsCondensed[i].checked"
                     [attr.aria-label]="'Select row ' + (i + 1)"
                     [attr.title]="'Select row ' + (i + 1)"
-                    [compact]="true"
-                    [value]="tableRowsCondensed[i].checked"
                     (click)="select(i, $event, 'condensed')"
                 ></fd-checkbox>
             </td>

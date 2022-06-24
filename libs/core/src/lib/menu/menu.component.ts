@@ -23,7 +23,7 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { ContentDensityService, DynamicComponentService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService } from '@fundamental-ngx/core/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { BasePopoverClass, PopoverService } from '@fundamental-ngx/core/popover';
@@ -34,6 +34,7 @@ import { MenuMobileModule } from './menu-mobile/menu-mobile.module';
 import { MenuService } from './services/menu.service';
 import { MENU_COMPONENT, MenuInterface } from './menu.interface';
 import { MenuItemComponent } from './menu-item/menu-item.component';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 let menuUniqueId = 0;
 
@@ -46,7 +47,7 @@ let menuUniqueId = 0;
     styleUrls: ['menu.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [MenuService, PopoverService]
+    providers: [MenuService, PopoverService, contentDensityObserverProviders()]
 })
 export class MenuComponent
     extends BasePopoverClass
@@ -63,10 +64,6 @@ export class MenuComponent
     /** Whether the popover is disabled. */
     @Input()
     disabled = false;
-
-    /** Display menu in compact mode */
-    @Input()
-    compact?: boolean;
 
     /** Whether the popover should be focusTrapped. */
     @Input()
@@ -132,22 +129,14 @@ export class MenuComponent
         private readonly _popoverService: PopoverService,
         private readonly _injector: Injector,
         private readonly _viewContainerRef: ViewContainerRef,
-        @Optional() private readonly _contentDensityService: ContentDensityService,
-        @Optional() private readonly _dynamicComponentService: DynamicComponentService
+        @Optional() private readonly _dynamicComponentService: DynamicComponentService,
+        readonly _contentDensityObserver: ContentDensityObserver
     ) {
         super();
     }
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                })
-            );
-        }
-
         /** keep isOpen up to date */
         this.isOpenChange.subscribe((isOpen) => {
             this.isOpen = isOpen;

@@ -11,7 +11,7 @@
                 aria-label="action"
                 fd-button
                 fdType="transparent"
-                [compact]="true"
+                fdCompact
                 glyph="action-settings"
                 (click)="onClick()"
             ></button>
@@ -28,29 +28,17 @@
         ariaLabel="Feed list item example"
     >
         <fd-feed-list-action>
-            <fd-action-sheet [compact]="true" #actionSheet>
+            <fd-action-sheet fdCompact #actionSheet>
                 <fd-action-sheet-control>
-                    <button fd-button [compact]="true" glyph="overflow" fdType="transparent" title="Actions"></button>
+                    <button fd-button fdCompact glyph="overflow" fdType="transparent" title="Actions"></button>
                 </fd-action-sheet-control>
 
                 <fd-action-sheet-body>
+                    <li fd-action-sheet-item fdCompact label="Edit" glyph="edit" (click)="actionSheet.close()"></li>
+                    <li fd-action-sheet-item fdCompact label="Share" glyph="share" (click)="actionSheet.close()"></li>
                     <li
                         fd-action-sheet-item
-                        [compact]="true"
-                        label="Edit"
-                        glyph="edit"
-                        (click)="actionSheet.close()"
-                    ></li>
-                    <li
-                        fd-action-sheet-item
-                        [compact]="true"
-                        label="Share"
-                        glyph="share"
-                        (click)="actionSheet.close()"
-                    ></li>
-                    <li
-                        fd-action-sheet-item
-                        [compact]="true"
+                        fdCompact
                         label="Delete"
                         glyph="delete"
                         [negative]="true"

@@ -2,11 +2,10 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewCh
 import { ShellbarUser } from '../model/shellbar-user';
 import { ShellbarUserMenu } from '../model/shellbar-user-menu';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
-import { Placement } from '@fundamental-ngx/core/shared';
-import { PopoverFillMode, Nullable } from '@fundamental-ngx/core/shared';
+import { Nullable, Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
 
 /**
- * This Component extends popover component and passes all of the options and events from outside to popover component
+ * This Component extends popover component and passes all the options and events from outside to popover component
  * and Vice Versa
  * */
 @Component({
@@ -45,10 +44,6 @@ export class ShellbarUserMenuComponent {
     /** Whether the popover should close when the escape key is pressed. */
     @Input()
     closeOnEscapeKey = true;
-
-    /** Display menu in compact mode */
-    @Input()
-    compact = false;
 
     /** Whether the popover should close when a click is made outside its boundaries. */
     @Input()

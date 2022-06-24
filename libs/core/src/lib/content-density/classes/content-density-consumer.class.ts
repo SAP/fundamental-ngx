@@ -1,5 +1,5 @@
 import { BehaviorSubject, distinctUntilChanged, finalize, map, Observable, Subscription, takeUntil, tap } from 'rxjs';
-import { ContentDensityCallbackFn, ContentDensityConsumerTarget, ContentDensityMode } from '../content-density.types';
+import { ContentDensityCallbackFn, ContentDensityObserverTarget, ContentDensityMode } from '../content-density.types';
 import { isCompact, isCondensed, isCozy } from '../helpers/density-type-checkers';
 import { ChangeDetectorRef } from '@angular/core';
 import { contentDensityCallbackFactory } from '../helpers/content-density-change-callback-factory';
@@ -86,7 +86,7 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
      * Pass consumers callback function, or configuration object to be called on density change
      */
     consume(
-        ...consumerConfigs: Array<ContentDensityConsumerTarget | ContentDensityCallbackFn>
+        ...consumerConfigs: Array<ContentDensityObserverTarget | ContentDensityCallbackFn>
     ): ContentDensityObserver {
         consumerConfigs.forEach((consumerConfig) => {
             const callback = contentDensityCallbackFactory(consumerConfig);
@@ -100,7 +100,7 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
      * Remove consumer callback from list of callbacks
      */
     removeConsumer(
-        ...consumerConfigs: Array<ContentDensityConsumerTarget | ContentDensityCallbackFn>
+        ...consumerConfigs: Array<ContentDensityObserverTarget | ContentDensityCallbackFn>
     ): ContentDensityObserver {
         consumerConfigs.forEach((consumerConfig) => {
             this._callbacks.delete(consumerConfig);

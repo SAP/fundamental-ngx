@@ -6,7 +6,6 @@ import { CommonModule } from '@angular/common';
 import { FileUploaderSelectDirective } from './directives/file-uploader-select.directive';
 import { FileUploaderDragndropDirective } from './directives/file-uploader-dragndrop.directive';
 import { ButtonModule } from '../button/button.module';
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
 import { ChangeDetectorRef } from '@angular/core';
 
 interface MockFile extends File {
@@ -21,8 +20,7 @@ describe('FileUploaderComponent', () => {
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 declarations: [FileUploaderComponent, FileUploaderSelectDirective, FileUploaderDragndropDirective],
-                imports: [CommonModule, FormsModule, ButtonModule],
-                providers: [ContentDensityService]
+                imports: [CommonModule, FormsModule, ButtonModule]
             }).compileComponents();
         })
     );
@@ -40,11 +38,6 @@ describe('FileUploaderComponent', () => {
     it('should setDisabledState', () => {
         component.setDisabledState(true);
         expect(component.disabled).toBeTruthy();
-    });
-
-    it('should handle content density when compact input is not provided', () => {
-        component.ngOnInit();
-        expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 
     it('should selectHandler with no maxFileSize', () => {

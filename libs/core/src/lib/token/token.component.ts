@@ -7,8 +7,6 @@ import {
     EventEmitter,
     Input,
     OnDestroy,
-    OnInit,
-    Optional,
     Output,
     TemplateRef,
     ViewChild,
@@ -16,7 +14,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 /**
  * A token is used to represent contextualizing information.
@@ -27,16 +25,13 @@ import { ContentDensityService } from '@fundamental-ngx/core/utils';
     templateUrl: './token.component.html',
     styleUrls: ['./token.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [contentDensityObserverProviders()]
 })
-export class TokenComponent implements OnInit, AfterViewInit, OnDestroy {
+export class TokenComponent implements AfterViewInit, OnDestroy {
     /** Whether the token is disabled. */
     @Input()
     disabled = false;
-
-    /** Whether the token is compact. */
-    @Input()
-    compact?: boolean;
 
     /** @hidden */
     @ViewChild('tokenWrapperElement')
@@ -97,21 +92,8 @@ export class TokenComponent implements OnInit, AfterViewInit, OnDestroy {
     constructor(
         public elementRef: ElementRef,
         private _cdRef: ChangeDetectorRef,
-        @Optional() private _contentDensityService: ContentDensityService
+        readonly _contentDensityObserver: ContentDensityObserver
     ) {}
-
-    /** @hidden */
-    /** @hidden */
-    ngOnInit(): void {
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                    this._cdRef.markForCheck();
-                })
-            );
-        }
-    }
 
     /** @hidden */
     ngAfterViewInit(): void {

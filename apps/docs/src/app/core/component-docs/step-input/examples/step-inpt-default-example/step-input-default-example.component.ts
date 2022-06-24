@@ -12,7 +12,7 @@ import { Component } from '@angular/core';
 
             <div class="step-input-example">
                 <label fd-form-label for="compat-input">Compact</label>
-                <fd-step-input inputId="compat-input" [(value)]="value2" [compact]="true"></fd-step-input>
+                <fd-step-input inputId="compat-input" [(value)]="value2" fdCompact></fd-step-input>
                 <small>Value: {{ value2 }}</small>
             </div>
         </div>

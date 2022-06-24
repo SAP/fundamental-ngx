@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ComboboxComponent, ComboboxModule } from '@fundamental-ngx/core/combobox';
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY, DynamicComponentService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService } from '@fundamental-ngx/core/utils';
 
 describe('ComboboxComponent', () => {
     let component: ComboboxComponent;
@@ -11,7 +11,7 @@ describe('ComboboxComponent', () => {
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 imports: [ComboboxModule],
-                providers: [DynamicComponentService, ContentDensityService]
+                providers: [DynamicComponentService]
             }).compileComponents();
         })
     );
@@ -52,11 +52,6 @@ describe('ComboboxComponent', () => {
         component.inputText = 'someValue';
         expect(component.onChange).toHaveBeenCalledWith('someValue');
         expect(component.onTouched).toHaveBeenCalled();
-    });
-
-    it('should handle content density when compact input is not provided', () => {
-        component.ngOnInit();
-        expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 
     it('should write value not on dropdown mode', () => {

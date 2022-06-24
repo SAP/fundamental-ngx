@@ -8,7 +8,7 @@
                             fd-button
                             fdType="transparent"
                             id="menu-mobile-navigate-back"
-                            [compact]="false"
+                            fdCozy
                             [attr.aria-label]="'Go to previous menu level: ' + title"
                             [glyph]="navigationIcon$ | async"
                             (click)="backToParentLevel()"
@@ -55,7 +55,7 @@
 </ng-template>
 
 <ng-template #subMenuTemplate>
-    <nav class="fd-menu fd-menu--mobile" [class.fd-menu--compact]="false">
+    <nav class="fd-menu fd-menu--mobile">
         <ul class="fd-menu__sublist">
             <ng-container *ngTemplateOutlet="view || null"></ng-container>
         </ul>

@@ -2,19 +2,19 @@ import { ChangeDetectorRef, ElementRef, Optional, Provider } from '@angular/core
 import { map, Observable } from 'rxjs';
 import { DestroyedService } from '@fundamental-ngx/core/utils';
 import { GlobalContentDensityService } from '../services/global-content-density.service';
-import { ContentDensityConsumerSettings, ContentDensityMode, LocalContentDensityMode } from '../content-density.types';
+import { ContentDensityObserverSettings, ContentDensityMode, LocalContentDensityMode } from '../content-density.types';
 import { CONTENT_DENSITY_DIRECTIVE } from '../tokens/content-density-directive';
 import { ContentDensityObserver } from '../classes/content-density-consumer.class';
-import { defaultContentDensityConsumerConfigs } from '../variables/default-content-density-consumer-config';
+import { defaultContentDensityObserverConfigs } from '../variables/default-content-density-consumer-config';
 import { getChangesSource$ } from '../helpers/get-changes-source.provider';
 
 /**
  * Creates provider for ContentDensityObserver
  * @param providedConfiguration
  */
-export function contentDensityObserver(providedConfiguration?: ContentDensityConsumerSettings): Provider {
-    const configuration: Required<ContentDensityConsumerSettings> = {
-        ...defaultContentDensityConsumerConfigs,
+export function contentDensityObserver(providedConfiguration?: ContentDensityObserverSettings): Provider {
+    const configuration: Required<ContentDensityObserverSettings> = {
+        ...defaultContentDensityObserverConfigs,
         ...(providedConfiguration || {})
     };
 
@@ -77,7 +77,7 @@ export function contentDensityObserver(providedConfiguration?: ContentDensityCon
 /**
  * Creates provider for ContentDensityObserver and adds DestroyedService provider
  */
-export function contentDensityObserverProviders(params?: ContentDensityConsumerSettings): Provider[] {
+export function contentDensityObserverProviders(params?: ContentDensityObserverSettings): Provider[] {
     const providedConfiguration = params || {};
     return [DestroyedService, contentDensityObserver(providedConfiguration)];
 }

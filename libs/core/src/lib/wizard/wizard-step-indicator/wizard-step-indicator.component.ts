@@ -5,15 +5,12 @@ import {
     EventEmitter,
     Input,
     OnDestroy,
-    OnInit,
-    Optional,
     Output,
     ViewChild
 } from '@angular/core';
 import { WizardStepComponent } from '../wizard-step/wizard-step.component';
 import { ActionSheetComponent } from '@fundamental-ngx/core/action-sheet';
 import { Subscription } from 'rxjs';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
 
 @Component({
@@ -21,18 +18,12 @@ import { Nullable } from '@fundamental-ngx/core/shared';
     templateUrl: './wizard-step-indicator.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WizardStepIndicatorComponent implements OnInit, OnDestroy {
+export class WizardStepIndicatorComponent implements OnDestroy {
     /**
      * The icon to use for this step.
      */
     @Input()
     glyph: Nullable<string>;
-
-    /**
-     * Whether or not the step indicator (specifically, the action sheet) is compact.
-     */
-    @Input()
-    compact?: boolean;
 
     /**
      * Event emitted when this step indicator is clicked.
@@ -49,19 +40,7 @@ export class WizardStepIndicatorComponent implements OnInit, OnDestroy {
     /** @hidden */
     private _subscriptions = new Subscription();
 
-    constructor(private _cdRef: ChangeDetectorRef, @Optional() private _contentDensityService: ContentDensityService) {}
-
-    /** @hidden */
-    ngOnInit(): void {
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                    this._cdRef.markForCheck();
-                })
-            );
-        }
-    }
+    constructor(private _cdRef: ChangeDetectorRef) {}
 
     /** @hidden */
     ngOnDestroy(): void {
