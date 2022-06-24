@@ -13,7 +13,6 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
                 [clearBorder]="true"
                 [forceOverflow]="true"
                 [shouldOverflow]="true"
-                [size]="!_contentDensityObserver.isCompact ? 'cozy' : 'compact'"
             >
                 <div fd-toolbar-item>
                     <ng-container *ngTemplateOutlet="templateContentRef"></ng-container>

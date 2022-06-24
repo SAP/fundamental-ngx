@@ -65,10 +65,6 @@ export class BarComponent implements OnChanges, OnInit, CssClassBuilder, OnDestr
     @Input()
     size: SizeType = '';
 
-    /** Whether to apply cozy mode to the Bar. */
-    @Input()
-    cozy?: boolean;
-
     /** @hidden */
     private _subscriptions = new Subscription();
 
