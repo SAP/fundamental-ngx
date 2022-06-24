@@ -29,7 +29,7 @@
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>the background design of the component
+				<p>The background design of the component
 					Options include: &#39;solid&#39; | &#39;translucent&#39; | &#39;transparent&#39;
 				The default is set to &#39;solid&#39;</p>
 			</div>
@@ -46,7 +46,7 @@
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>user defined onResize function</p>
+				<p>User-defined onResize function</p>
 			</div>
 		</div>
 		<div class="tsd-type-declaration">
@@ -60,7 +60,7 @@
 						<li class="tsd-description">
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>user defined onResize function</p>
+									<p>User-defined onResize function</p>
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -81,11 +81,26 @@
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>the layout of the component
+				<p>The layout of the component
 					Options include: &#39;OneColumnStartFullScreen&#39; | &#39;OneColumnMidFullScreen&#39; |
 					&#39;OneColumnEndFullScreen&#39; | &#39;TwoColumnsStartExpanded&#39; | &#39;TwoColumnsMidExpanded&#39; |
 					&#39;TwoColumnsEndExpanded&#39; | &#39;ThreeColumnsMidExpanded&#39; | &#39;ThreeColumnsEndExpanded&#39; |
 				&#39;ThreeColumnsStartMinimized&#39; | &#39;ThreeColumnsEndMinimized&#39;</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="layoutDefinitions" class="tsd-anchor"></a>
+		<h3>layout<wbr>Definitions</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">layout<wbr>Definitions<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FlexibleColumnLayoutDefinition</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Mapping of the layout name and the column layout in %</p>
 			</div>
 		</div>
 	</section>
@@ -100,7 +115,7 @@
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>user defined break point for LG screens
+				<p>User-defined break point for LG screens
 				the default (Fiori 3) value is 1280</p>
 			</div>
 		</div>
@@ -116,8 +131,8 @@
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>user defined break point for SM screens
-				the default (Fiori 3) value is 960</p>
+				<p>User defined break point for SM screens
+				Default (Fiori 3) value is 960</p>
 			</div>
 		</div>
 	</section>
@@ -135,7 +150,7 @@
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>the event emitted on layout value cchange</p>
+				<p>The event emitted on layout value change.</p>
 			</div>
 		</div>
 	</section>
@@ -147,12 +162,20 @@
 		<h3>constructor</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">new <wbr>Flexible<wbr>Column<wbr>Layout<wbr>Component<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FlexibleColumnLayoutComponent</span></li>
+			<li class="tsd-signature tsd-kind-icon">new <wbr>Flexible<wbr>Column<wbr>Layout<wbr>Component<span class="tsd-signature-symbol">(</span>_config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FlexibleLayoutConfig</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FlexibleColumnLayoutComponent</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
+					<ul>
+					</ul>
 				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>_config: <span class="tsd-signature-type">FlexibleLayoutConfig</span></h5>
+					</li>
+				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">FlexibleColumnLayoutComponent</span></h4>
 			</li>
 		</ul>
@@ -160,72 +183,6 @@
 </section>
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Properties</h2>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="_columnLayout" class="tsd-anchor"></a>
-		<h3>_column<wbr>Layout</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">_column<wbr>Layout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>the column layout representing the distribution of the width
-				between the first (start), the middle and the last(end) column</p>
-			</div>
-		</div>
-		<div class="tsd-type-declaration">
-			<h4>Type declaration</h4>
-			<ul class="tsd-parameters">
-				<li class="tsd-parameter">
-					<h5>end<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
-				</li>
-				<li class="tsd-parameter">
-					<h5>mid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
-				</li>
-				<li class="tsd-parameter">
-					<h5>start<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
-				</li>
-			</ul>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="_leftColumnSeparator" class="tsd-anchor"></a>
-		<h3>_left<wbr>Column<wbr>Separator</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">_left<wbr>Column<wbr>Separator<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ColumnSeparatorValue</span><span class="tsd-signature-symbol"> = null</span></div>
-		<aside class="tsd-sources">
-			<ul>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>left column separator value (between start and middle columns)
-					that specifies the direction of the arrow and
-					if the separator is visible
-				Options include: &#39;left&#39;, &#39;right&#39; and null</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="_rightColumnSeparator" class="tsd-anchor"></a>
-		<h3>_right<wbr>Column<wbr>Separator</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">_right<wbr>Column<wbr>Separator<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ColumnSeparatorValue</span><span class="tsd-signature-symbol"> = null</span></div>
-		<aside class="tsd-sources">
-			<ul>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>right column separator value (between middle and end columns)
-					that speccifies the direction of the arrow and
-					if the separator is visible
-				Options include: &#39;left&#39;, &#39;right&#39; and null</p>
-			</div>
-		</div>
-	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="endColumn" class="tsd-anchor"></a>
 		<h3>end<wbr>Column</h3>
@@ -237,7 +194,7 @@
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>the template that provides the content of the last/end/right column</p>
+				<p>The template that provides the content of the last/end/right column</p>
 			</div>
 		</div>
 	</section>
@@ -252,7 +209,7 @@
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>the template that provides the content of the middle column</p>
+				<p>The template that provides the content of the middle column</p>
 			</div>
 		</div>
 	</section>
@@ -267,58 +224,9 @@
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>the template that provides the content of the first/start/left column</p>
+				<p>The template that provides the content of the first/start/left column</p>
 			</div>
 		</div>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Methods</h2>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="_handleLeftColumnSeparatorClick" class="tsd-anchor"></a>
-		<h3>_handle<wbr>Left<wbr>Column<wbr>Separator<wbr>Click</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">_handle<wbr>Left<wbr>Column<wbr>Separator<wbr>Click<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>function that handles the click events on the left separator
-						and updates the layout</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="_handleRightColumnSeparatorClick" class="tsd-anchor"></a>
-		<h3>_handle<wbr>Right<wbr>Column<wbr>Separator<wbr>Click</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">_handle<wbr>Right<wbr>Column<wbr>Separator<wbr>Click<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>function that handles the click events on the right separator
-						and updates the layout</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
 	</section>
 </section>
 </div>
