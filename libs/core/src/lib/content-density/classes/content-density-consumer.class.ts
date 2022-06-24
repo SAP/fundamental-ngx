@@ -73,7 +73,7 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
     }
 
     /**
-     * Sync isCondensed. Calls ChangeDetectorRef.markForCheck() on update
+     * Sync isCozy. Calls ChangeDetectorRef.markForCheck() on update
      */
     get isCozy(): boolean {
         if (!this._cozySubscription) {
