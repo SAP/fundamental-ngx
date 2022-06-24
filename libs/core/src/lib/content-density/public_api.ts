@@ -17,3 +17,4 @@ export * from './tokens/content-density-directive';
 export * from './classes/deprecated-compact.directive';
 export * from './classes/deprecated-cozy.directive';
 export * from './classes/deprecated-condensed.directive';
+export * from './testing/mocked-local-content-density-directive';
