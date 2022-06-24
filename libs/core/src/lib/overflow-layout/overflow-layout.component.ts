@@ -321,7 +321,7 @@ export class OverflowLayoutComponent implements AfterViewInit, OnDestroy, Overfl
         });
 
         if (layoutWidth < 0 && forcedItemsIndexes.length > 0) {
-            throw new Error(
+            console.warn(
                 'There is no enough space to fit all forced visible items into the container. Please adjust their visibility accordingly.'
             );
         }
