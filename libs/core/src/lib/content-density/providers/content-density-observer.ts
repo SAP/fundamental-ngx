@@ -1,20 +1,23 @@
 import { ChangeDetectorRef, ElementRef, Optional, Provider } from '@angular/core';
-import { distinctUntilChanged, map, Observable, takeUntil, tap } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { DestroyedService } from '@fundamental-ngx/core/utils';
 import { GlobalContentDensityService } from '../services/global-content-density.service';
-import { ContentDensityMode, LocalContentDensityMode } from '../content-density.types';
+import { ContentDensityConsumerSettings, ContentDensityMode, LocalContentDensityMode } from '../content-density.types';
 import { CONTENT_DENSITY_DIRECTIVE } from '../tokens/content-density-directive';
-import { ContentDensityConsumer } from '../classes/content-density-consumer.class';
+import { ContentDensityObserver } from '../classes/content-density-consumer.class';
 import { defaultContentDensityConsumerConfigs } from '../variables/default-content-density-consumer-config';
 import { getChangesSource$ } from '../helpers/get-changes-source.provider';
 
-export function contentDensityConsumer(providedConfiguration: {
-    modifiers?: Partial<Record<ContentDensityMode, string>>;
-    supportedContentDensity?: ContentDensityMode[];
-    defaultContentDensity?: ContentDensityMode;
-    applyMode?: boolean;
-}): Provider {
-    const configuration = { ...defaultContentDensityConsumerConfigs, ...providedConfiguration };
+/**
+ * Creates provider for ContentDensityObserver
+ * @param providedConfiguration
+ */
+export function contentDensityObserver(providedConfiguration?: ContentDensityConsumerSettings): Provider {
+    const configuration: Required<ContentDensityConsumerSettings> = {
+        ...defaultContentDensityConsumerConfigs,
+        ...(providedConfiguration || {})
+    };
+
     const isSupported = (density: ContentDensityMode): boolean =>
         configuration.supportedContentDensity.includes(density);
 
@@ -27,7 +30,7 @@ export function contentDensityConsumer(providedConfiguration: {
     };
 
     return {
-        provide: ContentDensityConsumer,
+        provide: ContentDensityObserver,
         useFactory: (
             elementRef: ElementRef<Element>,
             destroy$: Observable<void>,
@@ -44,25 +47,22 @@ export function contentDensityConsumer(providedConfiguration: {
                     if (!isSupported(density)) {
                         return alternativeTo[density]();
                     }
-
                     return density;
-                }),
-                distinctUntilChanged(),
-                tap((density) => {
-                    if (configuration.applyMode) {
-                        Object.values(configuration.modifiers).forEach((className) => {
-                            elementRef.nativeElement.classList.remove(className);
-                        });
-                        if (configuration.modifiers[density]) {
-                            elementRef.nativeElement.classList.add(configuration.modifiers[density]);
-                        }
-                    }
                 })
             );
-
-            changesSource$.pipe(takeUntil(destroy$)).subscribe();
-
-            return new ContentDensityConsumer(changesSource$, destroy$, changeDetectorRef);
+            const observer = new ContentDensityObserver(
+                contentDensityService?.currentContentDensity || configuration.defaultContentDensity,
+                changesSource$,
+                destroy$,
+                changeDetectorRef
+            );
+            if (providedConfiguration) {
+                observer.consume({
+                    contentDensitySettings: { ...configuration },
+                    elementRef: () => elementRef
+                });
+            }
+            return observer;
         },
         deps: [
             ElementRef,
@@ -74,12 +74,10 @@ export function contentDensityConsumer(providedConfiguration: {
     };
 }
 
-export function contentDensityConsumerProviders(params?: {
-    modifiers?: Partial<Record<ContentDensityMode, string>>;
-    supportedContentDensity?: ContentDensityMode[];
-    defaultContentDensity?: ContentDensityMode;
-    applyMode?: boolean;
-}): Provider[] {
+/**
+ * Creates provider for ContentDensityObserver and adds DestroyedService provider
+ */
+export function contentDensityObserverProviders(params?: ContentDensityConsumerSettings): Provider[] {
     const providedConfiguration = params || {};
-    return [DestroyedService, contentDensityConsumer(providedConfiguration)];
+    return [DestroyedService, contentDensityObserver(providedConfiguration)];
 }

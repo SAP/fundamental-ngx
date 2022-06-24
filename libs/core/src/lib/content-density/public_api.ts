@@ -6,7 +6,7 @@ export * from './classes/abstract-content-density-storage';
 
 export * from './directives/content-density.directive';
 
-export * from './providers/content-density-consumer';
+export * from './providers/content-density-observer';
 
 export * from './services/global-content-density.service';
 

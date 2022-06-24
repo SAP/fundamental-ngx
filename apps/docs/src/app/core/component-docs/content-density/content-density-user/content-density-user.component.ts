@@ -1,7 +1,7 @@
-import { Component, Inject, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
-    ContentDensityConsumer,
-    contentDensityConsumerProviders,
+    ContentDensityObserver,
+    contentDensityObserverProviders,
     ContentDensityMode
 } from '@fundamental-ngx/core/content-density';
 
@@ -10,7 +10,7 @@ import {
     template: `
         <ng-content></ng-content>
         <span fd-object-status class="example-component__object-status" [inverted]="true">
-            {{ _contentDensityConsumer | async }}
+            {{ _contentDensityObserver | async }}
         </span>
     `,
     styleUrls: ['./content-density-user.component.scss'],
@@ -18,7 +18,7 @@ import {
         class: 'example-component'
     },
     providers: [
-        contentDensityConsumerProviders({
+        contentDensityObserverProviders({
             modifiers: {
                 [ContentDensityMode.COMPACT]: 'example-component--compact',
                 [ContentDensityMode.CONDENSED]: 'example-component--condensed'
@@ -34,5 +34,7 @@ import {
     encapsulation: ViewEncapsulation.None
 })
 export class ContentDensityUserComponent {
-    constructor(@Inject(ContentDensityConsumer) readonly _contentDensityConsumer: ContentDensityConsumer) {}
+    constructor(readonly _contentDensityObserver: ContentDensityObserver) {
+        _contentDensityObserver.subscribe();
+    }
 }

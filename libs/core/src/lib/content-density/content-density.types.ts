@@ -1,4 +1,5 @@
 import { Provider } from '@angular/core';
+import { HasElementRef } from '@fundamental-ngx/core/utils';
 
 export const ContentDensityGlobalKeyword = 'global';
 
@@ -39,3 +40,15 @@ export type ContentDensityModuleConfig = (
     | CustomStorageConfig
 ) &
     BaseContentDensityModuleConfig;
+
+export interface ContentDensityConsumerSettings {
+    modifiers?: Partial<Record<ContentDensityMode, string>>;
+    supportedContentDensity?: ContentDensityMode[];
+    defaultContentDensity?: ContentDensityMode;
+}
+
+export interface ContentDensityConsumerTarget extends HasElementRef {
+    contentDensitySettings: ContentDensityConsumerSettings;
+}
+
+export type ContentDensityCallbackFn = (target: ContentDensityMode) => void;

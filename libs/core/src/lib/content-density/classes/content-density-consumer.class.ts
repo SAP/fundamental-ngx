@@ -1,16 +1,29 @@
-import { map, Observable, Subscription, takeUntil, tap } from 'rxjs';
-import { ContentDensityMode } from '../content-density.types';
+import {
+    BehaviorSubject,
+    combineLatest,
+    distinctUntilChanged,
+    finalize,
+    map,
+    Observable,
+    Subscription,
+    takeUntil,
+    tap
+} from 'rxjs';
+import { ContentDensityCallbackFn, ContentDensityConsumerTarget, ContentDensityMode } from '../content-density.types';
 import { isCompact, isCondensed, isCozy } from '../helpers/density-type-checkers';
 import { ChangeDetectorRef } from '@angular/core';
+import { contentDensityCallbackFactory } from '../helpers/content-density-change-callback-factory';
 
 /** Class, which is used for consuming calculated content density state information in components */
-export class ContentDensityConsumer extends Observable<ContentDensityMode> {
+export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> {
     /** Stream for getting compact state */
     isCompact$: Observable<boolean>;
     /** Stream for getting cozy state */
     isCozy$: Observable<boolean>;
     /** Stream for getting condensed state */
     isCondensed$: Observable<boolean>;
+
+    callbacks: Map<any, ContentDensityCallbackFn> = new Map<any, ContentDensityCallbackFn>();
 
     /** @hidden */
     private _isCompact: boolean;
@@ -27,23 +40,29 @@ export class ContentDensityConsumer extends Observable<ContentDensityMode> {
     private _cozySubscription: Subscription;
 
     /** @hidden */
+    private _callCallbacks$ = new BehaviorSubject<void>(undefined);
+
+    /** @hidden */
     constructor(
+        initialValue: ContentDensityMode,
         dataSource: Observable<ContentDensityMode>,
         private destroy$: Observable<void>,
         private changeDetectorRef: ChangeDetectorRef
     ) {
-        super((subscriber) => {
-            const subscription = dataSource.subscribe((density) => {
-                subscriber.next(density);
+        super(initialValue);
+        const source$ = dataSource.pipe(distinctUntilChanged(), takeUntil(this.destroy$));
+        combineLatest([source$, this._callCallbacks$])
+            .pipe(
+                tap(([density]) => this._callCallbacks(density)),
+                map(([density]) => density),
+                finalize(() => this.complete())
+            )
+            .subscribe((density) => {
+                this.next(density);
             });
-            return () => {
-                subscription.unsubscribe();
-            };
-        });
-
-        this.isCompact$ = dataSource.pipe(map(isCompact));
-        this.isCozy$ = dataSource.pipe(map(isCozy));
-        this.isCondensed$ = dataSource.pipe(map(isCondensed));
+        this.isCompact$ = source$.pipe(map(isCompact));
+        this.isCozy$ = source$.pipe(map(isCozy));
+        this.isCondensed$ = source$.pipe(map(isCondensed));
     }
 
     /**
@@ -74,6 +93,38 @@ export class ContentDensityConsumer extends Observable<ContentDensityMode> {
             this._cozySubscription = this._listenToChanges(this.isCozy$, (v) => (this._isCozy = v));
         }
         return this._isCozy;
+    }
+
+    /**
+     * Pass consumers callback function, or configuration object to be called on density change
+     */
+    consume(
+        ...consumerConfigs: Array<ContentDensityConsumerTarget | ContentDensityCallbackFn>
+    ): ContentDensityObserver {
+        consumerConfigs.forEach((consumerConfig) => {
+            const callback = contentDensityCallbackFactory(consumerConfig);
+            this.callbacks.set(consumerConfig, callback);
+        });
+        this._callCallbacks$.next();
+        return this;
+    }
+
+    /**
+     * Remove consumer callback from list of callbacks
+     */
+    removeConsumer(
+        ...consumerConfigs: Array<ContentDensityConsumerTarget | ContentDensityCallbackFn>
+    ): ContentDensityObserver {
+        consumerConfigs.forEach((consumerConfig) => {
+            this.callbacks.delete(consumerConfig);
+        });
+        this._callCallbacks$.next();
+        return this;
+    }
+
+    /** @hidden */
+    _callCallbacks(density: ContentDensityMode): void {
+        this.callbacks.forEach((callback) => callback(density));
     }
 
     /** @hidden */
