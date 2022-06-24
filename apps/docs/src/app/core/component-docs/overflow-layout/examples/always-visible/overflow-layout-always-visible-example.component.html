@@ -1,0 +1,20 @@
+<p>Try to click on any element inside "More" popover. After click it should be transfered to the visible area.</p>
+
+<fd-overflow-layout>
+    <ng-container *ngFor="let item of itemsToRender; let i = index">
+        <fd-info-label
+            *fdOverflowItemRef="let hidden"
+            fdOverflowLayoutItem
+            [forceVisibility]="item.forcedVisibility"
+            (click)="hidden ? toggleForcedVisibility(i) : null"
+            [focusable]="true"
+            [color]="(i % 10).toString()"
+        >
+            Info label {{ i }}
+            {{ hidden ? 'hidden' : 'visible' }}
+        </fd-info-label>
+    </ng-container>
+</fd-overflow-layout>
+
+<button fd-button label="Add new item" (click)="addItem()"></button>
+<button fd-button label="Remove item" (click)="removeItem()"></button>

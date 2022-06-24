@@ -90,6 +90,7 @@ import { TimelineModule } from '@fundamental-ngx/core/timeline';
 import { ProgressIndicatorModule } from '@fundamental-ngx/core/progress-indicator';
 import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
 import { ThemingModule } from '@fundamental-ngx/core/theming';
+import { OverflowLayoutModule } from '@fundamental-ngx/core/overflow-layout';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -186,7 +187,8 @@ import { ThemingModule } from '@fundamental-ngx/core/theming';
         TimelineModule,
         ProgressIndicatorModule,
         ScrollbarModule,
-        ThemingModule
+        ThemingModule,
+        OverflowLayoutModule
     ]
 })
 export class FundamentalNgxCoreModule {}

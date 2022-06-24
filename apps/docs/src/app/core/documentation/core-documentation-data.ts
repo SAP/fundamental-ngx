@@ -102,6 +102,10 @@ export const layouts: SectionInterfaceContent[] = [
     { url: 'core/flexible-column-layout', name: 'Flexible Column Layout' },
     { url: 'core/layout-panel', name: 'Layout Panel' },
     { url: 'core/layout-grid', name: 'Layout Grid' },
+    {
+        url: 'core/overflow-layout',
+        name: 'Overflow Layout'
+    },
     { url: 'core/resizable-card-layout', name: 'Resizable Card Layout' }
 ];
 

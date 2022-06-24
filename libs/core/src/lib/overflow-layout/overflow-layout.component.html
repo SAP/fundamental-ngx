@@ -1,0 +1,51 @@
+<div class="fd-overflow-layout__items-container" #layoutContainer>
+    <div class="fd-overflow-layout__items" #itemsWrapper>
+        <ng-container *ngFor="let item of _allItems; trackBy: _itemsTrackFn">
+            <div fdOverflowLayoutItemContainer>
+                <ng-container *fdOverflowItemContainerRef>
+                    <ng-template
+                        [ngTemplateOutlet]="item.templateRef"
+                        [ngTemplateOutletContext]="{ $implicit: item.hidden, index: item.index }"
+                    ></ng-template>
+                </ng-container>
+            </div>
+        </ng-container>
+    </div>
+</div>
+
+<div class="fd-overflow-layout__more" *ngIf="_showMore" #showMoreContainer>
+    <ng-template #defaultShowMore>
+        <fd-popover
+            (isOpenChange)="_onPopoverStateChange($event)"
+            placement="bottom"
+            [focusTrapped]="true"
+            [focusAutoCapture]="true"
+            [maxWidth]="312"
+        >
+            <fd-popover-control>
+                <button
+                    fd-button
+                    [fdMenu]="true"
+                    i18n="@overflowLayout.moreItemsButton|Overflow Layout more button text"
+                    fdType="transparent"
+                >
+                    {{ _hiddenItems.length }} more
+                </button>
+            </fd-popover-control>
+            <fd-popover-body>
+                <div fdOverflowLayoutPopoverContent [items]="_hiddenItems">
+                    <ng-container *ngFor="let item of _hiddenItems">
+                        <ng-template
+                            [ngTemplateOutlet]="item.templateRef"
+                            [ngTemplateOutletContext]="{ $implicit: item.hidden, index: item.index }"
+                        ></ng-template>
+                    </ng-container>
+                </div>
+            </fd-popover-body>
+        </fd-popover>
+    </ng-template>
+    <ng-template
+        [ngTemplateOutlet]="_moreButton?.templateRef || defaultShowMore"
+        [ngTemplateOutletContext]="{ $implicit: _hiddenItems }"
+    ></ng-template>
+</div>
