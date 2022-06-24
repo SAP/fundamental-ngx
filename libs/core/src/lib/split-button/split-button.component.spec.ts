@@ -4,7 +4,6 @@ import { By } from '@angular/platform-browser';
 import { SplitButtonComponent, splitButtonTextClass, splitButtonTextCompactClass } from './split-button.component';
 import { MenuModule } from '../menu/menu.module';
 import { ButtonModule } from '../button/button.module';
-import { ContentDensityService } from '../utils/services/content-density.service';
 import createSpy = jasmine.createSpy;
 
 @Component({
@@ -41,8 +40,7 @@ describe('SplitButtonComponent', () => {
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 imports: [MenuModule, ButtonModule],
-                declarations: [SplitButtonComponent, TestComponent],
-                providers: [ContentDensityService]
+                declarations: [SplitButtonComponent, TestComponent]
             });
         })
     );
