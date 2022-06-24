@@ -10,3 +10,4 @@ export * from './toolbar-form-label.directive';
 export * from './toolbar-overflow-group.directive';
 export * from './toolbar-overflow-button.directive';
 export * from './toolbar-overflow-button-menu.directive';
+export * from './deprecated-toolbar-size.directive';
