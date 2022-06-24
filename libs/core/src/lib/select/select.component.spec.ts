@@ -7,11 +7,15 @@ import { SelectComponent } from './select.component';
 import { PopoverComponent } from '../popover/popover.component';
 import { SelectModule } from './select.module';
 import { SelectKeyManagerService } from './select-key-manager.service';
-import { ContentDensityService } from '../utils/public_api';
 
 @Component({
     template: `
-        <fd-select [(value)]="value" formControlName="selectControl" (isOpenChange)="onOpen($event)">
+        <fd-select
+            [(value)]="value"
+            formControlName="selectControl"
+            (isOpenChange)="onOpen($event)"
+            [fdCompact]="compact"
+        >
             <fd-option id="option-1" [value]="'value-1'">Test1</fd-option>
             <fd-option id="option-2" [value]="'value-2'">Test2</fd-option>
             <fd-option id="option-3" [value]="'value-3'">Test3</fd-option>
@@ -31,6 +35,8 @@ class TestWrapperComponent {
     disabled = false;
 
     overlayOpened: boolean;
+
+    compact = false;
 
     onOpen(isOpen: boolean): void {
         this.overlayOpened = isOpen;
@@ -76,7 +82,7 @@ describe('SelectComponent', () => {
             TestBed.configureTestingModule({
                 declarations: [TestWrapperComponent, TestFilteringWrapperComponent],
                 imports: [SelectModule],
-                providers: [ContentDensityService]
+                providers: []
             })
                 .overrideComponent(SelectComponent, {
                     set: { changeDetection: ChangeDetectionStrategy.Default }
@@ -109,6 +115,15 @@ describe('SelectComponent', () => {
 
         it('should have default state closed when component is initialized', () => {
             expect(fixture.nativeElement.querySelector('#option-1')).toBeFalsy();
+        });
+
+        it('should consume content density', () => {
+            fixture.componentInstance.compact = true;
+            fixture.detectChanges();
+            expect(fixture.nativeElement.querySelector('.fd-select--compact')).toBeTruthy();
+            fixture.componentInstance.compact = false;
+            fixture.detectChanges();
+            expect(fixture.nativeElement.querySelector('.fd-select--compact')).toBeFalsy();
         });
 
         it('should open options panel when we click on the trigger control.', async () => {
