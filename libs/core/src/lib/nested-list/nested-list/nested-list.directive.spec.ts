@@ -5,10 +5,15 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NestedListKeyboardService } from '../nested-list-keyboard.service';
 import { NestedListStateService } from '../nested-list-state.service';
 import { NestedListDirective } from './nested-list.directive';
+import {
+    ContentDensityGlobalKeyword,
+    ContentDensityMode,
+    LocalContentDensityMode
+} from '@fundamental-ngx/core/content-density';
 
 @Component({
     template: `
-        <ul fd-nested-list [textOnly]="true" [compact]="compact" #level1List>
+        <ul fd-nested-list [textOnly]="true" [fdContentDensity]="contentDensity" #level1List>
             <li fd-nested-list-item>
                 <a fd-nested-list-link>
                     <span fd-nested-list-title>Link 1</span>
@@ -39,7 +44,7 @@ import { NestedListDirective } from './nested-list.directive';
     `
 })
 class TestNestedContainerComponent {
-    compact: boolean | undefined = undefined;
+    contentDensity: LocalContentDensityMode = ContentDensityGlobalKeyword;
 
     @ViewChild('level4List', { static: true, read: NestedListDirective })
     level4List: NestedListDirective;
@@ -79,7 +84,7 @@ describe('NestedListDirective', () => {
     });
 
     it('Should add classes', () => {
-        component.compact = true;
+        component.contentDensity = ContentDensityMode.COMPACT;
         fixture.detectChanges();
         expect((level1List as any)._elementRef.nativeElement.classList.contains('fd-nested-list')).toBeTruthy();
         expect(
@@ -91,5 +96,13 @@ describe('NestedListDirective', () => {
         expect((level1List as any)._elementRef.nativeElement.classList.contains('level-1')).toBeTruthy();
         expect((level3List as any)._elementRef.nativeElement.classList.contains('level-3')).toBeTruthy();
         expect((level4List as any)._elementRef.nativeElement.classList.contains('level-4')).toBeTruthy();
+    });
+
+    it('should handle content density when compact input is not provided', () => {
+        component.contentDensity = ContentDensityGlobalKeyword;
+        fixture.detectChanges();
+        expect(
+            fixture.nativeElement.querySelector('ul:first-of-type').classList.contains('fd-nested-list--compact')
+        ).toBe(false);
     });
 });
