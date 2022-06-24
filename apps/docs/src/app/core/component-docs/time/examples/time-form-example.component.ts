@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { DatetimeAdapter, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
 @Component({
     selector: 'fd-time-form-example',
@@ -15,6 +15,6 @@ import { DatetimeAdapter, FdDatetimeAdapter } from '@fundamental-ngx/core/dateti
 })
 export class TimeFormExampleComponent {
     customForm = new FormGroup({
-        time: new FormControl(null)
+        time: new FormControl<FdDate | null>(null)
     });
 }

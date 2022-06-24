@@ -16,8 +16,8 @@
     Valid: {{ customForm.controls.dates.valid }}<br />
 
     Range Start Date:
-    {{ customForm.controls.dates.value.start?.toDateString() || 'null' }}
+    {{ customForm.controls.dates.value?.start?.toDateString() || 'null' }}
     <br />
     Range End Date:
-    {{ customForm.controls.dates.value.end?.toDateString() || 'null' }}
+    {{ customForm.controls.dates.value?.end?.toDateString() || 'null' }}
 </div>

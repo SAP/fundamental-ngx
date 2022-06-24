@@ -1,5 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -16,13 +16,23 @@ export class PlatformChekboxTristateComponent implements AfterViewInit {
     public dubrovnik: boolean | null = null;
     public jaipur: boolean | null = null;
 
-    public cities = new FormGroup({});
+    public cities = new FormGroup({
+        paris: new FormControl(),
+        doha: new FormControl(),
+        amsterdam: new FormControl(),
+        venice: new FormControl(),
+        kyoto: new FormControl(),
+        barcelona: new FormControl(),
+        athens: new FormControl(),
+        sydney: new FormControl()
+    });
     public citiesData = new SomeObject(false, 'Yes', null, false, true, null, null, false);
 
     public agreementsFormGroup = new FormGroup({});
 
     public registrationForm = new FormGroup({
-        agreements: this.agreementsFormGroup
+        agreements: this.agreementsFormGroup,
+        acceptAll: new FormControl()
     });
 
     public choices: Record<string, any> = { termsAndConditions: true, marketing: true, newsletter: false };

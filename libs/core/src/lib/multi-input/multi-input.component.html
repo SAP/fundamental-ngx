@@ -78,7 +78,7 @@
                     (onComplete)="_handleComplete($event)"
                     #searchInputElement
                     [displayFn]="displayFn"
-                    [inputText]="_searchTermCtrl.value"
+                    [inputText]="_searchTermCtrl.value || ''"
                     [options]="dropdownValues"
                     [enable]="autoComplete && !mobile"
                     [placeholder]="placeholder"
@@ -144,7 +144,7 @@
         <span
             *ngIf="!itemTemplate"
             fd-list-title
-            [innerHtml]="option.label | highlight: _searchTermCtrl.value:highlight"
+            [innerHtml]="option.label | highlight: _searchTermCtrl.value || '':highlight"
         ></span>
 
         <ng-container *ngIf="itemTemplate">

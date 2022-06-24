@@ -12,14 +12,22 @@ export class PlatformRadioGroupContentExampleComponent {
     favoriteMonth = '';
     seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];
 
-    form1 = new FormGroup({});
+    form1 = new FormGroup({
+        radioc1: new FormControl(null)
+    });
 
-    form2 = new FormGroup({});
+    form2 = new FormGroup({
+        radioc2: new FormControl(null)
+    });
 
-    form3 = new FormGroup({});
+    form3 = new FormGroup({
+        radioc3: new FormControl('winter')
+    });
     form3Data = { radioc3: 'winter' };
 
-    form4 = new FormGroup({});
+    form4 = new FormGroup({
+        radioc4: new FormControl(null)
+    });
 
     form5 = new FormGroup({
         month: new FormControl('february')

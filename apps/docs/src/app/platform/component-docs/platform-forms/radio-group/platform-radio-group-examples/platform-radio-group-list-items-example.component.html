@@ -28,7 +28,7 @@
 <div>Vertical radio group</div>
 <form #listform2="ngForm" (ngSubmit)="onSubmit(listform2)">
     <fdp-form-group [formGroup]="form5">
-        <fdp-form-field id="radio-lo2" [rank]="2" [required]="true">
+        <fdp-form-field id="radiolo2" [rank]="2" [required]="true">
             <fdp-radio-group name="vertical-radio-group" [list]="items" [isInline]="false" formControlName="example2">
             </fdp-radio-group>
             <fdp-button contentDensity="compact" type="submit" label="Submit"></fdp-button>

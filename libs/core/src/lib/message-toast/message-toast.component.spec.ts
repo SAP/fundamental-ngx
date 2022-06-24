@@ -35,13 +35,11 @@ describe('MessageToastComponent', () => {
     let fixture: ComponentFixture<MessageToastComponent>;
     let service: MessageToastService;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [TestModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [TestModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(MessageToastComponent);

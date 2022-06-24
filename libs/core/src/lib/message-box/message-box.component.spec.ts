@@ -44,18 +44,16 @@ describe('MessageBoxComponent', () => {
     const mockRouter = { events: routerEventsSubject.asObservable() };
     let router: Router;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [TestModule, RouterModule, RouterTestingModule],
-                providers: [
-                    { provide: MessageBoxRef, useValue: messageBoxRef },
-                    { provide: MessageBoxConfig, useValue: messageBoxConfig },
-                    { provide: Router, useValue: mockRouter }
-                ]
-            });
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [TestModule, RouterModule, RouterTestingModule],
+            providers: [
+                { provide: MessageBoxRef, useValue: messageBoxRef },
+                { provide: MessageBoxConfig, useValue: messageBoxConfig },
+                { provide: Router, useValue: mockRouter }
+            ]
+        });
+    }));
 
     function setup(providers: { token: any; provider: { useValue: any } }[] = []): void {
         providers.forEach((provider) => TestBed.overrideProvider(provider.token, provider.provider));
