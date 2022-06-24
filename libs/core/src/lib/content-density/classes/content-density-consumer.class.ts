@@ -1,14 +1,4 @@
-import {
-    BehaviorSubject,
-    combineLatest,
-    distinctUntilChanged,
-    finalize,
-    map,
-    Observable,
-    Subscription,
-    takeUntil,
-    tap
-} from 'rxjs';
+import { BehaviorSubject, distinctUntilChanged, finalize, map, Observable, Subscription, takeUntil, tap } from 'rxjs';
 import { ContentDensityCallbackFn, ContentDensityConsumerTarget, ContentDensityMode } from '../content-density.types';
 import { isCompact, isCondensed, isCozy } from '../helpers/density-type-checkers';
 import { ChangeDetectorRef } from '@angular/core';
@@ -40,9 +30,6 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
     private _cozySubscription: Subscription;
 
     /** @hidden */
-    private _callCallbacks$ = new BehaviorSubject<void>(undefined);
-
-    /** @hidden */
     constructor(
         initialValue: ContentDensityMode,
         dataSource: Observable<ContentDensityMode>,
@@ -51,10 +38,9 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
     ) {
         super(initialValue);
         const source$ = dataSource.pipe(distinctUntilChanged(), takeUntil(this.destroy$));
-        combineLatest([source$, this._callCallbacks$])
+        source$
             .pipe(
-                tap(([density]) => this._callCallbacks(density)),
-                map(([density]) => density),
+                tap((density) => this._callCallbacks(density)),
                 finalize(() => this.complete())
             )
             .subscribe((density) => {
@@ -104,8 +90,8 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
         consumerConfigs.forEach((consumerConfig) => {
             const callback = contentDensityCallbackFactory(consumerConfig);
             this.callbacks.set(consumerConfig, callback);
+            callback(this.value);
         });
-        this._callCallbacks$.next();
         return this;
     }
 
@@ -118,12 +104,11 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
         consumerConfigs.forEach((consumerConfig) => {
             this.callbacks.delete(consumerConfig);
         });
-        this._callCallbacks$.next();
         return this;
     }
 
     /** @hidden */
-    _callCallbacks(density: ContentDensityMode): void {
+    private _callCallbacks(density: ContentDensityMode): void {
         this.callbacks.forEach((callback) => callback(density));
     }
 
