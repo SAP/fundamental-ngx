@@ -23,15 +23,13 @@
             <li>Create <code>[themeName]_fonts.css</code> files in your application folder;</li>
             <li>
                 Adjust <code>styles</code> array in <code>angular.json</code> to include these css files during
-                application
-                build:
+                application build:
             </li>
         </ol>
         <fd-code-snippet [file]="stylesChunk"></fd-code-snippet>
-        <fd-message-strip [dismissible]="false" type="information"
-        ><b>Note:</b> these changes are automatically applied if you use <code>ng add</code>.
-        </fd-message-strip
-        >
+        <fd-message-strip [dismissible]="false" type="information">
+            <b>Note:</b> these changes are automatically applied if you use <code>ng add</code>.
+        </fd-message-strip>
     </description>
     <import module="ThemingModule" subPackage="theming"></import>
 
