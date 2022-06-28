@@ -39,6 +39,14 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
     }
 
     /**
+     * Width in pixel for truncation of an element
+     */
+    @Input()
+    set fdTruncateWidth(value: Nullable<number>) {
+        this._customWidthCount = coerceNumberProperty(value);
+    }
+
+    /**
      * Truncating state
      */
     @Input()
@@ -69,16 +77,32 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
     private _customCharCount: number;
 
     /** @hidden */
+    private _customWidthCount: number;
+
+    /** @hidden */
     private _widthCount: number;
 
     /** @hidden */
     private _maxChars: number;
 
     /** @hidden */
+    private _maxWidth: number;
+
+    /** @hidden */
     private _hasMore: boolean;
 
     /** @hidden */
     private windowResize$: Subscription;
+
+    /** @hidden
+     * saves default style of element before truncating
+     */
+    private defaultStyle: string;
+
+    /** @hidden
+     * truncation style for truncating element
+     */
+    private truncationStyle: string;
 
     /** @hidden */
     constructor(private readonly _elementRef: ElementRef, private readonly _renderer: Renderer2) {}
@@ -97,10 +121,19 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
         this.fdTruncateTargetTextContent = this._elementRef.nativeElement.textContent;
     }
 
+    /** @hidden
+     * Sets default style
+     */
+    _setDefaultStyle(): void {
+        this.defaultStyle = this._elementRef.nativeElement.style.cssText;
+    }
+
     /** @hidden */
     ngAfterViewInit(): void {
         if (this.rootElement) {
             this._setTextContent();
+            this._setDefaultStyle();
+
             this.refreshTarget(this);
             this.reset();
 
@@ -132,7 +165,7 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
     }
 
     reset(): void {
-        if (this._truncateTarget && this._originalText) {
+        if (!this._customWidthCount && this._truncateTarget && this._originalText) {
             this._truncateTarget.textContent = this._originalText + ' ';
         }
     }
@@ -147,7 +180,7 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
     }
 
     refreshTruncate(): void {
-        if (this.fdTruncateState && this._hasMore) {
+        if (this._hasMore) {
             this._toggleTruncate();
         }
     }
@@ -161,7 +194,7 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
 
         this._checkWidth();
 
-        if (this._originalText && this._originalText.length > this._maxChars) {
+        if ((this._originalText && this._originalText.length > this._maxChars) || this._customWidthCount) {
             this._hasMore = true;
             this.charCountUpdate.emit(this._hasMore);
             if (this.fdTruncateState) {
@@ -174,7 +207,11 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
      *  Toggle present text
      */
     private _toggleTruncate(): void {
-        this._truncateTarget.textContent = this.fdTruncateState ? this._truncatedText : this._originalText;
+        if (this._customWidthCount) {
+            this._truncateTarget.style.cssText = this.fdTruncateState ? this.truncationStyle : this.defaultStyle;
+        } else {
+            this._truncateTarget.textContent = this.fdTruncateState ? this._truncatedText : this._originalText;
+        }
     }
 
     /** @hidden
@@ -184,28 +221,39 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
         if (!this._truncateTarget) {
             return;
         }
+        if (this._customWidthCount) {
+            this._truncateByWidth(this._truncateTarget);
+        } else {
+            const ellipsisTextArray = this._originalText.split('');
+            while (ellipsisTextArray.length >= this._maxChars) {
+                ellipsisTextArray.pop();
+            }
 
-        const ellipsisTextArray = this._originalText.split('');
-        while (ellipsisTextArray.length >= this._maxChars) {
-            ellipsisTextArray.pop();
+            this._truncatedText = ellipsisTextArray.join('') + ' … ';
         }
-
-        this._truncatedText = ellipsisTextArray.join('') + ' … ';
     }
 
     /** @hidden */
     private _checkWidth(): void {
         const width = this.rootElement.offsetWidth;
-        console.log('width', width);
-        console.log('width count', this._widthCount);
+
         this._maxChars = this._customCharCount
             ? this._customCharCount
             : width >= this._widthCount
             ? DefaultTruncateCharCount.MAX
             : DefaultTruncateCharCount.MIN;
 
+        this._maxWidth = this._customWidthCount ? this._customWidthCount : width;
+
         if (this.fdTruncateState && this._hasMore) {
             this._truncate();
         }
+    }
+
+    /** @hidden
+     * Truncates element by pixel length
+     */
+    private _truncateByWidth(_element: HTMLElement): void {
+        this.truncationStyle = `${this.defaultStyle} overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: ${this._maxWidth}px;`;
     }
 }
