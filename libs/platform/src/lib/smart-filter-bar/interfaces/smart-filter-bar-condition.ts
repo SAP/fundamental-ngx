@@ -30,9 +30,10 @@ export interface SmartFilterBarConditionBuilder {
     controlType: InputType;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Condition strategy labels.
      */
-    defineStrategyLabels: SmartFilterBarStrategyLabels;
+    defineStrategyLabels: SmartFilterBarStrategyLabels | undefined;
 }
 
 export interface SmartFilterBarCondition<T = any> {

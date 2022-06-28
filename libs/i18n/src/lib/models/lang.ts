@@ -207,6 +207,9 @@ export interface FdLanguage {
     coreWizard: {
         ariaLabel: FdLanguageKey;
     };
+    platformActionBar: {
+        backButtonLabel: FdLanguageKey;
+    };
     platformApprovalFlow: {
         defaultWatchersLabel: FdLanguageKey;
         defaultTitle: FdLanguageKey;
@@ -278,6 +281,9 @@ export interface FdLanguage {
         /** @param count */
         userListSelectedItemsCountPlural: FdLanguageKey;
     };
+    platformFeedInput: {
+        userTitle: FdLanguageKey;
+    };
     platformVHD: {
         selectionBarLabel: FdLanguageKey;
         selectedAndConditionLabel: FdLanguageKey;
@@ -330,6 +336,9 @@ export interface FdLanguage {
         defineConditionConditionStrategyLabelNotEmpty: FdLanguageKey;
         /** @param count */
         defineConditionMaxCountError: FdLanguageKey;
+        selectTabTitle: FdLanguageKey;
+        searchTableEmptyMessage: FdLanguageKey;
+        defineTabTitle: FdLanguageKey;
     };
     platformCombobox: {
         countListResultsSingular: FdLanguageKey;
@@ -369,6 +378,11 @@ export interface FdLanguage {
         clearButtonTitle: FdLanguageKey;
         submitButtonTitle: FdLanguageKey;
         synchronizeButtonTitle: FdLanguageKey;
+        /**
+         * @param count
+         */
+        searchSuggestionMessage: FdLanguageKey;
+        searchSuggestionNavigateMessage: FdLanguageKey;
     };
     platformSmartFilterBar: {
         searchPlaceholder: FdLanguageKey;
@@ -387,6 +401,27 @@ export interface FdLanguage {
         selectFiltersActiveColumnLabel: FdLanguageKey;
         selectFiltersSubmitButtonLabel: FdLanguageKey;
         selectFiltersCancelButton: FdLanguageKey;
+        filterConditionContains: FdLanguageKey;
+        filterConditionEqualTo: FdLanguageKey;
+        filterConditionBetween: FdLanguageKey;
+        filterConditionBeginsWith: FdLanguageKey;
+        filterConditionEndsWith: FdLanguageKey;
+        filterConditionLessThan: FdLanguageKey;
+        filterConditionLessThanOrEqualTo: FdLanguageKey;
+        filterConditionGreaterThan: FdLanguageKey;
+        filterConditionGreaterThanOrEqualTo: FdLanguageKey;
+        filterConditionAfter: FdLanguageKey;
+        filterConditionOnOrAfter: FdLanguageKey;
+        filterConditionBefore: FdLanguageKey;
+        filterConditionBeforeOrOn: FdLanguageKey;
+        filterConditionValuePlaceholder: FdLanguageKey;
+        filterConditionValueFromPlaceholder: FdLanguageKey;
+        filterConditionValueToPlaceholder: FdLanguageKey;
+        settingsCategoryAll: FdLanguageKey;
+        settingsCategoryVisible: FdLanguageKey;
+        settingsCategoryActive: FdLanguageKey;
+        settingsCategoryVisibleAndActive: FdLanguageKey;
+        settingsCategoryMandatory: FdLanguageKey;
     };
     platformTable: {
         headerMenuSortAsc: FdLanguageKey;
@@ -495,6 +530,7 @@ export interface FdLanguage {
         detailsGotoPreviousButtonTitle: FdLanguageKey;
         detailsGotoNextButtonTitle: FdLanguageKey;
         detailsDialogCloseBtnLabel: FdLanguageKey;
+        roleDescription: FdLanguageKey;
     };
     platformUploadCollection: {
         moveToTitle: FdLanguageKey;
@@ -533,6 +569,8 @@ export interface FdLanguage {
         cancelUploadNewFileAction: FdLanguageKey;
         itemMenuBtnTitle: FdLanguageKey;
         dragDropAreaText: FdLanguageKey;
+        noDataText: FdLanguageKey;
+        noDataDescription: FdLanguageKey;
         /**
          * @param from
          * @param to
@@ -690,5 +728,9 @@ export interface FdLanguage {
         valuemaxDetails: FdLanguageKey;
         /** @param value */
         valueNowDetails: FdLanguageKey;
+    };
+    fnSwitch: {
+        semanticAcceptLabel: FdLanguageKey;
+        semanticDeclineLabel: FdLanguageKey;
     };
 }

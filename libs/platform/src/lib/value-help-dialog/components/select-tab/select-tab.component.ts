@@ -46,9 +46,12 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
     @Input()
     selection: VdhTableSelection = 'single';
 
-    /** Text displayed when table has no items. */
+    /**
+     * @deprecated use 18n capabilities instead
+     * Text displayed when table has no items.
+     */
     @Input()
-    emptyTableMessage = 'Use the search to get results';
+    emptyTableMessage: string;
 
     /** Uniq field from data source */
     @Input()

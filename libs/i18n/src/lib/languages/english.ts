@@ -136,6 +136,9 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
     coreWizard: {
         ariaLabel: 'Wizard'
     },
+    platformActionBar: {
+        backButtonLabel: 'Go Back'
+    },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Watchers',
         defaultTitle: 'Approval process',
@@ -203,6 +206,9 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         userListSelectedItemsCountSingular: '1 item selected',
         userListSelectedItemsCountPlural: '{{ count }} items selected'
     },
+    platformFeedInput: {
+        userTitle: 'User'
+    },
     platformVHD: {
         selectionBarLabel: 'Selected and condition items',
         selectedAndConditionLabel: 'Selected Items and Conditions',
@@ -247,7 +253,10 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         defineConditionConditionStrategyLabelEmpty: 'empty',
         defineConditionConditionStrategyLabelNotEqualTo: 'not equal to',
         defineConditionConditionStrategyLabelNotEmpty: 'not empty',
-        defineConditionMaxCountError: 'Enter a value with no more than {{ count }} characters'
+        defineConditionMaxCountError: 'Enter a value with no more than {{ count }} characters',
+        selectTabTitle: 'Select from list',
+        searchTableEmptyMessage: 'Use the search to get results',
+        defineTabTitle: 'Define Conditions'
     },
     platformCombobox: {
         countListResultsSingular: '1 result list item',
@@ -282,7 +291,9 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
     platformSearchField: {
         clearButtonTitle: 'Clear',
         submitButtonTitle: 'Search',
-        synchronizeButtonTitle: 'Synchronize'
+        synchronizeButtonTitle: 'Synchronize',
+        searchSuggestionMessage: '{{ count }} suggestions found.',
+        searchSuggestionNavigateMessage: 'use up and down arrows to navigate'
     },
     platformSmartFilterBar: {
         searchPlaceholder: 'Search',
@@ -299,7 +310,28 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         selectFiltersFilterColumnLabel: 'Filter',
         selectFiltersActiveColumnLabel: 'Active',
         selectFiltersSubmitButtonLabel: 'Go',
-        selectFiltersCancelButton: 'Cancel'
+        selectFiltersCancelButton: 'Cancel',
+        filterConditionContains: 'contains',
+        filterConditionEqualTo: 'equal to',
+        filterConditionBetween: 'between',
+        filterConditionBeginsWith: 'starts with',
+        filterConditionEndsWith: 'ends with',
+        filterConditionLessThan: 'less than',
+        filterConditionLessThanOrEqualTo: 'less than or equal to',
+        filterConditionGreaterThan: 'greater than',
+        filterConditionGreaterThanOrEqualTo: 'greater than or equal to',
+        filterConditionAfter: 'after',
+        filterConditionOnOrAfter: 'on or after',
+        filterConditionBefore: 'before',
+        filterConditionBeforeOrOn: 'before or on',
+        filterConditionValuePlaceholder: 'value',
+        filterConditionValueFromPlaceholder: 'from',
+        filterConditionValueToPlaceholder: 'to',
+        settingsCategoryAll: 'All',
+        settingsCategoryVisible: 'Visible',
+        settingsCategoryActive: 'Active',
+        settingsCategoryVisibleAndActive: 'Visible and active',
+        settingsCategoryMandatory: 'Mandatory'
     },
     platformTable: {
         headerMenuSortAsc: 'Sort Ascending',
@@ -400,7 +432,8 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Go to Previous',
         detailsGotoNextButtonTitle: 'Go to Next',
-        detailsDialogCloseBtnLabel: 'Close'
+        detailsDialogCloseBtnLabel: 'Close',
+        roleDescription: 'Image'
     },
     platformUploadCollection: {
         moveToTitle: 'Move to',
@@ -436,6 +469,8 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         cancelUploadNewFileAction: 'Cancel',
         itemMenuBtnTitle: 'More',
         dragDropAreaText: 'Drag files to upload',
+        noDataText: 'No files found',
+        noDataDescription: 'Drop files to upload, or use the “Add” button.',
         paginationTotal: 'Showing {{ from }}-{{ to }} of {{ total }}',
         resultsPerPage: 'Results per page',
         messageCreateFailed: 'Failed to create {{ folderName }}.',
@@ -492,5 +527,9 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         valueminDetails: 'Value is {{ value }}',
         valuemaxDetails: 'Value is {{ value }}',
         valueNowDetails: 'Current value is {{ value }}'
+    },
+    fnSwitch: {
+        semanticAcceptLabel: 'Accept',
+        semanticDeclineLabel: 'Decline'
     }
 };

@@ -308,8 +308,8 @@
                 [class.invisible]="_showDragDropArea"
             >
                 <fd-icon glyph="document"></fd-icon>
-                <h3 [innerText]="noDataText"></h3>
-                <p [innerText]="noDataDescription"></p>
+                <h3 [innerText]="noDataText || ('platformUploadCollection.noDataText' | fdTranslate)"></h3>
+                <p [innerText]="noDataDescription || ('platformUploadCollection.noDataDescription' | fdTranslate)"></p>
             </div>
         </div>
 

@@ -125,7 +125,7 @@
             <tr fd-table-row *ngIf="!displayedData.length">
                 <td colspan="100%">
                     <div class="fdp-value-help-dialog__empty-message">
-                        {{ emptyTableMessage }}
+                        {{ emptyTableMessage || ('platformVHD.searchTableEmptyMessage' | fdTranslate) }}
                     </div>
                 </td>
             </tr>

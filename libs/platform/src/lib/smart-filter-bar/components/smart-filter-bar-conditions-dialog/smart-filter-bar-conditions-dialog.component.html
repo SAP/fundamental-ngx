@@ -10,7 +10,7 @@
     </fd-dialog-header>
 
     <fd-dialog-body>
-        <form>
+        <form *ngIf="loaded; else loadingTpl">
             <fd-layout-grid *ngFor="let condition of _formItems; let i = index">
                 <div fdLayoutGridRow>
                     <div colGrow fdLayoutGridCol>
@@ -70,3 +70,9 @@
         </fd-dialog-footer-button>
     </fd-dialog-footer>
 </fd-dialog>
+
+<ng-template #loadingTpl>
+    <div style="text-align: center; margin: 1rem">
+        <fd-busy-indicator [loading]="true"></fd-busy-indicator>
+    </div>
+</ng-template>

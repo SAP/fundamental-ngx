@@ -1,9 +1,17 @@
+import { FdLanguageKeyArgs } from '../models';
 import { TranslationResolver } from './translation-resolver';
 
 describe('TranslationResolver', () => {
-    let resolver: TranslationResolver;
+    class TestTranslatioResolver extends TranslationResolver {
+        // wrapper for internal "_interpolate" method
+        testInterpolate(expression: string, args?: FdLanguageKeyArgs): string {
+            return super._interpolate(expression, args);
+        }
+    }
+
+    let resolver: TestTranslatioResolver;
     beforeEach(() => {
-        resolver = new TranslationResolver();
+        resolver = new TestTranslatioResolver();
     });
 
     const cases: [unprocessed: string, args: Record<string, any> | undefined, result: string][] = [
@@ -31,7 +39,7 @@ describe('TranslationResolver', () => {
 
     cases.forEach(([unprocessed, args, result]) => {
         it(`"${unprocessed}" should be processed as "${result}"`, () => {
-            expect(resolver._interpolate(unprocessed, args)).toBe(result);
+            expect(resolver.testInterpolate(unprocessed, args)).toBe(result);
         });
     });
 });

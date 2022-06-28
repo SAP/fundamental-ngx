@@ -87,7 +87,7 @@ export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit,
 
     /** Aria label for the time picker input. */
     @Input()
-    timePickerInputLabel = 'Time picker input';
+    timePickerInputLabel: string;
 
     /** Whether a null input is considered valid(success). */
     @Input()

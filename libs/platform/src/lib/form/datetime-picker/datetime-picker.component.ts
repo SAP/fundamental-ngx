@@ -96,13 +96,19 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
     @Input()
     activeView: FdCalendarView = 'day';
 
-    /** Aria label for the datetime picker input. */
+    /**
+     * @deprecated use i18n capabilities instead (being translated in core datetime picker)
+     * Aria label for the datetime picker input.
+     */
     @Input()
-    datetimeInputLabel = 'Datetime input';
+    datetimeInputLabel: string;
 
-    /** Aria label for the button to show/hide the calendar. */
+    /**
+     * @deprecated use i18n capabilities instead (being translated in core datetime picker)
+     * Aria label for the button to show/hide the calendar.
+     */
     @Input()
-    displayDatetimeToggleLabel = 'Display calendar toggle';
+    displayDatetimeToggleLabel: string;
 
     /** Whether a null input is considered valid. */
     @Input()

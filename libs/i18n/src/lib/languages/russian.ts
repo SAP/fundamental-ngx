@@ -151,6 +151,9 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
     coreWizard: {
         ariaLabel: 'Мастер'
     },
+    platformActionBar: {
+        backButtonLabel: 'Вернуться назад'
+    },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Наблюдатели',
         defaultTitle: 'Процесс утверждения',
@@ -263,6 +266,9 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
             }
         }
     },
+    platformFeedInput: {
+        userTitle: 'Пользователь'
+    },
     platformVHD: {
         selectionBarLabel: 'Выбранные элементы и условия',
         selectedAndConditionLabel: 'Выбранные элементы и условия',
@@ -346,7 +352,10 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
                 default:
                     return `Введите значение не более ${count || 0} символов`;
             }
-        }
+        },
+        selectTabTitle: 'Выбрать из списка',
+        searchTableEmptyMessage: 'Используйте поиск для получения результатов',
+        defineTabTitle: 'Определить условия'
     },
     platformCombobox: {
         countListResultsSingular: '1 элемент',
@@ -415,7 +424,20 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
     platformSearchField: {
         clearButtonTitle: 'Очистить',
         submitButtonTitle: 'Поиск',
-        synchronizeButtonTitle: 'Синхронизировать'
+        synchronizeButtonTitle: 'Синхронизировать',
+        searchSuggestionMessage: (params) => {
+            const count = params['count'];
+            const option = pluralization.process(count);
+            switch (option) {
+                case 'one':
+                    return `Найден 1 вариант`;
+                case 'few':
+                    return `Найдено ${count} варианта`;
+                default:
+                    return `Найдено ${count || 0} вариантов`;
+            }
+        },
+        searchSuggestionNavigateMessage: 'используйте стрелки вверх и вниз для навигации'
     },
     platformSmartFilterBar: {
         searchPlaceholder: 'Поиск',
@@ -432,7 +454,28 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         selectFiltersFilterColumnLabel: 'Фильтр',
         selectFiltersActiveColumnLabel: 'Активный',
         selectFiltersSubmitButtonLabel: 'Перейти',
-        selectFiltersCancelButton: 'Отменить'
+        selectFiltersCancelButton: 'Отменить',
+        filterConditionContains: 'содержит',
+        filterConditionEqualTo: 'равно',
+        filterConditionBetween: 'между',
+        filterConditionBeginsWith: 'начинается с',
+        filterConditionEndsWith: 'заканчивается',
+        filterConditionLessThan: 'меньше чем',
+        filterConditionLessThanOrEqualTo: 'меньше или равно',
+        filterConditionGreaterThan: 'больше чем',
+        filterConditionGreaterThanOrEqualTo: 'больше или равно',
+        filterConditionAfter: 'после',
+        filterConditionOnOrAfter: 'равно или после',
+        filterConditionBefore: 'до',
+        filterConditionBeforeOrOn: 'до или равно',
+        filterConditionValuePlaceholder: 'значение',
+        filterConditionValueFromPlaceholder: 'от',
+        filterConditionValueToPlaceholder: 'до',
+        settingsCategoryAll: 'Все',
+        settingsCategoryVisible: 'Видимые',
+        settingsCategoryActive: 'Активные',
+        settingsCategoryVisibleAndActive: 'Видимые и активные',
+        settingsCategoryMandatory: 'Обязательные'
     },
     platformTable: {
         headerMenuSortAsc: 'Сортировать по возрастанию',
@@ -533,7 +576,8 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Перейти к предыдущему',
         detailsGotoNextButtonTitle: 'Перейти к следующему',
-        detailsDialogCloseBtnLabel: 'Закрыть'
+        detailsDialogCloseBtnLabel: 'Закрыть',
+        roleDescription: 'Изображение'
     },
     platformUploadCollection: {
         moveToTitle: 'Переместить в',
@@ -580,6 +624,8 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         cancelUploadNewFileAction: 'Отменить',
         itemMenuBtnTitle: 'Больше',
         dragDropAreaText: 'Перетащите файлы для загрузки',
+        noDataText: 'Файлы не найдены',
+        noDataDescription: 'Перетащите файлы для загрузки или воспользуйтесь кнопкой «Добавить».',
         paginationTotal: 'Показано {{ from }}-{{ to }} из {{ total }}',
         resultsPerPage: 'Результаты на странице',
         messageCreateFailed: 'Не удалось создать {{ folderName }}.',
@@ -676,6 +722,10 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         valueminDetails: 'Значение равно {{ value }}',
         valuemaxDetails: 'Значение равно {{ value }}',
         valueNowDetails: 'Текущее значение: {{ value }}'
+    },
+    fnSwitch: {
+        semanticAcceptLabel: 'Принять',
+        semanticDeclineLabel: 'Отклонить'
     }
 };
 

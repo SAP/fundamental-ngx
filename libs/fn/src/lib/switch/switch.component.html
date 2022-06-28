@@ -26,7 +26,11 @@
             {{ isChecked ? activeText : inactiveText }}
         </span>
         <span *ngIf="semantic" [id]="_semanticLabelId" aria-hidden="true" class="fn-switch__invisible-text">
-            {{ checked ? semanticAcceptLabel : semanticDeclineLabel }}
+            {{
+                checked
+                    ? semanticAcceptLabel || ('fnSwitch.semanticAcceptLabel' | fdTranslate)
+                    : semanticDeclineLabel || ('fnSwitch.semanticAcceptLabel' | fdTranslate)
+            }}
         </span>
     </label>
 </div>

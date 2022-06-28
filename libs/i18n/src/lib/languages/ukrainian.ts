@@ -150,6 +150,9 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
     coreWizard: {
         ariaLabel: 'Майстер'
     },
+    platformActionBar: {
+        backButtonLabel: 'Повернутися назад'
+    },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Спостерігачі',
         defaultTitle: 'Процес затвердження',
@@ -262,6 +265,9 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
             }
         }
     },
+    platformFeedInput: {
+        userTitle: 'Користувач'
+    },
     platformVHD: {
         selectionBarLabel: 'Вибрані елементи та умови',
         selectedAndConditionLabel: 'Вибрані елементи та умови',
@@ -345,7 +351,10 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
                 default:
                     return `Введіть значення не більше ніж ${count || 0} символів`;
             }
-        }
+        },
+        selectTabTitle: 'Вибрати зі списку',
+        searchTableEmptyMessage: 'Використовуйте пошук, щоб отримати результати',
+        defineTabTitle: 'Визначити умови'
     },
     platformCombobox: {
         countListResultsSingular: '1 елемент',
@@ -413,7 +422,20 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
     platformSearchField: {
         clearButtonTitle: 'Очистити',
         submitButtonTitle: 'Пошук',
-        synchronizeButtonTitle: 'Синхронізувати'
+        synchronizeButtonTitle: 'Синхронізувати',
+        searchSuggestionMessage: (params) => {
+            const count = params['count'];
+            const option = pluralization.process(count);
+            switch (option) {
+                case 'one':
+                    return `Знайдено 1 варіант`;
+                case 'few':
+                    return `Знайдено ${count} варіанти`;
+                default:
+                    return `Знайдено ${count || 0} варіантів`;
+            }
+        },
+        searchSuggestionNavigateMessage: 'використовуйте стрілки вгору та вниз для навігації'
     },
     platformSmartFilterBar: {
         searchPlaceholder: 'Пошук',
@@ -430,7 +452,28 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         selectFiltersFilterColumnLabel: 'Фільтр',
         selectFiltersActiveColumnLabel: 'Активний',
         selectFiltersSubmitButtonLabel: 'Перейти',
-        selectFiltersCancelButton: 'Скасувати'
+        selectFiltersCancelButton: 'Скасувати',
+        filterConditionContains: 'містить',
+        filterConditionEqualTo: 'дорівнює',
+        filterConditionBetween: 'між',
+        filterConditionBeginsWith: 'починається з',
+        filterConditionEndsWith: 'закінчується',
+        filterConditionLessThan: 'менше ніж',
+        filterConditionLessThanOrEqualTo: 'менше або одно',
+        filterConditionGreaterThan: 'більше ніж',
+        filterConditionGreaterThanOrEqualTo: 'більше або дорівнює',
+        filterConditionAfter: 'після',
+        filterConditionOnOrAfter: 'дорівнює або після',
+        filterConditionBefore: 'до',
+        filterConditionBeforeOrOn: 'до або дорівнює',
+        filterConditionValuePlaceholder: 'значення',
+        filterConditionValueFromPlaceholder: 'від',
+        filterConditionValueToPlaceholder: 'до',
+        settingsCategoryAll: 'Всі',
+        settingsCategoryVisible: 'Видимі',
+        settingsCategoryActive: 'Активні',
+        settingsCategoryVisibleAndActive: 'Видимі та активні',
+        settingsCategoryMandatory: "Обов'язкові"
     },
     platformTable: {
         headerMenuSortAsc: 'Сортувати за зростанням',
@@ -531,7 +574,8 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Перейти до попереднього',
         detailsGotoNextButtonTitle: 'Перейти до наступного',
-        detailsDialogCloseBtnLabel: 'Закрити'
+        detailsDialogCloseBtnLabel: 'Закрити',
+        roleDescription: 'Зображення'
     },
     platformUploadCollection: {
         moveToTitle: 'Перемістити до',
@@ -578,6 +622,8 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         cancelUploadNewFileAction: 'Скасувати',
         itemMenuBtnTitle: 'Більше',
         dragDropAreaText: 'Перетягніть файли для завантаження',
+        noDataText: 'Файлів не знайдено',
+        noDataDescription: 'Перетягніть файли для завантаження або скористайтеся кнопкою «Додати».',
         paginationTotal: 'Показано {{ from }}-{{ to }} із {{ total }}',
         resultsPerPage: 'Результатів на сторінці',
         messageCreateFailed: 'Не вдалося створити {{ folderName }}.',
@@ -675,6 +721,10 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         valueminDetails: 'Поточне значення: {{ value }}',
         valuemaxDetails: 'Поточне значення: {{ value }}',
         valueNowDetails: 'Поточне значення: {{ value }}'
+    },
+    fnSwitch: {
+        semanticAcceptLabel: 'Прийняти',
+        semanticDeclineLabel: 'Відхилити'
     }
 };
 

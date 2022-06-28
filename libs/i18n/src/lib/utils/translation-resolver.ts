@@ -23,8 +23,11 @@ export class TranslationResolver {
         return this._getFdLanguageKeyValue(FD_LANGUAGE_ENGLISH, key, args) ?? '';
     }
 
-    /** @hidden */
-    _interpolate(expression: string, args: FdLanguageKeyArgs = {}): string {
+    /**
+     * @hidden
+     * "protected" access modified is used in order to be able to reference this method directly in tests
+     */
+    protected _interpolate(expression: string, args: FdLanguageKeyArgs = {}): string {
         return expression.replace(this._curlyBracesRegExp, (matchingGroup: string, match: string) => {
             const key = match?.trim();
             return args[key]?.toString() ?? '';

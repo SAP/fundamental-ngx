@@ -127,18 +127,22 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     conditionDisplayFn = defaultConditionDisplayFn;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Select from list tab's and Search table settings
      * */
     @Input()
-    selectTabTitle = 'Select from list';
+    selectTabTitle: string;
 
     /** Selection mode for search table */
     @Input()
     searchSelection: VdhTableSelection = 'multi';
 
-    /** Text displayed when table has no items. */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Text displayed when table has no items.
+     */
     @Input()
-    searchTableEmptyMessage = 'Use the search to get results';
+    searchTableEmptyMessage: string;
 
     /** Items per page for pagination below search table */
     @Input()
@@ -165,9 +169,12 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     @Input()
     contentDensity: ContentDensity = ContentDensityEnum.COMPACT;
 
-    /** Define conditions tab's settings */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Define conditions tab's settings
+     */
     @Input()
-    defineTabTitle = 'Define Conditions';
+    defineTabTitle: string;
 
     /** Dialog outputs */
     /** Event emitted when filters/tokens were changed. */

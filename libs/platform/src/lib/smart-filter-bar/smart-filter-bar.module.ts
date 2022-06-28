@@ -14,6 +14,7 @@ import {
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformSelectModule } from '@fundamental-ngx/platform/form';
+import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
@@ -53,6 +54,7 @@ import { I18nModule } from '@fundamental-ngx/i18n';
         PlatformButtonModule,
         PlatformInputGroupModule,
         IconModule,
+        BusyIndicatorModule,
         PlatformSearchFieldModule,
         DialogModule,
         ListModule,

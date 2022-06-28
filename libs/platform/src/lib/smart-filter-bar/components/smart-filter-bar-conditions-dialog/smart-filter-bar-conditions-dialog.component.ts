@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    Inject,
+    QueryList,
+    ViewChildren,
+    ViewEncapsulation
+} from '@angular/core';
 
 import { FilterAllStrategy, FILTER_STRATEGY } from '@fundamental-ngx/platform/table';
 import { SelectItem } from '@fundamental-ngx/platform/shared';
@@ -7,6 +15,9 @@ import { DynamicFormControl, DynamicFormItem, FormGeneratorComponent } from '@fu
 import { SmartFilterBarCondition, SmartFilterBarConditionBuilder } from '../../interfaces/smart-filter-bar-condition';
 import { SmartFilterBarService } from '../../smart-filter-bar.service';
 import { getSelectItemValue } from '../../helpers';
+import { SmartFilterBarStrategyLabels } from '../../interfaces/strategy-labels.type';
+import { FdLanguage, FD_LANGUAGE, TranslationResolver } from '@fundamental-ngx/i18n';
+import { firstValueFrom, Observable } from 'rxjs';
 
 @Component({
     selector: 'fdp-smart-filter-bar-conditions-dialog',
@@ -31,16 +42,49 @@ export class SmartFilterBarConditionsDialogComponent {
     formGenerators!: QueryList<FormGeneratorComponent>;
 
     /** @hidden */
+    loaded = false;
+
+    /** @hidden */
+    private readonly _conditionLabelKeys: SmartFilterBarStrategyLabels = {
+        contains: 'filterConditionContains',
+        equalTo: 'filterConditionEqualTo',
+        between: 'filterConditionBetween',
+        beginsWith: 'filterConditionBeginsWith',
+        endsWith: 'filterConditionEndsWith',
+        lessThan: 'filterConditionLessThan',
+        lessThanOrEqualTo: 'filterConditionLessThanOrEqualTo',
+        greaterThan: 'filterConditionGreaterThan',
+        greaterThanOrEqualTo: 'filterConditionGreaterThanOrEqualTo',
+        after: 'filterConditionAfter',
+        onOrAfter: 'filterConditionOnOrAfter',
+        before: 'filterConditionBefore',
+        beforeOrOn: 'filterConditionBeforeOrOn'
+    };
+
+    /** @hidden */
     private _submittedForms: any[] = [];
+
+    /** @hidden */
+    private _language: FdLanguage;
+
+    /** @hidden */
+    private _translationResolver = new TranslationResolver();
 
     /** @hidden */
     constructor(
         private _dialogRef: DialogRef<SmartFilterBarConditionBuilder, SmartFilterBarCondition[]>,
+        @Inject(FD_LANGUAGE) private readonly _language$: Observable<FdLanguage>,
+        private readonly _cdr: ChangeDetectorRef,
         private _smartFilterBarService: SmartFilterBarService
     ) {
+        this._init();
+    }
+
+    private async _init(): Promise<void> {
         this.config = this._dialogRef.data;
 
-        this.conditionOperatorOptions = this._getApplicableConditionOperators();
+        this._language = await firstValueFrom(this._language$);
+        this.conditionOperatorOptions = await this._getApplicableConditionOperators();
 
         this._addExistingConditions(getSelectItemValue(this.config.conditions));
 
@@ -48,6 +92,8 @@ export class SmartFilterBarConditionsDialogComponent {
             // Add first empty condition
             this.addCondition();
         }
+        this.loaded = true;
+        this._cdr.markForCheck();
     }
 
     /**
@@ -114,8 +160,23 @@ export class SmartFilterBarConditionsDialogComponent {
             this.config.dataType
         );
 
+        let labelsConfig = this.config.defineStrategyLabels;
+
+        if (!labelsConfig) {
+            labelsConfig = { ...this._conditionLabelKeys };
+            for (const strategyItem in labelsConfig) {
+                if (Object.prototype.hasOwnProperty.call(labelsConfig, strategyItem)) {
+                    const translationKey = labelsConfig[strategyItem];
+                    labelsConfig[strategyItem] = this._translationResolver.resolve(
+                        this._language,
+                        'platformSmartFilterBar.' + translationKey
+                    );
+                }
+            }
+        }
+
         return strategy.map((s: FilterAllStrategy) => ({
-            label: this.config.defineStrategyLabels[s],
+            label: labelsConfig![s],
             value: s
         }));
     }
@@ -157,7 +218,10 @@ export class SmartFilterBarConditionsDialogComponent {
                 default: condition?.value,
                 type: this.config.filterType,
                 choices: this.config.choices,
-                placeholder: 'value',
+                placeholder: this._translationResolver.resolve(
+                    this._language,
+                    'platformSmartFilterBar.filterConditionValuePlaceholder'
+                ),
                 controlType: this.config.controlType,
                 when: (value) => value.operator !== FILTER_STRATEGY.BETWEEN,
                 onchange: (value, _, control: DynamicFormControl) => {
@@ -176,7 +240,10 @@ export class SmartFilterBarConditionsDialogComponent {
                 default: condition?.value,
                 type: this.config.filterType,
                 choices: this.config.choices,
-                placeholder: 'from',
+                placeholder: this._translationResolver.resolve(
+                    this._language,
+                    'platformSmartFilterBar.filterConditionValueFromPlaceholder'
+                ),
                 controlType: this.config.controlType,
                 when: (value) => value.operator === FILTER_STRATEGY.BETWEEN,
                 onchange: (value, _, control: DynamicFormControl) => {
@@ -195,7 +262,10 @@ export class SmartFilterBarConditionsDialogComponent {
                 default: condition?.value2,
                 type: this.config.filterType,
                 choices: this.config.choices,
-                placeholder: 'to',
+                placeholder: this._translationResolver.resolve(
+                    this._language,
+                    'platformSmartFilterBar.filterConditionValueToPlaceholder'
+                ),
                 required: true,
                 controlType: this.config.controlType,
                 when: (value) => value?.operator === FILTER_STRATEGY.BETWEEN,
