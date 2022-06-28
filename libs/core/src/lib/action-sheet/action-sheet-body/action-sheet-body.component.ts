@@ -1,5 +1,4 @@
 import {
-    AfterViewInit,
     ChangeDetectionStrategy,
     Component,
     ElementRef,
@@ -13,11 +12,7 @@ import { KeyboardSupportService } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
 
 import { ActionSheetItemComponent } from '../action-sheet-item/action-sheet-item.component';
-import {
-    ContentDensityMode,
-    ContentDensityObserver,
-    contentDensityObserverProviders
-} from '@fundamental-ngx/core/content-density';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 let actionSheetBodyUniqueIdCounter = 0;
 
@@ -41,7 +36,7 @@ let actionSheetBodyUniqueIdCounter = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [contentDensityObserverProviders()]
 })
-export class ActionSheetBodyComponent implements AfterViewInit {
+export class ActionSheetBodyComponent {
     /** Id of the Action Sheet Body. */
     @Input()
     actionSheetBodyId = `fd-action-sheet-body-${actionSheetBodyUniqueIdCounter++}`;
@@ -78,19 +73,5 @@ export class ActionSheetBodyComponent implements AfterViewInit {
         if (this._keyboardSupportService.keyManager) {
             this._keyboardSupportService.onKeyDown(event);
         }
-    }
-
-    /** @hidden */
-    ngAfterViewInit(): void {
-        this._contentDensityObserver
-            .consume({
-                contentDensitySettings: {
-                    modifiers: {
-                        [ContentDensityMode.COMPACT]: 'fd-action-sheet--compact'
-                    }
-                },
-                elementRef: () => this.actionSheetElementRef
-            })
-            .subscribe();
     }
 }

@@ -5,6 +5,7 @@
     [attr.aria-labelledby]="ariaLabelledby"
     class="fd-action-sheet"
     [class.fd-action-sheet--mobile]="mobile"
+    [class.fd-action-sheet--compact]="_contentDensityObserver.isCompact$ | async"
     role="menu"
 >
     <ng-content select="[fd-action-sheet-item]"></ng-content>
