@@ -110,6 +110,7 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
     ngOnChanges(): void {
         this.refreshTarget(this);
         this.reset();
+        this._initTruncate();
         this.refreshTruncate();
     }
 
@@ -122,8 +123,6 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
     refreshTarget(event: TruncateDirective): void {
         this._truncateTarget = event.rootElement;
         this._originalText = event.fdTruncateTargetText;
-        this.reset();
-        this.refreshTruncate();
     }
 
     refreshTruncate(): void {
@@ -144,7 +143,9 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
         if (this._originalText && this._originalText.length > this._maxChars) {
             this._hasMore = true;
             this.charCountUpdate.emit(this._hasMore);
-            this._truncate();
+            if (this.fdTruncateState) {
+                this._truncate();
+            }
         }
     }
 
@@ -168,13 +169,14 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
             ellipsisTextArray.pop();
         }
 
-        this._truncatedText = this._truncateTarget.textContent = ellipsisTextArray.join('') + ' … ';
+        this._truncatedText = ellipsisTextArray.join('') + ' … ';
     }
 
     /** @hidden */
     private _checkWidth(): void {
         const width = this.rootElement.offsetWidth;
-
+        console.log('width', width);
+        console.log('width count', this._widthCount);
         this._maxChars = this._customCharCount
             ? this._customCharCount
             : width >= this._widthCount
