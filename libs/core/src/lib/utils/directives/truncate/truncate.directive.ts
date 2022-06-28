@@ -53,6 +53,12 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
     /** @hidden */
     private _truncateTarget: HTMLElement;
 
+    /** @hidden
+     * If fdTruncateTargetText is not provided this directive truncates Text Content of an element
+     * This Text Content of an element
+     */
+    private fdTruncateTargetTextContent: string;
+
     /** @hidden */
     private _originalText: string;
 
@@ -84,9 +90,20 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
         return this._elementRef.nativeElement;
     }
 
+    /** @hidden
+     * Sets fdTruncateTargetInnerText
+     */
+    _setTextContent(): void {
+        this.fdTruncateTargetTextContent = this._elementRef.nativeElement.textContent;
+    }
+
     /** @hidden */
     ngAfterViewInit(): void {
         if (this.rootElement) {
+            this._setTextContent();
+            this.refreshTarget(this);
+            this.reset();
+
             this._initTruncate();
 
             this.windowResize$ = fromEvent(window, 'resize')
@@ -122,7 +139,11 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
 
     refreshTarget(event: TruncateDirective): void {
         this._truncateTarget = event.rootElement;
-        this._originalText = event.fdTruncateTargetText;
+        this._originalText = event.fdTruncateTargetText
+            ? event.fdTruncateTargetText
+            : this.fdTruncateTargetTextContent
+            ? this.fdTruncateTargetTextContent
+            : '';
     }
 
     refreshTruncate(): void {
