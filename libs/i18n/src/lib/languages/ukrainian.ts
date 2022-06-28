@@ -6,6 +6,29 @@ const pluralization = new PluralizationSet1();
  * Default set of translations of Fundamental UI libarary for Ukrainian language
  */
 export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
+    coreCarousel: {
+        leftNavigationBtnLabel: 'Перейти до попереднього елемента',
+        rightNavigationBtnLabel: 'Перейти до наступного елемента'
+    },
+    coreDatePicker: {
+        dateInputLabel: 'Поле вводу дати',
+        dateRangeInputLabel: 'Поле введення діапазону дат',
+        displayCalendarToggleLabel: 'Відкрити засіб вибору',
+        valueStateSuccessMessage: 'Значення стану: Успіх',
+        valueStateInformationMessage: 'Значення стану: Інформаційний',
+        valueStateWarningMessage: 'Значення стану: Попередження',
+        valueStateErrorMessage: 'Значення стану: Помилка'
+    },
+    coreDatetimePicker: {
+        datetimeInputLabel: 'Поле вводу дати та часу',
+        displayDatetimeToggleLabel: 'Показати календар',
+        displayTypeDateLabel: 'Дата',
+        displayTypeTimeLabel: 'Час'
+    },
+    coreFeedListItem: {
+        moreLabel: 'Більше',
+        lessLabel: 'Менше'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Скасувати',
         listItemStatusAriaLabel: 'Елемент має статус. Статус: {{ status }}.',
@@ -27,6 +50,32 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         listItemStatusLocked: 'Заблоковано',
         listItemStatusDraft: 'Чернетка'
     },
+    coreMessageStrip: {
+        dismissLabel: 'Закрити'
+    },
+    coreNestedList: {
+        linkItemAriaLabel: 'Елемент дерева {{ itemDetails }}, {{ index }} із {{ total }}{{ selectedDescription }}'
+    },
+    corePagination: {
+        pageLabel: 'Сторінка {{ pageNumber }}',
+        currentPageAriaLabel: 'Сторінка {{ pageNumber }} є активною',
+        labelBeforeInputMobile: 'Сторінка:',
+        labelAfterInputMobile: 'із {{ totalCount }}',
+        inputAriaLabel: 'Поле вводу сторінки, Поточна сторінка, Сторінка {{ pageNumber }} із {{ totalCount }}',
+        itemsPerPageLabel: 'Результатів на сторінці:',
+        firstLabel: 'Перейти до першої',
+        previousLabel: 'Перейти до попердньої',
+        nextLabel: 'Перейти до наступної',
+        lastLabel: 'Перейти до останньої',
+        ariaLabel: 'Нумерація сторінок',
+        totalResultsLabel: '{{ totalCount }} результатів'
+    },
+    coreProductSwitch: {
+        ariaLabel: 'Перемикач'
+    },
+    coreShellbar: {
+        collapsedItemMenuLabel: 'Згорнуте меню елементів'
+    },
     coreSlider: {
         singleMinMaxDetails: 'Мінімальне значення слайдера {{min}}, максимальне значення {{ max }}',
         singleValueminDetails: 'Поточне значення: {{ value }}',
@@ -40,6 +89,66 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         multipleHandle2ValueminDetails: 'Поточне значення: {{ value }}',
         multipleHandle2ValuemaxDetails: 'Поточне значення: {{ value }}',
         multipleHandle2ValueNowDetails: 'Поточне значення: {{ value }}'
+    },
+    coreSplitButton: {
+        expandButtonAriaLabel: 'Більше дій'
+    },
+    coreSplitter: {
+        paginationItemAriaLabel: 'Секція'
+    },
+    coreStepInput: {
+        incrementButtonTitle: 'Збільшити',
+        decrementButtonTitle: 'Зменшити',
+        ariaRoleDescription: 'Крок вводу'
+    },
+    coreSwitch: {
+        semanticAcceptLabel: 'Прийняти',
+        semanticDeclineLabel: 'Відхилити'
+    },
+    coreTabs: {
+        tabListExpandButtonText: 'Більше'
+    },
+    coreText: {
+        moreLabel: 'Більше',
+        lessLabel: 'Менше'
+    },
+    coreTime: {
+        componentAriaName: 'Вибір часу',
+        increaseHoursLabel: 'Збільшити години',
+        hoursLabel: 'Год',
+        decreaseHoursLabel: 'Зменшити години',
+        increaseMinutesLabel: 'Збільшити хвилини',
+        minutesLabel: 'Хв',
+        decreaseMinutesLabel: 'Зменшити хвилини',
+        increaseSecondsLabel: 'Збільшити секунди',
+        secondsLabel: 'Сек',
+        decreaseSecondsLabel: 'Зменшити секунди',
+        increasePeriodLabel: 'Збільшити період',
+        periodLabel: 'Період',
+        decreasePeriodLabel: 'Зменшити період',
+        navigationInstruction:
+            'Щоб переміщатися між елементами в цьому списку, використовуйте стрілку вверх або вниз. ' +
+            'Для переключення між списками використовуйте стрілку вліво або вправо.'
+    },
+    coreTimePicker: {
+        timePickerInputLabel: 'Поле вводу часу',
+        timePickerButtonLabel: 'Відкрити вікно вибору'
+    },
+    coreToken: {
+        deleteButtonLabel: 'Може бути видаленим',
+        ariaRoleDescription: 'токен'
+    },
+    coreUploadCollection: {
+        menuOkText: 'ОК',
+        menuCancelText: 'Відмінити',
+        menuEditAriaLabel: 'Редагувати',
+        menuDeleteAriaLabel: 'Видалити',
+        menuOkAriaLabel: 'Редагувати',
+        menuCancelAriaLabel: 'Відминити',
+        formItemPlaceholder: "Ім'я файлу"
+    },
+    coreWizard: {
+        ariaLabel: 'Майстер'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Спостерігачі',

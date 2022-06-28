@@ -6,6 +6,7 @@ import {
     Component,
     ElementRef,
     EventEmitter,
+    Inject,
     Input,
     OnChanges,
     OnDestroy,
@@ -19,7 +20,7 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { firstValueFrom, Observable, Subscription } from 'rxjs';
 import { NgModel } from '@angular/forms';
 
 import {
@@ -31,6 +32,7 @@ import {
 
 import { Pagination } from './pagination.model';
 import { PaginationService } from './pagination.service';
+import { FdLanguage, FD_LANGUAGE, TranslationResolver } from '@fundamental-ngx/i18n';
 
 /** Constant representing the default number of items per page. */
 const DEFAULT_ITEMS_PER_PAGE = 10;
@@ -38,6 +40,8 @@ const DEFAULT_ITEMS_PER_PAGE = 10;
 interface CurrentShowing {
     from: number;
     to: number;
+    totalCount: number;
+    /** @deprecated has been renamed to "totalCount" */
     of: number;
 }
 
@@ -119,11 +123,12 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     itemsPerPageTemplate: TemplateRef<any>;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Label for options for items per page.
      * This property is mainly provided to support reading in the right language for screen reader.
      */
     @Input()
-    itemsPerPageLabel = 'Results per Page';
+    itemsPerPageLabel: string;
 
     /** Represents the options for items per page. */
     @Input()
@@ -152,39 +157,44 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     displayTextTemplate: TemplateRef<any>;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Label for the 'first' page button.
      * This property is mainly provided to support reading in the right language for screen reader.
      */
     @Input()
-    firstLabel = 'First';
+    firstLabel: string;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Label for the 'previous' page button.
      * This property is mainly provided to support reading in the right language for screen reader.
      */
     @Input()
-    previousLabel = 'Previous';
+    previousLabel: string;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Label for the 'next' page button.
      * This property is mainly provided to support reading in the right language for screen reader.
      */
     @Input()
-    nextLabel = 'Next';
+    nextLabel: string;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Label for the 'last' page button.
      * This property is mainly provided to support reading in the right language for screen reader.
      */
     @Input()
-    lastLabel = 'Last';
+    lastLabel: string;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Aria label for the navigation element
      * This property is mainly provided to support reading in the right language for screen reader.
      */
     @Input()
-    ariaLabel = 'Pagination';
+    ariaLabel: string;
 
     /** Event emitted when the page is changed. */
     @Output()
@@ -260,7 +270,8 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     _currentShowing: CurrentShowing = {
         from: 0,
         to: 0,
-        of: 0
+        of: 0,
+        totalCount: 0
     };
 
     /** @hidden */
@@ -282,26 +293,31 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     private _subscriptions = new Subscription();
 
     /** @hidden */
+    private _translationResolver = new TranslationResolver();
+
+    /** @hidden */
     private get _isRtl(): boolean {
         return this._rtlService?.rtl.value;
     }
 
     /**
+     * @deprecated use i18n capabilities instead
      * Label for the 'Page ' page button. Page number passed as function parameter.
      * This property is mainly provided to support reading in the right language for screen reader.
      */
     @Input()
-    pageLabel: (page: number) => string = (page: number) => `Page ${page}`;
+    pageLabel: (page: number) => string;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Function to create current page aria label, current page passed as a parameter of the function
      * This property is mainly provided to support reading in the right language for screen reader.
      */
     @Input()
-    currentPageAriaLabel: (currentPage: number) => string = (currentPage: number) =>
-        `Page ${currentPage} is current page`;
+    currentPageAriaLabel: (currentPage: number) => string;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Page label to be shown before current page input in mobile mode.
      * In conjuction with @pageLabelAfterInputMobile generates the label for the input.
      * Example: 'Page' + input + pageLabelAfterInputMobile
@@ -309,30 +325,32 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      */
     // eslint-disable-next-line @typescript-eslint/member-ordering
     @Input()
-    labelBeforeInputMobile = 'Page';
+    labelBeforeInputMobile: string;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Page label to be shown after current page input in mobile mode. Pages count passed as the function parameter.
      * In conjuction with @pageLabelBeforeInputMobile generates the label for the input.
      * Example: pageLabelBeforeInputMobile + input + 'of 500'.
      * This property is mainly provided to support i18n.
      */
     @Input()
-    labelAfterInputMobile: (pagesCount: number) => string = (pagesCount: number) => `of ${pagesCount}`;
+    labelAfterInputMobile: (pagesCount: number) => string;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Current page input aria label, parameters passed to the function (currentPage: number, pagesCount: number).
      * This property is mainly provided to support reading in the right language for screen reader.
      */
     @Input()
-    inputAriaLabel: (currentPage: number, pagesCount: number) => string = (currentPage: number, pagesCount: number) =>
-        `Page input, Current page, Page ${currentPage} of ${pagesCount}`;
+    inputAriaLabel: (currentPage: number, pagesCount: number) => string;
 
     /** @hidden */
     constructor(
         private readonly paginationService: PaginationService,
         private readonly _cdr: ChangeDetectorRef,
         private readonly _liveAnnouncer: LiveAnnouncer,
+        @Inject(FD_LANGUAGE) private readonly _language: Observable<FdLanguage>,
         @Optional() private readonly _rtlService: RtlService,
         @Optional() private readonly _contentDensityService: ContentDensityService
     ) {}
@@ -399,7 +417,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
 
         this.pageChangeStart.emit(page);
 
-        this._liveAnnouncer.announce(this.currentPageAriaLabel(page));
+        this._announcePage(page);
     }
 
     /** Navigates to the first page */
@@ -467,7 +485,8 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         this._currentShowing = {
             from: this.currentPage - 1 === 0 ? 1 : (this.currentPage - 1) * itemsPerPage + 1,
             to: Math.min((this.currentPage - 1) * itemsPerPage + itemsPerPage, this.totalItems),
-            of: this.totalItems
+            of: this.totalItems,
+            totalCount: this.totalItems
         };
 
         this._cdr.markForCheck();
@@ -507,5 +526,20 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
 
         this._displayedPageSizeOptions.sort((a, b) => a - b);
         this._cdr.markForCheck();
+    }
+
+    /** @hidden */
+    private async _announcePage(page: number): Promise<void> {
+        let label: string;
+        if (this.currentPageAriaLabel) {
+            label = this.currentPageAriaLabel(page);
+        } else {
+            const lang = await firstValueFrom(this._language);
+            label = this._translationResolver.resolve(lang, 'corePagination.currentPageAriaLabel', {
+                pageNumber: page,
+                totalCount: this.totalItems
+            });
+        }
+        this._liveAnnouncer.announce(label);
     }
 }

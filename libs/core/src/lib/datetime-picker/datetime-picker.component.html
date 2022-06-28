@@ -20,15 +20,19 @@
                 [buttonFocusable]="buttonFocusable"
                 glyph="date-time"
                 [isExpanded]="isOpen"
-                [glyphAriaLabel]="displayDatetimeToggleLabel"
-                [iconTitle]="displayDatetimeToggleLabel"
+                [glyphAriaLabel]="
+                    displayDatetimeToggleLabel || ('coreDatetimePicker.displayDatetimeToggleLabel' | fdTranslate)
+                "
+                [iconTitle]="
+                    displayDatetimeToggleLabel || ('coreDatetimePicker.displayDatetimeToggleLabel' | fdTranslate)
+                "
                 (addOnButtonClicked)="togglePopover()"
             >
                 <input
                     type="text"
                     class="fd-input"
                     fd-input-group-input
-                    [attr.aria-label]="datetimeInputLabel"
+                    [attr.aria-label]="datetimeInputLabel || ('coreDatetimePicker.datetimeInputLabel' | fdTranslate)"
                     [attr.id]="inputId"
                     [attr.aria-required]="required"
                     [placeholder]="placeholder"
@@ -50,8 +54,16 @@
             <div class="fd-popover__wrapper fd-datetime__wrapper">
                 <div class="fd-datetime__display-type-switcher">
                     <fd-segmented-button [(ngModel)]="_displayType">
-                        <button fd-button [label]="displayTypeDateLabel" value="date"></button>
-                        <button fd-button [label]="displayTypeTimeLabel" value="time"></button>
+                        <button
+                            fd-button
+                            [label]="displayTypeDateLabel || ('coreDatetimePicker.displayTypeDateLabel' | fdTranslate)"
+                            value="date"
+                        ></button>
+                        <button
+                            fd-button
+                            [label]="displayTypeTimeLabel || ('coreDatetimePicker.displayTypeTimeLabel' | fdTranslate)"
+                            value="time"
+                        ></button>
                     </fd-segmented-button>
                 </div>
                 <fd-form-message id="fd-form-message" [embedded]="true" *ngIf="_message" [type]="state">

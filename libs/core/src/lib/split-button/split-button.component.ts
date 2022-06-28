@@ -83,9 +83,12 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     @Input()
     fdType: ButtonType;
 
-    /** Aria-label attribute used to describe expand button */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Aria-label attribute used to describe expand button
+     */
     @Input()
-    expandButtonAriaLabel = 'More actions';
+    expandButtonAriaLabel: string;
 
     /** Title attribute used to describe expand button */
     @Input()

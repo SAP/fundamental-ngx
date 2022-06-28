@@ -17,6 +17,8 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ShellbarModule } from '@fundamental-ngx/core/shellbar';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { IconModule } from '@fundamental-ngx/core/icon';
 
 /** PROVIDES DEPENDENCIES REQUIRED TO BUILD DOCUMENTATION SHELL */
 
@@ -25,6 +27,8 @@ import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
     imports: [
         MenuModule,
         FormsModule,
+        ListModule,
+        IconModule,
         ButtonModule,
         CommonModule,
         RouterModule,

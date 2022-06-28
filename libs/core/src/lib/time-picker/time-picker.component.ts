@@ -123,13 +123,19 @@ export class TimePickerComponent<D>
     @Input()
     placeholder: string;
 
-    /** Aria label for the time picker input. */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Aria label for the time picker input.
+     */
     @Input()
-    timePickerInputLabel = 'Time picker input';
+    timePickerInputLabel: string;
 
-    /** Aria label for the time picker toggle button. */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Aria label for the time picker toggle button.
+     */
     @Input()
-    timePickerButtonLabel = 'Open picker';
+    timePickerButtonLabel: string;
 
     /** Whether a null input is considered valid(success). */
     @Input()

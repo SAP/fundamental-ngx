@@ -140,41 +140,54 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
     @Input()
     useValidation = true;
 
-    /** Aria-label for the datepicker input. */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Aria-label for the datepicker input.
+     */
     @Input()
-    dateInputLabel = 'Date input';
-
-    /** Aria-label for the datepicker input. */
-    @Input()
-    dateRangeInputLabel = 'Date range input';
-
-    /** Aria-label for the button to show/hide the calendar. */
-    @Input()
-    displayCalendarToggleLabel = 'Open picker';
+    dateInputLabel: string;
 
     /**
+     * @deprecated use i18n capabilities instead
+     * Aria-label for the datepicker input.
+     */
+    @Input()
+    dateRangeInputLabel: string;
+
+    /**
+     * @deprecated use i18n capabilities instead
+     * Aria-label for the button to show/hide the calendar.
+     */
+    @Input()
+    displayCalendarToggleLabel: string;
+
+    /**
+     * @deprecated use i18n capabilities instead
      * Value state "success" aria message.
      */
     @Input()
-    valueStateSuccessMessage = 'Value state Success';
+    valueStateSuccessMessage: string;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Value state "information" aria message.
      */
     @Input()
-    valueStateInformationMessage = 'Value state Information';
+    valueStateInformationMessage: string;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Value state "warning" aria message.
      */
     @Input()
-    valueStateWarningMessage = 'Value state Warning';
+    valueStateWarningMessage: string;
 
     /**
+     * @deprecated use i18n capabilities instead
      * Value state "error" aria message.
      */
     @Input()
-    valueStateErrorMessage = 'Value state Error';
+    valueStateErrorMessage: string;
 
     /** Whether a null input is considered valid. */
     @Input()
@@ -394,7 +407,10 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
      * @hidden
      */
     get _dateInputArialLabel(): string {
-        return this.type === 'range' ? this.dateRangeInputLabel : this.dateInputLabel;
+        // return either input value or a key for "fdTranslate" pipe
+        return this.type === 'range'
+            ? this.dateRangeInputLabel || 'coreDatePicker.dateRangeInputLabel'
+            : this.dateInputLabel || 'coreDatePicker.dateInputLabel';
     }
 
     /** @hidden */

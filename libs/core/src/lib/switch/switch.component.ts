@@ -91,13 +91,19 @@ export class SwitchComponent implements ControlValueAccessor, OnInit, OnDestroy 
     @Input()
     ariaLabelledby: Nullable<string>;
 
-    /** Semantic Label Accept set for Accessibility */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Semantic Label Accept set for Accessibility
+     */
     @Input()
-    semanticAcceptLabel = 'Accept';
+    semanticAcceptLabel: string;
 
-    /** Semantic Label Decline set for Accessibility */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Semantic Label Decline set for Accessibility
+     */
     @Input()
-    semanticDeclineLabel = 'Decline';
+    semanticDeclineLabel: string;
 
     /**
      * Event fired when the state of the switch changes.

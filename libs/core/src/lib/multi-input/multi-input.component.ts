@@ -179,10 +179,6 @@ export class MultiInputComponent
     @Input()
     newTokenValidateFn = this._defaultTokenValidate;
 
-    /** Aria label for the multi input body. */
-    @Input()
-    multiInputBodyLabel = 'Multi input body';
-
     /**
      * Preset options for the Select body width, whatever is chosen, the body has a 600px limit.
      * * `at-least` will apply a minimum width to the body equivalent to the width of the control. - Default

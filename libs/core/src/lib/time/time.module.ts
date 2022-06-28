@@ -8,10 +8,11 @@ import { FormModule } from '@fundamental-ngx/core/form';
 import { PipeModule } from '@fundamental-ngx/core/utils';
 import { TimeColumnComponent } from './time-column/time-column.component';
 import { CarouselModule } from '@fundamental-ngx/core/carousel';
+import { I18nModule } from '@fundamental-ngx/i18n';
 
 @NgModule({
     declarations: [TimeComponent, TimeColumnComponent],
-    imports: [CommonModule, FormsModule, FormModule, ButtonModule, PipeModule, CarouselModule],
+    imports: [CommonModule, FormsModule, FormModule, ButtonModule, PipeModule, CarouselModule, I18nModule],
     exports: [TimeComponent, TimeColumnComponent]
 })
 export class TimeModule {}

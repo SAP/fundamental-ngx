@@ -8,10 +8,12 @@ import {
     HostBinding,
     HostListener,
     Input,
+    OnChanges,
     OnDestroy,
     OnInit,
     Output,
     QueryList,
+    SimpleChanges,
     ViewChild,
     ViewChildren,
     ViewEncapsulation
@@ -21,6 +23,7 @@ import { buffer, debounceTime, filter, map, tap } from 'rxjs/operators';
 import { DOWN_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 
 import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { CarouselDirective, CarouselItemDirective, CarouselConfig, PanEndOutput } from '@fundamental-ngx/core/carousel';
 
 import { TimeColumnConfig } from './time-column-config';
@@ -44,7 +47,7 @@ export interface TimeColumnItemOutput<T> {
     }
 })
 export class TimeColumnComponent<K, T extends SelectableViewItem<K> = SelectableViewItem<K>>
-    implements AfterViewInit, OnInit, OnDestroy
+    implements AfterViewInit, OnInit, OnDestroy, OnChanges
 {
     /** items in row */
     @Input()
@@ -104,7 +107,11 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
 
     /** I18n and labels */
     @Input()
-    timeConfig: TimeColumnConfig;
+    timeConfig: Nullable<TimeColumnConfig>;
+
+    /** I18n and labels */
+    @Input()
+    columnTranslationsPreset: 'seconds' | 'minutes' | 'hours' | 'period';
 
     /**
      * Offset for carousel directive, active item is always the first one.
@@ -158,6 +165,8 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
 
     /** @hidden */
     config: CarouselConfig;
+
+    internalTranslationConfig: TimeColumnConfig | null = null;
 
     /** @hidden */
     get currentIndicatorId(): string {
@@ -230,6 +239,13 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     /** @hidden */
     ngAfterViewInit(): void {
         this._viewInit$.next(true);
+    }
+
+    /** @hidde */
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes.columnTranslationsPreset) {
+            this._updateInternalTranslationConfig();
+        }
     }
 
     /** @hidden */
@@ -466,5 +482,48 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
             this._activeValue = this.items.first.value;
         }
         this._pickTime(this._getItem(this._activeValue), false);
+    }
+
+    /** @hidden */
+    private _updateInternalTranslationConfig(): void {
+        switch (this.columnTranslationsPreset) {
+            case 'seconds':
+                this.internalTranslationConfig = {
+                    increaseLabel: 'coreTime.increaseHoursLabel',
+                    label: 'coreTime.hoursLabel',
+                    decreaseLabel: 'coreTime.decreaseHoursLabel',
+                    navigationInstruction: 'coreTime.navigationInstruction'
+                };
+                break;
+            case 'minutes':
+                this.internalTranslationConfig = {
+                    increaseLabel: 'coreTime.increaseMinutesLabel',
+                    label: 'coreTime.minutesLabel',
+                    decreaseLabel: 'coreTime.decreaseMinutesLabel',
+                    navigationInstruction: 'coreTime.navigationInstruction'
+                };
+                break;
+            case 'hours':
+                this.internalTranslationConfig = {
+                    increaseLabel: 'coreTime.increaseSecondsLabel',
+                    label: 'coreTime.secondsLabel',
+                    decreaseLabel: 'coreTime.decreaseSecondsLabel',
+                    navigationInstruction: 'coreTime.navigationInstruction'
+                };
+                break;
+            case 'period':
+                this.internalTranslationConfig = {
+                    increaseLabel: 'coreTime.increasePeriodLabel',
+                    label: 'coreTime.periodLabel',
+                    decreaseLabel: 'coreTime.decreasePeriodLabel',
+                    navigationInstruction: 'coreTime.navigationInstruction'
+                };
+                break;
+
+            default:
+                this.internalTranslationConfig = null;
+                break;
+        }
+        this._changeDetRef.markForCheck();
     }
 }

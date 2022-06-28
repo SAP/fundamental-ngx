@@ -1,5 +1,4 @@
-import { ChangeDetectorRef, Inject, isDevMode, OnDestroy, Pipe, PipeTransform } from '@angular/core';
-import { get } from 'lodash-es';
+import { ChangeDetectorRef, Inject, OnDestroy, Pipe, PipeTransform } from '@angular/core';
 import {
     BehaviorSubject,
     combineLatest,
@@ -12,9 +11,9 @@ import {
     takeUntil
 } from 'rxjs';
 
-import { FD_LANGUAGE_ENGLISH } from '../languages';
-import { FdLanguage, FdLanguageKeyArgs, FdLanguageKey, FdLanguageKeyFunction } from '../models/lang';
+import { FdLanguage, FdLanguageKeyArgs } from '../models/lang';
 import { FD_LANGUAGE } from '../utils/tokens';
+import { TranslationResolver } from '../utils/translation-resolver';
 
 @Pipe({
     name: 'fdTranslate',
@@ -22,7 +21,7 @@ import { FD_LANGUAGE } from '../utils/tokens';
 })
 export class FdTranslatePipe implements PipeTransform, OnDestroy {
     /** @hidden */
-    private readonly _curlyBracesRegExp = /{{\s*([^{}\s]*)\s*}}/g;
+    private readonly _translationResolver = new TranslationResolver();
 
     /** @hidden */
     private readonly _key$ = new BehaviorSubject<string | undefined>(undefined);
@@ -45,19 +44,11 @@ export class FdTranslatePipe implements PipeTransform, OnDestroy {
         this._onDestroy$.next();
     }
 
-    transform(key: string, args?: FdLanguageKeyArgs, defaultValue = ''): string {
+    transform(key: string, args?: FdLanguageKeyArgs | Record<string, any>, defaultValue = ''): string {
         this._key$.next(key);
         this._args$.next(args);
 
         return this._value ?? defaultValue;
-    }
-
-    /** @hidden */
-    _interpolate(expression: string, args: FdLanguageKeyArgs = {}): string {
-        return expression.replace(this._curlyBracesRegExp, (matchingGroup: string, match: string) => {
-            const key = match?.trim();
-            return args[key]?.toString() ?? '';
-        });
     }
 
     /** @hidden */
@@ -68,66 +59,12 @@ export class FdTranslatePipe implements PipeTransform, OnDestroy {
             this._args$.pipe(skip(1), distinctUntilChanged())
         ])
             .pipe(
-                map(([lang, key, args]) => {
-                    const resolvedValue = this._getFdLanguageKeyValue(lang, key, args);
-                    if (typeof resolvedValue === 'string') {
-                        return resolvedValue;
-                    }
-                    if (isDevMode()) {
-                        console.warn(
-                            `Could not resolve translation by "${key}" key in the provided language file. Falling back to English`
-                        );
-                    }
-                    // not a function, not a string, fall back to english, if possible
-                    return this._getFdLanguageKeyValue(FD_LANGUAGE_ENGLISH, key, args) ?? '';
-                }),
+                map(([lang, key, args]) => this._translationResolver.resolve(lang, key, args)),
                 takeUntil(this._onDestroy$)
             )
             .subscribe((value) => {
                 this._value = value;
                 this._cdr.markForCheck();
             });
-    }
-
-    /** @hidden */
-    private _getFdLanguageKeyValue(lang: FdLanguage, key: FdLanguageKey, args?: FdLanguageKeyArgs): string | null {
-        const resolvedKey = this._tryResolveKey(lang, key);
-        if (typeof resolvedKey === 'string') {
-            // if that's a string, return it with interpolation
-            return this._interpolate(resolvedKey, args);
-        }
-        if (typeof resolvedKey === 'function') {
-            // attempt to resolve function
-            const resolvedFunctionValue = this._tryExecuteLanguageFunction(resolvedKey, args);
-            if (resolvedFunctionValue) {
-                return this._interpolate(resolvedFunctionValue, args);
-            }
-        }
-        return null;
-    }
-
-    /** @hidden */
-    private _tryResolveKey(lang: FdLanguage, path: any): FdLanguageKey | null {
-        try {
-            const expression: FdLanguageKey = get(lang, path);
-            if (typeof expression === 'function') {
-                return expression;
-            }
-            return expression?.toString() ?? null;
-        } catch {
-            return null;
-        }
-    }
-
-    /** @hidden */
-    private _tryExecuteLanguageFunction(
-        expression: FdLanguageKeyFunction,
-        args: FdLanguageKeyArgs = {}
-    ): string | null {
-        try {
-            return expression(args) ?? null;
-        } catch {
-            return null;
-        }
     }
 }

@@ -7,6 +7,7 @@ import { IconModule } from '@fundamental-ngx/core/icon';
 import { SelectModule } from '@fundamental-ngx/core/select';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { OnlyDigitsModule, FocusKeyManagerHelpersModule } from '@fundamental-ngx/core/utils';
+import { I18nModule } from '@fundamental-ngx/i18n';
 
 import { PaginationComponent } from './pagination.component';
 import { PaginationService } from './pagination.service';
@@ -18,6 +19,7 @@ import { PaginationService } from './pagination.service';
         ButtonModule,
         IconModule,
         SelectModule,
+        I18nModule,
         FormsModule,
         FormModule,
         OnlyDigitsModule,

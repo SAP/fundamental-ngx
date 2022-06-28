@@ -4,6 +4,29 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI libarary for English language
  */
 export const FD_LANGUAGE_ENGLISH: FdLanguage = {
+    coreCarousel: {
+        leftNavigationBtnLabel: 'Go to previous item',
+        rightNavigationBtnLabel: 'Go to next item'
+    },
+    coreDatePicker: {
+        dateInputLabel: 'Date input',
+        dateRangeInputLabel: 'Date range input',
+        displayCalendarToggleLabel: 'Open picker',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
+    },
+    coreDatetimePicker: {
+        datetimeInputLabel: 'Datetime input',
+        displayDatetimeToggleLabel: 'Display calendar toggle',
+        displayTypeDateLabel: 'Date',
+        displayTypeTimeLabel: 'Time'
+    },
+    coreFeedListItem: {
+        moreLabel: 'More',
+        lessLabel: 'Less'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Cancel',
         listItemStatusAriaLabel: 'Item has status. Status: {{ status }}.',
@@ -13,6 +36,32 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         listItemStatusContainsErrors: 'Contains errors',
         listItemStatusLocked: 'Locked',
         listItemStatusDraft: 'Draft'
+    },
+    coreMessageStrip: {
+        dismissLabel: 'Dismiss'
+    },
+    coreNestedList: {
+        linkItemAriaLabel: 'Tree Item {{ itemDetails }}, {{ index }} of {{ total }}{{ selectedDescription }}'
+    },
+    corePagination: {
+        pageLabel: 'Page {{ pageNumber }}',
+        currentPageAriaLabel: 'Page {{ pageNumber }} is current page',
+        labelBeforeInputMobile: 'Page:',
+        labelAfterInputMobile: 'of {{ totalCount }}',
+        inputAriaLabel: 'Page input, Current page, Page {{ pageNumber }} of {{ totalCount }}',
+        itemsPerPageLabel: 'Results per Page:',
+        firstLabel: 'First',
+        previousLabel: 'Previous',
+        nextLabel: 'Next',
+        lastLabel: 'Last',
+        ariaLabel: 'Pagination',
+        totalResultsLabel: '{{ totalCount }} Results'
+    },
+    coreProductSwitch: {
+        ariaLabel: 'Product Switch'
+    },
+    coreShellbar: {
+        collapsedItemMenuLabel: 'Collapsed Item Menu'
     },
     coreSlider: {
         singleMinMaxDetails: 'Slider minimum value is {{ min }}, maximum value is {{ max }}',
@@ -27,6 +76,65 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         multipleHandle2ValueminDetails: 'Value is {{ value }}',
         multipleHandle2ValuemaxDetails: 'Value is {{ value }}',
         multipleHandle2ValueNowDetails: 'Current value is {{ value }}'
+    },
+    coreSplitButton: {
+        expandButtonAriaLabel: 'More actions'
+    },
+    coreSplitter: {
+        paginationItemAriaLabel: 'Section'
+    },
+    coreStepInput: {
+        incrementButtonTitle: 'Increment',
+        decrementButtonTitle: 'Decrement',
+        ariaRoleDescription: 'Step Input'
+    },
+    coreSwitch: {
+        semanticAcceptLabel: 'Accept',
+        semanticDeclineLabel: 'Decline'
+    },
+    coreTabs: {
+        tabListExpandButtonText: 'More'
+    },
+    coreText: {
+        moreLabel: 'More',
+        lessLabel: 'Less'
+    },
+    coreTime: {
+        componentAriaName: 'Time picker',
+        increaseHoursLabel: 'Increase hours',
+        hoursLabel: 'Hrs',
+        decreaseHoursLabel: 'Decrease hours',
+        increaseMinutesLabel: 'Increase minutes',
+        minutesLabel: 'Min',
+        decreaseMinutesLabel: 'Decrease minutes',
+        increaseSecondsLabel: 'Increase seconds',
+        secondsLabel: 'Sec',
+        decreaseSecondsLabel: 'Decrease seconds',
+        increasePeriodLabel: 'Increase period',
+        periodLabel: 'Period',
+        decreasePeriodLabel: 'Decrease period',
+        navigationInstruction:
+            'To move between items in this list, press top arrow or bottom arrow. To switch between lists press left arrow or right arrow.'
+    },
+    coreTimePicker: {
+        timePickerInputLabel: 'Time picker input',
+        timePickerButtonLabel: 'Open picker'
+    },
+    coreToken: {
+        deleteButtonLabel: 'Deletable',
+        ariaRoleDescription: 'token'
+    },
+    coreUploadCollection: {
+        menuOkText: 'Ok',
+        menuCancelText: 'Cancel',
+        menuEditAriaLabel: 'Edit',
+        menuDeleteAriaLabel: 'Delete',
+        menuOkAriaLabel: 'Edit',
+        menuCancelAriaLabel: 'Cancel',
+        formItemPlaceholder: 'Filename'
+    },
+    coreWizard: {
+        ariaLabel: 'Wizard'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Watchers',

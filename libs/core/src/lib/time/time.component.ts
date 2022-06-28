@@ -175,8 +175,8 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
     activeMeridianViewItem?: MeridianViewItem;
 
     /** Component aria-label */
-    get _componentAriaLabel(): string {
-        return this._timeI18nLabels.componentAriaName;
+    get _componentAriaLabel(): string | undefined {
+        return this._timeI18nLabels?.componentAriaName;
     }
 
     /** @hidden */
@@ -188,11 +188,11 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
     /** @hidden */
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
-        private _timeI18nLabels: TimeI18n,
         // Use @Optional to avoid angular injection error message and throw our own which is more precise one
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
         @Optional() private _contentDensityService: ContentDensityService,
-        @Optional() private _rtlService: RtlService
+        @Optional() private _rtlService: RtlService,
+        @Optional() private _timeI18nLabels?: TimeI18n
     ) {
         if (!_dateTimeAdapter) {
             throw createMissingDateImplementationError('DateTimeAdapter');
@@ -379,7 +379,10 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
     }
 
     /** Configuration for hours column */
-    getHoursConfig(): TimeColumnConfig {
+    getHoursConfig(): TimeColumnConfig | undefined {
+        if (!this._timeI18nLabels) {
+            return;
+        }
         return {
             decreaseLabel: this._timeI18nLabels.decreaseHoursLabel,
             increaseLabel: this._timeI18nLabels.increaseHoursLabel,
@@ -389,7 +392,10 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
     }
 
     /** Configuration for minutes column */
-    getMinutesConfig(): TimeColumnConfig {
+    getMinutesConfig(): TimeColumnConfig | undefined {
+        if (!this._timeI18nLabels) {
+            return;
+        }
         return {
             decreaseLabel: this._timeI18nLabels.decreaseMinutesLabel,
             increaseLabel: this._timeI18nLabels.increaseMinutesLabel,
@@ -399,7 +405,10 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
     }
 
     /** Configuration for seconds column */
-    getSecondsConfig(): TimeColumnConfig {
+    getSecondsConfig(): TimeColumnConfig | undefined {
+        if (!this._timeI18nLabels) {
+            return;
+        }
         return {
             decreaseLabel: this._timeI18nLabels.decreaseSecondsLabel,
             increaseLabel: this._timeI18nLabels.increaseSecondsLabel,
@@ -409,7 +418,10 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
     }
 
     /** Configuration for period column */
-    getPeriodConfig(): TimeColumnConfig {
+    getPeriodConfig(): TimeColumnConfig | undefined {
+        if (!this._timeI18nLabels) {
+            return;
+        }
         return {
             decreaseLabel: this._timeI18nLabels.decreasePeriodLabel,
             increaseLabel: this._timeI18nLabels.increasePeriodLabel,

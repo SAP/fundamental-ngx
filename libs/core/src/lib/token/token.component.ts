@@ -71,13 +71,19 @@ export class TokenComponent implements OnInit, AfterViewInit, OnDestroy {
     @Input()
     readOnly = false;
 
-    /** label for close icon */
+    /**
+     * @deprecated use i18n capabilities instead
+     * label for close icon
+     */
     @Input()
-    deleteButtonLabel = 'Deletable';
+    deleteButtonLabel: string;
 
-    /** role description for token */
+    /**
+     * @deprecated use i18n capabilities instead
+     * role description for token
+     */
     @Input()
-    ariaRoleDescription = 'token';
+    ariaRoleDescription: string;
 
     /** Emitted when the *x* icon is clicked. Specifically, any pseudo-element. */
     @Output()

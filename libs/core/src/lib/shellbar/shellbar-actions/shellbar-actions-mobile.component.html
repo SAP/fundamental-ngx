@@ -1,7 +1,12 @@
 <div class="fd-shellbar-collapse">
     <fd-action-sheet placement="bottom-end">
         <fd-action-sheet-control>
-            <button fd-button glyph="overflow" class="fd-shellbar__button" [attr.aria-label]="collapsedItemMenuLabel">
+            <button
+                fd-button
+                glyph="overflow"
+                class="fd-shellbar__button"
+                [attr.aria-label]="collapsedItemMenuLabel || ('coreShellbar.collapsedItemMenuLabel' | fdTranslate)"
+            >
                 <span *ngIf="totalNotifications" class="fd-button__badge">
                     {{ totalNotifications }}
                 </span>
