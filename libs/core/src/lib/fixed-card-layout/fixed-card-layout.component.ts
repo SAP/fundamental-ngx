@@ -1,6 +1,5 @@
 import {
     AfterContentInit,
-    AfterViewChecked,
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -26,7 +25,7 @@ import {
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { CdkDrag, CdkDragDrop, CdkDragEnter, CdkDropList } from '@angular/cdk/drag-drop';
 import { Subject } from 'rxjs';
-import { debounceTime, takeUntil } from 'rxjs/operators';
+import { debounceTime, delay, takeUntil } from 'rxjs/operators';
 
 import { resizeObservable, RtlService } from '@fundamental-ngx/core/utils';
 import { FixedCardLayoutItemComponent } from './fixed-card-layout-item/fixed-card-layout-item.component';
@@ -93,9 +92,7 @@ type CardColumn = CardDefinitionDirective[];
         class: 'fd-fixed-card-layout'
     }
 })
-export class FixedCardLayoutComponent
-    implements OnInit, AfterContentInit, AfterViewInit, AfterViewChecked, OnChanges, OnDestroy
-{
+export class FixedCardLayoutComponent implements OnInit, AfterContentInit, AfterViewInit, OnChanges, OnDestroy {
     /** Drag drop behavior can be disabled */
     @Input()
     disableDragDrop: boolean;
@@ -230,15 +227,6 @@ export class FixedCardLayoutComponent
     }
 
     /** @hidden */
-    ngAfterViewChecked(): void {
-        /**
-         * Update column layout when orientation of screen changes.
-         * actual width is returned when view is stable. In AfterViewInit, correct value does not come.
-         */
-        this.updateLayout();
-    }
-
-    /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if (!this._cards?.length) {
             return;
@@ -269,7 +257,7 @@ export class FixedCardLayoutComponent
 
     /** Distribute cards on window resize */
     updateLayout(): void {
-        if (!this._cards.length) {
+        if (!this._cards.length || !this._availableWidth) {
             return;
         }
 
@@ -294,26 +282,6 @@ export class FixedCardLayoutComponent
         }
 
         this._setColumnsWidth();
-    }
-
-    /** @hidden Calculate container height basing on the card wrapper columns */
-    _calculateContainerHeight(additionalSpace: number = 0): void {
-        this._changeDetector.detectChanges();
-
-        const wrapperColumns = this._cardColumns.map((column) =>
-            column
-                .map((card) => this._cardWrappers.find((wrapper) => wrapper.getSortedItems()[0].data === card)?.element)
-                .filter((v): v is ElementRef<HTMLElement> => !!v)
-        );
-
-        const columnsHeights = wrapperColumns
-            .map((column) => column.map((card) => card.nativeElement.getBoundingClientRect().height))
-            .map((column) => column.reduce((height, cardHeight) => (height += cardHeight), 0));
-
-        // +4px because it's the top & bottom borders of card placeholder
-        this._containerHeight = Math.max(...columnsHeights) + 4 + additionalSpace;
-
-        this._changeDetector.detectChanges();
     }
 
     /** @hidden */
@@ -451,7 +419,7 @@ export class FixedCardLayoutComponent
 
     /** @hidden Listen card change and distribute cards on column change */
     private _listenOnCardsChange(): void {
-        this._cards.changes.subscribe(() => {
+        this._cards.changes.pipe(delay(0)).subscribe(() => {
             this._processCards();
             this._updateColumns();
         });
@@ -469,8 +437,6 @@ export class FixedCardLayoutComponent
         this._cardsArray = this._cards
             .toArray()
             .sort((firstCard, secondCard) => firstCard.fdCardDef - secondCard.fdCardDef);
-
-        this._changeDetector.detectChanges();
 
         this.updateLayout();
     }
@@ -530,6 +496,26 @@ export class FixedCardLayoutComponent
         if (detectChanges) {
             this._changeDetector.detectChanges();
         }
+    }
+
+    /** @hidden Calculate container height basing on the card wrapper columns */
+    private _calculateContainerHeight(additionalSpace: number = 0): void {
+        this._changeDetector.detectChanges();
+
+        const wrapperColumns = this._cardColumns.map((column) =>
+            column
+                .map((card) => this._cardWrappers.find((wrapper) => wrapper.getSortedItems()[0].data === card)?.element)
+                .filter((v): v is ElementRef<HTMLElement> => !!v)
+        );
+
+        const columnsHeights = wrapperColumns
+            .map((column) => column.map((card) => card.nativeElement.getBoundingClientRect().height))
+            .map((column) => column.reduce((height, cardHeight) => (height += cardHeight), 0));
+
+        // +4px because it's the top & bottom borders of card placeholder
+        this._containerHeight = Math.max(...columnsHeights) + 4 + additionalSpace;
+
+        this._changeDetector.detectChanges();
     }
 }
 
