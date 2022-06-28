@@ -4,6 +4,29 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI libarary for Italian language
  */
 export const FD_LANGUAGE_ITALIAN: FdLanguage = {
+    coreCarousel: {
+        leftNavigationBtnLabel: "Vai all'elemento precedente",
+        rightNavigationBtnLabel: "Vai all'elemento successivo"
+    },
+    coreDatePicker: {
+        dateInputLabel: 'Inserimento data',
+        dateRangeInputLabel: 'Inserimento intervallo di date',
+        displayCalendarToggleLabel: 'Selettore aperto',
+        valueStateSuccessMessage: 'Stato valore Success',
+        valueStateInformationMessage: 'Informazioni sullo stato del valore',
+        valueStateWarningMessage: 'Avviso stato valore',
+        valueStateErrorMessage: 'Errore stato valore'
+    },
+    coreDatetimePicker: {
+        datetimeInputLabel: 'Inserimento data/ora',
+        displayDatetimeToggleLabel: 'Visualizza/disattiva calendario',
+        displayTypeDateLabel: 'Data',
+        displayTypeTimeLabel: 'Volta'
+    },
+    coreFeedListItem: {
+        moreLabel: 'Altro',
+        lessLabel: 'Meno'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Annulla',
         listItemStatusAriaLabel: "L'articolo ha uno stato. Stato: {{ status }}.",
@@ -13,6 +36,32 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
         listItemStatusContainsErrors: 'Contiene errori',
         listItemStatusLocked: 'Bloccato',
         listItemStatusDraft: 'Bozza'
+    },
+    coreMessageStrip: {
+        dismissLabel: 'Congedare'
+    },
+    coreNestedList: {
+        linkItemAriaLabel: "Elemento dell'albero {{ itemDetails }}, {{ index }} di {{ total }}{{ selectedDescription }}"
+    },
+    corePagination: {
+        pageLabel: 'Pagina {{ pageNumber }}',
+        currentPageAriaLabel: 'La pagina {{ pageNumber }} è la pagina corrente',
+        labelBeforeInputMobile: 'Pagina:',
+        labelAfterInputMobile: 'di {{ totalCount }}',
+        inputAriaLabel: 'Inserimento pagina, Pagina corrente, Pagina {{ pageNumber }} di {{ totalCount }}',
+        itemsPerPageLabel: 'Risultati per pagina:',
+        firstLabel: 'First',
+        previousLabel: 'Precedente',
+        nextLabel: 'Next',
+        lastLabel: 'Ultimo',
+        ariaLabel: 'Impaginazione',
+        totalResultsLabel: '{{ totalCount }} Risultati'
+    },
+    coreProductSwitch: {
+        ariaLabel: 'Commutatore del prodotto'
+    },
+    coreShellbar: {
+        collapsedItemMenuLabel: 'Menu di voci compresso'
     },
     coreSlider: {
         singleMinMaxDetails:
@@ -30,6 +79,69 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
         multipleHandle2ValueminDetails: 'Il valore è {{ value }}',
         multipleHandle2ValuemaxDetails: 'Il valore è {{ value }}',
         multipleHandle2ValueNowDetails: 'Il valore attuale è {{ value }}'
+    },
+    coreSplitButton: {
+        expandButtonAriaLabel: 'Più azioni'
+    },
+    coreSplitter: {
+        paginationItemAriaLabel: 'Sezione'
+    },
+    coreStepInput: {
+        incrementButtonTitle: 'Incremento',
+        decrementButtonTitle: 'Decremento',
+        ariaRoleDescription: 'Ingresso passo'
+    },
+    coreSwitch: {
+        semanticAcceptLabel: 'Accettare',
+        semanticDeclineLabel: 'Declino'
+    },
+    coreTabs: {
+        tabListExpandButtonText: 'Di più'
+    },
+    coreText: {
+        moreLabel: 'Di più',
+        lessLabel: 'Meno'
+    },
+    coreTime: {
+        componentAriaName: 'Selettore tempo',
+        increaseHoursLabel: 'Aumenta le ore',
+        hoursLabel: 'Ore',
+        decreaseHoursLabel: 'Diminuisci ore',
+        increaseMinutesLabel: 'Aumenta minuti',
+        minutesLabel: 'Minimo',
+        decreaseMinutesLabel: 'Diminuisci minuti',
+        increaseSecondsLabel: 'Aumenta i secondi',
+        secondsLabel: 'Sec',
+        decreaseSecondsLabel: 'Diminuisci secondi',
+        increasePeriodLabel: 'Aumento periodo',
+        periodLabel: 'Periodo',
+        decreasePeriodLabel: 'Diminuisci periodo',
+        navigationInstruction:
+            'Per spostarti tra gli elementi di questo elenco, premi la freccia in alto o in basso. ' +
+            "Per passare da un elenco all'altro, premere la freccia sinistra o la freccia destra."
+    },
+    coreTimePicker: {
+        timePickerInputLabel: 'Input per la selezione del tempo',
+        timePickerButtonLabel: 'Selettore aperto'
+    },
+    coreToken: {
+        deleteButtonLabel: 'Cancellabile',
+        ariaRoleDescription: 'gettone'
+    },
+    coreUploadCollection: {
+        menuOkText: 'Ok',
+        menuCancelText: 'Annulla',
+        menuEditAriaLabel: 'Modifica',
+        menuDeleteAriaLabel: 'Elimina',
+        menuOkAriaLabel: 'Modifica',
+        menuCancelAriaLabel: 'Annulla',
+        formItemPlaceholder: 'Nome file'
+    },
+    coreWizard: {
+        ariaLabel: 'Procedura guidata'
+    },
+    platformActionBar: {
+        backButtonLabel: 'Torna indietro'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Osservatori',
@@ -100,6 +212,9 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
         userListSelectedItemsCountSingular: '1 elemento selezionato',
         userListSelectedItemsCountPlural: '{{ count }} elementi selezionati'
     },
+    platformFeedInput: {
+        userTitle: 'Utente'
+    },
     platformVHD: {
         selectionBarLabel: 'Articoli selezionati e condizionati',
         selectedAndConditionLabel: 'Articoli e condizioni selezionati',
@@ -144,7 +259,10 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
         defineConditionConditionStrategyLabelEmpty: 'vuoto',
         defineConditionConditionStrategyLabelNotEqualTo: 'non uguale a',
         defineConditionConditionStrategyLabelNotEmpty: 'no vuoto',
-        defineConditionMaxCountError: 'Immettere un valore con non più di {{ count }} caratteri'
+        defineConditionMaxCountError: 'Immettere un valore con non più di {{ count }} caratteri',
+        selectTabTitle: "Seleziona dall'elenco",
+        searchTableEmptyMessage: 'Usa la ricerca per ottenere risultati',
+        defineTabTitle: 'Definisci condizioni'
     },
     platformCombobox: {
         countListResultsSingular: '1 elemento della lista dei risultati',
@@ -179,7 +297,9 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
     platformSearchField: {
         clearButtonTitle: 'Cancella',
         submitButtonTitle: 'Cerca',
-        synchronizeButtonTitle: 'Sincronizza'
+        synchronizeButtonTitle: 'Sincronizza',
+        searchSuggestionMessage: '{{ count }} suggerimenti trovati.',
+        searchSuggestionNavigateMessage: 'usa le frecce su e giù per navigare'
     },
     platformSmartFilterBar: {
         searchPlaceholder: 'Cerca',
@@ -196,7 +316,28 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
         selectFiltersFilterColumnLabel: 'Filtro',
         selectFiltersActiveColumnLabel: 'Attivo',
         selectFiltersSubmitButtonLabel: 'Vai',
-        selectFiltersCancelButton: 'Annulla'
+        selectFiltersCancelButton: 'Annulla',
+        filterConditionContains: 'contiene',
+        filterConditionEqualTo: 'uguale a',
+        filterConditionBetween: 'tra',
+        filterConditionBeginsWith: 'inizia con',
+        filterConditionEndsWith: 'finisce con',
+        filterConditionLessThan: 'minore di',
+        filterConditionLessThanOrEqualTo: 'minore o uguale a',
+        filterConditionGreaterThan: 'maggiore di',
+        filterConditionGreaterThanOrEqualTo: 'maggiore o uguale a',
+        filterConditionAfter: 'dopo',
+        filterConditionOnOrAfter: 'su o dopo',
+        filterConditionBefore: 'prima',
+        filterConditionBeforeOrOn: 'prima o sopra',
+        filterConditionValuePlaceholder: 'valore',
+        filterConditionValueFromPlaceholder: 'da',
+        filterConditionValueToPlaceholder: 'a',
+        settingsCategoryAll: 'Tutto',
+        settingsCategoryVisible: 'Visibile',
+        settingsCategoryActive: 'Attivo',
+        settingsCategoryVisibleAndActive: 'Visibile e attivo',
+        settingsCategoryMandatory: 'Obbligatorio'
     },
     platformTable: {
         headerMenuSortAsc: 'Ordine crescente',
@@ -297,7 +438,8 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Vai a Precedente',
         detailsGotoNextButtonTitle: 'Vai a Avanti',
-        detailsDialogCloseBtnLabel: 'Chiudi'
+        detailsDialogCloseBtnLabel: 'Chiudi',
+        roleDescription: 'Immagine'
     },
     platformUploadCollection: {
         moveToTitle: 'Sposta a',
@@ -333,6 +475,8 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
         cancelUploadNewFileAction: 'Annulla',
         itemMenuBtnTitle: 'Altro',
         dragDropAreaText: 'Trascina i file per caricarli',
+        noDataText: 'Nessun file trovato',
+        noDataDescription: 'Trascina i file da caricare o usa il pulsante "Aggiungi".',
         paginationTotal: 'Visualizzazione di {{ from }}-{{ to }} di {{ total }}',
         resultsPerPage: 'Risultati per pagina',
         messageCreateFailed: 'Impossibile creare {{ folderName }}.',
@@ -392,5 +536,9 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
         valueminDetails: 'Il valore è  {{ value }}',
         valuemaxDetails: 'Il valore è {{ value }}',
         valueNowDetails: 'Il valore attuale è{{ value }}'
+    },
+    fnSwitch: {
+        semanticAcceptLabel: 'Accettare',
+        semanticDeclineLabel: 'Declino'
     }
 };

@@ -4,6 +4,29 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI libarary for Turkish language
  */
 export const FD_LANGUAGE_TURKISH: FdLanguage = {
+    coreCarousel: {
+        leftNavigationBtnLabel: 'Önceki öğeye git',
+        rightNavigationBtnLabel: 'Sonraki öğeye git'
+    },
+    coreDatePicker: {
+        dateInputLabel: 'Tarih girişi',
+        dateRangeInputLabel: 'Tarih aralığı girişi',
+        displayCalendarToggleLabel: 'Seçiciyi aç',
+        valueStateSuccessMessage: 'Değer durumu Başarılı',
+        valueStateInformationMessage: 'Değer durumu Bilgisi',
+        valueStateWarningMessage: 'Değer durumu Uyarısı',
+        valueStateErrorMessage: 'Değer durumu Hatası'
+    },
+    coreDatetimePicker: {
+        datetimeInputLabel: 'Datetime girişi',
+        displayDatetimeToggleLabel: 'Takvim geçişini görüntüle',
+        displayTypeDateLabel: 'Tarih',
+        displayTypeTimeLabel: 'Zaman'
+    },
+    coreFeedListItem: {
+        moreLabel: 'Daha fazla',
+        lessLabel: 'Daha az'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Vazgeç',
         listItemStatusAriaLabel: 'Eşyayı statü var. Statü: {{ status }}.',
@@ -13,6 +36,32 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         listItemStatusContainsErrors: 'Hata içerir',
         listItemStatusLocked: 'Kilitli',
         listItemStatusDraft: 'Taslak'
+    },
+    coreMessageStrip: {
+        dismissLabel: 'Azletmek'
+    },
+    coreNestedList: {
+        linkItemAriaLabel: 'Ağaç Öğesi {{ itemDetails }}, {{ index }} / {{ total }}{{ selectedDescription }}'
+    },
+    corePagination: {
+        pageLabel: 'Sayfa {{ pageNumber }}',
+        currentPageAriaLabel: 'Sayfa {{ pageNumber }} geçerli sayfadır',
+        labelBeforeInputMobile: 'Sayfa:',
+        labelAfterInputMobile: 'of {{ totalCount }}',
+        inputAriaLabel: 'Sayfa girişi, Geçerli sayfa, Sayfa {{ pageNumber }} / {{ totalCount }}',
+        itemsPerPageLabel: 'Sayfa Başına Sonuçlar:',
+        firstLabel: 'İlk',
+        previousLabel: 'Önceki',
+        nextLabel: 'Sonraki',
+        lastLabel: 'Son',
+        ariaLabel: 'Sayfalandırma',
+        totalResultsLabel: '{{ totalCount }} Sonuçlar'
+    },
+    coreProductSwitch: {
+        ariaLabel: 'Ürün Anahtarı'
+    },
+    coreShellbar: {
+        collapsedItemMenuLabel: 'Daraltılmış Öğe Menüsü'
     },
     coreSlider: {
         singleMinMaxDetails: ' Kaydırıcının {{ min }} minimum değeri, {{ max }} maksimum değeri',
@@ -27,6 +76,68 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         multipleHandle2ValueminDetails: 'Değer {{ value }}',
         multipleHandle2ValuemaxDetails: 'Değer {{ value }}',
         multipleHandle2ValueNowDetails: 'Geçerli değer  {{ value }}'
+    },
+    coreSplitButton: {
+        expandButtonAriaLabel: 'Daha fazla hareket'
+    },
+    coreSplitter: {
+        paginationItemAriaLabel: 'Bölüm'
+    },
+    coreStepInput: {
+        incrementButtonTitle: 'Artış',
+        decrementButtonTitle: 'Azaltma',
+        ariaRoleDescription: 'Adım Girişi'
+    },
+    coreSwitch: {
+        semanticAcceptLabel: 'Kabul et',
+        semanticDeclineLabel: 'Reddet'
+    },
+    coreTabs: {
+        tabListExpandButtonText: 'Daha'
+    },
+    coreText: {
+        moreLabel: 'Daha',
+        lessLabel: 'Az'
+    },
+    coreTime: {
+        componentAriaName: 'Zaman seçici',
+        increaseHoursLabel: 'Saatleri artır',
+        hoursLabel: 'Saat',
+        decreaseHoursLabel: 'Saatleri azalt',
+        increaseMinutesLabel: 'Dakikaları artır',
+        minutesLabel: 'Min',
+        decreaseMinutesLabel: 'Dakikaları azalt',
+        increaseSecondsLabel: 'Saniyeyi artır',
+        secondsLabel: 'Sn',
+        decreaseSecondsLabel: 'Saniyeyi azalt',
+        increasePeriodLabel: 'Periyodu artırma',
+        periodLabel: 'Dönem',
+        decreasePeriodLabel: 'Düşüş periyodu',
+        navigationInstruction:
+            'Bu listedeki öğeler arasında hareket etmek için üst oka veya alt oka basın. Listeler arasında geçiş yapmak için sol ok veya sağ ok tuşuna basın.'
+    },
+    coreTimePicker: {
+        timePickerInputLabel: 'Zaman seçici girişi',
+        timePickerButtonLabel: 'Seçiciyi aç'
+    },
+    coreToken: {
+        deleteButtonLabel: 'Silinebilir',
+        ariaRoleDescription: 'jeton'
+    },
+    coreUploadCollection: {
+        menuOkText: 'Tamam',
+        menuCancelText: 'İptal',
+        menuEditAriaLabel: 'Düzenle',
+        menuDeleteAriaLabel: 'Sil',
+        menuOkAriaLabel: 'Düzenle',
+        menuCancelAriaLabel: 'İptal',
+        formItemPlaceholder: 'Dosya adı'
+    },
+    coreWizard: {
+        ariaLabel: 'Sihirbaz'
+    },
+    platformActionBar: {
+        backButtonLabel: 'Geri dön'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Gözlemciler',
@@ -53,7 +164,7 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         addNodeDialogAddToNext: 'Sonraki seri düğüme ekle',
         addNodeDialogDueDate: 'Bitiş tarihi',
         addNodeSearchPlaceholder: 'Ara',
-        addNodeAddActionBtnLabel: 'Add',
+        addNodeAddActionBtnLabel: 'Ekle',
         addNodeCancelActionBtnLabel: 'Vazgeç',
         addNodeSelectApproverActionBtnLabel: 'Seçme',
         addNodeCancelApproverSelectionActionBtnLabel: 'Vazgeç',
@@ -95,6 +206,9 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         watchersInputPlaceholder: 'Burada ara..',
         userListSelectedItemsCountSingular: '1 eşyayı seçildi',
         userListSelectedItemsCountPlural: '{{ count }} eşyayılar seçildi'
+    },
+    platformFeedInput: {
+        userTitle: 'kullanıcı'
     },
     platformVHD: {
         selectionBarLabel: 'Seçilmiş ve koşullu eşyayılar',
@@ -140,7 +254,10 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         defineConditionConditionStrategyLabelEmpty: 'boş',
         defineConditionConditionStrategyLabelNotEqualTo: 'eşit değil',
         defineConditionConditionStrategyLabelNotEmpty: 'boş değil',
-        defineConditionMaxCountError: '{{ count }} karakterden fazla olmayan bir değer gir'
+        defineConditionMaxCountError: '{{ count }} karakterden fazla olmayan bir değer gir',
+        selectTabTitle: 'Listeden seç',
+        searchTableEmptyMessage: 'Sonuçları almak için aramayı kullanın',
+        defineTabTitle: 'Koşulları Tanımla'
     },
     platformCombobox: {
         countListResultsSingular: '1 sonuç listesi eşyayı',
@@ -175,7 +292,9 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
     platformSearchField: {
         clearButtonTitle: 'Temiz',
         submitButtonTitle: 'Ara',
-        synchronizeButtonTitle: 'Senkronize'
+        synchronizeButtonTitle: 'Senkronize',
+        searchSuggestionMessage: '{{ count }} öneri bulundu.',
+        searchSuggestionNavigateMessage: 'gezinmek için yukarı ve aşağı okları kullanın'
     },
     platformSmartFilterBar: {
         searchPlaceholder: 'Ara',
@@ -192,7 +311,28 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         selectFiltersFilterColumnLabel: 'Filtre',
         selectFiltersActiveColumnLabel: 'Aktif',
         selectFiltersSubmitButtonLabel: 'Git',
-        selectFiltersCancelButton: 'Vazgeç'
+        selectFiltersCancelButton: 'Vazgeç',
+        filterConditionContains: 'içerir',
+        filterConditionEqualTo: 'eşittir',
+        filterConditionBetween: 'arasında',
+        filterConditionBeginsWith: 'ile başlar',
+        filterConditionEndsWith: 'ile biter',
+        filterConditionLessThan: 'küçüktür',
+        filterConditionLessThanOrEqualTo: 'küçük veya eşittir',
+        filterConditionGreaterThan: 'büyüktür',
+        filterConditionGreaterThanOrEqualTo: 'büyüktür veya eşittir',
+        filterConditionAfter: 'sonra',
+        filterConditionOnOrAfter: 'on veya after',
+        filterConditionBefore: 'önce',
+        filterConditionBeforeOrOn: 'önce veya açık',
+        filterConditionValuePlaceholder: 'değer',
+        filterConditionValueFromPlaceholder: 'from',
+        filterConditionValueToPlaceholder: 'to',
+        settingsCategoryAll: 'Tümü',
+        settingsCategoryVisible: 'Görünür',
+        settingsCategoryActive: 'Etkin',
+        settingsCategoryVisibleAndActive: 'Görünür ve aktif',
+        settingsCategoryMandatory: 'Zorunlu'
     },
     platformTable: {
         headerMenuSortAsc: 'Artan Sıralama',
@@ -293,7 +433,8 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Öncekine Git',
         detailsGotoNextButtonTitle: 'Sonrakine Git',
-        detailsDialogCloseBtnLabel: 'Kapat'
+        detailsDialogCloseBtnLabel: 'Kapat',
+        roleDescription: 'resim'
     },
     platformUploadCollection: {
         moveToTitle: 'Taşınma',
@@ -312,7 +453,7 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         breadcrumbLabelAllFiles: 'Tüm dosyalar',
         breadcrumbLabelAllFilesWithTotal: 'Tüm dosyalar ({{ total }})',
         searchPlaceholder: 'Ara',
-        addBtnLabel: 'Add',
+        addBtnLabel: 'Ekle',
         newFolderBtnLabel: 'Yeni Dizin',
         moveToBtnLabel: 'Taşınma',
         downloadBtnLabel: 'İndir',
@@ -329,6 +470,8 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         cancelUploadNewFileAction: 'Vazgeç',
         itemMenuBtnTitle: 'Daha',
         dragDropAreaText: 'Yüklenecek dosyaları sürükleyin',
+        noDataText: 'Dosya bulunamadı',
+        noDataDescription: 'Yüklenecek dosyaları bırakın veya “Ekle” düğmesini kullanın.',
         paginationTotal: '{{ total }}/{{ from }}-{{ to }} arasında gösteriliyor',
         resultsPerPage: 'Sayfa başına sonuç',
         messageCreateFailed: '{{ folderName }} oluşturulamadı.',
@@ -385,5 +528,9 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         valueminDetails: 'Değer {{ value }}',
         valuemaxDetails: 'Değer {{ value }}',
         valueNowDetails: 'Geçerli değer  {{ value }}'
+    },
+    fnSwitch: {
+        semanticAcceptLabel: 'Kabul et',
+        semanticDeclineLabel: 'Reddet'
     }
 };

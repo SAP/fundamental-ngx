@@ -13,8 +13,11 @@ import { ShellbarMenuItem, ShellbarSizes } from '@fundamental-ngx/core/shellbar'
 import {
     FdLanguage,
     FD_LANGUAGE,
+    FD_LANGUAGE_ALBANIAN,
     FD_LANGUAGE_ENGLISH,
+    FD_LANGUAGE_ITALIAN,
     FD_LANGUAGE_RUSSIAN,
+    FD_LANGUAGE_TURKISH,
     FD_LANGUAGE_UKRAINIAN
 } from '@fundamental-ngx/i18n';
 
@@ -55,7 +58,10 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
     translations = [
         { name: 'English', value: FD_LANGUAGE_ENGLISH },
         { name: 'Ukrainian', value: FD_LANGUAGE_UKRAINIAN },
-        { name: 'Russian', value: FD_LANGUAGE_RUSSIAN }
+        { name: 'Italian', value: FD_LANGUAGE_ITALIAN },
+        { name: 'Turkish', value: FD_LANGUAGE_TURKISH },
+        { name: 'Russian', value: FD_LANGUAGE_RUSSIAN },
+        { name: 'Albanian', value: FD_LANGUAGE_ALBANIAN }
     ];
 
     items: ShellbarMenuItem[] = [
