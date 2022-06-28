@@ -1,16 +1,15 @@
 import { FdLanguage } from '../models/lang';
 
 /**
- * Default set of translations of Fundamental UI libarary for English language
+ * Default set of translations of Fundamental UI libarary for Turkish language
  */
-export const FD_LANGUAGE_ENGLISH: FdLanguage = {
+export const FD_LANGUAGE_TURKISH: FdLanguage = {
     coreGridList: {
         filterBarCancelButtonTitle: 'Vazgeç',
         listItemStatusAriaLabel: 'Eşyayı statü var. Statü: {{ status }}.',
         listItemCounterAriaLabel: 'Eşyayı {{ count }} alt eşyası var.',
         listItemButtonDetailsTitle: 'Detaylar',
         listItemButtonDeleteTitle: 'Sil',
-        listItemButtonNavigationTitle: 'Navigasyon',
         listItemStatusContainsErrors: 'Hata içerir',
         listItemStatusLocked: 'Kilitli',
         listItemStatusDraft: 'Taslak'
@@ -338,9 +337,9 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         messageUpdateVersionSuccess: '{{ folderName }} sürümü güncellendi.',
         messageFileRenameFailed: '"{{ from }}" olarak yeniden adlandırılamadı "{{ to }}"',
         messageFileRenameSuccess: '"{{ from }}", "{{ to }}" olarak yeniden adlandırıldı.',
-        messageRemoveFoldersAndFilesFailed: '{{ folderCount }} dizin ve {{ filesCout }} dosya kaldırılamadı.',
+        messageRemoveFoldersAndFilesFailed: '{{ foldersCount }} dizin ve {{ filesCout }} dosya kaldırılamadı.',
         messageRemoveFoldersAndFilesSuccess: '{{ foldersCount }} dizinleri ve {{ filesCount }} dosyaları kaldırıldı.',
-        messageRemoveFoldersFailed: '{{ folderCount }} dizinleri kaldırılamadı',
+        messageRemoveFoldersFailed: '{{ foldersCount }} dizinleri kaldırılamadı',
         messageRemoveFoldersSuccess: '{{ foldersCount }} dizinleri kaldırıladı.',
         messageRemoveFilesFailed: '{{ filesCount }} dosyaları kaldırılamadı.',
         messageRemoveFilesSuccess: '{{ filesCount }}  dosyaları kaldırıldı.',
@@ -366,9 +365,9 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         messageMoveRootFileOrFolderFailed: '{{ name }} tüm dosyalara taşınamadı.',
         messageMoveRootFileOrFolderSuccess: '{{ name }} tüm dosyalara taşındı.',
         messageFileTypeMismatchPlural:
-            '{{ filesCount }} dosyalarının türü yanlış. İzin verilen türler: {{ allowTypes }}.',
+            '{{ filesCount }} dosyalarının türü yanlış. İzin verilen türler: {{ allowedTypes }}.',
         messageFileTypeMismatchSingular:
-            '"{{ fileName }}" dosyasının türü yanlış. İzin verilen türler: {{ allowTypes }}.',
+            '"{{ fileName }}" dosyasının türü yanlış. İzin verilen türler: {{ allowedTypes }}.',
         messageFileSizeExceededPlural:
             '{{ filesCount }} dosya maksimum dosya boyutunu aştı. İzin verilen maksimum dosya boyutu: {{ maxFileSize }}.',
         messageFileSizeExceededSingular:

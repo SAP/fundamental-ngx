@@ -1,7 +1,7 @@
 import { FdLanguage } from '../models/lang';
 
 /**
- * Default set of translations of Fundamental UI libarary for English language
+ * Default set of translations of Fundamental UI libarary for Albanian language
  */
 export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
     coreGridList: {
@@ -10,7 +10,6 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         listItemCounterAriaLabel: 'Artikulli ka {{ count }} nënartikuj.',
         listItemButtonDetailsTitle: 'Detaje',
         listItemButtonDeleteTitle: 'Fshi',
-        listItemButtonNavigationTitle: 'Navigacion',
         listItemStatusContainsErrors: 'Përmban gabime.',
         listItemStatusLocked: 'I kyçur',
         listItemStatusDraft: 'Draft'
@@ -342,7 +341,7 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         messageRemoveFoldersAndFilesFailed:
             'Dështoi për të hequr {{ foldersCount }} dosje dhe {{ filesCount }} skedare.',
         messageRemoveFoldersAndFilesSuccess: '{{ foldersCount }} dojse he {{ filesCount }} skedare janë hequr.',
-        messageRemoveFoldersFailed: 'Dështoi për të hequr {{ folderCount }} dosje.',
+        messageRemoveFoldersFailed: 'Dështoi për të hequr {{ foldersCount }} dosje.',
         messageRemoveFoldersSuccess: '{{ foldersCount }} dosje janë hequr.',
         messageRemoveFilesFailed: 'Dështoi për të hequr {{ filesCount }} skedare.',
         messageRemoveFilesSuccess: '{{ filesCount }} skedare janë hequr.',

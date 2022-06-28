@@ -1,16 +1,15 @@
 import { FdLanguage } from '../models/lang';
 
 /**
- * Default set of translations of Fundamental UI libarary for English language
+ * Default set of translations of Fundamental UI libarary for Italian language
  */
-export const FD_LANGUAGE_ENGLISH: FdLanguage = {
+export const FD_LANGUAGE_ITALIAN: FdLanguage = {
     coreGridList: {
         filterBarCancelButtonTitle: 'Annulla',
         listItemStatusAriaLabel: "L'articolo ha uno stato. Stato: {{ status }}.",
         listItemCounterAriaLabel: "L'articolo ha {{count}} sottoarticoli.",
         listItemButtonDetailsTitle: 'Dettagli',
         listItemButtonDeleteTitle: 'Elimina',
-        listItemButtonNavigationTitle: 'Navigazione',
         listItemStatusContainsErrors: 'Contiene errori',
         listItemStatusLocked: 'Bloccato',
         listItemStatusDraft: 'Bozza'
@@ -346,7 +345,7 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
             'Impossibile rimuovere le cartelle {{ foldersCount }} e i file {{ filesCount }}.',
         messageRemoveFoldersAndFilesSuccess:
             'Le cartelle {{ foldersCount }} e i file {{ filesCount }} sono state rimosse.',
-        messageRemoveFoldersFailed: 'Impossibile rimuovere le cartelle {{ folderCount }}.',
+        messageRemoveFoldersFailed: 'Impossibile rimuovere le cartelle {{ foldersount }}.',
         messageRemoveFoldersSuccess: 'Le cartelle {{ foldersCount }} sono state rimosse.',
         messageRemoveFilesFailed: 'Impossibile rimuovere {{ filesCount }} file.',
         messageRemoveFilesSuccess: 'I file {{ filesCount }} sono stati rimossi.',
