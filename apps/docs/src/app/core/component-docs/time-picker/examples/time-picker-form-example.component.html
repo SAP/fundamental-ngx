@@ -12,8 +12,7 @@
         <br />
         Selected Time:
         <span *ngIf="customForm.controls.time.value">
-            {{ customForm.controls.time.value.hour }}h {{ customForm.controls.time.value.minute }}m
-            {{ customForm.controls.time.value.second }}s
+            {{ customForm.controls.time.value?.toDate() | date: 'shortTime' }}
         </span>
     </div>
     <div fd-form-item>
@@ -27,8 +26,7 @@
         <br />
         Selected Time:
         <span *ngIf="customForm.controls.disabledTime.value">
-            {{ customForm.controls.disabledTime.value.hour }}h {{ customForm.controls.disabledTime.value.minute }}m
-            {{ customForm.controls.disabledTime.value.second }}s </span
+            {{ customForm.controls.disabledTime.value?.toDate() | date: 'shortTime' }} </span
         ><br />
         Disabled: {{ customForm.controls.disabledTime.disabled }}
     </div>

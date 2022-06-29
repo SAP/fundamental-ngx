@@ -68,7 +68,9 @@ export function refreshPage(isFullRefresh = false): void {
     } catch {}
     if (!isFullRefresh) {
         const url = browser.getUrl();
-        click(`#toolbar-home-btn`);
+        try {
+            click(`#toolbar-home-btn`);
+        } catch {}
         if (browser.getUrl().includes(`/home`)) {
             goBack();
         } else {
