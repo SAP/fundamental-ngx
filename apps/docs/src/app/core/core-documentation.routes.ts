@@ -205,6 +205,11 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'truncate',
+                loadChildren: () =>
+                    import('./component-docs/truncate/truncate-docs.module').then((m) => m.TruncateDocsModule)
+            },
+            {
                 path: 'grid-list',
                 loadChildren: () =>
                     import('./component-docs/grid-list/grid-list-docs.module').then((m) => m.GridListDocsModule)

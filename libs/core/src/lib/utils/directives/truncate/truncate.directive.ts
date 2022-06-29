@@ -92,17 +92,17 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
     private _hasMore: boolean;
 
     /** @hidden */
-    private windowResize$: Subscription;
+    private _windowResize$: Subscription;
 
     /** @hidden
      * saves default style of element before truncating
      */
-    private defaultStyle: string;
+    private _defaultStyle: string;
 
     /** @hidden
      * truncation style for truncating element
      */
-    private truncationStyle: string;
+    private _truncationStyle: string;
 
     /** @hidden */
     constructor(private readonly _elementRef: ElementRef, private readonly _renderer: Renderer2) {}
@@ -125,7 +125,7 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
      * Sets default style
      */
     _setDefaultStyle(): void {
-        this.defaultStyle = this._elementRef.nativeElement.style.cssText;
+        this._defaultStyle = this._elementRef.nativeElement.style.cssText;
     }
 
     /** @hidden */
@@ -139,7 +139,7 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
 
             this._initTruncate();
 
-            this.windowResize$ = fromEvent(window, 'resize')
+            this._windowResize$ = fromEvent(window, 'resize')
                 .pipe(distinctUntilChanged(), debounceTime(200))
                 .subscribe({
                     next: () => this._checkWidth()
@@ -151,8 +151,8 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
 
     /** @hidden */
     ngOnDestroy(): void {
-        if (this.windowResize$) {
-            this.windowResize$.unsubscribe();
+        if (this._windowResize$) {
+            this._windowResize$.unsubscribe();
         }
     }
 
@@ -208,7 +208,7 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
      */
     private _toggleTruncate(): void {
         if (this._customWidthCount) {
-            this._truncateTarget.style.cssText = this.fdTruncateState ? this.truncationStyle : this.defaultStyle;
+            this._truncateTarget.style.cssText = this.fdTruncateState ? this._truncationStyle : this._defaultStyle;
         } else {
             this._truncateTarget.textContent = this.fdTruncateState ? this._truncatedText : this._originalText;
         }
@@ -254,6 +254,6 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
      * Truncates element by pixel length
      */
     private _truncateByWidth(_element: HTMLElement): void {
-        this.truncationStyle = `${this.defaultStyle} overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: ${this._maxWidth}px;`;
+        this._truncationStyle = `${this._defaultStyle} overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: ${this._maxWidth}px;`;
     }
 }
