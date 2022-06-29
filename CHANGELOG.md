@@ -1,4 +1,11 @@
 
+### [0.35.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.2...v0.35.2-rc.3) (2022-06-29)
+
+
+### Bug Fixes
+
+* **core:** popovers inside wizard scrollable body ([#8288](https://github.com/SAP/fundamental-ngx/issues/8288)) ([8b1eebd](https://github.com/SAP/fundamental-ngx/commit/8b1eebdaf338be7573a0ed3a167546718c7ed2b9))
+
 ### [0.35.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.1...v0.35.2-rc.2) (2022-06-29)
 
 
