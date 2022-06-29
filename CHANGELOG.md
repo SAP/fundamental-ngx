@@ -1,4 +1,11 @@
 
+### [0.35.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.1...v0.35.2-rc.2) (2022-06-29)
+
+
+### Bug Fixes
+
+* **core/platform:** time-picker - a11y issues ([#8087](https://github.com/SAP/fundamental-ngx/issues/8087)) ([53161b9](https://github.com/SAP/fundamental-ngx/commit/53161b997c1e6028a4e5591f97d542e53ab6984a))
+
 ### [0.35.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.0...v0.35.2-rc.1) (2022-06-28)
 
 
