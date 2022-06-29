@@ -1,3 +1,4 @@
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WizardComponent } from './wizard.component';
@@ -21,7 +22,7 @@ import { ScrollSpyModule } from '@fundamental-ngx/core/scroll-spy';
         WizardContentComponent,
         WizardNextStepComponent
     ],
-    imports: [CommonModule, IconModule, ScrollSpyModule, ActionSheetModule],
+    imports: [CommonModule, IconModule, ScrollSpyModule, ActionSheetModule, ScrollingModule],
     exports: [
         WizardComponent,
         WizardNavigationComponent,
