@@ -18,10 +18,10 @@
             type="button"
             [compact]="compact"
             [disabled]="!canDecrement"
-            [title]="decrementButtonTitle"
+            [title]="decrementButtonTitle || ('coreStepInput.decrementButtonTitle' | fdTranslate)"
             [glyph]="decrementButtonIcon"
             (click)="onTouched()"
-            [attr.aria-label]="decrementButtonTitle"
+            [attr.aria-label]="decrementButtonTitle || ('coreStepInput.decrementButtonTitle' | fdTranslate)"
             [attr.aria-controls]="inputId"
         ></button>
         <input
@@ -40,7 +40,7 @@
             [attr.aria-valuemin]="min"
             [attr.aria-describedby]="canDisplayLabel ? inputId + '__description' : ''"
             [attr.aria-required]="required"
-            [attr.aria-roledescription]="ariaRoleDescription"
+            [attr.aria-roledescription]="ariaRoleDescription || ('coreStepInput.ariaRoleDescription' | fdTranslate)"
             (focusin)="handleFocusIn()"
             (focusout)="handleFocusOut()"
             (wheel)="handleScroll($event)"
@@ -62,10 +62,10 @@
             type="button"
             [compact]="compact"
             [disabled]="!canIncrement"
-            [title]="incrementButtonTitle"
+            [title]="incrementButtonTitle || ('coreStepInput.incrementButtonTitle' | fdTranslate)"
             [glyph]="incrementButtonIcon"
             (click)="onTouched()"
-            [attr.aria-label]="incrementButtonTitle"
+            [attr.aria-label]="incrementButtonTitle || ('coreStepInput.incrementButtonTitle' | fdTranslate)"
             [attr.aria-controls]="inputId"
         ></button>
     </div>

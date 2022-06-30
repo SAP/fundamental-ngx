@@ -7,6 +7,29 @@ const pluralization = new PluralizationSet1();
  * Default set of translations of Fundamental UI libarary for Russian language
  */
 export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
+    coreCarousel: {
+        leftNavigationBtnLabel: 'Перейти к предыдущему элементу',
+        rightNavigationBtnLabel: 'Перейти к следующему элементу'
+    },
+    coreDatePicker: {
+        dateInputLabel: 'Поле ввода даты',
+        dateRangeInputLabel: 'Поле ввода диапазона дат',
+        displayCalendarToggleLabel: 'Открыть средство выбора',
+        valueStateSuccessMessage: 'Значение состояния: Успех',
+        valueStateInformationMessage: 'Значение состояния: Информационное',
+        valueStateWarningMessage: 'Значение состояния: Предупреждение',
+        valueStateErrorMessage: 'Значение состояния: Ошибка'
+    },
+    coreDatetimePicker: {
+        datetimeInputLabel: 'Поле ввода даты и времени',
+        displayDatetimeToggleLabel: 'Показать календарь',
+        displayTypeDateLabel: 'Дата',
+        displayTypeTimeLabel: 'Время'
+    },
+    coreFeedListItem: {
+        moreLabel: 'Больше',
+        lessLabel: 'Меньше'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Отмена',
         listItemStatusAriaLabel: 'Элемент имеет статус. Статус: {{ status }}.',
@@ -28,6 +51,46 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         listItemStatusLocked: 'Заблокировано',
         listItemStatusDraft: 'Черновик'
     },
+    coreMessageStrip: {
+        dismissLabel: 'Закрыть'
+    },
+    coreNestedList: {
+        linkItemAriaLabel: 'Элемент дерева {{ itemDetails }}, {{ index }} из {{ total }}{{ selectedDescription }}'
+    },
+    coreOverflowLayout: {
+        moreItemsButton: (params) => {
+            const count = params['count'];
+            const option = pluralization.process(count);
+            switch (option) {
+                case 'one':
+                    return `Еще 1 елемент`;
+                case 'few':
+                    return `Еще ${count} елемента`;
+                default:
+                    return `Еще ${count} елементов`;
+            }
+        }
+    },
+    corePagination: {
+        pageLabel: 'Страница {{ pageNumber }}',
+        currentPageAriaLabel: 'Страница {{ pageNumber }} активна',
+        labelBeforeInputMobile: 'Страница:',
+        labelAfterInputMobile: 'из {{ totalCount }}',
+        inputAriaLabel: 'Поле ввода страницы, Текущая страница, Страница {{ pageNumber }} из {{ totalCount }}',
+        itemsPerPageLabel: 'Результатов на странице:',
+        firstLabel: 'Перейти к первой',
+        previousLabel: 'Перейти к предыдущей',
+        nextLabel: 'Перейти к следующей',
+        lastLabel: 'Перейти к последней',
+        ariaLabel: 'Нумерация страниц',
+        totalResultsLabel: '{{ totalCount }} результатов'
+    },
+    coreProductSwitch: {
+        ariaLabel: 'Переключатель'
+    },
+    coreShellbar: {
+        collapsedItemMenuLabel: 'Свернутое меню элементов'
+    },
     coreSlider: {
         singleMinMaxDetails: 'Минимальное значение слайдера {{ min }}, максимальное значение {{ max }}',
         singleValueminDetails: 'Значение равно {{ value }}',
@@ -41,6 +104,70 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         multipleHandle2ValueminDetails: 'Значение равно {{ value }}',
         multipleHandle2ValuemaxDetails: 'Значение равно {{ value }}',
         multipleHandle2ValueNowDetails: 'Текущее значение: {{ value }}'
+    },
+    coreSplitButton: {
+        expandButtonAriaLabel: 'Больше действий',
+        arialLabel: 'Кнопка разделения'
+    },
+    coreSplitter: {
+        paginationItemAriaLabel: 'Секция'
+    },
+    coreStepInput: {
+        incrementButtonTitle: 'Увеличить',
+        decrementButtonTitle: 'Уменьшить',
+        ariaRoleDescription: 'Шаг ввода'
+    },
+    coreSwitch: {
+        semanticAcceptLabel: 'Принять',
+        semanticDeclineLabel: 'Отклонить'
+    },
+    coreTabs: {
+        tabListExpandButtonText: 'Больше'
+    },
+    coreText: {
+        moreLabel: 'Больше',
+        lessLabel: 'Меньше'
+    },
+    coreTime: {
+        componentAriaName: 'Выбор времени',
+        increaseHoursLabel: 'Увеличить часы',
+        hoursLabel: 'Час',
+        decreaseHoursLabel: 'Уменьшить часы',
+        increaseMinutesLabel: 'Увеличить минуты',
+        minutesLabel: 'Мин',
+        decreaseMinutesLabel: 'Уменьшить минуты',
+        increaseSecondsLabel: 'Увеличить секунды',
+        secondsLabel: 'Сек',
+        decreaseSecondsLabel: 'Уменьшить секунды',
+        increasePeriodLabel: 'Увеличить период',
+        periodLabel: 'Период',
+        decreasePeriodLabel: 'Уменьшить период',
+        navigationInstruction:
+            'Для перемещения между элементами в этом списке используйте стрелку вверх или вниз. ' +
+            'Для переключения между списками используйте стрелку влево или вправо.'
+    },
+    coreTimePicker: {
+        timePickerInputLabel: 'Поле ввода времени',
+        timePickerButtonLabel: 'Открыть окно выбора'
+    },
+    coreToken: {
+        deleteButtonLabel: 'Удаляемый',
+        ariaRoleDescription: 'токен'
+    },
+    coreUploadCollection: {
+        menuOkText: 'ОК',
+        menuCancelText: 'Отменить',
+        menuEditAriaLabel: 'Редактировать',
+        menuDeleteAriaLabel: 'Удалить',
+        menuOkAriaLabel: 'Редактировать',
+        menuCancelAriaLabel: 'Отменить',
+        formItemPlaceholder: 'Имя файла'
+    },
+    coreWizard: {
+        ariaLabel: 'Мастер'
+    },
+    platformActionBar: {
+        backButtonLabel: 'Вернуться назад'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Наблюдатели',
@@ -154,6 +281,9 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
             }
         }
     },
+    platformFeedInput: {
+        userTitle: 'Пользователь'
+    },
     platformVHD: {
         selectionBarLabel: 'Выбранные элементы и условия',
         selectedAndConditionLabel: 'Выбранные элементы и условия',
@@ -237,7 +367,10 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
                 default:
                     return `Введите значение не более ${count || 0} символов`;
             }
-        }
+        },
+        selectTabTitle: 'Выбрать из списка',
+        searchTableEmptyMessage: 'Используйте поиск для получения результатов',
+        defineTabTitle: 'Определить условия'
     },
     platformCombobox: {
         countListResultsSingular: '1 элемент',
@@ -306,7 +439,20 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
     platformSearchField: {
         clearButtonTitle: 'Очистить',
         submitButtonTitle: 'Поиск',
-        synchronizeButtonTitle: 'Синхронизировать'
+        synchronizeButtonTitle: 'Синхронизировать',
+        searchSuggestionMessage: (params) => {
+            const count = params['count'];
+            const option = pluralization.process(count);
+            switch (option) {
+                case 'one':
+                    return `Найден 1 вариант`;
+                case 'few':
+                    return `Найдено ${count} варианта`;
+                default:
+                    return `Найдено ${count || 0} вариантов`;
+            }
+        },
+        searchSuggestionNavigateMessage: 'используйте стрелки вверх и вниз для навигации'
     },
     platformSmartFilterBar: {
         searchPlaceholder: 'Поиск',
@@ -323,7 +469,28 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         selectFiltersFilterColumnLabel: 'Фильтр',
         selectFiltersActiveColumnLabel: 'Активный',
         selectFiltersSubmitButtonLabel: 'Перейти',
-        selectFiltersCancelButton: 'Отменить'
+        selectFiltersCancelButton: 'Отменить',
+        filterConditionContains: 'содержит',
+        filterConditionEqualTo: 'равно',
+        filterConditionBetween: 'между',
+        filterConditionBeginsWith: 'начинается с',
+        filterConditionEndsWith: 'заканчивается',
+        filterConditionLessThan: 'меньше чем',
+        filterConditionLessThanOrEqualTo: 'меньше или равно',
+        filterConditionGreaterThan: 'больше чем',
+        filterConditionGreaterThanOrEqualTo: 'больше или равно',
+        filterConditionAfter: 'после',
+        filterConditionOnOrAfter: 'равно или после',
+        filterConditionBefore: 'до',
+        filterConditionBeforeOrOn: 'до или равно',
+        filterConditionValuePlaceholder: 'значение',
+        filterConditionValueFromPlaceholder: 'от',
+        filterConditionValueToPlaceholder: 'до',
+        settingsCategoryAll: 'Все',
+        settingsCategoryVisible: 'Видимые',
+        settingsCategoryActive: 'Активные',
+        settingsCategoryVisibleAndActive: 'Видимые и активные',
+        settingsCategoryMandatory: 'Обязательные'
     },
     platformTable: {
         headerMenuSortAsc: 'Сортировать по возрастанию',
@@ -424,7 +591,8 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Перейти к предыдущему',
         detailsGotoNextButtonTitle: 'Перейти к следующему',
-        detailsDialogCloseBtnLabel: 'Закрыть'
+        detailsDialogCloseBtnLabel: 'Закрыть',
+        roleDescription: 'Изображение'
     },
     platformUploadCollection: {
         moveToTitle: 'Переместить в',
@@ -471,6 +639,8 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         cancelUploadNewFileAction: 'Отменить',
         itemMenuBtnTitle: 'Больше',
         dragDropAreaText: 'Перетащите файлы для загрузки',
+        noDataText: 'Файлы не найдены',
+        noDataDescription: 'Перетащите файлы для загрузки или воспользуйтесь кнопкой «Добавить».',
         paginationTotal: 'Показано {{ from }}-{{ to }} из {{ total }}',
         resultsPerPage: 'Результаты на странице',
         messageCreateFailed: 'Не удалось создать {{ folderName }}.',
@@ -567,6 +737,10 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         valueminDetails: 'Значение равно {{ value }}',
         valuemaxDetails: 'Значение равно {{ value }}',
         valueNowDetails: 'Текущее значение: {{ value }}'
+    },
+    fnSwitch: {
+        semanticAcceptLabel: 'Принять',
+        semanticDeclineLabel: 'Отклонить'
     }
 };
 

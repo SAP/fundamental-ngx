@@ -8,6 +8,29 @@ export type FdLanguageKey = string | FdLanguageKeyFunction;
  * Representation of the dictionary per UI component
  */
 export interface FdLanguage {
+    coreCarousel: {
+        leftNavigationBtnLabel: FdLanguageKey;
+        rightNavigationBtnLabel: FdLanguageKey;
+    };
+    coreDatePicker: {
+        dateInputLabel: FdLanguageKey;
+        dateRangeInputLabel: FdLanguageKey;
+        displayCalendarToggleLabel: FdLanguageKey;
+        valueStateSuccessMessage: FdLanguageKey;
+        valueStateInformationMessage: FdLanguageKey;
+        valueStateWarningMessage: FdLanguageKey;
+        valueStateErrorMessage: FdLanguageKey;
+    };
+    coreDatetimePicker: {
+        datetimeInputLabel: FdLanguageKey;
+        displayDatetimeToggleLabel: FdLanguageKey;
+        displayTypeDateLabel: FdLanguageKey;
+        displayTypeTimeLabel: FdLanguageKey;
+    };
+    coreFeedListItem: {
+        moreLabel: FdLanguageKey;
+        lessLabel: FdLanguageKey;
+    };
     coreGridList: {
         filterBarCancelButtonTitle: FdLanguageKey;
         /** @param status */
@@ -19,6 +42,64 @@ export interface FdLanguage {
         listItemStatusContainsErrors: FdLanguageKey;
         listItemStatusLocked: FdLanguageKey;
         listItemStatusDraft: FdLanguageKey;
+    };
+    coreMessageStrip: {
+        dismissLabel: FdLanguageKey;
+    };
+    coreNestedList: {
+        /**
+         * @param itemDetails
+         * @param index
+         * @param total
+         * @param selectedDescription
+         */
+        linkItemAriaLabel: FdLanguageKey;
+    };
+    coreOverflowLayout: {
+        /** @param count */
+        moreItemsButton: FdLanguageKey;
+    };
+    corePagination: {
+        /** @param pageNumber */
+        pageLabel: FdLanguageKey;
+        /**
+         * @param pageNumber
+         * @param totalCount
+         */
+        currentPageAriaLabel: FdLanguageKey;
+        /**
+         * @param pageNumber
+         * @param totalCount
+         */
+        labelBeforeInputMobile: FdLanguageKey;
+        /**
+         * @param pageNumber
+         * @param totalCount
+         */
+        labelAfterInputMobile: FdLanguageKey;
+        /**
+         * @param pageNumber
+         * @param totalCount
+         */
+        inputAriaLabel: FdLanguageKey;
+        itemsPerPageLabel: FdLanguageKey;
+        firstLabel: FdLanguageKey;
+        previousLabel: FdLanguageKey;
+        nextLabel: FdLanguageKey;
+        lastLabel: FdLanguageKey;
+        ariaLabel: FdLanguageKey;
+        /**
+         * @param totalCount
+         * @param from
+         * @param to
+         */
+        totalResultsLabel: FdLanguageKey;
+    };
+    coreProductSwitch: {
+        ariaLabel: FdLanguageKey;
+    };
+    coreShellbar: {
+        collapsedItemMenuLabel: FdLanguageKey;
     };
     coreSlider: {
         /**
@@ -54,6 +135,85 @@ export interface FdLanguage {
         multipleHandle2ValuemaxDetails: FdLanguageKey;
         /** @param value */
         multipleHandle2ValueNowDetails: FdLanguageKey;
+    };
+    coreSplitButton: {
+        expandButtonAriaLabel: FdLanguageKey;
+        arialLabel: FdLanguageKey;
+    };
+    coreSplitter: {
+        paginationItemAriaLabel: FdLanguageKey;
+    };
+    coreStepInput: {
+        incrementButtonTitle: FdLanguageKey;
+        decrementButtonTitle: FdLanguageKey;
+        ariaRoleDescription: FdLanguageKey;
+    };
+    coreSwitch: {
+        semanticAcceptLabel: FdLanguageKey;
+        semanticDeclineLabel: FdLanguageKey;
+    };
+    coreTabs: {
+        tabListExpandButtonText: FdLanguageKey;
+    };
+    coreText: {
+        moreLabel: FdLanguageKey;
+        lessLabel: FdLanguageKey;
+    };
+    coreTime: {
+        /** Aria label for entire component */
+        componentAriaName: FdLanguageKey;
+        /** Aria label for the 'increase hours' button */
+        increaseHoursLabel: FdLanguageKey;
+        /** label for the 'hours' column */
+        hoursLabel: FdLanguageKey;
+        /** Aria label for the 'decrease hours' button */
+        decreaseHoursLabel: FdLanguageKey;
+        /** Aria label for the 'increase minutes' button */
+        increaseMinutesLabel: FdLanguageKey;
+        /** label for the 'minutes' column */
+        minutesLabel: FdLanguageKey;
+        /** Aria label for the 'decrease minutes' button */
+        decreaseMinutesLabel: FdLanguageKey;
+        /** Aria label for the 'increase seconds' button */
+        increaseSecondsLabel: FdLanguageKey;
+        /** label for the 'seconds' column */
+        secondsLabel: FdLanguageKey;
+        /** Aria label for the 'decrease seconds' button */
+        decreaseSecondsLabel: FdLanguageKey;
+        /** Aria label for the 'increase period' button */
+        increasePeriodLabel: FdLanguageKey;
+        /** label for the 'period' column */
+        periodLabel: FdLanguageKey;
+        /** Aria label for the 'decrease period' button */
+        decreasePeriodLabel: FdLanguageKey;
+        /**
+         * Instruction how to navigate between options
+         * in the time column list and to switch between time columns
+         */
+        navigationInstruction: FdLanguageKey;
+    };
+    coreTimePicker: {
+        timePickerInputLabel: FdLanguageKey;
+        timePickerButtonLabel: FdLanguageKey;
+    };
+    coreToken: {
+        deleteButtonLabel: FdLanguageKey;
+        ariaRoleDescription: FdLanguageKey;
+    };
+    coreUploadCollection: {
+        menuOkText: FdLanguageKey;
+        menuCancelText: FdLanguageKey;
+        menuEditAriaLabel: FdLanguageKey;
+        menuDeleteAriaLabel: FdLanguageKey;
+        menuOkAriaLabel: FdLanguageKey;
+        menuCancelAriaLabel: FdLanguageKey;
+        formItemPlaceholder: FdLanguageKey;
+    };
+    coreWizard: {
+        ariaLabel: FdLanguageKey;
+    };
+    platformActionBar: {
+        backButtonLabel: FdLanguageKey;
     };
     platformApprovalFlow: {
         defaultWatchersLabel: FdLanguageKey;
@@ -126,6 +286,9 @@ export interface FdLanguage {
         /** @param count */
         userListSelectedItemsCountPlural: FdLanguageKey;
     };
+    platformFeedInput: {
+        userTitle: FdLanguageKey;
+    };
     platformVHD: {
         selectionBarLabel: FdLanguageKey;
         selectedAndConditionLabel: FdLanguageKey;
@@ -178,6 +341,9 @@ export interface FdLanguage {
         defineConditionConditionStrategyLabelNotEmpty: FdLanguageKey;
         /** @param count */
         defineConditionMaxCountError: FdLanguageKey;
+        selectTabTitle: FdLanguageKey;
+        searchTableEmptyMessage: FdLanguageKey;
+        defineTabTitle: FdLanguageKey;
     };
     platformCombobox: {
         countListResultsSingular: FdLanguageKey;
@@ -217,6 +383,11 @@ export interface FdLanguage {
         clearButtonTitle: FdLanguageKey;
         submitButtonTitle: FdLanguageKey;
         synchronizeButtonTitle: FdLanguageKey;
+        /**
+         * @param count
+         */
+        searchSuggestionMessage: FdLanguageKey;
+        searchSuggestionNavigateMessage: FdLanguageKey;
     };
     platformSmartFilterBar: {
         searchPlaceholder: FdLanguageKey;
@@ -235,6 +406,27 @@ export interface FdLanguage {
         selectFiltersActiveColumnLabel: FdLanguageKey;
         selectFiltersSubmitButtonLabel: FdLanguageKey;
         selectFiltersCancelButton: FdLanguageKey;
+        filterConditionContains: FdLanguageKey;
+        filterConditionEqualTo: FdLanguageKey;
+        filterConditionBetween: FdLanguageKey;
+        filterConditionBeginsWith: FdLanguageKey;
+        filterConditionEndsWith: FdLanguageKey;
+        filterConditionLessThan: FdLanguageKey;
+        filterConditionLessThanOrEqualTo: FdLanguageKey;
+        filterConditionGreaterThan: FdLanguageKey;
+        filterConditionGreaterThanOrEqualTo: FdLanguageKey;
+        filterConditionAfter: FdLanguageKey;
+        filterConditionOnOrAfter: FdLanguageKey;
+        filterConditionBefore: FdLanguageKey;
+        filterConditionBeforeOrOn: FdLanguageKey;
+        filterConditionValuePlaceholder: FdLanguageKey;
+        filterConditionValueFromPlaceholder: FdLanguageKey;
+        filterConditionValueToPlaceholder: FdLanguageKey;
+        settingsCategoryAll: FdLanguageKey;
+        settingsCategoryVisible: FdLanguageKey;
+        settingsCategoryActive: FdLanguageKey;
+        settingsCategoryVisibleAndActive: FdLanguageKey;
+        settingsCategoryMandatory: FdLanguageKey;
     };
     platformTable: {
         headerMenuSortAsc: FdLanguageKey;
@@ -343,6 +535,7 @@ export interface FdLanguage {
         detailsGotoPreviousButtonTitle: FdLanguageKey;
         detailsGotoNextButtonTitle: FdLanguageKey;
         detailsDialogCloseBtnLabel: FdLanguageKey;
+        roleDescription: FdLanguageKey;
     };
     platformUploadCollection: {
         moveToTitle: FdLanguageKey;
@@ -381,6 +574,8 @@ export interface FdLanguage {
         cancelUploadNewFileAction: FdLanguageKey;
         itemMenuBtnTitle: FdLanguageKey;
         dragDropAreaText: FdLanguageKey;
+        noDataText: FdLanguageKey;
+        noDataDescription: FdLanguageKey;
         /**
          * @param from
          * @param to
@@ -538,5 +733,9 @@ export interface FdLanguage {
         valuemaxDetails: FdLanguageKey;
         /** @param value */
         valueNowDetails: FdLanguageKey;
+    };
+    fnSwitch: {
+        semanticAcceptLabel: FdLanguageKey;
+        semanticDeclineLabel: FdLanguageKey;
     };
 }

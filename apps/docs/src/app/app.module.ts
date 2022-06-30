@@ -6,6 +6,8 @@ import { MarkdownModule } from 'ngx-markdown';
 
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
 import { AppComponent } from './app.component';
+import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
+import { BehaviorSubject } from 'rxjs';
 
 const routes: Routes = [
     {
@@ -42,6 +44,12 @@ const routes: Routes = [
         MarkdownModule.forRoot({ loader: HttpClient })
     ],
     bootstrap: [AppComponent],
-    providers: [ContentDensityService]
+    providers: [
+        ContentDensityService,
+        {
+            provide: FD_LANGUAGE,
+            useValue: new BehaviorSubject(FD_LANGUAGE_ENGLISH)
+        }
+    ]
 })
 export class AppModule {}

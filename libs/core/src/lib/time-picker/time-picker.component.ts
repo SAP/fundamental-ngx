@@ -126,11 +126,11 @@ export class TimePickerComponent<D>
 
     /** Aria label for the time picker input. */
     @Input()
-    timePickerInputLabel = 'Time picker input';
+    timePickerInputLabel: string;
 
     /** Aria label for the time picker toggle button. */
     @Input()
-    timePickerButtonLabel = 'Open picker';
+    timePickerButtonLabel: string;
 
     /** Aria-labelledby for the time picker toggle button. */
     @Input()

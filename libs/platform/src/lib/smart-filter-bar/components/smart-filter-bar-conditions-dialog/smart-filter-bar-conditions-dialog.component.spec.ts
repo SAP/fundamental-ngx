@@ -26,22 +26,7 @@ const mockData: SmartFilterBarConditionBuilder = {
         }
     ],
     choices: [],
-    controlType: 'text',
-    defineStrategyLabels: {
-        contains: 'contains',
-        equalTo: 'equal to',
-        between: 'between',
-        beginsWith: 'starts with',
-        endsWith: 'ends with',
-        lessThan: 'less than',
-        lessThanOrEqualTo: 'less than or equal to',
-        greaterThan: 'greater than',
-        greaterThanOrEqualTo: 'greater than or equal to',
-        after: 'after',
-        onOrAfter: 'on or after',
-        before: 'before',
-        beforeOrOn: 'before or on'
-    }
+    controlType: 'text'
 };
 
 describe('SmartFilterBarConditionsDialogComponent', () => {
@@ -112,6 +97,8 @@ describe('SmartFilterBarConditionsDialogComponent', () => {
     });
 
     it('should close dialog when all forms are submitted', async () => {
+        fixture.detectChanges();
+        await new Promise((resolve) => setTimeout(() => resolve(null), 200));
         const spy = spyOn(component, '_onFormSubmitted').and.callThrough();
         const dialogSpy = spyOn((component as any)._dialogRef, 'close');
 

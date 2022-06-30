@@ -135,13 +135,19 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
     @Input()
     mimeTypes: string[] = [];
 
-    /** Allows to set own text for the 'No data' text label. */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Allows to set own text for the 'No data' text label.
+     */
     @Input()
-    noDataText = 'No files found';
+    noDataText: string;
 
-    /** Allows to set own text for the 'No data' description label. */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Allows to set own text for the 'No data' description label.
+     */
     @Input()
-    noDataDescription = 'Drop files to upload, or use the “Add” button.';
+    noDataDescription: string;
 
     /** All action buttons will be disabled */
     @Input()

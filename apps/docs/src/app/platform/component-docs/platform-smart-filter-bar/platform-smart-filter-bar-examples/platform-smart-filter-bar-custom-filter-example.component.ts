@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Injector } from '@angular/core';
 import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
 import { isSelectItem, SelectItem } from '@fundamental-ngx/platform/shared';
 import {
@@ -79,8 +79,8 @@ export class PlatformSmartFilterBarSliderComponent extends BaseDynamicFormGenera
     viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider, smartFilterBarProvider]
 })
 export class PlatformSmartFilterBarDateRendererComponent extends BaseSmartFilterBarConditionField {
-    constructor(dialogService: DialogService, smartFilterBar: SmartFilterBar) {
-        super(dialogService, smartFilterBar);
+    constructor(dialogService: DialogService, smartFilterBar: SmartFilterBar, injector: Injector) {
+        super(dialogService, smartFilterBar, injector);
     }
 }
 

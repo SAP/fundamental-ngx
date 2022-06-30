@@ -15,6 +15,6 @@ import { I18nModule } from '@fundamental-ngx/i18n';
     declarations: [ThumbnailComponent, ThumbnailImageComponent, ThumbnailDetailsComponent],
     providers: [RtlService, DialogRef],
     imports: [CommonModule, AvatarModule, DialogModule, CarouselModule, ButtonModule, I18nModule],
-    exports: [ThumbnailComponent]
+    exports: [ThumbnailComponent, ThumbnailImageComponent, ThumbnailDetailsComponent]
 })
 export class PlatformThumbnailModule {}

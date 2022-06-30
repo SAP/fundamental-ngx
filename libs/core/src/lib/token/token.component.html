@@ -17,7 +17,7 @@
     <span
         (click)="closeClickHandler($event)"
         role="button"
-        [attr.aria-label]="deleteButtonLabel"
+        [attr.aria-label]="deleteButtonLabel || ('coreToken.deleteButtonLabel' | fdTranslate)"
         *ngIf="!readOnly"
         class="fd-token__close"
         tabindex="-1"

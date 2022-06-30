@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ChangeDetectorRef } from '@angular/core';
 import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
+import { SwitchModule } from './switch.module';
 
 describe('SwitchComponent', () => {
     let component: SwitchComponent;
@@ -15,8 +16,7 @@ describe('SwitchComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [CommonModule, FormsModule],
-                declarations: [SwitchComponent],
+                imports: [CommonModule, FormsModule, SwitchModule],
                 providers: [ContentDensityService]
             }).compileComponents();
         })

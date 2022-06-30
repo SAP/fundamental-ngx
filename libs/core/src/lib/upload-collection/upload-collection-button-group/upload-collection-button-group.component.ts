@@ -48,29 +48,47 @@ export class UploadCollectionButtonGroupComponent {
     @Input()
     disableFileDeletion = false;
 
-    /** Text for the 'Ok' button. */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Text for the 'Ok' button.
+     */
     @Input()
-    okText = 'Ok';
+    okText: string;
 
-    /** Text for the 'Cancel' button. */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Text for the 'Cancel' button.
+     */
     @Input()
-    cancelText = 'Cancel';
+    cancelText: string;
 
-    /** Text for the 'Edit' aria-label. */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Text for the 'Edit' aria-label.
+     */
     @Input()
-    editAriaLabel = 'Edit';
+    editAriaLabel: string;
 
-    /** Text for the 'Delete' aria-label. */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Text for the 'Delete' aria-label.
+     */
     @Input()
-    deleteAriaLabel = 'Delete';
+    deleteAriaLabel: string;
 
-    /** Text for the 'Ok' aria-label. */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Text for the 'Ok' aria-label.
+     */
     @Input()
-    okAriaLabel = 'Edit';
+    okAriaLabel: string;
 
-    /** Text for the 'Cancel' aria-label. */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Text for the 'Cancel' aria-label.
+     */
     @Input()
-    cancelAriaLabel = 'Cancel';
+    cancelAriaLabel: string;
 
     /** @hidden */
     @ViewChild('okButton')

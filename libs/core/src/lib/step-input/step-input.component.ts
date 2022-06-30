@@ -81,13 +81,19 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     @Input()
     decrementButtonIcon = 'less';
 
-    /** Sets Increment Button title attribute */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Sets Increment Button title attribute
+     */
     @Input()
-    incrementButtonTitle = 'Increment';
+    incrementButtonTitle: string;
 
-    /** Sets Decrement Button title attribute */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Sets Decrement Button title attribute
+     */
     @Input()
-    decrementButtonTitle = 'Decrement';
+    decrementButtonTitle: string;
 
     /** Sets input aria-label attribute */
     @Input()
@@ -99,7 +105,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** Aria defines role description for the Step Input. */
     @Input()
-    ariaRoleDescription = 'Step Input';
+    ariaRoleDescription: string;
 
     /** Sets input id */
     @Input()

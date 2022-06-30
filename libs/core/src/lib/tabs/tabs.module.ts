@@ -23,6 +23,7 @@ import { IconModule } from '@fundamental-ngx/core/icon';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { I18nModule } from '@fundamental-ngx/i18n';
 import { MenuModule } from '@fundamental-ngx/core/menu';
 import { ScrollSpyModule } from '@fundamental-ngx/core/scroll-spy';
 import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.component';
@@ -46,7 +47,16 @@ import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.compon
         TabProcessIconDirective,
         TabSeparatorDirective
     ],
-    imports: [CommonModule, IconModule, PopoverModule, ListModule, ButtonModule, MenuModule, ScrollSpyModule],
+    imports: [
+        CommonModule,
+        IconModule,
+        PopoverModule,
+        ListModule,
+        ButtonModule,
+        MenuModule,
+        ScrollSpyModule,
+        I18nModule
+    ],
     exports: [
         TabListComponent,
         TabPanelComponent,

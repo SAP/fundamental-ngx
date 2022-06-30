@@ -4,6 +4,29 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI libarary for English language
  */
 export const FD_LANGUAGE_ENGLISH: FdLanguage = {
+    coreCarousel: {
+        leftNavigationBtnLabel: 'Go to previous item',
+        rightNavigationBtnLabel: 'Go to next item'
+    },
+    coreDatePicker: {
+        dateInputLabel: 'Date input',
+        dateRangeInputLabel: 'Date range input',
+        displayCalendarToggleLabel: 'Open picker',
+        valueStateSuccessMessage: 'Value state Success',
+        valueStateInformationMessage: 'Value state Information',
+        valueStateWarningMessage: 'Value state Warning',
+        valueStateErrorMessage: 'Value state Error'
+    },
+    coreDatetimePicker: {
+        datetimeInputLabel: 'Datetime input',
+        displayDatetimeToggleLabel: 'Display calendar toggle',
+        displayTypeDateLabel: 'Date',
+        displayTypeTimeLabel: 'Time'
+    },
+    coreFeedListItem: {
+        moreLabel: 'More',
+        lessLabel: 'Less'
+    },
     coreGridList: {
         filterBarCancelButtonTitle: 'Cancel',
         listItemStatusAriaLabel: 'Item has status. Status: {{ status }}.',
@@ -13,6 +36,35 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         listItemStatusContainsErrors: 'Contains errors',
         listItemStatusLocked: 'Locked',
         listItemStatusDraft: 'Draft'
+    },
+    coreMessageStrip: {
+        dismissLabel: 'Dismiss'
+    },
+    coreNestedList: {
+        linkItemAriaLabel: 'Tree Item {{ itemDetails }}, {{ index }} of {{ total }}{{ selectedDescription }}'
+    },
+    coreOverflowLayout: {
+        moreItemsButton: '{{ count }} more'
+    },
+    corePagination: {
+        pageLabel: 'Page {{ pageNumber }}',
+        currentPageAriaLabel: 'Page {{ pageNumber }} is current page',
+        labelBeforeInputMobile: 'Page:',
+        labelAfterInputMobile: 'of {{ totalCount }}',
+        inputAriaLabel: 'Page input, Current page, Page {{ pageNumber }} of {{ totalCount }}',
+        itemsPerPageLabel: 'Results per Page:',
+        firstLabel: 'First',
+        previousLabel: 'Previous',
+        nextLabel: 'Next',
+        lastLabel: 'Last',
+        ariaLabel: 'Pagination',
+        totalResultsLabel: '{{ totalCount }} Results'
+    },
+    coreProductSwitch: {
+        ariaLabel: 'Product Switch'
+    },
+    coreShellbar: {
+        collapsedItemMenuLabel: 'Collapsed Item Menu'
     },
     coreSlider: {
         singleMinMaxDetails: 'Slider minimum value is {{ min }}, maximum value is {{ max }}',
@@ -27,6 +79,69 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         multipleHandle2ValueminDetails: 'Value is {{ value }}',
         multipleHandle2ValuemaxDetails: 'Value is {{ value }}',
         multipleHandle2ValueNowDetails: 'Current value is {{ value }}'
+    },
+    coreSplitButton: {
+        expandButtonAriaLabel: 'More actions',
+        arialLabel: 'Split button'
+    },
+    coreSplitter: {
+        paginationItemAriaLabel: 'Section'
+    },
+    coreStepInput: {
+        incrementButtonTitle: 'Increment',
+        decrementButtonTitle: 'Decrement',
+        ariaRoleDescription: 'Step Input'
+    },
+    coreSwitch: {
+        semanticAcceptLabel: 'Accept',
+        semanticDeclineLabel: 'Decline'
+    },
+    coreTabs: {
+        tabListExpandButtonText: 'More'
+    },
+    coreText: {
+        moreLabel: 'More',
+        lessLabel: 'Less'
+    },
+    coreTime: {
+        componentAriaName: 'Time picker',
+        increaseHoursLabel: 'Increase hours',
+        hoursLabel: 'Hrs',
+        decreaseHoursLabel: 'Decrease hours',
+        increaseMinutesLabel: 'Increase minutes',
+        minutesLabel: 'Min',
+        decreaseMinutesLabel: 'Decrease minutes',
+        increaseSecondsLabel: 'Increase seconds',
+        secondsLabel: 'Sec',
+        decreaseSecondsLabel: 'Decrease seconds',
+        increasePeriodLabel: 'Increase period',
+        periodLabel: 'Period',
+        decreasePeriodLabel: 'Decrease period',
+        navigationInstruction:
+            'To move between items in this list, press top arrow or bottom arrow. To switch between lists press left arrow or right arrow.'
+    },
+    coreTimePicker: {
+        timePickerInputLabel: 'Time picker input',
+        timePickerButtonLabel: 'Open picker'
+    },
+    coreToken: {
+        deleteButtonLabel: 'Deletable',
+        ariaRoleDescription: 'token'
+    },
+    coreUploadCollection: {
+        menuOkText: 'Ok',
+        menuCancelText: 'Cancel',
+        menuEditAriaLabel: 'Edit',
+        menuDeleteAriaLabel: 'Delete',
+        menuOkAriaLabel: 'Edit',
+        menuCancelAriaLabel: 'Cancel',
+        formItemPlaceholder: 'Filename'
+    },
+    coreWizard: {
+        ariaLabel: 'Wizard'
+    },
+    platformActionBar: {
+        backButtonLabel: 'Go Back'
     },
     platformApprovalFlow: {
         defaultWatchersLabel: 'Watchers',
@@ -95,6 +210,9 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         userListSelectedItemsCountSingular: '1 item selected',
         userListSelectedItemsCountPlural: '{{ count }} items selected'
     },
+    platformFeedInput: {
+        userTitle: 'User'
+    },
     platformVHD: {
         selectionBarLabel: 'Selected and condition items',
         selectedAndConditionLabel: 'Selected Items and Conditions',
@@ -139,7 +257,10 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         defineConditionConditionStrategyLabelEmpty: 'empty',
         defineConditionConditionStrategyLabelNotEqualTo: 'not equal to',
         defineConditionConditionStrategyLabelNotEmpty: 'not empty',
-        defineConditionMaxCountError: 'Enter a value with no more than {{ count }} characters'
+        defineConditionMaxCountError: 'Enter a value with no more than {{ count }} characters',
+        selectTabTitle: 'Select from list',
+        searchTableEmptyMessage: 'Use the search to get results',
+        defineTabTitle: 'Define Conditions'
     },
     platformCombobox: {
         countListResultsSingular: '1 result list item',
@@ -174,7 +295,9 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
     platformSearchField: {
         clearButtonTitle: 'Clear',
         submitButtonTitle: 'Search',
-        synchronizeButtonTitle: 'Synchronize'
+        synchronizeButtonTitle: 'Synchronize',
+        searchSuggestionMessage: '{{ count }} suggestions found.',
+        searchSuggestionNavigateMessage: 'use up and down arrows to navigate'
     },
     platformSmartFilterBar: {
         searchPlaceholder: 'Search',
@@ -191,7 +314,28 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         selectFiltersFilterColumnLabel: 'Filter',
         selectFiltersActiveColumnLabel: 'Active',
         selectFiltersSubmitButtonLabel: 'Go',
-        selectFiltersCancelButton: 'Cancel'
+        selectFiltersCancelButton: 'Cancel',
+        filterConditionContains: 'contains',
+        filterConditionEqualTo: 'equal to',
+        filterConditionBetween: 'between',
+        filterConditionBeginsWith: 'starts with',
+        filterConditionEndsWith: 'ends with',
+        filterConditionLessThan: 'less than',
+        filterConditionLessThanOrEqualTo: 'less than or equal to',
+        filterConditionGreaterThan: 'greater than',
+        filterConditionGreaterThanOrEqualTo: 'greater than or equal to',
+        filterConditionAfter: 'after',
+        filterConditionOnOrAfter: 'on or after',
+        filterConditionBefore: 'before',
+        filterConditionBeforeOrOn: 'before or on',
+        filterConditionValuePlaceholder: 'value',
+        filterConditionValueFromPlaceholder: 'from',
+        filterConditionValueToPlaceholder: 'to',
+        settingsCategoryAll: 'All',
+        settingsCategoryVisible: 'Visible',
+        settingsCategoryActive: 'Active',
+        settingsCategoryVisibleAndActive: 'Visible and active',
+        settingsCategoryMandatory: 'Mandatory'
     },
     platformTable: {
         headerMenuSortAsc: 'Sort Ascending',
@@ -292,7 +436,8 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Go to Previous',
         detailsGotoNextButtonTitle: 'Go to Next',
-        detailsDialogCloseBtnLabel: 'Close'
+        detailsDialogCloseBtnLabel: 'Close',
+        roleDescription: 'Image'
     },
     platformUploadCollection: {
         moveToTitle: 'Move to',
@@ -328,6 +473,8 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         cancelUploadNewFileAction: 'Cancel',
         itemMenuBtnTitle: 'More',
         dragDropAreaText: 'Drag files to upload',
+        noDataText: 'No files found',
+        noDataDescription: 'Drop files to upload, or use the “Add” button.',
         paginationTotal: 'Showing {{ from }}-{{ to }} of {{ total }}',
         resultsPerPage: 'Results per page',
         messageCreateFailed: 'Failed to create {{ folderName }}.',
@@ -384,5 +531,9 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         valueminDetails: 'Value is {{ value }}',
         valuemaxDetails: 'Value is {{ value }}',
         valueNowDetails: 'Current value is {{ value }}'
+    },
+    fnSwitch: {
+        semanticAcceptLabel: 'Accept',
+        semanticDeclineLabel: 'Decline'
     }
 };

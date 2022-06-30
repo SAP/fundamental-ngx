@@ -3,7 +3,7 @@
     [ngClass]="typeClass"
     role="group"
     tabindex="-1"
-    [attr.aria-label]="arialLabel"
+    [attr.aria-label]="arialLabel || ('coreSplitButton.arialLabel' | fdTranslate)"
     [fdMenuTrigger]="menu"
     (focus)="_onGroupFocused()"
 >
@@ -27,8 +27,10 @@
         [fdType]="fdType"
         [compact]="compact"
         [disabled]="disabled"
-        [ariaLabel]="expandButtonAriaLabel"
-        [attr.title]="expandButtonTitle || expandButtonAriaLabel"
+        [ariaLabel]="expandButtonAriaLabel || ('coreSplitButton.expandButtonAriaLabel' | fdTranslate)"
+        [attr.title]="
+            expandButtonTitle || expandButtonAriaLabel || ('coreSplitButton.expandButtonAriaLabel' | fdTranslate)
+        "
         [class.is-active]="menu.isOpen"
     ></button>
     <ng-content select="fd-menu"></ng-content>

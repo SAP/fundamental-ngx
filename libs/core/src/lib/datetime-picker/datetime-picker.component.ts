@@ -112,10 +112,6 @@ export class DatetimePickerComponent<D>
     @Input()
     displaySeconds: boolean;
 
-    /** aria-label for the date-picker. */
-    @Input()
-    ariaLabel: Nullable<string>;
-
     /** aria-labelledby for element describing date-picker. */
     @Input()
     ariaLabelledBy: Nullable<string>;
@@ -173,21 +169,33 @@ export class DatetimePickerComponent<D>
     @Input()
     activeView: FdCalendarView = 'day';
 
-    /** Aria label for the datetime picker input. */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Aria label for the datetime picker input.
+     */
     @Input()
-    datetimeInputLabel = 'Datetime input';
+    datetimeInputLabel: string;
 
-    /** Aria label for the button to show/hide the calendar. */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Aria label for the button to show/hide the calendar.
+     */
     @Input()
-    displayDatetimeToggleLabel = 'Display calendar toggle';
+    displayDatetimeToggleLabel: string;
 
-    /** Label for the "Date" button in display type switcher in mobile mode */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Label for the "Date" button in display type switcher in mobile mode
+     */
     @Input()
-    displayTypeDateLabel = 'Date';
+    displayTypeDateLabel: string;
 
-    /** Label for the "Time" button in display type switcher in mobile mode */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Label for the "Time" button in display type switcher in mobile mode
+     */
     @Input()
-    displayTypeTimeLabel = 'Time';
+    displayTypeTimeLabel: string;
 
     /** Whether a null input is considered valid. */
     @Input()

@@ -9,6 +9,7 @@ import { DatePickerComponent } from './date-picker.component';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { FormMessageModule } from '@fundamental-ngx/core/form';
+import { I18nModule } from '@fundamental-ngx/i18n';
 
 @NgModule({
     declarations: [DatePickerComponent],
@@ -16,6 +17,7 @@ import { FormMessageModule } from '@fundamental-ngx/core/form';
         CommonModule,
         IconModule,
         PopoverModule,
+        I18nModule,
         CalendarModule,
         FormsModule,
         InputGroupModule,

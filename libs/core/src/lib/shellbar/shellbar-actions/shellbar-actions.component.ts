@@ -60,9 +60,12 @@ export class ShellbarActionsComponent {
     @Input()
     closePopoverOnSelect = false;
 
-    /** Label for the collapsed item menu. */
+    /**
+     * @deprecated use i18n capabilities instead
+     * Label for the collapsed item menu.
+     */
     @Input()
-    collapsedItemMenuLabel = 'Collapsed Item Menu';
+    collapsedItemMenuLabel: string;
 
     /** @hidden */
     @ContentChildren(ShellbarActionComponent)

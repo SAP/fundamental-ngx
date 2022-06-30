@@ -5,11 +5,21 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CURRENT_LIB, Libraries } from '../../utilities/libraries';
 
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { filter, fromEvent, Subject } from 'rxjs';
+import { BehaviorSubject, filter, fromEvent, Subject } from 'rxjs';
 import { debounceTime, startWith, takeUntil } from 'rxjs/operators';
 import { MenuComponent, MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { ContentDensity, ContentDensityService } from '@fundamental-ngx/core/utils';
 import { ShellbarMenuItem, ShellbarSizes } from '@fundamental-ngx/core/shellbar';
+import {
+    FdLanguage,
+    FD_LANGUAGE,
+    FD_LANGUAGE_ALBANIAN,
+    FD_LANGUAGE_ENGLISH,
+    FD_LANGUAGE_ITALIAN,
+    FD_LANGUAGE_RUSSIAN,
+    FD_LANGUAGE_TURKISH,
+    FD_LANGUAGE_UKRAINIAN
+} from '@fundamental-ngx/i18n';
 
 const urlContains = (themeName: string, search: string): boolean => themeName.toLowerCase().includes(search);
 
@@ -45,6 +55,15 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
 
     versions: any[];
 
+    translations = [
+        { name: 'English', value: FD_LANGUAGE_ENGLISH },
+        { name: 'Ukrainian', value: FD_LANGUAGE_UKRAINIAN },
+        { name: 'Italian', value: FD_LANGUAGE_ITALIAN },
+        { name: 'Turkish', value: FD_LANGUAGE_TURKISH },
+        { name: 'Russian', value: FD_LANGUAGE_RUSSIAN },
+        { name: 'Albanian', value: FD_LANGUAGE_ALBANIAN }
+    ];
+
     items: ShellbarMenuItem[] = [
         {
             name: 'Core Docs',
@@ -74,6 +93,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         private _contentDensityService: ContentDensityService,
         private _themingService: ThemingService,
         @Inject(CURRENT_LIB) private _currentLib: Libraries,
+        @Inject(FD_LANGUAGE) private langSubject$: BehaviorSubject<FdLanguage>,
         private _route: ActivatedRoute,
         private _domSanitizer: DomSanitizer
     ) {
@@ -151,6 +171,10 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
     selectTheme(themeId: string): void {
         this._themingService.setTheme(themeId);
         this.updateHighlightTheme(themeId);
+    }
+
+    selectTranslation(translation: FdLanguage): void {
+        this.langSubject$.next(translation);
     }
 
     selectDensity(density: ContentDensity): void {

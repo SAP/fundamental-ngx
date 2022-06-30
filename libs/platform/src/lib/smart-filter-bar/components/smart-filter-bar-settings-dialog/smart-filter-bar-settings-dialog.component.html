@@ -18,6 +18,7 @@
 
     <fd-dialog-body>
         <fdp-table
+            *ngIf="loaded; else loadingTpl"
             #table
             (rowSelectionChange)="_onRowSelectionChange($event)"
             [dataSource]="source"
@@ -78,3 +79,9 @@
         </fd-dialog-footer-button>
     </fd-dialog-footer>
 </fd-dialog>
+
+<ng-template #loadingTpl>
+    <div style="text-align: center; margin: 1rem">
+        <fd-busy-indicator [loading]="true"></fd-busy-indicator>
+    </div>
+</ng-template>
