@@ -91,7 +91,8 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         multipleHandle2ValueNowDetails: 'Поточне значення: {{ value }}'
     },
     coreSplitButton: {
-        expandButtonAriaLabel: 'Більше дій'
+        expandButtonAriaLabel: 'Більше дій',
+        arialLabel: 'Кнопка розділення'
     },
     coreSplitter: {
         paginationItemAriaLabel: 'Секція'

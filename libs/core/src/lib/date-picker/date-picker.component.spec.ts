@@ -24,7 +24,6 @@ describe('DatePickerComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                declarations: [DatePickerComponent],
                 imports: [
                     FdDatetimeModule,
                     CalendarModule,
@@ -33,7 +32,8 @@ describe('DatePickerComponent', () => {
                     IconModule,
                     InputGroupModule,
                     ButtonModule,
-                    FormMessageModule
+                    FormMessageModule,
+                    DatePickerModule
                 ],
                 providers: [ContentDensityService]
             }).compileComponents();

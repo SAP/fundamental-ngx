@@ -111,7 +111,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
 
     /** aria-label attribute */
     @Input()
-    arialLabel = 'Split button';
+    arialLabel: string;
 
     /** Event sent when primary button is clicked */
     @Output()

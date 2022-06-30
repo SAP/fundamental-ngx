@@ -408,9 +408,16 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
      */
     get _dateInputArialLabel(): string {
         // return either input value or a key for "fdTranslate" pipe
-        return this.type === 'range'
-            ? this.dateRangeInputLabel || 'coreDatePicker.dateRangeInputLabel'
-            : this.dateInputLabel || 'coreDatePicker.dateInputLabel';
+        return this.type === 'range' ? this.dateRangeInputLabel : this.dateInputLabel;
+    }
+
+    /**
+     * Date input aria label key based on type
+     * @hidden
+     */
+    get _dateInputArialLabelKey(): string {
+        // return either input value or a key for "fdTranslate" pipe
+        return this.type === 'range' ? 'coreDatePicker.dateRangeInputLabel' : 'coreDatePicker.dateInputLabel';
     }
 
     /** @hidden */

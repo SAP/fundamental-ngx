@@ -78,7 +78,8 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         multipleHandle2ValueNowDetails: 'Geçerli değer  {{ value }}'
     },
     coreSplitButton: {
-        expandButtonAriaLabel: 'Daha fazla hareket'
+        expandButtonAriaLabel: 'Daha fazla hareket',
+        arialLabel: 'Böl düğmesi'
     },
     coreSplitter: {
         paginationItemAriaLabel: 'Bölüm'

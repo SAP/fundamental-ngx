@@ -33,7 +33,7 @@ export interface SmartFilterBarConditionBuilder {
      * @deprecated use i18n capabilities instead
      * Condition strategy labels.
      */
-    defineStrategyLabels: SmartFilterBarStrategyLabels | undefined;
+    defineStrategyLabels?: SmartFilterBarStrategyLabels;
 }
 
 export interface SmartFilterBarCondition<T = any> {

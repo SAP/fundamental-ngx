@@ -78,7 +78,8 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         multipleHandle2ValueNowDetails: 'Vlera aktuale është {{ value }}'
     },
     coreSplitButton: {
-        expandButtonAriaLabel: 'Më shumë veprime'
+        expandButtonAriaLabel: 'Më shumë veprime',
+        arialLabel: 'Butoni i ndarjes'
     },
     coreSplitter: {
         paginationItemAriaLabel: 'Seksioni'

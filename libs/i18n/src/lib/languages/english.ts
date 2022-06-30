@@ -78,7 +78,8 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         multipleHandle2ValueNowDetails: 'Current value is {{ value }}'
     },
     coreSplitButton: {
-        expandButtonAriaLabel: 'More actions'
+        expandButtonAriaLabel: 'More actions',
+        arialLabel: 'Split button'
     },
     coreSplitter: {
         paginationItemAriaLabel: 'Section'

@@ -92,7 +92,8 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         multipleHandle2ValueNowDetails: 'Текущее значение: {{ value }}'
     },
     coreSplitButton: {
-        expandButtonAriaLabel: 'Больше действий'
+        expandButtonAriaLabel: 'Больше действий',
+        arialLabel: 'Кнопка разделения'
     },
     coreSplitter: {
         paginationItemAriaLabel: 'Секция'

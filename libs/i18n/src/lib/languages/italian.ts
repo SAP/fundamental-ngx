@@ -81,7 +81,8 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
         multipleHandle2ValueNowDetails: 'Il valore attuale è {{ value }}'
     },
     coreSplitButton: {
-        expandButtonAriaLabel: 'Più azioni'
+        expandButtonAriaLabel: 'Più azioni',
+        arialLabel: 'Pulsante Dividi'
     },
     coreSplitter: {
         paginationItemAriaLabel: 'Sezione'

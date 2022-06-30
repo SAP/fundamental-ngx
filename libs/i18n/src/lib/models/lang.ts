@@ -134,6 +134,7 @@ export interface FdLanguage {
     };
     coreSplitButton: {
         expandButtonAriaLabel: FdLanguageKey;
+        arialLabel: FdLanguageKey;
     };
     coreSplitter: {
         paginationItemAriaLabel: FdLanguageKey;

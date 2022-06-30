@@ -3,7 +3,7 @@
     [ngClass]="typeClass"
     role="group"
     tabindex="-1"
-    [attr.aria-label]="arialLabel"
+    [attr.aria-label]="arialLabel || ('coreSplitButton.arialLabel' | fdTranslate)"
     [fdMenuTrigger]="menu"
     (focus)="_onGroupFocused()"
 >

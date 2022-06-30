@@ -34,7 +34,7 @@
                 aria-haspopup="grid"
                 aria-autocomplete="none"
                 [attr.aria-expanded]="isOpen"
-                [attr.aria-label]="_dateInputArialLabel | fdTranslate"
+                [attr.aria-label]="_dateInputArialLabel || (_dateInputArialLabelKey | fdTranslate)"
                 [attr.aria-required]="required"
                 [attr.aria-describedby]="_formValueStateMessageId"
                 [ngModel]="_inputFieldDate"
