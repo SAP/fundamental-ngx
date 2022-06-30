@@ -5,13 +5,7 @@ import { API_FILES } from '../../api-files';
 import { DialogDocsHeaderComponent } from './dialog-docs-header/dialog-docs-header.component';
 import { DialogDocsComponent } from './dialog-docs.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
-import {
-    examples,
-    DialogExampleComponent,
-    DialogStackedExampleComponent,
-    FirstDialogExampleComponent,
-    SecondDialogExampleComponent
-} from './examples';
+import { examples } from './examples';
 import { A11yModule } from '@angular/cdk/a11y';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { ListModule } from '@fundamental-ngx/core/list';

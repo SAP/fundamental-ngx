@@ -75,7 +75,7 @@ class TestCheckboxComponent {
         example2: new FormControl('Checkbox1'),
         example3: new FormControl(false),
         disabledcheckbox: new FormControl({ value: false, disabled: true }),
-        example5: new FormControl(null)
+        example5: new FormControl<boolean | string | null>(null)
     });
 }
 
@@ -83,14 +83,12 @@ describe('Checkbox test Component', () => {
     let host: TestCheckboxComponent;
     let fixture: ComponentFixture<TestCheckboxComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [FdpFormGroupModule, FormModule, FormsModule, ReactiveFormsModule, PlatformCheckboxModule],
-                declarations: [TestCheckboxComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [FdpFormGroupModule, FormModule, FormsModule, ReactiveFormsModule, PlatformCheckboxModule],
+            declarations: [TestCheckboxComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestCheckboxComponent);

@@ -160,6 +160,10 @@ export class OverflowLayoutComponent implements AfterViewInit, OnDestroy, Overfl
     /** @hidden */
     private _maxVisibleItems = Infinity;
 
+    /** Overflow Layout more button text */
+    @Input()
+    moreItemsButtonText: (hiddenItemsCount: number) => string = (count) => `${count} more`;
+
     /** @hidden */
     constructor(
         private _cdr: ChangeDetectorRef,

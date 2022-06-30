@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
-import { entryComponents, examples } from './examples';
+import { examples } from './examples';
 import { MessageBoxDocsComponent } from './message-box-docs.component';
 import { MessageBoxDocsHeaderComponent } from './message-box-docs-header/message-box-docs-header.component';
 import { MessageBoxModule } from '@fundamental-ngx/core/message-box';

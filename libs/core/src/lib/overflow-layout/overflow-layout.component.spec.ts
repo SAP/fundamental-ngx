@@ -69,19 +69,17 @@ describe('OverflowLayoutComponent', () => {
         );
     });
 
-    it('should render automatic amount of items', async (done) => {
+    it('should render automatic amount of items', async () => {
         const expectedAmount = Math.floor(component.containerWidth / component.elementsWidth);
 
-        component.overflowLayout.visibleItemsCount.subscribe((value) => {
-            expect(value).toEqual(expectedAmount);
-            done();
-        });
+        const countSpy = spyOn(component.overflowLayout.visibleItemsCount, 'emit');
 
         component.maxItems = Infinity;
         fixture.detectChanges();
         await fixture.whenStable();
 
         expect(fixture.debugElement.queryAll(By.directive(OverflowLayoutItemDirective)).length).toEqual(expectedAmount);
+        expect(countSpy).toHaveBeenCalledOnceWith(expectedAmount);
     });
 
     it('should react on items resize', async () => {
