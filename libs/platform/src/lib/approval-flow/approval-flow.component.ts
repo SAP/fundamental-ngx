@@ -78,6 +78,7 @@ import {
     ApprovalFlowUserDataSource
 } from '@fundamental-ngx/platform/shared';
 import { cloneDeep, uniqBy } from 'lodash-es';
+import { ApprovalFlowAddNodeViewService } from './public_api';
 
 @Component({
     selector: 'fdp-approval-flow',
@@ -173,6 +174,9 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     @Output() onDataReceived = new EventEmitter<void>();
 
+    /** Event emitted when user submits search from add node dialog */
+    @Output() searchSubmit = new EventEmitter<string>();
+
     /** @hidden */
     @ViewChild('graphContainerEl') _graphContainerEl: ElementRef;
 
@@ -264,7 +268,8 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         private readonly _dialogService: DialogService,
         private readonly _cdr: ChangeDetectorRef,
         @Optional() @Inject(DATA_PROVIDERS) private providers: Map<string, DataProvider<any>>,
-        @Optional() private readonly _rtlService: RtlService
+        @Optional() private readonly _rtlService: RtlService,
+        private readonly _addNodeViewService: ApprovalFlowAddNodeViewService
     ) {}
 
     /** Returns snapshot of the current and initial states of approval process */
@@ -312,6 +317,12 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
 
         this._listenOnResize();
         this._setupDataSourceSubscription();
+
+        this._subscriptions.add(
+            this._addNodeViewService.onSearchSubmit.subscribe((query) => {
+                this.searchSubmit.emit(query);
+            })
+        );
     }
 
     ngOnChanges(changes: SimpleChanges): void {

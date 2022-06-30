@@ -41,6 +41,7 @@
                 contentDensity="compact"
                 [suggestions]="[]"
                 (inputChange)="_onSearchStringChange($event.text)"
+                (searchSubmit)="_onSearchSubmit($event)"
             ></fdp-search-field>
         </ng-template>
     </fd-dialog-header>

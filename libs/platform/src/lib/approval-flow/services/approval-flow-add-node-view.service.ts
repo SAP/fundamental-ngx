@@ -11,6 +11,8 @@ export enum VIEW_MODES {
 @Injectable()
 export class ApprovalFlowAddNodeViewService {
     onViewChange = new EventEmitter();
+    onSearchSubmit = new EventEmitter();
+    onRefreshFilter = new EventEmitter();
 
     private currentView?: VIEW_MODES;
     private selectedTeam?: ApprovalTeam;
@@ -51,5 +53,13 @@ export class ApprovalFlowAddNodeViewService {
 
     resetTeam(): void {
         this.selectedTeam = undefined;
+    }
+
+    submitSearch(query: string): void {
+        this.onSearchSubmit.emit(query);
+    }
+
+    refreshFilter(): void {
+        this.onRefreshFilter.emit();
     }
 }

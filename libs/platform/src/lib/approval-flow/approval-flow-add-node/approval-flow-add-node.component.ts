@@ -16,6 +16,7 @@ import { ApprovalFlowAddNodeViewService, VIEW_MODES } from '../services/approval
 import { displayTeamFn, displayUserFn, filterByName, trackByFn } from '../helpers';
 import { ApprovalNode, ApprovalTeam, ApprovalUser } from '../interfaces';
 import { ApprovalFlowTeamDataSource, ApprovalFlowUserDataSource } from '@fundamental-ngx/platform/shared';
+import { SearchInput } from '@fundamental-ngx/platform/search-field';
 
 export interface AddNodeDialogRefData {
     isEdit?: boolean;
@@ -131,7 +132,13 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     private _viewChangeSub: Subscription;
 
     /** @hidden */
+    private _refreshFilterSub: Subscription;
+
+    /** @hidden */
     private _dataSourceSub: Subscription;
+
+    /** @hidden */
+    private _filterString: string;
 
     /** @hidden */
     constructor(
@@ -174,6 +181,11 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
 
             this._approvers = approvers;
 
+            // When data updates from outside, filtered result should be maintained
+            if (!!this._filterString && this._filterString !== '') {
+                this.viewService.refreshFilter();
+            }
+
             if (this._data.isEdit) {
                 this._checkDueDate = !!this._data.checkDueDate;
 
@@ -201,6 +213,11 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
 
         this._viewChangeSub = this.viewService.onViewChange.subscribe(() => {
             this._onSearchStringChange('');
+            this._cdr.detectChanges();
+        });
+
+        this._refreshFilterSub = this.viewService.onRefreshFilter.subscribe(() => {
+            this._onSearchStringChange(this._filterString);
             this._cdr.detectChanges();
         });
 
@@ -354,6 +371,7 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     _onSearchStringChange(searchString = ''): void {
+        this._filterString = searchString;
         const params = new Map([['query', searchString]]);
 
         if (this.viewService.isSelectUserMode) {
@@ -363,6 +381,10 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
         } else if (this.viewService.isTeamMembersMode) {
             this._setFilteredTeamMembers(this._selectedTeamMembers.filter((user) => filterByName(user, searchString)));
         }
+    }
+
+    _onSearchSubmit({ text }: SearchInput): void {
+        this.viewService.submitSearch(text);
     }
 
     /** @hidden */

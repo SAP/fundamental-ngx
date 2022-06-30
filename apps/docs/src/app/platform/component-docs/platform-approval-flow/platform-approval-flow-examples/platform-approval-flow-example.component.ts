@@ -168,6 +168,12 @@ export class PlatformApprovalFlowExampleComponent implements OnDestroy {
 
         this.approvalProcess = updatedState;
     }
+
+    // eslint-disable-next-line no-unused-vars
+    searchSubmited(query: string): void {
+        userResult = [...users(), ...additionalUsers()];
+        this.userDataSource.match();
+    }
 }
 
 /** For all code below
@@ -312,8 +318,34 @@ const users: () => ApprovalUser[] = () => [
     }
 ];
 
+const additionalUsers: () => ApprovalUser[] = () => [
+    {
+        id: 'uid28142',
+        teamId: 'teamId3',
+        name: 'Ari Gold',
+        description: 'Legal team',
+        imgUrl: 'https://randomuser.me/api/portraits/men/91.jpg'
+    },
+    {
+        id: 'uid08143',
+        teamId: 'teamId3',
+        name: 'Dana Gordon',
+        description: 'Legal team',
+        imgUrl: 'https://randomuser.me/api/portraits/women/11.jpg'
+    },
+    {
+        id: 'uid99644',
+        teamId: 'teamId3',
+        name: 'Shauna Roberts',
+        description: 'Legal team',
+        imgUrl: 'https://randomuser.me/api/portraits/women/75.jpg'
+    }
+];
+
 const usersMap = {};
 users().forEach((u) => (usersMap[u.id] = u));
+
+let userResult = users();
 
 const teams: () => ApprovalTeam[] = () => [
     {
@@ -563,7 +595,8 @@ type GraphTypes = 'empty' | 'simple' | 'medium' | 'complex';
 
 class UserDataProvider extends DataProvider<ApprovalUser> {
     fetch(params: ProviderParams): Observable<ApprovalUser[]> {
-        let result = users();
+        let result = userResult;
+
         const query = params.get('query')?.toLowerCase();
         if (query) {
             result = result.filter((u) => u.name?.toLowerCase().startsWith(query));
