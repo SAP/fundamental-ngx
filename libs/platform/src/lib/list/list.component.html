@@ -37,15 +37,13 @@
                 [scrollPercent]="scrollOffsetPercentage"
                 [attr.role]="role"
             >
-                <ng-template *ngIf="_items.length !== 0; then thenBlock; else elseBlock"> </ng-template>
+                <ng-container *ngIf="_items.length !== 0; then thenBlock; else elseBlock"></ng-container>
             </div>
         </fd-busy-indicator>
     </ng-container>
-    <ng-container *ngIf="!loadOnScroll">
-        <ng-template *ngIf="_items.length !== 0; then thenBlock; else elseBlock"> </ng-template>
-    </ng-container>
+    <ng-container *ngIf="!loadOnScroll && _items.length !== 0; then thenBlock; else elseBlock"></ng-container>
 </ul>
-<li
+<div
     #listItem
     *ngIf="loadMore && !loadOnScroll"
     (click)="_getMoreData()"
@@ -67,7 +65,7 @@
         </fd-busy-indicator>
         {{ loadTitle }} <ng-content selector="#load"></ng-content>
     </button>
-</li>
+</div>
 
 <ng-template #thenBlock>
     <ng-container *ngFor="let item of _items; let i = index">
