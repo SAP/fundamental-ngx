@@ -14,9 +14,9 @@ import barPageResponsiveExampleHtml from '!./examples/bar-page-responsive-exampl
 import barPageResponsiveExampleTs from '!./examples/bar-page-responsive-example.component.ts?raw';
 import barWithTitleExampleHtml from '!./examples/bar-with-title-example.component.html?raw';
 import barWithTitleExampleTs from '!./examples/bar-with-title-example.component.ts?raw';
-import barCustomColorsExampleHtml from '!./examples/bar-custom-colors-example.component.html?raw';
-import barCustomColorsExampleScss from '!./examples/bar-custom-colors-example.component.scss?raw';
-import barCustomColorsExampleTs from '!./examples/bar-custom-colors-example.component.ts?raw';
+import barCustomShellbarExampleHtml from '!./examples/bar-custom-shellbar-example.component.html?raw';
+import barCustomShellbarExampleScss from '!./examples/bar-custom-shellbar-example.component.scss?raw';
+import barCustomShellbarExampleTs from '!./examples/bar-custom-shellbar-example.component.ts?raw';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
@@ -125,18 +125,18 @@ export class BarDocsComponent {
             component: 'BarWithTitleExampleComponent'
         }
     ];
-    barCustomColorsExample: ExampleFile[] = [
+    barCustomShellbarExample: ExampleFile[] = [
         {
             language: 'html',
-            fileName: 'bar-custom-colors-example',
-            code: barCustomColorsExampleHtml,
-            scssFileCode: barCustomColorsExampleScss
+            fileName: 'bar-custom-shellbar-example',
+            code: barCustomShellbarExampleHtml,
+            scssFileCode: barCustomShellbarExampleScss
         },
         {
             language: 'typescript',
-            code: barCustomColorsExampleTs,
-            fileName: 'bar-custom-colors-example',
-            component: 'BarCustomColorsExampleComponent'
+            code: barCustomShellbarExampleTs,
+            fileName: 'bar-custom-shellbar-example',
+            component: 'BarCustomShellbarExampleComponent'
         }
     ];
 }

@@ -17,8 +17,9 @@ import { BarHeaderComponent } from './bar-header/bar-header.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { BarModule } from '@fundamental-ngx/core/bar';
+import { ComboboxModule } from '@fundamental-ngx/core/combobox';
 import { BarWithTitleExampleComponent } from './examples/bar-with-title-example.component';
-import { BarCustomColorsExampleComponent } from './examples/bar-custom-colors-example.component';
+import { BarCustomShellbarExampleComponent } from './examples/bar-custom-shellbar-example.component';
 
 const routes: Routes = [
     {
@@ -32,7 +33,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), AvatarModule, SharedDocumentationPageModule, BarModule],
+    imports: [RouterModule.forChild(routes), AvatarModule, SharedDocumentationPageModule, BarModule, ComboboxModule],
     exports: [RouterModule],
     declarations: [
         BarDocsComponent,
@@ -46,7 +47,7 @@ const routes: Routes = [
         BarPageExampleComponent,
         BarPageResponsiveExampleComponent,
         BarWithTitleExampleComponent,
-        BarCustomColorsExampleComponent
+        BarCustomShellbarExampleComponent
     ]
 })
 export class BarDocsModule {}
