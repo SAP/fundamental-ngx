@@ -1,4 +1,11 @@
 
+### [0.35.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.5...v0.35.2-rc.6) (2022-07-01)
+
+
+### Bug Fixes
+
+* **platform:** table empty message box-sizing ([#8306](https://github.com/SAP/fundamental-ngx/issues/8306)) ([363aa13](https://github.com/SAP/fundamental-ngx/commit/363aa134fb1bee023b5c261d635b220cdd24ff6c))
+
 ### [0.35.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.4...v0.35.2-rc.5) (2022-06-30)
 
 ### [0.35.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.3...v0.35.2-rc.4) (2022-06-30)
