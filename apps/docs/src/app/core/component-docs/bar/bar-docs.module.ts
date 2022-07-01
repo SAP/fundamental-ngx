@@ -18,6 +18,7 @@ import { SharedDocumentationPageModule } from '../../../documentation/shared-doc
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { BarWithTitleExampleComponent } from './examples/bar-with-title-example.component';
+import { TitleModule } from '@fundamental-ngx/core/title';
 
 const routes: Routes = [
     {
@@ -31,7 +32,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), AvatarModule, SharedDocumentationPageModule, BarModule],
+    imports: [RouterModule.forChild(routes), AvatarModule, SharedDocumentationPageModule, BarModule, TitleModule],
     exports: [RouterModule],
     declarations: [
         BarDocsComponent,
