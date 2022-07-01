@@ -13,13 +13,11 @@ describe('MenuTitleDirective', () => {
     let fixture: ComponentFixture<TestComponent>;
     let directive: MenuTitleDirective;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestComponent, MenuTitleDirective]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestComponent, MenuTitleDirective]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

@@ -9,13 +9,11 @@ describe('SplitterSplitPaneComponent', () => {
     let component: SplitterSplitPaneComponent;
     let fixture: ComponentFixture<SplitterSplitPaneComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [SplitterModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [SplitterModule]
+        }).compileComponents();
+    }));
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(SplitterSplitPaneComponent);

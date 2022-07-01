@@ -39,18 +39,16 @@ describe('SearchFieldMobileComponent', () => {
         }
     }
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [DialogModule, BrowserAnimationsModule],
-                declarations: [SearchFieldMobileComponent],
-                providers: [
-                    DynamicComponentService,
-                    { provide: SEARCH_FIELD_COMPONENT, useValue: new SearchFieldComponent() }
-                ]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [DialogModule, BrowserAnimationsModule],
+            declarations: [SearchFieldMobileComponent],
+            providers: [
+                DynamicComponentService,
+                { provide: SEARCH_FIELD_COMPONENT, useValue: new SearchFieldComponent() }
+            ]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(SearchFieldMobileComponent);

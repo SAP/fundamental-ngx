@@ -19,15 +19,13 @@ describe('LinkComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [LinkModule],
-                declarations: [LinkComponent, TestComponent],
-                providers: []
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [LinkModule],
+            declarations: [LinkComponent, TestComponent],
+            providers: []
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
@@ -67,15 +65,13 @@ describe('LinkComponent Disabled', () => {
     let component: DisabledLinkComponent;
     let fixture: ComponentFixture<DisabledLinkComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [LinkModule],
-                declarations: [LinkComponent, DisabledLinkComponent],
-                providers: []
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [LinkModule],
+            declarations: [LinkComponent, DisabledLinkComponent],
+            providers: []
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(DisabledLinkComponent);

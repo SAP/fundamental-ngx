@@ -34,15 +34,13 @@ describe('NestedListDirectives', () => {
     let titleElement: NestedListTitleDirective;
     let fixture: ComponentFixture<TestNestedContainerComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [NestedListModule],
-                declarations: [TestNestedContainerComponent],
-                providers: [NestedItemService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [NestedListModule],
+            declarations: [TestNestedContainerComponent],
+            providers: [NestedItemService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestNestedContainerComponent);

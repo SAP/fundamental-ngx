@@ -17,23 +17,21 @@ describe('PlatformTableResetButtonComponent', () => {
     let fixture: ComponentFixture<ResetButtonComponent>;
     let resettable: ResettableMock;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [ButtonModule],
-                declarations: [ResetButtonComponent],
-                providers: [
-                    {
-                        provide: RESETTABLE_TOKEN,
-                        useFactory: () => {
-                            resettable = new ResettableMock();
-                            return resettable;
-                        }
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ButtonModule],
+            declarations: [ResetButtonComponent],
+            providers: [
+                {
+                    provide: RESETTABLE_TOKEN,
+                    useFactory: () => {
+                        resettable = new ResettableMock();
+                        return resettable;
                     }
-                ]
-            }).compileComponents();
-        })
-    );
+                }
+            ]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ResetButtonComponent);

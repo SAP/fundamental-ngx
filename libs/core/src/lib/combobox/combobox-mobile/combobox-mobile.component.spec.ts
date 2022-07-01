@@ -34,15 +34,13 @@ describe('ComboboxMobileComponent', () => {
         openChange: new EventEmitter<boolean>()
     };
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [DialogModule, BrowserAnimationsModule, RouterTestingModule],
-                declarations: [ComboboxMobileComponent],
-                providers: [DynamicComponentService, { provide: COMBOBOX_COMPONENT, useValue: comboboxInputComponent }]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [DialogModule, BrowserAnimationsModule, RouterTestingModule],
+            declarations: [ComboboxMobileComponent],
+            providers: [DynamicComponentService, { provide: COMBOBOX_COMPONENT, useValue: comboboxInputComponent }]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         comboboxInputComponent = {

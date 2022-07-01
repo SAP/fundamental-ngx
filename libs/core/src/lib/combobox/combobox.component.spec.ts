@@ -7,14 +7,12 @@ describe('ComboboxComponent', () => {
     let component: ComboboxComponent;
     let fixture: ComponentFixture<ComboboxComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [ComboboxModule],
-                providers: [DynamicComponentService, ContentDensityService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ComboboxModule],
+            providers: [DynamicComponentService, ContentDensityService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ComboboxComponent);

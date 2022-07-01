@@ -35,15 +35,13 @@ describe('ActionBarHeaderComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestComponent],
-                imports: [FormsModule, ActionBarModule, ButtonModule, PlatformActionBarModule],
-                providers: [RtlService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestComponent],
+            imports: [FormsModule, ActionBarModule, ButtonModule, PlatformActionBarModule],
+            providers: [RtlService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

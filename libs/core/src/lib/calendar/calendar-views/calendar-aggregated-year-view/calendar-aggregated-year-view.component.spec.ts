@@ -12,15 +12,13 @@ describe('CalendarAggregatedYearViewComponent', () => {
     let component: CalendarAggregatedYearViewComponent<FdDate>;
     let fixture: ComponentFixture<CalendarAggregatedYearViewComponent<FdDate>>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CommonModule, IconModule, ButtonModule, FdDatetimeModule],
-                declarations: [CalendarAggregatedYearViewComponent],
-                providers: [CalendarService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule, IconModule, ButtonModule, FdDatetimeModule],
+            declarations: [CalendarAggregatedYearViewComponent],
+            providers: [CalendarService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent<CalendarAggregatedYearViewComponent<FdDate>>(

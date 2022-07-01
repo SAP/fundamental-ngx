@@ -7,13 +7,11 @@ describe('TableToolbarActionsComponent', () => {
     let component: TableToolbarActionsComponent;
     let fixture: ComponentFixture<TableToolbarActionsComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TableToolbarActionsComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TableToolbarActionsComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TableToolbarActionsComponent);

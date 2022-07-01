@@ -110,23 +110,19 @@ describe('SmartFilterBarSubjectDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [PlatformTableModule, PlatformSmartFilterBarModule],
-                declarations: [TestComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [PlatformTableModule, PlatformSmartFilterBarModule],
+            declarations: [TestComponent]
+        }).compileComponents();
+    }));
 
-    beforeEach(
-        waitForAsync(async () => {
-            fixture = TestBed.createComponent(TestComponent);
-            component = fixture.componentInstance;
-            fixture.detectChanges();
-            await whenStable(fixture);
-        })
-    );
+    beforeEach(waitForAsync(async () => {
+        fixture = TestBed.createComponent(TestComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+        await whenStable(fixture);
+    }));
 
     it('should create', () => {
         expect(component).toBeTruthy();

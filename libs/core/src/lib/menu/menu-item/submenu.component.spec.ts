@@ -6,13 +6,11 @@ describe('SubmenuComponent', () => {
     let component: SubmenuComponent;
     let fixture: ComponentFixture<SubmenuComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [SubmenuComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [SubmenuComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(SubmenuComponent);

@@ -30,13 +30,11 @@ describe('DayjsDatetimeAdapter', () => {
     let platform: Platform;
     let adapter: DayjsDatetimeAdapter;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [DayjsDatetimeAdapterModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [DayjsDatetimeAdapterModule]
+        }).compileComponents();
+    }));
 
     beforeEach(inject([DatetimeAdapter, Platform], (dateAdapter: DayjsDatetimeAdapter, _platform: Platform) => {
         adapter = dateAdapter;
@@ -484,14 +482,12 @@ describe('DayjsDatetimeAdapter', () => {
 describe('MomentDatetimeAdapter with LOCALE_ID override', () => {
     let adapter: DayjsDatetimeAdapter;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [DayjsDatetimeAdapterModule],
-                providers: [{ provide: LOCALE_ID, useValue: 'da' }]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [DayjsDatetimeAdapterModule],
+            providers: [{ provide: LOCALE_ID, useValue: 'da' }]
+        }).compileComponents();
+    }));
 
     beforeEach(inject([DatetimeAdapter], (_adapter: DayjsDatetimeAdapter) => {
         adapter = _adapter;

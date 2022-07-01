@@ -18,15 +18,13 @@ describe('WizardStepIndicatorComponent', () => {
     let component: TestWrapperComponent;
     let fixture: ComponentFixture<TestWrapperComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestWrapperComponent],
-                imports: [WizardModule],
-                providers: [ContentDensityService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestWrapperComponent],
+            imports: [WizardModule],
+            providers: [ContentDensityService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestWrapperComponent);

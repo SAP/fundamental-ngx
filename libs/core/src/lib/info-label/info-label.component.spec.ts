@@ -22,13 +22,11 @@ describe('InfoLabelComponent', () => {
     let testComponent: TestInfoLabelComponent;
     let fixture: ComponentFixture<TestInfoLabelComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [InfoLabelComponent, TestInfoLabelComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [InfoLabelComponent, TestInfoLabelComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestInfoLabelComponent);

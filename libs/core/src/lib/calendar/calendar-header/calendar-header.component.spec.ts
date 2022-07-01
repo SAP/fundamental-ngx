@@ -9,15 +9,13 @@ describe('Calendar2HeaderComponent', () => {
     let component: CalendarHeaderComponent<FdDate>;
     let fixture: ComponentFixture<CalendarHeaderComponent<FdDate>>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [CalendarHeaderComponent],
-                imports: [ButtonModule, FdDatetimeModule],
-                providers: [CalendarService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [CalendarHeaderComponent],
+            imports: [ButtonModule, FdDatetimeModule],
+            providers: [CalendarService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent<CalendarHeaderComponent<FdDate>>(CalendarHeaderComponent);

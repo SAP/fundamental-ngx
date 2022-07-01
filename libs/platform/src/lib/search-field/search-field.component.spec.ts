@@ -117,19 +117,17 @@ describe('SearchFieldComponent', () => {
 
     let overlayContainerEl: HTMLElement;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestComponent],
-                imports: [PlatformSearchFieldModule],
-                providers: [RtlService]
-            }).compileComponents();
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestComponent],
+            imports: [PlatformSearchFieldModule],
+            providers: [RtlService]
+        }).compileComponents();
 
-            inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
-                overlayContainerEl = overlayContainer.getContainerElement();
-            })();
-        })
-    );
+        inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
+            overlayContainerEl = overlayContainer.getContainerElement();
+        })();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
@@ -798,19 +796,17 @@ describe('SearchFieldComponent with DataSource', () => {
 
     let overlayContainerEl: HTMLElement;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [DataSourceTestComponent],
-                imports: [PlatformSearchFieldModule],
-                providers: [RtlService]
-            }).compileComponents();
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [DataSourceTestComponent],
+            imports: [PlatformSearchFieldModule],
+            providers: [RtlService]
+        }).compileComponents();
 
-            inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
-                overlayContainerEl = overlayContainer.getContainerElement();
-            })();
-        })
-    );
+        inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
+            overlayContainerEl = overlayContainer.getContainerElement();
+        })();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(DataSourceTestComponent);

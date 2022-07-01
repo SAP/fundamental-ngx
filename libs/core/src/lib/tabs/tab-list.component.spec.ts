@@ -27,14 +27,12 @@ describe('TabListComponent', () => {
     let testComponent: TestTabsComponent;
     let fixture: ComponentFixture<TestTabsComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestTabsComponent],
-                imports: [TabsModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestTabsComponent],
+            imports: [TabsModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestTabsComponent);
@@ -141,14 +139,12 @@ describe('TabListComponent', () => {
         tabList._visualOrder.overflowing
     ];
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestCollapsibleTabsComponent],
-                imports: [TabsModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestCollapsibleTabsComponent],
+            imports: [TabsModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestCollapsibleTabsComponent);

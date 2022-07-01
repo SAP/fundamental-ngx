@@ -99,14 +99,12 @@ describe('QuickViewComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestComponent],
-                imports: [QuickViewModule, AvatarModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestComponent],
+            imports: [QuickViewModule, AvatarModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

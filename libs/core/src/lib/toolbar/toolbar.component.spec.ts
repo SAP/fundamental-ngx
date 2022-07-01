@@ -10,14 +10,12 @@ describe('ToolbarComponent', () => {
     let component: ToolbarTestComponent;
     let fixture: ComponentFixture<ToolbarTestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [ToolbarTestComponent],
-                imports: [ToolbarModule, ButtonModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [ToolbarTestComponent],
+            imports: [ToolbarModule, ButtonModule]
+        }).compileComponents();
+    }));
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(ToolbarTestComponent);
@@ -45,14 +43,12 @@ describe('ToolbarComponent - Prioritization', () => {
     let component: ToolbarOverflowPriorityTestComponent;
     let fixture: ComponentFixture<ToolbarOverflowPriorityTestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [ToolbarModule, ButtonModule],
-                declarations: [ToolbarOverflowPriorityTestComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ToolbarModule, ButtonModule],
+            declarations: [ToolbarOverflowPriorityTestComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(ToolbarOverflowPriorityTestComponent);
@@ -92,14 +88,12 @@ describe('ToolbarComponent - Prioritization and Grouping', () => {
     let component: ToolbarOverflowGroupingTestComponent;
     let fixture: ComponentFixture<ToolbarOverflowGroupingTestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [ToolbarModule, ButtonModule],
-                declarations: [ToolbarOverflowGroupingTestComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ToolbarModule, ButtonModule],
+            declarations: [ToolbarOverflowGroupingTestComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(ToolbarOverflowGroupingTestComponent);

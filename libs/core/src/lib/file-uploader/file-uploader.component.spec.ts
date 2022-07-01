@@ -17,15 +17,13 @@ describe('FileUploaderComponent', () => {
     let component: FileUploaderComponent;
     let fixture: ComponentFixture<FileUploaderComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [FileUploaderComponent, FileUploaderSelectDirective, FileUploaderDragndropDirective],
-                imports: [CommonModule, FormsModule, ButtonModule],
-                providers: [ContentDensityService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [FileUploaderComponent, FileUploaderSelectDirective, FileUploaderDragndropDirective],
+            imports: [CommonModule, FormsModule, ButtonModule],
+            providers: [ContentDensityService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(FileUploaderComponent);

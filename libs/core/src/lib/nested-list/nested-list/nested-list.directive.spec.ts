@@ -60,20 +60,13 @@ describe('NestedListDirective', () => {
     let level3List: NestedListDirective;
     let level4List: NestedListDirective;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [NestedListModule],
-                declarations: [TestNestedContainerComponent],
-                providers: [
-                    NestedListKeyboardService,
-                    MenuKeyboardService,
-                    NestedListStateService,
-                    ContentDensityService
-                ]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [NestedListModule],
+            declarations: [TestNestedContainerComponent],
+            providers: [NestedListKeyboardService, MenuKeyboardService, NestedListStateService, ContentDensityService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestNestedContainerComponent);

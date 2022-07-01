@@ -24,14 +24,12 @@ export class MockElementRef extends ElementRef {
 describe('ScrollSpyDirective', () => {
     let fixture: ComponentFixture<ScrollSpyTestComponent>, debugElement: DebugElement, directive;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [ScrollSpyDirective, ScrollSpyTestComponent],
-                providers: [{ provide: ElementRef, useClass: MockElementRef }]
-            });
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [ScrollSpyDirective, ScrollSpyTestComponent],
+            providers: [{ provide: ElementRef, useClass: MockElementRef }]
+        });
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ScrollSpyTestComponent);

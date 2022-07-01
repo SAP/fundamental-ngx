@@ -51,14 +51,12 @@ describe('ProductSwitchBodyComponent', () => {
 
     let component, componentInstance: ProductSwitchBodyComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [PopoverModule, ButtonModule, DragAndDropModule, DragDropModule],
-                declarations: [ProductSwitchBodyComponent, TestComponent]
-            });
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [PopoverModule, ButtonModule, DragAndDropModule, DragDropModule],
+            declarations: [ProductSwitchBodyComponent, TestComponent]
+        });
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

@@ -78,14 +78,12 @@ xdescribe('SliderComponent', () => {
     let sliders: SliderComponent[];
     let bodyClientWidth = 0;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestSliderComponent],
-                imports: [SliderModule, FormsModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestSliderComponent],
+            imports: [SliderModule, FormsModule]
+        }).compileComponents();
+    }));
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(TestSliderComponent);

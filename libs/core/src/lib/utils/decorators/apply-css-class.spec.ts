@@ -76,14 +76,12 @@ describe('ButtonComponent', () => {
     let testDirectiveInstance: TestDirective;
     let buttonInstance: ButtonComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CommonModule, ButtonModule],
-                declarations: [TestDirective, TestComponent, TestProxyComponent]
-            });
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule, ButtonModule],
+            declarations: [TestDirective, TestComponent, TestProxyComponent]
+        });
+    }));
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(TestComponent);

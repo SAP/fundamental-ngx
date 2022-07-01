@@ -25,14 +25,12 @@ describe('PanelComponent default values', () => {
     let fixture: ComponentFixture<PanelWithDefaultValuesComponent>;
     let panelComponent: PanelComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CommonModule, PlatformPanelModule],
-                declarations: [PanelWithDefaultValuesComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule, PlatformPanelModule],
+            declarations: [PanelWithDefaultValuesComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(PanelWithDefaultValuesComponent);
@@ -99,14 +97,12 @@ describe('Simple PanelComponent', () => {
     let fixture: ComponentFixture<SimplePanelComponent>;
     let panelContentComponent: PanelContentComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CommonModule, PlatformPanelModule, PlatformButtonModule],
-                declarations: [SimplePanelComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule, PlatformPanelModule, PlatformButtonModule],
+            declarations: [SimplePanelComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(SimplePanelComponent);

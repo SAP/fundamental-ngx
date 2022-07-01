@@ -15,13 +15,11 @@ describe('CardSecondSubtitleComponent', () => {
     let fixture: ComponentFixture<TestComponent>;
     let debugElement: DebugElement;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestComponent, CardSecondSubtitleDirective]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestComponent, CardSecondSubtitleDirective]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

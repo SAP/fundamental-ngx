@@ -16,20 +16,18 @@ describe('InputGroupComponent', () => {
     let component: InputGroupComponent;
     let fixture: ComponentFixture<InputGroupComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [FormsModule, ButtonModule, IconModule],
-                declarations: [
-                    InputGroupInputDirective,
-                    InputGroupAddOnDirective,
-                    InputGroupTextareaDirective,
-                    InputGroupComponent
-                ],
-                providers: [ContentDensityService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [FormsModule, ButtonModule, IconModule],
+            declarations: [
+                InputGroupInputDirective,
+                InputGroupAddOnDirective,
+                InputGroupTextareaDirective,
+                InputGroupComponent
+            ],
+            providers: [ContentDensityService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(InputGroupComponent);

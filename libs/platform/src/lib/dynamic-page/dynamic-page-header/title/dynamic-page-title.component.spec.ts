@@ -83,15 +83,13 @@ describe('DynamicPageTitleComponent', () => {
     let component: TestComponent;
     let titleHostComponentDebugElement: DebugElement;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CommonModule, PlatformDynamicPageModule, BreadcrumbModule, ToolbarModule, ButtonModule],
-                declarations: [TestComponent],
-                providers: [DynamicPageService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule, PlatformDynamicPageModule, BreadcrumbModule, ToolbarModule, ButtonModule],
+            declarations: [TestComponent],
+            providers: [DynamicPageService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

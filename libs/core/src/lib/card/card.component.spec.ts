@@ -47,15 +47,13 @@ describe('CardComponent', () => {
     let host: CardHostTestComponent;
     let card: CardComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CardModule],
-                declarations: [CardHostTestComponent],
-                providers: [ContentDensityService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CardModule],
+            declarations: [CardHostTestComponent],
+            providers: [ContentDensityService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(CardHostTestComponent);

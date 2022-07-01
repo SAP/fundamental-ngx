@@ -27,14 +27,12 @@ describe('Scrollbar Host Component', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestComponent],
-                imports: [ScrollbarModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestComponent],
+            imports: [ScrollbarModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

@@ -16,15 +16,13 @@ describe('Pagination Component', () => {
     let component: PaginationComponent;
     let fixture: ComponentFixture<PaginationComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({ imports: [PaginationModule] })
-                .overrideComponent(PaginationComponent, {
-                    set: { changeDetection: ChangeDetectionStrategy.Default }
-                })
-                .compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({ imports: [PaginationModule] })
+            .overrideComponent(PaginationComponent, {
+                set: { changeDetection: ChangeDetectionStrategy.Default }
+            })
+            .compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(PaginationComponent);

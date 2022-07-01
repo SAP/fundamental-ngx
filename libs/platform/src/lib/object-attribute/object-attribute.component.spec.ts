@@ -14,14 +14,12 @@ describe('ObjectAttributeComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [ObjectAttributeComponent, TestComponent],
-                providers: []
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [ObjectAttributeComponent, TestComponent],
+            providers: []
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
@@ -62,14 +60,12 @@ export class ObjectAttributeContentProjectionTesterComponent {}
 describe('Content projection', () => {
     let fixture: ComponentFixture<ObjectAttributeContentProjectionTesterComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [ObjectAttributeComponent, ObjectAttributeContentProjectionTesterComponent],
-                schemas: [NO_ERRORS_SCHEMA]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [ObjectAttributeComponent, ObjectAttributeContentProjectionTesterComponent],
+            schemas: [NO_ERRORS_SCHEMA]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ObjectAttributeContentProjectionTesterComponent);
@@ -94,14 +90,12 @@ describe('ObjectAttributeComponent With Link', () => {
     let component: LinkTestComponent;
     let fixture: ComponentFixture<LinkTestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [ObjectAttributeComponent, LinkTestComponent],
-                providers: []
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [ObjectAttributeComponent, LinkTestComponent],
+            providers: []
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(LinkTestComponent);

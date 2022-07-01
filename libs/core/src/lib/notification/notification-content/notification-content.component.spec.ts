@@ -7,13 +7,11 @@ describe('NotificationContentComponent', () => {
     let component: NotificationContentComponent;
     let fixture: ComponentFixture<NotificationContentComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [NotificationModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [NotificationModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(NotificationContentComponent);

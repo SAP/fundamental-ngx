@@ -45,15 +45,13 @@ describe('TableRowDirective', () => {
             .filter((cell) => !cell.classList.contains(HIDDEN_CLASS_NAME))
             .map((cell) => cell.innerHTML);
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestComponent],
-                imports: [TableModule],
-                providers: [TableService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestComponent],
+            imports: [TableModule],
+            providers: [TableService]
+        }).compileComponents();
+    }));
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(TestComponent);

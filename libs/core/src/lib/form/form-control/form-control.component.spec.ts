@@ -15,14 +15,12 @@ describe('FormControlComponent', () => {
 
     let directive, componentInstance;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [FormControlComponent, TestComponent],
-                providers: [ContentDensityService]
-            });
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [FormControlComponent, TestComponent],
+            providers: [ContentDensityService]
+        });
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

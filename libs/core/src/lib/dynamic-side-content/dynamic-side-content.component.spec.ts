@@ -43,14 +43,12 @@ describe('DynamicSideContent', () => {
     let host: TestHostComponent;
     let component: DynamicSideContentComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CommonModule, DynamicSideContentModule],
-                declarations: [TestHostComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule, DynamicSideContentModule],
+            declarations: [TestHostComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(TestHostComponent);

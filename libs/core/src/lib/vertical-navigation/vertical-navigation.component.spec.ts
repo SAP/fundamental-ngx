@@ -54,14 +54,12 @@ describe('VerticalNavigationComponent', () => {
     let component: TestVerticalNavigationComponent;
     let fixture: ComponentFixture<TestVerticalNavigationComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [VerticalNavigationComponent, TestVerticalNavigationComponent, LinkComponent],
-                imports: [IconModule, ListModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [VerticalNavigationComponent, TestVerticalNavigationComponent, LinkComponent],
+            imports: [IconModule, ListModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestVerticalNavigationComponent);

@@ -5,11 +5,9 @@ import { MockElementRef } from '../../scroll-spy/scroll-spy.directive.spec';
 describe('MenuLinkDirective', () => {
     let directive: MenuInteractiveDirective;
 
-    beforeEach(
-        waitForAsync(() => {
-            directive = new MenuInteractiveDirective(new MockElementRef());
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        directive = new MenuInteractiveDirective(new MockElementRef());
+    }));
 
     it('should create an instance', () => {
         expect(directive).toBeTruthy();

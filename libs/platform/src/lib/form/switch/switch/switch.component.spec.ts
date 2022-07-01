@@ -83,14 +83,12 @@ describe('SwitchComponent', () => {
     let component: TestSwitchComponent;
     let fixture: ComponentFixture<TestSwitchComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [FdpFormGroupModule, ReactiveFormsModule, PlatformSwitchModule],
-                declarations: [TestSwitchComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [FdpFormGroupModule, ReactiveFormsModule, PlatformSwitchModule],
+            declarations: [TestSwitchComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestSwitchComponent);

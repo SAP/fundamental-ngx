@@ -12,15 +12,13 @@ describe('SwitchComponent', () => {
     let changeDetectorRef: ChangeDetectorRef;
     let input;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CommonModule, FormsModule],
-                declarations: [SwitchComponent],
-                providers: [ContentDensityService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule, FormsModule],
+            declarations: [SwitchComponent],
+            providers: [ContentDensityService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(SwitchComponent);

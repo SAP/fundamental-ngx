@@ -8,14 +8,12 @@ describe('SelectComponent', () => {
     let component: SelectComponent;
     let fixture: ComponentFixture<SelectComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CommonModule, FormsModule],
-                declarations: [SelectComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule, FormsModule],
+            declarations: [SelectComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(SelectComponent);

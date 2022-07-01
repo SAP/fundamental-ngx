@@ -47,14 +47,12 @@ describe('StandardListItemComponent', () => {
     let component: StandardListItemTestComponent;
     let fixture: ComponentFixture<StandardListItemTestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [StandardListItemTestComponent],
-                imports: [StandardListItemModule, PlatformListModule, RouterTestingModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [StandardListItemTestComponent],
+            imports: [StandardListItemModule, PlatformListModule, RouterTestingModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(StandardListItemTestComponent);
@@ -103,14 +101,12 @@ class StandardListItemDataSourceTestComponent {
 describe('Standard  List Item Component with DataSource', () => {
     let fixture: ComponentFixture<StandardListItemDataSourceTestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [StandardListItemDataSourceTestComponent],
-                imports: [PlatformListModule, StandardListItemModule, RouterTestingModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [StandardListItemDataSourceTestComponent],
+            imports: [PlatformListModule, StandardListItemModule, RouterTestingModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(StandardListItemDataSourceTestComponent);

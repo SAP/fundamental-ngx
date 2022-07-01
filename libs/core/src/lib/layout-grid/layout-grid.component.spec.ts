@@ -16,13 +16,11 @@ describe('LayoutGridComponent', () => {
     let componentElement: LayoutGridComponent;
     let fixture: ComponentFixture<TestNestedContainerComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestNestedContainerComponent, LayoutGridComponent]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestNestedContainerComponent, LayoutGridComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestNestedContainerComponent);

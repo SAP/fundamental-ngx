@@ -22,14 +22,12 @@ describe('ActionButtonGroupComponent', () => {
     let component: ActionButtonGroupTestComponent;
     let fixture: ComponentFixture<ActionButtonGroupTestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [ActionButtonGroupComponent, ActionButtonGroupTestComponent],
-                imports: [ActionBarModule]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [ActionButtonGroupComponent, ActionButtonGroupTestComponent],
+            imports: [ActionBarModule]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ActionButtonGroupTestComponent);

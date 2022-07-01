@@ -18,14 +18,12 @@ describe('PlatformTableP13SortDialogComponent', () => {
     };
     dialogRef.data = dialogData;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [PlatformTableModule, BrowserAnimationsModule],
-                providers: [{ provide: DialogRef, useValue: dialogRef }, DialogConfig]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [PlatformTableModule, BrowserAnimationsModule],
+            providers: [{ provide: DialogRef, useValue: dialogRef }, DialogConfig]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(P13SortingDialogComponent);

@@ -36,15 +36,13 @@ describe('SplitButtonComponent', () => {
     let component: DebugElement;
     let componentInstance: SplitButtonComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [MenuModule, ButtonModule],
-                declarations: [SplitButtonComponent, TestComponent],
-                providers: [ContentDensityService]
-            });
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [MenuModule, ButtonModule],
+            declarations: [SplitButtonComponent, TestComponent],
+            providers: [ContentDensityService]
+        });
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

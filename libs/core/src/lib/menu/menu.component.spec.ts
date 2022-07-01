@@ -47,15 +47,13 @@ describe('MenuComponent', () => {
     let menuService: MenuService;
     let fixture: ComponentFixture<TestMenuComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [MenuModule],
-                declarations: [TestMenuComponent],
-                providers: [ContentDensityService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [MenuModule],
+            declarations: [TestMenuComponent],
+            providers: [ContentDensityService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestMenuComponent);

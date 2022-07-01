@@ -18,14 +18,12 @@ describe('PlatformTableFiltersDialogComponent', () => {
     };
     dialogRef.data = dialogData;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [PlatformTableModule, NoopAnimationsModule],
-                providers: [{ provide: DialogRef, useValue: dialogRef }, DialogService, DialogConfig]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [PlatformTableModule, NoopAnimationsModule],
+            providers: [{ provide: DialogRef, useValue: dialogRef }, DialogService, DialogConfig]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(FiltersComponent);

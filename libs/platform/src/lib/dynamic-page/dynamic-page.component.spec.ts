@@ -59,17 +59,15 @@ describe('DynamicPageComponent default values', () => {
     let fixture: ComponentFixture<TestComponent>;
     let dynamicPageServiceSpy: jasmine.SpyObj<DynamicPageService>;
 
-    beforeEach(
-        waitForAsync(() => {
-            dynamicPageServiceSpy = jasmine.createSpyObj('DynamicPageService', ['expandHeader', 'collapseHeader']);
+    beforeEach(waitForAsync(() => {
+        dynamicPageServiceSpy = jasmine.createSpyObj('DynamicPageService', ['expandHeader', 'collapseHeader']);
 
-            TestBed.configureTestingModule({
-                imports: [CommonModule, PlatformDynamicPageModule, ToolbarModule, ButtonModule],
-                declarations: [TestComponent],
-                providers: [{ provide: DynamicPageService, useValue: dynamicPageServiceSpy }]
-            }).compileComponents();
-        })
-    );
+        TestBed.configureTestingModule({
+            imports: [CommonModule, PlatformDynamicPageModule, ToolbarModule, ButtonModule],
+            declarations: [TestComponent],
+            providers: [{ provide: DynamicPageService, useValue: dynamicPageServiceSpy }]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
@@ -168,15 +166,13 @@ describe('DynamicPageComponent tabbed values', () => {
     let fixture: ComponentFixture<TestTabbedComponent>;
     let dynamicPageComponent: DynamicPageComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CommonModule, PlatformDynamicPageModule, TabsModule],
-                declarations: [TestTabbedComponent],
-                providers: [{ provide: DynamicPageService }]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule, PlatformDynamicPageModule, TabsModule],
+            declarations: [TestTabbedComponent],
+            providers: [{ provide: DynamicPageService }]
+        }).compileComponents();
+    }));
     beforeEach(() => {
         fixture = TestBed.createComponent(TestTabbedComponent);
         component = fixture.componentInstance;
@@ -227,15 +223,13 @@ class TestNonCollapsibleComponent {
 describe('DynamicPageComponent with collapsible set to false', () => {
     let fixture: ComponentFixture<TestNonCollapsibleComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CommonModule, PlatformDynamicPageModule, TabsModule],
-                declarations: [TestNonCollapsibleComponent],
-                providers: [{ provide: DynamicPageService }]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule, PlatformDynamicPageModule, TabsModule],
+            declarations: [TestNonCollapsibleComponent],
+            providers: [{ provide: DynamicPageService }]
+        }).compileComponents();
+    }));
     beforeEach(() => {
         fixture = TestBed.createComponent(TestNonCollapsibleComponent);
         fixture.detectChanges();
@@ -323,15 +317,13 @@ class HostTestComponent {
 describe('DynamicPageComponent Content Projection', () => {
     let fixture: ComponentFixture<HostTestComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [CommonModule, PlatformDynamicPageModule, ToolbarModule, ButtonModule],
-                declarations: [HostTestComponent],
-                providers: [DynamicPageService]
-            }).compileComponents();
-        })
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule, PlatformDynamicPageModule, ToolbarModule, ButtonModule],
+            declarations: [HostTestComponent],
+            providers: [DynamicPageService]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(HostTestComponent);
