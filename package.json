@@ -235,7 +235,7 @@
         "wdio-axe": "2.2.2",
         "wdio-chromedriver-service": "6.0.4",
         "wdio-html-format-reporter": "0.4.0",
-        "wdio-image-comparison-service": "2.0.0",
+        "wdio-image-comparison-service": "3.1.1",
         "webdriverio": "7.16.16"
     },
     "lint-staged": {
