@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { MarkdownModule } from 'ngx-markdown';
 
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { ThemingModule } from '@fundamental-ngx/core/theming';
 import { AppComponent } from './app.component';
 
 const routes: Routes = [
@@ -39,7 +40,8 @@ const routes: Routes = [
         BrowserAnimationsModule,
         HttpClientModule,
         RouterModule.forRoot(routes, { useHash: true, relativeLinkResolution: 'legacy' }),
-        MarkdownModule.forRoot({ loader: HttpClient })
+        MarkdownModule.forRoot({ loader: HttpClient }),
+        ThemingModule
     ],
     bootstrap: [AppComponent],
     providers: [ContentDensityService]
