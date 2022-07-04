@@ -24,8 +24,8 @@ import {
 } from '@angular/core';
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { CdkDrag, CdkDragDrop, CdkDragEnter, CdkDropList } from '@angular/cdk/drag-drop';
-import { Subject } from 'rxjs';
-import { debounceTime, delay, takeUntil } from 'rxjs/operators';
+import { Subject, Subscription } from 'rxjs';
+import { debounceTime, delay, filter, takeUntil } from 'rxjs/operators';
 
 import { resizeObservable, RtlService } from '@fundamental-ngx/core/utils';
 import { FixedCardLayoutItemComponent } from './fixed-card-layout-item/fixed-card-layout-item.component';
@@ -111,11 +111,6 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
         }
 
         this._cardMinimumWidth = coercedValue;
-
-        // If component is ready, do the recalculation.
-        if (this._layout) {
-            this.updateLayout();
-        }
     }
     get cardMinimumWidth(): number {
         return this._cardMinimumWidth;
@@ -146,8 +141,12 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     _cardContainers: QueryList<FixedCardLayoutItemComponent>;
 
     /** @hidden */
-    @ViewChildren('dropList', { read: CdkDropList })
-    _cardWrappers: QueryList<CdkDropList>;
+    @ViewChildren(CdkDropList)
+    _dropList: QueryList<CdkDropList>;
+
+    /** @hidden */
+    @ViewChildren(CdkDrag)
+    _dragList: QueryList<CdkDrag>;
 
     /** @hidden */
     @ViewChild('layout')
@@ -200,6 +199,12 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     /** @hidden */
     private _shouldCalculateContainerHeight = false;
 
+    /** @hidden */
+    private _viewInit = false;
+
+    /** @hidden */
+    private _cardColumnsSubscription = new Subscription();
+
     /** @hidden An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
@@ -224,15 +229,17 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
         this._processCards();
         this._listenOnResize();
         this._accessibilitySetup();
+
+        this._viewInit = true;
     }
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        if (!this._cards?.length) {
+        if (!this._cards?.length || !this._viewInit) {
             return;
         }
 
-        if ('maxColumns' in changes) {
+        if ('maxColumns' in changes || 'cardMinimumWidth' in changes) {
             this.updateLayout();
         } else if ('columnsWidthConfig' in changes) {
             this._setColumnsWidth();
@@ -241,6 +248,8 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
 
     /** @hidden */
     ngOnDestroy(): void {
+        this._cardColumnsSubscription.unsubscribe();
+
         this._onDestroy$.next();
         this._onDestroy$.complete();
     }
@@ -419,10 +428,12 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
 
     /** @hidden Listen card change and distribute cards on column change */
     private _listenOnCardsChange(): void {
-        this._cards.changes.pipe(delay(0)).subscribe(() => {
-            this._processCards();
-            this._updateColumns();
-        });
+        this._cards.changes
+            .pipe(
+                filter(() => this._viewInit),
+                delay(0)
+            )
+            .subscribe(() => this._processCards());
     }
 
     /** @hidden Renders layout on column changes */
@@ -466,6 +477,8 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
                 this._singleItemColumns.add(column[0].fdCardDef);
             }
         });
+
+        this._listenToCardsSizeChange();
     }
 
     /** @hidden */
@@ -504,7 +517,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
 
         const wrapperColumns = this._cardColumns.map((column) =>
             column
-                .map((card) => this._cardWrappers.find((wrapper) => wrapper.getSortedItems()[0].data === card)?.element)
+                .map((card) => this._dropList.find((wrapper) => wrapper.getSortedItems()[0].data === card)?.element)
                 .filter((v): v is ElementRef<HTMLElement> => !!v)
         );
 
@@ -516,6 +529,25 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
         this._containerHeight = Math.max(...columnsHeights) + 4 + additionalSpace;
 
         this._changeDetector.detectChanges();
+    }
+
+    /** @hidden */
+    private _listenToCardsSizeChange(): void {
+        this._cardColumnsSubscription.unsubscribe();
+        this._cardColumnsSubscription = new Subscription();
+
+        this._changeDetector.detectChanges();
+
+        this._cardColumns.forEach((column) =>
+            column
+                .map((card) => this._dragList.find((wrapper) => wrapper.data === card)?.element)
+                .filter((v): v is ElementRef<HTMLElement> => !!v)
+                .forEach((card) => {
+                    this._cardColumnsSubscription.add(
+                        resizeObservable(card.nativeElement).subscribe(() => this._calculateContainerHeight())
+                    );
+                })
+        );
     }
 }
 
