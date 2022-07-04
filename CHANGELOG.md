@@ -1,4 +1,11 @@
 
+### [0.35.2-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.7...v0.35.2-rc.8) (2022-07-04)
+
+
+### Features
+
+* **core:** info label different icon fonts ([#8308](https://github.com/SAP/fundamental-ngx/issues/8308)) ([fec587a](https://github.com/SAP/fundamental-ngx/commit/fec587acc18241d497014228060e1534b46a68ba))
+
 ### [0.35.2-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.6...v0.35.2-rc.7) (2022-07-04)
 
 
