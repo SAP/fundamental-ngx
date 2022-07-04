@@ -1,4 +1,11 @@
 
+### [0.35.2-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.6...v0.35.2-rc.7) (2022-07-04)
+
+
+### Bug Fixes
+
+* **docs:** theming service init ([#8319](https://github.com/SAP/fundamental-ngx/issues/8319)) ([6fe4c58](https://github.com/SAP/fundamental-ngx/commit/6fe4c58dd4915c313b6622f284a65a46e8f0e683))
+
 ### [0.35.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.5...v0.35.2-rc.6) (2022-07-01)
 
 
