@@ -11,24 +11,18 @@
 </fd-segmented-button>
 
 <div style="padding: 1rem; overflow: auto">
-    <fd-fixed-card-layout (cardDraggedDropped)="cardDraggedDropped($event)">
+    <fd-fixed-card-layout (cardDraggedDropped)="cardDraggedDropped($event)" [disableDragDrop]="true">
         <ng-container *ngIf="!isHidden('card1')">
             <fd-card cardType="list" *fdCardDef="1">
                 <fd-card-header>
                     <h2 fd-card-title>Card Title</h2>
                 </fd-card-header>
                 <fd-card-content>
-                    <ul fd-list [noBorder]="true">
-                        <li fd-list-item>
-                            <span fd-list-title> item 1 </span>
-                        </li>
-                        <li fd-list-item>
-                            <span fd-list-title> item 2 </span>
-                        </li>
-                        <li fd-list-item>
-                            <span fd-list-title> item 3 </span>
-                        </li>
-                    </ul>
+                    <div fd-form-item>
+                        <textarea style="width: 100%; resize: vertical">
+You can resize this textarea and see how card grows</textarea
+                        >
+                    </div>
                 </fd-card-content>
             </fd-card>
         </ng-container>
