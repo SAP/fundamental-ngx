@@ -2,13 +2,6 @@
 
 .fd-fixed-card-layout__card {
     width: 100%;
-    flex-shrink: 0;
-
-    &--single {
-        &.cdk-drop-list-dragging {
-            flex-basis: auto;
-        }
-    }
 }
 
 .fd-fixed-card-layout__card-placeholder {

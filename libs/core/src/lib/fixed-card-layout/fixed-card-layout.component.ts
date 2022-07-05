@@ -23,15 +23,15 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { FocusKeyManager } from '@angular/cdk/a11y';
-import { CdkDrag, CdkDragDrop, CdkDragEnter, CdkDropList } from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragDrop, CdkDragEnter } from '@angular/cdk/drag-drop';
 import { Subject, Subscription } from 'rxjs';
-import { debounceTime, delay, distinct, filter, takeUntil } from 'rxjs/operators';
+import { debounceTime, delay, distinct, takeUntil } from 'rxjs/operators';
 
 import { resizeObservable, RtlService } from '@fundamental-ngx/core/utils';
 import { FixedCardLayoutItemComponent } from './fixed-card-layout-item/fixed-card-layout-item.component';
 import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
 
-const PX_IN_REM = 16;
+const REM_IN_PX = 16;
 const CARD_MINIMUM_WIDTH = 320; // 320px = 20rem
 const CARD_GAP_WIDTH = 16; // 16px = 1rem
 const DRAG_START_DELAY = 200; // in ms
@@ -141,10 +141,6 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     _cardContainers: QueryList<FixedCardLayoutItemComponent>;
 
     /** @hidden */
-    @ViewChildren(CdkDropList)
-    _dropList: QueryList<CdkDropList>;
-
-    /** @hidden */
     @ViewChildren(CdkDrag)
     _dragList: QueryList<CdkDrag>;
 
@@ -153,7 +149,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     _layout: ElementRef;
 
     /** @hidden */
-    _cardsArray: Array<CardDefinitionDirective>;
+    _cardsArray: CardDefinitionDirective[];
 
     /** @hidden Number of Columns in layout */
     _numberOfColumns: number;
@@ -185,7 +181,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     }
 
     /** @hidden */
-    _placeholderMargin: { [klass: string]: string };
+    _placeholderMargin: boolean;
 
     /** @hidden */
     private _previousNumberOfColumns: number;
@@ -197,13 +193,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     private _cardMinimumWidth = CARD_MINIMUM_WIDTH;
 
     /** @hidden */
-    private _shouldCalculateContainerHeight = false;
-
-    /** @hidden */
-    private _viewInit = false;
-
-    /** @hidden */
-    private _cardColumnsSubscription = new Subscription();
+    private _cardsSizeChangeSubscription = new Subscription();
 
     /** @hidden An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
@@ -229,13 +219,11 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
         this._processCards();
         this._listenOnResize();
         this._accessibilitySetup();
-
-        this._viewInit = true;
     }
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        if (!this._cards?.length || !this._viewInit) {
+        if (!this._cards?.length) {
             return;
         }
 
@@ -248,7 +236,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
 
     /** @hidden */
     ngOnDestroy(): void {
-        this._cardColumnsSubscription.unsubscribe();
+        this._cardsSizeChangeSubscription.unsubscribe();
 
         this._onDestroy$.next();
         this._onDestroy$.complete();
@@ -294,33 +282,21 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     }
 
     /** @hidden */
-    _enterPredicate = (_: CdkDrag, drop: CdkDropList): boolean => {
-        // We should update container's height & its children rects (to react when drag moves into the list) before we entered any drop list.
-        // That's why it's done here instead of cdkDropListEntered. As this predicate being called many times here is the optimization.
-        if (this._shouldCalculateContainerHeight) {
-            this._shouldCalculateContainerHeight = false;
-
-            // Placeholder doesn't have margin set yet but we need to count it
-            // Margin will be set only if there are already items in container
-            const additionalSpace = drop.getSortedItems().length ? PX_IN_REM : 0;
-
-            this._calculateContainerHeight(additionalSpace);
-        }
-
-        return true;
-    };
-
-    /** @hidden */
-    _onDropListExited(): void {
-        this._shouldCalculateContainerHeight = true;
-    }
-
-    /** @hidden */
     _onDropListEntered(event: CdkDragEnter): void {
         const containerItemCardDef = (event.container.getSortedItems()[0].data as CardDefinitionDirective).fdCardDef;
         const dragItemCardDef = (event.item.data as CardDefinitionDirective).fdCardDef;
 
-        this._setPlaceholderStyle(containerItemCardDef !== dragItemCardDef);
+        this._placeholderMargin = containerItemCardDef !== dragItemCardDef;
+
+        const columnIndexToAddSpace = this._cardColumns.findIndex((column) =>
+            column.find((card) => event.container.getSortedItems()[0].data === card)
+        );
+        const spaceToAdd =
+            event.item.element.nativeElement.getBoundingClientRect().height +
+            (event.container.getSortedItems().length ? REM_IN_PX : 0);
+
+        // When we move the card into a certain column we should increase the height of that column by the card height
+        this._calculateContainerHeight(columnIndexToAddSpace, spaceToAdd);
     }
 
     /** @hidden */
@@ -328,6 +304,8 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
         if (event.container.data === event.previousContainer.data) {
             return;
         }
+
+        this._placeholderMargin = false;
 
         const movedCard = event.previousContainer.getSortedItems()[0].data;
         const replacedCard = event.container.getSortedItems()[0].data;
@@ -377,11 +355,6 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
         this._processDragDrop(indexFromArray, indexToArray, movedCard, replacedCard);
     };
 
-    /** @hidden */
-    _setPlaceholderStyle(value: boolean): void {
-        this._placeholderMargin = value ? { 'margin-bottom': '1rem' } : {};
-    }
-
     /** @hidden Arranges cards on drop of dragged card */
     private _processDragDrop(
         prevIndex: number,
@@ -428,12 +401,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
 
     /** @hidden Listen card change and distribute cards on column change */
     private _listenOnCardsChange(): void {
-        this._cards.changes
-            .pipe(
-                filter(() => this._viewInit),
-                delay(0)
-            )
-            .subscribe(() => this._processCards());
+        this._cards.changes.pipe(delay(0)).subscribe(() => this._processCards());
     }
 
     /** @hidden Renders layout on column changes */
@@ -511,30 +479,44 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
         }
     }
 
-    /** @hidden Calculate container height basing on the card wrapper columns */
-    private _calculateContainerHeight(additionalSpace: number = 0): void {
+    /**
+     * @hidden
+     * Calculate container height accordingly to the the cards height
+     * Parameters used to increase the height of a certain column, mainly for Drag'n'Drop manipulations
+     */
+    private _calculateContainerHeight(columnIndexToAddSpace = -1, spaceToAdd = 0): void {
         this._changeDetector.detectChanges();
 
         const wrapperColumns = this._cardColumns.map((column) =>
             column
-                .map((card) => this._dropList.find((wrapper) => wrapper.getSortedItems()[0].data === card)?.element)
+                .map((card) => this._dragList.find((wrapper) => wrapper.data === card)?.element)
                 .filter((v): v is ElementRef<HTMLElement> => !!v)
         );
 
         const columnsHeights = wrapperColumns
-            .map((column) => column.map((card) => card.nativeElement.getBoundingClientRect().height))
-            .map((column) => column.reduce((height, cardHeight) => (height += cardHeight), 0));
+            .map((column) =>
+                column.map((card) =>
+                    card.nativeElement.className.includes('cdk-drag-dragging')
+                        ? 0
+                        : card.nativeElement.getBoundingClientRect().height
+                )
+            )
+            .map(
+                (column, columnIndex) =>
+                    column.reduce((cardsHeight, height) => (cardsHeight += height ? height + REM_IN_PX : 0), 0) +
+                    (columnIndex === columnIndexToAddSpace ? spaceToAdd : 0)
+            );
 
         // +4px because it's the top & bottom borders of card placeholder
-        this._containerHeight = Math.max(...columnsHeights) + 4 + additionalSpace;
+        this._containerHeight = Math.max(...columnsHeights) + 4;
 
         this._changeDetector.detectChanges();
     }
 
     /** @hidden */
     private _listenToCardsSizeChange(): void {
-        this._cardColumnsSubscription.unsubscribe();
-        this._cardColumnsSubscription = new Subscription();
+        this._cardsSizeChangeSubscription.unsubscribe();
+        this._cardsSizeChangeSubscription = new Subscription();
 
         this._changeDetector.detectChanges();
 
@@ -543,7 +525,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
                 .map((card) => this._dragList.find((wrapper) => wrapper.data === card)?.element)
                 .filter((v): v is ElementRef<HTMLElement> => !!v)
                 .forEach((card) => {
-                    this._cardColumnsSubscription.add(
+                    this._cardsSizeChangeSubscription.add(
                         resizeObservable(card.nativeElement)
                             .pipe(distinct((resizeEntry) => resizeEntry[0].contentRect.height))
                             .subscribe(() => this._calculateContainerHeight())

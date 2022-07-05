@@ -21,9 +21,7 @@
         [style.min-width.px]="_columnsWidth.get(card.fdCardDef)"
         [style.max-width.px]="_columnsWidth.get(card.fdCardDef)"
         [cdkDropListData]="cardIndex"
-        [cdkDropListEnterPredicate]="_enterPredicate"
         (cdkDropListEntered)="_onDropListEntered($event)"
-        (cdkDropListExited)="_onDropListExited()"
     >
         <div
             cdkDrag
@@ -35,13 +33,16 @@
             [itemIndex]="_itemIndexes.get(card.fdCardDef)!"
             [groupIndex]="_groupIndexes.get(card.fdCardDef)!"
             (cdkDragDropped)="_onDragDropped($event)"
-            (cdkDragStarted)="_setPlaceholderStyle(false)"
         >
             <fd-fixed-card-layout-item>
                 <ng-container *ngTemplateOutlet="card?.template || null"> </ng-container>
             </fd-fixed-card-layout-item>
 
-            <div *cdkDragPlaceholder class="fd-fixed-card-layout__card-placeholder" [style]="_placeholderMargin">
+            <div
+                *cdkDragPlaceholder
+                class="fd-fixed-card-layout__card-placeholder"
+                [style.margin-bottom.rem]="+_placeholderMargin"
+            >
                 <ng-container *ngTemplateOutlet="card?.template || null"></ng-container>
             </div>
         </div>
