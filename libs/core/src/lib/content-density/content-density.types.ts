@@ -1,5 +1,6 @@
 import { Provider } from '@angular/core';
 import { HasElementRef } from '@fundamental-ngx/core/utils';
+import { ContentDensityObserverSettings } from './classes/content-density-observer.settings';
 
 export const ContentDensityGlobalKeyword = 'global';
 
@@ -40,12 +41,6 @@ export type ContentDensityModuleConfig = (
     | CustomStorageConfig
 ) &
     BaseContentDensityModuleConfig;
-
-export interface ContentDensityObserverSettings {
-    modifiers?: Partial<Record<ContentDensityMode, string>>;
-    supportedContentDensity?: ContentDensityMode[];
-    defaultContentDensity?: ContentDensityMode;
-}
 
 export interface ContentDensityObserverTarget extends HasElementRef {
     contentDensitySettings: ContentDensityObserverSettings;

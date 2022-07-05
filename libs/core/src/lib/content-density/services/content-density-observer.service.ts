@@ -2,7 +2,6 @@ import { ChangeDetectorRef, ElementRef, Injectable, InjectFlags, Injector } from
 import {
     ContentDensityCallbackFn,
     ContentDensityMode,
-    ContentDensityObserverSettings,
     ContentDensityObserverTarget,
     LocalContentDensityMode
 } from '../content-density.types';
@@ -14,6 +13,7 @@ import { contentDensityCallbackFactory } from '../helpers/content-density-change
 import { isCompact, isCondensed, isCozy } from '../helpers/density-type-checkers';
 import { CONTENT_DENSITY_DIRECTIVE } from '../tokens/content-density-directive';
 import { DestroyedService } from '@fundamental-ngx/core/utils';
+import { ContentDensityObserverSettings } from '../classes/content-density-observer.settings';
 
 @Injectable()
 export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> {
