@@ -79,7 +79,6 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         private _route: ActivatedRoute,
         private _domSanitizer: DomSanitizer
     ) {
-        this._themingService.init();
         this.library = this._route.snapshot.data.library || 'core';
 
         this._themingService.currentTheme

@@ -41,4 +41,8 @@ $block: 'fd-wizard';
             }
         }
     }
+
+    &__progress-bar {
+        z-index: 1003;
+    }
 }

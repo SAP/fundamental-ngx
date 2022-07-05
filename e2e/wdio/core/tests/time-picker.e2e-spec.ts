@@ -104,9 +104,9 @@ describe('Time-picker component test', () => {
         click(currentHour);
         click(thirdColumn);
         click(pmButton);
-        expect(getText(selectedTime).trim()).toEqual('12h 0m 0s');
+        expect(getText(selectedTime).trim()).toEqual('12:00 PM');
         click(amButton);
-        expect(getText(selectedTime).trim()).toEqual('0h 0m 0s');
+        expect(getText(selectedTime).trim()).toEqual('12:00 AM');
         click(formExample + clockIcon);
         checkChoosingTime(formExample);
         setValueByKeyboard(formExample);

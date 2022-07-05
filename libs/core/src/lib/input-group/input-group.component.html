@@ -35,7 +35,7 @@
                 [class.is-expanded]="isExpanded"
                 [attr.aria-expanded]="inShellbar ? isExpanded : null"
                 [ariaLabel]="glyphAriaLabel || glyph || addOnText"
-                [attr.aria-controls]="input"
+                [attr.aria-controls]="_inputId"
                 [disabled]="disabled"
                 (mousedown)="_preventFocus($event)"
                 (click)="_buttonClicked($event)"

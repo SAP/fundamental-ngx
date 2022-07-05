@@ -3,8 +3,10 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { MarkdownModule } from 'ngx-markdown';
-import { AppComponent } from './app.component';
+
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { ThemingModule } from '@fundamental-ngx/core/theming';
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
     {
@@ -43,6 +45,7 @@ const routes: Routes = [
             preloadingStrategy: PreloadAllModules
         }),
         MarkdownModule.forRoot({ loader: HttpClient }),
+        ThemingModule,
         ContentDensityModule.forRoot({ storage: 'localStorage' })
     ],
     bootstrap: [AppComponent]

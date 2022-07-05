@@ -7,15 +7,14 @@ import {
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
+import { IconFont } from '@fundamental-ngx/core/icon';
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
 
 export type LabelType = 'numeric' | 'icon';
 
 @Component({
-    // eslint-disable-next-line @angular-eslint/component-selector
-    // TODO @salarenko: DEPRECATED DIRECTIVE APPROACH - Remove in v0.23.0
-    selector: 'fd-info-label, [fd-info-label]',
+    selector: 'fd-info-label',
     templateUrl: './info-label.component.html',
     styleUrls: ['./info-label.component.scss'],
     encapsulation: ViewEncapsulation.None,
@@ -33,9 +32,18 @@ export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
     @Input()
     type: LabelType;
 
-    /** Glyph define the icon of info label */
+    /** The icon name to display. See the icon page for the list of icons
+     * here: https://sap.github.io/fundamental-ngx/icon
+     * */
     @Input()
-    glyph: string;
+    glyph: Nullable<string>;
+
+    /**
+     * The icon font
+     * Options include: 'SAP-icons', 'BusinessSuiteInAppSymbols' and 'SAP-icons-TNT'
+     */
+    @Input()
+    font: IconFont = 'SAP-icons';
 
     /** Define the colour of the info label starting form 1 to 10 */
     @Input()

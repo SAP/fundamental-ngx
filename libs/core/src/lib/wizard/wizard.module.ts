@@ -1,3 +1,4 @@
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WizardComponent } from './wizard.component';
@@ -24,7 +25,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         WizardNextStepComponent,
         DeprecatedWizardCompactDirective
     ],
-    imports: [CommonModule, IconModule, ScrollSpyModule, ActionSheetModule, ContentDensityModule],
+    imports: [CommonModule, IconModule, ScrollSpyModule, ActionSheetModule, ScrollingModule, ContentDensityModule],
     exports: [
         WizardComponent,
         WizardNavigationComponent,
