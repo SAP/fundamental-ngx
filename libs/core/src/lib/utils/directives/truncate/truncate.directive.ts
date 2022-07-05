@@ -65,7 +65,7 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
      * If fdTruncateTargetText is not provided this directive truncates Text Content of an element
      * This Text Content of an element
      */
-    private fdTruncateTargetTextContent: string;
+    private _fdTruncateTargetTextContent: string;
 
     /** @hidden */
     private _originalText: string;
@@ -118,7 +118,7 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
      * Sets fdTruncateTargetInnerText
      */
     _setTextContent(): void {
-        this.fdTruncateTargetTextContent = this._elementRef.nativeElement.textContent;
+        this._fdTruncateTargetTextContent = this._elementRef.nativeElement.textContent;
     }
 
     /** @hidden
@@ -174,8 +174,8 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
         this._truncateTarget = event.rootElement;
         this._originalText = event.fdTruncateTargetText
             ? event.fdTruncateTargetText
-            : this.fdTruncateTargetTextContent
-            ? this.fdTruncateTargetTextContent
+            : this._fdTruncateTargetTextContent
+            ? this._fdTruncateTargetTextContent
             : '';
     }
 
