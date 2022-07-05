@@ -1,4 +1,11 @@
 
+### [0.35.2-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.8...v0.35.2-rc.9) (2022-07-05)
+
+
+### Bug Fixes
+
+* **core:** small docs change for bar 1.0 ([#8307](https://github.com/SAP/fundamental-ngx/issues/8307)) ([472398b](https://github.com/SAP/fundamental-ngx/commit/472398be59dcdf5e8039644ff04e00c417cdd390))
+
 ### [0.35.2-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.7...v0.35.2-rc.8) (2022-07-04)
 
 
