@@ -25,7 +25,7 @@ import {
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { CdkDrag, CdkDragDrop, CdkDragEnter, CdkDropList } from '@angular/cdk/drag-drop';
 import { Subject, Subscription } from 'rxjs';
-import { debounceTime, delay, filter, takeUntil } from 'rxjs/operators';
+import { debounceTime, delay, distinct, filter, takeUntil } from 'rxjs/operators';
 
 import { resizeObservable, RtlService } from '@fundamental-ngx/core/utils';
 import { FixedCardLayoutItemComponent } from './fixed-card-layout-item/fixed-card-layout-item.component';
@@ -544,7 +544,9 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
                 .filter((v): v is ElementRef<HTMLElement> => !!v)
                 .forEach((card) => {
                     this._cardColumnsSubscription.add(
-                        resizeObservable(card.nativeElement).subscribe(() => this._calculateContainerHeight())
+                        resizeObservable(card.nativeElement)
+                            .pipe(distinct((resizeEntry) => resizeEntry[0].contentRect.height))
+                            .subscribe(() => this._calculateContainerHeight())
                     );
                 })
         );
