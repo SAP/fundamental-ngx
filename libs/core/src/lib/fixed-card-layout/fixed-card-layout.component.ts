@@ -1,5 +1,4 @@
 import {
-    AfterContentInit,
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -92,7 +91,7 @@ type CardColumn = CardDefinitionDirective[];
         class: 'fd-fixed-card-layout'
     }
 })
-export class FixedCardLayoutComponent implements OnInit, AfterContentInit, AfterViewInit, OnChanges, OnDestroy {
+export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
     /** Drag drop behavior can be disabled */
     @Input()
     disableDragDrop: boolean;
@@ -210,20 +209,18 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     }
 
     /** @hidden */
-    ngAfterContentInit(): void {
-        this._listenOnCardsChange();
-    }
-
-    /** @hidden */
     ngAfterViewInit(): void {
         this._processCards();
+
         this._listenOnResize();
+        this._listenOnCardsChange();
         this._accessibilitySetup();
     }
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        if (!this._cards?.length) {
+        // Skip all changes unless we don't have initial layout created
+        if (!this._cardsArray) {
             return;
         }
 
@@ -458,7 +455,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
             typeof this.columnsWidthConfig === 'object' &&
             Object.keys(this.columnsWidthConfig).length;
 
-        if (!configPresent || !this._layout || this._numberOfColumns === 1) {
+        if (!configPresent || this._numberOfColumns === 1) {
             return;
         }
 
