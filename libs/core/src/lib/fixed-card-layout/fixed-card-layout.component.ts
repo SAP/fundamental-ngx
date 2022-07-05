@@ -481,29 +481,25 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
 
     /**
      * @hidden
-     * Calculate container height accordingly to the the cards height
-     * Parameters used to increase the height of a certain column, mainly for Drag'n'Drop manipulations
+     * Calculate container height accordingly to the the card columns height
+     * Parameters used to increase the height of the column where drag'n'drop placeholder currently is
      */
     private _calculateContainerHeight(columnIndexToAddSpace = -1, spaceToAdd = 0): void {
         this._changeDetector.detectChanges();
 
-        const wrapperColumns = this._cardColumns.map((column) =>
+        const cardColumns = this._cardColumns.map((column) =>
             column
-                .map((card) => this._dragList.find((wrapper) => wrapper.data === card)?.element)
-                .filter((v): v is ElementRef<HTMLElement> => !!v)
+                .map(
+                    (card) => this._dragList.find((drag) => !drag._dragRef.isDragging() && drag.data === card)?.element
+                )
+                .filter((card): card is ElementRef<HTMLElement> => !!card)
         );
 
-        const columnsHeights = wrapperColumns
-            .map((column) =>
-                column.map((card) =>
-                    card.nativeElement.className.includes('cdk-drag-dragging')
-                        ? 0
-                        : card.nativeElement.getBoundingClientRect().height
-                )
-            )
+        const columnsHeights = cardColumns
+            .map((column) => column.map((card) => card.nativeElement.getBoundingClientRect().height))
             .map(
                 (column, columnIndex) =>
-                    column.reduce((cardsHeight, height) => (cardsHeight += height ? height + REM_IN_PX : 0), 0) +
+                    column.reduce((cardsHeight, height) => (cardsHeight += height + REM_IN_PX), 0) +
                     (columnIndex === columnIndexToAddSpace ? spaceToAdd : 0)
             );
 
