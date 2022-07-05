@@ -4,7 +4,7 @@ import { PluralizationSet1 } from './pluralization/set1';
 const pluralization = new PluralizationSet1();
 
 /**
- * Default set of translations of Fundamental UI libarary for Russian language
+ * Default set of translations of Fundamental UI library for Russian language
  */
 export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
     coreCarousel: {

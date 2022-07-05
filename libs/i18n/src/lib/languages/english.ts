@@ -1,7 +1,7 @@
 import { FdLanguage } from '../models/lang';
 
 /**
- * Default set of translations of Fundamental UI libarary for English language
+ * Default set of translations of Fundamental UI library for English language
  */
 export const FD_LANGUAGE_ENGLISH: FdLanguage = {
     coreCarousel: {

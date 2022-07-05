@@ -18,7 +18,8 @@ import {
     FD_LANGUAGE_ITALIAN,
     FD_LANGUAGE_RUSSIAN,
     FD_LANGUAGE_TURKISH,
-    FD_LANGUAGE_UKRAINIAN
+    FD_LANGUAGE_UKRAINIAN,
+    FD_LANGUAGE_GEORGIAN
 } from '@fundamental-ngx/i18n';
 
 const urlContains = (themeName: string, search: string): boolean => themeName.toLowerCase().includes(search);
@@ -57,6 +58,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
 
     translations = [
         { name: 'English', value: FD_LANGUAGE_ENGLISH },
+        { name: 'Georgian', value: FD_LANGUAGE_GEORGIAN },
         { name: 'Ukrainian', value: FD_LANGUAGE_UKRAINIAN },
         { name: 'Italian', value: FD_LANGUAGE_ITALIAN },
         { name: 'Turkish', value: FD_LANGUAGE_TURKISH },
