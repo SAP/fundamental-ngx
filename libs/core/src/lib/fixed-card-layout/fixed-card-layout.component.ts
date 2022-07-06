@@ -211,6 +211,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
     /** @hidden */
     ngAfterViewInit(): void {
         this._processCards();
+        this.updateLayout();
 
         this._listenOnResize();
         this._listenOnCardsChange();
@@ -398,7 +399,10 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
 
     /** @hidden Listen card change and distribute cards on column change */
     private _listenOnCardsChange(): void {
-        this._cards.changes.pipe(delay(0)).subscribe(() => this._processCards());
+        this._cards.changes.pipe(delay(0)).subscribe(() => {
+            this._processCards();
+            this._updateColumns();
+        });
     }
 
     /** @hidden Renders layout on column changes */
@@ -413,8 +417,6 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
         this._cardsArray = this._cards
             .toArray()
             .sort((firstCard, secondCard) => firstCard.fdCardDef - secondCard.fdCardDef);
-
-        this.updateLayout();
     }
 
     /** @hidden Distribute cards among columns to arrange them in "Z" flow */
