@@ -1,4 +1,11 @@
 
+### [0.35.2-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.9...v0.35.2-rc.10) (2022-07-06)
+
+
+### Bug Fixes
+
+* **core:** switching tabs issue ([#8326](https://github.com/SAP/fundamental-ngx/issues/8326)) ([3f992cc](https://github.com/SAP/fundamental-ngx/commit/3f992cc013f5916e94bfc71e1b5fb09bf71ea00f))
+
 ### [0.35.2-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.8...v0.35.2-rc.9) (2022-07-05)
 
 
