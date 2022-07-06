@@ -125,8 +125,14 @@ export class TabPanelComponent implements OnChanges {
     _expand(expanded: boolean): void {
         if (this._expanded !== expanded) {
             this._expanded = expanded;
-            expanded ? this.opened.emit() : this.closed.emit();
-            this._changeDetRef.markForCheck();
+
+            if (expanded) {
+                this.opened.emit();
+            } else {
+                this.closed.emit();
+            }
+
+            this._changeDetRef.detectChanges();
         }
     }
 }
