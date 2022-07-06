@@ -163,9 +163,6 @@ describe('TokenizerComponent', () => {
         component.tokenList.forEach((token) =>
             spyOn(token.elementRef.nativeElement.querySelector('.fd-token'), 'focus')
         );
-        component.tokenList.forEach((token) =>
-            spyOn(token.elementRef.nativeElement.querySelector('.fd-token'), 'setAttribute')
-        );
         spyOn(component, 'handleKeyDown');
 
         component.focusTokenElement(1);
@@ -177,7 +174,6 @@ describe('TokenizerComponent', () => {
             .filter((element, index) => index === 1)[0]
             .elementRef.nativeElement.querySelector('.fd-token');
         expect(elementToCheck.focus).toHaveBeenCalled();
-        expect(elementToCheck.setAttribute).toHaveBeenCalledWith('aria-setsize', '3');
     });
 
     it('should handle resize - getting smaller', () => {
