@@ -19,7 +19,16 @@ import { Component } from '@angular/core';
         <p
             fd-truncate
             [fdTruncateState]="true"
-            [fdTruncateChars]="45"
+            [fdTruncateChars]="22"
+            [fdTruncateTargetText]="'Replacement Target Text'"
+        >
+            This text should be replaced by the text provided to the [fdTruncateTargetText] input
+        </p>
+
+        <p
+            fd-truncate
+            [fdTruncateState]="true"
+            [fdTruncateWidth]="100"
             [fdTruncateTargetText]="'Replacement Target Text'"
         >
             This text should be replaced by the text provided to the [fdTruncateTargetText] input

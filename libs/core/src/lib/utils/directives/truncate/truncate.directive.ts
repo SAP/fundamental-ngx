@@ -63,7 +63,8 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
 
     /** @hidden
      * If fdTruncateTargetText is not provided this directive truncates Text Content of an element
-     * This Text Content of an element
+     *
+     * Text Content of an element
      */
     private _fdTruncateTargetTextContent: string;
 
@@ -84,9 +85,6 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _maxChars: number;
-
-    /** @hidden */
-    private _maxWidth: number;
 
     /** @hidden */
     private _hasMore: boolean;
@@ -209,6 +207,9 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
     private _toggleTruncate(): void {
         if (this._customWidthCount) {
             this._truncateTarget.style.cssText = this.fdTruncateState ? this._truncationStyle : this._defaultStyle;
+            if (this.fdTruncateTargetText) {
+                this._truncateTarget.textContent = this.fdTruncateTargetText;
+            }
         } else {
             this._truncateTarget.textContent = this.fdTruncateState ? this._truncatedText : this._originalText;
         }
@@ -222,14 +223,9 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
             return;
         }
         if (this._customWidthCount) {
-            this._truncateByWidth(this._truncateTarget);
+            this._truncationStyle = this._truncateByWidth();
         } else {
-            const ellipsisTextArray = this._originalText.split('');
-            while (ellipsisTextArray.length >= this._maxChars) {
-                ellipsisTextArray.pop();
-            }
-
-            this._truncatedText = ellipsisTextArray.join('') + ' … ';
+            this._truncatedText = this._truncateText(this._originalText, this._maxChars);
         }
     }
 
@@ -243,8 +239,6 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
             ? DefaultTruncateCharCount.MAX
             : DefaultTruncateCharCount.MIN;
 
-        this._maxWidth = this._customWidthCount ? this._customWidthCount : width;
-
         if (this.fdTruncateState && this._hasMore) {
             this._truncate();
         }
@@ -253,7 +247,14 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
     /** @hidden
      * Truncates element by pixel length
      */
-    private _truncateByWidth(_element: HTMLElement): void {
-        this._truncationStyle = `${this._defaultStyle} overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: ${this._maxWidth}px;`;
+    private _truncateByWidth(): string {
+        return `${this._defaultStyle} max-width: ${this._customWidthCount}px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;`;
+    }
+
+    /** @hidden
+     * Truncates text by limit value
+     */
+    private _truncateText(text: string, limit: number): string {
+        return text.substring(0, limit) + ' … ';
     }
 }
