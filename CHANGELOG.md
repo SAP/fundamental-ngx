@@ -1,4 +1,11 @@
 
+### [0.35.2-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.10...v0.35.2-rc.11) (2022-07-07)
+
+
+### Features
+
+* **core:** new content density implementation ([#8230](https://github.com/SAP/fundamental-ngx/issues/8230)) ([790d36b](https://github.com/SAP/fundamental-ngx/commit/790d36b98310d4475556516079d681c5f98ccf30)), closes [#8259](https://github.com/SAP/fundamental-ngx/issues/8259)
+
 ### [0.35.2-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.9...v0.35.2-rc.10) (2022-07-06)
 
 
