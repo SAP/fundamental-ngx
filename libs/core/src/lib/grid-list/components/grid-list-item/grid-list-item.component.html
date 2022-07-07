@@ -78,7 +78,7 @@
             aria-label="Details"
             i18n-title="coreGridList.Item.Btn.Details|Button title attribute"
             title="Details"
-            [compact]="true"
+            fdCompact
             (click)="_onDetail($event)"
         ></button>
 
@@ -92,7 +92,7 @@
             aria-label="Delete"
             i18n-title="coreGridList.Item.Btn.Delete|Button title attribute"
             title="Delete"
-            [compact]="true"
+            fdCompact
             (click)="_onDelete($event)"
         ></button>
 
@@ -188,7 +188,7 @@
                 aria-label="Locked"
                 i18n-label="coreGridList.Item.Status.Locked|Button label attribute"
                 label="Locked"
-                [compact]="true"
+                fdCompact
                 (click)="_clickOnLocked($event)"
             ></button>
 
@@ -201,7 +201,7 @@
                 aria-label="Draft"
                 i18n-label="coreGridList.Item.Status.Draft|Button label attribute"
                 label="Draft"
-                [compact]="true"
+                fdCompact
                 (click)="_clickOnDraft($event)"
             ></button>
         </ng-container>

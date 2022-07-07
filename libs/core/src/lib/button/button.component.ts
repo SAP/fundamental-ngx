@@ -8,12 +8,16 @@ import {
     OnChanges,
     OnDestroy,
     OnInit,
-    Optional,
     ViewEncapsulation
 } from '@angular/core';
 import { BaseButton } from './base-button';
 import { Subscription } from 'rxjs';
-import { ContentDensityService, CssClassBuilder, applyCssClass } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
+import {
+    ContentDensityObserver,
+    contentDensityObserverProviders,
+    ContentDensityMode
+} from '@fundamental-ngx/core/content-density';
 
 /**
  * Button directive, used to enhance standard HTML buttons.
@@ -37,7 +41,14 @@ import { ContentDensityService, CssClassBuilder, applyCssClass } from '@fundamen
         '[attr.type]': 'type',
         '[attr.disabled]': '_disabled || null',
         '[attr.aria-label]': 'buttonArialabel'
-    }
+    },
+    providers: [
+        contentDensityObserverProviders({
+            modifiers: {
+                [ContentDensityMode.COMPACT]: 'fd-button--compact'
+            }
+        })
+    ]
 })
 export class ButtonComponent extends BaseButton implements OnChanges, CssClassBuilder, OnInit, OnDestroy {
     /** The property allows user to pass additional css classes. */
@@ -86,9 +97,10 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
     constructor(
         private _elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
-        @Optional() private _contentDensityService: ContentDensityService
+        private _contentDensityObserver: ContentDensityObserver
     ) {
         super();
+        _contentDensityObserver.subscribe();
     }
 
     /** Function runs when component is initialized
@@ -100,15 +112,6 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
     }
 
     public ngOnInit(): void {
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                    this.buildComponentCssClass();
-                })
-            );
-        }
-
         this.buildComponentCssClass();
     }
 
@@ -126,7 +129,6 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
         return [
             'fd-button',
             this.fdType ? `fd-button--${this.fdType}` : '',
-            this.compact ? 'fd-button--compact' : '',
             this.fdMenu ? 'fd-button--menu' : '',
             this._disabled || this._ariaDisabled ? 'is-disabled' : '',
             this.toggled ? `fd-button--toggled` : '',

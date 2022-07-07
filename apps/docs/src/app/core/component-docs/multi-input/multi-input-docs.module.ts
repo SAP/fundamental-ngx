@@ -16,9 +16,10 @@ import { SharedDocumentationPageModule } from '../../../documentation/shared-doc
 import { MultiInputIncludesExampleComponent } from './examples/multi-input-includes-example/multi-input-includes-example.component';
 import { MultiInputCustomItemExampleComponent } from './examples/multi-input-custom-item-example/multi-input-custom-item-example.component';
 import { FormModule } from '@fundamental-ngx/core/form';
-import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
+import { DeprecatedMultiInputCompactDirective, MultiInputModule } from '@fundamental-ngx/core/multi-input';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { ListModule } from '@fundamental-ngx/core/list';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
 
 const routes: Routes = [
     {
@@ -54,6 +55,7 @@ const routes: Routes = [
         MultiInputMobileExampleComponent,
         MultiInputIncludesExampleComponent,
         MultiInputCustomItemExampleComponent
-    ]
+    ],
+    providers: [moduleDeprecationsProvider(DeprecatedMultiInputCompactDirective)]
 })
 export class MultiInputDocsModule {}

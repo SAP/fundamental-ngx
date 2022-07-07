@@ -4,7 +4,7 @@ import { Component, Input } from '@angular/core';
     selector: 'background-switch',
     template: `
         <label fd-form-label> Switch background </label>
-        <fd-switch [compact]="true" style="margin-bottom: 18px" (checkedChange)="onChange()"></fd-switch>
+        <fd-switch style="margin-bottom: 18px" (checkedChange)="onChange()"></fd-switch>
     `
 })
 export class ExampleBackgroundComponent {

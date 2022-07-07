@@ -7,10 +7,23 @@ import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { ListModule } from '@fundamental-ngx/core/list';
+import { DeprecatedTokenizerContentDensityDirective } from './deprecated-tokenizer-content-density.directive';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
-    declarations: [TokenComponent, TokenizerComponent, TokenizerInputDirective],
-    imports: [CommonModule, InputGroupModule, ButtonModule, PopoverModule, ListModule],
-    exports: [TokenComponent, TokenizerComponent, TokenizerInputDirective]
+    declarations: [
+        TokenComponent,
+        TokenizerComponent,
+        TokenizerInputDirective,
+        DeprecatedTokenizerContentDensityDirective
+    ],
+    imports: [CommonModule, InputGroupModule, ButtonModule, PopoverModule, ListModule, ContentDensityModule],
+    exports: [
+        TokenComponent,
+        TokenizerComponent,
+        TokenizerInputDirective,
+        DeprecatedTokenizerContentDensityDirective,
+        ContentDensityModule
+    ]
 })
 export class TokenModule {}

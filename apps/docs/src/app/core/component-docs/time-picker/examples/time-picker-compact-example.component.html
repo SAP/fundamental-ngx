@@ -1,4 +1,4 @@
-<fd-time-picker [compact]="true" [(ngModel)]="timeObject"></fd-time-picker>
+<fd-time-picker fdCompact [(ngModel)]="timeObject"></fd-time-picker>
 <br />
 Selected Time:
 <ng-container *ngIf="timeObject">{{ timeObject.toDate() | date: 'shortTime' }}</ng-container>

@@ -11,7 +11,6 @@
     <fd-popover-control>
         <fd-input-group
             #inputGroupComponent
-            [compact]="compact"
             [state]="state"
             [disabled]="disabled"
             [isControl]="true"
@@ -27,7 +26,6 @@
                 type="text"
                 class="fd-input"
                 fd-input-group-input
-                [compact]="compact"
                 [disabled]="disabled"
                 [placeholder]="placeholder"
                 [attr.id]="inputId"
@@ -54,7 +52,6 @@
         <fd-calendar
             (closeCalendar)="closeFromCalendar()"
             [activeView]="activeView"
-            [compact]="compact"
             [markWeekends]="markWeekends"
             [specialDaysRules]="specialDaysRules"
             [showWeekNumbers]="showWeekNumbers"

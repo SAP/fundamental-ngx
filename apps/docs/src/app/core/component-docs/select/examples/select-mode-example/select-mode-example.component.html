@@ -5,7 +5,7 @@
 <small style="display: block">Selected value: {{ selectedValue1 }}</small>
 
 <h4>Compact select</h4>
-<fd-select placeholder="Select an option" [compact]="true" [(value)]="selectedValue2">
+<fd-select placeholder="Select an option" fdCompact [(value)]="selectedValue2">
     <fd-option *ngFor="let option of options" [value]="option">{{ option }}</fd-option>
 </fd-select>
 <small style="display: block">Selected value: {{ selectedValue2 }}</small>

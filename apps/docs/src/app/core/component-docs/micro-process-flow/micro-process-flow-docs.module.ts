@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { MicroProcessFlowModule } from '@fundamental-ngx/core/micro-process-flow';
+import {
+    DeprecatedMicroProcessFlowContentDensityDirective,
+    MicroProcessFlowModule
+} from '@fundamental-ngx/core/micro-process-flow';
 import { IconModule } from '@fundamental-ngx/core/icon';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
@@ -22,6 +25,7 @@ import { MicroProcessFlowIndependentItemsExampleComponent } from './examples/mic
 import { InfoLabelModule } from '@fundamental-ngx/core/info-label';
 import { MicroProcessFlowCustomWidthExampleComponent } from './examples/micro-process-flow-custom-width-example.component';
 import { MicroProcessFlowObjectBetweenNodesExampleComponent } from './examples/micro-process-flow-object-between-nodes-example.component';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
 
 const routes: Routes = [
     {
@@ -57,6 +61,7 @@ const routes: Routes = [
         AvatarModule,
         InfoLabelModule
     ],
-    exports: [RouterModule]
+    exports: [RouterModule],
+    providers: [moduleDeprecationsProvider(DeprecatedMicroProcessFlowContentDensityDirective)]
 })
 export class MicroProcessFlowDocsModule {}

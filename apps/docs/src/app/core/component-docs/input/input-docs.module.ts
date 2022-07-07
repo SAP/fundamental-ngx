@@ -11,8 +11,9 @@ import {
     InputStateExampleComponent
 } from './examples/input-examples.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
-import { FormModule } from '@fundamental-ngx/core/form';
+import { DeprecatedFormControlContentDensityDirective, FormModule } from '@fundamental-ngx/core/form';
 import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
 
 const routes: Routes = [
     {
@@ -35,6 +36,7 @@ const routes: Routes = [
         InputStateExampleComponent,
         InputFormGroupExampleComponent,
         InputInlineHelpExampleComponent
-    ]
+    ],
+    providers: [moduleDeprecationsProvider(DeprecatedFormControlContentDensityDirective)]
 })
 export class InputDocsModule {}

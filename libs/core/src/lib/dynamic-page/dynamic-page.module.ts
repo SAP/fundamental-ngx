@@ -14,6 +14,8 @@ import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { DynamicPageWrapperDirective } from './dynamic-page-wrapper.directive';
 import { IgnoreClickOnSelectionModule } from '@fundamental-ngx/core/utils';
+import { DeprecatedDynamicPageCompactDirective } from './deprecated-dynamic-page-compact.directive';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
     declarations: [
@@ -25,9 +27,17 @@ import { IgnoreClickOnSelectionModule } from '@fundamental-ngx/core/utils';
         DynamicPageContentComponent,
         DynamicPageFooterComponent,
         DynamicPageTitleContentComponent,
-        DynamicPageWrapperDirective
+        DynamicPageWrapperDirective,
+        DeprecatedDynamicPageCompactDirective
     ],
-    imports: [CommonModule, ButtonModule, ToolbarModule, PopoverModule, IgnoreClickOnSelectionModule],
+    imports: [
+        CommonModule,
+        ButtonModule,
+        ToolbarModule,
+        PopoverModule,
+        IgnoreClickOnSelectionModule,
+        ContentDensityModule
+    ],
     exports: [
         DynamicPageComponent,
         DynamicPageHeaderComponent,
@@ -37,7 +47,8 @@ import { IgnoreClickOnSelectionModule } from '@fundamental-ngx/core/utils';
         DynamicPageContentComponent,
         DynamicPageFooterComponent,
         DynamicPageTitleContentComponent,
-        DynamicPageWrapperDirective
+        DynamicPageWrapperDirective,
+        DeprecatedDynamicPageCompactDirective
     ]
 })
 export class DynamicPageModule {}

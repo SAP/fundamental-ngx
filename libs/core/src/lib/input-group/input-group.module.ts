@@ -10,15 +10,25 @@ import {
     InputGroupInputDirective,
     InputGroupTextareaDirective
 } from './input-group-directives';
+import { DeprecatedInputGroupCompactDirective } from './deprecated-input-group-compact.directive';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
     declarations: [
         InputGroupComponent,
         InputGroupInputDirective,
         InputGroupTextareaDirective,
-        InputGroupAddOnDirective
+        InputGroupAddOnDirective,
+        DeprecatedInputGroupCompactDirective
     ],
-    imports: [CommonModule, ButtonModule, IconModule, FormsModule],
-    exports: [InputGroupComponent, InputGroupInputDirective, InputGroupTextareaDirective, InputGroupAddOnDirective]
+    imports: [CommonModule, ButtonModule, IconModule, FormsModule, ContentDensityModule],
+    exports: [
+        InputGroupComponent,
+        InputGroupInputDirective,
+        InputGroupTextareaDirective,
+        InputGroupAddOnDirective,
+        DeprecatedInputGroupCompactDirective,
+        ContentDensityModule
+    ]
 })
 export class InputGroupModule {}

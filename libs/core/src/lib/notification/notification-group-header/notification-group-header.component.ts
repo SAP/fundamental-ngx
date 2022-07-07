@@ -5,17 +5,19 @@ import {
     EventEmitter,
     HostBinding,
     Input,
-    OnInit,
     OnDestroy,
+    OnInit,
     Optional,
     Output,
-    ViewEncapsulation,
-    Renderer2
+    Renderer2,
+    ViewEncapsulation
 } from '@angular/core';
-import { ContentDensityService, RtlService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/core/utils';
 import { Subscription } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/core/shared';
 import { NotificationGroupBaseDirective } from '../notification-utils/notification-group-base';
+import { ContentDensityMode, LocalContentDensityMode } from '@fundamental-ngx/core/content-density';
+
 @Component({
     selector: 'fd-notification-group-header',
     template: `
@@ -23,7 +25,7 @@ import { NotificationGroupBaseDirective } from '../notification-utils/notificati
             fd-button
             fdType="transparent"
             role="button"
-            [compact]="expandCompact"
+            [fdContentDensity]="_expandButtonContentDensity"
             [attr.aria-expanded]="expanded"
             [attr.aria-describedby]="expandDescribedBy"
             [attr.aria-label]="expandAriaLabel"
@@ -77,25 +79,16 @@ export class NotificationGroupHeaderComponent extends NotificationGroupBaseDirec
     @Output()
     expandedChange = new EventEmitter<boolean>();
 
-    constructor(
-        private _cdRef: ChangeDetectorRef,
-        @Optional() private _rtlService: RtlService,
-        @Optional() private _contentDensityService: ContentDensityService,
-        renderer: Renderer2
-    ) {
+    get _expandButtonContentDensity(): LocalContentDensityMode {
+        return typeof this.expandCompact === 'undefined' ? 'global' : ContentDensityMode.COMPACT;
+    }
+
+    constructor(private _cdRef: ChangeDetectorRef, @Optional() private _rtlService: RtlService, renderer: Renderer2) {
         super(renderer);
     }
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.expandCompact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.expandCompact = isCompact;
-                    this._cdRef.markForCheck();
-                })
-            );
-        }
         this._listenRtl();
     }
 

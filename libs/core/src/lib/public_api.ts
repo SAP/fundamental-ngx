@@ -93,3 +93,4 @@ export * from '@fundamental-ngx/core/scrollbar';
 export * from '@fundamental-ngx/core/theming';
 export * from '@fundamental-ngx/core/utils';
 export * from '@fundamental-ngx/core/overflow-layout';
+export * from '@fundamental-ngx/core/content-density';

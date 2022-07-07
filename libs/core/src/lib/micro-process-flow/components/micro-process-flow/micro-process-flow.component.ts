@@ -1,26 +1,31 @@
 import { ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
 import {
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ContentChildren,
     ElementRef,
+    HostListener,
     Input,
-    OnInit,
     OnDestroy,
+    OnInit,
     Optional,
     QueryList,
     ViewChild,
-    ViewEncapsulation,
-    AfterViewInit,
-    HostListener
+    ViewEncapsulation
 } from '@angular/core';
-import { ContentDensityService, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, startWith } from 'rxjs/operators';
 import { MicroProcessFlowFocusableItemDirective } from '../../micro-process-flow-focusable-item.directive';
 import { MicroProcessFlowItemComponent } from '../micro-process-flow-item/micro-process-flow-item.component';
 import { MICRO_PROCESS_FLOW } from '../../injection-tokens';
+import {
+    ContentDensityObserver,
+    contentDensityObserverProviders,
+    ContentDensityMode
+} from '@fundamental-ngx/core/content-density';
 
 @Component({
     selector: 'fd-micro-process-flow',
@@ -30,24 +35,22 @@ import { MICRO_PROCESS_FLOW } from '../../injection-tokens';
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         class: 'fd-micro-process-flow',
-        '[class.fd-micro-process-flow--independent-steps]': 'independentSteps',
-        '[class.fd-micro-process-flow--compact]': 'compact'
+        '[class.fd-micro-process-flow--independent-steps]': 'independentSteps'
     },
     providers: [
         {
             provide: MICRO_PROCESS_FLOW,
             useExisting: MicroProcessFlowComponent
-        }
+        },
+        contentDensityObserverProviders({
+            modifiers: { [ContentDensityMode.COMPACT]: 'fd-micro-process-flow--compact' }
+        })
     ]
 })
 export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewInit {
     /** Should connector between items be hidden. */
     @Input()
     independentSteps = false;
-
-    /** Whether to apply compact mode to the micro process flow. */
-    @Input()
-    compact: boolean;
 
     /** Pagination transition speed in milliseconds */
     @Input()
@@ -123,8 +126,10 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
     constructor(
         private _cd: ChangeDetectorRef,
         @Optional() private _rtl: RtlService,
-        @Optional() private _contentDensityService: ContentDensityService
-    ) {}
+        private _contentDensityObserver: ContentDensityObserver
+    ) {
+        _contentDensityObserver.subscribe();
+    }
 
     /** @hidden */
     ngOnInit(): void {
@@ -147,15 +152,6 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
                     if (this.showPreviousButton) {
                         this._paginate(0);
                     }
-                })
-            );
-        }
-
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                    this._paginate(0);
                 })
             );
         }

@@ -15,7 +15,7 @@ import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { FlexibleColumnLayoutModule } from '@fundamental-ngx/core/flexible-column-layout';
-import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
+import { DeprecatedDynamicPageCompactDirective, DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { FacetModule } from '@fundamental-ngx/core/facets';
 import { TextModule } from '@fundamental-ngx/core/text';
@@ -24,6 +24,7 @@ import { ObjectNumberModule } from '@fundamental-ngx/core/object-number';
 import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { DynamicPageDynamicContainerHeightExampleComponent } from './dynamic-page-examples/dynamic-page-dynamic-container-height-example/dynamic-page-dynamic-container-height-example.component';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
 
 const routes: Routes = [
     {
@@ -63,6 +64,7 @@ const routes: Routes = [
         DynamicPageResponsiveExampleComponent,
         DynamicPageDynamicContainerHeightExampleComponent,
         DynamicPageFacetsExampleComponent
-    ]
+    ],
+    providers: [moduleDeprecationsProvider(DeprecatedDynamicPageCompactDirective)]
 })
 export class DynamicPageDocsModule {}

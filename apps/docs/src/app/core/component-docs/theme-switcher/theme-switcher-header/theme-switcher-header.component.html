@@ -1,20 +1,21 @@
-<header>Theme Switcher API</header>
-<fd-message-strip type="warning" [dismissible]="false">
-    DEPRECATED. ThemeService has been deprecated since 0.35.0 version in favor of
-    <a routerLink="/core/theming">ThemingModule and ThemingService</a> which provides more flexibility and functionality
-    to the developers.
-</fd-message-strip>
-<description>
-    Theme switcher API allows user to set specific theme programmatically. There is no longer need for each application
-    to implement its own theme switcher code.<br />
-    At the moment this won't work for Internet Explorer 11. We will enhance this feature in the near future.<br />
-    The API requires additional assets from the npm packages: <code>@sap-theming/theming-base-content</code> and
-    <code>fundamental-styles</code>.<br />
-    Prerequisites - add those objects to assets array in <code>angular.json</code>:<br />
+<fd-doc-page>
+    <header>Theme Switcher API</header>
+    <fd-message-strip type="warning" [dismissible]="false">
+        DEPRECATED. ThemeService has been deprecated since 0.35.0 version in favor of
+        <a routerLink="/core/theming">ThemingModule and ThemingService</a> which provides more flexibility and
+        functionality to the developers.
+    </fd-message-strip>
+    <description>
+        Theme switcher API allows user to set specific theme programmatically. There is no longer need for each
+        application to implement its own theme switcher code.<br />
+        At the moment this won't work for Internet Explorer 11. We will enhance this feature in the near future.<br />
+        The API requires additional assets from the npm packages: <code>@sap-theming/theming-base-content</code> and
+        <code>fundamental-styles</code>.<br />
+        Prerequisites - add those objects to assets array in <code>angular.json</code>:<br />
 
-    <fd-code-snippet [file]="file"></fd-code-snippet>
-</description>
-<import module="ThemeService" subPackage="utils"></import>
+        <fd-code-snippet [file]="file"></fd-code-snippet>
+    </description>
+    <import module="ThemeService" subPackage="utils"></import>
 
-<fd-header-tabs></fd-header-tabs>
-<router-outlet></router-outlet>
+    <fd-header-tabs></fd-header-tabs>
+</fd-doc-page>

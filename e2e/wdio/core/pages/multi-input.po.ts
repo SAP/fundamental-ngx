@@ -10,7 +10,7 @@ export class MultiInputPo extends CoreBaseComponentPo {
     simpleMultiInputOptions = '.fd-popover-custom-list [fd-list-item] fd-checkbox';
     expandedDropdown = '.fd-list';
     multiInputOptions = 'fd-multi-input[inputid="multiInput"] .fd-token__text span';
-    buttonShowAll = 'a.fd-link';
+    buttonShowAll = '.fd-multi-input-menu-overflow a.fd-link';
     hiddenAddonButtonInputOptions = 'fd-multi-input[inputid="noAddonMultiInput1"] .fd-token__text span';
     compactMultiInputOptions = '.fd-token--compact .fd-token__text span';
     approveButton = '.fd-button--emphasized';

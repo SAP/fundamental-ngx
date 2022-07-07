@@ -5,12 +5,11 @@ import {
     ContentChildren,
     ElementRef,
     Input,
-    OnDestroy,
-    QueryList,
-    ViewEncapsulation,
     OnChanges,
+    OnDestroy,
     OnInit,
-    Optional
+    QueryList,
+    ViewEncapsulation
 } from '@angular/core';
 import { TabLinkDirective } from '../tab-link/tab-link.directive';
 import { TabItemDirective } from '../tab-item/tab-item.directive';
@@ -18,15 +17,21 @@ import { TabsService } from '../tabs.service';
 import { merge, Subject, Subscription } from 'rxjs';
 import { TabModes, TabSizes } from '../tab-list.component';
 import { filter, takeUntil } from 'rxjs/operators';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
+import {
+    ContentDensityObserver,
+    contentDensityObserverProviders,
+    ContentDensityMode
+} from '@fundamental-ngx/core/content-density';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-tab-nav]',
-    template: `<ng-content></ng-content>`,
-    providers: [TabsService],
+    template: ` <ng-content></ng-content>`,
+    providers: [
+        TabsService,
+        contentDensityObserverProviders({ modifiers: { [ContentDensityMode.COMPACT]: 'fd-tabs--compact' } })
+    ],
     styleUrls: ['./tab-nav.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -46,10 +51,6 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
     /** Size of tab, it's mostly about adding spacing on tab container, available sizes 's' | 'm' | 'l' | 'xl' | 'xxl' */
     @Input()
     size: TabSizes = 'm';
-
-    /** Whether user wants to use tab component in compact mode */
-    @Input()
-    compact?: boolean;
 
     /** @hidden */
     @ContentChildren(TabLinkDirective)
@@ -72,8 +73,10 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
     constructor(
         private _tabsService: TabsService,
         private _elementRef: ElementRef,
-        @Optional() private _contentDensityService: ContentDensityService
-    ) {}
+        private _contentDensityObserver: ContentDensityObserver
+    ) {
+        this._contentDensityObserver.subscribe();
+    }
 
     /** @hidden */
     ngAfterContentInit(): void {
@@ -89,14 +92,6 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                    this.buildComponentCssClass();
-                })
-            );
-        }
         this.buildComponentCssClass();
     }
 
@@ -113,13 +108,7 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string[] {
-        return [
-            `fd-tabs`,
-            this.mode ? 'fd-tabs--' + this.mode : '',
-            this.compact ? 'fd-tabs--compact' : '',
-            `fd-tabs--${this.size}`,
-            this.class
-        ];
+        return [`fd-tabs`, this.mode ? 'fd-tabs--' + this.mode : '', `fd-tabs--${this.size}`, this.class];
     }
 
     /** HasElementRef interface implementation
