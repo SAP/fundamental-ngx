@@ -1,4 +1,4 @@
-<table fd-table [keys]="displayedColumns">
+<table fd-table [keys]="displayedColumns" aria-label="Customizable Columns">
     <thead fd-table-header>
         <tr fd-table-row>
             <th fd-table-cell *ngFor="let column of displayedColumns" [key]="column">{{ column | uppercase }}</th>

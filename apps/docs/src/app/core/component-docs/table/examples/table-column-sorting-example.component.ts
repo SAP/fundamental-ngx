@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 interface ExampleRow {
     column1: any;
@@ -19,8 +20,11 @@ export class TableColumnSortingExampleComponent implements OnInit {
     ascending = true;
     filterVal = '';
 
+    constructor(private liveAnnouncer: LiveAnnouncer) {}
+
     changeSort(asc: boolean): void {
         this.ascending = asc;
+        this.liveAnnouncer.announce(`Set sort ${asc ? 'ascending' : 'descending'}`, 'assertive');
     }
 
     ngOnInit(): void {

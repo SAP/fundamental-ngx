@@ -5,6 +5,11 @@ import { By } from '@angular/platform-browser';
 
 import { SliderComponent, SliderModule } from '@fundamental-ngx/core/slider';
 import { whenStable } from '@fundamental-ngx/core/tests';
+import { ContentDensityMode, mockedLocalContentDensityDirective } from '@fundamental-ngx/core/content-density';
+
+const { contentDensityDirectiveProvider, setContentDensity } = mockedLocalContentDensityDirective(
+    ContentDensityMode.COMPACT
+);
 
 @Component({
     template: `
@@ -43,7 +48,7 @@ import { whenStable } from '@fundamental-ngx/core/tests';
 
         <fd-slider class="example-5" [(ngModel)]="value5" [disabled]="true"></fd-slider>
 
-        <fd-slider class="example-6" [(ngModel)]="value6" [cozy]="true"></fd-slider>
+        <fd-slider class="example-6" [(ngModel)]="value6" fdCozy></fd-slider>
     `
 })
 class TestSliderComponent {
@@ -82,7 +87,8 @@ xdescribe('SliderComponent', () => {
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 declarations: [TestSliderComponent],
-                imports: [SliderModule, FormsModule]
+                imports: [SliderModule, FormsModule],
+                providers: [contentDensityDirectiveProvider]
             }).compileComponents();
         })
     );
@@ -101,9 +107,12 @@ xdescribe('SliderComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should handle content density when compact input is not provided', () => {
-        sliders[0].ngOnInit();
-        expect(sliders[0].cozy).toBeNull();
+    it('should consume content density change', () => {
+        setContentDensity(ContentDensityMode.COZY);
+        fixture.detectChanges();
+        expect(fixture.nativeElement.querySelectorAll('.fd-slider--lg').length).toBe(sliders.length);
+        setContentDensity(ContentDensityMode.COMPACT);
+        expect(fixture.nativeElement.querySelectorAll('.fd-slider--lg').length).toBe(0);
     });
 
     it('handle should be on the center of slider', () => {

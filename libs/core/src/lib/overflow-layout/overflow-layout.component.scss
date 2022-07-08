@@ -1,0 +1,55 @@
+$fd-block: 'fd-overflow-layout';
+
+@mixin fd-reset {
+    font-size: var(--sapFontSize);
+    line-height: var(--sapContent_LineHeight);
+    color: var(--sapTextColor);
+    font-family: var(--sapFontFamily);
+    font-weight: normal;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+
+    &::before,
+    &::after {
+        box-sizing: inherit;
+        font-size: inherit;
+    }
+}
+
+@mixin fd-flex {
+    display: flex;
+    align-items: center;
+    @content;
+}
+
+.#{$fd-block} {
+    @include fd-reset();
+    @include fd-flex() {
+        width: 100%;
+    }
+    &__items {
+        @include fd-reset();
+        @include fd-flex();
+    }
+
+    &__more {
+        @include fd-reset();
+        @include fd-flex();
+    }
+
+    &__items-container {
+        @include fd-reset();
+        @include fd-flex() {
+            width: 0;
+            flex: 1 auto;
+        }
+    }
+
+    &__popover-container {
+        @include fd-reset();
+        display: block;
+        white-space: normal;
+    }
+}

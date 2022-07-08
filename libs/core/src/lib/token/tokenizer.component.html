@@ -12,12 +12,11 @@
 
         <ng-content select="[fd-form-control]"></ng-content>
     </div>
-    <span fd-input-group-addon *ngIf="glyph" #inputGroupAddOn [compact]="compact" [button]="true" placement="after">
+    <span fd-input-group-addon *ngIf="glyph" #inputGroupAddOn [button]="true" placement="after">
         <button
             fd-button
             [class]="compact ? 'fd-tokenizer-addon--compact' : 'fd-tokenizer-addon'"
             fdType="transparent"
-            [compact]="compact"
             [glyph]="glyph"
             type="button"
         ></button>
@@ -59,9 +58,9 @@
         class="fd-tokenizer-more"
         #moreElement
     >
-        <ng-container *ngIf="compact || compactCollapse"
-            >{{ moreTokensLeft.length + moreTokensRight.length }} {{ moreTerm }}</ng-container
-        >
-        <ng-container *ngIf="!compact && !compactCollapse">{{ hiddenCozyTokenCount }} {{ moreTerm }}</ng-container>
+        <ng-container *ngIf="compact || compactCollapse">
+            {{ moreTokensLeft.length + moreTokensRight.length }} {{ moreTerm }}
+        </ng-container>
+        <ng-container *ngIf="!compact && !compactCollapse"> {{ hiddenCozyTokenCount }} {{ moreTerm }} </ng-container>
     </span>
 </ng-template>

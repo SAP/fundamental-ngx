@@ -40,6 +40,7 @@ export * from './interfaces/css-class-builder.interface';
 export * from './interfaces/css-style-builder.interface';
 export * from './interfaces/has-element-ref.interface';
 export * from './interfaces/keyboard-support-item.interface';
+export * from './interfaces/module-deprecation.interface';
 
 export * from './decorators/apply-css-class.decorator';
 export * from './decorators/apply-css-style.decorator';
@@ -61,6 +62,8 @@ export * from './services/rtl.service';
 export * from './services/themes.service';
 export * from './services/keyboard-support/keyboard-support.service';
 export * from './services/resize-observer.service';
+export * from './services/local-storage.service';
+export * from './services/destroyed.service';
 
 export * from './functions';
 
@@ -73,3 +76,5 @@ export * from './list-item/list-item-utils';
 export * from './mixins/apply-mixin';
 
 export * from './services/focus-trap.service';
+
+export * from './tokens/module-deprecations.token';

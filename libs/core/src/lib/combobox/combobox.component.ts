@@ -12,7 +12,6 @@ import {
     OnChanges,
     OnDestroy,
     OnInit,
-    Optional,
     Output,
     QueryList,
     SimpleChanges,
@@ -38,26 +37,20 @@ import {
 import { Subscription } from 'rxjs';
 
 import { ListComponent, ListMessageDirective } from '@fundamental-ngx/core/list';
-import {
-    KeyUtil,
-    AutoCompleteEvent,
-    DynamicComponentService,
-    FocusEscapeDirection,
-    ContentDensityService
-} from '@fundamental-ngx/core/utils';
-import { registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
+import { AutoCompleteEvent, DynamicComponentService, FocusEscapeDirection, KeyUtil } from '@fundamental-ngx/core/utils';
+import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
-import { FormStates, PopoverFillMode } from '@fundamental-ngx/core/shared';
+import { FormStates, Nullable, PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { InputGroupComponent } from '@fundamental-ngx/core/input-group';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { Nullable } from '@fundamental-ngx/core/shared';
 
 import { ComboboxMobileModule } from './combobox-mobile/combobox-mobile.module';
 import { ComboboxMobileComponent } from './combobox-mobile/combobox-mobile.component';
 import { COMBOBOX_COMPONENT, ComboboxInterface } from './combobox.interface';
 import { ComboboxItem } from './combobox-item';
 import { GroupFunction } from './list-group.pipe';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 let comboboxUniqueId = 0;
 
@@ -84,7 +77,8 @@ let comboboxUniqueId = 0;
             multi: true
         },
         registerFormItemControl(ComboboxComponent),
-        MenuKeyboardService
+        MenuKeyboardService,
+        contentDensityObserverProviders()
     ],
     host: {
         '[class.fd-combobox-custom-class]': 'true',
@@ -194,10 +188,6 @@ export class ComboboxComponent
     /** Search function to execute when the Enter key is pressed on the main input. */
     @Input()
     searchFn: () => void;
-
-    /** Whether the search input should be displayed in compact mode. */
-    @Input()
-    compact?: boolean;
 
     /** Whether the matching string should be highlighted during filtration. */
     @Input()
@@ -369,7 +359,7 @@ export class ComboboxComponent
         private readonly _injector: Injector,
         private readonly _viewContainerRef: ViewContainerRef,
         private readonly _dynamicComponentService: DynamicComponentService,
-        @Optional() private _contentDensityService: ContentDensityService
+        readonly _contentDensityObserver: ContentDensityObserver
     ) {}
 
     /** @hidden */
@@ -378,14 +368,6 @@ export class ComboboxComponent
             this.showDropdownButton = false;
         }
         this._refreshDisplayedValues();
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                    this._cdRef.markForCheck();
-                })
-            );
-        }
     }
 
     /** @hidden */

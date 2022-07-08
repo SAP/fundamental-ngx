@@ -11,10 +11,11 @@ import { PaginationPerPageExampleComponent } from './examples/pagination-per-pag
 import { PaginationMobileExampleComponent } from './examples/pagination-mobile/pagination-mobile-example.component';
 
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
-import { PaginationModule } from '@fundamental-ngx/core/pagination';
+import { DeprecatedPaginationCompactDirective, PaginationModule } from '@fundamental-ngx/core/pagination';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { SelectModule } from '@fundamental-ngx/core/select';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
 
 const routes: Routes = [
     {
@@ -44,6 +45,7 @@ const routes: Routes = [
         PaginationShowingExampleComponent,
         PaginationPerPageExampleComponent,
         PaginationMobileExampleComponent
-    ]
+    ],
+    providers: [moduleDeprecationsProvider(DeprecatedPaginationCompactDirective)]
 })
 export class PaginationDocsModule {}

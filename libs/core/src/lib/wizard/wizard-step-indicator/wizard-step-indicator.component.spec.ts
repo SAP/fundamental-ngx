@@ -3,7 +3,6 @@ import { Component, ViewChild } from '@angular/core';
 
 import { WizardModule } from '../wizard.module';
 import { WizardStepIndicatorComponent } from './wizard-step-indicator.component';
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../../utils/public_api';
 
 @Component({
     selector: 'fd-test-indicator',
@@ -22,8 +21,7 @@ describe('WizardStepIndicatorComponent', () => {
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 declarations: [TestWrapperComponent],
-                imports: [WizardModule],
-                providers: [ContentDensityService]
+                imports: [WizardModule]
             }).compileComponents();
         })
     );
@@ -36,11 +34,6 @@ describe('WizardStepIndicatorComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
-    });
-
-    it('should handle content density when compact input is not provided', () => {
-        component.indicator.ngOnInit();
-        expect(component.indicator.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 
     it('Should Add icon class with glyph on input', () => {

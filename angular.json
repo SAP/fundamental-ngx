@@ -597,6 +597,48 @@
             },
             "tags": ["type:lib", "scope:fd"]
         },
+        "core-content-density": {
+            "projectType": "library",
+            "root": "libs/core/src/lib/content-density",
+            "sourceRoot": "libs/core/src/lib/content-density",
+            "prefix": "fd",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/core/content-density"],
+                    "options": {
+                        "project": "libs/core/src/lib/content-density/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/core/src/lib/content-density/tsconfig.lib.prod.json"
+                        },
+                        "development": {
+                            "tsConfig": "libs/core/src/lib/content-density/tsconfig.lib.json"
+                        }
+                    },
+                    "defaultConfiguration": "production"
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/core/src/lib/content-density/test.ts",
+                        "tsConfig": "libs/core/src/lib/content-density/tsconfig.spec.json",
+                        "karmaConfig": "libs/core/src/lib/content-density/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/content-density/**/*.ts",
+                            "libs/core/src/lib/content-density/**/*.html"
+                        ]
+                    }
+                }
+            },
+            "tags": ["scope:fd", "type:lib"]
+        },
         "core-date-picker": {
             "projectType": "library",
             "root": "libs/core/src/lib/date-picker",
@@ -2135,6 +2177,48 @@
                 }
             },
             "tags": ["type:lib", "scope:fd"]
+        },
+        "core-overflow-layout": {
+            "projectType": "library",
+            "root": "libs/core/src/lib/overflow-layout",
+            "sourceRoot": "libs/core/src/lib/overflow-layout",
+            "prefix": "fd",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/core/overflow-layout"],
+                    "options": {
+                        "project": "libs/core/src/lib/overflow-layout/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/core/src/lib/overflow-layout/tsconfig.lib.prod.json"
+                        },
+                        "development": {
+                            "tsConfig": "libs/core/src/lib/overflow-layout/tsconfig.lib.json"
+                        }
+                    },
+                    "defaultConfiguration": "production"
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/core/src/lib/overflow-layout/test.ts",
+                        "tsConfig": "libs/core/src/lib/overflow-layout/tsconfig.spec.json",
+                        "karmaConfig": "libs/core/src/lib/overflow-layout/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/overflow-layout/**/*.ts",
+                            "libs/core/src/lib/overflow-layout/**/*.html"
+                        ]
+                    }
+                }
+            },
+            "tags": ["scope:fd", "type:lib"]
         },
         "core-pagination": {
             "projectType": "library",

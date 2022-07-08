@@ -1,4 +1,126 @@
 
+### [0.35.2-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.11...v0.35.2-rc.12) (2022-07-07)
+
+### [0.35.2-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.10...v0.35.2-rc.11) (2022-07-07)
+
+
+### Features
+
+* **core:** new content density implementation ([#8230](https://github.com/SAP/fundamental-ngx/issues/8230)) ([790d36b](https://github.com/SAP/fundamental-ngx/commit/790d36b98310d4475556516079d681c5f98ccf30)), closes [#8259](https://github.com/SAP/fundamental-ngx/issues/8259)
+
+### [0.35.2-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.9...v0.35.2-rc.10) (2022-07-06)
+
+
+### Bug Fixes
+
+* **core:** switching tabs issue ([#8326](https://github.com/SAP/fundamental-ngx/issues/8326)) ([3f992cc](https://github.com/SAP/fundamental-ngx/commit/3f992cc013f5916e94bfc71e1b5fb09bf71ea00f))
+
+### [0.35.2-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.8...v0.35.2-rc.9) (2022-07-05)
+
+
+### Bug Fixes
+
+* **core:** small docs change for bar 1.0 ([#8307](https://github.com/SAP/fundamental-ngx/issues/8307)) ([472398b](https://github.com/SAP/fundamental-ngx/commit/472398be59dcdf5e8039644ff04e00c417cdd390))
+
+### [0.35.2-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.7...v0.35.2-rc.8) (2022-07-04)
+
+
+### Features
+
+* **core:** info label different icon fonts ([#8308](https://github.com/SAP/fundamental-ngx/issues/8308)) ([fec587a](https://github.com/SAP/fundamental-ngx/commit/fec587acc18241d497014228060e1534b46a68ba))
+
+### [0.35.2-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.6...v0.35.2-rc.7) (2022-07-04)
+
+
+### Bug Fixes
+
+* **docs:** theming service init ([#8319](https://github.com/SAP/fundamental-ngx/issues/8319)) ([6fe4c58](https://github.com/SAP/fundamental-ngx/commit/6fe4c58dd4915c313b6622f284a65a46e8f0e683))
+
+### [0.35.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.5...v0.35.2-rc.6) (2022-07-01)
+
+
+### Bug Fixes
+
+* **platform:** table empty message box-sizing ([#8306](https://github.com/SAP/fundamental-ngx/issues/8306)) ([363aa13](https://github.com/SAP/fundamental-ngx/commit/363aa134fb1bee023b5c261d635b220cdd24ff6c))
+
+### [0.35.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.4...v0.35.2-rc.5) (2022-06-30)
+
+### [0.35.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.3...v0.35.2-rc.4) (2022-06-30)
+
+### [0.35.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.2...v0.35.2-rc.3) (2022-06-29)
+
+
+### Bug Fixes
+
+* **core:** popovers inside wizard scrollable body ([#8288](https://github.com/SAP/fundamental-ngx/issues/8288)) ([8b1eebd](https://github.com/SAP/fundamental-ngx/commit/8b1eebdaf338be7573a0ed3a167546718c7ed2b9))
+
+### [0.35.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.1...v0.35.2-rc.2) (2022-06-29)
+
+
+### Bug Fixes
+
+* **core/platform:** time-picker - a11y issues ([#8087](https://github.com/SAP/fundamental-ngx/issues/8087)) ([53161b9](https://github.com/SAP/fundamental-ngx/commit/53161b997c1e6028a4e5591f97d542e53ab6984a))
+
+### [0.35.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.0...v0.35.2-rc.1) (2022-06-28)
+
+
+### Bug Fixes
+
+* **core:** fixed card layout improvements, tabs issue ([#8265](https://github.com/SAP/fundamental-ngx/issues/8265)) ([5e39ba0](https://github.com/SAP/fundamental-ngx/commit/5e39ba035ca8715059e2ee1bcffefa37a708af06))
+
+### [0.35.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.35.1...v0.35.2-rc.0) (2022-06-24)
+
+
+### Features
+
+* **core:** overflow layout component ([#8254](https://github.com/SAP/fundamental-ngx/issues/8254)) ([5fa82be](https://github.com/SAP/fundamental-ngx/commit/5fa82bef4816b8dd64f789ad1a90afd9fb915645))
+
+### [0.35.1](https://github.com/SAP/fundamental-ngx/compare/v0.35.1-rc.2...v0.35.1) (2022-06-24)
+
+### [0.35.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.35.1-rc.1...v0.35.1-rc.2) (2022-06-24)
+
+
+### Bug Fixes
+
+* **core:** cdk reference in schematics ([#8274](https://github.com/SAP/fundamental-ngx/issues/8274)) ([6e737e1](https://github.com/SAP/fundamental-ngx/commit/6e737e13f18b99c90d59054b78c7b2ce152cdc19))
+
+### [0.35.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.35.1-rc.0...v0.35.1-rc.1) (2022-06-24)
+
+
+### Features
+
+* **core:** configurable flexible column layout ([#8262](https://github.com/SAP/fundamental-ngx/issues/8262)) ([9c4d029](https://github.com/SAP/fundamental-ngx/commit/9c4d0291c2acb958c20566f6b8426e249edd5cec))
+
+### [0.35.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.35.0...v0.35.1-rc.0) (2022-06-23)
+
+
+### Bug Fixes
+
+* **core:** modified ng-add schema of core to include theme in client project ([#8272](https://github.com/SAP/fundamental-ngx/issues/8272)) ([c3c4b5c](https://github.com/SAP/fundamental-ngx/commit/c3c4b5c64824b74d6e101af2d9903441a9a408af))
+
+## [0.35.0](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.28...v0.35.0) (2022-06-23)
+
+
+### Bug Fixes
+
+* **ci:** fixed release script ([#8269](https://github.com/SAP/fundamental-ngx/issues/8269)) ([b7fd171](https://github.com/SAP/fundamental-ngx/commit/b7fd17104ae67cce52b6ada6087c200afbdcf755))
+
+## [0.35.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.27...v0.35.0-rc.28) (2022-06-23)
+
+## [0.35.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.26...v0.35.0-rc.27) (2022-06-23)
+
+
+### Bug Fixes
+
+* **core,platform:** add inputs for datetimepicker ok/cancel buttons ([#8263](https://github.com/SAP/fundamental-ngx/issues/8263)) ([ff55731](https://github.com/SAP/fundamental-ngx/commit/ff55731d832c997c82d4f86bf2440cb8f93001db))
+
+## [0.35.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.25...v0.35.0-rc.26) (2022-06-23)
+
+
+### Features
+
+* **core:** table - a11y issues ([#8184](https://github.com/SAP/fundamental-ngx/issues/8184)) ([c817fe8](https://github.com/SAP/fundamental-ngx/commit/c817fe8ed94ff521ee2e565d845a25deabcb4bd2))
+
 ## [0.35.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.35.0-rc.24...v0.35.0-rc.25) (2022-06-22)
 
 

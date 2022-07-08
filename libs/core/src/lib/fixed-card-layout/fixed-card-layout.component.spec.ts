@@ -63,8 +63,8 @@ describe('FixedCardLayoutComponent', () => {
     });
 
     describe('Columns calculation', () => {
-        const sizes = [1664, 1600, 992, 656, 500, 300, 0];
-        const columns = [5, 4, 3, 2, 1, 1, 1];
+        const sizes = [1664, 1600, 992, 656, 500, 300];
+        const columns = [5, 4, 3, 2, 1, 1];
 
         for (let i = 0; i < sizes.length; i++) {
             it(`should have ${columns[i]} columns on Laptop width size value of ${sizes[i]}px`, async () => {

@@ -18,7 +18,7 @@ import { Component } from '@angular/core';
         </div>
         <div>
             <p>Compact:</p>
-            <fd-checkbox [(ngModel)]="checkboxValue7" [compact]="true" label="Compact label"></fd-checkbox>
+            <fd-checkbox [(ngModel)]="checkboxValue7" fdCompact label="Compact label"></fd-checkbox>
         </div>
     `
 })

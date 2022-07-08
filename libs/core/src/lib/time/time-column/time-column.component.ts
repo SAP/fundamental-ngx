@@ -21,7 +21,7 @@ import { buffer, debounceTime, filter, map, tap } from 'rxjs/operators';
 import { DOWN_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 
 import { KeyUtil } from '@fundamental-ngx/core/utils';
-import { CarouselDirective, CarouselItemDirective, CarouselConfig, PanEndOutput } from '@fundamental-ngx/core/carousel';
+import { CarouselConfig, CarouselDirective, CarouselItemDirective, PanEndOutput } from '@fundamental-ngx/core/carousel';
 
 import { TimeColumnConfig } from './time-column-config';
 import { SelectableViewItem } from '../models';
@@ -49,10 +49,6 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     /** items in row */
     @Input()
     rows: T[] = [];
-
-    /** items in row */
-    @Input()
-    compact = false;
 
     /**
      * @Input When set to false, hides the buttons that increment

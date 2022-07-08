@@ -179,6 +179,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'old-content-density',
+                loadChildren: () =>
+                    import('./component-docs/old-content-density/content-density-docs.module').then(
+                        (m) => m.ContentDensityDocsModule
+                    )
+            },
+            {
                 path: 'content-density',
                 loadChildren: () =>
                     import('./component-docs/content-density/content-density-docs.module').then(
@@ -541,6 +548,13 @@ export const ROUTES: Routes = [
                 path: 'scrollbar',
                 loadChildren: () =>
                     import('./component-docs/scrollbar/scrollbar-docs.module').then((m) => m.ScrollbarDocsModule)
+            },
+            {
+                path: 'overflow-layout',
+                loadChildren: () =>
+                    import('./component-docs/overflow-layout/overflow-layout-docs.module').then(
+                        (m) => m.OverflowLayoutDocsModule
+                    )
             }
         ]
     }

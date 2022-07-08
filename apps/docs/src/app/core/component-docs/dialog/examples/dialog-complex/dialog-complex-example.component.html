@@ -21,7 +21,7 @@
                             placement="after"
                             placeholder="Search"
                             [button]="true"
-                            [compact]="true"
+                            fdCompact
                             [buttonFocusable]="false"
                             [(ngModel)]="searchedPhrase"
                         >
@@ -31,8 +31,8 @@
             </ng-template>
         </fd-dialog-header>
 
-        <fd-dialog-body>
-            <ul *ngIf="(dialogRef.onLoading | async) === false" fd-list [compact]="true">
+        <fd-dialog-body fdCompact>
+            <ul *ngIf="(dialogRef.onLoading | async) === false" fd-list>
                 <li
                     *ngFor="let fruit of filterFruits(fruitCollection, searchedPhrase)"
                     fd-list-item
@@ -56,7 +56,7 @@
                         glyph="cart"
                         fdType="emphasized"
                         label="Checkout"
-                        [compact]="true"
+                        fdCompact
                         (click)="checkout()"
                         ariaLabel="Checkout Emphasized"
                     >

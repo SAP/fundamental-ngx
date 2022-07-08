@@ -1,27 +1,29 @@
 import {
-    Component,
-    OnInit,
-    OnChanges,
-    ElementRef,
-    ViewEncapsulation,
+    AfterViewChecked,
     ChangeDetectionStrategy,
-    Input,
-    HostBinding,
-    OnDestroy,
-    Optional,
+    Component,
     ContentChild,
-    AfterViewChecked
+    ElementRef,
+    HostBinding,
+    Input,
+    OnChanges,
+    OnDestroy,
+    OnInit,
+    ViewEncapsulation
 } from '@angular/core';
 
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 import equal from 'fast-deep-equal';
 
-import { CLASS_NAME, CardType } from './constants';
+import { CardType, CLASS_NAME } from './constants';
 import { Subscription } from 'rxjs';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { getCardModifierClassNameByCardType } from './utils';
 import { FD_CARD_CONTAINER } from './card.tokens';
+import {
+    ContentDensityObserver,
+    contentDensityObserverProviders,
+    ContentDensityMode
+} from '@fundamental-ngx/core/content-density';
 
 let cardId = 0;
 
@@ -30,17 +32,18 @@ let cardId = 0;
     templateUrl: './card.component.html',
     styleUrls: ['./card.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        contentDensityObserverProviders({
+            modifiers: {
+                [ContentDensityMode.COMPACT]: CLASS_NAME.cardCompact
+            }
+        })
+    ]
 })
 export class CardComponent implements OnChanges, AfterViewChecked, OnInit, CssClassBuilder, OnDestroy {
     /** Badge */
     @Input() badge: string;
-
-    /**
-     * Whether to apply compact mode
-     */
-    @Input()
-    compact?: boolean;
 
     /** Indicates when card should show a loader  */
     @Input()
@@ -75,7 +78,6 @@ export class CardComponent implements OnChanges, AfterViewChecked, OnInit, CssCl
         return [
             CLASS_NAME.card,
             this.cardType ? getCardModifierClassNameByCardType(this.cardType) : '',
-            this.compact ? CLASS_NAME.cardCompact : '',
             this.cardContainer?.containsList ? CLASS_NAME.cardList : ''
         ];
     }
@@ -87,10 +89,9 @@ export class CardComponent implements OnChanges, AfterViewChecked, OnInit, CssCl
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    constructor(
-        private _elementRef: ElementRef<HTMLElement>,
-        @Optional() private _contentDensityService: ContentDensityService
-    ) {}
+    constructor(private _elementRef: ElementRef<HTMLElement>, private _contentDensityObserver: ContentDensityObserver) {
+        _contentDensityObserver.subscribe();
+    }
 
     /** @hidden */
     ngOnChanges(): void {
@@ -107,14 +108,6 @@ export class CardComponent implements OnChanges, AfterViewChecked, OnInit, CssCl
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                    this.buildComponentCssClass();
-                })
-            );
-        }
     }
 
     /** @hidden */

@@ -1,0 +1,59 @@
+<fd-docs-section-title id="default" componentName="OverflowLayout">
+    Overflow Layout Standard Usage
+</fd-docs-section-title>
+<description>
+    <p>
+        Overflow Layout calculates available space based on the summed width of the elements with the applied
+        <code>fdOverflowLayoutItem</code> and <code>*fdOverflowItemRef</code> directives.
+    </p>
+    <p>
+        If the width of the parent container is not sufficient to fill all items, Overflow Layout will automatically
+        create a "More" button with the rest of the items inside a popover component.
+    </p>
+    <p>
+        If items inside Overflow Layout should be focusable, developers can pass <code>[focusable]="true"</code> input
+        property.
+    </p>
+    <p>
+        Overflow Layout reacts to the main element resize and to each item resize to fit items without user interaction.
+    </p>
+    <p>
+        Additionally, developers can pass maximum visible items amount via <code>[maxVisibleItems]</code> input
+        property.
+    </p>
+</description>
+<component-example>
+    <fd-overflow-layout-default-example></fd-overflow-layout-default-example>
+</component-example>
+<code-example [exampleFiles]="overflowLayoutDefaultExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="forced-visibility" componentName="OverflowLayout">
+    Forcing visibility of the items
+</fd-docs-section-title>
+<description>
+    <p>Developers can force visibility of the item if needed.</p>
+    <p>To force the visibility, set <code>[forceVisibility]</code> input property to <code>true</code>.</p>
+</description>
+<component-example>
+    <fd-overflow-layout-always-visible-example></fd-overflow-layout-always-visible-example>
+</component-example>
+<code-example [exampleFiles]="overflowLayoutVisibleItemsExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="complex" componentName="OverflowLayout">
+    Overflow Layout Complex example
+</fd-docs-section-title>
+<description>
+    <p>
+        Developers are able to define own "More" button template and it's logic with
+        <code>*fdOverflowExpand</code> directive.
+    </p>
+    <p>This directive returns array of hidden items with their template references.</p>
+</description>
+<component-example>
+    <fd-overflow-layout-complex-example></fd-overflow-layout-complex-example>
+</component-example>
+<code-example [exampleFiles]="overflowLayoutComplexExample"></code-example>

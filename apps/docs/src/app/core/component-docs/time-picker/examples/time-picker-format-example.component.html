@@ -1,4 +1,4 @@
 <fd-time-picker [(ngModel)]="time" [displayFormat]="displayFormat"></fd-time-picker>
 <br />
 Selected Time:
-<ng-container *ngIf="time"> {{ time.hour }}h {{ time.minute }}m {{ time.second }}s </ng-container>
+<ng-container *ngIf="time"> {{ time.toDate() | date: 'shortTime' }} </ng-container>

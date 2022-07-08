@@ -15,7 +15,7 @@ import {
     ToolbarOverflowGroupingExampleComponent,
     ToolbarSizeExampleComponent
 } from './examples/toolbar-example.component';
-import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
+import { DeprecatedToolbarSizeDirective, ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { SplitButtonModule } from '@fundamental-ngx/core/split-button';
@@ -27,6 +27,7 @@ import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { DatetimePickerModule } from '@fundamental-ngx/core/datetime-picker';
 import { ToolbarOverflowExampleComponent } from './examples/toolbar-overflow-example.component';
 import { TitleModule } from '@fundamental-ngx/core/title';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
 
 const examples = [
     ToolbarTypeExampleComponent,
@@ -67,6 +68,7 @@ const routes: Routes = [
         TitleModule
     ],
     exports: [RouterModule],
-    declarations: [ToolbarDocsComponent, ToolbarHeaderComponent, ...examples]
+    declarations: [ToolbarDocsComponent, ToolbarHeaderComponent, ...examples],
+    providers: [moduleDeprecationsProvider(DeprecatedToolbarSizeDirective)]
 })
 export class ToolbarDocsModule {}
