@@ -5,7 +5,11 @@
                 <fd-icon
                     *ngIf="_userToShowDetails && _data.node?.approvers && _data.node!.approvers!.length > 1"
                     [glyph]="'navigation-' + (_data.rtl ? 'right' : 'left') + '-arrow'"
+                    tabindex="0"
+                    role="button"
                     (click)="_exitUserDetailsMode()"
+                    (keyup.space)="_exitUserDetailsMode()"
+                    (keyup.enter)="_exitUserDetailsMode()"
                 ></fd-icon>
                 <ng-container *ngIf="_isListMode && !_userToShowDetails; else defaultHeader"
                     >{{ _data.node?.description }} ({{ _data.node?.approvers?.length ?? 0 }})</ng-container

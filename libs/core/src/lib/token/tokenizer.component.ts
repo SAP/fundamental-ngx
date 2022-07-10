@@ -1,6 +1,5 @@
 import {
     AfterContentInit,
-    AfterViewChecked,
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -25,8 +24,8 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { A, BACKSPACE, DELETE, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
-import { fromEvent, Subject, Subscription } from 'rxjs';
-import { filter, takeUntil, tap } from 'rxjs/operators';
+import { fromEvent, merge, Subject, Subscription } from 'rxjs';
+import { filter, mapTo, takeUntil, debounceTime } from 'rxjs/operators';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { applyCssClass, CssClassBuilder, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { TokenComponent } from './token.component';
@@ -41,7 +40,7 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
     providers: [contentDensityObserverProviders()]
 })
 export class TokenizerComponent
-    implements AfterViewChecked, AfterViewInit, AfterContentInit, OnDestroy, CssClassBuilder, OnInit, OnChanges
+    implements AfterViewInit, AfterContentInit, OnDestroy, CssClassBuilder, OnInit, OnChanges
 {
     /** user's custom classes */
     @Input()
@@ -65,14 +64,14 @@ export class TokenizerComponent
 
     /** @hidden */
     @ViewChild('tokenizerInner')
-    tokenizerInnerEl: ElementRef;
+    tokenizerInnerEl: ElementRef<HTMLDivElement>;
 
     /** @hidden */
     @ViewChild('moreElement')
-    moreElement: ElementRef;
+    moreElement: ElementRef<HTMLElement>;
 
     /** @hidden */
-    @ViewChild('inputGroupAddOn') set content(content: ElementRef) {
+    @ViewChild('inputGroupAddOn') set content(content: ElementRef<HTMLElement>) {
         this.inputGroupAddonEl = content;
     }
 
@@ -190,14 +189,6 @@ export class TokenizerComponent
         if (this.input && this.input.elementRef()) {
             this._inputKeydownEvent();
         }
-    }
-
-    /** @hidden */
-    ngAfterViewChecked(): void {
-        if (this.tokenList) {
-            this.previousTokenCount = this.tokenList.length;
-        }
-        this.handleTokenClickSubscriptions();
         // watch for changes to the tokenList and attempt to expand/collapse tokens as needed
         if (this.tokenListChangesSubscription) {
             this.tokenListChangesSubscription.unsubscribe();
@@ -275,6 +266,11 @@ export class TokenizerComponent
                     }
                 })
             );
+            this.tokenListClickSubscriptions.push(
+                token.onTokenKeydown.subscribe((event) => {
+                    this.handleKeyDown(event, index);
+                })
+            );
         });
     }
 
@@ -285,27 +281,10 @@ export class TokenizerComponent
         if (tokenListArray[newIndex]) {
             elementToFocus = tokenListArray[newIndex].tokenWrapperElement.nativeElement;
             // element needs tabindex in order to be focused
-            elementToFocus!.setAttribute('tabindex', '0');
             elementToFocus!.focus();
-            this.addKeyboardListener(elementToFocus!, newIndex);
         }
 
         return elementToFocus;
-    }
-
-    /** @hidden */
-    addKeyboardListener(element: HTMLElement, newIndex: number): void {
-        // function needs to be defined in order to be referenced later by addEventListener/removeEventListener
-        const handleFunctionReference = (e): void => {
-            if (newIndex || newIndex === 0) {
-                this.handleKeyDown(e, newIndex);
-            }
-        };
-        element.addEventListener('keydown', handleFunctionReference);
-        element.addEventListener('blur', () => {
-            element.setAttribute('tabindex', '-1');
-            element.removeEventListener('keydown', handleFunctionReference);
-        });
     }
 
     /** @hidden */
@@ -509,6 +488,7 @@ export class TokenizerComponent
         }
         this.handleTokenClickSubscriptions();
         this.previousTokenCount = this.tokenList.length;
+        this.tokenList.forEach((token) => token._setTotalCount(this.tokenList.length));
     }
 
     /** @hidden */
@@ -681,30 +661,27 @@ export class TokenizerComponent
     }
 
     /** @hidden */
-    private _isControlKey(keyboardEvent: KeyboardEvent): boolean {
+    private _isControlKey(keyboardEvent: KeyboardEvent | MouseEvent): boolean {
         return keyboardEvent.ctrlKey || keyboardEvent.metaKey;
     }
 
     /** @hidden */
     private _listenElementEvents(): void {
-        fromEvent<Event>(this.elementRef().nativeElement, 'focus', { capture: true })
-            .pipe(
+        merge(
+            fromEvent<Event>(this.elementRef().nativeElement, 'focus', { capture: true }).pipe(
                 filter((event) => (event['target'] as any)?.tagName === 'INPUT' && this.tokenizerFocusable),
-                tap(() => {
-                    this._tokenizerHasFocus = true;
-                    this._cdRef.markForCheck();
-                }),
-                takeUntil(this._onDestroy$)
-            )
-            .subscribe();
-        fromEvent(this.elementRef().nativeElement, 'blur', { capture: true })
+                mapTo(true)
+            ),
+            fromEvent<Event>(this.elementRef().nativeElement, 'blur', { capture: true }).pipe(mapTo(false))
+        )
             .pipe(
-                tap(() => {
-                    this._tokenizerHasFocus = false;
-                    this._cdRef.markForCheck();
-                }),
+                // debounceTime is needed in order to filter subsequent focus-blur events, that happen simultaneously
+                debounceTime(10),
                 takeUntil(this._onDestroy$)
             )
-            .subscribe();
+            .subscribe((focused) => {
+                this._tokenizerHasFocus = focused;
+                this._cdRef.markForCheck();
+            });
     }
 }

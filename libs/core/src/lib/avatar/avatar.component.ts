@@ -1,4 +1,5 @@
 import {
+    Attribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -55,6 +56,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     /** Aria-label for Avatar. */
     @Input()
     @HostBinding('attr.aria-label')
+    @HostBinding('attr.alt')
     ariaLabel: Nullable<string> = null;
 
     /** Aria-Labelledby for element describing Avatar. */
@@ -148,7 +150,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     }
 
     /** Event emitted when avatar clicked. Only fires if clickable input property set to true. */
-    @Output() avatarClicked = new EventEmitter<void>();
+    @Output() avatarClicked = new EventEmitter<Event>();
 
     /** Event emitted when zoom icon clicked. Only fires if zoomGlyph input property is set. */
     @Output() zoomGlyphClicked = new EventEmitter<void>();
@@ -191,6 +193,9 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
 
     /** @hidden */
     get _tabindex(): number | null {
+        if (this.hostTabindex != null) {
+            return this.hostTabindex;
+        }
         return this.clickable ? 0 : null;
     }
 
@@ -200,7 +205,11 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     }
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef, private _cdr: ChangeDetectorRef) {}
+    constructor(
+        private _elementRef: ElementRef,
+        private _cdr: ChangeDetectorRef,
+        @Attribute('tabindex') private hostTabindex: number | null
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -239,12 +248,12 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     }
 
     /** @hidden */
-    @HostListener('click')
-    @HostListener('keyup.enter')
-    @HostListener('keyup.space')
-    _onClick(): void {
+    @HostListener('click', ['$event'])
+    @HostListener('keydown.enter', ['$event'])
+    @HostListener('keydown.space', ['$event'])
+    _onClick(event: Event): void {
         if (this.clickable) {
-            this.avatarClicked.emit();
+            this.avatarClicked.emit(event);
         }
     }
 

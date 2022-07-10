@@ -86,7 +86,7 @@ $carousel-controls-height--edit-mode: 7.875rem;
 
     &__graph-container {
         position: relative;
-        overflow: hidden;
+        overflow: auto;
         padding-top: 0.5rem;
         padding-bottom: 2rem;
         padding-left: 2rem;

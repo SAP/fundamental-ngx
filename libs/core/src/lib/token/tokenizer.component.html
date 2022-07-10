@@ -4,7 +4,9 @@
     [class.fd-tokenizer--compact]="compact"
 >
     <div class="fd-tokenizer__inner" #tokenizerInner>
-        <ng-content select="fd-token"></ng-content>
+        <div role="listbox">
+            <ng-content select="fd-token"></ng-content>
+        </div>
 
         <ng-container *ngIf="_showOverflowPopover && (compact || compactCollapse); else moreElement">
             <ng-container *ngTemplateOutlet="tokensOverflow"></ng-container>
@@ -57,6 +59,8 @@
             !_tokenizerHasFocus
         "
         class="fd-tokenizer-more"
+        role="button"
+        tabindex="0"
         #moreElement
     >
         <ng-container *ngIf="compact || compactCollapse">

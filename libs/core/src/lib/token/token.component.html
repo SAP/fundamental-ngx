@@ -2,8 +2,11 @@
     #tokenWrapperElement
     class="fd-token"
     role="option"
+    tabindex="0"
+    [attr.aria-setsize]="totalCount"
     [attr.aria-roledescription]="ariaRoleDescription"
     (click)="tokenClickHandler($event)"
+    (keydown)="onTokenKeydown.emit($event)"
     [class.fd-token__disabled]="disabled"
     [class.fd-token--compact]="_contentDensityObserver.isCompact$ | async"
     [class.fd-token--selected]="selected"

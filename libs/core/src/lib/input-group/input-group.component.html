@@ -33,6 +33,7 @@
                 [glyph]="glyph"
                 [class.fd-shellbar__button]="inShellbar"
                 [class.is-expanded]="isExpanded"
+                [attr.aria-haspopup]="isControl"
                 [attr.aria-expanded]="inShellbar ? isExpanded : null"
                 [ariaLabel]="glyphAriaLabel || glyph || addOnText"
                 [attr.aria-controls]="_inputId"
