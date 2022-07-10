@@ -14,12 +14,20 @@ import {
     FdLanguage,
     FD_LANGUAGE,
     FD_LANGUAGE_ALBANIAN,
+    FD_LANGUAGE_BULGARIAN,
+    FD_LANGUAGE_CHINESE,
+    FD_LANGUAGE_CROATIAN,
     FD_LANGUAGE_ENGLISH,
+    FD_LANGUAGE_FRENCH,
+    FD_LANGUAGE_GEORGIAN,
+    FD_LANGUAGE_GERMAN,
     FD_LANGUAGE_ITALIAN,
+    FD_LANGUAGE_PORTUGUESE,
+    FD_LANGUAGE_ROMANIAN,
     FD_LANGUAGE_RUSSIAN,
+    FD_LANGUAGE_SPANISH,
     FD_LANGUAGE_TURKISH,
-    FD_LANGUAGE_UKRAINIAN,
-    FD_LANGUAGE_GEORGIAN
+    FD_LANGUAGE_UKRAINIAN
 } from '@fundamental-ngx/i18n';
 
 const urlContains = (themeName: string, search: string): boolean => themeName.toLowerCase().includes(search);
@@ -57,13 +65,21 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
     versions: any[];
 
     translations = [
+        { name: 'Albanian', value: FD_LANGUAGE_ALBANIAN },
+        { name: 'Български', value: FD_LANGUAGE_BULGARIAN },
+        { name: '中国人', value: FD_LANGUAGE_CHINESE },
+        { name: 'Hrvatski', value: FD_LANGUAGE_CROATIAN },
         { name: 'English', value: FD_LANGUAGE_ENGLISH },
-        { name: 'Georgian', value: FD_LANGUAGE_GEORGIAN },
-        { name: 'Ukrainian', value: FD_LANGUAGE_UKRAINIAN },
-        { name: 'Italian', value: FD_LANGUAGE_ITALIAN },
-        { name: 'Turkish', value: FD_LANGUAGE_TURKISH },
-        { name: 'Russian', value: FD_LANGUAGE_RUSSIAN },
-        { name: 'Albanian', value: FD_LANGUAGE_ALBANIAN }
+        { name: 'Français', value: FD_LANGUAGE_FRENCH },
+        { name: 'ქართული', value: FD_LANGUAGE_GEORGIAN },
+        { name: 'Deutsch', value: FD_LANGUAGE_GERMAN },
+        { name: 'Italiana', value: FD_LANGUAGE_ITALIAN },
+        { name: 'Português', value: FD_LANGUAGE_PORTUGUESE },
+        { name: 'Română', value: FD_LANGUAGE_ROMANIAN },
+        { name: 'Русский', value: FD_LANGUAGE_RUSSIAN },
+        { name: 'Española', value: FD_LANGUAGE_SPANISH },
+        { name: 'Türkçe', value: FD_LANGUAGE_TURKISH },
+        { name: 'Українська', value: FD_LANGUAGE_UKRAINIAN }
     ];
 
     items: ShellbarMenuItem[] = [
