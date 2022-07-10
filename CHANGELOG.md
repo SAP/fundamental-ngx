@@ -1,4 +1,11 @@
 
+### [0.35.2-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.12...v0.35.2-rc.13) (2022-07-10)
+
+
+### Bug Fixes
+
+* **platform:** approval flow - a11y issues ([#8164](https://github.com/SAP/fundamental-ngx/issues/8164)) ([528d2c7](https://github.com/SAP/fundamental-ngx/commit/528d2c748b8c29b34577c7ab7813785f91900f7c))
+
 ### [0.35.2-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.11...v0.35.2-rc.12) (2022-07-07)
 
 ### [0.35.2-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.10...v0.35.2-rc.11) (2022-07-07)
