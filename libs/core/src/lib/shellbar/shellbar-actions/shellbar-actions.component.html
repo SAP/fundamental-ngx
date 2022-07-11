@@ -2,8 +2,18 @@
     <ng-content select="fd-combobox"></ng-content>
 </div>
 
+<div class="fd-shellbar__action" [class.fd-shellbar__action--desktop]="!enableSearchComponentOnMobileMode">
+    <fd-shellbar-search
+        [showInput]="showInput"
+        [mobileMode]="enableSearchComponentOnMobileMode"
+        (cancleClick)="handleCancleInMobileMode($event)"
+    ></fd-shellbar-search>
+</div>
+
 <div class="fd-shellbar__action fd-shellbar__action--mobile">
     <fd-shellbar-actions-mobile
+        [isSearch]="enableSearchComponentOnMobileMode"
+        (enableSearchInMobile)="handleClickSearch($event)"
         [shellbarActions]="shellbarActions"
         [collapsedItemMenuLabel]="collapsedItemMenuLabel"
     ></fd-shellbar-actions-mobile>

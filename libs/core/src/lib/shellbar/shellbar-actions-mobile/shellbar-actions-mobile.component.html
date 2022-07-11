@@ -1,5 +1,5 @@
 <div class="fd-shellbar-collapse">
-    <fd-action-sheet placement="bottom-end">
+    <fd-action-sheet *ngIf="!isSearch" placement="bottom-end">
         <fd-action-sheet-control>
             <button
                 fd-button
@@ -15,6 +15,7 @@
         </fd-action-sheet-control>
 
         <fd-action-sheet-body>
+            <li fd-action-sheet-item tabindex="-1" glyph="search" label="Search" (click)="showSearchField()"></li>
             <li
                 fd-action-sheet-item
                 *ngFor="let action of shellbarActions"

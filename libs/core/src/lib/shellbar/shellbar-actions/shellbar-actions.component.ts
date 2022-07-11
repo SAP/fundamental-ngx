@@ -84,6 +84,19 @@ export class ShellbarActionsComponent {
     @ContentChild(ProductSwitchComponent, { static: false })
     productSwitchComponent: ProductSwitchComponent;
 
+    enableSearchComponentOnMobileMode = false;
+
+    showInput = false;
+
+    handleClickSearch(data: boolean): void {
+        this.enableSearchComponentOnMobileMode = data;
+        this.showInput = true;
+    }
+
+    handleCancleInMobileMode(data: boolean): void {
+        this.enableSearchComponentOnMobileMode = data;
+    }
+
     /** @hidden */
     triggerItems(): void {
         if (this.closePopoverOnSelect) {

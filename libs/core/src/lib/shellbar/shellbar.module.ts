@@ -12,6 +12,7 @@ import { ShellbarActionsComponent } from './shellbar-actions/shellbar-actions.co
 import { ShellbarActionComponent } from './shellbar-action/shellbar-action.component';
 import { ShellbarLogoComponent } from './shellbar-logo/shellbar-logo.component';
 import { ShellbarTitleComponent } from './shellbar-title/shellbar-title.component';
+import { ShellbarSearchComponent } from './shellbar-search/shellbar-search.component';
 
 import { ShellbarUserMenuComponent } from './user-menu/shellbar-user-menu.component';
 import { IconModule } from '@fundamental-ngx/core/icon';
@@ -21,6 +22,8 @@ import { ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
 import { ShellbarSidenavDirective } from './shellbar-sidenav.directive';
 import { ShellbarActionsMobileComponent } from './shellbar-actions-mobile/shellbar-actions-mobile.component';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
+
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 
 @NgModule({
     declarations: [
@@ -33,7 +36,8 @@ import { AvatarModule } from '@fundamental-ngx/core/avatar';
         ShellbarLogoComponent,
         ShellbarTitleComponent,
         ShellbarUserMenuComponent,
-        ShellbarSidenavDirective
+        ShellbarSidenavDirective,
+        ShellbarSearchComponent
     ],
     imports: [
         CommonModule,
@@ -45,7 +49,8 @@ import { AvatarModule } from '@fundamental-ngx/core/avatar';
         DragDropModule,
         ProductSwitchModule,
         IconModule,
-        AvatarModule
+        AvatarModule,
+        InputGroupModule
     ],
     exports: [
         ShellbarComponent,

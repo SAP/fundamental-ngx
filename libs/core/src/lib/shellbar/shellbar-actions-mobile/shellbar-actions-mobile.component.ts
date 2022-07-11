@@ -2,11 +2,15 @@ import {
     AfterContentChecked,
     ChangeDetectionStrategy,
     Component,
+    EventEmitter,
     Input,
+    Output,
     QueryList,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.component';
+import { ActionSheetComponent } from '@fundamental-ngx/core/action-sheet';
 
 @Component({
     selector: 'fd-shellbar-actions-mobile',
@@ -15,6 +19,9 @@ import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.comp
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShellbarActionsMobileComponent implements AfterContentChecked {
+    @ViewChild(ActionSheetComponent)
+    actionSheetComponent: ActionSheetComponent;
+
     /** @hidden */
     @Input()
     shellbarActions: QueryList<ShellbarActionComponent>;
@@ -22,6 +29,11 @@ export class ShellbarActionsMobileComponent implements AfterContentChecked {
     /** @hidden */
     @Input()
     collapsedItemMenuLabel: string;
+
+    @Input()
+    isSearch: boolean;
+
+    @Output() enableSearchInMobile = new EventEmitter();
 
     /** @hidden */
     totalNotifications: number;
@@ -31,6 +43,13 @@ export class ShellbarActionsMobileComponent implements AfterContentChecked {
         if (item.callback) {
             item.callback(event);
         }
+        this.actionSheetComponent.close();
+    }
+
+    showSearchField(): void {
+        this.isSearch = true;
+        this.enableSearchInMobile.emit(this.isSearch);
+        this.actionSheetComponent.close();
     }
 
     /** @hidden */
