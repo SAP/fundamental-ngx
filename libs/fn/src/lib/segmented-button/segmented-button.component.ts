@@ -49,7 +49,7 @@ import {
         SelectionService
     ]
 })
-export class SegmentedButtonComponent<T>
+export class SegmentedButtonComponent<T = any>
     implements SelectComponentRootToken<T>, ControlValueAccessor, AfterContentInit, OnDestroy
 {
     /**

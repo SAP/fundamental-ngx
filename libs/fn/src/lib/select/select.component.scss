@@ -1,4 +1,7 @@
+@import '~@angular/cdk/overlay-prebuilt';
+
 @import '~@fundamental-styles/fn/dist/fn-input';
+// TODO: After component is migrated to ngx, remove styling and use component.
 @import '~@fundamental-styles/fn/dist/fn-nested-button';
 
 // TODO: address in fundamental-styles
@@ -40,6 +43,11 @@
     :hover {
         color: #223548;
         background: #f5f6f7;
+    }
+
+    &.focus-visible {
+        box-shadow: 0 0 0 0.125rem #0070f2;
+        outline: none;
     }
 }
 

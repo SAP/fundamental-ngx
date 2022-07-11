@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SegmentedButtonComponent } from '@fundamental-ngx/fn/segmented-button';
 import { Component, Directive, ElementRef, Input, ViewChild } from '@angular/core';
 import { SelectableItemToken } from '@fundamental-ngx/fn/cdk';
+import { Observable } from 'rxjs';
 
 @Directive({
     selector: '[fnTestSelection]',
@@ -11,6 +12,8 @@ import { SelectableItemToken } from '@fundamental-ngx/fn/cdk';
 class TestSelectionDirective implements SelectableItemToken<string> {
     @Input('fnTestSelection') value!: string;
     selected = false;
+
+    clicked: Observable<MouseEvent | KeyboardEvent> = new Observable<MouseEvent | KeyboardEvent>();
 
     constructor(private _elementRef: ElementRef<HTMLElement>) {}
 

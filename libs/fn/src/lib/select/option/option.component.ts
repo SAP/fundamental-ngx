@@ -1,3 +1,4 @@
+import { FocusableOption } from '@angular/cdk/a11y';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -7,9 +8,14 @@ import {
     HostBinding,
     HostListener,
     Input,
+    OnDestroy,
+    Optional,
     Output,
     ViewEncapsulation
 } from '@angular/core';
+import { FnClickedProvider } from '@fundamental-ngx/fn/cdk';
+import { Subject, takeUntil } from 'rxjs';
+import { SelectComponent } from '../select.component';
 
 /**
  * Used to represent an option of the select component.
@@ -20,18 +26,19 @@ import {
     templateUrl: './option.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [FnClickedProvider],
     host: {
         role: 'option',
         class: 'fn-select__item',
         '[attr.tabindex]': 'tabindex'
     }
 })
-export class OptionComponent {
+export class OptionComponent implements OnDestroy, FocusableOption {
     /** Value of the option. Similar to how a native select operates. */
     @Input()
     value: string | any;
 
-    /** Whether or not this option is selected. */
+    /** Whether this option is selected. */
     @HostBinding('class.fn-select__item--selected')
     @Input()
     selected = false;
@@ -44,19 +51,29 @@ export class OptionComponent {
     @Output()
     optionClicked: EventEmitter<OptionComponent> = new EventEmitter<OptionComponent>();
 
+    /** Whether this option is hidden */
+    hidden = false;
+
+    /** @hidden */
+    private readonly _destroyed$ = new Subject<void>();
+
     /** @hidden */
     @HostListener('focusout')
     _onBlur(): void {
         this._elRef.nativeElement.classList.remove('focus-visible');
     }
 
-    /** @hidden */
-    @HostListener('click')
-    _optionClicked(): void {
-        this.optionClicked.emit(this);
+    constructor(
+        private _elRef: ElementRef,
+        private _cdRef: ChangeDetectorRef,
+        @Optional() private _selectComponent: SelectComponent | null,
+        private _clicked: FnClickedProvider
+    ) {
+        this._clicked.pipe(takeUntil(this._destroyed$)).subscribe((data) => {
+            this.optionClicked.emit(this);
+            this._selectComponent?.optionClicked(this);
+        });
     }
-
-    constructor(private _elRef: ElementRef, private _cdRef: ChangeDetectorRef) {}
 
     /** @hidden */
     get elementRef(): ElementRef {
@@ -64,7 +81,7 @@ export class OptionComponent {
     }
 
     /** @hidden */
-    _focus(): void {
+    focus(): void {
         setTimeout(() => {
             this._elRef.nativeElement.focus();
             this._elRef.nativeElement.classList.add('focus-visible');
@@ -74,10 +91,17 @@ export class OptionComponent {
     /** @hidden */
     _hide(): void {
         this._elRef.nativeElement.style.display = 'none';
+        this.hidden = true;
     }
 
     /** @hidden */
     _show(): void {
         this._elRef.nativeElement.style.display = 'list-item';
+        this.hidden = false;
+    }
+
+    ngOnDestroy(): void {
+        this._destroyed$.next();
+        this._destroyed$.complete();
     }
 }

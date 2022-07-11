@@ -25,22 +25,24 @@ export class MessageStripComponent {
 
     /** @hidden User-defined classes */
     @Input()
-    class: string;
+    class: string | null = null;
 
     /** The icon name to display. See the icon page for the list of icons
      * here: https://sap.github.io/fundamental-ngx/icon
      * */
-    @Input() glyph;
+    @Input()
+    glyph: string | null = null;
 
     /**
      * The icon font
      * Options include: 'SAP-icons', 'BusinessSuiteInAppSymbols' and 'SAP-icons-TNT'
      */
-    @Input() font: IconFont = 'SAP-icons';
+    @Input()
+    font: IconFont = 'SAP-icons';
 
     /** Aria-label for Icon. */
     @Input()
-    iconAriaLabel: string;
+    iconAriaLabel: string | null = null;
 
     /** Aria-label of the dismiss button. Default is Close */
     @Input()
@@ -48,10 +50,11 @@ export class MessageStripComponent {
 
     /** Message strip text */
     @Input()
-    label: string;
+    label: string | null = null;
 
     /** Whether message strip is dismissible. Default is true */
     @Input()
+    @HostBinding('class.fn-message-strip--dismissible')
     dismissible = true;
 
     /** Event when message strip is dismissed. */

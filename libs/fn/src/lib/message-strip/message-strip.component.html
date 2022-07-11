@@ -9,11 +9,9 @@
 <span class="fn-message-strip__text">{{ label }}</span>
 
 <button
-    *ngIf="dismissible"
-    fn-button
-    fnType="layout"
-    glyph="decline"
-    class="fn-message-strip__close-button"
-    [ariaLabel]="dismissButtonAriaLabel"
+    class="fn-nested-button fn-message-strip__close-button"
     (click)="dismiss.emit()"
-></button>
+    [attr.aria-label]="dismissButtonAriaLabel"
+>
+    <span class="sap-icon sap-icon--decline"></span>
+</button>
