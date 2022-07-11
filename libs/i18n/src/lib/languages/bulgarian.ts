@@ -1,539 +1,611 @@
 import { FdLanguage } from '../models/lang';
+import { PluralizationSet1 } from './pluralization/set1';
+
+const pluralization = new PluralizationSet1();
 
 /**
  * Default set of translations of Fundamental UI library for Bulgarian language
  */
 export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
     coreCarousel: {
-        leftNavigationBtnLabel: 'Go to previous item',
-        rightNavigationBtnLabel: 'Go to next item'
+        leftNavigationBtnLabel: 'Отиди на предишния елемент',
+        rightNavigationBtnLabel: 'Отиди на следващия елемент'
     },
     coreDatePicker: {
-        dateInputLabel: 'Date input',
-        dateRangeInputLabel: 'Date range input',
-        displayCalendarToggleLabel: 'Open picker',
-        valueStateSuccessMessage: 'Value state Success',
-        valueStateInformationMessage: 'Value state Information',
-        valueStateWarningMessage: 'Value state Warning',
-        valueStateErrorMessage: 'Value state Error'
+        dateInputLabel: 'Поле за дата',
+        dateRangeInputLabel: 'Поле за дата интервал',
+        displayCalendarToggleLabel: 'Избери дата',
+        valueStateSuccessMessage: 'Състояние Успех',
+        valueStateInformationMessage: 'Състояние Информиране',
+        valueStateWarningMessage: 'Състояние Предупреждение',
+        valueStateErrorMessage: 'Състояние Грешка'
     },
     coreDatetimePicker: {
-        datetimeInputLabel: 'Datetime input',
-        displayDatetimeToggleLabel: 'Display calendar toggle',
-        displayTypeDateLabel: 'Date',
-        displayTypeTimeLabel: 'Time'
+        datetimeInputLabel: 'Поле за дата и час',
+        displayDatetimeToggleLabel: 'Покажи/Скрий календар',
+        displayTypeDateLabel: 'Дата',
+        displayTypeTimeLabel: 'Час'
     },
     coreFeedListItem: {
-        moreLabel: 'More',
-        lessLabel: 'Less'
+        moreLabel: 'Повече',
+        lessLabel: 'По-малко'
     },
     coreGridList: {
-        filterBarCancelButtonTitle: 'Cancel',
-        listItemStatusAriaLabel: 'Item has status. Status: {{ status }}.',
-        listItemCounterAriaLabel: 'Item has {{ count }} children.',
-        listItemButtonDetailsTitle: 'Details',
-        listItemButtonDeleteTitle: 'Delete',
-        listItemStatusContainsErrors: 'Contains errors',
-        listItemStatusLocked: 'Locked',
-        listItemStatusDraft: 'Draft'
+        filterBarCancelButtonTitle: 'Отмени',
+        listItemStatusAriaLabel: 'Артикулът има статус. Статус: {{ status }}.',
+        listItemCounterAriaLabel: (params) => {
+            const count = params['count'];
+            const option = pluralization.process(count);
+            switch (option) {
+                case 'one':
+                    return 'Артикулът има 1 дете.';
+                default:
+                    return 'Артикулът има {{ count }} деца.';
+            }
+        },
+        listItemButtonDetailsTitle: 'Подробности',
+        listItemButtonDeleteTitle: 'Изтрий',
+        listItemStatusContainsErrors: 'Съдържа грешки',
+        listItemStatusLocked: 'Заключен',
+        listItemStatusDraft: 'Чернова'
     },
     coreMessageStrip: {
-        dismissLabel: 'Dismiss'
+        dismissLabel: 'Отхвърляне'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Tree Item {{ itemDetails }}, {{ index }} of {{ total }}{{ selectedDescription }}'
+        linkItemAriaLabel: 'Елемент от дърво {{ itemDetails }}, {{ index }} от {{ total }}{{ selectedDescription }}'
     },
     coreOverflowLayout: {
-        moreItemsButton: '{{ count }} more'
+        moreItemsButton: (params) => {
+            const count = params['count'];
+            const option = pluralization.process(count);
+            switch (option) {
+                case 'one':
+                    return 'Още 1 елемент';
+                default:
+                    return 'Още {{ count }} елемента';
+            }
+        }
     },
     corePagination: {
-        pageLabel: 'Page {{ pageNumber }}',
-        currentPageAriaLabel: 'Page {{ pageNumber }} is current page',
-        labelBeforeInputMobile: 'Page:',
-        labelAfterInputMobile: 'of {{ totalCount }}',
-        inputAriaLabel: 'Page input, Current page, Page {{ pageNumber }} of {{ totalCount }}',
-        itemsPerPageLabel: 'Results per Page:',
-        firstLabel: 'First',
-        previousLabel: 'Previous',
-        nextLabel: 'Next',
-        lastLabel: 'Last',
-        ariaLabel: 'Pagination',
-        totalResultsLabel: '{{ totalCount }} Results'
+        pageLabel: 'Страница {{ pageNumber }}',
+        currentPageAriaLabel: 'Страница {{ pageNumber }} е активна',
+        labelBeforeInputMobile: 'Страница:',
+        labelAfterInputMobile: 'от {{ totalCount }}',
+        inputAriaLabel: 'Поле за страница, Текуща страница, Page {{ pageNumber }} of {{ totalCount }}',
+        itemsPerPageLabel: 'Резултати на Страница:',
+        firstLabel: 'Първа',
+        previousLabel: 'Предна',
+        nextLabel: 'Следваща',
+        lastLabel: 'Последна',
+        ariaLabel: 'Пагинация',
+        totalResultsLabel: '{{ totalCount }} резултати'
     },
     coreProductSwitch: {
-        ariaLabel: 'Product Switch'
+        ariaLabel: 'Продуктов превключвател'
     },
     coreShellbar: {
         collapsedItemMenuLabel: 'Collapsed Item Menu'
     },
     coreSlider: {
-        singleMinMaxDetails: 'Slider minimum value is {{ min }}, maximum value is {{ max }}',
-        singleValueminDetails: 'Value is {{ value }}',
-        singleValuemaxDetails: 'Value is {{ value }}',
-        singleValueNowDetails: 'Current value is {{ value }}',
-        multipleHandle1MinMaxDetails: 'Range slider minimum value is {{ min }}, maximum value is {{ max }}',
-        multipleHandle1ValueminDetails: 'Value is {{ value }}',
-        multipleHandle1ValuemaxDetails: 'Value is {{ value }}',
-        multipleHandle1ValueNowDetails: 'Current value is {{ value }}',
-        multipleHandle2MinMaxDetails: 'Range slider minimum value is {{ min }}, maximum value is {{ max }}',
-        multipleHandle2ValueminDetails: 'Value is {{ value }}',
-        multipleHandle2ValuemaxDetails: 'Value is {{ value }}',
-        multipleHandle2ValueNowDetails: 'Current value is {{ value }}'
+        singleMinMaxDetails: 'Минималната стойност на плъзгача е {{ min }}, максималната стойност е {{ max }}',
+        singleValueminDetails: 'Стойността е {{ value }}',
+        singleValuemaxDetails: 'Стойността е {{ value }}',
+        singleValueNowDetails: 'Текущата стойност е {{ value }}',
+        multipleHandle1MinMaxDetails:
+            'Минималната стойност на плъзгача за обхват е {{ min }}, максималната стойност е {{ max }}',
+        multipleHandle1ValueminDetails: 'Стойността е {{ value }}',
+        multipleHandle1ValuemaxDetails: 'Стойността е {{ value }}',
+        multipleHandle1ValueNowDetails: 'Текущата стойност е {{ value }}',
+        multipleHandle2MinMaxDetails:
+            'Минималната стойност на плъзгача за обхват е {{ min }}, максималната стойност е {{ max }}',
+        multipleHandle2ValueminDetails: 'Стойността е {{ value }}',
+        multipleHandle2ValuemaxDetails: 'Стойността е {{ value }}',
+        multipleHandle2ValueNowDetails: 'Текущата стойност е {{ value }}'
     },
     coreSplitButton: {
-        expandButtonAriaLabel: 'More actions',
-        arialLabel: 'Split button'
+        expandButtonAriaLabel: 'Повече възможности',
+        arialLabel: 'Разделен бутон'
     },
     coreSplitter: {
-        paginationItemAriaLabel: 'Section'
+        paginationItemAriaLabel: 'Секция'
     },
     coreStepInput: {
-        incrementButtonTitle: 'Increment',
-        decrementButtonTitle: 'Decrement',
-        ariaRoleDescription: 'Step Input'
+        incrementButtonTitle: 'Увеличи',
+        decrementButtonTitle: 'Намали',
+        ariaRoleDescription: 'Поле за стъпка'
     },
     coreSwitch: {
-        semanticAcceptLabel: 'Accept',
-        semanticDeclineLabel: 'Decline'
+        semanticAcceptLabel: 'Приеми',
+        semanticDeclineLabel: 'Отхвърли'
     },
     coreTabs: {
-        tabListExpandButtonText: 'More'
+        tabListExpandButtonText: 'Повече'
     },
     coreText: {
-        moreLabel: 'More',
-        lessLabel: 'Less'
+        moreLabel: 'Повече',
+        lessLabel: 'По-малко'
     },
     coreTime: {
-        componentAriaName: 'Time picker',
-        increaseHoursLabel: 'Increase hours',
-        hoursLabel: 'Hrs',
-        decreaseHoursLabel: 'Decrease hours',
-        increaseMinutesLabel: 'Increase minutes',
-        minutesLabel: 'Min',
-        decreaseMinutesLabel: 'Decrease minutes',
-        increaseSecondsLabel: 'Increase seconds',
-        secondsLabel: 'Sec',
-        decreaseSecondsLabel: 'Decrease seconds',
-        increasePeriodLabel: 'Increase period',
-        periodLabel: 'Period',
-        decreasePeriodLabel: 'Decrease period',
+        componentAriaName: 'Избери час',
+        increaseHoursLabel: 'Увеличи часовете',
+        hoursLabel: 'Час',
+        decreaseHoursLabel: 'Намали часовете',
+        increaseMinutesLabel: 'Увеличи минутите',
+        minutesLabel: 'Мин',
+        decreaseMinutesLabel: 'Намали минутите',
+        increaseSecondsLabel: 'Увеличи секундите',
+        secondsLabel: 'Сек',
+        decreaseSecondsLabel: 'Намали секундите',
+        increasePeriodLabel: 'Увеличи интервала',
+        periodLabel: 'Интервал',
+        decreasePeriodLabel: 'Намали интервала',
         navigationInstruction:
-            'To move between items in this list, press top arrow or bottom arrow. To switch between lists press left arrow or right arrow.'
+            'За да се придвижвате между елементите в този списък, натиснете горната стрелка или долната стрелка. ' +
+            'За да превключвате между списъците, натиснете стрелка наляво или стрелка надясно.'
     },
     coreTimePicker: {
-        timePickerInputLabel: 'Time picker input',
-        timePickerButtonLabel: 'Open picker'
+        timePickerInputLabel: 'Поле за избор на час',
+        timePickerButtonLabel: 'Избери време'
     },
     coreToken: {
-        deleteButtonLabel: 'Deletable',
-        ariaRoleDescription: 'token'
+        deleteButtonLabel: 'Изтриваем',
+        ariaRoleDescription: 'жетон'
     },
     coreUploadCollection: {
-        menuOkText: 'Ok',
-        menuCancelText: 'Cancel',
-        menuEditAriaLabel: 'Edit',
-        menuDeleteAriaLabel: 'Delete',
-        menuOkAriaLabel: 'Edit',
-        menuCancelAriaLabel: 'Cancel',
-        formItemPlaceholder: 'Filename'
+        menuOkText: 'OK',
+        menuCancelText: 'Отмени',
+        menuEditAriaLabel: 'Редактирай',
+        menuDeleteAriaLabel: 'Изтрий',
+        menuOkAriaLabel: 'Редактирай',
+        menuCancelAriaLabel: 'Отмени',
+        formItemPlaceholder: 'Име на файл'
     },
     coreWizard: {
-        ariaLabel: 'Wizard'
+        ariaLabel: 'Помощник'
     },
     platformActionBar: {
-        backButtonLabel: 'Go Back'
+        backButtonLabel: 'Върни Се Обратно'
     },
     platformApprovalFlow: {
-        defaultWatchersLabel: 'Watchers',
-        defaultTitle: 'Approval process',
-        nextButtonAriaLabel: 'Go to next slide',
-        prevButtonAriaLabel: 'Go to previous slide',
-        editModeSaveButtonLabel: 'Save',
-        editModeExitButtonLabel: 'Exit',
-        emptyTitle: 'Start adding approvers and watchers',
-        emptyHint: 'To add approvers click "Add a step". To add watchers, click the Watchers field.',
-        addNodeDialogHeaderAddApprovers: 'Add approvers',
-        addNodeDialogHeaderEditApprover: 'Edit approver',
-        addNodeDialogHeaderAddApproverTeam: 'User/Team',
-        addNodeDialogHeaderDetail: 'Detail',
-        addNodeDialogNodeType: 'Parallel or serial',
-        addNodeDialogNodeTypeSerial: 'Serial',
-        addNodeDialogNodeTypeParallel: 'Parallel',
-        addNodeDialogApproverType: 'Approver type',
-        addNodeDialogApproverTypeUser: 'A user',
-        addNodeDialogApproverTypeTeamAnyone: 'Anyone on the team',
-        addNodeDialogApproverTypeTeamEveryone: 'Everyone on the team',
-        addNodeDialogUserOrTeam: 'User/Team',
-        addNodeDialogAddToNext: 'Add to the next serial node',
-        addNodeDialogDueDate: 'Due date',
-        addNodeSearchPlaceholder: 'Search',
-        addNodeAddActionBtnLabel: 'Add',
-        addNodeCancelActionBtnLabel: 'Cancel',
-        addNodeSelectApproverActionBtnLabel: 'Select',
-        addNodeCancelApproverSelectionActionBtnLabel: 'Cancel',
-        addNodeApproverOrTeamDetailsCloseActionBtnLabel: 'Close',
-        userDetailsHeader: 'Detail',
-        userDetailsSendReminderBtnLabel: 'Send reminder',
-        userDetailsCancelBtnLabel: 'Cancel',
-        messagesApproverAddedSuccess: '1 approver has been added',
-        messagesTeamAddedSuccess: '1 team has been added',
-        messagesNodeEdited: '1 approver has been edited',
-        messagesNodeRemovedSingular: '1 approver has been removed',
-        messagesNodeRemovedPlural: 'Approvers have been removed',
-        messagesTeamRemoved: '1 team has been removed',
-        messagesErrorBuildGraph: 'There was an error when trying to build graph. Check the initial data.',
-        messagesUndoAction: 'Undo',
-        nodeMembersCount: '{{ count }} members',
-        nodeVariousTeams: 'Various teams',
-        nodeStatusDueToday: 'Due today',
-        nodeStatusDueInXDays: ' Due in {{ count }} days',
-        nodeStatusXDaysOverdue: '{{ count }} days overdue',
-        nodeActionAddApproversBefore: 'Add approvers before',
-        nodeActionAddApproversAfter: 'Add approvers after',
-        nodeActionAddApproversParallel: 'Add parallel approvers',
-        nodeActionEditApprover: 'Edit approver',
-        nodeActionRemove: 'Remove',
+        defaultWatchersLabel: 'Наблюдатели',
+        defaultTitle: 'Процес на одобрение',
+        nextButtonAriaLabel: 'Преминете към следващия слайд',
+        prevButtonAriaLabel: 'Отидете на предишния слайд',
+        editModeSaveButtonLabel: 'Запази',
+        editModeExitButtonLabel: 'Излез',
+        emptyTitle: 'Започнете да добавяте одобряващи и наблюдатели',
+        emptyHint:
+            'За да добавите одобряващи, щракнете "Добавете стъпка". За да добавите наблюдатели, щракнете върху полето Наблюдатели.',
+        addNodeDialogHeaderAddApprovers: 'Добавете одобряващи',
+        addNodeDialogHeaderEditApprover: 'Редактиране на одобряващия',
+        addNodeDialogHeaderAddApproverTeam: 'Потребител/Екип',
+        addNodeDialogHeaderDetail: 'Детайл',
+        addNodeDialogNodeType: 'Паралелно или последователно',
+        addNodeDialogNodeTypeSerial: 'Последователно',
+        addNodeDialogNodeTypeParallel: 'Паралелно',
+        addNodeDialogApproverType: 'Тип одобряващ',
+        addNodeDialogApproverTypeUser: 'Потребител',
+        addNodeDialogApproverTypeTeamAnyone: 'Всеки от екипа',
+        addNodeDialogApproverTypeTeamEveryone: 'Всички в екипа',
+        addNodeDialogUserOrTeam: 'Потребител/Екип',
+        addNodeDialogAddToNext: 'Добавете към следващия последователен възел',
+        addNodeDialogDueDate: 'Краен срок',
+        addNodeSearchPlaceholder: 'Търси',
+        addNodeAddActionBtnLabel: 'Добаве',
+        addNodeCancelActionBtnLabel: 'Отмени',
+        addNodeSelectApproverActionBtnLabel: 'Избери',
+        addNodeCancelApproverSelectionActionBtnLabel: 'Отмени',
+        addNodeApproverOrTeamDetailsCloseActionBtnLabel: 'Затвори',
+        userDetailsHeader: 'Детайл',
+        userDetailsSendReminderBtnLabel: 'Изпрати напомняне',
+        userDetailsCancelBtnLabel: 'Отмени',
+        messagesApproverAddedSuccess: 'Добавен е 1 одобряващ',
+        messagesTeamAddedSuccess: '1 екип е добавен',
+        messagesNodeEdited: '1 одобряващ е редактиран',
+        messagesNodeRemovedSingular: '1 одобряващ е премахнат',
+        messagesNodeRemovedPlural: 'Одобряващите са премахнати',
+        messagesTeamRemoved: '1 отбор е премахнат',
+        messagesErrorBuildGraph: 'Възникна грешка при опит за изграждане на графиката. Проверете първоначалните данни.',
+        messagesUndoAction: 'Отмяна',
+        nodeMembersCount: (params) => {
+            const count = params['count'];
+            const option = pluralization.process(count);
+            switch (option) {
+                case 'one':
+                    return '1 член';
+                default:
+                    return '{{ count }} членове';
+            }
+        },
+        nodeVariousTeams: 'Различни екипи',
+        nodeStatusDueToday: 'Предстои днес',
+        nodeStatusDueInXDays: (params) => {
+            const count = params['count'];
+            const option = pluralization.process(count);
+            switch (option) {
+                case 'one':
+                    return 'Предстои след 1 ден';
+                default:
+                    return 'Предстои след {{ count }} дни';
+            }
+        },
+        nodeStatusXDaysOverdue: (params) => {
+            const count = params['count'];
+            const option = pluralization.process(count);
+            switch (option) {
+                case 'one':
+                    return '1 ден просрочие';
+                default:
+                    return '{{ count }} дни просрочие';
+            }
+        },
+        nodeActionAddApproversBefore: 'Добавете одобряващи преди',
+        nodeActionAddApproversAfter: 'Добавете одобряващи след това',
+        nodeActionAddApproversParallel: 'Добавете паралелни одобряващи',
+        nodeActionEditApprover: 'Редактиране на одобряващия',
+        nodeActionRemove: 'Изтрий',
         selectTypeDialogMoveApproverAs: 'Move approver as',
-        selectTypeDialogParallelOrSerial: 'Parallel or serial',
-        selectTypeDialogNodeTypeParallel: 'Parallel approver',
-        selectTypeDialogNodeTypeSerial: 'Serial approver',
-        selectTypeDialogConfirmButton: 'Confirm',
-        selectTypeDialogCancelButton: 'Cancel',
-        toolbarAddStepButton: 'Add a step',
-        toolbarEditButton: 'Edit',
-        toolbarAddApproversBefore: 'Add approvers before',
-        toolbarAddApproversAfter: 'Add approvers after',
-        toolbarAddApproversParallel: 'Add parallel approvers',
-        toolbarRemove: 'Remove',
-        toolbarEditApprover: 'Edit approver',
-        watchersInputPlaceholder: 'Search here..',
-        userListSelectedItemsCountSingular: '1 item selected',
-        userListSelectedItemsCountPlural: '{{ count }} items selected'
+        selectTypeDialogParallelOrSerial: 'Паралелно или последователно',
+        selectTypeDialogNodeTypeParallel: 'Паралелен одобряващ',
+        selectTypeDialogNodeTypeSerial: 'Последователен одобряващ',
+        selectTypeDialogConfirmButton: 'Потвърди',
+        selectTypeDialogCancelButton: 'Отмени',
+        toolbarAddStepButton: 'Добавете стъпка',
+        toolbarEditButton: 'Редактирай',
+        toolbarAddApproversBefore: 'Добавете одобряващи преди',
+        toolbarAddApproversAfter: 'Добавете одобряващи след това',
+        toolbarAddApproversParallel: 'Добавете паралелни одобряващи',
+        toolbarRemove: 'Изтрий',
+        toolbarEditApprover: 'Редактирай на одобряващия',
+        watchersInputPlaceholder: 'Търси тук...',
+        userListSelectedItemsCountSingular: 'Избран е 1 елемент',
+        userListSelectedItemsCountPlural: 'Избрани са {{ count }} елементи'
     },
     platformFeedInput: {
         userTitle: 'User'
     },
     platformVHD: {
-        selectionBarLabel: 'Selected and condition items',
-        selectedAndConditionLabel: 'Selected Items and Conditions',
-        footerClearSelectedTitle: 'clear selected items',
-        footerClearSelectedAriaLabel: 'clear selected items',
-        searchButtonLabel: 'Go',
-        successButtonLabel: 'OK',
-        cancelButtonLabel: 'Cancel',
-        selectedEmptyLabel: 'No Items or Conditions Selected',
-        searchPlaceholder: 'Search',
-        searchAdvancedSearchLabel: 'Filters',
-        searchShowAdvancedSearchLabel: 'Show filters',
-        searchHideAdvancedSearchLabel: 'Hide filters',
-        searchShowAllAdvancedSearchLabel: 'Show all filters',
-        searchHideAllAdvancedSearchLabel: 'Hide all filters',
-        selectTabDisplayCountLabel: 'Items ({{ count }})',
-        selectTabMoreBtnLabel: 'More',
-        selectTabCountHiddenA11yLabel: 'contains {{ rowCount }} rows and {{ colCount }} columns',
-        selectMobileTabBackBtnTitle: 'Back',
-        selectMobileTabBtnOpenDialogLabel: 'Open dialog',
-        selectMobileTabTitle: '{{ title }} tab',
-        selectMobileConditionEmpty: 'Empty',
-        defineConditionTitle: 'Product',
-        defineConditionSelectedValueHiddenA11yLabel: 'selected value {{ value }}',
-        defineConditionConditionsGroupHeaderInclude: 'Include',
-        defineConditionConditionsGroupHeaderExclude: 'Exclude',
-        defineConditionFromPlaceholder: 'from',
-        defineConditionToPlaceholder: 'to',
-        defineConditionValuePlaceholder: 'value',
-        defineConditionRemoveConditionButtonTitle: 'Remove Condition',
-        defineConditionAddConditionButtonLabel: 'Add',
-        defineConditionAddConditionButtonTitle: 'Add Condition',
-        defineConditionConditionStrategyLabelContains: 'contains',
-        defineConditionConditionStrategyLabelEqualTo: 'equal to',
-        defineConditionConditionStrategyLabelBetween: 'between',
-        defineConditionConditionStrategyLabelStartsWith: 'starts with',
-        defineConditionConditionStrategyLabelEndsWith: 'ends with',
-        defineConditionConditionStrategyLabelLessThan: 'less than',
-        defineConditionConditionStrategyLabelLessThanEqual: 'less than equal',
-        defineConditionConditionStrategyLabelGreaterThan: 'greater than',
-        defineConditionConditionStrategyLabelGreaterThanEqual: 'greater than equal',
-        defineConditionConditionStrategyLabelEmpty: 'empty',
-        defineConditionConditionStrategyLabelNotEqualTo: 'not equal to',
-        defineConditionConditionStrategyLabelNotEmpty: 'not empty',
-        defineConditionMaxCountError: 'Enter a value with no more than {{ count }} characters',
-        selectTabTitle: 'Select from list',
+        selectionBarLabel: 'Избрани и кондиционирани артикули',
+        selectedAndConditionLabel: 'Избрани артикули и условия',
+        footerClearSelectedTitle: 'изчистете избраните елементи',
+        footerClearSelectedAriaLabel: 'изчистете избраните елементи',
+        searchButtonLabel: 'Търси',
+        successButtonLabel: 'ОК',
+        cancelButtonLabel: 'Отмени',
+        selectedEmptyLabel: 'Няма избрани елементи или условия',
+        searchPlaceholder: 'Потърси',
+        searchAdvancedSearchLabel: 'Филтри',
+        searchShowAdvancedSearchLabel: 'Показване на филтри',
+        searchHideAdvancedSearchLabel: 'Скриване на филтрите',
+        searchShowAllAdvancedSearchLabel: 'Показване на всички филтри',
+        searchHideAllAdvancedSearchLabel: 'Скриване на всички филтри',
+        selectTabDisplayCountLabel: '({{ count }}) артикули',
+        selectTabMoreBtnLabel: 'Повече',
+        selectTabCountHiddenA11yLabel: 'съдържа {{ rowCount }} ред(а) и {{ colCount }} колонa/и',
+        selectMobileTabBackBtnTitle: 'Обратно',
+        selectMobileTabBtnOpenDialogLabel: 'Отвори диалоговия прозорец',
+        selectMobileTabTitle: '{{ title }} раздел',
+        selectMobileConditionEmpty: 'Празен',
+        defineConditionTitle: 'Продукт',
+        defineConditionSelectedValueHiddenA11yLabel: 'избрана стойност {{ value }}',
+        defineConditionConditionsGroupHeaderInclude: 'Включи',
+        defineConditionConditionsGroupHeaderExclude: 'Изключи',
+        defineConditionFromPlaceholder: 'от',
+        defineConditionToPlaceholder: 'до',
+        defineConditionValuePlaceholder: 'стойност',
+        defineConditionRemoveConditionButtonTitle: 'Премахни Условие',
+        defineConditionAddConditionButtonLabel: 'Добави',
+        defineConditionAddConditionButtonTitle: 'Добави Условие',
+        defineConditionConditionStrategyLabelContains: 'съдържа',
+        defineConditionConditionStrategyLabelEqualTo: 'равно на',
+        defineConditionConditionStrategyLabelBetween: 'между',
+        defineConditionConditionStrategyLabelStartsWith: 'започна с',
+        defineConditionConditionStrategyLabelEndsWith: 'завършва с',
+        defineConditionConditionStrategyLabelLessThan: 'по-малко от',
+        defineConditionConditionStrategyLabelLessThanEqual: 'по-малко или равно от',
+        defineConditionConditionStrategyLabelGreaterThan: 'по-голямо от',
+        defineConditionConditionStrategyLabelGreaterThanEqual: 'по-голямо или равно от',
+        defineConditionConditionStrategyLabelEmpty: 'празно',
+        defineConditionConditionStrategyLabelNotEqualTo: 'не е равно на',
+        defineConditionConditionStrategyLabelNotEmpty: 'не празно',
+        defineConditionMaxCountError: (params) => {
+            const count = params['count'];
+            const option = pluralization.process(count);
+            switch (option) {
+                case 'one':
+                    return 'Въведи стойност с не повече от 1 символ';
+                default:
+                    return 'Въведи стойност с не повече от {{ count }} символа';
+            }
+        },
+        selectTabTitle: 'Избери от списъка',
         searchTableEmptyMessage: 'Use the search to get results',
-        defineTabTitle: 'Define Conditions'
+        defineTabTitle: 'Дефиниране на условия'
     },
     platformCombobox: {
-        countListResultsSingular: '1 result list item',
-        countListResultsPlural: '{{ count }} result list items'
+        countListResultsSingular: '1 елемент от списъка с резултати',
+        countListResultsPlural: '{{ count }} елемента от списъка с резултати'
     },
     platformMultiCombobox: {
-        inputGlyphAriaLabel: 'Select Options',
-        inputIconTitle: 'Select Options',
-        mobileShowAllItemsButton: 'Show all items',
-        mobileShowSelectedItemsButton: 'Show selected items'
+        inputGlyphAriaLabel: 'Избери Опции',
+        inputIconTitle: 'Избери Опции',
+        mobileShowAllItemsButton: 'Покажи всички елементи',
+        mobileShowSelectedItemsButton: 'Покажи избраните елементи'
     },
     platformTextarea: {
-        counterMessageCharactersOverTheLimitSingular: '1 character over the limit',
-        counterMessageCharactersOverTheLimitPlural: '{{ count }} characters over the limit',
-        counterMessageCharactersRemainingSingular: '1 character remaining',
-        counterMessageCharactersRemainingPlural: '{{ count }} characters remaining'
+        counterMessageCharactersOverTheLimitSingular: '1 символ над ограничението',
+        counterMessageCharactersOverTheLimitPlural: '{{ count }} символи над ограничението',
+        counterMessageCharactersRemainingSingular: 'Остава 1 символ',
+        counterMessageCharactersRemainingPlural: 'Остават {{ count }} символи'
     },
     platformLink: {
-        roleDescriptionWithMedia: 'Media: {{ media }}'
+        roleDescriptionWithMedia: 'Медия: {{ media }}'
     },
     platformList: {
-        loadingAriaLabel: 'loading'
+        loadingAriaLabel: 'зареждане'
     },
     platformObjectListItem: {
-        detailsActionAriaLabel: 'detail',
-        deleteActionAriaLabel: 'delete'
+        detailsActionAriaLabel: 'детайл',
+        deleteActionAriaLabel: 'изтрий'
     },
     platformStandardListItem: {
-        detailsActionAriaLabel: 'detail',
-        deleteActionAriaLabel: 'delete'
+        detailsActionAriaLabel: 'детайл',
+        deleteActionAriaLabel: 'изтрий'
     },
     platformSearchField: {
-        clearButtonTitle: 'Clear',
-        submitButtonTitle: 'Search',
-        synchronizeButtonTitle: 'Synchronize',
-        searchSuggestionMessage: '{{ count }} suggestions found.',
-        searchSuggestionNavigateMessage: 'use up and down arrows to navigate'
+        clearButtonTitle: 'Изчисти',
+        submitButtonTitle: 'Търси',
+        synchronizeButtonTitle: 'Синхронизирай',
+        searchSuggestionMessage: (params) => {
+            const count = params['count'];
+            const option = pluralization.process(count);
+            switch (option) {
+                case 'one':
+                    return 'Намерено е 1 предложение.';
+                default:
+                    return 'Намерени са {{ count }} предложения.';
+            }
+        },
+        searchSuggestionNavigateMessage: 'използвайте стрелки нагоре и надолу за навигация'
     },
     platformSmartFilterBar: {
-        searchPlaceholder: 'Search',
-        submitButtonLabel: 'Go',
-        filtersButtonLabel: 'Filters ({{ filtersCount }})',
-        showFiltersButtonLabel: 'Show filters',
-        hideFiltersButtonLabel: 'Hide filters',
-        defineConditionsRemoveConditionButtonTitle: 'Remove condition',
-        defineConditionsAddConditionButtonLabel: 'Add condition',
-        defineConditionsSubmitButtonLabel: 'Go',
-        defineConditionsCancelButton: 'Cancel',
+        searchPlaceholder: 'Търси',
+        submitButtonLabel: 'Търси',
+        filtersButtonLabel: 'Филтри ({{ filtersCount }})',
+        showFiltersButtonLabel: 'Покажи филтрите',
+        hideFiltersButtonLabel: 'Скрий филтрите',
+        defineConditionsRemoveConditionButtonTitle: 'Премахни Условие',
+        defineConditionsAddConditionButtonLabel: 'Добави Условие',
+        defineConditionsSubmitButtonLabel: 'Търси',
+        defineConditionsCancelButton: 'Отмени',
         selectFiltersHeader: 'Filters',
-        selectFiltersAvailableFiltersText: 'Available filters',
-        selectFiltersFilterColumnLabel: 'Filter',
-        selectFiltersActiveColumnLabel: 'Active',
-        selectFiltersSubmitButtonLabel: 'Go',
-        selectFiltersCancelButton: 'Cancel',
-        filterConditionContains: 'contains',
-        filterConditionEqualTo: 'equal to',
-        filterConditionBetween: 'between',
-        filterConditionBeginsWith: 'starts with',
-        filterConditionEndsWith: 'ends with',
-        filterConditionLessThan: 'less than',
-        filterConditionLessThanOrEqualTo: 'less than or equal to',
-        filterConditionGreaterThan: 'greater than',
-        filterConditionGreaterThanOrEqualTo: 'greater than or equal to',
-        filterConditionAfter: 'after',
-        filterConditionOnOrAfter: 'on or after',
-        filterConditionBefore: 'before',
-        filterConditionBeforeOrOn: 'before or on',
-        filterConditionValuePlaceholder: 'value',
-        filterConditionValueFromPlaceholder: 'from',
-        filterConditionValueToPlaceholder: 'to',
-        settingsCategoryAll: 'All',
-        settingsCategoryVisible: 'Visible',
-        settingsCategoryActive: 'Active',
-        settingsCategoryVisibleAndActive: 'Visible and active',
-        settingsCategoryMandatory: 'Mandatory'
+        selectFiltersAvailableFiltersText: 'Налични филтри',
+        selectFiltersFilterColumnLabel: 'Филтър',
+        selectFiltersActiveColumnLabel: 'Активни',
+        selectFiltersSubmitButtonLabel: 'Филтрирай',
+        selectFiltersCancelButton: 'Отмени',
+        filterConditionContains: 'съдържа',
+        filterConditionEqualTo: 'равно на',
+        filterConditionBetween: 'между',
+        filterConditionBeginsWith: 'започна с',
+        filterConditionEndsWith: 'завършва с',
+        filterConditionLessThan: 'по-малко от',
+        filterConditionLessThanOrEqualTo: 'по-малко или равно',
+        filterConditionGreaterThan: 'по-голямо от',
+        filterConditionGreaterThanOrEqualTo: 'по-голямо или равно от',
+        filterConditionAfter: 'след',
+        filterConditionOnOrAfter: 'равно или повече',
+        filterConditionBefore: 'преди',
+        filterConditionBeforeOrOn: 'до или равно',
+        filterConditionValuePlaceholder: 'стойност',
+        filterConditionValueFromPlaceholder: 'от',
+        filterConditionValueToPlaceholder: 'до',
+        settingsCategoryAll: 'Всички',
+        settingsCategoryVisible: 'Видими',
+        settingsCategoryActive: 'Активни',
+        settingsCategoryVisibleAndActive: 'Видими и Активни',
+        settingsCategoryMandatory: 'Задължителни'
     },
     platformTable: {
-        headerMenuSortAsc: 'Sort Ascending',
-        headerMenuSortDesc: 'Sort Descending',
-        headerMenuGroup: 'Group',
-        headerMenuFreeze: 'Freeze',
-        headerMenuUnfreeze: 'HeaderMenuUnfreeze',
-        headerMenuFilter: 'Filter',
-        defaultEmptyMessage: 'No data found',
-        resetChangesButtonLabel: 'Reset',
-        editableCellNumberPlaceholder: 'Enter value',
-        editableCellDatePlaceholder: 'Enter value',
-        editableCellStringPlaceholder: 'Enter value',
-        P13ColumnsDialogHeader: 'Columns',
-        P13ColumnsDialogSearchPlaceholder: 'Search',
-        P13ColumnsDialogsShowSelected: 'Show Selected',
-        P13ColumnsDialogShowAll: 'Show all',
-        P13ColumnsDialogSelectAll: 'Select All ({{ selectedColumnsCount }}/{{ selectableColumnsCount }})',
+        headerMenuSortAsc: 'Сортирай Възходящо',
+        headerMenuSortDesc: 'Сортирай Нисходящо',
+        headerMenuGroup: 'Групирай',
+        headerMenuFreeze: 'Замрази',
+        headerMenuUnfreeze: 'Размрази',
+        headerMenuFilter: 'Филтър',
+        defaultEmptyMessage: 'Няма намерени данни',
+        resetChangesButtonLabel: 'Нулиране',
+        editableCellNumberPlaceholder: 'Въведи стойност',
+        editableCellDatePlaceholder: 'Въведи стойност',
+        editableCellStringPlaceholder: 'Въведи стойност',
+        P13ColumnsDialogHeader: 'Колони',
+        P13ColumnsDialogSearchPlaceholder: 'Търси',
+        P13ColumnsDialogsShowSelected: 'Покажи избраните',
+        P13ColumnsDialogShowAll: 'Покажи всички',
+        P13ColumnsDialogSelectAll: 'Покажи всички ({{ selectedColumnsCount }}/{{ selectableColumnsCount }})',
         P13ColumnsDialogConfirmationBtnLabel: 'OK',
-        P13ColumnsDialogCancelBtnLabel: 'Cancel',
-        P13ColumnsDialogMoveToTopBtn: 'Move to Top',
-        P13ColumnsDialogMoveUpBtn: 'Move Up',
-        P13ColumnsDialogMoveDownBtn: 'Move Down',
-        P13ColumnsDialogMoveToBottomBtn: 'Move to Bottom',
-        P13FilterStrategyLabelBetween: 'between',
-        P13FilterStrategyLabelContains: 'contains',
-        P13FilterStrategyLabelBeginsWith: 'begins with',
-        P13FilterStrategyLabelEndsWith: 'ends with',
-        P13FilterStrategyLabelEqualTo: 'equal to',
-        P13FilterStrategyLabelGreaterThan: 'greater than',
-        P13FilterStrategyLabelGreaterThanOrEqualTo: 'greater than or equal to',
-        P13FilterStrategyLabelLessThan: 'less than',
-        P13FilterStrategyLabelLessThanOrEqualTo: 'less than or equal to',
-        P13FilterStrategyLabelAfter: 'after',
-        P13FilterStrategyLabelOnOrAfter: 'on or after',
-        P13FilterStrategyLabelBefore: 'before',
-        P13FilterStrategyLabelBeforeOrOn: 'before or on',
-        P13FilterStrategyLabelNotDefined: 'Not Defined',
+        P13ColumnsDialogCancelBtnLabel: 'Отмени',
+        P13ColumnsDialogMoveToTopBtn: 'Измести най-отгоре',
+        P13ColumnsDialogMoveUpBtn: 'Измести нагоре',
+        P13ColumnsDialogMoveDownBtn: 'Измести надолу',
+        P13ColumnsDialogMoveToBottomBtn: 'Измести най-отдолу',
+        P13FilterStrategyLabelBetween: 'между',
+        P13FilterStrategyLabelContains: 'съдържа',
+        P13FilterStrategyLabelBeginsWith: 'започва с',
+        P13FilterStrategyLabelEndsWith: 'завършва с',
+        P13FilterStrategyLabelEqualTo: 'равно на',
+        P13FilterStrategyLabelGreaterThan: 'по-голямо от',
+        P13FilterStrategyLabelGreaterThanOrEqualTo: 'по-голямо или равно от',
+        P13FilterStrategyLabelLessThan: 'по-малко от',
+        P13FilterStrategyLabelLessThanOrEqualTo: 'по-малко или равно от',
+        P13FilterStrategyLabelAfter: 'след',
+        P13FilterStrategyLabelOnOrAfter: 'равно или повече',
+        P13FilterStrategyLabelBefore: 'преди',
+        P13FilterStrategyLabelBeforeOrOn: 'до или равно',
+        P13FilterStrategyLabelNotDefined: 'Недефинирано',
         P13FilterBooleanOptionNotDefined: ' ',
-        P13FilterBooleanOptionTrue: 'Yes',
-        P13FilterBooleanOptionFalse: 'No',
-        P13FilterDialogHeader: 'Filter By',
-        P13FilterDialogIncludePanelTitleWithCount: 'Include ({{ count }})',
-        P13FilterDialogIncludePanelTitleWithoutCount: 'Include',
-        P13FilterDialogExcludePanelTitleWithCount: 'Exclude ({{ count }})',
+        P13FilterBooleanOptionTrue: 'Да',
+        P13FilterBooleanOptionFalse: 'Не',
+        P13FilterDialogHeader: 'Филтрирано от',
+        P13FilterDialogIncludePanelTitleWithCount: 'Добави ({{ count }})',
+        P13FilterDialogIncludePanelTitleWithoutCount: 'Добави',
+        P13FilterDialogExcludePanelTitleWithCount: 'Изключи ({{ count }})',
         P13FilterDialogExcludePanelTitleWithoutCount: 'Exclude',
-        P13FilterDialogRemoveFilterBtnTitle: 'Remove Filter',
-        P13FilterDialoAddFilterBtnTitle: 'Add Filter',
+        P13FilterDialogRemoveFilterBtnTitle: 'Премахни Филтър',
+        P13FilterDialoAddFilterBtnTitle: 'Добави Филтър',
         P13FilterDialogConfirmationBtnLabel: 'OK',
-        P13FilterDialogCancelBtnLabel: 'Cancel',
-        P13GroupDialogHeader: 'Group',
-        P13GroupDialogNoneSelectedColumnSelectPlaceholder: '(none)',
+        P13FilterDialogCancelBtnLabel: 'Отмени',
+        P13GroupDialogHeader: 'Групирай',
+        P13GroupDialogNoneSelectedColumnSelectPlaceholder: '(нито един)',
         P13GroupDialogShowFieldAsColumnCheckboxLabel: 'Show Field as Column',
-        P13GroupDialogRemoveGroupBtnTitle: 'Remove',
-        P13GroupDialogAddNewGroupBtnTitle: 'Add new',
+        P13GroupDialogRemoveGroupBtnTitle: 'Премахни',
+        P13GroupDialogAddNewGroupBtnTitle: 'Добави Нова',
         P13GroupDialogConfirmationBtnLabel: 'OK',
-        P13GroupDialogCancelBtnLabel: 'Cancel',
-        P13SortDialogHeader: 'Sort',
-        P13SortDialogNoneSelectedColumn: '(none)',
-        P13SortDialogNoneSelectedSorting: '(none)',
-        P13SortDialogSortOrderSelectOptionAsc: 'Ascending',
-        P13SortDialogSortOrderSelectOptionDesc: 'Descending',
-        P13SortDialogRemoveSortBtnTitle: 'Remove',
-        P13SortDialogAddNewSortBtnTitle: 'Add new',
+        P13GroupDialogCancelBtnLabel: 'Отмени',
+        P13SortDialogHeader: 'Сортирай',
+        P13SortDialogNoneSelectedColumn: '(нито един)',
+        P13SortDialogNoneSelectedSorting: '(нито един)',
+        P13SortDialogSortOrderSelectOptionAsc: 'Възходящ',
+        P13SortDialogSortOrderSelectOptionDesc: 'Низходящ',
+        P13SortDialogRemoveSortBtnTitle: 'Премахни',
+        P13SortDialogAddNewSortBtnTitle: 'Добави Ново',
         P13SortDialogConfirmationBtnLabel: 'OK',
-        P13SortDialogCancelBtnLabel: 'Cancel',
-        toolbarSearchPlaceholder: 'Search',
-        toolbarActionCreateButtonLabel: 'Create',
-        toolbarActionSaveButtonLabel: 'Save',
-        toolbarActionCancelButtonLabel: 'Cancel',
-        toolbarActionSortButtonTitle: 'Sort',
-        toolbarActionFilterButtonTitle: 'Filter',
-        toolbarActionGroupButtonTitle: 'Group',
-        toolbarActionColumnsButtonTitle: 'Columns',
-        filterDialogNotFilteredLabel: '(Not Filtered)',
-        filterDialogFilterByLabel: 'Filter by: {{ filterLabel }}',
-        filterDialogFilterTitle: 'Filter',
-        filterDialogFilterBy: 'Filter By',
+        P13SortDialogCancelBtnLabel: 'Отмени',
+        toolbarSearchPlaceholder: 'Търси',
+        toolbarActionCreateButtonLabel: 'Създай',
+        toolbarActionSaveButtonLabel: 'Запиши',
+        toolbarActionCancelButtonLabel: 'Отмени',
+        toolbarActionSortButtonTitle: 'Сортирай',
+        toolbarActionFilterButtonTitle: 'Филтрирай',
+        toolbarActionGroupButtonTitle: 'Групирай',
+        toolbarActionColumnsButtonTitle: 'Колони',
+        filterDialogNotFilteredLabel: '(Нефилтрирано)',
+        filterDialogFilterByLabel: 'Филтрирано по: {{ filterLabel }}',
+        filterDialogFilterTitle: 'Филтър',
+        filterDialogFilterBy: 'Филтрирано по',
         filterDialogConfirmBtnLabel: 'OK',
-        filterDialogCancelBtnLabel: 'Cancel',
-        groupDialogHeader: 'Group',
-        groupDialogGroupOrderHeader: 'Group Order',
-        groupDialogGroupOrderAsc: 'Ascending',
-        groupDialogGroupOrderDesc: 'Descending',
-        groupDialogGroupByHeader: 'Group By',
-        groupDialogNotGroupedLabel: '(Not Grouped)',
+        filterDialogCancelBtnLabel: 'Отмени',
+        groupDialogHeader: 'Група',
+        groupDialogGroupOrderHeader: 'Ред на групиране',
+        groupDialogGroupOrderAsc: 'Възходяща',
+        groupDialogGroupOrderDesc: 'Низходяща',
+        groupDialogGroupByHeader: 'Групирано по',
+        groupDialogNotGroupedLabel: '(Негрупирано)',
         groupDialogConfirmBtnLabel: 'OK',
-        groupDialogCancelBtnLabel: 'Cancel',
-        sortDialogHeader: 'Sort',
-        sortDialogSortOrderHeader: 'Sort Order',
-        sortDialogSortOrderAsc: 'Ascending',
-        sortDialogSortOrderDesc: 'Descending',
-        sortDialogSortByHeader: 'Sorted By',
-        sortDialogNotSortedLabel: '(Not Sorted)',
+        groupDialogCancelBtnLabel: 'Отмени',
+        sortDialogHeader: 'Сортирай',
+        sortDialogSortOrderHeader: 'Сортирано',
+        sortDialogSortOrderAsc: 'Възходяща',
+        sortDialogSortOrderDesc: 'Низходяща',
+        sortDialogSortByHeader: 'Сортирано по',
+        sortDialogNotSortedLabel: '(Несортирано)',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogCancelBtnLabel: 'Cancel'
+        sortDialogCancelBtnLabel: 'Отмени'
     },
     platformThumbnail: {
-        detailsGotoPreviousButtonTitle: 'Go to Previous',
-        detailsGotoNextButtonTitle: 'Go to Next',
-        detailsDialogCloseBtnLabel: 'Close',
-        roleDescription: 'Image'
+        detailsGotoPreviousButtonTitle: 'Отиди на предишнита',
+        detailsGotoNextButtonTitle: 'Отиди на следващата',
+        detailsDialogCloseBtnLabel: 'Затвори',
+        roleDescription: 'Картинка'
     },
     platformUploadCollection: {
-        moveToTitle: 'Move to',
-        moveToTitleFolder: 'Folder',
-        moveToNewFolderBtnLabel: 'New Folder',
-        moveToAllFilesSubHeaderLabel: 'All files',
-        moveToConfirmBtn: 'Move',
-        moveToCloseBtn: 'Cancel',
-        newFolderTitle: 'New folder',
-        newFolderAtRootInputLabel: 'Name of new folder',
-        newFolderAtFolderInputLabel: 'Name of new folder inside of {{ folderName }}',
-        newFolderInputPlaceholder: 'Type here..',
-        newFolderInputErrorLabel: 'Maximum {{ count }} characters allowed',
-        newFolderDialogCreateBtnLabel: 'Create',
-        newFolderDialogCancelBtnLabel: 'Cancel',
-        breadcrumbLabelAllFiles: 'All files',
-        breadcrumbLabelAllFilesWithTotal: 'All files ({{ total }})',
-        searchPlaceholder: 'Search',
-        addBtnLabel: 'Add',
-        newFolderBtnLabel: 'New Folder',
-        moveToBtnLabel: 'Move to',
-        downloadBtnLabel: 'Download',
-        updateVersionBtnLabel: 'Update version',
-        removeBtnLabel: 'Remove',
-        folderIconTitle: 'Folder icon',
-        fileIconTitle: 'File icon',
-        editFileNameInputPlaceholder: 'Enter a name',
-        editFileNameFileAlreadyExistsError: 'File with this name already exists',
-        editFileNameFolderAlreadyExistsError: 'Folder with this name already exists',
-        itemStatusSuccessful: 'Successful',
-        itemStatusUnsuccessful: 'Unsuccessful',
-        uploadNewFileAfterFailAction: 'Run',
-        cancelUploadNewFileAction: 'Cancel',
-        itemMenuBtnTitle: 'More',
-        dragDropAreaText: 'Drag files to upload',
-        noDataText: 'No files found',
-        noDataDescription: 'Drop files to upload, or use the “Add” button.',
-        paginationTotal: 'Showing {{ from }}-{{ to }} of {{ total }}',
-        resultsPerPage: 'Results per page',
-        messageCreateFailed: 'Failed to create {{ folderName }}.',
-        messageCreateSuccess: '{{ folderName }} has been created.',
-        messageUpdateVersionFailed: 'Failed to update version of {{ folderName }}.',
-        messageUpdateVersionSuccess: '{{ folderName }} version has been updated.',
-        messageFileRenameFailed: 'Failed to rename "{{ from }}" to "{{ to }}."',
-        messageFileRenameSuccess: '"{{ from }}" has been renamed to "{{ to }}".',
-        messageRemoveFoldersAndFilesFailed: 'Failed to remove {{ foldersCount }} folders and {{ filesCount }} files.',
-        messageRemoveFoldersAndFilesSuccess: '{{ foldersCount }} folders and {{ filesCount }} files have been removed.',
-        messageRemoveFoldersFailed: 'Failed to remove {{ foldersCount }} folders.',
-        messageRemoveFoldersSuccess: '{{ foldersCount }} folders have been removed.',
-        messageRemoveFilesFailed: 'Failed to remove {{ filesCount }} files.',
-        messageRemoveFilesSuccess: '{{ filesCount }} files have been removed.',
-        messageRemoveFileOrFolderFailed: 'Failed to remove {{ name }}.',
-        messageRemoveFileOrFolderSuccess: '{{ name }} has been removed.',
+        moveToTitle: 'Премести в',
+        moveToTitleFolder: 'Папка',
+        moveToNewFolderBtnLabel: 'Нова папка',
+        moveToAllFilesSubHeaderLabel: 'Всички файлове',
+        moveToConfirmBtn: 'Премести',
+        moveToCloseBtn: 'Отмени',
+        newFolderTitle: 'Нова папка',
+        newFolderAtRootInputLabel: 'Име на новата папка',
+        newFolderAtFolderInputLabel: 'Име на новата папка вътре в {{ folderName }}',
+        newFolderInputPlaceholder: 'Пиши тук...',
+        newFolderInputErrorLabel: 'Максимум {{ count }} символ(а) позволени',
+        newFolderDialogCreateBtnLabel: 'Създай',
+        newFolderDialogCancelBtnLabel: 'Отмени',
+        breadcrumbLabelAllFiles: 'Всички файлове',
+        breadcrumbLabelAllFilesWithTotal: 'Всички файлове ({{ total }})',
+        searchPlaceholder: 'Търси',
+        addBtnLabel: 'Добави',
+        newFolderBtnLabel: 'Нова папка',
+        moveToBtnLabel: 'Премести в',
+        downloadBtnLabel: 'Изтегли',
+        updateVersionBtnLabel: 'Актуализирай версията',
+        removeBtnLabel: 'Премахни',
+        folderIconTitle: 'Икона на папка',
+        fileIconTitle: 'Икона на файл',
+        editFileNameInputPlaceholder: 'Въведи име',
+        editFileNameFileAlreadyExistsError: 'Файл с това име вече съществува',
+        editFileNameFolderAlreadyExistsError: 'Папка с това име вече съществува',
+        itemStatusSuccessful: 'Успешено',
+        itemStatusUnsuccessful: 'Неуспешно',
+        uploadNewFileAfterFailAction: 'Изпълни',
+        cancelUploadNewFileAction: 'Отмени',
+        itemMenuBtnTitle: 'Повече',
+        dragDropAreaText: 'Плъзнете файлове за качване',
+        noDataText: 'Няма намерени файлове',
+        noDataDescription: 'Пуснете файлове за качване или използвайте бутона „Добави“.',
+        paginationTotal: 'Показване {{ from }}-{{ to }} от {{ total }}',
+        resultsPerPage: 'Резултати на страница',
+        messageCreateFailed: 'Неуспешно създадена {{ folderName }}.',
+        messageCreateSuccess: '{{ folderName }} е създаден.',
+        messageUpdateVersionFailed: 'Неуспешно актуализиране на версията на {{ folderName }}.',
+        messageUpdateVersionSuccess: 'Версията на {{ folderName }} е актуализирана.',
+        messageFileRenameFailed: 'Неуспешно преименуване от "{{ from }}" на "{{ to }}."',
+        messageFileRenameSuccess: '"{{ from }}" беще преименуван на "{{ to }}".',
+        messageRemoveFoldersAndFilesFailed:
+            'Неуспешно премахване на {{ foldersCount }} папки и {{ filesCount }} файлове.',
+        messageRemoveFoldersAndFilesSuccess: '{{ foldersCount }} папки и {{ filesCount }} файлове бяха изтрити.',
+        messageRemoveFoldersFailed: 'Неуспешно премахване на {{ foldersCount }} папки.',
+        messageRemoveFoldersSuccess: '{{ foldersCount }} папки са премахнати.',
+        messageRemoveFilesFailed: 'Неуспешно премахване на {{ filesCount }} файлове.',
+        messageRemoveFilesSuccess: '{{ filesCount }} файлове са премахнати.',
+        messageRemoveFileOrFolderFailed: 'Неуспешно премахване на {{ name }}.',
+        messageRemoveFileOrFolderSuccess: '{{ name }} беше изтрита.',
         messageMoveFoldersAndFilesFailed:
-            'Failed to move {{ foldersCount }} folders and {{ filesCount }} files to {{ to }}.',
+            'Неуспешно преместване {{ foldersCount }} папки и {{ filesCount }} файлове в {{ to }}.',
         messageMoveFoldersAndFilesSuccess:
-            '{{ foldersCount }} folders and {{ filesCount }} files have been moved to {{ to }}.',
-        messageMoveFoldersFailed: 'Failed to move {{ foldersCount }} folders to {{ to }}.',
-        messageMoveFoldersSuccess: '{{ foldersCount }} folders have been moved to {{ to }}.',
-        messageMoveFilesFailed: 'Failed to move {{ filesCount }} files to {{ to }}.',
-        messageMoveFilesSuccess: '{{ filesCount }} files have been moved to {{ to }}.',
-        messageMoveFileOrFolderFailed: 'Failed to move {{ name }} to {{ to }}.',
-        messageMoveFileOrFolderSuccess: '{{ name }} has been moved to {{ to }}.',
+            '{{ foldersCount }} папки и {{ filesCount }} файлове са преместени в {{ to }}.',
+        messageMoveFoldersFailed: 'Неуспешно преместване {{ foldersCount }} папки в {{ to }}.',
+        messageMoveFoldersSuccess: '{{ foldersCount }} папки беше преместена в {{ to }}.',
+        messageMoveFilesFailed: 'Неуспешно преместване {{ filesCount }} файлове в {{ to }}.',
+        messageMoveFilesSuccess: '{{ filesCount }} файлове бяха преместени в {{ to }}.',
+        messageMoveFileOrFolderFailed: 'Неуспешно преместване {{ name }} в {{ to }}.',
+        messageMoveFileOrFolderSuccess: '{{ name }} е изместен(а) в {{ to }}.',
         messageMoveRootFoldersAndFilesFailed:
-            'Failed to move {{ foldersCount }} folders and {{ filesCount }} files to all files.',
+            'Неуспешно преместване {{ foldersCount }} папки и {{ filesCount }} файлове от всички файлове.',
         messageMoveRootFoldersAndFilesSuccess:
-            '{{ foldersCount }} folders and {{ filesCount }} files have been moved to all files.',
-        messageMoveRootFoldersFailed: 'Failed to move {{ foldersCount }} folders to all files.',
-        messageMoveRootFoldersSuccess: '{{ foldersCount }} folders have been moved to all files.',
-        messageMoveRootFilesFailed: 'Failed to move {{ filesCount }} files to all files.',
-        messageMoveRootFilesSuccess: '{{ filesCount }} files have been moved to all files.',
-        messageMoveRootFileOrFolderFailed: 'Failed to move {{ name }} to all files.',
-        messageMoveRootFileOrFolderSuccess: '{{ name }} has been moved to all files.',
-        messageFileTypeMismatchPlural: '{{ filesCount }} files have the wrong type. Allowed types: {{ allowedTypes }}.',
+            '{{ foldersCount }} папки and {{ filesCount }} файлове успешно преместени.',
+        messageMoveRootFoldersFailed: 'Неуспешно преместване {{ foldersCount }} папки за всички файлове.',
+        messageMoveRootFoldersSuccess: '{{ foldersCount }} папки бяха преместени за всички файлове.',
+        messageMoveRootFilesFailed: 'Неуспешно преместване {{ filesCount }} файлове за всички файлове.',
+        messageMoveRootFilesSuccess: '{{ filesCount }} файлове бяха изместени за всички файлове.',
+        messageMoveRootFileOrFolderFailed: 'Неуспешно преместване {{ name }} за всички файлове.',
+        messageMoveRootFileOrFolderSuccess: '{{ name }} е изместен за всички файлове.',
+        messageFileTypeMismatchPlural:
+            '{{ filesCount }} файлове имат грешно разширение. Позволени разширения: {{ allowedTypes }}.',
         messageFileTypeMismatchSingular:
-            'The file "{{ fileName }}" has the wrong type. Allowed types: {{ allowedTypes }}.',
+            'Файлът "{{ fileName }}" има грешно разширение. Позволени разширения: {{ allowedTypes }}.',
         messageFileSizeExceededPlural:
-            '{{ filesCount }} files exceeded the maximum file size. Allowed max file size: {{ maxFileSize }}.',
+            '{{ filesCount }} файлове надвишават максималната големина на файла. Позволен максимален размер на файла: {{ maxFileSize }}.',
         messageFileSizeExceededSingular:
-            'The file "{{ fileName }}" exceeded the maximum file size. Allowed max file size: {{ maxFileSize }}.',
+            'Файлът "{{ fileName }}" надвишава максималната големина на файла. Позволен максимален размер на файла: {{ maxFileSize }}.',
         messageFileNameLengthExceededPlural:
-            '{{ filesCount }} files exceeded the maximum filename length. Allowed filename length: {{ maxFilenameLength }} characters.',
+            '{{ filesCount }} файлове надвишават максималната дължина на името на файла. Позволена дължина на името на файла: {{ maxFilenameLength }} символа.',
         messageFileNameLengthExceededSingular:
-            'The name "{{ fileName }}" exceeded the maximum filename length. Allowed filename length: {{ maxFilenameLength }} characters.'
+            'Името "{{ fileName }}" надвишава максималната дължина на името на файла. Позволена дължина на името на файла: {{ maxFilenameLength }} символа.'
     },
     platformWizardGenerator: {
-        summarySectionEditStep: 'Edit'
+        summarySectionEditStep: 'Редактирай'
     },
     fnSlider: {
-        minMaxDetails: 'Slider minimum value is {{ min }}, maximum value is {{ max }}',
-        valueminDetails: 'Value is {{ value }}',
-        valuemaxDetails: 'Value is {{ value }}',
-        valueNowDetails: 'Current value is {{ value }}'
+        minMaxDetails: 'Минималната стойност на плъзгача е {{ min }}, максималната стойност е {{ max }}',
+        valueminDetails: 'Стойността е {{ value }}',
+        valuemaxDetails: 'Стойността е {{ value }}',
+        valueNowDetails: 'Текущата стойност е {{ value }}'
     },
     fnSwitch: {
-        semanticAcceptLabel: 'Accept',
-        semanticDeclineLabel: 'Decline'
+        semanticAcceptLabel: 'Приеми',
+        semanticDeclineLabel: 'Отхвърли'
     }
 };
