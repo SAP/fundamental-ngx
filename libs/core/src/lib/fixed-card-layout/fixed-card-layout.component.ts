@@ -26,13 +26,13 @@ import { CdkDrag, CdkDragDrop, CdkDragEnter } from '@angular/cdk/drag-drop';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, delay, distinct, takeUntil } from 'rxjs/operators';
 
-import { resizeObservable, RtlService } from '@fundamental-ngx/core/utils';
+import { resizeObservable, RtlService, getDocumentFontSize } from '@fundamental-ngx/core/utils';
 import { FixedCardLayoutItemComponent } from './fixed-card-layout-item/fixed-card-layout-item.component';
 import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
 
-const REM_IN_PX = 16;
-const CARD_MINIMUM_WIDTH = 320; // 320px = 20rem
-const CARD_GAP_WIDTH = 16; // 16px = 1rem
+const REM_IN_PX = getDocumentFontSize();
+const CARD_MINIMUM_WIDTH = REM_IN_PX * 20; // 20rem
+const CARD_GAP_WIDTH = REM_IN_PX; // 1rem
 const DRAG_START_DELAY = 200; // in ms
 const MAX_COLUMNS = 10;
 
