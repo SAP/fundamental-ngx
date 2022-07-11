@@ -1,4 +1,11 @@
 
+### [0.35.2-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.13...v0.35.2-rc.14) (2022-07-11)
+
+
+### Bug Fixes
+
+* **core,platform:** ng format metadata.yaml ([#8343](https://github.com/SAP/fundamental-ngx/issues/8343)) ([35291e1](https://github.com/SAP/fundamental-ngx/commit/35291e1701f57636f2017edc3fff8eff614ffd17))
+
 ### [0.35.2-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.12...v0.35.2-rc.13) (2022-07-10)
 
 
