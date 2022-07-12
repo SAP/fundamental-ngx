@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SegmentedButtonComponent } from '@fundamental-ngx/fn/segmented-button';
-import { Component, Directive, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, Directive, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
 import { SelectableItemToken } from '@fundamental-ngx/fn/cdk';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Directive({
     selector: '[fnTestSelection]',
@@ -13,7 +13,16 @@ class TestSelectionDirective implements SelectableItemToken<string> {
     @Input('fnTestSelection') value!: string;
     selected = false;
 
-    clicked: Observable<MouseEvent | KeyboardEvent> = new Observable<MouseEvent | KeyboardEvent>();
+    private _clicked = new Subject<MouseEvent | KeyboardEvent>();
+
+    get clicked(): Observable<MouseEvent | KeyboardEvent> {
+        return this._clicked.asObservable();
+    }
+
+    @HostListener('click', ['$event'])
+    onClick(event: MouseEvent): void {
+        this._clicked.next(event);
+    }
 
     constructor(private _elementRef: ElementRef<HTMLElement>) {}
 
@@ -84,6 +93,7 @@ describe('SegmentedButtonComponent', () => {
 
     it('should select multiple values', () => {
         component.multiple = true;
+        fixture.detectChanges();
         const selectableItem = fixture.elementRef.nativeElement.querySelector('#value2');
         selectableItem.click();
         expect(hostComponent.selectedItem).toEqual(['value2', 'value1']);

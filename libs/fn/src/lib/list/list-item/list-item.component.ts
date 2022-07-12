@@ -73,19 +73,19 @@ export class ListItemComponent {
     constructor(
         private _cd: ChangeDetectorRef,
         private _destroy$: DestroyedBehavior,
-        @Optional() private selectionService: SelectionService,
-        @Optional() @Inject(SelectableItemToken) private selectableItem: SelectableItemToken,
-        @Inject(ListComponent) private listComponent: ListComponent,
+        @Optional() private _selectionService: SelectionService,
+        @Optional() @Inject(SelectableItemToken) private _selectableItem: SelectableItemToken,
+        @Optional() @Inject(ListComponent) private _listComponent: ListComponent | null,
         private _elementRef: ElementRef<HTMLElement>,
-        private disabledProvider: FnDisabledProvider,
-        private readonlyProvider: FnReadonlyProvider,
-        private focusableItemProvider: FnFocusableItemProvider
+        private _disabledProvider: FnDisabledProvider,
+        private _readonlyProvider: FnReadonlyProvider,
+        _focusableItemProvider: FnFocusableItemProvider
     ) {
-        focusableItemProvider.setFocusable(true);
-        if (this.selectionService && this.selectableItem) {
-            this.checkboxContext$ = this.selectionService.value$.pipe(
+        _focusableItemProvider.setFocusable(true);
+        if (this._selectionService && this._selectableItem) {
+            this.checkboxContext$ = this._selectionService.value$.pipe(
                 map((v) => coerceArray(v)),
-                map((value: any[]) => value.includes(this.selectableItem.value)),
+                map((value: any[]) => value.includes(this._selectableItem.value)),
                 distinctUntilChanged(),
                 map((selected) => ({
                     $implicit: selected,
@@ -96,7 +96,7 @@ export class ListItemComponent {
     }
 
     get byline(): boolean {
-        return !!this.listComponent.byline;
+        return !!this._listComponent?.byline;
     }
 
     $templateRef = (template: any): TemplateRef<any> => template;
@@ -107,9 +107,9 @@ export class ListItemComponent {
 
     private toggleItemSelection = (isSelected: boolean): void => {
         if (isSelected) {
-            this.selectionService?.selectItem(this.selectableItem);
+            this._selectionService?.selectItem(this._selectableItem);
         } else {
-            this.selectionService?.deselectItem(this.selectableItem);
+            this._selectionService?.deselectItem(this._selectableItem);
         }
     };
 }

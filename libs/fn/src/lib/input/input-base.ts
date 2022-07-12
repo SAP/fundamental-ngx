@@ -30,7 +30,7 @@ export abstract class InputBase implements AfterViewInit, OnDestroy {
     @Input()
     state: InputState;
 
-    /** Whethert this input is disabled. */
+    /** Whether this input is disabled. */
     disabled: boolean | undefined;
 
     /** Whether this input has been disabled via Angular Forms. */

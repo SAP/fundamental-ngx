@@ -1,3 +1,5 @@
+import { FormsModule } from '@angular/forms';
+import { DisabledBehaviorModule, ReadonlyBehaviorModule } from '@fundamental-ngx/fn/cdk';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
@@ -11,7 +13,8 @@ describe('InputComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [InputComponent]
+            declarations: [InputComponent],
+            imports: [DisabledBehaviorModule, ReadonlyBehaviorModule, FormsModule]
         }).compileComponents();
     });
 
@@ -30,6 +33,7 @@ describe('InputComponent', () => {
 
         states.forEach((state) => {
             component.state = state;
+            component.ngOnChanges();
             fixture.detectChanges();
 
             expect(fixture.nativeElement.classList).toContain(`fn-input--${state}`);
@@ -38,9 +42,13 @@ describe('InputComponent', () => {
 
     it('should writeValue', () => {
         component.writeValue('test');
+        expect(component.inputText).toBe('test');
+    });
+
+    it('should call onTouched and onChange', () => {
         spyOn(component, 'onTouched');
         spyOn(component, 'onChange');
-        expect(component.inputText).toBe('test');
+        component.inputText = 'test';
         expect(component.onTouched).toHaveBeenCalled();
         expect(component.onChange).toHaveBeenCalled();
     });
@@ -58,7 +66,7 @@ runValueAccessorTests({
     testModuleMetadata: {
         imports: [InputModule]
     },
-    supportsOnBlur: true,
+    supportsOnBlur: false,
     nativeControlSelector: `input[id="${INPUT_IDENTIFIER}"]`,
     internalValueChangeSetter: (fixture, value) => {
         fixture.componentInstance.inputText = value;

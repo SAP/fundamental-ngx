@@ -135,6 +135,7 @@ describe('SelectionService', () => {
     it('should listen to the SPACE click', () => {
         const items = component.items.toArray();
         const event = new KeyboardEvent('keydown', {
+            key: 'Space',
             keyCode: SPACE
         });
         items[0].elementRef().nativeElement.dispatchEvent(event);
@@ -145,6 +146,7 @@ describe('SelectionService', () => {
     it('should listen to the ENTER click', () => {
         const items = component.items.toArray();
         const event = new KeyboardEvent('keydown', {
+            key: 'Enter',
             keyCode: ENTER
         });
         items[0].elementRef().nativeElement.dispatchEvent(event);

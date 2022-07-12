@@ -87,7 +87,7 @@ export class InputComponent extends InputBase implements OnInit, OnChanges, Cont
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string[] {
-        return [this.class];
+        return ['fn-input', this.state ? `fn-input--${this.state}` : '', this.class];
     }
 
     /** @hidden */
