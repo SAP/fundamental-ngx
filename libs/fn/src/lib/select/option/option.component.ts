@@ -7,6 +7,7 @@ import {
     EventEmitter,
     HostBinding,
     HostListener,
+    Inject,
     Input,
     OnDestroy,
     Optional,
@@ -15,7 +16,8 @@ import {
 } from '@angular/core';
 import { FnClickedProvider } from '@fundamental-ngx/fn/cdk';
 import { Subject, takeUntil } from 'rxjs';
-import { SelectComponent } from '../select.component';
+import { Select } from '../select.interface';
+import { FN_SELECT_PROVIDER } from '../select.token';
 
 /**
  * Used to represent an option of the select component.
@@ -66,10 +68,10 @@ export class OptionComponent implements OnDestroy, FocusableOption {
     constructor(
         private _elRef: ElementRef,
         private _cdRef: ChangeDetectorRef,
-        @Optional() private _selectComponent: SelectComponent | null,
+        @Optional() @Inject(FN_SELECT_PROVIDER) private _selectComponent: Select | null,
         private _clicked: FnClickedProvider
     ) {
-        this._clicked.pipe(takeUntil(this._destroyed$)).subscribe((data) => {
+        this._clicked.pipe(takeUntil(this._destroyed$)).subscribe(() => {
             this.optionClicked.emit(this);
             this._selectComponent?.optionClicked(this);
         });

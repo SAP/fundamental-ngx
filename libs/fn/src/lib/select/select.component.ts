@@ -19,6 +19,8 @@ import { ENTER, ESCAPE, SPACE, TAB } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { SelectMenuDirective } from './select-menu.directive';
+import { Select } from './select.interface';
+import { FN_SELECT_PROVIDER } from './select.token';
 /**
  * Select component intended to mimic
  * the behaviour of the native select element.
@@ -34,12 +36,16 @@ export type InputState = 'positive' | 'critical' | 'negative' | 'info';
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => SelectComponent),
             multi: true
+        },
+        {
+            provide: FN_SELECT_PROVIDER,
+            useExisting: SelectComponent
         }
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SelectComponent implements AfterContentInit, OnDestroy, ControlValueAccessor {
+export class SelectComponent implements AfterContentInit, OnDestroy, ControlValueAccessor, Select {
     /** Whether the select is opened. */
     @Input()
     opened = false;
@@ -129,9 +135,9 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
     keydownHandler(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [TAB]) && this.opened) {
             event.preventDefault();
-            this._hideMenu();
+            this.hideMenu();
         } else if (this.opened && KeyUtil.isKeyCode(event, ESCAPE)) {
-            this._hideMenu();
+            this.hideMenu();
         } else if (
             !this.opened &&
             document.activeElement === this.selectInput.nativeElement &&
@@ -146,7 +152,7 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
     @HostListener('document:click', ['$event.target'])
     clickOut(target: ElementRef): void {
         if (!this._elRef.nativeElement.contains(target as any) && this.opened) {
-            this._hideMenu();
+            this.hideMenu();
         }
     }
 
@@ -164,7 +170,7 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
             option === clickedOption ? (option.selected = true) : (option.selected = false);
         });
         this.value = clickedOption.value;
-        this._hideMenu();
+        this.hideMenu();
         this._cdRef.detectChanges();
     }
 
@@ -191,13 +197,17 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
         this._internalValue = value;
     }
 
-    /** @hidden */
-    _setMenu(menu: SelectMenuDirective): void {
+    /**
+     * Sets the menu directive.
+     */
+    setMenu(menu: SelectMenuDirective): void {
         this.menu = menu;
     }
 
-    /** @hidden */
-    _hideMenu(): void {
+    /**
+     * Hides opened menu.
+     */
+    hideMenu(): void {
         this.opened = false;
         setTimeout(() => {
             this.selectInput.nativeElement.focus();

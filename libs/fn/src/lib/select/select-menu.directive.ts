@@ -6,12 +6,14 @@ import {
     Directive,
     HostBinding,
     HostListener,
+    Inject,
     Optional,
     QueryList
 } from '@angular/core';
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { OptionComponent } from './option/option.component';
-import { SelectComponent } from './select.component';
+import { Select } from './select.interface';
+import { FN_SELECT_PROVIDER } from './select.token';
 
 @Directive({
     selector: '[fnSelectMenu]'
@@ -33,8 +35,8 @@ export class SelectMenuDirective implements AfterViewInit {
     _focusKeyManager: FocusKeyManager<OptionComponent>;
 
     /** @hidden */
-    constructor(@Optional() private readonly _selectComponent: SelectComponent) {
-        this._selectComponent?._setMenu(this);
+    constructor(@Optional() @Inject(FN_SELECT_PROVIDER) private readonly _selectComponent: Select) {
+        this._selectComponent?.setMenu(this);
     }
 
     /** @hidden */
@@ -46,7 +48,7 @@ export class SelectMenuDirective implements AfterViewInit {
             // passing the event to key manager so, we get a change fired
             this._focusKeyManager.onKeydown(event);
         } else if (KeyUtil.isKeyCode(event, TAB)) {
-            this._selectComponent?._hideMenu();
+            this._selectComponent?.hideMenu();
         }
     }
 
