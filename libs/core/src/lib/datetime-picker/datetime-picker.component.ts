@@ -210,7 +210,7 @@ export class DatetimePickerComponent<D>
     }
 
     get state(): FormStates {
-        if (this._state == null && this.useValidation && this.isInvalidDateInput) {
+        if (this.useValidation && this.isInvalidDateInput) {
             return 'error';
         }
         return this._state;
