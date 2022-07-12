@@ -2516,12 +2516,12 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@fundamental-styles/fn@0.21.0-rc.31":
-  version "0.21.0-rc.31"
-  resolved "https://registry.yarnpkg.com/@fundamental-styles/fn/-/fn-0.21.0-rc.31.tgz#40fb469b1e46189ba8bf622a47b83c2ad60815c1"
-  integrity sha512-Q88WVp9qd73J1JJphJrBkHfSpB4CcB14fekpKMqRK4NgGgqLHfZiX+JwZivb/tJAaAdwrTqe+mRb+X8hBDYUgw==
+"@fundamental-styles/fn@0.24.1-rc.12":
+  version "0.24.1-rc.12"
+  resolved "https://registry.yarnpkg.com/@fundamental-styles/fn/-/fn-0.24.1-rc.12.tgz#9405d33c42e383d865a9bd1e90eb6d61231120d7"
+  integrity sha512-o0fH1+CHhJZBL4OSTqI3DtkrPWLkARYri6H8WtPIXw+BJoCa7uIEY4HM6qizLKoSibEAYhk6Kl3EuxxDHZCY9g==
   dependencies:
-    fundamental-styles "0.21.0-rc.31"
+    fundamental-styles "0.24.1-rc.12"
 
 "@gar/promisify@^1.0.1":
   version "1.1.2"
@@ -9259,15 +9259,15 @@ functional-red-black-tree@^1.0.1:
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
   integrity sha512-dsKNQNdj6xA3T+QlADDA7mOSlX0qiMINjn0cgr+eGHGsbSHzTabcIogz2+p/iqP1Xs6EP/sS2SbqH+brGTbq0g==
 
-fundamental-styles@0.21.0-rc.31:
-  version "0.21.0-rc.31"
-  resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.21.0-rc.31.tgz#456f732334b0bdd8957dbdc8ec7f83b3ee49bbda"
-  integrity sha512-TFUkea+YJ+NSh0KgMIawLkU71e2jJMRrH9WiJpPSbzE+4Yx+qTR7C+QjXTvDj9YM6HeHNBx7RVRm9+PEf9G2/w==
-
 fundamental-styles@0.24.1-rc.1:
   version "0.24.1-rc.1"
   resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.24.1-rc.1.tgz#5e5ff0699ed27afd85c9f38d06d60aa1d3a24294"
   integrity sha512-DWsnoXOG39GR+CBpQwM9MCGKasMt3OKRSSv+EwwmyHuFTEGc++dih3fWKVLc5dM3N6MLhGGD0kyp/PV9vS+jkg==
+
+fundamental-styles@0.24.1-rc.12:
+  version "0.24.1-rc.12"
+  resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.24.1-rc.12.tgz#e78b7626e0164307a84f036e8e178c3f96f1720b"
+  integrity sha512-kGpGSjItRLUhVnrIRkaBSiwoHjGd7DA8OJB1xawlQtdPQGwAmhvjWESO67QHJ2i/kDET0HCFrdrqXqaIAeAOnQ==
 
 gauge@^3.0.0:
   version "3.0.2"
