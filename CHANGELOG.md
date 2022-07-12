@@ -1,4 +1,11 @@
 
+### [0.35.2-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.15...v0.35.2-rc.16) (2022-07-12)
+
+
+### Features
+
+* **fn:** bring more FN components ([#8266](https://github.com/SAP/fundamental-ngx/issues/8266)) ([acb048e](https://github.com/SAP/fundamental-ngx/commit/acb048e10272bcd6d4e4d2d5497395e0b230f6ba)), closes [#7698](https://github.com/SAP/fundamental-ngx/issues/7698) [#7712](https://github.com/SAP/fundamental-ngx/issues/7712) [#7722](https://github.com/SAP/fundamental-ngx/issues/7722) [#7708](https://github.com/SAP/fundamental-ngx/issues/7708) [#7709](https://github.com/SAP/fundamental-ngx/issues/7709) [#7741](https://github.com/SAP/fundamental-ngx/issues/7741) [#7746](https://github.com/SAP/fundamental-ngx/issues/7746) [#7743](https://github.com/SAP/fundamental-ngx/issues/7743) [#7767](https://github.com/SAP/fundamental-ngx/issues/7767) [#7787](https://github.com/SAP/fundamental-ngx/issues/7787) [#7830](https://github.com/SAP/fundamental-ngx/issues/7830) [#7822](https://github.com/SAP/fundamental-ngx/issues/7822) [#7866](https://github.com/SAP/fundamental-ngx/issues/7866) [#7881](https://github.com/SAP/fundamental-ngx/issues/7881) [#7797](https://github.com/SAP/fundamental-ngx/issues/7797) [#7790](https://github.com/SAP/fundamental-ngx/issues/7790)
+
 ### [0.35.2-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.14...v0.35.2-rc.15) (2022-07-11)
 
 ### [0.35.2-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.13...v0.35.2-rc.14) (2022-07-11)
