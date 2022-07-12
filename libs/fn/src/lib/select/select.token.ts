@@ -1,4 +1,4 @@
 import { InjectionToken } from '@angular/core';
-import { SelectComponent } from './select.component';
+import { Select } from './select.interface';
 
-export const FN_SELECT_PROVIDER = new InjectionToken<SelectComponent>('FnSelectProvider');
+export const FN_SELECT_PROVIDER = new InjectionToken<Select>('FnSelectProvider');
