@@ -14,10 +14,13 @@ export class StackblitzDependencies {
         '@angular/localize',
         '@angular/router',
         '@angular/platform-browser',
-        '@angular/platform-browser-dynamic'
+        '@angular/platform-browser-dynamic',
+        '@angular-devkit/build-angular',
+        '@angular/cli'
     ];
 
     private static _dependencies: string[] = [
+        'rxjs',
         '@sap-theming/theming-base-content',
         'core-js',
         'focus-trap',
