@@ -26,9 +26,9 @@
                 placeholder="(none)"
                 i18n-placeholder="@@platformTableP13GroupDialogNoneSelectedColumn|Table column select placeholder"
             >
-                <fd-option *ngFor="let column of columns" [value]="column.key">
+                <li fd-option *ngFor="let column of columns" [value]="column.key">
                     {{ column.label }}
-                </fd-option>
+                </li>
             </fd-select>
 
             <fd-checkbox

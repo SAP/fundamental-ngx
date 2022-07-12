@@ -16,10 +16,10 @@ import { SelectKeyManagerService } from './select-key-manager.service';
             (isOpenChange)="onOpen($event)"
             [fdCompact]="compact"
         >
-            <fd-option id="option-1" [value]="'value-1'">Test1</fd-option>
-            <fd-option id="option-2" [value]="'value-2'">Test2</fd-option>
-            <fd-option id="option-3" [value]="'value-3'">Test3</fd-option>
-            <fd-option id="option-4" [disabled]="disabled" [value]="'value-4'">Test4</fd-option>
+            <li fd-option id="option-1" [value]="'value-1'">Test1</li>
+            <li fd-option id="option-2" [value]="'value-2'">Test2</li>
+            <li fd-option id="option-3" [value]="'value-3'">Test3</li>
+            <li fd-option id="option-4" [disabled]="disabled" [value]="'value-4'">Test4</li>
         </fd-select>
     `
 })
@@ -46,11 +46,11 @@ class TestWrapperComponent {
 @Component({
     template: `
         <fd-select [(value)]="value" formControlName="selectControl">
-            <fd-option id="option-1" [value]="'aaa'">aaaa</fd-option>
-            <fd-option id="option-2" [value]="'bbb'">bbbb</fd-option>
-            <fd-option id="option-2a" [value]="'bxbb'">bxbb</fd-option>
-            <fd-option id="option-3" [value]="'ccc'">cccc</fd-option>
-            <fd-option id="option-4" [value]="'ddd'">dddd</fd-option>
+            <li fd-option id="option-1" [value]="'aaa'">aaaa</li>
+            <li fd-option id="option-2" [value]="'bbb'">bbbb</li>
+            <li fd-option id="option-2a" [value]="'bxbb'">bxbb</li>
+            <li fd-option id="option-3" [value]="'ccc'">cccc</li>
+            <li fd-option id="option-4" [value]="'ddd'">dddd</li>
         </fd-select>
     `
 })

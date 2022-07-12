@@ -1,7 +1,7 @@
 <h4>Default select</h4>
 <form [formGroup]="customForm">
     <fd-select formControlName="selectControl" [required]="true">
-        <fd-option *ngFor="let option of options" [value]="option">{{ option }}</fd-option>
+        <li fd-option *ngFor="let option of options" [value]="option">{{ option }}</li>
     </fd-select>
 </form>
 <small style="display: block">Value: {{ customForm.controls.selectControl.value }}</small>
@@ -12,7 +12,7 @@
 <h4>Disabled select</h4>
 <form [formGroup]="disabledForm">
     <fd-select formControlName="disabledControl">
-        <fd-option *ngFor="let option of options" [value]="option">{{ option }}</fd-option>
+        <li fd-option *ngFor="let option of options" [value]="option">{{ option }}</li>
     </fd-select>
 </form>
 <small style="display: block">Value: {{ disabledForm.controls.disabledControl.value }}</small>

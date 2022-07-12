@@ -6,7 +6,7 @@
         placeholder="Select locale option"
         [(value)]="locale"
     >
-        <fd-option *ngFor="let locale of locales" [value]="locale">{{ locale }}</fd-option>
+        <li fd-option *ngFor="let locale of locales" [value]="locale">{{ locale }}</li>
     </fd-select>
 </div>
 <div fd-form-item>

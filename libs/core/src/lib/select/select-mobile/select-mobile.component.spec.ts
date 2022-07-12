@@ -17,7 +17,7 @@ const MOBILE_CONFIG: MobileModeConfig = { title: 'TITLE', hasCloseButton: true }
             [mobile]="true"
             [mobileConfig]="mobileConfig"
         >
-            <fd-option *ngFor="let option of options" [value]="option">{{ option }}</fd-option>
+            <li fd-option *ngFor="let option of options" [value]="option">{{ option }}</li>
         </fd-select>
     `
 })

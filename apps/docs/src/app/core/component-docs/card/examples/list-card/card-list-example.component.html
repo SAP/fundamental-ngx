@@ -64,7 +64,7 @@
                     [(value)]="selectedMovie"
                     (valueChange)="onValueChange()"
                 >
-                    <fd-option *ngFor="let movie of movies" [value]="movie">{{ movie }}</fd-option>
+                    <li fd-option *ngFor="let movie of movies" [value]="movie">{{ movie }}</li>
                 </fd-select>
             </li>
             <ng-container *ngFor="let cast of casts">

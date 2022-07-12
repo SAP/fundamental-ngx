@@ -36,21 +36,21 @@
                 >
                     <ng-container *ngIf="_includeStrategy.length">
                         <li fd-list-group-header>Include</li>
-                        <fd-option *ngFor="let strategy of _includeStrategy" [value]="strategy.key">
+                        <li fd-option *ngFor="let strategy of _includeStrategy" [value]="strategy.key">
                             <ng-container
                                 [ngTemplateOutlet]="conditionStrategyOption"
                                 [ngTemplateOutletContext]="{ type: _defineTypes.include, strategy: strategy }"
                             ></ng-container>
-                        </fd-option>
+                        </li>
                     </ng-container>
                     <ng-container *ngIf="_excludeStrategy.length">
                         <li fd-list-group-header>Exclude</li>
-                        <fd-option *ngFor="let strategy of _excludeStrategy" [value]="strategy.key">
+                        <li fd-option *ngFor="let strategy of _excludeStrategy" [value]="strategy.key">
                             <ng-container
                                 [ngTemplateOutlet]="conditionStrategyOption"
                                 [ngTemplateOutletContext]="{ type: _defineTypes.exclude, strategy: strategy }"
                             ></ng-container>
-                        </fd-option>
+                        </li>
                     </ng-container>
                 </fd-select>
             </div>
