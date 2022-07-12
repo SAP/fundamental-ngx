@@ -1,20 +1,25 @@
-<div class="fn-select">
-    <div class="fn-text-field">
-        <label *ngIf="label" class="fn-text-field__label">{{ label }}</label>
-        <div class="fn-text-field__input-container" (click)="selectInputClicked($event)">
-            <input
-                #selectInput
-                class="fn-text-field__input fn-select__input"
-                type="text"
-                [attr.placeholder]="placeholder"
-                [(ngModel)]="value"
-                [readonly]="!editable"
-            />
-            <div class="fn-text-field__input-border"></div>
-            <span class="sap-icon sap-icon--navigation-down-arrow"></span>
-        </div>
+<div class="fn-input fn-input--select" [class]="state ? 'fn-input--' + state : ''">
+    <div (click)="selectInputClicked($event)" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
+        <input
+            #selectInput
+            class="fn-input__text-field"
+            type="text"
+            [attr.placeholder]="placeholder"
+            [(ngModel)]="value"
+            [readonly]="!editable"
+        />
+        <div class="fn-input__border"></div>
+        <button class="fn-nested-button" aria-label="nested button" tabindex="-1">
+            <span class="sap-icon sap-icon--megamenu"></span>
+        </button>
     </div>
-    <ul *ngIf="opened && !_optionsListEmpty" class="fn-select__menu" role="listbox" aria-label="Select menu">
-        <ng-content></ng-content>
-    </ul>
+    <ng-template
+        cdkConnectedOverlay
+        [cdkConnectedOverlayOrigin]="trigger"
+        [cdkConnectedOverlayOpen]="opened && !_optionsListEmpty"
+    >
+        <ul [style.width.px]="_selectWidth" aria-label="Select menu" fnSelectMenu #menu>
+            <ng-content></ng-content>
+        </ul>
+    </ng-template>
 </div>

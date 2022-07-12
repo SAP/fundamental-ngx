@@ -1,0 +1,39 @@
+<ng-template [ngTemplateOutlet]="semanticContainer"></ng-template>
+
+<div class="fn-notification__main-container">
+    <ng-content></ng-content>
+    <ng-template [ngTemplateOutlet]="textContainer"></ng-template>
+    <ng-container *ngIf="dismissButton">
+        <ng-template [ngTemplateOutlet]="dismissButton.templateRef"></ng-template>
+    </ng-container>
+</div>
+
+<ng-template #semanticContainer>
+    <div class="fn-notification__semantic-container" *ngIf="semanticTitle">
+        <ng-container *ngIf="semanticIcon">
+            <ng-template [ngTemplateOutlet]="semanticIcon.templateRef"></ng-template>
+        </ng-container>
+        <span class="fn-notification__semantic-title">
+            <ng-template [ngTemplateOutlet]="semanticTitle.templateRef"></ng-template>
+        </span>
+    </div>
+</ng-template>
+
+<ng-template [ngTemplateOutlet]="buttonsContainer"></ng-template>
+
+<ng-template #textContainer>
+    <div class="fn-notification__text-container">
+        <div class="fn-notification__title" *ngIf="title">
+            <ng-template [ngTemplateOutlet]="title.templateRef"></ng-template>
+        </div>
+        <div class="fn-notification__text" *ngIf="message">
+            <ng-template [ngTemplateOutlet]="message.templateRef"></ng-template>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #buttonsContainer>
+    <div class="fn-notification__button-container" *ngIf="actionButtons">
+        <ng-template [ngTemplateOutlet]="actionButtons.templateRef"></ng-template>
+    </div>
+</ng-template>

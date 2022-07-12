@@ -2,17 +2,18 @@ import { Component, ViewEncapsulation } from '@angular/core';
 
 import buttonrc from '!./examples/button-example/button-example.component.html?raw';
 import buttonsecondaryrc from '!./examples/button-example/button-secondary-example.component.html?raw';
-import buttonflatrc from '!./examples/button-example/button-flat-example.component.html?raw';
-import buttonoutlinerc from '!./examples/button-example/button-outline-example.component.html?raw';
-import buttonlinkrc from '!./examples/button-example/button-link-example.component.html?raw';
-import buttonnakedrc from '!./examples/button-example/button-naked-example.component.html?raw';
+import buttonemphasizedrc from '!./examples/button-example/button-emphasized-example.component.html?raw';
+import buttonpositiverc from '!./examples/button-example/button-positive-example.component.html?raw';
+import buttonlayoutrc from '!./examples/button-example/button-layout-example.component.html?raw';
+import buttonnegativerc from '!./examples/button-example/button-negative-example.component.html?raw';
+import buttoncriticalrc from '!./examples/button-example/button-negative-example.component.html?raw';
+import buttonstaterc from '!./examples/button-example/button-state-example.component.html?raw';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-button',
     templateUrl: './button-docs.component.html',
-    styleUrls: ['button-docs.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class ButtonDocsComponent {
@@ -32,35 +33,51 @@ export class ButtonDocsComponent {
         }
     ];
 
-    buttonFlatExample: ExampleFile[] = [
+    buttonEmphasizedExample: ExampleFile[] = [
         {
             language: 'html',
-            code: buttonflatrc,
+            code: buttonemphasizedrc,
             fileName: 'button-flat-example'
         }
     ];
 
-    buttonLinkExample: ExampleFile[] = [
+    buttonLayoutExample: ExampleFile[] = [
         {
             language: 'html',
-            code: buttonlinkrc,
+            code: buttonlayoutrc,
             fileName: 'button-link-example'
         }
     ];
 
-    buttonOutlineExample: ExampleFile[] = [
+    buttonPositiveExample: ExampleFile[] = [
         {
             language: 'html',
-            code: buttonoutlinerc,
+            code: buttonpositiverc,
             fileName: 'button-outline-example'
         }
     ];
 
-    buttonNakedExample: ExampleFile[] = [
+    buttonNegativeExample: ExampleFile[] = [
         {
             language: 'html',
-            code: buttonnakedrc,
+            code: buttonnegativerc,
             fileName: 'button-naked-example'
+        }
+    ];
+
+    buttonCriticalExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: buttoncriticalrc,
+            fileName: 'button-critical-example'
+        }
+    ];
+
+    buttonStatesExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: buttonstaterc,
+            fileName: 'button-state-example'
         }
     ];
 }
