@@ -1,4 +1,11 @@
 
+### [0.35.2-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.16...v0.35.2-rc.17) (2022-07-12)
+
+
+### Bug Fixes
+
+* stackblitz examples ([#8348](https://github.com/SAP/fundamental-ngx/issues/8348)) ([82c35ab](https://github.com/SAP/fundamental-ngx/commit/82c35abc2ba296763342626ecc1be1d5e45566df))
+
 ### [0.35.2-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.15...v0.35.2-rc.16) (2022-07-12)
 
 
