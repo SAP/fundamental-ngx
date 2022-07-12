@@ -11,7 +11,6 @@ import { RtlService } from '@fundamental-ngx/core/utils';
 import { BreadcrumbItemComponent } from './breadcrumb-item.component';
 import { BreadcrumbComponent } from './breadcrumb.component';
 import { whenStable } from '@fundamental-ngx/core/tests';
-import { BreadcrumbHiddenItemComponent } from './breadcrumb-hidden-item/breadcrumb-hidden-item.component';
 
 @Component({
     selector: 'fd-breadcrumb-test-component',
@@ -40,12 +39,7 @@ describe('BreadcrumbComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                declarations: [
-                    BreadcrumbComponent,
-                    BreadcrumbItemComponent,
-                    BreadcrumbHiddenItemComponent,
-                    BreadcrumbWrapperComponent
-                ],
+                declarations: [BreadcrumbComponent, BreadcrumbItemComponent, BreadcrumbWrapperComponent],
                 imports: [PopoverModule, MenuModule, IconModule, LinkModule, RouterModule, RouterTestingModule],
                 providers: [RtlService],
                 schemas: [NO_ERRORS_SCHEMA]
