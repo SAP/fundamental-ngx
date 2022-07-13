@@ -5,6 +5,6 @@
 </div>
 
 <fd-select placeholder="Select value" #select [(value)]="selectedValue" [closeOnOutsideClick]="false">
-    <fd-option *ngFor="let option of options" [value]="option">{{ option }}</fd-option>
+    <li fd-option *ngFor="let option of options" [value]="option">{{ option }}</li>
 </fd-select>
 <small style="display: block">Selected value: {{ selectedValue }}</small>

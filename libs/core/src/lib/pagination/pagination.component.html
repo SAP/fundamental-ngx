@@ -184,6 +184,6 @@
     <label fd-form-label class="fd-pagination__per-page-label">{{ itemsPerPageLabel }}:</label>
 
     <fd-select class="fd-pagination__per-page-select" [value]="itemsPerPage" (valueChange)="_onChangePerPage($event)">
-        <fd-option *ngFor="let option of pageOptions" [value]="option">{{ option }}</fd-option>
+        <li fd-option *ngFor="let option of pageOptions" [value]="option">{{ option }}</li>
     </fd-select>
 </ng-template>
