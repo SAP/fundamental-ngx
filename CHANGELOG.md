@@ -1,4 +1,12 @@
 
+### [0.35.2-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.19...v0.35.2-rc.20) (2022-07-13)
+
+
+### Bug Fixes
+
+* **core:** remove breadcrumb hidden item component ([#8353](https://github.com/SAP/fundamental-ngx/issues/8353)) ([1510b58](https://github.com/SAP/fundamental-ngx/commit/1510b58e9da3df93ec86fa09f9c92fb186a8f523))
+* **core:** select options should be li elements (border radius, accessibility issue) ([#8355](https://github.com/SAP/fundamental-ngx/issues/8355)) ([cd0c9c0](https://github.com/SAP/fundamental-ngx/commit/cd0c9c0f745b39d6dfcb74acb3e026536b77feb0))
+
 ### [0.35.2-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.18...v0.35.2-rc.19) (2022-07-13)
 
 
