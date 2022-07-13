@@ -6,7 +6,9 @@ import {
     ViewEncapsulation,
     ContentChild,
     ViewChild,
-    ChangeDetectionStrategy
+    ChangeDetectionStrategy,
+    AfterViewInit,
+    ChangeDetectorRef
 } from '@angular/core';
 
 import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
@@ -17,6 +19,8 @@ import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.comp
 import { ShellbarUserMenu } from '../model/shellbar-user-menu';
 import { ShellbarUser } from '../model/shellbar-user';
 import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.component';
+import { Subscription } from 'rxjs';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 
 /**
  * The component that represents shellbar actions.
@@ -48,7 +52,7 @@ import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.compo
         '[class.fd-shellbar__group--actions]': 'true'
     }
 })
-export class ShellbarActionsComponent {
+export class ShellbarActionsComponent implements AfterViewInit {
     /** The user data. */
     @Input()
     user: ShellbarUser;
@@ -68,6 +72,9 @@ export class ShellbarActionsComponent {
     @Input()
     collapsedItemMenuLabel: string;
 
+    /** toggles combobox. Shows combobox if true.*/
+    showCombobox = false;
+
     /** @hidden */
     @ContentChildren(ShellbarActionComponent)
     shellbarActions: QueryList<ShellbarActionComponent>;
@@ -77,11 +84,7 @@ export class ShellbarActionsComponent {
     userComponent: ShellbarUserMenuComponent;
 
     /** @hidden */
-    @ViewChild(ShellbarUserMenuComponent)
-    userComponentView: ShellbarUserMenuComponent;
-
-    /** @hidden */
-    @ContentChild(ComboboxComponent)
+    @ContentChild(ComboboxComponent, { static: false })
     comboboxComponent: ComboboxComponent;
 
     /** @hidden */
@@ -91,6 +94,52 @@ export class ShellbarActionsComponent {
     /** @hidden */
     @ContentChild(ProductSwitchComponent, { static: false })
     productSwitchComponent: ProductSwitchComponent;
+
+    /** @hidden */
+    @ViewChild(ShellbarUserMenuComponent)
+    userComponentView: ShellbarUserMenuComponent;
+
+    /** @hidden */
+    @ViewChild('searchButton')
+    searchButton: ButtonComponent;
+
+    /** @hidden */
+    private _subscriptions: Subscription = new Subscription();
+
+    /** @hidden */
+    constructor(private readonly _cdRef: ChangeDetectorRef) {}
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        if (this.comboboxComponent) {
+            this.handleComboboxSearchClick();
+        }
+    }
+
+    /** called when clicked search button. shows combobox */
+    onSearchButtonClick(): void {
+        this.showCombobox = true;
+        setTimeout(() => {
+            this.comboboxComponent.isOpenChangeHandle(true);
+        });
+        this._cdRef.detectChanges();
+        this.comboboxComponent.searchInputElement.nativeElement.focus();
+    }
+
+    /** called when clicked search button on combobox. hides combobox if input-text is empty */
+    handleComboboxSearchClick(): void {
+        this._subscriptions.add(
+            this.comboboxComponent.primaryButtonClicked.subscribe(() => {
+                if (this.comboboxComponent.isEmptyValue) {
+                    this.showCombobox = false;
+                    this.comboboxComponent.isOpenChangeHandle(false);
+                    this._cdRef.detectChanges();
+
+                    this.searchButton.elementRef().nativeElement.focus();
+                }
+            })
+        );
+    }
 
     /** @hidden */
     triggerItems(): void {

@@ -284,9 +284,13 @@ export class ComboboxComponent
     @Output()
     readonly itemClicked: EventEmitter<ComboboxItem> = new EventEmitter<ComboboxItem>();
 
-    /** Event emitted, when the combobox's popover body is opened or closed */
+    /** Event emitted, when the combobox's popovprimaryButtonClickeder body is opened or closed */
     @Output()
     readonly openChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+    /** Event emitted, when the combobox's primary button clicked */
+    @Output()
+    readonly primaryButtonClicked: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** Event emitted when the input text changes. */
     @Output()
@@ -560,6 +564,7 @@ export class ComboboxComponent
         if (this.open && this.listComponent) {
             this.listComponent.setItemActive(0);
         }
+        this.primaryButtonClicked.emit();
     }
 
     /** @hidden */
