@@ -1,4 +1,11 @@
 
+### [0.35.2-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.17...v0.35.2-rc.18) (2022-07-13)
+
+
+### Bug Fixes
+
+* **core:** fixed card layout issues, growing card feature ([#8323](https://github.com/SAP/fundamental-ngx/issues/8323)) ([09685df](https://github.com/SAP/fundamental-ngx/commit/09685dfe2eb4975470393b58dfe451735775eed8))
+
 ### [0.35.2-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.16...v0.35.2-rc.17) (2022-07-12)
 
 
