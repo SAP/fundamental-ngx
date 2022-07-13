@@ -82,7 +82,7 @@ describe('SelectComponent in mobile mode', () => {
 
         expect(fixture.nativeElement.querySelector('.fd-dialog--active')).toBeTruthy();
 
-        expect(fixture.nativeElement.querySelectorAll('fd-option').length).toBe(testComponent.options.length);
+        expect(fixture.nativeElement.querySelectorAll('li').length).toBe(testComponent.options.length);
     });
 
     it('should close', async () => {
@@ -135,7 +135,7 @@ describe('SelectComponent in mobile mode', () => {
 
         await whenStable(fixture);
 
-        fixture.nativeElement.querySelector('fd-option').click();
+        fixture.nativeElement.querySelector('li').click();
 
         await whenStable(fixture);
 
@@ -168,7 +168,7 @@ describe('SelectComponent in mobile mode', () => {
 
         await whenStable(fixture);
 
-        fixture.nativeElement.querySelector('fd-option').click();
+        fixture.nativeElement.querySelector('li').click();
 
         await whenStable(fixture);
 
@@ -186,7 +186,7 @@ describe('SelectComponent in mobile mode', () => {
 
         await whenStable(fixture);
 
-        fixture.nativeElement.querySelector('fd-option').click();
+        fixture.nativeElement.querySelector('li').click();
 
         await whenStable(fixture);
         fixture.nativeElement.querySelector('.sap-icon--decline').click();

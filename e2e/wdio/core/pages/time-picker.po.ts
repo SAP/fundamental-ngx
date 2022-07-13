@@ -35,12 +35,12 @@ export class TimePickerPo extends CoreBaseComponentPo {
     hoursPoint = this.hoursColumn + '> .fd-time__wrapper ul > li';
 
     formatList = '.fd-popover__popper';
-    usFormat = '.cdk-overlay-container ul[fd-list] fd-option:nth-child(1)';
-    frFormat = '.cdk-overlay-container ul[fd-list] fd-option:nth-child(2)';
-    bgFormat = '.cdk-overlay-container ul[fd-list] fd-option:nth-child(3)';
-    zhFormat = '.cdk-overlay-container ul[fd-list] fd-option:nth-child(4)';
-    bnFormat = '.cdk-overlay-container ul[fd-list] fd-option:nth-child(5)';
-    arFormat = '.cdk-overlay-container ul[fd-list] fd-option:nth-child(6)';
+    usFormat = '.cdk-overlay-container ul[fd-list] li[fd-option]:nth-child(1)';
+    frFormat = '.cdk-overlay-container ul[fd-list] li[fd-option]:nth-child(2)';
+    bgFormat = '.cdk-overlay-container ul[fd-list] li[fd-option]:nth-child(3)';
+    zhFormat = '.cdk-overlay-container ul[fd-list] li[fd-option]:nth-child(4)';
+    bnFormat = '.cdk-overlay-container ul[fd-list] li[fd-option]:nth-child(5)';
+    arFormat = '.cdk-overlay-container ul[fd-list] li[fd-option]:nth-child(6)';
 
     openClock(): void {
         click(this.localExample + this.clockIcon);

@@ -45,7 +45,7 @@ export class ValueHelpDialogPo extends BaseComponentPo {
     addBtn = 'button[label="Add"]';
     conditionsInputField = '.fd-popover__control.ng-star-inserted input';
     conditionSelectors = 'fd-popover .fd-select__text-content';
-    dropdownOptions = 'ul fd-option';
+    dropdownOptions = 'ul li[fd-option]';
     xBtn = 'button[glyph="decline"]';
     conditionsButton = 'fd-popover .fd-select__control .fd-button';
     cancelButton = '.fd-dialog__decisive-button';
