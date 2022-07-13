@@ -1,4 +1,11 @@
 
+### [0.35.2-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.18...v0.35.2-rc.19) (2022-07-13)
+
+
+### Bug Fixes
+
+* **core:** correctly display null validity for datepicker ([#8352](https://github.com/SAP/fundamental-ngx/issues/8352)) ([add0d61](https://github.com/SAP/fundamental-ngx/commit/add0d61cf7fb0fb49d420670d5715580b2209fa3))
+
 ### [0.35.2-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.17...v0.35.2-rc.18) (2022-07-13)
 
 
