@@ -15,7 +15,7 @@ export class FixedCardLayoutExampleComponent {
     }
 
     update(): void {
-        this._changeDetectorRef.detectChanges();
+        this._changeDetectorRef.markForCheck();
     }
 
     cardDraggedDropped(dropEvent: any): void {
