@@ -6,6 +6,7 @@ import {
     ContentChildren,
     forwardRef,
     Input,
+    OnChanges,
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
@@ -26,7 +27,7 @@ export type ShellbarSizes = 's' | 'm' | 'l' | 'xl';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ShellbarComponent implements AfterContentInit {
+export class ShellbarComponent implements OnChanges, AfterContentInit {
     /** Size of Shellbar component 's' | 'm' | 'l' | 'xl' */
     @Input()
     size: ShellbarSizes = 'm';
@@ -57,6 +58,15 @@ export class ShellbarComponent implements AfterContentInit {
         if (this.comboboxComponent) {
             this.comboboxComponent.compact = false;
             this.comboboxComponent.inShellbar = true;
+            if (this.size === 'xl' || this.size === 's') {
+                this.comboboxComponent.hideInput = false;
+                this.comboboxComponent.disableHideShowOfInput = true;
+                this.comboboxComponent.hideShowInputField();
+            } else {
+                this.comboboxComponent.hideInput = true;
+                this.comboboxComponent.disableHideShowOfInput = false;
+                this.comboboxComponent.hideShowInputField();
+            }
         }
     }
 
@@ -67,5 +77,9 @@ export class ShellbarComponent implements AfterContentInit {
                 button.elementRef().nativeElement.classList.add('fd-shellbar__button');
             });
         }
+    }
+
+    ngOnChanges(): void {
+        this.applyShellbarModeToCombobox();
     }
 }

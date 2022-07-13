@@ -12,7 +12,6 @@ import { ShellbarActionsComponent } from './shellbar-actions/shellbar-actions.co
 import { ShellbarActionComponent } from './shellbar-action/shellbar-action.component';
 import { ShellbarLogoComponent } from './shellbar-logo/shellbar-logo.component';
 import { ShellbarTitleComponent } from './shellbar-title/shellbar-title.component';
-import { ShellbarSearchComponent } from './shellbar-search/shellbar-search.component';
 
 import { ShellbarUserMenuComponent } from './user-menu/shellbar-user-menu.component';
 import { IconModule } from '@fundamental-ngx/core/icon';
@@ -36,8 +35,7 @@ import { InputGroupModule } from '@fundamental-ngx/core/input-group';
         ShellbarLogoComponent,
         ShellbarTitleComponent,
         ShellbarUserMenuComponent,
-        ShellbarSidenavDirective,
-        ShellbarSearchComponent
+        ShellbarSidenavDirective
     ],
     imports: [
         CommonModule,

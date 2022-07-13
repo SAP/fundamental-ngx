@@ -6,7 +6,9 @@ import {
     ViewEncapsulation,
     ContentChild,
     ViewChild,
-    ChangeDetectionStrategy
+    ChangeDetectionStrategy,
+    ElementRef,
+    AfterViewInit
 } from '@angular/core';
 
 import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
@@ -47,7 +49,7 @@ import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.compo
         '[class.fd-shellbar__group--actions]': 'true'
     }
 })
-export class ShellbarActionsComponent {
+export class ShellbarActionsComponent implements AfterViewInit {
     /** The user data. */
     @Input()
     user: ShellbarUser;
@@ -84,17 +86,24 @@ export class ShellbarActionsComponent {
     @ContentChild(ProductSwitchComponent, { static: false })
     productSwitchComponent: ProductSwitchComponent;
 
+    /** @hidden */
+    @ViewChild('shellBarCombobox')
+    shellBarCombobox: ElementRef<HTMLInputElement>;
+
+    @Input()
     enableSearchComponentOnMobileMode = false;
 
     showInput = false;
 
     handleClickSearch(data: boolean): void {
         this.enableSearchComponentOnMobileMode = data;
-        this.showInput = true;
+        this.comboboxComponent.hideInput = false;
+        this.applyComboboxFullLengthMode();
     }
 
     handleCancleInMobileMode(data: boolean): void {
         this.enableSearchComponentOnMobileMode = data;
+        this.applyComboboxFullLengthMode();
     }
 
     /** @hidden */
@@ -115,5 +124,21 @@ export class ShellbarActionsComponent {
         } else {
             return this.user;
         }
+    }
+
+    applyComboboxFullLengthMode(): void {
+        if (this.enableSearchComponentOnMobileMode) {
+            if (this.shellBarCombobox.nativeElement) {
+                this.shellBarCombobox.nativeElement.style.cssText = `width:100%; z-index:2; position: absolute; left: 0px; top: 0px;`;
+            }
+        } else {
+            if (this.shellBarCombobox.nativeElement) {
+                this.shellBarCombobox.nativeElement.style.cssText = '';
+            }
+        }
+    }
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this.applyComboboxFullLengthMode();
     }
 }

@@ -1,13 +1,22 @@
-<div *ngIf="comboboxComponent" class="fd-shellbar__action fd-shellbar__action--desktop">
-    <ng-content select="fd-combobox"></ng-content>
-</div>
-
-<div class="fd-shellbar__action" [class.fd-shellbar__action--desktop]="!enableSearchComponentOnMobileMode">
-    <fd-shellbar-search
-        [showInput]="showInput"
-        [mobileMode]="enableSearchComponentOnMobileMode"
-        (cancleClick)="handleCancleInMobileMode($event)"
-    ></fd-shellbar-search>
+<div
+    #shellBarCombobox
+    *ngIf="comboboxComponent"
+    class="fd-shellbar__action"
+    [class.fd-shellbar__action--desktop]="!enableSearchComponentOnMobileMode"
+>
+    <div>
+        <ng-content select="fd-combobox"></ng-content>
+        <button
+            *ngIf="enableSearchComponentOnMobileMode"
+            fd-button
+            fdType="transparent"
+            class="fd-shellbar__button"
+            [compact]="false"
+            (click)="handleCancleInMobileMode(false)"
+        >
+            Cancle
+        </button>
+    </div>
 </div>
 
 <div class="fd-shellbar__action fd-shellbar__action--mobile">
