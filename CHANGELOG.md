@@ -1,4 +1,11 @@
 
+### [0.35.2-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.20...v0.35.2-rc.21) (2022-07-14)
+
+
+### Bug Fixes
+
+* **core:** select overflow & styles version bump ([#8349](https://github.com/SAP/fundamental-ngx/issues/8349)) ([e750a90](https://github.com/SAP/fundamental-ngx/commit/e750a90979172e5e17285e47efe9f17658da99aa))
+
 ### [0.35.2-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.19...v0.35.2-rc.20) (2022-07-13)
 
 
