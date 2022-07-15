@@ -6,6 +6,7 @@ export * from './english';
 export * from './french';
 export * from './georgian';
 export * from './german';
+export * from './hebrew';
 export * from './italian';
 export * from './portuguese';
 export * from './romanian';
