@@ -22,28 +22,33 @@
                     fdCompact
                 ></button>
 
-                <fd-menu #menu placement="bottom-end" fdCompact>
-                    <li fd-menu-item>
+                <fd-menu
+                    #menu
+                    placement="bottom-end"
+                    [mobile]="true"
+                    [mobileConfig]="{ title: 'Actions', hasCloseButton: true }"
+                >
+                    <li fd-menu-item (click)="closeMenu()">
                         <div fd-menu-interactive>
                             <span fd-menu-title>Edit</span>
                         </div>
                     </li>
-                    <li fd-menu-item>
+                    <li fd-menu-item (click)="closeMenu()">
                         <div fd-menu-interactive>
                             <span fd-menu-title>Delete</span>
                         </div>
                     </li>
-                    <li fd-menu-item>
+                    <li fd-menu-item (click)="closeMenu()">
                         <div fd-menu-interactive>
                             <span fd-menu-title>Assign</span>
                         </div>
                     </li>
-                    <li fd-menu-item>
+                    <li fd-menu-item (click)="closeMenu()">
                         <div fd-menu-interactive>
                             <span fd-menu-title>Expire</span>
                         </div>
                     </li>
-                    <li fd-menu-item>
+                    <li fd-menu-item (click)="closeMenu()">
                         <div fd-menu-interactive>
                             <span fd-menu-title>Archive</span>
                         </div>
