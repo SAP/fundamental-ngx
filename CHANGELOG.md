@@ -1,4 +1,11 @@
 
+### [0.35.2-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.22...v0.35.2-rc.23) (2022-07-15)
+
+
+### Bug Fixes
+
+* **docs:** ignore fd-link styling ([#8360](https://github.com/SAP/fundamental-ngx/issues/8360)) ([f76efd7](https://github.com/SAP/fundamental-ngx/commit/f76efd7a2c097556c63264821f15d5c6796c4868))
+
 ### [0.35.2-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.21...v0.35.2-rc.22) (2022-07-15)
 
 
