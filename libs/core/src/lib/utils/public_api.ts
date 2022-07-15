@@ -41,6 +41,7 @@ export * from './interfaces/css-style-builder.interface';
 export * from './interfaces/has-element-ref.interface';
 export * from './interfaces/keyboard-support-item.interface';
 export * from './interfaces/module-deprecation.interface';
+export * from './interfaces/require.interface';
 
 export * from './decorators/apply-css-class.decorator';
 export * from './decorators/apply-css-style.decorator';
