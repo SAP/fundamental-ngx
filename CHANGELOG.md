@@ -1,4 +1,11 @@
 
+### [0.35.2-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.29...v0.35.2-rc.30) (2022-07-18)
+
+
+### Bug Fixes
+
+* **core:** correct breadcrumb overflow calculation ([#8358](https://github.com/SAP/fundamental-ngx/issues/8358)) ([8b5770a](https://github.com/SAP/fundamental-ngx/commit/8b5770a60dd97b9f27128815824e2ba7cdc397a3))
+
 ### [0.35.2-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.28...v0.35.2-rc.29) (2022-07-18)
 
 
