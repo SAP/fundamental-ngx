@@ -4,11 +4,8 @@
     *ngIf="zoomGlyph"
     role="presentation"
     class="fd-avatar__zoom-icon"
-    tabindex="0"
     [class]="zoomGlyph ? 'sap-icon--' + zoomGlyph : ''"
-    (click)="zoomGlyphClicked.next()"
-    (keyup.space)="zoomGlyphClicked.next()"
-    (keyup.enter)="zoomGlyphClicked.next()"
+    (mousedown)="zoomClicked($event)"
 >
 </i>
 

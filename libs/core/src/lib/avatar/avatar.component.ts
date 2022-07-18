@@ -43,7 +43,7 @@ const ALTER_ICON_OPTIONS = {
         '[attr.tabindex]': '_tabindex'
     }
 })
-export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
+export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnChanges {
     /** User's custom classes */
     @Input()
     class: string;
@@ -218,6 +218,9 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
 
     /** @hidden */
     ngOnChanges(): void {
+        if (this.zoomGlyph) {
+            this.clickable = true;
+        }
         this.buildComponentCssClass();
     }
 
@@ -254,7 +257,17 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     _onClick(event: Event): void {
         if (this.clickable) {
             this.avatarClicked.emit(event);
+            if (this.zoomGlyph) {
+                this.zoomGlyphClicked.next();
+            }
         }
+    }
+
+    /** @hidden */
+    zoomClicked(event: Event): void {
+        event.preventDefault();
+        this.elementRef().nativeElement.focus();
+        this.zoomGlyphClicked.next();
     }
 
     /** @hidden Get an abbreviate from the label or return null if not fit requirements */
