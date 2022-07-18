@@ -1,4 +1,11 @@
 
+### [0.35.2-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.25...v0.35.2-rc.26) (2022-07-18)
+
+
+### Bug Fixes
+
+* **core:** small bug with combobox border radius ([#8354](https://github.com/SAP/fundamental-ngx/issues/8354)) ([d619d9b](https://github.com/SAP/fundamental-ngx/commit/d619d9bac321509a0299ec1688e7a27f075880e0))
+
 ### [0.35.2-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.24...v0.35.2-rc.25) (2022-07-18)
 
 
