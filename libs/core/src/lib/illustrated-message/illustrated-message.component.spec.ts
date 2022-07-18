@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { IllustratedMessageComponent } from './illustrated-message.component';
+import { IllustratedMessageComponent, IllustratedMessageType } from './illustrated-message.component';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
@@ -9,8 +9,8 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
             <figcaption fd-illustrated-message-figcaption>
                 <h3 fd-illustrated-message-title>Unable to load data</h3>
                 <p fd-illustrated-message-text>
-                    Check your internet connection. If that's not it, try refereshing the page. If that still doesn't
-                    help, check with your administratior.
+                    Check your internet connection. If that's not it, try refreshing the page. If that still doesn't
+                    help, check with your administrator.
                 </p>
             </figcaption>
         </figure>
@@ -20,7 +20,7 @@ class TestIllustratedMessageComponent {
     @ViewChild(IllustratedMessageComponent, { static: true, read: ElementRef })
     illustratedMessageElementRef: ElementRef;
 
-    type = 'scene';
+    type: IllustratedMessageType = 'scene';
 }
 
 describe('IllustratedMessageComponent', () => {
@@ -28,11 +28,13 @@ describe('IllustratedMessageComponent', () => {
     let testComponent: TestIllustratedMessageComponent;
     let fixture: ComponentFixture<TestIllustratedMessageComponent>;
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [IllustratedMessageComponent, TestIllustratedMessageComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [IllustratedMessageComponent, TestIllustratedMessageComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestIllustratedMessageComponent);
