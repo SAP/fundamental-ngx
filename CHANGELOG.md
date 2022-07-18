@@ -1,4 +1,11 @@
 
+### [0.35.2-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.27...v0.35.2-rc.28) (2022-07-18)
+
+
+### Bug Fixes
+
+* **core:** fix zoom icon clickability and avatar focus ([#8357](https://github.com/SAP/fundamental-ngx/issues/8357)) ([93567cb](https://github.com/SAP/fundamental-ngx/commit/93567cb2a4c5b1bdf6a6667dc4917ffddc47df38))
+
 ### [0.35.2-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.26...v0.35.2-rc.27) (2022-07-18)
 
 ### [0.35.2-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.25...v0.35.2-rc.26) (2022-07-18)
