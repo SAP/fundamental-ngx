@@ -68,7 +68,7 @@ describe('BreadcrumbComponent', () => {
 
         await whenStable(fixture);
 
-        expect(component.collapsedBreadcrumbItems.length).toBe(0);
+        expect(component._collapsedBreadcrumbItems.length).toBe(0);
     });
 
     it('should handle onResize - shrinking the screen', () => {
@@ -78,6 +78,6 @@ describe('BreadcrumbComponent', () => {
 
         component.onResize();
 
-        expect(component.collapsedBreadcrumbItems.length).toBeGreaterThan(1);
+        expect(component._collapsedBreadcrumbItems.length).toBeGreaterThan(1);
     });
 });
