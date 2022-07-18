@@ -27,7 +27,7 @@ import { A, BACKSPACE, DELETE, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@an
 import { fromEvent, merge, Subject, Subscription } from 'rxjs';
 import { filter, mapTo, takeUntil, debounceTime } from 'rxjs/operators';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
-import { applyCssClass, CssClassBuilder, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder, KeyUtil, resizeObservable, RtlService } from '@fundamental-ngx/core/utils';
 import { TokenComponent } from './token.component';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
@@ -204,7 +204,7 @@ export class TokenizerComponent
             );
         });
         if (!this.compact && !this.compactCollapse) {
-            this._handleInitCozyTokenCount();
+            this._handleCozyTokenCount();
         }
     }
 
@@ -212,6 +212,7 @@ export class TokenizerComponent
     ngAfterContentInit(): void {
         this._listenElementEvents();
         this.previousElementWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
+        this._listenOnResize();
         this.onResize();
     }
 
@@ -321,12 +322,14 @@ export class TokenizerComponent
     }
 
     /** @hidden */
-    @HostListener('window:resize', [])
     onResize(): void {
         if (this._elementRef) {
             const elementWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
             this._resetTokens();
             this.previousElementWidth = elementWidth;
+            if (!this.compact && !this.compactCollapse) {
+                this._handleCozyTokenCount();
+            }
         }
     }
 
@@ -511,7 +514,7 @@ export class TokenizerComponent
     }
 
     /** @hidden */
-    private _handleInitCozyTokenCount(): void {
+    private _handleCozyTokenCount(): void {
         // because justify-content breaks scrollbar, it cannot be used on cozy screens, so use JS to scroll to the end
         this.tokenizerInnerEl.nativeElement.scrollLeft = this.tokenizerInnerEl.nativeElement.scrollWidth;
         this._getHiddenCozyTokenCount();
@@ -686,5 +689,12 @@ export class TokenizerComponent
                 this._tokenizerHasFocus = focused;
                 this._cdRef.markForCheck();
             });
+    }
+
+    /** @hidden Listen window resize and distribute cards on column change */
+    private _listenOnResize(): void {
+        resizeObservable(this.elementRef().nativeElement)
+            .pipe(debounceTime(60), takeUntil(this._onDestroy$))
+            .subscribe(() => this.onResize());
     }
 }

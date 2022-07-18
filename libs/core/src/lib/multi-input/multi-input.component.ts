@@ -492,6 +492,9 @@ export class MultiInputComponent
 
         this.tokenizer.removeSelectedTokens();
 
+        this.tokenizer.tokenizerInnerEl.nativeElement.scrollLeft =
+            this.tokenizer.tokenizerInnerEl.nativeElement.scrollWidth;
+
         this._changeDetRef.detectChanges();
     }
 
