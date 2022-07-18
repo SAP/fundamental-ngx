@@ -1,4 +1,11 @@
 
+### [0.35.2-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.28...v0.35.2-rc.29) (2022-07-18)
+
+
+### Features
+
+* **core:** add inline svg option for illustrated message ([#8363](https://github.com/SAP/fundamental-ngx/issues/8363)) ([d6ed039](https://github.com/SAP/fundamental-ngx/commit/d6ed039e68fba54a5d53d499097d5627bcb61d5f))
+
 ### [0.35.2-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.27...v0.35.2-rc.28) (2022-07-18)
 
 
