@@ -158,4 +158,15 @@ export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
         this.menuComponent.toggle();
         event.preventDefault();
     }
+
+    /**
+     * We catch interactions with item, Enter, Space, Mouse click and Touch click,
+     * if original element had router link we are proxying click to that element
+     * */
+    itemClicked(breadcrumbItem: BreadcrumbItemComponent, $event: any): void {
+        if (breadcrumbItem.needsClickProxy) {
+            $event.preventDefault();
+            breadcrumbItem.breadcrumbLink.elementRef().nativeElement.click();
+        }
+    }
 }

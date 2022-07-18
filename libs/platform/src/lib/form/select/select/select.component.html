@@ -24,10 +24,11 @@
     (valueChange)="_onSelection($event)"
 >
     <ng-content></ng-content>
-    <fd-option *ngIf="noValueLabel" [disabled]="false" [value]="null">
+    <li fd-option *ngIf="noValueLabel" [disabled]="false" [value]="null">
         {{ noValueLabel }}
-    </fd-option>
-    <fd-option
+    </li>
+    <li
+        fd-option
         *ngFor="let item of _optionItems; index as index"
         [disabled]="item.disabled ? true : false"
         [value]="item.value"
@@ -39,7 +40,7 @@
             [ngTemplateOutlet]="listItem"
             [ngTemplateOutletContext]="{ optionItem: item, index: index }"
         ></ng-container>
-    </fd-option>
+    </li>
 </fd-select>
 
 <ng-template let-optionItem="optionItem" let-index="index" #listItem>

@@ -14,14 +14,19 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { OptionComponent } from './option/option.component';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
-import { DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
+import { KeyUtil, resizeObservable } from '@fundamental-ngx/core/utils';
+import { ENTER, ESCAPE, SPACE, TAB } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { SelectMenuDirective } from './select-menu.directive';
+import { Select } from './select.interface';
+import { FN_SELECT_PROVIDER } from './select.token';
 /**
  * Select component intended to mimic
  * the behaviour of the native select element.
  */
+export type InputState = 'positive' | 'critical' | 'negative' | 'info';
+
 @Component({
     selector: 'fn-select',
     templateUrl: './select.component.html',
@@ -31,13 +36,17 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => SelectComponent),
             multi: true
+        },
+        {
+            provide: FN_SELECT_PROVIDER,
+            useExisting: SelectComponent
         }
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SelectComponent implements AfterContentInit, OnDestroy, ControlValueAccessor {
-    /** Whether or not the select is opened. */
+export class SelectComponent implements AfterContentInit, OnDestroy, ControlValueAccessor, Select {
+    /** Whether the select is opened. */
     @Input()
     opened = false;
 
@@ -49,10 +58,14 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
     @Input()
     placeholder: string;
 
+    /** The state of the input. */
+    @Input()
+    state?: InputState;
+
     /** @hidden The select value. */
     private _internalValue: string;
 
-    /** Whether or not this select is editable. */
+    /** Whether this select is editable. */
     @Input()
     editable = false;
 
@@ -63,6 +76,8 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
     /** @hidden */
     @ViewChild('selectInput', { read: ElementRef })
     selectInput: ElementRef;
+
+    menu: SelectMenuDirective;
 
     @Input()
     get value(): any {
@@ -79,28 +94,35 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
         this.onChange(newValue);
     }
 
+    _selectWidth = 0;
+
     /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
     _optionsListEmpty = false;
 
-    constructor(private _cdRef: ChangeDetectorRef, private _elRef: ElementRef) {}
+    constructor(private _cdRef: ChangeDetectorRef, private _elRef: ElementRef<HTMLElement>) {}
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this.options.forEach((option) => {
-            this._subscriptions.add(
-                option.optionClicked.subscribe((clickedOption) => {
-                    this.optionClicked(clickedOption);
-                })
-            );
-            if (this._internalValue && option.value === this._internalValue) {
-                setTimeout(() => {
-                    option.selected = true;
-                });
-            }
+        this._selectWidth = this._elRef.nativeElement.getBoundingClientRect().width;
+
+        resizeObservable(this._elRef.nativeElement).subscribe(() => {
+            this._selectWidth = this._elRef.nativeElement.getBoundingClientRect().width;
         });
+
+        if (!this._internalValue) {
+            return;
+        }
+
+        const selectedOption = this.options.find((option) => option.value === this._internalValue);
+
+        if (selectedOption) {
+            setTimeout(() => {
+                selectedOption.selected = true;
+            });
+        }
     }
 
     /** @hidden */
@@ -111,54 +133,18 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
     /** @hidden */
     @HostListener('keydown', ['$event'])
     keydownHandler(event: KeyboardEvent): void {
-        if (
-            document.activeElement === this.selectInput.nativeElement &&
-            (KeyUtil.isKeyCode(event, TAB) || (KeyUtil.isKeyCode(event, DOWN_ARROW) && this.opened))
-        ) {
-            let foundFirst = false;
-            this.options.forEach((option) => {
-                if (option.elementRef.nativeElement.style.display !== 'none' && !foundFirst) {
-                    foundFirst = true;
-                    option._focus();
-                }
-            });
+        if (KeyUtil.isKeyCode(event, [TAB]) && this.opened) {
+            event.preventDefault();
+            this.hideMenu();
         } else if (this.opened && KeyUtil.isKeyCode(event, ESCAPE)) {
-            this.opened = false;
+            this.hideMenu();
         } else if (
             !this.opened &&
             document.activeElement === this.selectInput.nativeElement &&
-            KeyUtil.isKeyCode(event, SPACE)
+            (KeyUtil.isKeyCode(event, SPACE) || KeyUtil.isKeyCode(event, ENTER))
         ) {
             event.preventDefault();
             this.opened = true;
-        } else if (KeyUtil.isKeyCode(event, ENTER)) {
-            const focusedOption = this._getFocusedOption();
-            if (focusedOption) {
-                this.optionClicked(focusedOption);
-            }
-        } else if (
-            KeyUtil.isKeyCode(event, DOWN_ARROW) ||
-            KeyUtil.isKeyCode(event, UP_ARROW) ||
-            KeyUtil.isKeyCode(event, TAB)
-        ) {
-            const focusedOption = this._getFocusedOption();
-            if (focusedOption) {
-                event.preventDefault();
-                const visibleOptions = this.options
-                    .toArray()
-                    .filter((option) => option.elementRef.nativeElement.style.display !== 'none');
-                const focusedIndex = visibleOptions.indexOf(focusedOption);
-                let newIndex = focusedIndex;
-                if (KeyUtil.isKeyCode(event, DOWN_ARROW) || (KeyUtil.isKeyCode(event, TAB) && !event.shiftKey)) {
-                    newIndex = focusedIndex + 1;
-                } else if (KeyUtil.isKeyCode(event, UP_ARROW) || (KeyUtil.isKeyCode(event, TAB) && event.shiftKey)) {
-                    newIndex = focusedIndex - 1;
-                }
-                const nextOption = visibleOptions[newIndex];
-                if (nextOption) {
-                    nextOption._focus();
-                }
-            }
         }
     }
 
@@ -166,7 +152,7 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
     @HostListener('document:click', ['$event.target'])
     clickOut(target: ElementRef): void {
         if (!this._elRef.nativeElement.contains(target as any) && this.opened) {
-            this.opened = false;
+            this.hideMenu();
         }
     }
 
@@ -184,7 +170,8 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
             option === clickedOption ? (option.selected = true) : (option.selected = false);
         });
         this.value = clickedOption.value;
-        this.opened = false;
+        this.hideMenu();
+        this._cdRef.detectChanges();
     }
 
     /** @hidden */
@@ -210,9 +197,21 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
         this._internalValue = value;
     }
 
-    /** @hidden */
-    private _getFocusedOption(): OptionComponent | undefined {
-        return this.options.find((option) => option.elementRef.nativeElement.classList.contains('focus-visible'));
+    /**
+     * Sets the menu directive.
+     */
+    setMenu(menu: SelectMenuDirective): void {
+        this.menu = menu;
+    }
+
+    /**
+     * Hides opened menu.
+     */
+    hideMenu(): void {
+        this.opened = false;
+        setTimeout(() => {
+            this.selectInput.nativeElement.focus();
+        });
     }
 
     /** @hidden */

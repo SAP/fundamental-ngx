@@ -8,7 +8,7 @@ let nextUniqueId = 0;
  */
 @Component({
     selector: 'fdp-option',
-    template: `<fd-option [id]="id" [value]="value" [disabled]="disabled"><ng-content></ng-content></fd-option>`,
+    template: `<li fd-option [id]="id" [value]="value" [disabled]="disabled"><ng-content></ng-content></li>`,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })

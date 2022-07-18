@@ -10,7 +10,7 @@ export class FormContainerPo extends BaseComponentPo {
     popover = '.cdk-overlay-container .cdk-overlay-pane';
     helpIcon = '.sap-icon--hint';
     fdSwitch = 'fd-switch label';
-    dropdownOption = '.cdk-overlay-container fd-option';
+    dropdownOption = '.cdk-overlay-container li[fd-option]';
     dropdownOptionAlt = 'ul .fd-list__item span';
     comboboxListItem = '.cdk-overlay-container li';
 

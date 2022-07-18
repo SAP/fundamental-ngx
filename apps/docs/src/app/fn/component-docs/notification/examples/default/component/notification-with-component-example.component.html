@@ -1,0 +1,24 @@
+<fn-notification-content>
+    <fn-avatar
+        [circle]="true"
+        *ngIf="notification.data?.avatar"
+        [image]="notification.data!.avatar"
+        size="l"
+    ></fn-avatar>
+    <ng-template fnNotificationTitle>{{ notification.title }}</ng-template>
+    <ng-template fnNotificationText>{{ notification.message }}</ng-template>
+    <ng-template fnNotificationDismissButton>
+        <button class="fn-nested-button" (click)="notificationRef.dismissWithAction('Dismiss')">
+            <span class="sap-icon sap-icon--decline"></span>
+        </button>
+    </ng-template>
+    <ng-template fnNotificationActionButtons>
+        <button fn-button emphasized="true" (click)="notificationRef.dismissWithAction('Agree')" label="Agree"></button>
+        <button
+            fn-button
+            fnType="secondary"
+            (click)="notificationRef.dismissWithAction('Reject')"
+            label="Reject"
+        ></button>
+    </ng-template>
+</fn-notification-content>

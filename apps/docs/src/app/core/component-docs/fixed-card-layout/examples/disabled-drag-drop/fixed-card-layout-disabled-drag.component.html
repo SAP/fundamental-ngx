@@ -1,5 +1,7 @@
 <div style="margin-bottom: 1rem">
-    <button fd-button (click)="changeDragBehaviour()">{{ dragDisabled ? 'Enable' : 'Disable' }} Drag</button>
+    <button class="disable-dnd" fd-button (click)="changeDragBehaviour()">
+        {{ dragDisabled ? 'Enable' : 'Disable' }} Drag
+    </button>
 </div>
 
 <div style="padding: 1rem; overflow: auto">

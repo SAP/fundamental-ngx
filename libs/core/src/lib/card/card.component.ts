@@ -1,8 +1,6 @@
 import {
-    AfterViewChecked,
     ChangeDetectionStrategy,
     Component,
-    ContentChild,
     ElementRef,
     HostBinding,
     Input,
@@ -13,12 +11,10 @@ import {
 } from '@angular/core';
 
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
-import equal from 'fast-deep-equal';
 
 import { CardType, CLASS_NAME } from './constants';
 import { Subscription } from 'rxjs';
 import { getCardModifierClassNameByCardType } from './utils';
-import { FD_CARD_CONTAINER } from './card.tokens';
 import {
     ContentDensityObserver,
     contentDensityObserverProviders,
@@ -41,7 +37,7 @@ let cardId = 0;
         })
     ]
 })
-export class CardComponent implements OnChanges, AfterViewChecked, OnInit, CssClassBuilder, OnDestroy {
+export class CardComponent implements OnChanges, OnInit, CssClassBuilder, OnDestroy {
     /** Badge */
     @Input() badge: string;
 
@@ -66,24 +62,8 @@ export class CardComponent implements OnChanges, AfterViewChecked, OnInit, CssCl
     @HostBinding('attr.role')
     role = 'region';
 
-    /** Reference to the card container element */
-    @ContentChild(FD_CARD_CONTAINER)
-    cardContainer: { containsList: boolean };
-
     /** @hidden */
     class: string;
-
-    /** @hidden */
-    get classList(): string[] {
-        return [
-            CLASS_NAME.card,
-            this.cardType ? getCardModifierClassNameByCardType(this.cardType) : '',
-            this.cardContainer?.containsList ? CLASS_NAME.cardList : ''
-        ];
-    }
-
-    /** @hidden */
-    private _previousClassList: string[];
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -99,13 +79,6 @@ export class CardComponent implements OnChanges, AfterViewChecked, OnInit, CssCl
     }
 
     /** @hidden */
-    ngAfterViewChecked(): void {
-        if (!equal(this._previousClassList, this.classList)) {
-            this.buildComponentCssClass();
-        }
-    }
-
-    /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
     }
@@ -118,8 +91,7 @@ export class CardComponent implements OnChanges, AfterViewChecked, OnInit, CssCl
     @applyCssClass
     /** @hidden */
     buildComponentCssClass(): string[] {
-        this._previousClassList = this.classList;
-        return this.classList;
+        return [CLASS_NAME.card, this.cardType ? getCardModifierClassNameByCardType(this.cardType) : ''];
     }
 
     /** @hidden */

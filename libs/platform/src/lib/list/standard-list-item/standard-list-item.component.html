@@ -173,6 +173,7 @@
             (click)="$event.stopPropagation()"
             [compact]="contentDensity | isCompactDensity"
             [(ngModel)]="_selected"
+            [ariaLabel]="ariaLabel"
             [attr.aria-selected]="_selected"
         >
         </fd-checkbox>

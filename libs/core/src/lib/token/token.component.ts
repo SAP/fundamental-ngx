@@ -89,7 +89,15 @@ export class TokenComponent implements AfterViewInit, OnDestroy {
     /** Emitted when a token is clicked. */
     @Output()
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    onTokenClick: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
+    onTokenClick = new EventEmitter<MouseEvent>();
+
+    /** Emitted when a there's a keydown registered on the token. */
+    @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+    onTokenKeydown = new EventEmitter<KeyboardEvent>();
+
+    /** @hidden */
+    totalCount: number;
 
     constructor(
         public elementRef: ElementRef,
@@ -124,8 +132,15 @@ export class TokenComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     tokenKeydownHandler(event): void {
+        this.onTokenKeydown.emit(event);
         if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
             this.onTokenClick.emit(event);
         }
+    }
+
+    /** @hidden */
+    _setTotalCount(count: number): void {
+        this.totalCount = count;
+        this._cdRef.markForCheck();
     }
 }

@@ -18,6 +18,7 @@ import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { TableModule } from '@fundamental-ngx/core/table';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
+import { FormModule } from '@fundamental-ngx/core/form';
 import { FixedCardLayoutCustomWidthExampleComponent } from './examples/custom-width/fixed-card-layout-custom-width-example.component';
 import { FixedCardLayoutCustomColumnWidthExampleComponent } from './examples/custom-column-width/fixed-card-layout-custom-column-width-example.component';
 import { FixedCardLayoutMaxColumnsExampleComponent } from './examples/max-columns/fixed-card-layout-max-columns-example.component';
@@ -44,7 +45,8 @@ const routes: Routes = [
         ObjectStatusModule,
         SegmentedButtonModule,
         TableModule,
-        ToolbarModule
+        ToolbarModule,
+        FormModule
     ],
     exports: [RouterModule],
     declarations: [

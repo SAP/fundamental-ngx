@@ -11,7 +11,7 @@
                 (ngModelChange)="rule.setColumnKey($event)"
                 (ngModelChange)="_onModelChange()"
             >
-                <fd-option *ngFor="let column of rule.columns" [value]="column.key">{{ column.label }}</fd-option>
+                <li fd-option *ngFor="let column of rule.columns" [value]="column.key">{{ column.label }}</li>
             </fd-select>
             <!-- Strategy -->
             <fd-select
@@ -23,7 +23,7 @@
                 (ngModelChange)="rule.setStrategy($event)"
                 (ngModelChange)="_onModelChange()"
             >
-                <fd-option *ngFor="let strategy of rule.strategies" [value]="strategy">
+                <li fd-option *ngFor="let strategy of rule.strategies" [value]="strategy">
                     <ng-container [ngSwitch]="strategy">
                         <span *ngSwitchCase="'between'" i18n="@@platformTableP13FilterStrategyLabelBetween">
                             between
@@ -85,7 +85,7 @@
                             Not Defined
                         </span>
                     </ng-container>
-                </fd-option>
+                </li>
             </fd-select>
         </div>
     </div>
@@ -137,13 +137,11 @@
                             (ngModelChange)="_onModelChange()"
                             [required]="true"
                         >
-                            <fd-option [value]="undefined" i18n="@@platformTableP13FilterBooleanOptionNotDefined">
+                            <li fd-option [value]="undefined" i18n="@@platformTableP13FilterBooleanOptionNotDefined">
                                 &nbsp;
-                            </fd-option>
-                            <fd-option [value]="true" i18n="@@platformTableP13FilterBooleanOptionTrue"> Yes </fd-option>
-                            <fd-option [value]="false" i18n="@@platformTableP13FilterBooleanOptionFalse">
-                                No
-                            </fd-option>
+                            </li>
+                            <li fd-option [value]="true" i18n="@@platformTableP13FilterBooleanOptionTrue">Yes</li>
+                            <li fd-option [value]="false" i18n="@@platformTableP13FilterBooleanOptionFalse">No</li>
                         </fd-select>
                     </ng-container>
                     <ng-container *ngSwitchDefault>

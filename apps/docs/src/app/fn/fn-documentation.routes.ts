@@ -20,6 +20,11 @@ export const ROUTES: Routes = [
                     import('./component-docs/checkbox/checkbox-docs.module').then((m) => m.CheckboxDocsModule)
             },
             {
+                path: 'generic-tag',
+                loadChildren: () =>
+                    import('./component-docs/generic-tag/generic-tag-docs.module').then((m) => m.GenericTagDocsModule)
+            },
+            {
                 path: 'select',
                 loadChildren: () => import('./component-docs/select/select-docs.module').then((m) => m.SelectDocsModule)
             },
@@ -28,12 +33,15 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/tabs/tabs-docs.module').then((m) => m.TabsDocsModule)
             },
             {
-                path: 'tag',
-                loadChildren: () => import('./component-docs/tag/tag-docs.module').then((m) => m.TagDocsModule)
-            },
-            {
                 path: 'switch',
                 loadChildren: () => import('./component-docs/switch/switch-docs.module').then((m) => m.SwitchDocsModule)
+            },
+            {
+                path: 'progress-bar',
+                loadChildren: () =>
+                    import('./component-docs/progress-bar/progress-bar-docs.module').then(
+                        (m) => m.ProgressBarDocsModule
+                    )
             },
             {
                 path: 'radio',
@@ -50,6 +58,87 @@ export const ROUTES: Routes = [
             {
                 path: 'slider',
                 loadChildren: () => import('./component-docs/slider/slider-docs.module').then((m) => m.SliderDocsModule)
+            },
+            {
+                path: 'segmented-button',
+                loadChildren: () =>
+                    import('./component-docs/segmented-button/segmented-button-docs.module').then(
+                        (m) => m.SegmentedButtonDocsModule
+                    )
+            },
+            {
+                path: 'list',
+                loadChildren: () => import('./component-docs/list/list-docs.module').then((m) => m.ListDocsModule)
+            },
+            {
+                path: 'list-byline',
+                loadChildren: () =>
+                    import('./component-docs/list-byline/list-byline-docs.module').then((m) => m.ListBylineDocsModule)
+            },
+            {
+                path: 'avatar',
+                loadChildren: () => import('./component-docs/avatar/avatar-docs.module').then((m) => m.AvatarDocsModule)
+            },
+            {
+                path: 'info-label',
+                loadChildren: () =>
+                    import('./component-docs/info-label/info-label-docs.module').then((m) => m.InfoLabelDocsModule)
+            },
+            {
+                path: 'message-strip',
+                loadChildren: () =>
+                    import('./component-docs/message-strip/message-strip-docs.module').then(
+                        (m) => m.MessageStripDocsModule
+                    )
+            },
+            {
+                path: 'object-status',
+                loadChildren: () =>
+                    import('./component-docs/object-status/object-status-docs.module').then(
+                        (m) => m.ObjectStatusDocsModule
+                    )
+            },
+            {
+                path: 'selectable-list',
+                loadChildren: () =>
+                    import('./component-docs/utilities/selectable-list/selectable-list-docs.module').then(
+                        (m) => m.SelectableListDocsModule
+                    )
+            },
+            {
+                path: 'focusable-list',
+                loadChildren: () =>
+                    import('./component-docs/utilities/focusable-list/focusable-list-docs.module').then(
+                        (m) => m.FocusableListDocsModule
+                    )
+            },
+            {
+                path: 'disabled',
+                loadChildren: () =>
+                    import('./component-docs/utilities/fn-disabled/fn-disabled-docs.module').then(
+                        (m) => m.FnDisabledDocsModule
+                    )
+            },
+            {
+                path: 'clicked',
+                loadChildren: () =>
+                    import('./component-docs/utilities/fn-clicked/fn-clicked-docs.module').then(
+                        (m) => m.FnClickedDocsModule
+                    )
+            },
+            {
+                path: 'message-toast',
+                loadChildren: () =>
+                    import('./component-docs/message-toast/message-toast-docs.module').then(
+                        (m) => m.MessageToastDocsModule
+                    )
+            },
+            {
+                path: 'notification',
+                loadChildren: () =>
+                    import('./component-docs/notification/notification-docs.module').then(
+                        (m) => m.NotificationDocsModule
+                    )
             }
         ]
     }

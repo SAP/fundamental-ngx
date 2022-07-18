@@ -6,6 +6,7 @@
     [attr.aria-roledescription]="ariaRoleDescription"
     (click)="tokenClickHandler($event)"
     (keydown)="tokenKeydownHandler($event)"
+    [attr.aria-setsize]="totalCount"
     [class.fd-token__disabled]="disabled"
     [class.fd-token--compact]="_contentDensityObserver.isCompact$ | async"
     [class.fd-token--selected]="selected"

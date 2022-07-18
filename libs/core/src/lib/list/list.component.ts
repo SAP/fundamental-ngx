@@ -21,7 +21,6 @@ import { FocusEscapeDirection, KeyboardSupportService } from '@fundamental-ngx/c
 import { ListGroupHeaderDirective } from './directives/list-group-header.directive';
 import { ListFocusItem } from './list-focus-item.model';
 import { ListNavigationItemComponent } from './list-navigation-item/list-navigation-item.component';
-import { FD_LIST } from './list.tokens';
 import {
     ContentDensityObserver,
     contentDensityObserverProviders,
@@ -45,10 +44,6 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         KeyboardSupportService,
-        {
-            provide: FD_LIST,
-            useExisting: ListComponent
-        },
         contentDensityObserverProviders({
             modifiers: { [ContentDensityMode.COMPACT]: 'fd-list--compact' }
         })
