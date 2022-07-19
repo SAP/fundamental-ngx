@@ -16,6 +16,7 @@ export * from './polish';
 export * from './portuguese';
 export * from './romanian';
 export * from './russian';
+export * from './sinhala';
 export * from './spanish';
 export * from './turkish';
 export * from './ukrainian';

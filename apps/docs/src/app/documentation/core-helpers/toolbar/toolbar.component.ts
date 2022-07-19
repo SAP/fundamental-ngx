@@ -31,6 +31,7 @@ import {
     FD_LANGUAGE_PORTUGUESE,
     FD_LANGUAGE_ROMANIAN,
     FD_LANGUAGE_RUSSIAN,
+    FD_LANGUAGE_SINHALA,
     FD_LANGUAGE_SPANISH,
     FD_LANGUAGE_TURKISH,
     FD_LANGUAGE_UKRAINIAN
@@ -89,6 +90,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         { name: 'Português', value: FD_LANGUAGE_PORTUGUESE },
         { name: 'Română', value: FD_LANGUAGE_ROMANIAN },
         { name: 'Русский', value: FD_LANGUAGE_RUSSIAN },
+        { name: 'සිංහල', value: FD_LANGUAGE_SINHALA },
         { name: 'Española', value: FD_LANGUAGE_SPANISH },
         { name: 'Türkçe', value: FD_LANGUAGE_TURKISH },
         { name: 'Українська', value: FD_LANGUAGE_UKRAINIAN }
