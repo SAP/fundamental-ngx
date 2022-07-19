@@ -202,6 +202,10 @@ export class DatePickerComponent<D>
     @Input()
     closeOnDateChoose = true;
 
+    /** Enables Today date selection button if true */
+    @Input()
+    showTodayButton = false;
+
     /**
      * Function used to disable previous button in the calendar header.
      */
@@ -531,11 +535,11 @@ export class DatePickerComponent<D>
 
     onTodayButtonClick(): void {
         const todayDate = this._dateTimeAdapter.today();
-        const todayDateRange: DateRange<D> = { start: todayDate, end: todayDate };
 
         if (this.type === 'single') {
             this.handleSingleDateChange(todayDate);
         } else if (this.type === 'range') {
+            const todayDateRange: DateRange<D> = { start: todayDate, end: todayDate };
             this.handleRangeDateChange(todayDateRange);
         }
         this.closeFromCalendar(); // closes only single type calendar

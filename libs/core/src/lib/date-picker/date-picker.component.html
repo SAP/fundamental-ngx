@@ -72,7 +72,7 @@
             [nextButtonDisableFunction]="nextButtonDisableFunction"
         ></fd-calendar>
 
-        <div fd-bar barDesign="footer">
+        <div *ngIf="showTodayButton" fd-bar barDesign="footer">
             <div fd-bar-right>
                 <fd-bar-element>
                     <button fd-button label="Today" (click)="onTodayButtonClick()"></button>
