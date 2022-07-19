@@ -1,4 +1,11 @@
 
+### [0.35.2-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.30...v0.35.2-rc.31) (2022-07-19)
+
+
+### Bug Fixes
+
+* **core:** fixed card layout enhancements ([#8391](https://github.com/SAP/fundamental-ngx/issues/8391)) ([5896e29](https://github.com/SAP/fundamental-ngx/commit/5896e29409fb2ed6bee00e1eb665bf868a4f2966))
+
 ### [0.35.2-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.29...v0.35.2-rc.30) (2022-07-18)
 
 
