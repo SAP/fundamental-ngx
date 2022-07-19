@@ -9,6 +9,7 @@ import { DatePickerComponent } from './date-picker.component';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { FormMessageModule } from '@fundamental-ngx/core/form';
+import { BarModule } from '@fundamental-ngx/core/bar';
 
 @NgModule({
     declarations: [DatePickerComponent],
@@ -20,7 +21,8 @@ import { FormMessageModule } from '@fundamental-ngx/core/form';
         FormsModule,
         InputGroupModule,
         ButtonModule,
-        FormMessageModule
+        FormMessageModule,
+        BarModule
     ],
     exports: [DatePickerComponent]
 })

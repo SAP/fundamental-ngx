@@ -638,6 +638,18 @@ export class DatePickerComponent<D>
         this._changeDetectionRef.detectChanges();
     }
 
+    onTodayButtonClick(): void {
+        const todayDate = this._dateTimeAdapter.today();
+        const todayDateRange: DateRange<D> = { start: todayDate, end: todayDate };
+
+        if (this.type === 'single') {
+            this.handleSingleDateChange(todayDate);
+        } else if (this.type === 'range') {
+            this.handleRangeDateChange(todayDateRange);
+        }
+        this.closeFromCalendar(); // closes only single type calendar
+    }
+
     /**
      * @hidden
      * Method, which is responsible for transforming string to date, depending on type or
