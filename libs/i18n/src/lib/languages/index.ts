@@ -8,6 +8,7 @@ export * from './georgian';
 export * from './german';
 export * from './hebrew';
 export * from './italian';
+export * from './polish';
 export * from './portuguese';
 export * from './romanian';
 export * from './russian';
