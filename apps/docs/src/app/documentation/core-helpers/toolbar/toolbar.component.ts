@@ -14,6 +14,7 @@ import {
     FdLanguage,
     FD_LANGUAGE,
     FD_LANGUAGE_ALBANIAN,
+    FD_LANGUAGE_ARABIC,
     FD_LANGUAGE_BULGARIAN,
     FD_LANGUAGE_CHINESE,
     FD_LANGUAGE_CROATIAN,
@@ -70,6 +71,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
 
     translations = [
         { name: 'Albanian', value: FD_LANGUAGE_ALBANIAN },
+        { name: 'Arabic', value: FD_LANGUAGE_ARABIC },
         { name: 'Български', value: FD_LANGUAGE_BULGARIAN },
         { name: '中国人', value: FD_LANGUAGE_CHINESE },
         { name: 'Hrvatski', value: FD_LANGUAGE_CROATIAN },
