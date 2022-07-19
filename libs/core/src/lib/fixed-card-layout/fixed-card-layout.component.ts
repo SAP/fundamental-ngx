@@ -24,7 +24,7 @@ import {
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { CdkDrag, CdkDragDrop, CdkDragEnter } from '@angular/cdk/drag-drop';
 import { Subject, Subscription } from 'rxjs';
-import { debounceTime, delay, distinct, takeUntil } from 'rxjs/operators';
+import { debounceTime, distinct, filter, takeUntil } from 'rxjs/operators';
 
 import { resizeObservable, RtlService, getDocumentFontSize } from '@fundamental-ngx/core/utils';
 import { FixedCardLayoutItemComponent } from './fixed-card-layout-item/fixed-card-layout-item.component';
@@ -183,7 +183,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
     _placeholderMargin: boolean;
 
     /** @hidden */
-    private _previousNumberOfColumns: number;
+    _skipListenResize = false;
 
     /** @hidden FocusKeyManager instance */
     private _keyboardEventsManager: FocusKeyManager<FixedCardLayoutItemComponent>;
@@ -211,7 +211,6 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
     /** @hidden */
     ngAfterViewInit(): void {
         this._processCards();
-        this.updateLayout();
 
         this._listenOnResize();
         this._listenOnCardsChange();
@@ -228,7 +227,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
         if ('maxColumns' in changes || 'cardMinimumWidth' in changes) {
             this.updateLayout();
         } else if ('columnsWidthConfig' in changes) {
-            this._setColumnsWidth();
+            this._setCardColumnsWidth();
         }
     }
 
@@ -252,7 +251,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
 
     /** Distribute cards on window resize */
     updateLayout(): void {
-        if (!this._cards.length || !this._availableWidth) {
+        if (!this._cards.length) {
             return;
         }
 
@@ -270,13 +269,9 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
             screenSize: this._availableWidth
         });
 
-        if (this._previousNumberOfColumns !== this._numberOfColumns) {
-            this._previousNumberOfColumns = this._numberOfColumns;
-            this._updateColumns();
-            return;
-        }
-
-        this._setColumnsWidth();
+        this._setCardColumns();
+        this._setCardColumnsWidth();
+        this._setContainerHeight();
     }
 
     /** @hidden */
@@ -294,7 +289,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
             (event.container.getSortedItems().length ? REM_IN_PX : 0);
 
         // When we move the card into a certain column we should increase the height of that column by the card height
-        this._calculateContainerHeight(columnIndexToAddSpace, spaceToAdd);
+        this._setContainerHeight(columnIndexToAddSpace, spaceToAdd);
     }
 
     /** @hidden */
@@ -374,7 +369,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
             items: this._cards.toArray()
         });
 
-        this._updateColumns();
+        this.updateLayout();
     }
 
     /** @hidden */
@@ -393,23 +388,17 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
     /** @hidden Listen window resize and distribute cards on column change */
     private _listenOnResize(): void {
         resizeObservable(this._layout.nativeElement)
-            .pipe(debounceTime(60), takeUntil(this._onDestroy$))
+            .pipe(
+                debounceTime(60),
+                filter(() => this._skipListenResize),
+                takeUntil(this._onDestroy$)
+            )
             .subscribe(() => this.updateLayout());
     }
 
     /** @hidden Listen card change and distribute cards on column change */
     private _listenOnCardsChange(): void {
-        this._cards.changes.pipe(delay(0)).subscribe(() => {
-            this._processCards();
-            this._updateColumns();
-        });
-    }
-
-    /** @hidden Renders layout on column changes */
-    private _updateColumns(): void {
-        this._setCardColumns();
-        this._setColumnsWidth(false);
-        this._calculateContainerHeight();
+        this._cards.changes.subscribe(() => this._processCards());
     }
 
     /** @hidden */
@@ -417,6 +406,8 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
         this._cardsArray = this._cards
             .toArray()
             .sort((firstCard, secondCard) => firstCard.fdCardDef - secondCard.fdCardDef);
+
+        this.updateLayout();
     }
 
     /** @hidden Distribute cards among columns to arrange them in "Z" flow */
@@ -440,16 +431,16 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
         this._cardColumns = columns;
 
         this._cardColumns.forEach((column) => {
-            if (column.length > 0 && column.length < 2) {
+            if (column.length === 1) {
                 this._singleItemColumns.add(column[0].fdCardDef);
             }
         });
 
-        this._listenToCardsSizeChange();
+        this._listenOnCardsSizeChange();
     }
 
     /** @hidden */
-    private _setColumnsWidth(detectChanges = true): void {
+    private _setCardColumnsWidth(): void {
         this._columnsWidth = new Map();
 
         const configPresent =
@@ -472,10 +463,6 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
 
             column.forEach((card) => this._columnsWidth.set(card.fdCardDef, columnWidth));
         });
-
-        if (detectChanges) {
-            this._changeDetector.detectChanges();
-        }
     }
 
     /**
@@ -483,7 +470,9 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
      * Calculate container height accordingly to the the card columns height
      * Parameters used to increase the height of the column where drag'n'drop placeholder currently is
      */
-    private _calculateContainerHeight(columnIndexToAddSpace = -1, spaceToAdd = 0): void {
+    private _setContainerHeight(columnIndexToAddSpace = -1, spaceToAdd = 0): void {
+        this._skipListenResize = true;
+
         this._changeDetector.detectChanges();
 
         const cardColumns = this._cardColumns.map((column) =>
@@ -506,10 +495,12 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
         this._containerHeight = Math.max(...columnsHeights) + 4;
 
         this._changeDetector.detectChanges();
+
+        this._skipListenResize = false;
     }
 
     /** @hidden */
-    private _listenToCardsSizeChange(): void {
+    private _listenOnCardsSizeChange(): void {
         this._cardsSizeChangeSubscription.unsubscribe();
         this._cardsSizeChangeSubscription = new Subscription();
 
@@ -523,7 +514,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
                     this._cardsSizeChangeSubscription.add(
                         resizeObservable(card.nativeElement)
                             .pipe(distinct((resizeEntry) => resizeEntry[0].contentRect.height))
-                            .subscribe(() => this._calculateContainerHeight())
+                            .subscribe(() => this._setContainerHeight())
                     );
                 })
         );
