@@ -71,6 +71,14 @@
             [previousButtonDisableFunction]="previousButtonDisableFunction"
             [nextButtonDisableFunction]="nextButtonDisableFunction"
         ></fd-calendar>
+
+        <div fd-bar barDesign="footer">
+            <div fd-bar-right>
+                <fd-bar-element>
+                    <button fd-button label="Today" (click)="onTodayButtonClick()"></button>
+                </fd-bar-element>
+            </div>
+        </div>
     </fd-popover-body>
 </fd-popover>
 
