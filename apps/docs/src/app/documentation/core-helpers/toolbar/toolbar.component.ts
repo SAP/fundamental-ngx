@@ -15,6 +15,7 @@ import {
     FD_LANGUAGE,
     FD_LANGUAGE_ALBANIAN,
     FD_LANGUAGE_ARABIC,
+    FD_LANGUAGE_BELARUSIAN,
     FD_LANGUAGE_BULGARIAN,
     FD_LANGUAGE_CHINESE,
     FD_LANGUAGE_CROATIAN,
@@ -70,8 +71,9 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
     versions: any[];
 
     translations = [
-        { name: 'Albanian', value: FD_LANGUAGE_ALBANIAN },
-        { name: 'Arabic', value: FD_LANGUAGE_ARABIC },
+        { name: 'Shqip', value: FD_LANGUAGE_ALBANIAN },
+        { name: 'العربية', value: FD_LANGUAGE_ARABIC },
+        { name: 'Беларускі', value: FD_LANGUAGE_BELARUSIAN },
         { name: 'Български', value: FD_LANGUAGE_BULGARIAN },
         { name: '中国人', value: FD_LANGUAGE_CHINESE },
         { name: 'Hrvatski', value: FD_LANGUAGE_CROATIAN },
@@ -82,7 +84,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         { name: 'Deutsch', value: FD_LANGUAGE_GERMAN },
         { name: 'עִברִית', value: FD_LANGUAGE_HEBREW },
         { name: 'Hindi', value: FD_LANGUAGE_HINDI },
-        { name: 'Italiana', value: FD_LANGUAGE_ITALIAN },
+        { name: 'Italiano', value: FD_LANGUAGE_ITALIAN },
         { name: 'Polski', value: FD_LANGUAGE_POLISH },
         { name: 'Português', value: FD_LANGUAGE_PORTUGUESE },
         { name: 'Română', value: FD_LANGUAGE_ROMANIAN },

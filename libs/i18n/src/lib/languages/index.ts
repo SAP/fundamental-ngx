@@ -1,5 +1,6 @@
 export * from './albanian';
 export * from './arabic';
+export * from './belarusian';
 export * from './bulgarian';
 export * from './chinese';
 export * from './croatian';
