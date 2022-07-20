@@ -1,4 +1,11 @@
 
+### [0.35.2-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.31...v0.35.2-rc.32) (2022-07-20)
+
+
+### Bug Fixes
+
+* **core:** adjust size on time column resize ([#8404](https://github.com/SAP/fundamental-ngx/issues/8404)) ([ce765b8](https://github.com/SAP/fundamental-ngx/commit/ce765b8e7a279df7e0d38249bc9a921a3b3fd214))
+
 ### [0.35.2-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.30...v0.35.2-rc.31) (2022-07-19)
 
 
