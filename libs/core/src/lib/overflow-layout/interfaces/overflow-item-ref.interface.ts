@@ -1,9 +1,18 @@
 import { ElementRef, TemplateRef } from '@angular/core';
+import { Observable } from 'rxjs';
 import { OverflowItem } from './overflow-item.interface';
 
-export type OverflowItemDirectiveContext = { $implicit: boolean; index: number };
+export type OverflowItemDirectiveContext<T = any> = {
+    $implicit: boolean;
+    index: number;
+    first$: Observable<boolean>;
+    last$: Observable<boolean>;
+    first: boolean;
+    last: boolean;
+    item: T;
+};
 
-export interface OverflowItemRef {
+export interface OverflowItemRef<T = any> {
     /**
      * Element reference.
      */
@@ -20,10 +29,21 @@ export interface OverflowItemRef {
      * The index of the item in the array of items.
      */
     index: number;
+
+    /** Whether this item is first in the array */
+    first$: Observable<boolean>;
+
+    /** Whether this item is last in the array */
+    last$: Observable<boolean>;
+
+    first: boolean;
+    last: boolean;
     /**
      * Template reference of the directive.
      */
-    templateRef: TemplateRef<OverflowItemDirectiveContext>;
+    templateRef: TemplateRef<OverflowItemDirectiveContext<T>>;
+
+    item: T;
 
     /**
      * Sets the element reference of the directive.
@@ -36,4 +56,8 @@ export interface OverflowItemRef {
      * @param item Overflow item directive.
      */
     setOverflowItem(item: OverflowItem): void;
+
+    setLast(value: boolean): void;
+
+    setFirst(value: boolean): void;
 }

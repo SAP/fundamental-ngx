@@ -1,8 +1,10 @@
+import { PortalModule } from '@angular/cdk/portal';
 import { Component, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { OverflowLayoutModule } from '@fundamental-ngx/core/overflow-layout';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { MenuModule } from '@fundamental-ngx/core/menu';
 import { IconModule } from '@fundamental-ngx/core/icon';
@@ -40,7 +42,16 @@ describe('BreadcrumbComponent', () => {
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 declarations: [BreadcrumbComponent, BreadcrumbItemComponent, BreadcrumbWrapperComponent],
-                imports: [PopoverModule, MenuModule, IconModule, LinkModule, RouterModule, RouterTestingModule],
+                imports: [
+                    PopoverModule,
+                    MenuModule,
+                    IconModule,
+                    LinkModule,
+                    RouterModule,
+                    RouterTestingModule,
+                    OverflowLayoutModule,
+                    PortalModule
+                ],
                 providers: [RtlService],
                 schemas: [NO_ERRORS_SCHEMA]
             }).compileComponents();
@@ -59,25 +70,26 @@ describe('BreadcrumbComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should handle onResize - enlarging the screen', async () => {
-        spyOn(component.elementRef.nativeElement.parentElement as Element, 'getBoundingClientRect').and.returnValue({
-            width: component.elementRef.nativeElement.getBoundingClientRect().width + 100
-        } as any);
+    it('should handle onResize - enlarging the screen', fakeAsync(() => {
+        const hiddenItemsCountSpy = spyOn(component, '_onHiddenItemsCountChange').and.callThrough();
 
+        component.elementRef.nativeElement.parentElement!.style.width = '500px';
         component.onResize();
 
-        await whenStable(fixture);
+        tick(1000);
 
-        expect(component._collapsedBreadcrumbItems.length).toBe(0);
-    });
+        expect(hiddenItemsCountSpy).toHaveBeenCalledWith(0);
+    }));
 
-    it('should handle onResize - shrinking the screen', () => {
-        spyOn(component.elementRef.nativeElement.parentElement as Element, 'getBoundingClientRect').and.returnValue({
-            width: component.elementRef.nativeElement.getBoundingClientRect().width / 2
-        } as any);
+    it('should handle onResize - shrinking the screen', fakeAsync(() => {
+        const hiddenItemsCountSpy = spyOn(component, '_onHiddenItemsCountChange').and.callThrough();
 
+        component.elementRef.nativeElement.parentElement!.style.width = '200px';
         component.onResize();
+        fixture.detectChanges();
 
-        expect(component._collapsedBreadcrumbItems.length).toBeGreaterThan(1);
-    });
+        tick(1000);
+
+        expect(hiddenItemsCountSpy).toHaveBeenCalledWith(2);
+    }));
 });

@@ -1,5 +1,5 @@
 import { FocusableOption } from '@angular/cdk/a11y';
-import { ElementRef } from '@angular/core';
+import { ElementRef, EventEmitter } from '@angular/core';
 
 export interface OverflowItem extends FocusableOption {
     /**
@@ -18,4 +18,6 @@ export interface OverflowItem extends FocusableOption {
      * Whether the item is hidden.
      */
     hidden: boolean;
+
+    hiddenChange: EventEmitter<boolean>;
 }
