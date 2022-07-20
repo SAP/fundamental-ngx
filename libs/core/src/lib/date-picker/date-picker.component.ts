@@ -206,6 +206,9 @@ export class DatePickerComponent<D>
     @Input()
     showTodayButton = false;
 
+    @Input()
+    todayButtonLabel = 'Today';
+
     /**
      * Function used to disable previous button in the calendar header.
      */

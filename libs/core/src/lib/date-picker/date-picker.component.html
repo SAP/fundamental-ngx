@@ -75,7 +75,7 @@
         <div *ngIf="showTodayButton" fd-bar barDesign="footer">
             <div fd-bar-right>
                 <fd-bar-element>
-                    <button fd-button label="Today" (click)="onTodayButtonClick()"></button>
+                    <button fd-button [label]="todayButtonLabel" (click)="onTodayButtonClick()"></button>
                 </fd-bar-element>
             </div>
         </div>
