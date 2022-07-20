@@ -15,12 +15,13 @@
     <div
         *ngFor="let card of _cardsArray; let cardIndex = index"
         cdkDropList
-        cdkDropListSortingDisabled
         class="fd-fixed-card-layout__card"
         [class.fd-fixed-card-layout__card--single]="_singleItemColumns.has(card.fdCardDef)"
         [style.min-width.px]="_columnsWidth.get(card.fdCardDef)"
         [style.max-width.px]="_columnsWidth.get(card.fdCardDef)"
+        [style.display]="_hiddenCard === card ? 'none' : 'block'"
         [cdkDropListData]="cardIndex"
+        [cdkDropListSortPredicate]="_sortPredicateFn"
         (cdkDropListEntered)="_onDropListEntered($event)"
     >
         <div
@@ -32,6 +33,7 @@
             [cdkDragStartDelay]="dragStartDelay"
             [itemIndex]="_itemIndexes.get(card.fdCardDef)!"
             [groupIndex]="_groupIndexes.get(card.fdCardDef)!"
+            (cdkDragStarted)="_onDragStarted($event)"
             (cdkDragDropped)="_onDragDropped($event)"
         >
             <fd-fixed-card-layout-item>
