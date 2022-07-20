@@ -538,14 +538,12 @@ export class DatePickerComponent<D>
 
     onTodayButtonClick(): void {
         const todayDate = this._dateTimeAdapter.today();
-
         if (this.type === 'single') {
             this.handleSingleDateChange(todayDate);
+            this.closeFromCalendar();
         } else if (this.type === 'range') {
-            const todayDateRange: DateRange<D> = { start: todayDate, end: todayDate };
-            this.handleRangeDateChange(todayDateRange);
+            this.handleRangeDateChange({ start: todayDate, end: todayDate });
         }
-        this.closeFromCalendar(); // closes only single type calendar
     }
 
     /**
