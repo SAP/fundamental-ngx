@@ -1,5 +1,7 @@
+import { CdkScrollableModule } from '@angular/cdk/scrolling';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
@@ -52,7 +54,9 @@ const routes: Routes = [
         RatingIndicatorModule,
         AvatarModule,
         ObjectNumberModule,
-        ObjectStatusModule
+        ObjectStatusModule,
+        CdkScrollableModule,
+        InlineHelpModule
     ],
     exports: [RouterModule],
     declarations: [

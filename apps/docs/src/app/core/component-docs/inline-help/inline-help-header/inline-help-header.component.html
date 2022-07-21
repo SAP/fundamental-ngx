@@ -1,9 +1,15 @@
 <fd-doc-page>
     <header>Inline Help</header>
     <description>
-        Inline help is used to display help text in a popover, often inline with headers, body text and form labels. It
-        also uses the popover component and supports its whole functionality. All of properties and settings from
-        popover component can be used can be used in inline help.
+        <p>
+            Inline help is used to display help text in a popover, often inline with headers, body text and form labels.
+            It also uses the popover component and supports its whole functionality. All of properties and settings from
+            popover component can be used can be used in inline help.
+        </p>
+        <fd-message-strip [dismissible]="false" type="information">
+            <b>IMPORTANT</b> If you place Inline Hint inside scrollable container - you need to add
+            <code>cdkScrollable</code> directive into container and import <code>ScrollingModule</code> into module.
+        </fd-message-strip>
     </description>
     <import module="InlineHelpModule" subPackage="inline-help"></import>
 

@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { FlexibleColumnLayoutModule } from '@fundamental-ngx/core/flexible-column-layout';
+import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
@@ -44,7 +45,8 @@ const routes: Routes = [
         PlatformButtonModule,
         BarModule,
         FlexibleColumnLayoutModule,
-        DynamicPageModule
+        DynamicPageModule,
+        InlineHelpModule
     ],
     exports: [RouterModule],
     declarations: [
