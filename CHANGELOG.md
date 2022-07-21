@@ -1,4 +1,11 @@
 
+### [0.35.2-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.33...v0.35.2-rc.34) (2022-07-21)
+
+
+### Bug Fixes
+
+* **core:** product switch should loop back to the start ([#8416](https://github.com/SAP/fundamental-ngx/issues/8416)) ([8d6ef26](https://github.com/SAP/fundamental-ngx/commit/8d6ef26662588e36b7ca6c59b2d61fbe4b39c4b4))
+
 ### [0.35.2-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.32...v0.35.2-rc.33) (2022-07-21)
 
 ### [0.35.2-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.31...v0.35.2-rc.32) (2022-07-20)
