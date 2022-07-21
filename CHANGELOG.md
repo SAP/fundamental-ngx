@@ -1,4 +1,11 @@
 
+### [0.35.2-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.34...v0.35.2-rc.35) (2022-07-21)
+
+
+### Bug Fixes
+
+* **core:** dynamic page with inline hint ([#8426](https://github.com/SAP/fundamental-ngx/issues/8426)) ([6562a5e](https://github.com/SAP/fundamental-ngx/commit/6562a5ed3b41324ed72c2a2549936155f31cd176))
+
 ### [0.35.2-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.33...v0.35.2-rc.34) (2022-07-21)
 
 
