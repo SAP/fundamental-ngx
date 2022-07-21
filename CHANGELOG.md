@@ -1,4 +1,11 @@
 
+### [0.35.2-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.35...v0.35.2-rc.36) (2022-07-21)
+
+
+### Bug Fixes
+
+* **core:** update token tabindex behavior ([#8264](https://github.com/SAP/fundamental-ngx/issues/8264)) ([7ad618b](https://github.com/SAP/fundamental-ngx/commit/7ad618b1a4c12162d6b4802ea2ae3206cf9fbb06)), closes [#8171](https://github.com/SAP/fundamental-ngx/issues/8171)
+
 ### [0.35.2-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.34...v0.35.2-rc.35) (2022-07-21)
 
 
