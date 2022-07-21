@@ -408,8 +408,8 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
     private _listenOnResize(): void {
         resizeObservable(this._layout.nativeElement)
             .pipe(
-                debounceTime(60),
                 filter(() => this._listenResize),
+                debounceTime(50),
                 takeUntil(this._onDestroy$)
             )
             .subscribe(() => this.updateLayout());
@@ -528,8 +528,9 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
                     this._cardsSizeChangeSubscription.add(
                         resizeObservable(card.nativeElement)
                             .pipe(
+                                filter(() => this._listenResize),
                                 distinct((resizeEntry) => resizeEntry[0].contentRect.height),
-                                filter(() => this._listenResize)
+                                debounceTime(50)
                             )
                             .subscribe(() => this._setContainerHeight())
                     );
