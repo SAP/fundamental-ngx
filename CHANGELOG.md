@@ -1,4 +1,11 @@
 
+### [0.35.2-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.36...v0.35.2-rc.37) (2022-07-21)
+
+
+### Bug Fixes
+
+* **core:** time height bug ([#8427](https://github.com/SAP/fundamental-ngx/issues/8427)) ([8a614ac](https://github.com/SAP/fundamental-ngx/commit/8a614aca358427eb0180a4f01b17da3f166af085))
+
 ### [0.35.2-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.35.2-rc.35...v0.35.2-rc.36) (2022-07-21)
 
 
