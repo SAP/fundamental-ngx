@@ -691,8 +691,12 @@
   /* Avatar */
   --fdAvatar_BackgroundColor: var(--sapBackgroundColor);
   --fdAvatar_Tile_BackgroundColor: var(--sapBackgroundColor);
-  --fdAvatar-Transparent_BackgroundColor: var(--sapBackgroundColor);
+  --fdAvatar_Transparent_BackgroundColor: var(--sapBackgroundColor);
   --fdAvatar_Border: 0.0625rem solid var(--sapGroup_ContentBorderColor);
+  --fdAvatar_Text_Shadow: var(--sapContent_ContrastTextShadow);
+  --fdAvatar_Focus_Outline_Offset: -0.125rem;
+  --fdAvatar_Focus_Outline_Radius: 0;
+  --fdAvatar_Focus_Outline_Radius_Circle: 0;
   --fdAvatar_Accent_Color: var(--sapBackgroundColor);
   --fdAvatar_Accent_Color_1: var(--sapBackgroundColor);
   --fdAvatar_Accent_Color_2: var(--sapBackgroundColor);
@@ -727,6 +731,8 @@
   /* Avatar Group */
   --fdAvatarGroup_MoreButton_Border: 0.125rem;
   --fdAvatarGroup_MoreButton_Vertical_Offset: -0.3125rem;
+  --fdAvatarGroup_Focus_Outline_Radius: 0;
+  --fdAvatarGroup_Focus_Outline_Offset: -0.125rem;
   /* Radio */
   --fdRadio_Selected_Color: var(--sapContent_IconColor);
   --fdRadio_Inner_Content_Size: 0.625rem;
@@ -849,7 +855,7 @@
   --fdMessageStrip_Border_Color_Error: var(--sapErrorBorderColor);
   --fdMessageStrip_Border_Color_Warning: var(--sapWarningBorderColor);
   --fdMessageStrip_Border_Color_Neutral: var(--sapNeutralBorderColor);
-  --fdMessageStrip_Border_Color_Informative: var(--sapInformativeBorderColor);
+  --fdMessageStrip_Border_Color_Informative: var(--sapInformationBorderColor);
   --fdMessageStrip_Icon_Color_Success: var(--sapPositiveElementColor);
   --fdMessageStrip_Icon_Color_Error: var(--sapNegativeElementColor);
   --fdMessageStrip_Icon_Color_Warning: var(--sapCriticalElementColor);

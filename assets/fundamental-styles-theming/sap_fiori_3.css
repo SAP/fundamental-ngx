@@ -544,8 +544,12 @@
   /* Avatar */
   --fdAvatar_BackgroundColor: var(--sapAccentColor6);
   --fdAvatar_Tile_BackgroundColor: var(--sapTile_IconColor);
-  --fdAvatar-Transparent_BackgroundColor: transparent;
+  --fdAvatar_Transparent_BackgroundColor: transparent;
   --fdAvatar_Border: none;
+  --fdAvatar_Text_Shadow: var(--sapContent_ContrastTextShadow);
+  --fdAvatar_Focus_Outline_Offset: -0.125rem;
+  --fdAvatar_Focus_Outline_Radius: 0;
+  --fdAvatar_Focus_Outline_Radius_Circle: 0;
   --fdAvatar_Accent_Color: var(--sapContent_ContrastTextColor);
   --fdAvatar_Accent_Color_1: var(--sapAccentColor1);
   --fdAvatar_Accent_Color_2: var(--sapAccentColor2);
@@ -580,6 +584,8 @@
   /* Avatar Group */
   --fdAvatarGroup_MoreButton_Border: var(--sapButton_BorderWidth);
   --fdAvatarGroup_MoreButton_Vertical_Offset: -0.1875rem;
+  --fdAvatarGroup_Focus_Outline_Radius: 0;
+  --fdAvatarGroup_Focus_Outline_Offset: -0.125rem;
   /* Radio */
   --fdRadio_Selected_Color: var(--sapSelectedColor);
   --fdRadio_Inner_Content_Size: 0.625rem;
@@ -700,7 +706,7 @@
   --fdMessageStrip_Border_Color_Error: var(--sapErrorBorderColor);
   --fdMessageStrip_Border_Color_Warning: var(--sapWarningBorderColor);
   --fdMessageStrip_Border_Color_Neutral: var(--sapNeutralBorderColor);
-  --fdMessageStrip_Border_Color_Informative: var(--sapInformativeBorderColor);
+  --fdMessageStrip_Border_Color_Informative: var(--sapInformationBorderColor);
   --fdMessageStrip_Icon_Color_Success: var(--sapPositiveElementColor);
   --fdMessageStrip_Icon_Color_Error: var(--sapNegativeElementColor);
   --fdMessageStrip_Icon_Color_Warning: var(--sapCriticalElementColor);
@@ -830,6 +836,8 @@
   --fdBar_Left_Area_Padding_Right: 0;
   --fdBar_Middle_Area_Padding_X: 0.5rem;
   --fdBar_Right_Area_Padding_Left: 0;
+  --fdBar_Header_Font_Family: inherit;
+  --fdBar_Header_Color: inherit;
   /** Object List */
   --fdObject_List_Title_Font_Size: var(--sapFontHeader4Size);
   --fdObject_List_Title_Font_Weight: var(--sapFontHeaderWeight);

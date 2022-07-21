@@ -19,6 +19,12 @@
 		</li>
 	</ul>
 </section>
+<section class="tsd-panel">
+	<h3>Implements</h3>
+	<ul class="tsd-hierarchy">
+		<li><span class="tsd-signature-type">AfterViewInit</span></li>
+	</ul>
+</section>
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Constructors</h2>
 	<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
@@ -26,7 +32,7 @@
 		<h3>constructor</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">new <wbr>Breadcrumb<wbr>Item<wbr>Component<span class="tsd-signature-symbol">(</span>_elementRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span>, renderer2<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Renderer2</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BreadcrumbItemComponent</span></li>
+			<li class="tsd-signature tsd-kind-icon">new <wbr>Breadcrumb<wbr>Item<wbr>Component<span class="tsd-signature-symbol">(</span>_elementRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span>, renderer2<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Renderer2</span>, _cdR<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ChangeDetectorRef</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BreadcrumbItemComponent</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
@@ -42,10 +48,46 @@
 					<li>
 						<h5>renderer2: <span class="tsd-signature-type">Renderer2</span></h5>
 					</li>
+					<li>
+						<h5>_cdR: <span class="tsd-signature-type">ChangeDetectorRef</span></h5>
+					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">BreadcrumbItemComponent</span></h4>
 			</li>
 		</ul>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Properties</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="breadcrumbItemPortal" class="tsd-anchor"></a>
+		<h3>breadcrumb<wbr>Item<wbr>Portal</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">breadcrumb<wbr>Item<wbr>Portal<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DomPortal</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>In case there is no link in Item and breadcrumb item is non-interactive, we move whole item content to menu item title</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="linkContentPortal" class="tsd-anchor"></a>
+		<h3>link<wbr>Content<wbr>Portal</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">link<wbr>Content<wbr>Portal<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DomPortal</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>When breadcrumb item has link in it, we are moving link content to menu item title</p>
+			</div>
+		</div>
 	</section>
 </section>
 <section class="tsd-panel-group tsd-member-group ">

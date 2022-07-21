@@ -715,8 +715,12 @@
   /* Avatar */
   --fdAvatar_BackgroundColor: var(--sapAccentColor6);
   --fdAvatar_Tile_BackgroundColor: var(--sapBackgroundColor);
-  --fdAvatar-Transparent_BackgroundColor: transparent;
+  --fdAvatar_Transparent_BackgroundColor: transparent;
   --fdAvatar_Border: 0.0625rem solid var(--sapGroup_ContentBorderColor);
+  --fdAvatar_Text_Shadow: none;
+  --fdAvatar_Focus_Outline_Offset: -0.3125rem;
+  --fdAvatar_Focus_Outline_Radius: 0;
+  --fdAvatar_Focus_Outline_Radius_Circle: 0;
   --fdAvatar_Accent_Color: var(--sapContent_ContrastTextColor);
   --fdAvatar_Accent_Color_1: var(--sapBackgroundColor);
   --fdAvatar_Accent_Color_2: var(--sapBackgroundColor);
@@ -751,6 +755,8 @@
   /* Avatar Group */
   --fdAvatarGroup_MoreButton_Border: 0.125rem;
   --fdAvatarGroup_MoreButton_Vertical_Offset: -0.3125rem;
+  --fdAvatarGroup_Focus_Outline_Radius: 0;
+  --fdAvatarGroup_Focus_Outline_Offset: -0.25rem;
   /* Radio */
   --fdRadio_Selected_Color: var(--sapContent_Selected_ForegroundColor);
   --fdRadio_Inner_Content_Size: 0.75rem;
