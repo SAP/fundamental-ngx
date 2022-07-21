@@ -14,6 +14,8 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 /**
@@ -126,6 +128,14 @@ export class TokenComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     tokenClickHandler(event): void {
         this.onTokenClick.emit(event);
+    }
+
+    /** @hidden */
+    tokenKeydownHandler(event): void {
+        this.onTokenKeydown.emit(event);
+        if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
+            this.onTokenClick.emit(event);
+        }
     }
 
     /** @hidden */

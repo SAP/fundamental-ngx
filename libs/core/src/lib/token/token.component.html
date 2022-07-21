@@ -3,10 +3,10 @@
     class="fd-token"
     role="option"
     tabindex="0"
-    [attr.aria-setsize]="totalCount"
     [attr.aria-roledescription]="ariaRoleDescription"
     (click)="tokenClickHandler($event)"
-    (keydown)="onTokenKeydown.emit($event)"
+    (keydown)="tokenKeydownHandler($event)"
+    [attr.aria-setsize]="totalCount"
     [class.fd-token__disabled]="disabled"
     [class.fd-token--compact]="_contentDensityObserver.isCompact$ | async"
     [class.fd-token--selected]="selected"
@@ -23,7 +23,6 @@
         [attr.aria-label]="deleteButtonLabel"
         *ngIf="!readOnly"
         class="fd-token__close"
-        tabindex="-1"
     ></span>
 </span>
 
