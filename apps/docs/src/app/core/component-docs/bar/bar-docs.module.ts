@@ -4,10 +4,10 @@ import { ApiComponent } from '../../../documentation/core-helpers/api/api.compon
 import { API_FILES } from '../../api-files';
 import { BarDocsComponent } from './bar-docs.component';
 import {
-    BarSubHeaderExampleComponent,
-    BarHeaderSubHeaderExampleComponent,
+    BarFloatingFooterExampleComponent,
     BarFooterExampleComponent,
-    BarFloatingFooterExampleComponent
+    BarHeaderSubHeaderExampleComponent,
+    BarSubHeaderExampleComponent
 } from './examples/bar-simple-examples.component';
 import { BarDefaultExampleComponent } from './examples/bar-default-example.component';
 import { BarHeaderExampleComponent } from './examples/bar-header-example.component';
@@ -16,9 +16,11 @@ import { BarPageResponsiveExampleComponent } from './examples/bar-page-responsiv
 import { BarHeaderComponent } from './bar-header/bar-header.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
-import { BarModule } from '@fundamental-ngx/core/bar';
 import { ComboboxModule } from '@fundamental-ngx/core/combobox';
+import { BarModule } from '@fundamental-ngx/core/bar';
 import { BarWithTitleExampleComponent } from './examples/bar-with-title-example.component';
+
+import { TitleModule } from '@fundamental-ngx/core/title';
 import { BarCustomShellbarExampleComponent } from './examples/bar-custom-shellbar-example.component';
 
 const routes: Routes = [
@@ -33,7 +35,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), AvatarModule, SharedDocumentationPageModule, BarModule, ComboboxModule],
+    imports: [
+        RouterModule.forChild(routes),
+        AvatarModule,
+        SharedDocumentationPageModule,
+        BarModule,
+        ComboboxModule,
+        TitleModule
+    ],
     exports: [RouterModule],
     declarations: [
         BarDocsComponent,
@@ -46,8 +55,9 @@ const routes: Routes = [
         BarFloatingFooterExampleComponent,
         BarPageExampleComponent,
         BarPageResponsiveExampleComponent,
-        BarWithTitleExampleComponent,
-        BarCustomShellbarExampleComponent
-    ]
+        BarCustomShellbarExampleComponent,
+        BarWithTitleExampleComponent
+    ],
+    providers: []
 })
 export class BarDocsModule {}
