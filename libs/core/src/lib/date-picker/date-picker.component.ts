@@ -202,10 +202,11 @@ export class DatePickerComponent<D>
     @Input()
     closeOnDateChoose = true;
 
-    /** Enables Today date selection button if true */
+    /** Enables Today-Selection-Button if true */
     @Input()
     showTodayButton = false;
 
+    /** Label for Today-Selection-Button */
     @Input()
     todayButtonLabel = 'Today';
 
@@ -536,6 +537,10 @@ export class DatePickerComponent<D>
         }
     }
 
+    /**
+     * @hidden
+     * Method that is triggered when Today-Selection-Button clicked, it changes selected date or date range to today's date
+     */
     onTodayButtonClick(): void {
         const todayDate = this._dateTimeAdapter.today();
         if (this.type === 'single') {
