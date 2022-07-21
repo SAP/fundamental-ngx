@@ -22,11 +22,12 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { FocusKeyManager } from '@angular/cdk/a11y';
-import { CdkDrag, CdkDragDrop, CdkDragEnter } from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragDrop, CdkDragEnter, CdkDragStart } from '@angular/cdk/drag-drop';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinct, filter, takeUntil } from 'rxjs/operators';
 
 import { resizeObservable, RtlService, getDocumentFontSize } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/core/shared';
 import { FixedCardLayoutItemComponent } from './fixed-card-layout-item/fixed-card-layout-item.component';
 import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
 
@@ -183,7 +184,10 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
     _placeholderMargin: boolean;
 
     /** @hidden */
-    _skipListenResize = false;
+    _listenResize = false;
+
+    /** @hidden */
+    _hiddenCard: Nullable<CardDefinitionDirective>;
 
     /** @hidden FocusKeyManager instance */
     private _keyboardEventsManager: FocusKeyManager<FixedCardLayoutItemComponent>;
@@ -251,18 +255,20 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
 
     /** Distribute cards on window resize */
     updateLayout(): void {
-        if (!this._cards.length) {
-            return;
+        this._listenResize = false;
+
+        if (this._cards.length) {
+            const possibleNumberOfColumns = getNumberOfColumns(this._availableWidth, this.cardMinimumWidth);
+
+            this._numberOfColumns = Math.min(
+                possibleNumberOfColumns,
+                this._cards.length,
+                this.maxColumns || MAX_COLUMNS,
+                MAX_COLUMNS
+            );
+        } else {
+            this._numberOfColumns = 1;
         }
-
-        const possibleNumberOfColumns = getNumberOfColumns(this._availableWidth, this.cardMinimumWidth);
-
-        this._numberOfColumns = Math.min(
-            possibleNumberOfColumns,
-            this._cards.length,
-            this.maxColumns || MAX_COLUMNS,
-            MAX_COLUMNS
-        );
 
         this.layoutChange.emit({
             numberOfColumns: this._numberOfColumns,
@@ -272,6 +278,14 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
         this._setCardColumns();
         this._setCardColumnsWidth();
         this._setContainerHeight();
+
+        this._listenResize = true;
+    }
+
+    /** @hidden */
+    _onDragStarted(event: CdkDragStart): void {
+        this._listenResize = false;
+        this._hiddenCard = event.source.data;
     }
 
     /** @hidden */
@@ -294,6 +308,8 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
 
     /** @hidden */
     _onDragDropped(event: CdkDragDrop<number, number>): void {
+        this._hiddenCard = null;
+
         if (event.container.data === event.previousContainer.data) {
             return;
         }
@@ -325,6 +341,9 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
 
         this._processDragDrop(event.previousContainer.data, event.container.data, movedCard, replacedCard);
     }
+
+    /** @hidden */
+    _sortPredicateFn = (index: number): boolean => index === 0;
 
     /** @hidden For the keyboard drag&drop directive */
     _customMoveFn = (group: CardColumn, indexFrom: number, indexTo: number): void => {
@@ -381,7 +400,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
     private _subscribeToRtl(): void {
         this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl) => {
             this._dir = isRtl ? 'rtl' : 'ltr';
-            this._changeDetector.detectChanges();
+            this._changeDetector.markForCheck();
         });
     }
 
@@ -389,8 +408,8 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
     private _listenOnResize(): void {
         resizeObservable(this._layout.nativeElement)
             .pipe(
-                debounceTime(60),
-                filter(() => this._skipListenResize),
+                filter(() => this._listenResize),
+                debounceTime(50),
                 takeUntil(this._onDestroy$)
             )
             .subscribe(() => this.updateLayout());
@@ -471,20 +490,17 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
      * Parameters used to increase the height of the column where drag'n'drop placeholder currently is
      */
     private _setContainerHeight(columnIndexToAddSpace = -1, spaceToAdd = 0): void {
-        this._skipListenResize = true;
-
         this._changeDetector.detectChanges();
 
         const cardColumns = this._cardColumns.map((column) =>
             column
-                .map(
-                    (card) => this._dragList.find((drag) => !drag._dragRef.isDragging() && drag.data === card)?.element
-                )
-                .filter((card): card is ElementRef<HTMLElement> => !!card)
+                .map((card) => this._dragList.find((drag) => drag.data === card))
+                .filter((cdkDrag) => !cdkDrag?._dragRef.isDragging() && !!cdkDrag?.element?.nativeElement)
+                .map((cdkDrag) => cdkDrag?.element)
         );
 
         const columnsHeights = cardColumns
-            .map((column) => column.map((card) => card.nativeElement.getBoundingClientRect().height))
+            .map((column) => column.map((cardElRef) => cardElRef?.nativeElement.getBoundingClientRect().height || 0))
             .map(
                 (column, columnIndex) =>
                     column.reduce((cardsHeight, height) => (cardsHeight += height + REM_IN_PX), 0) +
@@ -492,11 +508,9 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
             );
 
         // +4px because it's the top & bottom borders of card placeholder
-        this._containerHeight = Math.max(...columnsHeights) + 4;
+        this._containerHeight = Math.ceil(Math.max(...columnsHeights) + 4);
 
         this._changeDetector.detectChanges();
-
-        this._skipListenResize = false;
     }
 
     /** @hidden */
@@ -513,7 +527,11 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
                 .forEach((card) => {
                     this._cardsSizeChangeSubscription.add(
                         resizeObservable(card.nativeElement)
-                            .pipe(distinct((resizeEntry) => resizeEntry[0].contentRect.height))
+                            .pipe(
+                                filter(() => this._listenResize),
+                                distinct((resizeEntry) => resizeEntry[0].contentRect.height),
+                                debounceTime(50)
+                            )
                             .subscribe(() => this._setContainerHeight())
                     );
                 })
