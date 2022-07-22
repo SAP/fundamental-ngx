@@ -1,5 +1,5 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
-import { ElementRef, Injectable, Optional, QueryList } from '@angular/core';
+import { ElementRef, Injectable, OnDestroy, Optional, QueryList } from '@angular/core';
 import { resizeObservable, RtlService } from '@fundamental-ngx/core/utils';
 import { debounceTime, distinctUntilChanged, filter, Observable, skip, Subject, Subscription } from 'rxjs';
 import { OverflowLayoutItemContainerDirective } from './directives/overflow-layout-item-container.directive';
@@ -26,7 +26,7 @@ export class OverflowLayoutListeningResult {
 }
 
 @Injectable()
-export class OverflowLayoutService {
+export class OverflowLayoutService implements OnDestroy {
     /**
      * Overflow Layout config.
      */
@@ -80,6 +80,11 @@ export class OverflowLayoutService {
 
     /** @hidden */
     constructor(private _elRef: ElementRef<HTMLElement>, @Optional() private _rtlService: RtlService | null) {}
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscription.unsubscribe();
+    }
 
     startListening(config: OverflowLayoutConfig): void {
         this.setConfig(config);
@@ -283,13 +288,13 @@ export class OverflowLayoutService {
             return;
         }
 
-        const rtlSub = this._rtlService.rtl.subscribe((isRtl) => {
-            this._dir = isRtl ? 'rtl' : 'ltr';
+        this._subscription.add(
+            this._rtlService.rtl.subscribe((isRtl) => {
+                this._dir = isRtl ? 'rtl' : 'ltr';
 
-            this._keyboardEventsManager = this._keyboardEventsManager.withHorizontalOrientation(this._dir);
-        });
-
-        this._subscription.add(rtlSub);
+                this._keyboardEventsManager = this._keyboardEventsManager.withHorizontalOrientation(this._dir);
+            })
+        );
     }
 
     /** @hidden */

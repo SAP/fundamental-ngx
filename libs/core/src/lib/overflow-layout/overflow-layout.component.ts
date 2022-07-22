@@ -230,22 +230,28 @@ export class OverflowLayoutComponent implements AfterViewInit, OnDestroy, Overfl
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._overflowLayoutService.detectChanges.subscribe(() => {
-            this._cdr.detectChanges();
-        });
+        this._subscription.add(
+            this._overflowLayoutService.detectChanges.subscribe(() => {
+                this._cdr.detectChanges();
+            })
+        );
 
-        this._overflowLayoutService.onResult.subscribe((result) => {
-            this._hiddenItems = result.hiddenItems;
-            this._showMore = result.showMore;
-            this.hiddenItemsCount.emit(result.hiddenItems.length);
-            this.visibleItemsCount.emit(this._allItems.filter((i) => !i.hidden).length);
-            this._cdr.detectChanges();
-        });
+        this._subscription.add(
+            this._overflowLayoutService.onResult.subscribe((result) => {
+                this._hiddenItems = result.hiddenItems;
+                this._showMore = result.showMore;
+                this.hiddenItemsCount.emit(result.hiddenItems.length);
+                this.visibleItemsCount.emit(this._allItems.filter((i) => !i.hidden).length);
+                this._cdr.detectChanges();
+            })
+        );
 
-        this._items.changes.subscribe(() => {
-            this._allItems = this._items.toArray();
-            this._cdr.detectChanges();
-        });
+        this._subscription.add(
+            this._items.changes.subscribe(() => {
+                this._allItems = this._items.toArray();
+                this._cdr.detectChanges();
+            })
+        );
 
         this._allItems = this._items.toArray();
         this._cdr.detectChanges();
