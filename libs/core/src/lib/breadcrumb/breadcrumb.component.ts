@@ -7,6 +7,7 @@ import {
     ElementRef,
     EventEmitter,
     Input,
+    OnDestroy,
     OnInit,
     Optional,
     Output,
@@ -17,7 +18,7 @@ import {
 import { OverflowLayoutComponent } from '@fundamental-ngx/core/overflow-layout';
 import { BreadcrumbItemComponent } from './breadcrumb-item.component';
 import { RtlService } from '@fundamental-ngx/core/utils';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { Placement } from '@fundamental-ngx/core/shared';
 
@@ -42,7 +43,7 @@ import { Placement } from '@fundamental-ngx/core/shared';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BreadcrumbComponent implements OnInit, AfterViewInit {
+export class BreadcrumbComponent implements OnInit, AfterViewInit, OnDestroy {
     /**
      * @deprecated
      * Breadcrumbs component now uses more advanced calculation mechanism without the need of specifying the container element.
@@ -81,6 +82,8 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
     @ViewChild(OverflowLayoutComponent)
     private readonly _overflowLayout: OverflowLayoutComponent;
 
+    private readonly _onDestroy$ = new Subject<void>();
+
     /**
      * @hidden
      * Array of breadcrumb items.
@@ -99,7 +102,15 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
 
     /** @hidden */
     ngOnInit(): void {
-        this._rtlService?.rtl.subscribe((value) => this._placement$.next(value ? 'bottom-end' : 'bottom-start'));
+        this._rtlService?.rtl
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe((value) => this._placement$.next(value ? 'bottom-end' : 'bottom-start'));
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
     }
 
     /** @hidden */
