@@ -37,9 +37,3 @@ export class BreadcrumbRouterLinkExampleComponent {
     ]
 })
 export class BreadcrumbHrefExampleComponent {}
-
-@Component({
-    selector: 'fd-breadcrumb-responsive-example',
-    templateUrl: './breadcrumb-responsive-example.component.html'
-})
-export class BreadcrumbResponsiveExampleComponent {}

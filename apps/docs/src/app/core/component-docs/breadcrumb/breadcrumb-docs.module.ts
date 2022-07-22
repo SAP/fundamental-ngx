@@ -4,7 +4,6 @@ import { ApiComponent } from '../../../documentation/core-helpers/api/api.compon
 import { API_FILES } from '../../api-files';
 import {
     BreadcrumbHrefExampleComponent,
-    BreadcrumbResponsiveExampleComponent,
     BreadcrumbRouterLinkExampleComponent
 } from './examples/breadcrumb-examples.component';
 import { BreadcrumbHeaderComponent } from './breadcrumb-header/breadcrumb-header.component';
@@ -31,8 +30,7 @@ const routes: Routes = [
         BreadcrumbDocsComponent,
         BreadcrumbHeaderComponent,
         BreadcrumbHrefExampleComponent,
-        BreadcrumbRouterLinkExampleComponent,
-        BreadcrumbResponsiveExampleComponent
+        BreadcrumbRouterLinkExampleComponent
     ],
     providers: [moduleDeprecationsProvider(DeprecatedBreadcrumbsCompactDirective)]
 })
