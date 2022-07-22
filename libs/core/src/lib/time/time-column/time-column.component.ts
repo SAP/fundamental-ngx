@@ -189,21 +189,18 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     /** @hidden */
     private _viewInit$ = new BehaviorSubject<boolean>(false);
 
+    private _resize$ = new BehaviorSubject<boolean>(false);
+
     /** @hidden */
     private _subscriptions: Subscription = new Subscription();
 
     /** @hidden */
     constructor(private _changeDetRef: ChangeDetectorRef, private _elmRef: ElementRef) {
         this._subscriptions.add(
-            combineLatest([
-                this._viewInit$,
-                this._elementsAtOnce$,
-                this._offset$,
-                resizeObservable(this._elmRef.nativeElement)
-            ])
+            combineLatest([this._viewInit$, this._elementsAtOnce$, this._offset$, this._resize$])
                 .pipe(
                     filter(([viewInit]) => viewInit),
-                    tap(([, elementsAtOnce, offset, size]) => {
+                    tap(([, elementsAtOnce, offset]) => {
                         const averageHeight =
                             this.items.toArray().reduce((acc, next) => acc + next.getHeight(), 0) / this.items.length;
                         this.wrapperHeight = averageHeight * elementsAtOnce;
@@ -236,6 +233,11 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
 
     /** @hidden */
     ngAfterViewInit(): void {
+        this._subscriptions.add(
+            resizeObservable(this._elmRef.nativeElement).subscribe(() => {
+                this._resize$.next(true);
+            })
+        );
         this._viewInit$.next(true);
     }
 
