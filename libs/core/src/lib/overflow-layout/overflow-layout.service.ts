@@ -138,11 +138,15 @@ export class OverflowLayoutService {
         let allItems = this.config.items.toArray();
 
         allItems.forEach((item, index) => {
+            // Softly hide previously completely hidden item in order to correctly calculate it's size.
+            item.softHidden = true;
             item.hidden = false;
             item.index = index;
-            item.setFirst(index === 0);
-            item.setLast(index === allItems.length - 1);
+            item.first = index === 0;
+            item.last = index === allItems.length - 1;
         });
+
+        this._detectChanges$.next();
 
         allItems = this.config.direction === 'right' ? allItems : allItems.reverse();
         const visibleContainerItems =
@@ -161,6 +165,10 @@ export class OverflowLayoutService {
             this.config.visibleItems.length <= this.config.maxVisibleItems &&
             this._hiddenItems.length === 0
         ) {
+            // Make all items fully visible.
+            allItems.forEach((item) => {
+                item.softHidden = false;
+            });
             this.result.showMore = false;
             this.result.hiddenItems = this._hiddenItems;
             this._emitResult();
@@ -201,6 +209,7 @@ export class OverflowLayoutService {
             const itemRef = allItems[index];
             if (shouldHideItems && !itemRef.overflowItem.forceVisibility) {
                 item.containerRef.hidden = true;
+                item.softHidden = false;
                 itemRef.hidden = true;
                 return;
             }
@@ -219,6 +228,7 @@ export class OverflowLayoutService {
                 fittingElmCount++;
             } else if (!itemRef.overflowItem.forceVisibility) {
                 shouldHideItems = true;
+                item.softHidden = false;
                 item.containerRef.hidden = true;
                 itemRef.hidden = true;
             }
@@ -227,19 +237,23 @@ export class OverflowLayoutService {
         // Reverse original order back.
         allItems = this.config.direction === 'right' ? allItems : allItems.reverse();
 
+        allItems.forEach((item) => {
+            item.softHidden = false;
+        });
+
         let hiddenItems = allItems.filter((i) => i.hidden);
         hiddenItems = !this.config.reverseHiddenItems ? hiddenItems.reverse() : hiddenItems;
         const visibleItems = allItems.filter((i) => !i.hidden);
 
         visibleItems.forEach((item, index) => {
             item.index = index;
-            item.setFirst(index === 0);
-            item.setLast(index === visibleItems.length - 1);
+            item.first = index === 0;
+            item.last = index === visibleItems.length - 1;
         });
 
         this._hiddenItems = hiddenItems.map((item, index) => {
-            item.setFirst(index === 0);
-            item.setLast(index === hiddenItems.length - 1);
+            item.first = index === 0;
+            item.last = index === hiddenItems.length - 1;
             item.index = index;
             return item;
         });

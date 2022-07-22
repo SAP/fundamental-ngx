@@ -1,5 +1,4 @@
 import { Directive, ElementRef, Input, TemplateRef } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { OverflowItemDirectiveContext, OverflowItemRef } from '../interfaces/overflow-item-ref.interface';
 import { OverflowItem } from '../interfaces/overflow-item.interface';
 import { FD_OVERFLOW_ITEM_REF } from '../tokens/overflow-item-ref.token';
@@ -42,22 +41,18 @@ export class OverflowItemRefDirective<T = any> implements OverflowItemRef<T> {
      */
     index: number;
 
-    get first$(): Observable<boolean> {
-        return this._first.asObservable();
-    }
-
-    get last$(): Observable<boolean> {
-        return this._last.asObservable();
-    }
-
+    /** Whether this item is last in the array. */
     first: boolean;
+
+    /** Whether this item is first in the array. */
     last: boolean;
 
+    /** Whether the item is softly hidden. */
+    softHidden = true;
+
+    /** Item instance. Used for correct autocomplete. */
     @Input('fdOverflowItemRef')
     item: T;
-
-    private _first = new BehaviorSubject<boolean>(false);
-    private _last = new BehaviorSubject<boolean>(false);
 
     /** @hidden */
     static ngTemplateContextGuard(
@@ -87,15 +82,5 @@ export class OverflowItemRefDirective<T = any> implements OverflowItemRef<T> {
      */
     setOverflowItem(item: OverflowItem): void {
         this.overflowItem = item;
-    }
-
-    setFirst(value: boolean): void {
-        this.first = value;
-        this._first.next(value);
-    }
-
-    setLast(value: boolean): void {
-        this.last = value;
-        this._last.next(value);
     }
 }

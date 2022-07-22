@@ -5,15 +5,13 @@
 <div class="fd-overflow-layout__items-container" #layoutContainer>
     <div class="fd-overflow-layout__items" #itemsWrapper>
         <ng-container *ngFor="let item of _allItems; trackBy: _itemsTrackFn">
-            <div fdOverflowLayoutItemContainer [first]="item.first" [last]="item.last">
+            <div fdOverflowLayoutItemContainer [first]="item.first" [last]="item.last" [softHidden]="item.softHidden">
                 <ng-container *fdOverflowItemContainerRef>
                     <ng-template
                         [ngTemplateOutlet]="item.templateRef"
                         [ngTemplateOutletContext]="{
                             $implicit: item.hidden,
                             index: item.index,
-                            last$: item.last$,
-                            first$: item.first$,
                             first: item.first,
                             last: item.last
                         }"
@@ -56,8 +54,6 @@
                                 [ngTemplateOutletContext]="{
                                     $implicit: item.hidden,
                                     index: item.index,
-                                    last$: item.last$,
-                                    first$: item.first$,
                                     first: item.first,
                                     last: item.last
                                 }"

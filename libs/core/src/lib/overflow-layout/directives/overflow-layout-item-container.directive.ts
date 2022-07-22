@@ -24,6 +24,13 @@ export class OverflowLayoutItemContainerDirective {
     first = false;
 
     /**
+     * Whether this item is softly hidden. Used during free space calculation without flickering of the items.
+     */
+    @Input()
+    @HostBinding('class.fd-overflow-layout__item--soft-hidden')
+    softHidden = true;
+
+    /**
      * Container reference.
      */
     @ContentChild(OverflowItemContainerRefDirective)
