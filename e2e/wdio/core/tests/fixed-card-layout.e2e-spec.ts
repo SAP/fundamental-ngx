@@ -146,7 +146,9 @@ describe('Fixed card layout test suite', () => {
             scrollIntoView(disableDragBtn);
             click(disableDragBtn);
             checkDragAndDrop(disabledCardContent, disabledCardContent, 4);
-            const newFirstCardText = getText(cardDivArr);
+
+            const newFirstCardText = getText(disabledCardDiv);
+
             expect(newFirstCardText).toBe(originalFirstCardText);
         });
 

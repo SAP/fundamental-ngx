@@ -57,3 +57,4 @@ rules:
 ignore:
     - '.github/in-solidarity.yml' # default
     - '**/*.yml'
+    - '.yarn/**/*.cjs'

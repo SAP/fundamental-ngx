@@ -1,23 +1,23 @@
 <h4>Default select</h4>
 <fd-select placeholder="Select an option" [(value)]="selectedValue1">
-    <fd-option *ngFor="let option of options" [value]="option">{{ option }}</fd-option>
+    <li fd-option *ngFor="let option of options" [value]="option">{{ option }}</li>
 </fd-select>
 <small style="display: block">Selected value: {{ selectedValue1 }}</small>
 
 <h4>Compact select</h4>
-<fd-select placeholder="Select an option" [compact]="true" [(value)]="selectedValue2">
-    <fd-option *ngFor="let option of options" [value]="option">{{ option }}</fd-option>
+<fd-select placeholder="Select an option" fdCompact [(value)]="selectedValue2">
+    <li fd-option *ngFor="let option of options" [value]="option">{{ option }}</li>
 </fd-select>
 <small style="display: block">Selected value: {{ selectedValue2 }}</small>
 
 <h4>Select in disabled mode</h4>
 <fd-select placeholder="Select an option" [disabled]="true" [(value)]="selectedValue4">
-    <fd-option *ngFor="let option of options" [value]="option">{{ option }}</fd-option>
+    <li fd-option *ngFor="let option of options" [value]="option">{{ option }}</li>
 </fd-select>
 <small style="display: block">Selected value: {{ selectedValue4 }}</small>
 
 <h4>Select in read-only mode</h4>
 <fd-select placeholder="Select an option" [readonly]="true" [(value)]="selectedValue5">
-    <fd-option *ngFor="let option of options" [value]="option">{{ option }}</fd-option>
+    <li fd-option *ngFor="let option of options" [value]="option">{{ option }}</li>
 </fd-select>
 <small style="display: block">Selected value: {{ selectedValue5 }}</small>

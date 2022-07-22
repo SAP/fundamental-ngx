@@ -8,7 +8,7 @@
 <div class="fd-initial-focus-examples">
     <div *ngIf="currentExample === 'select'">
         <fd-select fd-initial-focus=".fd-select__button" placeholder="Autofocusable select">
-            <fd-option *ngFor="let option of options" [value]="option">{{ option }}</fd-option>
+            <li fd-option *ngFor="let option of options" [value]="option">{{ option }}</li>
         </fd-select>
     </div>
     <div *ngIf="currentExample === 'combobox'">

@@ -20,7 +20,12 @@ export interface ApprovalNode {
 /** Blank - node used as connection between common nodes
  * Space - node used to visually represent space in the graph
  */
-export type ApprovalGraphNode = ApprovalNode & { blank?: boolean; space?: boolean; selected?: boolean };
+export type ApprovalGraphNode = ApprovalNode & {
+    blank?: boolean;
+    space?: boolean;
+    selected?: boolean;
+    colIndex?: number;
+};
 
 export interface ApprovalGraphNodeMetadata {
     parents: ApprovalGraphNode[];

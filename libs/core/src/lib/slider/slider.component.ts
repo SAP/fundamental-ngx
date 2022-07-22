@@ -46,14 +46,13 @@ import {
     SliderValueTargets
 } from './slider.model';
 import { MIN_DISTANCE_BETWEEN_TICKS } from './constants';
+import { applyCssClass, CssClassBuilder, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import {
-    RtlService,
-    ContentDensityService,
-    KeyUtil,
-    applyCssClass,
-    CssClassBuilder
-} from '@fundamental-ngx/core/utils';
-import { registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
+    ContentDensityMode,
+    ContentDensityObserver,
+    contentDensityObserverProviders
+} from '@fundamental-ngx/core/content-density';
 
 export const SLIDER_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
@@ -69,7 +68,14 @@ let sliderId = 0;
     styleUrls: ['./slider.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [SLIDER_VALUE_ACCESSOR, registerFormItemControl(SliderComponent)],
+    providers: [
+        SLIDER_VALUE_ACCESSOR,
+        registerFormItemControl(SliderComponent),
+        contentDensityObserverProviders({
+            defaultContentDensity: ContentDensityMode.COMPACT,
+            modifiers: { [ContentDensityMode.COZY]: 'fd-slider--lg' }
+        })
+    ],
     host: {
         '(mouseenter)': 'this._componentHovered$.next(true)',
         '(mouseleave)': 'this._componentHovered$.next(false)'
@@ -82,11 +88,6 @@ export class SliderComponent
     @Input()
     @HostBinding('attr.id')
     id = 'fd-slider-id-' + sliderId++;
-
-    /** Whether to apply cozy mode. */
-    @Input()
-    @HostBinding('class.fd-slider--lg')
-    cozy: Nullable<boolean>;
 
     /** User's custom classes */
     @Input()
@@ -364,8 +365,10 @@ export class SliderComponent
         private readonly _platform: Platform,
         private readonly _liveAnnouncer: LiveAnnouncer,
         @Optional() private readonly _rtlService: RtlService,
-        @Optional() private _contentDensityService: ContentDensityService
-    ) {}
+        readonly _contentDensityObserver: ContentDensityObserver
+    ) {
+        _contentDensityObserver.subscribe();
+    }
 
     /** @hidden */
     ngOnInit(): void {
@@ -377,9 +380,6 @@ export class SliderComponent
             this._constructValuesBySteps();
         }
 
-        if (this.cozy === null && this._contentDensityService) {
-            this._subscribeToContentDensity();
-        }
         this.buildComponentCssClass();
     }
 
@@ -824,15 +824,6 @@ export class SliderComponent
         this._rtlService.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl: boolean) => {
             this._isRtl = isRtl;
             this._cdr.markForCheck();
-        });
-    }
-
-    /** @hidden ContentDensity change subscription */
-    private _subscribeToContentDensity(): void {
-        this._contentDensityService?._contentDensityListener.pipe(takeUntil(this._onDestroy$)).subscribe((density) => {
-            this.cozy = density === 'cozy';
-            this.buildComponentCssClass();
-            this._cdr.detectChanges();
         });
     }
 

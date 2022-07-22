@@ -23,16 +23,12 @@ import {
 import { firstValueFrom, Observable, Subscription } from 'rxjs';
 import { NgModel } from '@angular/forms';
 
-import {
-    FocusKeyManagerItemDirective,
-    FocusKeyManagerListDirective,
-    ContentDensityService,
-    RtlService
-} from '@fundamental-ngx/core/utils';
+import { FocusKeyManagerItemDirective, FocusKeyManagerListDirective, RtlService } from '@fundamental-ngx/core/utils';
 
 import { Pagination } from './pagination.model';
 import { PaginationService } from './pagination.service';
 import { FdLanguage, FD_LANGUAGE, TranslationResolver } from '@fundamental-ngx/i18n';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 /** Constant representing the default number of items per page. */
 const DEFAULT_ITEMS_PER_PAGE = 10;
@@ -60,7 +56,7 @@ let paginationUniqueId = 0;
 @Component({
     selector: 'fd-pagination',
     templateUrl: './pagination.component.html',
-    providers: [PaginationService],
+    providers: [PaginationService, contentDensityObserverProviders()],
     host: {
         class: 'fd-pagination',
         '[class.fd-pagination--mobile]': 'mobile',
@@ -75,10 +71,6 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     /** Id for the pagination component. If omitted, a unique one is generated. */
     @Input()
     id: string = 'fd-pagination-' + paginationUniqueId++;
-
-    /** Whether component should be shown in compact mode. True by default. Cozy mode is generally applied for tablets, mobile. */
-    @Input()
-    compact = true;
 
     /** Whether component should be shown in the mobile mode. */
     @Input()
@@ -352,7 +344,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         private readonly _liveAnnouncer: LiveAnnouncer,
         @Inject(FD_LANGUAGE) private readonly _language: Observable<FdLanguage>,
         @Optional() private readonly _rtlService: RtlService,
-        @Optional() private readonly _contentDensityService: ContentDensityService
+        readonly _contentDensityObserver: ContentDensityObserver
     ) {}
 
     /** @hidden */
@@ -377,13 +369,6 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     /** @hidden */
     ngOnInit(): void {
         this._subscriptions.add(this._rtlService?.rtl.subscribe(() => this._refreshPages()));
-
-        this._subscriptions.add(
-            this._contentDensityService?._isCompactDensity.subscribe((isCompact) => {
-                this.compact = isCompact;
-                this._cdr.markForCheck();
-            })
-        );
     }
 
     /** @hidden */

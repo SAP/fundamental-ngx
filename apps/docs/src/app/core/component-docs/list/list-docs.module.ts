@@ -23,12 +23,12 @@ import { ListNavIndicatorExampleComponent } from './examples/list-nav-indicator-
 import { ListDataExampleComponent } from './examples/list-data-example/list-data-example.component';
 import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { ListInteractiveExampleComponent } from './examples/list-interactive-example/list-interactive-example.component';
-import { ListModule } from '@fundamental-ngx/core/list';
+import { DeprecatedListContentDensityDirective, ListModule } from '@fundamental-ngx/core/list';
 import { LinkModule } from '@fundamental-ngx/core/link';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { RadioModule } from '@fundamental-ngx/core/radio';
 import { InfiniteScrollModule } from '@fundamental-ngx/core/infinite-scroll';
-import { DragAndDropModule } from '@fundamental-ngx/core/utils';
+import { DragAndDropModule, moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
@@ -77,6 +77,7 @@ const routes: Routes = [
         ListNavIndicatorExampleComponent,
         ListDataExampleComponent,
         ListInteractiveExampleComponent
-    ]
+    ],
+    providers: [moduleDeprecationsProvider(DeprecatedListContentDensityDirective)]
 })
 export class ListDocsModule {}

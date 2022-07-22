@@ -20,24 +20,22 @@ import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
-import { Placement, SpecialDayRule, FormStates } from '@fundamental-ngx/core/shared';
+import { FormStates, Nullable, Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
 import {
     CalendarComponent,
     CalendarType,
+    CalendarYearGrid,
+    DateRange,
     DaysOfWeek,
     FdCalendarView,
-    DateRange,
-    CalendarYearGrid
+    NavigationButtonDisableFunction
 } from '@fundamental-ngx/core/calendar';
-import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
-import { PopoverFormMessageService, registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
+import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
+import { FormItemControl, PopoverFormMessageService, registerFormItemControl } from '@fundamental-ngx/core/form';
 import { PopoverService } from '@fundamental-ngx/core/popover';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
-import { Nullable } from '@fundamental-ngx/core/shared';
 import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
 
 import { createMissingDateImplementationError } from './errors';
-import { NavigationButtonDisableFunction } from '@fundamental-ngx/core/calendar';
 
 let datePickerCounter = 0;
 
@@ -89,10 +87,6 @@ export class DatePickerComponent<D>
     @Input()
     placeholder = '';
 
-    /** Whether this is the compact input date picker */
-    @Input()
-    compact?: boolean;
-
     /** ID attribute for input element inside DatePicker component */
     @Input()
     inputId: string;
@@ -107,6 +101,7 @@ export class DatePickerComponent<D>
         this._message = message;
         this._popoverFormMessage.message = message;
     }
+
     /** @hidden */
     _message: string | null = null;
 
@@ -117,6 +112,7 @@ export class DatePickerComponent<D>
         this._messageTriggers = triggers;
         this._popoverFormMessage.triggers = triggers;
     }
+
     /** @hidden */
     _messageTriggers: string[] = ['focusin', 'focusout'];
 
@@ -241,6 +237,7 @@ export class DatePickerComponent<D>
         this._state = state || 'default';
         this._popoverFormMessage.messageType = state || 'default';
     }
+
     /** @hidden */
     get state(): FormStates {
         if (this._state == null && this.useValidation && this._isInvalidDateInput) {
@@ -248,6 +245,7 @@ export class DatePickerComponent<D>
         }
         return this._state;
     }
+
     /** @hidden */
     private _state: FormStates = 'default';
 
@@ -321,6 +319,7 @@ export class DatePickerComponent<D>
     set processInputOnBlur(v: boolean) {
         this._processInputOnBlur = coerceBooleanProperty(v);
     }
+
     get processInputOnBlur(): boolean {
         return this._processInputOnBlur;
     }
@@ -433,8 +432,7 @@ export class DatePickerComponent<D>
         // Use @Optional to avoid angular injection error message and throw our own which is more precise one
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
-        private _popoverFormMessage: PopoverFormMessageService,
-        @Optional() private _contentDensityService: ContentDensityService
+        private _popoverFormMessage: PopoverFormMessageService
     ) {
         if (!this._dateTimeAdapter) {
             throw createMissingDateImplementationError('DateTimeAdapter');
@@ -450,14 +448,6 @@ export class DatePickerComponent<D>
             this.formatInputDate(this.selectedDate);
             this._changeDetectionRef.detectChanges();
         });
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                    this._changeDetectionRef.markForCheck();
-                })
-            );
-        }
     }
 
     /** @hidden */

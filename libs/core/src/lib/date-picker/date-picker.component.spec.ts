@@ -4,13 +4,12 @@ import { Component, ViewChild } from '@angular/core';
 
 import { FormMessageModule } from '@fundamental-ngx/core/form';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { CalendarModule, DateRange } from '@fundamental-ngx/core/calendar';
+import { CalendarModule, CalendarType, DateRange } from '@fundamental-ngx/core/calendar';
 import { FormStates } from '@fundamental-ngx/core/shared';
 import { DatetimeAdapter, FdDate, FdDatetimeAdapter, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '@fundamental-ngx/core/utils';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
 
 import { DatePickerModule, DatePickerComponent } from './public_api';
@@ -32,10 +31,8 @@ describe('DatePickerComponent', () => {
                     IconModule,
                     InputGroupModule,
                     ButtonModule,
-                    FormMessageModule,
-                    DatePickerModule
-                ],
-                providers: [ContentDensityService]
+                    FormMessageModule
+                ]
             }).compileComponents();
         })
     );
@@ -71,11 +68,6 @@ describe('DatePickerComponent', () => {
         component.closeCalendar();
         expect(component._inputFieldDate).toBeNull();
         expect(component.isOpen).not.toBeTruthy();
-    });
-
-    it('should handle content density when compact input is not provided', () => {
-        component.ngOnInit();
-        expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 
     it('should handle single date change and update input', () => {
@@ -336,7 +328,7 @@ describe('DatePickerComponent Accessibility', () => {
     class HostComponent {
         @ViewChild(DatePickerComponent) datePicker: DatePickerComponent<FdDate>;
 
-        type = 'single';
+        type: CalendarType = 'single';
         dateInputLabel = 'Date input';
         dateRangeInputLabel = 'Date range input';
         message = 'This is a message';

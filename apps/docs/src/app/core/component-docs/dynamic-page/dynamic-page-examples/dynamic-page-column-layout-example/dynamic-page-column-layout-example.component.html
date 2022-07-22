@@ -23,7 +23,7 @@
                         </fd-breadcrumb-item>
                     </fd-breadcrumb>
 
-                    <fd-dynamic-page-title-content [compact]="true"> Key Info </fd-dynamic-page-title-content>
+                    <fd-dynamic-page-title-content fdCompact> Key Info </fd-dynamic-page-title-content>
 
                     <fd-dynamic-page-global-actions>
                         <!-- global actions -->
@@ -31,7 +31,7 @@
                             <button
                                 fd-toolbar-item
                                 fd-button
-                                [compact]="true"
+                                fdCompact
                                 fdType="positive"
                                 (click)="closePage()"
                                 label="Accept"
@@ -40,7 +40,7 @@
                             <button
                                 fd-toolbar-item
                                 fd-button
-                                [compact]="true"
+                                fdCompact
                                 fdType="negative"
                                 (click)="closePage()"
                                 label="Reject"
@@ -84,7 +84,7 @@
                         impedit repellendus esse, facere autem optio consequatur nobis?
                     </span>
                 </fd-dynamic-page-subheader>
-                <fd-dynamic-page-content>
+                <fd-dynamic-page-content cdkScrollable>
                     <div
                         class="fd-dynamic-page-section-example"
                         style="display: flex; align-items: center; justify-content: center"

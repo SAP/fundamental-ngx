@@ -16,6 +16,7 @@ import { DynamicPageKeyInfoComponent } from './dynamic-page-header/key-info/dyna
 import { DynamicPageTitleComponent } from './dynamic-page-header/title/dynamic-page-title.component';
 import { DynamicPageTitleHostComponent } from './dynamic-page-header/title/dynamic-page-title-host.component';
 import { DynamicPageComponent } from './dynamic-page.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
     declarations: [
@@ -30,7 +31,7 @@ import { DynamicPageComponent } from './dynamic-page.component';
         DynamicPageContentHostComponent,
         DynamicPageFooterComponent
     ],
-    imports: [CommonModule, TabsModule, DynamicPageModule, PlatformButtonModule, BreadcrumbModule],
+    imports: [CommonModule, TabsModule, DynamicPageModule, PlatformButtonModule, BreadcrumbModule, ScrollingModule],
     exports: [
         DynamicPageComponent,
         DynamicPageTitleComponent,

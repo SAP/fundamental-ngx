@@ -13,7 +13,6 @@
         [label]="mainActionTitle"
         [style.width]="mainButtonWidth"
         [fdType]="fdType"
-        [compact]="compact"
         [disabled]="disabled"
         (click)="onMainButtonClick($event)"
     >
@@ -25,7 +24,6 @@
         #menuActionButton
         [glyph]="glyph"
         [fdType]="fdType"
-        [compact]="compact"
         [disabled]="disabled"
         [ariaLabel]="expandButtonAriaLabel || ('coreSplitButton.expandButtonAriaLabel' | fdTranslate)"
         [attr.title]="

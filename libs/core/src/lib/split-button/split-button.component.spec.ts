@@ -2,16 +2,14 @@ import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { SplitButtonComponent, splitButtonTextClass, splitButtonTextCompactClass } from './split-button.component';
-import { SplitButtonModule } from './split-button.module';
 import { MenuModule } from '../menu/menu.module';
 import { ButtonModule } from '../button/button.module';
 import createSpy = jasmine.createSpy;
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/services/content-density.service';
 
 @Component({
     selector: 'fd-test-component',
     template: `
-        <fd-split-button [expandButtonTitle]="moreBtnTitle">
+        <fd-split-button [expandButtonTitle]="moreBtnTitle" [fdCompact]="compact">
             <fd-menu>
                 <li fd-menu-item>
                     <div fd-menu-interactive>
@@ -29,6 +27,7 @@ import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/service
 })
 export class TestComponent {
     moreBtnTitle: string;
+    compact: boolean;
 }
 
 describe('SplitButtonComponent', () => {
@@ -40,9 +39,8 @@ describe('SplitButtonComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [MenuModule, ButtonModule, SplitButtonModule],
-                declarations: [TestComponent],
-                providers: [ContentDensityService]
+                imports: [MenuModule, ButtonModule],
+                declarations: [SplitButtonComponent, TestComponent]
             });
         })
     );
@@ -58,11 +56,6 @@ describe('SplitButtonComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
         expect(componentInstance).toBeTruthy();
-    });
-
-    it('should handle content density when compact input is not provided', () => {
-        componentInstance.ngOnInit();
-        expect(componentInstance.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 
     it('should handle content init - no selected item', () => {
@@ -119,8 +112,7 @@ describe('SplitButtonComponent', () => {
         fixture.detectChanges();
         const textElement = componentInstance.mainActionBtn?.nativeElement.querySelector('.fd-button__text');
         expect(textElement.classList.contains(splitButtonTextClass));
-        componentInstance.compact = true;
-        componentInstance.ngOnChanges(<any>{ compact: true });
+        fixture.componentInstance.compact = true;
         expect(textElement.classList.contains(splitButtonTextCompactClass));
     });
 

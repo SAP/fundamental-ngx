@@ -1,0 +1,19 @@
+<ul [fnDisabled]="rootElementDisabled">
+    <li fnDisabledRecipient [fnDisabled]="firstElementDisabled">child 1</li>
+    <li fnDisabledRecipient>child 2</li>
+    <li fnDisabledRecipient>child 3</li>
+</ul>
+
+<div style="margin-top: 20px">
+    <button
+        style="margin-bottom: 0.5rem"
+        fn-button
+        (fnClicked)="rootElementDisabled = !rootElementDisabled"
+        [label]="rootElementDisabled ? 'Enable root element' : 'Disable root element'"
+    ></button>
+    <button
+        fn-button
+        (fnClicked)="firstElementDisabled = !firstElementDisabled"
+        [label]="firstElementDisabled ? 'Enable first element' : 'Disable first element'"
+    ></button>
+</div>

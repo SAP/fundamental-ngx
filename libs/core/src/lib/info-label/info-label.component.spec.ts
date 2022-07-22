@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IconModule } from '@fundamental-ngx/core/icon';
 
-import { InfoLabelComponent } from './info-label.component';
+import { InfoLabelComponent, LabelType } from './info-label.component';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
@@ -11,7 +12,7 @@ class TestInfoLabelComponent {
     @ViewChild(InfoLabelComponent, { static: true, read: ElementRef })
     infoLabelElementRef: ElementRef;
 
-    type: string;
+    type: LabelType;
     label: string;
     color: string;
     glyph: string;
@@ -25,7 +26,8 @@ describe('InfoLabelComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                declarations: [InfoLabelComponent, TestInfoLabelComponent]
+                declarations: [InfoLabelComponent, TestInfoLabelComponent],
+                imports: [IconModule]
             }).compileComponents();
         })
     );
@@ -63,7 +65,7 @@ describe('InfoLabelComponent', () => {
     it('Should add icon', () => {
         testComponent.glyph = 'future';
         fixture.detectChanges();
-        const iconElement = fixture.nativeElement.querySelector('i');
+        const iconElement = fixture.nativeElement.querySelector('fd-icon');
 
         expect(iconElement).toBeTruthy();
         expect(iconElement.classList.contains('sap-icon--future')).toBeTrue();

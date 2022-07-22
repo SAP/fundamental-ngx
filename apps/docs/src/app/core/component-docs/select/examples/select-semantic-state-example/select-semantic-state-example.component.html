@@ -1,23 +1,23 @@
 <h4>Success state</h4>
 <fd-select placeholder="Select value" stateMessage="Success message" [(value)]="selectedValue1" state="success">
-    <fd-option *ngFor="let option of options" [value]="option">{{ option }}</fd-option>
+    <li fd-option *ngFor="let option of options" [value]="option">{{ option }}</li>
 </fd-select>
 <fd-form-message [static]="true" type="success">Success message</fd-form-message>
 
 <h4>Warning state</h4>
 <fd-select placeholder="Select value" stateMessage="Warning message" [(value)]="selectedValue2" state="warning">
-    <fd-option *ngFor="let option of options" [value]="option">{{ option }}</fd-option>
+    <li fd-option *ngFor="let option of options" [value]="option">{{ option }}</li>
 </fd-select>
 <fd-form-message [static]="true" type="warning">Warning message</fd-form-message>
 
 <h4>Error state</h4>
 <fd-select placeholder="Select value" stateMessage="Error message" [(value)]="selectedValue3" state="error">
-    <fd-option *ngFor="let option of options" [value]="option">{{ option }}</fd-option>
+    <li fd-option *ngFor="let option of options" [value]="option">{{ option }}</li>
 </fd-select>
 <fd-form-message [static]="true" type="error">Error message</fd-form-message>
 
 <h4>Information state</h4>
 <fd-select placeholder="Select value" stateMessage="Information message" [(value)]="selectedValue4" state="information">
-    <fd-option *ngFor="let option of options" [value]="option">{{ option }}</fd-option>
+    <li fd-option *ngFor="let option of options" [value]="option">{{ option }}</li>
 </fd-select>
 <fd-form-message [static]="true" type="information">Information message</fd-form-message>

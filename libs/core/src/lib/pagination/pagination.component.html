@@ -23,7 +23,6 @@
             fdType="transparent"
             glyph="media-rewind"
             [disabled]="isFirstPage"
-            [compact]="compact"
             [ariaLabel]="firstLabel || ('corePagination.firstLabel' | fdTranslate)"
             [title]="firstLabel || ('corePagination.firstLabel' | fdTranslate)"
             class="fd-pagination__button fd-pagination__button--mobile"
@@ -40,7 +39,6 @@
             fdType="transparent"
             glyph="navigation-left-arrow"
             [disabled]="isFirstPage"
-            [compact]="compact"
             [ariaLabel]="previousLabel || ('corePagination.previousLabel' | fdTranslate)"
             [title]="previousLabel || ('corePagination.previousLabel' | fdTranslate)"
             class="fd-pagination__button"
@@ -58,7 +56,6 @@
                 fd-focus-key-manager-item
                 fd-button
                 fdType="transparent"
-                [compact]="compact"
                 [ariaLabel]="
                     pageLabel ? pageLabel(page) : ('corePagination.pageLabel' | fdTranslate: { pageNumber: page })
                 "
@@ -78,7 +75,6 @@
             fd-focus-key-manager-item
             fd-button
             fdType="transparent"
-            [compact]="compact"
             [ariaLabel]="
                 pageLabel
                     ? pageLabel(currentPage)
@@ -110,7 +106,6 @@
             type="number"
             [max]="_lastPage"
             [state]="currentPageModel.invalid ? 'error' : null"
-            [compact]="compact"
             class="fd-pagination__input"
             #currentPageModel="ngModel"
             [ngModel]="currentPage"
@@ -141,7 +136,6 @@
                 fd-focus-key-manager-item
                 fd-button
                 fdType="transparent"
-                [compact]="compact"
                 [ariaLabel]="
                     pageLabel ? pageLabel(page) : ('corePagination.pageLabel' | fdTranslate: { pageNumber: page })
                 "
@@ -162,7 +156,6 @@
             fdType="transparent"
             glyph="navigation-right-arrow"
             [disabled]="isLastPage"
-            [compact]="compact"
             [ariaLabel]="nextLabel || ('corePagination.nextLabel' | fdTranslate)"
             [title]="nextLabel || ('corePagination.nextLabel' | fdTranslate)"
             class="fd-pagination__button"
@@ -179,7 +172,6 @@
             fdType="transparent"
             glyph="media-forward"
             [disabled]="isLastPage"
-            [compact]="compact"
             [ariaLabel]="lastLabel || ('corePagination.lastLabel' | fdTranslate)"
             [title]="lastLabel || ('corePagination.lastLabel' | fdTranslate)"
             class="fd-pagination__button fd-pagination__button--mobile"
@@ -202,7 +194,7 @@
 <ng-template #more>
     <span
         class="fd-pagination__more"
-        [class.fd-pagination__more--compact]="compact"
+        [class.fd-pagination__more--compact]="_contentDensityObserver.isCompact$ | async"
         aria-hidden="true"
         aria-label="..."
         role="presentation"
@@ -220,12 +212,7 @@
         {{ itemsPerPageLabel ? itemsPerPageLabel + ':' : ('corePagination.itemsPerPageLabel' | fdTranslate) }}
     </label>
 
-    <fd-select
-        [compact]="compact"
-        class="fd-pagination__per-page-select"
-        [value]="itemsPerPage"
-        (valueChange)="_onChangePerPage($event)"
-    >
-        <fd-option *ngFor="let option of pageOptions" [value]="option">{{ option }}</fd-option>
+    <fd-select class="fd-pagination__per-page-select" [value]="itemsPerPage" (valueChange)="_onChangePerPage($event)">
+        <li fd-option *ngFor="let option of pageOptions" [value]="option">{{ option }}</li>
     </fd-select>
 </ng-template>

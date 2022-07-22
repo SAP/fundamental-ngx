@@ -22,6 +22,8 @@ import { ShellbarSidenavDirective } from './shellbar-sidenav.directive';
 import { ShellbarActionsMobileComponent } from './shellbar-actions-mobile/shellbar-actions-mobile.component';
 import { I18nModule } from '@fundamental-ngx/i18n';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { DeprecatedShellbarCompactDirective } from './deprecated-shellbar-compact.directive';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
     declarations: [
@@ -34,7 +36,8 @@ import { AvatarModule } from '@fundamental-ngx/core/avatar';
         ShellbarLogoComponent,
         ShellbarTitleComponent,
         ShellbarUserMenuComponent,
-        ShellbarSidenavDirective
+        ShellbarSidenavDirective,
+        DeprecatedShellbarCompactDirective
     ],
     imports: [
         CommonModule,
@@ -47,7 +50,8 @@ import { AvatarModule } from '@fundamental-ngx/core/avatar';
         ProductSwitchModule,
         IconModule,
         I18nModule,
-        AvatarModule
+        AvatarModule,
+        ContentDensityModule
     ],
     exports: [
         ShellbarComponent,
@@ -59,7 +63,9 @@ import { AvatarModule } from '@fundamental-ngx/core/avatar';
         ShellbarLogoComponent,
         ShellbarTitleComponent,
         ShellbarUserMenuComponent,
-        ShellbarSidenavDirective
+        ShellbarSidenavDirective,
+        DeprecatedShellbarCompactDirective,
+        ContentDensityModule
     ]
 })
 export class ShellbarModule {}

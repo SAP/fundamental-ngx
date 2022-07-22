@@ -2,7 +2,7 @@
     class="fd-switch"
     (click)="focus()"
     [style.cursor]="disabled ? 'auto' : 'pointer'"
-    [class.fd-switch--compact]="compact"
+    [class.fd-switch--compact]="_contentDensityObserver.isCompact$ | async"
     [class.fd-switch--semantic]="semantic"
     [class.is-disabled]="disabled"
     [attr.aria-label]="ariaLabel"

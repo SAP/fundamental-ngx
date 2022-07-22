@@ -1,18 +1,18 @@
 import {
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     forwardRef,
     Input,
-    QueryList,
-    OnInit,
-    ViewChildren,
-    ViewEncapsulation,
-    AfterViewInit,
-    Optional,
-    OnDestroy,
     OnChanges,
-    SimpleChanges
+    OnDestroy,
+    OnInit,
+    Optional,
+    QueryList,
+    SimpleChanges,
+    ViewChildren,
+    ViewEncapsulation
 } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -20,13 +20,14 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
-import { KeyUtil, ContentDensityService, RtlService } from '@fundamental-ngx/core/utils';
+import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 
 import { Meridian, SelectableViewItem } from './models';
 import { createMissingDateImplementationError } from './errors';
 import { TimeI18n } from './i18n/time-i18n';
 import { TimeColumnConfig } from './time-column/time-column-config';
 import { TimeColumnComponent } from './time-column/time-column.component';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 export type FdTimeActiveView = 'hour' | 'minute' | 'second' | 'meridian';
 
@@ -47,7 +48,8 @@ type MeridianViewItem = SelectableViewItem<Meridian>;
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => TimeComponent),
             multi: true
-        }
+        },
+        contentDensityObserverProviders()
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
@@ -95,10 +97,6 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
      */
     @Input()
     displayHours = true;
-
-    /** @Input Defines if time component should be used in compact mode */
-    @Input()
-    compact?: boolean;
 
     /** @Input Defines if time component should be used in tablet mode */
     @Input()
@@ -190,9 +188,9 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         private _changeDetectorRef: ChangeDetectorRef,
         // Use @Optional to avoid angular injection error message and throw our own which is more precise one
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
-        @Optional() private _contentDensityService: ContentDensityService,
+        readonly _contentDensityObserver: ContentDensityObserver,
         @Optional() private _rtlService: RtlService,
-        @Optional() private _timeI18nLabels?: TimeI18n
+        @Optional() private _timeI18nLabels: TimeI18n
     ) {
         if (!_dateTimeAdapter) {
             throw createMissingDateImplementationError('DateTimeAdapter');
@@ -209,15 +207,6 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         });
 
         this._setUpViewGrid();
-
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                    this._changeDetectorRef.markForCheck();
-                })
-            );
-        }
     }
 
     /** @hidden

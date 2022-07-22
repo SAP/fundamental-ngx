@@ -7,7 +7,6 @@
     fdType="transparent"
     glyph="navigation-up-arrow"
     tabindex="-1"
-    [compact]="compact"
     [title]="
         timeConfig?.decreaseLabel ||
         (internalTranslationConfig && (internalTranslationConfig.decreaseLabel | fdTranslate))
@@ -23,7 +22,7 @@
     class="fd-time__wrapper"
     [class.fd-time__wrapper--active]="active"
     [class.fd-time__wrapper--meridian]="meridian"
-    [style.maxHeight]="active ? wrapperHeight : ''"
+    [style.height.px]="active ? wrapperHeight : ''"
 >
     <ul
         class="fd-time__list"
@@ -84,7 +83,6 @@
     fdType="transparent"
     glyph="navigation-down-arrow"
     tabindex="-1"
-    [compact]="compact"
     [title]="
         timeConfig?.increaseLabel ||
         (internalTranslationConfig && (internalTranslationConfig.increaseLabel | fdTranslate))

@@ -16,8 +16,8 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { BreadcrumbItemComponent } from './breadcrumb-item.component';
-import { ContentDensityService, ResizeObserverService, RtlService } from '@fundamental-ngx/core/utils';
-import { BehaviorSubject, firstValueFrom, map, startWith, Subscription, tap } from 'rxjs';
+import { ResizeObserverService, RtlService } from '@fundamental-ngx/core/utils';
+import { BehaviorSubject, debounceTime, firstValueFrom, map, startWith, Subscription, tap } from 'rxjs';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { Placement } from '@fundamental-ngx/core/shared';
 
@@ -45,23 +45,22 @@ import { Placement } from '@fundamental-ngx/core/shared';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
-    /** Whenever links wrapped inside overflow should be displayed in compact mode  */
-    @Input()
-    compact?: boolean;
-
     /** @hidden */
     @ContentChildren(forwardRef(() => BreadcrumbItemComponent))
-    breadcrumbItems: QueryList<BreadcrumbItemComponent>;
+    _breadcrumbItems: QueryList<BreadcrumbItemComponent>;
 
     /** @hidden */
     @ViewChild(MenuComponent)
-    menuComponent: MenuComponent;
+    _menuComponent: MenuComponent;
+
+    @ViewChild('overflowBreadcrumbsContainer')
+    private readonly _overflowContainer: ElementRef<HTMLElement>;
 
     /** @hidden */
-    collapsedBreadcrumbItems: Array<BreadcrumbItemComponent> = [];
+    _collapsedBreadcrumbItems: Array<BreadcrumbItemComponent> = [];
 
     /** @hidden */
-    placement$ = new BehaviorSubject<Placement>('bottom-start');
+    _placement$ = new BehaviorSubject<Placement>('bottom-start');
 
     /**
      * The element to act as the breadcrumb container. When provided, the breadcrumb's responsive collapsing behavior
@@ -75,7 +74,7 @@ export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
     reverse = false;
 
     /** @hidden */
-    containerBoundary: number;
+    _containerBoundary: number;
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -84,36 +83,28 @@ export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
     private _itemToSize = new Map<BreadcrumbItemComponent, number>();
 
     constructor(
-        public elementRef: ElementRef<Element>,
-        @Optional() private _rtlService: RtlService,
-        @Optional() private _contentDensityService: ContentDensityService,
-        private _cdRef: ChangeDetectorRef,
-        private _resizeObserver: ResizeObserverService,
-        private _ngZone: NgZone
+        public readonly elementRef: ElementRef<Element>,
+        @Optional() private readonly _rtlService: RtlService | null,
+        private readonly _cdRef: ChangeDetectorRef,
+        private readonly _resizeObserver: ResizeObserverService,
+        private readonly _ngZone: NgZone
     ) {}
 
     /** @hidden */
     ngOnInit(): void {
         if (this._rtlService) {
             this._subscriptions.add(
-                this._rtlService.rtl.subscribe((value) => this.placement$.next(value ? 'bottom-end' : 'bottom-start'))
-            );
-        }
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                    this._cdRef.markForCheck();
-                })
+                this._rtlService.rtl.subscribe((value) => this._placement$.next(value ? 'bottom-end' : 'bottom-start'))
             );
         }
     }
 
+    /** @hidden */
     ngAfterViewInit(): void {
         this._subscriptions.add(
-            this.breadcrumbItems.changes
+            this._breadcrumbItems.changes
                 .pipe(
-                    startWith(this.breadcrumbItems),
+                    startWith(this._breadcrumbItems),
                     map((items) => items.toArray() as BreadcrumbItemComponent[]),
                     map((items) => items.map((item) => [item, item.width]) as [BreadcrumbItemComponent, number][]),
                     tap((itemToSize: [BreadcrumbItemComponent, number][]) => (this._itemToSize = new Map(itemToSize)))
@@ -124,6 +115,8 @@ export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
             this._subscriptions.add(
                 this._resizeObserver
                     .observe(this.containerElement || (this.elementRef.nativeElement.parentElement as Element))
+                    // Add small delay for performance reasons.
+                    .pipe(debounceTime(30))
                     .subscribe(() => this.onResize())
             );
         });
@@ -134,26 +127,32 @@ export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
         this._subscriptions.unsubscribe();
     }
 
-    /** @hidden */
+    /**
+     * Callback function when breadcrumbs container has been resized.
+     */
     onResize(): void {
         if (!this.elementRef.nativeElement.parentElement) {
             return;
         }
-        this.containerBoundary = this.elementRef.nativeElement.parentElement.getBoundingClientRect().width;
+        this._containerBoundary = this.elementRef.nativeElement.parentElement.getBoundingClientRect().width;
 
         if (this.containerElement) {
-            this.containerBoundary = this.containerElement.getBoundingClientRect().width;
+            this._containerBoundary = this.containerElement.getBoundingClientRect().width;
+        }
+
+        if (this._overflowContainer) {
+            this._containerBoundary -= this._overflowContainer.nativeElement.getBoundingClientRect().width;
         }
 
         let visibleSum = 0;
-        const breadcrumbItemComponents = this.breadcrumbItems.toArray();
+        const breadcrumbItemComponents = this._breadcrumbItems.toArray();
         let i;
         for (i = breadcrumbItemComponents.length - 1; i >= 0; i--) {
             const breadcrumbItem = breadcrumbItemComponents[i];
             const itemSize = this._itemToSize.has(breadcrumbItem)
                 ? (this._itemToSize.get(breadcrumbItem) as number)
                 : breadcrumbItem.width;
-            if (visibleSum + itemSize <= this.containerBoundary) {
+            if (visibleSum + itemSize <= this._containerBoundary) {
                 visibleSum += itemSize;
                 breadcrumbItem.show();
             } else {
@@ -161,14 +160,25 @@ export class BreadcrumbComponent implements AfterViewInit, OnInit, OnDestroy {
             }
         }
         const collapsedBreadcrumbItems = breadcrumbItemComponents.slice(0, ++i);
-        this.collapsedBreadcrumbItems = this.reverse ? collapsedBreadcrumbItems : collapsedBreadcrumbItems.reverse();
-        this.collapsedBreadcrumbItems.forEach((item) => item.hide());
+        this._collapsedBreadcrumbItems = this.reverse ? collapsedBreadcrumbItems : collapsedBreadcrumbItems.reverse();
+        this._collapsedBreadcrumbItems.forEach((item) => item.hide());
         this._cdRef.detectChanges();
     }
 
     /** @hidden */
-    keyDownHandle(event: Event): void {
-        this.menuComponent.toggle();
+    _keyDownHandle(event: Event): void {
+        this._menuComponent.toggle();
         event.preventDefault();
+    }
+
+    /**
+     * We catch interactions with item, Enter, Space, Mouse click and Touch click,
+     * if original element had router link we are proxying click to that element
+     * */
+    itemClicked(breadcrumbItem: BreadcrumbItemComponent, $event: any): void {
+        if (breadcrumbItem.needsClickProxy) {
+            $event.preventDefault();
+            breadcrumbItem.breadcrumbLink.elementRef().nativeElement.click();
+        }
     }
 }

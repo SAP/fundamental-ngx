@@ -1,18 +1,48 @@
-<fd-menu #menu [compact]="compact" [closeOnEscapeKey]="true" [focusAutoCapture]="true" [placement]="placement$ | async">
-    <fd-breadcrumb-hidden-item
-        *ngFor="let collapsedBreadcrumbItem of collapsedBreadcrumbItems"
-        [breadcrumbItem]="collapsedBreadcrumbItem"
-    >
-    </fd-breadcrumb-hidden-item>
+<fd-menu #menu [closeOnEscapeKey]="true" [focusAutoCapture]="true" [placement]="_placement$ | async">
+    <ng-container *ngFor="let breadcrumbItem of _collapsedBreadcrumbItems">
+        <li fd-menu-item [disabled]="breadcrumbItem.breadcrumbLink ? breadcrumbItem.breadcrumbLink.disabled : false">
+            <a
+                fd-menu-interactive
+                (click)="itemClicked(breadcrumbItem, $event)"
+                (keydown.enter)="itemClicked(breadcrumbItem, $event)"
+                (keydown.space)="itemClicked(breadcrumbItem, $event)"
+            >
+                <ng-container *ngIf="breadcrumbItem?.breadcrumbLink; else portalContent">
+                    <ng-container *ngIf="breadcrumbItem.breadcrumbLink._prefixIconName">
+                        <fd-menu-addon
+                            position="before"
+                            [glyph]="breadcrumbItem.breadcrumbLink._prefixIconName"
+                        ></fd-menu-addon>
+                    </ng-container>
+                    <span fd-menu-title>
+                        <ng-container [cdkPortalOutlet]="breadcrumbItem.linkContentPortal"></ng-container>
+                    </span>
+                    <ng-container *ngIf="breadcrumbItem.breadcrumbLink._postfixIconName">
+                        <fd-menu-addon [glyph]="breadcrumbItem.breadcrumbLink._postfixIconName"></fd-menu-addon>
+                    </ng-container>
+                </ng-container>
+                <ng-template #portalContent>
+                    <span fd-menu-title>
+                        <ng-container [cdkPortalOutlet]="breadcrumbItem.breadcrumbItemPortal"></ng-container>
+                    </span>
+                </ng-template>
+            </a>
+        </li>
+    </ng-container>
 </fd-menu>
 
-<span class="fd-breadcrumb__item" *ngIf="collapsedBreadcrumbItems.length" [fdMenuTrigger]="menu">
+<span
+    class="fd-breadcrumb__item"
+    *ngIf="_collapsedBreadcrumbItems.length"
+    [fdMenuTrigger]="menu"
+    #overflowBreadcrumbsContainer
+>
     <a
         fd-link
         tabindex="0"
         class="fd-breadcrumb__collapsed"
-        (keydown.enter)="keyDownHandle($event)"
-        (keydown.space)="keyDownHandle($event)"
+        (keydown.enter)="_keyDownHandle($event)"
+        (keydown.space)="_keyDownHandle($event)"
     >
         ...
         <fd-icon glyph="slim-arrow-down"></fd-icon>

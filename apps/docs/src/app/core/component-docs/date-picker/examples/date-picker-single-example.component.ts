@@ -16,7 +16,7 @@ import {
         <div>Selected Date: {{ date?.toDateString() || 'null' }}</div>
         <br />
         <label fd-form-label for="compactDatePicker">Compact Date Picker</label>
-        <fd-date-picker type="single" inputId="compactDatePicker" [(ngModel)]="date" [compact]="true"></fd-date-picker>
+        <fd-date-picker type="single" inputId="compactDatePicker" [(ngModel)]="date" fdCompact></fd-date-picker>
         <div>Selected Date: {{ date?.toDateString() || 'null' }}</div>`,
     providers: [
         {

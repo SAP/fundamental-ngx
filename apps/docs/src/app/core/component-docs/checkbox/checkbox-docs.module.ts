@@ -7,7 +7,8 @@ import { CheckboxDocsComponent } from './checkbox-docs.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { examples } from './examples';
 import { FormModule } from '@fundamental-ngx/core/form';
-import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
+import { CheckboxModule, DeprecatedCheckboxContentDensityDirective } from '@fundamental-ngx/core/checkbox';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
 
 const routes: Routes = [
     {
@@ -23,6 +24,7 @@ const routes: Routes = [
 @NgModule({
     imports: [FormModule, CheckboxModule, RouterModule.forChild(routes), SharedDocumentationPageModule],
     exports: [RouterModule],
-    declarations: [examples, CheckboxDocsComponent, CheckboxHeaderComponent]
+    declarations: [examples, CheckboxDocsComponent, CheckboxHeaderComponent],
+    providers: [moduleDeprecationsProvider(DeprecatedCheckboxContentDensityDirective)]
 })
 export class CheckboxDocsModule {}

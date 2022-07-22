@@ -8,7 +8,6 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { BehaviorSubject, filter, fromEvent, Subject } from 'rxjs';
 import { debounceTime, startWith, takeUntil } from 'rxjs/operators';
 import { MenuComponent, MenuKeyboardService } from '@fundamental-ngx/core/menu';
-import { ContentDensity, ContentDensityService } from '@fundamental-ngx/core/utils';
 import { ShellbarMenuItem, ShellbarSizes } from '@fundamental-ngx/core/shellbar';
 import {
     FdLanguage,
@@ -36,6 +35,7 @@ import {
     FD_LANGUAGE_TURKISH,
     FD_LANGUAGE_UKRAINIAN
 } from '@fundamental-ngx/i18n';
+import { ContentDensityMode, GlobalContentDensityService } from '@fundamental-ngx/core/content-density';
 
 const urlContains = (themeName: string, search: string): boolean => themeName.toLowerCase().includes(search);
 
@@ -55,6 +55,8 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
 
     @ViewChild('themeMenu')
     themeMenu: MenuComponent;
+
+    ContentDensityMode = ContentDensityMode;
 
     highlightJsThemeCss: SafeResourceUrl;
 
@@ -122,14 +124,13 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
 
     constructor(
         private _routerService: Router,
-        private _contentDensityService: ContentDensityService,
+        private _contentDensityService: GlobalContentDensityService,
         private _themingService: ThemingService,
         @Inject(CURRENT_LIB) private _currentLib: Libraries,
         @Inject(FD_LANGUAGE) private langSubject$: BehaviorSubject<FdLanguage>,
         private _route: ActivatedRoute,
         private _domSanitizer: DomSanitizer
     ) {
-        this._themingService.init();
         this.library = this._route.snapshot.data.library || 'core';
 
         this._themingService.currentTheme
@@ -209,8 +210,8 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         this.langSubject$.next(translation);
     }
 
-    selectDensity(density: ContentDensity): void {
-        this._contentDensityService.contentDensity.next(density);
+    selectDensity(density: ContentDensityMode): void {
+        this._contentDensityService.updateContentDensity(density);
     }
 
     private trustedResourceUrl = (url: string): SafeResourceUrl =>

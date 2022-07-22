@@ -12,7 +12,6 @@
         <fd-popover-control>
             <fd-input-group
                 #inputGroupComponent
-                [compact]="compact"
                 [state]="state"
                 [disabled]="disabled"
                 [isControl]="true"
@@ -37,7 +36,6 @@
                     [attr.id]="inputId"
                     [attr.aria-required]="required"
                     [placeholder]="placeholder"
-                    [compact]="compact"
                     [disabled]="disabled"
                     [ngModel]="_inputFieldDate"
                     (keyup.enter)="handleInputChange($any($event.target).value, false)"
@@ -79,7 +77,6 @@
                         [disableFunction]="disableFunction || null"
                         [selectedDate]="_tempDate"
                         [escapeFocusFunction]="null"
-                        [compact]="compact"
                         [markWeekends]="markWeekends"
                         [specialDaysRules]="specialDaysRules"
                         [showWeekNumbers]="showWeekNumbers"
@@ -98,7 +95,6 @@
                         [elementsAtOnce]="5"
                         [keepTwoDigits]="keepTwoDigitsTime"
                         [ngModel]="_tempTime"
-                        [compact]="compact"
                         [spinnerButtons]="spinnerButtons"
                         [meridian]="_meridian"
                         [displaySeconds]="_displaySeconds"
@@ -108,7 +104,7 @@
                     ></fd-time>
                 </div>
                 <div fd-popover-body-footer *ngIf="showFooter">
-                    <div fd-bar barDesign="footer" [cozy]="!compact">
+                    <div fd-bar barDesign="footer">
                         <div fd-bar-right>
                             <fd-bar-element>
                                 <button
@@ -116,7 +112,6 @@
                                     fdType="emphasized"
                                     [label]="okLabel"
                                     [ariaLabel]="okLabel"
-                                    [compact]="compact"
                                     (click)="submit()"
                                 ></button>
                             </fd-bar-element>
@@ -124,7 +119,6 @@
                                 <button
                                     fd-button
                                     fdType="transparent"
-                                    [compact]="compact"
                                     [label]="cancelLabel"
                                     [ariaLabel]="cancelLabel"
                                     (click)="cancel()"

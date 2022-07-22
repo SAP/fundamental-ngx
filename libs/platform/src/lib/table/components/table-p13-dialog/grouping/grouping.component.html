@@ -25,9 +25,9 @@
                 [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 [placeholder]="'platformTable.P13GroupDialogNoneSelectedColumnSelectPlaceholder' | fdTranslate"
             >
-                <fd-option *ngFor="let column of columns" [value]="column.key">
+                <li fd-option *ngFor="let column of columns" [value]="column.key">
                     {{ column.label }}
-                </fd-option>
+                </li>
             </fd-select>
 
             <fd-checkbox

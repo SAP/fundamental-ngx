@@ -22,12 +22,12 @@ import { BehaviorSubject, combineLatest, Subject, Subscription } from 'rxjs';
 import { buffer, debounceTime, filter, map, tap } from 'rxjs/operators';
 import { DOWN_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 
-import { KeyUtil } from '@fundamental-ngx/core/utils';
-import { Nullable } from '@fundamental-ngx/core/shared';
-import { CarouselDirective, CarouselItemDirective, CarouselConfig, PanEndOutput } from '@fundamental-ngx/core/carousel';
+import { KeyUtil, resizeObservable } from '@fundamental-ngx/core/utils';
+import { CarouselConfig, CarouselDirective, CarouselItemDirective, PanEndOutput } from '@fundamental-ngx/core/carousel';
 
 import { TimeColumnConfig } from './time-column-config';
 import { SelectableViewItem } from '../models';
+import { Nullable } from '@fundamental-ngx/core/shared';
 
 let timeColumnUniqueId = 0;
 
@@ -53,10 +53,6 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     @Input()
     rows: T[] = [];
 
-    /** items in row */
-    @Input()
-    compact = false;
-
     /**
      * @Input When set to false, hides the buttons that increment
      * and decrement the corresponding columns.
@@ -67,7 +63,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     /** Currently chosen, centered time column item */
     @Input()
     set activeValue(activeItem: T | undefined) {
-        if (activeItem == null) {
+        if (!activeItem) {
             // omitting "null" and "undefined"
             return;
         }
@@ -154,7 +150,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     @ViewChild('indicator', { read: ElementRef })
     indicator: ElementRef;
 
-    wrapperHeight: string;
+    wrapperHeight: number;
 
     /**
      * Time to wait in milliseconds after the last keydown before
@@ -206,15 +202,20 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     private _subscriptions: Subscription = new Subscription();
 
     /** @hidden */
-    constructor(private _changeDetRef: ChangeDetectorRef) {
+    constructor(private _changeDetRef: ChangeDetectorRef, private _elmRef: ElementRef) {
         this._subscriptions.add(
-            combineLatest([this._viewInit$, this._elementsAtOnce$, this._offset$])
+            combineLatest([
+                this._viewInit$,
+                this._elementsAtOnce$,
+                this._offset$,
+                resizeObservable(this._elmRef.nativeElement)
+            ])
                 .pipe(
                     filter(([viewInit]) => viewInit),
                     tap(([, elementsAtOnce, offset]) => {
                         const averageHeight =
                             this.items.toArray().reduce((acc, next) => acc + next.getHeight(), 0) / this.items.length;
-                        this.wrapperHeight = `${averageHeight * elementsAtOnce}px`;
+                        this.wrapperHeight = averageHeight * elementsAtOnce;
                         const visibleButNotSelectedElements = Math.floor(elementsAtOnce / 2);
                         if (offset === 0) {
                             this.items.first.element.style.marginTop = `${
@@ -224,6 +225,12 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
                                 visibleButNotSelectedElements * averageHeight
                             }px`;
                         }
+
+                        if (this.activeValue) {
+                            this._pickTime(this._getItem(this.activeValue), false);
+                        }
+
+                        this._changeDetRef.detectChanges();
                     })
                 )
                 .subscribe()

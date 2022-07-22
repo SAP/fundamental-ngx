@@ -1,42 +1,82 @@
-<div class="fn-slider__dot fn-slider__dot--active"></div>
-<div class="fn-slider__track" (click)="onTrackClick($event)" #track>
-    <div
-        class="fn-slider__track-range"
-        [style.width.%]="vertical ? null : _progress"
-        [style.height.%]="vertical ? _progress : null"
-    ></div>
-    <div class="fn-slider__handle-wrapper">
-        <div
-            #handle
-            class="fn-slider__handle"
-            role="slider"
-            [attr.aria-label]="ariaLabel || 'fnSlider.minMaxDetails' | fdTranslate: { min: minValue, max: maxValue }"
-            [attr.aria-labelledby]="ariaLabelledBy"
-            [attr.aria-valuemin]="'fnSlider.valueminDetails' | fdTranslate: { value: minValue }"
-            [attr.aria-valuemax]="'fnSlider.valuemaxDetails' | fdTranslate: { value: maxValue }"
-            tabindex="0"
-            [attr.aria-valuenow]="
-                _useSliderValuePrefix
-                    ? ('fnSlider.valueNowDetails'
-                      | fdTranslate: { value: getValuenow(_position, _sliderValueTargets.SINGLE_SLIDER) })
-                    : getValuenow(_position, _sliderValueTargets.SINGLE_SLIDER)
-            "
-            [attr.aria-valuetext]="
-                _useSliderValuePrefix
-                    ? ('fnSlider.valueNowDetails'
-                      | fdTranslate: { value: getValuenow(_position, _sliderValueTargets.SINGLE_SLIDER) })
-                    : getValuenow(_position, _sliderValueTargets.SINGLE_SLIDER)
-            "
-            fn-slider-position
-            [vertical]="vertical"
-            [position]="_progress"
-            (mousedown)="onHandleClick($event)"
-            (blur)="onBlur()"
-            (keydown)="onKeyDown($event)"
-        >
-            <span class="sap-icon sap-icon--megamenu"></span>
-            <span class="sap-icon sap-icon--megamenu"></span>
-        </div>
-    </div>
+<div class="fn-slider__wrapper">
+    <ng-container [ngTemplateOutlet]="range ? rangeMode : singleMode"></ng-container>
 </div>
-<div class="fn-slider__dot"></div>
+
+<ng-template #singleMode>
+    <div class="fn-slider__track" [style.width.%]="_progress">
+        <div class="fn-slider__track-range"></div>
+        <fn-slider-handle
+            (mousedown)="onHandleClick($event)"
+            (keydown)="onKeyDown($event)"
+            [ariaLabel]="ariaLabel || 'fnSlider.minMaxDetails' | fdTranslate: { min: minValue, max: maxValue }"
+            [ariaValueMax]="'fnSlider.valuemaxDetails' | fdTranslate: { value: maxValue }"
+            [ariaValueMin]="'fnSlider.valueminDetails' | fdTranslate: { value: minValue }"
+            [ariaLabelledBy]="ariaLabelledBy"
+            [ariaValueNow]="
+                _useSliderValuePrefix
+                    ? ('fnSlider.valueNowDetails'
+                      | fdTranslate: { value: getValuenow(_position, _sliderValueTargets.SINGLE_SLIDER) })
+                    : getValuenow(_position, _sliderValueTargets.SINGLE_SLIDER)
+            "
+            [ariaValueText]="
+                _useSliderValuePrefix
+                    ? ('fnSlider.valueNowDetails'
+                      | fdTranslate: { value: getValuenow(_position, _sliderValueTargets.SINGLE_SLIDER) })
+                    : getValuenow(_position, _sliderValueTargets.SINGLE_SLIDER)
+            "
+        ></fn-slider-handle>
+    </div>
+</ng-template>
+
+<ng-template #rangeMode>
+    <div
+        class="fn-slider__track"
+        [style.width.%]="_rangeProgress"
+        [style.left.%]="!_isRtl ? _handle1Position : null"
+        [style.right.%]="_isRtl ? _handle1Position : null"
+    >
+        <fn-slider-handle
+            #rangeHandle1
+            (mousedown)="onHandleClick($event)"
+            (keydown)="onKeyDown($event)"
+            [ariaLabel]="ariaLabel || 'fnSlider.minMaxDetails' | fdTranslate: { min: minValue, max: maxValue }"
+            [ariaValueMax]="'fnSlider.valuemaxDetails' | fdTranslate: { value: maxValue }"
+            [ariaValueMin]="'fnSlider.valueminDetails' | fdTranslate: { value: minValue }"
+            [ariaLabelledBy]="ariaLabelledBy"
+            [ariaValueNow]="
+                _useSliderValuePrefix
+                    ? ('fnSlider.valueNowDetails'
+                      | fdTranslate: { value: getValuenow(_handle1Value, _sliderValueTargets.RANGE_SLIDER1) })
+                    : getValuenow(_position, _sliderValueTargets.SINGLE_SLIDER)
+            "
+            [ariaValueText]="
+                _useSliderValuePrefix
+                    ? ('fnSlider.valueNowDetails'
+                      | fdTranslate: { value: getValuenow(_handle1Value, _sliderValueTargets.RANGE_SLIDER1) })
+                    : getValuenow(_position, _sliderValueTargets.SINGLE_SLIDER)
+            "
+        ></fn-slider-handle>
+        <div class="fn-slider__track-range"></div>
+        <fn-slider-handle
+            #rangeHandle2
+            (mousedown)="onHandleClick($event)"
+            (keydown)="onKeyDown($event)"
+            [ariaLabel]="ariaLabel || 'fnSlider.minMaxDetails' | fdTranslate: { min: minValue, max: maxValue }"
+            [ariaValueMax]="'fnSlider.valuemaxDetails' | fdTranslate: { value: maxValue }"
+            [ariaValueMin]="'fnSlider.valueminDetails' | fdTranslate: { value: minValue }"
+            [ariaLabelledBy]="ariaLabelledBy"
+            [ariaValueNow]="
+                _useSliderValuePrefix
+                    ? ('fnSlider.valueNowDetails'
+                      | fdTranslate: { value: getValuenow(_handle2Value, _sliderValueTargets.RANGE_SLIDER2) })
+                    : getValuenow(_handle2Value, _sliderValueTargets.RANGE_SLIDER2)
+            "
+            [ariaValueText]="
+                _useSliderValuePrefix
+                    ? ('fnSlider.valueNowDetails'
+                      | fdTranslate: { value: getValuenow(_handle2Value, _sliderValueTargets.RANGE_SLIDER2) })
+                    : getValuenow(_handle2Value, _sliderValueTargets.RANGE_SLIDER2)
+            "
+        ></fn-slider-handle>
+    </div>
+</ng-template>

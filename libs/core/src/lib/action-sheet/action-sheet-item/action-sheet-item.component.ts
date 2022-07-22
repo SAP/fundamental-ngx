@@ -53,10 +53,6 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     @Input()
     negative = false;
 
-    /** Indicate if items should be in compact mode. */
-    @Input()
-    compact = false;
-
     /** Indicate if it's closing button */
     @Input()
     isCloseButton = false;

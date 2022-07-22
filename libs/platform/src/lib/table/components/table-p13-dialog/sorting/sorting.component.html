@@ -25,12 +25,13 @@
                 [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 [placeholder]="'platformTable.P13SortDialogNoneSelectedColumn' | fdTranslate"
             >
-                <fd-option
+                <li
+                    fd-option
                     *ngFor="let column of columns | getAvailableSortColumns: rules:rule.columnKey"
                     [value]="column.key"
                 >
                     {{ column.label }}
-                </fd-option>
+                </li>
             </fd-select>
 
             <fd-select
@@ -40,12 +41,12 @@
                 [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 [placeholder]="'platformTable.P13SortDialogNoneSelectedSorting' | fdTranslate"
             >
-                <fd-option [value]="SORT_DIRECTION.ASC">
+                <li fd-option [value]="SORT_DIRECTION.ASC" i18n="@@platformTableP13SortDialogSortOrderAsc">
                     {{ 'platformTable.P13SortDialogSortOrderSelectOptionAsc' | fdTranslate }}
-                </fd-option>
-                <fd-option [value]="SORT_DIRECTION.DESC">
+                </li>
+                <li fd-option [value]="SORT_DIRECTION.DESC" i18n="@@platformTableP13SortDialogSortOrderDesc">
                     {{ 'platformTable.P13SortDialogSortOrderSelectOptionDesc' | fdTranslate }}
-                </fd-option>
+                </li>
             </fd-select>
 
             <div class="sort-row__actions">

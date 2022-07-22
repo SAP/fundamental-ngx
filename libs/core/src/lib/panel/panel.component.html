@@ -1,4 +1,9 @@
-<div class="fd-panel" [class.fd-panel--fixed]="fixed" [class.fd-panel--compact]="compact" [class]="class">
+<div
+    class="fd-panel"
+    [class.fd-panel--fixed]="fixed"
+    [class.fd-panel--compact]="_contentDensityObserver.isCompact$ | async"
+    [class]="class"
+>
     <div class="fd-panel__header">
         <div *ngIf="!fixed" class="fd-panel__expand">
             <button
@@ -7,7 +12,6 @@
                 class="fd-panel__button"
                 [glyph]="_getButtonIcon()"
                 [id]="expandId"
-                [compact]="compact"
                 [class.is-expanded]="expanded"
                 [attr.aria-expanded]="expanded"
                 [attr.aria-controls]="panelContent?.id"

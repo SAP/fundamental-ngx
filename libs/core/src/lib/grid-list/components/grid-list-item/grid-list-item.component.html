@@ -16,6 +16,7 @@
     (keydown)="_onKeyDown($event)"
     (click)="selectionMode === 'singleSelect' && _singleSelect($event); _onClick($event)"
     [attr.aria-label]="ariaLabel"
+    [attr.aria-labelledby]="ariaLabelledBy"
     (mouseover)="_setActive($event, false)"
     (mouseout)="_setActive($event, true)"
     [attr.aria-selected]="selectionMode === 'none' ? null : !!_selectedItem"
@@ -74,7 +75,7 @@
             class="fd-grid-list__action-button"
             [attr.aria-label]="'coreGridList.listItemButtonDetailsTitle' | fdTranslate"
             [title]="'coreGridList.listItemButtonDetailsTitle' | fdTranslate"
-            [compact]="true"
+            fdCompact
             (click)="_onDetail($event)"
         ></button>
 
@@ -87,7 +88,7 @@
             [attr.aria-label]="'coreGridList.listItemButtonDeleteTitle' | fdTranslate"
             [title]="'coreGridList.listItemButtonDeleteTitle' | fdTranslate"
             title="Delete"
-            [compact]="true"
+            fdCompact
             (click)="_onDelete($event)"
         ></button>
 
@@ -127,6 +128,7 @@
         [id]="id + '-radio'"
         [name]="'fd-grid-list-item-toolbar-' + selectionMode"
         [attr.aria-label]="ariaLabel"
+        [attr.aria-labelledby]="ariaLabelledBy"
         [value]="value"
         [ngModel]="_selectedItem"
         (ngModelChange)="$event && _selectionItem($event)"
@@ -146,6 +148,7 @@
         class="fd-checkbox fd-checkbox--compact fd-grid-list__checkbox-input"
         [id]="id + '-checkbox'"
         [attr.aria-label]="ariaLabel"
+        [attr.aria-labelledby]="ariaLabelledBy"
         [ngModel]="_selectedItem"
         (click)="_checkboxClick($event)"
     />
@@ -179,7 +182,7 @@
                 glyph="private"
                 [label]="'coreGridList.listItemStatusLocked' | fdTranslate"
                 [attr.aria-label]="'coreGridList.listItemStatusLocked' | fdTranslate"
-                [compact]="true"
+                fdCompact
                 (click)="_clickOnLocked($event)"
             ></button>
 
@@ -190,7 +193,7 @@
                 fdType="transparent"
                 [attr.aria-label]="'coreGridList.listItemStatusDraft' | fdTranslate"
                 [label]="'coreGridList.listItemStatusDraft' | fdTranslate"
-                [compact]="true"
+                fdCompact
                 (click)="_clickOnDraft($event)"
             ></button>
         </ng-container>

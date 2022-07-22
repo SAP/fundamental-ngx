@@ -179,6 +179,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'old-content-density',
+                loadChildren: () =>
+                    import('./component-docs/old-content-density/content-density-docs.module').then(
+                        (m) => m.ContentDensityDocsModule
+                    )
+            },
+            {
                 path: 'content-density',
                 loadChildren: () =>
                     import('./component-docs/content-density/content-density-docs.module').then(

@@ -8,7 +8,6 @@ import { FormMessageModule } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { TimeModule } from '@fundamental-ngx/core/time';
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '@fundamental-ngx/core/utils';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
 import { Nullable } from '@fundamental-ngx/core/shared';
 
@@ -32,7 +31,7 @@ describe('TimePickerComponent', () => {
                     FormMessageModule,
                     TimePickerModule
                 ],
-                providers: [ContentDensityService]
+                declarations: [TimePickerComponent]
             }).compileComponents();
         })
     );
@@ -45,11 +44,6 @@ describe('TimePickerComponent', () => {
 
     it('should create with default values', () => {
         expect(component).toBeTruthy();
-    });
-
-    it('should handle content density when compact input is not provided', () => {
-        component.ngOnInit();
-        expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 
     it('should use displayFormat and set to true _displayHours, _displayMinutes, _meridian', () => {
@@ -211,11 +205,12 @@ describe('TimePickerComponent', () => {
 });
 
 @Component({
-    template: `<fd-time-picker></fd-time-picker>`
+    template: ` <fd-time-picker></fd-time-picker>`
 })
 class TimePickerHostComponent {
     @ViewChild(TimePickerComponent) picker: TimePickerComponent<FdDate>;
 }
+
 runValueAccessorTests<TimePickerComponent<FdDate>, TimePickerHostComponent>({
     component: TimePickerComponent,
     testModuleMetadata: {

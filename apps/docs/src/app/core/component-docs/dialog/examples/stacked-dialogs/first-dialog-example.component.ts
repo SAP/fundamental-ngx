@@ -22,7 +22,7 @@ import { SecondDialogExampleComponent } from './second-dialog-example.component'
                     fd-initial-focus
                     fdType="emphasized"
                     label="Open Second Dialog"
-                    [compact]="true"
+                    fdCompact
                     (click)="openDialog()"
                     ariaLabel="Open Second Dialog Emphasized"
                 >

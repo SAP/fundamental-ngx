@@ -9,10 +9,28 @@ import { I18nModule } from '@fundamental-ngx/i18n';
 
 import { TimePickerComponent } from './time-picker.component';
 import { FormMessageModule } from '@fundamental-ngx/core/form';
+import { DeprecatedTimepickerCompactDirective } from './deprecated-timepicker-compact.directive';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
-    declarations: [TimePickerComponent],
-    imports: [CommonModule, FormsModule, PopoverModule, InputGroupModule, TimeModule, FormMessageModule, I18nModule],
-    exports: [TimePickerComponent, PopoverModule, InputGroupModule, TimeModule]
+    declarations: [TimePickerComponent, DeprecatedTimepickerCompactDirective],
+    imports: [
+        CommonModule,
+        FormsModule,
+        PopoverModule,
+        InputGroupModule,
+        TimeModule,
+        FormMessageModule,
+        ContentDensityModule,
+        I18nModule
+    ],
+    exports: [
+        TimePickerComponent,
+        PopoverModule,
+        InputGroupModule,
+        TimeModule,
+        DeprecatedTimepickerCompactDirective,
+        ContentDensityModule
+    ]
 })
 export class TimePickerModule {}

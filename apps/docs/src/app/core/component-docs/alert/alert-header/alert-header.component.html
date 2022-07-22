@@ -1,11 +1,12 @@
-<header>Alert</header>
-<fd-message-strip type="warning" [dismissible]="false">
-    DEPRECATED. Alert does not exist as a Fiori 3 component so it has been deprecated. The inline version successor of
-    the alert is <a [routerLink]="'/core/message-strip'">Message Strip</a> component. There is no overlay version of
-    Alert in Fiori.
-</fd-message-strip>
-<description>Alerts are used to display short messages that require user attention.</description>
-<import module="AlertModule" subPackage="alert"></import>
+<fd-doc-page>
+    <header>Alert</header>
+    <fd-message-strip type="warning" [dismissible]="false">
+        DEPRECATED. Alert does not exist as a Fiori 3 component so it has been deprecated. The inline version successor
+        of the alert is <a [routerLink]="'/core/message-strip'">Message Strip</a> component. There is no overlay version
+        of Alert in Fiori.
+    </fd-message-strip>
+    <description>Alerts are used to display short messages that require user attention.</description>
+    <import module="AlertModule" subPackage="alert"></import>
 
-<fd-header-tabs></fd-header-tabs>
-<router-outlet></router-outlet>
+    <fd-header-tabs></fd-header-tabs>
+</fd-doc-page>

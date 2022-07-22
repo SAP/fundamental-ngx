@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MarkdownModule } from 'ngx-markdown';
-import { ThemingModule } from '@fundamental-ngx/core/theming';
 // services
 import { SchemaModule } from '../schema/schema.module';
 import { COMPONENT_SCHEMAS } from '../core/component-docs/schemas';
@@ -36,8 +35,7 @@ import { IconModule } from '@fundamental-ngx/core/icon';
         InputGroupModule,
         SideNavigationModule,
         MarkdownModule.forChild(),
-        SchemaModule.forRoot(COMPONENT_SCHEMAS),
-        ThemingModule
+        SchemaModule.forRoot(COMPONENT_SCHEMAS)
     ],
     exports: [CommonModule, SchemaModule, ToolbarDocsComponent, SectionsToolbarComponent, SortByPipe, FilterPipe]
 })

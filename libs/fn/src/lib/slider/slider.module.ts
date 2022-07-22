@@ -8,10 +8,10 @@ import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { I18nModule } from '@fundamental-ngx/i18n';
 
 import { SliderComponent } from './slider.component';
-import { SliderPositionDirective } from './slider-position.directive';
+import { SliderHandleComponent } from './components/slider-handle/slider-handle.component';
 
 @NgModule({
-    declarations: [SliderComponent, SliderPositionDirective],
+    declarations: [SliderComponent, SliderHandleComponent],
     imports: [CommonModule, PopoverModule, FormsModule, OnlyDigitsModule, I18nModule],
     exports: [SliderComponent]
 })

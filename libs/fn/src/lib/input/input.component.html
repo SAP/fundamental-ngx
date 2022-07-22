@@ -1,0 +1,15 @@
+<input
+    class="fn-input__text-field"
+    type="text"
+    [fnDisabled]="disabled"
+    [fnReadonly]="readonly"
+    [class.is-display]="display"
+    [attr.placeholder]="placeholder"
+    [attr.tabIndex]="display ? -1 : 0"
+    [(ngModel)]="inputText"
+/>
+<div class="fn-input__border"></div>
+<span *ngIf="state === 'positive'" class="sap-icon sap-icon--sys-enter-2"></span>
+<span *ngIf="state === 'negative'" class="sap-icon sap-icon--error"></span>
+<span *ngIf="state === 'info'" class="sap-icon sap-icon--information"></span>
+<span *ngIf="state === 'critical'" class="sap-icon sap-icon--alert"></span>

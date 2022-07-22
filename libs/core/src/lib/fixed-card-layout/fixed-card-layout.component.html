@@ -13,18 +13,16 @@
     [attr.dir]="_dir"
 >
     <div
-        #dropList
         *ngFor="let card of _cardsArray; let cardIndex = index"
         cdkDropList
-        cdkDropListSortingDisabled
         class="fd-fixed-card-layout__card"
         [class.fd-fixed-card-layout__card--single]="_singleItemColumns.has(card.fdCardDef)"
         [style.min-width.px]="_columnsWidth.get(card.fdCardDef)"
         [style.max-width.px]="_columnsWidth.get(card.fdCardDef)"
+        [style.display]="_hiddenCard === card ? 'none' : 'block'"
         [cdkDropListData]="cardIndex"
-        [cdkDropListEnterPredicate]="_enterPredicate"
+        [cdkDropListSortPredicate]="_sortPredicateFn"
         (cdkDropListEntered)="_onDropListEntered($event)"
-        (cdkDropListExited)="_onDropListExited()"
     >
         <div
             cdkDrag
@@ -35,14 +33,18 @@
             [cdkDragStartDelay]="dragStartDelay"
             [itemIndex]="_itemIndexes.get(card.fdCardDef)!"
             [groupIndex]="_groupIndexes.get(card.fdCardDef)!"
+            (cdkDragStarted)="_onDragStarted($event)"
             (cdkDragDropped)="_onDragDropped($event)"
-            (cdkDragStarted)="_setPlaceholderStyle(false)"
         >
             <fd-fixed-card-layout-item>
                 <ng-container *ngTemplateOutlet="card?.template || null"> </ng-container>
             </fd-fixed-card-layout-item>
 
-            <div *cdkDragPlaceholder class="fd-fixed-card-layout__card-placeholder" [style]="_placeholderMargin">
+            <div
+                *cdkDragPlaceholder
+                class="fd-fixed-card-layout__card-placeholder"
+                [style.margin-bottom.rem]="+_placeholderMargin"
+            >
                 <ng-container *ngTemplateOutlet="card?.template || null"></ng-container>
             </div>
         </div>

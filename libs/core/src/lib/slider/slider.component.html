@@ -56,7 +56,7 @@
     <div
         #handle
         class="fd-slider__handle"
-        [class.fd-slider__handle--lg]="cozy"
+        [class.fd-slider__handle--lg]="_contentDensityObserver.isCozy$ | async"
         [attr.tabindex]="disabled ? -1 : 0"
         role="slider"
         [attr.aria-label]="
@@ -109,7 +109,7 @@
     <div
         #rangeHandle1
         class="fd-slider__handle"
-        [class.fd-slider__handle--lg]="cozy"
+        [class.fd-slider__handle--lg]="_contentDensityObserver.isCozy$ | async"
         [attr.tabindex]="disabled ? -1 : 0"
         role="slider"
         [attr.aria-label]="
@@ -142,7 +142,7 @@
     <div
         #rangeHandle2
         class="fd-slider__handle"
-        [class.fd-slider__handle--lg]="cozy"
+        [class.fd-slider__handle--lg]="_contentDensityObserver.isCozy$ | async"
         [attr.tabindex]="disabled ? -1 : 0"
         role="slider"
         [attr.aria-label]="

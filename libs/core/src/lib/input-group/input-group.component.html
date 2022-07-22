@@ -18,7 +18,6 @@
         <span
             *ngIf="button"
             fd-input-group-addon
-            [compact]="compact"
             [button]="true"
             [placement]="placement"
             [class.fd-shellbar__input-group-addon]="inShellbar"
@@ -28,13 +27,13 @@
                 class="fd-input-group__button"
                 type="button"
                 [fdType]="inShellbar ? 'standard' : 'transparent'"
-                [compact]="compact"
                 [id]="_addOnButtonId"
                 [attr.tabindex]="buttonFocusable ? 0 : -1"
                 [attr.title]="iconTitle || glyphAriaLabel || glyph"
                 [glyph]="glyph"
                 [class.fd-shellbar__button]="inShellbar"
                 [class.is-expanded]="isExpanded"
+                [attr.aria-haspopup]="isControl"
                 [attr.aria-expanded]="inShellbar ? isExpanded : null"
                 [ariaLabel]="glyphAriaLabel || glyph || addOnText"
                 [attr.aria-controls]="_inputId"
@@ -50,7 +49,6 @@
             *ngIf="!button"
             fd-input-group-addon
             [id]="_addOnNonButtonId"
-            [compact]="compact"
             [placement]="placement"
             [attr.aria-label]="glyphAriaLabel || glyph || addOnText"
             [attr.title]="iconTitle || glyph || addOnText"
@@ -78,7 +76,6 @@
         [attr.aria-labelledby]="_inputAriaLabelledBy"
         [class.fd-shellbar__input-group-input]="inShellbar"
         fd-input-group-input
-        [compact]="compact"
         [type]="type"
         [disabled]="disabled"
         [readonly]="readonly"

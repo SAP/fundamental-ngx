@@ -10,9 +10,9 @@
 
 <h3>Compact multi-selection list</h3>
 
-<ul fd-list [compact]="true" [selection]="true">
+<ul fd-list fdCompact [selection]="true">
     <li fd-list-item *ngFor="let item of compactObject" [selected]="item.selected">
-        <fd-checkbox [(ngModel)]="item.selected" [compact]="true"></fd-checkbox>
+        <fd-checkbox [(ngModel)]="item.selected" fdCompact></fd-checkbox>
         <span fd-list-title>
             {{ item.label }}
         </span>
@@ -38,13 +38,13 @@
 
 <h3>Compact single-selection list</h3>
 
-<ul fd-list [selection]="true" [compact]="true">
+<ul fd-list [selection]="true" fdCompact>
     <li fd-list-item [selected]="selectionValueTwo === 'radio1'">
         <fd-radio-button
             name="radio2"
             id="radio12"
             value="radio1"
-            [compact]="true"
+            fdCompact
             [(ngModel)]="selectionValueTwo"
         ></fd-radio-button>
         <span fd-list-title> List item 1 </span>
@@ -54,7 +54,7 @@
             name="radio2"
             id="radio22"
             value="radio2"
-            [compact]="true"
+            fdCompact
             [(ngModel)]="selectionValueTwo"
         ></fd-radio-button>
         <span fd-list-title> List item 2 </span>
@@ -64,7 +64,7 @@
             name="radio2"
             id="radio32"
             value="radio3"
-            [compact]="true"
+            fdCompact
             [(ngModel)]="selectionValueTwo"
         ></fd-radio-button>
         <span fd-list-title> List item 3 </span>
