@@ -49,7 +49,7 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
      * Max preview characters of Feed text. If you have more than max characters text, you can toggle preview/full text with more/less button.
      */
     @Input()
-    maxChars?: number;
+    maxChars: number;
 
     /**
      * Sets the `aria-label` attribute to the element.
@@ -109,9 +109,24 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
     /** @hidden */
     constructor(private readonly _elementRef: ElementRef, private readonly _changeDetectorRef: ChangeDetectorRef) {}
 
+    setHasMore(): void {
+        if (this.text.length > this.maxChars) {
+            this.hasMore = true;
+        } else {
+            this.hasMore = false;
+        }
+    }
+
+    setMaxChar(): void {
+        if (!this.maxChars) {
+            this.maxChars = this.mobile ? 300 : 500;
+        }
+    }
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
+        this.setMaxChar();
+        this.setHasMore();
     }
 
     /** @hidden */
@@ -119,6 +134,8 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
         if ('class' in changes || 'isRichText' in changes) {
             this.buildComponentCssClass();
         }
+        this.setMaxChar();
+        this.setHasMore();
     }
 
     @applyCssClass
