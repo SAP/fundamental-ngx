@@ -174,7 +174,7 @@
     "@nrwl/linter": "13.8.3",
     "@nrwl/nx-cloud": "13.1.5",
     "@nrwl/schematics": "8.12.11",
-    "@nrwl/tao": "13.8.3",
+    "@nrwl/tao": "14.4.3",
     "@nrwl/workspace": "13.8.3",
     "@schematics/angular": "~13.0.3",
     "@types/jasmine": "3.10.2",
