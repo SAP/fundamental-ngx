@@ -109,6 +109,7 @@ export class ThemingService implements OnDestroy {
         if (!this.config.excludeThemingFonts) {
             this._setThemeResource('fonts', theme.theming.themeFontPath);
         }
+
         this._currentTheme = theme;
         this._currentThemeSubject.next(theme);
 

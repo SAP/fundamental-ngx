@@ -6,9 +6,9 @@
         [(value)]="locale"
         ariaLabelledBy="lang-select"
     >
-        <fd-option *ngFor="let option of ['en-ca', 'fr', 'de', 'bg', 'ar-eg', 'zh']" [value]="option">{{
-            option
-        }}</fd-option>
+        <li fd-option *ngFor="let option of ['en-ca', 'fr', 'de', 'bg', 'ar-eg', 'zh']" [value]="option">
+            {{ option }}
+        </li>
     </fd-select>
 </div>
 

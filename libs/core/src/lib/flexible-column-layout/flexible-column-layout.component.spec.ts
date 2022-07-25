@@ -16,7 +16,9 @@ import {
     THREE_COLUMNS_END_EXPANDED,
     THREE_COLUMNS_START_MINIMIZED,
     THREE_COLUMNS_END_MINIMIZED,
-    FlexibleColumnLayout
+    FlexibleColumnLayout,
+    FD_FLEXIBLE_LAYOUT_CONFIG,
+    DEFAULT_FLEXIBLE_LAYOUT_CONFIG
 } from './constants';
 
 declare let viewport: any;
@@ -56,7 +58,13 @@ describe('FlexibleColumnLayoutComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                declarations: [FlexibleColumnLayoutComponent, TestFlexibleColumnLayoutComponent]
+                declarations: [FlexibleColumnLayoutComponent, TestFlexibleColumnLayoutComponent],
+                providers: [
+                    {
+                        provide: FD_FLEXIBLE_LAYOUT_CONFIG,
+                        useValue: DEFAULT_FLEXIBLE_LAYOUT_CONFIG
+                    }
+                ]
             }).compileComponents();
         })
     );

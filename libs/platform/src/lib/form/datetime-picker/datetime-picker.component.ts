@@ -206,6 +206,18 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
     @Input()
     preventScrollOnFocus = false;
 
+    /**
+     * Text and aria-label of the DateTimePicker 'OK' button.
+     */
+    @Input()
+    okLabel = 'OK';
+
+    /**
+     * Text and aria-label of the DateTimePicker 'Cancel' button.
+     */
+    @Input()
+    cancelLabel = 'Cancel';
+
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
     readonly isOpenChange = new EventEmitter<boolean>();

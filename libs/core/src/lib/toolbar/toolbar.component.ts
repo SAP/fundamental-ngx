@@ -22,25 +22,22 @@ import {
 } from '@angular/core';
 import { DYNAMIC_PAGE_HEADER_TOKEN, DynamicPageHeader } from '@fundamental-ngx/core/shared';
 
-import {
-    applyCssClass,
-    ContentDensityService,
-    CssClassBuilder,
-    OVERFLOW_PRIORITY_SCORE,
-    OverflowPriority
-} from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder, OVERFLOW_PRIORITY_SCORE, OverflowPriority } from '@fundamental-ngx/core/utils';
 import { fromEvent, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, delay, distinctUntilChanged, filter, takeWhile } from 'rxjs/operators';
 import { ToolbarItemDirective } from './toolbar-item.directive';
 import { TitleToken } from '@fundamental-ngx/core/title';
+import {
+    ContentDensityMode,
+    ContentDensityObserver,
+    contentDensityObserverProviders
+} from '@fundamental-ngx/core/content-density';
 
 const ELEMENT_MARGIN = 8;
 const OVERFLOW_SPACE = 50 + 2 * ELEMENT_MARGIN;
 const MAX_CONTENT_SIZE = 99999999;
 
 export type ToolbarType = 'solid' | 'transparent' | 'auto' | 'info';
-
-export type ToolbarSize = 'cozy' | 'compact' | 'condensed' | null;
 
 export const enum OverflowPriorityEnum {
     ALWAYS = 'always',
@@ -55,7 +52,12 @@ export const enum OverflowPriorityEnum {
     templateUrl: './toolbar.component.html',
     styleUrls: ['./toolbar.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        contentDensityObserverProviders({
+            defaultContentDensity: ContentDensityMode.COMPACT
+        })
+    ]
 })
 export class ToolbarComponent
     implements OnInit, AfterViewInit, OnDestroy, AfterViewChecked, CssClassBuilder, AfterContentInit
@@ -77,13 +79,6 @@ export class ToolbarComponent
      */
     @Input()
     fdType: ToolbarType = 'solid';
-
-    /** Determines the size of toolbar
-     * Available options: 'cozy' | 'compact'
-     * Default value: 'compact'
-     */
-    @Input()
-    size: ToolbarSize = null;
 
     /** @deprecated */
     @Input()
@@ -179,19 +174,14 @@ export class ToolbarComponent
     constructor(
         private _cd: ChangeDetectorRef,
         private _renderer: Renderer2,
-        @Optional() private _contentDensityService?: ContentDensityService,
+        readonly _contentDensityObserver: ContentDensityObserver,
         @Optional() @SkipSelf() @Inject(DYNAMIC_PAGE_HEADER_TOKEN) private _dynamicPageHeader?: DynamicPageHeader
-    ) {}
+    ) {
+        _contentDensityObserver.subscribe();
+    }
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.size === null && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._contentDensityListener.subscribe((density) => {
-                    this.size = density;
-                })
-            );
-        }
         fromEvent(window, 'resize')
             .pipe(
                 takeWhile(() => this._alive && this.shouldOverflow),
@@ -252,7 +242,6 @@ export class ToolbarComponent
             'fd-toolbar',
             `fd-toolbar--${this.fdType}`,
             `${this.active && this.fdType === 'info' ? 'fd-toolbar--active' : ''}`,
-            `${this.size === 'cozy' ? 'fd-toolbar--cozy' : ''}`,
             `${this.hasTitle || this.title || this.titleComponent ? 'fd-toolbar--title' : ''}`,
             `${this.clearBorder ? 'fd-toolbar--clear' : ''}`,
             `${this._dynamicPageHeader ? 'fd-dynamic-page__toolbar' : ''}`

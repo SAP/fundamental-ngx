@@ -9,20 +9,18 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
             <fd-dialog-header>
                 <h1 fd-title>Table Customization</h1>
                 <ng-template fdTemplate="subheader">
-                    <div fd-bar-middle>
+                    <div fd-bar-middle fdCompact>
                         <fd-bar-element>
                             <button
                                 fd-button
                                 fdType="transparent"
                                 glyph="arrow-top"
-                                [compact]="true"
                                 (click)="sortAlphabetically(true)"
                             ></button>
                             <button
                                 fd-button
                                 fdType="transparent"
                                 glyph="arrow-bottom"
-                                [compact]="true"
                                 (click)="sortAlphabetically()"
                             ></button>
                         </fd-bar-element>
@@ -31,7 +29,6 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
                                 glyph="search"
                                 glyphAriaLabel="Submit"
                                 name="filter"
-                                [compact]="true"
                                 [(ngModel)]="filterPhrase"
                             >
                             </fd-input-group>

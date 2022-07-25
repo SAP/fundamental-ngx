@@ -13,6 +13,7 @@ import { IllustratedMessageModule } from '@fundamental-ngx/core/illustrated-mess
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { CardModule } from '@fundamental-ngx/core/card';
+import { IllustratedMessageInlineExampleComponent } from './examples/illustrated-message-inline-example.component';
 
 const routes: Routes = [
     {
@@ -40,7 +41,8 @@ const routes: Routes = [
         IllustratedMessageHeaderComponent,
         IllustratedMessageExampleComponent,
         IllustratedMessageDialogExampleComponent,
-        IllustratedMessageSpotExampleComponent
+        IllustratedMessageSpotExampleComponent,
+        IllustratedMessageInlineExampleComponent
     ]
 })
 export class IllustratedMessageDocsModule {}

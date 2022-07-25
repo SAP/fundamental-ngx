@@ -13,10 +13,11 @@ import { ListBylineStandardExampleComponent } from './examples/list-byline-stand
 import { ListBylineButtonExampleComponent } from './examples/list-byline-button-example/list-byline-button-example.component';
 import { ListBylineInteractiveExampleComponent } from './examples/list-byline-interactive-example/list-byline-interactive-example.component';
 import { ListBylineWrapExampleComponent } from './examples/list-byline-wrap-example/list-byline-wrap-example.component';
-import { ListModule } from '@fundamental-ngx/core/list';
+import { DeprecatedListContentDensityDirective, ListModule } from '@fundamental-ngx/core/list';
 import { LinkModule } from '@fundamental-ngx/core/link';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { RadioModule } from '@fundamental-ngx/core/radio';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
 
 const routes: Routes = [
     {
@@ -50,6 +51,7 @@ const routes: Routes = [
         ListBylineButtonExampleComponent,
         ListBylineInteractiveExampleComponent,
         ListBylineWrapExampleComponent
-    ]
+    ],
+    providers: [moduleDeprecationsProvider(DeprecatedListContentDensityDirective)]
 })
 export class ListDocsModule {}

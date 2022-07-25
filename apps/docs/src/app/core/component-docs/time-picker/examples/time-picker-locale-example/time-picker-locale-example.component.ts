@@ -9,7 +9,13 @@ import {
 @Component({
     selector: 'fd-time-picker-locale-example',
     templateUrl: './time-picker-locale-example.component.html',
-    styleUrls: ['./time-picker-locale-example.component.scss'],
+    styles: [
+        `
+            .fd-form-item {
+                margin-bottom: 1rem;
+            }
+        `
+    ],
     providers: [
         // Note that this is usually provided in the root of your application.
         // Due to the limit of this example we must provide it on this level.

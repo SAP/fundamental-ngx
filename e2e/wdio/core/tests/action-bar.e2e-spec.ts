@@ -58,7 +58,7 @@ describe('Action Bar Test Suite', () => {
             expect(isElementDisplayed(actionBarContextualMenuOptionList)).toBe(true);
         });
 
-        it('should check closing expanded menu', () => {
+        xit('should check closing expanded menu', () => {
             refreshPage();
             waitForElDisplayed(actionBarPage.title);
             click(actionBarContextualMenuButton);
@@ -73,7 +73,7 @@ describe('Action Bar Test Suite', () => {
         });
     });
 
-    describe('Action bar mobile view example', () => {
+    xdescribe('Action bar mobile view example', () => {
         it('should check that all buttons are clickable', () => {
             checkElArrIsClickable(actionBarMobileView + button);
         });

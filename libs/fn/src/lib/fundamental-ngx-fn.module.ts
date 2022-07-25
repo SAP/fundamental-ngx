@@ -9,7 +9,19 @@ import { SwitchModule } from '@fundamental-ngx/fn/switch';
 import { ButtonModule } from '@fundamental-ngx/fn/button';
 import { SearchModule } from '@fundamental-ngx/fn/search';
 import { SliderModule } from '@fundamental-ngx/fn/slider';
-import { TagModule } from '@fundamental-ngx/fn/tag';
+import { ProgressBarModule } from '@fundamental-ngx/fn/progress-bar';
+import { SegmentedButtonModule } from '@fundamental-ngx/fn/segmented-button';
+import { UtilsModule } from '@fundamental-ngx/fn/utils';
+import { CdkModule } from '@fundamental-ngx/fn/cdk';
+import { GenericTagModule } from '@fundamental-ngx/fn/generic-tag';
+import { ListModule } from '@fundamental-ngx/fn/list';
+import { ObjectStatusModule } from '@fundamental-ngx/fn/object-status';
+import { AvatarModule } from '@fundamental-ngx/fn/avatar';
+import { InfoLabelModule } from '@fundamental-ngx/fn/info-label';
+import { MessageStripModule } from '@fundamental-ngx/fn/message-strip';
+import { InputModule } from '@fundamental-ngx/fn/input';
+import { MessageToastModule } from '@fundamental-ngx/fn/message-toast';
+import { NotificationModule } from '@fundamental-ngx/fn/notification';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -22,7 +34,19 @@ import { TagModule } from '@fundamental-ngx/fn/tag';
         ButtonModule,
         SearchModule,
         SliderModule,
-        TagModule
+        AvatarModule,
+        ProgressBarModule,
+        GenericTagModule,
+        SegmentedButtonModule,
+        UtilsModule,
+        CdkModule,
+        MessageStripModule,
+        ObjectStatusModule,
+        InfoLabelModule,
+        ListModule,
+        InputModule,
+        MessageToastModule,
+        NotificationModule
     ],
     providers: []
 })

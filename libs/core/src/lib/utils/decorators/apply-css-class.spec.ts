@@ -107,7 +107,6 @@ describe('ButtonComponent', () => {
     });
 
     it('should handle styles for 2 directives', async () => {
-        buttonInstance.compact = true;
         buttonInstance.fdType = 'standard';
 
         testDirectiveInstance.ngOnInit();
@@ -117,7 +116,6 @@ describe('ButtonComponent', () => {
         const componentClasses = (buttonInstance.elementRef().nativeElement as HTMLElement).className;
 
         expect(componentClasses).toContain('standard');
-        expect(componentClasses).toContain('compact');
         expect(componentClasses).toContain(TEST_DIRECTIVE_CLASS);
     });
 

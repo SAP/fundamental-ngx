@@ -8,3 +8,4 @@ export * from './wizard-progress-bar/wizard-progress-bar.directive';
 export * from './wizard-step-indicator/wizard-step-indicator.component';
 export * from './wizard-injection-token';
 export * from './wizard.service';
+export * from './deprecated-wizard-compact.directive';

@@ -23,7 +23,7 @@
         [attr.aria-label]="ariaLabel"
         [attr.aria-labelledby]="ariaLabelledBy"
         [attr.aria-required]="required"
-        [class.fd-input--compact]="compact"
+        [class.fd-input--compact]="_contentDensityObserver.isCompact$ | async"
         [title]="ariaLabel"
         [placeholder]="placeholder"
         [value]=""
@@ -39,7 +39,6 @@
         class="file-uploader__button"
         [attr.aria-label]="buttonAriaLabel"
         [label]="buttonLabel"
-        [compact]="compact"
         [disabled]="disabled"
         (click)="open()"
     ></button>

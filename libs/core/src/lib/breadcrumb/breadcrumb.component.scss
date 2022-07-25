@@ -1,10 +1,18 @@
 @import '~fundamental-styles/dist/breadcrumb';
 
 .fd-breadcrumb {
-    display: inline-block;
+    display: flex;
     white-space: nowrap;
 
     .fd-breadcrumb__collapsed {
         cursor: pointer;
     }
+}
+
+.fd-breadcrumb__item:last-child::after {
+    content: '/';
+}
+
+.fd-overflow-layout__item--last .fd-breadcrumb__item::after {
+    content: none;
 }

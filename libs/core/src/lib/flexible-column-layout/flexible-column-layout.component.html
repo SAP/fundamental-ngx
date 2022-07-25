@@ -16,8 +16,11 @@
     <!-- Left Separator -->
     <div *ngIf="_leftColumnSeparator" class="fd-flexible-column-layout__separator">
         <button
-            class="fd-button fd-button--compact fd-button--transparent fd-flexible-column-layout__button"
-            aria-label="Expand"
+            fd-button
+            [compact]="true"
+            fdType="transparent"
+            class="fd-flexible-column-layout__button"
+            ariaLabel="Expand"
             (click)="_handleLeftColumnSeparatorClick()"
         >
             <i
@@ -39,8 +42,11 @@
     <!-- Right Separator -->
     <div *ngIf="_rightColumnSeparator" class="fd-flexible-column-layout__separator">
         <button
-            class="fd-button fd-button--compact fd-button--transparent fd-flexible-column-layout__button"
-            aria-label="Expand"
+            fd-button
+            [compact]="true"
+            fdType="transparent"
+            class="fd-flexible-column-layout__button"
+            ariaLabel="Expand"
             (click)="_handleRightColumnSeparatorClick()"
         >
             <i

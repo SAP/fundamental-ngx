@@ -6,8 +6,9 @@ import { API_FILES } from '../../api-files';
 import { RadioHeaderComponent } from './radio-header/radio-header.component';
 import { RadioDocsComponent } from './radio-docs.component';
 import { examples } from './examples';
-import { RadioModule } from '@fundamental-ngx/core/radio';
+import { DeprecatedRadioButtonCompactDirective, RadioModule } from '@fundamental-ngx/core/radio';
 import { FormModule } from '@fundamental-ngx/core/form';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
 
 const routes: Routes = [
     {
@@ -23,6 +24,7 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, RadioModule, FormModule],
     exports: [RouterModule],
-    declarations: [examples, RadioDocsComponent, RadioHeaderComponent]
+    declarations: [examples, RadioDocsComponent, RadioHeaderComponent],
+    providers: [moduleDeprecationsProvider(DeprecatedRadioButtonCompactDirective)]
 })
 export class RadioDocsModule {}

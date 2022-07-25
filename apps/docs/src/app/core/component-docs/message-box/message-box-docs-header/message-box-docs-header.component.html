@@ -1,42 +1,43 @@
-<header>Message Box</header>
-<import module="MessageBoxModule" subPackage="message-box"></import>
+<fd-doc-page>
+    <header>Message Box</header>
+    <import module="MessageBoxModule" subPackage="message-box"></import>
 
-<description>
-    <p>
-        The message box is a special dialog that allows you to display messages to the user. You can use the message box
-        to display messages that are not related to a field on the UI, such as technical errors.
-    </p>
-    <p>
-        Message box make use of a service called <code>MessageBoxService</code>. It provides the ability to
-        <code>open()</code> message box windows.
-    </p>
-    <p>
-        The <code>open()</code> method accepts either a <code>MessageBoxContent</code> object,
-        <code>TemplateRef</code> or <code>Component</code> as the message box content. In addition, you may also provide
-        a <code>MessageBoxConfig</code> object to override some default message box behaviours.
-    </p>
-    <p>
-        Importing either <code>BrowserAnimationsModule</code> or <code>NoopAnimationsModule</code> is required.
-        <code>BrowserAnimationsModule</code> is the standard Angular animation module, it animates content as expected.
-        <code>NoopAnimationsModule</code> mocks the animations and does not render them, potentially increasing
-        performance.
-    </p>
+    <description>
+        <p>
+            The message box is a special dialog that allows you to display messages to the user. You can use the message
+            box to display messages that are not related to a field on the UI, such as technical errors.
+        </p>
+        <p>
+            Message box make use of a service called <code>MessageBoxService</code>. It provides the ability to
+            <code>open()</code> message box windows.
+        </p>
+        <p>
+            The <code>open()</code> method accepts either a <code>MessageBoxContent</code> object,
+            <code>TemplateRef</code> or <code>Component</code> as the message box content. In addition, you may also
+            provide a <code>MessageBoxConfig</code> object to override some default message box behaviours.
+        </p>
+        <p>
+            Importing either <code>BrowserAnimationsModule</code> or <code>NoopAnimationsModule</code> is required.
+            <code>BrowserAnimationsModule</code> is the standard Angular animation module, it animates content as
+            expected. <code>NoopAnimationsModule</code> mocks the animations and does not render them, potentially
+            increasing performance.
+        </p>
 
-    <h2 fd-title [headerSize]="5">Use the message box if:</h2>
-    <ul>
-        <li>You want to interrupt the user while he or she performs an action.</li>
-        <li>You want to display error, warning, success, confirmation, or information messages.</li>
-        <li>You need to interrupt the user for some other reason.</li>
-        <li>You need the user to acknowledge the message.</li>
-        <li>You need the user to make a decision.</li>
-    </ul>
+        <h2 fd-title [headerSize]="5">Use the message box if:</h2>
+        <ul>
+            <li>You want to interrupt the user while he or she performs an action.</li>
+            <li>You want to display error, warning, success, confirmation, or information messages.</li>
+            <li>You need to interrupt the user for some other reason.</li>
+            <li>You need the user to acknowledge the message.</li>
+            <li>You need the user to make a decision.</li>
+        </ul>
 
-    <h2 fd-title [headerSize]="5">Don't use the message box if:</h2>
-    <ul>
-        <li>You want to display a short success message. Instead, use Message Toast.</li>
-        <li>You can show the message directly in a form field.</li>
-    </ul>
-</description>
+        <h2 fd-title [headerSize]="5">Don't use the message box if:</h2>
+        <ul>
+            <li>You want to display a short success message. Instead, use Message Toast.</li>
+            <li>You can show the message directly in a form field.</li>
+        </ul>
+    </description>
 
-<fd-header-tabs></fd-header-tabs>
-<router-outlet></router-outlet>
+    <fd-header-tabs></fd-header-tabs>
+</fd-doc-page>

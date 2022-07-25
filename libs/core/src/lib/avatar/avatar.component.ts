@@ -1,4 +1,5 @@
 import {
+    Attribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -42,7 +43,7 @@ const ALTER_ICON_OPTIONS = {
         '[attr.tabindex]': '_tabindex'
     }
 })
-export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
+export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnChanges {
     /** User's custom classes */
     @Input()
     class: string;
@@ -55,6 +56,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     /** Aria-label for Avatar. */
     @Input()
     @HostBinding('attr.aria-label')
+    @HostBinding('attr.alt')
     ariaLabel: Nullable<string> = null;
 
     /** Aria-Labelledby for element describing Avatar. */
@@ -148,7 +150,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     }
 
     /** Event emitted when avatar clicked. Only fires if clickable input property set to true. */
-    @Output() avatarClicked = new EventEmitter<void>();
+    @Output() avatarClicked = new EventEmitter<Event>();
 
     /** Event emitted when zoom icon clicked. Only fires if zoomGlyph input property is set. */
     @Output() zoomGlyphClicked = new EventEmitter<void>();
@@ -191,6 +193,9 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
 
     /** @hidden */
     get _tabindex(): number | null {
+        if (this.hostTabindex != null) {
+            return this.hostTabindex;
+        }
         return this.clickable ? 0 : null;
     }
 
@@ -200,7 +205,11 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     }
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef, private _cdr: ChangeDetectorRef) {}
+    constructor(
+        private _elementRef: ElementRef,
+        private _cdr: ChangeDetectorRef,
+        @Attribute('tabindex') private hostTabindex: number | null
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -209,6 +218,9 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
 
     /** @hidden */
     ngOnChanges(): void {
+        if (this.zoomGlyph) {
+            this.clickable = true;
+        }
         this.buildComponentCssClass();
     }
 
@@ -239,13 +251,23 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     }
 
     /** @hidden */
-    @HostListener('click')
-    @HostListener('keyup.enter')
-    @HostListener('keyup.space')
-    _onClick(): void {
+    @HostListener('click', ['$event'])
+    @HostListener('keydown.enter', ['$event'])
+    @HostListener('keydown.space', ['$event'])
+    _onClick(event: Event): void {
         if (this.clickable) {
-            this.avatarClicked.emit();
+            this.avatarClicked.emit(event);
+            if (this.zoomGlyph) {
+                this.zoomGlyphClicked.next();
+            }
         }
+    }
+
+    /** @hidden */
+    zoomClicked(event: Event): void {
+        event.preventDefault();
+        this.elementRef().nativeElement.focus();
+        this.zoomGlyphClicked.next();
     }
 
     /** @hidden Get an abbreviate from the label or return null if not fit requirements */

@@ -48,24 +48,16 @@ jobs:
         runs-on: ubuntu-latest
         needs: one_run
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/cache@v2
-              id: cache
-              with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
-            - uses: actions/setup-node@v2
-              with:
-                  node-version: 15.11.0
-            - name: install dependencies
-              run: npm ci
+            - uses: actions/checkout@v3
+            - name: Yarn setup
+              uses: ./.github/actions/nodejs
 
     # lint commit name
     commit_lint:
         runs-on: ubuntu-latest
         needs: install
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
               with:
                   fetch-depth: 0
             - uses: wagoid/commitlint-github-action@v3
@@ -75,12 +67,9 @@ jobs:
         needs: install
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/cache@v2
-              with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
-            - uses: actions/cache@v2
+            - uses: actions/checkout@v3
+            - uses: ./.github/actions/nodejs
+            - uses: actions/cache@v3
               with:
                   path: dist/libs/core
                   key: dist-core-${{ github.run_id }}
@@ -91,16 +80,13 @@ jobs:
         needs: build-core
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/cache@v2
-              with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
-            - uses: actions/cache@v2
+            - uses: actions/checkout@v3
+            - uses: ./.github/actions/nodejs
+            - uses: actions/cache@v3
               with:
                   path: dist/libs/core
                   key: dist-core-${{ github.run_id }}
-            - uses: actions/cache@v2
+            - uses: actions/cache@v3
               with:
                   path: dist/libs/platform
                   key: dist-platform-${{ github.run_id }}
@@ -111,16 +97,13 @@ jobs:
         needs: build-core
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/cache@v2
-              with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
-            - uses: actions/cache@v2
+            - uses: actions/checkout@v3
+            - uses: ./.github/actions/nodejs
+            - uses: actions/cache@v3
               with:
                   path: dist/libs/core
                   key: dist-core-${{ github.run_id }}
-            - uses: actions/cache@v2
+            - uses: actions/cache@v3
               with:
                   path: dist/libs/platform
                   key: dist-platform-${{ github.run_id }}
@@ -131,16 +114,13 @@ jobs:
         needs: build-core
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/cache@v2
-              with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
-            - uses: actions/cache@v2
+            - uses: actions/checkout@v3
+            - uses: ./.github/actions/nodejs
+            - uses: actions/cache@v3
               with:
                   path: dist/libs/core
                   key: dist-core-${{ github.run_id }}
-            - uses: actions/cache@v2
+            - uses: actions/cache@v3
               with:
                   path: dist/libs/platform
                   key: dist-platform-${{ github.run_id }}
@@ -151,12 +131,9 @@ jobs:
         needs: build-core
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/cache@v2
-              with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
-            - uses: actions/cache@v2
+            - uses: actions/checkout@v3
+            - uses: ./.github/actions/nodejs
+            - uses: actions/cache@v3
               with:
                   path: dist/libs/core
                   key: dist-core-${{ github.run_id }}
@@ -168,27 +145,24 @@ jobs:
         needs: install
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/cache@v2
-              with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
-            - uses: actions/cache@v2
+            - uses: actions/checkout@v3
+            - uses: ./.github/actions/nodejs
+            - uses: actions/cache@v3
               with:
                   path: dist/libs/core
                   key: dist-core-${{ github.run_id }}
-            - uses: actions/cache@v2
+            - uses: actions/cache@v3
               with:
                   path: dist/libs/platform
                   key: dist-platform-${{ github.run_id }}
-            - uses: actions/cache@v2
+            - uses: actions/cache@v3
               with:
                   path: dist/apps/docs
                   key: dist-docs-${{ github.run_id }}
-            #      - run: npm run build-docs -- --configuration production --base-href="fundamental-ngx"
+            #      - run: yarn run build-docs -- --configuration production --base-href="fundamental-ngx"
             - run: |
-                  npm run compile-typedoc-all
-                  npm run copy-docs
+                  yarn run compile-typedoc-all
+                  yarn run copy-docs
                   npx nx build docs --base-href="fundamental-ngx" --runner cloud
 
     # run unit tests core
@@ -200,13 +174,10 @@ jobs:
             matrix:
                 lib: [core, platform, moment-adapter, datetime-adapter, fn]
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/cache@v2
-              with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
+            - uses: actions/checkout@v3
+            - uses: ./.github/actions/nodejs
             - run: npx nx test ${{ matrix.lib }} --watch false --code-coverage true --browsers=ChromeHeadless --runner cloud
-            - run: npm run test:coveralls
+            - run: yarn run test:coveralls
 
     # run linting
     linting:
@@ -217,11 +188,8 @@ jobs:
             matrix:
                 lib: [core, platform, docs, moment-adapter, fn, components-e2e]
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/cache@v2
-              with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
+            - uses: actions/checkout@v3
+            - uses: ./.github/actions/nodejs
             - run: npx nx lint ${{ matrix.lib }} --runner cloud
 
     # run workspace checks
@@ -231,11 +199,8 @@ jobs:
         strategy:
             fail-fast: false
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/cache@v2
-              with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
+            - uses: actions/checkout@v3
+            - uses: ./.github/actions/nodejs
             - run: npx nx run workspace-tools:test --runner cloud
 
     # check formatting
@@ -243,13 +208,10 @@ jobs:
         runs-on: ubuntu-latest
         needs: install
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/cache@v2
-              with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
+            - uses: actions/checkout@v3
+            - uses: ./.github/actions/nodejs
             - run: git fetch origin main
-            - run: npm run format:check -- --base=origin/main --head=HEAD
+            - run: yarn run format:check -- --base=origin/main --head=HEAD
 
     # firebase deploy preview
     firebase_preview:
@@ -258,8 +220,8 @@ jobs:
         outputs:
             output_url: ${{ steps.firebase_hosting_preview.outputs.details_url }}
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/cache@v2
+            - uses: actions/checkout@v3
+            - uses: actions/cache@v3
               with:
                   path: dist/apps/docs
                   key: dist-docs-${{ github.run_id }}
@@ -290,25 +252,19 @@ jobs:
             matrix:
                 suite: ['suite platformA', 'suite platformB', 'suite platformC', 'suite coreA', 'suite coreB']
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
             - uses: browser-actions/setup-chrome@latest
               with:
                   chrome-version: stable
-            - uses: actions/cache@v2
+            - name: Yarn setup
+              uses: ./.github/actions/nodejs
               with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
-            - uses: actions/setup-node@v2
-              with:
-                  node-version: 15.11.0
-
+                  node-version: 14 # Seems like some dep of wdio does not support 16+ node versions
             - name: smoke e2e on firebase
               env:
                   CAP_SLUG: ${{ matrix.browser }}
               if: ${{ needs.firebase_preview.outputs.output_url }}
               run: |
-                  npm rebuild
-                  npm ci
                   export DISPLAY=:99
                   chrome --version
                   sudo Xvfb -ac :99 -screen 0 1920x1080x24 > /dev/null 2>&1 & # optional
@@ -319,8 +275,6 @@ jobs:
                   CAP_SLUG: ${{ matrix.browser }}
               if: ${{ !needs.firebase_preview.outputs.output_url }}
               run: |
-                  npm rebuild
-                  npm ci
                   npx ng serve --watch false --configuration production &
                   npx wait-on http://localhost:4200
                   export DISPLAY=:99
@@ -338,24 +292,20 @@ jobs:
             || github.ref == 'refs/heads/hotfix_tmp_branch_for_automated_release_do_not_use'
             ) }}
         steps:
-            - uses: actions/checkout@v2.4.0
+            - uses: actions/checkout@v3
               with:
                   token: ${{ secrets.GHACTIONS }}
                   submodules: true
                   fetch-depth: 0
-            - uses: actions/cache@v2
-              with:
-                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
-                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
-
+            - uses: ./.github/actions/nodejs
             - run: |
                   echo "STAGE_NAME=Release" >> $GITHUB_ENV
                   git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
                   git fetch
-                  git checkout tmp_branch_for_automated_release_do_not_use
+                  git checkout main
               if: ${{ github.ref == 'refs/heads/tmp_branch_for_automated_release_do_not_use' }}
             - run: |
-                  echo "STAGE_NAME=Pre-release" >> $GITHUB_ENV 
+                  echo "STAGE_NAME=Pre-release" >> $GITHUB_ENV
                   echo "releaseTag=prerelease" >> $GITHUB_ENV
                   git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
                   git fetch

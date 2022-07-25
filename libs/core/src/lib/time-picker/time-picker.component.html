@@ -11,7 +11,6 @@
     <fd-popover-control>
         <fd-input-group
             #inputGroupComponent
-            [compact]="compact"
             (addOnButtonClicked)="_addOnButtonClicked()"
             [button]="true"
             [state]="state"
@@ -26,7 +25,6 @@
                 type="text"
                 class="fd-input"
                 fd-input-group-input
-                [compact]="compact"
                 [value]="_inputTimeValue"
                 (focusout)="_timeInputChanged($any($event.currentTarget).value)"
                 (keyup.enter)="_timeInputChanged($any($event.currentTarget).value)"
@@ -48,7 +46,6 @@
         <fd-time
             *ngIf="isOpen"
             [tablet]="tablet"
-            [compact]="compact"
             [disabled]="disabled"
             [keepTwoDigits]="keepTwoDigitsTime"
             [ngModel]="time"

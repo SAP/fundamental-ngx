@@ -597,6 +597,48 @@
             },
             "tags": ["type:lib", "scope:fd"]
         },
+        "core-content-density": {
+            "projectType": "library",
+            "root": "libs/core/src/lib/content-density",
+            "sourceRoot": "libs/core/src/lib/content-density",
+            "prefix": "fd",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/core/content-density"],
+                    "options": {
+                        "project": "libs/core/src/lib/content-density/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/core/src/lib/content-density/tsconfig.lib.prod.json"
+                        },
+                        "development": {
+                            "tsConfig": "libs/core/src/lib/content-density/tsconfig.lib.json"
+                        }
+                    },
+                    "defaultConfiguration": "production"
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/core/src/lib/content-density/test.ts",
+                        "tsConfig": "libs/core/src/lib/content-density/tsconfig.spec.json",
+                        "karmaConfig": "libs/core/src/lib/content-density/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/content-density/**/*.ts",
+                            "libs/core/src/lib/content-density/**/*.html"
+                        ]
+                    }
+                }
+            },
+            "tags": ["scope:fd", "type:lib"]
+        },
         "core-date-picker": {
             "projectType": "library",
             "root": "libs/core/src/lib/date-picker",
@@ -2135,6 +2177,48 @@
                 }
             },
             "tags": ["type:lib", "scope:fd"]
+        },
+        "core-overflow-layout": {
+            "projectType": "library",
+            "root": "libs/core/src/lib/overflow-layout",
+            "sourceRoot": "libs/core/src/lib/overflow-layout",
+            "prefix": "fd",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/core/overflow-layout"],
+                    "options": {
+                        "project": "libs/core/src/lib/overflow-layout/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/core/src/lib/overflow-layout/tsconfig.lib.prod.json"
+                        },
+                        "development": {
+                            "tsConfig": "libs/core/src/lib/overflow-layout/tsconfig.lib.json"
+                        }
+                    },
+                    "defaultConfiguration": "production"
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/core/src/lib/overflow-layout/test.ts",
+                        "tsConfig": "libs/core/src/lib/overflow-layout/tsconfig.spec.json",
+                        "karmaConfig": "libs/core/src/lib/overflow-layout/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/core/src/lib/overflow-layout/**/*.ts",
+                            "libs/core/src/lib/overflow-layout/**/*.html"
+                        ]
+                    }
+                }
+            },
+            "tags": ["scope:fd", "type:lib"]
         },
         "core-pagination": {
             "projectType": "library",
@@ -3940,6 +4024,44 @@
             "tags": ["type:lib", "scope:fn"],
             "implicitDependencies": ["core"]
         },
+        "fn-avatar": {
+            "projectType": "library",
+            "root": "libs/fn/src/lib/avatar",
+            "sourceRoot": "libs/fn/src/lib/avatar",
+            "prefix": "fd",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/fn/avatar"],
+                    "options": {
+                        "tsConfig": "libs/fn/src/lib/avatar/tsconfig.lib.json",
+                        "project": "libs/fn/src/lib/avatar/ng-package.json",
+                        "updateBuildableProjectDepsInPackageJson": false
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/fn/src/lib/avatar/tsconfig.lib.prod.json"
+                        }
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/fn/src/lib/avatar/test.ts",
+                        "tsConfig": "libs/fn/src/lib/avatar/tsconfig.spec.json",
+                        "karmaConfig": "libs/fn/src/lib/avatar/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["libs/fn/src/lib/avatar/**/*.ts", "libs/fn/src/lib/avatar/**/*.html"]
+                    }
+                }
+            },
+            "tags": ["type:lib", "scope:fn"],
+            "implicitDependencies": ["core"]
+        },
         "fn-button": {
             "projectType": "library",
             "root": "libs/fn/src/lib/button",
@@ -3977,6 +4099,45 @@
             },
             "tags": ["type:lib", "scope:fn"],
             "implicitDependencies": ["core"]
+        },
+        "fn-cdk": {
+            "projectType": "library",
+            "root": "libs/fn/src/lib/cdk",
+            "sourceRoot": "libs/fn/src/lib/cdk",
+            "prefix": "fn",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/fn/cdk"],
+                    "options": {
+                        "project": "libs/fn/src/lib/cdk/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/fn/src/lib/cdk/tsconfig.lib.prod.json"
+                        },
+                        "development": {
+                            "tsConfig": "libs/fn/src/lib/cdk/tsconfig.lib.json"
+                        }
+                    },
+                    "defaultConfiguration": "production"
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/fn/src/lib/cdk/test.ts",
+                        "tsConfig": "libs/fn/src/lib/cdk/tsconfig.spec.json",
+                        "karmaConfig": "libs/fn/src/lib/cdk/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["libs/fn/src/lib/cdk/**/*.ts", "libs/fn/src/lib/cdk/**/*.html"]
+                    }
+                }
+            },
+            "tags": ["scope:fn", "type:lib"]
         },
         "fn-checkbox": {
             "projectType": "library",
@@ -4048,6 +4209,382 @@
                     "builder": "@nrwl/linter:eslint",
                     "options": {
                         "lintFilePatterns": ["libs/fn/src/lib/form/**/*.ts", "libs/fn/src/lib/form/**/*.html"]
+                    }
+                }
+            },
+            "tags": ["type:lib", "scope:fn"],
+            "implicitDependencies": ["core"]
+        },
+        "fn-generic-tag": {
+            "projectType": "library",
+            "root": "libs/fn/src/lib/generic-tag",
+            "sourceRoot": "libs/fn/src/lib/generic-tag",
+            "prefix": "fd",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/fn/generic-tag"],
+                    "options": {
+                        "tsConfig": "libs/fn/src/lib/generic-tag/tsconfig.lib.json",
+                        "project": "libs/fn/src/lib/generic-tag/ng-package.json",
+                        "updateBuildableProjectDepsInPackageJson": false
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/fn/src/lib/generic-tag/tsconfig.lib.prod.json"
+                        }
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/fn/src/lib/generic-tag/test.ts",
+                        "tsConfig": "libs/fn/src/lib/generic-tag/tsconfig.spec.json",
+                        "karmaConfig": "libs/fn/src/lib/generic-tag/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/fn/src/lib/generic-tag/**/*.ts",
+                            "libs/fn/src/lib/generic-tag/**/*.html"
+                        ]
+                    }
+                }
+            },
+            "tags": ["type:lib", "scope:fn"],
+            "implicitDependencies": ["core"]
+        },
+        "fn-info-label": {
+            "projectType": "library",
+            "root": "libs/fn/src/lib/info-label",
+            "sourceRoot": "libs/fn/src/lib/info-label",
+            "prefix": "fn",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/fn/info-label"],
+                    "options": {
+                        "project": "libs/fn/src/lib/info-label/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/fn/src/lib/info-label/tsconfig.lib.prod.json"
+                        },
+                        "development": {
+                            "tsConfig": "libs/fn/src/lib/info-label/tsconfig.lib.json"
+                        }
+                    },
+                    "defaultConfiguration": "production"
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/fn/src/lib/info-label/test.ts",
+                        "tsConfig": "libs/fn/src/lib/info-label/tsconfig.spec.json",
+                        "karmaConfig": "libs/fn/src/lib/info-label/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/fn/src/lib/info-label/**/*.ts",
+                            "libs/fn/src/lib/info-label/**/*.html"
+                        ]
+                    }
+                }
+            },
+            "tags": ["scope:fn", "type:lib"]
+        },
+        "fn-input": {
+            "projectType": "library",
+            "root": "libs/fn/src/lib/input",
+            "sourceRoot": "libs/fn/src/lib/input",
+            "prefix": "fn",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/fn/input"],
+                    "options": {
+                        "project": "libs/fn/src/lib/input/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/fn/src/lib/input/tsconfig.lib.prod.json"
+                        },
+                        "development": {
+                            "tsConfig": "libs/fn/src/lib/input/tsconfig.lib.json"
+                        }
+                    },
+                    "defaultConfiguration": "production"
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/fn/src/lib/input/test.ts",
+                        "tsConfig": "libs/fn/src/lib/input/tsconfig.spec.json",
+                        "karmaConfig": "libs/fn/src/lib/input/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["libs/fn/src/lib/input/**/*.ts", "libs/fn/src/lib/input/**/*.html"]
+                    }
+                }
+            },
+            "tags": ["scope:fn", "type:lib"]
+        },
+        "fn-list": {
+            "projectType": "library",
+            "root": "libs/fn/src/lib/list",
+            "sourceRoot": "libs/fn/src/lib/list",
+            "prefix": "fn",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/fn/list"],
+                    "options": {
+                        "project": "libs/fn/src/lib/list/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/fn/src/lib/list/tsconfig.lib.prod.json"
+                        },
+                        "development": {
+                            "tsConfig": "libs/fn/src/lib/list/tsconfig.lib.json"
+                        }
+                    },
+                    "defaultConfiguration": "production"
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/fn/src/lib/list/test.ts",
+                        "tsConfig": "libs/fn/src/lib/list/tsconfig.spec.json",
+                        "karmaConfig": "libs/fn/src/lib/list/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["libs/fn/src/lib/list/**/*.ts", "libs/fn/src/lib/list/**/*.html"]
+                    }
+                }
+            },
+            "tags": ["scope:fn", "type:lib"]
+        },
+        "fn-message-strip": {
+            "projectType": "library",
+            "root": "libs/fn/src/lib/message-strip",
+            "sourceRoot": "libs/fn/src/lib/message-strip",
+            "prefix": "fn",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/fn/message-strip"],
+                    "options": {
+                        "project": "libs/fn/src/lib/message-strip/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/fn/src/lib/message-strip/tsconfig.lib.prod.json"
+                        },
+                        "development": {
+                            "tsConfig": "libs/fn/src/lib/message-strip/tsconfig.lib.json"
+                        }
+                    },
+                    "defaultConfiguration": "production"
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/fn/src/lib/message-strip/test.ts",
+                        "tsConfig": "libs/fn/src/lib/message-strip/tsconfig.spec.json",
+                        "karmaConfig": "libs/fn/src/lib/message-strip/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/fn/src/lib/message-strip/**/*.ts",
+                            "libs/fn/src/lib/message-strip/**/*.html"
+                        ]
+                    }
+                }
+            },
+            "tags": ["scope:fn", "type:lib"],
+            "implicitDependencies": ["core"]
+        },
+        "fn-message-toast": {
+            "projectType": "library",
+            "root": "libs/fn/src/lib/message-toast",
+            "sourceRoot": "libs/fn/src/lib/message-toast",
+            "prefix": "fn",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/fn/message-toast"],
+                    "options": {
+                        "project": "libs/fn/src/lib/message-toast/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/fn/src/lib/message-toast/tsconfig.lib.prod.json"
+                        },
+                        "development": {
+                            "tsConfig": "libs/fn/src/lib/message-toast/tsconfig.lib.json"
+                        }
+                    },
+                    "defaultConfiguration": "production"
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/fn/src/lib/message-toast/test.ts",
+                        "tsConfig": "libs/fn/src/lib/message-toast/tsconfig.spec.json",
+                        "karmaConfig": "libs/fn/src/lib/message-toast/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/fn/src/lib/message-toast/**/*.ts",
+                            "libs/fn/src/lib/message-toast/**/*.html"
+                        ]
+                    }
+                }
+            },
+            "tags": ["scope:fn", "type:lib"],
+            "implicitDependencies": ["core"]
+        },
+        "fn-notification": {
+            "projectType": "library",
+            "root": "libs/fn/src/lib/notification",
+            "sourceRoot": "libs/fn/src/lib/notification",
+            "prefix": "fn",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/fn/notification"],
+                    "options": {
+                        "project": "libs/fn/src/lib/notification/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/fn/src/lib/notification/tsconfig.lib.prod.json"
+                        },
+                        "development": {
+                            "tsConfig": "libs/fn/src/lib/notification/tsconfig.lib.json"
+                        }
+                    },
+                    "defaultConfiguration": "production"
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/fn/src/lib/notification/test.ts",
+                        "tsConfig": "libs/fn/src/lib/notification/tsconfig.spec.json",
+                        "karmaConfig": "libs/fn/src/lib/notification/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/fn/src/lib/notification/**/*.ts",
+                            "libs/fn/src/lib/notification/**/*.html"
+                        ]
+                    }
+                }
+            },
+            "tags": ["scope:fn", "type:lib"],
+            "implicitDependencies": ["core"]
+        },
+        "fn-object-status": {
+            "projectType": "library",
+            "root": "libs/fn/src/lib/object-status",
+            "sourceRoot": "libs/fn/src/lib/object-status",
+            "prefix": "fn",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/fn/object-status"],
+                    "options": {
+                        "project": "libs/fn/src/lib/object-status/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/fn/src/lib/object-status/tsconfig.lib.prod.json"
+                        },
+                        "development": {
+                            "tsConfig": "libs/fn/src/lib/object-status/tsconfig.lib.json"
+                        }
+                    },
+                    "defaultConfiguration": "production"
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/fn/src/lib/object-status/test.ts",
+                        "tsConfig": "libs/fn/src/lib/object-status/tsconfig.spec.json",
+                        "karmaConfig": "libs/fn/src/lib/object-status/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/fn/src/lib/object-status/**/*.ts",
+                            "libs/fn/src/lib/object-status/**/*.html"
+                        ]
+                    }
+                }
+            },
+            "tags": ["scope:fn", "type:lib"],
+            "implicitDependencies": ["core"]
+        },
+        "fn-progress-bar": {
+            "projectType": "library",
+            "root": "libs/fn/src/lib/progress-bar",
+            "sourceRoot": "libs/fn/src/lib/progress-bar",
+            "prefix": "fn",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/fn/progress-bar"],
+                    "options": {
+                        "project": "libs/fn/src/lib/progress-bar/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/fn/src/lib/progress-bar/tsconfig.lib.prod.json"
+                        },
+                        "development": {
+                            "tsConfig": "libs/fn/src/lib/progress-bar/tsconfig.lib.json"
+                        }
+                    },
+                    "defaultConfiguration": "production"
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/fn/src/lib/progress-bar/test.ts",
+                        "tsConfig": "libs/fn/src/lib/progress-bar/tsconfig.spec.json",
+                        "karmaConfig": "libs/fn/src/lib/progress-bar/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/fn/src/lib/progress-bar/**/*.ts",
+                            "libs/fn/src/lib/progress-bar/**/*.html"
+                        ]
                     }
                 }
             },
@@ -4129,6 +4666,48 @@
             },
             "tags": ["type:lib", "scope:fn"],
             "implicitDependencies": ["core"]
+        },
+        "fn-segmented-button": {
+            "projectType": "library",
+            "root": "libs/fn/src/lib/segmented-button",
+            "sourceRoot": "libs/fn/src/lib/segmented-button",
+            "prefix": "fn",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/fn/segmented-button"],
+                    "options": {
+                        "project": "libs/fn/src/lib/segmented-button/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/fn/src/lib/segmented-button/tsconfig.lib.prod.json"
+                        },
+                        "development": {
+                            "tsConfig": "libs/fn/src/lib/segmented-button/tsconfig.lib.json"
+                        }
+                    },
+                    "defaultConfiguration": "production"
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/fn/src/lib/segmented-button/test.ts",
+                        "tsConfig": "libs/fn/src/lib/segmented-button/tsconfig.spec.json",
+                        "karmaConfig": "libs/fn/src/lib/segmented-button/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/fn/src/lib/segmented-button/**/*.ts",
+                            "libs/fn/src/lib/segmented-button/**/*.html"
+                        ]
+                    }
+                }
+            },
+            "tags": ["scope:fn", "type:lib"]
         },
         "fn-select": {
             "projectType": "library",
@@ -4282,43 +4861,44 @@
             "tags": ["type:lib", "scope:fn"],
             "implicitDependencies": ["core"]
         },
-        "fn-tag": {
+        "fn-utils": {
             "projectType": "library",
-            "root": "libs/fn/src/lib/tag",
-            "sourceRoot": "libs/fn/src/lib/tag",
+            "root": "libs/fn/src/lib/utils",
+            "sourceRoot": "libs/fn/src/lib/utils",
             "prefix": "fn",
             "architect": {
                 "build": {
                     "builder": "@nrwl/angular:package",
-                    "outputs": ["dist/libs/fn/tag"],
+                    "outputs": ["dist/libs/fn/utils"],
                     "options": {
-                        "tsConfig": "libs/fn/src/lib/tag/tsconfig.lib.json",
-                        "project": "libs/fn/src/lib/tag/ng-package.json",
-                        "updateBuildableProjectDepsInPackageJson": false
+                        "project": "libs/fn/src/lib/utils/ng-package.json"
                     },
                     "configurations": {
                         "production": {
-                            "tsConfig": "libs/fn/src/lib/tag/tsconfig.lib.prod.json"
+                            "tsConfig": "libs/fn/src/lib/utils/tsconfig.lib.prod.json"
+                        },
+                        "development": {
+                            "tsConfig": "libs/fn/src/lib/utils/tsconfig.lib.json"
                         }
-                    }
+                    },
+                    "defaultConfiguration": "production"
                 },
                 "test": {
                     "builder": "@angular-devkit/build-angular:karma",
                     "options": {
-                        "main": "libs/fn/src/lib/tag/test.ts",
-                        "tsConfig": "libs/fn/src/lib/tag/tsconfig.spec.json",
-                        "karmaConfig": "libs/fn/src/lib/tag/karma.conf.js"
+                        "main": "libs/fn/src/lib/utils/test.ts",
+                        "tsConfig": "libs/fn/src/lib/utils/tsconfig.spec.json",
+                        "karmaConfig": "libs/fn/src/lib/utils/karma.conf.js"
                     }
                 },
                 "lint": {
                     "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "lintFilePatterns": ["libs/fn/src/lib/tag/**/*.ts", "libs/fn/src/lib/tag/**/*.html"]
+                        "lintFilePatterns": ["libs/fn/src/lib/utils/**/*.ts", "libs/fn/src/lib/utils/**/*.html"]
                     }
                 }
             },
-            "tags": ["type:lib", "scope:fn"],
-            "implicitDependencies": ["core"]
+            "tags": ["scope:fn", "type:lib"]
         },
         "moment-adapter": {
             "root": "libs/moment-adapter",

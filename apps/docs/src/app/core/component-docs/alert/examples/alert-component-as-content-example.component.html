@@ -11,13 +11,15 @@
 
 <!-- Defining a template to open -->
 <ng-template let-alert #template>
-    <p>{{ alert.data.firstLine }}</p>
-    <p>{{ alert.data.secondLine }}</p>
+    <div>{{ alert.data.firstLine }}</div>
+    <br />
+    <div>{{ alert.data.secondLine }}</div>
+    <br />
     <button
         fd-button
         label="Click to dismiss"
         fdType="positive"
-        [compact]="true"
+        fdCompact
         (click)="alert.dismiss('Data passed back')"
     ></button>
 </ng-template>

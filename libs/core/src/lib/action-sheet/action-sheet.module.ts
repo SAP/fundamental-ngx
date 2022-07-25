@@ -7,15 +7,25 @@ import { ActionSheetItemComponent } from './action-sheet-item/action-sheet-item.
 import { ActionSheetBodyComponent } from './action-sheet-body/action-sheet-body.component';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { DeprecatedActionSheetCompactDirective } from './deprecated-action-sheet-compact.directive';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
-    imports: [CommonModule, PopoverModule, ButtonModule],
-    exports: [ActionSheetComponent, ActionSheetControlComponent, ActionSheetItemComponent, ActionSheetBodyComponent],
+    imports: [CommonModule, PopoverModule, ButtonModule, ContentDensityModule],
+    exports: [
+        ActionSheetComponent,
+        ActionSheetControlComponent,
+        ActionSheetItemComponent,
+        ActionSheetBodyComponent,
+        DeprecatedActionSheetCompactDirective,
+        ContentDensityModule
+    ],
     declarations: [
         ActionSheetComponent,
         ActionSheetControlComponent,
         ActionSheetItemComponent,
-        ActionSheetBodyComponent
+        ActionSheetBodyComponent,
+        DeprecatedActionSheetCompactDirective
     ]
 })
 export class ActionSheetModule {}

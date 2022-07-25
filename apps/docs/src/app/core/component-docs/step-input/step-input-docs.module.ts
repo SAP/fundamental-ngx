@@ -14,7 +14,8 @@ import { StepInputLabelExampleComponent } from './examples/step-input-label-exam
 import { StepInputCurrencyExampleComponent } from './examples/step-input-currency-example/step-input-currency-example.component';
 import { StepInputFormExampleComponent } from './examples/step-input-form-example/step-input-form-example.component';
 import { FormModule } from '@fundamental-ngx/core/form';
-import { StepInputModule } from '@fundamental-ngx/core/step-input';
+import { DeprecatedStepInputCompactDirective, StepInputModule } from '@fundamental-ngx/core/step-input';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
 
 const routes: Routes = [
     {
@@ -40,6 +41,7 @@ const routes: Routes = [
         StepInputLabelExampleComponent,
         StepInputCurrencyExampleComponent,
         StepInputFormExampleComponent
-    ]
+    ],
+    providers: [moduleDeprecationsProvider(DeprecatedStepInputCompactDirective)]
 })
 export class StepInputDocsModule {}

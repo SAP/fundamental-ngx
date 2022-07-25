@@ -144,6 +144,16 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
         const previousElementSibling = <HTMLElement>target.previousElementSibling;
         const nextElementSibling = <HTMLElement>target.nextElementSibling;
 
+        if (
+            i === this.products.length - 1 &&
+            (KeyUtil.isKeyCode(event, RIGHT_ARROW) || (KeyUtil.isKeyCode(event, LEFT_ARROW) && this._isRtl))
+        ) {
+            while (<HTMLElement>target.previousElementSibling) {
+                target = <HTMLElement>target.previousElementSibling;
+            }
+            target.focus();
+        }
+
         if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
             this._isRtl ? nextElementSibling?.focus() : previousElementSibling?.focus();
         } else if (KeyUtil.isKeyCode(event, RIGHT_ARROW)) {

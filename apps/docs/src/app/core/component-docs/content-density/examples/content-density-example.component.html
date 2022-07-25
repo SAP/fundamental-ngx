@@ -1,9 +1,13 @@
-<div style="display: flex">
-    <fd-select [(ngModel)]="selectedDensity" (ngModelChange)="onChange()" style="margin-right: 8px">
-        <fd-option value="cozy">Cozy</fd-option>
-        <fd-option value="condensed">Condensed</fd-option>
-        <fd-option value="compact">Compact</fd-option>
+<div>
+    <fd-select
+        [ngModel]="_contentDensityService.contentDensityListener() | async"
+        (ngModelChange)="onChange($event)"
+        style="margin-right: 8px"
+    >
+        <li fd-option value="cozy">Cozy</li>
+        <li fd-option value="condensed">Condensed</li>
+        <li fd-option value="compact">Compact</li>
     </fd-select>
-
-    <button fd-button>My size changes when "Compact" or "Condensed" is selected</button>
 </div>
+
+<fd-docs-content-density-user> This will follow the density of the service</fd-docs-content-density-user>
