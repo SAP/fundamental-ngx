@@ -108,9 +108,11 @@ export class SelectComponent implements AfterContentInit, OnDestroy, ControlValu
     ngAfterContentInit(): void {
         this._selectWidth = this._elRef.nativeElement.getBoundingClientRect().width;
 
-        resizeObservable(this._elRef.nativeElement).subscribe(() => {
-            this._selectWidth = this._elRef.nativeElement.getBoundingClientRect().width;
-        });
+        this._subscriptions.add(
+            resizeObservable(this._elRef.nativeElement).subscribe(() => {
+                this._selectWidth = this._elRef.nativeElement.getBoundingClientRect().width;
+            })
+        );
 
         if (!this._internalValue) {
             return;

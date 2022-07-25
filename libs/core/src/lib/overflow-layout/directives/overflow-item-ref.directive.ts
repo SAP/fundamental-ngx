@@ -1,4 +1,4 @@
-import { Directive, ElementRef, TemplateRef } from '@angular/core';
+import { Directive, ElementRef, Input, TemplateRef } from '@angular/core';
 import { OverflowItemDirectiveContext, OverflowItemRef } from '../interfaces/overflow-item-ref.interface';
 import { OverflowItem } from '../interfaces/overflow-item.interface';
 import { FD_OVERFLOW_ITEM_REF } from '../tokens/overflow-item-ref.token';
@@ -15,7 +15,7 @@ import { FD_OVERFLOW_ITEM_REF } from '../tokens/overflow-item-ref.token';
         }
     ]
 })
-export class OverflowItemRefDirective implements OverflowItemRef {
+export class OverflowItemRefDirective<T = any> implements OverflowItemRef<T> {
     /**
      * Element ref of the `fdOverflowLayoutItem` directive.
      */
@@ -27,11 +27,32 @@ export class OverflowItemRefDirective implements OverflowItemRef {
     /**
      * Whether the item is hidden.
      */
-    hidden = false;
+    get hidden(): boolean {
+        return this._hidden;
+    }
+
+    set hidden(value: boolean) {
+        this._hidden = value;
+        this.overflowItem.hiddenChange.emit(value);
+    }
+    _hidden = false;
     /**
      * Index of the item in the array of Overflow Layout Component's items.
      */
     index: number;
+
+    /** Whether this item is last in the array. */
+    first: boolean;
+
+    /** Whether this item is first in the array. */
+    last: boolean;
+
+    /** Whether the item is softly hidden. */
+    softHidden = true;
+
+    /** Item instance. Used for correct autocomplete. */
+    @Input('fdOverflowItemRef')
+    item: T;
 
     /** @hidden */
     static ngTemplateContextGuard(
@@ -42,7 +63,7 @@ export class OverflowItemRefDirective implements OverflowItemRef {
     }
 
     /** @hidden */
-    constructor(public templateRef: TemplateRef<OverflowItemDirectiveContext>) {}
+    constructor(public templateRef: TemplateRef<OverflowItemDirectiveContext<T>>) {}
 
     /**
      * Sets the element reference of the `fdOverflowLayoutItem` directive.`

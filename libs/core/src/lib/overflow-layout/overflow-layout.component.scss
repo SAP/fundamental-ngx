@@ -52,4 +52,10 @@ $fd-block: 'fd-overflow-layout';
         display: block;
         white-space: normal;
     }
+
+    &__item {
+        &--soft-hidden {
+            opacity: 0 !important;
+        }
+    }
 }

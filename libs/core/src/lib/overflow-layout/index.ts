@@ -12,3 +12,5 @@ export * from './interfaces/overflow-popover-content.interface';
 export * from './tokens/overflow-expand.token';
 export * from './tokens/overflow-item-ref.token';
 export * from './tokens/overflow-item.token';
+export * from './tokens/overflow-container.token';
+export * from './overflow-layout.service';

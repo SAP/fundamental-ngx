@@ -1,4 +1,4 @@
-import { Directive, TemplateRef } from '@angular/core';
+import { Directive, Input, TemplateRef } from '@angular/core';
 import { OverflowExpand, OverflowExpandDirectiveContext } from '../interfaces/overflow-expand.interface';
 import { FD_OVERFLOW_EXPAND } from '../tokens/overflow-expand.token';
 
@@ -14,7 +14,10 @@ import { FD_OVERFLOW_EXPAND } from '../tokens/overflow-expand.token';
         }
     ]
 })
-export class OverflowExpandDirective implements OverflowExpand {
+export class OverflowExpandDirective<T extends any[] = any[]> implements OverflowExpand<T> {
+    @Input()
+    fdOverflowExpandItems: T;
+
     /** @hidden */
     static ngTemplateContextGuard(
         dir: OverflowExpandDirective,
@@ -24,5 +27,5 @@ export class OverflowExpandDirective implements OverflowExpand {
     }
 
     /** @hidden */
-    constructor(public templateRef: TemplateRef<OverflowExpandDirectiveContext>) {}
+    constructor(public templateRef: TemplateRef<OverflowExpandDirectiveContext<T>>) {}
 }
