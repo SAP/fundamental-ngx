@@ -4,20 +4,21 @@
     [class.fd-tokenizer--compact]="compact"
 >
     <div class="fd-tokenizer__inner" #tokenizerInner>
-        <ng-content select="fd-token"></ng-content>
+        <div role="listbox">
+            <ng-content select="fd-token"></ng-content>
+        </div>
 
-        <ng-container *ngIf="compact || compactCollapse; else moreElement">
+        <ng-container *ngIf="_showOverflowPopover && (compact || compactCollapse); else moreElement">
             <ng-container *ngTemplateOutlet="tokensOverflow"></ng-container>
         </ng-container>
 
         <ng-content select="[fd-form-control]"></ng-content>
     </div>
-    <span fd-input-group-addon *ngIf="glyph" #inputGroupAddOn [compact]="compact" [button]="true" placement="after">
+    <span fd-input-group-addon *ngIf="glyph" #inputGroupAddOn [button]="true" placement="after">
         <button
             fd-button
             [class]="compact ? 'fd-tokenizer-addon--compact' : 'fd-tokenizer-addon'"
             fdType="transparent"
-            [compact]="compact"
             [glyph]="glyph"
             type="button"
         ></button>
@@ -39,7 +40,6 @@
                         *ngIf="!token.readOnly"
                         class="fd-token__close"
                         role="button"
-                        tabindex="-1"
                         [attr.aria-label]="token.deleteButtonLabel"
                         (click)="token.closeClickHandler($event)"
                     ></span>
@@ -58,11 +58,12 @@
             !_tokenizerHasFocus
         "
         class="fd-tokenizer-more"
-        #moreElement
+        role="button"
+        tabindex="0"
     >
-        <ng-container *ngIf="compact || compactCollapse"
-            >{{ moreTokensLeft.length + moreTokensRight.length }} {{ moreTerm }}</ng-container
-        >
-        <ng-container *ngIf="!compact && !compactCollapse">{{ hiddenCozyTokenCount }} {{ moreTerm }}</ng-container>
+        <ng-container *ngIf="compact || compactCollapse">
+            {{ moreTokensLeft.length + moreTokensRight.length }} {{ moreTerm }}
+        </ng-container>
+        <ng-container *ngIf="!compact && !compactCollapse"> {{ hiddenCozyTokenCount }} {{ moreTerm }} </ng-container>
     </span>
 </ng-template>

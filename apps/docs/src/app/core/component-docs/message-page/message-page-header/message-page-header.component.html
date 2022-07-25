@@ -1,46 +1,48 @@
-<header>Message Page</header>
-<description>
-    <p>
-        Message page displays a message to the user when an app or list is empty or if an error has occurred. The text
-        and icon on the message page changes depending on the use case, however, the layout stays the same. It is
-        responsive and adjusts to fit the available screen space.
-    </p>
+<fd-doc-page>
+    <header>Message Page</header>
+    <description>
+        <p>
+            Message page displays a message to the user when an app or list is empty or if an error has occurred. The
+            text and icon on the message page changes depending on the use case, however, the layout stays the same. It
+            is responsive and adjusts to fit the available screen space.
+        </p>
 
-    <import module="MessagePageModule" subPackage="message-page"></import>
+        <import module="MessagePageModule" subPackage="message-page"></import>
 
-    <h2>Usage</h2>
-    <b>The message page can be used in the following situations:</b>
-    <ul>
-        <li>Filter with no results</li>
-        <li>Search with no results</li>
-        <li>Empty app</li>
-        <li>Too many items</li>
-        <li>Item saved as a tile that is no longer available</li>
-        <li>Error</li>
-    </ul>
+        <h2>Usage</h2>
+        <b>The message page can be used in the following situations:</b>
+        <ul>
+            <li>Filter with no results</li>
+            <li>Search with no results</li>
+            <li>Empty app</li>
+            <li>Too many items</li>
+            <li>Item saved as a tile that is no longer available</li>
+            <li>Error</li>
+        </ul>
 
-    <h2>Structure</h2>
-    <ul>
-        <li>
-            <code>fd-message-page</code> - the user can specify the type of the Message Page through the
-            <b>type</b> input property which can be set to 'filter', 'search', 'no-items' and 'error'. The type will
-            automatically assign an icon for the Message Page. If no type is specified the default icon is set to
-            'documents'. The icon can be customized with the <b>glyph</b> input property. In this case leave the
-            <b>type</b> input property unset. It's recommended to always show an icon with the Message Page. In cases
-            where you can’t find a suitable icon for your message, set the <b>hasIcon</b> property to false. This will
-            remove the icon from the component.
-        </li>
-        <li><code>fd-message-page-title</code> - a mandatory element.</li>
-        <li>
-            <code>fd-message-page-subtitle</code> - an optional element that provides additional details to the title.
-            It should be as concise as possible. The text can formatted (bold, italic, underline and/or bullet points).
-        </li>
-        <li>
-            <code>fd-message-page-actions</code> - an optional container for buttons that represent actions associated
-            with the message. It's highly recommended not to add more than two buttons.
-        </li>
-        <li><code>fd-message-page-more</code>- optional. A container for more actions.</li>
-    </ul>
-</description>
-<fd-header-tabs></fd-header-tabs>
-<router-outlet></router-outlet>
+        <h2>Structure</h2>
+        <ul>
+            <li>
+                <code>fd-message-page</code> - the user can specify the type of the Message Page through the
+                <b>type</b> input property which can be set to 'filter', 'search', 'no-items' and 'error'. The type will
+                automatically assign an icon for the Message Page. If no type is specified the default icon is set to
+                'documents'. The icon can be customized with the <b>glyph</b> input property. In this case leave the
+                <b>type</b> input property unset. It's recommended to always show an icon with the Message Page. In
+                cases where you can’t find a suitable icon for your message, set the <b>hasIcon</b> property to false.
+                This will remove the icon from the component.
+            </li>
+            <li><code>fd-message-page-title</code> - a mandatory element.</li>
+            <li>
+                <code>fd-message-page-subtitle</code> - an optional element that provides additional details to the
+                title. It should be as concise as possible. The text can formatted (bold, italic, underline and/or
+                bullet points).
+            </li>
+            <li>
+                <code>fd-message-page-actions</code> - an optional container for buttons that represent actions
+                associated with the message. It's highly recommended not to add more than two buttons.
+            </li>
+            <li><code>fd-message-page-more</code>- optional. A container for more actions.</li>
+        </ul>
+    </description>
+    <fd-header-tabs></fd-header-tabs>
+</fd-doc-page>

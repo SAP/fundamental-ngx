@@ -20,34 +20,34 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DOWN_ARROW, TAB, SPACE, ENTER, UP_ARROW, ESCAPE } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import { SelectionModel } from '@angular/cdk/collections';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
-import { map, startWith, distinctUntilChanged, first } from 'rxjs/operators';
+import { distinctUntilChanged, first, map, startWith } from 'rxjs/operators';
 
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
-import { FormStates, PopoverFillMode, Nullable } from '@fundamental-ngx/core/shared';
+import { FormStates, Nullable, PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { TokenizerComponent } from '@fundamental-ngx/core/token';
-import { registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
+import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import { ListComponent } from '@fundamental-ngx/core/list';
 import {
-    ContentDensityService,
+    applyCssClass,
     CssClassBuilder,
     DynamicComponentService,
-    RtlService,
-    applyCssClass,
     FocusEscapeDirection,
-    KeyUtil,
     FocusTrapService,
-    uuidv4,
-    RangeSelector
+    KeyUtil,
+    RangeSelector,
+    RtlService,
+    uuidv4
 } from '@fundamental-ngx/core/utils';
 
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MultiInputMobileModule } from './multi-input-mobile/multi-input-mobile.module';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -69,7 +69,8 @@ import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interf
             multi: true
         },
         MenuKeyboardService,
-        registerFormItemControl(MultiInputComponent)
+        registerFormItemControl(MultiInputComponent),
+        contentDensityObserverProviders()
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -92,10 +93,6 @@ export class MultiInputComponent
     /** Whether the input is disabled. */
     @Input()
     disabled = false;
-
-    /** Whether the input is in compact mode. */
-    @Input()
-    compact?: boolean;
 
     /** If it is mandatory field */
     @Input()
@@ -341,28 +338,18 @@ export class MultiInputComponent
 
     /** @hidden */
     constructor(
+        readonly _contentDensityObserver: ContentDensityObserver,
         private readonly _elementRef: ElementRef,
         private readonly _changeDetRef: ChangeDetectorRef,
         private readonly _dynamicComponentService: DynamicComponentService,
         private readonly _injector: Injector,
         private readonly _viewContainerRef: ViewContainerRef,
         @Optional() private readonly _rtlService: RtlService,
-        @Optional() private readonly _contentDensityService: ContentDensityService,
         @Optional() private readonly _focusTrapService: FocusTrapService
     ) {}
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                    this.buildComponentCssClass();
-                    this._changeDetRef.markForCheck();
-                })
-            );
-        }
-
         this.buildComponentCssClass();
 
         this._subscriptions.add(
@@ -410,6 +397,7 @@ export class MultiInputComponent
         if (this.mobile) {
             this._setUpMobileMode();
         }
+        this.tokenizer._showOverflowPopover = false;
     }
 
     /** @hidden */
@@ -503,6 +491,9 @@ export class MultiInputComponent
         }
 
         this.tokenizer.removeSelectedTokens();
+
+        this.tokenizer.tokenizerInnerEl.nativeElement.scrollLeft =
+            this.tokenizer.tokenizerInnerEl.nativeElement.scrollWidth;
 
         this._changeDetRef.detectChanges();
     }

@@ -1,5 +1,47 @@
-<header>Content Density</header>
-<import module="ContentDensityService" subPackage="utils"></import>
+<fd-doc-page>
+    <header>Content Density</header>
+    <description>
+        <p>
+            SAP's Content density modes give you ability to render elements in different sizes. Majority of components
+            in library support content density features.
+        </p>
+        <p>Design system provides three content density modes:</p>
+        <ul>
+            <li>
+                <i>Cozy</i> - displays controls with dimensions large enough to enable fingertip interaction. This
+                factor can be used in touch screen devices
+            </li>
+            <li>
+                <i>Compact</i> - reduces the dimensions of the component, focusing more on the information displayed.
+                This factor can be used in devices operated by a mouse or keyboard.
+            </li>
+            <li>
+                <i>Condensed</i> - reduces the dimensions of the components and the space between letters. This factor
+                can be used on small screens
+            </li>
+        </ul>
+        <fd-message-strip type="warning" [dismissible]="false" [style.margin-bottom.rem]="0.5">
+            Some components do not support <b>Condensed</b> mode, they will fallback to <b>Compact</b>
+        </fd-message-strip>
+        <fd-message-strip type="warning" [dismissible]="false" [style.margin-bottom.rem]="0.5">
+            Please note that <code>forRoot()</code> method should be called from root module <b>always</b>, if you want
+            to make globallly available content density mode and service to manage that.
+        </fd-message-strip>
 
-<fd-header-tabs></fd-header-tabs>
-<router-outlet></router-outlet>
+        <fd-message-strip type="error" [dismissible]="false">
+            <p>
+                Previously used <code>ContentDensityService</code> is deprecated in favor of new
+                <code>ContentDensityModule</code> and it's components. To continue using old service without issues,
+                please remove it from providers array of root module and replace it by importing
+                <code>ContentDensityModule.forRoot()</code> in your root module
+            </p>
+            <p>
+                If you are looking for documentation related to old approach,
+                <a fd-link routerLink="/core/old-content-density">you can find it here</a>
+            </p>
+        </fd-message-strip>
+    </description>
+    <import module="ContentDensityModule" subPackage="content-density"></import>
+
+    <fd-header-tabs></fd-header-tabs>
+</fd-doc-page>

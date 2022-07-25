@@ -11,5 +11,5 @@ export class SliderBasicExampleComponent {
     value2 = 0;
     value3 = 0;
     value4 = 0;
-    verticalValue = 20;
+    rangeValue = [25, 75];
 }

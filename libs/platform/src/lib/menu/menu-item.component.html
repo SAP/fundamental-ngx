@@ -1,5 +1,12 @@
 <ng-container *ngIf="!_fdMenuInteractiveChild; else projectedContent">
-    <div class="fd-menu__link" [class.is-selected]="isSelected" tabindex="0" role="menuitem">
+    <div
+        class="fd-menu__link"
+        [class.is-disabled]="disabled"
+        [attr.disabled]="disabled"
+        [class.is-selected]="isSelected"
+        tabindex="0"
+        role="menuitem"
+    >
         <span class="fd-menu__title">
             <ng-container [ngTemplateOutlet]="projectedContent"></ng-container>
         </span>

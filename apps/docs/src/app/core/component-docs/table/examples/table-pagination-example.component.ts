@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class TablePaginationExampleComponent implements OnInit {
     tableRows: any[];
     displayedRows: any[];
-    totalItems = 25;
+    totalItems = 30;
     itemsPerPage = 5;
     currentPage = 3;
     itemsPerPageOptions: number[] = [3, 5, 10];
@@ -30,7 +30,7 @@ export class TablePaginationExampleComponent implements OnInit {
 
     itemsPerPageChange(value: number): void {
         this.itemsPerPage = value;
-        this.newPageClicked(1);
+        this.newPageClicked(this.currentPage);
     }
 
     constructor(private _rtlService: RtlService) {}
@@ -161,6 +161,31 @@ export class TablePaginationExampleComponent implements OnInit {
             {
                 column1: 'Row 25',
                 date: '11-12-18',
+                type: 'search'
+            },
+            {
+                column1: 'Row 26',
+                date: '11-12-18',
+                type: 'search'
+            },
+            {
+                column1: 'Row 27',
+                date: '11-12-18',
+                type: 'search'
+            },
+            {
+                column1: 'Row 28',
+                date: '11-12-20',
+                type: 'search'
+            },
+            {
+                column1: 'Row 29',
+                date: '11-12-21',
+                type: 'search'
+            },
+            {
+                column1: 'Row 30',
+                date: '11-12-22',
                 type: 'search'
             }
         ];

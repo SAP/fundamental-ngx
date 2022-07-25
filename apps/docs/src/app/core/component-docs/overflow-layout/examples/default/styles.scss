@@ -1,0 +1,11 @@
+@import '~fundamental-styles/dist/avatar-group';
+
+.fd-avatar {
+    margin: 0 1rem;
+}
+
+::ng-deep {
+    .fd-overflow-layout__items > div:not(:first-child) {
+        margin-left: -2rem;
+    }
+}

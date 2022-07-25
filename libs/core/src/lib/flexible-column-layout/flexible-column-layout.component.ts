@@ -1,66 +1,71 @@
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
-    ContentChild,
     Component,
+    ContentChild,
     EventEmitter,
+    Inject,
     Input,
     OnChanges,
     OnDestroy,
     OnInit,
     Output,
     SimpleChanges,
-    TemplateRef
+    TemplateRef,
+    ViewEncapsulation
 } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import {
-    ONE_COLUMN_START_FULL_SCREEN,
-    ONE_COLUMN_MID_FULL_SCREEN,
-    ONE_COLUMN_END_FULL_SCREEN,
-    TWO_COLUMNS_START_EXPANDED,
-    TWO_COLUMNS_MID_EXPANDED,
-    TWO_COLUMNS_END_EXPANDED,
-    THREE_COLUMNS_MID_EXPANDED,
-    THREE_COLUMNS_END_EXPANDED,
-    THREE_COLUMNS_START_MINIMIZED,
-    THREE_COLUMNS_END_MINIMIZED,
-    SM_SCREEN_SIZE,
-    MD_SCREEN_SIZE,
-    LG_SCREEN_SIZE,
-    ScreenSize,
+    ColumnSeparatorValue,
+    FD_FLEXIBLE_LAYOUT_CONFIG,
+    FlexibleLayoutConfig,
     FlexibleColumnLayout,
-    FlexibleColumnSettings,
-    ColumnSeparatorValue
+    FlexibleColumnLayoutDefinition,
+    LG_SCREEN_SIZE,
+    MD_SCREEN_SIZE,
+    ONE_COLUMN_END_FULL_SCREEN,
+    ONE_COLUMN_MID_FULL_SCREEN,
+    ONE_COLUMN_START_FULL_SCREEN,
+    ScreenSize,
+    SM_SCREEN_SIZE,
+    THREE_COLUMNS_END_EXPANDED,
+    THREE_COLUMNS_END_MINIMIZED,
+    THREE_COLUMNS_MID_EXPANDED,
+    THREE_COLUMNS_START_MINIMIZED,
+    TWO_COLUMNS_END_EXPANDED,
+    TWO_COLUMNS_MID_EXPANDED,
+    TWO_COLUMNS_START_EXPANDED
 } from './constants';
 
 @Component({
     selector: 'fd-flexible-column-layout',
     templateUrl: './flexible-column-layout.component.html',
     styleUrls: ['./flexible-column-layout.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, OnDestroy, OnInit {
     /**
-     * the template that provides the content of the first/start/left column
+     * The template that provides the content of the first/start/left column
      */
     @ContentChild('startColumn')
     startColumn: TemplateRef<any>;
 
     /**
-     * the template that provides the content of the middle column
+     * The template that provides the content of the middle column
      */
     @ContentChild('midColumn')
     midColumn: TemplateRef<any>;
 
     /**
-     * the template that provides the content of the last/end/right column
+     * The template that provides the content of the last/end/right column
      */
     @ContentChild('endColumn')
     endColumn: TemplateRef<any>;
 
     /**
-     * the background design of the component
+     * The background design of the component
      * Options include: 'solid' | 'translucent' | 'transparent'
      * The default is set to 'solid'
      */
@@ -68,7 +73,7 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
     backgroundDesign: 'solid' | 'translucent' | 'transparent' = 'solid';
 
     /**
-     * the layout of the component
+     * The layout of the component
      * Options include: 'OneColumnStartFullScreen' | 'OneColumnMidFullScreen' |
      * 'OneColumnEndFullScreen' | 'TwoColumnsStartExpanded' | 'TwoColumnsMidExpanded' |
      * 'TwoColumnsEndExpanded' | 'ThreeColumnsMidExpanded' | 'ThreeColumnsEndExpanded' |
@@ -78,32 +83,39 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
     layout: FlexibleColumnLayout = ONE_COLUMN_START_FULL_SCREEN;
 
     /**
-     * the event emitted on layout value cchange
+     * Mapping of the layout name and the column layout in %
+     */
+    @Input()
+    layoutDefinitions: FlexibleColumnLayoutDefinition = this._config.layouts;
+
+    /**
+     * The event emitted on layout value change.
      */
     @Output()
     layoutChange: EventEmitter<FlexibleColumnLayout> = new EventEmitter<FlexibleColumnLayout>();
 
     /**
-     * user defined break point for SM screens
-     * the default (Fiori 3) value is 960
+     * User defined break point for SM screens
+     * Default (Fiori 3) value is 960
      */
     @Input()
     smBreakPoint = 960;
 
     /**
-     * user defined break point for LG screens
+     * User-defined break point for LG screens
      * the default (Fiori 3) value is 1280
      */
     @Input()
     lgBreakPoint = 1280;
 
     /**
-     * user defined onResize function
+     * User-defined onResize function
      */
     @Input()
     customOnResizeFunction: () => void;
 
     /**
+     * @hidden
      * left column separator value (between start and middle columns)
      * that specifies the direction of the arrow and
      * if the separator is visible
@@ -112,8 +124,9 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
     _leftColumnSeparator: ColumnSeparatorValue = null;
 
     /**
+     * @hidden
      * right column separator value (between middle and end columns)
-     * that speccifies the direction of the arrow and
+     * that specifies the direction of the arrow and
      * if the separator is visible
      * Options include: 'left', 'right' and null
      */
@@ -134,26 +147,10 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
 
     /**
      * @hidden
-     * mappting of the layout name and the column layout in %
-     */
-    private _layouts: { [key: string]: FlexibleColumnSettings } = {
-        OneColumnStartFullScreen: { start: 100, mid: 0, end: 0 },
-        OneColumnMidFullScreen: { start: 0, mid: 100, end: 0 },
-        OneColumnEndFullScreen: { start: 0, mid: 0, end: 100 },
-        TwoColumnsStartExpanded: { start: 67, mid: 33, end: 0 },
-        TwoColumnsMidExpanded: { start: 33, mid: 67, end: 0 },
-        TwoColumnsEndExpanded: { start: 0, mid: 33, end: 67 },
-        ThreeColumnsMidExpanded: { start: 25, mid: 50, end: 25 },
-        ThreeColumnsEndExpanded: { start: 25, mid: 25, end: 50 },
-        ThreeColumnsStartMinimized: { start: 0, mid: 67, end: 33 },
-        ThreeColumnsEndMinimized: { start: 33, mid: 67, end: 0 }
-    };
-
-    /**
      * the column layout representing the distribution of the width
      * between the first (start), the middle and the last(end) column
      */
-    _columnLayout: { start: number; mid: number; end: number } = this._layouts[this.layout];
+    _columnLayout: { start: number; mid: number; end: number } = this.layoutDefinitions[this.layout];
 
     /**
      * @hidden
@@ -163,7 +160,10 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
      */
     private _responsiveFullscreenLayout = false;
 
+    constructor(@Inject(FD_FLEXIBLE_LAYOUT_CONFIG) private readonly _config: FlexibleLayoutConfig) {}
+
     /**
+     * @hidden
      * function that handles the click events on the left separator
      * and updates the layout
      */
@@ -188,6 +188,7 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
     }
 
     /**
+     * @hidden
      * function that handles the click events on the right separator
      * and updates the layout
      */
@@ -380,7 +381,7 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
      * makes a call to determine the new value of the right separator
      */
     private _updateColumnLayoutParameters(): void {
-        this._columnLayout = this._layouts[this.layout];
+        this._columnLayout = this.layoutDefinitions[this.layout];
         this._leftColumnSeparator = this._getLeftColumnSeparatorValue();
         this._rightColumnSeparator = this._getRightColumnSeparatorValue();
     }

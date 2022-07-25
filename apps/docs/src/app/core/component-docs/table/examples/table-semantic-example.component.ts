@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TableStatuses } from '@fundamental-ngx/core/table';
 import { RangeSelector } from '@fundamental-ngx/core/utils';
 
 @Component({
@@ -9,9 +10,9 @@ export class TableSemanticExampleComponent {
     private readonly _rangeSelector = new RangeSelector();
     isAllSelected: boolean | null = false;
 
-    tableRows: any[] = [
+    tableRows: RowData[] = [
         {
-            status: '',
+            status: null,
             column1: 'user.name@email.com',
             column2: 'Row 1',
             column3: 'Row 1',
@@ -27,7 +28,7 @@ export class TableSemanticExampleComponent {
             checked: false
         },
         {
-            status: '',
+            status: null,
             column1: 'user.name@email.com',
             column2: 'Row 1',
             column3: 'Row 1',
@@ -43,7 +44,7 @@ export class TableSemanticExampleComponent {
             checked: false
         },
         {
-            status: '',
+            status: null,
             column1: 'user.name@email.com',
             column2: 'Row 1',
             column3: 'Row 1',
@@ -59,7 +60,7 @@ export class TableSemanticExampleComponent {
             checked: false
         },
         {
-            status: '',
+            status: null,
             column1: 'user.name@email.com',
             column2: 'Row 3',
             column3: 'Row 3',
@@ -93,6 +94,14 @@ export class TableSemanticExampleComponent {
         }
     }
 
+    getRowAriaLabel(row: RowData, index: number): string {
+        let ariaLabel = 'Select row ' + (index + 1);
+        if (row.status) {
+            ariaLabel += ', ' + row.status;
+        }
+        return ariaLabel;
+    }
+
     private _selectAll(): void {
         this.tableRows.forEach((row) => (row.checked = true));
     }
@@ -111,4 +120,13 @@ export class TableSemanticExampleComponent {
         // returning null to set selection state to "indeterminate"
         return null;
     }
+}
+
+interface RowData {
+    status: TableStatuses | null;
+    column1: string;
+    column2: string;
+    column3: string;
+    date: string;
+    checked: boolean;
 }

@@ -22,7 +22,7 @@ export class ApprovalFlowPo extends BaseComponentPo {
 
     detailsDialogUserTeamButton = this.detailsDialog + ' fd-multi-input button';
     detailsDialogParallelSerialSelect = this.detailsDialog + ' fd-select';
-    detailsDialogParallelSerialSelectOption = 'fd-option';
+    detailsDialogParallelSerialSelectOption = 'li[fd-option]';
 
     selectExample = 'select';
     approvalFlowNode = 'fdp-approval-flow-node .fd-grid-list__item-body';

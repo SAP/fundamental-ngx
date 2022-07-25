@@ -19,9 +19,8 @@ import {
 import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
-import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
-import { SpecialDayRule, Nullable } from '@fundamental-ngx/core/shared';
+import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
+import { Nullable, SpecialDayRule } from '@fundamental-ngx/core/shared';
 
 import { DateRange } from './models/date-range';
 import { CalendarCurrent } from './models/calendar-current';
@@ -35,7 +34,12 @@ import { CalendarService } from './calendar.service';
 import { createMissingDateImplementationError } from './calendar-errors';
 import { CalendarAggregatedYearViewComponent } from './calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
 import { DisableDateFunction, EscapeFocusFunction, FocusableCalendarView } from './models/common';
-import { FdCalendarView, DaysOfWeek, CalendarType, NavigationButtonDisableFunction } from './types';
+import { CalendarType, DaysOfWeek, FdCalendarView, NavigationButtonDisableFunction } from './types';
+import {
+    ContentDensityObserver,
+    contentDensityObserverProviders,
+    ContentDensityMode
+} from '@fundamental-ngx/core/content-density';
 
 let calendarUniqueId = 0;
 
@@ -66,7 +70,12 @@ let calendarUniqueId = 0;
             useExisting: forwardRef(() => CalendarComponent),
             multi: true
         },
-        CalendarService
+        CalendarService,
+        contentDensityObserverProviders({
+            modifiers: {
+                [ContentDensityMode.COMPACT]: 'fd-calendar--compact'
+            }
+        })
     ],
     host: {
         '(blur)': 'onTouched()',
@@ -79,11 +88,6 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     /** The currently selected date model in single mode. */
     @Input()
     selectedDate: Nullable<D>;
-
-    /** Whether compact mode should be included into calendar */
-    @Input()
-    @HostBinding('class.fd-calendar--compact')
-    compact?: boolean;
 
     /**
      * Whether user wants to mark sunday/saturday with `fd-calendar__item--weekend` class
@@ -281,7 +285,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     /** @hidden */
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
-        @Optional() private _contentDensityService: ContentDensityService,
+        private _contentDensityObserver: ContentDensityObserver,
         // Use @Optional to avoid angular injection error message and throw our own which is more precise one
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
@@ -292,7 +296,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
         if (!this._dateTimeFormats) {
             throw createMissingDateImplementationError('DATE_TIME_FORMATS');
         }
-
+        _contentDensityObserver.subscribe();
         // set default value
         this._adapterStartingDayOfWeek = (this._dateTimeAdapter.getFirstDayOfWeek() + 1) as DaysOfWeek;
         this.selectedDate = this._dateTimeAdapter.today();
@@ -303,13 +307,6 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     /** @hidden */
     ngOnInit(): void {
         this._prepareDisplayedView();
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                })
-            );
-        }
     }
 
     /** @hidden */

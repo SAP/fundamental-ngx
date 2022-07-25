@@ -23,6 +23,7 @@
         [avatarSrc]="_user.imgUrl"
         [avatarTitle]="_user.name"
         [description]="_user.description"
+        [ariaLabel]="_user.name"
         [title]="_user.name"
         (click)="$event.stopPropagation(); onUserClick.emit(_user)"
     ></fdp-standard-list-item>

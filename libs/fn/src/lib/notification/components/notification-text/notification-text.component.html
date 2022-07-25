@@ -1,0 +1,9 @@
+<fn-notification-content>
+    <ng-template fnNotificationTitle>{{ config.title }}</ng-template>
+    <ng-template fnNotificationText>{{ config.message }}</ng-template>
+    <ng-template fnNotificationDismissButton>
+        <button class="fn-nested-button" (click)="toastRef.dismissWithAction()">
+            <span class="sap-icon sap-icon--decline"></span>
+        </button>
+    </ng-template>
+</fn-notification-content>

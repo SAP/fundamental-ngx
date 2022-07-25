@@ -2,28 +2,23 @@
 <component-example [hasBackground]="false">
     <fd-input-example></fd-input-example>
 </component-example>
-<code-example [exampleFiles]="inputsFormHtml"></code-example>
+<code-example [exampleFiles]="inputsHtml"></code-example>
 
 <separator></separator>
 
 <fd-docs-section-title id="states" componentName="input"> Input States </fd-docs-section-title>
 <description
-    >Use the <code>state</code> property to set the state of the input. Options include: succes, warning, error and
-    information.</description
+    >Use the <code>state</code> property to set the state of the input. Options include: positive, critical, negative,
+    and info.</description
 >
 <component-example [hasBackground]="false">
     <fd-input-state-example></fd-input-state-example>
 </component-example>
-<code-example [exampleFiles]="inputStatesFormHtml"></code-example>
+<code-example [exampleFiles]="inputStatesHtml"></code-example>
 
-<separator></separator>
-
-<fd-docs-section-title id="reactive-form" componentName="input"> Reactive Form Input </fd-docs-section-title>
-<description>
-    The input element, like several other native html elements, support Angular reactive forms. Using the input within
-    the form element greatly simplifies input value access and validation.
-</description>
+<fd-docs-section-title id="forms" componentName="input"> Input Forms </fd-docs-section-title>
+<description>Inputs may also be used in Angular Reactive Forms.</description>
 <component-example [hasBackground]="false">
-    <fd-input-form-group-example></fd-input-form-group-example>
+    <fd-input-form-example></fd-input-form-example>
 </component-example>
-<code-example [exampleFiles]="formGroupInput"></code-example>
+<code-example [exampleFiles]="inputFormsHtml"></code-example>

@@ -8,10 +8,10 @@ import { SelectModule } from './select.module';
 @Component({
     template: `
         <fd-select [(value)]="value" formControlName="selectControl" (isOpenChange)="onOpen($event)">
-            <fd-option id="option-1" [value]="'value-1'">Test1</fd-option>
-            <fd-option id="option-2" [value]="'value-2'">Test2</fd-option>
-            <fd-option id="option-3" [value]="'value-3'">Test3</fd-option>
-            <fd-option id="option-4" [disabled]="disabled" [value]="'value-4'">Test4</fd-option>
+            <li fd-option id="option-1" [value]="'value-1'">Test1</li>
+            <li fd-option id="option-2" [value]="'value-2'">Test2</li>
+            <li fd-option id="option-3" [value]="'value-3'">Test3</li>
+            <li fd-option id="option-4" [disabled]="disabled" [value]="'value-4'">Test4</li>
         </fd-select>
     `,
     providers: [SelectKeyManagerService]

@@ -8,6 +8,10 @@ import defaultFlexibleColumnLayoutScss from '!./examples/default/flexible-column
 import flexibleColumnLayoutDynamicPageHtml from '!./examples/dynamic-page/flexible-column-layout-dynamic-page-example.component.html?raw';
 import flexibleColumnLayoutDynamicPageTs from '!./examples/dynamic-page/flexible-column-layout-dynamic-page-example.component.ts?raw';
 import flexibleColumnLayoutDynamicPageScss from '!./examples/dynamic-page/flexible-column-layout-dynamic-page-example.component.scss?raw';
+import defaultConfigExampleSrc from '!./examples/custom-config/flexible-column-layout-global-config-example.ts?raw';
+import flexibleColumnLayoutCustomConfigHtml from '!./examples/custom-config/flexible-column-layout-custom-config-example.component.html?raw';
+import flexibleColumnLayoutCustomConfigTs from '!./examples/custom-config/flexible-column-layout-custom-config-example.component.ts?raw';
+import flexibleColumnLayoutCustomConfigScss from '!./examples/custom-config/flexible-column-layout-custom-config-example.component.scss?raw';
 
 @Component({
     selector: 'fd-flexible-column-layout-docs',
@@ -43,4 +47,21 @@ export class FlexibleColumnLayoutDocsComponent {
             fileName: 'flexible-column-layout-dynamic-page-example'
         }
     ];
+
+    flexibleColumnLayoutCustomConfig: ExampleFile[] = [
+        {
+            language: 'html',
+            code: flexibleColumnLayoutCustomConfigHtml,
+            fileName: 'flexible-card-layout-custom-config-example',
+            scssFileCode: flexibleColumnLayoutCustomConfigScss
+        },
+        {
+            language: 'typescript',
+            component: 'FlexibleColumnLayoutDynamicPageExampleComponent',
+            code: flexibleColumnLayoutCustomConfigTs,
+            fileName: 'flexible-card-layout-custom-config-example'
+        }
+    ];
+
+    defaultConfigExample = defaultConfigExampleSrc;
 }

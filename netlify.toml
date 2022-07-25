@@ -7,6 +7,6 @@
 
 [build]
   ignore = 'sh ./ignore.sh'
-  environment = { NODE_VERSION = "14.17.0", PYTHON_VERSION="3.7" }
+  environment = { NODE_VERSION = "16.15.1", PYTHON_VERSION="3.7", YARN_FLAGS="--frozen-lockfile" }
   publish = "dist/apps/docs"
-  command = "NODE_OPTIONS=--max_old_space_size=8192 npm run build-docs-netlify"
+  command = "NODE_OPTIONS=--max_old_space_size=8192 yarn run build-docs-netlify"

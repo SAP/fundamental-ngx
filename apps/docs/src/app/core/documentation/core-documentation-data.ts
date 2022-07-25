@@ -102,17 +102,21 @@ export const layouts: SectionInterfaceContent[] = [
     { url: 'core/flexible-column-layout', name: 'Flexible Column Layout' },
     { url: 'core/layout-panel', name: 'Layout Panel' },
     { url: 'core/layout-grid', name: 'Layout Grid' },
+    {
+        url: 'core/overflow-layout',
+        name: 'Overflow Layout'
+    },
     { url: 'core/resizable-card-layout', name: 'Resizable Card Layout' }
 ];
 
 export const utilities: SectionInterfaceContent[] = [
     { url: 'core/global-config', name: 'Global Configuration' },
-    { url: 'core/content-density', name: 'Content Density' },
     { url: 'core/infinite-scroll', name: 'Infinite Scroll' },
     { url: 'core/initial-focus', name: 'Initial Focus' },
     { url: 'core/scroll-spy', name: 'Scroll Spy' },
     { url: 'core/theme-switcher', name: 'Theme Switcher API' },
-    { url: 'core/theming', name: 'Theming' }
+    { url: 'core/theming', name: 'Theming' },
+    { url: 'core/content-density', name: 'Content Density' }
 ];
 
 export const adapters: SectionInterfaceContent[] = [

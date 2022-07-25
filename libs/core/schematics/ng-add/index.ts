@@ -1,4 +1,4 @@
-import { Rule, SchematicContext, Tree, chain, SchematicsException, TaskId } from '@angular-devkit/schematics';
+import { chain, Rule, SchematicContext, SchematicsException, TaskId, Tree } from '@angular-devkit/schematics';
 import { NodePackageInstallTask, RunSchematicTask } from '@angular-devkit/schematics/tasks';
 import { addPackageJsonDependency, NodeDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
 import { WorkspaceSchema } from '@schematics/angular/utility/workspace-models';
@@ -6,6 +6,8 @@ import { WorkspaceSchema } from '@schematics/angular/utility/workspace-models';
 import { defaultStyles } from './styles';
 import { checkPackageVersion, getPackageVersionFromPackageJson, hasPackage } from '../utils/package-utils';
 import { Schema } from './schema';
+import { updateWorkspace } from '@schematics/angular/utility/workspace';
+import { getProjectTargetOptions } from '../utils/angular-json-utils';
 
 // Needed to queue dependent schematics
 let installTaskId: TaskId;
@@ -29,6 +31,7 @@ export function ngAdd(options: any): Rule {
         addStylePathToConfig(options),
         addAssetsPathToConfig(options),
         addFontsToStyles(options),
+        addThemeToApplication(options),
         callAnimationsSchematics(options),
         callFontMigrationSchematics(options)
     ]);
@@ -294,4 +297,55 @@ function resolveStyles(tree: Tree): [string, Buffer] {
     }
 
     return [path, content];
+}
+
+function addThemeToApplication(options: Schema): Rule {
+    return (_tree, context) =>
+        updateWorkspace((workspace) => {
+            if (options.theme !== 'custom') {
+                const themeAssets = [
+                    `./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/${options.theme}/css_variables.css`,
+                    `./node_modules/fundamental-styles/dist/theming/${options.theme}.css`
+                ];
+                const targetOptions = getProjectTargetOptions(workspace.projects.get(options.project), 'build');
+                const styles = targetOptions.styles as (string | { input: string })[];
+
+                for (let i = 0; i < styles.length; i++) {
+                    let style = styles[i];
+                    const baseVariablesRegex = /@sap-theming\/(.*)\/baseLib\/(.*)\/css_variables.css$/;
+                    const fundamentalStylesDeltaThemingVariablesRegex =
+                        /fundamental-styles\/(.*)\/theming\/(.*)\/.css$/;
+                    const stylePath = typeof style === 'string' ? style : style.input;
+
+                    const baseVariablesMatch = stylePath.match(baseVariablesRegex);
+                    if (baseVariablesMatch) {
+                        const theme = baseVariablesMatch[2];
+                        context.logger.info(`
+                        Found theme ${theme} base SAP variables in styles. Can not add theme to application.
+                        Try to replace theme in application manually, or use ThemingService to manage multiple themes.
+                        [Instructions: https://sap.github.io/fundamental-ngx/#/core/theming]
+                    `);
+                        return;
+                    }
+
+                    const fundamentalStylesDeltaThemingVariablesMatch = stylePath.match(
+                        fundamentalStylesDeltaThemingVariablesRegex
+                    );
+                    if (fundamentalStylesDeltaThemingVariablesMatch) {
+                        const theme = fundamentalStylesDeltaThemingVariablesMatch[2];
+                        context.logger.info(`
+                        Found theme ${theme} fundamental-styles variables in styles. Can not add theme to application.
+                        Try to replace theme in application manually, or use ThemingService to manage multiple themes.
+                        [Instructions: https://sap.github.io/fundamental-ngx/#/core/theming]
+                    `);
+                        return;
+                    }
+                }
+
+                targetOptions.styles = [...(styles || []), ...themeAssets];
+                context.logger.info(
+                    `✅️ Added theme ${options.theme} variables to project ${options.project} in angular.json.`
+                );
+            }
+        });
 }

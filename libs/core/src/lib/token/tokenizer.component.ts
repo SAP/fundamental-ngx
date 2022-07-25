@@ -1,6 +1,5 @@
 import {
     AfterContentInit,
-    AfterViewChecked,
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -25,27 +24,23 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { A, BACKSPACE, DELETE, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
-import { fromEvent, Subject, Subscription } from 'rxjs';
-import { filter, takeUntil, tap } from 'rxjs/operators';
+import { fromEvent, merge, Subject, Subscription } from 'rxjs';
+import { filter, mapTo, takeUntil, debounceTime } from 'rxjs/operators';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
-import {
-    ContentDensityService,
-    CssClassBuilder,
-    applyCssClass,
-    RtlService,
-    KeyUtil
-} from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder, KeyUtil, resizeObservable, RtlService } from '@fundamental-ngx/core/utils';
 import { TokenComponent } from './token.component';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 @Component({
     selector: 'fd-tokenizer',
     templateUrl: './tokenizer.component.html',
     styleUrls: ['./tokenizer.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [contentDensityObserverProviders()]
 })
 export class TokenizerComponent
-    implements AfterViewChecked, AfterViewInit, AfterContentInit, OnDestroy, CssClassBuilder, OnInit, OnChanges
+    implements AfterViewInit, AfterContentInit, OnDestroy, CssClassBuilder, OnInit, OnChanges
 {
     /** user's custom classes */
     @Input()
@@ -69,14 +64,14 @@ export class TokenizerComponent
 
     /** @hidden */
     @ViewChild('tokenizerInner')
-    tokenizerInnerEl: ElementRef;
+    tokenizerInnerEl: ElementRef<HTMLDivElement>;
 
     /** @hidden */
     @ViewChild('moreElement')
-    moreElement: ElementRef;
+    moreElement: ElementRef<HTMLElement>;
 
     /** @hidden */
-    @ViewChild('inputGroupAddOn') set content(content: ElementRef) {
+    @ViewChild('inputGroupAddOn') set content(content: ElementRef<HTMLElement>) {
         this.inputGroupAddonEl = content;
     }
 
@@ -89,12 +84,15 @@ export class TokenizerComponent
         return this.tokenList.filter((token) => token.elementRef.nativeElement.style.display === 'none');
     }
 
+    /**
+     * Component is in compact mode, determined by the consumer
+     */
+    get compact(): boolean {
+        return this._contentDensityObserver.isCompact;
+    }
+
     /** @hidden */
     inputGroupAddonEl: ElementRef;
-
-    /** Whether the tokenizer is compact */
-    @Input()
-    compact?: boolean;
 
     /** Whether to use cozy visuals but compact collapsing behavior. */
     @Input()
@@ -149,7 +147,7 @@ export class TokenizerComponent
     _tokenizerHasFocus = false;
 
     /** @hidden */
-    private _contentDensitySubscription = new Subscription();
+    _showOverflowPopover = true;
 
     /** @hidden */
     /* Variable which will keep the index of the first token pressed in the tokenizer*/
@@ -170,76 +168,9 @@ export class TokenizerComponent
     /** An RxJS Subject that will kill the data stream upon destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    /** @hidden */
-    ngAfterViewInit(): void {
-        if (this.input && this.input.elementRef()) {
-            this._inputKeydownEvent();
-        }
-    }
-
-    /** @hidden */
-    ngAfterViewChecked(): void {
-        if (this.tokenList) {
-            this.previousTokenCount = this.tokenList.length;
-        }
-        this.handleTokenClickSubscriptions();
-        // watch for changes to the tokenList and attempt to expand/collapse tokens as needed
-        if (this.tokenListChangesSubscription) {
-            this.tokenListChangesSubscription.unsubscribe();
-        }
-        this.tokenListChangesSubscription = this.tokenList.changes.subscribe(() => {
-            this._cdRef.detectChanges();
-            this.moreTokensLeft = [];
-            this.moreTokensRight = [];
-            this.previousTokenCount > this.tokenList.length ? this._expandTokens() : this._collapseTokens();
-            this.previousTokenCount = this.tokenList.length;
-            this.handleTokenClickSubscriptions();
-        });
-        if (!this.compact && !this.compactCollapse) {
-            this._handleInitCozyTokenCount();
-        }
-    }
-
-    /** @hidden */
-    ngAfterContentInit(): void {
-        this._listenElementEvents();
-        this.previousElementWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
-        this.onResize();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        if (this.tokenListChangesSubscription) {
-            this.tokenListChangesSubscription.unsubscribe();
-        }
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
-        this._unsubscribeClicks();
-        this._contentDensitySubscription.unsubscribe();
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        if (this.compact === undefined && this._contentDensityService) {
-            this._contentDensitySubscription.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                    this._cdRef.markForCheck();
-                    this.buildComponentCssClass();
-                })
-            );
-        }
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
-
     constructor(
+        readonly _contentDensityObserver: ContentDensityObserver,
         private _elementRef: ElementRef,
-        @Optional() private _contentDensityService: ContentDensityService,
         private _cdRef: ChangeDetectorRef,
         @Optional() private _rtlService: RtlService,
         private _renderer: Renderer2
@@ -251,6 +182,58 @@ export class TokenizerComponent
                 });
             }
         });
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        if (this.input && this.input.elementRef()) {
+            this._inputKeydownEvent();
+        }
+        // watch for changes to the tokenList and attempt to expand/collapse tokens as needed
+        if (this.tokenListChangesSubscription) {
+            this.tokenListChangesSubscription.unsubscribe();
+        }
+        this.tokenListChangesSubscription = this.tokenList.changes.subscribe(() => {
+            this._resetTokens();
+        });
+        this.tokenList.forEach((token) => {
+            this.tokenListChangesSubscription.add(
+                token.onCloseClick.subscribe(() => {
+                    this._resetTokens();
+                })
+            );
+        });
+        if (!this.compact && !this.compactCollapse) {
+            this._handleCozyTokenCount();
+        }
+    }
+
+    /** @hidden */
+    ngAfterContentInit(): void {
+        this._listenElementEvents();
+        this.previousElementWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
+        this._listenOnResize();
+        this.onResize();
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        if (this.tokenListChangesSubscription) {
+            this.tokenListChangesSubscription.unsubscribe();
+        }
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
+        this._unsubscribeClicks();
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
     }
 
     @applyCssClass
@@ -270,6 +253,9 @@ export class TokenizerComponent
     handleTokenClickSubscriptions(): void {
         this._unsubscribeClicks();
         this.tokenList.forEach((token, index) => {
+            if (token.tokenWrapperElement) {
+                token.tokenWrapperElement.nativeElement.tabIndex = -1;
+            }
             this.tokenListClickSubscriptions.push(
                 token.onTokenClick.subscribe((event) => {
                     event.stopPropagation();
@@ -284,6 +270,11 @@ export class TokenizerComponent
                     }
                 })
             );
+            this.tokenListClickSubscriptions.push(
+                token.onTokenKeydown.subscribe((event) => {
+                    this.handleKeyDown(event, index);
+                })
+            );
         });
     }
 
@@ -294,27 +285,10 @@ export class TokenizerComponent
         if (tokenListArray[newIndex]) {
             elementToFocus = tokenListArray[newIndex].tokenWrapperElement.nativeElement;
             // element needs tabindex in order to be focused
-            elementToFocus!.setAttribute('tabindex', '0');
             elementToFocus!.focus();
-            this.addKeyboardListener(elementToFocus!, newIndex);
         }
 
         return elementToFocus;
-    }
-
-    /** @hidden */
-    addKeyboardListener(element: HTMLElement, newIndex: number): void {
-        // function needs to be defined in order to be referenced later by addEventListener/removeEventListener
-        const handleFunctionReference = (e): void => {
-            if (newIndex || newIndex === 0) {
-                this.handleKeyDown(e, newIndex);
-            }
-        };
-        element.addEventListener('keydown', handleFunctionReference);
-        element.addEventListener('blur', () => {
-            element.setAttribute('tabindex', '-1');
-            element.removeEventListener('keydown', handleFunctionReference);
-        });
     }
 
     /** @hidden */
@@ -348,17 +322,14 @@ export class TokenizerComponent
     }
 
     /** @hidden */
-    @HostListener('window:resize', [])
     onResize(): void {
         if (this._elementRef) {
             const elementWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
-            // if the element is geting smaller, try collapsing tokens
-            if (elementWidth <= this.previousElementWidth) {
-                this._collapseTokens();
-            } else {
-                this._expandTokens(); // if it's getting bigger, try expanding
-            }
+            this._resetTokens();
             this.previousElementWidth = elementWidth;
+            if (!this.compact && !this.compactCollapse) {
+                this._handleCozyTokenCount();
+            }
         }
     }
 
@@ -509,49 +480,21 @@ export class TokenizerComponent
     }
 
     /** @hidden */
-    private _expandTokens(): void {
+    private _resetTokens(): void {
+        this.moreTokensLeft = [];
+        this.moreTokensRight = [];
         if (this.compact || this.compactCollapse) {
-            let elementWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
-            let combinedTokenWidth = this.getCombinedTokenWidth(); // the combined width of all tokens, the "____ more" text, and the input
-
-            let breakLoop = false;
-            let i = this.moreTokensLeft.length - 1 + this.moreTokensRight.length;
-            while (combinedTokenWidth < elementWidth && i >= 0 && !breakLoop) {
-                // we want to get the first hidden token and check to see if it can fit in the whole tokenizer
-                const tokenToCheck = this.tokenList.filter(
-                    (token) => token.elementRef.nativeElement.style.display === 'none'
-                )[i];
-                /*
-                  set display: 'inline-block' and visibility: 'hidden' - this way, the tokenizer width will
-                  contain the width of the token we might display, without actually making the token visible to the user.
-                 */
-                tokenToCheck.elementRef.nativeElement.style.display = 'inline-block';
-                tokenToCheck.elementRef.nativeElement.style.visibility = 'hidden';
-                elementWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
-                combinedTokenWidth = this.getCombinedTokenWidth();
-                /*
-                  if the width of the inner tokenizer component is still smaller than the whole tokenizer component, we'll
-                  make the token visible and reduce the hidden count
-                */
-                if (combinedTokenWidth < elementWidth) {
-                    tokenToCheck.elementRef.nativeElement.style.visibility = 'visible';
-                    tokenToCheck._viewContainer.createEmbeddedView(tokenToCheck._content);
-                    if (this.moreTokensLeft.length) {
-                        this.moreTokensLeft.pop();
-                    } else if (this.moreTokensRight.length) {
-                        this.moreTokensRight.pop();
-                    }
-                } else {
-                    // otherwise, stop looping and set the token's display back to 'none'
-                    tokenToCheck.elementRef.nativeElement.style.display = 'none';
-                    breakLoop = true;
-                }
-                i--;
-                this._cdRef.markForCheck();
-            }
+            this.tokenList.forEach((token) => {
+                this._makeElementVisible(token.elementRef);
+            });
+            this._cdRef.markForCheck();
+            this._collapseTokens();
         } else {
             this._getHiddenCozyTokenCount();
         }
+        this.handleTokenClickSubscriptions();
+        this.previousTokenCount = this.tokenList.length;
+        this.tokenList.forEach((token) => token._setTotalCount(this.tokenList.length));
     }
 
     /** @hidden */
@@ -571,7 +514,7 @@ export class TokenizerComponent
     }
 
     /** @hidden */
-    private _handleInitCozyTokenCount(): void {
+    private _handleCozyTokenCount(): void {
         // because justify-content breaks scrollbar, it cannot be used on cozy screens, so use JS to scroll to the end
         this.tokenizerInnerEl.nativeElement.scrollLeft = this.tokenizerInnerEl.nativeElement.scrollWidth;
         this._getHiddenCozyTokenCount();
@@ -623,6 +566,7 @@ export class TokenizerComponent
             this._lastElementInSelection = null;
         }
     }
+
     /** @hidden Method which handles what happens to token when it is clicked and the shift key is being held down.*/
     private _shiftSelected(index): void {
         if (!this._firstElementInSelection && !this._lastElementInSelection) {
@@ -723,30 +667,34 @@ export class TokenizerComponent
     }
 
     /** @hidden */
-    private _isControlKey(keyboardEvent: KeyboardEvent): boolean {
+    private _isControlKey(keyboardEvent: KeyboardEvent | MouseEvent): boolean {
         return keyboardEvent.ctrlKey || keyboardEvent.metaKey;
     }
 
     /** @hidden */
     private _listenElementEvents(): void {
-        fromEvent<Event>(this.elementRef().nativeElement, 'focus', { capture: true })
-            .pipe(
+        merge(
+            fromEvent<Event>(this.elementRef().nativeElement, 'focus', { capture: true }).pipe(
                 filter((event) => (event['target'] as any)?.tagName === 'INPUT' && this.tokenizerFocusable),
-                tap(() => {
-                    this._tokenizerHasFocus = true;
-                    this._cdRef.markForCheck();
-                }),
-                takeUntil(this._onDestroy$)
-            )
-            .subscribe();
-        fromEvent(this.elementRef().nativeElement, 'blur', { capture: true })
+                mapTo(true)
+            ),
+            fromEvent<Event>(this.elementRef().nativeElement, 'blur', { capture: true }).pipe(mapTo(false))
+        )
             .pipe(
-                tap(() => {
-                    this._tokenizerHasFocus = false;
-                    this._cdRef.markForCheck();
-                }),
+                // debounceTime is needed in order to filter subsequent focus-blur events, that happen simultaneously
+                debounceTime(10),
                 takeUntil(this._onDestroy$)
             )
-            .subscribe();
+            .subscribe((focused) => {
+                this._tokenizerHasFocus = focused;
+                this._cdRef.markForCheck();
+            });
+    }
+
+    /** @hidden Listen window resize and distribute cards on column change */
+    private _listenOnResize(): void {
+        resizeObservable(this.elementRef().nativeElement)
+            .pipe(debounceTime(60), takeUntil(this._onDestroy$))
+            .subscribe(() => this.onResize());
     }
 }

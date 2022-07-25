@@ -1,0 +1,15 @@
+kind: Component
+metadata:
+    displayName: Fundamental Library for Angular
+    description: >-
+        Angular components implementation of Fundamental Library Styles guidelines.
+        The library is aiming to provide an Angular implementation of the components designed in Fundamental Library Styles.
+    labels:
+        language: # java|typescript|golang
+    tags:
+        # - Tag 1
+        # - Tag 2
+spec:
+    type:
+        name: # ui|microservice|operator|doc|cli
+        lifecycle: # experimental|production|deprecated.

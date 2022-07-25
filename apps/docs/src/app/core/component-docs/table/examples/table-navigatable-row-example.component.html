@@ -1,6 +1,6 @@
-<h4 class="table-example-popin-title">Entire row is navigatable, used with icon</h4>
+<h4 class="table-example-popin-title" id="table-example-popin-title-1">Entire row is navigatable, used with icon</h4>
 
-<table fd-table>
+<table fd-table aria-label="With navigatable rows" aria-describedby="table-example-popin-title-1">
     <thead fd-table-header [noBorderX]="true">
         <tr fd-table-row>
             <th fd-table-cell>Column 1</th>
@@ -38,6 +38,7 @@
             <td fd-table-cell [fitContent]="true" [noPadding]="true">
                 <i
                     *ngIf="row.navigatable"
+                    title="Navigate"
                     fd-table-icon
                     [glyph]="isRtl ? 'slim-arrow-left' : 'slim-arrow-right'"
                     [navigation]="true"
@@ -50,9 +51,9 @@
 
 <br />
 
-<h4 class="table-example-popin-title">Row with navigation button</h4>
+<h4 class="table-example-popin-title-2">Row with navigation button</h4>
 
-<table fd-table>
+<table fd-table aria-label="With navigatable rows" aria-describedby="table-example-popin-title-2">
     <thead fd-table-header>
         <tr fd-table-row>
             <th fd-table-cell>Column 1</th>
@@ -85,6 +86,7 @@
                 <button
                     class="fd-button fd-button--transparent"
                     [disabled]="!row.navigatable"
+                    title="Navigate"
                     routerLink="/core/home"
                     aria-label="navigation"
                 >
@@ -96,9 +98,17 @@
 </table>
 
 <div style="max-width: 450px">
-    <h4 class="table-example-popin-title">Mobile Mode</h4>
+    <h4 class="table-example-popin-title-3">Mobile Mode</h4>
 
-    <table fd-table [popIn]="true" [noBorderX]="true" [noBorderY]="true" [responsive]="true">
+    <table
+        fd-table
+        [popIn]="true"
+        [noBorderX]="true"
+        [noBorderY]="true"
+        [responsive]="true"
+        aria-label="With navigatable rows"
+        aria-describedby="table-example-popin-title-3"
+    >
         <thead fd-table-header>
             <tr fd-table-row>
                 <th fd-table-cell>Fruit Description</th>
@@ -128,6 +138,7 @@
                     <td fd-table-cell [fitContent]="true" [noPadding]="true">
                         <i
                             *ngIf="fruit.navigatable"
+                            title="Navigate"
                             fd-table-icon
                             [glyph]="isRtl ? 'slim-arrow-left' : 'slim-arrow-right'"
                             [navigation]="true"

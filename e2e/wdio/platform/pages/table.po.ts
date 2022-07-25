@@ -31,7 +31,7 @@ export class TablePo extends BaseComponentPo {
 
     button = 'button';
     buttonSearch = '.fdp-search-field__submit';
-    buttonFilter = 'button[title="filter"]';
+    buttonFilter = 'button[title="Filter"]';
     tableRow = 'tbody .fd-table__row.ng-star-inserted ';
     tableRowInitialState = 'tbody .fd-table__row.ng-star-inserted:not([aria-rowindex="0"], [aria-rowindex="3"])';
     input = 'input';
@@ -76,7 +76,7 @@ export class TablePo extends BaseComponentPo {
     playgroundSchemaInput = '.form-control.fd-input';
     toolbarText = '.fd-label.fd-toolbar__overflow-label';
     dropdownList = '.fd-select-options';
-    dropdownOption = 'fd-option.fd-list__item ';
+    dropdownOption = 'li[fd-option].fd-list__item ';
     dialogButton = 'fd-dialog-body .sort-row__actions .fd-button';
     dialogFilters = 'fd-dialog-body .fd-list__item:not(.fd-list__group-header)';
     filterInput = 'fdp-filter-custom input';

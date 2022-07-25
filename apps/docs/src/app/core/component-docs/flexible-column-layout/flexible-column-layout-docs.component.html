@@ -6,6 +6,8 @@
 </component-example>
 <code-example [exampleFiles]="defaultFlexibleColumnLayout"></code-example>
 
+<separator></separator>
+
 <fd-docs-section-title id="with-dynamic-page" componentName="flexible-column-layout">
     Flexible Column Layout With Dynamic Page
 </fd-docs-section-title>
@@ -13,3 +15,21 @@
     <fd-flexible-column-layout-dynamic-page-example></fd-flexible-column-layout-dynamic-page-example>
 </component-example>
 <code-example [exampleFiles]="flexibleColumnLayoutDynamicPage"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="custom-config" componentName="flexible-column-layout">
+    Flexible Column Layout with custom layout config
+</fd-docs-section-title>
+<description>
+    <p>Flexible Column Layout allows developers to pass own configuration with layout definitions.</p>
+    <p>
+        In order to provide own configuration object, use <code>withConfig()</code> method of the
+        <code>FlexibleColumnLayoutModule</code>.
+    </p>
+</description>
+<fd-code-snippet language="typescript" [contentBased]="true">{{ defaultConfigExample }}</fd-code-snippet>
+<component-example>
+    <fd-flexible-column-layout-custom-config-example></fd-flexible-column-layout-custom-config-example>
+</component-example>
+<code-example [exampleFiles]="flexibleColumnLayoutCustomConfig"></code-example>

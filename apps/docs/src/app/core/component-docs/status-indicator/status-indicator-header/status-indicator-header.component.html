@@ -1,31 +1,32 @@
-<header>Status Indicator</header>
-<description>
-    <p>
-        The status indicator displays a SVG images that indicate a pictorial representation of an object. It allows
-        users to fill the content on a numeric scale, <code> fillPercentage </code>typically from 0 (lowest) to 100
-        (highest) as percentage. If any negative value is passed the default lowest(0) value is applied. The Status
-        Indicator uses filling color representation like <code>status</code> and option available are
-        <code>positive,critical,negative</code>.
-    </p>
-    <p>The Status Indicator uses size representation like <code>size</code> and option available are:</p>
-    <ul>
-        <li>Extra Small (xs)(1.375rem)</li>
-        <li>Medium default (md)(1.875rem)</li>
-        <li>Large (lg) (3.4375rem)</li>
-        <li>Extra Large (xl) (6.25rem)</li>
-    </ul>
-    <p>If you omit these property the default value will be applied.</p>
-    <p>
-        <b>Note: </b>Two mandatory property are required in order to achieve the image rendering. These properties are
-        derived from the svg html representing an image.
-    </p>
-    <p>
-        Attribute is array of string <code>path </code> represent the svg html path tag with <code>d </code>attribute
-        form a array of string and pass it to the status indicator as a path attribute.
-    </p>
-    <p>Attribute is a string <code>viewBox </code> represent the svg html viewBox value of the svg provided.</p>
-</description>
-<import module="StatusIndicatorModule" subPackage="status-indicator"></import>
+<fd-doc-page>
+    <header>Status Indicator</header>
+    <description>
+        <p>
+            The status indicator displays a SVG images that indicate a pictorial representation of an object. It allows
+            users to fill the content on a numeric scale, <code> fillPercentage </code>typically from 0 (lowest) to 100
+            (highest) as percentage. If any negative value is passed the default lowest(0) value is applied. The Status
+            Indicator uses filling color representation like <code>status</code> and option available are
+            <code>positive,critical,negative</code>.
+        </p>
+        <p>The Status Indicator uses size representation like <code>size</code> and option available are:</p>
+        <ul>
+            <li>Extra Small (xs)(1.375rem)</li>
+            <li>Medium default (md)(1.875rem)</li>
+            <li>Large (lg) (3.4375rem)</li>
+            <li>Extra Large (xl) (6.25rem)</li>
+        </ul>
+        <p>If you omit these property the default value will be applied.</p>
+        <p>
+            <b>Note: </b>Two mandatory property are required in order to achieve the image rendering. These properties
+            are derived from the svg html representing an image.
+        </p>
+        <p>
+            Attribute is array of string <code>path </code> represent the svg html path tag with
+            <code>d </code>attribute form a array of string and pass it to the status indicator as a path attribute.
+        </p>
+        <p>Attribute is a string <code>viewBox </code> represent the svg html viewBox value of the svg provided.</p>
+    </description>
+    <import module="StatusIndicatorModule" subPackage="status-indicator"></import>
 
-<fd-header-tabs></fd-header-tabs>
-<router-outlet></router-outlet>
+    <fd-header-tabs></fd-header-tabs>
+</fd-doc-page>

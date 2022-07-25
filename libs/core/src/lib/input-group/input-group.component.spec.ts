@@ -9,7 +9,6 @@ import {
 } from './input-group-directives';
 import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
 import { first } from 'rxjs/operators';
 
 describe('InputGroupComponent', () => {
@@ -25,8 +24,7 @@ describe('InputGroupComponent', () => {
                     InputGroupAddOnDirective,
                     InputGroupTextareaDirective,
                     InputGroupComponent
-                ],
-                providers: [ContentDensityService]
+                ]
             }).compileComponents();
         })
     );
@@ -47,10 +45,5 @@ describe('InputGroupComponent', () => {
             done();
         });
         component._buttonClicked({} as any);
-    });
-
-    it('should handle content density when compact input is not provided', () => {
-        component.ngOnInit();
-        expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 });

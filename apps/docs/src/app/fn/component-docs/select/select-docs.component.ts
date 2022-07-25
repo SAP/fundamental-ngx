@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
 import selectrc from '!./examples/select-example/select-example.component.html?raw';
+import selectSemanticrc from '!./examples/select-example/select-semantic-example.component.html?raw';
 import selectFormsrc from '!./examples/select-example/select-forms-example.component.html?raw';
 import selectEditablerc from '!./examples/select-example/select-editable-example.component.html?raw';
 
@@ -18,6 +19,13 @@ export class SelectDocsComponent {
             language: 'html',
             code: selectrc,
             fileName: 'select-example'
+        }
+    ];
+    selectSemanticExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: selectSemanticrc,
+            fileName: 'select-semantic-example'
         }
     ];
     selectFormsExample: ExampleFile[] = [

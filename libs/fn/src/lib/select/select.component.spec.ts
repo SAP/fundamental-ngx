@@ -1,3 +1,4 @@
+import { OverlayModule } from '@angular/cdk/overlay';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { SelectComponent } from './select.component';
@@ -11,7 +12,7 @@ describe('SelectComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [CommonModule, FormsModule],
+                imports: [CommonModule, FormsModule, OverlayModule],
                 declarations: [SelectComponent]
             }).compileComponents();
         })

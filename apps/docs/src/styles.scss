@@ -1,6 +1,8 @@
-// @import url("../../../node_modules/fundamental-styles/dist/fundamental-styles.css");
+@use '@angular/cdk';
 @import '~fundamental-styles/dist/info-label.css';
 @import '~fundamental-styles/dist/form-layout-grid.css';
+
+@include cdk.a11y-visually-hidden();
 
 $gutter-size: 15px;
 
@@ -212,8 +214,8 @@ pre {
     padding: 10px 10px 0 10px;
 }
 
-a,
-a:focus {
+a:not(.fd-link),
+a:not(.fd-link):focus {
     text-decoration: none;
 }
 

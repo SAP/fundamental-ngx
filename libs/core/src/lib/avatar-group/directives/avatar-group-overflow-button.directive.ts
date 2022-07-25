@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, OnChanges } from '@angular/core';
+import { Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
 
 import { Size } from '@fundamental-ngx/core/utils';
 import { applyCssClass } from '@fundamental-ngx/core/utils';
@@ -11,7 +11,7 @@ import { AvatarGroupOverflowButtonColor } from '../avatar-group.component';
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-avatar-group-overflow-button]'
 })
-export class AvatarGroupOverflowButtonDirective implements OnChanges, CssClassBuilder {
+export class AvatarGroupOverflowButtonDirective implements OnInit, OnChanges, CssClassBuilder {
     /** User's custom classes. */
     @Input()
     class: string;
@@ -29,6 +29,11 @@ export class AvatarGroupOverflowButtonDirective implements OnChanges, CssClassBu
 
     /** @hidden */
     constructor(private readonly _elementRef: ElementRef) {}
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
+    }
 
     /** @hidden */
     ngOnChanges(): void {

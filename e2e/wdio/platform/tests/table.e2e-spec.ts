@@ -801,7 +801,7 @@ describe('Table component test suite', () => {
             checkAlertMessages(tableNoOuterBordersExample);
         });
 
-        it('should check alert messages', () => {
+        it('should check checkboxes', () => {
             checkAllCheckbox(tableNoOuterBordersExample);
         });
     });

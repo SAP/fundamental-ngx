@@ -12,8 +12,9 @@ import {
 
 import { MenuWithSubmenuExampleComponent } from './examples/menu-with-submenu-example.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
-import { MenuModule } from '@fundamental-ngx/core/menu';
+import { DeprecatedMenuCompactDirective, MenuModule } from '@fundamental-ngx/core/menu';
 import { MenuMobileExampleComponent } from './examples/menu-mobile-example.component';
+import { moduleDeprecationsProvider } from '@fundamental-ngx/core/utils';
 
 const routes: Routes = [
     {
@@ -37,6 +38,7 @@ const routes: Routes = [
         MenuMobileExampleComponent,
         MenuSeparatorExampleComponent,
         MenuWithSubmenuExampleComponent
-    ]
+    ],
+    providers: [moduleDeprecationsProvider(DeprecatedMenuCompactDirective)]
 })
 export class MenuDocsModule {}

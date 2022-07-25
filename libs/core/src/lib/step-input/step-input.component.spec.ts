@@ -3,7 +3,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { whenStable } from '@fundamental-ngx/core/tests';
 import { StepInputComponent } from './step-input.component';
 import { StepInputModule } from './step-input.module';
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
+import { FormStates } from '@fundamental-ngx/core/shared';
 
 const initialValue = 100;
 
@@ -13,7 +13,7 @@ const initialValue = 100;
             [(value)]="value"
             [locale]="locale"
             [step]="step"
-            [compact]="compact"
+            [fdCompact]="compact"
             [state]="state"
             [inputTitle]="inputTitle"
             [unit]="unit"
@@ -42,7 +42,7 @@ class TestWrapperComponent {
 
     unit: string | null = null;
 
-    state: string | null = null;
+    state: FormStates;
 
     inputId: string | null = null;
 
@@ -71,8 +71,7 @@ describe('StepInputComponent', () => {
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 declarations: [TestWrapperComponent],
-                imports: [StepInputModule],
-                providers: [ContentDensityService]
+                imports: [StepInputModule]
             }).compileComponents();
         })
     );
@@ -87,11 +86,6 @@ describe('StepInputComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
-    });
-
-    it('should handle content density when compact input is not provided', () => {
-        component.ngOnInit();
-        expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 
     it('should increment on button click', async () => {
@@ -290,7 +284,12 @@ describe('StepInputComponent', () => {
     });
 
     it('should change value based on mouse wheel events when input is focused', () => {
-        const context = { _canChangeValue: true, focused: true, increment: () => {}, decrement: () => {} };
+        const context = {
+            _canChangeValue: true,
+            focused: true,
+            increment: () => {},
+            decrement: () => {}
+        };
         const wheelEventUp = new WheelEvent('', { deltaY: -15 });
         const wheelEventDown = new WheelEvent('', { deltaY: 15 });
 
@@ -305,7 +304,12 @@ describe('StepInputComponent', () => {
     });
 
     it('should not change value based on mouse wheel events when input is not focused', () => {
-        const context = { _canChangeValue: true, focused: false, increment: () => {}, decrement: () => {} };
+        const context = {
+            _canChangeValue: true,
+            focused: false,
+            increment: () => {},
+            decrement: () => {}
+        };
         const wheelEventUp = new WheelEvent('', { deltaY: -15 });
         const wheelEventDown = new WheelEvent('', { deltaY: 15 });
 
@@ -351,7 +355,11 @@ describe('StepInputComponent', () => {
     });
 
     it('should handle ArrowUp and ArrowDown keys', () => {
-        const context = { _canChangeValue: false, increment: () => {}, decrement: () => {} };
+        const context = {
+            _canChangeValue: false,
+            increment: () => {},
+            decrement: () => {}
+        };
 
         const keyUpEvent = new KeyboardEvent('keydown', { key: 'ArrowUp' });
         const keyDownEvent = new KeyboardEvent('keydown', { key: 'ArrowDown' });

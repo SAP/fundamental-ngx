@@ -1,4 +1,13 @@
-import { Component, ContentChild, ElementRef, forwardRef, Renderer2 } from '@angular/core';
+import { DomPortal } from '@angular/cdk/portal';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    Component,
+    ContentChild,
+    ElementRef,
+    forwardRef,
+    ViewEncapsulation
+} from '@angular/core';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 
 /**
@@ -12,35 +21,84 @@ import { LinkComponent } from '@fundamental-ngx/core/link';
  */
 @Component({
     selector: 'fd-breadcrumb-item',
-    template: '<div style="display: inline"><ng-content></ng-content></div>',
+    template: '<ng-content></ng-content>',
     host: {
         class: 'fd-breadcrumb__item'
-    }
+    },
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BreadcrumbItemComponent {
-    /** @hidden */
-    get elementRef(): ElementRef<HTMLElement> {
-        return this._elementRef;
-    }
-
+export class BreadcrumbItemComponent implements AfterViewInit {
     /** @hidden */
     @ContentChild(forwardRef(() => LinkComponent))
     breadcrumbLink: LinkComponent;
 
-    /** @hidden */
-    get width(): number {
-        return this._elementRef.nativeElement.getBoundingClientRect().width;
-    }
+    /** In case there is no link in Item and breadcrumb item is non-interactive, we move whole item content to menu item title */
+    breadcrumbItemPortal: DomPortal<Element>;
 
-    constructor(private _elementRef: ElementRef<HTMLElement>, private renderer2: Renderer2) {}
+    /** When breadcrumb item has link in it, we are moving link content to menu item title */
+    linkContentPortal: DomPortal;
+
+    /**
+     * Breadcrumb item dom portal.
+     */
+    portal: DomPortal;
 
     /** @hidden */
-    get needsClickProxy(): boolean {
+    private _attached = false;
+
+    /** @hidden */
+    constructor(public readonly elementRef: ElementRef<HTMLElement>) {}
+
+    /** @hidden */
+    get _needsClickProxy(): boolean {
         return (
             !!this.breadcrumbLink?.elementRef().nativeElement.getAttribute('href') || !!this.breadcrumbLink.routerLink
         );
     }
 
-    show = (): void => this.renderer2.setStyle(this._elementRef.nativeElement, 'display', 'inline-block');
-    hide = (): void => this.renderer2.setStyle(this._elementRef.nativeElement, 'display', 'none');
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this._attach();
+    }
+
+    /**
+     * Sets breadcrumb item dom portal.
+     */
+    setPortal(): void {
+        if (!this.portal) {
+            this.portal = new DomPortal(this.elementRef);
+        }
+    }
+
+    /** @hidden */
+    _detach(): void {
+        if (!this._attached) {
+            return;
+        }
+
+        if (this.linkContentPortal?.isAttached) {
+            this.linkContentPortal?.detach();
+        }
+
+        if (this.breadcrumbItemPortal?.isAttached) {
+            this.breadcrumbItemPortal?.detach();
+        }
+
+        this._attached = false;
+    }
+
+    /** @hidden */
+    _attach(): void {
+        if (this._attached) {
+            return;
+        }
+
+        if (this.breadcrumbLink && this.breadcrumbLink.contentSpan) {
+            this.linkContentPortal = new DomPortal<HTMLElement>(this.breadcrumbLink.contentSpan.nativeElement);
+        }
+
+        this.breadcrumbItemPortal = new DomPortal(this.elementRef.nativeElement.firstElementChild as Element);
+        this._attached = true;
+    }
 }

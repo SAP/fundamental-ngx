@@ -4,15 +4,15 @@
             <button
                 aria-label="back"
                 fd-button
-                [compact]="true"
+                fdCompact
                 fdType="transparent"
                 [glyph]="navigationArrow$ | async"
             ></button>
         </div>
         <div fd-action-bar-title>Page Title</div>
         <div fd-action-bar-actions>
-            <button fd-button label="Cancel" [compact]="true"></button>
-            <button fd-button label="Save" [compact]="true" fdType="emphasized"></button>
+            <button fd-button label="Cancel" fdCompact></button>
+            <button fd-button label="Save" fdCompact fdType="emphasized"></button>
         </div>
     </div>
     <p fd-action-bar-description [withBackBtn]="true">Action bar Description</p>
