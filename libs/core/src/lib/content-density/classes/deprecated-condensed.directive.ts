@@ -14,6 +14,9 @@ export class DeprecatedCondensedDirective
 {
     @Input()
     set condensed(value: BooleanInput) {
+        if (isDevMode()) {
+            console.warn(`${this.message}. Use [fdCondensed] directive instead.`);
+        }
         this.next(coerceBooleanProperty(value) ? ContentDensityMode.CONDENSED : ContentDensityMode.COZY);
     }
 
@@ -26,9 +29,6 @@ export class DeprecatedCondensedDirective
     constructor(selectorBase: string) {
         super(ContentDensityMode.COZY);
         this.message = `Usage of ${selectorBase}[condensed] is deprecated`;
-        if (isDevMode()) {
-            console.warn(`${this.message}. Use [fdCondensed] directive instead.`);
-        }
     }
 
     ngOnDestroy(): void {
