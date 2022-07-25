@@ -7,7 +7,7 @@ import {
     ElementRef,
     EventEmitter,
     Input,
-    OnDestroy,
+    isDevMode,
     OnInit,
     Optional,
     Output,
@@ -17,8 +17,8 @@ import {
 } from '@angular/core';
 import { OverflowLayoutComponent } from '@fundamental-ngx/core/overflow-layout';
 import { BreadcrumbItemComponent } from './breadcrumb-item.component';
-import { RtlService } from '@fundamental-ngx/core/utils';
-import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
+import { DestroyedService, RtlService } from '@fundamental-ngx/core/utils';
+import { BehaviorSubject, takeUntil } from 'rxjs';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { Placement } from '@fundamental-ngx/core/shared';
 
@@ -41,9 +41,10 @@ import { Placement } from '@fundamental-ngx/core/shared';
     templateUrl: './breadcrumb.component.html',
     styleUrls: ['./breadcrumb.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [DestroyedService]
 })
-export class BreadcrumbComponent implements OnInit, AfterViewInit, OnDestroy {
+export class BreadcrumbComponent implements OnInit, AfterViewInit {
     /**
      * @deprecated
      * Breadcrumbs component now uses more advanced calculation mechanism without the need of specifying the container element.
@@ -52,7 +53,13 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit, OnDestroy {
      * performs better. When not provided, the immediate parent element's width will be used.
      */
     @Input()
-    containerElement: HTMLElement;
+    set containerElement(_: HTMLElement) {
+        if (isDevMode()) {
+            console.warn(
+                'Breadcrumbs component now uses more advanced calculation mechanism without the need of specifying the container element.'
+            );
+        }
+    }
 
     /** Whether to append items to the overflow dropdown in reverse order. Default is true. */
     @Input()
@@ -82,8 +89,6 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChild(OverflowLayoutComponent)
     private readonly _overflowLayout: OverflowLayoutComponent;
 
-    private readonly _onDestroy$ = new Subject<void>();
-
     /**
      * @hidden
      * Array of breadcrumb items.
@@ -96,6 +101,7 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit, OnDestroy {
     /** @hidden */
     constructor(
         public elementRef: ElementRef<HTMLElement>,
+        private _onDestroy$: DestroyedService,
         @Optional() private _rtlService: RtlService | null,
         private _cdr: ChangeDetectorRef
     ) {}
@@ -105,12 +111,6 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit, OnDestroy {
         this._rtlService?.rtl
             .pipe(takeUntil(this._onDestroy$))
             .subscribe((value) => this._placement$.next(value ? 'bottom-end' : 'bottom-start'));
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
     }
 
     /** @hidden */
