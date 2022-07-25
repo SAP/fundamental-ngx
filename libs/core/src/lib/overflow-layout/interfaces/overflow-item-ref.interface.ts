@@ -1,9 +1,15 @@
 import { ElementRef, TemplateRef } from '@angular/core';
 import { OverflowItem } from './overflow-item.interface';
 
-export type OverflowItemDirectiveContext = { $implicit: boolean; index: number };
+export type OverflowItemDirectiveContext<T = any> = {
+    $implicit: boolean;
+    index: number;
+    first: boolean;
+    last: boolean;
+    item: T;
+};
 
-export interface OverflowItemRef {
+export interface OverflowItemRef<T = any> {
     /**
      * Element reference.
      */
@@ -20,10 +26,22 @@ export interface OverflowItemRef {
      * The index of the item in the array of items.
      */
     index: number;
+
+    /** Whether this item is last in the array. */
+    first: boolean;
+
+    /** Whether this item is first in the array. */
+    last: boolean;
+
+    /** Whether the item is softly hidden. */
+    softHidden: boolean;
     /**
      * Template reference of the directive.
      */
-    templateRef: TemplateRef<OverflowItemDirectiveContext>;
+    templateRef: TemplateRef<OverflowItemDirectiveContext<T>>;
+
+    /** Item instance. Used for correct autocomplete. */
+    item: T;
 
     /**
      * Sets the element reference of the directive.

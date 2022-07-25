@@ -1,12 +1,14 @@
 import {
     Directive,
     ElementRef,
+    EventEmitter,
     HostBinding,
     HostListener,
     Inject,
     Input,
     OnInit,
     Optional,
+    Output,
     SkipSelf
 } from '@angular/core';
 import { OverflowItemRef } from '../interfaces/overflow-item-ref.interface';
@@ -46,11 +48,22 @@ export class OverflowLayoutItemDirective implements OverflowItem, OnInit {
     get forceVisibility(): boolean {
         return this._forceVisibility;
     }
+
+    /**
+     * Event emitted when `hidden` property has been changed.
+     */
+    @Output()
+    hiddenChange = new EventEmitter<boolean>();
+
     /**
      * Whether the item is hidden.
      */
     get hidden(): boolean {
         return this._overflowItemRef?.hidden === true;
+    }
+
+    set hidden(value: boolean) {
+        this.hiddenChange.emit(value);
     }
 
     /** @hidden */
