@@ -1,4 +1,11 @@
 
+### [0.35.4-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.35.3...v0.35.4-rc.0) (2022-07-25)
+
+
+### Features
+
+* **core:** migrate breadcrumbs component ([#8402](https://github.com/SAP/fundamental-ngx/issues/8402)) ([0448fc6](https://github.com/SAP/fundamental-ngx/commit/0448fc61ee6e4a3e5c47dfb63a177ef9acbbdf5e))
+
 ### [0.35.3](https://github.com/SAP/fundamental-ngx/compare/v0.35.3-rc.1...v0.35.3) (2022-07-23)
 
 ### [0.35.3-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.35.3-rc.0...v0.35.3-rc.1) (2022-07-23)
