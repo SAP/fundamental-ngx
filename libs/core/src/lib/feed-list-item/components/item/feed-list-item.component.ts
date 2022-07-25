@@ -110,17 +110,11 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
     constructor(private readonly _elementRef: ElementRef, private readonly _changeDetectorRef: ChangeDetectorRef) {}
 
     setHasMore(): void {
-        if (this.text.length > this.maxChars) {
-            this.hasMore = true;
-        } else {
-            this.hasMore = false;
-        }
+        this.hasMore = this.text.length > this.maxChars;
     }
 
     setMaxChar(): void {
-        if (!this.maxChars) {
-            this.maxChars = this.mobile ? 300 : 500;
-        }
+        this.maxChars = this.mobile ? 300 : 500;
     }
     /** @hidden */
     ngOnInit(): void {
