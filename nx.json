@@ -48,10 +48,12 @@
             "prefix": "fd"
         },
         "@nrwl/angular:application": {
+            "style": "scss",
             "linter": "eslint",
             "unitTestRunner": "jest"
         },
         "@nrwl/angular:library": {
+            "style": "scss",
             "linter": "eslint",
             "unitTestRunner": "jest"
         },

@@ -1,0 +1,16 @@
+<div class="fn-avatar__initials" *ngIf="_abbreviate">
+    {{ _abbreviate }}
+</div>
+<div *ngIf="glyph || showDefault" role="presentation" class="fn-avatar__icon">
+    <i [class]="'sap-icon ' + (glyph ? ' sap-icon--' + glyph : 'sap-icon--person-placeholder')"></i>
+</div>
+<div
+    *ngIf="_bgImage"
+    [style.background-image]="_bgImage"
+    class="fn-avatar__thumbnail"
+    role="img"
+    [attr.aria-label]="ariaLabel"
+></div>
+<div #content style="display: none">
+    <ng-content></ng-content>
+</div>

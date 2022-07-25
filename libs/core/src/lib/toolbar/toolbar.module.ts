@@ -13,6 +13,8 @@ import { ToolbarOverflowButtonMenuDirective } from './toolbar-overflow-button-me
 import { ToolbarFormLabelDirective } from './toolbar-form-label.directive';
 import { ToolbarOverflowPriorityDirective } from './toolbar-overflow-priority.directive';
 import { ToolbarOverflowGroupDirective } from './toolbar-overflow-group.directive';
+import { DeprecatedToolbarSizeDirective } from './deprecated-toolbar-size.directive';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 const components = [
     ToolbarComponent,
@@ -24,12 +26,13 @@ const components = [
     ToolbarOverflowButtonDirective,
     ToolbarOverflowButtonMenuDirective,
     ToolbarOverflowPriorityDirective,
-    ToolbarOverflowGroupDirective
+    ToolbarOverflowGroupDirective,
+    DeprecatedToolbarSizeDirective
 ];
 
 @NgModule({
     declarations: [...components],
-    imports: [CommonModule, ButtonModule, PopoverModule],
-    exports: [...components]
+    imports: [CommonModule, ButtonModule, PopoverModule, ContentDensityModule],
+    exports: [...components, ContentDensityModule]
 })
 export class ToolbarModule {}

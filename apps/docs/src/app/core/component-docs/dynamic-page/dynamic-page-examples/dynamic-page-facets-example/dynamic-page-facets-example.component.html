@@ -31,7 +31,7 @@
                     <button
                         fd-toolbar-item
                         fd-button
-                        [compact]="true"
+                        fdCompact
                         fdType="positive"
                         (click)="closePage()"
                         label="Accept"
@@ -40,7 +40,7 @@
                     <button
                         fd-toolbar-item
                         fd-button
-                        [compact]="true"
+                        fdCompact
                         fdType="negative"
                         (click)="closePage()"
                         label="Reject"
@@ -144,7 +144,7 @@
                 </fd-facet>
             </fd-facet-group>
         </fd-dynamic-page-subheader>
-        <fd-dynamic-page-content>
+        <fd-dynamic-page-content cdkScrollable>
             <div class="fd-dynamic-page-section-example">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip

@@ -1,26 +1,26 @@
 import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ElementRef,
     forwardRef,
     Input,
-    ViewChild,
-    ChangeDetectionStrategy,
     OnChanges,
-    ViewEncapsulation,
-    AfterViewInit,
-    OnInit,
     OnDestroy,
-    Optional
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { applyCssClass, CssClassBuilder, ContentDensityService } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
 import { registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 export type stateType = 'success' | 'error' | 'warning' | 'default' | 'information';
 let uniqueId = 0;
+
 @Component({
     selector: 'fd-radio-button',
     templateUrl: './radio-button.component.html',
@@ -33,11 +33,12 @@ let uniqueId = 0;
             useExisting: forwardRef(() => RadioButtonComponent),
             multi: true
         },
-        registerFormItemControl(RadioButtonComponent)
+        registerFormItemControl(RadioButtonComponent),
+        contentDensityObserverProviders()
     ]
 })
 export class RadioButtonComponent
-    implements OnChanges, AfterViewInit, CssClassBuilder, ControlValueAccessor, OnInit, OnDestroy, FormItemControl
+    implements OnChanges, AfterViewInit, CssClassBuilder, ControlValueAccessor, OnDestroy, FormItemControl
 {
     /** @hidden */
     @ViewChild('inputElement')
@@ -64,13 +65,6 @@ export class RadioButtonComponent
      */
     @Input()
     tabIndex: number;
-
-    /** Whether to apply compact mode to the radio button.
-     * Value: true or false
-     * By default field is set to false
-     */
-    @Input()
-    compact?: boolean;
 
     /** The field to set state of radio button using:
      * 'success' | 'error' | 'warning' | 'default' | 'information'
@@ -137,20 +131,8 @@ export class RadioButtonComponent
     /** @hidden */
     constructor(
         private changeDetectionRef: ChangeDetectorRef,
-        @Optional() private _contentDensityService: ContentDensityService
+        readonly _contentDensityObserver: ContentDensityObserver
     ) {}
-
-    /** @hidden */
-    ngOnInit(): void {
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._isCompactDensity.subscribe((isCompact) => {
-                    this.compact = isCompact;
-                    this.buildComponentCssClass();
-                })
-            );
-        }
-    }
 
     /** @hidden */
     ngOnDestroy(): void {
@@ -196,6 +178,7 @@ export class RadioButtonComponent
     writeValue(value: any): void {
         this.valueChange(value, false);
     }
+
     // End implementation
 
     /** This method is responsible for building a css class based on current state
@@ -204,11 +187,7 @@ export class RadioButtonComponent
      */
     @applyCssClass
     buildComponentCssClass(): string[] {
-        return [
-            'fd-radio',
-            this.compact ? 'fd-radio--compact' : '',
-            this.state !== 'default' ? `is-${this.state}` : ''
-        ];
+        return ['fd-radio', this.state !== 'default' ? `is-${this.state}` : ''];
     }
 
     /** @hidden */

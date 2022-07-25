@@ -14,7 +14,7 @@ export class PlayGroundComponent {
     @Input() displayBlock: boolean;
 
     /**
-     * Is current playground can be resetted to defaults.
+     * Is current playground can be reset to default.
      */
     @Input() resettable = false;
 
@@ -22,7 +22,7 @@ export class PlayGroundComponent {
     @Output() onFormChanges: EventEmitter<any> = new EventEmitter<any>();
 
     /**
-     * Emits event when playground was resetted.
+     * Emits event when playground was reset.
      */
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     @Output() onReset: EventEmitter<void> = new EventEmitter<void>();
@@ -32,7 +32,7 @@ export class PlayGroundComponent {
     }
 
     /**
-     * Emits event when playground was resetted.
+     * Emits event when playground was reset.
      */
     reset(): void {
         this.onReset.emit();

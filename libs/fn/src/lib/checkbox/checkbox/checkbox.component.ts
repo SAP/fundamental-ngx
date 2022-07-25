@@ -3,6 +3,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ContentChild,
     ElementRef,
     forwardRef,
     HostBinding,
@@ -16,6 +17,8 @@ import { KeyUtil } from '@fundamental-ngx/core/utils';
 import equal from 'fast-deep-equal';
 import { SPACE } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs';
+import { FN_CHECKBOX_LABEL } from '../checkbox.tokens';
+import { TemplateRefProviderToken } from '@fundamental-ngx/fn/utils';
 
 let checkboxUniqueId = 0;
 
@@ -95,6 +98,9 @@ export class CheckboxComponent implements ControlValueAccessor, OnDestroy {
     /** If it is mandatory field */
     @Input()
     required = false;
+
+    @ContentChild(FN_CHECKBOX_LABEL)
+    labelTemplateProvider: TemplateRefProviderToken<void>;
 
     /** @hidden */
     private _subscriptions = new Subscription();

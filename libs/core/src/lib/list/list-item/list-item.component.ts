@@ -184,7 +184,8 @@ export class ListItemComponent
         if (
             changes.selectedListItemScreenReaderText ||
             changes.navigatedListItemScreenReaderText ||
-            changes.navigatableListItemScreenReaderText
+            changes.navigatableListItemScreenReaderText ||
+            changes.selected
         ) {
             this._updateScreenReaderText();
         }
@@ -269,18 +270,23 @@ export class ListItemComponent
     private _updateScreenReaderText(): void {
         let content = '';
         if (this.selected) {
-            content += `, ${this.selectedListItemScreenReaderText ?? 'selected'}`;
+            content += this._addTextPart(content, this.selectedListItemScreenReaderText ?? 'selected');
         }
-        if (this.linkDirectives.some((d) => d.navigated)) {
-            content += `, ${this.navigatedListItemScreenReaderText ?? 'navigated'}`;
+        if (this.linkDirectives?.some((d) => d.navigated)) {
+            content += this._addTextPart(content, this.navigatedListItemScreenReaderText ?? 'navigated');
         }
-        if (this.linkDirectives.some((d) => d.navigationIndicator)) {
-            content += `, ${this.navigatableListItemScreenReaderText ?? 'navigatable'}`;
+        if (this.linkDirectives?.some((d) => d.navigationIndicator)) {
+            content += this._addTextPart(content, this.navigatableListItemScreenReaderText ?? 'navigatable');
         }
         if (content.startsWith(', ')) {
             content = content.substring(2);
         }
         this.screenReaderContent = content;
         this._changeDetectorRef.markForCheck();
+    }
+
+    /** @hidden */
+    private _addTextPart(existing: string, toAdd: string): string {
+        return (existing ? ', ' : '') + toAdd;
     }
 }

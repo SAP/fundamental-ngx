@@ -1,10 +1,11 @@
-<header><%= startCaseName %></header>
+<fd-doc-page>
+    <header><%= startCaseName %></header>
 
-<description>
-    <!-- TODO: description -->
-</description>
+    <description>
+        <!-- TODO: description -->
+    </description>
 
-<import module="<%= moduleName %>Module" subPackage="<%= name %>"></import>
+    <import module="<%= moduleName %>Module" subPackage="<%= name %>"></import>
 
-<fd-header-tabs></fd-header-tabs>
-<router-outlet></router-outlet>
+    <fd-header-tabs></fd-header-tabs>
+</fd-doc-page>

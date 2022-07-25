@@ -23,7 +23,7 @@
         <button
             fd-button
             [label]="notificationRef.data.open"
-            [compact]="true"
+            fdCompact
             (click)="notificationRef.close('Open Button Clicked')"
         ></button>
         <button
@@ -32,7 +32,7 @@
             glyph="decline"
             ariaLabel="Close"
             title="close"
-            [compact]="true"
+            fdCompact
             (click)="notificationRef.close('Close Button Click')"
         ></button>
     </fd-notification-actions>

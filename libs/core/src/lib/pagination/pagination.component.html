@@ -23,7 +23,6 @@
             fdType="transparent"
             glyph="media-rewind"
             [disabled]="isFirstPage"
-            [compact]="compact"
             [ariaLabel]="firstLabel"
             [title]="firstLabel"
             class="fd-pagination__button fd-pagination__button--mobile"
@@ -40,7 +39,6 @@
             fdType="transparent"
             glyph="navigation-left-arrow"
             [disabled]="isFirstPage"
-            [compact]="compact"
             [ariaLabel]="previousLabel"
             [title]="previousLabel"
             class="fd-pagination__button"
@@ -58,7 +56,6 @@
                 fd-focus-key-manager-item
                 fd-button
                 fdType="transparent"
-                [compact]="compact"
                 [ariaLabel]="pageLabel(page)"
                 [title]="nextLabel"
                 class="fd-pagination__link"
@@ -76,7 +73,6 @@
             fd-focus-key-manager-item
             fd-button
             fdType="transparent"
-            [compact]="compact"
             [ariaLabel]="pageLabel(currentPage)"
             class="fd-pagination__link is-active"
             [attr.aria-current]="true"
@@ -97,7 +93,6 @@
             type="number"
             [max]="_lastPage"
             [state]="currentPageModel.invalid ? 'error' : null"
-            [compact]="compact"
             class="fd-pagination__input"
             #currentPageModel="ngModel"
             [ngModel]="currentPage"
@@ -118,7 +113,6 @@
                 fd-focus-key-manager-item
                 fd-button
                 fdType="transparent"
-                [compact]="compact"
                 [ariaLabel]="pageLabel(page)"
                 [title]="nextLabel"
                 class="fd-pagination__link"
@@ -137,7 +131,6 @@
             fdType="transparent"
             glyph="navigation-right-arrow"
             [disabled]="isLastPage"
-            [compact]="compact"
             [ariaLabel]="nextLabel"
             [title]="nextLabel"
             class="fd-pagination__button"
@@ -154,7 +147,6 @@
             fdType="transparent"
             glyph="media-forward"
             [disabled]="isLastPage"
-            [compact]="compact"
             [ariaLabel]="lastLabel"
             [title]="lastLabel"
             class="fd-pagination__button fd-pagination__button--mobile"
@@ -177,7 +169,7 @@
 <ng-template #more>
     <span
         class="fd-pagination__more"
-        [class.fd-pagination__more--compact]="compact"
+        [class.fd-pagination__more--compact]="_contentDensityObserver.isCompact$ | async"
         aria-hidden="true"
         aria-label="..."
         role="presentation"
@@ -191,12 +183,7 @@
 <ng-template #perPage let-pageOptions="pageOptions">
     <label fd-form-label class="fd-pagination__per-page-label">{{ itemsPerPageLabel }}:</label>
 
-    <fd-select
-        [compact]="compact"
-        class="fd-pagination__per-page-select"
-        [value]="itemsPerPage"
-        (valueChange)="_onChangePerPage($event)"
-    >
-        <fd-option *ngFor="let option of pageOptions" [value]="option">{{ option }}</fd-option>
+    <fd-select class="fd-pagination__per-page-select" [value]="itemsPerPage" (valueChange)="_onChangePerPage($event)">
+        <li fd-option *ngFor="let option of pageOptions" [value]="option">{{ option }}</li>
     </fd-select>
 </ng-template>

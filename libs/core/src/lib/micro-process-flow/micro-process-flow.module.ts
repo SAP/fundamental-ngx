@@ -6,6 +6,8 @@ import { MicroProcessFlowIconComponent } from './components/micro-process-flow-i
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { MicroProcessFlowIntermediaryItemDirective } from './micro-process-flow-intermediary-item.directive';
 import { MicroProcessFlowFocusableItemDirective } from './micro-process-flow-focusable-item.directive';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { DeprecatedMicroProcessFlowContentDensityDirective } from './components/micro-process-flow/deprecated-micro-process-flow-content-density.directive';
 
 @NgModule({
     declarations: [
@@ -13,15 +15,18 @@ import { MicroProcessFlowFocusableItemDirective } from './micro-process-flow-foc
         MicroProcessFlowItemComponent,
         MicroProcessFlowIconComponent,
         MicroProcessFlowIntermediaryItemDirective,
-        MicroProcessFlowFocusableItemDirective
+        MicroProcessFlowFocusableItemDirective,
+        DeprecatedMicroProcessFlowContentDensityDirective
     ],
-    imports: [CommonModule, IconModule],
+    imports: [CommonModule, IconModule, ContentDensityModule],
     exports: [
         MicroProcessFlowComponent,
         MicroProcessFlowItemComponent,
         MicroProcessFlowIconComponent,
         MicroProcessFlowIntermediaryItemDirective,
-        MicroProcessFlowFocusableItemDirective
+        MicroProcessFlowFocusableItemDirective,
+        ContentDensityModule,
+        DeprecatedMicroProcessFlowContentDensityDirective
     ]
 })
 export class MicroProcessFlowModule {}

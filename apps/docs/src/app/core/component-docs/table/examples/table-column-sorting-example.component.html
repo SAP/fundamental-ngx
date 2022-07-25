@@ -1,34 +1,34 @@
 <fd-toolbar>
     <label fd-toolbar-label> Filter and sort for table elements </label>
     <fd-toolbar-spacer></fd-toolbar-spacer>
-    <fd-input-group
-        glyph="decline"
-        glyphAriaLabel="Clear"
-        title="Search"
-        placeholder="Search"
-        [button]="true"
-        [compact]="true"
-        [disabled]="false"
-        [(ngModel)]="filterVal"
-    >
-    </fd-input-group>
-    <button
-        ariaLabel="Sort ascending"
-        title="Sort ascending"
-        fd-button
-        [compact]="true"
-        glyph="sort-ascending"
-        (click)="changeSort(true)"
-    ></button>
-    <button
-        ariaLabel="Sort descending"
-        title="Sort descending"
-        fd-button
-        [compact]="true"
-        glyph="sort-descending"
-        (click)="changeSort(false)"
-    ></button>
+    <ng-container fdCompact>
+        <fd-input-group
+            glyph="decline"
+            glyphAriaLabel="Clear"
+            title="Search"
+            placeholder="Search"
+            [button]="true"
+            [disabled]="false"
+            [(ngModel)]="filterVal"
+        >
+        </fd-input-group>
+        <button
+            ariaLabel="Sort ascending"
+            title="Sort ascending"
+            fd-button
+            glyph="sort-ascending"
+            (click)="changeSort(true)"
+        ></button>
+        <button
+            ariaLabel="Sort descending"
+            title="Sort descending"
+            fd-button
+            glyph="sort-descending"
+            (click)="changeSort(false)"
+        ></button>
+    </ng-container>
 </fd-toolbar>
+
 <table fd-table aria-label="Column Sorting and Filtering">
     <thead fd-table-header>
         <tr fd-table-row>
@@ -60,7 +60,9 @@
             <td fd-table-cell>{{ row.column2 }}</td>
             <td fd-table-cell>{{ row.column3 }}</td>
             <td fd-table-cell>{{ row.date }}</td>
-            <td fd-table-cell><fd-icon [glyph]="row.type"></fd-icon></td>
+            <td fd-table-cell>
+                <fd-icon [glyph]="row.type"></fd-icon>
+            </td>
         </tr>
     </tbody>
 </table>

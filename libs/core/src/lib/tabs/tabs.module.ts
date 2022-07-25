@@ -26,6 +26,8 @@ import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { MenuModule } from '@fundamental-ngx/core/menu';
 import { ScrollSpyModule } from '@fundamental-ngx/core/scroll-spy';
 import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.component';
+import { DeprecatedTabsCompactDirective } from './deprecated-tabs-compact.directive';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
     declarations: [
@@ -44,9 +46,19 @@ import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.compon
         TabItemExpandComponent,
         TabCounterHeaderDirective,
         TabProcessIconDirective,
-        TabSeparatorDirective
+        TabSeparatorDirective,
+        DeprecatedTabsCompactDirective
     ],
-    imports: [CommonModule, IconModule, PopoverModule, ListModule, ButtonModule, MenuModule, ScrollSpyModule],
+    imports: [
+        CommonModule,
+        IconModule,
+        PopoverModule,
+        ListModule,
+        ButtonModule,
+        MenuModule,
+        ScrollSpyModule,
+        ContentDensityModule
+    ],
     exports: [
         TabListComponent,
         TabPanelComponent,
@@ -62,7 +74,9 @@ import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.compon
         TabHeaderDirective,
         TabCounterHeaderDirective,
         TabProcessIconDirective,
-        TabSeparatorDirective
+        TabSeparatorDirective,
+        DeprecatedTabsCompactDirective,
+        ContentDensityModule
     ]
 })
 export class TabsModule {}

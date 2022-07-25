@@ -53,21 +53,23 @@
                 <fd-select [compact]="true" [(value)]="_nodeType">
                     <ng-container *ngFor="let option of _nodeTypesArray">
                         <ng-container [ngSwitch]="option">
-                            <fd-option
+                            <li
+                                fd-option
                                 *ngSwitchCase="_nodeTypes.SERIAL"
                                 [value]="option"
                                 i18n="@@platformApprovalFlowAddNodeDialogNodeTypeSerial"
                             >
                                 Serial
-                            </fd-option>
+                            </li>
 
-                            <fd-option
+                            <li
+                                fd-option
                                 *ngSwitchCase="_nodeTypes.PARALLEL"
                                 [value]="option"
                                 i18n="@@platformApprovalFlowAddNodeDialogNodeTypeParallel"
                             >
                                 Parallel
-                            </fd-option>
+                            </li>
                         </ng-container>
                     </ng-container>
                 </fd-select>
@@ -79,29 +81,32 @@
                 <fd-select [compact]="true" [(value)]="_approverType">
                     <ng-container *ngFor="let option of _approverTypesArray">
                         <ng-container [ngSwitch]="option">
-                            <fd-option
+                            <li
+                                fd-option
                                 *ngSwitchCase="_approverTypes.SINGLE_USER"
                                 [value]="option"
                                 i18n="platformApprovalFlowAddNodeDialogApproverTypeUser"
                             >
                                 A user
-                            </fd-option>
+                            </li>
 
-                            <fd-option
+                            <li
+                                fd-option
                                 *ngSwitchCase="_approverTypes.ANYONE"
                                 [value]="option"
                                 i18n="platformApprovalFlowAddNodeDialogApproverTypeTeamAnyone"
                             >
                                 Anyone on the team
-                            </fd-option>
+                            </li>
 
-                            <fd-option
+                            <li
+                                fd-option
                                 *ngSwitchCase="_approverTypes.EVERYONE"
                                 [value]="option"
                                 i18n="platformApprovalFlowAddNodeDialogApproverTypeTeamEveryone"
                             >
                                 Everyone on the team
-                            </fd-option>
+                            </li>
                         </ng-container>
                     </ng-container>
                 </fd-select>

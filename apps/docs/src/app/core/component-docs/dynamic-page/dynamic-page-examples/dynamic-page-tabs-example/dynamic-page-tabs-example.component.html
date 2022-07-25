@@ -29,7 +29,7 @@
                     <button
                         fd-toolbar-item
                         fd-button
-                        [compact]="true"
+                        fdCompact
                         fdType="positive"
                         (click)="closePage()"
                         label="Accept"
@@ -38,7 +38,7 @@
                     <button
                         fd-toolbar-item
                         fd-button
-                        [compact]="true"
+                        fdCompact
                         fdType="negative"
                         (click)="closePage()"
                         label="Reject"
@@ -78,7 +78,7 @@
         </fd-dynamic-page-subheader>
         <fd-tab-list [stackContent]="stackedTabs" maxContentHeight="auto">
             <fd-tab *ngFor="let tab of ['Tab 1', 'Tab 2', 'Tab 3']" [title]="tab">
-                <fd-dynamic-page-content [id]="tab">
+                <fd-dynamic-page-content [id]="tab" cdkScrollable>
                     <div class="fd-dynamic-page-section-example">{{ tab }} content.</div>
                     <div class="fd-dynamic-page-section-example">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut

@@ -1,19 +1,23 @@
 import {
     ButtonExampleComponent,
-    ButtonFlatExampleComponent,
-    ButtonLinkExampleComponent,
-    ButtonNakedExampleComponent,
-    ButtonOutlineExampleComponent,
-    ButtonSecondaryExampleComponent
+    ButtonEmphasizedExampleComponent,
+    ButtonLayoutExampleComponent,
+    ButtonNegativeExampleComponent,
+    ButtonPositiveExampleComponent,
+    ButtonSecondaryExampleComponent,
+    ButtonCriticalExampleComponent,
+    ButtonStateExampleComponent
 } from './button-example/button-example-component';
 
 export * from './button-example/button-example-component';
 
 export const examples = [
     ButtonExampleComponent,
-    ButtonFlatExampleComponent,
-    ButtonLinkExampleComponent,
-    ButtonNakedExampleComponent,
-    ButtonOutlineExampleComponent,
-    ButtonSecondaryExampleComponent
+    ButtonEmphasizedExampleComponent,
+    ButtonLayoutExampleComponent,
+    ButtonNegativeExampleComponent,
+    ButtonPositiveExampleComponent,
+    ButtonSecondaryExampleComponent,
+    ButtonCriticalExampleComponent,
+    ButtonStateExampleComponent
 ];

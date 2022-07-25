@@ -5,7 +5,7 @@
         [class.is-focus]="focused"
         [class.is-readonly]="readonly"
         [class.is-disabled]="disabled"
-        [class.fd-step-input--compact]="compact"
+        [class.fd-step-input--compact]="_contentDensityObserver.isCompact"
         [class.fd-step-input--without-buttons]="!hasStepButtons"
     >
         <button
@@ -16,7 +16,6 @@
             class="fd-step-input__button"
             tabindex="-1"
             type="button"
-            [compact]="compact"
             [disabled]="!canDecrement"
             [title]="decrementButtonTitle"
             [glyph]="decrementButtonIcon"
@@ -32,7 +31,7 @@
             [disabled]="disabled"
             [readOnly]="readonly"
             [placeholder]="placeholder"
-            [class.fd-input--compact]="compact"
+            [class.fd-input--compact]="_contentDensityObserver.isCompact"
             [attr.aria-label]="ariaLabel"
             [attr.aria-labelledby]="ariaLabelledBy"
             [attr.aria-valuenow]="value"
@@ -60,7 +59,6 @@
             class="fd-step-input__button"
             tabindex="-1"
             type="button"
-            [compact]="compact"
             [disabled]="!canIncrement"
             [title]="incrementButtonTitle"
             [glyph]="incrementButtonIcon"

@@ -26,19 +26,22 @@
         ></fdp-approval-flow-toolbar-actions>
     </fd-grid-list-title-bar>
 
-    <div class="fdp-approval-flow__watchers" *ngIf="_approvalProcess?.watchers?.length || _isEditMode">
+    <div
+        class="fdp-approval-flow__watchers"
+        *ngIf="_approvalProcess?.watchers?.length || _isEditMode"
+        [attr.aria-label]="watchersLabel"
+    >
         <p class="fdp-approval-flow__watchers-title" i18n="@@platformApprovalFlowWatchers">{{ watchersLabel }}</p>
 
         <ng-container *ngIf="!_isEditMode">
             <fd-avatar
                 *ngFor="let watcher of _approvalProcess?.watchers; trackBy: _trackByFn"
-                tabindex="0"
                 size="xs"
                 [image]="watcher.imgUrl || ''"
                 [label]="watcher.name"
+                [clickable]="true"
                 [circle]="true"
-                (keyup.enter)="$event.stopPropagation(); _onWatcherClick(watcher)"
-                (click)="_onWatcherClick(watcher)"
+                (avatarClicked)="_onWatcherClick(watcher, $event)"
             ></fd-avatar>
         </ng-container>
 
@@ -61,35 +64,33 @@
         <ng-container *ngIf="_graph.columns.length; else emptyApprovalFlowGraph">
             <div
                 class="fdp-approval-flow__container"
-                [class.fdp-approval-flow__container--extra-padding-start]="_isCarousel && _carouselStep > 0"
-                [class.fdp-approval-flow__container--extra-padding-end]="
-                    _isCarousel && _maxCarouselStep - _carouselStep > 0
-                "
+                [class.fdp-approval-flow__container--extra-padding-start]="true"
+                [class.fdp-approval-flow__container--extra-padding-end]="true"
             >
                 <div
                     class="fdp-approval-flow-carousel-controls"
-                    *ngIf="_isCarousel"
+                    *ngIf="_scrollDiff > 0"
                     [class.fdp-approval-flow-carousel-controls--edit-mode]="_isEditMode"
                 >
                     <button
-                        *ngIf="_carouselStep > 0"
+                        *ngIf="_carouselStepsLeft > 0"
                         class="fdp-approval-flow-carousel-controls__button--prev-slide"
                         aria-label="Go to previous slide"
                         i18n-aria-label="@@platformApprovalPrevButton"
-                        (click)="previousSlide()"
+                        (click)="nextSlide(-1)"
                     >
                         <fd-icon [glyph]="'navigation-' + (_rtl ? 'right' : 'left') + '-arrow'"></fd-icon>
-                        {{ _carouselStep }}
+                        {{ _carouselStepsLeft }}
                     </button>
 
                     <button
-                        *ngIf="_maxCarouselStep - _carouselStep > 0"
+                        *ngIf="_carouselStepsRight > 0"
                         class="fdp-approval-flow-carousel-controls__button--next-slide"
                         aria-label="Go to next slide"
                         i18n-aria-label="@@platformApprovalNextButton"
                         (click)="nextSlide()"
                     >
-                        {{ _maxCarouselStep - _carouselStep }}
+                        {{ _carouselStepsRight }}
                         <fd-icon [glyph]="'navigation-' + (_rtl ? 'left' : 'right') + '-arrow'"></fd-icon>
                     </button>
                 </div>
@@ -103,26 +104,14 @@
                     <div
                         class="fdp-approval-flow__graph"
                         #graphEl
-                        [style.left.px]="_rtl ? -_carouselScrollX : _carouselScrollX"
                         [class.fdp-approval-flow__graph--edit-mode]="_isEditMode"
                     >
                         <div
                             class="fdp-approval-flow__graph-column"
-                            *ngFor="
-                                let column of _graph.columns;
-                                let columnIndex = index;
-                                let firstColumn = first;
-                                let lastColumn = last
-                            "
+                            *ngFor="let column of _graph.columns; let columnIndex = index"
                         >
                             <fdp-approval-flow-node
-                                *ngFor="
-                                    let node of column.nodes;
-                                    let nodeIndex = index;
-                                    let firstNode = first;
-                                    let lastNode = last;
-                                    trackBy: _trackByFn
-                                "
+                                *ngFor="let node of column.nodes; let nodeIndex = index; trackBy: _trackByFn"
                                 cdkDrag
                                 #approvalFlowNode
                                 [cdkDragDisabled]="_isCdkDragDisabled(node)"
@@ -137,7 +126,7 @@
                                 (onAdd)="_addNode(node, $event)"
                                 (onEdit)="_editNode(node)"
                                 (onDelete)="_onNodeDelete(node)"
-                                (keydown)="_onNodeKeyDown($event, node, firstColumn, firstNode, lastColumn, lastNode)"
+                                (keydown)="_onNodeKeyDown($event, node)"
                                 (cdkDragStarted)="_dragDropInProgress = true"
                                 (cdkDragReleased)="_onNodeDrop(node, $event.source)"
                                 (cdkDragMoved)="_onNodeDragMoved(node)"
@@ -147,6 +136,7 @@
                                     type="active"
                                     [value]="node"
                                     [selected]="!!node.selected"
+                                    [ariaLabelledBy]="approvalFlowNode.approvalFlowNodeId"
                                     [disableToolbarClick]="true"
                                     class="fdp-approval-flow__graph-node-inner"
                                     [class.fdp-approval-flow__graph-node-inner--edit]="_isEditMode"

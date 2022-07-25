@@ -93,11 +93,10 @@ export class DialogInnerPopoverComponent {
                 </div>
             </fd-dialog-body>
 
-            <fd-dialog-footer>
+            <fd-dialog-footer fdCompact>
                 <fd-button-bar
                     label="Interesting"
                     fdType="emphasized"
-                    [compact]="true"
                     (click)="dialogRef.close('Interesting')"
                     ariaLabel="Interesting Emphasized"
                 >
@@ -106,7 +105,6 @@ export class DialogInnerPopoverComponent {
                     label="Cancel"
                     fdInitialFocus
                     fdType="transparent"
-                    [compact]="true"
                     (click)="dialogRef.dismiss('Cancel')"
                     ariaLabel="Cancel"
                 >

@@ -45,14 +45,14 @@
     >
         <ng-container *ngFor="let tab of _tabs">
             <fd-tab [title]="tab.tabLabel" [id]="tab.id">
-                <fd-dynamic-page-content>
+                <fd-dynamic-page-content cdkScrollable>
                     <ng-container [ngTemplateOutlet]="tab.contentTemplateRef"></ng-container>
                 </fd-dynamic-page-content>
             </fd-tab>
         </ng-container>
     </fd-tab-list>
 
-    <fd-dynamic-page-content *ngIf="!_isTabbed">
+    <fd-dynamic-page-content *ngIf="!_isTabbed" cdkScrollable>
         <ng-container [ngTemplateOutlet]="contentComponent.contentTemplateRef"></ng-container>
     </fd-dynamic-page-content>
 

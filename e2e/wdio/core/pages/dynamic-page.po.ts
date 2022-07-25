@@ -30,7 +30,7 @@ export class DynamicPagePo extends CoreBaseComponentPo {
     flexibleColumn = '.fd-flexible-column-layout__column ';
     article = '.fd-dynamic-page-section-example';
     breadcrumbLink = '.fd-dynamic-page__breadcrumb-wrapper a';
-    currentBreadcrumbLink = '.fd-dynamic-page__breadcrumb-wrapper fd-breadcrumb-item:last-child span';
+    currentBreadcrumbLink = '.fd-dynamic-page__breadcrumb-wrapper .fd-overflow-layout__item--last span';
 
     open(): void {
         super.open(this.url);

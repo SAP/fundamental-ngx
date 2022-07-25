@@ -37,9 +37,9 @@
 </div>
 
 <div style="display: inline-block; width: 50%">
-    <button fd-button label="Compact Menu" [fdMenu]="true" [compact]="true" [fdMenuTrigger]="menuCompact"></button>
+    <button fd-button label="Compact Menu" [fdMenu]="true" fdCompact [fdMenuTrigger]="menuCompact"></button>
 
-    <fd-menu #menuCompact [compact]="true">
+    <fd-menu #menuCompact fdCompact>
         <li fd-menu-item>
             <a href="#" fd-menu-interactive>
                 <span fd-menu-title>Create New</span>

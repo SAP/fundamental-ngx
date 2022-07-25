@@ -11,7 +11,7 @@ export class FixedCardLayoutPo extends CoreBaseComponentPo {
     cardHeaderArr = 'fd-card fd-card-header';
     cardContentArr = 'fd-card fd-card-content';
     cardColumnArr = 'div.cdk-drop-list';
-    disableDragBtn = 'fd-fixed-card-layout-disabled-drag button';
+    disableDragBtn = 'fd-fixed-card-layout-disabled-drag .disable-dnd';
     placeholderCard = 'div.fd-fixed-card-layout__card-placeholder';
     navigationMenuBtn = 'button[aria-label*="Switch Navigation"]';
     pageSidebar = 'sections-toolbar .sidebar';

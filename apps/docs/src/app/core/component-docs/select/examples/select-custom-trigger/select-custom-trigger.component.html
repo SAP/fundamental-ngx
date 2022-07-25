@@ -1,5 +1,5 @@
 <fd-select placeholder="Select an option" [(value)]="selectedValue" [controlTemplate]="customSelectTemplate">
-    <fd-option *ngFor="let option of options" [value]="option">{{ option }}</fd-option>
+    <li fd-option *ngFor="let option of options" [value]="option">{{ option }}</li>
 </fd-select>
 
 <ng-template #customSelectTemplate let-textValue let-selected="selected">

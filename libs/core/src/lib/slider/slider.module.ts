@@ -6,10 +6,12 @@ import { SliderComponent } from './slider.component';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { SliderPositionDirective } from './slider-position.directive';
 import { OnlyDigitsModule } from '@fundamental-ngx/core/utils';
+import { DeprecatedSliderCozyDirective } from './deprecated-slider-cozy.directive';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
-    declarations: [SliderComponent, SliderPositionDirective],
-    imports: [CommonModule, PopoverModule, FormsModule, OnlyDigitsModule],
-    exports: [SliderComponent]
+    declarations: [SliderComponent, SliderPositionDirective, DeprecatedSliderCozyDirective],
+    imports: [CommonModule, PopoverModule, FormsModule, OnlyDigitsModule, ContentDensityModule],
+    exports: [SliderComponent, DeprecatedSliderCozyDirective, ContentDensityModule]
 })
 export class SliderModule {}

@@ -73,7 +73,8 @@ export const API_FILES = {
     carousel: ['CarouselComponent', 'CarouselItemComponent', 'CarouselService'],
     combobox: ['ComboboxComponent'],
     checkbox: ['CheckboxComponent'],
-    contentDensity: [],
+    oldContentDensity: [],
+    contentDensity: ['ContentDensityDirective', 'GlobalContentDensityService', 'ContentDensityStorage'],
     datePicker: ['DatePickerComponent', 'FdDate', 'FdDatetimeAdapter'],
     datetimePicker: ['DatetimePickerComponent', 'FdDate', 'FdDatetimeAdapter'],
     dynamicPage: [
@@ -403,5 +404,13 @@ export const API_FILES = {
         'TimelineHeaderInfoSubTitleDirective'
     ],
     scrollbar: ['ScrollbarComponent'],
-    theming: ['ThemingService', 'BaseThemingConfig']
+    theming: ['ThemingService', 'BaseThemingConfig'],
+    overflowLayout: [
+        'OverflowLayoutComponent',
+        'OverflowItemRefDirective',
+        'OverflowExpandDirective',
+        'OverflowLayoutItemDirective',
+        'OverflowItemContainerRefDirective',
+        'OverflowLayoutPopoverContentDirective'
+    ]
 };

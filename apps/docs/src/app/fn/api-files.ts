@@ -6,6 +6,7 @@
  * Names are sorted in the ApiComponent so order does not matter.
  */
 export const API_FILES = {
+    avatar: ['AvatarComponent'],
     button: [],
     tabs: [],
     switch: [],
@@ -14,5 +15,15 @@ export const API_FILES = {
     input: [],
     search: [],
     select: [],
-    slider: []
+    slider: [],
+    segmentedButton: [],
+    utils: [],
+    cdk: [],
+    list: [],
+    progressBar: ['ProgressBarComponent'],
+    infoLabel: ['InfoLabelComponent'],
+    messageStrip: ['MessageStripComponent'],
+    objectStatus: ['ObjectStatusComponent'],
+    messageToast: ['MessageToastComponent', 'MessageToastService', 'MessageToastConfig', 'MessageToastRef'],
+    notification: ['NotificationComponent', 'NotificationService', 'NotificationConfig', 'NotificationRef']
 };
