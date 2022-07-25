@@ -152,6 +152,9 @@
             "@fundamental-ngx/platform/action-button-group": ["libs/platform/src/lib/action-button-group/index.ts"],
             "@fundamental-ngx/platform/approval-flow": ["libs/platform/src/lib/approval-flow/index.ts"],
             "@fundamental-ngx/platform/button": ["libs/platform/src/lib/button/index.ts"],
+            "@fundamental-ngx/platform/content-density-deprecations": [
+                "libs/platform/src/lib/platform-content-density-deprecations/index.ts"
+            ],
             "@fundamental-ngx/platform/dynamic-page": ["libs/platform/src/lib/dynamic-page/index.ts"],
             "@fundamental-ngx/platform/feed-input": ["libs/platform/src/lib/feed-input/index.ts"],
             "@fundamental-ngx/platform/form": ["libs/platform/src/lib/form/index.ts"],

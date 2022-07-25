@@ -199,8 +199,6 @@ export abstract class BaseInput
     }
 
     ngOnInit(): void {
-        super.ngOnInit();
-
         if (!this.id || !this.name) {
             throw new Error('form input must have [id] and [name] attribute.');
         }

@@ -763,7 +763,7 @@ export class ListComponent<T> extends CollectionBaseInput implements OnInit, Aft
                 item.listType = this.listType;
             }
 
-            item.contentDensity = this.contentDensity;
+            // item.contentDensity = this.contentDensity; // no need for this
             item.selectionMode = this.selectionMode;
             item.rowSelection = this.rowSelection;
             item._hasByLine = this.hasByLine;

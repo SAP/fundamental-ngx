@@ -9,10 +9,11 @@ import { DynamicComponentService, PipeModule } from '@fundamental-ngx/core/utils
 import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 
 import { SearchFieldComponent, SearchFieldSuggestionDirective, SuggestionMatchesPipe } from './search-field.component';
+import { PlatformContentDensityDeprecationsModule } from "@fundamental-ngx/platform/content-density-deprecations";
 
 @NgModule({
-    imports: [CommonModule, FormsModule, OverlayModule, IconModule, MenuModule, PipeModule, PlatformMenuModule],
-    exports: [SearchFieldComponent, SearchFieldSuggestionDirective, SuggestionMatchesPipe],
+    imports: [CommonModule, FormsModule, OverlayModule, IconModule, MenuModule, PipeModule, PlatformMenuModule, PlatformContentDensityDeprecationsModule],
+    exports: [SearchFieldComponent, SearchFieldSuggestionDirective, SuggestionMatchesPipe, PlatformContentDensityDeprecationsModule],
     declarations: [SearchFieldComponent, SearchFieldSuggestionDirective, SuggestionMatchesPipe],
     providers: [DynamicComponentService]
 })

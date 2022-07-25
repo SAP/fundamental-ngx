@@ -8,7 +8,7 @@
     [disabled]="disabled"
     [accept]="accept"
     [multiple]="multiple"
-    [compact]="contentDensity | isCompactDensity"
+    [compact]="contentDensityObserver.isCompact$ | async"
     [maxFileSize]="maxFileSize"
     [minFileSize]="minFileSize"
     [state]="state"

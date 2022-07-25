@@ -7,7 +7,7 @@ import { BaseComponent } from '@fundamental-ngx/platform/shared';
 
 @Component({
     selector: 'fdp-action-bar',
-    templateUrl: './action-bar.component.html'
+    templateUrl: './action-bar.component.html',
 })
 export class ActionBarComponent extends BaseComponent implements OnInit {
     /**

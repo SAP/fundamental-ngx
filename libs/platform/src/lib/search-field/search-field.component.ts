@@ -45,6 +45,7 @@ import {
 } from './search-field-mobile/search-field-mobile.interface';
 import { SearchFieldMobileComponent } from './search-field-mobile/search-field/search-field-mobile.component';
 import { PlatformSearchFieldMobileModule } from './search-field-mobile/search-field-mobile.module';
+import { ContentDensityObserver, contentDensityObserverProviders } from "@fundamental-ngx/core/content-density";
 
 export interface SearchInput {
     text: string;
@@ -84,7 +85,8 @@ let searchFieldIdCount = 0;
     templateUrl: './search-field.component.html',
     styleUrls: ['./search-field.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    providers: [contentDensityObserverProviders()]
 })
 export class SearchFieldComponent
     extends BaseComponent
@@ -320,7 +322,8 @@ export class SearchFieldComponent
         @Optional() private readonly _rtl: RtlService,
         @Inject(DOCUMENT) private readonly _document: Document,
         private readonly _liveAnnouncer: LiveAnnouncer,
-        readonly _dynamicComponentService: DynamicComponentService
+        readonly _dynamicComponentService: DynamicComponentService,
+        readonly contentDensityObserver: ContentDensityObserver
     ) {
         super(_cd);
     }
@@ -656,7 +659,7 @@ export class SearchFieldComponent
 }
 
 @Pipe({
-    name: 'suggestionMatches'
+    name: "suggestionMatches"
 })
 export class SuggestionMatchesPipe implements PipeTransform {
     transform(values: string[] | null, match: string, mobile = false): string[] {
