@@ -8,6 +8,7 @@ import { OverflowItem } from './interfaces/overflow-item.interface';
 
 export interface OverflowLayoutConfig {
     items: QueryList<OverflowItemRef>;
+    focusableItems: QueryList<OverflowItem>;
     visibleItems: QueryList<OverflowLayoutItemContainerDirective>;
     itemsWrapper: HTMLElement;
     showMoreContainer: HTMLElement;
@@ -150,6 +151,7 @@ export class OverflowLayoutService implements OnDestroy {
             item.index = index;
             item.first = index === 0;
             item.last = index === allItems.length - 1;
+            item.globalIndex = index;
             visibleContainerItems[index].containerRef.hidden = false;
         });
 
@@ -162,7 +164,10 @@ export class OverflowLayoutService implements OnDestroy {
         this.result.showMore = false;
         this._emitResult();
         const containerWidth = this._elRef.nativeElement.getBoundingClientRect().width;
-        const itemsContainerWidth = this.config.itemsWrapper.getBoundingClientRect().width;
+        const itemsContainerWidth = allItems.reduce(
+            (total, item) => total + this._getElementWidth(item.elementRef.nativeElement),
+            0
+        );
 
         if (
             containerWidth >= itemsContainerWidth &&
@@ -186,7 +191,7 @@ export class OverflowLayoutService implements OnDestroy {
         let shouldHideItems = false;
 
         const showMoreContainerWidth = Math.ceil(this.config.showMoreContainer.getBoundingClientRect().width);
-        let layoutWidth = Math.ceil(this.config.layoutContainerElement.getBoundingClientRect().width);
+        let layoutWidth = containerWidth - showMoreContainerWidth;
 
         // Try to find all forced visible items
         const forcedItemsIndexes = this._getForcedItemsIndexes();
@@ -246,7 +251,7 @@ export class OverflowLayoutService implements OnDestroy {
         });
 
         let hiddenItems = allItems.filter((i) => i.hidden);
-        hiddenItems = !this.config.reverseHiddenItems ? hiddenItems.reverse() : hiddenItems;
+        hiddenItems = this.config.reverseHiddenItems ? hiddenItems.reverse() : hiddenItems;
         const visibleItems = allItems.filter((i) => !i.hidden);
 
         visibleItems.forEach((item, index) => {
@@ -275,9 +280,10 @@ export class OverflowLayoutService implements OnDestroy {
             return;
         }
         this._dir = this._rtlService?.rtl.value ? 'rtl' : 'ltr';
-        this._keyboardEventsManager = new FocusKeyManager(this._overflowItems)
+        this._keyboardEventsManager = new FocusKeyManager(this.config.focusableItems)
             .withWrap()
             .withHorizontalOrientation(this._dir)
+            .withVerticalOrientation()
             .skipPredicate((item) => !item.focusable || item.hidden);
     }
 
