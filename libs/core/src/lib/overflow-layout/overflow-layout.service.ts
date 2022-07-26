@@ -190,7 +190,7 @@ export class OverflowLayoutService implements OnDestroy {
         let fittingElmsWidth = 0;
         let shouldHideItems = false;
 
-        const showMoreContainerWidth = Math.ceil(this.config.showMoreContainer.getBoundingClientRect().width);
+        const showMoreContainerWidth = Math.ceil(this._getElementWidth(this.config.showMoreContainer));
         let layoutWidth = containerWidth - showMoreContainerWidth;
 
         // Try to find all forced visible items
