@@ -39,7 +39,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), AvatarModule, SharedDocumentationPageModule, BarModule, ComboboxModule, TitleModule],
+    imports: [
+        RouterModule.forChild(routes),
+        AvatarModule,
+        SharedDocumentationPageModule,
+        BarModule,
+        ComboboxModule,
+        TitleModule
+    ],
     exports: [RouterModule],
     declarations: [
         BarDocsComponent,
