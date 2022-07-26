@@ -4,7 +4,8 @@ import {
     EventEmitter,
     ViewEncapsulation,
     HostListener,
-    Output
+    Output,
+    ElementRef
 } from '@angular/core';
 
 /**
@@ -36,4 +37,14 @@ export class ActionSheetControlComponent {
     onClick(): void {
         this.clicked.emit();
     }
+
+    /**
+     * Root native element
+     */
+    get rootElement(): any {
+        return this._elementRef.nativeElement;
+    }
+
+    /** @hidden */
+    constructor(private readonly _elementRef: ElementRef) {}
 }
