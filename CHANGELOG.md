@@ -1,4 +1,11 @@
 
+### [0.35.4-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.0...v0.35.4-rc.1) (2022-07-26)
+
+
+### Bug Fixes
+
+* **docs:** add content-height ([#8451](https://github.com/SAP/fundamental-ngx/issues/8451)) ([0effbcc](https://github.com/SAP/fundamental-ngx/commit/0effbccf71b8ce68959bbd094674488d7c11732c))
+
 ### [0.35.4-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.35.3...v0.35.4-rc.0) (2022-07-25)
 
 
