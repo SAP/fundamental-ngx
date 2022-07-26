@@ -1,48 +1,48 @@
 import {
+    ChangeDetectorRef,
     Component,
-    ViewChild,
     ElementRef,
-    Input,
-    Output,
     EventEmitter,
-    ViewEncapsulation,
-    Optional,
-    SimpleChanges,
+    Input,
     OnChanges,
     OnDestroy,
-    ChangeDetectorRef
+    Output,
+    SimpleChanges,
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
-import { filter, take, takeUntil, tap } from 'rxjs/operators';
+import { take, tap } from 'rxjs/operators';
 
-import { uuidv4, ContentDensityEnum, ContentDensityService } from '@fundamental-ngx/core/utils';
-import { DialogService, DialogConfig } from '@fundamental-ngx/core/dialog';
-import { TableRowSelectionChangeEvent, ColumnAlign, SelectionMode } from '@fundamental-ngx/platform/table';
+import { uuidv4 } from '@fundamental-ngx/core/utils';
+import { DialogConfig, DialogService } from '@fundamental-ngx/core/dialog';
+import { ColumnAlign, SelectionMode, TableRowSelectionChangeEvent } from '@fundamental-ngx/platform/table';
 import { isDataSource } from '@fundamental-ngx/platform/shared';
 import { NewFolderComponent } from '../dialogs/new-folder/new-folder.component';
 import { MoveToComponent, MoveToComponentDialogData } from '../dialogs/move-to/move-to.component';
-import { FilesValidatorService, FilesValidatorOutput } from '../services/files-validator.service';
+import { FilesValidatorOutput, FilesValidatorService } from '../services/files-validator.service';
 import {
+    BreadcrumbList,
+    ItemPerPage,
+    Message,
+    MessageOptions,
+    MessageStripType,
+    MessageType,
     UploadCollectionFile,
     UploadCollectionFolder,
-    ItemPerPage,
     UploadCollectionItem,
-    UploadCollectionItemStatus,
-    Message,
-    MessageType,
-    BreadcrumbList,
-    MessageOptions,
-    MessageStripType
+    UploadCollectionItemStatus
 } from '../models/upload-collection.models';
 import {
-    TypeMismatchEvent,
     FilenameLengthExceedEvent,
     FileSizeExceedEvent,
     MoveToEvent,
+    TypeMismatchEvent,
     UpdateVersionEvent
 } from '../models/upload-collection-events.models';
 import { generateMessageStripeData } from '../helpers/generate-message-stripe-data';
 import { UploadCollectionDataSource } from '../domain/upload-collection-data-source';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 export type FdpUploadCollectionDataSource = UploadCollectionDataSource;
 let randomId = 0;
@@ -51,7 +51,8 @@ let randomId = 0;
     selector: 'fdp-upload-collection',
     templateUrl: './upload-collection.component.html',
     styleUrls: ['./upload-collection.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    providers: [contentDensityObserverProviders()]
 })
 export class UploadCollectionComponent implements OnChanges, OnDestroy {
     @Input()
@@ -106,10 +107,6 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
      */
     @Input()
     fileTypes: string[] = [];
-
-    /** The content density for which to render upload collection */
-    @Input()
-    contentDensity: ContentDensityEnum = ContentDensityEnum.COZY;
 
     /**
      * Specifies a file size limit in megabytes that prevents the upload
@@ -320,10 +317,8 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
         private readonly _dialogService: DialogService,
         private readonly _filesValidatorService: FilesValidatorService,
         private readonly _cdr: ChangeDetectorRef,
-        @Optional() private readonly _contentDensityService: ContentDensityService
-    ) {
-        this._trackContentDensityChanges();
-    }
+        readonly contentDensityObserver: ContentDensityObserver
+    ) {}
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -524,8 +519,7 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
                 items: this.dataSource.dataProvider.items,
                 currentFolder,
                 movableFolders: movableItems.filter((item) => item?.type === 'folder'),
-                maxFilenameLength: this.maxFilenameLength,
-                contentDensity: this.contentDensity
+                maxFilenameLength: this.maxFilenameLength
             } as MoveToComponentDialogData
         } as DialogConfig);
 
@@ -1098,21 +1092,6 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
                 delete item.sameFilenameState;
                 break;
             }
-        }
-    }
-
-    /** @hidden */
-    private _trackContentDensityChanges(): void {
-        if (this._contentDensityService) {
-            this._contentDensityService._contentDensityListener
-                .pipe(
-                    filter(() => !this._contentDensityManuallySet),
-                    takeUntil(this._onDestroy$)
-                )
-                .subscribe((density) => {
-                    this.contentDensity = density as ContentDensityEnum;
-                    this._cdr.markForCheck();
-                });
         }
     }
 }

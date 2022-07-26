@@ -7,11 +7,13 @@ import { Directive, forwardRef } from '@angular/core';
         fdp-action-bar[contentDensity],
         fdp-button[contentDensity],
         fdp-object-list-item[contentDensity],
+        fdp-menu[contentDensity],
         fdp-menu-button[contentDensity],
         fdp-panel[contentDensity],
         fdp-search-field[contentDensity],
         fdp-split-menu-button[contentDensity],
         fdp-file-uploader[contentDensity],
+        fdp-upload-collection[contentDensity],
     `,
     providers: [
         {

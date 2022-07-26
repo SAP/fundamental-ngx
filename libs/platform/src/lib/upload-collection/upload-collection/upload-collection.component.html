@@ -56,7 +56,6 @@
         <ng-container *ngIf="readonly || selectedItems.length === 0">
             <fd-input-group
                 *ngIf="showSearch"
-                [compact]="contentDensity | isCompactDensity"
                 [(ngModel)]="_searchText"
                 (ngModelChange)="_searchInputChanged()"
                 glyph="search"
@@ -70,7 +69,6 @@
                     fd-toolbar-item
                     fd-button
                     (click)="_openUploadFiles()"
-                    [compact]="contentDensity | isCompactDensity"
                     fdType="ghost"
                     [disabled]="disabled"
                     i18n-label="platformUploadCollection.Btn.Add"
@@ -83,7 +81,6 @@
                     fd-toolbar-item
                     fd-button
                     (click)="_openNewFolderDialog()"
-                    [compact]="contentDensity | isCompactDensity"
                     *ngIf="hierarchy"
                     [disabled]="disabled"
                     fdType="transparent"
@@ -100,7 +97,6 @@
                 fd-toolbar-item
                 fd-button
                 (click)="_moveToClicked(true)"
-                [compact]="contentDensity | isCompactDensity"
                 fdType="ghost"
                 [disabled]="disabled"
                 i18n-label="platformUploadCollection.Btn.MoveTo"
@@ -113,7 +109,6 @@
                 fd-button
                 (click)="_downloadClicked(true)"
                 fdType="ghost"
-                [compact]="contentDensity | isCompactDensity"
                 [disabled]="disabled"
                 *ngIf="_showIfSelectedOnlyFiles()"
                 i18n-label="platformUploadCollection.Btn.Download"
@@ -125,7 +120,6 @@
                 fd-toolbar-item
                 fd-button
                 (click)="_remove(true)"
-                [compact]="contentDensity | isCompactDensity"
                 fdType="ghost"
                 [disabled]="disabled"
                 i18n-label="platformUploadCollection.Btn.Remove"
@@ -202,7 +196,7 @@
                                             type="text"
                                             i18n-placeholder="platformUploadCollection.Edit.Input|Placeholder attribute"
                                             placeholder="Enter a name"
-                                            [compact]="contentDensity | isCompactDensity"
+                                            [compact]="contentDensityObserver.isCompact"
                                             [state]="item.sameFilenameState"
                                         />
                                         <span class="fdp-upload-collection__item_extension">{{
@@ -281,7 +275,7 @@
                                     i18n-title="platformUploadCollection.Btn.Run|Title attribute"
                                     title="Run"
                                     (click)="_runUploadNewFileAfterFail(item)"
-                                    [compact]="contentDensity | isCompactDensity"
+                                    [compact]="contentDensityObserver.isCompact"
                                     fdType="ghost"
                                     [disabled]="disabled"
                                     *ngIf="item.status === _uploadCollectionItemStatus.UNSUCCESSFUL"
@@ -294,7 +288,7 @@
                                     i18n-title="platformUploadCollection.Btn.Cancel|Title attribute"
                                     title="Cancel"
                                     fdType="negative"
-                                    [compact]="contentDensity | isCompactDensity"
+                                    [compact]="contentDensityObserver.isCompact"
                                     fdType="ghost"
                                     [disabled]="disabled"
                                     (click)="_cancelUploadNewFile(item)"
@@ -385,7 +379,7 @@
     </div>
 </div>
 
-<fdp-menu #itemsPerPageMenu xPosition="before" [contentDensity]="contentDensity">
+<fdp-menu #itemsPerPageMenu xPosition="before">
     <fdp-menu-item
         *ngFor="let value of _itemsPerPageOptions"
         (itemSelect)="_itemsPerPageChange(value.label)"
@@ -395,7 +389,7 @@
     </fdp-menu-item>
 </fdp-menu>
 
-<fdp-menu #menuActions xPosition="before" [contentDensity]="contentDensity">
+<fdp-menu #menuActions xPosition="before">
     <fdp-menu-item (itemSelect)="_moveToClicked()">
         <fd-icon
             class="fdp-upload-collection__fd-icon"

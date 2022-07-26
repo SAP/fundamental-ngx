@@ -28,6 +28,7 @@ import { UploadCollectionDragnDropDirective } from './directives/upload-collecti
 import { UploadCollectionComponent } from './upload-collection/upload-collection.component';
 import { NewFolderComponent } from './dialogs/new-folder/new-folder.component';
 import { MoveToComponent } from './dialogs/move-to/move-to.component';
+import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/content-density-deprecations';
 
 @NgModule({
     declarations: [UploadCollectionComponent, NewFolderComponent, MoveToComponent, UploadCollectionDragnDropDirective],
@@ -54,8 +55,9 @@ import { MoveToComponent } from './dialogs/move-to/move-to.component';
         ListModule,
         PlatformPipeModule,
         PlatformMenuButtonModule,
-        RouterModule
+        RouterModule,
+        PlatformContentDensityDeprecationsModule
     ],
-    exports: [UploadCollectionComponent]
+    exports: [UploadCollectionComponent, PlatformContentDensityDeprecationsModule]
 })
 export class PlatformUploadCollectionModule {}

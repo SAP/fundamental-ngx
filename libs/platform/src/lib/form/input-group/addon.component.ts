@@ -102,7 +102,7 @@ export class InputGroupAddonComponent implements AfterContentInit {
             return;
         }
 
-        button.contentDensity = this._contentDensity;
+        // button.contentDensity = this._contentDensity;
         button.disabled = this._disabled;
 
         button.markForCheck();
