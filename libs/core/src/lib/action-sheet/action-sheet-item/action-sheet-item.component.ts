@@ -75,6 +75,13 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     /** @hidden */
     constructor(private readonly _elementRef: ElementRef) {}
 
+    /**
+     * Root native element
+     */
+    get rootElement(): any {
+        return this._elementRef.nativeElement;
+    }
+
     /** @hidden */
     @HostListener('keydown', ['$event'])
     keydownHandler(event: KeyboardEvent): void {
