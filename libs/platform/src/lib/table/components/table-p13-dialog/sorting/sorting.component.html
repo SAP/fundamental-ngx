@@ -41,10 +41,10 @@
                 [compact]="dialogRef.data.tableContentDensity | isCompactDensity"
                 [placeholder]="'platformTable.P13SortDialogNoneSelectedSorting' | fdTranslate"
             >
-                <li fd-option [value]="SORT_DIRECTION.ASC" i18n="@@platformTableP13SortDialogSortOrderAsc">
+                <li fd-option [value]="SORT_DIRECTION.ASC">
                     {{ 'platformTable.P13SortDialogSortOrderSelectOptionAsc' | fdTranslate }}
                 </li>
-                <li fd-option [value]="SORT_DIRECTION.DESC" i18n="@@platformTableP13SortDialogSortOrderDesc">
+                <li fd-option [value]="SORT_DIRECTION.DESC">
                     {{ 'platformTable.P13SortDialogSortOrderSelectOptionDesc' | fdTranslate }}
                 </li>
             </fd-select>

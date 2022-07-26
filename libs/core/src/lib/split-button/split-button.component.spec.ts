@@ -5,6 +5,7 @@ import { SplitButtonComponent, splitButtonTextClass, splitButtonTextCompactClass
 import { MenuModule } from '../menu/menu.module';
 import { ButtonModule } from '../button/button.module';
 import createSpy = jasmine.createSpy;
+import { I18nModule } from '@fundamental-ngx/i18n';
 
 @Component({
     selector: 'fd-test-component',
@@ -39,7 +40,7 @@ describe('SplitButtonComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [MenuModule, ButtonModule],
+                imports: [MenuModule, ButtonModule, I18nModule],
                 declarations: [SplitButtonComponent, TestComponent]
             });
         })
