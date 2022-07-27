@@ -100,6 +100,20 @@ function addStylePathToConfig(options: any): Rule {
                 'styles'
             ] as (string | AngularStyleObject)[];
 
+            if (
+                !stylesArray.find(
+                    (style) =>
+                        (typeof style === 'object' && style.bundleName === 'fd_default_font_icons') ||
+                        style === `${sourceRoot}/theming/${themeFontFiles[0]}.css`
+                )
+            ) {
+                stylesArray.push({
+                    input: `${sourceRoot}/theming/${themeFontFiles[0]}.css`,
+                    inject: true,
+                    bundleName: 'fd_default_font_icons'
+                });
+            }
+
             themeFontFiles.forEach((fontStyle) => {
                 if (!stylesArray.find((style) => typeof style === 'object' && style.bundleName === `${fontStyle}`)) {
                     stylesArray.push({
