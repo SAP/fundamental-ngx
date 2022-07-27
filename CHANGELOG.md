@@ -1,4 +1,11 @@
 
+### [0.35.4-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.1...v0.35.4-rc.2) (2022-07-27)
+
+
+### Bug Fixes
+
+* **platform:** fix list keyboard navigation ([#8454](https://github.com/SAP/fundamental-ngx/issues/8454)) ([57e75cf](https://github.com/SAP/fundamental-ngx/commit/57e75cfde906023275224ab4bb5e7df5cfbf4d07))
+
 ### [0.35.4-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.0...v0.35.4-rc.1) (2022-07-26)
 
 
