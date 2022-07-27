@@ -7,10 +7,11 @@ import { RadioModule } from '@fundamental-ngx/core/radio';
 import { PipeModule } from '@fundamental-ngx/core/utils';
 import { RadioGroupComponent } from './radio-group.component';
 import { RadioButtonComponent } from './radio/radio.component';
+import { PlatformContentDensityDeprecationsModule } from "@fundamental-ngx/platform/content-density-deprecations";
 
 @NgModule({
-    imports: [CommonModule, FdFormModule, FormsModule, RadioModule, ReactiveFormsModule, PipeModule],
-    exports: [RadioGroupComponent, RadioButtonComponent],
+    imports: [CommonModule, FdFormModule, FormsModule, RadioModule, ReactiveFormsModule, PipeModule, PlatformContentDensityDeprecationsModule],
+    exports: [RadioGroupComponent, RadioButtonComponent, PlatformContentDensityDeprecationsModule],
     declarations: [RadioGroupComponent, RadioButtonComponent]
 })
 export class PlatformRadioGroupModule {}

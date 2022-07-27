@@ -21,9 +21,9 @@
 <br />
 
 <h3>Binary Checkbox in Reactive/Model Driven Form</h3>
-<fdp-form-group [formGroup]="customForm" [object]="data">
+<fdp-form-group [formGroup]="customForm" [object]="data" fdCompact>
     <fdp-form-field #red id="red" label="Red" [rank]="4">
-        <fdp-checkbox name="red-cb" title="Red" contentDensity="compact" [formControl]="red.formControl">
+        <fdp-checkbox name="red-cb" title="Red" [formControl]="red.formControl">
         </fdp-checkbox>
     </fdp-form-field>
 
@@ -31,7 +31,6 @@
         <fdp-checkbox
             name="blue-cb"
             title="Blue"
-            contentDensity="compact"
             [formControl]="blue.formControl"
         ></fdp-checkbox>
     </fdp-form-field>
@@ -40,7 +39,6 @@
         <fdp-checkbox
             name="green-cb"
             title="Green"
-            contentDensity="compact"
             [formControl]="green.formControl"
         ></fdp-checkbox>
     </fdp-form-field>
@@ -49,8 +47,8 @@
 <div style="padding-left: 2rem">form value: {{ customForm.getRawValue() | json }}</div>
 
 <h3>Disabled Checkbox</h3>
-<fdp-form-group>
+<fdp-form-group fdCompact>
     <fdp-form-field #disabled id="disabled" label="Red" [rank]="1">
-        <fdp-checkbox name="disabled-cb" title="Red" contentDensity="compact" [disabled]="true"></fdp-checkbox>
+        <fdp-checkbox name="disabled-cb" title="Red" [disabled]="true"></fdp-checkbox>
     </fdp-form-field>
 </fdp-form-group>

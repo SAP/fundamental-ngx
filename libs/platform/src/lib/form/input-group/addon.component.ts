@@ -49,15 +49,6 @@ export const inputGroupAddonChildProvider: Provider = {
 })
 export class InputGroupAddonComponent implements AfterContentInit {
     /** @hidden */
-    set contentDensity(contentDensity: ContentDensity) {
-        this._contentDensity = contentDensity;
-        this._setButtonControlOptions();
-    }
-    get contentDensity(): ContentDensity {
-        return this._contentDensity;
-    }
-
-    /** @hidden */
     set disabled(disabled: boolean) {
         this._disabled = disabled;
         this._setButtonControlOptions();
@@ -79,9 +70,6 @@ export class InputGroupAddonComponent implements AfterContentInit {
     set buttonElementRef(buttonComponentElementRef: ElementRef<HTMLElement>) {
         this._setButtonElementClass(buttonComponentElementRef?.nativeElement);
     }
-
-    /** @hidden */
-    private _contentDensity: ContentDensity;
 
     /** @hidden */
     private _disabled = false;

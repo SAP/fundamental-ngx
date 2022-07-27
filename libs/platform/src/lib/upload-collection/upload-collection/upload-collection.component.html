@@ -150,7 +150,6 @@
                 *ngIf="_visibleList.length > 0"
                 [dataSource]="_visibleList"
                 [loading]="dataSource?.isDataLoading"
-                [contentDensity]="contentDensity"
                 selectionMode="multiple"
                 emptyTableMessage=""
                 [noHorizontalBorders]="true"
@@ -196,7 +195,6 @@
                                             type="text"
                                             i18n-placeholder="platformUploadCollection.Edit.Input|Placeholder attribute"
                                             placeholder="Enter a name"
-                                            [compact]="contentDensityObserver.isCompact"
                                             [state]="item.sameFilenameState"
                                         />
                                         <span class="fdp-upload-collection__item_extension">{{
@@ -275,7 +273,6 @@
                                     i18n-title="platformUploadCollection.Btn.Run|Title attribute"
                                     title="Run"
                                     (click)="_runUploadNewFileAfterFail(item)"
-                                    [compact]="contentDensityObserver.isCompact"
                                     fdType="ghost"
                                     [disabled]="disabled"
                                     *ngIf="item.status === _uploadCollectionItemStatus.UNSUCCESSFUL"
@@ -287,8 +284,6 @@
                                     label="Cancel"
                                     i18n-title="platformUploadCollection.Btn.Cancel|Title attribute"
                                     title="Cancel"
-                                    fdType="negative"
-                                    [compact]="contentDensityObserver.isCompact"
                                     fdType="ghost"
                                     [disabled]="disabled"
                                     (click)="_cancelUploadNewFile(item)"
@@ -298,7 +293,6 @@
 
                             <fdp-menu-button
                                 icon="overflow"
-                                [contentDensity]="contentDensity"
                                 [disabled]="disabled"
                                 type="transparent"
                                 i18n-title="platformUploadCollection.MenuBtn.More|Title attribute"
@@ -360,16 +354,16 @@
             <!-- Results per page -->
             <div class="fdp-upload-collection__results">
                 <span class="fdp-upload-collection__results--title">
-                    <span [id]="id + '-results'" i18n="@@platformUploadCollection.ResultsPerPage.Title"
-                        >Results per page</span
-                    >
+                    <span [id]="id + '-results'"
+                          i18n="@@platformUploadCollection.ResultsPerPage.Title">
+                        Results per page
+                    </span>
                     <span *ngIf="_itemsPerPageOptions.length === 0" [innerText]="_itemsPerPage"></span>
                 </span>
                 <fdp-menu-button
                     *ngIf="_itemsPerPageOptions.length > 0"
                     type="ghost"
                     [ariaLabelledBy]="id + '-results'"
-                    [contentDensity]="contentDensity"
                     [fdpMenuTriggerFor]="itemsPerPageMenu"
                     [label]="_itemsPerPage + ''"
                 >

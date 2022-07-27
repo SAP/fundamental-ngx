@@ -1,6 +1,6 @@
 <div class="fd-input-group" [class.is-disabled]="disabled" [class]="_controlStateClass">
     <!-- Before input addons area -->
-    <fdp-input-group-addon-body *ngFor="let addon of _beforeInputAddons" [contentDensity]="contentDensity">
+    <fdp-input-group-addon-body *ngFor="let addon of _beforeInputAddons">
         <ng-container *ngTemplateOutlet="addon.contentTemplateRef"></ng-container>
     </fdp-input-group-addon-body>
 
@@ -10,7 +10,6 @@
             [name]="name"
             [id]="id"
             [placeholder]="placeholder"
-            [contentDensity]="contentDensity"
             [type]="_input.type"
             [disabled]="disabled"
             [value]="value"
@@ -26,7 +25,6 @@
     <!-- After input addons area -->
     <fdp-input-group-addon-body
         *ngFor="let addon of _afterInputAddons"
-        [contentDensity]="contentDensity"
         [hasButton]="!!addon.button"
     >
         <ng-container *ngTemplateOutlet="addon.contentTemplateRef"></ng-container>

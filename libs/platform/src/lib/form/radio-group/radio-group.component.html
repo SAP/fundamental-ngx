@@ -15,7 +15,6 @@
                         context: {
                             name: name,
                             value: radio.value,
-                            contentDensity: contentDensity,
                             state: state,
                             disabled: disabled || radio.disabled,
                             ariaLabel: radio.ariaLabel,
@@ -39,7 +38,6 @@
             <fdp-radio-button
                 [name]="name"
                 value="None"
-                [contentDensity]="contentDensity"
                 [state]="state"
                 [disabled]="disabled"
                 [forceRender]="true"
@@ -53,7 +51,6 @@
             <fdp-radio-button
                 [name]="name"
                 [value]="lookupValue(item)"
-                [contentDensity]="contentDensity"
                 [state]="state"
                 [disabled]="_getListItemDisabledValue(item)"
                 [forceRender]="true"

@@ -3,6 +3,8 @@ import { BehaviorSubject } from 'rxjs';
 import { ContentDensityMode } from '../content-density.types';
 import { ModuleDeprecation } from '@fundamental-ngx/core/utils';
 
+const warnedSelectorBases = new Set<string>();
+
 /**
  * Directive decorator is only for allowing @Input
  */
@@ -14,8 +16,9 @@ export class DeprecatedContentDensityDirective
     /** @deprecated use fdCompact directive instead */
     @Input()
     set contentDensity(value: any) {
-        if (isDevMode()) {
+        if (isDevMode() && !warnedSelectorBases.has(this.selectorBase)) {
             console.warn(`${this.message}. Use [fd${capitalize(value)}] or [fdContentDensity] directives instead.`);
+            warnedSelectorBases.add(this.selectorBase);
         }
         this.next(value);
     }

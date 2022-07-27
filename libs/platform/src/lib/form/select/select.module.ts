@@ -14,6 +14,7 @@ import { PipeModule } from '@fundamental-ngx/core/utils';
 import { SelectComponent } from './select/select.component';
 import { PlatformAutoCompleteModule } from '../auto-complete/auto-complete.module';
 import { OptionComponent } from './option/option.component';
+import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/content-density-deprecations';
 
 @NgModule({
     declarations: [SelectComponent, OptionComponent],
@@ -28,9 +29,10 @@ import { OptionComponent } from './option/option.component';
         PopoverModule,
         IconModule,
         ReactiveFormsModule,
-        SelectModule
+        SelectModule,
+        PlatformContentDensityDeprecationsModule
     ],
     providers: [DynamicComponentService],
-    exports: [SelectComponent, OptionComponent, TemplateModule]
+    exports: [SelectComponent, OptionComponent, TemplateModule, PlatformContentDensityDeprecationsModule]
 })
 export class PlatformSelectModule {}

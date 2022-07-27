@@ -1,6 +1,5 @@
 import { EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ContentDensity } from '@fundamental-ngx/core/utils';
 
 import { SaveRowsEvent } from './interfaces/save-rows-event.interface';
 import { TableState } from './interfaces/table-state.interface';
@@ -10,6 +9,7 @@ import { CollectionGroup } from './interfaces/collection-group.interface';
 import { SearchInput } from './interfaces/search-field.interface';
 import { TableColumn } from './components/table-column/table-column';
 import { TableDataSource } from './domain';
+import { ContentDensityMode } from "@fundamental-ngx/core/content-density";
 
 export abstract class Table<T = any> {
     /** Sum of widths of fixed columns (semantic highlighting, selection) */
@@ -22,7 +22,7 @@ export abstract class Table<T = any> {
     abstract get _tableWidthPx(): number;
 
     /** The content density for which to render table. 'cozy' | 'compact' | 'condensed' */
-    abstract get contentDensity(): ContentDensity;
+    abstract get contentDensity(): ContentDensityMode;
 
     /** Table columns definition list */
     abstract readonly tableColumnsStream: Observable<TableColumn[]>;

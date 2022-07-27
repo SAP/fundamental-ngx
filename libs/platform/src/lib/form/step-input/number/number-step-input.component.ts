@@ -19,6 +19,7 @@ import { RtlService } from '@fundamental-ngx/core/utils';
 import { FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
 import { StepInputChangeEvent, StepInputComponent } from '../base.step-input';
 import { StepInputConfig } from '../step-input.config';
+import { ContentDensityObserver, contentDensityObserverProviders } from "@fundamental-ngx/core/content-density";
 
 /**
  * Fundamental number-step-input component
@@ -41,7 +42,8 @@ import { StepInputConfig } from '../step-input.config';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         { provide: FormFieldControl, useExisting: NumberStepInputComponent, multi: true },
-        { provide: StepInputComponent, useExisting: NumberStepInputComponent }
+        { provide: StepInputComponent, useExisting: NumberStepInputComponent },
+        contentDensityObserverProviders()
     ]
 })
 export class NumberStepInputComponent extends StepInputComponent {
@@ -58,7 +60,8 @@ export class NumberStepInputComponent extends StepInputComponent {
         config: StepInputConfig,
         renderer: Renderer2,
         @Optional() rtlService: RtlService,
-        @Inject(LOCALE_ID) readonly localeId: string
+        @Inject(LOCALE_ID) readonly localeId: string,
+        readonly contentDensityObserver: ContentDensityObserver
     ) {
         super(cd, ngControl, ngForm, formField, formControl, config, renderer, rtlService);
     }

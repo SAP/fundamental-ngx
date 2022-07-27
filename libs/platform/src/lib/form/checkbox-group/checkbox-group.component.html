@@ -16,7 +16,6 @@
                         source: 'contentChildren',
                         name: name,
                         checkboxValue: checkbox.coreCheckbox?.values?.trueValue,
-                        contentDensity: contentDensity,
                         labeltext: checkbox.label,
                         disabled: disabled || checkbox.disabled,
                         ariaLabel: checkbox.ariaLabel,
@@ -45,7 +44,6 @@
                     source: 'list',
                     name: name,
                     checkboxValue: getLookupValue(item),
-                    contentDensity: contentDensity,
                     labeltext: getDisplayValue(item),
                     disabled: getListItemDisabledValue(item)
                 }
@@ -79,7 +77,6 @@
         [ariaLabelledBy]="ariaLabelledBy"
         [ariaDescribedBy]="ariaDescribedBy"
         [title]="title"
-        [contentDensity]="contentDensity"
         [disabled]="checkboxDisabled"
         [state]="state"
         [ngModel]="_selectionModel.isSelected(checkboxValue) ? checkboxValue : false"

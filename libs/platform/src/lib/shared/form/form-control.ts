@@ -30,10 +30,10 @@ export abstract class FormFieldControl<T> {
      */
     editable: boolean;
 
-    /**
-     *  Components works in two sizes compact or cozy
-     */
-    contentDensity: ContentDensity;
+    // /**
+    //  *  Components works in two sizes compact or cozy
+    //  */
+    // contentDensity: ContentDensity;
 
     /**
      * The height of the extra content at the bottom of the form control,

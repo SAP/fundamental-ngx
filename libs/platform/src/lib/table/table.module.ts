@@ -72,6 +72,7 @@ import { TableCellStylesPipe } from './pipes/cell-styles.pipe';
 import { SelectionCellStylesPipe } from './pipes/selection-cell-styles.pipe';
 import { RowClassesPipe } from './pipes/row-classes.pipe';
 import { ColumnResizableSidePipe } from './pipes/column-resizable-side.pipe';
+import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/content-density-deprecations';
 
 const EXPORTABLE_DECLARATIONS = [
     TableComponent,
@@ -146,9 +147,10 @@ const EXPORTABLE_DECLARATIONS = [
         DragAndDropModule,
         ScrollbarModule,
         PlatformDatePickerModule,
-        PlatformSwitchModule
+        PlatformSwitchModule,
+        PlatformContentDensityDeprecationsModule
     ],
     declarations: [...EXPORTABLE_DECLARATIONS],
-    exports: [...EXPORTABLE_DECLARATIONS]
+    exports: [...EXPORTABLE_DECLARATIONS, PlatformContentDensityDeprecationsModule]
 })
 export class PlatformTableModule {}

@@ -1,6 +1,6 @@
-import { ContentDensity } from '@fundamental-ngx/core/utils';
+import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 
 /** Common properties for table dialogs */
 export interface TableDialogCommonData {
-    tableContentDensity: ContentDensity;
+    tableContentDensity: ContentDensityMode;
 }
