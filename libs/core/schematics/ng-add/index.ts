@@ -219,6 +219,9 @@ function addStylePathToConfig(options: any): Rule {
         tree.overwrite(angularConfigPath, JSON.stringify(workspaceJson, null, 2));
 
         context.logger.info(`✅️ Added fundamental-styles path to angular.json.`);
+        context.logger.info(`
+        ❔Learn more how to enable theming for your application here: https://sap.github.io/fundamental-ngx/#/core/theming
+        `);
 
         return tree;
     };
@@ -252,7 +255,8 @@ function addFontsToStyles(options: any): Rule {
                 let fontsImported = false;
 
                 Object.keys(defaultStyles).forEach((font) => {
-                    if (stylesFileString.match(FONT_FACE_REGEX).filter((match) => match.includes(font)).length === 0) {
+                    const matches = stylesFileString.match(FONT_FACE_REGEX);
+                    if (!matches || matches.filter((match) => match.includes(font)).length === 0) {
                         stylesFileString = stylesFileString + (defaultStyles[font] as string);
                         fontsImported = true;
                     }
