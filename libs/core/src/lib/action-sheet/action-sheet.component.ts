@@ -118,7 +118,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     /** @hidden */
     ngAfterContentInit(): void {
         this._initializeChildrenState();
-        this._keyboardSupportService.setKeyboardService(this.actionSheetItems, false);
+        this._keyboardSupportService.setKeyboardService(this.actionSheetItems, true);
         this._listenOnItemsChange();
         this._actionControlHandle();
     }

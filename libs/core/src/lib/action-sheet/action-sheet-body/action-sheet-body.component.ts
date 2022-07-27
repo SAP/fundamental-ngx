@@ -1,11 +1,9 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    ContentChildren,
     ElementRef,
     HostListener,
     Input,
-    QueryList,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
@@ -57,25 +55,12 @@ export class ActionSheetBodyComponent {
     ariaLabelledby: Nullable<string>;
 
     @ViewChild('actionSheetElement') actionSheetElementRef: ElementRef<HTMLUListElement>;
-    /** @hidden */
-    @ContentChildren(ActionSheetItemComponent, { descendants: true })
-    actionSheetItems: QueryList<ActionSheetItemComponent>;
 
     /** @hidden */
     constructor(
         private readonly _keyboardSupportService: KeyboardSupportService<ActionSheetItemComponent>,
         readonly _contentDensityObserver: ContentDensityObserver
     ) {}
-
-    getItemIndex(event: KeyboardEvent): number {
-        const index = this.actionSheetItems.toArray().findIndex((item) => item.rootElement.firstChild === event.target);
-        return index;
-    }
-
-    /** @hidden Set fake focus on element with passed index */
-    private _setItemActive(index: number): void {
-        this._keyboardSupportService.keyManager?.setActiveItem(index);
-    }
 
     /** Handler for mouse events */
     @HostListener('click', ['$event'])
@@ -88,18 +73,14 @@ export class ActionSheetBodyComponent {
     keyDownHandler(event: KeyboardEvent): void {
         if (this._keyboardSupportService.keyManager) {
             this._keyboardSupportService.onKeyDown(event);
-        }
 
-        if (event.shiftKey && KeyUtil.isKeyCode(event, TAB)) {
-            event.preventDefault();
-            const index = this.getItemIndex(event);
-            const prevIndex = index === 0 ? this.actionSheetItems.toArray().length - 1 : index - 1;
-            this._setItemActive(prevIndex);
-        } else if (KeyUtil.isKeyCode(event, TAB)) {
-            event.preventDefault();
-            const index = this.getItemIndex(event);
-            const nextIndex = index === this.actionSheetItems.toArray().length - 1 ? 0 : index + 1;
-            this._setItemActive(nextIndex);
+            if (event.shiftKey && KeyUtil.isKeyCode(event, TAB)) {
+                event.preventDefault();
+                this._keyboardSupportService.keyManager?.setPreviousItemActive();
+            } else if (KeyUtil.isKeyCode(event, TAB)) {
+                event.preventDefault();
+                this._keyboardSupportService.keyManager?.setNextItemActive();
+            }
         }
     }
 }
