@@ -172,7 +172,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         if (isOpen) {
             this._setItemActive(0);
         } else {
-            this.actionSheetControl.rootElement.firstChild.focus();
+            this.actionSheetControl.focus();
         }
 
         this._changeDetectionRef.detectChanges();

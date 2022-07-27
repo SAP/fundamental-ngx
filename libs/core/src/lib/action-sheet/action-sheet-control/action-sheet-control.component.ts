@@ -38,11 +38,9 @@ export class ActionSheetControlComponent {
         this.clicked.emit();
     }
 
-    /**
-     * Root native element
-     */
-    get rootElement(): any {
-        return this._elementRef.nativeElement;
+    /** @hidden */
+    focus(): void {
+        this._elementRef.nativeElement.firstChild.focus();
     }
 
     /** @hidden */
