@@ -10,9 +10,9 @@ export class PlatformI18nTranslationCustomizationExampleComponent {
     /** part of the language object to be overriden using `fdPatchLanguage` directive */
     languagePatch: FdLanguagePatch = {
         platformTextarea: {
-            // it's possible to partially override translations for component
-            // overriding only 3 out of all translation strings for textarea here
-            // also function can be used to provide complex translation logic
+            // It's possible to partially override some translations for a specific component
+            // Here we are overriding three translations. These values can be found in the FdpTextArea documentation
+            // The third translation shows an example of more complex translation logic
             counterMessageCharactersOverTheLimitSingular: '1 znak powyżej limitu',
             counterMessageCharactersRemainingSingular: 'Pozostał 1 znak',
             counterMessageCharactersRemainingPlural: (params) => {

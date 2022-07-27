@@ -1,9 +1,7 @@
 <fd-docs-section-title id="basic" componentName="i18n"> Basic usage </fd-docs-section-title>
 <description>
-    If your app is in English, you don't have to do anything - components will load English language by default. In
-    order to use any other language, you will need to provide an object, that implements <code>FdLanguage</code>
-    interface in the root of your app.
-
+    Components will load the English language by default. In order to use any other language, you will need to provide
+    an object that implements the <code>FdLanguage</code> interface in the root of your app.
     <fd-code-snippet [file]="basicUsageExample"></fd-code-snippet>
 </description>
 
@@ -13,14 +11,18 @@
     Customizing language per component
 </fd-docs-section-title>
 <description>
-    <p>In order to provide language customizations per component, use <code>fdLanguagePatch</code> directive.</p>
     <p>
-        Also it's possible to easily override global language for a certain component by providing
-        <code>FD_LANGUAGE</code> token at any child scope. Use <code>patchLanguage</code> utility function for this.
+        In order to provide language customizations on a component-by-component basis, use the
+        <code>fdLanguagePatch</code> directive. You will also need to import the
+        <code>@fundamental-ngx/i18n</code> module.
     </p>
     <p>
-        <b>Note:</b> you should understand that providing an injection token in a certain module will affect the scope,
-        were this module is imported. Thus it's recommended to provide overrides on the level of components or lazy
+        It is also possible to easily override the global language for a certain component by providing
+        <code>FD_LANGUAGE</code> token at any child scope. Use the <code>patchLanguage</code> utility function for this.
+    </p>
+    <p>
+        <b>Note:</b> you should understand that providing an injection token in a certain module will affect the scope
+        where this module is imported. Thus it's recommended to provide overrides on the level of components or lazy
         loaded modules.
     </p>
 </description>
@@ -33,8 +35,8 @@
 <fd-docs-section-title id="language-change" componentName="i18n"> Changing languages at runtime </fd-docs-section-title>
 <description>
     <p>
-        <code>FD_LANGUAGE</code> token is an observable, which means you can change the language at runtime using your
-        own logic.
+        The <code>FD_LANGUAGE</code> token is an observable, which means you can change the language at runtime using
+        your own logic.
     </p>
     <p>
         In this particular example such capabilities are shown on the level of a component due to the limitations of the
@@ -53,9 +55,9 @@
 </fd-docs-section-title>
 <description>
     <p>
-        Although <code>fundamental-ngx</code> library provide rich set of languages to work with out of the box, it's
-        possible to also define own languages when needed. The language object is just a set of key/values, that are
-        defined per component. This object should implement <code>FdLanguage</code> interface.
+        Although <code>fundamental-ngx</code> library provides a rich set of languages to work with out of the box, it's
+        possible to also define your own languages when needed. The language object is just a set of key/values, that
+        are defined per component. This object should implement <code>FdLanguage</code> interface.
     </p>
     <p>
         You may provide both strings with interpolation using double curly brackets (<code>
@@ -63,9 +65,9 @@
         >) or functions as language values.
     </p>
     <p>
-        The list of available keys can be found in the corresponding docs section of each component (I18n section is
-        visible only for the components that have translations). You also can find there English value for each
-        translation property.
+        The list of available keys can be found in the corresponding docs section of each component. The I18n section is
+        visible only for the components that have translations. The default English value for each translation is also
+        in this documentation.
     </p>
 
     <fd-code-snippet [file]="translationExample"></fd-code-snippet>
