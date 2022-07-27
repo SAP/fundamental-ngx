@@ -1,4 +1,11 @@
 
+### [0.35.4-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.4...v0.35.4-rc.5) (2022-07-27)
+
+
+### Bug Fixes
+
+* **core:** export missing types ([#8463](https://github.com/SAP/fundamental-ngx/issues/8463)) ([8030575](https://github.com/SAP/fundamental-ngx/commit/8030575947e13abaa3390316b3ba196f14c37526))
+
 ### [0.35.4-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.3...v0.35.4-rc.4) (2022-07-27)
 
 
