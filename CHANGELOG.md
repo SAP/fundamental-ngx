@@ -1,4 +1,11 @@
 
+### [0.35.4-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.3...v0.35.4-rc.4) (2022-07-27)
+
+
+### Bug Fixes
+
+* **core:** fix theming schematics ([#8459](https://github.com/SAP/fundamental-ngx/issues/8459)) ([65a8f76](https://github.com/SAP/fundamental-ngx/commit/65a8f76133a59993b46009f1ef5317005813dc71))
+
 ### [0.35.4-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.2...v0.35.4-rc.3) (2022-07-27)
 
 ### [0.35.4-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.1...v0.35.4-rc.2) (2022-07-27)
