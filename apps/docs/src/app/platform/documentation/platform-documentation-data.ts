@@ -6,7 +6,8 @@ import {
 
 export const guides: SectionInterfaceContent[] = [
     { url: 'platform/home', name: 'Home' },
-    { url: 'platform/new-component', name: 'New Component' }
+    { url: 'platform/new-component', name: 'New Component' },
+    { url: 'platform/i18n', name: 'I18n' }
 ];
 
 export const components: SectionInterfaceContent[] = [
@@ -67,8 +68,7 @@ export const layouts: SectionInterfaceContent[] = [
 
 export const utilities: SectionInterfaceContent[] = [
     { url: 'platform/form-generator', name: 'Form Generator' },
-    { url: 'platform/wizard-generator', name: 'Wizard Generator' },
-    { url: 'platform/i18n', name: 'I18n' }
+    { url: 'platform/wizard-generator', name: 'Wizard Generator' }
 ];
 
 export const sections: SectionInterface[] = [
