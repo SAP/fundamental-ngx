@@ -2,6 +2,9 @@
   "name": "@fundamental-ngx/core",
   "version": "VERSION_PLACEHOLDER",
   "schematics": "./schematics/collection.json",
+  "ng-update": {
+    "migrations": "./schematics/migrations.json"
+  },
   "description": "Fundamental Library for Angular - core",
   "license": "Apache-2.0",
   "homepage": "https://sap.github.io/fundamental-ngx/home",
