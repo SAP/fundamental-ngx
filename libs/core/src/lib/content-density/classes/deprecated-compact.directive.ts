@@ -15,6 +15,9 @@ export class DeprecatedCompactDirective
     /** @deprecated use fdCompact directive instead */
     @Input()
     set compact(value: BooleanInput) {
+        if (isDevMode()) {
+            console.warn(`${this.message}. Use [fdCompact] directive instead.`);
+        }
         this.next(coerceBooleanProperty(value) ? ContentDensityMode.COMPACT : ContentDensityMode.COZY);
     }
 
@@ -27,9 +30,6 @@ export class DeprecatedCompactDirective
     constructor(selectorBase: string) {
         super(ContentDensityMode.COZY);
         this.message = `Usage of ${selectorBase}[compact] is deprecated`;
-        if (isDevMode()) {
-            console.warn(`${this.message}. Use [fdCompact] directive instead.`);
-        }
     }
 
     ngOnDestroy(): void {

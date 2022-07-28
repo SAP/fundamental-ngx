@@ -14,6 +14,9 @@ export class DeprecatedCozyDirective
 {
     @Input()
     set cozy(value: BooleanInput) {
+        if (isDevMode()) {
+            console.warn(`${this.message}. Use [fdCozy] directive instead.`);
+        }
         this.next(coerceBooleanProperty(value) ? ContentDensityMode.COZY : ContentDensityMode.COMPACT);
     }
 
@@ -26,9 +29,6 @@ export class DeprecatedCozyDirective
     constructor(selectorBase: string) {
         super(ContentDensityMode.COMPACT);
         this.message = `Usage of ${selectorBase}[cozy] is deprecated`;
-        if (isDevMode()) {
-            console.warn(`${this.message}. Use [fdCozy] directive instead.`);
-        }
     }
 
     ngOnDestroy(): void {
