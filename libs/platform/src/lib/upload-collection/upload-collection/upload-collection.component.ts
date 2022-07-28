@@ -42,7 +42,6 @@ import {
 } from '../models/upload-collection-events.models';
 import { generateMessageStripeData } from '../helpers/generate-message-stripe-data';
 import { UploadCollectionDataSource } from '../domain/upload-collection-data-source';
-import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 export type FdpUploadCollectionDataSource = UploadCollectionDataSource;
 let randomId = 0;
@@ -51,8 +50,7 @@ let randomId = 0;
     selector: 'fdp-upload-collection',
     templateUrl: './upload-collection.component.html',
     styleUrls: ['./upload-collection.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    providers: [contentDensityObserverProviders()]
+    encapsulation: ViewEncapsulation.None
 })
 export class UploadCollectionComponent implements OnChanges, OnDestroy {
     @Input()
@@ -316,8 +314,7 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
     constructor(
         private readonly _dialogService: DialogService,
         private readonly _filesValidatorService: FilesValidatorService,
-        private readonly _cdr: ChangeDetectorRef,
-        readonly contentDensityObserver: ContentDensityObserver
+        private readonly _cdr: ChangeDetectorRef
     ) {}
 
     /** @hidden */

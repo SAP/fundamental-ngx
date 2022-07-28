@@ -17,18 +17,19 @@ import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { PaginationModule } from '@fundamental-ngx/core/pagination';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { FileUploaderModule } from '@fundamental-ngx/core/file-uploader';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 import { PlatformTableModule } from '@fundamental-ngx/platform/table';
 import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformMenuButtonModule } from '@fundamental-ngx/platform/menu-button';
 import { PlatformPipeModule } from '@fundamental-ngx/platform/shared';
+import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/content-density-deprecations';
 
 import { UploadCollectionDragnDropDirective } from './directives/upload-collection-dragndrop.directive';
 import { UploadCollectionComponent } from './upload-collection/upload-collection.component';
 import { NewFolderComponent } from './dialogs/new-folder/new-folder.component';
 import { MoveToComponent } from './dialogs/move-to/move-to.component';
-import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/content-density-deprecations';
 
 @NgModule({
     declarations: [UploadCollectionComponent, NewFolderComponent, MoveToComponent, UploadCollectionDragnDropDirective],
@@ -56,8 +57,9 @@ import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platf
         PlatformPipeModule,
         PlatformMenuButtonModule,
         RouterModule,
-        PlatformContentDensityDeprecationsModule
+        PlatformContentDensityDeprecationsModule,
+        ContentDensityModule
     ],
-    exports: [UploadCollectionComponent, PlatformContentDensityDeprecationsModule]
+    exports: [UploadCollectionComponent, PlatformContentDensityDeprecationsModule, ContentDensityModule]
 })
 export class PlatformUploadCollectionModule {}
