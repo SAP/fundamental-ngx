@@ -10,6 +10,7 @@ import alertComponentAsContentExampleH from '!./examples/alert-component-as-cont
 import alertComponentAsContentExampleScss from '!./examples/alert-component-as-content-example.component.scss?raw';
 import alertInlineExampleHtml from '!./examples/alert-inline-example.component.html?raw';
 import alertInlineExampleScs from '!./examples/alert-inline-example.component.scss?raw';
+import alertInlineExampleTs from '!./examples/alert-inline-example.component.ts?raw';
 import alertWidthExampleHtml from '!./examples/alert-width-example.component.html?raw';
 import alertWidthExampleTs from '!./examples/alert-width-example.component.ts?raw';
 import alertWidthExampleScss from '!./examples/alert-width-example.component.scss?raw';
@@ -111,6 +112,12 @@ export class AlertDocsComponent implements AfterViewInit {
             scssFileCode: alertInlineExampleScs,
             fileName: 'alert-inline-example',
             code: alertInlineExampleHtml
+        },
+        {
+            language: 'typescript',
+            component: 'AlertInlineExampleComponent',
+            code: alertInlineExampleTs,
+            fileName: 'alert-inline-example'
         }
     ];
 
@@ -135,7 +142,6 @@ export class AlertDocsComponent implements AfterViewInit {
         this.schema = this.schemaFactory.getComponent('alert');
     }
 
-    /** @hidden */
     @ViewChild('alert')
     alertComponent: AlertComponent;
 
