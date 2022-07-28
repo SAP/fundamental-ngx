@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AlertComponent } from '@fundamental-ngx/core/alert';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 import alertExampleHtml from '!./examples/alert-example.component.html?raw';
@@ -18,7 +19,7 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     selector: 'app-alert',
     templateUrl: './alert-docs.component.html'
 })
-export class AlertDocsComponent {
+export class AlertDocsComponent implements AfterViewInit {
     static schema: any = {
         properties: {
             properties: {
@@ -66,6 +67,8 @@ export class AlertDocsComponent {
             type: 'default'
         }
     };
+
+    shouldShow = true;
 
     alertBasicExample: ExampleFile[] = [
         {
@@ -132,7 +135,27 @@ export class AlertDocsComponent {
         this.schema = this.schemaFactory.getComponent('alert');
     }
 
+    /** @hidden */
+    @ViewChild('alert')
+    alertComponent: AlertComponent;
+
     onSchemaValues(data): void {
         this.data = data;
+    }
+
+    /** opens alert and set shouldShow true */
+    openDynamicAlert(): void {
+        this.shouldShow = true;
+        setTimeout(() => {
+            this.alertComponent.open();
+        });
+    }
+
+    onAlertDismiss(): void {
+        this.shouldShow = false;
+    }
+
+    ngAfterViewInit(): void {
+        this.openDynamicAlert();
     }
 }
