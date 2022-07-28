@@ -611,6 +611,11 @@ export class ComboboxComponent
         this.clearInputBtnFocused = false;
     }
 
+    /** Current select value */
+    getValue(): any {
+        return this._value;
+    }
+
     /** Method that picks other value moved from current one by offset, called only when combobox is closed */
     private _chooseOtherItem(offset: number): void {
         const activeValue: any = this._getOptionObjectByDisplayedValue(this.inputTextValue);
@@ -694,16 +699,13 @@ export class ComboboxComponent
         this.onChange(this.getValue());
     }
 
+    /** @hidden */
     private setValue(value: any): void {
         if (this.communicateByObject) {
             this._value = value;
         } else {
             this._value = this.displayFn(value);
         }
-    }
-
-    getValue(): any {
-        return this._value;
     }
 
     /** @hidden */
