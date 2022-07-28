@@ -56,6 +56,8 @@ export class AlertDocsComponent implements AfterViewInit {
         type: 'object'
     };
 
+    shouldShow = true;
+
     data: any = {
         properties: {
             dismissible: true,
@@ -145,12 +147,18 @@ export class AlertDocsComponent implements AfterViewInit {
 
     onSchemaValues(data): void {
         this.data = data;
-        this.openDynamicAlert();
     }
 
     /** opens alert */
     openDynamicAlert(): void {
-        this.alertComponent.open();
+        this.shouldShow = true;
+        setTimeout(() => {
+            this.alertComponent.open();
+        });
+    }
+
+    onAlertDismiss(): void {
+        this.shouldShow = false;
     }
 
     ngAfterViewInit(): void {
