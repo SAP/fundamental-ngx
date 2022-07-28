@@ -15,6 +15,7 @@ import { MultiComboboxComponent } from './multi-combobox/multi-combobox.componen
 import { PlatformAutoCompleteModule } from '../auto-complete/auto-complete.module';
 import { MultiComboboxHighlightPipe } from './pipes/highlight.pipe';
 import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/content-density-deprecations';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
     declarations: [MultiComboboxComponent, MultiComboboxHighlightPipe],
@@ -32,9 +33,10 @@ import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platf
         PlatformListModule,
         StandardListItemModule,
         PlatformAutoCompleteModule,
-        PlatformContentDensityDeprecationsModule
+        PlatformContentDensityDeprecationsModule,
+        ContentDensityModule
     ],
     providers: [DynamicComponentService],
-    exports: [MultiComboboxComponent, TemplateModule, PlatformContentDensityDeprecationsModule]
+    exports: [MultiComboboxComponent, TemplateModule, PlatformContentDensityDeprecationsModule, ContentDensityModule]
 })
 export class PlatformMultiComboboxModule {}

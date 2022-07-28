@@ -39,7 +39,6 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
         FdpFormGroupModule,
-        PlatformMultiComboboxModule,
         PlatformComboboxModule,
         PlatformMultiComboboxModule,
         BusyIndicatorModule

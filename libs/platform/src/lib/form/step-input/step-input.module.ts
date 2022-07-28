@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { OnlyDigitsModule, PipeModule } from '@fundamental-ngx/core/utils';
 import { StepInputDecrementDirective } from './step-input-decrement.directive';
 import { StepInputIncrementDirective } from './step-input-increment.directive';
@@ -20,7 +21,8 @@ import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platf
         OnlyDigitsModule,
         FormInputMessageGroupModule,
         FormMessageModule,
-        PlatformContentDensityDeprecationsModule
+        PlatformContentDensityDeprecationsModule,
+        ContentDensityModule
     ],
     declarations: [
         StepInputDecrementDirective,
@@ -28,6 +30,6 @@ import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platf
         StepInputControlDirective,
         NumberStepInputComponent
     ],
-    exports: [NumberStepInputComponent, PlatformContentDensityDeprecationsModule]
+    exports: [NumberStepInputComponent, PlatformContentDensityDeprecationsModule, ContentDensityModule]
 })
 export class PlatformStepInputModule {}

@@ -13,12 +13,16 @@ import {
 } from '@angular/core';
 
 import { PanelTitleDirective } from '@fundamental-ngx/core/panel';
-import { ContentDensity } from '@fundamental-ngx/core/utils';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 
 import { PanelConfig } from './panel.config';
 import { PanelActionsComponent } from './panel-actions/panel-actions.component';
 import { PanelContentComponent } from './panel-content/panel-content.component';
+import {
+    ContentDensityObserver,
+    contentDensityObserverProviders,
+    defaultContentDensityObserverConfigs
+} from '@fundamental-ngx/core/content-density';
 
 /** Panel change event instance */
 export class PanelExpandChangeEvent {
@@ -42,7 +46,16 @@ let platformPanelTitleUniqueId = 0;
 @Component({
     selector: 'fdp-panel',
     templateUrl: './panel.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        contentDensityObserverProviders({
+            defaultContentDensity: {
+                useFactory: (panelConfig: PanelConfig) =>
+                    panelConfig.contentDensity || defaultContentDensityObserverConfigs.defaultContentDensity,
+                deps: [PanelConfig]
+            }
+        })
+    ]
 })
 export class PanelComponent extends BaseComponent implements OnInit, OnChanges {
     /**
@@ -97,14 +110,15 @@ export class PanelComponent extends BaseComponent implements OnInit, OnChanges {
     @ViewChild(PanelTitleDirective)
     _panelTitleDirective: PanelTitleDirective;
 
-    /** @hidden */
-    _contentDensity: ContentDensity = this._panelConfig.contentDensity;
-
     /** @hidden id of the title element */
     _titleId: string = 'fdp-panel-title-' + platformPanelTitleUniqueId++;
 
     /** @hidden */
-    constructor(protected _cd: ChangeDetectorRef, protected _panelConfig: PanelConfig) {
+    constructor(
+        protected _cd: ChangeDetectorRef,
+        protected _panelConfig: PanelConfig,
+        readonly contentDensityObserver: ContentDensityObserver
+    ) {
         super(_cd);
     }
 

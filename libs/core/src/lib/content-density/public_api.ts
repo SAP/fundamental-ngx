@@ -19,3 +19,4 @@ export * from './classes/deprecated-condensed.directive';
 export * from './testing/mocked-local-content-density-directive';
 export * from './classes/content-density-observer.settings';
 export * from './classes/deprecated-content-density.directive';
+export * from './variables/default-content-density-consumer-config';

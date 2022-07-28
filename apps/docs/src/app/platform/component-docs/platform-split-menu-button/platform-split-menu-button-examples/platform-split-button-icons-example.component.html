@@ -1,42 +1,46 @@
 Cozy Split Menu Button:
-<fdp-split-menu-button
-    [menu]="menu1"
-    [buttonLabel]="label1"
-    [title]="label1"
-    icon="world"
-    type="standard"
-    title="Default behavior for split menu button"
-    menuTitle="More options"
-    [fixedWidth]="false"
-    (primaryButtonClick)="onPrimaryButtonClick1()"
->
-</fdp-split-menu-button>
-<fdp-menu #menu1 xPosition="after">
-    <fdp-menu-item (itemSelect)="onItemSelect1('Option 1')">Option 1</fdp-menu-item>
-    <fdp-menu-item (itemSelect)="onItemSelect1('Option 2')">Option 2</fdp-menu-item>
-    <fdp-menu-item (itemSelect)="onItemSelect1('Option 3')">Option 3</fdp-menu-item>
-</fdp-menu>
+<ng-container fdCozy>
+    <fdp-split-menu-button
+        [menu]="menu1"
+        [buttonLabel]="label1"
+        [title]="label1"
+        icon="world"
+        type="standard"
+        title="Default behavior for split menu button"
+        menuTitle="More options"
+        [fixedWidth]="false"
+        (primaryButtonClick)="onPrimaryButtonClick1()"
+    >
+    </fdp-split-menu-button>
+    <fdp-menu #menu1 xPosition="after">
+        <fdp-menu-item (itemSelect)="onItemSelect1('Option 1')">Option 1</fdp-menu-item>
+        <fdp-menu-item (itemSelect)="onItemSelect1('Option 2')">Option 2</fdp-menu-item>
+        <fdp-menu-item (itemSelect)="onItemSelect1('Option 3')">Option 3</fdp-menu-item>
+    </fdp-menu>
+</ng-container>
 <br />
 selected value: {{ selectedItem1 }} <br /><br />
 
 Compact Split Menu Button:
-<fdp-split-menu-button
-    [menu]="menu2"
-    [buttonLabel]="label2"
-    [title]="label2"
-    icon="world"
-    contentDensity="compact"
-    type="standard"
-    title="option with longer text gets truncated"
-    menuTitle="More options"
-    [fixedWidth]="false"
-    (primaryButtonClick)="onPrimaryButtonClick2()"
->
-</fdp-split-menu-button>
-<fdp-menu #menu2 xPosition="after" contentDensity="compact">
-    <fdp-menu-item (itemSelect)="onItemSelect2('Option 1')">Option 1</fdp-menu-item>
-    <fdp-menu-item (itemSelect)="onItemSelect2('Option 2 with long text')">Option 2 with long text</fdp-menu-item>
-</fdp-menu>
+<ng-container fdCompact>
+    <!--Although, it could be also applied by attaching [fdCompact] to fdp-split-menu-button and fdp-menu separately-->
+    <fdp-split-menu-button
+        [menu]="menu2"
+        [buttonLabel]="label2"
+        [title]="label2"
+        icon="world"
+        type="standard"
+        title="option with longer text gets truncated"
+        menuTitle="More options"
+        [fixedWidth]="false"
+        (primaryButtonClick)="onPrimaryButtonClick2()"
+    >
+    </fdp-split-menu-button>
+    <fdp-menu #menu2 xPosition="after">
+        <fdp-menu-item (itemSelect)="onItemSelect2('Option 1')">Option 1</fdp-menu-item>
+        <fdp-menu-item (itemSelect)="onItemSelect2('Option 2 with long text')">Option 2 with long text</fdp-menu-item>
+    </fdp-menu>
+</ng-container>
 <br />
 selected value: {{ selectedItem2 }} <br /><br />
 

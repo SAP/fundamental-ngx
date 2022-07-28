@@ -10,6 +10,7 @@ import { ListModule } from '@fundamental-ngx/core/list';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { SelectModule } from '@fundamental-ngx/core/select';
 import { PipeModule } from '@fundamental-ngx/core/utils';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 import { SelectComponent } from './select/select.component';
 import { PlatformAutoCompleteModule } from '../auto-complete/auto-complete.module';
@@ -30,9 +31,16 @@ import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platf
         IconModule,
         ReactiveFormsModule,
         SelectModule,
-        PlatformContentDensityDeprecationsModule
+        PlatformContentDensityDeprecationsModule,
+        ContentDensityModule
     ],
     providers: [DynamicComponentService],
-    exports: [SelectComponent, OptionComponent, TemplateModule, PlatformContentDensityDeprecationsModule]
+    exports: [
+        SelectComponent,
+        OptionComponent,
+        TemplateModule,
+        PlatformContentDensityDeprecationsModule,
+        ContentDensityModule
+    ]
 })
 export class PlatformSelectModule {}

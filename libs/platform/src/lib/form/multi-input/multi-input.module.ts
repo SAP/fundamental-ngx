@@ -12,6 +12,7 @@ import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { PlatformMultiInputComponent } from './multi-input.component';
 import { PlatformAutoCompleteModule } from '../auto-complete/auto-complete.module';
 import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/content-density-deprecations';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
     declarations: [PlatformMultiInputComponent],
@@ -26,8 +27,9 @@ import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platf
         InputGroupModule,
         PlatformAutoCompleteModule,
         FormModule,
-        PlatformContentDensityDeprecationsModule
+        PlatformContentDensityDeprecationsModule,
+        ContentDensityModule
     ],
-    exports: [PlatformMultiInputComponent, PlatformContentDensityDeprecationsModule]
+    exports: [PlatformMultiInputComponent, PlatformContentDensityDeprecationsModule, ContentDensityModule]
 })
 export class PlatformMultiInputModule {}

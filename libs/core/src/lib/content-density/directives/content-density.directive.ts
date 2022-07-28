@@ -27,7 +27,7 @@ export class ContentDensityDirective extends BehaviorSubject<LocalContentDensity
      */
     @Input()
     set fdContentDensity(val: LocalContentDensityMode | '') {
-        this.next(val ? val : ContentDensityGlobalKeyword);
+        this.next(val || ContentDensityGlobalKeyword);
     }
 
     /**

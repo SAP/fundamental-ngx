@@ -2,7 +2,7 @@
 <p>Platform radio buttons passed as content projection and Formcontrol is disabled</p>
 <fdp-form-group [formGroup]="customForm">
     <fdp-form-field id="radio1" [rank]="1">
-        <fdp-radio-group name="radio1" contentDensity="compact" [isInline]="true" formControlName="example1">
+        <fdp-radio-group name="radio1" fdCompact [isInline]="true" formControlName="example1">
             <fdp-radio-button value="winter">Winter</fdp-radio-button>
             <fdp-radio-button value="spring">Spring</fdp-radio-button>
             <fdp-radio-button value="summer">Summer</fdp-radio-button>
@@ -14,7 +14,7 @@
 <p>Platform radio buttons Passed as content projection and some radio buttons are disabled</p>
 <fdp-form-group [formGroup]="customForm">
     <fdp-form-field id="radio2" [rank]="1">
-        <fdp-radio-group name="radio2" contentDensity="compact" [isInline]="true" formControlName="example2">
+        <fdp-radio-group name="radio2" fdCompact [isInline]="true" formControlName="example2">
             <fdp-radio-button value="winter">Winter</fdp-radio-button>
             <fdp-radio-button value="spring">Spring</fdp-radio-button>
             <fdp-radio-button value="summer" [disabled]="true">Summer</fdp-radio-button>
@@ -30,7 +30,7 @@
             name="radio3"
             [list]="seasons"
             [isInline]="true"
-            contentDensity="compact"
+            fdCompact
             [hasNoValue]="true"
             noValueLabel="(No selection)"
             formControlName="example3"
@@ -61,7 +61,7 @@
     <fdp-form-field id="radio6" [rank]="1">
         <fdp-radio-group
             name="radio6"
-            contentDensity="compact"
+            fdCompact
             [disabled]="true"
             [isInline]="true"
             [(ngModel)]="favoriteSeason1"
@@ -77,7 +77,7 @@
 <p>Platform radio buttons passed as content projection and individual radio button is disabled</p>
 <fdp-form-group>
     <fdp-form-field id="radio7" [rank]="1">
-        <fdp-radio-group name="radio7" contentDensity="compact" [isInline]="true" [(ngModel)]="favoriteSeason2">
+        <fdp-radio-group name="radio7" fdCompact [isInline]="true" [(ngModel)]="favoriteSeason2">
             <fdp-radio-button value="winter">Winter</fdp-radio-button>
             <fdp-radio-button value="spring">Spring</fdp-radio-button>
             <fdp-radio-button value="summer" [disabled]="true">Summer</fdp-radio-button>
@@ -93,7 +93,7 @@
             name="radio8"
             [list]="seasons"
             [isInline]="true"
-            contentDensity="compact"
+            fdCompact
             [disabled]="true"
             [hasNoValue]="true"
             noValueLabel="(No selection)"

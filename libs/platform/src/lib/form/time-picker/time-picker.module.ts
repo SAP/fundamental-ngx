@@ -6,6 +6,7 @@ import { TimePickerModule } from '@fundamental-ngx/core/time-picker';
 import { PipeModule } from '@fundamental-ngx/core/utils';
 import { PlatformTimePickerComponent } from './time-picker.component';
 import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/content-density-deprecations';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
     declarations: [PlatformTimePickerComponent],
@@ -15,8 +16,9 @@ import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platf
         ReactiveFormsModule,
         TimePickerModule,
         PipeModule,
-        PlatformContentDensityDeprecationsModule
+        PlatformContentDensityDeprecationsModule,
+        ContentDensityModule
     ],
-    exports: [PlatformTimePickerComponent, PlatformContentDensityDeprecationsModule]
+    exports: [PlatformTimePickerComponent, PlatformContentDensityDeprecationsModule, ContentDensityModule]
 })
 export class PlatformTimePickerModule {}

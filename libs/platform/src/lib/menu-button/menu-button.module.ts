@@ -3,13 +3,21 @@ import { CommonModule } from '@angular/common';
 
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { PipeModule } from '@fundamental-ngx/core/utils';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
+import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/content-density-deprecations';
 import { MenuButtonComponent } from './menu-button.component';
-import { PlatformContentDensityDeprecationsModule } from "@fundamental-ngx/platform/content-density-deprecations";
 
 @NgModule({
     declarations: [MenuButtonComponent],
-    imports: [CommonModule, ButtonModule, PlatformMenuModule, PipeModule, PlatformContentDensityDeprecationsModule],
-    exports: [MenuButtonComponent, PlatformContentDensityDeprecationsModule]
+    imports: [
+        CommonModule,
+        ButtonModule,
+        PlatformMenuModule,
+        PipeModule,
+        PlatformContentDensityDeprecationsModule,
+        ContentDensityModule
+    ],
+    exports: [MenuButtonComponent, PlatformContentDensityDeprecationsModule, ContentDensityModule]
 })
 export class PlatformMenuButtonModule {}

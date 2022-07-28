@@ -7,6 +7,7 @@ import { Directive, ElementRef, forwardRef } from '@angular/core';
         fdp-action-bar[contentDensity],
         fdp-button[contentDensity],
         fdp-object-list-item[contentDensity],
+        fdp-standard-list-item[contentDensity],
         fdp-menu[contentDensity],
         fdp-menu-button[contentDensity],
         fdp-panel[contentDensity],
