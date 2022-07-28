@@ -348,6 +348,9 @@ export class ComboboxComponent
     private _subscriptions = new Subscription();
 
     /** @hidden */
+    private _value: any;
+
+    /** @hidden */
     onChange: (value: any) => void = () => {};
 
     /** @hidden */
@@ -450,8 +453,9 @@ export class ComboboxComponent
     }
 
     /** Handle dialog dismissing, closes popover and sets backup data. */
-    dialogDismiss(term: string): void {
-        this.inputText = term;
+    dialogDismiss(term: any): void {
+        this.inputText = this.displayFn(term);
+        this.setValue(term);
         this.isOpenChangeHandle(false);
     }
 
@@ -502,6 +506,7 @@ export class ComboboxComponent
     /** @hidden */
     writeValue(value: any): void {
         this.inputTextValue = this.displayFn(value);
+        this.setValue(value);
         this._cdRef.markForCheck();
     }
 
@@ -643,9 +648,7 @@ export class ComboboxComponent
             return contentArray.filter((item) => {
                 if (item) {
                     const term = this.displayFn(item).toLocaleLowerCase();
-                    let retVal;
-                    this.includes ? (retVal = term.includes(searchLower)) : (retVal = term.startsWith(searchLower));
-                    return retVal;
+                    return this.includes ? term.includes(searchLower) : term.startsWith(searchLower);
                 }
             });
         } else if (typeof searchTerm === 'object') {
@@ -660,6 +663,7 @@ export class ComboboxComponent
             this.isOpenChangeHandle(false);
         }
         if (this.fillOnSelect) {
+            this.setValue(term);
             this.inputText = this.displayFn(term);
             this.searchInputElement.nativeElement.value = this.inputText;
             this._cdRef.detectChanges();
@@ -687,11 +691,19 @@ export class ComboboxComponent
 
     /** @hidden */
     private _propagateChange(): void {
+        this.onChange(this.getValue());
+    }
+
+    private setValue(value: any): void {
         if (this.communicateByObject) {
-            this.onChange(this._getOptionObjectByDisplayedValue(this.inputTextValue));
+            this._value = value;
         } else {
-            this.onChange(this.inputTextValue);
+            this._value = this.displayFn(value);
         }
+    }
+
+    getValue(): any {
+        return this._value;
     }
 
     /** @hidden */
@@ -708,5 +720,10 @@ export class ComboboxComponent
             this._viewContainerRef,
             injector
         );
+    }
+
+    isSelected(term: any): boolean {
+        const termValue = this.communicateByObject ? term : this.displayFn(term);
+        return this.getValue() === termValue;
     }
 }
