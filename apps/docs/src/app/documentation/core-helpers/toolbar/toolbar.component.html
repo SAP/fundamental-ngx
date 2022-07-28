@@ -110,7 +110,12 @@
                 [fdMenuTrigger]="i18nMenu"
             ></button>
 
-            <fd-menu #i18nMenu [fillControlMode]="null" placement="bottom-end">
+            <fd-menu
+                #i18nMenu
+                [mobile]="true"
+                [fillControlMode]="null"
+                [mobileConfig]="{ title: 'Language', cancelButtonText: 'Cancel' }"
+            >
                 <ng-container *ngTemplateOutlet="i18nTemplate"></ng-container>
             </fd-menu>
 

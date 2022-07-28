@@ -56,6 +56,9 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
     @ViewChild('themeMenu')
     themeMenu: MenuComponent;
 
+    @ViewChild('i18nMenu')
+    i18nMenu: MenuComponent;
+
     ContentDensityMode = ContentDensityMode;
 
     highlightJsThemeCss: SafeResourceUrl;
@@ -208,6 +211,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
 
     selectTranslation(translation: FdLanguage): void {
         this.langSubject$.next(translation);
+        this.i18nMenu.close();
     }
 
     selectDensity(density: ContentDensityMode): void {
