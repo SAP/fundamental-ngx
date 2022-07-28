@@ -267,6 +267,19 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     }
 
     /** @hidden */
+    @HostListener('wheel', ['$event'])
+    mouseScrollHandler(event: WheelEvent): void {
+        event.preventDefault();
+        if (this._active) {
+            if (event.deltaY > 0) {
+                this.scrollDown();
+            } else {
+                this.scrollUp();
+            }
+        }
+    }
+
+    /** @hidden */
     spinnerButtonKeyupHandle(event: KeyboardEvent, upButton?: boolean): void {
         if (KeyUtil.isKeyCode(event, SPACE)) {
             if (upButton) {
