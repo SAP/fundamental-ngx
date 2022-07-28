@@ -69,8 +69,6 @@ export class AlertDocsComponent implements AfterViewInit {
         }
     };
 
-    shouldShow = true;
-
     alertBasicExample: ExampleFile[] = [
         {
             language: 'html',
@@ -147,18 +145,12 @@ export class AlertDocsComponent implements AfterViewInit {
 
     onSchemaValues(data): void {
         this.data = data;
+        this.openDynamicAlert();
     }
 
-    /** opens alert and set shouldShow true */
+    /** opens alert */
     openDynamicAlert(): void {
-        this.shouldShow = true;
-        setTimeout(() => {
-            this.alertComponent.open();
-        });
-    }
-
-    onAlertDismiss(): void {
-        this.shouldShow = false;
+        this.alertComponent.open();
     }
 
     ngAfterViewInit(): void {
