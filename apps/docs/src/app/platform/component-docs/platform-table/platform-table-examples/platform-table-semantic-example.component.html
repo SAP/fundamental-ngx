@@ -1,13 +1,8 @@
-<fdp-table
-    [dataSource]="source"
-    contentDensity="compact"
-    emptyTableMessage="No data found"
-    semanticHighlighting="semantic"
->
+<fdp-table [dataSource]="source" fdCompact emptyTableMessage="No data found" semanticHighlighting="semantic">
     <fdp-table-toolbar title="Order Line Items" [hideItemCount]="false">
         <fdp-table-toolbar-actions>
-            <fdp-button label="Action One" contentDensity="compact" (click)="alert('Action One')"></fdp-button>
-            <fdp-button label="Action Two" contentDensity="compact" (click)="alert('Action Two')"></fdp-button>
+            <fdp-button label="Action One" (click)="alert('Action One')"></fdp-button>
+            <fdp-button label="Action Two" (click)="alert('Action Two')"></fdp-button>
         </fdp-table-toolbar-actions>
     </fdp-table-toolbar>
 
