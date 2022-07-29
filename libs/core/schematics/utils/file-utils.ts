@@ -1,11 +1,10 @@
 import { join, Path } from '@angular-devkit/core';
 import { Tree } from '@angular-devkit/schematics';
 
-const STYLESHEET_REGEX = /.*\.(css|scss)/;
+const STYLESHEET_REGEX = /.*\.(css|scss|less)/;
 
 export function findStylesheetFiles(tree: Tree, startDirectory: string = '/'): string[] {
     const result: string[] = [];
-
     const visitDir = (dirPath: Path) => {
         const { subfiles, subdirs } = tree.getDir(dirPath);
 
@@ -23,8 +22,6 @@ export function findStylesheetFiles(tree: Tree, startDirectory: string = '/'): s
             }
         });
     };
-
     visitDir(startDirectory as Path);
-
     return result;
 }

@@ -2,9 +2,15 @@
     "$schema": "../../../../node_modules/ng-packagr/ng-package.schema.json",
     "dest": "../../../../dist/libs/core",
     "deleteDestPath": true,
-    "assets": ["./assets/**/*"],
     "lib": {
         "entryFile": "./public_api.ts"
     },
-    "allowedNonPeerDependencies": ["focus-trap", "lodash-es", "fast-deep-equal", "compare-versions"]
+    "allowedNonPeerDependencies": [
+        "@sap-theming/theming-base-content",
+        "focus-trap",
+        "fundamental-styles",
+        "lodash-es",
+        "fast-deep-equal",
+        "compare-versions"
+    ]
 }
