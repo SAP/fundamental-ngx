@@ -1,4 +1,11 @@
 
+### [0.35.4-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.7...v0.35.4-rc.8) (2022-07-29)
+
+
+### Bug Fixes
+
+* **core,platform:** revert "schematics, deps, migrations, assets & styles ([#8465](https://github.com/SAP/fundamental-ngx/issues/8465))" ([#8475](https://github.com/SAP/fundamental-ngx/issues/8475)) ([ab27f69](https://github.com/SAP/fundamental-ngx/commit/ab27f69db4d841d707f21879d2e6896504806f8f))
+
 ### [0.35.4-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.6...v0.35.4-rc.7) (2022-07-29)
 
 
