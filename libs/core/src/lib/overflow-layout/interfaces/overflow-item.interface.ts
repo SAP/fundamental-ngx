@@ -18,6 +18,8 @@ export interface OverflowItem extends FocusableOption {
      * Whether the item is hidden.
      */
     hidden: boolean;
-
+    /**
+     * Event emitted when `hidden` property has been changed.
+     */
     hiddenChange: EventEmitter<boolean>;
 }
