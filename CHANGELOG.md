@@ -1,4 +1,11 @@
 
+### [0.35.4-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.10...v0.35.4-rc.11) (2022-07-29)
+
+
+### Bug Fixes
+
+* **core:** adjust calculation method for overflow layout ([#8453](https://github.com/SAP/fundamental-ngx/issues/8453)) ([24dca49](https://github.com/SAP/fundamental-ngx/commit/24dca497ed35126bfd39b9ad1705f2845a7cbf41))
+
 ### [0.35.4-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.9...v0.35.4-rc.10) (2022-07-29)
 
 
