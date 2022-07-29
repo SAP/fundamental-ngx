@@ -696,7 +696,11 @@ export class ComboboxComponent
 
     /** @hidden */
     private _propagateChange(): void {
-        this.onChange(this.getValue());
+        if (!this.communicateByObject) {
+            this.onChange(this.inputText);
+        } else {
+            this.onChange(this.getValue());
+        }
     }
 
     /** @hidden */
