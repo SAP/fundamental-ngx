@@ -1,9 +1,0 @@
-{
-    "schematics": {
-        "migration-0.36": {
-            "version": "0.36",
-            "description": "Removes icon font files, font styles, styles from config and notifies about necessity of running add schematics again.",
-            "factory": "./migrations/migration-0.36/index"
-        }
-    }
-}

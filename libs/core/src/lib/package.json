@@ -2,9 +2,6 @@
   "name": "@fundamental-ngx/core",
   "version": "VERSION_PLACEHOLDER",
   "schematics": "./schematics/collection.json",
-  "ng-update": {
-    "migrations": "./schematics/migrations.json"
-  },
   "description": "Fundamental Library for Angular - core",
   "license": "Apache-2.0",
   "homepage": "https://sap.github.io/fundamental-ngx/home",
@@ -22,29 +19,15 @@
     "@angular/animations": "ANGULAR_VER_PLACEHOLDER",
     "@angular/router": "ANGULAR_VER_PLACEHOLDER",
     "@angular/cdk": "ANGULAR_VER_PLACEHOLDER",
-    "rxjs": "RXJS_VER_PLACEHOLDER",
-    "fundamental-styles": "FDSTYLES_VER_PLACEHOLDER",
-    "@sap-theming/theming-base-content": "THEMING_VER_PLACEHOLDER"
+    "rxjs": "RXJS_VER_PLACEHOLDER"
   },
   "dependencies": {
+    "@sap-theming/theming-base-content": "THEMING_VER_PLACEHOLDER",
     "focus-trap": "FOCUSTRAP_VER_PLACEHOLDER",
+    "fundamental-styles": "FDSTYLES_VER_PLACEHOLDER",
     "fast-deep-equal": "FAST_DEEP_EQUAL_VER_PLACEHOLDER",
     "lodash-es": "LODASH_ES_VER_PLACEHOLDER",
     "tslib": "^2.0.0",
     "compare-versions": "COMPARE_VERSIONS_VER_PLACEHOLDER"
-  },
-  "exports": {
-    ".": {
-      "sass": "./assets/fundamental-ngx-core.scss"
-    },
-    "./assets/fundamental-ngx-core-fonts.scss": {
-      "sass": "./assets/fundamental-ngx-core-fonts.scss"
-    },
-    "./assets/fonts/sap_fiori_3_fonts.css": {
-      "style": "./assets/fonts/sap_fiori_3_fonts.css"
-    },
-    "./assets/fonts/sap_horizon_fonts.css": {
-      "style": "./assets/fonts/sap_horizon_fonts.css"
-    }
   }
 }

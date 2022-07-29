@@ -5,5 +5,13 @@
     "lib": {
         "entryFile": "./public_api.ts"
     },
-    "allowedNonPeerDependencies": ["focus-trap", "xml2js", "lodash-es", "fast-deep-equal"]
+    "allowedNonPeerDependencies": [
+        "@sap-theming/theming-base-content",
+        "focus-trap",
+        "fundamental-styles",
+        "@fundamental-ngx/core",
+        "xml2js",
+        "lodash-es",
+        "fast-deep-equal"
+    ]
 }
