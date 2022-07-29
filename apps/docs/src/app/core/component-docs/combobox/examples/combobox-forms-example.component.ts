@@ -19,6 +19,7 @@ export class ComboboxFormsExampleComponent {
 
     dropdownValues: ComboboxItem[] = [
         { displayedValue: 'Apple', value: 'AppleValue' },
+        { displayedValue: 'Apple', value: 'AppleValue2' },
         { displayedValue: 'Banana', value: 'BananaValue' },
         { displayedValue: 'Kiwi', value: 'KiwiValue' },
         { displayedValue: 'Strawberry', value: 'StrawberryValue' },
