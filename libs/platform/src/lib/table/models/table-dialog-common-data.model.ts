@@ -1,6 +1,5 @@
-import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
-
 /** Common properties for table dialogs */
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface TableDialogCommonData {
-    tableContentDensity: ContentDensityMode;
+    // nothing here yet
 }

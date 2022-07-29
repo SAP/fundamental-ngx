@@ -10,7 +10,6 @@ import { CollectionSort } from '../../interfaces/collection-sort.interface';
 import { TableState } from '../../interfaces/table-state.interface';
 import { Table } from '../../table';
 import { TableColumn } from '../table-column/table-column';
-import { TableDialogCommonData } from '../../models/table-dialog-common-data.model';
 
 import { TableP13SortComponent } from './table-p13-sort.component';
 import { TableP13GroupComponent } from './table-p13-group.component';
@@ -114,15 +113,18 @@ export class TableP13DialogComponent implements OnDestroy {
         const columns = this._getTableColumns().filter(({ sortable }) => sortable);
         const sortBy = state.sortBy;
         const dialogData: SortDialogData = {
-            ...this._getCommonDialogData(),
             columns: columns.map(({ label, key }) => ({ label, key })),
             collectionSort: sortBy
         };
 
-        const dialogRef = this._dialogService.open(P13SortingDialogComponent, {
-            ...dialogConfig,
-            data: dialogData
-        });
+        const dialogRef = this._dialogService.open(
+            P13SortingDialogComponent,
+            {
+                ...dialogConfig,
+                data: dialogData
+            },
+            this.table.injector
+        );
 
         this._subscriptions.add(
             dialogRef.afterClosed
@@ -139,18 +141,21 @@ export class TableP13DialogComponent implements OnDestroy {
         const columns = this._getTableColumns();
         const filterBy = state?.filterBy;
         const dialogData: FilterDialogData = {
-            ...this._getCommonDialogData(),
             columns: columns.map(({ label, key, dataType }) => ({ label, key, dataType })),
             collectionFilter: filterBy
         };
 
-        const dialogRef = this._dialogService.open(P13FilteringDialogComponent, {
-            ...dialogConfig,
-            responsivePadding: false,
-            verticalPadding: false,
-            width: '50rem',
-            data: dialogData
-        });
+        const dialogRef = this._dialogService.open(
+            P13FilteringDialogComponent,
+            {
+                ...dialogConfig,
+                responsivePadding: false,
+                verticalPadding: false,
+                width: '50rem',
+                data: dialogData
+            },
+            this.table.injector
+        );
 
         this._subscriptions.add(
             dialogRef.afterClosed
@@ -166,7 +171,6 @@ export class TableP13DialogComponent implements OnDestroy {
         const visibleColumns = state.columns;
         const groupBy = state.groupBy;
         const dialogData: GroupDialogData = {
-            ...this._getCommonDialogData(),
             columns: columns
                 // We can group by visible columns only
                 .filter(({ name }) => visibleColumns.includes(name))
@@ -175,10 +179,14 @@ export class TableP13DialogComponent implements OnDestroy {
             collectionGroup: groupBy
         };
 
-        const dialogRef = this._dialogService.open(P13GroupingDialogComponent, {
-            ...dialogConfig,
-            data: dialogData
-        });
+        const dialogRef = this._dialogService.open(
+            P13GroupingDialogComponent,
+            {
+                ...dialogConfig,
+                data: dialogData
+            },
+            this.table.injector
+        );
 
         this._subscriptions.add(
             dialogRef.afterClosed
@@ -195,18 +203,21 @@ export class TableP13DialogComponent implements OnDestroy {
         const columns = this._getTableColumns();
         const visibleColumns = state.columns;
         const dialogData: ColumnsDialogData = {
-            ...this._getCommonDialogData(),
             availableColumns: columns.map(({ label, name }) => ({ label, key: name })),
             visibleColumns
         };
 
-        const dialogRef = this._dialogService.open(P13ColumnsDialogComponent, {
-            ...dialogConfig,
-            responsivePadding: false,
-            verticalPadding: false,
-            minWidth: '35rem',
-            data: dialogData
-        });
+        const dialogRef = this._dialogService.open(
+            P13ColumnsDialogComponent,
+            {
+                ...dialogConfig,
+                responsivePadding: false,
+                verticalPadding: false,
+                minWidth: '35rem',
+                data: dialogData
+            },
+            this.table.injector
+        );
 
         this._subscriptions.add(
             dialogRef.afterClosed
@@ -293,12 +304,5 @@ export class TableP13DialogComponent implements OnDestroy {
     private _unsubscribeFromTable(): void {
         this._tableSubscriptions.unsubscribe();
         this._tableSubscriptions = new Subscription();
-    }
-
-    /** @hidden */
-    private _getCommonDialogData(): TableDialogCommonData {
-        return {
-            tableContentDensity: this._table.contentDensity
-        };
     }
 }

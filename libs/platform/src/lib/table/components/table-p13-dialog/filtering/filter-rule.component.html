@@ -6,10 +6,8 @@
                 class="filter-row__select"
                 fdLayoutGridCol
                 colGrow
-                [compact]="compact"
                 [ngModel]="rule.columnKey"
-                (ngModelChange)="rule.setColumnKey($event)"
-                (ngModelChange)="_onModelChange()"
+                (ngModelChange)="rule.setColumnKey($event); _onModelChange()"
             >
                 <li fd-option *ngFor="let column of rule.columns" [value]="column.key">{{ column.label }}</li>
             </fd-select>
@@ -18,10 +16,8 @@
                 class="filter-row__select"
                 fdLayoutGridCol
                 colGrow
-                [compact]="compact"
                 [ngModel]="rule.strategy"
-                (ngModelChange)="rule.setStrategy($event)"
-                (ngModelChange)="_onModelChange()"
+                (ngModelChange)="rule.setStrategy($event); _onModelChange()"
             >
                 <li fd-option *ngFor="let strategy of rule.strategies" [value]="strategy">
                     <ng-container [ngSwitch]="strategy">
@@ -121,7 +117,6 @@
                         <fd-date-picker
                             class="filter-row__input"
                             type="single"
-                            [compact]="compact"
                             [required]="true"
                             [name]="valueKey"
                             [(ngModel)]="rule[valueKey]"
@@ -131,7 +126,6 @@
                     <ng-container *ngSwitchCase="DATA_TYPE.BOOLEAN">
                         <fd-select
                             class="filter-row__select"
-                            [compact]="compact"
                             [name]="valueKey"
                             [(ngModel)]="rule[valueKey]"
                             (ngModelChange)="_onModelChange()"
@@ -149,7 +143,6 @@
                             type="text"
                             class="filter-row__input"
                             fd-form-control
-                            [compact]="compact"
                             required
                             [name]="valueKey"
                             [(ngModel)]="rule[valueKey]"

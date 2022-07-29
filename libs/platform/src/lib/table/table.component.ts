@@ -8,6 +8,7 @@ import {
     ElementRef,
     EventEmitter,
     HostBinding,
+    Injector,
     Input,
     NgZone,
     OnChanges,
@@ -187,10 +188,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
 
     get dataSource(): FdpTableDataSource<T> {
         return this._ds;
-    }
-
-    get contentDensity(): ContentDensityMode {
-        return this.contentDensityObserver.value;
     }
 
     /**
@@ -654,9 +651,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
     /** @hidden */
     private _dragDropInProgress = false;
 
-    /** @hidden Is used to identify whether the `contentDensity` property was set by the user manually. */
-    private contentDensityManuallySet = false;
-
     /** @hidden */
     get _selectionColumnWidth(): number {
         return this._isShownSelectionColumn ? SELECTION_COLUMN_WIDTH.get(this.contentDensityObserver.value) ?? 0 : 0;
@@ -703,7 +697,8 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
         public readonly _tableColumnResizeService: TableColumnResizeService,
         private readonly _elRef: ElementRef,
         @Optional() private readonly _rtlService: RtlService,
-        readonly contentDensityObserver: ContentDensityObserver
+        readonly contentDensityObserver: ContentDensityObserver,
+        readonly injector: Injector
     ) {
         super();
     }
@@ -721,10 +716,6 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
                     : (undefined as any);
         }
 
-        if (changes.contentDensity?.currentValue) {
-            this.contentDensityManuallySet = true;
-        }
-
         // changes below should be checked only after view is initialized
         if (!this._viewInitiated) {
             return;
@@ -734,12 +725,7 @@ export class TableComponent<T = any> extends Table<T> implements AfterViewInit, 
             this._rangeSelector.reset();
         }
 
-        if (
-            'selectionMode' in changes ||
-            'freezeColumnsTo' in changes ||
-            'semanticHighlighting' in changes ||
-            'contentDensity' in changes
-        ) {
+        if ('selectionMode' in changes || 'freezeColumnsTo' in changes || 'semanticHighlighting' in changes) {
             this.recalculateTableColumnWidth();
         }
 

@@ -36,6 +36,9 @@ import { CONTENT_DENSITY_DIRECTIVE, DeprecatedContentDensityDirective } from '@f
         fdp-input-group-addon-body[contentDensity],
         fdp-input-group[contentDensity],
         fdp-value-help-dialog[contentDensity],
+        fdp-filter-single-select[contentDensity],
+        fdp-filter-multi-select[contentDensity],
+        fdp-filter-custom[contentDensity]
     `,
     providers: [
         {
