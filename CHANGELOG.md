@@ -1,4 +1,11 @@
 
+### [0.35.4-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.9...v0.35.4-rc.10) (2022-07-29)
+
+
+### Bug Fixes
+
+* **platform:** correct markup for breadcrumbs ([#8474](https://github.com/SAP/fundamental-ngx/issues/8474)) ([6a520a9](https://github.com/SAP/fundamental-ngx/commit/6a520a92b3721e15c0fa1dc807f7ebf4a6f2367f))
+
 ### [0.35.4-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.8...v0.35.4-rc.9) (2022-07-29)
 
 
