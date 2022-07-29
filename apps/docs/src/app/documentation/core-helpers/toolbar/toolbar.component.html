@@ -114,7 +114,7 @@
                 #i18nMenu
                 [mobile]="true"
                 [fillControlMode]="null"
-                [mobileConfig]="{ title: 'Language', cancelButtonText: 'Cancel' }"
+                [mobileConfig]="{ title: 'Language', cancelButtonText: 'Cancel', dialogConfig: { mobile: false } }"
             >
                 <ng-container *ngTemplateOutlet="i18nTemplate"></ng-container>
             </fd-menu>
