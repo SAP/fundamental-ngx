@@ -141,6 +141,7 @@ export class OverflowLayoutService implements OnDestroy {
         this._allItems = this.config.items.toArray();
 
         let allItems = this.config.items.toArray();
+        let visibleContainerItems = this.config.visibleItems.toArray();
 
         allItems.forEach((item, index) => {
             // Softly hide previously completely hidden item in order to correctly calculate it's size.
@@ -149,16 +150,14 @@ export class OverflowLayoutService implements OnDestroy {
             item.index = index;
             item.first = index === 0;
             item.last = index === allItems.length - 1;
+            visibleContainerItems[index].containerRef.hidden = false;
         });
 
         this._detectChanges$.next();
 
         allItems = this.config.direction === 'right' ? allItems : allItems.reverse();
-        const visibleContainerItems =
-            this.config.direction === 'right'
-                ? this.config.visibleItems.toArray()
-                : this.config.visibleItems.toArray().reverse();
-        visibleContainerItems.forEach((i) => (i.containerRef.hidden = false));
+        visibleContainerItems =
+            this.config.direction === 'right' ? visibleContainerItems : visibleContainerItems.reverse();
 
         this.result.showMore = false;
         this._emitResult();

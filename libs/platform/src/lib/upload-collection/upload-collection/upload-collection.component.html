@@ -14,40 +14,45 @@
 
     <!-- Toolbar -->
     <fd-toolbar class="fdp-upload-collection__toolbar">
-        <div #responsiveBreadcrumbContainer style="flex-grow: 1">
-            <fd-breadcrumb [containerElement]="responsiveBreadcrumbContainer" [id]="id + '-breadcrumb'">
+        <div style="flex: 1 auto">
+            <fd-breadcrumb [id]="id + '-breadcrumb'">
                 <fd-breadcrumb-item>
-                    <a
-                        *ngIf="_breadcrumbList.length > 0"
-                        href="#"
-                        fd-link
-                        (click)="_breadcrumbGoTo($event)"
-                        i18n="@@platformUploadCollection.Breadcrumb.Label.AllFiles"
-                    >
-                        All files
-                    </a>
-                    <span
-                        *ngIf="_breadcrumbList.length === 0"
-                        i18n="@@platformUploadCollection.Breadcrumb.Label.AllFilesWithTotal"
-                    >
-                        <span>All files</span>
-                        (<span [innerText]="_totalItems"></span>)
-                    </span>
+                    <ng-template #multipleBreadcrumbs>
+                        <a
+                            href="#"
+                            fd-link
+                            (click)="_breadcrumbGoTo($event)"
+                            i18n="@@platformUploadCollection.Breadcrumb.Label.AllFiles"
+                        >
+                            All files
+                        </a>
+                    </ng-template>
+                    <ng-template #singleBreadcrumb>
+                        <span i18n="@@platformUploadCollection.Breadcrumb.Label.AllFilesWithTotal">
+                            <span>All files</span>
+                            (<span>{{ _totalItems }}</span
+                            >)
+                        </span>
+                    </ng-template>
+                    <ng-container
+                        *ngTemplateOutlet="_breadcrumbList.length > 0 ? multipleBreadcrumbs : singleBreadcrumb"
+                    ></ng-container>
                 </fd-breadcrumb-item>
                 <fd-breadcrumb-item *ngFor="let item of _breadcrumbList; let i = index">
-                    <a
-                        href="#"
-                        *ngIf="item.clikable"
-                        fd-link
-                        [innerText]="item.folderName"
-                        (click)="_breadcrumbGoTo($event, i)"
-                    ></a>
-                    <span *ngIf="!item.clikable" [innerText]="item.folderName + ' (' + _totalItems + ')'"></span>
+                    <ng-template #clickableBreadcrumb>
+                        <a href="#" fd-link (click)="_breadcrumbGoTo($event, i)">{{ item.folderName }}</a>
+                    </ng-template>
+                    <ng-template #textBreadcrumb>
+                        <span>{{ item.folderName }} ({{ _totalItems }})</span>
+                    </ng-template>
+                    <ng-container
+                        *ngTemplateOutlet="item.clikable ? clickableBreadcrumb : textBreadcrumb"
+                    ></ng-container>
                 </fd-breadcrumb-item>
             </fd-breadcrumb>
         </div>
 
-        <fd-toolbar-spacer></fd-toolbar-spacer>
+        <fd-toolbar-spacer style="max-width: 3rem"></fd-toolbar-spacer>
         <ng-container *ngIf="readonly || selectedItems.length === 0">
             <fd-input-group
                 *ngIf="showSearch"
