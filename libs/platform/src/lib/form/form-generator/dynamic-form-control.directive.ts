@@ -45,6 +45,7 @@ export class DynamicFormControlDirective implements OnInit {
     constructor(
         private readonly _formGeneratorService: FormGeneratorService,
         private readonly _vcRef: ViewContainerRef,
+        private readonly _injector: Injector,
         @Optional() @Inject(CONTENT_DENSITY_DIRECTIVE) private contentDensityDirective: Observable<ContentDensityMode>
     ) {}
 
@@ -72,7 +73,8 @@ export class DynamicFormControlDirective implements OnInit {
                             return of(ContentDensityGlobalKeyword);
                         }
                     }
-                ]
+                ],
+                parent: this._injector
             })
         });
 
