@@ -461,7 +461,6 @@ export class SmartFilterBarComponent implements OnDestroy, SmartFilterBar {
             choices: column.hasOptions ? this._getFilterDefaultOptions(column.key, column.filterType) : undefined,
             transformer: (itemValue) => getSelectItemValue(itemValue),
             guiOptions: {
-                contentDensity: 'compact',
                 additionalData: {
                     type: 'input',
                     dataType: column.dataType,
