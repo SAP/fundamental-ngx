@@ -1,4 +1,11 @@
 
+### [0.35.4-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.8...v0.35.4-rc.9) (2022-07-29)
+
+
+### Features
+
+* **core:** combobox dropdown values list can containt duplicate display names ([#8471](https://github.com/SAP/fundamental-ngx/issues/8471)) ([97bdd8d](https://github.com/SAP/fundamental-ngx/commit/97bdd8dae25ccccb0927cbed212e5906c979926e))
+
 ### [0.35.4-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.7...v0.35.4-rc.8) (2022-07-29)
 
 
