@@ -13,7 +13,7 @@ import { Nullable } from '@fundamental-ngx/core/shared';
 
 import { ActionSheetItemComponent } from '../action-sheet-item/action-sheet-item.component';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { TAB } from '@angular/cdk/keycodes';
+import { hasModifierKey, TAB } from '@angular/cdk/keycodes';
 
 let actionSheetBodyUniqueIdCounter = 0;
 
@@ -72,15 +72,16 @@ export class ActionSheetBodyComponent {
     @HostListener('keydown', ['$event'])
     keyDownHandler(event: KeyboardEvent): void {
         if (this._keyboardSupportService.keyManager) {
-            this._keyboardSupportService.onKeyDown(event);
-
-            if (event.shiftKey && KeyUtil.isKeyCode(event, TAB)) {
+            if (KeyUtil.isKeyCode(event, TAB)) {
                 event.preventDefault();
-                this._keyboardSupportService.keyManager?.setPreviousItemActive();
-            } else if (KeyUtil.isKeyCode(event, TAB)) {
-                event.preventDefault();
-                this._keyboardSupportService.keyManager?.setNextItemActive();
+                if (hasModifierKey(event, 'shiftKey')) {
+                    this._keyboardSupportService.keyManager.setPreviousItemActive();
+                } else {
+                    this._keyboardSupportService.keyManager.setNextItemActive();
+                }
+                return;
             }
+            this._keyboardSupportService.onKeyDown(event);
         }
     }
 }

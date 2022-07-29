@@ -39,7 +39,7 @@ export class ActionSheetControlComponent {
     }
 
     /** @hidden */
-    focus(): void {
+    _focus(): void {
         this._elementRef.nativeElement.firstChild.focus();
     }
 
