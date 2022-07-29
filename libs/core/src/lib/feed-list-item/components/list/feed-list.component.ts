@@ -120,8 +120,10 @@ export class FeedListComponent implements OnInit, AfterContentChecked, OnDestroy
     private _refreshItems(): void {
         (this.feedItems || []).forEach((feedItem) => {
             feedItem.mobile = this.mobile;
-            feedItem.setMaxChar();
-            feedItem.setHasMore();
+            if (feedItem.maxCharsAtDefault && this.mobile) {
+                feedItem.setDefaultMaxChars();
+                feedItem.setHasMore();
+            }
         });
     }
 }
