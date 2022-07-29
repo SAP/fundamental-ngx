@@ -147,7 +147,7 @@
     "lodash-es": "4.17.21",
     "moment": "2.29.2",
     "ngx-markdown": "12.0.1",
-    "rxjs": "7.5.4",
+    "rxjs": "7.5.6",
     "tslib": "2.3.0",
     "webdriver-manager": "12.1.7",
     "zone.js": "0.11.4"
