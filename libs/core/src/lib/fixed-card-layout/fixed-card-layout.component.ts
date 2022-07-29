@@ -158,7 +158,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
     _cardColumns: CardColumn[];
 
     /** @hidden*/
-    _containerHeight: number;
+    _containerHeight = 0;
 
     /** @hidden handles rtl service */
     _dir = 'ltr';
@@ -214,7 +214,11 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._processCards();
+        if (this._layout.nativeElement.clientHeight) {
+            this._processCards();
+        } else {
+            this._listenResize = true;
+        }
 
         this._listenOnResize();
         this._listenOnCardsChange();
@@ -410,11 +414,17 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
             .pipe(
                 debounceTime(20),
                 filter(
-                    (entries) => this._listenResize && !!entries[0].contentRect.height && !!entries[0].contentRect.width
+                    (entries) => this._listenResize && !!(entries[0].contentRect.height || entries[0].contentRect.width)
                 ),
                 takeUntil(this._onDestroy$)
             )
-            .subscribe(() => this.updateLayout());
+            .subscribe(() => {
+                if (this._cardsArray) {
+                    this.updateLayout();
+                } else {
+                    this._processCards();
+                }
+            });
     }
 
     /** @hidden Listen card change and distribute cards on column change */
