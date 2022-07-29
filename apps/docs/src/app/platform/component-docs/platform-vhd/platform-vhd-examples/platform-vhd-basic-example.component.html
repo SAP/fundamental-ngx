@@ -7,13 +7,14 @@
     label="Open value help dialog"
 ></button>
 <br />
-<div fd-form-item *ngIf="actualItems.length">
+<div *ngIf="actualItems.length">
     <fd-tokenizer fdCompact>
-        <fd-token *ngFor="let token of actualItems" [compact]="true" [readOnly]="true">{{ token }}</fd-token>
+        <fd-token *ngFor="let token of actualItems" [readOnly]="true">{{ token }}</fd-token>
     </fd-tokenizer>
 </div>
 <fdp-value-help-dialog
     #vhd
+    fdCompact
     dialogTitle="Simple value help dialog"
     uniqueKey="id"
     tokenViewField="name"

@@ -35,6 +35,7 @@ import { CONTENT_DENSITY_DIRECTIVE, DeprecatedContentDensityDirective } from '@f
         fdp-multi-combobox[contentDensity],
         fdp-input-group-addon-body[contentDensity],
         fdp-input-group[contentDensity],
+        fdp-value-help-dialog[contentDensity],
     `,
     providers: [
         {
