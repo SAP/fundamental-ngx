@@ -6,7 +6,7 @@ import { DatePickerModule } from '@fundamental-ngx/core/date-picker';
 import { PipeModule } from '@fundamental-ngx/core/utils';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { PlatformDatePickerComponent } from './date-picker.component';
-import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/content-density-deprecations';
+import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 
 @NgModule({
     declarations: [PlatformDatePickerComponent],

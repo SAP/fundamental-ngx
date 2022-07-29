@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { PipeModule } from '@fundamental-ngx/core/utils';
 import { ButtonComponent } from './button.component';
-import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/content-density-deprecations';
+import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({

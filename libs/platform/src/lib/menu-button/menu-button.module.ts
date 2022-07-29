@@ -5,7 +5,7 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
 import { PipeModule } from '@fundamental-ngx/core/utils';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
-import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/content-density-deprecations';
+import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 import { MenuButtonComponent } from './menu-button.component';
 
 @NgModule({

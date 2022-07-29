@@ -6,7 +6,7 @@ import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { PipeModule } from '@fundamental-ngx/core/utils';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
-import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/content-density-deprecations';
+import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 
 import { PanelComponent } from './panel.component';
 import { PanelContentComponent } from './panel-content/panel-content.component';

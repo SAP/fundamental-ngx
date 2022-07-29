@@ -8,7 +8,7 @@ import { PipeModule } from '@fundamental-ngx/core/utils';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { RadioGroupComponent } from './radio-group.component';
 import { RadioButtonComponent } from './radio/radio.component';
-import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/content-density-deprecations';
+import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 
 @NgModule({
     imports: [

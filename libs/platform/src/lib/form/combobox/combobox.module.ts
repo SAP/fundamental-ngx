@@ -14,7 +14,7 @@ import { PipeModule } from '@fundamental-ngx/core/utils';
 import { ComboboxComponent } from './combobox/combobox.component';
 import { ComboboxHighlightPipe } from './pipes/highlight.pipe';
 import { PlatformAutoCompleteModule } from '../auto-complete/auto-complete.module';
-import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/content-density-deprecations';
+import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 
 @NgModule({
     declarations: [ComboboxComponent, ComboboxHighlightPipe],

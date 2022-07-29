@@ -19,7 +19,7 @@ import { PlatformObjectAttributeModule } from '@fundamental-ngx/platform/object-
 import { ObjectListItemComponent } from './object-list-item.component';
 import { ObjectListItemRowComponent } from './object-list-item-row.component';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/content-density-deprecations';
+import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
@@ -45,6 +45,11 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         PlatformContentDensityDeprecationsModule,
         ContentDensityModule
     ],
-    exports: [ObjectListItemComponent, ObjectListItemRowComponent, PlatformContentDensityDeprecationsModule, ContentDensityModule]
+    exports: [
+        ObjectListItemComponent,
+        ObjectListItemRowComponent,
+        PlatformContentDensityDeprecationsModule,
+        ContentDensityModule
+    ]
 })
 export class ObjectListItemModule {}

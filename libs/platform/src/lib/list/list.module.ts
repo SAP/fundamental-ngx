@@ -9,7 +9,7 @@ import { PipeModule } from '@fundamental-ngx/core/utils';
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { InfiniteScrollModule } from '@fundamental-ngx/core/infinite-scroll';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
-import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/content-density-deprecations';
+import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 import { ListComponent, ListFooter, ListGroupHeader } from './list.component';
 import { ListItemDef } from './base-list-item';
 

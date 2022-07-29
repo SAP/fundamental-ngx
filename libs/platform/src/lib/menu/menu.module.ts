@@ -8,7 +8,7 @@ import { PipeModule } from '@fundamental-ngx/core/utils';
 import { MenuComponent } from './menu.component';
 import { MenuItemComponent } from './menu-item.component';
 import { MenuTriggerDirective } from './menu-trigger.directive';
-import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/content-density-deprecations';
+import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({

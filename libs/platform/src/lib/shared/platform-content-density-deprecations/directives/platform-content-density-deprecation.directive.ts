@@ -1,5 +1,5 @@
-import { CONTENT_DENSITY_DIRECTIVE, DeprecatedContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { Directive, ElementRef, forwardRef } from '@angular/core';
+import { CONTENT_DENSITY_DIRECTIVE, DeprecatedContentDensityDirective } from '@fundamental-ngx/core/content-density';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector

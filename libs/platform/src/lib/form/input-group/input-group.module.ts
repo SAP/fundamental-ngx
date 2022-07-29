@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
-import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/content-density-deprecations';
+import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 
 import { PlatformInputModule } from '../input/fdp-input.module';
 import { InputGroupComponent } from './input-group.component';

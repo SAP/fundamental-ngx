@@ -15,7 +15,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { SelectComponent } from './select/select.component';
 import { PlatformAutoCompleteModule } from '../auto-complete/auto-complete.module';
 import { OptionComponent } from './option/option.component';
-import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/content-density-deprecations';
+import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 
 @NgModule({
     declarations: [SelectComponent, OptionComponent],

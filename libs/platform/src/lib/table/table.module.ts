@@ -72,7 +72,7 @@ import { TableCellStylesPipe } from './pipes/cell-styles.pipe';
 import { SelectionCellStylesPipe } from './pipes/selection-cell-styles.pipe';
 import { RowClassesPipe } from './pipes/row-classes.pipe';
 import { ColumnResizableSidePipe } from './pipes/column-resizable-side.pipe';
-import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/content-density-deprecations';
+import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 
 const EXPORTABLE_DECLARATIONS = [
     TableComponent,

@@ -14,7 +14,7 @@ import { PlatformListModule, StandardListItemModule } from '@fundamental-ngx/pla
 import { MultiComboboxComponent } from './multi-combobox/multi-combobox.component';
 import { PlatformAutoCompleteModule } from '../auto-complete/auto-complete.module';
 import { MultiComboboxHighlightPipe } from './pipes/highlight.pipe';
-import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/content-density-deprecations';
+import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({

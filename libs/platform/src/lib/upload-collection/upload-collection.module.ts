@@ -24,7 +24,7 @@ import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformMenuButtonModule } from '@fundamental-ngx/platform/menu-button';
 import { PlatformPipeModule } from '@fundamental-ngx/platform/shared';
-import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/content-density-deprecations';
+import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 
 import { UploadCollectionDragnDropDirective } from './directives/upload-collection-dragndrop.directive';
 import { UploadCollectionComponent } from './upload-collection/upload-collection.component';

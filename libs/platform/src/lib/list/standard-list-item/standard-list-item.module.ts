@@ -15,7 +15,7 @@ import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
 import { PlatformObjectStatusModule } from '@fundamental-ngx/platform/object-status';
 import { StandardListItemComponent } from './standard-list-item.component';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
-import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/content-density-deprecations';
+import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 
 @NgModule({
     declarations: [StandardListItemComponent],

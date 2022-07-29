@@ -6,7 +6,7 @@ import { FormControlModule } from '@fundamental-ngx/core/form';
 import { PipeModule } from '@fundamental-ngx/core/utils';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { TextAreaComponent } from './text-area.component';
-import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/content-density-deprecations';
+import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 
 @NgModule({
     imports: [
