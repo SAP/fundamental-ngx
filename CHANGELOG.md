@@ -1,4 +1,57 @@
 
+### [0.35.4-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.9...v0.35.4-rc.10) (2022-07-29)
+
+
+### Bug Fixes
+
+* **platform:** correct markup for breadcrumbs ([#8474](https://github.com/SAP/fundamental-ngx/issues/8474)) ([6a520a9](https://github.com/SAP/fundamental-ngx/commit/6a520a92b3721e15c0fa1dc807f7ebf4a6f2367f))
+
+### [0.35.4-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.8...v0.35.4-rc.9) (2022-07-29)
+
+
+### Features
+
+* **core:** combobox dropdown values list can containt duplicate display names ([#8471](https://github.com/SAP/fundamental-ngx/issues/8471)) ([97bdd8d](https://github.com/SAP/fundamental-ngx/commit/97bdd8dae25ccccb0927cbed212e5906c979926e))
+
+### [0.35.4-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.7...v0.35.4-rc.8) (2022-07-29)
+
+
+### Bug Fixes
+
+* **core,platform:** revert "schematics, deps, migrations, assets & styles ([#8465](https://github.com/SAP/fundamental-ngx/issues/8465))" ([#8475](https://github.com/SAP/fundamental-ngx/issues/8475)) ([ab27f69](https://github.com/SAP/fundamental-ngx/commit/ab27f69db4d841d707f21879d2e6896504806f8f))
+
+### [0.35.4-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.6...v0.35.4-rc.7) (2022-07-29)
+
+
+### Bug Fixes
+
+* **core,platform:** schematics, deps, migrations, assets & styles ([#8465](https://github.com/SAP/fundamental-ngx/issues/8465)) ([1dc00d1](https://github.com/SAP/fundamental-ngx/commit/1dc00d1671a0dccef49c28ef11e7b54337ce0652))
+
+### [0.35.4-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.5...v0.35.4-rc.6) (2022-07-28)
+
+### [0.35.4-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.4...v0.35.4-rc.5) (2022-07-27)
+
+
+### Bug Fixes
+
+* **core:** export missing types ([#8463](https://github.com/SAP/fundamental-ngx/issues/8463)) ([8030575](https://github.com/SAP/fundamental-ngx/commit/8030575947e13abaa3390316b3ba196f14c37526))
+
+### [0.35.4-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.3...v0.35.4-rc.4) (2022-07-27)
+
+
+### Bug Fixes
+
+* **core:** fix theming schematics ([#8459](https://github.com/SAP/fundamental-ngx/issues/8459)) ([65a8f76](https://github.com/SAP/fundamental-ngx/commit/65a8f76133a59993b46009f1ef5317005813dc71))
+
+### [0.35.4-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.2...v0.35.4-rc.3) (2022-07-27)
+
+### [0.35.4-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.1...v0.35.4-rc.2) (2022-07-27)
+
+
+### Bug Fixes
+
+* **platform:** fix list keyboard navigation ([#8454](https://github.com/SAP/fundamental-ngx/issues/8454)) ([57e75cf](https://github.com/SAP/fundamental-ngx/commit/57e75cfde906023275224ab4bb5e7df5cfbf4d07))
+
 ### [0.35.4-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.0...v0.35.4-rc.1) (2022-07-26)
 
 
