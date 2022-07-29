@@ -1,21 +1,32 @@
-import { chain, Rule, SchematicContext, SchematicsException, TaskId, Tree } from '@angular-devkit/schematics';
-import { NodePackageInstallTask, RunSchematicTask } from '@angular-devkit/schematics/tasks';
+import { chain, Rule, SchematicContext, SchematicsException, Tree } from '@angular-devkit/schematics';
+import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import { addPackageJsonDependency, NodeDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
 import { WorkspaceSchema } from '@schematics/angular/utility/workspace-models';
-
-import { defaultStyles } from './styles';
-import { checkPackageVersion, getPackageVersionFromPackageJson, hasPackage } from '../utils/package-utils';
-import { Schema } from './schema';
 import { updateWorkspace } from '@schematics/angular/utility/workspace';
+import { Change, InsertChange } from '@schematics/angular/utility/change';
+import {
+    addModuleImportToModule,
+    findBootstrapModuleCall,
+    findModuleFromOptions,
+    findNode,
+    findNodes,
+    getAppModulePath,
+    getProjectMainFile,
+    insertImport
+} from '@angular/cdk/schematics';
+import * as ts from 'typescript';
+
+import {
+    checkPackageVersion,
+    getPackageVersionFromPackageJson,
+    getSourceFile,
+    hasPackage
+} from '../utils/package-utils';
+import { Schema } from './schema';
 import { getProjectTargetOptions } from '../utils/angular-json-utils';
+import { hasModuleImport } from '../utils/ng-module-utils';
 
-// Needed to queue dependent schematics
-let installTaskId: TaskId;
-
-const fdStylesIconPath = 'node_modules/fundamental-styles/dist/icon.css';
 const angularConfigPath = '/angular.json';
-
-const FONT_FACE_REGEX = /(@font-face)[\w\s]?{[\s\S\W\w]+?(?=\s}\s)?\s?}/gi;
 
 interface AngularAssets {
     glob: string;
@@ -23,21 +34,23 @@ interface AngularAssets {
     output: string;
 }
 
+interface AngularStyle {
+    input: string;
+    inject: boolean;
+    bundleName: string;
+}
+
 export function ngAdd(options: any): Rule {
     return chain([
-        endInstallTask(),
         addDependencies(options),
-        endInstallTask(),
-        addStylePathToConfig(options),
-        addAssetsPathToConfig(options),
-        addFontsToStyles(options),
-        addThemeToApplication(options),
-        callAnimationsSchematics(options),
-        callFontMigrationSchematics(options)
+        addStylesToConfig(options),
+        addAssetsToConfig(options),
+        addTheming(options),
+        addAnimations(options),
+        endInstallTask()
     ]);
 }
 
-// Adds missing dependencies to the project.
 function addDependencies(options: Schema): Rule {
     return (tree: Tree, context: SchematicContext) => {
         const ngCoreVersionTag = getPackageVersionFromPackageJson(tree, '@angular/core');
@@ -51,7 +64,7 @@ function addDependencies(options: Schema): Rule {
             });
         }
 
-        if (!hasPackage(tree, '@angular/animations')) {
+        if (options.animations && !hasPackage(tree, '@angular/animations')) {
             dependencies.push({
                 type: NodeDependencyType.Default,
                 version: `${ngCoreVersionTag}`,
@@ -67,34 +80,31 @@ function addDependencies(options: Schema): Rule {
             });
         }
 
-        if (options.styleFonts) {
-            if (
-                !hasPackage(tree, 'fundamental-styles') ||
-                checkPackageVersion(tree, 'fundamental-styles', 'FDSTYLES_VER_PLACEHOLDER', '<')
-            ) {
-                dependencies.push({
-                    type: NodeDependencyType.Default,
-                    // Will be replaced with the real version during sync-version script run
-                    version: `FDSTYLES_VER_PLACEHOLDER`,
-                    name: 'fundamental-styles',
-                    overwrite: true
-                });
-            }
-
-            if (
-                !hasPackage(tree, '@sap-theming/theming-base-content') ||
-                checkPackageVersion(tree, '@sap-theming/theming-base-content', 'THEMING_VER_PLACEHOLDER', '<')
-            ) {
-                dependencies.push({
-                    type: NodeDependencyType.Default,
-                    // Will be replaced with the real version during sync-version scipt run
-                    version: `THEMING_VER_PLACEHOLDER`,
-                    name: '@sap-theming/theming-base-content',
-                    overwrite: true
-                });
-            }
+        if (
+            !hasPackage(tree, 'fundamental-styles') ||
+            checkPackageVersion(tree, 'fundamental-styles', 'FDSTYLES_VER_PLACEHOLDER', '<')
+        ) {
+            dependencies.push({
+                type: NodeDependencyType.Default,
+                // Will be replaced with the real version during sync-version script run
+                version: `FDSTYLES_VER_PLACEHOLDER`,
+                name: 'fundamental-styles',
+                overwrite: true
+            });
         }
 
+        if (
+            !hasPackage(tree, '@sap-theming/theming-base-content') ||
+            checkPackageVersion(tree, '@sap-theming/theming-base-content', 'THEMING_VER_PLACEHOLDER', '<')
+        ) {
+            dependencies.push({
+                type: NodeDependencyType.Default,
+                // Will be replaced with the real version during sync-version script run
+                version: `THEMING_VER_PLACEHOLDER`,
+                name: '@sap-theming/theming-base-content',
+                overwrite: true
+            });
+        }
         dependencies.forEach((dependency) => {
             addPackageJsonDependency(tree, dependency);
 
@@ -105,53 +115,83 @@ function addDependencies(options: Schema): Rule {
     };
 }
 
-// Runs npm install. Called as the last rule.
 function endInstallTask(): Rule {
     return (tree: Tree, context: SchematicContext) => {
-        installTaskId = context.addTask(new NodePackageInstallTask());
-
-        return tree;
-    };
-}
-
-function callFontMigrationSchematics(options: Schema): Rule {
-    return (tree: Tree, context: SchematicContext) => {
-        // Chain won't work here since we need the externals to be actually installed before we call their schemas
-        // This ensures the externals are a dependency of the node install, so they exist when their schemas run.
-        context.addTask(new RunSchematicTask('migrate-theme-fonts', options), [installTaskId]);
-
-        return tree;
-    };
-}
-
-/**
- * Process adding animations modules.
- * Done as the separate schematics as @angular/cdk tools are used that may be not installed yet.
- */
-function callAnimationsSchematics(options: Schema): Rule {
-    return (tree: Tree, context: SchematicContext) => {
-        // Chain won't work here since we need the externals to be actually installed before we call their schemas
-        // This ensures the externals are a dependency of the node install, so they exist when their schemas run.
-        context.addTask(new RunSchematicTask('add-animations', options), [installTaskId]);
-
-        context.logger.info('✅️ Added Fundamental NGX Add Animations schematic to tasks');
+        context.addTask(new NodePackageInstallTask());
 
         return tree;
     };
 }
 
 function getWorkspaceJson(tree: Tree): WorkspaceSchema {
-    const angularConfigPath = '/angular.json';
     const workspaceConfig = tree.read(angularConfigPath);
 
     if (!workspaceConfig) {
-        throw new SchematicsException(`Unable to find angular.json. Please manually configure your styles array.`);
+        throw new SchematicsException(
+            `Unable to find angular.json. Please manually configure your assets & styles arrays.`
+        );
     }
 
     return JSON.parse(workspaceConfig.toString());
 }
 
-function addAssetsPathToConfig(options: Schema): Rule {
+function addStylesToConfig(options: Schema): Rule {
+    return (tree: Tree, context: SchematicContext) => {
+        const workspaceJson = getWorkspaceJson(tree);
+
+        try {
+            const additionalStyles = ['./node_modules/@fundamental-ngx/core/assets/fundamental-ngx-core.scss'];
+
+            if (options.fonts) {
+                additionalStyles.push('./node_modules/@fundamental-ngx/core/assets/fundamental-ngx-core-fonts.scss');
+            }
+
+            let stylesArray: (string | AngularAssets)[] = (
+                workspaceJson!.projects[options.project]!.architect!.build!.options as any
+            )['styles'];
+            let stylesUpdated = false;
+
+            additionalStyles.forEach((additionalStyle) => {
+                if (
+                    !stylesArray.find(
+                        (jsonStyle) => typeof jsonStyle === 'string' && jsonStyle === `${additionalStyle}`
+                    )
+                ) {
+                    stylesUpdated = true;
+                    stylesArray.push(additionalStyle);
+                }
+            });
+
+            if (!stylesUpdated) {
+                context.logger.info(`✅️ Found duplicate styles in angular.json. Skipping.`);
+
+                if (options.fonts) {
+                    context.logger.info(`✅️ Found duplicate font styles to angular.json.`);
+                }
+
+                return tree;
+            }
+
+            (workspaceJson!.projects[options.project]!.architect!.build!.options as any)['styles'] = stylesArray;
+        } catch (e) {
+            throw new SchematicsException(
+                `Unable to find angular.json project styles. Please manually configure your styles array.`
+            );
+        }
+
+        tree.overwrite(angularConfigPath, JSON.stringify(workspaceJson, null, 2));
+
+        context.logger.info(`✅️ Added styles to angular.json.`);
+
+        if (options.fonts) {
+            context.logger.info(`✅️ Added font styles to angular.json.`);
+        }
+
+        return tree;
+    };
+}
+
+function addAssetsToConfig(options: Schema): Rule {
     return (tree: Tree, context: SchematicContext) => {
         const workspaceJson = getWorkspaceJson(tree);
 
@@ -168,18 +208,26 @@ function addAssetsPathToConfig(options: Schema): Rule {
                     output: './assets/fundamental-styles-theming/'
                 }
             ];
-
-            let assetsArray = (workspaceJson!.projects[options.project]!.architect!.build!.options as any)[
-                'assets'
-            ] as (string | AngularAssets)[];
+            let assetsArray: (string | AngularAssets)[] = (
+                workspaceJson!.projects[options.project]!.architect!.build!.options as any
+            )['assets'];
+            let assetsUpdated = false;
 
             additionalAssets.forEach((asset) => {
                 if (
                     !assetsArray.find((jsonAsset) => typeof jsonAsset === 'object' && jsonAsset.input === asset.input)
                 ) {
+                    assetsUpdated = true;
                     assetsArray.push(asset);
                 }
             });
+
+            if (!assetsUpdated) {
+                context.logger.info(`✅️ Found duplicate assets in angular.json. Skipping.`);
+                return tree;
+            }
+
+            (workspaceJson!.projects[options.project]!.architect!.build!.options as any)['assets'] = assetsArray;
         } catch (e) {
             throw new SchematicsException(
                 `Unable to find angular.json project assets. Please manually configure your assets array.`
@@ -188,168 +236,218 @@ function addAssetsPathToConfig(options: Schema): Rule {
 
         tree.overwrite(angularConfigPath, JSON.stringify(workspaceJson, null, 2));
 
-        context.logger.info(`✅️ Added theming assets to angular.json.`);
+        context.logger.info(`✅️ Added assets to angular.json.`);
 
         return tree;
     };
 }
 
-// Adds the icon style path to the angular.json.
-function addStylePathToConfig(options: any): Rule {
-    return (tree: Tree, context: SchematicContext) => {
-        const workspaceJson = getWorkspaceJson(tree);
-
-        try {
-            let stylesArray = (workspaceJson!.projects[options.project]!.architect!.build!.options as any)['styles'];
-
-            if (!stylesArray.includes(fdStylesIconPath)) {
-                stylesArray = pushStylesToArray(stylesArray, fdStylesIconPath);
-                (workspaceJson!.projects[options.project]!.architect!.build!.options as any)['styles'] = stylesArray;
-            } else {
-                context.logger.info(`✅️ Found duplicate style path in angular.json. Skipping.`);
-
-                return tree;
-            }
-        } catch (e) {
-            throw new SchematicsException(
-                `Unable to find angular.json project styles. Please manually configure your styles array.`
+function addTheming(options: Schema): Rule {
+    return (tree, context) =>
+        updateWorkspace(async (workspace) => {
+            context.logger.info(
+                `⚠️ Currently, we don't automatically remove the deprecated Themes approach. If you have it applied you have to remove it by yourself.`
             );
-        }
 
-        tree.overwrite(angularConfigPath, JSON.stringify(workspaceJson, null, 2));
+            if (options.theme === 'custom') {
+                return;
+            }
 
-        context.logger.info(`✅️ Added fundamental-styles path to angular.json.`);
-        context.logger.info(`
-        ❔Learn more how to enable theming for your application here: https://sap.github.io/fundamental-ngx/#/core/theming
-        `);
+            const workspaceJson = getWorkspaceJson(tree);
+            const targetOptions = getProjectTargetOptions(workspace.projects.get(options.project)!, 'build');
+            const styles = targetOptions.styles as (string | { input: string })[];
 
-        return tree;
-    };
-}
+            for (let i = 0; i < styles.length; i++) {
+                let style = styles[i];
+                const stylePath = typeof style === 'string' ? style : style.input;
 
-function pushStylesToArray(stylesArray: any, path: string): any {
-    if (!stylesArray.includes(path)) {
-        stylesArray.push(path);
-    }
+                const baseVariablesMatch = stylePath.match(/@sap-theming\/(.*)\/baseLib\/(.*)\/css_variables.css$/);
+                if (baseVariablesMatch) {
+                    const theme = baseVariablesMatch[2];
+                    context.logger
+                        .info(`ℹ️ Found theming ${theme} base SAP variables in styles. Can not add theme to application.
+Try to replace theme in application manually, or use ThemingService to manage multiple themes.
+[Instructions: https://sap.github.io/fundamental-ngx/#/core/theming]`);
+                    return;
+                }
 
-    return stylesArray;
-}
-
-// Adds the default fonts import into styles.scss
-function addFontsToStyles(options: any): Rule {
-    return (tree: Tree, context: SchematicContext) => {
-        let [stylesFilePath, stylesFileContent] = resolveStyles(tree);
-
-        if (options.styleFonts) {
-            if (!stylesFileContent) {
-                context.logger.warn(
-                    `Unable to find styles file. Please manually configure your styles. For more info, visit https://fundamental-styles.netlify.app/?path=/docs/introduction-overview--page#project-configuration`
+                const fundamentalStylesDeltaThemingVariablesMatch = stylePath.match(
+                    /fundamental-styles\/(.*)\/theming\/(.*)\/.css$/
                 );
+                if (fundamentalStylesDeltaThemingVariablesMatch) {
+                    const theme = fundamentalStylesDeltaThemingVariablesMatch[2];
+                    context.logger
+                        .info(`ℹ️ Found theming ${theme} fundamental-styles variables in styles. Can not add theme to application.
+Try to replace theme in application manually, or use ThemingService to manage multiple themes.
+[Instructions: https://sap.github.io/fundamental-ngx/#/core/theming]`);
+                    return;
+                }
+            }
 
-                return tree;
+            const iconFonts = ['sap_fiori_3_fonts', 'sap_horizon_fonts'];
+            let stylesArray: (string | AngularStyle)[] = (
+                workspaceJson!.projects[options.project]!.architect!.build!.options as any
+            )['styles'];
+            let stylesUpdated = false;
+
+            iconFonts.forEach((font) => {
+                if (
+                    !stylesArray.find(
+                        (jsonStyle) => typeof jsonStyle === 'object' && jsonStyle.bundleName === `${font}`
+                    )
+                ) {
+                    stylesUpdated = true;
+                    stylesArray.push({
+                        input: `./node_modules/@fundamental-ngx/core/assets/fonts/${font}.css`,
+                        inject: false,
+                        bundleName: font
+                    });
+                }
+            });
+
+            if (stylesUpdated) {
+                (workspaceJson!.projects[options.project]!.architect!.build!.options as any)['styles'] = stylesArray;
+
+                tree.overwrite(angularConfigPath, JSON.stringify(workspaceJson, null, 2));
+
+                context.logger.info(`✅️ Added theming icon font styles to angular.json.`);
+            } else {
+                context.logger.info(`✅️ Found duplicate theming icon font styles in angular.json. Skipping.`);
             }
 
             try {
-                let stylesFileString = stylesFileContent.toString();
+                const projectDef = workspace.projects.get(options.project);
+                const mainPath = getProjectMainFile(projectDef!);
+                const bootstrapModuleCall = findBootstrapModuleCall(tree, mainPath);
 
-                let fontsImported = false;
-
-                Object.keys(defaultStyles).forEach((font) => {
-                    const matches = stylesFileString.match(FONT_FACE_REGEX);
-                    if (!matches || matches.filter((match) => match.includes(font)).length === 0) {
-                        stylesFileString = stylesFileString + (defaultStyles[font] as string);
-                        fontsImported = true;
-                    }
-                });
-
-                if (fontsImported) {
-                    tree.overwrite(stylesFilePath, stylesFileString);
-                    context.logger.info(`✅️ Added imports from @sap-theming to styles file.`);
-                    return tree;
+                if (!bootstrapModuleCall) {
+                    throw new SchematicsException(`❌ No bootstrap module call found.`);
                 }
 
-                context.logger.info(`✅️ There are imports from @sap-theming in styles file already. Skipping.`);
+                const appModulePath = getAppModulePath(tree, mainPath);
+                const appModuleName = bootstrapModuleCall.arguments[0].getText();
 
-                return tree;
+                const appModuleSourceFile = getSourceFile(tree, appModulePath);
+                const appModuleClassIdentifierNode = findNode(
+                    appModuleSourceFile,
+                    ts.SyntaxKind.Identifier,
+                    appModuleName
+                );
+                if (!appModuleClassIdentifierNode) {
+                    throw new SchematicsException(`❌ No root module declaration found.`);
+                }
+
+                addModuleImportToModule(
+                    tree,
+                    appModulePath,
+                    `ThemingModule.withConfig({ defaultTheme: '${options.theme}', changeThemeOnQueryParamChange: false })`,
+                    '@fundamental-ngx/core/theming'
+                );
+
+                const changes: Change[] = [];
+
+                changes.push(
+                    insertImport(appModuleSourceFile, appModulePath, `ThemingService`, `@fundamental-ngx/core/theming`)
+                );
+
+                const appModuleClassDeclarationNode = appModuleClassIdentifierNode.parent;
+                const appModuleConstructorNode = findNodes(appModuleClassDeclarationNode, ts.SyntaxKind.Constructor)[0];
+                if (appModuleConstructorNode) {
+                    const appModuleConstructorBlockNode = findNodes(appModuleConstructorNode, ts.SyntaxKind.Block)[0];
+                    const appModuleConstructorParameters = (appModuleConstructorNode as ts.ConstructorDeclaration)
+                        .parameters;
+
+                    changes.push(
+                        new InsertChange(
+                            appModulePath,
+                            (appModuleConstructorParameters.length
+                                ? appModuleConstructorParameters[appModuleConstructorParameters.length - 1].pos
+                                : appModuleConstructorBlockNode.pos) - 1,
+                            (appModuleConstructorParameters.length ? ', ' : '') + `themingService: ThemingService`
+                        )
+                    );
+
+                    changes.push(
+                        new InsertChange(
+                            appModulePath,
+                            appModuleConstructorBlockNode.end - 1,
+                            '\nthemingService.init();\n'
+                        )
+                    );
+                } else {
+                    changes.push(
+                        new InsertChange(
+                            appModulePath,
+                            appModuleClassDeclarationNode.getEnd() - 1,
+                            `\nconstructor(themingService: ThemingService) {\nthemingService.init();\n}\n`
+                        )
+                    );
+                }
+
+                const exportRecorder = tree.beginUpdate(appModulePath);
+                for (const change of changes) {
+                    if (change instanceof InsertChange) {
+                        exportRecorder.insertLeft(change.pos, change.toAdd);
+                    }
+                }
+                tree.commitUpdate(exportRecorder);
+
+                context.logger.info(`✅️ Added Theming initialization to root module.`);
             } catch (e) {
+                context.logger.info(`ℹ️ Please process adding Theming to root module by yourself.
+[Instructions: https://sap.github.io/fundamental-ngx/#/core/theming]`);
+            }
+        });
+}
+
+function addAnimations(options: Schema): any {
+    return async (tree: Tree, context: SchematicContext) => {
+        const browserAnimationsModuleName = 'BrowserAnimationsModule';
+        const noopAnimationsModuleName = 'NoopAnimationsModule';
+        const modulePath = await findModuleFromOptions(tree, options as any);
+
+        if (!modulePath) {
+            context.logger.warn(`
+                ⚠️ Could not set up animations because root module not found. Please manually set up animations.
+            `);
+            return;
+        }
+
+        if (options.animations) {
+            if (hasModuleImport(tree, modulePath, noopAnimationsModuleName)) {
                 context.logger.warn(
-                    `Unable to find styles file. Please manually configure your styles. For more info, visit https://fundamental-styles.netlify.com/getting-started.html`
+                    `⚠️ Could not set up "${browserAnimationsModuleName} because "${noopAnimationsModuleName}" is already imported. Please manually set up browser animations.`
                 );
 
                 return tree;
             }
+
+            if (hasModuleImport(tree, modulePath, browserAnimationsModuleName)) {
+                context.logger.info(
+                    `✅️ Import of ${browserAnimationsModuleName} already present in root module. Skipping.`
+                );
+
+                return tree;
+            }
+
+            addModuleImportToModule(
+                tree,
+                modulePath,
+                browserAnimationsModuleName,
+                '@angular/platform-browser/animations'
+            );
+
+            context.logger.info(`✅️ Added ${browserAnimationsModuleName} to root module.`);
+
+            return tree;
+        }
+
+        if (!hasModuleImport(tree, modulePath, browserAnimationsModuleName)) {
+            addModuleImportToModule(tree, modulePath, noopAnimationsModuleName, '@angular/platform-browser/animations');
+
+            context.logger.info(`✅️ Added ${noopAnimationsModuleName} to root module.`);
         }
 
         return tree;
     };
-}
-
-function resolveStyles(tree: Tree): [string, Buffer] {
-    const basePath = '/src/styles';
-    const extensions = ['.css', '.scss', '.less', '.sass'];
-
-    let path: string;
-    let content: Buffer;
-
-    for (let extension of extensions) {
-        path = basePath + extension;
-        content = tree.read(path);
-
-        if (content) {
-            return [path, content];
-        }
-    }
-
-    return [path, content];
-}
-
-function addThemeToApplication(options: Schema): Rule {
-    return (_tree, context) =>
-        updateWorkspace((workspace) => {
-            if (options.theme !== 'custom') {
-                const themeAssets = [
-                    `./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/${options.theme}/css_variables.css`,
-                    `./node_modules/fundamental-styles/dist/theming/${options.theme}.css`
-                ];
-                const targetOptions = getProjectTargetOptions(workspace.projects.get(options.project), 'build');
-                const styles = targetOptions.styles as (string | { input: string })[];
-
-                for (let i = 0; i < styles.length; i++) {
-                    let style = styles[i];
-                    const baseVariablesRegex = /@sap-theming\/(.*)\/baseLib\/(.*)\/css_variables.css$/;
-                    const fundamentalStylesDeltaThemingVariablesRegex =
-                        /fundamental-styles\/(.*)\/theming\/(.*)\/.css$/;
-                    const stylePath = typeof style === 'string' ? style : style.input;
-
-                    const baseVariablesMatch = stylePath.match(baseVariablesRegex);
-                    if (baseVariablesMatch) {
-                        const theme = baseVariablesMatch[2];
-                        context.logger.info(`
-                        Found theme ${theme} base SAP variables in styles. Can not add theme to application.
-                        Try to replace theme in application manually, or use ThemingService to manage multiple themes.
-                        [Instructions: https://sap.github.io/fundamental-ngx/#/core/theming]
-                    `);
-                        return;
-                    }
-
-                    const fundamentalStylesDeltaThemingVariablesMatch = stylePath.match(
-                        fundamentalStylesDeltaThemingVariablesRegex
-                    );
-                    if (fundamentalStylesDeltaThemingVariablesMatch) {
-                        const theme = fundamentalStylesDeltaThemingVariablesMatch[2];
-                        context.logger.info(`
-                        Found theme ${theme} fundamental-styles variables in styles. Can not add theme to application.
-                        Try to replace theme in application manually, or use ThemingService to manage multiple themes.
-                        [Instructions: https://sap.github.io/fundamental-ngx/#/core/theming]
-                    `);
-                        return;
-                    }
-                }
-
-                targetOptions.styles = [...(styles || []), ...themeAssets];
-                context.logger.info(
-                    `✅️ Added theme ${options.theme} variables to project ${options.project} in angular.json.`
-                );
-            }
-        });
 }
