@@ -184,7 +184,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
     _placeholderMargin: boolean;
 
     /** @hidden */
-    _listenResize = false;
+    _listenResize = true;
 
     /** @hidden */
     _hiddenCard: Nullable<CardDefinitionDirective>;
@@ -214,11 +214,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
 
     /** @hidden */
     ngAfterViewInit(): void {
-        if (this._layout.nativeElement.clientHeight) {
-            this._processCards();
-        } else {
-            this._listenResize = true;
-        }
+        this._processCards();
 
         this._listenOnResize();
         this._listenOnCardsChange();
@@ -418,18 +414,15 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
                 ),
                 takeUntil(this._onDestroy$)
             )
-            .subscribe(() => {
-                if (this._cardsArray) {
-                    this.updateLayout();
-                } else {
-                    this._processCards();
-                }
-            });
+            .subscribe(() => this.updateLayout());
     }
 
     /** @hidden Listen card change and distribute cards on column change */
     private _listenOnCardsChange(): void {
-        this._cards.changes.subscribe(() => this._processCards());
+        this._cards.changes.subscribe(() => {
+            this._processCards();
+            this.updateLayout();
+        });
     }
 
     /** @hidden */
@@ -437,8 +430,6 @@ export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChange
         this._cardsArray = this._cards
             .toArray()
             .sort((firstCard, secondCard) => firstCard.fdCardDef - secondCard.fdCardDef);
-
-        this.updateLayout();
     }
 
     /** @hidden Distribute cards among columns to arrange them in "Z" flow */
