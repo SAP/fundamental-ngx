@@ -20,7 +20,7 @@
                 *ngIf="!_userToShowDetails && _isListMode"
                 i18n-placeholder
                 placeholder="Search"
-                contentDensity="compact"
+                fdCompact
                 [suggestions]="[]"
                 (inputChange)="_onSearchStringChange($event.text)"
             ></fdp-search-field>
