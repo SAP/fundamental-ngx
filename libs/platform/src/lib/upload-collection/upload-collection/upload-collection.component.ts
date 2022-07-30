@@ -3,6 +3,7 @@ import {
     Component,
     ElementRef,
     EventEmitter,
+    Injector,
     Input,
     OnChanges,
     OnDestroy,
@@ -314,7 +315,8 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
     constructor(
         private readonly _dialogService: DialogService,
         private readonly _filesValidatorService: FilesValidatorService,
-        private readonly _cdr: ChangeDetectorRef
+        private readonly _cdr: ChangeDetectorRef,
+        private _injector: Injector
     ) {}
 
     /** @hidden */
@@ -507,18 +509,22 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
         const _activeItem = this._activeItem;
         const currentFolder = this._getCurrentFolder();
         const movableItems = multiple ? this.selectedItems : _activeItem ? [_activeItem] : [];
-        const dialogRef = this._dialogService.open(MoveToComponent, {
-            responsivePadding: true,
-            verticalPadding: false,
-            backdropClickCloseable: false,
-            height: '350px',
-            data: {
-                items: this.dataSource.dataProvider.items,
-                currentFolder,
-                movableFolders: movableItems.filter((item) => item?.type === 'folder'),
-                maxFilenameLength: this.maxFilenameLength
-            } as MoveToComponentDialogData
-        } as DialogConfig);
+        const dialogRef = this._dialogService.open(
+            MoveToComponent,
+            {
+                responsivePadding: true,
+                verticalPadding: false,
+                backdropClickCloseable: false,
+                height: '350px',
+                data: {
+                    items: this.dataSource.dataProvider.items,
+                    currentFolder,
+                    movableFolders: movableItems.filter((item) => item?.type === 'folder'),
+                    maxFilenameLength: this.maxFilenameLength
+                } as MoveToComponentDialogData
+            } as DialogConfig,
+            this._injector
+        );
 
         dialogRef.afterClosed.pipe(take(1)).subscribe(
             ({ selectedFolder, parentFolderId, folderName }) => {
