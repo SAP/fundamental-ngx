@@ -7,6 +7,14 @@
 		</div>
 	</div>
 </section>
+<section class="tsd-panel tsd-type-parameters">
+	<h3>Type parameters</h3>
+	<ul class="tsd-type-parameters">
+		<li>
+			<h4>T = <span class="tsd-signature-type">any</span></h4>
+		</li>
+	</ul>
+</section>
 <section class="tsd-panel tsd-hierarchy">
 	<h3>Hierarchy</h3>
 	<ul class="tsd-hierarchy">
@@ -18,8 +26,27 @@
 <section class="tsd-panel">
 	<h3>Implements</h3>
 	<ul class="tsd-hierarchy">
-		<li><span class="tsd-signature-type">OverflowItemRef</span></li>
+		<li><span class="tsd-signature-type">OverflowItemRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
 	</ul>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Inputs</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="item" class="tsd-anchor"></a>
+		<h3>item</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">item<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span></div>
+		<aside class="tsd-sources">
+			<p>Implementation of <span>OverflowItemRef</span>.<span>item</span></p>
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Item instance. Used for correct autocomplete.</p>
+			</div>
+		</div>
+	</section>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Properties</h2>
@@ -40,18 +67,34 @@
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="hidden" class="tsd-anchor"></a>
-		<h3>hidden</h3>
+		<a name="first" class="tsd-anchor"></a>
+		<h3>first</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">hidden<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<div class="tsd-signature tsd-kind-icon">first<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 		<aside class="tsd-sources">
-			<p>Implementation of <span>OverflowItemRef</span>.<span>hidden</span></p>
+			<p>Implementation of <span>OverflowItemRef</span>.<span>first</span></p>
 			<ul>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Whether the item is hidden.</p>
+				<p>Whether this item is last in the array.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="globalIndex" class="tsd-anchor"></a>
+		<h3>global<wbr>Index</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">global<wbr>Index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+		<aside class="tsd-sources">
+			<p>Implementation of <span>OverflowItemRef</span>.<span>globalIndex</span></p>
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>The index of the item in the array of items.</p>
 			</div>
 		</div>
 	</section>
@@ -67,7 +110,23 @@
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Index of the item in the array of Overflow Layout Component&#39;s items.</p>
+				<p>Index of the item in the visible or hidden array of Overflow Layout Component&#39;s items.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="last" class="tsd-anchor"></a>
+		<h3>last</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">last<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+		<aside class="tsd-sources">
+			<p>Implementation of <span>OverflowItemRef</span>.<span>last</span></p>
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether this item is first in the array.</p>
 			</div>
 		</div>
 	</section>
@@ -88,10 +147,26 @@
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="softHidden" class="tsd-anchor"></a>
+		<h3>soft<wbr>Hidden</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">soft<wbr>Hidden<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
+		<aside class="tsd-sources">
+			<p>Implementation of <span>OverflowItemRef</span>.<span>softHidden</span></p>
+			<ul>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether the item is softly hidden.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="templateRef" class="tsd-anchor"></a>
 		<h3>template<wbr>Ref</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">template<wbr>Ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">OverflowItemDirectiveContext</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<div class="tsd-signature tsd-kind-icon">template<wbr>Ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">OverflowItemDirectiveContext</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<p>Implementation of <span>OverflowItemRef</span>.<span>templateRef</span></p>
 		</aside>
@@ -100,6 +175,52 @@
 				<p>Template reference of the directive.</p>
 			</div>
 		</div>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Accessors</h2>
+	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+		<a name="hidden" class="tsd-anchor"></a>
+		<h3>hidden</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> hidden<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> hidden<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Implementation of <span>OverflowItemRef</span>.<span>hidden</span></p>
+					<ul>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Whether the item is hidden.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+			</li>
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Implementation of <span>OverflowItemRef</span>.<span>hidden</span></p>
+					<ul>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Whether the item is hidden.</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>value: <span class="tsd-signature-type">boolean</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
 	</section>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
