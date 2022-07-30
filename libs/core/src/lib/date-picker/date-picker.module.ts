@@ -11,6 +11,7 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
 import { FormMessageModule } from '@fundamental-ngx/core/form';
 import { DeprecatedDatePickerCompactDirective } from './deprecated-date-picker-compact.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { BarModule } from '@fundamental-ngx/core/bar';
 
 @NgModule({
     declarations: [DatePickerComponent, DeprecatedDatePickerCompactDirective],
@@ -23,6 +24,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         InputGroupModule,
         ButtonModule,
         FormMessageModule,
+        BarModule,
         ContentDensityModule
     ],
     exports: [DatePickerComponent, DeprecatedDatePickerCompactDirective, ContentDensityModule]

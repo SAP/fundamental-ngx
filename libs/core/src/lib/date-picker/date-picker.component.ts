@@ -202,6 +202,14 @@ export class DatePickerComponent<D>
     @Input()
     closeOnDateChoose = true;
 
+    /** Enables Today-Selection-Button if true */
+    @Input()
+    showTodayButton = false;
+
+    /** Label for Today-Selection-Button */
+    @Input()
+    todayButtonLabel = 'Today';
+
     /**
      * Function used to disable previous button in the calendar header.
      */
@@ -526,6 +534,20 @@ export class DatePickerComponent<D>
             this.selectedRangeDateChange.emit(this.selectedRangeDate);
             this.onChange(this.selectedRangeDate);
             this._isInvalidDateInput = !this.isModelValid();
+        }
+    }
+
+    /**
+     * @hidden
+     * Method that is triggered when Today-Selection-Button clicked, it changes selected date or date range to today's date
+     */
+    onTodayButtonClick(): void {
+        const todayDate = this._dateTimeAdapter.today();
+        if (this.type === 'single') {
+            this.handleSingleDateChange(todayDate);
+            this.closeFromCalendar();
+        } else if (this.type === 'range') {
+            this.handleRangeDateChange({ start: todayDate, end: todayDate });
         }
     }
 
