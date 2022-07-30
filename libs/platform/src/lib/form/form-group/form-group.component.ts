@@ -46,7 +46,7 @@ import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
 
-import { ContentDensityService, isCompactDensity, resizeObservable } from '@fundamental-ngx/core/utils';
+import { resizeObservable } from '@fundamental-ngx/core/utils';
 import {
     ColumnLayout,
     FieldHintOptions,
@@ -80,6 +80,11 @@ import {
 import { generateColumnClass, normalizeColumnLayout } from './helpers';
 import { FormFieldLayoutService } from './services/form-field-layout.service';
 import { FDP_FORM_FIELD_HINT_OPTIONS_DEFAULT } from './fdp-form.tokens';
+import {
+    contentDensityObserverProviders,
+    ContentDensityObserver,
+    ContentDensityMode
+} from '@fundamental-ngx/core/content-density';
 
 export const formGroupProvider: Provider = {
     provide: FormGroupContainer,
@@ -168,7 +173,15 @@ type FormGroupField = (FormField | FormFieldGroup) & { hintOptions?: HintOptions
     styleUrls: ['./form-group.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [formGroupProvider, FormFieldLayoutService]
+    providers: [
+        formGroupProvider,
+        FormFieldLayoutService,
+        contentDensityObserverProviders({
+            modifiers: {
+                [ContentDensityMode.COZY]: 'fd-form-layout-grid-container'
+            }
+        })
+    ]
 })
 export class FormGroupComponent
     implements FormGroupContainer, OnInit, AfterContentInit, AfterViewInit, OnDestroy, OnChanges
@@ -187,10 +200,6 @@ export class FormGroupComponent
     /** Indicates when labels should not be displayed */
     @Input()
     noLabelLayout = false;
-
-    /** Whether form is in compact mode */
-    @Input()
-    compact: boolean;
 
     /** User's custom classes */
     @Input()
@@ -398,7 +407,7 @@ export class FormGroupComponent
         private _cd: ChangeDetectorRef,
         private elementRef: ElementRef,
         @Optional() private formContainer: ControlContainer,
-        @Optional() private _contentDensityService: ContentDensityService,
+        readonly contentDensityObserver: ContentDensityObserver,
         @Inject(FDP_FORM_FIELD_HINT_OPTIONS_DEFAULT) private _defaultHintOptions: FieldHintOptions
     ) {
         this.formGroup = <FormGroup>(this.formContainer ? this.formContainer.control : new FormGroup({}));
@@ -426,14 +435,6 @@ export class FormGroupComponent
     ngOnInit(): void {
         if (!this.formGroup) {
             this.formGroup = new FormGroup({});
-        }
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._contentDensityListener.subscribe((density) => {
-                    this.compact = isCompactDensity(density);
-                    this.buildComponentCssClass();
-                })
-            );
         }
         this.buildComponentCssClass();
         this._updateInlineColumnLayout();
@@ -524,7 +525,7 @@ export class FormGroupComponent
 
     /** @hidden */
     buildComponentCssClass(): string[] {
-        return ['fd-container', !this.compact ? 'fd-form-layout-grid-container' : '', this.class];
+        return ['fd-container', this.class];
     }
 
     /** @hidden used for template side Type correction */
