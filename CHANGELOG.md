@@ -1,4 +1,11 @@
 
+### [0.35.5-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.35.4...v0.35.5-rc.0) (2022-07-30)
+
+
+### Features
+
+* **core, platform:** datepicker today button ([#8394](https://github.com/SAP/fundamental-ngx/issues/8394)) ([89a6ebe](https://github.com/SAP/fundamental-ngx/commit/89a6ebe90dad67fe82ad1270f47ca517d7924685))
+
 ### [0.35.4](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.13...v0.35.4) (2022-07-30)
 
 ### [0.35.4-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.12...v0.35.4-rc.13) (2022-07-29)
