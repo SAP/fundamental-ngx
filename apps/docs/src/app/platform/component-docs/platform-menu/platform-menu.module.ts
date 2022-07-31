@@ -16,6 +16,7 @@ import { PlatformMenuCascadeExampleComponent } from './platform-menu-examples/pl
 import { PlatformMenuScrollingExampleComponent } from './platform-menu-examples/platform-menu-scrolling-example.component';
 import { PlatformMenuXPositionExampleComponent } from './platform-menu-examples/platform-menu-x-position-example.component';
 import { PlatformMenuWithIconsExampleComponent } from './platform-menu-examples/platform-menu-with-icons-example.component';
+import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
     {
@@ -46,6 +47,7 @@ const routes: Routes = [
         PlatformMenuScrollingExampleComponent,
         PlatformMenuXPositionExampleComponent,
         PlatformMenuWithIconsExampleComponent
-    ]
+    ],
+    providers: [platformContentDensityModuleDeprecationsProvider('fdp-menu')]
 })
 export class PlatformMenuDocsModule {}
