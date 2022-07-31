@@ -20,6 +20,7 @@ export class DeprecatedContentDensityDirective
             console.warn(`${this.message}. Use [fd${capitalize(value)}] or [fdContentDensity] directives instead.`);
             warnedSelectorBases.add(this.selectorBase);
         }
+        this._manuallySet = true;
         this.next(value);
     }
 
@@ -27,12 +28,16 @@ export class DeprecatedContentDensityDirective
         return `Usage of ${this.selectorBase}[contentDensity] is deprecated`;
     }
 
-    readonly alternative = {
-        name: 'Use [fdCompact] directive instead',
-        link: ['/core', 'content-density']
-    };
+    get alternative(): any {
+        return {
+            name: `Use [${this._manuallySet ? `fd${capitalize(this.value)}` : 'fdContentDensity'}] directive instead`,
+            link: ['/core', 'content-density']
+        };
+    }
 
     selectorBase: string;
+
+    private _manuallySet = false;
 
     constructor() {
         super(ContentDensityMode.COZY);
