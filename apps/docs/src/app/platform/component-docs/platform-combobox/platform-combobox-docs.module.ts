@@ -23,6 +23,7 @@ import { ComboboxStateComponent } from './examples/combobox-states/combobox-stat
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { ComboboxBylineExampleComponent } from './examples/combobox-byline/combobox-byline-example.component';
 import { ComboboxLoadingExampleComponent } from './examples/combobox-loading/combobox-loading-example.component';
+import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
     {
@@ -46,7 +47,14 @@ const routes: Routes = [
         IconModule
     ],
     exports: [RouterModule],
-    providers: [{ provide: MOBILE_MODE_CONFIG, useValue: COMBOBOX_MOBILE_CONFIG, multi: true }],
+    providers: [
+        {
+            provide: MOBILE_MODE_CONFIG,
+            useValue: COMBOBOX_MOBILE_CONFIG,
+            multi: true
+        },
+        platformContentDensityModuleDeprecationsProvider('fdp-combobox')
+    ],
     declarations: [
         PlatformComboboxHeaderComponent,
         PlatformComboboxDocsComponent,
