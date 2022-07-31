@@ -1,27 +1,30 @@
-<header>Standard List Item</header>
-<description>
-    <p>
-        Standard List Item is used for less complex datasets (for example, when the user selects an item in a dialog).
-        It consists of an optional image, a title, description, and a single info text, which can contain semantic
-        information. This component makes use of <a routerLink="/core/list">list-item</a> directive present in
-        fundamental-ngx/core and has additional enhancements on top of it.
-    </p>
-    <h3>Platform specific enhancements:</h3>
-    <ul>
-        <li>
-            Standard-List-item is implemented as Angular component to hide complexity of dealing with HTML in order to
-            deliver high-order component.
-        </li>
-        <li>
-            Alignment of sub elements title, icons, secondary, footer, group header, counter, navigation, multi-select
-            are abstracted.
-        </li>
-        <li>Selection modes '', single and multi options along with features are provided.</li>
-        <li>Byline features are introduced.</li>
-        <li>Supports both imperative and declarative way of accepting the items for all the list variants.</li>
-    </ul>
-</description>
-<import module="PlatformListModule, StandardListItemModule" subPackage="list"></import>
+<fd-doc-page>
+    <header>Standard List Item</header>
+    <description>
+        <p>
+            Standard List Item is used for less complex datasets (for example, when the user selects an item in a
+            dialog).
+            It consists of an optional image, a title, description, and a single info text, which can contain semantic
+            information. This component makes use of <a routerLink="/core/list">list-item</a> directive present in
+            fundamental-ngx/core and has additional enhancements on top of it.
+        </p>
+        <h3>Platform specific enhancements:</h3>
+        <ul>
+            <li>
+                Standard-List-item is implemented as Angular component to hide complexity of dealing with HTML in order to
+                deliver high-order component.
+            </li>
+            <li>
+                Alignment of sub elements title, icons, secondary, footer, group header, counter, navigation, multi-select
+                are abstracted.
+            </li>
+            <li>Selection modes '', single and multi options along with features are provided.</li>
+            <li>Byline features are introduced.</li>
+            <li>Supports both imperative and declarative way of accepting the items for all the list variants.</li>
+        </ul>
+    </description>
+    <import module="PlatformListModule, StandardListItemModule" subPackage="list"></import>
 
-<fd-header-tabs></fd-header-tabs>
-<router-outlet></router-outlet>
+    <fd-header-tabs></fd-header-tabs>
+</fd-doc-page>
+
