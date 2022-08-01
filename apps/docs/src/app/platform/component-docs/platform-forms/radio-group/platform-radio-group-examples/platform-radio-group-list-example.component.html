@@ -3,13 +3,7 @@
 <form #listform="ngForm" (ngSubmit)="onSubmit(listform)">
     <fdp-form-group [formGroup]="form1">
         <fdp-form-field #fl1 id="radiol1" [rank]="1" [required]="true">
-            <fdp-radio-group
-                name="radiol1"
-                [list]="seasons"
-                [isInline]="true"
-                fdCozy
-                [formControl]="fl1.formControl"
-            >
+            <fdp-radio-group name="radiol1" [list]="seasons" [isInline]="true" fdCozy [formControl]="fl1.formControl">
             </fdp-radio-group>
             <ng-container fdCompact>
                 <fdp-button type="submit" label="Submit"></fdp-button>
@@ -73,13 +67,7 @@
 <p>Creating platform radio button with given list of string values</p>
 <fdp-form-group>
     <fdp-form-field id="radiol5" [rank]="1">
-        <fdp-radio-group
-            name="radiol5"
-            [list]="seasons"
-            fdCompact
-            [isInline]="true"
-            [(ngModel)]="favoriteOption2"
-        >
+        <fdp-radio-group name="radiol5" [list]="seasons" fdCompact [isInline]="true" [(ngModel)]="favoriteOption2">
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>

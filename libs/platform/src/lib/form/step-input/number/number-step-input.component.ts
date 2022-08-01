@@ -19,7 +19,7 @@ import { RtlService } from '@fundamental-ngx/core/utils';
 import { FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
 import { StepInputChangeEvent, StepInputComponent } from '../base.step-input';
 import { StepInputConfig } from '../step-input.config';
-import { ContentDensityObserver, contentDensityObserverProviders } from "@fundamental-ngx/core/content-density";
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 /**
  * Fundamental number-step-input component

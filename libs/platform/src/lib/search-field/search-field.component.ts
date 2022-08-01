@@ -45,7 +45,7 @@ import {
 } from './search-field-mobile/search-field-mobile.interface';
 import { SearchFieldMobileComponent } from './search-field-mobile/search-field/search-field-mobile.component';
 import { PlatformSearchFieldMobileModule } from './search-field-mobile/search-field-mobile.module';
-import { ContentDensityObserver, contentDensityObserverProviders } from "@fundamental-ngx/core/content-density";
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 export interface SearchInput {
     text: string;
@@ -659,7 +659,7 @@ export class SearchFieldComponent
 }
 
 @Pipe({
-    name: "suggestionMatches"
+    name: 'suggestionMatches'
 })
 export class SuggestionMatchesPipe implements PipeTransform {
     transform(values: string[] | null, match: string, mobile = false): string[] {

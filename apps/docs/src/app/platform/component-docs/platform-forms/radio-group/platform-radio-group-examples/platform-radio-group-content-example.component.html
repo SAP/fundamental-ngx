@@ -2,13 +2,7 @@
 <p>Compact radio group with 'default' state and with default selection</p>
 <fdp-form-group [formGroup]="form1">
     <fdp-form-field #ffl1 id="radioc1" [rank]="1">
-        <fdp-radio-group
-            name="radioc1"
-            fdCompact
-            selected="spring"
-            [isInline]="false"
-            [formControl]="ffl1.formControl"
-        >
+        <fdp-radio-group name="radioc1" fdCompact selected="spring" [isInline]="false" [formControl]="ffl1.formControl">
             <fdp-radio-button value="winter">Winter</fdp-radio-button>
             <fdp-radio-button value="spring">Spring</fdp-radio-button>
             <fdp-radio-button value="summer">Summer</fdp-radio-button>
@@ -86,13 +80,7 @@
 <p>Radio group using FormGroup and FormControl</p>
 <fdp-form-group [formGroup]="form5">
     <fdp-form-field id="radioc5" [rank]="1">
-        <fdp-radio-group
-            name="radioc5"
-            fdCompact
-            selected="march"
-            [isInline]="false"
-            formControlName="month"
-        >
+        <fdp-radio-group name="radioc5" fdCompact selected="march" [isInline]="false" formControlName="month">
             <fdp-radio-button value="january" [disabled]="true">January</fdp-radio-button>
             <fdp-radio-button value="february">February</fdp-radio-button>
             <fdp-radio-button value="march">March</fdp-radio-button>

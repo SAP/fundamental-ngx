@@ -41,7 +41,7 @@ import { startWith, switchMap } from 'rxjs/operators';
 
 import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { MenuItemComponent } from './menu-item.component';
-import { ContentDensityObserver, contentDensityObserverProviders } from "@fundamental-ngx/core/content-density";
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 export type MenuCloseMethod = void | 'mouse' | 'keyboard' | 'tab' | 'arrow';
 

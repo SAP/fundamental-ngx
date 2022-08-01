@@ -9,12 +9,7 @@
 <br />
 <label for="compactDatetime">Compact datetime picker. Click on the button to change the date:</label>
 <br />
-<fdp-datetime-picker
-    name="compactDatetime"
-    fdCompact
-    [value]="date1"
-    placeholder="Compact datetime picker"
->
+<fdp-datetime-picker name="compactDatetime" fdCompact [value]="date1" placeholder="Compact datetime picker">
 </fdp-datetime-picker>
 <br />
 <button fd-button name="changeBtn" (click)="changeDay()">Change datetime value</button>

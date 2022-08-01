@@ -127,13 +127,7 @@
 <p>Compact platform radio button created with given list of SelectItem objects.Using FormGroup and FormControl</p>
 <fdp-form-group [formGroup]="form2">
     <fdp-form-field id="radiolo2" [rank]="1">
-        <fdp-radio-group
-            name="radiolo2"
-            fdCompact
-            [list]="items"
-            [isInline]="true"
-            formControlName="example2"
-        >
+        <fdp-radio-group name="radiolo2" fdCompact [list]="items" [isInline]="true" formControlName="example2">
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>
@@ -181,13 +175,7 @@
 <p>Platform radio button created with given list of SelectItem objects</p>
 <fdp-form-group>
     <fdp-form-field id="radiolo6" [rank]="1">
-        <fdp-radio-group
-            name="radiolo6"
-            [list]="items"
-            fdCompact
-            [isInline]="true"
-            [(ngModel)]="favoriteOption2"
-        >
+        <fdp-radio-group name="radiolo6" [list]="items" fdCompact [isInline]="true" [(ngModel)]="favoriteOption2">
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>

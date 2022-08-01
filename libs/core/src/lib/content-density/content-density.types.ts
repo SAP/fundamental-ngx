@@ -11,7 +11,10 @@ export enum ContentDensityMode {
     COMPACT = 'compact'
 }
 
-export type LocalContentDensityMode = ContentDensityMode | typeof ContentDensityGlobalKeyword | typeof ContentDensityDefaultKeyword;
+export type LocalContentDensityMode =
+    | ContentDensityMode
+    | typeof ContentDensityGlobalKeyword
+    | typeof ContentDensityDefaultKeyword;
 
 interface BaseContentDensityModuleConfig {
     defaultGlobalContentDensity?: ContentDensityMode;

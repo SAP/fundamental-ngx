@@ -354,8 +354,7 @@
             <!-- Results per page -->
             <div class="fdp-upload-collection__results">
                 <span class="fdp-upload-collection__results--title">
-                    <span [id]="id + '-results'"
-                          i18n="@@platformUploadCollection.ResultsPerPage.Title">
+                    <span [id]="id + '-results'" i18n="@@platformUploadCollection.ResultsPerPage.Title">
                         Results per page
                     </span>
                     <span *ngIf="_itemsPerPageOptions.length === 0" [innerText]="_itemsPerPage"></span>

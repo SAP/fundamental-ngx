@@ -33,7 +33,7 @@
             *ngIf="_isShownSelectionColumn"
             fd-table-cell
             class="fd-table__cell--fixed fd-table__cell--checkbox"
-            [style]="contentDensityObserver | async | selectionCellStyles : _rtl:_semanticHighlightingColumnWidth"
+            [style]="contentDensityObserver | async | selectionCellStyles: _rtl:_semanticHighlightingColumnWidth"
         >
             <fd-checkbox
                 *ngIf="selectionMode === SELECTION_MODE.MULTIPLE"
@@ -291,7 +291,9 @@
                                     fd-table-cell
                                     fd-table-cell-selectable
                                     [style]="
-                                        contentDensityObserver | async | selectionCellStyles: _rtl:_semanticHighlightingColumnWidth
+                                        contentDensityObserver
+                                            | async
+                                            | selectionCellStyles: _rtl:_semanticHighlightingColumnWidth
                                     "
                                     [focusable]="true"
                                     [attr.aria-selected]="row.checked"
@@ -307,7 +309,9 @@
                                     role="cell"
                                     fd-table-cell
                                     [style]="
-                                        contentDensityObserver | async | selectionCellStyles: _rtl:_semanticHighlightingColumnWidth
+                                        contentDensityObserver
+                                            | async
+                                            | selectionCellStyles: _rtl:_semanticHighlightingColumnWidth
                                     "
                                 >
                                     <fd-checkbox

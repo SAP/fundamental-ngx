@@ -159,7 +159,9 @@
                                         ></fd-avatar>
 
                                         <ng-template fd-grid-list-item-body>
-                                            <ng-container [ngTemplateOutlet]="approvalFlowNode._nodeContent"></ng-container>
+                                            <ng-container
+                                                [ngTemplateOutlet]="approvalFlowNode._nodeContent"
+                                            ></ng-container>
                                         </ng-template>
                                     </fd-grid-list-item>
                                 </fdp-approval-flow-node>

@@ -59,13 +59,7 @@
 <p>Platform radio buttons passed as content projection and group is disabled</p>
 <fdp-form-group>
     <fdp-form-field id="radio6" [rank]="1">
-        <fdp-radio-group
-            name="radio6"
-            fdCompact
-            [disabled]="true"
-            [isInline]="true"
-            [(ngModel)]="favoriteSeason1"
-        >
+        <fdp-radio-group name="radio6" fdCompact [disabled]="true" [isInline]="true" [(ngModel)]="favoriteSeason1">
             <fdp-radio-button value="winter">Winter</fdp-radio-button>
             <fdp-radio-button value="spring">Spring</fdp-radio-button>
             <fdp-radio-button value="summer">Summer</fdp-radio-button>

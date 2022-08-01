@@ -3,12 +3,7 @@
 <small style="display: block">Selected value: {{ selectedValue1 }}</small>
 
 <h4>Compact select</h4>
-<fdp-select
-    placeholder="Select an option"
-    fdCompact
-    (selectionChange)="onSelect2($event)"
-    [list]="option"
->
+<fdp-select placeholder="Select an option" fdCompact (selectionChange)="onSelect2($event)" [list]="option">
 </fdp-select>
 <small style="display: block">Selected value: {{ selectedValue2 }}</small>
 

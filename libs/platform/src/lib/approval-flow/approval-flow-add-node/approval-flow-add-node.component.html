@@ -143,11 +143,7 @@
             <div *ngIf="_checkDueDate" fd-form-item>
                 <label fd-form-label i18n="@@platformApprovalFlowAddNodeDialogDueDate">Due date</label>
 
-                <fd-date-picker
-                    type="single"
-                    [state]="!this._dueDate ? 'error' : null"
-                    [(ngModel)]="_dueDate"
-                >
+                <fd-date-picker type="single" [state]="!this._dueDate ? 'error' : null" [(ngModel)]="_dueDate">
                 </fd-date-picker>
             </div>
         </ng-container>

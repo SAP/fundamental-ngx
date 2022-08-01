@@ -23,10 +23,7 @@
     </ng-container>
 
     <!-- After input addons area -->
-    <fdp-input-group-addon-body
-        *ngFor="let addon of _afterInputAddons"
-        [hasButton]="!!addon.button"
-    >
+    <fdp-input-group-addon-body *ngFor="let addon of _afterInputAddons" [hasButton]="!!addon.button">
         <ng-container *ngTemplateOutlet="addon.contentTemplateRef"></ng-container>
     </fdp-input-group-addon-body>
 </div>
