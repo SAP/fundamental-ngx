@@ -129,7 +129,7 @@
     "@fundamental-styles/fn": "0.24.1-rc.12",
     "@nrwl/angular": "~13.8.3",
     "@sap-theming/theming-base-content": "11.1.40",
-    "@stackblitz/sdk": "1.6.0",
+    "@stackblitz/sdk": "1.8.0",
     "@types/google.visualization": "0.0.68",
     "@types/node": "14.14.10",
     "allure-commandline": "2.13.8",
