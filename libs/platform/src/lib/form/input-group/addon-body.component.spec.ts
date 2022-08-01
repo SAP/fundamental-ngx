@@ -2,7 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { ContentDensity } from '@fundamental-ngx/core/utils';
 import { InputGroupAddonBodyComponent } from './addon-body.component';
 import { ContentDensityModule, ContentDensityMode } from '@fundamental-ngx/core/content-density';
 
@@ -14,7 +13,7 @@ import { ContentDensityModule, ContentDensityMode } from '@fundamental-ngx/core/
 class TextAddonHostComponent {
     @ViewChild(InputGroupAddonBodyComponent) addon: InputGroupAddonBodyComponent;
 
-    contentDensity: ContentDensity = ContentDensityMode.COZY;
+    contentDensity = ContentDensityMode.COZY;
     hasButton = false;
 }
 describe('Input group addon with a text', () => {

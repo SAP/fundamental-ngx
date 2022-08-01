@@ -21,8 +21,6 @@ import {
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 import { startWith } from 'rxjs/operators';
-
-import { ContentDensity } from '@fundamental-ngx/core/utils';
 import { BaseInput, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
 import { InputComponent } from '../input/input.component';
 

@@ -51,8 +51,8 @@ export abstract class BaseSmartFilterBarConditionField extends BaseDynamicFormGe
             this._injector
         );
 
-        dialogRef.afterClosed.pipe(take(1)).subscribe(
-            async (conditions: SmartFilterBarCondition[]) => {
+        dialogRef.afterClosed.pipe(take(1)).subscribe({
+            next: async (conditions: SmartFilterBarCondition[]) => {
                 const field = this.getField();
                 const normalizedConditions = (await this.normalizeConditions(conditions)).map((c: any) => {
                     if (isSelectItem(c)) {
@@ -68,8 +68,9 @@ export abstract class BaseSmartFilterBarConditionField extends BaseDynamicFormGe
                 });
                 field.setValue(normalizedConditions);
             },
-            (_) => {}
-        );
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            error: (_) => {}
+        });
     };
 
     /**

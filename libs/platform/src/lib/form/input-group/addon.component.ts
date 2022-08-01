@@ -11,7 +11,6 @@ import {
     ChangeDetectionStrategy
 } from '@angular/core';
 
-import { ContentDensity } from '@fundamental-ngx/core/utils';
 import { ButtonComponent } from '@fundamental-ngx/platform/button';
 
 import { CSS_CLASS_NAME, INPUT_GROUP_CHILD_TOKEN } from './constants';
