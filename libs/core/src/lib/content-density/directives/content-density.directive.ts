@@ -1,8 +1,9 @@
-import { Directive, forwardRef, Input, OnDestroy } from '@angular/core';
+import { Directive, forwardRef, Input, isDevMode, OnDestroy } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { BehaviorSubject } from 'rxjs';
 import { ContentDensityGlobalKeyword, ContentDensityMode, LocalContentDensityMode } from '../content-density.types';
 import { CONTENT_DENSITY_DIRECTIVE } from '../tokens/content-density-directive';
+import { isContentDensityMode } from '../helpers/density-type-checkers';
 
 /**
  * Directive to control the content density of the elements.
@@ -27,7 +28,16 @@ export class ContentDensityDirective extends BehaviorSubject<LocalContentDensity
      */
     @Input()
     set fdContentDensity(val: LocalContentDensityMode | '') {
-        this.next(val || ContentDensityGlobalKeyword);
+        if (!isContentDensityMode(val)) {
+            if (isDevMode() && val !== '') {
+                console.log(
+                    `The value "${val}" is not a valid content density mode.
+                     Using "${ContentDensityGlobalKeyword}" instead.`
+                );
+            }
+            val = ContentDensityGlobalKeyword;
+        }
+        this.next(val as LocalContentDensityMode);
     }
 
     /**

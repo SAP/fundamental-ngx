@@ -131,7 +131,11 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
                     console.log(`ContentDensityObserver: density changed to ${density}`);
                 }
                 if (!this.isSupported(density)) {
-                    return this.alternativeTo[density]();
+                    try {
+                        return this.alternativeTo[density]();
+                    } catch (e) {
+                        throw new Error(`ContentDensityObserver: density ${density} is not supported`);
+                    }
                 }
                 return density;
             }),
