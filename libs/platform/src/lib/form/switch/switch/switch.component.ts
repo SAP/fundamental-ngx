@@ -11,8 +11,6 @@ import {
     SkipSelf
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
-
-import { ContentDensity } from '@fundamental-ngx/core/utils';
 import { BaseInput, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
 import { SwitchConfig } from './switch.config';
 
@@ -58,9 +56,6 @@ export class SwitchComponent extends BaseInput {
     set value(selectValue: any) {
         this.setValue(selectValue);
     }
-
-    /** @hidden */
-    _contentDensity: ContentDensity = this._switchConfig.contentDensity;
 
     /** @hidden
      * tracking switch current value

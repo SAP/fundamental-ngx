@@ -1,4 +1,4 @@
-import { Component, ViewChildren, QueryList } from '@angular/core';
+import { Component, QueryList, ViewChildren } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -17,7 +17,7 @@ import { PlatformCheckboxModule } from './checkbox.module';
                 <fdp-checkbox
                     [name]="'checkbox-0'"
                     [label]="'checkbox0'"
-                    [contentDensity]="'compact'"
+                    fdCompact
                     [tristate]="true"
                     [tristateSelectable]="true"
                     [values]="{ trueValue: 'Yes' }"
@@ -30,7 +30,7 @@ import { PlatformCheckboxModule } from './checkbox.module';
                     [name]="'checkbox-1'"
                     [label]="'Checkbox1'"
                     [values]="{ trueValue: 'Checkbox1' }"
-                    [contentDensity]="'compact'"
+                    fdCompact
                     formControlName="example2"
                 ></fdp-checkbox>
             </fdp-form-field>
@@ -40,7 +40,7 @@ import { PlatformCheckboxModule } from './checkbox.module';
                     [name]="'checkbox-2'"
                     [label]="'Checkbox2'"
                     [values]="{ trueValue: 'Checkbox2' }"
-                    [contentDensity]="'compact'"
+                    fdCompact
                     formControlName="example3"
                 ></fdp-checkbox>
             </fdp-form-field>
@@ -59,7 +59,7 @@ import { PlatformCheckboxModule } from './checkbox.module';
                     [name]="'checkbox-4'"
                     [label]="'Checkbox4'"
                     [values]="{ trueValue: 'Checkbox4' }"
-                    [contentDensity]="'compact'"
+                    fdCompact
                     formControlName="example5"
                 ></fdp-checkbox>
             </fdp-form-field>
