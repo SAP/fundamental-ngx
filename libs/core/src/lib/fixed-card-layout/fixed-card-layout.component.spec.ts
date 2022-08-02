@@ -103,7 +103,6 @@ describe('FixedCardLayoutComponent', () => {
                 }
             } as any;
 
-            component.fixedCardLayout.updateLayout();
             component.fixedCardLayout._onDragDropped(event);
             fixture.detectChanges();
 
