@@ -18,17 +18,12 @@
             <fd-breadcrumb [id]="id + '-breadcrumb'">
                 <fd-breadcrumb-item>
                     <ng-template #multipleBreadcrumbs>
-                        <a
-                            href="#"
-                            fd-link
-                            (click)="_breadcrumbGoTo($event)"
-                            i18n="@@platformUploadCollection.Breadcrumb.Label.AllFiles"
-                        >
+                        <a href="#" fd-link (click)="_breadcrumbGoTo($event)">
                             {{ 'platformUploadCollection.breadcrumbLabelAllFiles' | fdTranslate }}
                         </a>
                     </ng-template>
                     <ng-template #singleBreadcrumb>
-                        <span i18n="@@platformUploadCollection.Breadcrumb.Label.AllFilesWithTotal">
+                        <span>
                             {{ 'platformUploadCollection.breadcrumbLabelAllFiles' | fdTranslate }}
                             {{
                                 'platformUploadCollection.breadcrumbLabelAllFilesWithTotal'
