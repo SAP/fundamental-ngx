@@ -75,8 +75,8 @@
 
 <fd-overflow-layout class="fd-avatar-group">
     <ng-container *ngFor="let person of itemsToRender; let i = index">
-        <ng-container *fdOverflowItemRef="let hidden; let innerIndex = index">
-            <ng-template #avatarRenderer let-person let-hidden="hidden">
+        <ng-container *fdOverflowItemRef="let hidden; let globalIndex = globalIndex">
+            <ng-template #avatarRenderer let-person let-hidden="hidden" let-innerIndex="innerIndex">
                 <fd-avatar
                     *ngIf="!person.imageUrl && !person.glyph"
                     [circle]="true"
@@ -137,7 +137,10 @@
                 >
                     <fd-popover-control>
                         <ng-container
-                            *ngTemplateOutlet="avatarRenderer; context: { $implicit: person, hidden: hidden }"
+                            *ngTemplateOutlet="
+                                avatarRenderer;
+                                context: { $implicit: person, hidden: hidden, innerIndex: globalIndex }
+                            "
                         ></ng-container>
                     </fd-popover-control>
                     <fd-popover-body
@@ -154,7 +157,10 @@
             </ng-template>
             <ng-template #hiddenItem>
                 <ng-container
-                    *ngTemplateOutlet="avatarRenderer; context: { $implicit: person, hidden: hidden }"
+                    *ngTemplateOutlet="
+                        avatarRenderer;
+                        context: { $implicit: person, hidden: hidden, innerIndex: globalIndex }
+                    "
                 ></ng-container>
             </ng-template>
         </ng-container>
@@ -207,7 +213,7 @@
                                 <ng-container
                                     *ngTemplateOutlet="
                                         person.templateRef;
-                                        context: { $implicit: person, hidden: true, index: person.index }
+                                        context: { $implicit: person, hidden: true, globalIndex: person.globalIndex }
                                     "
                                 ></ng-container>
                             </ng-container>

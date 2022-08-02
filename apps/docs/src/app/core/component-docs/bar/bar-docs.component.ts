@@ -14,6 +14,9 @@ import barPageResponsiveExampleHtml from '!./examples/bar-page-responsive-exampl
 import barPageResponsiveExampleTs from '!./examples/bar-page-responsive-example.component.ts?raw';
 import barWithTitleExampleHtml from '!./examples/bar-with-title-example.component.html?raw';
 import barWithTitleExampleTs from '!./examples/bar-with-title-example.component.ts?raw';
+import barCustomShellbarExampleHtml from '!./examples/bar-custom-shellbar-example.component.html?raw';
+import barCustomShellbarExampleScss from '!./examples/bar-custom-shellbar-example.component.scss?raw';
+import barCustomShellbarExampleTs from '!./examples/bar-custom-shellbar-example.component.ts?raw';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
@@ -120,6 +123,20 @@ export class BarDocsComponent {
             code: barWithTitleExampleTs,
             fileName: 'bar-with-title-example',
             component: 'BarWithTitleExampleComponent'
+        }
+    ];
+    barCustomShellbarExample: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'bar-custom-shellbar-example',
+            code: barCustomShellbarExampleHtml,
+            scssFileCode: barCustomShellbarExampleScss
+        },
+        {
+            language: 'typescript',
+            code: barCustomShellbarExampleTs,
+            fileName: 'bar-custom-shellbar-example',
+            component: 'BarCustomShellbarExampleComponent'
         }
     ];
 }

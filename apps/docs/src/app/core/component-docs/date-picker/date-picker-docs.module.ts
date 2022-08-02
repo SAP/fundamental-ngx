@@ -7,6 +7,7 @@ import { DatePickerHeaderComponent } from './date-picker-header/date-picker-head
 import { DatePickerDocsComponent } from './date-picker-docs.component';
 import { DatePickerRangeExampleComponent } from './examples/date-picker-range-example.component';
 import { DatePickerSingleExampleComponent } from './examples/date-picker-single-example.component';
+import { DatePickerTodayButtonExampleComponent } from './examples/date-picker-today-button-example.component';
 import { DatePickerAllowNullExampleComponent } from './examples/date-picker-allow-null-example.component';
 import { DatePickerDisabledExampleComponent } from './examples/date-picker-disabled-example.component';
 import { DatePickerFormExampleComponent } from './examples/date-picker-form-example.component';
@@ -54,6 +55,7 @@ const routes: Routes = [
         DatePickerDocsComponent,
         DatePickerHeaderComponent,
         DatePickerI18nExampleComponent,
+        DatePickerTodayButtonExampleComponent,
         DatePickerFormExampleComponent,
         DatePickerRangeExampleComponent,
         DatePickerFormatExampleComponent,

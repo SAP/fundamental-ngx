@@ -3242,10 +3242,10 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@stackblitz/sdk@1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@stackblitz/sdk/-/sdk-1.6.0.tgz#b53ff39058943b7db5a1aeb640498fac8b1cbe57"
-  integrity sha512-PPB9m1zywojv6sOGSiHv+tvnb4Zc00Jce9yjUG0BzTymUdFf9AP+gKJRlc0iq9vbEEEXfYv1bgKa5KTn4gAzbQ==
+"@stackblitz/sdk@1.8.0":
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/@stackblitz/sdk/-/sdk-1.8.0.tgz#9bd5f028ccfc1a921d66f914d1e7ea2761139c1e"
+  integrity sha512-hbS4CpQVF3bxJ+ZD8qu8lAjTZVLTPToLbMtgxbxUmp1AIgqm7i0gMFM1POBA8BqY84CT1A3z74gdCd1bsro7qA==
 
 "@swc-node/core@^1.8.2":
   version "1.8.2"
@@ -7040,10 +7040,10 @@ dateformat@^3.0.0:
   resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-3.0.3.tgz#a6e37499a4d9a9cf85ef5872044d62901c9889ae"
   integrity sha512-jyCETtSl3VMZMWeRo7iY1FL19ges1t55hMo5yaam4Jrsm5EPL89UQkoQRyiI+Yf4k8r2ZpdngkV8hr1lIdjb3Q==
 
-dayjs@1.11.3:
-  version "1.11.3"
-  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.3.tgz#4754eb694a624057b9ad2224b67b15d552589258"
-  integrity sha512-xxwlswWOlGhzgQ4TKzASQkUhqERI3egRNqgV4ScR8wlANA/A9tZ7miXa44vTTKEq5l7vWoL5G57bG3zA+Kow0A==
+dayjs@1.11.4:
+  version "1.11.4"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.4.tgz#3b3c10ca378140d8917e06ebc13a4922af4f433e"
+  integrity sha512-Zj/lPM5hOvQ1Bf7uAvewDaUcsJoI6JmNqmHhHl3nyumwe0XHwt8sWdOVAPACJzCebL8gQCi+K49w7iKWnGwX9g==
 
 debug@2.6.9, debug@^2.1.3, debug@^2.2.0, debug@^2.3.3, debug@^2.6.9:
   version "2.6.9"

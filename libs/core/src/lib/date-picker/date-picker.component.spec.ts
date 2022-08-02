@@ -96,6 +96,26 @@ describe('DatePickerComponent', () => {
         expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: dateStart, end: dateLast });
     });
 
+    it('should handle today button click and, change and update input', () => {
+        spyOn(component, 'onChange');
+        spyOn(component.selectedRangeDateChange, 'emit');
+        const date = adapter.today();
+        const dateStr = (<any>component)._formatDate(date);
+
+        component.type = 'single';
+        component._inputFieldDate = '';
+        component.onTodayButtonClick();
+        expect(component._inputFieldDate).toEqual(dateStr);
+        expect(component.onChange).toHaveBeenCalledWith(date);
+
+        component.type = 'range';
+        component._inputFieldDate = '';
+        component.onTodayButtonClick();
+        expect(component._inputFieldDate).toBe(dateStr + component._rangeDelimiter + dateStr);
+        expect(component.onChange).toHaveBeenCalledWith({ start: date, end: date });
+        expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: date, end: date });
+    });
+
     it('should handle correct write value for single mode', () => {
         const date = adapter.today();
         const dateStr = (<any>component)._formatDate(date);

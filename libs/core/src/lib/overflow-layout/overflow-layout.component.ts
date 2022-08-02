@@ -266,6 +266,7 @@ export class OverflowLayoutComponent implements AfterViewInit, OnDestroy, Overfl
         return {
             visibleItems: this._visibleItems,
             items: this._items,
+            focusableItems: this._overflowItems,
             itemsWrapper: this._itemsWrapper.nativeElement,
             showMoreContainer: this._showMoreContainer.nativeElement,
             layoutContainerElement: this._layoutContainer.nativeElement,

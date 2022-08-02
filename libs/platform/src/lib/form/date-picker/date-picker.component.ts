@@ -107,6 +107,14 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     @Input()
     displayCalendarToggleLabel: string;
 
+    /** Enables Today-Selection-Button if true */
+    @Input()
+    showTodayButton = false;
+
+    /** Label for Today-Selection-Button */
+    @Input()
+    todayButtonLabel = 'Today';
+
     /** Whether a null input is considered valid. */
     @Input()
     allowNull = true;

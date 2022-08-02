@@ -80,8 +80,8 @@ describe('ComboboxComponent', () => {
         spyOn(component, 'onChange');
         component.communicateByObject = true;
         component.displayFn = (item: any): string => item.displayedValue;
-        component.inputText = 'displayedValue2';
-        expect(component.onChange).toHaveBeenCalledWith({ value: 'value2', displayedValue: 'displayedValue2' });
+        component.onMenuClickHandler(component.dropdownValues[1]);
+        expect(component.onChange).toHaveBeenCalledWith(component.dropdownValues[1]);
     });
 
     it('should handle wrong input entry on dropdown mode', () => {

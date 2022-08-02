@@ -1,4 +1,35 @@
 
+### [0.35.5-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.35.5-rc.2...v0.35.5-rc.3) (2022-08-02)
+
+
+### Bug Fixes
+
+* **core:** fixed card layout flickering issue ([#8476](https://github.com/SAP/fundamental-ngx/issues/8476)) ([54e89a9](https://github.com/SAP/fundamental-ngx/commit/54e89a92813020f476dce25d73acaecc4559ec35))
+
+### [0.35.5-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.35.5-rc.1...v0.35.5-rc.2) (2022-08-01)
+
+### [0.35.5-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.35.5-rc.0...v0.35.5-rc.1) (2022-08-01)
+
+### [0.35.5-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.35.4...v0.35.5-rc.0) (2022-07-30)
+
+
+### Features
+
+* **core, platform:** datepicker today button ([#8394](https://github.com/SAP/fundamental-ngx/issues/8394)) ([89a6ebe](https://github.com/SAP/fundamental-ngx/commit/89a6ebe90dad67fe82ad1270f47ca517d7924685))
+
+### [0.35.4](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.13...v0.35.4) (2022-07-30)
+
+### [0.35.4-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.12...v0.35.4-rc.13) (2022-07-29)
+
+### [0.35.4-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.11...v0.35.4-rc.12) (2022-07-29)
+
+### [0.35.4-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.10...v0.35.4-rc.11) (2022-07-29)
+
+
+### Bug Fixes
+
+* **core:** adjust calculation method for overflow layout ([#8453](https://github.com/SAP/fundamental-ngx/issues/8453)) ([24dca49](https://github.com/SAP/fundamental-ngx/commit/24dca497ed35126bfd39b9ad1705f2845a7cbf41))
+
 ### [0.35.4-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.35.4-rc.9...v0.35.4-rc.10) (2022-07-29)
 
 
