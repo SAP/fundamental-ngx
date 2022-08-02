@@ -7,7 +7,6 @@ import {
     ElementRef,
     EventEmitter,
     Input,
-    isDevMode,
     OnChanges,
     OnDestroy,
     Optional,
@@ -157,11 +156,6 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     /** Loading state */
     @Input()
     loading: boolean | undefined;
-
-    /** @deprecated use `contentDensity` instead */
-    /** The content density for which to render table. 'cozy' | 'compact' | 'condensed' */
-    @Input()
-    searchTableDensity: ContentDensity = ContentDensityEnum.COMPACT;
 
     /** The content density for which to render value help dialog */
     @Input()
@@ -366,15 +360,8 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
             }
         }
 
-        if (changes.searchTableDensity || changes.contentDensity) {
+        if (changes.contentDensity) {
             this._contentDensityManuallySet = true;
-
-            if (changes.searchTableDensity) {
-                this.contentDensity = this.searchTableDensity;
-                if (isDevMode()) {
-                    console.warn('"searchTableDensity" is deprecated. Use "contentDensity" instead');
-                }
-            }
         }
     }
 
