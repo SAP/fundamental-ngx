@@ -1,4 +1,11 @@
 
+### [0.35.5-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.35.5-rc.5...v0.35.5-rc.6) (2022-08-02)
+
+
+### Features
+
+* **core:** enable scrolling in time picker ([#8470](https://github.com/SAP/fundamental-ngx/issues/8470)) ([aa8219f](https://github.com/SAP/fundamental-ngx/commit/aa8219f52b2c1744c7ac51cd840944a347a1f188))
+
 ### [0.35.5-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.35.5-rc.4...v0.35.5-rc.5) (2022-08-02)
 
 ### [0.35.5-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.35.5-rc.3...v0.35.5-rc.4) (2022-08-02)
