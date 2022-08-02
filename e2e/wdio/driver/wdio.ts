@@ -512,7 +512,7 @@ export function checkElementScreenshot(
     return browser.checkElement($$(selector)[index], tag, options);
 }
 
-function checkSelectorExists(selector: string, index: number = 0): void {
+export function checkSelectorExists(selector: string, index: number = 0): void {
     if ($$(selector)[index] === undefined) {
         throw new Error(`Element with index: ${index} for selector: '${selector}' not found.`);
     }
