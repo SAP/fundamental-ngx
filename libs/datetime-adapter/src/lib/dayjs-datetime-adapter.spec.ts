@@ -457,7 +457,7 @@ describe('DayjsDatetimeAdapter', () => {
 
     it('should get day period names (AM / PM) in a different locale', async () => {
         adapter.setLocale('ar-ma');
-        expect(adapter.getDayPeriodNames()).toEqual(['م', 'ص']);
+        expect(adapter.getDayPeriodNames()).toEqual(['ص', 'م']);
     });
 
     it('should parse longDateFormats', () => {
