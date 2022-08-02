@@ -138,12 +138,12 @@ export class AlertDocsComponent implements AfterViewInit {
 
     schema: Schema;
 
+    @ViewChild('alert')
+    alertComponent: AlertComponent;
+
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('alert');
     }
-
-    @ViewChild('alert')
-    alertComponent: AlertComponent;
 
     onSchemaValues(data): void {
         this.data = data;
