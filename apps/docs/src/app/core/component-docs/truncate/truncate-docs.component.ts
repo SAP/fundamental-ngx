@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 
-import truncateTs from '!./examples/truncate-example.component.ts?raw';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
+import truncateTs from '!./examples/truncate-example.component.ts?raw';
+import truncateTextTs from '!./examples/truncate-text-example.component.ts?raw';
 
 @Component({
     selector: 'app-truncate',
@@ -14,6 +15,15 @@ export class TruncateDocsComponent {
             code: truncateTs,
             fileName: 'truncate-example',
             component: 'TruncateExampleComponent'
+        }
+    ];
+
+    truncateText: ExampleFile[] = [
+        {
+            language: 'TypeScript',
+            code: truncateTextTs,
+            fileName: 'truncate-text-example',
+            component: 'TruncateTextExampleComponent'
         }
     ];
 }

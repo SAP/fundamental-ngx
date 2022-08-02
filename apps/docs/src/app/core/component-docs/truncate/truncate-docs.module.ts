@@ -6,8 +6,9 @@ import { API_FILES } from '../../api-files';
 import { TruncateDocsHeaderComponent } from './truncate-docs-header/truncate-docs-header.component';
 import { TruncateDocsComponent } from './truncate-docs.component';
 import { TruncateExampleComponent } from './examples/truncate-example.component';
-import { TruncateModule } from '@fundamental-ngx/core/utils';
+import { PipeModule, TruncateModule } from '@fundamental-ngx/core/utils';
 import { IconModule } from '@fundamental-ngx/core/icon';
+import { TruncateTextExampleComponent } from './examples/truncate-text-example.component';
 
 const routes: Routes = [
     {
@@ -21,8 +22,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, TruncateModule, IconModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, TruncateModule, PipeModule, IconModule],
     exports: [RouterModule],
-    declarations: [TruncateDocsComponent, TruncateExampleComponent, TruncateDocsHeaderComponent]
+    declarations: [
+        TruncateDocsComponent,
+        TruncateExampleComponent,
+        TruncateTextExampleComponent,
+        TruncateDocsHeaderComponent
+    ]
 })
 export class TruncateDocsModule {}
