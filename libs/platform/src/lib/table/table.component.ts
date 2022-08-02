@@ -110,7 +110,7 @@ let tableUniqueId = 0;
  * ```html
  * <fdp-table
  *  [dataSource]="source"
- *  contentDensity="compact"
+ *  fdCompact
  *  selectionMode="multiple"
  *  emptyTableMessage="No data found">
  *
