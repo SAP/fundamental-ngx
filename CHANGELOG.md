@@ -1,4 +1,13 @@
 
+## [0.36.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.35.5-rc.7...v0.36.0-rc.0) (2022-08-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* **platform:** removed input searchTableDensity from value help dialog
+
+* **platform:** removed deprecated searchTableDensity input ([#8477](https://github.com/SAP/fundamental-ngx/issues/8477)) ([3654436](https://github.com/SAP/fundamental-ngx/commit/3654436143863613980ce768c2355043b2e97418))
+
 ### [0.35.5-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.35.5-rc.6...v0.35.5-rc.7) (2022-08-02)
 
 ### [0.35.5-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.35.5-rc.5...v0.35.5-rc.6) (2022-08-02)
