@@ -1,4 +1,31 @@
 
+## [0.36.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.35.5-rc.7...v0.36.0-rc.0) (2022-08-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* **platform:** removed input searchTableDensity from value help dialog
+
+* **platform:** removed deprecated searchTableDensity input ([#8477](https://github.com/SAP/fundamental-ngx/issues/8477)) ([3654436](https://github.com/SAP/fundamental-ngx/commit/3654436143863613980ce768c2355043b2e97418))
+
+### [0.35.5-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.35.5-rc.6...v0.35.5-rc.7) (2022-08-02)
+
+### [0.35.5-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.35.5-rc.5...v0.35.5-rc.6) (2022-08-02)
+
+
+### Features
+
+* **core:** enable scrolling in time picker ([#8470](https://github.com/SAP/fundamental-ngx/issues/8470)) ([aa8219f](https://github.com/SAP/fundamental-ngx/commit/aa8219f52b2c1744c7ac51cd840944a347a1f188))
+
+### [0.35.5-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.35.5-rc.4...v0.35.5-rc.5) (2022-08-02)
+
+### [0.35.5-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.35.5-rc.3...v0.35.5-rc.4) (2022-08-02)
+
+
+### Bug Fixes
+
+* **core:** revert "fixed card layout flickering issue ([#8476](https://github.com/SAP/fundamental-ngx/issues/8476))" ([#8494](https://github.com/SAP/fundamental-ngx/issues/8494)) ([1b0f83c](https://github.com/SAP/fundamental-ngx/commit/1b0f83cde6a4478e8d0605adac4a515a61939311))
+
 ### [0.35.5-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.35.5-rc.2...v0.35.5-rc.3) (2022-08-02)
 
 
