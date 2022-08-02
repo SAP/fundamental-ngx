@@ -8,12 +8,11 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { KeyboardSupportService, KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyboardSupportService } from '@fundamental-ngx/core/utils';
 import { Nullable } from '@fundamental-ngx/core/shared';
 
 import { ActionSheetItemComponent } from '../action-sheet-item/action-sheet-item.component';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { hasModifierKey, TAB } from '@angular/cdk/keycodes';
 
 let actionSheetBodyUniqueIdCounter = 0;
 
@@ -72,15 +71,6 @@ export class ActionSheetBodyComponent {
     @HostListener('keydown', ['$event'])
     keyDownHandler(event: KeyboardEvent): void {
         if (this._keyboardSupportService.keyManager) {
-            if (KeyUtil.isKeyCode(event, TAB)) {
-                event.preventDefault();
-                if (hasModifierKey(event, 'shiftKey')) {
-                    this._keyboardSupportService.keyManager.setPreviousItemActive();
-                } else {
-                    this._keyboardSupportService.keyManager.setNextItemActive();
-                }
-                return;
-            }
             this._keyboardSupportService.onKeyDown(event);
         }
     }
