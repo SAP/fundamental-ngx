@@ -1,4 +1,11 @@
 
+### [0.35.5-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.35.5-rc.3...v0.35.5-rc.4) (2022-08-02)
+
+
+### Bug Fixes
+
+* **core:** revert "fixed card layout flickering issue ([#8476](https://github.com/SAP/fundamental-ngx/issues/8476))" ([#8494](https://github.com/SAP/fundamental-ngx/issues/8494)) ([1b0f83c](https://github.com/SAP/fundamental-ngx/commit/1b0f83cde6a4478e8d0605adac4a515a61939311))
+
 ### [0.35.5-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.35.5-rc.2...v0.35.5-rc.3) (2022-08-02)
 
 
