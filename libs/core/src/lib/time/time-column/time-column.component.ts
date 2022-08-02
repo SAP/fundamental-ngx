@@ -271,11 +271,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     mouseScrollHandler(event: WheelEvent): void {
         event.preventDefault();
         if (this._active) {
-            if (event.deltaY > 0) {
-                this.scrollDown();
-            } else {
-                this.scrollUp();
-            }
+            event.deltaY > 0 ? this.scrollDown() : this.scrollUp();
         }
     }
 
